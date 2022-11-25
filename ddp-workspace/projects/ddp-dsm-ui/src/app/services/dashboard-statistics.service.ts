@@ -3,9 +3,11 @@ import {dashboardType} from '../enums/dashboard.enums';
 import {DSMService} from './dsm.service';
 import {finalize, map} from 'rxjs/operators';
 import {Observable, Subject} from 'rxjs';
-import {CountsModel} from '../dashboard-statistics/models/Counts.model';
-import {DateRangeModel} from '../dashboard-statistics/models/DateRange.model';
+import {ICounts} from '../dashboard-statistics/interfaces/ICounts';
+import {IDateRange} from '../dashboard-statistics/interfaces/IDateRange';
 import {Plotly} from "angular-plotly.js/lib/plotly.interface";
+import {StatisticsEnum} from "../dashboard-statistics/enums/statistics.enum";
+import {LocalStorageService} from "./localStorage.service";
 
 interface chartFactory {
   type: string;
@@ -14,28 +16,25 @@ interface chartFactory {
 
 @Injectable()
 export class DashboardStatisticsService {
-  public Counts: Subject<CountsModel[]> = new Subject<CountsModel[]>();
-
   constructor(private dsmService: DSMService) {
   }
 
-  public ChartFactory(dateRange: DateRangeModel): Observable<Plotly.Data[]> {
-    const onlyCounts: CountsModel[] = [];
-    return this.dsmService.getDashboardData(dateRange)
+  public ChartFactory(dateRange: IDateRange): Observable<Plotly.Data[]> {
+    return this.dsmService.getDashboardData(dateRange, StatisticsEnum.CHART)
       .pipe(
         map(data => {
           const generatedCharts: Plotly.Data[] = [];
           data.forEach(chart => {
-            if(chart.type === dashboardType.COUNT) {
-              onlyCounts.push(chart);
-            }
             const generatedChart = this.CHART_TYPES.find((chartFactory: chartFactory) => chartFactory.type === chart.type)?.func(chart);
             generatedChart && generatedCharts.push(generatedChart);
           });
           return generatedCharts;
-        }),
-        finalize(() => this.Counts.next(onlyCounts))
+        })
       );
+  }
+
+  public CountsFactory(dateRange: IDateRange): Observable<any> {
+    return this.dsmService.getDashboardData(dateRange, StatisticsEnum.COUNT);
   }
 
 

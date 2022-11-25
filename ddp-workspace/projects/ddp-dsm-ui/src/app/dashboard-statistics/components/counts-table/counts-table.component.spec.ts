@@ -6,7 +6,7 @@ import {MatTableModule} from '@angular/material/table';
 import {MatSortModule} from '@angular/material/sort';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
-import {CountsModel} from '../../models/Counts.model';
+import {ICounts} from '../../interfaces/ICounts';
 import {ComponentHarness, HarnessLoader, HarnessQuery} from '@angular/cdk/testing';
 import {TestbedHarnessEnvironment} from '@angular/cdk/testing/testbed';
 import {MatInputHarness} from '@angular/material/input/testing';
@@ -17,7 +17,7 @@ describe('CountsTableComponent',  () => {
   let fixture: ComponentFixture<CountsTableComponent>;
   let component: CountsTableComponent;
   let harnessLoader: HarnessLoader;
-  const testData: CountsModel[] = [
+  const testData: ICounts[] = [
     {
       color: [],
       count: 50,
@@ -119,7 +119,7 @@ describe('CountsTableComponent',  () => {
    */
   it('should sort by Count', async () => {
     const [firstRow]: MatRowHarness[] = await getTableRowsAfterAscendingSort('Count');
-    const {title, count}: Partial<CountsModel> = await firstRow.getCellTextByColumnName();
+    const {title, count}: Partial<ICounts> = await firstRow.getCellTextByColumnName();
 
     expect(count).toEqual('1');
     expect(title).toBe('Mr Requested');
@@ -130,7 +130,7 @@ describe('CountsTableComponent',  () => {
    */
   it('should sort by Title', async () => {
     const [_,secondRow]: MatRowHarness[] = await getTableRowsAfterAscendingSort('Title');
-    const {title, count}: Partial<CountsModel> = await secondRow.getCellTextByColumnName();
+    const {title, count}: Partial<ICounts> = await secondRow.getCellTextByColumnName();
 
     expect(count).toEqual('50');
     expect(title).toBe('PTs w/ Blood Consent');

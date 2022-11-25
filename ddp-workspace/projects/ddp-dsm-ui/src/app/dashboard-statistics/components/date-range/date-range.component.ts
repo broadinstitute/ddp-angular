@@ -8,11 +8,11 @@ import {
   Output
 } from '@angular/core';
 import {AbstractControl, FormControl, FormGroup, Validators} from '@angular/forms';
-import {DateRangeModel} from '../../models/DateRange.model';
+import {IDateRange} from '../../interfaces/IDateRange';
 import {Subject} from 'rxjs';
 import {takeUntil, auditTime} from 'rxjs/operators';
 import {DatePipe} from '@angular/common';
-import {DateRangeErrorModel} from '../../models/DateRangeError.model';
+import {IDateRangeError} from '../../interfaces/IDateRangeError';
 
 type startOrEndDate = 'startDate' | 'endDate';
 
@@ -38,14 +38,14 @@ export class DateRangeComponent implements OnInit, OnDestroy {
   constructor(private datePipe: DatePipe) {
   }
 
-  @Input() initDates: DateRangeModel;
+  @Input() initDates: IDateRange;
 
   @Input('disabled') set disabledState(isDisabled: boolean) {
     const options = {emitEvent: false};
     isDisabled ? this.dateRangeForm.disable(options) : this.dateRangeForm.enable(options);
   }
 
-  @Output() dateChanged = new EventEmitter<DateRangeModel>();
+  @Output() dateChanged = new EventEmitter<IDateRange>();
 
 
   ngOnInit(): void {
@@ -58,7 +58,7 @@ export class DateRangeComponent implements OnInit, OnDestroy {
     this.destroyed$.complete();
   }
 
-  public get dateRangeErrors(): DateRangeErrorModel {
+  public get dateRangeErrors(): IDateRangeError {
     return Object.entries(this.formControls)
       .reduce(this.filterErroredEntries, {startDate: [], endDate: []});
   }
@@ -83,21 +83,21 @@ export class DateRangeComponent implements OnInit, OnDestroy {
      */
     this.dateRangeForm.valueChanges
       .pipe(auditTime(0), takeUntil(this.destroyed$))
-      .subscribe((dates: DateRangeModel) => this.emitDateChange(dates));
+      .subscribe((dates: IDateRange) => this.emitDateChange(dates));
   }
 
   private filterErroredEntries(
-    result: DateRangeErrorModel,
-    [key, value]: [startOrEndDate, AbstractControl]): DateRangeErrorModel {
+    result: IDateRangeError,
+    [key, value]: [startOrEndDate, AbstractControl]): IDateRangeError {
       value.errors && result[key].push(...Object.keys(value.errors));
       return result;
   }
 
-  private emitDateChange(dates: DateRangeModel): void {
+  private emitDateChange(dates: IDateRange): void {
     this.dateRangeForm.valid && this.dateChanged.emit(this.getTransformedDates(dates));
   }
 
-  private getTransformedDates(dates: DateRangeModel): DateRangeModel {
+  private getTransformedDates(dates: IDateRange): IDateRange {
     return {
       startDate: this.datePipe.transform(dates.startDate, this.OUTPUT_DATE_FORMAT),
       endDate: this.datePipe.transform(dates.endDate, this.OUTPUT_DATE_FORMAT)

@@ -4,9 +4,9 @@ import {DashboardStatisticsService} from '../services/dashboard-statistics.servi
 import {RoleService} from '../services/role.service';
 import {catchError, finalize} from 'rxjs/operators';
 import {HttpErrorResponse} from '@angular/common/http';
-import {CountsModel} from './models/Counts.model';
+import {ICounts} from './interfaces/ICounts';
 import {DatePipe} from '@angular/common';
-import {DateRangeModel} from './models/DateRange.model';
+import {IDateRange} from './interfaces/IDateRange';
 import {OnLineService} from "../services/onLine.service";
 
 /**
@@ -21,11 +21,11 @@ import {OnLineService} from "../services/onLine.service";
 
 export class DashboardStatisticsComponent implements OnInit {
   Charts: Observable<any>;
-  Counts: Observable<CountsModel[]>;
+  Counts: Observable<ICounts[]>;
   errorMessage = new Subject();
   hasRequiredRole;
   loading = true;
-  dateRange: DateRangeModel = {startDate: null, endDate: null};
+  dateRange: IDateRange = {startDate: null, endDate: null};
 
   constructor(
     private dashboardStatisticsService: DashboardStatisticsService,
@@ -42,10 +42,10 @@ export class DashboardStatisticsComponent implements OnInit {
     this.hasRequiredRole = this.roleService.allowedToViewEELData();
     this.Charts = this.dashboardStatisticsService.ChartFactory(this.dateRange)
       .pipe(catchError(this.catchErrorAndReturnArray.bind(this)), finalize(() => this.loading = false));
-    this.Counts = this.dashboardStatisticsService.Counts;
+    this.Counts = this.dashboardStatisticsService.CountsFactory(this.dateRange);
   }
 
-  public dateChanged(dateRange: DateRangeModel): void {
+  public dateChanged(dateRange: IDateRange): void {
     if(this.onLineService.isOnline) {
       this.loading = true;
     }

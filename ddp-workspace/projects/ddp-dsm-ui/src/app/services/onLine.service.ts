@@ -3,7 +3,7 @@ import {fromEvent, merge, Observable, of, Subject, Subscription, tap} from "rxjs
 import {map, takeUntil} from "rxjs/operators";
 import {MatSnackBar, MatSnackBarConfig, MatSnackBarRef} from "@angular/material/snack-bar";
 import {OnLineSnackbarComponent} from "../Shared/components/onLine-snackbar/onLine-snackbar.component";
-import {OnLineSnackbarMessages, OnlineSnackbarModel} from "../Shared/models/snackbar-models/online-snackbar.model";
+import {OnLineSnackbarMessages, IOnLineSnackbarModel} from "../Shared/interfaces/snackbars/IOnLineSnackbarModel";
 
 
 @Injectable({providedIn: 'root'})
@@ -50,7 +50,7 @@ export class OnLineService implements OnDestroy {
   }
 
   private openSnackbar(message: OnLineSnackbarMessages, duration: number | null = null): MatSnackBarRef<OnLineSnackbarComponent> {
-    const data: OnlineSnackbarModel = {
+    const data: IOnLineSnackbarModel = {
       text: message,
       online: this.isOnline
     }

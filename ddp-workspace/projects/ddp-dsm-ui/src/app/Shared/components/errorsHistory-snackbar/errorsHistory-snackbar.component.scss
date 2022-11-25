@@ -1,0 +1,49 @@
+p {
+  margin: 0;
+  padding: 0;
+}
+
+.noHistory {
+  text-align: center;
+  font-family: Montserrat-SemiBold, sans-serif;
+}
+
+.list-option {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &-date {
+    color: lightgray;
+  }
+}
+
+.option-selected {
+  display: flex;
+  align-items: center;
+  position: sticky;
+  bottom: 0;
+  justify-content: space-between;
+  background-color: rgb(202, 202, 246);
+  border-radius: 10px;
+  padding: 10px;
+  font-family: Montserrat-Regular, sans-serif;
+  margin-top: 12px;
+
+  &-data {
+    width: 80%;
+  }
+
+  &-button {
+    width: 20%;
+    button {
+      float: right;
+    }
+  }
+
+  p {
+    span {
+      font-family: Montserrat-SemiBold, sans-serif;
+    }
+  }
+}

@@ -15,6 +15,11 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {HttpInterceptorService} from "./interceptors/Http-interceptor.service";
 import {ErrorSnackbarComponent} from "./Shared/components/error-snackbar/error-snackbar.component";
+import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
+import {
+  ErrorsHistorySnackbarComponent
+} from "./Shared/components/errorsHistory-snackbar/errorsHistory-snackbar.component";
+import {MatListModule} from '@angular/material/list';
 
 
 const base = document.querySelector('base')?.getAttribute('href') || '';
@@ -50,7 +55,8 @@ const guards = [StudyGuard, CheckAuthGuard];
   declarations: [
     AppComponent,
     OnLineSnackbarComponent,
-    ErrorSnackbarComponent
+    ErrorSnackbarComponent,
+    ErrorsHistorySnackbarComponent
   ],
   imports: [
     BrowserModule,
@@ -60,7 +66,9 @@ const guards = [StudyGuard, CheckAuthGuard];
     MatSnackBarModule,
     MatIconModule,
     MatButtonModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatBottomSheetModule,
+    MatListModule
   ],
   providers: [
     ...guards,

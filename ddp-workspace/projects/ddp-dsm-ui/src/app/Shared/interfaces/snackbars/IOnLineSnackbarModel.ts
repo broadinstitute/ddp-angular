@@ -1,4 +1,4 @@
-export interface OnlineSnackbarModel {
+export interface IOnLineSnackbarModel {
    readonly online: boolean;
    readonly text: OnLineSnackbarMessages;
 }

@@ -31,24 +31,19 @@ h1 {
 }
 
 .dashboard {
-
   margin-bottom: 50px;
 
   &-chartsAndCounts {
     margin-top: 50px;
-
     mat-tab-group {
       margin: 10px 0;
     }
   }
-
-
     &-border {
       border: 2px solid white;
       width: 2px;
       height: 100%;
     }
-
 }
 
 .spinner {

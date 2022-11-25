@@ -1,0 +1,27 @@
+<ng-container *ngIf="httpErrorResponseHistoryItems?.length; else noErrorHistory">
+  <mat-selection-list  #httpErrorSelection [multiple]="false">
+    <mat-list-option  *ngFor="let historyItem of httpErrorResponseHistoryItems; let i = index;" [selected]="!i" [value]="historyItem.httpErrorResponse">
+      <div class="list-option">
+        <span class="list-option-title">{{historyItem.httpErrorResponse.name}}</span>
+        <span class="list-option-date">{{historyItem.timeStamp | date : 'mediumTime'}}</span>
+      </div>
+    </mat-list-option>
+  </mat-selection-list>
+
+  <div class="option-selected"
+       *ngIf="httpErrorSelection.selectedOptions.hasValue() && httpErrorSelection.selectedOptions.selected[0].value as errorResponse">
+    <div class="option-selected-data">
+      <p>Message: <span>{{errorResponse.message }}</span></p>
+      <p>Status Text: <span>{{errorResponse.statusText}}</span></p>
+    </div>
+    <div class="option-selected-button">
+      <button (click)="clearHistory(errorResponse)" matTooltip="Remove History Item" mat-icon-button color="warn" aria-label="Remove History Item">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+  </div>
+</ng-container>
+
+<ng-template #noErrorHistory>
+  <p class="noHistory" >No Error History</p>
+</ng-template>

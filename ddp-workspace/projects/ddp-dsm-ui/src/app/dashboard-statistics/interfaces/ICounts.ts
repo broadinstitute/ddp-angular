@@ -1,4 +1,4 @@
-export interface CountsModel {
+export interface ICounts {
   color: string[];
   count: number;
   size: string;

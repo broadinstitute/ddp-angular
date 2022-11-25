@@ -5,7 +5,7 @@ import {
   Input,
   ViewChild
 } from '@angular/core';
-import {CountsModel} from '../../models/Counts.model';
+import {ICounts} from '../../interfaces/ICounts';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatSort} from '@angular/material/sort';
 
@@ -17,22 +17,22 @@ import {MatSort} from '@angular/material/sort';
 })
 
 export class CountsTableComponent  implements AfterViewInit {
-  CountsArray: MatTableDataSource<CountsModel>;
+  countsArray: MatTableDataSource<ICounts>;
   readonly columnNames: string[] = ['title', 'count'];
 
-  @Input('counts') set setCounts(counts: CountsModel[]) {
-    this.CountsArray = new MatTableDataSource<CountsModel>(counts);
+  @Input('counts') set setCounts(counts: ICounts[]) {
+    this.countsArray = new MatTableDataSource<ICounts>(counts || []);
   }
 
   @ViewChild(MatSort) sort: MatSort;
 
   ngAfterViewInit(): void {
-    this.CountsArray.sort = this.sort;
+    this.countsArray.sort = this.sort;
   }
 
   public applyFilter(event: Event): void {
     const filterValue: string = (event.target as HTMLInputElement).value;
-    this.CountsArray.filter = filterValue.trim().toLowerCase();
+    this.countsArray.filter = filterValue.trim().toLowerCase();
   }
 
 
