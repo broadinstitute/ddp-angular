@@ -1,4 +1,4 @@
-import {Component, Inject} from "@angular/core";
+import {ChangeDetectionStrategy, Component, Inject} from "@angular/core";
 import {MAT_SNACK_BAR_DATA, MatSnackBarRef} from "@angular/material/snack-bar";
 import {HttpErrorResponse} from "@angular/common/http";
 import {MatBottomSheet} from "@angular/material/bottom-sheet";
@@ -8,7 +8,8 @@ import {ErrorsService} from "../../../services/errors.service";
 @Component({
   selector: 'app-error-snackbar',
   templateUrl: './error-snackbar.component.html',
-  styleUrls: ['./error-snackbar.component.scss']
+  styleUrls: ['./error-snackbar.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 
 export class ErrorSnackbarComponent {

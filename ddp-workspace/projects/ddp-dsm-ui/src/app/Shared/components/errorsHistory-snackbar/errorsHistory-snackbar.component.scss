@@ -3,6 +3,17 @@ p {
   padding: 0;
 }
 
+.clear-history {
+  text-align: center;
+  button:hover {
+    color: rgba(147, 147, 230, 0.4);
+  }
+}
+
+.highlightItem {
+  background-color: rgba(147, 147, 230, 0.1);
+}
+
 .noHistory {
   text-align: center;
   font-family: Montserrat-SemiBold, sans-serif;
@@ -32,13 +43,6 @@ p {
 
   &-data {
     width: 80%;
-  }
-
-  &-button {
-    width: 20%;
-    button {
-      float: right;
-    }
   }
 
   p {

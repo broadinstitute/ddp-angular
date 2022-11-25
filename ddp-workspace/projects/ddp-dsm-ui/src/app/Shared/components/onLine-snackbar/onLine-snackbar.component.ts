@@ -1,4 +1,4 @@
-import {Component, Inject} from "@angular/core";
+import {ChangeDetectionStrategy, Component, Inject} from "@angular/core";
 import {MAT_SNACK_BAR_DATA, MatSnackBarRef} from "@angular/material/snack-bar";
 import {IOnLineSnackbarModel} from "../../interfaces/snackbars/IOnLineSnackbarModel";
 
@@ -6,6 +6,7 @@ import {IOnLineSnackbarModel} from "../../interfaces/snackbars/IOnLineSnackbarMo
   selector: 'app-onLine-snackbar',
   templateUrl: './onLine-snackbar.component.html',
   styleUrls: ['./onLine-snackbar.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class OnLineSnackbarComponent {
 

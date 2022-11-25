@@ -1,6 +1,18 @@
-<ng-container *ngIf="httpErrorResponseHistoryItems?.length; else noErrorHistory">
+<ng-container *ngIf="httpErrorResponseHistoryItems?.length; else noErrorHistory" >
+
+  <div class="clear-history">
+    <button matTooltip="Clear All" (click)="clearHistory()" mat-icon-button color="primary" aria-label="Example icon button with a home icon">
+      <mat-icon>clear_all</mat-icon>
+    </button>
+  </div>
+
   <mat-selection-list  #httpErrorSelection [multiple]="false">
-    <mat-list-option  *ngFor="let historyItem of httpErrorResponseHistoryItems; let i = index;" [selected]="!i" [value]="historyItem.httpErrorResponse">
+    <mat-list-option
+      [ngClass]="{'highlightItem': i === httpErrorResponseHistoryItems.length - 1}"
+      *ngFor="let historyItem of httpErrorResponseHistoryItems; let i = index;"
+      [selected]="!i"
+      [value]="historyItem.httpErrorResponse"
+    >
       <div class="list-option">
         <span class="list-option-title">{{historyItem.httpErrorResponse.name}}</span>
         <span class="list-option-date">{{historyItem.timeStamp | date : 'mediumTime'}}</span>
@@ -14,14 +26,9 @@
       <p>Message: <span>{{errorResponse.message }}</span></p>
       <p>Status Text: <span>{{errorResponse.statusText}}</span></p>
     </div>
-    <div class="option-selected-button">
-      <button (click)="clearHistory(errorResponse)" matTooltip="Remove History Item" mat-icon-button color="warn" aria-label="Remove History Item">
-        <mat-icon>delete</mat-icon>
-      </button>
-    </div>
   </div>
 </ng-container>
 
 <ng-template #noErrorHistory>
-  <p class="noHistory" >No Error History</p>
+  <p class="noHistory" >No Errors History</p>
 </ng-template>

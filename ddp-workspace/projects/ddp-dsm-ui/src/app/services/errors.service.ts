@@ -19,22 +19,10 @@ export class ErrorsService {
     return {data: httpErrorResponse, panelClass: 'snackbarRestyleError'};
   }
 
-  public clearErrors(httpErrorResponse?: HttpErrorResponse): void {
-    if(httpErrorResponse instanceof HttpErrorResponse) {
-      const foundResponseIndex: number = this.HttpErrorResponsesHistory.findIndex(() => httpErrorResponse);
-        this.removeOneResponse(foundResponseIndex);
-    } else {
-      this.clearResponses();
-    }
-  }
-
-  private removeOneResponse(index: number): void {
-    this.HttpErrorResponsesHistory.splice(index, 1);
-  }
-
-  private clearResponses(): void {
+  public clearErrors(): void {
     this.HttpErrorResponsesHistory.splice(0,  this.HttpErrorResponsesHistory.length);
   }
+
 
   public openSnackbar(httpErrorResponse: HttpErrorResponse) {
     this.HttpErrorResponsesHistory.push(new HttpErrorResponsesHistory(httpErrorResponse, new Date()));
