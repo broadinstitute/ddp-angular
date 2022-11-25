@@ -19,7 +19,7 @@ export class HttpInterceptorService implements HttpInterceptor {
     return next.handle(req).pipe(
       catchError((httpErrorResponse: HttpErrorResponse) => {
         this.errorsService.openSnackbar(httpErrorResponse);
-        return EMPTY
+        throw httpErrorResponse;
       })
     )
   }

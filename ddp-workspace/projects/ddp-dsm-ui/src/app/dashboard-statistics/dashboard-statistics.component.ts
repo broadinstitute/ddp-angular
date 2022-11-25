@@ -1,9 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {EMPTY, Observable, Subject} from 'rxjs';
+import {Observable, Subject} from 'rxjs';
 import {DashboardStatisticsService} from '../services/dashboard-statistics.service';
 import {RoleService} from '../services/role.service';
-import {catchError, finalize} from 'rxjs/operators';
-import {HttpErrorResponse} from '@angular/common/http';
+import {finalize} from 'rxjs/operators';
 import {ICounts} from './interfaces/ICounts';
 import {DatePipe} from '@angular/common';
 import {IDateRange} from './interfaces/IDateRange';
@@ -41,7 +40,7 @@ export class DashboardStatisticsComponent implements OnInit {
   private initData(): void {
     this.hasRequiredRole = this.roleService.allowedToViewEELData();
     this.Charts = this.dashboardStatisticsService.ChartFactory(this.dateRange)
-      .pipe(catchError(this.catchErrorAndReturnArray.bind(this)), finalize(() => this.loading = false));
+      .pipe(finalize(() => this.loading = false));
     this.Counts = this.dashboardStatisticsService.CountsFactory(this.dateRange);
   }
 
@@ -58,12 +57,5 @@ export class DashboardStatisticsComponent implements OnInit {
       responsive: true,
       displaylogo: false
     };
-  }
-
-  private catchErrorAndReturnArray(error: HttpErrorResponse): Observable<never> {
-    if(error instanceof HttpErrorResponse) {
-      this.errorMessage.next(error);
-    }
-    return EMPTY;
   }
 }
