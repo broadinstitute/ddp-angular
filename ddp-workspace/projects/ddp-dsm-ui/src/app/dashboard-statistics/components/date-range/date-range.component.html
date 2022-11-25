@@ -12,7 +12,7 @@
     <mat-date-range-picker #picker></mat-date-range-picker>
 
     <button id="resetFocus" mat-icon-button matSuffix (click)="!isPristine && clearDatesAndEmit()" color="primary">
-      <mat-icon [matTooltip]="isPristine ? 'Type' : 'Clear Dates'"
+      <mat-icon [matTooltip]="isPristine ? 'Type' : 'Reset Dates'"
                 matDatepickerToggleIcon>{{ isPristine ? 'keyboard' : 'all_out'}}</mat-icon>
     </button>
 

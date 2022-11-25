@@ -7,6 +7,7 @@ import {HttpErrorResponse} from '@angular/common/http';
 import {CountsModel} from './models/Counts.model';
 import {DatePipe} from '@angular/common';
 import {DateRangeModel} from './models/DateRange.model';
+import {OnLineService} from "../services/onLine.service";
 
 /**
  * @TODO refactor this component and write unit tests
@@ -29,6 +30,7 @@ export class DashboardStatisticsComponent implements OnInit {
   constructor(
     private dashboardStatisticsService: DashboardStatisticsService,
     private roleService: RoleService,
+    private onLineService: OnLineService
   ) {
   }
 
@@ -44,8 +46,9 @@ export class DashboardStatisticsComponent implements OnInit {
   }
 
   public dateChanged(dateRange: DateRangeModel): void {
-    console.log(dateRange, 'DATE - dashboard.statistics');
-    this.loading = true;
+    if(this.onLineService.isOnline) {
+      this.loading = true;
+    }
     this.dateRange = dateRange;
     this.initData();
   }

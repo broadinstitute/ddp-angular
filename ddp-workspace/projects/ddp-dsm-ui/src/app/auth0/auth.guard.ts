@@ -4,16 +4,21 @@ import { Auth } from '../services/auth.service';
 import { SessionService } from '../services/session.service';
 import { DSMService } from '../services/dsm.service';
 import { Statics } from '../utils/statics';
+import {OnLineService} from "../services/onLine.service";
 
 @Injectable()
 export class AuthGuard implements CanActivate {
 
-  constructor(private router: Router, private auth: Auth) {
+  constructor(private router: Router, private auth: Auth, private onLineService: OnLineService) {
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
     if (localStorage.getItem(Auth.AUTH0_TOKEN_NAME) && localStorage.getItem(SessionService.DSM_TOKEN_NAME)) {
       // logged in so return true
+      if(!this.onLineService.isOnline) {
+        this.onLineService.openOfflineRequestSnackbar();
+        return false;
+      }
       return true;
     }
 

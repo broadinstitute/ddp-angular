@@ -5,26 +5,31 @@ import {finalize, map} from 'rxjs/operators';
 import {Observable, Subject} from 'rxjs';
 import {CountsModel} from '../dashboard-statistics/models/Counts.model';
 import {DateRangeModel} from '../dashboard-statistics/models/DateRange.model';
+import {Plotly} from "angular-plotly.js/lib/plotly.interface";
+
+interface chartFactory {
+  type: string;
+  func: (chartConfig: {}) => Plotly.Data;
+}
 
 @Injectable()
 export class DashboardStatisticsService {
-  public Counts: Subject<any> = new Subject<any>();
+  public Counts: Subject<CountsModel[]> = new Subject<CountsModel[]>();
 
   constructor(private dsmService: DSMService) {
   }
 
-
-  public ChartFactory(dateRange: DateRangeModel): Observable<any> {
+  public ChartFactory(dateRange: DateRangeModel): Observable<Plotly.Data[]> {
     const onlyCounts: CountsModel[] = [];
     return this.dsmService.getDashboardData(dateRange)
       .pipe(
         map(data => {
-          const generatedCharts = [];
+          const generatedCharts: Plotly.Data[] = [];
           data.forEach(chart => {
             if(chart.type === dashboardType.COUNT) {
               onlyCounts.push(chart);
             }
-            const generatedChart = this.CHART_TYPES.find(ch => ch.type === chart.type)?.func(chart);
+            const generatedChart = this.CHART_TYPES.find((chartFactory: chartFactory) => chartFactory.type === chart.type)?.func(chart);
             generatedChart && generatedCharts.push(generatedChart);
           });
           return generatedCharts;
@@ -34,15 +39,15 @@ export class DashboardStatisticsService {
   }
 
 
-  private readonly CHART_TYPES = [
+  private readonly CHART_TYPES: chartFactory[]  = [
     {type: dashboardType.VERTICAL_HIGHLIGHTED_BAR_CHART, func: this.generate_verticalHighlightedBarChart},
     {type: dashboardType.VERTICAL_BAR_CHART, func: this.generate_verticalBarChart},
     {type: dashboardType.HORIZONTAL_BAR_CHART, func: this.generate_horizontalBarChart},
     {type: dashboardType.DONUT_CHART, func: this.generate_donutChart}
   ];
 
-  private generate_verticalBarChart(chart: any): {} {
-    const chartObject: any = {};
+  private generate_verticalBarChart(chart: any): Plotly.Data {
+    const chartObject: Plotly.Data = {};
     chartObject.data = [
       {
         type: 'bar',
@@ -89,8 +94,8 @@ export class DashboardStatisticsService {
     return chartObject;
   }
 
-  private generate_verticalHighlightedBarChart(chart: any): {} {
-    const chartObject: any = {};
+  private generate_verticalHighlightedBarChart(chart: any): Plotly.Data {
+    const chartObject: Plotly.Data = {};
     chartObject.data = [
       {
         type: 'bar',
@@ -195,8 +200,8 @@ export class DashboardStatisticsService {
   }
 
 
-  private generate_horizontalBarChart(chart: any): {} {
-    const chartObject: any = {};
+  private generate_horizontalBarChart(chart: any): Plotly.Data {
+    const chartObject: Plotly.Data = {};
     chartObject.data = [
       {
         type: 'bar',
@@ -267,8 +272,8 @@ export class DashboardStatisticsService {
   }
 
 
-  private generate_donutChart(chart: any): {} {
-    const chartObject: any = {};
+  private generate_donutChart(chart: any): Plotly.Data {
+    const chartObject: Plotly.Data = {};
     chartObject.data = [
       {
         type: 'pie',
