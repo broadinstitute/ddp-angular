@@ -14,7 +14,6 @@ export class ErrorsHistorySnackbarComponent {
               private _bottomSheetRef: MatBottomSheetRef<ErrorsHistorySnackbarComponent>,
               private errorService: ErrorsService
   ) {
-    console.log(httpErrorResponseHistoryItems, 'RESPONSES')
   }
 
   public clearHistory(httpErrorResponse: HttpErrorResponse): void {

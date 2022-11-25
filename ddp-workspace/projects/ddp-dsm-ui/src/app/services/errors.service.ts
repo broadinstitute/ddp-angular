@@ -20,8 +20,6 @@ export class ErrorsService {
   }
 
   public clearErrors(httpErrorResponse?: HttpErrorResponse): void {
-    console.log(httpErrorResponse, 'HERE')
-
     if(httpErrorResponse instanceof HttpErrorResponse) {
       const foundResponseIndex: number = this.HttpErrorResponsesHistory.findIndex(() => httpErrorResponse);
         this.removeOneResponse(foundResponseIndex);
@@ -31,7 +29,7 @@ export class ErrorsService {
   }
 
   private removeOneResponse(index: number): void {
-    this.HttpErrorResponsesHistory.splice(-1, 1);
+    this.HttpErrorResponsesHistory.splice(index, 1);
   }
 
   private clearResponses(): void {

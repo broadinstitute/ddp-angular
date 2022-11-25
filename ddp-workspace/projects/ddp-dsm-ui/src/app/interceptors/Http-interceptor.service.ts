@@ -1,5 +1,5 @@
 import {HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from "@angular/common/http";
-import {EMPTY, Observable, tap} from "rxjs";
+import {EMPTY, Observable} from "rxjs";
 import {catchError} from "rxjs/operators";
 import {OnLineService} from "../services/onLine.service";
 import {Injectable} from "@angular/core";
