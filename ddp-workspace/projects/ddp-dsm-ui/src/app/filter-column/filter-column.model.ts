@@ -186,6 +186,7 @@ export class Filter {
     new NameValue('no', 'No')]);
   public static COLLABORATOR_SAMPLE_ID = new Filter(ParticipantColumn.COLLABORATOR_SAMPLE_ID, Filter.TEXT_TYPE);
   public static BLOCK_SENT = new Filter(ParticipantColumn.BLOCK_SENT, Filter.DATE_TYPE);
+  public static BLOCK_ID_SHL = new Filter(ParticipantColumn.BLOCK_ID_SHL, Filter.TEXT_TYPE);
   public static SCROLL_RECEIVED = new Filter(ParticipantColumn.SCROLL_RECEIVED, Filter.DATE_TYPE);
   public static SK_ID = new Filter(ParticipantColumn.SK_ID, Filter.TEXT_TYPE);
   public static SM_ID = new Filter(ParticipantColumn.SM_ID, Filter.TEXT_TYPE);
@@ -308,7 +309,7 @@ export class Filter {
     Filter.GENDER, Filter.TISSUE_PROBLEM_OPTION, Filter.UNABLE_OBTAIN_TISSUE, Filter.DESTRUCTION_POLICY,
     Filter.COUNT_RECEIVED, Filter.TISSUE_TYPE,
     Filter.TISSUE_SITE, Filter.TUMOR_TYPE, Filter.TISSUE_NOTES, Filter.H_E, Filter.SM_ID_TISSUE_VALUE,
-    Filter.COLLABORATOR_SAMPLE_ID, Filter.BLOCK_SENT, Filter.PATHOLOGY_REPORT,
+    Filter.COLLABORATOR_SAMPLE_ID, Filter.BLOCK_SENT, Filter.PATHOLOGY_REPORT, Filter.BLOCK_ID_SHL,
     Filter.SCROLL_RECEIVED, Filter.SK_ID, Filter.SM_ID, Filter.SENT_GP,
     Filter.TISSUE_EXPECTED_RETURN, Filter.TISSUE_RETURNED, Filter.TISSUE_TRACKING_NUMBER,
     Filter.TISSUE_FIRST_SM_ID, Filter.TISSUE_SHL_NUMBER, Filter.TISSUE_TUMOR_PERCENT, Filter.TISSUE_SEQUENCE, Filter.SCROLLS_COUNT,

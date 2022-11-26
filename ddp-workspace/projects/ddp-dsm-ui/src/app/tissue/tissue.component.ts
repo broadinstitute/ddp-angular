@@ -165,10 +165,10 @@ export class TissueComponent {
       this.patchFinished = false;
       this.dsmService.patchParticipantRecord(JSON.stringify(patch)).subscribe({ // need to subscribe, otherwise it will not send!
         next: data => {
+          this.patchFinished = true;
+          this.currentPatchField = null;
           if ( data && this.tissue.tissueId == null ) {
             this.tissue.tissueId = data['tissueId'];
-            this.patchFinished = true;
-            this.currentPatchField = null;
             this.dup = false;
             if ( data instanceof Array ) {
               data.forEach((val) => {
@@ -176,44 +176,6 @@ export class TissueComponent {
                 this.oncHistoryDetail[nameValue.name] = nameValue.value;
               });
             }
-          // } else if (result.code === 500 && result.body != null) {
-          //   this.dup = true;
-          //   if (tAlias === 'sm') {
-          //     if (smIdArray && index && smId) {
-          //       smIdArray[ index ].smIdPk = smId;//for new sm ids
-          //     }
-          //     this.smIdDuplicate[ this.currentSMIDField ].add(this.createDuplicateIndex( index ) );
-          //   }
-          // } else if (result.code === 200) {
-          //   if (result.body != null && result.body !== '') {
-          //     const jsonData: any | any[] = JSON.parse( result.body );
-          //     if (tAlias === 'sm') {
-          //       if (jsonData.smId) {
-          //         smId = jsonData.smId;
-          //         if (smIdArray && index) {
-          //           smIdArray[ index ].smIdPk = smId;
-          //         }
-          //
-          //       }
-          //       this.smIdDuplicate[ this.currentSMIDField ].delete( this.createDuplicateIndex (index));
-          //       this.patchFinished = true;
-          //       this.currentPatchField = null;
-          //       this.dup = false;
-          //       return smId;
-          //     }
-          //     if (jsonData instanceof Array) {
-          //       jsonData.forEach( ( val ) => {
-          //         const nameValue = NameValue.parse( val );
-          //         if (nameValue.name && nameValue.name.indexOf( '.' ) !== -1) {
-          //           nameValue.name = nameValue.name.substring( nameValue.name.indexOf( '.' ) + 1 );
-          //         }
-          //         this.oncHistoryDetail[ nameValue.name ] = nameValue.value;
-          //       } );
-          //     }
-          //   }
-          //   this.patchFinished = true;
-          //   this.currentPatchField = null;
-          //   this.dup = false;
           }
           if (data['smIdPk']) {
             smIdArray[index].smIdPk = data['smIdPk'];
