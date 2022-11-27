@@ -41,7 +41,7 @@ export class DSMService {
   }
 
   getDashboardData({startDate, endDate}: IDateRange, chartOrCount: StatisticsEnum): Observable<any> {
-    const url = this.baseUrl + DSMService.UI + 'dashboard';
+    const url = this.baseUrl + DSMService.UI + 'dashboards';
     const map: {}[] = [];
     map.push( {name: DSMService.REALM, value: this.localStorageService.selectedRealm} );
     map.push({name: 'part', value: chartOrCount});
