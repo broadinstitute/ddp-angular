@@ -5,7 +5,7 @@ import {
   Input,
   ViewChild
 } from '@angular/core';
-import {ICounts} from '../../interfaces/ICounts';
+import {ICount} from '../../interfaces/ICount';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatSort} from '@angular/material/sort';
 
@@ -17,11 +17,11 @@ import {MatSort} from '@angular/material/sort';
 })
 
 export class CountsTableComponent  implements AfterViewInit {
-  countsArray: MatTableDataSource<ICounts>;
+  countsArray: MatTableDataSource<ICount>;
   readonly columnNames: string[] = ['title', 'count'];
 
-  @Input('counts') set setCounts(counts: ICounts[]) {
-    this.countsArray = new MatTableDataSource<ICounts>(counts || []);
+  @Input('counts') set setCounts(counts: ICount[]) {
+    this.countsArray = new MatTableDataSource<ICount>(counts || []);
   }
 
   @ViewChild(MatSort) sort: MatSort;

@@ -1,55 +1,75 @@
-import {Component, OnInit} from '@angular/core';
-import {Observable, Subject, tap} from 'rxjs';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {DashboardStatisticsService} from '../services/dashboard-statistics.service';
-import {RoleService} from '../services/role.service';
-import {finalize} from 'rxjs/operators';
-import {ICounts} from './interfaces/ICounts';
+import {catchError, finalize, map, switchMap, takeUntil} from 'rxjs/operators';
+import {ICount} from './interfaces/ICount';
 import {DatePipe} from '@angular/common';
 import {IDateRange} from './interfaces/IDateRange';
+import {StatisticsEnum} from "./enums/statistics.enum";
+import {BehaviorSubject, of, Subject, tap} from 'rxjs';
+import {MatTabChangeEvent} from "@angular/material/tabs";
 
-/**
- * @TODO refactor this component and write unit tests
- */
+
+type ChartsOrCounts = 'charts' | 'counts';
+
 @Component({
   selector: 'app-dashboard-statistics',
   templateUrl: './dashboard-statistics.component.html',
   styleUrls: ['./dashboard-statistics.component.scss'],
   providers: [DatePipe]
 })
+export class DashboardStatisticsComponent implements OnInit, OnDestroy {
+  public charts: any;
+  public counts: ICount[];
 
-export class DashboardStatisticsComponent implements OnInit {
-  charts$: Observable<any>;
-  counts$: Observable<ICounts[]>;
-  dateRange: IDateRange = {startDate: null, endDate: null};
-  loading = false;
-  hasRequiredRole: boolean = this.roleService.allowedToViewEELData();
+  public dateRange: IDateRange = {startDate: null, endDate: null};
+  public loading = false;
 
-  errorMessage = new Subject();
+  private activeTab: ChartsOrCounts = 'charts';
+  private isDateChanged = false;
 
+  private statistics = new BehaviorSubject<ChartsOrCounts>(this.activeTab);
+  private destroy$ = new Subject<void>();
 
-
-  constructor(
-    private dashboardStatisticsService: DashboardStatisticsService,
-    private roleService: RoleService,
-  ) {}
+  constructor(private dashboardStatisticsService: DashboardStatisticsService) {}
 
   ngOnInit(): void {
-    this.initData();
+    this.statistics
+      .pipe(
+        tap(() => this.loading = true),
+        map((chartsOrCounts: ChartsOrCounts) =>
+          StatisticsEnum[chartsOrCounts.slice(0, chartsOrCounts.length - 1).toUpperCase()]),
+        switchMap((statistics: StatisticsEnum) =>
+          this.dashboardStatisticsService.getStatisticsFor(statistics, this.dateRange)
+            .pipe(catchError(error => of(error)), finalize(() => this.loading = false))
+        ),
+        takeUntil(this.destroy$),
+      )
+      .subscribe({next: countsOrCharts => this[this.activeTab] = countsOrCharts})
   }
 
-  private initData(): void {
-    this.charts$ = this.dashboardStatisticsService.ChartFactory(this.dateRange)
-      .pipe(finalize(() => this.loading = false), tap(() => console.log("SUBSCRIBED")));
-    this.counts$ = this.dashboardStatisticsService.CountsFactory(this.dateRange);
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
+  public getStatisticsFor({tab}: MatTabChangeEvent) {
+    const selectedTab = tab.ariaLabel.toLowerCase() as ChartsOrCounts;
+    if(this.allowStatisticsUpdate(selectedTab)) {
+      this.activeTab = selectedTab;
+      this.statistics.next(this.activeTab);
+      this.isDateChanged = false;
+    }
   }
 
   public dateChanged(dateRange: IDateRange): void {
-    if(navigator.onLine) {
-      this.loading = true;
-    }
+    this.loading = true;
+    this.isDateChanged = true;
     this.dateRange = dateRange;
-    this.initData();
+    this.statistics.next(this.activeTab);
   }
 
+  private allowStatisticsUpdate(selectedTab: string): boolean {
+    return (!this[selectedTab]?.length || this.isDateChanged) && !this.loading
+  }
 
 }

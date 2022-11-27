@@ -1,13 +1,11 @@
 import {Injectable} from '@angular/core';
 import {dashboardType} from '../enums/dashboard.enums';
 import {DSMService} from './dsm.service';
-import {finalize, map} from 'rxjs/operators';
-import {Observable, Subject} from 'rxjs';
-import {ICounts} from '../dashboard-statistics/interfaces/ICounts';
+import {map} from 'rxjs/operators';
+import {Observable} from 'rxjs';
 import {IDateRange} from '../dashboard-statistics/interfaces/IDateRange';
 import {Plotly} from "angular-plotly.js/lib/plotly.interface";
 import {StatisticsEnum} from "../dashboard-statistics/enums/statistics.enum";
-import {LocalStorageService} from "./localStorage.service";
 
 interface chartFactory {
   type: string;
@@ -16,10 +14,18 @@ interface chartFactory {
 
 @Injectable()
 export class DashboardStatisticsService {
-  constructor(private dsmService: DSMService) {
+  private $
+
+  constructor(private dsmService: DSMService) {}
+
+  public getStatisticsFor(chartsOrCounts: StatisticsEnum, dateRange: IDateRange): Observable<any> {
+    return ({
+      COUNT: this.countsFactory(dateRange),
+      CHART: this.chartFactory(dateRange)
+    })[chartsOrCounts]
   }
 
-  public ChartFactory(dateRange: IDateRange): Observable<Plotly.Data[]> {
+  private chartFactory(dateRange: IDateRange): Observable<Plotly.Data[]> {
     return this.dsmService.getDashboardData(dateRange, StatisticsEnum.CHART)
       .pipe(
         map(data => {
@@ -33,7 +39,7 @@ export class DashboardStatisticsService {
       );
   }
 
-  public CountsFactory(dateRange: IDateRange): Observable<any> {
+  private countsFactory(dateRange: IDateRange): Observable<any> {
     return this.dsmService.getDashboardData(dateRange, StatisticsEnum.COUNT);
   }
 
