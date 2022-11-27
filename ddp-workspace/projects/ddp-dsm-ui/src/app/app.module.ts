@@ -9,7 +9,6 @@ import {CheckAuthGuard} from './guards/checkAuth.guard';
 import {StudyGuard} from './guards/study.guard';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatSnackBarModule} from "@angular/material/snack-bar";
-import {OnLineSnackbarComponent} from "./Shared/components/onLine-snackbar/onLine-snackbar.component";
 import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from '@angular/material/button';
 import {MatTooltipModule} from '@angular/material/tooltip';
@@ -54,7 +53,6 @@ const guards = [StudyGuard, CheckAuthGuard];
 @NgModule({
   declarations: [
     AppComponent,
-    OnLineSnackbarComponent,
     ErrorSnackbarComponent,
     ErrorsHistorySnackbarComponent
   ],

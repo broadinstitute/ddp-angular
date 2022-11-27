@@ -1,4 +1,4 @@
-import {Injectable} from "@angular/core";
+import {Injectable, NgZone} from "@angular/core";
 import {HttpErrorResponse} from "@angular/common/http";
 import {MatSnackBar, MatSnackBarConfig} from "@angular/material/snack-bar";
 import {ErrorSnackbarComponent} from "../Shared/components/error-snackbar/error-snackbar.component";
@@ -12,7 +12,7 @@ class HttpErrorResponsesHistory implements IHttpErrorResponseHistoryItem {
 export class ErrorsService {
   public readonly HttpErrorResponsesHistory: IHttpErrorResponseHistoryItem[] = [];
 
-  constructor(private _snackBar: MatSnackBar) {
+  constructor(private _snackBar: MatSnackBar, private ngZone: NgZone) {
   }
 
   private getSnackbarConfig(httpErrorResponse: HttpErrorResponse): MatSnackBarConfig {
@@ -26,7 +26,10 @@ export class ErrorsService {
 
   public openSnackbar(httpErrorResponse: HttpErrorResponse) {
     this.HttpErrorResponsesHistory.push(new HttpErrorResponsesHistory(httpErrorResponse, new Date()));
-    this._snackBar.openFromComponent(ErrorSnackbarComponent, this.getSnackbarConfig(httpErrorResponse));
+
+    this.ngZone.run(() => {
+      this._snackBar.openFromComponent(ErrorSnackbarComponent, this.getSnackbarConfig(httpErrorResponse));
+    })
   }
 
 }

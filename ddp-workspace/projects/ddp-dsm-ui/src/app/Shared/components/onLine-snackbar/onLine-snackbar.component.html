@@ -1,8 +1,0 @@
-<main class="snackbar">
-  <mat-icon>{{data.online ? 'signal_cellular_4_bar' : 'signal_cellular_off'}}</mat-icon>
-
-  <div class="snackbar-content">
-    <p>{{data.text}}</p>
-    <button *ngIf="data.online" matTooltip="Close and Reload page"  mat-flat-button color="accent" (click)="refresh()"><mat-icon>refresh</mat-icon></button>
-  </div>
-</main>

@@ -14,7 +14,7 @@
       [value]="historyItem.httpErrorResponse"
     >
       <div class="list-option">
-        <span class="list-option-title">{{historyItem.httpErrorResponse.name}}</span>
+        <span class="list-option-title">{{i+1 + ' - ' + historyItem.httpErrorResponse.name}}</span>
         <span class="list-option-date">{{historyItem.timeStamp | date : 'mediumTime'}}</span>
       </div>
     </mat-list-option>

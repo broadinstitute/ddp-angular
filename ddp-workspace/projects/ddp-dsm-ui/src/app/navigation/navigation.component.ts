@@ -8,7 +8,6 @@ import {DomSanitizer, Title} from '@angular/platform-browser';
 import {Location} from '@angular/common';
 import {Observable} from 'rxjs';
 import {LocalStorageService} from '../services/localStorage.service';
-import {OnLineService} from "../services/onLine.service";
 
 @Component({
   selector: 'app-navigation',
@@ -22,7 +21,7 @@ export class NavigationComponent implements OnInit {
 
   constructor(private router: Router, private auth: Auth, private location: Location, sanitizer: DomSanitizer,
               private role: RoleService, private activatedRoute: ActivatedRoute, private title: Title,
-              private localStorageService: LocalStorageService, private onLineService: OnLineService) {
+              private localStorageService: LocalStorageService) {
   }
 
 
@@ -47,10 +46,6 @@ export class NavigationComponent implements OnInit {
   }
 
   selectRealm(realmName, realmValue): void {
-    if(!this.onLineService.isOnline) {
-      this.onLineService.openOfflineRequestSnackbar();
-      return;
-    }
     const [,study,page] = this.location.path().split('/');
     this.auth.setSelectedStudy = realmValue;
     study !== realmName && this.auth.selectRealm(realmName, page);

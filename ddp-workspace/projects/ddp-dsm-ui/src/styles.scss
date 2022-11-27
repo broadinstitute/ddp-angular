@@ -21,10 +21,12 @@ input::-webkit-inner-spin-button {
 
 .snackbarRestyleOnline {
   background-color: green;
+  opacity: .8!important;
 }
 
 .snackbarRestyleOffline {
   background-color: red;
+  opacity: .8!important;
 }
 
 .snackbarRestyleError {

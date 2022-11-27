@@ -2,32 +2,28 @@
   Statistics Dashboard
 </h1>
 
-<div class="dashboard">
-  <ng-container *ngTemplateOutlet="charts, context: {
-    charts: Charts | async,
-    counts: Counts | async
-  }">
-  </ng-container>
-</div>
+<ng-container class="dashboard" >
+  <ng-container *ngTemplateOutlet="charts"></ng-container>
+</ng-container>
 
-<div class="spinner" *ngIf="loading">
+<ng-template class="spinner" #loadingSpinner>
   <mat-spinner></mat-spinner>
-</div>
+</ng-template>
 
-<ng-template let-Charts="charts" let-Counts="counts" #charts>
+<ng-template #charts>
 
   <app-date-range [disabled]="loading" [initDates]="dateRange" (dateChanged)="dateChanged($event)" ></app-date-range>
 
-  <div class="dashboard-chartsAndCounts" *ngIf="!loading">
+  <div class="dashboard-chartsAndCounts" >
 
-    <mat-tab-group mat-align-tabs="center" *ngIf="Charts?.length > 0 || Counts?.length > 0; else noCharts">
+    <mat-tab-group mat-align-tabs="center" >
 
       <mat-tab>
         <ng-template mat-tab-label>
           <mat-icon class="example-tab-icon">bar_chart</mat-icon>
           Charts
         </ng-template>
-        <app-plotly-charts [chartData]="Charts" [config]="getConfiguration"></app-plotly-charts>
+        <app-plotly-charts *ngIf="!loading; else loadingSpinner" [chartData]="charts$ | async"></app-plotly-charts>
       </mat-tab>
 
       <mat-tab>
@@ -35,7 +31,7 @@
           <mat-icon class="example-tab-icon">score</mat-icon>
           Counts
         </ng-template>
-        <app-counts-table [counts]="Counts"></app-counts-table>
+        <app-counts-table *ngIf="!loading; else loadingSpinner" [counts]="counts$ | async"></app-counts-table>
       </mat-tab>
     </mat-tab-group>
 
