@@ -502,13 +502,13 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
           const tissues: Array<Tissue> = [];
           tissues.push(new Tissue(null, oncHis.oncHistoryDetailId, null, null, null, null,
             null, null, null, null, null, null, null, null
-            , null, null, null, null, null, null, null, null, null,
+            , null, null, null, null, null, null, null, null, null, null,
             null, null, null, null, null, null, null, false));
           oncHis.tissues = tissues;
         } else if (oncHis.tissues.length < 1) {
           oncHis.tissues.push(new Tissue(null, oncHis.oncHistoryDetailId, null, null, null, null,
             null, null, null, null, null, null, null, null, null, null
-            , null, null, null, null, null, null, null,
+            , null, null, null, null, null, null, null, null,
             null, null, null, null, null, null, null, false));
         }
       }
@@ -516,7 +516,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
         const tissues: Array<Tissue> = [];
         tissues.push(new Tissue(null, null, null, null, null, null, null,
           null, null, null, null, null, null, null, null, null,
-          null, null, null, null, null, null, null,
+          null, null, null, null, null, null, null, null,
           null, null, null, null, null, null, null, false));
 
         const oncHis = new OncHistoryDetail(this.participant.participant.participantId,
@@ -831,7 +831,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
                 oncHis.faxSent2 = Utils.getFormattedDate(date);
                 oncHis.faxSent2By = this.role.userID();
                 this.oncHistoryValueChanged(oncHis.faxSent2, 'faxSent2', oncHis);
-              } else {
+              } else if (oncHis.faxSent3 == null) {
                 oncHis.faxSent3 = Utils.getFormattedDate(date);
                 oncHis.faxSent3By = this.role.userID();
                 this.oncHistoryValueChanged(oncHis.faxSent3, 'faxSent3', oncHis);

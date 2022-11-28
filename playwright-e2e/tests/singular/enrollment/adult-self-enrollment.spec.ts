@@ -14,6 +14,8 @@ import PatientSurveyPage from 'pages/singular/enrollment/patient-survey-page';
 import { assertActivityHeader, assertActivityProgress } from 'utils/assertion-helper';
 import { generateUserName } from 'utils/faker-utils';
 
+const { SINGULAR_USER_EMAIL, SINGULAR_USER_PASSWORD } = process.env;
+
 test.describe('Enroll myself as adult', () => {
   // Randomize last name
   const lastName = generateUserName(user.patient.lastName);
@@ -31,7 +33,7 @@ test.describe('Enroll myself as adult', () => {
 
     // Step 2
     // Enter email alias and password to create new account
-    await auth.createAccountWithEmailAlias(page);
+    await auth.createAccountWithEmailAlias(page, { email: SINGULAR_USER_EMAIL, password: SINGULAR_USER_PASSWORD });
 
     // Step 3
     // On "My Dashboard" page, click Enroll Myself button
@@ -106,10 +108,7 @@ test.describe('Enroll myself as adult', () => {
     await medicalRecordReleaseForm.uploadFile(`data/upload/BroadInstitute_Wikipedia.jpg`);
     await medicalRecordReleaseForm.next({ waitForNav: true });
 
-    await assertActivityHeader(
-      page,
-      'Please complete this survey so that we may learn more about your medical background.'
-    );
+    await assertActivityHeader(page, 'Please complete this survey so that we may learn more about your medical background.');
 
     // Patient Survey
     const patientSurveyPage = new PatientSurveyPage(page);

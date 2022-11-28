@@ -91,6 +91,7 @@ export class ParticipantColumn {
   public static PATHOLOGY_REPORT = new ParticipantColumn('Pathology Report', 'pathologyReport', 't');
   public static COLLABORATOR_SAMPLE_ID = new ParticipantColumn('Tumor Collaborator Sample ID', 'collaboratorSampleId', 't');
   public static BLOCK_SENT = new ParticipantColumn('Block to SHL', 'blockSent', 't');
+  public static BLOCK_ID_SHL = new ParticipantColumn('Block ID to SHL', 'blockIdShl', 't');
   public static SCROLL_RECEIVED = new ParticipantColumn('Scrolls back from SHL', 'scrollsReceived', 't');
   public static SK_ID = new ParticipantColumn('SK ID', 'skId', 't');
   public static SM_ID = new ParticipantColumn('SM ID for H&E', 'smId', 't');

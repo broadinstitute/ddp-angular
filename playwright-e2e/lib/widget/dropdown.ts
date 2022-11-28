@@ -9,9 +9,7 @@ export default class Dropdown {
 
   constructor(page: Page, label: string | RegExp) {
     this.page = page;
-    this.locator = this.page
-      .locator('li.dropdown')
-      .filter({ has: this.page.locator('a.dropdown-toggle'), hasText: label });
+    this.locator = this.page.locator('li.dropdown').filter({ has: this.page.locator('a.dropdown-toggle'), hasText: label });
   }
 
   toLocator(): Locator {

@@ -14,6 +14,8 @@ import * as user from 'data/fake-user.json';
 import { assertActivityHeader, assertActivityProgress } from 'utils/assertion-helper';
 import { generateUserName } from 'utils/faker-utils';
 
+const { SINGULAR_USER_EMAIL, SINGULAR_USER_PASSWORD } = process.env;
+
 test.describe('Enrol an adult dependent', () => {
   // Randomize last name
   const dependentLastName = generateUserName(user.adultDependent.lastName);
@@ -29,7 +31,7 @@ test.describe('Enrol an adult dependent', () => {
     await preScreeningPage.enterInformationAboutYourself();
 
     // Enter email alias and new password in Login popup
-    await auth.createAccountWithEmailAlias(page);
+    await auth.createAccountWithEmailAlias(page, { email: SINGULAR_USER_EMAIL, password: SINGULAR_USER_PASSWORD });
 
     // On "My Dashboard" page
     const myDashboardPage = new MyDashboardPage(page);
@@ -109,10 +111,7 @@ test.describe('Enrol an adult dependent', () => {
     // Do not need to upload medical record file. Click Next button to continue without upload.
     await medicalRecordReleaseForm.next({ waitForNav: true });
 
-    await assertActivityHeader(
-      page,
-      'Please complete this survey so that we may learn more about your medical background.'
-    );
+    await assertActivityHeader(page, 'Please complete this survey so that we may learn more about your medical background.');
 
     // Patient Survey
     const patientSurveyPage = new PatientSurveyPage(page);
