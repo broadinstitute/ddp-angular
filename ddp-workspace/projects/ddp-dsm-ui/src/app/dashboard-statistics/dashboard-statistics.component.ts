@@ -5,7 +5,7 @@ import {ICount} from './interfaces/ICount';
 import {DatePipe} from '@angular/common';
 import {IDateRange} from './interfaces/IDateRange';
 import {StatisticsEnum} from './enums/statistics.enum';
-import {BehaviorSubject, EMPTY, Observable, Subject, tap} from 'rxjs';
+import {EMPTY, Observable, Subject, tap} from 'rxjs';
 import {MatTabChangeEvent} from '@angular/material/tabs';
 import {ErrorsService} from '../services/errors.service';
 import {Plotly} from 'angular-plotly.js/lib/plotly.interface';
@@ -35,7 +35,7 @@ export class DashboardStatisticsComponent implements OnInit, OnDestroy {
   private isDateChanged = false;
 
   private readonly statisticsSubject: Subject<void> = new Subject<void>();
-  private readonly destroy$: Subject<void> = new Subject<void>();
+  private readonly destroyStatisticsSubject$: Subject<void> = new Subject<void>();
 
   constructor(private dashboardStatisticsService: DashboardStatisticsService, private errorService: ErrorsService) {
     this.statisticsSubject
@@ -50,7 +50,7 @@ export class DashboardStatisticsComponent implements OnInit, OnDestroy {
               finalize(() => this.loading = false)
             )
         ),
-        takeUntil(this.destroy$),
+        takeUntil(this.destroyStatisticsSubject$),
       )
       .subscribe({next: this.initializeData.bind(this)});
   }
@@ -60,8 +60,8 @@ export class DashboardStatisticsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
+    this.destroyStatisticsSubject$.next();
+    this.destroyStatisticsSubject$.complete();
   }
 
   public getStatisticsFor({tab}: MatTabChangeEvent): void {
