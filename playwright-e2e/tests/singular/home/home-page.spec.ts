@@ -1,17 +1,12 @@
-import { expect, test } from '@playwright/test';
-import { goToAboutUs, goToPath, NavSelectors } from 'tests/singular/lib/nav';
-import { fillSitePassword } from 'tests/lib/auth-singular';
+import { expect } from '@playwright/test';
+import { test } from 'fixtures/singular-fixture';
+import { goToAboutUs, NavSelectors } from 'pages/singular/navbar';
 
 /**
  * Functional tests
  */
 test.describe('Home page', () => {
-  test.beforeEach(async ({ page }) => {
-    await goToPath(page, '/password');
-    await fillSitePassword(page);
-  });
-
-  test('go to "Contact Us" @singular', async ({ page }) => {
+  test('go to "Contact Us" @singular', async ({ page, homePage }) => {
     const aboutUs = page.locator(NavSelectors.AboutUs);
 
     await expect(aboutUs).toHaveAttribute('href', '/about');
@@ -32,11 +27,9 @@ test.describe('Home page', () => {
     const childImg = page.locator('img[src="assets/images/Judson_2x.png"]');
 
     await expect(childImg).toBeVisible();
-
-    // await expect(page).toHaveScreenshot('singular-about-us-page', {fullPage: true});
   });
 
-  test('go to "Study Progress" @singular', async ({ page, context }) => {
+  test('go to "Study Progress" @singular', async ({ page, context, homePage }) => {
     const studyProgress = page.locator(NavSelectors.StudyProgress);
 
     await expect(studyProgress).toHaveAttribute(
@@ -51,7 +44,7 @@ test.describe('Home page', () => {
     await expect(newPage).toHaveTitle('Project Singular - Additional Ventures');
   });
 
-  test('go to "FAQs" @singular', async ({ page }) => {
+  test('go to "FAQs" @singular', async ({ page, homePage }) => {
     const faq = page.locator(NavSelectors.FAQs);
 
     await expect(faq).toHaveAttribute('href', '/faq');
@@ -62,7 +55,7 @@ test.describe('Home page', () => {
     await expect(page.locator('h1')).toHaveText('Frequently Asked Questions');
   });
 
-  test('go to "For Researchers" @singular', async ({ page }) => {
+  test('go to "For Researchers" @singular', async ({ page, homePage }) => {
     const forResearchers = page.locator(NavSelectors.ForResearchers);
 
     await expect(forResearchers).toHaveAttribute('href', '/for-researchers');
@@ -73,7 +66,7 @@ test.describe('Home page', () => {
     await expect(page.locator('h1').first()).toHaveText('Uncovering Single Ventricle Etiology');
   });
 
-  test('go to "For Clinicians" @singular', async ({ page }) => {
+  test('go to "For Clinicians" @singular', async ({ page, homePage }) => {
     const forClinicians = page.locator(NavSelectors.ForClinicians);
 
     await expect(forClinicians).toHaveAttribute('href', '/for-clinicians');

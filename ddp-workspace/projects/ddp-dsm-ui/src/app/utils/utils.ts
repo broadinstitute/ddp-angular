@@ -441,8 +441,8 @@ export class Utils {
     fileSaver.saveAs(data, fileName);
   }
 
-  public static parseDate(dateString: string, format: string, allowUnknownDay: boolean): string | Date {
-    if (dateString != null && format != null) {
+  public static parseDate(dateString: string | undefined, format: string, allowUnknownDay: boolean): string | Date {
+    if (dateString !== null && format !== null && dateString !== undefined) {
       let dateParts: string[] = null;
       if (Utils.DATE_STRING_IN_CVS === format) {
         dateParts = dateString.split('/');
@@ -491,7 +491,7 @@ export class Utils {
     }
   }
 
-  public static getPartialDateFormatted(dateString: string, format: string): string {
+  public static getPartialDateFormatted(dateString: string , format: string): string {
     if (format != null) {
       let dateParts: string[] = null;
       if (Utils.DATE_STRING_IN_CVS === format) {
@@ -964,5 +964,9 @@ export class Utils {
     }
     const date = new Date( value );
     return new DatePipe( 'en-US' ).transform( date, Utils.DATE_STRING_IN_CVS );
+  }
+
+  public static getNiceDateFormat( uploadedAt: string ): string {
+    return new DatePipe( 'en-US' ).transform( uploadedAt, Utils.DATE_STRING_IN_CVS_WITH_TIME );
   }
 }

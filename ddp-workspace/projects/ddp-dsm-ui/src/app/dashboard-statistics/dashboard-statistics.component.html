@@ -5,7 +5,8 @@
 <div class="dashboard">
   <ng-container *ngTemplateOutlet="charts, context: {
     charts: Charts | async,
-    counts: Counts | async
+    counts: Counts | async,
+    error: errorMessage | async
   }">
   </ng-container>
 </div>
@@ -14,32 +15,43 @@
   <mat-spinner></mat-spinner>
 </div>
 
-<ng-template let-Charts="charts" let-Counts="counts" #charts>
+<ng-template let-Charts="charts" let-Error="error" let-Counts="counts" #charts>
+
+  <app-date-range [disabled]="loading" [initDates]="dateRange" (dateChanged)="dateChanged($event)" ></app-date-range>
 
   <div class="dashboard-chartsAndCounts" *ngIf="!loading">
 
+  <ng-container *ngIf="!Error; else errorText">
 
-      <mat-tab-group mat-align-tabs="center" *ngIf="Charts.length > 0 || Counts.length > 0; else noCharts">
-        <mat-tab>
-          <ng-template mat-tab-label>
-            <mat-icon class="example-tab-icon">bar_chart</mat-icon>
-            Charts
-          </ng-template>
-          <app-plotly-charts [chartData]="Charts" [config]="getConfiguration"></app-plotly-charts>
-        </mat-tab>
+    <mat-tab-group mat-align-tabs="center" *ngIf="Charts?.length > 0 || Counts?.length > 0; else noCharts">
 
-        <mat-tab>
-          <ng-template mat-tab-label>
-            <mat-icon class="example-tab-icon">score</mat-icon>
-            Counts
-          </ng-template>
-          <app-counts [countsData]="Counts"></app-counts>
-        </mat-tab>
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <mat-icon class="example-tab-icon">bar_chart</mat-icon>
+          Charts
+        </ng-template>
+        <app-plotly-charts [chartData]="Charts" [config]="getConfiguration"></app-plotly-charts>
+      </mat-tab>
 
-      </mat-tab-group>
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <mat-icon class="example-tab-icon">score</mat-icon>
+          Counts
+        </ng-template>
+        <app-counts-table [counts]="Counts"></app-counts-table>
+      </mat-tab>
+    </mat-tab-group>
+  </ng-container>
+
 
     <ng-template #noCharts>
       <p class="noCharts">There are not available charts and counts for this study</p>
+    </ng-template>
+
+    <ng-template #errorText>
+      <p class="errorText">An error occurred while fetching dashboard data.
+        <br/>Message: <span>{{ Error.statusText }}</span>
+        <br/>Status code: <span>{{ Error.status }}</span></p>
     </ng-template>
 
   </div>

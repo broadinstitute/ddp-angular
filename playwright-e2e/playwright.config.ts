@@ -13,8 +13,10 @@ dotenv.config({ path: path.resolve(__dirname, '.env') });
  * See https://playwright.dev/docs/test-configuration.
  */
 const testConfig: PlaywrightTestConfig = {
-  testDir: './tests',
-  /* Maximum time one test can run for. */
+  globalSetup: require.resolve('./fixtures/global-setup'),
+  testDir: '.',
+  testMatch: '**/*.spec.ts',
+  /* Maximum time one test can run for. Test should be short and takes less than 2 minutes to run */
   timeout: 120 * 1000,
   /* For expect() calls */
   expect: {
@@ -27,7 +29,6 @@ const testConfig: PlaywrightTestConfig = {
       // Account for minor difference in text rendering and resolution between headless and headed mode
       threshold: 0.3,
       maxDiffPixelRatio: 0.2
-      // maxDiffPixels: 200,
     },
     toHaveScreenshot: {
       scale: 'css',
@@ -36,21 +37,21 @@ const testConfig: PlaywrightTestConfig = {
     }
   },
   /* Run tests in files in parallel */
-  fullyParallel: true,
+  fullyParallel: false,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
-  retries: 0,
-  workers: 3,
-  maxFailures: 3, // Limits total test failures
+  retries: process.env.CI ? 1 : 0,
+  workers: process.env.CI ? 2 : 3,
+  maxFailures: process.env.CI ? 10 : 3,
 
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: [
     ['html', { open: 'never', outputFolder: 'html-test-results' }],
     ['list'],
-    ['junit', { outputFile: 'test-results/junit/results.xml' }]
+    ['junit', { outputFile: 'junit/results/results.xml' }]
   ],
   /* Folder for test artifacts such as screenshots, videos, traces, etc. */
-  outputDir: 'test-results/',
+  outputDir: 'test-results',
 
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
@@ -64,9 +65,9 @@ const testConfig: PlaywrightTestConfig = {
     // baseURL: 'http://localhost:3000',
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-    trace: 'retain-on-failure',
+    trace: process.env.CI ? 'on-first-retry' : 'retain-on-failure',
     screenshot: 'only-on-failure',
-    video: 'retain-on-failure',
+    video: process.env.CI ? 'on-first-retry' : 'retain-on-failure', // Limit load on CI system because trace and video add load
 
     userAgent:
       'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) ' +

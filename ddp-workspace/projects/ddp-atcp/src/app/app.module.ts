@@ -121,6 +121,7 @@ config.projectGcpId = DDP_ENV.projectGcpId;
 config.doGcpErrorReporting = DDP_ENV.doGcpErrorReporting;
 config.cloudLoggingUrl = DDP_ENV.cloudLoggingUrl;
 config.doCloudLogging = DDP_ENV.doCloudLogging;
+config.updatePreferredLanguageForGovernedParticipants = true;
 
 export function translateFactory(
   translate: TranslateService,

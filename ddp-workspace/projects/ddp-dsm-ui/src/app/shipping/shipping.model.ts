@@ -1,7 +1,7 @@
 import { Address } from '../address/address.model';
 
 export class KitRequest {
-  constructor(public participantId: string, public collaboratorParticipantId: string, public bspCollaboratorSampleId: string,
+  constructor(public participantId: string, public bspCollaboratorParticipantId: string, public bspCollaboratorSampleId: string,
               public realm: string, public kitTypeName: string, public dsmKitRequestId: string, public dsmKitId: string,
               public ddpLabel: string, public labelUrlTo: string, public labelUrlReturn: string,
               public trackingToId: string, public trackingReturnId: string, public easypostTrackingToUrl: string,
@@ -22,7 +22,7 @@ export class KitRequest {
 
   static parse(json): KitRequest {
     return new KitRequest(
-      json.participantId, json.collaboratorParticipantId, json.bspCollaboratorSampleId, json.realm, json.kitTypeName,
+      json.participantId, json.bspCollaboratorParticipantId, json.bspCollaboratorSampleId, json.realm, json.kitTypeName,
       json.dsmKitRequestId, json.dsmKitId,
       json.ddpLabel, json.labelUrlTo, json.labelUrlReturn,
       json.trackingToId, json.trackingReturnId, json.easypostTrackingToUrl,
@@ -45,19 +45,22 @@ export class KitRequest {
   }
 
   public getID(): any {
-    if (this.collaboratorParticipantId != null && this.collaboratorParticipantId !== '') {
-      const idSplit: string[] = this.collaboratorParticipantId.split('_');
+    if (this.bspCollaboratorParticipantId != null && this.bspCollaboratorParticipantId !== '') {
+      const idSplit: string[] = this.bspCollaboratorParticipantId.split('_');
       if (idSplit.length === 2) {
         return idSplit[ 1 ];
       }
       if (idSplit.length > 2) { // RGP
-        return this.collaboratorParticipantId.slice(this.collaboratorParticipantId.indexOf('_') + 1);
+        return this.bspCollaboratorParticipantId.slice(this.bspCollaboratorParticipantId.indexOf('_') + 1);
       }
+    }
+    if (this.shortId != null && this.shortId !== '') {
+      return this.shortId;
     }
     if (this.participant != null && this.participant.shortId !== '') {
       return this.participant.shortId;
     }
-    return this.collaboratorParticipantId;
+    return this.bspCollaboratorParticipantId;
   }
 
   public getShippingIdOrError(): any {

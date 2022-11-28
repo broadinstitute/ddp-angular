@@ -190,8 +190,10 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
 
     this.displayActivityOrder();
     this.addMedicalProviderInformation();
-    this.getMercuryEligibleSamples();
-    this.canSequence = this.canHaveSequencing(this.participant);
+    if(this.role.allowedToDoOrderSequencing()) {
+      this.getMercuryEligibleSamples();
+      this.canSequence = this.canHaveSequencing(this.participant);
+    }
   }
 
   private handleParticipantProfileUpdate(): void {
@@ -500,13 +502,13 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
           const tissues: Array<Tissue> = [];
           tissues.push(new Tissue(null, oncHis.oncHistoryDetailId, null, null, null, null,
             null, null, null, null, null, null, null, null
-            , null, null, null, null, null, null, null, null, null,
+            , null, null, null, null, null, null, null, null, null, null,
             null, null, null, null, null, null, null, false));
           oncHis.tissues = tissues;
         } else if (oncHis.tissues.length < 1) {
           oncHis.tissues.push(new Tissue(null, oncHis.oncHistoryDetailId, null, null, null, null,
             null, null, null, null, null, null, null, null, null, null
-            , null, null, null, null, null, null, null,
+            , null, null, null, null, null, null, null, null,
             null, null, null, null, null, null, null, false));
         }
       }
@@ -514,7 +516,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
         const tissues: Array<Tissue> = [];
         tissues.push(new Tissue(null, null, null, null, null, null, null,
           null, null, null, null, null, null, null, null, null,
-          null, null, null, null, null, null, null,
+          null, null, null, null, null, null, null, null,
           null, null, null, null, null, null, null, false));
 
         const oncHis = new OncHistoryDetail(this.participant.participant.participantId,
@@ -821,18 +823,25 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
               // TODO: check is it correct ? - shadowed variables `date`
               // eslint-disable-next-line @typescript-eslint/no-shadow
               const date = new Date();
+              const formattedDate = Utils.getFormattedDate(date);
               if (oncHis.faxSent == null) {
-                oncHis.faxSent = Utils.getFormattedDate(date);
+                oncHis.faxSent = formattedDate;
                 oncHis.faxSentBy = this.role.userID();
                 this.oncHistoryValueChanged(oncHis.faxSent, 'faxSent', oncHis);
               } else if (oncHis.faxSent2 == null) {
-                oncHis.faxSent2 = Utils.getFormattedDate(date);
-                oncHis.faxSent2By = this.role.userID();
-                this.oncHistoryValueChanged(oncHis.faxSent2, 'faxSent2', oncHis);
-              } else {
-                oncHis.faxSent3 = Utils.getFormattedDate(date);
-                oncHis.faxSent3By = this.role.userID();
-                this.oncHistoryValueChanged(oncHis.faxSent3, 'faxSent3', oncHis);
+                //If current date is not already on FaxSent1
+                if(oncHis.faxSent !== formattedDate) {
+                  oncHis.faxSent2 = formattedDate;
+                  oncHis.faxSent2By = this.role.userID();
+                  this.oncHistoryValueChanged(oncHis.faxSent2, 'faxSent2', oncHis);
+                }
+              } else if (oncHis.faxSent3 == null) {
+                //If current date is not already on either FaxSent1 or FaxSent2
+                if(oncHis.faxSent !== formattedDate && oncHis.faxSent2 !== formattedDate) {
+                  oncHis.faxSent3 = formattedDate;
+                  oncHis.faxSent3By = this.role.userID();
+                  this.oncHistoryValueChanged(oncHis.faxSent3, 'faxSent3', oncHis);
+                }
               }
               oncHis.changedBy = this.role.userMail();
               oncHis.changed = true;
@@ -875,7 +884,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
       // this.selectedTabTitle = data.heading;
       this.activeTab = tabName;
     }
-    if (tabName === 'sequencing') {
+    if (tabName === 'sequencing' && this.role.allowedToDoOrderSequencing()) {
       this.getMercuryEligibleSamples();
     }
   }
@@ -1636,7 +1645,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
     //pediatric pt
     if (!canBeSequencedBasedOnLocation) {
       const addParticipantActivity = participant.data.activities.find(activity => activity.activityCode === this.ADD_PARTICIPANT);
-      if (addParticipantActivity != null && prequalActivity) {
+      if (addParticipantActivity != null) {
         const countryQuestion = addParticipantActivity?.questionsAnswers?.find(
           questionAnswer => questionAnswer.stableId === this.CHILD_COUNTRY);
         if (countryQuestion != null && countryQuestion.answer) {
@@ -1714,4 +1723,13 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
     this.downloading = downloading;
 
   }
+
+  public get hasMrViewPermission(): boolean {
+    return this.role.allowedToViewMedicalRecords();
+  }
+
+  public get hasViewOnlyDSSDataPermission(): boolean {
+    return this.role.viewOnlyDSSData;
+  }
+
 }

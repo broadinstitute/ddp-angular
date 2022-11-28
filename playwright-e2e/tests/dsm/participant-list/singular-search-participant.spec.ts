@@ -1,8 +1,8 @@
 import { expect, test } from '@playwright/test';
-import { login } from 'tests/lib/auth-dsm';
-import { study } from 'tests/dsm/lib/navbar';
+import { login } from 'authentication/auth-dsm';
+import { study } from 'pages/dsm/navbar';
 import Select from 'lib/widget/select';
-import ParticipantListPage, { SearchFieldLabel } from 'tests/dsm/participant-list/participant-list-page';
+import ParticipantsPage, { SearchFieldLabel } from 'pages/dsm/participants/participants-page';
 import Table from 'lib/widget/table';
 
 test.describe('Singular Study in DSM', () => {
@@ -16,9 +16,9 @@ test.describe('Singular Study in DSM', () => {
     await expect(page.locator('h2')).toHaveText('You have selected the Singular study.');
 
     await study(page).selectOption('Participant List', { waitForNav: true });
-    await expect(page.locator('h1')).toHaveText('Participant List');
+    await expect(page.locator('h1')).toHaveText('Participant List', { timeout: 30 * 1000 });
 
-    const participantListPage = new ParticipantListPage(page);
+    const participantListPage = new ParticipantsPage(page);
     await participantListPage.openSearchButton().click();
 
     // Grab one random Short ID from table rwo index: 3 and column index: 3 and use value in the search

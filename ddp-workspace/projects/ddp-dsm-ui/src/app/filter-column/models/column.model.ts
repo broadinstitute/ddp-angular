@@ -89,8 +89,9 @@ export class ParticipantColumn {
   public static TUMOR_TYPE = new ParticipantColumn('Tumor Type', 'tumorType', 't');
   public static H_E = new ParticipantColumn('H&E', 'hE', 't');
   public static PATHOLOGY_REPORT = new ParticipantColumn('Pathology Report', 'pathologyReport', 't');
-  public static COLLABORATOR_SAMPLE_ID = new ParticipantColumn('Collaborator Sample ID', 'collaboratorSampleId', 't');
+  public static COLLABORATOR_SAMPLE_ID = new ParticipantColumn('Tumor Collaborator Sample ID', 'collaboratorSampleId', 't');
   public static BLOCK_SENT = new ParticipantColumn('Block to SHL', 'blockSent', 't');
+  public static BLOCK_ID_SHL = new ParticipantColumn('Block ID to SHL', 'blockIdShl', 't');
   public static SCROLL_RECEIVED = new ParticipantColumn('Scrolls back from SHL', 'scrollsReceived', 't');
   public static SK_ID = new ParticipantColumn('SK ID', 'skId', 't');
   public static SM_ID = new ParticipantColumn('SM ID for H&E', 'smId', 't');
@@ -117,7 +118,8 @@ export class ParticipantColumn {
   public static QC = new ParticipantColumn('QC', 'qc');
 
   // kit
-  public static COLLABORATOR_SAMPLE = new ParticipantColumn('Collaborator Sample ID', 'bspCollaboratorSampleId', 'k');
+  public static COLLABORATOR_SAMPLE = new ParticipantColumn('Normal Collaborator Sample ID', 'bspCollaboratorSampleId', 'k');
+  public static COLLABORATOR_PARTICIPANT_ID = new ParticipantColumn('Collaborator Participant ID', 'bspCollaboratorParticipantId', 'k');
   public static SAMPLE_TYPE = new ParticipantColumn('Sample Type', 'kitTypeName', 'k');
   public static SAMPLE_SENT = new ParticipantColumn('Sample Sent', 'scanDate', 'k');
   public static SAMPLE_RECEIVED = new ParticipantColumn('Sample Received', 'receiveDate', 'k');

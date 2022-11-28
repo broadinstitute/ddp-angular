@@ -516,8 +516,8 @@ participant.data.dsm['diagnosisYear'] != null">
           <!--tab order is not working when tabs have ngIf, will just put them at the end of static tabs. therefore ngIf=true is added to static tabs-->
           <tabset>
             <tab
-              *ngIf="participant != null && participant.data != null && participant.data.activities != null && participant.data.activities.length > 0
-                && activityDefinitions != null"
+              *ngIf="((participant != null && participant.data != null && participant.data.activities != null && participant.data.activities.length > 0
+                && activityDefinitions != null) && ((hasMrViewPermission || hasViewOnlyDSSDataPermission) || (!hasMrViewPermission && !hasViewOnlyDSSDataPermission)))"
               heading="Survey Data" [active]="tabActive('Survey Data')" (selectTab)="onSelect($event, 'Survey Data')">
               <br/><br/>
               <div class="Float--left Width--100">
@@ -553,7 +553,7 @@ participant.data.dsm['diagnosisYear'] != null">
             </tab>
 
             <!--sample information-->
-            <tab *ngIf="!hideSamplesTab && participant.kits != null && participant.kits.length > 0" heading="Sample Information">
+            <tab *ngIf="!hideSamplesTab && participant.kits != null && participant.kits.length > 0 && ((hasMrViewPermission && !hasViewOnlyDSSDataPermission) || (!hasMrViewPermission && hasViewOnlyDSSDataPermission))" heading="Sample Information">
               <ng-container *ngFor="let sample of participant.kits; let i = index">
                 <fieldset style="border: 1px black solid">
                   <legend class="Group--Title" id="{{sample.kitTypeName}}_{{i}}">Sample Type: {{sample.kitTypeName}}</legend>
@@ -574,7 +574,7 @@ participant.data.dsm['diagnosisYear'] != null">
                       </tr>
                       <hr style="border-color: lightgray">
                       <tr>
-                        <td class="TD--Padding Width--50 Data-Display-Question">Collaborator Sample Id:</td>
+                        <td class="TD--Padding Width--50 Data-Display-Question">Normal Collaborator Sample Id:</td>
                       </tr>
                       <tr>
                         <td class="TD--Padding-Left Width--50">{{sample.bspCollaboratorSampleId}}</td>
@@ -715,7 +715,7 @@ participant.data.dsm['diagnosisYear'] != null">
               </ng-container>
             </tab>
 
-          <tab *ngIf="showContactInformation" heading="Contact Information">
+          <tab *ngIf="showContactInformation && ((hasMrViewPermission && !hasViewOnlyDSSDataPermission) || (!hasMrViewPermission && hasViewOnlyDSSDataPermission))" heading="Contact Information">
             <legend class="Group--Title">
               <div class="Float--left Width--100">
                 <ng-container *ngIf="participant && (!participant.data ||!participant.data.address)">
@@ -772,7 +772,7 @@ participant.data.dsm['diagnosisYear'] != null">
           </tab>
 
             <tab heading="Medical Records"
-                 *ngIf="participant.medicalRecords != null && participant.medicalRecords.length > 0 && hasRole().allowedToViewMedicalRecords()"
+                 *ngIf="(participant.medicalRecords != null && participant.medicalRecords.length > 0) && hasMrViewPermission"
                  [active]="tabActive('Medical Records')" (selectTab)="onSelect($event, 'Medical Records')">
               <br/><br/><br/>
 
@@ -845,7 +845,7 @@ participant.data.dsm['diagnosisYear'] != null">
             </tab>
 
             <tab heading="Onc History"
-                 *ngIf="isOncHistoryVisible && hasRole().allowedToViewMedicalRecords()"
+                 *ngIf="isOncHistoryVisible && hasMrViewPermission"
                  [active]="tabActive('Onc History')" (selectTab)="onSelect($event, 'Onc History')">
               <br/><br/><br/>
 
@@ -887,7 +887,7 @@ participant.data.dsm['diagnosisYear'] != null">
               <br/><br/><br/>
 
               <ng-container *ngIf="!canBeSequencedBasedOnLocation">
-                <b>Participant not located in US</b><br/>
+                <b>Error: Participant lives in New York or Canada and is not eligible for clinical sequencing</b><br/>
               </ng-container>
 
               <ng-container *ngIf="canBeSequencedBasedOnLocation && sequencingOrdersArray.length < 1">
@@ -1151,7 +1151,7 @@ participant.data.dsm['diagnosisYear'] != null">
           <!--AT tabs from fieldSettings-->
           <ng-template #groupForm>
             <ng-container *ngFor="let tab of settings['TAB_GROUPED']">
-              <tab heading="{{getDisplayName(tab.columnDisplay, tab.columnName)}}"
+              <tab *ngIf="hasMrViewPermission || (!hasMrViewPermission && !hasViewOnlyDSSDataPermission)" heading="{{getDisplayName(tab.columnDisplay, tab.columnName)}}"
                    [active]="tabActive(tab.columnDisplay)" (select)="onSelect($event, tab.columnDisplay)">
                 <ng-container *ngFor="let setting of settings[tab.columnName]; let settingIndex = index">
                   <div *ngIf="setting.displayType === 'GROUP'">

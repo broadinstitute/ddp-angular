@@ -17,6 +17,7 @@ import { RoleService } from './role.service';
 import { SessionService } from './session.service';
 import { BulkCohortTag } from '../tags/cohort-tag/bulk-cohort-tag-modal/bulk-cohort-tag-model';
 import {LocalStorageService} from './localStorage.service';
+import {DateRangeModel} from '../dashboard-statistics/models/DateRange.model';
 
 declare var DDP_ENV: any;
 
@@ -38,10 +39,13 @@ export class DSMService {
               private localStorageService: LocalStorageService) {
   }
 
-  getDashboardData(realm: string): Observable<any> {
+  getDashboardData({startDate, endDate}: DateRangeModel): Observable<any> {
     const url = this.baseUrl + DSMService.UI + 'dashboard';
-    const map: { name: string; value: any }[] = [];
-    map.push( {name: DSMService.REALM, value: realm} );
+    const map: {}[] = [];
+    map.push( {name: DSMService.REALM, value: this.localStorageService.selectedRealm} );
+    startDate && map.push({name: 'startDate', value: startDate});
+    endDate && map.push({name: 'endDate', value: endDate});
+
     return this.http.get(url, this.buildQueryHeader(map)).pipe(
       catchError(this.handleError.bind(this))
     );
@@ -219,9 +223,11 @@ export class DSMService {
 
     if (filterQuery != null) {
       map.push({name: 'filterQuery', value: filterQuery});
-    } else if (json == null || !json.filters?.length) {
+    }
+    if (json != null && json.filterName != null) {
       json && map.push({name: 'filterName', value: json.filterName});
-    } else if (viewFilterCopy != null) {
+    }
+    if (viewFilterCopy != null) {
       map.push({name: 'filters', value: JSON.stringify(viewFilterCopy.filters)});
     }
 

@@ -1,9 +1,8 @@
-import { expect, test } from '@playwright/test';
-
-import MyDashboardPage from 'tests/singular/dashboard/my-dashboard-page';
-import HomePage from 'tests/singular/home/home-page';
-import { clickLogin, goToAboutUs, NavSelectors, visitHomePage } from 'tests/singular/lib/nav';
-import { fillSitePassword, login } from 'tests/lib/auth-singular';
+import { expect } from '@playwright/test';
+import { test } from 'fixtures/singular-fixture';
+import MyDashboardPage from 'pages/singular/dashboard/my-dashboard-page';
+import { NavSelectors } from 'pages/singular/navbar';
+import { login } from 'authentication/auth-singular';
 
 import _ from 'lodash';
 
@@ -12,19 +11,8 @@ import _ from 'lodash';
  * For example, to run this test: userEmail=bweng+101@broadinstitute.org userPasswd=NotAnyMora1 yarn test:e2e login-visual.spec.ts
  */
 test.describe.skip('Login into Singular', () => {
-  test.beforeEach(async ({ page }) => {
-    await visitHomePage(page);
-    const home = new HomePage(page);
-    await home.waitForReady();
-  });
-
-  test('should works @visual @singular', async ({ page }) => {
-    await login(page, { email: process.env.singularUserEmail, password: process.env.singularUserPassword });
-
-    // On non-prod env, user must enter Site password to continue
-    await fillSitePassword(page);
-    // My Dashboard page does not load automatically, click "Log In" button again to see My Dashboard
-    await clickLogin(page);
+  test('should works @visual @singular', async ({ page, homePage }) => {
+    await login(page, { email: process.env.SINGULAR_USER_EMAIL, password: process.env.SINGULAR_USER_PASSWORD });
 
     // My Dashboard is visible
     const myDashboardPage = new MyDashboardPage(page);
@@ -82,10 +70,9 @@ test.describe.skip('Login into Singular', () => {
     expect(await patientSurveyRow.screenshot()).toMatchSnapshot('patient-survey-row.png');
   });
 
-  test('should fail with invalid credential @visual @singular', async ({ page }) => {
-    await goToAboutUs(page);
-    await fillSitePassword(page);
-    await login(page, { email: process.env.singularUserEmail, password: 'WrongPazzw0rd' });
+  test('should fail with invalid credential @visual @singular', async ({ page, homePage }) => {
+    await homePage.gotoURLPath('/about');
+    await login(page, { email: 'fake-user@broadinstitute.org', password: 'WrongPazzw0rd' });
     const loginErrMessage = page.locator('form .auth0-global-message-error span:not([class])');
     await expect(loginErrMessage).toHaveText('Wrong email or password.');
     expect(await page.locator('form .auth0-lock-widget-container').screenshot()).toMatchSnapshot('wrong-password.png');

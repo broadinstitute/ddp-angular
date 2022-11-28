@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { forkJoin, Observable, of } from 'rxjs';
-import { map, take, switchMap, tap, skipWhile } from 'rxjs/operators';
+import { map, take, switchMap, tap, skipWhile, mergeMap, filter } from 'rxjs/operators';
 
 import {
   SessionMementoService,
@@ -15,6 +15,7 @@ import {
   LanguageService,
   CompositeDisposable,
   UserStatusServiceAgent,
+  ParticipantProfileServiceAgent
 } from 'ddp-sdk';
 
 import { ActivityService } from '../../services/activity.service';
@@ -54,6 +55,7 @@ export class ParticipantListComponent implements OnInit, OnDestroy {
     private readonly userStatusService: UserStatusServiceAgent,
     private readonly registrationStatusService: RegistrationStatusService,
     @Inject('ddp.config') private readonly config: ConfigurationService,
+    private participantProfileService: ParticipantProfileServiceAgent
   ) {}
 
   ngOnInit(): void {
@@ -64,7 +66,22 @@ export class ParticipantListComponent implements OnInit, OnDestroy {
     this.anchor.addNew(
       this.languageService
         .getProfileLanguageUpdateNotifier()
-        .pipe(skipWhile(value => value === null))
+        .pipe(
+          skipWhile(value => value === null),
+          // update the preferred language of all dependents/participants if it is required by configuration
+          filter(() => this.config.updatePreferredLanguageForGovernedParticipants && !!this.participants?.length),
+          mergeMap(() => {
+            const updatedParticipants = this.participants.map(participant => ({
+              guid: participant.guid,
+              profile: {
+                preferredLanguage: this.languageService.getCurrentLanguage()
+              } as UserProfile
+            }));
+            return forkJoin(
+              this.participantProfileService.updateParticipantProfiles(updatedParticipants)
+            );
+          })
+        )
         .subscribe(() => {
           this.isLoaded = false;
           this.getParticipants();

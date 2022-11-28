@@ -106,8 +106,19 @@ In **/tests/singular** dir, run Singular tests only:
 * If you don't set up `.env` file, you can also specify environment
   variables in cmd (Not recommended)
   * For example, to run `login-visual.spec.ts` test:
-  > npx cross-env singularSitePassword=<SITE_PASSWORD> singularUserEmail=<YOUR_EMAIL> singularUserPasswd=<YOUR_PASSWORD> singularBaseURL=<HOME_URL> npx playwright test --config=playwright.config.ts login-visual.spec.ts
+  > npx cross-env SITE_PASSWORD=<SITE_PASSWORD> SINGULAR_USER_EMAIL=<EMAIL> SINGULAR_USER_PASSWORD=<YOUR_PASSWORD> SINGULAR_BASE_URL=<HOME_URL> npx playwright test --config=playwright.config.ts login-visual.spec.ts
 
+### Running tests on CI
+  - CI workflow name is `playwright-e2e-test-workflow`. Trigger this workflow via `build-utils/run_ci.sh`.
+    - If this is the first time, set personal CI token in `$HOME/.circleci-token` file. To know how to generate a personal token, see https://app.circleci.com/settings/user/tokens
+    - `<STUDY_NAME>` Any study name. It's required parameter by the shell script, but it's not used to run Playwright tests for targeted study. All tests will run.
+    - `<BRANCH_NAME>` Your branch name
+    - `<ENV_NAME>` One of the following: dev, test, staging
+    ```
+    cd build-utils
+    ./run_ci.sh run-e2e-tests <STUDY_NAME> <BRANCH_NAME> <ENV_NAME>
+    ```
+  
 ### Debugging in Intellij
 
 - [TODO]
@@ -129,7 +140,19 @@ In **/tests/singular** dir, run Singular tests only:
   > `npx playwright test pre-screening-page-visual.spec.ts -u`
   - Save new screenshots and commit to GitHub
 
-- Before merging PRs, run `eslint` and `tsc build` to against changed code from project root dir, `/playwright-e2e`.
+- Before merging PR, from project root dir, `/playwright-e2e`, run `tsc build` to compile and build, then run `lint` to check formatting.
   > npm run build
   > 
   > npm run lint
+- Test fixture
+  - To understand build-in support for fixture, see https://playwright.dev/docs/test-fixtures#creating-a-fixture
+  - `homePage` in `fixtures/singular-fixture.ts` is an example of custom user-defined fixture.
+  - To use above fixture in a test, for example,
+  ```
+    import { Page } from '@playwright/test';
+    import { test } from 'fixtures/singular-fixture';
+    test('an example', async ({ page, homePage }) => {
+      await homePage.signUp();
+      ...
+    }
+  ```

@@ -1,21 +1,22 @@
 import {Injectable} from '@angular/core';
 import {dashboardType} from '../enums/dashboard.enums';
 import {DSMService} from './dsm.service';
-import {LocalStorageService} from './localStorage.service';
 import {finalize, map} from 'rxjs/operators';
 import {Observable, Subject} from 'rxjs';
+import {CountsModel} from '../dashboard-statistics/models/Counts.model';
+import {DateRangeModel} from '../dashboard-statistics/models/DateRange.model';
 
 @Injectable()
 export class DashboardStatisticsService {
   public Counts: Subject<any> = new Subject<any>();
 
-  constructor(private dsmService: DSMService, private localStorageService: LocalStorageService) {
+  constructor(private dsmService: DSMService) {
   }
 
 
-  public ChartFactory(): Observable<any> {
-    const onlyCounts = [];
-    return this.dsmService.getDashboardData(this.localStorageService.selectedRealm)
+  public ChartFactory(dateRange: DateRangeModel): Observable<any> {
+    const onlyCounts: CountsModel[] = [];
+    return this.dsmService.getDashboardData(dateRange)
       .pipe(
         map(data => {
           const generatedCharts = [];

@@ -1,41 +1,30 @@
-import { expect, Page, test } from '@playwright/test';
-
-import HomePage from 'tests/singular/home/home-page';
-import AboutMePage from 'tests/singular/enrollment/about-me-page';
-import ConsentFormPage from 'tests/singular/enrollment/consent-form-page';
-import MyDashboardPage from 'tests/singular/dashboard/my-dashboard-page';
+import { expect } from '@playwright/test';
+import { test } from 'fixtures/singular-fixture';
+import AboutMePage from 'pages/singular/enrollment/about-me-page';
+import ConsentFormPage from 'pages/singular/enrollment/consent-form-page';
+import MyDashboardPage from 'pages/singular/dashboard/my-dashboard-page';
 import * as user from 'data/fake-user.json';
-import * as nav from 'tests/singular/lib/nav';
-import * as auth from 'tests/lib/auth-singular';
-import { makeEmailAlias } from 'utils/string-utils';
+import * as auth from 'authentication/auth-singular';
 import { WHO } from 'data/constants';
-import { downloadConsentPdf, enterMailingAddress } from 'tests/lib/test-steps';
-import PreScreeningPage from './pre-screening-page';
-import EnrollMyselfPage from './enroll-myself-page';
-import MedicalRecordReleaseForm from './medical-record-release-form';
-import PatientSurveyPage from './patient-survey-page';
+import { downloadConsentPdf, enterMailingAddress } from 'utils/test-utils';
+import PreScreeningPage from 'pages/singular/enrollment/pre-screening-page';
+import EnrollMyselfPage from 'pages/singular/enrollment/enroll-myself-page';
+import MedicalRecordReleaseForm from 'pages/singular/enrollment/medical-record-release-form';
+import PatientSurveyPage from 'pages/singular/enrollment/patient-survey-page';
+import { assertActivityHeader, assertActivityProgress } from 'utils/assertion-helper';
+import { generateUserName } from 'utils/faker-utils';
+
+const { SINGULAR_USER_EMAIL, SINGULAR_USER_PASSWORD } = process.env;
 
 test.describe('Enroll myself as adult', () => {
-  test.beforeEach(async ({ page }) => {
-    await nav.goToPath(page, '/password');
-    await auth.fillSitePassword(page);
-    await new HomePage(page).waitForReady();
-  });
+  // Randomize last name
+  const lastName = generateUserName(user.patient.lastName);
 
   /**
    * Test case: https://docs.google.com/document/d/1Ewsh4ULh5LVdZiUapvG-PyI2kL3XzVf4seeLq8Mt-B0/edit?usp=sharing
    */
-  test('can complete self-enrollment @enrollment @singular', async ({ context, page }) => {
-    // Assertion helper functions
-    const assertActivityHeader = async (page: Page, expectedText: string) => {
-      await expect(page.locator('h1.activity-header')).toHaveText(expectedText);
-    };
-
-    const assertActivityProgress = async (page: Page, expectedText: string) => {
-      await expect(page.locator('h3.progress-title')).toHaveText(expectedText);
-    };
-
-    await nav.signMeUp(page);
+  test('can complete self-enrollment @enrollment @singular', async ({ context, page, homePage }) => {
+    await homePage.signUp();
 
     // Step 1
     // On “pre-screening” page, answer all questions about yourself with fake values
@@ -44,11 +33,7 @@ test.describe('Enroll myself as adult', () => {
 
     // Step 2
     // Enter email alias and password to create new account
-    await auth.fillEmailPassword(page, {
-      email: makeEmailAlias(process.env.singularUserEmail as string),
-      password: process.env.singularUserPassword,
-      waitForNavigation: true
-    });
+    await auth.createAccountWithEmailAlias(page, { email: SINGULAR_USER_EMAIL, password: SINGULAR_USER_PASSWORD });
 
     // Step 3
     // On "My Dashboard" page, click Enroll Myself button
@@ -78,19 +63,19 @@ test.describe('Enroll myself as adult', () => {
     await assertActivityHeader(page, 'Your Consent Form');
     await assertActivityProgress(page, 'Page 3 of 3');
     await consentForm.firstName().fill(user.patient.firstName);
-    await consentForm.lastName().fill(user.patient.lastName);
+    await consentForm.lastName().fill(lastName);
 
     await consentForm.dateOfBirth(user.patient.birthDate.MM, user.patient.birthDate.DD, user.patient.birthDate.YYYY);
     await consentForm.toKnowSecondaryFinding().check('I want to know.');
-    await consentForm.signature().fill(`${user.patient.firstName} ${user.patient.lastName}`);
-    await consentForm.authorizationSignature().fill(user.patient.lastName);
+    await consentForm.signature().fill(`${user.patient.firstName} ${lastName}`);
+    await consentForm.authorizationSignature().fill(`${user.patient.firstName} ${lastName}`);
     await consentForm.agree();
 
     // on "About Me" page
     const aboutMePage = new AboutMePage(page);
     await aboutMePage.waitForReady();
     await assertActivityHeader(page, 'About Me');
-    await enterMailingAddress(page, { fullName: `${user.patient.firstName} ${user.patient.lastName}` }); // Fill out address with fake data
+    await enterMailingAddress(page, { fullName: `${user.patient.firstName} ${lastName}` });
     // Clicking of Next button Triggered address validation
     await aboutMePage.next();
     // Because address is all fake, an error message is expected
@@ -113,20 +98,17 @@ test.describe('Enroll myself as adult', () => {
 
     await assertActivityHeader(page, 'Medical Record Release Form');
     await assertActivityProgress(page, 'Page 3 of 3');
-    await medicalRecordReleaseForm.name().fill(`${user.patient.firstName} ${user.patient.lastName}`);
-    await medicalRecordReleaseForm.signature().fill(`${user.patient.firstName} ${user.patient.lastName}`);
+    await medicalRecordReleaseForm.name().fill(`${user.patient.firstName} ${lastName}`);
+    await medicalRecordReleaseForm.signature().fill(`${user.patient.firstName} ${lastName}`);
     await page.waitForResponse((resp) => resp.url().includes('/answers') && resp.status() === 200);
     await medicalRecordReleaseForm.submit();
 
     // Medical Record File Upload
     await assertActivityHeader(page, 'Medical Record File Upload');
-    await medicalRecordReleaseForm.uploadFile(`data/upload/BroadInstitute_Wikipedia.pdf`);
+    await medicalRecordReleaseForm.uploadFile(`data/upload/BroadInstitute_Wikipedia.jpg`);
     await medicalRecordReleaseForm.next({ waitForNav: true });
 
-    await assertActivityHeader(
-      page,
-      'Please complete this survey so that we may learn more about your medical background.'
-    );
+    await assertActivityHeader(page, 'Please complete this survey so that we may learn more about your medical background.');
 
     // Patient Survey
     const patientSurveyPage = new PatientSurveyPage(page);

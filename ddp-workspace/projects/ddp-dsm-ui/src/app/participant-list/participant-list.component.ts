@@ -121,6 +121,7 @@ export class ParticipantListComponent implements OnInit {
   savedSelectedColumns = {};
   isAddFamilyMember = false;
   hasSequencingOrders = false;
+  hasExternalShipper = false;
   showGroupFields = false;
   hideSamplesTab = false;
   showContactInformation = false;
@@ -132,6 +133,7 @@ export class ParticipantListComponent implements OnInit {
   selectAll = false;
   selectAllColumnsLabel = 'Select all';
   selectedPatients: string[] = [];
+  searchForRGP = false;
 
   constructor(private role: RoleService, private dsmService: DSMService, private compService: ComponentService,
                private router: Router, private auth: Auth, private route: ActivatedRoute, private util: Utils,
@@ -168,7 +170,7 @@ export class ParticipantListComponent implements OnInit {
   public pageChanged(pageNumber: number, rPerPage?: number): void {
     this.loadingParticipants = true;
     this.role.getUserSetting().setRowsPerPage = rPerPage;
-    const rowsPerPage = rPerPage ? rPerPage : this.role.getUserSetting().getRowsPerPage();
+    const rowsPerPage = rPerPage ? rPerPage : this.role?.getUserSetting()?.getRowsPerPage();
     const from = (pageNumber - 1) * rowsPerPage;
     const to = pageNumber * rowsPerPage;
     if (this.viewFilter) {
@@ -276,7 +278,7 @@ export class ParticipantListComponent implements OnInit {
   }
 
   loadSettings(): void {
-    this.rowsPerPage = this.role.getUserSetting().getRowsPerPage();
+    this.rowsPerPage = this.role?.getUserSetting()?.getRowsPerPage();
     let jsonData: any;
     this.dsmService.getSettings(localStorage.getItem(ComponentService.MENU_SELECTED_REALM), this.parent).subscribe({
       next: data => {
@@ -323,7 +325,7 @@ export class ParticipantListComponent implements OnInit {
             this.cancers.push(val);
           });
         }
-        if (jsonData.fieldSettings != null) {
+        if (jsonData.fieldSettings != null && !this.role.viewOnlyDSSData) {
           Object.keys(jsonData.fieldSettings).forEach((key) => {
             jsonData.fieldSettings[key].forEach((fieldSetting: FieldSettings) => {
               let options: Array<NameValue> = null;
@@ -569,6 +571,7 @@ export class ParticipantListComponent implements OnInit {
             options.push(new NameValue(kitType.name, kitType.displayName));
             if (kitType.externalShipper) {
               hasExternalShipper = true;
+              this.hasExternalShipper = true;
             }
           });
           if (optionsUpload.length > 0) {
@@ -691,6 +694,9 @@ export class ParticipantListComponent implements OnInit {
         }
         this.orderColumns();
         this.getData();
+        this.deleteFiltersAccordingToPermission();
+        this.removeUnnecessaryColumns();
+
       },
       // this.renewSelectedColumns(); commented out because if we have defaultColumns for all the studies we won't need it anymore
       error: err => {
@@ -701,6 +707,67 @@ export class ParticipantListComponent implements OnInit {
         throw 'Error - Loading display settings' + err;
       }
     });
+  }
+
+
+  private deleteFiltersAccordingToPermission(): void {
+    let columnNamesToDelete: string[];
+
+    if(this.mrAndDssFalse) {
+      columnNamesToDelete = ['k', 'address', 'm', 'oD'];
+    } else if(this.mrFalseDssTrue) {
+      columnNamesToDelete = ['m', 'oD'];
+    }
+
+    this.deleteFilters(columnNamesToDelete);
+  }
+
+  private deleteFilters(columnNames: string[]): void {
+    if(columnNames?.length > 0) {
+      columnNames.forEach((name: string) => {
+        delete this.sourceColumns[name];
+        this.dataSources.delete(name);
+      });
+    }
+  }
+
+  private get mrFalseDssTrue(): boolean {
+    return !this.role.allowedToViewMedicalRecords() && this.role.viewOnlyDSSData;
+  }
+
+  private get mrAndDssFalse(): boolean {
+    return !this.role.allowedToViewMedicalRecords() && !this.role.viewOnlyDSSData;
+  }
+
+  private removeUnnecessaryColumns(): void {
+    if(!this.hasExternalShipper) {
+      const sampleColumnFiltersToRemove = [Filter.CORRECTED_TEST,
+        Filter.RESULT_TEST, Filter.TIME_TEST, Filter.STATUS_IN,
+        Filter.STATUS_OUT, Filter.CARE_EVOLVE];
+
+      this.removeColumns('k', sampleColumnFiltersToRemove);
+    }
+
+    if(!this.hasSequencingOrders) {
+      const sampleColumnFiltersToRemove = [Filter.SEQUENCING_RESTRICTION, Filter.SAMPLE_NOTES, Filter.COLLECTION_DATE];
+
+      delete this.sourceColumns['cl'];
+      this.dataSources.delete('cl');
+
+      this.removeColumns('k', sampleColumnFiltersToRemove);
+    }
+  }
+
+  private removeColumns(tableAlias: string, filters: Filter[]): void {
+    filters.forEach((filter: Filter) => this.removeColumnFromSourceColumns(tableAlias, filter));
+  }
+
+  private removeColumnFromSourceColumns(source: string, filter: Filter): void {
+    const index = this.sourceColumns[ source ].indexOf(filter);
+    if (index !== -1) {
+      this.sourceColumns[ source ].splice(index, 1);
+    }
+
   }
 
   private addDynamicFieldDefaultColumns(defaultColumn: any): void {
@@ -782,7 +849,7 @@ export class ParticipantListComponent implements OnInit {
   private getData(): void {
     // find viewFilter by filterName
     let defaultFilter: ViewFilter = null;
-    if (this.role.getUserSetting().defaultParticipantFilter) {
+    if (this.role.getUserSetting()?.defaultParticipantFilter) {
       defaultFilter = this.savedFilters.find(filter => filter.filterName === this.role.getUserSetting().defaultParticipantFilter);
       if (defaultFilter == null) {
         defaultFilter = this.quickFilters.find(filter => filter.filterName === this.role.getUserSetting().defaultParticipantFilter);
@@ -790,8 +857,8 @@ export class ParticipantListComponent implements OnInit {
       if (defaultFilter != null) {
         defaultFilter.selected=true;
         this.selectFilter(defaultFilter);
-      } else if (this.role.getUserSetting().defaultParticipantFilter !== ''
-        && this.role.getUserSetting().defaultParticipantFilter != null
+      } else if (this.role.getUserSetting()?.defaultParticipantFilter !== ''
+        && this.role.getUserSetting()?.defaultParticipantFilter != null
       ) {
         // eslint-disable-next-line max-len
         this.additionalMessage = 'The default filter seems to be deleted, however it is still the default filter as long as not changed in the user settings.';
@@ -855,12 +922,7 @@ export class ParticipantListComponent implements OnInit {
     }
   }
 
-  private removeColumnFromSourceColumns(source: string, filter: Filter): void {
-    const index = this.sourceColumns[ source ].indexOf(filter);
-    if (index !== -1) {
-      this.sourceColumns[ source ].splice(index, 1);
-    }
-  }
+
 
   public selectFilter(viewFilter: ViewFilter): void {
     this.resetPagination();
@@ -880,7 +942,7 @@ export class ParticipantListComponent implements OnInit {
     this.selectedPatients = [];
   }
 
-  private applyFilter(viewFilter: ViewFilter, from: number = 0, to: number = this.role.getUserSetting().getRowsPerPage()): void {
+  private applyFilter(viewFilter: ViewFilter, from: number = 0, to: number = this.role?.getUserSetting()?.getRowsPerPage()): void {
     this.dsmService.applyFilter(viewFilter, localStorage.getItem(ComponentService.MENU_SELECTED_REALM),
       this.parent, null, from, to, this.sortBy)
       .subscribe({
@@ -959,12 +1021,18 @@ export class ParticipantListComponent implements OnInit {
               }
             } else {
               // if selected columns are not set, set to default columns
+              const selectedStudy = localStorage.getItem(ComponentService.MENU_SELECTED_REALM);
               if ((this.selectedColumns['data'] && this.selectedColumns['data'].length === 0)
                 || (!this.selectedColumns['data'] && this.isSelectedColumnsNotEmpty())) {
-                this.dataSources.forEach((value: string, key: string) => {
-                  this.selectedColumns[key] = [];
-                });
-                this.refillWithDefaultColumns();
+                if(selectedStudy !== 'RGP') {
+                  this.dataSources.forEach((value: string, key: string) => {
+                    this.selectedColumns[key] = [];
+                  });
+                  this.refillWithDefaultColumns();
+                }
+                if(selectedStudy === 'RGP' && !this.searchForRGP) {
+                  this.refillWithDefaultColumns();
+                }
               }
             }
             const date = new Date();
@@ -1065,6 +1133,7 @@ export class ParticipantListComponent implements OnInit {
   }
 
   public clearFilter(): void {
+    this.setSelectedFilterName('');
     this.start = new Date().getTime();
     this.filterQuery = null;
     this.resetSelectedPatients();
@@ -1171,7 +1240,7 @@ export class ParticipantListComponent implements OnInit {
     this.viewFilter = null;
     this.jsonPatch = null;
     this.activePage = 1;
-    this.rowsPerPage = this.role.getUserSetting().getRowsPerPage();
+    this.rowsPerPage = this.role?.getUserSetting()?.getRowsPerPage();
   }
 
   getUtilStatic(): typeof Utils {
@@ -1374,6 +1443,10 @@ export class ParticipantListComponent implements OnInit {
       this.deselectQuickFilters();
       // TODO - can be changed later to all using the same - after all studies are migrated!
       // check if it was a tableAlias data filter -> filter client side
+      const selectedStudy = localStorage.getItem(ComponentService.MENU_SELECTED_REALM);
+      if(selectedStudy === 'RGP') {
+        this.searchForRGP = true;
+      }
       this.selectFilter(null);
     }
   }
@@ -1681,6 +1754,9 @@ export class ParticipantListComponent implements OnInit {
         if (maybeParticipant) {
           const existingCohortTags = maybeParticipant.data.dsm[CohortTagComponent.COHORT_TAG] as CohortTag[];
           if (existingCohortTags) {
+            if (existingCohortTags.find(tag => tag.cohortTagName === cohortTag.cohortTagName)) {
+              continue;
+            }
             existingCohortTags.push(cohortTag);
           } else {
             maybeParticipant.data.dsm[CohortTagComponent.COHORT_TAG] = [cohortTag];
@@ -2294,14 +2370,17 @@ export class ParticipantListComponent implements OnInit {
 
   addTabColumns(): void {
     let possibleColumns: Array<Filter> = [];
-    for (const tab of this.settings['TAB']) {
-      this.dataSources.set(tab.columnName, tab.columnDisplay);
-      for (const setting of this.settings[tab.columnName]) {
-        const filter = this.createFilter(setting);
-        possibleColumns.push(...filter);
+    if((this.role.allowedToViewMedicalRecords && !this.role.viewOnlyDSSData)
+      || (!this.role.allowedToViewMedicalRecords && !this.role.viewOnlyDSSData) ) {
+      for (const tab of this.settings['TAB']) {
+        this.dataSources.set(tab.columnName, tab.columnDisplay);
+        for (const setting of this.settings[tab.columnName]) {
+          const filter = this.createFilter(setting);
+          possibleColumns.push(...filter);
+        }
+        this.sourceColumns[tab.columnName] = possibleColumns;
+        possibleColumns = [];
       }
-      this.sourceColumns[tab.columnName] = possibleColumns;
-      possibleColumns = [];
     }
   }
 

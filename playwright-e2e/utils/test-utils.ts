@@ -1,11 +1,120 @@
-import { Locator, Page } from '@playwright/test';
+import { BrowserContext, Download, expect, Locator, Page } from '@playwright/test';
 import Input from 'lib/widget/Input';
 import Checkbox from 'lib/widget/checkbox';
 import Radiobutton from 'lib/widget/radiobutton';
 import Select from 'lib/widget/select';
+import axios from 'axios';
+import _ from 'lodash';
+import { STATES } from 'data/constants';
+import { generateRandomPhoneNum } from './faker-utils';
+
+const { SITE_PASSWORD } = process.env;
+
+export async function waitUntilRemoved(locator: Locator): Promise<void> {
+  expect(await locator.count()).toHaveLength(0);
+}
 
 export async function getTextValue(locator: Locator): Promise<string | null> {
-  return await locator.evaluate<string, HTMLSelectElement>((node) => node.value);
+  return locator.evaluate<string, HTMLSelectElement>((node) => node.value);
+}
+
+/**
+ * Download (fake) Consent form
+ * @param context
+ * @param locator
+ */
+export async function downloadConsentPdf(context: BrowserContext, locator: Locator): Promise<Download | void> {
+  // Use axis to fetch pdf directly
+  const downloadHref = await locator.getAttribute('href');
+  expect(downloadHref).not.toBeNull();
+  expect(downloadHref).toMatch(new RegExp(/https:\/\/storage\.googleapis\.com\/singular-(dev|staging)-assets\/consent_self.pdf/));
+  const response = await axios.get(downloadHref as string);
+  const fileData = Buffer.from(response.data);
+  expect(fileData && fileData.length).toBeTruthy();
+
+  // Ensure new page opens when click on link
+  await Promise.all([context.waitForEvent('page'), locator.click()]);
+  expect(context.pages()).toHaveLength(2);
+  const [, newPage] = context.pages();
+  await newPage.close();
+}
+
+/**
+ * Filling out address with fake data.
+ * @param page
+ * @param opts
+ */
+export async function enterMailingAddress(
+  page: Page,
+  opts: {
+    fullName: string;
+    country?: string;
+    state?: string;
+    street?: string;
+    city?: string;
+    zipCode?: string;
+    telephone?: string | number;
+  }
+): Promise<void> {
+  const {
+    fullName,
+    country = 'UNITED STATES',
+    state = _.shuffle(STATES)[0],
+    street = 'Broadway Street',
+    city = 'Cambridge',
+    zipCode = '01876',
+    telephone = generateRandomPhoneNum()
+  } = opts;
+
+  const getFullName = (): Locator => {
+    return new Input(page, { label: 'Full Name' }).toLocator();
+  };
+
+  const getStreet = (): Locator => {
+    return new Input(page, { label: 'Street Address' }).toLocator();
+  };
+
+  const getCountry = (): Select => {
+    return new Select(page, { label: 'Country' });
+  };
+
+  const getState = (): Select => {
+    return new Select(page, { label: 'State' });
+  };
+
+  const getCity = (): Locator => {
+    return new Input(page, { label: 'City' }).toLocator();
+  };
+
+  const getZipCode = (): Locator => {
+    return new Input(page, { label: 'Zip Code' }).toLocator();
+  };
+
+  const getTelephone = (): Locator => {
+    return new Input(page, { label: 'Telephone Contact Number' }).toLocator();
+  };
+
+  // Fill out address fields
+  await getFullName().fill(fullName);
+  await getCountry().selectOption(country.toUpperCase());
+  await getStreet().fill(street.toUpperCase());
+  await getCity().fill(city.toUpperCase());
+  await getState().selectOption(state.toUpperCase());
+  await getZipCode().fill(zipCode);
+  await getTelephone().fill(telephone.toString());
+}
+
+/**
+ * On non-prod env, user must first enter the Site password
+ * @param page
+ * @param password
+ */
+export async function fillSitePassword(page: Page, password = SITE_PASSWORD): Promise<void> {
+  if (password == null) {
+    throw Error(`Invalid parameter: password is "${SITE_PASSWORD}"`);
+  }
+  await page.locator('input[type="password"]').fill(password);
+  await Promise.all([page.waitForNavigation(), page.locator('button >> text=Submit').click()]);
 }
 
 /**
@@ -62,30 +171,34 @@ export function findIcon(dataDdpTest: string) {
 }
 
 // Fill in input
-const fillIn = async (page: Page, stableID: string, value: string): Promise<void> => {
+export async function fillIn(page: Page, stableID: string, value: string): Promise<void> {
   await new Input(page, { ddpTestID: stableID }).fill(value);
-};
+}
 
-const check = async (page: Page, stableID: string): Promise<void> => {
+export async function check(page: Page, stableID: string): Promise<void> {
   await new Checkbox(page, { ddpTestID: stableID }).check();
-};
+}
 
-const checkRadioButton = async (page: Page, stableID: string): Promise<void> => {
+export async function checkRadioButton(page: Page, stableID: string): Promise<void> {
   await new Radiobutton(page, { ddpTestID: stableID }).check();
-};
+}
 
-const select = async (page: Page, stableID: string, option: string): Promise<void> => {
+export async function select(page: Page, stableID: string, option: string): Promise<void> {
   await new Select(page, { ddpTestID: stableID }).selectOption(option);
-};
+}
 
-const click = async (page: Page, stableID: string, option: string): Promise<void> => {
+export async function click(page: Page, stableID: string, option: string): Promise<void> {
   await page.locator(`[data-ddp-test="${stableID}"]`).selectOption(option);
-};
+}
 
-module.exports = {
-  fillIn,
-  check,
-  checkRadioButton,
-  select,
-  click
+/**
+ * Returns the default value if value is null, empty or undefined.
+ * @param value
+ * @param defaultValue
+ */
+export const getEnv = (value: string | undefined, defaultValue: string): string => {
+  if (value == null && defaultValue == null) {
+    throw Error('Invalid Parameters: Value and defaultValue are both undefined or null.');
+  }
+  return value == null ? defaultValue : value;
 };

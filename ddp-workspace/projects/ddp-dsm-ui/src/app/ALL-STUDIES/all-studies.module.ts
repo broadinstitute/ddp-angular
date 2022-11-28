@@ -126,14 +126,21 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 
 import * as PlotlyJS from 'plotly.js-dist-min';
 import { PlotlyModule } from 'angular-plotly.js';
-import {CardComponent} from '../dashboard-statistics/components/card/card.component';
-import {DragAndDropDirective} from '../dashboard-statistics/directives/dragAndDrop/dragAndDrop.directive';
 import {RadioButtonDirective} from '../form-data/directives/radio-button.directive';
 import {PlotlyChartsComponent} from '../dashboard-statistics/components/plotly-charts/plotly-charts.component';
-import {CountsComponent} from '../dashboard-statistics/components/counts/counts.component';
 import {
   MatrixAnswerTableComponent
 } from '../activity-data/components/matrix-answer-table.component';
+import {NoDataPipe} from '../participant-list/pipes/noData.pipe';
+import {CountsTableComponent} from '../dashboard-statistics/components/counts-table/counts-table.component';
+import {MatSortModule} from '@angular/material/sort';
+import {DateRangeComponent} from '../dashboard-statistics/components/date-range/date-range.component';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatNativeDateModule} from '@angular/material/core';
+import {DateRangeErrorPipe} from '../dashboard-statistics/pipes/dateRangeError.pipe';
+import {KeyValuePairPipe} from '../dashboard-statistics/pipes/KeyValuePair.pipe';
+import {MatTooltipModule} from '@angular/material/tooltip';
+
 
 PlotlyModule.plotlyjs = PlotlyJS;
 
@@ -223,13 +230,15 @@ PlotlyModule.plotlyjs = PlotlyJS;
     ClinicalPageComponent,
     FileDownloadComponent,
     DashboardStatisticsComponent,
-    CardComponent,
-    DragAndDropDirective,
     PlotlyChartsComponent,
-    CountsComponent,
     MatrixAnswerTableComponent,
     ConditionalFormDataComponent,
-    RadioButtonDirective
+    RadioButtonDirective,
+    NoDataPipe,
+    CountsTableComponent,
+    DateRangeComponent,
+    DateRangeErrorPipe,
+    KeyValuePairPipe
   ],
   imports: [
     CommonModule,
@@ -267,7 +276,10 @@ PlotlyModule.plotlyjs = PlotlyJS;
     MatTabsModule,
     MatTableModule,
     MatFormFieldModule,
-    MatInputModule
+    MatSortModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatTooltipModule
   ],
   providers: [
     Utils,

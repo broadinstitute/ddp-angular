@@ -59,8 +59,7 @@ export class UploadComponent implements OnInit {
     this.realmNameStoredForFile = localStorage.getItem(ComponentService.MENU_SELECTED_REALM);
     this.route.queryParams.subscribe(params => {
       const realm = params[ DSMService.REALM ] || null;
-      if (realm != null && realm !== '') {
-        //        this.compService.realmMenu = realm;
+      if (realm != null && realm !== '' && this.role.allowedToUploadKits()) {
         this.checkRight();
       }
     });
@@ -91,11 +90,15 @@ export class UploadComponent implements OnInit {
 
   ngOnInit(): void {
     if (localStorage.getItem(ComponentService.MENU_SELECTED_REALM) != null) {
-      this.checkRight();
+      this.role.allowedToUploadKits() && this.checkRight();
     } else {
       this.additionalMessage = 'Please select a study';
     }
     window.scrollTo(0, 0);
+  }
+
+  public get atLeastOneParticipantSelected(): boolean {
+    return this.duplicateParticipants.some((pt: UploadParticipant) => pt?.selected);
   }
 
   getPossibleKitType(): void {

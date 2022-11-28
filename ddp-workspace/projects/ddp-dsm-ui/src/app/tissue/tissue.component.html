@@ -2,7 +2,7 @@
 <div class="Display--block" *ngIf="!tissue.deleted" [ngClass]="{'Green-background': tissue.tissueId === tissueId}">
   <table class="Width--100" style="border: 1px solid black;">
     <tr>
-      <td colspan="4" align="right" class="TD--Padding">
+      <td colspan="6" align="right" class="TD--Padding">
         <button mat-mini-fab color="warn" [disabled]="!editable"
                 (click)="deleteTissue()">
           <i class="fas fa-trash-alt fa-lg"></i>
@@ -11,7 +11,7 @@
     </tr>
     <tr>
       <td class="TD--Padding" style="width: 20%">Notes</td>
-      <td colspan="3">
+      <td colspan="5">
         <textarea maxlength="1000"
                   [ngClass]="{'Width--100': true, 'Color--Field--Patched': isPatchedCurrently('notes')}"
                   (blur)="currentField(null)" (focus)="currentField('notes')" [disabled]="!editable"
@@ -20,7 +20,7 @@
     </tr>
     <tr *ngIf="getCompService().getRealm().toUpperCase()==='MBC' || tissue.countReceived > 0">
       <td class="TD--Padding">Count Received</td>
-      <td colspan="3">
+      <td colspan="5">
         <mat-form-field [ngClass]="{'Input': true, 'Color--Field--Patched': isPatchedCurrently('countReceived')}">
           <input matInput type="number" min="0" max="10" [disabled]="!editable"
                  (blur)="currentField(null)" (focus)="currentField('countReceived')"
@@ -55,7 +55,7 @@
 
     <tr>
       <td></td>
-      <td colspan="3">
+      <td colspan="5">
         <mat-form-field [ngClass]="{'Input': true, 'Color--Field--Patched': isPatchedCurrently('blocksCount')}">
           <input matInput type="number" min="0" max="10" [disabled]="!editable"
                  (blur)="currentField(null)" (focus)="currentField('blocksCount')"
@@ -66,7 +66,7 @@
     </tr>
     <tr>
       <td></td>
-      <td colspan="3">
+      <td colspan="5">
         <mat-form-field [ngClass]="{'Input': true, 'Color--Field--Patched': isPatchedCurrently('hECount')}">
           <input matInput type="number" min="0" max="10" [disabled]="!editable"
                  (blur)="currentField(null)" (focus)="currentField('hECount')"
@@ -77,7 +77,7 @@
     </tr>
     <tr>
       <td></td>
-      <td colspan="3">
+      <td colspan="5">
         <mat-form-field [ngClass]="{'Input': true, 'Color--Field--Patched': isPatchedCurrently('scrollsCount')}">
           <input matInput type="number" min="0" max="10" [disabled]="!editable"
                  (blur)="currentField(null)" (focus)="currentField('scrollsCount')"
@@ -88,7 +88,7 @@
     </tr>
     <tr>
       <td class="TD--Padding">USS SM-IDS</td>
-      <td colspan="3">
+      <td colspan="5">
         <button md-mini-fab [disabled]="!editable || !this.tissue.tissueId" color="primary" [ngClass]="{'changed':!smIdCountMatch(this.tissue.ussSMId, this.tissue.ussCount)}"
                 (click)="openUSSModal()">
           <i class="fas fa-plus fa-lg"></i>
@@ -100,7 +100,7 @@
     </tr>
     <tr>
       <td class="TD--Padding">scrolls SM-IDS</td>
-      <td colspan="3">
+      <td colspan="5">
         <button md-mini-fab [disabled]="!editable || !this.tissue.tissueId" color="primary" [ngClass]="{'changed':!smIdCountMatch(this.tissue.scrollSMId, this.tissue.scrollsCount)}"
                 (click)="openScrollsModal()">
           <i class="fas fa-plus fa-lg"></i>
@@ -112,7 +112,7 @@
     </tr>
     <tr>
       <td class="TD--Padding">H&E SM-IDS</td>
-      <td colspan="3">
+      <td colspan="5">
         <button md-mini-fab [disabled]="!editable || !this.tissue.tissueId" color="primary" [ngClass]="{'changed':!smIdCountMatch(this.tissue.HESMId, this.tissue.hECount)}"
                 (click)="openHEModal()">
           <i class="fas fa-plus fa-lg"></i>
@@ -125,7 +125,7 @@
 
     <tr *ngIf="tissue.tissueType != null && tissue.tissueType === 'block' ">
       <td class="TD--Padding">Expected Return Date</td>
-      <td colspan="3">
+      <td colspan="5">
         <app-field-datepicker [dateString]="tissue.expectedReturn"
                               [showNAButton]="true"
                               [allowFutureDate]="true"
@@ -135,7 +135,7 @@
     </tr>
     <tr *ngIf="tissue.tissueType!= null && tissue.tissueType ==='block' ">
       <td class="TD--Padding">Return Date</td>
-      <td colspan="3">
+      <td colspan="5">
         <app-field-datepicker [dateString]="tissue.returnDate"
                               [allowFutureDate]="true"
                               (dateChanged)="valueChanged($event, 'returnDate')" [disabled]="false"
@@ -144,7 +144,7 @@
     </tr>
     <tr *ngIf="tissue.tissueType != null && tissue.tissueType ==='block' && tissue.returnDate != null">
       <td class="TD--Padding">Tracking Number</td>
-      <td colspan="3">
+      <td colspan="5">
         <mat-form-field
           [ngClass]="{'Width--100': true, 'Input--Min-WIDTH': true, 'Color--Field--Patched': isPatchedCurrently('returnFedexId')}">
           <input matInput maxlength="200" [disabled]="!editable"
@@ -158,7 +158,7 @@
     </tr>
     <tr *ngIf="getCompService().getRealm().toUpperCase()==='MBC' || tissue.countReceived > 0">
       <td class="TD--Padding">H&E</td>
-      <td colspan="3">
+      <td colspan="5">
         <mat-select placeholder="H&E"
                    [ngClass]="{'Input--Min-WIDTH': true, 'Color--Field--Patched': isPatchedCurrently('hE')}"
                    [(ngModel)]="tissue.hE" [disabled]="!editable"
@@ -171,7 +171,7 @@
     </tr>
     <tr>
       <td class="TD--Padding">Pathology Report</td>
-      <td>
+      <td colspan="3">
         <mat-select placeholder="Pathology Report"
                    [ngClass]="{'Input--Min-WIDTH': true, 'Color--Field--Patched': isPatchedCurrently('pathologyReport')}"
                    [(ngModel)]="tissue.pathologyReport" [disabled]="!editable"
@@ -196,7 +196,7 @@
       </td>
     </tr>
     <tr>
-      <td colspan="2"></td>
+      <td colspan="4"></td>
       <td class="TD--Padding">Tissue Site</td>
       <td>
         <app-lookup [lookupValue]="tissue.tissueSite" [lookupType]="'tSite'" [placeholder]="'Tissue Site'"
@@ -206,12 +206,12 @@
       </td>
     </tr>
     <tr>
-      <td class="TD--Padding">Collaborator Sample ID</td>
-      <td colspan="3">
+      <td class="TD--Padding">Tumor Collaborator Sample ID</td>
+      <td colspan="5">
         <mat-form-field
           [ngClass]="{'Input--Bigger-WIDTH': true, 'Color--Field--Patched': isPatchedCurrently('collaboratorSampleId')}">
           <input #collaboratorSampleId matInput maxlength="200"
-                 placeholder="Collaborator Sample ID" autocomplete="off"
+                 placeholder="Tumor Collaborator Sample ID" autocomplete="off"
                  [(ngModel)]="tissue.collaboratorSampleId" [disabled]="!editable"
                  (change)="valueChanged($event, 'collaboratorSampleId')"
                  (blur)="currentField(null)" (focus)="currentField('collaboratorSampleId'); checkCollaboratorId()">
@@ -234,6 +234,16 @@
                               [disabled]="!editable"
                               [dateString]="tissue.blockSent"
                               (dateChanged)="valueChanged($event, 'blockSent')"></app-field-datepicker>
+      </td>
+      <td class="TD--Padding">Block ID to SHL</td>
+      <td>
+        <mat-form-field
+          [ngClass]="{'Width--100': true, 'Input--Min-WIDTH': true, 'Color--Field--Patched': isPatchedCurrently('blockIdShl')}">
+          <input matInput maxlength="10" [disabled]="!editable" autocomplete="off"
+                 [(ngModel)]="tissue.blockIdShl" (change)="valueChanged($event, 'blockIdShl')"
+                 placeholder="Block ID to SHL" [maxLength]="10"
+                 (blur)="currentField(null)" (focus)="currentField('blockIdShl')">
+        </mat-form-field>
       </td>
       <td class="TD--Padding">SHL Work Number</td>
       <td>
@@ -268,7 +278,7 @@
     </tr>
     <tr>
       <td class="TD--Padding">SK ID</td>
-      <td colspan="3">
+      <td colspan="5">
         <mat-form-field
           [ngClass]="{'Width--100': true, 'Input--Min-WIDTH': true, 'Color--Field--Patched': isPatchedCurrently('skId')}">
           <input matInput maxlength="200" [disabled]="!editable" autocomplete="off"
@@ -281,7 +291,7 @@
     </tr>
     <tr>
       <td class="TD--Padding">First SM ID</td>
-      <td colspan="3">
+      <td colspan="5">
         <mat-form-field
           [ngClass]="{'Width--100': true, 'Input--Min-WIDTH': true, 'Color--Field--Patched': isPatchedCurrently('firstSmId')}">
           <input matInput maxlength="200" [disabled]="!editable" autocomplete="off"
@@ -295,7 +305,7 @@
     </tr>
     <tr>
       <td class="TD--Padding">SM ID for H&E</td>
-      <td colspan="3">
+      <td colspan="5">
         <mat-form-field
           [ngClass]="{'Width--100': true, 'Input--Min-WIDTH': true, 'Color--Field--Patched': isPatchedCurrently('smId')}">
           <input matInput maxlength="200" [disabled]="!editable" autocomplete="off"
@@ -308,7 +318,7 @@
     </tr>
     <tr *ngFor="let col of additionalColumns">
       <td class="TD--Padding">{{col.columnDisplay}}</td>
-      <td colspan="3">
+      <td colspan="5">
         <mat-form-field
           *ngIf="col.displayType === 'text' || col.displayType === 'TEXT' || col.displayType === ''|| col.displayType == null"
           [ngClass]="{'Width--100': true, 'Input--Min-WIDTH': true, 'Color--Field--Patched': isPatchedCurrently(col.columnName)}">
@@ -348,7 +358,7 @@
     </tr>
     <tr>
       <td class="TD--Padding">Date sent to GP</td>
-      <td colspan="3">
+      <td colspan="5">
         <app-field-datepicker [colorDuringPatch]="isPatchedCurrently('sentGp')" [allowFutureDate]="true"
                               [disabled]="!editable"
                               [dateString]="tissue.sentGp"
@@ -359,7 +369,7 @@
       <td class="TD--Padding">
         Sequencing Results
       </td>
-      <td colspan="3">
+      <td colspan="5">
         <mat-select [disabled]="!editable" [(ngModel)]="tissue.tissueSequence"
                    (selectionChange)="valueChanged($event, 'tissueSequence')"
                    [ngClass]="{'Color--Field--Patched': isPatchedCurrently('tissueSequence')}"
@@ -386,82 +396,87 @@
     <ng-container *ngIf="this.currentSMIDField === 'HE'">
       <table>
         <tr *ngFor="let smid of this.tissue.HESMId; let i = index;">
-          <td *ngIf="!smid.deleted">
-            <mat-checkbox color="primary" disableRipple *ngIf="!smIdCountMatch(this.tissue.HESMId, this.tissue.hECount)"
-                         [checked]="smid.isSelected" [disabled]="!canChangeThis(i, this.currentSMIDField)"
-                         (change)="smid.isSelected = $event.checked; checkboxChecked($event, this.tissue.HESMId, i)"></mat-checkbox>
-            <md-input-container [ngClass]="{'Input': true}">
-              <input matInput [disabled]="!canChangeThis(i, this.currentSMIDField)" id="HE{{i}}"
-                     [ngClass]="{'Color--Field--Patched': isPatchedCurrently('SMIDHE' + i)}"
-                     (blur)="currentField(null)" [(ngModel)]="this.tissue.HESMId[i].smIdValue"
-                     (change)="changeSmId($event, 'smIdValue', smid.smIdPk, 'he', this.tissue.HESMId, i, 'SMIDHE'+i)"
-                     (focus)="currentField('SMIDHE' + i)"
-                     [value]="smid.smIdValue" (keydown.enter)="goNext('HE', i)">
-              <md-hint class="ErrorMessageForm" *ngIf="isDuplicate(this.currentSMIDField, i)">Duplicate Value! Not Saved!
-              </md-hint>
-            </md-input-container>
-          </td>
-          <td *ngIf="!smid.deleted">
-            <button md-mini-fab color="warn" [disabled]="!canChangeThis(i, this.currentSMIDField)"
-                    (click)="deleteSMID(this.tissue.HESMId, i)">
-              <i class="fas fa-trash-alt fa-sm"></i>
-            </button>
-          </td>
+          <ng-container *ngIf="!smid.deleted">
+            <td>
+              <mat-checkbox color="primary" disableRipple *ngIf="!smIdCountMatch(this.tissue.HESMId, this.tissue.hECount)"
+                           [checked]="smid.isSelected" [disabled]="!canChangeThis(i, this.currentSMIDField)"
+                           (change)="smid.isSelected = $event.checked; checkboxChecked($event, this.tissue.HESMId, i)"></mat-checkbox>
+              <md-input-container [ngClass]="{'Input': true}">
+                <input matInput [disabled]="!canChangeThis(i, this.currentSMIDField)" id="HE{{i}}"
+                       [ngClass]="{'Color--Field--Patched': isPatchedCurrently('SMIDHE' + i)}"
+                       (blur)="currentField(null)" [(ngModel)]="this.tissue.HESMId[i].smIdValue"
+                       (change)="changeSmId($event, 'smIdValue', smid.smIdPk, 'he', this.tissue.HESMId, i, 'SMIDHE'+i)"
+                       (focus)="currentField('SMIDHE' + i)"
+                       [value]="smid.smIdValue" (keydown.enter)="goNext('HE', i)">
+                <md-hint class="ErrorMessageForm" *ngIf="isDuplicate(this.currentSMIDField, i)">Duplicate Value! Not Saved!
+                </md-hint>
+              </md-input-container>
+            </td>
+            <td>
+              <button md-mini-fab color="warn" [disabled]="!canChangeThis(i, this.currentSMIDField)"
+                      (click)="deleteSMID(this.tissue.HESMId, i)">
+                <i class="fas fa-trash-alt fa-sm"></i>
+              </button>
+            </td>
+          </ng-container>
         </tr>
       </table>
     </ng-container>
     <ng-container *ngIf="this.currentSMIDField === 'USS'">
       <table>
         <tr *ngFor="let smid of this.tissue.ussSMId; let i = index;">
-          <td *ngIf="!smid.deleted">
-            <mat-checkbox color="primary" disableRipple *ngIf="!smIdCountMatch(this.tissue.ussSMId, this.tissue.ussCount)
-                         [checked]="smid.isSelected" [disabled]="!canChangeThis(i, this.currentSMIDField)"
-                         (change)="smid.isSelected = $event.checked; checkboxChecked($event, this.tissue.ussSMId, i)"></mat-checkbox>
-            <md-input-container [ngClass]="{'Input': true}">
-              <input matInput [disabled]="!canChangeThis(i, this.currentSMIDField)" id="USS{{i}}"
-                     [ngClass]="{'Color--Field--Patched': isPatchedCurrently('SMIDUSS' + i)}"
-                     (blur)="currentField(null)" (change)="changeSmId($event, 'smIdValue', smid.smIdPk,  'uss', this.tissue.ussSMId, i, 'SMIDUSS'+i)"
-                     [(ngModel)]="this.tissue.ussSMId[i].smIdValue"
-                     (focus)="currentField('SMIDUSS' + i)"
-                     [value]="smid.smIdValue" (keydown.enter)="goNext('USS', i)">
-              <md-hint class="ErrorMessageForm" *ngIf="isDuplicate(this.currentSMIDField,  i)">Duplicate Value! Not Saved!
-              </md-hint>
-            </md-input-container>
-          </td>
-          <td  *ngIf="!smid.deleted">
-            <button md-mini-fab color="warn" [disabled]="!canChangeThis(i, this.currentSMIDField)"
-                    (click)="deleteSMID(this.tissue.ussSMId, i)">
-              <i class="fas fa-trash-alt fa-sm"></i>
-            </button>
-          </td>
+          <ng-container *ngIf="!smid.deleted">
+            <td>
+              <mat-checkbox color="primary" disableRipple *ngIf="!smIdCountMatch(this.tissue.ussSMId, this.tissue.ussCount)"
+                           [checked]="smid.isSelected" [disabled]="!canChangeThis(i, this.currentSMIDField)"
+                           (change)="smid.isSelected = $event.checked; checkboxChecked($event, this.tissue.ussSMId, i)"></mat-checkbox>
+              <md-input-container [ngClass]="{'Input': true}">
+                <input matInput [disabled]="!canChangeThis(i, this.currentSMIDField)" id="USS{{i}}"
+                       [ngClass]="{'Color--Field--Patched': isPatchedCurrently('SMIDUSS' + i)}"
+                       (blur)="currentField(null)" (change)="changeSmId($event, 'smIdValue', smid.smIdPk,  'uss', this.tissue.ussSMId, i, 'SMIDUSS'+i)"
+                       [(ngModel)]="this.tissue.ussSMId[i].smIdValue"
+                       (focus)="currentField('SMIDUSS' + i)"
+                       [value]="smid.smIdValue" (keydown.enter)="goNext('USS', i)">
+                <md-hint class="ErrorMessageForm" *ngIf="isDuplicate(this.currentSMIDField,  i)">Duplicate Value! Not Saved!
+                </md-hint>
+              </md-input-container>
+            </td>
+            <td  *ngIf="!smid.deleted">
+              <button md-mini-fab color="warn" [disabled]="!canChangeThis(i, this.currentSMIDField)"
+                      (click)="deleteSMID(this.tissue.ussSMId, i)">
+                <i class="fas fa-trash-alt fa-sm"></i>
+              </button>
+            </td>
+          </ng-container>
         </tr>
       </table>
     </ng-container>
     <ng-container *ngIf="this.currentSMIDField === 'scrolls'">
       <table>
         <tr *ngFor="let smid of this.tissue.scrollSMId; let i = index;">
-          <td  *ngIf="!smid.deleted">
-            <mat-checkbox color="primary" disableRipple *ngIf="!smIdCountMatch(this.tissue.scrollSMId, this.tissue.scrollsCount)"
-                         [checked]="smid.isSelected" [disabled]="!canChangeThis(i, this.currentSMIDField)"
-                         (change)="smid.isSelected = $event.checked; checkboxChecked($event, this.tissue.scrollSMId, i)"></mat-checkbox>
-            <md-input-container [ngClass]="{'Input': true}">
-              <input matInput [disabled]="!canChangeThis(i, this.currentSMIDField)" id="scrolls{{i}}"
-                     [ngClass]="{'Color--Field--Patched': isPatchedCurrently('SMIDScrolls' + i)}"
-                     (blur)="currentField(null)" [(ngModel)]="this.tissue.scrollSMId[i].smIdValue"
-                     (focus)="currentField('SMIDScrolls' + i)"
-                     (change)="changeSmId($event, 'smIdValue', smid.smIdPk, 'scrolls', this.tissue.scrollSMId, i, 'SMIDScrolls'+i )"
-                     [value]="smid.smIdValue" (keydown.enter)="goNext('scrolls', i)">
-              <md-hint class="ErrorMessageForm" *ngIf="isDuplicate(this.currentSMIDField,  i)">Duplicate Value! Not Saved!
-              </md-hint>
-            </md-input-container>
-          </td>
-          <td  *ngIf="!smid.deleted">
-            <button md-mini-fab color="warn" [disabled]="!canChangeThis(i, this.currentSMIDField)"
-                    (click)="deleteSMID(this.tissue.scrollSMId, i)">
-              <i class="fas fa-trash-alt fa-sm"></i>
-            </button>
-          </td>
-
+          <ng-container *ngIf="!smid.deleted">
+            <td  *ngIf="!smid.deleted">
+              <mat-checkbox color="primary" disableRipple *ngIf="!smIdCountMatch(this.tissue.scrollSMId, this.tissue.scrollsCount)"
+                           [checked]="smid.isSelected" [disabled]="!canChangeThis(i, this.currentSMIDField)"
+                           (change)="smid.isSelected = $event.checked; checkboxChecked($event, this.tissue.scrollSMId, i)"></mat-checkbox>
+              <md-input-container [ngClass]="{'Input': true}">
+                <input matInput [disabled]="!canChangeThis(i, this.currentSMIDField)" id="scrolls{{i}}"
+                       [ngClass]="{'Color--Field--Patched': isPatchedCurrently('SMIDScrolls' + i)}"
+                       (blur)="currentField(null)" [(ngModel)]="this.tissue.scrollSMId[i].smIdValue"
+                       (focus)="currentField('SMIDScrolls' + i)"
+                       (change)="changeSmId($event, 'smIdValue', smid.smIdPk, 'scrolls', this.tissue.scrollSMId, i, 'SMIDScrolls'+i )"
+                       [value]="smid.smIdValue" (keydown.enter)="goNext('scrolls', i)">
+                <md-hint class="ErrorMessageForm" *ngIf="isDuplicate(this.currentSMIDField,  i)">Duplicate Value! Not Saved!
+                </md-hint>
+              </md-input-container>
+            </td>
+            <td  *ngIf="!smid.deleted">
+              <button md-mini-fab color="warn" [disabled]="!canChangeThis(i, this.currentSMIDField)"
+                      (click)="deleteSMID(this.tissue.scrollSMId, i)">
+                <i class="fas fa-trash-alt fa-sm"></i>
+              </button>
+            </td>
+          </ng-container>
         </tr>
       </table>
     </ng-container>
