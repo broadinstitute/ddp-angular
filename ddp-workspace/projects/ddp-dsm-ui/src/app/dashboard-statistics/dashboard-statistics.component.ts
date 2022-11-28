@@ -11,11 +11,20 @@ import {ErrorsService} from '../services/errors.service';
 import {Plotly} from 'angular-plotly.js/lib/plotly.interface';
 
 
-type StatisticsTypes = 'charts' | 'counts';
-interface errorHas {
+interface IStatistics {
+  name: string;
+  matIconName: string;
+  data: any;
+}
+
+interface IErrorHas {
   charts: boolean;
   counts: boolean;
 }
+
+type StatisticsTypes = 'charts' | 'counts';
+
+
 
 @Component({
   selector: 'app-dashboard-statistics',
@@ -24,14 +33,28 @@ interface errorHas {
   providers: [DatePipe]
 })
 export class DashboardStatisticsComponent implements OnInit, OnDestroy {
-  public charts: Plotly.Data;
-  public counts: ICount[];
+  /**
+   * If there is any other type of statistics, just add here
+   */
+  public readonly statisticsCollection: IStatistics[] = [
+    {name: 'charts', matIconName: 'bar_chart', data: null},
+    {name: 'counts', matIconName: 'score', data: null}
+  ];
+
+  /**
+   * If you need to display error for particular type of
+   * statistics, just add in this object
+   */
+  public errorHas: IErrorHas = {charts: false, counts: false};
 
   public dateRange: IDateRange = {startDate: null, endDate: null};
-  public errorHas: errorHas = {charts: false, counts: false};
   public loading = false;
 
-  private activeTab: StatisticsTypes = 'charts';
+  /**
+   * Add here name of the statistics you want to be selected
+   * and initialized for the first time
+   */
+  private activeTab: StatisticsTypes = 'counts';
   private isDateChanged = false;
 
   private readonly statisticsSubject$: Subject<void> = new Subject<void>();
@@ -82,8 +105,12 @@ export class DashboardStatisticsComponent implements OnInit, OnDestroy {
     this.statisticsSubject$.next();
   }
 
+  public get selectedTabIndex() {
+    return this.statisticsCollection.findIndex(statistics => statistics.name === this.activeTab)
+  }
+
   private get allowStatisticsUpdate(): boolean {
-    return (!this[this.activeTab] || this.isDateChanged || this.errorHas[this.activeTab]) && !this.loading;
+    return (!this.activeTabsObject.data || this.isDateChanged || this.errorHas[this.activeTab]) && !this.loading;
   }
 
   private get enumeratedActiveTab(): StatisticsEnum {
@@ -92,8 +119,13 @@ export class DashboardStatisticsComponent implements OnInit, OnDestroy {
 
   private initializeData(countsOrCharts: ICount | Plotly.Data): void {
     this.errorHas[this.activeTab] = false;
-    this[this.activeTab] = countsOrCharts;
+    const activeTab = this.activeTabsObject;
+    activeTab.data = countsOrCharts;
     this.errorService.dismiss();
+  }
+
+  private get activeTabsObject(): IStatistics {
+    return this.statisticsCollection.find(statistics => statistics.name === this.activeTab)
   }
 
   private handleError(_: any): Observable<never> {
