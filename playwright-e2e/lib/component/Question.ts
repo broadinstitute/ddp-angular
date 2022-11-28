@@ -88,9 +88,10 @@ export default class Question {
   }
 
   /**
-   * Check a checkbox or radiobutton
-   * @param value
-   * @param opts
+   * Check a checkbox or radiobutton.
+   * @param {string | RegExp} value
+   * @param {{exactMatch?: boolean}} opts exactMatch: If set to true, match by exact string or substring
+   * @returns {Promise<void>}
    */
   async check(value: string | RegExp, opts: { exactMatch?: boolean } = {}): Promise<void> {
     const { exactMatch = false } = opts;

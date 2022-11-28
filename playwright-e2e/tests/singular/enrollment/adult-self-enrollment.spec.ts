@@ -38,6 +38,8 @@ test.describe('Enroll myself as adult', () => {
     // Step 3
     // On "My Dashboard" page, click Enroll Myself button
     const myDashboardPage = new MyDashboardPage(page);
+    await myDashboardPage.waitForReady();
+
     await myDashboardPage.enrollMyself();
 
     // Step 4
