@@ -594,19 +594,24 @@
       "Title": "Our Team",
       "Team": [
         {
-          "ImageUrl": "assets/images/Diane_circle_2x.png",
+          "ImageUrl": "assets/images/diane_pickles_profile.jpg",
           "Name": "Diane Pickles",
           "About": "Program Director,<br/>Project Singular,<br/>Additional Ventures"
         },
         {
-          "ImageUrl": "assets/images/Keller_circle_2x.png",
+          "ImageUrl": "assets/images/kirstie_keller_profile.jpg",
           "Name": "Kirstie Keller, PhD",
           "About": "Principal Investigator,<br/>Project Singular<br/>Vice President of Programs,<br/>Additional Ventures"
         },
         {
-          "ImageUrl": "assets/images/taylor-maclean.jpg",
+          "ImageUrl": "assets/images/taylor_macLean_profile.jpg",
           "Name": "Taylor MacLean, MS",
           "About": "Program Manager, <br/> Project&nbsp;Singular, <br/> Additional Ventures"
+        },
+        {
+          "ImageUrl": "assets/images/liz_ewens_profile.jpeg",
+          "Name": "Liz Ewen, PhD",
+          "About": "Senior Program Manager, <br/> Project&nbsp;Singular, <br/> Additional Ventures"
         }
       ]
     },
