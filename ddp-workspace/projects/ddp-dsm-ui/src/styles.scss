@@ -19,16 +19,6 @@ input::-webkit-inner-spin-button {
   margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
 }
 
-.snackbarRestyleOnline {
-  background-color: green;
-  opacity: .8!important;
-}
-
-.snackbarRestyleOffline {
-  background-color: red;
-  opacity: .8!important;
-}
-
 .snackbarRestyleError {
   background-color: #b72c2c;
 }

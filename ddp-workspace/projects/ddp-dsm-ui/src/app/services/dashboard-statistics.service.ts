@@ -6,6 +6,13 @@ import {Observable} from 'rxjs';
 import {IDateRange} from '../dashboard-statistics/interfaces/IDateRange';
 import {Plotly} from "angular-plotly.js/lib/plotly.interface";
 import {StatisticsEnum} from "../dashboard-statistics/enums/statistics.enum";
+import {IChart} from "../dashboard-statistics/interfaces/IChart";
+import {ICount} from "../dashboard-statistics/interfaces/ICount";
+
+
+/**
+ * @TODO Refactor this service and write unit tests
+ */
 
 interface chartFactory {
   type: string;
@@ -14,7 +21,6 @@ interface chartFactory {
 
 @Injectable()
 export class DashboardStatisticsService {
-  private $
 
   constructor(private dsmService: DSMService) {}
 
@@ -25,13 +31,13 @@ export class DashboardStatisticsService {
     })[chartsOrCounts]
   }
 
-  private chartFactory(dateRange: IDateRange): Observable<Plotly.Data[]> {
+  private chartFactory(dateRange: IDateRange): Observable<Plotly.Data> {
     return this.dsmService.getDashboardData(dateRange, StatisticsEnum.CHART)
       .pipe(
         map(data => {
-          const generatedCharts: Plotly.Data[] = [];
+          const generatedCharts: Plotly.Data = [];
           data.forEach(chart => {
-            const generatedChart = this.CHART_TYPES.find((chartFactory: chartFactory) => chartFactory.type === chart.type)?.func(chart);
+            const generatedChart: Plotly.Data = this.CHART_TYPES.find((chartFactory: chartFactory) => chartFactory.type === chart.type)?.func(chart);
             generatedChart && generatedCharts.push(generatedChart);
           });
           return generatedCharts;
@@ -39,7 +45,7 @@ export class DashboardStatisticsService {
       );
   }
 
-  private countsFactory(dateRange: IDateRange): Observable<any> {
+  private countsFactory(dateRange: IDateRange): Observable<ICount[]> {
     return this.dsmService.getDashboardData(dateRange, StatisticsEnum.COUNT);
   }
 
@@ -51,7 +57,7 @@ export class DashboardStatisticsService {
     {type: dashboardType.DONUT_CHART, func: this.generate_donutChart}
   ];
 
-  private generate_verticalBarChart(chart: any): Plotly.Data {
+  private generate_verticalBarChart(chart: IChart): Plotly.Data {
     const chartObject: Plotly.Data = {};
     chartObject.data = [
       {
@@ -205,7 +211,7 @@ export class DashboardStatisticsService {
   }
 
 
-  private generate_horizontalBarChart(chart: any): Plotly.Data {
+  private generate_horizontalBarChart(chart: IChart): Plotly.Data {
     const chartObject: Plotly.Data = {};
     chartObject.data = [
       {
@@ -277,7 +283,7 @@ export class DashboardStatisticsService {
   }
 
 
-  private generate_donutChart(chart: any): Plotly.Data {
+  private generate_donutChart(chart: IChart): Plotly.Data {
     const chartObject: Plotly.Data = {};
     chartObject.data = [
       {

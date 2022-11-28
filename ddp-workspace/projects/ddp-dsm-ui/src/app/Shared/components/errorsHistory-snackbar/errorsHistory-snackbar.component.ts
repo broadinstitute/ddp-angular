@@ -1,6 +1,5 @@
 import {ChangeDetectionStrategy, Component, Inject} from "@angular/core";
 import {MAT_BOTTOM_SHEET_DATA, MatBottomSheetRef} from "@angular/material/bottom-sheet";
-import {HttpErrorResponse} from "@angular/common/http";
 import {ErrorsService} from "../../../services/errors.service";
 import {IHttpErrorResponseHistoryItem} from "../../interfaces/IHttpErrorResponseHistoryItem";
 
@@ -11,15 +10,20 @@ import {IHttpErrorResponseHistoryItem} from "../../interfaces/IHttpErrorResponse
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ErrorsHistorySnackbarComponent {
-  constructor(@Inject(MAT_BOTTOM_SHEET_DATA) public httpErrorResponseHistoryItems: IHttpErrorResponseHistoryItem[],
-              private _bottomSheetRef: MatBottomSheetRef<ErrorsHistorySnackbarComponent>,
-              private errorService: ErrorsService
-  ) {
+  constructor(private _bottomSheetRef: MatBottomSheetRef<ErrorsHistorySnackbarComponent>,
+              private errorService: ErrorsService) {}
+
+  public get errorsHistory() {
+    return this.errorService.HttpErrorResponsesHistory;
   }
 
   public clearHistory(): void {
     this.errorService.clearErrors();
-    !this.httpErrorResponseHistoryItems.length && this._bottomSheetRef.dismiss();
+    !this.historyLength && this._bottomSheetRef.dismiss();
+  }
+
+  private get historyLength(): number {
+    return this.errorService.HttpErrorResponsesHistory.length;
   }
 
 }

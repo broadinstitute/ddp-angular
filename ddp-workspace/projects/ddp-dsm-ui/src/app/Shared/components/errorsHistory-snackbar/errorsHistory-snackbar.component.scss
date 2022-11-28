@@ -33,7 +33,11 @@ p {
   justify-content: space-between;
   align-items: center;
 
+  &-title {
+    width: 86%;
+  }
   &-date {
+    width: 14%;
     color: lightgray;
   }
 }

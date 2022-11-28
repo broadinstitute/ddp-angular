@@ -17,7 +17,7 @@ import {MatSort} from '@angular/material/sort';
 })
 
 export class CountsTableComponent  implements AfterViewInit {
-  countsArray: MatTableDataSource<ICount>;
+  public countsArray: MatTableDataSource<ICount>;
   readonly columnNames: string[] = ['title', 'count'];
 
   @Input('counts') set setCounts(counts: ICount[]) {

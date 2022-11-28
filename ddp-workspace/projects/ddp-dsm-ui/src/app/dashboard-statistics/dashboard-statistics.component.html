@@ -15,7 +15,12 @@
           <mat-icon class="example-tab-icon">bar_chart</mat-icon>
           Charts
         </ng-template>
-        <app-plotly-charts *ngIf="!loading; else loadingSpinner" [chartData]="charts"></app-plotly-charts>
+        <ng-container *ngIf="!loading; else loadingSpinner" >
+          <ng-container *ngIf="errorHas.charts">
+            <ng-container *ngTemplateOutlet="errorMessage; context: {chartsOrCounts: 'charts\''}"></ng-container>
+          </ng-container>
+          <app-plotly-charts [chartData]="charts"></app-plotly-charts>
+        </ng-container>
       </mat-tab>
 
       <mat-tab [disabled]="loading" aria-label="Counts">
@@ -23,13 +28,29 @@
           <mat-icon class="example-tab-icon">score</mat-icon>
           Counts
         </ng-template>
-        <app-counts-table *ngIf="!loading; else loadingSpinner"  [counts]="counts"></app-counts-table>
+        <ng-container *ngIf="!loading; else loadingSpinner">
+          <ng-container *ngIf="errorHas.counts">
+            <ng-container *ngTemplateOutlet="errorMessage; context: {chartsOrCounts: 'counts\''}"></ng-container>
+          </ng-container>
+          <app-counts-table  [counts]="counts"></app-counts-table>
+        </ng-container>
       </mat-tab>
     </mat-tab-group>
 
     <ng-template  #loadingSpinner>
       <div class="spinner">
         <mat-spinner></mat-spinner>
+      </div>
+    </ng-template>
+
+    <ng-template #errorMessage let-chartsOrCounts="chartsOrCounts">
+      <div class="errorContent">
+        <p class="errorContent-message">Error occurred while fetching {{chartsOrCounts}} data</p>
+        <button
+          class="errorContent-button"
+          matTooltip="Retry again in the selected dates range"
+          mat-flat-button color="warn"
+          (click)="retry()">Retry Again</button>
       </div>
     </ng-template>
 
