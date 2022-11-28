@@ -10,9 +10,13 @@ import {MatTabChangeEvent} from '@angular/material/tabs';
 import {ErrorsService} from '../services/errors.service';
 import {Plotly} from 'angular-plotly.js/lib/plotly.interface';
 
+/**
+ * For type safety, add new statistics name here as well
+ */
+type StatisticsName = 'charts' | 'counts';
 
 interface IStatistics {
-  name: string;
+  name: StatisticsName;
   matIconName: string;
   data: any;
 }
@@ -21,10 +25,6 @@ interface IErrorHas {
   charts: boolean;
   counts: boolean;
 }
-
-type StatisticsTypes = 'charts' | 'counts';
-
-
 
 @Component({
   selector: 'app-dashboard-statistics',
@@ -54,7 +54,7 @@ export class DashboardStatisticsComponent implements OnInit, OnDestroy {
    * Add here name of the statistics you want to be selected
    * and initialized for the first time
    */
-  private activeTab: StatisticsTypes = 'counts';
+  private activeTab: StatisticsName = 'counts';
   private isDateChanged = false;
 
   private readonly statisticsSubject$: Subject<void> = new Subject<void>();
@@ -86,7 +86,7 @@ export class DashboardStatisticsComponent implements OnInit, OnDestroy {
   }
 
   public getStatisticsFor({tab}: MatTabChangeEvent): void {
-    this.activeTab = tab.ariaLabel as StatisticsTypes;
+    this.activeTab = tab.ariaLabel as StatisticsName;
     if(this.allowStatisticsUpdate) {
       this.statisticsSubject$.next();
       this.isDateChanged = false;
