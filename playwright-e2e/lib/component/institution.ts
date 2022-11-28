@@ -3,7 +3,7 @@ import Button from 'lib/widget/button';
 import Input from 'lib/widget/Input';
 import Select from 'lib/widget/select';
 
-export default class DdpInstitution {
+export default class Institution {
   private readonly page: Page;
   private readonly elementLocator: Locator;
   private readonly rootLocator: Locator;

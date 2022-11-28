@@ -22,10 +22,9 @@ export default class Radiobutton extends WidgetBase {
     return this.elementLocator;
   }
 
-  async check(opts: { force?: boolean } = {}): Promise<void> {
-    const { force = false } = opts;
+  async check(): Promise<void> {
     const isChecked = await this.isChecked();
-    if (force || !isChecked) {
+    if (!isChecked) {
       await this.toLocator().click();
       await expect(this.toLocator()).toHaveClass(/radio-checked/);
     }
