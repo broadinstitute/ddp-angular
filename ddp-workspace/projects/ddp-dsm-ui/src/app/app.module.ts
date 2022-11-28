@@ -8,16 +8,16 @@ import {AppRoutingModule} from './app-routing.module';
 import {CheckAuthGuard} from './guards/checkAuth.guard';
 import {StudyGuard} from './guards/study.guard';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatSnackBarModule} from "@angular/material/snack-bar";
-import {MatIconModule} from "@angular/material/icon";
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {MatTooltipModule} from '@angular/material/tooltip';
-import {HttpInterceptorService} from "./interceptors/Http-interceptor.service";
-import {ErrorSnackbarComponent} from "./Shared/components/error-snackbar/error-snackbar.component";
+import {HttpInterceptorService} from './interceptors/Http-interceptor.service';
+import {ErrorSnackbarComponent} from './Shared/components/error-snackbar/error-snackbar.component';
 import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
 import {
   ErrorsHistorySnackbarComponent
-} from "./Shared/components/errorsHistory-snackbar/errorsHistory-snackbar.component";
+} from './Shared/components/errorsHistory-snackbar/errorsHistory-snackbar.component';
 import {MatListModule} from '@angular/material/list';
 
 

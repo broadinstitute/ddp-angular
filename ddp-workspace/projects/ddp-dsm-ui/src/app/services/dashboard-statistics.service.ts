@@ -4,10 +4,10 @@ import {DSMService} from './dsm.service';
 import {map} from 'rxjs/operators';
 import {Observable} from 'rxjs';
 import {IDateRange} from '../dashboard-statistics/interfaces/IDateRange';
-import {Plotly} from "angular-plotly.js/lib/plotly.interface";
-import {StatisticsEnum} from "../dashboard-statistics/enums/statistics.enum";
-import {IChart} from "../dashboard-statistics/interfaces/IChart";
-import {ICount} from "../dashboard-statistics/interfaces/ICount";
+import {Plotly} from 'angular-plotly.js/lib/plotly.interface';
+import {StatisticsEnum} from '../dashboard-statistics/enums/statistics.enum';
+import {IChart} from '../dashboard-statistics/interfaces/IChart';
+import {ICount} from '../dashboard-statistics/interfaces/ICount';
 
 
 /**
@@ -28,7 +28,7 @@ export class DashboardStatisticsService {
     return ({
       COUNT: this.countsFactory(dateRange),
       CHART: this.chartFactory(dateRange)
-    })[chartsOrCounts]
+    })[chartsOrCounts];
   }
 
   private chartFactory(dateRange: IDateRange): Observable<Plotly.Data> {
@@ -37,7 +37,8 @@ export class DashboardStatisticsService {
         map(data => {
           const generatedCharts: Plotly.Data = [];
           data.forEach(chart => {
-            const generatedChart: Plotly.Data = this.CHART_TYPES.find((chartFactory: chartFactory) => chartFactory.type === chart.type)?.func(chart);
+            const generatedChart: Plotly.Data =
+              this.CHART_TYPES.find((chartFactory: chartFactory) => chartFactory.type === chart.type)?.func(chart);
             generatedChart && generatedCharts.push(generatedChart);
           });
           return generatedCharts;

@@ -4,11 +4,11 @@ import {catchError, finalize, map, switchMap, take, takeUntil} from 'rxjs/operat
 import {ICount} from './interfaces/ICount';
 import {DatePipe} from '@angular/common';
 import {IDateRange} from './interfaces/IDateRange';
-import {StatisticsEnum} from "./enums/statistics.enum";
+import {StatisticsEnum} from './enums/statistics.enum';
 import {BehaviorSubject, EMPTY, Observable, Subject, tap} from 'rxjs';
-import {MatTabChangeEvent} from "@angular/material/tabs";
-import {ErrorsService} from "../services/errors.service";
-import {Plotly} from "angular-plotly.js/lib/plotly.interface";
+import {MatTabChangeEvent} from '@angular/material/tabs';
+import {ErrorsService} from '../services/errors.service';
+import {Plotly} from 'angular-plotly.js/lib/plotly.interface';
 
 
 type StatisticsTypes = 'charts' | 'counts';
@@ -55,15 +55,15 @@ export class DashboardStatisticsComponent implements OnInit, OnDestroy {
         ),
         takeUntil(this.destroy$),
       )
-      .subscribe({next: this.initializeData.bind(this)})
+      .subscribe({next: this.initializeData.bind(this)});
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
   }
 
-  public getStatisticsFor({tab}: MatTabChangeEvent) {
+  public getStatisticsFor({tab}: MatTabChangeEvent): void {
     this.activeTab = tab.ariaLabel.toLowerCase() as StatisticsTypes;
     if(this.allowStatisticsUpdate) {
       this.statisticsSubject.next(this.activeTab);

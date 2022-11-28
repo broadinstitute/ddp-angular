@@ -1,14 +1,14 @@
-import {Injectable} from "@angular/core";
-import {HttpErrorResponse} from "@angular/common/http";
-import {MatSnackBar, MatSnackBarConfig, MatSnackBarRef} from "@angular/material/snack-bar";
-import {ErrorSnackbarComponent} from "../Shared/components/error-snackbar/error-snackbar.component";
-import {IHttpErrorResponseHistoryItem} from "../Shared/interfaces/IHttpErrorResponseHistoryItem";
+import {Injectable} from '@angular/core';
+import {HttpErrorResponse} from '@angular/common/http';
+import {MatSnackBar, MatSnackBarConfig, MatSnackBarRef} from '@angular/material/snack-bar';
+import {ErrorSnackbarComponent} from '../Shared/components/error-snackbar/error-snackbar.component';
+import {IHttpErrorResponseHistoryItem} from '../Shared/interfaces/IHttpErrorResponseHistoryItem';
 
 class HttpErrorResponsesHistory implements IHttpErrorResponseHistoryItem {
   constructor(public httpErrorResponse: HttpErrorResponse, public timeStamp: Date) {}
 }
 
-@Injectable({providedIn: "root"})
+@Injectable({providedIn: 'root'})
 export class ErrorsService {
   public readonly HttpErrorResponsesHistory: IHttpErrorResponseHistoryItem[] = [];
 

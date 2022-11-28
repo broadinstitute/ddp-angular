@@ -18,7 +18,7 @@ import { SessionService } from './session.service';
 import { BulkCohortTag } from '../tags/cohort-tag/bulk-cohort-tag-modal/bulk-cohort-tag-model';
 import {LocalStorageService} from './localStorage.service';
 import {IDateRange} from '../dashboard-statistics/interfaces/IDateRange';
-import {StatisticsEnum} from "../dashboard-statistics/enums/statistics.enum";
+import {StatisticsEnum} from '../dashboard-statistics/enums/statistics.enum';
 
 declare var DDP_ENV: any;
 

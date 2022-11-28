@@ -1,5 +1,5 @@
 import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
-import {Plotly} from "angular-plotly.js/lib/plotly.interface";
+import {Plotly} from 'angular-plotly.js/lib/plotly.interface';
 
 @Component({
   selector: 'app-plotly-charts',

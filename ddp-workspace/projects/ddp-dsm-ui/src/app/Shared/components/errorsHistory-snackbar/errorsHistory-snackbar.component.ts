@@ -1,10 +1,10 @@
-import {ChangeDetectionStrategy, Component, Inject} from "@angular/core";
-import {MAT_BOTTOM_SHEET_DATA, MatBottomSheetRef} from "@angular/material/bottom-sheet";
-import {ErrorsService} from "../../../services/errors.service";
-import {IHttpErrorResponseHistoryItem} from "../../interfaces/IHttpErrorResponseHistoryItem";
+import {ChangeDetectionStrategy, Component} from '@angular/core';
+import {MatBottomSheetRef} from '@angular/material/bottom-sheet';
+import {ErrorsService} from '../../../services/errors.service';
+import {IHttpErrorResponseHistoryItem} from '../../interfaces/IHttpErrorResponseHistoryItem';
 
 @Component({
-  selector: 'app-errorsHistory-snackbar',
+  selector: 'app-errors-history-snackbar',
   templateUrl: './errorsHistory-snackbar.component.html',
   styleUrls: ['./errorsHistory-snackbar.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -13,7 +13,7 @@ export class ErrorsHistorySnackbarComponent {
   constructor(private _bottomSheetRef: MatBottomSheetRef<ErrorsHistorySnackbarComponent>,
               private errorService: ErrorsService) {}
 
-  public get errorsHistory() {
+  public get errorsHistory(): IHttpErrorResponseHistoryItem[] {
     return this.errorService.HttpErrorResponsesHistory;
   }
 
