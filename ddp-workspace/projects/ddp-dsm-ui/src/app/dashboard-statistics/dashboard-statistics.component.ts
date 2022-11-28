@@ -105,8 +105,8 @@ export class DashboardStatisticsComponent implements OnInit, OnDestroy {
     this.statisticsSubject$.next();
   }
 
-  public get selectedTabIndex() {
-    return this.statisticsCollection.findIndex(statistics => statistics.name === this.activeTab)
+  public get selectedTabIndex(): number {
+    return this.statisticsCollection.findIndex(statistics => statistics.name === this.activeTab);
   }
 
   private get allowStatisticsUpdate(): boolean {
@@ -118,7 +118,7 @@ export class DashboardStatisticsComponent implements OnInit, OnDestroy {
   }
 
   private get activeTabsObject(): IStatistics {
-    return this.statisticsCollection.find(statistics => statistics.name === this.activeTab)
+    return this.statisticsCollection.find(statistics => statistics.name === this.activeTab);
   }
 
   private initializeData(countsOrCharts: ICount | Plotly.Data): void {
