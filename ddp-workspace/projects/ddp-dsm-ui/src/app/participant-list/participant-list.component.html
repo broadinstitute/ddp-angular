@@ -677,7 +677,7 @@
                         <p class="BIT-OF-MARGIN"
                            *ngIf="onc.oncHistoryDetailId != null && onc.oncHistoryDetailId !== '' && !onc.deleted">
                           <ng-container
-                            *ngIf="col.type !== 'ADDITIONALVALUE' && col.type !== 'DATE' && col.type !== 'OPTIONS' && col.type !== 'CHECKBOX' && col.type !== 'BOOLEAN'">
+                            *ngIf="col.type !== 'ADDITIONALVALUE' && col.type !== 'DATE' && col.type !== 'OPTIONS' && col.type !== 'CHECKBOX' && col.type !== 'BOOLEAN'; else noTextData">
                             {{onc[col.participantColumn.name] | noData}}
                           </ng-container>
                           <ng-container *ngIf="col.type === 'ADDITIONALVALUE' && onc['additionalValuesJson'] != null
@@ -709,6 +709,10 @@
                             *ngIf="col.type === 'BOOLEAN' || col.type === 'CHECKBOX'">{{getUtil().getYesNo(onc[col.participantColumn.name]) | noData}}
                           </ng-container>
                         </p>
+
+                        <ng-template #noTextData>
+                          <p>&nbsp;</p>
+                        </ng-template>
                       </li>
                     </ul>
                   </div>
