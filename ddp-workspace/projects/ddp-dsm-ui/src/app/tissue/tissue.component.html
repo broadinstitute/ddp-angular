@@ -171,7 +171,7 @@
     </tr>
     <tr>
       <td class="TD--Padding">Pathology Report</td>
-      <td>
+      <td colspan="3">
         <mat-select placeholder="Pathology Report"
                    [ngClass]="{'Input--Min-WIDTH': true, 'Color--Field--Patched': isPatchedCurrently('pathologyReport')}"
                    [(ngModel)]="tissue.pathologyReport" [disabled]="!editable"
@@ -182,7 +182,7 @@
         </mat-select>
       </td>
       <td class="TD--Padding">Tumor Type</td>
-      <td colspan="3">
+      <td>
         <mat-select placeholder="Tumor Type"
                    [ngClass]="{'Input--Min-WIDTH': true, 'Color--Field--Patched': isPatchedCurrently('tumorType')}"
                    [(ngModel)]="tissue.tumorType" [disabled]="!editable"
@@ -206,12 +206,12 @@
       </td>
     </tr>
     <tr>
-      <td class="TD--Padding">Collaborator Sample ID</td>
+      <td class="TD--Padding">Tumor Collaborator Sample ID</td>
       <td colspan="5">
         <mat-form-field
           [ngClass]="{'Input--Bigger-WIDTH': true, 'Color--Field--Patched': isPatchedCurrently('collaboratorSampleId')}">
           <input #collaboratorSampleId matInput maxlength="200"
-                 placeholder="Collaborator Sample ID" autocomplete="off"
+                 placeholder="Tumor Collaborator Sample ID" autocomplete="off"
                  [(ngModel)]="tissue.collaboratorSampleId" [disabled]="!editable"
                  (change)="valueChanged($event, 'collaboratorSampleId')"
                  (blur)="currentField(null)" (focus)="currentField('collaboratorSampleId'); checkCollaboratorId()">
