@@ -32,7 +32,7 @@
           <ng-container *ngIf="errorHas.counts">
             <ng-container *ngTemplateOutlet="errorMessage; context: {chartsOrCounts: 'counts\''}"></ng-container>
           </ng-container>
-          <app-counts-table  [counts]="counts"></app-counts-table>
+          <app-counts-table [counts]="counts"></app-counts-table>
         </ng-container>
       </mat-tab>
     </mat-tab-group>
