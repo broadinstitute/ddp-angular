@@ -93,7 +93,7 @@
           {
             "Name": "How will Project Singular learn about single ventricle heart defects?",
             "Answers": [
-              "We will collect a saliva (spit) sample or a cheek swab from people enrolled in this study. We will use these samples to look at DNA. We want to see if we can find the causes of single ventricle heart defects. If we understand the causes, researchers may be able to develop new and better treatments.",
+              "We will collect a saliva sample from people enrolled in this study. We will use these samples to look at DNA. We want to see if we can find the causes of single ventricle heart defects. If we understand the causes, researchers may be able to develop new and better treatments.",
               "If you are a patient who joins, we will ask for access to your medical records. You will fill out a short survey to help us learn a bit more about you and your medical history. Your privacy is very important to us so we will store the information from your spit or cheek swab sample and medical records in a secure online location."
             ]
           },
@@ -108,8 +108,7 @@
           {
             "Name": "What should I know about participating in this study?",
             "Answers": [
-              "You won’t need to go to a clinic to take part. You can sign up on this website. We will mail you a saliva (spit) or cheek swab collection kit to use at home.",
-              "Most participants will receive a saliva (spit) collection kit.  Babies and toddlers under the age of 3 will receive a cheek swab kit.",
+              "You won’t need to go to a clinic to take part. You can sign up on this website. We will mail you a saliva collection kit to use at home.",
               "You will not be paid to take part in this study.",
               "There is no cost to take part in this study.",
               "You can quit the study at any time.",
@@ -192,7 +191,7 @@
           {
             "Name": "What is DNA and why is it important?",
             "Answers": [
-              "We will study your spit so we can read the DNA inside your cells. We can do this through gene sequencing. Genes are part of your DNA. Genes have instructions for how your body should work and grow. Sometimes genes give instructions that make it more likely for us to get a certain disease.",
+              "We will study your saliva so that we can read the DNA inside your cells. We can do this through gene sequencing. Genes are part of your DNA. Genes have instructions for how your body should work and grow. Sometimes genes give instructions that make it more likely for us to get a certain disease.",
               "Genetic research is the study of DNA. We want to find out which genes and things in a person’s environment might lead to disease. If we can find what causes diseases, we can find better ways to prevent, diagnose, and treat the diseases."
             ]
           },
@@ -674,8 +673,8 @@
         "text": "You can join by:\n"
       },
       {
-        "text": "1) Going to www.projectsingular.org and creating an account;\n2) Answering a short survey; and\n3) Providing a spit sample.\n",
-        "template": "1) Going to <a target='_blank' href='https://www.projectsingular.org/'>www.projectsingular.org</a> and creating an account;<br> 2) Answering a short survey; and<br> 3) Providing a spit sample."
+        "text": "1) Going to www.projectsingular.org and creating an account;\n2) Answering a short survey; and\n3) Providing a saliva sample.\n",
+        "template": "1) Going to <a target='_blank' href='https://www.projectsingular.org/'>www.projectsingular.org</a> and creating an account;<br> 2) Answering a short survey; and<br> 3) Providing a saliva sample"
       },
       {
         "text": "It’s easy and free!"
