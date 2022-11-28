@@ -112,7 +112,7 @@ export class DashboardStatisticsComponent implements OnInit, OnDestroy {
   }
 
   private get enumeratedActiveTab(): StatisticsEnum {
-    return StatisticsEnum[this.activeTab.slice(0, this.activeTab.length - 1).toUpperCase()];
+    return StatisticsEnum[this.activeTab.slice(0, -1).toUpperCase()];
   }
 
   private get activeTabStatObj(): IStatistics {
