@@ -11,7 +11,7 @@ import {ErrorsService} from "../services/errors.service";
 import {Plotly} from "angular-plotly.js/lib/plotly.interface";
 
 
-type ChartsOrCounts = 'charts' | 'counts';
+type StatisticsTypes = 'charts' | 'counts';
 interface errorHas {
   charts: boolean;
   counts: boolean;
@@ -31,23 +31,27 @@ export class DashboardStatisticsComponent implements OnInit, OnDestroy {
   public errorHas: errorHas = {charts: false, counts: false};
   public loading = false;
 
-  private activeTab: ChartsOrCounts = 'charts';
+  private activeTab: StatisticsTypes = 'charts';
   private isDateChanged = false;
 
-  private statistics = new BehaviorSubject<ChartsOrCounts>(this.activeTab);
+  private statisticsSubject = new BehaviorSubject<StatisticsTypes>(this.activeTab);
   private destroy$: Subject<void> = new Subject<void>();
 
   constructor(private dashboardStatisticsService: DashboardStatisticsService, private errorService: ErrorsService) {}
 
   ngOnInit(): void {
-    this.statistics
+    this.statisticsSubject
       .pipe(
         tap(() => this.loading = true),
-        map((chartsOrCounts: ChartsOrCounts) =>
+        map((chartsOrCounts: StatisticsTypes) =>
           StatisticsEnum[chartsOrCounts.slice(0, chartsOrCounts.length - 1).toUpperCase()]),
-        switchMap((statistics: StatisticsEnum) =>
-          this.dashboardStatisticsService.getStatisticsFor(statistics, this.dateRange)
-            .pipe(take(1), catchError(this.handleError.bind(this)), finalize(() => this.loading = false))
+        switchMap((statisticsEnum: StatisticsEnum) =>
+          this.dashboardStatisticsService.getStatisticsFor(statisticsEnum, this.dateRange)
+            .pipe(
+              take(1),
+              catchError(this.handleError.bind(this)),
+              finalize(() => this.loading = false)
+            )
         ),
         takeUntil(this.destroy$),
       )
@@ -60,9 +64,9 @@ export class DashboardStatisticsComponent implements OnInit, OnDestroy {
   }
 
   public getStatisticsFor({tab}: MatTabChangeEvent) {
-    this.activeTab = tab.ariaLabel.toLowerCase() as ChartsOrCounts;
+    this.activeTab = tab.ariaLabel.toLowerCase() as StatisticsTypes;
     if(this.allowStatisticsUpdate) {
-      this.statistics.next(this.activeTab);
+      this.statisticsSubject.next(this.activeTab);
       this.isDateChanged = false;
     }
   }
@@ -71,12 +75,12 @@ export class DashboardStatisticsComponent implements OnInit, OnDestroy {
     this.loading = true;
     this.isDateChanged = true;
     this.dateRange = dateRange;
-    this.statistics.next(this.activeTab);
+    this.statisticsSubject.next(this.activeTab);
   }
 
   public retry(): void {
     this.loading = true;
-    this.statistics.next(this.activeTab);
+    this.statisticsSubject.next(this.activeTab);
   }
 
   private get allowStatisticsUpdate(): boolean {

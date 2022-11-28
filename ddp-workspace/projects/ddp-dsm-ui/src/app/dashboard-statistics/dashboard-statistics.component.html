@@ -12,7 +12,7 @@
 
       <mat-tab [disabled]="loading" aria-label="Charts">
         <ng-template mat-tab-label >
-          <mat-icon class="example-tab-icon">bar_chart</mat-icon>
+          <mat-icon>bar_chart</mat-icon>
           Charts
         </ng-template>
         <ng-container *ngIf="!loading; else loadingSpinner" >
@@ -25,7 +25,7 @@
 
       <mat-tab [disabled]="loading" aria-label="Counts">
         <ng-template mat-tab-label>
-          <mat-icon class="example-tab-icon">score</mat-icon>
+          <mat-icon>score</mat-icon>
           Counts
         </ng-template>
         <ng-container *ngIf="!loading; else loadingSpinner">
