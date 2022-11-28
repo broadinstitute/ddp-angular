@@ -10,7 +10,7 @@
 
     <mat-tab-group mat-stretch-tabs  (selectedTabChange)="getStatisticsFor($event)" mat-align-tabs="center" >
 
-      <mat-tab [disabled]="loading" aria-label="Charts">
+      <mat-tab [disabled]="loading" aria-label="charts">
         <ng-template mat-tab-label >
           <mat-icon>bar_chart</mat-icon>
           Charts
@@ -23,7 +23,7 @@
         </ng-container>
       </mat-tab>
 
-      <mat-tab [disabled]="loading" aria-label="Counts">
+      <mat-tab [disabled]="loading" aria-label="counts">
         <ng-template mat-tab-label>
           <mat-icon>score</mat-icon>
           Counts

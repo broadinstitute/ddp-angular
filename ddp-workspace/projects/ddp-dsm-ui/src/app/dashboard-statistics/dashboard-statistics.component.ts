@@ -34,17 +34,14 @@ export class DashboardStatisticsComponent implements OnInit, OnDestroy {
   private activeTab: StatisticsTypes = 'charts';
   private isDateChanged = false;
 
-  private statisticsSubject = new BehaviorSubject<StatisticsTypes>(this.activeTab);
-  private destroy$: Subject<void> = new Subject<void>();
+  private readonly statisticsSubject: Subject<void> = new Subject<void>();
+  private readonly destroy$: Subject<void> = new Subject<void>();
 
-  constructor(private dashboardStatisticsService: DashboardStatisticsService, private errorService: ErrorsService) {}
-
-  ngOnInit(): void {
+  constructor(private dashboardStatisticsService: DashboardStatisticsService, private errorService: ErrorsService) {
     this.statisticsSubject
       .pipe(
         tap(() => this.loading = true),
-        map((chartsOrCounts: StatisticsTypes) =>
-          StatisticsEnum[chartsOrCounts.slice(0, chartsOrCounts.length - 1).toUpperCase()]),
+        map(() => this.enumeratedActiveTab),
         switchMap((statisticsEnum: StatisticsEnum) =>
           this.dashboardStatisticsService.getStatisticsFor(statisticsEnum, this.dateRange)
             .pipe(
@@ -58,15 +55,19 @@ export class DashboardStatisticsComponent implements OnInit, OnDestroy {
       .subscribe({next: this.initializeData.bind(this)});
   }
 
+  ngOnInit(): void {
+    this.statisticsSubject.next();
+  }
+
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
   }
 
   public getStatisticsFor({tab}: MatTabChangeEvent): void {
-    this.activeTab = tab.ariaLabel.toLowerCase() as StatisticsTypes;
+    this.activeTab = tab.ariaLabel as StatisticsTypes;
     if(this.allowStatisticsUpdate) {
-      this.statisticsSubject.next(this.activeTab);
+      this.statisticsSubject.next();
       this.isDateChanged = false;
     }
   }
@@ -75,16 +76,20 @@ export class DashboardStatisticsComponent implements OnInit, OnDestroy {
     this.loading = true;
     this.isDateChanged = true;
     this.dateRange = dateRange;
-    this.statisticsSubject.next(this.activeTab);
+    this.statisticsSubject.next();
   }
 
   public retry(): void {
     this.loading = true;
-    this.statisticsSubject.next(this.activeTab);
+    this.statisticsSubject.next();
   }
 
   private get allowStatisticsUpdate(): boolean {
     return (!this[this.activeTab] || this.isDateChanged || this.errorHas[this.activeTab]) && !this.loading;
+  }
+
+  private get enumeratedActiveTab(): StatisticsEnum {
+    return StatisticsEnum[this.activeTab.slice(0, this.activeTab.length - 1).toUpperCase()];
   }
 
   private initializeData(countsOrCharts: ICount | Plotly.Data): void {
