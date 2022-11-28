@@ -1,6 +1,5 @@
 import { Locator, Page } from '@playwright/test';
 import Input from 'lib/widget/Input';
-import Dropdown from '../../../lib/widget/dropdown';
 
 export enum SearchFieldLabel {
   ShortId = 'Short ID'
