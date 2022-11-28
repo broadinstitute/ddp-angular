@@ -1,14 +1,12 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {DashboardStatisticsService} from '../services/dashboard-statistics.service';
 import {catchError, finalize, map, switchMap, take} from 'rxjs/operators';
-import {ICount} from './interfaces/ICount';
 import {DatePipe} from '@angular/common';
 import {IDateRange} from './interfaces/IDateRange';
 import {StatisticsEnum} from './enums/statistics.enum';
 import {EMPTY, Observable, Subject, Subscription, tap} from 'rxjs';
 import {MatTabChangeEvent} from '@angular/material/tabs';
 import {ErrorsService} from '../services/errors.service';
-import {Plotly} from 'angular-plotly.js/lib/plotly.interface';
 
 /**
  * For type safety, add new statistics name here as well
@@ -110,20 +108,20 @@ export class DashboardStatisticsComponent implements OnInit, OnDestroy {
   }
 
   private get allowStatisticsUpdate(): boolean {
-    return (!this.activeTabsObject.data || this.isDateChanged || this.errorHas[this.activeTab]) && !this.loading;
+    return (!this.activeTabStatObj.data || this.isDateChanged || this.errorHas[this.activeTab]) && !this.loading;
   }
 
   private get enumeratedActiveTab(): StatisticsEnum {
     return StatisticsEnum[this.activeTab.slice(0, this.activeTab.length - 1).toUpperCase()];
   }
 
-  private get activeTabsObject(): IStatistics {
+  private get activeTabStatObj(): IStatistics {
     return this.statisticsCollection.find(statistics => statistics.name === this.activeTab);
   }
 
-  private initializeData(countsOrCharts: ICount | Plotly.Data): void {
+  private initializeData(countsOrCharts: any): void {
     this.errorHas[this.activeTab] = false;
-    const activeTab = this.activeTabsObject;
+    const activeTab = this.activeTabStatObj;
     activeTab.data = countsOrCharts;
     this.errorService.dismiss();
   }
