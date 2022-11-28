@@ -54,7 +54,7 @@ export class DashboardStatisticsComponent implements OnInit, OnDestroy {
    * Add here name of the statistics you want to be selected
    * and initialized for the first time
    */
-  private activeTab: StatisticsName = 'counts';
+  private activeTab: StatisticsName = 'charts';
   private isDateChanged = false;
 
   private readonly statisticsSubject$: Subject<void> = new Subject<void>();
