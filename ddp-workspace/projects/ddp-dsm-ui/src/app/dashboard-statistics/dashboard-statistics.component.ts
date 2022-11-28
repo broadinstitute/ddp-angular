@@ -117,15 +117,15 @@ export class DashboardStatisticsComponent implements OnInit, OnDestroy {
     return StatisticsEnum[this.activeTab.slice(0, this.activeTab.length - 1).toUpperCase()];
   }
 
+  private get activeTabsObject(): IStatistics {
+    return this.statisticsCollection.find(statistics => statistics.name === this.activeTab)
+  }
+
   private initializeData(countsOrCharts: ICount | Plotly.Data): void {
     this.errorHas[this.activeTab] = false;
     const activeTab = this.activeTabsObject;
     activeTab.data = countsOrCharts;
     this.errorService.dismiss();
-  }
-
-  private get activeTabsObject(): IStatistics {
-    return this.statisticsCollection.find(statistics => statistics.name === this.activeTab)
   }
 
   private handleError(_: any): Observable<never> {
