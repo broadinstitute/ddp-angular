@@ -17,13 +17,13 @@ export class ErrorsHistorySnackbarComponent {
     return this.errorService.HttpErrorResponsesHistory;
   }
 
+  public get historyLength(): number {
+    return this.errorService.HttpErrorResponsesHistory.length;
+  }
+
   public clearHistory(): void {
     this.errorService.clearErrors();
     !this.historyLength && this._bottomSheetRef.dismiss();
-  }
-
-  private get historyLength(): number {
-    return this.errorService.HttpErrorResponsesHistory.length;
   }
 
 }
