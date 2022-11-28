@@ -36,6 +36,10 @@ export default class ParticipantsPage {
     return this.page.locator('button:has-text("Search") >> nth=0');
   }
 
+  MedicalRecordColumnsDropDown(): Locator {
+    return this.page.locator('button.btn.btn-primary.dropdown-toggle >> nth=2');
+  }
+
   async search(searchField: SearchFieldLabel, searchString: string): Promise<void> {
     const input = new Input(this.page, { label: searchField, parent: this.page.locator('//app-filter-column') });
     await input.toLocator().type(searchString);

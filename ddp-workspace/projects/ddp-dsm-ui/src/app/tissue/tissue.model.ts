@@ -7,41 +7,12 @@ export class Tissue {
               public hE: string, public pathologyReport: string, public collaboratorSampleId: string, public blockSent: string,
               public scrollsReceived: string, public skId: string, public smId: string, public sentGp: string, public firstSmId: string,
               public additionalValuesJson: {}, public expectedReturn: string, public returnDate: string,
-              public returnFedexId: string, public shlWorkNumber: string, public tissueSequence: string, public tumorPercentage: string,
+              public returnFedexId: string, public blockIdShl: string, public shlWorkNumber: string, public tissueSequence: string,
+              public tumorPercentage: string,
               public scrollsCount: number, public ussCount: number, public blocksCount: number, public hECount: number,
               public scrollSMId: Array<TissueSmId>, public ussSMId: Array<TissueSmId>, public HESMId: Array<TissueSmId>,
               public deleted: boolean) {
-    this.tissueId = tissueId;
-    this.oncHistoryDetailId = oncHistoryDetailId;
-    this.notes = notes;
-    this.countReceived = countReceived;
-    this.tissueType = tissueType;
-    this.tissueSite = tissueSite;
-    this.tumorType = tumorType;
-    this.hE = hE;
-    this.pathologyReport = pathologyReport;
-    this.collaboratorSampleId = collaboratorSampleId;
-    this.blockSent = blockSent;
-    this.scrollsReceived = scrollsReceived;
-    this.skId = skId;
-    this.smId = smId;
-    this.sentGp = sentGp;
-    this.firstSmId = firstSmId;
-    this.additionalValuesJson = additionalValuesJson;
-    this.expectedReturn = expectedReturn;
-    this.returnDate = returnDate;
-    this.returnFedexId = returnFedexId;
-    this.shlWorkNumber = shlWorkNumber;
-    this.tissueSequence = tissueSequence;
-    this.tumorPercentage = tumorPercentage;
-    this.scrollsCount = scrollsCount;
-    this.ussCount = ussCount;
-    this.blocksCount = blocksCount;
-    this.hECount = hECount;
-    this.scrollSMId = scrollSMId;
-    this.ussSMId = ussSMId;
-    this.HESMId = HESMId;
-    this.deleted = deleted;
+
   }
 
   static parse(json): Tissue {
@@ -54,7 +25,7 @@ export class Tissue {
     return new Tissue(json.tissueId, json.oncHistoryDetailId, json.notes, json.countReceived, json.tissueType,
       json.tissueSite, json.tumorType, json.hE, json.pathologyReport, json.collaboratorSampleId, json.blockSent,
       json.scrollsReceived, json.skId, json.smId, json.sentGp, json.firstSmId, additionalValuesJson, json.expectedReturn,
-      json.returnDate, json.returnFedexId, json.shlWorkNumber, json.tissueSequence, json.tumorPercentage,
+      json.returnDate, json.returnFedexId, json.blockIdShl, json.shlWorkNumber, json.tissueSequence, json.tumorPercentage,
       json.scrollsCount, json.ussCount, json.blocksCount, json.hECount,
       TissueSmId.parseArray(json.scrollSMID), TissueSmId.parseArray(json.ussSMID), TissueSmId.parseArray(json.heSMID),
       json.deleted);

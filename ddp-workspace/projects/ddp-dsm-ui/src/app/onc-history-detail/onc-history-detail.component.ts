@@ -229,7 +229,7 @@ export class OncHistoryDetailComponent implements OnInit {
     tissues.push(new Tissue(null, null, null, null, null, null,
       null, null, null, null, null, null, null, null,
       null, null, null, null, null, null, null,
-      null, null, null, null, null, null, null, null, null, false));
+      null, null, null, null, null, null, null, null, null, null, false));
     this.oncHistory.push(new OncHistoryDetail(participantId, null, null, null, null,
       null, null, null, null, null, null, null, null,
       null, null, null, null, null, null, null, null, null,
