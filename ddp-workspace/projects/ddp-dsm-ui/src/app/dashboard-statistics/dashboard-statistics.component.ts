@@ -28,8 +28,8 @@ export class DashboardStatisticsComponent implements OnInit, OnDestroy {
   public counts: ICount[];
 
   public dateRange: IDateRange = {startDate: null, endDate: null};
-  public loading = false;
   public errorHas: errorHas = {charts: false, counts: false};
+  public loading = false;
 
   private activeTab: ChartsOrCounts = 'charts';
   private isDateChanged = false;
