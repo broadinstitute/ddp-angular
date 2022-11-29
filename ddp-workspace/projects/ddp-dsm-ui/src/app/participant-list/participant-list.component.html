@@ -681,7 +681,7 @@
                             {{onc[col.participantColumn.name] | noData}}
                           </ng-container>
                           <ng-container *ngIf="col.type === 'ADDITIONALVALUE' && onc['additionalValuesJson'] != null
-                          && onc['additionalValuesJson'][col.participantColumn.name] != null">
+                          && onc['additionalValuesJson'][col.participantColumn.name] != null; else noODDataTemplate">
                             <ng-container *ngIf="col.additionalType === 'DATE'">
                               {{onc['additionalValuesJson'][col.participantColumn.name] | date:'shortDate' | noData}}
                             </ng-container>
@@ -695,11 +695,11 @@
                           <ng-container
                             *ngIf="col.type === 'DATE'">
                             {{
-                            onc[col.participantColumn.name]?.split('-').length > 2 ?
+                            (onc[col.participantColumn.name]?.split('-').length > 2 ?
                               (onc[col.participantColumn.name]  | date: 'MM/dd/yyyy') :
                               onc[col.participantColumn.name]?.split('-').length === 2 ?
                                 (onc[col.participantColumn.name] | date: 'MM/yyyy') :
-                                (onc[col.participantColumn.name] | date: 'yyyy') | noData
+                                (onc[col.participantColumn.name] | date: 'yyyy')) | noData
                             }}
                           </ng-container>
                           <ng-container
@@ -712,65 +712,72 @@
                       </li>
                     </ul>
                   </div>
+                  <ng-template #noODDataTemplate>
+                    &nbsp;
+                  </ng-template>
                   <div *ngIf="alias === 't'">
                     <ul class="NO-PADDING-START">
                       <li class="LIST-SEPARATOR" *ngFor="let onc of pt.oncHistoryDetails">
-                        <ul class="NO-PADDING-START"
-                            *ngIf="onc.oncHistoryDetailId != null && onc.oncHistoryDetailId !== '' && !onc.deleted">
-                          <li class="LIST-SEPARATOR" *ngFor="let tissue of onc.tissues" (click)="openTissue(pt, onc)">
-                            <p class="BIT-OF-MARGIN"
-                               *ngIf="tissue.tissueId != null && tissue.tissueId !== '' && !tissue.deleted">
-                              <ng-container
-                                *ngIf="col.type !== 'ADDITIONALVALUE' && col.type !== 'DATE' && col.type !== 'OPTIONS' && col.type !== 'CHECKBOX' && col.type !== 'BOOLEAN'">
-                                <ng-container *ngIf="col.participantColumn.tableAlias === 'sm'">
-                                  <ng-container *ngFor="let smid of tissue.ussSMId">
-                                    {{smid.smIdValue | noData}}
+                        <ul class="NO-PADDING-START" >
+                          <ng-container *ngIf="onc.oncHistoryDetailId != null && onc.oncHistoryDetailId !== '' && !onc.deleted && onc.tissues.length; else noTDateTemplate">
+                            <li class="LIST-SEPARATOR" *ngFor="let tissue of onc.tissues" (click)="openTissue(pt, onc)">
+                              <p class="BIT-OF-MARGIN"
+                                 *ngIf="tissue.tissueId != null && tissue.tissueId !== '' && !tissue.deleted">
+                                <ng-container
+                                  *ngIf="col.type !== 'ADDITIONALVALUE' && col.type !== 'DATE' && col.type !== 'OPTIONS' && col.type !== 'CHECKBOX' && col.type !== 'BOOLEAN'">
+                                  <ng-container *ngIf="col.participantColumn.tableAlias === 'sm'">
+                                    <ng-container *ngFor="let smid of tissue.ussSMId">
+                                      {{smid.smIdValue | noData}}
+                                    </ng-container>
+                                    <ng-container *ngFor="let smid of tissue.HESMId">
+                                      {{smid.smIdValue | noData}}
+                                    </ng-container>
+                                    <ng-container *ngFor="let smid of tissue.scrollSMId">
+                                      {{smid.smIdValue | noData}}
+                                    </ng-container>
                                   </ng-container>
-                                  <ng-container *ngFor="let smid of tissue.HESMId">
-                                    {{smid.smIdValue | noData}}
-                                  </ng-container>
-                                  <ng-container *ngFor="let smid of tissue.scrollSMId">
-                                    {{smid.smIdValue | noData}}
+                                  <ng-container *ngIf="col.participantColumn.tableAlias !== 'sm'">
+                                    {{tissue[col.participantColumn.name] | noData}}
                                   </ng-container>
                                 </ng-container>
-                                <ng-container *ngIf="col.participantColumn.tableAlias !== 'sm'">
-                                  {{tissue[col.participantColumn.name] | noData}}
-                                </ng-container>
-                              </ng-container>
-                              <ng-container *ngIf="col.type === 'ADDITIONALVALUE' && tissue['additionalValuesJson'] != null
-                              && tissue['additionalValuesJson'][col.participantColumn.name] != null">
-                                <ng-container *ngIf="col.additionalType === 'DATE'">
-                                  {{tissue['additionalValuesJson'][col.participantColumn.name] | date:'shortDate' | noData}}
-                                </ng-container>
-                                <ng-container *ngIf="col.additionalType === 'CHECKBOX'">
-                                  {{getUtil().getYesNo(tissue['additionalValuesJson'][col.participantColumn.name]) | noData}}
+                                <ng-container *ngIf="col.type === 'ADDITIONALVALUE' && tissue['additionalValuesJson'] != null
+                                && tissue['additionalValuesJson'][col.participantColumn.name] != null">
+                                  <ng-container *ngIf="col.additionalType === 'DATE'">
+                                    {{tissue['additionalValuesJson'][col.participantColumn.name] | date:'shortDate' | noData}}
+                                  </ng-container>
+                                  <ng-container *ngIf="col.additionalType === 'CHECKBOX'">
+                                    {{getUtil().getYesNo(tissue['additionalValuesJson'][col.participantColumn.name]) | noData}}
+                                  </ng-container>
+                                  <ng-container
+                                    *ngIf="col.additionalType !== 'DATE' && col.additionalType !== 'CHECKBOX'">
+                                    {{tissue['additionalValuesJson'][col.participantColumn.name] | noData}}
+                                  </ng-container>
                                 </ng-container>
                                 <ng-container
-                                  *ngIf="col.additionalType !== 'DATE' && col.additionalType !== 'CHECKBOX'">
-                                  {{tissue['additionalValuesJson'][col.participantColumn.name] | noData}}
+                                  *ngIf="col.type === 'DATE'">
+                                  <ng-container *ngIf="tissue[col.participantColumn.name] === 'N/A'">
+                                    {{tissue[col.participantColumn.name] | noData}}
+                                  </ng-container>
+                                  <ng-container *ngIf="tissue[col.participantColumn.name] !== 'N/A'">
+                                    {{getUtil().getDateFormatted(tissue[col.participantColumn.name]) | noData}}
+                                  </ng-container>
                                 </ng-container>
-                              </ng-container>
-                              <ng-container
-                                *ngIf="col.type === 'DATE'">
-                                <ng-container *ngIf="tissue[col.participantColumn.name] === 'N/A'">
-                                  {{tissue[col.participantColumn.name] | noData}}
+                                <ng-container
+                                  *ngIf="col.type === 'OPTIONS'">{{getOptionDisplay(col.options, tissue[col.participantColumn.name]) | noData}}
                                 </ng-container>
-                                <ng-container *ngIf="tissue[col.participantColumn.name] !== 'N/A'">
-                                  {{getUtil().getDateFormatted(tissue[col.participantColumn.name]) | noData}}
+                                <ng-container
+                                  *ngIf="col.type === 'BOOLEAN' || col.type === 'CHECKBOX'">{{getUtil().getYesNo(onc[col.participantColumn.name]) | noData}}
                                 </ng-container>
-                              </ng-container>
-                              <ng-container
-                                *ngIf="col.type === 'OPTIONS'">{{getOptionDisplay(col.options, tissue[col.participantColumn.name]) | noData}}
-                              </ng-container>
-                              <ng-container
-                                *ngIf="col.type === 'BOOLEAN' || col.type === 'CHECKBOX'">{{getUtil().getYesNo(onc[col.participantColumn.name]) | noData}}
-                              </ng-container>
-                            </p>
-                          </li>
+                              </p>
+                            </li>
+                          </ng-container>
                         </ul>
                       </li>
                     </ul>
                   </div>
+                  <ng-template #noTDateTemplate>
+                    &nbsp;
+                  </ng-template>
                   <div *ngIf="alias === 'k'">
                     <ul class="NO-PADDING-START">
                       <li class="LIST-SEPARATOR" *ngFor="let sample of pt.kits">
