@@ -9,6 +9,7 @@ import { ConfigurationService } from '../configuration.service';
 @Injectable()
 export class LanguageService {
   private profileLanguageUpdateNotifier: Subject<void>;
+  private notifierParticipantGuid$: Subject<string>=new Subject();
   private readonly LOG_SOURCE = 'LanguageService';
 
   constructor(
@@ -87,5 +88,11 @@ export class LanguageService {
       localStorage.getItem('studyLanguage') ||
       this.config.defaultLanguageCode ||
       'en';
+  }
+  public notifyParticipantGuidBeforeLanguageChange(participantGuid:string){
+    this.notifierParticipantGuid$.next(participantGuid);
+  }
+  public getParticipantGuidBeforeLanguageChange():Observable<string>{
+    return this.notifierParticipantGuid$.asObservable();
   }
 }

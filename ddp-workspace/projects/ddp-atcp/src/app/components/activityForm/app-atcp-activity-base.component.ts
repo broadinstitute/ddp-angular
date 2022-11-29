@@ -23,6 +23,7 @@ import {
   LoggingService,
   LanguageService,
   ParticipantsSearchServiceAgent,
+  SessionMementoService,
 } from 'ddp-sdk';
 import { DOCUMENT } from '@angular/common';
 import { CurrentActivityService } from '../../sdk/services/currentActivity.service';
@@ -35,6 +36,7 @@ import {
   map,
   startWith,
   take,
+  tap,
 } from 'rxjs/operators';
 import { combineLatest, merge } from 'rxjs';
 
@@ -227,7 +229,8 @@ export class AtcpActivityBaseComponent extends ActivityComponent implements OnIn
     @Inject(DOCUMENT) document: any,
     // using Injector here as we get error using constructor injection
     // in both child and parent classes
-    injector: Injector) {
+    injector: Injector,
+    private session: SessionMementoService) {
     super(logger, windowRef, renderer, submitService, analytics, participantsSearchService, changeRef, document, injector);
     this.currentActivityService = injector.get(CurrentActivityService);
     this.multiGovernedUserService = injector.get(MultiGovernedUserService);
@@ -254,6 +257,15 @@ export class AtcpActivityBaseComponent extends ActivityComponent implements OnIn
           }
         })
     );
+    this.anchor.addNew(
+      combineLatest([this.languageService.onLanguageChange(), this.languageService.getParticipantGuidBeforeLanguageChange()])
+      .pipe(delay(2000))
+      .subscribe(
+          ([, participantGuid]) => {
+            !!participantGuid && this.session.setParticipant(participantGuid);
+            this.languageService.notifyOfProfileLanguageUpdate();
+          }
+        ));
 
     if (this.isPrequal) {
       this.setupPrequalLangListener();

@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { filter, take } from 'rxjs/operators';
 
-import { CompositeDisposable, SessionMementoService } from 'ddp-sdk';
+import { CompositeDisposable, LanguageService, SessionMementoService } from 'ddp-sdk';
 
 import * as RouterResource from '../../router-resources';
 
@@ -30,6 +30,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private session: SessionMementoService,
     private currentActivityService: CurrentActivityService,
     private multiGovernedUserService: MultiGovernedUserService,
+    private languageService: LanguageService
   ) {}
 
   onBeforeLanguageChange(): void {
@@ -39,6 +40,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
     if (this.session.session.participantGuid) {
       this.prevParticipantGuid = this.session.session.participantGuid;
+      this.languageService.notifyParticipantGuidBeforeLanguageChange(this.prevParticipantGuid);
       this.session.setParticipant(null);
     }
   }

@@ -20,6 +20,7 @@ import {
   WindowRef,
   LoggingService,
   ParticipantsSearchServiceAgent,
+  SessionMementoService,
 } from 'ddp-sdk';
 
 import { AtcpActivityBaseComponent } from './app-atcp-activity-base.component';
@@ -358,8 +359,9 @@ export class AtcpActivityComponent extends AtcpActivityBaseComponent implements 
       participantsSearchService: ParticipantsSearchServiceAgent,
       changeRef: ChangeDetectorRef,
       @Inject(DOCUMENT) document: any,
-      injector: Injector) {
-    super(logger, windowRef, renderer, submitService, analytics, participantsSearchService, changeRef, document, injector);
+      injector: Injector,
+      session: SessionMementoService) {
+    super(logger, windowRef, renderer, submitService, analytics, participantsSearchService, changeRef, document, injector,session);
 
     this.matDialog = injector.get(MatDialog);
   }
