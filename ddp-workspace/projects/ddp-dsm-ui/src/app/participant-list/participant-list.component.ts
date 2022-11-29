@@ -1220,6 +1220,7 @@ export class ParticipantListComponent implements OnInit {
 
   public clearAllFilters(): void {
     this.clearManualFilters();
+    this.resetPagination();
     this.deselectQuickFilters();
     this.deselectSavedFilters();
   }
@@ -1233,7 +1234,6 @@ export class ParticipantListComponent implements OnInit {
         }
       }
     });
-    this.resetPagination();
   }
 
   private resetPagination(): void {
