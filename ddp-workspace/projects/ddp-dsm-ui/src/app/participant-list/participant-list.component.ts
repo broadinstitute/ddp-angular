@@ -1140,6 +1140,10 @@ export class ParticipantListComponent implements OnInit {
     this.clearAllFilters();
     this.getData();
     this.setDefaultColumns();
+    const selectedStudy = localStorage.getItem(ComponentService.MENU_SELECTED_REALM);
+    if(selectedStudy === 'RGP') {
+      this.searchForRGP = true;
+    }
   }
 
   private setDefaultColumns(): void {
