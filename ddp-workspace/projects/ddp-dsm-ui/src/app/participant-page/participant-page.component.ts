@@ -808,7 +808,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
     if (!bundle) {
       configName = 'tissue';
     }
-    this.dsmService.downloadPDF(this.participant.participant.ddpParticipantId,
+    this.dsmService.downloadPDF(this.participant.data.profile['guid'],
       null, null, null, null,
       localStorage.getItem(ComponentService.MENU_SELECTED_REALM), configName, this.pdfs, requestOncHistoryList
     ).subscribe({
