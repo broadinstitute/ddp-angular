@@ -26,6 +26,11 @@ td {
   white-space: nowrap;
 }
 
+p {
+  margin: 0;
+  padding: 0;
+}
+
 .clickable:hover {
   color: blue;
   cursor: pointer;
