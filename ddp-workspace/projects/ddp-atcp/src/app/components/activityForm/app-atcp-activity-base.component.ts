@@ -259,7 +259,7 @@ export class AtcpActivityBaseComponent extends ActivityComponent implements OnIn
     );
     this.anchor.addNew(
       combineLatest([this.languageService.onLanguageChange(), this.languageService.getParticipantGuidBeforeLanguageChange()])
-      .pipe(delay(2000))
+      .pipe(delay(150))
       .subscribe(
           ([, participantGuid]) => {
             !!participantGuid && this.session.setParticipant(participantGuid);

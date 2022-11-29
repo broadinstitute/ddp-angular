@@ -54,9 +54,8 @@ export class CohortTagComponent implements OnInit {
           next: cohortTagId => {
             newTag.cohortTagId = parseInt(cohortTagId);
             this.getTags().push(newTag);
-            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
             // Clear the input value
-            event.chipInput!.clear();
+            !!event.chipInput && event.chipInput.clear();
           },
           error: (error) => {
             if (error.status === 500){
