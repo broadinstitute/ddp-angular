@@ -1,8 +1,9 @@
 {
   "patient": {
     "firstName": "E2E",
-    "middleName": "I",
+    "middleName": "Tester",
     "lastName": "Playwright",
+    "fullName": "E2E Tester Playwright",
     "birthDate": {
       "MM": "10",
       "DD": "02",
@@ -27,12 +28,28 @@
     "specialty": "PRIMARY_CARE",
     "phone": "6187247123",
     "hospital": "Mass General Hospital",
-    "address": "55 Fruit St, Boston, MA 02114"
+    "address": "55 Fruit Street, Boston, MA 02114",
+    "street": "55 Fruit Street",
+    "city": "Boston",
+    "state": "MA",
+    "zip": "02114"
+  },
+  "secondDoctor": {
+    "name": "John Stack",
+    "specialty": "PRIMARY_CARE",
+    "phone": "6187247123",
+    "hospital": "Brigham and Women's Hospital",
+    "address": "75 Francis Street, Boston, MA 02115",
+    "street": "75 Francis Street",
+    "city": "Boston",
+    "state": "MA",
+    "zip": "02115"
   },
   "child": {
     "firstName": "E2E-Child",
     "middleName": "Junior",
     "lastName": "Playwright",
+    "fullName": "E2E-Child Junior Playwright",
     "birthDate": {
       "MM": "12",
       "DD": "30",
@@ -55,6 +72,7 @@
   "adultDependent": {
     "firstName": "E2E-Adult-Dependent",
     "lastName": "Playwright",
+    "fullName": "E2E-Adult-Dependent Playwright",
     "birthDate": {
       "MM": "05",
       "DD": "01",
@@ -75,9 +93,10 @@
     "phone": "6177147000"
   },
   "secondChild": {
-    "firstName": "E2E-second-Child",
+    "firstName": "E2E-Second-Child",
     "middleName": "Junior",
     "lastName": "Playwright",
+    "fullName": "E2E-Second-Child Junior Playwright",
     "birthDate": {
       "MM": "07",
       "DD": "20",
@@ -98,9 +117,10 @@
     "phone": "6177147000"
   },
   "thirdChild": {
-    "firstName": "E2E-Child",
+    "firstName": "E2E-Third-Child",
     "middleName": "Junior",
     "lastName": "Playwright",
+    "fullName": "E2E-Third-Child Junior Playwright",
     "birthDate": {
       "MM": "07",
       "DD": "20",

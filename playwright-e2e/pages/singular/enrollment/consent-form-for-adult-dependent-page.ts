@@ -40,7 +40,7 @@ export default class ConsentFormForAdultDependentPage extends SingularPage {
    * <br> Question: Your Dependent Date of Birth
    * <br> Type: Question
    */
-  dateOfBirth(): Question {
+  dpendentDateOfBirth(): Question {
     return new Question(this.page, { prompt: 'Your Dependent Date of Birth' });
   }
 
@@ -70,8 +70,8 @@ export default class ConsentFormForAdultDependentPage extends SingularPage {
    * @param date
    * @param year
    */
-  async fillDateOfBirth(month: number | string, date: number | string, year: number | string): Promise<void> {
-    const dob = this.dateOfBirth();
+  async fillInDateOfBirth(month: number | string, date: number | string, year: number | string): Promise<void> {
+    const dob = this.dpendentDateOfBirth();
     await dob.date().locator('input[data-placeholder="MM"]').fill(month.toString());
     await dob.date().locator('input[data-placeholder="DD"]').fill(date.toString());
     await dob.date().locator('input[data-placeholder="YYYY"]').fill(year.toString());
