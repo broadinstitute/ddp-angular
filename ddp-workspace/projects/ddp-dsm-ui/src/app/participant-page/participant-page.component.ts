@@ -651,7 +651,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
       const patch1 = new PatchUtil(
         oncHis.oncHistoryDetailId, this.role.userMail(), {name: parameterName, value: v},
         null, 'participantId', oncHis.participantId, Statics.ONCDETAIL_ALIAS, null,
-        realm, this.participant.participant.ddpParticipantId
+        realm, this.participant.data.profile['guid']
       );
       const patch = patch1.getPatch();
       this.patchFinished = false;
