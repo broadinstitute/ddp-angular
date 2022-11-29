@@ -43,7 +43,7 @@
 
     <ng-template #errorTemplate let-erroredStatistics="erroredStatistics">
       <div class="errorContent">
-        <p class="errorContent-message">Error occurred while fetching {{erroredStatistics}} data</p>
+        <p class="errorContent-message">An error occurred while gathering the {{erroredStatistics.slice(0, -1)}} data</p>
         <button
           class="errorContent-button"
           matTooltip="Retry again in the selected dates range"
