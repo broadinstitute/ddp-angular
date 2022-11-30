@@ -9,7 +9,7 @@ test.describe('Home page', () => {
   test('Our teams @visual @singular', async ({ page, homePage }) => {
     await homePage.gotoURLPath('/about');
     const headerText = page.locator('.our-team h1');
-
+    await expect(headerText).toHaveText('Our Team');
     await expect(headerText).toHaveScreenshot('our-team-text.png');
     await expect(page.locator('.our-team .cards')).toHaveScreenshot(
       'our-team-cards.png', { mask: [page.locator('img'), page.locator('.header')] }
