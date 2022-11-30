@@ -33,7 +33,6 @@ import {ParticipantUpdateResultDialogComponent} from '../dialogs/participant-upd
 import {AddFamilyMemberComponent} from '../popups/add-family-member/add-family-member.component';
 import {Sample} from '../participant-list/models/sample.model';
 import {ParticipantDSMInformation} from '../participant-list/models/participant.model';
-import {ActivityData} from '../activity-data/activity-data.model';
 
 const fileSaver = require('file-saver');
 
@@ -189,7 +188,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
       && this.participant.data.medicalProviders != null && this.participant.medicalRecords != null
       && this.participant.data.medicalProviders.length > 0 && this.participant.medicalRecords.length > 0);
 
-    this.sortActivities();
+    this.displayActivityOrder();
     this.addMedicalProviderInformation();
     if(this.role.allowedToDoOrderSequencing()) {
       this.getMercuryEligibleSamples();
@@ -267,16 +266,18 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
     this.subscriptions.unsubscribe();
   }
 
-  sortActivities(): void {
-    this.participant.data.activities.sort(
-      ({activityCode: previousActivityCode}: ActivityData, {activityCode: currentActivityCode}: ActivityData) =>
-        this.displayOrder(previousActivityCode) - this.displayOrder(currentActivityCode)
-    );
-  }
+  displayActivityOrder(): void {
+    const orderedActivities = [];
+    this.activityDefinitions instanceof Array &&
+    [...this.activityDefinitions]
+      .sort(({displayOrder: A}, {displayOrder: B}) => A - B)
+      .forEach(activity => {
+        const foundActivity = this.participant.data.activities
+          .find(a => activity.activityCode === a.activityCode && activity.activityVersion === a.activityVersion);
+        foundActivity && orderedActivities.push(foundActivity);
+      });
 
-  private displayOrder(activityCode: string): number {
-    return this.activityDefinitions.find((activityDefinition: ActivityDefinition) =>
-      activityDefinition.activityCode === activityCode).displayOrder;
+    this.participant.data.activities = orderedActivities;
   }
 
   showFamilyMemberPopUpOnClick(): void {
