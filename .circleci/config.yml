@@ -37,7 +37,7 @@ executors:
     resource_class: medium+
     docker:
       # Playwright docker image version MUST match Playwright version in project
-      - image: mcr.microsoft.com/playwright:v1.25.0-focal
+      - image: mcr.microsoft.com/playwright:v1.28.0-focal
     working_directory: *playwright_path
     environment:
       NODE_ENV: development # Needed if playwright is in devDependencies
