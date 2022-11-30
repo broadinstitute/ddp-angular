@@ -33,7 +33,7 @@ import {ParticipantUpdateResultDialogComponent} from '../dialogs/participant-upd
 import {AddFamilyMemberComponent} from '../popups/add-family-member/add-family-member.component';
 import {Sample} from '../participant-list/models/sample.model';
 import {ParticipantDSMInformation} from '../participant-list/models/participant.model';
-import {ActivityData} from "../activity-data/activity-data.model";
+import {ActivityData} from '../activity-data/activity-data.model';
 
 const fileSaver = require('file-saver');
 
