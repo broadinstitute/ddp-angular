@@ -1,0 +1,8 @@
+<testsuites id="" name="" tests="1" failures="0" skipped="1" errors="0" time="103.21681900000573">
+<testsuite name="enrollment/adult-self-enrollment.spec.ts" timestamp="1669933887039" hostname="" tests="1" failures="0" skipped="1" time="0" errors="0">
+<testcase name="Enroll myself as adult can complete self-enrollment @enrollment @pancan" classname="[chromium] › enrollment/adult-self-enrollment.spec.ts › Enroll myself as adult › can complete self-enrollment @enrollment @pancan" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+</testsuites>
