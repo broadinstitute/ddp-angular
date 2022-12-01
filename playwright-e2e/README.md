@@ -49,20 +49,23 @@ Note: Update docker image version when upgrading Playwright version
 - Change dir to **/playwright-e2e**
   > cd playwright-e2e/
 
-- Start Playwright docker image
-  > docker run -v $PWD:/e2e -w /e2e -it --rm --ipc=host mcr.microsoft.com/playwright:v1.28.0-focal /bin/bash
+- Start running Playwright docker image
+  > docker run -v $PWD:/e2e -w /e2e -it --rm -d --ipc=host -p 9323:9323 mcr.microsoft.com/playwright:v1.28.0-focal /bin/bash
 
-- Install dependencies in docker container
+- Install dependencies inside docker container
   > npm install
-  >
+
   > npx playwright install
 
-- Start running tests in docker container
+- Start running tests inside docker container
   - For example, to run Singular tests, change dir to **/singular** first
-    > cd tests/singular
-    > 
-    > npx playwright test pre-screening-page-visual.spec.ts -u
-
+  > cd tests/singular
+    
+  > npx playwright test pre-screening-page-visual.spec.ts -u
+    
+- To view test results
+  - In another Terminal window (outside docker container), from **/playwright-e2e** dir, run command:
+  > npx playwright show-report html-test-results
 
 ## Run Tests Using `npx` from the Command-Line
 
@@ -108,7 +111,7 @@ In **/tests/singular** dir, run Singular tests only:
   * For example, to run `login-visual.spec.ts` test:
   > npx cross-env SITE_PASSWORD=<SITE_PASSWORD> SINGULAR_USER_EMAIL=<EMAIL> SINGULAR_USER_PASSWORD=<YOUR_PASSWORD> SINGULAR_BASE_URL=<HOME_URL> npx playwright test --config=playwright.config.ts login-visual.spec.ts
 
-### Running tests on CI
+### Running tests on CircleCI
   - CI workflow name is `playwright-e2e-test-workflow`. Trigger this workflow via `build-utils/run_ci.sh`.
     - If this is the first time, set personal CI token in `$HOME/.circleci-token` file. To know how to generate a personal token, see https://app.circleci.com/settings/user/tokens
     - `<STUDY_NAME>` Any study name. It's required parameter by the shell script, but it's not used to run Playwright tests for targeted study. All tests will run.
