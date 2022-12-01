@@ -1,66 +1,134 @@
-import {Component, OnInit} from '@angular/core';
-import {EMPTY, Observable, Subject} from 'rxjs';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {DashboardStatisticsService} from '../services/dashboard-statistics.service';
-import {RoleService} from '../services/role.service';
-import {catchError, finalize} from 'rxjs/operators';
-import {HttpErrorResponse} from '@angular/common/http';
-import {CountsModel} from './models/Counts.model';
+import {catchError, finalize, map, switchMap, take} from 'rxjs/operators';
 import {DatePipe} from '@angular/common';
-import {DateRangeModel} from './models/DateRange.model';
+import {IDateRange} from './interfaces/IDateRange';
+import {StatisticsEnum} from './enums/statistics.enum';
+import {EMPTY, Observable, Subject, Subscription, tap} from 'rxjs';
+import {MatTabChangeEvent} from '@angular/material/tabs';
+import {ErrorsService} from '../services/errors.service';
 
 /**
- * @TODO refactor this component and write unit tests
+ * For type safety, add new statistics name here as well
  */
+type StatisticsName = 'charts' | 'counts';
+
+interface IStatistics {
+  name: StatisticsName;
+  matIconName: string;
+  data: any;
+}
+
+interface IErrorHas {
+  charts: boolean;
+  counts: boolean;
+}
+
 @Component({
   selector: 'app-dashboard-statistics',
   templateUrl: './dashboard-statistics.component.html',
   styleUrls: ['./dashboard-statistics.component.scss'],
   providers: [DatePipe]
 })
+export class DashboardStatisticsComponent implements OnInit, OnDestroy {
+  /**
+   * If there is any other type of statistics, just add here
+   */
+  public readonly statisticsCollection: IStatistics[] = [
+    {name: 'charts', matIconName: 'bar_chart', data: null},
+    {name: 'counts', matIconName: 'score', data: null}
+  ];
 
-export class DashboardStatisticsComponent implements OnInit {
-  Charts: Observable<any>;
-  Counts: Observable<CountsModel[]>;
-  errorMessage = new Subject();
-  hasRequiredRole;
-  loading = true;
-  dateRange: DateRangeModel = {startDate: null, endDate: null};
+  /**
+   * If you need to display error for particular type of
+   * statistics, just add in this object
+   */
+  public errorHas: IErrorHas = {charts: false, counts: false};
 
-  constructor(
-    private dashboardStatisticsService: DashboardStatisticsService,
-    private roleService: RoleService,
-  ) {
+  public dateRange: IDateRange = {startDate: null, endDate: null};
+  public loading = false;
+
+  /**
+   * Add here name of the statistics you want to be selected
+   * and initialized for the first time
+   */
+  private activeTab: StatisticsName = 'charts';
+  private isDateChanged = false;
+
+  private readonly statisticsSubject$: Subject<void> = new Subject<void>();
+  private readonly statisticsSubjectSubscription$: Subscription;
+
+  constructor(private dashboardStatisticsService: DashboardStatisticsService, private errorService: ErrorsService) {
+    this.statisticsSubjectSubscription$ = this.statisticsSubject$
+      .pipe(
+        tap(() => this.loading = true),
+        map(() => this.enumeratedActiveTab),
+        switchMap((statisticsEnum: StatisticsEnum) =>
+          this.dashboardStatisticsService.getStatisticsFor(statisticsEnum, this.dateRange)
+            .pipe(
+              take(1),
+              catchError(this.handleError.bind(this)),
+              finalize(() => this.loading = false)
+            )
+        )
+      )
+      .subscribe({next: this.initializeData.bind(this)});
   }
 
   ngOnInit(): void {
-    this.initData();
+    this.statisticsSubject$.next();
   }
 
-  private initData(): void {
-    this.hasRequiredRole = this.roleService.allowedToViewEELData();
-    this.Charts = this.dashboardStatisticsService.ChartFactory(this.dateRange)
-      .pipe(catchError(this.catchErrorAndReturnArray.bind(this)), finalize(() => this.loading = false));
-    this.Counts = this.dashboardStatisticsService.Counts;
+  ngOnDestroy(): void {
+    this.statisticsSubjectSubscription$.unsubscribe();
   }
 
-  public dateChanged(dateRange: DateRangeModel): void {
-    console.log(dateRange, 'DATE - dashboard.statistics');
-    this.loading = true;
-    this.dateRange = dateRange;
-    this.initData();
-  }
-
-  get getConfiguration(): any {
-    return {
-      responsive: true,
-      displaylogo: false
-    };
-  }
-
-  private catchErrorAndReturnArray(error: HttpErrorResponse): Observable<never> {
-    if(error instanceof HttpErrorResponse) {
-      this.errorMessage.next(error);
+  public getStatisticsFor({tab}: MatTabChangeEvent): void {
+    this.activeTab = tab.ariaLabel as StatisticsName;
+    if(this.allowStatisticsUpdate) {
+      this.statisticsSubject$.next();
+      this.isDateChanged = false;
     }
+  }
+
+  public dateChanged(dateRange: IDateRange): void {
+    this.loading = true;
+    this.isDateChanged = true;
+    this.dateRange = dateRange;
+    this.statisticsSubject$.next();
+  }
+
+  public retry(): void {
+    this.loading = true;
+    this.statisticsSubject$.next();
+  }
+
+  public get selectedTabIndex(): number {
+    return this.statisticsCollection.findIndex(statistics => statistics.name === this.activeTab);
+  }
+
+  private get allowStatisticsUpdate(): boolean {
+    return (!this.activeTabStatObj.data || this.isDateChanged || this.errorHas[this.activeTab]) && !this.loading;
+  }
+
+  private get enumeratedActiveTab(): StatisticsEnum {
+    return StatisticsEnum[this.activeTab.slice(0, -1).toUpperCase()];
+  }
+
+  private get activeTabStatObj(): IStatistics {
+    return this.statisticsCollection.find(statistics => statistics.name === this.activeTab);
+  }
+
+  private initializeData(countsOrCharts: any): void {
+    this.errorHas[this.activeTab] = false;
+    const activeTab = this.activeTabStatObj;
+    activeTab.data = countsOrCharts;
+    this.errorService.dismiss();
+  }
+
+  private handleError(_: any): Observable<never> {
+    this.errorHas[this.activeTab] = true;
     return EMPTY;
   }
+
 }

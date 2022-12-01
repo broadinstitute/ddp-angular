@@ -4,7 +4,7 @@
     <input  matInput (keyup)="applyFilter($event)" placeholder="Ex. Mr | Ex. 50" #input>
   </mat-form-field>
 
-  <table mat-table [dataSource]="CountsArray" class="mat-elevation-z8" matSort>
+  <table mat-table [dataSource]="countsArray" class="mat-elevation-z8" matSort>
 
     <ng-container *ngFor="let column of columnNames" [matColumnDef]="column">
       <th mat-header-cell *matHeaderCellDef [mat-sort-header]="column"> {{column | titlecase}} </th>

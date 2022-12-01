@@ -1,4 +1,4 @@
-export interface DateRangeErrorModel {
+export interface IDateRangeError {
   startDate: string[];
   endDate: string[];
 }

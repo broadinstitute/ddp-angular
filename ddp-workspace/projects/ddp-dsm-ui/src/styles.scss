@@ -1,6 +1,7 @@
 @import 'styles/variables';
 @import 'styles/activities';
 @import 'styles/buttons';
+@import 'styles/fonts';
 
 md-hint.ErrorMessageForm {
   font-size: 14px;
@@ -16,6 +17,10 @@ input::-webkit-inner-spin-button {
   /* display: none; <- Crashes Chrome on hover */
   -webkit-appearance: none;
   margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+.snackbarRestyleError {
+  background-color: #b72c2c;
 }
 
 .Input label,

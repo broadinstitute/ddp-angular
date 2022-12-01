@@ -1,0 +1,10 @@
+<main class="snackbar" >
+  <mat-icon matTooltip="See Errors History" (click)="seeMore()">history</mat-icon>
+
+  <div class="snackbar-content" matTooltip="The latest HTTP error response">
+    <p class="snackbar-content-header">HTTP ERROR RESPONSE</p>
+    <p class="snackbar-content-statusCode">Status Code: <span class="snackbar-content-statusCode-status">{{httpErrorResponse.status}}</span></p>
+  </div>
+
+  <button matTooltip="Close"  mat-icon-button (click)="close()"><mat-icon>close</mat-icon></button>
+</main>

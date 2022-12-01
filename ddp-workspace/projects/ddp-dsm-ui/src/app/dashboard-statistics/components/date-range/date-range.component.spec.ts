@@ -7,7 +7,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {TestbedHarnessEnvironment} from '@angular/cdk/testing/testbed';
 import {expect} from '@angular/flex-layout/_private-utils/testing';
-import {DateRangeModel} from '../../models/DateRange.model';
+import {IDateRange} from '../../interfaces/IDateRange';
 import {MatDateRangeInputHarness, MatEndDateHarness, MatStartDateHarness} from '@angular/material/datepicker/testing';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {ReactiveFormsModule} from '@angular/forms';
@@ -31,7 +31,7 @@ describe('dateRangeComponent', () => {
   const OUTPUT_DATE_FORMAT = 'YYYY-MM-dd';
 
   const datePipe: DatePipe = new DatePipe('en-US');
-  const testData: DateRangeModel = {startDate: new Date(0), endDate: new Date()};
+  const testData: IDateRange = {startDate: new Date(0), endDate: new Date()};
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
@@ -152,7 +152,7 @@ describe('dateRangeComponent', () => {
       const startDate: Date = new Date(0);
       const endDate: Date = new Date(1994, 10, 10);
 
-      component.dateChanged.subscribe((dateRange: DateRangeModel) => {
+      component.dateChanged.subscribe((dateRange: IDateRange) => {
         expect(dateRange).toEqual(getTransformedOutputDates({startDate, endDate}));
       });
 
@@ -160,7 +160,7 @@ describe('dateRangeComponent', () => {
     });
 
     it('should reset and output the value', async () => {
-      component.dateChanged.subscribe((dateRange: DateRangeModel) => {
+      component.dateChanged.subscribe((dateRange: IDateRange) => {
         expect(dateRange).toEqual(getTransformedOutputDates({startDate: null, endDate: null}));
       });
 
@@ -195,7 +195,7 @@ describe('dateRangeComponent', () => {
    * @param endDate
    * Used for generating whole transformed date ranges object
    */
-  const getTransformedOutputDates = ({startDate, endDate}: DateRangeModel): DateRangeModel => ({
+  const getTransformedOutputDates = ({startDate, endDate}: IDateRange): IDateRange => ({
       startDate: transformDateFormat(startDate, OUTPUT_DATE_FORMAT),
       endDate: transformDateFormat(endDate, OUTPUT_DATE_FORMAT)
     });
@@ -277,7 +277,7 @@ describe('dateRangeComponent', () => {
    * @param endDate
    * Used for setting both dates
    */
-  const setBothDates = async ({startDate, endDate}: DateRangeModel): Promise<void> => {
+  const setBothDates = async ({startDate, endDate}: IDateRange): Promise<void> => {
     await setDateValue('start', startDate);
     await setDateValue('end', endDate);
   };
