@@ -59,7 +59,7 @@ import { ActivatedRoute, Router } from '@angular/router';
                 <button
                     mat-menu-item
                     *ngFor="let lang of getUnselectedLanguages()"
-                    (click)="changeLanguage(lang); shouldUpdateQueryParam ? updateURLParam() : clearURLParam();"
+                    (click)="changeLanguage(lang, true); shouldUpdateQueryParam ? updateURLParam() : clearURLParam();"
                 >
                     {{lang.displayName}}
                 </button>
@@ -174,7 +174,7 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
             || (language.languageCode !== this.currentLanguage.languageCode));
     }
 
-    public changeLanguage(lang: StudyLanguage): void {
+    public changeLanguage(lang: StudyLanguage, fromButton = false): void {
         if (this.currentLanguage && this.currentLanguage.languageCode === lang.languageCode) {
             return;
         }
@@ -186,7 +186,7 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
                 const langObs: Observable<any> = this.language.changeLanguageObservable(lang.languageCode);
                 let sub;
                 // not update user profile language if language was taken from URL
-                if (this.hasUserProfile() && !this.route.snapshot.queryParamMap.get(this.languageQueryParam)) {
+                if (this.hasUserProfile() && (fromButton || !this.route.snapshot.queryParamMap.get(this.languageQueryParam))) {
                     sub = this.launchPopup();
                     const sub2 = this.updateProfileLanguage().pipe(concatMap(() => langObs)).subscribe();
                     this.anchor.addNew(sub2);
