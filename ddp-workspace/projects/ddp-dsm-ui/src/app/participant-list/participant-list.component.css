@@ -4,6 +4,10 @@
   margin-bottom: 0;
 }
 
+hr, ul {
+  margin: 0!important;
+}
+
 .NO-PADDING-START{
   padding-inline-start: 0;
   list-style-type:none;
