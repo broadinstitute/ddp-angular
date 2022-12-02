@@ -41,6 +41,6 @@
   <div *ngIf="duplicateDetected">
     <h3 class="Color--warn">Please fix duplicate label before saving the scan pairs</h3>
   </div>
-  <button *ngIf="!scanReceived" mat-raised-button type="button" (click)="savePairs()" color="primary" [disabled]="isSixCharacters()">Save Scan Pairs</button>
+  <button *ngIf="!scanReceived" mat-raised-button type="button" (click)="savePairs()" color="primary" [disabled]="isNotSixCharacters()">Save Scan Pairs</button>
   <button *ngIf="scanReceived" mat-raised-button type="button" (click)="saveValues()" color="primary" [disabled]="scanValues.length < 2">Save SM-IDs</button>
 </form>

@@ -451,12 +451,18 @@ export class ScanComponent implements OnInit {
     return null;
   }
 
-  isSixCharacters(): boolean {
+  isNotSixCharacters(): boolean {
+    if(!this.initialScan)
+    {
+      return this.scanPairs.length < 2
+    }
+
     if(this.scanPairsValue.length === 0) {
       return true;
     }
     for (var pair in this.scanPairsValue) {
-      if(this.scanPairsValue[pair]['rightValue'].length !== 6) {
+      if(this.scanPairsValue[pair]['rightValue'].length !== 6 ||
+      this.scanPairsValue[pair]['leftValue'].length === 0) {
         return true;
       }
     }
