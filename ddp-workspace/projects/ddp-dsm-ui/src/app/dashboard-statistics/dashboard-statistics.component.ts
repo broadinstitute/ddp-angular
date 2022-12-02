@@ -7,6 +7,7 @@ import {StatisticsEnum} from './enums/statistics.enum';
 import {EMPTY, Observable, Subject, Subscription, tap} from 'rxjs';
 import {MatTabChangeEvent} from '@angular/material/tabs';
 import {ErrorsService} from '../services/errors.service';
+import {RoleService} from "../services/role.service";
 
 /**
  * For type safety, add new statistics name here as well
@@ -64,7 +65,11 @@ export class DashboardStatisticsComponent implements OnInit, OnDestroy {
   private readonly statisticsSubject$: Subject<void> = new Subject<void>();
   private readonly statisticsSubjectSubscription$: Subscription;
 
-  constructor(private dashboardStatisticsService: DashboardStatisticsService, private errorService: ErrorsService) {
+  constructor(
+    private dashboardStatisticsService: DashboardStatisticsService,
+    private errorService: ErrorsService,
+    private roleService: RoleService,
+  ) {
     this.statisticsSubjectSubscription$ = this.statisticsSubject$
       .pipe(
         tap(() => this.loading = true),
@@ -87,6 +92,10 @@ export class DashboardStatisticsComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.statisticsSubjectSubscription$.unsubscribe();
+  }
+
+  public get canView(): boolean {
+    return this.roleService.viewStatisticsDashboard;
   }
 
   public getStatisticsFor({tab}: MatTabChangeEvent): void {

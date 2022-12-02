@@ -33,6 +33,7 @@ export class RoleService {
   private _isDownloadParticipantFile = false;
   private _hasKitSequencingOrder = false;
   private _viewOnlyDssData = false;
+  private _viewStatisticsDashboard = false;
 
   private _userId: string;
   private _user: string;
@@ -136,6 +137,9 @@ export class RoleService {
             this._isDownloadParticipantFile = true;
           } else if(entry === 'view_only_dss_data') {
             this._viewOnlyDssData = true;
+          }
+          else if(entry === "dashboard_view") {
+            this._viewStatisticsDashboard = true;
           }
         }
       }
@@ -280,5 +284,9 @@ export class RoleService {
 
   public get viewOnlyDSSData(): boolean {
     return this._viewOnlyDssData;
+  }
+
+  public get viewStatisticsDashboard(): boolean {
+    return this._viewStatisticsDashboard;
   }
 }

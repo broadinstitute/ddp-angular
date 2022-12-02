@@ -2,7 +2,7 @@
   Statistics Dashboard
 </h1>
 
-<div class="dashboard">
+<div *ngIf="canView" class="dashboard">
   <app-date-range [disabled]="isLoading" [initDates]="dateRange" (dateChanged)="dateChanged($event)" ></app-date-range>
 
   <div class="dashboard-chartsAndCounts">
