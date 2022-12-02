@@ -450,4 +450,16 @@ export class ScanComponent implements OnInit {
     }
     return null;
   }
+
+  isSixCharacters(): boolean {
+    if(this.scanPairsValue.length === 0) {
+      return true;
+    }
+    for (var pair in this.scanPairsValue) {
+      if(this.scanPairsValue[pair]['rightValue'].length !== 6) {
+        return true;
+      }
+    }
+    return false;
+  }
 }
