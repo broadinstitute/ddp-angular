@@ -52,7 +52,7 @@ export default class Table {
 
   /**
    * In table, find the cell value in one column based on the cell value in another column.
-   * Two table cells have to be in the same row.
+   * Two cells have to be in the same row.
    *
    * @param searchHeader Column header: Search for cell value in this column. The row that contains this cell is
    *   used to find the other cell in resultColumnHeader
@@ -63,7 +63,6 @@ export default class Table {
    */
   async findCell(searchHeader: string, searchCellValue: string, resultHeader: string): Promise<Locator | null> {
     // Find the searchColumnHeader index
-    await this.page.pause();
     const columnNames = await this.getHeaderNames();
     const columnIndex = columnNames.findIndex((text) => text === searchHeader);
     if (columnIndex === -1) {
@@ -95,7 +94,6 @@ export default class Table {
    */
   async getHeaderNames(): Promise<Array<string>> {
     const columns = await this.headerLocator().elementHandles();
-    // const columns = await this.page.locator(this.headerCss).elementHandles();
     return await Promise.all(
       _.map(columns, async (column) => {
         return await column.innerText();
