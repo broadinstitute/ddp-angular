@@ -138,7 +138,7 @@ export class RoleService {
           } else if(entry === 'view_only_dss_data') {
             this._viewOnlyDssData = true;
           }
-          else if(entry === "dashboard_view") {
+          else if(entry === 'dashboard_view') {
             this._viewStatisticsDashboard = true;
           }
         }

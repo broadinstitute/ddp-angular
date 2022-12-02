@@ -7,7 +7,7 @@ import {StatisticsEnum} from './enums/statistics.enum';
 import {EMPTY, Observable, Subject, Subscription, tap} from 'rxjs';
 import {MatTabChangeEvent} from '@angular/material/tabs';
 import {ErrorsService} from '../services/errors.service';
-import {RoleService} from "../services/role.service";
+import {RoleService} from '../services/role.service';
 
 /**
  * For type safety, add new statistics name here as well
