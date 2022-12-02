@@ -166,7 +166,7 @@ test.describe('Adult Enrollment', () => {
     expect(statusCell).toBeTruthy();
     await expect((await statusCell?.innerText()) ?? '').toContain('Complete');
 
-    const todayDate = new Date().toLocaleDateString();
+    const todayDate = new Date().toLocaleDateString('en-US', { day: '2-digit', month: '2-digit', year: 'numeric' });
     const createdCell = await dashboardTable.findCell('Form', 'Initial Enrollment Survey', 'Created');
     await expect((await createdCell?.innerText()) ?? 'null').toEqual(todayDate);
   });
