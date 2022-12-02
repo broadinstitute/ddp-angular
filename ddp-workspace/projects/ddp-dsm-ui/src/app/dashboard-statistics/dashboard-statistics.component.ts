@@ -98,14 +98,14 @@ export class DashboardStatisticsComponent implements OnInit, OnDestroy {
   }
 
   public dateChanged(dateRange: IDateRange): void {
-    this.loading = true
+    this.loading = true;
     this.isDateChanged = true;
     this.dateRange = dateRange;
     this.statisticsSubject$.next();
   }
 
   public retry(): void {
-    this.loading = true
+    this.loading = true;
     this.statisticsSubject$.next();
   }
 
@@ -113,7 +113,7 @@ export class DashboardStatisticsComponent implements OnInit, OnDestroy {
     return this.statisticsCollection.findIndex(statistics => statistics.name === this.activeTab);
   }
 
-  public getLoadingStateFor(tabName: string) {
+  public getLoadingStateFor(tabName: string): boolean {
     return this['loading_' + tabName];
   }
 
