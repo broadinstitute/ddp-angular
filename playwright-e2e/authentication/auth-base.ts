@@ -40,5 +40,6 @@ export async function createAccountWithEmailAlias(
   }
   const emailAlias = generateEmailAlias(email);
   await fillInEmailPassword(page, { email: emailAlias, password });
-  return email;
+  console.log(`Created account with email: ${emailAlias}`);
+  return emailAlias;
 }

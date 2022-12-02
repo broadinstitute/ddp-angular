@@ -22,7 +22,7 @@ export default class MyDashboardPage extends SingularPage {
   }
 
   getDashboardTable(): Table {
-    return new Table(this.page, { classAttribute: '.dashboard-table' });
+    return new Table(this.page, { cssClassAttribute: '.dashboard-table' });
   }
 
   getViewFamilyEnrollmentMessageButton(): Locator {
