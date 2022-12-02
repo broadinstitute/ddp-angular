@@ -135,7 +135,7 @@ export class DashboardStatisticsComponent implements OnInit, OnDestroy {
   }
 
   private get allowStatisticsUpdate(): boolean {
-    return (!this.activeTabStatObj.data || this.isDateChanged || this.errorHas[this.activeTab]) && !this['loading' + this.activeTab];
+    return (!this.activeTabStatObj.data || this.isDateChanged || this.errorHas[this.activeTab]) && !this.isLoading;
   }
 
   private get enumeratedActiveTab(): StatisticsEnum {
