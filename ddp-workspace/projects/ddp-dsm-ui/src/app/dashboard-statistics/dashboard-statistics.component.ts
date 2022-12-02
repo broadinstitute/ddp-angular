@@ -7,6 +7,7 @@ import {StatisticsEnum} from './enums/statistics.enum';
 import {EMPTY, Observable, Subject, Subscription, tap} from 'rxjs';
 import {MatTabChangeEvent} from '@angular/material/tabs';
 import {ErrorsService} from '../services/errors.service';
+import {RoleService} from '../services/role.service';
 
 /**
  * For type safety, add new statistics name here as well
@@ -46,19 +47,29 @@ export class DashboardStatisticsComponent implements OnInit, OnDestroy {
   public errorHas: IErrorHas = {charts: false, counts: false};
 
   public dateRange: IDateRange = {startDate: null, endDate: null};
-  public loading = false;
 
   /**
    * Add here name of the statistics you want to be selected
    * and initialized for the first time
    */
-  private activeTab: StatisticsName = 'charts';
+  public activeTab: StatisticsName = 'charts';
+
+  /**
+   * Loading states for each type of statistics
+   */
+  private loading_charts = false;
+  private loading_counts = false;
+
   private isDateChanged = false;
 
   private readonly statisticsSubject$: Subject<void> = new Subject<void>();
   private readonly statisticsSubjectSubscription$: Subscription;
 
-  constructor(private dashboardStatisticsService: DashboardStatisticsService, private errorService: ErrorsService) {
+  constructor(
+    private dashboardStatisticsService: DashboardStatisticsService,
+    private errorService: ErrorsService,
+    private roleService: RoleService,
+  ) {
     this.statisticsSubjectSubscription$ = this.statisticsSubject$
       .pipe(
         tap(() => this.loading = true),
@@ -81,6 +92,10 @@ export class DashboardStatisticsComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.statisticsSubjectSubscription$.unsubscribe();
+  }
+
+  public get canView(): boolean {
+    return this.roleService.viewStatisticsDashboard;
   }
 
   public getStatisticsFor({tab}: MatTabChangeEvent): void {
@@ -107,8 +122,20 @@ export class DashboardStatisticsComponent implements OnInit, OnDestroy {
     return this.statisticsCollection.findIndex(statistics => statistics.name === this.activeTab);
   }
 
+  public getLoadingStateFor(tabName: string): boolean {
+    return this['loading_' + tabName];
+  }
+
+  public get isLoading(): boolean {
+    return this.loading_charts || this.loading_counts;
+  }
+
+  private set loading(isLoading: boolean) {
+    this['loading_' + this.activeTab] = isLoading;
+  }
+
   private get allowStatisticsUpdate(): boolean {
-    return (!this.activeTabStatObj.data || this.isDateChanged || this.errorHas[this.activeTab]) && !this.loading;
+    return (!this.activeTabStatObj.data || this.isDateChanged || this.errorHas[this.activeTab]) && !this.isLoading;
   }
 
   private get enumeratedActiveTab(): StatisticsEnum {
