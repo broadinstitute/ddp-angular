@@ -46,13 +46,19 @@ export class DashboardStatisticsComponent implements OnInit, OnDestroy {
   public errorHas: IErrorHas = {charts: false, counts: false};
 
   public dateRange: IDateRange = {startDate: null, endDate: null};
-  public loading = false;
 
   /**
    * Add here name of the statistics you want to be selected
    * and initialized for the first time
    */
-  private activeTab: StatisticsName = 'charts';
+  public activeTab: StatisticsName = 'charts';
+
+  /**
+   * Loading states for each type of statistics
+   */
+  private loading_charts = false;
+  private loading_counts = false;
+
   private isDateChanged = false;
 
   private readonly statisticsSubject$: Subject<void> = new Subject<void>();
@@ -92,14 +98,14 @@ export class DashboardStatisticsComponent implements OnInit, OnDestroy {
   }
 
   public dateChanged(dateRange: IDateRange): void {
-    this.loading = true;
+    this.loading = true
     this.isDateChanged = true;
     this.dateRange = dateRange;
     this.statisticsSubject$.next();
   }
 
   public retry(): void {
-    this.loading = true;
+    this.loading = true
     this.statisticsSubject$.next();
   }
 
@@ -107,8 +113,20 @@ export class DashboardStatisticsComponent implements OnInit, OnDestroy {
     return this.statisticsCollection.findIndex(statistics => statistics.name === this.activeTab);
   }
 
+  public getLoadingStateFor(tabName: string) {
+    return this['loading_' + tabName];
+  }
+
+  public get isLoading(): boolean {
+    return this.loading_charts || this.loading_counts;
+  }
+
+  private set loading(isLoading: boolean) {
+    this['loading_' + this.activeTab] = isLoading;
+  }
+
   private get allowStatisticsUpdate(): boolean {
-    return (!this.activeTabStatObj.data || this.isDateChanged || this.errorHas[this.activeTab]) && !this.loading;
+    return (!this.activeTabStatObj.data || this.isDateChanged || this.errorHas[this.activeTab]) && !this['loading' + this.activeTab];
   }
 
   private get enumeratedActiveTab(): StatisticsEnum {
