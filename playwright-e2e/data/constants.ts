@@ -1,3 +1,7 @@
+export enum APP {
+  RPG = 'RGP'
+}
+
 /**
  * Checkbox labels for Question "Who in your family has single ventricle heart defect?"
  */

@@ -2,7 +2,7 @@
  * Functional tests for the Home page
  */
 import {test} from '@playwright/test';
-import {getAccessToken, getUserID} from 'utils/user-email-verification';
+import {getAccessToken, getUserID} from 'utils/auth-api';
 
 test.describe('Auth0', () => {
   // eslint-disable-next-line no-empty-pattern
