@@ -6,22 +6,16 @@ import { Locator, Page } from '@playwright/test';
 export default class Dropdown {
   private readonly page: Page;
   private readonly locator: Locator;
-  private readonly label: string;
 
   constructor(page: Page, label: string, opts: { exactMatch?: boolean } = {}) {
     const { exactMatch = true } = opts;
     this.page = page;
-    this.label = label;
-    const textSelector = exactMatch ? `text="${this.label}"` : `text=${this.label}`;
+    const textSelector = exactMatch ? `text="${label}"` : `text=${label}`;
     this.locator = this.page.locator('li.dropdown').filter({ has: this.page.locator(textSelector) });
   }
 
   toLocator(): Locator {
     return this.locator;
-  }
-
-  getLabel(): string {
-    return this.label;
   }
 
   /**
