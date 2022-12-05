@@ -10,71 +10,63 @@ import * as user from 'data/fake-user.json';
 import { enterMailingAddress } from 'utils/test-utils';
 import MedicalReleaseFormPage from 'pages/pancan/enrollment/medical-release-form';
 import { expect } from '@playwright/test';
+import { TypePersonData } from '../../../pages/pancan/enrollment/utils/PersonType';
 
 test.describe('Enroll myself as adult', () => {
-    test('can complete self-enrollment @enrollment @pancan', async ({ context, page, homePage }) => {
-        await homePage.join();
-        // Randomize last name
-        const lastName = generateUserName(user.patient.lastName);
+  test('can complete self-enrollment @enrollment @pancan', async ({ context, page, homePage }) => {
+    await homePage.join();
+    // Randomize last name
+    const lastName = generateUserName(user.patient.lastName);
 
-        // Step 1
-        // On “pre-screening” page, answer all questions about yourself with fake values
-        const preScreeningPage = new PreScreeningPage(page);
-        await preScreeningPage.waitForReady();
-        await preScreeningPage.whoIsSigningUp().check("I have been diagnosed with cancer(s) and I'm signing myself up.", { exactMatch: true });
-        await preScreeningPage.next();
-        //diagnosis page
-        const preScreeningDiagnosisPage = new PreScreeningDiagnosisPage(page);
-        await preScreeningDiagnosisPage.waitForReady();
-        await preScreeningDiagnosisPage.cancerDiagnosed().input().fill("Cervical cancer");
-        await preScreeningDiagnosisPage.getNextButton().waitFor({state:"visible"});
-        await preScreeningDiagnosisPage.next();
-        //age/location page
-        const preScreeningAgeLocationPage =  new PreScreeningAgeLocationPage(page);
-        await preScreeningAgeLocationPage.waitForReady();
-        await preScreeningAgeLocationPage.enterInformationAboutAgeLocation();
+    // Step 1
+    // On “pre-screening” page, answer all questions about yourself with fake values
+    const preScreeningPage = new PreScreeningPage(page);
+    await preScreeningPage.waitForReady();
+    await preScreeningPage.whoIsSigningUp().check(TypePersonData.adult.whoIsSigningUp, { exactMatch: true });
+    await preScreeningPage.next();
+    //diagnosis page
+    const preScreeningDiagnosisPage = new PreScreeningDiagnosisPage(page);
+    await preScreeningDiagnosisPage.waitForReady();
+    await preScreeningDiagnosisPage.cancerDiagnosed().input().fill(TypePersonData.adult.cancerDiagnosed.cancer);
+    await preScreeningDiagnosisPage.getNextButton().waitFor({ state: 'visible' });
+    await preScreeningDiagnosisPage.next();
+    //age/location page
+    const preScreeningAgeLocationPage = new PreScreeningAgeLocationPage(page);
+    await preScreeningAgeLocationPage.waitForReady();
+    await preScreeningAgeLocationPage.enterInformationAboutAgeLocation();
 
+    // Step 2
+    // Enter email alias and password to create new account
+    await auth.createAccountWithEmailAlias(page);
 
+    // Step 3
+    // On "Consent Form" page, Page 1 of 3.
+    await assertActivityHeader(page, 'Research Consent Form');
+    await assertActivityStep(page, '1');
+    const consentFormPage = new ConsentFormPage(page);
+    await consentFormPage.next();
+    // On "Consent Form" page, Page 2 of 3.
+    await assertActivityStep(page, '2');
+    await consentFormPage.next();
+    // On "Consent Form" page, Page 3 of 3.
+    await assertActivityStep(page, '3');
+    await consentFormPage.bloodSamples();
+    await consentFormPage.cancerSamples();
+    await consentFormPage.firstName().fill(user.patient.firstName);
+    await consentFormPage.lastName().fill(lastName);
+    await consentFormPage.dateOfBirth(user.patient.birthDate.MM, user.patient.birthDate.DD, user.patient.birthDate.YYYY);
+    await consentFormPage.signature().fill(`${user.patient.firstName} ${lastName}`);
+    await enterMailingAddress(page, { fullName: `${user.patient.firstName} ${lastName}` }, 'Phone');
+    await consentFormPage.submit();
+    //On "Medical Release Form"
+    await assertActivityHeader(page, 'Medical Release Form');
+    const medicalReleaseFormPage = new MedicalReleaseFormPage(page);
+    await medicalReleaseFormPage.waitForReady();
+    await medicalReleaseFormPage.enterPhysicianData();
+    await medicalReleaseFormPage.contactPhysician().toLocator().click();
+    await medicalReleaseFormPage.submit();
 
-
-        // Step 2
-        // Enter email alias and password to create new account
-        await auth.createAccountWithEmailAlias(page);
-
-
-
-        // Step 3
-        // On "Consent Form" page, Page 1 of 3.
-        await assertActivityHeader(page, 'Research Consent Form');
-        await assertActivityStep(page,'1');
-        const consentFormPage = new ConsentFormPage(page);
-        await consentFormPage.next();
-        // On "Consent Form" page, Page 2 of 3.
-        await assertActivityStep(page,'2');
-        await consentFormPage.next();
-        // On "Consent Form" page, Page 3 of 3.
-        await assertActivityStep(page,'3');
-        await consentFormPage.bloodSamples();
-        await consentFormPage.cancerSamples();
-        await consentFormPage.firstName().fill(user.patient.firstName);
-        await consentFormPage.lastName().fill(lastName);
-        await consentFormPage.dateOfBirth(user.patient.birthDate.MM, user.patient.birthDate.DD, user.patient.birthDate.YYYY);
-        await consentFormPage.signature().fill(`${user.patient.firstName} ${lastName}`);
-        await enterMailingAddress(page, { fullName: `${user.patient.firstName} ${lastName}` },"Phone");
-        await consentFormPage.submit();
-        //On "Medical Release Form"
-        await assertActivityHeader(page, 'Medical Release Form');
-        const medicalReleaseFormPage = new MedicalReleaseFormPage(page);
-        await medicalReleaseFormPage.waitForReady();
-        await medicalReleaseFormPage.enterPhysicianData();
-        await medicalReleaseFormPage.contactPhysician().toLocator().click();
-        await medicalReleaseFormPage.submit();
-
-
-
-
-
- /*  await auth.createAccountWithEmailAlias(page);
+    /*  await auth.createAccountWithEmailAlias(page);
         const myDashboardPage = new MyDashboardPage(page);
         await myDashboardPage.enrollMyself();
 
@@ -178,6 +170,5 @@ test.describe('Enroll myself as adult', () => {
         const statusCell = await table.findCellLocator('Title', 'Consent', 'Status');
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         await expect(statusCell!).toHaveText('Complete'); */
-    });
-
+  });
 });
