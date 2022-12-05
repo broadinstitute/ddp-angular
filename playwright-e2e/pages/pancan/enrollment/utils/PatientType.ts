@@ -2,18 +2,18 @@ interface CancerDiagnosed {
   prompt: string;
   cancer: string;
 }
-interface PersonData {
+interface PatientData {
   whoIsSigningUp: string;
   cancerDiagnosed: CancerDiagnosed;
 }
 
-export type TypePerson = 'child' | 'adult';
+export type typePatient = 'child' | 'adult';
 
-export type Person = {
-  [index in TypePerson]: PersonData;
+export type Patient = {
+  [index in typePatient]: PatientData;
 };
 
-export const TypePersonData: Person = {
+export const PatientsData: Patient = {
   child: {
     whoIsSigningUp: 'My child has been diagnosed with cancer(s) and I am signing up for them or with them.',
     cancerDiagnosed: {

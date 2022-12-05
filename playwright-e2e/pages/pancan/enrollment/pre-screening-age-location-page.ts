@@ -1,18 +1,20 @@
-import { Page } from "@playwright/test";
-import Question from "lib/component/Question";
-import Input from "lib/widget/Input";
-import { PancanPage } from "../pancan-page";
+import { Page } from '@playwright/test';
+import Question from 'lib/component/Question';
+import Input from 'lib/widget/Input';
+import { PancanPage } from '../pancan-page';
 import * as fake from 'data/fake-user.json';
 
 export default class PreScreeningAgeLocationPage extends PancanPage {
-    constructor(page:Page){
-        super(page);
-    }
-    async waitForReady(): Promise<void> {
-        await this.age().toLocator().waitFor({state: "visible"});
-        await this.country().toLocator().waitFor({state: "visible"});
-    }
-   /**
+  constructor(page: Page) {
+    super(page);
+  }
+
+  async waitForReady(): Promise<void> {
+    await this.age().toLocator().waitFor({ state: 'visible' });
+    await this.country().toLocator().waitFor({ state: 'visible' });
+  }
+
+  /**
    * <br> Question: How old are you?
    * <br> Type: Input
    */
@@ -46,11 +48,7 @@ export default class PreScreeningAgeLocationPage extends PancanPage {
     } = {}
   ): Promise<void> {
     // Fake data from fake-user.json
-    const {
-      age = fake.patient.age,
-      country = fake.patient.country.abbreviation,
-      state = fake.patient.state.abbreviation,
-    } = opts;
+    const { age = fake.patient.age, country = fake.patient.country.abbreviation, state = fake.patient.state.abbreviation } = opts;
 
     await this.age().fill(age);
     await this.country().select().selectOption(country);
@@ -58,5 +56,4 @@ export default class PreScreeningAgeLocationPage extends PancanPage {
     await this.state().select().selectOption(state);
     await this.submit();
   }
-
 }
