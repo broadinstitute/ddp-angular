@@ -43,4 +43,9 @@
   </div>
   <button *ngIf="!scanReceived" mat-raised-button type="button" (click)="savePairs()" color="primary" [disabled]="isNotSixCharacters()">Save Scan Pairs</button>
   <button *ngIf="scanReceived" mat-raised-button type="button" (click)="saveValues()" color="primary" [disabled]="scanValues.length < 2">Save SM-IDs</button>
+  <br/>
+  <br/>
+  <ng-container *ngIf="!scanReceived && isNotSixCharacters() && initialScan">
+    ShortID Must be 6 Characters long and Kit Label cannot be blank
+  </ng-container>
 </form>

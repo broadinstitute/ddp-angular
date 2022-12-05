@@ -460,7 +460,7 @@ export class ScanComponent implements OnInit {
     if(this.scanPairsValue.length === 0) {
       return true;
     }
-    for (var pair in this.scanPairsValue) {
+    for (let pair in this.scanPairsValue) {
       if(this.scanPairsValue[pair]['rightValue'].length !== 6 ||
       this.scanPairsValue[pair]['leftValue'].length === 0) {
         return true;
