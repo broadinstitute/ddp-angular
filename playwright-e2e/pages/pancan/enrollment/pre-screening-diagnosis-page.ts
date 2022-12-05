@@ -1,7 +1,7 @@
 import { Page } from '@playwright/test';
 import Question from 'lib/component/Question';
 import { PancanPage } from '../pancan-page';
-import {TypePerson, TypePersonData} from './utils/PersonType';
+import {TypePerson, PatientsData} from './utils/PatientType';
 
 export default class PreScreeningDiagnosisPage extends PancanPage {
   typePerson;
@@ -20,6 +20,6 @@ export default class PreScreeningDiagnosisPage extends PancanPage {
    * <br> Type: Select
    */
   cancerDiagnosed(): Question {
-    return new Question(this.page, { prompt: TypePersonData[this.typePerson].cancerDiagnosed.prompt });
+    return new Question(this.page, { prompt: PatientsData[this.typePerson].cancerDiagnosed.prompt });
   }
 }

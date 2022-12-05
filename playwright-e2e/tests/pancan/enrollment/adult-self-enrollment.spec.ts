@@ -10,7 +10,7 @@ import * as user from 'data/fake-user.json';
 import { enterMailingAddress } from 'utils/test-utils';
 import MedicalReleaseFormPage from 'pages/pancan/enrollment/medical-release-form';
 import { expect } from '@playwright/test';
-import { TypePersonData } from '../../../pages/pancan/enrollment/utils/PersonType';
+import { PatientsData } from '../../../pages/pancan/enrollment/utils/PatientType';
 
 test.describe('Enroll myself as adult', () => {
   test('can complete self-enrollment @enrollment @pancan', async ({ context, page, homePage }) => {
@@ -22,12 +22,12 @@ test.describe('Enroll myself as adult', () => {
     // On “pre-screening” page, answer all questions about yourself with fake values
     const preScreeningPage = new PreScreeningPage(page);
     await preScreeningPage.waitForReady();
-    await preScreeningPage.whoIsSigningUp().check(TypePersonData.adult.whoIsSigningUp, { exactMatch: true });
+    await preScreeningPage.whoIsSigningUp().check(PatientsData.adult.whoIsSigningUp, { exactMatch: true });
     await preScreeningPage.next();
     //diagnosis page
     const preScreeningDiagnosisPage = new PreScreeningDiagnosisPage(page);
     await preScreeningDiagnosisPage.waitForReady();
-    await preScreeningDiagnosisPage.cancerDiagnosed().input().fill(TypePersonData.adult.cancerDiagnosed.cancer);
+    await preScreeningDiagnosisPage.cancerDiagnosed().input().fill(PatientsData.adult.cancerDiagnosed.cancer);
     await preScreeningDiagnosisPage.getNextButton().waitFor({ state: 'visible' });
     await preScreeningDiagnosisPage.next();
     //age/location page
