@@ -1,14 +1,18 @@
 /**
  * Functional tests for the Home page
  */
-import {test} from '@playwright/test';
-import {getAccessToken, getUserID} from 'utils/auth-api';
+import { test } from '@playwright/test';
+import { APP } from 'data/constants';
+import { getAuth0AccessToken, setAuth0UserEmailVerified } from 'utils/api-utils';
 
 test.describe('Auth0', () => {
-  // eslint-disable-next-line no-empty-pattern
   test('request', async ({ page }) => {
-    console.log('begin');
-    await getAccessToken();
-    // await getUserID('rgpbug1003@mailinator.com', )
+    const accessToken = await getAuth0AccessToken(APP.RPG);
+
+    // const userId = await getAuth0UserId(APP.RPG, 'rgpbug1003@mailinator.com', accessToken);
+    // console.log('user_id: ', userId);
+
+    const res = await setAuth0UserEmailVerified(APP.RPG, 'rgpbug1003@mailinator.com', accessToken, { isEmailVerified: false });
+    console.log(res)
   });
 });
