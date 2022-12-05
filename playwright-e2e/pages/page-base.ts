@@ -73,20 +73,8 @@ export default abstract class PageBase implements PageInterface {
     return this.page.goto(`${this.baseUrl}${urlPath}`, { waitUntil: 'load' });
   }
 
-  /**
-   *
-   * @param {Locator} locator
-   * @param {{waitForNav?: boolean, forceClick?: boolean}} opts
-   *  <br> - forceClick: Whether to bypass error message checks before click. If set to true, click regardless an error on page. Defaults to false.
-   *  <br> - waitForNav: Whether to wait for page navigation to complete after click. Defaults to false.
-   * @returns {Promise<void>}
-   * @protected
-   */
-  protected async clickAndWaitForNav(locator: Locator, opts: { waitForNav?: boolean; forceClick?: boolean } = {}): Promise<void> {
-    const { waitForNav = false, forceClick = false } = opts;
-    if (!forceClick) {
-      await expect(this.page.locator('.error-message')).toBeHidden();
-    }
+  protected async clickAndWaitForNav(locator: Locator, opts: { waitForNav?: boolean } = {}): Promise<void> {
+    const { waitForNav = false } = opts;
     waitForNav ? await this.waitForNavAfter(() => locator.click()) : await locator.click();
   }
 
