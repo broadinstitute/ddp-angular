@@ -62,7 +62,7 @@ export default class PreScreeningPage {
 
   async checkReCaptcha(): Promise<void> {
     const iframe = this.page.frameLocator('css=iframe[title="reCAPTCHA"]');
-    await iframe.locator('css=span[role="checkbox"]').waitFor({ state: 'visible' });
+    await iframe.locator('css=span[role="checkbox"]').waitFor({ state: 'visible', timeout: 15 * 1000 });
     await iframe.locator('css=span[role="checkbox"]').dispatchEvent('click');
     await iframe
       .locator('.recaptcha-checkbox-spinner[style*="animation-play-state: running;"]')

@@ -1,5 +1,6 @@
 import { expect, Locator, Page, Response } from '@playwright/test';
 import Question from 'lib/component/Question';
+import { waitUntilRemoved } from 'utils/test-utils';
 import { PageInterface } from './page-interface';
 
 export default abstract class PageBase implements PageInterface {
@@ -85,7 +86,7 @@ export default abstract class PageBase implements PageInterface {
   protected async clickAndWaitForNav(locator: Locator, opts: { waitForNav?: boolean; forceClick?: boolean } = {}): Promise<void> {
     const { waitForNav = false, forceClick = false } = opts;
     if (!forceClick && waitForNav) {
-      await expect(this.page.locator('.error-message')).toBeHidden();
+      await waitUntilRemoved(this.page.locator('.error-message'));
     }
     waitForNav ? await this.waitForNavAfter(() => locator.click()) : await locator.click();
   }
