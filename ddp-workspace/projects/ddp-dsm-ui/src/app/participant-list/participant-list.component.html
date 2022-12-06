@@ -46,7 +46,7 @@
     <div *ngIf="getRealm() != null && loadingParticipants === null && participantList != null">
       <div class="Width--15 Float--left">
         <div>
-          <mat-checkbox [checked]="selectAll"
+          <mat-checkbox [checked]="allColumnsSelected"
                         color="primary"
                         (change)="toggleColumns($event.checked)">
             {{selectAllColumnsLabel}}

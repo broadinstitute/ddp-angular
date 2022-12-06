@@ -130,10 +130,11 @@ export class ParticipantListComponent implements OnInit {
   jsonPatch: any;
   viewFilter: any;
   private start: number;
-  selectAll = false;
   selectAllColumnsLabel = 'Select all';
   selectedPatients: string[] = [];
   searchForRGP = false;
+  private reservedDefaultSelectedColumns;
+  public allColumnsSelected = false;
 
   constructor(private role: RoleService, private dsmService: DSMService, private compService: ComponentService,
                private router: Router, private auth: Auth, private route: ActivatedRoute, private util: Utils,
@@ -1384,7 +1385,6 @@ export class ParticipantListComponent implements OnInit {
   }
 
   public doFilter(): void {
-    this.selectAll = this.selectedColumns['allSelected'];
     this.resetPagination();
     this.resetSelectedPatients();
     const json = [];
@@ -2435,11 +2435,25 @@ export class ParticipantListComponent implements OnInit {
 
 
   toggleColumns(checked: boolean): void {
-    if (checked) {
-      this.prevSelectedColumns = this.selectedColumns;
-      this.selectedColumns = Object.assign({}, {...this.sourceColumns, allSelected: true});
-    } else {
-      this.selectedColumns = this.prevSelectedColumns;
+    if(!this.reservedDefaultSelectedColumns) {
+      this.reservedDefaultSelectedColumns = this.copyColumns(this.selectedColumns);
     }
+    if(checked) {
+      this.selectedColumns = this.copyColumns(this.sourceColumns);
+      this.allColumnsSelected = true;
+    } else {
+      this.allColumnsSelected = false;
+      this.selectedColumns = this.reservedDefaultSelectedColumns;
+    }
+  }
+
+
+  private copyColumns(columns: {[key:string]: Filter[]}): {[key:string]: Filter[]}  {
+    const copiedColumns = {};
+    Object.entries(columns as {[key: string]: Filter[]}).forEach(([key, value]) => {
+      copiedColumns[key] = [];
+      copiedColumns[key].push(...value);
+    })
+    return copiedColumns;
   }
 }
