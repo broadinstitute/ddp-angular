@@ -30,6 +30,7 @@ export class ScanComponent implements OnInit {
   initialScan = false;
   scanValues: Array<ScanValueComponent> = [];
   private singleScanValues: Array<ScanValue> = [];
+  scanErrorMsg = '';
 
   constructor(private _changeDetectionRef: ChangeDetectorRef, private dsmService: DSMService, private router: Router,
               private auth: Auth, private route: ActivatedRoute) {
@@ -95,6 +96,7 @@ export class ScanComponent implements OnInit {
   }
 
   public validateRightValue(position: number): boolean {
+    this.makeScanErrorMsg();
     if (this.scanPairsValue.length > 0 && this.scanPairsValue[position] != null) {
       return this.validateValue(this.scanPairsValue[position].rightValue, position, false);
     }
@@ -102,6 +104,7 @@ export class ScanComponent implements OnInit {
   }
 
   public validateLeftValue(position: number): boolean {
+    this.makeScanErrorMsg();
     if (this.scanPairsValue.length > 0 && this.scanPairsValue[position] != null) {
       return this.validateValue(this.scanPairsValue[position].leftValue, position, true);
     }
@@ -451,7 +454,7 @@ export class ScanComponent implements OnInit {
     return null;
   }
 
-  isNotSixCharacters(): boolean {
+  public areScanPairsValid(): boolean {
     if(!this.initialScan)
     {
       return this.scanPairs.length < 2;
@@ -467,5 +470,23 @@ export class ScanComponent implements OnInit {
       }
     }
     return false;
+  }
+
+  public makeScanErrorMsg(): void {
+
+    this.scanErrorMsg = '';
+
+    for (const pair in this.scanPairsValue) {
+      if(this.scanPairsValue[pair]['rightValue'].length !== 6 &&
+      this.scanPairsValue[pair]['leftValue'].length === 0) {
+        this.scanErrorMsg = 'Kit Label cannot be blank and ShortID must be 6 characters long';
+      }
+      else if(this.scanPairsValue[pair]['rightValue'].length !== 6) {
+        this.scanErrorMsg = 'ShortID must be 6 characters long';
+      }
+      else if(this.scanPairsValue[pair]['leftValue'].length === 0) {
+        this.scanErrorMsg = 'Kit Label cannot be blank';
+      }
+    }
   }
 }

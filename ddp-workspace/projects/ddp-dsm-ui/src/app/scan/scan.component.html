@@ -41,11 +41,11 @@
   <div *ngIf="duplicateDetected">
     <h3 class="Color--warn">Please fix duplicate label before saving the scan pairs</h3>
   </div>
-  <button *ngIf="!scanReceived" mat-raised-button type="button" (click)="savePairs()" color="primary" [disabled]="isNotSixCharacters()">Save Scan Pairs</button>
+  <button *ngIf="!scanReceived" mat-raised-button type="button" (click)="savePairs()" color="primary" [disabled]="areScanPairsValid()">Save Scan Pairs</button>
   <button *ngIf="scanReceived" mat-raised-button type="button" (click)="saveValues()" color="primary" [disabled]="scanValues.length < 2">Save SM-IDs</button>
   <br/>
   <br/>
-  <ng-container *ngIf="!scanReceived && isNotSixCharacters() && initialScan">
-    ShortID Must be 6 Characters long and Kit Label cannot be blank
+  <ng-container *ngIf="!scanReceived && initialScan">
+    {{scanErrorMsg}}
   </ng-container>
 </form>
