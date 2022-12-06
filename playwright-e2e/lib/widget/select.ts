@@ -25,11 +25,18 @@ export default class Select extends WidgetBase {
     return this.elementLocator;
   }
 
-  async selectOption(option: string): Promise<void> {
+  /**
+   *
+   * Select by `option.value`.
+   *
+   * @param {string | {value?: string, label?: string}} value
+   * @returns {Promise<void>}
+   */
+  async selectOption(value: string): Promise<void> {
     const tagName = await this.toLocator().evaluate((elem) => elem.tagName);
     switch (tagName) {
       case 'SELECT':
-        await this.toLocator().selectOption(option);
+        await this.toLocator().selectOption(value);
         break;
       default:
         // Click first to open mat-select dropdown
@@ -38,7 +45,7 @@ export default class Select extends WidgetBase {
         const ariaControlsId = await this.toLocator().getAttribute('aria-controls');
         await this.page
           .locator(`#${ariaControlsId}[role="listbox"]`)
-          .locator(`mat-option .mat-option-text >> text="${option}"`)
+          .locator(`mat-option .mat-option-text >> text="${value}"`)
           .click();
         break;
     }

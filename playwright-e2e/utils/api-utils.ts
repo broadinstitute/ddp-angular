@@ -1,4 +1,23 @@
+import { promises as fsPromises } from 'fs';
+import path from 'path';
 import { APP } from 'data/constants';
+
+// Stores AUTH0 access token for targeted app.
+// Created automatically when the authorization flow completes for the first time.
+const getTokenPath = (app: APP) => path.join(process.cwd(), app, 'token.txt');
+
+/**
+ * Reads previously authorized credentials from the save file.
+ */
+async function loadSavedAccessTokenIfExist(app: APP): Promise<string | null> {
+  try {
+    const contents = await fsPromises.readFile(getTokenPath(app), { encoding: 'utf-8' });
+    console.log(`read stored ${app} access_token:\n`, contents.toString());
+    return contents.toString();
+  } catch (err) {
+    return null;
+  }
+}
 
 /**
  * Build Auth0 client credentials
@@ -13,8 +32,8 @@ function buildAuth0ClientInfo(app: APP): string {
 
   switch (app) {
     case 'RGP':
-      clientId = process.env.RGP_CLIENT_ID;
-      clientSecret = process.env.RGP_CLIENT_SECRET;
+      clientId = process.env.RGP_AUTH0_CLIENT_ID;
+      clientSecret = process.env.RGP_AUTH0_CLIENT_SECRET;
       audience = process.env.RGP_AUTH0_AUDIENCE;
       domain = process.env.RGP_AUTH0_DOMAIN;
       break;
@@ -37,31 +56,12 @@ function buildAuth0ClientInfo(app: APP): string {
  * @returns {Promise<void>}
  */
 export async function getAuth0AccessToken(app: APP): Promise<string> {
+  const savedAccessToken = await loadSavedAccessTokenIfExist(app);
+  if (savedAccessToken) {
+    return savedAccessToken;
+  }
+
   const credentials = JSON.parse(buildAuth0ClientInfo(app));
-
-  /*
-  const options = {
-    method: 'POST',
-    url: `https://${credentials.domain}/oauth/token`,
-    headers: { 'content-type': 'application/x-www-form-urlencoded' },
-    data: new URLSearchParams({
-      grant_type: 'client_credentials',
-      client_id: `${credentials.client_id}`,
-      client_secret: `${credentials.client_secret}`,
-      audience: `${credentials.audience}`
-    })
-  };
-
-  return axios
-    .request(options)
-    .then((response) => {
-      return response.data.access_token;
-    })
-    .catch((err) => {
-      console.error(err);
-      throw err;
-    });
-   */
 
   return fetch(`https://${credentials.domain}/oauth/token`, {
     method: 'POST',
@@ -93,26 +93,6 @@ export async function getAuth0AccessToken(app: APP): Promise<string> {
 export async function getAuth0UserByEmail(app: APP, email: string, accessToken: string): Promise<string> {
   const credentials = JSON.parse(buildAuth0ClientInfo(app));
 
-  /*
-  const options = {
-    method: 'GET',
-    url: `https://${credentials.domain}/api/v2/users-by-email`,
-    params: { email: userEmail },
-    headers: { authorization: `Bearer ${accessToken}` }
-  };
-
-  return axios
-    .request(options)
-    .then((response) => {
-      // console.log('response.data: ', response.data)
-      return response.data[0].user_id;
-    })
-    .catch((err) => {
-      console.error(err);
-      throw err;
-    });
-  */
-
   return fetch(`https://${credentials.domain}/api/v2/users-by-email?${new URLSearchParams({ email })}`, {
     method: 'GET',
     headers: { Authorization: `Bearer ${accessToken}` }
@@ -136,38 +116,13 @@ export async function getAuth0UserByEmail(app: APP, email: string, accessToken: 
 export async function setAuth0UserEmailVerified(
   app: APP,
   email: string,
-  accessToken: string,
-  opts: { isEmailVerified?: boolean }
+  opts: { isEmailVerified?: boolean; accessToken?: string }
 ): Promise<string> {
   const credentials = JSON.parse(buildAuth0ClientInfo(app));
-  const { isEmailVerified = true } = opts;
+  const { isEmailVerified = true, accessToken = await getAuth0AccessToken(app) } = opts;
   const user = await getAuth0UserByEmail(app, email, accessToken);
 
-  // console.log('user:\n', user)
-  // console.log('user stringfy:\n', JSON.stringify(user))
-
   const userId = JSON.parse(JSON.stringify(user)).user_id;
-  console.log('user_id: ', userId)
-
-  /*
-  const options = {
-    method: 'PATCH',
-    url: `https://${credentials.domain}/api/v2/users/${userId}`,
-    headers: { Authorization: `Bearer ${accessToken}` },
-    data: { email_verified: isEmailVerified }
-  };
-
-  return axios
-    .request(options)
-    .then((response) => {
-      console.log(response.data);
-    })
-    .catch((err) => {
-      console.error(err);
-      throw err;
-    });
-
-   */
 
   return fetch(`https://${credentials.domain}/api/v2/users/${userId}`, {
     method: 'PATCH',
@@ -180,11 +135,8 @@ export async function setAuth0UserEmailVerified(
       }
       return Promise.reject(JSON.stringify(await res.json()));
     })
-    .then((json) => {
-      return json;
-    })
     .catch((err) => {
-      console.error('ERROR: PATCH /api/v2/users/$id\n', err);
+      console.error(`ERROR: PATCH /api/v2/users/${userId}\n`, err);
       throw err;
     });
 }

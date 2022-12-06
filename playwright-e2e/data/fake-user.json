@@ -1,5 +1,6 @@
 {
   "patient": {
+    "title": "MR",
     "firstName": "E2E",
     "middleName": "Tester",
     "lastName": "Playwright",
