@@ -2448,12 +2448,12 @@ export class ParticipantListComponent implements OnInit {
   }
 
 
-  private copyColumns(columns: {[key:string]: Filter[]}): {[key:string]: Filter[]}  {
+  private copyColumns(columns: {[key: string]: Filter[]}): {[key: string]: Filter[]}  {
     const copiedColumns = {};
     Object.entries(columns as {[key: string]: Filter[]}).forEach(([key, value]) => {
       copiedColumns[key] = [];
       copiedColumns[key].push(...value);
-    })
+    });
     return copiedColumns;
   }
 }
