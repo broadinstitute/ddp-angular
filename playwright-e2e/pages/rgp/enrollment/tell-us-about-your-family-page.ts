@@ -15,9 +15,9 @@ export default class TellUsAboutYourFamilyPage extends RgpPageBase {
   }
 
   async waitForReady(): Promise<void> {
+    await waitForNoSpinner(this.page);
     await expect(this.activityText).toBeVisible({ visible: true });
     await expect(this.activityText).toHaveText('Tell us about your family');
-    await waitForNoSpinner(this.page);
   }
 
   /**
@@ -106,8 +106,8 @@ export default class TellUsAboutYourFamilyPage extends RgpPageBase {
 
   /**
    * Clinical Diagnoses Details
-   * Answered 'Yes' to Question: 'Have any clinical diagnoses been made?'
-   * <br> Type: Input
+   * <br> Answered 'Yes' to Question: 'Have any clinical diagnoses been made?'
+   * <br> Type: TextArea
    */
   clinicalDiagnosesDetails(): Input {
     return new Input(this.page, { ddpTestID: 'answer:CLINICAL_DIAGNOSES_DETAILS' });
@@ -120,6 +120,15 @@ export default class TellUsAboutYourFamilyPage extends RgpPageBase {
    */
   haveAnyGeneticDiagnosesBeenMade(): Question {
     return new Question(this.page, { prompt: 'Have any genetic diagnoses been made?' });
+  }
+
+  /**
+   * GENETIC_DIAGNOSES_DETAILS
+   * <br> Answered 'Yes' to Question 'Have any genetic diagnoses been made?'
+   * <br> Type: Input
+   */
+  geneticDiagnosesDetails(): TextArea {
+    return new TextArea(this.page, { ddpTestID: 'answer:GENETIC_DIAGNOSES_DETAILS' });
   }
 
   /**

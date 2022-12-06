@@ -1,4 +1,4 @@
-import {expect, Page} from '@playwright/test';
+import { expect, Page } from '@playwright/test';
 import * as auth from 'authentication/auth-rgp';
 import * as user from 'data/fake-user.json';
 import { APP } from 'data/constants';
@@ -12,7 +12,6 @@ import { setAuth0UserEmailVerified } from 'utils/api-utils';
 const { RGP_USER_EMAIL, RGP_USER_PASSWORD } = process.env;
 
 test.describe('Adult Self Enrollment', () => {
-
   const assertProgressActiveItem = async (page: Page, itemName: string): Promise<void> => {
     const locator = page.locator('li.activity-stepper__step-container button.stepper-btn.stepper-btn--active');
     await expect(locator).toHaveCount(1);
@@ -68,12 +67,15 @@ test.describe('Adult Self Enrollment', () => {
     await tellUsAboutYourFamilyPage.haveAnyClinicalDiagnosesBeenMade().check('Yes');
     // pop-up input after check Yes in above question
     await tellUsAboutYourFamilyPage.clinicalDiagnosesDetails().fill('Single-gene disorders');
-    await tellUsAboutYourFamilyPage.howDidYouFindOutAboutThisProject().check('Doctor');
+    await tellUsAboutYourFamilyPage.haveAnyGeneticDiagnosesBeenMade().check('Yes');
+    await tellUsAboutYourFamilyPage.geneticDiagnosesDetails().fill('Single-gene disorders');
+    await tellUsAboutYourFamilyPage
+      .howDidYouFindOutAboutThisProject()
+      .checkAndFillInInput('Doctor', { inputText: user.doctor.name });
     await tellUsAboutYourFamilyPage.howDidYouFindOutAboutThisProject().check('Twitter');
-
-    await page.pause();
-
     await tellUsAboutYourFamilyPage.next();
+
+    await assertProgressActiveItem(page, '2');
 
     await page.pause();
     //
