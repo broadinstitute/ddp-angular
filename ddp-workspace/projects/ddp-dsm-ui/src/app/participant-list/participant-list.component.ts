@@ -1266,7 +1266,7 @@ export class ParticipantListComponent implements OnInit {
       this.selectedColumns[ parent ].splice(foundColumnItemIndex, 1);
     } else {
       const indexToBeInsertedIn: number = this.insertionIndex(parent, column);
-      this.selectedColumns[ parent ].splice(indexToBeInsertedIn, 0, column)
+      this.selectedColumns[ parent ].splice(indexToBeInsertedIn, 0, column);
     }
   }
 
@@ -1285,14 +1285,14 @@ export class ParticipantListComponent implements OnInit {
       return foundFilterIndexInSelectedColumns + 1;
     }
 
-    return this.insertionIndex(parent, previousFilter)
+    return this.insertionIndex(parent, previousFilter);
   }
 
   private findIndexIn(columns: {[key: string]: Filter[]},parent: string, filter_value: Filter): number {
     return columns[parent].findIndex((filter: Filter) =>
       filter.participantColumn.tableAlias === filter_value.participantColumn.tableAlias &&
       filter.participantColumn.name === filter_value.participantColumn.name
-    )
+    );
   }
 
   private isDataOfViewFilterExists(): boolean {
