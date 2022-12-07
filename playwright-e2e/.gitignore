@@ -4,6 +4,7 @@ node_modules/
 **/playwright-report/
 **/playwright/.cache/
 build/
+junit/
 
 **/.env
 

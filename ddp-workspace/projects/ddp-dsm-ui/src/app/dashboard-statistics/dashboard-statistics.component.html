@@ -2,56 +2,72 @@
   Statistics Dashboard
 </h1>
 
-<div class="dashboard">
-
-  <app-date-range [disabled]="loading" [initDates]="dateRange" (dateChanged)="dateChanged($event)" ></app-date-range>
+<div *ngIf="canView" class="dashboard">
+  <app-date-range [disabled]="isLoading" [initDates]="dateRange" (dateChanged)="dateChanged($event)" ></app-date-range>
 
   <div class="dashboard-chartsAndCounts">
-
     <mat-tab-group [selectedIndex]="selectedTabIndex" mat-stretch-tabs  (selectedTabChange)="getStatisticsFor($event)" mat-align-tabs="center" >
-
-      <mat-tab *ngFor="let statistics of statisticsCollection" [disabled]="loading" [aria-label]="statistics.name">
+      <mat-tab *ngFor="let statistics of statisticsCollection" [disabled]="isLoading" [aria-label]="statistics.name">
         <ng-template mat-tab-label>
           <mat-icon>{{statistics.matIconName}}</mat-icon>
           {{statistics.name | titlecase}}
         </ng-template>
 
-        <ng-container *ngIf="!loading; else loadingSpinner">
-
-          <ng-container *ngIf="errorHas[statistics.name]">
-            <ng-container *ngTemplateOutlet="errorTemplate; context: {erroredStatistics: statistics.name}"></ng-container>
-          </ng-container>
-
-          <!--If you want new statistics to be displayed, add in this container as well-->
-          <ng-container [ngSwitch]="statistics.name">
-            <app-plotly-charts *ngSwitchCase="'charts'" [chartData]="statistics.data"></app-plotly-charts>
-            <app-counts-table  *ngSwitchCase="'counts'" [counts]="statistics.data"></app-counts-table>
-          </ng-container>
+        <!--Error notifier-->
+        <ng-container *ngIf="errorHas[statistics.name]">
+          <ng-container *ngTemplateOutlet="errorTemplate; context: {erroredStatistics: statistics.name}"></ng-container>
         </ng-container>
+
+        <!--Statistics container-->
+        <ng-container
+          *ngTemplateOutlet="displayStatistics; context: {name: statistics.name, data: statistics.data}">
+        </ng-container>
+
       </mat-tab>
-
     </mat-tab-group>
-
-
-    <!-- Templates-->
-
-    <ng-template  #loadingSpinner>
-      <div class="spinner">
-        <mat-spinner></mat-spinner>
-      </div>
-    </ng-template>
-
-    <ng-template #errorTemplate let-erroredStatistics="erroredStatistics">
-      <div class="errorContent">
-        <p class="errorContent-message">An error occurred while gathering the {{erroredStatistics.slice(0, -1)}} data</p>
-        <button
-          class="errorContent-button"
-          matTooltip="Retry again in the selected dates range"
-          mat-flat-button color="warn"
-          (click)="retry()">Try Again</button>
-      </div>
-    </ng-template>
-
   </div>
-
 </div>
+
+
+
+
+<!-- Templates-->
+
+<ng-template #displayStatistics let-name="name" let-data="data">
+  <!--If you want new statistics to be displayed, add in this container as well-->
+  <ng-container [ngSwitch]="name">
+
+    <ng-container  *ngSwitchCase="'charts'">
+      <ng-container *ngIf="!getLoadingStateFor(name); else loadingSpinner">
+        <app-plotly-charts [chartData]="data"></app-plotly-charts>
+      </ng-container>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'counts'" >
+      <ng-container *ngIf="!getLoadingStateFor(name); else loadingSpinner">
+        <app-counts-table [counts]="data"></app-counts-table>
+      </ng-container>
+    </ng-container>
+
+  </ng-container>
+
+</ng-template>
+
+<!--Loading template-->
+<ng-template  #loadingSpinner>
+  <div class="spinner">
+    <mat-spinner></mat-spinner>
+  </div>
+</ng-template>
+
+<!--Error notifier template-->
+<ng-template #errorTemplate let-erroredStatistics="erroredStatistics">
+  <div class="errorContent">
+    <p class="errorContent-message">An error occurred while gathering the {{erroredStatistics.slice(0, -1)}} data</p>
+    <button
+      class="errorContent-button"
+      matTooltip="Retry again in the selected dates range"
+      mat-flat-button color="warn"
+      (click)="retry()">Try Again</button>
+  </div>
+</ng-template>
