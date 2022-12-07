@@ -81,3 +81,7 @@ export const STATES = [
   'Wisconsin',
   'Wyoming'
 ];
+
+export enum APP {
+  RPG = 'RGP'
+}
