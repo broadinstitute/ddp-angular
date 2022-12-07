@@ -197,8 +197,8 @@ export class ScanComponent implements OnInit {
           this.scanPairsValue.forEach(element => {
             if(element.rightValue !== '' && element.leftValue !== '') {
             scanPayloads.push({
-              kitLabel: element.rightValue,
-              trackingReturnId: element.leftValue
+              kitLabel: element.leftValue,
+              trackingReturnId: element.rightValue
             })};
           });
           this.dsmService.trackingScan(JSON.stringify(scanPayloads))
@@ -215,8 +215,8 @@ export class ScanComponent implements OnInit {
           this.scanPairsValue.forEach(element => {
             if(element.rightValue !== '' && element.leftValue !== '') {
             scanPayloads.push({
-              kitLabel: element.rightValue,
-              trackingReturnId: element.leftValue
+              kitLabel: element.leftValue,
+              hruid: element.rightValue
             })};
           });
           this.dsmService.initialScan(JSON.stringify(scanPayloads))
@@ -233,8 +233,8 @@ export class ScanComponent implements OnInit {
           this.scanPairsValue.forEach(element => {
             if(element.rightValue !== '' && element.leftValue !== '') {
             scanPayloads.push({
-              kitLabel: element.rightValue,
-              trackingReturnId: element.leftValue
+              kitLabel: element.leftValue,
+              ddpLabel: element.rightValue
             })};
           });
           this.dsmService.finalScan(JSON.stringify(scanPayloads))
@@ -489,17 +489,15 @@ export class ScanComponent implements OnInit {
 
     for (const {leftValue, rightValue} of this.scanPairsValue) {
 
-      if(rightValue === '' && leftValue === '') {
-        this.scanErrorMsg = '';
-      }
+      if(rightValue !== '' || leftValue !== '' && this.scanErrorMsg === '') {
+        if(leftValue === '') {
+          this.scanErrorMsg = 'Kit Label cannot be blank';
+        }
 
-      else if(leftValue === '') {
-        this.scanErrorMsg = 'Kit Label cannot be blank';
-      }
-
-      else if(rightValue === '' || rightValue.length !== 6) {
-        this.scanErrorMsg = 'ShortID must be 6 characters long';
-      }
+        else if(rightValue === '' || rightValue.length !== 6) {
+          this.scanErrorMsg = 'ShortID must be 6 characters long';
+        }
+    }
     }
   }
 }
