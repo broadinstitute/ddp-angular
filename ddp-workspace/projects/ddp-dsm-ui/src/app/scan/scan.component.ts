@@ -63,9 +63,9 @@ export class ScanComponent implements OnInit {
   }
 
   public scanDone(arg): void { // arg[0] = leftvalue (ddpLabel), arg[1] = rightvalue (kitLabel) and arg[2] = position
-    this.makeScanErrorMsg();
     this.scanPairsValue[arg[2]].leftValue = arg[0];
     this.scanPairsValue[arg[2]].rightValue= arg[1];
+    this.makeScanErrorMsg();
     if(this.shouldAddNewPair(arg[2])) {
       this.addNewScanPair();
     }
