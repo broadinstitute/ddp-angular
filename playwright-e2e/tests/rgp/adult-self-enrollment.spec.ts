@@ -20,7 +20,7 @@ test.describe('Adult Self Enrollment', () => {
     await expect(locator).toContainText(itemName);
   };
 
-  test('Can complete application @functional @enrollment @rgp', async ({ page }) => {
+  test.fixme('Can complete application @functional @enrollment @rgp', async ({ page }) => {
     const homePage = new HomePage(page);
     await homePage.clickGetStarted();
 
