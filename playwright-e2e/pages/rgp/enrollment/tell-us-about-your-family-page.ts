@@ -182,7 +182,7 @@ export default class TellUsAboutYourFamilyPage extends RgpPageBase {
 
   /**
    * Question: Patient's Ethnicity
-   * <br> Type: Radiobutton
+   * <br> Type: Radiobutton list
    * @returns {Radiobutton}
    */
   patientEthnicity(): Question {
@@ -194,8 +194,8 @@ export default class TellUsAboutYourFamilyPage extends RgpPageBase {
    * <br> Type: Select
    * @returns {Select}
    */
-  indicateTypesOfDoctors(): Select {
-    return new Select(this.page, { label: 'Please indicate types of doctors the patient has seen' });
+  indicateTypesOfDoctors(): Question {
+    return new Question(this.page, { prompt: 'Please indicate types of doctors the patient has seen' });
   }
 
   /**

@@ -20,7 +20,7 @@ test.describe('Adult Self Enrollment', () => {
     await expect(locator).toContainText(itemName);
   };
 
-  test.fixme('Can complete application @functional @enrollment @rgp', async ({ page }) => {
+  test('Can complete application @functional @enrollment @rgp', async ({ page }) => {
     const homePage = new HomePage(page);
     await homePage.clickGetStarted();
 
@@ -82,16 +82,12 @@ test.describe('Adult Self Enrollment', () => {
       'This study requires that at least one individual in the family affected by the rare condition provide a DNA sample.'
     );
 
-    /*
-
     await tellUsAboutYourFamilyPage.patientAge().fill(user.patient.age);
     await tellUsAboutYourFamilyPage.patientAgeAtOnsetCondition().fill(user.patient.age);
     await tellUsAboutYourFamilyPage.patientSex().check(user.patient.sex, { exactMatch: true });
-    // TODO Select is not Working
-    // await tellUsAboutYourFamilyPage.patientRace().select('I prefer not to answer');
+    await tellUsAboutYourFamilyPage.patientRace().toSelect('Select all that apply').selectOption('I prefer not to answer');
     await tellUsAboutYourFamilyPage.patientEthnicity().check('I prefer not to answer');
-    // TODO Select is not Working
-    // await tellUsAboutYourFamilyPage.indicateTypesOfDoctors().selectOption('Pulmonologist');
+    await tellUsAboutYourFamilyPage.indicateTypesOfDoctors().toSelect('Select all that apply').selectOption('Pulmonologist');
     await tellUsAboutYourFamilyPage.indicatePatientHadFollowingTest().check('Karyotype');
     await tellUsAboutYourFamilyPage.indicatePatientHadFollowingTest().check('Single gene testing');
     await tellUsAboutYourFamilyPage.indicateAnyPatientBiopsiesAvailable().check('Bone Marrow Biopsy');
@@ -102,6 +98,6 @@ test.describe('Adult Self Enrollment', () => {
 
     await assertProgressActiveItem(page, '3');
 
-    */
+    await page.pause();
   });
 });

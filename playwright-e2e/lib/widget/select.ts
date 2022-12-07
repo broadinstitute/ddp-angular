@@ -17,8 +17,8 @@ export default class Select extends WidgetBase {
     this.elementLocator = ddpTestID
         ? this.rootLocator.locator(`mat-select[data-ddp-test="${ddpTestID}"], select[data-ddp-test="${ddpTestID}"]`)
         : exactMatch
-            ? this.rootLocator.locator(`xpath=//select[.//text()[normalize-space()="${label}"]] | //mat-form-field[.//text()[normalize-space()="${label}"]]//mat-select`)
-            : this.rootLocator.locator(`xpath=//select[.//text()[contains(normalize-space(),"${label}")]] | //mat-form-field[.//text()[contains(normalize-space(),"${label}")]]//mat-select`);
+            ? this.rootLocator.locator(`xpath=.//select[.//text()[normalize-space()="${label}"]] | .//mat-select[.//text()[normalize-space()="${label}"]]`)
+            : this.rootLocator.locator(`xpath=.//select[.//text()[contains(normalize-space(),"${label}")]] | .//mat-select[.//text()[contains(normalize-space(),"${label}")]]`);
   }
 
   toLocator(): Locator {
@@ -29,10 +29,12 @@ export default class Select extends WidgetBase {
    *
    * Select by `option.value`.
    *
-   * @param {string | {value?: string, label?: string}} value
+   * @param {string} value
+   * @param opts
    * @returns {Promise<void>}
    */
-  async selectOption(value: string): Promise<void> {
+  async selectOption(value: string, opts: { exactMatch?: boolean } = {}): Promise<void> {
+    const { exactMatch = false } = opts;
     const tagName = await this.toLocator().evaluate((elem) => elem.tagName);
     switch (tagName) {
       case 'SELECT':
@@ -43,10 +45,22 @@ export default class Select extends WidgetBase {
         await this.toLocator().click();
         // eslint-disable-next-line no-case-declarations
         const ariaControlsId = await this.toLocator().getAttribute('aria-controls');
-        await this.page
-          .locator(`#${ariaControlsId}[role="listbox"]`)
-          .locator(`mat-option .mat-option-text >> text="${value}"`)
-          .click();
+        if (!ariaControlsId) {
+          throw Error('ERROR: Cannot find attribute "aria-controls"');
+        }
+        /* eslint-disable no-case-declarations */
+        const dropdown = this.page.locator(`#${ariaControlsId}[role="listbox"]`);
+        const ariaMultiSelectable = await dropdown.getAttribute('aria-multiselectable');
+        const isMultiSelectable = ariaMultiSelectable ? ariaMultiSelectable === 'true' : false;
+        if (exactMatch) {
+          await dropdown.locator(`mat-option .mat-option-text >> text="${value}"`).click();
+        } else {
+          await dropdown.locator(`mat-option .mat-option-text >> text=${value}`).click();
+        }
+        if (isMultiSelectable) {
+          // Use tab to close multiSelectable dropdown
+          await this.page.keyboard.press('Tab');
+        }
         break;
     }
   }
