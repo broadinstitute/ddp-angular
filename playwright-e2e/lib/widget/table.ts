@@ -11,9 +11,9 @@ export default class Table {
   constructor(page: Page, opts: { classAttribute?: string } = {}) {
     const { classAttribute } = opts;
     this.page = page;
-    this.tableCss = classAttribute ? `table${classAttribute}` : 'table';
-    this.headerCss = `${this.tableCss} thead [role="columnheader"], ${this.tableCss} th[class]`;
-    this.rowCss = `${this.tableCss} tbody [role="row"], ${this.tableCss} tbody tr`;
+    this.tableCss = classAttribute ? `table${classAttribute}, mat-table${classAttribute}` : 'table';
+    this.headerCss = `${this.tableCss} thead [role="columnheader"], ${this.tableCss} th[class],${this.tableCss} mat-header-row`;
+    this.rowCss = `${this.tableCss} tbody [role="row"], ${this.tableCss} tbody tr,${this.tableCss} mat-row`;
     this.footerCss = `${this.tableCss} tfoot tr`;
   }
 

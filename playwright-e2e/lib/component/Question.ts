@@ -72,10 +72,11 @@ export default class Question {
    * <br> Tag name: mat-radio-button
    * @param value
    */
-  radioButton(value: string | RegExp): Locator {
+  radioButton(value: string | RegExp, opts: { exactMatch?: boolean } = {}): Locator {
+    const { exactMatch = false } = opts;
     return this.toLocator()
       .locator('mat-radio-button')
-      .filter({ has: this.page.locator('label', { hasText: value }) });
+      .filter({ has: exactMatch ? this.page.locator(`text="${value}"`) : this.page.locator('label', { hasText: value }) });
   }
 
   /**
