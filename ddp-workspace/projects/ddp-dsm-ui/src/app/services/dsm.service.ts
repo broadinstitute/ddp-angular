@@ -17,7 +17,8 @@ import { RoleService } from './role.service';
 import { SessionService } from './session.service';
 import { BulkCohortTag } from '../tags/cohort-tag/bulk-cohort-tag-modal/bulk-cohort-tag-model';
 import {LocalStorageService} from './localStorage.service';
-import {DateRangeModel} from '../dashboard-statistics/models/DateRange.model';
+import {IDateRange} from '../dashboard-statistics/interfaces/IDateRange';
+import {StatisticsEnum} from '../dashboard-statistics/enums/statistics.enum';
 
 declare var DDP_ENV: any;
 
@@ -39,10 +40,11 @@ export class DSMService {
               private localStorageService: LocalStorageService) {
   }
 
-  getDashboardData({startDate, endDate}: DateRangeModel): Observable<any> {
+  getDashboardData({startDate, endDate}: IDateRange, chartOrCount: StatisticsEnum): Observable<any> {
     const url = this.baseUrl + DSMService.UI + 'dashboard';
     const map: {}[] = [];
     map.push( {name: DSMService.REALM, value: this.localStorageService.selectedRealm} );
+    map.push({name: 'part', value: chartOrCount});
     startDate && map.push({name: 'startDate', value: startDate});
     endDate && map.push({name: 'endDate', value: endDate});
 
@@ -274,9 +276,11 @@ export class DSMService {
     }
     if (filterQuery != null) {
       map.push({name: 'filterQuery', value: filterQuery});
-    } else if (json == null || json.filters == null) {
+    }
+    if (json != null && json.filterName != null) {
       json && map.push({name: 'filterName', value: json.filterName});
-    } else if (viewFilterCopy != null) {
+    }
+    if (viewFilterCopy != null) {
       map.push({name: 'filters', value: JSON.stringify(viewFilterCopy.filters)});
     }
     const filters = jsonPatch ? JSON.parse(jsonPatch) : undefined;

@@ -14,6 +14,21 @@ export enum WHO {
   TheDependantBeingEnrolled = 'The dependant being enrolled'
 }
 
+export enum MONTH {
+  JAN = 'January',
+  FEB = 'February',
+  MAR = 'March',
+  APR = 'April',
+  MAY = 'May',
+  JUN = 'June',
+  JUL = 'July',
+  AUG = 'August',
+  SEP = 'September',
+  OCT = 'October',
+  NOV = 'November',
+  DEC = 'December'
+}
+
 export const STATES = [
   'Alabama',
   'Alaska',

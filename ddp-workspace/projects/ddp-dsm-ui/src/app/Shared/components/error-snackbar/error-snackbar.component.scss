@@ -1,0 +1,29 @@
+p {
+  margin: 0;
+  padding: 0;
+}
+
+.snackbar {
+  display: flex;
+  align-items: center;
+  font-family: Montserrat-SemiBold, sans-serif;
+  color: black;
+
+  mat-icon:hover {
+    cursor: pointer;
+    color: white;
+  }
+
+  &-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+
+    &-statusCode {
+      font-family: Montserrat-Regular, sans-serif;
+      color: white;
+    }
+  }
+}
