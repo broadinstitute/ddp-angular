@@ -199,7 +199,7 @@ export class ScanComponent implements OnInit {
             scanPayloads.push({
               kitLabel: element.leftValue,
               trackingReturnId: element.rightValue
-            })};
+            });}
           });
           this.dsmService.trackingScan(JSON.stringify(scanPayloads))
             .subscribe({
@@ -217,7 +217,7 @@ export class ScanComponent implements OnInit {
             scanPayloads.push({
               kitLabel: element.leftValue,
               hruid: element.rightValue
-            })};
+            });}
           });
           this.dsmService.initialScan(JSON.stringify(scanPayloads))
             .subscribe({
@@ -235,7 +235,7 @@ export class ScanComponent implements OnInit {
             scanPayloads.push({
               kitLabel: element.leftValue,
               ddpLabel: element.rightValue
-            })};
+            });}
           });
           this.dsmService.finalScan(JSON.stringify(scanPayloads))
             .subscribe({
@@ -456,7 +456,7 @@ export class ScanComponent implements OnInit {
     return null;
   }
 
-  public areScanPairsValid(): boolean {
+  public areScanPairsInvalid(): boolean {
     if(!this.initialScan)
     {
       return this.scanPairs.length < 2;
