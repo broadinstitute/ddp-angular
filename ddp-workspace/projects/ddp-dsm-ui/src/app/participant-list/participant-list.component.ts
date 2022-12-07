@@ -290,7 +290,7 @@ export class ParticipantListComponent implements OnInit {
         this.quickFilters = [];
         this.savedFilters = [];
         this.mrCoverPdfSettings = [];
-        this.defaultColumns = [Filter.REALM, Filter.SHORT_ID, Filter.FIRST_NAME, Filter.LAST_NAME, Filter.ENROLLMENT_STATUS];
+        this.defaultColumns = [Filter.REALM, Filter.FIRST_NAME, Filter.LAST_NAME, Filter.SHORT_ID, Filter.ENROLLMENT_STATUS];
         this.assignees.push(new Assignee('-1', 'Remove Assignee', ''));
         jsonData = data;
         this.dataSources = new Map([
@@ -1262,15 +1262,37 @@ export class ParticipantListComponent implements OnInit {
       this.selectedColumns[ parent ] = [];
     }
     if (this.hasThisColumnSelected(this.selectedColumns[ parent ], column)) {
-      const f = this.selectedColumns[ parent ].find(item =>
-        item.participantColumn.tableAlias === column.participantColumn.tableAlias &&
-        item.participantColumn.name === column.participantColumn.name
-      );
-      const index = this.selectedColumns[ parent ].indexOf(f);
-      this.selectedColumns[ parent ].splice(index, 1);
+      const foundColumnItemIndex = this.findIndexIn(this.selectedColumns, parent, column);
+      this.selectedColumns[ parent ].splice(foundColumnItemIndex, 1);
     } else {
-      this.selectedColumns[ parent ].push(column);
+      const indexToBeInsertedIn: number = this.insertionIndex(parent, column);
+      this.selectedColumns[ parent ].splice(indexToBeInsertedIn, 0, column)
     }
+  }
+
+  private insertionIndex(parent: string, filter_value: Filter): number {
+    const currentFilterIndex = this.findIndexIn(this.sourceColumns, parent, filter_value);
+    const previousFilter: Filter = this.sourceColumns[parent][currentFilterIndex - 1];
+
+    if(!currentFilterIndex || !previousFilter) {
+      return 0;
+    }
+
+    const foundFilterIndexInSelectedColumns =
+      this.findIndexIn(this.selectedColumns, parent, previousFilter);
+
+    if(foundFilterIndexInSelectedColumns > -1) {
+      return foundFilterIndexInSelectedColumns + 1;
+    }
+
+    return this.insertionIndex(parent, previousFilter)
+  }
+
+  private findIndexIn(columns: {[key: string]: Filter[]},parent: string, filter_value: Filter): number {
+    return columns[parent].findIndex((filter: Filter) =>
+      filter.participantColumn.tableAlias === filter_value.participantColumn.tableAlias &&
+      filter.participantColumn.name === filter_value.participantColumn.name
+    )
   }
 
   private isDataOfViewFilterExists(): boolean {
