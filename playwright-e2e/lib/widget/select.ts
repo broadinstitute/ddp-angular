@@ -11,14 +11,27 @@ export default class Select extends WidgetBase {
   constructor(page: Page, opts: { label?: string; ddpTestID?: string; root?: Locator | string; exactMatch?: boolean }) {
     super(page);
     const { label, ddpTestID, root, exactMatch = false } = opts;
-    this.rootLocator = root ? (typeof root === 'string' ? this.page.locator(root) : root) : this.page.locator('mat-form-field');
-    // prettier-ignore
-    /* eslint-disable max-len */
+
+    /* prettier-ignore */
+    this.rootLocator = root
+        ? (typeof root === 'string'
+            ? this.page.locator(root)
+            : root)
+        : this.page.locator('mat-form-field');
+
     this.elementLocator = ddpTestID
-        ? this.rootLocator.locator(`mat-select[data-ddp-test="${ddpTestID}"], select[data-ddp-test="${ddpTestID}"]`)
-        : exactMatch
-            ? this.rootLocator.locator(`xpath=.//select[.//text()[normalize-space()="${label}"]] | .//mat-select[.//text()[normalize-space()="${label}"]]`)
-            : this.rootLocator.locator(`xpath=.//select[.//text()[contains(normalize-space(),"${label}")]] | .//mat-select[.//text()[contains(normalize-space(),"${label}")]]`);
+      ? this.rootLocator.locator(`mat-select[data-ddp-test="${ddpTestID}"], select[data-ddp-test="${ddpTestID}"]`)
+      : exactMatch
+      ? this.rootLocator.locator(
+          `xpath=.//select[.//text()[normalize-space()="${label}"]] | ` +
+            `.//mat-select[.//text()[normalize-space()="${label}"]] | ` +
+            `.//mat-select[@id=(//label[normalize-space(.)="${label}"]/@for)]`
+        )
+      : this.rootLocator.locator(
+          `xpath=.//select[.//text()[contains(normalize-space(),"${label}")]] | ` +
+            `.//mat-select[.//text()[contains(normalize-space(),"${label}")]] | ` +
+            `.//mat-select[@id=(//label[contains(normalize-space(.),"${label}")]/@for)]`
+        );
   }
 
   toLocator(): Locator {
@@ -34,7 +47,7 @@ export default class Select extends WidgetBase {
    * @returns {Promise<void>}
    */
   async selectOption(value: string, opts: { exactMatch?: boolean } = {}): Promise<void> {
-    const { exactMatch = false } = opts;
+    const { exactMatch = true } = opts;
     const tagName = await this.toLocator().evaluate((elem) => elem.tagName);
     switch (tagName) {
       case 'SELECT':
