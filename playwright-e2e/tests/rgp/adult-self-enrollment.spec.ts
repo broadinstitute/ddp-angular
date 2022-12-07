@@ -11,6 +11,8 @@ import { setAuth0UserEmailVerified } from 'utils/api-utils';
 
 const { RGP_USER_EMAIL, RGP_USER_PASSWORD } = process.env;
 
+/** UNFINISHED **/
+
 test.describe('Adult Self Enrollment', () => {
   const assertProgressActiveItem = async (page: Page, itemName: string): Promise<void> => {
     const locator = page.locator('li.activity-stepper__step-container button.stepper-btn.stepper-btn--active');
@@ -18,7 +20,7 @@ test.describe('Adult Self Enrollment', () => {
     await expect(locator).toContainText(itemName);
   };
 
-  test('Start application @functional @enrollment @rgp', async ({ page }) => {
+  test('Can complete application @functional @enrollment @rgp', async ({ page }) => {
     const homePage = new HomePage(page);
     await homePage.clickGetStarted();
 
@@ -65,7 +67,6 @@ test.describe('Adult Self Enrollment', () => {
     await tellUsAboutYourFamilyPage.website().fill('https://en.wikipedia.org/wiki/Broad_Institute');
     await tellUsAboutYourFamilyPage.describeGeneticCondition().fill('Single-gene disorders');
     await tellUsAboutYourFamilyPage.haveAnyClinicalDiagnosesBeenMade().check('Yes');
-    // pop-up input after check Yes in above question
     await tellUsAboutYourFamilyPage.clinicalDiagnosesDetails().fill('Single-gene disorders');
     await tellUsAboutYourFamilyPage.haveAnyGeneticDiagnosesBeenMade().check('Yes');
     await tellUsAboutYourFamilyPage.geneticDiagnosesDetails().fill('Single-gene disorders');
@@ -76,8 +77,31 @@ test.describe('Adult Self Enrollment', () => {
     await tellUsAboutYourFamilyPage.next();
 
     await assertProgressActiveItem(page, '2');
+    await expect(page.locator('text="Please provide information on the patient:"')).toBeVisible();
+    await expect(page.locator('ddp-activity-content p.SubHeading')).toHaveText(
+      'This study requires that at least one individual in the family affected by the rare condition provide a DNA sample.'
+    );
 
-    await page.pause();
-    //
+    /*
+
+    await tellUsAboutYourFamilyPage.patientAge().fill(user.patient.age);
+    await tellUsAboutYourFamilyPage.patientAgeAtOnsetCondition().fill(user.patient.age);
+    await tellUsAboutYourFamilyPage.patientSex().check(user.patient.sex, { exactMatch: true });
+    // TODO Select is not Working
+    // await tellUsAboutYourFamilyPage.patientRace().select('I prefer not to answer');
+    await tellUsAboutYourFamilyPage.patientEthnicity().check('I prefer not to answer');
+    // TODO Select is not Working
+    // await tellUsAboutYourFamilyPage.indicateTypesOfDoctors().selectOption('Pulmonologist');
+    await tellUsAboutYourFamilyPage.indicatePatientHadFollowingTest().check('Karyotype');
+    await tellUsAboutYourFamilyPage.indicatePatientHadFollowingTest().check('Single gene testing');
+    await tellUsAboutYourFamilyPage.indicateAnyPatientBiopsiesAvailable().check('Bone Marrow Biopsy');
+    await tellUsAboutYourFamilyPage.indicateAnyPatientBiopsiesAvailable().check('Skin Biopsy');
+    await tellUsAboutYourFamilyPage.indicateAnyPatientBiopsiesAvailable().check('Muscle Biopsy');
+    await tellUsAboutYourFamilyPage.isPatientParticipatingInResearchStudies().check('No');
+    await tellUsAboutYourFamilyPage.next();
+
+    await assertProgressActiveItem(page, '3');
+
+    */
   });
 });

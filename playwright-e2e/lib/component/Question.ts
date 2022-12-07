@@ -32,6 +32,7 @@ export default class Question {
     if (value === undefined) {
       return this.toLocator().locator('mat-select, select');
     }
+    // return new Select(this.page, { root: this.toLocator() });
     return this.toLocator().locator('mat-select, select', {
       has: this.page.locator(`//*[contains(normalize-space(.),"${value}")]`)
     });

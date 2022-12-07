@@ -20,6 +20,8 @@ export default class TellUsAboutYourFamilyPage extends RgpPageBase {
     await expect(this.activityText).toHaveText('Tell us about your family');
   }
 
+  /** STEP 1 Questions **/
+
   /**
    * Question: Your Title
    * <br> Type: Select
@@ -138,6 +140,91 @@ export default class TellUsAboutYourFamilyPage extends RgpPageBase {
    */
   howDidYouFindOutAboutThisProject(): Question {
     return new Question(this.page, { prompt: 'How did you find out about this project?' });
+  }
+
+  /** STEP 2 Questions **/
+
+  /**
+   * Question: Patient's Current Age
+   * <br> Type: Input
+   * @returns {Input}
+   */
+  patientAge(): Input {
+    return new Input(this.page, { ddpTestID: 'answer:PATIENT_AGE' });
+  }
+
+  /**
+   * Question: Patient's Age at Onset of Condition
+   * <br> Type: Input
+   * @returns {Input}
+   */
+  patientAgeAtOnsetCondition(): Input {
+    return new Input(this.page, { ddpTestID: 'answer:CONDITION_AGE' });
+  }
+
+  /**
+   * Question: Patient's Sex
+   * <br> Type: Question
+   * @returns {Question}
+   */
+  patientSex(): Question {
+    return new Question(this.page, { prompt: "Patient's Sex" });
+  }
+
+  /**
+   * Question: Patient's Race
+   * <br> Type: Select
+   * @returns {Select}
+   */
+  patientRace(): Question {
+    return new Question(this.page, { prompt: "Patient's Race" });
+  }
+
+  /**
+   * Question: Patient's Ethnicity
+   * <br> Type: Radiobutton
+   * @returns {Radiobutton}
+   */
+  patientEthnicity(): Question {
+    return new Question(this.page, { prompt: "Patient's Ethnicity" });
+  }
+
+  /**
+   * Question: Please indicate types of doctors the patient has seen
+   * <br> Type: Select
+   * @returns {Select}
+   */
+  indicateTypesOfDoctors(): Select {
+    return new Select(this.page, { label: 'Please indicate types of doctors the patient has seen' });
+  }
+
+  /**
+   * Question: Please indicate if the patient has had any of the following tests.
+   * <br> Type: Checkbox list
+   * @returns Question
+   */
+  indicatePatientHadFollowingTest(): Question {
+    return new Question(this.page, { prompt: 'Please indicate if the patient has had any of the following tests' });
+  }
+
+  /**
+   * Question: Please indicate if any patient biopsies may be available.
+   * <br> Type: Checkbox list
+   * @returns Question
+   */
+  indicateAnyPatientBiopsiesAvailable(): Question {
+    return new Question(this.page, { prompt: 'Please indicate if any patient biopsies may be available' });
+  }
+
+  /**
+   * Question: Is the patient currently participating in other research studies with genetic evaluations?
+   * <br> Type: Radiobutton list
+   * @returns {Radiobutton}
+   */
+  isPatientParticipatingInResearchStudies(): Question {
+    return new Question(this.page, {
+      prompt: 'Is the patient currently participating in other research studies with genetic evaluations'
+    });
   }
 
   /** Click "Next" button */

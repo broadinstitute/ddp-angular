@@ -5,6 +5,7 @@
     "middleName": "Tester",
     "lastName": "Playwright",
     "fullName": "E2E Tester Playwright",
+    "sex": "Male",
     "birthDate": {
       "MM": "10",
       "DD": "02",
