@@ -63,13 +63,13 @@ export class ScanComponent implements OnInit {
   }
 
   public scanDone(arg): void { // arg[0] = leftvalue (ddpLabel), arg[1] = rightvalue (kitLabel) and arg[2] = position
-    if (arg.length === 3) {
-      if (!this.checkIfKitLabelChanged(arg[0], arg[1], arg[2])) {
-        this.scanPairsValue.push(new ScanPair(arg[0], arg[1]));
-        this.addNewScanPair();
-        this._changeDetectionRef.detectChanges();
-      }
+    this.makeScanErrorMsg();
+    this.scanPairsValue[arg[2]].leftValue = arg[0];
+    this.scanPairsValue[arg[2]].rightValue= arg[1];
+    if(this.shouldAddNewPair(arg[2])) {
+      this.addNewScanPair();
     }
+    this._changeDetectionRef.detectChanges();
   }
 
   public get displayScanText(): string {
@@ -85,18 +85,14 @@ export class ScanComponent implements OnInit {
     }
   }
 
-  private checkIfKitLabelChanged(left: string, right: string, position: number): boolean {
-    for (let i = 0; i < this.scanPairsValue.length; i++) {
-      if (this.scanPairsValue[i].leftValue === left && i === position) {
-        this.scanPairsValue[i].rightValue = right;
-        return true;
-      }
+  private shouldAddNewPair(position: number): boolean {
+    if(this.scanPairs.length === position + 1) {
+      return true;
     }
     return false;
   }
 
   public validateRightValue(position: number): boolean {
-    this.makeScanErrorMsg();
     if (this.scanPairsValue.length > 0 && this.scanPairsValue[position] != null) {
       return this.validateValue(this.scanPairsValue[position].rightValue, position, false);
     }
@@ -104,7 +100,6 @@ export class ScanComponent implements OnInit {
   }
 
   public validateLeftValue(position: number): boolean {
-    this.makeScanErrorMsg();
     if (this.scanPairsValue.length > 0 && this.scanPairsValue[position] != null) {
       return this.validateValue(this.scanPairsValue[position].leftValue, position, true);
     }
@@ -113,20 +108,22 @@ export class ScanComponent implements OnInit {
 
   private validateValue(labelValue: string, position: number, isLeft: boolean): boolean {
     let isDuplicate = false;
-    for (let i = 0; i < this.scanPairsValue.length; i++) {
-      if (i !== position) {
-        if (this.scanPairsValue[position].leftValue != null && labelValue === this.scanPairsValue[i].leftValue
-          || this.scanPairsValue[position].rightValue != null && labelValue === this.scanPairsValue[i].rightValue) {
-          isDuplicate = true;
-        }
-      } else {
-        if (isLeft) {
-          if (this.scanPairsValue[position].rightValue != null && labelValue === this.scanPairsValue[i].rightValue) {
+    if(labelValue !== '') {
+      for (let i = 0; i < this.scanPairsValue.length; i++) {
+        if (i !== position) {
+          if (this.scanPairsValue[position].leftValue != null && labelValue === this.scanPairsValue[i].leftValue
+            || this.scanPairsValue[position].rightValue != null && labelValue === this.scanPairsValue[i].rightValue) {
             isDuplicate = true;
           }
         } else {
-          if (this.scanPairsValue[position].leftValue != null && labelValue === this.scanPairsValue[i].leftValue) {
-            isDuplicate = true;
+          if (isLeft) {
+            if (this.scanPairsValue[position].rightValue != null && labelValue === this.scanPairsValue[i].rightValue) {
+              isDuplicate = true;
+            }
+          } else {
+            if (this.scanPairsValue[position].leftValue != null && labelValue === this.scanPairsValue[i].leftValue) {
+              isDuplicate = true;
+            }
           }
         }
       }
@@ -142,6 +139,7 @@ export class ScanComponent implements OnInit {
   private addNewScanPair(): void {
     const newRow = new ScanPairComponent();
     this.scanPairs.push(newRow);
+    this.scanPairsValue.push(new ScanPair('', ''));
   }
 
   ngOnInit(): void {
@@ -159,6 +157,7 @@ export class ScanComponent implements OnInit {
       if (this.scanPairs.length < 1) {
         const newScanPair = new ScanPairComponent();
         this.scanPairs.push(newScanPair);
+        this.scanPairsValue.push(new ScanPair('', ''));
       }
     } else if (this.scanReceived) {
       this.addNewSingleScan();
@@ -178,7 +177,7 @@ export class ScanComponent implements OnInit {
   public savePairs(): void {
     if (this.scanPairsValue.length > 0) {
       this.duplicateDetected = false;
-      for (let i = 0; i < this.scanPairsValue.length; i++) {
+      for (let i = 0; i < this.scanPairsValue.length - 1; i++) {
         if (this.validateValue(this.scanPairsValue[i].leftValue, i, true)) {
           this.duplicateDetected = true;
           break;
@@ -196,10 +195,11 @@ export class ScanComponent implements OnInit {
         if (this.scanTracking) {
           const scanPayloads = [];
           this.scanPairsValue.forEach(element => {
+            if(element.rightValue !== '' && element.leftValue !== '') {
             scanPayloads.push({
               kitLabel: element.rightValue,
               trackingReturnId: element.leftValue
-            });
+            })};
           });
           this.dsmService.trackingScan(JSON.stringify(scanPayloads))
             .subscribe({
@@ -213,10 +213,11 @@ export class ScanComponent implements OnInit {
         } else if (this.initialScan) {
           const scanPayloads = [];
           this.scanPairsValue.forEach(element => {
+            if(element.rightValue !== '' && element.leftValue !== '') {
             scanPayloads.push({
-              kitLabel: element.leftValue,
-              hruid: element.rightValue
-            });
+              kitLabel: element.rightValue,
+              trackingReturnId: element.leftValue
+            })};
           });
           this.dsmService.initialScan(JSON.stringify(scanPayloads))
             .subscribe({
@@ -230,10 +231,11 @@ export class ScanComponent implements OnInit {
         } else {
           const scanPayloads = [];
           this.scanPairsValue.forEach(element => {
+            if(element.rightValue !== '' && element.leftValue !== '') {
             scanPayloads.push({
-              kitLabel: element.leftValue,
-              ddpLabel: element.rightValue
-            });
+              kitLabel: element.rightValue,
+              trackingReturnId: element.leftValue
+            })};
           });
           this.dsmService.finalScan(JSON.stringify(scanPayloads))
             .subscribe({
@@ -460,12 +462,21 @@ export class ScanComponent implements OnInit {
       return this.scanPairs.length < 2;
     }
 
-    if(this.scanPairsValue.length === 0) {
+    //No valid pair has been made yet, so we want a disabled button
+    if(this.scanPairs.length === 1) {
       return true;
     }
-    for (const pair in this.scanPairsValue) {
-      if(this.scanPairsValue[pair]['rightValue'].length !== 6 ||
-      this.scanPairsValue[pair]['leftValue'].length === 0) {
+    for (const {leftValue, rightValue} of this.scanPairsValue) {
+      //If both are null I want the button to be enabled, so return false
+      if(rightValue === '' && leftValue === '') {
+        return false;
+      }
+
+      //If only one of the two is null, I want the button to be enabled
+      if(leftValue === '') {
+          return true;
+      }
+      if(rightValue === '' || rightValue.length !== 6) {
         return true;
       }
     }
@@ -476,16 +487,18 @@ export class ScanComponent implements OnInit {
 
     this.scanErrorMsg = '';
 
-    for (const pair in this.scanPairsValue) {
-      if(this.scanPairsValue[pair]['rightValue'].length !== 6 &&
-      this.scanPairsValue[pair]['leftValue'].length === 0) {
-        this.scanErrorMsg = 'Kit Label cannot be blank and ShortID must be 6 characters long';
+    for (const {leftValue, rightValue} of this.scanPairsValue) {
+
+      if(rightValue === '' && leftValue === '') {
+        this.scanErrorMsg = '';
       }
-      else if(this.scanPairsValue[pair]['rightValue'].length !== 6) {
-        this.scanErrorMsg = 'ShortID must be 6 characters long';
-      }
-      else if(this.scanPairsValue[pair]['leftValue'].length === 0) {
+
+      else if(leftValue === '') {
         this.scanErrorMsg = 'Kit Label cannot be blank';
+      }
+
+      else if(rightValue === '' || rightValue.length !== 6) {
+        this.scanErrorMsg = 'ShortID must be 6 characters long';
       }
     }
   }
