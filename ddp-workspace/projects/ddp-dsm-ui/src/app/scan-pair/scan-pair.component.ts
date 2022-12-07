@@ -25,9 +25,10 @@ export class ScanPairComponent implements OnInit {
     this.leftInput.nativeElement.focus();
   }
 
-  moveFocus(leftValue: string): void {
+  moveFocus(leftValue: string, rightValue: string): void {
       this.rightInput.nativeElement.focus();
       this.leftLabelAdded.next([leftValue, this.positionScanPair]);
+      this.pairScanned.next([leftValue, rightValue, this.positionScanPair]);
   }
 
   nextPair(leftValue: string, rightValue: string): void {
