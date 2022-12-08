@@ -2,6 +2,7 @@ import { Locator, Page } from '@playwright/test';
 import * as auth from 'authentication/auth-rgp';
 import { HomePageInterface } from 'pages/page-interface';
 import { RgpPageBase } from 'pages/rgp/rgp-page-base';
+import { waitForNoSpinner } from 'utils/test-utils';
 
 /**
  * Landing page, unauthenticated.
@@ -29,6 +30,7 @@ export default class HomePage extends RgpPageBase implements HomePageInterface {
   async clickGetStarted(opts: { waitForNav?: boolean } = {}): Promise<void> {
     const { waitForNav = true } = opts;
     await this.clickAndWaitForNav(this.getStartedButton(), { waitForNav });
+    await waitForNoSpinner(this.page);
   }
 
   /**

@@ -2,6 +2,7 @@ import { expect, Locator, Page } from '@playwright/test';
 import { SingularPage } from 'pages/singular/singular-page';
 import * as auth from 'authentication/auth-singular';
 import { HomePageInterface } from 'pages/page-interface';
+import { waitForNoSpinner } from 'utils/test-utils';
 
 /**
  * Landing page, unauthenticated.
@@ -37,6 +38,7 @@ export default class HomePage extends SingularPage implements HomePageInterface 
   async signUp(opts: { waitForNav?: boolean } = {}): Promise<void> {
     const { waitForNav = true } = opts;
     await this.clickAndWaitForNav(this.getSignMeUpButton(), { waitForNav });
+    await waitForNoSpinner(this.page);
   }
 
   /**
