@@ -46,7 +46,7 @@ const testConfig: PlaywrightTestConfig = {
 
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: [
-    ['html', { open: 'never', outputFolder: 'html-test-results' }],
+    ['html', { open: 'never', outputFolder: 'html-test-results', host: '0.0.0.0', port: 9223 }],
     ['list'],
     ['junit', { outputFile: 'junit/results/results.xml' }]
   ],
