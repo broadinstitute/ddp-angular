@@ -105,8 +105,9 @@ export default abstract class PageBase implements PageInterface {
   }
 
   /** Click "Submit" button */
-  async submit(): Promise<void> {
-    await this.clickAndWaitForNav(this.getSubmitButton(), { waitForNav: true });
+  async submit(opts: { waitForNav?: boolean } = {}): Promise<void> {
+    const { waitForNav = true } = opts;
+    await this.clickAndWaitForNav(this.getSubmitButton(), { waitForNav });
   }
 
   /** Click "Agree" button */
