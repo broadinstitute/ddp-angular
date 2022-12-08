@@ -20,8 +20,8 @@ import { GTagEvent } from '../../../constants/gtag-event';
             <p>
               If you are interested in receiving these materials for your center or clinic, you can contact us by
               email at <a (click)="contactEmail($event)" href="mailto:contact@projectsingular.org">contact@projectsingular.org</a>
-              or <a (click)="contactPhone($event)" href="tel:+(650)7616486">(650) 561-6750</a>. Please provide the
-              name of the recipient of these materials and their email address, phone number, and direct mailing address
+              or <a (click)="contactPhone($event)" href="tel:+(650)7616486">(650) 561-6750</a>. <strong>Please provide the
+                name of the recipient of these materials and their email address, phone number, and direct mailing address</strong>
             </p>
             <p>
               Thank you for helping spread the word about Project Singular to single ventricle patients and families!
