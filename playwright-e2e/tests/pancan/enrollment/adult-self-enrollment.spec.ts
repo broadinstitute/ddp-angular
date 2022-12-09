@@ -30,7 +30,7 @@ test.describe('Enroll myself as adult', () => {
     //diagnosis page
     const preScreeningDiagnosisPage = new PreScreeningDiagnosisPage(page);
     await preScreeningDiagnosisPage.waitForReady();
-    await preScreeningDiagnosisPage.cancerDiagnosed().input().fill(PatientsData.adult.cancerDiagnosed.cancer);
+    await preScreeningDiagnosisPage.cancerDiagnosed().input().fill(PatientsData.adult.cancerDiagnosed.typeCancer);
     await preScreeningDiagnosisPage.getNextButton().waitFor({ state: 'visible' });
     await preScreeningDiagnosisPage.next();
     //age/location page
@@ -44,7 +44,7 @@ test.describe('Enroll myself as adult', () => {
 
     // Step 3
     // On "Consent Form" page, Page 1 of 3.
-    await assertActivityHeader(page, 'Research Consent Form');
+    await assertActivityHeader(page, PatientsData.adult.researchContentForm);
     await assertActivityStep(page, '1');
     const consentFormPage = new ConsentFormPage(page);
     await consentFormPage.next();

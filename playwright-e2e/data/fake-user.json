@@ -23,6 +23,30 @@
     "zip": "02142-1027",
     "phone": "6177147000"
   },
+  "adult": {
+    "firstName": "E2E",
+    "middleName": "Tester",
+    "lastName": "Playwright",
+    "fullName": "E2E Tester Playwright",
+    "birthDate": {
+      "MM": "10",
+      "DD": "02",
+      "YYYY": "1950"
+    },
+    "age": "73",
+    "country": {
+      "name": "UNITED STATES",
+      "abbreviation": "US"
+    },
+    "state": {
+      "name": "MASSACHUSETTS",
+      "abbreviation": "MA"
+    },
+    "streetAddress": "415 Main Street",
+    "city": "Cambridge",
+    "zip": "02142-1027",
+    "phone": "6177147000"
+  },
   "doctor": {
     "name": "John Strange",
     "specialty": "PRIMARY_CARE",
