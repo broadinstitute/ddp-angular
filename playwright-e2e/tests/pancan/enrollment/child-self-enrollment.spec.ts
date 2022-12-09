@@ -58,7 +58,6 @@ test.describe('Enroll child ', () => {
     await consentFormPage.next();
     await consentFormPage.waitSecondReady();
     await consentFormPage.childSignature().fill(user.child.firstName);
-    const medicalReleaseFormPage = new MedicalReleaseFormPage(page);
-    await medicalReleaseFormPage.submit();
+    await consentFormPage.submit();
   });
 });
