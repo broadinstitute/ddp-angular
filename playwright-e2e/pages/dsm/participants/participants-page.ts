@@ -51,4 +51,14 @@ export default class ParticipantsPage {
     await input.toLocator().type(searchString);
     await Promise.all([this.page.locator('.fa-spinner').waitFor({ state: 'visible' }), this.searchButton().click()]);
   }
+
+  async filterMedicalRecordPts(): Promise<void> {
+    await this.page.locator("text=Customize View >> button").click();
+    await this.page.locator('text=Medical Record Columns').click();
+    await this.page.locator('text=Initial MR Received').check();
+    await this.page.locator("text=Search >> button").click();
+    await this.page.locator("text=Initial MR Received mm/dd/yyyy * Today >> button >> nth=2").click();
+    await this.page.locator('text=Not Empty').check();
+    await this.page.locator("button:has-text('Search') >> nth=0").click();
+  }
 }

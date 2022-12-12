@@ -10,7 +10,7 @@ export default class Checkbox extends WidgetBase {
    * @param page
    * @param opts Require one parameter: label or ddpTestID
    */
-  constructor(page: Page, opts: { label?: string; ddpTestID?: string; root?: Locator | string; exactMatch?: boolean }) {
+   constructor(page: Page, opts: { label?: string; ddpTestID?: string; root?: Locator | string; exactMatch?: boolean }) {
     super(page);
     const { label, ddpTestID, root, exactMatch = false } = opts;
     this.rootLocator = root
@@ -24,7 +24,9 @@ export default class Checkbox extends WidgetBase {
         ? this.rootLocator.locator(`mat-checkbox[data-ddp-test="${ddpTestID}"]`) // Label ignored if ddpTestID is specified
         : exactMatch
             ? this.rootLocator.locator(`xpath=//mat-checkbox[.//input[@id=(//label[.//text()[normalize-space()="${label}"]]/@for)]]`)
-            : this.rootLocator.locator(`xpath=//mat-checkbox[.//input[@id=(//label[contains(normalize-space(.),"${label}")]/@for)]]`);
+            : label 
+                ? this.rootLocator.locator(`xpath=//mat-checkbox[.//input[@id=(//label[contains(normalize-space(.),"${label}")]/@for)]]`) 
+                : this.rootLocator.locator(`xpath=//mat-checkbox[.//input[@id=(//label/@for)]]`);
   }
 
   toLocator(): Locator {
