@@ -197,8 +197,8 @@ export class ScanComponent implements OnInit {
           this.scanPairsValue.forEach(element => {
             if(element.rightValue !== '' && element.leftValue !== '') {
             scanPayloads.push({
-              kitLabel: element.leftValue,
-              trackingReturnId: element.rightValue
+              kitLabel: element.rightValue,
+              trackingReturnId: element.leftValue
             });}
           });
           this.dsmService.trackingScan(JSON.stringify(scanPayloads))
