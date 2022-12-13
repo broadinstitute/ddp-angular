@@ -1464,20 +1464,20 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
         const keyForDiagnosis = key.slice(10,-SPECIFY.length);
 
         if(ptData['DIAGNOSIS'] !== keyForDiagnosis) {
-          delete ptData[key]
+          delete ptData[key];
         }
       } else if(key.includes('OTHER')) {
         const keyForOtherField = key.slice(0, -OTHER_SPECIFY.length);
 
         if(ptData[keyForOtherField] !== 'OTHER') {
-          delete ptData[key]
+          delete ptData[key];
         }
 
       } else {
-        const keyForCheckboxSpecify = key.slice(0, -SPECIFY.length)
+        const keyForCheckboxSpecify = key.slice(0, -SPECIFY.length);
 
         if(!ptData[keyForCheckboxSpecify]) {
-          delete ptData[key]
+          delete ptData[key];
         }
       }
     });
