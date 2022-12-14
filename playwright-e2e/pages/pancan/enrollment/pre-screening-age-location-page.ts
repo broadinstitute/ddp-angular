@@ -1,7 +1,7 @@
 import { Page } from '@playwright/test';
 import Question from 'lib/component/Question';
 import Input from 'lib/widget/Input';
-import { PancanPage } from '../pancan-page';
+import { PancanPage } from 'pages/pancan/pancan-page';
 import * as fake from 'data/fake-user.json';
 
 export default class PreScreeningAgeLocationPage extends PancanPage {

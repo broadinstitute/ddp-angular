@@ -1,6 +1,6 @@
 import { expect, Locator, Page } from "@playwright/test";
 import Question from "lib/component/Question";
-import { PancanPage } from "../pancan-page";
+import { PancanPage } from 'pages/pancan/pancan-page';
 
 export default class SurveyAboutYouPage extends PancanPage {
 

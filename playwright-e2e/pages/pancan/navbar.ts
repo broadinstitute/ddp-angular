@@ -3,7 +3,7 @@ import { Page, Response } from '@playwright/test';
 const { PANCAN_BASE_URL } = process.env;
 
 export const NavSelectors = {
-  Login: '.header button[data-ddp-test="signInButton"]:has-text("Log In")',
+  Login: '.header .auth_login button[data-ddp-test="signInButton"]:has-text("Log In")',
   LoadingSpinner: '.auth0-loading',
   AboutUs: '.header__nav >> text=About Us',
   Participation: '.header__nav >> text=Participation',
