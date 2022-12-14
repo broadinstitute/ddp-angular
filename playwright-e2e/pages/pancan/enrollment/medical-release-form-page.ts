@@ -1,6 +1,6 @@
 import { Page } from '@playwright/test';
 import Input from 'lib/widget/Input';
-import { PancanPage } from '../pancan-page';
+import { PancanPage } from 'pages/pancan/pancan-page';
 import * as user from 'data/fake-user.json';
 import Question from 'lib/component/Question';
 
@@ -29,7 +29,7 @@ export default class MedicalReleaseFormPage extends PancanPage {
   }
 
   contactPhysician(): Question{
-    return new Question(this.page,{prompt: 'I have already read and signed the informed consent document for this study, which describes the use of my personal health information (Section O: Authorization to use your health information for research purposes), and hereby grant permission to Nikhil Wagle, MD, Dana-Farber Cancer Institute, 450 Brookline Ave, Boston, MA, 02215, or a member of the study team to examine copies of my medical records pertaining to my cancer diagnosis and treatment, and, if I elected on the informed consent document, to obtain cancer samples and/or blood samples for research studies. I acknowledge that a copy of this completed form will be accessible via my project account.'});
+    return new Question(this.page,{prompt: 'I have already read and signed the informed consent document for this study, which describes the use of my personal health information'});
   }
   async enterPhysicianData(opts: { name?: string; hospital?: string; city?: string; state?: string; } = {}): Promise<void> {
     const {

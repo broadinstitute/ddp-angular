@@ -1,6 +1,8 @@
 import { expect, Locator, Page } from '@playwright/test';
 import { PancanPage } from 'pages/pancan/pancan-page';
 import { HomePageInterface } from 'pages/page-interface';
+import * as auth from 'authentication/auth-pancan';
+
 
 export default class HomePage extends PancanPage implements HomePageInterface {
   constructor(page: Page) {
@@ -29,7 +31,7 @@ export default class HomePage extends PancanPage implements HomePageInterface {
     await this.clickAndWaitForNav(this.getJoinCountMeInButton(), { waitForNav });
   }
 
-  logIn(): Promise<void> {
-    return Promise.resolve(undefined);
+  async logIn(): Promise<void> {
+    await auth.login(this.page);
   }
 }

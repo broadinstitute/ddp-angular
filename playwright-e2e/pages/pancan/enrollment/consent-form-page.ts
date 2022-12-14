@@ -1,7 +1,7 @@
 import { Locator, Page } from '@playwright/test';
 import Question from 'lib/component/Question';
 import Input from 'lib/widget/Input';
-import { PancanPage } from '../pancan-page';
+import { PancanPage } from 'pages/pancan/pancan-page';
 
 export default class ConsentFormPage extends PancanPage {
   constructor(page: Page) {
@@ -12,14 +12,14 @@ export default class ConsentFormPage extends PancanPage {
     await this.firstName().toLocator().waitFor({ state: 'visible' });
   }
 
-   async bloodSamples():Promise<void>{
-    const bloodSamplesRadioButton = this.page.locator(`mat-radio-button[id=mat-radio-2]`);
-    await bloodSamplesRadioButton.click();
-
+  async bloodSamples(): Promise<void> {
+    const bloodSamplesRadioButton = new Question(this.page, { prompt: 'You can work with me to arrange blood sample(s) to be drawn at my physician’s office, local clinic, or nearby lab facility.' });
+    await bloodSamplesRadioButton.check('Yes', { exactMatch: true });
   }
-  async cancerSamples():Promise<void>{
-    const cancerSamplesRadioButton = this.page.locator(`mat-radio-button[id=mat-radio-5]`);
-    await cancerSamplesRadioButton.click();
+
+  async cancerSamples(): Promise<void> {
+    const cancerSamplesRadioButton = new Question(this.page, { prompt: 'You can request my stored cancer samples (e.g. tumor biopsies, surgical specimens, bone marrow samples, etc)' });
+    await cancerSamplesRadioButton.check('Yes', { exactMatch: true });
   }
 
   /**
@@ -55,19 +55,5 @@ export default class ConsentFormPage extends PancanPage {
    */
   authorizationSignature(): Input {
     return new Input(this.page, { ddpTestID: 'answer:CONSENT_SELF_SIGNATURE_SUBJECT' });
-  }
-
-  /**
-   * <br> Question: Your Date of Birth
-   * <br> Type: Input
-   * @param month
-   * @param date
-   * @param year
-   */
-  async dateOfBirth(month: number | string, date: number | string, year: number | string): Promise<void> {
-    const dob = new Question(this.page, { prompt: 'Date of Birth' });
-    await dob.date().locator('input[data-placeholder="MM"]').fill(month.toString());
-    await dob.date().locator('input[data-placeholder="DD"]').fill(date.toString());
-    await dob.date().locator('input[data-placeholder="YYYY"]').fill(year.toString());
   }
 }

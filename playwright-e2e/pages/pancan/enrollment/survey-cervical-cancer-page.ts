@@ -1,7 +1,6 @@
 import { expect, Locator, Page } from "@playwright/test";
 import Question from "lib/component/Question";
-import Checkbox from "lib/widget/checkbox";
-import { PancanPage } from "../pancan-page";
+import { PancanPage } from 'pages/pancan/pancan-page';
 
 export default class SurveyCervicalCancerPage extends PancanPage {
 
@@ -9,47 +8,69 @@ export default class SurveyCervicalCancerPage extends PancanPage {
     super(page);
   }
   async waitForReady(): Promise<void> {
-    await this.cervicalCancerDiagnosedMonth().waitFor({state:'visible'});
-    await this.cervicalCancerDiagnosedYear().waitFor({state:'visible'});
+    await this.cervicalCancerDiagnosedMonth().waitFor({ state: 'visible' });
+    await this.cervicalCancerDiagnosedYear().waitFor({ state: 'visible' });
   }
-  //Question select
+  /**
+     * <br> Question: When were you first diagnosed with Cervical cancer?
+     * <br> Type: Locator
+     */
   cervicalCancerDiagnosedMonth(): Locator {
     return new Question(this.page, { prompt: 'When were you first diagnosed with Cervical cancer?' }).select('Choose month...');
 
 
   }
-  //Question select
+  /**
+   * <br> Question: When were you first diagnosed with Cervical cancer?
+   * <br> Type: Locator
+   */
+
   cervicalCancerDiagnosedYear(): Locator {
     return new Question(this.page, { prompt: 'When were you first diagnosed with Cervical cancer?' }).select('Choose year...');
 
   }
-  //Question selectInput
+  /**
+   * <br> Question: Please select the places in the body where you had cancer when you was first diagnosed.
+   * <br> Type: Input
+   */
+
   cancerBodyPlaces(): Locator {
     return this.page.locator('.picklist-answer-INITIAL_BODY_LOC').locator('input');
-    //return new Question(this.page,{parentSelector: this.page.locator('.picklist-answer-INITIAL_BODY_LOC')}).input();
 
   }
-  //Question radio-button
+  /**
+     * <br> Question: Are you currently cancer-free (e.g. in remission, no evidence of disease (NED), no evidence of active disease (NEAD))?
+     * <br> Type: Radio-button
+     */
   cancerFree(): Question {
-    return new Question(this.page,{prompt: 'Are you currently cancer-free (e.g. in remission, no evidence of disease (NED), no evidence of active disease (NEAD))?'});
+    return new Question(this.page, { prompt: 'Are you currently cancer-free (e.g. in remission, no evidence of disease (NED), no evidence of active disease (NEAD))?' });
 
   }
-  //Question radio-button
+  /**
+     * <br> Question: Please select all the places in the body where you have ever had cancer to the best of your knowledge.
+     * <br> Type: Input
+     */
   bodyPlacesEverHadCancer() {
     return this.page.locator('.picklist-answer-EVER_BODY_LOC').locator('input');
   }
-  //Question mat-checkbox
-  treatmentsReceived(label: string) {
-    return this.page.locator('.picklist-answer-TREATMENTS').locator('mat-checkbox').filter({hasText: label});
+  /**
+     * <br> Question: Have you received any of the following treatments or procedures for your cancer?
+     * <br> Type: checkbox
+     */
+  treatmentsReceived(label: string): Locator {
+    return this.page.locator('.picklist-answer-TREATMENTS').locator('mat-checkbox').filter({ hasText: label });
 
   }
-  //Question input
-  medicationsList() {
+  /**
+     * <br> Question: Please list all medications/chemotherapies that you have previously received and are currently receiving for the treatment of your cancer
+     * <br> Type: Input
+     */
+  medicationsList(): Locator {
     return this.page.locator('.activity-text-input-THERAPY_NAME').locator('input');
 
   }
-  async cervicalCancerDiagnosedDate(month: string,year: string){
-    await this.cervicalCancerDiagnosedMonth().selectOption({label: month});
+  async cervicalCancerDiagnosedDate(month: string, year: string) {
+    await this.cervicalCancerDiagnosedMonth().selectOption({ label: month });
     await this.cervicalCancerDiagnosedYear().selectOption(year);
   }
   async fillCancerBodyPlaces(value: string) {
