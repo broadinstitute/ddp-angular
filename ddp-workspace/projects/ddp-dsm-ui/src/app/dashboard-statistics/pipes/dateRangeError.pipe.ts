@@ -5,7 +5,7 @@ import {DateRangeErrorMessages} from './constants/dateRange-error.messages';
   name: 'DateRangeError'
 })
 export class DateRangeErrorPipe implements PipeTransform {
-  transform(errorKey: string, dateType?: string): string {
+  transform(errorKey: string, dateType: string): string {
     return DateRangeErrorMessages[dateType][errorKey] || '';
   }
 }
