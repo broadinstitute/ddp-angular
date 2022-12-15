@@ -93,14 +93,14 @@ export class ScanComponent implements OnInit {
   }
 
   public validateRightValue(position: number): boolean {
-    if (this.scanPairsValue.length > 0 && this.scanPairsValue[position] != null) {
+    if (this.scanPairsValue.length > 1 && this.scanPairsValue[position] != null) {
       return this.isDuplicate(this.scanPairsValue[position].rightValue, position, false);
     }
     return false;
   }
 
   public validateLeftValue(position: number): boolean {
-    if (this.scanPairsValue.length > 0 && this.scanPairsValue[position] != null) {
+    if (this.scanPairsValue.length > 1 && this.scanPairsValue[position] != null) {
       return this.isDuplicate(this.scanPairsValue[position].leftValue, position, true);
     }
     return false;
@@ -108,6 +108,7 @@ export class ScanComponent implements OnInit {
 
   private isDuplicate(labelValue: string, position: number, isLeft: boolean): boolean {
     let isDuplicate = false;
+    console.log("here");
     if(labelValue !== '') {
       for (let i = 0; i < this.scanPairsValue.length; i++) {
         if (i !== position) {
