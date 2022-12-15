@@ -94,34 +94,33 @@ export class ScanComponent implements OnInit {
 
   public validateRightValue(position: number): boolean {
     if (this.scanPairsValue.length > 0 && this.scanPairsValue[position] != null) {
-      return this.validateValue(this.scanPairsValue[position].rightValue, position, false);
+      return this.isDuplicate(this.scanPairsValue[position].rightValue, position, false);
     }
     return false;
   }
 
   public validateLeftValue(position: number): boolean {
     if (this.scanPairsValue.length > 0 && this.scanPairsValue[position] != null) {
-      return this.validateValue(this.scanPairsValue[position].leftValue, position, true);
+      return this.isDuplicate(this.scanPairsValue[position].leftValue, position, true);
     }
     return false;
   }
 
-  private validateValue(labelValue: string, position: number, isLeft: boolean): boolean {
+  private isDuplicate(labelValue: string, position: number, isLeft: boolean): boolean {
     let isDuplicate = false;
     if(labelValue !== '') {
       for (let i = 0; i < this.scanPairsValue.length; i++) {
         if (i !== position) {
-          if (this.scanPairsValue[position].leftValue != null && labelValue === this.scanPairsValue[i].leftValue
-            || this.scanPairsValue[position].rightValue != null && labelValue === this.scanPairsValue[i].rightValue) {
+          if (this.isNullOrDuplicate(true, true, position, i, labelValue)) {
             isDuplicate = true;
           }
         } else {
           if (isLeft) {
-            if (this.scanPairsValue[position].rightValue != null && labelValue === this.scanPairsValue[i].rightValue) {
+            if (this.isNullOrDuplicate(true, false, position, i, labelValue)) {
               isDuplicate = true;
             }
           } else {
-            if (this.scanPairsValue[position].leftValue != null && labelValue === this.scanPairsValue[i].leftValue) {
+            if (this.isNullOrDuplicate(false, true, position, i, labelValue)) {
               isDuplicate = true;
             }
           }
@@ -129,6 +128,25 @@ export class ScanComponent implements OnInit {
       }
     }
     return isDuplicate;
+  }
+
+  isNullOrDuplicate(right: boolean, left: boolean, position: number, index: number, labelValue: string) {
+    let isNullOrDuplicate = false;
+    //Check if the left value is null or duplicate
+    if(left) {
+      isNullOrDuplicate = this.scanPairsValue[position].leftValue != null && 
+      labelValue === this.scanPairsValue[index].leftValue;
+    }
+
+    //If above condition was true skip this check and return otherwise check
+    //if right value is null or duplicate
+    if(right && !isNullOrDuplicate) {
+      isNullOrDuplicate = this.scanPairsValue[position].rightValue != null && 
+      labelValue === this.scanPairsValue[index].rightValue;
+    }
+
+    return isNullOrDuplicate
+
   }
 
   public removeScanPair(position: number): void {
@@ -139,7 +157,7 @@ export class ScanComponent implements OnInit {
   private addNewScanPair(): void {
     const newRow = new ScanPairComponent();
     this.scanPairs.push(newRow);
-    this.scanPairsValue.push(new ScanPair('', ''));
+    this.scanPairsValue.push(new ScanPair());
   }
 
   ngOnInit(): void {
@@ -178,11 +196,11 @@ export class ScanComponent implements OnInit {
     if (this.scanPairsValue.length > 0) {
       this.duplicateDetected = false;
       for (let i = 0; i < this.scanPairsValue.length - 1; i++) {
-        if (this.validateValue(this.scanPairsValue[i].leftValue, i, true)) {
+        if (this.isDuplicate(this.scanPairsValue[i].leftValue, i, true)) {
           this.duplicateDetected = true;
           break;
         }
-        if (this.validateValue(this.scanPairsValue[i].rightValue, i, false)) {
+        if (this.isDuplicate(this.scanPairsValue[i].rightValue, i, false)) {
           this.duplicateDetected = true;
           break;
         }
@@ -467,12 +485,13 @@ export class ScanComponent implements OnInit {
       return true;
     }
     for (const {leftValue, rightValue} of this.scanPairsValue) {
-      //If both are null I want the button to be enabled, so return false
+      //If there is already one valid pair but the next are both
+      //empty I want the button to be enabled, so return false
       if(rightValue === '' && leftValue === '') {
         return false;
       }
 
-      //If only one of the two is null, I want the button to be enabled
+      //If only one of the two is empty, I want the button to be disabled
       if(leftValue === '') {
           return true;
       }

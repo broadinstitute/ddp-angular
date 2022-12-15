@@ -1,7 +1,7 @@
 export class ScanPair {
   public error: string;
 
-  constructor(public leftValue: string, public rightValue: string) {
+  constructor(public leftValue: string='', public rightValue: string='') {
     this.leftValue = leftValue;
     this.rightValue = rightValue;
   }
