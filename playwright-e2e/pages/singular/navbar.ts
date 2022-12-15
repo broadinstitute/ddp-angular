@@ -1,4 +1,5 @@
 import { Page, Response } from '@playwright/test';
+import { waitForNoSpinner } from 'utils/test-utils';
 
 const { SINGULAR_BASE_URL } = process.env;
 
@@ -36,9 +37,8 @@ export async function visitHomePage(page: Page): Promise<Response | null> {
 }
 
 export async function signMeUp(page: Page): Promise<void> {
-  const progressSpinner = 'mat-spinner[role="progressbar"]';
-  await Promise.all([page.locator(NavSelectors.SignMeUp).click(), page.locator(progressSpinner).waitFor({ state: 'visible' })]);
-  await page.locator(progressSpinner).waitFor({ state: 'detached', timeout: 30 * 1000 });
+  await page.locator(NavSelectors.SignMeUp).click();
+  await waitForNoSpinner(page);
 }
 
 export async function clickLogin(page: Page): Promise<void> {

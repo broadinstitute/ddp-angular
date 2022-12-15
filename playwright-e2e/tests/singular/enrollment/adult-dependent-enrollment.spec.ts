@@ -37,7 +37,7 @@ test.describe('Enrol an adult dependent', () => {
    * Test case: https://docs.google.com/document/d/1vaiSfsYeDzEHeK2XOVO3n_7I1W0Z94Kkqx_82w8-Vpc/edit#heading=h.6snot4x1e1uw
    */
   test('can finish adult-dependent-enrollment @enrollment @singular', async ({ page, homePage }) => {
-    await homePage.signUp();
+    await homePage.clickSignMeUp();
 
     // On “pre-screening” page, answer all questions about yourself with fake values
     const preScreeningPage = new PreScreeningPage(page);

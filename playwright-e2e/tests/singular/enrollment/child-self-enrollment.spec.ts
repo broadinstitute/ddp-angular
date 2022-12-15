@@ -8,7 +8,7 @@ test.describe('Child Enrollment', () => {
    * Child (age under 19) cannot complete self-enrollment
    */
   test('self-enrollment cannot complete @enrollment @singular', async ({ page, homePage }) => {
-    await homePage.signUp();
+    await homePage.clickSignMeUp();
 
     // On “Create your account” page
     const preScreeningPage = new PreScreeningPage(page);

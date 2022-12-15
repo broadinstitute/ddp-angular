@@ -21,7 +21,7 @@ test.describe('Enroll my child', () => {
   const childLastName = generateUserName(user.thirdChild.lastName);
 
   test('enrolling non assenting child > 7 not capable of consent @enrollment @singular', async ({ page, homePage }) => {
-    await homePage.signUp();
+    await homePage.clickSignMeUp();
 
     // Step 1
     // On “pre-screening” page, answer all questions about yourself with fake values

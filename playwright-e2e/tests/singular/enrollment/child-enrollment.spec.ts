@@ -27,7 +27,7 @@ test.describe('Enroll my child', () => {
    * Ages 7-age of majority: child needs to give assent in addition to parent’s consent
    */
   test('enrolling an assenting child @enrollment @singular', async ({ page, homePage }) => {
-    await homePage.signUp();
+    await homePage.clickSignMeUp();
 
     // Step 1
     // On “pre-screening” page, answer all questions about yourself with fake values

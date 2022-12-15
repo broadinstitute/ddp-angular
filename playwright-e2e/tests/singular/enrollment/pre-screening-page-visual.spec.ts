@@ -2,10 +2,10 @@ import { expect } from '@playwright/test';
 import { test } from 'fixtures/singular-fixture';
 import PreScreeningPage from 'pages/singular/enrollment/pre-screening-page';
 
-test.describe('About Yourself page', () => {
+test.describe.parallel('About Yourself page', () => {
   // Country validation: Select a country which is not US and Canada should triggers an error message
   test('select country France @visual @enrollment @singular', async ({ page, homePage }) => {
-    await homePage.signUp();
+    await homePage.clickSignMeUp();
 
     const preScreeningPage = new PreScreeningPage(page);
 
@@ -26,7 +26,7 @@ test.describe('About Yourself page', () => {
 
   // Age validation: 0 - 18 in country US should triggers an error message: requires parent or guardian to register in US
   test('Enter age 2 in US @visual @enrollment @singular', async ({ page, homePage }) => {
-    await homePage.signUp();
+    await homePage.clickSignMeUp();
 
     const preScreeningPage = new PreScreeningPage(page);
 

@@ -34,7 +34,7 @@ export default class HomePage extends SingularPage implements HomePageInterface 
    * Click "Sign me up!" button.
    * @param opts
    */
-  async signUp(opts: { waitForNav?: boolean } = {}): Promise<void> {
+  async clickSignMeUp(opts: { waitForNav?: boolean } = {}): Promise<void> {
     const { waitForNav = true } = opts;
     await this.clickAndWaitForNav(this.getSignMeUpButton(), { waitForNav });
   }

@@ -24,7 +24,7 @@ test.describe('Enroll myself as adult', () => {
    * Test case: https://docs.google.com/document/d/1Ewsh4ULh5LVdZiUapvG-PyI2kL3XzVf4seeLq8Mt-B0/edit?usp=sharing
    */
   test('can complete self-enrollment @enrollment @singular', async ({ context, page, homePage }) => {
-    await homePage.signUp();
+    await homePage.clickSignMeUp();
 
     // Step 1
     // On “pre-screening” page, answer all questions about yourself with fake values
