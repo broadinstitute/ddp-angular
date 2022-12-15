@@ -130,22 +130,22 @@ export class ScanComponent implements OnInit {
     return isDuplicate;
   }
 
-  isNullOrDuplicate(right: boolean, left: boolean, position: number, index: number, labelValue: string) {
+  isNullOrDuplicate(right: boolean, left: boolean, position: number, index: number, labelValue: string): boolean {
     let isNullOrDuplicate = false;
     //Check if the left value is null or duplicate
     if(left) {
-      isNullOrDuplicate = this.scanPairsValue[position].leftValue != null && 
+      isNullOrDuplicate = this.scanPairsValue[position].leftValue != null &&
       labelValue === this.scanPairsValue[index].leftValue;
     }
 
     //If above condition was true skip this check and return otherwise check
     //if right value is null or duplicate
     if(right && !isNullOrDuplicate) {
-      isNullOrDuplicate = this.scanPairsValue[position].rightValue != null && 
+      isNullOrDuplicate = this.scanPairsValue[position].rightValue != null &&
       labelValue === this.scanPairsValue[index].rightValue;
     }
 
-    return isNullOrDuplicate
+    return isNullOrDuplicate;
 
   }
 
