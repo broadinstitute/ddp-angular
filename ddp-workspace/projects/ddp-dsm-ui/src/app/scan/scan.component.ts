@@ -108,7 +108,6 @@ export class ScanComponent implements OnInit {
 
   private isDuplicate(labelValue: string, position: number, isLeft: boolean): boolean {
     let isDuplicate = false;
-    console.log("here");
     if(labelValue !== '') {
       for (let i = 0; i < this.scanPairsValue.length; i++) {
         if (i !== position) {
