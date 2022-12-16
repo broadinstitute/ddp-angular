@@ -86,10 +86,7 @@ export class ScanComponent implements OnInit {
   }
 
   private shouldAddNewPair(position: number): boolean {
-    if(this.scanPairs.length === position + 1) {
-      return true;
-    }
-    return false;
+    return this.scanPairs.length === position + 1;
   }
 
   public validateRightValue(position: number): boolean {
@@ -130,7 +127,7 @@ export class ScanComponent implements OnInit {
     return isDuplicate;
   }
 
-  isNullOrDuplicate(right: boolean, left: boolean, position: number, index: number, labelValue: string): boolean {
+  private isNullOrDuplicate(right: boolean, left: boolean, position: number, index: number, labelValue: string): boolean {
     let isNullOrDuplicate = false;
     //Check if the left value is null or duplicate
     if(left) {

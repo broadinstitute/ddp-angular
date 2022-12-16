@@ -1,5 +1,5 @@
 <mat-form-field>
-  <input matInput #leftInput name="leftValue" type="text" placeholder="{{leftInputPlaceholder}}" style="width: 8cm" (change)="moveFocus(leftInput.value, rightInput.value)" autocomplete="off">
+  <input matInput #leftInput name="leftValue" type="text" placeholder="{{leftInputPlaceholder}}" style="width: 8cm" (change)="moveFocus(leftInput.value)" autocomplete="off">
   <mat-hint class="ErrorMessageForm" *ngIf="isLeftValueDuplicate">Value already exists!</mat-hint>
 </mat-form-field>
 
