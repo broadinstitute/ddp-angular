@@ -16,16 +16,16 @@ export default class Table {
     this.tableCss = ddpTestID
         ? `[data-ddp-test="${ddpTestID}"]`
         : cssClassAttribute
-            ? `table${cssClassAttribute}, mat-table${classAttribute}`
+            ? `table${cssClassAttribute}, mat-table${cssClassAttribute}`
             : 'table, [role="table"]';
-    this.headerCss = '[role="columnheader"], th[class], mat-header-row';
+    this.headerCss = '[role="columnheader"], th[class], mat-header-row mat-header-cell';
     this.rowCss = '[role="row"]:not(mat-header-row), tbody tr, mat-row';
-    this.cellCss = 'td, [role="cell"]';
+    this.cellCss = 'td, [role="cell"], mat-cell';
     this.footerCss = 'tfoot tr';
   }
 
   async waitForReady() {
-    await expect(this.page.locator(this.headerCss)).toBeVisible();
+    await expect(this.tableLocator()).toBeVisible();
   }
 
   tableLocator(): Locator {
@@ -92,7 +92,7 @@ export default class Table {
    * Finds table column header names. Returns an array of string.
    * @returns {Array<string>}
    */
-  async getHeaderNames(): Promise<Array<string>> {
+   async getHeaderNames(): Promise<Array<string>> {
     const columns = await this.headerLocator().elementHandles();
     return await Promise.all(
       _.map(columns, async (column) => {
