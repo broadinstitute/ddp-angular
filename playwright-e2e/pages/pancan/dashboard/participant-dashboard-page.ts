@@ -22,7 +22,7 @@ export default class ParticipantDashboardPage extends PancanPage {
   }
 
   getDashboardTable(): Table {
-    return new Table(this.page, { classAttribute: '.ddp-dashboard' });
+    return new Table(this.page, { cssClassAttribute: '.ddp-dashboard' });
   }
 
   /**
