@@ -72,20 +72,6 @@ export default class ConsentFormPage extends PancanPage {
     await this.childSignature().toLocator().waitFor({ state: 'visible' });
   }
 
-  /**
-   * <br> Question: Your Date of Birth
-   * <br> Type: Input
-   * @param month
-   * @param date
-   * @param year
-   */
-  async dateOfBirth(month: number | string, date: number | string, year: number | string): Promise<void> {
-    const dob = new Question(this.page, { prompt: PatientsData[this.typePatient].ddpTestID.dateOfBirthLocation });
-    await dob.date().locator('input[data-placeholder="MM"]').fill(month.toString());
-    await dob.date().locator('input[data-placeholder="DD"]').fill(date.toString());
-    await dob.date().locator('input[data-placeholder="YYYY"]').fill(year.toString());
-  }
-
   async parentData() {
     const parentFirstName = new Input(this.page, { ddpTestID: PatientsData.child.ddpTestID.assentFirstName });
     const parentLastName = new Input(this.page, { ddpTestID: PatientsData.child.ddpTestID.assentLastName });

@@ -9,7 +9,7 @@ import * as auth from '../../../authentication/auth-pancan';
 import { assertActivityHeader, assertActivityStep } from '../../../utils/assertion-helper';
 import ConsentFormPage from '../../../pages/pancan/enrollment/consent-form-page';
 import { enterMailingAddress } from '../../../utils/test-utils';
-import MedicalReleaseFormPage from '../../../pages/pancan/enrollment/medical-release-form-page';
+const { PANCAN_USER_EMAIL, PANCAN_USER_PASSWORD } = process.env;
 
 test.describe('Enroll child ', () => {
   test('can complete child-enrollment @enrollment @pancan', async ({ context, page, homePage }) => {
@@ -35,7 +35,7 @@ test.describe('Enroll child ', () => {
 
     // Step 2
     // Enter email alias and password to create new account
-    await auth.createAccountWithEmailAlias(page);
+    await auth.createAccountWithEmailAlias(page, { email: PANCAN_USER_EMAIL, password: PANCAN_USER_PASSWORD });
 
     // Step 3
     // On "Consent Form" page, Page 1 of 3.
@@ -52,7 +52,7 @@ test.describe('Enroll child ', () => {
     await consentFormPage.cancerSamples();
     await consentFormPage.firstName().fill(user.child.firstName);
     await consentFormPage.lastName().fill(lastName);
-    await consentFormPage.dateOfBirth(user.child.birthDate.MM, user.child.birthDate.DD, user.child.birthDate.YYYY);
+    await consentFormPage.fillInDateOfBirth(user.child.birthDate.MM, user.child.birthDate.DD, user.child.birthDate.YYYY);
     await consentFormPage.parentData();
     await enterMailingAddress(page, { fullName: `${user.child.firstName} ${lastName}` }, 'Phone');
     await consentFormPage.next();
