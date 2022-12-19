@@ -29,7 +29,7 @@ export class ScanComponent implements OnInit {
   scanReceived = false;
   initialScan = false;
   scanValues: Array<ScanValueComponent> = [];
-  public showErrorMessage: boolean = false
+  public showErrorMessage = false;
   private singleScanValues: Array<ScanValue> = [];
 
   constructor(private _changeDetectionRef: ChangeDetectorRef, private dsmService: DSMService, private router: Router,
