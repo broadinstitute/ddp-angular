@@ -883,7 +883,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
       // this.selectedTabTitle = data.heading;
       this.activeTab = tabName;
     }
-    if (tabName === 'sequencing' && this.role.allowedToDoOrderSequencing() && !this.hasSequencingOrders) {
+    if (tabName === 'sequencing' && this.role.allowedToDoOrderSequencing() && this.hasSequencingOrders) {
       this.getMercuryEligibleSamples();
     }
   }
