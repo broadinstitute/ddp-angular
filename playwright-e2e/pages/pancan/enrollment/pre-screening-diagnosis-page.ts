@@ -1,7 +1,7 @@
 import { Page } from '@playwright/test';
 import Question from 'lib/component/Question';
-import { PancanPage } from '../pancan-page';
-import { TypePatient, PatientsData } from './utils/PatientType';
+import { PancanPage } from 'pages/pancan/pancan-page';
+import { typePatient, PatientsData } from './utils/PatientType';
 
 export default class PreScreeningDiagnosisPage extends PancanPage {
   constructor(page: Page, private typePerson: TypePatient = 'adult') {

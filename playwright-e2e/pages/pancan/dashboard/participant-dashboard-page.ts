@@ -1,6 +1,6 @@
 import { expect, Locator, Page } from '@playwright/test';
 import Table from 'lib/widget/table';
-import { PancanPage } from '../pancan-page';
+import { PancanPage } from 'pages/pancan/pancan-page';
 
 
 export default class ParticipantDashboardPage extends PancanPage {
@@ -22,7 +22,7 @@ export default class ParticipantDashboardPage extends PancanPage {
   }
 
   getDashboardTable(): Table {
-    return new Table(this.page, { classAttribute: '.ddp-dashboard' });
+    return new Table(this.page, { cssClassAttribute: '.ddp-dashboard' });
   }
 
   /**

@@ -1,8 +1,8 @@
 import PreScreeningAgeLocationPage from 'pages/pancan/enrollment/pre-screening-age-location-page';
 import PreScreeningDiagnosisPage from 'pages/pancan/enrollment/pre-screening-diagnosis-page';
-import { test } from '../../../fixtures/pancan-fixture';
-import PreScreeningPage from '../../../pages/pancan/enrollment/pre-screeening-page';
-import * as auth from 'authentication/auth-pancan';
+import { test } from 'fixtures/pancan-fixture';
+import PreScreeningPage from 'pages/pancan/enrollment/pre-screeening-page';
+import * as auth from 'authentication/auth-base';
 import { assertActivityHeader, assertActivityStep } from 'utils/assertion-helper';
 import ConsentFormPage from 'pages/pancan/enrollment/consent-form-page';
 import { generateUserName } from 'utils/faker-utils';
@@ -10,14 +10,18 @@ import * as user from 'data/fake-user.json';
 import { enterMailingAddress } from 'utils/test-utils';
 import MedicalReleaseFormPage from 'pages/pancan/enrollment/medical-release-form-page';
 import { expect } from '@playwright/test';
-import { PatientsData } from '../../../pages/pancan/enrollment/utils/PatientType';
+import { PatientsData } from 'pages/pancan/enrollment/utils/PatientType';
 import SurveyCervicalCancerPage from 'pages/pancan/enrollment/survey-cervical-cancer-page';
 import SurveyAboutYouPage from 'pages/pancan/enrollment/survey-about-you.page';
 import ParticipantDashboardPage from 'pages/pancan/dashboard/participant-dashboard-page';
+import HomePage from 'pages/pancan/home/home-page';
+const { PANCAN_USER_EMAIL, PANCAN_USER_PASSWORD } = process.env;
+
 
 test.describe('Enroll myself as adult', () => {
-  test('can complete self-enrollment @enrollment @pancan', async ({ context, page, homePage }) => {
-    await homePage.join();
+  test('can complete self-enrollment @enrollment @pancan', async ({ page }) => {
+    const pancanHomePage = new HomePage(page);
+    await pancanHomePage.join({ waitForNav: true });
     // Randomize last name
     const lastName = generateUserName(user.patient.lastName);
 
@@ -30,8 +34,8 @@ test.describe('Enroll myself as adult', () => {
     //diagnosis page
     const preScreeningDiagnosisPage = new PreScreeningDiagnosisPage(page);
     await preScreeningDiagnosisPage.waitForReady();
-    await preScreeningDiagnosisPage.cancerDiagnosed().input().fill(PatientsData.adult.cancerDiagnosed.typeCancer);
-    await preScreeningDiagnosisPage.getNextButton().waitFor({ state: 'visible' });
+    await preScreeningDiagnosisPage.cancerDiagnosed().input().fill(PatientsData.adult.cancerDiagnosed.cancer);
+    await page.waitForResponse((resp) => resp.url().includes('/answers') && resp.status() === 200);
     await preScreeningDiagnosisPage.next();
     //age/location page
     const preScreeningAgeLocationPage = new PreScreeningAgeLocationPage(page);
@@ -40,7 +44,7 @@ test.describe('Enroll myself as adult', () => {
 
     // Step 2
     // Enter email alias and password to create new account
-    await auth.createAccountWithEmailAlias(page);
+    await auth.createAccountWithEmailAlias(page, { email: PANCAN_USER_EMAIL, password: PANCAN_USER_PASSWORD });
 
     // Step 3
     // On "Consent Form" page, Page 1 of 3.
@@ -57,7 +61,7 @@ test.describe('Enroll myself as adult', () => {
     await consentFormPage.cancerSamples();
     await consentFormPage.firstName().fill(user.patient.firstName);
     await consentFormPage.lastName().fill(lastName);
-    await consentFormPage.dateOfBirth(user.patient.birthDate.MM, user.patient.birthDate.DD, user.patient.birthDate.YYYY);
+    await consentFormPage.fillInDateOfBirth(user.patient.birthDate.MM, user.patient.birthDate.DD, user.patient.birthDate.YYYY);
     await consentFormPage.signature().fill(`${user.patient.firstName} ${lastName}`);
     await enterMailingAddress(page, { fullName: `${user.patient.firstName} ${lastName}` }, 'Phone');
     await consentFormPage.submit();
@@ -83,23 +87,30 @@ test.describe('Enroll myself as adult', () => {
     await assertActivityHeader(page, 'Survey: About You');
     const survayAboutYou = new SurveyAboutYouPage(page);
     await survayAboutYou.waitForReady();
-    await survayAboutYou.sexAssignedAtBirth().radioButton('Male', {exactMatch: true}).locator('label').click();
+    await survayAboutYou.sexAssignedAtBirth().radioButton('Male', { exactMatch: true }).locator('label').click();
     await survayAboutYou.checkGenderIdentity('Man');
     await survayAboutYou.checkCategoriesDecribesYou('White');
     await survayAboutYou.checkCategoriesDecribesYou('English');
     await survayAboutYou.howDidYouHearAboutProject().check('Social media (Facebook, Twitter, Instagram, etc.)');
-    await survayAboutYou.howDidYouHearAboutProject().check('Facebook',{exactMatch: true});
+    await survayAboutYou.howDidYouHearAboutProject().check('Facebook', { exactMatch: true });
     await survayAboutYou.submit();
     //dashboard
     const participantDashborad = new ParticipantDashboardPage(page);
     await participantDashborad.waitForReady();
     const orderedHeaders = ['Form', 'Summary', 'Status', 'Actions'];
     const table = participantDashborad.getDashboardTable();
-    let headers = await table.getColumnNames();
-    headers=headers.length > 1 ? headers : headers[0].split(/\n/g);
+    await table.waitForReady();
+    let headers = await table.getHeaderNames();
     expect(headers).toHaveLength(4); // Four columns in table
     expect(headers).toEqual(orderedHeaders);
-
+    const statusResearchCell = await table.findCell('Form', 'Research Consent Form', 'Status');
+    await expect(await statusResearchCell?.innerText()).toEqual("Complete");
+    const statusMedicalReleaseCell = await table.findCell('Form', 'Medical Release Form', 'Status');
+    await expect(await statusMedicalReleaseCell?.innerText()).toEqual("Complete");
+    const statusCervicalCancerCell = await table.findCell('Form', 'Survey: Your Cervical cancer', 'Status');
+    await expect(await statusCervicalCancerCell?.innerText()).toEqual("Complete");
+    const statusAboutYouCell = await table.findCell('Form', 'Survey: About You', 'Status');
+    await expect(await statusAboutYouCell?.innerText()).toEqual("Complete");
 
   });
 });

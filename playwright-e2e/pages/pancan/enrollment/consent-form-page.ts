@@ -1,7 +1,7 @@
 import { expect, Locator, Page } from '@playwright/test';
 import Question from 'lib/component/Question';
 import Input from 'lib/widget/Input';
-import { PancanPage } from '../pancan-page';
+import { PancanPage } from 'pages/pancan/pancan-page';
 import { PatientsData, TypePatient } from './utils/PatientType';
 import { generateUserName } from '../../../utils/faker-utils';
 import * as user from '../../../data/fake-user.json';
@@ -16,13 +16,13 @@ export default class ConsentFormPage extends PancanPage {
   }
 
   async bloodSamples(): Promise<void> {
-    const bloodSamplesRadioButton = this.page.locator(`mat-radio-button[id=mat-radio-2]`);
-    await bloodSamplesRadioButton.click();
+    const bloodSamplesRadioButton = new Question(this.page, { prompt: 'You can work with me to arrange blood sample(s) to be drawn at my physician’s office, local clinic, or nearby lab facility.' });
+    await bloodSamplesRadioButton.check('Yes', { exactMatch: true });
   }
 
   async cancerSamples(): Promise<void> {
-    const cancerSamplesRadioButton = this.page.locator(`mat-radio-button[id=mat-radio-5]`);
-    await cancerSamplesRadioButton.click();
+    const cancerSamplesRadioButton = new Question(this.page, { prompt: 'You can request my stored cancer samples (e.g. tumor biopsies, surgical specimens, bone marrow samples, etc)' });
+    await cancerSamplesRadioButton.check('Yes', { exactMatch: true });
   }
 
   /**
