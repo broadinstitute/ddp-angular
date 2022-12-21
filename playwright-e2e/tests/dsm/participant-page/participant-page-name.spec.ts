@@ -2,34 +2,41 @@ import { expect, test } from '@playwright/test';
 import { login } from 'authentication/auth-dsm';
 import { study } from 'pages/dsm/navbar';
 import Select from 'lib/widget/select';
-import ParticipantsPage, { SearchFieldLabel } from 'pages/dsm/participants/participants-page';
+import ParticipantsPage from 'pages/dsm/participants/participants-page';
 import Table from 'lib/widget/table';
 import { Page } from '@playwright/test';
 
-test.describe('Participant Page DSM', () => {
+test.describe.parallel('Participant Page DSM', () => {
   test.beforeEach(async ({ page }) => {
     await login(page);
   });
 
-  test('Ensure name field updates properlyfor Brain @dsm @dsm-search', async ({ page }) => {
+  test('Ensure name field updates properly for Brain @dsm @dsm-search @functional', async ({ page }) => {
     await nameTest("Brain", page);
   });
 
-  test('Ensure name field updates properlyfor PanCan @dsm @dsm-search', async ({ page }) => {
+  test('Ensure name field updates properly for PanCan @dsm @dsm-search @functional', async ({ page }) => {
     await nameTest("PanCan", page);
   });
 
-  test('Ensure name field updates properlyfor Singular @dsm @dsm-search', async ({ page }) => {
+  test('Ensure name field updates properly for Singular @dsm @dsm-search @functional', async ({ page }) => {
     await nameTest("Singular", page);
   });
 
-  test('Ensure name field updates properlyfor RGP @dsm @dsm-search', async ({ page }) => {
+  test('Ensure name field updates properly for RGP @dsm @dsm-search @functional', async ({ page }) => {
     await nameTest("RGP", page);
   });
 });
 
 
 async function nameTest(studyName: string, page: Page) {
+  const currentdate = new Date(); 
+  const dateString = (currentdate.getMonth()+1)+ "/"
+                + currentdate.getDate()  + "/" 
+                + currentdate.getFullYear() + "@"  
+                + currentdate.getHours() + ":"  
+                + currentdate.getMinutes() + ":" 
+                + currentdate.getSeconds();
   await new Select(page, { label: 'Select study' }).selectOption(studyName);
   await expect(page.locator('h1')).toHaveText('Welcome to the DDP Study Management System');
   await expect(page.locator('h2')).toHaveText('You have selected the ' + studyName + ' study.');
@@ -43,23 +50,18 @@ async function nameTest(studyName: string, page: Page) {
   //Pick the participant at row 4 and enter their participant page
   const table = new Table(page);
   const cell = await table.cell(3, 2)
-  const shortId = cell.innerText();
   await cell.click();
   await expect(page.locator('h1')).toHaveText('Participant Page', { timeout: 5 * 1000 });
   //Change their first name
-  await page.fill('[placeholder="First Name"]', "test name");
-  let compareName = "test name";
+  let newName = "John Wakerman-" + dateString;
+  await page.fill('[placeholder="First Name"]', newName);
 
   //If the update button is clickable click it, otherwise change the name again
   const updateButtons = await page.locator('button:has-text("Update")');
   const firstNameButton = updateButtons.nth(0);
-  if(await firstNameButton.isDisabled()) {
-    await page.fill('[placeholder="First Name"]', "test name2");
-    compareName = "test name2";
-  }
   await firstNameButton.click();
-  //Wait for the update to finish
-  await expect(page.locator("text=Participant successfully updated")).toBeVisible({ timeout: 15 * 1000 });
+  //Wait for the update to finish. This sometimes takes a long time, so the timeout could still fail
+  await expect(page.locator("text=Participant successfully updated")).toBeVisible({ timeout: 30 * 1000 });
   await page.waitForTimeout(1000);
 
   //Refresh the page twice
@@ -73,5 +75,5 @@ async function nameTest(studyName: string, page: Page) {
   //Verify the name changed
   await cell.click();
   await expect(page.locator('h1')).toHaveText('Participant Page', { timeout: 5 * 1000 });
-  expect(await page.locator('[placeholder="First Name"]').inputValue()).toEqual(compareName);
+  expect(await page.locator('[placeholder="First Name"]').inputValue()).toEqual(newName);
 }
