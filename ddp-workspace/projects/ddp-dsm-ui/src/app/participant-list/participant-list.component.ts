@@ -1239,6 +1239,7 @@ export class ParticipantListComponent implements OnInit {
         }
       }
     });
+    this.currentFilter = [];
   }
 
   private resetPagination(): void {
