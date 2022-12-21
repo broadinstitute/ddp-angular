@@ -67,9 +67,7 @@ export class ScanComponent implements OnInit {
       if(!this.scanPairsValue.length) {
         return true;
       }
-      const invalid = !this.scanPairsValue.every(({rightValue}: ScanPair) => rightValue.length === 6);
-      this.showErrorMessage = invalid;
-      return invalid;
+      return !this.scanPairsValue.every(({rightValue}: ScanPair) => rightValue.length === 6);
     }
     return false;
   }
