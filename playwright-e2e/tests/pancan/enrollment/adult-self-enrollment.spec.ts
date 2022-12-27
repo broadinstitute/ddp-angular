@@ -17,7 +17,6 @@ import ParticipantDashboardPage from 'pages/pancan/dashboard/participant-dashboa
 import HomePage from 'pages/pancan/home/home-page';
 const { PANCAN_USER_EMAIL, PANCAN_USER_PASSWORD } = process.env;
 
-
 test.describe('Enroll myself as adult', () => {
   test('can complete self-enrollment @enrollment @pancan', async ({ page }) => {
     const pancanHomePage = new HomePage(page);
@@ -100,17 +99,16 @@ test.describe('Enroll myself as adult', () => {
     const orderedHeaders = ['Form', 'Summary', 'Status', 'Actions'];
     const table = participantDashborad.getDashboardTable();
     await table.waitForReady();
-    let headers = await table.getHeaderNames();
+    const headers = await table.getHeaderNames();
     expect(headers).toHaveLength(4); // Four columns in table
     expect(headers).toEqual(orderedHeaders);
     const statusResearchCell = await table.findCell('Form', 'Research Consent Form', 'Status');
-    await expect(await statusResearchCell?.innerText()).toEqual("Complete");
+    await expect(await statusResearchCell?.innerText()).toEqual('Complete');
     const statusMedicalReleaseCell = await table.findCell('Form', 'Medical Release Form', 'Status');
-    await expect(await statusMedicalReleaseCell?.innerText()).toEqual("Complete");
+    await expect(await statusMedicalReleaseCell?.innerText()).toEqual('Complete');
     const statusCervicalCancerCell = await table.findCell('Form', 'Survey: Your Cervical cancer', 'Status');
-    await expect(await statusCervicalCancerCell?.innerText()).toEqual("Complete");
+    await expect(await statusCervicalCancerCell?.innerText()).toEqual('Complete');
     const statusAboutYouCell = await table.findCell('Form', 'Survey: About You', 'Status');
-    await expect(await statusAboutYouCell?.innerText()).toEqual("Complete");
-
+    await expect(await statusAboutYouCell?.innerText()).toEqual('Complete');
   });
 });

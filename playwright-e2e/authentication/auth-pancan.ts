@@ -14,4 +14,3 @@ export async function login(page: Page, opts: { email?: string; password?: strin
 }
 
 export { createAccountWithEmailAlias } from 'authentication/auth-base';
-

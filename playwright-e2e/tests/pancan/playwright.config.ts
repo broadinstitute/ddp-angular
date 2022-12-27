@@ -1,9 +1,9 @@
-import { PlaywrightTestConfig } from "@playwright/test";
-import testConfig from "playwright.config";
+import { PlaywrightTestConfig } from '@playwright/test';
+import testConfig from 'playwright.config';
 
 const pancanConfig: PlaywrightTestConfig = {
-    ...testConfig,
-    testDir: './'
-  };
+  ...testConfig,
+  testDir: './'
+};
 
-  export default pancanConfig;
+export default pancanConfig;

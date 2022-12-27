@@ -60,7 +60,7 @@ export async function enterMailingAddress(
     zipCode?: string;
     telephone?: string | number;
   },
-  phoneLabel?:string
+  phoneLabel?: string
 ): Promise<void> {
   const {
     fullName,
@@ -79,7 +79,7 @@ export async function enterMailingAddress(
   await mailAddressForm.input('Street Address').fill(street.toUpperCase());
   await mailAddressForm.input('City').fill(city.toUpperCase());
   await mailAddressForm.input('Zip Code').fill(zipCode);
-  await mailAddressForm.input(phoneLabel ? phoneLabel :'Telephone Contact Number').fill(telephone.toString());
+  await mailAddressForm.input(phoneLabel ? phoneLabel : 'Telephone Contact Number').fill(telephone.toString());
   // Wait for Address Suggestion card
   await mailAddressForm.addressSuggestion().radioButton('As Entered:').check();
 }

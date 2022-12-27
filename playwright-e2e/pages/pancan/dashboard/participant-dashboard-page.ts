@@ -2,7 +2,6 @@ import { expect, Locator, Page } from '@playwright/test';
 import Table from 'lib/widget/table';
 import { PancanPage } from 'pages/pancan/pancan-page';
 
-
 export default class ParticipantDashboardPage extends PancanPage {
   constructor(page: Page) {
     super(page);

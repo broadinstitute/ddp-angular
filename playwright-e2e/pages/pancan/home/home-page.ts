@@ -3,7 +3,6 @@ import { PancanPage } from 'pages/pancan/pancan-page';
 import { HomePageInterface } from 'pages/page-interface';
 import * as auth from 'authentication/auth-pancan';
 
-
 export default class HomePage extends PancanPage implements HomePageInterface {
   constructor(page: Page) {
     super(page);
@@ -12,7 +11,6 @@ export default class HomePage extends PancanPage implements HomePageInterface {
   async waitForReady(): Promise<void> {
     await expect(this.getLogInButton()).toBeVisible();
     await expect(this.getJoinCountMeInButton()).toBeVisible();
-
   }
 
   getLogInButton(): Locator {
