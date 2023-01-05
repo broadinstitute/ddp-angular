@@ -3,7 +3,7 @@
 </h1>
 
 <br/>
-<b>No need to select a realm!</b>
+<b>No need to select a study!</b>
 <br/>
 <br/>
 
@@ -20,7 +20,7 @@
 <form>
   <ng-container *ngIf="!scanReceived">
     <div *ngFor="let row of scanPairs; let i = index">
-      <app-scan-pair [leftInputPlaceholder]="leftPlaceholder" [rightInputPlaceholder]="rightPlaceholder"
+      <app-scan-pair [initialScan]="initialScan" [leftInputPlaceholder]="leftPlaceholder" [rightInputPlaceholder]="rightPlaceholder"
                      (pairScanned)="scanDone($event)" (removeScanPair)="removeScanPair($event)"
                      (leftLabelAdded)="setLeftValue($event)" [isLeftValueDuplicate]="validateLeftValue(i)"
                      [isRightValueDuplicate]="validateRightValue(i)" [hadErrorSending]="checkSendStatus(i)"
@@ -41,6 +41,6 @@
   <div *ngIf="duplicateDetected">
     <h3 class="Color--warn">Please fix duplicate label before saving the scan pairs</h3>
   </div>
-  <button *ngIf="!scanReceived" mat-raised-button type="button" (click)="savePairs()" color="primary" [disabled]="scanPairs.length < 2">Save Scan Pairs</button>
+  <button *ngIf="!scanReceived" mat-raised-button type="button" (click)="savePairs()" color="primary" [disabled]="scanPairs.length < 2 || disableButton">Save Scan Pairs</button>
   <button *ngIf="scanReceived" mat-raised-button type="button" (click)="saveValues()" color="primary" [disabled]="scanValues.length < 2">Save SM-IDs</button>
 </form>
