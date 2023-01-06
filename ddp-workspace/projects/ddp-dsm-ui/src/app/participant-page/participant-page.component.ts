@@ -191,7 +191,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
 
     this.sortActivities();
     this.addMedicalProviderInformation();
-    if(this.role.allowedToDoOrderSequencing()) {
+    if(this.role.allowedToDoOrderSequencing() && this.hasSequencingOrders) {
       this.getMercuryEligibleSamples();
       this.canSequence = this.canHaveSequencing(this.participant);
     }
@@ -883,7 +883,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
       // this.selectedTabTitle = data.heading;
       this.activeTab = tabName;
     }
-    if (tabName === 'sequencing' && this.role.allowedToDoOrderSequencing()) {
+    if (tabName === 'sequencing' && this.role.allowedToDoOrderSequencing() && this.hasSequencingOrders) {
       this.getMercuryEligibleSamples();
     }
   }
