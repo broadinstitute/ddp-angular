@@ -36,7 +36,7 @@ import { LoadingModalComponent } from '../modals/loading-modal.component';
 import { BulkCohortTagModalComponent } from '../tags/cohort-tag/bulk-cohort-tag-modal/bulk-cohort-tag-modal.component';
 import { CohortTagComponent } from '../tags/cohort-tag/cohort-tag.component';
 import { CohortTag } from '../tags/cohort-tag/cohort-tag.model';
-import {FieldSettingsModel, ValueModel} from "../STORE/models";
+import {FieldSettingsModel, ValueModel} from '../STORE/models';
 
 interface IAdditionalValues {
   singularConsentAudit: string;
@@ -806,7 +806,7 @@ export class ParticipantListComponent implements OnInit {
     }
   }
 
-  parseAdditionalValues(additionalValuesJson: IAdditionalValues) {
+  parseAdditionalValues(additionalValuesJson: IAdditionalValues): IAdditionalValues | null {
     if(additionalValuesJson === null) {
       return null;
     }
@@ -821,7 +821,7 @@ export class ParticipantListComponent implements OnInit {
       if(foundValue) {
         additionalValuesJson[transformedKey] = foundValue.name;
       }
-    })
+    });
 
     return additionalValuesJson;
   }
