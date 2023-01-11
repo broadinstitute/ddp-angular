@@ -38,16 +38,6 @@ import { CohortTagComponent } from '../tags/cohort-tag/cohort-tag.component';
 import { CohortTag } from '../tags/cohort-tag/cohort-tag.model';
 import {FieldSettingsModel, ValueModel} from '../STORE/models';
 
-interface IAdditionalValues {
-  singularConsentAudit: string;
-  singularDateMrUploaded: string;
-  singularEnrollmentStatus: string;
-  singularMrAudit: string;
-  singularMrStatus: string;
-  singularMrUploaded: string;
-  singularSecondaryResult: string;
-}
-
 @Component({
   selector: 'app-participant-list',
   templateUrl: './participant-list.component.html',
@@ -806,7 +796,7 @@ export class ParticipantListComponent implements OnInit {
     }
   }
 
-  parseAdditionalValues(additionalValuesJson: IAdditionalValues): IAdditionalValues | null {
+  parseAdditionalValues(additionalValuesJson: object): object | null {
     if(additionalValuesJson === null) {
       return null;
     }
