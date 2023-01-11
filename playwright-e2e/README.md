@@ -13,10 +13,13 @@ E2E automation test follows the **Page Object Model** design
 
 Worthy of note:
 * `.env`     - Environment variables
-* `playwright.config.ts` - [Playwright test config](https://playwright.dev/docs/test-configuration) for Singular tests
+* `playwright.config.ts` - [Playwright test config](https://playwright.dev/docs/test-configuration) for all tests
+* `/tests/angio` - Angiosarcoma Project (ANGIO) tests
 * `/tests/dsm` - DSM tests
+* `/tests/rgp` - Rare Genomic Project (RGP) tests
 * `/tests/singular` - Singular tests
-* `/lib` - Reusable functions
+* `/lib` - Common UI widgets and components. For example, Checkbox, Question, etc.
+* `/utils` - Common test helper functions
 
 ## Set up *playwright-e2e* project on localhost
 
@@ -30,7 +33,7 @@ Worthy of note:
   * **DO NOT** commit local `.env` file.
   * Copy `.env.sample`, save as `.env`, fill it out.
   * If you need to know common test users credential, read it from Vault. Try not to use common users for local development.
-  > vault read -format=json secret/pepper/test/v1/e2e 
+  > vault read -format=json secret/pepper/test/v1/e2e
 
 * Install dependencies and Playwright web browsers in **/playwright-e2e** dir.
   > cd playwright-e2e/
