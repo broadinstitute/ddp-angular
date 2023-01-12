@@ -16,7 +16,7 @@ export async function waitForNoSpinner(page: Page): Promise<void> {
 }
 
 export async function waitUntilRemoved(locator: Locator): Promise<void> {
-  expect(await locator.count()).toHaveLength(0);
+  await expect(locator).toHaveCount(0);
 }
 
 export async function getTextValue(locator: Locator): Promise<string | null> {

@@ -191,7 +191,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
 
     this.sortActivities();
     this.addMedicalProviderInformation();
-    if(this.role.allowedToDoOrderSequencing()) {
+    if(this.role.allowedToDoOrderSequencing() && this.hasSequencingOrders) {
       this.getMercuryEligibleSamples();
       this.canSequence = this.canHaveSequencing(this.participant);
     }
@@ -883,7 +883,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
       // this.selectedTabTitle = data.heading;
       this.activeTab = tabName;
     }
-    if (tabName === 'sequencing' && this.role.allowedToDoOrderSequencing()) {
+    if (tabName === 'sequencing' && this.role.allowedToDoOrderSequencing() && this.hasSequencingOrders) {
       this.getMercuryEligibleSamples();
     }
   }
@@ -1455,7 +1455,33 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
     }
   }
 
+  private cleanupParticipantData({data: ptData}: ParticipantData): void {
+    const SPECIFY = '_SPECIFY';
+    const OTHER_SPECIFY = '_OTHER_SPECIFY';
 
+    Object.keys(ptData).filter((key: string) => key.includes(SPECIFY)).forEach((key: string) => {
+      if(key.includes('DIAGNOSIS')) {
+        const keyForDiagnosis = key.slice(10,-SPECIFY.length);
+
+        if(ptData['DIAGNOSIS'] !== keyForDiagnosis) {
+          delete ptData[key];
+        }
+      } else if(key.includes('OTHER')) {
+        const keyForOtherField = key.slice(0, -OTHER_SPECIFY.length);
+
+        if(ptData[keyForOtherField] !== 'OTHER') {
+          delete ptData[key];
+        }
+
+      } else {
+        const keyForCheckboxSpecify = key.slice(0, -SPECIFY.length);
+
+        if(!ptData[keyForCheckboxSpecify]) {
+          delete ptData[key];
+        }
+      }
+    });
+  }
 
   formPatch(value: any, fieldSetting: FieldSettings, groupSetting: FieldSettings, dataId?: string): void {
     if (fieldSetting == null || fieldSetting.fieldType == null) {
@@ -1480,6 +1506,8 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
       }
       if (participantData != null && participantData.data != null) {
         participantData.data[fieldSetting.columnName] = value;
+
+        this.cleanupParticipantData(participantData);
 
         const nameValue: { name: string; value: any }[] = [];
         nameValue.push({name: 'd.data', value: JSON.stringify(participantData.data)});

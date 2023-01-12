@@ -4,8 +4,9 @@
 </mat-form-field>
 
 <mat-form-field>
-  <input matInput #rightInput name="rightValue" type="text" placeholder="{{rightInputPlaceholder}}" style="width: 8cm" (change)="nextPair(leftInput.value, rightInput.value)" autocomplete="off">
+  <input [maxLength]="initialScan ? 6 : 1000" [minLength]="initialScan ? 6 : 1" matInput #rightInput name="rightValue" type="text" placeholder="{{rightInputPlaceholder}}" style="width: 8cm" (change)="nextPair(leftInput.value, rightInput.value)" autocomplete="off">
   <mat-hint class="ErrorMessageForm" align="start" *ngIf="isRightValueDuplicate">Value already exists!</mat-hint>
+  <mat-hint *ngIf="lessThanOrMoreThanSix && !isRightValueDuplicate" align="start">Must be 6 characters long</mat-hint>
 </mat-form-field>
 
 <button mat-mini-fab type="button" (click)="removeMe()" color="primary" [disabled]="positionScanPair === countScanPair-1">-</button>

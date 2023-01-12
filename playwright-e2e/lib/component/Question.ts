@@ -1,5 +1,6 @@
 import { expect, Locator, Page } from '@playwright/test';
 import Checkbox from 'lib/widget/checkbox';
+import Select from 'lib/widget/select';
 
 export default class Question {
   private readonly page: Page;
@@ -24,17 +25,21 @@ export default class Question {
   }
 
   /**
-   * A dropdown.
-   * <br> Tag name: mat-select or select
-   * @param value
+   * Tag Select.
+   * <br> Note: use toSelect() for tag "mat-select".
+   * @param label
    */
-  select(value?: string): Locator {
-    if (value === undefined) {
-      return this.toLocator().locator('mat-select, select');
+  select(label?: string): Locator {
+    if (label === undefined) {
+      return this.toLocator().locator('select');
     }
-    return this.toLocator().locator('mat-select, select', {
-      has: this.page.locator(`//*[contains(normalize-space(.),"${value}")]`)
+    return this.toLocator().locator('select', {
+      has: this.page.locator(`//*[contains(normalize-space(.),"${label}")]`)
     });
+  }
+
+  toSelect(label: string): Select {
+    return new Select(this.page, { label, root: this.toLocator() });
   }
 
   /**
