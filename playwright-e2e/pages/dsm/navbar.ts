@@ -6,5 +6,5 @@ export function study(page: Page): Dropdown {
 }
 
 export function sample(page: Page): Dropdown {
-  return new Dropdown(page, new RegExp("^Samples$"));
+  return new Dropdown(page, new RegExp('^Samples$'));
 }
