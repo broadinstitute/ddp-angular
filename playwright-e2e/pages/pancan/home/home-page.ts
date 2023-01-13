@@ -1,6 +1,7 @@
 import { expect, Locator, Page } from '@playwright/test';
 import { PancanPage } from 'pages/pancan/pancan-page';
 import { HomePageInterface } from 'pages/page-interface';
+import * as auth from 'authentication/auth-pancan';
 
 export default class HomePage extends PancanPage implements HomePageInterface {
   constructor(page: Page) {
@@ -13,14 +14,14 @@ export default class HomePage extends PancanPage implements HomePageInterface {
   }
 
   getLogInButton(): Locator {
-    return this.page.locator('.header button[data-ddp-test="signInButton"]:has-text("Log In")');
+    return this.page.locator('.header .controls button[data-ddp-test="signInButton"]:has-text("Log In")');
   }
 
   /**
    * Returns "Join Count Me In" button
    */
   getJoinCountMeInButton(): Locator {
-    return this.page.locator('a', { hasText: 'Join Count Me In' });
+    return this.page.locator('.info a', { hasText: 'Join Count Me In' });
   }
 
   async join(opts: { waitForNav?: boolean } = {}): Promise<void> {
@@ -28,7 +29,7 @@ export default class HomePage extends PancanPage implements HomePageInterface {
     await this.clickAndWaitForNav(this.getJoinCountMeInButton(), { waitForNav });
   }
 
-  logIn(): Promise<void> {
-    return Promise.resolve(undefined);
+  async logIn(): Promise<void> {
+    await auth.login(this.page);
   }
 }
