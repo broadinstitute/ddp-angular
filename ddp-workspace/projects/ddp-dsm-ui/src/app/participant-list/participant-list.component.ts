@@ -36,6 +36,7 @@ import { LoadingModalComponent } from '../modals/loading-modal.component';
 import { BulkCohortTagModalComponent } from '../tags/cohort-tag/bulk-cohort-tag-modal/bulk-cohort-tag-modal.component';
 import { CohortTagComponent } from '../tags/cohort-tag/cohort-tag.component';
 import { CohortTag } from '../tags/cohort-tag/cohort-tag.model';
+import {FieldSettingsModel, ValueModel} from '../STORE/models';
 
 @Component({
   selector: 'app-participant-list',
@@ -793,6 +794,26 @@ export class ParticipantListComponent implements OnInit {
         }
       }
     }
+  }
+
+  parseAdditionalValues(additionalValuesJson: object): object | null {
+    if(additionalValuesJson === null) {
+      return null;
+    }
+
+    this.settings['r'] && this.settings['r'].forEach((fieldSettings: FieldSettingsModel) => {
+      const transformedKey = fieldSettings.columnName.toLowerCase().split('_').map((str: string, index: number) =>
+        index > 0 ? str.charAt(0).toUpperCase() + str.slice(1) : str).join('');
+
+      const foundValue = fieldSettings.possibleValues && fieldSettings.possibleValues
+        .find(({value}: ValueModel) => value === additionalValuesJson[transformedKey]);
+
+      if(foundValue) {
+        additionalValuesJson[transformedKey] = foundValue.name;
+      }
+    });
+
+    return additionalValuesJson;
   }
 
   getQuestionOrStableId(question: QuestionDefinition): string {

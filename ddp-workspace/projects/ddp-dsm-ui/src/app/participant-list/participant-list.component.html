@@ -607,16 +607,18 @@
                       *ngIf="pt.participant[col.participantColumn.name] != null && col.type !== 'ADDITIONALVALUE' && col.type !== 'DATE' && col.type !== 'CHECKBOX'">
                       {{pt.participant[col.participantColumn.name]}}
                     </ng-container>
-                    <ng-container *ngIf="col.type === 'ADDITIONALVALUE' && pt.participant['additionalValuesJson'] != null
+                    <ng-container *ngIf="parseAdditionalValues(pt.participant['additionalValuesJson']) as additionalValues">
+                      <ng-container *ngIf="col.type === 'ADDITIONALVALUE'
                           && pt.participant['additionalValuesJson'][col.participantColumn.name] != null">
-                      <ng-container *ngIf="col.additionalType === 'DATE'">
-                        {{pt.participant['additionalValuesJson'][col.participantColumn.name] | date:'shortDate' | noData}}
-                      </ng-container>
-                      <ng-container *ngIf="col.additionalType === 'CHECKBOX'">
-                        {{getUtil().getYesNo(pt.participant['additionalValuesJson'][col.participantColumn.name]) | noData}}
-                      </ng-container>
-                      <ng-container *ngIf="col.additionalType !== 'DATE' && col.additionalType !== 'CHECKBOX'">
-                        {{pt.participant['additionalValuesJson'][col.participantColumn.name] | noData}}
+                        <ng-container *ngIf="col.additionalType === 'DATE'">
+                          {{additionalValues[col.participantColumn.name] | date:'shortDate' | noData}}
+                        </ng-container>
+                        <ng-container *ngIf="col.additionalType === 'CHECKBOX'">
+                          {{getUtil().getYesNo(additionalValues[col.participantColumn.name]) | noData}}
+                        </ng-container>
+                        <ng-container *ngIf="col.additionalType !== 'DATE' && col.additionalType !== 'CHECKBOX'">
+                          {{additionalValues[col.participantColumn.name] | noData}}
+                        </ng-container>
                       </ng-container>
                     </ng-container>
                     <ng-container *ngIf="pt.participant[col.participantColumn.name] != null && col.type === 'CHECKBOX'">
