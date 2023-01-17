@@ -3,7 +3,6 @@ import { test } from 'fixtures/singular-fixture';
 import * as user from 'data/fake-user.json';
 import * as auth from 'authentication/auth-singular';
 import MyDashboardPage from 'pages/singular/dashboard/my-dashboard-page';
-import AssentFormPage from 'pages/singular/enrollment/assent-form-page';
 import MedicalRecordReleaseForm from 'pages/singular/enrollment/medical-record-release-form';
 import AboutMyChildPage from 'pages/singular/enrollment/about-my-child-page';
 import ChildSurveyPage from 'pages/singular/enrollment/child-survey-page';
@@ -40,7 +39,8 @@ test.describe('Enroll child with cognitive impairment', () => {
     await myDashboardPage.enrollMyChild({
       age: user.thirdChild.age,
       country: user.thirdChild.country.abbreviation,
-      state: user.thirdChild.state.abbreviation
+      state: user.thirdChild.state.abbreviation,
+      cognitiveImpairment: 'Yes'
     });
     await myDashboardPage.next();
 
@@ -67,15 +67,6 @@ test.describe('Enroll child with cognitive impairment', () => {
     await consentForm.relationShipToSubject().check('Parent');
     await consentForm.authorizationSignature().fill(user.patient.lastName);
     await consentForm.agree();
-
-    // On Assent Form because child is >= 7 years old: 07/20/2012
-    await assertActivityHeader(page, new RegExp(/Assent Form/));
-    await assertActivityProgress(page, 'Page 1 of 1');
-    const assentForm = new AssentFormPage(page);
-    await assentForm.fullName().fill(`${user.thirdChild.firstName} ${user.thirdChild.middleName} ${childLastName}`);
-    await assentForm.subjectIsNotAbleToAssent().check();
-    await assentForm.sign().fill(`${user.patient.firstName} ${user.patient.lastName}`);
-    await assentForm.next({ waitForNav: true });
 
     // on "About My Child" page
     const aboutMyChildPage = new AboutMyChildPage(page);

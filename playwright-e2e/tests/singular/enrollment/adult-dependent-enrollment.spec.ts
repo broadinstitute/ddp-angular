@@ -79,7 +79,11 @@ test.describe('Enrol an adult dependent', () => {
 
     await consentForm.dependentFirstName().fill(user.adultDependent.firstName);
     await consentForm.dependentLastName().fill(dependentLastName);
-    await consentForm.fillInDateOfBirth(12, 20, 1930);
+    await consentForm.fillInDateOfBirth(
+      user.adultDependent.birthDate.MM,
+      user.adultDependent.birthDate.DD,
+      user.adultDependent.birthDate.YYYY
+    );
     await consentForm.toKnowSecondaryFinding().check('I want to know.');
     await consentForm.selectOneForAdultDependent().check('I have explained the study');
     await consentForm.dependentGuardianSignature().fill(`${user.patient.firstName} ${user.patient.lastName}`);

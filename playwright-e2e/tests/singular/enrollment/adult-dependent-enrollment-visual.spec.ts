@@ -9,8 +9,6 @@ import { WHO } from 'data/constants';
 const { SINGULAR_USER_EMAIL, SINGULAR_USER_PASSWORD } = process.env;
 
 async function signUp(page: Page) {
-  // await signMeUp(page);
-
   const preScreeningPage = new PreScreeningPage(page);
   await preScreeningPage.enterInformationAboutYourself();
 
