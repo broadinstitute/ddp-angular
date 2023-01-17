@@ -454,6 +454,33 @@ export class ParticipantListComponent implements OnInit {
                         }
                       });
                     }
+                  } else if (question.questionType === 'COMPOSITE') {
+                    options = new Array<NameValue>();
+                    type = Filter.OPTION_TYPE;
+                    if (question.childQuestions != null) {
+                      question.childQuestions.forEach((childQuestion: QuestionDefinition) => {
+                        if (childQuestion.options != null) {
+                          childQuestion.options.forEach((option: Option) => {
+                            options.push(new NameValue(option.optionStableId, option.optionText));
+                            if (option?.nestedOptions != null) {
+                              option.nestedOptions.forEach((nOption: Option) => {
+                                options.push(new NameValue(nOption.optionStableId, nOption.optionText));
+                              });
+                            }
+                          });
+                        }
+                        if (childQuestion.groups != null) {
+                          childQuestion.groups.forEach((group: Group) => {
+                            options.push(new NameValue(group.groupStableId, group.groupText));
+                            if (group.options != null) {
+                              group.options.forEach((gOption: Option) => {
+                                options.push(new NameValue(gOption.optionStableId, gOption.optionText));
+                              });
+                            }
+                          });
+                        }
+                      });
+                    }
                   } else if (question.questionType === 'NUMERIC') {
                     type = Filter.NUMBER_TYPE;
                   }
