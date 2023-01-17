@@ -9,30 +9,29 @@ import { generateEmailAlias } from 'utils/faker-utils';
  */
 export async function fillInEmailPassword(
   page: Page,
-  opts: { email: string; password: string; waitForNavigation?: boolean; waitForAuth?: boolean }
+  opts: { email: string; password: string; waitForNavigation?: boolean }
 ): Promise<void> {
-  const { email, password, waitForNavigation = true, waitForAuth = true } = opts;
+  const { email, password, waitForNavigation = true } = opts;
 
-  const emailInput = page.locator('input[type="email"]:visible');
-  const passwordInput = page.locator('input[type="password"]:visible');
+  const emailInput = page.locator('input[type="email"]');
+  const passwordInput = page.locator('input[type="password"]');
 
   await emailInput.fill(email);
   await passwordInput.fill(password);
 
-  const authPromise = waitForAuth ? page.locator('.auth0-loading').first().waitFor({ state: 'visible' }) : Promise.resolve();
   const navigationPromise = waitForNavigation ? page.waitForNavigation({ waitUntil: 'load' }) : Promise.resolve();
   await Promise.all([
-    authPromise,
+    page.locator('.auth0-loading').first().waitFor({ state: 'visible' }),
     navigationPromise,
-    page.locator('button[name="submit"]:visible, button[type="submit"]:visible').click()
+    page.locator('button[name="submit"], button[type="submit"]').click()
   ]);
 }
 
 export async function createAccountWithEmailAlias(
   page: Page,
-  opts: { email: string | undefined; password: string | undefined; waitForNavigation?: boolean; waitForAuth?: boolean }
+  opts: { email: string | undefined; password: string | undefined }
 ): Promise<string> {
-  const { email, password, waitForNavigation, waitForAuth } = opts;
+  const { email, password } = opts;
   if (email == null) {
     throw Error('Invalid parameters: User email is undefined or null.');
   }
@@ -40,6 +39,7 @@ export async function createAccountWithEmailAlias(
     throw Error('Invalid parameters: User password is undefined or null.');
   }
   const emailAlias = generateEmailAlias(email);
-  await fillInEmailPassword(page, { email: emailAlias, password, waitForNavigation, waitForAuth });
+  await fillInEmailPassword(page, { email: emailAlias, password });
+  console.log(`Created account with email: ${emailAlias}`);
   return emailAlias;
 }
