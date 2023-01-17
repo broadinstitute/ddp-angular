@@ -530,7 +530,7 @@ participant.data.dsm['diagnosisYear'] != null">
                   <ng-container *ngFor="let activity of participant.data.activities; let i = index">
                     <div class="Float--left" *ngIf="getActivityDefinition(activity.activityCode, activity.activityVersion) as activityDef3">
                       <a  class="Abstraction--Jump--Group" pageScroll (click)="openActivity = activity.activityCode" href="{{getGroupHref(activity.activityCode)}}"
-                         *ngIf="activityDef3 != null">{{activityDef3.activityName}} {{activityDef3.activityVersion}}</a>
+                         *ngIf="activityDef3 != null" [innerHTML]="activityDef3.activityName + ' ' +activityDef3.activityVersion"></a>
                     </div>
                     <ng-container *ngIf="i < participant.data.activities.length - 1">
                       <div class="Float--left Vertical--line"></div>
@@ -750,6 +750,9 @@ participant.data.dsm['diagnosisYear'] != null">
                   </tr>
                   <tr *ngIf="participant && participant.data && participant.data.address && participant.data.address.valid">
                     <td class="TD--Padding-Left Width--50"> Valid: {{ participant.data.address.valid }} </td>
+                  </tr>
+                  <tr *ngIf="participant && participant.data && participant.data.address && participant.data.address.valid">
+                    <td class="TD--Padding-Left Width--50"> Phone number: {{ participant.data.address.phone }} </td>
                   </tr>
                   </table>
                 </div>

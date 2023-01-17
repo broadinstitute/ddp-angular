@@ -29,6 +29,7 @@ export class ScanComponent implements OnInit {
   scanReceived = false;
   initialScan = false;
   scanValues: Array<ScanValueComponent> = [];
+  public showErrorMessage = false;
   private singleScanValues: Array<ScanValue> = [];
 
   constructor(private _changeDetectionRef: ChangeDetectorRef, private dsmService: DSMService, private router: Router,
@@ -59,6 +60,16 @@ export class ScanComponent implements OnInit {
         this.rightPlaceholder = 'Short ID';
       }
     }
+  }
+
+  public get disableButton(): boolean {
+    if(this.initialScan) {
+      if(!this.scanPairsValue.length) {
+        return true;
+      }
+      return !this.scanPairsValue.every(({leftValue,rightValue}: ScanPair) => leftValue.length && rightValue.length === 6);
+    }
+    return false;
   }
 
   public scanDone(arg): void { // arg[0] = leftvalue (ddpLabel), arg[1] = rightvalue (kitLabel) and arg[2] = position

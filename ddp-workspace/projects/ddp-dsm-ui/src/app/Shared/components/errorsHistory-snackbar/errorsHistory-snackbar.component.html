@@ -1,0 +1,35 @@
+<ng-container *ngIf="historyLength; else noErrorHistory" >
+
+  <div class="clear-history">
+    <button matTooltip="Clear All" (click)="clearHistory()" mat-icon-button color="warn" aria-label="Example icon button with a home icon">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </div>
+
+  <mat-selection-list  #httpErrorSelectionList [multiple]="false">
+    <mat-list-option
+      *ngFor="let error of errorsHistory; let i = index;"
+      [ngClass]="{'highlightItem': i === historyLength - 1}"
+      [selected]="i === historyLength - 1"
+      [value]="error.httpErrorResponse"
+    >
+      <div class="list-option">
+        <span class="list-option-title">{{i+1 + ' - ' + error.httpErrorResponse.url}}</span>
+        <span class="list-option-date">{{error.timeStamp | date : 'mediumTime'}}</span>
+      </div>
+    </mat-list-option>
+  </mat-selection-list>
+
+  <div class="option-selected"
+       *ngIf="httpErrorSelectionList.selectedOptions.hasValue() && httpErrorSelectionList.selectedOptions.selected[0].value as errorResponse">
+    <div class="option-selected-data">
+      <p>Message: <span>{{errorResponse.message }}</span></p>
+      <p>Status Code: <span>{{errorResponse.status}}</span></p>
+      <p>Status Text: <span>{{errorResponse.statusText}}</span></p>
+    </div>
+  </div>
+</ng-container>
+
+<ng-template #noErrorHistory>
+  <p class="noHistory" >No Errors History</p>
+</ng-template>

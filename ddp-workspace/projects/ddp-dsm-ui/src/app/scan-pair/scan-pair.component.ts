@@ -5,6 +5,8 @@ import { Component, OnInit, ViewChild, Output, EventEmitter, Input } from '@angu
   templateUrl: './scan-pair.component.html',
 })
 export class ScanPairComponent implements OnInit {
+  public lessThanOrMoreThanSix = false;
+
   @ViewChild('leftInput', {static: true}) leftInput;
   @ViewChild('rightInput') rightInput;
 
@@ -16,6 +18,7 @@ export class ScanPairComponent implements OnInit {
   @Input() leftInputPlaceholder = 'Kit Label';
   @Input() rightInputPlaceholder = 'DSM Label';
   @Input() errorMessage: string;
+  @Input() initialScan = false;
 
   @Output() pairScanned = new EventEmitter();
   @Output() removeScanPair = new EventEmitter();
@@ -31,6 +34,9 @@ export class ScanPairComponent implements OnInit {
   }
 
   nextPair(leftValue: string, rightValue: string): void {
+    if(this.initialScan) {
+      this.lessThanOrMoreThanSix = rightValue?.length !== 6;
+    }
     this.pairScanned.next([leftValue, rightValue, this.positionScanPair]);
   }
 

@@ -1,6 +1,5 @@
 import { Page } from '@playwright/test';
 import { SingularPage } from 'pages/singular/singular-page';
-import Card from 'lib/widget/card';
 import Input from 'lib/widget/Input';
 
 export default class AboutMyChildPage extends SingularPage {
@@ -26,9 +25,5 @@ export default class AboutMyChildPage extends SingularPage {
    */
   childLastName(): Input {
     return new Input(this.page, { ddpTestID: 'answer:ABOUT_PATIENT_LAST_NAME' });
-  }
-
-  suggestedAddress(): Card {
-    return new Card(this.page, 'We have checked your address entry and have suggested changes that could help ensure delivery');
   }
 }

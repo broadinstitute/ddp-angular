@@ -33,6 +33,7 @@ import {ParticipantUpdateResultDialogComponent} from '../dialogs/participant-upd
 import {AddFamilyMemberComponent} from '../popups/add-family-member/add-family-member.component';
 import {Sample} from '../participant-list/models/sample.model';
 import {ParticipantDSMInformation} from '../participant-list/models/participant.model';
+import {ActivityData} from '../activity-data/activity-data.model';
 
 const fileSaver = require('file-saver');
 
@@ -188,9 +189,9 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
       && this.participant.data.medicalProviders != null && this.participant.medicalRecords != null
       && this.participant.data.medicalProviders.length > 0 && this.participant.medicalRecords.length > 0);
 
-    this.displayActivityOrder();
+    this.sortActivities();
     this.addMedicalProviderInformation();
-    if(this.role.allowedToDoOrderSequencing()) {
+    if(this.role.allowedToDoOrderSequencing() && this.hasSequencingOrders) {
       this.getMercuryEligibleSamples();
       this.canSequence = this.canHaveSequencing(this.participant);
     }
@@ -266,18 +267,16 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
     this.subscriptions.unsubscribe();
   }
 
-  displayActivityOrder(): void {
-    const orderedActivities = [];
-    this.activityDefinitions instanceof Array &&
-    [...this.activityDefinitions]
-      .sort(({displayOrder: A}, {displayOrder: B}) => A - B)
-      .forEach(activity => {
-        const foundActivity = this.participant.data.activities
-          .find(a => activity.activityCode === a.activityCode && activity.activityVersion === a.activityVersion);
-        foundActivity && orderedActivities.push(foundActivity);
-      });
+  sortActivities(): void {
+    this.participant.data.activities.sort(
+      ({activityCode: previousActivityCode}: ActivityData, {activityCode: currentActivityCode}: ActivityData) =>
+      this.displayOrder(previousActivityCode) - this.displayOrder(currentActivityCode)
+    );
+  }
 
-    this.participant.data.activities = orderedActivities;
+  private displayOrder(activityCode: string): number {
+    return this.activityDefinitions.find((activityDefinition: ActivityDefinition) =>
+      activityDefinition.activityCode === activityCode).displayOrder;
   }
 
   showFamilyMemberPopUpOnClick(): void {
@@ -651,7 +650,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
       const patch1 = new PatchUtil(
         oncHis.oncHistoryDetailId, this.role.userMail(), {name: parameterName, value: v},
         null, 'participantId', oncHis.participantId, Statics.ONCDETAIL_ALIAS, null,
-        realm, this.participant.participant.ddpParticipantId
+        realm, this.participant.data.profile['guid']
       );
       const patch = patch1.getPatch();
       this.patchFinished = false;
@@ -808,7 +807,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
     if (!bundle) {
       configName = 'tissue';
     }
-    this.dsmService.downloadPDF(this.participant.participant.ddpParticipantId,
+    this.dsmService.downloadPDF(this.participant.data.profile['guid'],
       null, null, null, null,
       localStorage.getItem(ComponentService.MENU_SELECTED_REALM), configName, this.pdfs, requestOncHistoryList
     ).subscribe({
@@ -884,7 +883,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
       // this.selectedTabTitle = data.heading;
       this.activeTab = tabName;
     }
-    if (tabName === 'sequencing' && this.role.allowedToDoOrderSequencing()) {
+    if (tabName === 'sequencing' && this.role.allowedToDoOrderSequencing() && this.hasSequencingOrders) {
       this.getMercuryEligibleSamples();
     }
   }
@@ -1456,7 +1455,33 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
     }
   }
 
+  private cleanupParticipantData({data: ptData}: ParticipantData): void {
+    const SPECIFY = '_SPECIFY';
+    const OTHER_SPECIFY = '_OTHER_SPECIFY';
 
+    Object.keys(ptData).filter((key: string) => key.includes(SPECIFY)).forEach((key: string) => {
+      if(key.includes('DIAGNOSIS')) {
+        const keyForDiagnosis = key.slice(10,-SPECIFY.length);
+
+        if(ptData['DIAGNOSIS'] !== keyForDiagnosis) {
+          delete ptData[key];
+        }
+      } else if(key.includes('OTHER')) {
+        const keyForOtherField = key.slice(0, -OTHER_SPECIFY.length);
+
+        if(ptData[keyForOtherField] !== 'OTHER') {
+          delete ptData[key];
+        }
+
+      } else {
+        const keyForCheckboxSpecify = key.slice(0, -SPECIFY.length);
+
+        if(!ptData[keyForCheckboxSpecify]) {
+          delete ptData[key];
+        }
+      }
+    });
+  }
 
   formPatch(value: any, fieldSetting: FieldSettings, groupSetting: FieldSettings, dataId?: string): void {
     if (fieldSetting == null || fieldSetting.fieldType == null) {
@@ -1481,6 +1506,8 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
       }
       if (participantData != null && participantData.data != null) {
         participantData.data[fieldSetting.columnName] = value;
+
+        this.cleanupParticipantData(participantData);
 
         const nameValue: { name: string; value: any }[] = [];
         nameValue.push({name: 'd.data', value: JSON.stringify(participantData.data)});

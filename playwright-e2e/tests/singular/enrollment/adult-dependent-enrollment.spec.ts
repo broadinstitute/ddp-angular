@@ -147,15 +147,15 @@ test.describe('Enrol an adult dependent', () => {
     await myDashboardPage.waitForReady();
     const orderedHeaders = ['Title', 'Summary', 'Status', 'Action'];
     const table = myDashboardPage.getDashboardTable();
-    const headers = await table.getColumnNames();
+    const headers = await table.getHeaderNames();
     expect(headers).toHaveLength(4); // Four columns in table
     expect(headers).toEqual(orderedHeaders);
 
-    const summaryCell = await table.findCellLocator('Title', 'Consent Form for Adult Dependent', 'Summary');
+    const summaryCell = await table.findCell('Title', 'Consent Form for Adult Dependent', 'Summary');
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     await expect(summaryCell!).toHaveText('Thank you for signing the consent form -- welcome to Project Singular!');
 
-    const statusCell = await table.findCellLocator('Title', 'Consent Form for Adult Dependent', 'Status');
+    const statusCell = await table.findCell('Title', 'Consent Form for Adult Dependent', 'Status');
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     await expect(statusCell!).toHaveText('Complete');
   });

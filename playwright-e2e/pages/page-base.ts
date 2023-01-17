@@ -73,8 +73,20 @@ export default abstract class PageBase implements PageInterface {
     return this.page.goto(`${this.baseUrl}${urlPath}`, { waitUntil: 'load' });
   }
 
-  protected async clickAndWaitForNav(locator: Locator, opts: { waitForNav?: boolean } = {}): Promise<void> {
-    const { waitForNav = false } = opts;
+  /**
+   *
+   * @param {Locator} locator
+   * @param {{waitForNav?: boolean, forceClick?: boolean}} opts
+   *  <br> - forceClick: Whether to skip error message check before click. If set to true, click regardless any error on page. Defaults to false.
+   *  <br> - waitForNav: Whether to wait for page navigation to complete after click. Defaults to false.
+   * @returns {Promise<void>}
+   * @protected
+   */
+  protected async clickAndWaitForNav(locator: Locator, opts: { waitForNav?: boolean; forceClick?: boolean } = {}): Promise<void> {
+    const { waitForNav = false, forceClick = false } = opts;
+    if (!forceClick && waitForNav) {
+      await expect(this.page.locator('.error-message')).toBeHidden();
+    }
     waitForNav ? await this.waitForNavAfter(() => locator.click()) : await locator.click();
   }
 
@@ -93,8 +105,9 @@ export default abstract class PageBase implements PageInterface {
   }
 
   /** Click "Submit" button */
-  async submit(): Promise<void> {
-    await this.clickAndWaitForNav(this.getSubmitButton(), { waitForNav: true });
+  async submit(opts: { waitForNav?: boolean } = {}): Promise<void> {
+    const { waitForNav = true } = opts;
+    await this.clickAndWaitForNav(this.getSubmitButton(), { waitForNav });
   }
 
   /** Click "Agree" button */

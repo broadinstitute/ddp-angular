@@ -36,6 +36,7 @@ import { LoadingModalComponent } from '../modals/loading-modal.component';
 import { BulkCohortTagModalComponent } from '../tags/cohort-tag/bulk-cohort-tag-modal/bulk-cohort-tag-modal.component';
 import { CohortTagComponent } from '../tags/cohort-tag/cohort-tag.component';
 import { CohortTag } from '../tags/cohort-tag/cohort-tag.model';
+import {FieldSettingsModel, ValueModel} from '../STORE/models';
 
 @Component({
   selector: 'app-participant-list',
@@ -130,10 +131,11 @@ export class ParticipantListComponent implements OnInit {
   jsonPatch: any;
   viewFilter: any;
   private start: number;
-  selectAll = false;
   selectAllColumnsLabel = 'Select all';
   selectedPatients: string[] = [];
   searchForRGP = false;
+  private reservedDefaultSelectedColumns;
+  public allColumnsSelected = false;
 
   constructor(private role: RoleService, private dsmService: DSMService, private compService: ComponentService,
                private router: Router, private auth: Auth, private route: ActivatedRoute, private util: Utils,
@@ -448,6 +450,33 @@ export class ParticipantListComponent implements OnInit {
                         if (group.options != null) {
                           group.options.forEach((gOption: Option) => {
                             options.push(new NameValue(group.groupStableId + '.' + gOption.optionStableId, gOption.optionText));
+                          });
+                        }
+                      });
+                    }
+                  } else if (question.questionType === 'COMPOSITE') {
+                    options = new Array<NameValue>();
+                    type = Filter.OPTION_TYPE;
+                    if (question.childQuestions != null) {
+                      question.childQuestions.forEach((childQuestion: QuestionDefinition) => {
+                        if (childQuestion.options != null) {
+                          childQuestion.options.forEach((option: Option) => {
+                            options.push(new NameValue(option.optionStableId, option.optionText));
+                            if (option?.nestedOptions != null) {
+                              option.nestedOptions.forEach((nOption: Option) => {
+                                options.push(new NameValue(nOption.optionStableId, nOption.optionText));
+                              });
+                            }
+                          });
+                        }
+                        if (childQuestion.groups != null) {
+                          childQuestion.groups.forEach((group: Group) => {
+                            options.push(new NameValue(group.groupStableId, group.groupText));
+                            if (group.options != null) {
+                              group.options.forEach((gOption: Option) => {
+                                options.push(new NameValue(gOption.optionStableId, gOption.optionText));
+                              });
+                            }
                           });
                         }
                       });
@@ -792,6 +821,26 @@ export class ParticipantListComponent implements OnInit {
         }
       }
     }
+  }
+
+  parseAdditionalValues(additionalValuesJson: object): object | null {
+    if(additionalValuesJson === null) {
+      return null;
+    }
+
+    this.settings['r'] && this.settings['r'].forEach((fieldSettings: FieldSettingsModel) => {
+      const transformedKey = fieldSettings.columnName.toLowerCase().split('_').map((str: string, index: number) =>
+        index > 0 ? str.charAt(0).toUpperCase() + str.slice(1) : str).join('');
+
+      const foundValue = fieldSettings.possibleValues && fieldSettings.possibleValues
+        .find(({value}: ValueModel) => value === additionalValuesJson[transformedKey]);
+
+      if(foundValue) {
+        additionalValuesJson[transformedKey] = foundValue.name;
+      }
+    });
+
+    return additionalValuesJson;
   }
 
   getQuestionOrStableId(question: QuestionDefinition): string {
@@ -1140,6 +1189,10 @@ export class ParticipantListComponent implements OnInit {
     this.clearAllFilters();
     this.getData();
     this.setDefaultColumns();
+    const selectedStudy = localStorage.getItem(ComponentService.MENU_SELECTED_REALM);
+    if(selectedStudy === 'RGP') {
+      this.searchForRGP = true;
+    }
   }
 
   private setDefaultColumns(): void {
@@ -1220,6 +1273,7 @@ export class ParticipantListComponent implements OnInit {
 
   public clearAllFilters(): void {
     this.clearManualFilters();
+    this.resetPagination();
     this.deselectQuickFilters();
     this.deselectSavedFilters();
   }
@@ -1233,7 +1287,7 @@ export class ParticipantListComponent implements OnInit {
         }
       }
     });
-    this.resetPagination();
+    this.currentFilter = [];
   }
 
   private resetPagination(): void {
@@ -1380,7 +1434,6 @@ export class ParticipantListComponent implements OnInit {
   }
 
   public doFilter(): void {
-    this.selectAll = this.selectedColumns['allSelected'];
     this.resetPagination();
     this.resetSelectedPatients();
     const json = [];
@@ -2431,11 +2484,25 @@ export class ParticipantListComponent implements OnInit {
 
 
   toggleColumns(checked: boolean): void {
-    if (checked) {
-      this.prevSelectedColumns = this.selectedColumns;
-      this.selectedColumns = Object.assign({}, {...this.sourceColumns, allSelected: true});
-    } else {
-      this.selectedColumns = this.prevSelectedColumns;
+    if(!this.reservedDefaultSelectedColumns) {
+      this.reservedDefaultSelectedColumns = this.copyColumns(this.selectedColumns);
     }
+    if(checked) {
+      this.selectedColumns = this.copyColumns(this.sourceColumns);
+      this.allColumnsSelected = true;
+    } else {
+      this.allColumnsSelected = false;
+      this.selectedColumns = this.reservedDefaultSelectedColumns;
+    }
+  }
+
+
+  private copyColumns(columns: {[key: string]: Filter[]}): {[key: string]: Filter[]}  {
+    const copiedColumns = {};
+    Object.entries(columns as {[key: string]: Filter[]}).forEach(([key, value]) => {
+      copiedColumns[key] = [];
+      copiedColumns[key].push(...value);
+    });
+    return copiedColumns;
   }
 }

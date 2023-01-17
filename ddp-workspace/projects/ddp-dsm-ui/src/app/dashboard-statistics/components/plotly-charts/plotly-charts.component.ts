@@ -1,4 +1,5 @@
 import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
+import {Plotly} from 'angular-plotly.js/lib/plotly.interface';
 
 @Component({
   selector: 'app-plotly-charts',
@@ -8,7 +9,13 @@ import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
 })
 
 export class PlotlyChartsComponent {
-    @Input() chartData: any;
-    @Input() config: any;
+  @Input() chartData: Plotly.Data;
+
+  get configuration(): any {
+    return {
+      responsive: true,
+      displaylogo: false
+    };
+  }
 
 }

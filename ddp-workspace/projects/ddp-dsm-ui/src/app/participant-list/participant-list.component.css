@@ -4,6 +4,10 @@
   margin-bottom: 0;
 }
 
+hr, ul {
+  margin: 0!important;
+}
+
 .NO-PADDING-START{
   padding-inline-start: 0;
   list-style-type:none;
@@ -24,6 +28,11 @@ button.mat-icon-button {
 
 td {
   white-space: nowrap;
+}
+
+p {
+  margin: 0;
+  padding: 0;
 }
 
 .clickable:hover {

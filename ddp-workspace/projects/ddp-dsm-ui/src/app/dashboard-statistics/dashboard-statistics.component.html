@@ -2,58 +2,72 @@
   Statistics Dashboard
 </h1>
 
-<div class="dashboard">
-  <ng-container *ngTemplateOutlet="charts, context: {
-    charts: Charts | async,
-    counts: Counts | async,
-    error: errorMessage | async
-  }">
-  </ng-container>
-</div>
+<div *ngIf="canView" class="dashboard">
+  <app-date-range [disabled]="isLoading" [initDates]="dateRange" (dateChanged)="dateChanged($event)" ></app-date-range>
 
-<div class="spinner" *ngIf="loading">
-  <mat-spinner></mat-spinner>
-</div>
-
-<ng-template let-Charts="charts" let-Error="error" let-Counts="counts" #charts>
-
-  <app-date-range [disabled]="loading" [initDates]="dateRange" (dateChanged)="dateChanged($event)" ></app-date-range>
-
-  <div class="dashboard-chartsAndCounts" *ngIf="!loading">
-
-  <ng-container *ngIf="!Error; else errorText">
-
-    <mat-tab-group mat-align-tabs="center" *ngIf="Charts?.length > 0 || Counts?.length > 0; else noCharts">
-
-      <mat-tab>
+  <div class="dashboard-chartsAndCounts">
+    <mat-tab-group [selectedIndex]="selectedTabIndex" mat-stretch-tabs  (selectedTabChange)="getStatisticsFor($event)" mat-align-tabs="center" >
+      <mat-tab *ngFor="let statistics of statisticsCollection" [disabled]="isLoading" [aria-label]="statistics.name">
         <ng-template mat-tab-label>
-          <mat-icon class="example-tab-icon">bar_chart</mat-icon>
-          Charts
+          <mat-icon>{{statistics.matIconName}}</mat-icon>
+          {{statistics.name | titlecase}}
         </ng-template>
-        <app-plotly-charts [chartData]="Charts" [config]="getConfiguration"></app-plotly-charts>
-      </mat-tab>
 
-      <mat-tab>
-        <ng-template mat-tab-label>
-          <mat-icon class="example-tab-icon">score</mat-icon>
-          Counts
-        </ng-template>
-        <app-counts-table [counts]="Counts"></app-counts-table>
+        <!--Error notifier-->
+        <ng-container *ngIf="errorHas[statistics.name]">
+          <ng-container *ngTemplateOutlet="errorTemplate; context: {erroredStatistics: statistics.name}"></ng-container>
+        </ng-container>
+
+        <!--Statistics container-->
+        <ng-container
+          *ngTemplateOutlet="displayStatistics; context: {name: statistics.name, data: statistics.data}">
+        </ng-container>
+
       </mat-tab>
     </mat-tab-group>
+  </div>
+</div>
+
+
+
+
+<!-- Templates-->
+
+<ng-template #displayStatistics let-name="name" let-data="data">
+  <!--If you want new statistics to be displayed, add in this container as well-->
+  <ng-container [ngSwitch]="name">
+
+    <ng-container  *ngSwitchCase="'charts'">
+      <ng-container *ngIf="!getLoadingStateFor(name); else loadingSpinner">
+        <app-plotly-charts [chartData]="data"></app-plotly-charts>
+      </ng-container>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'counts'" >
+      <ng-container *ngIf="!getLoadingStateFor(name); else loadingSpinner">
+        <app-counts-table [counts]="data"></app-counts-table>
+      </ng-container>
+    </ng-container>
+
   </ng-container>
 
+</ng-template>
 
-    <ng-template #noCharts>
-      <p class="noCharts">There are not available charts and counts for this study</p>
-    </ng-template>
-
-    <ng-template #errorText>
-      <p class="errorText">An error occurred while fetching dashboard data.
-        <br/>Message: <span>{{ Error.statusText }}</span>
-        <br/>Status code: <span>{{ Error.status }}</span></p>
-    </ng-template>
-
+<!--Loading template-->
+<ng-template  #loadingSpinner>
+  <div class="spinner">
+    <mat-spinner></mat-spinner>
   </div>
+</ng-template>
 
+<!--Error notifier template-->
+<ng-template #errorTemplate let-erroredStatistics="erroredStatistics">
+  <div class="errorContent">
+    <p class="errorContent-message">An error occurred while gathering the {{erroredStatistics.slice(0, -1)}} data</p>
+    <button
+      class="errorContent-button"
+      matTooltip="Retry again in the selected dates range"
+      mat-flat-button color="warn"
+      (click)="retry()">Try Again</button>
+  </div>
 </ng-template>
