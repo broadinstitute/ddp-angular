@@ -1,5 +1,5 @@
 import { fixtureBase as base } from 'fixtures/fixture-base';
-import OsteoHomePage from 'pages/osteo/home/home-page';
+import OsteoHomePage from 'pages/osteo/home-page';
 import { fillSitePassword } from 'utils/test-utils';
 
 type Fixtures = {

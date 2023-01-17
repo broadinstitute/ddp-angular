@@ -2,12 +2,11 @@ import { expect } from '@playwright/test';
 import { waitForNoSpinner } from 'utils/test-utils';
 import { test } from 'fixtures/lms-fixture';
 
-
 /**
  * Functional tests
  */
 test.describe('Home page', () => {
-  test('test case for PEPPER-357 bug fix', async ({ page, homePage }) => {
+  test('test case for PEPPER-357 bug fix @leiomyosarcoma', async ({ page, homePage }) => {
     const countMeIn = await homePage.getJoinCountMeInButton();
     await countMeIn.click();
     await waitForNoSpinner(page);

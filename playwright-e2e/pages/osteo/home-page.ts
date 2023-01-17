@@ -1,11 +1,11 @@
 import { expect, Locator, Page } from '@playwright/test';
-import { OsteoPage } from 'pages/osteo/osteo-page';
+import { OsteoPageBase } from 'pages/osteo/osteo-page-base';
 import { HomePageInterface } from 'pages/page-interface';
 
 /**
  * Landing page, unauthenticated.
  */
-export default class HomePage extends OsteoPage implements HomePageInterface {
+export default class HomePage extends OsteoPageBase implements HomePageInterface {
   constructor(page: Page) {
     super(page);
   }
@@ -16,11 +16,11 @@ export default class HomePage extends OsteoPage implements HomePageInterface {
   }
 
   getLogInButton(): Locator {
-    return this.page.locator('.header button[data-ddp-test="signInButton"]:has-text("Log In") >> nth=0');
+    return this.page.locator('.header button[data-ddp-test="signInButton"]:has-text("Log In"):visible');
   }
 
   getJoinCountMeInButton(): Locator {
-   return this.page.locator('.header a >> text="Count Me In" >> nth=0');
+    return this.page.locator('.header a:visible >> text="Count Me In"');
   }
 
   async join(opts: { waitForNav?: boolean } = {}): Promise<void> {

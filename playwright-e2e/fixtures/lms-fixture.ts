@@ -1,5 +1,5 @@
 import { fixtureBase as base } from 'fixtures/fixture-base';
-import LmsHomePage from 'pages/lms/home/home-page';
+import LmsHomePage from 'pages/lms/home-page';
 import { fillSitePassword } from 'utils/test-utils';
 
 type Fixtures = {

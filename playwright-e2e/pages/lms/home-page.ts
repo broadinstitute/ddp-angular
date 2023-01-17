@@ -1,11 +1,11 @@
 import { expect, Locator, Page } from '@playwright/test';
-import { LmsPage } from 'pages/lms/lms-page';
+import { LmsPageBase } from 'pages/lms/lms-page-base';
 import { HomePageInterface } from 'pages/page-interface';
 
 /**
  * Landing page, unauthenticated.
  */
-export default class HomePage extends LmsPage implements HomePageInterface {
+export default class HomePage extends LmsPageBase implements HomePageInterface {
   constructor(page: Page) {
     super(page);
   }
