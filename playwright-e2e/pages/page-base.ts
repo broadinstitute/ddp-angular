@@ -1,5 +1,6 @@
 import { expect, Locator, Page, Response } from '@playwright/test';
 import Question from 'lib/component/Question';
+import { waitForNoSpinner } from 'utils/test-utils';
 import { PageInterface } from './page-interface';
 
 export default abstract class PageBase implements PageInterface {
@@ -92,6 +93,7 @@ export default abstract class PageBase implements PageInterface {
 
   protected async waitForNavAfter(fn: () => Promise<void>): Promise<void> {
     await Promise.all([this.page.waitForNavigation({ waitUntil: 'load' }), fn()]);
+    await waitForNoSpinner(this.page);
   }
 
   /** Click "Next" button */

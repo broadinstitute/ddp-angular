@@ -1,5 +1,8 @@
 import { expect, Locator, Page } from '@playwright/test';
+import { WHO } from 'data/constants';
+import * as user from 'data/fake-user.json';
 import Table from 'lib/widget/table';
+import EnrollMyChildPage from 'pages/singular/enrollment/enroll-my-child-page';
 import { SingularPage } from 'pages/singular/singular-page';
 
 export default class MyDashboardPage extends SingularPage {
@@ -59,9 +62,26 @@ export default class MyDashboardPage extends SingularPage {
     await this.getEnrollMyselfButton().click();
   }
 
-  /** Click "Enroll my child" button */
-  async enrollMyChild(): Promise<void> {
+  /** Click "Enroll my child" button. Complete Enroll my child form. */
+  async enrollMyChild(
+    opts: { who?: string; age?: string; country?: string; state?: string; cognitiveImpairment?: string | null } = {}
+  ): Promise<void> {
+    const {
+      who = WHO.TheChildBeingEnrolled,
+      age = user.child.age,
+      country = user.child.country.abbreviation,
+      state = user.child.state.abbreviation,
+      cognitiveImpairment = 'No'
+    } = opts;
     await this.getEnrollMyChildButton().click();
+    const enrollMyChildPage = new EnrollMyChildPage(this.page);
+    await enrollMyChildPage.whoInChildFamilyHasVentricleHeartDefect().check(who);
+    await enrollMyChildPage.howOldIsYourChild().fill(age);
+    await enrollMyChildPage.whereDoesChildLive().select('Select Country').selectOption(country);
+    await enrollMyChildPage.state().selectOption(state);
+    if (cognitiveImpairment) {
+      await enrollMyChildPage.doesChildHaveCognitiveImpairment().check(cognitiveImpairment, { exactMatch: true });
+    }
   }
 
   /** Click "Enroll my adult dependent" button */
