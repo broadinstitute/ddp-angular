@@ -1,4 +1,5 @@
 import { Page } from '@playwright/test';
+import { waitForNoSpinner } from 'utils/test-utils';
 import { fillInEmailPassword } from './auth-base';
 
 const { DSM_USER_EMAIL, DSM_USER_PASSWORD, DSM_BASE_URL } = process.env;
@@ -16,6 +17,5 @@ export async function login(page: Page, opts: { email?: string; password?: strin
   }
   await page.goto(DSM_BASE_URL, { waitUntil: 'load' });
   await fillInEmailPassword(page, { email, password, waitForNavigation: false });
+  await waitForNoSpinner(page);
 }
-
-export { createAccountWithEmailAlias } from 'authentication/auth-base';

@@ -18,9 +18,9 @@ export default class Table {
         : cssClassAttribute
             ? `table${cssClassAttribute}, mat-table${cssClassAttribute}`
             : 'table, mat-table, [role="table"]';
-    this.headerCss = '[role="columnheader"], th[class]';
-    this.rowCss = '[role="row"]:not(mat-header-row), tbody tr';
-    this.cellCss = 'td, [role="cell"]';
+    this.headerCss = '[role="columnheader"]';
+    this.rowCss = '[role="row"]:not([mat-header-row]):not(mat-header-row), tbody tr';
+    this.cellCss = '[role="cell"], td';
     this.footerCss = 'tfoot tr';
   }
 

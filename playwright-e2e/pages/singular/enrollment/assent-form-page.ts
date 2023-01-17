@@ -24,8 +24,16 @@ export default class AssentFormPage extends SingularPage {
    * Checkbox: I have explained the study to the extent compatible with the subject’s capability, and the subject has agreed to be in the study.
    *
    */
-  hasAgreedToBeInStudy(): Checkbox {
+  subjectHasAgreedToBeInStudy(): Checkbox {
     return new Checkbox(this.page, { label: 'subject has agreed to be in the study' });
+  }
+
+  /**
+   * Checkbox: The subject is not able to assent because the capability of the subject is so limited that the subject cannot reasonably be consulted.
+   *
+   */
+  subjectIsNotAbleToAssent(): Checkbox {
+    return new Checkbox(this.page, { label: 'The subject is not able to assent' });
   }
 
   /**
