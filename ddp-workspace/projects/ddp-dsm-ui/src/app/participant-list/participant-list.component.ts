@@ -725,7 +725,6 @@ export class ParticipantListComponent implements OnInit {
         this.getData();
         this.deleteFiltersAccordingToPermission();
         this.removeUnnecessaryColumns();
-
       },
       // this.renewSelectedColumns(); commented out because if we have defaultColumns for all the studies we won't need it anymore
       error: err => {
@@ -737,7 +736,6 @@ export class ParticipantListComponent implements OnInit {
       }
     });
   }
-
 
   private deleteFiltersAccordingToPermission(): void {
     let columnNamesToDelete: string[];
