@@ -36,6 +36,7 @@ import { LoadingModalComponent } from '../modals/loading-modal.component';
 import { BulkCohortTagModalComponent } from '../tags/cohort-tag/bulk-cohort-tag-modal/bulk-cohort-tag-modal.component';
 import { CohortTagComponent } from '../tags/cohort-tag/cohort-tag.component';
 import { CohortTag } from '../tags/cohort-tag/cohort-tag.model';
+import {FieldSettingsModel, ValueModel} from '../STORE/models';
 
 @Component({
   selector: 'app-participant-list',
@@ -453,6 +454,33 @@ export class ParticipantListComponent implements OnInit {
                         }
                       });
                     }
+                  } else if (question.questionType === 'COMPOSITE') {
+                    options = new Array<NameValue>();
+                    type = Filter.OPTION_TYPE;
+                    if (question.childQuestions != null) {
+                      question.childQuestions.forEach((childQuestion: QuestionDefinition) => {
+                        if (childQuestion.options != null) {
+                          childQuestion.options.forEach((option: Option) => {
+                            options.push(new NameValue(option.optionStableId, option.optionText));
+                            if (option?.nestedOptions != null) {
+                              option.nestedOptions.forEach((nOption: Option) => {
+                                options.push(new NameValue(nOption.optionStableId, nOption.optionText));
+                              });
+                            }
+                          });
+                        }
+                        if (childQuestion.groups != null) {
+                          childQuestion.groups.forEach((group: Group) => {
+                            options.push(new NameValue(group.groupStableId, group.groupText));
+                            if (group.options != null) {
+                              group.options.forEach((gOption: Option) => {
+                                options.push(new NameValue(gOption.optionStableId, gOption.optionText));
+                              });
+                            }
+                          });
+                        }
+                      });
+                    }
                   } else if (question.questionType === 'NUMERIC') {
                     type = Filter.NUMBER_TYPE;
                   }
@@ -791,6 +819,26 @@ export class ParticipantListComponent implements OnInit {
         }
       }
     }
+  }
+
+  parseAdditionalValues(additionalValuesJson: object): object | null {
+    if(additionalValuesJson === null) {
+      return null;
+    }
+
+    this.settings['r'] && this.settings['r'].forEach((fieldSettings: FieldSettingsModel) => {
+      const transformedKey = fieldSettings.columnName.toLowerCase().split('_').map((str: string, index: number) =>
+        index > 0 ? str.charAt(0).toUpperCase() + str.slice(1) : str).join('');
+
+      const foundValue = fieldSettings.possibleValues && fieldSettings.possibleValues
+        .find(({value}: ValueModel) => value === additionalValuesJson[transformedKey]);
+
+      if(foundValue) {
+        additionalValuesJson[transformedKey] = foundValue.name;
+      }
+    });
+
+    return additionalValuesJson;
   }
 
   getQuestionOrStableId(question: QuestionDefinition): string {

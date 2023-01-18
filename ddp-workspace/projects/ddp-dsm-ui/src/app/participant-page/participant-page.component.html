@@ -751,6 +751,9 @@ participant.data.dsm['diagnosisYear'] != null">
                   <tr *ngIf="participant && participant.data && participant.data.address && participant.data.address.valid">
                     <td class="TD--Padding-Left Width--50"> Valid: {{ participant.data.address.valid }} </td>
                   </tr>
+                  <tr *ngIf="participant && participant.data && participant.data.address && participant.data.address.valid">
+                    <td class="TD--Padding-Left Width--50"> Phone number: {{ participant.data.address.phone }} </td>
+                  </tr>
                   </table>
                 </div>
               </legend>

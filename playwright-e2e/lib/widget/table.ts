@@ -16,8 +16,8 @@ export default class Table {
     this.tableCss = ddpTestID
         ? `[data-ddp-test="${ddpTestID}"]`
         : cssClassAttribute
-            ? `table${cssClassAttribute}`
-            : 'table, [role="table"]';
+            ? `table${cssClassAttribute}, mat-table${cssClassAttribute}`
+            : 'table, mat-table, [role="table"]';
     this.headerCss = '[role="columnheader"], th[class]';
     this.rowCss = '[role="row"]:not(mat-header-row), tbody tr';
     this.cellCss = 'td, [role="cell"]';
@@ -25,7 +25,8 @@ export default class Table {
   }
 
   async waitForReady() {
-    await expect(this.page.locator(this.headerCss)).toBeVisible();
+    await expect(this.tableLocator().locator(this.headerCss).first()).toBeVisible();
+    expect(await this.rowLocator().count()).toBeGreaterThanOrEqual(1);
   }
 
   tableLocator(): Locator {
