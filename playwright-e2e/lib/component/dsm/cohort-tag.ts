@@ -3,8 +3,8 @@ import { expect, Locator, Page } from '@playwright/test';
 export default class CohortTag {
   constructor(private readonly page: Page) {}
 
-  async add(value: string): Promise<void> {
-    await this.page.fill('[placeholder="New tag..."]', value);
+  async add(tagName: string): Promise<void> {
+    await this.inputField.fill(tagName);
     await this.page.keyboard.press('Enter');
   }
 
@@ -14,17 +14,22 @@ export default class CohortTag {
     await this.page.keyboard.press('Escape');
   }
 
-  async delete(value: string): Promise<void> {
-    await this.page.locator(value).click();
+  async delete(tagName: string): Promise<void> {
+    await (await this.get(tagName)).click();
     await this.page.keyboard.press('Backspace');
   }
 
-  public getAllTags(value: string): Locator {
-    return this.page.locator(value);
+  public get(tagName: string): Locator {
+    return this.page.locator(`//mat-chip[normalize-space(text())='${tagName}']`);
+  }
+
+  public get inputField(): Locator {
+    return this.page
+      .locator('//mat-form-field//input[@id=//*[@aria-label="Tag selection"]/@data-mat-chip-input]')
   }
 
   /* assertions */
   public async assertCohortTagToHaveCount(tagName: string, count: number) {
-    await expect(this.getAllTags(tagName)).toHaveCount(count);
+    await expect(await this.page.locator(`text=${tagName}`)).toHaveCount(count);
   }
 }

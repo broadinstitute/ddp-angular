@@ -25,11 +25,10 @@ test.describe('Singular Study in DSM', () => {
     const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(StudyNav.PARTICIPANT_LIST);
 
     await participantListPage.assertPageTitle();
+
     await participantListPage.waitForReady();
     await participantListPage.openSearchButton().click();
-
     const shortId = await participantListPage.getParticipantShortIdAt(2);
-
     await participantListPage.search(SearchFieldLabel.ShortId, shortId);
 
     await participantListPage.assertParticipantsCount(1);
