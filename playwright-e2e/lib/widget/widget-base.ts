@@ -17,4 +17,12 @@ export default abstract class WidgetBase implements WidgetInterface {
       'xpath=/ancestor::ddp-activity-question//*[contains(@class,"ErrorMessage")] | /ancestor::mat-form-field//mat-error'
     );
   }
+
+  async click(): Promise<void> {
+    await this.toLocator().click();
+  }
+
+  async isDisabled(): Promise<boolean> {
+    return (await this.toLocator().getAttribute('disabled')) !== null;
+  }
 }

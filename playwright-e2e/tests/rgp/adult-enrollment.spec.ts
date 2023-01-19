@@ -3,7 +3,6 @@ import * as auth from 'authentication/auth-rgp';
 import * as user from 'data/fake-user.json';
 import { APP } from 'data/constants';
 import { test } from 'fixtures/rgp-fixture';
-import Button from 'lib/widget/button';
 import DashboardPage from 'pages/rgp/dashboard-page';
 import HowItWorksPage from 'pages/rgp/how-it-works-page';
 import TellUsAboutYourFamilyPage from 'pages/rgp/enrollment/tell-us-about-your-family-page';
@@ -61,27 +60,25 @@ test.describe('Adult Self Enrollment', () => {
 
     await auth.login(page, { email: userEmail });
 
-    const tellUsAboutYourFamilyPage = new TellUsAboutYourFamilyPage(page);
-    await tellUsAboutYourFamilyPage.waitForReady();
+    const tellUsAboutYourFamily = new TellUsAboutYourFamilyPage(page);
+    await tellUsAboutYourFamily.waitForReady();
     await assertProgressActiveItem(page, '1');
 
-    await tellUsAboutYourFamilyPage.yourTitle().selectOption(user.patient.title);
-    await tellUsAboutYourFamilyPage.yourFirstName().fill(user.patient.firstName);
-    await tellUsAboutYourFamilyPage.phone().fill(user.patient.phone);
-    await tellUsAboutYourFamilyPage.confirmPhone().fill(user.patient.phone);
-    await tellUsAboutYourFamilyPage.patientRelationship().selectOption('MYSELF');
-    await tellUsAboutYourFamilyPage.state().selectOption(user.patient.state.abbreviation);
-    await tellUsAboutYourFamilyPage.website().fill('https://en.wikipedia.org/wiki/Broad_Institute');
-    await tellUsAboutYourFamilyPage.describeGeneticCondition().fill('Single-gene disorders');
-    await tellUsAboutYourFamilyPage.haveAnyClinicalDiagnosesBeenMade().check('Yes');
-    await tellUsAboutYourFamilyPage.clinicalDiagnosesDetails().fill('Single-gene disorders');
-    await tellUsAboutYourFamilyPage.haveAnyGeneticDiagnosesBeenMade().check('Yes');
-    await tellUsAboutYourFamilyPage.geneticDiagnosesDetails().fill('Single-gene disorders');
-    await tellUsAboutYourFamilyPage
-      .howDidYouFindOutAboutThisProject()
-      .checkAndFillInInput('Doctor', { inputText: user.doctor.name });
-    await tellUsAboutYourFamilyPage.howDidYouFindOutAboutThisProject().check('Twitter');
-    await tellUsAboutYourFamilyPage.next();
+    await tellUsAboutYourFamily.yourTitle().selectOption(user.patient.title);
+    await tellUsAboutYourFamily.yourFirstName().fill(user.patient.firstName);
+    await tellUsAboutYourFamily.phone().fill(user.patient.phone);
+    await tellUsAboutYourFamily.confirmPhone().fill(user.patient.phone);
+    await tellUsAboutYourFamily.patientRelationship().selectOption('MYSELF');
+    await tellUsAboutYourFamily.state().selectOption(user.patient.state.abbreviation);
+    await tellUsAboutYourFamily.website().fill('https://en.wikipedia.org/wiki/Broad_Institute');
+    await tellUsAboutYourFamily.describeGeneticCondition().fill('Single-gene disorders');
+    await tellUsAboutYourFamily.haveAnyClinicalDiagnosesBeenMade().check('Yes');
+    await tellUsAboutYourFamily.clinicalDiagnosesDetails().fill('Single-gene disorders');
+    await tellUsAboutYourFamily.haveAnyGeneticDiagnosesBeenMade().check('Yes');
+    await tellUsAboutYourFamily.geneticDiagnosesDetails().fill('Single-gene disorders');
+    await tellUsAboutYourFamily.howDidYouFindOutAboutThisProject().checkAndFillInInput('Doctor', { inputText: user.doctor.name });
+    await tellUsAboutYourFamily.howDidYouFindOutAboutThisProject().check('Twitter');
+    await tellUsAboutYourFamily.next();
 
     await assertProgressActiveItem(page, '2');
     await expect(page.locator('text="Please provide information on the patient:"')).toBeVisible();
@@ -89,46 +86,46 @@ test.describe('Adult Self Enrollment', () => {
       'This study requires that at least one individual in the family affected by the rare condition provide a DNA sample.'
     );
 
-    await tellUsAboutYourFamilyPage.patientAge().fill(user.patient.age);
-    await tellUsAboutYourFamilyPage.patientAgeAtOnsetCondition().fill(user.patient.age);
-    await tellUsAboutYourFamilyPage.patientSex().check(user.patient.sex, { exactMatch: true });
-    await tellUsAboutYourFamilyPage.patientRace().toSelect('Select all that apply').selectOption('I prefer not to answer');
-    await tellUsAboutYourFamilyPage.patientEthnicity().check('I prefer not to answer');
-    await tellUsAboutYourFamilyPage.indicateTypesOfDoctors().toSelect('Select all that apply').selectOption('Pulmonologist');
-    await tellUsAboutYourFamilyPage.indicateAnyFollowingTest().check('Karyotype');
-    await tellUsAboutYourFamilyPage.indicateAnyFollowingTest().check('Single gene testing');
-    await tellUsAboutYourFamilyPage.indicateAnyBiopsiesAvailable().check('Bone Marrow Biopsy');
-    await tellUsAboutYourFamilyPage.indicateAnyBiopsiesAvailable().check('Skin Biopsy');
-    await tellUsAboutYourFamilyPage.indicateAnyBiopsiesAvailable().check('Muscle Biopsy');
-    await tellUsAboutYourFamilyPage.isPatientParticipatingInOtherResearchStudies().check('No');
-    await tellUsAboutYourFamilyPage.next();
+    await tellUsAboutYourFamily.patientAge().fill(user.patient.age);
+    await tellUsAboutYourFamily.patientAgeAtOnsetCondition().fill(user.patient.age);
+    await tellUsAboutYourFamily.patientSex().check(user.patient.sex, { exactMatch: true });
+    await tellUsAboutYourFamily.patientRace().toSelect('Select all that apply').selectOption('I prefer not to answer');
+    await tellUsAboutYourFamily.patientEthnicity().check('I prefer not to answer');
+    await tellUsAboutYourFamily.indicateTypesOfDoctors().toSelect('Select all that apply').selectOption('Pulmonologist');
+    await tellUsAboutYourFamily.indicateAnyFollowingTest().check('Karyotype');
+    await tellUsAboutYourFamily.indicateAnyFollowingTest().check('Single gene testing');
+    await tellUsAboutYourFamily.indicateAnyBiopsiesAvailable().check('Bone Marrow Biopsy');
+    await tellUsAboutYourFamily.indicateAnyBiopsiesAvailable().check('Skin Biopsy');
+    await tellUsAboutYourFamily.indicateAnyBiopsiesAvailable().check('Muscle Biopsy');
+    await tellUsAboutYourFamily.isPatientParticipatingInOtherResearchStudies().check('No');
+    await tellUsAboutYourFamily.next();
 
     await assertProgressActiveItem(page, '3');
 
-    await tellUsAboutYourFamilyPage
+    await tellUsAboutYourFamily
       .patientBiologicalMotherRace()
       .toSelect('Select all that apply')
       .selectOption('White', { exactMatch: false });
-    await tellUsAboutYourFamilyPage.patientBiologicalMotherEthnicity().check('Not Hispanic');
-    await tellUsAboutYourFamilyPage.doesMotherHaveSameGeneticMedicalCondition().check('No', { exactMatch: true });
-    await tellUsAboutYourFamilyPage.isPatientBiologicalMotherAbleToParticipateStudy().check('No');
+    await tellUsAboutYourFamily.patientBiologicalMotherEthnicity().check('Not Hispanic');
+    await tellUsAboutYourFamily.doesMotherHaveSameGeneticMedicalCondition().check('No', { exactMatch: true });
+    await tellUsAboutYourFamily.isPatientBiologicalMotherAbleToParticipateStudy().check('No');
 
-    await tellUsAboutYourFamilyPage
+    await tellUsAboutYourFamily
       .patientBiologicalFatherRace()
       .toSelect('Select all that apply')
       .selectOption('White', { exactMatch: false });
-    await tellUsAboutYourFamilyPage.patientBiologicalFatherEthnicity().check('Not Hispanic');
-    await tellUsAboutYourFamilyPage.doesFatherHaveSameGeneticMedicalCondition().check('No', { exactMatch: true });
-    await tellUsAboutYourFamilyPage.isPatientBiologicalFatherAbleToParticipateStudy().check('No');
-    await tellUsAboutYourFamilyPage.doesNotHaveAnySiblings().check();
-    await tellUsAboutYourFamilyPage.doesNotHaveAnyChildren().check();
-    await tellUsAboutYourFamilyPage.doesNotHaveAnyOtherFamilyMembersAffectedByCondition().check();
+    await tellUsAboutYourFamily.patientBiologicalFatherEthnicity().check('Not Hispanic');
+    await tellUsAboutYourFamily.doesFatherHaveSameGeneticMedicalCondition().check('No', { exactMatch: true });
+    await tellUsAboutYourFamily.isPatientBiologicalFatherAbleToParticipateStudy().check('No');
+    await tellUsAboutYourFamily.doesNotHaveAnySiblings().check();
+    await tellUsAboutYourFamily.doesNotHaveAnyChildren().check();
+    await tellUsAboutYourFamily.doesNotHaveAnyOtherFamilyMembersAffectedByCondition().check();
 
-    await tellUsAboutYourFamilyPage.iAgreeToMatchToResearchStudy().check();
-    await tellUsAboutYourFamilyPage.iAgreeToBeContacted().check();
-    await tellUsAboutYourFamilyPage.iUnderstand().check();
+    await tellUsAboutYourFamily.iAgreeToMatchToResearchStudy().check();
+    await tellUsAboutYourFamily.iAgreeToBeContacted().check();
+    await tellUsAboutYourFamily.iUnderstand().check();
 
-    await tellUsAboutYourFamilyPage.submit();
+    await tellUsAboutYourFamily.submit();
 
     const dashboard = new DashboardPage(page);
     await dashboard.waitForReady();
@@ -149,8 +146,13 @@ test.describe('Adult Self Enrollment', () => {
 
     const actionsCell = await table.findCell('Form', 'Tell us about your family', 'Actions');
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    await expect(new Button(page, { root: actionsCell! })).toBeTruthy();
-
-    await page.pause();
+    const viewButton = table.findButtonInCell(actionsCell!, { label: 'View' });
+    await expect(viewButton).toBeTruthy();
+    // Make sure the View button in table cell is working by clicking it and checks page navigation
+    await viewButton.click();
+    await tellUsAboutYourFamily.waitForReady();
+    // fields should be disabled. check one field to verify is disabled
+    expect(await tellUsAboutYourFamily.yourTitle().isDisabled()).toEqual(true);
+    expect(await tellUsAboutYourFamily.yourFirstName().isDisabled()).toEqual(true);
   });
 });
