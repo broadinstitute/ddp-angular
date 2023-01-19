@@ -2,13 +2,11 @@ import { expect } from '@playwright/test';
 import { test } from 'fixtures/singular-fixture';
 import * as user from 'data/fake-user.json';
 import * as auth from 'authentication/auth-singular';
-import { WHO } from 'data/constants';
 import MyDashboardPage from 'pages/singular/dashboard/my-dashboard-page';
 import MedicalRecordReleaseForm from 'pages/singular/enrollment/medical-record-release-form';
 import AboutMyChildPage from 'pages/singular/enrollment/about-my-child-page';
 import ChildSurveyPage from 'pages/singular/enrollment/child-survey-page';
 import PreScreeningPage from 'pages/singular/enrollment/pre-screening-page';
-import EnrollMyChildPage from 'pages/singular/enrollment/enroll-my-child-page';
 import ConsentFormForMinorPage from 'pages/singular/enrollment/consent-form-for-minor-page';
 import { enterMailingAddress } from 'utils/test-utils';
 import AssentFormPage from 'pages/singular/enrollment/assent-form-page';
@@ -42,19 +40,6 @@ test.describe('Enroll my child', () => {
     // On "My Dashboard" page, click Enroll Mys Child button
     const myDashboardPage = new MyDashboardPage(page);
     await myDashboardPage.enrollMyChild();
-
-    // On "Enroll mys child" page
-    await assertActivityHeader(page, 'Enroll my child');
-    const enrollMyChildPage = new EnrollMyChildPage(page);
-    await enrollMyChildPage.whoInChildFamilyHasVentricleHeartDefect().check(WHO.TheChildBeingEnrolled);
-    await enrollMyChildPage.howOldIsYourChild().fill(user.child.age);
-    await myDashboardPage.next();
-    await assertActivityHeader(page, 'Enroll my child');
-    await expect(enrollMyChildPage.getNextButton()).toBeDisabled();
-    // Triggered one extra question
-    await expect(enrollMyChildPage.getNextButton()).toBeEnabled();
-    await assertActivityHeader(page, 'Enroll my child');
-    await enrollMyChildPage.doesChildHaveCognitiveImpairment().check('No', { exactMatch: true });
     await myDashboardPage.next();
 
     // On "Consent Form for Minor Dependent" page
@@ -81,13 +66,13 @@ test.describe('Enroll my child', () => {
     await consentForm.authorizationSignature().fill(user.patient.lastName);
     await consentForm.agree();
 
-    // On Assent Form because child is >= 12 years old
+    // On Assent Form because child is >= 7 years old: 12/30/2010
     await assertActivityHeader(page, new RegExp(/Assent Form/));
     await assertActivityProgress(page, 'Page 1 of 1');
     const assentForm = new AssentFormPage(page);
     await assentForm.next();
     await assentForm.fullName().fill(`${user.child.firstName} ${user.child.middleName} ${childLastName}`);
-    await assentForm.hasAgreedToBeInStudy().check();
+    await assentForm.subjectHasAgreedToBeInStudy().check();
     await assentForm.sign().fill(`${user.patient.firstName} ${user.patient.lastName}`);
     await assentForm.next({ waitForNav: true });
 

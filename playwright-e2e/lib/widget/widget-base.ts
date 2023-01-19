@@ -14,7 +14,7 @@ export default abstract class WidgetBase implements WidgetInterface {
 
   errorMessage(): Locator {
     return this.toLocator().locator(
-      'xpath=' + '/ancestor::ddp-activity-question//*[contains(@class,"ErrorMessage")] | /ancestor::mat-form-field//mat-error'
+      'xpath=/ancestor::ddp-activity-question//*[contains(@class,"ErrorMessage")] | /ancestor::mat-form-field//mat-error'
     );
   }
 }

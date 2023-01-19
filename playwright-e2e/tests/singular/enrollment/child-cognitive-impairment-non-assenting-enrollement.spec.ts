@@ -2,13 +2,11 @@ import { expect } from '@playwright/test';
 import { test } from 'fixtures/singular-fixture';
 import * as user from 'data/fake-user.json';
 import * as auth from 'authentication/auth-singular';
-import { WHO } from 'data/constants';
 import MyDashboardPage from 'pages/singular/dashboard/my-dashboard-page';
 import MedicalRecordReleaseForm from 'pages/singular/enrollment/medical-record-release-form';
 import AboutMyChildPage from 'pages/singular/enrollment/about-my-child-page';
 import ChildSurveyPage from 'pages/singular/enrollment/child-survey-page';
 import PreScreeningPage from 'pages/singular/enrollment/pre-screening-page';
-import EnrollMyChildPage from 'pages/singular/enrollment/enroll-my-child-page';
 import ConsentFormForMinorPage from 'pages/singular/enrollment/consent-form-for-minor-page';
 import { enterMailingAddress } from 'utils/test-utils';
 import { assertActivityHeader, assertActivityProgress } from 'utils/assertion-helper';
@@ -16,11 +14,14 @@ import { generateUserName } from 'utils/faker-utils';
 
 const { SINGULAR_USER_EMAIL, SINGULAR_USER_PASSWORD } = process.env;
 
-test.describe('Enroll my child', () => {
+/**
+ * Enroll a child of age >= 7 but < AOM + cognitive impairment
+ */
+test.describe('Enroll child with cognitive impairment', () => {
   // Randomize last name
   const childLastName = generateUserName(user.thirdChild.lastName);
 
-  test('enrolling non assenting child > 7 not capable of consent @enrollment @singular', async ({ page, homePage }) => {
+  test('Enrolling child > 7 and not capable to consent @enrollment @singular', async ({ page, homePage }) => {
     await homePage.signUp();
 
     // Step 1
@@ -35,14 +36,12 @@ test.describe('Enroll my child', () => {
     // Step 3
     // On "My Dashboard" page, click Enroll Mys Child button
     const myDashboardPage = new MyDashboardPage(page);
-    await myDashboardPage.enrollMyChild();
-
-    // On "Enroll mys child" page
-    await assertActivityHeader(page, 'Enroll my child');
-    const enrollMyChildPage = new EnrollMyChildPage(page);
-    await enrollMyChildPage.whoInChildFamilyHasVentricleHeartDefect().check(WHO.TheChildBeingEnrolled);
-    await enrollMyChildPage.howOldIsYourChild().fill(user.thirdChild.age);
-    await enrollMyChildPage.doesChildHaveCognitiveImpairment().check('yes');
+    await myDashboardPage.enrollMyChild({
+      age: user.thirdChild.age,
+      country: user.thirdChild.country.abbreviation,
+      state: user.thirdChild.state.abbreviation,
+      cognitiveImpairment: 'Yes'
+    });
     await myDashboardPage.next();
 
     // On "Consent Form for Minor Dependent" page

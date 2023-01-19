@@ -63,13 +63,13 @@ test.describe('Adult Enrollment', () => {
     // Question 4
     await aboutYou.whereCurrentlyHaveInBody(['Head/Face/Neck (not scalp)']);
     // Question 5
-    await aboutYou.hadSurgeryToRemoveAngiosarcoma(new RegExp('^No'));
+    await aboutYou.hadSurgeryToRemoveAngiosarcoma('No');
     // Question 6
-    await aboutYou.hadRadiationTreatmentForAngiosarcoma(new RegExp('^No'));
+    await aboutYou.hadRadiationTreatmentForAngiosarcoma('No');
     // Question 8
-    await aboutYou.beingTreatedCurrentlyForAngiosarcoma(new RegExp('^No'));
+    await aboutYou.beingTreatedCurrentlyForAngiosarcoma('No');
     // Question 9
-    await aboutYou.diagnosedWithOtherCancer(new RegExp('^No'));
+    await aboutYou.diagnosedWithOtherCancer('No');
     // Question 11
     await aboutYou.howDidYouHearAbout('Friends and family');
     // Question 15

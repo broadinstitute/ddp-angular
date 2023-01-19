@@ -34,7 +34,7 @@ export default class Question {
       return this.toLocator().locator('select');
     }
     return this.toLocator().locator('select', {
-      has: this.page.locator(`//*[contains(normalize-space(.),"${label}")]`)
+      has: this.page.locator(`xpath=//*[contains(normalize-space(.),"${label}")]`)
     });
   }
 

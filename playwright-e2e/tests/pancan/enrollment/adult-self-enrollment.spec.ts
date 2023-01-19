@@ -15,6 +15,7 @@ import SurveyCervicalCancerPage from 'pages/pancan/enrollment/survey-cervical-ca
 import SurveyAboutYouPage from 'pages/pancan/enrollment/survey-about-you.page';
 import ParticipantDashboardPage from 'pages/pancan/dashboard/participant-dashboard-page';
 import HomePage from 'pages/pancan/home/home-page';
+
 const { PANCAN_USER_EMAIL, PANCAN_USER_PASSWORD } = process.env;
 
 test.describe('Enroll myself as adult', () => {
@@ -62,8 +63,11 @@ test.describe('Enroll myself as adult', () => {
     await consentFormPage.lastName().fill(lastName);
     await consentFormPage.fillInDateOfBirth(user.patient.birthDate.MM, user.patient.birthDate.DD, user.patient.birthDate.YYYY);
     await consentFormPage.signature().fill(`${user.patient.firstName} ${lastName}`);
+    await expect(consentFormPage.getSubmitButton()).toBeEnabled();
+
     await enterMailingAddress(page, { fullName: `${user.patient.firstName} ${lastName}` }, 'Phone');
     await consentFormPage.submit();
+
     //On "Medical Release Form"
     await assertActivityHeader(page, 'Medical Release Form');
     const medicalReleaseFormPage = new MedicalReleaseFormPage(page);
@@ -71,33 +75,36 @@ test.describe('Enroll myself as adult', () => {
     await medicalReleaseFormPage.enterPhysicianData();
     await medicalReleaseFormPage.contactPhysician().toLocator().click();
     await medicalReleaseFormPage.submit();
+
     //Survey: About Cervical Cancer
     await assertActivityHeader(page, 'Survey: About Your Cervical cancer');
-    const surveCervicalCancerPage = new SurveyCervicalCancerPage(page);
-    await surveCervicalCancerPage.waitForReady();
-    await surveCervicalCancerPage.cervicalCancerDiagnosedDate('March', '2015');
-    await surveCervicalCancerPage.fillCancerBodyPlaces('Appendix');
-    await surveCervicalCancerPage.cancerFree().radioButton('Yes').locator('label').click();
-    await surveCervicalCancerPage.fillBodyPlacesEverHadCancer('Appendix');
-    await surveCervicalCancerPage.checkTreatmentsReceived('Radiation');
-    await surveCervicalCancerPage.medicationsList().fill('many others');
-    await surveCervicalCancerPage.submit();
+    const surveyCervicalCancerPage = new SurveyCervicalCancerPage(page);
+    await surveyCervicalCancerPage.waitForReady();
+    await surveyCervicalCancerPage.cervicalCancerDiagnosedDate('March', '2015');
+    await surveyCervicalCancerPage.fillCancerBodyPlaces('Appendix');
+    await surveyCervicalCancerPage.cancerFree().radioButton('Yes').locator('label').click();
+    await surveyCervicalCancerPage.fillBodyPlacesEverHadCancer('Appendix');
+    await surveyCervicalCancerPage.checkTreatmentsReceived('Radiation');
+    await surveyCervicalCancerPage.medicationsList().fill('many others');
+    await surveyCervicalCancerPage.submit();
+
     //Survey: About you
     await assertActivityHeader(page, 'Survey: About You');
-    const survayAboutYou = new SurveyAboutYouPage(page);
-    await survayAboutYou.waitForReady();
-    await survayAboutYou.sexAssignedAtBirth().radioButton('Male', { exactMatch: true }).locator('label').click();
-    await survayAboutYou.checkGenderIdentity('Man');
-    await survayAboutYou.checkCategoriesDecribesYou('White');
-    await survayAboutYou.checkCategoriesDecribesYou('English');
-    await survayAboutYou.howDidYouHearAboutProject().check('Social media (Facebook, Twitter, Instagram, etc.)');
-    await survayAboutYou.howDidYouHearAboutProject().check('Facebook', { exactMatch: true });
-    await survayAboutYou.submit();
-    //dashboard
-    const participantDashborad = new ParticipantDashboardPage(page);
-    await participantDashborad.waitForReady();
+    const surveyAboutYou = new SurveyAboutYouPage(page);
+    await surveyAboutYou.waitForReady();
+    await surveyAboutYou.sexAssignedAtBirth().radioButton('Male', { exactMatch: true }).locator('label').click();
+    await surveyAboutYou.checkGenderIdentity('Man');
+    await surveyAboutYou.checkCategoriesDecribesYou('White');
+    await surveyAboutYou.checkCategoriesDecribesYou('English');
+    await surveyAboutYou.howDidYouHearAboutProject().check('Social media (Facebook, Twitter, Instagram, etc.)');
+    await surveyAboutYou.howDidYouHearAboutProject().check('Facebook', { exactMatch: true });
+    await surveyAboutYou.submit();
+
+    //Dashboard
+    const participantDashboard = new ParticipantDashboardPage(page);
+    await participantDashboard.waitForReady();
     const orderedHeaders = ['Form', 'Summary', 'Status', 'Actions'];
-    const table = participantDashborad.getDashboardTable();
+    const table = participantDashboard.getDashboardTable();
     await table.waitForReady();
     const headers = await table.getHeaderNames();
     expect(headers).toHaveLength(4); // Four columns in table

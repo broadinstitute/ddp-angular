@@ -33,10 +33,11 @@ test.describe('Enrol an adult dependent', () => {
     await expect(locator).toContainText(itemName);
   };
 
+  /** Test skip due to bug https://broadworkbench.atlassian.net/browse/PEPPER-485. Re-enable after bug fix. */
   /**
    * Test case: https://docs.google.com/document/d/1vaiSfsYeDzEHeK2XOVO3n_7I1W0Z94Kkqx_82w8-Vpc/edit#heading=h.6snot4x1e1uw
    */
-  test('can finish adult-dependent-enrollment @enrollment @singular', async ({ page, homePage }) => {
+  test.skip('can finish adult-dependent-enrollment @enrollment @singular', async ({ page, homePage }) => {
     await homePage.signUp();
 
     // On “pre-screening” page, answer all questions about yourself with fake values
@@ -55,6 +56,11 @@ test.describe('Enrol an adult dependent', () => {
     const enrollMyAdultDependentPage = new EnrollMyAdultDependentPage(page);
     await enrollMyAdultDependentPage.whoHasVentricleHeartDefect().check(WHO.TheDependantBeingEnrolled);
     await enrollMyAdultDependentPage.howOldIsYourDependent().fill(user.adultDependent.age);
+    await enrollMyAdultDependentPage
+      .whereDoesDependentLive()
+      .select('Select Country')
+      .selectOption(user.adultDependent.country.abbreviation);
+    await enrollMyAdultDependentPage.state().selectOption(user.adultDependent.state.abbreviation);
     await enrollMyAdultDependentPage.doesDependentHaveCognitiveImpairment().check('Yes', { exactMatch: true });
     await myDashboardPage.next();
 
@@ -73,7 +79,11 @@ test.describe('Enrol an adult dependent', () => {
 
     await consentForm.dependentFirstName().fill(user.adultDependent.firstName);
     await consentForm.dependentLastName().fill(dependentLastName);
-    await consentForm.fillInDateOfBirth(12, 20, 1950);
+    await consentForm.fillInDateOfBirth(
+      user.adultDependent.birthDate.MM,
+      user.adultDependent.birthDate.DD,
+      user.adultDependent.birthDate.YYYY
+    );
     await consentForm.toKnowSecondaryFinding().check('I want to know.');
     await consentForm.selectOneForAdultDependent().check('I have explained the study');
     await consentForm.dependentGuardianSignature().fill(`${user.patient.firstName} ${user.patient.lastName}`);

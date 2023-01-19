@@ -1,7 +1,6 @@
 import { expect, Page } from '@playwright/test';
 import { test } from 'fixtures/singular-fixture';
 import * as auth from 'authentication/auth-singular';
-import { signMeUp } from 'pages/singular/navbar';
 import PreScreeningPage from 'pages/singular/enrollment/pre-screening-page';
 import MyDashboardPage from 'pages/singular/dashboard/my-dashboard-page';
 import EnrollMyAdultDependentPage from 'pages/singular/enrollment/enroll-my-adult-dependent-page';
@@ -10,8 +9,6 @@ import { WHO } from 'data/constants';
 const { SINGULAR_USER_EMAIL, SINGULAR_USER_PASSWORD } = process.env;
 
 async function signUp(page: Page) {
-  await signMeUp(page);
-
   const preScreeningPage = new PreScreeningPage(page);
   await preScreeningPage.enterInformationAboutYourself();
 
