@@ -1,8 +1,8 @@
 import { expect, Locator, Page } from '@playwright/test';
 import Input from 'lib/widget/Input';
 import { waitForNoSpinner } from 'utils/test-utils';
-import Table from '../../lib/widget/table';
-import Checkbox from '../../lib/widget/checkbox';
+import Table from 'lib/widget/table';
+import Checkbox from 'lib/widget/checkbox';
 import ParticipantPage from './participant-page';
 
 export enum SearchFieldLabel {

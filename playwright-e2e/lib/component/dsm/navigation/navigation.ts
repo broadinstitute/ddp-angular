@@ -1,6 +1,6 @@
 import { Page } from '@playwright/test';
 import Dropdown from 'lib/widget/dropdown';
-import ParticipantListPage from '../../../../pages/dsm/participantList-page';
+import ParticipantListPage from 'pages/dsm/participantList-page';
 import { MainMenu } from './enums/mainMenu.enum';
 import { StudyNav } from './enums/studyNav.enum';
 

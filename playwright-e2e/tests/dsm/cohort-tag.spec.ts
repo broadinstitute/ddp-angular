@@ -1,12 +1,12 @@
 import { test } from '@playwright/test';
 import { login } from 'authentication/auth-dsm';
 import ParticipantListPage from 'pages/dsm/participantList-page';
-import HomePage from '../../pages/dsm/home-page';
-import ParticipantPage from '../../pages/dsm/participant-page';
-import CohortTag from '../../lib/component/dsm/cohort-tag';
-import Select from '../../lib/widget/select';
-import { StudyNav } from '../../lib/component/dsm/navigation/enums/studyNav.enum';
-import { Navigation } from '../../lib/component/dsm/navigation/navigation';
+import HomePage from 'pages/dsm/home-page';
+import ParticipantPage from 'pages/dsm/participant-page';
+import CohortTag from 'lib/component/dsm/cohort-tag';
+import Select from 'lib/widget/select';
+import { StudyNav } from 'lib/component/dsm/navigation/enums/studyNav.enum';
+import { Navigation } from 'lib/component/dsm/navigation/navigation';
 
 test.describe.parallel('', () => {
   let homePage: HomePage;
