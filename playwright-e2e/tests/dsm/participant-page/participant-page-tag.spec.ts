@@ -1,11 +1,13 @@
-import { expect, test } from '@playwright/test';
+import { test } from '@playwright/test';
 import { login } from 'authentication/auth-dsm';
-import { study } from 'pages/dsm/navbar';
-import Select from 'lib/widget/select';
-import ParticipantsPage from 'pages/dsm/participants/participants-page';
-import Table from 'lib/widget/table';
-import Checkbox from 'lib/widget/checkbox';
 import { Page } from '@playwright/test';
+import ParticipantListPage from 'pages/dsm/participantList-page';
+import HomePage from '../../../pages/dsm/home-page';
+import ParticipantPage from '../../../pages/dsm/participant-page';
+import CohortTag from '../../../lib/component/dsm/cohort-tag';
+import Select from '../../../lib/widget/select';
+import { StudyNav } from '../../../lib/component/dsm/navigation/enums/studyNav.enum';
+import { Navigation } from '../../../lib/component/dsm/navigation/navigation';
 
 test.describe.parallel('Participant Page DSM', () => {
   test.beforeEach(async ({ page }) => {
@@ -22,83 +24,66 @@ test.describe.parallel('Participant Page DSM', () => {
 });
 
 async function cohortTagTest(studyName: string, page: Page) {
-  //Get current date and time to ensure tag is different from others
-  const currentdate = new Date();
-  //Go to study
+  const currentDate = new Date().toLocaleString();
+
   await new Select(page, { label: 'Select study' }).selectOption(studyName);
-  await expect(page.locator('h1')).toHaveText('Welcome to the DDP Study Management System');
-  await expect(page.locator('h2')).toHaveText(`You have selected the ${studyName} study.`);
+  const navigation = new Navigation(page);
+  const homePage = new HomePage(page);
+  const cohortTag = new CohortTag(page);
 
-  await study(page).selectOption('Participant List', { waitForNav: true });
-  await expect(page.locator('h1')).toHaveText('Participant List', { timeout: 30 * 1000 });
+  await homePage.assertWelcomeTitle();
+  await homePage.assertSelectedStudyTitle(studyName);
 
-  const participantListPage = new ParticipantsPage(page);
+  const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(StudyNav.PARTICIPANT_LIST);
+
+  await participantListPage.assertPageTitle();
   await participantListPage.waitForReady();
-
-  //Filter to only patients with medical records
   await participantListPage.filterMedicalRecordParticipants();
   await participantListPage.waitForReady();
-  const table = new Table(page);
-  //Make sure we got at least one result and click the first result.
-  expect(await table.rowLocator().count()).toBeGreaterThanOrEqual(1);
-  const cell = await table.cell(0, 2);
-  await cell.click();
-  await expect(page.locator('h1')).toHaveText('Participant Page', { timeout: 5 * 1000 });
+  await participantListPage.assertParticipantsCountGreaterOrEqual(1);
 
-  //Make new tags
-  await page.fill('[placeholder="New tag..."]', `dsm_rc_${currentdate}_${studyName}`);
-  await page.keyboard.press('Enter');
-  //Delete tag
-  await page.locator(`text=dsm_rc_${currentdate}_${studyName}`).click();
-  await page.keyboard.press('Backspace');
-  //Make new tag
-  await page.fill('[placeholder="New tag..."]', `DSM RC ${studyName} ${currentdate}`);
-  await page.keyboard.press('Enter');
-  //Make new tag
-  await page.fill('[placeholder="New tag..."]', `${studyName} ${currentdate}`);
-  await page.keyboard.press('Enter');
-  //Make test note
-  await page.fill('textarea:right-of(:text("Participant Notes"))', `This is a test note - ${currentdate}`);
-  await page.keyboard.press('Tab');
-  //Refresh page
+  const participantPage: ParticipantPage = await participantListPage.clickParticipantAt(1);
+  await participantPage.assertPageTitle();
+
+  await cohortTag.add(`dsm_rc_${currentDate}_${studyName}`);
+  await cohortTag.delete(`text=dsm_rc_${currentDate}_${studyName}`);
+  await cohortTag.add(`DSM RC ${studyName} ${currentDate}`);
+  await cohortTag.add(`${studyName} ${currentDate}`);
+  await participantPage.fillParticipantNotes(`This is a test note - ${currentDate}`);
+
   await page.reload();
-  await expect(page.locator('h1')).toHaveText('Participant List', { timeout: 30 * 1000 });
+
+  await participantListPage.assertPageTitle();
   await participantListPage.waitForReady();
   await participantListPage.filterMedicalRecordParticipants();
-  await cell.click();
-  await expect(page.locator('h1')).toHaveText('Participant List', { timeout: 30 * 1000 });
-  //Make sure first tag was deleted
-  await expect(page.locator(`text=dsm_rc_${currentdate}_${studyName}`)).toHaveCount(0);
+  await participantListPage.clickParticipantAt(1);
 
-  //Make sure second tag is still there, then delete it
-  await expect(page.locator(`text=DSM RC ${studyName} ${currentdate}`)).toHaveCount(1);
-  await page.locator(`text=DSM RC ${studyName} ${currentdate}`).click();
-  await page.keyboard.press('Backspace');
+  await participantPage.assertPageTitle();
 
-  //Make sure 3rd tag is still there, ensure no duplicate tags can be added
-  await expect(page.locator(`text=${studyName} ${currentdate}`)).toHaveCount(1);
-  await page.fill('[placeholder="New tag..."]', `${studyName} ${currentdate}`);
-  await page.keyboard.press('Enter');
-  await expect(page.locator('text=Duplicate tag! Not saved!')).toHaveCount(1);
+  await cohortTag.assertCohortTagToHaveCount(`text=dsm_rc_${currentDate}_${studyName}`, 0);
+  await cohortTag.assertCohortTagToHaveCount(`text=DSM RC ${studyName} ${currentDate}`, 1);
+  await cohortTag.delete(`text=DSM RC ${studyName} ${currentDate}`);
 
-  //Make sure the test not is still there
-  expect(await page.locator('textarea:right-of(:text("Participant Notes"))').inputValue()).toBe(
-    `This is a test note - ${currentdate}`
-  );
-  await page.locator("text=<< back to 'List'").click();
+  await cohortTag.assertCohortTagToHaveCount(`text=${studyName} ${currentDate}`, 1);
 
-  //Make sure Add bulk cohort tag does not add duplicates.
-  await new Checkbox(page, { root: table.cell(0, 0) }).check();
-  await page.locator('button:right-of(:text("Initial MR Received"))').nth(17).click();
-  await page.fill('[placeholder="New tag..."]', `${studyName} ${currentdate}`);
-  await page.keyboard.press('Enter');
-  await page.locator('text=Submit').click();
-  await page.waitForTimeout(1000);
-  await page.keyboard.press('Escape');
-  await cell.click();
-  await expect(page.locator(`text=${studyName} ${currentdate}`)).toHaveCount(1);
-  //Delete tag
-  await page.locator(`text=${studyName} ${currentdate}`).click();
-  await page.keyboard.press('Backspace');
-  await expect(page.locator(`text=${studyName} ${currentdate}`)).toHaveCount(0);
+  await cohortTag.add(`${studyName} ${currentDate}`);
+
+  await cohortTag.assertCohortTagToHaveCount('text=Duplicate tag! Not saved!', 1);
+
+  await participantPage.assertParticipantNotesToHaveCount(`This is a test note - ${currentDate}`);
+  await participantPage.backToList();
+
+  await participantListPage.selectParticipant();
+  await participantListPage.addBulkCohortTags();
+
+  await cohortTag.add(`${studyName} ${currentDate}`);
+  await cohortTag.submitAndExit();
+
+  await participantListPage.clickParticipantAt(1);
+
+  await cohortTag.assertCohortTagToHaveCount(`text=${studyName} ${currentDate}`, 1);
+
+  await cohortTag.delete(`text=${studyName} ${currentDate}`);
+
+  await cohortTag.assertCohortTagToHaveCount(`text=${studyName} ${currentDate}`, 0);
 }

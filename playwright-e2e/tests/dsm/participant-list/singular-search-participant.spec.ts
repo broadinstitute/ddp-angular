@@ -1,34 +1,37 @@
-import { expect, test } from '@playwright/test';
+import { test } from '@playwright/test';
 import { login } from 'authentication/auth-dsm';
-import { study } from 'pages/dsm/navbar';
 import Select from 'lib/widget/select';
-import ParticipantsPage, { SearchFieldLabel } from 'pages/dsm/participants/participants-page';
-import Table from 'lib/widget/table';
+import ParticipantListPage, { SearchFieldLabel } from 'pages/dsm/participantList-page';
+import HomePage from '../../../pages/dsm/home-page';
+import { StudyNav } from '../../../lib/component/dsm/navigation/enums/studyNav.enum';
+import { Navigation } from '../../../lib/component/dsm/navigation/navigation';
 
 test.describe('Singular Study in DSM', () => {
+  let homePage: HomePage;
+  let navigation: Navigation;
+
   test.beforeEach(async ({ page }) => {
     await login(page);
+    homePage = new HomePage(page);
+    navigation = new Navigation(page);
   });
 
   test('search by Short ID in Singular study @dsm @dsm-search', async ({ page }) => {
     await new Select(page, { label: 'Select study' }).selectOption('Singular');
-    await expect(page.locator('h1')).toHaveText('Welcome to the DDP Study Management System');
-    await expect(page.locator('h2')).toHaveText('You have selected the Singular study.');
 
-    await study(page).selectOption('Participant List', { waitForNav: true });
-    await expect(page.locator('h1')).toHaveText('Participant List', { timeout: 30 * 1000 });
+    await homePage.assertWelcomeTitle();
+    await homePage.assertSelectedStudyTitle('Singular');
 
-    const participantListPage = new ParticipantsPage(page);
+    const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(StudyNav.PARTICIPANT_LIST);
+
+    await participantListPage.assertPageTitle();
     await participantListPage.waitForReady();
     await participantListPage.openSearchButton().click();
 
-    // Grab one random Short ID from table rwo index:2 and column index:2 and use value in the search
-    const table = new Table(page);
-    const shortId = await table.cell(2, 2).innerText();
+    const shortId = await participantListPage.getParticipantShortIdAt(2);
 
-    // Start search by Short ID
     await participantListPage.search(SearchFieldLabel.ShortId, shortId);
-    // Verify table has one row
-    await expect(table.rowLocator()).toHaveCount(1);
+
+    await participantListPage.assertParticipantsCount(1);
   });
 });
