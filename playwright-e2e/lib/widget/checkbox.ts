@@ -24,7 +24,9 @@ export default class Checkbox extends WidgetBase {
         ? this.rootLocator.locator(`mat-checkbox[data-ddp-test="${ddpTestID}"]`) // Label ignored if ddpTestID is specified
         : exactMatch
             ? this.rootLocator.locator(`xpath=//mat-checkbox[.//input[@id=(//label[.//text()[normalize-space()="${label}"]]/@for)]]`)
-            : this.rootLocator.locator(`xpath=//mat-checkbox[.//input[@id=(//label[contains(normalize-space(.),"${label}")]/@for)]]`);
+            : label
+                ? this.rootLocator.locator(`xpath=//mat-checkbox[.//input[@id=(//label[contains(normalize-space(.),"${label}")]/@for)]]`)
+                : this.rootLocator.locator(`xpath=//mat-checkbox[.//input[@id=(//label/@for)]]`);
   }
 
   toLocator(): Locator {
