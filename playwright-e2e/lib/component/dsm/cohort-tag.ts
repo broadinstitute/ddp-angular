@@ -24,8 +24,7 @@ export default class CohortTag {
   }
 
   public get inputField(): Locator {
-    return this.page
-      .locator('//mat-form-field//input[@id=//*[@aria-label="Tag selection"]/@data-mat-chip-input]')
+    return this.page.locator('//mat-form-field//input[@id=//*[@aria-label="Tag selection"]/@data-mat-chip-input]');
   }
 
   /* assertions */
