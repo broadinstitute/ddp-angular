@@ -456,10 +456,10 @@ export class ParticipantListComponent implements OnInit {
                     }
                   } else if (question.questionType === 'COMPOSITE') {
                     options = new Array<NameValue>();
-                    type = Filter.OPTION_TYPE;
                     if (question.childQuestions != null) {
                       question.childQuestions.forEach((childQuestion: QuestionDefinition) => {
                         if (childQuestion.options != null) {
+                          type = Filter.OPTION_TYPE;
                           childQuestion.options.forEach((option: Option) => {
                             options.push(new NameValue(option.optionStableId, option.optionText));
                             if (option?.nestedOptions != null) {
@@ -470,6 +470,7 @@ export class ParticipantListComponent implements OnInit {
                           });
                         }
                         if (childQuestion.groups != null) {
+                          type = Filter.OPTION_TYPE;
                           childQuestion.groups.forEach((group: Group) => {
                             options.push(new NameValue(group.groupStableId, group.groupText));
                             if (group.options != null) {
