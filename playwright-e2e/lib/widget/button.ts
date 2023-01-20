@@ -27,8 +27,4 @@ export default class Button extends WidgetBase {
   toLocator(): Locator {
     return this.elementLocator;
   }
-
-  async click(): Promise<void> {
-    await this.toLocator().click();
-  }
 }

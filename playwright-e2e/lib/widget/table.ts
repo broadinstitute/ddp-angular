@@ -1,4 +1,5 @@
 import { expect, Locator, Page } from '@playwright/test';
+import Button from 'lib/widget/button';
 import _ from 'lodash';
 
 export default class Table {
@@ -100,5 +101,13 @@ export default class Table {
         return await column.innerText();
       })
     );
+  }
+
+  /**
+   * Find a button in a cell
+   */
+  findButtonInCell(cellLocator: Locator, opts: { label?: string }): Button {
+    const { label } = opts;
+    return new Button(this.page, { root: cellLocator, label });
   }
 }
