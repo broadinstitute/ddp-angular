@@ -29,9 +29,15 @@ export default class MedicalReleaseFormPage extends PancanPage {
     return new Input(this.page, { label: 'State' });
   }
 
+  /**
+   * By completing this information, you are agreeing to allow us to contact these
+   *  physician(s) and hospital(s) / institution(s) to obtain your child’s records.
+   * Type: Checkbox
+   * @returns {Question}
+   */
   contactPhysician(): Question {
     return new Question(this.page, {
-      prompt: 'I have already read and signed the informed consent document for this study, which describes the use of'
+      prompt: 'I have already read and signed the informed consent document for this study'
     });
   }
 

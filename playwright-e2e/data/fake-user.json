@@ -34,6 +34,31 @@
     "state": "MA",
     "zip": "02114"
   },
+  "adult": {
+    "firstName": "E2E",
+    "middleName": "Tester",
+    "lastName": "Playwright",
+    "fullName": "E2E Tester Playwright",
+    "birthDate": {
+      "MM": "10",
+      "DD": "02",
+      "YYYY": "1960"
+    },
+    "sex": "Male",
+    "age": "63",
+    "country": {
+      "name": "UNITED STATES",
+      "abbreviation": "US"
+    },
+    "state": {
+      "name": "MASSACHUSETTS",
+      "abbreviation": "MA"
+    },
+    "streetAddress": "415 Main Street",
+    "city": "Cambridge",
+    "zip": "02142-1027",
+    "phone": "6177147000"
+  },
   "secondDoctor": {
     "name": "John Stack",
     "specialty": "PRIMARY_CARE",

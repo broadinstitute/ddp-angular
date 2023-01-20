@@ -3,9 +3,10 @@ import Question from 'lib/component/Question';
 import Input from 'lib/widget/Input';
 import { PancanPage } from 'pages/pancan/pancan-page';
 import * as fake from 'data/fake-user.json';
+import { TypePatient } from 'pages/patient-type';
 
 export default class PreScreeningAgeLocationPage extends PancanPage {
-  constructor(page: Page) {
+  constructor(page: Page, private patient: TypePatient = 'adult') {
     super(page);
   }
 
@@ -48,7 +49,11 @@ export default class PreScreeningAgeLocationPage extends PancanPage {
     } = {}
   ): Promise<void> {
     // Fake data from fake-user.json
-    const { age = fake.patient.age, country = fake.patient.country.abbreviation, state = fake.patient.state.abbreviation } = opts;
+    const {
+      age = fake[this.patient].age,
+      country = fake[this.patient].country.abbreviation,
+      state = fake[this.patient].state.abbreviation
+    } = opts;
 
     await this.age().fill(age);
     await this.country().select().selectOption(country);

@@ -114,7 +114,7 @@ test.describe('Enroll myself as adult', () => {
     await patientSurveyPage.currentZipCode().fill(user.patient.zip);
     await patientSurveyPage.sexAtBirth().check('Prefer not to answer');
     await patientSurveyPage.race().check('White');
-    await patientSurveyPage.isHispanic().check(new RegExp('^\\s*No\\s*$'));
+    await patientSurveyPage.isHispanic().check('No', { exactMatch: true });
     await patientSurveyPage.selectVentricleDiagnosis().check('Ebstein');
     await patientSurveyPage.submit();
 
