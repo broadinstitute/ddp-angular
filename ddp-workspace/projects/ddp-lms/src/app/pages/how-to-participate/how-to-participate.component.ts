@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
 })
 export class HowToParticipateComponent {
 
-  consent = 'https://storage.googleapis.com/cmi-study-dev-assets/lms/pdf/7.%20Adult%20Reseach%20Consent%20Form%20V5%20TRACKED%20LMS%20April%202022.docx.pdf';
+  consent = 'https://storage.googleapis.com/cmi-study-dev-assets/lms/pdf/Adult%20Reseach%20Consent%20Form%20V7%20CLEAN%20LMS%2016Dec%202022.pdf';
   medical_release = 'https://storage.googleapis.com/cmi-study-dev-assets/lms/pdf/LMS%20Medical%20Release%20Form%20-%20Adult.pdf';
   kit = 'https://storage.googleapis.com/cmi-study-dev-assets/lms/pdf/Kit%20Instructions%20-%20Linked%20on%20Participation%20Page.pdf';
   survey = 'https://storage.googleapis.com/cmi-study-dev-assets/lms/pdf/LMS%20About%20You_Your%20LMS%20Survey.pdf';
