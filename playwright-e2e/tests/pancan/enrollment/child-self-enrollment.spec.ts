@@ -121,7 +121,5 @@ test.describe('Enroll child ', () => {
     await expect(await statusCervicalCancerCell?.innerText()).toEqual('Complete');
     const statusAboutYouCell = await table.findCell('Form', 'Survey: About Your Child', 'Status');
     await expect(await statusAboutYouCell?.innerText()).toEqual('Complete');
-
-    await page.pause();
   });
 });
