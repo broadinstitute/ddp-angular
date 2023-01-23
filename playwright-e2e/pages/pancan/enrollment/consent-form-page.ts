@@ -91,7 +91,11 @@ export default class ConsentFormPage extends PancanPage {
     await this.childSignature().toLocator().waitFor({ state: 'visible' });
   }
 
-  async parentData() {
+  /**
+   * Used in Child enrollment.
+   * @returns {Promise<void>}
+   */
+  async fillInParentData() {
     const parentFirstName = new Input(this.page, { ddpTestID: PatientsData.child.ddpTestID.assentFirstName });
     const parentLastName = new Input(this.page, { ddpTestID: PatientsData.child.ddpTestID.assentLastName });
     const parentSignature = new Input(this.page, { ddpTestID: PatientsData.child.ddpTestID.assentSignature });

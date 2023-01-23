@@ -61,7 +61,7 @@ test.describe('Enroll child ', () => {
     await consentFormPage.firstName().fill(user.child.firstName);
     await consentFormPage.lastName().fill(lastName);
     await consentFormPage.fillInDateOfBirth(user.child.birthDate.MM, user.child.birthDate.DD, user.child.birthDate.YYYY);
-    await consentFormPage.parentData();
+    await consentFormPage.fillInParentData();
     await enterMailingAddress(page, { fullName: `${user.child.firstName} ${lastName}` }, 'Phone');
     await consentFormPage.next();
     await consentFormPage.waitSecondReady();
