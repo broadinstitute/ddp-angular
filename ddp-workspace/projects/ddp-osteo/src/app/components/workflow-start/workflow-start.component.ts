@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, Inject, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, Inject, OnDestroy, OnInit} from '@angular/core';
 import {
   HeaderConfigurationService,
   ToolkitConfigurationService,
@@ -15,12 +15,15 @@ import {
   WorkflowServiceAgent
 } from 'ddp-sdk';
 import { IS_REGISTERING } from '../../types';
+import {Subscription} from "rxjs";
+import {finalize, take} from "rxjs/operators";
 
 @Component({
   selector: 'app-workflow-start',
   templateUrl: './workflow-start.component.html'
 })
-export class WorkflowStartComponent extends WorkflowStartActivityRedesignedComponent implements OnInit {
+export class WorkflowStartComponent extends WorkflowStartActivityRedesignedComponent implements OnInit, OnDestroy {
+  private subscription: Subscription;
 
   constructor(
     private _headerConfig: HeaderConfigurationService,
@@ -49,11 +52,12 @@ export class WorkflowStartComponent extends WorkflowStartActivityRedesignedCompo
 
   ngOnInit(): void {
     super.ngOnInit();
+    this.observeSessionChanges();
+  }
 
-    if (this.__session.isTemporarySession()) {
-      this._headerConfig.showBreadcrumbs = false;
-      this._headerConfig.showMainButtons = true;
-    }
+  ngOnDestroy(): void {
+    super.ngOnDestroy();
+    !this.subscription.closed && this.subscription.unsubscribe();
   }
 
   onSubmit(response: ActivityResponse): void {
@@ -69,4 +73,18 @@ export class WorkflowStartComponent extends WorkflowStartActivityRedesignedCompo
     super.navigate(response);
   }
 
+  private observeSessionChanges(): void {
+    this.subscription = this.__session.sessionObservable
+        .pipe(
+            take(2),
+            finalize(this.resetHeaderNavigation.bind(this)))
+        .subscribe();
+  }
+
+  private resetHeaderNavigation(): void {
+    if (this.__session.isTemporarySession()) {
+        this._headerConfig.showBreadcrumbs = false;
+        this._headerConfig.showMainButtons = true;
+    }
+  }
 }
