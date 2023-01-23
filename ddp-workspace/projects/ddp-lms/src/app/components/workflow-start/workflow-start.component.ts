@@ -15,8 +15,8 @@ import {
   WorkflowServiceAgent,
 } from 'ddp-sdk';
 import { IS_REGISTERING } from '../../types';
-import {finalize, take} from "rxjs/operators";
-import {Subscription} from "rxjs";
+import {finalize, take} from 'rxjs/operators';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-workflow-start',
@@ -56,7 +56,7 @@ export class WorkflowStartComponent extends WorkflowStartActivityRedesignedCompo
     this.observeSessionChanges();
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): vod {
     super.ngOnDestroy();
     !this.subscription.closed && this.subscription.unsubscribe();
   }
@@ -76,7 +76,7 @@ export class WorkflowStartComponent extends WorkflowStartActivityRedesignedCompo
       .pipe(
         take(2),
         finalize(this.resetHeaderNavigation.bind(this)))
-      .subscribe()
+      .subscribe();
   }
 
   private resetHeaderNavigation(): void {
