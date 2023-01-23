@@ -35,7 +35,8 @@ export class WorkflowStartComponent extends WorkflowStartActivityRedesignedCompo
     private __cdr: ChangeDetectorRef,
     _sessionStorageService: SessionStorageService,
     @Inject('ddp.config') private __configuration: ConfigurationService,
-    @Inject('toolkit.toolkitConfig') public __toolkitConfiguration: ToolkitConfigurationService) {
+    @Inject('toolkit.toolkitConfig') public __toolkitConfiguration: ToolkitConfigurationService
+  ) {
     super(
       _headerConfig,
       __workflowBuilder,
