@@ -56,7 +56,7 @@ export class WorkflowStartComponent extends WorkflowStartActivityRedesignedCompo
     this.observeSessionChanges();
   }
 
-  ngOnDestroy(): vod {
+  ngOnDestroy(): void {
     super.ngOnDestroy();
     !this.subscription.closed && this.subscription.unsubscribe();
   }
