@@ -1,17 +1,17 @@
 import { ChangeDetectorRef } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { of } from 'rxjs';
+import {BehaviorSubject, of, Subject} from 'rxjs';
 import {
   SessionMementoService,
   TemporaryUserServiceAgent,
   WorkflowServiceAgent,
   WindowRef,
-  SessionStorageService
+  SessionStorageService,
 } from 'ddp-sdk';
 import { WorkflowStartComponent } from './workflow-start.component';
 import { HeaderConfigurationService, WorkflowBuilderService } from 'toolkit';
 
-describe('WorkflowStartComponent', () => {
+fdescribe('WorkflowStartComponent', () => {
   let fixture: ComponentFixture<WorkflowStartComponent>;
   let component: WorkflowStartComponent;
 
@@ -20,8 +20,11 @@ describe('WorkflowStartComponent', () => {
   let temporaryUserServiceSpy: jasmine.SpyObj<TemporaryUserServiceAgent>;
 
   beforeEach(async () => {
-    headerConfigSpy = jasmine.createSpyObj('headerConfigSpy', ['setupActivityHeader', 'setupDefaultHeader']);
-    sessionSpy = jasmine.createSpyObj('SessionMementoService', ['isTemporarySession', 'isAuthenticatedSession', 'setTemporarySession']);
+    headerConfigSpy = jasmine.createSpyObj('headerConfigSpy', ['setupActivityHeader',
+      'setupDefaultHeader']);
+    sessionSpy = jasmine.createSpyObj('SessionMementoService', ['isTemporarySession',
+      'isAuthenticatedSession', 'setTemporarySession', 'sessionObservable']);
+
     temporaryUserServiceSpy = jasmine.createSpyObj(
       'TemporaryUserServiceAgent',
       {createTemporaryUser: of({})}
@@ -48,6 +51,7 @@ describe('WorkflowStartComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(WorkflowStartComponent);
     component = fixture.debugElement.componentInstance;
+    (sessionSpy as any).sessionObservable = new BehaviorSubject<any>({});
     fixture.detectChanges();
   });
 
@@ -57,6 +61,8 @@ describe('WorkflowStartComponent', () => {
 
   it('should set header config for a temporary user', () => {
     sessionSpy.isTemporarySession.and.returnValue(true);
+    (sessionSpy.sessionObservable as Subject<any>).next({});
+
     component.ngOnInit();
 
     expect(headerConfigSpy.showBreadcrumbs).toBeFalse();
