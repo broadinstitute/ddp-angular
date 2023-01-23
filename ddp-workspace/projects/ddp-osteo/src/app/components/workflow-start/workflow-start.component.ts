@@ -15,8 +15,8 @@ import {
   WorkflowServiceAgent
 } from 'ddp-sdk';
 import { IS_REGISTERING } from '../../types';
-import {Subscription} from "rxjs";
-import {finalize, take} from "rxjs/operators";
+import {Subscription} from 'rxjs';
+import {finalize, take} from 'rxjs/operators';
 
 @Component({
   selector: 'app-workflow-start',
