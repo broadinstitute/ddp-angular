@@ -11,7 +11,7 @@ import {
 import { WorkflowStartComponent } from './workflow-start.component';
 import { HeaderConfigurationService, WorkflowBuilderService } from 'toolkit';
 
-fdescribe('WorkflowStartComponent', () => {
+describe('WorkflowStartComponent', () => {
   let fixture: ComponentFixture<WorkflowStartComponent>;
   let component: WorkflowStartComponent;
 
