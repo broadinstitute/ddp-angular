@@ -721,7 +721,7 @@ jobs:
                 command: |
                   # CI split by auto-detect timing does not work because CircleCI CLI expects both filenames and classnames to be present in JUnit xml.
                   # Playwright generated JUnit xml does not have filenames.
-                  npx playwright test -g "<< parameters.test_suites >>"
+                  npx playwright test -g << parameters.test_suites >>
                 no_output_timeout: 3m # Default is 10m. Set shorter time to ensure CI fails faster if test hangs
       - unless:
           # run all E2E tests
@@ -733,7 +733,7 @@ jobs:
                 command: |
                   # CI split by auto-detect timing does not work because CircleCI CLI expects both filenames and classnames to be present in JUnit xml.
                   # Playwright generated JUnit xml does not have filenames.
-                  SHARD="$((${CIRCLE_NODE_INDEX}+1))"; npx playwright test -- --shard=${SHARD}/${CIRCLE_NODE_TOTAL}
+                  SHARD="$((${CIRCLE_NODE_INDEX}+1))"; npm run test:ci -- --shard=${SHARD}/${CIRCLE_NODE_TOTAL}
                 no_output_timeout: 3m
       - store_test_results:
           path: playwright-e2e/junit
