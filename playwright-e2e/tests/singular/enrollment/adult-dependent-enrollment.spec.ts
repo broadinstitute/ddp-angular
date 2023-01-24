@@ -148,7 +148,7 @@ test.describe('Enrol an adult dependent', () => {
     await patientSurveyPage.currentZipCode().fill(user.adultDependent.zip);
     await patientSurveyPage.sexAtBirth().check('Prefer not to answer');
     await patientSurveyPage.race().check('White');
-    await patientSurveyPage.isHispanic().check(new RegExp('^\\s*No\\s*$'));
+    await patientSurveyPage.isHispanic().check('No', { exactMatch: true });
     await patientSurveyPage.selectVentricleDiagnosis().check('Other');
     await patientSurveyPage.selectVentricleDiagnosis().inputByLabel('Please specify (or write Unsure)').fill('Unsure');
     await patientSurveyPage.submit();

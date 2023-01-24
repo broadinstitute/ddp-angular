@@ -2,36 +2,40 @@ import { expect, Locator, Page } from '@playwright/test';
 import Question from 'lib/component/Question';
 import { PancanPage } from 'pages/pancan/pancan-page';
 
-export default class SurveyCervicalCancerPage extends PancanPage {
+export default class SurveyAboutCancerPage extends PancanPage {
   constructor(page: Page) {
     super(page);
   }
 
   async waitForReady(): Promise<void> {
-    await this.cervicalCancerDiagnosedMonth().waitFor({ state: 'visible' });
-    await this.cervicalCancerDiagnosedYear().waitFor({ state: 'visible' });
+    await this.firstDiagnosedMonth().waitFor({ state: 'visible' });
+    await this.firstDiagnosedYear().waitFor({ state: 'visible' });
   }
 
+  /**
+   * <br> Question: When were you first diagnosed?
+   * <br> Type: Locator
+   */
+  private firstDiagnosedMonth(): Locator {
+    return new Question(this.page, { prompt: new RegExp(/When (were|was) (you|your child) first diagnosed/) }).select(
+      'Choose month...'
+    );
+  }
   /**
    * <br> Question: When were you first diagnosed with Cervical cancer?
    * <br> Type: Locator
    */
-  cervicalCancerDiagnosedMonth(): Locator {
-    return new Question(this.page, { prompt: 'When were you first diagnosed with Cervical cancer?' }).select('Choose month...');
-  }
-  /**
-   * <br> Question: When were you first diagnosed with Cervical cancer?
-   * <br> Type: Locator
-   */
 
-  cervicalCancerDiagnosedYear(): Locator {
-    return new Question(this.page, { prompt: 'When were you first diagnosed with Cervical cancer?' }).select('Choose year...');
+  private firstDiagnosedYear(): Locator {
+    return new Question(this.page, { prompt: new RegExp(/When (were|was) (you|your child) first diagnosed/) }).select(
+      'Choose year...'
+    );
   }
+
   /**
    * <br> Question: Please select the places in the body where you had cancer when you was first diagnosed.
    * <br> Type: Input
    */
-
   cancerBodyPlaces(): Locator {
     return this.page.locator('.picklist-answer-INITIAL_BODY_LOC').locator('input');
   }
@@ -42,8 +46,9 @@ export default class SurveyCervicalCancerPage extends PancanPage {
    */
   cancerFree(): Question {
     return new Question(this.page, {
-      prompt:
-        'Are you currently cancer-free (e.g. in remission, no evidence of disease (NED), no evidence of active disease (NEAD))?'
+      prompt: new RegExp(
+        /(Are you|Is your child) currently cancer-free \(e.g. in remission, no evidence of disease \(NED\), no evidence of active disease \(NEAD\)\)/
+      )
     });
   }
 
@@ -71,9 +76,9 @@ export default class SurveyCervicalCancerPage extends PancanPage {
     return this.page.locator('.activity-text-input-THERAPY_NAME').locator('input');
   }
 
-  async cervicalCancerDiagnosedDate(month: string, year: string) {
-    await this.cervicalCancerDiagnosedMonth().selectOption({ label: month });
-    await this.cervicalCancerDiagnosedYear().selectOption(year);
+  async diagnosedDate(month: string, year: string) {
+    await this.firstDiagnosedMonth().selectOption({ label: month });
+    await this.firstDiagnosedYear().selectOption(year);
   }
 
   async fillCancerBodyPlaces(value: string) {
@@ -86,6 +91,12 @@ export default class SurveyCervicalCancerPage extends PancanPage {
     await this.bodyPlacesEverHadCancer().press('Tab');
   }
 
+  /**
+   * Question: Has your child received any of the following treatments or procedures for their cancer?
+   * Type: Checkbox list
+   * @param {string} option
+   * @returns {Promise<void>}
+   */
   async checkTreatmentsReceived(option: string) {
     await this.treatmentsReceived(option).click();
     await expect(this.treatmentsReceived('Radiation')).toHaveClass(/checkbox-checked/);
