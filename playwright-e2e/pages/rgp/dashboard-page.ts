@@ -1,5 +1,5 @@
 import { expect, Locator, Page } from '@playwright/test';
-import Table from 'lib/widget/table';
+import Table from 'lib/component/table';
 import { RgpPageBase } from 'pages/rgp/rgp-page-base';
 import { waitForNoSpinner } from 'utils/test-utils';
 

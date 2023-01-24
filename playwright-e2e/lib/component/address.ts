@@ -1,5 +1,5 @@
 import { Locator, Page } from '@playwright/test';
-import Card from 'lib/widget/card';
+import Card from 'lib/component/card';
 import Input from 'lib/widget/Input';
 import Select from 'lib/widget/select';
 

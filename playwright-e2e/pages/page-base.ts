@@ -1,5 +1,7 @@
 import { expect, Locator, Page, Response } from '@playwright/test';
+import Address from 'lib/component/address';
 import Question from 'lib/component/Question';
+import { generateRandomPhoneNum } from 'utils/faker-utils';
 import { waitForNoSpinner } from 'utils/test-utils';
 import { PageInterface } from './page-interface';
 
@@ -18,7 +20,7 @@ export default abstract class PageBase implements PageInterface {
    * Return "Back" button locator
    */
   getBackButton(): Locator {
-    return this.page.locator('button', { hasText: 'Back' });
+    return this.page.locator('button:visible', { hasText: 'Back' });
   }
 
   /**
@@ -39,28 +41,28 @@ export default abstract class PageBase implements PageInterface {
    * Return "Next" button locator
    */
   getNextButton(): Locator {
-    return this.page.locator('button', { hasText: 'Next' });
+    return this.page.locator('button:visible', { hasText: 'Next' });
   }
 
   /**
    * Returns "Submit" button locator
    */
   getSubmitButton(): Locator {
-    return this.page.locator('button', { hasText: 'Submit' });
+    return this.page.locator('button:visible', { hasText: 'Submit' });
   }
 
   /**
    * Returns "I Agree" button locator
    */
   getIAgreeButton(): Locator {
-    return this.page.locator('button', { hasText: 'I agree' });
+    return this.page.locator('button:visible', { hasText: 'I agree' });
   }
 
   /**
    * Returns "I'm not ready to agree" button
    */
   getIAmNotReadyToAgreeButton(): Locator {
-    return this.page.locator('button', { hasText: 'I am not ready to agree' });
+    return this.page.locator('button:visible', { hasText: 'I am not ready to agree' });
   }
 
   async gotoURL(url = '/'): Promise<Response | null> {
@@ -140,5 +142,78 @@ export default abstract class PageBase implements PageInterface {
     await dob.date().locator('input[data-placeholder="MM"]').fill(month.toString());
     await dob.date().locator('input[data-placeholder="DD"]').fill(date.toString());
     await dob.date().locator('input[data-placeholder="YYYY"]').fill(year.toString());
+  }
+
+  /**
+   * Filling out address form.
+   * @param page
+   * @param opts
+   */
+  async fillInContactAddress(opts: {
+    fullName: string;
+    country?: string;
+    state?: string;
+    street?: string;
+    city?: string;
+    zipCode?: string;
+    telephone?: string | number;
+    phoneLabel?: string;
+  }): Promise<void> {
+    const {
+      fullName,
+      country = 'UNITED STATES',
+      state = 'MASSACHUSETTS',
+      street = '415 MAIN ST',
+      city = 'CAMBRIDGE',
+      zipCode = '02142',
+      telephone = generateRandomPhoneNum(),
+      phoneLabel = 'Telephone Contact Number'
+    } = opts;
+
+    const mailAddressForm = new Address(this.page, { label: new RegExp(/contact information|Mailing Address/) });
+    await mailAddressForm.input('Full Name').fill(fullName);
+    await mailAddressForm.select('Country').selectOption(country);
+    await mailAddressForm.select('State').selectOption(state);
+    // Wait for data saved to database after fill out Street, City and Zip Code.
+    await Promise.all([
+      mailAddressForm.input('Street Address').fill(street.toUpperCase()),
+      this.page.waitForResponse((resp) => {
+        return (
+          resp.request().method() === 'PUT' &&
+          resp.url().includes('/profile/address/') &&
+          resp.status() === 204 &&
+          resp.request().postDataJSON().street1 === street.toUpperCase()
+        );
+      })
+    ]);
+    await Promise.all([
+      mailAddressForm.input('City').fill(city.toUpperCase()),
+      // Wait until data saved
+      this.page.waitForResponse((resp) => {
+        return (
+          resp.request().method() === 'PUT' &&
+          resp.url().includes('/profile/address/') &&
+          resp.status() === 204 &&
+          resp.request().postDataJSON().city === city.toUpperCase()
+        );
+      })
+    ]);
+    await Promise.all([
+      mailAddressForm.input('Zip Code').fill(zipCode),
+      this.page.waitForResponse((resp) => {
+        return (
+          resp.request().method() === 'PUT' &&
+          resp.url().includes('/profile/address/') &&
+          resp.status() === 204 &&
+          resp.request().postDataJSON().zip === zipCode.toUpperCase()
+        );
+      }),
+      this.page.waitForResponse((resp) => {
+        return resp.request().method() === 'POST' && resp.url().includes('/address/verify') && resp.status() === 200;
+      })
+    ]);
+    await mailAddressForm.input(phoneLabel).fill(telephone.toString());
+    // Wait for Address Suggestion card
+    await mailAddressForm.addressSuggestion().radioButton('As Entered:').check();
   }
 }

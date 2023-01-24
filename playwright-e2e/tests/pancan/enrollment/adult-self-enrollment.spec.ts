@@ -7,7 +7,6 @@ import { assertActivityHeader, assertActivityStep } from 'utils/assertion-helper
 import ConsentFormPage from 'pages/pancan/enrollment/consent-form-page';
 import { generateUserName } from 'utils/faker-utils';
 import * as user from 'data/fake-user.json';
-import { enterMailingAddress } from 'utils/test-utils';
 import MedicalReleaseFormPage from 'pages/pancan/enrollment/medical-release-form-page';
 import { expect } from '@playwright/test';
 import { PatientsData } from 'pages/patient-type';
@@ -65,7 +64,7 @@ test.describe('Enroll myself as adult', () => {
     await consentFormPage.signature().fill(`${user.patient.firstName} ${lastName}`);
     await expect(consentFormPage.getSubmitButton()).toBeEnabled();
 
-    await enterMailingAddress(page, { fullName: `${user.patient.firstName} ${lastName}` }, 'Phone');
+    await consentFormPage.fillInContactAddress({ fullName: `${user.patient.firstName} ${lastName}`, phoneLabel: 'Phone' });
     await consentFormPage.submit();
 
     //On "Medical Release Form"

@@ -99,9 +99,7 @@ export default class ConsentFormPage extends PancanPage {
     const parentFirstName = new Input(this.page, { ddpTestID: PatientsData.child.ddpTestID.assentFirstName });
     const parentLastName = new Input(this.page, { ddpTestID: PatientsData.child.ddpTestID.assentLastName });
     const parentSignature = new Input(this.page, { ddpTestID: PatientsData.child.ddpTestID.assentSignature });
-    const relationshipChild = new Question(this.page, {
-      prompt: PatientsData.child.ddpTestID.relationshipChild || ''
-    });
+    const relationshipChild = new Question(this.page, { prompt: PatientsData.child.ddpTestID.relationshipChild });
     const firstName = generateUserName(user.patient.firstName);
     const lastName = generateUserName(user.patient.lastName);
     await parentFirstName.fill(firstName);

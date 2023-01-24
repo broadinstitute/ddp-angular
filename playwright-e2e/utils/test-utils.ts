@@ -1,11 +1,9 @@
 import { BrowserContext, Download, expect, Locator, Page } from '@playwright/test';
-import Address from 'lib/component/address';
 import Input from 'lib/widget/Input';
 import Checkbox from 'lib/widget/checkbox';
 import Radiobutton from 'lib/widget/radiobutton';
 import Select from 'lib/widget/select';
 import axios from 'axios';
-import { generateRandomPhoneNum } from './faker-utils';
 
 const { SITE_PASSWORD } = process.env;
 
@@ -42,46 +40,6 @@ export async function downloadConsentPdf(context: BrowserContext, locator: Locat
   expect(context.pages()).toHaveLength(2);
   const [, newPage] = context.pages();
   await newPage.close();
-}
-
-/**
- * Filling out address with fake data.
- * @param page
- * @param opts
- */
-export async function enterMailingAddress(
-  page: Page,
-  opts: {
-    fullName: string;
-    country?: string;
-    state?: string;
-    street?: string;
-    city?: string;
-    zipCode?: string;
-    telephone?: string | number;
-  },
-  phoneLabel?: string
-): Promise<void> {
-  const {
-    fullName,
-    country = 'UNITED STATES',
-    state = 'MASSACHUSETTS',
-    street = '415 MAIN ST',
-    city = 'CAMBRIDGE',
-    zipCode = '02142',
-    telephone = generateRandomPhoneNum()
-  } = opts;
-
-  const mailAddressForm = new Address(page, { label: 'Mailing Address' });
-  await mailAddressForm.input('Full Name').fill(fullName);
-  await mailAddressForm.select('Country').selectOption(country);
-  await mailAddressForm.select('State').selectOption(state);
-  await mailAddressForm.input('Street Address').fill(street.toUpperCase());
-  await mailAddressForm.input('City').fill(city.toUpperCase());
-  await mailAddressForm.input('Zip Code').fill(zipCode);
-  await mailAddressForm.input(phoneLabel ? phoneLabel : 'Telephone Contact Number').fill(telephone.toString());
-  // Wait for Address Suggestion card
-  await mailAddressForm.addressSuggestion().radioButton('As Entered:').check();
 }
 
 /**

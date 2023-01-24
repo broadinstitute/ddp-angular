@@ -1,5 +1,8 @@
 version: 2.1
 
+orbs:
+  node: circleci/node@5.1.0
+
 references:
   repo_path: &repo_path
       /home/circleci/repo
@@ -651,7 +654,6 @@ jobs:
             export pancanUserPassword=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[] | select(.app==\"pancan\") | .password")
             echo "export PANCAN_USER_PASSWORD=$pancanUserPassword" >> playwright-env/envvars
             echo "export PANCAN_USER_EMAIL=$pancanUser" >> playwright-env/envvars
-
       - run:
           working_directory: *playwright_path
           name: npm install
@@ -683,6 +685,9 @@ jobs:
       parallel_num:
         type: integer
         default: 3
+      test_suites:
+        type: string
+        default: '".*"'
     parallelism: << parameters.parallel_num >>
     steps:
       - halt-playwright-test-check:
@@ -694,17 +699,18 @@ jobs:
           command: |
             cp "playwright-e2e/config/.env.<< parameters.env >>" .env
             cat .env | awk '/^[^#]/ {print "export " $0}' >> "$BASH_ENV"
-
             # export env from file (created in build-playwright-job)
             cat playwright-env/envvars | awk '{print "export " $0}' >> "$BASH_ENV"
-
             source "$BASH_ENV"
+      - node/install:
+          install-yarn: false
+          node-version: '18.13.0' # LTS version
       - run:
+          name: echo versions
           command: |
-            echo $RGP_AUTH0_DOMAIN
-            echo $RGP_AUTH0_AUDIENCE
-            echo $RGP_AUTH0_CLIENT_ID
-            echo $RGP_AUTH0_CLIENT_SECRET
+            echo node: $(node -v)
+            echo Playwright: $(npx playwright -V)
+            echo npm: $(npm -v)
       - run:
           working_directory: *playwright_path
           command: npm install --quiet
@@ -712,12 +718,12 @@ jobs:
           working_directory: *playwright_path
           command: npx playwright install --with-deps chromium # Only need Chrome browser
       - run:
-          name: Running Playwright tests
+          name: Running E2E Playwright tests
           working_directory: *playwright_path
           command: |
             # CI split by auto-detect timing does not work because CircleCI CLI expects both filenames and classnames to be present in JUnit xml.
             # Playwright generated JUnit xml does not have filenames.
-            SHARD="$((${CIRCLE_NODE_INDEX}+1))"; npm run test:ci -- --shard=${SHARD}/${CIRCLE_NODE_TOTAL}
+            SHARD="$((${CIRCLE_NODE_INDEX}+1))"; npx playwright test -g << parameters.test_suites >> -- --shard=${SHARD}/${CIRCLE_NODE_TOTAL}
           no_output_timeout: 3m # Default is 10m. Set shorter time to ensure CI fails faster if test hangs
       - store_test_results:
           path: playwright-e2e/junit
@@ -790,7 +796,7 @@ workflows:
 
   playwright-e2e-test-workflow:
     # Triggered by CI API (for example, run_ci.sh)
-    # Run Playwright tests against Dev, Test and Staging but not for Prod
+    # Run Playwright tests against Dev and Test but not for Staging and Production
     when:
       and:
         - equal: [ "run-e2e-tests", << pipeline.parameters.api_call >> ]
@@ -799,6 +805,7 @@ workflows:
           env: << pipeline.parameters.deploy_env >>
       - run-playwright-test-job:
           env: << pipeline.parameters.deploy_env >>
+          test_suites: << pipeline.parameters.test_suites >>
           requires:
             - build-playwright-test-job
 

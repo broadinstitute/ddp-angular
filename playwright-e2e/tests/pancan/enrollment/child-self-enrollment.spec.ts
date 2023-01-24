@@ -14,7 +14,7 @@ import { PatientsData } from 'pages/patient-type';
 import * as auth from 'authentication/auth-pancan';
 import { assertActivityHeader, assertActivityStep } from 'utils/assertion-helper';
 import ConsentFormPage from 'pages/pancan/enrollment/consent-form-page';
-import { enterMailingAddress } from 'utils/test-utils';
+
 const { PANCAN_USER_EMAIL, PANCAN_USER_PASSWORD } = process.env;
 
 test.describe('Enroll child ', () => {
@@ -62,7 +62,7 @@ test.describe('Enroll child ', () => {
     await consentFormPage.lastName().fill(lastName);
     await consentFormPage.fillInDateOfBirth(user.child.birthDate.MM, user.child.birthDate.DD, user.child.birthDate.YYYY);
     await consentFormPage.fillInParentData();
-    await enterMailingAddress(page, { fullName: `${user.child.firstName} ${lastName}` }, 'Phone');
+    await consentFormPage.fillInContactAddress({ fullName: `${user.child.firstName} ${lastName}`, phoneLabel: 'Phone' });
     await consentFormPage.next();
     await consentFormPage.waitSecondReady();
     await consentFormPage.childSignature().fill(user.child.firstName);
@@ -78,15 +78,15 @@ test.describe('Enroll child ', () => {
 
     // Survey: About Your Child's Leukemia
     await assertActivityHeader(page, "Survey: About Your Child's Leukemia");
-    const surveyCervicalCancerPage = new SurveyAboutCancerPage(page);
-    await surveyCervicalCancerPage.waitForReady();
-    await surveyCervicalCancerPage.diagnosedDate('March', '2015');
-    await surveyCervicalCancerPage.fillCancerBodyPlaces('Blood');
-    await surveyCervicalCancerPage.cancerFree().check('Yes');
-    await surveyCervicalCancerPage.fillBodyPlacesEverHadCancer('Blood');
-    await surveyCervicalCancerPage.checkTreatmentsReceived('Radiation');
-    await surveyCervicalCancerPage.medicationsList().fill('many others');
-    await surveyCervicalCancerPage.submit();
+    const surveyAboutCancerPage = new SurveyAboutCancerPage(page);
+    await surveyAboutCancerPage.waitForReady();
+    await surveyAboutCancerPage.diagnosedDate('March', '2015');
+    await surveyAboutCancerPage.fillCancerBodyPlaces('Blood');
+    await surveyAboutCancerPage.cancerFree().check('Yes');
+    await surveyAboutCancerPage.fillBodyPlacesEverHadCancer('Blood');
+    await surveyAboutCancerPage.checkTreatmentsReceived('Radiation');
+    await surveyAboutCancerPage.medicationsList().fill('many others');
+    await surveyAboutCancerPage.submit();
 
     // Survey: About your child
     await assertActivityHeader(page, 'Survey: About Your Child');

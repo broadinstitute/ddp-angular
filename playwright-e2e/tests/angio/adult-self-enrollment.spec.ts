@@ -105,15 +105,15 @@ test.describe('Adult Enrollment', () => {
     // Step 5
     // Medical Release Form
     const medicalReleaseForm = new MedicalReleaseForm(page);
-    await medicalReleaseForm.yourContactInformation().input('Full Name').fill(user.patient.fullName);
-    await medicalReleaseForm.yourContactInformation().select('Country/Territory').selectOption(user.patient.country.name);
-    await medicalReleaseForm.yourContactInformation().select('State').selectOption(user.patient.state.name);
-    await medicalReleaseForm.yourContactInformation().input('Street Address').fill(user.patient.streetAddress);
-    await medicalReleaseForm.yourContactInformation().input('City').fill(user.patient.city);
-    await medicalReleaseForm.yourContactInformation().input('Zip Code').fill(user.patient.zip);
-    // Wait for Address Suggestion card
-    await medicalReleaseForm.yourContactInformation().addressSuggestion().radioButton('As Entered:').check();
-
+    await medicalReleaseForm.fillInContactAddress({
+      fullName: user.patient.fullName,
+      country: user.patient.country.name,
+      state: user.patient.state.name,
+      street: user.patient.streetAddress,
+      city: user.patient.city,
+      zipCode: user.patient.zip,
+      phoneLabel: 'Phone'
+    });
     await medicalReleaseForm.yourPhysiciansNames().input('Physician Name').fill(user.doctor.name);
     await medicalReleaseForm.yourPhysiciansNames().input('Institution (if any)').fill(user.doctor.hospital);
     await medicalReleaseForm.yourPhysiciansNames().input('City').fill(user.doctor.city);

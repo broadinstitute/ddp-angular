@@ -8,7 +8,6 @@ import AboutMyChildPage from 'pages/singular/enrollment/about-my-child-page';
 import ChildSurveyPage from 'pages/singular/enrollment/child-survey-page';
 import PreScreeningPage from 'pages/singular/enrollment/pre-screening-page';
 import ConsentFormForMinorPage from 'pages/singular/enrollment/consent-form-for-minor-page';
-import { enterMailingAddress } from 'utils/test-utils';
 import { assertActivityHeader, assertActivityProgress } from 'utils/assertion-helper';
 import { generateUserName } from 'utils/faker-utils';
 
@@ -72,7 +71,7 @@ test.describe('Enroll child', () => {
     const aboutMyChildPage = new AboutMyChildPage(page);
     await aboutMyChildPage.waitForReady();
     await assertActivityHeader(page, 'About My Child');
-    await enterMailingAddress(page, {
+    await aboutMyChildPage.fillInContactAddress({
       fullName: `${user.secondChild.firstName} ${childLastName}`,
       country: user.secondChild.country.name,
       state: user.secondChild.state.name,
