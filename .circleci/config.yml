@@ -741,15 +741,6 @@ jobs:
                   # Playwright generated JUnit xml does not have filenames.
                   SHARD="$((${CIRCLE_NODE_INDEX}+1))"; npx playwright test -- --shard=${SHARD}/${CIRCLE_NODE_TOTAL}
                 no_output_timeout: 3m
-
-      - run:
-          name: Running E2E Playwright tests
-          working_directory: *playwright_path
-          command: |
-            # CI split by auto-detect timing does not work because CircleCI CLI expects both filenames and classnames to be present in JUnit xml.
-            # Playwright generated JUnit xml does not have filenames.
-            SHARD="$((${CIRCLE_NODE_INDEX}+1))"; npx playwright test -g "<< parameters.test_suites >>" -- --shard=${SHARD}/${CIRCLE_NODE_TOTAL}
-          no_output_timeout: 3m # Default is 10m. Set shorter time to ensure CI fails faster if test hangs
       - store_test_results:
           path: playwright-e2e/junit
       - store_artifacts:

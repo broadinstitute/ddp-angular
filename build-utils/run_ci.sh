@@ -5,7 +5,7 @@ COMMAND=$1
 STUDY_KEY=$2
 BRANCH=$3
 TARGET_ENV=$4
-TEST_SUITES=${5:-".*"}
+TEST_SUITES=${5:-""}
 
 CI_TOKEN=$(xargs <  ~/.circleci-token)
 if [[ -z $CI_TOKEN ]]; then
