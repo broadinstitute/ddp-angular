@@ -687,7 +687,7 @@ jobs:
         default: 3
       test_suites:
         type: string
-        default: '".*"'
+        default: '.*'
     parallelism: << parameters.parallel_num >>
     steps:
       - halt-playwright-test-check:
@@ -723,7 +723,7 @@ jobs:
           command: |
             # CI split by auto-detect timing does not work because CircleCI CLI expects both filenames and classnames to be present in JUnit xml.
             # Playwright generated JUnit xml does not have filenames.
-            SHARD="$((${CIRCLE_NODE_INDEX}+1))"; npx playwright test -g << parameters.test_suites >> -- --shard=${SHARD}/${CIRCLE_NODE_TOTAL}
+            SHARD="$((${CIRCLE_NODE_INDEX}+1))"; npx playwright test -g "<< parameters.test_suites >>" -- --shard=${SHARD}/${CIRCLE_NODE_TOTAL}
           no_output_timeout: 3m # Default is 10m. Set shorter time to ensure CI fails faster if test hangs
       - store_test_results:
           path: playwright-e2e/junit
@@ -758,7 +758,7 @@ parameters:
     default: false
   test_suites:
     type: string
-    default: '".*"'
+    default: '.*'
 
 workflows:
   version: 2
