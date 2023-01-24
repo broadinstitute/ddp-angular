@@ -120,7 +120,7 @@ In **/tests/singular** dir, run Singular tests only:
     - `<STUDY_NAME>` Any study name. It's required parameter by the shell script, but it's not used to run Playwright tests for targeted study. All tests will run.
     - `<BRANCH_NAME>` Your branch name
     - `<ENV_NAME>` One of the following: dev, test
-    - `<TEST_SUITES>` One or more groups of test suites. Example: @singular
+    - `<TEST_SUITES>` Optional parameter: run tests matching this regular expression. Example: @singular
     ```
     cd build-utils
     ./run_ci.sh run-e2e-tests <STUDY_NAME> <BRANCH_NAME> <ENV_NAME>
