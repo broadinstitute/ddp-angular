@@ -716,7 +716,7 @@ jobs:
       - unless:
           # run E2E tests matching this regular expression. Set parallelism to 1 because shard does not work with -g option.
           condition:
-            - equal: [UNKNOWN, << pipeline.parameters.test_suite >>]
+            - equal: [UNKNOWN, << parameters.test_suite >>]
           steps:
             - run:
                 name: Running Playwright tests
@@ -729,7 +729,7 @@ jobs:
       - when:
           # run all E2E tests
           condition:
-            - equal: [UNKNOWN, << pipeline.parameters.test_suite >>]
+            - equal: [UNKNOWN, << parameters.test_suite >>]
           steps:
             - run:
                 name: Running Playwright tests
