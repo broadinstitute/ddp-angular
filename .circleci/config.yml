@@ -829,7 +829,6 @@ workflows:
           env: << pipeline.parameters.deploy_env >>
           test_suite: << pipeline.parameters.study_key >>
           parallelism_num: << pipeline.parameters.e2e-test-parallelism >>
-          par
           requires:
             - build-playwright-test-job
 
