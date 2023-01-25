@@ -5,7 +5,7 @@ COMMAND=$1
 STUDY_KEY=$2
 BRANCH=$3
 TARGET_ENV=$4
-E2E_TEST_PARALLELISM=${5:-"1"}
+E2E_TEST_PARALLELISM=${5:-1}
 
 CI_TOKEN=$(xargs <  ~/.circleci-token)
 if [[ -z $CI_TOKEN ]]; then
@@ -46,6 +46,6 @@ curl -u "${CI_TOKEN}:" -X POST --header "Content-Type: application/json" -d "{
                                       $DEPLOY_ENV_PROPERTY
                                       \"study_key\": \"$STUDY_KEY\",
                                       \"api_call\": \"$COMMAND\",
-                                      \"e2e-test-parallelism\": \"$E2E_TEST_PARALLELISM\"
+                                      \"e2e-test-parallelism\": $E2E_TEST_PARALLELISM
                                   }
 }" "https://circleci.com/api/v2/project/${CI_PROJECT_SLUG}/pipeline"
