@@ -726,12 +726,13 @@ jobs:
                   # Playwright generated JUnit xml does not have filenames.
 
 
-                  npx playwright test --list -g @<< parameters.test_suite >> | grep -o '[^/]*.spec.ts' > e2e_tests.txt
+                  npx playwright test --list -g @<< parameters.test_suite >> | grep -o 'tests/.*.spec.ts' > e2e_tests.txt
+
                   echo 'cat e2e_tests.txt:'
                   cat e2e_tests.txt
                   echo '--'
 
-                  TESTS_FILE=$(circleci tests split --split-by=timings e2e_tests.txt)
+                  TESTS_FILE=$(circleci tests split --total=1 --split-by=timings e2e_tests.txt)
                   echo '$TESTS_FILE:'
                   echo $TESTS_FILE
                   echo '++'
