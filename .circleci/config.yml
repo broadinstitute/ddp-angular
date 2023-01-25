@@ -726,18 +726,18 @@ jobs:
                   # Playwright generated JUnit xml does not have filenames.
 
 
-                  npx playwright test --list -g @<< parameters.test_suite >> | grep -o '/.*.spec.ts' > e2e_tests.txt
+                  npx playwright test --list -g @<< parameters.test_suite >> | grep -o '[^/]*.spec.ts' > e2e_tests.txt
+                  echo 'cat e2e_tests.txt:'
                   cat e2e_tests.txt
-                  echo ''
+                  echo '--'
 
                   TESTS_FILE=$(circleci tests split --split-by=timings e2e_tests.txt)
+                  echo '$TESTS_FILE:'
                   echo $TESTS_FILE
-                  echo ''
+                  echo '++'
 
                   npm run test:ci $TESTS_FILE
 
-
-                  # npx playwright test -g @<< parameters.test_suite >> -- --shard=${SHARD}/1
                 no_output_timeout: 3m # Default is 10m. Set shorter time to ensure CI fails faster if test hangs
       - when:
           # run all E2E tests
