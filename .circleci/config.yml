@@ -682,15 +682,15 @@ jobs:
         default: dev
         type: enum
         enum: [ dev, test, staging, prod, UNKNOWN ]
-      parallel_num:
+      parallelism_num:
         type: integer
-        default: 3
+        default: 1
       test_suite:
         # to trigger E2E tests with labels matching study key:
         # [basil, osteo, angio, brain, mbc, testboston, mpc, atcp, rarex, rgp, esc, prion, cgc, circadia, pancan, singular, brugada, lms, fon]
         type: string
         default: << pipeline.parameters.study_key >>
-    parallelism: << parameters.parallel_num >>
+    parallelism: << parameters.parallelism_num >>
     steps:
       - halt-playwright-test-check:
           env: << parameters.env >>
@@ -713,46 +713,37 @@ jobs:
       - run:
           working_directory: *playwright_path
           command: npx playwright install --with-deps chromium # Only need Chrome browser
-      - unless:
-          # run E2E tests matching this regular expression.
-          condition:
-            equal: [ UNKNOWN, << parameters.test_suite >> ]
-          steps:
-            - run:
-                name: Running Playwright tests
-                working_directory: *playwright_path
-                command: |
-                  # CI split by auto-detect timing does not work because CircleCI CLI expects both filenames and classnames to be present in JUnit xml.
-                  # Playwright generated JUnit xml does not have filenames.
 
+      - run:
+          name: Running Playwright tests
+          working_directory: *playwright_path
+          command: |
+            # CI split by auto-detect timing does not work because CircleCI CLI expects both filenames and classnames to be present in JUnit xml.
+            # Playwright generated JUnit xml does not have filenames.
 
-                  npx playwright test --list -g @<< parameters.test_suite >> | grep -o 'tests/.*.spec.ts' > e2e_tests.txt
+            echo '<< parameters.test_suite >> ' << parameters.test_suite >>
 
-                  echo 'cat e2e_tests.txt:'
-                  cat e2e_tests.txt
-                  echo '--'
+            if [ << parameters.test_suite >> == "UNKNOWN" ]; then
+              # Grep all E2E tests
+              npx playwright test --list | grep -o 'tests/.*.spec.ts' > e2e_tests.txt
+            else
+              # Grep E2E tests for this study.
+              npx playwright test --list -g @<< parameters.test_suite >> | grep -o 'tests/.*.spec.ts' > e2e_tests.txt
+            fi
 
-                  TESTS_FILE=$(circleci tests split --total=1 --split-by=timings e2e_tests.txt)
-                  echo '$TESTS_FILE:'
-                  echo $TESTS_FILE
-                  echo '++'
+            echo 'cat e2e_tests.txt:'
+            cat e2e_tests.txt
+            echo '--'
 
-                  npm run test:ci $TESTS_FILE
+            TESTS_FILE=$(circleci tests split --split-by=timings --timings-type=classname e2e_tests.txt)
+            echo '$TESTS_FILE:'
+            echo $TESTS_FILE
+            echo '++'
 
-                no_output_timeout: 3m # Default is 10m. Set shorter time to ensure CI fails faster if test hangs
-      - when:
-          # run all E2E tests
-          condition:
-            equal: [ UNKNOWN, << parameters.test_suite >> ]
-          steps:
-            - run:
-                name: Running Playwright tests
-                working_directory: *playwright_path
-                command: |
-                  # CI split by auto-detect timing does not work because CircleCI CLI expects both filenames and classnames to be present in JUnit xml.
-                  # Playwright generated JUnit xml does not have filenames.
-                  SHARD="$((${CIRCLE_NODE_INDEX}+1))"; npm run test:ci -- --shard=${SHARD}/${CIRCLE_NODE_TOTAL}
-                no_output_timeout: 3m
+            npm run test:ci $TESTS_FILE
+
+          no_output_timeout: 3m # Default is 10m. Set shorter time to ensure CI fails faster if test hangs
+
       - store_test_results:
           path: playwright-e2e/junit
       - store_artifacts:
@@ -784,6 +775,9 @@ parameters:
   do-builds:
     type: boolean
     default: false
+  e2e-test-parallelism:
+    type: integer
+    default: 1
 
 workflows:
   version: 2
@@ -834,6 +828,8 @@ workflows:
       - run-playwright-test-job:
           env: << pipeline.parameters.deploy_env >>
           test_suite: << pipeline.parameters.study_key >>
+          parallelism_num: << pipeline.parameters.e2e-test-parallelism >>
+          par
           requires:
             - build-playwright-test-job
 
@@ -960,6 +956,7 @@ workflows:
       - run-playwright-test-job:
           <<: *filter-develop-branch
           env: << pipeline.parameters.deploy_env >>
+          parallelism_num: 3
           test_suite: UNKNOWN
           requires:
             - build-playwright-test-job

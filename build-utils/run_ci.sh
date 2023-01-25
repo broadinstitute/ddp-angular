@@ -5,6 +5,7 @@ COMMAND=$1
 STUDY_KEY=$2
 BRANCH=$3
 TARGET_ENV=$4
+E2E_TEST_PARALLELISM=${5:-"1"}
 
 CI_TOKEN=$(xargs <  ~/.circleci-token)
 if [[ -z $CI_TOKEN ]]; then
@@ -27,7 +28,8 @@ if [[ -z $COMMAND || -z $STUDY_KEY || -z $BRANCH || ($COMMAND == "deploy" && -z 
   echo "        STUDY_KEY: Run this study E2E test suite"
   echo "        BRANCH: develop"
   echo "        TARGET_ENV: dev or test"
-  echo "        Example 1 (run all tests against Dev env): ./run_ci.sh run-e2e-tests UNKNOWN develop dev"
+  echo "        E2E_TEST_PARALLELISM: Set CircleCi parallelism. Default value is 1"
+  echo "        Example 1 (run all tests against Dev env): ./run_ci.sh run-e2e-tests UNKNOWN develop dev 2"
   echo "        Example 2 (run Singular test suite against Dev env): ./run_ci.sh run-e2e-tests singular develop dev"
   echo ""
   exit 1
@@ -43,6 +45,7 @@ curl -u "${CI_TOKEN}:" -X POST --header "Content-Type: application/json" -d "{
                                   \"parameters\": {
                                       $DEPLOY_ENV_PROPERTY
                                       \"study_key\": \"$STUDY_KEY\",
-                                      \"api_call\": \"$COMMAND\"
+                                      \"api_call\": \"$COMMAND\",
+                                      \"e2e-test-parallelism\": \"$E2E_TEST_PARALLELISM\"
                                   }
 }" "https://circleci.com/api/v2/project/${CI_PROJECT_SLUG}/pipeline"
