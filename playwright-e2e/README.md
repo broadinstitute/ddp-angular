@@ -120,23 +120,28 @@ In **/tests/singular** dir, run Singular tests only:
     - `<STUDY_NAME>` Any study name. Run Playwright tests matching this study.
     - `<BRANCH_NAME>` develop
     - `<ENV_NAME>` Environment name: dev or test
+    - `<E2E_TEST_PARALLELISM>` (Optional) CircleCI parallelism. Default value is 1
     ```
     cd build-utils
-    ./run_ci.sh run-e2e-tests <STUDY_NAME> <BRANCH_NAME> <ENV_NAME>
+    ./run_ci.sh run-e2e-tests <STUDY_NAME> <BRANCH_NAME> <ENV_NAME> <E2E_TEST_PARALLELISM>
     ```
     Examples:
-    > 
-    - Run all E2E tests against Dev env:
+    
+    - Run all E2E tests against Dev env (on 1 CircleCI VM)
       > 
       > ./run_ci.sh run-e2e-tests UNKNOWN develop dev
     
-    - Run all Singular tests against Dev env:
+    - Run all Singular tests against Dev env (on 1 CircleCI VM)
       > 
       > ./run_ci.sh run-e2e-tests singular develop dev
-    - 
-    - Run all Singular tests against Test env:
-    >
-    > ./run_ci.sh run-e2e-tests singular develop test
+      
+    - Run all Singular tests against Test env on 3 CircleCI VM in parallel
+       >
+       > ./run_ci.sh run-e2e-tests singular develop test 3
+    
+    - Run all Pancan tests against Test env on 2 CircleCI VM in parallel
+      >
+      > ./run_ci.sh run-e2e-tests pancan develop test 2
 
 ### Debugging in Intellij
 

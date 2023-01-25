@@ -955,7 +955,7 @@ workflows:
       - run-playwright-test-job:
           <<: *filter-develop-branch
           env: << pipeline.parameters.deploy_env >>
-          parallelism_num: 3
+          parallelism_num: 2
           test_suite: UNKNOWN
           requires:
             - build-playwright-test-job
