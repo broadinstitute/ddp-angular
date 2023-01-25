@@ -715,8 +715,7 @@ jobs:
           command: npx playwright install --with-deps chromium # Only need Chrome browser
       - unless:
           # run E2E tests matching this regular expression. Set parallelism to 1 because shard does not work with -g option.
-          condition:
-            - equal: [UNKNOWN, << parameters.test_suite >>]
+          equal: [UNKNOWN, << parameters.test_suite >>]
           steps:
             - run:
                 name: Running Playwright tests
@@ -728,8 +727,7 @@ jobs:
                 no_output_timeout: 3m # Default is 10m. Set shorter time to ensure CI fails faster if test hangs
       - when:
           # run all E2E tests
-          condition:
-            - equal: [UNKNOWN, << parameters.test_suite >>]
+          equal: [UNKNOWN, << parameters.test_suite >>]
           steps:
             - run:
                 name: Running Playwright tests
