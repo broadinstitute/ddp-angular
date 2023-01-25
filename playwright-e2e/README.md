@@ -117,15 +117,27 @@ In **/tests/singular** dir, run Singular tests only:
 ### Running tests on CircleCI
   - CI workflow name is `playwright-e2e-test-workflow`. Trigger this workflow via `build-utils/run_ci.sh`.
     - If this is the first time, set personal CI token in `$HOME/.circleci-token` file. To know how to generate a personal token, see https://app.circleci.com/settings/user/tokens
-    - `<STUDY_NAME>` Any study name. It's required parameter by the shell script, but it's not used to run Playwright tests for targeted study. All tests will run.
-    - `<BRANCH_NAME>` Your branch name
-    - `<ENV_NAME>` One of the following: dev, test
-    - `<TEST_SUITES>` Optional parameter: run tests matching this regular expression. Example: @singular
+    - `<STUDY_NAME>` Any study name. Run Playwright tests matching this study.
+    - `<BRANCH_NAME>` develop
+    - `<ENV_NAME>` Environment name: dev or test
     ```
     cd build-utils
     ./run_ci.sh run-e2e-tests <STUDY_NAME> <BRANCH_NAME> <ENV_NAME>
     ```
-  
+    Examples:
+    > 
+    - Run all E2E tests against Dev env:
+      > 
+      > ./run_ci.sh run-e2e-tests UNKNOWN develop dev
+    
+    - Run all Singular tests against Dev env:
+      > 
+      > ./run_ci.sh run-e2e-tests singular develop dev
+    - 
+    - Run all Singular tests against Test env:
+    >
+    > ./run_ci.sh run-e2e-tests singular develop test
+
 ### Debugging in Intellij
 
 - [TODO]

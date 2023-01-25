@@ -5,7 +5,6 @@ COMMAND=$1
 STUDY_KEY=$2
 BRANCH=$3
 TARGET_ENV=$4
-TEST_SUITES=${5:-""}
 
 CI_TOKEN=$(xargs <  ~/.circleci-token)
 if [[ -z $CI_TOKEN ]]; then
@@ -24,10 +23,12 @@ if [[ -z $COMMAND || -z $STUDY_KEY || -z $BRANCH || ($COMMAND == "deploy" && -z 
   echo "    run-tests"
   echo "        Run tests for given study and given branch"
   echo "    run-e2e-tests"
-  echo "        Run Playwright E2E tests for given branch against specified TARGET_ENV (dev or test)"
-  echo "        STUDY_KEY is ignored. API call will run all or groups of tests"
-  echo "        Example (run all tests) 1: ./run_ci.sh run-e2e-tests singular pepper-227-test dev"
-  echo "        Example (run Singular test suite) 2: ./run_ci.sh run-e2e-tests singular pepper-227-test dev @singular"
+  echo "        Run Playwright E2E tests on develop branch against specified TARGET_ENV (dev or test)"
+  echo "        STUDY_KEY: Run this study E2E test suite"
+  echo "        BRANCH: develop"
+  echo "        TARGET_ENV: dev or test"
+  echo "        Example 1 (run all tests against Dev env): ./run_ci.sh run-e2e-tests UNKNOWN develop dev"
+  echo "        Example 2 (run Singular test suite against Dev env): ./run_ci.sh run-e2e-tests singular develop dev"
   echo ""
   exit 1
 fi
@@ -42,7 +43,6 @@ curl -u "${CI_TOKEN}:" -X POST --header "Content-Type: application/json" -d "{
                                   \"parameters\": {
                                       $DEPLOY_ENV_PROPERTY
                                       \"study_key\": \"$STUDY_KEY\",
-                                      \"api_call\": \"$COMMAND\",
-                                      \"test_suites\": \"$TEST_SUITES\"
+                                      \"api_call\": \"$COMMAND\"
                                   }
 }" "https://circleci.com/api/v2/project/${CI_PROJECT_SLUG}/pipeline"

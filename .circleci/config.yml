@@ -685,9 +685,11 @@ jobs:
       parallel_num:
         type: integer
         default: 3
-      test_suites:
+      test_suite:
+        # to trigger E2E tests with labels matching study key:
+        # [basil, osteo, angio, brain, mbc, testboston, mpc, atcp, rarex, rgp, esc, prion, cgc, circadia, pancan, singular, brugada, lms, fon]
         type: string
-        default: ''
+        default: << pipeline.parameters.study_key >>
     parallelism: << parameters.parallel_num >>
     steps:
       - halt-playwright-test-check:
@@ -711,9 +713,10 @@ jobs:
       - run:
           working_directory: *playwright_path
           command: npx playwright install --with-deps chromium # Only need Chrome browser
-      - when:
+      - unless:
           # run E2E tests matching this regular expression. Set parallelism to 1 because shard does not work with -g option.
-          condition: << parameters.test_suites >>
+          condition:
+            - equal: [UNKNOWN, << pipeline.parameters.test_suite >>]
           steps:
             - run:
                 name: Running Playwright tests
@@ -721,11 +724,12 @@ jobs:
                 command: |
                   # CI split by auto-detect timing does not work because CircleCI CLI expects both filenames and classnames to be present in JUnit xml.
                   # Playwright generated JUnit xml does not have filenames.
-                  npx playwright test -g << parameters.test_suites >>
+                  npx playwright test -g @<< parameters.test_suite >>
                 no_output_timeout: 3m # Default is 10m. Set shorter time to ensure CI fails faster if test hangs
-      - unless:
+      - when:
           # run all E2E tests
-          condition: << parameters.test_suites >>
+          condition:
+            - equal: [UNKNOWN, << pipeline.parameters.test_suite >>]
           steps:
             - run:
                 name: Running Playwright tests
@@ -766,9 +770,6 @@ parameters:
   do-builds:
     type: boolean
     default: false
-  test_suites:
-    type: string
-    default: ''
 
 workflows:
   version: 2
@@ -818,7 +819,7 @@ workflows:
           env: << pipeline.parameters.deploy_env >>
       - run-playwright-test-job:
           env: << pipeline.parameters.deploy_env >>
-          test_suites: << pipeline.parameters.test_suites >>
+          test_suite: << pipeline.parameters.study_key >>
           requires:
             - build-playwright-test-job
 
@@ -945,5 +946,6 @@ workflows:
       - run-playwright-test-job:
           <<: *filter-develop-branch
           env: << pipeline.parameters.deploy_env >>
+          test_suite: UNKNOWN
           requires:
             - build-playwright-test-job
