@@ -724,8 +724,20 @@ jobs:
                 command: |
                   # CI split by auto-detect timing does not work because CircleCI CLI expects both filenames and classnames to be present in JUnit xml.
                   # Playwright generated JUnit xml does not have filenames.
-                  # Set parallelism to 1 because shard does not work with -g option.
-                  SHARD="$((${CIRCLE_NODE_INDEX}+1))"; npx playwright test -g @<< parameters.test_suite >> -- --shard=${SHARD}/1
+
+
+                  npx playwright test --list -g @<< parameters.test_suite >> | grep -o '/.*.spec.ts' > e2e_tests.txt
+                  cat e2e_tests.txt
+                  echo ''
+
+                  TESTS_FILE=$(circleci tests split --split-by=timings e2e_tests.txt)
+                  echo $TESTS_FILE
+                  echo ''
+                  
+                  npm run test:ci $TESTS_FILE
+
+
+                  # npx playwright test -g @<< parameters.test_suite >> -- --shard=${SHARD}/1
                 no_output_timeout: 3m # Default is 10m. Set shorter time to ensure CI fails faster if test hangs
       - when:
           # run all E2E tests
