@@ -1041,7 +1041,6 @@ export const TestBostonCovidSurvey: BasicActivityDef = {
                     hideNumber: false,
                     isDeprecated: false,
                     isRestricted: false,
-                    numericType: 'INTEGER',
                     placeholderTemplate: {
                       templateText: '$household_member_age_placeholder',
                       templateType: 'HTML',
