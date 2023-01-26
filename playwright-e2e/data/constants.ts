@@ -83,5 +83,5 @@ export const STATES = [
 ];
 
 export enum APP {
-  RPG = 'RGP'
+  RGP = 'RGP'
 }

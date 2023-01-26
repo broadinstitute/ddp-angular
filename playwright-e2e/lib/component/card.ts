@@ -1,5 +1,5 @@
 import { Locator, Page } from '@playwright/test';
-import Radiobutton from './radiobutton';
+import Radiobutton from 'lib/widget/radiobutton';
 
 export default class Card {
   private readonly page: Page;

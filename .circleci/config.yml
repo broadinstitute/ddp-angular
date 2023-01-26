@@ -1,5 +1,8 @@
 version: 2.1
 
+orbs:
+  node: circleci/node@5.1.0
+
 references:
   repo_path: &repo_path
       /home/circleci/repo
@@ -596,7 +599,7 @@ jobs:
       env:
         default: dev
         type: enum
-        enum: [ dev, test, staging, prod, UNKNOWN ]
+        enum: [ dev, test, UNKNOWN ]
     steps:
       - halt-playwright-test-check:
           env: << parameters.env >>
@@ -635,10 +638,10 @@ jobs:
             export rgpAudience=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.auth0 | .[] | select(.app==\"rgp\" and .env==\"<< parameters.env >>\") | .audience")
             export rgpClientId=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.auth0 | .[] | select(.app==\"rgp\" and .env==\"<< parameters.env >>\") | .clientId")
             export rgpClientSecret=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.auth0 | .[] | select(.app==\"rgp\" and .env==\"<< parameters.env >>\") | .clientSecret")
-            echo "export RGP_AUTH0_DOMAIN=rgpDomain" >> playwright-env/envvars
-            echo "export RGP_AUTH0_AUDIENCE=rgpAudience" >> playwright-env/envvars
-            echo "export RGP_AUTH0_CLIENT_ID=rgpClientId" >> playwright-env/envvars
-            echo "export RGP_AUTH0_CLIENT_SECRET=rgpClientSecret" >> playwright-env/envvars
+            echo "export RGP_AUTH0_DOMAIN=$rgpDomain" >> playwright-env/envvars
+            echo "export RGP_AUTH0_AUDIENCE=$rgpAudience" >> playwright-env/envvars
+            echo "export RGP_AUTH0_CLIENT_ID=$rgpClientId" >> playwright-env/envvars
+            echo "export RGP_AUTH0_CLIENT_SECRET=$rgpClientSecret" >> playwright-env/envvars
 
             # ANGIO
             export angioUser=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[] | select(.app==\"angio\") | .userName")
@@ -651,7 +654,6 @@ jobs:
             export pancanUserPassword=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[] | select(.app==\"pancan\") | .password")
             echo "export PANCAN_USER_PASSWORD=$pancanUserPassword" >> playwright-env/envvars
             echo "export PANCAN_USER_EMAIL=$pancanUser" >> playwright-env/envvars
-
       - run:
           working_directory: *playwright_path
           name: npm install
@@ -680,10 +682,15 @@ jobs:
         default: dev
         type: enum
         enum: [ dev, test, staging, prod, UNKNOWN ]
-      parallel_num:
+      parallelism_num:
         type: integer
-        default: 3
-    parallelism: << parameters.parallel_num >>
+        default: 1
+      test_suite:
+        # to trigger E2E tests with labels matching study key:
+        # [basil, osteo, angio, brain, mbc, testboston, mpc, atcp, rarex, rgp, esc, prion, cgc, circadia, pancan, singular, brugada, lms, fon]
+        type: string
+        default: << pipeline.parameters.study_key >>
+    parallelism: << parameters.parallelism_num >>
     steps:
       - halt-playwright-test-check:
           env: << parameters.env >>
@@ -694,30 +701,34 @@ jobs:
           command: |
             cp "playwright-e2e/config/.env.<< parameters.env >>" .env
             cat .env | awk '/^[^#]/ {print "export " $0}' >> "$BASH_ENV"
-
             # export env from file (created in build-playwright-job)
             cat playwright-env/envvars | awk '{print "export " $0}' >> "$BASH_ENV"
-
             source "$BASH_ENV"
-      - run:
-          command: |
-            echo $RGP_AUTH0_DOMAIN
-            echo $RGP_AUTH0_AUDIENCE
-            echo $RGP_AUTH0_CLIENT_ID
-            echo $RGP_AUTH0_CLIENT_SECRET
+      - node/install:
+          install-yarn: false
+          node-version: '18.13.0' # LTS version
       - run:
           working_directory: *playwright_path
           command: npm install --quiet
       - run:
           working_directory: *playwright_path
           command: npx playwright install --with-deps chromium # Only need Chrome browser
+
       - run:
           name: Running Playwright tests
           working_directory: *playwright_path
           command: |
-            # CI split by auto-detect timing does not work because CircleCI CLI expects both filenames and classnames to be present in JUnit xml.
-            # Playwright generated JUnit xml does not have filenames.
-            SHARD="$((${CIRCLE_NODE_INDEX}+1))"; npm run test:ci -- --shard=${SHARD}/${CIRCLE_NODE_TOTAL}
+            echo 'Study: ' << parameters.test_suite >>
+
+            if [ << parameters.test_suite >> == "UNKNOWN" ]; then
+              # Grep all E2E tests
+              npx playwright test --list | grep -o 'tests/.*.spec.ts' > e2e_tests.txt
+            else
+              # Grep E2E tests for this study.
+              npx playwright test --list -g @<< parameters.test_suite >> | grep -o 'tests/.*.spec.ts' > e2e_tests.txt
+            fi
+            TESTS_FILE=$(circleci tests split --split-by=timings --timings-type=classname e2e_tests.txt)
+            npm run test:ci $TESTS_FILE
           no_output_timeout: 3m # Default is 10m. Set shorter time to ensure CI fails faster if test hangs
       - store_test_results:
           path: playwright-e2e/junit
@@ -750,6 +761,9 @@ parameters:
   do-builds:
     type: boolean
     default: false
+  e2e-test-parallelism:
+    type: integer
+    default: 1
 
 workflows:
   version: 2
@@ -790,7 +804,7 @@ workflows:
 
   playwright-e2e-test-workflow:
     # Triggered by CI API (for example, run_ci.sh)
-    # Run Playwright tests against Dev, Test and Staging but not for Prod
+    # Run Playwright tests against Dev and Test but not for Staging and Production
     when:
       and:
         - equal: [ "run-e2e-tests", << pipeline.parameters.api_call >> ]
@@ -799,6 +813,8 @@ workflows:
           env: << pipeline.parameters.deploy_env >>
       - run-playwright-test-job:
           env: << pipeline.parameters.deploy_env >>
+          test_suite: << pipeline.parameters.study_key >>
+          parallelism_num: << pipeline.parameters.e2e-test-parallelism >>
           requires:
             - build-playwright-test-job
 
@@ -925,5 +941,7 @@ workflows:
       - run-playwright-test-job:
           <<: *filter-develop-branch
           env: << pipeline.parameters.deploy_env >>
+          parallelism_num: 2
+          test_suite: UNKNOWN
           requires:
             - build-playwright-test-job

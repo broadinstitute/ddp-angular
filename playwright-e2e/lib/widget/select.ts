@@ -18,20 +18,20 @@ export default class Select extends WidgetBase {
             ? this.page.locator(root)
             : root)
         : this.page.locator('mat-form-field');
-
+    /* prettier-ignore */
     this.elementLocator = ddpTestID
       ? this.rootLocator.locator(`mat-select[data-ddp-test="${ddpTestID}"], select[data-ddp-test="${ddpTestID}"]`)
       : exactMatch
-      ? this.rootLocator.locator(
-          `xpath=.//select[.//text()[normalize-space()="${label}"]] | ` +
+        ? this.rootLocator.locator(
+            `xpath=.//select[.//text()[normalize-space()="${label}"]] | ` +
             `.//mat-select[.//text()[normalize-space()="${label}"]] | ` +
             `.//mat-select[@id=(//label[normalize-space(.)="${label}"]/@for)]`
-        )
-      : this.rootLocator.locator(
-          `xpath=.//select[.//text()[contains(normalize-space(),"${label}")]] | ` +
+          )
+        : this.rootLocator.locator(
+            `xpath=.//select[.//text()[contains(normalize-space(),"${label}")]] | ` +
             `.//mat-select[.//text()[contains(normalize-space(),"${label}")]] | ` +
             `.//mat-select[@id=(//label[contains(normalize-space(.),"${label}")]/@for)]`
-        );
+          );
   }
 
   toLocator(): Locator {

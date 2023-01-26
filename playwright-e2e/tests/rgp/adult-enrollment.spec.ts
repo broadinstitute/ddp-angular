@@ -12,8 +12,6 @@ import { setAuth0UserEmailVerified } from 'utils/api-utils';
 
 const { RGP_USER_EMAIL, RGP_USER_PASSWORD } = process.env;
 
-/** UNFINISHED **/
-
 test.describe('Adult Self Enrollment', () => {
   const assertProgressActiveItem = async (page: Page, itemName: string): Promise<void> => {
     const locator = page.locator('li.activity-stepper__step-container button.stepper-btn.stepper-btn--active');
@@ -56,7 +54,7 @@ test.describe('Adult Self Enrollment', () => {
     );
 
     // Verify user email by Auth0 API
-    await setAuth0UserEmailVerified(APP.RPG, userEmail, { isEmailVerified: true });
+    await setAuth0UserEmailVerified(APP.RGP, userEmail, { isEmailVerified: true });
 
     await auth.login(page, { email: userEmail });
 

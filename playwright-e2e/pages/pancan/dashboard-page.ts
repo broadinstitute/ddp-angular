@@ -1,5 +1,5 @@
 import { expect, Locator, Page } from '@playwright/test';
-import Table from 'lib/widget/table';
+import Table from 'lib/component/table';
 import { PancanPage } from 'pages/pancan/pancan-page';
 
 export default class DashboardPage extends PancanPage {

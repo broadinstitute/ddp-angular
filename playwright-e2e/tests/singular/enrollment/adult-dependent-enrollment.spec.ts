@@ -7,7 +7,6 @@ import PreScreeningPage from 'pages/singular/enrollment/pre-screening-page';
 import EnrollMyAdultDependentPage from 'pages/singular/enrollment/enroll-my-adult-dependent-page';
 import ConsentFormForAdultDependentPage from 'pages/singular/enrollment/consent-form-for-adult-dependent-page';
 import AboutMyAdultDependentPage from 'pages/singular/enrollment/about-my-adult-dependent-page';
-import { enterMailingAddress } from 'utils/test-utils';
 import MyDashboardPage from 'pages/singular/dashboard/my-dashboard-page';
 import { WHO } from 'data/constants';
 import * as user from 'data/fake-user.json';
@@ -99,7 +98,7 @@ test.describe('Enrol an adult dependent', () => {
     await assertProgressCurrentItem(page, 'About Me');
 
     // Fill out address with fake data
-    await enterMailingAddress(page, {
+    await aboutMyAdultDependentPage.fillInContactAddress({
       fullName: `${user.adultDependent.firstName} ${dependentLastName}`,
       country: user.adultDependent.country.name,
       state: user.adultDependent.state.name,

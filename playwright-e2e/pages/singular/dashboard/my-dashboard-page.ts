@@ -1,7 +1,7 @@
 import { expect, Locator, Page } from '@playwright/test';
 import { WHO } from 'data/constants';
 import * as user from 'data/fake-user.json';
-import Table from 'lib/widget/table';
+import Table from 'lib/component/table';
 import EnrollMyChildPage from 'pages/singular/enrollment/enroll-my-child-page';
 import { SingularPage } from 'pages/singular/singular-page';
 
