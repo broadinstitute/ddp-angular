@@ -27,7 +27,6 @@ test.describe.parallel('', () => {
       await new Select(page, { label: 'Select study' }).selectOption(studyName);
 
       /* Test Values */
-      const currentDate = new Date().toLocaleString();
       const cohortTagValue1 = `dsm_rc_testCohortTag_1_${studyName}`;
       const cohortTagValue2 = `DSM RC ${studyName} testCohortTag_2`;
       const cohortTagValue3 = `${studyName} testCohortTag_3`;
