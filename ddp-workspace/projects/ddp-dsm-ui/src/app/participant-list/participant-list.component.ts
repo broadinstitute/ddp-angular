@@ -564,6 +564,23 @@ export class ParticipantListComponent implements OnInit {
         } else {
           this.dataSources.delete('a');
         }
+
+        if (jsonData.hasProxyData != null) {
+          this.dataSources.set('proxy', 'Proxy');
+          const possibleColumns: Array<Filter> = [];
+          possibleColumns.push(new Filter(new ParticipantColumn('First Name', 'firstName', 'proxy', null, true), Filter.TEXT_TYPE));
+          possibleColumns.push(new Filter(new ParticipantColumn('Last Name', 'lastName', 'proxy', null, true), Filter.TEXT_TYPE));
+          possibleColumns.push(new Filter(new ParticipantColumn('Email', 'email', 'proxy', null, true), Filter.TEXT_TYPE));
+
+          this.sourceColumns['proxy'] = possibleColumns;
+          this.selectedColumns['proxy'] = [];
+          possibleColumns.forEach(filter => {
+            const tmp = filter.participantColumn.object != null ? filter.participantColumn.object : filter.participantColumn.tableAlias;
+            this.allFieldNames.add(tmp + '.' + filter.participantColumn.name);
+          });
+          this.orderColumns();
+        }
+
         if (jsonData.filters != null) {
           jsonData.filters.forEach((val) => {
             const view: ViewFilter = ViewFilter.parseFilter(val, this.sourceColumns);
@@ -676,21 +693,7 @@ export class ParticipantListComponent implements OnInit {
         if (jsonData.hasComputedObject) {
           this.addAutomatedScoringColumns();
         }
-        if (jsonData.hasProxyData != null) {
-          this.dataSources.set('proxy', 'Proxy');
-          const possibleColumns: Array<Filter> = [];
-          possibleColumns.push(new Filter(new ParticipantColumn('First Name', 'firstName', 'proxy', null, true), Filter.TEXT_TYPE));
-          possibleColumns.push(new Filter(new ParticipantColumn('Last Name', 'lastName', 'proxy', null, true), Filter.TEXT_TYPE));
-          possibleColumns.push(new Filter(new ParticipantColumn('Email', 'email', 'proxy', null, true), Filter.TEXT_TYPE));
 
-          this.sourceColumns['proxy'] = possibleColumns;
-          this.selectedColumns['proxy'] = [];
-          possibleColumns.forEach(filter => {
-            const tmp = filter.participantColumn.object != null ? filter.participantColumn.object : filter.participantColumn.tableAlias;
-            this.allFieldNames.add(tmp + '.' + filter.participantColumn.name);
-          });
-          this.orderColumns();
-        }
         if (jsonData.hideESFields != null) {
           const hideESFields: Value[] = [];
           jsonData.hideESFields.forEach((val) => {
