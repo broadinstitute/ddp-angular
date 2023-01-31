@@ -39,14 +39,4 @@ export default class EnrollMyChildPage extends SingularPage {
       prompt: "Who in your child's family has single ventricle heart defect?"
     });
   }
-
-  /**
-   * <br> Question: Where does your child currently live?
-   * <br> Type: Select Country
-   */
-  whereDoesChildLive(): Question {
-    return new Question(this.page, {
-      prompt: 'Where does your child currently live?'
-    });
-  }
 }

@@ -103,8 +103,9 @@ export default class Question {
     const input = this.input();
     const autocomplete = await input.getAttribute('aria-autocomplete');
     await input.fill(value);
-    if (autocomplete) {
-      const dropdown = this.page.locator(`[role="listbox"]`);
+    const expanded = await input.getAttribute('aria-expanded');
+    if (autocomplete === 'list' && expanded === 'true') {
+      const dropdown = this.page.locator('.mat-autocomplete-visible[role="listbox"][id]');
       await dropdown
         .locator('mat-option:visible', { hasText: new RegExp(value) })
         .first()
