@@ -75,7 +75,7 @@ test.describe('Enroll child ', () => {
     await assertActivityHeader(page, 'Medical Release Form');
     const medicalReleaseFormPage = new MedicalReleaseFormPage(page);
     await medicalReleaseFormPage.waitForReady();
-    await medicalReleaseFormPage.fillInInformationAboutPhysician();
+    await medicalReleaseFormPage.fillInInPhysicianData();
     await medicalReleaseFormPage.agreeToAllowContactPhysician().check();
     await medicalReleaseFormPage.submit();
 
