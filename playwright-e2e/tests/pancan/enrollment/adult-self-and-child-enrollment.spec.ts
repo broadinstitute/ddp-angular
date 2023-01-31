@@ -122,7 +122,7 @@ test.describe('Adult self-enroll & child (consent) enrollment', () => {
     // Survey: About you
     await assertActivityHeader(page, 'Survey: About You');
     const surveyAboutYou = new SurveyAboutYouPage(page);
-    await surveyAboutYou.fillOutSurveyAboutYou();
+    await surveyAboutYou.fillInSurveyAboutYou();
     await surveyAboutYou.submit();
 
     // Dashboard
@@ -214,7 +214,7 @@ test.describe('Adult self-enroll & child (consent) enrollment', () => {
     // Survey: About your child
     await assertActivityHeader(page, 'Survey: About Your Child');
     await surveyAboutYou.waitForReady();
-    await surveyAboutYou.fillOutSurveyAboutYou({ gender: 'Boy' });
+    await surveyAboutYou.fillInSurveyAboutYou({ gender: 'Boy' });
     await surveyAboutYou.submit();
 
     // Two tables: one for enrolled adult and one for enrolled child

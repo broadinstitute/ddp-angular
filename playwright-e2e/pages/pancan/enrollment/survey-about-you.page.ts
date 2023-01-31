@@ -61,7 +61,7 @@ export default class SurveyAboutYouPage extends PancanPageBase {
     await expect(loc).toHaveClass(/checkbox-checked/);
   }
 
-  async fillOutSurveyAboutYou(
+  async fillInSurveyAboutYou(
     opts: { sex?: string; gender?: string; race?: string; howDidYouHearAboutProject?: string } = {}
   ): Promise<void> {
     const {
