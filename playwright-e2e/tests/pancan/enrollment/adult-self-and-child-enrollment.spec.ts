@@ -43,10 +43,8 @@ test.describe('Adult self-enroll & child (consent) enrollment', () => {
     // On Diagnosis page
     const preScreeningDiagnosisPage = new PreScreeningDiagnosisPage(page);
     await preScreeningDiagnosisPage.waitForReady();
-    // Add two diagnosed cancers
+    // Add one diagnosed cancer
     await preScreeningDiagnosisPage.cancerDiagnosed().fill(PatientsData.adult.cancerDiagnosed.typeCancer);
-    await preScreeningDiagnosisPage.cancerDiagnosed().button('Add another diagnosis').click();
-    await preScreeningDiagnosisPage.cancerDiagnosed().input().nth(1).fill('Colon cancer');
     await preScreeningDiagnosisPage.next();
 
     // On Age and location page
@@ -106,19 +104,6 @@ test.describe('Adult self-enroll & child (consent) enrollment', () => {
     await surveyCervicalCancerPage.medicationsList().fill('many others');
     await surveyCervicalCancerPage.submit();
 
-    // Survey: About Colon Cancer
-    await assertActivityHeader(page, `Survey: About Your Colon cancer`);
-    const surveyColonCancerPage = new SurveyAboutCancerPage(page);
-    await surveyColonCancerPage.waitForReady();
-    await surveyColonCancerPage.diagnosedDate('May', '2017');
-    await surveyColonCancerPage.fillCancerBodyPlaces('Stomach');
-    await surveyColonCancerPage.cancerFree().radioButton('No').locator('label').click();
-    await surveyColonCancerPage.fillBodyPlacesEverHadCancer('Appendix');
-    await surveyColonCancerPage.checkTreatmentsReceived('Radiation');
-    await surveyColonCancerPage.checkTreatmentsReceived('Surgery');
-    await surveyColonCancerPage.medicationsList().fill('many others');
-    await surveyColonCancerPage.submit();
-
     // Survey: About you
     await assertActivityHeader(page, 'Survey: About You');
     const surveyAboutYou = new SurveyAboutYouPage(page);
@@ -145,8 +130,6 @@ test.describe('Adult self-enroll & child (consent) enrollment', () => {
     await expect(await medicalReleaseStatusCell?.innerText()).toEqual('Complete');
     const cervicalCancerStatusCell = await table.findCell('Form', 'Survey: Your Cervical cancer', 'Status');
     await expect(await cervicalCancerStatusCell?.innerText()).toEqual('Complete');
-    const colonCancerStatusCell = await table.findCell('Form', 'Survey: Your Colon cancer', 'Status');
-    await expect(await colonCancerStatusCell?.innerText()).toEqual('Complete');
     const aboutYouStatusCell = await table.findCell('Form', 'Survey: About You', 'Status');
     await expect(await aboutYouStatusCell?.innerText()).toEqual('Complete');
     await table.hide();

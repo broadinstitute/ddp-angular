@@ -42,15 +42,6 @@ export default class TellUsAboutYourFamilyPage extends RgpPageBase {
   }
 
   /**
-   * Question: State the family lives in *
-   * <br> Type: Select
-   * @returns {Select}
-   */
-  stateLivesIn(): Select {
-    return new Select(this.page, { label: 'State the family lives in' });
-  }
-
-  /**
    * Question: Is there a website, blog, or social media page that you
    write or maintain that describes your family's undiagnosed suspected genetic
    condition?

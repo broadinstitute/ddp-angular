@@ -49,8 +49,4 @@ export default class EnrollMyChildPage extends SingularPage {
       prompt: 'Where does your child currently live?'
     });
   }
-
-  state(): Question {
-    return new Question(this.page, { cssClassAttribute: '.picklist-answer-ADD_PARTICIPANT_STATE_CHILD' });
-  }
 }

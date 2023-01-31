@@ -235,7 +235,7 @@ export default abstract class PageBase implements PageInterface {
    * <br> Type: Select
    */
   country(): Question {
-    return new Question(this.page, { prompt: new RegExp(/(Choose Country)|(Select Country)/i) }); // classAttr: 'picklist-answer-COUNTRY'
+    return new Question(this.page, { prompt: new RegExp(/((?:choose|select) country\b)|(country\b)/i) });
   }
 
   /**
@@ -244,7 +244,7 @@ export default abstract class PageBase implements PageInterface {
    * <br> Type: Select
    */
   state(): Question {
-    return new Question(this.page, { prompt: new RegExp(/(Choose State)|(Select State)/i) });
+    return new Question(this.page, { prompt: new RegExp(/((?:choose|select) (state\b|province\b))|(state\b)/i) });
   }
 
   /**
