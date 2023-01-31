@@ -218,6 +218,29 @@ export default abstract class PageBase implements PageInterface {
   }
 
   /**
+   * Fill in Country and State if needed.
+   * @param {string} country
+   * @param {{state?: string}} opts
+   * @returns {Promise<void>}
+   */
+  async fillInCountry(country: string, opts: { state?: string } = {}): Promise<string> {
+    const { state } = opts;
+
+    const [selected] = await this.country().select().selectOption(country);
+    /*
+    // assert in V1.29. Uncomment after upgrade Playwright
+    await expect(async () => {
+      const selectedOption = await this.country().select().evaluate<string, HTMLSelectElement>((node) => node.value);
+      expect(selectedOption).toEqual(country);
+    }).toPass();
+    */
+    if (state) {
+      await this.state().select().selectOption(state);
+    }
+    return selected;
+  }
+
+  /**
    * COMMON UI FIELDS
    */
 
@@ -245,26 +268,5 @@ export default abstract class PageBase implements PageInterface {
    */
   state(): Question {
     return new Question(this.page, { prompt: new RegExp(/((?:choose|select) (state\b|province\b))|(state\b)/i) });
-  }
-
-  /**
-   * COMMON USER ACTIONS
-   */
-
-  async fillInCountry(opts: { country: string; state?: string }): Promise<void> {
-    const { country, state } = opts;
-
-    await this.country().select().selectOption(country);
-    /*
-    // assert in V1.29. Uncomment after upgrade Playwright
-    await expect(async () => {
-      const selectedOption = await this.country().select().evaluate<string, HTMLSelectElement>((node) => node.value);
-      expect(selectedOption).toEqual(country);
-    }).toPass();
-    */
-
-    if (state) {
-      await this.state().select().selectOption(state);
-    }
   }
 }

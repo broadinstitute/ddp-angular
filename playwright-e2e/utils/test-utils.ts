@@ -51,6 +51,7 @@ export async function fillSitePassword(page: Page, password = SITE_PASSWORD): Pr
   if (password == null) {
     throw Error(`Invalid parameter: password is "${SITE_PASSWORD}"`);
   }
+  await page.locator('input[type="password"]').waitFor({ state: 'visible', timeout: 30 * 1000 });
   await page.locator('input[type="password"]').fill(password);
   await Promise.all([page.waitForNavigation(), page.locator('button >> text=Submit').click()]);
 }

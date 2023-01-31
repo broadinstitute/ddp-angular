@@ -40,14 +40,4 @@ export default class EnrollMyAdultDependentPage extends SingularPage {
       prompt: 'Who in their family has single ventricle heart defect?'
     });
   }
-
-  /**
-   * <br> Question: Where does your dependent currently live?
-   * <br> Type: Select
-   */
-  whereDoesDependentLive(): Question {
-    return new Question(this.page, {
-      prompt: 'Where does your dependent currently live?'
-    });
-  }
 }

@@ -1,5 +1,5 @@
 import { Page } from '@playwright/test';
-import Input from 'lib/widget/Input';
+import Institution from 'lib/component/institution';
 import { PancanPageBase } from 'pages/pancan/pancan-page-base';
 import * as user from 'data/fake-user.json';
 import Question from 'lib/component/Question';
@@ -10,19 +10,7 @@ export default class MedicalReleaseFormPage extends PancanPageBase {
   }
 
   async waitForReady(): Promise<void> {
-    await this.physicianName().toLocator().waitFor({ state: 'visible' });
-  }
-
-  physicianName(): Input {
-    return new Input(this.page, { label: 'Physician Name (if applicable)' });
-  }
-
-  hospitalOrInstitution(): Input {
-    return new Input(this.page, { label: 'Hospital/Institution (if any)' });
-  }
-
-  city(): Input {
-    return new Input(this.page, { label: 'City' });
+    await this.agreeToAllowContactPhysician().toLocator().waitFor({ state: 'visible' });
   }
 
   /**
@@ -37,11 +25,18 @@ export default class MedicalReleaseFormPage extends PancanPageBase {
     });
   }
 
+  hospital(): Institution {
+    return new Institution(this.page, {
+      label: 'including any institutions'
+    });
+  }
+
   async fillInInPhysicianData(opts: { name?: string; hospital?: string; city?: string; state?: string } = {}): Promise<void> {
     const { name = user.doctor.name, hospital = user.doctor.hospital, city = user.doctor.city, state = user.doctor.state } = opts;
-    await this.physicianName().fill(name);
-    await this.hospitalOrInstitution().fill(hospital);
-    await this.city().fill(city);
-    await new Input(this.page, { label: 'State' }).fill(state);
+    const institution = this.hospital();
+    await institution.input('Physician Name').fill(name);
+    await institution.input('Hospital/Institution').fill(hospital);
+    await institution.input('City').fill(city);
+    await institution.input('State').fill(state);
   }
 }

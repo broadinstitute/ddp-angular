@@ -67,9 +67,7 @@ export default class PreScreeningPage extends SingularPage {
     } = opts;
 
     await this.age().fill(age);
-    await this.country().select().selectOption(country);
-    await this.state().toLocator().waitFor({ state: 'visible' });
-    await this.state().select().selectOption(state);
+    await this.fillInCountry(country, { state });
     await this.haveVentricleHeartDefect().check(hasHeartDefect ? 'Yes' : 'No');
     await this.checkReCaptcha();
     await this.signMeUp({ waitForNav: true });

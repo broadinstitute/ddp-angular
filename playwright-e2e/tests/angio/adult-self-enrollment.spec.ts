@@ -75,7 +75,7 @@ test.describe('Adult Enrollment', () => {
     // Question 15
     await aboutYou.yearBorn(user.patient.birthDate.YYYY);
     // Question 16
-    const [selectedValue] = await aboutYou.country().select().selectOption(user.patient.country.abbreviation);
+    const selectedValue = await aboutYou.fillInCountry(user.patient.country.abbreviation);
     expect(selectedValue).toEqual('US');
     await aboutYou.submit();
 
