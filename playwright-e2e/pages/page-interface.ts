@@ -1,5 +1,6 @@
 import { Locator, Response } from '@playwright/test';
 import Question from 'lib/component/Question';
+import Input from 'lib/widget/Input';
 
 export interface PageInterface {
   gotoURL(url: string): Promise<Response | null>;
@@ -13,6 +14,7 @@ export interface PageInterface {
   logOut(): Promise<void>;
   country(): Question;
   state(): Question;
+  age(): Input;
 }
 
 export interface HomePageInterface extends PageInterface {
