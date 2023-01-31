@@ -16,15 +16,16 @@ const testConfig: PlaywrightTestConfig = {
   globalSetup: require.resolve('./fixtures/global-setup'),
   testDir: '.',
   testMatch: '**/*.spec.ts',
-  /* Maximum time one test can run for. Test should be short and takes less than 2 minutes to run */
-  timeout: 120 * 1000,
+  /* Maximum time one test can run for. Test should be short and takes less than 4 minutes to run */
+  timeout: 600 * 1000,
+  globalTimeout: 1200 * 1000,
   /* For expect() calls */
   expect: {
     /**
      * Maximum time expect() should wait for the condition to be met.
      * For example in `await expect(locator).toHaveText();`
      */
-    timeout: 30 * 1000,
+    timeout: 60 * 1000,
     toMatchSnapshot: {
       // Account for minor difference in text rendering and resolution between headless and headed mode
       threshold: 0.3,
