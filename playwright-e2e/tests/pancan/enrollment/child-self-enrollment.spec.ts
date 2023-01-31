@@ -116,17 +116,17 @@ test.describe('Enroll child ', () => {
     expect(headers).toHaveLength(4); // Four columns in table
     expect(headers).toEqual(orderedHeaders);
 
-    const statusResearchCell = await table.findCell('Form', 'Research Consent Form - Parent or Guardian', 'Status');
-    await expect(await statusResearchCell?.innerText()).toEqual('Complete');
-    const statusMedicalReleaseCell = await table.findCell('Form', 'Medical Release Form', 'Status');
-    await expect(await statusMedicalReleaseCell?.innerText()).toEqual('Complete');
-    const statusCervicalCancerCell = await table.findCell(
+    const researchConsentFormStatusCell = await table.findCell('Form', 'Research Consent Form - Parent or Guardian', 'Status');
+    await expect(await researchConsentFormStatusCell?.innerText()).toEqual('Complete');
+    const medicalReleaseFormStatusCell = await table.findCell('Form', 'Medical Release Form', 'Status');
+    await expect(await medicalReleaseFormStatusCell?.innerText()).toEqual('Complete');
+    const leukemiaCancerStatusCell = await table.findCell(
       'Form',
       "Survey: Your Child's Leukemia (not otherwise specified)",
       'Status'
     );
-    await expect(await statusCervicalCancerCell?.innerText()).toEqual('Complete');
-    const statusAboutYouCell = await table.findCell('Form', 'Survey: About Your Child', 'Status');
-    await expect(await statusAboutYouCell?.innerText()).toEqual('Complete');
+    await expect(await leukemiaCancerStatusCell?.innerText()).toEqual('Complete');
+    const aboutYourChildFormStatusCell = await table.findCell('Form', 'Survey: About Your Child', 'Status');
+    await expect(await aboutYourChildFormStatusCell?.innerText()).toEqual('Complete');
   });
 });
