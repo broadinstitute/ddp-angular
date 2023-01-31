@@ -27,11 +27,10 @@ test.describe.parallel('', () => {
       await new Select(page, { label: 'Select study' }).selectOption(studyName);
 
       /* Test Values */
-      const currentDate = new Date().toLocaleString();
-      const cohortTagValue1 = `dsm_rc_${currentDate}_${studyName}`;
-      const cohortTagValue2 = `DSM RC ${studyName} ${currentDate}`;
-      const cohortTagValue3 = `${studyName} ${currentDate}`;
-      const participantNoteValue = `This is a test note - ${currentDate}`;
+      const cohortTagValue1 = `dsm_rc_testCohortTag_1_${studyName}`;
+      const cohortTagValue2 = `DSM RC ${studyName} testCohortTag_2`;
+      const cohortTagValue3 = `${studyName} testCohortTag_3`;
+      const participantNoteValue = `This is a test note - testNoteValue`;
 
       /* Step-By-Step navigation through the website and making assertions as needed */
       await homePage.assertWelcomeTitle();
@@ -68,15 +67,15 @@ test.describe.parallel('', () => {
       await cohortTag.assertCohortTagToHaveCount(cohortTagValue1, 0);
       await cohortTag.assertCohortTagToHaveCount(cohortTagValue2, 1);
 
-      await cohortTag.delete(`DSM RC ${studyName} ${currentDate}`);
+      await cohortTag.delete(cohortTagValue2);
 
-      await cohortTag.assertCohortTagToHaveCount(`${studyName} ${currentDate}`, 1);
+      await cohortTag.assertCohortTagToHaveCount(cohortTagValue3, 1);
 
       await cohortTag.add(cohortTagValue3);
 
       await cohortTag.assertCohortTagToHaveCount('Duplicate tag! Not saved!', 1);
 
-      await participantPage.assertParticipantNotesToHaveCount(`This is a test note - ${currentDate}`);
+      await participantPage.assertParticipantNotesToHaveCount(participantNoteValue);
 
       await participantPage.backToList();
       await participantListPage.selectParticipant();
