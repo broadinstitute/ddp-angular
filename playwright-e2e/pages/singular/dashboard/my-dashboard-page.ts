@@ -78,7 +78,7 @@ export default class MyDashboardPage extends SingularPage {
     await enrollMyChildPage.whoInChildFamilyHasVentricleHeartDefect().check(who);
     await enrollMyChildPage.howOldIsYourChild().fill(age);
     await enrollMyChildPage.whereDoesChildLive().select('Select Country').selectOption(country);
-    await enrollMyChildPage.state().selectOption(state);
+    await enrollMyChildPage.state().select().selectOption(state);
     if (cognitiveImpairment) {
       await enrollMyChildPage.doesChildHaveCognitiveImpairment().check(cognitiveImpairment, { exactMatch: true });
     }

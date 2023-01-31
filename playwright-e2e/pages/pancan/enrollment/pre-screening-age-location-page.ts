@@ -1,11 +1,10 @@
 import { Page } from '@playwright/test';
-import Question from 'lib/component/Question';
-import Input from 'lib/widget/input';
-import { PancanPage } from 'pages/pancan/pancan-page';
+import Input from 'lib/widget/Input';
+import { PancanPageBase } from 'pages/pancan/pancan-page-base';
 import * as fake from 'data/fake-user.json';
-import { TypePatient } from 'pages/patient-type';
+import { PatientsData, TypePatient } from 'pages/patient-type';
 
-export default class PreScreeningAgeLocationPage extends PancanPage {
+export default class PreScreeningAgeLocationPage extends PancanPageBase {
   constructor(page: Page, private patient: TypePatient = 'adult') {
     super(page);
   }
@@ -15,30 +14,8 @@ export default class PreScreeningAgeLocationPage extends PancanPage {
     await this.country().toLocator().waitFor({ state: 'visible' });
   }
 
-  /**
-   * <br> Question: How old are you?
-   * <br> Type: Input
-   */
   age(): Input {
-    return new Input(this.page, { ddpTestID: 'answer:AGE' });
-  }
-
-  /**
-   * <br> Question: Where do you live?
-   * <br> Select Country
-   * <br> Type: Select
-   */
-  country(): Question {
-    return new Question(this.page, { prompt: 'Choose Country...' });
-  }
-
-  /**
-   * <br> Question: Select State (US and Canada)
-   * <br> Select State
-   * <br> Type: Select
-   */
-  state(): Question {
-    return new Question(this.page, { prompt: 'Choose State...' });
+    return new Input(this.page, { ddpTestID: PatientsData[this.patient].ddpTestID.age });
   }
 
   async enterInformationAboutAgeLocation(
@@ -48,7 +25,6 @@ export default class PreScreeningAgeLocationPage extends PancanPage {
       state?: string;
     } = {}
   ): Promise<void> {
-    // Fake data from fake-user.json
     const {
       age = fake[this.patient].age,
       country = fake[this.patient].country.abbreviation,
@@ -56,9 +32,14 @@ export default class PreScreeningAgeLocationPage extends PancanPage {
     } = opts;
 
     await this.age().fill(age);
-    await this.country().select().selectOption(country);
-    await this.state().toLocator().waitFor({ state: 'visible' });
-    await this.state().select().selectOption(state);
+    await Promise.all([
+      this.page.waitForResponse((resp) => resp.url().includes('/answers') && resp.status() === 200),
+      this.country().select().selectOption(country)
+    ]);
+    await Promise.all([
+      this.page.waitForResponse((resp) => resp.url().includes('/answers') && resp.status() === 200),
+      this.state().select().selectOption(state)
+    ]);
     await this.submit();
   }
 }

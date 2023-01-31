@@ -59,7 +59,7 @@ test.describe('Enrol an adult dependent', () => {
       .whereDoesDependentLive()
       .select('Select Country')
       .selectOption(user.adultDependent.country.abbreviation);
-    await enrollMyAdultDependentPage.state().selectOption(user.adultDependent.state.abbreviation);
+    await enrollMyAdultDependentPage.state().select().selectOption(user.adultDependent.state.abbreviation);
     await enrollMyAdultDependentPage.doesDependentHaveCognitiveImpairment().check('Yes', { exactMatch: true });
     await myDashboardPage.next();
 

@@ -67,7 +67,7 @@ test.describe('Adult Self Enrollment', () => {
     await tellUsAboutYourFamily.phone().fill(user.patient.phone);
     await tellUsAboutYourFamily.confirmPhone().fill(user.patient.phone);
     await tellUsAboutYourFamily.patientRelationship().selectOption('MYSELF');
-    await tellUsAboutYourFamily.state().selectOption(user.patient.state.abbreviation);
+    await tellUsAboutYourFamily.stateLivesIn().selectOption(user.patient.state.abbreviation);
     await tellUsAboutYourFamily.website().fill('https://en.wikipedia.org/wiki/Broad_Institute');
     await tellUsAboutYourFamily.describeGeneticCondition().fill('Single-gene disorders');
     await tellUsAboutYourFamily.haveAnyClinicalDiagnosesBeenMade().check('Yes');

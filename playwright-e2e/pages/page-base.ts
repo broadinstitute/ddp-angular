@@ -1,6 +1,7 @@
 import { expect, Locator, Page, Response } from '@playwright/test';
 import Address from 'lib/component/address';
 import Question from 'lib/component/Question';
+import Input from 'lib/widget/Input';
 import { generateRandomPhoneNum } from 'utils/faker-utils';
 import { waitForNoSpinner } from 'utils/test-utils';
 import { PageInterface } from './page-interface';
@@ -146,7 +147,6 @@ export default abstract class PageBase implements PageInterface {
 
   /**
    * Filling out address form.
-   * @param page
    * @param opts
    */
   async fillInContactAddress(opts: {
@@ -215,5 +215,56 @@ export default abstract class PageBase implements PageInterface {
     await mailAddressForm.input(phoneLabel).fill(telephone.toString());
     // Wait for Address Suggestion card
     await mailAddressForm.addressSuggestion().radioButton('As Entered:').check();
+  }
+
+  /**
+   * COMMON UI FIELDS
+   */
+
+  /**
+   * <br> Question: How old are you?
+   * <br> Type: Input
+   */
+  age(): Input {
+    return new Input(this.page, { ddpTestID: 'answer:AGE' });
+  }
+
+  /**
+   * Select country.
+   * <br> Question: Where do you live? or What country do you live in?
+   * <br> Type: Select
+   */
+  country(): Question {
+    return new Question(this.page, { prompt: new RegExp(/(Choose Country)|(Select Country)/i) }); // classAttr: 'picklist-answer-COUNTRY'
+  }
+
+  /**
+   * Select State.
+   * <br> Question: Select State (US and Canada)
+   * <br> Type: Select
+   */
+  state(): Question {
+    return new Question(this.page, { prompt: new RegExp(/(Choose State)|(Select State)/i) });
+  }
+
+  /**
+   * COMMON USER ACTIONS
+   */
+
+  async fillInCountry(opts: { country: string; state?: string }): Promise<void> {
+    const { country, state } = opts;
+
+    await this.country().select().selectOption(country);
+    /*
+    // assert in V1.29. Uncomment after upgrade Playwright
+    await expect(async () => {
+      const selectedOption = await this.country().select().evaluate<string, HTMLSelectElement>((node) => node.value);
+      expect(selectedOption).toEqual(country);
+    }).toPass();
+    */
+
+    if (state) {
+      await this.state().select().selectOption(state);
+    }
   }
 }

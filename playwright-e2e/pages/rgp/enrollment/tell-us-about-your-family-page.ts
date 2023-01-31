@@ -46,7 +46,7 @@ export default class TellUsAboutYourFamilyPage extends RgpPageBase {
    * <br> Type: Select
    * @returns {Select}
    */
-  state(): Select {
+  stateLivesIn(): Select {
     return new Select(this.page, { label: 'State the family lives in' });
   }
 

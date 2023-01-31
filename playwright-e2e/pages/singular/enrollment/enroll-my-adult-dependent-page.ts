@@ -1,4 +1,4 @@
-import { expect, Locator, Page } from '@playwright/test';
+import { expect, Page } from '@playwright/test';
 import Question from 'lib/component/Question';
 import Input from 'lib/widget/input';
 import { SingularPage } from 'pages/singular/singular-page';
@@ -49,9 +49,5 @@ export default class EnrollMyAdultDependentPage extends SingularPage {
     return new Question(this.page, {
       prompt: 'Where does your dependent currently live?'
     });
-  }
-
-  state(): Locator {
-    return new Question(this.page, { prompt: 'Select State' }).select();
   }
 }

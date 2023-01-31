@@ -1,4 +1,5 @@
 import { expect, Locator, Page } from '@playwright/test';
+import Button from 'lib/widget/button';
 import Checkbox from 'lib/widget/checkbox';
 import Select from 'lib/widget/select';
 
@@ -24,6 +25,13 @@ export default class Question {
 
   errorMessage(): Locator {
     return this.toLocator().locator('.ErrorMessage');
+  }
+
+  button(label: string): Button {
+    return new Button(this.page, {
+      label,
+      root: this.rootLocator
+    });
   }
 
   /**
@@ -88,12 +96,22 @@ export default class Question {
   }
 
   /**
-   * Typing text or numerical value
+   * Typing text. If text triggers an autocomplete dropdown, automatically selects the first option.
    * @param value
    */
   async fill(value: string): Promise<void> {
-    await this.input().fill(value);
-    await this.input().press('Tab');
+    const input = this.input();
+    const autocomplete = await input.getAttribute('aria-autocomplete');
+    await input.fill(value);
+    if (autocomplete) {
+      const dropdown = this.page.locator(`[role="listbox"]`);
+      await dropdown
+        .locator('mat-option:visible', { hasText: new RegExp(value) })
+        .first()
+        .click();
+    } else {
+      await input.press('Tab');
+    }
   }
 
   /**

@@ -1,4 +1,4 @@
-import { Locator, Page } from '@playwright/test';
+import { Page } from '@playwright/test';
 import { SingularPage } from 'pages/singular/singular-page';
 import Question from 'lib/component/Question';
 import Input from 'lib/widget/input';
@@ -50,7 +50,7 @@ export default class EnrollMyChildPage extends SingularPage {
     });
   }
 
-  state(): Locator {
-    return new Question(this.page, { prompt: 'Select State' }).select();
+  state(): Question {
+    return new Question(this.page, { classAttr: 'picklist-answer-ADD_PARTICIPANT_STATE_CHILD' });
   }
 }

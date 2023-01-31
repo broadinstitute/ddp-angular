@@ -30,13 +30,16 @@ test.describe('Enroll child ', () => {
     await preScreeningPage.waitForReady();
     await preScreeningPage.whoIsSigningUp().check(PatientsData.child.whoIsSigningUp, { exactMatch: true });
     await preScreeningPage.next();
-    //diagnosis page
+    // On Diagnosis page
     const preScreeningDiagnosisPage = new PreScreeningDiagnosisPage(page, 'child');
     await preScreeningDiagnosisPage.waitForReady();
-    await preScreeningDiagnosisPage.cancerDiagnosed().input().fill(PatientsData.child.cancerDiagnosed.typeCancer);
-    await preScreeningDiagnosisPage.getNextButton().waitFor({ state: 'visible' });
+    await preScreeningDiagnosisPage.cancerDiagnosed().fill(PatientsData.child.cancerDiagnosed.typeCancer);
     await preScreeningDiagnosisPage.next();
-    //age/location page
+
+    await assertActivityHeader(page, 'Lets get started');
+    await preScreeningDiagnosisPage.submit({ waitForNav: false });
+
+    // On Age/location page
     const preScreeningAgeLocationPage = new PreScreeningAgeLocationPage(page, 'child');
     await preScreeningAgeLocationPage.waitForReady();
     await preScreeningAgeLocationPage.enterInformationAboutAgeLocation();
@@ -56,8 +59,8 @@ test.describe('Enroll child ', () => {
     await consentFormPage.next();
     // On "Consent Form" page, Page 3 of 3.
     await assertActivityStep(page, '3');
-    await consentFormPage.bloodSamples();
-    await consentFormPage.cancerSamples();
+    await consentFormPage.agreeToBloodSamples();
+    await consentFormPage.agreeToStoreCancerSamples();
     await consentFormPage.firstName().fill(user.child.firstName);
     await consentFormPage.lastName().fill(lastName);
     await consentFormPage.fillInDateOfBirth(user.child.birthDate.MM, user.child.birthDate.DD, user.child.birthDate.YYYY);
@@ -72,12 +75,12 @@ test.describe('Enroll child ', () => {
     await assertActivityHeader(page, 'Medical Release Form');
     const medicalReleaseFormPage = new MedicalReleaseFormPage(page);
     await medicalReleaseFormPage.waitForReady();
-    await medicalReleaseFormPage.enterPhysicianData();
-    await medicalReleaseFormPage.contactPhysician().check();
+    await medicalReleaseFormPage.fillInInformationAboutPhysician();
+    await medicalReleaseFormPage.agreeToAllowContactPhysician().check();
     await medicalReleaseFormPage.submit();
 
     // Survey: About Your Child's Leukemia
-    await assertActivityHeader(page, "Survey: About Your Child's Leukemia");
+    await assertActivityHeader(page, "Survey: About Your Child's Leukemia (not otherwise specified)");
     const surveyAboutCancerPage = new SurveyAboutCancerPage(page);
     await surveyAboutCancerPage.waitForReady();
     await surveyAboutCancerPage.diagnosedDate('March', '2015');
@@ -94,8 +97,8 @@ test.describe('Enroll child ', () => {
     await surveyAboutYou.waitForReady();
     await surveyAboutYou.sexAssignedAtBirth().radioButton('Male', { exactMatch: true }).locator('label').click();
     await surveyAboutYou.checkGenderIdentity('Boy');
-    await surveyAboutYou.checkCategoriesDescribesYou('White');
-    await surveyAboutYou.checkCategoriesDescribesYou('English');
+    await surveyAboutYou.checkRaceCategoriesDescribesYou('White');
+    await surveyAboutYou.checkRaceCategoriesDescribesYou('English');
     await surveyAboutYou.howDidYouHearAboutProject().check('Social media (Facebook, Twitter, Instagram, etc.)');
     await surveyAboutYou.howDidYouHearAboutProject().check('Facebook', { exactMatch: true });
     await surveyAboutYou.howDidYouHearAboutProject().check('YouTube', { exactMatch: true });
@@ -117,7 +120,11 @@ test.describe('Enroll child ', () => {
     await expect(await statusResearchCell?.innerText()).toEqual('Complete');
     const statusMedicalReleaseCell = await table.findCell('Form', 'Medical Release Form', 'Status');
     await expect(await statusMedicalReleaseCell?.innerText()).toEqual('Complete');
-    const statusCervicalCancerCell = await table.findCell('Form', "Survey: Your Child's Leukemia", 'Status');
+    const statusCervicalCancerCell = await table.findCell(
+      'Form',
+      "Survey: Your Child's Leukemia (not otherwise specified)",
+      'Status'
+    );
     await expect(await statusCervicalCancerCell?.innerText()).toEqual('Complete');
     const statusAboutYouCell = await table.findCell('Form', 'Survey: About Your Child', 'Status');
     await expect(await statusAboutYouCell?.innerText()).toEqual('Complete');

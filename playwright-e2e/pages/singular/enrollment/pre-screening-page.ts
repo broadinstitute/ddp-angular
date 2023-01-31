@@ -2,12 +2,11 @@ import { expect, Locator, Page } from '@playwright/test';
 import * as fake from 'data/fake-user.json';
 import Input from 'lib/widget/input';
 import Question from 'lib/component/Question';
+import { SingularPage } from 'pages/singular/singular-page';
 
-export default class PreScreeningPage {
-  page: Page;
-
+export default class PreScreeningPage extends SingularPage {
   constructor(page: Page) {
-    this.page = page;
+    super(page);
   }
 
   async waitForReady(): Promise<void> {
@@ -30,24 +29,6 @@ export default class PreScreeningPage {
    */
   age(): Input {
     return new Input(this.page, { ddpTestID: 'answer:PREQUAL_AGE' });
-  }
-
-  /**
-   * <br> Question: Where do you currently live?
-   * <br> Select Country
-   * <br> Type: Select
-   */
-  country(): Question {
-    return new Question(this.page, { prompt: 'Select Country' });
-  }
-
-  /**
-   * <br> Question: Select State (US and Canada)
-   * <br> Select State
-   * <br> Type: Select
-   */
-  state(): Question {
-    return new Question(this.page, { prompt: 'Select State' });
   }
 
   /**

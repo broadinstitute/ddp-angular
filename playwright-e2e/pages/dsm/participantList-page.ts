@@ -10,7 +10,7 @@ export enum SearchFieldLabel {
 }
 
 export default class ParticipantListPage {
-  private readonly table: Table = new Table(this.page);
+  private readonly table: Table = new Table(this.page, { cssClassAttribute: '.table' });
   private readonly pageTitle: string = 'Participant List';
 
   constructor(private readonly page: Page) {}
@@ -65,17 +65,13 @@ export default class ParticipantListPage {
     return await this.table.cell(rowIndex, 2).innerText();
   }
 
-  private async participantsCount(): Promise<number> {
-    return await this.table.rowLocator().count();
-  }
-
   /* assertions */
   async assertPageTitle(): Promise<void> {
     await expect(this.getTitle).toHaveText(this.pageTitle, { timeout: 30 * 1000 });
   }
 
   async assertParticipantsCountGreaterOrEqual(value: number): Promise<void> {
-    await expect(await this.participantsCount()).toBeGreaterThanOrEqual(value);
+    await expect(await this.table.rowLocator().count()).toBeGreaterThanOrEqual(value);
   }
 
   async assertParticipantsCount(count: number) {
