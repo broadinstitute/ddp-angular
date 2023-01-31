@@ -145,6 +145,12 @@
       "path": "./projects/ddp-dsm-ui/tsconfig.spec.json"
     },
     {
+      "path": "./projects/study-builder-ui/tsconfig.app.json"
+    },
+    {
+      "path": "./projects/study-builder-ui/tsconfig.spec.json"
+    },
+    {
       "path": "./projects/ddp-fon/tsconfig.app.json"
     },
     {
