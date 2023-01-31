@@ -18,7 +18,7 @@ export default class PreScreeningAgeLocationPage extends PancanPageBase {
     return new Input(this.page, { ddpTestID: PatientsData[this.patient].ddpTestID.age });
   }
 
-  async enterInformationAboutAgeLocation(
+  async fillInAgeLocation(
     opts: {
       age?: string;
       country?: string;

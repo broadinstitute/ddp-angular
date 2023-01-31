@@ -38,7 +38,7 @@ test.describe('Enroll myself as adult', () => {
     //age/location page
     const preScreeningAgeLocationPage = new PreScreeningAgeLocationPage(page);
     await preScreeningAgeLocationPage.waitForReady();
-    await preScreeningAgeLocationPage.enterInformationAboutAgeLocation();
+    await preScreeningAgeLocationPage.fillInAgeLocation();
 
     // Step 2
     // Enter email alias and password to create new account

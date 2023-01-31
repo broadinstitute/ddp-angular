@@ -8,15 +8,15 @@ export default class Question {
   private readonly locator: Locator;
   private readonly rootLocator: Locator;
 
-  constructor(page: Page, opts: { prompt?: string | RegExp; classAttr?: string; parentSelector?: Locator }) {
-    const { prompt, classAttr, parentSelector } = opts;
+  constructor(page: Page, opts: { prompt?: string | RegExp; cssClassAttribute?: string; parentSelector?: Locator }) {
+    const { prompt, cssClassAttribute, parentSelector } = opts;
     this.page = page;
     this.rootLocator = parentSelector ? parentSelector : this.page.locator('ddp-activity-question');
     // Look for text somewhere inside element. Text matching is case-insensitive and searches for a substring or regex.
     // Caution: If text contains a punctuation colon or/and single quote, find is likely to fail.
     this.locator = prompt
       ? this.rootLocator.filter({ hasText: prompt })
-      : this.rootLocator.filter({ has: this.page.locator(`css=.${classAttr}`) });
+      : this.rootLocator.filter({ has: this.page.locator(`css=${cssClassAttribute}`) });
   }
 
   toLocator(): Locator {

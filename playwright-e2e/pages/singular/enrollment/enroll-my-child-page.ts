@@ -51,6 +51,6 @@ export default class EnrollMyChildPage extends SingularPage {
   }
 
   state(): Question {
-    return new Question(this.page, { classAttr: 'picklist-answer-ADD_PARTICIPANT_STATE_CHILD' });
+    return new Question(this.page, { cssClassAttribute: '.picklist-answer-ADD_PARTICIPANT_STATE_CHILD' });
   }
 }

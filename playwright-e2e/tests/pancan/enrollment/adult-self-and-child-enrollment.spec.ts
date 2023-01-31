@@ -52,7 +52,7 @@ test.describe('Adult self-enroll & child (consent) enrollment', () => {
     // On Age and location page
     const preScreeningAgeLocationPage = new PreScreeningAgeLocationPage(page);
     await preScreeningAgeLocationPage.waitForReady();
-    await preScreeningAgeLocationPage.enterInformationAboutAgeLocation();
+    await preScreeningAgeLocationPage.fillInAgeLocation();
 
     // Step 2
     // Enter email alias and password to create new account
@@ -164,7 +164,7 @@ test.describe('Adult self-enroll & child (consent) enrollment', () => {
     // On Age/location page
     const childPreScreeningAgeLocationPage = new PreScreeningAgeLocationPage(page, 'secondChild');
     await childPreScreeningAgeLocationPage.waitForReady();
-    await childPreScreeningAgeLocationPage.enterInformationAboutAgeLocation({ age: user.secondChild.age });
+    await childPreScreeningAgeLocationPage.fillInAgeLocation({ age: user.secondChild.age });
 
     // On "Consent Form" page, Page 1 of 3.
     await assertActivityHeader(page, PatientsData.secondChild.researchContentForm);
