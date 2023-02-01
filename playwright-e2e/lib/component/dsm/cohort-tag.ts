@@ -14,13 +14,22 @@ export default class CohortTag {
     await this.page.keyboard.press('Escape');
   }
 
-  async delete(tagName: string): Promise<void> {
-    await (await this.get(tagName)).click();
-    await this.page.keyboard.press('Backspace');
+  async removeAllTags(): Promise<void> {
+    const removeButtons = await this.page.locator(`//mat-form-field//mat-chip//button[contains(@class, 'mat-chip-remove')]`);
+    const removeButtonsCount = await removeButtons.count();
+    if(removeButtonsCount > 0) {
+      for(let i = 0; i < removeButtonsCount; i++) {
+        await removeButtons.nth(i).click();
+      }
+    }
   }
 
-  public get(tagName: string): Locator {
-    return this.page.locator(`//mat-chip[normalize-space(text())='${tagName}']`);
+  async remove(tagName: string): Promise<void> {
+    await this.getRemoveButtonFor(tagName).click();
+  }
+
+  public getRemoveButtonFor(tagName: string): Locator {
+    return this.page.locator(`//mat-chip[normalize-space(text())='${tagName}']//button[contains(@class, 'mat-chip-remove')]`);
   }
 
   public get inputField(): Locator {

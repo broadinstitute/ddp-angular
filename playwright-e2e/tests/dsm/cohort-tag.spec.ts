@@ -1,3 +1,4 @@
+const crypto = require('crypto');
 import { test } from '@playwright/test';
 import { login } from 'authentication/auth-dsm';
 import ParticipantListPage from 'pages/dsm/participantList-page';
@@ -27,10 +28,10 @@ test.describe.parallel('', () => {
       await new Select(page, { label: 'Select study' }).selectOption(studyName);
 
       /* Test Values */
-      const cohortTagValue1 = `dsm_rc_testCohortTag_1_${studyName}`;
-      const cohortTagValue2 = `DSM RC ${studyName} testCohortTag_2`;
-      const cohortTagValue3 = `${studyName} testCohortTag_3`;
-      const participantNoteValue = `This is a test note - testNoteValue`;
+      const cohortTagValue1 = `dsm_rc_testCohortTag_1_${studyName} - ${crypto.randomUUID()}`;
+      const cohortTagValue2 = `DSM RC ${studyName} testCohortTag_2 - ${crypto.randomUUID()}`;
+      const cohortTagValue3 = `${studyName} testCohortTag_3 - ${crypto.randomUUID()}`;
+      const participantNoteValue = `This is a test note - testNoteValue - ${crypto.randomUUID()}`;
 
       /* Step-By-Step navigation through the website and making assertions as needed */
       await homePage.assertWelcomeTitle();
@@ -50,8 +51,10 @@ test.describe.parallel('', () => {
 
       await participantPage.assertPageTitle();
 
+      await cohortTag.removeAllTags();
+
       await cohortTag.add(cohortTagValue1);
-      await cohortTag.delete(cohortTagValue1);
+      await cohortTag.remove(cohortTagValue1);
       await cohortTag.add(cohortTagValue2);
       await cohortTag.add(cohortTagValue3);
       await participantPage.fillParticipantNotes(participantNoteValue);
@@ -67,7 +70,7 @@ test.describe.parallel('', () => {
       await cohortTag.assertCohortTagToHaveCount(cohortTagValue1, 0);
       await cohortTag.assertCohortTagToHaveCount(cohortTagValue2, 1);
 
-      await cohortTag.delete(cohortTagValue2);
+      await cohortTag.remove(cohortTagValue2);
 
       await cohortTag.assertCohortTagToHaveCount(cohortTagValue3, 1);
 
@@ -86,7 +89,7 @@ test.describe.parallel('', () => {
 
       await cohortTag.assertCohortTagToHaveCount(cohortTagValue3, 1);
 
-      await cohortTag.delete(cohortTagValue3);
+      await cohortTag.remove(cohortTagValue3);
 
       await cohortTag.assertCohortTagToHaveCount(cohortTagValue3, 0);
     });
