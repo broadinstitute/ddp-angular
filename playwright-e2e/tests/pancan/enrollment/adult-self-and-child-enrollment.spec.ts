@@ -37,7 +37,10 @@ test.describe('Adult self-enroll & child (consent) enrollment', () => {
     await preScreeningPage.next();
 
     await assertActivityHeader(page, 'Lets get started');
-    await expect(page.locator('p')).toHaveText('About You');
+    await expect(page.locator('p')).toHaveText(
+      'We will first ask about your experiences with cancer. ' +
+        "Once you arrive at the Dashboard you will be able to add details about your child's experience with cancer."
+    );
     await preScreeningPage.next();
 
     // On Diagnosis page
