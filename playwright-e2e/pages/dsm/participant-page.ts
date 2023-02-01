@@ -14,7 +14,7 @@ export default class ParticipantPage {
   }
 
   async fillParticipantNotes(value: string): Promise<void> {
-    const textArea = await this.getTextArea;
+    const textArea = this.getTextArea;
     await textArea.fill(value);
     await textArea.blur();
   }
