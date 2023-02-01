@@ -1,6 +1,6 @@
 import { Locator, Page } from '@playwright/test';
 import Button from 'lib/widget/button';
-import Input from 'lib/widget/Input';
+import Input from 'lib/widget/input';
 import Select from 'lib/widget/select';
 
 export default class Institution {

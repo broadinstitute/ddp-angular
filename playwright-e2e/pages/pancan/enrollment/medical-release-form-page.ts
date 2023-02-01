@@ -1,5 +1,5 @@
 import { Page } from '@playwright/test';
-import Input from 'lib/widget/Input';
+import Input from 'lib/widget/input';
 import { PancanPage } from 'pages/pancan/pancan-page';
 import * as user from 'data/fake-user.json';
 import Question from 'lib/component/Question';
