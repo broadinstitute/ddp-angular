@@ -9,9 +9,14 @@ export default class ParticipantPage {
     return this.page.locator('h1');
   }
 
+  public get getTextArea(): Locator {
+    return this.page.locator('//table[.//td[contains(normalize-space(),"Participant Notes")]]//td/textarea');
+  }
+
   async fillParticipantNotes(value: string): Promise<void> {
-    await this.page.fill('textarea:right-of(:text("Participant Notes"))', value);
-    await this.page.keyboard.press('Tab');
+    const textArea = await this.getTextArea;
+    await textArea.fill(value);
+    await textArea.blur();
   }
 
   async backToList(): Promise<void> {
