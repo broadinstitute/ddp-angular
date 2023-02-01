@@ -5,6 +5,7 @@ export default class CohortTag {
 
   async add(tagName: string): Promise<void> {
     await this.inputField.fill(tagName);
+    // bluring the input element is enough to insert value
     await this.inputField.blur();
   }
 

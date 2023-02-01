@@ -53,7 +53,7 @@ export default class ParticipantListPage {
   }
 
   public async addBulkCohortTags(): Promise<void> {
-    await this.page.locator('button:right-of(:text("Initial MR Received"))').nth(17).click();
+    await this.page.locator('//button[.//*[@tooltip="Bulk Cohort Tag"]]').click();
   }
 
   public async clickParticipantAt(rowIndex: number): Promise<ParticipantPage> {

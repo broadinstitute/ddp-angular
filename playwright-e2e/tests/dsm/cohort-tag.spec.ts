@@ -51,7 +51,10 @@ test.describe.parallel('', () => {
 
       await participantPage.assertPageTitle();
 
-      await cohortTag.removeAllTags();
+      /*
+       @NOTE Don't delete me
+       */
+      // await cohortTag.removeAllTags();
 
       await cohortTag.add(cohortTagValue1);
       await cohortTag.remove(cohortTagValue1);
