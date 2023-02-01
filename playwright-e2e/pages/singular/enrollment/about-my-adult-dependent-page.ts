@@ -1,5 +1,5 @@
 import { Page } from '@playwright/test';
-import Input from 'lib/widget/Input';
+import Input from 'lib/widget/input';
 import { SingularPage } from 'pages/singular/singular-page';
 
 export default class AboutMyAdultDependentPage extends SingularPage {

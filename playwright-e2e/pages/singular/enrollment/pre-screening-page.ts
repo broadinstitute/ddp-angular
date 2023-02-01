@@ -1,6 +1,6 @@
 import { expect, Locator, Page } from '@playwright/test';
 import * as fake from 'data/fake-user.json';
-import Input from 'lib/widget/Input';
+import Input from 'lib/widget/input';
 import Question from 'lib/component/Question';
 
 export default class PreScreeningPage {
