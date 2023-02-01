@@ -1,4 +1,3 @@
-const crypto = require('crypto');
 import { test } from '@playwright/test';
 import { login } from 'authentication/auth-dsm';
 import ParticipantListPage from 'pages/dsm/participantList-page';
@@ -8,6 +7,7 @@ import CohortTag from 'lib/component/dsm/cohort-tag';
 import Select from 'lib/widget/select';
 import { StudyNav } from 'lib/component/dsm/navigation/enums/studyNav.enum';
 import { Navigation } from 'lib/component/dsm/navigation/navigation';
+import * as crypto from 'crypto';
 
 test.describe.parallel('', () => {
   let homePage: HomePage;
@@ -28,10 +28,10 @@ test.describe.parallel('', () => {
       await new Select(page, { label: 'Select study' }).selectOption(studyName);
 
       /* Test Values */
-      const cohortTagValue1 = `dsm_rc_testCohortTag_1_${studyName} - ${crypto.randomUUID()}`;
-      const cohortTagValue2 = `DSM RC ${studyName} testCohortTag_2 - ${crypto.randomUUID()}`;
-      const cohortTagValue3 = `${studyName} testCohortTag_3 - ${crypto.randomUUID()}`;
-      const participantNoteValue = `This is a test note - testNoteValue - ${crypto.randomUUID()}`;
+      const cohortTagValue1 = `dsm_1_${studyName}-${crypto.randomUUID()}`;
+      const cohortTagValue2 = `dsm_2_${studyName}-${crypto.randomUUID()}`;
+      const cohortTagValue3 = `dsm_3_${studyName}-${crypto.randomUUID()}`;
+      const participantNoteValue = `This is a test note_${studyName}-${crypto.randomUUID()}`;
 
       /* Step-By-Step navigation through the website and making assertions as needed */
       await homePage.assertWelcomeTitle();

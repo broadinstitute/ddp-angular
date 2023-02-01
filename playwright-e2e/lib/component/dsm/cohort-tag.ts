@@ -5,7 +5,7 @@ export default class CohortTag {
 
   async add(tagName: string): Promise<void> {
     await this.inputField.fill(tagName);
-    await this.page.keyboard.press('Enter');
+    await this.inputField.blur();
   }
 
   async submitAndExit(): Promise<void> {
@@ -17,8 +17,8 @@ export default class CohortTag {
   async removeAllTags(): Promise<void> {
     const removeButtons = await this.page.locator(`//mat-form-field//mat-chip//button[contains(@class, 'mat-chip-remove')]`);
     const removeButtonsCount = await removeButtons.count();
-    if(removeButtonsCount > 0) {
-      for(let i = 0; i < removeButtonsCount; i++) {
+    if (removeButtonsCount > 0) {
+      for (let i = 0; i < removeButtonsCount; i++) {
         await removeButtons.nth(i).click();
       }
     }
