@@ -599,7 +599,7 @@ jobs:
       env:
         default: dev
         type: enum
-        enum: [ dev, test, UNKNOWN ]
+        enum: [ dev, test, staging, prod, UNKNOWN ]
     steps:
       - halt-playwright-test-check:
           env: << parameters.env >>
