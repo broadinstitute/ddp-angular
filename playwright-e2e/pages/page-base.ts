@@ -1,7 +1,7 @@
 import { expect, Locator, Page, Response } from '@playwright/test';
 import Address from 'lib/component/address';
 import Question from 'lib/component/Question';
-import Input from 'lib/widget/Input';
+import Input from 'lib/widget/input';
 import { generateRandomPhoneNum } from 'utils/faker-utils';
 import { waitForNoSpinner } from 'utils/test-utils';
 import { PageInterface } from './page-interface';
