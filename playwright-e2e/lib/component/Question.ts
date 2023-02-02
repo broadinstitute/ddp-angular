@@ -1,4 +1,5 @@
 import { expect, Locator, Page } from '@playwright/test';
+import Button from 'lib/widget/button';
 import Checkbox from 'lib/widget/checkbox';
 import Select from 'lib/widget/select';
 
@@ -7,15 +8,15 @@ export default class Question {
   private readonly locator: Locator;
   private readonly rootLocator: Locator;
 
-  constructor(page: Page, opts: { prompt?: string | RegExp; classAttr?: string; parentSelector?: Locator }) {
-    const { prompt, classAttr, parentSelector } = opts;
+  constructor(page: Page, opts: { prompt?: string | RegExp; cssClassAttribute?: string; parentSelector?: Locator }) {
+    const { prompt, cssClassAttribute, parentSelector } = opts;
     this.page = page;
     this.rootLocator = parentSelector ? parentSelector : this.page.locator('ddp-activity-question');
     // Look for text somewhere inside element. Text matching is case-insensitive and searches for a substring or regex.
     // Caution: If text contains a punctuation colon or/and single quote, find is likely to fail.
     this.locator = prompt
       ? this.rootLocator.filter({ hasText: prompt })
-      : this.rootLocator.filter({ has: this.page.locator(`css=.${classAttr}`) });
+      : this.rootLocator.filter({ has: this.page.locator(`css=${cssClassAttribute}`) });
   }
 
   toLocator(): Locator {
@@ -24,6 +25,13 @@ export default class Question {
 
   errorMessage(): Locator {
     return this.toLocator().locator('.ErrorMessage');
+  }
+
+  button(label: string): Button {
+    return new Button(this.page, {
+      label,
+      root: this.rootLocator
+    });
   }
 
   /**
@@ -88,12 +96,23 @@ export default class Question {
   }
 
   /**
-   * Typing text or numerical value
+   * Typing text. If text triggers an autocomplete dropdown, automatically selects the first option.
    * @param value
    */
   async fill(value: string): Promise<void> {
-    await this.input().fill(value);
-    await this.input().press('Tab');
+    const input = this.input();
+    const autocomplete = await input.getAttribute('aria-autocomplete');
+    await input.fill(value);
+    const expanded = await input.getAttribute('aria-expanded');
+    if (autocomplete === 'list' && expanded === 'true') {
+      const dropdown = this.page.locator('.mat-autocomplete-visible[role="listbox"][id]');
+      await dropdown
+        .locator('mat-option:visible', { hasText: new RegExp(value) })
+        .first()
+        .click();
+    } else {
+      await input.press('Tab');
+    }
   }
 
   /**

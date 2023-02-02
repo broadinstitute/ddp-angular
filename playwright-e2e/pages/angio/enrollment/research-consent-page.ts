@@ -118,17 +118,6 @@ export default class ResearchConsentPage extends AngioPageBase {
     await question.select().selectOption(answer);
   }
 
-  /**
-   * <br> Question: What country do you live in?
-   * <br> Type: Select
-   */
-  async country(answer: string): Promise<void> {
-    const question = new Question(this.page, {
-      prompt: 'What country do you live in?'
-    });
-    await question.select().selectOption(answer);
-  }
-
   private async questionHelper(question: Question, checkboxes: string[], inputText?: string[]) {
     for (let i = 0; i < checkboxes.length; i++) {
       if (inputText) {

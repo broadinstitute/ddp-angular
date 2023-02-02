@@ -33,13 +33,12 @@ test.describe('Enroll myself as adult', () => {
     //diagnosis page
     const preScreeningDiagnosisPage = new PreScreeningDiagnosisPage(page);
     await preScreeningDiagnosisPage.waitForReady();
-    await preScreeningDiagnosisPage.cancerDiagnosed().input().fill(PatientsData.adult.cancerDiagnosed.typeCancer);
-    await page.waitForResponse((resp) => resp.url().includes('/answers') && resp.status() === 200);
+    await preScreeningDiagnosisPage.cancerDiagnosed().fill(PatientsData.adult.cancerDiagnosed.typeCancer);
     await preScreeningDiagnosisPage.next();
     //age/location page
     const preScreeningAgeLocationPage = new PreScreeningAgeLocationPage(page);
     await preScreeningAgeLocationPage.waitForReady();
-    await preScreeningAgeLocationPage.enterInformationAboutAgeLocation();
+    await preScreeningAgeLocationPage.fillInAgeLocation();
 
     // Step 2
     // Enter email alias and password to create new account
@@ -56,8 +55,8 @@ test.describe('Enroll myself as adult', () => {
     await consentFormPage.next();
     // On "Consent Form" page, Page 3 of 3.
     await assertActivityStep(page, '3');
-    await consentFormPage.bloodSamples();
-    await consentFormPage.cancerSamples();
+    await consentFormPage.agreeToBloodSamples();
+    await consentFormPage.agreeToStoreCancerSamples();
     await consentFormPage.firstName().fill(user.patient.firstName);
     await consentFormPage.lastName().fill(lastName);
     await consentFormPage.fillInDateOfBirth(user.patient.birthDate.MM, user.patient.birthDate.DD, user.patient.birthDate.YYYY);
@@ -71,8 +70,8 @@ test.describe('Enroll myself as adult', () => {
     await assertActivityHeader(page, 'Medical Release Form');
     const medicalReleaseFormPage = new MedicalReleaseFormPage(page);
     await medicalReleaseFormPage.waitForReady();
-    await medicalReleaseFormPage.enterPhysicianData();
-    await medicalReleaseFormPage.contactPhysician().check();
+    await medicalReleaseFormPage.fillInInPhysicianData();
+    await medicalReleaseFormPage.agreeToAllowContactPhysician().check();
     await medicalReleaseFormPage.submit();
 
     //Survey: About Cervical Cancer
@@ -93,8 +92,8 @@ test.describe('Enroll myself as adult', () => {
     await surveyAboutYou.waitForReady();
     await surveyAboutYou.sexAssignedAtBirth().radioButton('Male', { exactMatch: true }).locator('label').click();
     await surveyAboutYou.checkGenderIdentity('Man');
-    await surveyAboutYou.checkCategoriesDescribesYou('White');
-    await surveyAboutYou.checkCategoriesDescribesYou('English');
+    await surveyAboutYou.checkRaceCategoriesDescribesYou('White');
+    await surveyAboutYou.checkRaceCategoriesDescribesYou('English');
     await surveyAboutYou.howDidYouHearAboutProject().check('Social media (Facebook, Twitter, Instagram, etc.)');
     await surveyAboutYou.howDidYouHearAboutProject().check('Facebook', { exactMatch: true });
     await surveyAboutYou.submit();

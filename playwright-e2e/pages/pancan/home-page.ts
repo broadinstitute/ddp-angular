@@ -1,9 +1,9 @@
 import { expect, Locator, Page } from '@playwright/test';
-import { PancanPage } from 'pages/pancan/pancan-page';
+import { PancanPageBase } from 'pages/pancan/pancan-page-base';
 import { HomePageInterface } from 'pages/page-interface';
 import * as auth from 'authentication/auth-pancan';
 
-export default class HomePage extends PancanPage implements HomePageInterface {
+export default class HomePage extends PancanPageBase implements HomePageInterface {
   constructor(page: Page) {
     super(page);
   }

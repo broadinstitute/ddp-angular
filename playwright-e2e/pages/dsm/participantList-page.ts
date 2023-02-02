@@ -10,7 +10,7 @@ export enum SearchFieldLabel {
 }
 
 export default class ParticipantListPage {
-  private readonly table: Table = new Table(this.page);
+  private readonly table: Table = new Table(this.page, { cssClassAttribute: '.table' });
   private readonly pageTitle: string = 'Participant List';
 
   constructor(private readonly page: Page) {}

@@ -1,4 +1,4 @@
-import { Locator, Page } from '@playwright/test';
+import { Page } from '@playwright/test';
 import { SingularPage } from 'pages/singular/singular-page';
 import Question from 'lib/component/Question';
 import Input from 'lib/widget/input';
@@ -38,19 +38,5 @@ export default class EnrollMyChildPage extends SingularPage {
     return new Question(this.page, {
       prompt: "Who in your child's family has single ventricle heart defect?"
     });
-  }
-
-  /**
-   * <br> Question: Where does your child currently live?
-   * <br> Type: Select Country
-   */
-  whereDoesChildLive(): Question {
-    return new Question(this.page, {
-      prompt: 'Where does your child currently live?'
-    });
-  }
-
-  state(): Locator {
-    return new Question(this.page, { prompt: 'Select State' }).select();
   }
 }
