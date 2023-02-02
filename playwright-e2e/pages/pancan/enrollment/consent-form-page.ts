@@ -1,6 +1,6 @@
 import { Page } from '@playwright/test';
 import Question from 'lib/component/Question';
-import Input from 'lib/widget/Input';
+import Input from 'lib/widget/input';
 import { PancanPageBase } from 'pages/pancan/pancan-page-base';
 import { PatientsData, TypePatient } from 'pages/patient-type';
 import { generateUserName } from 'utils/faker-utils';

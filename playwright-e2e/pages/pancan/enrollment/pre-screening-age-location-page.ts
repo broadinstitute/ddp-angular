@@ -1,5 +1,5 @@
 import { Page } from '@playwright/test';
-import Input from 'lib/widget/Input';
+import Input from 'lib/widget/input';
 import { PancanPageBase } from 'pages/pancan/pancan-page-base';
 import * as fake from 'data/fake-user.json';
 import { PatientsData, TypePatient } from 'pages/patient-type';

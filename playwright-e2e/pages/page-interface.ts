@@ -1,6 +1,6 @@
 import { Locator, Response } from '@playwright/test';
 import Question from 'lib/component/Question';
-import Input from 'lib/widget/Input';
+import Input from 'lib/widget/input';
 
 export interface PageInterface {
   gotoURL(url: string): Promise<Response | null>;
