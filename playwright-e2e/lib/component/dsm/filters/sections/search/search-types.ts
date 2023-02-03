@@ -1,4 +1,4 @@
-import {AdditionalFilter} from "./search-enums";
+import { AdditionalFilter } from './search-enums';
 
 type Today = 'today';
 type AdditionalFilters = AdditionalFilter[];

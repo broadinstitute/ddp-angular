@@ -33,7 +33,7 @@ test.describe('Singular Study in DSM', () => {
     const searchPanel = participantListPage.filters.searchPanel;
 
     await searchPanel.open();
-    await searchPanel.text('Short ID', {textValue: shortId});
+    await searchPanel.text('Short ID', { textValue: shortId });
     await searchPanel.search();
 
     await participantListPage.assertParticipantsCount(1);

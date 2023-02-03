@@ -1,8 +1,8 @@
-import {Locator, Page} from "@playwright/test";
+import { Locator, Page } from '@playwright/test';
 
 export class CustomizeView {
-  private activeColumnsGroup: string = '';
-  constructor(private readonly page: Page) {};
+  private activeColumnsGroup = '';
+  constructor(private readonly page: Page) {}
 
   public async open(): Promise<void> {
     await this.page.locator(this.openButtonXPath).click();
@@ -11,7 +11,7 @@ export class CustomizeView {
   public async selectColumns(columnsGroupName: string, columns: string[]): Promise<void> {
     this.activeColumnsGroup = columnsGroupName;
     await this.openColumnsGroup();
-    for(let column of columns) {
+    for (const column of columns) {
       await this.selectColumn(column);
     }
     await this.closeColumnsGroup();
@@ -21,18 +21,17 @@ export class CustomizeView {
     const columnXPath = this.columnsGroupXPath + this.columnPathXPath(columnName);
     const column = this.locator(columnXPath);
 
-    !await this.isChecked(column) && await this.locator(columnXPath).click();
+    !(await this.isChecked(column)) && (await this.locator(columnXPath).click());
   }
-
 
   private async openColumnsGroup(): Promise<void> {
     const columnsGroupButton = this.columnsGroupButton;
-    !await this.isExpanded(columnsGroupButton) && await columnsGroupButton.click();
+    !(await this.isExpanded(columnsGroupButton)) && (await columnsGroupButton.click());
   }
 
   private async closeColumnsGroup(): Promise<void> {
     const columnsGroupButton = this.columnsGroupButton;
-    await this.isExpanded(columnsGroupButton) && await columnsGroupButton.click();
+    (await this.isExpanded(columnsGroupButton)) && (await columnsGroupButton.click());
   }
 
   private get columnsGroupButton(): Locator {
@@ -49,16 +48,18 @@ export class CustomizeView {
     return isExpanded === 'true' || false;
   }
 
-
-
   /* Locators */
 
   private locator(XPath: string): Locator {
     return this.page.locator(XPath);
   }
+
   /* XPaths */
   private get openButtonXPath(): string {
-    return `//div[text()[normalize-space()='Customize View'] and button[.//*[local-name()='svg' and @data-icon='server']/*[local-name()='path']]]/button`
+    return (
+      "//div[text()[normalize-space()='Customize View'] and " +
+      "button[.//*[local-name()='svg' and @data-icon='server']/*[local-name()='path']]]/button"
+    );
   }
 
   private get columnsGroupXPath(): string {
@@ -66,6 +67,6 @@ export class CustomizeView {
   }
 
   private columnPathXPath(columnName: string): string {
-    return `/ul/li/mat-checkbox[label[*[text()[normalize-space()='${columnName}']]]]`
+    return `/ul/li/mat-checkbox[label[*[text()[normalize-space()='${columnName}']]]]`;
   }
 }

@@ -1,6 +1,6 @@
-import {Locator, Page} from "@playwright/test";
-import {CustomizeView} from "./sections/customize-view";
-import {Search} from "./sections/search/search";
+import { Locator, Page } from '@playwright/test';
+import { CustomizeView } from './sections/customize-view';
+import { Search } from './sections/search/search';
 
 export class Filters {
   private readonly CustomizeView: CustomizeView = new CustomizeView(this.page);
@@ -25,7 +25,9 @@ export class Filters {
   }
 
   private get reloadWithDefaultFiltersXPath(): string {
-    return `//div[text()[normalize-space()='Reload With Default Filter'] and button[.//*[local-name()='svg' and @data-icon='sync-alt']/*[local-name()='path']]]/button`
+    return (
+      "//div[text()[normalize-space()='Reload With Default Filter'] " +
+      "and button[.//*[local-name()='svg' and @data-icon='sync-alt']/*[local-name()='path']]]/button"
+    );
   }
-
 }

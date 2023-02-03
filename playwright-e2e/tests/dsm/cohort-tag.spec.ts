@@ -1,14 +1,14 @@
-import {test} from '@playwright/test';
-import {login} from 'authentication/auth-dsm';
+import { test } from '@playwright/test';
+import { login } from 'authentication/auth-dsm';
 import ParticipantListPage from 'pages/dsm/participantList-page';
 import HomePage from 'pages/dsm/home-page';
 import ParticipantPage from 'pages/dsm/participant-page';
 import CohortTag from 'lib/component/dsm/cohort-tag';
 import Select from 'lib/widget/select';
-import {StudyNav} from 'lib/component/dsm/navigation/enums/studyNav.enum';
-import {Navigation} from 'lib/component/dsm/navigation/navigation';
+import { StudyNav } from 'lib/component/dsm/navigation/enums/studyNav.enum';
+import { Navigation } from 'lib/component/dsm/navigation/navigation';
 import * as crypto from 'crypto';
-import {AdditionalFilter} from "../../lib/component/dsm/filters/sections/search/search-enums";
+import { AdditionalFilter } from '../../lib/component/dsm/filters/sections/search/search-enums';
 
 test.describe.parallel('', () => {
   let homePage: HomePage;
@@ -51,8 +51,8 @@ test.describe.parallel('', () => {
       await customizeViewPanel.selectColumns('Participant Columns', ['Status']);
 
       await searchPanel.open();
-      await searchPanel.dates('Initial MR Received', {additionalFilters: [AdditionalFilter.NOT_EMPTY]})
-      await searchPanel.checkboxes('Status', {checkboxValues: ['Enrolled']});
+      await searchPanel.dates('Initial MR Received', { additionalFilters: [AdditionalFilter.NOT_EMPTY] });
+      await searchPanel.checkboxes('Status', { checkboxValues: ['Enrolled'] });
 
       await participantListPage.waitForReady();
 
@@ -83,8 +83,8 @@ test.describe.parallel('', () => {
       await customizeViewPanel.selectColumns('Participant Columns', ['Status']);
 
       await searchPanel.open();
-      await searchPanel.dates('Initial MR Received', {additionalFilters: [AdditionalFilter.NOT_EMPTY]})
-      await searchPanel.checkboxes('Status', {checkboxValues: ['Enrolled']});
+      await searchPanel.dates('Initial MR Received', { additionalFilters: [AdditionalFilter.NOT_EMPTY] });
+      await searchPanel.checkboxes('Status', { checkboxValues: ['Enrolled'] });
 
       await participantListPage.clickParticipantAt(0);
 

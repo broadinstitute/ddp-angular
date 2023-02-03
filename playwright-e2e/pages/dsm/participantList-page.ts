@@ -1,16 +1,9 @@
 import { expect, Locator, Page } from '@playwright/test';
-import Input from 'lib/widget/Input';
 import { waitForNoSpinner } from 'utils/test-utils';
 import Table from 'lib/component/table';
 import Checkbox from 'lib/widget/checkbox';
 import ParticipantPage from './participant-page';
-import {Search} from "../../lib/component/dsm/filters/sections/search/search";
-import {CustomizeView} from "../../lib/component/dsm/filters/sections/customize-view";
-import {Filters} from "../../lib/component/dsm/filters/filters";
-
-export enum SearchFieldLabel {
-  ShortId = 'Short ID'
-}
+import { Filters } from '../../lib/component/dsm/filters/filters';
 
 export default class ParticipantListPage {
   private readonly PAGE_TITLE: string = 'Participant List';
