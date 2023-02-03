@@ -1,7 +1,7 @@
 import { test } from '@playwright/test';
 import { login } from 'authentication/auth-dsm';
 import Select from 'lib/widget/select';
-import ParticipantListPage, { SearchFieldLabel } from 'pages/dsm/participantList-page';
+import ParticipantListPage from 'pages/dsm/participantList-page';
 import HomePage from 'pages/dsm/home-page';
 import { StudyNav } from 'lib/component/dsm/navigation/enums/studyNav.enum';
 import { Navigation } from 'lib/component/dsm/navigation/navigation';
@@ -27,9 +27,14 @@ test.describe('Singular Study in DSM', () => {
     await participantListPage.assertPageTitle();
 
     await participantListPage.waitForReady();
-    await participantListPage.openSearchButton().click();
-    const shortId = await participantListPage.getParticipantShortIdAt(2);
-    await participantListPage.search(SearchFieldLabel.ShortId, shortId);
+
+    const shortId = await participantListPage.getParticipantShortIdAt(0);
+
+    const searchPanel = participantListPage.filters.searchPanel;
+
+    await searchPanel.open();
+    await searchPanel.text('Short ID', {textValue: shortId});
+    await searchPanel.search();
 
     await participantListPage.assertParticipantsCount(1);
   });

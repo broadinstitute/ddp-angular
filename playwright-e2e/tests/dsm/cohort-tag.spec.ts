@@ -1,13 +1,14 @@
-import { test } from '@playwright/test';
-import { login } from 'authentication/auth-dsm';
+import {test} from '@playwright/test';
+import {login} from 'authentication/auth-dsm';
 import ParticipantListPage from 'pages/dsm/participantList-page';
 import HomePage from 'pages/dsm/home-page';
 import ParticipantPage from 'pages/dsm/participant-page';
 import CohortTag from 'lib/component/dsm/cohort-tag';
 import Select from 'lib/widget/select';
-import { StudyNav } from 'lib/component/dsm/navigation/enums/studyNav.enum';
-import { Navigation } from 'lib/component/dsm/navigation/navigation';
+import {StudyNav} from 'lib/component/dsm/navigation/enums/studyNav.enum';
+import {Navigation} from 'lib/component/dsm/navigation/navigation';
 import * as crypto from 'crypto';
+import {AdditionalFilter} from "../../lib/component/dsm/filters/sections/search/search-enums";
 
 test.describe.parallel('', () => {
   let homePage: HomePage;
@@ -38,16 +39,26 @@ test.describe.parallel('', () => {
       await homePage.assertSelectedStudyTitle(studyName);
 
       const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(StudyNav.PARTICIPANT_LIST);
+      const customizeViewPanel = participantListPage.filters.customizeViewPanel;
+      const searchPanel = participantListPage.filters.searchPanel;
 
       await participantListPage.assertPageTitle();
 
       await participantListPage.waitForReady();
-      await participantListPage.filterMedicalRecordParticipants();
+
+      await customizeViewPanel.open();
+      await customizeViewPanel.selectColumns('Medical Record Columns', ['Initial MR Received']);
+      await customizeViewPanel.selectColumns('Participant Columns', ['Status']);
+
+      await searchPanel.open();
+      await searchPanel.dates('Initial MR Received', {additionalFilters: [AdditionalFilter.NOT_EMPTY]})
+      await searchPanel.checkboxes('Status', {checkboxValues: ['Enrolled']});
+
       await participantListPage.waitForReady();
 
       await participantListPage.assertParticipantsCountGreaterOrEqual(1);
 
-      const participantPage: ParticipantPage = await participantListPage.clickParticipantAt(1);
+      const participantPage: ParticipantPage = await participantListPage.clickParticipantAt(0);
 
       await participantPage.assertPageTitle();
 
@@ -66,8 +77,16 @@ test.describe.parallel('', () => {
       await participantListPage.assertPageTitle();
 
       await participantListPage.waitForReady();
-      await participantListPage.filterMedicalRecordParticipants();
-      await participantListPage.clickParticipantAt(1);
+
+      await customizeViewPanel.open();
+      await customizeViewPanel.selectColumns('Medical Record Columns', ['Initial MR Received']);
+      await customizeViewPanel.selectColumns('Participant Columns', ['Status']);
+
+      await searchPanel.open();
+      await searchPanel.dates('Initial MR Received', {additionalFilters: [AdditionalFilter.NOT_EMPTY]})
+      await searchPanel.checkboxes('Status', {checkboxValues: ['Enrolled']});
+
+      await participantListPage.clickParticipantAt(0);
 
       await participantPage.assertPageTitle();
       await cohortTag.assertCohortTagToHaveCount(cohortTagValue1, 0);
@@ -88,7 +107,7 @@ test.describe.parallel('', () => {
       await participantListPage.addBulkCohortTags();
       await cohortTag.add(cohortTagValue3);
       await cohortTag.submitAndExit();
-      await participantListPage.clickParticipantAt(1);
+      await participantListPage.clickParticipantAt(0);
 
       await cohortTag.assertCohortTagToHaveCount(cohortTagValue3, 1);
 
