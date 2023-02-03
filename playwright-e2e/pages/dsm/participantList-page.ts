@@ -1,4 +1,5 @@
 import { expect, Locator, Page } from '@playwright/test';
+
 import { waitForNoSpinner } from 'utils/test-utils';
 import Table from 'lib/component/table';
 import Checkbox from 'lib/widget/checkbox';

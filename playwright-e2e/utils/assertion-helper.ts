@@ -1,5 +1,9 @@
 import { expect, Page } from '@playwright/test';
 
+export const assertHeader = async (page: Page, expectedText: string | RegExp) => {
+  await expect(page.locator('h1')).toHaveText(expectedText);
+};
+
 export const assertActivityHeader = async (page: Page, expectedText: string | RegExp) => {
   await expect(page.locator('h1.activity-header')).toHaveText(expectedText);
 };

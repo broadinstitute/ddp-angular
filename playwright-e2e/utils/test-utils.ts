@@ -1,5 +1,5 @@
 import { BrowserContext, Download, expect, Locator, Page } from '@playwright/test';
-import Input from 'lib/widget/Input';
+import Input from 'lib/widget/input';
 import Checkbox from 'lib/widget/checkbox';
 import Radiobutton from 'lib/widget/radiobutton';
 import Select from 'lib/widget/select';
@@ -51,6 +51,7 @@ export async function fillSitePassword(page: Page, password = SITE_PASSWORD): Pr
   if (password == null) {
     throw Error(`Invalid parameter: password is "${SITE_PASSWORD}"`);
   }
+  await page.locator('input[type="password"]').waitFor({ state: 'visible', timeout: 30 * 1000 });
   await page.locator('input[type="password"]').fill(password);
   await Promise.all([page.waitForNavigation(), page.locator('button >> text=Submit').click()]);
 }
