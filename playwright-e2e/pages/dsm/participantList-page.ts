@@ -1,7 +1,6 @@
 import { expect, Locator, Page } from '@playwright/test';
 
 import { waitForNoSpinner } from 'utils/test-utils';
-import Table from 'lib/component/table';
 import Checkbox from 'lib/widget/checkbox';
 import ParticipantPage from './participant-page';
 import { Filters } from '../../lib/component/dsm/filters/filters';
@@ -9,7 +8,6 @@ import { Filters } from '../../lib/component/dsm/filters/filters';
 export default class ParticipantListPage {
   private readonly PAGE_TITLE: string = 'Participant List';
 
-  private readonly _table: Table = new Table(this.page);
   private readonly _filters: Filters = new Filters(this.page);
 
   constructor(private readonly page: Page) {}
@@ -23,7 +21,7 @@ export default class ParticipantListPage {
   }
 
   public async selectParticipant(): Promise<any> {
-    await new Checkbox(this.page, { root: this._table.cell(0, 0) }).check();
+    await new Checkbox(this.page, { root: this.tableRowsLocator.nth(0).locator('[role="cell"], td').nth(0) }).check();
   }
 
   public async addBulkCohortTags(): Promise<void> {
@@ -31,12 +29,12 @@ export default class ParticipantListPage {
   }
 
   public async clickParticipantAt(rowIndex: number): Promise<ParticipantPage> {
-    await this._table.cell(rowIndex, 2).click();
+    await this.tableRowsLocator.nth(rowIndex).locator('[role="cell"], td').nth(2).click();
     return new ParticipantPage(this.page);
   }
 
   public async getParticipantShortIdAt(rowIndex: number): Promise<string> {
-    return await this._table.cell(rowIndex, 2).innerText();
+    return this.tableRowsLocator.nth(rowIndex).locator('[role="cell"], td').nth(2).innerText();
   }
 
   public get filters(): Filters {
@@ -44,7 +42,7 @@ export default class ParticipantListPage {
   }
 
   private async participantsCount(): Promise<number> {
-    return await this._table.rowLocator().count();
+    return await this.tableRowsLocator.count();
   }
 
   /* assertions */
@@ -57,6 +55,10 @@ export default class ParticipantListPage {
   }
 
   async assertParticipantsCount(count: number) {
-    await expect(this._table.rowLocator()).toHaveCount(count);
+    await expect(this.tableRowsLocator).toHaveCount(count);
+  }
+
+  private get tableRowsLocator(): Locator {
+    return this.page.locator('[role="row"]:not([mat-header-row]):not(mat-header-row), tbody tr');
   }
 }
