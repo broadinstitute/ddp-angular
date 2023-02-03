@@ -53,6 +53,7 @@ test.describe.parallel('', () => {
       await searchPanel.open();
       await searchPanel.dates('Initial MR Received', { additionalFilters: [AdditionalFilter.NOT_EMPTY] });
       await searchPanel.checkboxes('Status', { checkboxValues: ['Enrolled'] });
+      await searchPanel.search();
 
       await participantListPage.waitForReady();
 
@@ -85,6 +86,7 @@ test.describe.parallel('', () => {
       await searchPanel.open();
       await searchPanel.dates('Initial MR Received', { additionalFilters: [AdditionalFilter.NOT_EMPTY] });
       await searchPanel.checkboxes('Status', { checkboxValues: ['Enrolled'] });
+      await searchPanel.search();
 
       await participantListPage.clickParticipantAt(0);
 
