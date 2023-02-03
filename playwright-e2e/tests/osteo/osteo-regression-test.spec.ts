@@ -233,7 +233,7 @@ test('Osteo enroll self and kid together', async({ page}) => {
 
 // todo arz consent page for address
 
-  consentAssentPage.fillInContactAddress({fullName: 'The Parent',
+  await consentAssentPage.fillInContactAddress({fullName: 'The Parent',
   country: 'UNITED STATES',
   street:'75 Ames Street',
   city: 'Cambridge', 
@@ -391,7 +391,7 @@ const request = await requestPromise;
 
   const consentPage = new ResearchConsentPage(page);
 
-  consentPage.fillInContactAddress({fullName: 'Andrew Zimmer',
+  await consentPage.fillInContactAddress({fullName: 'Andrew Zimmer',
   country: 'UNITED STATES',
   street:'75 Ames Street',
   city: 'Cambridge', 
@@ -399,9 +399,8 @@ const request = await requestPromise;
   zipCode:'02476', 
   telephone:'5555551212'})
 
-  consentPage.submit();
+  await consentPage.submit();
   
-  await page.getByRole('button', { name: 'Submit' }).click();
   await page.getByRole('heading', { name: 'Consent Form Addendum: Learning About Your Tumor' }).click();
   await page.getByText('Introduction').click();
   await page.getByText('This consent addendum gives new information about the research study in which yo').click();
