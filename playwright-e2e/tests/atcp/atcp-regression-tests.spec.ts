@@ -46,7 +46,7 @@ test('Test Signup', async ({ page }) => {
   await page.getByLabel('Password *').fill('broad_institute');
   await page.getByLabel('Password *').press('Enter');
   await page.locator('#join-us-nav').click();
-  // sometimes fails here, seems like click to join us is unreliable
+  await page.waitForTimeout(1000);
   await testutils.findTextInput(page,'answer:PREQUAL_FIRST_NAME').fill('TestLast');
   await testutils.findTextInput(page,'answer:PREQUAL_LAST_NAME').fill('TestFirst');
   //await page.locator('.mat-form-field-infix').first().click();
@@ -83,10 +83,7 @@ test('Test Signup', async ({ page }) => {
   await page.getByText('Registration').click();
   await page.getByLabel('Participant\'s First Name*').click();
   await page.getByRole('combobox', { name: 'Participant\'s First Name*' }).fill('Andrew');
-  await page.getByRole('combobox', { name: 'Participant\'s First Name*' }).press('Tab');
   await page.getByRole('combobox', { name: 'Participant\'s Last Name*' }).fill('Zimmer');
-  await page.getByRole('combobox', { name: 'Participant\'s Last Name*' }).press('Tab');
-  await page.getByRole('combobox', { name: 'Participant\'s Middle Name (optional)' }).press('Tab');
   await page.getByRole('combobox', { name: 'Participant\'s Prefix/Suffix (optional)' }).fill('Sir');
   await page.locator('#mat-input-4').selectOption('M');
   await page.locator('#mat-input-4').selectOption('F');
@@ -106,14 +103,17 @@ test('Test Signup', async ({ page }) => {
   // wait for country selection to drive state/province
   const requestPromise = page.waitForResponse(response => response.url().includes('https://pepper-test.datadonationplatform.org/pepper/v1/user') && response.status() === 200);
   await page.locator('#mat-input-10').selectOption('US');
-  await page.locator('#mat-input-10').click();
+  // await page.locator('#mat-input-10').click();
   const request = await requestPromise;
   
   
   await page.getByText("Participant's State/Province *");
   // why is this so slow?
   await page.locator('#mat-input-11').waitFor({timeout: 20 * 1000});
+
+  await expect(page.getByRole('main').locator('div').filter({ hasText: '$' })).toHaveCount(0);
   await page.locator('#mat-input-11').selectOption('US-MA');
+
   await page.getByRole('button', { name: 'Register' }).click();
   await page.locator('.mat-checkbox-inner-container').click();
   await page.locator('.mat-checkbox-inner-container').click();
@@ -409,16 +409,16 @@ test('Test Signup', async ({ page }) => {
   await page.getByRole('cell', { name: 'Registration', exact: true }).click();
   await page.getByRole('cell', { name: 'Consent', exact: true }).click();
   await page.getByRole('cell', { name: 'Contacting Physician', exact: true }).click();
-  await page.getByRole('cell', { name: 'Medical Release', exact: true }).click();
+  await page.getByRole('cell', { name: 'Medical History', exact: true }).click();
   await page.getByRole('cell', { name: 'Genome Study', exact: true }).click();
   await page.getByRole('cell', { name: 'Review & Submission' }).first().click();
-  await page.getByRole('row', { name: 'Registration Thank you for signing the registration form. 01 / 31 Complete View Edit' }).getByRole('cell', { name: 'Complete' }).click();
-  await page.getByRole('row', { name: 'Consent Thank you for signing the research consent form. 01 / 31 Complete View Edit' }).getByRole('cell', { name: 'Complete' }).click();
-  await page.getByRole('row', { name: 'Contacting Physician Thank you for signing the contacting physician form. 01 / 31 Complete View Edit' }).getByRole('cell', { name: 'Complete' }).click();
-  await page.getByRole('row', { name: 'Medical History Thank you for signing the Medical History form. 01 / 31 Complete View Edit' }).getByRole('cell', { name: 'Complete' }).click();
-  await page.getByRole('row', { name: 'Genome Study Thank you for signing the Genome Study form. 01 / 31 Complete View Edit' }).getByRole('cell', { name: 'Complete' }).click();
-  await page.getByRole('row', { name: 'Review & Submission Review & Submission 01 / 31 Complete View' }).getByRole('cell', { name: 'Complete' }).click();
-  await page.getByRole('row', { name: 'Registration Thank you for signing the registration form. 01 / 31 Complete View Edit' }).getByRole('button', { name: 'View' }).click();
+  await page.getByRole('row', { name: 'Registration Thank you for signing the registration form.' }).getByRole('cell', { name: 'Complete' }).click();
+  await page.getByRole('row', { name: 'Consent Thank you for signing the research consent form.' }).getByRole('cell', { name: 'Complete' }).click();
+  await page.getByRole('row', { name: 'Contacting Physician Thank you for signing the contacting physician form.' }).getByRole('cell', { name: 'Complete' }).click();
+  await page.getByRole('row', { name: 'Medical History Thank you for signing the Medical History form.' }).getByRole('cell', { name: 'Complete' }).click();
+  await page.getByRole('row', { name: 'Genome Study Thank you for signing the Genome Study form.' }).getByRole('cell', { name: 'Complete' }).click();
+  await page.getByRole('row', { name: 'Review & Submission Review & Submission' }).getByRole('cell', { name: 'Complete' }).click();
+  await page.getByRole('row', { name: 'Registration Thank you for signing the registration form.' }).getByRole('button', { name: 'View' }).click();
   await page.getByRole('heading', { name: 'Andrew\'s Enrollment Process' }).click();
   await page.getByRole('heading', { name: 'Registration' }).click();
   await page.getByRole('button', { name: 'My Account' }).click();

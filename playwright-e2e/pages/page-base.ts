@@ -170,7 +170,7 @@ export default abstract class PageBase implements PageInterface {
       phoneLabel = 'Telephone Contact Number'
     } = opts;
 
-    const mailAddressForm = new Address(this.page, { label: new RegExp(/contact information|Mailing Address/) });
+    const mailAddressForm = new Address(this.page, { label: new RegExp(/Contact Information|Mailing Address/) });
     await mailAddressForm.input('Full Name').fill(fullName);
     await mailAddressForm.select('Country').selectOption(country);
     await mailAddressForm.select('State').selectOption(state);

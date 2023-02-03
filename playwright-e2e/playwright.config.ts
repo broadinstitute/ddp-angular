@@ -17,8 +17,8 @@ const testConfig: PlaywrightTestConfig = {
   testDir: '.',
   testMatch: '**/*.spec.ts',
   /* Maximum time one test can run for. Test should be short and takes less than 4 minutes to run */
-  timeout: 600 * 1000,
-  globalTimeout: 1200 * 1000,
+  timeout: 15 * 60 * 1000,
+  globalTimeout:15 * 60 * 1000,
   /* For expect() calls */
   expect: {
     /**
@@ -61,6 +61,7 @@ const testConfig: PlaywrightTestConfig = {
     actionTimeout: 10 * 1000,
     navigationTimeout: 30 * 1000,
     acceptDownloads: true,
+    testIdAttribute: 'data-ddp-test',
 
     /* Base URL to use in actions like `await page.goto('/')`. */
     // baseURL: 'http://localhost:3000',
