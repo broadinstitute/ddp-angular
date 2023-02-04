@@ -129,6 +129,7 @@ constructor(page: Page) {
   }
 
   async finish():Promise<void> {
+    await this.page.waitForTimeout(1000);
     await this.page.getByRole('button', { name: 'Finish' }).click();
   }
 }

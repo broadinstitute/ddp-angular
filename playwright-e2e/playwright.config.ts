@@ -17,8 +17,8 @@ const testConfig: PlaywrightTestConfig = {
   testDir: '.',
   testMatch: '**/*.spec.ts',
   /* Maximum time one test can run for. Test should be short and takes less than 4 minutes to run */
-  timeout: 15 * 60 * 1000,
-  globalTimeout:15 * 60 * 1000,
+  timeout: 6 * 60 * 1000,
+  globalTimeout:6 * 60 * 1000,
   /* For expect() calls */
   expect: {
     /**
