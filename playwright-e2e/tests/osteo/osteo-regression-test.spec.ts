@@ -9,6 +9,14 @@ import PrequalPage from 'pages/osteo/prequal-page';
 import ConsentAddendumPage from 'pages/osteo/consent-addendump-page';
 import ConsentAssentPage from 'pages/osteo/consent-assent-page';
 import * as auth from 'authentication/auth-angio';
+import ReleasePage from 'pages/osteo/release-page';
+import AboutYourOsteosarcoma from 'pages/osteo/about-your-osteosarcoma-page';
+import { logParticpantCreated } from 'utils/log-utils';
+import { lastIndexOf } from 'lodash';
+import { faker } from '@faker-js/faker';
+import { generateUserName } from 'utils/faker-utils';
+import { CancerSelector } from 'pages/cancer-selector';
+import { FamilyHistory } from 'pages/family-history';
 
 const { OSTEO_USER_EMAIL, OSTEO_USER_PASSWORD } = process.env;
 
@@ -239,7 +247,8 @@ test('Osteo enroll self and kid together', async({ page}) => {
   city: 'Cambridge', 
   state: 'MASSACHUSETTS', 
   zipCode:'02476', 
-  telephone:'5555551212'})
+  telephone:'5555551212',
+  phoneLabel: 'Phone'})
 
     await page.getByText('Suggested:').click();
 
@@ -319,7 +328,7 @@ test('Osteo enroll self and kid together', async({ page}) => {
     await page.getByText('A little of the time').nth(1).click();
     await page.getByText('Occasionally').click();
    
-    consentAssentPage.submit();
+    await consentAssentPage.submit();
 
     await page.getByText('Thank you for providing information regarding your chid’s experiences with osteo').click();
     await page.getByText('A Message from the Osteosarcoma Project').click();
@@ -334,6 +343,12 @@ test('Osteo enroll self and kid together', async({ page}) => {
 
 test('Osteo self enroll', async ({ page }) => {
   const userEmail = generateEmailAlias(OSTEO_USER_EMAIL);
+  const firstName = generateUserName('OS');
+  const lastName = generateUserName('OS');
+  const fullName = firstName + ' ' + lastName;
+
+  logParticpantCreated(userEmail, fullName);
+
   await page.goto('https://osteo.test.datadonationplatform.org/');
   await page.getByLabel('Password *').click();
   await page.getByLabel('Password *').fill('broad_institute');
@@ -348,11 +363,10 @@ test('Osteo self enroll', async ({ page }) => {
   await page.getByLabel('Enter age').click();
   await page.getByLabel('Enter age').fill('30');
 
-// wait for country selection to drive state/province
-const requestPromise = page.waitForResponse(response => response.url().includes('https://pepper-test.datadonationplatform.org/pepper/v1/user') && response.status() === 200);
-await page.locator('#mat-input-2').selectOption('US');
-const request = await requestPromise;
-
+  // wait for country selection to drive state/province
+  const requestPromise = page.waitForResponse(response => response.url().includes('https://pepper-test.datadonationplatform.org/pepper/v1/user') && response.status() === 200);
+  await page.locator('#mat-input-2').selectOption('US');
+  const request = await requestPromise;
   await page.locator('#mat-input-3').selectOption('CO');
   await page.waitForTimeout(2000);
     
@@ -381,9 +395,9 @@ const request = await requestPromise;
   await page.locator('#mat-radio-6').getByText('No').click();
   await page.locator('#mat-radio-5').getByText('Yes').click();
   await page.getByLabel('First Name').click();
-  await page.getByRole('combobox', { name: 'First Name' }).fill('Andrew');
+  await page.getByRole('combobox', { name: 'First Name' }).fill(firstName);
   await page.getByRole('combobox', { name: 'First Name' }).press('Tab');
-  await page.getByRole('combobox', { name: 'Last Name' }).fill('Zimmer');
+  await page.getByRole('combobox', { name: 'Last Name' }).fill(lastName);
   await page.getByLabel('MM').click();
   await page.getByLabel('MM').fill('01');
   await page.getByLabel('DD', { exact: true }).fill('01');
@@ -391,13 +405,14 @@ const request = await requestPromise;
 
   const consentPage = new ResearchConsentPage(page);
 
-  await consentPage.fillInContactAddress({fullName: 'Andrew Zimmer',
+  await consentPage.fillInContactAddress({fullName: fullName,
   country: 'UNITED STATES',
   street:'75 Ames Street',
   city: 'Cambridge', 
   state: 'MASSACHUSETTS', 
   zipCode:'02476', 
-  telephone:'5555551212'})
+  telephone:'5555551212',
+  phoneLabel: 'Phone'});
 
   await consentPage.submit();
   
@@ -408,42 +423,43 @@ const request = await requestPromise;
   await page.getByText('You can share with me any available results from the sequencing of tumor sample[').click();
   await page.getByText('Yes').click();
   await page.locator('.mat-form-field-infix').click();
-  await page.locator('#mat-input-12').fill('Andrew Zimmer');
+  await page.locator('#mat-input-12').fill(fullName);
   await page.getByRole('heading', { name: 'Date' }).click();
   
   consentPage.submit();
 
+  const releasePage = new ReleasePage(page);
+  
   await page.getByRole('heading', { name: 'Medical Release Form' }).click();
   await page.getByText('Thank you for your consent to participate in this research study.').click();
-  await page.getByLabel('Physician Name').click();
-  await page.getByLabel('Physician Name').fill('Dr. Teeth');
-  await page.getByLabel('Physician Name').press('Tab');
-  await page.getByRole('combobox', { name: 'Institution (if any)' }).fill('institute');
-  await page.getByRole('combobox', { name: 'Institution (if any)' }).press('ArrowDown');
-  await page.getByRole('combobox', { name: 'Institution (if any)' }).press('ArrowDown');
-  await page.getByRole('combobox', { name: 'Institution (if any)' }).press('ArrowDown');
-  await page.getByRole('combobox', { name: 'Institution (if any)' }).press('Enter');
-  await page.getByRole('button', { name: '+ Add another physician' }).click();
-  await page.locator('#mat-input-22').click();
-  await page.locator('#mat-input-22').fill('Dr. Feelgood');
-  await page.locator('#mat-input-19').click();
-  await page.locator('#mat-input-19').fill('Heavy Metal Hospital');
-  await page.locator('#mat-input-20').click();
-  await page.locator('#mat-input-20').fill('Big Hair');
-  await page.locator('#mat-input-20').press('Tab');
-  await page.locator('#mat-input-21').fill('MA');
-  await page.locator('#mat-input-23').click();
-  await page.locator('#mat-input-23').fill('USA');
+
+  await releasePage.chooseInstitutionInList(0, 'Pittsburgh', 3, "Children's Institute Of Pittsburgh, The", 'Pittsburgh', 'PA', 'USA' );
+  await releasePage.setPhysician(0, 'Dr. Teeth');
+  await releasePage.addAnotherPhysician();
+
+  //await releasePage.typeNewInstitute(0, 'Motley Crue Hospital', "Partyville", "Los Angeles", "Califoooornia" );
+  await releasePage.setPhysician(0, 'Dr. Feelgood');
+
+  // await releasePage.signName('Testy McTesterson');
+  //await releasePage.clickAcknowledge();
+
   await page.locator('section').filter({ hasText: 'Thank you for your consent to participate in this research study. To complete th' }).click();
+ 
+  await page.locator('section').filter({ hasText: 'Thank you for your consent to participate in this research study. To complete th' }).click();
+ 
   await page.getByText('I have already read and signed the informed consent document for this study, whi').click();
   await page.getByLabel('Full Name').click();
+ 
   await page.getByRole('combobox', { name: 'Full Name' }).fill('Andrew Zimmer');
   
-  consentPage.submit();
+  await consentPage.submit();
 
-  await page.getByRole('heading', { name: 'Survey: About Your Osteosarcoma' }).click();
+  const aboutYourOsteosarcoma = new AboutYourOsteosarcoma(page,'Survey: About Your Osteosarcoma');
+  await aboutYourOsteosarcoma.waitForReady();
+
   await page.getByText('Please tell us more about your experience with osteosarcoma by answering the que').click();
-  await page.getByRole('button', { name: 'Next' }).click();
+  await aboutYourOsteosarcoma.next();
+  
   await page.getByRole('combobox').first().selectOption('2');
   await page.getByRole('combobox').nth(1).selectOption('2009');
   await page.locator('#mat-input-24').selectOption('SIX_TO_TWELVE_MONTHS');
@@ -453,23 +469,33 @@ const request = await requestPromise;
   await page.getByLabel('Please provide details').click();
   await page.getByLabel('Please provide details').fill('A different part of my body');
   await page.getByText('Please select all the places in your body that you currently have osteosarcoma, ').click();
-  await page.locator('#mat-checkbox-17 > .mat-checkbox-layout > .mat-checkbox-inner-container').click();
-  await page.locator('#mat-radio-12').getByText('No').click();
-  await page.locator('#mat-radio-11').getByText('Yes').click();
-  await page.locator('#mat-checkbox-24 > .mat-checkbox-layout > .mat-checkbox-inner-container').click();
-  await page.locator('#mat-checkbox-25 > .mat-checkbox-layout > .mat-checkbox-inner-container').click();
-  await page.locator('label').filter({ hasText: 'Cisplatin' }).click();
-  await page.locator('#mat-checkbox-24 > .mat-checkbox-layout > .mat-checkbox-inner-container').click();
-  await page.getByText('Methotrexate').click();
-  await page.getByText('Cisplatin').click();
-  await page.locator('#mat-radio-16 > .mat-radio-label > .mat-radio-container > .mat-radio-outer-circle').click();
-  await page.locator('#mat-radio-15').getByText('Yes').click();
-  await page.locator('#mat-radio-19').getByText('Yes').click();
-  await page.locator('#mat-radio-23').getByText('Yes').click();
-  await page.getByLabel('Choose cancer...').click();
-  await page.getByRole('combobox', { name: 'Choose cancer...' }).fill('cancer');
-  await page.getByText('Bone Cancer').click();
-  await page.getByRole('combobox', { name: 'Year' }).selectOption('2000');
+  await page.locator('.picklist-answer-CURRENT_BODY_LOC').getByText('Lung (both)').click();
+  await page.locator('.picklist-answer-HAD_RADIATION').getByText('No', {exact: true}).click();
+
+  await page.locator('.picklist-answer-THERAPIES_RECEIVED').getByText('Cisplatin').click();
+  await page.locator('.picklist-answer-THERAPIES_RECEIVED').getByText('Methotrexate').click();
+  await page.locator('.picklist-answer-CURRENTLY_TREATED').getByText('Yes').click();
+  await page.locator('.picklist-answer-OTHER_CANCERS').scrollIntoViewIfNeeded();
+  await page.locator('.picklist-answer-OTHER_CANCERS').getByText('Yes').click();
+
+  // would be class and class
+  var cancerSelector = new CancerSelector(page, '.activity-text-input-OTHER_CANCER_NAME', '.date-answer-OTHER_CANCER_YEAR');
+  await cancerSelector.chooseCancer(0,'bone', 2, 'Giant Cell Tumor of the Bone (GCT)');
+  await cancerSelector.chooseTime(0,'2000');
+
+
+  /*
+  await page.getByLabel('Choose cancer...').nth(0).click();
+  await page.getByRole('combobox', { name: 'Choose cancer...' }).nth(0).type('bone', { delay: 200});
+  await page.waitForTimeout(1000);
+  await page.getByRole('combobox', { name: 'Choose cancer...' }).nth(0).press('ArrowDown'); 
+  await page.waitForTimeout(1000);
+  await page.getByRole('combobox', { name: 'Choose cancer...' }).nth(0).press('ArrowDown');
+  await page.waitForTimeout(1000);
+  await page.getByRole('combobox', { name: 'Choose cancer...' }).nth(0).press('Enter');
+  await expect(page.getByRole('combobox', { name: 'Choose cancer...' }).nth(0)).toHaveValue('Giant Cell Tumor of the Bone (GCT)')
+  await page.getByRole('combobox', { name: 'Year' }).nth(0).selectOption('2000');
+*/
 
   consentPage.submit();
 
@@ -481,26 +507,26 @@ const request = await requestPromise;
   await page.getByText('Cuban', { exact: true }).click();
   await page.getByText('Dominican', { exact: true }).click();
   await page.getByText('3A. Do you consider yourself to be mixed race, that is belonging to more than on').click();
-  await page.locator('#mat-radio-62').getByText('No').click();
-  await page.locator('#mat-radio-66').getByText('Yes').click();
+  await page.locator('.picklist-answer-MIXED_RACE').getByText('No', {exact: true}).click();
+  await page.locator('.picklist-answer-MIXED_RACE').getByText('Yes', {exact: true}).click();
+  
   await page.getByRole('paragraph').filter({ hasText: '3C. Do you consider yourself to be indigenous or Native American (such as Purepe' }).click();
-  await page.locator('#mat-radio-72').getByText('No').click();
-  await page.locator('#mat-input-28').click();
-  await page.locator('#mat-input-28').fill('testing comments!');
+  await page.locator('.picklist-answer-INDIGENOUS_NATIVE').getByText('No', {exact: true}).click();
+  await page.getByTestId('answer:OTHER_COMMENTS').click();
+  await page.getByTestId('answer:OTHER_COMMENTS').fill('testing comments!');
   await page.getByText('General internet/Online sources (search engines, patient advocacy group website,').click();
   await page.getByText('Patient advocacy group website', { exact: true }).click();
-  await page.locator('#mat-radio-33').getByText('Most of the time').click();
+  await page.locator('.picklist-answer-READ_HOSPITAL_MATERIALS_ID').getByText('Most of the time').click();
   await page.getByText('How often do you have problems learning about your medical condition because of ').click();
-  await page.locator('#mat-radio-41').getByText('A little of the time').click();
+  await page.locator('.picklist-answer-PROBLEM_UNDERSTANDING_WRITTEN_ID').getByText('A little of the time').click();
   await page.getByText('Occasionally').click();
   await page.getByText('High school graduate or equivalent').click();
   await page.getByText('English', { exact: true }).click();  
   await page.getByRole('button', { name: 'Submit' }).hover();
-  consentPage.submit();
-  await page.goto('https://osteo.test.datadonationplatform.org/dashboard');
+  await consentPage.submit();
   await page.getByText('Thank you for providing information regarding your experiences with osteosarcoma').click();
-  await page.getByRole('button', { name: 'Andrew Zimmer Hide' }).click();
-  await page.getByRole('button', { name: 'Andrew Zimmer Show' }).click();
+  await page.getByRole('button', { name: fullName + ' Hide' }).click();
+  await page.getByRole('button', { name: fullName + ' Show' }).click();
   await page.getByRole('button', { name: 'Research Consent Form' }).click();
   await page.getByRole('heading', { name: 'Research Consent Form' }).click();
   await page.getByRole('link', { name: 'Dashboard' }).click();
@@ -509,56 +535,135 @@ const request = await requestPromise;
   await page.getByText('Please tell us more about your experience with osteosarcoma by answering the que').click();
   await page.getByRole('link', { name: 'Dashboard' }).click();
   await page.getByRole('button', { name: 'Edit' }).click();
-  await page.getByRole('heading', { name: 'Tell us about the history of cancer in your biological (blood-related) family' }).click();
-  await page.getByText('2 Instructions').click();
-  await page.getByText('Understanding the history of cancer in someone\'s biological family can help rese').click();
-  await page.getByRole('button', { name: 'Next' }).click();
-  await page.getByRole('button', { name: 'Next' }).click();
-  await page.locator('mat-card-content').filter({ hasText: 'Biological / Birth Parent 1: Assigned Female at birth 1 questions answered' }).getByRole('button', { name: 'Edit' }).click();
-  await page.locator('.mat-form-field-wrapper').first().click();
-  await page.locator('#mat-input-30').fill('Mom');
-  await page.locator('#mat-input-30').press('Tab');
-  await page.locator('#mat-radio-76').getByText('Yes').click();
-  await page.locator('#mat-input-32').selectOption('90-94');
-  await page.locator('#mat-radio-80').getByText('Yes').click();
-  await page.locator('#mat-radio-84').getByText('Yes').click();
-  await page.getByText('Ashkenazi', { exact: true }).click();
-  await page.getByRole('button', { name: 'Save' }).click();
-  await page.locator('mat-card-content').filter({ hasText: 'Biological / Birth Parent 2: Assigned Male at birth 1 questions answered' }).getByRole('button', { name: 'Edit' }).click();
-  await page.locator('#mat-input-35').click();
-  await page.locator('#mat-input-35').fill('Dad');
-  await page.locator('#mat-radio-94').getByText('Yes').click();
-  await page.locator('#mat-input-37').selectOption('90-94');
-  await page.locator('#mat-radio-99').getByText('No').click();
-  await page.locator('#mat-radio-103').getByText('No').click();
-  await page.getByRole('button', { name: 'Save' }).click();
-  await page.getByRole('button', { name: 'Next' }).click();
-  await page.getByRole('button', { name: 'Add a Parent\'s Sibling Add a Parent\'s Sibling' }).click();
-  await page.locator('#mat-input-38').click();
-  await page.locator('#mat-input-38').fill('Mom\'s Sister');
-  await page.locator('#mat-input-39').selectOption('PARENT1');
-  await page.locator('#mat-input-40').selectOption('FEMALE');
-  await page.locator('#mat-radio-107').getByText('No').click();
-  await page.locator('#mat-input-41').selectOption('45-49');
-  await page.locator('#mat-radio-110').getByText('Yes').click();
-  await page.locator('#mat-input-42').click();
-  await page.getByText('Atypical teratoid rhabdoid tumor (ATRT)').click();
-  await page.locator('#mat-input-43').selectOption('5-9');
-  await page.getByRole('button', { name: 'Save' }).click();
-  await page.getByRole('button', { name: 'Next' }).click();
-  await page.getByRole('button', { name: 'Next' }).click();
-  await page.getByRole('button', { name: 'Next' }).click();
-  await page.getByRole('button', { name: 'Next' }).click();
-  await page.getByRole('button', { name: 'Add a Child Add a Child' }).click();
-  await page.locator('#mat-input-44').click();
-  await page.locator('#mat-input-44').fill('Kid');
-  await page.locator('#mat-input-45').selectOption('INTERSEX');
-  await page.locator('#mat-radio-114').getByText('Yes').click();
-  await page.locator('#mat-input-46').selectOption('10-14');
-  await page.locator('#mat-radio-119 label').click();
-  await page.getByRole('button', { name: 'Save' }).click();
-  await page.getByRole('button', { name: 'Next' }).click();
-  await page.getByRole('button', { name: 'Finish' }).click();
+
+ const familyHistoryPage = new FamilyHistory(page);
+
+ await familyHistoryPage.waitForReady();
+ await familyHistoryPage.next();
+ await page.getByText("In this survey we would like to know the living status, age, and cancer history of people in your biological, or blood-related, family. We recognize that there are many different types of families, so please skip sections that do not apply to your family tree.").click()
+ await familyHistoryPage.next();
+ await familyHistoryPage.addFamilyMember('PARENT1', {
+  nickname: 'Mom',
+  sexAtBirth: 'Female',
+  currentlyLiving: true,
+  ageRange: '60-64',
+  cancers:  [{ cancerSearch: 'gan', expectedCancerResult: 'Ganglioglioma', numTimesToHitDownArrow: 1, time:'45-49'},
+  { cancerSearch: 'multi', expectedCancerResult: 'Glioblastoma / Glioblastoma multiforme (GBM)', numTimesToHitDownArrow: 3, time:'35-39'}],
+  ancestry: ['Ashkenazi']
+ });
+ await familyHistoryPage.addFamilyMember('PARENT2', {
+  nickname: 'Dad',
+  sexAtBirth: 'Male',
+  currentlyLiving: true,
+  ageRange: '65-69',
+  cancers:  [], ancestry: []
+ });
+ 
+ 
+  // todo arz other family members
+
+
+  await familyHistoryPage.next();
+  await familyHistoryPage.clickAddParentSibling();
+  await familyHistoryPage.addFamilyMember('PARENT_SIBLING', {
+    nickname: "Dad's sister",
+    sexAtBirth: 'Female',
+    currentlyLiving: true,
+    ageRange: '65-69',
+    cancers:  [], ancestry: [], sideOfFamily: 'Biological / Birth Parent 2: Assigned Male at birth'
+   });
+   await familyHistoryPage.clickAddParentSibling();
+   await familyHistoryPage.addFamilyMember('PARENT_SIBLING', {
+    nickname: "Mom's sister",
+    sexAtBirth: 'Female',
+    currentlyLiving: false,
+    ageRange: '60-64',
+    cancers:  [], ancestry: [], sideOfFamily: 'Biological / Birth Parent 1: Assigned Female at birth'
+   });
+   await familyHistoryPage.next();
+   await familyHistoryPage.clickAddGrandParent();
+   await familyHistoryPage.addFamilyMember('GRANDPARENT', {
+    nickname: "Mom's Dad",
+    sexAtBirth: 'Male',
+    currentlyLiving: false,
+    ageRange: '90-94',
+    cancers:  [{cancerSearch:'noid',expectedCancerResult:'Gastrointestinal carcinoid tumor', numTimesToHitDownArrow: 6, time:'55-59'}], 
+    ancestry: [], sideOfFamily: 'Biological / Birth Parent 1: Assigned Female at birth'
+   });
+   await familyHistoryPage.clickAddGrandParent();
+   await familyHistoryPage.addFamilyMember('GRANDPARENT', {
+    nickname: "Mom's Mom",
+    sexAtBirth: 'Female',
+    currentlyLiving: false,
+    ageRange: '90-94',
+    cancers:  [{cancerSearch:'carcinoma',expectedCancerResult:'Cholangiocarcinoma / Bile duct cancer', numTimesToHitDownArrow: 3, time:'25-29'}], 
+    ancestry: [], sideOfFamily: 'Biological / Birth Parent 1: Assigned Female at birth'
+   });
+   await familyHistoryPage.clickAddGrandParent();
+   await familyHistoryPage.addFamilyMember('GRANDPARENT', {
+    nickname: "Dads's Mom",
+    sexAtBirth: 'Female',
+    currentlyLiving: false,
+    ageRange: '90-94',
+    cancers:  [{cancerSearch:'acute',expectedCancerResult:'Acute myeloid leukemia (AML)', numTimesToHitDownArrow: 3, time:'25-29'}], 
+    ancestry: [], sideOfFamily: 'Biological / Birth Parent 2: Assigned Male at birth'
+   });
+   await familyHistoryPage.clickAddGrandParent();
+   await familyHistoryPage.addFamilyMember('GRANDPARENT', {
+    nickname: "Dads's Dad",
+    sexAtBirth: 'Male',
+    currentlyLiving: true,
+    ageRange: '90-94',
+    cancers:  [], 
+    ancestry: [], sideOfFamily: 'Biological / Birth Parent 2: Assigned Male at birth'
+   });
+  await familyHistoryPage.next();
+  await familyHistoryPage.clickAddSibling();
+   await familyHistoryPage.addFamilyMember('SIBLING', {
+    nickname: "Big Sis",
+    sexAtBirth: 'Female',
+    currentlyLiving: true,
+    ageRange: '20-24',
+    cancers:  [], 
+    ancestry: []
+   });
+   await familyHistoryPage.clickAddSibling();
+   await familyHistoryPage.addFamilyMember('SIBLING', {
+    nickname: "Little Bro",
+    sexAtBirth: 'Female',
+    currentlyLiving: true,
+    ageRange: '10-14',
+    cancers:  [{cancerSearch:'renal',expectedCancerResult:'Kidney cancer / Renal cell carcinoma (RCC), all subtypes', numTimesToHitDownArrow: 2, time:'5-9'}], 
+    ancestry: []
+   });
+
+   familyHistoryPage.next();
+
+   await familyHistoryPage.clickAddHalfSibling();
+   await familyHistoryPage.addFamilyMember('HALF_SIBLING', {
+    nickname: "Little Half Sis",
+    sexAtBirth: 'Female',
+    currentlyLiving: true,
+    ageRange: '10-14', sideOfFamily: 'Biological / Birth Parent 2: Assigned Male at birth',
+    cancers:  [{cancerSearch:'fibro',expectedCancerResult:'Primary myelofibrosis (PMF)', numTimesToHitDownArrow: 2, time:'5-9'}], 
+    ancestry: []
+   });
+
+   familyHistoryPage.next();
+
+   await familyHistoryPage.clickAddChild();
+   await familyHistoryPage.addFamilyMember('CHILD', {
+    nickname: "My Daughter",
+    sexAtBirth: 'Female',
+    currentlyLiving: true,
+    ageRange: '10-14',
+    cancers:  [{cancerSearch:'fibro',expectedCancerResult:'Desmoid-type fibrosis / Desmoid tumor (DF)', numTimesToHitDownArrow: 4, time:'5-9'}], 
+    ancestry: []
+   });
+
+   await familyHistoryPage.next();
+   await familyHistoryPage.finish();
+  
   await page.getByRole('row', { name: 'Survey: Family History of Cancer Thank you for telling us more about your family history of cancer.' }).getByRole('button', { name: 'View Completed' }).click();
   await page.getByRole('link', { name: 'Dashboard' }).click();
 });

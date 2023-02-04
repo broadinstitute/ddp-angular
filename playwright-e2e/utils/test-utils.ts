@@ -129,6 +129,9 @@ export async function click(page: Page, stableID: string, option: string): Promi
   await page.locator(`[data-ddp-test="${stableID}"]`).selectOption(option);
 }
 
+export function booleanToYesOrNo(val: boolean) {
+  return val ? 'Yes' : 'No';
+}
 /**
  * Returns the default value if value is null, empty or undefined.
  * @param value
@@ -140,3 +143,4 @@ export const getEnv = (value: string | undefined, defaultValue: string): string 
   }
   return value == null ? defaultValue : value;
 };
+

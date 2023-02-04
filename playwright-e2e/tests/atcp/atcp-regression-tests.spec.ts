@@ -170,11 +170,9 @@ test('Test Signup', async ({ page }) => {
   await page.getByRole('button', { name: 'Next' }).click();
   await page.getByText('Check the boxes below to indicate if you agree to the following options. If you ').click();
   await page.getByText('Study staff may re-contact me with follow-up research questionnaires and invitat').click();
-  await page.locator('.mat-radio-outer-circle').first().click();
-  await page.locator('#mat-radio-3 > .mat-radio-label > .mat-radio-container > .mat-radio-outer-circle').click();
-  await page.locator('.mat-radio-outer-circle').first().click();
-  await page.locator('#mat-radio-6 > .mat-radio-label > .mat-radio-container > .mat-radio-outer-circle').click();
-  await page.locator('#mat-radio-5 > .mat-radio-label > .mat-radio-container > .mat-radio-outer-circle').click();
+  await page.getByTestId('answer:RE_CONTACT_FOLLOW_UP').getByText('Yes').click();
+  await page.getByTestId('answer:PERFORM_DNA').getByText('No').click();
+  await page.getByTestId('answer:PERFORM_DNA').getByText('Yes').click();
   await page.getByRole('button', { name: 'Next' }).click();
   await page.getByText('Please choose yes or no').first().click();
   await page.locator('#mat-radio-8 > .mat-radio-label > .mat-radio-container > .mat-radio-outer-circle').click();
