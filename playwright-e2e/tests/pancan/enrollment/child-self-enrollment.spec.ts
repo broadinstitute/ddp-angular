@@ -62,7 +62,7 @@ test.describe('Enroll child ', () => {
     await consentFormPage.lastName().fill(lastName);
     await consentFormPage.fillInDateOfBirth(user.child.birthDate.MM, user.child.birthDate.DD, user.child.birthDate.YYYY);
     await consentFormPage.fillInParentData();
-    await consentFormPage.fillInContactAddress({ fullName: `${user.child.firstName} ${lastName}`, labels: { phone: 'Telephone Contact Number',country: 'Country',state:'City',zip:'Zip Code', city:'City'}});
+    await consentFormPage.fillInContactAddress({ fullName: `${user.child.firstName} ${lastName}`, labels: { phone: 'Telephone Contact Number',country: 'Country',state:'State',zip:'Zip Code', city:'City'}});
     await consentFormPage.next();
     await consentFormPage.waitSecondReady();
     await consentFormPage.childSignature().fill(user.child.firstName);

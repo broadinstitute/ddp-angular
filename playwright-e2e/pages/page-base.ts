@@ -166,9 +166,15 @@ export default abstract class PageBase implements PageInterface {
       street = '415 MAIN ST',
       city = 'CAMBRIDGE',
       zipCode = '02142',
-      telephone = generateRandomPhoneNum(),
-      labels = { phone: 'Phone',country: 'Country',state:'State',zip:'Zip Code', city:'City'}
+      telephone = generateRandomPhoneNum()
     } = opts;
+
+    var labels;
+    if (!opts.labels) {
+      labels = { phone: 'Phone',country: 'Country',state:'State',zip:'Zip Code', city:'City'}
+    } else {
+      labels = opts.labels;
+    }
 
     const mailAddressForm = new Address(this.page, { label: new RegExp(/Your contact information|Contact Information|Mailing Address/) });
     await mailAddressForm.input('Full Name').fill(fullName);

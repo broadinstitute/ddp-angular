@@ -79,7 +79,7 @@ test.describe('Enroll child', () => {
       city: user.secondChild.city,
       zipCode: user.secondChild.zip,
       telephone: user.secondChild.phone,
-      labels: { phone: 'Telephone Contact Number',country: 'Country',state:'City',zip:'Zip Code', city:'City'}
+      labels: { phone: 'Telephone Contact Number',country: 'Country',state:'State',zip:'Zip Code', city:'City'}
     });
     await aboutMyChildPage.next({ waitForNav: true });
 
