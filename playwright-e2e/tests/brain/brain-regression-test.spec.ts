@@ -284,7 +284,7 @@ test('Brain enroll self', async ({ page}) => {
         state: 'QUEBEC', 
         zipCode:'H3A 0G', // leave off full zip so the "as entered" button can be clicked
         telephone:'5555551212',
-        labels: { phone: 'Telephone Contact Number',country: 'Country/Territory',state:'Province',zip:'Postal Code', city:'City'}
+        labels: { phone: 'Phone',country: 'Country/Territory',state:'Province',zip:'Postal Code', city:'City'}
     });
 
         /*
