@@ -77,7 +77,7 @@ test.describe('Enroll myself as adult', () => {
     const aboutMePage = new AboutMePage(page);
     await aboutMePage.waitForReady();
     await assertActivityHeader(page, 'About Me');
-    await aboutMePage.fillInContactAddress({ fullName: `${user.patient.firstName} ${lastName}` });
+    await aboutMePage.fillInContactAddress({ fullName: `${user.patient.firstName} ${lastName}`,labels: { phone: 'Telephone Contact Number',country: 'Country',state:'City',zip:'Zip Code', city:'City'} });
     await aboutMePage.next({ waitForNav: true });
 
     // on "Medical Record Release Form" page, page 1 of 3.

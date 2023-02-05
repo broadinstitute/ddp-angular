@@ -17,8 +17,9 @@ import { faker } from '@faker-js/faker';
 import { generateUserName } from 'utils/faker-utils';
 import { CancerSelector } from 'pages/cancer-selector';
 import { FamilyHistory } from 'pages/family-history';
+import { checkUserReceivedEmails } from 'utils/email-utils';
 
-const { OSTEO_USER_EMAIL, OSTEO_USER_PASSWORD } = process.env;
+const { OSTEO_USER_EMAIL, OSTEO_USER_PASSWORD, SITE_PASSWORD } = process.env;
 
 test('Static Content', async ({page}) => {
   await page.goto('https://osteo.test.datadonationplatform.org/');
@@ -346,8 +347,7 @@ test('Osteo enroll self and kid together', async({ page}) => {
   city: 'Cambridge', 
   state: 'MASSACHUSETTS', 
   zipCode:'02476', 
-  telephone:'5555551212',
-  phoneLabel: 'Phone'})
+  telephone:'5555551212'});
 
     await page.getByText('Suggested:').click();
 
@@ -449,9 +449,7 @@ test('Osteo self enroll', async ({ page }) => {
   logParticpantCreated(userEmail, fullName);
 
   await page.goto('https://osteo.test.datadonationplatform.org/');
-  await page.getByLabel('Password *').click();
-  await page.getByLabel('Password *').fill('broad_institute');
-  await page.getByLabel('Password *').press('Enter');
+  await testutils.fillSitePassword(page,SITE_PASSWORD)
   await page.waitForTimeout(1000);
   await page.getByRole('banner').getByRole('link', { name: 'Count Me In' }).click();
 
@@ -510,9 +508,9 @@ test('Osteo self enroll', async ({ page }) => {
   city: 'Cambridge', 
   state: 'MASSACHUSETTS', 
   zipCode:'02476', 
-  telephone:'5555551212',
-  phoneLabel: 'Phone'});
+  telephone:'5555551212'});
 
+  await page.waitForTimeout(1000);
   await consentPage.submit();
   
   await page.getByRole('heading', { name: 'Consent Form Addendum: Learning About Your Tumor' }).click();
@@ -524,8 +522,8 @@ test('Osteo self enroll', async ({ page }) => {
   await page.locator('.mat-form-field-infix').click();
   await page.locator('#mat-input-12').fill(fullName);
   await page.getByRole('heading', { name: 'Date' }).click();
-  
-  consentPage.submit();
+  await page.waitForTimeout(1000);
+  await consentPage.submit();
 
   const releasePage = new ReleasePage(page);
   
@@ -596,7 +594,7 @@ test('Osteo self enroll', async ({ page }) => {
   await page.getByRole('combobox', { name: 'Year' }).nth(0).selectOption('2000');
 */
 
-  consentPage.submit();
+  await consentPage.submit();
 
   await page.getByRole('heading', { name: 'Survey: About you' }).click();
   await page.getByText('Please tell us more about you by answering the questions below. As you fill out ').click();
@@ -736,7 +734,7 @@ test('Osteo self enroll', async ({ page }) => {
     ancestry: []
    });
 
-   familyHistoryPage.next();
+   await familyHistoryPage.next();
 
    await familyHistoryPage.clickAddHalfSibling();
    await familyHistoryPage.addFamilyMember('HALF_SIBLING', {
@@ -748,7 +746,7 @@ test('Osteo self enroll', async ({ page }) => {
     ancestry: []
    });
 
-   familyHistoryPage.next();
+   await familyHistoryPage.next();
 
    await familyHistoryPage.clickAddChild();
    await familyHistoryPage.addFamilyMember('CHILD', {
@@ -765,4 +763,12 @@ test('Osteo self enroll', async ({ page }) => {
   
   await page.getByRole('row', { name: 'Survey: Family History of Cancer Thank you for telling us more about your family history of cancer.' }).getByRole('button', { name: 'View Completed' }).click();
   await page.getByRole('link', { name: 'Dashboard' }).click();
+
+  await checkUserReceivedEmails(userEmail,
+    [
+      {subject: 'Thank you for providing your consent', textProbe: 'Dear ' + firstName},
+      {subject: 'Thank you for providing your consent', textProbe: "Your participation isn't just important to our work - it drives everything that we do"},
+      {subject: 'Thank you for providing additional consent', textProbe: "Thank you for joining the Osteosarcoma Project and for giving us your consent to share with you any available information we learned from the sequencing of your tumor sample[s] that the study receives."},
+    
+    ]);
 });

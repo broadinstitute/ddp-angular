@@ -119,10 +119,16 @@ constructor(page: Page) {
 
     var selectBoxes = 1;
     if (p.sideOfFamily != null) {
-        await this.page.getByRole('combobox').nth(selectBoxes++).selectOption(p.sideOfFamily);
+        let sideOfFamilyClass = 'FAMILY_SIDE_Q_3';
+        if (selectorBase.indexOf('GRAND') > 0) {
+            sideOfFamilyClass = 'FAMILY_SIDE_Q_1';
+        } else if (selectorBase.indexOf('HALF_SIBLING') > 0) {
+          sideOfFamilyClass = 'FAMILY_SIDE_Q_2';
+        }
+        await this.page.locator('.picklist-answer-' + sideOfFamilyClass).getByRole('combobox').selectOption(p.sideOfFamily)
     }
-    if (p.sexAtBirth != null) {
-        await this.page.getByRole('combobox').nth(selectBoxes++).selectOption(p.sexAtBirth);
+    if (p.sexAtBirth != null) { 
+        await this.page.locator('.picklist-answer-' + selectorBase + '_SEX_AT_BIRTH').getByRole('combobox').selectOption(p.sexAtBirth);
     }
     await this.page.getByRole('button', { name: 'Save' }).click();
     await this.page.waitForResponse((resp) => resp.url().includes('/summary') && resp.status() === 200);

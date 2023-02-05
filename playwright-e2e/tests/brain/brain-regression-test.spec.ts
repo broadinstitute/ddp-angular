@@ -2,17 +2,20 @@ import { test, expect } from '@playwright/test';
 import { setAuth0UserEmailVerified } from 'utils/api-utils';
 import { APP } from 'data/constants';
 import * as auth from 'authentication/auth-base';
-import { generateEmailAlias } from 'utils/faker-utils';
+import { generateEmailAlias, generateUserName } from 'utils/faker-utils';
 import * as testutils from 'utils/test-utils';
+import * as email from 'utils/email-utils'
+import HomePage from 'pages/brain/home-page';
+import PrequalPage from 'pages/brain/prequal-page';
+import ResearchConsentPage from 'pages/brain/consent-page';
 
-const { BRAIN_USER_EMAIL, BRAIN_USER_PASSWORD } = process.env;
+const { BRAIN_USER_EMAIL, BRAIN_USER_PASSWORD, MIN_EMAIL_WAIT_TIME, BRAIN_BASE_URL, SITE_PASSWORD } = process.env;
 
 test('Brain statics', async ({page}) => {
-    await page.goto('https://brain.test.datadonationplatform.org/');
-    await page.goto('https://brain.test.datadonationplatform.org/password');
-    await page.locator('div').filter({ hasText: 'Password *' }).nth(2).click();
-    await page.getByLabel('Password *').fill('broad_institute');
-    await page.getByLabel('Password *').press('Enter');
+    await page.goto(BRAIN_BASE_URL!);
+    
+    testutils.fillSitePassword(page, SITE_PASSWORD);
+    await page.waitForTimeout(1000);
     await page.getByRole('link', { name: 'Brain Tumor Project logo Brain Tumor Project' }).click();
     await page.getByRole('banner').getByRole('listitem').filter({ hasText: 'FAQs' }).click();
     await page.getByRole('heading', { name: 'Frequently Asked Questions' }).click();
@@ -96,11 +99,10 @@ test('Brain statics', async ({page}) => {
 });
 
 test('Brain enroll kid on their behalf', async ( {page}) => {
+    await page.goto(BRAIN_BASE_URL!);
     const userEmail = generateEmailAlias(BRAIN_USER_EMAIL);
-    await page.goto('https://brain.test.datadonationplatform.org/');
-    await page.getByLabel('Password *').click();
-    await page.getByLabel('Password *').fill('broad_institute');
-    await page.getByLabel('Password *').press('Enter');
+    testutils.fillSitePassword(page, SITE_PASSWORD)
+    
     await page.waitForTimeout(1000);
     await page.getByRole('banner').getByRole('link', { name: 'Count Me In' }).click();
     await page.getByText('My child has been diagnosed with a brain tumor').click();
@@ -227,169 +229,158 @@ test('Brain enroll kid on their behalf', async ( {page}) => {
 });
 
 test('Brain enroll self', async ({ page}) => {
+    await page.goto(BRAIN_BASE_URL!);
+    const checkForEmailsAfter = Date.now() + Number.parseInt(MIN_EMAIL_WAIT_TIME!);
+    await testutils.fillSitePassword(page);
+   
+    const homePage = new HomePage(page);
+    await homePage.waitForReady();
+    await homePage.clickCountMeIn();
+    
+    const prequalPage = new PrequalPage(page);
+    await prequalPage.startSelfEnrollment(30, 'US', 'FL')
+   
+    const userEmail = await auth.createAccountWithEmailAlias(page, { email: BRAIN_USER_EMAIL, password: BRAIN_USER_PASSWORD });
+    const firstName = generateUserName('BR');
+    const lastName = generateUserName('BR');
+    const fullName = firstName + ' ' + lastName;
 
-    const userEmail = generateEmailAlias(BRAIN_USER_EMAIL);
-await page.goto('https://brain.test.datadonationplatform.org/');
-await page.getByLabel('Password *').click();
+    const consentPage = new ResearchConsentPage(page);
+  
+    await page.getByRole('heading', { name: 'Research Consent Form' }).click();
+    await page.getByText('Please read through the consent form text below and click Next when you are done').click();
+    await page.getByRole('heading', { name: 'What if I have questions?' }).click();
+    await page.getByText('If you have any questions, please send an email to info@braintumorproject.org or').click();
+    await page.getByRole('heading', { name: 'Can I stop taking part in this research study?' }).click();
+    await page.getByText('Yes, you can withdraw from this research study at any time, although any of your').click();
 
-await page.getByLabel('Password *').fill('broad_institute');
-await page.getByLabel('Password *').press('Enter');
-await page.waitForTimeout(1000);
-await page.getByRole('heading', { name: 'Help transform our understanding of brain tumors' }).click();
-await page.getByText('If you or your child have been diagnosed with a primary brain tumor, you can joi').click();
-await page.getByRole('heading', { name: 'What’s this project about?' }).click();
-await page.getByText('The Brain Tumor Project is part of Count Me In, a nonprofit organization that’s ').click();
-await page.getByText('Tell us where you’ve been treated').click();
-await page.getByText('We ask where patients have been treated, so that we can request medical records,').click();
-await page.getByText('Provide a saliva and/or blood sample').click();
-await page.getByText('We will send you a kit to collect a sample of your saliva and/or blood. We will ').click();
-await page.getByRole('banner').getByRole('listitem').filter({ hasText: 'FAQs' }).click();
-await page.getByRole('paragraph').filter({ hasText: 'The Brain Tumor Project (BTp) takes a new approach to cancer research in which p' }).click();
-await page.getByRole('button', { name: 'What is the goal of this project?' }).click();
-await page.getByText('The goal of this project is to generate a large dataset that includes genomic, c').click();
-await page.getByRole('heading', { name: 'I/my child have been diagnosed with a brain tumor' }).click();
-await page.getByRole('button', { name: 'How does this project work?' }).click();
-await page.getByText('Click "Count Me In" and complete a simple online form to tell us about yourself/').click();
-await page.getByRole('paragraph').filter({ hasText: 'C. We\'ll find and request your/your child\'s records.' }).click();
-await page.getByText('Our team will contact your/your child\'s doctors and hospitals to obtain copies o').click();
-await page.getByRole('heading', { name: 'I am a member of the community who would like to get involved' }).click();
-await page.getByRole('button', { name: 'How can I receive updates on the Brain Tumor Project?' }).click();
-await page.getByText('If you would like updates on the project, please sign up for our mailing list.').click();
-await page.getByRole('banner').getByRole('link', { name: 'About Us' }).click();
-await page.getByText('is stewarded by four leading organizations: the Broad Institute of MIT and Harva').click();
-await page.getByText('Charlie Blotner is a hospice social worker in Seattle, WA. Intercommunity knowle').click();
-await page.getByText('Amanda Haddock’s son died from brain cancer at the age of 18. Since his diagnosi').click();
-await page.getByText('Meta Laabs is a retired university administrator, living now in Asheville North ').click();
-await page.getByText('Sabine Schwab is a former researcher with a Ph.D. in Economics and Social Scienc').click();
-await page.getByRole('banner').getByRole('link', { name: 'Data' }).click();
-await page.getByRole('heading', { name: 'We’re in the process of collecting data from participants across the United States and Canada.' }).click();
-await page.getByText('Patient-reported responses to the question: “When you were first diagnosed with ').click();
-await page.getByText('Calculated from response to the question: “When were you first diagnosed with br').click();
-await page.getByRole('heading', { name: 'What does a data release look like?' }).click();
-await page.getByRole('banner').getByRole('link', { name: 'Count Me In' }).click();
-await page.getByText('I have been diagnosed with a brain tumor.').click();
-await page.getByRole('button', { name: 'Next' }).click();
-await page.getByLabel('Enter age').click();
-await page.getByLabel('Enter age').fill('30');
-await page.locator('#mat-input-2').selectOption('US');
-await page.locator('#mat-input-3').selectOption('FL');
-await page.getByRole('button', { name: 'Submit' }).click();
-await page.getByPlaceholder('yours@example.com').click();
-await page.getByPlaceholder('yours@example.com').fill(userEmail);
-await page.getByPlaceholder('yours@example.com').press('Tab');
-await page.getByPlaceholder('your password').fill(BRAIN_USER_PASSWORD!);
-await page.getByPlaceholder('your password').press('Enter');
-await page.getByRole('heading', { name: 'Research Consent Form' }).click();
-await page.getByText('Please read through the consent form text below and click Next when you are done').click();
-await page.getByRole('heading', { name: 'What if I have questions?' }).click();
-await page.getByText('If you have any questions, please send an email to info@braintumorproject.org or').click();
-await page.getByRole('heading', { name: 'Can I stop taking part in this research study?' }).click();
-await page.getByText('Yes, you can withdraw from this research study at any time, although any of your').click();
-await page.getByRole('button', { name: 'Next' }).click();
-await page.getByRole('heading', { name: 'Research Consent Form' }).click();
-await page.getByRole('heading', { name: 'Introduction' }).click();
-await page.getByText('You are being invited to participate in a research study that will collect and a').click();
-await page.getByRole('heading', { name: 'Authorization to use your health information for research purposes' }).click();
-await page.getByText('Because information about you and your health is personal and private, it genera').click();
-await page.getByRole('button', { name: 'Next' }).click();
-await page.getByRole('heading', { name: 'Research Consent Form' }).click();
-await page.getByRole('heading', { name: 'Documentation of Consent' }).click();
-await page.locator('#mat-radio-2').getByText('Yes').click();
-await page.locator('#mat-radio-5').getByText('Yes').click();
-await page.locator('#mat-radio-6').getByText('No').click();
-await page.locator('#mat-radio-5').getByText('Yes').click();
-await page.getByLabel('First Name').click();
-await page.getByRole('combobox', { name: 'First Name' }).fill('Andrew');
-await page.getByLabel('Last Name').click();
-await page.getByRole('combobox', { name: 'Last Name' }).fill('Zimmer');
-await page.locator('div').filter({ hasText: 'MM' }).nth(2).click();
-await page.getByLabel('MM').fill('01');
-await page.getByLabel('DD').fill('01');
-await page.getByLabel('YYYY').fill('1991');
-await page.locator('div:nth-child(10) > .ddp-single-question > div > ddp-activity-question > .ddp-activity-question > ddp-activity-answer > ddp-activity-text-answer > ddp-activity-text-input > .activity-text-input > .mat-form-field > .mat-form-field-wrapper > .mat-form-field-flex > .mat-form-field-infix').click();
-await page.getByRole('combobox', { name: 'Your Signature (Full Name)*' }).fill('Andrew Zimmer');
-await page.getByRole('button', { name: 'Submit' }).click();
-await page.getByRole('heading', { name: 'Medical Release Form' }).click();
-await page.getByText('Thank you very much for providing your consent to participate in this research s').click();
-await page.getByText('Your contact information', { exact: true }).click();
-await page.getByLabel('Full Name *').click();
-await page.getByLabel('Full Name *').fill('ANDREW ZIMMEr');
-await page.getByRole('combobox', { name: 'Country/Territory Country/Territory' }).getByText('Country/Territory').click();
-await page.getByText('UNITED STATES', { exact: true }).click();
-await page.getByPlaceholder('Enter a location').click();
-await page.getByPlaceholder('Enter a location').fill('320 CHARLES St');
-await page.getByPlaceholder('Enter a location').press('Tab');
-await page.getByLabel('Apt/Floor #').press('Tab');
-await page.getByLabel('City *').click();
-await page.getByLabel('City *').fill('CAMBRIDGe');
-await page.getByRole('combobox', { name: 'State State' }).getByText('State').click();
-await page.getByText('MASSACHUSETTS').click();
-await page.locator('div').filter({ hasText: 'Zip Code *' }).nth(2).click();
-await page.getByLabel('Zip Code *').fill('02476');
-await page.getByText('Suggested:').click();
-await page.getByLabel('Physician Name').click();
-await page.getByLabel('Physician Name').fill('Dr. Teeth');
-await page.getByLabel('Physician Name').press('Tab');
-await page.getByRole('combobox', { name: 'Institution (if any)' }).fill('Muppet Memorial Hospital');
-await page.getByRole('combobox', { name: 'Institution (if any)' }).press('Tab');
-await page.locator('#mat-input-14').fill('Sesame St Township');
-await page.locator('#mat-input-14').press('Tab');
-await page.locator('#mat-input-15').click();
-await page.locator('#mat-input-15').fill('Sesame St');
-await page.getByLabel('Institution', { exact: true }).click();
-await page.getByRole('combobox', { name: 'Institution', exact: true }).fill('Muppet Institute');
-await page.getByRole('combobox', { name: 'Institution', exact: true }).press('Tab');
-await page.locator('#mat-input-18').fill('Muppetville');
-await page.locator('#mat-input-19').click();
-await page.locator('#mat-input-19').fill('Muppet');
-await page.getByText('I have already read and signed the informed consent document for this study, whi').click();
-await page.getByRole('button', { name: 'Submit' }).click();
-await page.getByRole('heading', { name: 'Join the movement: tell us about yourself' }).click();
-await page.getByText('Thank you for providing your consent for research. The Brain Tumor Project is op').click();
-await page.getByRole('combobox').first().selectOption('1990');
-await page.getByRole('combobox').first().press('Meta+0');
-await page.getByRole('combobox').nth(1).selectOption('5');
-await page.getByLabel('Type your answer here...').click();
-await page.getByRole('combobox', { name: 'Type your answer here...' }).fill('type 1');
-await page.locator('#mat-input-21').selectOption('GRADE-I');
-await page.locator('#mat-radio-11').getByText('Yes').click();
-await page.getByText('What type did your brain tumor change to and when?').click();
-await page.locator('.activity-text-input-OTHER_BRAIN_CANCER_TYPE').click();
-await page.locator('.activity-text-input-OTHER_BRAIN_CANCER_TYPE').type('type 5');
-await page.locator('select').nth(3).selectOption('2009');
-await page.locator('select').nth(4).selectOption('10');
-await page.locator('#mat-radio-16').getByText('No').click();
-await page.getByRole('button', { name: 'Submit' }).click();
-await page.getByRole('heading', { name: 'Please tell us more about yourself' }).click();
-await page.getByText('Thank you for joining the movement. Please help us understand more about your ex').click();
-await page.locator('.mat-checkbox-inner-container').first().click();
-await page.locator('#mat-radio-19').click();
-await page.locator('#mat-radio-19').getByText('Yes').click();
-await page.getByText('Focal radiation (examples include CyberKnife, gamma knife radiosurgery, and ster').click();
-await page.getByText('Proton beam radiation therapy').click();
-await page.locator('#mat-radio-23').getByText('Yes').click();
-await page.getByLabel('Choose medication/chemotherapy...').click();
-await page.getByRole('combobox', { name: 'Choose medication/chemotherapy...' }).fill('nib');
-await page.getByRole('option', { name: 'AFATINIB', exact: true }).locator('span').first().click();
-await page.locator('#mat-radio-28').click();
-await page.locator('#mat-radio-28').getByText('No').click();
-await page.getByText('Female').click();
-await page.getByText('Transgender').click();
-await page.getByText('Transgender woman').click();
-await page.getByText('Asian').click();
-await page.getByText('Cambodian').click();
-await page.getByText('Native Hawaiian or other Pacific Islander').click();
-await page.getByText('Chuukese').click();
-await page.getByRole('button', { name: 'Submit' }).click();
-await page.getByText('My Dashboard').click();
-await page.getByText('Thank you for providing your consent for this study, and for providing informati').click();
-await page.getByText('We\'ll stay in touch with you so that you can see the progress that we are making').click();
-await page.getByRole('cell', { name: 'Thank you for signing the research consent form.' }).click();
-await page.getByRole('cell', { name: 'Thank you for providing your mailing address and contact information for your physician(s) and hospital(s).' }).click();
-await page.getByRole('cell', { name: 'Thank you for telling us about your experiences with a brain tumor.' }).click();
-await page.getByRole('cell', { name: 'Thank you for telling us additional details about your experience with a brain tumor.' }).click();
-await page.getByRole('row', { name: 'Medical Release Form Thank you for providing your mailing address and contact information for your physician(s) and hospital(s)' }).getByRole('button', { name: 'View/Edit' }).click();
-await page.getByRole('heading', { name: 'Medical Release Form' }).click();
-await page.getByRole('link', { name: 'Dashboard' }).click();
+    await prequalPage.next();
+
+    await page.getByRole('heading', { name: 'Research Consent Form' }).click();
+    await page.getByRole('heading', { name: 'Introduction' }).click();
+    await page.getByText('You are being invited to participate in a research study that will collect and a').click();
+    await page.getByRole('heading', { name: 'Authorization to use your health information for research purposes' }).click();
+    await page.getByText('Because information about you and your health is personal and private, it genera').click();
+
+    await prequalPage.next();
+
+    await page.getByRole('heading', { name: 'Research Consent Form' }).click();
+    await page.getByRole('heading', { name: 'Documentation of Consent' }).click();
+
+    await consentPage.clickTissue(true); 
+    await consentPage.clickBlood(true); 
+    await consentPage.enterName(firstName, lastName);
+    await consentPage.enterDOB('01','01','2000'); 
+    await consentPage.enterSignature(fullName); 
+    await consentPage.submit();
+
+    await page.getByRole('heading', { name: 'Medical Release Form' }).click();
+    await page.getByText('Thank you very much for providing your consent to participate in this research s').click();
+
+    await consentPage.fillInContactAddress({fullName: fullName,
+        country: 'CANADA',
+        street:'845 RUE SHERBROOKE OUES',
+        city: 'MONTREAL', 
+        state: 'QUEBEC', 
+        zipCode:'H3A 0G', // leave off full zip so the "as entered" button can be clicked
+        telephone:'5555551212',
+        labels: { phone: 'Telephone Contact Number',country: 'Country/Territory',state:'Province',zip:'Postal Code', city:'City'}
+    });
+
+        /*
+    await page.getByLabel('Full Name *').fill('ANDREW ZIMMEr');
+    await page.getByRole('combobox', { name: 'Country/Territory Country/Territory' }).getByText('Country/Territory').click();
+    await page.getByText('UNITED STATES', { exact: true }).click();
+    await page.getByPlaceholder('Enter a location').click();
+    await page.getByPlaceholder('Enter a location').fill('320 CHARLES St');
+    await page.getByPlaceholder('Enter a location').press('Tab');
+    await page.getByLabel('Apt/Floor #').press('Tab');
+    await page.getByLabel('City *').click();
+    await page.getByLabel('City *').fill('CAMBRIDGe');
+    await page.getByRole('combobox', { name: 'State State' }).getByText('State').click();
+    await page.getByText('MASSACHUSETTS').click();
+    await page.locator('div').filter({ hasText: 'Zip Code *' }).nth(2).click();
+    await page.getByLabel('Zip Code *').fill('02476');
+    await page.getByText('Suggested:').click();
+
+    */
+
+    // fill these in with components
+    await page.getByLabel('Physician Name').click();
+    await page.getByLabel('Physician Name').fill('Dr. Teeth');
+    await page.getByLabel('Physician Name').press('Tab');
+    await page.getByRole('combobox', { name: 'Institution (if any)' }).fill('Muppet Memorial Hospital');
+    await page.getByRole('combobox', { name: 'Institution (if any)' }).press('Tab');
+    await page.locator('#mat-input-14').fill('Sesame St Township');
+    await page.locator('#mat-input-14').press('Tab');
+    await page.locator('#mat-input-15').click();
+    await page.locator('#mat-input-15').fill('Sesame St');
+    await page.getByLabel('Institution', { exact: true }).click();
+    await page.getByRole('combobox', { name: 'Institution', exact: true }).fill('Muppet Institute');
+    await page.getByRole('combobox', { name: 'Institution', exact: true }).press('Tab');
+    await page.locator('#mat-input-18').fill('Muppetville');
+    await page.locator('#mat-input-19').click();
+    await page.locator('#mat-input-19').fill('Muppet');
+    await page.getByText('I have already read and signed the informed consent document for this study, whi').click();
+   
+    await consentPage.submit();
+
+    await page.getByRole('heading', { name: 'Join the movement: tell us about yourself' }).click();
+    await page.getByText('Thank you for providing your consent for research. The Brain Tumor Project is op').click();
+    await page.getByRole('combobox').first().selectOption('1990');
+    await page.getByRole('combobox').first().press('Meta+0');
+    await page.getByRole('combobox').nth(1).selectOption('5');
+    await page.getByLabel('Type your answer here...').click();
+    await page.getByRole('combobox', { name: 'Type your answer here...' }).fill('type 1');
+    await page.locator('#mat-input-21').selectOption('GRADE-I');
+    await page.locator('#mat-radio-11').getByText('Yes').click();
+    await page.getByText('What type did your brain tumor change to and when?').click();
+    await page.locator('.activity-text-input-OTHER_BRAIN_CANCER_TYPE').click();
+    await page.locator('.activity-text-input-OTHER_BRAIN_CANCER_TYPE').type('type 5');
+    await page.locator('select').nth(3).selectOption('2009');
+    await page.locator('select').nth(4).selectOption('10');
+    await page.locator('#mat-radio-16').getByText('No').click();
+    await page.getByRole('button', { name: 'Submit' }).click();
+    await page.getByRole('heading', { name: 'Please tell us more about yourself' }).click();
+    await page.getByText('Thank you for joining the movement. Please help us understand more about your ex').click();
+    await page.locator('.mat-checkbox-inner-container').first().click();
+    await page.locator('#mat-radio-19').click();
+    await page.locator('#mat-radio-19').getByText('Yes').click();
+    await page.getByText('Focal radiation (examples include CyberKnife, gamma knife radiosurgery, and ster').click();
+    await page.getByText('Proton beam radiation therapy').click();
+    await page.locator('#mat-radio-23').getByText('Yes').click();
+    await page.getByLabel('Choose medication/chemotherapy...').click();
+    await page.getByRole('combobox', { name: 'Choose medication/chemotherapy...' }).fill('nib');
+    await page.getByRole('option', { name: 'AFATINIB', exact: true }).locator('span').first().click();
+    await page.locator('#mat-radio-28').click();
+    await page.locator('#mat-radio-28').getByText('No').click();
+    await page.getByText('Female').click();
+    await page.getByText('Transgender').click();
+    await page.getByText('Transgender woman').click();
+    await page.getByText('Asian').click();
+    await page.getByText('Cambodian').click();
+    await page.getByText('Native Hawaiian or other Pacific Islander').click();
+    await page.getByText('Chuukese').click();
+    await page.getByRole('button', { name: 'Submit' }).click();
+    await page.getByText('My Dashboard').click();
+    await page.getByText('Thank you for providing your consent for this study, and for providing informati').click();
+    await page.getByText('We\'ll stay in touch with you so that you can see the progress that we are making').click();
+    await page.getByRole('cell', { name: 'Thank you for signing the research consent form.' }).click();
+    await page.getByRole('cell', { name: 'Thank you for providing your mailing address and contact information for your physician(s) and hospital(s).' }).click();
+    await page.getByRole('cell', { name: 'Thank you for telling us about your experiences with a brain tumor.' }).click();
+    await page.getByRole('cell', { name: 'Thank you for telling us additional details about your experience with a brain tumor.' }).click();
+    await page.getByRole('row', { name: 'Medical Release Form Thank you for providing your mailing address and contact information for your physician(s) and hospital(s)' }).getByRole('button', { name: 'View/Edit' }).click();
+    await page.getByRole('heading', { name: 'Medical Release Form' }).click();
+    await page.getByRole('link', { name: 'Dashboard' }).click();
+    
+    const waitMessage = 'Waiting for ' + (checkForEmailsAfter - Date.now()) + 'additional ms to check emails';
+    await test.step(waitMessage, async () => {
+        await page.waitForTimeout(checkForEmailsAfter - Date.now());
+    });
+
+    await email.checkUserReceivedEmails(userEmail, [
+        { subject: 'Thank you for submitting your information', textProbe: "Thank you for joining the Brain Tumor Project. We are now asking if you would be willing to sign our research consent form, where we ask your permission to obtain copies of your medical records"},
+        { subject: 'Thank you for providing your consent', textProbe: "Thank you for joining The Brain Tumor Project and for giving us your consent for research"},
+    ]);
 
 });

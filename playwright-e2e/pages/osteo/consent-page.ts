@@ -1,6 +1,6 @@
 import { expect, Locator, Page } from '@playwright/test';
 import { AngioPageBase } from 'pages/angio/angio-page-base';
-import { waitForNoSpinner } from 'utils/test-utils';
+import { booleanToYesOrNo, waitForNoSpinner } from 'utils/test-utils';
 import Question from 'lib/component/Question';
 import Input from 'lib/widget/Input';
 import { OsteoPageBase } from './osteo-base-page';

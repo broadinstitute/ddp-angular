@@ -112,7 +112,7 @@ test.describe('Adult Enrollment', () => {
       street: user.patient.streetAddress,
       city: user.patient.city,
       zipCode: user.patient.zip,
-      phoneLabel: 'Phone'
+      labels: { phone: 'Phone',country: 'Country',state:'City',zip:'Zip Code', city:'City'}
     });
     await medicalReleaseForm.yourPhysiciansNames().input('Physician Name').fill(user.doctor.name);
     await medicalReleaseForm.yourPhysiciansNames().input('Institution (if any)').fill(user.doctor.hospital);
