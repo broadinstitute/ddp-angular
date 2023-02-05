@@ -13,7 +13,6 @@ import { OAuth2Client } from 'google-auth-library';
 const TOKEN_PATH = path.join(process.cwd(), 'google-email-token.txt');
 const CREDENTIALS_PATH = path.join(process.cwd(), 'google-email-credentials.txt');
 
-// If modifying these scopes, delete token.json.
 const SCOPES = ['https://www.googleapis.com/auth/contacts.readonly'];
 
 

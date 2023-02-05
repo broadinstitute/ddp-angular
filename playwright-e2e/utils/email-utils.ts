@@ -1,10 +1,6 @@
 import { OAuth2Client } from 'google-auth-library';
 import * as mail from '@googleapis/gmail';
-import { logEmailVerificationResult } from './log-utils';
 import test, { expect } from '@playwright/test';
-
-// how to control wait during test--wait for mainline to complete
-// and then verify all emails?
 
 const { EMAIL_REFRESH_TOKEN, EMAIL_CLIENT_ID, EMAIL_CLIENT_SECRET, EMAIL_REDIRECT_URI  } = process.env;
 
