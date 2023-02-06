@@ -38,6 +38,8 @@ export default class CohortTag {
   }
 
   public async assertDuplicateCohortTagMessage(): Promise<void> {
-    await expect(this.page.locator("//app-cohort-tag//mat-form-field/following-sibling::div")).toHaveText('Duplicate tag! Not saved!');
+    await expect(this.page.locator('//app-cohort-tag//mat-form-field/following-sibling::div')).toHaveText(
+      'Duplicate tag! Not saved!'
+    );
   }
 }
