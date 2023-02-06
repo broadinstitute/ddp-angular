@@ -1,23 +1,25 @@
-import { test } from '@playwright/test';
-import { login } from 'authentication/auth-dsm';
-import Select from 'lib/widget/select';
+import {test} from '@playwright/test';
+import {login} from 'authentication/auth-dsm';
 import ParticipantListPage from 'pages/dsm/participantList-page';
 import HomePage from 'pages/dsm/home-page';
-import { StudyNav } from 'lib/component/dsm/navigation/enums/studyNav.enum';
-import { Navigation } from 'lib/component/dsm/navigation/navigation';
+import {StudyNav} from 'lib/component/dsm/navigation/enums/studyNav.enum';
+import {Navigation} from 'lib/component/dsm/navigation/navigation';
+import {WelcomePage} from "pages/dsm/welcome-page";
 
 test.describe('Singular Study in DSM', () => {
+  let welcomePage: WelcomePage;
   let homePage: HomePage;
   let navigation: Navigation;
 
   test.beforeEach(async ({ page }) => {
     await login(page);
+    welcomePage = new WelcomePage(page);
     homePage = new HomePage(page);
     navigation = new Navigation(page);
   });
 
   test('search by Short ID in Singular study @dsm @dsm-search', async ({ page }) => {
-    await new Select(page, { label: 'Select study' }).selectOption('Singular');
+    await welcomePage.selectStudy('Singular');
 
     await homePage.assertWelcomeTitle();
     await homePage.assertSelectedStudyTitle('Singular');

@@ -4,13 +4,21 @@ import ParticipantListPage from 'pages/dsm/participantList-page';
 import HomePage from 'pages/dsm/home-page';
 import ParticipantPage from 'pages/dsm/participant-page';
 import CohortTag from 'lib/component/dsm/cohort-tag';
-import Select from 'lib/widget/select';
 import { StudyNav } from 'lib/component/dsm/navigation/enums/studyNav.enum';
 import { Navigation } from 'lib/component/dsm/navigation/navigation';
 import * as crypto from 'crypto';
-import { AdditionalFilter } from '../../lib/component/dsm/filters/sections/search/search-enums';
+import { AdditionalFilter } from 'lib/component/dsm/filters/sections/search/search-enums';
+import {WelcomePage} from "pages/dsm/welcome-page";
 
+/**
+ * @TODO
+ * 1. Reimplement cohort tag functionality
+ * 2. Reimplement participant list functionalities
+ * 3. refactor code
+ * 4. have frequently used filters or other functions made simple
+ */
 test.describe.parallel('', () => {
+  let welcomePage: WelcomePage;
   let homePage: HomePage;
   let navigation: Navigation;
   let cohortTag: CohortTag;
@@ -19,6 +27,7 @@ test.describe.parallel('', () => {
 
   test.beforeEach(async ({ page }) => {
     await login(page);
+    welcomePage = new WelcomePage(page);
     homePage = new HomePage(page);
     navigation = new Navigation(page);
     cohortTag = new CohortTag(page);
@@ -26,7 +35,7 @@ test.describe.parallel('', () => {
 
   for (const studyName of studyNames) {
     test(`Ensure cohort tags update and delete properly for ${studyName} @dsm @dsm-search @functional`, async ({ page }) => {
-      await new Select(page, { label: 'Select study' }).selectOption(studyName);
+      await welcomePage.selectStudy(studyName);
 
       /* Test Values */
       const cohortTagValue1 = `dsm_1_${studyName}-${crypto.randomUUID()}`;

@@ -1,3 +1,4 @@
 export enum MainMenu {
-  STUDY = 'Study'
+  STUDY = 'Study',
+  SELECTED_STUDY = 'Selected study',
 }

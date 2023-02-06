@@ -22,24 +22,17 @@ export default class Dropdown {
    * Determine if dropdown is open by look up aria-expanded property
    */
   async isOpen(): Promise<boolean> {
-    const ariaExpanded = await this.toLocator().locator('a[data-toggle="dropdown"]').getAttribute('aria-expanded');
-    return ariaExpanded ? Boolean(ariaExpanded) : false;
+    const ariaExpanded = await this.toLocator().locator('a[data-toggle="dropdown"]')
+      .getAttribute('aria-expanded');
+    return ariaExpanded === 'true';
   }
 
   async open(): Promise<void> {
-    if (!(await this.isOpen())) {
-      await this.toLocator().locator('a.dropdown-toggle').click();
-    }
+    !(await this.isOpen()) && await this.toLocator().locator('a.dropdown-toggle').click();
   }
 
-  async selectOption(value: string, opts: { waitForNav?: boolean } = {}): Promise<void> {
-    const { waitForNav = false } = opts;
-
+  async selectOption(value: string): Promise<void> {
     await this.open();
-    const navigationPromise = waitForNav ? this.page.waitForNavigation() : Promise.resolve();
-    await Promise.all([
-      navigationPromise,
-      this.toLocator().locator('ul.dropdown-menu').locator('a[href]', { hasText: value }).click()
-    ]);
+    await this.toLocator().locator('ul.dropdown-menu').locator('a', { hasText: value }).click();
   }
 }
