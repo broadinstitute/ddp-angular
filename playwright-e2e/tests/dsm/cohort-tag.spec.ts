@@ -1,14 +1,15 @@
-import { test } from '@playwright/test';
-import { login } from 'authentication/auth-dsm';
+import {test} from '@playwright/test';
+import {login} from 'authentication/auth-dsm';
 import ParticipantListPage from 'pages/dsm/participantList-page';
 import HomePage from 'pages/dsm/home-page';
 import ParticipantPage from 'pages/dsm/participant-page';
 import CohortTag from 'lib/component/dsm/cohort-tag';
-import { StudyNav } from 'lib/component/dsm/navigation/enums/studyNav.enum';
-import { Navigation } from 'lib/component/dsm/navigation/navigation';
+import {StudyNav} from 'lib/component/dsm/navigation/enums/studyNav.enum';
+import {Navigation} from 'lib/component/dsm/navigation/navigation';
 import * as crypto from 'crypto';
-import { AdditionalFilter } from 'lib/component/dsm/filters/sections/search/search-enums';
-import { WelcomePage } from 'pages/dsm/welcome-page';
+import {AdditionalFilter} from 'lib/component/dsm/filters/sections/search/search-enums';
+import {WelcomePage} from 'pages/dsm/welcome-page';
+import {Study} from "lib/component/dsm/navigation/enums/selectStudyNav.enum";
 
 /**
  * @TODO
@@ -23,7 +24,7 @@ test.describe.parallel('', () => {
   let navigation: Navigation;
   let cohortTag: CohortTag;
 
-  const studyNames = ['Brain', 'PanCan'];
+  const studyNames = [Study.BRAIN, Study.PANCAN];
 
   test.beforeEach(async ({ page }) => {
     await login(page);
