@@ -5,7 +5,7 @@ import HomePage from 'pages/dsm/home-page';
 import { StudyNav } from 'lib/component/dsm/navigation/enums/studyNav.enum';
 import { Navigation } from 'lib/component/dsm/navigation/navigation';
 import { WelcomePage } from 'pages/dsm/welcome-page';
-import {Study} from "lib/component/dsm/navigation/enums/selectStudyNav.enum";
+import { Study } from 'lib/component/dsm/navigation/enums/selectStudyNav.enum';
 
 test.describe('Singular Study in DSM', () => {
   let welcomePage: WelcomePage;
