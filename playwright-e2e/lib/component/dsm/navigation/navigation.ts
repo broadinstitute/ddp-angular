@@ -1,22 +1,28 @@
 import { Page } from '@playwright/test';
-import Dropdown from 'lib/widget/dropdown';
+import Dropdown from 'lib/widget/dsm/dropdown';
 import ParticipantListPage from 'pages/dsm/participantList-page';
 import { MainMenu } from './enums/mainMenu.enum';
 import { StudyNav } from './enums/studyNav.enum';
+import { Study } from './enums/selectStudyNav.enum';
+import { NavigationItems } from './navigation-types';
 
 export class Navigation {
-  private readonly navigationItems: any = {
-    Study: { name: StudyNav.PARTICIPANT_LIST, Page: ParticipantListPage }
+  private readonly navigationItems: Partial<NavigationItems> = {
+    study: new Map([[StudyNav.PARTICIPANT_LIST, new ParticipantListPage(this.page)]])
   };
 
   constructor(private readonly page: Page) {}
 
-  async selectFromStudy<T extends object>(selection: string): Promise<T> {
-    return await this.select<T>(MainMenu.STUDY, selection);
+  public async selectStudy(studyName: Study): Promise<void> {
+    await this.selectFrom(MainMenu.SELECTED_STUDY, studyName);
   }
 
-  private async select<T extends object>(from: MainMenu, page: string): Promise<T> {
-    await new Dropdown(this.page, from).selectOption(page, { waitForNav: true });
-    return new this.navigationItems[from].Page(this.page);
+  async selectFromStudy<T extends object>(studyNav: StudyNav): Promise<T> {
+    await this.selectFrom(MainMenu.STUDY, studyNav);
+    return (this.navigationItems.study as Map<string, object>).get(studyNav) as T;
+  }
+
+  private async selectFrom(from: MainMenu, selection: Study | StudyNav): Promise<void> {
+    await new Dropdown(this.page, from).selectOption(selection);
   }
 }
