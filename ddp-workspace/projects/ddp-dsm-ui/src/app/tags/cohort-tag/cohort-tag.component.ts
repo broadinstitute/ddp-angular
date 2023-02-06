@@ -72,9 +72,9 @@ export class CohortTagComponent implements OnInit {
 
     if (foundTagIndex >= 0) {
       if (tagToRemove.cohortTagId) {
-        this.dsmService.deleteCohortTag(tagToRemove.cohortTagId, this.compService.getRealm()).subscribe();
+        this.dsmService.deleteCohortTag(tagToRemove.cohortTagId, this.compService.getRealm())
+          .subscribe({next: () => this.getTags().splice(foundTagIndex, 1)});
       }
-      this.getTags().splice(foundTagIndex, 1);
     }
   }
 
