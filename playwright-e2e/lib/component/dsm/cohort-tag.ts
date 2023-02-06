@@ -17,8 +17,8 @@ export default class CohortTag {
 
   public async submitAndExit(): Promise<void> {
     const submitButton = await this.page.locator(this.getSubmitButtonXPath);
-    !await submitButton.isDisabled() && await submitButton.click()
-    await this.waitForOKResponse('bulkCreateCohortTags')
+    !(await submitButton.isDisabled()) && (await submitButton.click());
+    await this.waitForOKResponse('bulkCreateCohortTags');
     await this.page.keyboard.press('Escape');
   }
 
