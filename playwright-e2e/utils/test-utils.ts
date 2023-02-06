@@ -8,7 +8,7 @@ import { Response } from 'playwright-core';
 
 const { SITE_PASSWORD } = process.env;
 
-interface WaitForResponseByURLConfig {
+export interface WaitForResponseByURLConfig {
   url: string;
   status: number;
   timeout?: number;

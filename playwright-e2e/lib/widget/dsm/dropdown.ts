@@ -1,8 +1,5 @@
 import { Locator, Page } from '@playwright/test';
 
-/**
- * DSM UI
- */
 export default class Dropdown {
   private readonly page: Page;
   private readonly locator: Locator;
