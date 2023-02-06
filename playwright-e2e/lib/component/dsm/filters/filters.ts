@@ -24,6 +24,8 @@ export class Filters {
     return this.page.locator(XPath);
   }
 
+  /* XPaths */
+
   private get reloadWithDefaultFiltersXPath(): string {
     return (
       "//div[text()[normalize-space()='Reload With Default Filter'] " +

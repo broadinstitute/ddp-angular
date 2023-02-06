@@ -143,7 +143,7 @@ export class Search {
     return this.page.locator(
       `${
         isTextField ? this.baseTextColumnXPath(columnName) : this.baseColumnXPath(columnName)
-      }/div[mat-checkbox[label[*[text()[normalize-space()='${checkboxName}']]]]]/mat-checkbox`
+      }/div[mat-checkbox[label[.//*[text()[normalize-space()='${checkboxName}']]]]]/mat-checkbox`
     );
   }
 
@@ -165,11 +165,11 @@ export class Search {
   }
 
   private get plusIconXPath(): string {
-    return "/button[*[local-name()='svg' and @data-icon='plus-square']/*[local-name()='path']]";
+    return "/button[.//*[local-name()='svg' and @data-icon='plus-square']/*[local-name()='path']]";
   }
 
   private get minusIconXPath(): string {
-    return "/button[*[local-name()='svg' and @data-icon='minus-square']/*[local-name()='path']]";
+    return "/button[.//*[local-name()='svg' and @data-icon='minus-square']/*[local-name()='path']]";
   }
 
   private todayButtonXPath(columnName: string): string {

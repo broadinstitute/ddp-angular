@@ -107,7 +107,7 @@ test.describe.parallel('', () => {
 
       await cohortTag.assertDuplicateCohortTagMessage();
 
-      await participantPage.assertParticipantNotesToHaveCount(participantNoteValue);
+      await participantPage.assertParticipantNotesToBe(participantNoteValue);
 
       await participantPage.backToList();
       await participantListPage.selectParticipant();

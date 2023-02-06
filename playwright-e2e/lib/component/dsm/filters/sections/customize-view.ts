@@ -19,9 +19,9 @@ export class CustomizeView {
 
   private async selectColumn(columnName: string): Promise<void> {
     const columnXPath = this.columnsGroupXPath + this.columnPathXPath(columnName);
-    const column = this.locator(columnXPath);
+    const column = this.page.locator(columnXPath);
 
-    !(await this.isChecked(column)) && (await this.locator(columnXPath).click());
+    !(await this.isChecked(column)) && (await this.page.locator(columnXPath).click());
   }
 
   private async openColumnsGroup(): Promise<void> {
@@ -32,10 +32,6 @@ export class CustomizeView {
   private async closeColumnsGroup(): Promise<void> {
     const columnsGroupButton = this.columnsGroupButton;
     (await this.isExpanded(columnsGroupButton)) && (await columnsGroupButton.click());
-  }
-
-  private get columnsGroupButton(): Locator {
-    return this.locator(`${this.columnsGroupXPath}/button`);
   }
 
   private async isChecked(locator: Locator | undefined): Promise<boolean> {
@@ -50,8 +46,8 @@ export class CustomizeView {
 
   /* Locators */
 
-  private locator(XPath: string): Locator {
-    return this.page.locator(XPath);
+  private get columnsGroupButton(): Locator {
+    return this.page.locator(`${this.columnsGroupXPath}/button`);
   }
 
   /* XPaths */
@@ -67,6 +63,6 @@ export class CustomizeView {
   }
 
   private columnPathXPath(columnName: string): string {
-    return `/ul/li/mat-checkbox[label[*[text()[normalize-space()='${columnName}']]]]`;
+    return `/ul/li/mat-checkbox[label[.//*[text()[normalize-space()='${columnName}']]]]`;
   }
 }
