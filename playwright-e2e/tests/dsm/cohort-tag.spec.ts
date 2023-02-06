@@ -73,11 +73,6 @@ test.describe.parallel('', () => {
 
       await participantPage.assertPageTitle();
 
-      /*
-       @NOTE Don't delete me
-       */
-      // await cohortTag.removeAllTags();
-
       await cohortTag.add(cohortTagValue1);
       await cohortTag.remove(cohortTagValue1);
       await cohortTag.add(cohortTagValue2);
@@ -110,7 +105,7 @@ test.describe.parallel('', () => {
 
       await cohortTag.add(cohortTagValue3);
 
-      await cohortTag.assertCohortTagToHaveCount('Duplicate tag! Not saved!', 1);
+      await cohortTag.assertDuplicateCohortTagMessage();
 
       await participantPage.assertParticipantNotesToHaveCount(participantNoteValue);
 
