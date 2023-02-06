@@ -22,13 +22,12 @@ export default class Dropdown {
    * Determine if dropdown is open by look up aria-expanded property
    */
   async isOpen(): Promise<boolean> {
-    const ariaExpanded = await this.toLocator().locator('a[data-toggle="dropdown"]')
-      .getAttribute('aria-expanded');
+    const ariaExpanded = await this.toLocator().locator('a[data-toggle="dropdown"]').getAttribute('aria-expanded');
     return ariaExpanded === 'true';
   }
 
   async open(): Promise<void> {
-    !(await this.isOpen()) && await this.toLocator().locator('a.dropdown-toggle').click();
+    !(await this.isOpen()) && (await this.toLocator().locator('a.dropdown-toggle').click());
   }
 
   async selectOption(value: string): Promise<void> {

@@ -1,5 +1,5 @@
 export enum Study {
-  AT= 'AT',
+  AT = 'AT',
   BRUGADA = 'Brugada',
   BASIL = 'basil',
   ANGIO = 'Angio',

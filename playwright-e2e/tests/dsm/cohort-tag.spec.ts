@@ -8,7 +8,7 @@ import { StudyNav } from 'lib/component/dsm/navigation/enums/studyNav.enum';
 import { Navigation } from 'lib/component/dsm/navigation/navigation';
 import * as crypto from 'crypto';
 import { AdditionalFilter } from 'lib/component/dsm/filters/sections/search/search-enums';
-import {WelcomePage} from "pages/dsm/welcome-page";
+import { WelcomePage } from 'pages/dsm/welcome-page';
 
 /**
  * @TODO
