@@ -14,7 +14,7 @@ export default class ParticipantPage {
   }
 
   public async backToList(): Promise<void> {
-    await this.page.locator("//div/a[.//*[contains(text(), \"<< back to 'List' \")]]").click();
+    await this.page.locator('//div/a[.//*[contains(text(), "<< back to \'List\' ")]]').click();
   }
 
   /* Locators */
