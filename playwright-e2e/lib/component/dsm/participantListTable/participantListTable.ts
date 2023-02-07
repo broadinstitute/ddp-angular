@@ -1,7 +1,7 @@
 import { Locator, Page } from '@playwright/test';
 import ParticipantPage from 'pages/dsm/participant-page';
 
-export class Table {
+export class ParticipantListTable {
   private readonly _participantPage: ParticipantPage = new ParticipantPage(this.page);
 
   constructor(private readonly page: Page) {}
