@@ -19,19 +19,20 @@ test.describe('Singular Study in DSM', () => {
     navigation = new Navigation(page);
   });
 
-  test('search by Short ID in Singular study @dsm @dsm-search', async ({ page }) => {
+  test('search by Short ID in Singular study @dsm', async ({ page }) => {
     await welcomePage.selectStudy(Study.SINGULAR);
 
     await homePage.assertWelcomeTitle();
     await homePage.assertSelectedStudyTitle('Singular');
 
     const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(StudyNav.PARTICIPANT_LIST);
+    const participantListTable = participantListPage.participantListTable;
 
     await participantListPage.assertPageTitle();
 
     await participantListPage.waitForReady();
 
-    const shortId = await participantListPage.getParticipantShortIdAt(0);
+    const shortId = await participantListTable.getParticipantDataAtBy(0, 'Short ID');
 
     const searchPanel = participantListPage.filters.searchPanel;
 
