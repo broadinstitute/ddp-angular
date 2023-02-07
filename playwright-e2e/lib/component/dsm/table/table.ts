@@ -12,12 +12,11 @@ export class Table {
     return this._participantPage;
   }
 
-  public async openParticipantPageBy(
-    columnName: string,
-    columnValue: string,
-    position = 1
-  ): Promise<ParticipantPage> {
-    await this.page.locator(this.getParticipantXPathBy(columnName, columnValue)).nth(position - 1).click();
+  public async openParticipantPageBy(columnName: string, columnValue: string, position = 1): Promise<ParticipantPage> {
+    await this.page
+      .locator(this.getParticipantXPathBy(columnName, columnValue))
+      .nth(position - 1)
+      .click();
     return this._participantPage;
   }
 
