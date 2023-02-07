@@ -34,7 +34,7 @@ export class ParticipantListTable {
     return (
       `//table/thead/th[text()[normalize-space()='${columnName}']]` +
       `/ancestor::table/tbody//td[position()=${this.theadCount(columnName)}]` +
-      "[.//*[text()[normalize-space()='${columnValue}']]]/ancestor::tr"
+      `[.//*[text()[normalize-space()='${columnValue}']]]/ancestor::tr`
     );
   }
 
