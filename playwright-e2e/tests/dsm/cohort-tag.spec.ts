@@ -18,7 +18,7 @@ import { Study } from 'lib/component/dsm/navigation/enums/selectStudyNav.enum';
  * 3. refactor code
  * 4. have frequently used filters or other functions made simple
  */
-test.describe.parallel('', () => {
+test.describe.parallel('Cohort tags', () => {
   let welcomePage: WelcomePage;
   let homePage: HomePage;
   let navigation: Navigation;
@@ -35,7 +35,7 @@ test.describe.parallel('', () => {
   });
 
   for (const studyName of studyNames) {
-    test(`Ensure cohort tags update and delete properly for ${studyName} @dsm @dsm-search @functional`, async ({ page }) => {
+    test(`Ensure cohort tags update and delete properly for ${studyName} @dsm @functional`, async ({ page }) => {
       await welcomePage.selectStudy(studyName);
 
       /* Test Values */

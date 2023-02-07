@@ -19,7 +19,7 @@ test.describe('Singular Study in DSM', () => {
     navigation = new Navigation(page);
   });
 
-  test('search by Short ID in Singular study @dsm @dsm-search', async ({ page }) => {
+  test('search by Short ID in Singular study @dsm', async ({ page }) => {
     await welcomePage.selectStudy(Study.SINGULAR);
 
     await homePage.assertWelcomeTitle();
