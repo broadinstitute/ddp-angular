@@ -51,6 +51,7 @@ test.describe.parallel('', () => {
       const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(StudyNav.PARTICIPANT_LIST);
       const customizeViewPanel = participantListPage.filters.customizeViewPanel;
       const searchPanel = participantListPage.filters.searchPanel;
+      const participantListTable = participantListPage.participantListTable
 
       await participantListPage.assertPageTitle();
 
@@ -69,7 +70,7 @@ test.describe.parallel('', () => {
 
       await participantListPage.assertParticipantsCountGreaterOrEqual(1);
 
-      const participantPage: ParticipantPage = await participantListPage.clickParticipantAt(0);
+      const participantPage: ParticipantPage = await participantListTable.openParticipantPageAt(1);
 
       await participantPage.assertPageTitle();
 
@@ -93,7 +94,7 @@ test.describe.parallel('', () => {
       await searchPanel.checkboxes('Status', { checkboxValues: ['Enrolled'] });
       await searchPanel.search();
 
-      await participantListPage.clickParticipantAt(0);
+      await participantListTable.openParticipantPageAt(1);
 
       await participantPage.assertPageTitle();
       await cohortTag.assertCohortTagToHaveCount(cohortTagValue1, 0);
@@ -110,11 +111,11 @@ test.describe.parallel('', () => {
       await participantPage.assertParticipantNotesToBe(participantNoteValue);
 
       await participantPage.backToList();
-      await participantListPage.selectParticipant();
+      await participantListTable.selectParticipantAt(1);
       await participantListPage.addBulkCohortTags();
       await cohortTag.add(cohortTagValue3);
       await cohortTag.submitAndExit();
-      await participantListPage.clickParticipantAt(0);
+      await participantListTable.openParticipantPageAt(1);
 
       await cohortTag.assertCohortTagToHaveCount(cohortTagValue3, 1);
 

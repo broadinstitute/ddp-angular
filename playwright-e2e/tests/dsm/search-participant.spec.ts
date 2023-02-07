@@ -26,12 +26,13 @@ test.describe('Singular Study in DSM', () => {
     await homePage.assertSelectedStudyTitle('Singular');
 
     const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(StudyNav.PARTICIPANT_LIST);
+    const participantListTable = participantListPage.participantListTable;
 
     await participantListPage.assertPageTitle();
 
     await participantListPage.waitForReady();
 
-    const shortId = await participantListPage.getParticipantShortIdAt(0);
+    const shortId = await participantListTable.getParticipantDataAtBy(1,'Short ID');
 
     const searchPanel = participantListPage.filters.searchPanel;
 
