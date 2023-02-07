@@ -70,7 +70,7 @@ test.describe.parallel('Cohort tags', () => {
 
       await participantListPage.assertParticipantsCountGreaterOrEqual(1);
 
-      const participantPage: ParticipantPage = await participantListTable.openParticipantPageAt(1);
+      const participantPage: ParticipantPage = await participantListTable.openParticipantPageAt(0);
 
       await participantPage.assertPageTitle();
 
@@ -94,7 +94,7 @@ test.describe.parallel('Cohort tags', () => {
       await searchPanel.checkboxes('Status', { checkboxValues: ['Enrolled'] });
       await searchPanel.search();
 
-      await participantListTable.openParticipantPageAt(1);
+      await participantListTable.openParticipantPageAt(0);
 
       await participantPage.assertPageTitle();
       await cohortTag.assertCohortTagToHaveCount(cohortTagValue1, 0);
@@ -111,11 +111,11 @@ test.describe.parallel('Cohort tags', () => {
       await participantPage.assertParticipantNotesToBe(participantNoteValue);
 
       await participantPage.backToList();
-      await participantListTable.selectParticipantAt(1);
+      await participantListTable.selectParticipantAt(0);
       await participantListPage.addBulkCohortTags();
       await cohortTag.add(cohortTagValue3);
       await cohortTag.submitAndExit();
-      await participantListTable.openParticipantPageAt(1);
+      await participantListTable.openParticipantPageAt(0);
 
       await cohortTag.assertCohortTagToHaveCount(cohortTagValue3, 1);
 

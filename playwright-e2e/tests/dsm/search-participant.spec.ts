@@ -32,7 +32,7 @@ test.describe('Singular Study in DSM', () => {
 
     await participantListPage.waitForReady();
 
-    const shortId = await participantListTable.getParticipantDataAtBy(1, 'Short ID');
+    const shortId = await participantListTable.getParticipantDataAtBy(0, 'Short ID');
 
     const searchPanel = participantListPage.filters.searchPanel;
 

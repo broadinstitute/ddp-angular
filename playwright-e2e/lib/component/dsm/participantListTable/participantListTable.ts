@@ -12,10 +12,10 @@ export class ParticipantListTable {
     return this._participantPage;
   }
 
-  public async openParticipantPageBy(columnName: string, columnValue: string, position = 1): Promise<ParticipantPage> {
+  public async openParticipantPageBy(columnName: string, columnValue: string, position = 0): Promise<ParticipantPage> {
     await this.page
       .locator(this.getParticipantXPathBy(columnName, columnValue))
-      .nth(position - 1)
+      .nth(position)
       .click();
     return this._participantPage;
   }
@@ -29,7 +29,7 @@ export class ParticipantListTable {
   }
 
   private getParticipantAt(position: number): Locator {
-    return this.page.locator(`//table/tbody/tr`).nth(position - 1);
+    return this.page.locator(`//table/tbody/tr`).nth(position);
   }
 
   /* XPaths */
@@ -43,7 +43,7 @@ export class ParticipantListTable {
 
   private getParticipantDataXPathAtBy(position: number, columnName: string) {
     return (
-      `//table/tbody/tr[${position}]//td[position()=`+ this.theadCount(columnName) +"]"
+      `//table/tbody/tr[${position + 1}]//td[position()=`+ this.theadCount(columnName) +"]"
     );
   }
 
