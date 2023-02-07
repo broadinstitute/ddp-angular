@@ -56,6 +56,7 @@ export class ScanPairComponent implements OnInit, OnDestroy {
     if(this.RGPFinalScan && !rightValue.slice(0, 4).includes('RNA')) {
        const openDialog: MatDialogRef<any> = this.dialog.open(this.RGPDialog, {
          width: '250px',
+         disableClose: true
        });
      this.subscription = openDialog.afterClosed()
        .subscribe(() =>
