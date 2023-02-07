@@ -29,6 +29,14 @@ references:
       branches:
         only: develop
 
+  # On PR branches only
+  filter-pr-branch: &filter-pr-branch
+    filters:
+      tags:
+        ignore: /.*/
+      branches:
+        ignore: develop
+
 # Container for all the builds
 executors:
   build-executor:
@@ -51,16 +59,22 @@ commands:
     parameters:
       study_key:
         type: string
+      store_build_artifacts:
+        type: boolean
+        default: true
     steps:
       - setup-build-workspace
       - set-deployment-environment
       - setup-shared-env:
           study_key: << parameters.study_key >>
       - run-linter-check
-      - run-tests
+      - run-ng-test
       - build-app:
           study_key: << parameters.study_key >>
-      - store-app-build
+      - when:
+          condition: << parameters.store_build_artifacts >>
+          steps:
+            - store-app-build
 
   app-build-and-deploy:
     description: Run build and immediately deploy it to GAE
@@ -79,12 +93,12 @@ commands:
           steps:
             - set-deployment-environment
             - run-linter-check
-            - run-tests
+            - run-ng-test
             - build-app:
                 study_key: << parameters.study_key >>
             - deploy-exploded-build:
                 study_key: << parameters.study_key >>
-            - afterbuild-runtests
+            - todo: afterbuild-runtests
 
   set-deployment-environment:
     description: "Determine working environment"
@@ -310,7 +324,8 @@ commands:
             ng lint ddp-sdk
             ng lint toolkit
             ng lint $ANGULAR_PROJECT_NAME
-  run-tests:
+
+  run-ng-test:
     description: "Run all tests"
     steps:
       - run:
@@ -591,7 +606,16 @@ jobs:
       - setup-shared-env:
           study_key: << pipeline.parameters.study_key >>
       - run-linter-check
-      - run-tests
+      - run-ng-test
+
+  build-job:
+    working_directory: *ng_workspace_path
+    executor:
+      name: build-executor
+    steps:
+      - setup-build-workspace
+      - run-linter-check
+      -
 
   build-playwright-test-job:
     executor: build-executor
@@ -768,6 +792,22 @@ parameters:
 
 workflows:
   version: 2
+
+  build-pr:
+    # TODO remove when is for testing
+    when: << pipeline.parameters.do-builds >>
+    # Automatically launched when PR has been merged
+    jobs:
+      - app-build-and-store-job:
+          <<: *filter-pr-branch
+          name: << matrix.study_key >>-build-pr
+          store_build_artifacts: false
+          matrix:
+            alias: build-app-pr
+            parameters:
+              study_key: [ basil, osteo, angio, brain, mbc, testboston, mpc, atcp, rarex, rgp, esc, prion, cgc, circadia, pancan, singular, brugada, lms, fon ]
+      - build-playwright-test-job
+
 
   api-build-and-store-workflow:
     # Build study specified in api call
