@@ -2,7 +2,7 @@ import { expect, Locator, Page } from '@playwright/test';
 
 import { waitForNoSpinner } from 'utils/test-utils';
 import { Filters } from 'lib/component/dsm/filters/filters';
-import { ParticipantListTable } from 'lib/component/dsm/participantListTable/participantListTable';
+import { ParticipantListTable } from 'lib/component/dsm/tables/participantListTable';
 
 export default class ParticipantListPage {
   private readonly PAGE_TITLE: string = 'Participant List';
