@@ -6,34 +6,27 @@ export class Table {
 
   constructor(private readonly page: Page) {}
 
-  public async openParticipantPageAt(position: number): Promise<ParticipantPage | undefined> {
-    position && (await this.getParticipantAt(position).click());
+  public async openParticipantPageAt(position: number): Promise<ParticipantPage> {
+    await this.getParticipantAt(position).click();
     await this._participantPage.assertPageTitle();
-    return position ? this._participantPage : undefined;
+    return this._participantPage;
   }
 
   public async openParticipantPageBy(
     columnName: string,
     columnValue: string,
     position = 1
-  ): Promise<ParticipantPage | undefined> {
-    const proceed = !!columnName && !!columnValue && !!position;
-    proceed &&
-      (await this.page
-        .locator(this.getParticipantXPathBy(columnName, columnValue))
-        .nth(position - 1)
-        .click());
-    return proceed ? this._participantPage : undefined;
+  ): Promise<ParticipantPage> {
+    await this.page.locator(this.getParticipantXPathBy(columnName, columnValue)).nth(position - 1).click();
+    return this._participantPage;
   }
 
   public async getParticipantDataAtBy(position: number, columnName: string): Promise<string> {
-    return position && columnName
-      ? await this.page.locator(this.getParticipantDataXPathAtBy(position, columnName)).innerText()
-      : '';
+    return await this.page.locator(this.getParticipantDataXPathAtBy(position, columnName)).innerText();
   }
 
   public async selectParticipantAt(position: number): Promise<void> {
-    return position ? await this.getParticipantAt(position).nth(0).locator('mat-checkbox').click() : undefined;
+    return await this.getParticipantAt(position).nth(0).locator('mat-checkbox').click();
   }
 
   private getParticipantAt(position: number): Locator {
