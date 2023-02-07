@@ -608,15 +608,6 @@ jobs:
       - run-linter-check
       - run-ng-test
 
-  build-job:
-    working_directory: *ng_workspace_path
-    executor:
-      name: build-executor
-    steps:
-      - setup-build-workspace
-      - run-linter-check
-      -
-
   build-playwright-test-job:
     executor: build-executor
     working_directory: *repo_path
@@ -795,7 +786,7 @@ workflows:
 
   build-pr:
     # TODO remove when is for testing
-    when: << pipeline.parameters.do-builds >>
+    # when: << pipeline.parameters.do-builds >>
     # Automatically launched when PR has been merged
     jobs:
       - app-build-and-store-job:
