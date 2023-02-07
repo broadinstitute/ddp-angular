@@ -30,6 +30,8 @@ export class DSMService {
   public static SCAN_TRACKING = 'scanTracking';
   public static SCAN_RECEIVED = 'scanReceived';
   public static INITIAL_SCAN = 'initialScan';
+  public static RGP_FINAL_SCAN = 'RGPFinalScan';
+
 
   private baseUrl = DDP_ENV.baseUrl;
 

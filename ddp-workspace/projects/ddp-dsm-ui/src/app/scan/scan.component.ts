@@ -28,6 +28,7 @@ export class ScanComponent implements OnInit {
 
   scanReceived = false;
   initialScan = false;
+  RGPFinalScan = false;
   scanValues: Array<ScanValueComponent> = [];
   public showErrorMessage = false;
   private singleScanValues: Array<ScanValue> = [];
@@ -40,6 +41,7 @@ export class ScanComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
       this.scanTracking = params[DSMService.SCAN_TRACKING] || false;
       this.scanReceived = params[DSMService.SCAN_RECEIVED] || false;
+      this.RGPFinalScan = params[DSMService.RGP_FINAL_SCAN] || false;
       this.initialScan = params[DSMService.INITIAL_SCAN] || false;
       this.changePlaceholder();
       this.createNewComponents();
@@ -53,7 +55,10 @@ export class ScanComponent implements OnInit {
       this.rightPlaceholder = 'Kit Label';
     } else if (this.scanReceived) {
       this.leftPlaceholder = 'SM-ID';
-    } else {
+    } else if(this.RGPFinalScan) {
+      this.rightPlaceholder = 'RNA';
+    }
+    else {
       this.leftPlaceholder = 'Kit Label';
       this.rightPlaceholder = 'DSM Label';
       if (this.initialScan) {
@@ -86,6 +91,9 @@ export class ScanComponent implements OnInit {
     if (!this.scanTracking && !this.scanReceived) {
       if (this.initialScan) {
         return 'Initial Scan';
+      }
+      else if(this.RGPFinalScan) {
+        return 'RGP Final Scan'
       }
       return 'Final Scan';
     } else if (this.scanTracking) {
