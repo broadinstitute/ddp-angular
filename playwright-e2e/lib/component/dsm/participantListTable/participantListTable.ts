@@ -36,16 +36,19 @@ export class ParticipantListTable {
   private getParticipantXPathBy(columnName: string, columnValue: string): string {
     return (
       `//table/thead/th[text()[normalize-space()='${columnName}']]` +
-      `/ancestor::table/tbody//td[position()=` +
-      `count(//table/thead/th[text()[normalize-space()='${columnName}']]` +
-      `/preceding-sibling::th)+1][.//*[text()[normalize-space()='${columnValue}']]]/ancestor::tr`
+      `/ancestor::table/tbody//td[position()=` + this.theadCount(columnName) +
+      `][.//*[text()[normalize-space()='${columnValue}']]]/ancestor::tr`
     );
   }
 
   private getParticipantDataXPathAtBy(position: number, columnName: string) {
     return (
-      `//table/tbody/tr[${position}]//td[position()=count(//table/thead/` +
-      `th[text()[normalize-space()='${columnName}']]/preceding-sibling::th)+1]`
+      `//table/tbody/tr[${position}]//td[position()=`+ this.theadCount(columnName) +"]"
     );
+  }
+
+  private theadCount(columnName: string): string {
+    return `count(//table/thead/` +
+      `th[text()[normalize-space()='${columnName}']]/preceding-sibling::th)+1`;
   }
 }
