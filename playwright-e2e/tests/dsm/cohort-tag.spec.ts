@@ -51,7 +51,7 @@ test.describe.parallel('', () => {
       const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(StudyNav.PARTICIPANT_LIST);
       const customizeViewPanel = participantListPage.filters.customizeViewPanel;
       const searchPanel = participantListPage.filters.searchPanel;
-      const participantListTable = participantListPage.participantListTable
+      const participantListTable = participantListPage.participantListTable;
 
       await participantListPage.assertPageTitle();
 
