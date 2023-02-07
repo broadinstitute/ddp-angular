@@ -564,6 +564,7 @@ jobs:
     parameters:
       study_key:
         type: string
+        default: << pipeline.parameters.study_key >>
       store_build_artifacts:
         type: boolean
         default: true
