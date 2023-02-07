@@ -127,7 +127,7 @@
             <!--            kit type-->
             Type
           </th>
-          <th *ngIf="isClinicalStudy">
+          <th *ngIf="isClinicalStudy && shippingPage !== UPLOADED">
             <!--            sample type-->
             Sample Type
           </th>
@@ -203,7 +203,7 @@
           <th>
             <!--            kit type-->
           </th>
-          <th *ngIf="isClinicalStudy">
+          <th *ngIf="isClinicalStudy && shippingPage !== UPLOADED">
             <!--            sample type-->
           </th>
           <th
@@ -310,7 +310,7 @@
             <!--            kit type-->
             {{kitRequest.kitTypeName}}
           </td>
-          <td *ngIf="isClinicalStudy && (shippingPage === RECEIVED || shippingPage === OVERVIEW)" [ngClass]="{'highlight_sample': isResearchSample(kitRequest)}">
+          <td *ngIf="isClinicalStudy && shippingPage !== UPLOADED" [ngClass]="{'highlight_sample': isResearchSample(kitRequest)}">
             <!--            sample type-->
             <ng-container *ngIf="!isResearchSample(kitRequest)">Clinical Sample</ng-container>
             <ng-container *ngIf="isResearchSample(kitRequest)">Research Sample</ng-container>

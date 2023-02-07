@@ -814,8 +814,7 @@ export class ShippingComponent implements OnInit {
   }
 
   isResearchSample(kitRequest: KitRequest): boolean {
-    return  ((kitRequest.message && kitRequest.message === this.PECGS_RESEARCH)
-      || (kitRequest.sequencingRestriction && kitRequest.sequencingRestriction === this.RESEARCH_SAMPLE))
-      && this.isClinicalStudy;
+    return (kitRequest.message && kitRequest.message === this.PECGS_RESEARCH)
+        || (kitRequest.sequencingRestriction && kitRequest.sequencingRestriction === this.RESEARCH_SAMPLE);
   }
 }
