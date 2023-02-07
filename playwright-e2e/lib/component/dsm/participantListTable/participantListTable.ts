@@ -13,10 +13,7 @@ export class ParticipantListTable {
   }
 
   public async openParticipantPageBy(columnName: string, columnValue: string, position = 0): Promise<ParticipantPage> {
-    await this.page
-      .locator(this.getParticipantXPathBy(columnName, columnValue))
-      .nth(position)
-      .click();
+    await this.page.locator(this.getParticipantXPathBy(columnName, columnValue)).nth(position).click();
     return this._participantPage;
   }
 
@@ -36,19 +33,16 @@ export class ParticipantListTable {
   private getParticipantXPathBy(columnName: string, columnValue: string): string {
     return (
       `//table/thead/th[text()[normalize-space()='${columnName}']]` +
-      `/ancestor::table/tbody//td[position()=` + this.theadCount(columnName) +
-      `][.//*[text()[normalize-space()='${columnValue}']]]/ancestor::tr`
+      `/ancestor::table/tbody//td[position()=${this.theadCount(columnName)}]` +
+      "[.//*[text()[normalize-space()='${columnValue}']]]/ancestor::tr"
     );
   }
 
   private getParticipantDataXPathAtBy(position: number, columnName: string) {
-    return (
-      `//table/tbody/tr[${position + 1}]//td[position()=`+ this.theadCount(columnName) +"]"
-    );
+    return `//table/tbody/tr[${position + 1}]//td[position()=${this.theadCount(columnName)}]`;
   }
 
   private theadCount(columnName: string): string {
-    return `count(//table/thead/` +
-      `th[text()[normalize-space()='${columnName}']]/preceding-sibling::th)+1`;
+    return `count(//table/thead/` + `th[text()[normalize-space()='${columnName}']]/preceding-sibling::th)+1`;
   }
 }
