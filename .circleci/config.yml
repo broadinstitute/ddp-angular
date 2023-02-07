@@ -54,28 +54,6 @@ executors:
       NODE_ENV: development # Needed if playwright is in devDependencies
 
 commands:
-  app-build-and-store:
-    description: Run build and store archive of it
-    parameters:
-      study_key:
-        type: string
-      store_build_artifacts:
-        type: boolean
-        default: true
-    steps:
-      - setup-build-workspace
-      - set-deployment-environment
-      - setup-shared-env:
-          study_key: << parameters.study_key >>
-      - run-linter-check
-      - run-ng-test
-      - build-app:
-          study_key: << parameters.study_key >>
-      - when:
-          condition: << parameters.store_build_artifacts >>
-          steps:
-            - store-app-build
-
   app-build-and-deploy:
     description: Run build and immediately deploy it to GAE
     parameters:
@@ -584,6 +562,8 @@ jobs:
     executor:
       name: build-executor
     parameters:
+      study_key:
+        type: string
       store_build_artifacts:
         type: boolean
         default: true
