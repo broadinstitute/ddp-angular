@@ -224,7 +224,8 @@
         </thead>
         <tbody>
         <tr *ngFor="let kitRequest of mf.data; let i = index">
-          <td *ngIf="getRole().allowedToHandleSamples() && (queueToPrint() || shippingPage === UPLOADED) && !kitType.externalShipper">
+          <td *ngIf="getRole().allowedToHandleSamples() && (queueToPrint() || shippingPage === UPLOADED) && !kitType.externalShipper"
+              [ngClass]="{'highlight_sample': isResearchSample(kitRequest)}">
             <!--            checkbox to select for printing label -->
             <ng-container *ngIf="(shippingPage === UPLOADED && kitRequest.labelDate === undefined) || queueToPrint()">
               <mat-checkbox color="primary" disableRipple
@@ -245,7 +246,8 @@
               </div>
             </div>
           </td>
-          <td *ngIf="(shippingPage === UPLOADED || shippingPage === QUEUE || shippingPage === ERROR) && showPreferredLanguage()">
+          <td *ngIf="(shippingPage === UPLOADED || shippingPage === QUEUE || shippingPage === ERROR) && showPreferredLanguage()"
+              [ngClass]="{'highlight_sample': isResearchSample(kitRequest)}">
             <!--            preferred Language-->
             <ng-container *ngIf="kitRequest.preferredLanguage != null && kitRequest.preferredLanguage !== ''">{{getLanguage().getLanguageName(kitRequest.preferredLanguage)}}</ng-container>
           </td>
@@ -261,7 +263,8 @@
             <!--            external order status-->
             {{kitRequest.externalOrderStatus}}
           </td>
-          <td *ngIf="shippingPage === ERROR" class="Line--Break">
+          <td *ngIf="shippingPage === ERROR" class="Line--Break"
+              [ngClass]="{'highlight_sample': isResearchSample(kitRequest)}">
             <!--            error-->
             {{kitRequest.getError()}}
           </td>
@@ -316,7 +319,8 @@
             <ng-container *ngIf="isResearchSample(kitRequest)">Research Sample</ng-container>
           </td>
           <td
-            *ngIf="getRole().allowedToDeactivateKits() && (shippingPage === DEACTIVATED || (shippingPage !== DEACTIVATED && (queueToPrint() || shippingPage === UPLOADED)))">
+            *ngIf="getRole().allowedToDeactivateKits() && (shippingPage === DEACTIVATED || (shippingPage !== DEACTIVATED && (queueToPrint() || shippingPage === UPLOADED)))"
+            [ngClass]="{'highlight_sample': isResearchSample(kitRequest)}">
             <!--            deactivation/reactivation button-->
             <button *ngIf="shippingPage !== DEACTIVATED && (queueToPrint() || shippingPage === UPLOADED) && !kitType.externalShipper" type="button"
                     (click)="setKitRequest(kitRequest, DEACTIVATED); modal.show()" class="btn btn-xs Button--Background--Color">Deactivate
