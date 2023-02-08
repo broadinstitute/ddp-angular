@@ -6,7 +6,6 @@ import { DSMService } from '../services/dsm.service';
 import { KitRequest } from '../shipping/shipping.model';
 import { RoleService } from '../services/role.service';
 import { Observable, defer } from 'rxjs';
-import {ComponentService} from "../services/component.service";
 
 @Component({
   selector: 'app-shipping-search',
