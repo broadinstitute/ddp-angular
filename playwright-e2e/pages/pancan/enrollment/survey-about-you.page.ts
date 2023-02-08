@@ -1,8 +1,8 @@
 import { expect, Locator, Page } from '@playwright/test';
 import Question from 'lib/component/Question';
-import { PancanPage } from 'pages/pancan/pancan-page';
+import { PancanPageBase } from 'pages/pancan/pancan-page-base';
 
-export default class SurveyAboutYouPage extends PancanPage {
+export default class SurveyAboutYouPage extends PancanPageBase {
   constructor(page: Page) {
     super(page);
   }
@@ -35,7 +35,7 @@ export default class SurveyAboutYouPage extends PancanPage {
   }
 
   //Question selectInput
-  categoriesDescribesYou(label: string): Locator {
+  raceCategoriesDescribesYou(label: string): Locator {
     return this.page.locator('.picklist-answer-RACE >> mat-checkbox').filter({ has: this.page.locator(`text="${label}"`) });
   }
 
@@ -55,9 +55,27 @@ export default class SurveyAboutYouPage extends PancanPage {
     await expect(loc).toHaveClass(/checkbox-checked/);
   }
 
-  async checkCategoriesDescribesYou(option: string) {
-    const loc = this.categoriesDescribesYou(option);
+  async checkRaceCategoriesDescribesYou(option: string) {
+    const loc = this.raceCategoriesDescribesYou(option);
     await loc.click();
     await expect(loc).toHaveClass(/checkbox-checked/);
+  }
+
+  async fillInSurveyAboutYou(
+    opts: { sex?: string; gender?: string; race?: string; howDidYouHearAboutProject?: string } = {}
+  ): Promise<void> {
+    const {
+      sex = 'Male',
+      gender = 'Man',
+      race = 'White',
+      howDidYouHearAboutProject = 'Social media (Facebook, Twitter, Instagram, etc.)'
+    } = opts;
+    await this.waitForReady();
+    await this.sexAssignedAtBirth().radioButton(sex, { exactMatch: true }).locator('label').click();
+    await this.checkGenderIdentity(gender);
+    await this.checkRaceCategoriesDescribesYou(race);
+    await this.checkRaceCategoriesDescribesYou('English');
+    await this.howDidYouHearAboutProject().check(howDidYouHearAboutProject);
+    await this.howDidYouHearAboutProject().check('Facebook', { exactMatch: true });
   }
 }

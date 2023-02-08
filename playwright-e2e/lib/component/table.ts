@@ -9,17 +9,19 @@ export default class Table {
   private readonly rowCss: string;
   private readonly cellCss: string;
   private readonly footerCss: string;
+  private readonly nth: number;
 
-  constructor(page: Page, opts: { cssClassAttribute?: string; ddpTestID?: string } = {}) {
-    const { cssClassAttribute, ddpTestID } = opts;
+  constructor(page: Page, opts: { cssClassAttribute?: string; ddpTestID?: string; nth?: number } = {}) {
+    const { cssClassAttribute, ddpTestID, nth = 0 } = opts;
     this.page = page;
+    this.nth = nth;
     // prettier-ignore
     this.tableCss = ddpTestID
         ? `[data-ddp-test="${ddpTestID}"]`
         : cssClassAttribute
             ? `table${cssClassAttribute}, mat-table${cssClassAttribute}`
             : 'table, mat-table, [role="table"]';
-    this.headerCss = '[role="columnheader"]';
+    this.headerCss = '[role="columnheader"]:visible';
     this.rowCss = '[role="row"]:not([mat-header-row]):not(mat-header-row), tbody tr';
     this.cellCss = '[role="cell"], td';
     this.footerCss = 'tfoot tr';
@@ -31,7 +33,7 @@ export default class Table {
   }
 
   tableLocator(): Locator {
-    return this.page.locator(this.tableCss);
+    return this.page.locator(this.tableCss).nth(this.nth);
   }
 
   rowLocator(): Locator {
@@ -109,5 +111,19 @@ export default class Table {
   findButtonInCell(cellLocator: Locator, opts: { label?: string }): Button {
     const { label } = opts;
     return new Button(this.page, { root: cellLocator, label });
+  }
+
+  async show(): Promise<void> {
+    await this.tableLocator()
+      .locator('xpath=/ancestor::mat-expansion-panel')
+      .locator('mat-icon', { hasText: /expand_more/ })
+      .click();
+  }
+
+  async hide(): Promise<void> {
+    await this.tableLocator()
+      .locator('xpath=/ancestor::mat-expansion-panel')
+      .locator('mat-icon', { hasText: /expand_less/ })
+      .click();
   }
 }

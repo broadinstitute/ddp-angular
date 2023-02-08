@@ -40,6 +40,6 @@ export default class Input extends WidgetBase {
   }
 
   toLocator(): Locator {
-    return this.elementLocator;
+    return this.elementLocator.nth(this.nth);
   }
 }

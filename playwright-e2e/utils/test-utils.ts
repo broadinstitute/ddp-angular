@@ -1,16 +1,27 @@
 import { BrowserContext, Download, expect, Locator, Page } from '@playwright/test';
-import Input from 'lib/widget/Input';
+import Input from 'lib/widget/input';
 import Checkbox from 'lib/widget/checkbox';
 import Radiobutton from 'lib/widget/radiobutton';
 import Select from 'lib/widget/select';
 import axios from 'axios';
+import { Response } from 'playwright-core';
 
 const { SITE_PASSWORD } = process.env;
+
+export interface WaitForResponseByURLConfig {
+  url: string;
+  status: number;
+  timeout?: number;
+}
 
 export async function waitForNoSpinner(page: Page): Promise<void> {
   await page
     .locator('[data-icon="spinner"].fa-spin, mat-spinner[role="progressbar"]')
     .waitFor({ state: 'hidden', timeout: 30 * 1000 });
+}
+
+export async function waitForResponseByURL(page: Page, { url, status, timeout }: WaitForResponseByURLConfig) {
+  await page.waitForResponse((resp: Response) => resp.url().includes(url) && resp.status() === status, { timeout });
 }
 
 export async function waitUntilRemoved(locator: Locator): Promise<void> {
@@ -51,6 +62,7 @@ export async function fillSitePassword(page: Page, password = SITE_PASSWORD): Pr
   if (password == null) {
     throw Error(`Invalid parameter: password is "${SITE_PASSWORD}"`);
   }
+  await page.locator('input[type="password"]').waitFor({ state: 'visible', timeout: 30 * 1000 });
   await page.locator('input[type="password"]').fill(password);
   await Promise.all([page.waitForNavigation(), page.locator('button >> text=Submit').click()]);
 }

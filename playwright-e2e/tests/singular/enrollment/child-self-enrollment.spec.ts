@@ -15,8 +15,7 @@ test.describe('Child Enrollment', () => {
 
     // Enter an age < 19
     await preScreeningPage.age().fill(user.child.age);
-    await preScreeningPage.country().select().selectOption(user.child.country.abbreviation);
-    await preScreeningPage.state().select().selectOption(user.child.state.abbreviation);
+    await preScreeningPage.fillInCountry(user.child.country.abbreviation, { state: user.child.state.abbreviation });
     // In the “Do you or your immediate family member have a single ventricle heart defect?” select “Yes”
     await preScreeningPage.haveVentricleHeartDefect().check('Yes');
     await preScreeningPage.checkReCaptcha(); // ReCaptcha "I'm not a robot"

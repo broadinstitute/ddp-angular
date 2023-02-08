@@ -45,7 +45,7 @@ test.describe('Adult Dependent visual tests', () => {
     // Clear the error message by select `The dependant being enrolled`
     await whoHasVentricleHeartDefect.uncheck(WHO.SomeoneElse);
     await whoHasVentricleHeartDefect.check(WHO.TheDependantBeingEnrolled);
-    await page.waitForResponse((resp) => resp.url().includes('/answers') && resp.status() === 200);
+    await expect(whoHasVentricleHeartDefect.errorMessage()).toBeHidden();
     const screenshotSuccess = await whoHasVentricleHeartDefect.toLocator().screenshot();
     expect(screenshotSuccess).toMatchSnapshot('whoHasVentricleHeartDefect-no-errors.png');
   });
@@ -66,7 +66,7 @@ test.describe('Adult Dependent visual tests', () => {
     expect(screenshotInvalidAge).toMatchSnapshot('age-invalid-error-message.png');
     // Enter a valid age
     await age.fill('58');
-    await page.waitForResponse((resp) => resp.url().includes('/answers') && resp.status() === 200);
+    await expect(age.errorMessage()).toBeHidden();
     const screenshotValidAge = await age.toQuestion().screenshot();
     expect(screenshotValidAge).toMatchSnapshot('age-valid.png');
   });
@@ -85,16 +85,17 @@ test.describe('Adult Dependent visual tests', () => {
     const cognitiveImpairmentQuestion = enrollMyAdultDependentPage.doesDependentHaveCognitiveImpairment();
 
     await cognitiveImpairmentQuestion.check('No');
-    await page.waitForResponse((resp) => resp.url().includes('/answers') && resp.status() === 200);
+    await expect(age.errorMessage()).toBeVisible();
     const screenshotAgeOfMajorityError = await age.toQuestion().screenshot();
     expect(screenshotAgeOfMajorityError).toMatchSnapshot('age-of-majority-error-message.png');
     const screenshotCognitiveImpairmentNoAnswer = await cognitiveImpairmentQuestion.toLocator().screenshot();
     expect(screenshotCognitiveImpairmentNoAnswer).toMatchSnapshot('cognitive-impairment-no-answer.png');
 
     await cognitiveImpairmentQuestion.check('Yes');
-    await page.waitForResponse((resp) => resp.url().includes('/answers') && resp.status() === 200);
+    await expect(age.errorMessage()).toBeHidden();
     const screenshotCognitiveImpairment = await age.toQuestion().screenshot();
     expect(screenshotCognitiveImpairment).toMatchSnapshot('age-without-errors.png');
+    await expect(cognitiveImpairmentQuestion.errorMessage()).toBeHidden();
     const screenshotCognitiveImpairmentYesAnswer = await cognitiveImpairmentQuestion.toLocator().screenshot();
     expect(screenshotCognitiveImpairmentYesAnswer).toMatchSnapshot('cognitive-impairment-yes-answer.png');
   });

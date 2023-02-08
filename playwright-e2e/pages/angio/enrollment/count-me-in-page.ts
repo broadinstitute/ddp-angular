@@ -1,7 +1,7 @@
 import { expect, Locator, Page } from '@playwright/test';
 import { AngioPageBase } from 'pages/angio/angio-page-base';
 import { waitForNoSpinner } from 'utils/test-utils';
-import Input from 'lib/widget/Input';
+import Input from 'lib/widget/input';
 import Radiobutton from 'lib/widget/radiobutton';
 
 export enum DESCRIBE_SELF {

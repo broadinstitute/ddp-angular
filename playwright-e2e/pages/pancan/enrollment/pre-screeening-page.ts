@@ -1,8 +1,8 @@
 import { Page } from '@playwright/test';
 import Question from 'lib/component/Question';
-import { PancanPage } from 'pages/pancan/pancan-page';
+import { PancanPageBase } from 'pages/pancan/pancan-page-base';
 
-export default class PreScreeningPage extends PancanPage {
+export default class PreScreeningPage extends PancanPageBase {
   constructor(page: Page) {
     super(page);
   }

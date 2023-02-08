@@ -124,17 +124,6 @@ export default class AboutYouPage extends AngioPageBase {
   }
 
   /**
-   * <br> Question: What country do you live in?
-   * <br> Type: Select
-   */
-  async country(answer: string): Promise<string[]> {
-    const question = new Question(this.page, {
-      prompt: 'What country do you live in?'
-    });
-    return question.select().selectOption(answer);
-  }
-
-  /**
    * <br> Question: How did you hear about The Angiosarcoma Project?
    * <br> Type: Textarea
    */

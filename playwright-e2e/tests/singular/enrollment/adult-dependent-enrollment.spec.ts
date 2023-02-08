@@ -55,11 +55,9 @@ test.describe('Enrol an adult dependent', () => {
     const enrollMyAdultDependentPage = new EnrollMyAdultDependentPage(page);
     await enrollMyAdultDependentPage.whoHasVentricleHeartDefect().check(WHO.TheDependantBeingEnrolled);
     await enrollMyAdultDependentPage.howOldIsYourDependent().fill(user.adultDependent.age);
-    await enrollMyAdultDependentPage
-      .whereDoesDependentLive()
-      .select('Select Country')
-      .selectOption(user.adultDependent.country.abbreviation);
-    await enrollMyAdultDependentPage.state().selectOption(user.adultDependent.state.abbreviation);
+    await enrollMyAdultDependentPage.fillInCountry(user.adultDependent.country.abbreviation, {
+      state: user.adultDependent.state.abbreviation
+    });
     await enrollMyAdultDependentPage.doesDependentHaveCognitiveImpairment().check('Yes', { exactMatch: true });
     await myDashboardPage.next();
 

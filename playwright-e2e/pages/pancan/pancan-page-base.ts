@@ -4,7 +4,7 @@ import PageBase from 'pages/page-base';
 /**
  * Project Pancan base page.
  */
-export abstract class PancanPage extends PageBase {
+export abstract class PancanPageBase extends PageBase {
   protected constructor(page: Page) {
     const { PANCAN_BASE_URL } = process.env;
     if (PANCAN_BASE_URL == null) {
