@@ -76,7 +76,6 @@ commands:
                 study_key: << parameters.study_key >>
             - deploy-exploded-build:
                 study_key: << parameters.study_key >>
-            - todo: afterbuild-runtests
 
   set-deployment-environment:
     description: "Determine working environment"
