@@ -12,13 +12,3 @@
 <button mat-mini-fab type="button" (click)="removeMe()" color="primary" [disabled]="positionScanPair === countScanPair-1">-</button>
 <p style="vertical-align: text-bottom" class="Width--100 Color--warn Line--Break" *ngIf="hadErrorSending && errorMessage != null">Error occurred sending this scan pair!
 {{errorMessage}}</p>
-
-<ng-template #RGPDialog>
-  <div mat-dialog-content>
-    This barcode does not contain the “RNA” prefix. Would you like to proceed anyways?
-  </div>
-  <div mat-dialog-actions>
-    <button mat-button mat-dialog-close cdkFocusInitial>No</button>
-    <button mat-button mat-dialog-close (click)="continueRGP = true">Yes</button>
-  </div>
-</ng-template>

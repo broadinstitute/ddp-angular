@@ -7,10 +7,8 @@ import {Subscription} from "rxjs";
   templateUrl: './scan-pair.component.html',
   styleUrls: ['./scan-pair.component.css']
 })
-export class ScanPairComponent implements OnInit, OnDestroy {
+export class ScanPairComponent implements OnInit {
   public lessThanOrMoreThanSix = false;
-
-  private subscription: Subscription;
 
   @ViewChild('leftInput', {static: true}) leftInput;
   @ViewChild('rightInput') rightInput;
@@ -37,10 +35,6 @@ export class ScanPairComponent implements OnInit, OnDestroy {
     this.leftInput.nativeElement.focus();
   }
 
-  ngOnDestroy() {
-    this.subscription?.unsubscribe();
-  }
-
   constructor(public dialog?: MatDialog) {
   }
 
@@ -53,18 +47,7 @@ export class ScanPairComponent implements OnInit, OnDestroy {
     if(this.initialScan) {
       this.lessThanOrMoreThanSix = rightValue?.length !== 6;
     }
-    if(this.RGPFinalScan && !rightValue.slice(0, 4).includes('RNA')) {
-       const openDialog: MatDialogRef<any> = this.dialog.open(this.RGPDialog, {
-         width: '250px',
-         disableClose: true
-       });
-     this.subscription = openDialog.afterClosed()
-       .subscribe(() =>
-         this.continueRGP && this.pairScanned.next([leftValue, rightValue, this.positionScanPair])
-       )
-    } else {
-      this.pairScanned.next([leftValue, rightValue, this.positionScanPair]);
-    }
+    this.pairScanned.next([leftValue, rightValue, this.positionScanPair]);
   }
 
   removeMe(): void {
