@@ -654,6 +654,31 @@ jobs:
             export pancanUserPassword=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[] | select(.app==\"pancan\") | .password")
             echo "export PANCAN_USER_PASSWORD=$pancanUserPassword" >> playwright-env/envvars
             echo "export PANCAN_USER_EMAIL=$pancanUser" >> playwright-env/envvars
+
+            # OSTEO
+            export osteoUser=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[] | select(.app==\"osteo\") | .userName")
+            export osteoUserPassword=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[] | select(.app==\"osteo\") | .password")
+            echo "export OSTEO_USER_PASSWORD=$osteoUserPassword" >> playwright-env/envvars
+            echo "export OSTEO_USER_EMAIL=$osteoUser" >> playwright-env/envvars
+
+            # BRAIN
+            export brainUser=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[] | select(.app==\"brain\") | .userName")
+            export brainUserPassword=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[] | select(.app==\"brain\") | .password")
+            echo "export BRAIN_USER_PASSWORD=$brainUserPassword" >> playwright-env/envvars
+            echo "export BRAIN_USER_EMAIL=$brainUser" >> playwright-env/envvars
+
+            # EMAIL TESTING
+           export refreshToken=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.email.refreshToken")
+           export emailClientId=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.email.clientId")
+           export emailClientSecret=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.email.clientSecret")
+           export emailRedirectUri=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.email.redirectUri")
+           export emailWaitTime=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.email.minWaitTime")
+           echo "export EMAIL_REFRESH_TOKEN=$refreshToken" >> playwright-env/envvars
+           echo "export EMAIL_CLIENT_ID=$emailClientId" >> playwright-env/envvars
+           echo "export EMAIL_CLIENT_SECRET=$emailClientSecret" >> playwright-env/envvars
+           echo "export EMAIL_REDIRECT_URL=$emailRedirectUri" >> playwright-env/envvars
+           echo "export MIN_EMAIL_WAIT_TIME=$emailWaitTime" >> playwright-env/envvars
+
       - run:
           working_directory: *playwright_path
           name: npm install
