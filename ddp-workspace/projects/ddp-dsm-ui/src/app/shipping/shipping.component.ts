@@ -101,6 +101,7 @@ export class ShippingComponent implements OnInit {
   isClinicalStudy: Boolean = false;
 
   RESEARCH_SAMPLE = 'RUO';
+  PECGS_RESEARCH = 'PECGS_RESEARCH';
 
   disableCheckboxes = false;
 
@@ -268,6 +269,10 @@ export class ShippingComponent implements OnInit {
     this.needsNameLabels = false;
     this.kitsWithNoReturn = false;
     this.isClinicalStudy = false;
+    if(localStorage.getItem(ComponentService.MENU_SELECTED_REALM) === 'osteo2'
+      || localStorage.getItem(ComponentService.MENU_SELECTED_REALM) === 'cmi-lms') {
+      this.isClinicalStudy = true;
+    }
     this.loading = true;
 
     let jsonData: any[];
@@ -285,9 +290,6 @@ export class ShippingComponent implements OnInit {
               const kit = KitRequest.parse(val);
               if (kit.noReturn) {
                 this.kitsWithNoReturn = true;
-              }
-              if(kit.receivedBy === 'MERCURY') {
-                this.isClinicalStudy = true;
               }
               this.kitRequests.push(kit);
             });
@@ -812,7 +814,7 @@ export class ShippingComponent implements OnInit {
   }
 
   isResearchSample(kitRequest: KitRequest): boolean {
-    return  kitRequest.sequencingRestriction && kitRequest.sequencingRestriction === this.RESEARCH_SAMPLE && this.isClinicalStudy
-      && (this.shippingPage === this.RECEIVED || this.shippingPage === this.OVERVIEW);
+    return (kitRequest.message && kitRequest.message === this.PECGS_RESEARCH)
+        || (kitRequest.sequencingRestriction && kitRequest.sequencingRestriction === this.RESEARCH_SAMPLE);
   }
 }
