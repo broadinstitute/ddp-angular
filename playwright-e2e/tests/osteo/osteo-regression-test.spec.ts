@@ -121,7 +121,7 @@ test('Static Content', async ({page}) => {
 });
 
 test('Osteo enroll kid', async ({ page}) => {
-
+    test.setTimeout(6 * 60 * 1000);
     const userEmail = generateEmailAlias(OSTEO_USER_EMAIL);
     await page.goto('https://osteo.test.datadonationplatform.org/');
     await page.getByLabel('Password *').click();
@@ -293,6 +293,7 @@ test('Osteo enroll kid', async ({ page}) => {
 });
 
 test('Osteo enroll self and kid together', async({ page}) => {
+    test.setTimeout(7 * 60 * 1000);
     await page.goto('https://osteo.test.datadonationplatform.org/');
     await page.getByLabel('Password *').click();
     await page.getByLabel('Password *').fill('broad_institute');
@@ -339,15 +340,13 @@ test('Osteo enroll self and kid together', async({ page}) => {
     
     await page.getByText('Parent', { exact: true }).click();
 
-// todo arz consent page for address
-
-  await consentAssentPage.fillInContactAddress({fullName: 'The Parent',
-  country: 'UNITED STATES',
-  street:'75 Ames Street',
-  city: 'Cambridge', 
-  state: 'MASSACHUSETTS', 
-  zipCode:'02476', 
-  telephone:'5555551212'});
+    await consentAssentPage.fillInContactAddress({fullName: 'The Parent',
+    country: 'UNITED STATES',
+    street:'75 Ames Street',
+    city: 'Cambridge',
+    state: 'MASSACHUSETTS',
+    zipCode:'02476',
+    telephone:'5555551212'});
 
     await page.getByText('Suggested:').click();
 
@@ -372,7 +371,6 @@ test('Osteo enroll self and kid together', async({ page}) => {
     
     await consentAssentPage.next();
 
-    // todo arz isolate next click
     await page.getByText('Consent Form Addendum: Learning About Your Child').click();
     await page.getByText('Assent Form Addendum: Learning About Your Tumor').click();
     await page.getByText('The form below will tell you more about another part of the research study that ').click();
@@ -441,6 +439,7 @@ test('Osteo enroll self and kid together', async({ page}) => {
 });
 
 test('Osteo self enroll', async ({ page }) => {
+  test.setTimeout(5 * 60 * 1000);
   const userEmail = generateEmailAlias(OSTEO_USER_EMAIL);
   const firstName = generateUserName('OS');
   const lastName = generateUserName('OS');
@@ -578,21 +577,7 @@ test('Osteo self enroll', async ({ page }) => {
   // would be class and class
   var cancerSelector = new CancerSelector(page, '.activity-text-input-OTHER_CANCER_NAME', '.date-answer-OTHER_CANCER_YEAR');
   await cancerSelector.chooseCancer(0,'bone', 2, 'Giant Cell Tumor of the Bone (GCT)');
-  await cancerSelector.chooseTime(0,'2000');
-
-
-  /*
-  await page.getByLabel('Choose cancer...').nth(0).click();
-  await page.getByRole('combobox', { name: 'Choose cancer...' }).nth(0).type('bone', { delay: 200});
-  await page.waitForTimeout(1000);
-  await page.getByRole('combobox', { name: 'Choose cancer...' }).nth(0).press('ArrowDown'); 
-  await page.waitForTimeout(1000);
-  await page.getByRole('combobox', { name: 'Choose cancer...' }).nth(0).press('ArrowDown');
-  await page.waitForTimeout(1000);
-  await page.getByRole('combobox', { name: 'Choose cancer...' }).nth(0).press('Enter');
-  await expect(page.getByRole('combobox', { name: 'Choose cancer...' }).nth(0)).toHaveValue('Giant Cell Tumor of the Bone (GCT)')
-  await page.getByRole('combobox', { name: 'Year' }).nth(0).selectOption('2000');
-*/
+  await cancerSelector.chooseDiagnosisAt(0,'2000');
 
   await consentPage.submit();
 
@@ -633,31 +618,28 @@ test('Osteo self enroll', async ({ page }) => {
   await page.getByRole('link', { name: 'Dashboard' }).click();
   await page.getByRole('button', { name: 'Edit' }).click();
 
- const familyHistoryPage = new FamilyHistory(page);
+  const familyHistoryPage = new FamilyHistory(page);
 
- await familyHistoryPage.waitForReady();
- await familyHistoryPage.next();
- await page.getByText("In this survey we would like to know the living status, age, and cancer history of people in your biological, or blood-related, family. We recognize that there are many different types of families, so please skip sections that do not apply to your family tree.").click()
- await familyHistoryPage.next();
- await familyHistoryPage.addFamilyMember('PARENT1', {
-  nickname: 'Mom',
-  sexAtBirth: 'Female',
-  currentlyLiving: true,
-  ageRange: '60-64',
-  cancers:  [{ cancerSearch: 'gan', expectedCancerResult: 'Ganglioglioma', numTimesToHitDownArrow: 1, time:'45-49'},
-  { cancerSearch: 'multi', expectedCancerResult: 'Glioblastoma / Glioblastoma multiforme (GBM)', numTimesToHitDownArrow: 3, time:'35-39'}],
-  ancestry: ['Ashkenazi']
- });
- await familyHistoryPage.addFamilyMember('PARENT2', {
-  nickname: 'Dad',
-  sexAtBirth: 'Male',
-  currentlyLiving: true,
-  ageRange: '65-69',
-  cancers:  [], ancestry: []
- });
- 
- 
-  // todo arz other family members
+   await familyHistoryPage.waitForReady();
+   await familyHistoryPage.next();
+   await page.getByText("In this survey we would like to know the living status, age, and cancer history of people in your biological, or blood-related, family. We recognize that there are many different types of families, so please skip sections that do not apply to your family tree.").click()
+   await familyHistoryPage.next();
+   await familyHistoryPage.addFamilyMember('PARENT1', {
+    nickname: 'Mom',
+    sexAtBirth: 'Female',
+    currentlyLiving: true,
+    ageRange: '60-64',
+    cancers:  [{ cancerSearch: 'gan', expectedCancerResult: 'Ganglioglioma', numTimesToHitDownArrow: 1, time:'45-49'},
+    { cancerSearch: 'multi', expectedCancerResult: 'Glioblastoma / Glioblastoma multiforme (GBM)', numTimesToHitDownArrow: 3, time:'35-39'}],
+    ancestry: ['Ashkenazi']
+   });
+   await familyHistoryPage.addFamilyMember('PARENT2', {
+    nickname: 'Dad',
+    sexAtBirth: 'Male',
+    currentlyLiving: true,
+    ageRange: '65-69',
+    cancers:  [], ancestry: []
+   });
 
 
   await familyHistoryPage.next();

@@ -3,7 +3,7 @@ import { AngioPageBase } from 'pages/angio/angio-page-base';
 import { booleanToYesOrNo, waitForNoSpinner } from 'utils/test-utils';
 import Question from 'lib/component/Question';
 import Input from 'lib/widget/Input';
-import { BrainBasePage } from './base-page';
+import { BrainBasePage } from './brain-base-page';
 
 export default class ResearchConsentPage extends BrainBasePage {
 
@@ -33,6 +33,7 @@ export default class ResearchConsentPage extends BrainBasePage {
     await this.page.getByTestId('answer:CONSENT_FULLNAME').fill(fullName);
   }
 
+// todo arz use existing fill in DOB in base page
   async enterDOB(mm:string, dd: string, yyyy:string): Promise<void> {
     const dateLocator = '.date-answer-CONSENT_DOB';
     await this.page.locator(dateLocator).getByLabel('MM').fill(mm);
@@ -40,8 +41,6 @@ export default class ResearchConsentPage extends BrainBasePage {
     await this.page.locator(dateLocator).getByLabel('YYYY').fill(yyyy);
   }
 
-  async submit(opts: { waitForNav?: boolean } = {}): Promise<void> {
-    this.page.waitForTimeout(1000);
-    super.submit();
-  }
+  // todo arz fix toBeVisble (visible:true) to drop param
+
 }

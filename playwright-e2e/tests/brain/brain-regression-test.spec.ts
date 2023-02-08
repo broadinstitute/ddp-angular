@@ -99,6 +99,7 @@ test('Brain statics', async ({page}) => {
 });
 
 test('Brain enroll kid on their behalf', async ( {page}) => {
+    test.setTimeout(5 * 60 * 1000);
     await page.goto(BRAIN_BASE_URL!);
     const userEmail = generateEmailAlias(BRAIN_USER_EMAIL);
     testutils.fillSitePassword(page, SITE_PASSWORD)
@@ -229,6 +230,7 @@ test('Brain enroll kid on their behalf', async ( {page}) => {
 });
 
 test('Brain enroll self', async ({ page}) => {
+    test.setTimeout(5 * 60 * 1000);
     await page.goto(BRAIN_BASE_URL!);
     const checkForEmailsAfter = Date.now() + Number.parseInt(MIN_EMAIL_WAIT_TIME!);
     await testutils.fillSitePassword(page);
@@ -286,24 +288,6 @@ test('Brain enroll self', async ({ page}) => {
         telephone:'5555551212',
         labels: { phone: 'Phone',country: 'Country/Territory',state:'Province',zip:'Postal Code', city:'City'}
     });
-
-        /*
-    await page.getByLabel('Full Name *').fill('ANDREW ZIMMEr');
-    await page.getByRole('combobox', { name: 'Country/Territory Country/Territory' }).getByText('Country/Territory').click();
-    await page.getByText('UNITED STATES', { exact: true }).click();
-    await page.getByPlaceholder('Enter a location').click();
-    await page.getByPlaceholder('Enter a location').fill('320 CHARLES St');
-    await page.getByPlaceholder('Enter a location').press('Tab');
-    await page.getByLabel('Apt/Floor #').press('Tab');
-    await page.getByLabel('City *').click();
-    await page.getByLabel('City *').fill('CAMBRIDGe');
-    await page.getByRole('combobox', { name: 'State State' }).getByText('State').click();
-    await page.getByText('MASSACHUSETTS').click();
-    await page.locator('div').filter({ hasText: 'Zip Code *' }).nth(2).click();
-    await page.getByLabel('Zip Code *').fill('02476');
-    await page.getByText('Suggested:').click();
-
-    */
 
     // fill these in with components
     await page.getByLabel('Physician Name').click();

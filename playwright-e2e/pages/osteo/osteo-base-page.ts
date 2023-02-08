@@ -3,9 +3,6 @@ import PageBase from 'pages/page-base';
 
 const { OSTEO_BASE_URL } = process.env;
 
-/**
- * Angiosarcoma Project (Angio) page base
- */
 export abstract class OsteoPageBase extends PageBase {
   protected constructor(page: Page) {
     if (OSTEO_BASE_URL == null) {

@@ -30,7 +30,7 @@ constructor(page: Page, cancerSelector: string, diagnosisTimeLabel:string) {
     await expect(cancerField).toHaveValue(expectedResult)
   }
 
-  async chooseTime(index: number, time: string): Promise<void> {
-    await this.page.locator(this.diagnosisTimeLabel).getByRole('combobox').nth(index).selectOption(time);  
+  async chooseDiagnosisAt(index: number, diagnosisAt: string): Promise<void> {
+    await this.page.locator(this.diagnosisTimeLabel).getByRole('combobox').nth(index).selectOption(diagnosisAt);
   }
 }

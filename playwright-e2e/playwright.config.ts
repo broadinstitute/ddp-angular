@@ -16,16 +16,15 @@ const testConfig: PlaywrightTestConfig = {
   globalSetup: require.resolve('./fixtures/global-setup'),
   testDir: '.',
   testMatch: '**/*.spec.ts',
-  /* Maximum time one test can run for. Test should be short and takes less than 4 minutes to run */
-  timeout: 10 * 60 * 1000,
-  globalTimeout:10 * 60 * 1000,
+  /* Maximum time one test can run for. Test should be short and takes less than 2 minutes to run */
+  timeout: 120 * 1000,
   /* For expect() calls */
   expect: {
     /**
      * Maximum time expect() should wait for the condition to be met.
      * For example in `await expect(locator).toHaveText();`
      */
-    timeout: 60 * 1000,
+    timeout: 30 * 1000,
     toMatchSnapshot: {
       // Account for minor difference in text rendering and resolution between headless and headed mode
       threshold: 0.3,
@@ -69,7 +68,7 @@ const testConfig: PlaywrightTestConfig = {
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: process.env.CI ? 'on-first-retry' : 'retain-on-failure',
     screenshot: 'only-on-failure',
-    video: process.env.CI ? 'on-first-retry' : 'retain-on-failure', // Limit load on CI system because trace and video add load
+    video: process.env.video ? 'on' : process.env.CI ? 'on-first-retry' : 'retain-on-failure', // Limit load on CI system because trace and video add load
 
     userAgent:
       'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) ' +

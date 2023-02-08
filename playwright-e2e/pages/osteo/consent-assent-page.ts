@@ -38,14 +38,11 @@ export default class ConsentAssentPage extends OsteoPageBase {
     minorLastName: string,
     parentFirstName: string,
     parentLastName: string) : Promise<void> {
-        await this.page.getByTestId('answer:CONSENT_ASSENT_CHILD_FIRSTNAME').click();
         await this.page.getByTestId('answer:CONSENT_ASSENT_CHILD_FIRSTNAME').fill(minorFirstName);
         await this.page.getByTestId('answer:CONSENT_ASSENT_CHILD_LASTNAME').click();
         await this.page.getByTestId('answer:CONSENT_ASSENT_CHILD_LASTNAME').fill(minorLastName);
-    
-        await this.page.getByTestId('answer:CONSENT_ASSENT_FIRSTNAME').click();
+
         await this.page.getByTestId('answer:CONSENT_ASSENT_FIRSTNAME').fill(parentFirstName);
-        await this.page.getByTestId('answer:CONSENT_ASSENT_LASTNAME').click();
         await this.page.getByTestId('answer:CONSENT_ASSENT_LASTNAME').fill(parentLastName);
         
     }

@@ -2,41 +2,28 @@ import { expect, Page } from '@playwright/test';
 import PageBase from 'pages/page-base';
 import { booleanToYesOrNo } from 'utils/test-utils';
 import { CancerSelector } from './cancer-selector';
+import {BrainBasePage} from "./brain/brain-base-page";
 
 
 /**
  * CMI's family history
  */
-export class FamilyHistory {
+export class FamilyHistory extends BrainBasePage {
 
-  private readonly page:Page;
-
-/*
-
-await page.getByText('Understanding the history of cancer in someone\'s biological family can help rese').click();
-  await page.getByRole('button', { name: 'Next' }).click();
-  await page.getByRole('button', { name: 'Next' }).click();
-  await page.locator('mat-card-content').filter({ hasText: 'Biological / Birth Parent 1: Assigned Female at birth 1 questions answered' }).getByRole('button', { name: 'Edit' }).click();
-  await page.getByTestId('answer:FH_PARENT1_ALIAS').fill('Mom');
-  await page.locator('.picklist-answer-FH_PARENT1_LIVING').getByText('Yes').click();
-  await page.locator('.picklist-answer-FH_PARENT1_AGE_RANGE').getByRole('combobox').selectOption('90-94');
-  await page.locator('.picklist-answer-FH_PARENT1_HAD_CANCER').getByText('Yes').click();
-
-*/
 
 constructor(page: Page) {
-    this.page = page;  
+    super(page);
   }
 
   async waitForReady(): Promise<void> {
-    await this.page.getByText('Understanding the history of cancer in someone\'s biological family can help rese').click();
+    await this.page.getByText('Understanding the history of cancer in someone\'s biological family can help research').click();
     await this.page.getByText("Tell us about the history of cancer in your biological (blood-related) family").click();
   }
-
+  
   async next(): Promise<void> {
     await this.page.getByRole('button').getByText('Next').click();
   }
-  
+
   async parent(parentNumber:number, p: FamilyMember): Promise<void> {
     await this.page.locator('mat-card-content').filter({ hasText:'Biological / Birth Parent ' + parentNumber }).getByRole('button', { name: 'Edit' }).click();
     const selectorBase = 'FH_PARENT' + parentNumber;
@@ -53,7 +40,7 @@ constructor(page: Page) {
         const selectedCancer = p.cancers[i];
         const cancerSelector = new CancerSelector(this.page,'.picklist-answer-'+ selectorBase +'_CANCER_NAME', '.picklist-answer-'+ selectorBase +'_CANCER_AGE_RANGE');
         await cancerSelector.chooseCancer(i,selectedCancer.cancerSearch,selectedCancer.numTimesToHitDownArrow,selectedCancer.expectedCancerResult);       
-        await cancerSelector.chooseTime(i,selectedCancer.time)
+        await cancerSelector.chooseDiagnosisAt(i,selectedCancer.time)
     }
 
     if (p.ancestry.length > 0) {
@@ -107,7 +94,7 @@ constructor(page: Page) {
         const selectedCancer = p.cancers[i];
         const cancerSelector = new CancerSelector(this.page,'.picklist-answer-'+ selectorBase +'_CANCER_NAME', '.picklist-answer-'+ selectorBase +'_CANCER_AGE_RANGE');
         await cancerSelector.chooseCancer(i,selectedCancer.cancerSearch,selectedCancer.numTimesToHitDownArrow,selectedCancer.expectedCancerResult);       
-        await cancerSelector.chooseTime(i,selectedCancer.time)
+        await cancerSelector.chooseDiagnosisAt(i,selectedCancer.time)
     }
 
     if (p.ancestry.length > 0) {
@@ -132,10 +119,5 @@ constructor(page: Page) {
     }
     await this.page.getByRole('button', { name: 'Save' }).click();
     await this.page.waitForResponse((resp) => resp.url().includes('/summary') && resp.status() === 200);
-  }
-
-  async finish():Promise<void> {
-    await this.page.waitForTimeout(1000);
-    await this.page.getByRole('button', { name: 'Finish' }).click();
   }
 }

@@ -4,14 +4,14 @@ import { waitForNoSpinner } from 'utils/test-utils';
 import Question from 'lib/component/Question';
 import Input from 'lib/widget/Input';
 import PageBase from 'pages/page-base';
-import { BrainBasePage } from './base-page';
+import { BrainBasePage } from './brain-base-page';
 
 export default class PrequalPage extends BrainBasePage {
   private readonly pageTitle: Locator;
   
   constructor(page: Page) {
     super(page);
-    this.pageTitle = this.page.locator('h1.no-margin');
+    this.pageTitle = this.page.locator('h1');
   }
 
   async waitForReady(): Promise<void> {
