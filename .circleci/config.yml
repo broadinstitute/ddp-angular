@@ -781,9 +781,7 @@ workflows:
   version: 2
 
   build-pr:
-    # TODO remove when is for testing
-    # when: << pipeline.parameters.do-builds >>
-    # Automatically launched when PR has been merged
+    # Launched on PR commits
     jobs:
       - app-build-and-store-job:
           <<: *filter-pr-branch
