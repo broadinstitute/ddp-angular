@@ -15,7 +15,7 @@ export default class PrequalPage extends OsteoPageBase {
   }
 
   async waitForReady(): Promise<void> {
-    await expect(this.pageTitle).toBeVisible({ visible: true });
+    await expect(this.pageTitle).toBeVisible();
     await expect(this.pageTitle).toHaveText("Let's Get Started");
     await waitForNoSpinner(this.page);
   }

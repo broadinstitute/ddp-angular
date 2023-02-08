@@ -336,7 +336,7 @@ test('Osteo enroll self and kid together', async({ page}) => {
     
     await consentAssentPage.bloodAndTissue(true, true);
     await consentAssentPage.fillInParentAndMinor('KidFirst', 'KidLast', 'ParentFirst', 'ParentLast');
-    await consentAssentPage.fillInMinorDOB('01','01','2006');
+    await consentAssentPage.fillInDateOfBirth('01','01','2006');
     
     await page.getByText('Parent', { exact: true }).click();
 
@@ -365,7 +365,7 @@ test('Osteo enroll self and kid together', async({ page}) => {
     
     
     await page.locator('span').filter({ hasText: 'Yes' }).click();
-    await expect(page.getByTestId('answer:SOMATIC_SINGATURE_PEDIATRIC')).toBeVisible( { visible: true});
+    await expect(page.getByTestId('answer:SOMATIC_SINGATURE_PEDIATRIC')).toBeVisible();
     await page.getByTestId('answer:SOMATIC_SINGATURE_PEDIATRIC').fill('Playwright Parent');
     await page.getByTestId('answer:SOMATIC_SINGATURE_PEDIATRIC').blur( { timeout: 2000});
     

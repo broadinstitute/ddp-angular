@@ -14,7 +14,7 @@ export default class ConsentAssentPage extends OsteoPageBase {
   }
 
   async waitForReady(): Promise<void> {
-    await expect(this.pageTitle).toBeVisible({ visible: true });
+    await expect(this.pageTitle).toBeVisible();
     await expect(this.pageTitle).toHaveText('Research Consent & Assent Form');
     await waitForNoSpinner(this.page);
     await this.page.waitForLoadState('networkidle', {timeout: 2000});
@@ -45,13 +45,6 @@ export default class ConsentAssentPage extends OsteoPageBase {
         await this.page.getByTestId('answer:CONSENT_ASSENT_FIRSTNAME').fill(parentFirstName);
         await this.page.getByTestId('answer:CONSENT_ASSENT_LASTNAME').fill(parentLastName);
         
-    }
-
-    async fillInMinorDOB(mm: string, dd: string, yyyy: string):  Promise<void> {
-      await this.page.locator('input[data-placeholder="MM"]').fill(mm);
-      await this.page.locator('input[data-placeholder="DD"]').fill(dd);
-      await this.page.locator('input[data-placeholder="YYYY"]').fill(yyyy);
-
     }
 
 }

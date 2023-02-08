@@ -15,8 +15,8 @@ export default class PrequalPage extends BrainBasePage {
   }
 
   async waitForReady(): Promise<void> {
-    await expect(this.pageTitle).toBeVisible({ visible: true });
-    await expect(this.page.getByText('First, how will you be participating in the Brain Tumor Project?')).toBeVisible({ visible: true});
+    await expect(this.pageTitle).toBeVisible();
+    await expect(this.page.getByText('First, how will you be participating in the Brain Tumor Project?')).toBeVisible();
     await waitForNoSpinner(this.page);
   }
 

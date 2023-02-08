@@ -14,7 +14,7 @@ export default class HomePage extends OsteoPageBase {
   }
 
   async waitForReady(): Promise<void> {
-    await expect(this.pageTitle).toBeVisible({ visible: true });
+    await expect(this.pageTitle).toBeVisible();
     await expect(this.pageTitle).toHaveText('Together, the osteosarcoma community has the power to move research forward');
     await waitForNoSpinner(this.page);
   }

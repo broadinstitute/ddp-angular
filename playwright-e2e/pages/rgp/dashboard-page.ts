@@ -15,7 +15,7 @@ export default class DashboardPage extends RgpPageBase {
 
   async waitForReady(): Promise<void> {
     await waitForNoSpinner(this.page);
-    await expect(this.pageTitle).toBeVisible({ visible: true });
+    await expect(this.pageTitle).toBeVisible();
     await expect(this.pageTitle).toHaveText('Dashboard');
     await expect(this.userActivitiesTitle).toHaveText('Study Forms');
   }

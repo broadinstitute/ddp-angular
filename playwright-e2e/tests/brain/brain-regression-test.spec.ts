@@ -272,7 +272,7 @@ test('Brain enroll self', async ({ page}) => {
     await consentPage.clickTissue(true); 
     await consentPage.clickBlood(true); 
     await consentPage.enterName(firstName, lastName);
-    await consentPage.enterDOB('01','01','2000'); 
+    await consentPage.fillInDateOfBirth('01','01','2000');
     await consentPage.enterSignature(fullName); 
     await consentPage.submit();
 

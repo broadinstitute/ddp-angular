@@ -17,7 +17,7 @@ export default class HomePage extends BrainBasePage implements HomePageInterface
   }
 
   async waitForReady(): Promise<void> {
-    await expect(this.pageTitle).toBeVisible({ visible: true });
+    await expect(this.pageTitle).toBeVisible();
     await expect(this.pageTitle).toHaveText('Help transform our understanding of brain tumors');
     await waitForNoSpinner(this.page);
   }

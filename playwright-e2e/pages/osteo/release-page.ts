@@ -34,7 +34,7 @@ export default class ReleasePage extends OsteoPageBase {
   }
 
   async waitForReady(): Promise<void> {
-    await expect(this.pageTitle).toBeVisible({ visible: true });
+    await expect(this.pageTitle).toBeVisible();
     await expect(this.pageTitle).toHaveText('Medical Release');
     await waitForNoSpinner(this.page);
   }
