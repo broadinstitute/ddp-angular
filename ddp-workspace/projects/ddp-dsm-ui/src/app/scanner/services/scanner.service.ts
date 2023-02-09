@@ -1,8 +1,8 @@
-import {Injectable} from "@angular/core";
-import {Scanners} from "../interfaces/scanners";
-import {AbstractControl, ValidationErrors, ValidatorFn} from "@angular/forms";
-import {DSMService} from "../../services/dsm.service";
-import {Observable} from "rxjs";
+import {Injectable} from '@angular/core';
+import {Scanners} from '../interfaces/scanners';
+import {AbstractControl, ValidationErrors, ValidatorFn} from '@angular/forms';
+import {DSMService} from '../../services/dsm.service';
+import {Observable} from 'rxjs';
 
 @Injectable()
 export class ScannerService {
@@ -102,12 +102,12 @@ export class ScannerService {
         }
       ]
     }
-  }
+  };
 
   constructor(private readonly dsmService: DSMService) {
   }
 
-  public getScanner(scannerName: string) {
+  public getScanner(scannerName: string): any {
     return this.scanners[scannerName];
   }
 
@@ -138,8 +138,7 @@ export class ScannerService {
 
   /* Custom Validators */
   private sixCharacters(): ValidatorFn {
-    return (control: AbstractControl) : ValidationErrors | null => {
-      return control?.value?.length !== 6  || !control?.value?.length? {notSixCharacters: true} : null;
-    }
+    return (control: AbstractControl): ValidationErrors | null =>
+      control?.value?.length !== 6  || !control?.value?.length? {notSixCharacters: true} : null;
   }
 }

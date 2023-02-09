@@ -93,7 +93,7 @@ export class ScanComponent implements OnInit {
         return 'Initial Scan';
       }
       else if(this.RGPFinalScan) {
-        return 'RGP Final Scan'
+        return 'RGP Final Scan';
       }
       return 'Final Scan';
     } else if (this.scanTracking) {

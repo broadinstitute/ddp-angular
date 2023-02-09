@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewChild, Output, EventEmitter, Input, TemplateRef, OnDestroy} from '@angular/core';
-import {MatDialog, MatDialogRef} from "@angular/material/dialog";
-import {Subscription} from "rxjs";
+import {MatDialog, MatDialogRef} from '@angular/material/dialog';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-scan-pair',
@@ -22,9 +22,9 @@ export class ScanPairComponent implements OnInit {
   @Input() leftInputPlaceholder = 'Kit Label';
   @Input() rightInputPlaceholder = 'DSM Label';
   @Input() errorMessage: string;
-  @Input() initialScan: boolean = false;
-  @Input() RGPFinalScan: boolean = false;
-  RGPPlaceholder: string = 'RNA';
+  @Input() initialScan = false;
+  @Input() RGPFinalScan = false;
+  RGPPlaceholder = 'RNA';
 
   @Output() pairScanned = new EventEmitter();
   @Output() removeScanPair = new EventEmitter();

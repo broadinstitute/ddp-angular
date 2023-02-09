@@ -6,28 +6,29 @@ import {
   QueryList,
   Self,
   ViewChildren
-} from "@angular/core";
-import {ScannerService} from "./services/scanner.service";
-import {ActivatedRoute, Params, Router} from "@angular/router";
+} from '@angular/core';
+import {ScannerService} from './services/scanner.service';
+import {ActivatedRoute, Params, Router} from '@angular/router';
 import {
   AbstractControl,
   FormArray,
   FormControl,
   FormGroup
-} from "@angular/forms";
-import {observable, Observable, of, Subject, takeUntil} from "rxjs";
-import {InputField} from "./interfaces/input-field";
-import {Auth} from "../services/auth.service";
-import {Statics} from "../utils/statics";
-import {catchError, first, map} from "rxjs/operators";
+} from '@angular/forms';
+import { Observable, Subject, takeUntil} from 'rxjs';
+import {InputField} from './interfaces/input-field';
+import {Auth} from '../services/auth.service';
+import {Statics} from '../utils/statics';
 
 /*
  map(data => [
-          {kit: 'giogio', error: 'No kit for participant with ShortId \\"dsadad\\" was not found.\\nFor more information please contact your DSM developer'},
+          {kit: 'giogio', error: 'No kit for participant with ShortId \\"dsadad\\" was not found.\\nFor more
+          information please contact your DSM developer'},
         ]),
         catchError(() => {
           return of([
-            {kit: 'giogio', error: 'No kit for participant with ShortId \\"dsadad\\" was not found.\\nFor more information please contact your DSM developer'},
+            {kit: 'giogio', error: 'No kit for participant with ShortId \\"dsadad\\" was not found.\\nFor more
+             information please contact your DSM developer'},
           ])
         }),
 */
@@ -62,11 +63,11 @@ export class ScannerComponent implements OnDestroy {
   ) {
     activatedRoute.queryParams
       .pipe(takeUntil(this.subscriptionSubject$))
-      .subscribe(({scannerType = ''}: Params) => this.initialize(scannerType))
+      .subscribe(({scannerType = ''}: Params) => this.initialize(scannerType));
   }
 
-  ngOnDestroy() {
-    this.subscriptionSubject$.next()
+  ngOnDestroy(): void {
+    this.subscriptionSubject$.next();
     this.subscriptionSubject$.complete();
   }
 
@@ -80,7 +81,7 @@ export class ScannerComponent implements OnDestroy {
 
   public save({scannerFields}): void {
     const filteredFields = scannerFields
-      .filter((field: object) => Object.values(field).some((value: string | null) => value))
+      .filter((field: object) => Object.values(field).some((value: string | null) => value));
 
     this.activeScannerSaveFunction(filteredFields)
       .pipe(
@@ -88,7 +89,7 @@ export class ScannerComponent implements OnDestroy {
       )
       .subscribe({
         next: (data: any[]) => {
-          console.log(data, 'FIRST_DATA')
+          console.log(data, 'FIRST_DATA');
           this.cdr.markForCheck();
           if(data.length) {
             this.removeSuccessfulScans(data);
@@ -113,7 +114,7 @@ export class ScannerComponent implements OnDestroy {
           }
           this.additionalMessage = 'Error - Failed to save data';
         }
-      })
+      });
   }
 
   public moveFocusAndAdd(formControlIndex: number, scannerFieldIndex: number, inputField: HTMLInputElement): void {
@@ -121,24 +122,24 @@ export class ScannerComponent implements OnDestroy {
     formControlIndex === this.activeScannerInputFields.length - 1 &&
     this.addFields();
 
-    let foundIndex: number = this.inputFields.toArray()
-      .findIndex((inElement) => inElement.nativeElement === inputField)
+    const foundIndex: number = this.inputFields.toArray()
+      .findIndex((inElement) => inElement.nativeElement === inputField);
 
     this.inputFields.get(foundIndex + 1)?.nativeElement.focus();
   }
 
   public get noValidatorsForLastItem(): string {
     if(this.scannerFields.length > 1) {
-      const formControls = Object.values((this.scannerFields.at(this.scannerFields.length - 1) as FormGroup).controls)
+      const formControls = Object.values((this.scannerFields.at(this.scannerFields.length - 1) as FormGroup).controls);
       formControls.forEach((formControl: FormControl) => formControl.setErrors(null));
     }
-    return ''
+    return '';
   }
 
   public addFields(): void {
     const formGroup = new FormGroup({});
     this.activeScannerInputFields.forEach((inputField: InputField) =>
-      formGroup.addControl(inputField.controllerName, new FormControl(null, [...inputField.validators])))
+      formGroup.addControl(inputField.controllerName, new FormControl(null, [...inputField.validators])));
     this.scannerFields.push(formGroup, {emitEvent: false});
   }
 
@@ -146,12 +147,13 @@ export class ScannerComponent implements OnDestroy {
     const formControls: AbstractControl[] = (this.scannerFields.controls as FormGroup[])
       .map((formGroup: FormGroup) => formGroup.controls[formControlName]);
 
-    let duplicateValueControllers: Set<AbstractControl> = new Set();
+    const duplicateValueControllers: Set<AbstractControl> = new Set();
 
-    for(let formControlCompare of formControls) {
-      for(let formControlTo of formControls) {
+    for(const formControlCompare of formControls) {
+      for(const formControlTo of formControls) {
         formControlCompare.hasError('duplicateValue') && formControlCompare.setErrors(null);
-        if(formControlCompare !== formControlTo && formControlCompare.value && formControlTo.value && formControlCompare.value === formControlTo.value) {
+        if(formControlCompare !== formControlTo && formControlCompare.value && formControlTo.value &&
+          formControlCompare.value === formControlTo.value) {
           duplicateValueControllers.add(formControlCompare);
           duplicateValueControllers.add(formControlTo);
         }
@@ -159,16 +161,16 @@ export class ScannerComponent implements OnDestroy {
     }
 
     duplicateValueControllers.size > 1 && duplicateValueControllers.forEach((formControl: AbstractControl) =>
-      formControl.setErrors({duplicateValue: true}))
+      formControl.setErrors({duplicateValue: true}));
   }
 
   private removeSuccessfulScans(responseData: any[]): void {
-    console.log(responseData, 'REMOVE_SUCCESSFUL_SCANS')
+    console.log(responseData, 'REMOVE_SUCCESSFUL_SCANS');
 
     const filteredFields = this.scannerFields.getRawValue()
-      .filter((field: object) => Object.values(field).some((value: string | null) => value))
+      .filter((field: object) => Object.values(field).some((value: string | null) => value));
 
-    console.log(filteredFields, 'MAIN_FORM')
+    console.log(filteredFields, 'MAIN_FORM');
 
     const removeIndexes = [];
 
@@ -176,22 +178,22 @@ export class ScannerComponent implements OnDestroy {
       const lastField = (Object.keys(filteredObject) as any).at(-1);
       const foundObject = responseData.find((responseObject: any) => filteredObject[lastField] === responseObject.kit);
       if(foundObject) {
-        this.scannerFields.at(filterObjectIndex).setErrors({notFound: foundObject?.error})
-        console.log(this.scannerFields, filterObjectIndex, 'FOUND_OBJECT')
+        this.scannerFields.at(filterObjectIndex).setErrors({notFound: foundObject?.error});
+        console.log(this.scannerFields, filterObjectIndex, 'FOUND_OBJECT');
       } else {
         removeIndexes.push(filteredObject);
       }
-    })
+    });
 
-    console.log(removeIndexes, 'INDEXES')
+    console.log(removeIndexes, 'INDEXES');
 
     removeIndexes.length && removeIndexes.forEach((objectToRemove: object) => {
       const lastField1 = (Object.keys(objectToRemove) as any).at(-1);
       const findObjectIndex = this.scannerFields.getRawValue().findIndex((objectValue: any) => {
         const lastField2 = (Object.keys(objectValue) as any).at(-1);
-        return objectValue[lastField2] === objectToRemove[lastField1]
-      })
-      this.scannerFields.removeAt(findObjectIndex)
+        return objectValue[lastField2] === objectToRemove[lastField1];
+      });
+      this.scannerFields.removeAt(findObjectIndex);
     });
 
   }
@@ -210,7 +212,7 @@ export class ScannerComponent implements OnDestroy {
 
     this.activeScannerFormGroup = new FormGroup({
       scannerFields: new FormArray([])
-    })
+    });
 
     this.scannerFields.reset({emitEvent: false});
     this.scannerFields.clear({emitEvent: false});
