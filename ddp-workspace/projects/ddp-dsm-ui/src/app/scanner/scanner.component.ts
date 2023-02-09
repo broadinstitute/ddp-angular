@@ -19,7 +19,18 @@ import {observable, Observable, of, Subject, takeUntil} from "rxjs";
 import {InputField} from "./interfaces/input-field";
 import {Auth} from "../services/auth.service";
 import {Statics} from "../utils/statics";
-import {catchError, map} from "rxjs/operators";
+import {catchError, first, map} from "rxjs/operators";
+
+/*
+ map(data => [
+          {kit: 'giogio', error: 'No kit for participant with ShortId \\"dsadad\\" was not found.\\nFor more information please contact your DSM developer'},
+        ]),
+        catchError(() => {
+          return of([
+            {kit: 'giogio', error: 'No kit for participant with ShortId \\"dsadad\\" was not found.\\nFor more information please contact your DSM developer'},
+          ])
+        }),
+*/
 
 @Component({
   selector: 'app-scanner',
@@ -73,14 +84,6 @@ export class ScannerComponent implements OnDestroy {
 
     this.activeScannerSaveFunction(filteredFields)
       .pipe(
-        map(data => [
-          {kit: 'giogio', error: 'No kit for participant with ShortId \\"dsadad\\" was not found.\\nFor more information please contact your DSM developer'},
-        ]),
-        catchError(() => {
-          return of([
-            {kit: 'giogio', error: 'No kit for participant with ShortId \\"dsadad\\" was not found.\\nFor more information please contact your DSM developer'},
-          ])
-        }),
         takeUntil(this.subscriptionSubject$)
       )
       .subscribe({
