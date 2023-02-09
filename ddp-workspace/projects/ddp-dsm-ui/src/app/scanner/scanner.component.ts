@@ -67,7 +67,7 @@ export class ScannerComponent implements OnDestroy, DoCheck {
   }
 
   ngDoCheck(): void {
-    this.noValidatorsForLastItem()
+    this.noValidatorsForLastItem();
   }
 
   ngOnDestroy(): void {
