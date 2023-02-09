@@ -36,6 +36,7 @@ import {HomeComponent} from '../home/home.component';
 import {StoolUploadComponent} from '../stool-upload/stool-upload.component';
 import {ExportHelpComponent} from '../help/help.component';
 import {DashboardStatisticsComponent} from '../dashboard-statistics/dashboard-statistics.component';
+import {ScannerComponent} from "../scanner/scanner.component";
 
 
 
@@ -57,7 +58,7 @@ export const AppRoutes: Routes = [
       {path: Statics.SHIPPING_UPLOADED, component: ShippingComponent, canActivate: [AuthGuard]},
       {path: Statics.SHIPPING_TRIGGERED, component: ShippingComponent, canActivate: [AuthGuard]},
 
-      {path: 'scan', component: ScanComponent, canActivate: [AuthGuard]},
+      {path: 'scan', component: ScannerComponent, canActivate: [AuthGuard]},
       {path: 'shippingSearch', component: ShippingSearchComponent, canActivate: [AuthGuard]},
       {path: 'upload', component: UploadComponent, canActivate: [AuthGuard]},
       {path: 'discardList', component: DiscardSampleComponent, canActivate: [AuthGuard]},

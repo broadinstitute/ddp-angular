@@ -28,11 +28,11 @@
           <li *ngIf="hasRole().allowToViewSampleLists() || hasRole().allowedToHandleSamples()"><a [routerLink]="['shippingQueue']"> Queue </a></li>
           <li *ngIf="hasRole().allowToViewSampleLists() || hasRole().allowedToHandleSamples()"><a [routerLink]="['shippingError']"> Error </a></li>
           <!-- Scan pages, only if you have right to handle samples or to receive samples -->
-          <li *ngIf="hasRole().allowedToHandleSamples()"><a [routerLink]="['scan']" [queryParams]="{initialScan: true}"> Initial Scan </a></li>
-          <li *ngIf="hasRole().allowedToHandleSamples()"><a [routerLink]="['scan']" [queryParams]="{scanTracking: true}"> Tracking Scan </a></li>
-          <li *ngIf="hasRole().allowedToHandleSamples()"><a [routerLink]="['scan']"> Final Scan </a></li>
-          <li *ngIf="hasRole().allowedToHandleSamples()"><a [routerLink]="['scan']" [queryParams]="{RGPFinalScan: true}" > RGP Final Scan </a></li>
-          <li *ngIf="hasRole().allowedToViewReceivingPage()"><a [routerLink]="['scan']" [queryParams]="{scanReceived: true}"> Receiving Scan </a></li>
+          <li *ngIf="hasRole().allowedToHandleSamples()"><a [routerLink]="['scan']" [queryParams]="{scannerType: 'initial'}"> Initial Scan </a></li>
+          <li *ngIf="hasRole().allowedToHandleSamples()"><a [routerLink]="['scan']" [queryParams]="{scannerType: 'tracking'}"> Tracking Scan </a></li>
+          <li *ngIf="hasRole().allowedToHandleSamples()"><a [routerLink]="['scan']" [queryParams]="{scannerType: 'final'}"> Final Scan </a></li>
+          <li *ngIf="hasRole().allowedToHandleSamples()"><a [routerLink]="['scan']" [queryParams]="{scannerType: 'RGPFinal'}"> RGP Final Scan </a></li>
+          <li *ngIf="hasRole().allowedToViewReceivingPage()"><a [routerLink]="['scan']" [queryParams]="{scannerType: 'receiving'}"> Receiving Scan </a></li>
           <!-- Discard sample, only if you have right to discard samples or you are allowed to exit a participant -->
           <li *ngIf="hasRole().allowedToDiscardSamples() || hasRole().allowedToExitParticipant()"><a [routerLink]="['discardList']"> Discard Sample </a></li>
           <!-- Lists of samples, only if you have right to handle samples or view sample lists -->

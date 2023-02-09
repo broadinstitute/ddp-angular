@@ -20,7 +20,8 @@
 <form>
   <ng-container *ngIf="!scanReceived">
     <div *ngFor="let row of scanPairs; let i = index">
-      <app-scan-pair [initialScan]="initialScan" [RGPFinalScan]="RGPFinalScan" [leftInputPlaceholder]="leftPlaceholder" [rightInputPlaceholder]="rightPlaceholder"
+      <app-scan-pair [initialScan]="initialScan" [RGPFinalScan]="RGPFinalScan"
+                     [leftInputPlaceholder]="leftPlaceholder" [rightInputPlaceholder]="rightPlaceholder"
                      (pairScanned)="scanDone($event)" (removeScanPair)="removeScanPair($event)"
                      (leftLabelAdded)="setLeftValue($event)" [isLeftValueDuplicate]="validateLeftValue(i)"
                      [isRightValueDuplicate]="validateRightValue(i)" [hadErrorSending]="checkSendStatus(i)"

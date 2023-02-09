@@ -140,6 +140,7 @@ import {MatNativeDateModule} from '@angular/material/core';
 import {DateRangeErrorPipe} from '../dashboard-statistics/pipes/dateRangeError.pipe';
 import {KeyValuePairPipe} from '../dashboard-statistics/pipes/KeyValuePair.pipe';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import {ScannerComponent} from "../scanner/scanner.component";
 
 
 PlotlyModule.plotlyjs = PlotlyJS;
@@ -238,7 +239,8 @@ PlotlyModule.plotlyjs = PlotlyJS;
     CountsTableComponent,
     DateRangeComponent,
     DateRangeErrorPipe,
-    KeyValuePairPipe
+    KeyValuePairPipe,
+    ScannerComponent
   ],
   imports: [
     CommonModule,

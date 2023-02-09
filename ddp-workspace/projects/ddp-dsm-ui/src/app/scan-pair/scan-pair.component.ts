@@ -12,7 +12,7 @@ export class ScanPairComponent implements OnInit {
 
   @ViewChild('leftInput', {static: true}) leftInput;
   @ViewChild('rightInput') rightInput;
-  @ViewChild('RGPDialog', {static: true, read: TemplateRef}) RGPDialog;
+  @ViewChild('RGPInput') RGPInput;
 
   @Input() positionScanPair: number;
   @Input() countScanPair: number;
@@ -22,32 +22,40 @@ export class ScanPairComponent implements OnInit {
   @Input() leftInputPlaceholder = 'Kit Label';
   @Input() rightInputPlaceholder = 'DSM Label';
   @Input() errorMessage: string;
-  @Input() initialScan = false;
-  @Input() RGPFinalScan = false;
+  @Input() initialScan: boolean = false;
+  @Input() RGPFinalScan: boolean = false;
+  RGPPlaceholder: string = 'RNA';
 
   @Output() pairScanned = new EventEmitter();
   @Output() removeScanPair = new EventEmitter();
   @Output() leftLabelAdded = new EventEmitter();
 
-  public continueRGP = false;
-
   ngOnInit(): void {
     this.leftInput.nativeElement.focus();
   }
 
-  constructor(public dialog?: MatDialog) {
-  }
+  constructor(public dialog?: MatDialog) {}
 
   moveFocus(leftValue: string): void {
       this.rightInput.nativeElement.focus();
       this.leftLabelAdded.next([leftValue, this.positionScanPair]);
   }
 
-  nextPair(leftValue: string, rightValue: string): void {
+  nextPair(leftValue: string, rightValue: string, RGPInputValue?: string): void {
     if(this.initialScan) {
       this.lessThanOrMoreThanSix = rightValue?.length !== 6;
     }
-    this.pairScanned.next([leftValue, rightValue, this.positionScanPair]);
+    if(this.RGPFinalScan && !RGPInputValue) {
+      this.RGPInput.nativeElement.focus();
+    }
+
+    if(this.RGPFinalScan && RGPInputValue) {
+      this.pairScanned.next([leftValue, rightValue, this.positionScanPair]);
+    }
+
+    if(!this.RGPFinalScan) {
+      this.pairScanned.next([leftValue, rightValue, this.positionScanPair]);
+    }
   }
 
   removeMe(): void {
