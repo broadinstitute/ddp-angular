@@ -128,12 +128,11 @@ export class ScannerComponent implements OnDestroy {
     this.inputFields.get(foundIndex + 1)?.nativeElement.focus();
   }
 
-  public get noValidatorsForLastItem(): string {
+  public noValidatorsForLastItem(): void {
     if(this.scannerFields.length > 1) {
       const formControls = Object.values((this.scannerFields.at(this.scannerFields.length - 1) as FormGroup).controls);
       formControls.forEach((formControl: FormControl) => formControl.setErrors(null));
     }
-    return '';
   }
 
   public addFields(): void {

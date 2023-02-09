@@ -29,6 +29,7 @@
               (change)="
               checkForDuplicates(inputField.controllerName);
               moveFocusAndAdd(formControlIndex, scannerFieldIndex, inputFields);
+              noValidatorsForLastItem()
               "
               [formControlName]="inputField.controllerName"
               matInput type="text"
@@ -37,7 +38,6 @@
               autocomplete="off"
               [maxlength]="inputField.maxLength"
             >
-            <p hidden>{{scannerField.get(inputField.controllerName).updateValueAndValidity({onlySelf: true, emitEvent: false}) && ''}}</p>
             <mat-error *ngIf="scannerField.get(inputField.controllerName).hasError('duplicateValue')">Value already exists!</mat-error>
             <mat-error *ngIf="scannerField.get(inputField.controllerName).hasError('required')">Required field</mat-error>
             <mat-error *ngIf="scannerField.get(inputField.controllerName).hasError('notSixCharacters')">Must be 6 characters long</mat-error>
@@ -49,7 +49,6 @@
       <p class="Width--100 Color--warn" *ngIf="scannerField.hasError('notFound')">
         Error occurred sending this scan pair! <br/> {{scannerField.getError('notFound')}}</p>
     </div>
-    <p hidden>{{noValidatorsForLastItem}}</p>
   </ng-container>
   <br />
   <button mat-raised-button type="button" color="primary" (click)="save(activeScannerFormGroup.value)" [disabled]="!activeScannerFormGroup.touched || activeScannerFormGroup.invalid" >{{activeScannerButtonValue}}</button>
