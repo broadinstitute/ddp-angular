@@ -20,19 +20,6 @@ import {InputField} from './interfaces/input-field';
 import {Auth} from '../services/auth.service';
 import {Statics} from '../utils/statics';
 
-/*
- map(data => [
-          {kit: 'giogio', error: 'No kit for participant with ShortId \\"dsadad\\" was not found.\\nFor more
-          information please contact your DSM developer'},
-        ]),
-        catchError(() => {
-          return of([
-            {kit: 'giogio', error: 'No kit for participant with ShortId \\"dsadad\\" was not found.\\nFor more
-             information please contact your DSM developer'},
-          ])
-        }),
-*/
-
 @Component({
   selector: 'app-scanner',
   templateUrl: 'scanner.component.html',

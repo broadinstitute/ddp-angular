@@ -4,7 +4,6 @@ import {DashboardComponent} from '../dashboard/dashboard.component';
 import {ShippingReportComponent} from '../shipping-report/shipping-report.component';
 import {AuthGuard} from '../auth0/auth.guard';
 import {ShippingComponent} from '../shipping/shipping.component';
-import {ScanComponent} from '../scan/scan.component';
 import {ShippingSearchComponent} from '../shipping-search/shipping-search.component';
 import {UploadComponent} from '../upload/upload.component';
 import {DiscardSampleComponent} from '../discard-sample/discard-sample.component';
