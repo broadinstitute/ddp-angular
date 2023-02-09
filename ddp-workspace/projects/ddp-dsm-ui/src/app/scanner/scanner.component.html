@@ -51,5 +51,5 @@
     <p hidden>{{noValidatorsForLastItem}}</p>
   </ng-container>
   <br />
-  <button mat-raised-button type="button" color="primary" (click)="save(activeScannerFormGroup.value)" [disabled]="activeScannerFormGroup.invalid" >{{activeScannerButtonValue}}</button>
+  <button mat-raised-button type="button" color="primary" (click)="save(activeScannerFormGroup.value)" [disabled]="!activeScannerFormGroup.touched || activeScannerFormGroup.invalid" >{{activeScannerButtonValue}}</button>
 </form>
