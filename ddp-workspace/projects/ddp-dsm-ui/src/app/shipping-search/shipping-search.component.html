@@ -108,7 +108,7 @@
         <td [ngClass]="{'highlight_sample': isResearchSample(kitRequest)}">{{kitRequest.realm}}</td>
         <td *ngIf="!showColumn('hruid')" [ngClass]="{'highlight_sample': isResearchSample(kitRequest)}">{{kitRequest.getID()}}</td>
         <td *ngIf="showColumn('hruid')" [ngClass]="{'highlight_sample': isResearchSample(kitRequest)}">{{kitRequest.hruid}}</td>
-        <td>{{kitRequest.bspCollaboratorParticipantId}}</td>
+        <td [ngClass]="{'highlight_sample': isResearchSample(kitRequest)}">{{kitRequest.bspCollaboratorParticipantId}}</td>
         <td *ngIf="showColumn('bspCollaboratorSampleId')" [ngClass]="{'highlight_sample': isResearchSample(kitRequest)}">{{kitRequest.bspCollaboratorSampleId}}</td>
         <td *ngIf="showColumn('ddpLabel')" [ngClass]="{'highlight_sample': isResearchSample(kitRequest)}">{{kitRequest.ddpLabel}}</td>
         <td [ngClass]="{'highlight_sample': isResearchSample(kitRequest)}">
