@@ -54,105 +54,49 @@ executors:
       NODE_ENV: development # Needed if playwright is in devDependencies
 
 commands:
-  app-build-and-deploy:
-    description: Run build and immediately deploy it to GAE
-    parameters:
-      study_key:
-        type: string
-      skip_build:
-        type: boolean
-        default: false
-    steps:
-      - setup-build-workspace
-      - setup-shared-env:
-          study_key: << parameters.study_key >>
-      - unless:
-          condition: << parameters.skip_build >>
-          steps:
-            - set-deployment-environment
-            - run-linter-check
-            - run-ng-test
-            - build-app:
-                study_key: << parameters.study_key >>
-            - deploy-exploded-build:
-                study_key: << parameters.study_key >>
-
-  set-deployment-environment:
-    description: "Determine working environment"
-    steps:
-      - run:
-          name: Determine environment for branch << pipeline.git.branch >>
-          command: |
-            if [ "<< pipeline.parameters.deploy_env >>" != "UNKNOWN" ]
-            then
-              DEPLOY_TARGET_ENV="<< pipeline.parameters.deploy_env >>"
-            else
-              DEPLOY_TARGET_ENV="<< pipeline.git.branch >>"
-            fi
-
-            case $DEPLOY_TARGET_ENV in
-              dev*)
-                DEPLOY_ENV=dev
-                BUILD_PARAMS=--sourceMap
-              ;;
-              test)
-                DEPLOY_ENV=test
-                BUILD_PARAMS=--sourceMap
-              ;;
-              staging)
-                DEPLOY_ENV=staging
-              ;;
-              prod*)
-                DEPLOY_ENV=prod
-              ;;
-              *)
-                DEPLOY_ENV=dev
-                BUILD_PARAMS=--sourceMap
-                echo "Defaulting $DEPLOY_TARGET_ENV to dev environment"
-              ;;
-            esac
-            echo "Setting deployment ENVIRONMENT to $DEPLOY_ENV"
-            echo "export ENVIRONMENT=$DEPLOY_ENV" >> $BASH_ENV
-            echo "export BUILD_PARAMS=$BUILD_PARAMS" >> $BASH_ENV
-            source $BASH_ENV
-
-  deploy-stored-build:
-    description: Deploy archived build to GAE
-    parameters:
-      study_key:
-        type: string
+  checkout-code:
+    description: "Git checkout and install dependencies"
     steps:
       - checkout:
           path: *repo_path
-      - setup-shared-env:
-          study_key: << parameters.study_key >>
-      - set-deployment-environment
+      - restore_cache: *npm_cache_restore_key
       - run:
-          name: Retrieve and expand build archive for << parameters.study_key >> with git SHA << pipeline.git.revision >>
+          name: Install dependencies
+          command: |
+            if [[ ! -d node_modules ]]; then
+              npm ci
+            else
+              echo "package.json and package-lock.json unchanged, using cache"
+            fi
+      - save_cache:
+          key: *npm_cache_key
+          paths:
+            - ./node_modules
+
+  build:
+    description: Build DDP study app
+    parameters:
+      study_key:
+        type: string
+        default: UNKNOWN
+    steps:
+      - when:
+          condition:
+            or:
+              - equal: [ atcp, << parameters.study_key >> ]
+          steps:
+            - execute-study-specific-commands:
+                study_key: << parameters.study_key >>
+      - run:
+          name: ng build
           command: |
             set -u
-            # we are getting our builds from the one bucket
-            readvault.sh secret/pepper/prod/v1/conf .data.gcp.serviceKey | gcloud auth activate-service-account --key-file=-
-            TAR_FILE_URL_PATTERN="gs://${BUILDS_BUCKET}/${ANGULAR_PROJECT_NAME}/${ANGULAR_PROJECT_NAME}_*_${SHORT_GIT_SHA}.tar.gz"
-            echo "Looking for archive matching ${TAR_FILE_URL_PATTERN}"
-            TAR_FILE_URL=`gsutil ls $TAR_FILE_URL_PATTERN  | sort -r | head -1`
+            export NODE_OPTIONS="--max-old-space-size=4096"
+            ng build $ANGULAR_PROJECT_NAME $BUILD_PARAMS --prod --aot --base-href=/ --output-path=$OUTPUT_DIR --verbose=true --progress=true
+          #
 
-            if [ -z $TAR_FILE_URL ]
-            then
-              echo "Could not find archive using pattern ${TAR_FILE_URL_PATTERN}"
-              exit 1
-            fi
-            TAR_FILE_PATH="/tmp/$(basename -- $TAR_FILE_URL)"
-            echo "Downloading ${TAR_FILE_URL} to ${TAR_FILE_PATH}"
-            gsutil cp  $TAR_FILE_URL $TAR_FILE_PATH
-            mkdir -p $OUTPUT_DIR && tar -xvf $TAR_FILE_PATH -C $OUTPUT_DIR
-            echo "Contents of extracted archive at $OUTPUT_DIR"
-            ls -l $OUTPUT_DIR
-      - deploy-exploded-build:
-          study_key: << parameters.study_key >>
-
-  deploy-exploded-build:
-    description: Deploy files to GAE
+  deploy:
+    description: Deploy to GAE and delete previous version of service
     parameters:
       study_key:
         type: string
@@ -225,6 +169,83 @@ commands:
               gcloud app versions delete --quiet --service "$SERVICE" "$VERSION_TO_DELETE" --project "broad-ddp-${ENVIRONMENT}"
             done;
             exit 0;
+      #
+
+  set-deployment-environment:
+    description: "Determine working environment"
+    steps:
+      - run:
+          name: Determine environment for branch << pipeline.git.branch >>
+          command: |
+            if [ "<< pipeline.parameters.deploy_env >>" != "UNKNOWN" ]
+            then
+              DEPLOY_TARGET_ENV="<< pipeline.parameters.deploy_env >>"
+            else
+              DEPLOY_TARGET_ENV="<< pipeline.git.branch >>"
+            fi
+
+            case $DEPLOY_TARGET_ENV in
+              dev*)
+                DEPLOY_ENV=dev
+                BUILD_PARAMS=--sourceMap
+              ;;
+              test)
+                DEPLOY_ENV=test
+                BUILD_PARAMS=--sourceMap
+              ;;
+              staging)
+                DEPLOY_ENV=staging
+              ;;
+              prod*)
+                DEPLOY_ENV=prod
+              ;;
+              *)
+                DEPLOY_ENV=dev
+                BUILD_PARAMS=--sourceMap
+                echo "Defaulting $DEPLOY_TARGET_ENV to dev environment"
+              ;;
+            esac
+            
+            echo "Setting deployment environment $ENVIRONMENT to $DEPLOY_ENV"
+            echo "export ENVIRONMENT=$DEPLOY_ENV" >> $BASH_ENV
+            echo "export BUILD_PARAMS=$BUILD_PARAMS" >> $BASH_ENV
+            source $BASH_ENV
+          #
+
+  deploy-stored-build:
+    description: Deploy archived build to GAE
+    parameters:
+      study_key:
+        type: string
+    steps:
+      - checkout:
+          path: *repo_path
+      - setup-shared-env:
+          study_key: << parameters.study_key >>
+      - set-deployment-environment
+      - run:
+          name: Retrieve and expand build archive for << parameters.study_key >> with git SHA << pipeline.git.revision >>
+          command: |
+            set -u
+            # we are getting our builds from the one bucket
+            readvault.sh secret/pepper/prod/v1/conf .data.gcp.serviceKey | gcloud auth activate-service-account --key-file=-
+            TAR_FILE_URL_PATTERN="gs://${BUILDS_BUCKET}/${ANGULAR_PROJECT_NAME}/${ANGULAR_PROJECT_NAME}_*_${SHORT_GIT_SHA}.tar.gz"
+            echo "Looking for archive matching ${TAR_FILE_URL_PATTERN}"
+            TAR_FILE_URL=`gsutil ls $TAR_FILE_URL_PATTERN  | sort -r | head -1`
+
+            if [ -z $TAR_FILE_URL ]
+            then
+              echo "Could not find archive using pattern ${TAR_FILE_URL_PATTERN}"
+              exit 1
+            fi
+            TAR_FILE_PATH="/tmp/$(basename -- $TAR_FILE_URL)"
+            echo "Downloading ${TAR_FILE_URL} to ${TAR_FILE_PATH}"
+            gsutil cp  $TAR_FILE_URL $TAR_FILE_PATH
+            mkdir -p $OUTPUT_DIR && tar -xvf $TAR_FILE_PATH -C $OUTPUT_DIR
+            echo "Contents of extracted archive at $OUTPUT_DIR"
+            ls -l $OUTPUT_DIR
+      - deploy:
+          study_key: << parameters.study_key >>
 
   setup-shared-env:
     description: "Setup shared ENV vars used by multiple scripts"
@@ -273,27 +294,9 @@ commands:
             echo 'export BUILDS_BUCKET=ddp-build-artifacts' >> $BASH_ENV
             source $BASH_ENV
 
-  setup-build-workspace:
-    description: "Setup workspace used by all projects"
-    steps:
-      - checkout:
-          path: *repo_path
-      - restore_cache: *npm_cache_restore_key
-      - run:
-          name: Install dependencies
-          command: |
-            if [[ ! -d node_modules ]]; then
-              npm ci
-            else
-              echo "package.json and package-lock.json unchanged, using cache"
-            fi
-      - save_cache:
-          key: *npm_cache_key
-          paths:
-            - ./node_modules
-
   run-linter-check:
-    description: "Run linter check"
+    # Requires $ANGULAR_PROJECT_NAME
+    description: Run ng lint for ddp-sdk, toolkit and specified project
     steps:
       - run:
           name: Linter check
@@ -303,7 +306,8 @@ commands:
             ng lint $ANGULAR_PROJECT_NAME
 
   run-ng-test:
-    description: "Run all tests"
+    # Requires $ANGULAR_PROJECT_NAME
+    description: Run all ng tests
     steps:
       - run:
           name: ng test
@@ -348,27 +352,6 @@ commands:
             equal: [ atcp, << parameters.study_key >> ]
           steps:
             - build-atcp-assets
-
-  build-app:
-    description: "Build DDP study app"
-    parameters:
-      study_key:
-        type: string
-        default: "UNKNOWN"
-    steps:
-      - when:
-          condition:
-            or:
-              - equal: [ atcp, << parameters.study_key >> ]
-          steps:
-            - execute-study-specific-commands:
-                study_key: << parameters.study_key >>
-      - run:
-          name: ng build
-          command: |
-            set -u
-            export NODE_OPTIONS="--max-old-space-size=4096"
-            ng build $ANGULAR_PROJECT_NAME $BUILD_PARAMS --prod --aot --base-href=/ --output-path=$OUTPUT_DIR --verbose=true --progress=true
 
   store-app-build:
     description: "Copy build to cloud storage"
@@ -494,9 +477,15 @@ jobs:
     executor:
       name: build-executor
     steps:
-      - app-build-and-deploy:
+      - checkout-code
+      - setup-shared-env:
           study_key: << parameters.study_key >>
-          skip_build: false
+      - set-deployment-environment
+      - build:
+          study_key: << parameters.study_key >>
+      - deploy:
+          study_key: << parameters.study_key >>
+
 
   conditionally-launch-build-and-deploy-all-job:
     working_directory: *ng_workspace_path
@@ -555,8 +544,8 @@ jobs:
       - conditionally-launch-build-and-store:
           study_key: fon
 
-  app-build-and-store-job:
-    description: Run build and store archive of it
+  build-job:
+    description: Run build and archive build artifacts
     working_directory: *ng_workspace_path
     executor:
       name: build-executor
@@ -568,13 +557,13 @@ jobs:
         type: boolean
         default: true
     steps:
-      - setup-build-workspace
+      - checkout-code
       - set-deployment-environment
       - setup-shared-env:
           study_key: << pipeline.parameters.study_key >>
       - run-linter-check
       - run-ng-test
-      - build-app:
+      - build:
           study_key: << pipeline.parameters.study_key >>
       - when:
           condition: << parameters.store_build_artifacts >>
@@ -592,12 +581,13 @@ jobs:
       - deploy-stored-build:
           study_key: << parameters.study_key >>
 
-  app-run-tests-job:
+  run-ng-test-job:
+    description: Run linter and all ng tests for study specified in CircleCI api call
     working_directory: *ng_workspace_path
     executor:
       name: build-executor
     steps:
-      - setup-build-workspace
+      - checkout-code
       - setup-shared-env:
           study_key: << pipeline.parameters.study_key >>
       - run-linter-check
@@ -782,7 +772,7 @@ workflows:
   build-pr:
     # Launched on PR commits
     jobs:
-      - app-build-and-store-job:
+      - build-job:
           <<: *filter-pr-branch
           name: << matrix.study_key >>-build-pr
           store_build_artifacts: false
@@ -801,7 +791,7 @@ workflows:
         - not:
             equal: ["UNKNOWN", << pipeline.parameters.study_key >>]
     jobs:
-      - app-build-and-store-job
+      - build-job
 
   api-deploy-workflow:
     # Deploy a study build to environment specified in api call
@@ -825,7 +815,7 @@ workflows:
           - not:
               equal: ["UNKNOWN", << pipeline.parameters.study_key >>]
       jobs:
-        - app-run-tests-job
+        - run-ng-test-job
 
   playwright-e2e-test-workflow:
     # Triggered by CI API (for example, run_ci.sh)
@@ -881,7 +871,7 @@ workflows:
   build-app-workflow:
     when: << pipeline.parameters.do-builds >>
     jobs:
-      - app-build-and-store-job:
+      - build-job:
           <<: *build-and-store-filters
 
   deploy-all-apps-workflow:
