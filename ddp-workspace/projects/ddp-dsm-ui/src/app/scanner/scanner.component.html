@@ -41,6 +41,7 @@
             <mat-error *ngIf="scannerField.get(inputField.controllerName).hasError('duplicateValue')">Value already exists!</mat-error>
             <mat-error *ngIf="scannerField.get(inputField.controllerName).hasError('required')">Required field</mat-error>
             <mat-error *ngIf="scannerField.get(inputField.controllerName).hasError('notSixCharacters')">Must be 6 characters long</mat-error>
+            <mat-error *ngIf="scannerField.get(inputField.controllerName).hasError('noRNA')">This barcode does not contain the “RNA” prefix</mat-error>
           </mat-form-field>
         </ng-container>
       </ng-container>

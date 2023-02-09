@@ -85,7 +85,7 @@ export class ScannerService {
           controllerName: 'RNA',
           placeholder: 'RNA',
           maxLength: undefined,
-          validators: []
+          validators: [this.shouldIncludeRNA()]
         }
       ]
     },
@@ -140,5 +140,10 @@ export class ScannerService {
   private sixCharacters(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null =>
       control?.value?.length !== 6  || !control?.value?.length? {notSixCharacters: true} : null;
+  }
+
+  private shouldIncludeRNA(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null =>
+      !control?.value?.slice(0, 4).includes('RNA') ? {noRNA: true} : null;
   }
 }
