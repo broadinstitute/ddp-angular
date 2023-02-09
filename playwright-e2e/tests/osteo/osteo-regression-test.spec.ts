@@ -21,7 +21,7 @@ import { checkUserReceivedEmails } from 'utils/email-utils';
 
 const { OSTEO_USER_EMAIL, OSTEO_USER_PASSWORD, SITE_PASSWORD } = process.env;
 
-test('Static Content', async ({page}) => {
+test('Static Content @osteo', async ({page}) => {
   await page.goto('https://osteo.test.datadonationplatform.org/');
   await page.locator('div').filter({ hasText: 'Password *' }).nth(2).click();
   await page.getByLabel('Password *').fill('broad_institute');
@@ -120,8 +120,8 @@ test('Static Content', async ({page}) => {
 
 });
 
-test('Osteo enroll kid', async ({ page}) => {
-    test.setTimeout(6 * 60 * 1000);
+test('Osteo enroll kid @osteo', async ({ page}) => {
+    test.slow('Lots going on here');
     const userEmail = generateEmailAlias(OSTEO_USER_EMAIL);
     await page.goto('https://osteo.test.datadonationplatform.org/');
     await page.getByLabel('Password *').click();
@@ -292,8 +292,8 @@ test('Osteo enroll kid', async ({ page}) => {
   
 });
 
-test('Osteo enroll self and kid together', async({ page}) => {
-    test.setTimeout(7 * 60 * 1000);
+test('Osteo enroll self and kid together @osteo', async({ page}) => {
+    test.slow('Lots going on here');
     await page.goto('https://osteo.test.datadonationplatform.org/');
     await page.getByLabel('Password *').click();
     await page.getByLabel('Password *').fill('broad_institute');
@@ -439,7 +439,7 @@ test('Osteo enroll self and kid together', async({ page}) => {
 });
 
 test('Osteo self enroll', async ({ page }) => {
-  test.setTimeout(5 * 60 * 1000);
+  test.slow('Lots going on here');
   const userEmail = generateEmailAlias(OSTEO_USER_EMAIL);
   const firstName = generateUserName('OS');
   const lastName = generateUserName('OS');

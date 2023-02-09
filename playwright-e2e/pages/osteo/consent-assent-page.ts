@@ -28,7 +28,6 @@ export default class ConsentAssentPage extends OsteoPageBase {
   }
 
   async enterChildAssent(childName: string) : Promise<void> {
-    await this.page.getByTestId('answer:CONSENT_ASSENT_CHILD_SIGNATURE').click();
     await this.page.getByTestId('answer:CONSENT_ASSENT_CHILD_SIGNATURE').fill(childName);
     await this.page.waitForTimeout(1000);
 
@@ -39,7 +38,6 @@ export default class ConsentAssentPage extends OsteoPageBase {
     parentFirstName: string,
     parentLastName: string) : Promise<void> {
         await this.page.getByTestId('answer:CONSENT_ASSENT_CHILD_FIRSTNAME').fill(minorFirstName);
-        await this.page.getByTestId('answer:CONSENT_ASSENT_CHILD_LASTNAME').click();
         await this.page.getByTestId('answer:CONSENT_ASSENT_CHILD_LASTNAME').fill(minorLastName);
 
         await this.page.getByTestId('answer:CONSENT_ASSENT_FIRSTNAME').fill(parentFirstName);

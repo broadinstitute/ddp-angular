@@ -11,9 +11,8 @@ import ResearchConsentPage from 'pages/brain/consent-page';
 
 const { BRAIN_USER_EMAIL, BRAIN_USER_PASSWORD, MIN_EMAIL_WAIT_TIME, BRAIN_BASE_URL, SITE_PASSWORD } = process.env;
 
-test('Brain statics', async ({page}) => {
+test('Brain statics @brain', async ({page}) => {
     await page.goto(BRAIN_BASE_URL!);
-    
     testutils.fillSitePassword(page, SITE_PASSWORD);
     await page.waitForTimeout(1000);
     await page.getByRole('link', { name: 'Brain Tumor Project logo Brain Tumor Project' }).click();
@@ -98,8 +97,8 @@ test('Brain statics', async ({page}) => {
   
 });
 
-test('Brain enroll kid on their behalf', async ( {page}) => {
-    test.setTimeout(5 * 60 * 1000);
+test('Brain enroll kid on their behalf @brain', async ( {page}) => {
+    test.slow('Lots of stuff going on here');
     await page.goto(BRAIN_BASE_URL!);
     const userEmail = generateEmailAlias(BRAIN_USER_EMAIL);
     testutils.fillSitePassword(page, SITE_PASSWORD)
@@ -229,8 +228,8 @@ test('Brain enroll kid on their behalf', async ( {page}) => {
   
 });
 
-test('Brain enroll self', async ({ page}) => {
-    test.setTimeout(5 * 60 * 1000);
+test('Brain enroll self @brain', async ({ page}) => {
+    test.slow('Lots of stuff going on here');
     await page.goto(BRAIN_BASE_URL!);
     const checkForEmailsAfter = Date.now() + Number.parseInt(MIN_EMAIL_WAIT_TIME!);
     await testutils.fillSitePassword(page);
