@@ -128,7 +128,6 @@ export class ScannerComponent implements OnDestroy {
     if(this.scannerFields.length > 1) {
       const formControls = Object.values((this.scannerFields.at(this.scannerFields.length - 1) as FormGroup).controls)
       formControls.forEach((formControl: FormControl) => formControl.setErrors(null));
-      this.scannerFields.updateValueAndValidity();
     }
     return ''
   }
