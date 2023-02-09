@@ -483,9 +483,9 @@ jobs:
       - set-deployment-environment
       - setup-shared-env:
           study_key: << parameters.study_key >>
-      - build:
+      - build-app:
           study_key: << parameters.study_key >>
-      - deploy:
+      - deploy-exploded-build:
           study_key: << parameters.study_key >>
 
   conditionally-launch-build-and-deploy-all-job:
