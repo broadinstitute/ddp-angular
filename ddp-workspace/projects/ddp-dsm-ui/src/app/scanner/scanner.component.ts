@@ -81,7 +81,7 @@ export class ScannerComponent implements OnDestroy {
 
   public save({scannerFields}): void {
     const filteredFields = scannerFields
-      .filter((field: object) => Object.values(field).some((value: string | null) => value));
+      .filter((field: object) => Object.values(field).every((value: string | null) => value));
 
     this.activeScannerSaveFunction(filteredFields)
       .pipe(

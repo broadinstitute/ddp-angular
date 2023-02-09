@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Scanners} from '../interfaces/scanners';
-import {AbstractControl, ValidationErrors, ValidatorFn} from '@angular/forms';
+import {AbstractControl, ValidationErrors, ValidatorFn, Validators} from '@angular/forms';
 import {DSMService} from '../../services/dsm.service';
 import {Observable} from 'rxjs';
 
@@ -22,7 +22,7 @@ export class ScannerService {
           controllerName: 'hruid',
           placeholder: 'Short ID',
           maxLength: 6,
-          validators: [this.sixCharacters()]
+          validators: [this.sixCharacters(), Validators.required]
         }
       ]
     },
@@ -35,13 +35,13 @@ export class ScannerService {
           controllerName: 'trackingReturnId',
           placeholder: 'Tracking Label',
           maxLength: undefined,
-          validators: []
+          validators: [Validators.required]
         },
         {
           controllerName: 'kitLabel',
           placeholder: 'Kit Label',
           maxLength: undefined,
-          validators: []
+          validators: [Validators.required]
         }
       ]
     },
@@ -54,13 +54,13 @@ export class ScannerService {
           controllerName: 'kitLabel',
           placeholder: 'Kit Label',
           maxLength: undefined,
-          validators: []
+          validators: [Validators.required]
         },
         {
           controllerName: 'ddpLabel',
           placeholder: 'DSM Label',
           maxLength: undefined,
-          validators: []
+          validators: [Validators.required]
         }
       ]
     },
@@ -73,19 +73,19 @@ export class ScannerService {
           controllerName: 'kitLabel',
           placeholder: 'Kit Label',
           maxLength: undefined,
-          validators: []
+          validators: [Validators.required]
         },
         {
           controllerName: 'ddpLabel',
           placeholder: 'DSM Label',
           maxLength: undefined,
-          validators: []
+          validators: [Validators.required]
         },
         {
           controllerName: 'RNA',
           placeholder: 'RNA',
           maxLength: undefined,
-          validators: [this.shouldIncludeRNA()]
+          validators: [this.shouldIncludeRNA(), Validators.required]
         }
       ]
     },
@@ -98,7 +98,7 @@ export class ScannerService {
           controllerName: 'kit',
           placeholder: 'SM-ID',
           maxLength: undefined,
-          validators: []
+          validators: [Validators.required]
         }
       ]
     }
