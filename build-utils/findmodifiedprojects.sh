@@ -1,11 +1,10 @@
 #!/bin/bash
 # Script will list the Angular projects have been modified comparing two git SHAs
 # Can run anywhere within the repo
-# If a file from a common area, like the root directory was modified, we call that _SHARED_
+# If a file from a common area, like the root diretory was modified, we call that _SHARED_
 set +x
-#ignore these file name patterns when figuring out what modules changed
-#ignore changed files in nested project playwright-e2e
-declare -a exclude_patterns=( '^.*\.md' '^.*.pdf' 'playwright-e2e' )
+#ignore these file name patterns when figuring out what modules changed 
+declare -a exclude_patterns=( '^.*\.md' '^.*.pdf' )
 
 EXCLUDE_CMD='grep -v -E'
 

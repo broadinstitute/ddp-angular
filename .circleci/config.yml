@@ -29,14 +29,6 @@ references:
       branches:
         only: develop
 
-  # On PR branches only
-  filter-pr-branch: &filter-pr-branch
-    filters:
-      tags:
-        ignore: /.*/
-      branches:
-        ignore: develop
-
 # Container for all the builds
 executors:
   build-executor:
@@ -768,20 +760,6 @@ parameters:
 
 workflows:
   version: 2
-
-  build-pr:
-    # Launched on PR commits
-    jobs:
-      - build-job:
-          <<: *filter-pr-branch
-          name: << matrix.study_key >>-build-pr
-          store_build_artifacts: false
-          matrix:
-            alias: build-app-pr
-            parameters:
-              study_key: [ basil, osteo, angio, brain, mbc, testboston, mpc, atcp, rarex, rgp, esc, prion, cgc, circadia, pancan, singular, brugada, lms, fon ]
-      - build-playwright-test-job
-
 
   api-build-and-store-workflow:
     # Build study specified in api call
