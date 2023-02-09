@@ -16,7 +16,7 @@ export class ScannerService {
           controllerName: 'kitLabel',
           placeholder: 'Kit Label',
           maxLength: undefined,
-          validators: []
+          validators: [Validators.required]
         },
         {
           controllerName: 'hruid',
