@@ -73,6 +73,9 @@ commands:
         type: string
         default: UNKNOWN
     steps:
+      - checkout-code
+      - setup-shared-env:
+          study_key: << parameters.study_key >>
       - when:
           condition:
             equal: [ atcp, << parameters.study_key >> ]
@@ -88,8 +91,6 @@ commands:
                 command: |
                   set -u
                   ./node_modules/.bin/sass ./projects/ddp-atcp/src/auth0/auth0-styles/main.scss ./projects/ddp-atcp/src/auth0/compiled/auth0-styles/main.css --style compressed
-      
-
       - run:
           name: ng build
           command: |
@@ -395,12 +396,9 @@ jobs:
     executor:
       name: build-executor
     steps:
-      - checkout-code
-      - set-deployment-environment
-      - setup-shared-env:
-          study_key: << parameters.study_key >>
       - build:
           study_key: << parameters.study_key >>
+      - set-deployment-environment
       - deploy-exploded-build:
           study_key: << parameters.study_key >>
 
@@ -467,14 +465,11 @@ jobs:
     executor:
       name: build-executor
     steps:
-      - checkout-code
-      - set-deployment-environment
-      - setup-shared-env:
-          study_key: << pipeline.parameters.study_key >>
       - build:
           study_key: << pipeline.parameters.study_key >>
+      - set-deployment-environment
       - run:
-          name: Create build archive
+          name: Create build archive tar
           command: |
             set -u
             DATE=`date +%F`
@@ -768,7 +763,8 @@ workflows:
           - not:
               equal: ["UNKNOWN", << pipeline.parameters.study_key >>]
       jobs:
-        - app-ui-unit-test
+        - app-ui-unit-test:
+            study_key: << pipeline.parameters.study_key >>
         - api-unit-test
 
   playwright-e2e-test-workflow:
