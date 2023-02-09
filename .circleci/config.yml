@@ -388,7 +388,7 @@ commands:
                 command: circleci-agent step halt
 
 jobs:
-  app-deploy-job:
+  app-deploy:
     working_directory: *ng_workspace_path
     parameters:
       study_key:
@@ -798,7 +798,7 @@ workflows:
         - << pipeline.parameters.do-builds >>
         - equal: ["UNKNOWN", << pipeline.parameters.deploy_env >>]
     jobs:
-      - app-deploy-job:
+      - app-deploy:
           study_key: << pipeline.parameters.study_key >>
           filters:
             branches:
