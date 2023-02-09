@@ -1,7 +1,7 @@
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
-  Component, ElementRef,
+  Component, DoCheck, ElementRef,
   OnDestroy,
   QueryList,
   Self,
@@ -40,7 +40,7 @@ import {Statics} from '../utils/statics';
   providers: [ScannerService],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ScannerComponent implements OnDestroy {
+export class ScannerComponent implements OnDestroy, DoCheck {
   @ViewChildren('inputFields') inputFields: QueryList<ElementRef<HTMLInputElement>>;
 
   public additionalMessage: string | undefined;
@@ -66,6 +66,10 @@ export class ScannerComponent implements OnDestroy {
       .subscribe(({scannerType = ''}: Params) => this.initialize(scannerType));
   }
 
+  ngDoCheck(): void {
+    this.noValidatorsForLastItem()
+  }
+
   ngOnDestroy(): void {
     this.subscriptionSubject$.next();
     this.subscriptionSubject$.complete();
@@ -80,6 +84,8 @@ export class ScannerComponent implements OnDestroy {
   }
 
   public save({scannerFields}): void {
+    this.additionalMessage = '';
+
     const filteredFields = scannerFields
       .filter((field: object) => Object.values(field).every((value: string | null) => value));
 
@@ -167,7 +173,7 @@ export class ScannerComponent implements OnDestroy {
     console.log(responseData, 'REMOVE_SUCCESSFUL_SCANS');
 
     const filteredFields = this.scannerFields.getRawValue()
-      .filter((field: object) => Object.values(field).some((value: string | null) => value));
+      .filter((field: object) => Object.values(field).every((value: string | null) => value));
 
     console.log(filteredFields, 'MAIN_FORM');
 
@@ -199,6 +205,7 @@ export class ScannerComponent implements OnDestroy {
 
   private initialize(scannerType: string): void {
     this.cdr.markForCheck();
+    this.additionalMessage = '';
 
     const {title, saveFn, buttonValue, inputFields} =
       this.scannerService.getScanner(scannerType);

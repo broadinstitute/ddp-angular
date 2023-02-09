@@ -29,7 +29,7 @@
               (change)="
               checkForDuplicates(inputField.controllerName);
               moveFocusAndAdd(formControlIndex, scannerFieldIndex, inputFields);
-              noValidatorsForLastItem()
+              scannerField.get(inputField.controllerName).updateValueAndValidity({emitEvent: false});
               "
               [formControlName]="inputField.controllerName"
               matInput type="text"
