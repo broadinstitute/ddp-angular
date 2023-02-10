@@ -111,8 +111,8 @@ export function findLink(dataDdpTest: string) {
 }
 
 // Buttons on a page, in a table cell, etc.
-export function findButton(dataDdpTest: string) {
-  return `button[data-ddp-test="${dataDdpTest}"]`;
+export function findButton(page: Page, dataDdpTest: string) {
+  return page.locator(`button[data-ddp-test="${dataDdpTest}"]`);
 }
 
 // Seen wrapped inside a button
@@ -141,6 +141,9 @@ export async function click(page: Page, stableID: string, option: string): Promi
   await page.locator(`[data-ddp-test="${stableID}"]`).selectOption(option);
 }
 
+export function booleanToYesOrNo(val: boolean) {
+  return val ? 'Yes' : 'No';
+}
 /**
  * Returns the default value if value is null, empty or undefined.
  * @param value

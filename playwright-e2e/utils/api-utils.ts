@@ -36,6 +36,12 @@ function buildAuth0ClientCredentials(app: APP): string {
       audience = process.env.RGP_AUTH0_AUDIENCE;
       domain = process.env.RGP_AUTH0_DOMAIN;
       break;
+    case 'AT':
+      clientId = process.env.AT_AUTH0_CLIENT_ID;
+      clientSecret = process.env.AT_AUTH0_CLIENT_SECRET;
+      audience = process.env.AT_AUTH0_AUDIENCE;
+      domain = process.env.AT_AUTH0_DOMAIN;
+      break;
     default:
       throw Error(`Undefined app name: ${app}`);
   }

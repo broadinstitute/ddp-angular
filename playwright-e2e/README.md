@@ -34,7 +34,7 @@ Worthy of note:
   * Copy `.env.sample`, save as `.env`, fill it out.
   * If you need to know common test users credential, read it from Vault. Try not to use common users for local development.
   > vault read -format=json secret/pepper/test/v1/e2e
-
+ 
 * Install dependencies and Playwright web browsers in **/playwright-e2e** dir.
   > cd playwright-e2e/
   > 
@@ -43,6 +43,35 @@ Worthy of note:
   > npx playwright install
 
 If you don't want to use the `.env` file, you can also specify environment variables in cmd. See an example of this in **Examples** section.
+
+
+## Email forwarding
+* Tests run assertions that probe actual delivered email using gmail APIs.  In order for
+  these tests to work properly, the emails that pepper sends need to be forwarded into a shared 
+  gmail account that we have API access into.  The test accounts in vault have this forwarding
+  enabled, but when you add a new account for a new study or when you want to run the tests
+  locally using your own email account, you will need to setup email forwarding.
+* Set up **selective** forwarding by creating a filter in your gmail account that identifies the
+pattern of the `to:`.  You don't want to forward everything in your gmail account to the shared account
+since that would mean you're leaking all of your email into a shared account.
+* For the various `_EMAIL_` values in your `.env` file, use a pattern like `[your username]+forward@broad.dev`
+that you are sure will not pick up any stray emails.  Playwright tests will generate new accounts
+for each test, resulting in email addresses like `[your user]+forward+383839392920@broad.dev`.  We will
+use this pattern to drive the email filter.
+* Use the `email.forwardTo` email from `secret/pepper/test/v1/e2e`
+* You can choose to either keep a copy in your inbox or delete it.  You can change this
+as you see fit over time.
+
+![gmail forward screenshot](gmail-forward2.png)
+
+![gmail filter screenshot](gmail-filter.png)
+
+![gmail forward screenshot](gmail-forward.png)
+
+* Once you have added your filter and forwarding, you will need to login to the shared gmail
+account and approve the request for forwarding.  Use the `forwardTo` and `forwardPassword` 
+in `secret/pepper/etst/v1/e2e` to login to the shared gmail account and approve forwarding.
+
 
 
 ## Set up to run tests in docker container on localhost

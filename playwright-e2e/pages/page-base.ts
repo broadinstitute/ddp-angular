@@ -157,7 +157,7 @@ export default abstract class PageBase implements PageInterface {
     city?: string;
     zipCode?: string;
     telephone?: string | number;
-    phoneLabel?: string;
+    labels?: MaillingAddressLabels;
   }): Promise<void> {
     const {
       fullName,
@@ -166,14 +166,22 @@ export default abstract class PageBase implements PageInterface {
       street = '415 MAIN ST',
       city = 'CAMBRIDGE',
       zipCode = '02142',
-      telephone = generateRandomPhoneNum(),
-      phoneLabel = 'Telephone Contact Number'
+      telephone = generateRandomPhoneNum()
     } = opts;
 
-    const mailAddressForm = new Address(this.page, { label: new RegExp(/contact information|Mailing Address/) });
+    let labels;
+    if (!opts.labels) {
+      labels = { phone: 'Phone', country: 'Country', state: 'State', zip: 'Zip Code', city: 'City' };
+    } else {
+      labels = opts.labels;
+    }
+
+    const mailAddressForm = new Address(this.page, {
+      label: new RegExp(/Your contact information|Contact Information|Mailing Address/)
+    });
     await mailAddressForm.input('Full Name').fill(fullName);
-    await mailAddressForm.select('Country').selectOption(country);
-    await mailAddressForm.select('State').selectOption(state);
+    await mailAddressForm.select(labels.country).selectOption(country);
+    await mailAddressForm.select(labels.state).selectOption(state);
     // Wait for data saved to database after fill out Street, City and Zip Code.
     await Promise.all([
       mailAddressForm.input('Street Address').fill(street.toUpperCase()),
@@ -187,7 +195,7 @@ export default abstract class PageBase implements PageInterface {
       })
     ]);
     await Promise.all([
-      mailAddressForm.input('City').fill(city.toUpperCase()),
+      mailAddressForm.input(labels.city).fill(city.toUpperCase()),
       // Wait until data saved
       this.page.waitForResponse((resp) => {
         return (
@@ -199,7 +207,7 @@ export default abstract class PageBase implements PageInterface {
       })
     ]);
     await Promise.all([
-      mailAddressForm.input('Zip Code').fill(zipCode),
+      mailAddressForm.input(labels.zip).fill(zipCode),
       this.page.waitForResponse((resp) => {
         return (
           resp.request().method() === 'PUT' &&
@@ -212,7 +220,7 @@ export default abstract class PageBase implements PageInterface {
         return resp.request().method() === 'POST' && resp.url().includes('/address/verify') && resp.status() === 200;
       })
     ]);
-    await mailAddressForm.input(phoneLabel).fill(telephone.toString());
+    await mailAddressForm.input(labels.phone).fill(telephone.toString());
     // Wait for Address Suggestion card
     await mailAddressForm.addressSuggestion().radioButton('As Entered:').check();
   }

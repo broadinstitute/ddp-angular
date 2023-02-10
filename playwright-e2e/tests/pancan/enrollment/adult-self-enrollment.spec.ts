@@ -63,7 +63,7 @@ test.describe('Enroll myself as adult', () => {
     await consentFormPage.signature().fill(`${user.patient.firstName} ${lastName}`);
     await expect(consentFormPage.getSubmitButton()).toBeEnabled();
 
-    await consentFormPage.fillInContactAddress({ fullName: `${user.patient.firstName} ${lastName}`, phoneLabel: 'Phone' });
+    await consentFormPage.fillInContactAddress({ fullName: `${user.patient.firstName} ${lastName}` });
     await consentFormPage.submit();
 
     //On "Medical Release Form"

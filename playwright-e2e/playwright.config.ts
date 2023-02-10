@@ -60,6 +60,7 @@ const testConfig: PlaywrightTestConfig = {
     actionTimeout: process.env.CI ? 30 * 1000 : 10 * 1000,
     navigationTimeout: 30 * 1000,
     acceptDownloads: true,
+    testIdAttribute: 'data-ddp-test',
 
     /* Base URL to use in actions like `await page.goto('/')`. */
     // baseURL: 'http://localhost:3000',
@@ -67,7 +68,7 @@ const testConfig: PlaywrightTestConfig = {
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: process.env.CI ? 'on-first-retry' : 'retain-on-failure',
     screenshot: 'only-on-failure',
-    video: process.env.CI ? 'on-first-retry' : 'retain-on-failure', // Limit load on CI system because trace and video add load
+    video: process.env.video ? 'on' : process.env.CI ? 'on-first-retry' : 'retain-on-failure', // Limit load on CI system because trace and video add load
 
     userAgent:
       'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) ' +
