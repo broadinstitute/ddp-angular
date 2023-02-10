@@ -58,7 +58,7 @@ since that would mean you're leaking all of your email into a shared account.
 that you are sure will not pick up any stray emails.  Playwright tests will generate new accounts
 for each test, resulting in email addresses like `[your user]+forward+383839392920@broad.dev`.  We will
 use this pattern to drive the email filter.
-* Use the `email.forwardTo` email from `secret/pepper/etst/v1/e2e`
+* Use the `email.forwardTo` email from `secret/pepper/test/v1/e2e`
 * You can choose to either keep a copy in your inbox or delete it.  You can change this
 as you see fit over time.
 
