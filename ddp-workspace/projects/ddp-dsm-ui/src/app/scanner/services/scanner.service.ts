@@ -8,6 +8,7 @@ import {Observable} from 'rxjs';
 export class ScannerService {
   private readonly scanners: Scanners = {
     initial: {
+      type: 'initial',
       title: 'Initial Scan',
       buttonValue: 'Save Scan Pairs',
       saveFn: (data: object) =>  this.saveInitialScan(data),
@@ -27,6 +28,7 @@ export class ScannerService {
       ]
     },
     tracking: {
+      type: 'tracking',
       title: 'Tracking Scan',
       buttonValue: 'Save Scan Pairs',
       saveFn: (data: object) =>  this.saveTrackingScan(data),
@@ -46,6 +48,7 @@ export class ScannerService {
       ]
     },
     final: {
+      type: 'final',
       title: 'Final Scan',
       buttonValue: 'Save Scan Pairs',
       saveFn: (data: object) =>  this.saveFinalScan(data),
@@ -65,6 +68,7 @@ export class ScannerService {
       ]
     },
     RGPFinal: {
+      type: 'RGPFinal',
       title: 'RGP Final Scan',
       buttonValue: 'Save Scan Pairs',
       saveFn: (data) => this.saveRGPFinalScan(data) ,
@@ -90,6 +94,7 @@ export class ScannerService {
       ]
     },
     receiving: {
+      type: 'receiving',
       title: 'Receiving Scan',
       buttonValue: 'Save SM-IDs',
       saveFn: (data: object) => this.saveReceivingScan(data),
