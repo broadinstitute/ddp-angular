@@ -82,6 +82,7 @@ commands:
         default: UNKNOWN
     steps:
       - checkout-code
+      - set-deployment-environment
       - setup-shared-env:
           study_key: << parameters.study_key >>
       - when:
@@ -406,7 +407,6 @@ jobs:
     steps:
       - build:
           study_key: << parameters.study_key >>
-      - set-deployment-environment
       - deploy-exploded-build:
           study_key: << parameters.study_key >>
 
@@ -484,7 +484,6 @@ jobs:
             if [ "$CIRCLE_BRANCH" != "develop" ]; then
               circleci-agent step halt
             fi
-      - set-deployment-environment
       - run:
           name: Create build archive tar
           command: |
