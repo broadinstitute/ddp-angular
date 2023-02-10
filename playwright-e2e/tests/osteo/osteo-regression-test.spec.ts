@@ -313,7 +313,7 @@ test('Osteo enroll kid @osteo', async ({ page }) => {
     .click();
 });
 
-test('Osteo enroll self and kid together @osteo', async ({ page }) => {
+test('Osteo enroll self and kid together @osteo', async ({ page}) => {
   test.slow();
   await page.goto('https://osteo.test.datadonationplatform.org/');
   await page.getByLabel('Password *').click();
@@ -368,7 +368,7 @@ test('Osteo enroll self and kid together @osteo', async ({ page }) => {
     state: 'MASSACHUSETTS',
     zipCode: '02476',
     telephone: '5555551212'
-  });
+});
 
   await page.getByText('Suggested:').click();
 
@@ -385,7 +385,8 @@ test('Osteo enroll self and kid together @osteo', async ({ page }) => {
   await page.getByText('Introduction').click();
   await page.getByText('This consent addendum gives new information about the research study in which yo').click();
 
-  await page.locator('span').filter({ hasText: 'Yes' }).click();
+
+    await page.locator('span').filter({ hasText: 'Yes' }).click();
   await expect(page.getByTestId('answer:SOMATIC_SINGATURE_PEDIATRIC')).toBeVisible();
   await page.getByTestId('answer:SOMATIC_SINGATURE_PEDIATRIC').fill('Playwright Parent');
   await page.getByTestId('answer:SOMATIC_SINGATURE_PEDIATRIC').blur({ timeout: 2000 });
@@ -467,12 +468,12 @@ test('Osteo self enroll', async ({ page }) => {
   const userEmail = generateEmailAlias(OSTEO_USER_EMAIL);
   const firstName = generateUserName('OS');
   const lastName = generateUserName('OS');
-  const fullName = `${firstName} ${lastName}`;
+  const fullName = `${firstName  } ${  lastName}`;
 
   logParticpantCreated(userEmail, fullName);
 
   await page.goto('https://osteo.test.datadonationplatform.org/');
-  await testutils.fillSitePassword(page, SITE_PASSWORD);
+  await testutils.fillSitePassword(page, SITE_PASSWORD)
   await page.waitForTimeout(1000);
   await page.getByRole('banner').getByRole('link', { name: 'Count Me In' }).click();
 
@@ -529,7 +530,7 @@ test('Osteo self enroll', async ({ page }) => {
   const consentPage = new ResearchConsentPage(page);
 
   await consentPage.fillInContactAddress({
-    fullName,
+fullName: fullName,
     country: 'UNITED STATES',
     street: '75 Ames Street',
     city: 'Cambridge',
@@ -618,7 +619,7 @@ test('Osteo self enroll', async ({ page }) => {
   await page.locator('.picklist-answer-OTHER_CANCERS').getByText('Yes').click();
 
   // would be class and class
-  const cancerSelector = new CancerSelector(page, '.activity-text-input-OTHER_CANCER_NAME', '.date-answer-OTHER_CANCER_YEAR');
+  let cancerSelector = new CancerSelector(page, '.activity-text-input-OTHER_CANCER_NAME', '.date-answer-OTHER_CANCER_YEAR');
   await cancerSelector.chooseCancer(0, 'bone', 2, 'Giant Cell Tumor of the Bone (GCT)');
   await cancerSelector.chooseDiagnosisAt(0, '2000');
 
@@ -653,8 +654,8 @@ test('Osteo self enroll', async ({ page }) => {
   await page.getByRole('button', { name: 'Submit' }).hover();
   await consentPage.submit();
   await page.getByText('Thank you for providing information regarding your experiences with osteosarcoma').click();
-  await page.getByRole('button', { name: `${fullName} Hide` }).click();
-  await page.getByRole('button', { name: `${fullName} Show` }).click();
+  await page.getByRole('button', { name: `${fullName  } Hide` }).click();
+  await page.getByRole('button', { name: `${fullName  } Show` }).click();
   await page.getByRole('button', { name: 'Research Consent Form' }).click();
   await page.getByRole('heading', { name: 'Research Consent Form' }).click();
   await page.getByRole('link', { name: 'Dashboard' }).click();
@@ -695,8 +696,7 @@ test('Osteo self enroll', async ({ page }) => {
     sexAtBirth: 'Male',
     currentlyLiving: true,
     ageRange: '65-69',
-    cancers: [],
-    ancestry: []
+    cancers: [], ancestry: []
   });
 
   await familyHistoryPage.next();
@@ -706,9 +706,7 @@ test('Osteo self enroll', async ({ page }) => {
     sexAtBirth: 'Female',
     currentlyLiving: true,
     ageRange: '65-69',
-    cancers: [],
-    ancestry: [],
-    sideOfFamily: 'Biological / Birth Parent 2: Assigned Male at birth'
+    cancers: [], ancestry: [], sideOfFamily: 'Biological / Birth Parent 2: Assigned Male at birth'
   });
   await familyHistoryPage.clickAddParentSibling();
   await familyHistoryPage.addFamilyMember('PARENT_SIBLING', {
@@ -716,9 +714,7 @@ test('Osteo self enroll', async ({ page }) => {
     sexAtBirth: 'Female',
     currentlyLiving: false,
     ageRange: '60-64',
-    cancers: [],
-    ancestry: [],
-    sideOfFamily: 'Biological / Birth Parent 1: Assigned Female at birth'
+    cancers: [], ancestry: [], sideOfFamily: 'Biological / Birth Parent 1: Assigned Female at birth'
   });
   await familyHistoryPage.next();
   await familyHistoryPage.clickAddGrandParent();
@@ -727,9 +723,7 @@ test('Osteo self enroll', async ({ page }) => {
     sexAtBirth: 'Male',
     currentlyLiving: false,
     ageRange: '90-94',
-    cancers: [
-      { cancerSearch: 'noid', expectedCancerResult: 'Gastrointestinal carcinoid tumor', numTimesToHitDownArrow: 6, time: '55-59' }
-    ],
+    cancers: [{cancerSearch: 'noid', expectedCancerResult: 'Gastrointestinal carcinoid tumor', numTimesToHitDownArrow: 6, time: '55-59'}],
     ancestry: [],
     sideOfFamily: 'Biological / Birth Parent 1: Assigned Female at birth'
   });
@@ -756,9 +750,7 @@ test('Osteo self enroll', async ({ page }) => {
     sexAtBirth: 'Female',
     currentlyLiving: false,
     ageRange: '90-94',
-    cancers: [
-      { cancerSearch: 'acute', expectedCancerResult: 'Acute myeloid leukemia (AML)', numTimesToHitDownArrow: 3, time: '25-29' }
-    ],
+    cancers: [{cancerSearch: 'acute', expectedCancerResult: 'Acute myeloid leukemia (AML)', numTimesToHitDownArrow: 3, time: '25-29'}],
     ancestry: [],
     sideOfFamily: 'Biological / Birth Parent 2: Assigned Male at birth'
   });
@@ -788,14 +780,7 @@ test('Osteo self enroll', async ({ page }) => {
     sexAtBirth: 'Female',
     currentlyLiving: true,
     ageRange: '10-14',
-    cancers: [
-      {
-        cancerSearch: 'renal',
-        expectedCancerResult: 'Kidney cancer / Renal cell carcinoma (RCC), all subtypes',
-        numTimesToHitDownArrow: 2,
-        time: '5-9'
-      }
-    ],
+    cancers: [{cancerSearch: 'renal', expectedCancerResult: 'Kidney cancer / Renal cell carcinoma (RCC), all subtypes', numTimesToHitDownArrow: 2, time: '5-9'}],
     ancestry: []
   });
 
@@ -808,9 +793,7 @@ test('Osteo self enroll', async ({ page }) => {
     currentlyLiving: true,
     ageRange: '10-14',
     sideOfFamily: 'Biological / Birth Parent 2: Assigned Male at birth',
-    cancers: [
-      { cancerSearch: 'fibro', expectedCancerResult: 'Primary myelofibrosis (PMF)', numTimesToHitDownArrow: 2, time: '5-9' }
-    ],
+    cancers: [{cancerSearch: 'fibro', expectedCancerResult: 'Primary myelofibrosis (PMF)', numTimesToHitDownArrow: 2, time: '5-9'}],
     ancestry: []
   });
 
@@ -822,14 +805,7 @@ test('Osteo self enroll', async ({ page }) => {
     sexAtBirth: 'Female',
     currentlyLiving: true,
     ageRange: '10-14',
-    cancers: [
-      {
-        cancerSearch: 'fibro',
-        expectedCancerResult: 'Desmoid-type fibrosis / Desmoid tumor (DF)',
-        numTimesToHitDownArrow: 4,
-        time: '5-9'
-      }
-    ],
+    cancers: [{cancerSearch: 'fibro', expectedCancerResult: 'Desmoid-type fibrosis / Desmoid tumor (DF)', numTimesToHitDownArrow: 4, time: '5-9'}],
     ancestry: []
   });
 
@@ -845,7 +821,7 @@ test('Osteo self enroll', async ({ page }) => {
   await page.getByRole('link', { name: 'Dashboard' }).click();
 
   await checkUserReceivedEmails(userEmail, [
-    { subject: 'Thank you for providing your consent', textProbe: `Dear ${firstName}` },
+    { subject: 'Thank you for providing your consent', textProbe: 'Dear ' + firstName },
     {
       subject: 'Thank you for providing your consent',
       textProbe: "Your participation isn't just important to our work - it drives everything that we do"
@@ -853,7 +829,5 @@ test('Osteo self enroll', async ({ page }) => {
     {
       subject: 'Thank you for providing additional consent',
       textProbe:
-        'Thank you for joining the Osteosarcoma Project and for giving us your consent to share with you any available information we learned from the sequencing of your tumor sample[s] that the study receives.'
-    }
-  ]);
+        'Thank you for joining the Osteosarcoma Project and for giving us your consent to share with you any available information we learned from the sequencing of your tumor sample[s] that the study receives.',}]);
 });
