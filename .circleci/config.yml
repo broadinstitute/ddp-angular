@@ -529,11 +529,11 @@ jobs:
       - setup-shared-env:
           study_key: << parameters.study_key >>
       - run:
-          name: "Lint code for $ANGULAR_PROJECT_NAME"
+          name: Lint code
           command: |
             ng lint $ANGULAR_PROJECT_NAME
       - run:
-          name: "Run ng unit tests for $ANGULAR_PROJECT_NAME"
+          name: Run ui unit tests
           command: |
             mkdir -p /tmp/junit
             ng test $ANGULAR_PROJECT_NAME --watch=false --browsers ChromeHeadlessNoSandbox --reporters junit
