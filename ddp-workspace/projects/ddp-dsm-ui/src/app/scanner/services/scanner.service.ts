@@ -116,10 +116,6 @@ export class ScannerService {
     return this.scanners[scannerName];
   }
 
-  public save(scanType: string, data: object): Observable<any> {
-    return this.scanners[scanType].saveFn(data);
-  }
-
   /* HTTP Requests */
   private saveTrackingScan(data: object): Observable<any> {
     return this.dsmService.trackingScan(JSON.stringify(data));
