@@ -79,7 +79,7 @@ test.describe('Enroll child with cognitive impairment', () => {
       city: user.thirdChild.city,
       zipCode: user.thirdChild.zip,
       telephone: user.thirdChild.phone,
-      labels: { phone: 'Telephone Contact Number',country: 'Country',state:'State',zip:'Zip Code', city:'City'}
+      labels: { phone: 'Telephone Contact Number', country: 'Country', state: 'State', zip: 'Zip Code', city: 'City' }
     });
     await aboutMyChildPage.next({ waitForNav: true });
 

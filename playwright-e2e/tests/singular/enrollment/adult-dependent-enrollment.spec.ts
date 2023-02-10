@@ -104,7 +104,7 @@ test.describe('Enrol an adult dependent', () => {
       city: user.adultDependent.city,
       zipCode: user.adultDependent.zip,
       telephone: user.adultDependent.phone,
-      labels: { phone: 'Telephone Contact Number',country: 'Country',state:'State',zip:'Zip Code', city:'City'}
+      labels: { phone: 'Telephone Contact Number', country: 'Country', state: 'State', zip: 'Zip Code', city: 'City' }
     });
     await aboutMyAdultDependentPage.next({ waitForNav: true });
 

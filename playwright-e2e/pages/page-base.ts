@@ -157,7 +157,7 @@ export default abstract class PageBase implements PageInterface {
     city?: string;
     zipCode?: string;
     telephone?: string | number;
-    labels?:MaillingAddressLabels;
+    labels?: MaillingAddressLabels;
   }): Promise<void> {
     const {
       fullName,
@@ -169,14 +169,16 @@ export default abstract class PageBase implements PageInterface {
       telephone = generateRandomPhoneNum()
     } = opts;
 
-    var labels;
+    let labels;
     if (!opts.labels) {
-      labels = { phone: 'Phone',country: 'Country',state:'State',zip:'Zip Code', city:'City'}
+      labels = { phone: 'Phone', country: 'Country', state: 'State', zip: 'Zip Code', city: 'City' };
     } else {
       labels = opts.labels;
     }
 
-    const mailAddressForm = new Address(this.page, { label: new RegExp(/Your contact information|Contact Information|Mailing Address/) });
+    const mailAddressForm = new Address(this.page, {
+      label: new RegExp(/Your contact information|Contact Information|Mailing Address/)
+    });
     await mailAddressForm.input('Full Name').fill(fullName);
     await mailAddressForm.select(labels.country).selectOption(country);
     await mailAddressForm.select(labels.state).selectOption(state);

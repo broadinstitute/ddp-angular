@@ -3,9 +3,9 @@
  * set differently for different studies
  */
 interface MaillingAddressLabels {
-    city: string;
-    country: string;
-    phone:string
-    state:string;
-    zip:string;
+  city: string;
+  country: string;
+  phone: string;
+  state: string;
+  zip: string;
 }
