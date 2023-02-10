@@ -59,7 +59,6 @@ export class ScannerComponent implements DoCheck {
 
   ngDoCheck() {
     this.scannerFields.length > 1 && this.resetValidations();
-    console.log('CONTENT_CHECKED')
   }
 
   public get scannerFields(): FormArray {
@@ -78,14 +77,6 @@ export class ScannerComponent implements DoCheck {
 
     this.activeScanner.saveFn(filteredActiveScannerFieldsGroupsArray)
       .pipe(
-        map(() => [
-          {kit: 'giogio', error: 'No kit for participant with ShortId \\"giogio\\" was not found.\\nFor more information please contact your DSM developer'},
-          {kit: 'gagaga', error: 'No kit for participant with ShortId \\"gagaga\\" was not found.\\nFor more information please contact your DSM developer'}
-        ]),
-        catchError(() => of([
-          {kit: 'giogio', error: 'No kit for participant with ShortId \\"giogio\\" was not found.\\nFor more information please contact your DSM developer'},
-          {kit: 'gagaga', error: 'No kit for participant with ShortId \\"gagaga\\" was not found.\\nFor more information please contact your DSM developer'}
-        ])),
         takeUntil(this.subscriptionSubject$)
       )
       .subscribe({
@@ -129,7 +120,7 @@ export class ScannerComponent implements DoCheck {
   public resetValidations(): void {
     if(this.updatePreviousFieldValidations) {
       const previousFormControls = Object.values((this.scannerFields.at(this.scannerFields.length - 2) as FormGroup).controls);
-      previousFormControls.forEach((formControl: FormControl) => formControl.updateValueAndValidity({onlySelf: true}));
+      previousFormControls.forEach((formControl: FormControl) => formControl.updateValueAndValidity({emitEvent: false}));
       this.updatePreviousFieldValidations = false;
     }
     const lastFormGroupControls = Object.values((this.scannerFields.at(this.scannerFields.length - 1) as FormGroup).controls);
@@ -184,7 +175,7 @@ export class ScannerComponent implements DoCheck {
   private removeSuccessfulScans(responseData: any[]): void {
     const filteredActiveScannerFieldsGroupsArray = this.filteredNonNullFieldsGroups;
     const fieldsGroupToRemove = [];
-    console.log('REMOVE_SUCCESSFUL')
+
     filteredActiveScannerFieldsGroupsArray.forEach((fieldsGroup: object, fieldsGroupIndex: number) => {
       const lastField = this.getLastFieldFor(fieldsGroup);
       const foundObject = responseData.find((responseObject: any) => fieldsGroup[lastField] === responseObject.kit);
