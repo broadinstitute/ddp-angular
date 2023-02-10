@@ -759,14 +759,14 @@ workflows:
           matrix:
             alias: build-app
             parameters:
-              study_key: [ basil, osteo, angio, brain, mbc, testboston, mpc, atcp, rarex, rgp, esc, prion, cgc, pancan, singular, brugada, lms, fon ]
+              study_key: [ basil, osteo, angio, brain, mbc, testboston, mpc, atcp, rgp, esc, prion, cgc, pancan, singular, brugada, lms ]
       - app-ui-unit-test:
           <<: *filter-pr-branch
           name: << matrix.study_key >>-unit-test
           matrix:
             alias: ui-unit-test
             parameters:
-              study_key: [ basil, osteo, angio, brain, mbc, testboston, mpc, atcp, rarex, rgp, esc, prion, cgc, pancan, singular, brugada, lms, fon ]
+              study_key: [ basil, osteo, angio, brain, mbc, testboston, mpc, atcp, rgp, esc, prion, cgc, pancan, singular, brugada, lms ]
       - toolkit-sdk-unit-test:
           <<: *filter-pr-branch
       - playwright-build:
