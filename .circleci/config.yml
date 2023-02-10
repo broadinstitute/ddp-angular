@@ -481,15 +481,13 @@ jobs:
       - run:
           name: Don't archive build artifacts if branch is a pull request
           command: |
-            if [[ !${CIRCLE_PULL_REQUEST} ]]; then
+            if [[ ${CIRCLE_PULL_REQUEST} ]]; then
               echo "CIRCLE_PULL_REQUEST: $CIRCLE_PULL_REQUEST"
-              regexp="[[:digit:]]\+$"
-              PR_NUMBER=$(echo $CIRCLE_PULL_REQUEST | grep -o $regexp)
-              echo "PR_NUMBER: $PR_NUMBER"
               echo "CIRCLE_BRANCH: $CIRCLE_BRANCH"
               circleci-agent step halt
+            else
+              echo "else"
             fi
-            echo "continue"
       - run:
           name: Create build archive tar
           command: |
@@ -762,14 +760,14 @@ workflows:
           matrix:
             alias: build-app
             parameters:
-              study_key: [ basil, osteo, angio, brain, mbc, testboston, mpc, atcp, rarex, rgp, esc, prion, cgc, circadia, pancan, singular, brugada, lms, fon ]
+              study_key: [ basil, osteo, angio, brain, mbc, testboston, mpc, atcp, rarex, rgp, esc, prion, cgc, pancan, singular, brugada, lms, fon ]
       - app-ui-unit-test:
           <<: *filter-pr-branch
           name: << matrix.study_key >>-unit-test
           matrix:
             alias: ui-unit-test
             parameters:
-              study_key: [ basil, osteo, angio, brain, mbc, testboston, mpc, atcp, rarex, rgp, esc, prion, cgc, circadia, pancan, singular, brugada, lms, fon ]
+              study_key: [ basil, osteo, angio, brain, mbc, testboston, mpc, atcp, rarex, rgp, esc, prion, cgc, pancan, singular, brugada, lms, fon ]
       - toolkit-sdk-unit-test:
           <<: *filter-pr-branch
       - playwright-build:
