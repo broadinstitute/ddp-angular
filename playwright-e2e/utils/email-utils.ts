@@ -1,7 +1,7 @@
 import { OAuth2Client } from 'google-auth-library';
 import * as mail from '@googleapis/gmail';
 import { expect } from '@playwright/test';
-import { Buffer } from '/buffer';
+import { Buffer } from 'buffer';
 
 const { EMAIL_REFRESH_TOKEN, EMAIL_CLIENT_ID, EMAIL_CLIENT_SECRET, EMAIL_REDIRECT_URI } = process.env;
 
