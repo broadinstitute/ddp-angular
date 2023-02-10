@@ -479,12 +479,17 @@ jobs:
       - build:
           study_key: << parameters.study_key >>
       - run:
-          name: Don't archive build artifacts if branch is not develop
+          name: Don't archive build artifacts if branch is a pull request
           command: |
-            if [ "$CIRCLE_BRANCH" != "develop" ]; then
-              echo "CIRCLE_BRANCH=$CIRCLE_BRANCH"
+            if [[ !${CIRCLE_PULL_REQUEST} ]]; then
+              echo "CIRCLE_PULL_REQUEST: $CIRCLE_PULL_REQUEST"
+              regexp="[[:digit:]]\+$"
+              PR_NUMBER=$(echo $CIRCLE_PULL_REQUEST | grep -o $regexp)
+              echo "PR_NUMBER: $PR_NUMBER"
+              echo "CIRCLE_BRANCH: $CIRCLE_BRANCH"
               circleci-agent step halt
             fi
+            echo "continue"
       - run:
           name: Create build archive tar
           command: |
