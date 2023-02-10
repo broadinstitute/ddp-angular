@@ -81,6 +81,9 @@ export class KitRequest {
 
   public getError(): string {
     if (this.error) {
+      if (this.message === 'PECGS_RESEARCH') {
+        return 'PE-CGS Research Sample';
+      }
       if (this.participant != null) {
         if (this.participant.country != null && this.participant.country === 'CA') {
           return 'Canadian Participant';
