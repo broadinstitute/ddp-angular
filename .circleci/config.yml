@@ -29,6 +29,14 @@ references:
       branches:
         only: develop
 
+  # On PR branches only
+  filter-pr-branch: &filter-pr-branch
+    filters:
+      tags:
+        ignore: /.*/
+      branches:
+        ignore: develop
+
 # Container for all the builds
 executors:
   build-executor:
@@ -464,9 +472,18 @@ jobs:
     working_directory: *ng_workspace_path
     executor:
       name: build-executor
+    parameters:
+      study_key:
+        type: string
     steps:
       - build:
-          study_key: << pipeline.parameters.study_key >>
+          study_key: << parameters.study_key >>
+      - run:
+          name: Don't archive build artifacts if branch is not develop
+          command: |
+            if [ "$CIRCLE_BRANCH" != "develop" ]; then
+              circleci-agent step halt
+            fi
       - set-deployment-environment
       - run:
           name: Create build archive tar
@@ -555,7 +572,7 @@ jobs:
       - store_artifacts:
           path: /tmp/junit
 
-  build-playwright-test-job:
+  playwright-build:
     executor: build-executor
     working_directory: *repo_path
     parameters:
@@ -636,7 +653,7 @@ jobs:
             - playwright-env # dir which contains env-variables file
             - playwright-e2e
 
-  run-playwright-test-job:
+  playwright-test:
     # Run Playwright tests only for targeted env: Dev, Test or Staging.
     executor: playwright-test-executor
     working_directory: *repo_path
@@ -731,6 +748,28 @@ parameters:
 workflows:
   version: 2
 
+  build-pr:
+    # Launched on PR commits
+    jobs:
+      - app-build-and-store-job:
+          <<: *filter-pr-branch
+          name: build-<< matrix.study_key >>
+          matrix:
+            alias: build-app
+            parameters:
+              study_key: [ basil, osteo, angio, brain, mbc, testboston, mpc, atcp, rarex, rgp, esc, prion, cgc, circadia, pancan, singular, brugada, lms, fon ]
+      - app-ui-unit-test:
+          <<: *filter-pr-branch
+          name: unit-test-<< matrix.study_key >>
+          matrix:
+            alias: ui-unit-test
+            parameters:
+              study_key: [ basil, osteo, angio, brain, mbc, testboston, mpc, atcp, rarex, rgp, esc, prion, cgc, circadia, pancan, singular, brugada, lms, fon ]
+      - toolkit-sdk-unit-test:
+          <<: *filter-pr-branch
+      - playwright-build:
+          <<: *filter-pr-branch
+
   api-build-and-store-workflow:
     # Build study specified in api call
     when:
@@ -739,7 +778,8 @@ workflows:
         - not:
             equal: ["UNKNOWN", << pipeline.parameters.study_key >>]
     jobs:
-      - app-build-and-store-job
+      - app-build-and-store-job:
+          study_key: << pipeline.parameters.study_key >>
 
   api-deploy-workflow:
     # Deploy a study build to environment specified in api call
@@ -767,21 +807,21 @@ workflows:
             study_key: << pipeline.parameters.study_key >>
         - toolkit-sdk-unit-test
 
-  playwright-e2e-test-workflow:
+  playwright-test-workflow:
     # Triggered by CI API (for example, run_ci.sh)
-    # Run Playwright tests against Dev and Test but not for Staging and Production
+    # Run Playwright E2E tests against Dev and Test but not for Staging and Production
     when:
       and:
         - equal: [ "run-e2e-tests", << pipeline.parameters.api_call >> ]
     jobs:
-      - build-playwright-test-job:
+      - playwright-build:
           env: << pipeline.parameters.deploy_env >>
-      - run-playwright-test-job:
+      - playwright-test:
           env: << pipeline.parameters.deploy_env >>
           test_suite: << pipeline.parameters.study_key >>
           parallelism_num: << pipeline.parameters.e2e-test-parallelism >>
           requires:
-            - build-playwright-test-job
+            - playwright-build
 
   build-and-deploy-all-apps-workflow:
     unless: << pipeline.parameters.do-builds >>
@@ -823,6 +863,7 @@ workflows:
     jobs:
       - app-build-and-store-job:
           <<: *build-and-store-filters
+          study_key: << pipeline.parameters.study_key >>
 
   deploy-all-apps-workflow:
     jobs:
@@ -900,13 +941,13 @@ workflows:
         - equal: [ scheduled_pipeline, << pipeline.trigger_source >> ]
         - equal: [ nightly-playwright-test, << pipeline.schedule.name >> ]
     jobs:
-      - build-playwright-test-job:
+      - playwright-build:
           <<: *filter-develop-branch
           env: << pipeline.parameters.deploy_env >>
-      - run-playwright-test-job:
+      - playwright-test:
           <<: *filter-develop-branch
           env: << pipeline.parameters.deploy_env >>
           parallelism_num: 2
           test_suite: UNKNOWN
           requires:
-            - build-playwright-test-job
+            - playwright-build
