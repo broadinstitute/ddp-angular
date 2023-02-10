@@ -1,7 +1,7 @@
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
-  Component, DoCheck, ElementRef,
+  Component, DoCheck, ElementRef, OnDestroy,
   QueryList,
   Self,
   ViewChildren
@@ -14,12 +14,12 @@ import {
   FormControl,
   FormGroup
 } from '@angular/forms';
-import {of, Subject, takeUntil} from 'rxjs';
+import {Subject, takeUntil} from 'rxjs';
 import {InputField} from './interfaces/input-field';
 import {Auth} from '../services/auth.service';
 import {Statics} from '../utils/statics';
-import {Scanner} from "./interfaces/scanners";
-import {catchError, first, map} from "rxjs/operators";
+import {Scanner} from './interfaces/scanners';
+import {first} from 'rxjs/operators';
 
 @Component({
   selector: 'app-scanner',
@@ -28,14 +28,14 @@ import {catchError, first, map} from "rxjs/operators";
   providers: [ScannerService],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ScannerComponent implements DoCheck {
+export class ScannerComponent implements DoCheck, OnDestroy {
   public activeScanner!: Scanner;
   public activeScannerFormGroup: FormGroup = this.fb.group({
     scannerFields: this.fb.array([])
-  })
+  });
   public additionalMessage: string | undefined;
 
-  private updatePreviousFieldValidations: boolean = false;
+  private updatePreviousFieldValidations = false;
   private readonly subscriptionSubject$ = new Subject<void>();
 
   @ViewChildren('htmlInputElement') inputFields: QueryList<ElementRef<HTMLInputElement>>;
@@ -57,7 +57,7 @@ export class ScannerComponent implements DoCheck {
     this.subscriptionSubject$.complete();
   }
 
-  ngDoCheck() {
+  ngDoCheck(): void {
     this.scannerFields.length > 1 && this.resetValidations();
   }
 
@@ -68,7 +68,7 @@ export class ScannerComponent implements DoCheck {
   public removeFields(index: number): void {
     this.scannerFields.length - 1 && this.scannerFields.removeAt(index);
     this.activeScanner.inputFields.forEach((inputField: InputField) =>
-      this.checkForDuplicates(inputField.controllerName))
+      this.checkForDuplicates(inputField.controllerName));
   }
 
   public save(): void {
@@ -161,7 +161,7 @@ export class ScannerComponent implements DoCheck {
   private moveFocusLazy(htmlInputElement: HTMLInputElement): void {
     this.inputFields.changes
       .pipe(first())
-      .subscribe(() => this.moveFocusEager(htmlInputElement))
+      .subscribe(() => this.moveFocusEager(htmlInputElement));
   }
 
   private moveFocusEager(htmlInputElement: HTMLInputElement, inputFields: QueryList<ElementRef> = this.inputFields): void {
@@ -174,17 +174,17 @@ export class ScannerComponent implements DoCheck {
 
   private removeSuccessfulScans(responseData: any[]): void {
     const filteredActiveScannerFieldsGroupsArray = this.filteredNonNullFieldsGroups;
-    const fieldsGroupToRemove = [];
+    const fieldsGroupToRemoveCollection = [];
 
     filteredActiveScannerFieldsGroupsArray.forEach((fieldsGroup: object, fieldsGroupIndex: number) => {
       const lastField = this.getLastFieldFor(fieldsGroup);
       const foundObject = responseData.find((responseObject: any) => fieldsGroup[lastField] === responseObject.kit);
 
       foundObject ? this.scannerFields.at(fieldsGroupIndex).setErrors({notFound: foundObject.error}) :
-        fieldsGroupToRemove.push(fieldsGroup);
+        fieldsGroupToRemoveCollection.push(fieldsGroup);
     });
 
-    fieldsGroupToRemove.length && fieldsGroupToRemove.forEach((fieldsGroupToRemove: object) => {
+    fieldsGroupToRemoveCollection.length && fieldsGroupToRemoveCollection.forEach((fieldsGroupToRemove: object) => {
       const lastField1 = this.getLastFieldFor(fieldsGroupToRemove);
       const findObjectIndex = this.scannerFields.getRawValue().findIndex((objectValue: any) => {
         const lastField2 = this.getLastFieldFor(objectValue);
@@ -209,7 +209,7 @@ export class ScannerComponent implements DoCheck {
     this.activeScanner = this.scannerService.getScanner(scannerType);
 
     this.resetForm();
-    setTimeout(() => this.inputFields.get(0).nativeElement.focus())
+    setTimeout(() => this.inputFields.get(0).nativeElement.focus());
   }
 
   private resetForm(): void {
