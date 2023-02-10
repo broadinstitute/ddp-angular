@@ -484,9 +484,8 @@ jobs:
             if [[ ${CIRCLE_PULL_REQUEST} ]]; then
               echo "CIRCLE_PULL_REQUEST: $CIRCLE_PULL_REQUEST"
               echo "CIRCLE_BRANCH: $CIRCLE_BRANCH"
+              echo "Skip archive build"
               circleci-agent step halt
-            else
-              echo "else"
             fi
       - run:
           name: Create build archive tar
