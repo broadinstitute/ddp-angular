@@ -2,6 +2,7 @@ import { OAuth2Client } from 'google-auth-library';
 import * as mail from '@googleapis/gmail';
 import { expect } from '@playwright/test';
 import { Buffer } from 'buffer';
+import * as mp from 'mailparser';
 
 const { EMAIL_REFRESH_TOKEN, EMAIL_CLIENT_ID, EMAIL_CLIENT_SECRET, EMAIL_REDIRECT_URI } = process.env;
 
@@ -63,7 +64,7 @@ export async function hasUserReceivedEmail(
 
         const decoded = Buffer.from(messageText, 'base64');
 
-        const simpleParser = require('mailparser').simpleParser;
+        const simpleParser = mp.simpleParser;
         const parsed = await simpleParser(decoded);
 
         const subject = parsed.headers.get('subject');
