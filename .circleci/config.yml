@@ -482,6 +482,7 @@ jobs:
           name: Don't archive build artifacts if branch is not develop
           command: |
             if [ "$CIRCLE_BRANCH" != "develop" ]; then
+              echo "CIRCLE_BRANCH=$CIRCLE_BRANCH"
               circleci-agent step halt
             fi
       - run:
@@ -752,14 +753,14 @@ workflows:
     jobs:
       - app-build-and-store-job:
           <<: *filter-pr-branch
-          name: build-<< matrix.study_key >>
+          name: << matrix.study_key >>-build
           matrix:
             alias: build-app
             parameters:
               study_key: [ basil, osteo, angio, brain, mbc, testboston, mpc, atcp, rarex, rgp, esc, prion, cgc, circadia, pancan, singular, brugada, lms, fon ]
       - app-ui-unit-test:
           <<: *filter-pr-branch
-          name: unit-test-<< matrix.study_key >>
+          name: << matrix.study_key >>-unit-test
           matrix:
             alias: ui-unit-test
             parameters:
