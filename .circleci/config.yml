@@ -575,7 +575,7 @@ jobs:
       - run-linter-check
       - run-tests
 
-  build-playwright-test-job:
+  playwright-build:
     executor: build-executor
     working_directory: *repo_path
     parameters:
@@ -681,7 +681,7 @@ jobs:
             - playwright-env # dir which contains env-variables file
             - playwright-e2e
 
-  run-playwright-test-job:
+  playwright-test:
     # Run Playwright tests only for targeted env: Dev, Test or Staging.
     executor: playwright-test-executor
     working_directory: *repo_path
@@ -817,14 +817,14 @@ workflows:
       and:
         - equal: [ "run-e2e-tests", << pipeline.parameters.api_call >> ]
     jobs:
-      - build-playwright-test-job:
+      - playwright-build:
           env: << pipeline.parameters.deploy_env >>
-      - run-playwright-test-job:
+      - playwright-test:
           env: << pipeline.parameters.deploy_env >>
           test_suite: << pipeline.parameters.study_key >>
           parallelism_num: << pipeline.parameters.e2e-test-parallelism >>
           requires:
-            - build-playwright-test-job
+            - playwright-build
 
   build-and-deploy-all-apps-workflow:
     unless: << pipeline.parameters.do-builds >>
@@ -943,13 +943,13 @@ workflows:
         - equal: [ scheduled_pipeline, << pipeline.trigger_source >> ]
         - equal: [ nightly-playwright-test, << pipeline.schedule.name >> ]
     jobs:
-      - build-playwright-test-job:
+      - playwright-build:
           <<: *filter-develop-branch
           env: << pipeline.parameters.deploy_env >>
-      - run-playwright-test-job:
+      - playwright-test:
           <<: *filter-develop-branch
           env: << pipeline.parameters.deploy_env >>
           parallelism_num: 2
           test_suite: UNKNOWN
           requires:
-            - build-playwright-test-job
+            - playwright-build
