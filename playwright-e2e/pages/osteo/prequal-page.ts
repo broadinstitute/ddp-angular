@@ -22,6 +22,6 @@ export default class PrequalPage extends OsteoPageBase {
     await this.page.getByLabel('Enter age').fill(age.toString());
     await this.page.locator('#mat-input-2').selectOption(country); // picklist-answer-CHILD_COUNTRY
     await this.page.locator('#mat-input-3').selectOption(state);
-    this.submit();
+    await this.submit();
   }
 }

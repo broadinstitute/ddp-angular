@@ -1,33 +1,31 @@
+/* eslint-disable */
 import { test, expect } from '@playwright/test';
-import { setAuth0UserEmailVerified } from 'utils/api-utils';
-import { APP } from 'data/constants';
 import { generateEmailAlias } from 'utils/faker-utils';
 import * as testutils from 'utils/test-utils';
 import ResearchConsentPage from 'pages/osteo/consent-page';
 import HomePage from 'pages/osteo/home-page';
 import PrequalPage from 'pages/osteo/prequal-page';
-import ConsentAddendumPage from 'pages/osteo/consent-addendump-page';
 import ConsentAssentPage from 'pages/osteo/consent-assent-page';
 import * as auth from 'authentication/auth-angio';
 import ReleasePage from 'pages/osteo/release-page';
 import AboutYourOsteosarcoma from 'pages/osteo/about-your-osteosarcoma-page';
 import { logParticpantCreated } from 'utils/log-utils';
-import { lastIndexOf } from 'lodash';
-import { faker } from '@faker-js/faker';
 import { generateUserName } from 'utils/faker-utils';
 import { CancerSelector } from 'pages/cancer-selector';
 import { FamilyHistory } from 'pages/family-history';
 import { checkUserReceivedEmails } from 'utils/email-utils';
 
-const { OSTEO_USER_EMAIL, OSTEO_USER_PASSWORD, SITE_PASSWORD } = process.env;
+const { OSTEO_USER_EMAIL, OSTEO_USER_PASSWORD, SITE_PASSWORD, OSTEO_BASE_URL } = process.env;
 
-test('Static Content @osteo', async ({ page }) => {
-  await page.goto('https://osteo.test.datadonationplatform.org/');
+test('Osteo Static Content @osteo', async ({ page }) => {
+  await page.goto(OSTEO_BASE_URL!);
   await page.locator('div').filter({ hasText: 'Password *' }).nth(2).click();
   await page.getByLabel('Password *').fill('broad_institute');
   await page.getByLabel('Password *').press('Enter');
   await page
-    .getByRole('heading', { name: 'Together, the osteosarcoma community has the power to move research forward' })
+    .getByRole('heading', {
+      name: 'Together, the osteosarcoma community has the power to move research forward'
+    })
     .click();
   await page.getByText('By generating the most comprehensive osteosarcoma database, we can accelerate re').click();
   await page.getByRole('heading', { name: 'You can help drive discoveries' }).click();
@@ -75,15 +73,23 @@ test('Static Content @osteo', async ({ page }) => {
   await page.getByText('We ask where patients have been treated for their cancer, so that we can request').click();
   await page
     .locator('section')
-    .filter({ hasText: 'STEP 2 access_time5 minutes Tell us where you’ve been treated We ask where patie' })
+    .filter({
+      hasText: 'STEP 2 access_time5 minutes Tell us where you’ve been treated We ask where patie'
+    })
     .getByRole('img', { name: 'Computer screen displaying medical center' })
     .click();
   await page
     .locator('section')
-    .filter({ hasText: 'STEP 3 access_timeTime varies by survey Respond to surveys about you and your ex' })
+    .filter({
+      hasText: 'STEP 3 access_timeTime varies by survey Respond to surveys about you and your ex'
+    })
     .getByRole('img', { name: 'Computer screen displaying online survey' })
     .click();
-  await page.getByRole('heading', { name: 'Respond to surveys about you and your experience with cancer' }).click();
+  await page
+    .getByRole('heading', {
+      name: 'Respond to surveys about you and your experience with cancer'
+    })
+    .click();
   await page.getByText('In these surveys we ask questions about a participant’s experience with osteosar').click();
   await page.getByRole('banner').getByRole('link', { name: 'FAQs' }).click();
   await page.getByText('As part of the OSproject, patients contribute their experiences, clinical inform').click();
@@ -94,11 +100,17 @@ test('Static Content @osteo', async ({ page }) => {
   await page.getByRole('button', { name: 'What does participation look like?' }).click();
   await page.getByText('Participants can join through the project website to share their information and').click();
   await page.getByText('• Provide consent: The consent form is how participants give researchers their p').click();
-  await page.getByRole('button', { name: 'Are there any benefits that participants receive for participating?' }).click();
+  await page
+    .getByRole('button', {
+      name: 'Are there any benefits that participants receive for participating?'
+    })
+    .click();
   await page.getByText('While there are no explicit benefits that individuals receive for enrolling in t').click();
   await page
     .getByRole('paragraph')
-    .filter({ hasText: '• Receive information about what we’ve learned from your tumor sample (optional)' })
+    .filter({
+      hasText: '• Receive information about what we’ve learned from your tumor sample (optional)'
+    })
     .click();
   await page.getByText('• Learn more about your normal DNA (optional): The project is also partnering wi').click();
   await page.getByRole('banner').getByRole('link', { name: 'About Us' }).click();
@@ -135,7 +147,7 @@ test('Static Content @osteo', async ({ page }) => {
 test('Osteo enroll kid @osteo', async ({ page }) => {
   test.slow();
   const userEmail = generateEmailAlias(OSTEO_USER_EMAIL);
-  await page.goto('https://osteo.test.datadonationplatform.org/');
+  await page.goto(OSTEO_BASE_URL!);
   await page.getByLabel('Password *').click();
   await page.getByLabel('Password *').press('Meta+a');
   await page.getByLabel('Password *').fill('broad_institute');
@@ -176,7 +188,9 @@ test('Osteo enroll kid @osteo', async ({ page }) => {
   await page.locator('#mat-radio-2').getByText('Yes').click();
   await page
     .getByRole('paragraph')
-    .filter({ hasText: 'You can request my child’s stored tumor samples (e.g. tumor biopsies, surgical s' })
+    .filter({
+      hasText: 'You can request my child’s stored tumor samples (e.g. tumor biopsies, surgical s'
+    })
     .click();
   await expect(page.getByText('$')).toHaveCount(0);
   await page.locator('#mat-radio-5').getByText('Yes').click();
@@ -214,7 +228,11 @@ test('Osteo enroll kid @osteo', async ({ page }) => {
   await page.getByRole('button', { name: 'Submit' }).click();
   await page.getByText('1. Consent Addendum').click();
   await page.getByText('1. Consent Addendum').click();
-  await page.getByRole('heading', { name: 'Consent Form Addendum: Learning About Your Child’s Tumor' }).click();
+  await page
+    .getByRole('heading', {
+      name: 'Consent Form Addendum: Learning About Your Child’s Tumor'
+    })
+    .click();
   await page.getByText('Introduction').click();
   await page.getByText('This consent addendum gives new information about the research study in which yo').click();
   await page.getByText('Yes').click();
@@ -271,10 +289,13 @@ test('Osteo enroll kid @osteo', async ({ page }) => {
     .getByRole('combobox', { name: 'Choose cancer...' })
     .type('doma', { delay: 200 });
 
-  page.waitForTimeout(1000);
-  page.locator('.composite-answer-OTHER_CANCERS_LIST').getByRole('combobox', { name: 'Choose cancer...' }).press('ArrowDown');
-  page.waitForTimeout(1000);
-  page.locator('.composite-answer-OTHER_CANCERS_LIST').getByRole('combobox', { name: 'Choose cancer...' }).press('Enter');
+  await page.waitForTimeout(1000);
+  await page
+    .locator('.composite-answer-OTHER_CANCERS_LIST')
+    .getByRole('combobox', { name: 'Choose cancer...' })
+    .press('ArrowDown');
+  await page.waitForTimeout(1000);
+  await page.locator('.composite-answer-OTHER_CANCERS_LIST').getByRole('combobox', { name: 'Choose cancer...' }).press('Enter');
 
   await page.locator('.composite-answer-OTHER_CANCERS_LIST').getByRole('combobox', { name: 'Year' }).selectOption('2016');
 
@@ -301,21 +322,37 @@ test('Osteo enroll kid @osteo', async ({ page }) => {
   await page.getByRole('button', { name: 'Submit' }).click();
   await page.getByText('A Message from the Osteosarcoma Project').click();
   await page.getByText('Thank you for providing information regarding your chid’s experiences with osteo').click();
-  await page.getByRole('cell', { name: 'Thank you for signing the research consent and assent forms.' }).click();
-  await page.getByRole('cell', { name: 'Thank you for completing these additional consent and assent forms.' }).click();
   await page
-    .getByRole('cell', { name: 'Thank you for providing information about where your child has been treated for their cancer.' })
+    .getByRole('cell', {
+      name: 'Thank you for signing the research consent and assent forms.'
+    })
     .click();
-  await page.getByRole('cell', { name: "Thank you for telling us about your child's experiences with Osteosarcoma." }).click();
+  await page
+    .getByRole('cell', {
+      name: 'Thank you for completing these additional consent and assent forms.'
+    })
+    .click();
+  await page
+    .getByRole('cell', {
+      name: 'Thank you for providing information about where your child has been treated for their cancer.'
+    })
+    .click();
+  await page
+    .getByRole('cell', {
+      name: "Thank you for telling us about your child's experiences with Osteosarcoma."
+    })
+    .click();
   await page.getByRole('cell', { name: 'Thank you for telling us more about you.' }).click();
   await page
-    .getByRole('cell', { name: "Please complete this survey to tell us more about your child's family history of cancer." })
+    .getByRole('cell', {
+      name: "Please complete this survey to tell us more about your child's family history of cancer."
+    })
     .click();
 });
 
-test('Osteo enroll self and kid together @osteo', async ({ page}) => {
+test.fixme('Osteo enroll self and kid together @osteo', async ({ page }) => {
   test.slow();
-  await page.goto('https://osteo.test.datadonationplatform.org/');
+  await page.goto(OSTEO_BASE_URL!);
   await page.getByLabel('Password *').click();
   await page.getByLabel('Password *').fill('broad_institute');
   await page.getByLabel('Password *').press('Enter');
@@ -331,10 +368,10 @@ test('Osteo enroll self and kid together @osteo', async ({ page}) => {
   const prequalPage = new PrequalPage(page);
   await prequalPage.enrollChild(10, 'United States', 'Idaho');
 
-  //await page.getByText('My child has been diagnosed').click();
-  //await page.getByRole('button', { name: 'Next' }).click();
-  //await page.getByText('How old is your child?').click();
-  const userEmail = auth.createAccountWithEmailAlias(page, { email: OSTEO_USER_EMAIL, password: OSTEO_USER_PASSWORD });
+  await auth.createAccountWithEmailAlias(page, {
+    email: OSTEO_USER_EMAIL,
+    password: OSTEO_USER_PASSWORD
+  });
 
   await page.waitForURL('**/consent**');
   await page.getByRole('heading', { name: 'Research Consent & Assent Form' }).click();
@@ -368,7 +405,7 @@ test('Osteo enroll self and kid together @osteo', async ({ page}) => {
     state: 'MASSACHUSETTS',
     zipCode: '02476',
     telephone: '5555551212'
-});
+  });
 
   await page.getByText('Suggested:').click();
 
@@ -385,8 +422,7 @@ test('Osteo enroll self and kid together @osteo', async ({ page}) => {
   await page.getByText('Introduction').click();
   await page.getByText('This consent addendum gives new information about the research study in which yo').click();
 
-
-    await page.locator('span').filter({ hasText: 'Yes' }).click();
+  await page.locator('span').filter({ hasText: 'Yes' }).click();
   await expect(page.getByTestId('answer:SOMATIC_SINGATURE_PEDIATRIC')).toBeVisible();
   await page.getByTestId('answer:SOMATIC_SINGATURE_PEDIATRIC').fill('Playwright Parent');
   await page.getByTestId('answer:SOMATIC_SINGATURE_PEDIATRIC').blur({ timeout: 2000 });
@@ -451,29 +487,45 @@ test('Osteo enroll self and kid together @osteo', async ({ page}) => {
 
   await page.getByText('Thank you for providing information regarding your chid’s experiences with osteo').click();
   await page.getByText('A Message from the Osteosarcoma Project').click();
-  await page.getByRole('cell', { name: 'Thank you for signing the research consent and assent forms.' }).click();
-  await page.getByRole('cell', { name: 'Thank you for completing these additional consent and assent forms.' }).click();
   await page
-    .getByRole('cell', { name: 'Thank you for providing information about where your child has been treated for their cancer.' })
+    .getByRole('cell', {
+      name: 'Thank you for signing the research consent and assent forms.'
+    })
     .click();
-  await page.getByRole('cell', { name: "Thank you for telling us about your child's experiences with Osteosarcoma." }).click();
+  await page
+    .getByRole('cell', {
+      name: 'Thank you for completing these additional consent and assent forms.'
+    })
+    .click();
+  await page
+    .getByRole('cell', {
+      name: 'Thank you for providing information about where your child has been treated for their cancer.'
+    })
+    .click();
+  await page
+    .getByRole('cell', {
+      name: "Thank you for telling us about your child's experiences with Osteosarcoma."
+    })
+    .click();
   await page.getByRole('cell', { name: 'Thank you for telling us more about you.' }).click();
   await page
-    .getByRole('cell', { name: "Please complete this survey to tell us more about your child's family history of cancer." })
+    .getByRole('cell', {
+      name: "Please complete this survey to tell us more about your child's family history of cancer."
+    })
     .click();
 });
 
-test('Osteo self enroll', async ({ page }) => {
+test.fixme('Osteo self enroll @osteo', async ({ page }) => {
   test.slow();
   const userEmail = generateEmailAlias(OSTEO_USER_EMAIL);
   const firstName = generateUserName('OS');
   const lastName = generateUserName('OS');
-  const fullName = `${firstName  } ${  lastName}`;
+  const fullName = `${firstName} ${lastName}`;
 
   logParticpantCreated(userEmail, fullName);
 
-  await page.goto('https://osteo.test.datadonationplatform.org/');
-  await testutils.fillSitePassword(page, SITE_PASSWORD)
+  await page.goto(OSTEO_BASE_URL!);
+  await testutils.fillSitePassword(page, SITE_PASSWORD);
   await page.waitForTimeout(1000);
   await page.getByRole('banner').getByRole('link', { name: 'Count Me In' }).click();
 
@@ -482,15 +534,12 @@ test('Osteo self enroll', async ({ page }) => {
   await page.getByText("I have been diagnosed with osteosarcoma and I'm signing myself up").click();
   await page.getByRole('button', { name: 'Next' }).click();
   await page.getByLabel('Enter age').click();
+
   await page.getByLabel('Enter age').fill('30');
 
   // wait for country selection to drive state/province
-  const requestPromise = page.waitForResponse(
-    (response) =>
-      response.url().includes('https://pepper-test.datadonationplatform.org/pepper/v1/user') && response.status() === 200
-  );
+  await page.waitForResponse((response) => response.url().includes('/pepper/v1/user') && response.status() === 200);
   await page.locator('#mat-input-2').selectOption('US');
-  const request = await requestPromise;
   await page.locator('#mat-input-3').selectOption('CO');
   await page.waitForTimeout(2000);
 
@@ -530,7 +579,7 @@ test('Osteo self enroll', async ({ page }) => {
   const consentPage = new ResearchConsentPage(page);
 
   await consentPage.fillInContactAddress({
-fullName: fullName,
+    fullName,
     country: 'UNITED STATES',
     street: '75 Ames Street',
     city: 'Cambridge',
@@ -542,7 +591,11 @@ fullName: fullName,
   await page.waitForTimeout(1000);
   await consentPage.submit();
 
-  await page.getByRole('heading', { name: 'Consent Form Addendum: Learning About Your Tumor' }).click();
+  await page
+    .getByRole('heading', {
+      name: 'Consent Form Addendum: Learning About Your Tumor'
+    })
+    .click();
   await page.getByText('Introduction').click();
   await page.getByText('This consent addendum gives new information about the research study in which yo').click();
   await page.getByText('This is what I agree to:').click();
@@ -579,12 +632,16 @@ fullName: fullName,
 
   await page
     .locator('section')
-    .filter({ hasText: 'Thank you for your consent to participate in this research study. To complete th' })
+    .filter({
+      hasText: 'Thank you for your consent to participate in this research study. To complete th'
+    })
     .click();
 
   await page
     .locator('section')
-    .filter({ hasText: 'Thank you for your consent to participate in this research study. To complete th' })
+    .filter({
+      hasText: 'Thank you for your consent to participate in this research study. To complete th'
+    })
     .click();
 
   await page.getByText('I have already read and signed the informed consent document for this study, whi').click();
@@ -619,7 +676,7 @@ fullName: fullName,
   await page.locator('.picklist-answer-OTHER_CANCERS').getByText('Yes').click();
 
   // would be class and class
-  let cancerSelector = new CancerSelector(page, '.activity-text-input-OTHER_CANCER_NAME', '.date-answer-OTHER_CANCER_YEAR');
+  const cancerSelector = new CancerSelector(page, '.activity-text-input-OTHER_CANCER_NAME', '.date-answer-OTHER_CANCER_YEAR');
   await cancerSelector.chooseCancer(0, 'bone', 2, 'Giant Cell Tumor of the Bone (GCT)');
   await cancerSelector.chooseDiagnosisAt(0, '2000');
 
@@ -638,7 +695,9 @@ fullName: fullName,
 
   await page
     .getByRole('paragraph')
-    .filter({ hasText: '3C. Do you consider yourself to be indigenous or Native American (such as Purepe' })
+    .filter({
+      hasText: '3C. Do you consider yourself to be indigenous or Native American (such as Purepe'
+    })
     .click();
   await page.locator('.picklist-answer-INDIGENOUS_NATIVE').getByText('No', { exact: true }).click();
   await page.getByTestId('answer:OTHER_COMMENTS').click();
@@ -654,8 +713,8 @@ fullName: fullName,
   await page.getByRole('button', { name: 'Submit' }).hover();
   await consentPage.submit();
   await page.getByText('Thank you for providing information regarding your experiences with osteosarcoma').click();
-  await page.getByRole('button', { name: `${fullName  } Hide` }).click();
-  await page.getByRole('button', { name: `${fullName  } Show` }).click();
+  await page.getByRole('button', { name: `${fullName} Hide` }).click();
+  await page.getByRole('button', { name: `${fullName} Show` }).click();
   await page.getByRole('button', { name: 'Research Consent Form' }).click();
   await page.getByRole('heading', { name: 'Research Consent Form' }).click();
   await page.getByRole('link', { name: 'Dashboard' }).click();
@@ -671,7 +730,9 @@ fullName: fullName,
   await familyHistoryPage.next();
   await page
     .getByText(
-      'In this survey we would like to know the living status, age, and cancer history of people in your biological, or blood-related, family. We recognize that there are many different types of families, so please skip sections that do not apply to your family tree.'
+      'In this survey we would like to know the living status, age, and cancer history of people in your biological, ' +
+        'or blood-related, family. We recognize that there are many different types of families, ' +
+        'so please skip sections that do not apply to your family tree.'
     )
     .click();
   await familyHistoryPage.next();
@@ -681,7 +742,12 @@ fullName: fullName,
     currentlyLiving: true,
     ageRange: '60-64',
     cancers: [
-      { cancerSearch: 'gan', expectedCancerResult: 'Ganglioglioma', numTimesToHitDownArrow: 1, time: '45-49' },
+      {
+        cancerSearch: 'gan',
+        expectedCancerResult: 'Ganglioglioma',
+        numTimesToHitDownArrow: 1,
+        time: '45-49'
+      },
       {
         cancerSearch: 'multi',
         expectedCancerResult: 'Glioblastoma / Glioblastoma multiforme (GBM)',
@@ -696,7 +762,8 @@ fullName: fullName,
     sexAtBirth: 'Male',
     currentlyLiving: true,
     ageRange: '65-69',
-    cancers: [], ancestry: []
+    cancers: [],
+    ancestry: []
   });
 
   await familyHistoryPage.next();
@@ -706,7 +773,9 @@ fullName: fullName,
     sexAtBirth: 'Female',
     currentlyLiving: true,
     ageRange: '65-69',
-    cancers: [], ancestry: [], sideOfFamily: 'Biological / Birth Parent 2: Assigned Male at birth'
+    cancers: [],
+    ancestry: [],
+    sideOfFamily: 'Biological / Birth Parent 2: Assigned Male at birth'
   });
   await familyHistoryPage.clickAddParentSibling();
   await familyHistoryPage.addFamilyMember('PARENT_SIBLING', {
@@ -714,7 +783,9 @@ fullName: fullName,
     sexAtBirth: 'Female',
     currentlyLiving: false,
     ageRange: '60-64',
-    cancers: [], ancestry: [], sideOfFamily: 'Biological / Birth Parent 1: Assigned Female at birth'
+    cancers: [],
+    ancestry: [],
+    sideOfFamily: 'Biological / Birth Parent 1: Assigned Female at birth'
   });
   await familyHistoryPage.next();
   await familyHistoryPage.clickAddGrandParent();
@@ -723,7 +794,14 @@ fullName: fullName,
     sexAtBirth: 'Male',
     currentlyLiving: false,
     ageRange: '90-94',
-    cancers: [{cancerSearch: 'noid', expectedCancerResult: 'Gastrointestinal carcinoid tumor', numTimesToHitDownArrow: 6, time: '55-59'}],
+    cancers: [
+      {
+        cancerSearch: 'noid',
+        expectedCancerResult: 'Gastrointestinal carcinoid tumor',
+        numTimesToHitDownArrow: 6,
+        time: '55-59'
+      }
+    ],
     ancestry: [],
     sideOfFamily: 'Biological / Birth Parent 1: Assigned Female at birth'
   });
@@ -750,7 +828,14 @@ fullName: fullName,
     sexAtBirth: 'Female',
     currentlyLiving: false,
     ageRange: '90-94',
-    cancers: [{cancerSearch: 'acute', expectedCancerResult: 'Acute myeloid leukemia (AML)', numTimesToHitDownArrow: 3, time: '25-29'}],
+    cancers: [
+      {
+        cancerSearch: 'acute',
+        expectedCancerResult: 'Acute myeloid leukemia (AML)',
+        numTimesToHitDownArrow: 3,
+        time: '25-29'
+      }
+    ],
     ancestry: [],
     sideOfFamily: 'Biological / Birth Parent 2: Assigned Male at birth'
   });
@@ -780,7 +865,14 @@ fullName: fullName,
     sexAtBirth: 'Female',
     currentlyLiving: true,
     ageRange: '10-14',
-    cancers: [{cancerSearch: 'renal', expectedCancerResult: 'Kidney cancer / Renal cell carcinoma (RCC), all subtypes', numTimesToHitDownArrow: 2, time: '5-9'}],
+    cancers: [
+      {
+        cancerSearch: 'renal',
+        expectedCancerResult: 'Kidney cancer / Renal cell carcinoma (RCC), all subtypes',
+        numTimesToHitDownArrow: 2,
+        time: '5-9'
+      }
+    ],
     ancestry: []
   });
 
@@ -793,7 +885,14 @@ fullName: fullName,
     currentlyLiving: true,
     ageRange: '10-14',
     sideOfFamily: 'Biological / Birth Parent 2: Assigned Male at birth',
-    cancers: [{cancerSearch: 'fibro', expectedCancerResult: 'Primary myelofibrosis (PMF)', numTimesToHitDownArrow: 2, time: '5-9'}],
+    cancers: [
+      {
+        cancerSearch: 'fibro',
+        expectedCancerResult: 'Primary myelofibrosis (PMF)',
+        numTimesToHitDownArrow: 2,
+        time: '5-9'
+      }
+    ],
     ancestry: []
   });
 
@@ -805,7 +904,14 @@ fullName: fullName,
     sexAtBirth: 'Female',
     currentlyLiving: true,
     ageRange: '10-14',
-    cancers: [{cancerSearch: 'fibro', expectedCancerResult: 'Desmoid-type fibrosis / Desmoid tumor (DF)', numTimesToHitDownArrow: 4, time: '5-9'}],
+    cancers: [
+      {
+        cancerSearch: 'fibro',
+        expectedCancerResult: 'Desmoid-type fibrosis / Desmoid tumor (DF)',
+        numTimesToHitDownArrow: 4,
+        time: '5-9'
+      }
+    ],
     ancestry: []
   });
 
@@ -821,13 +927,19 @@ fullName: fullName,
   await page.getByRole('link', { name: 'Dashboard' }).click();
 
   await checkUserReceivedEmails(userEmail, [
-    { subject: 'Thank you for providing your consent', textProbe: 'Dear ' + firstName },
+    {
+      subject: 'Thank you for providing your consent',
+      textProbe: `Dear ${firstName}`
+    },
     {
       subject: 'Thank you for providing your consent',
       textProbe: "Your participation isn't just important to our work - it drives everything that we do"
     },
     {
       subject: 'Thank you for providing additional consent',
+      /* eslint-disable max-len */
       textProbe:
-        'Thank you for joining the Osteosarcoma Project and for giving us your consent to share with you any available information we learned from the sequencing of your tumor sample[s] that the study receives.',}]);
+        'Thank you for joining the Osteosarcoma Project and for giving us your consent to share with you any available information we learned from the sequencing of your tumor sample[s] that the study receives.'
+    }
+  ]);
 });

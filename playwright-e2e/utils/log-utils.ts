@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { test } from '@playwright/test';
 
 export function logParticpantCreated(participantEmail: string, participantName: string) {
   test.info().annotations.push({

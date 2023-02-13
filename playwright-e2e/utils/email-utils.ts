@@ -32,34 +32,39 @@ export async function hasUserReceivedEmail(
   expectedSubject: string,
   textToFindInMessage: string
 ): Promise<boolean> {
-  const foo = mail.gmail('v1');
+  mail.gmail('v1');
   const gmail = mail.gmail({ version: 'v1', auth: getAuthClient() });
   let numEmailsFound = 0;
 
   try {
     let foundMessages = false;
-    let gmailMesssages;
+    let gmailMessages;
     let retryNumber = 0;
     do {
-      gmailMesssages = await gmail.users.messages.list({
+      gmailMessages = await gmail.users.messages.list({
         userId: 'me',
         q: `to:${originalEmail}`
       });
-      foundMessages = gmailMesssages.data.messages != null;
+      foundMessages = gmailMessages.data.messages != null;
       retryNumber++;
       if (!foundMessages) {
         await new Promise((resolve) => setTimeout(resolve, 10000));
       }
     } while (retryNumber < 3 && !foundMessages);
 
-    if (foundMessages && gmailMesssages) {
-      gmailMesssages.data.messages?.forEach((message) => {
+    if (foundMessages && gmailMessages) {
+      /*
+      gmailMessages.data.messages?.forEach((message) => {
         const messageId: string = message.id!;
       });
-
-      const messages = gmailMesssages.data.messages!;
+      */
+      const messages = gmailMessages.data.messages!;
       for (let i = 0; i < messages.length; i++) {
-        const messageContents = await gmail.users.messages.get({ userId: 'me', id: messages[i].id!, format: 'RAW' });
+        const messageContents = await gmail.users.messages.get({
+          userId: 'me',
+          id: messages[i].id!,
+          format: 'RAW'
+        });
         const messageText = messageContents.data.raw!;
 
         const decoded = Buffer.from(messageText, 'base64');
@@ -70,7 +75,7 @@ export async function hasUserReceivedEmail(
         const subject = parsed.headers.get('subject');
         const text = parsed.text;
 
-        if (subject && subject.includes(expectedSubject) && text && text.includes(textToFindInMessage)) {
+        if (subject && (subject as string)?.includes(expectedSubject) && text && text.includes(textToFindInMessage)) {
           numEmailsFound++;
           break;
         }
@@ -82,7 +87,7 @@ export async function hasUserReceivedEmail(
   }
 
   console.log(`Found ${numEmailsFound} for email subject '${expectedSubject}' to ${originalEmail}`);
-  return numEmailsFound == 1;
+  return numEmailsFound === 1;
 }
 
 /**

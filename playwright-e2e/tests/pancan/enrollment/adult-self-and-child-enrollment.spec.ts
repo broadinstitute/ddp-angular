@@ -80,7 +80,10 @@ test.describe('Adult self-enroll & child (consent) enrollment', () => {
     await consentFormPage.signature().fill(`${user.adult.firstName} ${lastName}`);
     await expect(consentFormPage.getSubmitButton()).toBeEnabled();
 
-    await consentFormPage.fillInContactAddress({ fullName: `${user.adult.firstName} ${lastName}`, phoneLabel: 'Phone' });
+    await consentFormPage.fillInContactAddress({
+      fullName: `${user.adult.firstName} ${lastName}`,
+      labels: { phone: 'Phone', country: 'Country', state: 'State', zip: 'Zip Code', city: 'City' }
+    });
     await consentFormPage.submit();
 
     //On "Medical Release Form"
@@ -174,7 +177,7 @@ test.describe('Adult self-enroll & child (consent) enrollment', () => {
     await childConsentFormPage.fillInParentData();
     await childConsentFormPage.fillInContactAddress({
       fullName: user.secondChild.fullName,
-      phoneLabel: 'Phone'
+      labels: { phone: 'Phone', country: 'Country', state: 'State', zip: 'Zip Code', city: 'City' }
     });
     await childConsentFormPage.submit();
 

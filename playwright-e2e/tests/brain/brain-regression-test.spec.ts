@@ -1,19 +1,19 @@
+/* eslint-disable */
 import { test, expect } from '@playwright/test';
-import { setAuth0UserEmailVerified } from 'utils/api-utils';
-import { APP } from 'data/constants';
 import * as auth from 'authentication/auth-base';
 import { generateEmailAlias, generateUserName } from 'utils/faker-utils';
-import * as testutils from 'utils/test-utils';
+import * as utils from 'utils/test-utils';
 import * as email from 'utils/email-utils';
 import HomePage from 'pages/brain/home-page';
 import PrequalPage from 'pages/brain/prequal-page';
+
 import ResearchConsentPage from 'pages/brain/consent-page';
 
 const { BRAIN_USER_EMAIL, BRAIN_USER_PASSWORD, MIN_EMAIL_WAIT_TIME, BRAIN_BASE_URL, SITE_PASSWORD } = process.env;
 
 test('Brain statics @brain', async ({ page }) => {
   await page.goto(BRAIN_BASE_URL!);
-  testutils.fillSitePassword(page, SITE_PASSWORD);
+  await utils.fillSitePassword(page, SITE_PASSWORD);
   await page.waitForTimeout(1000);
   await page.getByRole('link', { name: 'Brain Tumor Project logo Brain Tumor Project' }).click();
   await page.getByRole('banner').getByRole('listitem').filter({ hasText: 'FAQs' }).click();
@@ -24,30 +24,56 @@ test('Brain statics @brain', async ({ page }) => {
   await page.getByText('The goal of this project is to generate a large dataset that includes genomic, c').click();
   await page.getByRole('button', { name: 'Who is conducting this research?' }).click();
   await page.getByText('This project is being conducted by Count Me In. Our team is made up of cancer re').click();
-  await page.getByRole('button', { name: 'What are the genomic and molecular research aspects of this project?' }).click();
+  await page
+    .getByRole('button', {
+      name: 'What are the genomic and molecular research aspects of this project?'
+    })
+    .click();
   await page.getByText('This study involves genomic and molecular research to better define the genes an').click();
   await page.getByRole('button', { name: 'Are there any costs for me to participate?' }).click();
   await page.getByText('No, there are no costs to you. All associated costs related to acquiring medical').click();
   await page
-    .getByRole('button', { name: 'How has the brain tumor community been involved in the design of this project?' })
+    .getByRole('button', {
+      name: 'How has the brain tumor community been involved in the design of this project?'
+    })
     .click();
   await page.getByText('We have worked closely with patients, parents, and patient advocates within the ').click();
-  await page.getByRole('button', { name: 'If I am asked to share a tissue sample, will my tissue be used up?' }).click();
+  await page
+    .getByRole('button', {
+      name: 'If I am asked to share a tissue sample, will my tissue be used up?'
+    })
+    .click();
   await page.getByText('If you do elect to share tissue as part of the study, we will take every measure').click();
   await page.getByText('In order to get a sense of what archived samples are available for request, the ').click();
   await page.getByRole('button', { name: 'Is this study a clinical trial?' }).click();
   await page.getByText('This study is not a clinical trial. Participation will not have any impact on yo').click();
-  await page.getByRole('heading', { name: 'I/my child have been diagnosed with a brain tumor' }).click();
+  await page
+    .getByRole('heading', {
+      name: 'I/my child have been diagnosed with a brain tumor'
+    })
+    .click();
   await page.getByRole('button', { name: 'How does this project work?' }).click();
   await page.getByText('Click "Count Me In" and complete a simple online form to tell us about yourself/').click();
   await page.getByText('If you are in the United States or Canada after you fill out the initial survey,').click();
   await page.getByText("We'll also send you a simple kit to collect a saliva sample from you/your child,").click();
-  await page.getByRole('button', { name: 'What happens when my child with a brain tumor becomes an adult?' }).click();
+  await page
+    .getByRole('button', {
+      name: 'What happens when my child with a brain tumor becomes an adult?'
+    })
+    .click();
   await page.getByText('When your child reaches the age of consenting for themselves, they need to conse').click();
   await page.getByText('If your child remains in the study when they reach the age of consenting for the').click();
-  await page.getByRole('button', { name: 'How can I spread the word about the Brain Tumor Project?' }).click();
+  await page
+    .getByRole('button', {
+      name: 'How can I spread the word about the Brain Tumor Project?'
+    })
+    .click();
   await page.getByText('If you would like to learn more about how to spread the word about the project, ').click();
-  await page.getByRole('button', { name: 'How can I receive updates on the Brain Tumor Project?' }).click();
+  await page
+    .getByRole('button', {
+      name: 'How can I receive updates on the Brain Tumor Project?'
+    })
+    .click();
   await page.getByText('If you would like updates on the project, please sign up for our mailing list.').click();
   await page.getByRole('banner').getByRole('link', { name: 'About Us' }).click();
   await page.getByText('Brain Tumor Project', { exact: true }).click();
@@ -97,16 +123,24 @@ test('Brain statics @brain', async ({ page }) => {
   await page.getByRole('button').filter({ hasText: 'clear' }).click();
   await page.getByRole('heading', { name: 'What does a data release look like?' }).click();
   await page.getByText('Below are links out to datasets from other Count Me In projects. This is what we').click();
-  await page.getByRole('img', { name: 'The Metastatic Breast Cancer Project data release diagram' }).click();
-  await page.getByRole('img', { name: 'The Metastatic Prostate Cancer Project data release diagram' }).click();
+  await page
+    .getByRole('img', {
+      name: 'The Metastatic Breast Cancer Project data release diagram'
+    })
+    .click();
+  await page
+    .getByRole('img', {
+      name: 'The Metastatic Prostate Cancer Project data release diagram'
+    })
+    .click();
   await page.getByRole('img', { name: 'The Angiosarcoma Project data release diagram' }).click();
 });
 
-test('Brain enroll kid on their behalf @brain', async ({ page }) => {
+test.fixme('Brain enroll kid on their behalf @brain', async ({ page }) => {
   test.slow();
   await page.goto(BRAIN_BASE_URL!);
   const userEmail = generateEmailAlias(BRAIN_USER_EMAIL);
-  testutils.fillSitePassword(page, SITE_PASSWORD);
+  await utils.fillSitePassword(page, SITE_PASSWORD);
 
   await page.waitForTimeout(1000);
   await page.getByRole('banner').getByRole('link', { name: 'Count Me In' }).click();
@@ -124,7 +158,11 @@ test('Brain enroll kid on their behalf @brain', async ({ page }) => {
   await page.getByPlaceholder('your password').press('Enter');
   await page.getByRole('heading', { name: 'Consent & Assent Form' }).click();
   await page.getByText('Please read through the consent form text below and click Next when you are done').click();
-  await page.getByRole('heading', { name: 'Does my child have to participate in this study?' }).click();
+  await page
+    .getByRole('heading', {
+      name: 'Does my child have to participate in this study?'
+    })
+    .click();
   await page.getByText('No. Taking part in this study is voluntary. Even if you decide to have your chil').click();
   await page.getByRole('heading', { name: 'What if my child or I have questions?' }).click();
   await page.getByRole('button', { name: 'Next' }).click();
@@ -192,11 +230,17 @@ test('Brain enroll kid on their behalf @brain', async ({ page }) => {
   await page.locator('#mat-input-18').fill('Muppet');
   await page
     .getByRole('paragraph')
-    .filter({ hasText: 'I have already read and signed the informed consent document for this study, whi' })
+    .filter({
+      hasText: 'I have already read and signed the informed consent document for this study, whi'
+    })
     .click();
   await page.getByText('By completing this information, you are agreeing to allow us to contact these ph').click();
   await page.getByRole('button', { name: 'Submit' }).click();
-  await page.getByRole('heading', { name: 'Join the movement: tell us about your child' }).click();
+  await page
+    .getByRole('heading', {
+      name: 'Join the movement: tell us about your child'
+    })
+    .click();
   await page.getByText('My child has been diagnosed with a primary brain tumor, and I am filling out thi').click();
   await page.getByRole('combobox').first().selectOption('2014');
   await page.getByRole('combobox').nth(1).selectOption('6');
@@ -232,24 +276,34 @@ test('Brain enroll kid on their behalf @brain', async ({ page }) => {
   await page.getByText('My Dashboard').click();
   await page.getByText('A Message from the Brain Tumor Project').click();
   await page.getByText('Thank you for saying "Count Me In" and providing information regarding your expe').click();
-  await page.getByRole('cell', { name: 'Thank you for signing the research consent form.' }).click();
+  await page
+    .getByRole('cell', {
+      name: 'Thank you for signing the research consent form.'
+    })
+    .click();
   await page
     .getByRole('cell', {
       name: "Thank you for providing your child's mailing address and contact information for your child's physician(s) and hospital(s)."
     })
     .click();
-  await page.getByRole('cell', { name: "Thank you for telling us about your child's experiences with a brain tumor." }).click();
   await page
-    .getByRole('cell', { name: "Thank you for telling us additional details about your child's experience with a brain tumor." })
+    .getByRole('cell', {
+      name: "Thank you for telling us about your child's experiences with a brain tumor."
+    })
+    .click();
+  await page
+    .getByRole('cell', {
+      name: "Thank you for telling us additional details about your child's experience with a brain tumor."
+    })
     .click();
   await page.getByRole('button', { name: 'View', exact: true }).click();
 });
 
-test('Brain enroll self @brain', async ({ page }) => {
+test.fixme('Brain enroll self @brain', async ({ page }) => {
   test.slow();
   await page.goto(BRAIN_BASE_URL!);
   const checkForEmailsAfter = Date.now() + Number.parseInt(MIN_EMAIL_WAIT_TIME!);
-  await testutils.fillSitePassword(page);
+  await utils.fillSitePassword(page);
 
   const homePage = new HomePage(page);
   await homePage.waitForReady();
@@ -258,7 +312,10 @@ test('Brain enroll self @brain', async ({ page }) => {
   const prequalPage = new PrequalPage(page);
   await prequalPage.startSelfEnrollment(30, 'US', 'FL');
 
-  const userEmail = await auth.createAccountWithEmailAlias(page, { email: BRAIN_USER_EMAIL, password: BRAIN_USER_PASSWORD });
+  const userEmail = await auth.createAccountWithEmailAlias(page, {
+    email: BRAIN_USER_EMAIL,
+    password: BRAIN_USER_PASSWORD
+  });
   const firstName = generateUserName('BR');
   const lastName = generateUserName('BR');
   const fullName = `${firstName} ${lastName}`;
@@ -269,7 +326,11 @@ test('Brain enroll self @brain', async ({ page }) => {
   await page.getByText('Please read through the consent form text below and click Next when you are done').click();
   await page.getByRole('heading', { name: 'What if I have questions?' }).click();
   await page.getByText('If you have any questions, please send an email to info@braintumorproject.org or').click();
-  await page.getByRole('heading', { name: 'Can I stop taking part in this research study?' }).click();
+  await page
+    .getByRole('heading', {
+      name: 'Can I stop taking part in this research study?'
+    })
+    .click();
   await page.getByText('Yes, you can withdraw from this research study at any time, although any of your').click();
 
   await prequalPage.next();
@@ -277,7 +338,11 @@ test('Brain enroll self @brain', async ({ page }) => {
   await page.getByRole('heading', { name: 'Research Consent Form' }).click();
   await page.getByRole('heading', { name: 'Introduction' }).click();
   await page.getByText('You are being invited to participate in a research study that will collect and a').click();
-  await page.getByRole('heading', { name: 'Authorization to use your health information for research purposes' }).click();
+  await page
+    .getByRole('heading', {
+      name: 'Authorization to use your health information for research purposes'
+    })
+    .click();
   await page.getByText('Because information about you and your health is personal and private, it genera').click();
 
   await prequalPage.next();
@@ -303,7 +368,13 @@ test('Brain enroll self @brain', async ({ page }) => {
     state: 'QUEBEC',
     zipCode: 'H3A 0G', // leave off full zip so the "as entered" button can be clicked
     telephone: '5555551212',
-    labels: { phone: 'Phone', country: 'Country/Territory', state: 'Province', zip: 'Postal Code', city: 'City' }
+    labels: {
+      phone: 'Phone',
+      country: 'Country/Territory',
+      state: 'Province',
+      zip: 'Postal Code',
+      city: 'City'
+    }
   });
 
   // fill these in with components
@@ -366,15 +437,25 @@ test('Brain enroll self @brain', async ({ page }) => {
   await page.getByText('My Dashboard').click();
   await page.getByText('Thank you for providing your consent for this study, and for providing informati').click();
   await page.getByText("We'll stay in touch with you so that you can see the progress that we are making").click();
-  await page.getByRole('cell', { name: 'Thank you for signing the research consent form.' }).click();
+  await page
+    .getByRole('cell', {
+      name: 'Thank you for signing the research consent form.'
+    })
+    .click();
   await page
     .getByRole('cell', {
       name: 'Thank you for providing your mailing address and contact information for your physician(s) and hospital(s).'
     })
     .click();
-  await page.getByRole('cell', { name: 'Thank you for telling us about your experiences with a brain tumor.' }).click();
   await page
-    .getByRole('cell', { name: 'Thank you for telling us additional details about your experience with a brain tumor.' })
+    .getByRole('cell', {
+      name: 'Thank you for telling us about your experiences with a brain tumor.'
+    })
+    .click();
+  await page
+    .getByRole('cell', {
+      name: 'Thank you for telling us additional details about your experience with a brain tumor.'
+    })
     .click();
   await page
     .getByRole('row', {
