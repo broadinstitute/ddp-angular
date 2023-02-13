@@ -63,7 +63,9 @@ export default abstract class PageBase implements PageInterface {
    * Returns "I'm not ready to agree" button
    */
   getIAmNotReadyToAgreeButton(): Locator {
-    return this.page.locator('button:visible', { hasText: 'I am not ready to agree' });
+    return this.page.locator('button:visible', {
+      hasText: 'I am not ready to agree'
+    });
   }
 
   async gotoURL(url = '/'): Promise<Response | null> {
@@ -123,7 +125,9 @@ export default abstract class PageBase implements PageInterface {
 
   /** Click "I am not ready to agree" button */
   async notReadyToAgree(): Promise<void> {
-    await this.clickAndWaitForNav(this.getIAmNotReadyToAgreeButton(), { waitForNav: true });
+    await this.clickAndWaitForNav(this.getIAmNotReadyToAgreeButton(), {
+      waitForNav: true
+    });
   }
 
   /** Click "Log Out" button */
@@ -171,7 +175,13 @@ export default abstract class PageBase implements PageInterface {
 
     let labels;
     if (!opts.labels) {
-      labels = { phone: 'Phone', country: 'Country', state: 'State', zip: 'Zip Code', city: 'City' };
+      labels = {
+        phone: 'Phone',
+        country: 'Country',
+        state: 'State',
+        zip: 'Zip Code',
+        city: 'City'
+      };
     } else {
       labels = opts.labels;
     }
@@ -266,7 +276,9 @@ export default abstract class PageBase implements PageInterface {
    * <br> Type: Select
    */
   country(): Question {
-    return new Question(this.page, { prompt: new RegExp(/((?:choose|select) country\b)|(country\b)/i) });
+    return new Question(this.page, {
+      prompt: new RegExp(/((?:choose|select) country\b)|(country\b)/i)
+    });
   }
 
   /**
@@ -275,6 +287,8 @@ export default abstract class PageBase implements PageInterface {
    * <br> Type: Select
    */
   state(): Question {
-    return new Question(this.page, { prompt: new RegExp(/((?:choose|select) (state\b|province\b))|(state\b)/i) });
+    return new Question(this.page, {
+      prompt: new RegExp(/((?:choose|select) (state\b|province\b))|(state\b)/i)
+    });
   }
 }

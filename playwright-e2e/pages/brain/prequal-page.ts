@@ -22,6 +22,6 @@ export default class PrequalPage extends BrainBasePage {
     await this.page.getByTestId('answer:SELF_CURRENT_AGE').fill(age.toString());
     await this.page.locator('.picklist-answer-SELF_COUNTRY').getByRole('combobox').selectOption(country);
     await this.page.locator('.picklist-answer-SELF_STATE').getByRole('combobox').selectOption(state);
-    this.submit();
+    await this.submit();
   }
 }

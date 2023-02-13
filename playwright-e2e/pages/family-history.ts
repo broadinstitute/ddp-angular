@@ -1,4 +1,4 @@
-import { expect, Page } from '@playwright/test';
+import { Page } from '@playwright/test';
 import { booleanToYesOrNo } from 'utils/test-utils';
 import { CancerSelector } from './cancer-selector';
 import { BrainBasePage } from './brain/brain-base-page';
@@ -21,6 +21,7 @@ export class FamilyHistory extends BrainBasePage {
   }
 
   async parent(parentNumber: number, p: FamilyMember): Promise<void> {
+    let i;
     await this.page
       .locator('mat-card-content')
       .filter({ hasText: `Biological / Birth Parent ${parentNumber}` })
@@ -39,7 +40,7 @@ export class FamilyHistory extends BrainBasePage {
       .getByText(booleanToYesOrNo(p.cancers.length > 0), { exact: true })
       .click();
 
-    for (var i = 0; i < p.cancers.length; i++) {
+    for (let i = 0; i < p.cancers.length; i++) {
       if (i > 0) {
         await this.page.getByText(' + Add another cancer').click();
       }
@@ -60,7 +61,7 @@ export class FamilyHistory extends BrainBasePage {
 
     if (p.ancestry.length > 0) {
       await this.page.locator(`.picklist-answer-${selectorBase}_JEWISH_ANC`).getByText('Yes').click();
-      for (var i = 0; i < p.ancestry.length; i++) {
+      for (i = 0; i < p.ancestry.length; i++) {
         await this.page.locator(`.picklist-answer-${selectorBase}_JEWISH_GROUP`).getByText(p.ancestry[i]).click();
       }
     }
@@ -68,7 +69,11 @@ export class FamilyHistory extends BrainBasePage {
   }
 
   async clickAddParentSibling(): Promise<void> {
-    await this.page.getByRole('button', { name: "Add a Parent's Sibling Add a Parent's Sibling" }).click();
+    await this.page
+      .getByRole('button', {
+        name: "Add a Parent's Sibling Add a Parent's Sibling"
+      })
+      .click();
   }
 
   async clickAddGrandParent(): Promise<void> {
@@ -88,13 +93,13 @@ export class FamilyHistory extends BrainBasePage {
   }
 
   async addFamilyMember(relationship: string, p: FamilyMember): Promise<void> {
-    if (relationship == 'PARENT1') {
+    if (relationship === 'PARENT1') {
       await this.page
         .locator('mat-card-content')
         .filter({ hasText: 'Biological / Birth Parent 1' })
         .getByRole('button', { name: 'Edit' })
         .click();
-    } else if (relationship == 'PARENT2') {
+    } else if (relationship === 'PARENT2') {
       await this.page
         .locator('mat-card-content')
         .filter({ hasText: 'Biological / Birth Parent 2' })
@@ -114,7 +119,7 @@ export class FamilyHistory extends BrainBasePage {
       .getByText(booleanToYesOrNo(p.cancers.length > 0), { exact: true })
       .click();
 
-    for (var i = 0; i < p.cancers.length; i++) {
+    for (let i = 0; i < p.cancers.length; i++) {
       if (i > 0) {
         await this.page.getByText(' + Add another cancer').click();
       }
@@ -135,12 +140,11 @@ export class FamilyHistory extends BrainBasePage {
 
     if (p.ancestry.length > 0) {
       await this.page.locator(`.picklist-answer-${selectorBase}_JEWISH_ANC`).getByText('Yes').click();
-      for (var i = 0; i < p.ancestry.length; i++) {
+      for (let i = 0; i < p.ancestry.length; i++) {
         await this.page.locator(`.picklist-answer-${selectorBase}_JEWISH_GROUP`).getByText(p.ancestry[i]).click();
       }
     }
 
-    const selectBoxes = 1;
     if (p.sideOfFamily != null) {
       let sideOfFamilyClass = 'FAMILY_SIDE_Q_3';
       if (selectorBase.indexOf('GRAND') > 0) {

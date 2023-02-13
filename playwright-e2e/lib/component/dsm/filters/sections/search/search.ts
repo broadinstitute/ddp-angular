@@ -4,6 +4,7 @@ import { AdditionalFilter } from './search-enums';
 
 export class Search {
   private readonly enUSDateRegExp = new RegExp(/\b(0[1-9]|1[012])([/])(0[1-9]|[12]\d|3[01])\2(\d{4})/);
+
   private readonly todayTextInDateRegExp = new RegExp('^today$');
 
   constructor(private readonly page: Page) {}
