@@ -594,7 +594,7 @@ jobs:
           name: Save Vault secrets into temp file to persist across jobs
           command: |
             set -u
-            ./export-playwright-env.sh
+            ../.circleci/export-playwright-env.sh
       - run:
           working_directory: *playwright_path
           name: npm install
@@ -743,7 +743,7 @@ workflows:
       jobs:
         - app-run-tests-job
 
-  playwright-e2e-test-workflow:
+  playwright-test-workflow:
     # Triggered by CI API (for example, run_ci.sh)
     # Run Playwright tests against Dev and Test but not for Staging and Production
     when:
