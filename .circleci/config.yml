@@ -593,6 +593,7 @@ jobs:
           # Reading Vault secrets here because build-executor provides Vault set-up
           name: Save Vault secrets into temp file to persist across jobs
           command: |
+            pwd
             set -u
             ../.circleci/export-playwright-env.sh
       - run:
