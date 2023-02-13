@@ -65,22 +65,6 @@ commands:
           paths:
             - ./node_modules
 
-  app-build-and-store:
-    description: Run build and store archive of it
-    parameters:
-      study_key:
-        type: string
-    steps:
-      - checkout-code
-      - set-deployment-environment
-      - setup-shared-env:
-          study_key: << parameters.study_key >>
-      - run-linter-check
-      - run-tests
-      - build-app:
-          study_key: << parameters.study_key >>
-      - store-app-build
-
   set-deployment-environment:
     description: "Determine working environment"
     steps:
@@ -306,48 +290,32 @@ commands:
       - store_artifacts:
           path: /tmp/junit
 
-  build-atcp-assets:
-    description: build atcp auth0 scripts & styles
-    steps:
-      - run:
-          name: build atcp auth0 scripts
-          command: |
-            set -u
-            ng build ddp-atcp-auth
-            npm run convert-atcp-auth-build-to-UMD
-      - run:
-          name: build atcp auth0 styles
-          command: |
-            set -u
-            ./node_modules/.bin/sass ./projects/ddp-atcp/src/auth0/auth0-styles/main.scss ./projects/ddp-atcp/src/auth0/compiled/auth0-styles/main.css --style compressed
-
-  execute-study-specific-commands:
-    description: run study specific commands if necessary
-    parameters:
-      study_key:
-        type: string
-        default: "UNKNOWN"
-    steps:
-      - when:
-          condition:
-            equal: [ atcp, << parameters.study_key >> ]
-          steps:
-            - build-atcp-assets
-
-  build-app:
+  build:
     description: "Build DDP study app"
     parameters:
       study_key:
         type: string
         default: "UNKNOWN"
     steps:
+      - checkout-code
+      - set-deployment-environment
+      - setup-shared-env:
+          study_key: << parameters.study_key >>
       - when:
           condition:
-            or:
-              - equal: [ atcp, << parameters.study_key >> ]
+            equal: [ atcp, << parameters.study_key >> ]
           steps:
-            - execute-study-specific-commands:
-                study_key: << parameters.study_key >>
+            - run:
+                name: build atcp auth0 scripts
+                command: |
+                  set -u
+                  ng build ddp-atcp-auth
+                  npm run convert-atcp-auth-build-to-UMD
+            - run:
+                name: build atcp auth0 styles
+                command: |
+                  set -u
+                  ./node_modules/.bin/sass ./projects/ddp-atcp/src/auth0/auth0-styles/main.scss ./projects/ddp-atcp/src/auth0/compiled/auth0-styles/main.css --style compressed
       - run:
           name: ng build
           command: |
@@ -472,7 +440,7 @@ commands:
                 command: circleci-agent step halt
 
 jobs:
-  build-and-deploy-job:
+  app-deploy:
     working_directory: *ng_workspace_path
     parameters:
       study_key:
@@ -480,11 +448,7 @@ jobs:
     executor:
       name: build-executor
     steps:
-      - checkout-code
-      - set-deployment-environment
-      - setup-shared-env:
-          study_key: << parameters.study_key >>
-      - build-app:
+      - build:
           study_key: << parameters.study_key >>
       - deploy-exploded-build:
           study_key: << parameters.study_key >>
@@ -546,13 +510,27 @@ jobs:
       - conditionally-launch-build-and-store:
           study_key: fon
 
-  app-build-and-store-job:
+  app-build:
     working_directory: *ng_workspace_path
     executor:
       name: build-executor
+    parameters:
+      study_key:
+        type: string
     steps:
-      - app-build-and-store:
-          study_key: << pipeline.parameters.study_key >>
+      - build:
+          study_key: << parameters.study_key >>
+      - run-linter-check
+      - run-tests
+      - run:
+          name: Short circuit - Don't store build artifacts if branch is a pull request
+          command: |
+            if [[ ${CIRCLE_PULL_REQUEST} ]]; then
+              echo "CIRCLE_PULL_REQUEST: $CIRCLE_PULL_REQUEST"
+              echo "CIRCLE_BRANCH: $CIRCLE_BRANCH"
+              echo "Skip store build"
+              circleci-agent step halt
+      - store-app-build
 
   deploy-stored-build-job:
     working_directory: *ng_workspace_path
@@ -716,7 +694,8 @@ workflows:
         - not:
             equal: ["UNKNOWN", << pipeline.parameters.study_key >>]
     jobs:
-      - app-build-and-store-job
+      - app-build:
+          study_key: << pipeline.parameters.study_key >>
 
   api-deploy-workflow:
     # Deploy a study build to environment specified in api call
@@ -773,7 +752,7 @@ workflows:
         - << pipeline.parameters.do-builds >>
         - equal: ["UNKNOWN", << pipeline.parameters.deploy_env >>]
     jobs:
-      - build-and-deploy-job:
+      - app-deploy:
           study_key: << pipeline.parameters.study_key >>
           filters:
             branches:
@@ -796,8 +775,9 @@ workflows:
   build-app-workflow:
     when: << pipeline.parameters.do-builds >>
     jobs:
-      - app-build-and-store-job:
+      - app-build:
           <<: *build-and-store-filters
+          study_key: << pipeline.parameters.study_key >>
 
   deploy-all-apps-workflow:
     jobs:
