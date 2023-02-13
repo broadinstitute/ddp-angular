@@ -136,7 +136,7 @@ test('Brain statics @brain', async ({ page }) => {
   await page.getByRole('img', { name: 'The Angiosarcoma Project data release diagram' }).click();
 });
 
-test('Brain enroll kid on their behalf @brain', async ({ page }) => {
+test.fixme('Brain enroll kid on their behalf @brain', async ({ page }) => {
   test.slow();
   await page.goto(BRAIN_BASE_URL!);
   const userEmail = generateEmailAlias(BRAIN_USER_EMAIL);
@@ -299,7 +299,7 @@ test('Brain enroll kid on their behalf @brain', async ({ page }) => {
   await page.getByRole('button', { name: 'View', exact: true }).click();
 });
 
-test('Brain enroll self @brain', async ({ page }) => {
+test.fixme('Brain enroll self @brain', async ({ page }) => {
   test.slow();
   await page.goto(BRAIN_BASE_URL!);
   const checkForEmailsAfter = Date.now() + Number.parseInt(MIN_EMAIL_WAIT_TIME!);

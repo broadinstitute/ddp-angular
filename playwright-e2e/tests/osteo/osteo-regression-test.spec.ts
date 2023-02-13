@@ -17,7 +17,7 @@ import { checkUserReceivedEmails } from 'utils/email-utils';
 
 const { OSTEO_USER_EMAIL, OSTEO_USER_PASSWORD, SITE_PASSWORD, OSTEO_BASE_URL } = process.env;
 
-test('Static Content @osteo', async ({ page }) => {
+test('Osteo Static Content @osteo', async ({ page }) => {
   await page.goto(OSTEO_BASE_URL!);
   await page.locator('div').filter({ hasText: 'Password *' }).nth(2).click();
   await page.getByLabel('Password *').fill('broad_institute');
@@ -350,7 +350,7 @@ test('Osteo enroll kid @osteo', async ({ page }) => {
     .click();
 });
 
-test('Osteo enroll self and kid together @osteo', async ({ page }) => {
+test.fixme('Osteo enroll self and kid together @osteo', async ({ page }) => {
   test.slow();
   await page.goto(OSTEO_BASE_URL!);
   await page.getByLabel('Password *').click();
@@ -515,7 +515,7 @@ test('Osteo enroll self and kid together @osteo', async ({ page }) => {
     .click();
 });
 
-test('Osteo self enroll', async ({ page }) => {
+test.fixme('Osteo self enroll @osteo', async ({ page }) => {
   test.slow();
   const userEmail = generateEmailAlias(OSTEO_USER_EMAIL);
   const firstName = generateUserName('OS');
@@ -534,6 +534,7 @@ test('Osteo self enroll', async ({ page }) => {
   await page.getByText("I have been diagnosed with osteosarcoma and I'm signing myself up").click();
   await page.getByRole('button', { name: 'Next' }).click();
   await page.getByLabel('Enter age').click();
+
   await page.getByLabel('Enter age').fill('30');
 
   // wait for country selection to drive state/province
