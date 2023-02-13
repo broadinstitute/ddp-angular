@@ -465,9 +465,10 @@ commands:
             or:
               - equal: [ UNKNOWN, << parameters.env >> ]
               - equal: [ prod, << parameters.env >> ]
+              - equal: [ staging, << parameters.env >> ]
           steps:
             - run:
-                name: Step halt ENV=<< parameters.env >>
+                name: Halt job ENV=<< parameters.env >>
                 command: circleci-agent step halt
 
 jobs:
