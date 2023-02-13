@@ -585,8 +585,6 @@ jobs:
         type: enum
         enum: [ dev, test, staging, prod, UNKNOWN ]
     steps:
-      - halt-playwright-test-check:
-          env: << parameters.env >>
       - checkout:
           path: *repo_path
       - setup-shared-env
