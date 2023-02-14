@@ -733,10 +733,16 @@ workflows:
             alias: app-ui-unit-test
             parameters:
               study_key: [ basil, osteo, angio, brain, mbc, mpc, atcp, rgp, esc, prion, pancan, singular, brugada, lms ]
+          requires:
+            - app-build
       - api-unit-test:
           <<: *filter-pr-branch
+          requires:
+            - app-build
       - playwright-build:
           <<: *filter-pr-branch
+          requires:
+            - app-build
 
   api-build-and-store-workflow:
     # Build study specified in api call
