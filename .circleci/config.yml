@@ -772,7 +772,9 @@ workflows:
         and:
           - equal: ["run-tests", << pipeline.parameters.api_call >>]
           - not:
-              equal: ["UNKNOWN", << pipeline.parameters.study_key >>]
+              - or:
+                - equal: ["UNKNOWN", << pipeline.parameters.study_key >>]
+                - equal: ["unknown", << pipeline.parameters.study_key >>]
       jobs:
         - api-unit-test
         - ui-unit-test:
