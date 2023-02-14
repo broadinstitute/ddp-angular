@@ -723,7 +723,7 @@ workflows:
           store_build: false
           name: << matrix.study_key >>-build
           matrix:
-            alias: app-build-and-store
+            alias: app-build
             parameters:
               study_key: [ basil, osteo, angio, brain, mbc, mpc, atcp, rgp, esc, prion, pancan, singular, brugada, lms ]
       - ui-unit-test:
