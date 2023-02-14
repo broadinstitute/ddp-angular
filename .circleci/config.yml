@@ -743,8 +743,8 @@ workflows:
       - playwright-build:
           <<: *filter-pr-branch
 
-  api-build-and-store-workflow:
-    # Build study specified in api call
+  build-single-app-workflow:
+    # Build study specified in api call by run_ci.sh
     when:
       and:
         - equal: ["build-and-store", << pipeline.parameters.api_call >>]
@@ -760,8 +760,8 @@ workflows:
             - ui-unit-test
             - api-unit-test
 
-  api-deploy-workflow:
-    # Deploy a study build to environment specified in api call
+  deploy-single-app-workflow:
+    # Deploy a study build to environment specified in api call by run_ci.sh
     when:
       and:
         - equal: ["deploy", << pipeline.parameters.api_call >>]
