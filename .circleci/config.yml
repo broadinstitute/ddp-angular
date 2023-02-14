@@ -742,7 +742,8 @@ workflows:
       - playwright-build:
           <<: *filter-pr-branch
           requires:
-            - app-build
+            - app-ui-unit-test
+            - api-unit-test
 
   api-build-and-store-workflow:
     # Build study specified in api call
