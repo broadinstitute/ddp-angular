@@ -715,7 +715,12 @@ workflows:
   version: 2
 
   build-test-pr:
-    # Automatically run on every PR commit
+    # Automatically run on every PR commit.
+    # CircleCI API calls will not launch this workflow.
+    when:
+      and:
+        - equal: [ "UNKNOWN", << pipeline.parameters.api_call >> ]
+        - equal: [ "UNKNOWN", << pipeline.parameters.study_key >> ]
     jobs:
       - app-build:
           <<: *filter-pr-branch
