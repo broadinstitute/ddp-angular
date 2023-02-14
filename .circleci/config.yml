@@ -721,6 +721,7 @@ workflows:
       and:
         - equal: [ "UNKNOWN", << pipeline.parameters.api_call >> ]
         - equal: [ "UNKNOWN", << pipeline.parameters.study_key >> ]
+        - equal: [ "UNKNOWN", << pipeline.parameters.deploy_env >> ]
     jobs:
       - app-build:
           <<: *filter-pr-branch
@@ -743,7 +744,7 @@ workflows:
       - playwright-build:
           <<: *filter-pr-branch
 
-  build-single-app-workflow:
+  build-single-app:
     # Build study specified in api call by run_ci.sh
     when:
       and:
@@ -760,7 +761,7 @@ workflows:
             - ui-unit-test
             - api-unit-test
 
-  deploy-single-app-workflow:
+  deploy-single-app:
     # Deploy a study build to environment specified in api call by run_ci.sh
     when:
       and:
