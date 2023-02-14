@@ -776,7 +776,7 @@ workflows:
           study_key: << pipeline.parameters.study_key >>
 
   api-run-tests-workflow:
-    # Run tests for study specified in api call (also tests for sdk and toolkit)
+    # Run ui tests for study specified in api call by run_ci.sh and tests for sdk and toolkit
       when:
         and:
           - equal: ["run-tests", << pipeline.parameters.api_call >>]
