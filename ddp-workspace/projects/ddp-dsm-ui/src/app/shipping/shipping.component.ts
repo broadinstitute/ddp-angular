@@ -431,7 +431,8 @@ export class ShippingComponent implements OnInit {
 
   private closedWindow(): void {
     this.selectedKitRequests = [];
-    !this.kitType.manualSentTrack && !this.isPHI && this.router.navigate([Statics.SCAN_URL], {relativeTo: this.route});
+    !this.kitType.manualSentTrack && !this.isPHI && this.router.navigate(['../','scan'],
+      {relativeTo: this.route, queryParams: {scannerType: 'final'}});
     this.allSelected = false;
     this.isPHI = false;
     this.setAllCheckboxes(false);
