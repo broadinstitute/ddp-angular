@@ -456,10 +456,10 @@ export class ParticipantListComponent implements OnInit {
                     }
                   } else if (question.questionType === 'COMPOSITE') {
                     options = new Array<NameValue>();
-                    type = Filter.OPTION_TYPE;
                     if (question.childQuestions != null) {
                       question.childQuestions.forEach((childQuestion: QuestionDefinition) => {
                         if (childQuestion.options != null) {
+                          type = Filter.OPTION_TYPE;
                           childQuestion.options.forEach((option: Option) => {
                             options.push(new NameValue(option.optionStableId, option.optionText));
                             if (option?.nestedOptions != null) {
@@ -470,6 +470,7 @@ export class ParticipantListComponent implements OnInit {
                           });
                         }
                         if (childQuestion.groups != null) {
+                          type = Filter.OPTION_TYPE;
                           childQuestion.groups.forEach((group: Group) => {
                             options.push(new NameValue(group.groupStableId, group.groupText));
                             if (group.options != null) {
@@ -563,6 +564,23 @@ export class ParticipantListComponent implements OnInit {
         } else {
           this.dataSources.delete('a');
         }
+
+        if (jsonData.hasProxyData != null) {
+          this.dataSources.set('proxy', 'Proxy');
+          const possibleColumns: Array<Filter> = [];
+          possibleColumns.push(new Filter(new ParticipantColumn('First Name', 'firstName', 'proxy', null, true), Filter.TEXT_TYPE));
+          possibleColumns.push(new Filter(new ParticipantColumn('Last Name', 'lastName', 'proxy', null, true), Filter.TEXT_TYPE));
+          possibleColumns.push(new Filter(new ParticipantColumn('Email', 'email', 'proxy', null, true), Filter.TEXT_TYPE));
+
+          this.sourceColumns['proxy'] = possibleColumns;
+          this.selectedColumns['proxy'] = [];
+          possibleColumns.forEach(filter => {
+            const tmp = filter.participantColumn.object != null ? filter.participantColumn.object : filter.participantColumn.tableAlias;
+            this.allFieldNames.add(tmp + '.' + filter.participantColumn.name);
+          });
+          this.orderColumns();
+        }
+
         if (jsonData.filters != null) {
           jsonData.filters.forEach((val) => {
             const view: ViewFilter = ViewFilter.parseFilter(val, this.sourceColumns);
@@ -675,21 +693,7 @@ export class ParticipantListComponent implements OnInit {
         if (jsonData.hasComputedObject) {
           this.addAutomatedScoringColumns();
         }
-        if (jsonData.hasProxyData != null) {
-          this.dataSources.set('proxy', 'Proxy');
-          const possibleColumns: Array<Filter> = [];
-          possibleColumns.push(new Filter(new ParticipantColumn('First Name', 'firstName', 'proxy', null, true), Filter.TEXT_TYPE));
-          possibleColumns.push(new Filter(new ParticipantColumn('Last Name', 'lastName', 'proxy', null, true), Filter.TEXT_TYPE));
-          possibleColumns.push(new Filter(new ParticipantColumn('Email', 'email', 'proxy', null, true), Filter.TEXT_TYPE));
 
-          this.sourceColumns['proxy'] = possibleColumns;
-          this.selectedColumns['proxy'] = [];
-          possibleColumns.forEach(filter => {
-            const tmp = filter.participantColumn.object != null ? filter.participantColumn.object : filter.participantColumn.tableAlias;
-            this.allFieldNames.add(tmp + '.' + filter.participantColumn.name);
-          });
-          this.orderColumns();
-        }
         if (jsonData.hideESFields != null) {
           const hideESFields: Value[] = [];
           jsonData.hideESFields.forEach((val) => {
@@ -725,7 +729,6 @@ export class ParticipantListComponent implements OnInit {
         this.getData();
         this.deleteFiltersAccordingToPermission();
         this.removeUnnecessaryColumns();
-
       },
       // this.renewSelectedColumns(); commented out because if we have defaultColumns for all the studies we won't need it anymore
       error: err => {
@@ -737,7 +740,6 @@ export class ParticipantListComponent implements OnInit {
       }
     });
   }
-
 
   private deleteFiltersAccordingToPermission(): void {
     let columnNamesToDelete: string[];

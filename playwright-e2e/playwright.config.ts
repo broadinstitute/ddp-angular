@@ -16,8 +16,8 @@ const testConfig: PlaywrightTestConfig = {
   globalSetup: require.resolve('./fixtures/global-setup'),
   testDir: '.',
   testMatch: '**/*.spec.ts',
-  /* Maximum time one test can run for. Test should be short and takes less than 2 minutes to run */
-  timeout: 120 * 1000,
+  /* Maximum timeout per test. Test should be short and takes less than 2 min or 3 min in docker container to run */
+  timeout: process.env.CI ? 180 * 1000 : 120 * 1000,
   /* For expect() calls */
   expect: {
     /**
@@ -42,11 +42,19 @@ const testConfig: PlaywrightTestConfig = {
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 1 : 0,
   workers: process.env.CI ? 2 : 3,
-  maxFailures: process.env.CI ? 10 : 3,
+  maxFailures: process.env.CI ? 10 : 0,
 
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: [
-    ['html', { open: 'never', outputFolder: 'html-test-results', host: '0.0.0.0', port: 9223 }],
+    [
+      'html',
+      {
+        open: 'never',
+        outputFolder: 'html-test-results',
+        host: '0.0.0.0',
+        port: 9223
+      }
+    ],
     ['list'],
     ['junit', { outputFile: 'junit/results/results.xml' }]
   ],
@@ -57,9 +65,10 @@ const testConfig: PlaywrightTestConfig = {
   use: {
     headless: true,
     /* Maximum time each (browser) action such as `click()` can take. Defaults to 0 (no limit). */
-    actionTimeout: 10 * 1000,
+    actionTimeout: process.env.CI ? 30 * 1000 : 10 * 1000,
     navigationTimeout: 30 * 1000,
     acceptDownloads: true,
+    testIdAttribute: 'data-ddp-test',
 
     /* Base URL to use in actions like `await page.goto('/')`. */
     // baseURL: 'http://localhost:3000',
@@ -67,7 +76,7 @@ const testConfig: PlaywrightTestConfig = {
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: process.env.CI ? 'on-first-retry' : 'retain-on-failure',
     screenshot: 'only-on-failure',
-    video: process.env.CI ? 'on-first-retry' : 'retain-on-failure', // Limit load on CI system because trace and video add load
+    video: process.env.video ? 'on' : process.env.CI ? 'on-first-retry' : 'retain-on-failure', // Limit load on CI system because trace and video add load
 
     userAgent:
       'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) ' +

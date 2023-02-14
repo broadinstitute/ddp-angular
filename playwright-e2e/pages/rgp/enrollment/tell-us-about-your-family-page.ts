@@ -1,6 +1,7 @@
 import { expect, Locator, Page } from '@playwright/test';
 import Question from 'lib/component/Question';
-import Input from 'lib/widget/Input';
+import Checkbox from 'lib/widget/checkbox';
+import Input from 'lib/widget/input';
 import Select from 'lib/widget/select';
 import TextArea from 'lib/widget/textarea';
 import { RgpPageBase } from 'pages/rgp/rgp-page-base';
@@ -38,15 +39,6 @@ export default class TellUsAboutYourFamilyPage extends RgpPageBase {
    */
   patientRelationship(): Select {
     return new Select(this.page, { label: 'The patient is [select from list]' });
-  }
-
-  /**
-   * Question: State the family lives in *
-   * <br> Type: Select
-   * @returns {Select}
-   */
-  state(): Select {
-    return new Select(this.page, { label: 'State the family lives in' });
   }
 
   /**
@@ -203,7 +195,7 @@ export default class TellUsAboutYourFamilyPage extends RgpPageBase {
    * <br> Type: Checkbox list
    * @returns Question
    */
-  indicatePatientHadFollowingTest(): Question {
+  indicateAnyFollowingTest(): Question {
     return new Question(this.page, { prompt: 'Please indicate if the patient has had any of the following tests' });
   }
 
@@ -212,19 +204,158 @@ export default class TellUsAboutYourFamilyPage extends RgpPageBase {
    * <br> Type: Checkbox list
    * @returns Question
    */
-  indicateAnyPatientBiopsiesAvailable(): Question {
+  indicateAnyBiopsiesAvailable(): Question {
     return new Question(this.page, { prompt: 'Please indicate if any patient biopsies may be available' });
   }
 
   /**
    * Question: Is the patient currently participating in other research studies with genetic evaluations?
    * <br> Type: Radiobutton list
-   * @returns {Radiobutton}
+   * @returns {Question}
    */
-  isPatientParticipatingInResearchStudies(): Question {
+  isPatientParticipatingInOtherResearchStudies(): Question {
     return new Question(this.page, {
       prompt: 'Is the patient currently participating in other research studies with genetic evaluations'
     });
+  }
+
+  /** Step 3 questions */
+
+  /**
+   * Question: Patient's Biological Mother's Race
+   * <br> Type: Select
+   * @returns {Question}
+   */
+  patientBiologicalMotherRace(): Question {
+    return new Question(this.page, {
+      prompt: "Patient's Biological Mother's Race"
+    });
+  }
+
+  /**
+   * Question: Patient's Biological Mother's Ethnicity
+   * <br> Type: Radiobutton list
+   * @returns {Question}
+   */
+  patientBiologicalMotherEthnicity(): Question {
+    return new Question(this.page, { prompt: "Patient's Biological Mother's Ethnicity" });
+  }
+
+  /**
+   * Question: Does the patient's biological mother have the same genetic medical condition as the patient?
+   * <br> Type: Radiobutton list
+   * @returns {Question}
+   */
+  doesMotherHaveSameGeneticMedicalCondition(): Question {
+    return new Question(this.page, {
+      prompt: "Does the patient's biological mother have the same genetic medical condition as the patient"
+    });
+  }
+
+  /**
+   * Question: Is the patient's biological mother able to participate in the study?
+   * <br> Type: Radiobutton list
+   * @returns {Question}
+   */
+  isPatientBiologicalMotherAbleToParticipateStudy(): Question {
+    return new Question(this.page, { prompt: "Is the patient's biological mother able to participate in the study?" });
+  }
+
+  /**
+   * Question: Patient's Biological Father's Race
+   * <br> Type: Select
+   * @returns {Question}
+   */
+  patientBiologicalFatherRace(): Question {
+    return new Question(this.page, {
+      prompt: "Patient's Biological Father's Race"
+    });
+  }
+
+  /**
+   * Question: Patient's Biological Father's Ethnicity
+   * <br> Type: Radiobutton list
+   * @returns {Question}
+   */
+  patientBiologicalFatherEthnicity(): Question {
+    return new Question(this.page, { prompt: "Patient's Biological Father's Ethnicity" });
+  }
+
+  /**
+   * Question: Does the patient's biological father have the same genetic medical condition as the patient?
+   * <br> Type: Radiobutton list
+   * @returns {Question}
+   */
+  doesFatherHaveSameGeneticMedicalCondition(): Question {
+    return new Question(this.page, {
+      prompt: "Does the patient's biological father have the same genetic medical condition as the patient"
+    });
+  }
+
+  /**
+   * Question: Is the patient's biological father able to participate in the study?
+   * <br> Type: Radiobutton list
+   * @returns {Question}
+   */
+  isPatientBiologicalFatherAbleToParticipateStudy(): Question {
+    return new Question(this.page, { prompt: "Is the patient's biological father able to participate in the study?" });
+  }
+
+  /**
+   * Question: Patient doesn't have any siblings
+   * <br> Type: Checkbox
+   * @returns {Checkbox}
+   */
+  doesNotHaveAnySiblings(): Checkbox {
+    return new Checkbox(this.page, { label: "Patient doesn't have any siblings" });
+  }
+
+  /**
+   * Question: Patient doesn't have any children
+   * <br> Type: Checkbox
+   * @returns {Checkbox}
+   */
+  doesNotHaveAnyChildren(): Checkbox {
+    return new Checkbox(this.page, { label: "Patient doesn't have any children" });
+  }
+
+  /**
+   * Question: Patient doesn't have any other family members affected by the condition
+   * <br> Type: Checkbox
+   * @returns {Checkbox}
+   */
+  doesNotHaveAnyOtherFamilyMembersAffectedByCondition(): Checkbox {
+    return new Checkbox(this.page, { label: "Patient doesn't have any other family members affected by the condition" });
+  }
+
+  /**
+   * I agree that the information I entered here will be stored in a secure database and may be used to
+   *   match me to a research study—the Rare Genomes Project.
+   * <br> Type: Checkbox
+   * @returns {Checkbox}
+   */
+  iAgreeToMatchToResearchStudy(): Checkbox {
+    return new Checkbox(this.page, { label: 'I agree that the information I entered here will be stored in a secure database' });
+  }
+
+  /**
+   * I agree that if the information that I entered is a match for the Rare Genomes Project now
+   *   or in the future, I may be contacted about my possible participation.
+   * <br> Type: Checkbox
+   * @returns {Checkbox}
+   */
+  iAgreeToBeContacted(): Checkbox {
+    return new Checkbox(this.page, { label: 'I agree that if the information that I entered is a match' });
+  }
+
+  /**
+   * I understand that if I would like my information deleted from our database now or in the future,
+   *   I can email raregenomes@broadinstitute.org and my information will be removed from the database.
+   * <br> Type: Checkbox
+   * @returns {Checkbox}
+   */
+  iUnderstand(): Checkbox {
+    return new Checkbox(this.page, { label: 'I understand that if I would like my information deleted from our database now' });
   }
 
   /** Click "Next" button */

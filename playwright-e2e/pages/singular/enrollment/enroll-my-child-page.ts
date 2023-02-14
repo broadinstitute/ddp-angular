@@ -1,7 +1,7 @@
 import { Page } from '@playwright/test';
 import { SingularPage } from 'pages/singular/singular-page';
 import Question from 'lib/component/Question';
-import Input from 'lib/widget/Input';
+import Input from 'lib/widget/input';
 
 export default class EnrollMyChildPage extends SingularPage {
   constructor(page: Page) {

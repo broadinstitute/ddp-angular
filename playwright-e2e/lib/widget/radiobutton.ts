@@ -14,8 +14,8 @@ export default class Radiobutton extends WidgetBase {
     this.elementLocator = ddpTestID
         ? this.rootLocator.locator(`mat-radio-button[data-ddp-test="${ddpTestID}"]`) // Label ignored if ddpTestID is specified
         : exactMatch
-            ? this.rootLocator.locator(`xpath=//mat-radio-button[.//input[@id=(//label[.//text()[normalize-space()="${label}"]]/@for)]]`)
-            : this.rootLocator.locator(`xpath=//mat-radio-button[.//input[@id=(//label[contains(normalize-space(.),"${label}")]/@for)]]`);
+            ? this.rootLocator.locator(`xpath=.//mat-radio-button[.//input[@id=(//label[.//text()[normalize-space()="${label}"]]/@for)]]`)
+            : this.rootLocator.locator(`xpath=.//mat-radio-button[.//input[@id=(//label[contains(normalize-space(.),"${label}")]/@for)]]`);
   }
 
   toLocator(): Locator {

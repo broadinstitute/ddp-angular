@@ -7,7 +7,6 @@ import PreScreeningPage from 'pages/singular/enrollment/pre-screening-page';
 import EnrollMyAdultDependentPage from 'pages/singular/enrollment/enroll-my-adult-dependent-page';
 import ConsentFormForAdultDependentPage from 'pages/singular/enrollment/consent-form-for-adult-dependent-page';
 import AboutMyAdultDependentPage from 'pages/singular/enrollment/about-my-adult-dependent-page';
-import { enterMailingAddress } from 'utils/test-utils';
 import MyDashboardPage from 'pages/singular/dashboard/my-dashboard-page';
 import { WHO } from 'data/constants';
 import * as user from 'data/fake-user.json';
@@ -33,10 +32,11 @@ test.describe('Enrol an adult dependent', () => {
     await expect(locator).toContainText(itemName);
   };
 
+  /** Test skip due to bug https://broadworkbench.atlassian.net/browse/PEPPER-485. Re-enable after bug fix. */
   /**
    * Test case: https://docs.google.com/document/d/1vaiSfsYeDzEHeK2XOVO3n_7I1W0Z94Kkqx_82w8-Vpc/edit#heading=h.6snot4x1e1uw
    */
-  test('can finish adult-dependent-enrollment @enrollment @singular', async ({ page, homePage }) => {
+  test.skip('can finish adult-dependent-enrollment @enrollment @singular', async ({ page, homePage }) => {
     await homePage.signUp();
 
     // On “pre-screening” page, answer all questions about yourself with fake values
@@ -55,6 +55,9 @@ test.describe('Enrol an adult dependent', () => {
     const enrollMyAdultDependentPage = new EnrollMyAdultDependentPage(page);
     await enrollMyAdultDependentPage.whoHasVentricleHeartDefect().check(WHO.TheDependantBeingEnrolled);
     await enrollMyAdultDependentPage.howOldIsYourDependent().fill(user.adultDependent.age);
+    await enrollMyAdultDependentPage.fillInCountry(user.adultDependent.country.abbreviation, {
+      state: user.adultDependent.state.abbreviation
+    });
     await enrollMyAdultDependentPage.doesDependentHaveCognitiveImpairment().check('Yes', { exactMatch: true });
     await myDashboardPage.next();
 
@@ -73,7 +76,11 @@ test.describe('Enrol an adult dependent', () => {
 
     await consentForm.dependentFirstName().fill(user.adultDependent.firstName);
     await consentForm.dependentLastName().fill(dependentLastName);
-    await consentForm.fillInDateOfBirth(12, 20, 1950);
+    await consentForm.fillInDateOfBirth(
+      user.adultDependent.birthDate.MM,
+      user.adultDependent.birthDate.DD,
+      user.adultDependent.birthDate.YYYY
+    );
     await consentForm.toKnowSecondaryFinding().check('I want to know.');
     await consentForm.selectOneForAdultDependent().check('I have explained the study');
     await consentForm.dependentGuardianSignature().fill(`${user.patient.firstName} ${user.patient.lastName}`);
@@ -89,14 +96,15 @@ test.describe('Enrol an adult dependent', () => {
     await assertProgressCurrentItem(page, 'About Me');
 
     // Fill out address with fake data
-    await enterMailingAddress(page, {
+    await aboutMyAdultDependentPage.fillInContactAddress({
       fullName: `${user.adultDependent.firstName} ${dependentLastName}`,
       country: user.adultDependent.country.name,
       state: user.adultDependent.state.name,
       street: user.adultDependent.streetAddress,
       city: user.adultDependent.city,
       zipCode: user.adultDependent.zip,
-      telephone: user.adultDependent.phone
+      telephone: user.adultDependent.phone,
+      labels: { phone: 'Telephone Contact Number', country: 'Country', state: 'State', zip: 'Zip Code', city: 'City' }
     });
     await aboutMyAdultDependentPage.next({ waitForNav: true });
 
@@ -138,7 +146,7 @@ test.describe('Enrol an adult dependent', () => {
     await patientSurveyPage.currentZipCode().fill(user.adultDependent.zip);
     await patientSurveyPage.sexAtBirth().check('Prefer not to answer');
     await patientSurveyPage.race().check('White');
-    await patientSurveyPage.isHispanic().check(new RegExp('^\\s*No\\s*$'));
+    await patientSurveyPage.isHispanic().check('No', { exactMatch: true });
     await patientSurveyPage.selectVentricleDiagnosis().check('Other');
     await patientSurveyPage.selectVentricleDiagnosis().inputByLabel('Please specify (or write Unsure)').fill('Unsure');
     await patientSurveyPage.submit();

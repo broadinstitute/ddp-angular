@@ -1,6 +1,6 @@
 import { Page } from '@playwright/test';
 import { SingularPage } from 'pages/singular/singular-page';
-import Input from 'lib/widget/Input';
+import Input from 'lib/widget/input';
 
 export default class AboutMyChildPage extends SingularPage {
   constructor(page: Page) {

@@ -1,4 +1,5 @@
 import { expect, Locator, Page } from '@playwright/test';
+import Button from 'lib/widget/button';
 import Checkbox from 'lib/widget/checkbox';
 import Select from 'lib/widget/select';
 
@@ -7,13 +8,15 @@ export default class Question {
   private readonly locator: Locator;
   private readonly rootLocator: Locator;
 
-  constructor(page: Page, opts: { prompt: string | RegExp; parentSelector?: Locator }) {
-    const { prompt, parentSelector } = opts;
+  constructor(page: Page, opts: { prompt?: string | RegExp; cssClassAttribute?: string; parentSelector?: Locator }) {
+    const { prompt, cssClassAttribute, parentSelector } = opts;
     this.page = page;
     this.rootLocator = parentSelector ? parentSelector : this.page.locator('ddp-activity-question');
     // Look for text somewhere inside element. Text matching is case-insensitive and searches for a substring or regex.
     // Caution: If text contains a punctuation colon or/and single quote, find is likely to fail.
-    this.locator = this.rootLocator.filter({ hasText: prompt });
+    this.locator = prompt
+      ? this.rootLocator.filter({ hasText: prompt })
+      : this.rootLocator.filter({ has: this.page.locator(`css=${cssClassAttribute}`) });
   }
 
   toLocator(): Locator {
@@ -22,6 +25,13 @@ export default class Question {
 
   errorMessage(): Locator {
     return this.toLocator().locator('.ErrorMessage');
+  }
+
+  button(label: string): Button {
+    return new Button(this.page, {
+      label,
+      root: this.rootLocator
+    });
   }
 
   /**
@@ -34,7 +44,7 @@ export default class Question {
       return this.toLocator().locator('select');
     }
     return this.toLocator().locator('select', {
-      has: this.page.locator(`//*[contains(normalize-space(.),"${label}")]`)
+      has: this.page.locator(`xpath=//*[contains(normalize-space(.),"${label}")]`)
     });
   }
 
@@ -76,6 +86,7 @@ export default class Question {
   /**
    * <br> Tag name: mat-radio-button
    * @param value
+   * @param opts: {boolean} exactMatch
    */
   radioButton(value: string | RegExp, opts: { exactMatch?: boolean } = {}): Locator {
     const { exactMatch = false } = opts;
@@ -85,30 +96,44 @@ export default class Question {
   }
 
   /**
-   * Typing text or numerical value
+   * Typing text. If text triggers an autocomplete dropdown, automatically selects the first option.
    * @param value
    */
   async fill(value: string): Promise<void> {
-    await this.input().fill(value);
-    await this.input().press('Tab');
+    const input = this.input();
+    const autocomplete = await input.getAttribute('aria-autocomplete');
+    await input.fill(value);
+    const expanded = await input.getAttribute('aria-expanded');
+    if (autocomplete === 'list' && expanded === 'true') {
+      const dropdown = this.page.locator('.mat-autocomplete-visible[role="listbox"][id]');
+      await dropdown
+        .locator('mat-option:visible', { hasText: new RegExp(value) })
+        .first()
+        .click();
+    } else {
+      await input.press('Tab');
+    }
   }
 
   /**
    * Check a checkbox or radiobutton.
-   * @param {string | RegExp} value
+   * @param {string} label
    * @param {{exactMatch?: boolean}} opts exactMatch: If set to true, match by exact string or substring
    * @returns {Promise<void>}
    */
-  async check(value: string | RegExp, opts: { exactMatch?: boolean } = {}): Promise<void> {
+  async check(label?: string, opts: { exactMatch?: boolean } = {}): Promise<void> {
     const { exactMatch = false } = opts;
-    let loc = this.toLocator().locator('mat-radio-button, mat-checkbox');
-    loc = exactMatch
-      ? loc.filter({ has: this.page.locator(`text="${value}"`) })
-      : loc.filter({ has: this.page.locator('label', { hasText: value }) });
-    const isChecked = await Question.isChecked(loc);
+
+    const locator = this.toLocator().locator('mat-radio-button, mat-checkbox');
+    const textLocator = exactMatch ? this.page.locator(`text="${label}"`) : this.page.locator('label', { hasText: label });
+
+    const filterLocator = label ? locator.filter({ has: textLocator }) : locator;
+
+    const isChecked = await Question.isChecked(filterLocator);
+
     if (!isChecked) {
-      await loc.click();
-      await expect(loc).toHaveClass(/checkbox-checked|radio-checked/);
+      await filterLocator.locator('.mat-radio-label, .mat-checkbox-layout').click();
+      await expect(filterLocator).toHaveClass(/checkbox-checked|radio-checked/);
     }
   }
 

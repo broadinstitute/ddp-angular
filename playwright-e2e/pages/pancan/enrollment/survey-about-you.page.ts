@@ -1,8 +1,8 @@
 import { expect, Locator, Page } from '@playwright/test';
 import Question from 'lib/component/Question';
-import { PancanPage } from 'pages/pancan/pancan-page';
+import { PancanPageBase } from 'pages/pancan/pancan-page-base';
 
-export default class SurveyAboutYouPage extends PancanPage {
+export default class SurveyAboutYouPage extends PancanPageBase {
   constructor(page: Page) {
     super(page);
   }
@@ -11,12 +11,23 @@ export default class SurveyAboutYouPage extends PancanPage {
     await this.sexAssignedAtBirth().toLocator().waitFor({ state: 'visible' });
   }
 
-  //Question select
+  /**
+   * Question: Sex assigned at birth is the assignment and classification of people as male, female,
+   *   or intersex based on a combination of external anatomy, internal anatomy, hormones, and chromosomes.
+   * Type: Radiobutton
+   * @returns {Question}
+   */
   sexAssignedAtBirth(): Question {
-    return new Question(this.page, { prompt: 'What sex were you assigned at birth?' });
+    return new Question(this.page, { prompt: new RegExp(/What sex (were you|was your child) assigned at birth\?/) });
   }
 
-  //Question select
+  /**
+   * Question: Gender identity is a term to describe a person's inner sense of being male, female, both,
+   *   neither or some other gender. It can correspond to or differ from a person's sex assigned at birth.
+   * Type: Checkbox
+   * @param {string} label
+   * @returns {Locator}
+   */
   genderIdentity(label: string): Locator {
     return this.page
       .locator('.picklist-answer-GENDER_IDENTITY >> mat-checkbox')
@@ -24,7 +35,7 @@ export default class SurveyAboutYouPage extends PancanPage {
   }
 
   //Question selectInput
-  categoriesDecribesYou(label: string): Locator {
+  raceCategoriesDescribesYou(label: string): Locator {
     return this.page.locator('.picklist-answer-RACE >> mat-checkbox').filter({ has: this.page.locator(`text="${label}"`) });
   }
 
@@ -44,9 +55,27 @@ export default class SurveyAboutYouPage extends PancanPage {
     await expect(loc).toHaveClass(/checkbox-checked/);
   }
 
-  async checkCategoriesDecribesYou(option: string) {
-    const loc = this.categoriesDecribesYou(option);
+  async checkRaceCategoriesDescribesYou(option: string) {
+    const loc = this.raceCategoriesDescribesYou(option);
     await loc.click();
     await expect(loc).toHaveClass(/checkbox-checked/);
+  }
+
+  async fillInSurveyAboutYou(
+    opts: { sex?: string; gender?: string; race?: string; howDidYouHearAboutProject?: string } = {}
+  ): Promise<void> {
+    const {
+      sex = 'Male',
+      gender = 'Man',
+      race = 'White',
+      howDidYouHearAboutProject = 'Social media (Facebook, Twitter, Instagram, etc.)'
+    } = opts;
+    await this.waitForReady();
+    await this.sexAssignedAtBirth().radioButton(sex, { exactMatch: true }).locator('label').click();
+    await this.checkGenderIdentity(gender);
+    await this.checkRaceCategoriesDescribesYou(race);
+    await this.checkRaceCategoriesDescribesYou('English');
+    await this.howDidYouHearAboutProject().check(howDidYouHearAboutProject);
+    await this.howDidYouHearAboutProject().check('Facebook', { exactMatch: true });
   }
 }

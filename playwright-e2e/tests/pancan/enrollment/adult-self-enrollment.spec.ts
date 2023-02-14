@@ -7,18 +7,18 @@ import { assertActivityHeader, assertActivityStep } from 'utils/assertion-helper
 import ConsentFormPage from 'pages/pancan/enrollment/consent-form-page';
 import { generateUserName } from 'utils/faker-utils';
 import * as user from 'data/fake-user.json';
-import { enterMailingAddress } from 'utils/test-utils';
 import MedicalReleaseFormPage from 'pages/pancan/enrollment/medical-release-form-page';
 import { expect } from '@playwright/test';
-import { PatientsData } from 'pages/pancan/enrollment/utils/PatientType';
-import SurveyCervicalCancerPage from 'pages/pancan/enrollment/survey-cervical-cancer-page';
+import { PatientsData } from 'pages/patient-type';
+import SurveyAboutCancerPage from 'pages/pancan/enrollment/survey-about-cancer-page';
 import SurveyAboutYouPage from 'pages/pancan/enrollment/survey-about-you.page';
-import ParticipantDashboardPage from 'pages/pancan/dashboard/participant-dashboard-page';
-import HomePage from 'pages/pancan/home/home-page';
+import DashboardPage from 'pages/pancan/dashboard-page';
+import HomePage from 'pages/pancan/home-page';
+
 const { PANCAN_USER_EMAIL, PANCAN_USER_PASSWORD } = process.env;
 
 test.describe('Enroll myself as adult', () => {
-  test('can complete self-enrollment @enrollment @pancan', async ({ page }) => {
+  test('can complete self-enrollment @enrollment @pancan @functional', async ({ page }) => {
     const pancanHomePage = new HomePage(page);
     await pancanHomePage.join({ waitForNav: true });
     // Randomize last name
@@ -33,13 +33,12 @@ test.describe('Enroll myself as adult', () => {
     //diagnosis page
     const preScreeningDiagnosisPage = new PreScreeningDiagnosisPage(page);
     await preScreeningDiagnosisPage.waitForReady();
-    await preScreeningDiagnosisPage.cancerDiagnosed().input().fill(PatientsData.adult.cancerDiagnosed.cancer);
-    await page.waitForResponse((resp) => resp.url().includes('/answers') && resp.status() === 200);
+    await preScreeningDiagnosisPage.cancerDiagnosed().fill(PatientsData.adult.cancerDiagnosed.typeCancer);
     await preScreeningDiagnosisPage.next();
     //age/location page
     const preScreeningAgeLocationPage = new PreScreeningAgeLocationPage(page);
     await preScreeningAgeLocationPage.waitForReady();
-    await preScreeningAgeLocationPage.enterInformationAboutAgeLocation();
+    await preScreeningAgeLocationPage.fillInAgeLocation();
 
     // Step 2
     // Enter email alias and password to create new account
@@ -56,48 +55,54 @@ test.describe('Enroll myself as adult', () => {
     await consentFormPage.next();
     // On "Consent Form" page, Page 3 of 3.
     await assertActivityStep(page, '3');
-    await consentFormPage.bloodSamples();
-    await consentFormPage.cancerSamples();
+    await consentFormPage.agreeToBloodSamples();
+    await consentFormPage.agreeToStoreCancerSamples();
     await consentFormPage.firstName().fill(user.patient.firstName);
     await consentFormPage.lastName().fill(lastName);
     await consentFormPage.fillInDateOfBirth(user.patient.birthDate.MM, user.patient.birthDate.DD, user.patient.birthDate.YYYY);
     await consentFormPage.signature().fill(`${user.patient.firstName} ${lastName}`);
-    await enterMailingAddress(page, { fullName: `${user.patient.firstName} ${lastName}` }, 'Phone');
+    await expect(consentFormPage.getSubmitButton()).toBeEnabled();
+
+    await consentFormPage.fillInContactAddress({ fullName: `${user.patient.firstName} ${lastName}` });
     await consentFormPage.submit();
+
     //On "Medical Release Form"
     await assertActivityHeader(page, 'Medical Release Form');
     const medicalReleaseFormPage = new MedicalReleaseFormPage(page);
     await medicalReleaseFormPage.waitForReady();
-    await medicalReleaseFormPage.enterPhysicianData();
-    await medicalReleaseFormPage.contactPhysician().toLocator().click();
+    await medicalReleaseFormPage.fillInInPhysicianData();
+    await medicalReleaseFormPage.agreeToAllowContactPhysician().check();
     await medicalReleaseFormPage.submit();
+
     //Survey: About Cervical Cancer
     await assertActivityHeader(page, 'Survey: About Your Cervical cancer');
-    const surveCervicalCancerPage = new SurveyCervicalCancerPage(page);
-    await surveCervicalCancerPage.waitForReady();
-    await surveCervicalCancerPage.cervicalCancerDiagnosedDate('March', '2015');
-    await surveCervicalCancerPage.fillCancerBodyPlaces('Appendix');
-    await surveCervicalCancerPage.cancerFree().radioButton('Yes').locator('label').click();
-    await surveCervicalCancerPage.fillBodyPlacesEverHadCancer('Appendix');
-    await surveCervicalCancerPage.checkTreatmentsReceived('Radiation');
-    await surveCervicalCancerPage.medicationsList().fill('many others');
-    await surveCervicalCancerPage.submit();
+    const surveyCervicalCancerPage = new SurveyAboutCancerPage(page);
+    await surveyCervicalCancerPage.waitForReady();
+    await surveyCervicalCancerPage.diagnosedDate('March', '2015');
+    await surveyCervicalCancerPage.fillCancerBodyPlaces('Appendix');
+    await surveyCervicalCancerPage.cancerFree().radioButton('Yes').locator('label').click();
+    await surveyCervicalCancerPage.fillBodyPlacesEverHadCancer('Appendix');
+    await surveyCervicalCancerPage.checkTreatmentsReceived('Radiation');
+    await surveyCervicalCancerPage.medicationsList().fill('many others');
+    await surveyCervicalCancerPage.submit();
+
     //Survey: About you
     await assertActivityHeader(page, 'Survey: About You');
-    const survayAboutYou = new SurveyAboutYouPage(page);
-    await survayAboutYou.waitForReady();
-    await survayAboutYou.sexAssignedAtBirth().radioButton('Male', { exactMatch: true }).locator('label').click();
-    await survayAboutYou.checkGenderIdentity('Man');
-    await survayAboutYou.checkCategoriesDecribesYou('White');
-    await survayAboutYou.checkCategoriesDecribesYou('English');
-    await survayAboutYou.howDidYouHearAboutProject().check('Social media (Facebook, Twitter, Instagram, etc.)');
-    await survayAboutYou.howDidYouHearAboutProject().check('Facebook', { exactMatch: true });
-    await survayAboutYou.submit();
-    //dashboard
-    const participantDashborad = new ParticipantDashboardPage(page);
-    await participantDashborad.waitForReady();
+    const surveyAboutYou = new SurveyAboutYouPage(page);
+    await surveyAboutYou.waitForReady();
+    await surveyAboutYou.sexAssignedAtBirth().radioButton('Male', { exactMatch: true }).locator('label').click();
+    await surveyAboutYou.checkGenderIdentity('Man');
+    await surveyAboutYou.checkRaceCategoriesDescribesYou('White');
+    await surveyAboutYou.checkRaceCategoriesDescribesYou('English');
+    await surveyAboutYou.howDidYouHearAboutProject().check('Social media (Facebook, Twitter, Instagram, etc.)');
+    await surveyAboutYou.howDidYouHearAboutProject().check('Facebook', { exactMatch: true });
+    await surveyAboutYou.submit();
+
+    //Dashboard
+    const participantDashboard = new DashboardPage(page);
+    await participantDashboard.waitForReady();
     const orderedHeaders = ['Form', 'Summary', 'Status', 'Actions'];
-    const table = participantDashborad.getDashboardTable();
+    const table = participantDashboard.getDashboardTable();
     await table.waitForReady();
     const headers = await table.getHeaderNames();
     expect(headers).toHaveLength(4); // Four columns in table

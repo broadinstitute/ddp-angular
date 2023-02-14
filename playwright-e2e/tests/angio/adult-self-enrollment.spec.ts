@@ -63,19 +63,19 @@ test.describe('Adult Enrollment', () => {
     // Question 4
     await aboutYou.whereCurrentlyHaveInBody(['Head/Face/Neck (not scalp)']);
     // Question 5
-    await aboutYou.hadSurgeryToRemoveAngiosarcoma(new RegExp('^No'));
+    await aboutYou.hadSurgeryToRemoveAngiosarcoma('No');
     // Question 6
-    await aboutYou.hadRadiationTreatmentForAngiosarcoma(new RegExp('^No'));
+    await aboutYou.hadRadiationTreatmentForAngiosarcoma('No');
     // Question 8
-    await aboutYou.beingTreatedCurrentlyForAngiosarcoma(new RegExp('^No'));
+    await aboutYou.beingTreatedCurrentlyForAngiosarcoma('No');
     // Question 9
-    await aboutYou.diagnosedWithOtherCancer(new RegExp('^No'));
+    await aboutYou.diagnosedWithOtherCancer('No');
     // Question 11
     await aboutYou.howDidYouHearAbout('Friends and family');
     // Question 15
     await aboutYou.yearBorn(user.patient.birthDate.YYYY);
     // Question 16
-    const [selectedValue] = await aboutYou.country(user.patient.country.abbreviation);
+    const selectedValue = await aboutYou.fillInCountry(user.patient.country.abbreviation);
     expect(selectedValue).toEqual('US');
     await aboutYou.submit();
 
@@ -105,15 +105,15 @@ test.describe('Adult Enrollment', () => {
     // Step 5
     // Medical Release Form
     const medicalReleaseForm = new MedicalReleaseForm(page);
-    await medicalReleaseForm.yourContactInformation().input('Full Name').fill(user.patient.fullName);
-    await medicalReleaseForm.yourContactInformation().select('Country/Territory').selectOption(user.patient.country.name);
-    await medicalReleaseForm.yourContactInformation().select('State').selectOption(user.patient.state.name);
-    await medicalReleaseForm.yourContactInformation().input('Street Address').fill(user.patient.streetAddress);
-    await medicalReleaseForm.yourContactInformation().input('City').fill(user.patient.city);
-    await medicalReleaseForm.yourContactInformation().input('Zip Code').fill(user.patient.zip);
-    // Wait for Address Suggestion card
-    await medicalReleaseForm.yourContactInformation().addressSuggestion().radioButton('As Entered:').check();
-
+    await medicalReleaseForm.fillInContactAddress({
+      fullName: user.patient.fullName,
+      country: user.patient.country.name,
+      state: user.patient.state.name,
+      street: user.patient.streetAddress,
+      city: user.patient.city,
+      zipCode: user.patient.zip,
+      labels: { phone: 'Phone', country: 'Country', state: 'State', zip: 'Zip Code', city: 'City' }
+    });
     await medicalReleaseForm.yourPhysiciansNames().input('Physician Name').fill(user.doctor.name);
     await medicalReleaseForm.yourPhysiciansNames().input('Institution (if any)').fill(user.doctor.hospital);
     await medicalReleaseForm.yourPhysiciansNames().input('City').fill(user.doctor.city);

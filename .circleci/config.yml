@@ -1,5 +1,8 @@
 version: 2.1
 
+orbs:
+  node: circleci/node@5.1.0
+
 references:
   repo_path: &repo_path
       /home/circleci/repo
@@ -43,44 +46,24 @@ executors:
       NODE_ENV: development # Needed if playwright is in devDependencies
 
 commands:
-  app-build-and-store:
-    description: Run build and store archive of it
-    parameters:
-      study_key:
-        type: string
+  checkout-code:
+    description: "Git checkout and install dependencies"
     steps:
-      - setup-build-workspace
-      - set-deployment-environment
-      - setup-shared-env:
-          study_key: << parameters.study_key >>
-      - run-linter-check
-      - run-tests
-      - build-app:
-          study_key: << parameters.study_key >>
-      - store-app-build
-
-  app-build-and-deploy:
-    description: Run build and immediately deploy it to GAE
-    parameters:
-      study_key:
-        type: string
-      skip_build:
-        type: boolean
-        default: false
-    steps:
-      - setup-build-workspace
-      - setup-shared-env:
-          study_key: << parameters.study_key >>
-      - unless:
-          condition: << parameters.skip_build >>
-          steps:
-            - set-deployment-environment
-            - run-linter-check
-            - run-tests
-            - build-app:
-                study_key: << parameters.study_key >>
-            - deploy-exploded-build:
-                study_key: << parameters.study_key >>
+      - checkout:
+          path: *repo_path
+      - restore_cache: *npm_cache_restore_key
+      - run:
+          name: Install dependencies
+          command: |
+            if [[ ! -d node_modules ]]; then
+              npm ci
+            else
+              echo "package.json and package-lock.json unchanged, using cache"
+            fi
+      - save_cache:
+          key: *npm_cache_key
+          paths:
+            - ./node_modules
 
   set-deployment-environment:
     description: "Determine working environment"
@@ -278,24 +261,6 @@ commands:
             echo 'export BUILDS_BUCKET=ddp-build-artifacts' >> $BASH_ENV
             source $BASH_ENV
 
-  setup-build-workspace:
-    description: "Setup workspace used by all projects"
-    steps:
-      - checkout:
-          path: *repo_path
-      - restore_cache: *npm_cache_restore_key
-      - run:
-          name: Install dependencies
-          command: |
-            if [[ ! -d node_modules ]]; then
-              npm ci
-            else
-              echo "package.json and package-lock.json unchanged, using cache"
-            fi
-      - save_cache:
-          key: *npm_cache_key
-          paths:
-            - ./node_modules
 
   run-linter-check:
     description: "Run linter check"
@@ -325,48 +290,32 @@ commands:
       - store_artifacts:
           path: /tmp/junit
 
-  build-atcp-assets:
-    description: build atcp auth0 scripts & styles
-    steps:
-      - run:
-          name: build atcp auth0 scripts
-          command: |
-            set -u
-            ng build ddp-atcp-auth
-            npm run convert-atcp-auth-build-to-UMD
-      - run:
-          name: build atcp auth0 styles
-          command: |
-            set -u
-            ./node_modules/.bin/sass ./projects/ddp-atcp/src/auth0/auth0-styles/main.scss ./projects/ddp-atcp/src/auth0/compiled/auth0-styles/main.css --style compressed
-
-  execute-study-specific-commands:
-    description: run study specific commands if necessary
-    parameters:
-      study_key:
-        type: string
-        default: "UNKNOWN"
-    steps:
-      - when:
-          condition:
-            equal: [ atcp, << parameters.study_key >> ]
-          steps:
-            - build-atcp-assets
-
-  build-app:
+  build:
     description: "Build DDP study app"
     parameters:
       study_key:
         type: string
         default: "UNKNOWN"
     steps:
+      - checkout-code
+      - set-deployment-environment
+      - setup-shared-env:
+          study_key: << parameters.study_key >>
       - when:
           condition:
-            or:
-              - equal: [ atcp, << parameters.study_key >> ]
+            equal: [ atcp, << parameters.study_key >> ]
           steps:
-            - execute-study-specific-commands:
-                study_key: << parameters.study_key >>
+            - run:
+                name: build atcp auth0 scripts
+                command: |
+                  set -u
+                  ng build ddp-atcp-auth
+                  npm run convert-atcp-auth-build-to-UMD
+            - run:
+                name: build atcp auth0 styles
+                command: |
+                  set -u
+                  ./node_modules/.bin/sass ./projects/ddp-atcp/src/auth0/auth0-styles/main.scss ./projects/ddp-atcp/src/auth0/compiled/auth0-styles/main.css --style compressed
       - run:
           name: ng build
           command: |
@@ -484,13 +433,14 @@ commands:
             or:
               - equal: [ UNKNOWN, << parameters.env >> ]
               - equal: [ prod, << parameters.env >> ]
+              - equal: [ staging, << parameters.env >> ]
           steps:
             - run:
-                name: Step halt ENV=<< parameters.env >>
+                name: Halt job ENV=<< parameters.env >>
                 command: circleci-agent step halt
 
 jobs:
-  build-and-deploy-job:
+  app-deploy:
     working_directory: *ng_workspace_path
     parameters:
       study_key:
@@ -498,9 +448,12 @@ jobs:
     executor:
       name: build-executor
     steps:
-      - app-build-and-deploy:
+      - build:
           study_key: << parameters.study_key >>
-          skip_build: false
+      - run-linter-check
+      - run-tests
+      - deploy-exploded-build:
+          study_key: << parameters.study_key >>
 
   conditionally-launch-build-and-deploy-all-job:
     working_directory: *ng_workspace_path
@@ -559,13 +512,28 @@ jobs:
       - conditionally-launch-build-and-store:
           study_key: fon
 
-  app-build-and-store-job:
+  app-build:
     working_directory: *ng_workspace_path
     executor:
       name: build-executor
+    parameters:
+      study_key:
+        type: string
     steps:
-      - app-build-and-store:
-          study_key: << pipeline.parameters.study_key >>
+      - build:
+          study_key: << parameters.study_key >>
+      - run-linter-check
+      - run-tests
+      - run:
+          name: Short circuit - Don't store build artifacts if branch is a pull request
+          command: |
+            if [[ ${CIRCLE_PULL_REQUEST} ]]; then
+              echo "CIRCLE_PULL_REQUEST: $CIRCLE_PULL_REQUEST"
+              echo "CIRCLE_BRANCH: $CIRCLE_BRANCH"
+              echo "Skip store build"
+              circleci-agent step halt
+            fi
+      - store-app-build
 
   deploy-stored-build-job:
     working_directory: *ng_workspace_path
@@ -583,13 +551,13 @@ jobs:
     executor:
       name: build-executor
     steps:
-      - setup-build-workspace
+      - checkout-code
       - setup-shared-env:
           study_key: << pipeline.parameters.study_key >>
       - run-linter-check
       - run-tests
 
-  build-playwright-test-job:
+  playwright-build:
     executor: build-executor
     working_directory: *repo_path
     parameters:
@@ -598,54 +566,15 @@ jobs:
         type: enum
         enum: [ dev, test, staging, prod, UNKNOWN ]
     steps:
-      - halt-playwright-test-check:
-          env: << parameters.env >>
       - checkout:
           path: *repo_path
       - setup-shared-env
       - run:
           # Reading Vault secrets here because build-executor provides Vault set-up
-          name: Save Vault secrets to file to persist across jobs
+          name: Save Vault secrets into temp file to persist across jobs
           command: |
-            mkdir -p playwright-env
-
-            export sitePwd=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.sitePassword")
-            echo "export SITE_PASSWORD=$sitePwd" >> playwright-env/envvars
-
-            #DSM
-            export dsmUser=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[] | select(.app==\"dsm\") | .userName")
-            export dsmUserPassword=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[] | select(.app==\"dsm\") | .password")
-            echo "export DSM_USER_EMAIL=$dsmUser" >> playwright-env/envvars
-            echo "export DSM_USER_PASSWORD=$dsmUserPassword" >> playwright-env/envvars
-
-            # SINGULAR
-            export singularUser=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[] | select(.app==\"singular\") | .userName")
-            export singularUserPassword=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[] | select(.app==\"singular\") | .password")
-            echo "export SINGULAR_USER_EMAIL=$singularUser" >> playwright-env/envvars
-            echo "export SINGULAR_USER_PASSWORD=$singularUserPassword" >> playwright-env/envvars
-
-            # RGP
-            export rgpUser=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[] | select(.app==\"rgp\") | .userName")
-            export rgpUserPassword=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[] | select(.app==\"rgp\") | .password")
-            echo "export RGP_USER_PASSWORD=$rgpUserPassword" >> playwright-env/envvars
-            echo "export RGP_USER_EMAIL=$rgpUser" >> playwright-env/envvars
-
-            # Read Auth0 RGP client credentials
-            export rgpDomain=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.auth0 | .[] | select(.app==\"rgp\" and .env==\"<< parameters.env >>\") | .domain")
-            export rgpAudience=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.auth0 | .[] | select(.app==\"rgp\" and .env==\"<< parameters.env >>\") | .audience")
-            export rgpClientId=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.auth0 | .[] | select(.app==\"rgp\" and .env==\"<< parameters.env >>\") | .clientId")
-            export rgpClientSecret=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.auth0 | .[] | select(.app==\"rgp\" and .env==\"<< parameters.env >>\") | .clientSecret")
-            echo "export RGP_AUTH0_DOMAIN=rgpDomain" >> playwright-env/envvars
-            echo "export RGP_AUTH0_AUDIENCE=rgpAudience" >> playwright-env/envvars
-            echo "export RGP_AUTH0_CLIENT_ID=rgpClientId" >> playwright-env/envvars
-            echo "export RGP_AUTH0_CLIENT_SECRET=rgpClientSecret" >> playwright-env/envvars
-
-            # ANGIO
-            export angioUser=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[] | select(.app==\"angio\") | .userName")
-            export angioUserPassword=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[] | select(.app==\"angio\") | .password")
-            echo "export ANGIO_USER_PASSWORD=$angioUserPassword" >> playwright-env/envvars
-            echo "export ANGIO_USER_EMAIL=$angioUser" >> playwright-env/envvars
-
+            set -u
+            .circleci/export-playwright-env.sh
       - run:
           working_directory: *playwright_path
           name: npm install
@@ -665,7 +594,7 @@ jobs:
             - playwright-env # dir which contains env-variables file
             - playwright-e2e
 
-  run-playwright-test-job:
+  playwright-test:
     # Run Playwright tests only for targeted env: Dev, Test or Staging.
     executor: playwright-test-executor
     working_directory: *repo_path
@@ -674,10 +603,15 @@ jobs:
         default: dev
         type: enum
         enum: [ dev, test, staging, prod, UNKNOWN ]
-      parallel_num:
+      parallelism_num:
         type: integer
-        default: 3
-    parallelism: << parameters.parallel_num >>
+        default: 1
+      test_suite:
+        # to trigger E2E tests with labels matching study key:
+        # [basil, osteo, angio, brain, mbc, testboston, mpc, atcp, rarex, rgp, esc, prion, cgc, circadia, pancan, singular, brugada, lms, fon]
+        type: string
+        default: << pipeline.parameters.study_key >>
+    parallelism: << parameters.parallelism_num >>
     steps:
       - halt-playwright-test-check:
           env: << parameters.env >>
@@ -688,30 +622,34 @@ jobs:
           command: |
             cp "playwright-e2e/config/.env.<< parameters.env >>" .env
             cat .env | awk '/^[^#]/ {print "export " $0}' >> "$BASH_ENV"
-
             # export env from file (created in build-playwright-job)
             cat playwright-env/envvars | awk '{print "export " $0}' >> "$BASH_ENV"
-
             source "$BASH_ENV"
-      - run:
-          command: |
-            echo $RGP_AUTH0_DOMAIN
-            echo $RGP_AUTH0_AUDIENCE
-            echo $RGP_AUTH0_CLIENT_ID
-            echo $RGP_AUTH0_CLIENT_SECRET
+      - node/install:
+          install-yarn: false
+          node-version: '18.13.0' # LTS version
       - run:
           working_directory: *playwright_path
           command: npm install --quiet
       - run:
           working_directory: *playwright_path
           command: npx playwright install --with-deps chromium # Only need Chrome browser
+
       - run:
           name: Running Playwright tests
           working_directory: *playwright_path
           command: |
-            # CI split by auto-detect timing does not work because CircleCI CLI expects both filenames and classnames to be present in JUnit xml.
-            # Playwright generated JUnit xml does not have filenames.
-            SHARD="$((${CIRCLE_NODE_INDEX}+1))"; npm run test:ci -- --shard=${SHARD}/${CIRCLE_NODE_TOTAL}
+            echo 'Study: ' << parameters.test_suite >>
+
+            if [ << parameters.test_suite >> == "UNKNOWN" ]; then
+              # Grep all E2E tests
+              npx playwright test --list | grep -o 'tests/.*.spec.ts' > e2e_tests.txt
+            else
+              # Grep E2E tests for this study.
+              npx playwright test --list -g @<< parameters.test_suite >> | grep -o 'tests/.*.spec.ts' > e2e_tests.txt
+            fi
+            TESTS_FILE=$(circleci tests split --split-by=timings --timings-type=classname e2e_tests.txt)
+            npm run test:ci $TESTS_FILE
           no_output_timeout: 3m # Default is 10m. Set shorter time to ensure CI fails faster if test hangs
       - store_test_results:
           path: playwright-e2e/junit
@@ -744,6 +682,9 @@ parameters:
   do-builds:
     type: boolean
     default: false
+  e2e-test-parallelism:
+    type: integer
+    default: 1
 
 workflows:
   version: 2
@@ -756,7 +697,8 @@ workflows:
         - not:
             equal: ["UNKNOWN", << pipeline.parameters.study_key >>]
     jobs:
-      - app-build-and-store-job
+      - app-build:
+          study_key: << pipeline.parameters.study_key >>
 
   api-deploy-workflow:
     # Deploy a study build to environment specified in api call
@@ -782,19 +724,21 @@ workflows:
       jobs:
         - app-run-tests-job
 
-  playwright-e2e-test-workflow:
+  playwright-test-workflow:
     # Triggered by CI API (for example, run_ci.sh)
-    # Run Playwright tests against Dev, Test and Staging but not for Prod
+    # Run Playwright tests against Dev and Test but not for Staging and Production
     when:
       and:
         - equal: [ "run-e2e-tests", << pipeline.parameters.api_call >> ]
     jobs:
-      - build-playwright-test-job:
+      - playwright-build:
           env: << pipeline.parameters.deploy_env >>
-      - run-playwright-test-job:
+      - playwright-test:
           env: << pipeline.parameters.deploy_env >>
+          test_suite: << pipeline.parameters.study_key >>
+          parallelism_num: << pipeline.parameters.e2e-test-parallelism >>
           requires:
-            - build-playwright-test-job
+            - playwright-build
 
   build-and-deploy-all-apps-workflow:
     unless: << pipeline.parameters.do-builds >>
@@ -811,7 +755,7 @@ workflows:
         - << pipeline.parameters.do-builds >>
         - equal: ["UNKNOWN", << pipeline.parameters.deploy_env >>]
     jobs:
-      - build-and-deploy-job:
+      - app-deploy:
           study_key: << pipeline.parameters.study_key >>
           filters:
             branches:
@@ -834,8 +778,9 @@ workflows:
   build-app-workflow:
     when: << pipeline.parameters.do-builds >>
     jobs:
-      - app-build-and-store-job:
+      - app-build:
           <<: *build-and-store-filters
+          study_key: << pipeline.parameters.study_key >>
 
   deploy-all-apps-workflow:
     jobs:
@@ -913,11 +858,13 @@ workflows:
         - equal: [ scheduled_pipeline, << pipeline.trigger_source >> ]
         - equal: [ nightly-playwright-test, << pipeline.schedule.name >> ]
     jobs:
-      - build-playwright-test-job:
+      - playwright-build:
           <<: *filter-develop-branch
           env: << pipeline.parameters.deploy_env >>
-      - run-playwright-test-job:
+      - playwright-test:
           <<: *filter-develop-branch
           env: << pipeline.parameters.deploy_env >>
+          parallelism_num: 2
+          test_suite: UNKNOWN
           requires:
-            - build-playwright-test-job
+            - playwright-build
