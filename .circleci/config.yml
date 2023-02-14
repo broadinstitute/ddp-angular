@@ -751,6 +751,9 @@ workflows:
       - api-unit-test
       - app-build:
           study_key: << pipeline.parameters.study_key >>
+          requires:
+            - ui-unit-test
+            - api-unit-test
 
   api-deploy-workflow:
     # Deploy a study build to environment specified in api call
