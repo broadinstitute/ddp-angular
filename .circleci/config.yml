@@ -724,7 +724,7 @@ workflows:
           matrix:
             alias: app-build
             parameters:
-              study_key: (*study_keys)
+              study_key: [(*study_keys)]
 
   build-test-pr:
     # Automatically run on every PR commit.
