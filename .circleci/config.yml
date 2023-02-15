@@ -78,14 +78,18 @@ commands:
             - ./node_modules
 
   set-deployment-environment:
-    description: "Determine working environment"
+    description: "Determine deploy environment"
+    parameters:
+      env:
+        type: string
+        default: << pipeline.parameters.deploy_env >>
     steps:
       - run:
-          name: Determine environment for branch << pipeline.git.branch >>
+          name: Determine deploy environment for branch << pipeline.git.branch >>
           command: |
-            if [ "<< pipeline.parameters.deploy_env >>" != "UNKNOWN" ]
+            if [ "<< parameters.env >>" != "UNKNOWN" ]
             then
-              DEPLOY_TARGET_ENV="<< pipeline.parameters.deploy_env >>"
+              DEPLOY_TARGET_ENV="<< parameters.env >>"
             else
               DEPLOY_TARGET_ENV="<< pipeline.git.branch >>"
             fi
@@ -242,14 +246,17 @@ commands:
           #
 
   build:
-    description: "Build DDP study app"
+    description: Build DDP study app
     parameters:
       study_key:
         type: string
-        default: "UNKNOWN"
+        default: UNKNOWN
+      env:
+        type: string
     steps:
       - checkout-code
-      - set-deployment-environment
+      - set-deployment-environment:
+          env: << parameters.env >>
       - setup-shared-env:
           study_key: << parameters.study_key >>
       - when:
@@ -406,11 +413,14 @@ jobs:
     parameters:
       study_key:
         type: string
+      env:
+        type: string
     executor:
       name: build-executor
     steps:
       - build:
           study_key: << parameters.study_key >>
+          env: << parameters.env >>
       #- run-ui-unit-test:
       #    study_key: << parameters.study_key >>
       #- run-api-unit-test
@@ -728,6 +738,8 @@ workflows:
             alias: app-ui-unit-test
             parameters: &params
               study_key: [ basil ]
+          requires:
+            - api-unit-test
       - app-deploy:
           <<: *filter-pr-branch
           #<<: *filter-develop-branch
@@ -736,8 +748,8 @@ workflows:
             alias: app-build
             parameters:
               <<: *params
+              env: dev
           requires:
-            - api-unit-test
             - << matrix.study_key >>-ui-unit-test
 
 
