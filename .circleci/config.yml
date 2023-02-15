@@ -411,9 +411,9 @@ jobs:
     steps:
       - build:
           study_key: << parameters.study_key >>
-      - run-ui-unit-test:
-          study_key: << parameters.study_key >>
-      - run-api-unit-test
+      #- run-ui-unit-test:
+      #    study_key: << parameters.study_key >>
+      #- run-api-unit-test
       - deploy-exploded-build:
           study_key: << parameters.study_key >>
 
@@ -716,15 +716,26 @@ workflows:
 
   deploy-dev:
     jobs:
-      - app-build:
+      - api-unit-test:
           <<: *filter-pr-branch
-          # Don't store PR build artifacts
-          store_build: false
+      - ui-unit-test:
+          <<: *filter-pr-branch
+          name: << matrix.study_key >>-ui-unit-test
+          matrix:
+            alias: app-ui-unit-test
+            parameters:
+              study_key: [ basil, osteo ]
+      - app-deploy:
+          <<: *filter-pr-branch
           name: << matrix.study_key >>-build
           matrix:
             alias: app-build
             parameters:
-              study_key: [(*study_keys)]
+              study_key: [ basil, osteo ]
+          requires:
+            - api-unit-test
+            - << matrix.study_key >>-ui-unit-test
+
 
   build-test-pr:
     # Automatically run on every PR commit.
