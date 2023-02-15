@@ -727,7 +727,7 @@ workflows:
           matrix:
             alias: app-ui-unit-test
             parameters: &params
-              study_key: [ basil, osteo ]
+              study_key: [ basil ]
       - app-deploy:
           <<: *filter-pr-branch
           #<<: *filter-develop-branch
