@@ -714,6 +714,18 @@ parameters:
 workflows:
   version: 2
 
+  deploy-dev:
+    jobs:
+      - app-build:
+          <<: *filter-pr-branch
+          # Don't store PR build artifacts
+          store_build: false
+          name: << matrix.study_key >>-build
+          matrix:
+            alias: app-build
+            parameters:
+              study_key: (*study_keys)
+
   build-test-pr:
     # Automatically run on every PR commit.
     # CircleCI API calls will not launch this workflow.
