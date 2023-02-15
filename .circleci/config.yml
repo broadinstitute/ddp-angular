@@ -748,7 +748,7 @@ workflows:
             alias: app-build
             parameters:
               <<: *params
-              env: dev
+              env: [ dev ]
           requires:
             - << matrix.study_key >>-ui-unit-test
 
