@@ -38,7 +38,20 @@ references:
       tags:
         ignore: /.*/
       branches:
-        ignore: develop
+        ignore:
+          - develop
+          - master
+          - /.*rc.*/
+          - /.*hotfix.*/
+
+  filter-build-store: &filter-build-store
+    filters:
+      tags:
+        ignore: /.*/
+      branches:
+        only:
+          - /^rc.*/
+          - /^hotfix.*/
 
 # Container for all the builds
 executors:
@@ -408,6 +421,27 @@ commands:
       - store_artifacts:
           path: /tmp/junit
 
+  halt-playwright-test-check:
+    description: Stop running Playwright e2e tests if halt conditions are met
+    parameters:
+      env:
+        default: dev
+        type: enum
+        enum: [ dev, test, staging, prod, UNKNOWN ]
+    steps:
+      - when:
+          # Stop running Playwright e2e tests if env is UNKNOWN, Prod or Staging
+          condition:
+            or:
+              - equal: [ UNKNOWN, << parameters.env >> ]
+              - equal: [ prod, << parameters.env >> ]
+              - equal: [ staging, << parameters.env >> ]
+          steps:
+            - run:
+                name: "Halt running Playwright tests. Not supported for ENV=<< parameters.env >>"
+                command: circleci-agent step halt
+
+
 jobs:
   app-deploy:
     working_directory: *ng_workspace_path
@@ -572,6 +606,8 @@ jobs:
         type: enum
         enum: [ dev, test, staging, prod, UNKNOWN ]
     steps:
+      - halt-playwright-test-check:
+          env: << parameters.env >>
       - checkout:
           path: *repo_path
       - setup-shared-env
@@ -619,17 +655,8 @@ jobs:
         default: << pipeline.parameters.study_key >>
     parallelism: << parameters.parallelism_num >>
     steps:
-      - when:
-          # Stop running Playwright e2e tests if env is UNKNOWN, Prod or Staging
-          condition:
-            or:
-              - equal: [ UNKNOWN, << parameters.env >> ]
-              - equal: [ prod, << parameters.env >> ]
-              - equal: [ staging, << parameters.env >> ]
-          steps:
-            - run:
-                name: Halt running Playwright tests ENV=<< parameters.env >>
-                command: circleci-agent step halt
+      - halt-playwright-test-check:
+          env: << parameters.env >>
       - attach_workspace:
           at: .
       - run:
@@ -725,7 +752,7 @@ parameters:
 workflows:
   version: 2
 
-  deploy-dev:
+  deploy-dev-changed-apps:
     # Automatically run on every PR merge
     jobs:
       - api-unit-test:
@@ -737,7 +764,7 @@ workflows:
           name: << matrix.study_key >>-ui-unit-test
           matrix:
             alias: app-ui-unit-test
-            parameters: &params
+            parameters: &studies
               study_key: [ basil ]
           requires:
             - api-unit-test
@@ -748,7 +775,7 @@ workflows:
           matrix:
             alias: app-deploy
             parameters:
-              <<: *params
+              <<: *studies
               env: [ dev ]
           requires:
             - << matrix.study_key >>-ui-unit-test
@@ -770,7 +797,8 @@ workflows:
           name: << matrix.study_key >>-build
           matrix:
             alias: app-build
-            parameters:
+            parameters: &studies
+              # Few studies are not included in this
               study_key: [ basil, osteo, angio, brain, mbc, mpc, atcp, rgp, esc, prion, pancan, singular, brugada, lms ]
       - ui-unit-test:
           <<: *filter-pr-branch
@@ -778,7 +806,7 @@ workflows:
           matrix:
             alias: app-ui-unit-test
             parameters:
-              study_key: [ basil, osteo, angio, brain, mbc, mpc, atcp, rgp, esc, prion, pancan, singular, brugada, lms ]
+              <<: *studies
       - api-unit-test:
           <<: *filter-pr-branch
       - playwright-build:
@@ -786,6 +814,7 @@ workflows:
 
   build-single-app:
     # Build study specified in api call by run_ci.sh
+    # Example: ./build-utils/run_ci.sh build-and-store dsm-ui dsm_rc_swarm_sprint_4 test
     when:
       and:
         - equal: ["build-and-store", << pipeline.parameters.api_call >>]
@@ -803,6 +832,7 @@ workflows:
 
   deploy-single-app:
     # Deploy a study build to environment specified in api call by run_ci.sh
+    # Example: ./build-utils/run_ci.sh deploy dsm-ui dsm_rc_swarm_sprint_4 test
     when:
       and:
         - equal: ["deploy", << pipeline.parameters.api_call >>]
@@ -869,25 +899,27 @@ workflows:
   launch-all-app-builds-workflow:
     # using do-builds param to select which of the two workflows using the build-on-tag-filters
     # should run; should be this one that just launches the builds or the one actually doing the builds
+    # Triggered by rc or hotfix branch commits
     unless: << pipeline.parameters.do-builds >>
     jobs:
-      - conditionally-launch-build-and-store-all-job: &build-and-store-filters
-          filters:
-            branches:
-              only:
-                - /^rc.*/
-                - /^hotfix.*/
+      - conditionally-launch-build-and-store-all-job:
+          <<: *filter-build-store
 
   build-app-workflow:
-    when: << pipeline.parameters.do-builds >>
+    # api call from "conditionally-launch-build-and-store" command
+    when:
+      and:
+        - << pipeline.parameters.do-builds >>
+        - not:
+            equal: [ UNKNOWN, << pipeline.parameters.study_key >> ]
     jobs:
       - ui-unit-test:
-          <<: *build-and-store-filters
+          <<: *filter-build-store
           study_key: << pipeline.parameters.study_key >>
       - api-unit-test:
-          <<: *build-and-store-filters
+          <<: *filter-build-store
       - app-build:
-          <<: *build-and-store-filters
+          <<: *filter-build-store
           study_key: << pipeline.parameters.study_key >>
           requires:
             - ui-unit-test
@@ -970,10 +1002,8 @@ workflows:
         - equal: [ nightly-playwright-test, << pipeline.schedule.name >> ]
     jobs:
       - playwright-build:
-          <<: *filter-develop-branch
           env: << pipeline.parameters.deploy_env >>
       - playwright-test:
-          <<: *filter-develop-branch
           env: << pipeline.parameters.deploy_env >>
           parallelism_num: 2
           test_suite: UNKNOWN
