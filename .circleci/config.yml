@@ -253,6 +253,7 @@ commands:
         default: UNKNOWN
       env:
         type: string
+        default: << pipeline.parameters.deploy_env >>
     steps:
       - checkout-code
       - set-deployment-environment:
@@ -743,9 +744,9 @@ workflows:
       - app-deploy:
           <<: *filter-pr-branch
           #<<: *filter-develop-branch
-          name: << matrix.study_key >>-build
+          name: << matrix.study_key >>-deploy
           matrix:
-            alias: app-build
+            alias: app-deploy
             parameters:
               <<: *params
               env: [ dev ]
@@ -854,10 +855,11 @@ workflows:
     when:
       and:
         - << pipeline.parameters.do-builds >>
-        - equal: ["UNKNOWN", << pipeline.parameters.deploy_env >>]
+        - equal: [ "UNKNOWN", << pipeline.parameters.deploy_env >> ]
     jobs:
       - app-deploy:
           study_key: << pipeline.parameters.study_key >>
+          env: << pipeline.parameters.deploy_env >>
           filters:
             branches:
               ignore:
