@@ -715,23 +715,27 @@ workflows:
   version: 2
 
   deploy-dev:
+    # Automatically run on every PR merge
     jobs:
       - api-unit-test:
           <<: *filter-pr-branch
+          #<<: *filter-develop-branch
       - ui-unit-test:
           <<: *filter-pr-branch
+          #<<: *filter-develop-branch
           name: << matrix.study_key >>-ui-unit-test
           matrix:
             alias: app-ui-unit-test
-            parameters:
+            parameters: &params
               study_key: [ basil, osteo ]
       - app-deploy:
           <<: *filter-pr-branch
+          #<<: *filter-develop-branch
           name: << matrix.study_key >>-build
           matrix:
             alias: app-build
             parameters:
-              study_key: [ basil, osteo ]
+              <<: *params
           requires:
             - api-unit-test
             - << matrix.study_key >>-ui-unit-test
