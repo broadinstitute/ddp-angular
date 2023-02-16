@@ -750,10 +750,14 @@ parameters:
   e2e-test-parallelism:
     type: integer
     default: 1
+  scheduled-playwright:
+    type: boolean
+    default: false
 
 workflows:
   version: 2
 
+  # TODO
   deploy-dev-changed-apps:
     # Automatically run on every PR merge
     jobs:
@@ -880,9 +884,8 @@ workflows:
   build-and-deploy-all-apps-workflow:
     when:
       and:
-        - not:  << pipeline.parameters.do-builds >>
-        - not:
-            equal: [ scheduled_pipeline, << pipeline.trigger_source >> ]
+        - not: << pipeline.parameters.do-builds >>
+        - not: << pipeline.parameters.scheduled-playwright >>
     jobs:
       - conditionally-launch-build-and-deploy-all-job:
           <<: *filter-develop-branch
@@ -1006,6 +1009,7 @@ workflows:
       and:
         - equal: [ scheduled_pipeline, << pipeline.trigger_source >> ]
         - equal: [ nightly-playwright-test, << pipeline.schedule.name >> ]
+        - << pipeline.parameters.scheduled-playwright >>
     jobs:
       - playwright-build:
           env: << pipeline.parameters.deploy_env >>
