@@ -130,7 +130,7 @@ export class ScannerService {
   }
 
   private saveRGPFinalScan(data: object): Observable<any> {
-    return this.dsmService.finalScan(JSON.stringify(data));
+    return this.dsmService.rgpFinalScan(JSON.stringify(data));
   }
 
   private saveReceivingScan(data: object): Observable<any> {
