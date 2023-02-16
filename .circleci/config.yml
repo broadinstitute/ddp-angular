@@ -821,9 +821,9 @@ workflows:
     # Check all studies, build and store builds for changed apps only on rc_* or hotfix_* branches
     jobs:
       - api-unit-test:
-          <<: *filter-rc-hotfix-branch
+          <<: *filter-pr-branch
       - ui-unit-test:
-          <<: *filter-rc-hotfix-branch
+          <<: *filter-pr-branch
           name: << matrix.study_key >>-ui-unit-test
           matrix:
             alias: app-ui-unit-test
@@ -832,7 +832,7 @@ workflows:
           requires:
             - api-unit-test
       - app-build:
-          <<: *filter-rc-hotfix-branch
+          <<: *filter-pr-branch
           name: << matrix.study_key >>-build
           matrix:
             alias: app-build
