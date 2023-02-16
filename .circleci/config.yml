@@ -817,7 +817,7 @@ workflows:
             - api-unit-test
 
   build-apps-rc-hotfix:
-    # Build and store builds for changed apps only on rc_* or hotfix_* branches
+    # Check all studies, build and store builds for changed apps only on rc_* or hotfix_* branches
     jobs:
       - api-unit-test:
           <<: *filter-rc-hotfix-branch
