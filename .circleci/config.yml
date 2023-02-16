@@ -30,6 +30,8 @@ references:
   # Job runs for develop branch only
   filter-develop-branch: &filter-develop-branch
     filters:
+      tags:
+        ignore: /.*/
       branches:
         only: develop
 
@@ -38,7 +40,11 @@ references:
       tags:
         ignore: /.*/
       branches:
-        ignore: develop
+        ignore:
+          - develop
+          - master
+          - /^rc.*/
+          - /^hotfix.*/
 
 # Container for all the builds
 executors:
@@ -400,6 +406,27 @@ commands:
       - store_artifacts:
           path: /tmp/junit
 
+  halt-playwright-check:
+    description: Stop running Playwright test job if halt conditions are met
+    parameters:
+      env:
+        default: dev
+        type: enum
+        enum: [ dev, test, staging, prod, UNKNOWN ]
+    steps:
+      - when:
+          # Stop running Playwright e2e tests if env is UNKNOWN, Prod or Staging
+          condition:
+            or:
+              - equal: [ UNKNOWN, << parameters.env >> ]
+              - equal: [ prod, << parameters.env >> ]
+              - equal: [ staging, << parameters.env >> ]
+          steps:
+            - run:
+                name: "Halt running Playwright test job. Not supported for ENV=<< parameters.env >>"
+                command: circleci-agent step halt
+
+
 jobs:
   app-deploy:
     working_directory: *ng_workspace_path
@@ -561,6 +588,8 @@ jobs:
         type: enum
         enum: [ dev, test, staging, prod, UNKNOWN ]
     steps:
+      - halt-playwright-check:
+          env: << parameters.env >>
       - checkout:
           path: *repo_path
       - setup-shared-env
@@ -608,17 +637,8 @@ jobs:
         default: << pipeline.parameters.study_key >>
     parallelism: << parameters.parallelism_num >>
     steps:
-      - when:
-          # Stop running Playwright e2e tests if env is UNKNOWN, Prod or Staging
-          condition:
-            or:
-              - equal: [ UNKNOWN, << parameters.env >> ]
-              - equal: [ prod, << parameters.env >> ]
-              - equal: [ staging, << parameters.env >> ]
-          steps:
-            - run:
-                name: Halt running Playwright tests ENV=<< parameters.env >>
-                command: circleci-agent step halt
+      - halt-playwright-check:
+          env: << parameters.env >>
       - attach_workspace:
           at: .
       - run:
@@ -710,6 +730,9 @@ parameters:
   e2e-test-parallelism:
     type: integer
     default: 1
+  scheduled-playwright:
+    type: boolean
+    default: false
 
 workflows:
   version: 2
@@ -806,7 +829,10 @@ workflows:
             - playwright-build
 
   build-and-deploy-all-apps-workflow:
-    unless: << pipeline.parameters.do-builds >>
+    when:
+      and:
+        - not: << pipeline.parameters.do-builds >>
+        - not: << pipeline.parameters.scheduled-playwright >>
     jobs:
       - conditionally-launch-build-and-deploy-all-job:
           <<: *filter-develop-branch
@@ -927,6 +953,7 @@ workflows:
       and:
         - equal: [ scheduled_pipeline, << pipeline.trigger_source >> ]
         - equal: [ nightly-playwright-test, << pipeline.schedule.name >> ]
+        - << pipeline.parameters.scheduled-playwright >>
     jobs:
       - playwright-build:
           <<: *filter-develop-branch
