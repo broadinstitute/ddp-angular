@@ -30,6 +30,8 @@ references:
   # Job runs for develop branch only
   filter-develop-branch: &filter-develop-branch
     filters:
+      tags:
+        ignore: /.*/
       branches:
         only: develop
 
@@ -44,7 +46,7 @@ references:
           - /.*rc.*/
           - /.*hotfix.*/
 
-  filter-build-store: &filter-build-store
+  filter-rc-hotfix: &filter-rc-hotfix
     filters:
       tags:
         ignore: /.*/
@@ -876,7 +878,11 @@ workflows:
             - playwright-build
 
   build-and-deploy-all-apps-workflow:
-    unless: << pipeline.parameters.do-builds >>
+    when:
+      and:
+        - not:  << pipeline.parameters.do-builds >>
+        - not:
+            equal: [ scheduled_pipeline, << pipeline.trigger_source >> ]
     jobs:
       - conditionally-launch-build-and-deploy-all-job:
           <<: *filter-develop-branch
@@ -903,7 +909,7 @@ workflows:
     unless: << pipeline.parameters.do-builds >>
     jobs:
       - conditionally-launch-build-and-store-all-job:
-          <<: *filter-build-store
+          <<: *filter-rc-hotfix
 
   build-app-workflow:
     # api call from "conditionally-launch-build-and-store" command
@@ -914,12 +920,12 @@ workflows:
             equal: [ UNKNOWN, << pipeline.parameters.study_key >> ]
     jobs:
       - ui-unit-test:
-          <<: *filter-build-store
+          <<: *filter-rc-hotfix
           study_key: << pipeline.parameters.study_key >>
       - api-unit-test:
-          <<: *filter-build-store
+          <<: *filter-rc-hotfix
       - app-build:
-          <<: *filter-build-store
+          <<: *filter-rc-hotfix
           study_key: << pipeline.parameters.study_key >>
           requires:
             - ui-unit-test
