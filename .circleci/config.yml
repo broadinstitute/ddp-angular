@@ -834,7 +834,7 @@ workflows:
           <<: *filter-rc-hotfix-branch
           name: << matrix.study_key >>-build
           matrix:
-            alias: app-deploy
+            alias: << matrix.study_key >>-build
             parameters:
               <<: *studies
           requires:
