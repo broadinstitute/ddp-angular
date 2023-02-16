@@ -825,7 +825,7 @@ workflows:
           <<: *filter-rc-hotfix-branch
           name: << matrix.study_key >>-ui-unit-test
           matrix:
-            alias: << matrix.study_key >>-ui-unit-test
+            alias: app-ui-unit-test
             parameters: &studies
               study_key: [ basil, osteo, brain, angio, mbc, testboston, mpc, prion, atcp, rarex, rgp, esc, cgc, circadia, pancan, singular, brugada, lms, fon ]
           requires:
@@ -834,7 +834,7 @@ workflows:
           <<: *filter-rc-hotfix-branch
           name: << matrix.study_key >>-build
           matrix:
-            alias: << matrix.study_key >>-build
+            alias: app-build
             parameters:
               <<: *studies
           requires:
