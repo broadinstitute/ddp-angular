@@ -80,16 +80,16 @@ export class ScannerService {
           validators: [Validators.required]
         },
         {
-          controllerName: 'ddpLabel',
-          placeholder: 'DSM Label',
-          maxLength: undefined,
-          validators: [Validators.required]
-        },
-        {
           controllerName: 'RNA',
           placeholder: 'RNA',
           maxLength: undefined,
           validators: [this.shouldIncludeRNA(), Validators.required]
+        },
+        {
+          controllerName: 'ddpLabel',
+          placeholder: 'DSM Label',
+          maxLength: undefined,
+          validators: [Validators.required]
         }
       ]
     },
