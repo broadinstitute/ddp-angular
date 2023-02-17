@@ -719,6 +719,7 @@ workflows:
       - api-unit-test:
           <<: *filter-pr-branch
       - playwright-build:
+          name: playwright-build-<< pipeline.parameters.study_key >>-<< pipeline.parameters.deploy_env >>
           <<: *filter-pr-branch
 
   build-single-app:
@@ -750,6 +751,7 @@ workflows:
             equal: ["UNKNOWN", << pipeline.parameters.study_key >>]
     jobs:
       - deploy-stored-build-job:
+          name: deploy-stored-build-<< pipeline.parameters.study_key >>-<< pipeline.parameters.deploy_env >>
           study_key: << pipeline.parameters.study_key >>
 
   api-run-tests-workflow:
