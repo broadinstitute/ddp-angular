@@ -373,7 +373,7 @@ commands:
           command: |
             echo "ng test $ANGULAR_PROJECT_NAME"
             mkdir -p /tmp/junit
-            ng test $ANGULAR_PROJECT_NAME --reporters junit
+            ng test $ANGULAR_PROJECT_NAME --browsers ChromeHeadlessNoSandbox --reporters junit
           environment:
             JUNIT_REPORT_PATH: /tmp/ui/junit/
             JUNIT_REPORT_NAME: test-results.xml
@@ -395,8 +395,8 @@ commands:
           name: Run sdk and toolkit ng api unit tests
           command: |
             mkdir -p /tmp/junit
-            ng test ddp-sdk --reporters junit
-            ng test toolkit --reporters junit
+            ng test ddp-sdk --browsers ChromeHeadlessNoSandbox --reporters junit
+            ng test toolkit --browsers ChromeHeadlessNoSandbox --reporters junit
           environment:
             JUNIT_REPORT_PATH: /tmp/api/junit/
             JUNIT_REPORT_NAME: test-results.xml
