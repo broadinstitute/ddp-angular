@@ -419,9 +419,6 @@ jobs:
     steps:
       - build:
           study_key: << parameters.study_key >>
-      - run-ui-unit-test:
-          study_key: << parameters.study_key >>
-      - run-api-unit-test
       - deploy-exploded-build:
           study_key: << parameters.study_key >>
 
@@ -719,7 +716,6 @@ workflows:
       - api-unit-test:
           <<: *filter-pr-branch
       - playwright-build:
-          name: playwright-build-<< pipeline.parameters.study_key >>-<< pipeline.parameters.deploy_env >>
           <<: *filter-pr-branch
 
   build-single-app:
@@ -751,8 +747,20 @@ workflows:
             equal: ["UNKNOWN", << pipeline.parameters.study_key >>]
     jobs:
       - deploy-stored-build-job:
-          name: deploy-stored-build-<< pipeline.parameters.study_key >>-<< pipeline.parameters.deploy_env >>
+          name: deploy-<< pipeline.parameters.study_key >>-<< pipeline.parameters.deploy_env >>
           study_key: << pipeline.parameters.study_key >>
+      - playwright-build:
+          <<: *filter-rc-hotfix-branch
+          env: << pipeline.parameters.deploy_env >>
+          requires:
+            - deploy-stored-build-job
+      - playwright-test:
+          <<: *filter-rc-hotfix-branch
+          env: << pipeline.parameters.deploy_env >>
+          test_suite: UNKNOWN
+          parallelism_num: << pipeline.parameters.e2e-test-parallelism >>
+          requires:
+            - playwright-build
 
   api-run-tests-workflow:
     # Run ui tests for study specified in api call by run_ci.sh and tests for sdk and toolkit
@@ -799,8 +807,14 @@ workflows:
         - << pipeline.parameters.do-builds >>
         - equal: [ "UNKNOWN", << pipeline.parameters.deploy_env >> ]
     jobs:
+      - ui-unit-test:
+          study_key: << parameters.study_key >>
+      - api-unit-test
       - app-deploy:
           study_key: << pipeline.parameters.study_key >>
+          requires:
+            - api-unit-test
+            - ui-unit-test
           filters:
             branches:
               ignore:
