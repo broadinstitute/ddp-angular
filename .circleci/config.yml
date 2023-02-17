@@ -701,16 +701,16 @@ workflows:
           <<: *filter-pr-branch
           # Don't store PR build artifacts
           store_build: false
-          name: << matrix.study_key >>-build
+          name: << matrix.study_key >>-build-pr
           matrix:
             alias: app-build
             parameters: &studies
               study_key: [ basil, osteo, brain, angio, mbc, testboston, mpc, prion, atcp, rarex, rgp, esc, cgc, circadia, pancan, singular, brugada, lms, fon ]
           requires:
-            - << matrix.study_key >>-ui-unit-test
+            - << matrix.study_key >>-ui-unit-test-pr
       - ui-unit-test:
           <<: *filter-pr-branch
-          name: << matrix.study_key >>-ui-unit-test
+          name: << matrix.study_key >>-ui-unit-test-pr
           matrix:
             alias: app-ui-unit-test
             parameters:
