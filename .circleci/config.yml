@@ -127,7 +127,7 @@ commands:
                 echo "Defaulting $DEPLOY_TARGET_ENV to dev environment"
               ;;
             esac
-            echo "ENVIRONMENT=$DEPLOY_ENV"
+            echo "Setting deployment ENVIRONMENT to $DEPLOY_ENV"
             echo "export ENVIRONMENT=$DEPLOY_ENV" >> $BASH_ENV
             echo "export BUILD_PARAMS=$BUILD_PARAMS" >> $BASH_ENV
             source $BASH_ENV
@@ -232,7 +232,6 @@ commands:
             echo 'export PATH=$PATH:<< parameters.repo_path >>/build-utils' >> $BASH_ENV
             if [[ '<<parameters.study_key>>' != 'UNKNOWN' ]]; then
               echo 'export STUDY_KEY=<<parameters.study_key>>' >> $BASH_ENV
-              echo "STUDY_KEY=$STUDY_KEY"
               STUDY_KEYS=(<<parameters.study_keys>>)
               STUDY_GUIDS=(<<parameters.study_guids>>)
               for i in ${!STUDY_KEYS[@]}; do
@@ -240,7 +239,6 @@ commands:
                   if [[ $currentKey == '<<parameters.study_key>>' ]]; then
                       STUDY_GUID="${STUDY_GUIDS[$i]}"
                       echo "export STUDY_GUID=${STUDY_GUID}" >> $BASH_ENV
-                      echo "STUDY_GUID=$STUDY_GUID"
                       break;
                   fi
               done;
