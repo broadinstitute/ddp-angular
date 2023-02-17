@@ -76,6 +76,11 @@ export class DSMService {
     return this.baseKitScan(url, json);
   }
 
+  public rgpFinalScan(json: string): Observable<any> {
+      const url = this.baseUrl + DSMService.UI + 'rgpFinalScan';
+      return this.baseKitScan(url, json);
+  }
+
   public initialScan(json: string): Observable<any> {
     const url = this.baseUrl + DSMService.UI + 'initialScan';
     return this.baseKitScan(url, json);
