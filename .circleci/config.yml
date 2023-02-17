@@ -740,7 +740,7 @@ workflows:
             - api-unit-test
 
   deploy-single-app:
-    # Deploy a study build to environment specified in api call by run_ci.sh
+    # Deploy a study to environment specified in api call by run_ci.sh, using stored build in Google bucket.
     when:
       and:
         - equal: ["deploy", << pipeline.parameters.api_call >>]
@@ -751,7 +751,19 @@ workflows:
             equal: ["UNKNOWN", << pipeline.parameters.study_key >>]
     jobs:
       - deploy-stored-build-job:
+          name: deploy-stored-build-<< pipeline.parameters.study_key >>-<< pipeline.parameters.deploy_env >>
           study_key: << pipeline.parameters.study_key >>
+      # After deploy, run Playwright E2E tests against Dev or Test but not for Staging and Production
+      - playwright-build:
+          env: << pipeline.parameters.deploy_env >>
+          requires:
+            - deploy-stored-build-job
+      - playwright-test:
+          env: << pipeline.parameters.deploy_env >>
+          test_suite: << pipeline.parameters.study_key >> # Note: not all studies have Playwright E2E tests
+          parallelism_num: 2
+          requires:
+            - playwright-build
 
   api-run-tests-workflow:
     # Run ui tests for study specified in api call by run_ci.sh and tests for sdk and toolkit
@@ -768,8 +780,8 @@ workflows:
             study_key: << pipeline.parameters.study_key >>
 
   playwright-test-workflow:
-    # Triggered by CI API (for example, run_ci.sh)
-    # Run Playwright tests against Dev and Test but not for Staging and Production
+    # Triggered by CI API (run_ci.sh)
+    # Run Playwright E2E tests against Dev or Test but not for Staging and Production
     when:
       and:
         - equal: [ "run-e2e-tests", << pipeline.parameters.api_call >> ]
@@ -844,7 +856,6 @@ workflows:
               <<: *studies
           requires:
             - << matrix.study_key >>-ui-unit-test
-
 
   deploy-all-apps-workflow:
     jobs:
