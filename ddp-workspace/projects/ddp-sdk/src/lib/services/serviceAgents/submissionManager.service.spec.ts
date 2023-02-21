@@ -117,7 +117,7 @@ describe('SubmissionManagerTest', () => {
         // Let's set the start Time
         const startTime: number = new Date().getTime();
         console.log(startTime, 'START_TIME');
-        console.log(new Date(), 'START_DATE');
+        console.log(new Date(), 'START_DATE'); //sada
 
         // this is what we are actually testing: the subscription to isSubmissionInProgress$
         submissionManager.isAnswerSubmissionInProgress$.subscribe((isInProgress: boolean) => {
