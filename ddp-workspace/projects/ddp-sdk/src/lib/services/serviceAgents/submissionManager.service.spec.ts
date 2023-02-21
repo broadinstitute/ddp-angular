@@ -128,7 +128,7 @@ describe('SubmissionManagerTest', () => {
         });
 
         submissionManager.pendingAnswerSubmissionQueue$.subscribe(queue => {
-            console.log('QUEUE' + queue);
+            queue.forEach((data, index) => console.log('QUEUE - ' + index , data));
             console.log('The queue now has: ' + queue.length);
         });
 
