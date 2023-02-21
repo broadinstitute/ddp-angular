@@ -645,6 +645,10 @@ jobs:
           name: Export env variables to BASH_ENV
           command: |
             cp "playwright-e2e/config/.env.<< parameters.env >>" .env
+            
+            cat .env
+            cat playwright-env/envvars
+            
             cat .env | awk '/^[^#]/ {print "export " $0}' >> "$BASH_ENV"
             # export env from file (created in build-playwright-job)
             cat playwright-env/envvars | awk '{print "export " $0}' >> "$BASH_ENV"
@@ -664,10 +668,10 @@ jobs:
           working_directory: *playwright_path
           command: |
             node -v
-            echo $RGP_AUTH0_CLIENT_SECRET
-            echo $RGP_AUTH0_CLIENT_ID
-            echo $RGP_AUTH0_DOMAIN
-            echo $RGP_AUTH0_AUDIENCE
+            echo "$RGP_AUTH0_CLIENT_SECRET"
+            echo "$RGP_AUTH0_CLIENT_ID"
+            echo "$RGP_AUTH0_DOMAIN"
+            echo "$RGP_AUTH0_AUDIENCE"
             echo ""
 
             if [ << parameters.test_suite >> == "UNKNOWN" ]; then
