@@ -665,13 +665,7 @@ jobs:
           name: Running Playwright tests
           working_directory: *playwright_path
           command: |
-            node -v
-            echo "$RGP_AUTH0_CLIENT_SECRET"
-            echo "$RGP_AUTH0_CLIENT_ID"
-            echo "$RGP_AUTH0_DOMAIN"
-            echo "$RGP_AUTH0_AUDIENCE"
-            echo ""
-
+            echo 'Study: ' << parameters.test_suite >>
             if [ << parameters.test_suite >> == "UNKNOWN" ]; then
               # Grep all E2E tests
               npx playwright test --list | grep -o 'tests/.*.spec.ts' > e2e_tests.txt
