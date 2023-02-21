@@ -395,8 +395,8 @@ commands:
           name: Run sdk and toolkit ng api unit tests
           command: |
             mkdir -p /tmp/junit
-            ng test ddp-sdk --watch=false --browsers ChromeHeadlessNoSandbox --reporters junit
             ng test toolkit --watch=false --browsers ChromeHeadlessNoSandbox --reporters junit
+            ng test ddp-sdk --watch=false --browsers ChromeHeadlessNoSandbox --reporters junit
           environment:
             JUNIT_REPORT_PATH: /tmp/junit/
             JUNIT_REPORT_NAME: test-results.xml
