@@ -125,7 +125,7 @@ describe('SubmissionManagerTest', () => {
             const value = {value: isInProgress, delay: (endTime - startTime)};
             console.log('returnedInProgressValue:', value);
             returnedInProgressValues.push(value);
-        });
+        }); // 1676972198481
 
         submissionManager.pendingAnswerSubmissionQueue$.subscribe(queue => {
             queue.forEach((data, index) => console.log('QUEUE - ' + index , data));
