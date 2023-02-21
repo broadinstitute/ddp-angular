@@ -119,7 +119,9 @@ describe('SubmissionManagerTest', () => {
 
         // this is what we are actually testing: the subscription to isSubmissionInProgress$
         submissionManager.isAnswerSubmissionInProgress$.subscribe((isInProgress: boolean) => {
-            const value = {value: isInProgress, delay: (new Date().getTime() - startTime)};
+            const endTime = new Date().getTime();
+            console.log(endTime - startTime, 'MINUS');
+            const value = {value: isInProgress, delay: (endTime - startTime)};
             console.log('returnedInProgressValue:', value);
             returnedInProgressValues.push(value);
         });
