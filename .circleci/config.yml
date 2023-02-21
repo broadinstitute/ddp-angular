@@ -647,10 +647,6 @@ jobs:
           name: Export env variables to BASH_ENV
           command: |
             cp "playwright-e2e/config/.env.<< parameters.env >>" .env
-            
-            cat .env
-            cat playwright-env/envvars
-            
             cat .env | awk '/^[^#]/ {print "export " $0}' >> "$BASH_ENV"
             # export env from file (created in build-playwright-job)
             cat playwright-env/envvars | awk '{print "export " $0}' >> "$BASH_ENV"
