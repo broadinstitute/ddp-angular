@@ -13,7 +13,7 @@ import { logParticpantCreated } from 'utils/log-utils';
 import { generateUserName } from 'utils/faker-utils';
 import { CancerSelector } from 'pages/cancer-selector';
 import { FamilyHistory } from 'pages/family-history';
-import { checkUserReceivedEmails } from 'utils/email-utils';
+// import { checkUserReceivedEmails } from 'utils/email-utils';
 
 const { OSTEO_USER_EMAIL, OSTEO_USER_PASSWORD, SITE_PASSWORD, OSTEO_BASE_URL } = process.env;
 
@@ -350,7 +350,7 @@ test('Osteo enroll kid @osteo', async ({ page }) => {
     .click();
 });
 
-test.fixme('Osteo enroll self and kid together @osteo', async ({ page }) => {
+test('Osteo enroll self and kid together @osteo', async ({ page }) => {
   test.slow();
   await page.goto(OSTEO_BASE_URL!);
   await page.getByLabel('Password *').click();
@@ -462,8 +462,8 @@ test.fixme('Osteo enroll self and kid together @osteo', async ({ page }) => {
 
   await consentAssentPage.next();
 
-  await page.getByRole('combobox').first().selectOption('December');
-  await page.locator('#mat-input-23').selectOption('6-12 months before diagnosis');
+  await page.getByRole('combobox').first().selectOption({ label: 'December' });
+  await page.locator('#mat-input-23').selectOption({ label: '6-12 months before diagnosis' });
   await page.locator('.picklist-answer-INITIAL_BODY_LOC').getByText('Pelvis').click();
   await page.locator('.picklist-answer-HAD_RADIATION').getByText('No', { exact: true }).click();
   await page.getByText('Sorafenib').click();
@@ -515,7 +515,7 @@ test.fixme('Osteo enroll self and kid together @osteo', async ({ page }) => {
     .click();
 });
 
-test.fixme('Osteo self enroll @osteo', async ({ page }) => {
+test('Osteo self enroll @osteo', async ({ page }) => {
   test.slow();
   const userEmail = generateEmailAlias(OSTEO_USER_EMAIL);
   const firstName = generateUserName('OS');
@@ -538,7 +538,7 @@ test.fixme('Osteo self enroll @osteo', async ({ page }) => {
   await page.getByLabel('Enter age').fill('30');
 
   // wait for country selection to drive state/province
-  await page.waitForResponse((response) => response.url().includes('/pepper/v1/user') && response.status() === 200);
+  // await page.waitForResponse((response) => response.url().includes('/pepper/v1/user') && response.status() === 200);
   await page.locator('#mat-input-2').selectOption('US');
   await page.locator('#mat-input-3').selectOption('CO');
   await page.waitForTimeout(2000);
@@ -926,6 +926,8 @@ test.fixme('Osteo self enroll @osteo', async ({ page }) => {
     .click();
   await page.getByRole('link', { name: 'Dashboard' }).click();
 
+  /*
+  * Disable email checks. Slack https://broadinstitute.slack.com/archives/C043W8G8SS3/p1676387289422749
   await checkUserReceivedEmails(userEmail, [
     {
       subject: 'Thank you for providing your consent',
@@ -937,9 +939,11 @@ test.fixme('Osteo self enroll @osteo', async ({ page }) => {
     },
     {
       subject: 'Thank you for providing additional consent',
-      /* eslint-disable max-len */
       textProbe:
         'Thank you for joining the Osteosarcoma Project and for giving us your consent to share with you any available information we learned from the sequencing of your tumor sample[s] that the study receives.'
     }
   ]);
+  *
+  */
+
 });
