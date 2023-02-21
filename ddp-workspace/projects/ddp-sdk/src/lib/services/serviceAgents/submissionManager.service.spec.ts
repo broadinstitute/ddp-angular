@@ -90,11 +90,11 @@ describe('SubmissionManagerTest', () => {
             });
     });
 
-    fit('test isSubmissionInProgress$ observable', (done) => {
+    it('test isSubmissionInProgress$ observable', (done) => {
         // Fake the call to service agent, including the response delay
         const httpCallDelay = 500;
 
-        console.log('START', httpCallDelay)
+        console.log('START', httpCallDelay);
 
         serviceAgent.saveAnswerSubmission.and.callFake((): Observable<PatchAnswerResponse> => {
             return of({
@@ -136,13 +136,13 @@ describe('SubmissionManagerTest', () => {
         submissionManager.answerSubmissionResponse$.subscribe((response: PatchAnswerResponse) => console.log('Got a response', response));
 
         // Let's do a dummy patch. Remember to subscribe!
-        console.log('PATCH_ANSWER', returnedInProgressValues)
+        console.log('PATCH_ANSWER', returnedInProgressValues);
         submissionManager.patchAnswer('1', '2', '3', 'hello', 'blockGuid');
 
         // Give the patch time to complete and let's observe what happened
         setTimeout(() => {
             console.log(returnedInProgressValues, 'ALL_VALUES');
-            console.log(httpCallDelay, 'DELAY')
+            console.log(httpCallDelay, 'DELAY');
             expect(serviceAgent.saveAnswerSubmission.calls.count()).toBe(1);
             // initial value + our patch + our patch completed = 3 changes to status
             expect(returnedInProgressValues.length).toBe(3);
