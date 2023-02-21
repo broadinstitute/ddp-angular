@@ -129,7 +129,7 @@ describe('SubmissionManagerTest', () => {
             const value = {value: isInProgress, delay: (endTime - startTime)};
             console.log('returnedInProgressValue:', value);
             returnedInProgressValues.push(value);
-        });
+        }); //SDAADA
 
         submissionManager.pendingAnswerSubmissionQueue$.subscribe(queue => {
             queue.forEach((data, index) => console.log('QUEUE - ' + index , data));
