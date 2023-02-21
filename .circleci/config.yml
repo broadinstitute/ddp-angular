@@ -648,7 +648,7 @@ jobs:
             cat .env | awk '/^[^#]/ {print "export " $0}' >> "$BASH_ENV"
             # export env from file (created in build-playwright-job)
             cat playwright-env/envvars | awk '{print "export " $0}' >> "$BASH_ENV"
-            source "$BASH_ENV"
+            source $BASH_ENV
       - node/install:
           install-yarn: false
           node-version: '18.13.0' # LTS version
@@ -664,7 +664,10 @@ jobs:
           working_directory: *playwright_path
           command: |
             node -v
-            echo "$BASH_ENV"
+            echo $RGP_AUTH0_CLIENT_SECRET
+            echo $RGP_AUTH0_CLIENT_ID
+            echo $RGP_AUTH0_DOMAIN
+            echo $RGP_AUTH0_AUDIENCE
             echo ""
 
             if [ << parameters.test_suite >> == "UNKNOWN" ]; then
