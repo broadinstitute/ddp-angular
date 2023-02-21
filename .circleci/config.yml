@@ -598,6 +598,8 @@ jobs:
           name: Save Vault secrets into temp file to persist across jobs
           command: |
             set -u
+            echo "export ENV=<< parameters.env >>" >> $BASH_ENV
+            source $BASH_ENV
             .circleci/export-playwright-env.sh
       - run:
           working_directory: *playwright_path
