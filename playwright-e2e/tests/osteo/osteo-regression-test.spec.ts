@@ -536,9 +536,7 @@ test('Osteo self enroll @osteo', async ({ page }) => {
   await page.getByLabel('Enter age').click();
 
   await page.getByLabel('Enter age').fill('30');
-
-  // wait for country selection to drive state/province
-  // await page.waitForResponse((response) => response.url().includes('/pepper/v1/user') && response.status() === 200);
+  
   await page.locator('#mat-input-2').selectOption('US');
   await page.locator('#mat-input-3').selectOption('CO');
   await page.waitForTimeout(2000);
