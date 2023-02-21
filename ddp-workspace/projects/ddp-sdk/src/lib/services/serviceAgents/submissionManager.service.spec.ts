@@ -94,7 +94,7 @@ describe('SubmissionManagerTest', () => {
         // Fake the call to service agent, including the response delay
         const httpCallDelay = 500;
 
-        console.log('START', httpCallDelay);
+        console.log('START_START', httpCallDelay);
 
         serviceAgent.saveAnswerSubmission.and.callFake((): Observable<PatchAnswerResponse> => {
             return of({
