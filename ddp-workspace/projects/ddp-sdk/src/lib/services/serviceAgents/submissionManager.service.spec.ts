@@ -137,7 +137,7 @@ describe('SubmissionManagerTest', () => {
 
         // Give the patch time to complete and let's observe what happened
         setTimeout(() => {
-            console.log(returnedInProgressValues, 'ALL_VALUES')
+            console.log(returnedInProgressValues, 'ALL_VALUES');
             expect(serviceAgent.saveAnswerSubmission.calls.count()).toBe(1);
             // initial value + our patch + our patch completed = 3 changes to status
             expect(returnedInProgressValues.length).toBe(3);
