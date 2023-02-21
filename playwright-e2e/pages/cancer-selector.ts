@@ -19,7 +19,7 @@ export class CancerSelector {
     await cancerField.type(search, { delay: 200 });
 
     for (let i = 0; i < pressDownTimes; i++) {
-      await this.page.waitForTimeout(1000);
+      await this.page.waitForTimeout(2000);
       await cancerField.press('ArrowDown');
     }
     await cancerField.press('Enter');

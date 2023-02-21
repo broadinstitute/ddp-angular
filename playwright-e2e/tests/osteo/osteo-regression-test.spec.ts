@@ -20,7 +20,7 @@ const { OSTEO_USER_EMAIL, OSTEO_USER_PASSWORD, SITE_PASSWORD, OSTEO_BASE_URL } =
 test('Osteo Static Content @osteo', async ({ page }) => {
   await page.goto(OSTEO_BASE_URL!);
   await page.locator('div').filter({ hasText: 'Password *' }).nth(2).click();
-  await page.getByLabel('Password *').fill('broad_institute');
+  await page.getByLabel('Password *').fill(SITE_PASSWORD!);
   await page.getByLabel('Password *').press('Enter');
   await page
     .getByRole('heading', {
@@ -150,7 +150,7 @@ test('Osteo enroll kid @osteo', async ({ page }) => {
   await page.goto(OSTEO_BASE_URL!);
   await page.getByLabel('Password *').click();
   await page.getByLabel('Password *').press('Meta+a');
-  await page.getByLabel('Password *').fill('broad_institute');
+  await page.getByLabel('Password *').fill(SITE_PASSWORD!);
   await page.getByLabel('Password *').press('Enter');
   await page.getByRole('banner').getByRole('link', { name: 'Count Me In' }).click();
   await page.waitForTimeout(2000);
@@ -354,7 +354,7 @@ test('Osteo enroll self and kid together @osteo', async ({ page }) => {
   test.slow();
   await page.goto(OSTEO_BASE_URL!);
   await page.getByLabel('Password *').click();
-  await page.getByLabel('Password *').fill('broad_institute');
+  await page.getByLabel('Password *').fill(SITE_PASSWORD!);
   await page.getByLabel('Password *').press('Enter');
 
   const homePage = new HomePage(page);
@@ -436,6 +436,7 @@ test('Osteo enroll self and kid together @osteo', async ({ page }) => {
   await page.locator('#mat-input-16').click();
   await page.locator('.mat-form-field-infix').click();
   await page.locator('#mat-input-16').fill('A name?');
+  await page.waitForTimeout(1000);
 
   await consentAssentPage.submit();
 
@@ -536,7 +537,7 @@ test('Osteo self enroll @osteo', async ({ page }) => {
   await page.getByLabel('Enter age').click();
 
   await page.getByLabel('Enter age').fill('30');
-  
+
   await page.locator('#mat-input-2').selectOption('US');
   await page.locator('#mat-input-3').selectOption('CO');
   await page.waitForTimeout(2000);
@@ -720,6 +721,7 @@ test('Osteo self enroll @osteo', async ({ page }) => {
   await page.getByRole('heading', { name: 'Survey: About Your Osteosarcoma' }).click();
   await page.getByText('Please tell us more about your experience with osteosarcoma by answering the que').click();
   await page.getByRole('link', { name: 'Dashboard' }).click();
+  await page.waitForTimeout(2000);
   await page.getByRole('button', { name: 'Edit' }).click();
 
   const familyHistoryPage = new FamilyHistory(page);
