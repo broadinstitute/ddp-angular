@@ -608,6 +608,12 @@ export class Filter {
           new NameValue('additionalValuesJson', filter.value1),
           filter.filter2, null,
           filter.exactMatch, filter.type, filter.range, filter.empty, filter.notEmpty, filter.participantColumn, filter.additionalType);
+      } else if ((!filter.value1) && filter.value2) {
+        filter.filter2.value = filter.value2;
+        filterText = this.getFilterJson(parent,
+          new NameValue('additionalValuesJson', filter.value1),
+          filter.filter2, null,
+          filter.exactMatch, filter.type, filter.range, filter.empty, filter.notEmpty, filter.participantColumn, filter.additionalType);
       } else if (filter.selectedOptions && filter.selectedOptions.length > 0) {
         const selectedOptions = <Array<boolean>>filter.selectedOptions;
         const trueIndex = selectedOptions.indexOf(true);
