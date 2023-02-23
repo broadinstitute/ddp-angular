@@ -4,7 +4,7 @@
 # If a file from a common area, like the root diretory was modified, we call that _SHARED_
 set +x
 #ignore these file name patterns when figuring out what modules changed
-declare -a exclude_patterns=( '^.*\.md' '^.*.pdf', '^.*\.spec\.ts', '.*\config.yml' )
+declare -a exclude_patterns=( '^.*\.md' '^.*.pdf', '^.*\.spec\.ts', '.*\config.yml', '.*\.sh )
 
 EXCLUDE_CMD='grep -v -E'
 
@@ -15,7 +15,7 @@ done
 NG_PROJECT_PATH_PREFIX='ddp-workspace\/projects\/'
 SHARED='_SHARED_'
 if [[ "$OSTYPE" == "darwin"* ]]; then
-  SED_CMD='gsed -E'
+  SED_CMD='sed -E'
 else
   SED_CMD='sed -E'
 fi
@@ -25,7 +25,7 @@ fi
 # If it does match Angular project path, save only the project dir name
 git diff --name-only $1 $2 | \
 ${EXCLUDE_CMD} | \
-${SED_CMD} "/${NG_PROJECT_PATH_PREFIX}[^\/]*/! s/.*/${SHARED}/" | \
-${SED_CMD} "s_${NG_PROJECT_PATH_PREFIX}([^\/]*)/.*_\1_" | \
+#${SED_CMD} "/${NG_PROJECT_PATH_PREFIX}[^\/]*/! s/.*/${SHARED}/" | \
+#${SED_CMD} "s_${NG_PROJECT_PATH_PREFIX}([^\/]*)/.*_\1_" | \
 sort | uniq
 
