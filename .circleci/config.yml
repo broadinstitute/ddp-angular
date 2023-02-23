@@ -296,7 +296,7 @@ commands:
           #
 
   halt-when-study-unchanged:
-    description: Stop running build for a study if the study has not changed
+    description: Stop if the study has not changed
     parameters:
       study_key:
         type: string
@@ -309,7 +309,7 @@ commands:
             set +x
            
             CHANGED_STUDIES=$(findmodifiedprojects.sh <<pipeline.git.base_revision >> << pipeline.git.revision >>)
-            echo "Changed studies are: $CHANGED_STUDIES \n"
+            echo "Changed studies are: $CHANGED_STUDIES"
             
             NG_PROJECT_NAME="ddp-<< parameters.study_key >>"
             CHANGED_DEPENDENCIES=$(echo  $CHANGED_STUDIES | grep -E -e $NG_PROJECT_NAME -e _SHARED_  -e ddp-sdk -e toolkit)
@@ -317,7 +317,7 @@ commands:
             echo "CHANGED_DEPENDENCIES=$CHANGED_DEPENDENCIES"
             
             if [[ -z $CHANGED_DEPENDENCIES ]]; then
-              echo "Halt building study: $STUDY_KEY"
+              echo "Halt building study: << parameters.study_key >>"
               circleci-agent step halt
             fi
           #
