@@ -816,7 +816,7 @@ workflows:
           <<: *filter-develop-branch
           env: dev # on develop branch, env name is Dev because it's PR merge
           requires:
-            - app-deploy
+            - << matrix.study_key >>-deploy
       - playwright-test:
           <<: *filter-develop-branch
           env: dev
