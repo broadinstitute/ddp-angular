@@ -304,20 +304,21 @@ commands:
       - run:
           name: Check << parameters.study_key >> and stop job if study has not changed
           command: |
-            set -u
-            set +e
-            set +x
-           
-            CHANGED_STUDIES=$(findmodifiedprojects.sh <<pipeline.git.base_revision >> << pipeline.git.revision >>)
+            set -u     
+            echo "pipeline.git.revision=<< pipeline.git.revision >>"
+            echo "pipeline.git.base_revision=<< pipeline.git.base_revision >>"
+            CHANGED_STUDIES=$(findmodifiedprojects.sh << pipeline.git.base_revision >> << pipeline.git.revision >>)
             echo "Changed studies are: $CHANGED_STUDIES"
             
             NG_PROJECT_NAME="ddp-<< parameters.study_key >>"
-            CHANGED_DEPENDENCIES=$(echo  $CHANGED_STUDIES | grep -E -e $NG_PROJECT_NAME -e _SHARED_  -e ddp-sdk -e toolkit)
+            CHANGED_DEPENDENCIES=$(echo $CHANGED_STUDIES | grep -E -e $NG_PROJECT_NAME -e _SHARED_ -e ddp-sdk -e toolkit)
             echo "CHANGED_DEPENDENCIES=$CHANGED_DEPENDENCIES"
             
             if [[ -z $CHANGED_DEPENDENCIES ]]; then
-              echo "Halt job because study is not changed"
+              echo "Study has not changed"
               circleci-agent step halt
+            else
+              echo "Study has been changed"
             fi
           #
 
