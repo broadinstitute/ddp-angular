@@ -800,7 +800,7 @@ workflows:
             parameters:
               <<: *studies
           requires:
-            - app-build
+            - api-unit-test
       - app-deploy:
           <<: *filter-pr-branch
           name: << matrix.study_key >>-deploy
@@ -810,7 +810,6 @@ workflows:
               <<: *studies
           check_changes: true
           requires:
-            - << matrix.study_key >>-ui-unit-test
             - api-unit-test
       - playwright-build:
           <<: *filter-pr-branch
