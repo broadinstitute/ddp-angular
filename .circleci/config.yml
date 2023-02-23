@@ -306,11 +306,12 @@ commands:
             echo "pipeline.git.revision=<< pipeline.git.revision >>"
             echo "pipeline.git.base_revision=<< pipeline.git.base_revision >>"
             CHANGED_STUDIES=$(../build-utils/findmodifiedprojects.sh << pipeline.git.base_revision >> << pipeline.git.revision >>)
-            echo "Changed studies are: $CHANGED_STUDIES"
+            echo "Changed studies are:"
+            echo "$CHANGED_STUDIES"
             
             NG_PROJECT_NAME="ddp-<< parameters.study_key >>"
-            CHANGED_DEPENDENCIES=$(echo $CHANGED_STUDIES | grep -E -e $NG_PROJECT_NAME -e _SHARED_ -e ddp-sdk -e toolkit)
-            echo "CHANGED_DEPENDENCIES=$CHANGED_DEPENDENCIES"
+            CHANGED_DEPENDENCIES=$(echo $CHANGED_STUDIES | grep -E -e $NG_PROJECT_NAME  -e ddp-sdk -e toolkit)
+            echo "CHANGED_DEPENDENCIES: $CHANGED_DEPENDENCIES"
             
             if [[ -z $CHANGED_DEPENDENCIES ]]; then
               echo "Study has not changed"
