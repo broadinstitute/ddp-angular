@@ -310,7 +310,7 @@ commands:
             echo "$CHANGED_STUDIES"
             
             NG_PROJECT_NAME="ddp-<< parameters.study_key >>"
-            CHANGED_DEPENDENCIES=$(echo $CHANGED_STUDIES | grep -e $NG_PROJECT_NAME)
+            CHANGED_DEPENDENCIES=$(echo $CHANGED_STUDIES | grep -e $NG_PROJECT_NAME 2>&1)
             echo "CHANGED_DEPENDENCIES: $CHANGED_DEPENDENCIES"
             
             if [[ -z $CHANGED_DEPENDENCIES ]]; then
