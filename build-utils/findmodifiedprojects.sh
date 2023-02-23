@@ -4,7 +4,7 @@
 # If a file from a common area, like the root diretory was modified, we call that _SHARED_
 set +x
 #ignore these file name patterns when figuring out what modules changed
-declare -a exclude_patterns=( '^.*\.md' '^.*.pdf', '^.*\.spec\.ts', '^.*\.yml' )
+declare -a exclude_patterns=( '^.*\.md' '^.*.pdf', '^.*\.spec\.ts', '.*\.yml' )
 
 EXCLUDE_CMD='grep -v -E'
 
