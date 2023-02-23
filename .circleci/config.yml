@@ -813,7 +813,7 @@ workflows:
           requires:
             - << matrix.study_key >>-build
       - app-deploy:
-          <<: *filter-pr-branch
+          <<: *filter-develop-branch
           name: << matrix.study_key >>-deploy
           matrix:
             alias: app-deploy
