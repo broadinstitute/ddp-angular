@@ -302,7 +302,7 @@ commands:
         type: string
     steps:
       - run:
-          name: Check << parameters.study_key >> and launch build if study has been changed
+          name: Check << parameters.study_key >> and stop job if study has not changed
           command: |
             set -u
             set +e
