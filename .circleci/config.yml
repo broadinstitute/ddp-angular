@@ -313,7 +313,6 @@ commands:
             
             NG_PROJECT_NAME="ddp-<< parameters.study_key >>"
             CHANGED_DEPENDENCIES=$(echo  $CHANGED_STUDIES | grep -E -e $NG_PROJECT_NAME -e _SHARED_  -e ddp-sdk -e toolkit)
-            echo "_SHARED_ = $_SHARED_"
             echo "NG_PROJECT_NAME = $NG_PROJECT_NAME"
             echo "CHANGED_DEPENDENCIES=$CHANGED_DEPENDENCIES"
             
@@ -778,19 +777,8 @@ workflows:
           requires:
             - playwright-build
 
-  build-and-deploy-changed-apps:
+  build-test-deploy-changed-apps:
     jobs:
-      - api-unit-test:
-          <<: *filter-pr-branch
-      - ui-unit-test:
-          <<: *filter-pr-branch
-          name: << matrix.study_key >>-ui-unit-test
-          matrix:
-            alias: ui-unit-test
-            parameters:
-              <<: *studies
-          requires:
-            - api-unit-test
       # conditionally launch build and deploy for changed studies
       - app-build:
           <<: *filter-pr-branch
@@ -802,6 +790,19 @@ workflows:
           check_changes: true
           requires:
             - << matrix.study_key >>-ui-unit-test
+      - api-unit-test:
+          <<: *filter-pr-branch
+          requires:
+            - app-build
+      - ui-unit-test:
+          <<: *filter-pr-branch
+          name: << matrix.study_key >>-ui-unit-test
+          matrix:
+            alias: ui-unit-test
+            parameters:
+              <<: *studies
+          requires:
+            - api-unit-test
       - app-deploy:
           <<: *filter-pr-branch
           name: << matrix.study_key >>-deploy
@@ -811,7 +812,7 @@ workflows:
               <<: *studies
           check_changes: true
           requires:
-            - << matrix.study_key >>-build
+            - << matrix.study_key >>-ui-unit-test
       - playwright-build:
           <<: *filter-pr-branch
           env: dev # on develop branch, env name is Dev because it's PR merge
