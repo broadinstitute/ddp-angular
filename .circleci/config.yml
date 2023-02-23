@@ -304,7 +304,9 @@ commands:
       - run:
           name: Check << parameters.study_key >> and stop job if study has not changed
           command: |
-            set -u     
+            set -u
+            pwd
+            ls
             echo "pipeline.git.revision=<< pipeline.git.revision >>"
             echo "pipeline.git.base_revision=<< pipeline.git.base_revision >>"
             CHANGED_STUDIES=$(../build-utils/findmodifiedprojects.sh << pipeline.git.base_revision >> << pipeline.git.revision >>)
