@@ -788,8 +788,6 @@ workflows:
             parameters:
               <<: *studies
           check_changes: true
-          requires:
-            - << matrix.study_key >>-ui-unit-test
       - api-unit-test:
           <<: *filter-pr-branch
           requires:
@@ -802,7 +800,7 @@ workflows:
             parameters:
               <<: *studies
           requires:
-            - api-unit-test
+            - app-build
       - app-deploy:
           <<: *filter-pr-branch
           name: << matrix.study_key >>-deploy
@@ -813,6 +811,7 @@ workflows:
           check_changes: true
           requires:
             - << matrix.study_key >>-ui-unit-test
+            - api-unit-test
       - playwright-build:
           <<: *filter-pr-branch
           env: dev # on develop branch, env name is Dev because it's PR merge
