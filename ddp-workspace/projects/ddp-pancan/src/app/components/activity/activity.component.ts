@@ -2,7 +2,6 @@ import { DOCUMENT } from '@angular/common';
 import { ChangeDetectorRef, Component, Inject, Injector, OnDestroy, OnInit, Renderer2 } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 
-// changed to deploy
 import {
     ActivityRedesignedComponent,
     SubmissionManager,
