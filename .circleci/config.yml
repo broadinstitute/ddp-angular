@@ -803,7 +803,7 @@ workflows:
       - api-unit-test:
           <<: *filter-pr-branch
           requires:
-            - << matrix.study_key >>-build
+            - app-build
       - ui-unit-test:
           <<: *filter-pr-branch
           name: << matrix.study_key >>-ui-unit-test
