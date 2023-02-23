@@ -295,44 +295,32 @@ commands:
             ng build $ANGULAR_PROJECT_NAME $BUILD_PARAMS --configuration production --aot --base-href=/ --output-path=$OUTPUT_DIR --verbose=true --progress=true
           #
 
-  conditionally-launch-build-and-deploy:
-    description: Check every study, launch build and deploy if study has changed
+  halt-when-study-unchanged:
+    description: Stop running build for a study if the study has not changed
     parameters:
-      study_keys:
+      study_key:
         type: string
     steps:
       - run:
-          name: Check << parameters.study_keys >> and launch build if modified
+          name: Check << parameters.study_key >> and launch build if study has been changed
           command: |
             set -u
             set +e
             set +x
-            # CircleCi does not support arrays as params, so here is my workaround
-            STUDY_KEYS=(<< parameters.study_keys >>)
-
-            CHANGED_PROJECTS=$(findmodifiedprojects.sh <<pipeline.git.base_revision >> << pipeline.git.revision >>)
-
-            echo "The following projects were found to have changed: $CHANGED_PROJECTS"
-
-            for i in "${!STUDY_KEYS[@]}"; do
-              STUDY_KEY=${STUDY_KEYS[$i]}
-
-              NG_PROJECT_NAME="ddp-$STUDY_KEY"
-              CHANGED_DEPENDENCIES=$(echo  $CHANGED_PROJECTS |
-                  grep -E -e $NG_PROJECT_NAME -e _SHARED_  -e ddp-sdk -e toolkit)
-              if [[ ! -z $CHANGED_DEPENDENCIES ]]; then
-                echo "Launching build and deploy for $NG_PROJECT_NAME"
-                curl -u "${CIRCLE_API_TOKEN}:" -X POST --header "Content-Type: application/json" -d "{
-                                  \"branch\": \"<< pipeline.git.branch >>\",
-                                  \"parameters\": {
-                                      \"study_key\": \"$STUDY_KEY\",
-                                      \"do-builds\": true
-                                  }
-                                }" https://circleci.com/api/v2/project/gh/broadinstitute/ddp-angular/pipeline
-              else
-                echo "Skipping $STUDY_KEY"
-              fi
-            done;
+           
+            CHANGED_STUDIES=$(findmodifiedprojects.sh <<pipeline.git.base_revision >> << pipeline.git.revision >>)
+            echo "Changed studies are: $CHANGED_STUDIES \n"
+            
+            NG_PROJECT_NAME="ddp-<< parameters.study_key >>"
+            CHANGED_DEPENDENCIES=$(echo  $CHANGED_STUDIES | grep -E -e $NG_PROJECT_NAME -e _SHARED_  -e ddp-sdk -e toolkit)
+            echo "_SHARED_ = $_SHARED_"
+            echo "NG_PROJECT_NAME = $NG_PROJECT_NAME"
+            echo "CHANGED_DEPENDENCIES=$CHANGED_DEPENDENCIES"
+            
+            if [[ -z $CHANGED_DEPENDENCIES ]]; then
+              echo "Halt building study: $STUDY_KEY"
+              circleci-agent step halt
+            fi
           #
 
   run-ui-unit-test:
@@ -412,27 +400,19 @@ jobs:
     parameters:
       study_key:
         type: string
+      check_changes:
+        type: boolean
+        default: false
     executor:
       name: build-executor
     steps:
-      - build:
-          study_key: << parameters.study_key >>
-      - run-ui-unit-test:
-          study_key: << parameters.study_key >>
-      - run-api-unit-test
+      - when:
+          condition: << parameters.check_changes >>
+          steps:
+            - halt-when-study-unchanged:
+                study_key: << parameters.study_key >>
       - deploy-exploded-build:
           study_key: << parameters.study_key >>
-
-  conditionally-launch-build-and-deploy-all-job:
-    working_directory: *ng_workspace_path
-    executor:
-      name: build-executor
-    steps:
-      - checkout:
-          path: *repo_path
-      - setup-shared-env
-      - conditionally-launch-build-and-deploy:
-          study_keys: *study_keys
 
   app-build:
     description: Build and store build artifacts to Google cloud storage if existing archive is not found
@@ -445,7 +425,15 @@ jobs:
       store_build:
         type: boolean
         default: true
+      check_changes:
+        type: boolean
+        default: false
     steps:
+      - when:
+          condition: << parameters.check_changes >>
+          steps:
+            - halt-when-study-unchanged:
+                study_key: << parameters.study_key >>
       - build:
           study_key: << parameters.study_key >>
       - when:
@@ -673,9 +661,6 @@ parameters:
     type: enum
     enum: ["dev", "test", "staging", "prod", "UNKNOWN"]
     default: "UNKNOWN"
-  do-builds:
-    type: boolean
-    default: false
   e2e-test-parallelism:
     type: integer
     default: 1
@@ -793,31 +778,54 @@ workflows:
           requires:
             - playwright-build
 
-  build-and-deploy-all-apps-workflow:
-    when:
-      and:
-        - not: << pipeline.parameters.do-builds >>
-        - not: << pipeline.parameters.scheduled-playwright >>
+  build-and-deploy-changed-apps:
     jobs:
-      - conditionally-launch-build-and-deploy-all-job:
+      - api-unit-test:
           <<: *filter-develop-branch
-
-  build-and-deploy-workflow:
-    when:
-      and:
-        - << pipeline.parameters.do-builds >>
-        - equal: [ "UNKNOWN", << pipeline.parameters.deploy_env >> ]
-    jobs:
+      - ui-unit-test:
+          <<: *filter-develop-branch
+          name: << matrix.study_key >>-ui-unit-test
+          matrix:
+            alias: ui-unit-test
+            parameters:
+              <<: *studies
+          requires:
+            - api-unit-test
+      # conditionally launch build and deploy for changed studies
+      - app-build:
+          <<: *filter-develop-branch
+          name: << matrix.study_key >>-build
+          matrix:
+            alias: app-build
+            parameters:
+              <<: *studies
+              check_changes: true
+          requires:
+            - << matrix.study_key >>-ui-unit-test
       - app-deploy:
-          study_key: << pipeline.parameters.study_key >>
-          filters:
-            branches:
-              ignore:
-                - /^rc.*/
-                - /^hotfix.*/
+          <<: *filter-develop-branch
+          name: << matrix.study_key >>-deploy
+          matrix:
+            alias: app-deploy
+            parameters:
+              <<: *studies
+              check_changes: true
+          requires:
+            - << matrix.study_key >>-build
+      - playwright-build:
+          <<: *filter-develop-branch
+          env: dev # on develop branch, env name is Dev because it's PR merge
+          requires:
+            - app-deploy
+      - playwright-test:
+          <<: *filter-develop-branch
+          env: dev
+          test_suite: UNKNOWN
+          parallelism_num: 2
+          requires:
+            - playwright-build
 
   build-app-workflow:
-    when: << pipeline.parameters.do-builds >>
     jobs:
       - ui-unit-test:
           <<: *filter-rc-hotfix-branch
