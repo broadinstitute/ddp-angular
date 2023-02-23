@@ -307,7 +307,7 @@ commands:
             set -u     
             echo "pipeline.git.revision=<< pipeline.git.revision >>"
             echo "pipeline.git.base_revision=<< pipeline.git.base_revision >>"
-            CHANGED_STUDIES=$(findmodifiedprojects.sh << pipeline.git.base_revision >> << pipeline.git.revision >>)
+            CHANGED_STUDIES=$(./build-utils/findmodifiedprojects.sh << pipeline.git.base_revision >> << pipeline.git.revision >>)
             echo "Changed studies are: $CHANGED_STUDIES"
             
             NG_PROJECT_NAME="ddp-<< parameters.study_key >>"
