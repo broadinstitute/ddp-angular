@@ -292,7 +292,7 @@ commands:
           #
 
   halt-when-study-unchanged:
-    description: Stop if the study has not changed
+    description: Stop job if study has not changed
     parameters:
       study_key:
         type: string
@@ -307,7 +307,8 @@ commands:
             
             NG_PROJECT_NAME="ddp-<< parameters.study_key >>"
             CHANGED_DEPENDENCIES=$(echo $CHANGED_STUDIES | grep -E -e $NG_PROJECT_NAME -e _SHARED_ -e ddp-sdk -e toolkit)
-            echo "CHANGED_DEPENDENCIES: $CHANGED_DEPENDENCIES"
+            echo "CHANGED_DEPENDENCIES:"
+            echo "$CHANGED_DEPENDENCIES"
             
             if [[ -z $CHANGED_DEPENDENCIES ]]; then
               echo "Study has not changed"
@@ -788,9 +789,9 @@ workflows:
           requires:
             - playwright-build
 
-  build-test-deploy-changed-apps:
+  build-test-deploy-apps:
+    # conditionally build and deploy for changed studies
     jobs:
-      # conditionally launch build and deploy for changed studies
       - app-build:
           <<: *filter-pr-branch
           name: << matrix.study_key >>-build
@@ -801,6 +802,8 @@ workflows:
           check_changes: true
       - api-unit-test:
           <<: *filter-pr-branch
+          requires:
+            - << matrix.study_key >>-build
       - ui-unit-test:
           <<: *filter-pr-branch
           name: << matrix.study_key >>-ui-unit-test
@@ -824,9 +827,9 @@ workflows:
             - << matrix.study_key >>-ui-unit-test
       - playwright-build:
           <<: *filter-develop-branch
-          env: dev # on develop branch, env name is Dev because it's PR merge
+          env: dev # env name is dev because it's PR merge into develop branch
           requires:
-            - app-deploy
+            - app-deploy # start after all deploys have been completed
       - playwright-test:
           <<: *filter-develop-branch
           env: dev
