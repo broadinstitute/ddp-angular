@@ -409,6 +409,9 @@ jobs:
           steps:
             - halt-when-study-unchanged:
                 study_key: << parameters.study_key >>
+      - set-deployment-environment
+      - setup-shared-env:
+          study_key: << parameters.study_key >>
       - deploy-exploded-build:
           study_key: << parameters.study_key >>
 
