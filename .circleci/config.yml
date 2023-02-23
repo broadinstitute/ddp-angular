@@ -802,8 +802,6 @@ workflows:
           check_changes: true
       - api-unit-test:
           <<: *filter-pr-branch
-          requires:
-            - app-build
       - ui-unit-test:
           <<: *filter-pr-branch
           name: << matrix.study_key >>-ui-unit-test
@@ -815,7 +813,7 @@ workflows:
           requires:
             - << matrix.study_key >>-build
       - app-deploy:
-          <<: *filter-develop-branch
+          <<: *filter-pr-branch
           name: << matrix.study_key >>-deploy
           matrix:
             alias: app-deploy
