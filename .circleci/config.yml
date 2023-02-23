@@ -793,27 +793,28 @@ workflows:
     # conditionally build and deploy for changed studies on develop branch
     jobs:
       - app-build:
-          <<: *filter-develop-branch
+          <<: *filter-pr-branch
           name: << matrix.study_key >>-build
           matrix:
             alias: app-build
             parameters:
               <<: *studies
           check_changes: true
+          requires:
+            - << matrix.study_key >>-ui-unit-test
+            - api-unit-test
       - api-unit-test:
-          <<: *filter-develop-branch
+          <<: *filter-pr-branch
       - ui-unit-test:
-          <<: *filter-develop-branch
+          <<: *filter-pr-branch
           name: << matrix.study_key >>-ui-unit-test
           matrix:
             alias: ui-unit-test
             parameters:
               <<: *studies
           check_changes: true
-          requires:
-            - << matrix.study_key >>-build
       - app-deploy:
-          <<: *filter-develop-branch
+          <<: *filter-pr-branch
           name: << matrix.study_key >>-deploy
           matrix:
             alias: app-deploy
@@ -822,35 +823,21 @@ workflows:
           check_changes: true
           requires:
             - api-unit-test
-            - << matrix.study_key >>-ui-unit-test
+            - << matrix.study_key >>-build
       - playwright-build:
-          <<: *filter-develop-branch
+          <<: *filter-pr-branch
           env: dev # env name is dev because it's PR merge into develop branch
           requires:
             - app-deploy # start after all deploys have been completed
       - playwright-test:
-          <<: *filter-develop-branch
+          <<: *filter-pr-branch
           env: dev
           test_suite: UNKNOWN
           parallelism_num: 2
           requires:
             - playwright-build
 
-  build-app-workflow:
-    jobs:
-      - ui-unit-test:
-          <<: *filter-rc-hotfix-branch
-          study_key: << pipeline.parameters.study_key >>
-      - api-unit-test:
-          <<: *filter-rc-hotfix-branch
-      - app-build:
-          <<: *filter-rc-hotfix-branch
-          study_key: << pipeline.parameters.study_key >>
-          requires:
-            - ui-unit-test
-            - api-unit-test
-
-  build-apps-rc-hotfix:
+  build-test-apps-rc-hotfix:
     # Check all studies, build and store builds for changed apps only on rc_* or hotfix_* branches
     jobs:
       - api-unit-test:
