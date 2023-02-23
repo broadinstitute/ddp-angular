@@ -19,10 +19,13 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
 else
   SED_CMD='sed -E'
 fi
-git diff --name-only $1 $2 |
-${EXCLUDE_CMD} | # Exclude from changes files that we want to ignore
-${SED_CMD} "/${NG_PROJECT_PATH_PREFIX}[^\/]*/! s/.*/${SHARED}/" | # If does not match Angular project path we call it _SHARED_
-${SED_CMD} "s_${NG_PROJECT_PATH_PREFIX}([^\/]*)/.*_\1_" | # If it does match Angular project path, save only the project dir name
-sort |
-uniq
+
+# Exclude from changes files that we want to ignore
+# If does not match Angular project path we call it _SHARED_
+# If it does match Angular project path, save only the project dir name
+git diff --name-only $1 $2 | \
+${EXCLUDE_CMD} | \
+${SED_CMD} "/${NG_PROJECT_PATH_PREFIX}[^\/]*/! s/.*/${SHARED}/" | \
+${SED_CMD} "s_${NG_PROJECT_PATH_PREFIX}([^\/]*)/.*_\1_" | \
+sort | uniq
 
