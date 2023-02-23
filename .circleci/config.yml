@@ -310,7 +310,7 @@ commands:
             echo "$CHANGED_STUDIES"
             
             NG_PROJECT_NAME="ddp-<< parameters.study_key >>"
-            CHANGED_DEPENDENCIES=$(echo $CHANGED_STUDIES | grep -E -e $NG_PROJECT_NAME  -e ddp-sdk -e toolkit)
+            CHANGED_DEPENDENCIES=$(echo $CHANGED_STUDIES | grep -E -e $NG_PROJECT_NAME -e ddp-sdk -e toolkit)
             echo "CHANGED_DEPENDENCIES: $CHANGED_DEPENDENCIES"
             
             if [[ -z $CHANGED_DEPENDENCIES ]]; then
