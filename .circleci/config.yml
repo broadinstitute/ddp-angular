@@ -313,7 +313,7 @@ commands:
             CHANGED_DEPENDENCIES=$(echo $CHANGED_STUDIES | grep -e $NG_PROJECT_NAME 2>&1)
             echo "CHANGED_DEPENDENCIES: $CHANGED_DEPENDENCIES"
             
-            if [[ -z $CHANGED_DEPENDENCIES ]]; then
+            if [ -z "$CHANGED_DEPENDENCIES" ]; then
               echo "Study has not changed"
               circleci-agent step halt
             else
