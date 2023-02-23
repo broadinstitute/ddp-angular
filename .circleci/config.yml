@@ -799,7 +799,7 @@ workflows:
             alias: app-build
             parameters:
               <<: *studies
-              check_changes: true
+          check_changes: true
           requires:
             - << matrix.study_key >>-ui-unit-test
       - app-deploy:
@@ -809,14 +809,14 @@ workflows:
             alias: app-deploy
             parameters:
               <<: *studies
-              check_changes: true
+          check_changes: true
           requires:
             - << matrix.study_key >>-build
       - playwright-build:
           <<: *filter-develop-branch
           env: dev # on develop branch, env name is Dev because it's PR merge
           requires:
-            - << matrix.study_key >>-deploy
+            - app-deploy
       - playwright-test:
           <<: *filter-develop-branch
           env: dev
