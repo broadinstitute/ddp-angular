@@ -268,10 +268,6 @@ commands:
         type: string
         default: "UNKNOWN"
     steps:
-      - checkout-code
-      - set-deployment-environment
-      - setup-shared-env:
-          study_key: << parameters.study_key >>
       - when:
           condition:
             equal: [ atcp, << parameters.study_key >> ]
@@ -407,6 +403,7 @@ jobs:
     executor:
       name: build-executor
     steps:
+      - checkout-code
       - when:
           condition: << parameters.check_changes >>
           steps:
@@ -430,11 +427,15 @@ jobs:
         type: boolean
         default: false
     steps:
+      - checkout-code
       - when:
           condition: << parameters.check_changes >>
           steps:
             - halt-when-study-unchanged:
                 study_key: << parameters.study_key >>
+      - set-deployment-environment
+      - setup-shared-env:
+          study_key: << parameters.study_key >>
       - build:
           study_key: << parameters.study_key >>
       - when:
