@@ -781,9 +781,9 @@ workflows:
   build-and-deploy-changed-apps:
     jobs:
       - api-unit-test:
-          <<: *filter-develop-branch
+          <<: *filter-pr-branch
       - ui-unit-test:
-          <<: *filter-develop-branch
+          <<: *filter-pr-branch
           name: << matrix.study_key >>-ui-unit-test
           matrix:
             alias: ui-unit-test
@@ -793,7 +793,7 @@ workflows:
             - api-unit-test
       # conditionally launch build and deploy for changed studies
       - app-build:
-          <<: *filter-develop-branch
+          <<: *filter-pr-branch
           name: << matrix.study_key >>-build
           matrix:
             alias: app-build
@@ -803,7 +803,7 @@ workflows:
           requires:
             - << matrix.study_key >>-ui-unit-test
       - app-deploy:
-          <<: *filter-develop-branch
+          <<: *filter-pr-branch
           name: << matrix.study_key >>-deploy
           matrix:
             alias: app-deploy
@@ -813,12 +813,12 @@ workflows:
           requires:
             - << matrix.study_key >>-build
       - playwright-build:
-          <<: *filter-develop-branch
+          <<: *filter-pr-branch
           env: dev # on develop branch, env name is Dev because it's PR merge
           requires:
             - app-deploy
       - playwright-test:
-          <<: *filter-develop-branch
+          <<: *filter-pr-branch
           env: dev
           test_suite: UNKNOWN
           parallelism_num: 2
