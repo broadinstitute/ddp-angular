@@ -4,18 +4,18 @@
 # If a file from a common area, like the root diretory was modified, we call that _SHARED_
 set +x
 #ignore these file name patterns when figuring out what modules changed
-declare -a exclude_patterns=( '^.*\.md' '^.*.pdf', '^.*\.spec\.ts', '.*\config.yml', '.*\.sh' )
+declare -a exclude_patterns=( '^.*\.md' '^.*.pdf', '^.*\.spec\.ts', '.*\config\.yml', '.*\.sh' )
 
 EXCLUDE_CMD='grep -v -E'
 
 for exclude_pattern in "${exclude_patterns[@]}"
 do
-	EXCLUDE_CMD="${EXCLUDE_CMD} -e ${exclude_pattern}"
+	EXCLUDE_CMD="${EXCLUDE_CMD} -e '^.*\.md' -e '^.*.pdf' -e '^.*\.spec\.ts' -e '.*\config\.yml' -e '.*\.sh'"
 done
 NG_PROJECT_PATH_PREFIX='ddp-workspace\/projects\/'
 SHARED='_SHARED_'
 if [[ "$OSTYPE" == "darwin"* ]]; then
-  SED_CMD='gsed -E'
+  SED_CMD='sed -E'
 else
   SED_CMD='sed -E'
 fi
