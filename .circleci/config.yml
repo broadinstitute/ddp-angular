@@ -822,7 +822,6 @@ workflows:
               <<: *studies
           check_changes: true
           requires:
-            - api-unit-test
             - << matrix.study_key >>-build
       - playwright-build:
           <<: *filter-pr-branch
