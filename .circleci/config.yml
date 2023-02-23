@@ -313,11 +313,10 @@ commands:
             
             NG_PROJECT_NAME="ddp-<< parameters.study_key >>"
             CHANGED_DEPENDENCIES=$(echo  $CHANGED_STUDIES | grep -E -e $NG_PROJECT_NAME -e _SHARED_  -e ddp-sdk -e toolkit)
-            echo "NG_PROJECT_NAME = $NG_PROJECT_NAME"
             echo "CHANGED_DEPENDENCIES=$CHANGED_DEPENDENCIES"
             
             if [[ -z $CHANGED_DEPENDENCIES ]]; then
-              echo "Halt building study: << parameters.study_key >>"
+              echo "Halt job because study is not changed"
               circleci-agent step halt
             fi
           #
@@ -640,8 +639,16 @@ jobs:
     parameters:
       study_key:
         type: string
+      check_changes:
+        type: boolean
+        default: false
     steps:
       - checkout-code
+      - when:
+          condition: << parameters.check_changes >>
+          steps:
+            - halt-when-study-unchanged:
+                study_key: << parameters.study_key >>
       - run-ui-unit-test:
           study_key: << parameters.study_key >>
 
@@ -797,6 +804,7 @@ workflows:
             alias: ui-unit-test
             parameters:
               <<: *studies
+          check_changes: true
           requires:
             - << matrix.study_key >>-build
       - app-deploy:
