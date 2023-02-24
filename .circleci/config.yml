@@ -793,7 +793,7 @@ workflows:
     # conditionally build and deploy for changed studies on develop branch
     jobs:
       - app-build:
-          <<: *filter-pr-branch
+          <<: *filter-develop-branch
           name: << matrix.study_key >>-build
           matrix:
             alias: app-build
@@ -804,9 +804,9 @@ workflows:
             - << matrix.study_key >>-ui-unit-test
             - api-unit-test
       - api-unit-test:
-          <<: *filter-pr-branch
+          <<: *filter-develop-branch
       - ui-unit-test:
-          <<: *filter-pr-branch
+          <<: *filter-develop-branch
           name: << matrix.study_key >>-ui-unit-test
           matrix:
             alias: ui-unit-test
@@ -814,7 +814,7 @@ workflows:
               <<: *studies
           check_changes: true
       - app-deploy:
-          <<: *filter-pr-branch
+          <<: *filter-develop-branch
           name: << matrix.study_key >>-deploy
           matrix:
             alias: app-deploy
@@ -824,12 +824,13 @@ workflows:
           requires:
             - << matrix.study_key >>-build
       - playwright-build:
-          <<: *filter-pr-branch
+          # run Playwright build and test after app-deploy even if no study has changed
+          <<: *filter-develop-branch
           env: dev # env name is dev because it's PR merge into develop branch
           requires:
             - app-deploy # start after all deploys have been completed
       - playwright-test:
-          <<: *filter-pr-branch
+          <<: *filter-develop-branch
           env: dev
           test_suite: UNKNOWN
           parallelism_num: 2
