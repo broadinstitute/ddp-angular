@@ -19,7 +19,7 @@ import {InputField} from './interfaces/input-field';
 import {Auth} from '../services/auth.service';
 import {Statics} from '../utils/statics';
 import {Scanner} from './interfaces/scanners';
-import {first} from 'rxjs/operators';
+import {first, map} from 'rxjs/operators';
 
 @Component({
   selector: 'app-scanner',
@@ -36,7 +36,7 @@ export class ScannerComponent implements DoCheck, OnDestroy {
   public additionalMessage: string | undefined;
 
   private updatePreviousFieldValidations = false;
-  private readonly subscriptionSubject$ = new Subject<void>();
+  private readonly subscriptionSubject$: Subject<void> = new Subject<void>();
 
   @ViewChildren('htmlInputElement') inputFields: QueryList<ElementRef<HTMLInputElement>>;
 
@@ -77,6 +77,7 @@ export class ScannerComponent implements DoCheck, OnDestroy {
 
     this.activeScanner.saveFn(filteredActiveScannerFieldsGroupsArray)
       .pipe(
+        map(() => ([null, {error: 'error for this field'}, null, {error: 'error for this field'}])),
         takeUntil(this.subscriptionSubject$)
       )
       .subscribe({
@@ -119,10 +120,12 @@ export class ScannerComponent implements DoCheck, OnDestroy {
 
   public resetValidations(): void {
     if(this.updatePreviousFieldValidations) {
+      // @ts-ignore
       const previousFormControls = Object.values((this.scannerFields.at(this.scannerFields.length - 2) as FormGroup).controls);
       previousFormControls.forEach((formControl: FormControl) => formControl.updateValueAndValidity({emitEvent: false}));
       this.updatePreviousFieldValidations = false;
     }
+    // @ts-ignore
     const lastFormGroupControls = Object.values((this.scannerFields.at(this.scannerFields.length - 1) as FormGroup).controls);
     lastFormGroupControls.forEach((formControl: FormControl) => formControl.setErrors(null));
   }
@@ -173,25 +176,15 @@ export class ScannerComponent implements DoCheck, OnDestroy {
   }
 
   private removeSuccessfulScans(responseData: any[]): void {
-    const filteredActiveScannerFieldsGroupsArray = this.filteredNonNullFieldsGroups;
-    const fieldsGroupToRemoveCollection = [];
+    responseData.forEach((data: any, index: number) => {
+      // @ts-ignore
+      data && index !== this.scannerFields.length - 1 && this.scannerFields.at(index).setErrors({notFound: data?.error});
+    })
 
-    filteredActiveScannerFieldsGroupsArray.forEach((fieldsGroup: object, fieldsGroupIndex: number) => {
-      const lastField = this.getLastFieldFor(fieldsGroup);
-      const foundObject = responseData.find((responseObject: any) => fieldsGroup[lastField] === responseObject.kit);
-
-      foundObject ? this.scannerFields.at(fieldsGroupIndex).setErrors({notFound: foundObject.error}) :
-        fieldsGroupToRemoveCollection.push(fieldsGroup);
-    });
-
-    fieldsGroupToRemoveCollection.length && fieldsGroupToRemoveCollection.forEach((fieldsGroupToRemove: object) => {
-      const lastField1 = this.getLastFieldFor(fieldsGroupToRemove);
-      const findObjectIndex = this.scannerFields.getRawValue().findIndex((objectValue: any) => {
-        const lastField2 = this.getLastFieldFor(objectValue);
-        return objectValue[lastField2] === fieldsGroupToRemove[lastField1];
-      });
-      this.scannerFields.removeAt(findObjectIndex);
-    });
+    for (let i = 0; i < this.scannerFields.length - 1; i++) {
+      !this.scannerFields.at(i).hasError('notFound') &&
+      this.scannerFields.removeAt(i)
+    }
   }
 
   private getLastFieldFor(obj: object): any {
@@ -200,6 +193,7 @@ export class ScannerComponent implements DoCheck, OnDestroy {
 
   private get filteredNonNullFieldsGroups(): object[] {
     return this.scannerFields.getRawValue()
+      // @ts-ignore
       .filter((fieldsGroup: object) => Object.values(fieldsGroup).every((fieldValue: string | null) => fieldValue));
   }
 
