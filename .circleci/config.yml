@@ -43,6 +43,18 @@ references:
         ignore:
           - develop
           - master
+          - test
+          - staging
+          - production
+          - /^rc.*/
+          - /^hotfix.*/
+
+  filter-rc-hotfix-branch: &filter-rc-hotfix-branch
+    filters:
+      tags:
+        ignore: /.*/
+      branches:
+        only:
           - /^rc.*/
           - /^hotfix.*/
 
@@ -321,41 +333,6 @@ commands:
             done;
           #
 
-  conditionally-launch-build-and-store:
-    description: Launch build and save job if build missing
-    parameters:
-      study_key:
-        type: string
-    steps:
-      - setup-shared-env:
-          study_key: << parameters.study_key >>
-      - run:
-          name: Initiate build for <<parameters.study_key>> and git SHA << pipeline.git.revision >> if existing one not found
-          command: |
-            set -u
-            set +e
-            readvault.sh secret/pepper/prod/v1/conf .data.gcp.serviceKey | gcloud auth activate-service-account --key-file=-
-            TAR_FILE_URL_PATTERN="gs://${BUILDS_BUCKET}/${ANGULAR_PROJECT_NAME}/${ANGULAR_PROJECT_NAME}_*_${SHORT_GIT_SHA}.tar.gz"
-            echo "Checking for ${TAR_FILE_URL_PATTERN}"
-            # For some reason following line generating exit code 1 every time in CircleCI. Use set +e so script can continue
-            TAR_FILE_URL=`gsutil ls $TAR_FILE_URL_PATTERN  | head -1`
-
-            # if not found, let's kick off a build
-            if [ -z $TAR_FILE_URL ]
-              then
-                echo "No build found for <<parameters.study_key>> with git sha ${SHORT_GIT_SHA}. Initiating a build for it."
-                curl -u "${CIRCLE_API_TOKEN}:" -X POST --header "Content-Type: application/json" -d '{
-                  "branch": "<< pipeline.git.branch >>",
-                  "parameters": {
-                      "study_key": "<<parameters.study_key>>",
-                      "do-builds": true
-                  }
-                }' https://circleci.com/api/v2/project/gh/broadinstitute/ddp-angular/pipeline
-              else
-                echo "Build for <<parameters.study_key>> found at URL: ${TAR_FILE_URL}. No new build will be initiated"
-            fi
-          #
-
   run-ui-unit-test:
     description: Lint code and run ui unit tests for specified app
     parameters:
@@ -454,52 +431,6 @@ jobs:
       - setup-shared-env
       - conditionally-launch-build-and-deploy:
           study_keys: *study_keys
-
-  conditionally-launch-build-and-store-all-job:
-    working_directory: *ng_workspace_path
-    executor:
-      name: build-executor
-    steps:
-      - checkout:
-          path: *repo_path
-      - conditionally-launch-build-and-store:
-          study_key: basil
-      - conditionally-launch-build-and-store:
-          study_key: osteo
-      - conditionally-launch-build-and-store:
-          study_key: brain
-      - conditionally-launch-build-and-store:
-          study_key: angio
-      - conditionally-launch-build-and-store:
-          study_key: mbc
-      - conditionally-launch-build-and-store:
-          study_key: testboston
-      - conditionally-launch-build-and-store:
-          study_key: mpc
-      - conditionally-launch-build-and-store:
-          study_key: atcp
-      - conditionally-launch-build-and-store:
-          study_key: rarex
-      - conditionally-launch-build-and-store:
-          study_key: rgp
-      - conditionally-launch-build-and-store:
-          study_key: esc
-      - conditionally-launch-build-and-store:
-          study_key: prion
-      - conditionally-launch-build-and-store:
-          study_key: cgc
-      - conditionally-launch-build-and-store:
-          study_key: circadia
-      - conditionally-launch-build-and-store:
-          study_key: pancan
-      - conditionally-launch-build-and-store:
-          study_key: singular
-      - conditionally-launch-build-and-store:
-          study_key: brugada
-      - conditionally-launch-build-and-store:
-          study_key: lms
-      - conditionally-launch-build-and-store:
-          study_key: fon
 
   app-build:
     description: Run build and store build artifacts to Google cloud storage
@@ -751,25 +682,28 @@ workflows:
           <<: *filter-pr-branch
           # Don't store PR build artifacts
           store_build: false
-          name: << matrix.study_key >>-build
+          name: << matrix.study_key >>-build-pr
           matrix:
             alias: app-build
-            parameters:
-              study_key: [ basil, osteo, angio, brain, mbc, mpc, atcp, rgp, esc, prion, pancan, singular, brugada, lms ]
+            parameters: &studies
+              study_key: [ basil, osteo, brain, angio, mbc, testboston, mpc, prion, atcp, rarex, rgp, esc, cgc, circadia, pancan, singular, brugada, lms, fon ]
+          requires:
+            - << matrix.study_key >>-ui-unit-test-pr
+            - api-unit-test
       - ui-unit-test:
           <<: *filter-pr-branch
-          name: << matrix.study_key >>-ui-unit-test
+          name: << matrix.study_key >>-ui-unit-test-pr
           matrix:
             alias: app-ui-unit-test
             parameters:
-              study_key: [ basil, osteo, angio, brain, mbc, mpc, atcp, rgp, esc, prion, pancan, singular, brugada, lms ]
+              <<: *studies
       - api-unit-test:
           <<: *filter-pr-branch
       - playwright-build:
           <<: *filter-pr-branch
 
   build-single-app:
-    # Build study specified in api call by run_ci.sh
+    # Deploy a study to environment specified in api call by run_ci.sh, using stored build in Google bucket.
     when:
       and:
         - equal: ["build-and-store", << pipeline.parameters.api_call >>]
@@ -857,27 +791,32 @@ workflows:
     # should run; should be this one that just launches the builds or the one actually doing the builds
     unless: << pipeline.parameters.do-builds >>
     jobs:
-      - conditionally-launch-build-and-store-all-job: &build-and-store-filters
-          filters:
-            branches:
-              only:
-                - /^rc.*/
-                - /^hotfix.*/
+      - api-unit-test:
+          <<: *filter-rc-hotfix-branch
+      - ui-unit-test:
+          <<: *filter-rc-hotfix-branch
+          name: << matrix.study_key >>-ui-unit-test
+          matrix:
+            alias: app-ui-unit-test
+            parameters:
+              <<: *studies
+      - app-build:
+          <<: *filter-rc-hotfix-branch
+          name: << matrix.study_key >>-build
+          matrix:
+            alias: app-build
+            parameters:
+              <<: *studies
+          requires:
+            - << matrix.study_key >>-ui-unit-test
+            - api-unit-test
 
   build-app-workflow:
     when: << pipeline.parameters.do-builds >>
     jobs:
-      - ui-unit-test:
-          <<: *build-and-store-filters
-          study_key: << pipeline.parameters.study_key >>
-      - api-unit-test:
-          <<: *build-and-store-filters
       - app-build:
-          <<: *build-and-store-filters
+          <<: *filter-rc-hotfix-branch
           study_key: << pipeline.parameters.study_key >>
-          requires:
-            - ui-unit-test
-            - api-unit-test
 
   deploy-all-apps-workflow:
     jobs:
