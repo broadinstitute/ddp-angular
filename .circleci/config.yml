@@ -703,7 +703,7 @@ workflows:
           <<: *filter-pr-branch
 
   build-single-app:
-    # Deploy a study to environment specified in api call by run_ci.sh, using stored build in Google bucket.
+    # Build study specified in api call by run_ci.sh
     when:
       and:
         - equal: ["build-and-store", << pipeline.parameters.api_call >>]
