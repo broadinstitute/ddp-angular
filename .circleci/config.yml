@@ -5,16 +5,16 @@ orbs:
 
 references:
   repo_path: &repo_path
-               /home/circleci/repo
+    /home/circleci/repo
 
   ng_workspace_path: &ng_workspace_path
-                       /home/circleci/repo/ddp-workspace
+    /home/circleci/repo/ddp-workspace
 
   playwright_path: &playwright_path
-                     /home/circleci/repo/playwright-e2e
+    /home/circleci/repo/playwright-e2e
 
   npm_cache_key: &npm_cache_key
-                   v1-dependency-npm2-{{ checksum "package.json" }}-{{ checksum "package-lock.json" }}
+    v1-dependency-npm2-{{ checksum "package.json" }}-{{ checksum "package-lock.json" }}
 
   npm_cache_restore_key: &npm_cache_restore_key
     keys:
@@ -22,10 +22,10 @@ references:
 
   # Note: important that values of guids and keys have matching order!"
   study_keys: &study_keys
-                "basil dsm-ui osteo brain angio mbc testboston mpc prion atcp rarex rgp esc cgc circadia pancan singular brugada lms fon"
+    "basil dsm-ui osteo brain angio mbc testboston mpc prion atcp rarex rgp esc cgc circadia pancan singular brugada lms fon"
 
   study_guids: &study_guids
-                 "basil NA CMI-OSTEO cmi-brain ANGIO cmi-mbc testboston cmi-mpc PRION atcp rarex RGP cmi-esc cgc circadia cmi-pancan singular brugada cmi-lms fon"
+    "basil NA CMI-OSTEO cmi-brain ANGIO cmi-mbc testboston cmi-mpc PRION atcp rarex RGP cmi-esc cgc circadia cmi-pancan singular brugada cmi-lms fon"
 
   # Job runs for develop branch only
   filter-develop-branch: &filter-develop-branch
