@@ -412,6 +412,8 @@ commands:
       - run:
           name: Wait for all Google App Engine operations to finish
           command: |
+            pwd
+            ls
             .circleci/wait-for-gae-pending-done.sh
 
 jobs:
@@ -818,7 +820,7 @@ workflows:
     # conditionally build and deploy for changed studies on develop branch
     jobs:
       - app-build:
-          <<: *filter-pr-branch
+          <<: *filter-develop-branch
           name: << matrix.study_key >>-build
           matrix:
             alias: app-build
@@ -829,9 +831,9 @@ workflows:
             - << matrix.study_key >>-ui-unit-test
             - api-unit-test
       - api-unit-test:
-          <<: *filter-pr-branch
+          <<: *filter-develop-branch
       - ui-unit-test:
-          <<: *filter-pr-branch
+          <<: *filter-develop-branch
           name: << matrix.study_key >>-ui-unit-test
           matrix:
             alias: ui-unit-test
@@ -846,8 +848,9 @@ workflows:
             parameters:
               <<: *studies
           check_changes: true
-          requires:
-            - << matrix.study_key >>-build
+          # undo comment
+          #requires:
+          #  - << matrix.study_key >>-build
       - playwright-build:
           # run Playwright build and test after app-deploy even if no study has changed
           <<: *filter-develop-branch
