@@ -5,13 +5,13 @@ orbs:
 
 references:
   repo_path: &repo_path
-      /home/circleci/repo
+    /home/circleci/repo
 
   ng_workspace_path: &ng_workspace_path
-      /home/circleci/repo/ddp-workspace
+    /home/circleci/repo/ddp-workspace
 
   playwright_path: &playwright_path
-      /home/circleci/repo/playwright-e2e
+    /home/circleci/repo/playwright-e2e
 
   npm_cache_key: &npm_cache_key
     v1-dependency-npm2-{{ checksum "package.json" }}-{{ checksum "package-lock.json" }}
@@ -43,15 +43,6 @@ references:
         ignore:
           - develop
           - master
-          - /^rc.*/
-          - /^hotfix.*/
-
-  filter-rc-hotfix-branch: &filter-rc-hotfix-branch
-    filters:
-      tags:
-        ignore: /.*/
-      branches:
-        only:
           - /^rc.*/
           - /^hotfix.*/
 
@@ -104,7 +95,6 @@ commands:
             else
               DEPLOY_TARGET_ENV="<< pipeline.git.branch >>"
             fi
-            echo "DEPLOY_TARGET_ENV=$DEPLOY_TARGET_ENV"
 
             case $DEPLOY_TARGET_ENV in
               dev*)
@@ -242,20 +232,16 @@ commands:
                       break;
                   fi
               done;
-              
               if [[ -z $STUDY_GUID ]]; then
                 echo "Could not find study guid for <<parameters.study_key>>"
                 exit 1
               fi
-            
               echo 'export ANGULAR_PROJECT_NAME=ddp-<<parameters.study_key>>' >> $BASH_ENV
               echo 'export ANGULAR_PROJECT_DIR_PATH=projects/ddp-<<parameters.study_key>>' >> $BASH_ENV
               source $BASH_ENV
-            
               OUTPUT_DIR="${ANGULAR_PROJECT_DIR_PATH}/dist"
               echo "export OUTPUT_DIR=$OUTPUT_DIR" >> $BASH_ENV
             fi
-            
             echo "export SHORT_GIT_SHA=`echo '<< pipeline.git.revision >>' | cut -c 1-7`" >> $BASH_ENV
             echo 'export BUILDS_BUCKET=ddp-build-artifacts' >> $BASH_ENV
             source $BASH_ENV
@@ -296,7 +282,7 @@ commands:
           #
 
   conditionally-launch-build-and-deploy:
-    description: Check every study, launch build and deploy if study has changed
+    description: Launch build and deploy if project has changed
     parameters:
       study_keys:
         type: string
@@ -335,6 +321,41 @@ commands:
             done;
           #
 
+  conditionally-launch-build-and-store:
+    description: Launch build and save job if build missing
+    parameters:
+      study_key:
+        type: string
+    steps:
+      - setup-shared-env:
+          study_key: << parameters.study_key >>
+      - run:
+          name: Initiate build for <<parameters.study_key>> and git SHA << pipeline.git.revision >> if existing one not found
+          command: |
+            set -u
+            set +e
+            readvault.sh secret/pepper/prod/v1/conf .data.gcp.serviceKey | gcloud auth activate-service-account --key-file=-
+            TAR_FILE_URL_PATTERN="gs://${BUILDS_BUCKET}/${ANGULAR_PROJECT_NAME}/${ANGULAR_PROJECT_NAME}_*_${SHORT_GIT_SHA}.tar.gz"
+            echo "Checking for ${TAR_FILE_URL_PATTERN}"
+            # For some reason following line generating exit code 1 every time in CircleCI. Use set +e so script can continue
+            TAR_FILE_URL=`gsutil ls $TAR_FILE_URL_PATTERN  | head -1`
+
+            # if not found, let's kick off a build
+            if [ -z $TAR_FILE_URL ]
+              then
+                echo "No build found for <<parameters.study_key>> with git sha ${SHORT_GIT_SHA}. Initiating a build for it."
+                curl -u "${CIRCLE_API_TOKEN}:" -X POST --header "Content-Type: application/json" -d '{
+                  "branch": "<< pipeline.git.branch >>",
+                  "parameters": {
+                      "study_key": "<<parameters.study_key>>",
+                      "do-builds": true
+                  }
+                }' https://circleci.com/api/v2/project/gh/broadinstitute/ddp-angular/pipeline
+              else
+                echo "Build for <<parameters.study_key>> found at URL: ${TAR_FILE_URL}. No new build will be initiated"
+            fi
+          #
+
   run-ui-unit-test:
     description: Lint code and run ui unit tests for specified app
     parameters:
@@ -354,13 +375,13 @@ commands:
             mkdir -p /tmp/junit
             ng test $ANGULAR_PROJECT_NAME --watch=false --browsers ChromeHeadlessNoSandbox --reporters junit
           environment:
-            JUNIT_REPORT_PATH: /tmp/ui/junit/
+            JUNIT_REPORT_PATH: /tmp/junit/
             JUNIT_REPORT_NAME: test-results.xml
           when: always
       - store_test_results:
-          path: /tmp/ui/junit
+          path: /tmp/junit
       - store_artifacts:
-          path: /tmp/ui/junit
+          path: /tmp/junit
 
   run-api-unit-test:
     description: Lint code and run api unit tests for sdk and toolkit
@@ -377,13 +398,13 @@ commands:
             ng test ddp-sdk --watch=false --browsers ChromeHeadlessNoSandbox --reporters junit
             ng test toolkit --watch=false --browsers ChromeHeadlessNoSandbox --reporters junit
           environment:
-            JUNIT_REPORT_PATH: /tmp/api/junit/
+            JUNIT_REPORT_PATH: /tmp/junit/
             JUNIT_REPORT_NAME: test-results.xml
           when: always
       - store_test_results:
-          path: /tmp/api/junit
+          path: /tmp/junit
       - store_artifacts:
-          path: /tmp/api/junit
+          path: /tmp/junit
 
   halt-playwright-check:
     description: Stop running Playwright test job if halt conditions are met
@@ -434,8 +455,54 @@ jobs:
       - conditionally-launch-build-and-deploy:
           study_keys: *study_keys
 
+  conditionally-launch-build-and-store-all-job:
+    working_directory: *ng_workspace_path
+    executor:
+      name: build-executor
+    steps:
+      - checkout:
+          path: *repo_path
+      - conditionally-launch-build-and-store:
+          study_key: basil
+      - conditionally-launch-build-and-store:
+          study_key: osteo
+      - conditionally-launch-build-and-store:
+          study_key: brain
+      - conditionally-launch-build-and-store:
+          study_key: angio
+      - conditionally-launch-build-and-store:
+          study_key: mbc
+      - conditionally-launch-build-and-store:
+          study_key: testboston
+      - conditionally-launch-build-and-store:
+          study_key: mpc
+      - conditionally-launch-build-and-store:
+          study_key: atcp
+      - conditionally-launch-build-and-store:
+          study_key: rarex
+      - conditionally-launch-build-and-store:
+          study_key: rgp
+      - conditionally-launch-build-and-store:
+          study_key: esc
+      - conditionally-launch-build-and-store:
+          study_key: prion
+      - conditionally-launch-build-and-store:
+          study_key: cgc
+      - conditionally-launch-build-and-store:
+          study_key: circadia
+      - conditionally-launch-build-and-store:
+          study_key: pancan
+      - conditionally-launch-build-and-store:
+          study_key: singular
+      - conditionally-launch-build-and-store:
+          study_key: brugada
+      - conditionally-launch-build-and-store:
+          study_key: lms
+      - conditionally-launch-build-and-store:
+          study_key: fon
+
   app-build:
-    description: Build and store build artifacts to Google cloud storage if existing archive is not found
+    description: Run build and store build artifacts to Google cloud storage
     working_directory: *ng_workspace_path
     executor:
       name: build-executor
@@ -449,38 +516,23 @@ jobs:
       - build:
           study_key: << parameters.study_key >>
       - when:
-          # Store build artifacts if store_build==true
+          # Store build artifacts if store_build = true
           condition: << parameters.store_build >>
           steps:
             - run:
-                name: Create build archive for << parameters.study_key >> with git SHA << pipeline.git.revision >> if existing one is not found in Google bucket
+                name: Create build archive for << parameters.study_key >> with git SHA << pipeline.git.revision >>
                 command: |
                   set -u
-                  set +e
-                  
-                  readvault.sh secret/pepper/prod/v1/conf .data.gcp.serviceKey | gcloud auth activate-service-account --key-file=-
-                  TAR_FILE_URL_PATTERN="gs://${BUILDS_BUCKET}/${ANGULAR_PROJECT_NAME}/${ANGULAR_PROJECT_NAME}_*_${SHORT_GIT_SHA}.tar.gz"
-                  echo "Checking for TAR_FILE_URL_PATTERN: ${TAR_FILE_URL_PATTERN}"
-                  # For some reason following line generating exit code 1 every time in CircleCI. Use set +e so script can continue
-                  TAR_FILE_URL=`gsutil ls $TAR_FILE_URL_PATTERN  | head -1`
-                  
-                  # Store build artifacts if no build archive matches search pattern
-                  if [ -z $TAR_FILE_URL ]; then
-                    DATE=`date +%F`
-                    TAR_NAME="${ANGULAR_PROJECT_NAME}_${DATE}_${SHORT_GIT_SHA}.tar.gz"
-                    TAR_PATH="/tmp/${TAR_NAME}"
-                    echo "export TAR_NAME=$TAR_NAME" >> $BASH_ENV
-                    echo "export TAR_PATH=$TAR_PATH" >> $BASH_ENV
-                    source $BASH_ENV
-                    cd ${OUTPUT_DIR}
-                    tar -czvf ${TAR_PATH} .
-                    echo "Tar file created at ${TAR_PATH}"
-                    ls -l $TAR_PATH
-                  else
-                    echo "Build archive for <<parameters.study_key>> with git SHA: << pipeline.git.revision >> is found at URL: ${TAR_FILE_URL}"
-                    echo "Skipping store build archive"
-                    circleci-agent step halt
-                  fi
+                  DATE=`date +%F`
+                  TAR_NAME="${ANGULAR_PROJECT_NAME}_${DATE}_${SHORT_GIT_SHA}.tar.gz"
+                  TAR_PATH="/tmp/${TAR_NAME}"
+                  # Save some ENV vars for in job downstream
+                  echo "export TAR_NAME=$TAR_NAME" >> $BASH_ENV
+                  echo "export TAR_PATH=$TAR_PATH" >> $BASH_ENV
+                  cd ${OUTPUT_DIR}
+                  tar -czvf ${TAR_PATH} .
+                  echo "Tar file created at ${TAR_PATH}"
+                  ls -l $TAR_PATH
             - run:
                 name: Store build archive for << parameters.study_key >> with git SHA << pipeline.git.revision >>
                 command: |
@@ -699,22 +751,18 @@ workflows:
           <<: *filter-pr-branch
           # Don't store PR build artifacts
           store_build: false
-          name: << matrix.study_key >>-build-pr
+          name: << matrix.study_key >>-build
           matrix:
             alias: app-build
-            parameters: &studies
-              study_key: [ basil, osteo, brain, angio, mbc, testboston, mpc, prion, atcp, rarex, rgp, esc, cgc, circadia, pancan, singular, brugada, lms, fon ]
-          requires:
-            - << matrix.study_key >>-ui-unit-test-pr
+            parameters:
+              study_key: [ basil, osteo, angio, brain, mbc, mpc, atcp, rgp, esc, prion, pancan, singular, brugada, lms ]
       - ui-unit-test:
           <<: *filter-pr-branch
-          name: << matrix.study_key >>-ui-unit-test-pr
+          name: << matrix.study_key >>-ui-unit-test
           matrix:
             alias: app-ui-unit-test
             parameters:
-              <<: *studies
-          requires:
-            - api-unit-test
+              study_key: [ basil, osteo, angio, brain, mbc, mpc, atcp, rgp, esc, prion, pancan, singular, brugada, lms ]
       - api-unit-test:
           <<: *filter-pr-branch
       - playwright-build:
@@ -738,7 +786,7 @@ workflows:
             - api-unit-test
 
   deploy-single-app:
-    # Deploy a study to environment specified in api call by run_ci.sh, using stored build in Google bucket.
+    # Deploy a study build to environment specified in api call by run_ci.sh
     when:
       and:
         - equal: ["deploy", << pipeline.parameters.api_call >>]
@@ -749,37 +797,25 @@ workflows:
             equal: ["UNKNOWN", << pipeline.parameters.study_key >>]
     jobs:
       - deploy-stored-build-job:
-          name: deploy-stored-build-<< pipeline.parameters.study_key >>-<< pipeline.parameters.deploy_env >>
           study_key: << pipeline.parameters.study_key >>
-      # After deploy, run Playwright E2E tests against Dev or Test but not for Staging and Production
-      - playwright-build:
-          env: << pipeline.parameters.deploy_env >>
-          requires:
-            - deploy-stored-build-job
-      - playwright-test:
-          env: << pipeline.parameters.deploy_env >>
-          test_suite: << pipeline.parameters.study_key >> # Note: not all studies have Playwright E2E tests
-          parallelism_num: 2
-          requires:
-            - playwright-build
 
   api-run-tests-workflow:
     # Run ui tests for study specified in api call by run_ci.sh and tests for sdk and toolkit
-      when:
-        and:
-          - equal: ["run-tests", << pipeline.parameters.api_call >>]
-          - not:
-              or:
-                - equal: ["UNKNOWN", << pipeline.parameters.study_key >>]
-                - equal: ["unknown", << pipeline.parameters.study_key >>]
-      jobs:
-        - api-unit-test
-        - ui-unit-test:
-            study_key: << pipeline.parameters.study_key >>
+    when:
+      and:
+        - equal: ["run-tests", << pipeline.parameters.api_call >>]
+        - not:
+            or:
+              - equal: ["UNKNOWN", << pipeline.parameters.study_key >>]
+              - equal: ["unknown", << pipeline.parameters.study_key >>]
+    jobs:
+      - api-unit-test
+      - ui-unit-test:
+          study_key: << pipeline.parameters.study_key >>
 
   playwright-test-workflow:
-    # Triggered by CI API (run_ci.sh)
-    # Run Playwright E2E tests against Dev or Test but not for Staging and Production
+    # Triggered by CI API (for example, run_ci.sh)
+    # Run Playwright tests against Dev and Test but not for Staging and Production
     when:
       and:
         - equal: [ "run-e2e-tests", << pipeline.parameters.api_call >> ]
@@ -806,7 +842,7 @@ workflows:
     when:
       and:
         - << pipeline.parameters.do-builds >>
-        - equal: [ "UNKNOWN", << pipeline.parameters.deploy_env >> ]
+        - equal: ["UNKNOWN", << pipeline.parameters.deploy_env >>]
     jobs:
       - app-deploy:
           study_key: << pipeline.parameters.study_key >>
@@ -816,44 +852,32 @@ workflows:
                 - /^rc.*/
                 - /^hotfix.*/
 
+  launch-all-app-builds-workflow:
+    # using do-builds param to select which of the two workflows using the build-on-tag-filters
+    # should run; should be this one that just launches the builds or the one actually doing the builds
+    unless: << pipeline.parameters.do-builds >>
+    jobs:
+      - conditionally-launch-build-and-store-all-job: &build-and-store-filters
+          filters:
+            branches:
+              only:
+                - /^rc.*/
+                - /^hotfix.*/
+
   build-app-workflow:
     when: << pipeline.parameters.do-builds >>
     jobs:
       - ui-unit-test:
-          <<: *filter-rc-hotfix-branch
+          <<: *build-and-store-filters
           study_key: << pipeline.parameters.study_key >>
       - api-unit-test:
-          <<: *filter-rc-hotfix-branch
+          <<: *build-and-store-filters
       - app-build:
-          <<: *filter-rc-hotfix-branch
+          <<: *build-and-store-filters
           study_key: << pipeline.parameters.study_key >>
           requires:
             - ui-unit-test
             - api-unit-test
-
-  build-apps-rc-hotfix:
-    # Check all studies, build and store builds for changed apps only on rc_* or hotfix_* branches
-    jobs:
-      - api-unit-test:
-          <<: *filter-rc-hotfix-branch
-      - ui-unit-test:
-          <<: *filter-rc-hotfix-branch
-          name: << matrix.study_key >>-ui-unit-test
-          matrix:
-            alias: app-ui-unit-test
-            parameters:
-              <<: *studies
-          requires:
-            - api-unit-test
-      - app-build:
-          <<: *filter-rc-hotfix-branch
-          name: << matrix.study_key >>-build
-          matrix:
-            alias: app-build
-            parameters:
-              <<: *studies
-          requires:
-            - << matrix.study_key >>-ui-unit-test
 
   deploy-all-apps-workflow:
     jobs:
