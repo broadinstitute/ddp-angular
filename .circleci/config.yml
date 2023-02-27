@@ -375,13 +375,13 @@ commands:
             mkdir -p /tmp/junit
             ng test $ANGULAR_PROJECT_NAME --watch=false --browsers ChromeHeadlessNoSandbox --reporters junit
           environment:
-            JUNIT_REPORT_PATH: /tmp/junit/
+            JUNIT_REPORT_PATH: /tmp/ui/junit/
             JUNIT_REPORT_NAME: test-results.xml
           when: always
       - store_test_results:
-          path: /tmp/junit
+          path: /tmp/ui/junit
       - store_artifacts:
-          path: /tmp/junit
+          path: /tmp/ui/junit
 
   run-api-unit-test:
     description: Lint code and run api unit tests for sdk and toolkit
@@ -398,13 +398,13 @@ commands:
             ng test ddp-sdk --watch=false --browsers ChromeHeadlessNoSandbox --reporters junit
             ng test toolkit --watch=false --browsers ChromeHeadlessNoSandbox --reporters junit
           environment:
-            JUNIT_REPORT_PATH: /tmp/junit/
+            JUNIT_REPORT_PATH: /tmp/api/junit/
             JUNIT_REPORT_NAME: test-results.xml
           when: always
       - store_test_results:
-          path: /tmp/junit
+          path: /tmp/api/junit
       - store_artifacts:
-          path: /tmp/junit
+          path: /tmp/api/junit
 
   halt-playwright-check:
     description: Stop running Playwright test job if halt conditions are met
