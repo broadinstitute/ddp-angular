@@ -546,8 +546,6 @@ jobs:
           name: Save Vault secrets into temp file to persist across jobs
           command: |
             set -u
-            echo "export ENV=<< parameters.env >>" >> $BASH_ENV
-            source $BASH_ENV
             .circleci/export-playwright-env.sh
       - run:
           working_directory: *playwright_path
@@ -598,7 +596,7 @@ jobs:
             cat .env | awk '/^[^#]/ {print "export " $0}' >> "$BASH_ENV"
             # export env from file (created in build-playwright-job)
             cat playwright-env/envvars | awk '{print "export " $0}' >> "$BASH_ENV"
-            source $BASH_ENV
+            source "$BASH_ENV"
       - node/install:
           install-yarn: false
           node-version: '18.13.0' # LTS version
@@ -614,6 +612,7 @@ jobs:
           working_directory: *playwright_path
           command: |
             echo 'Study: ' << parameters.test_suite >>
+
             if [ << parameters.test_suite >> == "UNKNOWN" ]; then
               # Grep all E2E tests
               npx playwright test --list | grep -o 'tests/.*.spec.ts' > e2e_tests.txt
