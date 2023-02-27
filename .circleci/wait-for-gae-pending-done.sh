@@ -1,15 +1,12 @@
 #!/bin/bash
-
+# https://gist.github.com/RayBB/0b442641ad740701ef5c96f5f9ef9dd9
 set -x
 
 GCLOUD_PROJECT="broad-ddp-$ENVIRONMENT"
 gcloud config set project "$GCLOUD_PROJECT"
 
-DEBIAN_FRONTEND=noninteractive
-
-WAITFORGAE() {
+WAIT_FOR_GAE() {
   PENDING=$(gcloud app operations list --format=json --pending)
-  echo $PENDING
   PENDING_OPERATION_COUNT=$(echo "$PENDING" | jq '. | length')
 
   echo "$PENDING_OPERATION_COUNT pending operations"
@@ -19,9 +16,9 @@ WAITFORGAE() {
     gcloud app operations wait "$ID"
     # Sleep up to 30 seconds
     sleep $(((RANDOM % 30) + 1))
-    WAITFORGAE
+    WAIT_FOR_GAE
   fi
 }
 
 # Invoke function
-WAITFORGAE
+WAIT_FOR_GAE

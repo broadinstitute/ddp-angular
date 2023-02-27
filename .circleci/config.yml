@@ -208,7 +208,7 @@ commands:
       - run:
           name: Wait for all Google App Engine operations to finish
           command: |
-            .circleci/wait-for-gae-pending-done.sh
+            ../.circleci/wait-for-gae-pending-done.sh
       - run:
           name: Update deployments sheet
           command: |
@@ -397,24 +397,6 @@ commands:
                 name: "Halt running Playwright test job. Not supported for ENV=<< parameters.env >>"
                 command: circleci-agent step halt
 
-  deploy-check-script-delete-me:
-    description: Deploy files to GAE
-    parameters:
-      study_key:
-        type: string
-    steps:
-      - run:
-          name: Setup gcloud context
-          command: |
-            set -u
-            readvault.sh secret/pepper/${ENVIRONMENT}/v1/conf .data.gcp.serviceKey | gcloud auth activate-service-account --key-file=-
-            gcloud --quiet config set compute/zone ${GOOGLE_COMPUTE_ZONE}
-      - run:
-          name: Wait for all Google App Engine operations to finish
-          command: |
-            pwd
-            ls
-            ../.circleci/wait-for-gae-pending-done.sh
 
 jobs:
   app-deploy:
@@ -437,7 +419,7 @@ jobs:
       - set-deployment-environment
       - setup-shared-env:
           study_key: << parameters.study_key >>
-      - deploy-check-script-delete-me: #deploy-exploded-build:
+      - deploy-exploded-build:
           study_key: << parameters.study_key >>
 
   app-build:
@@ -841,16 +823,15 @@ workflows:
               <<: *studies
           check_changes: true
       - app-deploy:
-          <<: *filter-pr-branch
+          <<: *filter-develop-branch
           name: << matrix.study_key >>-deploy
           matrix:
             alias: app-deploy
             parameters:
               <<: *studies
           check_changes: true
-          # undo comment
-          #requires:
-          #  - << matrix.study_key >>-build
+          requires:
+            - << matrix.study_key >>-build
       - playwright-build:
           # run Playwright build and test after app-deploy even if no study has changed
           <<: *filter-develop-branch
