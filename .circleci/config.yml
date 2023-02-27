@@ -789,7 +789,7 @@ workflows:
           requires:
             - playwright-build
 
-  build-test-deploy-apps:
+  build-deploy:
     # conditionally build and deploy for changed studies on develop branch
     jobs:
       - app-build:
