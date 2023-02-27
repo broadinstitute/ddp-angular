@@ -36,7 +36,7 @@ import { LoadingModalComponent } from '../modals/loading-modal.component';
 import { BulkCohortTagModalComponent } from '../tags/cohort-tag/bulk-cohort-tag-modal/bulk-cohort-tag-modal.component';
 import { CohortTagComponent } from '../tags/cohort-tag/cohort-tag.component';
 import { CohortTag } from '../tags/cohort-tag/cohort-tag.model';
-import {FieldSettingsModel, ValueModel} from "../models";
+import {FieldSettingsModel, ValueModel} from '../models';
 
 @Component({
   selector: 'app-participant-list',

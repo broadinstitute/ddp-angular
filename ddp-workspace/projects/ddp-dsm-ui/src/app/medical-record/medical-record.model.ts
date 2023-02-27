@@ -1,6 +1,6 @@
 import { OncHistoryDetail } from '../onc-history-detail/onc-history-detail.model';
 import { FollowUp } from '../follow-up/follow-up.model';
-import {MedicalProviderModel} from "../models";
+import {MedicalProviderModel} from '../models';
 
 export class MedicalRecord {
   constructor(public medicalRecordId?: string, public participantId?: string, public institutionId?: string,
