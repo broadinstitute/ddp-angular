@@ -150,8 +150,6 @@ export class ParticipantColumn {
   public static CLINICAL_ORDER_DATE = new ParticipantColumn('Clinical Order Date', 'orderDate', 'cl', 'dsm');
   public static CLINICAL_STATUS_DATE = new ParticipantColumn('Clinical Order Status Date', 'statusDate', 'cl', 'dsm');
 
-  //FON
-  public static ACTIVITY_STATUS = new ParticipantColumn('Enrollment Status', 'activityStatus', 'data');
 
   constructor(public display: string, public name: string, public tableAlias?: string, public object?: string, public esData?: boolean) {
     this.display = display;

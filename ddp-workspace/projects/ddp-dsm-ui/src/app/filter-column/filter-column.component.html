@@ -61,7 +61,7 @@
   </div>
   <ng-container *ngIf="!dataFilter.singleOption">
     <div *ngFor="let option of dataFilter.options; let i=index" class="TD--Padding-Left">
-      <mat-checkbox [checked]="dataFilter.selectedOptions[i]" color="primary" disableRipple
+      <mat-checkbox *ngIf="option.value" [checked]="dataFilter.selectedOptions[i]" color="primary" disableRipple
                    [(ngModel)]="dataFilter.selectedOptions[i]" [disabled]="!editable || dataFilter.empty || dataFilter.notEmpty">
         <span tooltip="{{option.name}}">{{option.value}}</span>
       </mat-checkbox>
