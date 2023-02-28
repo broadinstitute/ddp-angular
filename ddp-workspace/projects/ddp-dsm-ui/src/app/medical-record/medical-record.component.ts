@@ -60,6 +60,7 @@ export class MedicalRecordComponent implements OnInit {
 
   startDate: string;
   endDate: string;
+  hasEndDateChanged: boolean = false;
   pdfs: Array<PDFModel> = [];
   selectedPDF: string;
   source: string;
@@ -100,7 +101,9 @@ export class MedicalRecordComponent implements OnInit {
       }
       this.startDate = this.participant.data.dsm[ 'diagnosisMonth' ] + '/' + this.participant.data.dsm[ 'diagnosisYear' ];
       this.endDate = Utils.getFormattedDate(new Date());
-      this.message = null;
+      this.hasEndDateChanged = false;
+
+     this.message = null;
     } else {
       this.errorMessage = 'Error - Information is missing';
     }
@@ -244,9 +247,12 @@ export class MedicalRecordComponent implements OnInit {
   }
 
   downloadPDF(configName: string): void {
-    if (configName === 'cover' && this.medicalRecord.name == null || this.medicalRecord.name === '') {
+    if (configName === 'cover' && !this.medicalRecord.name) {
       this.additionalMessage = 'Please add a \'Confirmed Institution Name\'';
     } else {
+      if (this.isLostToFollowUp() && !this.hasEndDateChanged) {
+        this.endDate = this.participant.data.dsm['dateOfMajority'];
+      }
       this.downloading = true;
       this.message = 'Downloading... This might take a while';
       this.dsmService.downloadPDF(this.participant.data.profile['guid'], this.medicalRecord.medicalRecordId,
@@ -407,6 +413,7 @@ export class MedicalRecordComponent implements OnInit {
   }
 
   endDateChanged(date: string): void {
+    this.hasEndDateChanged = true;
     this.endDate = date;
   }
 
@@ -466,5 +473,9 @@ export class MedicalRecordComponent implements OnInit {
       participantId = this.participant.data.profile[ 'legacyAltPid' ];
     }
     return participantId;
+  }
+
+  isLostToFollowUp(): boolean {
+    return this.participant.data['status']=== 'CONSENT_SUSPENDED';
   }
 }
