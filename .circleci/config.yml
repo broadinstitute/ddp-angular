@@ -907,9 +907,8 @@ workflows:
               <<: *studies
           check_changes: true
           requires:
-            requires:
-              - << matrix.study_key >>-ui-unit-test
-              - api-unit-test
+            - << matrix.study_key >>-ui-unit-test
+            - api-unit-test
       - playwright-build:
           # run Playwright build and test after app-deploy
           <<: *filter-develop-branch
@@ -924,7 +923,6 @@ workflows:
             - app-deploy # start after all deploys have been completed
 
   build-and-deploy-workflow:
-    # Deploy to Dev env
     when:
       and:
         - << pipeline.parameters.do-builds >>
