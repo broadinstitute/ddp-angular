@@ -77,19 +77,14 @@ export class ScannerComponent implements DoCheck, OnDestroy {
 
     this.activeScanner.saveFn(filteredActiveScannerFieldsGroupsArray)
       .pipe(
-        map(() => ([null, {error: 'error for this field'}, null, {error: 'error for this field'}])),
         takeUntil(this.subscriptionSubject$)
       )
       .subscribe({
         next: (data: any[]) => {
           this.cdr.markForCheck();
-          if (data.length) {
+          if (data.some(data => data)) {
             this.removeSuccessfulScans(data);
             this.additionalMessage = 'Error - Failed to save all changes';
-            if (data.length === 1 && data[0].kit === data[0].error) {
-              this.additionalMessage = 'Data saved for ' + data[0].kit;
-              this.resetForm();
-            }
           } else {
             this.resetForm();
             this.additionalMessage = 'Data saved';
@@ -176,24 +171,16 @@ export class ScannerComponent implements DoCheck, OnDestroy {
   }
 
   private removeSuccessfulScans(responseData: any[]): void {
-    responseData.forEach((data: any, index: number) => {
-      // @ts-ignore
-      data && index !== this.scannerFields.length - 1 && this.scannerFields.at(index).setErrors({notFound: data?.error});
-    })
-
-    for (let i = 0; i < this.scannerFields.length - 1; i++) {
-      !this.scannerFields.at(i).hasError('notFound') &&
-      this.scannerFields.removeAt(i)
+    responseData.forEach((data: any, index: number) => data &&
+      this.scannerFields.at(index).setErrors({notFound: data?.error})
+    )
+    for (let i = this.scannerFields.length - 2; i >= 0; i--) {
+      !this.scannerFields.at(i).hasError('notFound') && this.scannerFields.removeAt(i);
     }
-  }
-
-  private getLastFieldFor(obj: object): any {
-    return (Object.keys(obj) as any).at(-1);
   }
 
   private get filteredNonNullFieldsGroups(): object[] {
     return this.scannerFields.getRawValue()
-      // @ts-ignore
       .filter((fieldsGroup: object) => Object.values(fieldsGroup).every((fieldValue: string | null) => fieldValue));
   }
 
