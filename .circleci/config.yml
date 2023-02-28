@@ -888,9 +888,6 @@ workflows:
         - not: << pipeline.parameters.do-builds >>
         - not: << pipeline.parameters.scheduled-playwright >>
     jobs:
-      #- conditionally-launch-build-and-deploy-all-job:
-      #    <<: *filter-develop-branch
-
       - api-unit-test:
           <<: *filter-develop-branch
       - ui-unit-test:
