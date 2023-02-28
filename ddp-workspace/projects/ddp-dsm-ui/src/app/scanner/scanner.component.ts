@@ -82,7 +82,7 @@ export class ScannerComponent implements DoCheck, OnDestroy {
       .subscribe({
         next: (data: any[]) => {
           this.cdr.markForCheck();
-          if (data.some(data => data)) {
+          if (data.some(d => d)) {
             this.removeSuccessfulScans(data);
             this.additionalMessage = 'Error - Failed to save all changes';
           } else {
@@ -115,12 +115,10 @@ export class ScannerComponent implements DoCheck, OnDestroy {
 
   public resetValidations(): void {
     if(this.updatePreviousFieldValidations) {
-      // @ts-ignore
       const previousFormControls = Object.values((this.scannerFields.at(this.scannerFields.length - 2) as FormGroup).controls);
       previousFormControls.forEach((formControl: FormControl) => formControl.updateValueAndValidity({emitEvent: false}));
       this.updatePreviousFieldValidations = false;
     }
-    // @ts-ignore
     const lastFormGroupControls = Object.values((this.scannerFields.at(this.scannerFields.length - 1) as FormGroup).controls);
     lastFormGroupControls.forEach((formControl: FormControl) => formControl.setErrors(null));
   }
@@ -173,7 +171,7 @@ export class ScannerComponent implements DoCheck, OnDestroy {
   private removeSuccessfulScans(responseData: any[]): void {
     responseData.forEach((data: any, index: number) => data &&
       this.scannerFields.at(index).setErrors({notFound: data?.error})
-    )
+    );
     for (let i = this.scannerFields.length - 2; i >= 0; i--) {
       !this.scannerFields.at(i).hasError('notFound') && this.scannerFields.removeAt(i);
     }
