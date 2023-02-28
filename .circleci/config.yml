@@ -465,6 +465,9 @@ jobs:
     executor:
       name: build-executor
     steps:
+      # REMOVE THIS BEFORE MERGE
+      - run:
+          command: circleci-agent step halt
       - checkout-code
       - when:
           condition: << parameters.check_changes >>
@@ -544,16 +547,8 @@ jobs:
       store_build:
         type: boolean
         default: true
-      check_changes:
-        type: boolean
-        default: false
     steps:
       - checkout-code
-      - when:
-          condition: << parameters.check_changes >>
-          steps:
-            - halt-when-study-unchanged:
-                study_key: << parameters.study_key >>
       - build:
           study_key: << parameters.study_key >>
       - when:
@@ -795,6 +790,7 @@ workflows:
         - equal: [ "UNKNOWN", << pipeline.parameters.api_call >> ]
         - equal: [ "UNKNOWN", << pipeline.parameters.study_key >> ]
         - equal: [ "UNKNOWN", << pipeline.parameters.deploy_env >> ]
+        - << pipeline.parameters.do-builds >> # REMOVE THIS BEFORE MERGE
     jobs:
       - app-build:
           <<: *filter-pr-branch
@@ -889,9 +885,9 @@ workflows:
         - not: << pipeline.parameters.scheduled-playwright >>
     jobs:
       - api-unit-test:
-          <<: *filter-develop-branch
+          <<: *filter-pr-branch
       - ui-unit-test:
-          <<: *filter-develop-branch
+          <<: *filter-pr-branch
           name: << matrix.study_key >>-ui-unit-test
           matrix:
             alias: ui-unit-test
@@ -899,7 +895,7 @@ workflows:
               <<: *studies
           check_changes: true
       - app-deploy:
-          <<: *filter-develop-branch
+          <<: *filter-pr-branch
           name: << matrix.study_key >>-deploy
           matrix:
             alias: app-deploy
@@ -911,10 +907,10 @@ workflows:
             - api-unit-test
       - playwright-build:
           # run Playwright build and test after app-deploy
-          <<: *filter-develop-branch
+          <<: *filter-pr-branch
           env: dev # env is Dev because it's PR merge into develop branch
       - playwright-test:
-          <<: *filter-develop-branch
+          <<: *filter-pr-branch
           env: dev
           test_suite: UNKNOWN
           parallelism_num: 2
