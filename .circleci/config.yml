@@ -459,7 +459,7 @@ jobs:
     parameters:
       study_key:
         type: string
-      check_changes:
+      check_changed:
         type: boolean
         default: false
     executor:
@@ -467,7 +467,7 @@ jobs:
     steps:
       - checkout-code
       - when:
-          condition: << parameters.check_changes >>
+          condition: << parameters.check_changed >>
           steps:
             - halt-when-study-unchanged:
                 study_key: << parameters.study_key >>
@@ -738,13 +738,13 @@ jobs:
     parameters:
       study_key:
         type: string
-      check_changes:
+      check_changed:
         type: boolean
         default: false
     steps:
       - checkout-code
       - when:
-          condition: << parameters.check_changes >>
+          condition: << parameters.check_changed >>
           steps:
             - halt-when-study-unchanged:
                 study_key: << parameters.study_key >>
@@ -874,7 +874,7 @@ workflows:
             - playwright-build
 
   build-and-deploy-all-apps-workflow:
-    # Check all studies, launch GAE deploy if a study has changed.
+    # check all studies, launch GAE deploy if a study has changed.
     when:
       and:
         - not: << pipeline.parameters.do-builds >>
@@ -889,7 +889,7 @@ workflows:
             alias: ui-unit-test
             parameters:
               <<: *studies
-          check_changes: true
+          check_changed: true
       - app-deploy:
           <<: *filter-develop-branch
           name: << matrix.study_key >>-deploy
@@ -897,7 +897,7 @@ workflows:
             alias: app-deploy
             parameters:
               <<: *studies
-          check_changes: true
+          check_changed: true
           requires:
             - << matrix.study_key >>-ui-unit-test
             - api-unit-test
@@ -912,7 +912,7 @@ workflows:
           parallelism_num: 2
           requires:
             - playwright-build
-            - app-deploy # start after all deploys have been completed
+            - app-deploy
 
   build-and-deploy-workflow:
     when:
