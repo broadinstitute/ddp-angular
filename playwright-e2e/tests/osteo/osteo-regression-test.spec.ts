@@ -1,7 +1,7 @@
 /* eslint-disable */
-import { test, expect } from '@playwright/test';
+import { expect } from '@playwright/test';
+import { test } from 'fixtures/osteo-fixture';
 import { generateEmailAlias } from 'utils/faker-utils';
-import * as testutils from 'utils/test-utils';
 import ResearchConsentPage from 'pages/osteo/consent-page';
 import HomePage from 'pages/osteo/home-page';
 import PrequalPage from 'pages/osteo/prequal-page';
@@ -15,13 +15,9 @@ import { CancerSelector } from 'pages/cancer-selector';
 import { FamilyHistory } from 'pages/family-history';
 // import { checkUserReceivedEmails } from 'utils/email-utils';
 
-const { OSTEO_USER_EMAIL, OSTEO_USER_PASSWORD, SITE_PASSWORD, OSTEO_BASE_URL } = process.env;
+const { OSTEO_USER_EMAIL, OSTEO_USER_PASSWORD } = process.env;
 
 test('Osteo Static Content @osteo', async ({ page }) => {
-  await page.goto(OSTEO_BASE_URL!);
-  await page.locator('div').filter({ hasText: 'Password *' }).nth(2).click();
-  await page.getByLabel('Password *').fill(SITE_PASSWORD!);
-  await page.getByLabel('Password *').press('Enter');
   await page
     .getByRole('heading', {
       name: 'Together, the osteosarcoma community has the power to move research forward'
@@ -147,11 +143,7 @@ test('Osteo Static Content @osteo', async ({ page }) => {
 test('Osteo enroll kid @osteo', async ({ page }) => {
   test.slow();
   const userEmail = generateEmailAlias(OSTEO_USER_EMAIL);
-  await page.goto(OSTEO_BASE_URL!);
-  await page.getByLabel('Password *').click();
-  await page.getByLabel('Password *').press('Meta+a');
-  await page.getByLabel('Password *').fill(SITE_PASSWORD!);
-  await page.getByLabel('Password *').press('Enter');
+
   await page.getByRole('banner').getByRole('link', { name: 'Count Me In' }).click();
   await page.waitForTimeout(2000);
   await page.getByRole('heading', { name: "Let's Get Started" }).click();
@@ -352,10 +344,6 @@ test('Osteo enroll kid @osteo', async ({ page }) => {
 
 test('Osteo enroll self and kid together @osteo', async ({ page }) => {
   test.slow();
-  await page.goto(OSTEO_BASE_URL!);
-  await page.getByLabel('Password *').click();
-  await page.getByLabel('Password *').fill(SITE_PASSWORD!);
-  await page.getByLabel('Password *').press('Enter');
 
   const homePage = new HomePage(page);
   await homePage.waitForReady();
@@ -525,9 +513,6 @@ test('Osteo self enroll @osteo', async ({ page }) => {
 
   logParticpantCreated(userEmail, fullName);
 
-  await page.goto(OSTEO_BASE_URL!);
-  await testutils.fillSitePassword(page, SITE_PASSWORD);
-  await page.waitForTimeout(1000);
   await page.getByRole('banner').getByRole('link', { name: 'Count Me In' }).click();
 
   await page.getByText("Thank you for your interest in the Osteosarcoma Project. Here's what sign up and").click();
