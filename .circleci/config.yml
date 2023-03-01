@@ -969,16 +969,16 @@ workflows:
         - equal: [ UNKNOWN, << pipeline.parameters.api_call >> ]
     jobs:
       - api-unit-test:
-          <<: *filter-pr-branch
+          <<: *filter-release-branch
       - ui-unit-test:
-          <<: *filter-pr-branch
+          <<: *filter-release-branch
           name: << matrix.study_key >>-ui-unit-test
           matrix:
             alias: app-ui-unit-test
             parameters:
               <<: *studies
       - app-build:
-          <<: *filter-pr-branch
+          <<: *filter-release-branch
           name: << matrix.study_key >>-build
           matrix:
             alias: app-build
