@@ -261,7 +261,7 @@ commands:
       - setup-shared-env:
           study_key: << parameters.study_key >>
       - restore_cache:
-          key: v1-ng-build-{{ << .Environment.ANGULAR_PROJECT_NAME >> }}-{{ .Environment.CIRCLE_BRANCH }}-{{ checksum "package.json" }}-{{ checksum "package-lock.json" }}
+          key: &ng-build-cache v1-ng-build-{{ .Environment.ANGULAR_PROJECT_NAME }}-{{ checksum "package.json" }}-{{ checksum "package-lock.json" }}
       - when:
           condition:
             equal: [ atcp, << parameters.study_key >> ]
@@ -288,7 +288,7 @@ commands:
             echo "OUTPUT_DIR: $OUTPUT_DIR"
             pwd && ls -r
       - save_cache:
-          key: v1-ng-build-{{ << .Environment.ANGULAR_PROJECT_NAME >> }}-{{ .Environment.CIRCLE_BRANCH }}-{{ checksum "package.json" }}-{{ checksum "package-lock.json" }}
+          key: *ng-build-cache
           paths:
             - $OUTPUT_DIR
 
