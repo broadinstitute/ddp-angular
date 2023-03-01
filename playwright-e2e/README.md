@@ -82,7 +82,7 @@ Note: Update docker image version when upgrading Playwright version
   > cd playwright-e2e/
 
 - Start running Playwright docker image
-  > docker run -v $PWD:/e2e -w /e2e -it --rm -d --ipc=host -p 9323:9323 mcr.microsoft.com/playwright:v1.28.0-focal /bin/bash
+  > docker run -v $PWD:/e2e -w /e2e -it --rm --ipc=host -p 9323:9323 mcr.microsoft.com/playwright:v1.31.0-focal /bin/bash
 
 - Install dependencies inside docker container
   > npm install

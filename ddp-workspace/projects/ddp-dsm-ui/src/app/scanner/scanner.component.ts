@@ -20,7 +20,7 @@ import {Auth} from '../services/auth.service';
 import {Statics} from '../utils/statics';
 import {Scanner} from './interfaces/scanners';
 import {first} from 'rxjs/operators';
-
+// changing
 @Component({
   selector: 'app-scanner',
   templateUrl: 'scanner.component.html',
@@ -36,7 +36,7 @@ export class ScannerComponent implements DoCheck, OnDestroy {
   public additionalMessage: string | undefined;
 
   private updatePreviousFieldValidations = false;
-  private readonly subscriptionSubject$ = new Subject<void>();
+  private readonly subscriptionSubject$: Subject<void> = new Subject<void>();
 
   @ViewChildren('htmlInputElement') inputFields: QueryList<ElementRef<HTMLInputElement>>;
 
@@ -82,13 +82,9 @@ export class ScannerComponent implements DoCheck, OnDestroy {
       .subscribe({
         next: (data: any[]) => {
           this.cdr.markForCheck();
-          if (data.length) {
+          if (data.some(d => d)) {
             this.removeSuccessfulScans(data);
             this.additionalMessage = 'Error - Failed to save all changes';
-            if (data.length === 1 && data[0].kit === data[0].error) {
-              this.additionalMessage = 'Data saved for ' + data[0].kit;
-              this.resetForm();
-            }
           } else {
             this.resetForm();
             this.additionalMessage = 'Data saved';
@@ -173,29 +169,12 @@ export class ScannerComponent implements DoCheck, OnDestroy {
   }
 
   private removeSuccessfulScans(responseData: any[]): void {
-    const filteredActiveScannerFieldsGroupsArray = this.filteredNonNullFieldsGroups;
-    const fieldsGroupToRemoveCollection = [];
-
-    filteredActiveScannerFieldsGroupsArray.forEach((fieldsGroup: object, fieldsGroupIndex: number) => {
-      const lastField = this.getLastFieldFor(fieldsGroup);
-      const foundObject = responseData.find((responseObject: any) => fieldsGroup[lastField] === responseObject.kit);
-
-      foundObject ? this.scannerFields.at(fieldsGroupIndex).setErrors({notFound: foundObject.error}) :
-        fieldsGroupToRemoveCollection.push(fieldsGroup);
-    });
-
-    fieldsGroupToRemoveCollection.length && fieldsGroupToRemoveCollection.forEach((fieldsGroupToRemove: object) => {
-      const lastField1 = this.getLastFieldFor(fieldsGroupToRemove);
-      const findObjectIndex = this.scannerFields.getRawValue().findIndex((objectValue: any) => {
-        const lastField2 = this.getLastFieldFor(objectValue);
-        return objectValue[lastField2] === fieldsGroupToRemove[lastField1];
-      });
-      this.scannerFields.removeAt(findObjectIndex);
-    });
-  }
-
-  private getLastFieldFor(obj: object): any {
-    return (Object.keys(obj) as any).at(-1);
+    responseData.forEach((data: any, index: number) => data &&
+      this.scannerFields.at(index).setErrors({notFound: data?.error})
+    );
+    for (let i = this.scannerFields.length - 2; i >= 0; i--) {
+      !this.scannerFields.at(i).hasError('notFound') && this.scannerFields.removeAt(i);
+    }
   }
 
   private get filteredNonNullFieldsGroups(): object[] {
