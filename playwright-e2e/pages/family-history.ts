@@ -1,4 +1,5 @@
 import { Page } from '@playwright/test';
+import Question from 'lib/component/Question';
 import { booleanToYesOrNo } from 'utils/test-utils';
 import { CancerSelector } from './cancer-selector';
 import { BrainBasePage } from './brain/brain-base-page';
@@ -152,11 +153,17 @@ export class FamilyHistory extends BrainBasePage {
       } else if (selectorBase.indexOf('HALF_SIBLING') > 0) {
         sideOfFamilyClass = 'FAMILY_SIDE_Q_2';
       }
-      await this.page.locator(`.picklist-answer-${sideOfFamilyClass}`).getByRole('combobox').selectOption(p.sideOfFamily);
+      await new Question(this.page, { cssClassAttribute: `.picklist-answer-${sideOfFamilyClass}` })
+        .select()
+        .selectOption({ label: p.sideOfFamily });
     }
+
     if (p.sexAtBirth != null) {
-      await this.page.locator(`.picklist-answer-${selectorBase}_SEX_AT_BIRTH`).getByRole('combobox').selectOption(p.sexAtBirth);
+      await new Question(this.page, { cssClassAttribute: `.picklist-answer-${selectorBase}_SEX_AT_BIRTH` })
+        .select()
+        .selectOption({ label: p.sexAtBirth });
     }
+
     await this.page.getByRole('button', { name: 'Save' }).click();
     await this.page.waitForResponse((resp) => resp.url().includes('/summary') && resp.status() === 200);
   }

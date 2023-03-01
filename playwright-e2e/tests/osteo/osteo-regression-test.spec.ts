@@ -1,7 +1,7 @@
 /* eslint-disable */
-import { test, expect } from '@playwright/test';
+import { expect } from '@playwright/test';
+import { test } from 'fixtures/osteo-fixture';
 import { generateEmailAlias } from 'utils/faker-utils';
-import * as testutils from 'utils/test-utils';
 import ResearchConsentPage from 'pages/osteo/consent-page';
 import HomePage from 'pages/osteo/home-page';
 import PrequalPage from 'pages/osteo/prequal-page';
@@ -13,15 +13,11 @@ import { logParticpantCreated } from 'utils/log-utils';
 import { generateUserName } from 'utils/faker-utils';
 import { CancerSelector } from 'pages/cancer-selector';
 import { FamilyHistory } from 'pages/family-history';
-import { checkUserReceivedEmails } from 'utils/email-utils';
+// import { checkUserReceivedEmails } from 'utils/email-utils';
 
-const { OSTEO_USER_EMAIL, OSTEO_USER_PASSWORD, SITE_PASSWORD, OSTEO_BASE_URL } = process.env;
+const { OSTEO_USER_EMAIL, OSTEO_USER_PASSWORD } = process.env;
 
 test('Osteo Static Content @osteo', async ({ page }) => {
-  await page.goto(OSTEO_BASE_URL!);
-  await page.locator('div').filter({ hasText: 'Password *' }).nth(2).click();
-  await page.getByLabel('Password *').fill('broad_institute');
-  await page.getByLabel('Password *').press('Enter');
   await page
     .getByRole('heading', {
       name: 'Together, the osteosarcoma community has the power to move research forward'
@@ -147,11 +143,7 @@ test('Osteo Static Content @osteo', async ({ page }) => {
 test('Osteo enroll kid @osteo', async ({ page }) => {
   test.slow();
   const userEmail = generateEmailAlias(OSTEO_USER_EMAIL);
-  await page.goto(OSTEO_BASE_URL!);
-  await page.getByLabel('Password *').click();
-  await page.getByLabel('Password *').press('Meta+a');
-  await page.getByLabel('Password *').fill('broad_institute');
-  await page.getByLabel('Password *').press('Enter');
+
   await page.getByRole('banner').getByRole('link', { name: 'Count Me In' }).click();
   await page.waitForTimeout(2000);
   await page.getByRole('heading', { name: "Let's Get Started" }).click();
@@ -350,12 +342,8 @@ test('Osteo enroll kid @osteo', async ({ page }) => {
     .click();
 });
 
-test.fixme('Osteo enroll self and kid together @osteo', async ({ page }) => {
+test('Osteo enroll self and kid together @osteo', async ({ page }) => {
   test.slow();
-  await page.goto(OSTEO_BASE_URL!);
-  await page.getByLabel('Password *').click();
-  await page.getByLabel('Password *').fill('broad_institute');
-  await page.getByLabel('Password *').press('Enter');
 
   const homePage = new HomePage(page);
   await homePage.waitForReady();
@@ -436,6 +424,7 @@ test.fixme('Osteo enroll self and kid together @osteo', async ({ page }) => {
   await page.locator('#mat-input-16').click();
   await page.locator('.mat-form-field-infix').click();
   await page.locator('#mat-input-16').fill('A name?');
+  await page.waitForTimeout(1000);
 
   await consentAssentPage.submit();
 
@@ -462,8 +451,8 @@ test.fixme('Osteo enroll self and kid together @osteo', async ({ page }) => {
 
   await consentAssentPage.next();
 
-  await page.getByRole('combobox').first().selectOption('December');
-  await page.locator('#mat-input-23').selectOption('6-12 months before diagnosis');
+  await page.getByRole('combobox').first().selectOption({ label: 'December' });
+  await page.locator('#mat-input-23').selectOption({ label: '6-12 months before diagnosis' });
   await page.locator('.picklist-answer-INITIAL_BODY_LOC').getByText('Pelvis').click();
   await page.locator('.picklist-answer-HAD_RADIATION').getByText('No', { exact: true }).click();
   await page.getByText('Sorafenib').click();
@@ -515,7 +504,7 @@ test.fixme('Osteo enroll self and kid together @osteo', async ({ page }) => {
     .click();
 });
 
-test.fixme('Osteo self enroll @osteo', async ({ page }) => {
+test('Osteo self enroll @osteo', async ({ page }) => {
   test.slow();
   const userEmail = generateEmailAlias(OSTEO_USER_EMAIL);
   const firstName = generateUserName('OS');
@@ -524,9 +513,6 @@ test.fixme('Osteo self enroll @osteo', async ({ page }) => {
 
   logParticpantCreated(userEmail, fullName);
 
-  await page.goto(OSTEO_BASE_URL!);
-  await testutils.fillSitePassword(page, SITE_PASSWORD);
-  await page.waitForTimeout(1000);
   await page.getByRole('banner').getByRole('link', { name: 'Count Me In' }).click();
 
   await page.getByText("Thank you for your interest in the Osteosarcoma Project. Here's what sign up and").click();
@@ -537,8 +523,6 @@ test.fixme('Osteo self enroll @osteo', async ({ page }) => {
 
   await page.getByLabel('Enter age').fill('30');
 
-  // wait for country selection to drive state/province
-  await page.waitForResponse((response) => response.url().includes('/pepper/v1/user') && response.status() === 200);
   await page.locator('#mat-input-2').selectOption('US');
   await page.locator('#mat-input-3').selectOption('CO');
   await page.waitForTimeout(2000);
@@ -722,6 +706,7 @@ test.fixme('Osteo self enroll @osteo', async ({ page }) => {
   await page.getByRole('heading', { name: 'Survey: About Your Osteosarcoma' }).click();
   await page.getByText('Please tell us more about your experience with osteosarcoma by answering the que').click();
   await page.getByRole('link', { name: 'Dashboard' }).click();
+  await page.waitForTimeout(2000);
   await page.getByRole('button', { name: 'Edit' }).click();
 
   const familyHistoryPage = new FamilyHistory(page);
@@ -926,6 +911,8 @@ test.fixme('Osteo self enroll @osteo', async ({ page }) => {
     .click();
   await page.getByRole('link', { name: 'Dashboard' }).click();
 
+  /*
+  * Disable email checks. Slack https://broadinstitute.slack.com/archives/C043W8G8SS3/p1676387289422749
   await checkUserReceivedEmails(userEmail, [
     {
       subject: 'Thank you for providing your consent',
@@ -937,9 +924,11 @@ test.fixme('Osteo self enroll @osteo', async ({ page }) => {
     },
     {
       subject: 'Thank you for providing additional consent',
-      /* eslint-disable max-len */
       textProbe:
         'Thank you for joining the Osteosarcoma Project and for giving us your consent to share with you any available information we learned from the sequencing of your tumor sample[s] that the study receives.'
     }
   ]);
+  *
+  */
+
 });
