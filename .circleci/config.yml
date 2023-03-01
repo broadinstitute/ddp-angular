@@ -986,9 +986,9 @@ workflows:
               <<: *studies
           check_archive: true
           store_build: true
-          #requires:
-          #  - << matrix.study_key >>-ui-unit-test
-          #  - api-unit-test
+          requires:
+            - << matrix.study_key >>-ui-unit-test
+            - api-unit-test
 
   build-app-workflow:
     when: << pipeline.parameters.do-builds >>
