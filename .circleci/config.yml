@@ -443,7 +443,12 @@ commands:
       - run:
           name: Check << parameters.study_key >> and stop job if study has not changed
           command: |
+            set +e
+            set -v
+            set -o pipefail
+            set -o functrace
             set -u
+            
             CHANGED_STUDIES=$(../build-utils/findmodifiedprojects.sh << pipeline.git.base_revision >> << pipeline.git.revision >>)
             echo "The following projects were found to have changed: $CHANGED_STUDIES"
             
