@@ -61,7 +61,7 @@ executors:
     resource_class: medium+
     docker:
       # Playwright docker image version MUST match Playwright version in project
-      - image: mcr.microsoft.com/playwright:v1.28.0-focal
+      - image: mcr.microsoft.com/playwright:v1.31.0-focal
     working_directory: *playwright_path
     environment:
       NODE_ENV: development # Needed if playwright is in devDependencies
@@ -634,12 +634,9 @@ jobs:
             echo "export ENV=<< parameters.env >>" >> $BASH_ENV
             source $BASH_ENV
             .circleci/export-playwright-env.sh
-      - run:
-          working_directory: *playwright_path
-          name: npm install
-          command: |
-            ls && npm --version
-            npm install --quiet
+      - node/install-packages:
+          app-dir: *playwright_path
+          override-ci-command: npm install
       - run:
           working_directory: *playwright_path
           command: npm run lint -- --max-warnings 0

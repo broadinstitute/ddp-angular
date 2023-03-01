@@ -2,6 +2,7 @@ import { expect, Locator, Page, Response } from '@playwright/test';
 import Address from 'lib/component/address';
 import Question from 'lib/component/Question';
 import Input from 'lib/widget/input';
+import { assertSelectedOption } from 'utils/assertion-helper';
 import { generateRandomPhoneNum } from 'utils/faker-utils';
 import { waitForNoSpinner } from 'utils/test-utils';
 import { PageInterface } from './page-interface';
@@ -241,21 +242,16 @@ export default abstract class PageBase implements PageInterface {
    * @param {{state?: string}} opts
    * @returns {Promise<void>}
    */
-  async fillInCountry(country: string, opts: { state?: string } = {}): Promise<string> {
+  async fillInCountry(country: string, opts: { state?: string } = {}): Promise<void> {
     const { state } = opts;
 
-    const [selected] = await this.country().select().selectOption(country);
-    /*
-    // assert in V1.29. Uncomment after upgrade Playwright
-    await expect(async () => {
-      const selectedOption = await this.country().select().evaluate<string, HTMLSelectElement>((node) => node.value);
-      expect(selectedOption).toEqual(country);
-    }).toPass();
-    */
+    await this.country().select().selectOption(country);
+    await assertSelectedOption(this.country().select(), country);
+
     if (state) {
       await this.state().select().selectOption(state);
+      await assertSelectedOption(this.state().select(), state);
     }
-    return selected;
   }
 
   /**

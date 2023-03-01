@@ -16,8 +16,8 @@ const testConfig: PlaywrightTestConfig = {
   globalSetup: require.resolve('./fixtures/global-setup'),
   testDir: '.',
   testMatch: '**/*.spec.ts',
-  /* Maximum timeout per test. Test should be short and takes less than 2 min or 3 min in docker container to run */
-  timeout: process.env.CI ? 180 * 1000 : 120 * 1000,
+  /* Maximum timeout per test. Each test should be short and takes less than 3 min to run */
+  timeout: 180 * 1000,
   /* For expect() calls */
   expect: {
     /**
@@ -75,7 +75,10 @@ const testConfig: PlaywrightTestConfig = {
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: process.env.CI ? 'on-first-retry' : 'retain-on-failure',
-    screenshot: 'only-on-failure',
+    screenshot: {
+      mode: 'only-on-failure',
+      fullPage: true
+    },
     video: process.env.video ? 'on' : process.env.CI ? 'on-first-retry' : 'retain-on-failure', // Limit load on CI system because trace and video add load
 
     userAgent:
