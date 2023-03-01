@@ -4,7 +4,6 @@ import Checkbox from 'lib/widget/checkbox';
 import Radiobutton from 'lib/widget/radiobutton';
 import Select from 'lib/widget/select';
 import axios from 'axios';
-import { Response } from 'playwright-core';
 
 const { SITE_PASSWORD } = process.env;
 
@@ -21,7 +20,7 @@ export async function waitForNoSpinner(page: Page): Promise<void> {
 }
 
 export async function waitForResponseByURL(page: Page, { url, status, timeout }: WaitForResponseByURLConfig) {
-  await page.waitForResponse((resp: Response) => resp.url().includes(url) && resp.status() === status, { timeout });
+  await page.waitForResponse((resp) => resp.url().includes(url) && resp.status() === status, { timeout });
 }
 
 export async function waitUntilRemoved(locator: Locator): Promise<void> {
