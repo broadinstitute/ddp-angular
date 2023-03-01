@@ -60,7 +60,7 @@ export class MedicalRecordComponent implements OnInit {
 
   startDate: string;
   endDate: string;
-  hasEndDateChanged: boolean = false;
+  hasEndDateChanged = false;
   pdfs: Array<PDFModel> = [];
   selectedPDF: string;
   source: string;
