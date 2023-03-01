@@ -49,7 +49,7 @@ references:
           - /.*rc.*/
           - /.*hotfix.*/
 
-  filter-rc-hotfix-branch: &filter-release-branch
+  filter-release-branch: &filter-release-branch
     filters:
       tags:
         ignore: /.*/
@@ -176,7 +176,7 @@ commands:
           name: Deploy to GAE
           command: |
             set -u
-            gcloud app deploy --version="${SHORT_GIT_SHA}" --stop-previous-version --project "broad-ddp-${ENVIRONMENT}" "${ANGULAR_PROJECT_DIR_PATH}/app.yaml"
+            gcloud app deploy --version="${SHORT_GIT_SHA}" --stop-previous-version --promote --quiet --project "broad-ddp-${ENVIRONMENT}" "${ANGULAR_PROJECT_DIR_PATH}/app.yaml"
       - run:
           name: Update deployments sheet
           command: |
@@ -184,31 +184,6 @@ commands:
             set +x
             readvault.sh secret/pepper/${ENVIRONMENT}/v1/conf .data.gcp.serviceKey | \
             reportdeploy.sh "$RELEASE_SHEET_ID" '<<parameters.study_key>> Angular client' "$ENVIRONMENT" "$CIRCLE_BUILD_NUM" "$CIRCLE_BUILD_URL"
-      - run:
-          name: Delete previous versions of service
-          command: |
-            set +x
-            # extract the service name from the GAE yaml file
-            CONFIG_FILE="${ANGULAR_PROJECT_DIR_PATH}/app.yaml"
-            SERVICE=$(grep -Eo -m1 "^service:\s*.*" "${CONFIG_FILE}" | awk '{print $2}')
-            echo "The service name is *${SERVICE}*"
-
-            # find what other versions are currently running
-            # skip first line, exclude our version, print 2nd column
-            AWK_COMMMAND="NR > 1 && !/${SHORT_GIT_SHA}/ {print \$2}"
-            VERSIONS_TO_DELETE=$(gcloud app versions list --service "$SERVICE" --project "broad-ddp-${ENVIRONMENT}" | awk "${AWK_COMMMAND}")
-
-            # Sometime deleting versions fails. If there are less than 3 versions then we are not going to worry about it
-            # and set flag so this job step does not fail when exit error value is generated
-            if [[ ! -z $VERSIONS_TO_DELETE ]] && [[ "${#VERSIONS_TO_DELETE[@]}" -lt 3 ]]; then
-              set +e
-            fi
-
-            for VERSION_TO_DELETE in $VERSIONS_TO_DELETE; do
-              echo "Deleting version $VERSION_TO_DELETE of service $SERVICE"
-              gcloud app versions delete --quiet --service "$SERVICE" "$VERSION_TO_DELETE" --project "broad-ddp-${ENVIRONMENT}"
-            done;
-            exit 0;
           #
 
   setup-shared-env:
@@ -462,6 +437,38 @@ commands:
             fi
         #
 
+  halt-build-archive:
+    description: Stop new build and archive if build archive for specified study is found in Google bucket
+    parameters:
+      study_key:
+        type: string
+    steps:
+      - setup-shared-env:
+          study_key: << parameters.study_key >>
+      - run:
+          name: Check build archive for <<parameters.study_key>> with git SHA << pipeline.git.revision >>
+          command: |
+            set -u
+            set +e
+            
+            readvault.sh secret/pepper/prod/v1/conf .data.gcp.serviceKey | gcloud auth activate-service-account --key-file=-
+            TAR_FILE_URL_PATTERN="gs://${BUILDS_BUCKET}/${ANGULAR_PROJECT_NAME}/${ANGULAR_PROJECT_NAME}_*_${SHORT_GIT_SHA}.tar.gz"
+            echo "Checking for ${TAR_FILE_URL_PATTERN}"
+            
+            # For some reason following line generating exit code 1 every time in CircleCI. Use set +e so script can continue
+            TAR_FILE_URL=`gsutil ls $TAR_FILE_URL_PATTERN  | head -1`
+
+            # if not found, continue running build and store
+            if [ -z $TAR_FILE_URL ]
+              then
+                echo "Build archive for <<parameters.study_key>> is not found at URL: ${TAR_FILE_URL}"
+              else
+                echo "Build archive for <<parameters.study_key>> is found at URL: ${TAR_FILE_URL}. No new build artifacts will be archived."
+                circleci-agent step halt
+            fi
+          #
+
+
 jobs:
   app-deploy:
     working_directory: *ng_workspace_path
@@ -556,12 +563,20 @@ jobs:
       check_changed:
         type: boolean
         default: false
+      check_archive:
+        type: boolean
+        default: false
     steps:
       - checkout-code
       - when:
           condition: << parameters.check_changed >>
           steps:
             - halt-when-study-unchanged:
+                study_key: << parameters.study_key >>
+      - when:
+          condition: << parameters.check_archive >>
+          steps:
+            - halt-build-archive:
                 study_key: << parameters.study_key >>
       - build:
           study_key: << parameters.study_key >>
@@ -968,6 +983,8 @@ workflows:
             alias: app-build
             parameters:
               <<: *studies
+          check_archive: true
+          store_build: true
           requires:
             - << matrix.study_key >>-ui-unit-test
             - api-unit-test
