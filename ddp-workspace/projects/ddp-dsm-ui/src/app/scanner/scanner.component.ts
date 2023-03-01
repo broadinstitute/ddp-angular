@@ -19,7 +19,7 @@ import {InputField} from './interfaces/input-field';
 import {Auth} from '../services/auth.service';
 import {Statics} from '../utils/statics';
 import {Scanner} from './interfaces/scanners';
-import {first, map} from 'rxjs/operators';
+import {first} from 'rxjs/operators';
 
 @Component({
   selector: 'app-scanner',
