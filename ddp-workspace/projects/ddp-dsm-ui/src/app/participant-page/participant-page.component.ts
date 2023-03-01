@@ -185,7 +185,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
       this.scrolled = true;
     }
     this.validateEmailInput(this.participant.data.profile['email'] || '');
-    this.isOncHistoryVisible = (this.participant.data.status === 'ENROLLED'
+    this.isOncHistoryVisible = ((this.participant.data.status === 'ENROLLED' || this.isLostToFollowUp())
       && this.participant.data.medicalProviders != null && this.participant.medicalRecords != null
       && this.participant.data.medicalProviders.length > 0 && this.participant.medicalRecords.length > 0);
 
@@ -1759,4 +1759,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
     return this.role.viewOnlyDSSData;
   }
 
+  public isLostToFollowUp(): boolean {
+    return this.participant.data['status']=== 'CONSENT_SUSPENDED';
+  }
 }
