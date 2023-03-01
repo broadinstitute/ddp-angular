@@ -550,8 +550,16 @@ jobs:
       store_build:
         type: boolean
         default: true
+      check_changed:
+        type: boolean
+        default: false
     steps:
       - checkout-code
+      - when:
+          condition: << parameters.check_changed >>
+          steps:
+            - halt-when-study-unchanged:
+                study_key: << parameters.study_key >>
       - build:
           study_key: << parameters.study_key >>
       - when:
@@ -795,6 +803,7 @@ workflows:
           <<: *filter-pr-branch
           # Don't store PR build artifacts
           store_build: false
+          check_changed: true
           name: << matrix.study_key >>-build
           matrix:
             alias: app-build
