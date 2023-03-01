@@ -41,6 +41,9 @@ references:
         ignore: /.*/
       branches:
         ignore:
+          - test
+          - staging
+          - production
           - develop
           - master
           - /^rc.*/
@@ -254,7 +257,6 @@ commands:
         type: string
         default: "UNKNOWN"
     steps:
-      - checkout-code
       - set-deployment-environment
       - setup-shared-env:
           study_key: << parameters.study_key >>
@@ -375,13 +377,13 @@ commands:
             mkdir -p /tmp/junit
             ng test $ANGULAR_PROJECT_NAME --watch=false --browsers ChromeHeadlessNoSandbox --reporters junit
           environment:
-            JUNIT_REPORT_PATH: /tmp/junit/
+            JUNIT_REPORT_PATH: /tmp/ui/junit/
             JUNIT_REPORT_NAME: test-results.xml
           when: always
       - store_test_results:
-          path: /tmp/junit
+          path: /tmp/ui/junit
       - store_artifacts:
-          path: /tmp/junit
+          path: /tmp/ui/junit
 
   run-api-unit-test:
     description: Lint code and run api unit tests for sdk and toolkit
@@ -398,13 +400,13 @@ commands:
             ng test ddp-sdk --watch=false --browsers ChromeHeadlessNoSandbox --reporters junit
             ng test toolkit --watch=false --browsers ChromeHeadlessNoSandbox --reporters junit
           environment:
-            JUNIT_REPORT_PATH: /tmp/junit/
+            JUNIT_REPORT_PATH: /tmp/api/junit/
             JUNIT_REPORT_NAME: test-results.xml
           when: always
       - store_test_results:
-          path: /tmp/junit
+          path: /tmp/api/junit
       - store_artifacts:
-          path: /tmp/junit
+          path: /tmp/api/junit
 
   halt-playwright-check:
     description: Stop running Playwright test job if halt conditions are met
@@ -426,6 +428,30 @@ commands:
                 name: "Halt running Playwright test job. Not supported for ENV=<< parameters.env >>"
                 command: circleci-agent step halt
 
+  halt-when-study-unchanged:
+    description: Stop job if specified study has not changed
+    parameters:
+      study_key:
+        type: string
+    steps:
+      - run:
+          name: Check << parameters.study_key >> and stop job if study has not changed
+          command: |
+            set -u
+            CHANGED_STUDIES=$(../build-utils/findmodifiedprojects.sh << pipeline.git.base_revision >> << pipeline.git.revision >>)
+            echo "The following projects were found to have changed: $CHANGED_STUDIES"
+            
+            NG_PROJECT_NAME="ddp-<< parameters.study_key >>"
+            CHANGED_DEPENDENCIES=$(echo $CHANGED_STUDIES | grep -E -e $NG_PROJECT_NAME -e _SHARED_ -e ddp-sdk -e toolkit)
+            echo "CHANGED_DEPENDENCIES: $CHANGED_DEPENDENCIES"
+            
+            if [[ -z $CHANGED_DEPENDENCIES ]]; then
+              echo "Study << parameters.study_key >> has not changed"
+              circleci-agent step halt
+            else
+              echo "Study has changed"
+            fi
+        #
 
 jobs:
   app-deploy:
@@ -433,14 +459,20 @@ jobs:
     parameters:
       study_key:
         type: string
+      check_changed:
+        type: boolean
+        default: false
     executor:
       name: build-executor
     steps:
+      - checkout-code
+      - when:
+          condition: << parameters.check_changed >>
+          steps:
+            - halt-when-study-unchanged:
+                study_key: << parameters.study_key >>
       - build:
           study_key: << parameters.study_key >>
-      - run-ui-unit-test:
-          study_key: << parameters.study_key >>
-      - run-api-unit-test
       - deploy-exploded-build:
           study_key: << parameters.study_key >>
 
@@ -513,6 +545,7 @@ jobs:
         type: boolean
         default: true
     steps:
+      - checkout-code
       - build:
           study_key: << parameters.study_key >>
       - when:
@@ -705,8 +738,16 @@ jobs:
     parameters:
       study_key:
         type: string
+      check_changed:
+        type: boolean
+        default: false
     steps:
       - checkout-code
+      - when:
+          condition: << parameters.check_changed >>
+          steps:
+            - halt-when-study-unchanged:
+                study_key: << parameters.study_key >>
       - run-ui-unit-test:
           study_key: << parameters.study_key >>
 
@@ -754,15 +795,18 @@ workflows:
           name: << matrix.study_key >>-build
           matrix:
             alias: app-build
-            parameters:
-              study_key: [ basil, osteo, angio, brain, mbc, mpc, atcp, rgp, esc, prion, pancan, singular, brugada, lms ]
+            parameters: &studies
+              study_key: [ basil, osteo, brain, angio, mbc, testboston, mpc, prion, atcp, rarex, rgp, esc, cgc, circadia, pancan, singular, brugada, lms, fon ]
+          requires:
+            - << matrix.study_key >>-ui-unit-test-pr
+            - api-unit-test
       - ui-unit-test:
           <<: *filter-pr-branch
-          name: << matrix.study_key >>-ui-unit-test
+          name: << matrix.study_key >>-ui-unit-test-pr
           matrix:
             alias: app-ui-unit-test
             parameters:
-              study_key: [ basil, osteo, angio, brain, mbc, mpc, atcp, rgp, esc, prion, pancan, singular, brugada, lms ]
+              <<: *studies
       - api-unit-test:
           <<: *filter-pr-branch
       - playwright-build:
@@ -830,13 +874,45 @@ workflows:
             - playwright-build
 
   build-and-deploy-all-apps-workflow:
+    # check all studies, launch GAE deploy if a study has changed.
     when:
       and:
         - not: << pipeline.parameters.do-builds >>
         - not: << pipeline.parameters.scheduled-playwright >>
     jobs:
-      - conditionally-launch-build-and-deploy-all-job:
+      - api-unit-test:
           <<: *filter-develop-branch
+      - ui-unit-test:
+          <<: *filter-develop-branch
+          name: << matrix.study_key >>-ui-unit-test
+          matrix:
+            alias: ui-unit-test
+            parameters:
+              <<: *studies
+          check_changed: true
+      - app-deploy:
+          <<: *filter-develop-branch
+          name: << matrix.study_key >>-deploy
+          matrix:
+            alias: app-deploy
+            parameters:
+              <<: *studies
+          check_changed: true
+          requires:
+            - << matrix.study_key >>-ui-unit-test
+            - api-unit-test
+      - playwright-build:
+          # run Playwright build and test after app-deploy
+          <<: *filter-develop-branch
+          env: dev # env is Dev because it's PR merge into develop branch
+      - playwright-test:
+          <<: *filter-develop-branch
+          env: dev
+          test_suite: UNKNOWN
+          parallelism_num: 2
+          requires:
+            - playwright-build
+            - app-deploy
 
   build-and-deploy-workflow:
     when:
