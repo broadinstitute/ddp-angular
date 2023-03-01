@@ -819,6 +819,7 @@ workflows:
             alias: app-ui-unit-test
             parameters:
               <<: *studies
+          check_changed: true
       - api-unit-test:
           <<: *filter-pr-branch
       - playwright-build:
