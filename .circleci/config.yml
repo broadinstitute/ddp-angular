@@ -260,6 +260,8 @@ commands:
       - set-deployment-environment
       - setup-shared-env:
           study_key: << parameters.study_key >>
+      - restore_cache:
+          key: v1-ng-build-{{ checksum "package.json" }}-{{ checksum "package-lock.json" }}-{{ << parameters.study_key >> }}
       - when:
           condition:
             equal: [ atcp, << parameters.study_key >> ]
@@ -281,7 +283,14 @@ commands:
             set -u
             export NODE_OPTIONS="--max-old-space-size=4096"
             ng build $ANGULAR_PROJECT_NAME $BUILD_PARAMS --configuration production --aot --base-href=/ --output-path=$OUTPUT_DIR --verbose=true --progress=true
-          #
+      - run:
+          command: |
+            echo "OUTPUT_DIR: $OUTPUT_DIR"
+            pwd && ls -r
+      - save_cache:
+          key: v1-ng-build-{{ checksum "package.json" }}-{{ checksum "package-lock.json" }}-{{ << parameters.study_key >> }}
+          paths:
+            - $OUTPUT_DIR
 
   conditionally-launch-build-and-deploy:
     description: Launch build and deploy if project has changed
