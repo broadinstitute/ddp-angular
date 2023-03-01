@@ -978,7 +978,7 @@ workflows:
             parameters:
               <<: *studies
       - app-build:
-          <<: *filter-release-branch
+          <<: *filter-pr-branch
           name: << matrix.study_key >>-build
           matrix:
             alias: app-build
@@ -986,9 +986,9 @@ workflows:
               <<: *studies
           check_archive: true
           store_build: true
-          requires:
-            - << matrix.study_key >>-ui-unit-test
-            - api-unit-test
+          #requires:
+          #  - << matrix.study_key >>-ui-unit-test
+          #  - api-unit-test
 
   build-app-workflow:
     when: << pipeline.parameters.do-builds >>
