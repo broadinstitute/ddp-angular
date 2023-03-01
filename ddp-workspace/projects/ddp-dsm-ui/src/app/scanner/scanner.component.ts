@@ -20,7 +20,7 @@ import {Auth} from '../services/auth.service';
 import {Statics} from '../utils/statics';
 import {Scanner} from './interfaces/scanners';
 import {first} from 'rxjs/operators';
-
+// changing
 @Component({
   selector: 'app-scanner',
   templateUrl: 'scanner.component.html',
