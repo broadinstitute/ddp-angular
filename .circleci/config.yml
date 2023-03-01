@@ -27,6 +27,15 @@ references:
   study_guids: &study_guids
     "basil NA CMI-OSTEO cmi-brain ANGIO cmi-mbc testboston cmi-mpc PRION atcp rarex RGP cmi-esc cgc circadia cmi-pancan singular brugada cmi-lms fon"
 
+  filter-release-branch: &filter-release-branch
+    filters:
+      tags:
+        ignore: /.*/
+      branches:
+        only:
+          - /^rc.*/
+          - /^hotfix.*/
+
   # Job runs for develop branch only
   filter-develop-branch: &filter-develop-branch
     filters:
@@ -49,14 +58,6 @@ references:
           - /.*rc.*/
           - /.*hotfix.*/
 
-  filter-release-branch: &filter-release-branch
-    filters:
-      tags:
-        ignore: /.*/
-      branches:
-        only:
-          - /^rc.*/
-          - /^hotfix.*/
 
 # Container for all the builds
 executors:
