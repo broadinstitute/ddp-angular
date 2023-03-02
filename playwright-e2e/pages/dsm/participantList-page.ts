@@ -6,7 +6,8 @@ import Checkbox from 'lib/widget/checkbox';
 import ParticipantPage from './participant-page';
 
 export enum SearchFieldLabel {
-  ShortId = 'Short ID'
+  ShortId = 'Short ID',
+  ParticipantID = 'Participant ID'
 }
 
 export default class ParticipantListPage {
@@ -50,6 +51,18 @@ export default class ParticipantListPage {
     await this.page.locator('text=Initial MR Received mm/dd/yyyy * Today >> button >> nth=2').click();
     await this.page.locator('text=Not Empty').check();
     await this.page.locator("button:has-text('Search') >> nth=0").click();
+  }
+
+  public async filterListByParticipantGUID(participantGUID: string): Promise<void> {
+    await this.page.locator('text=Customize View >> button').click();
+    await this.page.locator('text=Participant Columns').click();
+    await this.page.locator(`//mat-checkbox/label[span[normalize-space(text()) = 'Participant ID']]`).check();
+    await this.page.locator('text=Search >> button').click();
+    await this.page.locator(`//input[@data-placeholder='Participant ID']`).fill(participantGUID);
+    await this.page.locator("button:has-text('Search') >> nth=0").click();
+    await this.page.getByRole('cell', {name: participantGUID}).click();
+    await expect(this.page.getByRole('heading', {name: 'Participant Page'})).toBeVisible();
+    await expect(this.page.getByRole('cell', {name: participantGUID})).toBeVisible();
   }
 
   public async addBulkCohortTags(): Promise<void> {

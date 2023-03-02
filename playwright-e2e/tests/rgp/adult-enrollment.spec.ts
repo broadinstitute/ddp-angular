@@ -9,12 +9,24 @@ import TellUsAboutYourFamilyPage from 'pages/rgp/enrollment/tell-us-about-your-f
 import TellUsYourStoryPage, { WHO } from 'pages/rgp/enrollment/tell-us-your-story-page';
 import HomePage from 'pages/rgp/home-page';
 import { setAuth0UserEmailVerified } from 'utils/api-utils';
+import { request } from 'http';
+import { updateTypeAssertion } from 'typescript';
+import { setPatientParticipantGuid } from 'utils/faker-utils';
+import dsmHome from 'pages/dsm/home-page';
+import * as dsmAuth from 'authentication/auth-dsm';
+import Select from 'lib/widget/select';
+import { Navigation } from 'lib/component/dsm/navigation/navigation';
+import ParticipantListPage from 'pages/dsm/participantList-page';
+import { StudyNav } from 'lib/component/dsm/navigation/enums/studyNav.enum';
 
-const { RGP_USER_EMAIL, RGP_USER_PASSWORD } = process.env;
+
+
+const { RGP_USER_EMAIL, RGP_USER_PASSWORD, DSM_USER_EMAIL, DSM_USER_PASSWORD } = process.env;
 
 /** UNFINISHED **/
 
 test.describe('Adult Self Enrollment', () => {
+  
   const assertProgressActiveItem = async (page: Page, itemName: string): Promise<void> => {
     const locator = page.locator('li.activity-stepper__step-container button.stepper-btn.stepper-btn--active');
     await expect(locator).toHaveCount(1);
@@ -22,6 +34,7 @@ test.describe('Adult Self Enrollment', () => {
   };
 
   test('Can complete application @functional @enrollment @rgp', async ({ page }) => {
+    
     const homePage = new HomePage(page);
     await homePage.clickGetStarted();
 
@@ -61,15 +74,21 @@ test.describe('Adult Self Enrollment', () => {
     await auth.login(page, { email: userEmail });
 
     const tellUsAboutYourFamily = new TellUsAboutYourFamilyPage(page);
-    await tellUsAboutYourFamily.waitForReady();
-    await assertProgressActiveItem(page, '1');
 
+    setPatientParticipantGuid(page);
+
+    await tellUsAboutYourFamily.waitForReady();
+
+    await assertProgressActiveItem(page, '1');
+    
     await tellUsAboutYourFamily.yourTitle().selectOption(user.patient.title);
+    
     await tellUsAboutYourFamily.yourFirstName().fill(user.patient.firstName);
     await tellUsAboutYourFamily.phone().fill(user.patient.phone);
     await tellUsAboutYourFamily.confirmPhone().fill(user.patient.phone);
     await tellUsAboutYourFamily.patientRelationship().selectOption('MYSELF');
     await tellUsAboutYourFamily.state().selectOption(user.patient.state.abbreviation);
+
     await tellUsAboutYourFamily.website().fill('https://en.wikipedia.org/wiki/Broad_Institute');
     await tellUsAboutYourFamily.describeGeneticCondition().fill('Single-gene disorders');
     await tellUsAboutYourFamily.haveAnyClinicalDiagnosesBeenMade().check('Yes');
@@ -154,5 +173,26 @@ test.describe('Adult Self Enrollment', () => {
     // fields should be disabled. check one field to verify is disabled
     expect(await tellUsAboutYourFamily.yourTitle().isDisabled()).toEqual(true);
     expect(await tellUsAboutYourFamily.yourFirstName().isDisabled()).toEqual(true);
+    
+    //Go to DSM to verify the newly created account can be found there
+    const dsm = new dsmHome(page);
+    const dsmUserEmail = await dsmAuth.login(page, {
+      email: DSM_USER_EMAIL,
+      password: DSM_USER_PASSWORD
+    });
+    
+    let navigation = new Navigation(page);
+
+    //select RGP study
+    await new Select(page, { label: 'Select study' }).selectOption('Pepper RGP');
+
+    const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(StudyNav.PARTICIPANT_LIST);
+
+    await participantListPage.assertPageTitle();
+
+    await participantListPage.waitForReady();
+    await participantListPage.filterListByParticipantGUID(user.patient.participantGuid);
+
   });
+
 });
