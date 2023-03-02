@@ -181,7 +181,7 @@ test.describe('Adult Self Enrollment', () => {
     let navigation = new Navigation(page);
 
     //select RGP study
-    await new Select(page, { label: 'Select study' }).selectOption('Pepper RGP');
+    await new Select(page, { label: 'Select study' }).selectOption('RGP');
 
     const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(StudyNav.PARTICIPANT_LIST);
 
