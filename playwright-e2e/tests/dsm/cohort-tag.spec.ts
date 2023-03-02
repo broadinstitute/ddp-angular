@@ -39,9 +39,9 @@ test.describe.parallel('Cohort tags', () => {
       await welcomePage.selectStudy(studyName);
 
       /* Test Values */
-      const cohortTagValue1 = `dsm_1_${studyName}-${crypto.randomUUID()}`;
-      const cohortTagValue2 = `dsm_2_${studyName}-${crypto.randomUUID()}`;
-      const cohortTagValue3 = `dsm_3_${studyName}-${crypto.randomUUID()}`;
+      const cohortTagValue1 = `1_${studyName}-${crypto.randomUUID().toString().substring(0, 10)}`;
+      const cohortTagValue2 = `2_${studyName}-${crypto.randomUUID().toString().substring(0, 10)}`;
+      const cohortTagValue3 = `3_${studyName}-${crypto.randomUUID().toString().substring(0, 10)}`;
       const participantNoteValue = `This is a test note_${studyName}-${crypto.randomUUID()}`;
 
       /* Step-By-Step navigation through the website and making assertions as needed */
@@ -104,7 +104,7 @@ test.describe.parallel('Cohort tags', () => {
 
       await cohortTag.assertCohortTagToHaveCount(cohortTagValue3, 1);
 
-      await cohortTag.add(cohortTagValue3);
+      await cohortTag.add(cohortTagValue3, false);
 
       await cohortTag.assertDuplicateCohortTagMessage();
 
@@ -113,7 +113,7 @@ test.describe.parallel('Cohort tags', () => {
       await participantPage.backToList();
       await participantListTable.selectParticipantAt(0);
       await participantListPage.addBulkCohortTags();
-      await cohortTag.add(cohortTagValue3);
+      await cohortTag.add(cohortTagValue3, false);
       await cohortTag.submitAndExit();
       await participantListTable.openParticipantPageAt(0);
 
