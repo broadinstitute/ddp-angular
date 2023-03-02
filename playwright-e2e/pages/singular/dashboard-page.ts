@@ -5,7 +5,7 @@ import Table from 'lib/component/table';
 import EnrollMyChildPage from 'pages/singular/enrollment/enroll-my-child-page';
 import { SingularPage } from 'pages/singular/singular-page';
 
-export default class MyDashboardPage extends SingularPage {
+export default class DashboardPage extends SingularPage {
   constructor(page: Page) {
     super(page);
   }
