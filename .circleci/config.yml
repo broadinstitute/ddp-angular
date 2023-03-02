@@ -972,14 +972,14 @@ workflows:
           <<: *filter-release-branch
       - ui-unit-test:
           <<: *filter-release-branch
-          name: << matrix.study_key >>-ui-unit-test
+          name: << matrix.study_key >>-ui-unit-test-release
           matrix:
             alias: app-ui-unit-test
             parameters:
               <<: *studies
       - app-build:
           <<: *filter-release-branch
-          name: << matrix.study_key >>-build
+          name: << matrix.study_key >>-build-release
           matrix:
             alias: app-build
             parameters:
@@ -987,7 +987,7 @@ workflows:
           check_archive: true
           store_build: true
           requires:
-            - << matrix.study_key >>-ui-unit-test
+            - << matrix.study_key >>-ui-unit-test-release
             - api-unit-test
 
   build-app-workflow:
