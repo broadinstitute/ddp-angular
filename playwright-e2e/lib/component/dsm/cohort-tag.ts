@@ -4,10 +4,10 @@ import { waitForResponseByURL } from '../../../utils/test-utils';
 export default class CohortTag {
   constructor(private readonly page: Page) {}
 
-  public async add(tagName: string, waitForResponse: boolean = true): Promise<void> {
+  public async add(tagName: string, waitForResponse = true): Promise<void> {
     await this.inputField.fill(tagName);
     await this.inputField.blur();
-    waitForResponse && await this.waitForOKResponse('createCohortTag');
+    waitForResponse && (await this.waitForOKResponse('createCohortTag'));
   }
 
   public async remove(tagName: string): Promise<void> {
