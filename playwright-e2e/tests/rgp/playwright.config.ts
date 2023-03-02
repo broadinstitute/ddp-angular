@@ -5,7 +5,7 @@ const rgpConfig: PlaywrightTestConfig = {
   ...testConfig,
   testDir: './',
   use: {
-    video: 'on',
+    video: 'on'
   }
 };
 

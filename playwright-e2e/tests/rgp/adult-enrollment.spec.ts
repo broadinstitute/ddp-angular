@@ -19,12 +19,9 @@ import { Navigation } from 'lib/component/dsm/navigation/navigation';
 import ParticipantListPage from 'pages/dsm/participantList-page';
 import { StudyNav } from 'lib/component/dsm/navigation/enums/studyNav.enum';
 
-
-
 const { RGP_USER_EMAIL, RGP_USER_PASSWORD, DSM_USER_EMAIL, DSM_USER_PASSWORD } = process.env;
 
 test.describe('Adult Self Enrollment', () => {
-  
   const assertProgressActiveItem = async (page: Page, itemName: string): Promise<void> => {
     const locator = page.locator('li.activity-stepper__step-container button.stepper-btn.stepper-btn--active');
     await expect(locator).toHaveCount(1);
@@ -32,7 +29,6 @@ test.describe('Adult Self Enrollment', () => {
   };
 
   test('Can complete application @functional @enrollment @rgp', async ({ page }) => {
-    
     const homePage = new HomePage(page);
     await homePage.clickGetStarted();
 
@@ -73,14 +69,12 @@ test.describe('Adult Self Enrollment', () => {
 
     const tellUsAboutYourFamily = new TellUsAboutYourFamilyPage(page);
 
-    setPatientParticipantGuid(page);
+    await setPatientParticipantGuid(page);
 
     await tellUsAboutYourFamily.waitForReady();
 
     await assertProgressActiveItem(page, '1');
-    
     await tellUsAboutYourFamily.yourTitle().selectOption(user.patient.title);
-    
     await tellUsAboutYourFamily.yourFirstName().fill(user.patient.firstName);
     await tellUsAboutYourFamily.phone().fill(user.patient.phone);
     await tellUsAboutYourFamily.confirmPhone().fill(user.patient.phone);
@@ -170,15 +164,13 @@ test.describe('Adult Self Enrollment', () => {
     // fields should be disabled. check one field to verify is disabled
     expect(await tellUsAboutYourFamily.yourTitle().isDisabled()).toEqual(true);
     expect(await tellUsAboutYourFamily.yourFirstName().isDisabled()).toEqual(true);
-    
     //Go to DSM to verify the newly created account can be found there
     const dsm = new dsmHome(page);
     const dsmUserEmail = await dsmAuth.login(page, {
       email: DSM_USER_EMAIL,
       password: DSM_USER_PASSWORD
     });
-    
-    let navigation = new Navigation(page);
+    const navigation = new Navigation(page);
 
     //select RGP study
     await new Select(page, { label: 'Select study' }).selectOption('RGP');
@@ -189,7 +181,5 @@ test.describe('Adult Self Enrollment', () => {
 
     await participantListPage.waitForReady();
     await participantListPage.filterListByParticipantGUID(user.patient.participantGuid);
-
   });
-
 });

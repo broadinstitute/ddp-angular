@@ -1,12 +1,12 @@
 import { expect, Locator, Page } from '@playwright/test';
+import { waitForNoSpinner } from 'utils/test-utils';
+import { Filters } from 'lib/component/dsm/filters/filters';
+import { ParticipantListTable } from 'lib/component/dsm/tables/participantListTable';
 
 export enum SearchFieldLabel {
   ShortId = 'Short ID',
   ParticipantID = 'Participant ID'
 }
-import { waitForNoSpinner } from 'utils/test-utils';
-import { Filters } from 'lib/component/dsm/filters/filters';
-import { ParticipantListTable } from 'lib/component/dsm/tables/participantListTable';
 
 export default class ParticipantListPage {
   private readonly PAGE_TITLE: string = 'Participant List';
@@ -31,9 +31,9 @@ export default class ParticipantListPage {
     await this.page.locator('text=Search >> button').click();
     await this.page.locator(`//input[@data-placeholder='Participant ID']`).fill(participantGUID);
     await this.page.locator("button:has-text('Search') >> nth=0").click();
-    await this.page.getByRole('cell', {name: participantGUID}).click();
-    await expect(this.page.getByRole('heading', {name: 'Participant Page'})).toBeVisible();
-    await expect(this.page.getByRole('cell', {name: participantGUID})).toBeVisible();
+    await this.page.getByRole('cell', { name: participantGUID }).click();
+    await expect(this.page.getByRole('heading', { name: 'Participant Page' })).toBeVisible();
+    await expect(this.page.getByRole('cell', { name: participantGUID })).toBeVisible();
   }
 
   public async addBulkCohortTags(): Promise<void> {

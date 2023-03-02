@@ -21,13 +21,11 @@ export const generateEmailAlias = (email: string | undefined): string => {
 };
 
 export const setPatientParticipantGuid =  async (page: Page) => {
-
   const [response] = await Promise.all([
-    page.waitForResponse(resp => resp.url().includes('/participants') && resp.status() === 200)
+    page.waitForResponse((resp) => resp.url().includes('/participants') && resp.status() === 200)
   ]);
 
-  let participantResponse = response.url();
-  var urlArray = participantResponse.split("/");
+  const participantResponse = response.url();
+  const urlArray = participantResponse.split('/');
   user.patient.participantGuid = urlArray[6];
-}
-
+};
