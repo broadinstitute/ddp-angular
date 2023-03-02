@@ -20,7 +20,7 @@ export const generateEmailAlias = (email: string | undefined): string => {
   return `${name}+${Math.floor(Math.random() * 1000000000)}@${domain}`;
 };
 
-export const setPatientParticipantGuid =  async (page: Page) => {
+export const setPatientParticipantGuid = async (page: Page) => {
   const [response] = await Promise.all([
     page.waitForResponse((resp) => resp.url().includes('/participants') && resp.status() === 200)
   ]);
