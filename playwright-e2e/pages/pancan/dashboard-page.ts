@@ -1,8 +1,9 @@
 import { expect, Locator, Page } from '@playwright/test';
-import Table from 'lib/widget/table';
-import { PancanPage } from 'pages/pancan/pancan-page';
+import Table from 'lib/component/table';
+import Button from 'lib/widget/button';
+import { PancanPageBase } from 'pages/pancan/pancan-page-base';
 
-export default class DashboardPage extends PancanPage {
+export default class DashboardPage extends PancanPageBase {
   constructor(page: Page) {
     super(page);
   }
@@ -20,8 +21,8 @@ export default class DashboardPage extends PancanPage {
     return this.page.locator('.enrollmentStatusCompleteText');
   }
 
-  getDashboardTable(): Table {
-    return new Table(this.page, { ddpTestID: 'activitiesTable' });
+  getDashboardTable(nth = 0): Table {
+    return new Table(this.page, { ddpTestID: 'activitiesTable', nth });
   }
 
   /**
@@ -46,5 +47,14 @@ export default class DashboardPage extends PancanPage {
   /** Click "Enroll my adult dependent" button */
   async enrollMyAdultDependent(): Promise<void> {
     await this.getEnrollMyAdultDependentButton().click();
+  }
+
+  /**
+   * Click Add Participant button
+   * @returns {Promise<void>}
+   */
+  async addParticipant(): Promise<void> {
+    const button = new Button(this.page, { root: 'section', label: 'Add Participant' });
+    await button.click();
   }
 }

@@ -1,7 +1,7 @@
 import { expect, Locator, Page } from '@playwright/test';
 import Question from 'lib/component/Question';
 import Checkbox from 'lib/widget/checkbox';
-import Input from 'lib/widget/Input';
+import Input from 'lib/widget/input';
 import Select from 'lib/widget/select';
 import TextArea from 'lib/widget/textarea';
 import { RgpPageBase } from 'pages/rgp/rgp-page-base';
@@ -39,15 +39,6 @@ export default class TellUsAboutYourFamilyPage extends RgpPageBase {
    */
   patientRelationship(): Select {
     return new Select(this.page, { label: 'The patient is [select from list]' });
-  }
-
-  /**
-   * Question: State the family lives in *
-   * <br> Type: Select
-   * @returns {Select}
-   */
-  state(): Select {
-    return new Select(this.page, { label: 'State the family lives in' });
   }
 
   /**

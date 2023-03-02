@@ -1,6 +1,6 @@
 import { Locator, Page } from '@playwright/test';
-import Card from 'lib/widget/card';
-import Input from 'lib/widget/Input';
+import Card from 'lib/component/card';
+import Input from 'lib/widget/input';
 import Select from 'lib/widget/select';
 
 export default class Address {

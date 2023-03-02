@@ -7,8 +7,6 @@ import {AllStudiesRoutingModule} from './all-studies.routing.module';
 import {HomeComponent} from '../home/home.component';
 import {KitLabelComponent} from '../kit-label/kit-label.component';
 import {AddressComponent} from '../address/address.component';
-import {ScanComponent} from '../scan/scan.component';
-import {ScanPairComponent} from '../scan-pair/scan-pair.component';
 import {MedicalRecordComponent} from '../medical-record/medical-record.component';
 import {ModalComponent} from '../modal/modal.component';
 import {AssigneesComponent} from '../assignee/assignee.component';
@@ -21,7 +19,6 @@ import {ShippingComponent} from '../shipping/shipping.component';
 import {UploadComponent} from '../upload/upload.component';
 import {ParticipantExitComponent} from '../participant-exit/participant-exit.component';
 import {UserSettingComponent} from '../user-setting/user-setting.component';
-import {ScanValueComponent} from '../scan-value/scan-value.component';
 import {BannerComponent} from '../banner/banner.component';
 import {FieldDatepickerComponent} from '../field-datepicker/field-datepicker.component';
 import {OncHistoryDetailComponent} from '../onc-history-detail/onc-history-detail.component';
@@ -140,6 +137,7 @@ import {MatNativeDateModule} from '@angular/material/core';
 import {DateRangeErrorPipe} from '../dashboard-statistics/pipes/dateRangeError.pipe';
 import {KeyValuePairPipe} from '../dashboard-statistics/pipes/KeyValuePair.pipe';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import {ScannerComponent} from '../scanner/scanner.component';
 
 
 PlotlyModule.plotlyjs = PlotlyJS;
@@ -152,8 +150,6 @@ PlotlyModule.plotlyjs = PlotlyJS;
     AllStudiesComponent,
     KitLabelComponent,
     AddressComponent,
-    ScanComponent,
-    ScanPairComponent,
     MedicalRecordComponent,
     ModalComponent,
     AssigneesComponent,
@@ -166,7 +162,6 @@ PlotlyModule.plotlyjs = PlotlyJS;
     UploadComponent,
     ParticipantExitComponent,
     UserSettingComponent,
-    ScanValueComponent,
     BannerComponent,
     QrCodeComponent,
     FieldDatepickerComponent,
@@ -238,7 +233,8 @@ PlotlyModule.plotlyjs = PlotlyJS;
     CountsTableComponent,
     DateRangeComponent,
     DateRangeErrorPipe,
-    KeyValuePairPipe
+    KeyValuePairPipe,
+    ScannerComponent
   ],
   imports: [
     CommonModule,

@@ -1,9 +1,9 @@
-import { Page } from '@playwright/test';
+import { expect, Page } from '@playwright/test';
 import Question from 'lib/component/Question';
-import { PancanPage } from 'pages/pancan/pancan-page';
+import { PancanPageBase } from 'pages/pancan/pancan-page-base';
 import { PatientsData, TypePatient } from 'pages/patient-type';
 
-export default class PreScreeningDiagnosisPage extends PancanPage {
+export default class PreScreeningDiagnosisPage extends PancanPageBase {
   typePerson;
   constructor(page: Page, typePerson: TypePatient = 'adult') {
     super(page);
@@ -12,6 +12,7 @@ export default class PreScreeningDiagnosisPage extends PancanPage {
 
   async waitForReady(): Promise<void> {
     await this.cancerDiagnosed().toLocator().waitFor({ state: 'visible' });
+    await expect(this.getNextButton()).toBeEnabled();
   }
 
   /**

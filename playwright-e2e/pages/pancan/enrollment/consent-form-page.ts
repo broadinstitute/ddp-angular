@@ -1,12 +1,12 @@
 import { Page } from '@playwright/test';
 import Question from 'lib/component/Question';
-import Input from 'lib/widget/Input';
-import { PancanPage } from 'pages/pancan/pancan-page';
+import Input from 'lib/widget/input';
+import { PancanPageBase } from 'pages/pancan/pancan-page-base';
 import { PatientsData, TypePatient } from 'pages/patient-type';
 import { generateUserName } from 'utils/faker-utils';
 import * as user from 'data/fake-user.json';
 
-export default class ConsentFormPage extends PancanPage {
+export default class ConsentFormPage extends PancanPageBase {
   constructor(page: Page, private typePatient: TypePatient = 'adult') {
     super(page);
   }
@@ -22,9 +22,12 @@ export default class ConsentFormPage extends PancanPage {
    * Type: Radiobutton
    * @returns {Promise<void>}
    */
-  async bloodSamples(): Promise<void> {
-    const bloodSamplesRadioButton = new Question(this.page, { classAttr: PatientsData[this.typePatient].ddpTestID.bloodSamples });
-    await bloodSamplesRadioButton.check('Yes', { exactMatch: true });
+  bloodSamples(): Question {
+    return new Question(this.page, { cssClassAttribute: `.${PatientsData[this.typePatient].ddpTestID.bloodSamples}` });
+  }
+
+  async agreeToBloodSamples(answer = 'Yes'): Promise<void> {
+    await this.bloodSamples().check(answer, { exactMatch: true });
   }
 
   // You can work with me to arrange blood sample(s) to be drawn at my physician’s office, local clinic, or nearby lab'
@@ -37,11 +40,14 @@ export default class ConsentFormPage extends PancanPage {
    * Type: Radiobutton
    * @returns {Promise<void>}
    */
-  async cancerSamples(): Promise<void> {
-    const cancerSamplesRadioButton = new Question(this.page, {
-      classAttr: PatientsData[this.typePatient].ddpTestID.assentTissue
+  cancerSamples(): Question {
+    return new Question(this.page, {
+      cssClassAttribute: `.${PatientsData[this.typePatient].ddpTestID.assentTissue}`
     });
-    await cancerSamplesRadioButton.check('Yes', { exactMatch: true });
+  }
+
+  async agreeToStoreCancerSamples(answer = 'Yes'): Promise<void> {
+    await this.cancerSamples().check(answer, { exactMatch: true });
   }
 
   /**
@@ -96,14 +102,12 @@ export default class ConsentFormPage extends PancanPage {
    * @returns {Promise<void>}
    */
   async fillInParentData() {
-    const parentFirstName = new Input(this.page, { ddpTestID: PatientsData.child.ddpTestID.assentFirstName });
-    const parentLastName = new Input(this.page, { ddpTestID: PatientsData.child.ddpTestID.assentLastName });
-    const parentSignature = new Input(this.page, { ddpTestID: PatientsData.child.ddpTestID.assentSignature });
-    const relationshipChild = new Question(this.page, {
-      prompt: PatientsData.child.ddpTestID.relationshipChild || ''
-    });
-    const firstName = generateUserName(user.patient.firstName);
-    const lastName = generateUserName(user.patient.lastName);
+    const parentFirstName = new Input(this.page, { ddpTestID: PatientsData[this.typePatient].ddpTestID.assentFirstName });
+    const parentLastName = new Input(this.page, { ddpTestID: PatientsData[this.typePatient].ddpTestID.assentLastName });
+    const parentSignature = new Input(this.page, { ddpTestID: PatientsData[this.typePatient].ddpTestID.assentSignature });
+    const relationshipChild = new Question(this.page, { prompt: PatientsData[this.typePatient].ddpTestID.relationshipChild });
+    const firstName = generateUserName(user[this.typePatient].firstName);
+    const lastName = generateUserName(user[this.typePatient].lastName);
     await parentFirstName.fill(firstName);
     await parentLastName.fill(lastName);
     await parentSignature.fill(lastName);

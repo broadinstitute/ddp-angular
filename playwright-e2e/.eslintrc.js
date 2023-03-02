@@ -19,7 +19,8 @@ module.exports = {
     'eqeqeq': ['warn', 'smart'],
 
     'no-unused-vars': 'off', // Needed for the below rule
-    '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '_', args: "none" }],
+    '@typescript-eslint/no-unused-vars': ['off', { argsIgnorePattern: '_', args: "none" }],
+    '@typescript-eslint/no-unused-vars-experimental': 'off',
 
     'no-multi-spaces': 'warn',
 
@@ -87,6 +88,7 @@ module.exports = {
         tabWidth: 2
       }
     ],
+    '@typescript-eslint/no-non-null-assertion': 'off',
     'max-len': [
       'warn',
       130,

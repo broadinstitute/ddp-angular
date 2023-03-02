@@ -7,7 +7,6 @@ import PreScreeningPage from 'pages/singular/enrollment/pre-screening-page';
 import EnrollMyAdultDependentPage from 'pages/singular/enrollment/enroll-my-adult-dependent-page';
 import ConsentFormForAdultDependentPage from 'pages/singular/enrollment/consent-form-for-adult-dependent-page';
 import AboutMyAdultDependentPage from 'pages/singular/enrollment/about-my-adult-dependent-page';
-import { enterMailingAddress } from 'utils/test-utils';
 import MyDashboardPage from 'pages/singular/dashboard/my-dashboard-page';
 import { WHO } from 'data/constants';
 import * as user from 'data/fake-user.json';
@@ -56,11 +55,9 @@ test.describe('Enrol an adult dependent', () => {
     const enrollMyAdultDependentPage = new EnrollMyAdultDependentPage(page);
     await enrollMyAdultDependentPage.whoHasVentricleHeartDefect().check(WHO.TheDependantBeingEnrolled);
     await enrollMyAdultDependentPage.howOldIsYourDependent().fill(user.adultDependent.age);
-    await enrollMyAdultDependentPage
-      .whereDoesDependentLive()
-      .select('Select Country')
-      .selectOption(user.adultDependent.country.abbreviation);
-    await enrollMyAdultDependentPage.state().selectOption(user.adultDependent.state.abbreviation);
+    await enrollMyAdultDependentPage.fillInCountry(user.adultDependent.country.abbreviation, {
+      state: user.adultDependent.state.abbreviation
+    });
     await enrollMyAdultDependentPage.doesDependentHaveCognitiveImpairment().check('Yes', { exactMatch: true });
     await myDashboardPage.next();
 
@@ -99,14 +96,15 @@ test.describe('Enrol an adult dependent', () => {
     await assertProgressCurrentItem(page, 'About Me');
 
     // Fill out address with fake data
-    await enterMailingAddress(page, {
+    await aboutMyAdultDependentPage.fillInContactAddress({
       fullName: `${user.adultDependent.firstName} ${dependentLastName}`,
       country: user.adultDependent.country.name,
       state: user.adultDependent.state.name,
       street: user.adultDependent.streetAddress,
       city: user.adultDependent.city,
       zipCode: user.adultDependent.zip,
-      telephone: user.adultDependent.phone
+      telephone: user.adultDependent.phone,
+      labels: { phone: 'Telephone Contact Number', country: 'Country', state: 'State', zip: 'Zip Code', city: 'City' }
     });
     await aboutMyAdultDependentPage.next({ waitForNav: true });
 

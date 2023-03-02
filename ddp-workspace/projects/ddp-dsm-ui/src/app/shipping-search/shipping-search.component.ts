@@ -21,6 +21,7 @@ export class ShippingSearchComponent implements OnInit {
   allowedRealms: string[] = [];
   kit: KitRequest[] = [];
   private currentPatchField: string | null;
+  PECGS_RESEARCH = 'PECGS_RESEARCH';
 
   constructor(private dsmService: DSMService, private auth: Auth, private role: RoleService) {
     if (!auth.authenticated()) {
@@ -150,5 +151,19 @@ saveCompleted(): void{
     const patch = patch1.getPatch();
     this.currentPatchField = 'collectionDate';
     return this.patch(patch);
+  }
+
+  isResearchStudy(kitRequest: KitRequest): boolean {
+    if (kitRequest.realm === 'osteo2' || kitRequest.realm === 'cmi-lms') {
+      return true;
+    }
+    return false;
+  }
+
+  isResearchSample(kitRequest: KitRequest): boolean {
+    if (kitRequest.realm === 'osteo2' || kitRequest.realm === 'cmi-lms') {
+      return (kitRequest.message && kitRequest.message === this.PECGS_RESEARCH);
+    }
+    return false;
   }
 }

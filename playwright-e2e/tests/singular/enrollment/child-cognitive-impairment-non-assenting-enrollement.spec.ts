@@ -8,7 +8,6 @@ import AboutMyChildPage from 'pages/singular/enrollment/about-my-child-page';
 import ChildSurveyPage from 'pages/singular/enrollment/child-survey-page';
 import PreScreeningPage from 'pages/singular/enrollment/pre-screening-page';
 import ConsentFormForMinorPage from 'pages/singular/enrollment/consent-form-for-minor-page';
-import { enterMailingAddress } from 'utils/test-utils';
 import { assertActivityHeader, assertActivityProgress } from 'utils/assertion-helper';
 import { generateUserName } from 'utils/faker-utils';
 
@@ -72,14 +71,15 @@ test.describe('Enroll child with cognitive impairment', () => {
     const aboutMyChildPage = new AboutMyChildPage(page);
     await aboutMyChildPage.waitForReady();
     await assertActivityHeader(page, 'About My Child');
-    await enterMailingAddress(page, {
+    await aboutMyChildPage.fillInContactAddress({
       fullName: `${user.thirdChild.firstName} ${childLastName}`,
       country: user.thirdChild.country.name,
       state: user.thirdChild.state.name,
       street: user.thirdChild.streetAddress,
       city: user.thirdChild.city,
       zipCode: user.thirdChild.zip,
-      telephone: user.thirdChild.phone
+      telephone: user.thirdChild.phone,
+      labels: { phone: 'Telephone Contact Number', country: 'Country', state: 'State', zip: 'Zip Code', city: 'City' }
     });
     await aboutMyChildPage.next({ waitForNav: true });
 

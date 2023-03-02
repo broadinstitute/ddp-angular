@@ -1,0 +1,55 @@
+<h1>
+  <ng-container > {{ activeScanner.title }} </ng-container>
+</h1>
+
+<br/>
+<b>No need to select a study!</b>
+<br/>
+<br/>
+
+<ng-container *ngIf="activeScanner.type === 'receiving'">
+  For migrated kits which have only a SM-ID and no manufacturer barcode on the tube
+  <br/>
+  <br/>
+</ng-container>
+
+<div *ngIf="additionalMessage != null">
+  <h3 class="Color--warn">{{additionalMessage}}</h3>
+  <br/>
+</div>
+
+<form [formGroup]="activeScannerFormGroup">
+  <ng-container formArrayName="scannerFields">
+    <div class="formsGroup" *ngFor="let scannerField of scannerFields.controls; let scannerFieldIndex = index">
+      <ng-container [formGroup]="scannerField">
+        <ng-container *ngFor="let inputField of activeScanner.inputFields; let formControlIndex = index">
+          <mat-form-field>
+            <input
+              #htmlInputElement
+              (change)="
+              checkForDuplicates(inputField.controllerName);
+              addInputsGroupAndOrMoveFocus(formControlIndex, scannerFieldIndex, htmlInputElement);
+              "
+              [formControlName]="inputField.controllerName"
+              matInput type="text"
+              placeholder="{{inputField.placeholder}}"
+              style="width: 8cm"
+              autocomplete="off"
+              [maxlength]="inputField.maxLength"
+            >
+            <mat-error *ngIf="scannerField.get(inputField.controllerName).hasError('duplicatedValue')">Value already exists!</mat-error>
+            <mat-error *ngIf="scannerField.get(inputField.controllerName).hasError('required')">Required field</mat-error>
+            <mat-error *ngIf="scannerField.get(inputField.controllerName).hasError('notSixCharacters')">Must be 6 characters long</mat-error>
+            <mat-error *ngIf="scannerField.get(inputField.controllerName).hasError('noRNA')">This barcode does not contain the “RNA” prefix</mat-error>
+          </mat-form-field>
+        </ng-container>
+      </ng-container>
+      <button mat-mini-fab type="button" [disabled]="scannerFields.length - 1 === scannerFieldIndex" (click)="removeFields(scannerFieldIndex)" color="primary" >-</button>
+      <p class="Width--100 Color--warn" *ngIf="scannerField.hasError('notFound')">
+        Error occurred sending this scan pair! <br/> {{scannerField.getError('notFound')}}</p>
+    </div>
+  </ng-container>
+  <br />
+  <button mat-raised-button type="button" color="primary" (click)="save()"
+          [disabled]="activeScannerFormGroup.invalid" >{{activeScanner.buttonValue}}</button>
+</form>

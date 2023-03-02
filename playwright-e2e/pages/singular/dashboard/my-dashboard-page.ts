@@ -1,7 +1,7 @@
 import { expect, Locator, Page } from '@playwright/test';
 import { WHO } from 'data/constants';
 import * as user from 'data/fake-user.json';
-import Table from 'lib/widget/table';
+import Table from 'lib/component/table';
 import EnrollMyChildPage from 'pages/singular/enrollment/enroll-my-child-page';
 import { SingularPage } from 'pages/singular/singular-page';
 
@@ -77,8 +77,7 @@ export default class MyDashboardPage extends SingularPage {
     const enrollMyChildPage = new EnrollMyChildPage(this.page);
     await enrollMyChildPage.whoInChildFamilyHasVentricleHeartDefect().check(who);
     await enrollMyChildPage.howOldIsYourChild().fill(age);
-    await enrollMyChildPage.whereDoesChildLive().select('Select Country').selectOption(country);
-    await enrollMyChildPage.state().selectOption(state);
+    await enrollMyChildPage.fillInCountry(country, { state });
     if (cognitiveImpairment) {
       await enrollMyChildPage.doesChildHaveCognitiveImpairment().check(cognitiveImpairment, { exactMatch: true });
     }

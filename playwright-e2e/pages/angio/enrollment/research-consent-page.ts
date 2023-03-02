@@ -2,7 +2,7 @@ import { expect, Locator, Page } from '@playwright/test';
 import { AngioPageBase } from 'pages/angio/angio-page-base';
 import { waitForNoSpinner } from 'utils/test-utils';
 import Question from 'lib/component/Question';
-import Input from 'lib/widget/Input';
+import Input from 'lib/widget/input';
 
 export default class ResearchConsentPage extends AngioPageBase {
   private readonly pageTitle: Locator;
@@ -13,7 +13,7 @@ export default class ResearchConsentPage extends AngioPageBase {
   }
 
   async waitForReady(): Promise<void> {
-    await expect(this.pageTitle).toBeVisible({ visible: true });
+    await expect(this.pageTitle).toBeVisible();
     await expect(this.pageTitle).toHaveText('Research Consent Form');
     await waitForNoSpinner(this.page);
   }
@@ -114,17 +114,6 @@ export default class ResearchConsentPage extends AngioPageBase {
   async yearBorn(answer: string): Promise<void> {
     const question = new Question(this.page, {
       prompt: 'In what year were you born?'
-    });
-    await question.select().selectOption(answer);
-  }
-
-  /**
-   * <br> Question: What country do you live in?
-   * <br> Type: Select
-   */
-  async country(answer: string): Promise<void> {
-    const question = new Question(this.page, {
-      prompt: 'What country do you live in?'
     });
     await question.select().selectOption(answer);
   }

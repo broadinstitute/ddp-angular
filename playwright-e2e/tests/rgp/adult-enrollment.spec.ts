@@ -23,8 +23,6 @@ import { StudyNav } from 'lib/component/dsm/navigation/enums/studyNav.enum';
 
 const { RGP_USER_EMAIL, RGP_USER_PASSWORD, DSM_USER_EMAIL, DSM_USER_PASSWORD } = process.env;
 
-/** UNFINISHED **/
-
 test.describe('Adult Self Enrollment', () => {
   
   const assertProgressActiveItem = async (page: Page, itemName: string): Promise<void> => {
@@ -69,7 +67,7 @@ test.describe('Adult Self Enrollment', () => {
     );
 
     // Verify user email by Auth0 API
-    await setAuth0UserEmailVerified(APP.RPG, userEmail, { isEmailVerified: true });
+    await setAuth0UserEmailVerified(APP.RGP, userEmail, { isEmailVerified: true });
 
     await auth.login(page, { email: userEmail });
 
@@ -87,8 +85,7 @@ test.describe('Adult Self Enrollment', () => {
     await tellUsAboutYourFamily.phone().fill(user.patient.phone);
     await tellUsAboutYourFamily.confirmPhone().fill(user.patient.phone);
     await tellUsAboutYourFamily.patientRelationship().selectOption('MYSELF');
-    await tellUsAboutYourFamily.state().selectOption(user.patient.state.abbreviation);
-
+    await tellUsAboutYourFamily.state().select().selectOption(user.patient.state.abbreviation);
     await tellUsAboutYourFamily.website().fill('https://en.wikipedia.org/wiki/Broad_Institute');
     await tellUsAboutYourFamily.describeGeneticCondition().fill('Single-gene disorders');
     await tellUsAboutYourFamily.haveAnyClinicalDiagnosesBeenMade().check('Yes');

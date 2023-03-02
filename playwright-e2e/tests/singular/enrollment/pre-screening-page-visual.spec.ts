@@ -14,9 +14,7 @@ test.describe('About Yourself page', () => {
     await expect(country.errorMessage()).toBeHidden();
 
     // Select country France and press Tab should start triggering the error message
-    await preScreeningPage.country().select().selectOption('FR');
-    //await page.keyboard.press('Tab');
-
+    await preScreeningPage.fillInCountry('FR');
     await expect(country.errorMessage()).toContainText(
       'Project Singular is currently open only to participants in the United States and Territories or Canada.' +
         ' Thank you for your interest.'
@@ -40,9 +38,7 @@ test.describe('About Yourself page', () => {
     await expect(preScreeningPage.state().toLocator()).toBeHidden();
 
     // Select a country and press Tab should start triggering the error message
-    await preScreeningPage.country().select().selectOption('US');
-    await page.keyboard.press('Tab');
-
+    await preScreeningPage.fillInCountry('US');
     await expect(age.errorMessage()).toContainText(
       'In order to participate in Project Singular, a parent or guardian must register and consent for you.'
     );
