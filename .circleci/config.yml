@@ -177,7 +177,7 @@ commands:
           name: Deploy to GAE
           command: |
             set -u
-            gcloud app deploy --version="${SHORT_GIT_SHA}" --stop-previous-version --promote --quiet --project "broad-ddp-${ENVIRONMENT}" "${ANGULAR_PROJECT_DIR_PATH}/app.yaml"
+            gcloud app deploy --version="${SHORT_GIT_SHA}" --stop-previous-version --promote --project "broad-ddp-${ENVIRONMENT}" "${ANGULAR_PROJECT_DIR_PATH}/app.yaml"
       - run:
           name: Update deployments sheet
           command: |
