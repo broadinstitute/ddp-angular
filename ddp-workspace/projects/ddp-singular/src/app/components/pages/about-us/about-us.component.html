@@ -9,7 +9,7 @@
       <p [innerHTML]="'About.About.P5' | translate"></p>
     </div>
     <div class="about-right">
-      <img src="assets/images/Judson_2x.png" alt="">
+      <img src="assets/images/Judson_2x.png" alt="Judson">
       <div class="img-description">{{ 'About.About.PhotoCaption' | translate }}</div>
     </div>
   </div>
@@ -43,7 +43,10 @@
 <ng-template #card let-person="person">
   <div class="cards-card">
     <div class="cards-card-img">
-      <img src="{{ person.ImageUrl }}" alt="">
+      <img src="{{ person.ImageUrl }}"
+        [alt]="person.Name | translate"
+        width="150" height="150"
+        lazy-resource>
     </div>
     <div class="cards-card-description">
       <div class="cards-card-description-name">{{ person.Name | translate }}</div>
