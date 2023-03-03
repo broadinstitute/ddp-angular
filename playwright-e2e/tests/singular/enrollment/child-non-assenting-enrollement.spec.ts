@@ -1,17 +1,12 @@
 import { expect } from '@playwright/test';
 import { test } from 'fixtures/singular-fixture';
 import * as user from 'data/fake-user.json';
-import * as auth from 'authentication/auth-singular';
-import MyDashboardPage from 'pages/singular/dashboard/my-dashboard-page';
 import MedicalRecordReleaseForm from 'pages/singular/enrollment/medical-record-release-form';
 import AboutMyChildPage from 'pages/singular/enrollment/about-my-child-page';
 import ChildSurveyPage from 'pages/singular/enrollment/child-survey-page';
-import PreScreeningPage from 'pages/singular/enrollment/pre-screening-page';
 import ConsentFormForMinorPage from 'pages/singular/enrollment/consent-form-for-minor-page';
 import { assertActivityHeader, assertActivityProgress } from 'utils/assertion-helper';
 import { generateUserName } from 'utils/faker-utils';
-
-const { SINGULAR_USER_EMAIL, SINGULAR_USER_PASSWORD } = process.env;
 
 /**
  * Enroll a child of age < 7
@@ -20,28 +15,15 @@ test.describe('Enroll child', () => {
   // Randomize last name
   const childLastName = generateUserName(user.secondChild.lastName);
 
-  test('Enrolling non-assenting child < 7 @enrollment @singular', async ({ page, homePage }) => {
-    await homePage.signUp();
-
-    // Step 1
-    // On “pre-screening” page, answer all questions about yourself with fake values
-    const preScreeningPage = new PreScreeningPage(page);
-    await preScreeningPage.enterInformationAboutYourself();
-
-    // Step 2
-    // Enter email alias and password to create new account
-    await auth.createAccountWithEmailAlias(page, { email: SINGULAR_USER_EMAIL, password: SINGULAR_USER_PASSWORD });
-
-    // Step 3
+  test('Enrolling non-assenting child < 7 @enrollment @singular', async ({ page, dashboardPage }) => {
     // On "My Dashboard" page, click Enroll Mys Child button
-    const myDashboardPage = new MyDashboardPage(page);
-    await myDashboardPage.enrollMyChild({
+    await dashboardPage.enrollMyChild({
       age: user.secondChild.age,
       country: user.secondChild.country.abbreviation,
       state: user.secondChild.state.abbreviation,
       cognitiveImpairment: null
     });
-    await myDashboardPage.next();
+    await dashboardPage.next();
 
     // On "Consent Form for Minor Dependent" page
     const consentForm = new ConsentFormForMinorPage(page);
@@ -144,9 +126,9 @@ test.describe('Enroll child', () => {
     await childSurveyPage.submit();
 
     // Assert contents in My Dashboard table
-    await myDashboardPage.waitForReady();
+    await dashboardPage.waitForReady();
     const orderedHeaders = ['Title', 'Summary', 'Status', 'Action'];
-    const table = myDashboardPage.getDashboardTable();
+    const table = dashboardPage.getDashboardTable();
     const headers = await table.getHeaderNames();
     expect(headers).toHaveLength(4); // Four columns in table
     expect(headers).toEqual(orderedHeaders);
