@@ -164,10 +164,6 @@ import { Component } from '@angular/core';
           <img lazy-resource class="partner-logo" src="./assets/images/logo-min_coalition.png"
               [alt]="'Partners.Min' | translate">
       </div>
-      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 Message-partners">
-          <a href="https://mbccanada.org/" target="_blank"><img lazy-resource class="partner-logo"
-                  src="./assets/images/logo_mbccanada.png" [alt]="'Partners.MBCCanada' | translate"></a>
-      </div>
   </div>
   `
 })
