@@ -11,6 +11,7 @@ export default class DashboardPage extends SingularPage {
   }
 
   async waitForReady(): Promise<void> {
+    await super.waitForReady();
     await expect(this.page.locator('h1.title')).toHaveText('My Dashboard');
     await expect(this.page.locator('h1.title')).toBeVisible();
     await expect(this.getViewFamilyEnrollmentMessageButton()).toBeVisible();
