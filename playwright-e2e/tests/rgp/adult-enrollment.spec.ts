@@ -9,8 +9,6 @@ import TellUsAboutYourFamilyPage from 'pages/rgp/enrollment/tell-us-about-your-f
 import TellUsYourStoryPage, { WHO } from 'pages/rgp/enrollment/tell-us-your-story-page';
 import HomePage from 'pages/rgp/home-page';
 import { setAuth0UserEmailVerified } from 'utils/api-utils';
-import { request } from 'http';
-import { updateTypeAssertion } from 'typescript';
 import { setPatientParticipantGuid } from 'utils/faker-utils';
 import dsmHome from 'pages/dsm/home-page';
 import * as dsmAuth from 'authentication/auth-dsm';
@@ -21,7 +19,7 @@ import { StudyNav } from 'lib/component/dsm/navigation/enums/studyNav.enum';
 
 const { RGP_USER_EMAIL, RGP_USER_PASSWORD, DSM_USER_EMAIL, DSM_USER_PASSWORD } = process.env;
 
-test.describe('Adult Self Enrollment', () => {
+test.describe.serial('Adult Self Enrollment', () => {
   const assertProgressActiveItem = async (page: Page, itemName: string): Promise<void> => {
     const locator = page.locator('li.activity-stepper__step-container button.stepper-btn.stepper-btn--active');
     await expect(locator).toHaveCount(1);
@@ -164,6 +162,9 @@ test.describe('Adult Self Enrollment', () => {
     // fields should be disabled. check one field to verify is disabled
     expect(await tellUsAboutYourFamily.yourTitle().isDisabled()).toEqual(true);
     expect(await tellUsAboutYourFamily.yourFirstName().isDisabled()).toEqual(true);
+  });
+
+  test('Go to DSM to verify the newly created account can be found @functional @enrollment @rgp', async ({ page }) => {
     //Go to DSM to verify the newly created account can be found there
     const dsm = new dsmHome(page);
     const dsmUserEmail = await dsmAuth.login(page, {

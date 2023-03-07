@@ -2,19 +2,22 @@ import { expect, Locator, Page } from '@playwright/test';
 import { waitForNoSpinner } from 'utils/test-utils';
 import { Filters } from 'lib/component/dsm/filters/filters';
 import { ParticipantListTable } from 'lib/component/dsm/tables/participantListTable';
+import { DSMPageBase } from './page-base';
 
 export enum SearchFieldLabel {
   ShortId = 'Short ID',
   ParticipantID = 'Participant ID'
 }
 
-export default class ParticipantListPage {
+export default class ParticipantListPage extends DSMPageBase {
   private readonly PAGE_TITLE: string = 'Participant List';
 
   private readonly _filters: Filters = new Filters(this.page);
   private readonly _table: ParticipantListTable = new ParticipantListTable(this.page);
 
-  constructor(private readonly page: Page) {}
+  constructor(protected readonly page: Page) {
+    super(page);
+  }
 
   public get title(): Locator {
     return this.page.locator('h1');
