@@ -65,7 +65,7 @@ const testConfig: PlaywrightTestConfig = {
   use: {
     headless: true,
     /* Maximum time each (browser) action such as `click()` can take. Defaults to 0 (no limit). */
-    actionTimeout: process.env.CI ? 30 * 1000 : 10 * 1000,
+    actionTimeout: process.env.CI ? 20 * 1000 : 15 * 1000,
     navigationTimeout: 30 * 1000,
     acceptDownloads: true,
     testIdAttribute: 'data-ddp-test',
