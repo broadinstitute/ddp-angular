@@ -10,7 +10,8 @@ export const NavSelectors = {
   FAQs: '.header__nav >> text=FAQs',
   ForResearchers: '.header__nav >> text=For Researchers',
   ForClinicians: '.header__nav >> text=For Clinicians',
-  SignMeUp: '.header__nav >> text=Sign me up!'
+  SignMeUp: '.header__nav >> text=Sign me up!',
+  MyDashboard: '.header__nav >> text=My Dashboard'
 };
 
 export async function goToAboutUs(page: Page): Promise<void> {
@@ -33,14 +34,4 @@ export async function goToPath(page: Page, path?: string): Promise<Response | nu
 
 export async function visitHomePage(page: Page): Promise<Response | null> {
   return await goToPath(page);
-}
-
-export async function signMeUp(page: Page): Promise<void> {
-  const progressSpinner = 'mat-spinner[role="progressbar"]';
-  await Promise.all([page.locator(NavSelectors.SignMeUp).click(), page.locator(progressSpinner).waitFor({ state: 'visible' })]);
-  await page.locator(progressSpinner).waitFor({ state: 'detached', timeout: 30 * 1000 });
-}
-
-export async function clickLogin(page: Page): Promise<void> {
-  await page.locator(NavSelectors.Login).click();
 }

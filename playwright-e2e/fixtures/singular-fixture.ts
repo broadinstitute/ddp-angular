@@ -32,7 +32,10 @@ const fixture = base.extend<Fixtures>({
     const homePage = await launchHomePage(page);
     await homePage.signUp();
     await new PreScreeningPage(page).enterInformationAboutYourself();
-    await auth.createAccountWithEmailAlias(page, { email: SINGULAR_USER_EMAIL, password: SINGULAR_USER_PASSWORD });
+    process.env.SINGULAR_USER_EMAIL_ALIAS = await auth.createAccountWithEmailAlias(page, {
+      email: SINGULAR_USER_EMAIL,
+      password: SINGULAR_USER_PASSWORD
+    });
     const dashboardPage = new DashboardPage(page);
     await dashboardPage.waitForReady();
     await use(dashboardPage);

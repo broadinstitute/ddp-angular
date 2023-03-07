@@ -12,11 +12,16 @@ export default abstract class PageBase implements PageInterface {
   protected readonly baseUrl: string;
 
   protected constructor(page: Page, baseURL: string) {
+    if (baseURL == null) {
+      throw Error(`Invalid baseURL=${baseURL}`);
+    }
     this.page = page;
     this.baseUrl = baseURL;
   }
 
-  abstract waitForReady(): Promise<void>;
+  async waitForReady(): Promise<void> {
+    await waitForNoSpinner(this.page);
+  }
 
   /**
    * Return "Back" button locator
