@@ -12,22 +12,13 @@ test('Continue enrollment after log out @visual @singular', async ({ page, dashb
   await login(page, { email: process.env.SINGULAR_USER_EMAIL_ALIAS, password: process.env.SINGULAR_USER_PASSWORD });
   await dashboardPage.waitForReady();
 
-  const enrollMyselfButton = await page
-    .locator('//*[contains(@class,"controls")]/button[./*[contains(@class,"next-container")]]')
-    .nth(0)
-    .screenshot();
+  const enrollMyselfButton = await dashboardPage.getEnrollMyselfButton().screenshot();
   expect(enrollMyselfButton).toMatchSnapshot('enroll-myself-button.png');
 
-  const enrollMyChildButton = await page
-    .locator('//*[contains(@class,"controls")]/button[./*[contains(@class,"next-container")]]')
-    .nth(1)
-    .screenshot();
+  const enrollMyChildButton = await dashboardPage.getEnrollMyChildButton().screenshot();
   expect(enrollMyChildButton).toMatchSnapshot('enroll-my-child-button.png');
 
-  const enrollMyAdultDependentButton = await page
-    .locator('//*[contains(@class,"controls")]/button[./*[contains(@class,"next-container")]]')
-    .nth(2)
-    .screenshot();
+  const enrollMyAdultDependentButton = await dashboardPage.getEnrollMyAdultDependentButton().screenshot();
   expect(enrollMyAdultDependentButton).toMatchSnapshot('enroll-my-adult-dependent-button.png');
 
   // Click Enroll Myself button
