@@ -10,6 +10,7 @@ const fixture = base.extend({
     await fillSitePassword(page);
     await use(page);
   }
+
 });
 
 export const test = fixture;

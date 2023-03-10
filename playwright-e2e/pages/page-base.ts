@@ -1,11 +1,38 @@
 import { expect, Locator, Page, Response } from '@playwright/test';
+import * as user from 'data/fake-user.json';
 import Address from 'lib/component/address';
+import Institution from 'lib/component/institution';
 import Question from 'lib/component/Question';
 import Input from 'lib/widget/input';
 import { assertSelectedOption } from 'utils/assertion-helper';
 import { generateRandomPhoneNum } from 'utils/faker-utils';
 import { waitForNoSpinner } from 'utils/test-utils';
 import { PageInterface } from './page-interface';
+
+/**
+ * Labels for the mailing address widget, which can be
+ * set differently for different studies
+ */
+interface MailingAddressLabels {
+  city: string;
+  country: string;
+  phone: string;
+  state: string;
+  zip: string;
+}
+interface PhysicianInstitutionAddressLabels extends MailingAddressLabels {
+  hospital?: string;
+  name?: string;
+}
+
+const UIDefaultLabels = {
+  phone: 'Phone',
+  hospital: 'Institution',
+  country: 'Country',
+  state: 'State',
+  city: 'City',
+  zip: 'Zip Code'
+};
 
 export default abstract class PageBase implements PageInterface {
   protected readonly page: Page;
@@ -16,7 +43,10 @@ export default abstract class PageBase implements PageInterface {
     this.baseUrl = baseURL;
   }
 
-  abstract waitForReady(): Promise<void>;
+  async waitForReady(): Promise<void> {
+    await waitForNoSpinner(this.page);
+    await expect(this.page).toHaveTitle(/\D+/);
+  }
 
   /**
    * Return "Back" button locator
@@ -51,6 +81,10 @@ export default abstract class PageBase implements PageInterface {
    */
   getSubmitButton(): Locator {
     return this.page.locator('button:visible', { hasText: 'Submit' });
+  }
+
+  getSavingButton(): Locator {
+    return this.page.locator('button:visible', { hasText: 'Saving' });
   }
 
   /**
@@ -162,7 +196,7 @@ export default abstract class PageBase implements PageInterface {
     city?: string;
     zipCode?: string;
     telephone?: string | number;
-    labels?: MaillingAddressLabels;
+    labels?: MailingAddressLabels;
   }): Promise<void> {
     const {
       fullName,
@@ -254,6 +288,51 @@ export default abstract class PageBase implements PageInterface {
     }
   }
 
+  async fillInName(firstName: string, lastName: string, opts: { getByRole?: boolean } = {}) {
+    const { getByRole = false } = opts;
+    if (getByRole) {
+      await this.page.getByRole('combobox', { name: 'First Name' }).fill(firstName);
+      await this.page.getByRole('combobox', { name: 'Last Name' }).fill(lastName);
+    } else {
+      await this.page.getByTestId('answer:CONSENT_FIRSTNAME').fill(firstName);
+      await this.page.getByTestId('answer:CONSENT_LASTNAME').fill(lastName);
+    }
+  }
+
+  async fillInPhysicianInstitution(
+    opts: {
+      physicianName?: string;
+      institutionName?: string;
+      city?: string;
+      state?: string;
+      country?: string;
+      nth?: number;
+      uiLabels?: PhysicianInstitutionAddressLabels;
+    } = {}
+  ): Promise<void> {
+    const {
+      physicianName = user.doctor.name,
+      institutionName = user.doctor.hospital,
+      city = user.doctor.city,
+      state = user.doctor.state,
+      country = user.patient.country.name,
+      nth = 0,
+      uiLabels = UIDefaultLabels
+    } = opts;
+
+    uiLabels.name = 'Physician Name';
+
+    console.log(physicianName);
+    console.log(uiLabels.name);
+
+    const institution = new Institution(this.page, { label: /Physician/, nth });
+    await institution.input(uiLabels.name).fill(physicianName);
+    await institution.input((uiLabels.hospital ??= 'Institution (if any)')).fill(institutionName);
+    await institution.input((uiLabels.city ??= 'City')).fill(city);
+    await institution.input((uiLabels.state ??= 'State')).fill(state);
+    await institution.input((uiLabels.country ??= 'Country')).fill(country);
+  }
+
   /**
    * COMMON UI FIELDS
    */
@@ -262,8 +341,8 @@ export default abstract class PageBase implements PageInterface {
    * <br> Question: How old are you?
    * <br> Type: Input
    */
-  age(): Input {
-    return new Input(this.page, { ddpTestID: 'answer:AGE' });
+  age(ddpTestID = 'answer:AGE'): Input {
+    return new Input(this.page, { ddpTestID });
   }
 
   /**
@@ -286,5 +365,9 @@ export default abstract class PageBase implements PageInterface {
     return new Question(this.page, {
       prompt: new RegExp(/((?:choose|select) (state\b|province\b))|(state\b)/i)
     });
+  }
+
+  signature(): Locator {
+    return this.page.locator('ddp-activity-text-answer').filter({ hasText: 'Signature:' }).locator('input');
   }
 }

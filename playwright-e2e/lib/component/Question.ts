@@ -8,6 +8,8 @@ export default class Question {
   private readonly locator: Locator;
   private readonly rootLocator: Locator;
 
+  static _toTakeScreenshot = false;
+
   constructor(page: Page, opts: { prompt?: string | RegExp; cssClassAttribute?: string; parentSelector?: Locator }) {
     const { prompt, cssClassAttribute, parentSelector } = opts;
     this.page = page;
@@ -17,6 +19,10 @@ export default class Question {
     this.locator = prompt
       ? this.rootLocator.filter({ hasText: prompt })
       : this.rootLocator.filter({ has: this.page.locator(`css=${cssClassAttribute}`) });
+  }
+
+  static set enableScreenshot(value: boolean) {
+    this._toTakeScreenshot = value;
   }
 
   toLocator(): Locator {
@@ -75,12 +81,10 @@ export default class Question {
 
   /**
    * <br> Tag name: mat-checkbox
-   * @param value
+   * @param {string} label
    */
-  checkbox(value: string | RegExp): Locator {
-    return this.toLocator()
-      .locator('mat-checkbox')
-      .filter({ has: this.page.locator('label', { hasText: value }) });
+  toCheckbox(label: string): Checkbox {
+    return new Checkbox(this.page, { root: this.toLocator(), label });
   }
 
   /**

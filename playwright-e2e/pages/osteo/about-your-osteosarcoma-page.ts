@@ -1,6 +1,6 @@
 import { expect, Locator, Page } from '@playwright/test';
 import { waitForNoSpinner } from 'utils/test-utils';
-import { OsteoPageBase } from './osteo-base-page';
+import { OsteoPageBase } from 'pages/osteo/osteo-page-base';
 
 export default class AboutYourOsteosarcoma extends OsteoPageBase {
   private readonly pageTitle: Locator;

@@ -1,9 +1,9 @@
 import { expect, Locator, Page } from '@playwright/test';
 import { waitForNoSpinner } from 'utils/test-utils';
 
-import { OsteoPageBase } from './osteo-base-page';
+import { OsteoPageBase } from 'pages/osteo/osteo-page-base';
 
-export default class ReleasePage extends OsteoPageBase {
+export default class MedicalReleasePage extends OsteoPageBase {
   private readonly pageTitle: Locator;
 
   constructor(page: Page) {
@@ -39,8 +39,7 @@ export default class ReleasePage extends OsteoPageBase {
   }
 
   async waitForReady(): Promise<void> {
-    await expect(this.pageTitle).toBeVisible();
-    await expect(this.pageTitle).toHaveText('Medical Release');
+    await expect(this.pageTitle).toHaveText('Medical Release Form');
     await waitForNoSpinner(this.page);
   }
 }

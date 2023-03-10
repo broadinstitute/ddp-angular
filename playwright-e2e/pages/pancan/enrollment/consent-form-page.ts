@@ -73,9 +73,10 @@ export default class ConsentFormPage extends PancanPageBase {
    * <br> Question: Your Signature (Full Name):
    * <br> Type: Input
    */
+  /*
   signature(): Input {
     return new Input(this.page, { ddpTestID: PatientsData[this.typePatient].ddpTestID.signature });
-  }
+  } */
 
   /**
    * <br> Question: Your Signature (Full Name):

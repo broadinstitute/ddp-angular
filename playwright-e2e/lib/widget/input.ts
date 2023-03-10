@@ -34,8 +34,18 @@ export default class Input extends WidgetBase {
   async fill(value: string): Promise<void> {
     const existValue = await this.toLocator().inputValue();
     if (existValue !== value) {
+      const autocomplete = await this.toLocator().getAttribute('aria-autocomplete');
       await this.toLocator().fill(value);
-      await this.toLocator().press('Tab');
+      const expanded = await this.toLocator().getAttribute('aria-expanded');
+      if (autocomplete === 'list' && expanded === 'true') {
+        const dropdown = this.page.locator('.mat-autocomplete-visible[role="listbox"][id]');
+        await dropdown
+          .locator('mat-option:visible', { hasText: new RegExp(value) })
+          .first()
+          .click();
+      } else {
+        await this.toLocator().press('Tab');
+      }
     }
   }
 
