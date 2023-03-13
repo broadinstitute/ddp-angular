@@ -2,29 +2,22 @@ import { Locator, Page } from '@playwright/test';
 import WidgetBase from 'lib/widget/widget-base';
 
 export default class Button extends WidgetBase {
-  private readonly elementLocator: Locator;
-  private readonly rootLocator: Locator;
+  constructor(page: Page, opts: { label?: string | RegExp; ddpTestID?: string; root?: Locator | string; exactMatch?: boolean }) {
+    super(page, { root: opts.root ? opts.root : 'ddp-activity' });
+    const { label, ddpTestID, exactMatch = false } = opts;
 
-  constructor(page: Page, opts: { label?: string; ddpTestID?: string; root?: Locator | string; exactMatch?: boolean }) {
-    super(page);
-    const { label, ddpTestID, root, exactMatch = false } = opts;
-    /* prettier-ignore */
-    this.rootLocator = root
-        ? (typeof root === 'string'
-            ? this.page.locator(root)
-            : root)
-        : this.page.locator('ddp-activity');
-    /* prettier-ignore */
-    this.elementLocator = ddpTestID
-        ? this.rootLocator.locator(`button[data-ddp-test="${ddpTestID}"]`)
-        : label
-            ? exactMatch
-                ? this.rootLocator.locator(`xpath=.//button[.//text()[normalize-space()="${label}"]]`)
-                : this.rootLocator.locator(`xpath=.//button[.//text()[contains(normalize-space(),"${label}")]]`)
-            : this.rootLocator.locator(`xpath=.//button`).first();
-  }
-
-  toLocator(): Locator {
-    return this.elementLocator;
+    if (ddpTestID) {
+      this.element = this.page.locator(`[data-ddp-test="${ddpTestID}"]`);
+    } else if (label) {
+      if (typeof label === 'string') {
+        this.element = exactMatch
+          ? this.root.locator(`xpath=.//button[.//text()[normalize-space()="${label}"]]`)
+          : this.root.locator(`xpath=.//button[.//text()[contains(normalize-space(),"${label}")]]`);
+      } else {
+        this.element = this.root.locator('button', { hasText: label });
+      }
+    } else {
+      this.element = this.root.locator(`xpath=.//button`).first();
+    }
   }
 }

@@ -13,11 +13,7 @@ export default class Institution {
     const { label, root, nth = 0 } = opts;
     this.page = page;
     this.label = label;
-    this.rootLocator = root
-      ? typeof root === 'string'
-        ? this.page.locator(root)
-        : root
-      : this.page.locator('ddp-institutions-form');
+    this.rootLocator = root ? (typeof root === 'string' ? this.page.locator(root) : root) : this.page.locator('ddp-institutions-form');
     this.elementLocator = this.rootLocator.filter({ hasText: label }).locator('ddp-institution').nth(nth);
   }
 

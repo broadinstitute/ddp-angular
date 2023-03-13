@@ -16,7 +16,10 @@ export default abstract class PageBase implements PageInterface {
     this.baseUrl = baseURL;
   }
 
-  abstract waitForReady(): Promise<void>;
+  async waitForReady(): Promise<void> {
+    await waitForNoSpinner(this.page);
+    await expect(this.page).toHaveTitle(/\D+/);
+  }
 
   /**
    * Return "Back" button locator
@@ -233,7 +236,7 @@ export default abstract class PageBase implements PageInterface {
     ]);
     await mailAddressForm.input(labels.phone).fill(telephone.toString());
     // Wait for Address Suggestion card
-    await mailAddressForm.addressSuggestion().radioButton('As Entered:').check();
+    await mailAddressForm.addressSuggestion().radioButton('As Entered').check('As Entered');
   }
 
   /**
@@ -245,12 +248,12 @@ export default abstract class PageBase implements PageInterface {
   async fillInCountry(country: string, opts: { state?: string } = {}): Promise<void> {
     const { state } = opts;
 
-    await this.country().select().selectOption(country);
-    await assertSelectedOption(this.country().select(), country);
+    await this.country().toSelect().selectOption(country);
+    await assertSelectedOption(this.country().toSelect().toLocator(), country);
 
     if (state) {
-      await this.state().select().selectOption(state);
-      await assertSelectedOption(this.state().select(), state);
+      await this.state().toSelect().selectOption(state);
+      await assertSelectedOption(this.state().toSelect().toLocator(), state);
     }
   }
 

@@ -17,13 +17,7 @@ test.describe('Adult Enrollment', () => {
   // Randomize last name
   const lastName = generateUserName(user.patient.lastName);
 
-  const assertAngioWizardStep = async (
-    page: Page,
-    expectedText: string,
-    isActive: boolean,
-    isCompleted: boolean,
-    nth: number
-  ) => {
+  const assertAngioWizardStep = async (page: Page, expectedText: string, isActive: boolean, isCompleted: boolean, nth: number) => {
     await expect(page.locator('.WizardSteps').nth(nth)).toHaveText(expectedText);
     isCompleted
       ? await expect(page.locator('.WizardSteps').nth(nth)).toHaveClass(/completed/)
@@ -43,7 +37,7 @@ test.describe('Adult Enrollment', () => {
     await countMeInPage.waitForReady();
     await countMeInPage.firstName().fill(user.patient.firstName);
     await countMeInPage.lastName().fill(lastName);
-    await countMeInPage.diagnosedWithAngiosarcoma(DESCRIBE_SELF.HaveBeenDiagnosedWithAngiosarcoma).check();
+    await countMeInPage.diagnosedWithAngiosarcoma(DESCRIBE_SELF.HaveBeenDiagnosedWithAngiosarcoma);
     await countMeInPage.submit();
 
     // Step 2:
@@ -75,7 +69,7 @@ test.describe('Adult Enrollment', () => {
     // Question 15
     await aboutYou.yearBorn(user.patient.birthDate.YYYY);
     // Question 16
-    const selectedValue = await aboutYou.fillInCountry(user.patient.country.abbreviation);
+    await aboutYou.fillInCountry(user.patient.country.abbreviation);
     await aboutYou.submit();
 
     // Step 4:
@@ -94,11 +88,7 @@ test.describe('Adult Enrollment', () => {
     await researchConsentPage.agreeToArrangeSampleBloodDrawn('Yes');
     await researchConsentPage.canRequestMyStoredTissueSamples('Yes');
     await researchConsentPage.fullName(`${user.patient.firstName} ${user.patient.lastName}`);
-    await researchConsentPage.fillInDateOfBirth(
-      user.patient.birthDate.MM,
-      user.patient.birthDate.DD,
-      user.patient.birthDate.YYYY
-    );
+    await researchConsentPage.fillInDateOfBirth(user.patient.birthDate.MM, user.patient.birthDate.DD, user.patient.birthDate.YYYY);
     await researchConsentPage.submit();
 
     // Step 5

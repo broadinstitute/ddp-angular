@@ -11,11 +11,7 @@ export default class Address {
   constructor(page: Page, opts: { label: string | RegExp; root?: Locator | string; nth?: number }) {
     const { label, root, nth = 0 } = opts;
     this.page = page;
-    this.rootLocator = root
-      ? typeof root === 'string'
-        ? this.page.locator(root)
-        : root
-      : this.page.locator('ddp-address-embedded');
+    this.rootLocator = root ? (typeof root === 'string' ? this.page.locator(root) : root) : this.page.locator('ddp-address-embedded');
     this.elementLocator = this.rootLocator.filter({ hasText: label }).nth(nth);
   }
 

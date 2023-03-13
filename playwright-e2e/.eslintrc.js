@@ -91,7 +91,7 @@ module.exports = {
     '@typescript-eslint/no-non-null-assertion': 'off',
     'max-len': [
       'warn',
-      130,
+      150,
       {
         ignorePattern: '^import |^export\\{(.*?)\\}',
         ignoreComments: true,

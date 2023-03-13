@@ -4,7 +4,7 @@ module.exports = {
   singleQuote: true,
   jsxSingleQuote: true,
   parser: 'typescript',
-  printWidth: 130,
+  printWidth: 150,
   tabWidth: 2,
   useTabs: false,
   bracketSpacing: true
