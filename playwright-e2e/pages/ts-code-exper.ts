@@ -28,7 +28,7 @@ const UIDefaultLabels: MailingAddressLabels = {
   zip: 'Zip Code'
 };
 
-const DefaultPhysicianHospitalUILabels:PhysicianInstitutionLabels = { ...UIDefaultLabels, name: 'Name', hospital: 'Institution' };
+const DefaultPhysicianHospitalUILabels: PhysicianInstitutionLabels = { ...UIDefaultLabels, name: 'Physician Name', hospital: 'Institution' };
 
 export default abstract class {
   protected readonly page: Page;
@@ -47,7 +47,7 @@ export default abstract class {
       state?: string;
       country?: string;
       nth?: number;
-      uiLabels?: PhysicianInstitutionLabels
+      uiLabels?: PhysicianInstitutionLabels;
     } = {}
   ): Promise<void> {
     const {
