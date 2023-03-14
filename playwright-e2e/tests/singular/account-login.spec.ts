@@ -27,9 +27,7 @@ test('Continue enrollment after log out @visual @singular', async ({ page, dashb
 
   const enrollMyselfPage = new EnrollMyselfPage(page);
   await enrollMyselfPage.waitForReady();
-  expect(await enrollMyselfPage.whoHasVentricleHeartDefect().toLocator().screenshot()).toMatchSnapshot(
-    'question-who-has-heart-defect.png'
-  );
+  expect(await enrollMyselfPage.whoHasVentricleHeartDefect().toLocator().screenshot()).toMatchSnapshot('question-who-has-heart-defect.png');
 
   // Go back to Dashboard
   await page.locator(NavSelectors.MyDashboard).click();

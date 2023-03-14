@@ -17,10 +17,7 @@ export class Search {
     await this.page.locator("//div[@id='searchTable']/button[1][span[text()='Search']]").click();
   }
 
-  public async dates(
-    columnName: string,
-    { from: fromValue, to: toValue, additionalFilters }: Partial<DateConfig>
-  ): Promise<void> {
+  public async dates(columnName: string, { from: fromValue, to: toValue, additionalFilters }: Partial<DateConfig>): Promise<void> {
     await this.setAdditionalFilters(columnName, additionalFilters);
 
     let fromDate!: string;
@@ -88,8 +85,7 @@ export class Search {
   private async setAdditionalFilter(columnName: string, additionalFilter: AdditionalFilter, isTextField = false): Promise<void> {
     const baseColumnXPath = isTextField ? this.baseTextColumnXPath(columnName) : this.baseColumnXPath(columnName);
 
-    !(await this.isAdditionalFiltersOpen(columnName, isTextField)) &&
-      (await this.page.locator(baseColumnXPath + this.plusIconXPath).click());
+    !(await this.isAdditionalFiltersOpen(columnName, isTextField)) && (await this.page.locator(baseColumnXPath + this.plusIconXPath).click());
 
     const additionalFilterCheckbox = await this.additionalFilterCheckboxLocator(columnName, additionalFilter, isTextField);
     const isChecked = await this.isChecked(additionalFilterCheckbox);
@@ -99,11 +95,7 @@ export class Search {
   }
 
   private async setExactMatch(columnName: string, isTextField = false): Promise<void> {
-    const additionalFilterCheckbox = await this.additionalFilterCheckboxLocator(
-      columnName,
-      AdditionalFilter.EXACT_MATCH,
-      isTextField
-    );
+    const additionalFilterCheckbox = await this.additionalFilterCheckboxLocator(columnName, AdditionalFilter.EXACT_MATCH, isTextField);
     const isCheckedOrDisabled = await this.isChecked(additionalFilterCheckbox);
 
     isCheckedOrDisabled && (await additionalFilterCheckbox.click());
@@ -131,9 +123,7 @@ export class Search {
   /* Locators */
 
   private checkboxLocator(columnName: string, checkboxName: string): Locator {
-    return this.page.locator(
-      `${this.baseColumnXPath(columnName)}//mat-checkbox[label[.//*[text()[normalize-space()='${checkboxName}']]]]`
-    );
+    return this.page.locator(`${this.baseColumnXPath(columnName)}//mat-checkbox[label[.//*[text()[normalize-space()='${checkboxName}']]]]`);
   }
 
   private textInputLocator(columnName: string): Locator {
@@ -152,8 +142,7 @@ export class Search {
 
   private get openButtonXPath(): string {
     return (
-      "//div[text()[normalize-space()='Search'] and button[.//*[local-name()='svg' " +
-      "and @data-icon='search']/*[local-name()='path']]]/button"
+      "//div[text()[normalize-space()='Search'] and button[.//*[local-name()='svg' and @data-icon='search']/*[local-name()='path']]]/button"
     );
   }
 

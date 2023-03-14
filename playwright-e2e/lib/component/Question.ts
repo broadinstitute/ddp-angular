@@ -1,6 +1,7 @@
 import { expect, Locator, Page } from '@playwright/test';
 import Button from 'lib/widget/button';
 import Checkbox from 'lib/widget/checkbox';
+import Input from 'lib/widget/input';
 import Select from 'lib/widget/select';
 
 export default class Question {
@@ -39,48 +40,23 @@ export default class Question {
    * <br> Note: use toSelect() for tag "mat-select".
    * @param label
    */
-  select(label?: string): Locator {
-    if (label === undefined) {
-      return this.toLocator().locator('select');
-    }
-    return this.toLocator().locator('select', {
-      has: this.page.locator(`xpath=//*[contains(normalize-space(.),"${label}")]`)
-    });
-  }
-
-  toSelect(label: string): Select {
+  toSelect(label?: string | RegExp): Select {
     return new Select(this.page, { label, root: this.toLocator() });
   }
 
   /**
    * <br> Tag name: input (text or number)
    */
-  input(): Locator {
-    return this.toLocator().locator('mat-form-field').locator('input');
-  }
-
-  /**
-   * <br> Tag name: input (text or number) (get by its label)
-   * @param value
-   */
-  inputByLabel(value?: string | RegExp): Locator {
-    if (value === undefined) {
-      return this.input();
-    }
-    return this.toLocator()
-      .locator('mat-form-field')
-      .filter({ has: this.page.locator('label', { hasText: value }) })
-      .locator('input');
+  toInput(label?: string | RegExp): Input {
+    return new Input(this.page, { label, root: this.toLocator() });
   }
 
   /**
    * <br> Tag name: mat-checkbox
-   * @param value
+   * @param label
    */
-  checkbox(value: string | RegExp): Locator {
-    return this.toLocator()
-      .locator('mat-checkbox')
-      .filter({ has: this.page.locator('label', { hasText: value }) });
+  toCheckbox(label: string | RegExp): Checkbox {
+    return new Checkbox(this.page, { label, root: this.toLocator() });
   }
 
   /**
@@ -100,19 +76,7 @@ export default class Question {
    * @param value
    */
   async fill(value: string): Promise<void> {
-    const input = this.input();
-    const autocomplete = await input.getAttribute('aria-autocomplete');
-    await input.fill(value);
-    const expanded = await input.getAttribute('aria-expanded');
-    if (autocomplete === 'list' && expanded === 'true') {
-      const dropdown = this.page.locator('.mat-autocomplete-visible[role="listbox"][id]');
-      await dropdown
-        .locator('mat-option:visible', { hasText: new RegExp(value) })
-        .first()
-        .click();
-    } else {
-      await input.press('Tab');
-    }
+    await this.toInput().fill(value);
   }
 
   /**
