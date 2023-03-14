@@ -60,6 +60,7 @@ export class ParticipantColumn {
   public static MR_FOLLOW_UP = new ParticipantColumn('Follow-Up ', 'followUps', 'm');
   public static MR_FOLLOW_REQUIRED = new ParticipantColumn('Follow-Up required', 'followupRequired', 'm');
   public static MR_FOLLOW_REQUIRED_TEXT = new ParticipantColumn('Follow-Up required Text', 'followupRequiredText', 'm');
+  public static NO_ACTION_NEEDED = new ParticipantColumn('No Action Needed', 'noActionNeeded', 'm');
 
   // oncHistoryDetail columns
   public static ACCESSION_NUMBER = new ParticipantColumn('Accession Number', 'accessionNumber', 'oD');
