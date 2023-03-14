@@ -1,12 +1,13 @@
 import { expect, Locator, Page } from '@playwright/test';
-import WidgetBase from 'lib/widget/widget-base';
+import WidgetBase from 'lib/widget-base';
 
 export default class Radiobutton extends WidgetBase {
   constructor(page: Page, opts: { label?: string | RegExp; ddpTestID?: string; root?: Locator | string; exactMatch?: boolean } = {}) {
     const { label, ddpTestID, root, exactMatch = false } = opts;
-    super(page, { root: root ? root : 'mat-radio-group', testId: ddpTestID });
+    super(page, { root, testId: ddpTestID });
 
     if (!ddpTestID) {
+      this.root = this.root.locator('mat-radio-group');
       if (label) {
         if (typeof label === 'string') {
           this.element = exactMatch

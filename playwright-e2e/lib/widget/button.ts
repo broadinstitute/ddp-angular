@@ -1,5 +1,5 @@
 import { Locator, Page } from '@playwright/test';
-import WidgetBase from 'lib/widget/widget-base';
+import WidgetBase from 'lib/widget-base';
 
 export default class Button extends WidgetBase {
   constructor(page: Page, opts: { label?: string | RegExp; ddpTestID?: string; root?: Locator | string; exactMatch?: boolean }) {

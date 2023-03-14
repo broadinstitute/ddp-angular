@@ -1,5 +1,5 @@
 import { expect, Locator, Page } from '@playwright/test';
-import WidgetBase from 'lib/widget/widget-base';
+import WidgetBase from 'lib/widget-base';
 
 /**
  * mat-checkbox

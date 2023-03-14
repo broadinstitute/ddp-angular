@@ -1,5 +1,5 @@
 import { Locator, Page } from '@playwright/test';
-import WidgetBase from 'lib/widget/widget-base';
+import WidgetBase from 'lib/widget-base';
 
 /**
  * Works with "mat-select" and "select" web elements

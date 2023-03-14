@@ -2,29 +2,22 @@ import { Locator, Page } from '@playwright/test';
 import Card from 'lib/component/card';
 import Input from 'lib/widget/input';
 import Select from 'lib/widget/select';
+import WidgetBase from 'lib/widget-base';
 
-export default class Address {
-  private readonly page: Page;
-  private readonly elementLocator: Locator;
-  private readonly rootLocator: Locator;
-
+export default class Address extends WidgetBase {
   constructor(page: Page, opts: { label: string | RegExp; root?: Locator | string; nth?: number }) {
-    const { label, root, nth = 0 } = opts;
-    this.page = page;
-    this.rootLocator = root ? (typeof root === 'string' ? this.page.locator(root) : root) : this.page.locator('ddp-address-embedded');
-    this.elementLocator = this.rootLocator.filter({ hasText: label }).nth(nth);
+    const { label, root, nth } = opts;
+    super(page, { nth, root });
+    this.root = this.root.locator('ddp-address-embedded').filter({ hasText: label });
+    this.element = this.root;
   }
 
-  input(label: string): Input {
+  toInput(label: string | RegExp): Input {
     return new Input(this.page, { label, root: this.toLocator() });
   }
 
-  select(label: string): Select {
+  toSelect(label: string | RegExp): Select {
     return new Select(this.page, { label, root: this.toLocator() });
-  }
-
-  toLocator(): Locator {
-    return this.elementLocator;
   }
 
   /**
@@ -35,6 +28,9 @@ export default class Address {
    * @returns {Card}
    */
   addressSuggestion(): Card {
-    return new Card(this.page, 'We have checked your address entry and have suggested changes that could help ensure delivery');
+    return new Card(this.page, {
+      label: 'We have checked your address entry and have suggested changes that could help ensure delivery',
+      root: this.toLocator()
+    });
   }
 }
