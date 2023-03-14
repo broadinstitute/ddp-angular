@@ -28,5 +28,5 @@ export const assertSelectedOption = async (locator: Locator, expectedOption: str
   await expect(async () => {
     const selectedOption = await locator.evaluate<string, HTMLSelectElement>((node) => node.value);
     expect(selectedOption).toEqual(expectedOption);
-  }).toPass();
+  }).toPass({ timeout: 5000 });
 };

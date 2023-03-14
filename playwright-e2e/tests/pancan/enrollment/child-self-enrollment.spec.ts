@@ -120,11 +120,7 @@ test.describe('Enroll child ', () => {
     await expect(await researchConsentFormStatusCell?.innerText()).toEqual('Complete');
     const medicalReleaseFormStatusCell = await table.findCell('Form', 'Medical Release Form', 'Status');
     await expect(await medicalReleaseFormStatusCell?.innerText()).toEqual('Complete');
-    const leukemiaCancerStatusCell = await table.findCell(
-      'Form',
-      "Survey: Your Child's Leukemia (not otherwise specified)",
-      'Status'
-    );
+    const leukemiaCancerStatusCell = await table.findCell('Form', "Survey: Your Child's Leukemia (not otherwise specified)", 'Status');
     await expect(await leukemiaCancerStatusCell?.innerText()).toEqual('Complete');
     const aboutYourChildFormStatusCell = await table.findCell('Form', 'Survey: About Your Child', 'Status');
     await expect(await aboutYourChildFormStatusCell?.innerText()).toEqual('Complete');

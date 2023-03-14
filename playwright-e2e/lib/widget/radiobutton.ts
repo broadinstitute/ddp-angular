@@ -1,45 +1,41 @@
 import { expect, Locator, Page } from '@playwright/test';
-import WidgetBase from 'lib/widget/widget-base';
+import WidgetBase from 'lib/widget-base';
 
 export default class Radiobutton extends WidgetBase {
-  private readonly elementLocator: Locator;
-  private readonly rootLocator: Locator;
-
-  constructor(page: Page, opts: { label?: string; ddpTestID?: string; root?: Locator | string; exactMatch?: boolean }) {
-    super(page);
+  constructor(page: Page, opts: { label?: string | RegExp; ddpTestID?: string; root?: Locator | string; exactMatch?: boolean } = {}) {
     const { label, ddpTestID, root, exactMatch = false } = opts;
-    this.rootLocator = root ? (typeof root === 'string' ? this.page.locator(root) : root) : this.page.locator('mat-radio-group');
-    // prettier-ignore
-    /* eslint-disable max-len */
-    this.elementLocator = ddpTestID
-        ? this.rootLocator.locator(`mat-radio-button[data-ddp-test="${ddpTestID}"]`) // Label ignored if ddpTestID is specified
-        : exactMatch
-            ? this.rootLocator.locator(`xpath=.//mat-radio-button[.//input[@id=(//label[.//text()[normalize-space()="${label}"]]/@for)]]`)
-            : this.rootLocator.locator(`xpath=.//mat-radio-button[.//input[@id=(//label[contains(normalize-space(.),"${label}")]/@for)]]`);
+    super(page, { root, testId: ddpTestID });
+
+    if (!ddpTestID) {
+      this.root = this.root.locator('mat-radio-group');
+      if (label) {
+        if (typeof label === 'string') {
+          this.element = exactMatch
+            ? this.root.filter({ has: this.page.locator(`xpath=.//*[.//text()[normalize-space()="${label}"]]`) })
+            : this.root.filter({ has: this.page.locator(`xpath=.//*[.//text()[contains(normalize-space(), "${label}")]]`) });
+        } else {
+          this.element = this.root.filter({ hasText: label });
+        }
+      } else {
+        this.element = this.root;
+      }
+    }
   }
 
-  toLocator(): Locator {
-    return this.elementLocator;
-  }
-
-  async check(): Promise<void> {
-    const isChecked = await this.isChecked();
+  async check(label: string | RegExp): Promise<void> {
+    const isChecked = await this.isChecked(label);
     if (!isChecked) {
-      await this.toLocator().click();
-      await expect(this.toLocator()).toHaveClass(/radio-checked/);
+      await this.getRadiobuttonByLabel(label).click();
+      await expect(this.getRadiobuttonByLabel(label)).toHaveClass(/radio-checked/);
     }
   }
 
-  async uncheck(): Promise<void> {
-    const isChecked = await this.isChecked();
-    if (isChecked) {
-      await this.toLocator().click();
-      await expect(this.toLocator()).not.toHaveClass(/radio-checked/);
-    }
-  }
-
-  private async isChecked(): Promise<boolean> {
-    const isChecked = (await this.toLocator().getAttribute('class'))?.includes('mat-radio-checked');
+  private async isChecked(label: string | RegExp): Promise<boolean> {
+    const isChecked = (await this.getRadiobuttonByLabel(label).getAttribute('class'))?.includes('mat-radio-checked');
     return isChecked ? isChecked : false;
+  }
+
+  private getRadiobuttonByLabel(label: string | RegExp): Locator {
+    return this.toLocator().locator('mat-radio-button', { hasText: label });
   }
 }

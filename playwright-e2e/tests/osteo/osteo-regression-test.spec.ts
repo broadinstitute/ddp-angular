@@ -809,7 +809,7 @@ test('Osteo self enroll @osteo', async ({ page }) => {
   });
   await familyHistoryPage.clickAddGrandParent();
   await familyHistoryPage.addFamilyMember('GRANDPARENT', {
-    nickname: "Dads's Mom",
+    nickname: "Dad's Mom",
     sexAtBirth: 'Female',
     currentlyLiving: false,
     ageRange: '90-94',
@@ -826,7 +826,7 @@ test('Osteo self enroll @osteo', async ({ page }) => {
   });
   await familyHistoryPage.clickAddGrandParent();
   await familyHistoryPage.addFamilyMember('GRANDPARENT', {
-    nickname: "Dads's Dad",
+    nickname: "Dad's Dad",
     sexAtBirth: 'Male',
     currentlyLiving: true,
     ageRange: '90-94',

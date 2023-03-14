@@ -16,7 +16,10 @@ export default abstract class PageBase implements PageInterface {
     this.baseUrl = baseURL;
   }
 
-  abstract waitForReady(): Promise<void>;
+  async waitForReady(): Promise<void> {
+    await waitForNoSpinner(this.page);
+    await expect(this.page).toHaveTitle(/\D+/);
+  }
 
   /**
    * Return "Back" button locator
@@ -190,12 +193,12 @@ export default abstract class PageBase implements PageInterface {
     const mailAddressForm = new Address(this.page, {
       label: new RegExp(/Your contact information|Contact Information|Mailing Address/)
     });
-    await mailAddressForm.input('Full Name').fill(fullName);
-    await mailAddressForm.select(labels.country).selectOption(country);
-    await mailAddressForm.select(labels.state).selectOption(state);
+    await mailAddressForm.toInput('Full Name').fill(fullName);
+    await mailAddressForm.toSelect(labels.country).selectOption(country);
+    await mailAddressForm.toSelect(labels.state).selectOption(state);
     // Wait for data saved to database after fill out Street, City and Zip Code.
     await Promise.all([
-      mailAddressForm.input('Street Address').fill(street.toUpperCase()),
+      mailAddressForm.toInput('Street Address').fill(street.toUpperCase()),
       this.page.waitForResponse((resp) => {
         return (
           resp.request().method() === 'PUT' &&
@@ -206,7 +209,7 @@ export default abstract class PageBase implements PageInterface {
       })
     ]);
     await Promise.all([
-      mailAddressForm.input(labels.city).fill(city.toUpperCase()),
+      mailAddressForm.toInput(labels.city).fill(city.toUpperCase()),
       // Wait until data saved
       this.page.waitForResponse((resp) => {
         return (
@@ -218,7 +221,7 @@ export default abstract class PageBase implements PageInterface {
       })
     ]);
     await Promise.all([
-      mailAddressForm.input(labels.zip).fill(zipCode),
+      mailAddressForm.toInput(labels.zip).fill(zipCode),
       this.page.waitForResponse((resp) => {
         return (
           resp.request().method() === 'PUT' &&
@@ -231,9 +234,11 @@ export default abstract class PageBase implements PageInterface {
         return resp.request().method() === 'POST' && resp.url().includes('/address/verify') && resp.status() === 200;
       })
     ]);
-    await mailAddressForm.input(labels.phone).fill(telephone.toString());
+    await mailAddressForm.toInput(labels.phone).fill(telephone.toString());
     // Wait for Address Suggestion card
-    await mailAddressForm.addressSuggestion().radioButton('As Entered:').check();
+    await mailAddressForm.addressSuggestion()
+      .toRadioButton()
+      .check('As Entered');
   }
 
   /**
@@ -245,12 +250,12 @@ export default abstract class PageBase implements PageInterface {
   async fillInCountry(country: string, opts: { state?: string } = {}): Promise<void> {
     const { state } = opts;
 
-    await this.country().select().selectOption(country);
-    await assertSelectedOption(this.country().select(), country);
+    await this.country().toSelect().selectOption(country);
+    await assertSelectedOption(this.country().toSelect().toLocator(), country);
 
     if (state) {
-      await this.state().select().selectOption(state);
-      await assertSelectedOption(this.state().select(), state);
+      await this.state().toSelect().selectOption(state);
+      await assertSelectedOption(this.state().toSelect().toLocator(), state);
     }
   }
 

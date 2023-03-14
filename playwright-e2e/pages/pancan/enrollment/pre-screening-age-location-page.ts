@@ -25,20 +25,16 @@ export default class PreScreeningAgeLocationPage extends PancanPageBase {
       state?: string;
     } = {}
   ): Promise<void> {
-    const {
-      age = fake[this.patient].age,
-      country = fake[this.patient].country.abbreviation,
-      state = fake[this.patient].state.abbreviation
-    } = opts;
+    const { age = fake[this.patient].age, country = fake[this.patient].country.abbreviation, state = fake[this.patient].state.abbreviation } = opts;
 
     await this.age().fill(age);
     await Promise.all([
       this.page.waitForResponse((resp) => resp.url().includes('/answers') && resp.status() === 200),
-      this.country().select().selectOption(country)
+      this.country().toSelect().selectOption(country)
     ]);
     await Promise.all([
       this.page.waitForResponse((resp) => resp.url().includes('/answers') && resp.status() === 200),
-      this.state().select().selectOption(state)
+      this.state().toSelect().selectOption(state)
     ]);
     await this.submit();
   }
