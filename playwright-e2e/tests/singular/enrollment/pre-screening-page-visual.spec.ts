@@ -16,7 +16,7 @@ test.describe('About Yourself page', () => {
     // Select country France and press Tab should start triggering the error message
     await preScreeningPage.fillInCountry('FR');
     await expect(country.errorMessage()).toContainText(
-      'Project Singular is currently open only to participants in the United States and Territories or Canada.' + ' Thank you for your interest.'
+      'Project Singular is currently open only to participants in the United States and Territories or Canada. Thank you for your interest.'
     );
     expect(await country.toLocator().screenshot()).toMatchSnapshot('country-france-err-message.png');
   });

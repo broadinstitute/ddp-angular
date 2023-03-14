@@ -142,7 +142,7 @@ export class Search {
 
   private get openButtonXPath(): string {
     return (
-      "//div[text()[normalize-space()='Search'] and button[.//*[local-name()='svg' " + "and @data-icon='search']/*[local-name()='path']]]/button"
+      "//div[text()[normalize-space()='Search'] and button[.//*[local-name()='svg' and @data-icon='search']/*[local-name()='path']]]/button"
     );
   }
 
