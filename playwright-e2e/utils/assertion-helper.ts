@@ -25,8 +25,8 @@ export const assertActivityStep = async (page: Page, expectedText: string) => {
  * @returns {Promise<void>}
  */
 export const assertSelectedOption = async (locator: Locator, expectedOption: string) => {
-  await expect(async (): Promise<boolean> => {
+  await expect(async () => {
     const selectedOption = await locator.evaluate<string, HTMLSelectElement>((node) => node.value);
-    return selectedOption === expectedOption;
-  }).toPass();
+    expect(selectedOption).toEqual(expectedOption);
+  }).toPass({ timeout: 5000 });
 };
