@@ -91,9 +91,7 @@ test.describe('Adult self-enroll & child (consent) enrollment', () => {
     const medicalReleaseFormPage = new MedicalReleaseFormPage(page);
     await medicalReleaseFormPage.waitForReady();
     expect(await page.locator('.ddp-content').first().screenshot()).toMatchSnapshot('medical-release-form-content.png');
-    expect(await medicalReleaseFormPage.agreeToAllowContactPhysician().toLocator().screenshot()).toMatchSnapshot(
-      'agree-to-contact-physician.png'
-    );
+    expect(await medicalReleaseFormPage.agreeToAllowContactPhysician().toLocator().screenshot()).toMatchSnapshot('agree-to-contact-physician.png');
     await medicalReleaseFormPage.fillInInPhysicianData();
     await medicalReleaseFormPage.agreeToAllowContactPhysician().check();
     await medicalReleaseFormPage.submit();
@@ -169,11 +167,7 @@ test.describe('Adult self-enroll & child (consent) enrollment', () => {
     await childConsentFormPage.agreeToStoreCancerSamples();
     await childConsentFormPage.firstName().fill(user.secondChild.firstName);
     await childConsentFormPage.lastName().fill(lastName);
-    await childConsentFormPage.fillInDateOfBirth(
-      user.secondChild.birthDate.MM,
-      user.secondChild.birthDate.DD,
-      user.secondChild.birthDate.YYYY
-    );
+    await childConsentFormPage.fillInDateOfBirth(user.secondChild.birthDate.MM, user.secondChild.birthDate.DD, user.secondChild.birthDate.YYYY);
     await childConsentFormPage.fillInParentData();
     await childConsentFormPage.fillInContactAddress({
       fullName: user.secondChild.fullName,

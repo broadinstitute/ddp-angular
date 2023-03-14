@@ -7,7 +7,6 @@
   "private": true,
   "scripts": {
     "build": "npx tsc --build",
-    "format": "prettier --config .prettierrc.js --write --ignore-unknown \"**/*.{ts,js}\"",
     "test:e2e:singular": "npx playwright test --config=tests/singular/playwright.config.ts --grep-invert \"/nightly/|/examples/\"",
     "test:ci": "npx playwright test",
     "test:e2e:ci:singuarl:nightly": "npx playwright test --config=tests/singular/playwright-ci.config.ts --grep \"nightly/\"",
@@ -24,10 +23,7 @@
     "@typescript-eslint/eslint-plugin": "^5.54.0",
     "@typescript-eslint/parser": "^5.54.0",
     "eslint": "^8.35.0",
-    "eslint-config-prettier": "^8.6.0",
     "eslint-plugin-import": "^2.27.5",
-    "eslint-plugin-prettier": "^4.2.1",
-    "prettier": "^2.8.4",
     "uuid": "^9.0.0"
   },
   "dependencies": {

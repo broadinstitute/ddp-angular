@@ -1,20 +1,16 @@
 import { Locator, Page } from '@playwright/test';
 import Radiobutton from 'lib/widget/radiobutton';
+import WidgetBase from 'lib/widget-base';
 
-export default class Card {
-  private readonly page: Page;
-  private readonly locator: Locator;
-
-  constructor(page: Page, label: string | RegExp) {
-    this.page = page;
-    this.locator = page.locator('mat-card').filter({ has: this.page.locator('mat-card-header', { hasText: label }) });
+export default class Card extends WidgetBase {
+  constructor(page: Page, opts: { label: string | RegExp; root?: string | Locator }) {
+    const { label, root } = opts;
+    super(page, { root });
+    this.root = this.root.locator('mat-card').filter({ has: this.page.locator('mat-card-header', { hasText: label }) });
+    this.element = this.root;
   }
 
-  toLocator(): Locator {
-    return this.locator;
-  }
-
-  radioButton(label: string): Radiobutton {
-    return new Radiobutton(this.page, { label });
+  toRadioButton(label?: string | RegExp): Radiobutton {
+    return new Radiobutton(this.page, { label, root: this.toLocator() });
   }
 }

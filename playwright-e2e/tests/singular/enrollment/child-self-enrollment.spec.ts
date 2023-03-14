@@ -27,8 +27,6 @@ test.describe('Child Enrollment', () => {
       'In order to participate in Project Singular, a parent or guardian must register and consent for you.'
     );
 
-    await expect(page.locator('.error-message')).toHaveText(
-      'Submission cannot proceed. Please review messages in form for details.'
-    );
+    await expect(page.locator('.error-message')).toHaveText('Submission cannot proceed. Please review messages in form for details.');
   });
 });

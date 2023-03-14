@@ -29,9 +29,7 @@ export default class SurveyAboutYouPage extends PancanPageBase {
    * @returns {Locator}
    */
   genderIdentity(label: string): Locator {
-    return this.page
-      .locator('.picklist-answer-GENDER_IDENTITY >> mat-checkbox')
-      .filter({ has: this.page.locator(`text="${label}"`) });
+    return this.page.locator('.picklist-answer-GENDER_IDENTITY >> mat-checkbox').filter({ has: this.page.locator(`text="${label}"`) });
   }
 
   //Question selectInput
@@ -61,15 +59,8 @@ export default class SurveyAboutYouPage extends PancanPageBase {
     await expect(loc).toHaveClass(/checkbox-checked/);
   }
 
-  async fillInSurveyAboutYou(
-    opts: { sex?: string; gender?: string; race?: string; howDidYouHearAboutProject?: string } = {}
-  ): Promise<void> {
-    const {
-      sex = 'Male',
-      gender = 'Man',
-      race = 'White',
-      howDidYouHearAboutProject = 'Social media (Facebook, Twitter, Instagram, etc.)'
-    } = opts;
+  async fillInSurveyAboutYou(opts: { sex?: string; gender?: string; race?: string; howDidYouHearAboutProject?: string } = {}): Promise<void> {
+    const { sex = 'Male', gender = 'Man', race = 'White', howDidYouHearAboutProject = 'Social media (Facebook, Twitter, Instagram, etc.)' } = opts;
     await this.waitForReady();
     await this.sexAssignedAtBirth().radioButton(sex, { exactMatch: true }).locator('label').click();
     await this.checkGenderIdentity(gender);
