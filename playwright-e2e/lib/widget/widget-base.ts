@@ -6,11 +6,14 @@ export default abstract class WidgetBase implements WidgetInterface {
   protected readonly root: Locator;
   protected element: Locator | undefined;
 
-  protected constructor(readonly page: Page, opts: { root?: Locator | string; nth?: number } = {}) {
-    const { root, nth = 0 } = opts;
+  protected constructor(readonly page: Page, opts: { root?: Locator | string; testId?: string; readonly nth?: number } = {}) {
+    const { root, testId, nth = 0 } = opts;
     this.page = page;
     this.nth = nth;
     this.root = root ? (typeof root === 'string' ? this.page.locator(root) : root) : this.page.locator('app-root');
+    if (testId) {
+      this.element = this.page.locator(`[data-ddp-test="${testId}"]`)
+    }
   }
 
   toLocator(): Locator {

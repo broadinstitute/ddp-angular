@@ -25,7 +25,7 @@ export default class EnrollMyChildPage extends SingularPage {
    */
   doesChildHaveCognitiveImpairment(): Question {
     return new Question(this.page, {
-      prompt: 'Does your child have a cognitive impairment that impacts their understanding of words commonly' + ' used by others in their age group?'
+      prompt: 'Does your child have a cognitive impairment that impacts their understanding of words commonly used by others in their age group?'
     });
   }
 

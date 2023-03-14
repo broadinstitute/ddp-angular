@@ -7,21 +7,21 @@ export default class Input extends WidgetBase {
    * @param {{label?: string, ddpTestID?: string, root?: Locator | string, exactMatch?: boolean}} opts
    */
   constructor(page: Page, opts: { label?: string | RegExp; ddpTestID?: string; root?: Locator | string; exactMatch?: boolean } = {}) {
-    super(page, { root: opts.root ? opts.root : 'mat-form-field' });
-    const { label, ddpTestID, exactMatch = false } = opts;
+    const { label, ddpTestID, root, exactMatch = false } = opts;
+    super(page, { root: root ? root : 'mat-form-field', testId: ddpTestID });
 
-    if (ddpTestID) {
-      this.element = this.page.locator(`[data-ddp-test="${ddpTestID}"]`);
-    } else if (label) {
-      if (typeof label === 'string') {
-        this.element = exactMatch
-          ? this.root.locator(`xpath=.//input[@id=(//label[.//text()[normalize-space()="${label}"]]/@for)]`)
-          : this.root.locator(`xpath=.//input[@id=(//label[contains(normalize-space(.),"${label}")]/@for)]`);
+    if (!ddpTestID) {
+      if (label) {
+        if (typeof label === 'string') {
+          this.element = exactMatch
+            ? this.root.locator(`xpath=.//input[@id=(//label[.//text()[normalize-space()="${label}"]]/@for)]`)
+            : this.root.locator(`xpath=.//input[@id=(//label[contains(normalize-space(.),"${label}")]/@for)]`);
+        } else {
+          this.element = this.root.filter({ has: this.page.locator('label', { hasText: label }) }).locator('input');
+        }
       } else {
-        this.element = this.root.filter({ has: this.page.locator('label', { hasText: label }) }).locator('input');
+        this.element = this.root.locator('input');
       }
-    } else {
-      this.element = this.root.locator('input');
     }
   }
 

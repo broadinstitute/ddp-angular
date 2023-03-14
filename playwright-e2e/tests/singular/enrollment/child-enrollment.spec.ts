@@ -138,11 +138,9 @@ test.describe('Enroll my child', () => {
     expect(headers).toEqual(orderedHeaders);
 
     const summaryCell = await table.findCell('Title', 'Consent Form for Minor Dependent', 'Summary');
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     await expect(summaryCell!).toHaveText('Thank you for signing the consent form -- welcome to Project Singular!');
 
     const statusCell = await table.findCell('Title', 'Consent Form for Minor Dependent', 'Status');
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     await expect(statusCell!).toHaveText('Complete');
 
     await expect(page.locator('.enrollmentStatusCompleteText')).toHaveText('Fully Enrolled');

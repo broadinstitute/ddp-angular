@@ -17,10 +17,6 @@ export class FamilyHistory extends BrainBasePage {
     await this.page.getByText('Tell us about the history of cancer in your biological (blood-related) family').click();
   }
 
-  async next(): Promise<void> {
-    await this.page.getByRole('button').getByText('Next').click();
-  }
-
   async parent(parentNumber: number, p: FamilyMember): Promise<void> {
     let i;
     await this.page

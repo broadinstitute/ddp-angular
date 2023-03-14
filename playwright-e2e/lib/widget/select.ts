@@ -6,29 +6,29 @@ import WidgetBase from 'lib/widget/widget-base';
  */
 export default class Select extends WidgetBase {
   constructor(page: Page, opts: { label?: string | RegExp; ddpTestID?: string; root?: Locator | string; exactMatch?: boolean }) {
-    const { label, ddpTestID, exactMatch = false } = opts;
-    super(page, { root: opts.root ? opts.root : 'mat-form-field' });
+    const { label, ddpTestID, root, exactMatch = false } = opts;
+    super(page, { root: root ? root : 'mat-form-field', testId: ddpTestID });
 
-    if (ddpTestID) {
-      this.element = this.page.locator(`[data-ddp-test="${ddpTestID}"]`);
-    } else if (label) {
-      if (typeof label === 'string') {
-        this.element = exactMatch
-          ? this.root.locator(
+    if (!ddpTestID) {
+      if (label) {
+        if (typeof label === 'string') {
+          this.element = exactMatch
+            ? this.root.locator(
               `xpath=.//select[.//text()[normalize-space()="${label}"]] | ` +
-                `.//mat-select[.//text()[normalize-space()="${label}"]] | ` +
-                `.//mat-select[@id=(//label[normalize-space(.)="${label}"]/@for)]`
+              `.//mat-select[.//text()[normalize-space()="${label}"]] | ` +
+              `.//mat-select[@id=(//label[normalize-space(.)="${label}"]/@for)]`
             )
-          : this.root.locator(
+            : this.root.locator(
               `xpath=.//select[.//text()[contains(normalize-space(),"${label}")]] | ` +
-                `.//mat-select[.//text()[contains(normalize-space(),"${label}")]] | ` +
-                `.//mat-select[@id=(//label[contains(normalize-space(.),"${label}")]/@for)]`
+              `.//mat-select[.//text()[contains(normalize-space(),"${label}")]] | ` +
+              `.//mat-select[@id=(//label[contains(normalize-space(.),"${label}")]/@for)]`
             );
+        } else {
+          this.element = this.root.locator('select, mat-select').filter({ has: this.page.locator('label', { hasText: label }) });
+        }
       } else {
-        this.element = this.root.locator('select, mat-select').filter({ has: this.page.locator('label', { hasText: label }) });
+        this.element = this.root.locator('select, mat-select');
       }
-    } else {
-      this.element = this.root.locator('select, mat-select');
     }
   }
 
