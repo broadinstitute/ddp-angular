@@ -10,8 +10,8 @@ import { generateUserName } from 'utils/faker-utils';
 import * as user from 'data/fake-user.json';
 import MedicalReleaseFormPage from 'pages/pancan/enrollment/medical-release-form-page';
 import { PatientsData } from 'pages/patient-type';
-import SurveyAboutCancerPage from 'pages/pancan/enrollment/survey-about-cancer-page';
-import SurveyAboutYouPage from 'pages/pancan/enrollment/survey-about-you.page';
+import SurveyAboutCancerPage from 'pages/survey-about-cancer-page';
+import SurveyAboutYouPage from 'pages/survey-about-you.page';
 import DashboardPage from 'pages/pancan/dashboard-page';
 import HomePage from 'pages/pancan/home-page';
 
@@ -74,8 +74,7 @@ test.describe('Adult self-enroll & child (consent) enrollment', () => {
     await consentFormPage.agreeToBloodSamples();
     expect(await consentFormPage.cancerSamples().toLocator().screenshot()).toMatchSnapshot('agree-to-store-cancer-samples.png');
     await consentFormPage.agreeToStoreCancerSamples();
-    await consentFormPage.firstName().fill(user.adult.firstName);
-    await consentFormPage.lastName().fill(lastName);
+    await consentFormPage.fillInName(user.adult.firstName, lastName);
     await consentFormPage.fillInDateOfBirth(user.adult.birthDate.MM, user.adult.birthDate.DD, user.adult.birthDate.YYYY);
     await consentFormPage.signature().fill(`${user.adult.firstName} ${lastName}`);
     await expect(consentFormPage.getSubmitButton()).toBeEnabled();
@@ -100,8 +99,8 @@ test.describe('Adult self-enroll & child (consent) enrollment', () => {
     await assertActivityHeader(page, `Survey: About Your ${PatientsData.adult.cancerDiagnosed.typeCancer}`);
     const surveyCervicalCancerPage = new SurveyAboutCancerPage(page);
     await surveyCervicalCancerPage.waitForReady();
-    await surveyCervicalCancerPage.diagnosedDate('March', '2015');
-    await surveyCervicalCancerPage.fillCancerBodyPlaces('Appendix');
+    await surveyCervicalCancerPage.fillInDiagnosedDate('March', '2015');
+    await surveyCervicalCancerPage.initialBodyLocation().fill('Appendix');
     await surveyCervicalCancerPage.cancerFree().radioButton('Yes').locator('label').click();
     await surveyCervicalCancerPage.fillBodyPlacesEverHadCancer('Appendix');
     await surveyCervicalCancerPage.checkTreatmentsReceived('Radiation');
@@ -165,8 +164,10 @@ test.describe('Adult self-enroll & child (consent) enrollment', () => {
     await assertActivityStep(page, '3');
     await childConsentFormPage.agreeToBloodSamples();
     await childConsentFormPage.agreeToStoreCancerSamples();
-    await childConsentFormPage.firstName().fill(user.secondChild.firstName);
-    await childConsentFormPage.lastName().fill(lastName);
+    await childConsentFormPage.fillInName(user.secondChild.firstName, lastName, {
+      firstNameTestId: 'answer:PARENTAL_CHILD_FIRSTNAME',
+      lastNameTestId: 'answer:PARENTAL_CHILD_LASTNAME'
+    });
     await childConsentFormPage.fillInDateOfBirth(user.secondChild.birthDate.MM, user.secondChild.birthDate.DD, user.secondChild.birthDate.YYYY);
     await childConsentFormPage.fillInParentData();
     await childConsentFormPage.fillInContactAddress({
@@ -186,8 +187,8 @@ test.describe('Adult self-enroll & child (consent) enrollment', () => {
     await assertActivityHeader(page, "Survey: About Your Child's Pancreatic cancer / Pancreatic ductal adenocarcinoma (PDAC)");
     const surveyAboutCancerPage = new SurveyAboutCancerPage(page);
     await surveyAboutCancerPage.waitForReady();
-    await surveyAboutCancerPage.diagnosedDate('March', '2015');
-    await surveyAboutCancerPage.fillCancerBodyPlaces('Blood');
+    await surveyAboutCancerPage.fillInDiagnosedDate('March', '2015');
+    await surveyAboutCancerPage.initialBodyLocation().fill('Blood');
     await surveyAboutCancerPage.cancerFree().check('Yes');
     await surveyAboutCancerPage.fillBodyPlacesEverHadCancer('Blood');
     await surveyAboutCancerPage.checkTreatmentsReceived('Radiation');

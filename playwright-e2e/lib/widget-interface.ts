@@ -6,4 +6,5 @@ export interface WidgetInterface {
   toQuestion(): Locator;
   click(): Promise<void>;
   isDisabled(): Promise<boolean>
+  getAttribute(attributeName: string): Promise<string | null>
 }

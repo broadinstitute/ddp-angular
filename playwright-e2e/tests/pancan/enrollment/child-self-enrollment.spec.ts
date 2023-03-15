@@ -2,8 +2,8 @@ import { expect } from '@playwright/test';
 import { test } from 'fixtures/pancan-fixture';
 import DashboardPage from 'pages/pancan/dashboard-page';
 import MedicalReleaseFormPage from 'pages/pancan/enrollment/medical-release-form-page';
-import SurveyAboutCancerPage from 'pages/pancan/enrollment/survey-about-cancer-page';
-import SurveyAboutYouPage from 'pages/pancan/enrollment/survey-about-you.page';
+import SurveyAboutCancerPage from 'pages/survey-about-cancer-page';
+import SurveyAboutYouPage from 'pages/survey-about-you.page';
 import HomePage from 'pages/pancan/home-page';
 import { generateUserName } from 'utils/faker-utils';
 import * as user from 'data/fake-user.json';
@@ -61,8 +61,10 @@ test.describe('Enroll child ', () => {
     await assertActivityStep(page, '3');
     await consentFormPage.agreeToBloodSamples();
     await consentFormPage.agreeToStoreCancerSamples();
-    await consentFormPage.firstName().fill(user.child.firstName);
-    await consentFormPage.lastName().fill(lastName);
+    await consentFormPage.fillInName(user.child.firstName, lastName, {
+      firstNameTestId: 'answer:ASSENT_CHILD_FIRSTNAME',
+      lastNameTestId: 'answer:ASSENT_CHILD_LASTNAME'
+    });
     await consentFormPage.fillInDateOfBirth(user.child.birthDate.MM, user.child.birthDate.DD, user.child.birthDate.YYYY);
     await consentFormPage.fillInParentData();
     await consentFormPage.fillInContactAddress({ fullName: `${user.child.firstName} ${lastName}` });
@@ -83,8 +85,8 @@ test.describe('Enroll child ', () => {
     await assertActivityHeader(page, "Survey: About Your Child's Leukemia (not otherwise specified)");
     const surveyAboutCancerPage = new SurveyAboutCancerPage(page);
     await surveyAboutCancerPage.waitForReady();
-    await surveyAboutCancerPage.diagnosedDate('March', '2015');
-    await surveyAboutCancerPage.fillCancerBodyPlaces('Blood');
+    await surveyAboutCancerPage.fillInDiagnosedDate('March', '2015');
+    await surveyAboutCancerPage.initialBodyLocation().fill('Blood');
     await surveyAboutCancerPage.cancerFree().check('Yes');
     await surveyAboutCancerPage.fillBodyPlacesEverHadCancer('Blood');
     await surveyAboutCancerPage.checkTreatmentsReceived('Radiation');
@@ -95,10 +97,10 @@ test.describe('Enroll child ', () => {
     await assertActivityHeader(page, 'Survey: About Your Child');
     const surveyAboutYou = new SurveyAboutYouPage(page);
     await surveyAboutYou.waitForReady();
-    await surveyAboutYou.sexAssignedAtBirth().radioButton('Male', { exactMatch: true }).locator('label').click();
+    await surveyAboutYou.sexAtBirth().radioButton('Male', { exactMatch: true }).locator('label').click();
     await surveyAboutYou.checkGenderIdentity('Boy');
-    await surveyAboutYou.checkRaceCategoriesDescribesYou('White');
-    await surveyAboutYou.checkRaceCategoriesDescribesYou('English');
+    await surveyAboutYou.raceCategoriesDescribesYou().toCheckbox('White').check();
+    await surveyAboutYou.raceCategoriesDescribesYou().toCheckbox('English').check();
     await surveyAboutYou.howDidYouHearAboutProject().check('Social media (Facebook, Twitter, Instagram, etc.)');
     await surveyAboutYou.howDidYouHearAboutProject().check('Facebook', { exactMatch: true });
     await surveyAboutYou.howDidYouHearAboutProject().check('YouTube', { exactMatch: true });
