@@ -14,9 +14,7 @@ export interface WaitForResponseByURLConfig {
 }
 
 export async function waitForNoSpinner(page: Page): Promise<void> {
-  await page
-    .locator('[data-icon="spinner"].fa-spin, mat-spinner[role="progressbar"]')
-    .waitFor({ state: 'hidden', timeout: 30 * 1000 });
+  await page.locator('[data-icon="spinner"].fa-spin, mat-spinner[role="progressbar"]').waitFor({ state: 'hidden', timeout: 30 * 1000 });
 }
 
 export async function waitForResponseByURL(page: Page, { url, status, timeout }: WaitForResponseByURLConfig) {
@@ -126,10 +124,6 @@ export async function fillIn(page: Page, stableID: string, value: string): Promi
 
 export async function check(page: Page, stableID: string): Promise<void> {
   await new Checkbox(page, { ddpTestID: stableID }).check();
-}
-
-export async function checkRadioButton(page: Page, stableID: string): Promise<void> {
-  await new Radiobutton(page, { ddpTestID: stableID }).check();
 }
 
 export async function select(page: Page, stableID: string, option: string): Promise<void> {

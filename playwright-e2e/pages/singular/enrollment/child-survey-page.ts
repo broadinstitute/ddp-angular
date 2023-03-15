@@ -173,9 +173,7 @@ export default class ChildSurveyPage extends SingularPage {
    */
   hasReceivedSupportOrTreatmentForBehavioralNeurodevelopmentalPsychologicalProblem(): Question {
     return new Question(this.page, {
-      prompt:
-        'Has your child ever received treatment or support for any form of emotional,' +
-        ' behavioral, neurodevelopmental, or psychological problem?'
+      prompt: 'Has your child ever received treatment or support for any form of emotional, behavioral, neurodevelopmental, or psychological problem?'
     });
   }
 

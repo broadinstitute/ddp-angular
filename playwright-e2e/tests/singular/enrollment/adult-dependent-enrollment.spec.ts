@@ -60,11 +60,7 @@ test.describe('Enrol an adult dependent', () => {
 
     await consentForm.dependentFirstName().fill(user.adultDependent.firstName);
     await consentForm.dependentLastName().fill(dependentLastName);
-    await consentForm.fillInDateOfBirth(
-      user.adultDependent.birthDate.MM,
-      user.adultDependent.birthDate.DD,
-      user.adultDependent.birthDate.YYYY
-    );
+    await consentForm.fillInDateOfBirth(user.adultDependent.birthDate.MM, user.adultDependent.birthDate.DD, user.adultDependent.birthDate.YYYY);
     await consentForm.toKnowSecondaryFinding().check('I want to know.');
     await consentForm.selectOneForAdultDependent().check('I have explained the study');
     await consentForm.dependentGuardianSignature().fill(`${user.patient.firstName} ${user.patient.lastName}`);
@@ -132,7 +128,7 @@ test.describe('Enrol an adult dependent', () => {
     await patientSurveyPage.race().check('White');
     await patientSurveyPage.isHispanic().check('No', { exactMatch: true });
     await patientSurveyPage.selectVentricleDiagnosis().check('Other');
-    await patientSurveyPage.selectVentricleDiagnosis().inputByLabel('Please specify (or write Unsure)').fill('Unsure');
+    await patientSurveyPage.selectVentricleDiagnosis().toInput('Please specify (or write Unsure)').fill('Unsure');
     await patientSurveyPage.submit();
 
     // Assert contents in My Dashboard table
@@ -144,11 +140,9 @@ test.describe('Enrol an adult dependent', () => {
     expect(headers).toEqual(orderedHeaders);
 
     const summaryCell = await table.findCell('Title', 'Consent Form for Adult Dependent', 'Summary');
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     await expect(summaryCell!).toHaveText('Thank you for signing the consent form -- welcome to Project Singular!');
 
     const statusCell = await table.findCell('Title', 'Consent Form for Adult Dependent', 'Status');
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     await expect(statusCell!).toHaveText('Complete');
   });
 });

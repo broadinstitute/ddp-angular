@@ -88,10 +88,7 @@ test.describe('Enroll child with cognitive impairment', () => {
     await assertActivityHeader(page, 'Medical Record File Upload');
     await medicalRecordReleaseForm.next({ waitForNav: true });
 
-    await assertActivityHeader(
-      page,
-      "Please complete this survey so that we may learn more about your child's medical background."
-    );
+    await assertActivityHeader(page, "Please complete this survey so that we may learn more about your child's medical background.");
 
     // Answers to the Child Survey
     const childSurveyPage = new ChildSurveyPage(page);
@@ -112,9 +109,7 @@ test.describe('Enroll child with cognitive impairment', () => {
     await childSurveyPage.hadVad().check('No');
     await childSurveyPage.hasReceivedHeartTransplant().check('No');
     await childSurveyPage.hasReceivedLiverTransplant().check('No');
-    await childSurveyPage
-      .aboutYourChildHealth()
-      .check('My child had at least 5 sick visits to the doctor (not routine check-ups)');
+    await childSurveyPage.aboutYourChildHealth().check('My child had at least 5 sick visits to the doctor (not routine check-ups)');
     await childSurveyPage.aboutYourChildHealth().check('My child has missed 7 days or more from work or school due to illness');
     await childSurveyPage.describePhysicalHealth().check('Somewhat healthy');
     await childSurveyPage.familyDescribePhysicalHealth().check('Somewhat healthy');
@@ -135,11 +130,9 @@ test.describe('Enroll child with cognitive impairment', () => {
     expect(headers).toEqual(orderedHeaders);
 
     const summaryCell = await table.findCell('Title', 'Consent Form for Minor Dependent', 'Summary');
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     await expect(summaryCell!).toHaveText('Thank you for signing the consent form -- welcome to Project Singular!');
 
     const statusCell = await table.findCell('Title', 'Consent Form for Minor Dependent', 'Status');
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     await expect(statusCell!).toHaveText('Complete');
 
     await expect(page.locator('.enrollmentStatusCompleteText')).toHaveText('Fully Enrolled');

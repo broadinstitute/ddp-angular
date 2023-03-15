@@ -16,7 +16,7 @@ export class MedicalRecord {
               public institutionDDP?: string, public streetAddressDDP?: string, public cityDDP?: string, public stateDDP?: string,
               public isDeleted?: boolean, public oncHistoryDetail?: Array<OncHistoryDetail>, public followUps?: FollowUp[],
               public followupRequired?: boolean, public followupRequiredText?: string, public additionalValuesJson?: {},
-              public unableObtainText?: string) {
+              public unableObtainText?: string, public noActionNeeded?: boolean) {
     this.followUps = followUps == null ? [] : followUps;
   }
 

@@ -27,11 +27,7 @@ function getAuthClient(): OAuth2Client {
  * @param textToFindInMessage a text blurb to look for in the body of the email
  * @returns true if the message was found, false otherwise.
  */
-export async function hasUserReceivedEmail(
-  originalEmail: string,
-  expectedSubject: string,
-  textToFindInMessage: string
-): Promise<boolean> {
+export async function hasUserReceivedEmail(originalEmail: string, expectedSubject: string, textToFindInMessage: string): Promise<boolean> {
   mail.gmail('v1');
   const gmail = mail.gmail({ version: 'v1', auth: getAuthClient() });
   let numEmailsFound = 0;

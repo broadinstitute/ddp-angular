@@ -25,9 +25,7 @@ export default class EnrollMyAdultDependentPage extends SingularPage {
    */
   doesDependentHaveCognitiveImpairment(): Question {
     return new Question(this.page, {
-      prompt:
-        'Does your dependent have a cognitive impairment that impacts their understanding of words commonly' +
-        ' used by others in their age group?'
+      prompt: 'Does your dependent have a cognitive impairment that impacts their understanding of words commonly used by others in their age group?'
     });
   }
 

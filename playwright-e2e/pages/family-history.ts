@@ -17,10 +17,6 @@ export class FamilyHistory extends BrainBasePage {
     await this.page.getByText('Tell us about the history of cancer in your biological (blood-related) family').click();
   }
 
-  async next(): Promise<void> {
-    await this.page.getByRole('button').getByText('Next').click();
-  }
-
   async parent(parentNumber: number, p: FamilyMember): Promise<void> {
     let i;
     await this.page
@@ -31,10 +27,7 @@ export class FamilyHistory extends BrainBasePage {
     const selectorBase = `FH_PARENT${parentNumber}`;
 
     await this.page.getByTestId(`answer:${selectorBase}_ALIAS`).fill(p.nickname);
-    await this.page
-      .locator(`.picklist-answer-${selectorBase}_LIVING`)
-      .getByText(booleanToYesOrNo(p.currentlyLiving), { exact: true })
-      .click();
+    await this.page.locator(`.picklist-answer-${selectorBase}_LIVING`).getByText(booleanToYesOrNo(p.currentlyLiving), { exact: true }).click();
     await this.page.locator(`.picklist-answer-${selectorBase}_AGE_RANGE`).getByRole('combobox').selectOption(p.ageRange);
     await this.page
       .locator(`.picklist-answer-${selectorBase}_HAD_CANCER`)
@@ -51,12 +44,7 @@ export class FamilyHistory extends BrainBasePage {
         `.picklist-answer-${selectorBase}_CANCER_NAME`,
         `.picklist-answer-${selectorBase}_CANCER_AGE_RANGE`
       );
-      await cancerSelector.chooseCancer(
-        i,
-        selectedCancer.cancerSearch,
-        selectedCancer.numTimesToHitDownArrow,
-        selectedCancer.expectedCancerResult
-      );
+      await cancerSelector.chooseCancer(i, selectedCancer.cancerSearch, selectedCancer.numTimesToHitDownArrow, selectedCancer.expectedCancerResult);
       await cancerSelector.chooseDiagnosisAt(i, selectedCancer.time);
     }
 
@@ -95,25 +83,14 @@ export class FamilyHistory extends BrainBasePage {
 
   async addFamilyMember(relationship: string, p: FamilyMember): Promise<void> {
     if (relationship === 'PARENT1') {
-      await this.page
-        .locator('mat-card-content')
-        .filter({ hasText: 'Biological / Birth Parent 1' })
-        .getByRole('button', { name: 'Edit' })
-        .click();
+      await this.page.locator('mat-card-content').filter({ hasText: 'Biological / Birth Parent 1' }).getByRole('button', { name: 'Edit' }).click();
     } else if (relationship === 'PARENT2') {
-      await this.page
-        .locator('mat-card-content')
-        .filter({ hasText: 'Biological / Birth Parent 2' })
-        .getByRole('button', { name: 'Edit' })
-        .click();
+      await this.page.locator('mat-card-content').filter({ hasText: 'Biological / Birth Parent 2' }).getByRole('button', { name: 'Edit' }).click();
     }
     const selectorBase = `FH_${relationship}`;
 
     await this.page.getByTestId(`answer:${selectorBase}_ALIAS`).fill(p.nickname);
-    await this.page
-      .locator(`.picklist-answer-${selectorBase}_LIVING`)
-      .getByText(booleanToYesOrNo(p.currentlyLiving), { exact: true })
-      .click();
+    await this.page.locator(`.picklist-answer-${selectorBase}_LIVING`).getByText(booleanToYesOrNo(p.currentlyLiving), { exact: true }).click();
     await this.page.locator(`.picklist-answer-${selectorBase}_AGE_RANGE`).getByRole('combobox').selectOption(p.ageRange);
     await this.page
       .locator(`.picklist-answer-${selectorBase}_HAD_CANCER`)
@@ -130,12 +107,7 @@ export class FamilyHistory extends BrainBasePage {
         `.picklist-answer-${selectorBase}_CANCER_NAME`,
         `.picklist-answer-${selectorBase}_CANCER_AGE_RANGE`
       );
-      await cancerSelector.chooseCancer(
-        i,
-        selectedCancer.cancerSearch,
-        selectedCancer.numTimesToHitDownArrow,
-        selectedCancer.expectedCancerResult
-      );
+      await cancerSelector.chooseCancer(i, selectedCancer.cancerSearch, selectedCancer.numTimesToHitDownArrow, selectedCancer.expectedCancerResult);
       await cancerSelector.chooseDiagnosisAt(i, selectedCancer.time);
     }
 
@@ -154,13 +126,15 @@ export class FamilyHistory extends BrainBasePage {
         sideOfFamilyClass = 'FAMILY_SIDE_Q_2';
       }
       await new Question(this.page, { cssClassAttribute: `.picklist-answer-${sideOfFamilyClass}` })
-        .select()
+        .toSelect()
+        .toLocator()
         .selectOption({ label: p.sideOfFamily });
     }
 
     if (p.sexAtBirth != null) {
       await new Question(this.page, { cssClassAttribute: `.picklist-answer-${selectorBase}_SEX_AT_BIRTH` })
-        .select()
+        .toSelect()
+        .toLocator()
         .selectOption({ label: p.sexAtBirth });
     }
 

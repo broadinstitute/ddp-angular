@@ -77,7 +77,7 @@ test.describe.serial('Adult Self Enrollment', () => {
     await tellUsAboutYourFamily.phone().fill(user.patient.phone);
     await tellUsAboutYourFamily.confirmPhone().fill(user.patient.phone);
     await tellUsAboutYourFamily.patientRelationship().selectOption('MYSELF');
-    await tellUsAboutYourFamily.state().select().selectOption(user.patient.state.abbreviation);
+    await tellUsAboutYourFamily.state().toSelect().selectOption(user.patient.state.abbreviation);
     await tellUsAboutYourFamily.website().fill('https://en.wikipedia.org/wiki/Broad_Institute');
     await tellUsAboutYourFamily.describeGeneticCondition().fill('Single-gene disorders');
     await tellUsAboutYourFamily.haveAnyClinicalDiagnosesBeenMade().check('Yes');
@@ -110,18 +110,12 @@ test.describe.serial('Adult Self Enrollment', () => {
 
     await assertProgressActiveItem(page, '3');
 
-    await tellUsAboutYourFamily
-      .patientBiologicalMotherRace()
-      .toSelect('Select all that apply')
-      .selectOption('White', { exactMatch: false });
+    await tellUsAboutYourFamily.patientBiologicalMotherRace().toSelect('Select all that apply').selectOption('White', { exactMatch: false });
     await tellUsAboutYourFamily.patientBiologicalMotherEthnicity().check('Not Hispanic');
     await tellUsAboutYourFamily.doesMotherHaveSameGeneticMedicalCondition().check('No', { exactMatch: true });
     await tellUsAboutYourFamily.isPatientBiologicalMotherAbleToParticipateStudy().check('No');
 
-    await tellUsAboutYourFamily
-      .patientBiologicalFatherRace()
-      .toSelect('Select all that apply')
-      .selectOption('White', { exactMatch: false });
+    await tellUsAboutYourFamily.patientBiologicalFatherRace().toSelect('Select all that apply').selectOption('White', { exactMatch: false });
     await tellUsAboutYourFamily.patientBiologicalFatherEthnicity().check('Not Hispanic');
     await tellUsAboutYourFamily.doesFatherHaveSameGeneticMedicalCondition().check('No', { exactMatch: true });
     await tellUsAboutYourFamily.isPatientBiologicalFatherAbleToParticipateStudy().check('No');
