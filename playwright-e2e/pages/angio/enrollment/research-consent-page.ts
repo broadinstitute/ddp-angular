@@ -115,7 +115,7 @@ export default class ResearchConsentPage extends AngioPageBase {
     const question = new Question(this.page, {
       prompt: 'In what year were you born?'
     });
-    await question.select().selectOption(answer);
+    await question.toSelect().selectOption(answer);
   }
 
   private async questionHelper(question: Question, checkboxes: string[], inputText?: string[]) {

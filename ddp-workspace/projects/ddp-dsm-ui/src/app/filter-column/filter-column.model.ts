@@ -117,6 +117,7 @@ export class Filter {
   public static MR_UNABLE_TO_OBTAIN = new Filter(ParticipantColumn.MR_UNABLE_TO_OBTAIN, Filter.CHECKBOX_TYPE);
   public static MR_DUPLICATE = new Filter(ParticipantColumn.MR_DUPLICATE, Filter.CHECKBOX_TYPE);
   public static MR_INTERNATIONAL = new Filter(ParticipantColumn.MR_INTERNATIONAL, Filter.CHECKBOX_TYPE);
+  public static NO_ACTION_NEEDED = new Filter(ParticipantColumn.NO_ACTION_NEEDED, Filter.CHECKBOX_TYPE);
   public static MR_PAPER_CR = new Filter(ParticipantColumn.MR_PAPER_CR, Filter.CHECKBOX_TYPE);
   public static PATHOLOGY_RESENT = new Filter(ParticipantColumn.PATHOLOGY_RESENT, Filter.OPTION_TYPE, [
     new NameValue('yes', 'Yes'),
@@ -295,7 +296,8 @@ export class Filter {
     Filter.COLLABORATOR_SAMPLE, Filter.SAMPLE_SENT, Filter.SAMPLE_RECEIVED, Filter.SAMPLE_DEACTIVATION, Filter.SAMPLE_QUEUE,
     Filter.TRACKING_TO_PARTICIPANT, Filter.TRACKING_RETURN, Filter.MF_BARCODE, Filter.STATUS_OUT, Filter.STATUS_IN, Filter.RESULT_TEST, Filter.CORRECTED_TEST, Filter.TIME_TEST, Filter.CARE_EVOLVE,
     Filter.ABSTRACTION_ACTIVITY, Filter.ABSTRACTION_STATUS, Filter.ABSTRACTION_USER, Filter.COHORT_TAG_NAME, Filter.PARTICIPANT_FILE_NAMES, Filter.PARTICIPANT_FILE_UPLOAD_TIME,
-    Filter.COLLECTION_DATE, Filter.SEQUENCING_RESTRICTION, Filter.SAMPLE_NOTES, Filter.CLINICAL_ORDER_DATE, Filter.CLINICAL_ORDER_STATUS, Filter.CLINICAL_ORDER_ID, Filter.CLINICAL_ORDER_PDO, Filter.CLINICAL_STATUS_DATE];
+    Filter.COLLECTION_DATE, Filter.SEQUENCING_RESTRICTION, Filter.SAMPLE_NOTES, Filter.CLINICAL_ORDER_DATE, Filter.CLINICAL_ORDER_STATUS, Filter.CLINICAL_ORDER_ID, Filter.CLINICAL_ORDER_PDO,
+    Filter.CLINICAL_STATUS_DATE, Filter.NO_ACTION_NEEDED];
 
   public static parseToColumnArray(json, allColumns, surveyNames?, surveyColumns?): {} {
     const result = {};

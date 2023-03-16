@@ -46,7 +46,7 @@ export default class CountMeInPage extends AngioPageBase {
    * <br> Self Describe
    * <br> Type: Radiobutton picklist
    */
-  diagnosedWithAngiosarcoma(label: DESCRIBE_SELF): Radiobutton {
-    return new Radiobutton(this.page, { label });
+  diagnosedWithAngiosarcoma(label: DESCRIBE_SELF): Promise<void> {
+    return new Radiobutton(this.page).check(label);
   }
 }

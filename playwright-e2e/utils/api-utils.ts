@@ -125,11 +125,7 @@ export async function getAuth0UserByEmail(app: APP, email: string, accessToken: 
     });
 }
 
-export async function setAuth0UserEmailVerified(
-  app: APP,
-  email: string,
-  opts: { isEmailVerified?: boolean; accessToken?: string }
-): Promise<string> {
+export async function setAuth0UserEmailVerified(app: APP, email: string, opts: { isEmailVerified?: boolean; accessToken?: string }): Promise<string> {
   const credentials = JSON.parse(buildAuth0ClientCredentials(app));
   const { isEmailVerified = true, accessToken = await getAuth0AccessToken(app) } = opts;
   const user = await getAuth0UserByEmail(app, email, accessToken);

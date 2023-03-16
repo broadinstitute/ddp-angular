@@ -17,9 +17,9 @@ export default class SurveyAboutCancerPage extends PancanPageBase {
    * <br> Type: Locator
    */
   private firstDiagnosedMonth(): Locator {
-    return new Question(this.page, { prompt: new RegExp(/When (were|was) (you|your child) first diagnosed/) }).select(
-      'Choose month...'
-    );
+    return new Question(this.page, { prompt: new RegExp(/When (were|was) (you|your child) first diagnosed/) })
+      .toSelect('Choose month...')
+      .toLocator();
   }
   /**
    * <br> Question: When were you first diagnosed with Cervical cancer?
@@ -27,9 +27,7 @@ export default class SurveyAboutCancerPage extends PancanPageBase {
    */
 
   private firstDiagnosedYear(): Locator {
-    return new Question(this.page, { prompt: new RegExp(/When (were|was) (you|your child) first diagnosed/) }).select(
-      'Choose year...'
-    );
+    return new Question(this.page, { prompt: new RegExp(/When (were|was) (you|your child) first diagnosed/) }).toSelect('Choose year...').toLocator();
   }
 
   /**
