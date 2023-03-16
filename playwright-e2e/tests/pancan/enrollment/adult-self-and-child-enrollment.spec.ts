@@ -10,8 +10,8 @@ import { generateUserName } from 'utils/faker-utils';
 import * as user from 'data/fake-user.json';
 import MedicalReleaseFormPage from 'pages/pancan/enrollment/medical-release-form-page';
 import { PatientsData } from 'pages/patient-type';
-import SurveyAboutCancerPage from 'pages/survey-about-cancer-page';
-import SurveyAboutYouPage from 'pages/survey-about-you.page';
+import SurveyAboutCancer from 'pages/pancan/enrollment/survey-about-cancer-page';
+import SurveyAboutYou from 'pages/survey-about-you';
 import DashboardPage from 'pages/pancan/dashboard-page';
 import HomePage from 'pages/pancan/home-page';
 
@@ -20,6 +20,18 @@ const { PANCAN_USER_EMAIL, PANCAN_USER_PASSWORD } = process.env;
 test.describe('Adult self-enroll & child (consent) enrollment', () => {
   // Randomize patient last name
   const lastName = generateUserName(user.adult.lastName);
+
+  async function fillInSurveyAboutYou(survey: SurveyAboutYou, opts: {
+    sex?: string; gender?: string; race?: string; howDidYouHearAboutProject?: string
+  } = {}): Promise<void> {
+    const { sex = 'Male', gender = 'Man', race = 'White', howDidYouHearAboutProject = 'Social media (Facebook, Twitter, Instagram, etc.)' } = opts;
+    await survey.sex().radioButton(sex, { exactMatch: true }).locator('label').click();
+    await survey.gender().toCheckbox(gender).check();
+    await survey.race().toCheckbox(race).check();
+    await survey.race().toCheckbox('English').check();
+    await survey.howDidYouHearAboutProject().check(howDidYouHearAboutProject);
+    await survey.howDidYouHearAboutProject().check('Facebook', { exactMatch: true });
+  }
 
   /**
    * Participant first go through adult self enrollment, then be taken to the dashboard to continue child’s enrollment
@@ -97,7 +109,7 @@ test.describe('Adult self-enroll & child (consent) enrollment', () => {
 
     // Survey: About Cervical Cancer
     await assertActivityHeader(page, `Survey: About Your ${PatientsData.adult.cancerDiagnosed.typeCancer}`);
-    const surveyCervicalCancerPage = new SurveyAboutCancerPage(page);
+    const surveyCervicalCancerPage = new SurveyAboutCancer(page);
     await surveyCervicalCancerPage.waitForReady();
     await surveyCervicalCancerPage.fillInDiagnosedDate('March', '2015');
     await surveyCervicalCancerPage.initialBodyLocation().fill('Appendix');
@@ -109,8 +121,8 @@ test.describe('Adult self-enroll & child (consent) enrollment', () => {
 
     // Survey: About you
     await assertActivityHeader(page, 'Survey: About You');
-    const surveyAboutYou = new SurveyAboutYouPage(page);
-    await surveyAboutYou.fillInSurveyAboutYou();
+    const surveyAboutYou = new SurveyAboutYou(page);
+    await fillInSurveyAboutYou(surveyAboutYou);
     await surveyAboutYou.submit();
 
     // Dashboard
@@ -185,7 +197,7 @@ test.describe('Adult self-enroll & child (consent) enrollment', () => {
 
     // Survey: About Your Child's Pancreatic cancer
     await assertActivityHeader(page, "Survey: About Your Child's Pancreatic cancer / Pancreatic ductal adenocarcinoma (PDAC)");
-    const surveyAboutCancerPage = new SurveyAboutCancerPage(page);
+    const surveyAboutCancerPage = new SurveyAboutCancer(page);
     await surveyAboutCancerPage.waitForReady();
     await surveyAboutCancerPage.fillInDiagnosedDate('March', '2015');
     await surveyAboutCancerPage.initialBodyLocation().fill('Blood');
@@ -198,7 +210,7 @@ test.describe('Adult self-enroll & child (consent) enrollment', () => {
     // Survey: About your child
     await assertActivityHeader(page, 'Survey: About Your Child');
     await surveyAboutYou.waitForReady();
-    await surveyAboutYou.fillInSurveyAboutYou({ gender: 'Boy' });
+    await fillInSurveyAboutYou(surveyAboutYou, { gender: 'Boy' });
     await surveyAboutYou.submit();
 
     // Two tables: one for enrolled adult and one for enrolled child

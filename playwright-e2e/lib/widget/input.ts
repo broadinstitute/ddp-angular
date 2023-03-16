@@ -36,19 +36,19 @@ export default class Input extends WidgetBase {
    * @param opts
    * @returns {Promise<void>}
    */
-  async fill(value: string, opts?: { dropdownOption: string, type?: boolean }): Promise<void> {
+  async fill(value: string | number, opts?: { dropdownOption: string, type?: boolean }): Promise<void> {
     const useType = opts?.type ? opts.type : false;
     const existValue = await this.toLocator().inputValue();
     if (existValue !== value) {
       const autocomplete = await this.getAttribute('aria-autocomplete');
       useType
-        ? await this.toLocator().type(value, { delay: 200 })
-        : await this.toLocator().fill(value);
+        ? await this.toLocator().type(value as string, { delay: 200 })
+        : await this.toLocator().fill(value as string);
 
       const expanded = await this.getAttribute('aria-expanded');
       if (autocomplete === 'list' && expanded === 'true') {
         const dropdown = this.page.locator('.mat-autocomplete-visible[role="listbox"][id]');
-        const dropdownOption = opts ? opts.dropdownOption : value;
+        const dropdownOption = opts ? opts.dropdownOption : value as string;
           await dropdown
             .locator('[role="option"]') //, { has: this.page.locator(`span.mat-option-text:text("${dropdownOption}")`) })
             .filter({ hasText: dropdownOption })

@@ -2,13 +2,12 @@ import { expect, Page } from '@playwright/test';
 import { test } from 'fixtures/osteo-fixture';
 import ConsentAddendumPage from 'pages/osteo/consent-addendump-page';
 import GetStartedPage from 'pages/osteo/get-started-page';
-import SurveyAboutYouPage from 'pages/survey-about-you.page';
+import SurveyAboutYou from 'pages/survey-about-you';
 import { assertActivityHeader } from 'utils/assertion-helper';
-import { generateEmailAlias } from 'utils/faker-utils';
 import ResearchConsentFormPage from 'pages/osteo/research-consent-page';
 import HomePage from 'pages/osteo/home-page';
 import MedicalReleasePage from 'pages/osteo/medical-release-page';
-import SurveyAboutYourOsteosarcoma from 'pages/survey-about-cancer-page';
+import SurveyAboutYourOsteosarcoma from 'pages/osteo/survey-about-osteo-page';
 import { logParticpantCreated } from 'utils/log-utils';
 import { generateUserName } from 'utils/faker-utils';
 import { CancerSelector } from 'pages/cancer-selector';
@@ -17,7 +16,7 @@ import * as user from 'data/fake-user.json';
 import * as auth from 'authentication/auth-osteo';
 // import { checkUserReceivedEmails } from 'utils/email-utils';
 
-const { OSTEO_USER_EMAIL, OSTEO_USER_PASSWORD } = process.env;
+const { OSTEO_USER_EMAIL, OSTEO_USER_PASSWORD, OSTEO_BASE_URL } = process.env;
 
 const assertActiveActivityStep = async (page: Page, expectedText: string) => {
   await expect(page.locator('.activity-step.active')).toHaveText(expectedText);
@@ -26,13 +25,11 @@ const assertActiveActivityStep = async (page: Page, expectedText: string) => {
 test('Osteo adult self enroll @osteo', async ({ page }) => {
   test.slow();
 
-  const userEmail = generateEmailAlias(OSTEO_USER_EMAIL);
   const firstName = generateUserName('OS');
   const lastName = generateUserName('OS');
   const fullName = `${firstName} ${lastName}`;
   const patient = user.adult;
 
-  logParticpantCreated(userEmail, fullName);
 
   const homePage = new HomePage(page);
   await homePage.waitForReady();
@@ -47,14 +44,16 @@ test('Osteo adult self enroll @osteo', async ({ page }) => {
   await getStartedPage.fillInCountry(patient.country.abbreviation, { state: 'CO' });
   await getStartedPage.submit();
 
-  await auth.createAccountWithEmailAlias(page, {
+  const userEmail = await auth.createAccountWithEmailAlias(page, {
     email: OSTEO_USER_EMAIL,
     password: OSTEO_USER_PASSWORD
   });
+  logParticpantCreated(userEmail, fullName);
 
   await assertActivityHeader(page, 'Research Consent Form');
-
   const researchConsentPage = new ResearchConsentFormPage(page);
+  await researchConsentPage.waitForReady();
+
   await assertActiveActivityStep(page, '1. Key Points');
   await researchConsentPage.next();
   await assertActiveActivityStep(page, '2. Full Form');
@@ -98,8 +97,8 @@ test('Osteo adult self enroll @osteo', async ({ page }) => {
   await medicalReleasePage.fillInFullName(fullName);
   await medicalReleasePage.submit()
 
-
-  const surveyAboutOsteosarcoma = new SurveyAboutYourOsteosarcoma(page, 'Survey: About Your Osteosarcoma');
+  await assertActivityHeader(page, 'Survey: About Your Osteosarcoma')
+  const surveyAboutOsteosarcoma = new SurveyAboutYourOsteosarcoma(page);
   await surveyAboutOsteosarcoma.waitForReady();
   await surveyAboutOsteosarcoma.next();
 
@@ -113,8 +112,8 @@ test('Osteo adult self enroll @osteo', async ({ page }) => {
   await surveyAboutOsteosarcoma.hadRadiationAsTreatment().toRadiobutton().check('No', { exact: true });
   await surveyAboutOsteosarcoma.hadReceivedTherapies().toCheckbox('Cisplatin').check();
   await surveyAboutOsteosarcoma.hadReceivedTherapies().toCheckbox('Methotrexate').check();
-  await surveyAboutOsteosarcoma.currentlyBeingTreated().toRadiobutton().check('Yes');
-  await surveyAboutOsteosarcoma.hadDiagnosedWithOtherCancer().toRadiobutton().check('Yes');
+  await surveyAboutOsteosarcoma.isCurrentlyBeingTreated().toRadiobutton().check('Yes');
+  await surveyAboutOsteosarcoma.haveOtherCancer().toRadiobutton().check('Yes');
 
   const cancerSelector = new CancerSelector(page, '.activity-text-input-OTHER_CANCER_NAME', '.date-answer-OTHER_CANCER_YEAR');
   await cancerSelector.chooseCancer(0, 'bone', 2, 'Giant Cell Tumor of the Bone (GCT)');
@@ -122,17 +121,16 @@ test('Osteo adult self enroll @osteo', async ({ page }) => {
 
   await surveyAboutOsteosarcoma.submit();
 
-  const surveyAboutYou = new SurveyAboutYouPage(page);
+  const surveyAboutYou = new SurveyAboutYou(page);
   await surveyAboutYou.waitForReady();
-  // await surveyAboutYou.fillInSurveyAboutYou({ sex: 'Female', gender: 'Woman', race: 'Hispanic, Latino, or Spanish' })
 
-  await surveyAboutYou.sexAtBirth().radioButton('Female', { exactMatch: true }).locator('label').click();
-  await surveyAboutYou.checkGenderIdentity('Woman');
-  await surveyAboutYou.raceCategoriesDescribesYou().toCheckbox('Hispanic, Latino, or Spanish').check();
-  await surveyAboutYou.raceCategoriesDescribesYou().toCheckbox('Cuban').check();
-  await surveyAboutYou.raceCategoriesDescribesYou().toCheckbox('Dominican').check();
-  await surveyAboutYou.mixedRace().toRadiobutton().check('Yes');
-  await surveyAboutYou.indigenousNative().toRadiobutton().check('No', { exact: true });
+  await surveyAboutYou.sex().radioButton('Female', { exactMatch: true }).locator('label').click();
+  await surveyAboutYou.gender().toCheckbox('Woman').check();
+  await surveyAboutYou.race().toCheckbox('Hispanic, Latino, or Spanish').check();
+  await surveyAboutYou.race().toCheckbox('Cuban').check();
+  await surveyAboutYou.race().toCheckbox('Dominican').check();
+  await surveyAboutYou.isMixedRace().toRadiobutton().check('Yes');
+  await surveyAboutYou.isIndigenousNative().toRadiobutton().check('No', { exact: true });
   await surveyAboutYou.tellUsAnythingElse().toTextarea().fill('testing comments!');
 
 
@@ -140,8 +138,8 @@ test('Osteo adult self enroll @osteo', async ({ page }) => {
   await surveyAboutYou.howOftenDoYouNeedHelpReadHospitalMaterials().toRadiobutton().check('Most of the time');
   await surveyAboutYou.howOftenDoYouHaveProblemsUnderstandWrittenInformation().toRadiobutton().check('A little of the time')
   await surveyAboutYou.howConfidentAreYouFillingOutFormsByYourself().toRadiobutton().check('Occasionally');
-  await surveyAboutYou.whatIsHighestLevelOfSchoolCompleted().toRadiobutton().check('High school graduate or equivalent');
-  await surveyAboutYou.whatLanguageDoYouSpeak().toRadiobutton().check('English');
+  await surveyAboutYou.highestLevelOfSchoolCompleted().toRadiobutton().check('High school graduate or equivalent');
+  await surveyAboutYou.speakLanguage().toRadiobutton().check('English');
   await surveyAboutYou.submit();
 
   await page.getByText('Thank you for providing information regarding your experiences with osteosarcoma').click();

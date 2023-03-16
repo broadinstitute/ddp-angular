@@ -13,9 +13,8 @@ export default class ResearchConsentFormPage extends OsteoPageBase {
   }
 
   async waitForReady(): Promise<void> {
-    await expect(this.pageTitle).toBeVisible();
+    await super.waitForReady();
     await expect(this.pageTitle).toHaveText('Research Consent Form');
-    await waitForNoSpinner(this.page);
   }
 
   async agreeToDrawBloodSamples(answer = 'Yes'): Promise<void> {

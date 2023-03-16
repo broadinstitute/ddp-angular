@@ -5,14 +5,7 @@ import Input from 'lib/widget/input';
  * Cancer selector widget used widely by CMI
  */
 export class CancerSelector {
-  private readonly page: Page;
-  private readonly cancerSelector: string;
-  private readonly diagnosisTimeLabel: string;
-
-  constructor(page: Page, cancerSelector: string, diagnosisTimeLabel: string) {
-    this.page = page;
-    this.cancerSelector = cancerSelector;
-    this.diagnosisTimeLabel = diagnosisTimeLabel;
+  constructor(readonly page: Page, readonly cancerSelector: string, readonly diagnosisTimeLabel: string) {
   }
 
   async chooseCancer(index: number, search: string, pressDownTimes: number, expectedResult: string): Promise<void> {

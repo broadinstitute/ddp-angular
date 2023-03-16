@@ -3,15 +3,8 @@ import Question from 'lib/component/Question';
 import { PancanPageBase } from 'pages/pancan/pancan-page-base';
 
 export default class SurveyAboutCancerPage extends PancanPageBase {
-  private readonly pageTitle: Locator;
-  constructor(page: Page, readonly expectedTitle?: string) {
+  constructor(page: Page) {
     super(page);
-    this.pageTitle = this.page.locator('h1.activity-header');
-  }
-
-  async waitForReady(): Promise<void> {
-    await super.waitForReady();
-    this.expectedTitle && await expect(this.pageTitle).toHaveText(this.expectedTitle);
   }
 
   /**
@@ -20,8 +13,8 @@ export default class SurveyAboutCancerPage extends PancanPageBase {
    */
   private firstDiagnosedMonth(): Locator {
     return new Question(this.page, { prompt: new RegExp(/When (were|was) (you|your child) first diagnosed/) })
-      .toSelect('Choose month...')
-      .toLocator();
+    .toSelect('Choose month...')
+    .toLocator();
   }
 
   /**
@@ -33,17 +26,6 @@ export default class SurveyAboutCancerPage extends PancanPageBase {
   }
 
   /**
-   * <br> Question: When did you first experience symptoms...?
-   * <br> Type: Locator
-   */
-  async chooseTimeframe(option: string): Promise<void> {
-    await new Question(this.page, { prompt: new RegExp(/When did you first experience symptoms/) })
-    .toSelect('Choose timeframe...')
-    .toLocator()
-      .selectOption(option);
-  }
-
-  /**
    * <br> Question: Please select the places in the body where you had cancer when you was first diagnosed.
    * <br> Type: Question
    */
@@ -51,43 +33,6 @@ export default class SurveyAboutCancerPage extends PancanPageBase {
     return new Question(this.page, { cssClassAttribute: '.picklist-answer-INITIAL_BODY_LOC' });
     // return this.page.locator('.picklist-answer-INITIAL_BODY_LOC').locator('input');
   }
-
-  /**
-   * <br> Question: Please select all the places in your body that you currently have ...
-   * <br> Type: Question
-   */
-  currentBodyLocation(): Question {
-    return new Question(this.page, { cssClassAttribute: '.picklist-answer-CURRENT_BODY_LOC' });
-  }
-
-  /**
-   * <br> Question: Have you had radiation as a treatment for  ...
-   * <br> Type: Question
-   */
-  hadRadiationAsTreatment(): Question {
-    return new Question(this.page, { cssClassAttribute: '.picklist-answer-HAD_RADIATION' });
-  }
-
-  hadReceivedTherapies(): Question {
-    return new Question(this.page, { cssClassAttribute: '.picklist-answer-THERAPIES_RECEIVED'});
-  }
-
-  /**
-   * <br> Question: Are you currently being treated for  ...
-   * <br> Type: Question
-   */
-  currentlyBeingTreated(): Question {
-    return new Question(this.page, { cssClassAttribute: '.picklist-answer-CURRENTLY_TREATED'});
-  }
-
-  /**
-   * <br> Question: Have you ever been diagnosed with any other cancer(s)?
-   * <br> Type: Question
-   */
-  hadDiagnosedWithOtherCancer(): Question {
-    return new Question(this.page, { cssClassAttribute: '.picklist-answer-OTHER_CANCERS'});
-  }
-
 
   /**
    * <br> Question: Are you currently cancer-free (e.g. in remission, no evidence of disease (NED), no evidence of active disease (NEAD))?

@@ -10,8 +10,8 @@ import * as user from 'data/fake-user.json';
 import MedicalReleaseFormPage from 'pages/pancan/enrollment/medical-release-form-page';
 import { expect } from '@playwright/test';
 import { PatientsData } from 'pages/patient-type';
-import SurveyAboutCancerPage from 'pages/survey-about-cancer-page';
-import SurveyAboutYouPage from 'pages/survey-about-you.page';
+import SurveyAboutCancer from 'pages/pancan/enrollment/survey-about-cancer-page';
+import SurveyAboutYou from 'pages/survey-about-you';
 import DashboardPage from 'pages/pancan/dashboard-page';
 import HomePage from 'pages/pancan/home-page';
 
@@ -75,7 +75,7 @@ test.describe('Enroll myself as adult', () => {
 
     //Survey: About Cervical Cancer
     await assertActivityHeader(page, 'Survey: About Your Cervical cancer');
-    const surveyCervicalCancerPage = new SurveyAboutCancerPage(page);
+    const surveyCervicalCancerPage = new SurveyAboutCancer(page);
     await surveyCervicalCancerPage.waitForReady();
     await surveyCervicalCancerPage.fillInDiagnosedDate('March', '2015');
     await surveyCervicalCancerPage.initialBodyLocation().fill('Appendix');
@@ -87,12 +87,12 @@ test.describe('Enroll myself as adult', () => {
 
     //Survey: About you
     await assertActivityHeader(page, 'Survey: About You');
-    const surveyAboutYou = new SurveyAboutYouPage(page);
+    const surveyAboutYou = new SurveyAboutYou(page);
     await surveyAboutYou.waitForReady();
-    await surveyAboutYou.sexAtBirth().radioButton('Male', { exactMatch: true }).locator('label').click();
-    await surveyAboutYou.checkGenderIdentity('Man');
-    await surveyAboutYou.raceCategoriesDescribesYou().toCheckbox('White').check();
-    await surveyAboutYou.raceCategoriesDescribesYou().toCheckbox('English').check();
+    await surveyAboutYou.sex().radioButton('Male', { exactMatch: true }).locator('label').click();
+    await surveyAboutYou.gender().toCheckbox('Man').check();
+    await surveyAboutYou.race().toCheckbox('White').check();
+    await surveyAboutYou.race().toCheckbox('English').check();
     await surveyAboutYou.howDidYouHearAboutProject().check('Social media (Facebook, Twitter, Instagram, etc.)');
     await surveyAboutYou.howDidYouHearAboutProject().check('Facebook', { exactMatch: true });
     await surveyAboutYou.submit();

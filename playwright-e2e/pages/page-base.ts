@@ -26,7 +26,7 @@ interface PhysicianInstitutionAddressLabels extends MailingAddressLabels {
   physicianName?: string | RegExp;
 }
 
-const defaultMailingAddressLabels = {
+const defaultMailingAddressLabels: { phone: string, hospital: string, country: string, state: string, city: string, zip: string } = {
   phone: 'Phone',
   hospital: 'Institution',
   country: 'Country',
@@ -37,9 +37,9 @@ const defaultMailingAddressLabels = {
 
 export default abstract class PageBase implements PageInterface {
   protected readonly page: Page;
-  protected readonly baseUrl: string;
+  protected readonly baseUrl: string | undefined;
 
-  protected constructor(page: Page, baseURL: string) {
+  protected constructor(page: Page, baseURL?: string) {
     this.page = page;
     this.baseUrl = baseURL;
   }
@@ -105,8 +105,11 @@ export default abstract class PageBase implements PageInterface {
   }
 
   async gotoURLPath(urlPath = ''): Promise<Response | null> {
+    if (this.baseUrl == null) {
+      throw Error('Parameter baseUrl is undefined');
+    }
     if (urlPath.startsWith('https')) {
-      throw Error('Parameter urlPath is not valid.');
+      throw Error('Parameter urlPath is not valid');
     }
     return this.page.goto(`${this.baseUrl}${urlPath}`, { waitUntil: 'load' });
   }
@@ -116,7 +119,7 @@ export default abstract class PageBase implements PageInterface {
    * @param {Locator} locator
    * @param {{waitForNav?: boolean, forceClick?: boolean}} opts
    *  <br> - forceClick: Whether to skip error message check before click. If set to true, click regardless any error on page. Defaults to false.
-   *  <br> - waitForNav: Whether to wait for page navigation to complete after click. Defaults to false.
+   *  <br> - waitForNav: Whether to wait for page navigation to start after click. Defaults to false.
    * @returns {Promise<void>}
    * @protected
    */
@@ -125,12 +128,14 @@ export default abstract class PageBase implements PageInterface {
     if (!forceClick && waitForNav) {
       await expect(this.page.locator('.error-message')).toBeHidden();
     }
-    waitForNav ? await this.waitForNavAfter(() => locator.click()) : await locator.click();
-  }
-
-  protected async waitForNavAfter(fn: () => Promise<void>): Promise<void> {
-    await Promise.all([this.page.waitForNavigation({ waitUntil: 'load' }), fn()]);
-    await waitForNoSpinner(this.page);
+    if (waitForNav) {
+      await Promise.all([
+        locator.click(),
+        this.page.waitForResponse(response => response.status() === 200)
+      ]);
+    } else {
+      await locator.click();
+    }
   }
 
   /**
@@ -166,14 +171,12 @@ export default abstract class PageBase implements PageInterface {
 
   /** Click "I am not ready to agree" button */
   async notReadyToAgree(): Promise<void> {
-    await this.clickAndWaitForNav(this.getIAmNotReadyToAgreeButton(), {
-      waitForNav: true
-    });
+    await this.clickAndWaitForNav(this.getIAmNotReadyToAgreeButton(), { waitForNav: true });
   }
 
   /** Click "Log Out" button */
   async logOut(): Promise<void> {
-    await Promise.all([this.page.waitForNavigation({ waitUntil: 'load' }), this.getLogOutButton().click()]);
+    await this.getLogOutButton().click();
   }
 
   /**
@@ -361,8 +364,12 @@ export default abstract class PageBase implements PageInterface {
    * <br> Question: How old are you?
    * <br> Type: Input
    */
-  age(): Input {
-    return new Input(this.page, { ddpTestID: 'answer:AGE' });
+  age(opts?: { testId: string}): Input {
+    if (!opts) {
+      return new Input(this.page, { label: 'Enter age' });
+    }
+    // 'answer:AGE'
+    return new Input(this.page, { ddpTestID: opts.testId });
   }
 
   /**
