@@ -22,20 +22,22 @@ export default class Radiobutton extends WidgetBase {
     }
   }
 
-  async check(label: string | RegExp): Promise<void> {
-    const isChecked = await this.isChecked(label);
+  async check(label: string | RegExp, opts?: { exact: boolean }): Promise<void> {
+    const isChecked = await this.isChecked(label, opts);
     if (!isChecked) {
-      await this.getRadiobuttonByLabel(label).click();
-      await expect(this.getRadiobuttonByLabel(label)).toHaveClass(/radio-checked/);
+      const radio = this.getRadiobuttonByLabel(label, opts);
+      await radio.click();
+      await expect(radio).toHaveClass(/radio-checked/);
     }
   }
 
-  private async isChecked(label: string | RegExp): Promise<boolean> {
-    const isChecked = (await this.getRadiobuttonByLabel(label).getAttribute('class'))?.includes('mat-radio-checked');
+  private async isChecked(label: string | RegExp, opts?: { exact: boolean }): Promise<boolean> {
+    const isChecked = (await this.getRadiobuttonByLabel(label, opts).getAttribute('class'))?.includes('mat-radio-checked');
     return isChecked ? isChecked : false;
   }
 
-  private getRadiobuttonByLabel(label: string | RegExp): Locator {
-    return this.toLocator().locator('mat-radio-button', { hasText: label });
+  private getRadiobuttonByLabel(label: string | RegExp, opts?: { exact: boolean }): Locator {
+    return this.toLocator().locator('mat-radio-button')
+      .filter({ has: this.page.getByRole('radio', { name: label, exact: opts?.exact }) });
   }
 }

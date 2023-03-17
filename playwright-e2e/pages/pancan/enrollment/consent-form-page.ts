@@ -12,7 +12,7 @@ export default class ConsentFormPage extends PancanPageBase {
   }
 
   async waitForReady(): Promise<void> {
-    await this.firstName().toLocator().waitFor({ state: 'visible' });
+    await this.signature().toLocator().waitFor({ state: 'visible' });
   }
 
   /**
@@ -48,33 +48,6 @@ export default class ConsentFormPage extends PancanPageBase {
 
   async agreeToStoreCancerSamples(answer = 'Yes'): Promise<void> {
     await this.cancerSamples().check(answer, { exactMatch: true });
-  }
-
-  /**
-   * Your Name (Study Participant):
-   */
-  /**
-   * <br> Question: First Name
-   * <br> Type: Input
-   */
-  firstName(): Input {
-    return new Input(this.page, { ddpTestID: PatientsData[this.typePatient].ddpTestID.firstName });
-  }
-
-  /**
-   * <br> Question: Last Name
-   * <br> Type: Input
-   */
-  lastName(): Input {
-    return new Input(this.page, { ddpTestID: PatientsData[this.typePatient].ddpTestID.lastName });
-  }
-
-  /**
-   * <br> Question: Your Signature (Full Name):
-   * <br> Type: Input
-   */
-  signature(): Input {
-    return new Input(this.page, { ddpTestID: PatientsData[this.typePatient].ddpTestID.signature });
   }
 
   /**
