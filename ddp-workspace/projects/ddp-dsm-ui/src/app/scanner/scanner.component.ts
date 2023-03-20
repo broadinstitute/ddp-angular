@@ -19,7 +19,7 @@ import {InputField} from './interfaces/input-field';
 import {Auth} from '../services/auth.service';
 import {Statics} from '../utils/statics';
 import {Scanner} from './interfaces/scanners';
-import {first} from 'rxjs/operators';
+import {first, map} from 'rxjs/operators';
 // changing
 @Component({
   selector: 'app-scanner',
@@ -82,7 +82,7 @@ export class ScannerComponent implements DoCheck, OnDestroy {
       .subscribe({
         next: (data: any[]) => {
           this.cdr.markForCheck();
-          if (data.some(d => d)) {
+          if (data.some(d => d?.hasOwnProperty('error'))) {
             this.removeSuccessfulScans(data);
             this.additionalMessage = 'Error - Failed to save all changes';
           } else {
@@ -169,7 +169,7 @@ export class ScannerComponent implements DoCheck, OnDestroy {
   }
 
   private removeSuccessfulScans(responseData: any[]): void {
-    responseData.forEach((data: any, index: number) => data &&
+    responseData.forEach((data: any, index: number) => data?.hasOwnProperty('error') &&
       this.scannerFields.at(index).setErrors({notFound: data?.error})
     );
     for (let i = this.scannerFields.length - 2; i >= 0; i--) {
