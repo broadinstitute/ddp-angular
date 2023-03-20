@@ -44,8 +44,7 @@ test.describe('Enroll myself as adult', () => {
     // On "Consent Form" page, Page 3 of 3.
     await assertActivityHeader(page, 'Your Consent Form');
     await assertActivityProgress(page, 'Page 3 of 3');
-    await consentForm.firstName().fill(user.patient.firstName);
-    await consentForm.lastName().fill(lastName);
+    await consentForm.fillInName(user.patient.firstName, lastName);
 
     await consentForm.fillInDateOfBirth(user.patient.birthDate.MM, user.patient.birthDate.DD, user.patient.birthDate.YYYY);
     await consentForm.toKnowSecondaryFinding().check('I want to know.');

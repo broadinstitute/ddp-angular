@@ -35,8 +35,7 @@ test.describe('Adult Enrollment', () => {
     // Tell Us About Yourself
     const countMeInPage = new CountMeInPage(page);
     await countMeInPage.waitForReady();
-    await countMeInPage.firstName().fill(user.patient.firstName);
-    await countMeInPage.lastName().fill(lastName);
+    await countMeInPage.fillInName(user.patient.firstName, lastName);
     await countMeInPage.diagnosedWithAngiosarcoma(DESCRIBE_SELF.HaveBeenDiagnosedWithAngiosarcoma);
     await countMeInPage.submit();
 
@@ -125,7 +124,7 @@ test.describe('Adult Enrollment', () => {
     await medicalReleaseForm.otherBiopsiesOrSurgeries().toInput('City').fill(user.secondDoctor.city);
     await medicalReleaseForm.otherBiopsiesOrSurgeries().toInput('State').fill(user.secondDoctor.state);
 
-    await medicalReleaseForm.acknowledge().check();
+    await medicalReleaseForm.agreeToAllowUsToContactPhysicians();
     await medicalReleaseForm.submit();
 
     // Dashboard verification
