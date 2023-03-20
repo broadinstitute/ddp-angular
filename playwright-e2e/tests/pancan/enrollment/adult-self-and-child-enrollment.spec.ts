@@ -10,8 +10,8 @@ import { generateUserName } from 'utils/faker-utils';
 import * as user from 'data/fake-user.json';
 import MedicalReleaseFormPage from 'pages/pancan/enrollment/medical-release-form-page';
 import { PatientsData } from 'pages/patient-type';
-import SurveyAboutCancerPage from 'pages/pancan/enrollment/survey-about-cancer-page';
-import SurveyAboutYouPage from 'pages/pancan/enrollment/survey-about-you.page';
+import SurveyAboutCancer from 'pages/pancan/enrollment/survey-about-cancer-page';
+import SurveyAboutYou from 'pages/survey-about-you';
 import DashboardPage from 'pages/pancan/dashboard-page';
 import HomePage from 'pages/pancan/home-page';
 
@@ -20,6 +20,18 @@ const { PANCAN_USER_EMAIL, PANCAN_USER_PASSWORD } = process.env;
 test.describe('Adult self-enroll & child (consent) enrollment', () => {
   // Randomize patient last name
   const lastName = generateUserName(user.adult.lastName);
+
+  async function fillInSurveyAboutYou(survey: SurveyAboutYou, opts: {
+    sex?: string; gender?: string; race?: string; howDidYouHearAboutProject?: string
+  } = {}): Promise<void> {
+    const { sex = 'Male', gender = 'Man', race = 'White', howDidYouHearAboutProject = 'Social media (Facebook, Twitter, Instagram, etc.)' } = opts;
+    await survey.sex().radioButton(sex, { exactMatch: true }).locator('label').click();
+    await survey.gender().toCheckbox(gender).check();
+    await survey.race().toCheckbox(race).check();
+    await survey.race().toCheckbox('English').check();
+    await survey.howDidYouHearAboutProject().check(howDidYouHearAboutProject);
+    await survey.howDidYouHearAboutProject().check('Facebook', { exactMatch: true });
+  }
 
   /**
    * Participant first go through adult self enrollment, then be taken to the dashboard to continue child’s enrollment
@@ -74,8 +86,7 @@ test.describe('Adult self-enroll & child (consent) enrollment', () => {
     await consentFormPage.agreeToBloodSamples();
     expect(await consentFormPage.cancerSamples().toLocator().screenshot()).toMatchSnapshot('agree-to-store-cancer-samples.png');
     await consentFormPage.agreeToStoreCancerSamples();
-    await consentFormPage.firstName().fill(user.adult.firstName);
-    await consentFormPage.lastName().fill(lastName);
+    await consentFormPage.fillInName(user.adult.firstName, lastName);
     await consentFormPage.fillInDateOfBirth(user.adult.birthDate.MM, user.adult.birthDate.DD, user.adult.birthDate.YYYY);
     await consentFormPage.signature().fill(`${user.adult.firstName} ${lastName}`);
     await expect(consentFormPage.getSubmitButton()).toBeEnabled();
@@ -98,10 +109,10 @@ test.describe('Adult self-enroll & child (consent) enrollment', () => {
 
     // Survey: About Cervical Cancer
     await assertActivityHeader(page, `Survey: About Your ${PatientsData.adult.cancerDiagnosed.typeCancer}`);
-    const surveyCervicalCancerPage = new SurveyAboutCancerPage(page);
+    const surveyCervicalCancerPage = new SurveyAboutCancer(page);
     await surveyCervicalCancerPage.waitForReady();
-    await surveyCervicalCancerPage.diagnosedDate('March', '2015');
-    await surveyCervicalCancerPage.fillCancerBodyPlaces('Appendix');
+    await surveyCervicalCancerPage.fillInDiagnosedDate('March', '2015');
+    await surveyCervicalCancerPage.initialBodyLocation().fill('Appendix');
     await surveyCervicalCancerPage.cancerFree().radioButton('Yes').locator('label').click();
     await surveyCervicalCancerPage.fillBodyPlacesEverHadCancer('Appendix');
     await surveyCervicalCancerPage.checkTreatmentsReceived('Radiation');
@@ -110,8 +121,8 @@ test.describe('Adult self-enroll & child (consent) enrollment', () => {
 
     // Survey: About you
     await assertActivityHeader(page, 'Survey: About You');
-    const surveyAboutYou = new SurveyAboutYouPage(page);
-    await surveyAboutYou.fillInSurveyAboutYou();
+    const surveyAboutYou = new SurveyAboutYou(page);
+    await fillInSurveyAboutYou(surveyAboutYou);
     await surveyAboutYou.submit();
 
     // Dashboard
@@ -165,8 +176,10 @@ test.describe('Adult self-enroll & child (consent) enrollment', () => {
     await assertActivityStep(page, '3');
     await childConsentFormPage.agreeToBloodSamples();
     await childConsentFormPage.agreeToStoreCancerSamples();
-    await childConsentFormPage.firstName().fill(user.secondChild.firstName);
-    await childConsentFormPage.lastName().fill(lastName);
+    await childConsentFormPage.fillInName(user.secondChild.firstName, lastName, {
+      firstNameTestId: 'answer:PARENTAL_CHILD_FIRSTNAME',
+      lastNameTestId: 'answer:PARENTAL_CHILD_LASTNAME'
+    });
     await childConsentFormPage.fillInDateOfBirth(user.secondChild.birthDate.MM, user.secondChild.birthDate.DD, user.secondChild.birthDate.YYYY);
     await childConsentFormPage.fillInParentData();
     await childConsentFormPage.fillInContactAddress({
@@ -184,10 +197,10 @@ test.describe('Adult self-enroll & child (consent) enrollment', () => {
 
     // Survey: About Your Child's Pancreatic cancer
     await assertActivityHeader(page, "Survey: About Your Child's Pancreatic cancer / Pancreatic ductal adenocarcinoma (PDAC)");
-    const surveyAboutCancerPage = new SurveyAboutCancerPage(page);
+    const surveyAboutCancerPage = new SurveyAboutCancer(page);
     await surveyAboutCancerPage.waitForReady();
-    await surveyAboutCancerPage.diagnosedDate('March', '2015');
-    await surveyAboutCancerPage.fillCancerBodyPlaces('Blood');
+    await surveyAboutCancerPage.fillInDiagnosedDate('March', '2015');
+    await surveyAboutCancerPage.initialBodyLocation().fill('Blood');
     await surveyAboutCancerPage.cancerFree().check('Yes');
     await surveyAboutCancerPage.fillBodyPlacesEverHadCancer('Blood');
     await surveyAboutCancerPage.checkTreatmentsReceived('Radiation');
@@ -197,7 +210,7 @@ test.describe('Adult self-enroll & child (consent) enrollment', () => {
     // Survey: About your child
     await assertActivityHeader(page, 'Survey: About Your Child');
     await surveyAboutYou.waitForReady();
-    await surveyAboutYou.fillInSurveyAboutYou({ gender: 'Boy' });
+    await fillInSurveyAboutYou(surveyAboutYou, { gender: 'Boy' });
     await surveyAboutYou.submit();
 
     // Two tables: one for enrolled adult and one for enrolled child
