@@ -77,7 +77,7 @@ export class ScannerComponent implements DoCheck, OnDestroy {
   public save(): void {
     this.additionalMessage = '';
     const filteredActiveScannerFieldsGroupsArray = this.filteredNonNullFieldsGroups;
-    this.shortIds = Array.apply(null, Array(this.scannerFields.length)).map(function () {});
+    this.shortIds = Array(...Array(this.scannerFields.length)).map(function() {});
     this.activeScanner.saveFn(filteredActiveScannerFieldsGroupsArray)
       .pipe(
         takeUntil(this.subscriptionSubject$)
@@ -181,7 +181,7 @@ export class ScannerComponent implements DoCheck, OnDestroy {
 
     responseData.forEach((data: any, index: number) =>
       {
-      data?.hasOwnProperty('shortId') && this.setShortId(index, data)
+      data?.hasOwnProperty('shortId') && this.setShortId(index, data);
       }
     );
 
