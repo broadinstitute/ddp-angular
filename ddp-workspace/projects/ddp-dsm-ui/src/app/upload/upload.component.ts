@@ -98,7 +98,8 @@ export class UploadComponent implements OnInit {
   }
 
   public get atLeastOneParticipantSelected(): boolean {
-    return this.duplicateParticipants.some((pt: UploadParticipant) => pt?.selected);
+    return (this.duplicateParticipants.some((pt: UploadParticipant) => pt?.selected) ||
+    this.specialKits.some((pt: UploadParticipant) => pt?.selected));
   }
 
   getPossibleKitType(): void {
