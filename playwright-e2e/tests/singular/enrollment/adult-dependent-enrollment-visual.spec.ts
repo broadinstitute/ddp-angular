@@ -72,10 +72,7 @@ test.describe('Adult Dependent visual tests', () => {
   });
 
   // eslint-disable-next-line max-len
-  test('should validate `Does your dependent have a cognitive impairment` question @visual @enrollment @singular', async ({
-    page,
-    homePage
-  }) => {
+  test('should validate `Does your dependent have a cognitive impairment` question @visual @enrollment @singular', async ({ page, homePage }) => {
     await homePage.signUp();
     await signUp(page);
     const enrollMyAdultDependentPage = await getEnrollMyAdultDependentPage(page);

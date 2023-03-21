@@ -1,41 +1,35 @@
 import { Locator, Page } from '@playwright/test';
-import WidgetBase from 'lib/widget/widget-base';
+import WidgetBase from 'lib/widget-base';
 
 /**
  * Works with "mat-select" and "select" web elements
  */
 export default class Select extends WidgetBase {
-  private readonly elementLocator: Locator;
-  private readonly rootLocator: Locator;
-
-  constructor(page: Page, opts: { label?: string; ddpTestID?: string; root?: Locator | string; exactMatch?: boolean }) {
-    super(page);
+  constructor(page: Page, opts: { label?: string | RegExp; ddpTestID?: string; root?: Locator | string; exactMatch?: boolean }) {
     const { label, ddpTestID, root, exactMatch = false } = opts;
+    super(page, { root: root ? root : 'mat-form-field', testId: ddpTestID });
 
-    /* prettier-ignore */
-    this.rootLocator = root
-        ? (typeof root === 'string'
-            ? this.page.locator(root)
-            : root)
-        : this.page.locator('mat-form-field');
-    /* prettier-ignore */
-    this.elementLocator = ddpTestID
-      ? this.rootLocator.locator(`mat-select[data-ddp-test="${ddpTestID}"], select[data-ddp-test="${ddpTestID}"]`)
-      : exactMatch
-        ? this.rootLocator.locator(
-            `xpath=.//select[.//text()[normalize-space()="${label}"]] | ` +
-            `.//mat-select[.//text()[normalize-space()="${label}"]] | ` +
-            `.//mat-select[@id=(//label[normalize-space(.)="${label}"]/@for)]`
-          )
-        : this.rootLocator.locator(
-            `xpath=.//select[.//text()[contains(normalize-space(),"${label}")]] | ` +
-            `.//mat-select[.//text()[contains(normalize-space(),"${label}")]] | ` +
-            `.//mat-select[@id=(//label[contains(normalize-space(.),"${label}")]/@for)]`
-          );
-  }
-
-  toLocator(): Locator {
-    return this.elementLocator;
+    if (!ddpTestID) {
+      if (label) {
+        if (typeof label === 'string') {
+          this.element = exactMatch
+            ? this.root.locator(
+              `xpath=.//select[.//text()[normalize-space()="${label}"]] | ` +
+              `.//mat-select[.//text()[normalize-space()="${label}"]] | ` +
+              `.//mat-select[@id=(//label[normalize-space(.)="${label}"]/@for)]`
+            )
+            : this.root.locator(
+              `xpath=.//select[.//text()[contains(normalize-space(),"${label}")]] | ` +
+              `.//mat-select[.//text()[contains(normalize-space(),"${label}")]] | ` +
+              `.//mat-select[@id=(//label[contains(normalize-space(.),"${label}")]/@for)]`
+            );
+        } else {
+          this.element = this.root.locator('select, mat-select').filter({ has: this.page.locator('label', { hasText: label }) });
+        }
+      } else {
+        this.element = this.root.locator('select, mat-select');
+      }
+    }
   }
 
   /**

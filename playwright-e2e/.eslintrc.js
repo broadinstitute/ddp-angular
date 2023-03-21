@@ -1,8 +1,8 @@
 module.exports = {
   root: true,
   parser: '@typescript-eslint/parser',
-  extends: ['eslint:recommended', 'plugin:@typescript-eslint/recommended', 'plugin:prettier/recommended'],
-  plugins: ['@typescript-eslint', 'import', 'prettier'],
+  extends: ['eslint:recommended', 'plugin:@typescript-eslint/recommended'],
+  plugins: ['@typescript-eslint', 'import'],
   parserOptions: {
     ecmaVersion: 'latest', // Allows for the parsing of modern ECMAScript features
     sourceType: 'module', // Allows for the use of imports
@@ -77,21 +77,12 @@ module.exports = {
 
     'import/first': 'warn',
     'import/no-anonymous-default-export': ['warn', { allowObject: true }],
-
     'no-debugger': 'warn',
 
-    /* Style */
-    'prettier/prettier': [
-      'warn',
-      {
-        singleQuote: true,
-        tabWidth: 2
-      }
-    ],
     '@typescript-eslint/no-non-null-assertion': 'off',
     'max-len': [
       'warn',
-      130,
+      150,
       {
         ignorePattern: '^import |^export\\{(.*?)\\}',
         ignoreComments: true,

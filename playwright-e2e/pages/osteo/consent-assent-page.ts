@@ -1,6 +1,6 @@
 import { expect, Locator, Page } from '@playwright/test';
 import { waitForNoSpinner } from 'utils/test-utils';
-import { OsteoPageBase } from './osteo-base-page';
+import { OsteoPageBase } from 'pages/osteo/osteo-page-base';
 
 export default class ConsentAssentPage extends OsteoPageBase {
   private readonly pageTitle: Locator;
@@ -29,12 +29,7 @@ export default class ConsentAssentPage extends OsteoPageBase {
     await this.page.waitForTimeout(1000);
   }
 
-  async fillInParentAndMinor(
-    minorFirstName: string,
-    minorLastName: string,
-    parentFirstName: string,
-    parentLastName: string
-  ): Promise<void> {
+  async fillInParentAndMinor(minorFirstName: string, minorLastName: string, parentFirstName: string, parentLastName: string): Promise<void> {
     await this.page.getByTestId('answer:CONSENT_ASSENT_CHILD_FIRSTNAME').fill(minorFirstName);
     await this.page.getByTestId('answer:CONSENT_ASSENT_CHILD_LASTNAME').fill(minorLastName);
 
