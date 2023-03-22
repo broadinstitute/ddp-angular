@@ -35,7 +35,7 @@ export class ScannerComponent implements DoCheck, OnDestroy {
   });
   public additionalMessage: string | undefined;
 
-  private shortIds = [];
+  public shortIds = [];
 
   private updatePreviousFieldValidations = false;
   private readonly subscriptionSubject$: Subject<void> = new Subject<void>();
