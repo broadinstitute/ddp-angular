@@ -1,18 +1,18 @@
-import {test} from "@playwright/test";
-import {WelcomePage} from "pages/dsm/welcome-page";
-import HomePage from "pages/dsm/home-page";
-import {Navigation} from "lib/component/dsm/navigation/navigation";
-import CohortTag from "lib/component/dsm/cohort-tag";
-import {Study} from "lib/component/dsm/navigation/enums/selectStudyNav.enum";
-import {login} from "authentication/auth-dsm";
-import KitsWithoutLabelPage from "pages/dsm/kitsWithoutLabel-page";
-import {SamplesNav} from "lib/component/dsm/navigation/enums/samplesNav";
-import {Kit} from "lib/component/dsm/kitType/kit-enum";
-import ParticipantListPage from "pages/dsm/participantList-page";
-import {StudyNav} from "lib/component/dsm/navigation/enums/studyNav.enum";
+import {test} from '@playwright/test';
+import {WelcomePage} from 'pages/dsm/welcome-page';
+import HomePage from 'pages/dsm/home-page';
+import {Navigation} from 'lib/component/dsm/navigation/navigation';
+import CohortTag from 'lib/component/dsm/cohort-tag';
+import {Study} from 'lib/component/dsm/navigation/enums/selectStudyNav.enum';
+import {login} from 'authentication/auth-dsm';
+import KitsWithoutLabelPage from 'pages/dsm/kitsWithoutLabel-page';
+import {SamplesNav} from 'lib/component/dsm/navigation/enums/samplesNav';
+import {Kit} from 'lib/component/dsm/kitType/kit-enum';
+import ParticipantListPage from 'pages/dsm/participantList-page';
+import {StudyNav} from 'lib/component/dsm/navigation/enums/studyNav.enum';
 import crypto from 'crypto';
-import InitialScanPage from "pages/dsm/initialScan-page";
-import FinalScanPage from "pages/dsm/finalScan-page";
+import InitialScanPage from 'pages/dsm/initialScan-page';
+import FinalScanPage from 'pages/dsm/finalScan-page';
 
 test.describe('Final Scan Test', () => {
   let welcomePage: WelcomePage;
@@ -69,5 +69,4 @@ test.describe('Final Scan Test', () => {
     await finalScanPage.fillInput('DSM Label', shippingId);
     await finalScanPage.save();
   })
-
 })

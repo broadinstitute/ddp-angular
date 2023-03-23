@@ -132,7 +132,8 @@ export class Search {
   }
 
   private radioBtnLocator(columnName: string, radioButtonName: string): Locator {
-    return this.page.locator(`${this.baseColumnXPath(columnName)}//mat-radio-group//mat-radio-button[label[.//*[text()[normalize-space()='${radioButtonName}']]]]`);
+    return this.page.locator(`${this.baseColumnXPath(columnName)}` +
+      `//mat-radio-group//mat-radio-button[label[.//*[text()[normalize-space()='${radioButtonName}']]]]`);
   }
 
   private textInputLocator(columnName: string): Locator {

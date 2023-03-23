@@ -1,5 +1,5 @@
-import {expect, Page} from "@playwright/test";
-import {waitForResponse} from "utils/test-utils";
+import {expect, Page} from '@playwright/test';
+import {waitForResponse} from 'utils/test-utils';
 
 type inputField = 'Kit Label' | 'DSM Label';
 
@@ -37,5 +37,4 @@ export default class FinalScanPage {
   private get saveButtonXPath(): string {
     return `//form/button[.//*[text()[normalize-space()='Save Scan Pairs']]]`;
   }
-
 }

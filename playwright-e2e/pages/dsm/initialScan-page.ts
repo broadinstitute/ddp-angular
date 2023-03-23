@@ -1,5 +1,5 @@
-import {expect, Page} from "@playwright/test";
-import {waitForResponse} from "utils/test-utils";
+import {expect, Page} from '@playwright/test';
+import {waitForResponse} from 'utils/test-utils';
 
 type inputField = 'Kit Label' | 'Short ID';
 

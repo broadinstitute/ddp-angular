@@ -1,9 +1,8 @@
-import {Locator, Page} from "@playwright/test";
+import {Locator, Page} from '@playwright/test';
 
 type shortOrShippingID = 'Short ID' | 'Shipping ID';
 
 export class KitsTable {
-
   constructor(private readonly page: Page) {}
 
   public async searchBy(searchBy: shortOrShippingID, value: string): Promise<void> {
@@ -29,7 +28,7 @@ export class KitsTable {
   }
 
   private searchByXPath(searchBy: shortOrShippingID): string {
-    return `(//table/thead/tr[2]/th)[count(//table/thead/tr[1]/th[.//*[text()[normalize-space()='${searchBy}']]]`+
+    return `(//table/thead/tr[2]/th)[count(//table/thead/tr[1]/th[.//*[text()[normalize-space()='${searchBy}']]]` +
       `/preceding-sibling::th)+1]/input`
   }
 

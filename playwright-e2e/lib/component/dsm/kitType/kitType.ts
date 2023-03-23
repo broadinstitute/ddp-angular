@@ -1,5 +1,5 @@
-import {Page} from "@playwright/test";
-import {Kit} from "./kit-enum";
+import {Page} from '@playwright/test';
+import {Kit} from './kit-enum';
 
 export class KitType {
   constructor(private readonly page: Page) {}

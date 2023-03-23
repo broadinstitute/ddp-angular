@@ -1,8 +1,8 @@
-import {expect, Page} from "@playwright/test";
-import {KitType} from "lib/component/dsm/kitType/kitType";
-import {Kit} from "lib/component/dsm/kitType/kit-enum";
-import {waitForNoSpinner} from "utils/test-utils";
-import {KitsTable} from "lib/component/dsm/tables/kitsTable";
+import {expect, Page} from '@playwright/test';
+import {KitType} from 'lib/component/dsm/kitType/kitType';
+import {Kit} from 'lib/component/dsm/kitType/kit-enum';
+import {waitForNoSpinner} from 'utils/test-utils';
+import {KitsTable} from 'lib/component/dsm/tables/kitsTable';
 
 
 export default class KitsWithoutLabelPage {
@@ -32,5 +32,4 @@ export default class KitsWithoutLabelPage {
   public async assertTitle() {
     await expect(this.page.locator('h1')).toHaveText(this.PAGE_TITLE);
   }
-
 }

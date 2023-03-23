@@ -22,12 +22,11 @@ export class CustomizeView {
     await this.closeColumnsGroup();
   }
 
-  private async select(columns: string[], deselect: boolean = false): Promise<void> {
-    for (const column of columns)
-      await this.selectOrDeselect(column, deselect);
+  private async select(columns: string[], deselect = false): Promise<void> {
+    for (const column of columns) { await this.selectOrDeselect(column, deselect); }
   }
 
-  private async selectOrDeselect(columnName: string, deselect: boolean = false): Promise<void> {
+  private async selectOrDeselect(columnName: string, deselect = false): Promise<void> {
     const columnXPath = this.columnsGroupXPath + this.columnPathXPath(columnName);
     const column = this.page.locator(columnXPath);
 

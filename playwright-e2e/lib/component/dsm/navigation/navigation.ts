@@ -5,10 +5,10 @@ import {MainMenu} from './enums/mainMenu.enum';
 import {StudyNav} from './enums/studyNav.enum';
 import {Study} from './enums/selectStudyNav.enum';
 import {NavigationItems} from './navigation-types';
-import {SamplesNav} from "./enums/samplesNav";
-import KitsWithoutLabelPage from "pages/dsm/kitsWithoutLabel-page";
-import InitialScanPage from "pages/dsm/initialScan-page";
-import FinalScanPage from "pages/dsm/finalScan-page";
+import {SamplesNav} from './enums/samplesNav';
+import KitsWithoutLabelPage from 'pages/dsm/kitsWithoutLabel-page';
+import InitialScanPage from 'pages/dsm/initialScan-page';
+import FinalScanPage from 'pages/dsm/finalScan-page';
 
 
 type Selection = StudyNav | Study | SamplesNav;
