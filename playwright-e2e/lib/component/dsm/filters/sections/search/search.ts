@@ -56,7 +56,7 @@ export class Search {
     textValue && !exactMatch && (await this.setExactMatch(columnName, true));
   }
 
-  public async radio(columnName: string, { radioButtonValue, additionalFilters}: Partial<RadioButtonConfig>): Promise<void> {
+  public async radioBtn(columnName: string, { radioButtonValue, additionalFilters}: Partial<RadioButtonConfig>): Promise<void> {
     await this.setAdditionalFilters(columnName, additionalFilters);
     radioButtonValue && (await this.radioBtnLocator(columnName, radioButtonValue).click());
   }

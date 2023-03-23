@@ -45,7 +45,7 @@ test.describe.only('Final Scan Test', () => {
     await customizeViewPanel.selectColumns('Sample Columns', ['Status']);
 
     await searchPanel.open();
-    await searchPanel.radio('Status', {radioButtonValue: 'Waiting on GP'});
+    await searchPanel.radioBtn('Status', {radioButtonValue: 'Waiting on GP'});
     await searchPanel.search();
     await participantListPage.waitForReady();
 
