@@ -1,9 +1,8 @@
-import { BrowserContext, Download, expect, Locator, Page } from '@playwright/test';
+import {BrowserContext, Download, expect, Locator, Page, Response} from '@playwright/test';
 import Input from 'lib/widget/input';
 import Checkbox from 'lib/widget/checkbox';
 import Select from 'lib/widget/select';
 import axios from 'axios';
-import {Response} from 'playwright-core';
 
 export interface WaitForResponse {
   uri: string;
