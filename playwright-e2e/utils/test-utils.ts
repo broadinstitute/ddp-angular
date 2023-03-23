@@ -17,7 +17,7 @@ export async function waitForNoSpinner(page: Page): Promise<void> {
   await page.locator('[data-icon="spinner"].fa-spin, mat-spinner[role="progressbar"]').waitFor({ state: 'hidden', timeout: 60 * 1000 });
 }
 
-export async function waitForResponseByURL(page: Page, { url, status, timeout }: WaitForResponseByURLConfig) {
+export async function waitForResponseByURL(page: Page, { url, status, timeout }: WaitForResponseByURLConfig): Promise<void> {
   await page.waitForResponse((resp) => resp.url().includes(url) && resp.status() === status, { timeout });
 }
 

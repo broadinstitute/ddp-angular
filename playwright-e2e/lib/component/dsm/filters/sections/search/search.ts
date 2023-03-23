@@ -1,5 +1,5 @@
 import { Locator, Page } from '@playwright/test';
-import { CheckboxConfig, DateConfig, TextConfig } from './search-types';
+import {CheckboxConfig, DateConfig, RadioButtonConfig, TextConfig} from './search-types';
 import { AdditionalFilter } from './search-enums';
 
 export class Search {
@@ -54,6 +54,11 @@ export class Search {
     textValue && (await this.textInputLocator(columnName).fill(textValue));
 
     textValue && !exactMatch && (await this.setExactMatch(columnName, true));
+  }
+
+  public async radio(columnName: string, { radioButtonValue, additionalFilters}: Partial<RadioButtonConfig>): Promise<void> {
+    await this.setAdditionalFilters(columnName, additionalFilters);
+    radioButtonValue && (await this.radioBtnLocator(columnName, radioButtonValue).click());
   }
 
   public async checkboxes(columnName: string, { checkboxValues, additionalFilters }: Partial<CheckboxConfig>): Promise<void> {
@@ -124,6 +129,10 @@ export class Search {
 
   private checkboxLocator(columnName: string, checkboxName: string): Locator {
     return this.page.locator(`${this.baseColumnXPath(columnName)}//mat-checkbox[label[.//*[text()[normalize-space()='${checkboxName}']]]]`);
+  }
+
+  private radioBtnLocator(columnName: string, radioButtonName: string): Locator {
+    return this.page.locator(`${this.baseColumnXPath(columnName)}//mat-radio-group//mat-radio-button[label[.//*[text()[normalize-space()='${radioButtonName}']]]]`);
   }
 
   private textInputLocator(columnName: string): Locator {

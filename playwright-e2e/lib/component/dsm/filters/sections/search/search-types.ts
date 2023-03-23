@@ -19,3 +19,8 @@ export interface CheckboxConfig {
   checkboxValues: string[] | null | undefined;
   additionalFilters: AdditionalFilters;
 }
+
+export interface RadioButtonConfig {
+  radioButtonValue: string | null | undefined;
+  additionalFilters: AdditionalFilters;
+}

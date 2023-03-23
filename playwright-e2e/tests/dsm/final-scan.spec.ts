@@ -1,0 +1,80 @@
+import {test} from "@playwright/test";
+import {WelcomePage} from "pages/dsm/welcome-page";
+import HomePage from "pages/dsm/home-page";
+import {Navigation} from "lib/component/dsm/navigation/navigation";
+import CohortTag from "lib/component/dsm/cohort-tag";
+import {Study} from "lib/component/dsm/navigation/enums/selectStudyNav.enum";
+import {login} from "authentication/auth-dsm";
+import KitsWithoutLabelPage from "../../pages/dsm/kitsWithoutLabel-page";
+import {SamplesNav} from "lib/component/dsm/navigation/enums/samplesNav";
+import {KitTypes} from "lib/component/dsm/kitType/kitType-enum";
+import ParticipantListPage from "../../pages/dsm/participantList-page";
+import {StudyNav} from "../../lib/component/dsm/navigation/enums/studyNav.enum";
+import crypto from 'crypto';
+import InitialScanPage from "../../pages/dsm/initialScan-page";
+import FinalScanPage from "../../pages/dsm/finalScan-page";
+
+test.describe.only('Final Scan Test', () => {
+  let welcomePage: WelcomePage;
+  let homePage: HomePage;
+  let navigation: Navigation;
+  let cohortTag: CohortTag;
+
+  test.beforeEach(async ({ page }) => {
+    await login(page);
+    welcomePage = new WelcomePage(page);
+    homePage = new HomePage(page);
+    navigation = new Navigation(page);
+    cohortTag = new CohortTag(page);
+  });
+
+  test.beforeEach(async ({ page }) => {
+    await welcomePage.selectStudy(Study.PANCAN);
+    await homePage.assertWelcomeTitle();
+    await homePage.assertSelectedStudyTitle(Study.PANCAN);
+  });
+
+  test('Should display success message under scan pairs', async ({page}) => {
+    const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(StudyNav.PARTICIPANT_LIST);
+    const participantListTable = participantListPage.participantListTable;
+    const customizeViewPanel = participantListPage.filters.customizeViewPanel;
+    const searchPanel = participantListPage.filters.searchPanel;
+
+    await customizeViewPanel.open();
+    await customizeViewPanel.deselectColumns('Participant Columns', ['Status']);
+    await customizeViewPanel.selectColumns('Sample Columns', ['Status']);
+
+    await searchPanel.open();
+    await searchPanel.radio('Status', {radioButtonValue: 'Waiting on GP'});
+    await searchPanel.search();
+    await participantListPage.waitForReady();
+
+    const participantShortId = await participantListTable.getParticipantDataAt(1, 'Short ID');
+    console.log(participantShortId, 'PT_ID')
+
+    const kitsWithoutLabelPage = await navigation.selectFromSamples<KitsWithoutLabelPage>(SamplesNav.KITS_WITHOUT_LABELS);
+    await kitsWithoutLabelPage.assertTitle();
+    await kitsWithoutLabelPage.selectKitType(KitTypes.SALIVA);
+    const shippingId = await kitsWithoutLabelPage.shippingId(participantShortId);
+    console.log(shippingId, 'SHIPPING_ID');
+
+    const initialScanPage = await navigation.selectFromSamples<InitialScanPage>(SamplesNav.INITIAL_SCAN);
+    await initialScanPage.assertTitle();
+    const kitLabel = crypto.randomBytes(14).toString('hex').slice(0, 14);
+    await initialScanPage.fillInput('Kit Label', kitLabel);
+    await initialScanPage.fillInput('Short ID', participantShortId);
+    await initialScanPage.save();
+
+    const finalScanPage = await navigation.selectFromSamples<FinalScanPage>(SamplesNav.FINAL_SCAN);
+    await finalScanPage.assertTitle();
+    await finalScanPage.fillInput('Kit Label', kitLabel);
+    await finalScanPage.fillInput('DSM Label', shippingId);
+    await finalScanPage.save();
+
+    // const ptData = await participantListTable.getParticipantDataBy('Short ID', 'PWUREH', 'Status');
+    // console.log(ptData.split('\n'), 'PT DATA') // should not be more than 2 length
+
+
+  })
+
+})

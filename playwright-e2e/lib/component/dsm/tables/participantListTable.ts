@@ -12,16 +12,15 @@ export class ParticipantListTable {
     return this._participantPage;
   }
 
-  public async openParticipantPageBy(columnName: string, columnValue: string, position = 0): Promise<ParticipantPage> {
-    await this.page.locator(this.getParticipantXPathBy(columnName, columnValue)).nth(position).click();
-    return this._participantPage;
+  public async getParticipantDataBy(columnName: string, columnValue: string, xColumnName: string): Promise<string> {
+    return await this.page.locator(this.participantDataByXPath(columnName, columnValue, xColumnName)).innerText();
   }
 
-  public async getParticipantDataAtBy(position: number, columnName: string): Promise<string> {
-    return await this.page.locator(this.getParticipantDataXPathAtBy(position, columnName)).innerText();
+  public async getParticipantDataAt(position: number, columnName: string): Promise<string> {
+    return await this.page.locator(this.getParticipantDataAtXPath(position, columnName)).innerText();
   }
 
-  public async selectParticipantAt(position: number): Promise<void> {
+  public async selectCheckboxForParticipantAt(position: number): Promise<void> {
     return await this.getParticipantAt(position).nth(0).locator('mat-checkbox').click();
   }
 
@@ -30,19 +29,19 @@ export class ParticipantListTable {
   }
 
   /* XPaths */
-  private getParticipantXPathBy(columnName: string, columnValue: string): string {
+  private participantDataByXPath(columnName: string, columnValue: string, xColumnName: string): string {
     return (
-      `//table/thead/th[text()[normalize-space()='${columnName}']]` +
-      `/ancestor::table/tbody//td[position()=${this.theadCount(columnName)}]` +
-      `[.//*[text()[normalize-space()='${columnValue}']]]/ancestor::tr`
-    );
+      `//table/tbody//td[position()=count(//table/thead/th[text()[normalize-space()='${xColumnName}']]/preceding-sibling::th)+1]` +
+      `[count(//table/tbody//td[position()=count(//table/thead/th[text()[normalize-space()='${columnName}']]` +
+      `/preceding-sibling::th)+1][.//*[text()[normalize-space()='${columnValue}']]]/ancestor::tr/preceding-sibling::tr) + 1]`
+    )
   }
 
-  private getParticipantDataXPathAtBy(position: number, columnName: string) {
+  private getParticipantDataAtXPath(position: number, columnName: string) {
     return `//table/tbody/tr[${position + 1}]//td[position()=${this.theadCount(columnName)}]`;
   }
 
   private theadCount(columnName: string): string {
-    return `count(//table/thead/` + `th[text()[normalize-space()='${columnName}']]/preceding-sibling::th)+1`;
+    return `count(//table/thead/th[text()[normalize-space()='${columnName}']]/preceding-sibling::th)+1`;
   }
 }

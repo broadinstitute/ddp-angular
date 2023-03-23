@@ -111,7 +111,7 @@ test.describe.parallel('Cohort tags', () => {
       await participantPage.assertParticipantNotesToBe(participantNoteValue);
 
       await participantPage.backToList();
-      await participantListTable.selectParticipantAt(0);
+      await participantListTable.selectCheckboxForParticipantAt(0);
       await participantListPage.addBulkCohortTags();
       await cohortTag.add(cohortTagValue3, false);
       await cohortTag.submitAndExit();

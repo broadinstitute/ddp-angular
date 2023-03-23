@@ -17,11 +17,27 @@ export class CustomizeView {
     await this.closeColumnsGroup();
   }
 
+  public async deselectColumns(columnsGroupName: string, columns: string[]): Promise<void> {
+    this.activeColumnsGroup = columnsGroupName;
+    await this.openColumnsGroup();
+    for (const column of columns) {
+      await this.deselectColumn(column);
+    }
+    await this.closeColumnsGroup();
+  }
+
   private async selectColumn(columnName: string): Promise<void> {
     const columnXPath = this.columnsGroupXPath + this.columnPathXPath(columnName);
     const column = this.page.locator(columnXPath);
 
     !(await this.isChecked(column)) && (await this.page.locator(columnXPath).click());
+  }
+
+  private async deselectColumn(columnName: string): Promise<void> {
+    const columnXPath = this.columnsGroupXPath + this.columnPathXPath(columnName);
+    const column = this.page.locator(columnXPath);
+
+    (await this.isChecked(column)) && (await this.page.locator(columnXPath).click());
   }
 
   private async openColumnsGroup(): Promise<void> {
