@@ -1,5 +1,5 @@
 import {expect, Page} from "@playwright/test";
-import {Response} from "playwright-core";
+import {waitForResponse} from "utils/test-utils";
 
 type inputField = 'Kit Label' | 'Short ID';
 
@@ -14,16 +14,16 @@ export default class InitialScanPage {
 
   public async save(): Promise<void> {
     await this.page.locator(this.saveButtonXPath).focus();
-    await this.page.locator(this.saveButtonXPath).click()
-    await this.page.waitForResponse(async (response: Response) => {
-      const responseBody = await response.json();
-      let isRequestFailed = false;
-      if(responseBody instanceof Array && responseBody.length) {
-        const [firstItem] = responseBody;
-        isRequestFailed = firstItem !== null;
-      }
-      return response.url().includes('initialScan') && response.ok() && !isRequestFailed;
-    }, {timeout: 10000});
+    await this.page.locator(this.saveButtonXPath).click();
+
+    const response = await waitForResponse(this.page, {uri: 'initialScan'});
+    const responseBody = await response.json();
+
+    const [firstItem] = responseBody.length && responseBody;
+    await expect(firstItem).toBeNull();
+
+    const message = await this.page.locator('h3').innerText();
+    await expect(message).toEqual('Data saved');
   }
 
   /* Assertions */

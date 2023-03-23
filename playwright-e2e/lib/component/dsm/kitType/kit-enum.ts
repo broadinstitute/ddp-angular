@@ -1,4 +1,4 @@
-export enum KitTypes {
+export enum Kit {
   SALIVA = 'SALIVA',
   BLOOD = 'BLOOD',
   STOOL = 'STOOL'

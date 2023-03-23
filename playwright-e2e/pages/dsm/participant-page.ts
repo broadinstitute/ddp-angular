@@ -1,5 +1,5 @@
 import { expect, Locator, Page } from '@playwright/test';
-import { waitForResponseByURL } from '../../utils/test-utils';
+import { waitForResponse } from 'utils/test-utils';
 
 export default class ParticipantPage {
   private readonly PAGE_TITLE: string = 'Participant Page';
@@ -10,7 +10,7 @@ export default class ParticipantPage {
     const textArea = await this.participantNotes;
     await textArea.fill(value);
     await textArea.blur();
-    await waitForResponseByURL(this.page, { url: '/ui/patch', status: 200 });
+    await waitForResponse(this.page, {uri: '/ui/patch'});
   }
 
   public async backToList(): Promise<void> {

@@ -7,10 +7,8 @@ import {Study} from './enums/selectStudyNav.enum';
 import {NavigationItems} from './navigation-types';
 import {SamplesNav} from "./enums/samplesNav";
 import KitsWithoutLabelPage from "pages/dsm/kitsWithoutLabel-page";
-import QueuePage from "pages/dsm/queue-page";
 import InitialScanPage from "pages/dsm/initialScan-page";
 import FinalScanPage from "pages/dsm/finalScan-page";
-import KitUploadPage from "pages/dsm/kitUpload-page";
 
 
 type Selection = StudyNav | Study | SamplesNav;
@@ -20,10 +18,8 @@ export class Navigation {
     study: new Map<string, object>([[StudyNav.PARTICIPANT_LIST, new ParticipantListPage(this.page)]]),
     samples: new Map<string, object>([
       [SamplesNav.KITS_WITHOUT_LABELS, new KitsWithoutLabelPage(this.page)],
-      [SamplesNav.QUEUE, new QueuePage(this.page)],
       [SamplesNav.INITIAL_SCAN, new InitialScanPage(this.page)],
       [SamplesNav.FINAL_SCAN, new FinalScanPage(this.page)],
-      [SamplesNav.KIT_UPLOAD, new KitUploadPage(this.page)]
     ])
   };
 

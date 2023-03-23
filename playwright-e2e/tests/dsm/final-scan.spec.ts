@@ -5,16 +5,16 @@ import {Navigation} from "lib/component/dsm/navigation/navigation";
 import CohortTag from "lib/component/dsm/cohort-tag";
 import {Study} from "lib/component/dsm/navigation/enums/selectStudyNav.enum";
 import {login} from "authentication/auth-dsm";
-import KitsWithoutLabelPage from "../../pages/dsm/kitsWithoutLabel-page";
+import KitsWithoutLabelPage from "pages/dsm/kitsWithoutLabel-page";
 import {SamplesNav} from "lib/component/dsm/navigation/enums/samplesNav";
-import {KitTypes} from "lib/component/dsm/kitType/kitType-enum";
-import ParticipantListPage from "../../pages/dsm/participantList-page";
-import {StudyNav} from "../../lib/component/dsm/navigation/enums/studyNav.enum";
+import {Kit} from "lib/component/dsm/kitType/kit-enum";
+import ParticipantListPage from "pages/dsm/participantList-page";
+import {StudyNav} from "lib/component/dsm/navigation/enums/studyNav.enum";
 import crypto from 'crypto';
-import InitialScanPage from "../../pages/dsm/initialScan-page";
-import FinalScanPage from "../../pages/dsm/finalScan-page";
+import InitialScanPage from "pages/dsm/initialScan-page";
+import FinalScanPage from "pages/dsm/finalScan-page";
 
-test.describe.only('Final Scan Test', () => {
+test.describe('Final Scan Test', () => {
   let welcomePage: WelcomePage;
   let homePage: HomePage;
   let navigation: Navigation;
@@ -50,13 +50,11 @@ test.describe.only('Final Scan Test', () => {
     await participantListPage.waitForReady();
 
     const participantShortId = await participantListTable.getParticipantDataAt(1, 'Short ID');
-    console.log(participantShortId, 'PT_ID')
 
     const kitsWithoutLabelPage = await navigation.selectFromSamples<KitsWithoutLabelPage>(SamplesNav.KITS_WITHOUT_LABELS);
     await kitsWithoutLabelPage.assertTitle();
-    await kitsWithoutLabelPage.selectKitType(KitTypes.SALIVA);
+    await kitsWithoutLabelPage.selectKitType(Kit.SALIVA);
     const shippingId = await kitsWithoutLabelPage.shippingId(participantShortId);
-    console.log(shippingId, 'SHIPPING_ID');
 
     const initialScanPage = await navigation.selectFromSamples<InitialScanPage>(SamplesNav.INITIAL_SCAN);
     await initialScanPage.assertTitle();
@@ -70,11 +68,6 @@ test.describe.only('Final Scan Test', () => {
     await finalScanPage.fillInput('Kit Label', kitLabel);
     await finalScanPage.fillInput('DSM Label', shippingId);
     await finalScanPage.save();
-
-    // const ptData = await participantListTable.getParticipantDataBy('Short ID', 'PWUREH', 'Status');
-    // console.log(ptData.split('\n'), 'PT DATA') // should not be more than 2 length
-
-
   })
 
 })

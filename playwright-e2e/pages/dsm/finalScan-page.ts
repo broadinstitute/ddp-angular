@@ -1,11 +1,7 @@
 import {expect, Page} from "@playwright/test";
-import {KitType} from "../../lib/component/dsm/kitType/kitType";
-import {KitTypes} from "../../lib/component/dsm/kitType/kitType-enum";
-import {waitForNoSpinner} from "../../utils/test-utils";
-import {Response} from "playwright-core";
+import {waitForResponse} from "utils/test-utils";
 
 type inputField = 'Kit Label' | 'DSM Label';
-
 
 export default class FinalScanPage {
   private readonly PAGE_TITLE = 'Final Scan';
@@ -18,14 +14,13 @@ export default class FinalScanPage {
 
   public async save(): Promise<void> {
     await this.page.locator(this.saveButtonXPath).focus();
-    await this.page.locator(this.saveButtonXPath).click()
-    await this.page.waitForResponse(async (response: Response) => {
-      const responseBody = await response.json();
-      let isRequestFailed = false;
-      console.log(responseBody)
-      //@TODO MAKE ASSERTIONS ABOUT FINAL SCAN PAGE
-      return response.url().includes('finalScan') && response.ok() && !isRequestFailed;
-    }, {timeout: 10000});
+    await this.page.locator(this.saveButtonXPath).click();
+
+    const response = await waitForResponse(this.page, {uri: 'finalScan'});
+    const responseBody = await response.json();
+
+    //@TODO MAKE ASSERTIONS ABOUT FINAL SCAN PAGE
+    console.log(responseBody, 'FINAL_SCAN_RESPONSE')
   }
 
 

@@ -1,4 +1,4 @@
-import {Page} from "@playwright/test";
+import {Locator, Page} from "@playwright/test";
 
 type shortOrShippingID = 'Short ID' | 'Shipping ID';
 
@@ -14,6 +14,10 @@ export class KitsTable {
     return this.page.locator(this.shippingIdByShortIdXPath(shortId)).innerText();
   }
 
+  public get rows(): Locator {
+    return this.page.locator(this.rowsXPath);
+  }
+
   /* XPaths */
   private shippingIdByShortIdXPath(shortId: string): string {
     return (
@@ -27,5 +31,9 @@ export class KitsTable {
   private searchByXPath(searchBy: shortOrShippingID): string {
     return `(//table/thead/tr[2]/th)[count(//table/thead/tr[1]/th[.//*[text()[normalize-space()='${searchBy}']]]`+
       `/preceding-sibling::th)+1]/input`
+  }
+
+  private get rowsXPath(): string {
+    return `//table/tbody/tr`;
   }
 }
