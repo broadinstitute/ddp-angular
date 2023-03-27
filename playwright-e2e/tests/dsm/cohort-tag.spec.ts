@@ -11,13 +11,6 @@ import { AdditionalFilter } from 'lib/component/dsm/filters/sections/search/sear
 import { WelcomePage } from 'pages/dsm/welcome-page';
 import { Study } from 'lib/component/dsm/navigation/enums/selectStudyNav.enum';
 
-/**
- * @TODO
- * 1. Reimplement cohort tag functionality
- * 2. Reimplement participant list functionalities
- * 3. refactor code
- * 4. have frequently used filters or other functions made simple
- */
 test.describe.parallel('Cohort tags', () => {
   let welcomePage: WelcomePage;
   let homePage: HomePage;
