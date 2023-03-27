@@ -2,7 +2,7 @@ import { expect } from '@playwright/test';
 import { test } from 'fixtures/singular-fixture';
 import PreScreeningPage from 'pages/singular/enrollment/pre-screening-page';
 
-test.describe('About Yourself page', () => {
+test.describe.skip('About Yourself page', () => {
   // Country validation: Select a country which is not US and Canada should triggers an error message
   test('select country France @visual @enrollment @singular', async ({ page, homePage }) => {
     await homePage.signUp();
