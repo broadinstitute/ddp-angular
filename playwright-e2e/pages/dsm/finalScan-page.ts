@@ -10,11 +10,10 @@ export default class FinalScanPage {
 
   public async fillScanPairs(fieldsInputs: string[]): Promise<void> {
     let extractValueIndex = -1;
-    for(let i = 0; i < fieldsInputs.length / 2; i++) {
-      for(let j = 0; j < 2; j++) {
-        if(extractValueIndex >= fieldsInputs.length - 1)
-          break;
-        let inputFieldToFill: inputField = !j ? 'Kit Label' : 'DSM Label' ;
+    for (let i = 0; i < fieldsInputs.length / 2; i++) {
+      for (let j = 0; j < 2; j++) {
+        if (extractValueIndex >= fieldsInputs.length - 1) { break; }
+        const inputFieldToFill: inputField = !j ? 'Kit Label' : 'DSM Label' ;
         const inputField = await this.page.locator(this.inputFieldXPath(inputFieldToFill)).nth(i);
         await inputField.fill(fieldsInputs[++extractValueIndex]);
         await inputField.blur();
