@@ -12,7 +12,7 @@ export class AuthGuard implements CanActivate {
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    if (localStorage.getItem(Auth.AUTH0_TOKEN_NAME) && localStorage.getItem(SessionService.DSM_TOKEN_NAME)) {
+    if (sessionStorage.getItem(Auth.AUTH0_TOKEN_NAME) && sessionStorage.getItem(SessionService.DSM_TOKEN_NAME)) {
       // logged in so return true
       return true;
     }
@@ -30,7 +30,7 @@ export class AuthGuard implements CanActivate {
         } else {
           link = {link: state.url};
         }
-        localStorage.setItem(Statics.PERMALINK, JSON.stringify(link));
+        sessionStorage.setItem(Statics.PERMALINK, JSON.stringify(link));
       }
     }
     return false;

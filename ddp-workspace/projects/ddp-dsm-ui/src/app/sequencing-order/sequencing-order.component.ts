@@ -41,7 +41,7 @@ export class SequencingOrderComponent {
       v = value;
     }
     if (v != null) {
-      const realm: string = localStorage.getItem( ComponentService.MENU_SELECTED_REALM );
+      const realm: string = sessionStorage.getItem( ComponentService.MENU_SELECTED_REALM );
       const patch1 = new PatchUtil(
         sample.dsmKitRequestId, this.role.userMail(),
         {
@@ -90,7 +90,7 @@ export class SequencingOrderComponent {
         orders.push( sample );
       }
     } );
-    const realm: string = localStorage.getItem( ComponentService.MENU_SELECTED_REALM );
+    const realm: string = sessionStorage.getItem( ComponentService.MENU_SELECTED_REALM );
     this.dsmService.placeSeqOrder( orders, realm, this.participant.data.profile[ 'guid' ] ).subscribe();
     this.closeModal();
   }

@@ -46,7 +46,7 @@ export class UserSettingComponent implements OnInit {
   ngOnInit(): void {
     this.additionalMessage = null;
     // TODO: check is it correct ? - are the commented lines needed ?
-    // if (localStorage.getItem(ComponentService.MENU_SELECTED_REALM) == null || localStorage.getItem(ComponentService.MENU_SELECTED_REALM)
+    // if (sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM) == null || sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM)
     // === undefined) { this.additionalMessage = "Please select a realm"; } else {
     this.checkRight();
     this.userSetting = this.role.getUserSetting();
@@ -65,7 +65,7 @@ export class UserSettingComponent implements OnInit {
       next: data => {
         jsonData = data;
         jsonData.forEach((val) => {
-          if (localStorage.getItem(ComponentService.MENU_SELECTED_REALM) === val) {
+          if (sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM) === val) {
             allowedToSeeInformation = true;
             this.getSavedFilters();
             this.realm = val;
@@ -74,7 +74,7 @@ export class UserSettingComponent implements OnInit {
             this.additionalMessage = null;
           }
         });
-        if (!allowedToSeeInformation && localStorage.getItem(ComponentService.MENU_SELECTED_REALM) != null) {
+        if (!allowedToSeeInformation && sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM) != null) {
           this.compService.customViews = null;
           this.errorMessage = 'You are not allowed to see information of the selected study at that category';
         }
@@ -122,7 +122,7 @@ export class UserSettingComponent implements OnInit {
     };
     const jsonString = JSON.stringify(json);
     this.saving = true;
-    this.dsmService.setDefaultFilter(jsonString, filterName, parent, localStorage.getItem(ComponentService.MENU_SELECTED_REALM))
+    this.dsmService.setDefaultFilter(jsonString, filterName, parent, sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM))
       .subscribe({
         next: () => {
           this.additionalMessage = '';
@@ -148,7 +148,7 @@ export class UserSettingComponent implements OnInit {
   }
 
   getSavedFilters(): void {
-    this.dsmService.getFiltersForUserForRealm(localStorage.getItem(ComponentService.MENU_SELECTED_REALM), null)
+    this.dsmService.getFiltersForUserForRealm(sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM), null)
       .subscribe({
         next: jsonData => {
           this.tissueListFilterNames = [];

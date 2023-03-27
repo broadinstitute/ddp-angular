@@ -15,7 +15,7 @@ export class CheckAuthGuard implements CanLoad {
   }
 
   canLoad(route: Route, segments: UrlSegment[]): boolean | UrlTree {
-    const selectedRealm = localStorage.getItem(ComponentService.MENU_SELECTED_REALM);
+    const selectedRealm = sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM);
 
     if (!this.auth.authenticated() && !selectedRealm) {
       return true;

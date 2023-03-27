@@ -83,8 +83,8 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (localStorage.getItem(ComponentService.MENU_SELECTED_REALM) == null
-      || localStorage.getItem(ComponentService.MENU_SELECTED_REALM) === undefined
+    if (sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM) == null
+      || sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM) === undefined
     ) {
       this.additionalMessage = 'Please select a study';
     } else {
@@ -95,7 +95,7 @@ export class DashboardComponent implements OnInit {
   }
 
   private loadDDPData(startDate: string, endDate: string, version: string): void {
-    if (localStorage.getItem(ComponentService.MENU_SELECTED_REALM) != null) {
+    if (sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM) != null) {
       this.allowedToSeeInformation = false;
       this.loadingDDPData = true;
       if (version === Statics.MEDICALRECORD_DASHBOARD) {
@@ -105,9 +105,9 @@ export class DashboardComponent implements OnInit {
             this.ddp = null;
             jsonData = data;
             jsonData.forEach((val) => {
-              if (localStorage.getItem(ComponentService.MENU_SELECTED_REALM) === val) {
+              if (sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM) === val) {
                 this.allowedToSeeInformation = true;
-                this.dsmService.getMedicalRecordDashboard(localStorage.getItem(ComponentService.MENU_SELECTED_REALM), startDate, endDate)
+                this.dsmService.getMedicalRecordDashboard(sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM), startDate, endDate)
                   .subscribe({
                     next: dataInfo => {
                       const result = Result.parse(dataInfo);
@@ -147,9 +147,9 @@ export class DashboardComponent implements OnInit {
           next: data => {
             jsonData = data;
             jsonData.forEach((val) => {
-              if (localStorage.getItem(ComponentService.MENU_SELECTED_REALM) === val) {
+              if (sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM) === val) {
                 this.allowedToSeeInformation = true;
-                this.dsmService.getShippingDashboard(localStorage.getItem(ComponentService.MENU_SELECTED_REALM))
+                this.dsmService.getShippingDashboard(sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM))
                   .subscribe({
                     next: ddpData => {
                       this.ddp = DDPInformation.parse(ddpData);
@@ -214,7 +214,7 @@ export class DashboardComponent implements OnInit {
   }
 
   loadDDPSummary(): void {
-    if (localStorage.getItem(ComponentService.MENU_SELECTED_REALM) != null) {
+    if (sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM) != null) {
       const start = new Date();
       start.setDate(start.getDate() - 7);
       this.startDate = Utils.getFormattedDate(start);
@@ -385,7 +385,7 @@ export class DashboardComponent implements OnInit {
 
   loadSettings(): void {
     let jsonData: any;
-    this.dsmService.getSettings(localStorage.getItem(ComponentService.MENU_SELECTED_REALM), 'participantList').subscribe({
+    this.dsmService.getSettings(sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM), 'participantList').subscribe({
       next: data => {
         this.activityDefinitionList = [];
         jsonData = data;
@@ -484,7 +484,7 @@ export class DashboardComponent implements OnInit {
   }
 
   getParticipantData(): void {
-    this.dsmService.applyFilter(null, localStorage.getItem(ComponentService.MENU_SELECTED_REALM), 'participantList', null)
+    this.dsmService.applyFilter(null, sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM), 'participantList', null)
       .subscribe({
         next: data => {
           this.participantList = [];

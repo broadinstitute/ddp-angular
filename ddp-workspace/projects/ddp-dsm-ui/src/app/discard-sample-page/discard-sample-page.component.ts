@@ -57,8 +57,8 @@ export class DiscardSamplePageComponent implements OnInit, OnDestroy {
     if (this.compService.discardSample != null) {
       this.sample = this.compService.discardSample;
     }
-    if (localStorage.getItem(ComponentService.MENU_SELECTED_REALM) != null) {
-      this.realm = localStorage.getItem(ComponentService.MENU_SELECTED_REALM);
+    if (sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM) != null) {
+      this.realm = sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM);
     } else {
       this.errorMessage = 'Error - Information is missing';
     }

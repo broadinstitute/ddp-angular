@@ -93,7 +93,7 @@ export class DSMService {
 
   private baseKitScan(url: string, json: string): Observable<any> {
     const map: { name: string; value: any }[] = [];
-    map.push({ name: DSMService.REALM, value: localStorage.getItem(ComponentService.MENU_SELECTED_REALM) });
+    map.push({ name: DSMService.REALM, value: sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM) });
     map.push({ name: 'userId', value: this.role.userID() });
     return this.http.post(url, json, this.buildQueryHeader(map)).pipe(
       catchError(this.handleError.bind(this))
@@ -103,7 +103,7 @@ export class DSMService {
   public setKitReceivedRequest(json: string): Observable<any> {
     const url = this.baseUrl + DSMService.UI + 'receivedKits';
     const map: { name: string; value: any }[] = [];
-    map.push( {name: DSMService.REALM, value: localStorage.getItem(ComponentService.MENU_SELECTED_REALM)} );
+    map.push( {name: DSMService.REALM, value: sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM)} );
     map.push({name: 'userId', value: this.role.userID()});
     return this.http.post(url, json, this.buildQueryHeader(map)).pipe(
       catchError(this.handleError.bind(this))
@@ -128,7 +128,7 @@ export class DSMService {
     const url = this.baseUrl + DSMService.UI + 'sentKits';
     const map: { name: string; value: any }[] = [];
     map.push({name: 'userId', value: this.role.userID()});
-    map.push( {name: DSMService.REALM, value: localStorage.getItem(ComponentService.MENU_SELECTED_REALM)} );
+    map.push( {name: DSMService.REALM, value: sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM)} );
     return this.http.post(url, json, this.buildQueryHeader(map)).pipe(
       catchError(this.handleError.bind(this))
     );
@@ -209,7 +209,7 @@ export class DSMService {
     );
   }
 
-  public applyFilter(json: ViewFilter = null, realm: string = localStorage.getItem(ComponentService.MENU_SELECTED_REALM), parent: string,
+  public applyFilter(json: ViewFilter = null, realm: string = sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM), parent: string,
                      filterQuery: string = null, from: number = 0, to: number = this.role.getUserSetting().getRowsPerPage(), sortBy?: Sort
   ): Observable<any> {
     // console.log(json, realm,parent, filterQuery, from, to, 'testing to see')
@@ -305,7 +305,7 @@ export class DSMService {
     );
   }
 
-  public getSettings(realm: string = localStorage.getItem(ComponentService.MENU_SELECTED_REALM), parent: string): Observable<any> {
+  public getSettings(realm: string = sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM), parent: string): Observable<any> {
     const url = this.baseUrl + DSMService.UI + 'displaySettings/' + realm;
     const map: { name: string; value: any }[] = [];
     map.push({name: 'userId', value: this.role.userID()});
@@ -717,7 +717,7 @@ export class DSMService {
   public singleKitLabel(kitJson: string): Observable<any> {
     const url = this.baseUrl + DSMService.UI + 'kitLabel';
     const map: { name: string; value: any }[] = [];
-    map.push( {name: DSMService.REALM, value: localStorage.getItem(ComponentService.MENU_SELECTED_REALM)} );
+    map.push( {name: DSMService.REALM, value: sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM)} );
     map.push({name: 'userId', value: this.role.userID()});
     return this.http.post(url, kitJson, this.buildQueryHeader(map)).pipe(
       catchError(this.handleError)

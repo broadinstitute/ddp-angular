@@ -15,6 +15,6 @@ export class ComponentService {
   fieldSettings: Map<string, Array<FieldSettings>>;
 
   public getRealm(): string {
-    return localStorage.getItem(ComponentService.MENU_SELECTED_REALM);
+    return sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM);
   }
 }

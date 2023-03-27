@@ -14,7 +14,7 @@ export class SessionService {
   }
 
   public setDSMToken(token: string): void {
-    localStorage.setItem(SessionService.DSM_TOKEN_NAME, token);
+    sessionStorage.setItem(SessionService.DSM_TOKEN_NAME, token);
     this.isLoggedIn = true;
     this.setExpirationTime(token);
   }
@@ -24,7 +24,7 @@ export class SessionService {
   }
 
   public getDSMToken(): string {
-    return localStorage.getItem(SessionService.DSM_TOKEN_NAME);
+    return sessionStorage.getItem(SessionService.DSM_TOKEN_NAME);
   }
 
   public getAuthBearerHeaderValue(): string {

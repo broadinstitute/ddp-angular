@@ -8,13 +8,13 @@ import {BehaviorSubject, Observable} from 'rxjs';
 
 export class LocalStorageService {
 
-  private observeStudyChange = new BehaviorSubject<string>(localStorage.getItem(ComponentService.MENU_SELECTED_REALM));
+  private observeStudyChange = new BehaviorSubject<string>(sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM));
 
   public clear(): void {
-    localStorage.removeItem('auth_token');
-    localStorage.removeItem(SessionService.DSM_TOKEN_NAME);
-    localStorage.removeItem(Statics.PERMALINK);
-    localStorage.removeItem(ComponentService.MENU_SELECTED_REALM);
+    sessionStorage.removeItem('auth_token');
+    sessionStorage.removeItem(SessionService.DSM_TOKEN_NAME);
+    sessionStorage.removeItem(Statics.PERMALINK);
+    sessionStorage.removeItem(ComponentService.MENU_SELECTED_REALM);
   }
 
   public emitStudyChange(study: string): void {
@@ -26,7 +26,7 @@ export class LocalStorageService {
   }
 
   get selectedRealm(): string {
-    return localStorage.getItem(ComponentService.MENU_SELECTED_REALM);
+    return sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM);
   }
 
 

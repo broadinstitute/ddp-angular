@@ -49,7 +49,7 @@ export class PermalinkComponent implements OnInit {
     this.participant = null;
     this.medicalRecord = null;
     if (medicalRecordId != null && medicalRecordId !== '' && participantId != null && participantId !== '') {
-      this.dsmService.getParticipant(participantId, localStorage.getItem(ComponentService.MENU_SELECTED_REALM)).subscribe({
+      this.dsmService.getParticipant(participantId, sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM)).subscribe({
         next: data => {
           // console.info(`participant data received: ${JSON.stringify(data, null, 2)}`);
           this.participant = Participant.parse(data);

@@ -157,7 +157,7 @@ export class ParticipantListComponent implements OnInit {
 
   ngOnInit(): void {
     this.additionalMessage = null;
-    if (localStorage.getItem(ComponentService.MENU_SELECTED_REALM) == null) {
+    if (sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM) == null) {
       this.additionalMessage = 'Please select a study';
     } else {
       this.checkRight();
@@ -179,7 +179,7 @@ export class ParticipantListComponent implements OnInit {
       this.applyFilter(this.buildTemporaryViewFilter(), from, to);
     } else {
       if (this.jsonPatch) {
-        this.dsmService.filterData(localStorage.getItem(
+        this.dsmService.filterData(sessionStorage.getItem(
           ComponentService.MENU_SELECTED_REALM), this.jsonPatch, this.parent, null, from, to, this.sortBy
         )
           .subscribe({
@@ -196,7 +196,7 @@ export class ParticipantListComponent implements OnInit {
           });
       } else {
         this.dsmService.filterData(
-          localStorage.getItem(ComponentService.MENU_SELECTED_REALM), null, this.parent, true, from, to, this.sortBy
+          sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM), null, this.parent, true, from, to, this.sortBy
           )
           .subscribe({
             next: data => {
@@ -249,7 +249,7 @@ export class ParticipantListComponent implements OnInit {
   private checkRight(): void {
     // assumption for now: profile parameters are always the same, only survey will be dynamic per ddp
     this.start = new Date().getTime();
-    this.loadingParticipants = localStorage.getItem(ComponentService.MENU_SELECTED_REALM);
+    this.loadingParticipants = sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM);
     this.setSelectedFilterName('');
     this.currentFilter = null;
     this.filterQuery = null;
@@ -261,7 +261,7 @@ export class ParticipantListComponent implements OnInit {
       next: data => {
         jsonData = data;
         jsonData.forEach((val) => {
-          if (localStorage.getItem(ComponentService.MENU_SELECTED_REALM) === val) {
+          if (sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM) === val) {
             allowedToSeeInformation = true;
             this.loadSettings();
           }
@@ -282,7 +282,7 @@ export class ParticipantListComponent implements OnInit {
   loadSettings(): void {
     this.rowsPerPage = this.role?.getUserSetting()?.getRowsPerPage();
     let jsonData: any;
-    this.dsmService.getSettings(localStorage.getItem(ComponentService.MENU_SELECTED_REALM), this.parent).subscribe({
+    this.dsmService.getSettings(sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM), this.parent).subscribe({
       next: data => {
         this.assignees = [];
         this.drugs = [];
@@ -913,8 +913,8 @@ export class ParticipantListComponent implements OnInit {
       ) {
         // eslint-disable-next-line max-len
         this.additionalMessage = 'The default filter seems to be deleted, however it is still the default filter as long as not changed in the user settings.';
-        this.loadingParticipants = localStorage.getItem(ComponentService.MENU_SELECTED_REALM);
-        this.dsmService.filterData(localStorage.getItem(ComponentService.MENU_SELECTED_REALM), null, this.parent, true).subscribe({
+        this.loadingParticipants = sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM);
+        this.dsmService.filterData(sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM), null, this.parent, true).subscribe({
           next: data => {
             if (data != null) {
               this.additionalMessage = '';
@@ -978,7 +978,7 @@ export class ParticipantListComponent implements OnInit {
   public selectFilter(viewFilter: ViewFilter): void {
     this.resetPagination();
     this.resetSelectedPatients();
-    this.loadingParticipants = localStorage.getItem(ComponentService.MENU_SELECTED_REALM);
+    this.loadingParticipants = sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM);
     this.currentView = JSON.stringify(viewFilter);
     if (viewFilter != null) {
       this.filtered = true;
@@ -994,7 +994,7 @@ export class ParticipantListComponent implements OnInit {
   }
 
   private applyFilter(viewFilter: ViewFilter, from: number = 0, to: number = this.role?.getUserSetting()?.getRowsPerPage()): void {
-    this.dsmService.applyFilter(viewFilter, localStorage.getItem(ComponentService.MENU_SELECTED_REALM),
+    this.dsmService.applyFilter(viewFilter, sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM),
       this.parent, null, from, to, this.sortBy)
       .subscribe({
         next: data => {
@@ -1072,7 +1072,7 @@ export class ParticipantListComponent implements OnInit {
               }
             } else {
               // if selected columns are not set, set to default columns
-              const selectedStudy = localStorage.getItem(ComponentService.MENU_SELECTED_REALM);
+              const selectedStudy = sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM);
               if ((this.selectedColumns['data'] && this.selectedColumns['data'].length === 0)
                 || (!this.selectedColumns['data'] && this.isSelectedColumnsNotEmpty())) {
                 if(selectedStudy !== 'RGP') {
@@ -1117,7 +1117,7 @@ export class ParticipantListComponent implements OnInit {
   }
 
   getFilters(): void {
-    this.dsmService.getFiltersForUserForRealm(localStorage.getItem(ComponentService.MENU_SELECTED_REALM), this.parent).subscribe({
+    this.dsmService.getFiltersForUserForRealm(sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM), this.parent).subscribe({
       next: jsonData => {
         this.savedFilters = [];
         jsonData.forEach((val) => {
@@ -1191,7 +1191,7 @@ export class ParticipantListComponent implements OnInit {
     this.clearAllFilters();
     this.getData();
     this.setDefaultColumns();
-    const selectedStudy = localStorage.getItem(ComponentService.MENU_SELECTED_REALM);
+    const selectedStudy = sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM);
     if(selectedStudy === 'RGP') {
       this.searchForRGP = true;
     }
@@ -1370,9 +1370,9 @@ export class ParticipantListComponent implements OnInit {
         this.selectedActivity = selectedActivity;
       }
       if (this.filtered && participant.participant != null && participant.participant.ddpParticipantId != null) {
-        this.loadingParticipants = localStorage.getItem(ComponentService.MENU_SELECTED_REALM);
+        this.loadingParticipants = sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM);
         this.dsmService.getParticipantData(
-            localStorage.getItem(ComponentService.MENU_SELECTED_REALM),
+            sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM),
             participant.participant.ddpParticipantId,
             this.parent
           )
@@ -1418,7 +1418,7 @@ export class ParticipantListComponent implements OnInit {
   }
 
   getRealm(): string {
-    return localStorage.getItem(ComponentService.MENU_SELECTED_REALM);
+    return sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM);
   }
 
   getFilterButtonColorStyle(isOpened: boolean): string {
@@ -1456,8 +1456,8 @@ export class ParticipantListComponent implements OnInit {
       this.currentView = jsonPatch;
       this.jsonPatch = jsonPatch;
       this.filtered = true;
-      this.loadingParticipants = localStorage.getItem(ComponentService.MENU_SELECTED_REALM);
-      this.dsmService.filterData(localStorage.getItem(ComponentService.MENU_SELECTED_REALM), jsonPatch, this.parent, null)
+      this.loadingParticipants = sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM);
+      this.dsmService.filterData(sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM), jsonPatch, this.parent, null)
         .subscribe({
           next: data => {
             if (data != null && data !== '') {
@@ -1498,7 +1498,7 @@ export class ParticipantListComponent implements OnInit {
       this.deselectQuickFilters();
       // TODO - can be changed later to all using the same - after all studies are migrated!
       // check if it was a tableAlias data filter -> filter client side
-      const selectedStudy = localStorage.getItem(ComponentService.MENU_SELECTED_REALM);
+      const selectedStudy = sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM);
       if(selectedStudy === 'RGP') {
         this.searchForRGP = true;
       }
@@ -1611,7 +1611,7 @@ export class ParticipantListComponent implements OnInit {
   public shareFilter(savedFilter: ViewFilter, i): void {
     const value = savedFilter.shared ? '0' : '1';
     const patch1 = new PatchUtil(savedFilter.id, this.role.userMail(),
-      {name: 'shared', value}, null, this.parent, null, null, null, localStorage.getItem(ComponentService.MENU_SELECTED_REALM), null);
+      {name: 'shared', value}, null, this.parent, null, null, null, sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM), null);
     const patch = patch1.getPatch();
     this.dsmService.patchParticipantRecord(JSON.stringify(patch)).subscribe({
       next: data => {
@@ -1627,7 +1627,7 @@ export class ParticipantListComponent implements OnInit {
     const patch1 = new PatchUtil(
       savedFilter.id, this.role.userMail(),
       {name: 'fDeleted', value: '1'}, null, this.parent, null, null, null,
-      localStorage.getItem(ComponentService.MENU_SELECTED_REALM), null
+      sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM), null
     );
     const patch = patch1.getPatch();
     this.dsmService.patchParticipantRecord(JSON.stringify(patch)).subscribe({
@@ -1675,7 +1675,7 @@ export class ParticipantListComponent implements OnInit {
     };
     const jsonPatch = JSON.stringify(jsonData);
     this.currentView = jsonPatch;
-    this.dsmService.saveCurrentFilter(jsonPatch, localStorage.getItem(ComponentService.MENU_SELECTED_REALM), this.parent).subscribe({
+    this.dsmService.saveCurrentFilter(jsonPatch, sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM), this.parent).subscribe({
       next: data => {
         const result = Result.parse(data);
         if (result.code === 500 && result.body != null) {
@@ -1836,7 +1836,7 @@ export class ParticipantListComponent implements OnInit {
       }
     }
     this.dsmService.downloadParticipantData(
-      localStorage.getItem(ComponentService.MENU_SELECTED_REALM),
+      sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM),
       this.jsonPatch,
       this.parent,
       columns,
@@ -1940,7 +1940,7 @@ export class ParticipantListComponent implements OnInit {
       }
       this.deselect();
       this.dsmService.assignParticipant(
-          localStorage.getItem(ComponentService.MENU_SELECTED_REALM),
+          sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM),
           this.assignMR, this.assignTissue, JSON.stringify(assignParticipants)
         )
         .subscribe({ // need to subscribe, otherwise it will not send!
@@ -2012,8 +2012,8 @@ export class ParticipantListComponent implements OnInit {
     });
     this.filtered = queryText != null;
     this.jsonPatch = jsonPatch;
-    this.loadingParticipants = localStorage.getItem(ComponentService.MENU_SELECTED_REALM);
-    this.dsmService.filterData(localStorage.getItem(ComponentService.MENU_SELECTED_REALM), jsonPatch, this.parent, null)
+    this.loadingParticipants = sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM);
+    this.dsmService.filterData(sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM), jsonPatch, this.parent, null)
       .subscribe({
         next: data => {
           this.participantList = [];

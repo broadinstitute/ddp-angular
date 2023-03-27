@@ -124,7 +124,7 @@ export class ShippingComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (localStorage.getItem(ComponentService.MENU_SELECTED_REALM) != null) {
+    if (sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM) != null) {
       this.checkRight();
     } else {
       this.additionalMessage = 'Please select a study';
@@ -145,7 +145,7 @@ export class ShippingComponent implements OnInit {
       next: data => {
         jsonData = data;
         jsonData.forEach((val) => {
-          if (localStorage.getItem(ComponentService.MENU_SELECTED_REALM) === val) {
+          if (sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM) === val) {
             this.allowedToSeeInformation = true;
             this.getPossibleKitType();
           }
@@ -215,11 +215,11 @@ export class ShippingComponent implements OnInit {
     this.kitRequests = [];
     let jsonData: any[];
 
-    if (localStorage.getItem(ComponentService.MENU_SELECTED_REALM) != null &&
-      localStorage.getItem(ComponentService.MENU_SELECTED_REALM) !== ''
+    if (sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM) != null &&
+      sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM) !== ''
     ) {
       this.loading = true;
-      this.dsmService.getKitTypes(localStorage.getItem(ComponentService.MENU_SELECTED_REALM)).subscribe({
+      this.dsmService.getKitTypes(sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM)).subscribe({
         next: data => {
           this.kitTypes = [];
           jsonData = data;
@@ -269,18 +269,18 @@ export class ShippingComponent implements OnInit {
     this.needsNameLabels = false;
     this.kitsWithNoReturn = false;
     this.isClinicalStudy = false;
-    if(localStorage.getItem(ComponentService.MENU_SELECTED_REALM) === 'osteo2'
-      || localStorage.getItem(ComponentService.MENU_SELECTED_REALM) === 'cmi-lms') {
+    if(sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM) === 'osteo2'
+      || sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM) === 'cmi-lms') {
       this.isClinicalStudy = true;
     }
     this.loading = true;
 
     let jsonData: any[];
-    if (localStorage.getItem(ComponentService.MENU_SELECTED_REALM) != null &&
-      localStorage.getItem(ComponentService.MENU_SELECTED_REALM) !== ''
+    if (sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM) != null &&
+      sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM) !== ''
     ) {
       this.disableCheckboxes = true;
-      this.dsmService.getKitRequests(localStorage.getItem(ComponentService.MENU_SELECTED_REALM), this.shippingPage, kitType.name)
+      this.dsmService.getKitRequests(sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM), this.shippingPage, kitType.name)
         .pipe(finalize(() => this.disableCheckboxes = false))
         .subscribe({
           next: data => {
@@ -541,7 +541,7 @@ export class ShippingComponent implements OnInit {
     Utils.createCSV(
       fields,
       map,
-      localStorage.getItem(ComponentService.MENU_SELECTED_REALM) + ' Kits ' + this.kitType.name + ' '
+      sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM) + ' Kits ' + this.kitType.name + ' '
       + Utils.getDateFormatted(date, Utils.DATE_STRING_CVS) + Statics.CSV_FILE_EXTENSION
     );
   }
@@ -791,7 +791,7 @@ export class ShippingComponent implements OnInit {
   }
 
   realm(): string {
-    return localStorage.getItem(ComponentService.MENU_SELECTED_REALM);
+    return sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM);
   }
 
   getUtil(): Utils {

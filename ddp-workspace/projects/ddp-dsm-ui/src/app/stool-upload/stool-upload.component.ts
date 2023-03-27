@@ -44,7 +44,7 @@ export class StoolUploadComponent implements OnInit {
 
   constructor( private dsmService: DSMService, private auth: Auth, private compService: ComponentService, private route: ActivatedRoute) {
     !auth.authenticated() && auth.logout();
-    this.realmNameStoredForFile = localStorage.getItem(ComponentService.MENU_SELECTED_REALM);
+    this.realmNameStoredForFile = sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM);
     this.route.queryParams.subscribe(params => {
       const realm = params[ DSMService.REALM ] || null;
       !!realm && this.checkRight();
@@ -147,7 +147,7 @@ export class StoolUploadComponent implements OnInit {
   }
 
   private get selectedRealm(): string {
-    return localStorage.getItem(ComponentService.MENU_SELECTED_REALM);
+    return sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM);
   }
 
 }

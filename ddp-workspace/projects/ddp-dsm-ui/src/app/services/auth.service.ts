@@ -93,7 +93,7 @@ export class Auth {
                ) {
     // Add callback for lock `authenticated` event
     this.lock.on('authenticated', (authResult: any) => {
-      localStorage.setItem(Auth.AUTH0_TOKEN_NAME, authResult.idToken);
+      sessionStorage.setItem(Auth.AUTH0_TOKEN_NAME, authResult.idToken);
       const payload = {
         token: authResult.idToken
       };
@@ -118,9 +118,6 @@ export class Auth {
   }
 
   public authenticated(): boolean {
-    // Check if there's an unexpired JWT
-    // This searches for an item in localStorage with key == 'token'
-    // return tokenNotExpired();
     return this.sessionService.isAuthenticated();
   }
 
@@ -202,7 +199,7 @@ export class Auth {
 
           this.realmListForPicklist.next(this.realmList);
 
-          const selectedRealm = localStorage.getItem(ComponentService.MENU_SELECTED_REALM);
+          const selectedRealm = sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM);
 
           this.setSelectedStudy = this.realmList.find(realm => realm.name === selectedRealm)?.value;
         }
@@ -213,7 +210,7 @@ export class Auth {
   selectRealm(realm: string, page?: string): void {
     const navigateUrl = `${realm}/${page || ''}`;
 
-    localStorage.setItem(ComponentService.MENU_SELECTED_REALM, realm);
+    sessionStorage.setItem(ComponentService.MENU_SELECTED_REALM, realm);
 
     page ? this.navigateWithParam(navigateUrl) : this.router.navigate([navigateUrl]);
   }
