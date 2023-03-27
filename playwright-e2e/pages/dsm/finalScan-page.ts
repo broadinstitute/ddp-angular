@@ -8,13 +8,26 @@ export default class FinalScanPage {
 
   constructor(private readonly page: Page) {}
 
-  public async fillInput(field: inputField, value: string): Promise<void> {
-    await this.page.locator(this.inputFieldXPath(field)).fill(value);
+  public async fillScanPairs(fieldsInputs: string[]): Promise<void> {
+    let extractValueIndex = -1;
+    for(let i = 0; i < fieldsInputs.length / 2; i++) {
+      for(let j = 0; j < 2; j++) {
+        if(extractValueIndex >= fieldsInputs.length - 1)
+          break;
+        let inputFieldToFill: inputField = !j ? 'Kit Label' : 'DSM Label' ;
+        const inputField = await this.page.locator(this.inputFieldXPath(inputFieldToFill)).nth(i);
+        await inputField.fill(fieldsInputs[++extractValueIndex]);
+        await inputField.blur();
+      }
+    }
   }
 
   public async save(): Promise<void> {
-    await this.page.locator(this.saveButtonXPath).focus();
-    await this.page.locator(this.saveButtonXPath).click();
+    const saveButton = await this.page.locator(this.saveButtonXPath);
+    await expect(saveButton).not.toBeDisabled();
+
+    await saveButton.focus();
+    await saveButton.click();
 
     const response = await waitForResponse(this.page, {uri: 'finalScan'});
     const responseBody = await response.json();

@@ -59,14 +59,12 @@ test.describe('Final Scan Test', () => {
     const initialScanPage = await navigation.selectFromSamples<InitialScanPage>(SamplesNav.INITIAL_SCAN);
     await initialScanPage.assertTitle();
     const kitLabel = crypto.randomBytes(14).toString('hex').slice(0, 14);
-    await initialScanPage.fillInput('Kit Label', kitLabel);
-    await initialScanPage.fillInput('Short ID', participantShortId);
+    await initialScanPage.fillScanPairs([kitLabel, participantShortId]);
     await initialScanPage.save();
 
     const finalScanPage = await navigation.selectFromSamples<FinalScanPage>(SamplesNav.FINAL_SCAN);
     await finalScanPage.assertTitle();
-    await finalScanPage.fillInput('Kit Label', kitLabel);
-    await finalScanPage.fillInput('DSM Label', shippingId);
+    await finalScanPage.fillScanPairs([kitLabel, shippingId]);
     await finalScanPage.save();
   })
 })
