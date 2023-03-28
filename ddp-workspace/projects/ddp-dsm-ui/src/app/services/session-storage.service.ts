@@ -6,7 +6,7 @@ import {BehaviorSubject, Observable} from 'rxjs';
 
 @Injectable({providedIn: 'root'})
 
-export class LocalStorageService {
+export class SessionStorageService {
 
   private observeStudyChange = new BehaviorSubject<string>(sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM));
 

@@ -16,7 +16,7 @@ import { ComponentService } from './component.service';
 import { RoleService } from './role.service';
 import { SessionService } from './session.service';
 import { BulkCohortTag } from '../tags/cohort-tag/bulk-cohort-tag-modal/bulk-cohort-tag-model';
-import {LocalStorageService} from './localStorage.service';
+import {SessionStorageService} from './session-storage.service';
 import {IDateRange} from '../dashboard-statistics/interfaces/IDateRange';
 import {StatisticsEnum} from '../dashboard-statistics/enums/statistics.enum';
 
@@ -35,7 +35,7 @@ export class DSMService {
                private sessionService: SessionService,
                private role: RoleService,
                private router: Router,
-              private localStorageService: LocalStorageService) {
+              private localStorageService: SessionStorageService) {
   }
 
   getDashboardData({startDate, endDate}: IDateRange, chartOrCount: StatisticsEnum): Observable<any> {

@@ -13,7 +13,7 @@ import { SessionService } from './session.service';
 import { RoleService } from './role.service';
 import { DSMService } from './dsm.service';
 import { ComponentService } from './component.service';
-import {LocalStorageService} from './localStorage.service';
+import {SessionStorageService} from './session-storage.service';
 
 // Avoid name not found warnings
 declare var Auth0Lock: any;
@@ -89,7 +89,7 @@ export class Auth {
 
   constructor(private router: Router, private activatedRoute: ActivatedRoute, private http: HttpClient,
               private sessionService: SessionService, private role: RoleService,
-              private compService: ComponentService, private dsmService: DSMService, private localStorageService: LocalStorageService
+              private compService: ComponentService, private dsmService: DSMService, private localStorageService: SessionStorageService
                ) {
     // Add callback for lock `authenticated` event
     this.lock.on('authenticated', (authResult: any) => {
