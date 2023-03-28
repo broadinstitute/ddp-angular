@@ -46,7 +46,8 @@ export class UserSettingComponent implements OnInit {
   ngOnInit(): void {
     this.additionalMessage = null;
     // TODO: check is it correct ? - are the commented lines needed ?
-    // if (sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM) == null || sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM)
+    // if (sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM) == null ||
+    //    sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM)
     // === undefined) { this.additionalMessage = "Please select a realm"; } else {
     this.checkRight();
     this.userSetting = this.role.getUserSetting();
