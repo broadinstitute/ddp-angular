@@ -77,28 +77,23 @@ export default class Table {
     // Find the searchColumnHeader index
     const columnNames = await this.getHeaderNames();
     const columnIndex = columnNames.findIndex((text) => text === searchHeader);
-    console.log('columnIndex', columnIndex)
     if (columnIndex === -1) {
       return null;
     }
     const resultColumnIndex = columnNames.findIndex((text: string) => exactMatch ? text === resultHeader : text.includes(resultHeader));
-    console.log('resultColumnIndex', resultColumnIndex)
     if (resultColumnIndex === -1) {
       return null;
     }
 
     // Find the row which contains the searchCellValue
     const allRows = await this.rowLocator().elementHandles();
-    console.log('allRows size', allRows.length)
     const allCellValues = await Promise.all(
       allRows.map(async (row) => {
         const cells = await row.$$(this.cellCss);
         return await cells[columnIndex].innerText();
       })
     );
-    console.log('allCellValues', allCellValues)
     const searchRowIndex = allCellValues.findIndex((cellValue) => cellValue === searchCellValue);
-    console.log('searchRowIndex', searchRowIndex)
     if (searchRowIndex === -1) {
       return null;
     }
