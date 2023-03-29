@@ -3,12 +3,12 @@ import {test} from 'fixtures/rgp-fixture';
 import HowItWorksPage from 'pages/rgp/how-it-works-page';
 import TellUsYourStoryPage, {WHO} from 'pages/rgp/enrollment/tell-us-your-story-page';
 import HomePage from 'pages/rgp/home-page';
-import {generateEmailAlias} from "../../utils/faker-utils";
-import {login} from "../../authentication/auth-dsm";
-import {Miscellaneous, Study} from "../../lib/component/dsm/navigation/enums/selectStudyNav.enum";
-import {WelcomePage} from "../../pages/dsm/welcome-page";
-import {Navigation} from "../../lib/component/dsm/navigation/navigation";
-import Table, {SortOrder} from "../../lib/component/table";
+import {generateEmailAlias} from '../../utils/faker-utils';
+import {login} from '../../authentication/auth-dsm';
+import {Miscellaneous, Study} from '../../lib/component/dsm/navigation/enums/selectStudyNav.enum';
+import {WelcomePage} from '../../pages/dsm/welcome-page';
+import {Navigation} from '../../lib/component/dsm/navigation/navigation';
+import Table, {SortOrder} from '../../lib/component/table';
 
 const RGP_USER_EMAIL = process.env.RGP_USER_EMAIL as string;
 const emailAlias = generateEmailAlias(RGP_USER_EMAIL);
@@ -49,7 +49,6 @@ test.describe.serial('When an interested participant does NOT meet participation
     const emailInput = page.locator('input[type="email"]:visible');
     await emailInput.fill(emailAlias);
     await page.locator('button[type="submit"]:has-text("Join Mailing List")').click();
-
   });
 
   test('The email signed up can be found in DSM @visual @enrollment @rgp',
@@ -64,12 +63,10 @@ test.describe.serial('When an interested participant does NOT meet participation
       const navigation = new Navigation(page);
       await navigation.selectMiscellaneous(Miscellaneous.MAILING_LIST);
 
-      const table = new Table(page, {cssClassAttribute:'.table'});
+      const table = new Table(page, { cssClassAttribute:'.table'});
       await table.waitForReady()
       await table.sort(TABLE_COLUMN_DATE_SIGNED_UP, SortOrder.DESC);
 
       await expect(await table.findCell(TABLE_COLUMN_EMAIL, emailAlias, TABLE_COLUMN_EMAIL)).toBeTruthy();
-
   });
-
 });

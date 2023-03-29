@@ -96,9 +96,9 @@ export default class Table {
         return await cells[columnIndex].innerText();
       })
     );
-    console.log('allCellValues',allCellValues)
+    console.log('allCellValues', allCellValues)
     const searchRowIndex = allCellValues.findIndex((cellValue) => cellValue === searchCellValue);
-    console.log('searchRowIndex',searchRowIndex)
+    console.log('searchRowIndex', searchRowIndex)
     if (searchRowIndex === -1) {
       return null;
     }
