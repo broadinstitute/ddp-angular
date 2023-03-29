@@ -63,7 +63,7 @@ test.describe.serial('When an interested participant does NOT meet participation
       const navigation = new Navigation(page);
       await navigation.selectMiscellaneous(Miscellaneous.MAILING_LIST);
 
-      const table = new Table(page, { cssClassAttribute:'.table'});
+      const table = new Table(page, { cssClassAttribute: '.table'});
       await table.waitForReady()
       await table.sort(TABLE_COLUMN_DATE_SIGNED_UP, SortOrder.DESC);
 
