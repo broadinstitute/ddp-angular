@@ -3,7 +3,7 @@ import Dropdown from 'lib/widget/dsm/dropdown';
 import ParticipantListPage from 'pages/dsm/participantList-page';
 import { MainMenu } from './enums/mainMenu.enum';
 import { StudyNav } from './enums/studyNav.enum';
-import { Study } from './enums/selectStudyNav.enum';
+import { Miscellaneous, Study } from './enums/selectStudyNav.enum';
 import { NavigationItems } from './navigation-types';
 
 export class Navigation {
@@ -22,7 +22,11 @@ export class Navigation {
     return (this.navigationItems.study as Map<string, object>).get(studyNav) as T;
   }
 
-  private async selectFrom(from: MainMenu, selection: Study | StudyNav): Promise<void> {
+  private async selectFrom(from: MainMenu, selection: Study | StudyNav | Miscellaneous | string): Promise<void> {
     await new Dropdown(this.page, from).selectOption(selection);
+  }
+
+  public async selectMiscellaneous(miscName: Miscellaneous | string): Promise<void> {
+    await this.selectFrom(MainMenu.MISCELLANEOUS, miscName);
   }
 }
