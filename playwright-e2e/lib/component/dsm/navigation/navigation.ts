@@ -13,7 +13,7 @@ export class Navigation {
 
   constructor(private readonly page: Page) {}
 
-  public async selectStudy(studyName: Study): Promise<void> {
+  public async selectStudy(studyName: Study | string): Promise<void> {
     await this.selectFrom(MainMenu.SELECTED_STUDY, studyName);
   }
 
@@ -22,7 +22,11 @@ export class Navigation {
     return (this.navigationItems.study as Map<string, object>).get(studyNav) as T;
   }
 
-  private async selectFrom(from: MainMenu, selection: Study | StudyNav): Promise<void> {
+  private async selectFrom(from: MainMenu | string, selection: Study | StudyNav | string): Promise<void> {
     await new Dropdown(this.page, from).selectOption(selection);
+  }
+
+  async selectMiscellaneous(miscName: string | string): Promise<void> {
+    await this.selectFrom('Miscellaneous', 'Mailing List');
   }
 }

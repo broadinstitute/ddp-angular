@@ -1,6 +1,11 @@
-import { expect, Locator, Page } from '@playwright/test';
+import {ElementHandle, expect, Locator, Page} from '@playwright/test';
 import Button from 'lib/widget/button';
-import _ from 'lodash';
+import _, {forEach} from 'lodash';
+
+export enum SortOrder {
+ DESC = 'desc',
+  ASC = 'asc'
+}
 
 export default class Table {
   private readonly page: Page;
@@ -21,7 +26,7 @@ export default class Table {
         : cssClassAttribute
             ? `table${cssClassAttribute}, mat-table${cssClassAttribute}`
             : 'table, mat-table, [role="table"]';
-    this.headerCss = '[role="columnheader"]:visible';
+    this.headerCss = 'th, [role="columnheader"]';
     this.rowCss = '[role="row"]:not([mat-header-row]):not(mat-header-row), tbody tr';
     this.cellCss = '[role="cell"], td';
     this.footerCss = 'tfoot tr';
@@ -63,29 +68,37 @@ export default class Table {
    * @param searchCellValue Cell value: Cell text to search for in searchColumnHeader
    * @param resultHeader Column header: Find the cell in this column in the same row
    *
+   * @param opts
    * @returns Cell locator
    */
-  async findCell(searchHeader: string, searchCellValue: string, resultHeader: string): Promise<Locator | null> {
+  async findCell(searchHeader: string, searchCellValue: string, resultHeader: string, opts: { exactMatch?: boolean} = {}): Promise<Locator | null> {
+    const { exactMatch = true } = opts;
+
     // Find the searchColumnHeader index
     const columnNames = await this.getHeaderNames();
     const columnIndex = columnNames.findIndex((text) => text === searchHeader);
+    console.log('columnIndex', columnIndex)
     if (columnIndex === -1) {
       return null;
     }
-    const resultColumnIndex = columnNames.findIndex((text) => text === resultHeader);
+    const resultColumnIndex = columnNames.findIndex((text: string) => exactMatch ? text === resultHeader : text.includes(resultHeader));
+    console.log('resultColumnIndex', resultColumnIndex)
     if (resultColumnIndex === -1) {
       return null;
     }
 
     // Find the row which contains the searchCellValue
     const allRows = await this.rowLocator().elementHandles();
+    console.log('allRows size', allRows.length)
     const allCellValues = await Promise.all(
       allRows.map(async (row) => {
         const cells = await row.$$(this.cellCss);
         return await cells[columnIndex].innerText();
       })
     );
+    console.log('allCellValues',allCellValues)
     const searchRowIndex = allCellValues.findIndex((cellValue) => cellValue === searchCellValue);
+    console.log('searchRowIndex',searchRowIndex)
     if (searchRowIndex === -1) {
       return null;
     }
@@ -103,6 +116,10 @@ export default class Table {
         return await column.innerText();
       })
     );
+  }
+
+  getHeaderByName(name: string): Locator {
+    return this.headerLocator().filter({hasText: name});
   }
 
   /**
@@ -125,5 +142,15 @@ export default class Table {
       .locator('xpath=/ancestor::mat-expansion-panel')
       .locator('mat-icon', { hasText: /expand_less/ })
       .click();
+  }
+
+  async sort(column: string, order: SortOrder): Promise<void> {
+    const header = await this.getHeaderByName(column);
+    await header.locator('a').click();
+    const ariaLabel = await header.locator('span').getAttribute('aria-label')
+    if (ariaLabel !== order) {
+      await header.locator('a').click();
+    }
+    await expect(header.locator('span')).toHaveAttribute('aria-label', order);
   }
 }
