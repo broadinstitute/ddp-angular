@@ -5,6 +5,7 @@ import { MainMenu } from './enums/mainMenu.enum';
 import { StudyNav } from './enums/studyNav.enum';
 import { Study } from './enums/selectStudyNav.enum';
 import { NavigationItems } from './navigation-types';
+import {Miscellaneous} from 'lib/component/dsm/navigation/enums/miscellaneousNav.enum';
 
 export class Navigation {
   private readonly navigationItems: Partial<NavigationItems> = {
@@ -22,7 +23,11 @@ export class Navigation {
     return (this.navigationItems.study as Map<string, object>).get(studyNav) as T;
   }
 
-  private async selectFrom(from: MainMenu, selection: Study | StudyNav): Promise<void> {
+  private async selectFrom(from: MainMenu, selection: Study | StudyNav | Miscellaneous | string): Promise<void> {
     await new Dropdown(this.page, from).selectOption(selection);
+  }
+
+  public async selectMiscellaneous(miscName: Miscellaneous | string): Promise<void> {
+    await this.selectFrom(MainMenu.MISCELLANEOUS, miscName);
   }
 }
