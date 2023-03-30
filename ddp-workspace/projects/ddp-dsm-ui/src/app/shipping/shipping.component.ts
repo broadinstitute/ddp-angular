@@ -15,7 +15,7 @@ import { Statics } from '../utils/statics';
 import { EasypostLabelRate } from '../utils/easypost-label-rate.model';
 import { LabelSetting } from '../label-settings/label-settings.model';
 import { Result } from '../utils/result.model';
-import {SessionStorageService} from '../services/session-storage.service';
+import {LocalStorageService} from '../services/local-storage.service';
 import {finalize} from 'rxjs/operators';
 
 @Component({
@@ -107,7 +107,7 @@ export class ShippingComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private router: Router, private dsmService: DSMService, private auth: Auth,
                private role: RoleService, private compService: ComponentService, private _changeDetectionRef: ChangeDetectorRef,
-               private util: Utils, private language: Language, private localStorageService: SessionStorageService) {
+               private util: Utils, private language: Language, private localStorageService: LocalStorageService) {
     if (!auth.authenticated()) {
       auth.logout();
     }

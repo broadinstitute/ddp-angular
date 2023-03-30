@@ -19,8 +19,8 @@ export class StudyGuard implements CanLoad {
   }
 
   private allowAccessToStudy(selectedRealm: string, state: string): boolean {
-    return sessionStorage.getItem(Auth.AUTH0_TOKEN_NAME)
-      && sessionStorage.getItem(SessionService.DSM_TOKEN_NAME)
+    return localStorage.getItem(Auth.AUTH0_TOKEN_NAME)
+      && localStorage.getItem(SessionService.DSM_TOKEN_NAME)
       && selectedRealm === state;
   }
 }

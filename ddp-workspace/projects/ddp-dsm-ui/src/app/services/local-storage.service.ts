@@ -6,14 +6,14 @@ import {BehaviorSubject, Observable} from 'rxjs';
 
 @Injectable({providedIn: 'root'})
 
-export class SessionStorageService {
+export class LocalStorageService {
 
   private observeStudyChange = new BehaviorSubject<string>(sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM));
 
   public clear(): void {
-    sessionStorage.removeItem('auth_token');
-    sessionStorage.removeItem(SessionService.DSM_TOKEN_NAME);
-    sessionStorage.removeItem(Statics.PERMALINK);
+    localStorage.removeItem('auth_token');
+    localStorage.removeItem(SessionService.DSM_TOKEN_NAME);
+    localStorage.removeItem(Statics.PERMALINK);
     sessionStorage.removeItem(ComponentService.MENU_SELECTED_REALM);
   }
 
