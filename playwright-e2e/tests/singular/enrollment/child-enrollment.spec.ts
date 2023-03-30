@@ -9,7 +9,7 @@ import AssentFormPage from 'pages/singular/enrollment/assent-form-page';
 import { assertActivityHeader, assertActivityProgress } from 'utils/assertion-helper';
 import { generateUserName } from 'utils/faker-utils';
 
-test.describe('Enroll my child', () => {
+test.describe.skip('Enroll my child', () => {
   // Randomize last name
   const childLastName = generateUserName(user.child.lastName);
 

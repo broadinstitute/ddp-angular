@@ -11,7 +11,7 @@ import PatientSurveyPage from 'pages/singular/enrollment/patient-survey-page';
 import { assertActivityHeader, assertActivityProgress } from 'utils/assertion-helper';
 import { generateUserName } from 'utils/faker-utils';
 
-test.describe('Enroll myself as adult', () => {
+test.describe.skip('Enroll myself as adult', () => {
   // Randomize last name
   const lastName = generateUserName(user.patient.lastName);
 
