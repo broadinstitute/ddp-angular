@@ -68,7 +68,7 @@ export class MedicalRecord {
       json.notes, json.reviewMedicalRecord, medicalProvider?.type, json.nameDDP,
       json.institutionDDP, json.streetAddressDDP, json.cityDDP, json.stateDDP,
       json.isDeleted, json.oncHistoryDetails, result,
-      json.followupRequired, json.followupRequiredText, additionalValuesJson, json.unableObtainText);
+      json.followupRequired, json.followupRequiredText, additionalValuesJson, json.unableObtainText, json.noActionNeeded);
   }
 
   getMRStatus(): string {
