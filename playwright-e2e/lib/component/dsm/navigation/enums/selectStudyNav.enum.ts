@@ -16,7 +16,3 @@ export enum Study {
   RAREX = 'RareX',
   SINGULAR = 'Singular'
 }
-
-export enum Miscellaneous {
-  MAILING_LIST = 'Mailing List'
-}

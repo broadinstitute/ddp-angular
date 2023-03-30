@@ -3,8 +3,9 @@ import Dropdown from 'lib/widget/dsm/dropdown';
 import ParticipantListPage from 'pages/dsm/participantList-page';
 import { MainMenu } from './enums/mainMenu.enum';
 import { StudyNav } from './enums/studyNav.enum';
-import { Miscellaneous, Study } from './enums/selectStudyNav.enum';
+import { Study } from './enums/selectStudyNav.enum';
 import { NavigationItems } from './navigation-types';
+import {Miscellaneous} from 'lib/component/dsm/navigation/enums/miscellaneousNav.enum';
 
 export class Navigation {
   private readonly navigationItems: Partial<NavigationItems> = {

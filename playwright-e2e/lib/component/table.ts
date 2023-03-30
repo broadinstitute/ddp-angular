@@ -3,7 +3,7 @@ import Button from 'lib/widget/button';
 import _ from 'lodash';
 
 export enum SortOrder {
- DESC = 'desc',
+  DESC = 'desc',
   ASC = 'asc'
 }
 
