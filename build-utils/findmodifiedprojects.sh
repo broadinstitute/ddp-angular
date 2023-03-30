@@ -3,8 +3,8 @@
 # Can run anywhere within the repo
 # If a file from a common area, like the root diretory was modified, we call that _SHARED_
 set +x
-#ignore these file name patterns when figuring out what modules changed 
-declare -a exclude_patterns=( '^.*\.md' '^.*.pdf' )
+#ignore these file name patterns when figuring out what modules changed
+declare -a exclude_patterns=( '^.*\.md' '^.*.pdf', '^.*\.spec\.ts' )
 
 EXCLUDE_CMD='grep -v -E'
 

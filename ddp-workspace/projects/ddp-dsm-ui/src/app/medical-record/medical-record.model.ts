@@ -1,6 +1,6 @@
 import { OncHistoryDetail } from '../onc-history-detail/onc-history-detail.model';
 import { FollowUp } from '../follow-up/follow-up.model';
-import {MedicalProviderModel} from '../STORE/models';
+import {MedicalProviderModel} from '../models';
 
 export class MedicalRecord {
   constructor(public medicalRecordId?: string, public participantId?: string, public institutionId?: string,
@@ -16,7 +16,7 @@ export class MedicalRecord {
               public institutionDDP?: string, public streetAddressDDP?: string, public cityDDP?: string, public stateDDP?: string,
               public isDeleted?: boolean, public oncHistoryDetail?: Array<OncHistoryDetail>, public followUps?: FollowUp[],
               public followupRequired?: boolean, public followupRequiredText?: string, public additionalValuesJson?: {},
-              public unableObtainText?: string) {
+              public unableObtainText?: string, public noActionNeeded?: boolean) {
     this.followUps = followUps == null ? [] : followUps;
   }
 
@@ -68,7 +68,7 @@ export class MedicalRecord {
       json.notes, json.reviewMedicalRecord, medicalProvider?.type, json.nameDDP,
       json.institutionDDP, json.streetAddressDDP, json.cityDDP, json.stateDDP,
       json.isDeleted, json.oncHistoryDetails, result,
-      json.followupRequired, json.followupRequiredText, additionalValuesJson, json.unableObtainText);
+      json.followupRequired, json.followupRequiredText, additionalValuesJson, json.unableObtainText, json.noActionNeeded);
   }
 
   getMRStatus(): string {

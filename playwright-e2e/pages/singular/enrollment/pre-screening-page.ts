@@ -45,9 +45,7 @@ export default class PreScreeningPage extends SingularPage {
     const iframe = this.page.frameLocator('css=iframe[title="reCAPTCHA"]');
     await iframe.locator('css=span[role="checkbox"]').waitFor({ state: 'visible' });
     await iframe.locator('css=span[role="checkbox"]').dispatchEvent('click');
-    await iframe
-      .locator('.recaptcha-checkbox-spinner[style*="animation-play-state: running;"]')
-      .waitFor({ state: 'hidden', timeout: 30 * 1000 });
+    await iframe.locator('.recaptcha-checkbox-spinner[style*="animation-play-state: running;"]').waitFor({ state: 'hidden', timeout: 30 * 1000 });
   }
 
   async enterInformationAboutYourself(

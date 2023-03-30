@@ -2,19 +2,14 @@ import { expect } from '@playwright/test';
 import { test } from 'fixtures/singular-fixture';
 import AboutMePage from 'pages/singular/enrollment/about-me-page';
 import ConsentFormPage from 'pages/singular/enrollment/consent-form-page';
-import MyDashboardPage from 'pages/singular/dashboard/my-dashboard-page';
 import * as user from 'data/fake-user.json';
-import * as auth from 'authentication/auth-singular';
 import { WHO } from 'data/constants';
 import { downloadConsentPdf } from 'utils/test-utils';
-import PreScreeningPage from 'pages/singular/enrollment/pre-screening-page';
 import EnrollMyselfPage from 'pages/singular/enrollment/enroll-myself-page';
 import MedicalRecordReleaseForm from 'pages/singular/enrollment/medical-record-release-form';
 import PatientSurveyPage from 'pages/singular/enrollment/patient-survey-page';
 import { assertActivityHeader, assertActivityProgress } from 'utils/assertion-helper';
 import { generateUserName } from 'utils/faker-utils';
-
-const { SINGULAR_USER_EMAIL, SINGULAR_USER_PASSWORD } = process.env;
 
 test.describe('Enroll myself as adult', () => {
   // Randomize last name
@@ -23,24 +18,9 @@ test.describe('Enroll myself as adult', () => {
   /**
    * Test case: https://docs.google.com/document/d/1Ewsh4ULh5LVdZiUapvG-PyI2kL3XzVf4seeLq8Mt-B0/edit?usp=sharing
    */
-  test('can complete self-enrollment @enrollment @singular', async ({ context, page, homePage }) => {
-    await homePage.signUp();
-
-    // Step 1
-    // On “pre-screening” page, answer all questions about yourself with fake values
-    const preScreeningPage = new PreScreeningPage(page);
-    await preScreeningPage.enterInformationAboutYourself();
-
-    // Step 2
-    // Enter email alias and password to create new account
-    await auth.createAccountWithEmailAlias(page, { email: SINGULAR_USER_EMAIL, password: SINGULAR_USER_PASSWORD });
-
-    // Step 3
+  test('can complete self-enrollment @enrollment @singular', async ({ context, page, dashboardPage }) => {
     // On "My Dashboard" page, click Enroll Myself button
-    const myDashboardPage = new MyDashboardPage(page);
-    await myDashboardPage.waitForReady();
-
-    await myDashboardPage.enrollMyself();
+    await dashboardPage.enrollMyself();
 
     // Step 4
     // On "Enroll myself" page, check "Me" checkbox
@@ -64,8 +44,7 @@ test.describe('Enroll myself as adult', () => {
     // On "Consent Form" page, Page 3 of 3.
     await assertActivityHeader(page, 'Your Consent Form');
     await assertActivityProgress(page, 'Page 3 of 3');
-    await consentForm.firstName().fill(user.patient.firstName);
-    await consentForm.lastName().fill(lastName);
+    await consentForm.fillInName(user.patient.firstName, lastName);
 
     await consentForm.fillInDateOfBirth(user.patient.birthDate.MM, user.patient.birthDate.DD, user.patient.birthDate.YYYY);
     await consentForm.toKnowSecondaryFinding().check('I want to know.');
@@ -122,19 +101,17 @@ test.describe('Enroll myself as adult', () => {
     await patientSurveyPage.submit();
 
     // Assert contents in My Dashboard table
-    await myDashboardPage.waitForReady();
+    await dashboardPage.waitForReady();
     const orderedHeaders = ['Title', 'Summary', 'Status', 'Action'];
-    const table = myDashboardPage.getDashboardTable();
+    const table = dashboardPage.getDashboardTable();
     const headers = await table.getHeaderNames();
     expect(headers).toHaveLength(4); // Four columns in table
     expect(headers).toEqual(orderedHeaders);
 
     const summaryCell = await table.findCell('Title', 'Consent', 'Summary');
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     await expect(summaryCell!).toHaveText('Thank you for signing the consent form -- welcome to Project Singular!');
 
     const statusCell = await table.findCell('Title', 'Consent', 'Status');
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     await expect(statusCell!).toHaveText('Complete');
   });
 });

@@ -45,12 +45,4 @@ export default class MedicalReleaseFormPage extends AngioPageBase {
       nth: institutionIndex
     });
   }
-
-  /**
-   * <br> Question: I have already read and signed the informed consent document ...
-   * @returns {Checkbox}
-   */
-  acknowledge(): Checkbox {
-    return new Checkbox(this.page, { label: 'I have already read and signed the informed consent document' });
-  }
 }

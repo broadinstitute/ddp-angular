@@ -1,19 +1,14 @@
 import { expect, Page } from '@playwright/test';
 import { test } from 'fixtures/singular-fixture';
-import * as auth from 'authentication/auth-singular';
 import MedicalRecordReleaseForm from 'pages/singular/enrollment/medical-record-release-form';
 import PatientSurveyPage from 'pages/singular/enrollment/patient-survey-page';
-import PreScreeningPage from 'pages/singular/enrollment/pre-screening-page';
 import EnrollMyAdultDependentPage from 'pages/singular/enrollment/enroll-my-adult-dependent-page';
 import ConsentFormForAdultDependentPage from 'pages/singular/enrollment/consent-form-for-adult-dependent-page';
 import AboutMyAdultDependentPage from 'pages/singular/enrollment/about-my-adult-dependent-page';
-import MyDashboardPage from 'pages/singular/dashboard/my-dashboard-page';
 import { WHO } from 'data/constants';
 import * as user from 'data/fake-user.json';
 import { assertActivityHeader, assertActivityProgress } from 'utils/assertion-helper';
 import { generateUserName } from 'utils/faker-utils';
-
-const { SINGULAR_USER_EMAIL, SINGULAR_USER_PASSWORD } = process.env;
 
 test.describe('Enrol an adult dependent', () => {
   // Randomize last name
@@ -36,19 +31,8 @@ test.describe('Enrol an adult dependent', () => {
   /**
    * Test case: https://docs.google.com/document/d/1vaiSfsYeDzEHeK2XOVO3n_7I1W0Z94Kkqx_82w8-Vpc/edit#heading=h.6snot4x1e1uw
    */
-  test.skip('can finish adult-dependent-enrollment @enrollment @singular', async ({ page, homePage }) => {
-    await homePage.signUp();
-
-    // On “pre-screening” page, answer all questions about yourself with fake values
-    const preScreeningPage = new PreScreeningPage(page);
-    await preScreeningPage.enterInformationAboutYourself();
-
-    // Enter email alias and new password in Login popup
-    await auth.createAccountWithEmailAlias(page, { email: SINGULAR_USER_EMAIL, password: SINGULAR_USER_PASSWORD });
-
-    // On "My Dashboard" page
-    const myDashboardPage = new MyDashboardPage(page);
-    await myDashboardPage.enrollMyAdultDependent();
+  test.skip('can finish adult-dependent-enrollment @enrollment @singular', async ({ page, dashboardPage }) => {
+    await dashboardPage.enrollMyAdultDependent();
 
     // On "Enroll my adult dependent" page
     await assertActivityHeader(page, 'Enroll my adult dependent');
@@ -59,7 +43,7 @@ test.describe('Enrol an adult dependent', () => {
       state: user.adultDependent.state.abbreviation
     });
     await enrollMyAdultDependentPage.doesDependentHaveCognitiveImpairment().check('Yes', { exactMatch: true });
-    await myDashboardPage.next();
+    await dashboardPage.next();
 
     // // On "Consent Form for Adult Dependent" page
     const consentForm = new ConsentFormForAdultDependentPage(page);
@@ -76,11 +60,7 @@ test.describe('Enrol an adult dependent', () => {
 
     await consentForm.dependentFirstName().fill(user.adultDependent.firstName);
     await consentForm.dependentLastName().fill(dependentLastName);
-    await consentForm.fillInDateOfBirth(
-      user.adultDependent.birthDate.MM,
-      user.adultDependent.birthDate.DD,
-      user.adultDependent.birthDate.YYYY
-    );
+    await consentForm.fillInDateOfBirth(user.adultDependent.birthDate.MM, user.adultDependent.birthDate.DD, user.adultDependent.birthDate.YYYY);
     await consentForm.toKnowSecondaryFinding().check('I want to know.');
     await consentForm.selectOneForAdultDependent().check('I have explained the study');
     await consentForm.dependentGuardianSignature().fill(`${user.patient.firstName} ${user.patient.lastName}`);
@@ -148,23 +128,21 @@ test.describe('Enrol an adult dependent', () => {
     await patientSurveyPage.race().check('White');
     await patientSurveyPage.isHispanic().check('No', { exactMatch: true });
     await patientSurveyPage.selectVentricleDiagnosis().check('Other');
-    await patientSurveyPage.selectVentricleDiagnosis().inputByLabel('Please specify (or write Unsure)').fill('Unsure');
+    await patientSurveyPage.selectVentricleDiagnosis().toInput('Please specify (or write Unsure)').fill('Unsure');
     await patientSurveyPage.submit();
 
     // Assert contents in My Dashboard table
-    await myDashboardPage.waitForReady();
+    await dashboardPage.waitForReady();
     const orderedHeaders = ['Title', 'Summary', 'Status', 'Action'];
-    const table = myDashboardPage.getDashboardTable();
+    const table = dashboardPage.getDashboardTable();
     const headers = await table.getHeaderNames();
     expect(headers).toHaveLength(4); // Four columns in table
     expect(headers).toEqual(orderedHeaders);
 
     const summaryCell = await table.findCell('Title', 'Consent Form for Adult Dependent', 'Summary');
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     await expect(summaryCell!).toHaveText('Thank you for signing the consent form -- welcome to Project Singular!');
 
     const statusCell = await table.findCell('Title', 'Consent Form for Adult Dependent', 'Status');
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     await expect(statusCell!).toHaveText('Complete');
   });
 });

@@ -4,7 +4,6 @@ import Checkbox from 'lib/widget/checkbox';
 import Radiobutton from 'lib/widget/radiobutton';
 import Select from 'lib/widget/select';
 import axios from 'axios';
-import { Response } from 'playwright-core';
 
 const { SITE_PASSWORD } = process.env;
 
@@ -15,13 +14,11 @@ export interface WaitForResponseByURLConfig {
 }
 
 export async function waitForNoSpinner(page: Page): Promise<void> {
-  await page
-    .locator('[data-icon="spinner"].fa-spin, mat-spinner[role="progressbar"]')
-    .waitFor({ state: 'hidden', timeout: 30 * 1000 });
+  await page.locator('[data-icon="spinner"].fa-spin, mat-spinner[role="progressbar"]').waitFor({ state: 'hidden', timeout: 60 * 1000 });
 }
 
 export async function waitForResponseByURL(page: Page, { url, status, timeout }: WaitForResponseByURLConfig) {
-  await page.waitForResponse((resp: Response) => resp.url().includes(url) && resp.status() === status, { timeout });
+  await page.waitForResponse((resp) => resp.url().includes(url) && resp.status() === status, { timeout });
 }
 
 export async function waitUntilRemoved(locator: Locator): Promise<void> {
@@ -127,10 +124,6 @@ export async function fillIn(page: Page, stableID: string, value: string): Promi
 
 export async function check(page: Page, stableID: string): Promise<void> {
   await new Checkbox(page, { ddpTestID: stableID }).check();
-}
-
-export async function checkRadioButton(page: Page, stableID: string): Promise<void> {
-  await new Radiobutton(page, { ddpTestID: stableID }).check();
 }
 
 export async function select(page: Page, stableID: string, option: string): Promise<void> {

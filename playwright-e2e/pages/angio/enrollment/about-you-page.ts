@@ -29,8 +29,8 @@ export default class AboutYouPage extends AngioPageBase {
    */
   async whenDiagnosedWithAngiosarcoma(month: MONTH, year: string): Promise<void> {
     const question = new Question(this.page, { prompt: 'When were you first diagnosed with angiosarcoma?' });
-    await question.select('month').selectOption({ label: month });
-    await question.select('year').selectOption({ label: year });
+    await question.toSelect('month').toLocator().selectOption({ label: month });
+    await question.toSelect('year').toLocator().selectOption({ label: year });
   }
 
   /**
@@ -115,12 +115,12 @@ export default class AboutYouPage extends AngioPageBase {
    * <br> Question: In what year were you born?
    * <br> Type: Select
    */
-  async yearBorn(answer: string): Promise<string[]> {
+  async yearBorn(answer: string): Promise<void> {
     const question = new Question(this.page, {
       prompt: 'In what year were you born?'
     });
-    await question.select().focus();
-    return question.select().selectOption(answer);
+    await question.toSelect().toLocator().focus();
+    await question.toSelect().selectOption(answer);
   }
 
   /**

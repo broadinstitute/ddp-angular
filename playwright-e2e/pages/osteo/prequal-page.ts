@@ -1,6 +1,6 @@
 import { expect, Locator, Page } from '@playwright/test';
 import { waitForNoSpinner } from 'utils/test-utils';
-import { OsteoPageBase } from './osteo-base-page';
+import { OsteoPageBase } from 'pages/osteo/osteo-page-base';
 
 export default class PrequalPage extends OsteoPageBase {
   private readonly pageTitle: Locator;
@@ -20,8 +20,8 @@ export default class PrequalPage extends OsteoPageBase {
     await this.page.getByText('My child has been diagnosed').click();
     await this.page.getByRole('button').filter({ hasText: 'Next' }).click();
     await this.page.getByLabel('Enter age').fill(age.toString());
-    await this.page.locator('#mat-input-2').selectOption(country); // picklist-answer-CHILD_COUNTRY
-    await this.page.locator('#mat-input-3').selectOption(state);
+    await this.page.locator('#mat-input-2').selectOption({ label: country }); // picklist-answer-CHILD_COUNTRY
+    await this.page.locator('#mat-input-3').selectOption({ label: state });
     await this.submit();
   }
 }

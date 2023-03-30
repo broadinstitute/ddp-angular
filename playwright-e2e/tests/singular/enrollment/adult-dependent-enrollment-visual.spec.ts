@@ -2,7 +2,7 @@ import { expect, Page } from '@playwright/test';
 import { test } from 'fixtures/singular-fixture';
 import * as auth from 'authentication/auth-singular';
 import PreScreeningPage from 'pages/singular/enrollment/pre-screening-page';
-import MyDashboardPage from 'pages/singular/dashboard/my-dashboard-page';
+import DashboardPage from 'pages/singular/dashboard-page';
 import EnrollMyAdultDependentPage from 'pages/singular/enrollment/enroll-my-adult-dependent-page';
 import { WHO } from 'data/constants';
 
@@ -17,7 +17,7 @@ async function signUp(page: Page) {
 }
 
 async function getEnrollMyAdultDependentPage(page: Page) {
-  const myDashboardPage = new MyDashboardPage(page);
+  const myDashboardPage = new DashboardPage(page);
   await myDashboardPage.enrollMyAdultDependent();
   return new EnrollMyAdultDependentPage(page);
 }
@@ -72,10 +72,7 @@ test.describe('Adult Dependent visual tests', () => {
   });
 
   // eslint-disable-next-line max-len
-  test('should validate `Does your dependent have a cognitive impairment` question @visual @enrollment @singular', async ({
-    page,
-    homePage
-  }) => {
+  test('should validate `Does your dependent have a cognitive impairment` question @visual @enrollment @singular', async ({ page, homePage }) => {
     await homePage.signUp();
     await signUp(page);
     const enrollMyAdultDependentPage = await getEnrollMyAdultDependentPage(page);

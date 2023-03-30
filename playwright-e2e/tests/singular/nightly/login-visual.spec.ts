@@ -1,6 +1,6 @@
 import { expect } from '@playwright/test';
 import { test } from 'fixtures/singular-fixture';
-import MyDashboardPage from 'pages/singular/dashboard/my-dashboard-page';
+import DashboardPage from 'pages/singular/dashboard-page';
 import { NavSelectors } from 'pages/singular/navbar';
 import { login } from 'authentication/auth-singular';
 
@@ -15,7 +15,7 @@ test.describe.skip('Login into Singular', () => {
     await login(page, { email: process.env.SINGULAR_USER_EMAIL, password: process.env.SINGULAR_USER_PASSWORD });
 
     // My Dashboard is visible
-    const myDashboardPage = new MyDashboardPage(page);
+    const myDashboardPage = new DashboardPage(page);
     await myDashboardPage.waitForReady();
 
     // Login button is NOT visible

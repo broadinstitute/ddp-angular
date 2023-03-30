@@ -305,6 +305,15 @@
               </td>
               <td>Follow-Up required</td>
             </tr>
+            <tr>
+              <td>
+                <mat-checkbox [(ngModel)]="medicalRecord.noActionNeeded"
+                              (change)="valueChanged($event, 'noActionNeeded')"
+                              [color]="isCheckboxPatchedCurrently('noActionNeeded')" (blur)="currentField(null)"
+                              (focus)="currentField('noActionNeeded')" [disabled]="participantExited"></mat-checkbox>
+              </td>
+              <td>No Action Needed</td>
+            </tr>
             <tr *ngIf="medicalRecord.followupRequired">
               <td colspan="2">
                 <textarea

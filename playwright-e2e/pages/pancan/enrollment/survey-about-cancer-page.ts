@@ -7,37 +7,31 @@ export default class SurveyAboutCancerPage extends PancanPageBase {
     super(page);
   }
 
-  async waitForReady(): Promise<void> {
-    await this.firstDiagnosedMonth().waitFor({ state: 'visible' });
-    await this.firstDiagnosedYear().waitFor({ state: 'visible' });
-  }
-
   /**
    * <br> Question: When were you first diagnosed?
    * <br> Type: Locator
    */
   private firstDiagnosedMonth(): Locator {
-    return new Question(this.page, { prompt: new RegExp(/When (were|was) (you|your child) first diagnosed/) }).select(
-      'Choose month...'
-    );
+    return new Question(this.page, { prompt: new RegExp(/When (were|was) (you|your child) first diagnosed/) })
+    .toSelect('Choose month...')
+    .toLocator();
   }
+
   /**
    * <br> Question: When were you first diagnosed with Cervical cancer?
    * <br> Type: Locator
    */
-
   private firstDiagnosedYear(): Locator {
-    return new Question(this.page, { prompt: new RegExp(/When (were|was) (you|your child) first diagnosed/) }).select(
-      'Choose year...'
-    );
+    return new Question(this.page, { prompt: new RegExp(/When (were|was) (you|your child) first diagnosed/) }).toSelect('Choose year...').toLocator();
   }
 
   /**
    * <br> Question: Please select the places in the body where you had cancer when you was first diagnosed.
-   * <br> Type: Input
+   * <br> Type: Question
    */
-  cancerBodyPlaces(): Locator {
-    return this.page.locator('.picklist-answer-INITIAL_BODY_LOC').locator('input');
+  initialBodyLocation(): Question {
+    return new Question(this.page, { cssClassAttribute: '.picklist-answer-INITIAL_BODY_LOC' });
+    // return this.page.locator('.picklist-answer-INITIAL_BODY_LOC').locator('input');
   }
 
   /**
@@ -76,14 +70,9 @@ export default class SurveyAboutCancerPage extends PancanPageBase {
     return this.page.locator('.activity-text-input-THERAPY_NAME').locator('input');
   }
 
-  async diagnosedDate(month: string, year: string) {
+  async fillInDiagnosedDate(month: string, year: string) {
     await this.firstDiagnosedMonth().selectOption({ label: month });
     await this.firstDiagnosedYear().selectOption(year);
-  }
-
-  async fillCancerBodyPlaces(value: string) {
-    await this.cancerBodyPlaces().fill(value);
-    await this.cancerBodyPlaces().press('Tab');
   }
 
   async fillBodyPlacesEverHadCancer(value: string) {

@@ -80,16 +80,16 @@ export class ScannerService {
           validators: [Validators.required]
         },
         {
-          controllerName: 'ddpLabel',
-          placeholder: 'DSM Label',
-          maxLength: undefined,
-          validators: [Validators.required]
-        },
-        {
           controllerName: 'RNA',
           placeholder: 'RNA',
           maxLength: undefined,
           validators: [this.shouldIncludeRNA(), Validators.required]
+        },
+        {
+          controllerName: 'ddpLabel',
+          placeholder: 'DSM Label',
+          maxLength: undefined,
+          validators: [Validators.required]
         }
       ]
     },
@@ -130,7 +130,7 @@ export class ScannerService {
   }
 
   private saveRGPFinalScan(data: object): Observable<any> {
-    return this.dsmService.finalScan(JSON.stringify(data));
+    return this.dsmService.rgpFinalScan(JSON.stringify(data));
   }
 
   private saveReceivingScan(data: object): Observable<any> {
