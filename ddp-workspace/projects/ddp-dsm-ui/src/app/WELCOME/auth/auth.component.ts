@@ -4,7 +4,7 @@ import {Title} from '@angular/platform-browser';
 import {fromEvent, Observable, tap} from 'rxjs';
 import {Auth} from '../../services/auth.service';
 import {ComponentService} from '../../services/component.service';
-import {SessionService} from "../../services/session.service";
+import {SessionService} from '../../services/session.service';
 
 
 @Component({
@@ -55,7 +55,7 @@ export class AuthComponent implements OnInit {
       event => {
         if (event.key === SessionService.DSM_TOKEN_NAME && event.newValue === null) {
           this.auth.doLogout();
-          this.router.navigateByUrl("/");
+          this.router.navigateByUrl('/');
         }
       }
     );
