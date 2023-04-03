@@ -68,7 +68,7 @@ export class DrugListComponent implements OnInit {
       },
       error: err => {
         if (err._body === Auth.AUTHENTICATION_ERROR) {
-          this.auth.logout();
+          this.auth.sessionLogout();
         }
         this.loading = false;
         this.errorMessage = 'Error - Loading Drug List\nPlease contact your DSM developer';
@@ -133,7 +133,7 @@ export class DrugListComponent implements OnInit {
       },
       error: err => {
         if (err._body === Auth.AUTHENTICATION_ERROR) {
-          this.auth.logout();
+          this.auth.sessionLogout();
         }
       }
     });
@@ -178,7 +178,7 @@ export class DrugListComponent implements OnInit {
       },
       error: err => {
         if (err._body === Auth.AUTHENTICATION_ERROR) {
-          this.auth.logout();
+          this.auth.sessionLogout();
         }
         this.loading = false;
         this.additionalMessage = 'Error - Saving Drug\nPlease contact your DSM developer';

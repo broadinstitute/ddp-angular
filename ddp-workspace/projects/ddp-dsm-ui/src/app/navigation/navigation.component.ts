@@ -58,7 +58,7 @@ export class NavigationComponent implements OnInit {
 
   doLogin(): void {
     sessionStorage.removeItem(ComponentService.MENU_SELECTED_REALM); // if user logs in new or logs out, remove stored menu!
-    this.auth.logout();
+    this.auth.doLogout();
   }
 
   hasRole(): RoleService {

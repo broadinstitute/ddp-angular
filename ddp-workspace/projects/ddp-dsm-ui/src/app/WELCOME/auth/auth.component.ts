@@ -1,9 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {Title} from '@angular/platform-browser';
-import {Observable, tap} from 'rxjs';
+import {fromEvent, Observable, tap} from 'rxjs';
 import {Auth} from '../../services/auth.service';
 import {ComponentService} from '../../services/component.service';
+import {SessionService} from "../../services/session.service";
 
 
 @Component({
@@ -43,10 +44,22 @@ export class AuthComponent implements OnInit {
   popUpIsShown = true;
   authError: Observable<string | null>;
   pickList$: Observable<any>;
+  private source$: Observable<StorageEvent>;
 
   constructor(private auth: Auth, private title: Title, private router: Router) {}
 
   ngOnInit(): void {
+
+    this.source$ = fromEvent<StorageEvent>(window, 'storage');
+    this.source$.subscribe(
+      event => {
+        if (event.key === SessionService.DSM_TOKEN_NAME && event.newValue === null) {
+          this.auth.doLogout();
+          this.router.navigateByUrl("/");
+        }
+      }
+    );
+
     if (this.auth.authenticated()) {
       const selectedRealm = sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM);
       this.router.navigate([selectedRealm]);
@@ -58,7 +71,7 @@ export class AuthComponent implements OnInit {
 
   startAppAuth(): void {
     this.title.setTitle('DDP Study Management');
-    this.auth.logout();
+    this.auth.sessionLogout();
     this.showAuthPopUp();
     this.runAuth0Listeners();
   }

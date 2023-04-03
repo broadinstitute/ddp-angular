@@ -125,9 +125,13 @@ export class Auth {
     return this.realmListForPicklist.asObservable();
   }
 
-  public logout(): void {
-    // Remove token from localStorage
+  public doLogout(): void {
     this.localStorageService.clear();
+    this.sessionService.logout();
+    this.selectedRealm = null;
+}
+  public sessionLogout(): void {
+    // Do NOT remove token from localStorage at this point.
     this.sessionService.logout();
     this.selectedRealm = null;
   }

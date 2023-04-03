@@ -53,7 +53,7 @@ export class SurveyComponent implements OnInit {
   constructor(private dsmService: DSMService, private auth: Auth, private router: Router, private role: RoleService,
               private compService: ComponentService, private route: ActivatedRoute, private util: Utils) {
     if (!auth.authenticated()) {
-      auth.logout();
+      auth.sessionLogout();
     }
     this.route.queryParams.subscribe(params => {
       this.realm = params[DSMService.REALM] || null;
@@ -121,7 +121,7 @@ export class SurveyComponent implements OnInit {
         },
         error: err => {
           if (err._body === Auth.AUTHENTICATION_ERROR) {
-            this.auth.logout();
+            this.auth.sessionLogout();
           }
           this.loading = false;
           this.errorMessage = 'Error - Loading list of surveys\nPlease contact your DSM developer';
@@ -156,7 +156,7 @@ export class SurveyComponent implements OnInit {
         },
         error: err => {
           if (err._body === Auth.AUTHENTICATION_ERROR) {
-            this.auth.logout();
+            this.auth.sessionLogout();
           }
           this.loading = false;
           this.errorMessage = 'Error - Loading list of survey status\nPlease contact your DSM developer';
@@ -276,7 +276,7 @@ export class SurveyComponent implements OnInit {
         error: err => {
           this.loading = false;
           if (err._body === Auth.AUTHENTICATION_ERROR) {
-            this.auth.logout();
+            this.auth.sessionLogout();
           }
           this.errorMessage = 'Error - Uploading txt\n' + err;
         }

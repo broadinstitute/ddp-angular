@@ -69,7 +69,7 @@ export class MedicalRecordComponent implements OnInit {
               private dsmService: DSMService, private router: Router,
                private role: RoleService, private util: Utils, private route: ActivatedRoute) {
     if (!auth.authenticated()) {
-      auth.logout();
+      auth.sessionLogout();
     }
     this.route.queryParams.subscribe(params => {
       const realm = params[ DSMService.REALM ] || null;
@@ -207,7 +207,7 @@ export class MedicalRecordComponent implements OnInit {
       },
       error: err => {
         if (err._body === Auth.AUTHENTICATION_ERROR) {
-          this.auth.logout();
+          this.auth.sessionLogout();
         }
         this.errorMessage = 'Error - Loading mr log\nPlease contact your DSM developer';
       }

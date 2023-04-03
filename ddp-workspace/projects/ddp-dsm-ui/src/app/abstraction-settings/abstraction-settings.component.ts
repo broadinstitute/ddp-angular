@@ -36,7 +36,7 @@ export class AbstractionSettingsComponent implements OnInit {
     private route: ActivatedRoute
   ) {
     if (!auth.authenticated()) {
-      auth.logout();
+      auth.sessionLogout();
     }
     this.route.queryParams.subscribe({
       next: params => {
@@ -95,7 +95,7 @@ export class AbstractionSettingsComponent implements OnInit {
       },
       error: err => {
         if (err._body === Auth.AUTHENTICATION_ERROR) {
-          this.auth.logout();
+          this.auth.sessionLogout();
           this.loading = false;
         }
         this.errorMessage = 'Error - Loading medical record abstraction form controls\n ' + err;
@@ -130,7 +130,7 @@ export class AbstractionSettingsComponent implements OnInit {
             },
             error: err => {
               if (err._body === Auth.AUTHENTICATION_ERROR) {
-                this.auth.logout();
+                this.auth.sessionLogout();
                 this.loading = false;
               }
               this.errorMessage = 'Error - Loading medical record abstraction form controls\n ' + err;

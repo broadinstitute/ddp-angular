@@ -158,7 +158,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
   constructor(private auth: Auth, private compService: ComponentService, private dsmService: DSMService, private router: Router,
               private role: RoleService, private util: Utils, private route: ActivatedRoute, public dialog: MatDialog) {
     if (!auth.authenticated()) {
-      auth.logout();
+      auth.sessionLogout();
     }
     this.route.queryParams.subscribe(params => {
       const realm = params[DSMService.REALM] || null;
@@ -623,7 +623,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
         },
         error: err => {
           if (err._body === Auth.AUTHENTICATION_ERROR) {
-            this.auth.logout();
+            this.auth.sessionLogout();
           }
         }
       });
@@ -990,7 +990,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
         },
         error: err => {
           if (err._body === Auth.AUTHENTICATION_ERROR) {
-            this.auth.logout();
+            this.auth.sessionLogout();
           }
         }
       });

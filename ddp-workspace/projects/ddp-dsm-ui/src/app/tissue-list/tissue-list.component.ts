@@ -123,7 +123,7 @@ export class TissueListComponent implements OnInit {
   constructor(public role: RoleService, private dsmService: DSMService, private compService: ComponentService,
                private router: Router, private auth: Auth, private route: ActivatedRoute) {
     if (!auth.authenticated()) {
-      auth.logout();
+      auth.sessionLogout();
     }
 
     this.route.queryParams.subscribe(params => {
@@ -487,7 +487,7 @@ export class TissueListComponent implements OnInit {
           },
           error: err => {
             if (err._body === Auth.AUTHENTICATION_ERROR) {
-              this.auth.logout();
+              this.auth.sessionLogout();
             }
             this.errorMessage = 'Error - Loading Tissues for tissue view, Please contact your DSM developer\n ' + err;
           },

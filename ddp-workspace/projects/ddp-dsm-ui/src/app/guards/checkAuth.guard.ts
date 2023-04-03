@@ -21,10 +21,10 @@ export class CheckAuthGuard implements CanLoad {
       return true;
     }
     else if (this.auth.authenticated() && !selectedRealm) {
-      this.auth.logout();
+      this.auth.sessionLogout();
       return this.router.createUrlTree(['']);
     } else if (!this.auth.authenticated() && selectedRealm) {
-      this.auth.logout();
+      this.auth.doLogout();
       return this.router.createUrlTree(['']);
     }
     else {

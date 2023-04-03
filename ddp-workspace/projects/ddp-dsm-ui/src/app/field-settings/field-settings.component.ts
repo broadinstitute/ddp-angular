@@ -39,7 +39,7 @@ export class FieldSettingsComponent implements OnInit {
   constructor(private _changeDetectionRef: ChangeDetectorRef, private dsmService: DSMService, private auth: Auth,
                private role: RoleService, private compService: ComponentService, private route: ActivatedRoute) {
     if (!auth.authenticated()) {
-      auth.logout();
+      auth.sessionLogout();
     }
     this.route.queryParams.subscribe(params => {
       this.realm = params[ DSMService.REALM ] || null;
@@ -154,7 +154,7 @@ export class FieldSettingsComponent implements OnInit {
       },
       error: err => {
         if (err._body === Auth.AUTHENTICATION_ERROR) {
-          this.auth.logout();
+          this.auth.sessionLogout();
         }
         this.loading = false;
         const returnedMessage = JSON.parse(err._body);
@@ -199,7 +199,7 @@ export class FieldSettingsComponent implements OnInit {
           },
           error: err => {
             if (err._body === Auth.AUTHENTICATION_ERROR) {
-              this.auth.logout();
+              this.auth.sessionLogout();
               this.loading = false;
             }
             this.additionalMessage = JSON.parse(err._body).body;

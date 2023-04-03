@@ -30,7 +30,7 @@ export class UserSettingComponent implements OnInit {
               private compService: ComponentService
   ) {
     if (!auth.authenticated()) {
-      auth.logout();
+      auth.sessionLogout();
     }
     this.additionalMessage = null;
     this.route.queryParams.subscribe(params => {

@@ -141,7 +141,7 @@ export class ParticipantListComponent implements OnInit {
                private router: Router, private auth: Auth, private route: ActivatedRoute, private util: Utils,
               private dialog: MatDialog) {
     if (!auth.authenticated()) {
-      auth.logout();
+      auth.sessionLogout();
     }
     this.route.queryParams.subscribe(params => {
       const realm = params[ DSMService.REALM ] || null;
@@ -204,7 +204,7 @@ export class ParticipantListComponent implements OnInit {
             },
             error: err => {
               if (err._body === Auth.AUTHENTICATION_ERROR) {
-                this.auth.logout();
+                this.auth.sessionLogout();
               }
               this.loadingParticipants = null;
               this.errorMessage = 'Error - Loading Participant List, Please contact your DSM developer';
@@ -733,7 +733,7 @@ export class ParticipantListComponent implements OnInit {
       // this.renewSelectedColumns(); commented out because if we have defaultColumns for all the studies we won't need it anymore
       error: err => {
         if (err._body === Auth.AUTHENTICATION_ERROR) {
-          this.auth.logout();
+          this.auth.sessionLogout();
         }
         // eslint-disable-next-line no-throw-literal
         throw 'Error - Loading display settings' + err;
@@ -940,7 +940,7 @@ export class ParticipantListComponent implements OnInit {
           },
           error: err => {
             if (err._body === Auth.AUTHENTICATION_ERROR) {
-              this.auth.logout();
+              this.auth.sessionLogout();
             }
             this.loadingParticipants = null;
             this.errorMessage = 'Error - Loading Participant List, Please contact your DSM developer';
@@ -1094,7 +1094,7 @@ export class ParticipantListComponent implements OnInit {
         },
         error: err => {
           if (err._body === Auth.AUTHENTICATION_ERROR) {
-            this.auth.logout();
+            this.auth.sessionLogout();
           }
           this.loadingParticipants = null;
           this.errorMessage = 'Error - Loading Participant List, Please contact your DSM developer';

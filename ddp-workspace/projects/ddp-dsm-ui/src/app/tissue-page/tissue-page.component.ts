@@ -53,7 +53,7 @@ export class TissuePageComponent implements OnInit {
                private role: RoleService, private util: Utils
   ) {
     if (!auth.authenticated()) {
-      auth.logout();
+      auth.sessionLogout();
     }
     this.route.queryParams.subscribe(params => {
       const realm = params[ DSMService.REALM ] || null;

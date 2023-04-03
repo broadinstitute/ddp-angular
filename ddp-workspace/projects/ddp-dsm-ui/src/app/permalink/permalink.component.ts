@@ -18,7 +18,7 @@ export class PermalinkComponent implements OnInit {
 
   constructor(private router: Router, private route: ActivatedRoute, private dsmService: DSMService, private auth: Auth) {
     if (!auth.authenticated()) {
-      auth.logout();
+      auth.sessionLogout();
     }
   }
 
@@ -60,7 +60,7 @@ export class PermalinkComponent implements OnInit {
         },
         error: err => {
           if (err._body === Auth.AUTHENTICATION_ERROR) {
-            this.auth.logout();
+            this.auth.sessionLogout();
           }
           // eslint-disable-next-line no-throw-literal
           throw 'Error loading institutions' + err;
@@ -78,7 +78,7 @@ export class PermalinkComponent implements OnInit {
         },
         error: err => {
           if (err._body === Auth.AUTHENTICATION_ERROR) {
-            this.auth.logout();
+            this.auth.sessionLogout();
           }
           // eslint-disable-next-line no-throw-literal
           throw 'Error loading medical record data' + err;

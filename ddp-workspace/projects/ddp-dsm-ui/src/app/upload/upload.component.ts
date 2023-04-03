@@ -54,7 +54,7 @@ export class UploadComponent implements OnInit {
   constructor( private dsmService: DSMService, private auth: Auth, private compService: ComponentService, private route: ActivatedRoute,
                private role: RoleService ) {
     if (!auth.authenticated()) {
-      auth.logout();
+      auth.sessionLogout();
     }
     this.realmNameStoredForFile = sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM);
     this.route.queryParams.subscribe(params => {
@@ -122,7 +122,7 @@ export class UploadComponent implements OnInit {
         },
         error: err => {
           if (err._body === Auth.AUTHENTICATION_ERROR) {
-            this.auth.logout();
+            this.auth.sessionLogout();
           }
           this.loading = false;
           this.errorMessage = 'Error - Loading kit types\n' + err;
@@ -156,7 +156,7 @@ export class UploadComponent implements OnInit {
   private checkErrorMessage(err: HttpErrorResponse): void {
     switch (err.status) {
       case 401:
-        this.auth.logout();
+        this.auth.sessionLogout();
         break;
       case 403:
         this.allowedToSeeInformation = false;
@@ -181,7 +181,7 @@ export class UploadComponent implements OnInit {
         },
         error: err => {
           if (err._body === Auth.AUTHENTICATION_ERROR) {
-            this.auth.logout();
+            this.auth.sessionLogout();
           }
           this.loading = false;
           this.errorMessage = 'Error - Loading shipping carriers\n' + err;
@@ -256,7 +256,7 @@ export class UploadComponent implements OnInit {
         },
         error: (err: HttpErrorResponse) => {
           this.loading = false;
-          err.status === 401 && this.auth.logout();
+          err.status === 401 && this.auth.sessionLogout();
           this.errorMessage = err.error;
         }
       });
@@ -312,7 +312,7 @@ export class UploadComponent implements OnInit {
         error: err => {
           this.loading = false;
           if (err._body === Auth.AUTHENTICATION_ERROR) {
-            this.auth.logout();
+            this.auth.sessionLogout();
           }
           this.errorMessage = 'Error - Uploading txt\n' + err;
         }

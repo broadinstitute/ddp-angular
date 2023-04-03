@@ -71,7 +71,7 @@ export class DashboardComponent implements OnInit {
   constructor(private dsmService: DSMService, private auth: Auth, private router: Router, private compService: ComponentService,
                private route: ActivatedRoute, private role: RoleService) {
     if (!auth.authenticated()) {
-      auth.logout();
+      auth.sessionLogout();
     }
     this.route.queryParams.subscribe(params => {
       const realm = params[ DSMService.REALM ] || null;
@@ -124,7 +124,7 @@ export class DashboardComponent implements OnInit {
                     },
                     error: err => {
                       if (err._body === Auth.AUTHENTICATION_ERROR) {
-                        this.auth.logout();
+                        this.auth.sessionLogout();
                       }
                       this.loadingDDPData = false;
                       this.errorMessage = 'Error - Loading ddp information\nPlease contact your DSM developer';
@@ -157,7 +157,7 @@ export class DashboardComponent implements OnInit {
                     },
                     error: err => {
                       if (err._body === Auth.AUTHENTICATION_ERROR) {
-                        this.auth.logout();
+                        this.auth.sessionLogout();
                       }
                       this.errorMessage = 'Error - Loading ddp information\nPlease contact your DSM developer';
                       this.loadingDDPData = false;
@@ -246,7 +246,7 @@ export class DashboardComponent implements OnInit {
       },
       error: err => {
         if (err._body === Auth.AUTHENTICATION_ERROR) {
-          this.auth.logout();
+          this.auth.sessionLogout();
         }
         this.loadingDDPData = false;
         this.errorMessage = 'Error - Loading ddp information ' + err;
@@ -281,7 +281,7 @@ export class DashboardComponent implements OnInit {
       },
       error: err => {
         if (err._body === Auth.AUTHENTICATION_ERROR) {
-          this.auth.logout();
+          this.auth.sessionLogout();
         }
         this.loadingDDPData = false;
         this.errorMessage = 'Error - Loading ddp information ' + err;
@@ -475,7 +475,7 @@ export class DashboardComponent implements OnInit {
       },
       error: err => {
         if (err._body === Auth.AUTHENTICATION_ERROR) {
-          this.auth.logout();
+          this.auth.sessionLogout();
         }
         // eslint-disable-next-line no-throw-literal
         throw 'Error - Loading display settings' + err;
@@ -496,7 +496,7 @@ export class DashboardComponent implements OnInit {
         },
         error: err => {
           if (err._body === Auth.AUTHENTICATION_ERROR) {
-            this.auth.logout();
+            this.auth.sessionLogout();
           }
           this.loadingDDPData = false;
           this.errorMessage = 'Error - Downloading Participant List, Please contact your DSM developer';

@@ -109,7 +109,7 @@ export class ShippingComponent implements OnInit {
                private role: RoleService, private compService: ComponentService, private _changeDetectionRef: ChangeDetectorRef,
                private util: Utils, private language: Language, private localStorageService: LocalStorageService) {
     if (!auth.authenticated()) {
-      auth.logout();
+      auth.sessionLogout();
     }
     this.route.queryParams.subscribe(params => {
       this.setShippingPage(this.router.url);
@@ -232,7 +232,7 @@ export class ShippingComponent implements OnInit {
         },
         error: err => {
           if (err._body === Auth.AUTHENTICATION_ERROR) {
-            this.auth.logout();
+            this.auth.sessionLogout();
           }
           this.loading = false;
           this.additionalMessage = 'Error - Loading kit types\n' + err;
@@ -299,7 +299,7 @@ export class ShippingComponent implements OnInit {
           },
           error: err => {
             if (err._body === Auth.AUTHENTICATION_ERROR) {
-              this.auth.logout();
+              this.auth.sessionLogout();
             }
             this.loading = false;
             this.errorMessage = 'Error - Loading kit request data\n' + err;
@@ -563,7 +563,7 @@ export class ShippingComponent implements OnInit {
         },
         error: err => {
           if (err._body === Auth.AUTHENTICATION_ERROR) {
-            this.auth.logout();
+            this.auth.sessionLogout();
           }
           this.loading = false;
           this.errorMessage = 'Error - Buying express label\n' + err;
@@ -589,7 +589,7 @@ export class ShippingComponent implements OnInit {
         },
         error: err => {
           if (err._body === Auth.AUTHENTICATION_ERROR) {
-            this.auth.logout();
+            this.auth.sessionLogout();
           }
           this.loading = false;
           this.errorMessage = 'Error - Deactivating kit request\n' + err;
@@ -619,7 +619,7 @@ export class ShippingComponent implements OnInit {
         },
         error: err => {
           if (err._body === Auth.AUTHENTICATION_ERROR) {
-            this.auth.logout();
+            this.auth.sessionLogout();
           }
           this.loading = false;
           this.errorMessage = 'Error - Deactivating kit request\n' + err;
@@ -661,7 +661,7 @@ export class ShippingComponent implements OnInit {
         },
         error: err => {
           if (err._body === Auth.AUTHENTICATION_ERROR) {
-            this.auth.logout();
+            this.auth.sessionLogout();
           }
           this.loading = false;
           this.errorMessage = 'Error - Activating kit request.\nPlease contact your DSM developer';
@@ -727,7 +727,7 @@ export class ShippingComponent implements OnInit {
       },
       error: err => {
         if (err._body === Auth.AUTHENTICATION_ERROR) {
-          this.auth.logout();
+          this.auth.sessionLogout();
         }
         this.loading = false;
         this.errorMessage = 'Error - Deactivating kit request\n' + err;
@@ -778,7 +778,7 @@ export class ShippingComponent implements OnInit {
       },
       error: err => {
         if (err._body === Auth.AUTHENTICATION_ERROR) {
-          this.auth.logout();
+          this.auth.sessionLogout();
         }
         this.loading = false;
         this.errorMessage = 'Error - Loading ddp information ' + err;
