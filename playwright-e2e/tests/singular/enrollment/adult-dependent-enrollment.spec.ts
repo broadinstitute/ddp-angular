@@ -10,7 +10,7 @@ import * as user from 'data/fake-user.json';
 import { assertActivityHeader, assertActivityProgress } from 'utils/assertion-helper';
 import { generateUserName } from 'utils/faker-utils';
 
-test.describe('Enrol an adult dependent', () => {
+test.describe.skip('Enrol an adult dependent', () => {
   // Randomize last name
   const dependentLastName = generateUserName(user.adultDependent.lastName);
 

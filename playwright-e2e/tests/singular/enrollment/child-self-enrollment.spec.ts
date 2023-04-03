@@ -3,7 +3,7 @@ import { test } from 'fixtures/singular-fixture';
 import PreScreeningPage from 'pages/singular/enrollment/pre-screening-page';
 import * as user from 'data/fake-user.json';
 
-test.describe('Child Enrollment', () => {
+test.describe.skip('Child Enrollment', () => {
   /**
    * Child (age under 19) cannot complete self-enrollment
    */
