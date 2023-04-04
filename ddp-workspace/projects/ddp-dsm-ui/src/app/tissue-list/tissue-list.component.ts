@@ -123,7 +123,7 @@ export class TissueListComponent implements OnInit {
   constructor(public role: RoleService, private dsmService: DSMService, private compService: ComponentService,
                private router: Router, private auth: Auth, private route: ActivatedRoute) {
     if (!auth.authenticated()) {
-      auth.logout();
+      auth.sessionLogout();
     }
 
     this.route.queryParams.subscribe(params => {
@@ -199,7 +199,7 @@ export class TissueListComponent implements OnInit {
       next: data => {
         jsonData = data;
         jsonData.forEach((val) => {
-          if (localStorage.getItem(ComponentService.MENU_SELECTED_REALM) === val) {
+          if (sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM) === val) {
             allowedToSeeInformation = true;
             this.defaultFilterName = this.role.getUserSetting().defaultTissueFilter;
             this.clearFilters();
@@ -219,14 +219,14 @@ export class TissueListComponent implements OnInit {
 
   ngOnInit(): void {
     this.loading = false;
-    if (localStorage.getItem(ComponentService.MENU_SELECTED_REALM) != null) {
-      this.realm = localStorage.getItem(ComponentService.MENU_SELECTED_REALM);
+    if (sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM) != null) {
+      this.realm = sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM);
       //      this.compService.realmMenu = this.realm;
     } else {
       this.errorMessage = 'Please select a study';
     }
     window.scrollTo(0, 0);
-    if (localStorage.getItem(ComponentService.MENU_SELECTED_REALM) == null) {
+    if (sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM) == null) {
       this.errorMessage = 'Please select a study';
       return;
     } else {
@@ -244,7 +244,7 @@ export class TissueListComponent implements OnInit {
   }
 
   private getFieldSettings(): void {
-    this.dsmService.getFieldSettings(localStorage.getItem(ComponentService.MENU_SELECTED_REALM)).subscribe({
+    this.dsmService.getFieldSettings(sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM)).subscribe({
       next: data => {
         this.allAdditionalColumns = {};
         this.settings = {};
@@ -320,7 +320,7 @@ export class TissueListComponent implements OnInit {
         // for ( let col of this.allColumns["data"] ) {
         //   let t = col.participantColumn.object !== null && col.participantColumn.object !== undefined ? col.participantColumn.object :
         // col.participantColumn.tableAlias; this.allFieldNames.add(t + Statics.DELIMITER_ALIAS + col.participantColumn.name); }
-        this.getAssignees(localStorage.getItem( ComponentService.MENU_SELECTED_REALM ));
+        this.getAssignees(sessionStorage.getItem( ComponentService.MENU_SELECTED_REALM ));
       },
       error: err => {
         this.errorMessage = 'Could not getting the field settings for this study. Please contact your DSM developer\n ' + err;
@@ -384,7 +384,7 @@ export class TissueListComponent implements OnInit {
       }
     }
     if (defaultFilter && this.defaultFilter != null) {
-      this.dsmService.applyFilter(this.defaultFilter, localStorage.getItem(ComponentService.MENU_SELECTED_REALM), this.parent, null)
+      this.dsmService.applyFilter(this.defaultFilter, sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM), this.parent, null)
         .subscribe({
           next: data => {
             if (this.defaultFilter != null && this.defaultFilter.filters != null) {
@@ -442,7 +442,7 @@ export class TissueListComponent implements OnInit {
           },
         });
     } else {
-      this.dsmService.filterData(localStorage.getItem(ComponentService.MENU_SELECTED_REALM), null, this.parent, defaultFilter)
+      this.dsmService.filterData(sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM), null, this.parent, defaultFilter)
         .subscribe({
           next: data => {
             const date = new Date();
@@ -487,7 +487,7 @@ export class TissueListComponent implements OnInit {
           },
           error: err => {
             if (err._body === Auth.AUTHENTICATION_ERROR) {
-              this.auth.logout();
+              this.auth.sessionLogout();
             }
             this.errorMessage = 'Error - Loading Tissues for tissue view, Please contact your DSM developer\n ' + err;
           },
@@ -584,7 +584,7 @@ export class TissueListComponent implements OnInit {
     });
     this.currentFilter = json;
     this.currentView = jsonPatch;
-    this.dsmService.filterData(localStorage.getItem(ComponentService.MENU_SELECTED_REALM), jsonPatch, this.parent, null)
+    this.dsmService.filterData(sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM), jsonPatch, this.parent, null)
       .subscribe({
         next: data => {
           this.loading = false;
@@ -697,7 +697,7 @@ export class TissueListComponent implements OnInit {
     };
     const jsonPatch = JSON.stringify(jsonData);
     this.currentView = jsonPatch;
-    this.dsmService.saveCurrentFilter(jsonPatch, localStorage.getItem(ComponentService.MENU_SELECTED_REALM), this.parent).subscribe({
+    this.dsmService.saveCurrentFilter(jsonPatch, sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM), this.parent).subscribe({
       next: data => {
         const result = Result.parse(data);
         if (result.code === 500 && result.body != null) {
@@ -728,7 +728,7 @@ export class TissueListComponent implements OnInit {
   }
 
   getAllFilters(applyDefault: boolean): void {
-    this.dsmService.getFiltersForUserForRealm(localStorage.getItem(ComponentService.MENU_SELECTED_REALM), this.parent)
+    this.dsmService.getFiltersForUserForRealm(sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM), this.parent)
       .subscribe({
         next: jsonData => {
           this.savedFilters = [];
@@ -783,7 +783,7 @@ export class TissueListComponent implements OnInit {
   public shareFilter(savedFilter: ViewFilter, i): void {
     const value = savedFilter.shared ? '0' : '1';
     const patch1 = new PatchUtil(savedFilter.id, this.role.userMail(),
-      { name: 'shared', value }, null, this.parent, null, null, null, localStorage.getItem(ComponentService.MENU_SELECTED_REALM), null);
+      { name: 'shared', value }, null, this.parent, null, null, null, sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM), null);
     const patch = patch1.getPatch();
     this.dsmService.patchParticipantRecord(JSON.stringify(patch)).subscribe(data => {
       this.savedFilters[ i ].shared = (value === '1');
@@ -795,7 +795,7 @@ export class TissueListComponent implements OnInit {
       savedFilter.id, this.role.userMail(),
       { name: 'fDeleted', value: '1' },
       null, this.parent, null, null, null,
-      localStorage.getItem(ComponentService.MENU_SELECTED_REALM), null
+      sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM), null
     );
     const patch = patch1.getPatch();
     this.dsmService.patchParticipantRecord(JSON.stringify(patch)).subscribe(data => {
@@ -884,7 +884,7 @@ export class TissueListComponent implements OnInit {
     this.loading = true;
     this.currentQuickFilterName = quickFilter.name;
     this.currentView = JSON.stringify(quickFilter);
-    this.dsmService.applyFilter(quickFilter, localStorage.getItem(ComponentService.MENU_SELECTED_REALM), this.parent, null)
+    this.dsmService.applyFilter(quickFilter, sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM), this.parent, null)
       .subscribe({
         next: data => {
           if (quickFilter != null && quickFilter.filters != null) {
@@ -942,7 +942,7 @@ export class TissueListComponent implements OnInit {
     this.wrongQuery = false;
     const destroyingViewFilter = new ViewFilter(null, filterName, this.destructionPolicyColumns, false, '0',
       null, null, this.parent, null, null, null);
-    this.dsmService.applyFilter(destroyingViewFilter, localStorage.getItem(ComponentService.MENU_SELECTED_REALM), this.parent, null)
+    this.dsmService.applyFilter(destroyingViewFilter, sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM), this.parent, null)
       .subscribe({
         next: data => {
           if (destroyingViewFilter.filters != null) {
@@ -1012,7 +1012,7 @@ export class TissueListComponent implements OnInit {
           value: v,
         }, null, 'participantId', this.tissueListWrappers[ index ].tissueList.oncHistoryDetails.participantId,
         Statics.ONCDETAIL_ALIAS, null,
-        localStorage.getItem(ComponentService.MENU_SELECTED_REALM), this.tissueListWrappers[ index ].tissueList.ddpParticipantId
+        sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM), this.tissueListWrappers[ index ].tissueList.ddpParticipantId
       );
       const patch = patch1.getPatch();
       this.patch(patch, index);
@@ -1085,7 +1085,7 @@ export class TissueListComponent implements OnInit {
       this.loading = false;
     } else {
       this.dsmService.getParticipantData(
-          localStorage.getItem(ComponentService.MENU_SELECTED_REALM),
+          sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM),
           tissueListWrapper.tissueList.ddpParticipantId, this.parent
         )
         .subscribe({
@@ -1166,7 +1166,7 @@ export class TissueListComponent implements OnInit {
 
   public doFilterByQuery(queryText: string): void {
     this.deactivateSavedFilterIfNotInUse(queryText);
-    this.dsmService.applyFilter(null, localStorage.getItem(ComponentService.MENU_SELECTED_REALM), this.parent, queryText)
+    this.dsmService.applyFilter(null, sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM), this.parent, queryText)
       .subscribe({
         next: data => {
           const date = new Date();
@@ -1609,7 +1609,7 @@ export class TissueListComponent implements OnInit {
         }
       }
       this.deselect();
-      this.dsmService.assignParticipant(localStorage.getItem(ComponentService.MENU_SELECTED_REALM), false,
+      this.dsmService.assignParticipant(sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM), false,
           this.assignTissue, JSON.stringify(assignParticipants)
         )
         .subscribe({ // need to subscribe, otherwise it will not send!

@@ -159,7 +159,7 @@ export class TissueComponent {
           name: parameterName,
           value: v,
         }, nameValues, parentName, parentId, tAlias, null,
-        localStorage.getItem(ComponentService.MENU_SELECTED_REALM), this.participant.data.profile['guid']
+        sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM), this.participant.data.profile['guid']
       );
       const patch = patch1.getPatch();
       this.patchFinished = false;
@@ -210,7 +210,7 @@ export class TissueComponent {
     if (this.collaboratorS == null && (this.tissue.collaboratorSampleId == null || this.tissue.collaboratorSampleId === '')) {
       this.dsmService.lookupCollaboratorId(
         'tCollab', this.participant.participant.ddpParticipantId,
-          this.participant.data.profile['hruid'], localStorage.getItem(ComponentService.MENU_SELECTED_REALM)
+          this.participant.data.profile['hruid'], sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM)
         )
         .subscribe({// need to subscribe, otherwise it will not send!
           next: data => {

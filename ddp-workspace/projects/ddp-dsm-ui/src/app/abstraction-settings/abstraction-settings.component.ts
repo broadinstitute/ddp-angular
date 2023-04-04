@@ -36,7 +36,7 @@ export class AbstractionSettingsComponent implements OnInit {
     private route: ActivatedRoute
   ) {
     if (!auth.authenticated()) {
-      auth.logout();
+      auth.sessionLogout();
     }
     this.route.queryParams.subscribe({
       next: params => {
@@ -50,8 +50,8 @@ export class AbstractionSettingsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (localStorage.getItem(ComponentService.MENU_SELECTED_REALM) != null) {
-      this.realm = localStorage.getItem(ComponentService.MENU_SELECTED_REALM);
+    if (sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM) != null) {
+      this.realm = sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM);
       this.checkRight();
     } else {
       this.additionalMessage = 'Please select a study';
@@ -83,7 +83,7 @@ export class AbstractionSettingsComponent implements OnInit {
   loadAbstractionFormControls(): void {
     this.loading = true;
     let jsonData: any[];
-    this.dsmService.getMedicalRecordAbstractionFormControls(localStorage.getItem(ComponentService.MENU_SELECTED_REALM)).subscribe({
+    this.dsmService.getMedicalRecordAbstractionFormControls(sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM)).subscribe({
       next: data => {
         this.abstractionFormControls = [];
         jsonData = data;
@@ -95,7 +95,7 @@ export class AbstractionSettingsComponent implements OnInit {
       },
       error: err => {
         if (err._body === Auth.AUTHENTICATION_ERROR) {
-          this.auth.logout();
+          this.auth.sessionLogout();
           this.loading = false;
         }
         this.errorMessage = 'Error - Loading medical record abstraction form controls\n ' + err;
@@ -118,7 +118,7 @@ export class AbstractionSettingsComponent implements OnInit {
         this.loading = false;
       } else {
         this.dsmService.saveMedicalRecordAbstractionFormControls(
-            localStorage.getItem(ComponentService.MENU_SELECTED_REALM),
+            sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM),
             JSON.stringify(cleanedSettings, (key, value) => {
               if (value !== null) {
                 return value;
@@ -130,7 +130,7 @@ export class AbstractionSettingsComponent implements OnInit {
             },
             error: err => {
               if (err._body === Auth.AUTHENTICATION_ERROR) {
-                this.auth.logout();
+                this.auth.sessionLogout();
                 this.loading = false;
               }
               this.errorMessage = 'Error - Loading medical record abstraction form controls\n ' + err;
