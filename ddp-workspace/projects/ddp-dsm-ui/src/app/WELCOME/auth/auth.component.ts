@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {Title} from '@angular/platform-browser';
-import { Observable, tap} from 'rxjs';
+import {Observable, tap} from 'rxjs';
 import {Auth} from '../../services/auth.service';
 import {ComponentService} from '../../services/component.service';
 
