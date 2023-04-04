@@ -25,7 +25,7 @@ export class ShippingSearchComponent implements OnInit {
 
   constructor(private dsmService: DSMService, private auth: Auth, private role: RoleService) {
     if (!auth.authenticated()) {
-      auth.logout();
+      auth.sessionLogout();
     }
   }
 
@@ -67,7 +67,7 @@ export class ShippingSearchComponent implements OnInit {
         },
         error: err => {
           if (err._body === Auth.AUTHENTICATION_ERROR) {
-            this.auth.logout();
+            this.auth.sessionLogout();
           }
           this.errorMessage = 'Error - Loading ddp information\nPlease contact your DSM developer';
           this.searching = false;
@@ -112,7 +112,7 @@ export class ShippingSearchComponent implements OnInit {
           },
           error: err => {
             if (err._body === Auth.AUTHENTICATION_ERROR) {
-              this.auth.logout();
+              this.auth.sessionLogout();
             }
             this.errorMessage = 'Error - Loading ddp information\nPlease contact your DSM developer';
             this.searching = false;

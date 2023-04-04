@@ -20,7 +20,7 @@ export class ShippingReportComponent implements OnInit {
 
   constructor(private dsmService: DSMService, private auth: Auth) {
     if (!auth.authenticated()) {
-      auth.logout();
+      auth.sessionLogout();
     }
   }
 
@@ -53,7 +53,7 @@ export class ShippingReportComponent implements OnInit {
       },
       error: err => {
         if (err._body === Auth.AUTHENTICATION_ERROR) {
-          this.auth.logout();
+          this.auth.sessionLogout();
         }
         this.loadingReport = false;
         this.errorMessage = 'Error - Loading Sample Report\nPlease contact your DSM developer';
@@ -93,7 +93,7 @@ export class ShippingReportComponent implements OnInit {
       },
       error: err => {
         if (err._body === Auth.AUTHENTICATION_ERROR) {
-          this.auth.logout();
+          this.auth.sessionLogout();
         }
         this.loadingReport = false;
         this.errorMessage = 'Error - Loading Sample Report\nPlease contact your DSM developer';
