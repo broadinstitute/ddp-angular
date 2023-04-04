@@ -43,8 +43,8 @@ export class StoolUploadComponent implements OnInit {
   allowedToSeeInformation = false;
 
   constructor( private dsmService: DSMService, private auth: Auth, private compService: ComponentService, private route: ActivatedRoute) {
-    !auth.authenticated() && auth.logout();
-    this.realmNameStoredForFile = localStorage.getItem(ComponentService.MENU_SELECTED_REALM);
+    !auth.authenticated() && auth.sessionLogout();
+    this.realmNameStoredForFile = sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM);
     this.route.queryParams.subscribe(params => {
       const realm = params[ DSMService.REALM ] || null;
       !!realm && this.checkRight();
@@ -104,7 +104,7 @@ export class StoolUploadComponent implements OnInit {
         },
         error: err => {
           if (err._body === Auth.AUTHENTICATION_ERROR) {
-            this.auth.logout();
+            this.auth.sessionLogout();
           }
           this.loading = false;
           this.errorMessage = 'Error - Loading kit types\n' + err;
@@ -130,7 +130,7 @@ export class StoolUploadComponent implements OnInit {
         },
         error: err => {
           if (err._body === Auth.AUTHENTICATION_ERROR) {
-            this.auth.logout();
+            this.auth.sessionLogout();
           }
           this.errorMessage = err.error;
         },
@@ -147,7 +147,7 @@ export class StoolUploadComponent implements OnInit {
   }
 
   private get selectedRealm(): string {
-    return localStorage.getItem(ComponentService.MENU_SELECTED_REALM);
+    return sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM);
   }
 
 }

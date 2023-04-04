@@ -69,7 +69,7 @@ export class MedicalRecordComponent implements OnInit {
               private dsmService: DSMService, private router: Router,
                private role: RoleService, private util: Utils, private route: ActivatedRoute) {
     if (!auth.authenticated()) {
-      auth.logout();
+      auth.sessionLogout();
     }
     this.route.queryParams.subscribe(params => {
       const realm = params[ DSMService.REALM ] || null;
@@ -150,7 +150,7 @@ export class MedicalRecordComponent implements OnInit {
     }
     if (v !== null) {
       const participantId: string = this.getParticipantId();
-      const realm: string = localStorage.getItem(ComponentService.MENU_SELECTED_REALM);
+      const realm: string = sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM);
       const patch1 = new PatchUtil(
         this.medicalRecord.medicalRecordId, this.role.userMail(),
         {name: parameterName, value: v}, null, null, participantId,
@@ -207,7 +207,7 @@ export class MedicalRecordComponent implements OnInit {
       },
       error: err => {
         if (err._body === Auth.AUTHENTICATION_ERROR) {
-          this.auth.logout();
+          this.auth.sessionLogout();
         }
         this.errorMessage = 'Error - Loading mr log\nPlease contact your DSM developer';
       }
@@ -256,7 +256,7 @@ export class MedicalRecordComponent implements OnInit {
       this.downloading = true;
       this.message = 'Downloading... This might take a while';
       this.dsmService.downloadPDF(this.participant.data.profile['guid'], this.medicalRecord.medicalRecordId,
-        this.startDate, this.endDate, this.mrCoverPdfSettings, localStorage.getItem(ComponentService.MENU_SELECTED_REALM),
+        this.startDate, this.endDate, this.mrCoverPdfSettings, sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM),
         configName, this.pdfs, null
       )
         .subscribe({
@@ -325,7 +325,7 @@ export class MedicalRecordComponent implements OnInit {
 
         this.lookups        = [];
         const participantId = this.getParticipantId();
-        const realm         = localStorage.getItem(ComponentService.MENU_SELECTED_REALM);
+        const realm         = sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM);
         const patch         = new PatchUtil(
           this.medicalRecord.medicalRecordId,
           this.role.userMail(),
