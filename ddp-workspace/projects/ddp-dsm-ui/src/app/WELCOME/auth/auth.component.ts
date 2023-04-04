@@ -1,10 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {Title} from '@angular/platform-browser';
-import {fromEvent, Observable, tap} from 'rxjs';
+import { Observable, tap} from 'rxjs';
 import {Auth} from '../../services/auth.service';
 import {ComponentService} from '../../services/component.service';
-import {SessionService} from '../../services/session.service';
 
 
 @Component({
@@ -44,7 +43,6 @@ export class AuthComponent implements OnInit {
   popUpIsShown = true;
   authError: Observable<string | null>;
   pickList$: Observable<any>;
-  private source$: Observable<StorageEvent>;
 
   constructor(private auth: Auth, private title: Title, private router: Router) {}
 
