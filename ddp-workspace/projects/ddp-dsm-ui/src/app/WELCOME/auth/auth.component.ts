@@ -49,17 +49,6 @@ export class AuthComponent implements OnInit {
   constructor(private auth: Auth, private title: Title, private router: Router) {}
 
   ngOnInit(): void {
-
-    this.source$ = fromEvent<StorageEvent>(window, 'storage');
-    this.source$.subscribe(
-      event => {
-        if (event.key === SessionService.DSM_TOKEN_NAME && event.newValue === null) {
-          this.auth.doLogout();
-          this.router.navigateByUrl('/');
-        }
-      }
-    );
-
     if (this.auth.authenticated()) {
       const selectedRealm = sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM);
       this.router.navigate([selectedRealm]);

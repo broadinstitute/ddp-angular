@@ -4,7 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {
   throwError,
   Subject,
-  Subscription, Observable, BehaviorSubject
+  Subscription, Observable, BehaviorSubject, fromEvent
 } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
@@ -46,6 +46,7 @@ export class Auth {
 
   selectedStudy = new BehaviorSubject<string>('');
 
+  source$ = fromEvent<StorageEvent>(window, 'storage');
 
   // Configure Auth0
   lock = new Auth0Lock(DDP_ENV.auth0ClientKey, DDP_ENV.auth0Domain, {
@@ -106,7 +107,14 @@ export class Auth {
     this.lockForDiscard.on('authenticated', (authResult: any) => {
       this.kitDiscard.next(authResult.idToken);
     });
-
+    this.source$.subscribe(
+      event => {
+        if (event.key === SessionService.DSM_TOKEN_NAME && event.newValue === null) {
+          this.doLogout();
+          this.router.navigateByUrl('/');
+        }
+      }
+    );
   }
 
   public getSelectedStudy(): Observable<string> {
