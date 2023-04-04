@@ -46,14 +46,7 @@ export class Auth implements OnDestroy {
 
   selectedStudy = new BehaviorSubject<string>('');
 
-  storageEventSource$ = fromEvent<StorageEvent>(window, 'storage').subscribe(
-    event => {
-      if (event.key === SessionService.DSM_TOKEN_NAME && event.newValue === null) {
-        this.doLogout();
-        this.router.navigateByUrl('/');
-      }
-    }
-  );
+  storageEventSource$: Subscription;
 
   // Configure Auth0
   lock = new Auth0Lock(DDP_ENV.auth0ClientKey, DDP_ENV.auth0Domain, {
@@ -114,6 +107,15 @@ export class Auth implements OnDestroy {
     this.lockForDiscard.on('authenticated', (authResult: any) => {
       this.kitDiscard.next(authResult.idToken);
     });
+
+    this.storageEventSource$ = fromEvent<StorageEvent>(window, 'storage').subscribe(
+      event => {
+        if (event.key === SessionService.DSM_TOKEN_NAME && event.newValue === null) {
+          this.doLogout();
+          this.router.navigateByUrl('/');
+        }
+      }
+    );
   }
 
   public getSelectedStudy(): Observable<string> {
