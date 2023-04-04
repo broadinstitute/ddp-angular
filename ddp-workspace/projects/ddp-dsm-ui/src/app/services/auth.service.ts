@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable, OnDestroy} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {
@@ -20,7 +20,7 @@ declare var Auth0Lock: any;
 declare var DDP_ENV: any;
 
 @Injectable({providedIn: 'root'})
-export class Auth {
+export class Auth implements OnDestroy {
   static AUTH0_TOKEN_NAME = 'auth_token';
 
   public static AUTHENTICATION_ERROR = 'AUTHENTICATION_ERROR';
@@ -46,7 +46,14 @@ export class Auth {
 
   selectedStudy = new BehaviorSubject<string>('');
 
-  source$ = fromEvent<StorageEvent>(window, 'storage');
+  storageEventSource$ = fromEvent<StorageEvent>(window, 'storage').subscribe(
+    event => {
+      if (event.key === SessionService.DSM_TOKEN_NAME && event.newValue === null) {
+        this.doLogout();
+        this.router.navigateByUrl('/');
+      }
+    }
+  );
 
   // Configure Auth0
   lock = new Auth0Lock(DDP_ENV.auth0ClientKey, DDP_ENV.auth0Domain, {
@@ -107,14 +114,6 @@ export class Auth {
     this.lockForDiscard.on('authenticated', (authResult: any) => {
       this.kitDiscard.next(authResult.idToken);
     });
-    this.source$.subscribe(
-      event => {
-        if (event.key === SessionService.DSM_TOKEN_NAME && event.newValue === null) {
-          this.doLogout();
-          this.router.navigateByUrl('/');
-        }
-      }
-    );
   }
 
   public getSelectedStudy(): Observable<string> {
@@ -232,6 +231,10 @@ export class Auth {
       .then(() => {
         this.router.navigate([navigateUrl]);
       });
+  }
+
+  ngOnDestroy(): void {
+    this.storageEventSource$.unsubscribe();
   }
 
 }
