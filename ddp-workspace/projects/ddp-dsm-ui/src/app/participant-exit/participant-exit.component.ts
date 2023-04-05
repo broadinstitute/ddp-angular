@@ -12,7 +12,7 @@ import { DiscardSample } from '../discard-sample/discard-sample.model';
 @Component({
   selector: 'app-participant-exit',
   templateUrl: './participant-exit.component.html',
-  styleUrls: ['./participant-exit.component.css']
+  styleUrls: ['./participant-exit.component.scss']
 })
 export class ParticipantExitComponent implements OnInit {
   errorMessage: string;
