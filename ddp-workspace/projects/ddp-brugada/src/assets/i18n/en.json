@@ -174,7 +174,7 @@
                     {
                         "Name": "Is there information that I can bring to my doctor so that I can discuss this study with them?",
                         "Answers": [
-                            "Yes, you can print out or use your mobile device to share the documents <a class=\"underlined-link\" target=\"_blank\" href=\"https://storage.googleapis.com/cmi-study-dev-assets/brugada/pdf/For%20Physicians-v2.pdf\">here</a>."
+                            "Yes, you can print out or use your mobile device to share the documents <a class=\"underlined-link\" target=\"_blank\" href=\"https://storage.googleapis.com/cmi-study-dev-assets/brugada/pdf/For_Physicians_v2.pdf\">here</a>."
                         ]
                     },
                     {
