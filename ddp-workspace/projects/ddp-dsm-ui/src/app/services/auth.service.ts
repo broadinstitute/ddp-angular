@@ -1,12 +1,12 @@
 import {Injectable, OnDestroy} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 import {
   throwError,
   Subject,
   Subscription, Observable, BehaviorSubject, fromEvent
 } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import {catchError} from 'rxjs/operators';
 
 import { NameValue } from '../utils/name-value.model';
 import { SessionService } from './session.service';
@@ -177,11 +177,20 @@ export class Auth implements OnDestroy {
     return {headers, withCredentials: true};
   }
 
+  private checkForAuth0Error(error: any): boolean {
+    return (error instanceof HttpErrorResponse &&  error && error.hasOwnProperty('status') && error.hasOwnProperty('ok') && error.message && error.url &&
+      (error.status === 401 || error.status === 0)
+      && !error.ok && error.message.includes('ui/auth0: 0 Unknown Error') && error.url.includes('ui/auth0'))
+  }
   private handleError(error: any): Observable<any> {
     // In a real world app, we might use a remote logging infrastructure
     // We'd also dig deeper into the error to get a better message
     let errMsg: string | null = null;
-
+    if(this.checkForAuth0Error(error)) {
+      this.doLogout();
+      this.lock.show();
+      return;
+    }
     if(error.status === 500) {
       errMsg = 'Incorrect user name or password.';
     } else {
