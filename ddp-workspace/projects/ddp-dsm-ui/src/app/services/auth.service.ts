@@ -178,9 +178,10 @@ export class Auth implements OnDestroy {
   }
 
   private checkForAuth0Error(error: any): boolean {
-    return (error instanceof HttpErrorResponse &&  error && error.hasOwnProperty('status') && error.hasOwnProperty('ok') && error.message && error.url &&
+    return (error instanceof HttpErrorResponse &&  error && error.hasOwnProperty('status')
+      && error.hasOwnProperty('ok') && error.message && error.url &&
       (error.status === 401 || error.status === 0)
-      && !error.ok && error.message.includes('ui/auth0: 0 Unknown Error') && error.url.includes('ui/auth0'))
+      && !error.ok && error.message.includes('ui/auth0: 0 Unknown Error') && error.url.includes('ui/auth0'));
   }
   private handleError(error: any): Observable<any> {
     // In a real world app, we might use a remote logging infrastructure
