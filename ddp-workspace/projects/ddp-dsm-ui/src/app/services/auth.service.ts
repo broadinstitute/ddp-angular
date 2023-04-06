@@ -140,7 +140,9 @@ export class Auth implements OnDestroy {
     this.selectedRealm = null;
 }
   public sessionLogout(): void {
-    this.doLogout();
+    // Do NOT remove token from localStorage at this point.
+    this.sessionService.logout();
+    this.selectedRealm = null;
   }
 
   public doLogin(authPayload: any): void {
