@@ -51,7 +51,7 @@ export class OncHistoryDetailComponent implements OnInit {
   patchFinished = true;
 
   constructor(private dsmService: DSMService, private compService: ComponentService, private role: RoleService,
-               private router: Router, private util: Utils) {
+               private router: Router, private util: Utils, private auth: Auth) {
   }
 
   ngOnInit(): void {
@@ -174,7 +174,7 @@ export class OncHistoryDetailComponent implements OnInit {
       },
       error: err => {
         if (err._body === Auth.AUTHENTICATION_ERROR) {
-          this.router.navigate([ Statics.HOME_URL ]);
+          this.auth.doLogout();
         }
       }
     });
@@ -258,7 +258,7 @@ export class OncHistoryDetailComponent implements OnInit {
       },
       error: err => {
         if (err._body === Auth.AUTHENTICATION_ERROR) {
-          this.router.navigate([ Statics.HOME_URL ]);
+          this.auth.doLogout();
         }
       }
     });

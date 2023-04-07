@@ -17,7 +17,6 @@ import {
 import {Subject, takeUntil} from 'rxjs';
 import {InputField} from './interfaces/input-field';
 import {Auth} from '../services/auth.service';
-import {Statics} from '../utils/statics';
 import {Scanner} from './interfaces/scanners';
 import {first} from 'rxjs/operators';
 // changing
@@ -47,7 +46,8 @@ export class ScannerComponent implements DoCheck, OnDestroy {
     private readonly fb: FormBuilder,
     private readonly activatedRoute: ActivatedRoute,
     private readonly cdr: ChangeDetectorRef,
-    private readonly router: Router
+    private readonly router: Router,
+    private auth: Auth
   ) {
     activatedRoute.queryParams
       .pipe(takeUntil(this.subscriptionSubject$))
@@ -96,7 +96,7 @@ export class ScannerComponent implements DoCheck, OnDestroy {
         error: async (error: any) => {
           this.cdr.markForCheck();
           if (error.body === Auth.AUTHENTICATION_ERROR) {
-            await this.router.navigate([Statics.HOME_URL]);
+            this.auth.doLogout();
           }
           this.additionalMessage = 'Error - Failed to save data';
         }

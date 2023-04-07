@@ -93,7 +93,7 @@ export class MailingListComponent implements OnInit {
         },
         error: err => {
           if (err._body === Auth.AUTHENTICATION_ERROR) {
-            this.auth.sessionLogout();
+            this.auth.doLogout();
           }
           this.errorMessage = 'Error - Loading contacts  ' + err;
           this.loadingContacts = false;

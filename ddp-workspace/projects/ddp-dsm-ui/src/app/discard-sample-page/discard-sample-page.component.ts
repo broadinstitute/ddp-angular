@@ -96,7 +96,7 @@ export class DiscardSamplePageComponent implements OnInit, OnDestroy {
         },
         error: err => {
           if (err._body === Auth.AUTHENTICATION_ERROR) {
-            this.auth.sessionLogout();
+            this.auth.doLogout();
           }
           this.errorMessage = 'Error - Loading list of samples of exited participants\nPlease contact your DSM developer';
         }
@@ -120,7 +120,7 @@ export class DiscardSamplePageComponent implements OnInit, OnDestroy {
       },
       error: err => {
         if (err._body === Auth.AUTHENTICATION_ERROR) {
-          this.auth.sessionLogout();
+          this.auth.doLogout();
         }
         this.errorMessage = 'Error - Uploading file\nPlease contact your DSM developer';
         this.waiting = false;
@@ -140,7 +140,7 @@ export class DiscardSamplePageComponent implements OnInit, OnDestroy {
         },
         error: err => {
           if (err._body === Auth.AUTHENTICATION_ERROR) {
-            this.auth.sessionLogout();
+            this.auth.doLogout();
           }
           this.errorMessage = 'Error - Loading list of samples of exited participants\nPlease contact your DSM developer';
         }
@@ -174,7 +174,7 @@ export class DiscardSamplePageComponent implements OnInit, OnDestroy {
         },
         error: err => {
           if (err._body === Auth.AUTHENTICATION_ERROR) {
-            this.auth.sessionLogout();
+            this.auth.doLogout();
           }
           this.modalRef.hide();
           this.additionalMessage = null;
@@ -224,7 +224,7 @@ export class DiscardSamplePageComponent implements OnInit, OnDestroy {
       error: err => {
         if (err._body === Auth.AUTHENTICATION_ERROR) {
           console.info('received error back');
-          this.auth.sessionLogout();
+          this.auth.doLogout();
         }
         this.errorMessage = 'Error - Loading list of samples of exited participants\nPlease contact your DSM developer';
       }

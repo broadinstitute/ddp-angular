@@ -98,7 +98,7 @@ export class ParticipantExitComponent implements OnInit {
         },
         error: err => {
           if (err._body === Auth.AUTHENTICATION_ERROR) {
-            this.router.navigate([Statics.HOME_URL]);
+            this.auth.doLogout();
           }
           this.errorMessage = 'Error - Failed to exit participant';
           this.loading = false;
@@ -121,7 +121,7 @@ export class ParticipantExitComponent implements OnInit {
       },
       error: err => {
         if (err._body === Auth.AUTHENTICATION_ERROR) {
-          this.auth.sessionLogout();
+          this.auth.doLogout();
         }
         this.loading = false;
         this.errorMessage = 'Error - Loading list of samples of exited participants\nPlease contact your DSM developer';
@@ -148,7 +148,7 @@ export class ParticipantExitComponent implements OnInit {
         },
         error: err => {
           if (err._body === Auth.AUTHENTICATION_ERROR) {
-            this.auth.sessionLogout();
+            this.auth.doLogout();
           }
           this.loading = false;
           this.errorMessage = 'Error - Loading list of exited participants\nPlease contact your DSM developer';

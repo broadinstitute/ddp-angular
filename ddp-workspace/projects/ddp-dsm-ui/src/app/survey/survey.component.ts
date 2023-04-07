@@ -121,7 +121,7 @@ export class SurveyComponent implements OnInit {
         },
         error: err => {
           if (err._body === Auth.AUTHENTICATION_ERROR) {
-            this.auth.sessionLogout();
+            this.auth.doLogout();
           }
           this.loading = false;
           this.errorMessage = 'Error - Loading list of surveys\nPlease contact your DSM developer';
@@ -156,7 +156,7 @@ export class SurveyComponent implements OnInit {
         },
         error: err => {
           if (err._body === Auth.AUTHENTICATION_ERROR) {
-            this.auth.sessionLogout();
+            this.auth.doLogout();
           }
           this.loading = false;
           this.errorMessage = 'Error - Loading list of survey status\nPlease contact your DSM developer';
@@ -276,7 +276,7 @@ export class SurveyComponent implements OnInit {
         error: err => {
           this.loading = false;
           if (err._body === Auth.AUTHENTICATION_ERROR) {
-            this.auth.sessionLogout();
+            this.auth.doLogout();
           }
           this.errorMessage = 'Error - Uploading txt\n' + err;
         }

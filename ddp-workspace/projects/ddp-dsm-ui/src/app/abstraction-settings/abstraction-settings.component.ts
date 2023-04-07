@@ -95,7 +95,7 @@ export class AbstractionSettingsComponent implements OnInit {
       },
       error: err => {
         if (err._body === Auth.AUTHENTICATION_ERROR) {
-          this.auth.sessionLogout();
+          this.auth.doLogout();
           this.loading = false;
         }
         this.errorMessage = 'Error - Loading medical record abstraction form controls\n ' + err;
@@ -130,7 +130,7 @@ export class AbstractionSettingsComponent implements OnInit {
             },
             error: err => {
               if (err._body === Auth.AUTHENTICATION_ERROR) {
-                this.auth.sessionLogout();
+                this.auth.doLogout();
                 this.loading = false;
               }
               this.errorMessage = 'Error - Loading medical record abstraction form controls\n ' + err;

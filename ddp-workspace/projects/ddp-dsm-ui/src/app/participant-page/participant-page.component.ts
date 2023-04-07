@@ -585,7 +585,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
         },
         error: err => {
           if (err._body === Auth.AUTHENTICATION_ERROR) {
-            this.router.navigate([Statics.HOME_URL]);
+            this.auth.doLogout();
           }
           this.additionalMessage = 'Error - Saving changed field \n' + err;
         }
@@ -623,7 +623,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
         },
         error: err => {
           if (err._body === Auth.AUTHENTICATION_ERROR) {
-            this.auth.sessionLogout();
+            this.auth.doLogout();
           }
         }
       });
@@ -670,7 +670,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
         },
         error: err => {
           if (err._body === Auth.AUTHENTICATION_ERROR) {
-            this.router.navigate([Statics.HOME_URL]);
+            this.auth.doLogout();
           }
         }
       });
@@ -791,7 +791,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
       },
       error: err => {
         if (err._body === Auth.AUTHENTICATION_ERROR) {
-          this.router.navigate([Statics.HOME_URL]);
+          this.auth.doLogout();
         }
         this.additionalMessage = 'Error - Saving paper C/R changes \n' + err;
       }
@@ -855,7 +855,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
       },
       error: err => {
         if (err._body === Auth.AUTHENTICATION_ERROR) {
-          this.router.navigate([Statics.HOME_URL]);
+          this.auth.doLogout();
         }
         this.disableTissueRequestButton = false;
         this.downloading = false;
@@ -990,7 +990,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
         },
         error: err => {
           if (err._body === Auth.AUTHENTICATION_ERROR) {
-            this.auth.sessionLogout();
+            this.auth.doLogout();
           }
         }
       });
@@ -1045,7 +1045,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
         },
         error: err => {
           if (err._body === Auth.AUTHENTICATION_ERROR) {
-            this.router.navigate([Statics.HOME_URL]);
+            this.auth.doLogout();
           }
         }
       });
@@ -1085,7 +1085,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
       },
       error: err => {
         if (err._body === Auth.AUTHENTICATION_ERROR) {
-          this.router.navigate([Statics.HOME_URL]);
+          this.auth.doLogout();
         }
       }
     });
@@ -1127,7 +1127,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
       },
       error: err => {
         if (err._body === Auth.AUTHENTICATION_ERROR) {
-          this.router.navigate([Statics.HOME_URL]);
+          this.auth.doLogout();
         }
       }
     });
@@ -1161,7 +1161,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
       },
       error: err => {
         if (err._body === Auth.AUTHENTICATION_ERROR) {
-          this.router.navigate([Statics.HOME_URL]);
+          this.auth.doLogout();
         }
       }
     });
@@ -1286,7 +1286,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
       },
       error: err => {
         if (err._body === Auth.AUTHENTICATION_ERROR) {
-          this.router.navigate([Statics.HOME_URL]);
+          this.auth.doLogout();
         }
         this.additionalMessage = 'Error - Downloading consent pdf file\nPlease contact your DSM developer';
         this.disableDownload = false;
@@ -1571,7 +1571,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
           },
           error: err => {
             if (err._body === Auth.AUTHENTICATION_ERROR) {
-              this.router.navigate([Statics.HOME_URL]);
+              this.auth.doLogout();
             }
           }
         });

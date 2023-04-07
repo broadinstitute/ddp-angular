@@ -60,7 +60,7 @@ export class PermalinkComponent implements OnInit {
         },
         error: err => {
           if (err._body === Auth.AUTHENTICATION_ERROR) {
-            this.auth.sessionLogout();
+            this.auth.doLogout();
           }
           // eslint-disable-next-line no-throw-literal
           throw 'Error loading institutions' + err;
@@ -78,14 +78,14 @@ export class PermalinkComponent implements OnInit {
         },
         error: err => {
           if (err._body === Auth.AUTHENTICATION_ERROR) {
-            this.auth.sessionLogout();
+            this.auth.doLogout();
           }
           // eslint-disable-next-line no-throw-literal
           throw 'Error loading medical record data' + err;
         }
       });
     } else {
-      this.router.navigate([ Statics.HOME_URL ]);
+      this.router.navigateByUrl('/');
     }
   }
 }

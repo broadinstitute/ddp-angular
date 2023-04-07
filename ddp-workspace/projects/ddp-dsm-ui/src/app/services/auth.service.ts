@@ -90,8 +90,8 @@ export class Auth implements OnDestroy {
 
   constructor(private router: Router, private activatedRoute: ActivatedRoute, private http: HttpClient,
               private sessionService: SessionService, private role: RoleService,
-              private compService: ComponentService, private dsmService: DSMService, private localStorageService: LocalStorageService
-               ) {
+              private compService: ComponentService, private dsmService: DSMService,
+              private localStorageService: LocalStorageService) {
     // Add callback for lock `authenticated` event
     this.lock.on('authenticated', (authResult: any) => {
       localStorage.setItem(Auth.AUTH0_TOKEN_NAME, authResult.idToken);
@@ -112,7 +112,6 @@ export class Auth implements OnDestroy {
       event => {
         if (event.key === SessionService.DSM_TOKEN_NAME && event.newValue === null) {
           this.doLogout();
-          this.router.navigateByUrl('/');
         }
       }
     );
@@ -138,6 +137,7 @@ export class Auth implements OnDestroy {
     this.localStorageService.clear();
     this.sessionService.logout();
     this.selectedRealm = null;
+    this.router.navigateByUrl('/');
 }
   public sessionLogout(): void {
     // Do NOT remove token from localStorage at this point.

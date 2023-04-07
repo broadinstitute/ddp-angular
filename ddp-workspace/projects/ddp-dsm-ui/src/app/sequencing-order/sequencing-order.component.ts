@@ -62,7 +62,7 @@ export class SequencingOrderComponent {
       },
       error: err => {
         if (err._body === Auth.AUTHENTICATION_ERROR) {
-          this.auth.sessionLogout();
+          this.auth.doLogout();
         }
       }
     } );

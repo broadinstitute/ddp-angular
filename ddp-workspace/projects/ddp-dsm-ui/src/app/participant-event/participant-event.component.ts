@@ -93,7 +93,7 @@ export class ParticipantEventComponent implements OnInit {
         },
         error: err => {
           if (err._body === Auth.AUTHENTICATION_ERROR) {
-            this.auth.sessionLogout();
+            this.auth.doLogout();
           }
           this.loading = false;
           this.errorMessage = 'Error - Loading list of event types\nPlease contact your DSM developer';
@@ -125,7 +125,7 @@ export class ParticipantEventComponent implements OnInit {
         error: err => {
           // console.log(err);
           if (err._body === Auth.AUTHENTICATION_ERROR) {
-            this.router.navigate([Statics.HOME_URL]);
+            this.auth.doLogout();
           }
           this.errorMessage = 'Failed to skip email for given participant';
           this.loading = false;
@@ -155,7 +155,7 @@ export class ParticipantEventComponent implements OnInit {
         },
         error: err => {
           if (err._body === Auth.AUTHENTICATION_ERROR) {
-            this.auth.sessionLogout();
+            this.auth.doLogout();
           }
           this.loading = false;
           this.errorMessage = 'Error - Loading list of skipped participant events\nPlease contact your DSM developer';

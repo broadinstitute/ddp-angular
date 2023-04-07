@@ -1165,8 +1165,9 @@ export class DSMService {
 
   private checkCookieBeforeCall(): boolean {
     if (this.sessionService.getDSMToken() == null) {
+      this.localStorageService.clear();
       this.sessionService.logout();
-      this.router.navigate([ Statics.HOME_URL ]);
+      this.router.navigateByUrl('/');
       return false;
     } else {
       const jwtHelper = new JwtHelperService();

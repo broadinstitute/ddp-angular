@@ -122,7 +122,7 @@ export class UploadComponent implements OnInit {
         },
         error: err => {
           if (err._body === Auth.AUTHENTICATION_ERROR) {
-            this.auth.sessionLogout();
+            this.auth.doLogout();
           }
           this.loading = false;
           this.errorMessage = 'Error - Loading kit types\n' + err;
@@ -156,7 +156,7 @@ export class UploadComponent implements OnInit {
   private checkErrorMessage(err: HttpErrorResponse): void {
     switch (err.status) {
       case 401:
-        this.auth.sessionLogout();
+        this.auth.doLogout();
         break;
       case 403:
         this.allowedToSeeInformation = false;
@@ -181,7 +181,7 @@ export class UploadComponent implements OnInit {
         },
         error: err => {
           if (err._body === Auth.AUTHENTICATION_ERROR) {
-            this.auth.sessionLogout();
+            this.auth.doLogout();
           }
           this.loading = false;
           this.errorMessage = 'Error - Loading shipping carriers\n' + err;
@@ -256,7 +256,7 @@ export class UploadComponent implements OnInit {
         },
         error: (err: HttpErrorResponse) => {
           this.loading = false;
-          err.status === 401 && this.auth.sessionLogout();
+          err.status === 401 && this.auth.doLogout();
           this.errorMessage = err.error;
         }
       });
@@ -312,7 +312,7 @@ export class UploadComponent implements OnInit {
         error: err => {
           this.loading = false;
           if (err._body === Auth.AUTHENTICATION_ERROR) {
-            this.auth.sessionLogout();
+            this.auth.doLogout();
           }
           this.errorMessage = 'Error - Uploading txt\n' + err;
         }

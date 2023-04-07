@@ -487,7 +487,7 @@ export class TissueListComponent implements OnInit {
           },
           error: err => {
             if (err._body === Auth.AUTHENTICATION_ERROR) {
-              this.auth.sessionLogout();
+              this.auth.doLogout();
             }
             this.errorMessage = 'Error - Loading Tissues for tissue view, Please contact your DSM developer\n ' + err;
           },
@@ -1053,7 +1053,7 @@ export class TissueListComponent implements OnInit {
       },
       error: err => {
         if (err._body === Auth.AUTHENTICATION_ERROR) {
-          this.router.navigate([ Statics.HOME_URL ]);
+          this.auth.doLogout();
         }
       },
     });
@@ -1622,7 +1622,7 @@ export class TissueListComponent implements OnInit {
           },
           error: err => {
             if (err._body === Auth.AUTHENTICATION_ERROR) {
-              this.router.navigate([Statics.HOME_URL]);
+              this.auth.doLogout();
             }
             this.additionalMessage = 'Error - Assigning Tissues, Please contact your DSM developer';
           }
