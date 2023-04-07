@@ -53,7 +53,7 @@ export class ShippingReportComponent implements OnInit {
       },
       error: err => {
         if (err._body === Auth.AUTHENTICATION_ERROR) {
-          this.auth.sessionLogout();
+          this.auth.doLogout();
         }
         this.loadingReport = false;
         this.errorMessage = 'Error - Loading Sample Report\nPlease contact your DSM developer';
@@ -93,7 +93,7 @@ export class ShippingReportComponent implements OnInit {
       },
       error: err => {
         if (err._body === Auth.AUTHENTICATION_ERROR) {
-          this.auth.sessionLogout();
+          this.auth.doLogout();
         }
         this.loadingReport = false;
         this.errorMessage = 'Error - Loading Sample Report\nPlease contact your DSM developer';

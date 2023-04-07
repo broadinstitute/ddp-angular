@@ -67,7 +67,7 @@ export class ShippingSearchComponent implements OnInit {
         },
         error: err => {
           if (err._body === Auth.AUTHENTICATION_ERROR) {
-            this.auth.sessionLogout();
+            this.auth.doLogout();
           }
           this.errorMessage = 'Error - Loading ddp information\nPlease contact your DSM developer';
           this.searching = false;
@@ -112,7 +112,7 @@ export class ShippingSearchComponent implements OnInit {
           },
           error: err => {
             if (err._body === Auth.AUTHENTICATION_ERROR) {
-              this.auth.sessionLogout();
+              this.auth.doLogout();
             }
             this.errorMessage = 'Error - Loading ddp information\nPlease contact your DSM developer';
             this.searching = false;

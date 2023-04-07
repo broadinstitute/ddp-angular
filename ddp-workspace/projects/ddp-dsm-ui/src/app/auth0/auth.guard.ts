@@ -4,6 +4,7 @@ import { Auth } from '../services/auth.service';
 import { SessionService } from '../services/session.service';
 import { DSMService } from '../services/dsm.service';
 import { Statics } from '../utils/statics';
+import {ComponentService} from '../services/component.service';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
@@ -12,7 +13,9 @@ export class AuthGuard implements CanActivate {
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    if (localStorage.getItem(Auth.AUTH0_TOKEN_NAME) && localStorage.getItem(SessionService.DSM_TOKEN_NAME)) {
+    const selectedRealm = sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM);
+    if (localStorage.getItem(Auth.AUTH0_TOKEN_NAME) && localStorage.getItem(SessionService.DSM_TOKEN_NAME)
+      && state.url.includes(selectedRealm)) {
       // logged in so return true
       return true;
     }

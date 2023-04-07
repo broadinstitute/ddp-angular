@@ -43,7 +43,8 @@ export class TissueComponent {
   selectedSmIds = 0;
   smIdDuplicate = {};
 
-  constructor(private role: RoleService, private dsmService: DSMService, private compService: ComponentService, private router: Router) {
+  constructor(private role: RoleService, private dsmService: DSMService, private compService: ComponentService,
+              private router: Router, private auth: Auth) {
     this.smIdDuplicate[ this.uss ] = new Set();
     this.smIdDuplicate[ this.he ] = new Set();
     this.smIdDuplicate[ this.scrolls ] = new Set();
@@ -190,7 +191,7 @@ export class TissueComponent {
             this.smIdDuplicate[ this.currentSMIDField ].add(this.createDuplicateIndex( index ) );
           }
           if (err._body === Auth.AUTHENTICATION_ERROR) {
-            this.router.navigate([ Statics.HOME_URL ]);
+            this.auth.doLogout();
           }
         },
       });
@@ -222,7 +223,7 @@ export class TissueComponent {
           },
           error: err => {
             if (err._body === Auth.AUTHENTICATION_ERROR) {
-              this.router.navigate([Statics.HOME_URL]);
+              this.auth.doLogout();
             }
           },
         });

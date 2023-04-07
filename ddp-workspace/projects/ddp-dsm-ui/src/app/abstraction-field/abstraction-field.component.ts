@@ -44,7 +44,8 @@ export class AbstractionFieldComponent implements OnInit {
   modalReadOnly: boolean;
   _other: string;
 
-  constructor(private dsmService: DSMService, private router: Router, private compService: ComponentService, private role: RoleService) {
+  constructor(private dsmService: DSMService, private router: Router, private compService: ComponentService,
+              private role: RoleService, private auth: Auth) {
   }
 
   ngOnInit(): void {
@@ -308,7 +309,7 @@ export class AbstractionFieldComponent implements OnInit {
           },
           error: err => {
             if (err._body === Auth.AUTHENTICATION_ERROR) {
-              this.router.navigate([ Statics.HOME_URL ]);
+              this.auth.doLogout();
             }
           }
         });
@@ -343,7 +344,7 @@ export class AbstractionFieldComponent implements OnInit {
       },
       error: err => {
         if (err._body === Auth.AUTHENTICATION_ERROR) {
-          this.router.navigate([ Statics.HOME_URL ]);
+          this.auth.doLogout();
         }
       }
     });

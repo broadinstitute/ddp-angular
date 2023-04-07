@@ -154,7 +154,7 @@ export class FieldSettingsComponent implements OnInit {
       },
       error: err => {
         if (err._body === Auth.AUTHENTICATION_ERROR) {
-          this.auth.sessionLogout();
+          this.auth.doLogout();
         }
         this.loading = false;
         const returnedMessage = JSON.parse(err._body);
@@ -199,7 +199,7 @@ export class FieldSettingsComponent implements OnInit {
           },
           error: err => {
             if (err._body === Auth.AUTHENTICATION_ERROR) {
-              this.auth.sessionLogout();
+              this.auth.doLogout();
               this.loading = false;
             }
             this.additionalMessage = JSON.parse(err._body).body;

@@ -94,7 +94,7 @@ export class DiscardSampleComponent implements OnInit {
         },
         error: err => {
           if (err._body === Auth.AUTHENTICATION_ERROR) {
-            this.auth.sessionLogout();
+            this.auth.doLogout();
           }
           this.loading = false;
           this.errorMessage = 'Error - Loading list of samples of exited participants\nPlease contact your DSM developer';
@@ -125,7 +125,7 @@ export class DiscardSampleComponent implements OnInit {
         },
         error: err => {
           if (err._body === Auth.AUTHENTICATION_ERROR) {
-            this.auth.sessionLogout();
+            this.auth.doLogout();
           }
           this.loading = false;
           this.errorMessage = 'Error - Loading list of samples of exited participants\nPlease contact your DSM developer';

@@ -100,7 +100,7 @@ export class UserSettingComponent implements OnInit {
       },
       error: err => {
         if (err._body === Auth.AUTHENTICATION_ERROR) {
-          this.router.navigate([Statics.HOME_URL]);
+          this.auth.doLogout();
         }
         this.additionalMessage = 'Error - Saving user settings\n' + err;
         this.saving = false;
@@ -139,7 +139,7 @@ export class UserSettingComponent implements OnInit {
         },
         error: err => {
           if (err._body === Auth.AUTHENTICATION_ERROR) {
-            this.router.navigate([Statics.HOME_URL]);
+            this.auth.doLogout();
           }
           this.additionalMessage = 'Error - Saving user settings\n' + err;
           this.saving = false;

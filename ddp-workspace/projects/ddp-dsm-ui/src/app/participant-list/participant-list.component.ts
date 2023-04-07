@@ -204,7 +204,7 @@ export class ParticipantListComponent implements OnInit {
             },
             error: err => {
               if (err._body === Auth.AUTHENTICATION_ERROR) {
-                this.auth.sessionLogout();
+                this.auth.doLogout();
               }
               this.loadingParticipants = null;
               this.errorMessage = 'Error - Loading Participant List, Please contact your DSM developer';
@@ -733,7 +733,7 @@ export class ParticipantListComponent implements OnInit {
       // this.renewSelectedColumns(); commented out because if we have defaultColumns for all the studies we won't need it anymore
       error: err => {
         if (err._body === Auth.AUTHENTICATION_ERROR) {
-          this.auth.sessionLogout();
+          this.auth.doLogout();
         }
         // eslint-disable-next-line no-throw-literal
         throw 'Error - Loading display settings' + err;
@@ -940,7 +940,7 @@ export class ParticipantListComponent implements OnInit {
           },
           error: err => {
             if (err._body === Auth.AUTHENTICATION_ERROR) {
-              this.auth.sessionLogout();
+              this.auth.doLogout();
             }
             this.loadingParticipants = null;
             this.errorMessage = 'Error - Loading Participant List, Please contact your DSM developer';
@@ -1094,7 +1094,7 @@ export class ParticipantListComponent implements OnInit {
         },
         error: err => {
           if (err._body === Auth.AUTHENTICATION_ERROR) {
-            this.auth.sessionLogout();
+            this.auth.doLogout();
           }
           this.loadingParticipants = null;
           this.errorMessage = 'Error - Loading Participant List, Please contact your DSM developer';
@@ -1955,7 +1955,7 @@ export class ParticipantListComponent implements OnInit {
           },
           error: err => {
             if (err._body === Auth.AUTHENTICATION_ERROR) {
-              this.router.navigate([Statics.HOME_URL]);
+              this.auth.doLogout();
             }
             this.additionalMessage = 'Error - Assigning Participants, Please contact your DSM developer';
           }

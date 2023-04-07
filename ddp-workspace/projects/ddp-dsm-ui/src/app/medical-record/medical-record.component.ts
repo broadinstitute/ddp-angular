@@ -176,7 +176,7 @@ export class MedicalRecordComponent implements OnInit {
         },
         error: err => {
           if (err._body === Auth.AUTHENTICATION_ERROR) {
-            this.router.navigate([ Statics.HOME_URL ]);
+            this.auth.doLogout();
           }
           this.additionalMessage = 'Error - Saving changes \n' + err;
         }
@@ -207,7 +207,7 @@ export class MedicalRecordComponent implements OnInit {
       },
       error: err => {
         if (err._body === Auth.AUTHENTICATION_ERROR) {
-          this.auth.sessionLogout();
+          this.auth.doLogout();
         }
         this.errorMessage = 'Error - Loading mr log\nPlease contact your DSM developer';
       }
@@ -227,7 +227,7 @@ export class MedicalRecordComponent implements OnInit {
           },
           error: err => {
             if (err._body === Auth.AUTHENTICATION_ERROR) {
-              this.router.navigate([Statics.HOME_URL]);
+              this.auth.doLogout();
             }
             this.additionalMessage = 'Error - Saving log data\nPlease contact your DSM developer';
           }
@@ -271,7 +271,7 @@ export class MedicalRecordComponent implements OnInit {
           },
           error: err => {
             if (err._body === Auth.AUTHENTICATION_ERROR) {
-              this.router.navigate([Statics.HOME_URL]);
+              this.auth.doLogout();
             }
             this.message = 'Failed to download pdf.';
             this.downloading = false;
@@ -361,7 +361,7 @@ export class MedicalRecordComponent implements OnInit {
       },
       error: err => {
         if (err._body === Auth.AUTHENTICATION_ERROR) {
-          this.router.navigate([ Statics.HOME_URL ]);
+          this.auth.doLogout();
         }
         this.additionalMessage = 'Error - Saving changes \n' + err;
       }

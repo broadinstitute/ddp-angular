@@ -49,7 +49,7 @@ export class NDIUploadComponent implements OnInit {
         //        console.log(`received***: ${JSON.stringify(err, null, 2)}`);
         this.loading = false;
         if (err._body === Auth.AUTHENTICATION_ERROR) {
-          this.auth.sessionLogout();
+          this.auth.doLogout();
         }
         this.errorMessage = 'Error - Uploading txt\n' + err._body;
       }

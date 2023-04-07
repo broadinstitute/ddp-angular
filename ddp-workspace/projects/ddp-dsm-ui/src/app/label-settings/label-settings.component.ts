@@ -39,7 +39,7 @@ export class LabelSettingsComponent implements OnInit {
       },
       error: err => {
         if (err._body === Auth.AUTHENTICATION_ERROR) {
-          this.auth.sessionLogout();
+          this.auth.doLogout();
         }
         this.loading = false;
         this.errorMessage = 'Error - Loading Label Settings\nPlease contact your DSM developer';
@@ -101,7 +101,7 @@ export class LabelSettingsComponent implements OnInit {
         },
         error: err => {
           if (err._body === Auth.AUTHENTICATION_ERROR) {
-            this.auth.sessionLogout();
+            this.auth.doLogout();
           }
           this.loading = false;
           this.additionalMessage = 'Error - Saving label settings\nPlease contact your DSM developer';

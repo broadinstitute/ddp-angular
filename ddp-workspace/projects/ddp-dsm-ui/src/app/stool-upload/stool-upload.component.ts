@@ -104,7 +104,7 @@ export class StoolUploadComponent implements OnInit {
         },
         error: err => {
           if (err._body === Auth.AUTHENTICATION_ERROR) {
-            this.auth.sessionLogout();
+            this.auth.doLogout();
           }
           this.loading = false;
           this.errorMessage = 'Error - Loading kit types\n' + err;
@@ -130,7 +130,7 @@ export class StoolUploadComponent implements OnInit {
         },
         error: err => {
           if (err._body === Auth.AUTHENTICATION_ERROR) {
-            this.auth.sessionLogout();
+            this.auth.doLogout();
           }
           this.errorMessage = err.error;
         },
