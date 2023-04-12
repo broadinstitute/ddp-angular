@@ -2,7 +2,6 @@ import {Inject, Injectable} from '@angular/core';
 import {ConfigurationService} from 'ddp-sdk';
 import {UserSetting} from '../user-setting/user-setting.model';
 import {SessionService} from './session.service';
-import {Utils} from "../utils/utils";
 
 @Injectable({providedIn: 'root'})
 export class RoleService {
