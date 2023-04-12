@@ -2,6 +2,7 @@ import {Inject, Injectable} from '@angular/core';
 import {ConfigurationService} from 'ddp-sdk';
 import {UserSetting} from '../user-setting/user-setting.model';
 import {SessionService} from './session.service';
+import {Utils} from "../utils/utils";
 
 @Injectable({providedIn: 'root'})
 export class RoleService {
@@ -80,11 +81,11 @@ export class RoleService {
   }
 
   public setRoles( token: string ): void {
+    this.resetRolesToDefault();
     if (token != null) {
       const accessRoles: string = this.getClaimByKeyName( token, 'USER_ACCESS_ROLE' );
       if (accessRoles != null) {
         // console.log( accessRoles );
-        this.resetRolesToDefault();
         const roles: string[] = JSON.parse( accessRoles );
         for (const entry of roles) {
           // only special kit_shipping_xxx rights should get added here, not the overall only kit_shipping_view
@@ -179,6 +180,8 @@ export class RoleService {
       const userSettings: any = this.getClaimByKeyName( token, 'USER_SETTINGS' );
       if (userSettings != null && userSettings !== 'null') {
         this._userSetting = UserSetting.parse( JSON.parse( userSettings ) );
+      } else {
+        this._userSetting = UserSetting.parse({});
       }
       this._userId = this.getClaimByKeyName( token, 'USER_ID' );
       this._user = this.getClaimByKeyName( token, 'USER_NAME' );
