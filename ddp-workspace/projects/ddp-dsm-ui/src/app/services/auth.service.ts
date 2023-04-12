@@ -179,29 +179,25 @@ export class Auth implements OnDestroy {
 
   private checkForAuth0Error(error: any): boolean {
     return (error instanceof HttpErrorResponse &&  error && error.hasOwnProperty('status')
-      && error.hasOwnProperty('ok') && error.url &&
-      (error.status === 401 || error.status === 0)
+      && error.hasOwnProperty('ok') && error.url
       && !error.ok && error.url.includes('ui/auth0'));
   }
   private handleError(error: any): Observable<any> {
     // In a real world app, we might use a remote logging infrastructure
     // We'd also dig deeper into the error to get a better message
     let errMsg: string | null = null;
+
+    errMsg = (error.message) ? error.message :
+      error.status ? `${error.status} - ${error.statusText}` : 'Server error';
+    this.authError.next(errMsg);
+    console.error(errMsg); // log to console instead
+
     if(this.checkForAuth0Error(error)) {
       this.doLogout();
       this.lock.show();
       return;
     }
-    if(error.status === 500) {
-      errMsg = 'Incorrect user name or password.';
-    } else {
-      errMsg = (error.message) ? error.message :
-        error.status ? `${error.status} - ${error.statusText}` : 'Server error';
-    }
 
-    this.authError.next(errMsg);
-
-    console.error(errMsg); // log to console instead
     return throwError(() => new Error(errMsg));
   }
 
