@@ -47,7 +47,40 @@ export class RoleService {
     this.setRoles( token );
   }
 
+  private resetRolesToDefault(): void {
+    this._isShipping = false;
+    this._isMRRequesting = false;
+    this._isMRView = false;
+    this._isMailingList = false;
+    this._isUpload = false;
+    this._isExitParticipant = false;
+    this._isDeactivation = false;
+    this._isViewingEEL = false;
+    this._isReceiving = false;
+    this._isExpressKit = false;
+    this._isTriggeringSurveyCreation = false;
+    this._isSkipParticipant = false;
+    this._isDiscardingSamples = false;
+    this._isSampleListView = false;
+    this._isDownloadPDF = false;
+    this._isDownloadNDI = false;
+    this._noTissueRequest = false;
+    this._fieldSettings = false;
+    this._isAbstracter = false;
+    this._isQC = false;
+    this._isAbstractionAdmin = false;
+    this._canEditDrugList = false;
+    this._isParticipantListView = false;
+    this._isParticipantEdit = false;
+    this._isKitUploadInvalidAddress = false;
+    this._isDownloadParticipantFile = false;
+    this._hasKitSequencingOrder = false;
+    this._viewOnlyDssData = false;
+    this._viewStatisticsDashboard = false;
+  }
+
   public setRoles( token: string ): void {
+    this.resetRolesToDefault();
     if (token != null) {
       const accessRoles: string = this.getClaimByKeyName( token, 'USER_ACCESS_ROLE' );
       if (accessRoles != null) {
@@ -146,6 +179,8 @@ export class RoleService {
       const userSettings: any = this.getClaimByKeyName( token, 'USER_SETTINGS' );
       if (userSettings != null && userSettings !== 'null') {
         this._userSetting = UserSetting.parse( JSON.parse( userSettings ) );
+      } else {
+        this._userSetting = UserSetting.parse({});
       }
       this._userId = this.getClaimByKeyName( token, 'USER_ID' );
       this._user = this.getClaimByKeyName( token, 'USER_NAME' );
