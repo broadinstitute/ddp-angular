@@ -1,10 +1,12 @@
 import { Page } from '@playwright/test';
 import Dropdown from 'lib/widget/dsm/dropdown';
 import ParticipantListPage from 'pages/dsm/participantList-page';
+import KitUploadPage 
 import { MainMenu } from './enums/mainMenu.enum';
 import { StudyNav } from './enums/studyNav.enum';
 import { Study } from './enums/selectStudyNav.enum';
 import { NavigationItems } from './navigation-types';
+import { SamplesMenu } from './enums/samplesNav.enum';
 import {Miscellaneous} from 'lib/component/dsm/navigation/enums/miscellaneousNav.enum';
 
 export class Navigation {

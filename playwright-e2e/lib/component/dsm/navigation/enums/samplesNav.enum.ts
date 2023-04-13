@@ -1,0 +1,22 @@
+export enum SamplesMenu {
+    UNSENT_KITS_OVERVIEW = 'Unsent Kits Overview',
+    REPORT = 'Report',
+    SUMMARY = 'Summary',
+    KITS_WITHOUT_LABELS = 'Kits without Labels',
+    QUEUE = 'Queue',
+    ERROR = 'Error',
+    INITIAL_SCAN = 'Initial Scan',
+    TRACKING_SCAN = 'Tracking Scan',
+    FINAL_SCAN = 'Final Scan',
+    RGP_FINAL_SCAN = 'RGP Final Scan',
+    DISCARD_SAMPLE = 'Discard Sample',
+    SENT = 'Sent',
+    RECEIVED = 'Received',
+    SENT_RECEIVED_OVERVIEW = 'Sent/Received Overview',
+    DEACTIVATED = 'Deactivated',
+    SEARCH = 'Search',
+    KIT_UPLOAD = 'Kit Upload',
+    STOOL_SAMPLE_UPLOAD = 'Stool Sample Upload',
+    LABEL_SETTINGS = 'Label Settings',
+    CLINICAL_ORDERS = 'Clinical Orders'
+}
