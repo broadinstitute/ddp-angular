@@ -1,7 +1,7 @@
 import { Page } from '@playwright/test';
 import Dropdown from 'lib/widget/dsm/dropdown';
 import ParticipantListPage from 'pages/dsm/participantList-page';
-import KitUploadPage 
+import KitUploadPage from 'pages/dsm/kitUpload-page';
 import { MainMenu } from './enums/mainMenu.enum';
 import { StudyNav } from './enums/studyNav.enum';
 import { Study } from './enums/selectStudyNav.enum';
@@ -11,7 +11,8 @@ import {Miscellaneous} from 'lib/component/dsm/navigation/enums/miscellaneousNav
 
 export class Navigation {
   private readonly navigationItems: Partial<NavigationItems> = {
-    study: new Map([[StudyNav.PARTICIPANT_LIST, new ParticipantListPage(this.page)]])
+    study: new Map([[StudyNav.PARTICIPANT_LIST, new ParticipantListPage(this.page)]]),
+    samples: new Map([[SamplesMenu.KIT_UPLOAD, new KitUploadPage(this.page)]])
   };
 
   constructor(private readonly page: Page) {}
@@ -23,6 +24,12 @@ export class Navigation {
   async selectFromStudy<T extends object>(studyNav: StudyNav): Promise<T> {
     await this.selectFrom(MainMenu.STUDY, studyNav);
     return (this.navigationItems.study as Map<string, object>).get(studyNav) as T;
+  }
+
+  //Select from the Samples menu in DSM
+  async selectFromSamples<T extends object>(samplesMenu: SamplesMenu): Promise<T> {
+    await this.selectFrom(MainMenu.SAMPLES, samplesMenu);
+    return (this.navigationItems.samples as Map<string, object>).get(samplesMenu) as T;
   }
 
   private async selectFrom(from: MainMenu, selection: Study | StudyNav | Miscellaneous | string): Promise<void> {
