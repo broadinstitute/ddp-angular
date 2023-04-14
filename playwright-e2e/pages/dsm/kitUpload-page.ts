@@ -1,11 +1,5 @@
 import { expect, Locator, Page } from '@playwright/test';
-
-//Inputting the various kit types that can be uploaded in DSM
-//todo Update as needed as more kit upload tests are created
-enum KitType {
-    BLOOD = 'BLOOD',
-    BLOOD_AND_RNA = 'BLOOD & RNA'
-}
+import { KitType } from 'lib/component/dsm/samples/enums/kitType.enum'
 
 export default class KitUploadPage {
     private readonly PAGE_TITLE: string = 'Kit Upload';
@@ -21,8 +15,8 @@ export default class KitUploadPage {
     }
 
     //looking into using the above enums for this - this was just jotted down
-    public async selectKitTypeOption(kitType: string): Promise<void> {
-        const kitOption = this.page.locator('label').filter({ hasText: `'${kitType}'`});
+    public async selectKitTypeOption(kitType: KitType): Promise<void> {
+        const kitOption = this.page.locator(`//mat-checkbox/label[span[normalize-space(text()) = 'BLOOD & RNA']]`);
         await kitOption.check();
     }
 

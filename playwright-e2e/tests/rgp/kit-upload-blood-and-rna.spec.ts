@@ -6,6 +6,7 @@ import { WelcomePage } from 'pages/dsm/welcome-page';
 import { Study } from 'lib/component/dsm/navigation/enums/selectStudyNav.enum';
 import KitUploadPage from 'pages/dsm/kitUpload-page';
 import { SamplesMenu } from 'lib/component/dsm/navigation/enums/samplesNav.enum';
+import { KitType } from 'lib/component/dsm/samples/enums/kitType.enum'
 
 
 test.describe('RGP Kit Upload', () => {
@@ -29,5 +30,7 @@ test.describe('RGP Kit Upload', () => {
 
         const kitUploadPage = await navigation.selectFromSamples<KitUploadPage>(SamplesMenu.KIT_UPLOAD);
         await kitUploadPage.assertPageTitle();
+
+        await kitUploadPage.selectKitTypeOption(KitType.BLOOD_AND_RNA);
     })
 })
