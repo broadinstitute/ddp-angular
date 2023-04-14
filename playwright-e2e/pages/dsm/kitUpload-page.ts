@@ -14,9 +14,8 @@ export default class KitUploadPage {
         await expect(title).toBeVisible();
     }
 
-    //looking into using the above enums for this - this was just jotted down
     public async selectKitTypeOption(kitType: KitType): Promise<void> {
-        const kitOption = this.page.locator(`//mat-checkbox/label[span[normalize-space(text()) = 'BLOOD & RNA']]`);
+        const kitOption = this.page.locator(`//mat-checkbox/label[span[normalize-space(text()) = '${kitType}']]`);
         await kitOption.check();
     }
 
