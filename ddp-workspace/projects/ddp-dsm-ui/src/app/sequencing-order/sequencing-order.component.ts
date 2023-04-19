@@ -159,4 +159,8 @@ export class SequencingOrderComponent {
   closeModal(): void {
     this.modal.hide();
   }
+
+  public canNotSubmitOrder(): boolean{
+    return !this.role.allowedToDoOrderSequencing();
+  }
 }

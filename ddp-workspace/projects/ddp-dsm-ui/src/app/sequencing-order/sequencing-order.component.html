@@ -51,7 +51,7 @@
     </tr>
     </tbody>
   </table>
-  <ng-container>
+  <ng-container *ngIf="!canNotSubmitOrder()">
     <button (click)="preSubmitOrder()" color="primary">
       Place order
     </button>
@@ -79,7 +79,7 @@
     </div>
     <div class="app-modal-footer">
       <button (click)="closeModal()" class="btn btn-default" type="button">Close</button>
-      <button (click)="submitOrders()" *ngIf="!this.checkError()" class="btn btn-default" type="button">Submit</button>
+      <button (click)="submitOrders()" *ngIf="!this.checkError()" class="btn btn-default" type="button" [disabled]="canNotSubmitOrder()">Submit</button>
     </div>
   </app-modal>
 </ng-container>

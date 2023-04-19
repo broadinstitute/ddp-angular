@@ -34,6 +34,7 @@ export class RoleService {
   private _hasKitSequencingOrder = false;
   private _viewOnlyDssData = false;
   private _viewStatisticsDashboard = false;
+  private _viewSeqOrderStatus = false;
 
   private _userId: string;
   private _user: string;
@@ -77,6 +78,7 @@ export class RoleService {
     this._hasKitSequencingOrder = false;
     this._viewOnlyDssData = false;
     this._viewStatisticsDashboard = false;
+    this._viewSeqOrderStatus = false;
   }
 
   public setRoles( token: string ): void {
@@ -84,7 +86,7 @@ export class RoleService {
     if (token != null) {
       const accessRoles: string = this.getClaimByKeyName( token, 'USER_ACCESS_ROLE' );
       if (accessRoles != null) {
-        // console.log( accessRoles );
+        console.log( accessRoles );
         const roles: string[] = JSON.parse( accessRoles );
         for (const entry of roles) {
           // only special kit_shipping_xxx rights should get added here, not the overall only kit_shipping_view
@@ -173,6 +175,9 @@ export class RoleService {
           }
           else if(entry === 'dashboard_view') {
             this._viewStatisticsDashboard = true;
+          }
+          else if (entry === 'view_seq_order_status'){
+            this._viewSeqOrderStatus = true;
           }
         }
       }
@@ -323,5 +328,9 @@ export class RoleService {
 
   public get viewStatisticsDashboard(): boolean {
     return this._viewStatisticsDashboard;
+  }
+
+  public get viewSeqOrderStatus(): boolean {
+    return this._viewSeqOrderStatus;
   }
 }
