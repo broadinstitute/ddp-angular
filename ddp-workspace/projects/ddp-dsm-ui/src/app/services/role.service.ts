@@ -86,7 +86,7 @@ export class RoleService {
     if (token != null) {
       const accessRoles: string = this.getClaimByKeyName( token, 'USER_ACCESS_ROLE' );
       if (accessRoles != null) {
-        console.log( accessRoles );
+//         console.log( accessRoles );
         const roles: string[] = JSON.parse( accessRoles );
         for (const entry of roles) {
           // only special kit_shipping_xxx rights should get added here, not the overall only kit_shipping_view
