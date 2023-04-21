@@ -14,7 +14,7 @@ test('Osteo enroll self and kid together @osteo', async ({ page }) => {
   await homePage.waitForReady();
   await homePage.clickCountMeIn();
 
-  // do some basic content checkx
+  // do some basic content checks
   await page.getByText("Thank you for your interest in the Osteosarcoma Project. Here's what sign up and").click();
   await page.getByText('First, who is signing up for the Osteosarcoma Project? Check all that apply').click();
 
@@ -129,7 +129,7 @@ test('Osteo enroll self and kid together @osteo', async ({ page }) => {
   await page.getByRole('heading', { name: 'Survey: About your child' }).click();
   await page.getByText('Please tell us more about your child by answering the questions below. As you fi').click();
   await page.getByText('Two-spirit').click();
-  await page.getByText('Middle Eastern or North African (For examle: Algerian, Egyptian, Iranian, Lebane').click();
+  await page.getByText('Middle Eastern or North African (For example: Algerian, Egyptian, Iranian, Lebane').click();
   await page.getByText('Egyptian', { exact: true }).click();
   await page.getByText('Event (patient conference, science or research symposium, networking event, etc.').click();
   await page.getByText('Science or research talk, conference, or symposium').click();
@@ -139,7 +139,7 @@ test('Osteo enroll self and kid together @osteo', async ({ page }) => {
 
   await consentAssentPage.submit();
 
-  await page.getByText('Thank you for providing information regarding your chid’s experiences with osteo').click();
+  await page.getByText('Thank you for providing information regarding your child’s experiences with osteo').click();
   await page.getByText('A Message from the Osteosarcoma Project').click();
   await page
     .getByRole('cell', {
