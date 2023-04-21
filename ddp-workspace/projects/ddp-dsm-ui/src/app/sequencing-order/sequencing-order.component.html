@@ -31,13 +31,13 @@
         {{sample.sampleStatus}}
       </td>
       <td>
-        <ng-container *ngIf="sample.sampleType === 'Normal' && canChangeCollectionDate()">
+        <ng-container *ngIf="canEditCollectionDate(sample)">
           <app-field-datepicker (dateChanged)="valueChanged($event, 'collectionDate', sample)" [allowUnknownDay]="false"
                                 [colorDuringPatch]="isPatchedCurrently('collectionDate')"
                                 [dateString]="sample.collectionDate"
                                 [showTodayButton]="true"></app-field-datepicker>
         </ng-container>
-        <ng-container *ngIf="sample.sampleType === 'Tumor' || !canChangeCollectionDate()">
+        <ng-container *ngIf="!canEditCollectionDate(sample)">
           {{sample.collectionDate}}
         </ng-container>
 
