@@ -166,18 +166,18 @@ export class SequencingOrderComponent {
     return !this.role.allowedToDoOrderSequencing();
   }
 
-  canEditCollectionDate(sample : SequencingOrder ) {
-  if (sample.sampleType === 'Normal') {
-  // only a normal sample should have collectionDate editable, for tumor samples it is the date of px
-    if (this.role.canViewSeqOrderStatus()) {
-    // people with this specific view access can only enter a date if there is no previous date entered
-      return (_.isNull(sample.collectionDate) || _.isUndefined(sample.collectionDate) || _.isEmpty(sample.collectionDate));
+  canEditCollectionDate(sample: SequencingOrder ): boolean {
+    if (sample.sampleType === 'Normal') {
+    // only a normal sample should have collectionDate editable, for tumor samples it is the date of px
+      if (this.role.canViewSeqOrderStatus()) {
+      // people with this specific view access can only enter a date if there is no previous date entered
+        return (_.isNull(sample.collectionDate) || _.isUndefined(sample.collectionDate) || _.isEmpty(sample.collectionDate));
+      }
+      else if (this.role.allowedToDoOrderSequencing()) {
+      // people with this access can enter or change a date
+        return true;
+      }
     }
-    else if (this.role.allowedToDoOrderSequencing()) {
-    // people with this access can enter or change a date
-      return true;
-    }
-  }
-  return false;
+    return false;
   }
 }
