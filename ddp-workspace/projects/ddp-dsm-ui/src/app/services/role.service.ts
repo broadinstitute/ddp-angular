@@ -330,7 +330,7 @@ export class RoleService {
     return this._viewStatisticsDashboard;
   }
 
-  public get viewSeqOrderStatus(): boolean {
+  public canViewSeqOrderStatus(): boolean {
     return this._viewSeqOrderStatus;
   }
 }

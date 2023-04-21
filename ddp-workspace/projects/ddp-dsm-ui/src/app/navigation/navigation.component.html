@@ -16,7 +16,7 @@
       </li>
       <li class="dropdown" *ngIf="getAuth().authenticated()
         && (hasRole().allowToViewSampleLists() || hasRole().allowedToHandleSamples() || hasRole().allowedToViewReceivingPage() || hasRole().allowedToDiscardSamples() || hasRole().allowedToExitParticipant()
-        || hasRole().allowedToDoOrderSequencing() || hasRole().viewSeqOrderStatus)">
+        || hasRole().allowedToDoOrderSequencing() || hasRole().canViewSeqOrderStatus())">
         <a class="dropdown-toggle" data-toggle="dropdown" href="#"><b>Samples</b>
           <span class="caret"></span></a>
         <ul class="dropdown-menu">
@@ -55,7 +55,7 @@
           <hr *ngIf="hasRole().allowedToHandleSamples()">
           <li *ngIf="hasRole().allowedToHandleSamples()"><a [routerLink]="['labelSettings']"> Label Settings </a></li>
           <hr *ngIf="hasRole().allowedToHandleSamples()">
-          <li *ngIf="hasRole().allowedToHandleSamples() || hasRole().allowedToDoOrderSequencing() || hasRole().viewSeqOrderStatus">
+          <li *ngIf="hasRole().allowedToHandleSamples() || hasRole().allowedToDoOrderSequencing() || hasRole().canViewSeqOrderStatus()">
             <a [routerLink]="['clinicalOrders']">Clinical Orders</a>
           </li>
         </ul>

@@ -163,4 +163,8 @@ export class SequencingOrderComponent {
   public canNotSubmitOrder(): boolean{
     return !this.role.allowedToDoOrderSequencing();
   }
+
+  public canChangeCollectionDate(): boolean{
+      return this.role.allowedToDoOrderSequencing() || this.role.allowToViewSampleLists();
+    }
 }

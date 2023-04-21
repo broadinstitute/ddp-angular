@@ -2,7 +2,7 @@
   <table class="table table-striped Width--100">
     <thead>
     <tr>
-      <th>
+      <th *ngIf="!canNotSubmitOrder()">
         Select
       </th>
       <th>Sample Type</th>
@@ -17,7 +17,7 @@
     </thead>
     <tbody>
     <tr *ngFor="let sample of samples">
-      <td>
+      <td *ngIf="!canNotSubmitOrder()">
         <mat-checkbox *ngIf="shouldHaveCheckbox(sample)" [(ngModel)]="sample.isSelected" color="primary" disableRipple>
         </mat-checkbox>
       </td>
@@ -31,13 +31,13 @@
         {{sample.sampleStatus}}
       </td>
       <td>
-        <ng-container *ngIf="sample.sampleType === 'Normal'">
+        <ng-container *ngIf="sample.sampleType === 'Normal' && canChangeCollectionDate()">
           <app-field-datepicker (dateChanged)="valueChanged($event, 'collectionDate', sample)" [allowUnknownDay]="false"
                                 [colorDuringPatch]="isPatchedCurrently('collectionDate')"
                                 [dateString]="sample.collectionDate"
                                 [showTodayButton]="true"></app-field-datepicker>
         </ng-container>
-        <ng-container *ngIf="sample.sampleType === 'Tumor'">
+        <ng-container *ngIf="sample.sampleType === 'Tumor' || !canChangeCollectionDate()">
           {{sample.collectionDate}}
         </ng-container>
 
