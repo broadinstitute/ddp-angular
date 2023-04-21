@@ -139,7 +139,8 @@ test('Osteo enroll self and kid together @osteo', async ({ page }) => {
 
   await consentAssentPage.submit();
 
-  await page.getByText('Thank you for providing information regarding your child’s experiences with osteo').click();
+  await expect(page.locator('.infobox_dashboard')).toContainText(
+      "Thank you for providing information regarding your child's experiences with osteosarcoma.");
   await page.getByText('A Message from the Osteosarcoma Project').click();
   await page
     .getByRole('cell', {
