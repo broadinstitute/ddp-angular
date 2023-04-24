@@ -5,51 +5,24 @@ export default class KitUploadPage {
     private readonly PAGE_TITLE: string = 'Kit Upload';
     constructor(private readonly page: Page) {}
 
-    private getPageTitle(): Locator {
+    public getPageTitle(): Locator {
         return this.page.getByRole('heading', { name: this.PAGE_TITLE});
     }
 
-    public async assertPageTitle(): Promise<void> {
-        const title = this.getPageTitle();
-        await expect(title).toBeVisible();
-    }
-
-    public async selectKitTypeOption(kitType: KitType): Promise<void> {
-        const kitOption = this.page.locator(`//mat-checkbox/label[span[normalize-space(text()) = '${kitType}']]`);
-        await kitOption.check();
+    public getKitTypeOption(kitType: KitType): Locator {
+     const kitOption = this.page.locator(`//mat-checkbox/label[span[normalize-space(text()) = '${kitType}']]`);
+     return kitOption;
     }
 
     //This option only appears to some study admins based on permissions - so I have a getter here
     //so I can use it to verify display of option and also select option later
-   private getSkipAddressValidationOption(): Locator {
+   public getSkipAddressValidationOption(): Locator {
         return this.page.locator('label').filter({ hasText: 'Skip address validation on upload' });
    }
 
-   //Assert that if the test study admin has the neccessary permissions - they can see the Skip Address Validation option
-   //Assert that if they don't have permissions, they don't see it
-   //Should probably be two different methods - could use a better function name
-   public async assertSkipAddressValidationOptionDisplayed(hasPermissions: boolean): Promise<void> {
-        const validationOption = this.getSkipAddressValidationOption();
-        if (hasPermissions) {
-            await expect(validationOption).toBeVisible();
-        } else {
-            await expect(validationOption).not.toBeVisible();
-        }
-   }
-
-   public async selectSkipAddressValidationOption(): Promise<void> {
-        const validationOption = this.getSkipAddressValidationOption();
-        await validationOption.check();
-   }
-
    //todo add assertion for display of button
-   private getBrowseButton(): Locator {
+   public getBrowseButton(): Locator {
         return this.page.getByText('Browse...');
-   }
-
-   public async selectBrowseButton(): Promise<void> {
-        const browseButton = this.getBrowseButton();
-        await browseButton.click();
    }
 
    //todo add assertion for display of button
