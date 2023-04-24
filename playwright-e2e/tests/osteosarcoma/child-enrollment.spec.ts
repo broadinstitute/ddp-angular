@@ -190,7 +190,6 @@ test('Osteo enroll kid @osteo', async ({ page }) => {
   await page.waitForTimeout(2000);
   await page.getByRole('button', { name: 'Submit' }).click();
   await page.getByText('A Message from the Osteosarcoma Project').click();
-  await page.getByText('Thank you for providing information regarding your chid’s experiences with osteo').click();
   await page
     .getByRole('cell', {
       name: 'Thank you for signing the research consent and assent forms.'
