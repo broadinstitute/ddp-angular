@@ -1,4 +1,4 @@
-import {expect, Page} from '@playwright/test';
+import {expect} from '@playwright/test';
 import {test} from 'fixtures/rgp-fixture';
 import HowItWorksPage from 'pages/rgp/how-it-works-page';
 import TellUsYourStoryPage, {WHO} from 'pages/rgp/enrollment/tell-us-your-story-page';
@@ -15,14 +15,7 @@ const RGP_USER_EMAIL = process.env.RGP_USER_EMAIL as string;
 const emailAlias = generateEmailAlias(RGP_USER_EMAIL);
 
 test.describe.serial('When an interested participant does NOT meet participation requirements', () => {
-  const assertProgressActiveItem = async (page: Page, itemName: string): Promise<void> => {
-    const locator = page.locator('li.activity-stepper__step-container button.stepper-btn.stepper-btn--active');
-    await expect(locator).toHaveCount(1);
-    await expect(locator).toContainText(itemName);
-  };
-
-  test('Interested participant can sign up for mailing list @visual @enrollment @rgp',
-    async ({ page }) => {
+  test('Interested participant can sign up for mailing list @visual @enrollment @rgp', async ({ page }) => {
     const homePage = new HomePage(page);
     await homePage.clickGetStarted();
 
@@ -40,10 +33,12 @@ test.describe.serial('When an interested participant does NOT meet participation
 
     await expect(page.locator('text="Thank you for your interest in joining the Rare Genomes Project"')).toBeVisible();
 
-    //todo: should we have a generic function that takes the selector and snapshot-to-match as parameters?
-    expect(await page.locator('p.Paragraph:nth-of-type(1)').screenshot()).toMatchSnapshot('requirement-header-message.png');
-    expect(await page.locator('p.Paragraph:nth-of-type(2)').screenshot()).toMatchSnapshot('join-mailing-list-message.png');
-    expect(await page.locator('p.Paragraph:nth-of-type(3)').screenshot()).toMatchSnapshot('delete-info-request-message.png');
+    const paragraphLocator = page.locator('.Paragraph');
+    await expect(paragraphLocator).toHaveCount(3);
+
+    expect(await paragraphLocator.nth(0).screenshot()).toMatchSnapshot('requirement-header-message.png');
+    expect(await paragraphLocator.nth(1).screenshot()).toMatchSnapshot('join-mailing-list-message.png');
+    expect(await paragraphLocator.nth(2).screenshot()).toMatchSnapshot('delete-info-request-message.png');
 
     expect(await page.locator('.list').screenshot()).toMatchSnapshot('requirement-list.png');
 
