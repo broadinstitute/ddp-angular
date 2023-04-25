@@ -311,6 +311,63 @@ export default class TellUsAboutYourFamilyPage extends RgpPageBase {
   }
 
   /**
+   * Question: Patient's Biological Sibling Sex
+   * <br> Type: Select
+   * @returns {Question}
+   */
+  patientBiologicalSiblingSex(): Question {
+    return new Question(this.page, { cssClassAttribute: '.picklist-answer-SIBLING_SEX' });
+  }
+
+  /**
+   * Question: Patient's Biological Sibling Age
+   * <br> Type: Select
+   * @returns {Question}
+   */
+  patientBiologicalSiblingAge(): Input {
+    return new Input(this.page, { ddpTestID: 'answer:SIBLING_AGE' });
+  }
+
+  /**
+   * Question: Patient's Biological Sibling's Race
+   * <br> Type: Select
+   * @returns {Question}
+   */
+  patientBiologicalSiblingRace(): Question {
+    return new Question(this.page, { prompt: "Patient's Biological Sibling's Race" });
+  }
+
+  /**
+   * Question: Patient's Biological Sibling's Ethnicity
+   * <br> Type: Radiobutton list
+   * @returns {Question}
+   */
+  patientBiologicalSiblingEthnicity(): Question {
+    return new Question(this.page, { prompt: "Patient's Biological Sibling's Ethnicity" });
+  }
+
+  /**
+   * Question: Does the patient's biological sibling have the same genetic medical condition as the patient?
+   * <br> Type: Radiobutton list
+   * @returns {Question}
+   */
+  doesSiblingHaveSameGeneticMedicalCondition(): Question {
+    return new Question(this.page, {
+      prompt: "Does the patient's biological sibling have the same genetic medical condition as the patient"
+    });
+  }
+
+  /**
+   * Question: Is the patient's biological sibling able to participate in the study?
+   * <br> Type: Radiobutton list
+   * @returns {Question}
+   */
+  isPatientBiologicalSiblingAbleToParticipateStudy(): Question {
+    return new Question(this.page, { prompt: "Is the patient's biological sibling able to participate in the study?" });
+  }
+
+
+  /**
    * Question: Patient doesn't have any children
    * <br> Type: Checkbox
    * @returns {Checkbox}

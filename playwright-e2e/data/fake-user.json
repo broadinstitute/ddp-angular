@@ -37,6 +37,7 @@
     "zip": "02114"
   },
   "adult": {
+    "title": "MR",
     "firstName": "E2E",
     "middleName": "Tester",
     "lastName": "Playwright",
@@ -77,6 +78,7 @@
     "middleName": "Junior",
     "lastName": "Playwright",
     "fullName": "E2E-Child Junior Playwright",
+    "sex": "Male",
     "birthDate": {
       "MM": "12",
       "DD": "30",
