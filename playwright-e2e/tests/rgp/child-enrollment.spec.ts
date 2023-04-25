@@ -12,14 +12,14 @@ import { setAuth0UserEmailVerified } from 'utils/api-utils';
 
 const { RGP_USER_EMAIL, RGP_USER_PASSWORD } = process.env;
 
-test.describe('Child (under 18) Enrollment', () => {
+test.describe('Child Enrollment', () => {
   const assertProgressActiveItem = async (page: Page, itemName: string): Promise<void> => {
     const locator = page.locator('li.activity-stepper__step-container button.stepper-btn.stepper-btn--active');
     await expect(locator).toHaveCount(1);
     await expect(locator).toContainText(itemName);
   };
 
-  test('Can complete application for a child @functional @enrollment @rgp @visual', async ({ page }) => {
+  test('Enroll a child (under 18) @functional @enrollment @rgp @visual', async ({ page }) => {
     const child = user.child;
     const adult = user.adult;
 
