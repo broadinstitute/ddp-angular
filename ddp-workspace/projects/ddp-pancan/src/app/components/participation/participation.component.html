@@ -9,9 +9,9 @@
             <h2 class="step__title">{{step.Title}}</h2>
             <p class="step__text">{{step.Text}}</p>
 
-            <a mat-stroked-button *ngIf="step.Button && stepsHref[i]"
+            <a mat-stroked-button *ngIf="step.Button && step.href"
                target="_blank"
-               [href]="stepsHref[i]"
+               [href]="step.href"
                class="step__btn button button_small small-letter-spacing button_secondary">
                 {{step.Button}}
             </a>
