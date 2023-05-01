@@ -103,7 +103,7 @@ import { ToolkitConfigurationService } from 'toolkit';
                         <h1 class="PageContent-title" translate>Toolkit.MoreDetails.FAQ.OtherQuestions.Title</h1>
                         <p class="PageContent-text">
                             <span translate>Toolkit.MoreDetails.FAQ.OtherQuestions.Section1.Text</span>
-                            <a href="AngiosarcomaBrochure_NewDFCILogo.pdf" target="_blank" class="Link" translate> Toolkit.MoreDetails.FAQ.OtherQuestions.Section1.Link</a>
+                            <a href="AngiosarcomaBrochure.pdf" target="_blank" class="Link" translate> Toolkit.MoreDetails.FAQ.OtherQuestions.Section1.Link</a>
                         </p>
                         <p class="PageContent-text">
                             <span translate>Toolkit.MoreDetails.FAQ.OtherQuestions.Section2.TextPt1</span>
