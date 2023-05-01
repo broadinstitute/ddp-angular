@@ -94,6 +94,7 @@
                     "Title": "Provide consent for the study",
                     "Text": "This section consists of several pages, but feel free to take your time. Your progress will be automatically saved so you can come back to it later. If you are signing up for / with your child, depending on their age, we may also ask them to “assent” or agree that they would also like to participate in the study.",
                     "Button": "View Consent Document",
+                    "href": "consent.pdf",
                     "ImageAlt": "Computer screen displaying online consent form"
                 },
                 {
@@ -102,6 +103,7 @@
                     "Title": "Tell us where you’ve been treated",
                     "Text": "Tell us where you’ve been treated for your cancer. We ask where patients have been treated, so that we can request medical records, and if applicable, archived tumor tissue.",
                     "Button": "View Medical Release",
+                    "href": "medical_release.pdf",
                     "ImageAlt": "Computer screen displaying medical center"
                 },
                 {
@@ -110,6 +112,7 @@
                     "Title": "Respond to surveys about you and your experience with cancer",
                     "Text": "In these surveys, we ask questions about your experience with cancer, like what type of cancer you were diagnosed with, when you were diagnosed, and the types of treatments you’ve had.",
                     "Button": "View Surveys",
+                    "href": "surveys.pdf",
                     "ImageAlt": "Computer screen displaying online survey"
                 },
                 {
@@ -118,6 +121,7 @@
                     "Title": "Provide a saliva and/or blood sample",
                     "Text": "We will send you a kit to collect a sample of your saliva and/or blood. We will study these samples to help improve our understanding of cancer.",
                     "Button": "View Kit Instructions",
+                    "href": "Salvia_Kit_Instructions_PanCan.pdf",
                     "ImageAlt": "Sample collection kit"
                 },
                 {
