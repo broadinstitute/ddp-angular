@@ -39,7 +39,8 @@
         "Address": {
             "Text": "Contact Us:",
             "Line1": "Broad Institute of MIT and Harvard",
-            "Line2": "415 Main Street, Cambridge, MA 02142 United States"
+            "Line2": "415 Main Street, Cambridge, MA 02142 United States",
+            "Line3": "(Toll-free: <a class=\"Footer-contactLink\" href='tel: 855-534-4300'>855-534-4300</a>)"
         },
         "FacebookAlt": "Facebook"
     },
@@ -427,7 +428,10 @@
         "Title": "Frequently Asked Questions",
         "Intro": {
             "Text1": "Browse through these FAQs to find answers to commonly raised questions. We also encourage you to read through the other pages of this website. If your question is not answered, please reach out to us by email at",
-            "Text2": "or by phone at"
+            "Text2": "or by phone at",
+            "ContactInfo": {
+                "tollFreePhone": "(Toll-free: <a class=\"Link\" href='tel: 855-534-4300'>855-534-4300</a>)"
+            }
         },
         "General": {
             "Title": "General Questions",
@@ -700,9 +704,8 @@
             "List": {
                 "Item1": "Have a rare and genetically undiagnosed condition",
                 "Item2": "Live in the United States",
-                "Item3": "Are English- or Spanish-speaking",
-                "Item4": "Be currently under the care of a medical provider that is helping to understand the cause of the condition",
-                "Item5": "Have access to a telephone and/or a computer"
+                "Item3": "Be currently under the care of a medical provider that is helping to understand the cause of the condition",
+                "Item4": "Have access to a telephone and/or a computer"
             },
             "Ending": {
                 "Text1": {
@@ -752,6 +755,9 @@
                 "Text2": {
                     "Part1": "Please reach out to us by email at",
                     "Part2": "or by phone at",
+                    "ContactInfo": {
+                        "tollFreePhone": "(Toll-free: <a class=\"Link\" href='tel: 855-534-4300'>855-534-4300</a>)"
+                    },
                     "Part3": "if you have any questions or would like us to consider a special-case application."
                 }
             }
@@ -772,6 +778,7 @@
             {
                 "title": "Get to know our project",
                 "text": "The Rare Genomes Project is a research study focused on patients and families with <span class=\"Accent\">rare and genetically undiagnosed conditions</span>. We use genomic sequencing to search for the cause of rare disease in these families and hope to accelerate the rate of rare disease diagnosis in the process. For more information, review our <a href=\"/eligibility-criteria\" class=\"Link\">eligibility criteria</a> and read through the steps below.",
+                "videoUrl": "https://youtu.be/ux4_MwSALrc",
                 "image": "/assets/images/step-1.jpg "
             },
             {
@@ -820,7 +827,10 @@
                 "Text1": "If you do not see your question",
                 "Text2": "here",
                 "Text3": "please email us at",
-                "Text4": "or call us at"
+                "Text4": "or call us at",
+                "ContactInfo": {
+                    "tollFreePhone": "(Toll-free: <a class=\"Link\" href='tel: 855-534-4300'>855-534-4300</a>)"
+                }
             }
         }
     },
@@ -869,7 +879,10 @@
         },
         "Ending": {
             "Text1": "We discuss data sharing during the consent call if you are accepted into the project and will make sure you understand how your data will be used. If you have questions or concerns about privacy that are not answered above, please contact us by email at",
-            "Text2": "or by phone at"
+            "Text2": "or by phone at",
+            "ContactInfo": {
+                "tollFreePhone": "(Toll-free: <a class=\"Link\" href='tel: 855-534-4300'>855-534-4300</a>)"
+            }
         }
     },
     "ForYourPhysicianPage": {
@@ -892,7 +905,6 @@
                 {
                     "Title": "Patients and families with <span class=\"Accent\">a rare and genetically undiagnosed condition</span> who:",
                     "Items": [
-                        "Are English- or Spanish-speaking",
                         "Live in the United States",
                         "Are currently under the care of a doctor that is helping to understand the cause of the patient’s condition"
                     ]
@@ -919,7 +931,10 @@
             "Item2": "Addressing follow-up questions that arise during the family’s involvement in the project"
         },
         "ThankYou": "Thank you for your support. We look forward to learning with you!",
-        "Contact": "Contact Us"
+        "Contact": "Contact Us",
+        "ContactInfo": {
+            "tollFreePhone": "(Toll-free: <a class=\"Link\" href='tel: 855-534-4300'>855-534-4300</a>)"
+        }
     },
     "DataAccessPage": {
         "Title": "Data Sharing",
@@ -944,7 +959,10 @@
         },
         "Questions": {
             "Text1": "If you have further questions, please contact us by email at",
-            "Text2": "or call us at"
+            "Text2": "or call us at",
+            "ContactInfo": {
+                "tollFreePhone": "(Toll-free: <a class=\"Link\" href='tel: 855-534-4300'>855-534-4300</a>)"
+            }
         }
     },
     "LGMDPage": {
@@ -965,8 +983,7 @@
                 "Have a clinical diagnosis of LGMD*",
                 "Have had prior genetic testing that was negative or did not provide a full genetic explanation*",
                 "Are currently under the care of a neurologist, medical geneticist, or relevant subspecialist",
-                "Live in the United States",
-                "Are English- or Spanish-speaking"
+                "Live in the United States"
             ],
             "Ending": {
                 "Text1": "*If you are unsure whether you have a clinical diagnosis of LGMD or you have not had prior genetic testing for your LGMD, you may still be eligible to participate and are encouraged to apply by",
@@ -1029,8 +1046,7 @@
                 },
                 "Item2": "Do <span class=\"Accent\">NOT</span> have a condition with a low suspicion of a single gene cause, such as <a href=\"https://cleftline.org/family-resources/introduction-to-cleft-craniofacial-conditions/\" target=\"_blank\" class=\"Link Link--blue\"> isolated cleft lip and/or palate</a>, isolated <a href=\"http://www.childrenshospital.org/conditions-and-treatments/conditions/m/microtia\" target=\"_blank\" class=\"Link Link--blue\">microtia</a>, or <a href=\"https://rarediseases.info.nih.gov/diseases/6582/hemifacial-microsomia\" target=\"_blank\" class=\"Link Link--blue\">hemifacial microsomia</a>",
                 "Item3": "Are currently under the care of a medical geneticist or relevant subspecialist",
-                "Item4": "Live in the United States",
-                "Item5": "Are English- or Spanish-speaking"
+                "Item4": "Live in the United States"
             }
         },
         "Steps": {
@@ -1065,7 +1081,7 @@
             "Paragraph2": {
                 "Intro": "If you have questions, browse our ",
                 "Link": "Frequently Asked Questions",
-                "Closing": " page or contact the study staff at <a href=\"tel:617-714-7395\">617-714-7395</a> or <a href=\"mailto:raregenomes@broadinstitute.org\">raregenomes@broadinstitute.org</a>."
+                "Closing": " page or contact the study staff at <a href=\"tel:617-714-7395\">617-714-7395</a> (Toll-free: <a class=\"Link\" href='tel: 855-534-4300'>855-534-4300</a>) or <a href=\"mailto:raregenomes@broadinstitute.org\">raregenomes@broadinstitute.org</a>."
             }
         },
         "StudyMessages": {
@@ -1131,7 +1147,6 @@
         "Title": "Thank you for your interest in joining the Rare Genomes Project",
         "Paragraph1": "Unfortunately, your responses to our pre-screening questionnaire do not match the <a href=\"/eligibility-criteria\" class=\"Link\">current requirements for participation</a> in the study. The Rare Genomes Project can only accept applications from families who meet all of these conditions:",
         "List": [
-            "Understand English or Spanish",
             "Live in the United States",
             "Have a rare and genetically undiagnosed condition",
             "Are currently under the care of a medical provider who is helping to understand the cause of your condition"

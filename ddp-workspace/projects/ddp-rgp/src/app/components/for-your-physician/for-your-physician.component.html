@@ -51,7 +51,10 @@
       <h3 class="Subtitle Color--blue TopMargin25" translate>ForYourPhysicianPage.Contact</h3>
       <li class="List-li" i18n><a href="http://raregenomes.org" target="_blank" class="Link">www.raregenomes.org</a>
       </li>
-      <li class="List-li"><a [href]="phoneHref" class="Link">{{phone}}</a></li>
+      <li class="List-li">
+          <a [href]="phoneHref" class="Link">{{phone}}</a>
+          <span class="tollFreeLinkColor" [innerHTML]="'ForYourPhysicianPage.ContactInfo.tollFreePhone' | translate"></span>
+      </li>
     </ul>
   </div>
 </div>

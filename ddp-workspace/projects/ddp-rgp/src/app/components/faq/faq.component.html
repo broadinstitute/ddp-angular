@@ -13,7 +13,8 @@
       <span translate>FaqPage.Intro.Text1</span>
       <a [href]="emailHref" class="Link">{{email}}</a>
       <span translate>FaqPage.Intro.Text2</span>
-      <a [href]="phoneHref" class="Link">{{phone}}</a>.
+      <a [href]="phoneHref" class="Link">{{phone}}</a>
+        <span [innerHTML]="'FaqPage.Intro.ContactInfo.tollFreePhone' | translate"></span>.
     </p>
 
     <a (click)="isGeneralCollapsed = !isGeneralCollapsed" class="Panel">

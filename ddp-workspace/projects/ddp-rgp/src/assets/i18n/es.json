@@ -39,7 +39,8 @@
         "Address": {
             "Text": "Comuníquese con nosotros:",
             "Line1": "Broad Institute of MIT and Harvard",
-            "Line2": "415 Main Street, Cambridge, MA 02142 United States"
+            "Line2": "415 Main Street, Cambridge, MA 02142 United States",
+            "Line3": "(Línea gratuita: <a class=\"Footer-contactLink\" href='tel: 855-534-4300'>855-534-4300</a>)"
         },
         "FacebookAlt": "Facebook"
     },
@@ -427,7 +428,10 @@
         "Title": "Preguntas frecuentes",
         "Intro": {
             "Text1": "Explore esta página para hallar respuestas a preguntas frecuentes. También le recomendamos que lea las demás páginas de este sitio web. Si no encuentra respuesta a su pregunta, escríbanos por correo electrónico a",
-            "Text2": "o llámenos por teléfono al"
+            "Text2": "o llámenos por teléfono al",
+            "ContactInfo": {
+                "tollFreePhone": "(Línea gratuita: <a class=\"Link\" href='tel: 855-534-4300'>855-534-4300</a>)"
+            }
         },
         "General": {
             "Title": "Preguntas generales",
@@ -700,9 +704,8 @@
             "List": {
                 "Item1": "Tener una enfermedad genética rara que no se haya diagnosticado",
                 "Item2": "Vivir en los Estados Unidos",
-                "Item3": "Hablar inglés o español",
-                "Item4": "Recibir actualmente los cuidados de un profesional médico que le esté ayudando a determinar la causa de la enfermedad",
-                "Item5": "Tener acceso a un teléfono o a una computadora"
+                "Item3": "Recibir actualmente los cuidados de un profesional médico que le esté ayudando a determinar la causa de la enfermedad",
+                "Item4": "Tener acceso a un teléfono o a una computadora"
             },
             "Ending": {
                 "Text1": {
@@ -752,6 +755,9 @@
                 "Text2": {
                     "Part1": "Escríbanos por correo electrónico a",
                     "Part2": "o llámenos por teléfono al",
+                    "ContactInfo": {
+                        "tollFreePhone": "(Línea gratuita: <a class=\"Link\" href='tel: 855-534-4300'>855-534-4300</a>)"
+                    },
                     "Part3": "si tiene preguntas o desea que tengamos en cuenta la solicitud de un caso especial."
                 }
             }
@@ -772,6 +778,7 @@
             {
                 "title": "Conozca el proyecto",
                 "text": "El Proyecto Genomas Raros es un estudio clínico que se centra en pacientes y en familias que tienen <span class=\"Accent\">enfermedades raras y de causa genética desconocida</span>. Empleamos la secuenciación del genoma para buscar la causa de la enfermedad rara en estas familias y al mismo tiempo esperamos acelerar la tasa de diagnóstico de estas enfermedades. Si desea más información, revise los <a href=\"/eligibility-criteria\" class=\"Link\">criterios de idoneidad</a> y lea los siguientes pasos.",
+                "videoUrl": "https://www.youtube.com/watch?v=Du2XETXbhRo",
                 "image": "/assets/images/step-1.jpg"
             },
             {
@@ -820,7 +827,10 @@
                 "Text1": "Si no ve su pregunta",
                 "Text2": "aquí",
                 "Text3": "escríbanos por correo electrónico a",
-                "Text4": "o llámenos al"
+                "Text4": "o llámenos al",
+                "ContactInfo": {
+                    "tollFreePhone": "(Línea gratuita: <a class=\"Link\" href='tel: 855-534-4300'>855-534-4300</a>)"
+                }
             }
         }
     },
@@ -869,7 +879,10 @@
         },
         "Ending": {
             "Text1": "Durante la llamada de consentimiento hablaremos de la comunicación de datos si se le acepta en el proyecto y nos cercioraremos de que usted entienda cómo se emplearán sus datos. Si tiene preguntas o dudas sobre su privacidad que no se respondieron en esta página, escríbanos por correo electrónico a",
-            "Text2": "o llámenos por teléfono al"
+            "Text2": "o llámenos por teléfono al",
+            "ContactInfo": {
+                "tollFreePhone": "(Línea gratuita: <a class=\"Link\" href='tel: 855-534-4300'>855-534-4300</a>)"
+            }
         }
     },
     "ForYourPhysicianPage": {
@@ -892,7 +905,6 @@
                 {
                     "Title": "Pacientes y familias que tengan una enfermedad <span class=\"Accent\">rara cuya causa genética no se haya diagnosticado</span>, y que además:",
                     "Items": [
-                        "Hablen inglés o español",
                         "Vivan en los Estados Unidos",
                         "Reciban los cuidados de un médico que les esté ayudando a determinar la causa de la enfermedad"
                     ]
@@ -920,7 +932,10 @@
             "ThankYou": "Gracias por tu apoyo. ¡Esperamos aprender contigo!"
         },
         "ThankYou": "Le agradecemos su apoyo. Esperamos aprender muy pronto con usted.",
-        "Contact": "Comuníquese con nosotros"
+        "Contact": "Comuníquese con nosotros",
+        "ContactInfo": {
+            "tollFreePhone": "(Línea gratuita: <a class=\"Link\" href='tel: 855-534-4300'>855-534-4300</a>)"
+        }
     },
     "DataAccessPage": {
         "Title": "Intercambio de datos",
@@ -945,7 +960,10 @@
         },
         "Questions": {
             "Text1": "Si tiene más preguntas, escríbanos por correo electrónico a",
-            "Text2": "o llámenos al"
+            "Text2": "o llámenos al",
+            "ContactInfo": {
+                "tollFreePhone": "(Línea gratuita: <a class=\"Link\" href='tel: 855-534-4300'>855-534-4300</a>)"
+            }
         }
     },
     "LGMDPage": {
@@ -966,8 +984,7 @@
                 "Tengan un diagnóstico clínico de distrofia muscular de cinturas*",
                 "Hayan tenido resultados negativos en pruebas genéticas anteriores o estas pruebas no hayan proporcionado una explicación genética completa*",
                 "Estén recibiendo atención médica actualmente de un neurólogo, un genetista médico o un subespecialista pertinente",
-                "Vivan en los Estados Unidos",
-                "Hablen inglés o español"
+                "Vivan en los Estados Unidos"
             ],
             "Ending": {
                 "Text1": "*Si usted no sabe si tiene un diagnóstico clínico de distrofia muscular de cinturas o no se ha hecho pruebas genéticas para esta enfermedad, quizá aún cumpla los requisitos para participar.",
@@ -1030,8 +1047,7 @@
                 },
                 "Item2": "Ausencia de una enfermedad en que la sospecha de un gen único sea baja, como los <a href=\"https://cleftline.org/family-resources/introduction-to-cleft-craniofacial-conditions/\" target=\"_blank\" class=\"Link Link--blue\">casos aislados de labio leporino o paladar hendido</a>, los casos aislados de <a href=\"http://www.childrenshospital.org/conditions-and-treatments/conditions/m/microtia\" target=\"_blank\" class=\"Link Link--blue\">microtia</a> o la <a href=\"https://rarediseases.info.nih.gov/diseases/6582/hemifacial-microsomia\" target=\"_blank\" class=\"Link Link--blue\">microsomía hemifacial</a>",
                 "Item3": "Estar recibiendo atención médica actualmente de un genetista médico o un subespecialista pertinente",
-                "Item4": "Vivir en los Estados Unidos",
-                "Item5": "Hablar inglés o español"
+                "Item4": "Vivir en los Estados Unidos"
             }
         },
         "Steps": {
@@ -1071,7 +1087,7 @@
             "Paragraph2": {
                 "Intro": "Si tiene preguntas, consulte la página de",
                 "Link": "Preguntas frecuentes",
-                "Closing": "o comuníquese con el personal del estudio llamando al <a href=\"tel:617-714-7395\">617-714-7395</a> o escribiendo a <a href=\"mailto:raregenomes@broadinstitute.org\">raregenomes@broadinstitute.org</a>."
+                "Closing": "o comuníquese con el personal del estudio llamando al <a href=\"tel:617-714-7395\">617-714-7395</a> (Línea gratuita: <a class=\"Link\" href='tel: 855-534-4300'>855-534-4300</a>) o escribiendo a <a href=\"mailto:raregenomes@broadinstitute.org\">raregenomes@broadinstitute.org</a>."
             }
         },
         "StudyMessages": {
@@ -1137,7 +1153,6 @@
         "Title": "Gracias por su interés en participar en el Proyecto Genomas Raros",
         "Paragraph1": "Desafortunadamente, sus respuestas al cuestionario de preselección no coinciden con los <a href=\"eligibility-criteria\" class=\"Link\">requisitos actuales para participar</a> en el estudio. El Proyecto Genomas Raros solo puede aceptar solicitudes de familias que cumplan todas estas condiciones:",
         "List": [
-            "Entender inglés o español",
             "Vivir en los Estados Unidos",
             "Tener una enfermedad genética rara que no se haya diagnosticado",
             "Recibir actualmente los cuidados de un profesional médico que le esté ayudando a determinar la causa de la enfermedad"
