@@ -6,10 +6,4 @@ import { Component } from '@angular/core';
     styleUrls: ['./participation.component.scss']
 })
 export class ParticipationComponent {
-    readonly stepsHref = [
-        'consent.pdf',
-        'medical_release.pdf',
-        'surveys.pdf',
-        'assets/images/kit_instructions.jpg'
-    ];
 }
