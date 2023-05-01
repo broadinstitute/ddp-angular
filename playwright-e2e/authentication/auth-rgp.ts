@@ -1,5 +1,4 @@
 import { Page } from '@playwright/test';
-import { NavSelectors } from 'pages/singular/navbar';
 
 const { RGP_USER_EMAIL, RGP_USER_PASSWORD } = process.env;
 
@@ -11,10 +10,10 @@ export async function login(page: Page, opts: { email?: string; password?: strin
   if (password == null) {
     throw Error('Invalid parameters: RGP user password is undefined or null.');
   }
-  await page.locator(NavSelectors.Login).click();
-  await page.locator('#signInEmail').fill(email);
-  await page.locator('#signInPassword').fill(password);
-  await Promise.all([page.waitForNavigation({ waitUntil: 'load' }), page.click('[type="submit"]')]);
+  await page.locator('.header a:has-text("Sign In")').click();
+  await page.locator('input#signInEmail').fill(email);
+  await page.locator('input#signInPassword').fill(password);
+  await page.click('button#signInSubmit');
 }
 
 export { createAccountWithEmailAlias } from 'authentication/auth-base';

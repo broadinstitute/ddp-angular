@@ -1,5 +1,4 @@
 import { expect, Locator, Page } from '@playwright/test';
-import Address from 'lib/component/address';
 import Institution from 'lib/component/institution';
 import Checkbox from 'lib/widget/checkbox';
 import { AngioPageBase } from 'pages/angio/angio-page-base';
@@ -17,14 +16,6 @@ export default class MedicalReleaseFormPage extends AngioPageBase {
     await expect(this.pageTitle).toBeVisible({ visible: true });
     await expect(this.pageTitle).toHaveText('About you');
     await waitForNoSpinner(this.page);
-  }
-
-  /**
-   * <br> Questions: Your contact information
-   * <br> Type: Address Form
-   */
-  yourContactInformation(): Address {
-    return new Address(this.page, { label: 'Your contact information' });
   }
 
   /**
@@ -53,13 +44,5 @@ export default class MedicalReleaseFormPage extends AngioPageBase {
       label: 'Where were any other biopsies or surgeries for your angiosarcoma performed',
       nth: institutionIndex
     });
-  }
-
-  /**
-   * <br> Question: I have already read and signed the informed consent document ...
-   * @returns {Checkbox}
-   */
-  acknowledge(): Checkbox {
-    return new Checkbox(this.page, { label: 'I have already read and signed the informed consent document' });
   }
 }

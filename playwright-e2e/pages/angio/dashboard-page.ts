@@ -1,6 +1,6 @@
 import { expect, Page } from '@playwright/test';
 import { AngioPageBase } from 'pages/angio/angio-page-base';
-import Table from 'lib/widget/table';
+import Table from 'lib/component/table';
 
 export default class DashboardPage extends AngioPageBase {
   constructor(page: Page) {

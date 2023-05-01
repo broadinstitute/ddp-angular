@@ -1,4 +1,5 @@
 import { Utils } from '../utils/utils';
+import * as _ from 'underscore';
 
 export class UserSetting {
   constructor(public rowsOnPage: number, public rowSet0: number, public rowSet1: number, public rowSet2: number,
@@ -8,19 +9,19 @@ export class UserSetting {
     this.setToDefaultValues();
 
     // if value is not 0 fill with actual value from user settings table
-    if (rowsOnPage !== 0) {
+    if (rowsOnPage !== 0 && _.isNumber(rowsOnPage)) {
       this.rowsOnPage = rowsOnPage;
     }
-    if (rowSet0 !== 0) {
+    if (rowSet0 !== 0 && _.isNumber(rowSet0)) {
       this.rowSet0 = rowSet0;
     }
-    if (rowSet1 !== 0) {
+    if (rowSet1 !== 0 && _.isNumber(rowSet1)) {
       this.rowSet1 = rowSet1;
     }
-    if (rowSet2 !== 0) {
+    if (rowSet2 !== 0 && _.isNumber(rowSet2)) {
       this.rowSet2 = rowSet2;
     }
-    if (this.dateFormat != null) {
+    if (!_.isNull(dateFormat) && !_.isUndefined(dateFormat)) {
       this.dateFormat = dateFormat;
     }
     this.defaultParticipantFilter = defaultParticipantFilter;

@@ -60,6 +60,7 @@ export class MedicalRecordComponent implements OnInit {
 
   startDate: string;
   endDate: string;
+  hasEndDateChanged = false;
   pdfs: Array<PDFModel> = [];
   selectedPDF: string;
   source: string;
@@ -68,7 +69,7 @@ export class MedicalRecordComponent implements OnInit {
               private dsmService: DSMService, private router: Router,
                private role: RoleService, private util: Utils, private route: ActivatedRoute) {
     if (!auth.authenticated()) {
-      auth.logout();
+      auth.sessionLogout();
     }
     this.route.queryParams.subscribe(params => {
       const realm = params[ DSMService.REALM ] || null;
@@ -100,7 +101,9 @@ export class MedicalRecordComponent implements OnInit {
       }
       this.startDate = this.participant.data.dsm[ 'diagnosisMonth' ] + '/' + this.participant.data.dsm[ 'diagnosisYear' ];
       this.endDate = Utils.getFormattedDate(new Date());
-      this.message = null;
+      this.hasEndDateChanged = false;
+
+     this.message = null;
     } else {
       this.errorMessage = 'Error - Information is missing';
     }
@@ -147,7 +150,7 @@ export class MedicalRecordComponent implements OnInit {
     }
     if (v !== null) {
       const participantId: string = this.getParticipantId();
-      const realm: string = localStorage.getItem(ComponentService.MENU_SELECTED_REALM);
+      const realm: string = sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM);
       const patch1 = new PatchUtil(
         this.medicalRecord.medicalRecordId, this.role.userMail(),
         {name: parameterName, value: v}, null, null, participantId,
@@ -173,7 +176,7 @@ export class MedicalRecordComponent implements OnInit {
         },
         error: err => {
           if (err._body === Auth.AUTHENTICATION_ERROR) {
-            this.router.navigate([ Statics.HOME_URL ]);
+            this.auth.doLogout();
           }
           this.additionalMessage = 'Error - Saving changes \n' + err;
         }
@@ -204,7 +207,7 @@ export class MedicalRecordComponent implements OnInit {
       },
       error: err => {
         if (err._body === Auth.AUTHENTICATION_ERROR) {
-          this.auth.logout();
+          this.auth.doLogout();
         }
         this.errorMessage = 'Error - Loading mr log\nPlease contact your DSM developer';
       }
@@ -224,7 +227,7 @@ export class MedicalRecordComponent implements OnInit {
           },
           error: err => {
             if (err._body === Auth.AUTHENTICATION_ERROR) {
-              this.router.navigate([Statics.HOME_URL]);
+              this.auth.doLogout();
             }
             this.additionalMessage = 'Error - Saving log data\nPlease contact your DSM developer';
           }
@@ -244,13 +247,16 @@ export class MedicalRecordComponent implements OnInit {
   }
 
   downloadPDF(configName: string): void {
-    if (configName === 'cover' && this.medicalRecord.name == null || this.medicalRecord.name === '') {
+    if (configName === 'cover' && !this.medicalRecord.name) {
       this.additionalMessage = 'Please add a \'Confirmed Institution Name\'';
     } else {
+      if (this.isLostToFollowUp() && !this.hasEndDateChanged) {
+        this.endDate = this.participant.data.dsm['dateOfMajority'];
+      }
       this.downloading = true;
       this.message = 'Downloading... This might take a while';
       this.dsmService.downloadPDF(this.participant.data.profile['guid'], this.medicalRecord.medicalRecordId,
-        this.startDate, this.endDate, this.mrCoverPdfSettings, localStorage.getItem(ComponentService.MENU_SELECTED_REALM),
+        this.startDate, this.endDate, this.mrCoverPdfSettings, sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM),
         configName, this.pdfs, null
       )
         .subscribe({
@@ -265,7 +271,7 @@ export class MedicalRecordComponent implements OnInit {
           },
           error: err => {
             if (err._body === Auth.AUTHENTICATION_ERROR) {
-              this.router.navigate([Statics.HOME_URL]);
+              this.auth.doLogout();
             }
             this.message = 'Failed to download pdf.';
             this.downloading = false;
@@ -319,7 +325,7 @@ export class MedicalRecordComponent implements OnInit {
 
         this.lookups        = [];
         const participantId = this.getParticipantId();
-        const realm         = localStorage.getItem(ComponentService.MENU_SELECTED_REALM);
+        const realm         = sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM);
         const patch         = new PatchUtil(
           this.medicalRecord.medicalRecordId,
           this.role.userMail(),
@@ -355,7 +361,7 @@ export class MedicalRecordComponent implements OnInit {
       },
       error: err => {
         if (err._body === Auth.AUTHENTICATION_ERROR) {
-          this.router.navigate([ Statics.HOME_URL ]);
+          this.auth.doLogout();
         }
         this.additionalMessage = 'Error - Saving changes \n' + err;
       }
@@ -407,6 +413,7 @@ export class MedicalRecordComponent implements OnInit {
   }
 
   endDateChanged(date: string): void {
+    this.hasEndDateChanged = true;
     this.endDate = date;
   }
 
@@ -466,5 +473,9 @@ export class MedicalRecordComponent implements OnInit {
       participantId = this.participant.data.profile[ 'legacyAltPid' ];
     }
     return participantId;
+  }
+
+  isLostToFollowUp(): boolean {
+    return this.participant.data['status']=== 'CONSENT_SUSPENDED';
   }
 }

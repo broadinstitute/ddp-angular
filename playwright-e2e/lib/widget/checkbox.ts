@@ -1,34 +1,32 @@
 import { expect, Locator, Page } from '@playwright/test';
-import WidgetBase from 'lib/widget/widget-base';
+import WidgetBase from 'lib/widget-base';
 
+/**
+ * mat-checkbox
+ */
 export default class Checkbox extends WidgetBase {
-  private readonly elementLocator: Locator;
-  private readonly rootLocator: Locator;
-
   /**
    *
    * @param page
    * @param opts Require one parameter: label or ddpTestID
    */
-  constructor(page: Page, opts: { label?: string; ddpTestID?: string; root?: Locator | string; exactMatch?: boolean }) {
-    super(page);
+  constructor(page: Page, opts: { label?: string | RegExp; ddpTestID?: string; root?: Locator | string; exactMatch?: boolean }) {
     const { label, ddpTestID, root, exactMatch = false } = opts;
-    this.rootLocator = root
-      ? typeof root === 'string'
-        ? this.page.locator(root)
-        : root
-      : this.page.locator('mat-list-item, ddp-activity-section, ddp-activity-question');
-    // prettier-ignore
-    /* eslint-disable max-len */
-    this.elementLocator = ddpTestID
-        ? this.rootLocator.locator(`mat-checkbox[data-ddp-test="${ddpTestID}"]`) // Label ignored if ddpTestID is specified
-        : exactMatch
-            ? this.rootLocator.locator(`xpath=//mat-checkbox[.//input[@id=(//label[.//text()[normalize-space()="${label}"]]/@for)]]`)
-            : this.rootLocator.locator(`xpath=//mat-checkbox[.//input[@id=(//label[contains(normalize-space(.),"${label}")]/@for)]]`);
-  }
+    super(page, { root: root ? root : 'mat-list-item, ddp-activity-section, ddp-activity-question', testId: ddpTestID });
 
-  toLocator(): Locator {
-    return this.elementLocator;
+    if (!ddpTestID) {
+      if (label) {
+        if (typeof label === 'string') {
+          this.element = exactMatch
+            ? this.root.locator(`xpath=//mat-checkbox[.//input[@type="checkbox" and @id=(//label[.//text()[normalize-space()="${label}"]]/@for)]]`)
+            : this.root.locator(`xpath=//mat-checkbox[.//input[@type="checkbox" and @id=(//label[contains(normalize-space(.),"${label}")]/@for)]]`);
+        } else {
+          this.element = this.root.locator('mat-checkbox').filter({ has: this.page.locator('label', { hasText: label }) });
+        }
+      } else {
+        this.element = this.root.locator(`xpath=//mat-checkbox[.//input[@id=(//label/@for)]]`);
+      }
+    }
   }
 
   async isChecked(): Promise<boolean> {
@@ -58,9 +56,7 @@ export default class Checkbox extends WidgetBase {
    */
   async fill(value: string | undefined): Promise<void> {
     if (value) {
-      const inputLocator = this.toLocator().locator(
-        'xpath=ancestor::mat-list-item//input[contains(@class, "mat-input-element")]'
-      );
+      const inputLocator = this.toLocator().locator('xpath=ancestor::mat-list-item//input[contains(@class, "mat-input-element")]');
       await inputLocator.fill(value);
     }
   }

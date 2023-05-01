@@ -28,7 +28,7 @@ export class FieldDatepickerComponent implements OnInit, OnChanges {
   @Output() dateChanged = new EventEmitter();
   @Output() saveCompleted = new EventEmitter();
 
-
+  public readonly maxDate: Date = new Date();
   _dateString: string;
   defaultDate = '1000-01-01';
   error: string = null;
@@ -182,7 +182,7 @@ export class FieldDatepickerComponent implements OnInit, OnChanges {
       this.emitDate(this._dateString);
     }
 
-    public closeCalendar(): void {
+    public closeOrOpenCalendar(): void {
       this.showDatePicker = !this.showDatePicker;
     }
 

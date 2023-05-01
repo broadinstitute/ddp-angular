@@ -117,6 +117,7 @@ export class Filter {
   public static MR_UNABLE_TO_OBTAIN = new Filter(ParticipantColumn.MR_UNABLE_TO_OBTAIN, Filter.CHECKBOX_TYPE);
   public static MR_DUPLICATE = new Filter(ParticipantColumn.MR_DUPLICATE, Filter.CHECKBOX_TYPE);
   public static MR_INTERNATIONAL = new Filter(ParticipantColumn.MR_INTERNATIONAL, Filter.CHECKBOX_TYPE);
+  public static NO_ACTION_NEEDED = new Filter(ParticipantColumn.NO_ACTION_NEEDED, Filter.CHECKBOX_TYPE);
   public static MR_PAPER_CR = new Filter(ParticipantColumn.MR_PAPER_CR, Filter.CHECKBOX_TYPE);
   public static PATHOLOGY_RESENT = new Filter(ParticipantColumn.PATHOLOGY_RESENT, Filter.OPTION_TYPE, [
     new NameValue('yes', 'Yes'),
@@ -257,29 +258,6 @@ export class Filter {
     new NameValue( 'qc', 'QC' ) ] );
   public static ABSTRACTION_USER = new Filter( ParticipantColumn.ABSTRACTION_USER, Filter.TEXT_TYPE );
 
-  public static ACTIVITY_STATUS = new Filter( ParticipantColumn.ACTIVITY_STATUS, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,
-    ( participant: Participant, activityDefinitionList: ActivityDefinition[] ) => {
-      let str = '';
-      const activityDataArray = participant.data.activities;
-      activityDataArray.sort( ( ac1, ac2 ) => {
-          const acDef1 = Utils.getActivityDefinition( activityDefinitionList, ac1.activityCode, ac1.activityVersion );
-          const acDef2 = Utils.getActivityDefinition( activityDefinitionList, ac2.activityCode, ac2.activityVersion );
-          return acDef1?.displayOrder - acDef2?.displayOrder;
-        }
-      );
-      const niceText = {
-        COMPLETE: 'Completed',
-        CREATED: 'Created',
-        IN_PROGRESS: 'In Progress',
-        ERROR: 'Error'
-      };
-      for (let i = 0; i < activityDataArray.length; i++) {
-        const activityData = activityDataArray[ i ];
-        const acDef = Utils.getActivityDefinition( activityDefinitionList, activityData.activityCode, activityData.activityVersion );
-        str += acDef?.activityName + ' : ' + niceText[ activityData.status ] + ', ';
-      }
-      return str;
-    }, false );
 
   //Cohort tags
   public static COHORT_TAG_NAME = new Filter(ParticipantColumn.COHORT_TAG_NAME, Filter.TEXT_TYPE);
@@ -317,8 +295,9 @@ export class Filter {
     Filter.USS_COUNT, Filter.H_E_COUNT, Filter.BLOCKS_COUNT, Filter.COLLABORATOR_PARTICIPANT_ID,
     Filter.COLLABORATOR_SAMPLE, Filter.SAMPLE_SENT, Filter.SAMPLE_RECEIVED, Filter.SAMPLE_DEACTIVATION, Filter.SAMPLE_QUEUE,
     Filter.TRACKING_TO_PARTICIPANT, Filter.TRACKING_RETURN, Filter.MF_BARCODE, Filter.STATUS_OUT, Filter.STATUS_IN, Filter.RESULT_TEST, Filter.CORRECTED_TEST, Filter.TIME_TEST, Filter.CARE_EVOLVE,
-    Filter.ABSTRACTION_ACTIVITY, Filter.ABSTRACTION_STATUS, Filter.ABSTRACTION_USER, Filter.ACTIVITY_STATUS, Filter.COHORT_TAG_NAME, Filter.PARTICIPANT_FILE_NAMES, Filter.PARTICIPANT_FILE_UPLOAD_TIME,
-    Filter.COLLECTION_DATE, Filter.SEQUENCING_RESTRICTION, Filter.SAMPLE_NOTES, Filter.CLINICAL_ORDER_DATE, Filter.CLINICAL_ORDER_STATUS, Filter.CLINICAL_ORDER_ID, Filter.CLINICAL_ORDER_PDO, Filter.CLINICAL_STATUS_DATE];
+    Filter.ABSTRACTION_ACTIVITY, Filter.ABSTRACTION_STATUS, Filter.ABSTRACTION_USER, Filter.COHORT_TAG_NAME, Filter.PARTICIPANT_FILE_NAMES, Filter.PARTICIPANT_FILE_UPLOAD_TIME,
+    Filter.COLLECTION_DATE, Filter.SEQUENCING_RESTRICTION, Filter.SAMPLE_NOTES, Filter.CLINICAL_ORDER_DATE, Filter.CLINICAL_ORDER_STATUS, Filter.CLINICAL_ORDER_ID, Filter.CLINICAL_ORDER_PDO,
+    Filter.CLINICAL_STATUS_DATE, Filter.NO_ACTION_NEEDED];
 
   public static parseToColumnArray(json, allColumns, surveyNames?, surveyColumns?): {} {
     const result = {};
@@ -604,6 +583,12 @@ export class Filter {
       }
     } else if (filter.type === Filter.ADDITIONAL_VALUE_TYPE) {
       if ((filter.value1) || (filter.empty || filter.notEmpty)) {
+        filterText = this.getFilterJson(parent,
+          new NameValue('additionalValuesJson', filter.value1),
+          filter.filter2, null,
+          filter.exactMatch, filter.type, filter.range, filter.empty, filter.notEmpty, filter.participantColumn, filter.additionalType);
+      } else if ((!filter.value1) && filter.value2) {
+        filter.filter2.value = filter.value2;
         filterText = this.getFilterJson(parent,
           new NameValue('additionalValuesJson', filter.value1),
           filter.filter2, null,

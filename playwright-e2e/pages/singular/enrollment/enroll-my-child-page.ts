@@ -1,7 +1,7 @@
 import { Page } from '@playwright/test';
 import { SingularPage } from 'pages/singular/singular-page';
 import Question from 'lib/component/Question';
-import Input from 'lib/widget/Input';
+import Input from 'lib/widget/input';
 
 export default class EnrollMyChildPage extends SingularPage {
   constructor(page: Page) {
@@ -25,9 +25,7 @@ export default class EnrollMyChildPage extends SingularPage {
    */
   doesChildHaveCognitiveImpairment(): Question {
     return new Question(this.page, {
-      prompt:
-        'Does your child have a cognitive impairment that impacts their understanding of words commonly' +
-        ' used by others in their age group?'
+      prompt: 'Does your child have a cognitive impairment that impacts their understanding of words commonly used by others in their age group?'
     });
   }
 

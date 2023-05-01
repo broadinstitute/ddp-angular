@@ -107,7 +107,7 @@ import { NGXTranslateService } from 'ddp-sdk';
                         <h2 class="PageContent-subtitle" translate>Toolkit.MoreDetails.FAQ.InfoForPhysicians.Question</h2>
                         <p class="PageContent-text">
                             <span translate>Toolkit.MoreDetails.FAQ.InfoForPhysicians.Text</span>
-                            <a href="Metastatic-breast-cancer-project-for-physicians.pdf" target="_blank" class="Link" translate>Toolkit.MoreDetails.FAQ.InfoForPhysicians.Link</a>
+                            <a href="For_Your_Physician_MBC_new_DFCI_Logo.pdf" target="_blank" class="Link" translate>Toolkit.MoreDetails.FAQ.InfoForPhysicians.Link</a>
                         </p>
 
                         <h2 class="PageContent-subtitle" translate>Toolkit.MoreDetails.FAQ.AggregatedData.Question</h2>

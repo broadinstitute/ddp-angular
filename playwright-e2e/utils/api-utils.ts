@@ -11,7 +11,9 @@ const getTokenPath = (app: APP) => path.join(process.cwd(), app, 'token.txt');
  */
 async function loadSavedAccessTokenIfExist(app: APP): Promise<string | null> {
   try {
-    const contents = await fsPromises.readFile(getTokenPath(app), { encoding: 'utf-8' });
+    const contents = await fsPromises.readFile(getTokenPath(app), {
+      encoding: 'utf-8'
+    });
     return contents.toString();
   } catch (err) {
     return null;
@@ -35,6 +37,12 @@ function buildAuth0ClientCredentials(app: APP): string {
       clientSecret = process.env.RGP_AUTH0_CLIENT_SECRET;
       audience = process.env.RGP_AUTH0_AUDIENCE;
       domain = process.env.RGP_AUTH0_DOMAIN;
+      break;
+    case 'AT':
+      clientId = process.env.AT_AUTH0_CLIENT_ID;
+      clientSecret = process.env.AT_AUTH0_CLIENT_SECRET;
+      audience = process.env.AT_AUTH0_AUDIENCE;
+      domain = process.env.AT_AUTH0_DOMAIN;
       break;
     default:
       throw Error(`Undefined app name: ${app}`);
@@ -92,10 +100,15 @@ export async function getAuth0AccessToken(app: APP): Promise<string> {
 export async function getAuth0UserByEmail(app: APP, email: string, accessToken: string): Promise<string> {
   const credentials = JSON.parse(buildAuth0ClientCredentials(app));
 
-  return fetch(`https://${credentials.domain}/api/v2/users-by-email?${new URLSearchParams({ email })}`, {
-    method: 'GET',
-    headers: { Authorization: `Bearer ${accessToken}` }
-  })
+  return fetch(
+    `https://${credentials.domain}/api/v2/users-by-email?${new URLSearchParams({
+      email
+    })}`,
+    {
+      method: 'GET',
+      headers: { Authorization: `Bearer ${accessToken}` }
+    }
+  )
     .then(async (res) => {
       if (res.ok) {
         return res.json();
@@ -112,11 +125,7 @@ export async function getAuth0UserByEmail(app: APP, email: string, accessToken: 
     });
 }
 
-export async function setAuth0UserEmailVerified(
-  app: APP,
-  email: string,
-  opts: { isEmailVerified?: boolean; accessToken?: string }
-): Promise<string> {
+export async function setAuth0UserEmailVerified(app: APP, email: string, opts: { isEmailVerified?: boolean; accessToken?: string }): Promise<string> {
   const credentials = JSON.parse(buildAuth0ClientCredentials(app));
   const { isEmailVerified = true, accessToken = await getAuth0AccessToken(app) } = opts;
   const user = await getAuth0UserByEmail(app, email, accessToken);
@@ -125,7 +134,10 @@ export async function setAuth0UserEmailVerified(
 
   return fetch(`https://${credentials.domain}/api/v2/users/${userId}`, {
     method: 'PATCH',
-    headers: { authorization: `Bearer ${accessToken}`, 'Content-type': 'application/json; charset=UTF-8' },
+    headers: {
+      authorization: `Bearer ${accessToken}`,
+      'Content-type': 'application/json; charset=UTF-8'
+    },
     body: JSON.stringify({ email_verified: isEmailVerified })
   })
     .then(async (res) => {

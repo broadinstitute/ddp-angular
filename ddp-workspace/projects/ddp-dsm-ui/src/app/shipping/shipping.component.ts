@@ -15,7 +15,7 @@ import { Statics } from '../utils/statics';
 import { EasypostLabelRate } from '../utils/easypost-label-rate.model';
 import { LabelSetting } from '../label-settings/label-settings.model';
 import { Result } from '../utils/result.model';
-import {LocalStorageService} from '../services/localStorage.service';
+import {LocalStorageService} from '../services/local-storage.service';
 import {finalize} from 'rxjs/operators';
 
 @Component({
@@ -101,6 +101,7 @@ export class ShippingComponent implements OnInit {
   isClinicalStudy: Boolean = false;
 
   RESEARCH_SAMPLE = 'RUO';
+  PECGS_RESEARCH = 'PECGS_RESEARCH';
 
   disableCheckboxes = false;
 
@@ -108,7 +109,7 @@ export class ShippingComponent implements OnInit {
                private role: RoleService, private compService: ComponentService, private _changeDetectionRef: ChangeDetectorRef,
                private util: Utils, private language: Language, private localStorageService: LocalStorageService) {
     if (!auth.authenticated()) {
-      auth.logout();
+      auth.sessionLogout();
     }
     this.route.queryParams.subscribe(params => {
       this.setShippingPage(this.router.url);
@@ -123,7 +124,7 @@ export class ShippingComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (localStorage.getItem(ComponentService.MENU_SELECTED_REALM) != null) {
+    if (sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM) != null) {
       this.checkRight();
     } else {
       this.additionalMessage = 'Please select a study';
@@ -144,7 +145,7 @@ export class ShippingComponent implements OnInit {
       next: data => {
         jsonData = data;
         jsonData.forEach((val) => {
-          if (localStorage.getItem(ComponentService.MENU_SELECTED_REALM) === val) {
+          if (sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM) === val) {
             this.allowedToSeeInformation = true;
             this.getPossibleKitType();
           }
@@ -214,11 +215,11 @@ export class ShippingComponent implements OnInit {
     this.kitRequests = [];
     let jsonData: any[];
 
-    if (localStorage.getItem(ComponentService.MENU_SELECTED_REALM) != null &&
-      localStorage.getItem(ComponentService.MENU_SELECTED_REALM) !== ''
+    if (sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM) != null &&
+      sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM) !== ''
     ) {
       this.loading = true;
-      this.dsmService.getKitTypes(localStorage.getItem(ComponentService.MENU_SELECTED_REALM)).subscribe({
+      this.dsmService.getKitTypes(sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM)).subscribe({
         next: data => {
           this.kitTypes = [];
           jsonData = data;
@@ -231,7 +232,7 @@ export class ShippingComponent implements OnInit {
         },
         error: err => {
           if (err._body === Auth.AUTHENTICATION_ERROR) {
-            this.auth.logout();
+            this.auth.doLogout();
           }
           this.loading = false;
           this.additionalMessage = 'Error - Loading kit types\n' + err;
@@ -268,14 +269,18 @@ export class ShippingComponent implements OnInit {
     this.needsNameLabels = false;
     this.kitsWithNoReturn = false;
     this.isClinicalStudy = false;
+    if(sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM) === 'osteo2'
+      || sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM) === 'cmi-lms') {
+      this.isClinicalStudy = true;
+    }
     this.loading = true;
 
     let jsonData: any[];
-    if (localStorage.getItem(ComponentService.MENU_SELECTED_REALM) != null &&
-      localStorage.getItem(ComponentService.MENU_SELECTED_REALM) !== ''
+    if (sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM) != null &&
+      sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM) !== ''
     ) {
       this.disableCheckboxes = true;
-      this.dsmService.getKitRequests(localStorage.getItem(ComponentService.MENU_SELECTED_REALM), this.shippingPage, kitType.name)
+      this.dsmService.getKitRequests(sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM), this.shippingPage, kitType.name)
         .pipe(finalize(() => this.disableCheckboxes = false))
         .subscribe({
           next: data => {
@@ -286,9 +291,6 @@ export class ShippingComponent implements OnInit {
               if (kit.noReturn) {
                 this.kitsWithNoReturn = true;
               }
-              if(kit.receivedBy === 'MERCURY') {
-                this.isClinicalStudy = true;
-              }
               this.kitRequests.push(kit);
             });
 
@@ -297,7 +299,7 @@ export class ShippingComponent implements OnInit {
           },
           error: err => {
             if (err._body === Auth.AUTHENTICATION_ERROR) {
-              this.auth.logout();
+              this.auth.doLogout();
             }
             this.loading = false;
             this.errorMessage = 'Error - Loading kit request data\n' + err;
@@ -429,7 +431,8 @@ export class ShippingComponent implements OnInit {
 
   private closedWindow(): void {
     this.selectedKitRequests = [];
-    !this.kitType.manualSentTrack && !this.isPHI && this.router.navigate([Statics.SCAN_URL], {relativeTo: this.route});
+    !this.kitType.manualSentTrack && !this.isPHI && this.router.navigate(['../','scan'],
+      {relativeTo: this.route, queryParams: {scannerType: 'final'}});
     this.allSelected = false;
     this.isPHI = false;
     this.setAllCheckboxes(false);
@@ -538,7 +541,7 @@ export class ShippingComponent implements OnInit {
     Utils.createCSV(
       fields,
       map,
-      localStorage.getItem(ComponentService.MENU_SELECTED_REALM) + ' Kits ' + this.kitType.name + ' '
+      sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM) + ' Kits ' + this.kitType.name + ' '
       + Utils.getDateFormatted(date, Utils.DATE_STRING_CVS) + Statics.CSV_FILE_EXTENSION
     );
   }
@@ -560,7 +563,7 @@ export class ShippingComponent implements OnInit {
         },
         error: err => {
           if (err._body === Auth.AUTHENTICATION_ERROR) {
-            this.auth.logout();
+            this.auth.doLogout();
           }
           this.loading = false;
           this.errorMessage = 'Error - Buying express label\n' + err;
@@ -586,7 +589,7 @@ export class ShippingComponent implements OnInit {
         },
         error: err => {
           if (err._body === Auth.AUTHENTICATION_ERROR) {
-            this.auth.logout();
+            this.auth.doLogout();
           }
           this.loading = false;
           this.errorMessage = 'Error - Deactivating kit request\n' + err;
@@ -616,7 +619,7 @@ export class ShippingComponent implements OnInit {
         },
         error: err => {
           if (err._body === Auth.AUTHENTICATION_ERROR) {
-            this.auth.logout();
+            this.auth.doLogout();
           }
           this.loading = false;
           this.errorMessage = 'Error - Deactivating kit request\n' + err;
@@ -658,7 +661,7 @@ export class ShippingComponent implements OnInit {
         },
         error: err => {
           if (err._body === Auth.AUTHENTICATION_ERROR) {
-            this.auth.logout();
+            this.auth.doLogout();
           }
           this.loading = false;
           this.errorMessage = 'Error - Activating kit request.\nPlease contact your DSM developer';
@@ -724,7 +727,7 @@ export class ShippingComponent implements OnInit {
       },
       error: err => {
         if (err._body === Auth.AUTHENTICATION_ERROR) {
-          this.auth.logout();
+          this.auth.doLogout();
         }
         this.loading = false;
         this.errorMessage = 'Error - Deactivating kit request\n' + err;
@@ -775,7 +778,7 @@ export class ShippingComponent implements OnInit {
       },
       error: err => {
         if (err._body === Auth.AUTHENTICATION_ERROR) {
-          this.auth.logout();
+          this.auth.doLogout();
         }
         this.loading = false;
         this.errorMessage = 'Error - Loading ddp information ' + err;
@@ -788,7 +791,7 @@ export class ShippingComponent implements OnInit {
   }
 
   realm(): string {
-    return localStorage.getItem(ComponentService.MENU_SELECTED_REALM);
+    return sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM);
   }
 
   getUtil(): Utils {
@@ -812,7 +815,7 @@ export class ShippingComponent implements OnInit {
   }
 
   isResearchSample(kitRequest: KitRequest): boolean {
-    return  kitRequest.sequencingRestriction && kitRequest.sequencingRestriction === this.RESEARCH_SAMPLE && this.isClinicalStudy
-      && (this.shippingPage === this.RECEIVED || this.shippingPage === this.OVERVIEW);
+    return (kitRequest.message && kitRequest.message === this.PECGS_RESEARCH)
+        || (kitRequest.sequencingRestriction && kitRequest.sequencingRestriction === this.RESEARCH_SAMPLE);
   }
 }

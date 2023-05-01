@@ -33,7 +33,7 @@ export class PdfDownloadComponent implements OnInit {
   constructor(private dsmService: DSMService, private auth: Auth, private router: Router, private role: RoleService,
                private compService: ComponentService, private route: ActivatedRoute) {
     if (!auth.authenticated()) {
-      auth.logout();
+      auth.sessionLogout();
     }
     this.route.queryParams.subscribe(params => {
       this.realm = params[ DSMService.REALM ] || null;
@@ -46,8 +46,8 @@ export class PdfDownloadComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (localStorage.getItem(ComponentService.MENU_SELECTED_REALM) != null) {
-      this.realm = localStorage.getItem(ComponentService.MENU_SELECTED_REALM);
+    if (sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM) != null) {
+      this.realm = sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM);
       this.checkRight();
     } else {
       this.additionalMessage = 'Please select a study';
@@ -101,7 +101,7 @@ export class PdfDownloadComponent implements OnInit {
         },
         error: err => {
           if (err._body === Auth.AUTHENTICATION_ERROR) {
-            this.auth.logout();
+            this.auth.doLogout();
           }
           this.loading = false;
           this.errorMessage = 'Error - Loading list of event types\nPlease contact your DSM developer';
@@ -131,7 +131,7 @@ export class PdfDownloadComponent implements OnInit {
         },
         error: err => {
           if (err._body === Auth.AUTHENTICATION_ERROR) {
-            this.auth.logout();
+            this.auth.doLogout();
           }
           this.loading = false;
           this.errorMessage = 'Error - Loading list of event types\nPlease contact your DSM developer';
@@ -153,7 +153,7 @@ export class PdfDownloadComponent implements OnInit {
       },
       error: err => {
         if (err._body === Auth.AUTHENTICATION_ERROR) {
-          this.router.navigate([Statics.HOME_URL]);
+          this.auth.doLogout();
         }
         this.additionalMessage = 'Error - Downloading consent pdf file\nPlease contact your DSM developer';
         this.loading = false;

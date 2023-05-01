@@ -1,13 +1,12 @@
 import { expect, Locator, Page } from '@playwright/test';
 import * as fake from 'data/fake-user.json';
-import Input from 'lib/widget/Input';
+import Input from 'lib/widget/input';
 import Question from 'lib/component/Question';
+import { SingularPage } from 'pages/singular/singular-page';
 
-export default class PreScreeningPage {
-  page: Page;
-
+export default class PreScreeningPage extends SingularPage {
   constructor(page: Page) {
-    this.page = page;
+    super(page);
   }
 
   async waitForReady(): Promise<void> {
@@ -33,24 +32,6 @@ export default class PreScreeningPage {
   }
 
   /**
-   * <br> Question: Where do you currently live?
-   * <br> Select Country
-   * <br> Type: Select
-   */
-  country(): Question {
-    return new Question(this.page, { prompt: 'Select Country' });
-  }
-
-  /**
-   * <br> Question: Select State (US and Canada)
-   * <br> Select State
-   * <br> Type: Select
-   */
-  state(): Question {
-    return new Question(this.page, { prompt: 'Select State' });
-  }
-
-  /**
    * <br> Question: Do you or your immediate family member have a single ventricle heart defect?
    * <br> Type: RadioButton
    */
@@ -64,9 +45,7 @@ export default class PreScreeningPage {
     const iframe = this.page.frameLocator('css=iframe[title="reCAPTCHA"]');
     await iframe.locator('css=span[role="checkbox"]').waitFor({ state: 'visible' });
     await iframe.locator('css=span[role="checkbox"]').dispatchEvent('click');
-    await iframe
-      .locator('.recaptcha-checkbox-spinner[style*="animation-play-state: running;"]')
-      .waitFor({ state: 'hidden', timeout: 30 * 1000 });
+    await iframe.locator('.recaptcha-checkbox-spinner[style*="animation-play-state: running;"]').waitFor({ state: 'hidden', timeout: 30 * 1000 });
   }
 
   async enterInformationAboutYourself(
@@ -86,9 +65,7 @@ export default class PreScreeningPage {
     } = opts;
 
     await this.age().fill(age);
-    await this.country().select().selectOption(country);
-    await this.state().toLocator().waitFor({ state: 'visible' });
-    await this.state().select().selectOption(state);
+    await this.fillInCountry(country, { state });
     await this.haveVentricleHeartDefect().check(hasHeartDefect ? 'Yes' : 'No');
     await this.checkReCaptcha();
     await this.signMeUp({ waitForNav: true });

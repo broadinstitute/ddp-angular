@@ -7,7 +7,7 @@ import {Component} from '@angular/core';
 })
 export class ForYourPhysicianComponent {
 
-  FYP = 'https://storage.googleapis.com/cmi-study-dev-assets/lms/pdf/48.%20ForYourPhysician_LMS_PE-CGS%20updated%20June%2022.pdf';
+  FYP = 'https://storage.googleapis.com/cmi-study-dev-assets/lms/pdf/48.%20Information%20for%20physicians%20PDF%20LMS%20Clean%2022Dec%202022.pdf';
 
 
 }

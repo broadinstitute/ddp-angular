@@ -11,17 +11,13 @@
   <ng-container *ngIf="allowUnknownDay">*</ng-container>
   <div class="Calendar--Popup"
        *ngIf="showDatePicker">
-    <ng-container *ngIf="allowFutureDate">
-        <datepicker [ngModel]="datePicker" [showWeeks]="false"
-                    (selectionDone)="selectDate($event)"></datepicker>
-    </ng-container>
-    <ng-container *ngIf="!allowFutureDate">
-        <datepicker [ngModel]="datePicker" [showWeeks]="false" [maxDate]="getUtil().maxDate()"
-                    (selectionDone)="selectDate($event)"></datepicker>
-    </ng-container>
+      <datepicker [ngModel]="datePicker"
+                  [showWeeks]="false"
+                  [maxDate]="allowFutureDate ? null : maxDate"
+                  (selectionDone)="selectDate($event)"></datepicker>
   </div>
   <button class="btn btn-xs Button--Background--Color" *ngIf="showCalendarButton"
-          (click)="closeCalendar()"
+          (click)="closeOrOpenCalendar();"
           [disabled]="disabled">
     <i class="fas fa-calendar-alt fa-lg"></i>
   </button>
