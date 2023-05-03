@@ -113,8 +113,8 @@ test.describe.serial('When an interested participant does NOT meet participation
 
     // Retrieve new RGP user Date Signed Up from API response body, compare with what's displayed in table
     const user: MailListCSV[] = lodash.filter(respJson, row => row.email === newEmail);
-    const dateInJson = new Date(parseInt(user[0].dateCreated) * 1000);
+    const dateInJson = mailingListCreatedDate(new Date(parseInt(user[0].dateCreated) * 1000));
     const dateInTCell = mailingListCreatedDate(new Date(await tCell!.innerText()));
-    expect(dateInTCell, `Matching date ${dateInTCell}`).toEqual(mailingListCreatedDate(dateInJson));
+    expect(dateInTCell, `Matching date ${dateInTCell}`).toEqual(dateInJson);
   });
 });
