@@ -8,6 +8,8 @@ import {RoleService} from '../services/role.service';
 import {PatchUtil} from '../utils/patch.model';
 import {Utils} from '../utils/utils';
 import {SequencingOrder} from './sequencing-order.model';
+import * as _ from 'underscore';
+
 
 @Component( {
   selector: 'app-sequencing-order',
@@ -41,7 +43,7 @@ export class SequencingOrderComponent {
       v = value;
     }
     if (v != null) {
-      const realm: string = localStorage.getItem( ComponentService.MENU_SELECTED_REALM );
+      const realm: string = sessionStorage.getItem( ComponentService.MENU_SELECTED_REALM );
       const patch1 = new PatchUtil(
         sample.dsmKitRequestId, this.role.userMail(),
         {
@@ -62,7 +64,7 @@ export class SequencingOrderComponent {
       },
       error: err => {
         if (err._body === Auth.AUTHENTICATION_ERROR) {
-          this.auth.logout();
+          this.auth.doLogout();
         }
       }
     } );
@@ -90,7 +92,7 @@ export class SequencingOrderComponent {
         orders.push( sample );
       }
     } );
-    const realm: string = localStorage.getItem( ComponentService.MENU_SELECTED_REALM );
+    const realm: string = sessionStorage.getItem( ComponentService.MENU_SELECTED_REALM );
     this.dsmService.placeSeqOrder( orders, realm, this.participant.data.profile[ 'guid' ] ).subscribe();
     this.closeModal();
   }
@@ -158,5 +160,24 @@ export class SequencingOrderComponent {
 
   closeModal(): void {
     this.modal.hide();
+  }
+
+  public canNotSubmitOrder(): boolean{
+    return !this.role.allowedToDoOrderSequencing();
+  }
+
+  canEditCollectionDate(sample: SequencingOrder ): boolean {
+    if (sample.sampleType === 'Normal') {
+    // only a normal sample should have collectionDate editable, for tumor samples it is the date of px
+      if (this.role.canViewSeqOrderStatus()) {
+      // people with this specific view access can only enter a date if there is no previous date entered
+        return (_.isNull(sample.collectionDate) || _.isUndefined(sample.collectionDate) || _.isEmpty(sample.collectionDate));
+      }
+      else if (this.role.allowedToDoOrderSequencing()) {
+      // people with this access can enter or change a date
+        return true;
+      }
+    }
+    return false;
   }
 }

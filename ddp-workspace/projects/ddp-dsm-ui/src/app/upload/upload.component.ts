@@ -54,9 +54,9 @@ export class UploadComponent implements OnInit {
   constructor( private dsmService: DSMService, private auth: Auth, private compService: ComponentService, private route: ActivatedRoute,
                private role: RoleService ) {
     if (!auth.authenticated()) {
-      auth.logout();
+      auth.sessionLogout();
     }
-    this.realmNameStoredForFile = localStorage.getItem(ComponentService.MENU_SELECTED_REALM);
+    this.realmNameStoredForFile = sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM);
     this.route.queryParams.subscribe(params => {
       const realm = params[ DSMService.REALM ] || null;
       if (realm != null && realm !== '' && this.role.allowedToUploadKits()) {
@@ -73,7 +73,7 @@ export class UploadComponent implements OnInit {
       next: data => {
         jsonData = data;
         jsonData.forEach((val) => {
-          if (localStorage.getItem(ComponentService.MENU_SELECTED_REALM) === val) {
+          if (sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM) === val) {
             this.allowedToSeeInformation = true;
             this.getPossibleKitType();
             this.getUploadReasons();
@@ -89,7 +89,7 @@ export class UploadComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (localStorage.getItem(ComponentService.MENU_SELECTED_REALM) != null) {
+    if (sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM) != null) {
       this.role.allowedToUploadKits() && this.checkRight();
     } else {
       this.additionalMessage = 'Please select a study';
@@ -106,7 +106,7 @@ export class UploadComponent implements OnInit {
     if (this.isSelectedRealm()) {
       this.loading = true;
       let jsonData: any[];
-      this.dsmService.getKitTypes(localStorage.getItem(ComponentService.MENU_SELECTED_REALM)).subscribe({
+      this.dsmService.getKitTypes(sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM)).subscribe({
         next: data => {
           this.kitTypes = [];
           jsonData = data;
@@ -122,7 +122,7 @@ export class UploadComponent implements OnInit {
         },
         error: err => {
           if (err._body === Auth.AUTHENTICATION_ERROR) {
-            this.auth.logout();
+            this.auth.doLogout();
           }
           this.loading = false;
           this.errorMessage = 'Error - Loading kit types\n' + err;
@@ -135,7 +135,7 @@ export class UploadComponent implements OnInit {
     if (this.isSelectedRealm()) {
       this.loading = true;
       let jsonData: any[];
-      this.dsmService.getUploadReasons(localStorage.getItem(ComponentService.MENU_SELECTED_REALM)).subscribe({
+      this.dsmService.getUploadReasons(sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM)).subscribe({
         next: data => {
           this.uploadReasons = [];
           jsonData = data;
@@ -156,7 +156,7 @@ export class UploadComponent implements OnInit {
   private checkErrorMessage(err: HttpErrorResponse): void {
     switch (err.status) {
       case 401:
-        this.auth.logout();
+        this.auth.doLogout();
         break;
       case 403:
         this.allowedToSeeInformation = false;
@@ -170,7 +170,7 @@ export class UploadComponent implements OnInit {
     if (this.isSelectedRealm()) {
       this.loading = true;
       let jsonData: any[];
-      this.dsmService.getShippingCarriers(localStorage.getItem(ComponentService.MENU_SELECTED_REALM)).subscribe({
+      this.dsmService.getShippingCarriers(sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM)).subscribe({
         next: data => {
           this.carriers = [];
           jsonData = data;
@@ -181,7 +181,7 @@ export class UploadComponent implements OnInit {
         },
         error: err => {
           if (err._body === Auth.AUTHENTICATION_ERROR) {
-            this.auth.logout();
+            this.auth.doLogout();
           }
           this.loading = false;
           this.errorMessage = 'Error - Loading shipping carriers\n' + err;
@@ -211,7 +211,7 @@ export class UploadComponent implements OnInit {
     this.failedParticipants = [];
     this.loading = true;
     this.dsmService.uploadTxtFile(
-      localStorage.getItem(ComponentService.MENU_SELECTED_REALM), this.kitType.name,
+      sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM), this.kitType.name,
         this.file, this.selectedReason, this.selectedCarrier, this.skipAddressValidation
       )
       .subscribe({
@@ -249,14 +249,14 @@ export class UploadComponent implements OnInit {
                 this.additionalMessage = 'All participants were uploaded.';
                 this.file = null;
                 this.filepicker.unselectFile();
-                this.realmNameStoredForFile = localStorage.getItem(ComponentService.MENU_SELECTED_REALM);
+                this.realmNameStoredForFile = sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM);
               }
             }
           }
         },
         error: (err: HttpErrorResponse) => {
           this.loading = false;
-          err.status === 401 && this.auth.logout();
+          err.status === 401 && this.auth.doLogout();
           this.errorMessage = err.error;
         }
       });
@@ -297,7 +297,7 @@ export class UploadComponent implements OnInit {
     }
     const jsonParticipants = JSON.stringify(array);
     this.dsmService.uploadDuplicateParticipant(
-        localStorage.getItem(ComponentService.MENU_SELECTED_REALM), this.kitType.name,
+        sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM), this.kitType.name,
         jsonParticipants, this.selectedReason, this.selectedCarrier, this.skipAddressValidation
       )
       .subscribe({
@@ -312,7 +312,7 @@ export class UploadComponent implements OnInit {
         error: err => {
           this.loading = false;
           if (err._body === Auth.AUTHENTICATION_ERROR) {
-            this.auth.logout();
+            this.auth.doLogout();
           }
           this.errorMessage = 'Error - Uploading txt\n' + err;
         }
@@ -331,7 +331,7 @@ export class UploadComponent implements OnInit {
     this.specialKits = [];
     this.file = null;
     this.filepicker.unselectFile();
-    this.realmNameStoredForFile = localStorage.getItem(ComponentService.MENU_SELECTED_REALM);
+    this.realmNameStoredForFile = sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM);
   }
 
   fileSelected(file: File): void {
@@ -349,8 +349,8 @@ export class UploadComponent implements OnInit {
   }
 
   private isSelectedRealm(): boolean {
-    return localStorage.getItem(ComponentService.MENU_SELECTED_REALM) != null &&
-      localStorage.getItem(ComponentService.MENU_SELECTED_REALM) !== '';
+    return sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM) != null &&
+      sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM) !== '';
   }
 
   hasRole(): RoleService {

@@ -1,26 +1,26 @@
-import { Injectable } from '@angular/core';
+import {Injectable, OnDestroy} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 import {
   throwError,
   Subject,
-  Subscription, Observable, BehaviorSubject
+  Subscription, Observable, BehaviorSubject, fromEvent
 } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import {catchError} from 'rxjs/operators';
 
 import { NameValue } from '../utils/name-value.model';
 import { SessionService } from './session.service';
 import { RoleService } from './role.service';
 import { DSMService } from './dsm.service';
 import { ComponentService } from './component.service';
-import {LocalStorageService} from './localStorage.service';
+import {LocalStorageService} from './local-storage.service';
 
 // Avoid name not found warnings
 declare var Auth0Lock: any;
 declare var DDP_ENV: any;
 
 @Injectable({providedIn: 'root'})
-export class Auth {
+export class Auth implements OnDestroy {
   static AUTH0_TOKEN_NAME = 'auth_token';
 
   public static AUTHENTICATION_ERROR = 'AUTHENTICATION_ERROR';
@@ -46,6 +46,7 @@ export class Auth {
 
   selectedStudy = new BehaviorSubject<string>('');
 
+  storageEventSource$: Subscription;
 
   // Configure Auth0
   lock = new Auth0Lock(DDP_ENV.auth0ClientKey, DDP_ENV.auth0Domain, {
@@ -89,8 +90,8 @@ export class Auth {
 
   constructor(private router: Router, private activatedRoute: ActivatedRoute, private http: HttpClient,
               private sessionService: SessionService, private role: RoleService,
-              private compService: ComponentService, private dsmService: DSMService, private localStorageService: LocalStorageService
-               ) {
+              private compService: ComponentService, private dsmService: DSMService,
+              private localStorageService: LocalStorageService) {
     // Add callback for lock `authenticated` event
     this.lock.on('authenticated', (authResult: any) => {
       localStorage.setItem(Auth.AUTH0_TOKEN_NAME, authResult.idToken);
@@ -107,6 +108,13 @@ export class Auth {
       this.kitDiscard.next(authResult.idToken);
     });
 
+    this.storageEventSource$ = fromEvent<StorageEvent>(window, 'storage').subscribe(
+      event => {
+        if (event.key === SessionService.DSM_TOKEN_NAME && event.newValue === null) {
+          this.doLogout();
+        }
+      }
+    );
   }
 
   public getSelectedStudy(): Observable<string> {
@@ -118,9 +126,6 @@ export class Auth {
   }
 
   public authenticated(): boolean {
-    // Check if there's an unexpired JWT
-    // This searches for an item in localStorage with key == 'token'
-    // return tokenNotExpired();
     return this.sessionService.isAuthenticated();
   }
 
@@ -128,9 +133,14 @@ export class Auth {
     return this.realmListForPicklist.asObservable();
   }
 
-  public logout(): void {
-    // Remove token from localStorage
+  public doLogout(): void {
     this.localStorageService.clear();
+    this.sessionService.logout();
+    this.selectedRealm = null;
+    this.router.navigateByUrl('/');
+}
+  public sessionLogout(): void {
+    // Do NOT remove token from localStorage at this point.
     this.sessionService.logout();
     this.selectedRealm = null;
   }
@@ -167,21 +177,27 @@ export class Auth {
     return {headers, withCredentials: true};
   }
 
+  private checkForAuth0Error(error: any): boolean {
+    return (error instanceof HttpErrorResponse &&  error && error.hasOwnProperty('status')
+      && error.hasOwnProperty('ok') && error.url
+      && !error.ok && error.url.includes('ui/auth0'));
+  }
   private handleError(error: any): Observable<any> {
     // In a real world app, we might use a remote logging infrastructure
     // We'd also dig deeper into the error to get a better message
     let errMsg: string | null = null;
 
-    if(error.status === 500) {
-      errMsg = 'Incorrect user name or password.';
-    } else {
-      errMsg = (error.message) ? error.message :
-        error.status ? `${error.status} - ${error.statusText}` : 'Server error';
+    errMsg = (error.message) ? error.message :
+      error.status ? `${error.status} - ${error.statusText}` : 'Server error';
+    this.authError.next(errMsg);
+    console.error(errMsg); // log to console instead
+
+    if(this.checkForAuth0Error(error)) {
+      this.doLogout();
+      this.lock.show();
+      return;
     }
 
-    this.authError.next(errMsg);
-
-    console.error(errMsg); // log to console instead
     return throwError(() => new Error(errMsg));
   }
 
@@ -202,7 +218,7 @@ export class Auth {
 
           this.realmListForPicklist.next(this.realmList);
 
-          const selectedRealm = localStorage.getItem(ComponentService.MENU_SELECTED_REALM);
+          const selectedRealm = sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM);
 
           this.setSelectedStudy = this.realmList.find(realm => realm.name === selectedRealm)?.value;
         }
@@ -213,7 +229,7 @@ export class Auth {
   selectRealm(realm: string, page?: string): void {
     const navigateUrl = `${realm}/${page || ''}`;
 
-    localStorage.setItem(ComponentService.MENU_SELECTED_REALM, realm);
+    sessionStorage.setItem(ComponentService.MENU_SELECTED_REALM, realm);
 
     page ? this.navigateWithParam(navigateUrl) : this.router.navigate([navigateUrl]);
   }
@@ -223,6 +239,10 @@ export class Auth {
       .then(() => {
         this.router.navigate([navigateUrl]);
       });
+  }
+
+  ngOnDestroy(): void {
+    this.storageEventSource$.unsubscribe();
   }
 
 }

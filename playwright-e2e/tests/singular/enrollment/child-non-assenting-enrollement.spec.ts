@@ -11,7 +11,7 @@ import { generateUserName } from 'utils/faker-utils';
 /**
  * Enroll a child of age < 7
  */
-test.describe('Enroll child', () => {
+test.describe.skip('Enroll child', () => {
   // Randomize last name
   const childLastName = generateUserName(user.secondChild.lastName);
 

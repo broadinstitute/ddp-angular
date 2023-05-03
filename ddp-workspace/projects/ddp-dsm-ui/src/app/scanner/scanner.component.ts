@@ -17,7 +17,6 @@ import {
 import {Subject, takeUntil} from 'rxjs';
 import {InputField} from './interfaces/input-field';
 import {Auth} from '../services/auth.service';
-import {Statics} from '../utils/statics';
 import {Scanner} from './interfaces/scanners';
 import {first} from 'rxjs/operators';
 // changing
@@ -35,6 +34,8 @@ export class ScannerComponent implements DoCheck, OnDestroy {
   });
   public additionalMessage: string | undefined;
 
+  public shortIds = [];
+
   private updatePreviousFieldValidations = false;
   private readonly subscriptionSubject$: Subject<void> = new Subject<void>();
 
@@ -45,7 +46,8 @@ export class ScannerComponent implements DoCheck, OnDestroy {
     private readonly fb: FormBuilder,
     private readonly activatedRoute: ActivatedRoute,
     private readonly cdr: ChangeDetectorRef,
-    private readonly router: Router
+    private readonly router: Router,
+    private auth: Auth
   ) {
     activatedRoute.queryParams
       .pipe(takeUntil(this.subscriptionSubject$))
@@ -67,6 +69,7 @@ export class ScannerComponent implements DoCheck, OnDestroy {
 
   public removeFields(index: number): void {
     this.scannerFields.length - 1 && this.scannerFields.removeAt(index);
+    this.shortIds.length - 1 && this.shortIds.splice(index, 1);
     this.activeScanner.inputFields.forEach((inputField: InputField) =>
       this.checkForDuplicates(inputField.controllerName));
   }
@@ -74,6 +77,7 @@ export class ScannerComponent implements DoCheck, OnDestroy {
   public save(): void {
     this.additionalMessage = '';
     const filteredActiveScannerFieldsGroupsArray = this.filteredNonNullFieldsGroups;
+    this.shortIds = Array(...Array(this.scannerFields.length)).map(function() {});
 
     this.activeScanner.saveFn(filteredActiveScannerFieldsGroupsArray)
       .pipe(
@@ -82,9 +86,8 @@ export class ScannerComponent implements DoCheck, OnDestroy {
       .subscribe({
         next: (data: any[]) => {
           this.cdr.markForCheck();
-          if (data.some(d => d?.hasOwnProperty('error'))) {
+          if (data.some(d => d?.hasOwnProperty('error') || d?.hasOwnProperty('shortId'))) {
             this.removeSuccessfulScans(data);
-            this.additionalMessage = 'Error - Failed to save all changes';
           } else {
             this.resetForm();
             this.additionalMessage = 'Data saved';
@@ -93,7 +96,7 @@ export class ScannerComponent implements DoCheck, OnDestroy {
         error: async (error: any) => {
           this.cdr.markForCheck();
           if (error.body === Auth.AUTHENTICATION_ERROR) {
-            await this.router.navigate([Statics.HOME_URL]);
+            this.auth.doLogout();
           }
           this.additionalMessage = 'Error - Failed to save data';
         }
@@ -169,12 +172,25 @@ export class ScannerComponent implements DoCheck, OnDestroy {
   }
 
   private removeSuccessfulScans(responseData: any[]): void {
-    responseData.forEach((data: any, index: number) => data?.hasOwnProperty('error') &&
-      this.scannerFields.at(index).setErrors({notFound: data?.error})
+    responseData.forEach((data: any, index: number) => {
+        if (data?.hasOwnProperty('error')) {
+            this.scannerFields.at(index).setErrors({notFound: data?.error});
+            this.additionalMessage = 'Error - Failed to save all changes';
+            }
+        }
+    );
+    responseData.forEach((data: any, index: number) =>
+          {
+          data?.hasOwnProperty('shortId') && this.setShortId(index, data);
+          }
     );
     for (let i = this.scannerFields.length - 2; i >= 0; i--) {
-      !this.scannerFields.at(i).hasError('notFound') && this.scannerFields.removeAt(i);
+          !this.scannerFields.at(i).hasError('notFound') && !this.shortIds[i] && this.scannerFields.removeAt(i);
     }
+  }
+
+  private setShortId(index: number, data): void {
+      this.shortIds[index] = data?.shortId;
   }
 
   private get filteredNonNullFieldsGroups(): object[] {
@@ -194,6 +210,7 @@ export class ScannerComponent implements DoCheck, OnDestroy {
   private resetForm(): void {
     this.scannerFields.reset({emitEvent: false});
     this.scannerFields.clear({emitEvent: false});
+    this.shortIds = [];
     this.addFields();
   }
 }

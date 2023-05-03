@@ -15,16 +15,16 @@ export class CheckAuthGuard implements CanLoad {
   }
 
   canLoad(route: Route, segments: UrlSegment[]): boolean | UrlTree {
-    const selectedRealm = localStorage.getItem(ComponentService.MENU_SELECTED_REALM);
+    const selectedRealm = sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM);
 
     if (!this.auth.authenticated() && !selectedRealm) {
       return true;
     }
     else if (this.auth.authenticated() && !selectedRealm) {
-      this.auth.logout();
+      this.auth.sessionLogout();
       return this.router.createUrlTree(['']);
     } else if (!this.auth.authenticated() && selectedRealm) {
-      this.auth.logout();
+      this.auth.doLogout();
       return this.router.createUrlTree(['']);
     }
     else {

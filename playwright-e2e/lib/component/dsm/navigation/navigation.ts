@@ -9,9 +9,10 @@ import {SamplesNav} from './enums/samplesNav';
 import KitsWithoutLabelPage from 'pages/dsm/kitsWithoutLabel-page';
 import InitialScanPage from 'pages/dsm/initialScan-page';
 import FinalScanPage from 'pages/dsm/finalScan-page';
+import {Miscellaneous} from 'lib/component/dsm/navigation/enums/miscellaneousNav.enum';
 
 
-type Selection = StudyNav | Study | SamplesNav;
+type Selection = StudyNav | Study | SamplesNav | Miscellaneous;
 
 export class Navigation {
   private readonly navigationItems: Partial<NavigationItems> = {
@@ -41,5 +42,9 @@ export class Navigation {
 
   private async selectFrom(from: MainMenu, selection: Selection): Promise<void> {
     await new Dropdown(this.page, from).selectOption(selection);
+  }
+
+  public async selectMiscellaneous(miscName: Miscellaneous | string): Promise<void> {
+    await this.selectFrom(MainMenu.MISCELLANEOUS, miscName);
   }
 }

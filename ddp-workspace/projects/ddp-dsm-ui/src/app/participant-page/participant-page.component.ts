@@ -158,7 +158,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
   constructor(private auth: Auth, private compService: ComponentService, private dsmService: DSMService, private router: Router,
               private role: RoleService, private util: Utils, private route: ActivatedRoute, public dialog: MatDialog) {
     if (!auth.authenticated()) {
-      auth.logout();
+      auth.sessionLogout();
     }
     this.route.queryParams.subscribe(params => {
       const realm = params[DSMService.REALM] || null;
@@ -191,7 +191,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
 
     this.sortActivities();
     this.addMedicalProviderInformation();
-    if(this.role.allowedToDoOrderSequencing() && this.hasSequencingOrders) {
+    if((this.role.allowedToDoOrderSequencing() || this.role.canViewSeqOrderStatus()) && this.hasSequencingOrders) {
       this.getMercuryEligibleSamples();
       this.canSequence = this.canHaveSequencing(this.participant);
     }
@@ -558,10 +558,10 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
       const patch1 = new PatchUtil(
         participantId, this.role.userMail(),
         {name: parameterName, value: v}, null, 'ddpParticipantId',
-        ddpParticipantId, tableAlias, null, localStorage.getItem(ComponentService.MENU_SELECTED_REALM),
+        ddpParticipantId, tableAlias, null, sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM),
         ddpParticipantId
       );
-      patch1.realm = localStorage.getItem(ComponentService.MENU_SELECTED_REALM);
+      patch1.realm = sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM);
       const patch = patch1.getPatch();
       this.currentPatchField = parameterName;
       this.patchFinished = false;
@@ -585,7 +585,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
         },
         error: err => {
           if (err._body === Auth.AUTHENTICATION_ERROR) {
-            this.router.navigate([Statics.HOME_URL]);
+            this.auth.doLogout();
           }
           this.additionalMessage = 'Error - Saving changed field \n' + err;
         }
@@ -606,7 +606,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
       }
     }
     if (v != null) {
-      const realm: string = localStorage.getItem(ComponentService.MENU_SELECTED_REALM);
+      const realm: string = sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM);
       const patch1 = new PatchUtil(
         sample.dsmKitRequestId, this.role.userMail(),
         {
@@ -623,7 +623,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
         },
         error: err => {
           if (err._body === Auth.AUTHENTICATION_ERROR) {
-            this.auth.logout();
+            this.auth.doLogout();
           }
         }
       });
@@ -632,7 +632,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
 
   oncHistoryValueChanged(value: any, parameterName: string, oncHis: OncHistoryDetail): void {
     let v;
-    const realm: string = localStorage.getItem(ComponentService.MENU_SELECTED_REALM);
+    const realm: string = sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM);
     if (typeof value === 'string') {
       oncHis[parameterName] = value;
       v = value;
@@ -670,7 +670,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
         },
         error: err => {
           if (err._body === Auth.AUTHENTICATION_ERROR) {
-            this.router.navigate([Statics.HOME_URL]);
+            this.auth.doLogout();
           }
         }
       });
@@ -782,7 +782,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
       this.noteMedicalRecord.medicalRecordId, this.role.userMail(),
       {name: 'notes', value: this.noteMedicalRecord.notes},
       null, null, null, Statics.MR_ALIAS, null,
-      localStorage.getItem(ComponentService.MENU_SELECTED_REALM), this.participant.participant.ddpParticipantId
+      sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM), this.participant.participant.ddpParticipantId
     );
     const patch = patch1.getPatch();
 
@@ -791,7 +791,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
       },
       error: err => {
         if (err._body === Auth.AUTHENTICATION_ERROR) {
-          this.router.navigate([Statics.HOME_URL]);
+          this.auth.doLogout();
         }
         this.additionalMessage = 'Error - Saving paper C/R changes \n' + err;
       }
@@ -809,7 +809,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
     }
     this.dsmService.downloadPDF(this.participant.data.profile['guid'],
       null, null, null, null,
-      localStorage.getItem(ComponentService.MENU_SELECTED_REALM), configName, this.pdfs, requestOncHistoryList
+      sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM), configName, this.pdfs, requestOncHistoryList
     ).subscribe({
       next: data => {
         const date = new Date();
@@ -855,7 +855,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
       },
       error: err => {
         if (err._body === Auth.AUTHENTICATION_ERROR) {
-          this.router.navigate([Statics.HOME_URL]);
+          this.auth.doLogout();
         }
         this.disableTissueRequestButton = false;
         this.downloading = false;
@@ -883,7 +883,8 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
       // this.selectedTabTitle = data.heading;
       this.activeTab = tabName;
     }
-    if (tabName === 'sequencing' && this.role.allowedToDoOrderSequencing() && this.hasSequencingOrders) {
+    if (tabName === 'sequencing' && (this.role.allowedToDoOrderSequencing() || this.role.canViewSeqOrderStatus())
+     && this.hasSequencingOrders) {
       this.getMercuryEligibleSamples();
     }
   }
@@ -937,7 +938,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
     if (this.participant.participant != null && this.participant.participant.ddpParticipantId != null) {
       this.loadingParticipantPage = true;
       const ddpParticipantId = this.participant.participant.ddpParticipantId;
-      this.dsmService.getAbstractionValues(localStorage.getItem(ComponentService.MENU_SELECTED_REALM), ddpParticipantId).subscribe({
+      this.dsmService.getAbstractionValues(sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM), ddpParticipantId).subscribe({
         next: data => {
           let jsonData: any | any[];
           if (data != null) {
@@ -990,7 +991,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
         },
         error: err => {
           if (err._body === Auth.AUTHENTICATION_ERROR) {
-            this.auth.logout();
+            this.auth.doLogout();
           }
         }
       });
@@ -1001,7 +1002,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
     this.loadingParticipantPage = true;
     const ddpParticipantId = this.participant.participant.ddpParticipantId;
     this.dsmService.changeMedicalRecordAbstractionStatus(
-      localStorage.getItem(ComponentService.MENU_SELECTED_REALM),
+      sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM),
       ddpParticipantId,
       'in_progress',
       abstractionData
@@ -1045,7 +1046,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
         },
         error: err => {
           if (err._body === Auth.AUTHENTICATION_ERROR) {
-            this.router.navigate([Statics.HOME_URL]);
+            this.auth.doLogout();
           }
         }
       });
@@ -1054,7 +1055,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
   breakLockParticipant(abstractionData: Abstraction): void {
     const ddpParticipantId = this.participant.participant.ddpParticipantId;
     this.dsmService.changeMedicalRecordAbstractionStatus(
-      localStorage.getItem(ComponentService.MENU_SELECTED_REALM),
+      sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM),
       ddpParticipantId,
       'clear',
       abstractionData
@@ -1085,7 +1086,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
       },
       error: err => {
         if (err._body === Auth.AUTHENTICATION_ERROR) {
-          this.router.navigate([Statics.HOME_URL]);
+          this.auth.doLogout();
         }
       }
     });
@@ -1094,7 +1095,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
   submitParticipant(abstractionData: Abstraction): void {
     const ddpParticipantId = this.participant.participant.ddpParticipantId;
     this.dsmService.changeMedicalRecordAbstractionStatus(
-      localStorage.getItem(ComponentService.MENU_SELECTED_REALM),
+      sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM),
       ddpParticipantId,
       'submit',
       abstractionData
@@ -1127,7 +1128,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
       },
       error: err => {
         if (err._body === Auth.AUTHENTICATION_ERROR) {
-          this.router.navigate([Statics.HOME_URL]);
+          this.auth.doLogout();
         }
       }
     });
@@ -1138,7 +1139,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
     this.patchFinished = false;
     const ddpParticipantId = this.participant.participant.ddpParticipantId;
     this.dsmService.changeMedicalRecordAbstractionStatus(
-      localStorage.getItem(ComponentService.MENU_SELECTED_REALM),
+      sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM),
       ddpParticipantId,
       null,
       abstractionData
@@ -1161,7 +1162,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
       },
       error: err => {
         if (err._body === Auth.AUTHENTICATION_ERROR) {
-          this.router.navigate([Statics.HOME_URL]);
+          this.auth.doLogout();
         }
       }
     });
@@ -1252,7 +1253,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
           participantId = this.participant.data.profile['legacyAltPid'];
         }
         this.participant.participant = new ParticipantDSMInformation(
-          null, participantId, localStorage.getItem(ComponentService.MENU_SELECTED_REALM),
+          null, participantId, sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM),
           null, null, null, null, null, null, null,
           false, false, false, false, 0, null
         );
@@ -1286,7 +1287,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
       },
       error: err => {
         if (err._body === Auth.AUTHENTICATION_ERROR) {
-          this.router.navigate([Statics.HOME_URL]);
+          this.auth.doLogout();
         }
         this.additionalMessage = 'Error - Downloading consent pdf file\nPlease contact your DSM developer';
         this.disableDownload = false;
@@ -1551,7 +1552,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
           parentId: participantId,
           user: this.role.userMail(),
           fieldId: fieldTypeId,
-          realm: localStorage.getItem(ComponentService.MENU_SELECTED_REALM),
+          realm: sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM),
           nameValues: nameValue,
           actions: actionPatch,
           tableAlias: 'd',
@@ -1571,7 +1572,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
           },
           error: err => {
             if (err._body === Auth.AUTHENTICATION_ERROR) {
-              this.router.navigate([Statics.HOME_URL]);
+              this.auth.doLogout();
             }
           }
         });
@@ -1632,7 +1633,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
     if (!this.canHaveSequencing(this.participant) && !this.canBeSequencedBasedOnLocation) {
       return;
     }
-    const realm = localStorage.getItem(ComponentService.MENU_SELECTED_REALM);
+    const realm = sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM);
     const sub1 = this.dsmService.getMercuryEligibleSamples(this.participant.data.profile['guid'], realm).subscribe({
       next: data => {
         const jsonData = data;
@@ -1694,7 +1695,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
   }
 
   canHaveSequencing(participant: Participant): boolean {
-    if (!this.role.allowedToDoOrderSequencing() || !this.hasSequencingOrders) {
+    if (!(this.role.allowedToDoOrderSequencing() || this.role.canViewSeqOrderStatus()) || !this.hasSequencingOrders) {
       return false;
     }
 
@@ -1726,7 +1727,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
       return;
     }
     this.setDownloadMessageAndStatus('Downloading... This might take a while', true);
-    const realm = localStorage.getItem(ComponentService.MENU_SELECTED_REALM);
+    const realm = sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM);
     this.dsmService.getSignedUrl(this.participant.data.profile['guid'], file, realm).pipe(
       mergeMap(data => this.dsmService.downloadFromSignedUrl(data['url'])), take(1)).subscribe({
       next: data => {
