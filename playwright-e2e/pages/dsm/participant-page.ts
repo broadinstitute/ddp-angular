@@ -1,5 +1,5 @@
 import { expect, Locator, Page } from '@playwright/test';
-import { waitForResponseByURL } from '../../utils/test-utils';
+import { waitForResponseByURL } from 'utils/test-utils';
 
 export default class ParticipantPage {
   private readonly PAGE_TITLE: string = 'Participant Page';

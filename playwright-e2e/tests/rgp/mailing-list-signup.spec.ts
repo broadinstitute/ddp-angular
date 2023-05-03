@@ -1,18 +1,25 @@
-import {expect} from '@playwright/test';
-import {test} from 'fixtures/rgp-fixture';
+import { expect } from '@playwright/test';
+import { APP } from 'data/constants';
+import { test } from 'fixtures/rgp-fixture';
+import * as lodash from 'lodash';
+import MailingListPage, { COLUMN } from 'pages/dsm/mailing-list-page';
 import HowItWorksPage from 'pages/rgp/how-it-works-page';
-import TellUsYourStoryPage, {WHO} from 'pages/rgp/enrollment/tell-us-your-story-page';
+import TellUsYourStoryPage, { WHO } from 'pages/rgp/enrollment/tell-us-your-story-page';
 import HomePage from 'pages/rgp/home-page';
-import {generateEmailAlias} from 'utils/faker-utils';
-import {login} from 'authentication/auth-dsm';
-import {Study} from 'lib/component/dsm/navigation/enums/selectStudyNav.enum';
-import {WelcomePage} from 'pages/dsm/welcome-page';
-import {Navigation} from 'lib/component/dsm/navigation/navigation';
-import Table, {SortOrder} from 'lib/component/table';
-import {Miscellaneous} from 'lib/component/dsm/navigation/enums/miscellaneousNav.enum';
+import { assertTableHeaders } from 'utils/assertion-helper';
+import { getDate, getMailingListDownloadedFileDate, mailingListCreatedDate } from 'utils/date-utils';
+import { login } from 'authentication/auth-dsm';
+import { Study } from 'lib/component/dsm/navigation/enums/selectStudyNav.enum';
+import { WelcomePage } from 'pages/dsm/welcome-page';
+import { Navigation } from 'lib/component/dsm/navigation/navigation';
+import { SortOrder } from 'lib/component/table';
+import { Miscellaneous } from 'lib/component/dsm/navigation/enums/miscellaneousNav.enum';
+import { generateEmailAlias } from 'utils/faker-utils';
+import { MailListCSV, readMailListCSVFile } from 'utils/file-utils';
+
 
 const RGP_USER_EMAIL = process.env.RGP_USER_EMAIL as string;
-const emailAlias = generateEmailAlias(RGP_USER_EMAIL);
+const newEmail = generateEmailAlias(RGP_USER_EMAIL);
 
 test.describe.serial('When an interested participant does NOT meet participation requirements', () => {
   test('Interested participant can sign up for mailing list @visual @enrollment @rgp', async ({ page }) => {
@@ -43,26 +50,73 @@ test.describe.serial('When an interested participant does NOT meet participation
     expect(await page.locator('.list').screenshot()).toMatchSnapshot('requirement-list.png');
 
     const emailInput = page.locator('input[type="email"]:visible');
-    await emailInput.fill(emailAlias);
+    await emailInput.fill(newEmail);
     await page.locator('button[type="submit"]:has-text("Join Mailing List")').click();
   });
 
-  test('The email signed up can be found in DSM @visual @enrollment @rgp',
+  test('Email can be found in DSM Mailing List @visual @enrollment @rgp',
     async ({ page }) => {
-      const TABLE_COLUMN_EMAIL = 'Email'
-      const TABLE_COLUMN_DATE_SIGNED_UP = 'Date signed up';
       await login(page);
 
       const welcomePage = new WelcomePage(page);
       await welcomePage.selectStudy(Study.RGP);
 
       const navigation = new Navigation(page);
-      await navigation.selectMiscellaneous(Miscellaneous.MAILING_LIST);
+      const [mailListResponse] = await Promise.all([
+        page.waitForResponse(response => response.url().includes('/ui/mailingList/RGP') && response.status() === 200),
+        navigation.selectMiscellaneous(Miscellaneous.MAILING_LIST)
+      ]);
+      const respJson: MailListCSV[] = JSON.parse(await mailListResponse.text());
+      expect(respJson.length).toBeGreaterThan(1); // response should contains at least one emails
 
-      const table = new Table(page, { cssClassAttribute: '.table'});
-      await table.waitForReady()
-      await table.sort(TABLE_COLUMN_DATE_SIGNED_UP, SortOrder.DESC);
+      const mailingListPage = new MailingListPage(page, APP.RGP);
+      await mailingListPage.waitForReady();
 
-      await expect(await table.findCell(TABLE_COLUMN_EMAIL, emailAlias, TABLE_COLUMN_EMAIL)).toBeTruthy();
-  });
+      // Downloading mailing list
+      const download = await mailingListPage.download();
+      const actualFileName = download.suggestedFilename();
+      const expectedFileName = `MailingList ${APP.RGP} ${getMailingListDownloadedFileDate()}.csv`;
+      expect(actualFileName).toBe(expectedFileName);
+
+      const file = await download.path();
+      if (file == null) {
+        throw Error('Mailing list file path not found');
+      }
+      const rows = await readMailListCSVFile(file)
+      .catch((error) => {
+        console.error(error);
+        throw error;
+      });
+
+      // Verify csv file: Assert every user from API response body can also be found inside the downloaded csv file
+      lodash.forEach(respJson, item => {
+        const dateInJson = getDate(new Date(parseInt(item.dateCreated) * 1000)); // Transform to dd/mm/yyyy
+        const emailInJson = item.email;
+        const finding = lodash.filter(rows, row => row.email === emailInJson && row.dateCreated === dateInJson);
+        expect(finding.length,
+          `Matching record for email: "${emailInJson}" and dateCreated: "${dateInJson}" in downloaded csv file.`)
+        .toEqual(1);
+      });
+
+      // Verify Mailing List table: Assert email of new RGP participant can be found inside the Mailing List table
+      const table = await mailingListPage.getMailingListTable();
+      const orderedHeaders = [COLUMN.EMAIL, COLUMN.DATE_SIGNED_UP];
+      const actualHeaders = await table.getHeaderNames();
+      assertTableHeaders(actualHeaders, orderedHeaders);
+
+
+      await table.sort(COLUMN.DATE_SIGNED_UP, SortOrder.DESC);
+      await expect(await table.findCell(COLUMN.EMAIL, newEmail, COLUMN.EMAIL)).toBeTruthy();
+      const tableCell = await table.findCell(COLUMN.EMAIL, newEmail, COLUMN.DATE_SIGNED_UP, { exactMatch: false });
+      if (tableCell == null) {
+        throw Error(`Did not find row which contains Email: ${newEmail} in Mailing List table`);
+      }
+      const dateInTableCell = new Date(await tableCell.innerText());
+
+      // Retrieve new RGP user Date Signed Up from API response body
+      const user: MailListCSV[] = lodash.filter(respJson, row => row.email === newEmail);
+      const newEmailCreateDate = new Date(parseInt(user[0].dateCreated) * 1000);
+      expect(mailingListCreatedDate(dateInTableCell), `Matching new RGP user "Email" and "Date signed up"`)
+      .toEqual(mailingListCreatedDate(newEmailCreateDate));
+    });
 });

@@ -148,4 +148,8 @@ export default class Table {
     }
     await expect(header.locator('span')).toHaveAttribute('aria-label', order);
   }
+
+  static asDSMMailingListTable(page: Page): Table {
+    return new Table(page, {cssClassAttribute: '.table'});
+  }
 }
