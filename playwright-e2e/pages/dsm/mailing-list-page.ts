@@ -3,7 +3,7 @@ import Table from 'lib/component/table';
 
 export const COLUMN = {
   EMAIL: 'Email',
-  DATE_SIGNED_UP: 'Date signed up',
+  DATE: 'Date signed up',
   FIRST_NAME: 'First Name',
   LAST_NAME: 'Last Name'
 }
