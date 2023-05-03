@@ -44,7 +44,7 @@ export class Navigation {
     await new Dropdown(this.page, from).selectOption(selection);
   }
 
-  public async selectMiscellaneous(miscName: Miscellaneous | string): Promise<void> {
+  public async selectMiscellaneous(miscName: Miscellaneous): Promise<void> {
     await this.selectFrom(MainMenu.MISCELLANEOUS, miscName);
   }
 }
