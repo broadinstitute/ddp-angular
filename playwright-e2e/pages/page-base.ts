@@ -152,10 +152,9 @@ export default abstract class PageBase implements PageInterface {
   }
 
   async finish(): Promise<void> {
-    await Promise.all([
-      waitForNoSpinner(this.page),
-      this.getFinishButton().click()
-    ]);
+    await waitForNoSpinner(this.page);
+    await this.getFinishButton().click();
+    await waitForNoSpinner(this.page);
   }
 
   /** Click "Next" button */
