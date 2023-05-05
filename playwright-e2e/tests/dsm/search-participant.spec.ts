@@ -2,10 +2,10 @@ import { test } from '@playwright/test';
 import { login } from 'authentication/auth-dsm';
 import ParticipantListPage from 'pages/dsm/participantList-page';
 import HomePage from 'pages/dsm/home-page';
-import { StudyNav } from 'lib/component/dsm/navigation/enums/studyNav.enum';
+import { StudyNavEnum } from 'lib/component/dsm/navigation/enums/studyNav-enum';
 import { Navigation } from 'lib/component/dsm/navigation/navigation';
 import { WelcomePage } from 'pages/dsm/welcome-page';
-import { Study } from 'lib/component/dsm/navigation/enums/selectStudyNav.enum';
+import { StudyEnum } from 'lib/component/dsm/navigation/enums/selectStudyNav-enum';
 
 test.describe('Singular Study in DSM', () => {
   let welcomePage: WelcomePage;
@@ -20,12 +20,12 @@ test.describe('Singular Study in DSM', () => {
   });
 
   test('search by Short ID in Singular study @dsm', async ({ page }) => {
-    await welcomePage.selectStudy(Study.SINGULAR);
+    await welcomePage.selectStudy(StudyEnum.SINGULAR);
 
     await homePage.assertWelcomeTitle();
     await homePage.assertSelectedStudyTitle('Singular');
 
-    const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(StudyNav.PARTICIPANT_LIST);
+    const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
     const participantListTable = participantListPage.participantListTable;
 
     await participantListPage.assertPageTitle();

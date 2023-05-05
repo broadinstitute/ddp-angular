@@ -16,8 +16,13 @@ export async function waitForNoSpinner(page: Page): Promise<void> {
   await page.locator('[data-icon="spinner"].fa-spin, mat-spinner[role="progressbar"]').waitFor({ state: 'hidden', timeout: 60 * 1000 });
 }
 
-export async function waitForResponse(page: Page, {uri, status = 200, timeout = 10000}: WaitForResponse): Promise<Response> {
-  return await page.waitForResponse((response: Response) => response.url().includes(uri) && response.status() === status, {timeout});
+export async function waitForResponse(page: Page, {uri, status = 200, timeout = 30000}: WaitForResponse): Promise<Response> {
+  try {
+    return await page.waitForResponse((response: Response) =>
+      response.url().includes(uri) && response.status() === status, {timeout})
+  } catch (error: any) {
+    throw new Error(`Timeout ${timeout}ms exceeded while waiting for ${uri} URI response`)
+  }
 }
 
 export async function waitUntilRemoved(locator: Locator): Promise<void> {

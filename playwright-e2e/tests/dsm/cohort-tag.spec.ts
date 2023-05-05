@@ -2,14 +2,14 @@ import { test } from '@playwright/test';
 import { login } from 'authentication/auth-dsm';
 import ParticipantListPage from 'pages/dsm/participantList-page';
 import HomePage from 'pages/dsm/home-page';
-import ParticipantPage from 'pages/dsm/participant-page';
+import ParticipantPage from 'pages/dsm/participant-page/participant-page';
 import CohortTag from 'lib/component/dsm/cohort-tag';
-import { StudyNav } from 'lib/component/dsm/navigation/enums/studyNav.enum';
+import { StudyNavEnum } from 'lib/component/dsm/navigation/enums/studyNav-enum';
 import { Navigation } from 'lib/component/dsm/navigation/navigation';
 import * as crypto from 'crypto';
 import { AdditionalFilter } from 'lib/component/dsm/filters/sections/search/search-enums';
 import { WelcomePage } from 'pages/dsm/welcome-page';
-import { Study } from 'lib/component/dsm/navigation/enums/selectStudyNav.enum';
+import { StudyEnum } from 'lib/component/dsm/navigation/enums/selectStudyNav-enum';
 
 /**
  * @TODO
@@ -24,7 +24,7 @@ test.describe.parallel('Cohort tags', () => {
   let navigation: Navigation;
   let cohortTag: CohortTag;
 
-  const studyNames = [Study.BRAIN, Study.PANCAN];
+  const studyNames = [StudyEnum.BRAIN, StudyEnum.PANCAN];
 
   test.beforeEach(async ({ page }) => {
     await login(page);
@@ -48,7 +48,7 @@ test.describe.parallel('Cohort tags', () => {
       await homePage.assertWelcomeTitle();
       await homePage.assertSelectedStudyTitle(studyName);
 
-      const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(StudyNav.PARTICIPANT_LIST);
+      const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
       const customizeViewPanel = participantListPage.filters.customizeViewPanel;
       const searchPanel = participantListPage.filters.searchPanel;
       const participantListTable = participantListPage.participantListTable;
@@ -78,7 +78,7 @@ test.describe.parallel('Cohort tags', () => {
       await cohortTag.remove(cohortTagValue1);
       await cohortTag.add(cohortTagValue2);
       await cohortTag.add(cohortTagValue3);
-      await participantPage.fillParticipantNotes(participantNoteValue);
+      await participantPage.fillNotes(participantNoteValue);
       await page.reload();
 
       await participantListPage.assertPageTitle();
@@ -108,7 +108,7 @@ test.describe.parallel('Cohort tags', () => {
 
       await cohortTag.assertDuplicateCohortTagMessage();
 
-      await participantPage.assertParticipantNotesToBe(participantNoteValue);
+      await participantPage.assertNotesToBe(participantNoteValue);
 
       await participantPage.backToList();
       await participantListTable.selectCheckboxForParticipantAt(0);

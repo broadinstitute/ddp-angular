@@ -13,8 +13,17 @@ export class KitsTable {
     return this.page.locator(this.shippingIdByShortIdXPath(shortId)).innerText();
   }
 
+  /* Locators */
+  public get deactivateButtons(): Locator {
+    return this.page.locator(this.deactivateButtonXPath);
+  }
+
   public get rows(): Locator {
     return this.page.locator(this.rowsXPath);
+  }
+
+  public get header(): Locator {
+    return this.page.locator(this.headerXPath);
   }
 
   /* XPaths */
@@ -32,7 +41,15 @@ export class KitsTable {
       `/preceding-sibling::th)+1]/input`
   }
 
+  private get deactivateButtonXPath(): string {
+    return this.rowsXPath + "/td[button[@type='button'][text()[normalize-space()='Deactivate']]]/button"
+  }
+
   private get rowsXPath(): string {
     return `//table/tbody/tr`;
+  }
+
+  private get headerXPath(): string {
+    return '//table/thead/tr[1]'
   }
 }

@@ -5,11 +5,11 @@ import TellUsYourStoryPage, {WHO} from 'pages/rgp/enrollment/tell-us-your-story-
 import HomePage from 'pages/rgp/home-page';
 import {generateEmailAlias} from 'utils/faker-utils';
 import {login} from 'authentication/auth-dsm';
-import {Study} from 'lib/component/dsm/navigation/enums/selectStudyNav.enum';
+import {StudyEnum} from 'lib/component/dsm/navigation/enums/selectStudyNav-enum';
 import {WelcomePage} from 'pages/dsm/welcome-page';
 import {Navigation} from 'lib/component/dsm/navigation/navigation';
 import Table, {SortOrder} from 'lib/component/table';
-import {Miscellaneous} from 'lib/component/dsm/navigation/enums/miscellaneousNav.enum';
+import {MiscellaneousEnum} from 'lib/component/dsm/navigation/enums/miscellaneousNav-enum';
 
 const RGP_USER_EMAIL = process.env.RGP_USER_EMAIL as string;
 const emailAlias = generateEmailAlias(RGP_USER_EMAIL);
@@ -54,10 +54,10 @@ test.describe.serial('When an interested participant does NOT meet participation
       await login(page);
 
       const welcomePage = new WelcomePage(page);
-      await welcomePage.selectStudy(Study.RGP);
+      await welcomePage.selectStudy(StudyEnum.RGP);
 
       const navigation = new Navigation(page);
-      await navigation.selectMiscellaneous(Miscellaneous.MAILING_LIST);
+      await navigation.selectMiscellaneous(MiscellaneousEnum.MAILING_LIST);
 
       const table = new Table(page, { cssClassAttribute: '.table'});
       await table.waitForReady()

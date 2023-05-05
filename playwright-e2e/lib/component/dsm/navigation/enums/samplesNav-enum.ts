@@ -1,4 +1,4 @@
-export enum SamplesNav {
+export enum SamplesNavEnum {
   UNSENT_KITS_OVERVIEW = 'Unsent Kits Overview',
   REPORT = 'Report',
   KITS_WITHOUT_LABELS = 'Kits without Labels',
