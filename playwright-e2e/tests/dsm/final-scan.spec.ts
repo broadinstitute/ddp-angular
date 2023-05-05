@@ -19,7 +19,15 @@ import InitialScanPage from "pages/dsm/initialScan-page";
 import FinalScanPage from "pages/dsm/finalScan-page";
 import crypto from "crypto";
 
-test.describe.only('Final Scan Test', () => {
+
+/**
+ * @TODO
+ * 1. handle duplicated kits
+ * 2. sent page
+ * 3. received page
+ * 4. make more assertions
+ */
+test.describe('Final Scan Test', () => {
   let welcomePage: WelcomePage;
   let homePage: HomePage;
   let navigation: Navigation;
@@ -42,7 +50,7 @@ test.describe.only('Final Scan Test', () => {
   test('Should display success message under scan pairs', async ({page}) => {
     const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
     const participantListTable = participantListPage.participantListTable;
-    const shortID = await participantListTable.getParticipantDataAt(1, 'Short ID');
+    const shortID = await participantListTable.getParticipantDataAt(0, 'Short ID');
 
     const kitsWithoutLabelPage = await navigation.selectFromSamples<KitsWithoutLabelPage>(SamplesNavEnum.KITS_WITHOUT_LABELS);
     await kitsWithoutLabelPage.selectKitType(KitTypeEnum.SALIVA);
@@ -54,7 +62,7 @@ test.describe.only('Final Scan Test', () => {
     await kitsWithoutLabelPage.deactivateAllKitsFor(shortID);
 
     await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
-    const participantPage: ParticipantPage = await participantListTable.openParticipantPageAt(1);
+    const participantPage: ParticipantPage = await participantListTable.openParticipantPageAt(0);
     const contactInformationTab = await participantPage.clickTab<ContactInformationTab>(TabEnum.CONTACT_INFORMATION);
 
     const kitUploadInfo = new KitInfo(

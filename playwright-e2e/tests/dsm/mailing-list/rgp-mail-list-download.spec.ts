@@ -2,8 +2,8 @@ import { expect } from '@playwright/test';
 import { login } from 'authentication/auth-dsm';
 import { APP } from 'data/constants';
 import { test } from 'fixtures/rgp-fixture';
-import { Miscellaneous } from 'lib/component/dsm/navigation/enums/miscellaneousNav.enum';
-import { Study } from 'lib/component/dsm/navigation/enums/selectStudyNav.enum';
+import { MiscellaneousEnum } from 'lib/component/dsm/navigation/enums/miscellaneousNav-enum';
+import { StudyEnum } from 'lib/component/dsm/navigation/enums/selectStudyNav-enum';
 import { Navigation } from 'lib/component/dsm/navigation/navigation';
 import { SortOrder } from 'lib/component/table';
 import * as lodash from 'lodash';
@@ -58,12 +58,12 @@ test.describe.serial('When an interested participant does NOT meet participation
     await login(page);
 
     const welcomePage = new WelcomePage(page);
-    await welcomePage.selectStudy(Study.RGP);
+    await welcomePage.selectStudy(StudyEnum.RGP);
 
     const navigation = new Navigation(page);
     const [mailListResponse] = await Promise.all([
       page.waitForResponse(response => response.url().includes('/ui/mailingList/RGP') && response.status() === 200),
-      navigation.selectMiscellaneous(Miscellaneous.MAILING_LIST)
+      navigation.selectMiscellaneous(MiscellaneousEnum.MAILING_LIST)
     ]);
     const respJson: MailListCSV[] = JSON.parse(await mailListResponse.text());
     expect(respJson.length).toBeGreaterThan(1); // response should contains at least one emails
