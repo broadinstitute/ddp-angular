@@ -1,6 +1,7 @@
 import { Locator, Page } from '@playwright/test';
 import {CheckboxConfig, DateConfig, RadioButtonConfig, TextConfig} from './search-types';
 import { AdditionalFilter } from './search-enums';
+import {waitForNoSpinner, waitForResponse} from "utils/test-utils";
 
 export class Search {
   private readonly enUSDateRegExp = new RegExp(/\b(0[1-9]|1[012])([/])(0[1-9]|[12]\d|3[01])\2(\d{4})/);
@@ -15,6 +16,8 @@ export class Search {
 
   public async search(): Promise<void> {
     await this.page.locator("//div[@id='searchTable']/button[1][span[text()='Search']]").click();
+    await waitForResponse(this.page, {uri: 'filterList'});
+    await waitForNoSpinner(this.page);
   }
 
   public async dates(columnName: string, { from: fromValue, to: toValue, additionalFilters }: Partial<DateConfig>): Promise<void> {

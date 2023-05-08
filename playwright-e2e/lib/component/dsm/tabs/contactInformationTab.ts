@@ -7,44 +7,44 @@ export default class ContactInformationTab {
 
   public async getStreet1(): Promise<string> {
     const street1 = await this.readInfoFor(ContactInfoEnum.STREET_1);
-    return this.splitOrString(street1);
+    return this.split(street1);
   }
 
   public async getCity(): Promise<string> {
     const city = await this.readInfoFor(ContactInfoEnum.CITY);
-    return this.splitOrString(city);
+    return this.split(city);
   }
 
   public async getState(): Promise<string> {
     const state = await this.readInfoFor(ContactInfoEnum.STATE);
-    return this.splitOrString(state);
+    return this.split(state);
   }
 
   public async getCountry(): Promise<string> {
     const country = await this.readInfoFor(ContactInfoEnum.COUNTRY);
-    return this.splitOrString(country);
+    return this.split(country);
   }
 
   public async getZip(): Promise<string> {
     const zip = await this.readInfoFor(ContactInfoEnum.ZIP);
-    return this.splitOrString(zip);
+    return this.split(zip);
   }
 
   public async getValid(): Promise<string> {
     const valid = await this.readInfoFor(ContactInfoEnum.VALID);
-    return this.splitOrString(valid);
+    return this.split(valid);
   }
 
   public async getPhone(): Promise<string> {
     const phone = await this.readInfoFor(ContactInfoEnum.PHONE);
-    return this.splitOrString(phone);
+    return this.split(phone);
   }
 
   private async readInfoFor(key: ContactInfoEnum): Promise<string | null> {
     return this.page.locator(this.getContactInfoXPath(key)).textContent();
   }
 
-  private splitOrString(value: string | null): string {
+  private split(value: string | null): string {
     return value ? value.split(':')[1].trim() : '';
   }
 

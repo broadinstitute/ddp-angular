@@ -1,4 +1,4 @@
-import {expect, Page} from '@playwright/test';
+import {expect, Locator, Page} from '@playwright/test';
 import {KitTypeEnum} from './enums/kitType-enum';
 
 export class KitType {
@@ -8,12 +8,9 @@ export class KitType {
     await this.page.locator(this.kitTypeCheckbox(kitType)).click();
   }
 
-  /* Assertions */
-  public async verifyDisplayedKitTypes(kitTypes: KitTypeEnum[]): Promise<void> {
-    for(let kitType of kitTypes) {
-      await expect(this.page.locator(this.kitTypeCheckbox(kitType)),
-        'Displayed kit types checkboxes are wrong').toBeVisible()
-    }
+  /* Locators */
+  public displayedKitType(kitType: KitTypeEnum): Locator {
+    return this.page.locator(this.kitTypeCheckbox(kitType));
   }
 
   /* XPaths */

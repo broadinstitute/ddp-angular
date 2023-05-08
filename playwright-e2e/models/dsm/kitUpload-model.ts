@@ -1,4 +1,4 @@
-export class KitInfo {
+export class KitUploadInfo {
   constructor(public readonly shortId: string,
               public readonly firstName: string,
               public readonly lastName: string,

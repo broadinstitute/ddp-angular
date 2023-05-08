@@ -23,7 +23,7 @@ export default class InitialScanPage {
 
   public async save(): Promise<void> {
     const saveButton = await this.page.locator(this.saveButtonXPath);
-    await expect(saveButton).not.toBeDisabled();
+    await expect(saveButton, 'Save Scan Pairs button is not enabled').toBeEnabled();
 
     await saveButton.focus();
     await saveButton.click();
@@ -31,16 +31,20 @@ export default class InitialScanPage {
     const response = await waitForResponse(this.page, {uri: 'initialScan'});
     const responseBody = await response.json();
 
-    const [firstItem] = responseBody.length && responseBody;
-    await expect(firstItem).toBeNull();
+    await expect(responseBody.every((d: any) => d === null),
+      `Error while uploading initial scan pairs: ${await response.text()}`)
+      .toBeTruthy();
 
-    const message = await this.page.locator('h3').innerText();
-    await expect(message).toEqual('Data saved');
+    const message = await this.page.locator('h3').textContent();
+    await expect(message, 'All kits have not been scanned successfully')
+      .toEqual('Data saved');
   }
 
   /* Assertions */
   public async assertTitle() {
-    await expect(this.page.locator('h1')).toHaveText(this.PAGE_TITLE);
+    await expect(this.page.locator('h1'),
+      `The page title doesn't match the expected one - ${this.PAGE_TITLE}`)
+      .toHaveText(this.PAGE_TITLE);
   }
 
   /* XPaths */

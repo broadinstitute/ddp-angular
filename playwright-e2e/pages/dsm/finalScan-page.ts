@@ -23,16 +23,19 @@ export default class FinalScanPage {
 
   public async save(): Promise<void> {
     const saveButton = await this.page.locator(this.saveButtonXPath);
-    await expect(saveButton).not.toBeDisabled();
+    await expect(saveButton, 'Save Scan Pairs button is not enabled').toBeEnabled();
 
     await saveButton.focus();
     await saveButton.click();
 
-    const response = await waitForResponse(this.page, {uri: 'finalScan'});
-    const responseBody = await response.json();
+    await waitForResponse(this.page, {uri: 'finalScan'});
 
-    //@TODO MAKE ASSERTIONS ABOUT FINAL SCAN PAGE
-    console.log(responseBody, 'FINAL_SCAN_RESPONSE')
+    const textUnderScanPair = this.page.locator(this.textUnderScanPairXPath);
+    const textUnderScanPairCount = await textUnderScanPair.count();
+    for(let t = 0; t < textUnderScanPairCount; t++) {
+      await expect(await textUnderScanPair.textContent(), 'All kits have not been scanned successfully')
+        .toContain('Scanned successfully for');
+    }
   }
 
 
@@ -48,5 +51,9 @@ export default class FinalScanPage {
 
   private get saveButtonXPath(): string {
     return `//form/button[.//*[text()[normalize-space()='Save Scan Pairs']]]`;
+  }
+
+  private get textUnderScanPairXPath(): string {
+    return "//form/div[contains(@class, 'formsGroup')][position() != last()]/p"
   }
 }
