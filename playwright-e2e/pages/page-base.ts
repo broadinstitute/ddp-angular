@@ -70,6 +70,10 @@ export default abstract class PageBase implements PageInterface {
     return this.page.locator('.header button[data-ddp-test="signOutButton"]:has-text("Log Out")');
   }
 
+  getFinishButton(): Locator {
+    return this.page.getByRole('button', { name: 'Finish' });
+  }
+
   /**
    * Return "Next" button locator
    */
@@ -145,6 +149,12 @@ export default abstract class PageBase implements PageInterface {
    */
   async agreeToAllowUsToContactPhysicians(): Promise<void> {
     await new Checkbox(this.page, { label: 'I have already read and signed the informed consent document' }).check();
+  }
+
+  async finish(): Promise<void> {
+    await waitForNoSpinner(this.page);
+    await this.getFinishButton().click();
+    await waitForNoSpinner(this.page);
   }
 
   /** Click "Next" button */

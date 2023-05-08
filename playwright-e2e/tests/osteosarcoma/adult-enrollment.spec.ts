@@ -1,5 +1,6 @@
 import { expect, Page } from '@playwright/test';
 import { test } from 'fixtures/osteo-fixture';
+import TextArea from 'lib/widget/textarea';
 import ConsentAddendumPage from 'pages/osteo/consent-addendump-page';
 import GetStartedPage from 'pages/osteo/get-started-page';
 import SurveyAboutYou from 'pages/survey-about-you';
@@ -347,14 +348,20 @@ test('Osteo adult self enroll @osteo', async ({ page }) => {
   });
 
   await familyHistoryPage.next();
+
+  await new TextArea(page, { ddpTestID: 'answer:FH_OTHER_FACTORS_CANCER_RISK' }).toLocator().waitFor({
+    state: 'visible',
+    timeout: 60 * 1000
+  });
+
   await familyHistoryPage.finish();
 
-  await page
+  const viewCompletedButton = page
     .getByRole('row', {
       name: 'Survey: Family History of Cancer Thank you for telling us more about your family history of cancer.'
     })
-    .getByRole('button', { name: 'View Completed' })
-    .click();
+    .getByRole('button', { name: 'View Completed' });
+  await viewCompletedButton.click();
   await page.getByRole('link', { name: 'Dashboard' }).click();
 
 
