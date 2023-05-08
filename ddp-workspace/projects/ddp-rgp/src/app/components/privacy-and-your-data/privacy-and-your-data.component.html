@@ -123,7 +123,9 @@
             <a [href]="emailHref" class="Link">{{email}}</a>
             <span translate>PrivacyAndYourDataPage.Ending.Text2</span>
             <a [href]="phoneHref" class="Link">{{phone}}</a>
-            <span [innerHTML]="'PrivacyAndYourDataPage.Ending.ContactInfo.tollFreePhone' | translate"></span>.
+            <span>
+                ({{'PrivacyAndYourDataPage.Ending.tollFree' | translate}}
+                <a class="Link" href='tel: 855-534-4300'>855-534-4300</a>)</span>.
         </p>
     </div>
 </div>

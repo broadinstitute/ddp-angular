@@ -66,7 +66,9 @@
       <a [href]="emailHref" class="Link">{{email}}</a>
       <span translate>HowItWorksPage.Ending.AnyQuestions.Text4</span>
       <a [href]="phoneHref" class="Link">{{phone}}</a>
-        <span [innerHTML]="'HowItWorksPage.Ending.AnyQuestions.ContactInfo.tollFreePhone' | translate"></span>.
+        <span>
+                ({{'HowItWorksPage.Ending.AnyQuestions.tollFree' | translate}}
+            <a class="Link" href='tel: 855-534-4300'>855-534-4300</a>)</span>.
     </p>
 
   </div>

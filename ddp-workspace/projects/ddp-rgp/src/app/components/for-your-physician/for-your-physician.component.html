@@ -53,7 +53,10 @@
       </li>
       <li class="List-li">
           <a [href]="phoneHref" class="Link">{{phone}}</a>
-          <span class="tollFreeLinkColor" [innerHTML]="'ForYourPhysicianPage.ContactInfo.tollFreePhone' | translate"></span>
+          <span class="tollFreeLinkColor">
+              ({{'ForYourPhysicianPage.tollFree' | translate}}
+              <a class="Link" href='tel: 855-534-4300'>855-534-4300</a>)
+          </span>
       </li>
     </ul>
   </div>

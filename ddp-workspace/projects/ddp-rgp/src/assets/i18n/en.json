@@ -40,7 +40,7 @@
             "Text": "Contact Us:",
             "Line1": "Broad Institute of MIT and Harvard",
             "Line2": "415 Main Street, Cambridge, MA 02142 United States",
-            "Line3": "(Toll-free: <a class=\"Footer-contactLink\" href='tel: 855-534-4300'>855-534-4300</a>)"
+            "tollFree": "Toll-free:"
         },
         "FacebookAlt": "Facebook"
     },
@@ -429,9 +429,7 @@
         "Intro": {
             "Text1": "Browse through these FAQs to find answers to commonly raised questions. We also encourage you to read through the other pages of this website. If your question is not answered, please reach out to us by email at",
             "Text2": "or by phone at",
-            "ContactInfo": {
-                "tollFreePhone": "(Toll-free: <a class=\"Link\" href='tel: 855-534-4300'>855-534-4300</a>)"
-            }
+            "tollFree": "Toll-free:"
         },
         "General": {
             "Title": "General Questions",
@@ -755,9 +753,7 @@
                 "Text2": {
                     "Part1": "Please reach out to us by email at",
                     "Part2": "or by phone at",
-                    "ContactInfo": {
-                        "tollFreePhone": "(Toll-free: <a class=\"Link\" href='tel: 855-534-4300'>855-534-4300</a>)"
-                    },
+                    "tollFree": "Toll-free:",
                     "Part3": "if you have any questions or would like us to consider a special-case application."
                 }
             }
@@ -828,9 +824,7 @@
                 "Text2": "here",
                 "Text3": "please email us at",
                 "Text4": "or call us at",
-                "ContactInfo": {
-                    "tollFreePhone": "(Toll-free: <a class=\"Link\" href='tel: 855-534-4300'>855-534-4300</a>)"
-                }
+                "tollFree": "Toll-free:"
             }
         }
     },
@@ -880,9 +874,7 @@
         "Ending": {
             "Text1": "We discuss data sharing during the consent call if you are accepted into the project and will make sure you understand how your data will be used. If you have questions or concerns about privacy that are not answered above, please contact us by email at",
             "Text2": "or by phone at",
-            "ContactInfo": {
-                "tollFreePhone": "(Toll-free: <a class=\"Link\" href='tel: 855-534-4300'>855-534-4300</a>)"
-            }
+            "tollFree": "Toll-free:"
         }
     },
     "ForYourPhysicianPage": {
@@ -932,9 +924,7 @@
         },
         "ThankYou": "Thank you for your support. We look forward to learning with you!",
         "Contact": "Contact Us",
-        "ContactInfo": {
-            "tollFreePhone": "(Toll-free: <a class=\"Link\" href='tel: 855-534-4300'>855-534-4300</a>)"
-        }
+        "tollFree": "Toll-free:"
     },
     "DataAccessPage": {
         "Title": "Data Sharing",
@@ -960,9 +950,7 @@
         "Questions": {
             "Text1": "If you have further questions, please contact us by email at",
             "Text2": "or call us at",
-            "ContactInfo": {
-                "tollFreePhone": "(Toll-free: <a class=\"Link\" href='tel: 855-534-4300'>855-534-4300</a>)"
-            }
+            "tollFree": "Toll-free:"
         }
     },
     "LGMDPage": {

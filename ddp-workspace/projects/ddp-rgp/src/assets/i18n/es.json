@@ -40,7 +40,7 @@
             "Text": "Comuníquese con nosotros:",
             "Line1": "Broad Institute of MIT and Harvard",
             "Line2": "415 Main Street, Cambridge, MA 02142 United States",
-            "Line3": "(Línea gratuita: <a class=\"Footer-contactLink\" href='tel: 855-534-4300'>855-534-4300</a>)"
+            "tollFree": "Línea gratuita:"
         },
         "FacebookAlt": "Facebook"
     },
@@ -429,9 +429,7 @@
         "Intro": {
             "Text1": "Explore esta página para hallar respuestas a preguntas frecuentes. También le recomendamos que lea las demás páginas de este sitio web. Si no encuentra respuesta a su pregunta, escríbanos por correo electrónico a",
             "Text2": "o llámenos por teléfono al",
-            "ContactInfo": {
-                "tollFreePhone": "(Línea gratuita: <a class=\"Link\" href='tel: 855-534-4300'>855-534-4300</a>)"
-            }
+            "tollFree": "Línea gratuita:"
         },
         "General": {
             "Title": "Preguntas generales",
@@ -755,9 +753,7 @@
                 "Text2": {
                     "Part1": "Escríbanos por correo electrónico a",
                     "Part2": "o llámenos por teléfono al",
-                    "ContactInfo": {
-                        "tollFreePhone": "(Línea gratuita: <a class=\"Link\" href='tel: 855-534-4300'>855-534-4300</a>)"
-                    },
+                    "tollFree": "Línea gratuita:",
                     "Part3": "si tiene preguntas o desea que tengamos en cuenta la solicitud de un caso especial."
                 }
             }
@@ -828,9 +824,7 @@
                 "Text2": "aquí",
                 "Text3": "escríbanos por correo electrónico a",
                 "Text4": "o llámenos al",
-                "ContactInfo": {
-                    "tollFreePhone": "(Línea gratuita: <a class=\"Link\" href='tel: 855-534-4300'>855-534-4300</a>)"
-                }
+                "tollFree": "Línea gratuita:"
             }
         }
     },
@@ -880,9 +874,7 @@
         "Ending": {
             "Text1": "Durante la llamada de consentimiento hablaremos de la comunicación de datos si se le acepta en el proyecto y nos cercioraremos de que usted entienda cómo se emplearán sus datos. Si tiene preguntas o dudas sobre su privacidad que no se respondieron en esta página, escríbanos por correo electrónico a",
             "Text2": "o llámenos por teléfono al",
-            "ContactInfo": {
-                "tollFreePhone": "(Línea gratuita: <a class=\"Link\" href='tel: 855-534-4300'>855-534-4300</a>)"
-            }
+            "tollFree": "Línea gratuita:"
         }
     },
     "ForYourPhysicianPage": {
@@ -933,9 +925,7 @@
         },
         "ThankYou": "Le agradecemos su apoyo. Esperamos aprender muy pronto con usted.",
         "Contact": "Comuníquese con nosotros",
-        "ContactInfo": {
-            "tollFreePhone": "(Línea gratuita: <a class=\"Link\" href='tel: 855-534-4300'>855-534-4300</a>)"
-        }
+        "tollFree": "Línea gratuita:"
     },
     "DataAccessPage": {
         "Title": "Intercambio de datos",
@@ -961,9 +951,7 @@
         "Questions": {
             "Text1": "Si tiene más preguntas, escríbanos por correo electrónico a",
             "Text2": "o llámenos al",
-            "ContactInfo": {
-                "tollFreePhone": "(Línea gratuita: <a class=\"Link\" href='tel: 855-534-4300'>855-534-4300</a>)"
-            }
+            "tollFree": "Línea gratuita:"
         }
     },
     "LGMDPage": {
