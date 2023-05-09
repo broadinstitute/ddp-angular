@@ -22,6 +22,13 @@ import SampleInformationTab from "lib/component/dsm/tabs/sampleInformationTab";
 import {SampleInfoEnum} from "lib/component/dsm/tabs/enums/sampleInfo-enum";
 import {SampleStatusEnum} from "lib/component/dsm/tabs/enums/sampleStatus-enum";
 
+/**
+ * @TODO
+ * 1. cleanup code
+ * 2. error texts on assertions
+ * 3. make more reusable
+ * 4. walk through questions
+ */
 test.describe.serial.only('Saliva Kits upload flow', () => {
   let welcomePage: WelcomePage;
   let homePage: HomePage;
