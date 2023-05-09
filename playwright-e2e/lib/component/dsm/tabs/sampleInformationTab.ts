@@ -70,7 +70,7 @@ export default class SampleInformationTab {
     const selection = this.sampleFieldset.nth(at).locator(this.getSampleInfoForXPath(sampleInfo) + '//span')
       .locator('span');
 
-    return await selection.isVisible() ? await selection.textContent() : '';
+    return await selection.isVisible() ? selection.textContent() : '';
   }
 
   private deactivatedText(at: number): Promise<string | null> {
