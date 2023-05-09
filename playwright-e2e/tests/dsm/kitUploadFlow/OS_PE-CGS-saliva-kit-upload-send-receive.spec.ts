@@ -101,12 +101,12 @@ test.describe.serial.only('Saliva Kits upload flow', () => {
     await kitsWithoutLabelPage.assertReloadKitListBtn();
     await kitsWithoutLabelPage.assertTableHeader();
     await kitsWithoutLabelPage.assertTitle();
-    const shippingId = await kitsWithoutLabelPage.shippingId(shortID);
+    shippingID = await kitsWithoutLabelPage.shippingId(shortID);
 
     // final scan
     const finalScanPage = await navigation.selectFromSamples<FinalScanPage>(SamplesNavEnum.FINAL_SCAN);
     await finalScanPage.assertTitle();
-    await finalScanPage.fillScanPairs([kitLabel, shippingId]);
+    await finalScanPage.fillScanPairs([kitLabel, shippingID]);
     await finalScanPage.save();
 
     // kits sent page
