@@ -27,7 +27,9 @@ export default class KitsWithoutLabelPage {
       await this.deactivateKit(await this.kitsTable.deactivateButtons.nth(0));
       await this.kitsTable.rows.count() && await this.deactivateAllKitsFor(shortId)
     }
-    await expect(await this.kitsTable.rows, 'All kits were not removed').toHaveCount(0)
+    await expect(await this.kitsTable.rows,
+      'Kits Without Label page - All kits were not removed')
+      .toHaveCount(0)
   }
 
   public async shippingId(shortId: string): Promise<string> {
@@ -41,9 +43,11 @@ export default class KitsWithoutLabelPage {
     const deactivateReasonInput = await this.page.locator(this.deactivateReasonInputXPath);
     const deactivateReasonButton = await this.page.locator(this.deactivateReasonBtnXPath);
 
-    await expect(await deactivateReasonInput, 'Deactivate reason input field is not visible')
+    await expect(await deactivateReasonInput,
+      'Kits Without Label page - Deactivate reason input field is not visible')
       .toBeVisible();
-    await expect(await deactivateReasonButton, 'Deactivate reason button is not visible')
+    await expect(await deactivateReasonButton,
+      'Kits Without Label page - Deactivate reason button is not visible')
       .toBeVisible();
 
     await deactivateReasonInput.fill(`testDeactivate-${new Date().getTime()}`);
@@ -56,20 +60,24 @@ export default class KitsWithoutLabelPage {
 
   /* Assertions */
   public async assertTitle() {
-    await expect(this.page.locator('h1')).toHaveText(this.PAGE_TITLE);
+    await expect(this.page.locator('h1'),
+      "Kits Without Label page - page title is wrong").toHaveText(this.PAGE_TITLE);
   }
 
   public async assertReloadKitListBtn() {
-    await expect(this.page.locator(this.reloadKitListBtnXPath)).toBeVisible();
+    await expect(this.page.locator(this.reloadKitListBtnXPath),
+      "Kits Without Label page - Reload Kit List Button is not visible").toBeVisible();
   }
 
   public async assertCreateLabelsBtn() {
-    await expect(this.page.locator(this.createLabelsBtnXPath)).toBeVisible();
+    await expect(this.page.locator(this.createLabelsBtnXPath),
+      "Kits Without Label page - Create Labels button is not visible")
+      .toBeVisible();
   }
 
   public async assertTableHeader() {
     await expect(await this.kitsTable.header.screenshot(),
-      "Table header columns screenshot doesn't match the provided one (Kits without label)")
+      "Kits Without Label page - Table header columns screenshot doesn't match the provided one")
       .toMatchSnapshot(`kits_without_label_table_header.png`);
   }
 

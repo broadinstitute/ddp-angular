@@ -9,6 +9,10 @@ export class KitsTable {
     await this.page.locator(this.searchByXPath(searchBy)).fill(value);
   }
 
+  public async searchByMFCode(value: string): Promise<void> {
+    await this.page.locator(this.searchByMFCodeXPath).fill(value);
+  }
+
   public async shippingId(shortId: string): Promise<string> {
     return this.page.locator(this.shippingIdByShortIdXPath(shortId)).innerText();
   }
@@ -39,6 +43,11 @@ export class KitsTable {
   private searchByXPath(searchBy: shortOrShippingID): string {
     return `(//table/thead/tr[2]/th)[count(//table/thead/tr[1]/th[.//*[text()[normalize-space()='${searchBy}']]]` +
       `/preceding-sibling::th)+1]/input`
+  }
+
+  private get searchByMFCodeXPath(): string {
+    return `(//table/thead/tr[2]/th)[count(//table/thead/tr[1]/th[text()[normalize-space()='MF code']]` +
+    `/preceding-sibling::th)+1]/input`
   }
 
   private get deactivateButtonXPath(): string {

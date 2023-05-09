@@ -23,7 +23,6 @@ interface KitUploadResponse {
 export default class KitUploadPage {
   private readonly PAGE_TITLE = 'Kit Upload';
   private readonly T_HEAD = 'shortId\tfirstName\tlastName\tstreet1\tstreet2\tcity\tpostalCode\tstate\tcountry';
-
   private readonly kitType = new KitType(this.page);
 
   constructor(private readonly page: Page) {
@@ -49,7 +48,7 @@ export default class KitUploadPage {
       .textContent(), "Couldn't upload kits - something went wrong")
       .toEqual('All participants were uploaded.');
 
-    // deleteFileSync(path);
+    deleteFileSync(path);
   }
 
   /* Helper functions */
