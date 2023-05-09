@@ -1,4 +1,4 @@
-import {Page} from "@playwright/test";
+import {expect, Page} from "@playwright/test";
 import {TabEnum} from "./enums/tab-enum";
 import ContactInformationTab from "./contactInformationTab";
 import SampleInformationTab from "./sampleInformationTab";
@@ -12,7 +12,9 @@ export default class Tabs {
   constructor(private readonly page: Page) {}
 
   public async clickTab<T extends object>(tabName: TabEnum): Promise<T> {
-    await this.page.locator(this.getTabXPath(tabName)).click();
+    const tab = this.page.locator(this.getTabXPath(tabName));
+    await expect(tab, `The tab '${tabName}' is not visible`).toBeVisible();
+    await tab.click();
     return (this.tabs as Map<string, object>).get(tabName) as T;
   }
 

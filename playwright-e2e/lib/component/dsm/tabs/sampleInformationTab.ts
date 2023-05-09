@@ -1,6 +1,7 @@
-import {Locator, Page} from "@playwright/test";
+import {expect, Locator, Page} from "@playwright/test";
 import {SampleInfoEnum} from "./enums/sampleInfo-enum";
 import SampleInformation from "./model/sampleInformationModel";
+import {KitTypeEnum} from "../kitType/enums/kitType-enum";
 
 interface SampleInfo {
   [fieldName: string]: SampleInfoEnum;
@@ -69,7 +70,7 @@ export default class SampleInformationTab {
     const selection = this.sampleFieldset.nth(at).locator(this.getSampleInfoForXPath(sampleInfo) + '//span')
       .locator('span');
 
-    return await selection.isVisible() ? selection.textContent() : '';
+    return await selection.isVisible() ? await selection.textContent() : '';
   }
 
   private deactivatedText(at: number): Promise<string | null> {
@@ -78,6 +79,23 @@ export default class SampleInformationTab {
 
   private get sampleFieldset(): Locator {
     return this.page.locator(this.getSampleFieldsetXPath)
+  }
+
+  /* Assertions */
+  public async assertSampleByMFBarcode(MFBarcode: string, type: KitTypeEnum, {info, value}:
+    {info: SampleInfoEnum, value: string}): Promise<void> {
+    const MFBarcodeXPath = this.getSampleByMFBarcodeXPath(MFBarcode);
+
+    await expect(this.page.locator(MFBarcodeXPath),
+      `MFBarcode - '${MFBarcode}' can't be found`).toBeVisible();
+
+    await expect(await this.page.locator(MFBarcodeXPath + this.ancestorSampleTypeXPath).textContent(),
+      `Provided MFBarcode (${MFBarcode}) has different sample type than - ${type}`)
+      .toContain(type);
+
+    await expect(await this.page.locator(MFBarcodeXPath + this.ancestorSampleTextXPath(info)).textContent(),
+      `Provided MFBarcode (${MFBarcode}) has different info in - ${info} (provided value: ${value})`)
+      .toContain(value);
   }
 
   /* XPaths */
@@ -91,5 +109,17 @@ export default class SampleInformationTab {
 
   private get getSampleFieldsetXPath(): string {
     return `//tab[@heading='Sample Information']/fieldset[legend[contains(text(),'Sample Type')]]`;
+  }
+
+  private getSampleByMFBarcodeXPath(MFCode: string): string {
+    return `//tab[@heading='Sample Information']/fieldset//td[text()[normalize-space()='${MFCode}']]`
+  }
+
+  private get ancestorSampleTypeXPath(): string {
+    return "/ancestor::fieldset/legend[contains(text(), 'SALIVA')]"
+  }
+
+  private ancestorSampleTextXPath(sampleInfo: SampleInfoEnum): string {
+    return `/ancestor::table/tr[td[contains(text(), '${sampleInfo}')]]/following-sibling::tr[1]/td`
   }
 }

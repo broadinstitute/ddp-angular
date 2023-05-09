@@ -1,8 +1,8 @@
-import {KitType} from "../../lib/component/dsm/kitType/kitType";
-import {KitsTable} from "../../lib/component/dsm/tables/kitsTable";
+import {KitType} from "lib/component/dsm/kitType/kitType";
+import {KitsTable} from "lib/component/dsm/tables/kitsTable";
 import {expect, Page} from "@playwright/test";
-import {KitTypeEnum} from "../../lib/component/dsm/kitType/enums/kitType-enum";
-import {waitForNoSpinner, waitForResponse} from "../../utils/test-utils";
+import {KitTypeEnum} from "lib/component/dsm/kitType/enums/kitType-enum";
+import {waitForNoSpinner, waitForResponse} from "utils/test-utils";
 
 export default class KitsReceivedPage {
   private readonly PAGE_TITLE = 'Kits Received';

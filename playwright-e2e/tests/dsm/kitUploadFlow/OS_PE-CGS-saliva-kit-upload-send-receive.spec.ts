@@ -18,6 +18,9 @@ import InitialScanPage from "pages/dsm/initialScan-page";
 import FinalScanPage from "pages/dsm/finalScan-page";
 import KitsSentPage from "pages/dsm/kitsSentPage";
 import crypto from "crypto";
+import SampleInformationTab from "lib/component/dsm/tabs/sampleInformationTab";
+import {SampleInfoEnum} from "lib/component/dsm/tabs/enums/sampleInfo-enum";
+import {SampleStatusEnum} from "lib/component/dsm/tabs/enums/sampleStatus-enum";
 
 test.describe.serial.only('Saliva Kits upload flow', () => {
   let welcomePage: WelcomePage;
@@ -29,7 +32,8 @@ test.describe.serial.only('Saliva Kits upload flow', () => {
   let kitLabel: string;
   let shippingID: string;
 
-  let expectedKitTypes = [KitTypeEnum.SALIVA, KitTypeEnum.BLOOD];
+  const kitType = KitTypeEnum.SALIVA;
+  const expectedKitTypes = [KitTypeEnum.SALIVA, KitTypeEnum.BLOOD];
 
   test.beforeEach(async ({ page }) => {
     await login(page);
@@ -66,7 +70,7 @@ test.describe.serial.only('Saliva Kits upload flow', () => {
 
     // deactivate all kits for the participant
     const kitsWithoutLabelPage = await navigation.selectFromSamples<KitsWithoutLabelPage>(SamplesNavEnum.KITS_WITHOUT_LABELS);
-    await kitsWithoutLabelPage.selectKitType(KitTypeEnum.SALIVA);
+    await kitsWithoutLabelPage.selectKitType(kitType);
     await kitsWithoutLabelPage.assertCreateLabelsBtn();
     await kitsWithoutLabelPage.assertReloadKitListBtn();
     await kitsWithoutLabelPage.assertTableHeader();
@@ -76,12 +80,12 @@ test.describe.serial.only('Saliva Kits upload flow', () => {
     // Uploads kit
     const kitUploadPage = await navigation.selectFromSamples<KitUploadPage>(SamplesNavEnum.KIT_UPLOAD);
     await kitUploadPage.assertDisplayedKitTypes(expectedKitTypes);
-    await kitUploadPage.selectKitType(KitTypeEnum.SALIVA);
+    await kitUploadPage.selectKitType(kitType);
     await kitUploadPage.assertBrowseBtn();
     await kitUploadPage.assertUploadKitsBtn();
     await kitUploadPage.assertTitle();
     await kitUploadPage.assertInstructionSnapshot();
-    await kitUploadPage.uploadFile(KitTypeEnum.SALIVA, [kitUploadInfo], StudyEnum.OSTEO2);
+    await kitUploadPage.uploadFile(kitType, [kitUploadInfo], StudyEnum.OSTEO2);
 
     // initial scan
     const initialScanPage = await navigation.selectFromSamples<InitialScanPage>(SamplesNavEnum.INITIAL_SCAN);
@@ -92,7 +96,7 @@ test.describe.serial.only('Saliva Kits upload flow', () => {
 
     // Kits without label for extracting a shipping ID
     await navigation.selectFromSamples<KitsWithoutLabelPage>(SamplesNavEnum.KITS_WITHOUT_LABELS);
-    await kitsWithoutLabelPage.selectKitType(KitTypeEnum.SALIVA);
+    await kitsWithoutLabelPage.selectKitType(kitType);
     await kitsWithoutLabelPage.assertCreateLabelsBtn();
     await kitsWithoutLabelPage.assertReloadKitListBtn();
     await kitsWithoutLabelPage.assertTableHeader();
@@ -109,13 +113,22 @@ test.describe.serial.only('Saliva Kits upload flow', () => {
     const kitsSentPage = await navigation.selectFromSamples<KitsSentPage>(SamplesNavEnum.SENT);
     await kitsSentPage.assertTitle();
     await kitsSentPage.assertDisplayedKitTypes(expectedKitTypes);
-
-    await kitsSentPage.selectKitType(KitTypeEnum.SALIVA);
-
+    await kitsSentPage.selectKitType(kitType);
     await kitsSentPage.assertReloadKitListBtn();
     await kitsSentPage.assertTableHeader();
     await kitsSentPage.searchByMFCode(kitLabel);
     await kitsSentPage.assertDisplayedRowsCount(1);
 
+    // checks if the uploaded kit is displayed on the participant's page, in the sample information tab
+    await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
+    const searchPanel = await participantListPage.filters.searchPanel;
+    await searchPanel.open();
+    await searchPanel.text('Short ID', {textValue: shortID});
+    await searchPanel.search();
+    await participantListTable.openParticipantPageAt(0);
+    const sampleInformationTab = await participantPage.clickTab<SampleInformationTab>(TabEnum.SAMPLE_INFORMATION);
+    await sampleInformationTab
+      .assertSampleByMFBarcode(kitLabel, kitType,
+        {info: SampleInfoEnum.STATUS, value: SampleStatusEnum.SHIPPED})
   })
 })
