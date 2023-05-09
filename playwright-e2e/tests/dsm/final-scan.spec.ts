@@ -43,6 +43,11 @@ test.describe.only('Final Scan Test', () => {
 
   test('Should display success message under scan pairs', async ({page}) => {
     const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
+    const search = participantListPage.filters.searchPanel;
+    await search.open();
+    await search.text('Short ID', {textValue: 'PYNTTD'});
+    await search.search();
+
     const participantListTable = participantListPage.participantListTable;
 
     const fromParticipantIndex = 3;
@@ -52,14 +57,14 @@ test.describe.only('Final Scan Test', () => {
 
     const participantPage: ParticipantPage = await participantListTable.openParticipantPageAt(0);
     const sampleInfo = await participantPage.clickTab<SampleInformationTab>(TabEnum.SAMPLE_INFORMATION);
-
-    console.log(await sampleInfo.getStatus(KitTypeEnum.SALIVA))
-    console.log(await sampleInfo.getKitUploadType(KitTypeEnum.SALIVA))
-    console.log(await sampleInfo.getNormalCollaboratorSampleId(KitTypeEnum.SALIVA))
-    console.log(await sampleInfo.getMFBarcode(KitTypeEnum.SALIVA))
-    console.log(await sampleInfo.getSent(KitTypeEnum.SALIVA))
-    console.log(await sampleInfo.getReceived(KitTypeEnum.SALIVA))
-    console.log(await sampleInfo.getDeactivated(KitTypeEnum.SALIVA))
+    console.log(await sampleInfo.collectData(), 'COLLECTED_DATA')
+    // console.log(await sampleInfo.getStatus(KitTypeEnum.SALIVA))
+    // console.log(await sampleInfo.getKitUploadType(KitTypeEnum.SALIVA))
+    // console.log(await sampleInfo.getNormalCollaboratorSampleId(KitTypeEnum.SALIVA))
+    // console.log(await sampleInfo.getMFBarcode(KitTypeEnum.SALIVA))
+    // console.log(await sampleInfo.getSent(KitTypeEnum.SALIVA))
+    // console.log(await sampleInfo.getReceived(KitTypeEnum.SALIVA))
+    // console.log(await sampleInfo.getDeactivated(KitTypeEnum.SALIVA))
 
   })
 })

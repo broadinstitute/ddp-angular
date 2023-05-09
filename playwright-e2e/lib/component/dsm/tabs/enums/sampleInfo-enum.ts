@@ -6,4 +6,8 @@ export enum SampleInfoEnum {
   SENT = 'Sent',
   RECEIVED = 'Received',
   DEACTIVATED = 'Deactivated',
+  RESULTS = 'Results',
+  COLLECTION_DATE = 'Collection Date',
+  SEQUENCING_RESTRICTIONS = 'Sequencing Restriction',
+  SAMPLE_NOTES = 'Sample Notes'
 }
