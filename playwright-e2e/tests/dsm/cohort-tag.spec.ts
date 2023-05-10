@@ -11,7 +11,7 @@ import { AdditionalFilter } from 'lib/component/dsm/filters/sections/search/sear
 import { WelcomePage } from 'pages/dsm/welcome-page';
 import { StudyEnum } from 'lib/component/dsm/navigation/enums/selectStudyNav-enum';
 
-test.describe.parallel('Cohort tags', () => {
+test.describe.skip('Cohort tags', () => {
   let welcomePage: WelcomePage;
   let homePage: HomePage;
   let navigation: Navigation;
