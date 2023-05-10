@@ -7,7 +7,7 @@ import { Navigation } from 'lib/component/dsm/navigation/navigation';
 import { WelcomePage } from 'pages/dsm/welcome-page';
 import { StudyEnum } from 'lib/component/dsm/navigation/enums/selectStudyNav-enum';
 
-test.describe.skip('Singular Study in DSM', () => {
+test.describe('Singular Study in DSM', () => {
   let welcomePage: WelcomePage;
   let homePage: HomePage;
   let navigation: Navigation;
