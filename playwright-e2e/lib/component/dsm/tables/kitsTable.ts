@@ -51,7 +51,7 @@ export class KitsTable {
   }
 
   private get deactivateButtonXPath(): string {
-    return this.rowsXPath + "/td[button[@type='button'][text()[normalize-space()='Deactivate']]]/button"
+    return `${this.rowsXPath}/td[button[@type='button'][text()[normalize-space()='Deactivate']]]/button`
   }
 
   private get rowsXPath(): string {

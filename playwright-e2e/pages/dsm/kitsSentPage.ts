@@ -1,8 +1,8 @@
-import {expect, Page} from "@playwright/test";
-import {KitType} from "lib/component/dsm/kitType/kitType";
-import {KitsTable} from "lib/component/dsm/tables/kitsTable";
-import {KitTypeEnum} from "lib/component/dsm/kitType/enums/kitType-enum";
-import {waitForNoSpinner, waitForResponse} from "utils/test-utils";
+import {expect, Page} from '@playwright/test';
+import {KitType} from 'lib/component/dsm/kitType/kitType';
+import {KitsTable} from 'lib/component/dsm/tables/kitsTable';
+import {KitTypeEnum} from 'lib/component/dsm/kitType/enums/kitType-enum';
+import {waitForNoSpinner, waitForResponse} from 'utils/test-utils';
 
 export default class KitsSentPage {
   private readonly PAGE_TITLE = 'Kits Sent';
@@ -26,20 +26,20 @@ export default class KitsSentPage {
   /* Assertions */
   public async assertPageTitle() {
     await expect(this.page.locator('h1'),
-      "Kits Sent page - page title is wrong")
+      'Kits Sent page - page title is wrong')
       .toHaveText(this.PAGE_TITLE);
   }
 
   public async assertReloadKitListBtn() {
     await expect(this.page.locator(this.reloadKitListBtnXPath),
-      "Kits Sent page - Reload Kit List Button is not visible")
+      'Kits Sent page - Reload Kit List Button is not visible')
       .toBeVisible();
   }
 
   public async assertDisplayedKitTypes(kitTypes: KitTypeEnum[]): Promise<void> {
     await waitForResponse(this.page, {uri: '/kitTypes'});
     await waitForNoSpinner(this.page);
-    for(let kitType of kitTypes) {
+    for (const kitType of kitTypes) {
       await expect(this.kitType.displayedKitType(kitType),
         'Kits Sent page - Displayed kit types checkboxes are wrong').toBeVisible()
     }

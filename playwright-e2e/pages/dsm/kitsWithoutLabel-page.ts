@@ -23,7 +23,7 @@ export default class KitsWithoutLabelPage {
     await this.kitsTable.searchBy('Short ID', shortId);
     await waitForNoSpinner(this.page);
     const kitsCount = await this.kitsTable.rows.count();
-    if(kitsCount) {
+    if (kitsCount) {
       await this.deactivateKit(await this.kitsTable.deactivateButtons.nth(0));
       await this.kitsTable.rows.count() && await this.deactivateAllKitsFor(shortId)
     }
@@ -67,12 +67,12 @@ export default class KitsWithoutLabelPage {
 
   public async assertReloadKitListBtn() {
     await expect(this.page.locator(this.reloadKitListBtnXPath),
-      "Kits Without Label page - Reload Kit List Button is not visible").toBeVisible();
+      'Kits Without Label page - Reload Kit List Button is not visible').toBeVisible();
   }
 
   public async assertCreateLabelsBtn() {
     await expect(this.page.locator(this.createLabelsBtnXPath),
-      "Kits Without Label page - Create Labels button is not visible")
+      'Kits Without Label page - Create Labels button is not visible')
       .toBeVisible();
   }
 

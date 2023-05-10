@@ -9,10 +9,10 @@ import {SamplesNavEnum} from './enums/samplesNav-enum';
 import KitsWithoutLabelPage from 'pages/dsm/kitsWithoutLabel-page';
 import InitialScanPage from 'pages/dsm/initialScan-page';
 import FinalScanPage from 'pages/dsm/finalScan-page';
-import KitUploadPage from "pages/dsm/kitUpload-page/kitUpload-page";
+import KitUploadPage from 'pages/dsm/kitUpload-page/kitUpload-page';
 import {MiscellaneousEnum} from 'lib/component/dsm/navigation/enums/miscellaneousNav-enum';
-import KitsSentPage from "pages/dsm/kitsSentPage";
-import KitsReceivedPage from "pages/dsm/kitsReceivedPage";
+import KitsSentPage from 'pages/dsm/kitsSentPage';
+import KitsReceivedPage from 'pages/dsm/kitsReceivedPage';
 
 
 type Selection = StudyNavEnum | StudyEnum | SamplesNavEnum | MiscellaneousEnum;

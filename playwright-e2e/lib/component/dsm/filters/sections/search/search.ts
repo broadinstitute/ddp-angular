@@ -1,7 +1,7 @@
 import { Locator, Page } from '@playwright/test';
 import {CheckboxConfig, DateConfig, RadioButtonConfig, TextConfig} from './search-types';
 import { AdditionalFilter } from './search-enums';
-import {waitForNoSpinner, waitForResponse} from "utils/test-utils";
+import {waitForNoSpinner, waitForResponse} from 'utils/test-utils';
 
 export class Search {
   private readonly enUSDateRegExp = new RegExp(/\b(0[1-9]|1[012])([/])(0[1-9]|[12]\d|3[01])\2(\d{4})/);

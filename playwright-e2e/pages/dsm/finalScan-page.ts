@@ -32,7 +32,7 @@ export default class FinalScanPage {
 
     const textUnderScanPair = this.page.locator(this.textUnderScanPairXPath);
     const textUnderScanPairCount = await textUnderScanPair.count();
-    for(let t = 0; t < textUnderScanPairCount; t++) {
+    for (let t = 0; t < textUnderScanPairCount; t++) {
       await expect(await textUnderScanPair.textContent(),
         'Final Scan page - All kits have not been scanned successfully')
         .toContain('Scanned successfully for');

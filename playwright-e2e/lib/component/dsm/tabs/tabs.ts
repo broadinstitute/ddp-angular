@@ -1,7 +1,7 @@
-import {expect, Page} from "@playwright/test";
-import {TabEnum} from "./enums/tab-enum";
-import ContactInformationTab from "./contactInformationTab";
-import SampleInformationTab from "./sampleInformationTab";
+import {expect, Page} from '@playwright/test';
+import {TabEnum} from './enums/tab-enum';
+import ContactInformationTab from './contactInformationTab';
+import SampleInformationTab from './sampleInformationTab';
 
 export default class Tabs {
   private readonly tabs = new Map<string, object>([

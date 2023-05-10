@@ -18,8 +18,7 @@ export async function waitForNoSpinner(page: Page): Promise<void> {
 
 export async function waitForResponse(page: Page, {uri, status = 200, timeout = 30000}: WaitForResponse): Promise<Response> {
   try {
-    return await page.waitForResponse((response: Response) =>
-      response.url().includes(uri) && response.status() === status, {timeout})
+    return await page.waitForResponse((response: Response) => response.url().includes(uri) && response.status() === status, {timeout})
   } catch (error: any) {
     throw new Error(`Timeout ${timeout}ms exceeded while waiting for ${uri} URI response`)
   }

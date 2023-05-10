@@ -1,8 +1,8 @@
 import {expect, Locator, Page} from '@playwright/test';
 import {waitForResponse} from 'utils/test-utils';
-import {MainInfoEnum} from "./enums/main-info-enum";
-import Tabs from "lib/component/dsm/tabs/tabs";
-import {TabEnum} from "lib/component/dsm/tabs/enums/tab-enum";
+import {MainInfoEnum} from './enums/main-info-enum';
+import Tabs from 'lib/component/dsm/tabs/tabs';
+import {TabEnum} from 'lib/component/dsm/tabs/enums/tab-enum';
 
 export default class ParticipantPage {
   private readonly PAGE_TITLE: string = 'Participant Page';
@@ -96,11 +96,11 @@ export default class ParticipantPage {
   }
 
   private getMainInputValueInfoXPath(info: MainInfoEnum) {
-    return this.getMainInfoXPath(info) + `/input`
+    return `${this.getMainInfoXPath(info)}/input`
   }
 
   private getMainCheckboxValueInfoXPath(info: MainInfoEnum) {
-    return this.getMainInfoXPath(info) + `/mat-checkbox//input[@type='checkbox']`
+    return `${this.getMainInfoXPath(info)}/mat-checkbox//input[@type='checkbox']`
   }
 
   private getMainInfoXPath(info: MainInfoEnum): string {

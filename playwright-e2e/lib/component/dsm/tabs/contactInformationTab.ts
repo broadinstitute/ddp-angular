@@ -1,5 +1,5 @@
-import {Page} from "@playwright/test";
-import {ContactInfoEnum} from "lib/component/dsm/tabs/enums/contactInfo-enum";
+import {Page} from '@playwright/test';
+import {ContactInfoEnum} from 'lib/component/dsm/tabs/enums/contactInfo-enum';
 
 export default class ContactInformationTab {
   constructor(private readonly page: Page) {

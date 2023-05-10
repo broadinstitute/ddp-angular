@@ -1,7 +1,7 @@
-import {expect, Locator, Page} from "@playwright/test";
-import {SampleInfoEnum} from "./enums/sampleInfo-enum";
-import SampleInformation from "./model/sampleInformationModel";
-import {KitTypeEnum} from "../kitType/enums/kitType-enum";
+import {expect, Locator, Page} from '@playwright/test';
+import {SampleInfoEnum} from './enums/sampleInfo-enum';
+import SampleInformation from './model/sampleInformationModel';
+import {KitTypeEnum} from '../kitType/enums/kitType-enum';
 
 interface SampleInfo {
   [fieldName: string]: SampleInfoEnum;
@@ -16,7 +16,7 @@ export default class SampleInformationTab {
     const samplesCount: number = await samplesLocator.count();
     const sampleInformationArray: SampleInformation[] = [];
 
-    for(let s = 0; s < samplesCount; s++) {
+    for (let s = 0; s < samplesCount; s++) {
       const sampleInformationInstance: SampleInformation = new SampleInformation();
       const sampleType = await samplesLocator.nth(s).locator('legend').textContent();
       const selectionValue: SampleInfo = {sampleNotes: SampleInfoEnum.SEQUENCING_RESTRICTIONS};
@@ -43,11 +43,11 @@ export default class SampleInformationTab {
 
       sampleInformationInstance.deactivated = (await this.deactivatedText(s))?.trim() || '';
 
-      for(let [key, sampleInfoName] of Object.entries(textsValues)) {
+      for (const [key, sampleInfoName] of Object.entries(textsValues)) {
         sampleInformationInstance[key as keyof SampleInformation] = (await this.textAtFor(s, sampleInfoName))?.trim() || '';
       }
 
-      for(let [key, sampleInfoName] of Object.entries(inputValues)) {
+      for (const [key, sampleInfoName] of Object.entries(inputValues)) {
         sampleInformationInstance[key as keyof SampleInformation] = (await this.valueAtFor(s, sampleInfoName)).trim();
       }
 
@@ -65,11 +65,11 @@ export default class SampleInformationTab {
 
   private async textAtFor(at: number, sampleInfo: SampleInfoEnum): Promise<string | null> {
     const element = this.sampleFieldset.nth(at).locator(this.getSampleInfoForXPath(sampleInfo));
-    return await element.isVisible() ?  element.textContent() : '';
+    return await element.isVisible() ? element.textContent() : '';
   }
 
   private async selectionAtFor(at: number, sampleInfo: SampleInfoEnum): Promise<string | null> {
-    const selection = this.sampleFieldset.nth(at).locator(this.getSampleInfoForXPath(sampleInfo) + '//span')
+    const selection = this.sampleFieldset.nth(at).locator(`${this.getSampleInfoForXPath(sampleInfo)}//span`)
       .locator('span');
     return await selection.isVisible() ? selection.textContent() : '';
   }

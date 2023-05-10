@@ -1,26 +1,26 @@
-import {test} from "@playwright/test";
-import {WelcomePage} from "pages/dsm/welcome-page";
-import HomePage from "pages/dsm/home-page";
-import {Navigation} from "lib/component/dsm/navigation/navigation";
-import {login} from "authentication/auth-dsm";
-import {StudyEnum} from "lib/component/dsm/navigation/enums/selectStudyNav-enum";
-import ParticipantListPage from "pages/dsm/participantList-page";
-import {StudyNavEnum} from "lib/component/dsm/navigation/enums/studyNav-enum";
-import ParticipantPage from "pages/dsm/participant-page/participant-page";
-import {KitUploadInfo} from "pages/dsm/kitUpload-page/models/kitUpload-model";
-import ContactInformationTab from "lib/component/dsm/tabs/contactInformationTab";
-import {TabEnum} from "lib/component/dsm/tabs/enums/tab-enum";
-import KitsWithoutLabelPage from "pages/dsm/kitsWithoutLabel-page";
-import {SamplesNavEnum} from "lib/component/dsm/navigation/enums/samplesNav-enum";
-import {KitTypeEnum} from "lib/component/dsm/kitType/enums/kitType-enum";
-import KitUploadPage from "pages/dsm/kitUpload-page/kitUpload-page";
-import InitialScanPage from "pages/dsm/initialScan-page";
-import FinalScanPage from "pages/dsm/finalScan-page";
-import KitsSentPage from "pages/dsm/kitsSentPage";
-import crypto from "crypto";
-import SampleInformationTab from "lib/component/dsm/tabs/sampleInformationTab";
-import {SampleInfoEnum} from "lib/component/dsm/tabs/enums/sampleInfo-enum";
-import {SampleStatusEnum} from "lib/component/dsm/tabs/enums/sampleStatus-enum";
+import {test} from '@playwright/test';
+import {WelcomePage} from 'pages/dsm/welcome-page';
+import HomePage from 'pages/dsm/home-page';
+import {Navigation} from 'lib/component/dsm/navigation/navigation';
+import {login} from 'authentication/auth-dsm';
+import {StudyEnum} from 'lib/component/dsm/navigation/enums/selectStudyNav-enum';
+import ParticipantListPage from 'pages/dsm/participantList-page';
+import {StudyNavEnum} from 'lib/component/dsm/navigation/enums/studyNav-enum';
+import ParticipantPage from 'pages/dsm/participant-page/participant-page';
+import {KitUploadInfo} from 'pages/dsm/kitUpload-page/models/kitUpload-model';
+import ContactInformationTab from 'lib/component/dsm/tabs/contactInformationTab';
+import {TabEnum} from 'lib/component/dsm/tabs/enums/tab-enum';
+import KitsWithoutLabelPage from 'pages/dsm/kitsWithoutLabel-page';
+import {SamplesNavEnum} from 'lib/component/dsm/navigation/enums/samplesNav-enum';
+import {KitTypeEnum} from 'lib/component/dsm/kitType/enums/kitType-enum';
+import KitUploadPage from 'pages/dsm/kitUpload-page/kitUpload-page';
+import InitialScanPage from 'pages/dsm/initialScan-page';
+import FinalScanPage from 'pages/dsm/finalScan-page';
+import KitsSentPage from 'pages/dsm/kitsSentPage';
+import crypto from 'crypto';
+import SampleInformationTab from 'lib/component/dsm/tabs/sampleInformationTab';
+import {SampleInfoEnum} from 'lib/component/dsm/tabs/enums/sampleInfo-enum';
+import {SampleStatusEnum} from 'lib/component/dsm/tabs/enums/sampleStatus-enum';
 
 /**
  * @TODO
@@ -29,7 +29,7 @@ import {SampleStatusEnum} from "lib/component/dsm/tabs/enums/sampleStatus-enum";
  * 3. make more reusable
  * 4. walk through questions
  */
-test.describe('Saliva Kits upload flow (OC PE-CGS)', () => {
+test.describe.only('Saliva Kits upload flow (OC PE-CGS)', () => {
   let welcomePage: WelcomePage;
   let homePage: HomePage;
   let navigation: Navigation;
@@ -55,7 +55,7 @@ test.describe('Saliva Kits upload flow (OC PE-CGS)', () => {
     await homePage.assertSelectedStudyTitle(StudyEnum.OSTEO2);
   });
 
-  test("Should upload a single kit for one participant @visual @dsm @osteo", async ({page}) => {
+  test('Should upload a single kit for one participant @visual @dsm @osteo', async ({page}) => {
     // Collects all the necessary data for kit upload
     const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
     await participantListPage.assertPageTitle();

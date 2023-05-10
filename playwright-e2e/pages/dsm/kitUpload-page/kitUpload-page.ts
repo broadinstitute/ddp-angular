@@ -1,10 +1,10 @@
-import {expect, Locator, Page, Response} from "@playwright/test";
-import {KitType} from "lib/component/dsm/kitType/kitType";
-import {KitTypeEnum} from "lib/component/dsm/kitType/enums/kitType-enum";
-import {waitForNoSpinner, waitForResponse} from "utils/test-utils";
-import {crateTextFileSync, deleteFileSync} from "utils/file-utils";
-import {KitUploadInfo} from "pages/dsm/kitUpload-page/models/kitUpload-model";
-import {StudyEnum} from "lib/component/dsm/navigation/enums/selectStudyNav-enum";
+import {expect, Locator, Page, Response} from '@playwright/test';
+import {KitType} from 'lib/component/dsm/kitType/kitType';
+import {KitTypeEnum} from 'lib/component/dsm/kitType/enums/kitType-enum';
+import {waitForNoSpinner, waitForResponse} from 'utils/test-utils';
+import {crateTextFileSync, deleteFileSync} from 'utils/file-utils';
+import {KitUploadInfo} from 'pages/dsm/kitUpload-page/models/kitUpload-model';
+import {StudyEnum} from 'lib/component/dsm/navigation/enums/selectStudyNav-enum';
 
 enum KitUploadResponseEnum {
   INVALID_KIT_ADDRESS_LIST = 'invalidKitAddressList',
@@ -61,7 +61,7 @@ export default class KitUploadPage {
       .toBeDisabled();
 
     const duplicatedKitsCount: number = await this.page.locator(this.modalBodyContentCheckboxesXPath).count();
-    for(let dupKit = 0; dupKit < duplicatedKitsCount; dupKit++) {
+    for (let dupKit = 0; dupKit < duplicatedKitsCount; dupKit++) {
       await this.page.locator(this.modalBodyContentCheckboxesXPath).nth(dupKit).click();
     }
     const uploadKitButton = this.page.locator(this.modalUploadKitBtnXPath);
@@ -77,8 +77,8 @@ export default class KitUploadPage {
     const response = await this.waitForKitUploadResponse();
     const responseBody: KitUploadResponse = JSON.parse(await response.text());
 
-    for(let [key, value] of Object.entries(responseBody)) {
-      if(value instanceof Array && value.length) {
+    for (const [key, value] of Object.entries(responseBody)) {
+      if (value instanceof Array && value.length) {
         key === KitUploadResponseEnum.DUPLICATED_KIT_LIST ? await this.handleDuplicatedKits() :
           await expect(value.length, `Kit Upload page - Couldn't upload kits - ${key} is not empty`)
             .toEqual(0)
@@ -122,7 +122,7 @@ export default class KitUploadPage {
   public async assertDisplayedKitTypes(kitTypes: KitTypeEnum[]): Promise<void> {
     await waitForResponse(this.page, {uri: '/kitTypes'});
     await waitForNoSpinner(this.page);
-    for(let kitType of kitTypes) {
+    for (const kitType of kitTypes) {
       await expect(this.kitType.displayedKitType(kitType),
         'Kit Upload page - Displayed kit types checkboxes are wrong').toBeVisible()
     }
@@ -150,18 +150,18 @@ export default class KitUploadPage {
   }
 
   private get modalHeaderXPath(): string {
-    return this.modalContentXPath + "//div[@class='modal-header']"
+    return `${this.modalContentXPath}//div[@class='modal-header']`
   }
 
   private get modalFooterXPath(): string {
-    return this.modalContentXPath + "//div[@class='modal-footer']"
+    return `${this.modalContentXPath}//div[@class='modal-footer']`
   }
 
   private get modalUploadKitBtnXPath(): string {
-    return this.modalFooterXPath + "//button[text()[normalize-space()='Upload Kit']]"
+    return `${this.modalFooterXPath}//button[text()[normalize-space()='Upload Kit']]`
   }
 
   private get modalBodyContentCheckboxesXPath(): string {
-    return this.modalContentXPath + "/div[@class='modal-body']/div[@class='app-modal-body']/div/mat-checkbox"
+    return `${this.modalContentXPath}/div[@class='modal-body']/div[@class='app-modal-body']/div/mat-checkbox`
   }
 }
