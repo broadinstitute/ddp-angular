@@ -55,7 +55,7 @@ test.describe('Saliva Kits upload flow (OC PE-CGS)', () => {
     await homePage.assertSelectedStudyTitle(StudyEnum.OSTEO2);
   });
 
-  test('Should upload a single kit for one participant @visual @dsm @osteo', async ({page}) => {
+  test('Should upload a single kit for one participant @functional @visual @dsm @osteo', async ({page}) => {
     // Collects all the necessary data for kit upload
     const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
     await participantListPage.assertPageTitle();
