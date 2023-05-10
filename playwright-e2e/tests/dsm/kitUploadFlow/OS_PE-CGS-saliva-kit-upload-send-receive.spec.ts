@@ -29,7 +29,7 @@ import {SampleStatusEnum} from 'lib/component/dsm/tabs/enums/sampleStatus-enum';
  * 3. make more reusable
  * 4. walk through questions
  */
-test.describe.only('Saliva Kits upload flow (OC PE-CGS)', () => {
+test.describe('Saliva Kits upload flow (OC PE-CGS)', () => {
   let welcomePage: WelcomePage;
   let homePage: HomePage;
   let navigation: Navigation;
