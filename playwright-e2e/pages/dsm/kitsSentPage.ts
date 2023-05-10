@@ -46,9 +46,9 @@ export default class KitsSentPage {
   }
 
   public async assertTableHeader() {
-    await expect(await this.kitsTable.header.screenshot(),
+    expect(await this.kitsTable.header.screenshot(),
       "Kits Sent page - Table header columns screenshot doesn't match the provided one (Kits without label)")
-      .toMatchSnapshot(`kits_sent_table_header.png`);
+      .toMatchSnapshot('kits_sent_table_header.png');
   }
 
   public async assertDisplayedRowsCount(count: number): Promise<void> {

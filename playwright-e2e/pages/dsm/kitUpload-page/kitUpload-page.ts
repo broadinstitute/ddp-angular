@@ -114,9 +114,9 @@ export default class KitUploadPage {
   }
 
   public async assertInstructionSnapshot() {
-    await expect(await this.page.locator(this.uploadInstructionsXPath).screenshot(),
+    expect(await this.page.locator(this.uploadInstructionsXPath).screenshot(),
       "Kit Upload page - Kit upload instructions screenshot doesn't match the provided one")
-      .toMatchSnapshot(`upload_instructions.png`);
+      .toMatchSnapshot('upload_instructions.png');
   }
 
   public async assertDisplayedKitTypes(kitTypes: KitTypeEnum[]): Promise<void> {

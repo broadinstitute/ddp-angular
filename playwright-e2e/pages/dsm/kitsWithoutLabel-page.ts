@@ -77,9 +77,9 @@ export default class KitsWithoutLabelPage {
   }
 
   public async assertTableHeader() {
-    await expect(await this.kitsTable.header.screenshot(),
+    expect(await this.kitsTable.header.screenshot(),
       "Kits Without Label page - Table header columns screenshot doesn't match the provided one")
-      .toMatchSnapshot(`kits_without_label_table_header.png`);
+      .toMatchSnapshot('kits_without_label_table_header.png');
   }
 
   /* XPaths */
