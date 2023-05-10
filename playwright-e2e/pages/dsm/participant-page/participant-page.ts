@@ -90,10 +90,6 @@ export default class ParticipantPage {
     return this.page.locator('//table[.//td[contains(normalize-space(),"Participant Notes")]]//td/textarea');
   }
 
-  private get title(): Locator {
-    return this.page.locator('h1');
-  }
-
   /* XPaths */
   private getMainTextInfoXPath(info: MainInfoEnum) {
     return this.getMainInfoXPath(info);
@@ -113,10 +109,13 @@ export default class ParticipantPage {
 
   /* assertions */
   public async assertPageTitle(): Promise<void> {
-    await expect(this.title).toHaveText(this.PAGE_TITLE, { timeout: 5 * 1000 });
+    await expect(this.page.locator('h1'), "Participant page - page title doesn't match the expected one")
+      .toHaveText(this.PAGE_TITLE, { timeout: 5 * 1000 });
   }
 
   public async assertNotesToBe(value: string): Promise<void> {
-    await expect(await this.notes.inputValue()).toBe(value);
+    await expect(await this.notes.inputValue(),
+      "Participant page - participant's value doesn't match the provided one")
+      .toBe(value);
   }
 }

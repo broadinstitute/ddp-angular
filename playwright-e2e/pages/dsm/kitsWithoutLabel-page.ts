@@ -59,9 +59,10 @@ export default class KitsWithoutLabelPage {
   }
 
   /* Assertions */
-  public async assertTitle() {
+  public async assertPageTitle() {
     await expect(this.page.locator('h1'),
-      "Kits Without Label page - page title is wrong").toHaveText(this.PAGE_TITLE);
+      "Kits Without Label page - page title doesn't match the expected one")
+      .toHaveText(this.PAGE_TITLE);
   }
 
   public async assertReloadKitListBtn() {

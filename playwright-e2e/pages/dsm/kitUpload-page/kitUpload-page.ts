@@ -3,7 +3,7 @@ import {KitType} from "lib/component/dsm/kitType/kitType";
 import {KitTypeEnum} from "lib/component/dsm/kitType/enums/kitType-enum";
 import {waitForNoSpinner, waitForResponse} from "utils/test-utils";
 import {crateTextFileSync, deleteFileSync} from "utils/file-utils";
-import {KitUploadInfo} from "models/dsm/kitUpload-model";
+import {KitUploadInfo} from "pages/dsm/kitUpload-page/models/kitUpload-model";
 import {StudyEnum} from "lib/component/dsm/navigation/enums/selectStudyNav-enum";
 
 enum KitUploadResponseEnum {
@@ -38,14 +38,14 @@ export default class KitUploadPage {
     crateTextFileSync(path, this.T_HEAD + this.createKitUploadBody(kitInfo));
     await this.fileInput.setInputFiles(path);
 
-    await expect(this.uploadKitsBtn, 'Upload Kits button is disabled').toBeEnabled();
+    await expect(this.uploadKitsBtn, 'Kit Upload page - Upload Kits button is disabled').toBeEnabled();
 
     await this.uploadKitsBtn.click();
     await this.handleKitUploadResponse();
     await waitForNoSpinner(this.page);
 
     await expect(await this.page.locator('h3')
-      .textContent(), "Couldn't upload kits - something went wrong")
+      .textContent(), "Kit Upload page - Couldn't upload kits - something went wrong")
       .toEqual('All participants were uploaded.');
 
     deleteFileSync(path);
@@ -53,9 +53,11 @@ export default class KitUploadPage {
 
   /* Helper functions */
   private async handleDuplicatedKits(): Promise<void> {
-    await expect(this.page.locator(this.modalContentXPath), 'Duplicated kits modal is not visible')
+    await expect(this.page.locator(this.modalContentXPath),
+      'Kit Upload page - Duplicated kits modal is not visible')
       .toBeVisible();
-    await expect(this.page.locator(this.modalUploadKitBtnXPath), 'Upload Kit button is enabled')
+    await expect(this.page.locator(this.modalUploadKitBtnXPath),
+      'Kit Upload page - Upload Kit button is enabled')
       .toBeDisabled();
 
     const duplicatedKitsCount: number = await this.page.locator(this.modalBodyContentCheckboxesXPath).count();
@@ -64,7 +66,7 @@ export default class KitUploadPage {
     }
     const uploadKitButton = this.page.locator(this.modalUploadKitBtnXPath);
 
-    await expect(uploadKitButton, 'Upload Kit button is disabled').toBeEnabled();
+    await expect(uploadKitButton, 'Kit Upload page - Upload Kit button is disabled').toBeEnabled();
 
     await uploadKitButton.click();
     await this.waitForKitUploadResponse();
@@ -78,7 +80,8 @@ export default class KitUploadPage {
     for(let [key, value] of Object.entries(responseBody)) {
       if(value instanceof Array && value.length) {
         key === KitUploadResponseEnum.DUPLICATED_KIT_LIST ? await this.handleDuplicatedKits() :
-          await expect(value.length, `Couldn't upload kits - ${key} is not empty`).toEqual(0)
+          await expect(value.length, `Kit Upload page - Couldn't upload kits - ${key} is not empty`)
+            .toEqual(0)
       }
     }
   }
@@ -104,13 +107,15 @@ export default class KitUploadPage {
   }
 
   /* Assertions */
-  public async assertTitle() {
-    await expect(this.page.locator('h1')).toHaveText(this.PAGE_TITLE);
+  public async assertPageTitle() {
+    await expect(this.page.locator('h1'),
+      "Kit Upload page - page title doesn't match the expected one")
+      .toHaveText(this.PAGE_TITLE);
   }
 
   public async assertInstructionSnapshot() {
     await expect(await this.page.locator(this.uploadInstructionsXPath).screenshot(),
-      "Kit upload instructions screenshot doesn't match the provided one")
+      "Kit Upload page - Kit upload instructions screenshot doesn't match the provided one")
       .toMatchSnapshot(`upload_instructions.png`);
   }
 
@@ -119,18 +124,19 @@ export default class KitUploadPage {
     await waitForNoSpinner(this.page);
     for(let kitType of kitTypes) {
       await expect(this.kitType.displayedKitType(kitType),
-        'Displayed kit types checkboxes are wrong').toBeVisible()
+        'Kit Upload page - Displayed kit types checkboxes are wrong').toBeVisible()
     }
   }
 
   public async assertBrowseBtn(): Promise<void> {
     await expect(this.page.locator('//label[text()[normalize-space()=\'Browse...\']][@class=\'label-button\']'),
-      'Browse button is not visible')
+      'Kit Upload page - Browse button is not visible')
       .toBeVisible();
   }
 
   public async assertUploadKitsBtn(): Promise<void> {
-    await expect(this.page.getByText('Upload Kits'), 'Kit Uploads button is not visible')
+    await expect(this.page.getByText('Upload Kits'),
+      'Kit Upload page - Kit Uploads button is not visible')
       .toBeVisible();
   }
 

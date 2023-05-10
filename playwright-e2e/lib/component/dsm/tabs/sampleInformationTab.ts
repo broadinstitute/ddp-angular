@@ -44,7 +44,7 @@ export default class SampleInformationTab {
       sampleInformationInstance.deactivated = (await this.deactivatedText(s))?.trim() || '';
 
       for(let [key, sampleInfoName] of Object.entries(textsValues)) {
-        sampleInformationInstance[key as keyof SampleInformation] = (await this.textAtFor(s, sampleInfoName))?.trim() || ''
+        sampleInformationInstance[key as keyof SampleInformation] = (await this.textAtFor(s, sampleInfoName))?.trim() || '';
       }
 
       for(let [key, sampleInfoName] of Object.entries(inputValues)) {
@@ -57,19 +57,20 @@ export default class SampleInformationTab {
   }
 
   /* Helper Functions */
-  private valueAtFor(at: number, sampleInfo: SampleInfoEnum): Promise<string> {
-    return this.sampleFieldset.nth(at).locator(this.getSampleInfoForXPath(sampleInfo))
-      .locator('input').inputValue();
+  private async valueAtFor(at: number, sampleInfo: SampleInfoEnum): Promise<string> {
+    const element = this.sampleFieldset.nth(at).locator(this.getSampleInfoForXPath(sampleInfo))
+      .locator('input');
+    return await element.isVisible() ? element.inputValue() : '';
   }
 
-  private textAtFor(at: number, sampleInfo: SampleInfoEnum): Promise<string | null> {
-    return this.sampleFieldset.nth(at).locator(this.getSampleInfoForXPath(sampleInfo)).textContent();
+  private async textAtFor(at: number, sampleInfo: SampleInfoEnum): Promise<string | null> {
+    const element = this.sampleFieldset.nth(at).locator(this.getSampleInfoForXPath(sampleInfo));
+    return await element.isVisible() ?  element.textContent() : '';
   }
 
   private async selectionAtFor(at: number, sampleInfo: SampleInfoEnum): Promise<string | null> {
     const selection = this.sampleFieldset.nth(at).locator(this.getSampleInfoForXPath(sampleInfo) + '//span')
       .locator('span');
-
     return await selection.isVisible() ? selection.textContent() : '';
   }
 

@@ -23,7 +23,7 @@ export default class FinalScanPage {
 
   public async save(): Promise<void> {
     const saveButton = await this.page.locator(this.saveButtonXPath);
-    await expect(saveButton, 'Save Scan Pairs button is not enabled').toBeEnabled();
+    await expect(saveButton, 'Final Scan page - Save Scan Pairs button is not enabled').toBeEnabled();
 
     await saveButton.focus();
     await saveButton.click();
@@ -33,15 +33,18 @@ export default class FinalScanPage {
     const textUnderScanPair = this.page.locator(this.textUnderScanPairXPath);
     const textUnderScanPairCount = await textUnderScanPair.count();
     for(let t = 0; t < textUnderScanPairCount; t++) {
-      await expect(await textUnderScanPair.textContent(), 'All kits have not been scanned successfully')
+      await expect(await textUnderScanPair.textContent(),
+        'Final Scan page - All kits have not been scanned successfully')
         .toContain('Scanned successfully for');
     }
   }
 
 
   /* Assertions */
-  public async assertTitle() {
-    await expect(this.page.locator('h1')).toHaveText(this.PAGE_TITLE);
+  public async assertPageTitle() {
+    await expect(this.page.locator('h1'),
+      "Final Scan page - page title doesn't match the expected one")
+      .toHaveText(this.PAGE_TITLE);
   }
 
   /* XPaths */

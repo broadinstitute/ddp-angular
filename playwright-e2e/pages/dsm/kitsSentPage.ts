@@ -24,7 +24,7 @@ export default class KitsSentPage {
   }
 
   /* Assertions */
-  public async assertTitle() {
+  public async assertPageTitle() {
     await expect(this.page.locator('h1'),
       "Kits Sent page - page title is wrong")
       .toHaveText(this.PAGE_TITLE);
