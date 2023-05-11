@@ -22,14 +22,7 @@ import SampleInformationTab from 'lib/component/dsm/tabs/sampleInformationTab';
 import {SampleInfoEnum} from 'lib/component/dsm/tabs/enums/sampleInfo-enum';
 import {SampleStatusEnum} from 'lib/component/dsm/tabs/enums/sampleStatus-enum';
 
-/**
- * @TODO
- * 1. cleanup code
- * 2. error texts on assertions
- * 3. make more reusable
- * 4. walk through questions
- */
-test.describe.only('Saliva Kits upload flow (OC PE-CGS)', () => {
+test.describe('Saliva Kits upload flow (OC PE-CGS)', () => {
   let welcomePage: WelcomePage;
   let homePage: HomePage;
   let navigation: Navigation;
@@ -71,6 +64,7 @@ test.describe.only('Saliva Kits upload flow (OC PE-CGS)', () => {
       await participantPage.getLastName(),
     );
 
+    // collects data from the contact information tab if the tab is available
     if(isContactInformationTabVisible) {
       const contactInformationTab = await participantPage.clickTab<ContactInformationTab>(TabEnum.CONTACT_INFORMATION);
       kitUploadInfo.street1 = await contactInformationTab.getStreet1();
