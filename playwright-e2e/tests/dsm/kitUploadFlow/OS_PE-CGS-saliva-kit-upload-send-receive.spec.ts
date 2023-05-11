@@ -65,7 +65,7 @@ test.describe('Saliva Kits upload flow (OC PE-CGS)', () => {
     );
 
     // collects data from the contact information tab if the tab is available
-    if(isContactInformationTabVisible) {
+    if (isContactInformationTabVisible) {
       const contactInformationTab = await participantPage.clickTab<ContactInformationTab>(TabEnum.CONTACT_INFORMATION);
       kitUploadInfo.street1 = await contactInformationTab.getStreet1();
       kitUploadInfo.city = await contactInformationTab.getCity();

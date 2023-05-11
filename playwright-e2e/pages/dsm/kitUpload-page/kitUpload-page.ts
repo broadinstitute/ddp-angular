@@ -68,8 +68,8 @@ export default class KitUploadPage {
     const responseBody: KitUploadResponse = JSON.parse(await response.text());
 
     for (const [key, value] of Object.entries(responseBody)) {
-      if(value instanceof Array && value.length) {
-        if(key == kitUploadResponseEnum.INVALID_KIT_ADDRESS_LIST) {
+      if (value instanceof Array && value.length) {
+        if (key === kitUploadResponseEnum.INVALID_KIT_ADDRESS_LIST) {
           throw new Error('Invalid kit addresses array is not empty');
         } else {
           await this.handleDuplicatedOrSpecialKits();
