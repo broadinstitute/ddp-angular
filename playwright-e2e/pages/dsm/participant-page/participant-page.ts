@@ -68,8 +68,14 @@ export default class ParticipantPage {
     return await this.readMainTextInfoFor(MainInfoEnum.PREFERRED_LANGUAGE) || '';
   }
 
+  public async isTabVisible(tabName: TabEnum): Promise<boolean> {
+    return await this.tabs.isTabVisible(tabName);
+  }
+
   public async clickTab<T extends object>(tabName: TabEnum): Promise<T> {
-    return await this.tabs.clickTab(tabName) as T;
+    await expect(this.tabs.tabLocator(tabName), `The tab '${tabName}' is not visible`)
+      .toBeVisible();
+    return await this.tabs.clickTab<T>(tabName) as T;
   }
 
   private async readMainTextInfoFor(key: MainInfoEnum): Promise<string | null> {

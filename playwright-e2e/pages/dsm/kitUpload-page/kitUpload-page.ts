@@ -6,7 +6,7 @@ import {crateTextFileSync, deleteFileSync} from 'utils/file-utils';
 import {KitUploadInfo} from 'pages/dsm/kitUpload-page/models/kitUpload-model';
 import {StudyEnum} from 'lib/component/dsm/navigation/enums/selectStudyNav-enum';
 
-enum KitUploadResponseEnum {
+enum kitUploadResponseEnum {
   INVALID_KIT_ADDRESS_LIST = 'invalidKitAddressList',
   DUPLICATED_KIT_LIST = 'duplicateKitList',
   SPECIAL_KIT_LIST = 'specialKitList',
@@ -52,7 +52,33 @@ export default class KitUploadPage {
   }
 
   /* Helper functions */
-  private async handleDuplicatedKits(): Promise<void> {
+  private createKitUploadBody(kitInfo: KitUploadInfo[]): string {
+    return kitInfo.map((kitInfo: KitUploadInfo) => {
+      const {shortId, firstName, lastName, street1, street2, city, postalCode, state, country} = kitInfo;
+      return `\n${shortId}\t${firstName}\t${lastName}\t${street1}\t${street2}\t${city}\t${postalCode}\t${state}\t${country}`;
+    }).join();
+  }
+
+  private waitForKitUploadResponse(): Promise<Response> {
+    return waitForResponse(this.page, {uri: '/kitUpload'});
+  }
+
+  private async handleKitUploadResponse(): Promise<void> {
+    const response = await this.waitForKitUploadResponse();
+    const responseBody: KitUploadResponse = JSON.parse(await response.text());
+
+    for (const [key, value] of Object.entries(responseBody)) {
+      if(value instanceof Array && value.length) {
+        if(key == kitUploadResponseEnum.INVALID_KIT_ADDRESS_LIST) {
+          throw new Error('Invalid kit addresses array is not empty');
+        } else {
+          await this.handleDuplicatedOrSpecialKits();
+        }
+      }
+    }
+  }
+
+  private async handleDuplicatedOrSpecialKits(): Promise<void> {
     await expect(this.page.locator(this.modalContentXPath),
       'Kit Upload page - Duplicated kits modal is not visible')
       .toBeVisible();
@@ -71,30 +97,6 @@ export default class KitUploadPage {
     await uploadKitButton.click();
     await this.waitForKitUploadResponse();
     await waitForNoSpinner(this.page);
-  }
-
-  private async handleKitUploadResponse(): Promise<void> {
-    const response = await this.waitForKitUploadResponse();
-    const responseBody: KitUploadResponse = JSON.parse(await response.text());
-
-    for (const [key, value] of Object.entries(responseBody)) {
-      if (value instanceof Array && value.length) {
-        key === KitUploadResponseEnum.DUPLICATED_KIT_LIST ? await this.handleDuplicatedKits() :
-          await expect(value.length, `Kit Upload page - Couldn't upload kits - ${key} is not empty`)
-            .toEqual(0)
-      }
-    }
-  }
-
-  private createKitUploadBody(kitInfo: KitUploadInfo[]): string {
-    return kitInfo.map((kitInfo: KitUploadInfo) => {
-      const {shortId, firstName, lastName, street1, street2, city, postalCode, state, country} = kitInfo;
-      return `\n${shortId}\t${firstName}\t${lastName}\t${street1}\t${street2}\t${city}\t${postalCode}\t${state}\t${country}`;
-    }).join();
-  }
-
-  private waitForKitUploadResponse(): Promise<Response> {
-    return waitForResponse(this.page, {uri: '/kitUpload'});
   }
 
   /* Locators */

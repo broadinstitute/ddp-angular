@@ -29,7 +29,7 @@ import {SampleStatusEnum} from 'lib/component/dsm/tabs/enums/sampleStatus-enum';
  * 3. make more reusable
  * 4. walk through questions
  */
-test.describe('Saliva Kits upload flow (OC PE-CGS)', () => {
+test.describe.only('Saliva Kits upload flow (OC PE-CGS)', () => {
   let welcomePage: WelcomePage;
   let homePage: HomePage;
   let navigation: Navigation;
@@ -64,18 +64,21 @@ test.describe('Saliva Kits upload flow (OC PE-CGS)', () => {
     await participantPage.assertPageTitle();
     shortID = await participantPage.getShortId();
 
-    const contactInformationTab = await participantPage.clickTab<ContactInformationTab>(TabEnum.CONTACT_INFORMATION);
+    const isContactInformationTabVisible = await participantPage.isTabVisible(TabEnum.CONTACT_INFORMATION);
     kitUploadInfo = new KitUploadInfo(
       shortID,
       await participantPage.getFirstName(),
       await participantPage.getLastName(),
-      await contactInformationTab.getStreet1(),
-      '',
-      await contactInformationTab.getCity(),
-      await contactInformationTab.getZip(),
-      await contactInformationTab.getState(),
-      await contactInformationTab.getCountry()
     );
+
+    if(isContactInformationTabVisible) {
+      const contactInformationTab = await participantPage.clickTab<ContactInformationTab>(TabEnum.CONTACT_INFORMATION);
+      kitUploadInfo.street1 = await contactInformationTab.getStreet1();
+      kitUploadInfo.city = await contactInformationTab.getCity();
+      kitUploadInfo.postalCode = await contactInformationTab.getZip();
+      kitUploadInfo.state = await contactInformationTab.getState();
+      kitUploadInfo.country = await contactInformationTab.getCountry();
+    }
 
     // deactivate all kits for the participant
     const kitsWithoutLabelPage = await navigation.selectFromSamples<KitsWithoutLabelPage>(SamplesNavEnum.KITS_WITHOUT_LABELS);
