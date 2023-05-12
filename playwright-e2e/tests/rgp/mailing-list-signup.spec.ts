@@ -48,7 +48,7 @@ test.describe.serial('When an interested participant does NOT meet participation
   });
 
   test('The email signed up can be found in DSM @visual @enrollment @rgp',
-    async ({ page }) => {
+    async ({ page, request }) => {
       const TABLE_COLUMN_EMAIL = 'Email'
       const TABLE_COLUMN_DATE_SIGNED_UP = 'Date signed up';
       await login(page);
@@ -56,7 +56,7 @@ test.describe.serial('When an interested participant does NOT meet participation
       const welcomePage = new WelcomePage(page);
       await welcomePage.selectStudy(StudyEnum.RGP);
 
-      const navigation = new Navigation(page);
+      const navigation = new Navigation(page, request);
       await navigation.selectMiscellaneous(MiscellaneousEnum.MAILING_LIST);
 
       const table = new Table(page, { cssClassAttribute: '.table'});
