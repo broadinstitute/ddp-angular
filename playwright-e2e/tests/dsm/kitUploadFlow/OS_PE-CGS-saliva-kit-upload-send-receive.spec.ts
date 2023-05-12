@@ -19,10 +19,10 @@ import crypto from 'crypto';
 import SampleInformationTab from 'lib/component/dsm/tabs/sampleInformationTab';
 import {SampleInfoEnum} from 'lib/component/dsm/tabs/enums/sampleInfo-enum';
 import {SampleStatusEnum} from 'lib/component/dsm/tabs/enums/sampleStatus-enum';
-import KitsWithoutLabelPage from "pages/dsm/kitsInfo-pages/kitsWithoutLabel-page";
-import {KitsColumnsEnum} from "pages/dsm/kitsInfo-pages/enums/kitsColumns-enum";
-import KitsSentPage from "pages/dsm/kitsInfo-pages/kitsSentPage";
-import KitsReceivedPage from "pages/dsm/kitsInfo-pages/kitsReceived-page/kitsReceivedPage";
+import KitsWithoutLabelPage from 'pages/dsm/kitsInfo-pages/kitsWithoutLabel-page';
+import {KitsColumnsEnum} from 'pages/dsm/kitsInfo-pages/enums/kitsColumns-enum';
+import KitsSentPage from 'pages/dsm/kitsInfo-pages/kitsSentPage';
+import KitsReceivedPage from 'pages/dsm/kitsInfo-pages/kitsReceived-page/kitsReceivedPage';
 
 
 /**

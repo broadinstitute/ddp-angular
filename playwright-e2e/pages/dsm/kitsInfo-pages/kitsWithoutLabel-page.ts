@@ -3,7 +3,7 @@ import {KitType} from 'lib/component/dsm/kitType/kitType';
 import {KitTypeEnum} from 'lib/component/dsm/kitType/enums/kitType-enum';
 import {waitForNoSpinner, waitForResponse} from 'utils/test-utils';
 import {KitsTable} from 'lib/component/dsm/tables/kitsTable';
-import {KitsColumnsEnum} from "./enums/kitsColumns-enum";
+import {KitsColumnsEnum} from './enums/kitsColumns-enum';
 
 
 export default class KitsWithoutLabelPage {
@@ -14,7 +14,7 @@ export default class KitsWithoutLabelPage {
   constructor(private readonly page: Page) {}
 
   public async waitForLoad(): Promise<void> {
-    await this.page.waitForLoadState("networkidle");
+    await this.page.waitForLoadState('networkidle');
     await waitForNoSpinner(this.page);
   }
 

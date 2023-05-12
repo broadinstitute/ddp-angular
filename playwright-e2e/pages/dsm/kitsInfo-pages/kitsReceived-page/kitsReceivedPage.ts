@@ -3,9 +3,9 @@ import {KitsTable} from 'lib/component/dsm/tables/kitsTable';
 import {expect, Page} from '@playwright/test';
 import {KitTypeEnum} from 'lib/component/dsm/kitType/enums/kitType-enum';
 import {waitForNoSpinner, waitForResponse} from 'utils/test-utils';
-import {getRequest} from "utils/api-utils";
-import {KitsReceivedResponse} from "./interfaces/kitsReceivedResponse";
-import {KitsColumnsEnum} from "../enums/kitsColumns-enum";
+import {getRequest} from 'utils/api-utils';
+import {KitsReceivedResponse} from './interfaces/kitsReceivedResponse';
+import {KitsColumnsEnum} from '../enums/kitsColumns-enum';
 
 const { BSP_TOKEN } = process.env;
 
@@ -19,7 +19,7 @@ export default class KitsReceivedPage {
   }
 
   public async waitForLoad(): Promise<void> {
-    await this.page.waitForLoadState("networkidle");
+    await this.page.waitForLoadState('networkidle');
     await waitForNoSpinner(this.page);
   }
 
@@ -31,7 +31,7 @@ export default class KitsReceivedPage {
   }
 
   public async kitReceivedRequest(kitLabel: string): Promise<void> {
-    if(!BSP_TOKEN) {
+    if (!BSP_TOKEN) {
       throw Error('Invalid parameter: DSM BSP token is not provided.');
     }
     const response = await getRequest(`/ddp/ClinicalKits/${kitLabel}`, {

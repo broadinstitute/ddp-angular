@@ -5,8 +5,8 @@ import {waitForNoSpinner, waitForResponse} from 'utils/test-utils';
 import {crateTextFileSync, deleteFileSync} from 'utils/file-utils';
 import {KitUploadInfo} from 'pages/dsm/kitUpload-page/models/kitUpload-model';
 import {StudyEnum} from 'lib/component/dsm/navigation/enums/selectStudyNav-enum';
-import {KitUploadResponse} from "./interfaces/kitUpload";
-import {kitUploadResponseEnum} from "./enums/kitUploadResponse-enum";
+import {KitUploadResponse} from './interfaces/kitUpload';
+import {kitUploadResponseEnum} from './enums/kitUploadResponse-enum';
 
 export default class KitUploadPage {
   private readonly PAGE_TITLE = 'Kit Upload';
@@ -17,7 +17,7 @@ export default class KitUploadPage {
   }
 
   public async waitForLoad(): Promise<void> {
-    await this.page.waitForLoadState("networkidle");
+    await this.page.waitForLoadState('networkidle');
     await waitForNoSpinner(this.page);
   }
 

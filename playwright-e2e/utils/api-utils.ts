@@ -1,8 +1,8 @@
 import { promises as fsPromises } from 'fs';
 import path from 'path';
 import { APP } from 'data/constants';
-import {APIResponse, request} from "playwright-core";
-import {Serializable} from "playwright-core/types/structs";
+import {APIResponse, request} from 'playwright-core';
+import {Serializable} from 'playwright-core/types/structs';
 
 const { DSM_BASE_URL } = process.env;
 

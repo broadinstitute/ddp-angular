@@ -1,5 +1,5 @@
 import {expect, Locator, Page} from '@playwright/test';
-import {KitsColumnsEnum} from "pages/dsm/kitsInfo-pages/enums/kitsColumns-enum";
+import {KitsColumnsEnum} from 'pages/dsm/kitsInfo-pages/enums/kitsColumns-enum';
 
 
 export class KitsTable {

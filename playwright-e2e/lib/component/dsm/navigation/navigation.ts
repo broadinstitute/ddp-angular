@@ -13,7 +13,7 @@ import KitUploadPage from 'pages/dsm/kitUpload-page/kitUpload-page';
 import {MiscellaneousEnum} from 'lib/component/dsm/navigation/enums/miscellaneousNav-enum';
 import KitsSentPage from 'pages/dsm/kitsInfo-pages/kitsSentPage';
 import KitsReceivedPage from 'pages/dsm/kitsInfo-pages/kitsReceived-page/kitsReceivedPage';
-import {waitForNoSpinner} from "utils/test-utils";
+import {waitForNoSpinner} from 'utils/test-utils';
 
 
 type Selection = StudyNavEnum | StudyEnum | SamplesNavEnum | MiscellaneousEnum;
