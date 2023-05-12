@@ -43,11 +43,11 @@ test.describe('Saliva Kits upload flow (OC PE-CGS)', () => {
   const kitType = KitTypeEnum.SALIVA;
   const expectedKitTypes = [KitTypeEnum.SALIVA, KitTypeEnum.BLOOD];
 
-  test.beforeEach(async ({ page }) => {
+  test.beforeEach(async ({ page, request }) => {
     await login(page);
     welcomePage = new WelcomePage(page);
     homePage = new HomePage(page);
-    navigation = new Navigation(page);
+    navigation = new Navigation(page, request);
   });
 
   test.beforeEach(async () => {
@@ -149,6 +149,7 @@ test.describe('Saliva Kits upload flow (OC PE-CGS)', () => {
     await kitsReceivedPage.assertTableHeader();
     await kitsReceivedPage.search(KitsColumnsEnum.MF_CODE, kitLabel);
     await kitsReceivedPage.assertDisplayedRowsCount(1);
+    const receivedDate = await kitsReceivedPage.getData(KitsColumnsEnum.RECEIVED);
 
     // checks if the uploaded kit is displayed on the participant's page, in the sample information tab
     await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
@@ -160,8 +161,10 @@ test.describe('Saliva Kits upload flow (OC PE-CGS)', () => {
     await participantListTable.openParticipantPageAt(0);
     await participantPage.assertPageTitle();
     const sampleInformationTab = await participantPage.clickTab<SampleInformationTab>(TabEnum.SAMPLE_INFORMATION);
+    await sampleInformationTab.assertKitType(kitLabel, kitType)
     await sampleInformationTab
-      .assertSampleByMFBarcode(kitLabel, kitType,
-        {info: SampleInfoEnum.STATUS, value: SampleStatusEnum.RECEIVED})
+      .assertValue(kitLabel, {info: SampleInfoEnum.STATUS, value: SampleStatusEnum.RECEIVED})
+    await sampleInformationTab
+      .assertValue(kitLabel, {info: SampleInfoEnum.RECEIVED, value: receivedDate})
   })
 })

@@ -83,8 +83,7 @@ export default class SampleInformationTab {
   }
 
   /* Assertions */
-  public async assertSampleByMFBarcode(MFBarcode: string, type: KitTypeEnum, {info, value}:
-    {info: SampleInfoEnum, value: string}): Promise<void> {
+  public async assertKitType(MFBarcode: string, type: KitTypeEnum): Promise<void> {
     const MFBarcodeXPath = this.getSampleByMFBarcodeXPath(MFBarcode);
 
     await expect(this.page.locator(MFBarcodeXPath),
@@ -93,10 +92,21 @@ export default class SampleInformationTab {
     await expect(await this.page.locator(MFBarcodeXPath + this.ancestorSampleTypeXPath).textContent(),
       `Provided MFBarcode (${MFBarcode}) has different sample type than - ${type}`)
       .toContain(type);
+  }
 
-    await expect(await this.page.locator(MFBarcodeXPath + this.ancestorSampleTextXPath(info)).textContent(),
+  public async assertValue(MFBarcode: string, {info, value}:
+    {info: SampleInfoEnum, value: string}): Promise<void> {
+    const MFBarcodeXPath = this.getSampleByMFBarcodeXPath(MFBarcode);
+
+    await expect(this.page.locator(MFBarcodeXPath),
+      `MFBarcode - '${MFBarcode}' can't be found`).toBeVisible();
+
+    const textValue = await this.page.locator(MFBarcodeXPath + this.ancestorSampleTextXPath(info))
+      .textContent()
+
+    expect(textValue?.trim(),
       `Provided MFBarcode (${MFBarcode}) has different info in - ${info} (provided value: ${value})`)
-      .toContain(value);
+      .toContain(value.trim());
   }
 
   /* XPaths */

@@ -54,13 +54,13 @@ test.describe.serial('When an interested participant does NOT meet participation
     await page.locator('button[type="submit"]:has-text("Join Mailing List")').click();
   });
 
-  test('DSM download Mail List @visual @dsm @rgp', async ({ page }) => {
+  test('DSM download Mail List @visual @dsm @rgp', async ({ page, request }) => {
     await login(page);
 
     const welcomePage = new WelcomePage(page);
     await welcomePage.selectStudy(StudyEnum.RGP);
 
-    const navigation = new Navigation(page);
+    const navigation = new Navigation(page, request);
     const [mailListResponse] = await Promise.all([
       page.waitForResponse(response => response.url().includes('/ui/mailingList/RGP') && response.status() === 200),
       navigation.selectMiscellaneous(MiscellaneousEnum.MAILING_LIST)

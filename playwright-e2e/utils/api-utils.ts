@@ -1,17 +1,6 @@
 import { promises as fsPromises } from 'fs';
 import path from 'path';
 import { APP } from 'data/constants';
-import {APIResponse, request} from 'playwright-core';
-import {Serializable} from 'playwright-core/types/structs';
-
-const { DSM_BASE_URL } = process.env;
-
-interface requestOptions {
-  headers: { [key: string]: string };
-  params: { [key: string]: string|number|boolean; };
-  timeout: number;
-  data: string|Buffer|Serializable;
-}
 
 
 // Stores AUTH0 access token for targeted app.
@@ -162,10 +151,4 @@ export async function setAuth0UserEmailVerified(app: APP, email: string, opts: {
       console.error(`ERROR: PATCH /api/v2/users/${userId}\n`, err);
       throw err;
     });
-}
-
-
-export async function getRequest(uri: string, params: Partial<requestOptions>): Promise<APIResponse> {
-  const requestContext = await request.newContext({baseURL: DSM_BASE_URL});
-  return requestContext.get(uri, params);
 }

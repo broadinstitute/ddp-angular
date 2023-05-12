@@ -1,21 +1,19 @@
 import {KitType} from 'lib/component/dsm/kitType/kitType';
 import {KitsTable} from 'lib/component/dsm/tables/kitsTable';
-import {expect, Page} from '@playwright/test';
+import {APIRequestContext, expect, Page} from '@playwright/test';
 import {KitTypeEnum} from 'lib/component/dsm/kitType/enums/kitType-enum';
 import {waitForNoSpinner, waitForResponse} from 'utils/test-utils';
-import {getRequest} from 'utils/api-utils';
-import {KitsReceivedResponse} from './interfaces/kitsReceivedResponse';
 import {KitsColumnsEnum} from '../enums/kitsColumns-enum';
 
-const { BSP_TOKEN } = process.env;
-
+const { BSP_TOKEN, DSM_BASE_URL } = process.env;
 
 export default class KitsReceivedPage {
   private readonly PAGE_TITLE = 'Kits Received';
   private readonly kitType = new KitType(this.page);
   private readonly kitsTable = new KitsTable(this.page);
 
-  constructor(private readonly page: Page) {
+  constructor(private readonly page: Page,
+              private readonly request: APIRequestContext) {
   }
 
   public async waitForLoad(): Promise<void> {
@@ -34,12 +32,12 @@ export default class KitsReceivedPage {
     if (!BSP_TOKEN) {
       throw Error('Invalid parameter: DSM BSP token is not provided.');
     }
-    const response = await getRequest(`/ddp/ClinicalKits/${kitLabel}`, {
+    const response = await this.request.get(`${DSM_BASE_URL}/ddp/ClinicalKits/${kitLabel}`, {
       headers: {
         Authorization: `Bearer ${BSP_TOKEN}`
       }
     });
-    const jsonResponse: KitsReceivedResponse = await response.json();
+    const jsonResponse = await response.json();
     await expect(response.ok()).toBeTruthy();
     expect(jsonResponse).toHaveProperty('kit_label', kitLabel);
   }

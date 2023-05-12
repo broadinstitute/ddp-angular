@@ -12,11 +12,11 @@ test.describe('Singular Study in DSM', () => {
   let homePage: HomePage;
   let navigation: Navigation;
 
-  test.beforeEach(async ({ page }) => {
+  test.beforeEach(async ({ page, request }) => {
     await login(page);
     welcomePage = new WelcomePage(page);
     homePage = new HomePage(page);
-    navigation = new Navigation(page);
+    navigation = new Navigation(page, request);
   });
 
   test('search by Short ID in Singular study @dsm', async ({ page }) => {

@@ -19,11 +19,11 @@ test.describe.parallel('Cohort tags', () => {
 
   const studyNames = [StudyEnum.BRAIN, StudyEnum.PANCAN];
 
-  test.beforeEach(async ({ page }) => {
+  test.beforeEach(async ({ page, request }) => {
     await login(page);
     welcomePage = new WelcomePage(page);
     homePage = new HomePage(page);
-    navigation = new Navigation(page);
+    navigation = new Navigation(page, request);
     cohortTag = new CohortTag(page);
   });
 

@@ -1,4 +1,4 @@
-import {Page} from '@playwright/test';
+import {APIRequestContext, Page} from '@playwright/test';
 import Dropdown from 'lib/widget/dsm/dropdown';
 import ParticipantListPage from 'pages/dsm/participantList-page';
 import {MainMenuEnum} from './enums/mainMenu-enum';
@@ -13,7 +13,6 @@ import KitUploadPage from 'pages/dsm/kitUpload-page/kitUpload-page';
 import {MiscellaneousEnum} from 'lib/component/dsm/navigation/enums/miscellaneousNav-enum';
 import KitsSentPage from 'pages/dsm/kitsInfo-pages/kitsSentPage';
 import KitsReceivedPage from 'pages/dsm/kitsInfo-pages/kitsReceived-page/kitsReceivedPage';
-import {waitForNoSpinner} from 'utils/test-utils';
 
 
 type Selection = StudyNavEnum | StudyEnum | SamplesNavEnum | MiscellaneousEnum;
@@ -27,11 +26,11 @@ export class Navigation {
       [SamplesNavEnum.FINAL_SCAN, new FinalScanPage(this.page)],
       [SamplesNavEnum.KIT_UPLOAD, new KitUploadPage(this.page)],
       [SamplesNavEnum.SENT, new KitsSentPage(this.page)],
-      [SamplesNavEnum.RECEIVED, new KitsReceivedPage(this.page)],
+      [SamplesNavEnum.RECEIVED, new KitsReceivedPage(this.page, this.request)],
     ])
   };
 
-  constructor(private readonly page: Page) {}
+  constructor(private readonly page: Page, private readonly request: APIRequestContext) {}
 
   public async selectStudy(studyName: StudyEnum): Promise<void> {
     await this.selectFrom(MainMenuEnum.SELECTED_STUDY, studyName);
