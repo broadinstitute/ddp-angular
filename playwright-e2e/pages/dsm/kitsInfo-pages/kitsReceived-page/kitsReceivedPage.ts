@@ -37,7 +37,12 @@ export default class KitsReceivedPage {
         Authorization: `Bearer ${BSP_TOKEN}`
       }
     });
-    const jsonResponse = await response.json();
+    let jsonResponse;
+    try {
+      jsonResponse = await response.json()
+    } catch (error) {
+      throw new Error(`Couldn't send the kit received request - something went wrong\n${error}`)
+    }
     await expect(response.ok()).toBeTruthy();
     expect(jsonResponse).toHaveProperty('kit_label', kitLabel);
   }
