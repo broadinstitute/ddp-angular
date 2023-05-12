@@ -5,20 +5,8 @@ import {waitForNoSpinner, waitForResponse} from 'utils/test-utils';
 import {crateTextFileSync, deleteFileSync} from 'utils/file-utils';
 import {KitUploadInfo} from 'pages/dsm/kitUpload-page/models/kitUpload-model';
 import {StudyEnum} from 'lib/component/dsm/navigation/enums/selectStudyNav-enum';
-
-enum kitUploadResponseEnum {
-  INVALID_KIT_ADDRESS_LIST = 'invalidKitAddressList',
-  DUPLICATED_KIT_LIST = 'duplicateKitList',
-  SPECIAL_KIT_LIST = 'specialKitList',
-  SPECIAL_MESSAGE = 'specialMessage'
-}
-
-interface KitUploadResponse {
-  invalidKitAddressList: any[];
-  duplicateKitList: any[];
-  specialKitList: any[];
-  specialMessage: string;
-}
+import {KitUploadResponse} from "./interfaces/kitUpload";
+import {kitUploadResponseEnum} from "./enums/kitUploadResponse-enum";
 
 export default class KitUploadPage {
   private readonly PAGE_TITLE = 'Kit Upload';
@@ -26,6 +14,11 @@ export default class KitUploadPage {
   private readonly kitType = new KitType(this.page);
 
   constructor(private readonly page: Page) {
+  }
+
+  public async waitForLoad(): Promise<void> {
+    await this.page.waitForLoadState("networkidle");
+    await waitForNoSpinner(this.page);
   }
 
   public async selectKitType(kitType: KitTypeEnum): Promise<void> {

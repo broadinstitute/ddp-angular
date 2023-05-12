@@ -10,18 +10,26 @@ import ParticipantPage from 'pages/dsm/participant-page/participant-page';
 import {KitUploadInfo} from 'pages/dsm/kitUpload-page/models/kitUpload-model';
 import ContactInformationTab from 'lib/component/dsm/tabs/contactInformationTab';
 import {TabEnum} from 'lib/component/dsm/tabs/enums/tab-enum';
-import KitsWithoutLabelPage from 'pages/dsm/kitsWithoutLabel-page';
 import {SamplesNavEnum} from 'lib/component/dsm/navigation/enums/samplesNav-enum';
 import {KitTypeEnum} from 'lib/component/dsm/kitType/enums/kitType-enum';
 import KitUploadPage from 'pages/dsm/kitUpload-page/kitUpload-page';
 import InitialScanPage from 'pages/dsm/initialScan-page';
 import FinalScanPage from 'pages/dsm/finalScan-page';
-import KitsSentPage from 'pages/dsm/kitsSentPage';
 import crypto from 'crypto';
 import SampleInformationTab from 'lib/component/dsm/tabs/sampleInformationTab';
 import {SampleInfoEnum} from 'lib/component/dsm/tabs/enums/sampleInfo-enum';
 import {SampleStatusEnum} from 'lib/component/dsm/tabs/enums/sampleStatus-enum';
+import KitsWithoutLabelPage from "pages/dsm/kitsInfo-pages/kitsWithoutLabel-page";
+import {KitsColumnsEnum} from "pages/dsm/kitsInfo-pages/enums/kitsColumns-enum";
+import KitsSentPage from "pages/dsm/kitsInfo-pages/kitsSentPage";
+import KitsReceivedPage from "pages/dsm/kitsInfo-pages/kitsReceived-page/kitsReceivedPage";
 
+
+/**
+ * @TODO
+ * 1. make last assertion from samples tab (sent/received dates)
+ * 2. find the right participant to run tests for
+ */
 test.describe('Saliva Kits upload flow (OC PE-CGS)', () => {
   let welcomePage: WelcomePage;
   let homePage: HomePage;
@@ -76,6 +84,7 @@ test.describe('Saliva Kits upload flow (OC PE-CGS)', () => {
 
     // deactivate all kits for the participant
     const kitsWithoutLabelPage = await navigation.selectFromSamples<KitsWithoutLabelPage>(SamplesNavEnum.KITS_WITHOUT_LABELS);
+    await kitsWithoutLabelPage.waitForLoad();
     await kitsWithoutLabelPage.assertPageTitle();
     await kitsWithoutLabelPage.selectKitType(kitType);
     await kitsWithoutLabelPage.assertCreateLabelsBtn();
@@ -85,6 +94,7 @@ test.describe('Saliva Kits upload flow (OC PE-CGS)', () => {
 
     // Uploads kit
     const kitUploadPage = await navigation.selectFromSamples<KitUploadPage>(SamplesNavEnum.KIT_UPLOAD);
+    await kitUploadPage.waitForLoad();
     await kitUploadPage.assertPageTitle();
     await kitUploadPage.assertDisplayedKitTypes(expectedKitTypes);
     await kitUploadPage.selectKitType(kitType);
@@ -102,12 +112,14 @@ test.describe('Saliva Kits upload flow (OC PE-CGS)', () => {
 
     // Kits without label for extracting a shipping ID
     await navigation.selectFromSamples<KitsWithoutLabelPage>(SamplesNavEnum.KITS_WITHOUT_LABELS);
+    await kitsWithoutLabelPage.waitForLoad();
     await kitsWithoutLabelPage.selectKitType(kitType);
     await kitsWithoutLabelPage.assertCreateLabelsBtn();
     await kitsWithoutLabelPage.assertReloadKitListBtn();
     await kitsWithoutLabelPage.assertTableHeader();
     await kitsWithoutLabelPage.assertPageTitle();
-    shippingID = await kitsWithoutLabelPage.shippingId(shortID);
+    await kitsWithoutLabelPage.search(KitsColumnsEnum.SHORT_ID, shortID);
+    shippingID = (await kitsWithoutLabelPage.getData(KitsColumnsEnum.SHIPPING_ID)).trim();
 
     // final scan
     const finalScanPage = await navigation.selectFromSamples<FinalScanPage>(SamplesNavEnum.FINAL_SCAN);
@@ -117,13 +129,26 @@ test.describe('Saliva Kits upload flow (OC PE-CGS)', () => {
 
     // kits sent page
     const kitsSentPage = await navigation.selectFromSamples<KitsSentPage>(SamplesNavEnum.SENT);
+    await kitsSentPage.waitForLoad();
     await kitsSentPage.assertPageTitle();
     await kitsSentPage.assertDisplayedKitTypes(expectedKitTypes);
     await kitsSentPage.selectKitType(kitType);
     await kitsSentPage.assertReloadKitListBtn();
     await kitsSentPage.assertTableHeader();
-    await kitsSentPage.searchByMFCode(kitLabel);
+    await kitsSentPage.search(KitsColumnsEnum.MF_CODE, kitLabel);
     await kitsSentPage.assertDisplayedRowsCount(1);
+
+    // kits received page
+    const kitsReceivedPage = await navigation.selectFromSamples<KitsReceivedPage>(SamplesNavEnum.RECEIVED);
+    await kitsReceivedPage.kitReceivedRequest(kitLabel);
+    await kitsReceivedPage.waitForLoad();
+    await kitsReceivedPage.selectKitType(kitType);
+    await kitsReceivedPage.assertPageTitle();
+    await kitsReceivedPage.assertDisplayedKitTypes(expectedKitTypes);
+    await kitsReceivedPage.assertReloadKitListBtn();
+    await kitsReceivedPage.assertTableHeader();
+    await kitsReceivedPage.search(KitsColumnsEnum.MF_CODE, kitLabel);
+    await kitsReceivedPage.assertDisplayedRowsCount(1);
 
     // checks if the uploaded kit is displayed on the participant's page, in the sample information tab
     await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
@@ -137,6 +162,6 @@ test.describe('Saliva Kits upload flow (OC PE-CGS)', () => {
     const sampleInformationTab = await participantPage.clickTab<SampleInformationTab>(TabEnum.SAMPLE_INFORMATION);
     await sampleInformationTab
       .assertSampleByMFBarcode(kitLabel, kitType,
-        {info: SampleInfoEnum.STATUS, value: SampleStatusEnum.SHIPPED})
+        {info: SampleInfoEnum.STATUS, value: SampleStatusEnum.RECEIVED})
   })
 })

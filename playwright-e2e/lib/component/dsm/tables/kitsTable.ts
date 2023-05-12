@@ -1,23 +1,46 @@
-import {Locator, Page} from '@playwright/test';
+import {expect, Locator, Page} from '@playwright/test';
+import {KitsColumnsEnum} from "pages/dsm/kitsInfo-pages/enums/kitsColumns-enum";
 
-type shortOrShippingID = 'Short ID' | 'Shipping ID';
 
 export class KitsTable {
   constructor(private readonly page: Page) {}
 
-  public async searchBy(searchBy: shortOrShippingID, value: string): Promise<void> {
-    await this.page.locator(this.searchByXPath(searchBy)).fill(value);
+  public async searchBy(columnName: KitsColumnsEnum, value: string): Promise<void> {
+    const column = this.column(columnName);
+    const searchInputHeader = this.searchHeader(columnName);
+
+    await expect(column, `Kits Table - the column ${columnName} doesn't exist`)
+      .toBeVisible();
+    await expect(searchInputHeader, `Kits Table - you can't search by ${columnName} column`)
+      .toBeVisible();
+
+    await searchInputHeader.fill(value);
   }
 
-  public async searchByMFCode(value: string): Promise<void> {
-    await this.page.locator(this.searchByMFCodeXPath).fill(value);
-  }
+  public async getData(columnName: KitsColumnsEnum): Promise<string> {
+    const column = this.column(columnName);
+    await expect(column, `Kits Table - the column ${columnName} doesn't exist`)
+      .toBeVisible();
 
-  public async shippingId(shortId: string): Promise<string> {
-    return this.page.locator(this.shippingIdByShortIdXPath(shortId)).innerText();
+    const td = await this.td(columnName);
+    await expect(td, 'Kits Table - more than one data was found').toHaveCount(1);
+
+    return await td.textContent() || '';
   }
 
   /* Locators */
+  public searchHeader(columnName: KitsColumnsEnum): Locator {
+    return this.page.locator(this.searchByXPath(columnName));
+  }
+
+  public column(columnName: KitsColumnsEnum): Locator {
+    return this.page.locator(this.columnXPath(columnName));
+  }
+
+  public td(columnName: KitsColumnsEnum): Locator {
+    return this.page.locator(this.tdXPath(columnName));
+  }
+
   public get deactivateButtons(): Locator {
     return this.page.locator(this.deactivateButtonXPath);
   }
@@ -31,27 +54,24 @@ export class KitsTable {
   }
 
   /* XPaths */
-  private shippingIdByShortIdXPath(shortId: string): string {
-    return (
-      `(//table/tbody//td[position()=count(//table/thead/tr[1]/th[.//*[text()[normalize-space()='Shipping ID']]]` +
-      `/preceding-sibling::th)+1])[count(//table/tbody//td[position()=count(//table/thead/tr[1]/th` +
-      `[.//*[text()[normalize-space()='Short ID']]]/preceding-sibling::th)+1][text()[normalize-space()='${shortId}']]` +
-      `/ancestor::tr/preceding-sibling::tr) + 1]`
-    );
+  private searchByXPath(columnName: KitsColumnsEnum): string {
+    return `(//table/thead/tr[2]/th)[${this.columnPositionXPath(columnName)}]/input`;
   }
 
-  private searchByXPath(searchBy: shortOrShippingID): string {
-    return `(//table/thead/tr[2]/th)[count(//table/thead/tr[1]/th[.//*[text()[normalize-space()='${searchBy}']]]` +
-      `/preceding-sibling::th)+1]/input`
+  private tdXPath(columnName: KitsColumnsEnum): string {
+    return `//table/tbody//td[position()=${this.columnPositionXPath(columnName)}]`;
   }
 
-  private get searchByMFCodeXPath(): string {
-    return `(//table/thead/tr[2]/th)[count(//table/thead/tr[1]/th[text()[normalize-space()='MF code']]` +
-    `/preceding-sibling::th)+1]/input`
+  private columnPositionXPath(columnName: KitsColumnsEnum): string {
+    return `count(${this.columnXPath(columnName)}/preceding-sibling::th)+1`;
+  }
+
+  private columnXPath(columnName: KitsColumnsEnum): string {
+    return `${this.headerXPath}/th[descendant-or-self::*[text()[normalize-space()='${columnName}']]]`;
   }
 
   private get deactivateButtonXPath(): string {
-    return `${this.rowsXPath}/td[button[@type='button'][text()[normalize-space()='Deactivate']]]/button`
+    return `${this.rowsXPath}/td[button[@type='button'][text()[normalize-space()='Deactivate']]]/button`;
   }
 
   private get rowsXPath(): string {

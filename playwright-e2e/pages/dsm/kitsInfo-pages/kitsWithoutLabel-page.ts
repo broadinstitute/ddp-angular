@@ -3,6 +3,7 @@ import {KitType} from 'lib/component/dsm/kitType/kitType';
 import {KitTypeEnum} from 'lib/component/dsm/kitType/enums/kitType-enum';
 import {waitForNoSpinner, waitForResponse} from 'utils/test-utils';
 import {KitsTable} from 'lib/component/dsm/tables/kitsTable';
+import {KitsColumnsEnum} from "./enums/kitsColumns-enum";
 
 
 export default class KitsWithoutLabelPage {
@@ -12,6 +13,11 @@ export default class KitsWithoutLabelPage {
 
   constructor(private readonly page: Page) {}
 
+  public async waitForLoad(): Promise<void> {
+    await this.page.waitForLoadState("networkidle");
+    await waitForNoSpinner(this.page);
+  }
+
   public async selectKitType(kitType: KitTypeEnum): Promise<void> {
     await waitForNoSpinner(this.page);
     await this.kitType.selectKitType(kitType);
@@ -20,7 +26,7 @@ export default class KitsWithoutLabelPage {
   }
 
   public async deactivateAllKitsFor(shortId: string) {
-    await this.kitsTable.searchBy('Short ID', shortId);
+    await this.kitsTable.searchBy(KitsColumnsEnum.SHORT_ID, shortId);
     await waitForNoSpinner(this.page);
     const kitsCount = await this.kitsTable.rows.count();
     if (kitsCount) {
@@ -32,10 +38,12 @@ export default class KitsWithoutLabelPage {
       .toHaveCount(0)
   }
 
-  public async shippingId(shortId: string): Promise<string> {
-    await this.kitsTable.searchBy('Short ID', shortId);
-    await waitForNoSpinner(this.page);
-    return this.kitsTable.shippingId(shortId);
+  public async search(columnName: KitsColumnsEnum, value: string): Promise<void> {
+    await this.kitsTable.searchBy(columnName, value);
+  }
+
+  public async getData(columnName: KitsColumnsEnum): Promise<string> {
+    return await this.kitsTable.getData(columnName);
   }
 
   private async deactivateKit(deactivateButton: Locator): Promise<void> {

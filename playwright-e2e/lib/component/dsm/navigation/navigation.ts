@@ -6,13 +6,14 @@ import {StudyNavEnum} from './enums/studyNav-enum';
 import {StudyEnum} from './enums/selectStudyNav-enum';
 import {NavigationItems} from './navigation-types';
 import {SamplesNavEnum} from './enums/samplesNav-enum';
-import KitsWithoutLabelPage from 'pages/dsm/kitsWithoutLabel-page';
+import KitsWithoutLabelPage from 'pages/dsm/kitsInfo-pages/kitsWithoutLabel-page';
 import InitialScanPage from 'pages/dsm/initialScan-page';
 import FinalScanPage from 'pages/dsm/finalScan-page';
 import KitUploadPage from 'pages/dsm/kitUpload-page/kitUpload-page';
 import {MiscellaneousEnum} from 'lib/component/dsm/navigation/enums/miscellaneousNav-enum';
-import KitsSentPage from 'pages/dsm/kitsSentPage';
-import KitsReceivedPage from 'pages/dsm/kitsReceivedPage';
+import KitsSentPage from 'pages/dsm/kitsInfo-pages/kitsSentPage';
+import KitsReceivedPage from 'pages/dsm/kitsInfo-pages/kitsReceived-page/kitsReceivedPage';
+import {waitForNoSpinner} from "utils/test-utils";
 
 
 type Selection = StudyNavEnum | StudyEnum | SamplesNavEnum | MiscellaneousEnum;
@@ -46,11 +47,11 @@ export class Navigation {
     return (this.navigationItems.study as Map<string, object>).get(studyNav) as T;
   }
 
-  private async selectFrom(from: MainMenuEnum, selection: Selection): Promise<void> {
-    await new Dropdown(this.page, from).selectOption(selection);
-  }
-
   public async selectMiscellaneous(miscName: MiscellaneousEnum): Promise<void> {
     await this.selectFrom(MainMenuEnum.MISCELLANEOUS, miscName);
+  }
+
+  private async selectFrom(from: MainMenuEnum, selection: Selection): Promise<void> {
+    await new Dropdown(this.page, from).selectOption(selection);
   }
 }
