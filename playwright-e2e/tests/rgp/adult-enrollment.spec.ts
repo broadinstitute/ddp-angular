@@ -158,7 +158,7 @@ test.describe.serial('Adult Self Enrollment', () => {
     expect(await tellUsAboutYourFamily.yourFirstName().isDisabled()).toEqual(true);
   });
 
-  test('Go to DSM to verify the newly created account can be found @functional @enrollment @rgp', async ({ page }) => {
+  test('Go to DSM to verify the newly created account can be found @functional @rgp', async ({ page }) => {
     //Go to DSM to verify the newly created account can be found there
     const dsm = new dsmHome(page);
     const dsmUserEmail = await dsmAuth.login(page, {
@@ -176,5 +176,186 @@ test.describe.serial('Adult Self Enrollment', () => {
 
     await participantListPage.waitForReady();
     await participantListPage.filterListByParticipantGUID(user.patient.participantGuid);
+  });
+
+  test('Verify the display and functionality of family account dynamic fields @functional @rgp', async ({ page}) => {
+    //Go into DSM
+    const dsm = new dsmHome(page);
+    const dsmUserEmail = await dsmAuth.login(page, {
+      email: DSM_USER_EMAIL,
+      password: DSM_USER_PASSWORD
+    });
+    const navigation = new Navigation(page);
+
+    //select RGP study
+    await new Select(page, { label: 'Select study' }).selectOption('RGP');
+
+    //Verify the Participant List is displayed
+    const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(StudyNav.PARTICIPANT_LIST);
+    await participantListPage.assertPageTitle();
+    await participantListPage.waitForReady();
+    await participantListPage.filterListByParticipantGUID(user.patient.participantGuid);
+
+    //Confirm the 'Add Family Member' button is visible
+    const addFamilyMemberButton = await page.locator("//span[contains(text(), 'Add Family Member')]/preceding-sibling::button");
+    await expect(addFamilyMemberButton).toBeVisible();
+
+    //Confirm 'Family Notes' is present and functional
+    await expect(page.getByRole('cell', { name: 'Family Notes' })).toBeVisible();
+    const datetime = new Date();
+    await page.getByRole('row', { name: 'Family Notes' }).getByRole('textbox').fill(`Random text by playwright test on: '${datetime}'`);
+
+    //Confirm 'Seqr project' is present and functional
+    await expect(page.getByRole('cell', { name: 'Seqr project' })).toBeVisible();
+    await page.locator("//td[contains(text(), 'Seqr project')]/following-sibling::td/mat-select").click();
+    await page.locator("//div[@role='listbox']").locator('//mat-option').filter({ hasText: 'HMB Genome' }).click();
+
+    //Confirm 'Specialty Project: R21' is present and functional
+    await expect(page.getByRole('cell', { name: 'Specialty Project: R21' })).toBeVisible();
+    await page.locator("//td[contains(text(), 'Specialty Project: R21')]/following-sibling::td/mat-checkbox").click();
+
+    //Confirm 'Specialty Project: CAGI 2022' is present and functional
+    await expect(page.getByRole('cell', { name: 'Specialty Project: CAGI 2022' })).toBeVisible();
+    await page.locator("//td[contains(text(), 'Specialty Project: CAGI 2022')]/following-sibling::td/mat-checkbox").click();
+
+    //Confirm 'Specialty Project: CAGI 2023' is present and functional
+    await expect(page.getByRole('cell', { name: 'Specialty Project: CAGI 2023' })).toBeVisible();
+    await page.locator("//td[contains(text(), 'Specialty Project: CAGI 2023')]/following-sibling::td/mat-checkbox").click();
+
+    //Confirm 'Specialty Project: CZI' is present and functional
+    await expect(page.getByRole('cell', { name: 'Specialty Project: CZI' })).toBeVisible();
+    await page.locator("//td[contains(text(), 'Specialty Project: CZI')]/following-sibling::td/mat-checkbox").click();
+
+    //Confirm 'Expected # to Sequence' is present and functional
+    await expect(page.getByRole('cell', { name: 'Expected # to Sequence' })).toBeVisible();
+    await page.locator("//td[contains(text(), 'Expected # to Sequence')]/following-sibling::td/mat-select").click();
+    await page.locator("//div[@role='listbox']").locator('//mat-option').filter({ hasText: '5' }).click();
+  });
+
+  test('Verify that the proband family member tab can be filled out @functional @rgp', async ({ page }) => {
+    //Go into DSM
+    const dsm = new dsmHome(page);
+    const dsmUserEmail = await dsmAuth.login(page, {
+      email: DSM_USER_EMAIL,
+      password: DSM_USER_PASSWORD
+    });
+    const navigation = new Navigation(page);
+
+    //select RGP study
+    await new Select(page, { label: 'Select study' }).selectOption('RGP');
+
+    //Verify the Participant List is displayed
+    const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(StudyNav.PARTICIPANT_LIST);
+    await participantListPage.assertPageTitle();
+    await participantListPage.waitForReady();
+    await participantListPage.filterListByParticipantGUID(user.patient.participantGuid);
+
+    //Verify that the proband tab is present (and includes the text RGP and 3 as proband subject ids have the format RGP_{family id}_3)
+    const probandTab = page.locator("//li//span[contains(text(), 'RGP') and contains(text(), '3')]");
+    await expect(probandTab).toBeVisible();
+
+    //Verify that the dynamic form menu is present
+    const jumpToMenuText = page.getByRole('tabpanel').getByText('Jump to:');
+    await expect(jumpToMenuText).toBeVisible();
+
+    const participantInfoMenuLink = page.locator("//a[contains(text(), 'Participant Info')]");
+    await expect(participantInfoMenuLink).toBeVisible();
+
+    const contactInfoMenuLink = page.locator("//a[contains(text(), 'Contact Info')]");
+    await expect(contactInfoMenuLink).toBeVisible();
+
+    const studyStatusLink = page.locator("//a[contains(text(), 'Study Status')]");
+    await expect(studyStatusLink).toBeVisible();
+
+    const medicalRecordsLink = page.locator("//a[contains(text(), 'Medical records')]");
+    await expect(medicalRecordsLink).toBeVisible();
+
+    const primarySampleLink = page.locator("//a[contains(text(), 'Primary Sample')]");
+    await expect(primarySampleLink).toBeVisible();
+
+    const tissueLink = page.locator("//a[text()='Tissue']");
+    await expect(tissueLink).toBeVisible();
+
+    const rorLink = page.locator("//a[contains(text(), 'ROR')]");
+    await expect(rorLink).toBeVisible();
+
+    const surveyLink = page.locator("//a[text()='Survey']");
+    await expect(surveyLink).toBeVisible();
+
+    //Fill out Participant Info section
+    await page.locator("//button[contains(text(), 'Participant Info')]").click();
+
+    //Confirm that the same family id is used between proband tab, subject id field, family id field
+    const probandSubjectID = page.getByPlaceholder('Subject ID');
+    const probandFamilyID = page.getByPlaceholder('Family ID');
+
+    //Confirm that input entered in Important Notes and Process Notes is saved
+    await page.getByPlaceholder('Important Notes').fill('Testing notes here - Important Notes');
+    await page.getByPlaceholder('Process Notes').fill('Testing notes here - Process Notes');
+
+    const probandFirstName = page.locator("//td[contains(text(), 'First Name')]/following-sibling::td//div/input[@data-placeholder='First Name']");
+    await probandFirstName.fill(user.patient.firstName);
+
+    const probandMiddleName = page.locator("//input[@data-placeholder='Middle Name']");
+    await probandMiddleName.fill(user.patient.middleName);
+
+    const probandLastName = page.locator("//td[contains(text(), 'Last Name')]/following-sibling::td//div/input[@data-placeholder='Last Name']");
+    await probandLastName.fill(user.patient.lastName);
+
+    await page.locator("//input[@data-placeholder='Name Suffix']").fill('junior');
+
+    await page.locator("//td[contains(text(), 'Preferred Language')]/following-sibling::td/mat-select").click();
+    await page.locator("//div[@role='listbox']").locator('//mat-option').filter({ hasText: 'Spanish' }).click();
+
+    await page.locator("//td[contains(text(), 'Sex')]/following-sibling::td/mat-select").click();
+    await page.locator("//div[@role='listbox']").locator('//mat-option').filter({ hasText: 'Female' }).click();
+
+    await page.locator("//td[contains(text(), 'Pronouns')]/following-sibling::td/mat-select").click();
+    await page.locator("//div[@role='listbox']").locator('//mat-option').filter({ hasText: 'they/them' }).click();
+
+    //section for Participant Info -> DOB
+
+    //section for Participant Info -> Age Today; check that the age automatically calculagted and inputted into
+    //Age Today field is the the correct age given the age inputted in DOB field
+
+    //The default value for Participant Info -> Alive/Deceased is an Alive status
+    const probandIsAliveStatus = page.getByRole('radio', { name: 'Alive' });
+    await expect(probandIsAliveStatus).toBeChecked();
+
+    //The default value in the proband tab should be 'Self' (the proband is the main person in the study)
+    const relationshipToProband = page.locator("//td[contains(text(), 'Relationship to Proband')]/following-sibling::td/mat-select");
+    await expect(relationshipToProband).toHaveText('Self');
+
+    await page.locator("//td[contains(text(), 'Affected Status')]/following-sibling::td/mat-select").click();
+    await page.locator("//div[@role='listbox']").locator('//mat-option').filter({ hasText: 'Uncertain' }).click();
+
+    await page.locator("//td[contains(text(), 'Race')]/following-sibling::td/mat-select").click();
+    await page.locator("//div[@role='listbox']").locator('//mat-option').filter({ hasText: 'Black or African American' }).click();
+
+    await page.locator("//td[contains(text(), 'Ethnicity')]/following-sibling::td/mat-select").click();
+    await page.locator("//div[@role='listbox']").locator('//mat-option').filter({ hasText: 'Unknown or Not Reported' }).click();
+
+    await page.getByPlaceholder('Mixed Race Notes').fill('Testing notes here - Mixed Race Notes');
+
+    //Fill out Contact Info section
+    await page.locator("//button[contains(text(), 'Contact Info')]").click();
+
+    //Fill out Study Status section
+    await page.locator("//button[contains(text(), 'Study Status')]").click();
+
+    //Fill out Medical records section
+    await page.locator("//button[contains(text(), 'Medical record')]").click();
+
+    //Fill out Primary Sample section
+    await page.locator("//button[contains(text(), 'Primary Sample')]").click();
+
+    //Fill out Tissue section
+    await page.locator("//button[contains(text(), 'Tissue')]").click();
+
+    //Fill out ROR section
+    await page.locator("//button[contains(text(), 'ROR')]").click();
+
+    //Fill out Survey section
+    await page.locator("//button[contains(text(), 'Survey')]").click();
   });
 });
