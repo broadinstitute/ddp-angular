@@ -68,9 +68,9 @@ test.describe('Saliva Kits upload flow (OC PE-CGS)', () => {
     await customizeViewPanel.selectColumns('Sample Columns', [normalCollaboratorSampleID]);
 
     let testParticipantIndex = 0;
-    for(let count = 0; count < 10; count++) {
+    for (let count = 0; count < 10; count++) {
       const textData = await participantListTable.getParticipantDataAt(count, normalCollaboratorSampleID);
-      if(textData.split('\n').length < 8) {
+      if (textData.split('\n').length < 8) {
         testParticipantIndex = count;
         break;
       }
