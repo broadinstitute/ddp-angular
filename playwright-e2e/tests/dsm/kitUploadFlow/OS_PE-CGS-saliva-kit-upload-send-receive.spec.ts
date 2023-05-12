@@ -57,14 +57,28 @@ test.describe('Saliva Kits upload flow (OC PE-CGS)', () => {
   });
 
   test('Should upload a single kit for one participant @functional @visual @dsm @osteo', async ({page}) => {
-    // Collects all the necessary data for kit upload
     const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
     await participantListPage.assertPageTitle();
-    const participantListTable = participantListPage.participantListTable;
-    const participantPage: ParticipantPage = await participantListTable.openParticipantPageAt(0);
-    await participantPage.assertPageTitle();
-    shortID = await participantPage.getShortId();
 
+    // find the participant that has not more than 4 samples
+    const customizeViewPanel = participantListPage.filters.customizeViewPanel;
+    const participantListTable = participantListPage.participantListTable;
+    const normalCollaboratorSampleID = 'Normal Collaborator Sample ID';
+    await customizeViewPanel.open();
+    await customizeViewPanel.selectColumns('Sample Columns', [normalCollaboratorSampleID]);
+
+    let testParticipantIndex = 0;
+    for(let count = 0; count < 10; count++) {
+      const textData = await participantListTable.getParticipantDataAt(count, normalCollaboratorSampleID);
+      if(textData.split('\n').length < 8) {
+        testParticipantIndex = count;
+        break;
+      }
+    }
+
+    // Collects all the necessary data for kit upload
+    const participantPage: ParticipantPage = await participantListTable.openParticipantPageAt(testParticipantIndex);
+    shortID = await participantPage.getShortId();
     const isContactInformationTabVisible = await participantPage.isTabVisible(TabEnum.CONTACT_INFORMATION);
     kitUploadInfo = new KitUploadInfo(
       shortID,
