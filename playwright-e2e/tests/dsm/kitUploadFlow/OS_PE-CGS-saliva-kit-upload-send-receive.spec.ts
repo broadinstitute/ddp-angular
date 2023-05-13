@@ -55,7 +55,7 @@ test.describe('Saliva Kits upload flow (OC PE-CGS)', () => {
     const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
     await participantListPage.assertPageTitle();
 
-    // find the participant that has not more than 4 samples
+    // find the participant that has not more than 14 samples
     const customizeViewPanel = participantListPage.filters.customizeViewPanel;
     const participantListTable = participantListPage.participantListTable;
     const normalCollaboratorSampleID = 'Normal Collaborator Sample ID';
