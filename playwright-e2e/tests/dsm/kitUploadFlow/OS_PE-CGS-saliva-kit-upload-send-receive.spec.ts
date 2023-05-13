@@ -25,11 +25,6 @@ import KitsSentPage from 'pages/dsm/kitsInfo-pages/kitsSentPage';
 import KitsReceivedPage from 'pages/dsm/kitsInfo-pages/kitsReceived-page/kitsReceivedPage';
 
 
-/**
- * @TODO
- * 1. make last assertion from samples tab (sent/received dates)
- * 2. find the right participant to run tests for
- */
 test.describe('Saliva Kits upload flow (OC PE-CGS)', () => {
   let welcomePage: WelcomePage;
   let homePage: HomePage;
