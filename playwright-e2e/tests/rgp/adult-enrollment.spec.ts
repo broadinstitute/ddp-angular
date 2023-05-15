@@ -9,13 +9,14 @@ import TellUsAboutYourFamilyPage from 'pages/rgp/enrollment/tell-us-about-your-f
 import TellUsYourStoryPage, { WHO } from 'pages/rgp/enrollment/tell-us-your-story-page';
 import HomePage from 'pages/rgp/home-page';
 import { setAuth0UserEmailVerified } from 'utils/api-utils';
-import { setPatientParticipantGuid } from 'utils/faker-utils';
+import { calculateBirthDate, setPatientParticipantGuid } from 'utils/faker-utils';
 import dsmHome from 'pages/dsm/home-page';
 import * as dsmAuth from 'authentication/auth-dsm';
 import Select from 'lib/widget/select';
 import { Navigation } from 'lib/component/dsm/navigation/navigation';
 import ParticipantListPage from 'pages/dsm/participantList-page';
 import { StudyNav } from 'lib/component/dsm/navigation/enums/studyNav.enum';
+import exp from 'constants';
 
 const { RGP_USER_EMAIL, RGP_USER_PASSWORD, DSM_USER_EMAIL, DSM_USER_PASSWORD } = process.env;
 
@@ -314,9 +315,16 @@ test.describe.serial('Adult Self Enrollment', () => {
     await page.locator("//div[@role='listbox']").locator('//mat-option').filter({ hasText: 'they/them' }).click();
 
     //section for Participant Info -> DOB
+    const probandDOB = page.locator("//td[contains(text(), 'DOB')]/following-sibling::td//div//input[@data-placeholder='mm/dd/yyyy']");
+    await probandDOB.fill(`${user.patient.birthDate.MM}/${user.patient.birthDate.DD}/${user.patient.birthDate.YYYY}`);
+    //DOB field must either use Enter press or be de-selected in order for age to show up in following Age Today field
+    await probandDOB.press('Enter');
 
-    //section for Participant Info -> Age Today; check that the age automatically calculagted and inputted into
+    //section for Participant Info -> Age Today; check that the age automatically calculated and inputted into
     //Age Today field is the the correct age given the age inputted in DOB field
+    const probandAgeToday = page.locator("//td[contains(text(), 'Age Today')]/following-sibling::td//div//input[@data-placeholder='Age Today']");
+    const estimatedAge = calculateBirthDate(user.patient.birthDate.MM, user.patient.birthDate.DD, user.patient.birthDate.YYYY);
+    await expect(probandAgeToday).toHaveValue(estimatedAge.toString());
 
     //The default value for Participant Info -> Alive/Deceased is an Alive status
     const probandIsAliveStatus = page.getByRole('radio', { name: 'Alive' });
@@ -339,6 +347,44 @@ test.describe.serial('Adult Self Enrollment', () => {
 
     //Fill out Contact Info section
     await page.locator("//button[contains(text(), 'Contact Info')]").click();
+    const primaryPhone = page.locator("//td[contains(text(), 'Phone')]/following-sibling::td//div//input[@data-placeholder='Phone (Primary)']");
+    await primaryPhone.fill(user.patient.phone);
+
+    const secondaryPhone = page.locator("//td[contains(text(), 'Phone')]/following-sibling::td//div//input[@data-placeholder='Phone (Secondary)']");
+    await secondaryPhone.fill(user.patient.secondaryPhoneNumber);
+
+    //Verify that the proband's preferred email matches the email of the family account
+    const email = page.locator("//td[contains(text(), 'Preferred Email')]/following-sibling::td//div//input[@data-placeholder='Preferred Email']");
+    const familyAccountEmail = page.locator("//input[@data-placeholder='Email']");
+    await expect(email.inputValue()).toEqual(familyAccountEmail.inputValue());
+
+    //Verify that Send Secure has a default value of 'Unknown'
+    const sendSecure = page.locator("//td[contains(text(), 'Send Secure')]/following-sibling::td/mat-select");
+    await expect(sendSecure).toHaveText('Unknown');
+
+    //Verify that Portal Message*** has a default value of 'Automated Default'
+    const portalMessage = page.locator("//td[contains(text(), 'Portal Message')]/following-sibling::td/mat-select");
+    await expect(portalMessage).toHaveText('Automated Default');
+
+    const currentDay = new Date().toLocaleDateString('en-US', {year: 'numeric', month: '2-digit', day: '2-digit'});
+    const currentDate = currentDay.split('/');
+    const portalMessageDate = page.locator("//td[contains(text(), 'Portal Message Date')]/following-sibling::td//div/input");
+    await portalMessageDate.fill(`${currentDate[0]}/${currentDate[1]}/${currentDate[2]}`);
+
+    const streetOne = page.locator("//td[contains(text(), 'Street 1')]/following-sibling::td//div//input[@data-placeholder='Street 1']");
+    await streetOne.fill(user.patient.streetAddress);
+
+    const city = page.locator("//td[contains(text(), 'City')]/following-sibling::td//div//input[@data-placeholder='City']");
+    await city.fill(user.patient.city);
+
+    await page.locator("//td[contains(text(), 'State')]/following-sibling::td/mat-select").click();
+    await page.locator("//div[@role='listbox']").locator('//mat-option').filter({ hasText: `${user.patient.state.name}` }).click();
+
+    const zip = page.locator("//td[contains(text(), 'Zip')]/following-sibling::td//div//input[@data-placeholder='Zip']");
+    await zip.fill(user.patient.zip);
+
+    const country = page.locator("//td[contains(text(), 'Country')]/following-sibling::td//div//input[@data-placeholder='Country']");
+    await country.fill(user.patient.country.name);
 
     //Fill out Study Status section
     await page.locator("//button[contains(text(), 'Study Status')]").click();

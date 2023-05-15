@@ -24,7 +24,8 @@
     "streetAddress": "415 Main Street",
     "city": "Cambridge",
     "zip": "02142-1027",
-    "phone": "6177147000"
+    "phone": "6177147000",
+    "secondaryPhoneNumber": "6171234000"
   },
   "doctor": {
     "name": "John Strange",

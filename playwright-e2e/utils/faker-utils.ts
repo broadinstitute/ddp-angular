@@ -2,6 +2,7 @@ import { faker } from '@faker-js/faker';
 import { Page } from '@playwright/test';
 import * as user from 'data/fake-user.json';
 
+
 export const generateUserName = (namePrefix: string): string => {
   return `${namePrefix}-${faker.name.lastName()}${faker.random.word()}`;
 };
@@ -28,4 +29,19 @@ export const setPatientParticipantGuid = async (page: Page) => {
   const participantResponse = response.url();
   const urlArray = participantResponse.split('/');
   user.patient.participantGuid = urlArray[6];
+};
+
+export const calculateBirthDate = (month: string, day: string, year: string): number => {
+  const dateOfBirth = new Date(Number(year), Number(month), Number(day));
+  const today = new Date();
+
+  let resultAge = today.getFullYear() - dateOfBirth.getFullYear();
+  const resultMonth = today.getMonth() - dateOfBirth.getMonth();
+
+  //Adjust age result depending on if birthday has not yet occurred for the year
+  if (resultMonth < 0 || (resultMonth === 0 && today.getDate() < dateOfBirth.getDate())) {
+    resultAge--;
+  }
+
+  return resultAge;
 };
