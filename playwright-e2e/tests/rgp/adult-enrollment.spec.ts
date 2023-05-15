@@ -389,6 +389,45 @@ test.describe.serial('Adult Self Enrollment', () => {
     //Fill out Study Status section
     await page.locator("//button[contains(text(), 'Study Status')]").click();
 
+    const probandAcceptanceStatus = page.locator("//td[contains(text(), 'Acceptance Status')]/following-sibling::td/mat-select");
+    await probandAcceptanceStatus.click();
+    await page.locator("//div[@role='listbox']").locator('//mat-option').filter({ hasText: 'NMI to Accepted' }).click();
+
+    const probandAcceptanceStatusDate = page.locator("//td[contains(text(), 'Acceptance Status Date')]/following-sibling::td//div/input");
+    await probandAcceptanceStatusDate.fill(`${currentDate[0]}/${currentDate[1]}/${currentDate[2]}`);
+
+    //The default value of Active/Inactive/HOLD is 'Active'
+    const probandActiveInactiveHold = page.locator("//td[contains(text(), 'Active/Inactive/HOLD')]/following-sibling::td/mat-select");
+    await expect(probandActiveInactiveHold).toHaveText('Active');
+
+    //The default value of Inactive Reason is 'N/A'
+    const probandInactiveReason = page.locator("//td[contains(text(), 'Inactive Reason')]/following-sibling::td/mat-select");
+    await expect(probandInactiveReason).toHaveText('N/A');
+
+    const probandAcuityAppointmentDate = page.locator("//td[contains(text(), 'Acuity Appointment Date')]/following-sibling::td//div/input");
+    await probandAcuityAppointmentDate.fill(`${currentDate[0]}/${currentDate[1]}/${currentDate[2]}`);
+
+    const probandDateOfConsentCall = page.locator("//td[contains(text(), 'Date of Consent Call')]/following-sibling::td//div/input");
+    await probandDateOfConsentCall.fill(`${currentDate[0]}/${currentDate[1]}/${currentDate[2]}`);
+
+    const probandEnrollmentDate = page.locator("//td[contains(text(), 'Enrollment Date')]/following-sibling::td//div/input");
+    await probandEnrollmentDate.fill(`${currentDate[0]}/${currentDate[1]}/${currentDate[2]}`);
+
+    //The default value of Data-sharing permissions is 'Unknown'
+    const probandDataSharingPermissions = page.locator("//td[contains(text(), 'Data-sharing permissions')]/following-sibling::td/mat-select");
+    await expect(probandDataSharingPermissions).toHaveText('Unknown');
+
+    await page.getByPlaceholder('Consenting Notes').fill('Testing notes here - Consenting Notes');
+
+    const probandConsentDocumentationCompleteYes = page.locator("//td[contains(text(), 'Consent Documentation Complete')]" +
+    "/following-sibling::td//mat-radio-button//span[text()='Yes']");
+    await probandConsentDocumentationCompleteYes.click();
+    await expect(probandConsentDocumentationCompleteYes).toBeChecked();
+
+    //The default value of photo permissions is 'N/A'
+    const probandPhotoPermissions = page.locator("//td[contains(text(), 'Photo Permissions')]/following-sibling::td/mat-select");
+    await expect(probandPhotoPermissions).toHaveText('N/A');
+
     //Fill out Medical records section
     await page.locator("//button[contains(text(), 'Medical record')]").click();
 
