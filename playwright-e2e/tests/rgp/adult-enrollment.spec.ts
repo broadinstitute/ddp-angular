@@ -287,15 +287,18 @@ test.describe.serial('Adult Self Enrollment', () => {
     await page.locator("//button[contains(text(), 'Participant Info')]").click();
 
     //Confirm that the same family id is used between proband tab, subject id field, family id field
-    const probandSubjectID = page.getByPlaceholder('Subject ID');
-    const probandFamilyID = page.getByPlaceholder('Family ID');
+    const probandSubjectID = page.locator("//input[@data-placeholder='Subject ID']");
+    const subjectID = (await probandSubjectID.inputValue()).substring(4, 8); //To get the family id in the subject id
+
+    const probandFamilyID = page.locator("//input[@data-placeholder='Family ID']");
+    await expect(subjectID).toEqual(probandFamilyID.inputValue()); //Make sure that the family id in each element is the same
 
     //Confirm that input entered in Important Notes and Process Notes is saved
     await page.getByPlaceholder('Important Notes').fill('Testing notes here - Important Notes');
     await page.getByPlaceholder('Process Notes').fill('Testing notes here - Process Notes');
 
     const probandFirstName = page.locator("//td[contains(text(), 'First Name')]/following-sibling::td//div/input[@data-placeholder='First Name']");
-    await probandFirstName.fill(user.patient.firstName);
+    await probandFirstName.fill(`${user.patient.firstName}_PROBAND`); //PROBAND suffix to make it easy to check for messages in DSS
 
     const probandMiddleName = page.locator("//input[@data-placeholder='Middle Name']");
     await probandMiddleName.fill(user.patient.middleName);
@@ -539,7 +542,69 @@ test.describe.serial('Adult Self Enrollment', () => {
     //Fill out ROR section
     await page.locator("//button[contains(text(), 'ROR')]").click();
 
+    //The default value of Reportable result is 'No'
+    const reportableResult = page.locator("//td[contains(text(), 'Reportable result')]/following-sibling::td/mat-select");
+    await expect(reportableResult).toHaveText('No');
+
+    //The default value of ROR notification is 'N/A'
+    const rorNotification = page.locator("//td[contains(text(), 'ROR notification')]/following-sibling::td/mat-select");
+    await expect(rorNotification).toHaveText('N/A');
+
+    //The default value of Solved is 'No'
+    const solved = page.locator("//td[contains(text(), 'Solved')]/following-sibling::td/mat-select");
+    await expect(solved).toHaveText('No');
+
+    const geneName = page.locator("//td[contains(text(), 'Gene name')]/following-sibling::td//div//input[@data-placeholder='Gene name']");
+    await geneName.fill('Mysterious Gene');
+
+    //The default value of Proceeding to confirm is 'N/A'
+    const proceedingToConfirm = page.locator("//td[contains(text(), 'Proceeding to confirm')]/following-sibling::td/mat-select");
+    await expect(proceedingToConfirm).toHaveText('N/A');
+
+    const providerContactInfo = page.locator("//td[contains(text(), 'Provider contact info')]" +
+    "/following-sibling::td//div//input[@data-placeholder='Provider contact info']");
+    await providerContactInfo.fill(user.doctor.phone);
+
+    //The default value of Confirm Lab is 'N/A'
+    const confirmLab = page.locator("//td[contains(text(), 'Confirm Lab')]/following-sibling::td/mat-select");
+    await expect(confirmLab).toHaveText('N/A');
+
+    const confirmLabAccessionNumber = page.locator("//td[contains(text(), 'Confirm lab accession number')]" +
+    "/following-sibling::td//div//input[@data-placeholder='Confirm lab accession number']");
+    const accessionNumber = getRandomInteger(50000);
+    await confirmLabAccessionNumber.fill(`RGP_LAB_${accessionNumber}`);
+
+    const dateConfirmKitSent = page.locator("//td[contains(text(), 'Date confirm kit sent')]/following-sibling::td//div/input");
+    await dateConfirmKitSent.fill(`${currentDate[0]}/${currentDate[1]}/${currentDate[2]}`);
+
+    const dateOfConfirmReport = page.locator("//td[contains(text(), 'Date of confirm report')]/following-sibling::td//div/input");
+    await dateOfConfirmReport.fill(`${currentDate[0]}/${currentDate[1]}/${currentDate[2]}`);
+
+    await page.getByPlaceholder('ROR Status/Notes').fill('Testing notes here - ROR Status/Notes');
+
+    await page.getByPlaceholder('Post-disclosure notes').fill('Testing notes here - Post-disclosure notes');
+
+    //The default value of Collaboration? is 'N/A'
+    const collaboration = page.locator("//td[contains(text(), 'Collaboration?')]/following-sibling::td/mat-select");
+    await expect(collaboration).toHaveText('N/A');
+
+    //The default value of MTA is 'N/A'
+    const mta = page.locator("//td[contains(text(), 'MTA')]/following-sibling::td/mat-select");
+    await expect(mta).toHaveText('N/A');
+
+    //The default value of Publication is 'N/A'
+    const publication = page.locator("//td[contains(text(), 'Publication')]/following-sibling::td/mat-select");
+    await expect(publication).toHaveText('N/A');
+
+    await page.getByPlaceholder('Publication Info').fill('Testing notes here - Publication Info');
+
     //Fill out Survey section
     await page.locator("//button[contains(text(), 'Survey')]").click();
+
+    await page.locator("//td[contains(text(), 'RedCap Survey Taker')]/following-sibling::td/mat-select").click();
+    await page.locator("//div[@role='listbox']").locator('//mat-option').filter({ hasText: 'Yes' }).click();
+
+    const redCapSurveyCompletedDate = page.locator("//td[contains(text(), 'RedCap Survey Completed Date')]/following-sibling::td//div/input");
+    await redCapSurveyCompletedDate.fill(`${currentDate[0]}/${currentDate[1]}/${currentDate[2]}`);
   });
 });
