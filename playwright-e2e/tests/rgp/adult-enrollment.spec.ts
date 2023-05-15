@@ -421,7 +421,7 @@ test.describe.serial('Adult Self Enrollment', () => {
 
     const probandConsentDocumentationCompleteYes = page.locator("//td[contains(text(), 'Consent Documentation Complete')]" +
     "/following-sibling::td//mat-radio-button//span[text()='Yes']");
-    await probandConsentDocumentationCompleteYes.click();
+    await probandConsentDocumentationCompleteYes.check();
     await expect(probandConsentDocumentationCompleteYes).toBeChecked();
 
     //The default value of photo permissions is 'N/A'
@@ -430,6 +430,48 @@ test.describe.serial('Adult Self Enrollment', () => {
 
     //Fill out Medical records section
     await page.locator("//button[contains(text(), 'Medical record')]").click();
+
+    const probandMedicalRecordsReceivedYes = page.locator("//td[contains(text(), 'Medical Records Received')]" +
+    "/following-sibling::td//mat-radio-button//span[text()='Yes']");
+    await probandMedicalRecordsReceivedYes.check();
+    await expect(probandMedicalRecordsReceivedYes).toBeChecked();
+
+    const medicalRecordslastReceived = page.locator("//td[contains(text(), 'Medical Records Last Received')]/following-sibling::td//div/input");
+    await medicalRecordslastReceived.fill(`${currentDate[0]}/${currentDate[1]}/${currentDate[2]}`);
+
+    await page.getByPlaceholder('Medical Records Notes').fill('Testing notes here - Medical Records Notes');
+
+    //The default value of Medical Records Release Obtained is 'No'
+    const medicalRecordsReleaseObtainedNo = page.locator("//td[contains(text(), 'Medical Records Release Obtained')]" +
+    "/following-sibling::td//mat-radio-button//span[text()='No']");
+    await expect(medicalRecordsReleaseObtainedNo).toBeChecked();
+
+    const recordsLastRequested = page.locator("//td[contains(text(), 'Records Last Requested')]/following-sibling::td//div/input");
+    await recordsLastRequested.fill(`${currentDate[0]}/${currentDate[1]}/${currentDate[2]}`);
+
+    const familyProvidedURL = page.locator("//td[contains(text(), 'Family Provided URL (if any)')]" +
+    "/following-sibling::td//div//input[@data-placeholder='Family Provided URL (if any)']");
+    await familyProvidedURL.fill('https://en.wikipedia.org/wiki/Broad_Institute');
+
+    //todo Update testing Referral Source to check for functionality from ticket PEPPER-575 (ticket in-progress)
+    await page.locator("//td[contains(text(), 'Referral Source')]/following-sibling::td/mat-select").click();
+    await page.locator("//div[@role='listbox']").locator('//mat-option').filter({ hasText: 'Doctor' }).click();
+
+    await page.getByPlaceholder('Referral Notes').fill('Testing notes here - Referral Notes');
+
+    const referringClinician = page.locator("//td[contains(text(), 'Referring Clinician')]" +
+    "/following-sibling::td//div//input[@data-placeholder='Referring Clinician']");
+    await referringClinician.fill(`${user.doctor.name}`);
+
+    await page.locator("//td[contains(text(), 'Clinician Referral Form')]/following-sibling::td/mat-select").click();
+    await page.locator("//div[@role='listbox']").locator('//mat-option').filter({ hasText: 'Yes' }).click();
+
+    //The default value of Consent to speak with clinician is 'Unknown'
+    const consentToSpeakToClinician = page.locator("//td[contains(text(), 'Consent to speak with clinician')]/following-sibling::td/mat-select");
+    await expect(consentToSpeakToClinician).toHaveText('Unknown');
+
+    await page.locator("//td[contains(text(), 'Cohort')]/following-sibling::td/mat-select").click();
+    await page.locator("//div[@role='listbox']").locator('//mat-option').filter({ hasText: 'Hereditary hemorrhagic telangeictasia' }).click();
 
     //Fill out Primary Sample section
     await page.locator("//button[contains(text(), 'Primary Sample')]").click();
