@@ -464,7 +464,7 @@ test.describe.serial('Adult Self Enrollment', () => {
     await referringClinician.fill(`${user.doctor.name}`);
 
     await page.locator("//td[contains(text(), 'Clinician Referral Form')]/following-sibling::td/mat-select").click();
-    await page.locator("//div[@role='listbox']").locator('//mat-option').filter({ hasText: 'Yes' }).click();
+    await page.locator("//div[@role='listbox']").locator('//mat-option').filter({ hasText: 'No' }).click();
 
     //The default value of Consent to speak with clinician is 'Unknown'
     const consentToSpeakToClinician = page.locator("//td[contains(text(), 'Consent to speak with clinician')]/following-sibling::td/mat-select");
@@ -475,6 +475,45 @@ test.describe.serial('Adult Self Enrollment', () => {
 
     //Fill out Primary Sample section
     await page.locator("//button[contains(text(), 'Primary Sample')]").click();
+
+    await page.locator("//td[contains(text(), 'Kit Type to Request')]/following-sibling::td/mat-select").click();
+    await page.locator("//div[@role='listbox']").locator('//mat-option').filter({ hasText: 'None - external DNA from blood' }).click();
+
+    const dateKitSent = page.locator("//td[contains(text(), 'Date Kit Sent')]/following-sibling::td//div/input");
+    await dateKitSent.fill(`${currentDate[0]}/${currentDate[1]}/${currentDate[2]}`);
+
+    await page.locator("//td[contains(text(), 'CLIA or NonCLIA Kit Sent')]/following-sibling::td/mat-select").click();
+    await page.locator("//div[@role='listbox']").locator('//mat-option').filter({ hasText: 'Non CLIA' }).click();
+
+    const dateEDTASampleReceived = page.locator("//td[contains(text(), 'Date EDTA Sample Received')]/following-sibling::td//div/input");
+    await dateEDTASampleReceived.fill(`${currentDate[0]}/${currentDate[1]}/${currentDate[2]}`);
+
+    const datePAXgeneSampleReceived = page.locator("//td[contains(text(), 'Date PAXgene Sample Received')]/following-sibling::td//div/input");
+    await datePAXgeneSampleReceived.fill(`${currentDate[0]}/${currentDate[1]}/${currentDate[2]}`);
+
+    const dateBackupEDTATubeReceived = page.locator("//td[contains(text(), 'Date back-up EDTA tube received')]/following-sibling::td//div/input");
+    await dateBackupEDTATubeReceived.fill(`${currentDate[0]}/${currentDate[1]}/${currentDate[2]}`);
+
+    const dateSentToGP = page.locator("//td[contains(text(), 'Sent to GP')]/following-sibling::td//div/input");
+    await dateSentToGP.fill(`${currentDate[0]}/${currentDate[1]}/${currentDate[2]}`);
+
+    await page.getByPlaceholder('Sample Notes').fill('Testing notes here - Sample Notes');
+
+    await page.locator("//td[contains(text(), 'Blood/Saliva Processing')]/following-sibling::td/mat-select").click();
+    await page.locator("//div[@role='listbox']").locator('//mat-option').filter({ hasText: 'WGS' }).click();
+
+    //The default value of Long-read WGS is 'No'
+    const longReadWGS = page.locator("//td[contains(text(), 'Long-read WGS')]/following-sibling::td/mat-select");
+    await expect(longReadWGS).toHaveText('No');
+
+    //The default value of Methylation is 'No'
+    const methlytation = page.locator("//td[contains(text(), 'Methylation')]/following-sibling::td/mat-select");
+    await expect(methlytation).toHaveText('No');
+
+    //The default value of Blood RNASeq? is 'No'
+    const bloodRNASeqNotApplicable = page.locator("//td[contains(text(), 'Blood RNAseq?')]" +
+    "/following-sibling::td//mat-radio-button//span[text()='N/A']");
+    await expect(bloodRNASeqNotApplicable).toBeChecked();
 
     //Fill out Tissue section
     await page.locator("//button[contains(text(), 'Tissue')]").click();
