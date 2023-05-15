@@ -9,7 +9,7 @@ import TellUsAboutYourFamilyPage from 'pages/rgp/enrollment/tell-us-about-your-f
 import TellUsYourStoryPage, { WHO } from 'pages/rgp/enrollment/tell-us-your-story-page';
 import HomePage from 'pages/rgp/home-page';
 import { setAuth0UserEmailVerified } from 'utils/api-utils';
-import { calculateBirthDate, setPatientParticipantGuid } from 'utils/faker-utils';
+import { calculateBirthDate, getRandomInteger, setPatientParticipantGuid } from 'utils/faker-utils';
 import dsmHome from 'pages/dsm/home-page';
 import * as dsmAuth from 'authentication/auth-dsm';
 import Select from 'lib/widget/select';
@@ -530,6 +530,11 @@ test.describe.serial('Adult Self Enrollment', () => {
     //The default value of Tissue processing is 'N/A'
     const tissueProcessing = page.locator("//td[contains(text(), 'Tissue processing')]/following-sibling::td/mat-select");
     await expect(tissueProcessing).toHaveText('N/A');
+
+    const sampleID = getRandomInteger(50000);
+    const tissueSampleID = page.locator("//td[contains(text(), 'Tissue Sample ID')]" +
+    "/following-sibling::td//div//input[@data-placeholder='Tissue Sample ID']");
+    await tissueSampleID.fill(`RGP_${sampleID}`);
 
     //Fill out ROR section
     await page.locator("//button[contains(text(), 'ROR')]").click();

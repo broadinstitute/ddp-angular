@@ -45,3 +45,9 @@ export const calculateBirthDate = (month: string, day: string, year: string): nu
 
   return resultAge;
 };
+
+//Mostly planned for use with tissue sample ids to make them unique and useful in case something
+//needs to be manually checked
+export const getRandomInteger = (maxNumber: number): number => {
+  return Math.floor(Math.random() * maxNumber);
+}
