@@ -518,6 +518,19 @@ test.describe.serial('Adult Self Enrollment', () => {
     //Fill out Tissue section
     await page.locator("//button[contains(text(), 'Tissue')]").click();
 
+    await page.locator("//td[contains(text(), 'Potential tissue sample available')]/following-sibling::td/mat-select").click();
+    await page.locator("//div[@role='listbox']").locator('//mat-option').filter({ hasText: 'Maybe' }).click();
+
+    await page.getByPlaceholder('Tissue Notes').fill('Testing notes here - Tissue Notes');
+
+    const tissueTypeReceived = page.locator("//td[contains(text(), 'Tissue Type Received')]" +
+    "/following-sibling::td//div//input[@data-placeholder='Tissue Type Received']");
+    await tissueTypeReceived.fill('Mysterious Tissue');
+
+    //The default value of Tissue processing is 'N/A'
+    const tissueProcessing = page.locator("//td[contains(text(), 'Tissue processing')]/following-sibling::td/mat-select");
+    await expect(tissueProcessing).toHaveText('N/A');
+
     //Fill out ROR section
     await page.locator("//button[contains(text(), 'ROR')]").click();
 
