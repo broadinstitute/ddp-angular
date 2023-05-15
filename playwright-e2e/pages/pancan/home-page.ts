@@ -42,7 +42,7 @@ export default class HomePage extends PancanPageBase implements HomePageInterfac
     const [response] = await Promise.all([
       this.page.waitForResponse(response => response.url().includes('/v1/mailing-list')
         && response.request().method() === 'POST'
-        && response.status() === 204),
+        && response.status() === 204, { timeout: 50 * 1000 }),
       this.page.getByRole('button', { name: 'JOIN' }).click()
     ]);
   }

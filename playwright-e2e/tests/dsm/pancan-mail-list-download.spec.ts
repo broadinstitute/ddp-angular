@@ -79,8 +79,8 @@ test.describe.serial('Join Pancan Mailing List', () => {
 
     // Verify headers
     const table = await mailingListPage.getMailingListTable();
-    const orderedHeaders = [COLUMN.FIRST_NAME, COLUMN.LAST_NAME, COLUMN.EMAIL, '', COLUMN.DATE];
-    const actualHeaders = await table.getHeaderNames();
+    const orderedHeaders = [COLUMN.FIRST_NAME, COLUMN.LAST_NAME, COLUMN.EMAIL, COLUMN.DATE];
+    const actualHeaders: string[] = await table.getHeaderNames();
     assertTableHeaders(actualHeaders, orderedHeaders);
 
     // Verify new Pancan participant email is found inside table.
