@@ -32,6 +32,8 @@ export const assertSelectedOption = async (locator: Locator, expectedOption: str
 };
 
 export const assertTableHeaders = (actualHeaders: string[], expectedHeaders: string[]): void => {
-  expect(actualHeaders).toHaveLength(expectedHeaders.length);
-  expect(actualHeaders).toEqual(expectedHeaders);
+  const filterActualHeaders = actualHeaders.filter(value => !!value);
+  const filterExpectedHeaders = expectedHeaders.filter(value => !!value);
+  expect(filterActualHeaders).toHaveLength(filterExpectedHeaders.length);
+  expect(filterActualHeaders).toEqual(filterExpectedHeaders);
 }

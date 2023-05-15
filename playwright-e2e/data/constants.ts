@@ -85,5 +85,6 @@ export const STATES = [
 export enum APP {
   RGP = 'RGP',
   AT = 'AT',
-  OSTEO = 'OSTEO'
+  OSTEO = 'OSTEO',
+  PANCAN = 'PanCan'
 }
