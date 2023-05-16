@@ -48,13 +48,13 @@ export default class KitsWithoutLabelPage {
 
   private async deactivateKit(deactivateButton: Locator): Promise<void> {
     await deactivateButton.click();
-    const deactivateReasonInput = await this.page.locator(this.deactivateReasonInputXPath);
-    const deactivateReasonButton = await this.page.locator(this.deactivateReasonBtnXPath);
+    const deactivateReasonInput = this.page.locator(this.deactivateReasonInputXPath);
+    const deactivateReasonButton = this.page.locator(this.deactivateReasonBtnXPath);
 
-    await expect(await deactivateReasonInput,
+    await expect(deactivateReasonInput,
       'Kits Without Label page - Deactivate reason input field is not visible')
       .toBeVisible();
-    await expect(await deactivateReasonButton,
+    await expect(deactivateReasonButton,
       'Kits Without Label page - Deactivate reason button is not visible')
       .toBeVisible();
 

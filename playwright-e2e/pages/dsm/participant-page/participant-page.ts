@@ -78,15 +78,15 @@ export default class ParticipantPage {
     return await this.tabs.clickTab<T>(tabName) as T;
   }
 
-  private async readMainTextInfoFor(key: MainInfoEnum): Promise<string | null> {
+  private readMainTextInfoFor(key: MainInfoEnum) {
    return this.page.locator(this.getMainTextInfoXPath(key)).textContent();
   }
 
-  private async readMainInputValueFor(key: MainInfoEnum): Promise<string | null> {
+  private readMainInputValueFor(key: MainInfoEnum) {
     return this.page.locator(this.getMainInputValueInfoXPath(key)).inputValue();
   }
 
-  private async readMainCheckboxValueFor(key: MainInfoEnum): Promise<boolean> {
+  private readMainCheckboxValueFor(key: MainInfoEnum) {
     return this.page.locator(this.getMainCheckboxValueInfoXPath(key)).isChecked();
   }
   /* ---- */
