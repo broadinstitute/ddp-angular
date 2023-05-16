@@ -4,7 +4,7 @@ import {APIRequestContext, expect, Page} from '@playwright/test';
 import {KitTypeEnum} from 'lib/component/dsm/kitType/enums/kitType-enum';
 import {waitForNoSpinner, waitForResponse} from 'utils/test-utils';
 import {KitsColumnsEnum} from '../enums/kitsColumns-enum';
-import {assertTableHeaders} from "utils/assertion-helper";
+import {assertTableHeaders} from 'utils/assertion-helper';
 
 const { BSP_TOKEN, DSM_BASE_URL } = process.env;
 

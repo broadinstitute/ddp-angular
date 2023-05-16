@@ -32,7 +32,7 @@ export class KitsTable {
     const headers = await this.header.locator('th');
     const headersCount = await headers.count();
     const actualHeadersTexts = [];
-    for(let i = 0; i < headersCount; i++) {
+    for (let i = 0; i < headersCount; i++) {
       const headerText = await headers.nth(i).innerText();
       actualHeadersTexts.push(headerText.trim());
     }

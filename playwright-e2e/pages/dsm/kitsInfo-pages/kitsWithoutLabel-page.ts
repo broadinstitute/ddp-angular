@@ -4,7 +4,7 @@ import {KitTypeEnum} from 'lib/component/dsm/kitType/enums/kitType-enum';
 import {waitForNoSpinner, waitForResponse} from 'utils/test-utils';
 import {KitsTable} from 'lib/component/dsm/tables/kitsTable';
 import {KitsColumnsEnum} from './enums/kitsColumns-enum';
-import {assertTableHeaders} from "utils/assertion-helper";
+import {assertTableHeaders} from 'utils/assertion-helper';
 
 
 export default class KitsWithoutLabelPage {
