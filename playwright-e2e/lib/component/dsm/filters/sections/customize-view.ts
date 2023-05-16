@@ -30,15 +30,13 @@ export class CustomizeView {
     const columnXPath = this.columnsGroupXPath + this.columnPathXPath(columnName);
     const column = this.page.locator(columnXPath);
 
-    if(!deselect) {
-      if(!(await this.isChecked(column))) {
+    if (!deselect) {
+      if (!(await this.isChecked(column))) {
         await this.page.locator(columnXPath).click()
       }
-    } else {
-      if(await this.isChecked(column)) {
+    } else if (await this.isChecked(column)) {
         await this.page.locator(columnXPath).click()
       }
-    }
   }
 
   private async openColumnsGroup(): Promise<void> {
