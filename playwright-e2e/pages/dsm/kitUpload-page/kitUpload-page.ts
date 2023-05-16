@@ -2,7 +2,7 @@ import {expect, Locator, Page, Response} from '@playwright/test';
 import {KitType} from 'lib/component/dsm/kitType/kitType';
 import {KitTypeEnum} from 'lib/component/dsm/kitType/enums/kitType-enum';
 import {waitForNoSpinner, waitForResponse} from 'utils/test-utils';
-import {crateTextFileSync, deleteFileSync} from 'utils/file-utils';
+import {createTextFileSync, deleteFileSync} from 'utils/file-utils';
 import {KitUploadInfo} from 'pages/dsm/kitUpload-page/models/kitUpload-model';
 import {StudyEnum} from 'lib/component/dsm/navigation/enums/selectStudyNav-enum';
 import {KitUploadResponse} from './interfaces/kitUpload';
@@ -28,7 +28,7 @@ export default class KitUploadPage {
 
   public async uploadFile(kitType: KitTypeEnum, kitInfo: KitUploadInfo[], study: StudyEnum) {
     const path = `${__dirname}/${kitType}_${study}-${new Date().getTime()}.txt`;
-    crateTextFileSync(path, this.T_HEAD + this.createKitUploadBody(kitInfo));
+    createTextFileSync(path, this.T_HEAD + this.createKitUploadBody(kitInfo));
     await this.fileInput.setInputFiles(path);
 
     await expect(this.uploadKitsBtn, 'Kit Upload page - Upload Kits button is disabled').toBeEnabled();

@@ -8,7 +8,7 @@ export interface MailListCSV {
   lastName?: string;
 }
 
-export function crateTextFileSync(pathName: string, data: string) {
+export function createTextFileSync(pathName: string, data: string) {
   try {
     fs.writeFileSync(pathName, data);
     console.log(`File: ${pathName} - created successfully`)
