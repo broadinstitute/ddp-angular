@@ -2,8 +2,8 @@ import { expect } from '@playwright/test';
 import { APP } from 'data/constants';
 import { test } from 'fixtures/pancan-fixture';
 import { login } from 'authentication/auth-dsm';
-import { Miscellaneous } from 'lib/component/dsm/navigation/enums/miscellaneousNav.enum';
-import { Study } from 'lib/component/dsm/navigation/enums/selectStudyNav.enum';
+import {StudyEnum} from "lib/component/dsm/navigation/enums/selectStudyNav-enum";
+import {MiscellaneousEnum} from "lib/component/dsm/navigation/enums/miscellaneousNav-enum";
 import { Navigation } from 'lib/component/dsm/navigation/navigation';
 import Modal from 'lib/component/modal';
 import { SortOrder } from 'lib/component/table';
@@ -16,6 +16,7 @@ import lodash from 'lodash';
 
 import HomePage from 'pages/pancan/home-page';
 import { MailListCSV, readMailListCSVFile } from 'utils/file-utils';
+
 
 const PANCAN_USER_EMAIL = process.env.PANCAN_USER_EMAIL as string;
 const newEmail = generateEmailAlias(PANCAN_USER_EMAIL);
@@ -35,16 +36,16 @@ test.describe.serial('Join Pancan Mailing List', () => {
     expect(await modal.toLocator().screenshot()).toMatchSnapshot('stay-informed-modal.png');
   });
 
-  test('DSM download Mail List @dsm @pancan', async ({ page }) => {
+  test('DSM download Mail List @dsm @pancan', async ({ page, request }) => {
     await login(page);
 
     const welcomePage = new WelcomePage(page);
-    await welcomePage.selectStudy(Study.PANCAN);
+    await welcomePage.selectStudy(StudyEnum.PANCAN);
 
-    const navigation = new Navigation(page);
+    const navigation = new Navigation(page, request);
     const [mailListResponse] = await Promise.all([
       page.waitForResponse(response => response.url().includes('/ui/mailingList/PanCan') && response.status() === 200),
-      navigation.selectMiscellaneous(Miscellaneous.MAILING_LIST)
+      navigation.selectMiscellaneous(MiscellaneousEnum.MAILING_LIST)
     ]);
     const respJson: MailListCSV[] = JSON.parse(await mailListResponse.text());
     expect(respJson.length).toBeGreaterThan(1); // response should contains at least one emails
