@@ -1,23 +1,27 @@
-import { BrowserContext, Download, expect, Locator, Page } from '@playwright/test';
+import {BrowserContext, Download, expect, Locator, Page, Response} from '@playwright/test';
 import Input from 'lib/widget/input';
 import Checkbox from 'lib/widget/checkbox';
 import Select from 'lib/widget/select';
 import axios from 'axios';
 
-const { SITE_PASSWORD } = process.env;
-
-export interface WaitForResponseByURLConfig {
-  url: string;
-  status: number;
+export interface WaitForResponse {
+  uri: string;
+  status?: number;
   timeout?: number;
 }
+
+const { SITE_PASSWORD } = process.env;
 
 export async function waitForNoSpinner(page: Page): Promise<void> {
   await page.locator('[data-icon="spinner"].fa-spin, mat-spinner[role="progressbar"]').waitFor({ state: 'hidden', timeout: 60 * 1000 });
 }
 
-export async function waitForResponseByURL(page: Page, { url, status, timeout }: WaitForResponseByURLConfig) {
-  await page.waitForResponse((resp) => resp.url().includes(url) && resp.status() === status, { timeout });
+export async function waitForResponse(page: Page, {uri, status = 200, timeout = 30000}: WaitForResponse): Promise<Response> {
+  try {
+    return await page.waitForResponse((response: Response) => response.url().includes(uri) && response.status() === status, {timeout})
+  } catch (error: any) {
+    throw new Error(`Timeout ${timeout}ms exceeded while waiting for ${uri} URI response with status - ${status}`)
+  }
 }
 
 export async function waitUntilRemoved(locator: Locator): Promise<void> {

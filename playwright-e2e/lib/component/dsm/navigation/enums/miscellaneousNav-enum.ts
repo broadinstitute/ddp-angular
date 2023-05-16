@@ -1,4 +1,4 @@
-export enum Miscellaneous {
+export enum MiscellaneousEnum {
   MAILING_LIST = 'Mailing List',
   PARTICIPANT_WITHDRAWAL = 'Participant Withdrawal',
   PARTICIPANT_EVENT = 'Participant Event',

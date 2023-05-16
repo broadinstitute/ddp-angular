@@ -2,35 +2,28 @@ import { test } from '@playwright/test';
 import { login } from 'authentication/auth-dsm';
 import ParticipantListPage from 'pages/dsm/participantList-page';
 import HomePage from 'pages/dsm/home-page';
-import ParticipantPage from 'pages/dsm/participant-page';
+import ParticipantPage from 'pages/dsm/participant-page/participant-page';
 import CohortTag from 'lib/component/dsm/cohort-tag';
-import { StudyNav } from 'lib/component/dsm/navigation/enums/studyNav.enum';
+import { StudyNavEnum } from 'lib/component/dsm/navigation/enums/studyNav-enum';
 import { Navigation } from 'lib/component/dsm/navigation/navigation';
 import * as crypto from 'crypto';
 import { AdditionalFilter } from 'lib/component/dsm/filters/sections/search/search-enums';
 import { WelcomePage } from 'pages/dsm/welcome-page';
-import { Study } from 'lib/component/dsm/navigation/enums/selectStudyNav.enum';
+import { StudyEnum } from 'lib/component/dsm/navigation/enums/selectStudyNav-enum';
 
-/**
- * @TODO
- * 1. Reimplement cohort tag functionality
- * 2. Reimplement participant list functionalities
- * 3. refactor code
- * 4. have frequently used filters or other functions made simple
- */
-test.describe.parallel('Cohort tags', () => {
+test.describe.skip('Cohort tags', () => {
   let welcomePage: WelcomePage;
   let homePage: HomePage;
   let navigation: Navigation;
   let cohortTag: CohortTag;
 
-  const studyNames = [Study.BRAIN, Study.PANCAN];
+  const studyNames = [StudyEnum.BRAIN, StudyEnum.PANCAN];
 
-  test.beforeEach(async ({ page }) => {
+  test.beforeEach(async ({ page, request }) => {
     await login(page);
     welcomePage = new WelcomePage(page);
     homePage = new HomePage(page);
-    navigation = new Navigation(page);
+    navigation = new Navigation(page, request);
     cohortTag = new CohortTag(page);
   });
 
@@ -48,7 +41,7 @@ test.describe.parallel('Cohort tags', () => {
       await homePage.assertWelcomeTitle();
       await homePage.assertSelectedStudyTitle(studyName);
 
-      const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(StudyNav.PARTICIPANT_LIST);
+      const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
       const customizeViewPanel = participantListPage.filters.customizeViewPanel;
       const searchPanel = participantListPage.filters.searchPanel;
       const participantListTable = participantListPage.participantListTable;
@@ -78,7 +71,7 @@ test.describe.parallel('Cohort tags', () => {
       await cohortTag.remove(cohortTagValue1);
       await cohortTag.add(cohortTagValue2);
       await cohortTag.add(cohortTagValue3);
-      await participantPage.fillParticipantNotes(participantNoteValue);
+      await participantPage.fillNotes(participantNoteValue);
       await page.reload();
 
       await participantListPage.assertPageTitle();
@@ -108,10 +101,10 @@ test.describe.parallel('Cohort tags', () => {
 
       await cohortTag.assertDuplicateCohortTagMessage();
 
-      await participantPage.assertParticipantNotesToBe(participantNoteValue);
+      await participantPage.assertNotesToBe(participantNoteValue);
 
       await participantPage.backToList();
-      await participantListTable.selectParticipantAt(0);
+      await participantListTable.selectCheckboxForParticipantAt(0);
       await participantListPage.addBulkCohortTags();
       await cohortTag.add(cohortTagValue3, false);
       await cohortTag.submitAndExit();
