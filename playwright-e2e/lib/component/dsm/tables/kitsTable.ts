@@ -29,7 +29,7 @@ export class KitsTable {
   }
 
   public async getHeaderTexts(): Promise<string[]> {
-    const headers = await this.header.locator('th');
+    const headers = this.header.locator('th');
     const headersCount = await headers.count();
     const actualHeadersTexts = [];
     for (let i = 0; i < headersCount; i++) {
