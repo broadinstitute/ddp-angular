@@ -20,7 +20,7 @@ export async function waitForResponse(page: Page, {uri, status = 200, timeout = 
   try {
     return await page.waitForResponse((response: Response) => response.url().includes(uri) && response.status() === status, {timeout})
   } catch (error: any) {
-    throw new Error(`Timeout ${timeout}ms exceeded while waiting for ${uri} URI response`)
+    throw new Error(`Timeout ${timeout}ms exceeded while waiting for ${uri} URI response with status - ${status}`)
   }
 }
 

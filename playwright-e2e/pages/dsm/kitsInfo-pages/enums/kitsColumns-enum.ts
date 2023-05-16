@@ -1,4 +1,5 @@
 export enum KitsColumnsEnum {
+  PRINT_KIT = 'Print Kit',
   SHORT_ID = 'Short ID',
   SHIPPING_ID = 'Shipping ID',
   TRACKING_NUMBER = 'Tracking Number',

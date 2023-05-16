@@ -4,9 +4,15 @@ import {KitsTable} from 'lib/component/dsm/tables/kitsTable';
 import {KitTypeEnum} from 'lib/component/dsm/kitType/enums/kitType-enum';
 import {waitForNoSpinner, waitForResponse} from 'utils/test-utils';
 import {KitsColumnsEnum} from './enums/kitsColumns-enum';
+import {assertTableHeaders} from "utils/assertion-helper";
 
 export default class KitsSentPage {
   private readonly PAGE_TITLE = 'Kits Sent';
+  private readonly TABLE_HEADERS = [KitsColumnsEnum.SHORT_ID, KitsColumnsEnum.SHIPPING_ID,
+    KitsColumnsEnum.TRACKING_NUMBER, KitsColumnsEnum.TRACKING_RETURN,
+    KitsColumnsEnum.SENT, KitsColumnsEnum.MF_CODE, KitsColumnsEnum.DDP_REALM,
+    KitsColumnsEnum.TYPE, KitsColumnsEnum.SAMPLE_TYPE];
+
   private readonly kitType = new KitType(this.page);
   private readonly kitsTable = new KitsTable(this.page);
 
@@ -54,10 +60,8 @@ export default class KitsSentPage {
     }
   }
 
-  public async assertTableHeader() {
-    expect(await this.kitsTable.header.screenshot(),
-      "Kits Sent page - Table header columns screenshot doesn't match the provided one (Kits without label)")
-      .toMatchSnapshot('kits_sent_table_header.png');
+  public async assertTableHeader(): Promise<void> {
+    assertTableHeaders(await this.kitsTable.getHeaderTexts(), this.TABLE_HEADERS);
   }
 
   public async assertDisplayedRowsCount(count: number): Promise<void> {

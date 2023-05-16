@@ -4,11 +4,16 @@ import {APIRequestContext, expect, Page} from '@playwright/test';
 import {KitTypeEnum} from 'lib/component/dsm/kitType/enums/kitType-enum';
 import {waitForNoSpinner, waitForResponse} from 'utils/test-utils';
 import {KitsColumnsEnum} from '../enums/kitsColumns-enum';
+import {assertTableHeaders} from "utils/assertion-helper";
 
 const { BSP_TOKEN, DSM_BASE_URL } = process.env;
 
 export default class KitsReceivedPage {
   private readonly PAGE_TITLE = 'Kits Received';
+  private readonly TABLE_HEADERS = [KitsColumnsEnum.SHORT_ID, KitsColumnsEnum.SHIPPING_ID,
+    KitsColumnsEnum.RECEIVED, KitsColumnsEnum.MF_CODE,
+    KitsColumnsEnum.DDP_REALM, KitsColumnsEnum.TYPE, KitsColumnsEnum.SAMPLE_TYPE];
+
   private readonly kitType = new KitType(this.page);
   private readonly kitsTable = new KitsTable(this.page);
 
@@ -56,13 +61,13 @@ export default class KitsReceivedPage {
   }
 
   /* Assertions */
-  public async assertPageTitle() {
+  public async assertPageTitle(): Promise<void> {
     await expect(this.page.locator('h1'),
       'Kits Received page - page title is wrong')
       .toHaveText(this.PAGE_TITLE);
   }
 
-  public async assertReloadKitListBtn() {
+  public async assertReloadKitListBtn(): Promise<void> {
     await expect(this.page.locator(this.reloadKitListBtnXPath),
       'Kits Received page - Reload Kit List Button is not visible')
       .toBeVisible();
@@ -76,10 +81,8 @@ export default class KitsReceivedPage {
     }
   }
 
-  public async assertTableHeader() {
-    await expect(await this.kitsTable.header.screenshot(),
-      "Kits Received page - Table header columns screenshot doesn't match the provided one (Kits without label)")
-      .toMatchSnapshot(`kits_received_table_header.png`);
+  public async assertTableHeader(): Promise<void> {
+    assertTableHeaders(await this.kitsTable.getHeaderTexts(), this.TABLE_HEADERS);
   }
 
   public async assertDisplayedRowsCount(count: number): Promise<void> {

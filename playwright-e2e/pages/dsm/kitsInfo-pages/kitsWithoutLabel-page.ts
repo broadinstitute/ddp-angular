@@ -4,10 +4,16 @@ import {KitTypeEnum} from 'lib/component/dsm/kitType/enums/kitType-enum';
 import {waitForNoSpinner, waitForResponse} from 'utils/test-utils';
 import {KitsTable} from 'lib/component/dsm/tables/kitsTable';
 import {KitsColumnsEnum} from './enums/kitsColumns-enum';
+import {assertTableHeaders} from "utils/assertion-helper";
 
 
 export default class KitsWithoutLabelPage {
   private readonly PAGE_TITLE = 'Kits without label';
+  private readonly TABLE_HEADERS = [KitsColumnsEnum.PRINT_KIT, KitsColumnsEnum.SHORT_ID,
+    KitsColumnsEnum.PREFERRED_LANGUAGE, KitsColumnsEnum.SHIPPING_ID,
+    KitsColumnsEnum.DDP_REALM, KitsColumnsEnum.TYPE, ''];
+  // the last item is empty string because the deactivate buttons columns doesn't have one
+
   private readonly kitType = new KitType(this.page);
   private readonly kitsTable = new KitsTable(this.page);
 
@@ -67,27 +73,25 @@ export default class KitsWithoutLabelPage {
   }
 
   /* Assertions */
-  public async assertPageTitle() {
+  public async assertPageTitle(): Promise<void> {
     await expect(this.page.locator('h1'),
       "Kits Without Label page - page title doesn't match the expected one")
       .toHaveText(this.PAGE_TITLE);
   }
 
-  public async assertReloadKitListBtn() {
+  public async assertReloadKitListBtn(): Promise<void> {
     await expect(this.page.locator(this.reloadKitListBtnXPath),
       'Kits Without Label page - Reload Kit List Button is not visible').toBeVisible();
   }
 
-  public async assertCreateLabelsBtn() {
+  public async assertCreateLabelsBtn(): Promise<void> {
     await expect(this.page.locator(this.createLabelsBtnXPath),
       'Kits Without Label page - Create Labels button is not visible')
       .toBeVisible();
   }
 
-  public async assertTableHeader() {
-    expect(await this.kitsTable.header.screenshot(),
-      "Kits Without Label page - Table header columns screenshot doesn't match the provided one")
-      .toMatchSnapshot('kits_without_label_table_header.png');
+  public async assertTableHeader(): Promise<void> {
+    assertTableHeaders(await this.kitsTable.getHeaderTexts(), this.TABLE_HEADERS);
   }
 
   /* XPaths */
