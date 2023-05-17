@@ -25,7 +25,7 @@ import KitsSentPage from 'pages/dsm/kitsInfo-pages/kitsSentPage';
 import KitsReceivedPage from 'pages/dsm/kitsInfo-pages/kitsReceived-page/kitsReceivedPage';
 
 
-test.describe.parallel.only('Saliva Kits upload flow (OC PE-CGS)', () => {
+test.describe.parallel('Saliva Kits upload flow', () => {
   let welcomePage: WelcomePage;
   let homePage: HomePage;
   let navigation: Navigation;
