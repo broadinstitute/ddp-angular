@@ -46,7 +46,7 @@ test.describe.parallel.only('Saliva Kits upload flow (OC PE-CGS)', () => {
     navigation = new Navigation(page, request);
   });
 
-  for(let study of studies) {
+  for (const study of studies) {
     test(`Should upload a single kit for one participant @functional @visual @dsm @${study}`, async () => {
       await welcomePage.selectStudy(study);
       await homePage.assertWelcomeTitle();
