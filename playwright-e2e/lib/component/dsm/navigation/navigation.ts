@@ -7,12 +7,13 @@ import {StudyEnum} from './enums/selectStudyNav-enum';
 import {NavigationItems} from './navigation-types';
 import {SamplesNavEnum} from './enums/samplesNav-enum';
 import KitsWithoutLabelPage from 'pages/dsm/kitsInfo-pages/kitsWithoutLabel-page';
-import InitialScanPage from 'pages/dsm/initialScan-page';
-import FinalScanPage from 'pages/dsm/finalScan-page';
+import InitialScanPage from 'pages/dsm/scanner-pages/initialScan-page';
+import FinalScanPage from 'pages/dsm/scanner-pages/finalScan-page';
 import KitUploadPage from 'pages/dsm/kitUpload-page/kitUpload-page';
 import {MiscellaneousEnum} from 'lib/component/dsm/navigation/enums/miscellaneousNav-enum';
 import KitsSentPage from 'pages/dsm/kitsInfo-pages/kitsSentPage';
 import KitsReceivedPage from 'pages/dsm/kitsInfo-pages/kitsReceived-page/kitsReceivedPage';
+import TrackingScanPage from "pages/dsm/scanner-pages/trackingScan-page";
 
 
 type Selection = StudyNavEnum | StudyEnum | SamplesNavEnum | MiscellaneousEnum;
@@ -23,6 +24,7 @@ export class Navigation {
     samples: new Map<string, object>([
       [SamplesNavEnum.KITS_WITHOUT_LABELS, new KitsWithoutLabelPage(this.page)],
       [SamplesNavEnum.INITIAL_SCAN, new InitialScanPage(this.page)],
+      [SamplesNavEnum.TRACKING_SCAN, new TrackingScanPage(this.page)],
       [SamplesNavEnum.FINAL_SCAN, new FinalScanPage(this.page)],
       [SamplesNavEnum.KIT_UPLOAD, new KitUploadPage(this.page)],
       [SamplesNavEnum.SENT, new KitsSentPage(this.page)],

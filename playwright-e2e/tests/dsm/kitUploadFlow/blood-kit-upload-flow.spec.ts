@@ -23,9 +23,10 @@ import KitsWithoutLabelPage from 'pages/dsm/kitsInfo-pages/kitsWithoutLabel-page
 import {KitsColumnsEnum} from 'pages/dsm/kitsInfo-pages/enums/kitsColumns-enum';
 import KitsSentPage from 'pages/dsm/kitsInfo-pages/kitsSentPage';
 import KitsReceivedPage from 'pages/dsm/kitsInfo-pages/kitsReceived-page/kitsReceivedPage';
+import TrackingScanPage from "pages/dsm/scanner-pages/trackingScan-page";
 
 
-test.describe.parallel('Saliva Kits upload flow', () => {
+test.describe.parallel.only('Blood Kits upload flow', () => {
   let welcomePage: WelcomePage;
   let homePage: HomePage;
   let navigation: Navigation;
@@ -33,10 +34,11 @@ test.describe.parallel('Saliva Kits upload flow', () => {
   let shortID: string;
   let kitUploadInfo: KitUploadInfo;
   let kitLabel: string;
+  let trackingLabel: string;
   let shippingID: string;
 
-  const studies = [StudyEnum.LMS, StudyEnum.OSTEO2];
-  const kitType = KitTypeEnum.SALIVA;
+  const studies = [StudyEnum.OSTEO2];
+  const kitType = KitTypeEnum.BLOOD;
   const expectedKitTypes = [KitTypeEnum.SALIVA, KitTypeEnum.BLOOD];
 
   test.beforeEach(async ({ page, request }) => {
@@ -129,6 +131,13 @@ test.describe.parallel('Saliva Kits upload flow', () => {
       await kitsWithoutLabelPage.assertPageTitle();
       await kitsWithoutLabelPage.search(KitsColumnsEnum.SHORT_ID, shortID);
       shippingID = (await kitsWithoutLabelPage.getData(KitsColumnsEnum.SHIPPING_ID)).trim();
+
+      // tracking scan
+      const trackingScanPage = await navigation.selectFromSamples<TrackingScanPage>(SamplesNavEnum.TRACKING_SCAN);
+      await trackingScanPage.assertPageTitle();
+      trackingLabel = `tracking-${crypto.randomUUID().toString().substring(0, 10)}`;
+      await trackingScanPage.fillScanPairs([trackingLabel, kitLabel]);
+      await trackingScanPage.save();
 
       // final scan
       const finalScanPage = await navigation.selectFromSamples<FinalScanPage>(SamplesNavEnum.FINAL_SCAN);
