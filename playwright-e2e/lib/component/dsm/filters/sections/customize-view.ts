@@ -11,17 +11,32 @@ export class CustomizeView {
   public async selectColumns(columnsGroupName: string, columns: string[]): Promise<void> {
     this.activeColumnsGroup = columnsGroupName;
     await this.openColumnsGroup();
-    for (const column of columns) {
-      await this.selectColumn(column);
-    }
+    await this.select(columns);
     await this.closeColumnsGroup();
   }
 
-  private async selectColumn(columnName: string): Promise<void> {
+  public async deselectColumns(columnsGroupName: string, columns: string[]): Promise<void> {
+    this.activeColumnsGroup = columnsGroupName;
+    await this.openColumnsGroup();
+    await this.select(columns, true);
+    await this.closeColumnsGroup();
+  }
+
+  private async select(columns: string[], deselect = false): Promise<void> {
+    for (const column of columns) { await this.selectOrDeselect(column, deselect); }
+  }
+
+  private async selectOrDeselect(columnName: string, deselect = false): Promise<void> {
     const columnXPath = this.columnsGroupXPath + this.columnPathXPath(columnName);
     const column = this.page.locator(columnXPath);
 
-    !(await this.isChecked(column)) && (await this.page.locator(columnXPath).click());
+    if (!deselect) {
+      if (!(await this.isChecked(column))) {
+        await this.page.locator(columnXPath).click()
+      }
+    } else if (await this.isChecked(column)) {
+        await this.page.locator(columnXPath).click()
+      }
   }
 
   private async openColumnsGroup(): Promise<void> {

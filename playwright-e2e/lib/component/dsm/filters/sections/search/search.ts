@@ -1,6 +1,7 @@
 import { Locator, Page } from '@playwright/test';
-import { CheckboxConfig, DateConfig, TextConfig } from './search-types';
+import {CheckboxConfig, DateConfig, RadioButtonConfig, TextConfig} from './search-types';
 import { AdditionalFilter } from './search-enums';
+import {waitForNoSpinner, waitForResponse} from 'utils/test-utils';
 
 export class Search {
   private readonly enUSDateRegExp = new RegExp(/\b(0[1-9]|1[012])([/])(0[1-9]|[12]\d|3[01])\2(\d{4})/);
@@ -15,6 +16,8 @@ export class Search {
 
   public async search(): Promise<void> {
     await this.page.locator("//div[@id='searchTable']/button[1][span[text()='Search']]").click();
+    await waitForResponse(this.page, {uri: 'filterList'});
+    await waitForNoSpinner(this.page);
   }
 
   public async dates(columnName: string, { from: fromValue, to: toValue, additionalFilters }: Partial<DateConfig>): Promise<void> {
@@ -54,6 +57,11 @@ export class Search {
     textValue && (await this.textInputLocator(columnName).fill(textValue));
 
     textValue && !exactMatch && (await this.setExactMatch(columnName, true));
+  }
+
+  public async radioButton(columnName: string, { radioButtonValue, additionalFilters}: Partial<RadioButtonConfig>): Promise<void> {
+    await this.setAdditionalFilters(columnName, additionalFilters);
+    radioButtonValue && (await this.radioBtnLocator(columnName, radioButtonValue).click());
   }
 
   public async checkboxes(columnName: string, { checkboxValues, additionalFilters }: Partial<CheckboxConfig>): Promise<void> {
@@ -124,6 +132,11 @@ export class Search {
 
   private checkboxLocator(columnName: string, checkboxName: string): Locator {
     return this.page.locator(`${this.baseColumnXPath(columnName)}//mat-checkbox[label[.//*[text()[normalize-space()='${checkboxName}']]]]`);
+  }
+
+  private radioBtnLocator(columnName: string, radioButtonName: string): Locator {
+    return this.page.locator(`${this.baseColumnXPath(columnName)}` +
+      `//mat-radio-group//mat-radio-button[label[.//*[text()[normalize-space()='${radioButtonName}']]]]`);
   }
 
   private textInputLocator(columnName: string): Locator {

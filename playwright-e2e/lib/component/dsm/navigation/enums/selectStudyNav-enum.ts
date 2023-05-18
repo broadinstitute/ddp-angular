@@ -1,4 +1,4 @@
-export enum Study {
+export enum StudyEnum {
   AT = 'AT',
   BRUGADA = 'Brugada',
   BASIL = 'basil',
