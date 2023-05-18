@@ -1,22 +1,31 @@
-import { BrowserContext, Download, expect, Locator, Page } from '@playwright/test';
-import Address from 'lib/component/address';
-import Input from 'lib/widget/Input';
+import {BrowserContext, Download, expect, Locator, Page, Response} from '@playwright/test';
+import Input from 'lib/widget/input';
 import Checkbox from 'lib/widget/checkbox';
-import Radiobutton from 'lib/widget/radiobutton';
 import Select from 'lib/widget/select';
 import axios from 'axios';
-import { generateRandomPhoneNum } from './faker-utils';
+
+export interface WaitForResponse {
+  uri: string;
+  status?: number;
+  timeout?: number;
+}
 
 const { SITE_PASSWORD } = process.env;
 
 export async function waitForNoSpinner(page: Page): Promise<void> {
-  await page
-    .locator('[data-icon="spinner"].fa-spin, mat-spinner[role="progressbar"]')
-    .waitFor({ state: 'hidden', timeout: 30 * 1000 });
+  await page.locator('[data-icon="spinner"].fa-spin, mat-spinner[role="progressbar"]').waitFor({ state: 'hidden', timeout: 60 * 1000 });
+}
+
+export async function waitForResponse(page: Page, {uri, status = 200, timeout = 30000}: WaitForResponse): Promise<Response> {
+  try {
+    return await page.waitForResponse((response: Response) => response.url().includes(uri) && response.status() === status, {timeout})
+  } catch (error: any) {
+    throw new Error(`Timeout ${timeout}ms exceeded while waiting for ${uri} URI response with status - ${status}`)
+  }
 }
 
 export async function waitUntilRemoved(locator: Locator): Promise<void> {
-  expect(await locator.count()).toHaveLength(0);
+  await expect(locator).toHaveCount(0);
 }
 
 export async function getTextValue(locator: Locator): Promise<string | null> {
@@ -45,45 +54,6 @@ export async function downloadConsentPdf(context: BrowserContext, locator: Locat
 }
 
 /**
- * Filling out address with fake data.
- * @param page
- * @param opts
- */
-export async function enterMailingAddress(
-  page: Page,
-  opts: {
-    fullName: string;
-    country?: string;
-    state?: string;
-    street?: string;
-    city?: string;
-    zipCode?: string;
-    telephone?: string | number;
-  }
-): Promise<void> {
-  const {
-    fullName,
-    country = 'UNITED STATES',
-    state = 'MASSACHUSETTS',
-    street = '415 MAIN ST',
-    city = 'CAMBRIDGE',
-    zipCode = '02142',
-    telephone = generateRandomPhoneNum()
-  } = opts;
-
-  const mailAddressForm = new Address(page, { label: 'Mailing Address' });
-  await mailAddressForm.input('Full Name').fill(fullName);
-  await mailAddressForm.select('Country').selectOption(country);
-  await mailAddressForm.select('State').selectOption(state);
-  await mailAddressForm.input('Street Address').fill(street.toUpperCase());
-  await mailAddressForm.input('City').fill(city.toUpperCase());
-  await mailAddressForm.input('Zip Code').fill(zipCode);
-  await mailAddressForm.input('Telephone Contact Number').fill(telephone.toString());
-  // Wait for Address Suggestion card
-  await mailAddressForm.addressSuggestion().radioButton('As Entered:').check();
-}
-
-/**
  * On non-prod env, user must first enter the Site password
  * @param page
  * @param password
@@ -92,6 +62,7 @@ export async function fillSitePassword(page: Page, password = SITE_PASSWORD): Pr
   if (password == null) {
     throw Error(`Invalid parameter: password is "${SITE_PASSWORD}"`);
   }
+  await page.locator('input[type="password"]').waitFor({ state: 'visible', timeout: 30 * 1000 });
   await page.locator('input[type="password"]').fill(password);
   await Promise.all([page.waitForNavigation(), page.locator('button >> text=Submit').click()]);
 }
@@ -140,8 +111,8 @@ export function findLink(dataDdpTest: string) {
 }
 
 // Buttons on a page, in a table cell, etc.
-export function findButton(dataDdpTest: string) {
-  return `button[data-ddp-test="${dataDdpTest}"]`;
+export function findButton(page: Page, dataDdpTest: string) {
+  return page.locator(`button[data-ddp-test="${dataDdpTest}"]`);
 }
 
 // Seen wrapped inside a button
@@ -158,10 +129,6 @@ export async function check(page: Page, stableID: string): Promise<void> {
   await new Checkbox(page, { ddpTestID: stableID }).check();
 }
 
-export async function checkRadioButton(page: Page, stableID: string): Promise<void> {
-  await new Radiobutton(page, { ddpTestID: stableID }).check();
-}
-
 export async function select(page: Page, stableID: string, option: string): Promise<void> {
   await new Select(page, { ddpTestID: stableID }).selectOption(option);
 }
@@ -170,6 +137,9 @@ export async function click(page: Page, stableID: string, option: string): Promi
   await page.locator(`[data-ddp-test="${stableID}"]`).selectOption(option);
 }
 
+export function booleanToYesOrNo(val: boolean) {
+  return val ? 'Yes' : 'No';
+}
 /**
  * Returns the default value if value is null, empty or undefined.
  * @param value

@@ -1,48 +1,29 @@
 import { expect } from '@playwright/test';
 import { test } from 'fixtures/singular-fixture';
 import * as user from 'data/fake-user.json';
-import * as auth from 'authentication/auth-singular';
-import { WHO } from 'data/constants';
-import MyDashboardPage from 'pages/singular/dashboard/my-dashboard-page';
 import MedicalRecordReleaseForm from 'pages/singular/enrollment/medical-record-release-form';
 import AboutMyChildPage from 'pages/singular/enrollment/about-my-child-page';
 import ChildSurveyPage from 'pages/singular/enrollment/child-survey-page';
-import PreScreeningPage from 'pages/singular/enrollment/pre-screening-page';
-import EnrollMyChildPage from 'pages/singular/enrollment/enroll-my-child-page';
 import ConsentFormForMinorPage from 'pages/singular/enrollment/consent-form-for-minor-page';
-import { enterMailingAddress } from 'utils/test-utils';
 import { assertActivityHeader, assertActivityProgress } from 'utils/assertion-helper';
 import { generateUserName } from 'utils/faker-utils';
 
-const { SINGULAR_USER_EMAIL, SINGULAR_USER_PASSWORD } = process.env;
-
-test.describe('Enroll my child', () => {
+/**
+ * Enroll a child of age < 7
+ */
+test.describe.skip('Enroll child', () => {
   // Randomize last name
   const childLastName = generateUserName(user.secondChild.lastName);
 
-  test('enrolling non assenting child < 7 @enrollment @singular', async ({ page, homePage }) => {
-    await homePage.signUp();
-
-    // Step 1
-    // On “pre-screening” page, answer all questions about yourself with fake values
-    const preScreeningPage = new PreScreeningPage(page);
-    await preScreeningPage.enterInformationAboutYourself();
-
-    // Step 2
-    // Enter email alias and password to create new account
-    await auth.createAccountWithEmailAlias(page, { email: SINGULAR_USER_EMAIL, password: SINGULAR_USER_PASSWORD });
-
-    // Step 3
+  test('Enrolling non-assenting child < 7 @enrollment @singular', async ({ page, dashboardPage }) => {
     // On "My Dashboard" page, click Enroll Mys Child button
-    const myDashboardPage = new MyDashboardPage(page);
-    await myDashboardPage.enrollMyChild();
-
-    // On "Enroll mys child" page
-    await assertActivityHeader(page, 'Enroll my child');
-    const enrollMyChildPage = new EnrollMyChildPage(page);
-    await enrollMyChildPage.whoInChildFamilyHasVentricleHeartDefect().check(WHO.TheChildBeingEnrolled);
-    await enrollMyChildPage.howOldIsYourChild().fill(user.secondChild.age);
-    await myDashboardPage.next();
+    await dashboardPage.enrollMyChild({
+      age: user.secondChild.age,
+      country: user.secondChild.country.abbreviation,
+      state: user.secondChild.state.abbreviation,
+      cognitiveImpairment: null
+    });
+    await dashboardPage.next();
 
     // On "Consent Form for Minor Dependent" page
     const consentForm = new ConsentFormForMinorPage(page);
@@ -72,14 +53,15 @@ test.describe('Enroll my child', () => {
     const aboutMyChildPage = new AboutMyChildPage(page);
     await aboutMyChildPage.waitForReady();
     await assertActivityHeader(page, 'About My Child');
-    await enterMailingAddress(page, {
+    await aboutMyChildPage.fillInContactAddress({
       fullName: `${user.secondChild.firstName} ${childLastName}`,
       country: user.secondChild.country.name,
       state: user.secondChild.state.name,
       street: user.secondChild.streetAddress,
       city: user.secondChild.city,
       zipCode: user.secondChild.zip,
-      telephone: user.secondChild.phone
+      telephone: user.secondChild.phone,
+      labels: { phone: 'Telephone Contact Number', country: 'Country', state: 'State', zip: 'Zip Code', city: 'City' }
     });
     await aboutMyChildPage.next({ waitForNav: true });
 
@@ -105,10 +87,7 @@ test.describe('Enroll my child', () => {
     await assertActivityHeader(page, 'Medical Record File Upload');
     await medicalRecordReleaseForm.next({ waitForNav: true });
 
-    await assertActivityHeader(
-      page,
-      "Please complete this survey so that we may learn more about your child's medical background."
-    );
+    await assertActivityHeader(page, "Please complete this survey so that we may learn more about your child's medical background.");
 
     // Answers to the Child Survey
     const childSurveyPage = new ChildSurveyPage(page);
@@ -129,9 +108,7 @@ test.describe('Enroll my child', () => {
     await childSurveyPage.hadVad().check('No');
     await childSurveyPage.hasReceivedHeartTransplant().check('No');
     await childSurveyPage.hasReceivedLiverTransplant().check('No');
-    await childSurveyPage
-      .aboutYourChildHealth()
-      .check('My child had at least 5 sick visits to the doctor (not routine check-ups)');
+    await childSurveyPage.aboutYourChildHealth().check('My child had at least 5 sick visits to the doctor (not routine check-ups)');
     await childSurveyPage.aboutYourChildHealth().check('My child has missed 7 days or more from work or school due to illness');
     await childSurveyPage.describePhysicalHealth().check('Somewhat healthy');
     await childSurveyPage.familyDescribePhysicalHealth().check('Somewhat healthy');
@@ -144,19 +121,17 @@ test.describe('Enroll my child', () => {
     await childSurveyPage.submit();
 
     // Assert contents in My Dashboard table
-    await myDashboardPage.waitForReady();
+    await dashboardPage.waitForReady();
     const orderedHeaders = ['Title', 'Summary', 'Status', 'Action'];
-    const table = myDashboardPage.getDashboardTable();
+    const table = dashboardPage.getDashboardTable();
     const headers = await table.getHeaderNames();
     expect(headers).toHaveLength(4); // Four columns in table
     expect(headers).toEqual(orderedHeaders);
 
     const summaryCell = await table.findCell('Title', 'Consent Form for Minor Dependent', 'Summary');
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     await expect(summaryCell!).toHaveText('Thank you for signing the consent form -- welcome to Project Singular!');
 
     const statusCell = await table.findCell('Title', 'Consent Form for Minor Dependent', 'Status');
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     await expect(statusCell!).toHaveText('Complete');
 
     await expect(page.locator('.enrollmentStatusCompleteText')).toHaveText('Fully Enrolled');

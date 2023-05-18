@@ -1,7 +1,7 @@
 import { Page } from '@playwright/test';
 import { SingularPage } from 'pages/singular/singular-page';
 import Question from 'lib/component/Question';
-import Input from 'lib/widget/Input';
+import Input from 'lib/widget/input';
 import Select from 'lib/widget/select';
 
 export default class ChildSurveyPage extends SingularPage {
@@ -173,9 +173,7 @@ export default class ChildSurveyPage extends SingularPage {
    */
   hasReceivedSupportOrTreatmentForBehavioralNeurodevelopmentalPsychologicalProblem(): Question {
     return new Question(this.page, {
-      prompt:
-        'Has your child ever received treatment or support for any form of emotional,' +
-        ' behavioral, neurodevelopmental, or psychological problem?'
+      prompt: 'Has your child ever received treatment or support for any form of emotional, behavioral, neurodevelopmental, or psychological problem?'
     });
   }
 

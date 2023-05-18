@@ -36,7 +36,6 @@
         <li class="List-li" translate>EligibilityPage.Eligible.List.Item2</li>
         <li class="List-li" translate>EligibilityPage.Eligible.List.Item3</li>
         <li class="List-li" translate>EligibilityPage.Eligible.List.Item4</li>
-        <li class="List-li" translate>EligibilityPage.Eligible.List.Item5</li>
       </ul>
 
       <p class="Paragraph Aligned--left">
@@ -90,7 +89,10 @@
         <a [href]="emailHref" class="Link">{{email}}</a>
         <span translate>EligibilityPage.General.Ending.Text2.Part2</span>
         <a [href]="phoneHref" class="Link">{{phone}}</a>
-        <span translate>EligibilityPage.General.Ending.Text2.Part3</span>
+          <span>
+                ({{'EligibilityPage.General.Ending.Text2.tollFree' | translate}}
+              <a class="Link" href='tel: 855-534-4300'>855-534-4300</a>)</span>.
+          <span translate>EligibilityPage.General.Ending.Text2.Part3</span>
       </p>
     </section>
   </div>

@@ -1,42 +1,26 @@
 import { Locator, Page } from '@playwright/test';
 import Button from 'lib/widget/button';
-import Input from 'lib/widget/Input';
+import Input from 'lib/widget/input';
 import Select from 'lib/widget/select';
+import WidgetBase from 'lib/widget-base';
 
-export default class Institution {
-  private readonly page: Page;
-  private readonly elementLocator: Locator;
-  private readonly rootLocator: Locator;
-  private readonly label: string | RegExp;
-
+export default class Institution extends WidgetBase {
   constructor(page: Page, opts: { label: string | RegExp; root?: Locator | string; nth?: number }) {
-    const { label, root, nth = 0 } = opts;
-    this.page = page;
-    this.label = label;
-    this.rootLocator = root
-      ? typeof root === 'string'
-        ? this.page.locator(root)
-        : root
-      : this.page.locator('ddp-institutions-form');
-    this.elementLocator = this.rootLocator.filter({ hasText: label }).locator('ddp-institution').nth(nth);
+    const { label, root, nth } = opts;
+    super(page, { nth, root });
+    this.root = this.root.locator('ddp-institutions-form').filter({ hasText: label });
+    this.element = this.root.locator('ddp-institution');
   }
 
-  input(label: string): Input {
+  toInput(label: string | RegExp): Input {
     return new Input(this.page, { label, root: this.toLocator() });
   }
 
-  select(label: string): Select {
+  toSelect(label: string | RegExp): Select {
     return new Select(this.page, { label, root: this.toLocator() });
   }
 
-  button(label: string): Button {
-    return new Button(this.page, {
-      label,
-      root: this.rootLocator.filter({ hasText: this.label })
-    });
-  }
-
-  toLocator(): Locator {
-    return this.elementLocator;
+  toButton(label: string): Button {
+    return new Button(this.page, { label, root: this.root });
   }
 }

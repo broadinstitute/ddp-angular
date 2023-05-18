@@ -36,6 +36,7 @@ import { LoadingModalComponent } from '../modals/loading-modal.component';
 import { BulkCohortTagModalComponent } from '../tags/cohort-tag/bulk-cohort-tag-modal/bulk-cohort-tag-modal.component';
 import { CohortTagComponent } from '../tags/cohort-tag/cohort-tag.component';
 import { CohortTag } from '../tags/cohort-tag/cohort-tag.model';
+import {FieldSettingsModel, ValueModel} from '../models';
 
 @Component({
   selector: 'app-participant-list',
@@ -140,7 +141,7 @@ export class ParticipantListComponent implements OnInit {
                private router: Router, private auth: Auth, private route: ActivatedRoute, private util: Utils,
               private dialog: MatDialog) {
     if (!auth.authenticated()) {
-      auth.logout();
+      auth.sessionLogout();
     }
     this.route.queryParams.subscribe(params => {
       const realm = params[ DSMService.REALM ] || null;
@@ -156,7 +157,7 @@ export class ParticipantListComponent implements OnInit {
 
   ngOnInit(): void {
     this.additionalMessage = null;
-    if (localStorage.getItem(ComponentService.MENU_SELECTED_REALM) == null) {
+    if (sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM) == null) {
       this.additionalMessage = 'Please select a study';
     } else {
       this.checkRight();
@@ -178,7 +179,7 @@ export class ParticipantListComponent implements OnInit {
       this.applyFilter(this.buildTemporaryViewFilter(), from, to);
     } else {
       if (this.jsonPatch) {
-        this.dsmService.filterData(localStorage.getItem(
+        this.dsmService.filterData(sessionStorage.getItem(
           ComponentService.MENU_SELECTED_REALM), this.jsonPatch, this.parent, null, from, to, this.sortBy
         )
           .subscribe({
@@ -195,7 +196,7 @@ export class ParticipantListComponent implements OnInit {
           });
       } else {
         this.dsmService.filterData(
-          localStorage.getItem(ComponentService.MENU_SELECTED_REALM), null, this.parent, true, from, to, this.sortBy
+          sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM), null, this.parent, true, from, to, this.sortBy
           )
           .subscribe({
             next: data => {
@@ -203,7 +204,7 @@ export class ParticipantListComponent implements OnInit {
             },
             error: err => {
               if (err._body === Auth.AUTHENTICATION_ERROR) {
-                this.auth.logout();
+                this.auth.doLogout();
               }
               this.loadingParticipants = null;
               this.errorMessage = 'Error - Loading Participant List, Please contact your DSM developer';
@@ -248,7 +249,7 @@ export class ParticipantListComponent implements OnInit {
   private checkRight(): void {
     // assumption for now: profile parameters are always the same, only survey will be dynamic per ddp
     this.start = new Date().getTime();
-    this.loadingParticipants = localStorage.getItem(ComponentService.MENU_SELECTED_REALM);
+    this.loadingParticipants = sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM);
     this.setSelectedFilterName('');
     this.currentFilter = null;
     this.filterQuery = null;
@@ -260,7 +261,7 @@ export class ParticipantListComponent implements OnInit {
       next: data => {
         jsonData = data;
         jsonData.forEach((val) => {
-          if (localStorage.getItem(ComponentService.MENU_SELECTED_REALM) === val) {
+          if (sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM) === val) {
             allowedToSeeInformation = true;
             this.loadSettings();
           }
@@ -281,7 +282,7 @@ export class ParticipantListComponent implements OnInit {
   loadSettings(): void {
     this.rowsPerPage = this.role?.getUserSetting()?.getRowsPerPage();
     let jsonData: any;
-    this.dsmService.getSettings(localStorage.getItem(ComponentService.MENU_SELECTED_REALM), this.parent).subscribe({
+    this.dsmService.getSettings(sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM), this.parent).subscribe({
       next: data => {
         this.assignees = [];
         this.drugs = [];
@@ -453,6 +454,34 @@ export class ParticipantListComponent implements OnInit {
                         }
                       });
                     }
+                  } else if (question.questionType === 'COMPOSITE') {
+                    options = new Array<NameValue>();
+                    if (question.childQuestions != null) {
+                      question.childQuestions.forEach((childQuestion: QuestionDefinition) => {
+                        if (childQuestion.options != null) {
+                          type = Filter.OPTION_TYPE;
+                          childQuestion.options.forEach((option: Option) => {
+                            options.push(new NameValue(option.optionStableId, option.optionText));
+                            if (option?.nestedOptions != null) {
+                              option.nestedOptions.forEach((nOption: Option) => {
+                                options.push(new NameValue(nOption.optionStableId, nOption.optionText));
+                              });
+                            }
+                          });
+                        }
+                        if (childQuestion.groups != null) {
+                          type = Filter.OPTION_TYPE;
+                          childQuestion.groups.forEach((group: Group) => {
+                            options.push(new NameValue(group.groupStableId, group.groupText));
+                            if (group.options != null) {
+                              group.options.forEach((gOption: Option) => {
+                                options.push(new NameValue(gOption.optionStableId, gOption.optionText));
+                              });
+                            }
+                          });
+                        }
+                      });
+                    }
                   } else if (question.questionType === 'NUMERIC') {
                     type = Filter.NUMBER_TYPE;
                   }
@@ -535,6 +564,23 @@ export class ParticipantListComponent implements OnInit {
         } else {
           this.dataSources.delete('a');
         }
+
+        if (jsonData.hasProxyData != null) {
+          this.dataSources.set('proxy', 'Proxy');
+          const possibleColumns: Array<Filter> = [];
+          possibleColumns.push(new Filter(new ParticipantColumn('First Name', 'firstName', 'proxy', null, true), Filter.TEXT_TYPE));
+          possibleColumns.push(new Filter(new ParticipantColumn('Last Name', 'lastName', 'proxy', null, true), Filter.TEXT_TYPE));
+          possibleColumns.push(new Filter(new ParticipantColumn('Email', 'email', 'proxy', null, true), Filter.TEXT_TYPE));
+
+          this.sourceColumns['proxy'] = possibleColumns;
+          this.selectedColumns['proxy'] = [];
+          possibleColumns.forEach(filter => {
+            const tmp = filter.participantColumn.object != null ? filter.participantColumn.object : filter.participantColumn.tableAlias;
+            this.allFieldNames.add(tmp + '.' + filter.participantColumn.name);
+          });
+          this.orderColumns();
+        }
+
         if (jsonData.filters != null) {
           jsonData.filters.forEach((val) => {
             const view: ViewFilter = ViewFilter.parseFilter(val, this.sourceColumns);
@@ -647,21 +693,7 @@ export class ParticipantListComponent implements OnInit {
         if (jsonData.hasComputedObject) {
           this.addAutomatedScoringColumns();
         }
-        if (jsonData.hasProxyData != null) {
-          this.dataSources.set('proxy', 'Proxy');
-          const possibleColumns: Array<Filter> = [];
-          possibleColumns.push(new Filter(new ParticipantColumn('First Name', 'firstName', 'proxy', null, true), Filter.TEXT_TYPE));
-          possibleColumns.push(new Filter(new ParticipantColumn('Last Name', 'lastName', 'proxy', null, true), Filter.TEXT_TYPE));
-          possibleColumns.push(new Filter(new ParticipantColumn('Email', 'email', 'proxy', null, true), Filter.TEXT_TYPE));
 
-          this.sourceColumns['proxy'] = possibleColumns;
-          this.selectedColumns['proxy'] = [];
-          possibleColumns.forEach(filter => {
-            const tmp = filter.participantColumn.object != null ? filter.participantColumn.object : filter.participantColumn.tableAlias;
-            this.allFieldNames.add(tmp + '.' + filter.participantColumn.name);
-          });
-          this.orderColumns();
-        }
         if (jsonData.hideESFields != null) {
           const hideESFields: Value[] = [];
           jsonData.hideESFields.forEach((val) => {
@@ -697,19 +729,17 @@ export class ParticipantListComponent implements OnInit {
         this.getData();
         this.deleteFiltersAccordingToPermission();
         this.removeUnnecessaryColumns();
-
       },
       // this.renewSelectedColumns(); commented out because if we have defaultColumns for all the studies we won't need it anymore
       error: err => {
         if (err._body === Auth.AUTHENTICATION_ERROR) {
-          this.auth.logout();
+          this.auth.doLogout();
         }
         // eslint-disable-next-line no-throw-literal
         throw 'Error - Loading display settings' + err;
       }
     });
   }
-
 
   private deleteFiltersAccordingToPermission(): void {
     let columnNamesToDelete: string[];
@@ -795,6 +825,26 @@ export class ParticipantListComponent implements OnInit {
     }
   }
 
+  parseAdditionalValues(additionalValuesJson: object): object | null {
+    if(additionalValuesJson === null) {
+      return null;
+    }
+
+    this.settings['r'] && this.settings['r'].forEach((fieldSettings: FieldSettingsModel) => {
+      const transformedKey = fieldSettings.columnName.toLowerCase().split('_').map((str: string, index: number) =>
+        index > 0 ? str.charAt(0).toUpperCase() + str.slice(1) : str).join('');
+
+      const foundValue = fieldSettings.possibleValues && fieldSettings.possibleValues
+        .find(({value}: ValueModel) => value === additionalValuesJson[transformedKey]);
+
+      if(foundValue) {
+        additionalValuesJson[transformedKey] = foundValue.name;
+      }
+    });
+
+    return additionalValuesJson;
+  }
+
   getQuestionOrStableId(question: QuestionDefinition): string {
     return question.questionText != null && question.questionText !== '' && question.questionText.length < 45 ?
       question.questionText : question.stableId;
@@ -863,8 +913,8 @@ export class ParticipantListComponent implements OnInit {
       ) {
         // eslint-disable-next-line max-len
         this.additionalMessage = 'The default filter seems to be deleted, however it is still the default filter as long as not changed in the user settings.';
-        this.loadingParticipants = localStorage.getItem(ComponentService.MENU_SELECTED_REALM);
-        this.dsmService.filterData(localStorage.getItem(ComponentService.MENU_SELECTED_REALM), null, this.parent, true).subscribe({
+        this.loadingParticipants = sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM);
+        this.dsmService.filterData(sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM), null, this.parent, true).subscribe({
           next: data => {
             if (data != null) {
               this.additionalMessage = '';
@@ -890,7 +940,7 @@ export class ParticipantListComponent implements OnInit {
           },
           error: err => {
             if (err._body === Auth.AUTHENTICATION_ERROR) {
-              this.auth.logout();
+              this.auth.doLogout();
             }
             this.loadingParticipants = null;
             this.errorMessage = 'Error - Loading Participant List, Please contact your DSM developer';
@@ -928,7 +978,7 @@ export class ParticipantListComponent implements OnInit {
   public selectFilter(viewFilter: ViewFilter): void {
     this.resetPagination();
     this.resetSelectedPatients();
-    this.loadingParticipants = localStorage.getItem(ComponentService.MENU_SELECTED_REALM);
+    this.loadingParticipants = sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM);
     this.currentView = JSON.stringify(viewFilter);
     if (viewFilter != null) {
       this.filtered = true;
@@ -944,7 +994,7 @@ export class ParticipantListComponent implements OnInit {
   }
 
   private applyFilter(viewFilter: ViewFilter, from: number = 0, to: number = this.role?.getUserSetting()?.getRowsPerPage()): void {
-    this.dsmService.applyFilter(viewFilter, localStorage.getItem(ComponentService.MENU_SELECTED_REALM),
+    this.dsmService.applyFilter(viewFilter, sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM),
       this.parent, null, from, to, this.sortBy)
       .subscribe({
         next: data => {
@@ -1022,7 +1072,7 @@ export class ParticipantListComponent implements OnInit {
               }
             } else {
               // if selected columns are not set, set to default columns
-              const selectedStudy = localStorage.getItem(ComponentService.MENU_SELECTED_REALM);
+              const selectedStudy = sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM);
               if ((this.selectedColumns['data'] && this.selectedColumns['data'].length === 0)
                 || (!this.selectedColumns['data'] && this.isSelectedColumnsNotEmpty())) {
                 if(selectedStudy !== 'RGP') {
@@ -1044,7 +1094,7 @@ export class ParticipantListComponent implements OnInit {
         },
         error: err => {
           if (err._body === Auth.AUTHENTICATION_ERROR) {
-            this.auth.logout();
+            this.auth.doLogout();
           }
           this.loadingParticipants = null;
           this.errorMessage = 'Error - Loading Participant List, Please contact your DSM developer';
@@ -1067,7 +1117,7 @@ export class ParticipantListComponent implements OnInit {
   }
 
   getFilters(): void {
-    this.dsmService.getFiltersForUserForRealm(localStorage.getItem(ComponentService.MENU_SELECTED_REALM), this.parent).subscribe({
+    this.dsmService.getFiltersForUserForRealm(sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM), this.parent).subscribe({
       next: jsonData => {
         this.savedFilters = [];
         jsonData.forEach((val) => {
@@ -1141,7 +1191,7 @@ export class ParticipantListComponent implements OnInit {
     this.clearAllFilters();
     this.getData();
     this.setDefaultColumns();
-    const selectedStudy = localStorage.getItem(ComponentService.MENU_SELECTED_REALM);
+    const selectedStudy = sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM);
     if(selectedStudy === 'RGP') {
       this.searchForRGP = true;
     }
@@ -1239,6 +1289,7 @@ export class ParticipantListComponent implements OnInit {
         }
       }
     });
+    this.currentFilter = [];
   }
 
   private resetPagination(): void {
@@ -1319,9 +1370,9 @@ export class ParticipantListComponent implements OnInit {
         this.selectedActivity = selectedActivity;
       }
       if (this.filtered && participant.participant != null && participant.participant.ddpParticipantId != null) {
-        this.loadingParticipants = localStorage.getItem(ComponentService.MENU_SELECTED_REALM);
+        this.loadingParticipants = sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM);
         this.dsmService.getParticipantData(
-            localStorage.getItem(ComponentService.MENU_SELECTED_REALM),
+            sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM),
             participant.participant.ddpParticipantId,
             this.parent
           )
@@ -1367,7 +1418,7 @@ export class ParticipantListComponent implements OnInit {
   }
 
   getRealm(): string {
-    return localStorage.getItem(ComponentService.MENU_SELECTED_REALM);
+    return sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM);
   }
 
   getFilterButtonColorStyle(isOpened: boolean): string {
@@ -1405,8 +1456,8 @@ export class ParticipantListComponent implements OnInit {
       this.currentView = jsonPatch;
       this.jsonPatch = jsonPatch;
       this.filtered = true;
-      this.loadingParticipants = localStorage.getItem(ComponentService.MENU_SELECTED_REALM);
-      this.dsmService.filterData(localStorage.getItem(ComponentService.MENU_SELECTED_REALM), jsonPatch, this.parent, null)
+      this.loadingParticipants = sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM);
+      this.dsmService.filterData(sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM), jsonPatch, this.parent, null)
         .subscribe({
           next: data => {
             if (data != null && data !== '') {
@@ -1447,7 +1498,7 @@ export class ParticipantListComponent implements OnInit {
       this.deselectQuickFilters();
       // TODO - can be changed later to all using the same - after all studies are migrated!
       // check if it was a tableAlias data filter -> filter client side
-      const selectedStudy = localStorage.getItem(ComponentService.MENU_SELECTED_REALM);
+      const selectedStudy = sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM);
       if(selectedStudy === 'RGP') {
         this.searchForRGP = true;
       }
@@ -1560,7 +1611,7 @@ export class ParticipantListComponent implements OnInit {
   public shareFilter(savedFilter: ViewFilter, i): void {
     const value = savedFilter.shared ? '0' : '1';
     const patch1 = new PatchUtil(savedFilter.id, this.role.userMail(),
-      {name: 'shared', value}, null, this.parent, null, null, null, localStorage.getItem(ComponentService.MENU_SELECTED_REALM), null);
+      {name: 'shared', value}, null, this.parent, null, null, null, sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM), null);
     const patch = patch1.getPatch();
     this.dsmService.patchParticipantRecord(JSON.stringify(patch)).subscribe({
       next: data => {
@@ -1576,7 +1627,7 @@ export class ParticipantListComponent implements OnInit {
     const patch1 = new PatchUtil(
       savedFilter.id, this.role.userMail(),
       {name: 'fDeleted', value: '1'}, null, this.parent, null, null, null,
-      localStorage.getItem(ComponentService.MENU_SELECTED_REALM), null
+      sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM), null
     );
     const patch = patch1.getPatch();
     this.dsmService.patchParticipantRecord(JSON.stringify(patch)).subscribe({
@@ -1624,7 +1675,7 @@ export class ParticipantListComponent implements OnInit {
     };
     const jsonPatch = JSON.stringify(jsonData);
     this.currentView = jsonPatch;
-    this.dsmService.saveCurrentFilter(jsonPatch, localStorage.getItem(ComponentService.MENU_SELECTED_REALM), this.parent).subscribe({
+    this.dsmService.saveCurrentFilter(jsonPatch, sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM), this.parent).subscribe({
       next: data => {
         const result = Result.parse(data);
         if (result.code === 500 && result.body != null) {
@@ -1785,7 +1836,7 @@ export class ParticipantListComponent implements OnInit {
       }
     }
     this.dsmService.downloadParticipantData(
-      localStorage.getItem(ComponentService.MENU_SELECTED_REALM),
+      sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM),
       this.jsonPatch,
       this.parent,
       columns,
@@ -1889,7 +1940,7 @@ export class ParticipantListComponent implements OnInit {
       }
       this.deselect();
       this.dsmService.assignParticipant(
-          localStorage.getItem(ComponentService.MENU_SELECTED_REALM),
+          sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM),
           this.assignMR, this.assignTissue, JSON.stringify(assignParticipants)
         )
         .subscribe({ // need to subscribe, otherwise it will not send!
@@ -1904,7 +1955,7 @@ export class ParticipantListComponent implements OnInit {
           },
           error: err => {
             if (err._body === Auth.AUTHENTICATION_ERROR) {
-              this.router.navigate([Statics.HOME_URL]);
+              this.auth.doLogout();
             }
             this.additionalMessage = 'Error - Assigning Participants, Please contact your DSM developer';
           }
@@ -1961,8 +2012,8 @@ export class ParticipantListComponent implements OnInit {
     });
     this.filtered = queryText != null;
     this.jsonPatch = jsonPatch;
-    this.loadingParticipants = localStorage.getItem(ComponentService.MENU_SELECTED_REALM);
-    this.dsmService.filterData(localStorage.getItem(ComponentService.MENU_SELECTED_REALM), jsonPatch, this.parent, null)
+    this.loadingParticipants = sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM);
+    this.dsmService.filterData(sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM), jsonPatch, this.parent, null)
       .subscribe({
         next: data => {
           this.participantList = [];

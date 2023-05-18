@@ -7,7 +7,7 @@ import {ActivatedRoute, NavigationStart, Router} from '@angular/router';
 import {DomSanitizer, Title} from '@angular/platform-browser';
 import {Location} from '@angular/common';
 import {Observable} from 'rxjs';
-import {LocalStorageService} from '../services/localStorage.service';
+import {LocalStorageService} from '../services/local-storage.service';
 
 @Component({
   selector: 'app-navigation',
@@ -38,7 +38,7 @@ export class NavigationComponent implements OnInit {
         if (event.navigationTrigger === 'popstate') {
           const [,study,page] = event.url.split('/');
           this.auth.selectRealm(study, page);
-          localStorage.setItem(ComponentService.MENU_SELECTED_REALM, study);
+          sessionStorage.setItem(ComponentService.MENU_SELECTED_REALM, study);
           this.auth.setSelectedStudy = this.auth.realmList.find(realm => realm.name === study)?.value;
         }
       });
@@ -57,8 +57,8 @@ export class NavigationComponent implements OnInit {
   }
 
   doLogin(): void {
-    localStorage.removeItem(ComponentService.MENU_SELECTED_REALM); // if user logs in new or logs out, remove stored menu!
-    this.auth.logout();
+    sessionStorage.removeItem(ComponentService.MENU_SELECTED_REALM); // if user logs in new or logs out, remove stored menu!
+    this.auth.doLogout();
   }
 
   hasRole(): RoleService {

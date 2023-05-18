@@ -21,10 +21,11 @@ export class ShippingSearchComponent implements OnInit {
   allowedRealms: string[] = [];
   kit: KitRequest[] = [];
   private currentPatchField: string | null;
+  PECGS_RESEARCH = 'PECGS_RESEARCH';
 
   constructor(private dsmService: DSMService, private auth: Auth, private role: RoleService) {
     if (!auth.authenticated()) {
-      auth.logout();
+      auth.sessionLogout();
     }
   }
 
@@ -66,7 +67,7 @@ export class ShippingSearchComponent implements OnInit {
         },
         error: err => {
           if (err._body === Auth.AUTHENTICATION_ERROR) {
-            this.auth.logout();
+            this.auth.doLogout();
           }
           this.errorMessage = 'Error - Loading ddp information\nPlease contact your DSM developer';
           this.searching = false;
@@ -111,7 +112,7 @@ export class ShippingSearchComponent implements OnInit {
           },
           error: err => {
             if (err._body === Auth.AUTHENTICATION_ERROR) {
-              this.auth.logout();
+              this.auth.doLogout();
             }
             this.errorMessage = 'Error - Loading ddp information\nPlease contact your DSM developer';
             this.searching = false;
@@ -150,5 +151,19 @@ saveCompleted(): void{
     const patch = patch1.getPatch();
     this.currentPatchField = 'collectionDate';
     return this.patch(patch);
+  }
+
+  isResearchStudy(kitRequest: KitRequest): boolean {
+    if (kitRequest.realm === 'osteo2' || kitRequest.realm === 'cmi-lms') {
+      return true;
+    }
+    return false;
+  }
+
+  isResearchSample(kitRequest: KitRequest): boolean {
+    if (kitRequest.realm === 'osteo2' || kitRequest.realm === 'cmi-lms') {
+      return (kitRequest.message && kitRequest.message === this.PECGS_RESEARCH);
+    }
+    return false;
   }
 }

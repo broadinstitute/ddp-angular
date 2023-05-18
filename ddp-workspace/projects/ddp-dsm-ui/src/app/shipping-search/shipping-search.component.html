@@ -105,45 +105,45 @@
       </thead>
       <tbody>
       <tr *ngFor="let kitRequest of mf.data">
-        <td>{{kitRequest.realm}}</td>
-        <td *ngIf="!showColumn('hruid')">{{kitRequest.getID()}}</td>
-        <td *ngIf="showColumn('hruid')">{{kitRequest.hruid}}</td>
-        <td>{{kitRequest.bspCollaboratorParticipantId}}</td>
-        <td *ngIf="showColumn('bspCollaboratorSampleId')">{{kitRequest.bspCollaboratorSampleId}}</td>
-        <td *ngIf="showColumn('ddpLabel')">{{kitRequest.ddpLabel}}</td>
-        <td>
+        <td [ngClass]="{'highlight_sample': isResearchSample(kitRequest)}">{{kitRequest.realm}}</td>
+        <td *ngIf="!showColumn('hruid')" [ngClass]="{'highlight_sample': isResearchSample(kitRequest)}">{{kitRequest.getID()}}</td>
+        <td *ngIf="showColumn('hruid')" [ngClass]="{'highlight_sample': isResearchSample(kitRequest)}">{{kitRequest.hruid}}</td>
+        <td [ngClass]="{'highlight_sample': isResearchSample(kitRequest)}">{{kitRequest.bspCollaboratorParticipantId}}</td>
+        <td *ngIf="showColumn('bspCollaboratorSampleId')" [ngClass]="{'highlight_sample': isResearchSample(kitRequest)}">{{kitRequest.bspCollaboratorSampleId}}</td>
+        <td *ngIf="showColumn('ddpLabel')" [ngClass]="{'highlight_sample': isResearchSample(kitRequest)}">{{kitRequest.ddpLabel}}</td>
+        <td [ngClass]="{'highlight_sample': isResearchSample(kitRequest)}">
           {{kitRequest.kitLabel}}
         </td>
-        <td *ngIf="showColumn('kitTypeName')">{{kitRequest.kitTypeName}}</td>
-        <td *ngIf="showColumn('message')">{{kitRequest.getError()}}</td>
-        <td *ngIf="showColumn('trackingUrlTo')">
+        <td *ngIf="showColumn('kitTypeName')" [ngClass]="{'highlight_sample': isResearchSample(kitRequest)}">{{kitRequest.kitTypeName}}</td>
+        <td *ngIf="showColumn('message')" [ngClass]="{'highlight_sample': isResearchSample(kitRequest)}">{{kitRequest.getError()}}</td>
+        <td *ngIf="showColumn('trackingUrlTo')" [ngClass]="{'highlight_sample': isResearchSample(kitRequest)}">
           <ng-container *ngIf="kitRequest.trackingUrlTo != null"><a href="{{kitRequest.trackingUrlTo}}" target="_blank">{{kitRequest.trackingNumberTo}}</a></ng-container>
           <ng-container *ngIf="kitRequest.trackingUrlTo == null">{{kitRequest.trackingNumberTo}}</ng-container>
         </td>
-        <td *ngIf="showColumn('trackingUrlReturn')">
+        <td *ngIf="showColumn('trackingUrlReturn')" [ngClass]="{'highlight_sample': isResearchSample(kitRequest)}">
           <ng-container *ngIf="kitRequest.trackingUrlReturn != null"><a href="{{kitRequest.trackingUrlReturn}}" target="_blank">{{kitRequest.trackingReturnId}}</a></ng-container>
           <ng-container *ngIf="kitRequest.trackingUrlReturn == null">{{kitRequest.trackingReturnId}}</ng-container>
         </td>
-        <td *ngIf="showColumn('scanDate')">
+        <td *ngIf="showColumn('scanDate')" [ngClass]="{'highlight_sample': isResearchSample(kitRequest)}">
           <ng-container *ngIf="kitRequest.scanDate === 0"> - </ng-container>
           <ng-container *ngIf="kitRequest.scanDate !== 0">{{kitRequest.scanDate | date:'medium'}}</ng-container>
         </td>
-        <td *ngIf="showColumn('receiveDate')">
+        <td *ngIf="showColumn('receiveDate')" [ngClass]="{'highlight_sample': isResearchSample(kitRequest)}">
           <ng-container *ngIf="kitRequest.receiveDate === 0"> - </ng-container>
           <ng-container *ngIf="kitRequest.receiveDate !== 0">{{kitRequest.receiveDate | date:'medium'}}</ng-container>
         </td>
-        <td *ngIf="showColumn('deactivatedDate')">
+        <td *ngIf="showColumn('deactivatedDate')" [ngClass]="{'highlight_sample': isResearchSample(kitRequest)}">
           <ng-container *ngIf="kitRequest.deactivatedDate === 0"> - </ng-container>
           <ng-container *ngIf="kitRequest.deactivatedDate !== 0">{{kitRequest.deactivatedDate | date:'medium'}}</ng-container>
         </td>
-        <td *ngIf="showColumn('deactivationReason')">{{kitRequest.deactivationReason}}</td>
-        <td *ngIf="showColumn('receiveDateString')">{{kitRequest.receiveDateString}}</td>
-        <td *ngIf="showColumn('gender')">{{kitRequest.gender}}</td>
-        <td *ngIf="!showColumn('receiveDateString')">
+        <td *ngIf="showColumn('deactivationReason')" [ngClass]="{'highlight_sample': isResearchSample(kitRequest)}">{{kitRequest.deactivationReason}}</td>
+        <td *ngIf="showColumn('receiveDateString')" [ngClass]="{'highlight_sample': isResearchSample(kitRequest)}">{{kitRequest.receiveDateString}}</td>
+        <td *ngIf="showColumn('gender')" [ngClass]="{'highlight_sample': isResearchSample(kitRequest)}">{{kitRequest.gender}}</td>
+        <td *ngIf="!showColumn('receiveDateString')" [ngClass]="{'highlight_sample': isResearchSample(kitRequest)}">
           <button mat-raised-button type="button" color="primary" *ngIf="(kitRequest.receiveDateString === '' || kitRequest.receiveDateString === null || kitRequest.receiveDateString === undefined) && kitRequest.realm === 'AT'"
                   (click)="receiveATKit(kitRequest)">Mark Received</button>
         </td>
-        <td>
+        <td *ngIf="isResearchStudy(kitRequest)" [ngClass]="{'highlight_sample': isResearchSample(kitRequest)}">
           <app-field-datepicker (dateChanged)="valueChanged($event, 'collectionDate', kitRequest)"
                                 (saveCompleted)="saveCompleted()"
                                 [allowUnknownDay]="false"

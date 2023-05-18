@@ -5,7 +5,7 @@ To build locally during development, there are three main steps:
 
 0. Registering your client in your local database
 1. rendering the config file (either from vault or by hand-crafting)
-2. building building an app
+2. building an app
 
 #### Registering your auth0 client with your local mysql database
 Each developer has their own auth0 client.  You must register your client id
@@ -14,18 +14,26 @@ environments are not polluted with developer-specific clients.  To register your
 
 1. Login to the [auth0 console](https://manage.auth0.com/#/clients) and find your client
 2. Copy the `client ID` and `Client Secret` fields
-3. Paste the id and secret fields into this snippet of SQL, and run it in your local mysql db:
+3. Encrypt the value of Client Secret using the `AesUtil.java` from ddp-study-server repo with passing these variables. 
+```shell
+-es [secret-to-encrypt] 
+```
+4.Paste the id and secret fields into this snippet of SQL, and run it in your local mysql db:
 
 ```sql
-insert into client (client_name, is_revoked, auth0_client_id, auth0_signing_secret,auth0_domain)
-values ('[client name of your choosing]', 0, '[client id]', '[client secret]','https://ddp-dev.auth0.com/')
+insert into auth0_tenant (auth0_domain, management_client_id, management_client_secret)
+values ('https://ddp-dev.auth0.com/', '[client id of management application]', 
+'[encrypted secret of management application]');
+
+insert into client ( is_revoked, auth0_client_id, auth0_signing_secret)
+values ( 0, '[client id]', '[encrypted value of client secret]');
 ```
 
 After your local client is registered, you also need to grant it access to the study you're interested in.
 
 ```sql
 insert into client__umbrella_study (client_id, umbrella_study_id)
-values ((select client_id from client where client_name = '[client name of your choosing]'),
+values ((select client_id from client where auth0_client_id = '[client id]'),
         (select umbrella_study_id from umbrella_study where guid = '[the study guid]'))
 ```
 
@@ -52,7 +60,7 @@ You can go to the project that you require, then open dev-tools and navigate to 
 
 **Do not commit rendered `ddpConfig.js` and `pepperConfig.js` files**.
 Once rendered, you can hand-edit the `pepper-angular/ddp-workspace/projects/[ddp-angio | ddp-brain | ddp-mbc]/src/assets/config/pepperConfig.js` on-the-fly during front-end development via `ng serve` to alter your auth0 client and enable local registration for local development, editing it like so:
-1. Find `DDP_ENV['basePepperUrl']` or `basePepperUrl` and change the value to `"http://localhost:4200"`
+1. Find `DDP_ENV['basePepperUrl']` or `basePepperUrl` and change the value to `"http://localhost:[<port> value from local backend config]"`
 2. Find `DDP_ENV['auth0ClientId']` or `auth0ClientId` and change the value to your local dev auth0 client id
 3. Find `doLocalRegistration` and change the value to `true`
 

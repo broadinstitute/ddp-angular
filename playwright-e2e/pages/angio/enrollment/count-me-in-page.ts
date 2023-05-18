@@ -1,7 +1,6 @@
 import { expect, Locator, Page } from '@playwright/test';
 import { AngioPageBase } from 'pages/angio/angio-page-base';
 import { waitForNoSpinner } from 'utils/test-utils';
-import Input from 'lib/widget/Input';
 import Radiobutton from 'lib/widget/radiobutton';
 
 export enum DESCRIBE_SELF {
@@ -19,34 +18,15 @@ export default class CountMeInPage extends AngioPageBase {
   }
 
   async waitForReady(): Promise<void> {
-    await expect(this.pageTitle).toBeVisible({ visible: true });
     await expect(this.pageTitle).toHaveText('Join the movement: tell us about yourself');
     await waitForNoSpinner(this.page);
-  }
-
-  /**
-   * <br> Contact Info:
-   * <br> Question: First Name
-   * <br> Type: Input
-   */
-  firstName(): Input {
-    return new Input(this.page, { ddpTestID: 'answer:PREQUAL_FIRST_NAME' });
-  }
-
-  /**
-   * <br> Contact Info:
-   * <br> Question: Last Name
-   * <br> Type: Input
-   */
-  lastName(): Input {
-    return new Input(this.page, { ddpTestID: 'answer:PREQUAL_LAST_NAME' });
   }
 
   /**
    * <br> Self Describe
    * <br> Type: Radiobutton picklist
    */
-  diagnosedWithAngiosarcoma(label: DESCRIBE_SELF): Radiobutton {
-    return new Radiobutton(this.page, { label });
+  diagnosedWithAngiosarcoma(label: DESCRIBE_SELF): Promise<void> {
+    return new Radiobutton(this.page).check(label);
   }
 }

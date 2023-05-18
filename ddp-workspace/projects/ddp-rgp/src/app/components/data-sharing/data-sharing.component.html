@@ -84,7 +84,10 @@
         <span translate>DataAccessPage.Questions.Text1</span>
         <a [href]="emailHref" class="Link">{{email}}</a>,
         <span translate>DataAccessPage.Questions.Text2</span>
-        <a [href]="phoneHref" class="Link">{{phone}}</a>.
+        <a [href]="phoneHref" class="Link">{{phone}}</a>
+          <span>
+                ({{'DataAccessPage.Questions.tollFree' | translate}}
+              <a class="Link" href='tel: 855-534-4300'>855-534-4300</a>)</span>.
       </h3>
     </div>
   </div>

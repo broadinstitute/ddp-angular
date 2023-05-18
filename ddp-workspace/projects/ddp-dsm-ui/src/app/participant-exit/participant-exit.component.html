@@ -21,18 +21,21 @@
       <mat-form-field>
         <input matInput type="text" [(ngModel)]="participantId" placeholder="Participant ID" maxlength="200" style="width: 10cm">
       </mat-form-field>
-      <mat-checkbox color="primary" disableRipple
-                   [checked]="deletedFromDDP" (change)="deletedFromDDP = $event.checked">Delete from DDP</mat-checkbox>
+<!--      <mat-checkbox color="primary" disableRipple-->
+<!--                   [checked]="deletedFromDDP" (change)="deletedFromDDP = $event.checked">Delete from DDP</mat-checkbox>-->
       <button mat-raised-button type="button" color="primary"
               (click)="exitParticipant()"
               [disabled]="participantId == null">Withdraw Participant</button>
     </div>
     <div>
-      <b>If your participant is a migrated one and has a altPID please use that ID to withdraw the participant, otherwise use the GUID</b>
-      <b>
-        Selecting <u>'Delete from DDP'</u> will not delete the participant data from the DDP (yet), but will prevent DSM from asking the DDP for the Short ID of that participant.
-        <br/>Please select it, if you going to delete the participant from the DDP
-      </b>
+      <p><b>To withdraw a Participant from this study:</b></p>
+      <ol class="instructions_list">
+        <li>Enter their Participant ID above (Note: This is their 20 character Internal Participant ID found on their
+          individual participant page, not their 6 character Short ID)</li>
+        <li>Click the "Withdraw Participant" button</li>
+      </ol>
+      <p><b>Be cautious when using this feature!</b> Once a Participant is withdrawn from a study, it cannot be undone.
+        Participants who are withdrawn from a study are no longer able to update their activities, however, the data they previously submitted is still retained.</p>
     </div>
     <br/>
     <br/>

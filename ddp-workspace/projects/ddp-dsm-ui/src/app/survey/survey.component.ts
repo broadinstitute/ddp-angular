@@ -53,7 +53,7 @@ export class SurveyComponent implements OnInit {
   constructor(private dsmService: DSMService, private auth: Auth, private router: Router, private role: RoleService,
               private compService: ComponentService, private route: ActivatedRoute, private util: Utils) {
     if (!auth.authenticated()) {
-      auth.logout();
+      auth.sessionLogout();
     }
     this.route.queryParams.subscribe(params => {
       this.realm = params[DSMService.REALM] || null;
@@ -65,8 +65,8 @@ export class SurveyComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (localStorage.getItem(ComponentService.MENU_SELECTED_REALM) != null) {
-      this.realm = localStorage.getItem(ComponentService.MENU_SELECTED_REALM);
+    if (sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM) != null) {
+      this.realm = sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM);
       this.checkRight();
     } else {
       this.additionalMessage = 'Please select a study';
@@ -121,7 +121,7 @@ export class SurveyComponent implements OnInit {
         },
         error: err => {
           if (err._body === Auth.AUTHENTICATION_ERROR) {
-            this.auth.logout();
+            this.auth.doLogout();
           }
           this.loading = false;
           this.errorMessage = 'Error - Loading list of surveys\nPlease contact your DSM developer';
@@ -156,7 +156,7 @@ export class SurveyComponent implements OnInit {
         },
         error: err => {
           if (err._body === Auth.AUTHENTICATION_ERROR) {
-            this.auth.logout();
+            this.auth.doLogout();
           }
           this.loading = false;
           this.errorMessage = 'Error - Loading list of survey status\nPlease contact your DSM developer';
@@ -276,7 +276,7 @@ export class SurveyComponent implements OnInit {
         error: err => {
           this.loading = false;
           if (err._body === Auth.AUTHENTICATION_ERROR) {
-            this.auth.logout();
+            this.auth.doLogout();
           }
           this.errorMessage = 'Error - Uploading txt\n' + err;
         }

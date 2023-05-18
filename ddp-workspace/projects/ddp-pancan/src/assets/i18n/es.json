@@ -94,6 +94,7 @@
                     "Title": "Dé su consentimiento para el estudio",
                     "Text": "Esta sección consiste de varias páginas, así que tómese el tiempo que desee. Su progreso se guardará automáticamente para que pueda regresar más tarde. Si se inscribe por su hijo(a) o junto con su hijo(a), dependiendo de la edad del niño(a) también podríamos pedirle que dé su “asentimiento” o que acepte que también desea participar en el estudio.",
                     "Button": "Ver el documento de consentimiento",
+                    "href": "consent.pdf",
                     "ImageAlt": "Pantalla de computadora que muestra un formulario de consentimiento en línea"
                 },
                 {
@@ -102,6 +103,7 @@
                     "Title": "Indique dónde ha recibido tratamiento",
                     "Text": "Indique dónde ha recibido tratamiento para su cáncer. Les preguntamos a los pacientes dónde han recibido tratamiento para poder solicitar sus registros médicos y, si corresponde, el tejido almacenado de su tumor.",
                     "Button": "Ver el formulario de divulgación de información médica",
+                    "href": "medical_release.pdf",
                     "ImageAlt": "Pantalla de computadora que muestra un centro médico"
                 },
                 {
@@ -110,6 +112,7 @@
                     "Title": "Responda encuestas acerca de usted y su experiencia con el cáncer",
                     "Text": "En estas encuestas hacemos preguntas sobre su experiencia con el cáncer, como el tipo de cáncer que le diagnosticaron, cuándo se lo diagnosticaron y los tipos de tratamientos que recibió.",
                     "Button": "Ver encuestas",
+                    "href": "surveys.pdf",
                     "ImageAlt": "Pantalla de computadora que muestra una encuesta en línea"
                 },
                 {
@@ -118,6 +121,7 @@
                     "Title": "Proporcione una muestra de saliva y/o de sangre",
                     "Text": "Le enviaremos un kit para obtener una muestra de su saliva y/o su sangre. Estudiaremos estas muestras para ayudar a mejorar nuestros conocimientos sobre el cáncer.",
                     "Button": "Ver las instrucciones para el kit",
+                    "href": "Salvia_Kit_Instructions_PanCan_Espanol.pdf",
                     "ImageAlt": "Kit de obtención de muestras"
                 },
                 {
@@ -214,10 +218,10 @@
                         {
                             "Title": "Liderazgo",
                             "List": [
-                                "<b>Nikhil Wagle</b><br/> Director",
-                                "<b>Diane Diehl</b><br/> Directora, Operaciones Científicas",
-                                "<b>Elana Anastasio</b><br/> Directora Asociada",
-                                "<b>Roeshana Moore-Evans</b><br/> Asesora Superior"
+                                "<b>Diane Diehl</b><br/>Directora Interina",
+                                "<b>Taisha Hendrickson</b><br/>Directora de Comunicacion, Acercamiento e Involucramiento",
+                                "<b>Elana Anastasio</b><br/>Directora Asociada",
+                                "<b>Mary McGillicuddy</b><br/>Gerente de Operaciones de Projectos"
                             ]
                         },
                         {
@@ -231,7 +235,7 @@
                                 "<b>Jesse Souweine</b><br/>Directora de Operaciones, Vicepresidenta Ejecutiva, Broad Institute"                                ,
                                 "<b>Laurie Glimcher</b><br/>Presidenta y Directora Ejecutiva, Directora de Dana-Farber Cancer Institute, Profesora de Medicina Dana-Farber/Harvard Cancer Center Richard y Susan Smith, Escuela de Medicina Harvard",
                                 "<b>Matt Bettonville</b><br/>Director, Venture Investing, Salud, Emerson Collective",
-                                "<b>Nikhil Wagle</b><br/>Director, Count Me In<br>Profesor Asistente de Medicina, Escuela de Medicina Harvard / Dana-Farber Cancer Institute<br>Miembro del Instituto, Broad Institute"
+                                "<b>Diane Diehl</b><br/>Directora Interina, Count Me In"
                             ]
                         }
                     ]

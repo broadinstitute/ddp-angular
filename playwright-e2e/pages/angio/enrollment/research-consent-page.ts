@@ -2,7 +2,7 @@ import { expect, Locator, Page } from '@playwright/test';
 import { AngioPageBase } from 'pages/angio/angio-page-base';
 import { waitForNoSpinner } from 'utils/test-utils';
 import Question from 'lib/component/Question';
-import Input from 'lib/widget/Input';
+import Input from 'lib/widget/input';
 
 export default class ResearchConsentPage extends AngioPageBase {
   private readonly pageTitle: Locator;
@@ -13,7 +13,7 @@ export default class ResearchConsentPage extends AngioPageBase {
   }
 
   async waitForReady(): Promise<void> {
-    await expect(this.pageTitle).toBeVisible({ visible: true });
+    await expect(this.pageTitle).toBeVisible();
     await expect(this.pageTitle).toHaveText('Research Consent Form');
     await waitForNoSpinner(this.page);
   }
@@ -66,7 +66,7 @@ export default class ResearchConsentPage extends AngioPageBase {
    * <br> Question: Have you had surgery to remove angiosarcoma?
    * <br> Type: Checkbox
    */
-  async hadSurgeryToRemoveAngiosarcoma(answer: string | RegExp): Promise<void> {
+  async hadSurgeryToRemoveAngiosarcoma(answer: string): Promise<void> {
     const question = new Question(this.page, {
       prompt: 'Have you had surgery to remove angiosarcoma?'
     });
@@ -78,7 +78,7 @@ export default class ResearchConsentPage extends AngioPageBase {
    * If you had radiation for other cancers, we will ask you about that later.
    * <br> Type: Checkbox
    */
-  async hadRadiationTreatmentForAngiosarcoma(answer: string | RegExp): Promise<void> {
+  async hadRadiationTreatmentForAngiosarcoma(answer: string): Promise<void> {
     const question = new Question(this.page, {
       prompt: 'Have you had radiation as a treatment for angiosarcoma?'
     });
@@ -89,7 +89,7 @@ export default class ResearchConsentPage extends AngioPageBase {
    * <br> Question: Are you currently being treated for your angiosarcoma?
    * <br> Type: Checkbox
    */
-  async beingTreatedCurrentlyForAngiosarcoma(answer: string | RegExp): Promise<void> {
+  async beingTreatedCurrentlyForAngiosarcoma(answer: string): Promise<void> {
     const question = new Question(this.page, {
       prompt: 'Are you currently being treated for your angiosarcoma?'
     });
@@ -100,7 +100,7 @@ export default class ResearchConsentPage extends AngioPageBase {
    * <br> Question: Were you ever diagnosed with any other kind of cancer(s)?
    * <br> Type: Checkbox
    */
-  async diagnosedWithOtherCancer(answer: string | RegExp): Promise<void> {
+  async diagnosedWithOtherCancer(answer: string): Promise<void> {
     const question = new Question(this.page, {
       prompt: 'Were you ever diagnosed with any other kind of cancer(s)?'
     });
@@ -115,18 +115,7 @@ export default class ResearchConsentPage extends AngioPageBase {
     const question = new Question(this.page, {
       prompt: 'In what year were you born?'
     });
-    await question.select().selectOption(answer);
-  }
-
-  /**
-   * <br> Question: What country do you live in?
-   * <br> Type: Select
-   */
-  async country(answer: string): Promise<void> {
-    const question = new Question(this.page, {
-      prompt: 'What country do you live in?'
-    });
-    await question.select().selectOption(answer);
+    await question.toSelect().selectOption(answer);
   }
 
   private async questionHelper(question: Question, checkboxes: string[], inputText?: string[]) {

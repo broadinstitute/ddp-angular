@@ -1,6 +1,6 @@
 import { Page } from '@playwright/test';
 import Question from 'lib/component/Question';
-import Input from 'lib/widget/Input';
+import Input from 'lib/widget/input';
 import { SingularPage } from 'pages/singular/singular-page';
 
 export default class ConsentFormForAdultDependentPage extends SingularPage {

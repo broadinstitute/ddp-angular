@@ -26,7 +26,7 @@ export class ClinicalPageComponent implements OnInit {
 
   getMercuryOrders(): void {
     this.loading = true;
-    const realm = localStorage.getItem( ComponentService.MENU_SELECTED_REALM );
+    const realm = sessionStorage.getItem( ComponentService.MENU_SELECTED_REALM );
     this.dsmService.getMercuryOrders( realm ).subscribe( {
       next: data => {
         const jsonData = data;

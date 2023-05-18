@@ -42,8 +42,7 @@
         "MRS": "logo de Metastasis Research Society",
         "Sisters": "logo de Sisters R Us Circle of Survivors",
         "HMN": "logo de Health Ministries Network",
-        "Min": "logo de Minority Coalition",
-        "MBCCanada": "logo de Metastatic Breast Cancer Canada"
+        "Min": "logo de Minority Coalition"
     },
     "Toolkit": {
         "Common": {
@@ -391,7 +390,7 @@
             },
             "FAQ": {
                 "Title": "Preguntas Frecuentes",
-                "OnePagerDocument": "MBCpSpanish_One-Pager.pdf",
+                "OnePagerDocument": "MBCpSpanish_One-Pager_NewDFCILogo.pdf",
                 "Goal": {
                     "Question": "1. ¿Cuál es el propósito de este proyecto?",
                     "Section1": "Este proyecto conectará a pacientes con cáncer de mama metastásico tratados en clínicas y hospitales con científicos que usan tecnología de última generación para estudiar las causas genéticas y moleculares del cáncer. El cáncer no es una sola enfermedad aislada y cada tumor contiene una pieza del rompecabezas.",
@@ -410,7 +409,7 @@
                 "InvolvedInProject": {
                     "Question": "3. ¿Cómo se han involucrado los pacientes en el diseño de este proyecto?",
                     "Section1": "Hemos trabajado cerca con pacientes y grupos aliados de pacientes dentro de la comunidad de cáncer de mama metastásico desde el inicio de este proyecto y a lo largo del diseño e implementación. Los pacientes han estado involucrados en todos los aspectos, incluyendo conceptualización del proyecto, metas, comunicación, los formularios que utilizamos e incluso en el diseño de esta página de internet. El MBCproject continúa evolucionando, y en cada paso, buscamos la ayuda de pacientes para asegurar que estamos en sincronía con la comunidad de pacientes con cáncer de mama metastásico.",
-                    "Section2": "Estamos orgullosos de mencionar a estas organizaciones como nuestros aliados en el MBCproject, Avon, Metastatic Breast Cancer Network, Living Beyond Breast Cancer, Young Survivors Coalition, Inflammatory Breast Cancer Research Foundation, SHARE, METAvivor, Theresa's Research Foundation, TigerLily, Triple Negative Breast Cancer Foundation, The IBC Network Foundation, Advocates for Breast Cancer, METup, Male Breast Cancer Coalition, Susan G. Komen, Breast Cancer Research Foundation, Dr. Susan Love Research Foundation, BCSM: Breast Cancer Social Media, Hope Scarves, The Cancer Couch Foundation, Twisted Pink, Cierra Sisters, BreastCancerTrials.org, Breast Cancer Alliance, The Tutu Project, Metaplastic Breast Cancer Global Alliance, Lobular Breast Cancer Alliance, FORCE, Shay Sharpe’s Pink Wishes, Metastasis Research Society, Sisters R Us Circle of Survivors, Health Ministries Network, Minority Coalition for Precision Medicine, y el Metastatic Breast Cancer Canada."
+                    "Section2": "Estamos orgullosos de mencionar a estas organizaciones como nuestros aliados en el MBCproject, Avon, Metastatic Breast Cancer Network, Living Beyond Breast Cancer, Young Survivors Coalition, Inflammatory Breast Cancer Research Foundation, SHARE, METAvivor, Theresa's Research Foundation, TigerLily, Triple Negative Breast Cancer Foundation, The IBC Network Foundation, Advocates for Breast Cancer, METup, Male Breast Cancer Coalition, Susan G. Komen, Breast Cancer Research Foundation, Dr. Susan Love Research Foundation, BCSM: Breast Cancer Social Media, Hope Scarves, The Cancer Couch Foundation, Twisted Pink, Cierra Sisters, BreastCancerTrials.org, Breast Cancer Alliance, The Tutu Project, Metaplastic Breast Cancer Global Alliance, Lobular Breast Cancer Alliance, FORCE, Shay Sharpe’s Pink Wishes, Metastasis Research Society, Sisters R Us Circle of Survivors, Health Ministries Network, y el Minority Coalition for Precision Medicine."
                 },
                 "Costs": {
                     "Question": "4. ¿Hay algún costo por participar en este proyecto?",

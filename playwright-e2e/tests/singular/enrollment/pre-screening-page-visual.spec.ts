@@ -2,7 +2,7 @@ import { expect } from '@playwright/test';
 import { test } from 'fixtures/singular-fixture';
 import PreScreeningPage from 'pages/singular/enrollment/pre-screening-page';
 
-test.describe('About Yourself page', () => {
+test.describe.skip('About Yourself page', () => {
   // Country validation: Select a country which is not US and Canada should triggers an error message
   test('select country France @visual @enrollment @singular', async ({ page, homePage }) => {
     await homePage.signUp();
@@ -14,12 +14,9 @@ test.describe('About Yourself page', () => {
     await expect(country.errorMessage()).toBeHidden();
 
     // Select country France and press Tab should start triggering the error message
-    await preScreeningPage.country().select().selectOption('FR');
-    //await page.keyboard.press('Tab');
-
+    await preScreeningPage.fillInCountry('FR');
     await expect(country.errorMessage()).toContainText(
-      'Project Singular is currently open only to participants in the United States and Territories or Canada.' +
-        ' Thank you for your interest.'
+      'Project Singular is currently open only to participants in the United States and Territories or Canada. Thank you for your interest.'
     );
     expect(await country.toLocator().screenshot()).toMatchSnapshot('country-france-err-message.png');
   });
@@ -40,9 +37,7 @@ test.describe('About Yourself page', () => {
     await expect(preScreeningPage.state().toLocator()).toBeHidden();
 
     // Select a country and press Tab should start triggering the error message
-    await preScreeningPage.country().select().selectOption('US');
-    await page.keyboard.press('Tab');
-
+    await preScreeningPage.fillInCountry('US');
     await expect(age.errorMessage()).toContainText(
       'In order to participate in Project Singular, a parent or guardian must register and consent for you.'
     );

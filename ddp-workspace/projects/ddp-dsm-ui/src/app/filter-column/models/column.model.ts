@@ -60,6 +60,7 @@ export class ParticipantColumn {
   public static MR_FOLLOW_UP = new ParticipantColumn('Follow-Up ', 'followUps', 'm');
   public static MR_FOLLOW_REQUIRED = new ParticipantColumn('Follow-Up required', 'followupRequired', 'm');
   public static MR_FOLLOW_REQUIRED_TEXT = new ParticipantColumn('Follow-Up required Text', 'followupRequiredText', 'm');
+  public static NO_ACTION_NEEDED = new ParticipantColumn('No Action Needed', 'noActionNeeded', 'm');
 
   // oncHistoryDetail columns
   public static ACCESSION_NUMBER = new ParticipantColumn('Accession Number', 'accessionNumber', 'oD');
@@ -150,8 +151,6 @@ export class ParticipantColumn {
   public static CLINICAL_ORDER_DATE = new ParticipantColumn('Clinical Order Date', 'orderDate', 'cl', 'dsm');
   public static CLINICAL_STATUS_DATE = new ParticipantColumn('Clinical Order Status Date', 'statusDate', 'cl', 'dsm');
 
-  //FON
-  public static ACTIVITY_STATUS = new ParticipantColumn('Enrollment Status', 'activityStatus', 'data');
 
   constructor(public display: string, public name: string, public tableAlias?: string, public object?: string, public esData?: boolean) {
     this.display = display;

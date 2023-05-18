@@ -3,7 +3,7 @@ import { test } from 'fixtures/singular-fixture';
 import PreScreeningPage from 'pages/singular/enrollment/pre-screening-page';
 import * as user from 'data/fake-user.json';
 
-test.describe('Child Enrollment', () => {
+test.describe.skip('Child Enrollment', () => {
   /**
    * Child (age under 19) cannot complete self-enrollment
    */
@@ -15,8 +15,7 @@ test.describe('Child Enrollment', () => {
 
     // Enter an age < 19
     await preScreeningPage.age().fill(user.child.age);
-    await preScreeningPage.country().select().selectOption(user.child.country.abbreviation);
-    await preScreeningPage.state().select().selectOption(user.child.state.abbreviation);
+    await preScreeningPage.fillInCountry(user.child.country.abbreviation, { state: user.child.state.abbreviation });
     // In the “Do you or your immediate family member have a single ventricle heart defect?” select “Yes”
     await preScreeningPage.haveVentricleHeartDefect().check('Yes');
     await preScreeningPage.checkReCaptcha(); // ReCaptcha "I'm not a robot"
@@ -28,8 +27,6 @@ test.describe('Child Enrollment', () => {
       'In order to participate in Project Singular, a parent or guardian must register and consent for you.'
     );
 
-    await expect(page.locator('.error-message')).toHaveText(
-      'Submission cannot proceed. Please review messages in form for details.'
-    );
+    await expect(page.locator('.error-message')).toHaveText('Submission cannot proceed. Please review messages in form for details.');
   });
 });

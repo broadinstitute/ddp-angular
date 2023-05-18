@@ -1,7 +1,7 @@
 import { Page } from '@playwright/test';
 import { SingularPage } from 'pages/singular/singular-page';
 import Question from 'lib/component/Question';
-import Input from 'lib/widget/Input';
+import Input from 'lib/widget/input';
 
 export default class ConsentFormPage extends SingularPage {
   constructor(page: Page) {
@@ -9,26 +9,7 @@ export default class ConsentFormPage extends SingularPage {
   }
 
   async waitForReady(): Promise<void> {
-    await this.firstName().toLocator().waitFor({ state: 'visible' });
-  }
-
-  /**
-   * Your Name (Study Participant):
-   */
-  /**
-   * <br> Question: First Name
-   * <br> Type: Input
-   */
-  firstName(): Input {
-    return new Input(this.page, { ddpTestID: 'answer:CONSENT_SELF_FIRST_NAME' });
-  }
-
-  /**
-   * <br> Question: Last Name
-   * <br> Type: Input
-   */
-  lastName(): Input {
-    return new Input(this.page, { ddpTestID: 'answer:CONSENT_SELF_LAST_NAME' });
+    await this.signature().toLocator().waitFor({ state: 'visible' });
   }
 
   /**

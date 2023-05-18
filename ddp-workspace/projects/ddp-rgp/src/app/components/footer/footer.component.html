@@ -30,6 +30,10 @@
                         </li>
                         <li>
                             <a [href]="phoneHref" class="Footer-contactLink">{{phone}}</a>
+                            <span>
+                               ({{'Footer.Address.tollFree' | translate}}
+                                <a class="Footer-contactLink" href='tel: 855-534-4300'>855-534-4300</a>)
+                            </span>
                         </li>
                         <li>
                             <a target="_blank" [href]="facebookUrl"><img class="Footer-contactLogos" lazy-resource
