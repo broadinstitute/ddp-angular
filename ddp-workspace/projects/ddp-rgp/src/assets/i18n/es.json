@@ -1075,7 +1075,7 @@
             "Paragraph2": {
                 "Intro": "Si tiene preguntas, consulte la página de",
                 "Link": "Preguntas frecuentes",
-                "Closing": "o comuníquese con el personal del estudio llamando al <a href=\"tel:617-714-7395\">617-714-7395</a> (Línea gratuita: <a class=\"Link\" href='tel: 855-534-4300'>855-534-4300</a>) o escribiendo a <a href=\"mailto:raregenomes@broadinstitute.org\">raregenomes@broadinstitute.org</a>."
+                "Closing": "o comuníquese con el personal del estudio llamando al <a href=\"tel:617-714-7395\">617-714-7395</a> (Línea gratuita: <a href='tel: 855-534-4300'>855-534-4300</a>) o escribiendo a <a href=\"mailto:raregenomes@broadinstitute.org\">raregenomes@broadinstitute.org</a>."
             }
         },
         "StudyMessages": {
