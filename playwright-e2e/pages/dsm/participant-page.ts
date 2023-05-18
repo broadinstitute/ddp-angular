@@ -4,7 +4,7 @@ import { waitForResponseByURL } from '../../utils/test-utils';
 export default class ParticipantPage {
   private readonly PAGE_TITLE: string = 'Participant Page';
 
-  constructor(private readonly page: Page) {}
+  constructor(protected readonly page: Page) {}
 
   public async fillParticipantNotes(value: string): Promise<void> {
     const textArea = await this.participantNotes;
@@ -18,6 +18,10 @@ export default class ParticipantPage {
   }
 
   /* Locators */
+  public getEmail(): Locator {
+    return this.page.locator("//input[@data-placeholder='Email']");
+  }
+
   private get participantNotes(): Locator {
     return this.page.locator('//table[.//td[contains(normalize-space(),"Participant Notes")]]//td/textarea');
   }
