@@ -46,6 +46,10 @@ export default class RgpParticipantPage extends ParticipantPage {
         return this.page.locator("//mat-dialog-container//table[contains(@class, 'family-member-form')]//button[text()='Submit']");
     }
 
+    public getAddFamilyMemberSuccessfulMessage(): Locator {
+        return this.page.getByText('Successfully added family member');
+    }
+
     /**
      * This only needs to be called once for the first instance of a dropdown being clicked as
      * dropdowns in the RGP participant page seem to have the same xpath

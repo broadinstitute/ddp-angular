@@ -643,6 +643,63 @@ test.describe.serial('Adult Self Enrollment', () => {
     await redCapSurveyCompletedDate.fill(`${currentDate[0]}/${currentDate[1]}/${currentDate[2]}`);//[0] is MM, [1] is DD, [2] is YYYY
   });
 
+  test('Verify that a family member can be added without copying proband info @rgp @functional', async ({ page }) => {
+    //Go into DSM
+    const dsm = new dsmHome(page);
+    const dsmUserEmail = await dsmAuth.login(page, {
+      email: DSM_USER_EMAIL,
+      password: DSM_USER_PASSWORD
+    });
+    const navigation = new Navigation(page);
+
+    //select RGP study
+    await new Select(page, { label: 'Select study' }).selectOption('RGP');
+
+    //Verify the Participant List is displayed
+    const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(StudyNav.PARTICIPANT_LIST);
+    await participantListPage.assertPageTitle();
+    await participantListPage.waitForReady();
+    await participantListPage.filterListByParticipantGUID(user.patient.participantGuid);
+
+    //Add a new family member
+    const rgpParticipantPage = new RgpParticipantPage(page);
+
+    const addFamilyMemberButton = rgpParticipantPage.getAddFamilyMemberButton();
+    await addFamilyMemberButton.click();
+
+    const addFamilyMemberPopup = rgpParticipantPage.getAddFamilyMemberPopup();
+    await expect(addFamilyMemberPopup).toBeVisible();
+
+    //Setup new family member
+    const testMaternalGrandfather = new FamilyMemberTab(page, FamilyMember.MATERNAL_GRANDFATHER);
+    testMaternalGrandfather.relationshipID = '20';
+    testMaternalGrandfather.firstName = 'Test Maternal Grandfather';
+    testMaternalGrandfather.lastName = user.patient.lastName;
+
+    const familyMemberFirstName = rgpParticipantPage.getFamilyMemberFirstName();
+    await familyMemberFirstName.fill(testMaternalGrandfather.firstName);
+
+    const familyMemberLastName = rgpParticipantPage.getFamilyMemberLastName();
+    await familyMemberLastName.fill(testMaternalGrandfather.lastName);
+
+    const familyMemberRelationshipID = rgpParticipantPage.getFamilyMemberRelationshipID();
+    await familyMemberRelationshipID.fill(testMaternalGrandfather.relationshipID);
+
+    const familyMemberRelation = rgpParticipantPage.getFamilyMemberRelation();
+    await familyMemberRelation.click();
+    const dropdownOptions = rgpParticipantPage.getDropdownOptions();
+    await dropdownOptions.filter({ hasText: testMaternalGrandfather.relationToProband}).click();
+
+    const copyProbandInfo = rgpParticipantPage.getCopyProbandInfo();
+    await expect(copyProbandInfo).not.toBeChecked();
+
+    const submitButton = rgpParticipantPage.getAddFamilyMemberFormSubmitButton();
+    await submitButton.click();
+
+    const successfullyAddedFamilyMemberMessage = rgpParticipantPage.getAddFamilyMemberSuccessfulMessage();
+    await expect(successfullyAddedFamilyMemberMessage).toBeVisible();
+  })
+
   test('Verify that a family member can be added using copied proband info @rgp @functional', async ({ page }) => {
     //Go into DSM
     const dsm = new dsmHome(page);
@@ -695,5 +752,10 @@ test.describe.serial('Adult Self Enrollment', () => {
 
     const submitButton = rgpParticipantPage.getAddFamilyMemberFormSubmitButton();
     await submitButton.click();
+
+    const successfullyAddedFamilyMemberMessage = rgpParticipantPage.getAddFamilyMemberSuccessfulMessage();
+    await expect(successfullyAddedFamilyMemberMessage).toBeVisible();
+
+    //Verify that family member info is similar to proband (expect for first name, last name, relationship id & relation to proband)
   });
 });
