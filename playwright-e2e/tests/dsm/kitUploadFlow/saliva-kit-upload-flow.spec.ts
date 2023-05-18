@@ -1,4 +1,4 @@
-import {test} from '@playwright/test';
+import {expect, test} from '@playwright/test';
 import {WelcomePage} from 'pages/dsm/welcome-page';
 import HomePage from 'pages/dsm/home-page';
 import {Navigation} from 'lib/component/dsm/navigation/navigation';
@@ -74,11 +74,16 @@ test.describe.parallel('Saliva Kits upload flow', () => {
       // Collects all the necessary data for kit upload
       const participantPage: ParticipantPage = await participantListTable.openParticipantPageAt(testParticipantIndex);
       shortID = await participantPage.getShortId();
+      const firstName = await participantPage.getFirstName();
+      const lastName = await participantPage.getLastName();
+      expect(shortID, "The short ID is empty").toBeTruthy();
+      expect(firstName, "The first name is empty").toBeTruthy();
+      expect(lastName, "The last name is empty").toBeTruthy();
       const isContactInformationTabVisible = await participantPage.isTabVisible(TabEnum.CONTACT_INFORMATION);
       kitUploadInfo = new KitUploadInfo(
         shortID,
-        await participantPage.getFirstName(),
-        await participantPage.getLastName(),
+        firstName,
+        lastName,
       );
 
       // collects data from the contact information tab if the tab is available
