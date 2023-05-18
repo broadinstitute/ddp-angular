@@ -89,7 +89,7 @@ export default class SampleInformationTab {
     await expect(this.page.locator(MFBarcodeXPath),
       `MFBarcode - '${MFBarcode}' can't be found`).toBeVisible();
 
-    await expect(await this.page.locator(MFBarcodeXPath + this.ancestorSampleTypeXPath).textContent(),
+    await expect(await this.page.locator(MFBarcodeXPath + this.ancestorSampleTypeXPath(type)).textContent(),
       `Provided MFBarcode (${MFBarcode}) has different sample type than - ${type}`)
       .toContain(type);
   }
@@ -102,7 +102,7 @@ export default class SampleInformationTab {
       `MFBarcode - '${MFBarcode}' can't be found`).toBeVisible();
 
     const textValue = await this.page.locator(MFBarcodeXPath + this.ancestorSampleTextXPath(info))
-      .textContent()
+      .textContent();
 
     expect(textValue?.trim(),
       `Provided MFBarcode (${MFBarcode}) has different info in - ${info} (provided value: ${value})`)
@@ -126,8 +126,8 @@ export default class SampleInformationTab {
     return `//tab[@heading='Sample Information']/fieldset//td[text()[normalize-space()='${MFCode}']]`
   }
 
-  private get ancestorSampleTypeXPath(): string {
-    return "/ancestor::fieldset/legend[contains(text(), 'SALIVA')]"
+  private ancestorSampleTypeXPath(type: KitTypeEnum): string {
+    return `/ancestor::fieldset/legend[contains(text(), ${type})]`
   }
 
   private ancestorSampleTextXPath(sampleInfo: SampleInfoEnum): string {

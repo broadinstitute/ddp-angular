@@ -117,7 +117,7 @@ test.describe.parallel.only('Blood Kits upload flow', () => {
       // initial scan
       const initialScanPage = await navigation.selectFromSamples<InitialScanPage>(SamplesNavEnum.INITIAL_SCAN);
       await initialScanPage.assertPageTitle();
-      kitLabel = `kit-${crypto.randomUUID().toString().substring(0, 10)}`;
+      kitLabel = `PECGS-${crypto.randomUUID().toString().substring(0, 10)}`;
       await initialScanPage.fillScanPairs([kitLabel, shortID]);
       await initialScanPage.save();
 
