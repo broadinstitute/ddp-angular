@@ -76,9 +76,9 @@ test.describe.parallel('Saliva Kits upload flow', () => {
       shortID = await participantPage.getShortId();
       const firstName = await participantPage.getFirstName();
       const lastName = await participantPage.getLastName();
-      expect(shortID, "The short ID is empty").toBeTruthy();
-      expect(firstName, "The first name is empty").toBeTruthy();
-      expect(lastName, "The last name is empty").toBeTruthy();
+      expect(shortID, 'The short ID is empty').toBeTruthy();
+      expect(firstName, 'The first name is empty').toBeTruthy();
+      expect(lastName, 'The last name is empty').toBeTruthy();
       const isContactInformationTabVisible = await participantPage.isTabVisible(TabEnum.CONTACT_INFORMATION);
       kitUploadInfo = new KitUploadInfo(
         shortID,
