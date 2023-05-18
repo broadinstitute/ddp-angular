@@ -36,6 +36,7 @@ import {StoolUploadComponent} from '../stool-upload/stool-upload.component';
 import {ExportHelpComponent} from '../help/help.component';
 import {DashboardStatisticsComponent} from '../dashboard-statistics/dashboard-statistics.component';
 import {ScannerComponent} from '../scanner/scanner.component';
+import {OncHistoryUploadComponent} from "../oncHistoryUpload/oncHistoryUpload.component";
 
 
 
@@ -88,7 +89,7 @@ export const AppRoutes: Routes = [
       {path: 'downloadPDF', component: PdfDownloadComponent, canActivate: [AuthGuard]},
       {path: 'customizeView', component: ShippingSearchComponent, canActivate: [AuthGuard]},
       {path: 'ndi', component: NDIUploadComponent, canActivate: [AuthGuard]},
-      {path: 'stoolUpload', component: StoolUploadComponent, canActivate: [AuthGuard]},
+      {path: 'oncHistoryUpload', component: OncHistoryUploadComponent, canActivate: [AuthGuard]},
 
 
       {path: 'userSettings', component: UserSettingComponent, canActivate: [AuthGuard]},

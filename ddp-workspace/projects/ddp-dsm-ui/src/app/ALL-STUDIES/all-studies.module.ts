@@ -138,6 +138,7 @@ import {DateRangeErrorPipe} from '../dashboard-statistics/pipes/dateRangeError.p
 import {KeyValuePairPipe} from '../dashboard-statistics/pipes/KeyValuePair.pipe';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {ScannerComponent} from '../scanner/scanner.component';
+import {OncHistoryUploadComponent} from "../oncHistoryUpload/oncHistoryUpload.component";
 
 
 PlotlyModule.plotlyjs = PlotlyJS;
@@ -234,7 +235,8 @@ PlotlyModule.plotlyjs = PlotlyJS;
     DateRangeComponent,
     DateRangeErrorPipe,
     KeyValuePairPipe,
-    ScannerComponent
+    ScannerComponent,
+    OncHistoryUploadComponent
   ],
   imports: [
     CommonModule,
