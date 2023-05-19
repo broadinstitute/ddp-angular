@@ -70,7 +70,7 @@ export default class FamilyMemberTab {
      */
     public async getFamilyIDFromSubjectID(): Promise<number> {
         const subjectIDField = this.getSubjectID();
-        const retreivedFamilyID = (await subjectIDField.inputValue()).substring(4, 8)
+        const retreivedFamilyID = (await subjectIDField.inputValue()).substring(4, 8);
         return parseInt(retreivedFamilyID);
     }
 
@@ -90,7 +90,7 @@ export default class FamilyMemberTab {
     /* Locators */
 
     /**
-     * Uses the relationshipID to find the tab to be returned, must be ran after setting the relationshipID
+     * Uses the relationshipID to find the tab to be returned, must be ran only after setting the relationshipID
      * @returns locator for a family member's tab
      */
     public getFamilyMemberTab(): Locator {
@@ -145,12 +145,54 @@ export default class FamilyMemberTab {
         return this.page.locator("//input[@data-placeholder='Family ID']");
     }
 
+    /**
+     * Inputs the given note into the Important Notes textarea
+     * @param notes the notes to be inputted
+     */
     public async inputImportantNotes(notes: string): Promise<void> {
         await this.page.getByPlaceholder('Important Notes').fill(`${notes}`);
     }
 
+    /**
+     * Returns the text content of the Important Notes textarea
+     * @returns contents of the Important Notes textarea
+     */
+    public async getImportantNotesContent(): Promise<string> {
+        const content = (await this.page.getByPlaceholder('Important Notes').inputValue()).toString();
+        return content;
+    }
+
+    /**
+     * Returns the locator for the Participant Info -> Important Notes textarea
+     * @returns Important Notes textarea locator
+     */
+    public getImportantNotes(): Locator {
+        return this.page.getByPlaceholder('Important Notes');
+    }
+
+    /**
+     * Inputs the given note into the Process Notes textarea
+     * @param notes the notes to be inputted
+     */
     public async inputProcessNotes(notes: string): Promise<void> {
         await this.page.getByPlaceholder('Process Notes').fill(`${notes}`);
+    }
+
+    /**
+     * Returns the text content of the Process Notes textarea
+     * @returns contents of the Process Notes textarea
+     */
+    public async getProcessNotesContent(): Promise<string> {
+        const content = (await this.page.getByPlaceholder('Process Notes').inputValue()).toString();
+        return content;
+    }
+
+    /**
+     * Returns the locator for the Participant Info -> Process Notes textarea
+     * @returns Process Notes textarea locator
+     */
+    public getProcessNotes(): Locator {
+        return this.page.getByPlaceholder('Process Notes');
     }
 
     public getFirstName(): Locator {
@@ -204,7 +246,6 @@ export default class FamilyMemberTab {
      * @param option the radio button option to be selected
      * @returns Alive/Deceased radio button locator
      */
-
     public getLivingStatusOption(option: string): Locator {
         return this.page.getByRole('radio', { name: `${option}` });
     }
@@ -225,8 +266,29 @@ export default class FamilyMemberTab {
         return this.page.locator("//td[contains(text(), 'Ethnicity')]/following-sibling::td/mat-select");
     }
 
+    /**
+     * Inputs the given note into the Mixed Race Notes textarea
+     * @param notes the notes to be inputted
+     */
     public async inputMixedRaceNotes(notes: string): Promise<void> {
         await this.page.getByPlaceholder('Mixed Race Notes').fill(`${notes}`);
+    }
+
+    /**
+     * Returns the text content of the Mixed Race Notes textarea
+     * @returns contents of the Mixed Race Notes textarea
+     */
+    public async getMixedRaceNotesContent(): Promise<string> {
+        const content = (await this.page.getByPlaceholder('Mixed Race Notes').inputValue()).toString();
+        return content;
+    }
+
+    /**
+     * Returns the locator for the Participant Info -> Mixed Race Notes textarea
+     * @returns Mixed Race Notes textarea locator
+     */
+    public getMixedRaceNotes(): Locator {
+        return this.page.getByPlaceholder('Mixed Race Notes');
     }
 
     public getContactInfoSection(): Locator {

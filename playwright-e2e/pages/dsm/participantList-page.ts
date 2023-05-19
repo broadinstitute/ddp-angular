@@ -27,6 +27,10 @@ export default class ParticipantListPage extends DSMPageBase {
     await waitForNoSpinner(this.page);
   }
 
+  /**
+   * Filters the participant list to search for a specific participant when given their guid
+   * @param participantGUID the guid of the specific participant to search for
+   */
   public async filterListByParticipantGUID(participantGUID: string): Promise<void> {
     const customizeViewPanel = this.filters.customizeViewPanel;
     await customizeViewPanel.open();
@@ -36,7 +40,13 @@ export default class ParticipantListPage extends DSMPageBase {
     await searchPanel.open();
     await searchPanel.text('Participant ID', {textValue: participantGUID });
     await searchPanel.search();
+  }
 
+  /**
+   * Selects a specific participant from the participant list when given their guid
+   * @param participantGUID the guid of the specific participant to search for
+   */
+  public async selectParticipant(participantGUID: string): Promise<void> {
     await this.page.getByRole('cell', { name: participantGUID }).click()
     await expect(this.page.getByRole('heading', { name: 'Participant Page' })).toBeVisible();
     await expect(this.page.getByRole('cell', { name: participantGUID })).toBeVisible();

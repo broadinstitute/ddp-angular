@@ -180,6 +180,7 @@ test.describe.serial('Adult Self Enrollment', () => {
 
     await participantListPage.waitForReady();
     await participantListPage.filterListByParticipantGUID(user.patient.participantGuid);
+    await participantListPage.selectParticipant(user.patient.participantGuid);
   });
 
   test('Verify the display and functionality of family account dynamic fields @functional @rgp', async ({ page}) => {
@@ -199,6 +200,7 @@ test.describe.serial('Adult Self Enrollment', () => {
     await participantListPage.assertPageTitle();
     await participantListPage.waitForReady();
     await participantListPage.filterListByParticipantGUID(user.patient.participantGuid);
+    await participantListPage.selectParticipant(user.patient.participantGuid);
 
     //Confirm the 'Add Family Member' button is visible
     const rgpParticipantPage = new RgpParticipantPage(page);
@@ -260,6 +262,7 @@ test.describe.serial('Adult Self Enrollment', () => {
     await participantListPage.assertPageTitle();
     await participantListPage.waitForReady();
     await participantListPage.filterListByParticipantGUID(user.patient.participantGuid);
+    await participantListPage.selectParticipant(user.patient.participantGuid);
 
     //Verify that the proband tab is present (and includes the text RGP and 3 as proband subject ids have the format RGP_{family id}_3)
     const proband = new FamilyMemberTab(page, FamilyMember.PROBAND);
@@ -351,7 +354,7 @@ test.describe.serial('Adult Self Enrollment', () => {
     //DOB field must either use Enter press or be de-selected in order for age to show up in following Age Today field
     await dateOfBirth.blur();
 
-    //section for Participant Info -> Age Today; check that the age automatically calculated and inputted into
+    //section for Participant Info -> Age Today; check that the age is automatically calculated and inputted into
     //Age Today field is the the correct age given the age inputted in DOB field
     const ageToday = proband.getAgeToday();
     const estimatedAge = calculateBirthDate(user.patient.birthDate.MM, user.patient.birthDate.DD, user.patient.birthDate.YYYY);
@@ -379,7 +382,32 @@ test.describe.serial('Adult Self Enrollment', () => {
 
     await proband.inputMixedRaceNotes('Testing notes here - Mixed Race Notes');
 
-    //todo verify that the input to Important Notes, Process Notes, Mixed Race Notes is saved even when page is re-visited
+    //Verify that the input to Important Notes, Process Notes, Mixed Race Notes has been saved even when page is re-visited
+    const familyAccount = new RgpParticipantPage(page);
+
+    const importantNotes = await proband.getImportantNotesContent();
+    const importantNotesTextarea = proband.getImportantNotes();
+
+    const processNotes = await proband.getProcessNotesContent();
+    const processNotesTextarea = proband.getProcessNotes();
+
+    const mixedRaceNotes = await proband.getMixedRaceNotesContent();
+    const mixedRaceTextarea = proband.getMixedRaceNotes();
+
+    //Go back to Participant List and refresh using Reload with Default Filters
+    await familyAccount.backToList();
+    participantListPage.filters.reloadWithDefaultFilters;
+    await participantListPage.filterListByParticipantGUID(user.patient.participantGuid);
+    await participantListPage.selectParticipant(user.patient.participantGuid);
+
+    //After refreshing participant list and page, check that the input for the above textareas are as expected
+    //Note: Proband tab is usually the tab that is open/selected upon visiting participant page/family account page
+    await expect(probandTab).toHaveAttribute('aria-selected', 'true');
+
+    await participantInfoSection.click();
+    await expect(importantNotesTextarea).toHaveText(importantNotes);
+    await expect(processNotesTextarea).toHaveText(processNotes);
+    await expect(mixedRaceTextarea).toHaveText(mixedRaceNotes);
 
     //Fill out Contact Info section
     const contactInfoSection = proband.getContactInfoSection();
@@ -393,7 +421,6 @@ test.describe.serial('Adult Self Enrollment', () => {
 
     //Verify that the proband's preferred email matches the email of the family account
     const email = proband.getPreferredEmail();
-    const familyAccount = new RgpParticipantPage(page);
     const familyAccountEmail = familyAccount.getEmail();
     await expect(email.inputValue()).toEqual(familyAccountEmail.inputValue());
 
@@ -634,7 +661,7 @@ test.describe.serial('Adult Self Enrollment', () => {
     const publication = proband.getPublication();
     await expect(publication).toHaveText('N/A');
 
-    const publicationInfo = proband.inputPublicationInfo('Testing notes here - Publication Info');
+    await proband.inputPublicationInfo('Testing notes here - Publication Info');
 
     //Fill out Survey section
     const surveySection = proband.getSurveySection();
@@ -665,6 +692,7 @@ test.describe.serial('Adult Self Enrollment', () => {
     await participantListPage.assertPageTitle();
     await participantListPage.waitForReady();
     await participantListPage.filterListByParticipantGUID(user.patient.participantGuid);
+    await participantListPage.selectParticipant(user.patient.participantGuid);
 
     //Add a new family member
     const rgpParticipantPage = new RgpParticipantPage(page);
@@ -722,6 +750,7 @@ test.describe.serial('Adult Self Enrollment', () => {
     await participantListPage.assertPageTitle();
     await participantListPage.waitForReady();
     await participantListPage.filterListByParticipantGUID(user.patient.participantGuid);
+    await participantListPage.selectParticipant(user.patient.participantGuid);
 
     //Add a new family member
     const rgpParticipantPage = new RgpParticipantPage(page);
