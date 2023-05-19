@@ -40,6 +40,10 @@ export default class ContactInformationTab {
     return this.split(phone);
   }
 
+  public isInformationEntered(): Promise<boolean> {
+    return this.page.locator(this.notEnteredInfoXPath).isVisible();
+  }
+
   private async readInfoFor(key: ContactInfoEnum): Promise<string | null> {
     return this.page.locator(this.getContactInfoXPath(key)).textContent();
   }
@@ -51,5 +55,9 @@ export default class ContactInformationTab {
   /* XPaths */
   private getContactInfoXPath(infoName: string): string {
     return `//tab[@heading='Contact Information']/legend//table/tr[td[contains(text(),'${infoName}')]]`
+  }
+
+  private get notEnteredInfoXPath(): string {
+    return `//tab[@heading='Contact Information']/legend//p[text()='Not Entered']`;
   }
 }
