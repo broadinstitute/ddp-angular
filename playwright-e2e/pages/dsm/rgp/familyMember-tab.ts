@@ -15,7 +15,7 @@ export default class FamilyMemberTab {
 
     constructor(page: Page, relationToProband: FamilyMember) {
         this.page = page;
-        this._firstName; //proband starts with this as unknown, first name is used as an identifier in DSM & DSS
+        this._firstName; //proband starts with this as unknown, first name is used as an identifier in DSM (family member tab) & DSS (dashboard messaging)
         this._lastName; //proband starts with this as unknown
         this._familyID;
         this._relationshipID;
@@ -173,6 +173,13 @@ export default class FamilyMemberTab {
         return this.page.locator("//td[contains(text(), 'Age Today')]/following-sibling::td//div//input[@data-placeholder='Age Today']");
     }
 
+    /**
+     * Participant Info -> Alive/Deceased has the following radio button options: Alive, Deceased
+     * Use one of the above options as a parameter to get the relevant locator returned
+     * @param option the radio button option to be selected
+     * @returns Alive/Deceased radio button locator
+     */
+
     public getLivingStatusOption(option: string): Locator {
         return this.page.getByRole('radio', { name: `${option}` });
     }
@@ -289,6 +296,12 @@ export default class FamilyMemberTab {
         await this.page.getByPlaceholder('Consenting Notes').fill(`${notes}`);
     }
 
+    /**
+     * Study Status -> Consent Documentation Complete has the following radio button options: Yes, No
+     * Use one of the above options as a parameter to get the relevant locator returned
+     * @param option the radio button option to be selected
+     * @returns Consent Documentation Complete radio button locator
+     */
     public getConsentDocumentationCompleteOption(option: string): Locator {
         return this.page.locator(`//td[contains(text(), 'Consent Documentation Complete')]` +
         `/following-sibling::td//mat-radio-button//span[text()='${option}']`);
@@ -302,6 +315,12 @@ export default class FamilyMemberTab {
         return this.page.locator("//button[contains(text(), 'Medical record')]");
     }
 
+    /**
+     * Medical Records -> Medical Records Received has the following radio button options: Yes, No, Partial, N/A
+     * Use one of the above options as a parameter to get the relevant locator returned
+     * @param option the radio button option to be selected
+     * @returns Medical Records Received radio button locator
+     */
     public getMedicalRecordsReceived(option: string): Locator {
         return this.page.locator(`//td[contains(text(), 'Medical Records Received')]` +
         `/following-sibling::td//mat-radio-button//span[text()='${option}']`);
@@ -315,6 +334,12 @@ export default class FamilyMemberTab {
         await this.page.getByPlaceholder('Medical Records Notes').fill(`${notes}`);
     }
 
+    /**
+     * Medical Records -> Medical Records Release Obtained has the following radio button options: Yes, No, Partial
+     * Use one of the above options as a parameter to get the relevant locator returned
+     * @param option the radio button option to be selected
+     * @returns Medical Records Release Obtained radio button locator
+     */
     public getMedicalRecordsReleaseObtained(option: string): Locator {
         return this.page.locator(`//td[contains(text(), 'Medical Records Release Obtained')]` +
         `/following-sibling::td//mat-radio-button//span[text()='${option}']`);
@@ -402,6 +427,12 @@ export default class FamilyMemberTab {
         return this.page.locator("//td[contains(text(), 'Methylation')]/following-sibling::td/mat-select");
     }
 
+    /**
+     * Primary Sample -> Blood RNAseq? has the following radio button options: Yes, No, N/A
+     * Use one of the above options as a parameter to get the relevant locator returned
+     * @param option the radio button option to be selected
+     * @returns Blood RNAseq? radio button locator
+     */
     public getBloodRnaSeq(option: string): Locator {
         return this.page.locator(`//td[contains(text(), 'Blood RNAseq?')]/following-sibling::td//mat-radio-button//span[text()='${option}']`);
     }

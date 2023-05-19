@@ -267,7 +267,7 @@ test.describe.serial('Adult Self Enrollment', () => {
     const proband = new FamilyMemberTab(page, FamilyMember.PROBAND);
 
     //Initial setup
-    proband.relationshipID = '_3';
+    proband.relationshipID = '3';
 
     const probandTab = proband.getFamilyMemberTab();
     await expect(probandTab).toBeVisible();
@@ -756,6 +756,9 @@ test.describe.serial('Adult Self Enrollment', () => {
     const successfullyAddedFamilyMemberMessage = rgpParticipantPage.getAddFamilyMemberSuccessfulMessage();
     await expect(successfullyAddedFamilyMemberMessage).toBeVisible();
 
-    //Verify that family member info is similar to proband (expect for first name, last name, relationship id & relation to proband)
+    /** Verify that family member info is similar to proband (expect for first name, last name, relationship id & relation to proband)
+    *   Initial verification tactic - check that the fields present in RGP default filter are the same upon creating copied family member (except those listed above) i.e.:
+    *   Family ID, Date of Birth, Age Today, Preferred Language, Affected Status, Phone (Primary), Preferred Email, Acceptance Status, Acceptance Status Date, Enrollment Date
+    **/
   });
 });
