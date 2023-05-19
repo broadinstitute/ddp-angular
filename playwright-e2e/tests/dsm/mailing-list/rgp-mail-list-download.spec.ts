@@ -33,7 +33,6 @@ test.describe.serial('When an interested participant does NOT meet participation
     await tellUsYourStoryPage.waitForReady();
 
     // Check all but one checkbox (i.e. don't check all the boxes so that user fails to meet requirements)
-    await tellUsYourStoryPage.who().check(WHO.UnderstandEnglishOrSpanish);
     await tellUsYourStoryPage.who().check(WHO.LivesInUS);
     await tellUsYourStoryPage.who().check(WHO.HasRareGeneticallyUndiagnosedCondition);
     await tellUsYourStoryPage.submit();

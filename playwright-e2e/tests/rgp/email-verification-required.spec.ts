@@ -18,7 +18,6 @@ test.describe('Registration requires email Verification', () => {
     const tellUsYourStoryPage = new TellUsYourStoryPage(page);
     await tellUsYourStoryPage.waitForReady();
 
-    await tellUsYourStoryPage.who().check(WHO.UnderstandEnglishOrSpanish);
     await tellUsYourStoryPage.who().check(WHO.LivesInUS);
     await tellUsYourStoryPage.who().check(WHO.HasRareGeneticallyUndiagnosedCondition);
     await tellUsYourStoryPage.who().check(WHO.IsUnderCare);
