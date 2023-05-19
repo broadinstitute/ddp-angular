@@ -19,7 +19,7 @@ export default class Tabs {
   public async isTabVisible(tabName: TabEnum): Promise<boolean> {
     const isTabVisible: boolean = await this.tabLocator(tabName).isVisible();
     let contactInformationEntered = true;
-    if(isTabVisible && tabName === TabEnum.CONTACT_INFORMATION) {
+    if (isTabVisible && tabName === TabEnum.CONTACT_INFORMATION) {
       await this.clickTab(tabName);
       contactInformationEntered = await this.HasContactInformationTabEnteredData();
     }
