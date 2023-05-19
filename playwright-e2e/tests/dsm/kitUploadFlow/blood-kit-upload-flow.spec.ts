@@ -1,4 +1,4 @@
-import {expect, test} from '@playwright/test';
+import {test} from '@playwright/test';
 import {WelcomePage} from 'pages/dsm/welcome-page';
 import HomePage from 'pages/dsm/home-page';
 import {Navigation} from 'lib/component/dsm/navigation/navigation';
@@ -23,9 +23,10 @@ import KitsWithoutLabelPage from 'pages/dsm/kitsInfo-pages/kitsWithoutLabel-page
 import {KitsColumnsEnum} from 'pages/dsm/kitsInfo-pages/enums/kitsColumns-enum';
 import KitsSentPage from 'pages/dsm/kitsInfo-pages/kitsSentPage';
 import KitsReceivedPage from 'pages/dsm/kitsInfo-pages/kitsReceived-page/kitsReceivedPage';
+import TrackingScanPage from 'pages/dsm/scanner-pages/trackingScan-page';
 
 
-test.describe.parallel('Saliva Kits upload flow', () => {
+test.describe.parallel('Blood Kits upload flow', () => {
   let welcomePage: WelcomePage;
   let homePage: HomePage;
   let navigation: Navigation;
@@ -33,10 +34,11 @@ test.describe.parallel('Saliva Kits upload flow', () => {
   let shortID: string;
   let kitUploadInfo: KitUploadInfo;
   let kitLabel: string;
+  let trackingLabel: string;
   let shippingID: string;
 
-  const studies = [StudyEnum.LMS, StudyEnum.OSTEO2];
-  const kitType = KitTypeEnum.SALIVA;
+  const studies = [StudyEnum.OSTEO2];
+  const kitType = KitTypeEnum.BLOOD;
   const expectedKitTypes = [KitTypeEnum.SALIVA, KitTypeEnum.BLOOD];
 
   test.beforeEach(async ({ page, request }) => {
@@ -74,16 +76,11 @@ test.describe.parallel('Saliva Kits upload flow', () => {
       // Collects all the necessary data for kit upload
       const participantPage: ParticipantPage = await participantListTable.openParticipantPageAt(testParticipantIndex);
       shortID = await participantPage.getShortId();
-      const firstName = await participantPage.getFirstName();
-      const lastName = await participantPage.getLastName();
-      expect(shortID, 'The short ID is empty').toBeTruthy();
-      expect(firstName, 'The first name is empty').toBeTruthy();
-      expect(lastName, 'The last name is empty').toBeTruthy();
       const isContactInformationTabVisible = await participantPage.isTabVisible(TabEnum.CONTACT_INFORMATION);
       kitUploadInfo = new KitUploadInfo(
         shortID,
-        firstName,
-        lastName,
+        await participantPage.getFirstName(),
+        await participantPage.getLastName(),
       );
 
       // collects data from the contact information tab if the tab is available
@@ -120,7 +117,7 @@ test.describe.parallel('Saliva Kits upload flow', () => {
       // initial scan
       const initialScanPage = await navigation.selectFromSamples<InitialScanPage>(SamplesNavEnum.INITIAL_SCAN);
       await initialScanPage.assertPageTitle();
-      kitLabel = `kit-${crypto.randomUUID().toString().substring(0, 10)}`;
+      kitLabel = `PECGS-${crypto.randomUUID().toString().substring(0, 10)}`;
       await initialScanPage.fillScanPairs([kitLabel, shortID]);
       await initialScanPage.save();
 
@@ -134,6 +131,13 @@ test.describe.parallel('Saliva Kits upload flow', () => {
       await kitsWithoutLabelPage.assertPageTitle();
       await kitsWithoutLabelPage.search(KitsColumnsEnum.SHORT_ID, shortID);
       shippingID = (await kitsWithoutLabelPage.getData(KitsColumnsEnum.SHIPPING_ID)).trim();
+
+      // tracking scan
+      const trackingScanPage = await navigation.selectFromSamples<TrackingScanPage>(SamplesNavEnum.TRACKING_SCAN);
+      await trackingScanPage.assertPageTitle();
+      trackingLabel = `tracking-${crypto.randomUUID().toString().substring(0, 10)}`;
+      await trackingScanPage.fillScanPairs([trackingLabel, kitLabel]);
+      await trackingScanPage.save();
 
       // final scan
       const finalScanPage = await navigation.selectFromSamples<FinalScanPage>(SamplesNavEnum.FINAL_SCAN);

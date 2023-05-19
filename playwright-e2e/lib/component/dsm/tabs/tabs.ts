@@ -17,7 +17,12 @@ export default class Tabs {
   }
 
   public async isTabVisible(tabName: TabEnum): Promise<boolean> {
-    return this.tabLocator(tabName).isVisible();
+    const isTabVisible: boolean = await this.tabLocator(tabName).isVisible();
+    const isContentEntered = tabName === TabEnum.CONTACT_INFORMATION ?
+      !(await (this.tabs.get(tabName) as ContactInformationTab).isInfoNotEnteredVisible()) :
+      true;
+
+    return isTabVisible && isContentEntered;
   }
 
   /* Locators */
