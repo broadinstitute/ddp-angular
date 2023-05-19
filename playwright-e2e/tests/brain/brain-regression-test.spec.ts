@@ -352,7 +352,7 @@ test.fixme('Brain enroll self @brain', async ({ page }) => {
 
   await consentPage.clickTissue(true);
   await consentPage.clickBlood(true);
-  await consentPage.enterName(firstName, lastName);
+  await consentPage.fillInName(firstName, lastName);
   await consentPage.fillInDateOfBirth('01', '01', '2000');
   await consentPage.enterSignature(fullName);
   await consentPage.submit();

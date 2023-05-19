@@ -2,7 +2,9 @@ import { expect, Locator, Page } from '@playwright/test';
 import Button from 'lib/widget/button';
 import Checkbox from 'lib/widget/checkbox';
 import Input from 'lib/widget/input';
+import Radiobutton from 'lib/widget/radiobutton';
 import Select from 'lib/widget/select';
+import TextArea from 'lib/widget/textarea';
 
 export default class Question {
   private readonly page: Page;
@@ -51,12 +53,20 @@ export default class Question {
     return new Input(this.page, { label, root: this.toLocator() });
   }
 
+  toTextarea(): TextArea {
+    return new TextArea(this.page, { root: this.toLocator() });
+  }
+
   /**
    * <br> Tag name: mat-checkbox
    * @param label
    */
   toCheckbox(label: string | RegExp): Checkbox {
     return new Checkbox(this.page, { label, root: this.toLocator() });
+  }
+
+  toRadiobutton(label?: string | RegExp): Radiobutton {
+    return new Radiobutton(this.page, { label, root: this.toLocator() });
   }
 
   /**

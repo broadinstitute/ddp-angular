@@ -40,7 +40,6 @@ test.describe.serial('Adult Self Enrollment', () => {
     const tellUsYourStoryPage = new TellUsYourStoryPage(page);
     await tellUsYourStoryPage.waitForReady();
     // Check all checkboxes
-    await tellUsYourStoryPage.who().check(WHO.UnderstandEnglishOrSpanish);
     await tellUsYourStoryPage.who().check(WHO.LivesInUS);
     await tellUsYourStoryPage.who().check(WHO.HasRareGeneticallyUndiagnosedCondition);
     await tellUsYourStoryPage.who().check(WHO.IsUnderCare);

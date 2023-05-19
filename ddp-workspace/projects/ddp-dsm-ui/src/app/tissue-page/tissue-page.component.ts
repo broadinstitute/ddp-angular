@@ -53,7 +53,7 @@ export class TissuePageComponent implements OnInit {
                private role: RoleService, private util: Utils
   ) {
     if (!auth.authenticated()) {
-      auth.logout();
+      auth.sessionLogout();
     }
     this.route.queryParams.subscribe(params => {
       const realm = params[ DSMService.REALM ] || null;
@@ -139,7 +139,7 @@ export class TissuePageComponent implements OnInit {
           value: v,
         }, null, 'participantId',
         this.participant.participant.ddpParticipantId, Statics.ONCDETAIL_ALIAS,  null,
-        localStorage.getItem(ComponentService.MENU_SELECTED_REALM), this.participant.data.profile['guid']
+        sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM), this.participant.data.profile['guid']
       );
       const patch = patch1.getPatch();
       this.patchFinished = false;
@@ -184,7 +184,7 @@ export class TissuePageComponent implements OnInit {
       userId: this.role.userID(),
       userMail: this.role.userMail(),
     };
-    this.dsmService.applyDestructionPolicyToAll(localStorage.getItem(ComponentService.MENU_SELECTED_REALM), JSON.stringify(jsonData))
+    this.dsmService.applyDestructionPolicyToAll(sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM), JSON.stringify(jsonData))
       .subscribe({
         next: data => {
           const result = Result.parse(data);

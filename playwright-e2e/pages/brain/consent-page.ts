@@ -20,11 +20,6 @@ export default class ResearchConsentPage extends BrainBasePage {
     await this.page.getByTestId('answer:CONSENT_BLOOD').getByText(booleanToYesOrNo(agree)).click();
   }
 
-  async enterName(firstName: string, lastName: string): Promise<void> {
-    await this.page.getByTestId('answer:CONSENT_FIRSTNAME').fill(firstName);
-    await this.page.getByTestId('answer:CONSENT_LASTNAME').fill(lastName);
-  }
-
   async enterSignature(fullName: string): Promise<void> {
     await this.page.getByTestId('answer:CONSENT_FULLNAME').fill(fullName);
   }

@@ -14,7 +14,7 @@ import { filter, first, tap } from 'rxjs/operators';
 export class HeaderComponent implements OnInit {
   Route = Route;
   private _isNavigationShown = false;
-  public pdfUrl = 'https://storage.googleapis.com/cmi-study-dev-assets/brugada/pdf/for-physicians.pdf';
+  public pdfUrl = 'https://storage.googleapis.com/cmi-study-dev-assets/brugada/pdf/For_Physicians_v2.pdf';
 
   constructor(
     private readonly router: ActivatedRoute,

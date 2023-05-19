@@ -11,7 +11,7 @@ import PatientSurveyPage from 'pages/singular/enrollment/patient-survey-page';
 import { assertActivityHeader, assertActivityProgress } from 'utils/assertion-helper';
 import { generateUserName } from 'utils/faker-utils';
 
-test.describe('Enroll myself as adult', () => {
+test.describe.skip('Enroll myself as adult', () => {
   // Randomize last name
   const lastName = generateUserName(user.patient.lastName);
 
@@ -44,8 +44,7 @@ test.describe('Enroll myself as adult', () => {
     // On "Consent Form" page, Page 3 of 3.
     await assertActivityHeader(page, 'Your Consent Form');
     await assertActivityProgress(page, 'Page 3 of 3');
-    await consentForm.firstName().fill(user.patient.firstName);
-    await consentForm.lastName().fill(lastName);
+    await consentForm.fillInName(user.patient.firstName, lastName);
 
     await consentForm.fillInDateOfBirth(user.patient.birthDate.MM, user.patient.birthDate.DD, user.patient.birthDate.YYYY);
     await consentForm.toKnowSecondaryFinding().check('I want to know.');

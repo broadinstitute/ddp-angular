@@ -111,7 +111,7 @@ import { ToolkitConfigurationService } from 'toolkit';
                         <h1 class="PageContent-title" translate>MoreDetails.FAQ.OtherQuestions.Title</h1>
                         <p class="PageContent-text">
                             <span translate>MoreDetails.FAQ.OtherQuestions.Section1.Text</span>
-                            <a href="ESCBrochure.pdf" target="_blank" class="Link" translate> MoreDetails.FAQ.OtherQuestions.Section1.Link</a>
+                            <a href="ESCBrochure-one-pager_NewLogo_31Mar2023.pdf" target="_blank" class="Link" translate> MoreDetails.FAQ.OtherQuestions.Section1.Link</a>
                         </p>
                         <p class="PageContent-text">
                             <span translate>MoreDetails.FAQ.OtherQuestions.Section2.TextPt1</span>

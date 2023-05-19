@@ -8,8 +8,11 @@ echo "export SITE_PASSWORD=$sitePwd" >> playwright-env/envvars
 #DSM
 export dsmUser=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[] | select(.app==\"dsm\") | .userName")
 export dsmUserPassword=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[] | select(.app==\"dsm\") | .password")
+export bspToken=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.bsp | .[] | select(.env==\"$ENV\") | .token")
 echo "export DSM_USER_EMAIL=$dsmUser" >> playwright-env/envvars
 echo "export DSM_USER_PASSWORD=$dsmUserPassword" >> playwright-env/envvars
+echo "export BSP_TOKEN=$bspToken" >> playwright-env/envvars
+
 
 # SINGULAR
 export singularUser=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[] | select(.app==\"singular\") | .userName")

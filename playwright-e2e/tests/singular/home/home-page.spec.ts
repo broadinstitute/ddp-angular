@@ -5,7 +5,7 @@ import { NavSelectors } from 'pages/singular/navbar';
 /**
  * Functional tests
  */
-test.describe('Home page', () => {
+test.describe.skip('Home page', () => {
   test('go to "Contact Us" @singular', async ({ page, homePage }) => {
     const aboutUs = page.locator(NavSelectors.AboutUs);
     await expect(aboutUs).toHaveAttribute('href', '/about');

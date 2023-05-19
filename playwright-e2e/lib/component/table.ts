@@ -2,6 +2,11 @@ import { expect, Locator, Page } from '@playwright/test';
 import Button from 'lib/widget/button';
 import _ from 'lodash';
 
+export enum SortOrder {
+  DESC = 'desc',
+  ASC = 'asc'
+}
+
 export default class Table {
   private readonly page: Page;
   private readonly tableCss: string;
@@ -21,7 +26,7 @@ export default class Table {
         : cssClassAttribute
             ? `table${cssClassAttribute}, mat-table${cssClassAttribute}`
             : 'table, mat-table, [role="table"]';
-    this.headerCss = '[role="columnheader"]:visible';
+    this.headerCss = 'th, [role="columnheader"]';
     this.rowCss = '[role="row"]:not([mat-header-row]):not(mat-header-row), tbody tr';
     this.cellCss = '[role="cell"], td';
     this.footerCss = 'tfoot tr';
@@ -63,16 +68,19 @@ export default class Table {
    * @param searchCellValue Cell value: Cell text to search for in searchColumnHeader
    * @param resultHeader Column header: Find the cell in this column in the same row
    *
+   * @param opts
    * @returns Cell locator
    */
-  async findCell(searchHeader: string, searchCellValue: string, resultHeader: string): Promise<Locator | null> {
+  async findCell(searchHeader: string, searchCellValue: string, resultHeader: string, opts: { exactMatch?: boolean} = {}): Promise<Locator | null> {
+    const { exactMatch = true } = opts;
+
     // Find the searchColumnHeader index
     const columnNames = await this.getHeaderNames();
     const columnIndex = columnNames.findIndex((text) => text === searchHeader);
     if (columnIndex === -1) {
       return null;
     }
-    const resultColumnIndex = columnNames.findIndex((text) => text === resultHeader);
+    const resultColumnIndex = columnNames.findIndex((text: string) => exactMatch ? text === resultHeader : text.includes(resultHeader));
     if (resultColumnIndex === -1) {
       return null;
     }
@@ -105,6 +113,10 @@ export default class Table {
     );
   }
 
+  getHeaderByName(name: string): Locator {
+    return this.headerLocator().filter({hasText: name});
+  }
+
   /**
    * Find a button in a cell
    */
@@ -125,5 +137,15 @@ export default class Table {
       .locator('xpath=/ancestor::mat-expansion-panel')
       .locator('mat-icon', { hasText: /expand_less/ })
       .click();
+  }
+
+  async sort(column: string, order: SortOrder): Promise<void> {
+    const header = await this.getHeaderByName(column);
+    await header.locator('a').click();
+    const ariaLabel = await header.locator('span').getAttribute('aria-label')
+    if (ariaLabel !== order) {
+      await header.locator('a').click();
+    }
+    await expect(header.locator('span')).toHaveAttribute('aria-label', order);
   }
 }

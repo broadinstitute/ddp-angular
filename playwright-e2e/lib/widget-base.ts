@@ -37,4 +37,8 @@ export default abstract class WidgetBase implements WidgetInterface {
   async isDisabled(): Promise<boolean> {
     return (await this.toLocator().getAttribute('disabled')) !== null;
   }
+
+  async getAttribute(attributeName: string): Promise<string | null> {
+    return this.toLocator().getAttribute(attributeName)
+  }
 }

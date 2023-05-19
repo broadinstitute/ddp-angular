@@ -45,7 +45,7 @@ export class PickStudyComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.unsubscribeVar))
       .subscribe(({name, value}) => {
         this.router.navigate([name]);
-        localStorage.setItem(ComponentService.MENU_SELECTED_REALM, name);
+        sessionStorage.setItem(ComponentService.MENU_SELECTED_REALM, name);
         this.auth.setSelectedStudy = value;
       });
   }

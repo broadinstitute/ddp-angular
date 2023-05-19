@@ -43,7 +43,8 @@ export class TissueComponent {
   selectedSmIds = 0;
   smIdDuplicate = {};
 
-  constructor(private role: RoleService, private dsmService: DSMService, private compService: ComponentService, private router: Router) {
+  constructor(private role: RoleService, private dsmService: DSMService, private compService: ComponentService,
+              private router: Router, private auth: Auth) {
     this.smIdDuplicate[ this.uss ] = new Set();
     this.smIdDuplicate[ this.he ] = new Set();
     this.smIdDuplicate[ this.scrolls ] = new Set();
@@ -159,7 +160,7 @@ export class TissueComponent {
           name: parameterName,
           value: v,
         }, nameValues, parentName, parentId, tAlias, null,
-        localStorage.getItem(ComponentService.MENU_SELECTED_REALM), this.participant.data.profile['guid']
+        sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM), this.participant.data.profile['guid']
       );
       const patch = patch1.getPatch();
       this.patchFinished = false;
@@ -190,7 +191,7 @@ export class TissueComponent {
             this.smIdDuplicate[ this.currentSMIDField ].add(this.createDuplicateIndex( index ) );
           }
           if (err._body === Auth.AUTHENTICATION_ERROR) {
-            this.router.navigate([ Statics.HOME_URL ]);
+            this.auth.doLogout();
           }
         },
       });
@@ -210,7 +211,7 @@ export class TissueComponent {
     if (this.collaboratorS == null && (this.tissue.collaboratorSampleId == null || this.tissue.collaboratorSampleId === '')) {
       this.dsmService.lookupCollaboratorId(
         'tCollab', this.participant.participant.ddpParticipantId,
-          this.participant.data.profile['hruid'], localStorage.getItem(ComponentService.MENU_SELECTED_REALM)
+          this.participant.data.profile['hruid'], sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM)
         )
         .subscribe({// need to subscribe, otherwise it will not send!
           next: data => {
@@ -222,7 +223,7 @@ export class TissueComponent {
           },
           error: err => {
             if (err._body === Auth.AUTHENTICATION_ERROR) {
-              this.router.navigate([Statics.HOME_URL]);
+              this.auth.doLogout();
             }
           },
         });

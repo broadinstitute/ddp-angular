@@ -51,7 +51,7 @@ export class OncHistoryDetailComponent implements OnInit {
   patchFinished = true;
 
   constructor(private dsmService: DSMService, private compService: ComponentService, private role: RoleService,
-               private router: Router, private util: Utils) {
+               private router: Router, private util: Utils, private auth: Auth) {
   }
 
   ngOnInit(): void {
@@ -86,7 +86,7 @@ export class OncHistoryDetailComponent implements OnInit {
       }
     }
     if (v != null) {
-      const realm: string = localStorage.getItem(ComponentService.MENU_SELECTED_REALM);
+      const realm: string = sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM);
       const patch1 = new PatchUtil(
         this.oncHistory[index].oncHistoryDetailId, this.role.userMail(),
         {
@@ -174,7 +174,7 @@ export class OncHistoryDetailComponent implements OnInit {
       },
       error: err => {
         if (err._body === Auth.AUTHENTICATION_ERROR) {
-          this.router.navigate([ Statics.HOME_URL ]);
+          this.auth.doLogout();
         }
       }
     });
@@ -239,7 +239,7 @@ export class OncHistoryDetailComponent implements OnInit {
 
   deleteOncHistory(index: number): void {
     this.oncHistory[ index ].deleted = true;
-    const realm: string = localStorage.getItem(ComponentService.MENU_SELECTED_REALM);
+    const realm: string = sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM);
     const patch1 = new PatchUtil(
       this.oncHistory[index].oncHistoryDetailId, this.role.userMail(),
       {
@@ -258,7 +258,7 @@ export class OncHistoryDetailComponent implements OnInit {
       },
       error: err => {
         if (err._body === Auth.AUTHENTICATION_ERROR) {
-          this.router.navigate([ Statics.HOME_URL ]);
+          this.auth.doLogout();
         }
       }
     });
@@ -297,7 +297,7 @@ export class OncHistoryDetailComponent implements OnInit {
   }
 
   setFacility(contact: Lookup | string, index: number): void {
-    const realm: string = localStorage.getItem(ComponentService.MENU_SELECTED_REALM);
+    const realm: string = sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM);
     if (contact != null) {
       if (contact instanceof Lookup) {
         this.oncHistory[ index ].facility = contact.field1.value;
@@ -352,7 +352,7 @@ export class OncHistoryDetailComponent implements OnInit {
       if (object instanceof Lookup) {
         // slow save to make sure value is saved to right value
         this.oncHistory[ index ].typePx = object.field1.value;
-        const realm: string = localStorage.getItem(ComponentService.MENU_SELECTED_REALM);
+        const realm: string = sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM);
         const patch1 = new PatchUtil(
           this.oncHistory[ index ].oncHistoryDetailId, this.role.userMail(),
           {
@@ -375,7 +375,7 @@ export class OncHistoryDetailComponent implements OnInit {
       if (object instanceof Lookup) {
         // slow save to make sure value is saved to right value
         this.oncHistory[ index ].histology = object.field1.value;
-        const realm: string = localStorage.getItem(ComponentService.MENU_SELECTED_REALM);
+        const realm: string = sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM);
         const patch1 = new PatchUtil(
           this.oncHistory[ index ].oncHistoryDetailId, this.role.userMail(),
           {

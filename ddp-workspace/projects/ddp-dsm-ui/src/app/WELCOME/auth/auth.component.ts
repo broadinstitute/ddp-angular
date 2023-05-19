@@ -48,7 +48,7 @@ export class AuthComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.auth.authenticated()) {
-      const selectedRealm = localStorage.getItem(ComponentService.MENU_SELECTED_REALM);
+      const selectedRealm = sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM);
       this.router.navigate([selectedRealm]);
     } else {
       this.startAppAuth();
@@ -58,7 +58,7 @@ export class AuthComponent implements OnInit {
 
   startAppAuth(): void {
     this.title.setTitle('DDP Study Management');
-    this.auth.logout();
+    this.auth.sessionLogout();
     this.showAuthPopUp();
     this.runAuth0Listeners();
   }

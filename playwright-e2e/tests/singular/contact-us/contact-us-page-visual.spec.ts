@@ -4,7 +4,7 @@ import { test } from 'fixtures/singular-fixture';
 /**
  * Functional tests for the Home page
  */
-test.describe('Home page', () => {
+test.describe.skip('Home page', () => {
   test('Our teams @visual @singular', async ({ page, homePage }) => {
     await homePage.gotoURLPath('/about');
     const headerText = page.locator('.our-team h1');

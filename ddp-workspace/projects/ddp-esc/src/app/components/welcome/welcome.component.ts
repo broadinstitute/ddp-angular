@@ -24,7 +24,7 @@ import {
 
         <div class="Intro-footer row">
             <img src="./assets/images/logo-broad-institute.png" class="Intro-footerLogos" alt="Broad Institute Logo" />
-            <img src="./assets/images/logo-dana-farber-cancer-institute.png" class="Intro-footerLogos" alt="Dana Farber Logo">
+            <img src="./assets/images/logo-new-DFCI.jpg" class="Intro-footerLogos" alt="Dana Farber Logo">
         </div>
 
         <div class="Intro row">

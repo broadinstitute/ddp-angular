@@ -18,7 +18,7 @@ export class PermalinkComponent implements OnInit {
 
   constructor(private router: Router, private route: ActivatedRoute, private dsmService: DSMService, private auth: Auth) {
     if (!auth.authenticated()) {
-      auth.logout();
+      auth.sessionLogout();
     }
   }
 
@@ -49,7 +49,7 @@ export class PermalinkComponent implements OnInit {
     this.participant = null;
     this.medicalRecord = null;
     if (medicalRecordId != null && medicalRecordId !== '' && participantId != null && participantId !== '') {
-      this.dsmService.getParticipant(participantId, localStorage.getItem(ComponentService.MENU_SELECTED_REALM)).subscribe({
+      this.dsmService.getParticipant(participantId, sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM)).subscribe({
         next: data => {
           // console.info(`participant data received: ${JSON.stringify(data, null, 2)}`);
           this.participant = Participant.parse(data);
@@ -60,7 +60,7 @@ export class PermalinkComponent implements OnInit {
         },
         error: err => {
           if (err._body === Auth.AUTHENTICATION_ERROR) {
-            this.auth.logout();
+            this.auth.doLogout();
           }
           // eslint-disable-next-line no-throw-literal
           throw 'Error loading institutions' + err;
@@ -78,14 +78,14 @@ export class PermalinkComponent implements OnInit {
         },
         error: err => {
           if (err._body === Auth.AUTHENTICATION_ERROR) {
-            this.auth.logout();
+            this.auth.doLogout();
           }
           // eslint-disable-next-line no-throw-literal
           throw 'Error loading medical record data' + err;
         }
       });
     } else {
-      this.router.navigate([ Statics.HOME_URL ]);
+      this.router.navigateByUrl('/');
     }
   }
 }

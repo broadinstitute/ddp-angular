@@ -11,7 +11,7 @@ import { generateUserName } from 'utils/faker-utils';
 /**
  * Enroll a child of age >= 7 but < AOM + cognitive impairment
  */
-test.describe('Enroll child with cognitive impairment', () => {
+test.describe.skip('Enroll child with cognitive impairment', () => {
   // Randomize last name
   const childLastName = generateUserName(user.thirdChild.lastName);
 

@@ -85,7 +85,7 @@ export class LookupComponent implements OnInit, OnDestroy {
   }
 
   private fetchLookedUpValue(value: string): Observable<any> {
-   return this.dsmService.lookupValue(this.lookupType, value, localStorage.getItem(ComponentService.MENU_SELECTED_REALM));
+   return this.dsmService.lookupValue(this.lookupType, value, sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM));
   }
 
   private setValues(data: object[]): void {

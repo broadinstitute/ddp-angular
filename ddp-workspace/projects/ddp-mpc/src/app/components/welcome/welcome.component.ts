@@ -23,7 +23,7 @@ import {
         </div>
         <div class="Intro-footer row">
             <img src="./assets/images/logo-broad-institute.png" class="Intro-footerLogos" alt="Broad Institute Logo" />
-            <img src="./assets/images/logo-dana-farber-cancer-institute.png" class="Intro-footerLogos" alt="Dana Farber Logo">
+            <img src="./assets/images/logo-new-DFCI.jpg" class="Intro-footerLogos" alt="Dana Farber Logo">
         </div>
         <div class="Intro row">
             <section class="Message Message--intro col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12">

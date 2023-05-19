@@ -2,6 +2,7 @@ import { promises as fsPromises } from 'fs';
 import path from 'path';
 import { APP } from 'data/constants';
 
+
 // Stores AUTH0 access token for targeted app.
 // Created automatically when the authorization flow completes for the first time.
 const getTokenPath = (app: APP) => path.join(process.cwd(), app, 'token.txt');

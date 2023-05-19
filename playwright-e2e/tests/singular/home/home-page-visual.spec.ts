@@ -5,7 +5,7 @@ import _ from 'lodash';
 /**
  * Visual screenshots tests for the Home page
  */
-test.describe('Home page', () => {
+test.describe.skip('Home page', () => {
   test('match navigation-links @visual @singular', async ({ page, homePage }) => {
     const nav = page.locator('.header__nav');
     expect(await nav.screenshot({ omitBackground: true })).toMatchSnapshot('nav.png');

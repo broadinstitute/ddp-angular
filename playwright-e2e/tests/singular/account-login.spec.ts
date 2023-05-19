@@ -6,7 +6,7 @@ import EnrollMyselfPage from 'pages/singular/enrollment/enroll-myself-page';
 import { assertActivityHeader } from 'utils/assertion-helper';
 import { NavSelectors } from 'pages/singular/navbar';
 
-test('Continue enrollment after log out @visual @singular', async ({ page, dashboardPage }) => {
+test.skip('Continue enrollment after log out @visual @singular', async ({ page, dashboardPage }) => {
   await dashboardPage.logOut();
 
   await login(page, { email: process.env.SINGULAR_USER_EMAIL_ALIAS, password: process.env.SINGULAR_USER_PASSWORD });

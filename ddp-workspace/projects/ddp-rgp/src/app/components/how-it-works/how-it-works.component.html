@@ -25,7 +25,7 @@
 
       <div *ngIf="first" class="row">
         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-          <a [href]="videoUrl" target="_blank">
+          <a [href]="item.videoUrl" target="_blank">
             <img
               lazy-resource
               class="PageContent-imageStep PageContent-imageStep--no-border"
@@ -65,7 +65,10 @@
       <span translate>HowItWorksPage.Ending.AnyQuestions.Text3</span>
       <a [href]="emailHref" class="Link">{{email}}</a>
       <span translate>HowItWorksPage.Ending.AnyQuestions.Text4</span>
-      <a [href]="phoneHref" class="Link">{{phone}}</a>.
+      <a [href]="phoneHref" class="Link">{{phone}}</a>
+        <span>
+                ({{'HowItWorksPage.Ending.AnyQuestions.tollFree' | translate}}
+            <a class="Link" href='tel: 855-534-4300'>855-534-4300</a>)</span>.
     </p>
 
   </div>

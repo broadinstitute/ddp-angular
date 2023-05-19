@@ -44,7 +44,8 @@ export class AbstractionFieldComponent implements OnInit {
   modalReadOnly: boolean;
   _other: string;
 
-  constructor(private dsmService: DSMService, private router: Router, private compService: ComponentService, private role: RoleService) {
+  constructor(private dsmService: DSMService, private router: Router, private compService: ComponentService,
+              private role: RoleService, private auth: Auth) {
   }
 
   ngOnInit(): void {
@@ -196,7 +197,7 @@ export class AbstractionFieldComponent implements OnInit {
             {name: this.activityOfField + '_fileName', value: null},
             {name: this.activityOfField + '_filePage', value: null} ,
             {name: this.activityOfField + '_matchPhrase', value: null} ],
-          realm : localStorage.getItem(ComponentService.MENU_SELECTED_REALM),
+          realm : sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM),
           ddpParticipantId: this.participant.participant.ddpParticipantId
         };
         field.fieldValue.value = null;
@@ -213,7 +214,7 @@ export class AbstractionFieldComponent implements OnInit {
             {name: this.activityOfField + '_fileName', value: null},
             {name: this.activityOfField + '_filePage', value: null} ,
             {name: this.activityOfField + '_matchPhrase', value: null}],
-          realm : localStorage.getItem(ComponentService.MENU_SELECTED_REALM),
+          realm : sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM),
           ddpParticipantId: this.participant.participant.ddpParticipantId
         };
         field.fieldValue.value = null;
@@ -227,7 +228,7 @@ export class AbstractionFieldComponent implements OnInit {
           fieldId: field.medicalRecordAbstractionFieldId,
           fieldName: field.displayName,
           nameValues: [ {name: this.activityOfField + '_' + fieldName, value: v} ],
-          realm : localStorage.getItem(ComponentService.MENU_SELECTED_REALM),
+          realm : sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM),
           ddpParticipantId: this.participant.participant.ddpParticipantId
         };
       } else if (fieldName === 'note' || fieldName === 'doubleCheck' || fieldName === 'fileName') {
@@ -238,7 +239,7 @@ export class AbstractionFieldComponent implements OnInit {
           user: this.role.userMail(),
           fieldId: field.medicalRecordAbstractionFieldId,
           nameValues: [ {name: this.activityOfField + '_' + fieldName, value: v} ],
-          realm : localStorage.getItem(ComponentService.MENU_SELECTED_REALM),
+          realm : sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM),
           ddpParticipantId: this.participant.participant.ddpParticipantId
         };
       } else if (fieldName === 'value') {
@@ -250,7 +251,7 @@ export class AbstractionFieldComponent implements OnInit {
           fieldId: field.medicalRecordAbstractionFieldId,
           nameValues: [ {name: this.activityOfField + '_' + fieldName, value: v},
             {name: this.activityOfField + '_valueCounter', value: field.fieldValue.valueCounter} ],
-          realm : localStorage.getItem(ComponentService.MENU_SELECTED_REALM),
+          realm : sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM),
           ddpParticipantId: this.participant.participant.ddpParticipantId
         };
       } else if (fieldName === 'matchPhrase') {
@@ -261,7 +262,7 @@ export class AbstractionFieldComponent implements OnInit {
           user: this.role.userMail(),
           fieldId: field.medicalRecordAbstractionFieldId,
           nameValues: [ {name: this.activityOfField + '_' + fieldName, value: v} ],
-          realm : localStorage.getItem(ComponentService.MENU_SELECTED_REALM),
+          realm : sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM),
           ddpParticipantId: this.participant.participant.ddpParticipantId
         };
       } else if (fieldName === 'filePage' && field.fieldValue.fileName != null && field.fieldValue.fileName !== '') {
@@ -273,7 +274,7 @@ export class AbstractionFieldComponent implements OnInit {
           fieldId: field.medicalRecordAbstractionFieldId,
           nameValues: [ {name: this.activityOfField + '_' + fieldName, value: v},
             {name: this.activityOfField + '_fileName', value: field.fieldValue.fileName} ],
-          realm : localStorage.getItem(ComponentService.MENU_SELECTED_REALM),
+          realm : sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM),
           ddpParticipantId: this.participant.participant.ddpParticipantId
         };
       }
@@ -308,7 +309,7 @@ export class AbstractionFieldComponent implements OnInit {
           },
           error: err => {
             if (err._body === Auth.AUTHENTICATION_ERROR) {
-              this.router.navigate([ Statics.HOME_URL ]);
+              this.auth.doLogout();
             }
           }
         });
@@ -330,7 +331,7 @@ export class AbstractionFieldComponent implements OnInit {
         {name: 'qc_fileName', value: field.fieldValue.fileName},
         {name: 'qc_filePage', value: field.fieldValue.filePage} ,
         {name: 'qc_matchPhrase', value: field.fieldValue.matchPhrase} ],
-      realm : localStorage.getItem(ComponentService.MENU_SELECTED_REALM),
+      realm : sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM),
       ddpParticipantId: this.participant.participant.ddpParticipantId
     };
     this.dsmService.patchParticipantRecord(JSON.stringify(patch)).subscribe({// need to subscribe, otherwise it will not send!
@@ -343,7 +344,7 @@ export class AbstractionFieldComponent implements OnInit {
       },
       error: err => {
         if (err._body === Auth.AUTHENTICATION_ERROR) {
-          this.router.navigate([ Statics.HOME_URL ]);
+          this.auth.doLogout();
         }
       }
     });

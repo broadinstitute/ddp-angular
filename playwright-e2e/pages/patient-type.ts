@@ -3,25 +3,27 @@ interface CancerDiagnosed {
   typeCancer: string;
 }
 
+export interface TestID {
+  age: string;
+  firstName: string;
+  lastName: string;
+  signature: string;
+  authorizationSignature: string;
+  dateOfBirthLocation: string;
+  relationshipChild: string;
+  assentFirstName: string;
+  assentLastName: string;
+  assentSignature: string;
+  assentChildSignature: string;
+  bloodSamples: string;
+  assentTissue: string;
+}
+
 export interface PatientData {
   whoIsSigningUp: string;
   cancerDiagnosed: CancerDiagnosed;
   researchContentForm: string;
-  ddpTestID: {
-    age: string;
-    firstName: string;
-    lastName: string;
-    signature: string;
-    authorizationSignature: string;
-    dateOfBirthLocation: string;
-    relationshipChild?: string;
-    assentFirstName?: string;
-    assentLastName?: string;
-    assentSignature?: string;
-    assentChildSignature?: string;
-    bloodSamples?: string;
-    assentTissue?: string;
-  };
+  ddpTestID: Partial<TestID>;
 }
 
 export type TypePatient = 'child' | 'adult' | 'secondChild';

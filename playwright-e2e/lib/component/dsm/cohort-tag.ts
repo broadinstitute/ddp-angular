@@ -1,5 +1,5 @@
 import { expect, Locator, Page } from '@playwright/test';
-import { waitForResponseByURL } from 'utils/test-utils';
+import { waitForResponse } from 'utils/test-utils';
 
 export default class CohortTag {
   constructor(private readonly page: Page) {}
@@ -33,7 +33,7 @@ export default class CohortTag {
 
   /* Wait For Response */
   private async waitForOKResponse(url: string): Promise<void> {
-    await waitForResponseByURL(this.page, { url: `/ui/${url}`, status: 200 });
+    await waitForResponse(this.page, {uri: `/ui/${url}`});
   }
 
   /* XPaths */

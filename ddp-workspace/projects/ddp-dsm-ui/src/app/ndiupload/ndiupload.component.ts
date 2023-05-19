@@ -26,7 +26,7 @@ export class NDIUploadComponent implements OnInit {
 
   constructor(private dsmService: DSMService, private auth: Auth, private compService: ComponentService) {
     if (!auth.authenticated()) {
-      auth.logout();
+      auth.sessionLogout();
     }
   }
 
@@ -49,7 +49,7 @@ export class NDIUploadComponent implements OnInit {
         //        console.log(`received***: ${JSON.stringify(err, null, 2)}`);
         this.loading = false;
         if (err._body === Auth.AUTHENTICATION_ERROR) {
-          this.auth.logout();
+          this.auth.doLogout();
         }
         this.errorMessage = 'Error - Uploading txt\n' + err._body;
       }

@@ -47,6 +47,8 @@
       <button mat-mini-fab type="button" [disabled]="scannerFields.length - 1 === scannerFieldIndex" (click)="removeFields(scannerFieldIndex)" color="primary" >-</button>
       <p class="Width--100 Color--warn" *ngIf="scannerField.hasError('notFound')">
         Error occurred sending this scan pair! <br/> {{scannerField.getError('notFound')}}</p>
+      <p class="Width--100" *ngIf="shortIds[scannerFieldIndex]">
+        Scanned successfully for <br/> {{shortIds[scannerFieldIndex]}}</p>
     </div>
   </ng-container>
   <br />
