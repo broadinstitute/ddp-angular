@@ -392,9 +392,9 @@ test.describe.serial('Adult Self Enrollment', () => {
     await expect(probandTab).toHaveClass('nav-link active'); //Make sure proband tab is opened
 
     await participantInfoSection.click();
-    await expect(importantNotesTextarea.inputValue()).toBe(importantNotes);
-    await expect(processNotesTextarea).toHaveText(processNotes);
-    await expect(mixedRaceTextarea).toHaveText(mixedRaceNotes);
+    expect(await importantNotesTextarea.inputValue()).toEqual(importantNotes);
+    expect(await processNotesTextarea.inputValue()).toEqual(processNotes);
+    expect(await mixedRaceTextarea.inputValue()).toEqual(mixedRaceNotes);
 
     //Fill out Contact Info section
     const contactInfoSection = proband.getContactInfoSection();
@@ -409,7 +409,7 @@ test.describe.serial('Adult Self Enrollment', () => {
     //Verify that the proband's preferred email matches the email of the family account
     const email = proband.getPreferredEmail();
     const familyAccountEmail = await familyAccount.getEmail();
-    await expect(email.inputValue()).toEqual(familyAccountEmail);
+    expect(await email.inputValue()).toEqual(familyAccountEmail);
 
     //Verify that Send Secure has a default value of 'Unknown'
     const sendSecure = proband.getSendSecure();
