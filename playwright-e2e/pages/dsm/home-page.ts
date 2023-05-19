@@ -2,8 +2,6 @@ import { expect, Locator, Page } from '@playwright/test';
 import { HomePageInterface } from 'pages/page-interface';
 import { DSMPageBase } from './page-base';
 import * as auth from 'authentication/auth-dsm';
-import { Navigation } from 'lib/component/dsm/navigation/navigation';
-import ParticipantListPage from 'pages/dsm/participantList-page';
 
 enum Titles {
   WELCOME = 'Welcome to the DDP Study Management System',
@@ -28,20 +26,16 @@ export default class HomePage extends DSMPageBase implements HomePageInterface {
     await this.page.waitForFunction(() => document.title === 'DDP Study Management');
   }
 
-  public get welcomeTitle(): Locator {
-    return this.page.locator('h1');
-  }
-
-  public get studySelectionTitle() {
-    return this.page.locator('h2');
-  }
-
   /* Assertions */
   async assertWelcomeTitle(): Promise<void> {
-    await expect(this.welcomeTitle).toHaveText(Titles.WELCOME);
+    await expect(this.page.locator('h1'),
+      "Home page - page title doesn't match the expected one")
+      .toHaveText(Titles.WELCOME);
   }
 
   async assertSelectedStudyTitle(study: string): Promise<void> {
-    await expect(this.studySelectionTitle).toHaveText(Titles.SELECTED_STUDY + study + Titles.STUDY);
+    await expect(this.page.locator('h2'),
+      "Home page - displayed selected study doesn't match the expected one")
+      .toHaveText(Titles.SELECTED_STUDY + study + Titles.STUDY);
   }
 }

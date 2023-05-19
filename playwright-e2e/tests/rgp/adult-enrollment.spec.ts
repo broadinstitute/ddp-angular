@@ -10,18 +10,18 @@ import TellUsYourStoryPage, { WHO } from 'pages/rgp/enrollment/tell-us-your-stor
 import HomePage from 'pages/rgp/home-page';
 import { setAuth0UserEmailVerified } from 'utils/api-utils';
 import { calculateBirthDate, getRandomInteger, setPatientParticipantGuid } from 'utils/faker-utils';
-import dsmHome from 'pages/dsm/home-page';
-import * as dsmLogin from 'authentication/auth-dsm';
+import { login } from 'authentication/auth-dsm';
 import Select from 'lib/widget/select';
 import { Navigation } from 'lib/component/dsm/navigation/navigation';
 import ParticipantListPage from 'pages/dsm/participantList-page';
-import { StudyNav } from 'lib/component/dsm/navigation/enums/studyNav.enum';
+import { StudyNavEnum } from 'lib/component/dsm/navigation/enums/studyNav-enum';
 import FamilyMemberTab from 'pages/dsm/rgp/familyMember-tab';
 import { FamilyMember } from 'lib/component/dsm/study/rgp/enums/familyMember.enum';
-import ParticipantPage from 'pages/dsm/participant-page';
+import ParticipantPage from 'pages/dsm/participant-page/participant-page';
 import RgpParticipantPage from 'pages/dsm/rgp/rgp-participant-page';
+import { request } from 'http';
 
-const { RGP_USER_EMAIL, RGP_USER_PASSWORD, DSM_USER_EMAIL, DSM_USER_PASSWORD } = process.env;
+const { RGP_USER_EMAIL, RGP_USER_PASSWORD } = process.env;
 
 test.describe.serial('Adult Self Enrollment', () => {
   const assertProgressActiveItem = async (page: Page, itemName: string): Promise<void> => {
@@ -161,19 +161,15 @@ test.describe.serial('Adult Self Enrollment', () => {
     expect(await tellUsAboutYourFamily.yourFirstName().isDisabled()).toEqual(true);
   });
 
-  test('Go to DSM to verify the newly created account can be found @functional @rgp', async ({ page }) => {
+  test('Go to DSM to verify the newly created account can be found @functional @rgp', async ({ page, request }) => {
     //Go to DSM to verify the newly created account can be found there
-    const dsm = new dsmHome(page);
-    const dsmUserEmail = await dsmLogin.login(page, {
-      email: DSM_USER_EMAIL,
-      password: DSM_USER_PASSWORD
-    });
-    const navigation = new Navigation(page);
+    await login(page);
+    const navigation = new Navigation(page, request);
 
     //select RGP study
     await new Select(page, { label: 'Select study' }).selectOption('RGP');
 
-    const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(StudyNav.PARTICIPANT_LIST);
+    const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
 
     await participantListPage.assertPageTitle();
 
@@ -182,20 +178,15 @@ test.describe.serial('Adult Self Enrollment', () => {
     await participantListPage.selectParticipant(user.patient.participantGuid);
   });
 
-  test('Verify the display and functionality of family account dynamic fields @functional @rgp', async ({ page}) => {
-    //Go into DSM
-    const dsm = new dsmHome(page);
-    const dsmUserEmail = await dsmLogin.login(page, {
-      email: DSM_USER_EMAIL,
-      password: DSM_USER_PASSWORD
-    });
-    const navigation = new Navigation(page);
+  test('Verify the display and functionality of family account dynamic fields @functional @rgp', async ({ page, request}) => {
+    await login(page);
+    const navigation = new Navigation(page, request);
 
     //select RGP study
     await new Select(page, { label: 'Select study' }).selectOption('RGP');
 
     //Verify the Participant List is displayed
-    const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(StudyNav.PARTICIPANT_LIST);
+    const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
     await participantListPage.assertPageTitle();
     await participantListPage.waitForReady();
     await participantListPage.filterListByParticipantGUID(user.patient.participantGuid);
@@ -244,20 +235,16 @@ test.describe.serial('Adult Self Enrollment', () => {
     await dropdownOptions.filter({ hasText: '5' }).click();
   });
 
-  test('Verify that the proband family member tab can be filled out @functional @rgp', async ({ page }) => {
+  test('Verify that the proband family member tab can be filled out @functional @rgp', async ({ page, request }) => {
     //Go into DSM
-    const dsm = new dsmHome(page);
-    const dsmUserEmail = await dsmLogin.login(page, {
-      email: DSM_USER_EMAIL,
-      password: DSM_USER_PASSWORD
-    });
-    const navigation = new Navigation(page);
+    await login(page);
+    const navigation = new Navigation(page, request);
 
     //select RGP study
     await new Select(page, { label: 'Select study' }).selectOption('RGP');
 
     //Verify the Participant List is displayed
-    const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(StudyNav.PARTICIPANT_LIST);
+    const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
     await participantListPage.assertPageTitle();
     await participantListPage.waitForReady();
     await participantListPage.filterListByParticipantGUID(user.patient.participantGuid);
@@ -377,7 +364,7 @@ test.describe.serial('Adult Self Enrollment', () => {
 
     const ethnicity = proband.getEthnicity();
     await ethnicity.click();
-    await dropdownOptions.filter({ hasText: 'Unknown or Not Reported' }).click();
+    await dropdownOptions.filter({ hasText: 'Not Hispanic' }).click();
 
     await proband.inputMixedRaceNotes('Testing notes here - Mixed Race Notes');
 
@@ -401,10 +388,11 @@ test.describe.serial('Adult Self Enrollment', () => {
 
     //After refreshing participant list and page, check that the input for the above textareas are as expected
     //Note: Proband tab is usually the tab that is open/selected upon visiting participant page/family account page
-    await expect(probandTab).toHaveAttribute('aria-selected', 'true');
+    await probandTab.scrollIntoViewIfNeeded();
+    await expect(probandTab).toHaveClass('nav-link active'); //Make sure proband tab is opened
 
     await participantInfoSection.click();
-    await expect(importantNotesTextarea).toHaveText(importantNotes);
+    await expect(importantNotesTextarea.inputValue()).toBe(importantNotes);
     await expect(processNotesTextarea).toHaveText(processNotes);
     await expect(mixedRaceTextarea).toHaveText(mixedRaceNotes);
 
@@ -420,8 +408,8 @@ test.describe.serial('Adult Self Enrollment', () => {
 
     //Verify that the proband's preferred email matches the email of the family account
     const email = proband.getPreferredEmail();
-    const familyAccountEmail = familyAccount.getEmail();
-    await expect(email.inputValue()).toEqual(familyAccountEmail.inputValue());
+    const familyAccountEmail = await familyAccount.getEmail();
+    await expect(email.inputValue()).toEqual(familyAccountEmail);
 
     //Verify that Send Secure has a default value of 'Unknown'
     const sendSecure = proband.getSendSecure();
@@ -674,20 +662,16 @@ test.describe.serial('Adult Self Enrollment', () => {
     await redCapSurveyCompletedDate.fill(`${currentDate[0]}/${currentDate[1]}/${currentDate[2]}`);//[0] is MM, [1] is DD, [2] is YYYY
   });
 
-  test('Verify that a family member can be added without copying proband info @rgp @functional', async ({ page }) => {
+  test('Verify that a family member can be added without copying proband info @rgp @functional', async ({ page, request }) => {
     //Go into DSM
-    const dsm = new dsmHome(page);
-    const dsmUserEmail = await dsmLogin.login(page, {
-      email: DSM_USER_EMAIL,
-      password: DSM_USER_PASSWORD
-    });
-    const navigation = new Navigation(page);
+    await login(page);
+    const navigation = new Navigation(page, request);
 
     //select RGP study
     await new Select(page, { label: 'Select study' }).selectOption('RGP');
 
     //Verify the Participant List is displayed
-    const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(StudyNav.PARTICIPANT_LIST);
+    const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
     await participantListPage.assertPageTitle();
     await participantListPage.waitForReady();
     await participantListPage.filterListByParticipantGUID(user.patient.participantGuid);
@@ -732,20 +716,16 @@ test.describe.serial('Adult Self Enrollment', () => {
     await expect(successfullyAddedFamilyMemberMessage).toBeVisible();
   })
 
-  test('Verify that a family member can be added using copied proband info @rgp @functional', async ({ page }) => {
+  test('Verify that a family member can be added using copied proband info @rgp @functional', async ({ page, request }) => {
     //Go into DSM
-    const dsm = new dsmHome(page);
-    const dsmUserEmail = await dsmLogin.login(page, {
-      email: DSM_USER_EMAIL,
-      password: DSM_USER_PASSWORD
-    });
-    const navigation = new Navigation(page);
+    await login(page);
+    const navigation = new Navigation(page, request);
 
     //select RGP study
     await new Select(page, { label: 'Select study' }).selectOption('RGP');
 
     //Verify the Participant List is displayed
-    const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(StudyNav.PARTICIPANT_LIST);
+    const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
     await participantListPage.assertPageTitle();
     await participantListPage.waitForReady();
     await participantListPage.filterListByParticipantGUID(user.patient.participantGuid);

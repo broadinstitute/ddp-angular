@@ -1,4 +1,4 @@
-import ParticipantPage from '../participant-page';
+import ParticipantPage from '../participant-page/participant-page';
 import { Locator, Page } from '@playwright/test';
 
 /**
