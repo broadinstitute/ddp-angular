@@ -23,10 +23,10 @@ import KitsWithoutLabelPage from 'pages/dsm/kitsInfo-pages/kitsWithoutLabel-page
 import {KitsColumnsEnum} from 'pages/dsm/kitsInfo-pages/enums/kitsColumns-enum';
 import KitsSentPage from 'pages/dsm/kitsInfo-pages/kitsSentPage';
 import KitsReceivedPage from 'pages/dsm/kitsInfo-pages/kitsReceived-page/kitsReceivedPage';
-import TrackingScanPage from "pages/dsm/scanner-pages/trackingScan-page";
+import TrackingScanPage from 'pages/dsm/scanner-pages/trackingScan-page';
 
 
-test.describe.parallel.only('Blood Kits upload flow', () => {
+test.describe.parallel('Blood Kits upload flow', () => {
   let welcomePage: WelcomePage;
   let homePage: HomePage;
   let navigation: Navigation;
