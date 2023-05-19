@@ -11,16 +11,14 @@ import HomePage from 'pages/rgp/home-page';
 import { setAuth0UserEmailVerified } from 'utils/api-utils';
 import { calculateBirthDate, getRandomInteger, setPatientParticipantGuid } from 'utils/faker-utils';
 import dsmHome from 'pages/dsm/home-page';
-import * as dsmAuth from 'authentication/auth-dsm';
+import * as dsmLogin from 'authentication/auth-dsm';
 import Select from 'lib/widget/select';
 import { Navigation } from 'lib/component/dsm/navigation/navigation';
 import ParticipantListPage from 'pages/dsm/participantList-page';
 import { StudyNav } from 'lib/component/dsm/navigation/enums/studyNav.enum';
-import exp from 'constants';
 import FamilyMemberTab from 'pages/dsm/rgp/familyMember-tab';
 import { FamilyMember } from 'lib/component/dsm/study/rgp/enums/familyMember.enum';
 import ParticipantPage from 'pages/dsm/participant-page';
-import { drop } from 'lodash';
 import RgpParticipantPage from 'pages/dsm/rgp/rgp-participant-page';
 
 const { RGP_USER_EMAIL, RGP_USER_PASSWORD, DSM_USER_EMAIL, DSM_USER_PASSWORD } = process.env;
@@ -167,7 +165,7 @@ test.describe.serial('Adult Self Enrollment', () => {
   test('Go to DSM to verify the newly created account can be found @functional @rgp', async ({ page }) => {
     //Go to DSM to verify the newly created account can be found there
     const dsm = new dsmHome(page);
-    const dsmUserEmail = await dsmAuth.login(page, {
+    const dsmUserEmail = await dsmLogin.login(page, {
       email: DSM_USER_EMAIL,
       password: DSM_USER_PASSWORD
     });
@@ -187,7 +185,7 @@ test.describe.serial('Adult Self Enrollment', () => {
   test('Verify the display and functionality of family account dynamic fields @functional @rgp', async ({ page}) => {
     //Go into DSM
     const dsm = new dsmHome(page);
-    const dsmUserEmail = await dsmAuth.login(page, {
+    const dsmUserEmail = await dsmLogin.login(page, {
       email: DSM_USER_EMAIL,
       password: DSM_USER_PASSWORD
     });
@@ -248,7 +246,7 @@ test.describe.serial('Adult Self Enrollment', () => {
   test('Verify that the proband family member tab can be filled out @functional @rgp', async ({ page }) => {
     //Go into DSM
     const dsm = new dsmHome(page);
-    const dsmUserEmail = await dsmAuth.login(page, {
+    const dsmUserEmail = await dsmLogin.login(page, {
       email: DSM_USER_EMAIL,
       password: DSM_USER_PASSWORD
     });
@@ -304,12 +302,19 @@ test.describe.serial('Adult Self Enrollment', () => {
     const participantInfoSection = proband.getParticipantInfoSection();
     await participantInfoSection.click();
 
-    //Confirm that the same family id is used between proband tab, subject id field, family id field
-    const subjectID = proband.getSubjectID();
-    //const subjectID = (await probandSubjectID.inputValue()).substring(4, 8); //To get the family id in the subject id
+    const subjectID = proband.getSubjectID(); //Subject ID is usually automatically filled out for the proband
+    await expect(subjectID).not.toBeEmpty();
 
     const familyID = proband.getFamilyID();
+    proband.familyID = Number((await familyID.inputValue()).toString());
     await expect(familyID).not.toBeEditable(); //Verify that family id is not selectable/able to be changed
+
+    //Confirm that the same family id is used between proband tab, subject id field, family id field
+    const familyIDFromSubjectID = await proband.getFamilyIDFromSubjectID();
+    const familyIDFromFamilyMemberTab = await proband.getFamilyIDFromFamilyMemberTab();
+
+    await expect(familyIDFromSubjectID).toEqual(proband.familyID);
+    await expect(familyIDFromFamilyMemberTab).toEqual(proband.familyID);
 
     //Confirm that input entered in Important Notes and Process Notes is saved
     await proband.inputImportantNotes('Testing notes here - Important Notes');
@@ -388,7 +393,7 @@ test.describe.serial('Adult Self Enrollment', () => {
 
     //Verify that the proband's preferred email matches the email of the family account
     const email = proband.getPreferredEmail();
-    const familyAccount = new ParticipantPage(page);
+    const familyAccount = new RgpParticipantPage(page);
     const familyAccountEmail = familyAccount.getEmail();
     await expect(email.inputValue()).toEqual(familyAccountEmail.inputValue());
 
@@ -646,7 +651,7 @@ test.describe.serial('Adult Self Enrollment', () => {
   test('Verify that a family member can be added without copying proband info @rgp @functional', async ({ page }) => {
     //Go into DSM
     const dsm = new dsmHome(page);
-    const dsmUserEmail = await dsmAuth.login(page, {
+    const dsmUserEmail = await dsmLogin.login(page, {
       email: DSM_USER_EMAIL,
       password: DSM_USER_PASSWORD
     });
@@ -703,7 +708,7 @@ test.describe.serial('Adult Self Enrollment', () => {
   test('Verify that a family member can be added using copied proband info @rgp @functional', async ({ page }) => {
     //Go into DSM
     const dsm = new dsmHome(page);
-    const dsmUserEmail = await dsmAuth.login(page, {
+    const dsmUserEmail = await dsmLogin.login(page, {
       email: DSM_USER_EMAIL,
       password: DSM_USER_PASSWORD
     });

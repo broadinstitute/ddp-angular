@@ -37,6 +37,7 @@ export default class RgpParticipantPage extends ParticipantPage {
         "//td[contains(.,'Relation')]/following-sibling::td/mat-select");
     }
 
+    
     public getCopyProbandInfo(): Locator {
         return this.page.locator("//mat-dialog-container//table[contains(@class, 'family-member-form')]//td[contains(.,'Copy Proband Info')]" +
         "/following-sibling::td/mat-checkbox//span[contains(@class, 'mat-checkbox-inner-container')]");

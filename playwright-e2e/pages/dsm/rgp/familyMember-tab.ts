@@ -62,6 +62,31 @@ export default class FamilyMemberTab {
         return this._lastName;
     }
 
+    /* RGP specific utility methods */
+
+    /**
+     * Gets the family id from inside the subject id i.e RGP_{family id here}_{relationship id here} e.g RGP_1234_5
+     * @returns the family id from the subject id
+     */
+    public async getFamilyIDFromSubjectID(): Promise<number> {
+        const subjectIDField = this.getSubjectID();
+        const retreivedFamilyID = (await subjectIDField.inputValue()).substring(4, 8)
+        return parseInt(retreivedFamilyID);
+    }
+
+    /**
+     * Gets the family id from inside the family member tab
+     * @returns the family id from the family member tab
+     */
+    public async getFamilyIDFromFamilyMemberTab(): Promise<number> {
+        const familyMemberTab = this.getFamilyMemberTab();
+        const memberTabParts = (await familyMemberTab.innerText()).split('-'); //Family member tabs are usually {first name} - {subject id}
+        const retreivedSubjectID = memberTabParts[1];
+        const subjectIDParts = retreivedSubjectID.split('_'); //Subject id is usually in the format of RGP_{family id here}_{relationship id here}
+        const retreivedFamilyID = subjectIDParts[1];
+        return parseInt(retreivedFamilyID);
+    }
+
     /* Locators */
 
     /**
