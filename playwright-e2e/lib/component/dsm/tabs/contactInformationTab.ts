@@ -40,7 +40,7 @@ export default class ContactInformationTab {
     return this.split(phone);
   }
 
-  public isInformationEntered(): Promise<boolean> {
+  public isInfoNotEnteredVisible(): Promise<boolean> {
     return this.page.locator(this.notEnteredInfoXPath).isVisible();
   }
 
