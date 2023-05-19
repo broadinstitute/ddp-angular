@@ -8,6 +8,10 @@ export class CustomizeView {
     await this.page.locator(this.openButtonXPath).click();
   }
 
+  public async close(): Promise<void> {
+    await this.open();
+  }
+
   public async selectColumns(columnsGroupName: string, columns: string[]): Promise<void> {
     this.activeColumnsGroup = columnsGroupName;
     await this.openColumnsGroup();

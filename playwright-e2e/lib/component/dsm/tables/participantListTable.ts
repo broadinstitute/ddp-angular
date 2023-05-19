@@ -1,10 +1,13 @@
 import { Locator, Page } from '@playwright/test';
+import Table from 'lib/component/table';
 import ParticipantPage from 'pages/dsm/participant-page/participant-page';
 
-export class ParticipantListTable {
+export class ParticipantListTable extends Table {
   private readonly _participantPage: ParticipantPage = new ParticipantPage(this.page);
 
-  constructor(private readonly page: Page) {}
+  constructor(page: Page) {
+    super(page, { cssClassAttribute: '.table' });
+  }
 
   public async openParticipantPageAt(position: number): Promise<ParticipantPage> {
     await this.getParticipantAt(position).click();
@@ -17,7 +20,9 @@ export class ParticipantListTable {
   }
 
   public async getParticipantDataAt(position: number, columnName: string): Promise<string> {
-    return await this.page.locator(this.getParticipantDataAtXPath(position, columnName)).innerText();
+    const columnIndex = await this.getHeaderIndex(columnName);
+    return this.cell(position, columnIndex).innerText();
+    // return await this.page.locator(this.getParticipantDataAtXPath(position, columnName)).innerText();
   }
 
   public async selectCheckboxForParticipantAt(position: number): Promise<void> {

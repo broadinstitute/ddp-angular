@@ -8,6 +8,7 @@ export interface WaitForResponse {
   uri: string;
   status?: number;
   timeout?: number;
+  requestMethod?: string
 }
 
 const { SITE_PASSWORD } = process.env;
@@ -16,9 +17,14 @@ export async function waitForNoSpinner(page: Page): Promise<void> {
   await page.locator('[data-icon="spinner"].fa-spin, mat-spinner[role="progressbar"]').waitFor({ state: 'hidden', timeout: 60 * 1000 });
 }
 
-export async function waitForResponse(page: Page, {uri, status = 200, timeout = 30000}: WaitForResponse): Promise<Response> {
+export async function waitForResponse(page: Page, {uri, status = 200, timeout = 30000, requestMethod = 'GET'}: WaitForResponse): Promise<Response> {
   try {
-    return await page.waitForResponse((response: Response) => response.url().includes(uri) && response.status() === status, {timeout})
+    return page.waitForResponse((response: Response) =>
+        response.url().includes(uri) &&
+        response.status() === status &&
+        response.request().method() === requestMethod,
+      {timeout}
+    )
   } catch (error: any) {
     throw new Error(`Timeout ${timeout}ms exceeded while waiting for ${uri} URI response with status - ${status}`)
   }

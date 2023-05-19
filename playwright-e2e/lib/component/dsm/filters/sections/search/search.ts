@@ -16,7 +16,7 @@ export class Search {
 
   public async search(): Promise<void> {
     await this.page.locator("//div[@id='searchTable']/button[1][span[text()='Search']]").click();
-    await waitForResponse(this.page, {uri: 'filterList'});
+    await waitForResponse(this.page, {uri: 'ui/filterList?', requestMethod: 'PATCH'});
     await waitForNoSpinner(this.page);
   }
 
@@ -46,7 +46,11 @@ export class Search {
       toValue && console.warn(`'${toValue}' - is not valid date, therefore can't be set in '${columnName}' date field`);
     }
 
-    const dateInputFields = await this.page.locator(this.dateInputFieldXPath(columnName));
+    // Click plus icon to expand Date fields
+    //const expandDateRangeButton = this.page.locator(`xpath=${this.baseColumnXPath(columnName)}//button[.//*[@data-icon="plus-square"]]`);
+    //await expandDateRangeButton.click();
+
+    const dateInputFields = this.page.locator(this.dateInputFieldXPath(columnName));
 
     fromDate && (await dateInputFields.nth(0).fill(fromDate));
     toDate && (await dateInputFields.nth(1).fill(fromDate));
@@ -136,11 +140,11 @@ export class Search {
 
   private radioBtnLocator(columnName: string, radioButtonName: string): Locator {
     return this.page.locator(`${this.baseColumnXPath(columnName)}` +
-      `//mat-radio-group//mat-radio-button[label[.//*[text()[normalize-space()='${radioButtonName}']]]]`);
+      `//mat-radio-group//mat-radio-button[label[.//*[text()[normalize-space()="${radioButtonName}"]]]]`);
   }
 
   private textInputLocator(columnName: string): Locator {
-    return this.page.locator(`${this.baseTextColumnXPath(columnName)}/mat-form-field//input`);
+    return this.page.locator(`${this.baseTextColumnXPath(columnName)}//mat-form-field//input`);
   }
 
   private additionalFilterCheckboxLocator(columnName: string, checkboxName: AdditionalFilter, isTextField = false): Locator {
@@ -160,11 +164,11 @@ export class Search {
   }
 
   private baseColumnXPath(columnName: string): string {
-    return `//app-filter-column[div[.//*[text()[normalize-space()='${columnName}']]]]`;
+    return `//app-filter-column[div[.//*[text()[normalize-space()="${columnName}"]]]]`;
   }
 
   private baseTextColumnXPath(columnName: string): string {
-    return `//app-filter-column[mat-form-field//label[.//*[text()[normalize-space()='${columnName}']]]]`;
+    return `//app-filter-column[.//*[text()[normalize-space()="${columnName}"]]]`;
   }
 
   private get plusIconXPath(): string {
