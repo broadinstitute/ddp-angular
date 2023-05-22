@@ -169,7 +169,14 @@ export default class Table {
 
   async sort(column: string, order: SortOrder): Promise<void> {
     const header = this.getHeaderByName(RegExp(column));
-    await header.click();
+    const headerLink = header.locator('a');
+
+    if (await headerLink.count() > 0) {
+      await headerLink.click();
+    } else {
+      await header.click();
+    }
+
     let ariaLabel = await header.locator('span').last().getAttribute('aria-label');
     if (ariaLabel) {
       if (ariaLabel !== order) {

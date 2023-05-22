@@ -16,7 +16,7 @@ export class Search {
 
   public async search(): Promise<void> {
     await this.page.locator("//div[@id='searchTable']/button[1][span[text()='Search']]").click();
-    await waitForResponse(this.page, {uri: 'ui/filterList?', requestMethod: 'PATCH'});
+    await waitForResponse(this.page, {uri: 'ui/filterList?'});
     await waitForNoSpinner(this.page);
   }
 

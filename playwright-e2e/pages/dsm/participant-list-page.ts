@@ -83,7 +83,7 @@ export default class ParticipantListPage {
     await saveModal.getButton({ label: /Save Filter/ }).click();
     await Promise.all([
       waitForNoSpinner(this.page),
-      waitForResponse(this.page, { uri: '/ui/saveFilter?', requestMethod: 'PATCH' })
+      waitForResponse(this.page, {uri: '/ui/saveFilter?'})
     ]);
   }
 

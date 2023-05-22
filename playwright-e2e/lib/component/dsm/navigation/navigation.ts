@@ -1,6 +1,7 @@
 import {APIRequestContext, Page} from '@playwright/test';
 import Dropdown from 'lib/widget/dsm/dropdown';
 import ParticipantListPage from 'pages/dsm/participant-list-page';
+import { waitForNoSpinner } from 'utils/test-utils';
 import {MainMenuEnum} from './enums/mainMenu-enum';
 import {StudyNavEnum} from './enums/studyNav-enum';
 import {StudyEnum} from './enums/selectStudyNav-enum';
@@ -40,6 +41,7 @@ export class Navigation {
 
   public async selectFromSamples<T extends object>(sampleNav: SamplesNavEnum): Promise<T> {
     await this.selectFrom(MainMenuEnum.SAMPLES, sampleNav);
+    await waitForNoSpinner(this.page);
     return (this.navigationItems.samples as Map<string, object>).get(sampleNav) as T;
   }
 
