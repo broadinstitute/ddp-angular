@@ -2,6 +2,7 @@ import { expect, Locator, Page } from '@playwright/test';
 import { waitForNoSpinner } from 'utils/test-utils';
 import { Filters } from 'lib/component/dsm/filters/filters';
 import { ParticipantListTable } from 'lib/component/dsm/tables/participantListTable';
+import {rows} from "lib/component/dsm/paginators/types/rowsPerPage";
 
 export default class ParticipantListPage {
   private readonly PAGE_TITLE: string = 'Participant List';
@@ -21,6 +22,22 @@ export default class ParticipantListPage {
 
   public get filters(): Filters {
     return this._filters;
+  }
+
+  public async goToPage(page: number): Promise<void> {
+    await this._table.goToPage(page);
+  }
+
+  public async nextPage(): Promise<void> {
+    await this._table.nextPage();
+  }
+
+  public async previousPage(): Promise<void> {
+    await this._table.previousPage();
+  }
+
+  public async rowsPerPage(rows: rows): Promise<void> {
+    await this._table.rowsPerPage(rows);
   }
 
   public get participantListTable(): ParticipantListTable {

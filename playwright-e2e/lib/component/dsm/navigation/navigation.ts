@@ -14,6 +14,7 @@ import {MiscellaneousEnum} from 'lib/component/dsm/navigation/enums/miscellaneou
 import KitsSentPage from 'pages/dsm/kitsInfo-pages/kitsSentPage';
 import KitsReceivedPage from 'pages/dsm/kitsInfo-pages/kitsReceived-page/kitsReceivedPage';
 import TrackingScanPage from 'pages/dsm/scanner-pages/trackingScan-page';
+import {waitForNoSpinner} from "utils/test-utils";
 
 
 type Selection = StudyNavEnum | StudyEnum | SamplesNavEnum | MiscellaneousEnum;
@@ -54,5 +55,6 @@ export class Navigation {
 
   private async selectFrom(from: MainMenuEnum, selection: Selection): Promise<void> {
     await new Dropdown(this.page, from).selectOption(selection);
+    await waitForNoSpinner(this.page);
   }
 }

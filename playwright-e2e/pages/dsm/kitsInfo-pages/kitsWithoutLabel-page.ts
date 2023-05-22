@@ -5,6 +5,7 @@ import {waitForNoSpinner, waitForResponse} from 'utils/test-utils';
 import {KitsTable} from 'lib/component/dsm/tables/kitsTable';
 import {KitsColumnsEnum} from './enums/kitsColumns-enum';
 import {assertTableHeaders} from 'utils/assertion-helper';
+import {rows} from "lib/component/dsm/paginators/types/rowsPerPage";
 
 
 export default class KitsWithoutLabelPage {
@@ -18,6 +19,14 @@ export default class KitsWithoutLabelPage {
   private readonly kitsTable = new KitsTable(this.page);
 
   constructor(private readonly page: Page) {}
+
+  public async goToPage(page: number): Promise<void> {
+    await this.kitsTable.goToPage(page);
+  }
+
+  public async rowsPerPage(rows: rows): Promise<void> {
+    await this.kitsTable.rowsPerPage(rows);
+  }
 
   public async waitForLoad(): Promise<void> {
     await this.page.waitForLoadState('networkidle');
