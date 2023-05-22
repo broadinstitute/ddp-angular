@@ -38,8 +38,13 @@ export function getMailingListDownloadedFileDate(): string {
   return `${month}${day}${year}`
 }
 
-export function subtractDaysFromToday(number = 1): Date {
+export function offsetDaysFromToday(number = 1, opts: { isAdd?: boolean } = {}): Date {
+  const { isAdd = false } = opts;
   const today = new Date();
-  today.setDate(today.getDate() - number);
+  if (isAdd) {
+    today.setDate(today.getDate() + number);
+  } else {
+    today.setDate(today.getDate() - number);
+  }
   return today;
 }

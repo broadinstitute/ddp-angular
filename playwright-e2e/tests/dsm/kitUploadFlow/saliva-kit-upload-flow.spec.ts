@@ -4,7 +4,7 @@ import HomePage from 'pages/dsm/home-page';
 import {Navigation} from 'lib/component/dsm/navigation/navigation';
 import {login} from 'authentication/auth-dsm';
 import {StudyEnum} from 'lib/component/dsm/navigation/enums/selectStudyNav-enum';
-import ParticipantListPage from 'pages/dsm/participantList-page';
+import ParticipantListPage from 'pages/dsm/participant-list-page';
 import {StudyNavEnum} from 'lib/component/dsm/navigation/enums/studyNav-enum';
 import ParticipantPage from 'pages/dsm/participant-page/participant-page';
 import {KitUploadInfo} from 'pages/dsm/kitUpload-page/models/kitUpload-model';

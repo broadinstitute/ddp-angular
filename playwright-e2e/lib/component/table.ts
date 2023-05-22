@@ -46,6 +46,10 @@ export default class Table {
     return this.tableLocator().locator(this.headerCss);
   }
 
+  footerLocator(): Locator {
+    return this.tableLocator().locator(this.footerCss);
+  }
+
   /**
    *
    * @param {number} rowIndex 0-index
@@ -129,7 +133,7 @@ export default class Table {
     return allColumnNames.findIndex((text: string) => exactMatch ? text === name : text.includes(name));
   }
 
-  getHeaderByName(name: string): Locator {
+  getHeaderByName(name: RegExp | string): Locator {
     return this.headerLocator().filter({hasText: name});
   }
 
@@ -164,17 +168,53 @@ export default class Table {
   }
 
   async sort(column: string, order: SortOrder): Promise<void> {
-    const header = await this.getHeaderByName(column);
-    await header.locator('a').click();
-    const ariaLabel = await header.locator('span').getAttribute('aria-label')
-    if (ariaLabel !== order) {
-      await header.locator('a').click();
+    const header = this.getHeaderByName(RegExp(column));
+    await header.click();
+    let ariaLabel = await header.locator('span').last().getAttribute('aria-label');
+    if (ariaLabel) {
+      if (ariaLabel !== order) {
+        await header.locator('a').click();
+      }
+      await waitForNoSpinner(this.page);
+      await expect(header.locator('span')).toHaveAttribute('aria-label', order);
+    } else {
+      let icon;
+      switch (order) {
+        case SortOrder.DESC:
+          icon = 'sort-alpha-down';
+          break;
+        case SortOrder.ASC:
+          icon = 'sort-alpha-up';
+          break;
+      }
+      ariaLabel = await header.locator('svg[data-icon]').getAttribute('data-icon');
+      if (ariaLabel !== icon) {
+        await header.locator('svg[data-icon]').click();
+      }
+      await waitForNoSpinner(this.page);
+      await expect(header.locator('svg[data-icon]')).toHaveAttribute('data-icon', icon);
     }
-    await waitForNoSpinner(this.page);
-    await expect(header.locator('span')).toHaveAttribute('aria-label', order);
   }
 
-  async rowsTotal(searchString: RegExp | string): Promise<number> {
+  async getTableRowsTotal(searchString: RegExp | string): Promise<number | null> {
+    const footer = await this.footerLocator().locator('td', { hasText: searchString }).innerText();
+    return this.parseForNumber(footer);
+  }
 
+  /**
+   * Returns a random row index
+   * @returns {Promise<number>}
+   */
+  async getRandomRowIndex(): Promise<number> {
+    const rowsCount = await this.getRowsCount();
+    return Math.floor(Math.random() * rowsCount);
+  }
+
+  private parseForNumber(text: string): number | null {
+    const numericalStr = text.match(/(\d|\.)+/g);
+    if (numericalStr) {
+      return parseInt(numericalStr[0]);
+    }
+    return null;
   }
 }

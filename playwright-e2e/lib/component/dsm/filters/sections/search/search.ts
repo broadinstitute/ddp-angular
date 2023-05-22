@@ -1,4 +1,4 @@
-import { Locator, Page } from '@playwright/test';
+import { expect, Locator, Page } from '@playwright/test';
 import {CheckboxConfig, DateConfig, RadioButtonConfig, TextConfig} from './search-types';
 import { AdditionalFilter } from './search-enums';
 import {waitForNoSpinner, waitForResponse} from 'utils/test-utils';
@@ -51,9 +51,10 @@ export class Search {
     //await expandDateRangeButton.click();
 
     const dateInputFields = this.page.locator(this.dateInputFieldXPath(columnName));
+    await expect(dateInputFields).toHaveCount(2); // synchronize with UI
 
     fromDate && (await dateInputFields.nth(0).fill(fromDate));
-    toDate && (await dateInputFields.nth(1).fill(fromDate));
+    toDate && (await dateInputFields.nth(1).fill(toDate));
   }
 
   public async text(columnName: string, { textValue, additionalFilters, exactMatch = true }: Partial<TextConfig>): Promise<void> {
@@ -99,7 +100,7 @@ export class Search {
 
     !(await this.isAdditionalFiltersOpen(columnName, isTextField)) && (await this.page.locator(baseColumnXPath + this.plusIconXPath).click());
 
-    const additionalFilterCheckbox = await this.additionalFilterCheckboxLocator(columnName, additionalFilter, isTextField);
+    const additionalFilterCheckbox = this.additionalFilterCheckboxLocator(columnName, additionalFilter, isTextField);
     const isChecked = await this.isChecked(additionalFilterCheckbox);
     const isDisabled = await this.isDisabled(additionalFilterCheckbox);
 

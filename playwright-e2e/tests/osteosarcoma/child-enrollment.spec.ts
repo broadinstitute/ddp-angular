@@ -6,7 +6,7 @@ import GetStartedPage from 'pages/osteo/get-started-page';
 import HomePage from 'pages/osteo/home-page';
 import { assertActivityHeader } from 'utils/assertion-helper';
 import { generateUserName } from 'utils/faker-utils';
-import { logParticpantCreated } from 'utils/log-utils';
+import { logParticipantCreated } from 'utils/log-utils';
 // import { checkUserReceivedEmails } from 'utils/email-utils';
 
 const { OSTEO_USER_EMAIL, OSTEO_USER_PASSWORD } = process.env;
@@ -36,7 +36,7 @@ test('Osteo enroll kid @osteo', async ({ page }) => {
     email: OSTEO_USER_EMAIL,
     password: OSTEO_USER_PASSWORD
   });
-  logParticpantCreated(userEmail, childFullName);
+  logParticipantCreated(userEmail, childFullName);
 
   await assertActivityHeader(page, 'Research Consent Form');
 

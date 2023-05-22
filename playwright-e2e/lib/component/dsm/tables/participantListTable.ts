@@ -29,6 +29,14 @@ export class ParticipantListTable extends Table {
     return await this.getParticipantAt(position).nth(0).locator('mat-checkbox').click();
   }
 
+  public async numOfParticipants(): Promise<number> {
+    const total = await this.getTableRowsTotal('# of participants');
+    if (total) {
+      return total;
+    }
+    throw new Error('Failed to get Total number of participants in Participant List table');
+  }
+
   private getParticipantAt(position: number): Locator {
     return this.page.locator(`//table/tbody/tr`).nth(position);
   }

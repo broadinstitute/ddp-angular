@@ -9,7 +9,7 @@ import ResearchConsentFormPage from 'pages/osteo/research-consent-page';
 import HomePage from 'pages/osteo/home-page';
 import MedicalReleasePage from 'pages/osteo/medical-release-page';
 import SurveyAboutYourOsteosarcoma from 'pages/osteo/survey-about-osteo-page';
-import { logParticpantCreated } from 'utils/log-utils';
+import { logParticipantCreated } from 'utils/log-utils';
 import { generateUserName } from 'utils/faker-utils';
 import { CancerSelector } from 'pages/cancer-selector';
 import { FamilyHistory } from 'pages/family-history';
@@ -49,7 +49,7 @@ test('Osteo adult self enroll @osteo', async ({ page }) => {
     email: OSTEO_USER_EMAIL,
     password: OSTEO_USER_PASSWORD
   });
-  logParticpantCreated(userEmail, fullName);
+  logParticipantCreated(userEmail, fullName);
 
   await assertActivityHeader(page, 'Research Consent Form');
   const researchConsentPage = new ResearchConsentFormPage(page);

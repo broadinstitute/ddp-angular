@@ -1,6 +1,6 @@
 import {APIRequestContext, Page} from '@playwright/test';
 import Dropdown from 'lib/widget/dsm/dropdown';
-import ParticipantListPage from 'pages/dsm/participantList-page';
+import ParticipantListPage from 'pages/dsm/participant-list-page';
 import {MainMenuEnum} from './enums/mainMenu-enum';
 import {StudyNavEnum} from './enums/studyNav-enum';
 import {StudyEnum} from './enums/selectStudyNav-enum';
