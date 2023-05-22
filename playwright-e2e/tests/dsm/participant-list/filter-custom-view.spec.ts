@@ -53,7 +53,6 @@ test.describe('Participants list search and filter', () => {
       const mfCodes: string[] = mfCodeCellText.split(/[\r\n]+/);
       expect(mfCodes).toBeTruthy();
       expect(mfCodes.length).toBeGreaterThanOrEqual(1);
-      console.log('First row MF codes are: ', mfCodes);
 
       // Save custom view
       const newViewName = `hunter_${new Date().getTime().toString()}`;

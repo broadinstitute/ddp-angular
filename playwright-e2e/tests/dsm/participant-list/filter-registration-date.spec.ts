@@ -6,7 +6,6 @@ import { MainInfoEnum } from 'pages/dsm/participant-page/enums/main-info-enum';
 import ParticipantListPage from 'pages/dsm/participant-list-page';
 import { StudyEnum } from 'lib/component/dsm/navigation/enums/selectStudyNav-enum';
 import { getDate, offsetDaysFromToday } from 'utils/date-utils';
-import { log } from 'utils/log-utils';
 
 test.describe('Participants Search', () => {
   const studies = [StudyEnum.LMS, StudyEnum.OSTEO2];
@@ -61,7 +60,7 @@ test.describe('Participants Search', () => {
       await searchPanel.search();
 
       const numParticipants2 = await participantsTable.numOfParticipants();
-      log(`Search by Registration Date Range returns ${numParticipants2} participants`);
+      console.log(`Search by Registration Date Range returns ${numParticipants2} participants`);
       expect(numParticipants2).toBeGreaterThan(1);
       expect(numParticipants2).not.toEqual(numParticipants1); // Expect Participants list table has reloaded and changed
 
