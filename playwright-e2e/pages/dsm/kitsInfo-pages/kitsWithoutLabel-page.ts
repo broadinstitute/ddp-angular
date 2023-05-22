@@ -5,7 +5,7 @@ import {waitForNoSpinner, waitForResponse} from 'utils/test-utils';
 import {KitsTable} from 'lib/component/dsm/tables/kitsTable';
 import {KitsColumnsEnum} from './enums/kitsColumns-enum';
 import {assertTableHeaders} from 'utils/assertion-helper';
-import {rows} from "lib/component/dsm/paginators/types/rowsPerPage";
+import {rows} from 'lib/component/dsm/paginators/types/rowsPerPage';
 
 
 export default class KitsWithoutLabelPage {

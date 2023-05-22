@@ -5,8 +5,8 @@ import {KitTypeEnum} from 'lib/component/dsm/kitType/enums/kitType-enum';
 import {waitForNoSpinner, waitForResponse} from 'utils/test-utils';
 import {KitsColumnsEnum} from '../enums/kitsColumns-enum';
 import {assertTableHeaders} from 'utils/assertion-helper';
-import {KitsPaginator} from "lib/component/dsm/paginators/kitsPaginator";
-import {rows} from "lib/component/dsm/paginators/types/rowsPerPage";
+import {KitsPaginator} from 'lib/component/dsm/paginators/kitsPaginator';
+import {rows} from 'lib/component/dsm/paginators/types/rowsPerPage';
 
 const { BSP_TOKEN, DSM_BASE_URL } = process.env;
 

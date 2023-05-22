@@ -1,7 +1,7 @@
 import { Locator, Page } from '@playwright/test';
 import ParticipantPage from 'pages/dsm/participant-page/participant-page';
-import {ParticipantsListPaginator} from "../paginators/participantsListPaginator";
-import {rows} from "../paginators/types/rowsPerPage";
+import {ParticipantsListPaginator} from '../paginators/participantsListPaginator';
+import {rows} from '../paginators/types/rowsPerPage';
 
 export class ParticipantListTable {
   private readonly _participantPage: ParticipantPage = new ParticipantPage(this.page);

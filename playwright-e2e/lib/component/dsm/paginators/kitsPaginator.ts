@@ -1,5 +1,5 @@
-import {expect, Page} from "@playwright/test";
-import {rows} from "./types/rowsPerPage";
+import {expect, Page} from '@playwright/test';
+import {rows} from './types/rowsPerPage';
 
 export class KitsPaginator {
   constructor(private readonly page: Page) {

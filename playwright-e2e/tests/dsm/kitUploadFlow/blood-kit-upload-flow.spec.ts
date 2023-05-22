@@ -72,7 +72,7 @@ test.describe.parallel('Blood Kits upload flow', () => {
           testParticipantIndex = count;
           break;
         }
-        if(count === participantsRowsCount - 1) {
+        if (count === participantsRowsCount - 1) {
           await participantListTable.nextPage();
           participantsRowsCount = await participantListTable.rowsCount;
         }

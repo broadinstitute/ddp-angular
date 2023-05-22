@@ -1,6 +1,6 @@
-import {expect, Page} from "@playwright/test";
-import {waitForNoSpinner, waitForResponse} from "utils/test-utils";
-import {rows} from "./types/rowsPerPage";
+import {expect, Page} from '@playwright/test';
+import {waitForNoSpinner, waitForResponse} from 'utils/test-utils';
+import {rows} from './types/rowsPerPage';
 
 export class ParticipantsListPaginator {
   constructor(private readonly page: Page) {}
@@ -27,7 +27,7 @@ export class ParticipantsListPaginator {
   private async paginate(xpath: string): Promise<void> {
     const paginatorLocator = this.page.locator(xpath);
     const isDisabled = (await paginatorLocator.getAttribute('class'))?.includes('disabled');
-    if(!isDisabled) {
+    if (!isDisabled) {
       await paginatorLocator.click();
       await this.waitForReady();
     }
@@ -59,7 +59,7 @@ export class ParticipantsListPaginator {
   }
 
   private get paginatorXPath(): string {
-    return "//tfoot/tr[1]/td[1]/pagination-controls/pagination-template/ul/li";
+    return '//tfoot/tr[1]/td[1]/pagination-controls/pagination-template/ul/li';
   }
 
   private rowsPerPageXPath(rows: rows): string {

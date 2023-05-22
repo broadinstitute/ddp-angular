@@ -1,7 +1,7 @@
 import {expect, Locator, Page} from '@playwright/test';
 import {KitsColumnsEnum} from 'pages/dsm/kitsInfo-pages/enums/kitsColumns-enum';
-import {KitsPaginator} from "../paginators/kitsPaginator";
-import {rows} from "../paginators/types/rowsPerPage";
+import {KitsPaginator} from '../paginators/kitsPaginator';
+import {rows} from '../paginators/types/rowsPerPage';
 
 
 export class KitsTable {
