@@ -42,12 +42,12 @@ test.describe.parallel('Saliva Kits upload flow', () => {
   });
 
   for (const study of studies) {
-    test(`Should upload a single kit for one participant @functional @visual @dsm @${study}`, async () => {
-      let shortID: string;
-      let kitUploadInfo: KitUploadInfo;
-      let kitLabel: string;
-      let shippingID: string;
+    let shortID: string;
+    let kitUploadInfo: KitUploadInfo;
+    let kitLabel: string;
+    let shippingID: string;
 
+    test(`Should upload a single kit for one participant @functional @visual @dsm @${study}`, async () => {
       await welcomePage.selectStudy(study);
       await homePage.assertWelcomeTitle();
       await homePage.assertSelectedStudyTitle(study);
