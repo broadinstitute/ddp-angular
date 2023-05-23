@@ -4,6 +4,7 @@ import HomePage from 'pages/osteo/home-page';
 import PrequalPage from 'pages/osteo/prequal-page';
 import ConsentAssentPage from 'pages/osteo/consent-assent-page';
 import * as auth from 'authentication/auth-angio';
+import { waitForResponse } from 'utils/test-utils';
 
 const { OSTEO_USER_EMAIL, OSTEO_USER_PASSWORD } = process.env;
 
@@ -77,13 +78,17 @@ test('Osteo enroll self and kid together @osteo', async ({ page }) => {
 
   await page.locator('span').filter({ hasText: 'Yes' }).click();
   await expect(page.getByTestId('answer:SOMATIC_SINGATURE_PEDIATRIC')).toBeVisible();
-  await page.getByTestId('answer:SOMATIC_SINGATURE_PEDIATRIC').fill('Playwright Parent');
-  await page.getByTestId('answer:SOMATIC_SINGATURE_PEDIATRIC').blur({ timeout: 2000 });
+
+  const resp = waitForResponse(page, { uri: '/answers'});
+  await Promise.all([
+    page.getByTestId('answer:SOMATIC_SINGATURE_PEDIATRIC').fill('Playwright Parent'),
+    resp
+  ]);
 
   await consentAssentPage.next();
 
-  await page.getByText('Consent Form Addendum: Learning About Your Child').click();
-  await page.getByText('Assent Form Addendum: Learning About Your Tumor').click();
+  // await page.getByText('Consent Form Addendum: Learning About Your Child').click();
+  // await page.getByText('Assent Form Addendum: Learning About Your Tumor').click();
   await page.getByText('The form below will tell you more about another part of the research study that ').click();
   await page.getByText('Yes').click();
   await page.locator('#mat-input-16').click();

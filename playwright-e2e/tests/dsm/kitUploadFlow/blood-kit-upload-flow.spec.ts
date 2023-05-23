@@ -37,6 +37,8 @@ test.describe.parallel('Blood Kits upload flow', () => {
   let trackingLabel: string;
   let shippingID: string;
 
+  let testResultDir: string;
+
   const studies = [StudyEnum.OSTEO2];
   const kitType = KitTypeEnum.BLOOD;
   const expectedKitTypes = [KitTypeEnum.SALIVA, KitTypeEnum.BLOOD];
@@ -49,7 +51,9 @@ test.describe.parallel('Blood Kits upload flow', () => {
   });
 
   for (const study of studies) {
-    test(`Should upload a single kit for one participant @functional @visual @dsm @${study}`, async () => {
+    test(`Should upload a single kit for one participant @functional @visual @dsm @${study}`, async ({page}, testInfo) => {
+      testResultDir = testInfo.outputDir;
+
       await welcomePage.selectStudy(study);
       await homePage.assertWelcomeTitle();
       await homePage.assertSelectedStudyTitle(study);
@@ -112,7 +116,7 @@ test.describe.parallel('Blood Kits upload flow', () => {
       await kitUploadPage.assertBrowseBtn();
       await kitUploadPage.assertUploadKitsBtn();
       await kitUploadPage.assertInstructionSnapshot();
-      await kitUploadPage.uploadFile(kitType, [kitUploadInfo], study);
+      await kitUploadPage.uploadFile(kitType, [kitUploadInfo], study, testResultDir);
 
       // initial scan
       const initialScanPage = await navigation.selectFromSamples<InitialScanPage>(SamplesNavEnum.INITIAL_SCAN);

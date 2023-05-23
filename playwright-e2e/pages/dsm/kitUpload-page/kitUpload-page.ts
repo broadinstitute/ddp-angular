@@ -26,8 +26,9 @@ export default class KitUploadPage {
     await this.kitType.selectKitType(kitType);
   }
 
-  public async uploadFile(kitType: KitTypeEnum, kitInfo: KitUploadInfo[], study: StudyEnum) {
-    const path = `${__dirname}/${kitType}_${study}-${new Date().getTime()}.txt`;
+  public async uploadFile(kitType: KitTypeEnum, kitInfo: KitUploadInfo[], study: StudyEnum, testResultDir?: string) {
+    const dir = testResultDir ? testResultDir : __dirname;
+    const path = `${dir}/${kitType}_${study}-${new Date().getTime()}.txt`;
     createTextFileSync(path, this.T_HEAD + this.createKitUploadBody(kitInfo));
     await this.fileInput.setInputFiles(path);
 
