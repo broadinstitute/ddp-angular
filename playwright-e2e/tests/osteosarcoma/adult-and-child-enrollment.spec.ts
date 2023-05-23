@@ -1,8 +1,8 @@
 import { expect } from '@playwright/test';
 import { test } from 'fixtures/osteo-fixture';
-import HomePage from 'pages/osteo/home-page';
-import PrequalPage from 'pages/osteo/prequal-page';
-import ConsentAssentPage from 'pages/osteo/consent-assent-page';
+import HomePage from 'dss/pages/osteo/home-page';
+import PrequalPage from 'dss/pages/osteo/prequal-page';
+import ConsentAssentPage from 'dss/pages/osteo/consent-assent-page';
 import * as auth from 'authentication/auth-angio';
 import { waitForResponse } from 'utils/test-utils';
 

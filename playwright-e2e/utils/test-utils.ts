@@ -1,7 +1,7 @@
 import {BrowserContext, Download, expect, Locator, Page, Response} from '@playwright/test';
-import Input from 'lib/widget/input';
-import Checkbox from 'lib/widget/checkbox';
-import Select from 'lib/widget/select';
+import Input from 'dss/component/input';
+import Checkbox from 'dss/component/checkbox';
+import Select from 'dss/component/select';
 import axios from 'axios';
 
 export interface WaitForResponse {

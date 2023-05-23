@@ -1,6 +1,6 @@
 import { expect } from '@playwright/test';
 import { test } from 'fixtures/singular-fixture';
-import PreScreeningPage from 'pages/singular/enrollment/pre-screening-page';
+import PreScreeningPage from 'dss/pages/singular/enrollment/pre-screening-page';
 
 test.describe.skip('About Yourself page', () => {
   // Country validation: Select a country which is not US and Canada should triggers an error message

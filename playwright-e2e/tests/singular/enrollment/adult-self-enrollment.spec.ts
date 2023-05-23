@@ -1,13 +1,13 @@
 import { expect } from '@playwright/test';
 import { test } from 'fixtures/singular-fixture';
-import AboutMePage from 'pages/singular/enrollment/about-me-page';
-import ConsentFormPage from 'pages/singular/enrollment/consent-form-page';
+import AboutMePage from 'dss/pages/singular/enrollment/about-me-page';
+import ConsentFormPage from 'dss/pages/singular/enrollment/consent-form-page';
 import * as user from 'data/fake-user.json';
 import { WHO } from 'data/constants';
 import { downloadConsentPdf } from 'utils/test-utils';
-import EnrollMyselfPage from 'pages/singular/enrollment/enroll-myself-page';
-import MedicalRecordReleaseForm from 'pages/singular/enrollment/medical-record-release-form';
-import PatientSurveyPage from 'pages/singular/enrollment/patient-survey-page';
+import EnrollMyselfPage from 'dss/pages/singular/enrollment/enroll-myself-page';
+import MedicalRecordReleaseForm from 'dss/pages/singular/enrollment/medical-record-release-form';
+import PatientSurveyPage from 'dss/pages/singular/enrollment/patient-survey-page';
 import { assertActivityHeader, assertActivityProgress } from 'utils/assertion-helper';
 import { generateUserName } from 'utils/faker-utils';
 

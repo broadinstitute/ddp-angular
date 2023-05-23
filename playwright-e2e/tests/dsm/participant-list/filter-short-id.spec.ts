@@ -1,7 +1,7 @@
 import { expect } from '@playwright/test';
 import { test } from 'fixtures/dsm-fixture';
-import ParticipantListPage from 'pages/dsm/participant-list-page';
-import { StudyEnum } from 'lib/component/dsm/navigation/enums/selectStudyNav-enum';
+import ParticipantListPage from 'dsm/pages/participant-list-page';
+import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
 
 test.describe('Participants Search', () => {
   const studies = [StudyEnum.LMS, StudyEnum.OSTEO2];

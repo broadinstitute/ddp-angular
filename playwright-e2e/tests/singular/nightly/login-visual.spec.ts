@@ -1,7 +1,7 @@
 import { expect } from '@playwright/test';
 import { test } from 'fixtures/singular-fixture';
-import DashboardPage from 'pages/singular/dashboard-page';
-import { NavSelectors } from 'pages/singular/navbar';
+import DashboardPage from 'dss/pages/singular/dashboard-page';
+import { NavSelectors } from 'dss/pages/singular/navbar';
 import { login } from 'authentication/auth-singular';
 
 import _ from 'lodash';

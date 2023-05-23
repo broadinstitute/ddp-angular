@@ -1,8 +1,8 @@
 import { expect } from '@playwright/test';
 import { test } from 'fixtures/dsm-fixture';
-import { AdditionalFilter } from 'lib/component/dsm/filters/sections/search/search-enums';
-import { StudyEnum } from 'lib/component/dsm/navigation/enums/selectStudyNav-enum';
-import ParticipantListPage from 'pages/dsm/participant-list-page';
+import { AdditionalFilter } from 'dsm/component/filters/sections/search/search-enums';
+import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
+import ParticipantListPage from 'dsm/pages/participant-list-page';
 import { offsetDaysFromToday } from 'utils/date-utils';
 
 test.describe('Participants list search and filter', () => {

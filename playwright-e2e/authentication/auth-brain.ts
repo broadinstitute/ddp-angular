@@ -1,6 +1,6 @@
 import { Page } from '@playwright/test';
 import { fillInEmailPassword } from 'authentication/auth-base';
-import { NavSelectors } from 'pages/pancan/navbar';
+import { NavSelectors } from 'dss/pages/pancan/navbar';
 
 const { BRAIN_USER_EMAIL, BRAIN_USER_PASSWORD } = process.env;
 
