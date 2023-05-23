@@ -703,16 +703,7 @@ jobs:
           name: Running Playwright tests
           working_directory: *playwright_path
           command: |
-            echo 'Study: ' << parameters.test_suite >>
-            if [ << parameters.test_suite >> == "UNKNOWN" ]; then
-              # Grep all E2E tests
-              npx playwright test --list | grep -o 'tests/.*.spec.ts' > e2e_tests.txt
-            else
-              # Grep E2E tests for this study.
-              npx playwright test --list -g @<< parameters.test_suite >> | grep -o 'tests/.*.spec.ts' > e2e_tests.txt
-            fi
-            TESTS_FILE=$(circleci tests split --split-by=timings --timings-type=classname e2e_tests.txt)
-            npm run test:ci $TESTS_FILE
+            SHARD="$((${CIRCLE_NODE_INDEX}+1))"; npx playwright test -- --shard=${SHARD}/${CIRCLE_NODE_TOTAL}
           no_output_timeout: 3m # Default is 10m. Set shorter time to ensure CI fails faster if test hangs
       - store_test_results:
           path: playwright-e2e/junit
