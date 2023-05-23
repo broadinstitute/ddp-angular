@@ -68,14 +68,14 @@ test.describe.parallel('Saliva Kits upload flow', () => {
 
       // Collects all the necessary data for kit upload
       const participantPage: ParticipantPage = await participantListTable.openParticipantPageAt(testParticipantIndex);
-      let shortID = await participantPage.getShortId();
+      const shortID = await participantPage.getShortId();
       const firstName = await participantPage.getFirstName();
       const lastName = await participantPage.getLastName();
       expect(shortID, 'The short ID is empty').toBeTruthy();
       expect(firstName, 'The first name is empty').toBeTruthy();
       expect(lastName, 'The last name is empty').toBeTruthy();
       const isContactInformationTabVisible = await participantPage.isTabVisible(TabEnum.CONTACT_INFORMATION);
-      let kitUploadInfo = new KitUploadInfo(
+      const kitUploadInfo = new KitUploadInfo(
         shortID,
         firstName,
         lastName,
@@ -115,7 +115,7 @@ test.describe.parallel('Saliva Kits upload flow', () => {
       // initial scan
       const initialScanPage = await navigation.selectFromSamples<InitialScanPage>(SamplesNavEnum.INITIAL_SCAN);
       await initialScanPage.assertPageTitle();
-      let kitLabel = `kit-${crypto.randomUUID().toString().substring(0, 10)}`;
+      const kitLabel = `kit-${crypto.randomUUID().toString().substring(0, 10)}`;
       await initialScanPage.fillScanPairs([kitLabel, shortID]);
       await initialScanPage.save();
 
@@ -128,7 +128,7 @@ test.describe.parallel('Saliva Kits upload flow', () => {
       await kitsWithoutLabelPage.assertTableHeader();
       await kitsWithoutLabelPage.assertPageTitle();
       await kitsWithoutLabelPage.search(KitsColumnsEnum.SHORT_ID, shortID);
-      let shippingID = (await kitsWithoutLabelPage.getData(KitsColumnsEnum.SHIPPING_ID)).trim();
+      const shippingID = (await kitsWithoutLabelPage.getData(KitsColumnsEnum.SHIPPING_ID)).trim();
 
       // final scan
       const finalScanPage = await navigation.selectFromSamples<FinalScanPage>(SamplesNavEnum.FINAL_SCAN);
