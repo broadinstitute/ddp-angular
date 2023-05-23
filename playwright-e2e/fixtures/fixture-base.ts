@@ -16,14 +16,7 @@ const REQUEST_EXCLUDES = ['google-analytics', 'facebook'];
 export const fixtureBase = base.extend({
   page: async ({ page }, use) => {
     await page.route('**/*', (route) => {
-      return REQUEST_EXCLUDES.some((urlPart) => route.request().url().includes(urlPart)) ? route.abort('aborted') : route.continue();
-    });
-    page.on('requestfailed', request => {
-      const failure = request.failure();
-      if (failure && !failure.errorText.includes('ERR_ABORTED')) {
-        console.error(`FAILED: ${request.url()}`);
-        console.error(`FAILED: ${failure.errorText}`);
-      }
+      return REQUEST_EXCLUDES.some((urlPart) => route.request().url().includes(urlPart)) ? route.abort() : route.continue();
     });
     await use(page);
   }

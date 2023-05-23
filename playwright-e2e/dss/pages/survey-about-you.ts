@@ -12,7 +12,7 @@ export default class SurveyAboutYou extends PageBase {
 
   async waitForReady(): Promise<void> {
     await super.waitForReady();
-    await expect(this.page.locator('h1.activity-header')).toHaveText(/Survey: About (You|Your Child)/);
+    await expect(this.page.locator('h1.activity-header')).toHaveText(/Survey: About (you|Your Child)/);
   }
 
   /**
