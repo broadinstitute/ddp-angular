@@ -22,7 +22,6 @@ export class ParticipantListTable extends Table {
   public async getParticipantDataAt(position: number, columnName: string): Promise<string> {
     const columnIndex = await this.getHeaderIndex(columnName);
     return this.cell(position, columnIndex).innerText();
-    // return await this.page.locator(this.getParticipantDataAtXPath(position, columnName)).innerText();
   }
 
   public async selectCheckboxForParticipantAt(position: number): Promise<void> {

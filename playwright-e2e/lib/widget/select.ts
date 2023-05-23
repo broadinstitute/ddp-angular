@@ -66,7 +66,7 @@ export default class Select extends WidgetBase {
         }
         if (isMultiSelectable) {
           // Use tab to close multiSelectable dropdown
-          await (this.page as Page).keyboard.press('Tab');
+          await this.page.keyboard.press('Tab');
         }
         break;
     }
