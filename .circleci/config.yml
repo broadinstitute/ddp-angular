@@ -771,7 +771,7 @@ parameters:
     default: false
   e2e-test-parallelism:
     type: integer
-    default: 1
+    default: 2
   scheduled-playwright:
     type: boolean
     default: false
