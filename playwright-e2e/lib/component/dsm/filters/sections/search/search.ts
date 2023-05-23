@@ -1,4 +1,4 @@
-import { Locator, Page } from '@playwright/test';
+import { expect, Locator, Page } from '@playwright/test';
 import {CheckboxConfig, DateConfig, RadioButtonConfig, TextConfig} from './search-types';
 import { AdditionalFilter } from './search-enums';
 import {waitForNoSpinner, waitForResponse} from 'utils/test-utils';
@@ -16,7 +16,7 @@ export class Search {
 
   public async search(): Promise<void> {
     await this.page.locator("//div[@id='searchTable']/button[1][span[text()='Search']]").click();
-    await waitForResponse(this.page, {uri: 'filterList'});
+    await waitForResponse(this.page, {uri: 'ui/filterList?'});
     await waitForNoSpinner(this.page);
   }
 
@@ -46,10 +46,15 @@ export class Search {
       toValue && console.warn(`'${toValue}' - is not valid date, therefore can't be set in '${columnName}' date field`);
     }
 
-    const dateInputFields = await this.page.locator(this.dateInputFieldXPath(columnName));
+    // Click plus icon to expand Date fields
+    //const expandDateRangeButton = this.page.locator(`xpath=${this.baseColumnXPath(columnName)}//button[.//*[@data-icon="plus-square"]]`);
+    //await expandDateRangeButton.click();
+
+    const dateInputFields = this.page.locator(this.dateInputFieldXPath(columnName));
+    await expect(dateInputFields).toHaveCount(2); // synchronize with UI
 
     fromDate && (await dateInputFields.nth(0).fill(fromDate));
-    toDate && (await dateInputFields.nth(1).fill(fromDate));
+    toDate && (await dateInputFields.nth(1).fill(toDate));
   }
 
   public async text(columnName: string, { textValue, additionalFilters, exactMatch = true }: Partial<TextConfig>): Promise<void> {
@@ -95,7 +100,7 @@ export class Search {
 
     !(await this.isAdditionalFiltersOpen(columnName, isTextField)) && (await this.page.locator(baseColumnXPath + this.plusIconXPath).click());
 
-    const additionalFilterCheckbox = await this.additionalFilterCheckboxLocator(columnName, additionalFilter, isTextField);
+    const additionalFilterCheckbox = this.additionalFilterCheckboxLocator(columnName, additionalFilter, isTextField);
     const isChecked = await this.isChecked(additionalFilterCheckbox);
     const isDisabled = await this.isDisabled(additionalFilterCheckbox);
 
@@ -136,11 +141,11 @@ export class Search {
 
   private radioBtnLocator(columnName: string, radioButtonName: string): Locator {
     return this.page.locator(`${this.baseColumnXPath(columnName)}` +
-      `//mat-radio-group//mat-radio-button[label[.//*[text()[normalize-space()='${radioButtonName}']]]]`);
+      `//mat-radio-group//mat-radio-button[label[.//*[text()[normalize-space()="${radioButtonName}"]]]]`);
   }
 
   private textInputLocator(columnName: string): Locator {
-    return this.page.locator(`${this.baseTextColumnXPath(columnName)}/mat-form-field//input`);
+    return this.page.locator(`${this.baseTextColumnXPath(columnName)}//mat-form-field//input`);
   }
 
   private additionalFilterCheckboxLocator(columnName: string, checkboxName: AdditionalFilter, isTextField = false): Locator {
@@ -160,11 +165,11 @@ export class Search {
   }
 
   private baseColumnXPath(columnName: string): string {
-    return `//app-filter-column[div[.//*[text()[normalize-space()='${columnName}']]]]`;
+    return `//app-filter-column[div[.//*[text()[normalize-space()="${columnName}"]]]]`;
   }
 
   private baseTextColumnXPath(columnName: string): string {
-    return `//app-filter-column[mat-form-field//label[.//*[text()[normalize-space()='${columnName}']]]]`;
+    return `//app-filter-column[.//*[text()[normalize-space()="${columnName}"]]]`;
   }
 
   private get plusIconXPath(): string {

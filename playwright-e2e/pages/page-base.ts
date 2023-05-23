@@ -328,10 +328,11 @@ export default abstract class PageBase implements PageInterface {
   }
 
   async fillInFullName(fullName: string, opts?: { testId: string }): Promise<void> {
-    if (!opts) {
-      return this.page.getByRole('combobox', { name: 'Full Name' }).fill(fullName);
-    }
-    await this.page.getByTestId(opts.testId).fill(fullName);
+    const waitForResponsePromise = this.page.waitForResponse(response => response.status() === 200);
+    await Promise.all([
+      opts ? this.page.getByTestId(opts.testId).fill(fullName) : this.page.getByRole('combobox', { name: 'Full Name' }).fill(fullName),
+      waitForResponsePromise
+    ]);
   }
 
   async fillInPhysicianInstitution(

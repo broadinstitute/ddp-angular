@@ -14,7 +14,7 @@ dotenv.config({ path: path.resolve(__dirname, '.env') });
  */
 const testConfig: PlaywrightTestConfig = {
   globalSetup: require.resolve('./fixtures/global-setup'),
-  testDir: '.',
+  testDir: __dirname,
   testMatch: '**/*.spec.ts',
   /* Maximum timeout per test. Each test should be short and takes less than 3 min to run */
   timeout: 180 * 1000,
@@ -41,7 +41,7 @@ const testConfig: PlaywrightTestConfig = {
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 1 : 0,
-  workers: process.env.CI ? 2 : 3,
+  workers: process.env.CI ? 2 : 5,
   maxFailures: process.env.CI ? 10 : 0,
 
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
@@ -93,7 +93,7 @@ const testConfig: PlaywrightTestConfig = {
   projects: [
     {
       name: 'chromium',
-      testMatch: '**/*.spec.ts',
+      // testMatch: '**/*.spec.ts',
       grepInvert: /examples/,
       use: {
         browserName: 'chromium',

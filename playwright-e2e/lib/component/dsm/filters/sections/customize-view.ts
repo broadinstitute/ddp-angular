@@ -5,7 +5,17 @@ export class CustomizeView {
   constructor(private readonly page: Page) {}
 
   public async open(): Promise<void> {
-    await this.page.locator(this.openButtonXPath).click();
+    const isOpen = await this.isPanelOpen();
+    if (!isOpen) {
+      await this.page.locator(this.openButtonXPath).click();
+    }
+  }
+
+  public async close(): Promise<void> {
+    const isOpen = await this.isPanelOpen();
+    if (isOpen) {
+      await this.page.locator(this.openButtonXPath).click();
+    }
   }
 
   public async selectColumns(columnsGroupName: string, columns: string[]): Promise<void> {
@@ -67,10 +77,11 @@ export class CustomizeView {
 
   /* XPaths */
   private get openButtonXPath(): string {
-    return (
-      "//div[text()[normalize-space()='Customize View'] and " +
-      "button[.//*[local-name()='svg' and @data-icon='server']/*[local-name()='path']]]/button"
-    );
+    return `//*[text()[normalize-space()="Customize View"]]/button`;
+  }
+
+  private async isPanelOpen(): Promise<boolean> {
+    return await this.page.locator('.btn-group').count() >= 1;
   }
 
   private get columnsGroupXPath(): string {

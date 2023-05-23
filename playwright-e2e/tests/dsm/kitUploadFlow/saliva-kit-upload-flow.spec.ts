@@ -4,7 +4,7 @@ import HomePage from 'pages/dsm/home-page';
 import {Navigation} from 'lib/component/dsm/navigation/navigation';
 import {login} from 'authentication/auth-dsm';
 import {StudyEnum} from 'lib/component/dsm/navigation/enums/selectStudyNav-enum';
-import ParticipantListPage from 'pages/dsm/participantList-page';
+import ParticipantListPage from 'pages/dsm/participant-list-page';
 import {StudyNavEnum} from 'lib/component/dsm/navigation/enums/studyNav-enum';
 import ParticipantPage from 'pages/dsm/participant-page/participant-page';
 import {KitUploadInfo} from 'pages/dsm/kitUpload-page/models/kitUpload-model';
@@ -25,10 +25,12 @@ import KitsSentPage from 'pages/dsm/kitsInfo-pages/kitsSentPage';
 import KitsReceivedPage from 'pages/dsm/kitsInfo-pages/kitsReceived-page/kitsReceivedPage';
 
 
-test.describe.parallel('Saliva Kits upload flow', () => {
+test.describe('Saliva Kits upload flow', () => {
   let welcomePage: WelcomePage;
   let homePage: HomePage;
   let navigation: Navigation;
+
+  let testResultDir: string;
 
   const studies = [StudyEnum.LMS, StudyEnum.OSTEO2];
   const kitType = KitTypeEnum.SALIVA;
@@ -42,7 +44,9 @@ test.describe.parallel('Saliva Kits upload flow', () => {
   });
 
   for (const study of studies) {
-    test(`Should upload a single kit for one participant @functional @visual @dsm @${study}`, async () => {
+    test(`Should upload a single kit for one participant @functional @visual @dsm @${study}`, async ({page}, testInfo) => {
+      testResultDir = testInfo.outputDir;
+
       await welcomePage.selectStudy(study);
       await homePage.assertWelcomeTitle();
       await homePage.assertSelectedStudyTitle(study);
@@ -110,7 +114,7 @@ test.describe.parallel('Saliva Kits upload flow', () => {
       await kitUploadPage.assertBrowseBtn();
       await kitUploadPage.assertUploadKitsBtn();
       await kitUploadPage.assertInstructionSnapshot();
-      await kitUploadPage.uploadFile(kitType, [kitUploadInfo], study);
+      await kitUploadPage.uploadFile(kitType, [kitUploadInfo], study, testResultDir);
 
       // initial scan
       const initialScanPage = await navigation.selectFromSamples<InitialScanPage>(SamplesNavEnum.INITIAL_SCAN);

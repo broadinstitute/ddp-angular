@@ -1,6 +1,6 @@
 import { expect, Locator, Page } from '@playwright/test';
 import Button from 'lib/widget/button';
-import _ from 'lodash';
+import { waitForNoSpinner } from 'utils/test-utils';
 
 export enum SortOrder {
   DESC = 'desc',
@@ -8,7 +8,6 @@ export enum SortOrder {
 }
 
 export default class Table {
-  private readonly page: Page;
   private readonly tableCss: string;
   private readonly headerCss: string;
   private readonly rowCss: string;
@@ -16,11 +15,9 @@ export default class Table {
   private readonly footerCss: string;
   private readonly nth: number;
 
-  constructor(page: Page, opts: { cssClassAttribute?: string; ddpTestID?: string; nth?: number } = {}) {
+  constructor(protected readonly page: Page, opts: { cssClassAttribute?: string; ddpTestID?: string; nth?: number } = {}) {
     const { cssClassAttribute, ddpTestID, nth = 0 } = opts;
-    this.page = page;
     this.nth = nth;
-    // prettier-ignore
     this.tableCss = ddpTestID
         ? `[data-ddp-test="${ddpTestID}"]`
         : cssClassAttribute
@@ -49,10 +46,14 @@ export default class Table {
     return this.tableLocator().locator(this.headerCss);
   }
 
+  footerLocator(): Locator {
+    return this.tableLocator().locator(this.footerCss);
+  }
+
   /**
    *
-   * @param {number} rowIndex
-   * @param {number} columnIndex
+   * @param {number} rowIndex 0-index
+   * @param {number} columnIndex 0-index
    * @returns {Locator}
    */
   cell(rowIndex: number, columnIndex: number): Locator {
@@ -74,15 +75,17 @@ export default class Table {
   async findCell(searchHeader: string, searchCellValue: string, resultHeader: string, opts: { exactMatch?: boolean} = {}): Promise<Locator | null> {
     const { exactMatch = true } = opts;
 
-    // Find the searchColumnHeader index
+    // Find the search column header index
     const columnNames = await this.getHeaderNames();
-    const columnIndex = columnNames.findIndex((text) => text === searchHeader);
+    const columnIndex = await this.getHeaderIndex(searchHeader, { exactMatch });
     if (columnIndex === -1) {
-      return null;
+      return null; // Not found
     }
-    const resultColumnIndex = columnNames.findIndex((text: string) => exactMatch ? text === resultHeader : text.includes(resultHeader));
+
+    // Find the result column header index
+    const resultColumnIndex = await this.getHeaderIndex(resultHeader, { exactMatch });
     if (resultColumnIndex === -1) {
-      return null;
+      return null; // Not found
     }
 
     // Find the row which contains the searchCellValue
@@ -101,20 +104,45 @@ export default class Table {
   }
 
   /**
+   * Returns an array of string in a row
+   * @param {number} row 0-indexed. 0 selects first row.
+   * @returns {Promise<void>}
+   */
+  async getRowValues(row = 0): Promise<Array<string>> {
+    return this.rowLocator().nth(row).allInnerTexts();
+  }
+
+  /**
    * Finds table column header names. Returns an array of string.
    * @returns {Array<string>}
    */
   async getHeaderNames(): Promise<Array<string>> {
+    return this.headerLocator().allInnerTexts();
+    /*
     const columns = await this.headerLocator().elementHandles();
     return await Promise.all(
       _.map(columns, async (column) => {
         return await column.innerText();
       })
-    );
+    ); */
   }
 
-  getHeaderByName(name: string): Locator {
+  async getHeaderIndex(name: string, opts: { exactMatch?: boolean } = {}): Promise<number> {
+    const { exactMatch = true } = opts;
+    const allColumnNames = await this.getHeaderNames();
+    return allColumnNames.findIndex((text: string) => exactMatch ? text === name : text.includes(name));
+  }
+
+  getHeaderByName(name: RegExp | string): Locator {
     return this.headerLocator().filter({hasText: name});
+  }
+
+  async getHeadersCount(): Promise<number> {
+    return this.headerLocator().count();
+  }
+
+  async getRowsCount(): Promise<number> {
+    return this.rowLocator().count();
   }
 
   /**
@@ -140,12 +168,60 @@ export default class Table {
   }
 
   async sort(column: string, order: SortOrder): Promise<void> {
-    const header = await this.getHeaderByName(column);
-    await header.locator('a').click();
-    const ariaLabel = await header.locator('span').getAttribute('aria-label')
-    if (ariaLabel !== order) {
-      await header.locator('a').click();
+    const header = this.getHeaderByName(RegExp(column));
+    const headerLink = header.locator('a');
+
+    if (await headerLink.count() > 0) {
+      await headerLink.click();
+    } else {
+      await header.click();
     }
-    await expect(header.locator('span')).toHaveAttribute('aria-label', order);
+
+    let ariaLabel = await header.locator('span').last().getAttribute('aria-label');
+    if (ariaLabel) {
+      if (ariaLabel !== order) {
+        await header.locator('a').click();
+      }
+      await waitForNoSpinner(this.page);
+      await expect(header.locator('span')).toHaveAttribute('aria-label', order);
+    } else {
+      let icon;
+      switch (order) {
+        case SortOrder.DESC:
+          icon = 'sort-alpha-down';
+          break;
+        case SortOrder.ASC:
+          icon = 'sort-alpha-up';
+          break;
+      }
+      ariaLabel = await header.locator('svg[data-icon]').getAttribute('data-icon');
+      if (ariaLabel !== icon) {
+        await header.locator('svg[data-icon]').click();
+      }
+      await waitForNoSpinner(this.page);
+      await expect(header.locator('svg[data-icon]')).toHaveAttribute('data-icon', icon);
+    }
+  }
+
+  async getTableRowsTotal(searchString: RegExp | string): Promise<number | null> {
+    const footer = await this.footerLocator().locator('td', { hasText: searchString }).innerText();
+    return this.parseForNumber(footer);
+  }
+
+  /**
+   * Returns a random row index
+   * @returns {Promise<number>}
+   */
+  async getRandomRowIndex(): Promise<number> {
+    const rowsCount = await this.getRowsCount();
+    return Math.floor(Math.random() * rowsCount);
+  }
+
+  private parseForNumber(text: string): number | null {
+    const numericalStr = text.match(/(\d|\.)+/g);
+    if (numericalStr) {
+      return parseInt(numericalStr[0]);
+    }
+    return null;
   }
 }

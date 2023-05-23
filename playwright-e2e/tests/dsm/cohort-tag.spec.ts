@@ -1,6 +1,6 @@
 import { test } from '@playwright/test';
 import { login } from 'authentication/auth-dsm';
-import ParticipantListPage from 'pages/dsm/participantList-page';
+import ParticipantListPage from 'pages/dsm/participant-list-page';
 import HomePage from 'pages/dsm/home-page';
 import ParticipantPage from 'pages/dsm/participant-page/participant-page';
 import CohortTag from 'lib/component/dsm/cohort-tag';
