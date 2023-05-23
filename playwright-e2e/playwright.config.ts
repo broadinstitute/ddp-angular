@@ -14,8 +14,8 @@ dotenv.config({ path: path.resolve(__dirname, '.env') });
  */
 const testConfig: PlaywrightTestConfig = {
   globalSetup: require.resolve('./fixtures/global-setup'),
-  testDir: '.',
-  testMatch: '/.*.spec.ts/',
+  testDir: path.join(__dirname, 'tests'),
+  testMatch: '**/*.spec.ts',
   /* Maximum timeout per test. Each test should be short and takes less than 3 min to run */
   timeout: 180 * 1000,
   /* For expect() calls */
