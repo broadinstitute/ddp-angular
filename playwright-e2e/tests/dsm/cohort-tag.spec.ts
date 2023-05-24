@@ -1,15 +1,15 @@
 import { test } from '@playwright/test';
 import { login } from 'authentication/auth-dsm';
-import ParticipantListPage from 'pages/dsm/participant-list-page';
-import HomePage from 'pages/dsm/home-page';
-import ParticipantPage from 'pages/dsm/participant-page/participant-page';
-import CohortTag from 'lib/component/dsm/cohort-tag';
-import { StudyNavEnum } from 'lib/component/dsm/navigation/enums/studyNav-enum';
-import { Navigation } from 'lib/component/dsm/navigation/navigation';
+import ParticipantListPage from 'dsm/pages/participant-list-page';
+import HomePage from 'dsm/pages/home-page';
+import ParticipantPage from 'dsm/pages/participant-page/participant-page';
+import CohortTag from 'dsm/component/cohort-tag';
+import { StudyNavEnum } from 'dsm/component/navigation/enums/studyNav-enum';
+import { Navigation } from 'dsm/component/navigation/navigation';
 import * as crypto from 'crypto';
-import { AdditionalFilter } from 'lib/component/dsm/filters/sections/search/search-enums';
-import { WelcomePage } from 'pages/dsm/welcome-page';
-import { StudyEnum } from 'lib/component/dsm/navigation/enums/selectStudyNav-enum';
+import { AdditionalFilter } from 'dsm/component/filters/sections/search/search-enums';
+import { WelcomePage } from 'dsm/pages/welcome-page';
+import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
 
 test.describe.skip('Cohort tags', () => {
   let welcomePage: WelcomePage;

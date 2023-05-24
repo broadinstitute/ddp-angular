@@ -1,6 +1,6 @@
 import { expect } from '@playwright/test';
 import { test } from 'fixtures/singular-fixture';
-import { NavSelectors } from 'pages/singular/navbar';
+import { NavSelectors } from 'dss/pages/singular/navbar';
 
 /**
  * Functional tests

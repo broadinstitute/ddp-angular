@@ -1,19 +1,19 @@
 import { expect } from '@playwright/test';
 import { test } from 'fixtures/pancan-fixture';
-import DashboardPage from 'pages/pancan/dashboard-page';
-import MedicalReleaseFormPage from 'pages/pancan/enrollment/medical-release-form-page';
-import SurveyAboutCancer from 'pages/pancan/enrollment/survey-about-cancer-page';
-import SurveyAboutYou from 'pages/survey-about-you';
-import HomePage from 'pages/pancan/home-page';
+import DashboardPage from 'dss/pages/pancan/dashboard-page';
+import MedicalReleaseFormPage from 'dss/pages/pancan/enrollment/medical-release-form-page';
+import SurveyAboutCancer from 'dss/pages/pancan/enrollment/survey-about-cancer-page';
+import SurveyAboutYou from 'dss/pages/survey-about-you';
+import HomePage from 'dss/pages/pancan/home-page';
 import { generateUserName } from 'utils/faker-utils';
 import * as user from 'data/fake-user.json';
-import PreScreeningPage from 'pages/pancan/enrollment/pre-screeening-page';
-import PreScreeningDiagnosisPage from 'pages/pancan/enrollment/pre-screening-diagnosis-page';
-import PreScreeningAgeLocationPage from 'pages/pancan/enrollment/pre-screening-age-location-page';
-import { PatientsData } from 'pages/patient-type';
+import PreScreeningPage from 'dss/pages/pancan/enrollment/pre-screeening-page';
+import PreScreeningDiagnosisPage from 'dss/pages/pancan/enrollment/pre-screening-diagnosis-page';
+import PreScreeningAgeLocationPage from 'dss/pages/pancan/enrollment/pre-screening-age-location-page';
+import { PatientsData } from 'dss/pages/patient-type';
 import * as auth from 'authentication/auth-pancan';
 import { assertActivityHeader, assertActivityStep } from 'utils/assertion-helper';
-import ConsentFormPage from 'pages/pancan/enrollment/consent-form-page';
+import ConsentFormPage from 'dss/pages/pancan/enrollment/consent-form-page';
 
 const { PANCAN_USER_EMAIL, PANCAN_USER_PASSWORD } = process.env;
 

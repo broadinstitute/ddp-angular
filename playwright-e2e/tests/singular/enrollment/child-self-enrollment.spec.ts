@@ -1,6 +1,6 @@
 import { expect } from '@playwright/test';
 import { test } from 'fixtures/singular-fixture';
-import PreScreeningPage from 'pages/singular/enrollment/pre-screening-page';
+import PreScreeningPage from 'dss/pages/singular/enrollment/pre-screening-page';
 import * as user from 'data/fake-user.json';
 
 test.describe.skip('Child Enrollment', () => {
