@@ -18,5 +18,5 @@ export enum FamilyMember {
     MATERNAL_UNCLE = 'Maternal Uncle',
     PATERNAL_AUNT = 'Paternal Aunt',
     PATERNAL_FIRST_COUSIN = 'Paternal First Cousin',
-    PATERNAL_UNCLE = 'Paternal_Uncle'
+    PATERNAL_UNCLE = 'Paternal Uncle'
 }
