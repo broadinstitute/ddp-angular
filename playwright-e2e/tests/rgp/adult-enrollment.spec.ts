@@ -305,6 +305,11 @@ test.describe.serial('Adult Self Enrollment', () => {
     await expect(familyIDFromSubjectID).toEqual(proband.familyID);
     await expect(familyIDFromFamilyMemberTab).toEqual(proband.familyID);
 
+    //Prep for checking note content  in Participant Info later on
+    const importantNotesTextarea = proband.getImportantNotes();
+    const processNotesTextarea = proband.getProcessNotes();
+    const mixedRaceTextarea = proband.getMixedRaceNotes();
+
     //Confirm that input entered in Important Notes and Process Notes is saved
     await proband.inputImportantNotes('Testing notes here - Important Notes');
     await proband.inputProcessNotes('Testing notes here - Process Notes');
@@ -367,20 +372,15 @@ test.describe.serial('Adult Self Enrollment', () => {
     await dropdownOptions.filter({ hasText: 'Not Hispanic' }).click();
 
     await proband.inputMixedRaceNotes('Testing notes here - Mixed Race Notes');
+    await mixedRaceTextarea.blur(); //This blur action is needed to make sure automated input stays for later verification - lessens but does not get totally rid of flakiness
 
     //Verify that the input to Important Notes, Process Notes, Mixed Race Notes has been saved even when page is re-visited
-    const familyAccount = new RgpParticipantPage(page);
-
     const importantNotes = await proband.getImportantNotesContent();
-    const importantNotesTextarea = proband.getImportantNotes();
-
     const processNotes = await proband.getProcessNotesContent();
-    const processNotesTextarea = proband.getProcessNotes();
-
     const mixedRaceNotes = await proband.getMixedRaceNotesContent();
-    const mixedRaceTextarea = proband.getMixedRaceNotes();
 
     //Go back to Participant List and refresh using Reload with Default Filters
+    const familyAccount = new RgpParticipantPage(page);
     await familyAccount.backToList();
     participantListPage.filters.reloadWithDefaultFilters;
     await participantListPage.filterListByParticipantGUID(user.patient.participantGuid);
