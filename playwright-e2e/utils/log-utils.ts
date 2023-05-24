@@ -1,6 +1,6 @@
 import { test } from '@playwright/test';
 
-export function logParticpantCreated(participantEmail: string, participantName: string) {
+export function logParticipantCreated(participantEmail: string, participantName: string) {
   test.info().annotations.push({
     type: 'participant',
     description: `${participantEmail} ${participantName}`

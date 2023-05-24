@@ -702,16 +702,10 @@ jobs:
       - run:
           name: Running Playwright tests
           working_directory: *playwright_path
-          command: |
-            echo 'Study: ' << parameters.test_suite >>
-            if [ << parameters.test_suite >> == "UNKNOWN" ]; then
-              # Grep all E2E tests
-              npx playwright test --list | grep -o 'tests/.*.spec.ts' > e2e_tests.txt
-            else
-              # Grep E2E tests for this study.
-              npx playwright test --list -g @<< parameters.test_suite >> | grep -o 'tests/.*.spec.ts' > e2e_tests.txt
-            fi
+          command: |            
+            npx playwright test --list | grep -o 'tests/.*.spec.ts' | sort | uniq > e2e_tests.txt
             TESTS_FILE=$(circleci tests split --split-by=timings --timings-type=classname e2e_tests.txt)
+            echo $TESTS_FILE
             npm run test:ci $TESTS_FILE
           no_output_timeout: 3m # Default is 10m. Set shorter time to ensure CI fails faster if test hangs
       - store_test_results:
@@ -776,7 +770,7 @@ parameters:
     default: false
   e2e-test-parallelism:
     type: integer
-    default: 1
+    default: 2
   scheduled-playwright:
     type: boolean
     default: false

@@ -1,15 +1,15 @@
 import { expect, Page } from '@playwright/test';
 import { test } from 'fixtures/angio-fixture';
-import DashboardPage from 'pages/angio/dashboard-page';
-import MedicalReleaseForm from 'pages/angio/enrollment/medical-release-form-page';
-import HomePage from 'pages/angio/home-page';
-import CountMeInPage, { DESCRIBE_SELF } from 'pages/angio/enrollment/count-me-in-page';
+import DashboardPage from 'dss/pages/angio/dashboard-page';
+import MedicalReleaseForm from 'dss/pages/angio/enrollment/medical-release-form-page';
+import HomePage from 'dss/pages/angio/home-page';
+import CountMeInPage, { DESCRIBE_SELF } from 'dss/pages/angio/enrollment/count-me-in-page';
 import * as user from 'data/fake-user.json';
 import { generateUserName } from 'utils/faker-utils';
 import * as auth from 'authentication/auth-angio';
-import AboutYouPage from 'pages/angio/enrollment/about-you-page';
+import AboutYouPage from 'dss/pages/angio/enrollment/about-you-page';
 import { MONTH } from 'data/constants';
-import ResearchConsentPage from 'pages/angio/enrollment/research-consent-page';
+import ResearchConsentPage from 'dss/pages/angio/enrollment/research-consent-page';
 
 const { ANGIO_USER_EMAIL, ANGIO_USER_PASSWORD } = process.env;
 

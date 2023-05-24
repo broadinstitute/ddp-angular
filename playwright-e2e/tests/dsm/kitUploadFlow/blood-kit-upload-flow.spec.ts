@@ -1,32 +1,32 @@
 import {test} from '@playwright/test';
-import {WelcomePage} from 'pages/dsm/welcome-page';
-import HomePage from 'pages/dsm/home-page';
-import {Navigation} from 'lib/component/dsm/navigation/navigation';
+import {WelcomePage} from 'dsm/pages/welcome-page';
+import HomePage from 'dsm/pages/home-page';
+import {Navigation} from 'dsm/component/navigation/navigation';
 import {login} from 'authentication/auth-dsm';
-import {StudyEnum} from 'lib/component/dsm/navigation/enums/selectStudyNav-enum';
-import ParticipantListPage from 'pages/dsm/participantList-page';
-import {StudyNavEnum} from 'lib/component/dsm/navigation/enums/studyNav-enum';
-import ParticipantPage from 'pages/dsm/participant-page/participant-page';
-import {KitUploadInfo} from 'pages/dsm/kitUpload-page/models/kitUpload-model';
-import ContactInformationTab from 'lib/component/dsm/tabs/contactInformationTab';
-import {TabEnum} from 'lib/component/dsm/tabs/enums/tab-enum';
-import {SamplesNavEnum} from 'lib/component/dsm/navigation/enums/samplesNav-enum';
-import {KitTypeEnum} from 'lib/component/dsm/kitType/enums/kitType-enum';
-import KitUploadPage from 'pages/dsm/kitUpload-page/kitUpload-page';
-import InitialScanPage from 'pages/dsm/scanner-pages/initialScan-page';
-import FinalScanPage from 'pages/dsm/scanner-pages/finalScan-page';
+import {StudyEnum} from 'dsm/component/navigation/enums/selectStudyNav-enum';
+import ParticipantListPage from 'dsm/pages/participant-list-page';
+import {StudyNavEnum} from 'dsm/component/navigation/enums/studyNav-enum';
+import ParticipantPage from 'dsm/pages/participant-page/participant-page';
+import {KitUploadInfo} from 'dsm/pages/kitUpload-page/models/kitUpload-model';
+import ContactInformationTab from 'dsm/component/tabs/contactInformationTab';
+import {TabEnum} from 'dsm/component/tabs/enums/tab-enum';
+import {SamplesNavEnum} from 'dsm/component/navigation/enums/samplesNav-enum';
+import {KitTypeEnum} from 'dsm/component/kitType/enums/kitType-enum';
+import KitUploadPage from 'dsm/pages/kitUpload-page/kitUpload-page';
+import InitialScanPage from 'dsm/pages/scanner-pages/initialScan-page';
+import FinalScanPage from 'dsm/pages/scanner-pages/finalScan-page';
 import crypto from 'crypto';
-import SampleInformationTab from 'lib/component/dsm/tabs/sampleInformationTab';
-import {SampleInfoEnum} from 'lib/component/dsm/tabs/enums/sampleInfo-enum';
-import {SampleStatusEnum} from 'lib/component/dsm/tabs/enums/sampleStatus-enum';
-import KitsWithoutLabelPage from 'pages/dsm/kitsInfo-pages/kitsWithoutLabel-page';
-import {KitsColumnsEnum} from 'pages/dsm/kitsInfo-pages/enums/kitsColumns-enum';
-import KitsSentPage from 'pages/dsm/kitsInfo-pages/kitsSentPage';
-import KitsReceivedPage from 'pages/dsm/kitsInfo-pages/kitsReceived-page/kitsReceivedPage';
-import TrackingScanPage from 'pages/dsm/scanner-pages/trackingScan-page';
+import SampleInformationTab from 'dsm/component/tabs/sampleInformationTab';
+import {SampleInfoEnum} from 'dsm/component/tabs/enums/sampleInfo-enum';
+import {SampleStatusEnum} from 'dsm/component/tabs/enums/sampleStatus-enum';
+import KitsWithoutLabelPage from 'dsm/pages/kitsInfo-pages/kitsWithoutLabel-page';
+import {KitsColumnsEnum} from 'dsm/pages/kitsInfo-pages/enums/kitsColumns-enum';
+import KitsSentPage from 'dsm/pages/kitsInfo-pages/kitsSentPage';
+import KitsReceivedPage from 'dsm/pages/kitsInfo-pages/kitsReceived-page/kitsReceivedPage';
+import TrackingScanPage from 'dsm/pages/scanner-pages/trackingScan-page';
 
 
-test.describe.parallel('Blood Kits upload flow', () => {
+test.describe('Blood Kits upload flow', () => {
   let welcomePage: WelcomePage;
   let homePage: HomePage;
   let navigation: Navigation;
@@ -36,6 +36,8 @@ test.describe.parallel('Blood Kits upload flow', () => {
   let kitLabel: string;
   let trackingLabel: string;
   let shippingID: string;
+
+  let testResultDir: string;
 
   const studies = [StudyEnum.OSTEO2];
   const kitType = KitTypeEnum.BLOOD;
@@ -49,7 +51,9 @@ test.describe.parallel('Blood Kits upload flow', () => {
   });
 
   for (const study of studies) {
-    test(`Should upload a single kit for one participant @functional @visual @dsm @${study}`, async () => {
+    test(`Should upload a single kit for one participant @functional @visual @dsm @${study}`, async ({page}, testInfo) => {
+      testResultDir = testInfo.outputDir;
+
       await welcomePage.selectStudy(study);
       await homePage.assertWelcomeTitle();
       await homePage.assertSelectedStudyTitle(study);
@@ -112,7 +116,7 @@ test.describe.parallel('Blood Kits upload flow', () => {
       await kitUploadPage.assertBrowseBtn();
       await kitUploadPage.assertUploadKitsBtn();
       await kitUploadPage.assertInstructionSnapshot();
-      await kitUploadPage.uploadFile(kitType, [kitUploadInfo], study);
+      await kitUploadPage.uploadFile(kitType, [kitUploadInfo], study, testResultDir);
 
       // initial scan
       const initialScanPage = await navigation.selectFromSamples<InitialScanPage>(SamplesNavEnum.INITIAL_SCAN);

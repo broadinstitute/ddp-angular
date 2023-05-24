@@ -4,10 +4,10 @@ import * as auth from 'authentication/auth-base';
 import { generateEmailAlias, generateUserName } from 'utils/faker-utils';
 import * as utils from 'utils/test-utils';
 import * as email from 'utils/email-utils';
-import HomePage from 'pages/brain/home-page';
-import PrequalPage from 'pages/brain/prequal-page';
+import HomePage from 'dss/pages/brain/home-page';
+import PrequalPage from 'dss/pages/brain/prequal-page';
 
-import ResearchConsentPage from 'pages/brain/consent-page';
+import ResearchConsentPage from 'dss/pages/brain/consent-page';
 
 const { BRAIN_USER_EMAIL, BRAIN_USER_PASSWORD, MIN_EMAIL_WAIT_TIME, BRAIN_BASE_URL, SITE_PASSWORD } = process.env;
 

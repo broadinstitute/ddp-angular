@@ -1,9 +1,9 @@
 import { Page } from '@playwright/test';
 import * as auth from 'authentication/auth-singular';
 import { fixtureBase as base } from 'fixtures/fixture-base';
-import DashboardPage from 'pages/singular/dashboard-page';
-import PreScreeningPage from 'pages/singular/enrollment/pre-screening-page';
-import HomePage from 'pages/singular/home/home-page';
+import DashboardPage from 'dss/pages/singular/dashboard-page';
+import PreScreeningPage from 'dss/pages/singular/enrollment/pre-screening-page';
+import HomePage from 'dss/pages/singular/home/home-page';
 import { fillSitePassword } from 'utils/test-utils';
 
 const { SINGULAR_USER_EMAIL, SINGULAR_USER_PASSWORD } = process.env;
