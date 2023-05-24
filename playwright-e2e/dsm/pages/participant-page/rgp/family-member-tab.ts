@@ -1,5 +1,5 @@
 import { Locator, Page } from '@playwright/test';
-import { FamilyMember } from 'lib/component/dsm/study/rgp/enums/familyMember.enum';
+import { FamilyMember } from 'dsm/component/tabs/enums/familyMember-enum';
 
 /**
  * Captures the webelements that can be interacted with for RGP Family Members
