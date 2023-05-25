@@ -714,6 +714,26 @@ test.describe.serial('Adult Self Enrollment', () => {
 
     const successfullyAddedFamilyMemberMessage = rgpParticipantPage.getAddFamilyMemberSuccessfulMessage();
     await expect(successfullyAddedFamilyMemberMessage).toBeVisible();
+
+    await page.keyboard.press('Escape'); //Press Escape key to close the 'Successfully Added Family Member' dialog
+    await expect(successfullyAddedFamilyMemberMessage).not.toBeVisible();
+
+    //Check that the newly added family member has the same family id as the proband - check added due to non-prod bug that occurs occassionaly
+    const maternalGrandFatherFamilyMemberTab = testMaternalGrandfather.getFamilyMemberTab();
+    await maternalGrandFatherFamilyMemberTab.scrollIntoViewIfNeeded();
+    await expect(maternalGrandFatherFamilyMemberTab).toBeVisible();
+
+    const maternalGrandfatherFamilyID = testMaternalGrandfather.getFamilyIDFromFamilyMemberTab();
+
+    //Setup to check the existing proband information
+    const proband = new FamilyMemberTab(page, FamilyMember.PROBAND);
+    proband.relationshipID = '3';
+
+    const probandFamilyMemberTab = proband.getFamilyMemberTab();
+    await expect(probandFamilyMemberTab).toBeVisible();
+    const probandFamilyID = proband.getFamilyIDFromFamilyMemberTab();
+
+    expect(maternalGrandfatherFamilyID).toEqual(probandFamilyID);
   })
 
   test('Verify that a family member can be added using copied proband info @rgp @functional', async ({ page, request }) => {
@@ -768,10 +788,12 @@ test.describe.serial('Adult Self Enrollment', () => {
 
     const successfullyAddedFamilyMemberMessage = rgpParticipantPage.getAddFamilyMemberSuccessfulMessage();
     await expect(successfullyAddedFamilyMemberMessage).toBeVisible();
+    await page.keyboard.press('Escape'); //Press Escape key to close the 'Successfully Added Family Member' dialog
 
     /** Verify that family member info is similar to proband (expect for first name, last name, relationship id & relation to proband)
     *   Initial verification tactic - check that the fields present in RGP default filter are the same upon creating copied family member (except those listed above) i.e.:
     *   Family ID, Date of Birth, Age Today, Preferred Language, Affected Status, Phone (Primary), Preferred Email, Acceptance Status, Acceptance Status Date, Enrollment Date
     **/
+    await expect(successfullyAddedFamilyMemberMessage).not.toBeVisible();
   });
 });

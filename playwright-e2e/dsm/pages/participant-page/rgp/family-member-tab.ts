@@ -94,7 +94,7 @@ export default class FamilyMemberTab {
      * @returns locator for a family member's tab
      */
     public getFamilyMemberTab(): Locator {
-        return this.page.locator(`//li//a[contains(., 'RGP') and contains(., '${this.relationshipID}')]`);
+        return this.page.locator(`//li//a[contains(., 'RGP') and contains(., '_${this.relationshipID}')]`);
     }
 
     public getJumpToMenuText(): Locator {
