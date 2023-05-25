@@ -1,9 +1,9 @@
 import { expect, Page } from '@playwright/test';
 import { test } from 'fixtures/singular-fixture';
 import * as auth from 'authentication/auth-singular';
-import PreScreeningPage from 'pages/singular/enrollment/pre-screening-page';
-import DashboardPage from 'pages/singular/dashboard-page';
-import EnrollMyAdultDependentPage from 'pages/singular/enrollment/enroll-my-adult-dependent-page';
+import PreScreeningPage from 'dss/pages/singular/enrollment/pre-screening-page';
+import DashboardPage from 'dss/pages/singular/dashboard-page';
+import EnrollMyAdultDependentPage from 'dss/pages/singular/enrollment/enroll-my-adult-dependent-page';
 import { WHO } from 'data/constants';
 
 const { SINGULAR_USER_EMAIL, SINGULAR_USER_PASSWORD } = process.env;

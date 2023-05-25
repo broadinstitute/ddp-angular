@@ -2,11 +2,11 @@ import { expect } from '@playwright/test';
 import * as auth from 'authentication/auth-osteo';
 import * as user from 'data/fake-user.json';
 import { test } from 'fixtures/osteo-fixture';
-import GetStartedPage from 'pages/osteo/get-started-page';
-import HomePage from 'pages/osteo/home-page';
+import GetStartedPage from 'dss/pages/osteo/get-started-page';
+import HomePage from 'dss/pages/osteo/home-page';
 import { assertActivityHeader } from 'utils/assertion-helper';
 import { generateUserName } from 'utils/faker-utils';
-import { logParticpantCreated } from 'utils/log-utils';
+import { logParticipantCreated } from 'utils/log-utils';
 // import { checkUserReceivedEmails } from 'utils/email-utils';
 
 const { OSTEO_USER_EMAIL, OSTEO_USER_PASSWORD } = process.env;
@@ -36,7 +36,7 @@ test('Osteo enroll kid @osteo', async ({ page }) => {
     email: OSTEO_USER_EMAIL,
     password: OSTEO_USER_PASSWORD
   });
-  logParticpantCreated(userEmail, childFullName);
+  logParticipantCreated(userEmail, childFullName);
 
   await assertActivityHeader(page, 'Research Consent Form');
 

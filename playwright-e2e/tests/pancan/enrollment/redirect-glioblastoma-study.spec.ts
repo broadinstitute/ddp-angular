@@ -1,10 +1,10 @@
 import { expect } from '@playwright/test';
 import { test } from 'fixtures/pancan-fixture';
-import Modal from 'lib/component/modal';
-import PreScreeningDiagnosisPage from 'pages/pancan/enrollment/pre-screening-diagnosis-page';
-import PreScreeningPage from 'pages/pancan/enrollment/pre-screeening-page';
-import { PatientsData } from 'pages/patient-type';
-import HomePage from 'pages/pancan/home-page';
+import Modal from 'dss/component/modal';
+import PreScreeningDiagnosisPage from 'dss/pages/pancan/enrollment/pre-screening-diagnosis-page';
+import PreScreeningPage from 'dss/pages/pancan/enrollment/pre-screeening-page';
+import { PatientsData } from 'dss/pages/patient-type';
+import HomePage from 'dss/pages/pancan/home-page';
 import { assertHeader } from 'utils/assertion-helper';
 import { fillSitePassword } from 'utils/test-utils';
 
