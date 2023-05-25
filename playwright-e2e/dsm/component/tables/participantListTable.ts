@@ -1,8 +1,8 @@
 import { Locator, Page } from '@playwright/test';
 import Table from 'dss/component/table';
 import ParticipantPage from 'dsm/pages/participant-page/participant-page';
-import {ParticipantsListPaginator} from "lib/component/dsm/paginators/participantsListPaginator";
-import {rows} from "lib/component/dsm/paginators/types/rowsPerPage";
+import {ParticipantsListPaginator} from 'lib/component/dsm/paginators/participantsListPaginator';
+import {rows} from 'lib/component/dsm/paginators/types/rowsPerPage';
 
 export class ParticipantListTable extends Table {
   private readonly _participantPage: ParticipantPage = new ParticipantPage(this.page);
