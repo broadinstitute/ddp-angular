@@ -1084,6 +1084,12 @@ participant.data.dsm['diagnosisYear'] != null">
               </div>
             </tab>
 
+            <tab  heading="Shared Learnings">
+              <legend class="Group--Title">
+                <app-shared-learnings-upload></app-shared-learnings-upload>
+              </legend>
+            </tab>
+
           <ng-container *ngIf="settings | dynamicFormTypeAndStudyRGP; else groupForm">
             <ng-container *ngFor="let relative of participant.participantData">
               <!--RGP tabs from fieldSettings-->
