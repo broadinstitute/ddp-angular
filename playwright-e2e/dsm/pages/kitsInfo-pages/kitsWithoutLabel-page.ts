@@ -2,7 +2,7 @@ import {expect, Locator, Page} from '@playwright/test';
 import {KitType} from 'dsm/component/kitType/kitType';
 import {KitTypeEnum} from 'dsm/component/kitType/enums/kitType-enum';
 import {waitForNoSpinner, waitForResponse} from 'utils/test-utils';
-import {KitsTable} from 'dsm/component/tables/kitsTable';
+import {KitsTable} from 'dsm/component/tables/kits-table';
 import {KitsColumnsEnum} from 'dsm/pages/kitsInfo-pages/enums/kitsColumns-enum';
 import {assertTableHeaders} from 'utils/assertion-helper';
 import {rows} from 'lib/component/dsm/paginators/types/rowsPerPage';

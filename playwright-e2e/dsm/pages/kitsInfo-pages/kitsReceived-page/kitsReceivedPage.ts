@@ -1,5 +1,5 @@
 import {KitType} from 'dsm/component/kitType/kitType';
-import {KitsTable} from 'dsm/component/tables/kitsTable';
+import {KitsTable} from 'dsm/component/tables/kits-table';
 import {APIRequestContext, expect, Page} from '@playwright/test';
 import {KitTypeEnum} from 'dsm/component/kitType/enums/kitType-enum';
 import {waitForNoSpinner, waitForResponse} from 'utils/test-utils';

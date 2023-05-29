@@ -1,6 +1,6 @@
 import {expect, Page} from '@playwright/test';
 import {KitType} from 'dsm/component/kitType/kitType';
-import {KitsTable} from 'dsm/component/tables/kitsTable';
+import {KitsTable} from 'dsm/component/tables/kits-table';
 import {KitTypeEnum} from 'dsm/component/kitType/enums/kitType-enum';
 import {waitForNoSpinner, waitForResponse} from 'utils/test-utils';
 import {KitsColumnsEnum} from 'dsm/pages/kitsInfo-pages/enums/kitsColumns-enum';

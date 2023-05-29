@@ -61,7 +61,7 @@ export class ParticipantListTable extends Table {
 
   /* Locators */
   public get rowsCount(): Promise<number> {
-    return this.page.locator(this.rowsXPath).count();
+    return this.getRowsCount();
   }
 
   /* XPaths */

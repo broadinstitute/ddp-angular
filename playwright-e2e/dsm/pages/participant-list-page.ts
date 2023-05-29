@@ -5,7 +5,7 @@ import { Navigation } from 'dsm/component/navigation/navigation';
 import { WelcomePage } from 'dsm/pages/welcome-page';
 import { waitForNoSpinner, waitForResponse } from 'utils/test-utils';
 import { Filters } from 'dsm/component/filters/filters';
-import { ParticipantListTable } from 'dsm/component/tables/participantListTable';
+import { ParticipantListTable } from 'dsm/component/tables/participant-list-table';
 
 export default class ParticipantListPage {
   private readonly PAGE_TITLE: string = 'Participant List';
