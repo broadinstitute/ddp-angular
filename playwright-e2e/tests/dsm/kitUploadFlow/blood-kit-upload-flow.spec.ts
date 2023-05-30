@@ -25,7 +25,7 @@ import KitsSentPage from 'dsm/pages/kitsInfo-pages/kitsSentPage';
 import KitsReceivedPage from 'dsm/pages/kitsInfo-pages/kitsReceived-page/kitsReceivedPage';
 import TrackingScanPage from 'dsm/pages/scanner-pages/trackingScan-page';
 
-
+// don't run in parallel
 test.describe('Blood Kits upload flow', () => {
   let welcomePage: WelcomePage;
   let homePage: HomePage;
