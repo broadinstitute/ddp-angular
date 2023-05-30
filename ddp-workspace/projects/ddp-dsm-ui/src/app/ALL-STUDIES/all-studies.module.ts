@@ -141,7 +141,7 @@ import {ScannerComponent} from '../scanner/scanner.component';
 import {SharedLearningsUploadComponent} from "../sharedLearningUpload/sharedLearningsUpload.component";
 import {MatListModule} from "@angular/material/list";
 import {MatPaginatorModule} from "@angular/material/paginator";
-import {BrowseFileComponent} from "../sharedLearningUpload/components/browseFile/browseFile.component";
+import {UploadFileComponent} from "../sharedLearningUpload/components/uploadFile/uploadFile.component";
 import {FilesTableComponent} from "../sharedLearningUpload/components/filesTable/filesTable.component";
 
 
@@ -241,8 +241,8 @@ PlotlyModule.plotlyjs = PlotlyJS;
     KeyValuePairPipe,
     ScannerComponent,
     SharedLearningsUploadComponent,
-    BrowseFileComponent,
-    FilesTableComponent
+    UploadFileComponent,
+    FilesTableComponent,
   ],
   imports: [
     CommonModule,

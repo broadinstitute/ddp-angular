@@ -23,7 +23,15 @@ main {
         width: 50%;
       }
     }
+
+    &.files {
+      .spinner {
+        width: 100%;
+        @include common.flexContainer(center, center);
+      }
+    }
   }
+
 }
 
 

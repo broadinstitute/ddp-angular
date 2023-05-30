@@ -11,20 +11,21 @@ import {SharedLearningsHTTPService} from "../../services/sharedLearningsHTTP.ser
 import {Subscription} from "rxjs";
 import {finalize} from "rxjs/operators";
 import {UploadButtonText, UploadStatus} from "../../enums/browseFile-enums";
+import {MatDialog} from "@angular/material/dialog";
+import {LoadingModalComponent} from "../../../modals/loading-modal.component";
 
 @Component({
   selector: 'app-browse-files',
-  templateUrl: `browseFile.component.html`,
-  styleUrls: ['browseFile.component.scss'],
+  templateUrl: `uploadFile.component.html`,
+  styleUrls: ['uploadFile.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class BrowseFileComponent implements OnDestroy {
+export class UploadFileComponent implements OnDestroy {
   @ViewChild('hiddenInput', {static: true}) inputElement: ElementRef<HTMLInputElement>;
   @ViewChild('uploadButton') uploadButton: ElementRef<HTMLButtonElement>;
 
   public selectedFileName = 'No File';
   public uploadButtonText = UploadButtonText.UPLOAD;
-  public isLoading: boolean = false;
   public isFileSelected: boolean = false;
   public uploadStatus: UploadStatus = UploadStatus.NONE;
 
@@ -33,10 +34,11 @@ export class BrowseFileComponent implements OnDestroy {
   @Output() fileUploaded = new EventEmitter<SharedLearningsFile>()
 
   constructor(private readonly cdr: ChangeDetectorRef,
-              private readonly sharedLearningsHTTPService: SharedLearningsHTTPService) {
+              private readonly sharedLearningsHTTPService: SharedLearningsHTTPService,
+              private readonly matDialog: MatDialog) {
   }
 
-  ngOnDestroy(): void {
+  public ngOnDestroy(): void {
     this.subscription?.unsubscribe()
   }
 
@@ -48,12 +50,14 @@ export class BrowseFileComponent implements OnDestroy {
     const files: FileList = this.inputElement.nativeElement.files;
     const file: File = files.item(0);
     this.cdr.markForCheck();
-    this.isLoading = true
     this.updateUploadButton(UploadStatus.IN_PROGRESS);
+
+    const openLoadingDialog = this.matDialog.open(LoadingModalComponent,
+      {data: {message: `${file.name} is uploading. Please wait...`}, disableClose: true});
 
     this.subscription = this.sharedLearningsHTTPService
       .uploadFile(file)
-      .pipe(finalize(() => this.isLoading = false))
+      .pipe(finalize(() => openLoadingDialog.close()))
       .subscribe({
         next: () => {
           this.updateUploadButton(UploadStatus.SUCCESS);
@@ -62,6 +66,7 @@ export class BrowseFileComponent implements OnDestroy {
             uploadDate: new Date()
           })
         }, error: () => {
+          this.cdr.markForCheck();
           this.updateUploadButton(UploadStatus.FAIL);
         }
       })

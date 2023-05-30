@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {delay,Observable, of} from "rxjs";
+import {delay, Observable, of} from "rxjs";
 import {SharedLearningsFile} from "../interfaces/sharedLearningsFile";
 
 @Injectable()

@@ -6,6 +6,15 @@
     <p>This file will be made available to the participant</p>
   </section>
   <section class="files">
-    <app-files-table [uploadedFiles]="sharedLearningsFiles"></app-files-table>
+    <ng-container *ngIf="!isLoading; else spinner" >
+      <app-files-table [uploadedFiles]="sharedLearningsFiles"></app-files-table>
+    </ng-container>
   </section>
 </main>
+
+
+<ng-template #spinner>
+  <div class="spinner">
+    <mat-spinner></mat-spinner>
+  </div>
+</ng-template>
