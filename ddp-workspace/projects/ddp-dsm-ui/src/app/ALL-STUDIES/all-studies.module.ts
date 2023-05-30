@@ -142,6 +142,7 @@ import {SharedLearningsUploadComponent} from "../sharedLearningUpload/sharedLear
 import {MatListModule} from "@angular/material/list";
 import {MatPaginatorModule} from "@angular/material/paginator";
 import {BrowseFileComponent} from "../sharedLearningUpload/components/browseFile/browseFile.component";
+import {FilesTableComponent} from "../sharedLearningUpload/components/filesTable/filesTable.component";
 
 
 PlotlyModule.plotlyjs = PlotlyJS;
@@ -240,7 +241,8 @@ PlotlyModule.plotlyjs = PlotlyJS;
     KeyValuePairPipe,
     ScannerComponent,
     SharedLearningsUploadComponent,
-    BrowseFileComponent
+    BrowseFileComponent,
+    FilesTableComponent
   ],
   imports: [
     CommonModule,

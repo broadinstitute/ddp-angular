@@ -2,27 +2,15 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
-  ElementRef, EventEmitter,
+  ElementRef, EventEmitter, OnDestroy,
   Output,
   ViewChild
 } from "@angular/core";
 import {SharedLearningsFile} from "../../interfaces/sharedLearningsFile";
-
-enum UploadButtonText {
-  UPLOAD = 'Upload',
-  UPLOAD_SUCCESS = 'Uploaded',
-  UPLOAD_FAIL = 'Upload failed',
-  UPLOAD_IN_PROGRESS = 'Uploading...',
-  UPLOAD_RETRY = 'Retry'
-}
-
-enum UploadStatus {
-  NONE,
-  SUCCESS,
-  FAIL,
-  IN_PROGRESS,
-  RETRY
-}
+import {SharedLearningsHTTPService} from "../../services/sharedLearningsHTTP.service";
+import {Subscription} from "rxjs";
+import {finalize} from "rxjs/operators";
+import {UploadButtonText, UploadStatus} from "../../enums/browseFile-enums";
 
 @Component({
   selector: 'app-browse-files',
@@ -30,7 +18,7 @@ enum UploadStatus {
   styleUrls: ['browseFile.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class BrowseFileComponent {
+export class BrowseFileComponent implements OnDestroy {
   @ViewChild('hiddenInput', {static: true}) inputElement: ElementRef<HTMLInputElement>;
   @ViewChild('uploadButton') uploadButton: ElementRef<HTMLButtonElement>;
 
@@ -40,44 +28,48 @@ export class BrowseFileComponent {
   public isFileSelected: boolean = false;
   public uploadStatus: UploadStatus = UploadStatus.NONE;
 
+  private subscription: Subscription;
+
   @Output() fileUploaded = new EventEmitter<SharedLearningsFile>()
 
-  constructor(private cdf: ChangeDetectorRef) {}
+  constructor(private readonly cdr: ChangeDetectorRef,
+              private readonly sharedLearningsHTTPService: SharedLearningsHTTPService) {
+  }
 
+  ngOnDestroy(): void {
+    this.subscription?.unsubscribe()
+  }
 
   public browse(): void {
     this.inputElement.nativeElement.click()
   }
 
-  public upload() {
+  public upload(): void {
     const files: FileList = this.inputElement.nativeElement.files;
     const file: File = files.item(0);
-    this.cdf.markForCheck();
+    this.cdr.markForCheck();
     this.isLoading = true
-    console.log(file)
-    /**
-     * @TODO integrate backend call
-     */
-
     this.updateUploadButton(UploadStatus.IN_PROGRESS);
-    setTimeout(() => {
-      this.cdf.markForCheck();
-      this.isLoading = false
-      let random = Math.floor(Math.random() * 2)
-      this.updateUploadButton(!random ? UploadStatus.FAIL : UploadStatus.SUCCESS);
-      if(this.uploadStatus === UploadStatus.SUCCESS) {
-        this.fileUploaded.emit({
-          name: file.name,
-          uploadDate: new Date()
-        })
-      }
-    }, 3000)
+
+    this.subscription = this.sharedLearningsHTTPService
+      .uploadFile(file)
+      .pipe(finalize(() => this.isLoading = false))
+      .subscribe({
+        next: () => {
+          this.updateUploadButton(UploadStatus.SUCCESS);
+          this.fileUploaded.emit({
+            name: file.name,
+            uploadDate: new Date()
+          })
+        }, error: () => {
+          this.updateUploadButton(UploadStatus.FAIL);
+        }
+      })
   }
 
   public onFileSelection(event: Event) {
-    this.cdf.markForCheck();
     const files: FileList = (event.target as HTMLInputElement).files;
-    if(files.length) {
+    if (files.length) {
       this.selectedFileName &&= this.displayFileName(files.item(0).name);
       this.isFileSelected = true;
       this.uploadStatus = UploadStatus.NONE;
@@ -86,7 +78,7 @@ export class BrowseFileComponent {
   }
 
   public retryOrNot(isMouseOver: boolean): void {
-    if(this.uploadStatus === UploadStatus.FAIL || this.uploadStatus === UploadStatus.RETRY) {
+    if (this.uploadStatus === UploadStatus.FAIL || this.uploadStatus === UploadStatus.RETRY) {
       const currentStatus = isMouseOver ? UploadStatus.RETRY : UploadStatus.FAIL;
       this.updateUploadButton(currentStatus);
     }
@@ -101,7 +93,7 @@ export class BrowseFileComponent {
   }
 
   private updateUploadButton(uploadStatus: UploadStatus) {
-    switch(uploadStatus) {
+    switch (uploadStatus) {
       case  UploadStatus.SUCCESS:
         this.uploadStatus = UploadStatus.SUCCESS;
         this.uploadButtonText = UploadButtonText.UPLOAD_SUCCESS;

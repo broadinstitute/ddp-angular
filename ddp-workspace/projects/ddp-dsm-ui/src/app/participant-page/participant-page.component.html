@@ -1084,9 +1084,9 @@ participant.data.dsm['diagnosisYear'] != null">
               </div>
             </tab>
 
-            <tab  heading="Shared Learnings">
+            <tab (selectTab)="sharedLearningsTabSelected()" heading="Shared Learnings">
               <legend class="Group--Title">
-                <app-shared-learnings-upload></app-shared-learnings-upload>
+                <app-shared-learnings-upload [tabActivated]="sharedLearningsTabSubject.asObservable()"></app-shared-learnings-upload>
               </legend>
             </tab>
 

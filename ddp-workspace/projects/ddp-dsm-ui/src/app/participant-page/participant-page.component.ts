@@ -2,7 +2,7 @@ import {AfterViewChecked, Component, EventEmitter, Input, OnDestroy, OnInit, Out
 import {MatDialog} from '@angular/material/dialog';
 import {TabDirective} from 'ngx-bootstrap/tabs';
 import {ActivatedRoute, Router} from '@angular/router';
-import {mergeMap, Subscription} from 'rxjs';
+import {mergeMap, Subject, Subscription} from 'rxjs';
 import {ActivityDefinition} from '../activity-data/models/activity-definition.model';
 import {FieldSettings} from '../field-settings/field-settings.model';
 import {ESFile} from '../participant-list/models/file.model';
@@ -69,6 +69,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
   @Output() leaveParticipant = new EventEmitter();
   @Output('ngModelChange') update = new EventEmitter();
 
+  public sharedLearningsTabSubject = new Subject<void>();
   participantExited = true;
   participantNotConsented = true;
 
@@ -167,6 +168,10 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
         this.leaveParticipant.emit(null);
       }
     });
+  }
+
+  public sharedLearningsTabSelected() {
+    this.sharedLearningsTabSubject.next();
   }
 
 

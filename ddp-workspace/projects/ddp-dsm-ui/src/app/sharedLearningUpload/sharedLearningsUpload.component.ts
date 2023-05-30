@@ -1,28 +1,43 @@
-import {ChangeDetectionStrategy, Component, ViewChild} from "@angular/core";
+import {
+  ChangeDetectionStrategy,
+  Component, Input, OnDestroy, OnInit,
+} from "@angular/core";
 import {SharedLearningsFile} from "./interfaces/sharedLearningsFile";
-import {delay, Observable, of} from "rxjs";
-import {MatTable} from "@angular/material/table";
+import {EMPTY, iif, Observable, Subscription, switchMap, tap} from "rxjs";
+import {SharedLearningsHTTPService} from "./services/sharedLearningsHTTP.service";
 
 @Component({
   selector: 'app-shared-learnings-upload',
   templateUrl: 'sharedLearningsUpload.component.html',
   styleUrls: ['sharedLearningsUpload.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [SharedLearningsHTTPService]
 })
-export class SharedLearningsUploadComponent {
-  @ViewChild(MatTable) table: MatTable<SharedLearningsFile>;
+export class SharedLearningsUploadComponent implements OnInit, OnDestroy {
+  @Input() tabActivated: Observable<void>;
+  public sharedLearningsFiles: SharedLearningsFile[];
+  private subscription: Subscription
 
-  public uploadedFiles: SharedLearningsFile[] = [];
-  public isUploadedFilesDataLoading = false;
-  public readonly columnNames: string[] = ['Name', 'DateUploaded'];
-
-  constructor() {
+  constructor(private readonly sharedLearningsHTTPService: SharedLearningsHTTPService) {
   }
 
-  public onFileUpload(file: SharedLearningsFile) {
-    console.log(file, 'FILE_UPLOADED')
-    this.uploadedFiles.push(file)
-    this.table.renderRows();
+  ngOnInit(): void {
+    this.subscription = this.getFiles.subscribe();
+  }
+
+  ngOnDestroy(): void {
+    this.subscription?.unsubscribe();
+  }
+
+  public onFileUpload(file: SharedLearningsFile): void {
+    this.sharedLearningsFiles = [...this.sharedLearningsFiles, file]
+  }
+
+  private get getFiles(): Observable<any> {
+    return this.tabActivated.pipe(
+      switchMap(() => iif(() => !this.sharedLearningsFiles, this.sharedLearningsHTTPService.tempFiles, EMPTY)),
+      tap((files: SharedLearningsFile[]) => this.sharedLearningsFiles = files)
+    )
   }
 
 }
