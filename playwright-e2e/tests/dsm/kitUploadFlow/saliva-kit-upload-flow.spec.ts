@@ -24,7 +24,7 @@ import {KitsColumnsEnum} from 'dsm/pages/kitsInfo-pages/enums/kitsColumns-enum';
 import KitsSentPage from 'dsm/pages/kitsInfo-pages/kitsSentPage';
 import KitsReceivedPage from 'dsm/pages/kitsInfo-pages/kitsReceived-page/kitsReceivedPage';
 
-
+// don't run in parallel
 test.describe('Saliva Kits upload flow', () => {
   let welcomePage: WelcomePage;
   let homePage: HomePage;

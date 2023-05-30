@@ -25,7 +25,7 @@ import KitsSentPage from 'dsm/pages/kitsInfo-pages/kitsSentPage';
 import KitsReceivedPage from 'dsm/pages/kitsInfo-pages/kitsReceived-page/kitsReceivedPage';
 import TrackingScanPage from 'dsm/pages/scanner-pages/trackingScan-page';
 
-
+// don't run in parallel
 test.describe('Blood Kits upload flow', () => {
   let welcomePage: WelcomePage;
   let homePage: HomePage;
@@ -69,11 +69,16 @@ test.describe('Blood Kits upload flow', () => {
       await customizeViewPanel.selectColumns('Sample Columns', [normalCollaboratorSampleID]);
 
       let testParticipantIndex = 0;
-      for (let count = 0; count < 10; count++) {
+      let participantsRowsCount = await participantListTable.rowsCount;
+      for (let count = 0; count < participantsRowsCount; count++) {
         const textData = await participantListTable.getParticipantDataAt(count, normalCollaboratorSampleID);
         if (textData.split('\n').length < 28) {
           testParticipantIndex = count;
           break;
+        }
+        if (count === participantsRowsCount - 1) {
+          await participantListTable.nextPage();
+          participantsRowsCount = await participantListTable.rowsCount;
         }
       }
 
