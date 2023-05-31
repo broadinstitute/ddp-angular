@@ -44,8 +44,8 @@ export default class KitsSentPage {
     await this.kitsTable.searchBy(columnName, value);
   }
 
-  public async getData(columnName: KitsColumnsEnum): Promise<string> {
-    return await this.kitsTable.getData(columnName);
+  public getData(columnName: KitsColumnsEnum): Promise<string> {
+    return this.kitsTable.getData(columnName);
   }
 
   /* Assertions */

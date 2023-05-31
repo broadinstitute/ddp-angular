@@ -23,6 +23,7 @@ import KitsWithoutLabelPage from 'dsm/pages/kitsInfo-pages/kitsWithoutLabel-page
 import {KitsColumnsEnum} from 'dsm/pages/kitsInfo-pages/enums/kitsColumns-enum';
 import KitsSentPage from 'dsm/pages/kitsInfo-pages/kitsSentPage';
 import KitsReceivedPage from 'dsm/pages/kitsInfo-pages/kitsReceived-page/kitsReceivedPage';
+import {SampleTypesEnum} from "dsm/pages/kitsInfo-pages/enums/sampleTypes-enum";
 
 // don't run in parallel
 test.describe('Saliva Kits upload flow', () => {
@@ -150,6 +151,8 @@ test.describe('Saliva Kits upload flow', () => {
       await kitsSentPage.assertTableHeader();
       await kitsSentPage.search(KitsColumnsEnum.MF_CODE, kitLabel);
       await kitsSentPage.assertDisplayedRowsCount(1);
+      study === StudyEnum.OSTEO2 && await sampleTypeCheck(kitUploadInfo, kitsSentPage);
+
 
       // kits received page
       const kitsReceivedPage = await navigation.selectFromSamples<KitsReceivedPage>(SamplesNavEnum.RECEIVED);
@@ -163,6 +166,7 @@ test.describe('Saliva Kits upload flow', () => {
       await kitsReceivedPage.search(KitsColumnsEnum.MF_CODE, kitLabel);
       await kitsReceivedPage.assertDisplayedRowsCount(1);
       const receivedDate = await kitsReceivedPage.getData(KitsColumnsEnum.RECEIVED);
+      study === StudyEnum.OSTEO2 && await sampleTypeCheck(kitUploadInfo, kitsReceivedPage);
 
       // checks if the uploaded kit is displayed on the participant's page, in the sample information tab
       await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
@@ -182,3 +186,17 @@ test.describe('Saliva Kits upload flow', () => {
     })
   }
 })
+
+/**
+ *
+ * @param kitUploadInfo
+ * @param sentOrReceivedPage
+ *
+ */
+async function sampleTypeCheck(kitUploadInfo: KitUploadInfo, sentOrReceivedPage: KitsSentPage | KitsReceivedPage):
+  Promise<void > {
+  const sampleType = await sentOrReceivedPage.getData(KitsColumnsEnum.SAMPLE_TYPE);
+  const {country, state} = kitUploadInfo;
+  const isResearchKit = (country === 'US' && state === 'NY') || country === 'CA';
+  expect(sampleType.trim()).toBe(isResearchKit ? SampleTypesEnum.RESEARCH : SampleTypesEnum.CLINICAL)
+}
