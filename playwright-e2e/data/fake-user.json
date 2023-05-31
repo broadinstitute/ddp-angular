@@ -5,6 +5,7 @@
     "lastName": "Playwright",
     "fullName": "E2E Tester Playwright",
     "participantGuid": "",
+    "relationshipID": "3",
     "birthDate": {
       "MM": "10",
       "DD": "02",
@@ -26,6 +27,15 @@
     "zip": "02142-1027",
     "phone": "6177147000",
     "secondaryPhoneNumber": "6171234000"
+  }, 
+  "maternalGrandfather": {
+    "firstName": "Test Maternal Grandfather",
+    "lastName": "Playwright",
+    "relationshipID": "20"
+  }, "brother": {
+    "firstName": "Test Brother",
+    "lastName": "Playwright",
+    "relationshipID": "10"
   },
   "doctor": {
     "name": "John Strange",

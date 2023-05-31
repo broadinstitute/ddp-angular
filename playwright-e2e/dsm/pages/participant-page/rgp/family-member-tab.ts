@@ -90,10 +90,11 @@ export default class FamilyMemberTab {
     /* Locators */
 
     /**
-     * Uses the relationshipID to find the tab to be returned, must be ran only after setting the relationshipID
+     * Uses the relationshipID to find the family member tab to be returned, must be ran only after setting the relationshipID
      * @returns locator for a family member's tab
      */
     public getFamilyMemberTab(): Locator {
+        //todo Needs a better general locator - the last contains could capture more webelements than intended once family id is in 3,000's
         return this.page.locator(`//li//a[contains(., 'RGP') and contains(., '_${this.relationshipID}')]`);
     }
 
@@ -150,7 +151,7 @@ export default class FamilyMemberTab {
      * @param notes the notes to be inputted
      */
     public async inputImportantNotes(notes: string): Promise<void> {
-        await this.page.getByPlaceholder('Important Notes').fill(`${notes}`);
+        await this.page.locator("//textarea[contains(@data-placeholder, 'Important Notes')]").fill(`${notes}`);
     }
 
     /**
@@ -158,7 +159,7 @@ export default class FamilyMemberTab {
      * @returns contents of the Important Notes textarea
      */
     public async getImportantNotesContent(): Promise<string> {
-        const content = (await this.page.getByPlaceholder('Important Notes').inputValue()).toString();
+        const content = (await this.page.locator("//textarea[contains(@data-placeholder, 'Important Notes')]").inputValue()).toString();
         return content;
     }
 
@@ -167,7 +168,7 @@ export default class FamilyMemberTab {
      * @returns Important Notes textarea locator
      */
     public getImportantNotes(): Locator {
-        return this.page.getByPlaceholder('Important Notes');
+        return this.page.locator("//textarea[contains(@data-placeholder, 'Important Notes')]");
     }
 
     /**
@@ -175,7 +176,7 @@ export default class FamilyMemberTab {
      * @param notes the notes to be inputted
      */
     public async inputProcessNotes(notes: string): Promise<void> {
-        await this.page.getByPlaceholder('Process Notes').fill(`${notes}`);
+        await this.page.locator("//textarea[contains(@data-placeholder, 'Process Notes')]").fill(`${notes}`);
     }
 
     /**
@@ -183,7 +184,7 @@ export default class FamilyMemberTab {
      * @returns contents of the Process Notes textarea
      */
     public async getProcessNotesContent(): Promise<string> {
-        const content = (await this.page.getByPlaceholder('Process Notes').inputValue()).toString();
+        const content = (await this.page.locator("//textarea[contains(@data-placeholder, 'Process Notes')]").inputValue()).toString();
         return content;
     }
 
@@ -192,7 +193,7 @@ export default class FamilyMemberTab {
      * @returns Process Notes textarea locator
      */
     public getProcessNotes(): Locator {
-        return this.page.getByPlaceholder('Process Notes');
+        return this.page.locator("//textarea[contains(@data-placeholder, 'Process Notes')]");
     }
 
     public getFirstName(): Locator {
@@ -271,7 +272,10 @@ export default class FamilyMemberTab {
      * @param notes the notes to be inputted
      */
     public async inputMixedRaceNotes(notes: string): Promise<void> {
-        await this.page.getByPlaceholder('Mixed Race Notes').fill(`${notes}`);
+        const responsePromise = this.page.waitForResponse('**/ui/patch');
+        await this.page.locator("//textarea[contains(@data-placeholder, 'Mixed Race Notes')]").fill(`${notes}`);
+        await this.page.locator("//textarea[contains(@data-placeholder, 'Mixed Race Notes')]").blur();
+        const response = await responsePromise;
     }
 
     /**
@@ -279,7 +283,7 @@ export default class FamilyMemberTab {
      * @returns contents of the Mixed Race Notes textarea
      */
     public async getMixedRaceNotesContent(): Promise<string> {
-        const content = (await this.page.getByPlaceholder('Mixed Race Notes').inputValue()).toString();
+        const content = (await this.page.locator("//textarea[contains(@data-placeholder, 'Mixed Race Notes')]").inputValue()).toString();
         return content;
     }
 
@@ -288,7 +292,7 @@ export default class FamilyMemberTab {
      * @returns Mixed Race Notes textarea locator
      */
     public getMixedRaceNotes(): Locator {
-        return this.page.getByPlaceholder('Mixed Race Notes');
+        return this.page.locator("//textarea[contains(@data-placeholder, 'Mixed Race Notes')]");
     }
 
     public getContactInfoSection(): Locator {
@@ -380,7 +384,7 @@ export default class FamilyMemberTab {
     }
 
     public async inputConsentingNotes(notes: string): Promise<void> {
-        await this.page.getByPlaceholder('Consenting Notes').fill(`${notes}`);
+        await this.page.locator("//textarea[contains(@data-placeholder, 'Consenting Notes')]").fill(`${notes}`);
     }
 
     /**
@@ -418,7 +422,7 @@ export default class FamilyMemberTab {
     }
 
     public async inputMedicalRecordsNotes(notes: string): Promise<void> {
-        await this.page.getByPlaceholder('Medical Records Notes').fill(`${notes}`);
+        await this.page.locator("//textarea[contains(@data-placeholder, 'Medical Records Notes')]").fill(`${notes}`);
     }
 
     /**
@@ -446,7 +450,7 @@ export default class FamilyMemberTab {
     }
 
     public async inputReferralNotes(notes: string): Promise<void> {
-        await this.page.getByPlaceholder('Referral Notes').fill(`${notes}`);
+        await this.page.locator("//textarea[contains(@data-placeholder, 'Referral Notes')]").fill(`${notes}`);
     }
 
     public getReferringClinician(): Locator {
@@ -499,7 +503,7 @@ export default class FamilyMemberTab {
     }
 
     public async inputSampleNotes(notes: string): Promise<void> {
-        await this.page.getByPlaceholder('Sample Notes').fill('Testing notes here - Sample Notes');
+        await this.page.locator("//textarea[contains(@data-placeholder, 'Sample Notes')]").fill('Testing notes here - Sample Notes');
     }
 
     public getBloodSalivaProcessing(): Locator {
@@ -533,7 +537,7 @@ export default class FamilyMemberTab {
     }
 
     public async inputTissueNotes(notes: string): Promise<void> {
-        await this.page.getByPlaceholder('Tissue Notes').fill(`${notes}`);
+        await this.page.locator("//textarea[contains(@data-placeholder, 'Tissue Notes')]").fill(`${notes}`);
     }
 
     public getTissueTypeReceived(): Locator {
@@ -597,11 +601,11 @@ export default class FamilyMemberTab {
     }
 
     public async inputRorStatusNotes(notes: string): Promise<void> {
-        await this.page.getByPlaceholder('ROR Status/Notes').fill(`${notes}`);
+        await this.page.locator("//textarea[contains(@data-placeholder, 'ROR Status/Notes')]").fill(`${notes}`);
     }
 
     public async inputPostDisclosureNotes(notes: string): Promise<void> {
-        await this.page.getByPlaceholder('Post-disclosure notes').fill(`${notes}`);
+        await this.page.locator("//textarea[contains(@data-placeholder, 'Post-disclosure notes')]").fill(`${notes}`);
     }
 
     public getCollaboration(): Locator {
@@ -617,7 +621,7 @@ export default class FamilyMemberTab {
     }
 
     public async inputPublicationInfo(notes: string): Promise<void> {
-        await this.page.getByPlaceholder('Publication Info').fill(`${notes}`);
+        await this.page.locator("//textarea[contains(@data-placeholder, 'Publication Info')]").fill(`${notes}`);
     }
 
     public getSurveySection(): Locator {

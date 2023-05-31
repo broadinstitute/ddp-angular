@@ -32,6 +32,18 @@ export default class HomePage extends RgpPageBase implements HomePageInterface {
   }
 
   /**
+   * Returns the Sign In button
+   */
+  getSignInButton(): Locator {
+    return this.page.locator("//div[contains(@class, 'get-started-auth')]//button[contains(text(), 'Sign In')]");
+  }
+
+  async clickSignIn(): Promise<void> {
+    const button = this.getSignInButton();
+    await button.click();
+  }
+
+  /**
    * Log into RGP application
    * @param opts
    */
