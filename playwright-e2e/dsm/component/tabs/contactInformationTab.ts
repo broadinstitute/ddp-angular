@@ -45,7 +45,8 @@ export default class ContactInformationTab {
   }
 
   private async readInfoFor(key: ContactInfoEnum): Promise<string | null> {
-    return this.page.locator(this.getContactInfoXPath(key)).textContent();
+    const info = this.page.locator(this.getContactInfoXPath(key));
+    return await info.isVisible() ? await info.textContent() : null;
   }
 
   private split(value: string | null): string {

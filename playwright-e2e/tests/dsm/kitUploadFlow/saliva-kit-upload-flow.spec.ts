@@ -55,19 +55,35 @@ test.describe('Saliva Kits upload flow', () => {
       const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
       await participantListPage.assertPageTitle();
 
-      // find the participant that has not more than 14 samples
+      // find the right participant
       const customizeViewPanel = participantListPage.filters.customizeViewPanel;
       const participantListTable = participantListPage.participantListTable;
-      const normalCollaboratorSampleID = 'Normal Collaborator Sample ID';
+      const searchPanel = participantListPage.filters.searchPanel;
+      await searchPanel.open();
+      await searchPanel.checkboxes('Status', {checkboxValues: ['Enrolled']});
+      await searchPanel.search();
+
+      const normalCollaboratorSampleIDColumn = 'Normal Collaborator Sample ID';
+      const validColumn = 'Valid';
+
       await customizeViewPanel.open();
-      await customizeViewPanel.selectColumns('Sample Columns', [normalCollaboratorSampleID]);
+      await customizeViewPanel.selectColumns('Sample Columns', [normalCollaboratorSampleIDColumn]);
+      await customizeViewPanel.selectColumns('Contact Information Columns', [validColumn]);
 
       let testParticipantIndex = 0;
-      for (let count = 0; count < 10; count++) {
-        const textData = await participantListTable.getParticipantDataAt(count, normalCollaboratorSampleID);
-        if (textData.split('\n').length < 28) {
+      let participantsRowsCount = await participantListTable.rowsCount;
+
+      for (let count = 0; count < participantsRowsCount; count++) {
+        const normalCollaboratorSampleID = await participantListTable.getParticipantDataAt(count, normalCollaboratorSampleIDColumn);
+        const isAddressValid = await participantListTable.getParticipantDataAt(count, validColumn);
+        if (normalCollaboratorSampleID.split('\n').length < 28 &&
+          isAddressValid.trim().toLowerCase() === 'true') {
           testParticipantIndex = count;
           break;
+        }
+        if (count === participantsRowsCount - 1) {
+          await participantListTable.nextPage();
+          participantsRowsCount = await participantListTable.rowsCount;
         }
       }
 
@@ -89,11 +105,11 @@ test.describe('Saliva Kits upload flow', () => {
       // collects data from the contact information tab if the tab is available
       if (isContactInformationTabVisible) {
         const contactInformationTab = await participantPage.clickTab<ContactInformationTab>(TabEnum.CONTACT_INFORMATION);
-        kitUploadInfo.street1 = await contactInformationTab.getStreet1();
-        kitUploadInfo.city = await contactInformationTab.getCity();
-        kitUploadInfo.postalCode = await contactInformationTab.getZip();
-        kitUploadInfo.state = await contactInformationTab.getState();
-        kitUploadInfo.country = await contactInformationTab.getCountry();
+        kitUploadInfo.street1 = (await contactInformationTab.getStreet1()) || kitUploadInfo.street1;
+        kitUploadInfo.city = (await contactInformationTab.getCity()) || kitUploadInfo.city;
+        kitUploadInfo.postalCode = (await contactInformationTab.getZip()) || kitUploadInfo.postalCode;
+        kitUploadInfo.state = (await contactInformationTab.getState()) || kitUploadInfo.state;
+        kitUploadInfo.country = (await contactInformationTab.getCountry()) || kitUploadInfo.country;
       }
 
       // deactivate all kits for the participant
@@ -171,7 +187,7 @@ test.describe('Saliva Kits upload flow', () => {
       // checks if the uploaded kit is displayed on the participant's page, in the sample information tab
       await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
       await participantListPage.assertPageTitle();
-      const searchPanel = await participantListPage.filters.searchPanel;
+      await participantListPage.filters.searchPanel;
       await searchPanel.open();
       await searchPanel.text('Short ID', {textValue: shortID});
       await searchPanel.search();
