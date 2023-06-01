@@ -111,6 +111,7 @@ sdkConfig.usesVerticalStepper = [
     'DIET_LIFESTYLE',
 ];
 sdkConfig.alwaysShowQuestionsCountInModalNestedActivity = true;
+sdkConfig.updatePreferredLanguageForGovernedParticipants = true;
 
 export function translateFactory(translate: TranslateService,
     injector: Injector,
