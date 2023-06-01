@@ -66,22 +66,6 @@ export class ParticipantListComponent implements OnInit, OnDestroy {
     this.anchor.addNew(
       this.languageService
         .getProfileLanguageUpdateNotifier()
-        .pipe(
-          skipWhile(value => value === null),
-          // update the preferred language of all dependents/participants if it is required by configuration
-          filter(() => this.config.updatePreferredLanguageForGovernedParticipants && !!this.participants?.length),
-          mergeMap(() => {
-            const updatedParticipants = this.participants.map(participant => ({
-              guid: participant.guid,
-              profile: {
-                preferredLanguage: this.languageService.getCurrentLanguage()
-              } as UserProfile
-            }));
-            return forkJoin(
-              this.participantProfileService.updateParticipantProfiles(updatedParticipants)
-            );
-          })
-        )
         .subscribe(() => {
           this.isLoaded = false;
           this.getParticipants();

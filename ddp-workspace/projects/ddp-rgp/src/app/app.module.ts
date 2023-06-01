@@ -108,6 +108,7 @@ config.cloudLoggingUrl = DDP_ENV.cloudLoggingUrl;
 config.doCloudLogging = DDP_ENV.doCloudLogging;
 config.useBinaryLanguageSelector = true;
 config.reverseBinaryLanguageSelector = true;
+config.updatePreferredLanguageForGovernedParticipants = true;
 
 export function translateFactory(
   translate: TranslateService,
