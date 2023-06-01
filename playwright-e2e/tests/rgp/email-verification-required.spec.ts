@@ -1,9 +1,9 @@
 import { expect } from '@playwright/test';
 import * as auth from 'authentication/auth-rgp';
 import { test } from 'fixtures/rgp-fixture';
-import HowItWorksPage from 'pages/rgp/how-it-works-page';
-import TellUsYourStoryPage, { WHO } from 'pages/rgp/enrollment/tell-us-your-story-page';
-import HomePage from 'pages/rgp/home-page';
+import HowItWorksPage from 'dss/pages/rgp/how-it-works-page';
+import TellUsYourStoryPage, { WHO } from 'dss/pages/rgp/enrollment/tell-us-your-story-page';
+import HomePage from 'dss/pages/rgp/home-page';
 
 const { RGP_USER_EMAIL, RGP_USER_PASSWORD, RGP_BASE_URL } = process.env;
 

@@ -1,30 +1,31 @@
 import {expect, test} from '@playwright/test';
-import {WelcomePage} from 'pages/dsm/welcome-page';
-import HomePage from 'pages/dsm/home-page';
-import {Navigation} from 'lib/component/dsm/navigation/navigation';
+import {WelcomePage} from 'dsm/pages/welcome-page';
+import HomePage from 'dsm/pages/home-page';
+import {Navigation} from 'dsm/component/navigation/navigation';
 import {login} from 'authentication/auth-dsm';
-import {StudyEnum} from 'lib/component/dsm/navigation/enums/selectStudyNav-enum';
-import ParticipantListPage from 'pages/dsm/participant-list-page';
-import {StudyNavEnum} from 'lib/component/dsm/navigation/enums/studyNav-enum';
-import ParticipantPage from 'pages/dsm/participant-page/participant-page';
-import {KitUploadInfo} from 'pages/dsm/kitUpload-page/models/kitUpload-model';
-import ContactInformationTab from 'lib/component/dsm/tabs/contactInformationTab';
-import {TabEnum} from 'lib/component/dsm/tabs/enums/tab-enum';
-import {SamplesNavEnum} from 'lib/component/dsm/navigation/enums/samplesNav-enum';
-import {KitTypeEnum} from 'lib/component/dsm/kitType/enums/kitType-enum';
-import KitUploadPage from 'pages/dsm/kitUpload-page/kitUpload-page';
-import InitialScanPage from 'pages/dsm/scanner-pages/initialScan-page';
-import FinalScanPage from 'pages/dsm/scanner-pages/finalScan-page';
+import {StudyEnum} from 'dsm/component/navigation/enums/selectStudyNav-enum';
+import ParticipantListPage from 'dsm/pages/participant-list-page';
+import {StudyNavEnum} from 'dsm/component/navigation/enums/studyNav-enum';
+import ParticipantPage from 'dsm/pages/participant-page/participant-page';
+import {KitUploadInfo} from 'dsm/pages/kitUpload-page/models/kitUpload-model';
+import ContactInformationTab from 'dsm/component/tabs/contactInformationTab';
+import {TabEnum} from 'dsm/component/tabs/enums/tab-enum';
+import {SamplesNavEnum} from 'dsm/component/navigation/enums/samplesNav-enum';
+import {KitTypeEnum} from 'dsm/component/kitType/enums/kitType-enum';
+import KitUploadPage from 'dsm/pages/kitUpload-page/kitUpload-page';
+import InitialScanPage from 'dsm/pages/scanner-pages/initialScan-page';
+import FinalScanPage from 'dsm/pages/scanner-pages/finalScan-page';
 import crypto from 'crypto';
-import SampleInformationTab from 'lib/component/dsm/tabs/sampleInformationTab';
-import {SampleInfoEnum} from 'lib/component/dsm/tabs/enums/sampleInfo-enum';
-import {SampleStatusEnum} from 'lib/component/dsm/tabs/enums/sampleStatus-enum';
-import KitsWithoutLabelPage from 'pages/dsm/kitsInfo-pages/kitsWithoutLabel-page';
-import {KitsColumnsEnum} from 'pages/dsm/kitsInfo-pages/enums/kitsColumns-enum';
-import KitsSentPage from 'pages/dsm/kitsInfo-pages/kitsSentPage';
-import KitsReceivedPage from 'pages/dsm/kitsInfo-pages/kitsReceived-page/kitsReceivedPage';
+import SampleInformationTab from 'dsm/component/tabs/sampleInformationTab';
+import {SampleInfoEnum} from 'dsm/component/tabs/enums/sampleInfo-enum';
+import {SampleStatusEnum} from 'dsm/component/tabs/enums/sampleStatus-enum';
+import KitsWithoutLabelPage from 'dsm/pages/kitsInfo-pages/kitsWithoutLabel-page';
+import {KitsColumnsEnum} from 'dsm/pages/kitsInfo-pages/enums/kitsColumns-enum';
+import KitsSentPage from 'dsm/pages/kitsInfo-pages/kitsSentPage';
+import KitsReceivedPage from 'dsm/pages/kitsInfo-pages/kitsReceived-page/kitsReceivedPage';
+import {SampleTypesEnum} from 'dsm/pages/kitsInfo-pages/enums/sampleTypes-enum';
 
-
+// don't run in parallel
 test.describe('Saliva Kits upload flow', () => {
   let welcomePage: WelcomePage;
   let homePage: HomePage;
@@ -150,6 +151,8 @@ test.describe('Saliva Kits upload flow', () => {
       await kitsSentPage.assertTableHeader();
       await kitsSentPage.search(KitsColumnsEnum.MF_CODE, kitLabel);
       await kitsSentPage.assertDisplayedRowsCount(1);
+      study === StudyEnum.OSTEO2 && await sampleTypeCheck(kitUploadInfo, kitsSentPage);
+
 
       // kits received page
       const kitsReceivedPage = await navigation.selectFromSamples<KitsReceivedPage>(SamplesNavEnum.RECEIVED);
@@ -163,6 +166,7 @@ test.describe('Saliva Kits upload flow', () => {
       await kitsReceivedPage.search(KitsColumnsEnum.MF_CODE, kitLabel);
       await kitsReceivedPage.assertDisplayedRowsCount(1);
       const receivedDate = await kitsReceivedPage.getData(KitsColumnsEnum.RECEIVED);
+      study === StudyEnum.OSTEO2 && await sampleTypeCheck(kitUploadInfo, kitsReceivedPage);
 
       // checks if the uploaded kit is displayed on the participant's page, in the sample information tab
       await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
@@ -182,3 +186,17 @@ test.describe('Saliva Kits upload flow', () => {
     })
   }
 })
+
+/**
+ *
+ * @param kitUploadInfo
+ * @param sentOrReceivedPage
+ *
+ */
+async function sampleTypeCheck(kitUploadInfo: KitUploadInfo, sentOrReceivedPage: KitsSentPage | KitsReceivedPage):
+  Promise<void > {
+  const sampleType = await sentOrReceivedPage.getData(KitsColumnsEnum.SAMPLE_TYPE);
+  const {country, state} = kitUploadInfo;
+  const isResearchKit = (country === 'US' && state === 'NY') || country === 'CA';
+  expect(sampleType.trim()).toBe(isResearchKit ? SampleTypesEnum.RESEARCH : SampleTypesEnum.CLINICAL)
+}
