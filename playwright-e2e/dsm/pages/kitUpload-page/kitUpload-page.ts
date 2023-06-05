@@ -38,8 +38,10 @@ export default class KitUploadPage {
       }
     }
 
-    const path = `${dir}/${kitName}_${study}-${new Date().getTime()}.txt`;
-    createTextFileSync(path, this.T_HEAD + this.createKitUploadBody(kitInfo));
+    //const path = `${dir}/${kitName}_${study}-${new Date().getTime()}.txt`;
+    const path = `${dir}/`;
+    const fileName = `${kitName}_${study}-${new Date().getTime()}.txt`;
+    createTextFileSync(path, fileName, this.T_HEAD + this.createKitUploadBody(kitInfo));
     await this.fileInput.setInputFiles(path);
 
     await expect(this.uploadKitsBtn, 'Kit Upload page - Upload Kits button is disabled').toBeEnabled();

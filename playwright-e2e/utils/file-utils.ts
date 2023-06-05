@@ -1,4 +1,5 @@
-import fs from 'fs-extra';
+import fsextra from 'fs-extra';
+import fs from 'fs';
 import csv from 'csv-parser';
 
 export interface MailListCSV {
@@ -8,11 +9,12 @@ export interface MailListCSV {
   lastName?: string;
 }
 
-export function createTextFileSync(pathName: string, data: string) {
+export function createTextFileSync(pathName: string, fileName: string, data: string) {
   try {
-    fs.ensureDirSync(pathName);
-    console.log(`EnsureDirSync: ${pathName}`);
-    fs.writeFileSync(pathName, data);
+    fsextra.ensureDirSync(pathName);
+    console.log(`Pathname: ${pathName}`);
+    console.log(`Data in file: ${data}`);
+    fs.writeFileSync(`${pathName}/${fileName}`, data);
     console.log(`File: ${pathName} - created successfully`)
   } catch (error) {
     console.error(`Couldn't create the File: ${pathName}`);
