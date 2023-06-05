@@ -13,6 +13,7 @@ export function createTextFileSync(pathName: string, data: string) {
     fs.writeFileSync(pathName, data);
     console.log(`File: ${pathName} - created successfully`)
   } catch (error) {
+    console.log(`Error: ${error}`);
     console.error(`Couldn't create the File: ${pathName}`);
     throw error;
   }

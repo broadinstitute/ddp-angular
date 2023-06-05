@@ -11,8 +11,15 @@ import { StudyNavEnum } from 'dsm/component/navigation/enums/studyNav-enum';
 import FamilyMemberTab from 'dsm/pages/participant-page/rgp/family-member-tab';
 import { FamilyMember } from 'dsm/component/tabs/enums/familyMember-enum';
 import RgpParticipantPage from 'dsm/pages/participant-page/rgp/rgp-participant-page';
-import HomePage from 'dss/pages/rgp/home-page';
+import DSMHomePage from 'dsm/pages/home-page';
+import DSSHomePage from 'dss/pages/rgp/home-page';
 import DashboardPage from 'dss/pages/rgp/dashboard-page';
+import { WelcomePage } from 'dsm/pages/welcome-page';
+import KitUploadPage from 'dsm/pages/kitUpload-page/kitUpload-page';
+import {SamplesNavEnum} from 'dsm/component/navigation/enums/samplesNav-enum';
+import { KitUploadInfo } from 'dsm/pages/kitUpload-page/models/kitUpload-model';
+import {StudyEnum} from 'dsm/component/navigation/enums/selectStudyNav-enum';
+import { KitTypeEnum } from 'dsm/component/kitType/enums/kitType-enum';
 
 const { RGP_USER_PASSWORD } = process.env;
 const probandName = user.patient.firstName;
@@ -134,7 +141,8 @@ test('Verify the display and functionality of family account dynamic fields @fun
     const participantInfoSection = proband.getParticipantInfoSection();
     await participantInfoSection.click();
 
-    const subjectID = proband.getSubjectID(); //Subject ID is usually automatically filled out for the proband
+    const subjectID = proband.getSubjectID();
+    //Note: Subject ID is usually automatically filled out for the family members; proband at family account registration and family members after they are added
     await expect(subjectID).not.toBeEmpty();
 
     const familyID = proband.getFamilyID();
@@ -804,17 +812,72 @@ test('Verify the display and functionality of family account dynamic fields @fun
     expect(brotherMixedRaceNotes).toEqual(probandMixedRaceNotesContent);
   });
 
-  test('Verify that a blood and rna kit can be uploaded @rgp @functional', async ({ page, request }) => {
+  test('Verify that a blood and rna kit can be uploaded @rgp @functional', async ({ page, request}, testInfo) => {
+    const testResultDirectory = testInfo.outputDir;
+    console.log(`Directory: ${testResultDirectory}`);
+    let kitLabel: string;
+    let trackingLabel: string;
+    let shippingID: string;
+
+    const study = StudyEnum.RGP;
+    const kitType = KitTypeEnum.BLOOD_AND_RNA;
+    const expectedKitTypes = [KitTypeEnum.BLOOD, KitTypeEnum.BLOOD_AND_RNA]; //Later will be just Blood & RNA kit type for RGP
+
     //Go into DSM
     await login(page);
     const navigation = new Navigation(page, request);
 
     //select RGP study
     await new Select(page, { label: 'Select study' }).selectOption('RGP');
+
+    //Go to recently created playwright test participant to get their short id
+    const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
+    await participantListPage.assertPageTitle();
+    await participantListPage.waitForReady();
+
+    await participantListPage.filterListByParticipantGUID(user.patient.participantGuid);
+    await participantListPage.selectParticipant(user.patient.participantGuid);
+
+    //For RGP, the short id needed for the kit upload is the family member's subject id
+    const proband = new FamilyMemberTab(page, FamilyMember.PROBAND);
+    proband.relationshipID = user.patient.relationshipID;
+
+    const probandTab = proband.getFamilyMemberTab();
+    await expect(probandTab).toBeVisible();
+    await probandTab.click();
+    await expect(probandTab).toHaveClass('nav-link active');//Make sure the tab is in view and selected
+
+    const participantInfoSection = proband.getParticipantInfoSection();
+    await participantInfoSection.click();
+
+    const probandSubjectID = proband.getSubjectID();
+    await expect(probandSubjectID).not.toBeEmpty();
+    const shortID = await probandSubjectID.inputValue();
+    console.log(`Proband's subject ID: ${shortID}`);
+
+    //The rest of the kit upload information - RGP kits are by family member instead of by account - using the proband's info to make a kit
+    const kitUploadInfo = new KitUploadInfo(shortID, user.patient.firstName, user.patient.lastName);
+    kitUploadInfo.street1 = user.patient.streetAddress;
+    kitUploadInfo.city = user.patient.city;
+    kitUploadInfo.postalCode = user.patient.zip;
+    kitUploadInfo.state = user.patient.state.abbreviation;
+    kitUploadInfo.country = user.patient.country.abbreviation;
+
+    //Note: no blood kits are automatically created for RGP - so there's no need for preliminary deactivation of existing kits
+    //Upload a Blood & RNA kit
+    const kitUploadPage = await navigation.selectFromSamples<KitUploadPage>(SamplesNavEnum.KIT_UPLOAD);
+    await kitUploadPage.waitForLoad();
+    await kitUploadPage.assertPageTitle();
+    await kitUploadPage.assertDisplayedKitTypes(expectedKitTypes);
+    await kitUploadPage.selectKitType(kitType);
+    await kitUploadPage.assertBrowseBtn();
+    await kitUploadPage.assertUploadKitsBtn();
+    //await kitUploadPage.assertInstructionSnapshot();
+    await kitUploadPage.uploadFile(kitType, [kitUploadInfo], study, testResultDirectory);
   });
 
-  test.skip('Verify that messages are displayed in DSS dashboard due to DSM dynamic form updates @rgp @functional', async ({ page, request }) => {
-    const homePage = new HomePage(page);
+  test.skip('Verify that messages are displayed in DSS dashboard @rgp @functional', async ({ page, request }) => {
+    const homePage = new DSSHomePage(page);
     await homePage.clickSignIn();
 
     await auth.login(page, {email: rgpEmail, password: RGP_USER_PASSWORD });

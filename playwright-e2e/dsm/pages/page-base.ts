@@ -1,5 +1,5 @@
 import { Page } from '@playwright/test';
-import PageBase from 'pages/page-base';
+import PageBase from 'dss/pages/page-base';
 
 /**
  * Data Study Manager (DSM) page base

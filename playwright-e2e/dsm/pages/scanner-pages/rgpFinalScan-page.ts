@@ -8,6 +8,10 @@ export default class RgpFinalScanPage {
     constructor(private readonly page: Page) {}
 
     public async fillScanTrio(kitLabel: string, rna:string, dsmLabel: string, rowNumber: number): Promise<void> {
+        //First check if the number row is valid
+        const totalAmountOfRows = await this.getNumberOfScannableRows();
+        expect(rowNumber, 'RGP Final Scan Page: Checking entered row number is valid').toBeLessThanOrEqual(totalAmountOfRows);
+
         //Setup which row will be filled with info
         const kitLabelLocator = this.page.locator(`(//mat-form-field//input[contains(@data-placeholder, 'Kit Label')])[${rowNumber}]`);
         const rnaLocator = this.page.locator(`(//mat-form-field//input[contains(@data-placeholder, 'RNA')])[${rowNumber}]`);
