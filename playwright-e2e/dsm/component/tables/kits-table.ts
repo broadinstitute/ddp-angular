@@ -1,9 +1,21 @@
 import {expect, Locator, Page} from '@playwright/test';
 import {KitsColumnsEnum} from 'dsm/pages/kitsInfo-pages/enums/kitsColumns-enum';
+import {KitsPaginator} from 'lib/component/dsm/paginators/kitsPaginator';
+import {rows} from 'lib/component/dsm/paginators/types/rowsPerPage';
 
 
 export class KitsTable {
+  private readonly paginator = new KitsPaginator(this.page);
+
   constructor(private readonly page: Page) {}
+
+  public async goToPage(page: number): Promise<void> {
+    await this.paginator.pageAt(page);
+  }
+
+  public async rowsPerPage(rows: rows): Promise<void> {
+    await this.paginator.rowsPerPage(rows);
+  }
 
   public async searchBy(columnName: KitsColumnsEnum, value: string): Promise<void> {
     const column = this.column(columnName);

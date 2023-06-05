@@ -23,8 +23,9 @@ import KitsWithoutLabelPage from 'dsm/pages/kitsInfo-pages/kitsWithoutLabel-page
 import {KitsColumnsEnum} from 'dsm/pages/kitsInfo-pages/enums/kitsColumns-enum';
 import KitsSentPage from 'dsm/pages/kitsInfo-pages/kitsSentPage';
 import KitsReceivedPage from 'dsm/pages/kitsInfo-pages/kitsReceived-page/kitsReceivedPage';
+import {SampleTypesEnum} from 'dsm/pages/kitsInfo-pages/enums/sampleTypes-enum';
 
-
+// don't run in parallel
 test.describe('Saliva Kits upload flow', () => {
   let welcomePage: WelcomePage;
   let homePage: HomePage;
@@ -54,19 +55,35 @@ test.describe('Saliva Kits upload flow', () => {
       const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
       await participantListPage.assertPageTitle();
 
-      // find the participant that has not more than 14 samples
+      // find the right participant
       const customizeViewPanel = participantListPage.filters.customizeViewPanel;
       const participantListTable = participantListPage.participantListTable;
-      const normalCollaboratorSampleID = 'Normal Collaborator Sample ID';
+      const searchPanel = participantListPage.filters.searchPanel;
+      await searchPanel.open();
+      await searchPanel.checkboxes('Status', {checkboxValues: ['Enrolled']});
+      await searchPanel.search();
+
+      const normalCollaboratorSampleIDColumn = 'Normal Collaborator Sample ID';
+      const validColumn = 'Valid';
+
       await customizeViewPanel.open();
-      await customizeViewPanel.selectColumns('Sample Columns', [normalCollaboratorSampleID]);
+      await customizeViewPanel.selectColumns('Sample Columns', [normalCollaboratorSampleIDColumn]);
+      await customizeViewPanel.selectColumns('Contact Information Columns', [validColumn]);
 
       let testParticipantIndex = 0;
-      for (let count = 0; count < 10; count++) {
-        const textData = await participantListTable.getParticipantDataAt(count, normalCollaboratorSampleID);
-        if (textData.split('\n').length < 28) {
+      let participantsRowsCount = await participantListTable.rowsCount;
+
+      for (let count = 0; count < participantsRowsCount; count++) {
+        const normalCollaboratorSampleID = await participantListTable.getParticipantDataAt(count, normalCollaboratorSampleIDColumn);
+        const isAddressValid = await participantListTable.getParticipantDataAt(count, validColumn);
+        if (normalCollaboratorSampleID.split('\n').length < 28 &&
+          isAddressValid.trim().toLowerCase() === 'true') {
           testParticipantIndex = count;
           break;
+        }
+        if (count === participantsRowsCount - 1) {
+          await participantListTable.nextPage();
+          participantsRowsCount = await participantListTable.rowsCount;
         }
       }
 
@@ -88,11 +105,11 @@ test.describe('Saliva Kits upload flow', () => {
       // collects data from the contact information tab if the tab is available
       if (isContactInformationTabVisible) {
         const contactInformationTab = await participantPage.clickTab<ContactInformationTab>(TabEnum.CONTACT_INFORMATION);
-        kitUploadInfo.street1 = await contactInformationTab.getStreet1();
-        kitUploadInfo.city = await contactInformationTab.getCity();
-        kitUploadInfo.postalCode = await contactInformationTab.getZip();
-        kitUploadInfo.state = await contactInformationTab.getState();
-        kitUploadInfo.country = await contactInformationTab.getCountry();
+        kitUploadInfo.street1 = (await contactInformationTab.getStreet1()) || kitUploadInfo.street1;
+        kitUploadInfo.city = (await contactInformationTab.getCity()) || kitUploadInfo.city;
+        kitUploadInfo.postalCode = (await contactInformationTab.getZip()) || kitUploadInfo.postalCode;
+        kitUploadInfo.state = (await contactInformationTab.getState()) || kitUploadInfo.state;
+        kitUploadInfo.country = (await contactInformationTab.getCountry()) || kitUploadInfo.country;
       }
 
       // deactivate all kits for the participant
@@ -150,6 +167,8 @@ test.describe('Saliva Kits upload flow', () => {
       await kitsSentPage.assertTableHeader();
       await kitsSentPage.search(KitsColumnsEnum.MF_CODE, kitLabel);
       await kitsSentPage.assertDisplayedRowsCount(1);
+      study === StudyEnum.OSTEO2 && await sampleTypeCheck(kitUploadInfo, kitsSentPage);
+
 
       // kits received page
       const kitsReceivedPage = await navigation.selectFromSamples<KitsReceivedPage>(SamplesNavEnum.RECEIVED);
@@ -163,11 +182,12 @@ test.describe('Saliva Kits upload flow', () => {
       await kitsReceivedPage.search(KitsColumnsEnum.MF_CODE, kitLabel);
       await kitsReceivedPage.assertDisplayedRowsCount(1);
       const receivedDate = await kitsReceivedPage.getData(KitsColumnsEnum.RECEIVED);
+      study === StudyEnum.OSTEO2 && await sampleTypeCheck(kitUploadInfo, kitsReceivedPage);
 
       // checks if the uploaded kit is displayed on the participant's page, in the sample information tab
       await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
       await participantListPage.assertPageTitle();
-      const searchPanel = await participantListPage.filters.searchPanel;
+      await participantListPage.filters.searchPanel;
       await searchPanel.open();
       await searchPanel.text('Short ID', {textValue: shortID});
       await searchPanel.search();
@@ -182,3 +202,17 @@ test.describe('Saliva Kits upload flow', () => {
     })
   }
 })
+
+/**
+ *
+ * @param kitUploadInfo
+ * @param sentOrReceivedPage
+ *
+ */
+async function sampleTypeCheck(kitUploadInfo: KitUploadInfo, sentOrReceivedPage: KitsSentPage | KitsReceivedPage):
+  Promise<void > {
+  const sampleType = await sentOrReceivedPage.getData(KitsColumnsEnum.SAMPLE_TYPE);
+  const {country, state} = kitUploadInfo;
+  const isResearchKit = (country === 'US' && state === 'NY') || country === 'CA';
+  expect(sampleType.trim()).toBe(isResearchKit ? SampleTypesEnum.RESEARCH : SampleTypesEnum.CLINICAL)
+}

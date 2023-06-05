@@ -223,9 +223,8 @@
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let kitRequest of mf.data; let i = index">
-          <td *ngIf="getRole().allowedToHandleSamples() && (queueToPrint() || shippingPage === UPLOADED) && !kitType.externalShipper"
-              [ngClass]="{'highlight_sample': isResearchSample(kitRequest)}">
+        <tr *ngFor="let kitRequest of mf.data; let i = index" [ngClass]="{'highlight_sample': isResearchSample(kitRequest)}">
+          <td *ngIf="getRole().allowedToHandleSamples() && (queueToPrint() || shippingPage === UPLOADED) && !kitType.externalShipper">
             <!--            checkbox to select for printing label -->
             <ng-container *ngIf="(shippingPage === UPLOADED && kitRequest.labelDate === undefined) || queueToPrint()">
               <mat-checkbox color="primary" disableRipple
