@@ -14,7 +14,7 @@ export function createTextFileSync(pathName: string, fileName: string, data: str
     fsextra.ensureDirSync(pathName);
     console.log(`Pathname: ${pathName}`);
     console.log(`Data in file: ${data}`);
-    fs.writeFileSync(`${pathName}/${fileName}`, data);
+    fs.writeFileSync(`${pathName}/${fileName}`, 'Hello');
     console.log(`File: ${pathName} - created successfully`)
   } catch (error) {
     console.error(`Couldn't create the File: ${pathName}`);
