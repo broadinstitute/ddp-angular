@@ -109,7 +109,12 @@ test('Osteo enroll self and kid together @osteo', async ({ page }) => {
   await page.getByText('By completing this information, you are agreeing to allow us to contact these ph').click();
   await page.getByText('I have already read and signed the informed consent document for this study, whi').click();
   await page.getByLabel('Full Name').click();
-  await page.getByRole('combobox', { name: 'Full Name' }).fill('Playwright McTestsAlot');
+
+  const responsePromise = waitForResponse(page, { uri: '/answers'});
+  await Promise.all([
+    responsePromise,
+    page.getByRole('combobox', { name: 'Full Name' }).fill('Playwright McTestsAlot')
+  ]);
 
   await consentAssentPage.submit();
 

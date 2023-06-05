@@ -37,7 +37,7 @@ export class Search {
     }
 
     if (toValue instanceof Date) {
-      fromDate = new Intl.DateTimeFormat('en-US').format(toValue);
+      toDate = new Intl.DateTimeFormat('en-US').format(toValue);
     } else if (toValue && this.enUSDateRegExp.test(toValue)) {
       toDate = toValue;
     } else if (toValue && this.todayTextInDateRegExp.test(toValue)) {

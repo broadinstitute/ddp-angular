@@ -22,22 +22,23 @@ export default class Radiobutton extends WidgetBase {
     }
   }
 
-  async check(label: string | RegExp, opts?: { exact: boolean }): Promise<void> {
-    const isChecked = await this.isChecked(label, opts);
+  async check(label: string | RegExp): Promise<void> {
+    const isChecked = await this.isChecked(label);
     if (!isChecked) {
-      const radio = this.getRadiobuttonByLabel(label, opts);
+      const radio = this.getRadiobuttonByLabel(label);
       await radio.click();
       await expect(radio).toHaveClass(/radio-checked/);
     }
   }
 
-  private async isChecked(label: string | RegExp, opts?: { exact: boolean }): Promise<boolean> {
-    const isChecked = (await this.getRadiobuttonByLabel(label, opts).getAttribute('class'))?.includes('mat-radio-checked');
+  private async isChecked(label: string | RegExp): Promise<boolean> {
+    const isChecked = (await this.getRadiobuttonByLabel(label).getAttribute('class'))?.includes('mat-radio-checked');
     return isChecked ? isChecked : false;
   }
 
-  private getRadiobuttonByLabel(label: string | RegExp, opts?: { exact: boolean }): Locator {
-    return this.toLocator().locator('mat-radio-button')
-      .filter({ has: this.page.getByRole('radio', { name: label, exact: opts?.exact }) });
+  private getRadiobuttonByLabel(label: string | RegExp): Locator {
+    return this.toLocator()
+      .locator('mat-radio-button')
+      .filter({ hasText: label });
   }
 }
