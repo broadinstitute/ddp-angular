@@ -28,8 +28,17 @@ export default class KitUploadPage {
 
   public async uploadFile(kitType: KitTypeEnum, kitInfo: KitUploadInfo[], study: StudyEnum, testResultDir?: string) {
     const dir = testResultDir ? testResultDir : __dirname;
-    const path = `${dir}/${kitType}_${study}-${new Date().getTime()}.txt`;
-    console.log(`path: ${path}`);
+
+    let kitName = kitType.toString(); //Handle the kit name if it has more than 1 type for 1 kit i.e. RGP's 'Blood & RNA' kit
+    if (kitName.includes('&')) {
+      const kitNameParts = kitName.split('&');
+      kitName = '';
+      for (let index = 0; index < kitNameParts.length; index++) {
+        kitName += kitNameParts[index].trim();
+      }
+    }
+
+    const path = `${dir}/${kitName}_${study}-${new Date().getTime()}.txt`;
     createTextFileSync(path, this.T_HEAD + this.createKitUploadBody(kitInfo));
     await this.fileInput.setInputFiles(path);
 

@@ -812,7 +812,7 @@ test('Verify the display and functionality of family account dynamic fields @fun
     expect(brotherMixedRaceNotes).toEqual(probandMixedRaceNotesContent);
   });
 
-  test('Verify that a blood and rna kit can be uploaded @rgp @functional', async ({ page, request}, testInfo) => {
+  test('Verify that a blood rna kit can be uploaded @upload @rgp @functional', async ({ page, request}, testInfo) => {
     const testResultDirectory = testInfo.outputDir;
     console.log(`Directory: ${testResultDirectory}`);
     let kitLabel: string;
@@ -835,8 +835,8 @@ test('Verify the display and functionality of family account dynamic fields @fun
     await participantListPage.assertPageTitle();
     await participantListPage.waitForReady();
 
-    await participantListPage.filterListByParticipantGUID(user.patient.participantGuid);
-    await participantListPage.selectParticipant(user.patient.participantGuid);
+    await participantListPage.filterListByParticipantGUID('4FBXLRIXYU7DJQT7QZA0');
+    await participantListPage.selectParticipant('4FBXLRIXYU7DJQT7QZA0');
 
     //For RGP, the short id needed for the kit upload is the family member's subject id
     const proband = new FamilyMemberTab(page, FamilyMember.PROBAND);
