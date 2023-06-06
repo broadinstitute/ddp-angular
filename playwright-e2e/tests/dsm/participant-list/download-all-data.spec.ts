@@ -2,6 +2,7 @@ import { expect } from '@playwright/test';
 import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
 import { test } from 'fixtures/dsm-fixture';
+import fs from 'fs';
 import { assertParticipantListDownloadFileName } from 'utils/test-utils';
 
 test.describe.parallel('Participant List Download', () => {
@@ -16,11 +17,12 @@ test.describe.parallel('Participant List Download', () => {
       await participantListPage.selectAll();
 
       // Export as human-readable, Excel and include all completion of an activity
-      const download = await participantListPage.downloadParticipantList();
+      const download = await participantListPage.downloadParticipant();
       assertParticipantListDownloadFileName(download, study);
 
       const downloadedFile = await download.path();
       expect(downloadedFile).toBeTruthy();
+      expect((await fs.promises.stat(downloadedFile as string)).size).toBeGreaterThan(1000);
 
       // TODO unzip and check xlsx contents
     });

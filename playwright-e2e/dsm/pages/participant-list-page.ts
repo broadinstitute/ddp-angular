@@ -103,14 +103,22 @@ export default class ParticipantListPage {
     ]);
   }
 
-  public async downloadParticipantList(opts: {
+  /**
+   * Click Download button to download participant list.
+   * @param {{fileFormat?: FileFormatEnum, textFormat?: TextFormatEnum, includeCompletionOfActivity?: boolean, timeout?: number}} opts
+   * @returns {Promise<Download>}
+   */
+  public async downloadParticipant(opts: {
       fileFormat?: FileFormatEnum,
       textFormat?: TextFormatEnum,
       includeCompletionOfActivity?: boolean,
       timeout?: number
     } = {}): Promise<Download> {
     const {
-      fileFormat = FileFormatEnum.XLSX, textFormat = TextFormatEnum.HUMAN_READABLE, includeCompletionOfActivity = true, timeout = 2 * 60 * 1000
+      fileFormat = FileFormatEnum.XLSX,
+      textFormat = TextFormatEnum.HUMAN_READABLE,
+      includeCompletionOfActivity = true,
+      timeout = 2 * 60 * 1000
     } = opts;
 
     const button = this.page.locator('button').filter({has: this.page.locator('[data-icon="file-download"]')});

@@ -20,7 +20,7 @@ test.describe('Participant List Download', () => {
         await customizeViewPanel.selectColumns('Participant Columns', ['Participant ID']);
 
         // Export as human-readable, Excel and include all completion of an activity
-        const download = await participantListPage.downloadParticipantList();
+        const download = await participantListPage.downloadParticipant();
         assertParticipantListDownloadFileName(download, study);
 
         const downloadedFile = await download.path();
@@ -41,7 +41,7 @@ test.describe('Participant List Download', () => {
         await customizeViewPanel.selectColumns('Participant Columns', ['Participant ID']);
 
         // Export as analysis-friendly, tab-delimited and include all completion of an activity
-        const download = await participantListPage.downloadParticipantList({
+        const download = await participantListPage.downloadParticipant({
           fileFormat: FileFormatEnum.TSV,
           textFormat: TextFormatEnum.ANALYSIS_FRIENDLY
         });
