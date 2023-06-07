@@ -54,7 +54,7 @@ export class ActivitySectionComponent implements OnInit, OnDestroy {
         );
 
         this.downloadUrl$ = this.fileDownloadService
-            .getDownloadUrl(this.studyGuid, this.activityGuid, 'SHOW_RESULTS')
+            .getDownloadUrl(this.studyGuid, this.activityGuid, 'RESULT_FILE')
             .pipe(pluck('downloadUrl'));
     }
 
