@@ -1,16 +1,13 @@
 import { expect } from '@playwright/test';
-import { MiscellaneousEnum } from 'dsm/component/navigation/enums/miscellaneousNav-enum';
 import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
-import { Navigation } from 'dsm/component/navigation/navigation';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
-import { MainInfoEnum } from 'dsm/pages/participant-page/enums/main-info-enum';
 import ParticipantWithdrawalPage from 'dsm/pages/participant-withdrawal-page';
 import { SortOrder } from 'dss/component/table';
 import { test } from 'fixtures/dsm-fixture';
-import { waitForResponse } from 'utils/test-utils';
+import { assertTableHeaders } from 'utils/assertion-helper';
 
 test.describe('Participants Withdrawal', () => {
-  const studies = [StudyEnum.LMS, StudyEnum.OSTEO2];
+  const studies = [StudyEnum.LMS, StudyEnum.ANGIO];
 
   test(`In Test Boston @dsm @test_boston`, async ({ page, request }) => {
       const participantListPage = await ParticipantListPage.goto(page, StudyEnum.TEST_BOSTON, request);
@@ -37,6 +34,7 @@ test.describe('Participants Withdrawal', () => {
       // Sort Registration Date in ascending order to pick the oldest participant
       await participantsTable.sort('Registration Date', SortOrder.ASC);
 
+      // Select record on first row for withdrawal
       // First row Registration Date
       const registrationDateColumnIndex = await participantsTable.getHeaderIndex('Registration Date');
       const registrationDate = await participantsTable.cell(0, registrationDateColumnIndex).innerText();
@@ -44,11 +42,17 @@ test.describe('Participants Withdrawal', () => {
       const participantIdColumnIndex = await participantsTable.getHeaderIndex('Participant ID');
       const participantId = await participantsTable.cell(0, participantIdColumnIndex).innerText();
 
-      const withdrawalPage = new ParticipantWithdrawalPage(page);
-      await withdrawalPage.goto(request);
+      const withdrawalPage = await ParticipantWithdrawalPage.goto(page, request);
+      await withdrawalPage.withdrawParticipant(participantId);
 
-      await withdrawalPage.withdrawParticipantId(participantId);
+      const table = withdrawalPage.withdrewTable();
+      const headers = await table.getHeaderNames();
+      const orderedHeaders = ['DDP-Realm', 'Short ID', 'Participant ID', 'User', 'Date'];
+      assertTableHeaders(,orderedHeaders);
 
+      
+      expect(headers).toHaveLength(4); // Four columns in table
+      expect(headers).toEqual(orderedHeaders);
 
 
 
