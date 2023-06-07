@@ -2,21 +2,12 @@ import { APIRequestContext, Download, expect, Locator, Page } from '@playwright/
 import Modal from 'dsm/component/modal';
 import { StudyNavEnum } from 'dsm/component/navigation/enums/studyNav-enum';
 import { Navigation } from 'dsm/component/navigation/navigation';
+import { FileFormatEnum, TextFormatEnum } from 'dsm/pages/participant-page/enums/download-format-enum';
 import { WelcomePage } from 'dsm/pages/welcome-page';
 import Checkbox from 'dss/component/checkbox';
 import { waitForNoSpinner, waitForResponse } from 'utils/test-utils';
 import { Filters } from 'dsm/component/filters/filters';
 import { ParticipantListTable } from 'dsm/component/tables/participant-list-table';
-
-export enum FileFormatEnum {
-  XLSX = 'Excel (.xlsx)',
-  TSV = 'Tab-delimited (.tsv)'
-}
-
-export enum TextFormatEnum {
-  HUMAN_READABLE = 'Human-readable',
-  ANALYSIS_FRIENDLY = 'Analysis-friendly'
-}
 
 export default class ParticipantListPage {
   private readonly PAGE_TITLE: string = 'Participant List';
