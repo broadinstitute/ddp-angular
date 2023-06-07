@@ -281,9 +281,8 @@ export default abstract class PageBase implements PageInterface {
           resp.request().postDataJSON().zip === zipCode.toUpperCase()
         );
       }),
-      this.page.waitForResponse((resp) => {
-        return resp.request().method() === 'POST' && resp.url().includes('/address/verify') && resp.status() === 200;
-      })
+      this.page.waitForResponse((resp) => resp.request().method() === 'POST' && resp.url().includes('/address/verify') && resp.status() === 200,
+        { timeout: 30 * 1000 })
     ]);
     await mailAddressForm.toInput(labels.phone).fill(telephone.toString());
     // Wait for Address Suggestion card

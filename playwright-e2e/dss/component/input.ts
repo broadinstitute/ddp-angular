@@ -48,6 +48,7 @@ export default class Input extends WidgetBase {
       const expanded = await this.getAttribute('aria-expanded');
       if (autocomplete === 'list' && expanded === 'true') {
         const dropdown = this.page.locator('.mat-autocomplete-visible[role="listbox"][id]');
+        await dropdown.waitFor({ state: 'visible', timeout: 30 * 1000 });
         const dropdownOption = opts ? opts.dropdownOption : value as string;
           await dropdown
             .locator('[role="option"]') //, { has: this.page.locator(`span.mat-option-text:text("${dropdownOption}")`) })
