@@ -63,6 +63,8 @@
             [validationRequested]="validationRequested"
             [studyGuid]="studyGuid"
             [activityGuid]="activityGuid"
+            [activityCode]="model.activityCode"
+            [activityStatusCode]="model.statusCode"
             (embeddedComponentsValidationStatus)="updateEmbeddedComponentValidationStatus(1, $event)"
             (componentBusy)="embeddedComponentBusy$[1].next($event)"
           >

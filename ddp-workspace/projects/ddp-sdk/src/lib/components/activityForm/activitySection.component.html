@@ -25,19 +25,16 @@
                                    [activityGuid]="activityGuid">
             </ddp-conditional-block>
         </div>
-        <div *ngIf="shouldBlockBeShown(block, BlockType.Question) && block.stableId !== 'RESULT_FILE'">
+        <div *ngIf="shouldBlockBeShown(block, BlockType.Question)">
             <ddp-activity-question [block]="block"
+                                   [activityCode]="activityCode"
+                                   [activityStatusCode]="activityStatusCode"
                                    [readonly]="readonly || !block.enabled"
                                    [validationRequested]="validationRequested"
                                    [studyGuid]="studyGuid"
                                    [activityGuid]="activityGuid"
                                    (componentBusy)="componentBusy.emit($event)">
             </ddp-activity-question>
-        </div>
-        <div *ngIf="shouldBlockBeShown(block, BlockType.Question) && block.stableId === 'RESULT_FILE'">
-            <ddp-download-file [activityGuid]="activityGuid"
-                               [studyGuid]="studyGuid"
-                               [block]="block"></ddp-download-file>
         </div>
         <div *ngIf="shouldBlockBeShown(block, BlockType.Institution)">
             <ddp-institutions-form [block]="block"
@@ -91,3 +88,7 @@
                        [activityGuid]="activityGuid">
     </ddp-tabular-block>
 </div>
+
+<ng-container *ngIf="shouldDisplayDownloadButton">
+    <ddp-download-file [downloadURL]="downloadUrl$ | async"></ddp-download-file>
+</ng-container>

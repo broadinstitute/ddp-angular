@@ -227,6 +227,7 @@ import {
 } from './components/activityForm/answers/activity-equation-answer/activityEquationAnswer.component';
 import { TabularBlockComponent } from './components/activityForm/activity-blocks/tabularBlock/tabularBlock.component';
 import {DownloadFileComponent} from "./components/activityForm/activity-blocks/downloadFile.component";
+import {FileDownloadService} from "./services/fileDownload.service";
 
 
 export function jwtOptionsFactory(sessionService: SessionMementoService): object {
@@ -354,6 +355,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         StatisticsServiceAgent,
         ModalDialogService,
         FileUploadService,
+        FileDownloadService,
         InvitationPipe,
         FileAnswerMapperService,
         ParticipantsSearchServiceAgent,

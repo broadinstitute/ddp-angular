@@ -1,23 +1,17 @@
-import {
-    ChangeDetectorRef,
-    Component,
-    EventEmitter,
-    Inject,
-    Input,
-    OnDestroy,
-    OnInit,
-    Output
-} from '@angular/core';
-import { Subscription } from 'rxjs';
+import {ChangeDetectorRef, Component, EventEmitter, Inject, Input, OnDestroy, OnInit, Output} from '@angular/core';
+import {Observable, Subscription} from 'rxjs';
 
-import { ActivitySection } from '../../models/activity/activitySection';
-import { ActivityBlock } from '../../models/activity/activityBlock';
-import { BlockType } from '../../models/activity/blockType';
-import { BlockVisibility } from '../../models/activity/blockVisibility';
-import { ConfigurationService } from '../../services/configuration.service';
-import { ActivityActivityBlock } from '../../models/activity/activityActivityBlock';
-import { SubmissionManager } from '../../services/serviceAgents/submissionManager.service';
-import { ActivityInstance } from '../../models/activityInstance';
+import {ActivitySection} from '../../models/activity/activitySection';
+import {ActivityBlock} from '../../models/activity/activityBlock';
+import {BlockType} from '../../models/activity/blockType';
+import {BlockVisibility} from '../../models/activity/blockVisibility';
+import {ConfigurationService} from '../../services/configuration.service';
+import {ActivityActivityBlock} from '../../models/activity/activityActivityBlock';
+import {SubmissionManager} from '../../services/serviceAgents/submissionManager.service';
+import {ActivityInstance} from '../../models/activityInstance';
+import {ActivityQuestionBlock} from "../../models/activity/activityQuestionBlock";
+import {pluck} from "rxjs/operators";
+import {FileDownloadService} from "../../services/fileDownload.service";
 
 @Component({
     selector: 'ddp-activity-section',
@@ -29,8 +23,13 @@ export class ActivitySectionComponent implements OnInit, OnDestroy {
     @Input() public validationRequested = false;
     @Input() public studyGuid: string;
     @Input() public activityGuid: string;
+    @Input() public activityCode: string;
+    @Input() public activityStatusCode: string;
+
     @Output() embeddedComponentsValidationStatus: EventEmitter<boolean> = new EventEmitter();
     @Output() componentBusy: EventEmitter<boolean> = new EventEmitter(true);
+    public downloadUrl$: Observable<any>;
+
     private subscription: Subscription;
     private embeddedValidationStatus = new Map();
 
@@ -45,17 +44,29 @@ export class ActivitySectionComponent implements OnInit, OnDestroy {
 
     constructor(@Inject('ddp.config') public config: ConfigurationService,
                 private submissionManager: SubmissionManager,
-                private readonly cdr: ChangeDetectorRef) {
+                private readonly cdr: ChangeDetectorRef,
+                private fileDownloadService: FileDownloadService) {
     }
 
     ngOnInit(): void {
         this.subscription = this.submissionManager.answerSubmissionResponse$.subscribe(response =>
             this.updateVisibilityAndValidation(response.blockVisibility)
         );
+
+        this.downloadUrl$ = this.fileDownloadService
+            .getDownloadUrl(this.studyGuid, this.activityGuid, 'SHOW_RESULTS')
+            .pipe(pluck('downloadUrl'));
     }
 
     ngOnDestroy(): void {
         this.subscription.unsubscribe();
+    }
+
+    public get shouldDisplayDownloadButton(): boolean {
+        const showResultsBlock: ActivityQuestionBlock<any> = this.section.blocks
+            .find(block => block.blockType === BlockType.Question) as ActivityQuestionBlock<any>;
+        return !!showResultsBlock && showResultsBlock.stableId === 'SHOW_RESULTS' && showResultsBlock.answer === true && this.activityCode === 'SOMATIC_RESULTS' &&
+            this.activityStatusCode === 'COMPLETE';
     }
 
     public onBlockVisibilityChanged(blockVisibility: BlockVisibility[]): void {
