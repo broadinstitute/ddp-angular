@@ -17,72 +17,96 @@ import {SamplesNavEnum} from 'dsm/component/navigation/enums/samplesNav-enum';
 import FamilyMemberTab from 'dsm/pages/participant-page/rgp/family-member-tab';
 import { FamilyMember } from 'dsm/component/tabs/enums/familyMember-enum';
 
-test.describe.skip('Blood & RNA Kit Upload', () => {
-    let welcomePage: WelcomePage;
-    let homePage: HomePage;
-    let navigation: Navigation;
-
-    let shortID: string;
-    let kitUploadInfo: KitUploadInfo;
-    let kitLabel: string;
-    let trackingLabel: string;
-    let shippingID: string;
+test.describe('Blood & RNA Kit Upload', () => {
+test('Verify that a blood rna kit can be uploaded @upload @rgp @functional', async ({ page, request}, testInfo) => {
+    const testResultDirectory = testInfo.outputDir;
+    console.log(`Directory: ${testResultDirectory}`);
 
     const study = StudyEnum.RGP;
     const kitType = KitTypeEnum.BLOOD_AND_RNA;
     const expectedKitTypes = [KitTypeEnum.BLOOD, KitTypeEnum.BLOOD_AND_RNA]; //Later will be just Blood & RNA kit type for RGP
 
-    test.beforeEach(async ({ page, request }) => {
-        await login(page);
-        welcomePage = new WelcomePage(page);
-        homePage = new HomePage(page);
-        navigation = new Navigation(page, request);
+    //Go into DSM
+    await login(page);
+    const navigation = new Navigation(page, request);
 
-        //select RGP study
-        await new Select(page, { label: 'Select study' }).selectOption('RGP');
-    });
+    //select RGP study
+    await new Select(page, { label: 'Select study' }).selectOption('RGP');
 
-    test('Verify that a single blood and rna kit can be uploaded, sent, and received @functional @rgp', async ({ page, request}) => {
-        await welcomePage.selectStudy(study);
-        await homePage.assertWelcomeTitle();
-        await homePage.assertSelectedStudyTitle(study);
+    //Go to recently created playwright test participant to get their short id
+    const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
+    await participantListPage.assertPageTitle();
+    await participantListPage.waitForReady();
 
-        //Go to recently created playwright test participant to get their short id
-        const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
-        await participantListPage.assertPageTitle();
-        await participantListPage.waitForReady();
+    const participantGuid = await participantListPage.getGuidOfMostRecentAutomatedParticipant(true);
+    await participantListPage.filterListByParticipantGUID(participantGuid);
+    await participantListPage.selectParticipant(participantGuid);
 
-        await participantListPage.filterListByParticipantGUID(user.patient.participantGuid);
-        await participantListPage.selectParticipant(user.patient.participantGuid);
+    //For RGP, the short id needed for the kit upload is the family member's subject id
+    const proband = new FamilyMemberTab(page, FamilyMember.PROBAND);
+    proband.relationshipID = user.patient.relationshipID;
 
-        //For RGP, the short id needed for the kit upload is the family member's subject id
-        const proband = new FamilyMemberTab(page, FamilyMember.PROBAND);
-        proband.relationshipID = user.patient.relationshipID;
+    const probandTab = proband.getFamilyMemberTab();
+    await expect(probandTab).toBeVisible();
+    await probandTab.click();
+    await expect(probandTab).toHaveClass('nav-link active');//Make sure the tab is in view and selected
 
-        const probandTab = proband.getFamilyMemberTab();
-        await expect(probandTab).toBeVisible();
-        await probandTab.click();
-        await expect(probandTab).toHaveClass('nav-link active');//Make sure the tab is in view and selected
+    const participantInfoSection = proband.getParticipantInfoSection();
+    await participantInfoSection.click();
 
-        const participantInfoSection = proband.getParticipantInfoSection();
-        await participantInfoSection.click();
+    const probandSubjectID = proband.getSubjectID();
+    await expect(probandSubjectID).not.toBeEmpty();
+    const shortID = await probandSubjectID.inputValue();
+    console.log(`Proband's subject ID: ${shortID}`);
 
-        const probandSubjectID = proband.getSubjectID();
-        await expect(probandSubjectID).not.toBeEmpty();
-        console.log(`Proband's subject ID: ${probandSubjectID.inputValue()}`);
-        shortID = await probandSubjectID.inputValue();
+    //The rest of the kit upload information - RGP kits are by family member instead of by account - using the proband's info to make a kit
+    const kitUploadInfo = new KitUploadInfo(shortID, user.patient.firstName, user.patient.lastName);
+    kitUploadInfo.street1 = user.patient.streetAddress;
+    kitUploadInfo.city = user.patient.city;
+    kitUploadInfo.postalCode = user.patient.zip;
+    kitUploadInfo.state = user.patient.state.abbreviation;
+    kitUploadInfo.country = user.patient.country.abbreviation;
 
-        //The rest of the kit upload information - RGP kits are by family member instead of by account - using the proband's info to make a kit
-        kitUploadInfo = new KitUploadInfo(shortID, user.patient.firstName, user.patient.lastName);
-        kitUploadInfo.street1 = user.patient.streetAddress;
-        kitUploadInfo.city = user.patient.city;
-        kitUploadInfo.postalCode = user.patient.zip;
-        kitUploadInfo.state = user.patient.state.abbreviation;
-        kitUploadInfo.country = user.patient.country.abbreviation;
+    //Note: no blood kits are automatically created for RGP - so there's no need for preliminary deactivation of existing kits
+    //Upload a Blood & RNA kit
+    const kitUploadPage = await navigation.selectFromSamples<KitUploadPage>(SamplesNavEnum.KIT_UPLOAD);
+    await kitUploadPage.waitForLoad();
+    await kitUploadPage.assertPageTitle();
+    await kitUploadPage.assertDisplayedKitTypes(expectedKitTypes);
+    await kitUploadPage.selectKitType(kitType);
+    await kitUploadPage.assertBrowseBtn();
+    await kitUploadPage.assertUploadKitsBtn();
+    //await kitUploadPage.assertInstructionSnapshot();
+    await kitUploadPage.uploadFile(kitType, [kitUploadInfo], study, testResultDirectory);
 
-        //Note: no blood kits are automatically created for RGP - so there's no need for preliminary deactivation of existing kits
-        //Upload a Blood & RNA kit
-        const kitUploadPage = await navigation.selectFromSamples<KitUploadPage>(SamplesNavEnum.KIT_UPLOAD);
+    //Go to Kits w/o :abel to extract a shipping ID
+    const kitsWithoutLabelPage = await navigation.selectFromSamples<KitsWithoutLabelPage>(SamplesNavEnum.KITS_WITHOUT_LABELS);
+    await kitsWithoutLabelPage.waitForLoad();
+    await kitsWithoutLabelPage.selectKitType(kitType);
+    await kitsWithoutLabelPage.assertCreateLabelsBtn();
+    await kitsWithoutLabelPage.assertReloadKitListBtn();
+    await kitsWithoutLabelPage.assertTableHeader();
+    await kitsWithoutLabelPage.assertPageTitle();
+    const simpleShortId = simplifyShortID(shortID, 'RGP');
+    await kitsWithoutLabelPage.search(KitsColumnsEnum.SHORT_ID, simpleShortId);
+    const shippingID = (await kitsWithoutLabelPage.getData(KitsColumnsEnum.SHIPPING_ID)).trim();
+    console.log(`Shipping ID/DSM Label: ${shippingID}`);
 
+    // tracking scan
+    const labelNumber = crypto.randomUUID().toString().substring(0, 10);
+    const kitLabel = `RGP_${labelNumber}`;
+    const trackingScanPage = await navigation.selectFromSamples<TrackingScanPage>(SamplesNavEnum.TRACKING_SCAN);
+    await trackingScanPage.assertPageTitle();
+    const trackingLabel = `tracking-${crypto.randomUUID().toString().substring(0, 10)}`;
+    await trackingScanPage.fillScanPairs([trackingLabel, kitLabel]);
+    await trackingScanPage.save();
+
+    //RGP final scan page
+    const finalScanPage = await navigation.selectFromSamples<RgpFinalScanPage>(SamplesNavEnum.RGP_FINAL_SCAN);
+    const rnaNumber = crypto.randomUUID().toString().substring(0, 10);
+    const rnaLabel = `RNA${rnaNumber}`;
+    //await finalScanPage.assertPageTitle();
+    await finalScanPage.fillScanTrio(kitLabel, rnaLabel, shippingID, 1);
+    await finalScanPage.save();
     });
 });

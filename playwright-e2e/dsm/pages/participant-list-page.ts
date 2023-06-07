@@ -60,6 +60,11 @@ export default class ParticipantListPage {
     await expect(this.page.getByRole('cell', { name: participantGUID })).toBeVisible();
   }
 
+  /**
+   * Returns the guid of the most recently created playwright participant
+   * @param isRGPStudy mark as true or false if this is being ran in RGP - parameter is only needed if method is ran in RGP study
+   * @returns the guid of the most recently registered playwright participant
+   */
   public async getGuidOfMostRecentAutomatedParticipant(isRGPStudy?: boolean): Promise<string> {
     //Select the columns to be used to help find the most recent automated participant
     const customizeViewPanel = this.filters.customizeViewPanel;
