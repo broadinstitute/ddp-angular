@@ -15,9 +15,15 @@ export class Search {
   }
 
   public async search(): Promise<void> {
-    await this.page.locator("//div[@id='searchTable']/button[1][span[text()='Search']]").click();
-    await waitForResponse(this.page, {uri: 'ui/filterList?'});
+    await Promise.all([
+      waitForResponse(this.page, {uri: 'ui/filterList?'}),
+      this.page.locator("//div[@id='searchTable']/button[1][span[text()='Search']]").click()
+    ]);
     await waitForNoSpinner(this.page);
+  }
+
+  public async clear(): Promise<void> {
+    await this.page.locator("//div[@id='searchTable']/button[.//span[text()='Clear']][1]").click(); // Two Clear buttons, use first one.
   }
 
   public async dates(columnName: string, { from: fromValue, to: toValue, additionalFilters }: Partial<DateConfig>): Promise<void> {

@@ -27,7 +27,7 @@ export default class ParticipantWithdrawalPage {
   public async waitForReady(): Promise<void> {
     await waitForNoSpinner(this.page);
     expect(this.page.locator('h1')).toBe('Participant Withdrawal');
-    await expect(this.withdrawButton().toLocator()).toBeDisabled();
+    await expect(this.getWithdrawButton().toLocator()).toBeDisabled();
   }
 
   public async withdrawParticipant(id: string): Promise<void> {
@@ -36,12 +36,13 @@ export default class ParticipantWithdrawalPage {
 
     await Promise.all([
       waitForResponse(this.page, { uri: 'ui/exitParticipant' }),
-      this.withdrawButton().click()
+      this.getWithdrawButton().click()
     ]);
+    await waitForNoSpinner(this.page);
   }
 
-  public withdrawButton(): Button {
-    return new Button(this.page, { label: 'Withdraw Participant' });
+  public getWithdrawButton(): Button {
+    return new Button(this.page, { label: new RegExp('Withdraw Participant'), root: '//*' });
   }
 
   public withdrewTable(): Table {
