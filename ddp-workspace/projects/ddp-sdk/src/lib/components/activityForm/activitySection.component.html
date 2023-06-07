@@ -25,7 +25,7 @@
                                    [activityGuid]="activityGuid">
             </ddp-conditional-block>
         </div>
-        <div *ngIf="shouldBlockBeShown(block, BlockType.Question)">
+        <div *ngIf="shouldBlockBeShown(block, BlockType.Question) && block.stableId !== 'RESULT_FILE'">
             <ddp-activity-question [block]="block"
                                    [readonly]="readonly || !block.enabled"
                                    [validationRequested]="validationRequested"
@@ -33,6 +33,11 @@
                                    [activityGuid]="activityGuid"
                                    (componentBusy)="componentBusy.emit($event)">
             </ddp-activity-question>
+        </div>
+        <div *ngIf="shouldBlockBeShown(block, BlockType.Question) && block.stableId === 'RESULT_FILE'">
+            <ddp-download-file [activityGuid]="activityGuid"
+                               [studyGuid]="studyGuid"
+                               [block]="block"></ddp-download-file>
         </div>
         <div *ngIf="shouldBlockBeShown(block, BlockType.Institution)">
             <ddp-institutions-form [block]="block"
