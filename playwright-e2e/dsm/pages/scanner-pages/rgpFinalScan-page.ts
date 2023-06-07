@@ -33,8 +33,20 @@ export default class RgpFinalScanPage {
         return numberOfRows;
     }
 
-    public getSaveScanPairsButton(): Locator {
+    private getSaveScanPairsButton(): Locator {
         const scanPairButton = this.page.getByRole('button', { name: 'Save Scan Pairs' });
         return scanPairButton;
+    }
+
+    public async save(): Promise<void> {
+        const scanPairButton = this.getSaveScanPairsButton();
+        await expect(scanPairButton).toBeEnabled();
+        await scanPairButton.focus();
+        await scanPairButton.click();
+    }
+
+    public async assertPageTitle(): Promise<void> {
+        const heading = this.page.locator(`//h1[contains(., '${this.PAGE_TITLE}')]`);
+        await expect(heading, 'RGP FInal Scan page header is not visible').toBeVisible();
     }
 }

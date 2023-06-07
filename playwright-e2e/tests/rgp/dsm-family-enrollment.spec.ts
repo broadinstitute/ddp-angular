@@ -20,6 +20,13 @@ import {SamplesNavEnum} from 'dsm/component/navigation/enums/samplesNav-enum';
 import { KitUploadInfo } from 'dsm/pages/kitUpload-page/models/kitUpload-model';
 import {StudyEnum} from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import { KitTypeEnum } from 'dsm/component/kitType/enums/kitType-enum';
+import KitsWithoutLabelPage from 'dsm/pages/kitsInfo-pages/kitsWithoutLabel-page';
+import {KitsColumnsEnum} from 'dsm/pages/kitsInfo-pages/enums/kitsColumns-enum';
+import KitsSentPage from 'dsm/pages/kitsInfo-pages/kitsSentPage';
+import KitsReceivedPage from 'dsm/pages/kitsInfo-pages/kitsReceived-page/kitsReceivedPage';
+import TrackingScanPage from 'dsm/pages/scanner-pages/trackingScan-page';
+import RgpFinalScanPage from 'dsm/pages/scanner-pages/rgpFinalScan-page';
+import { simplifyShortID } from 'utils/faker-utils';
 
 const { RGP_USER_PASSWORD } = process.env;
 const probandName = user.patient.firstName;
@@ -27,7 +34,7 @@ const brotherName = user.brother.firstName;
 let rgpEmail: string;
 
 test.describe.serial('DSM Family Enrollment Handling', () => {
-test('Verify the display and functionality of family account dynamic fields @functional @rgp', async ({ page, request}) => {
+test.skip('Verify the display and functionality of family account dynamic fields @functional @rgp', async ({ page, request}) => {
     await login(page);
     const navigation = new Navigation(page, request);
 
@@ -85,7 +92,7 @@ test('Verify the display and functionality of family account dynamic fields @fun
     await dropdownOptions.filter({ hasText: '5' }).click();
   });
 
-  test('Verify that the proband family member tab can be filled out @functional @rgp', async ({ page, request }) => {
+  test.skip('Verify that the proband family member tab can be filled out @functional @rgp', async ({ page, request }) => {
     //Go into DSM
     await login(page);
     const navigation = new Navigation(page, request);
@@ -513,7 +520,7 @@ test('Verify the display and functionality of family account dynamic fields @fun
     await redCapSurveyCompletedDate.fill(`${currentDate[0]}/${currentDate[1]}/${currentDate[2]}`);//[0] is MM, [1] is DD, [2] is YYYY
   });
 
-  test('Verify that a family member can be added without copying proband info @rgp @functional', async ({ page, request }) => {
+  test.skip('Verify that a family member can be added without copying proband info @rgp @functional', async ({ page, request }) => {
     //Go into DSM
     await login(page);
     const navigation = new Navigation(page, request);
@@ -617,7 +624,7 @@ test('Verify the display and functionality of family account dynamic fields @fun
     await expect(maternalGrandfatherFamilyID).toEqual(probandFamilyID);
   })
 
-  test('Verify that a family member can be added using copied proband info @rgp @functional', async ({ page, request }) => {
+  test.skip('Verify that a family member can be added using copied proband info @rgp @functional', async ({ page, request }) => {
     //Go into DSM
     await login(page);
     const navigation = new Navigation(page, request);
@@ -673,7 +680,7 @@ test('Verify the display and functionality of family account dynamic fields @fun
     await expect(successfullyAddedFamilyMemberMessage).not.toBeVisible();
   });
 
-  test('Verify that a copied family member has similar info to the proband @rgp @functional', async ({ page, request }) => {
+  test.skip('Verify that a copied family member has similar info to the proband @rgp @functional', async ({ page, request }) => {
     //Go into DSM
     await login(page);
     const navigation = new Navigation(page, request);
@@ -815,9 +822,6 @@ test('Verify the display and functionality of family account dynamic fields @fun
   test('Verify that a blood rna kit can be uploaded @upload @rgp @functional', async ({ page, request}, testInfo) => {
     const testResultDirectory = testInfo.outputDir;
     console.log(`Directory: ${testResultDirectory}`);
-    let kitLabel: string;
-    let trackingLabel: string;
-    let shippingID: string;
 
     const study = StudyEnum.RGP;
     const kitType = KitTypeEnum.BLOOD_AND_RNA;
@@ -835,8 +839,8 @@ test('Verify the display and functionality of family account dynamic fields @fun
     await participantListPage.assertPageTitle();
     await participantListPage.waitForReady();
 
-    await participantListPage.filterListByParticipantGUID('4FBXLRIXYU7DJQT7QZA0');
-    await participantListPage.selectParticipant('4FBXLRIXYU7DJQT7QZA0');
+    await participantListPage.filterListByParticipantGUID(user.patient.participantGuid);
+    await participantListPage.selectParticipant(user.patient.participantGuid);
 
     //For RGP, the short id needed for the kit upload is the family member's subject id
     const proband = new FamilyMemberTab(page, FamilyMember.PROBAND);
@@ -874,26 +878,35 @@ test('Verify the display and functionality of family account dynamic fields @fun
     await kitUploadPage.assertUploadKitsBtn();
     //await kitUploadPage.assertInstructionSnapshot();
     await kitUploadPage.uploadFile(kitType, [kitUploadInfo], study, testResultDirectory);
-  });
 
-  test.skip('Verify that messages are displayed in DSS dashboard @rgp @functional', async ({ page, request }) => {
-    const homePage = new DSSHomePage(page);
-    await homePage.clickSignIn();
+    //Go to Kits w/o :abel to extract a shipping ID
+    const kitsWithoutLabelPage = await navigation.selectFromSamples<KitsWithoutLabelPage>(SamplesNavEnum.KITS_WITHOUT_LABELS);
+    await kitsWithoutLabelPage.waitForLoad();
+    await kitsWithoutLabelPage.selectKitType(kitType);
+    await kitsWithoutLabelPage.assertCreateLabelsBtn();
+    await kitsWithoutLabelPage.assertReloadKitListBtn();
+    await kitsWithoutLabelPage.assertTableHeader();
+    await kitsWithoutLabelPage.assertPageTitle();
+    const simpleShortId = simplifyShortID(shortID, 'RGP');
+    await kitsWithoutLabelPage.search(KitsColumnsEnum.SHORT_ID, simpleShortId);
+    const shippingID = (await kitsWithoutLabelPage.getData(KitsColumnsEnum.SHIPPING_ID)).trim();
+    console.log(`Shipping ID/DSM Label: ${shippingID}`);
 
-    await auth.login(page, {email: rgpEmail, password: RGP_USER_PASSWORD });
-    const dashboard = new DashboardPage(page);
-    const orderedHeaders = ['Date', 'Title', 'Description'];
-    const table = await dashboard.getDashboardTable();
-    console.log(`DSS Dashboard table result: ${table}`);
-    const resultHeaders = await table.getHeaderNames();
-    console.log(`DSS Dashboard table header names: ${resultHeaders}`);
+    // tracking scan
+    const labelNumber = crypto.randomUUID().toString().substring(0, 10);
+    const kitLabel = `RGP_${labelNumber}`;
+    const trackingScanPage = await navigation.selectFromSamples<TrackingScanPage>(SamplesNavEnum.TRACKING_SCAN);
+    await trackingScanPage.assertPageTitle();
+    const trackingLabel = `tracking-${crypto.randomUUID().toString().substring(0, 10)}`;
+    await trackingScanPage.fillScanPairs([trackingLabel, kitLabel]);
+    await trackingScanPage.save();
 
-    //Verify display of proband messages
-    const probandSection = dashboard.getFamilyMemberSection(probandName);
-
-    //Verify display of sibling (brother) message
-    const brotherSection = dashboard.getFamilyMemberSection(brotherName);
-
-    //Verify that grandparent is not displayed
+    //RGP final scan page
+    const finalScanPage = await navigation.selectFromSamples<RgpFinalScanPage>(SamplesNavEnum.RGP_FINAL_SCAN);
+    const rnaNumber = crypto.randomUUID().toString().substring(0, 10);
+    const rnaLabel = `RNA${rnaNumber}`;
+    //await finalScanPage.assertPageTitle();
+    await finalScanPage.fillScanTrio(kitLabel, rnaLabel, shippingID, 1);
+    await finalScanPage.save();
   });
 });

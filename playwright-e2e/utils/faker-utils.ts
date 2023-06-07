@@ -51,3 +51,21 @@ export const calculateBirthDate = (month: string, day: string, year: string): nu
 export const getRandomInteger = (maxNumber: number): number => {
   return Math.floor(Math.random() * maxNumber);
 }
+
+/**
+ * Takes a short id that is presumed to have the study in it e.g. RGP_1234_56 and
+ * returns the short id without the study name prefix e.g. 1234_56
+ * @param shortId the short id
+ * @param studyName the study name/alias used in the short id e.g. RGP
+ * @returns simplified short id
+ */
+export const simplifyShortID = (shortId: string, studyName: string): string => {
+  console.log(`short id: ${shortId}`);
+  const shortIdParts = shortId.split(`${studyName}_`); // Use 'RGP_' to determine where to split
+  const partOne = shortIdParts[0];
+  const partTwo = shortIdParts[1];
+  console.log(`first part: ${partOne}`);
+  console.log(`second part: ${partTwo}`);
+  const simplifiedShortID = shortIdParts[1];
+  return simplifiedShortID;
+}

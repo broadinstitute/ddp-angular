@@ -12,9 +12,7 @@ export interface MailListCSV {
 export function createTextFileSync(pathName: string, fileName: string, data: string) {
   try {
     fsextra.ensureDirSync(pathName);
-    console.log(`Pathname: ${pathName}`);
-    console.log(`Data in file: ${data}`);
-    fs.writeFileSync(`${pathName}/${fileName}`, 'Hello');
+    fs.writeFileSync(`${pathName}/${fileName}`, data);
     console.log(`File: ${pathName} - created successfully`)
   } catch (error) {
     console.error(`Couldn't create the File: ${pathName}`);
