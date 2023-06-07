@@ -1,5 +1,5 @@
 import { expect, Locator, Page } from '@playwright/test';
-import { HomePageInterface } from 'pages/page-interface';
+import { HomePageInterface } from 'dss/pages/page-interface';
 import { DSMPageBase } from './page-base';
 import * as auth from 'authentication/auth-dsm';
 

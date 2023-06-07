@@ -65,7 +65,7 @@ test.describe.serial('Adult Self Enrollment', () => {
 
     const tellUsAboutYourFamily = new TellUsAboutYourFamilyPage(page);
 
-    await setPatientParticipantGuid(page);
+    //await setPatientParticipantGuid(page);
 
     await tellUsAboutYourFamily.waitForReady();
 
@@ -169,7 +169,9 @@ test.describe.serial('Adult Self Enrollment', () => {
     await participantListPage.assertPageTitle();
 
     await participantListPage.waitForReady();
-    await participantListPage.filterListByParticipantGUID(user.patient.participantGuid);
-    await participantListPage.selectParticipant(user.patient.participantGuid);
+    const participantGuid = await participantListPage.getGuidOfMostRecentAutomatedParticipant(true);
+    console.log(`Newest guid: ${participantGuid}`);
+    await participantListPage.filterListByParticipantGUID(participantGuid);
+    await participantListPage.selectParticipant(participantGuid);
   });
 });
