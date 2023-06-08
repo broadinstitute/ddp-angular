@@ -47,9 +47,9 @@ export class ActivityContentComponent implements OnInit, OnChanges {
     public get shouldDisplayDownloadButton(): boolean {
         const showResultsBlock: ActivityQuestionBlock<any> = this.section.blocks
             .find(block => block.blockType === BlockType.Question) as ActivityQuestionBlock<any>;
-        return !!showResultsBlock && showResultsBlock.stableId === 'SHOW_RESULTS' &&
-            showResultsBlock.answer === true && this.activityCode === 'SOMATIC_RESULTS' &&
-            this.activityStatusCode === 'COMPLETE';
+
+        return this.activityCode === 'SOMATIC_RESULTS' && this.activityStatusCode === 'COMPLETE' &&
+            !!showResultsBlock && showResultsBlock.stableId === 'SHOW_RESULTS' && showResultsBlock.answer === true;
     }
 
     private sanitizeContent(): void {
