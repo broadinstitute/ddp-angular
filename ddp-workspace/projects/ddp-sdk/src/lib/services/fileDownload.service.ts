@@ -20,7 +20,7 @@ export class FileDownloadService extends UserServiceAgent<any> {
 
 
     public getDownloadUrl(studyGuid: string, activityGuid: string, questionStableId: string): Observable<FileDownloadResponse> {
-        const path = `/studies/${studyGuid}/activities/${activityGuid}/questions/${questionStableId}/downloads`;
+        const path = `/studies/${studyGuid}/activities/${activityGuid}/questions/${questionStableId}/download`;
 
         return this.getObservable(path)
             .pipe(
