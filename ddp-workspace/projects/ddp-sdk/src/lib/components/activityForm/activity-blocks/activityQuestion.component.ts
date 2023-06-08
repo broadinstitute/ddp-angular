@@ -16,6 +16,7 @@ import {SubmissionManager} from '../../../services/serviceAgents/submissionManag
 import {ConfigurationService} from '../../../services/configuration.service';
 import {ActivityValidationResult} from '../../../models/activity/activityValidationResult';
 import {LayoutType} from '../../../models/layout/layoutType';
+import {WindowRef} from '../../../services/windowRef';
 
 @Component({
     selector: 'ddp-activity-question',
@@ -38,7 +39,7 @@ import {LayoutType} from '../../../models/layout/layoutType';
                     </ddp-validation-message>
                 </div>
             </ng-container>
-        </div>`,
+        </div>`
 })
 export class ActivityQuestionComponent implements OnInit, OnDestroy {
     @Input() block: ActivityQuestionBlock<any>;
@@ -66,7 +67,8 @@ export class ActivityQuestionComponent implements OnInit, OnDestroy {
 
     constructor(
         @Inject('ddp.config') public config: ConfigurationService,
-        private submissionManager: SubmissionManager) {
+        private submissionManager: SubmissionManager,
+        private windowRef: WindowRef) {
     }
 
     get isReadonly(): boolean {
