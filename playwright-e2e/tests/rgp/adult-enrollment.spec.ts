@@ -25,7 +25,7 @@ test.describe.serial('Adult Self Enrollment', () => {
     await expect(locator).toContainText(itemName);
   };
 
-  test('Can complete application @functional @enrollment @rgp @proband', async ({ page }) => {
+  test('Can complete application @functional @enrollment @rgp', async ({ page }) => {
     const homePage = new HomePage(page);
     await homePage.clickGetStarted();
 
@@ -156,7 +156,7 @@ test.describe.serial('Adult Self Enrollment', () => {
     expect(await tellUsAboutYourFamily.yourFirstName().isDisabled()).toEqual(true);
   });
 
-  test('Go to DSM to verify the newly created account can be found @functional @rgp @proband', async ({ page, request }) => {
+  test('Go to DSM to verify the newly created account can be found @functional @rgp', async ({ page, request }) => {
     //Go to DSM to verify the newly created account can be found there
     await login(page);
     const navigation = new Navigation(page, request);

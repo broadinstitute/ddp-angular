@@ -25,7 +25,6 @@ import { simplifyShortID } from 'utils/faker-utils';
 test.describe('Blood & RNA Kit Upload', () => {
 test('Verify that a blood & rna kit can be uploaded @rgp @functional @upload', async ({ page, request}, testInfo) => {
     const testResultDirectory = testInfo.outputDir;
-    console.log(`Directory: ${testResultDirectory}`);
 
     const study = StudyEnum.RGP;
     const kitType = KitTypeEnum.BLOOD_AND_RNA;
@@ -80,7 +79,7 @@ test('Verify that a blood & rna kit can be uploaded @rgp @functional @upload', a
     await kitUploadPage.selectKitType(kitType);
     await kitUploadPage.assertBrowseBtn();
     await kitUploadPage.assertUploadKitsBtn();
-    //await kitUploadPage.assertInstructionSnapshot();
+    await kitUploadPage.assertInstructionSnapshot();
     await kitUploadPage.uploadFile(kitType, [kitUploadInfo], study, testResultDirectory);
 
     //Go to Kits w/o Label to extract a shipping ID

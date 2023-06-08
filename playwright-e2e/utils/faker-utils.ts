@@ -72,12 +72,9 @@ export const getRandomInteger = (maxNumber: number): number => {
  * @returns simplified short id
  */
 export const simplifyShortID = (shortId: string, studyName: string): string => {
-  console.log(`short id: ${shortId}`);
   const shortIdParts = shortId.split(`${studyName}_`); // Use 'RGP_' to determine where to split
   const partOne = shortIdParts[0];
   const partTwo = shortIdParts[1];
-  console.log(`first part: ${partOne}`);
-  console.log(`second part: ${partTwo}`);
   const simplifiedShortID = shortIdParts[1];
   return simplifiedShortID;
 }

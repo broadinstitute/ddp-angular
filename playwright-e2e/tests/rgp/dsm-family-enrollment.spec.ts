@@ -1,8 +1,7 @@
 import { expect, Page } from '@playwright/test';
-import * as auth from 'authentication/auth-rgp';
 import * as user from 'data/fake-user.json';
 import { test } from 'fixtures/dsm-fixture';
-import { calculateBirthDate, getRandomInteger, saveParticipantGuid, setPatientParticipantGuid } from 'utils/faker-utils';
+import { calculateBirthDate, getRandomInteger, saveParticipantGuid } from 'utils/faker-utils';
 import { login } from 'authentication/auth-dsm';
 import { Navigation } from 'dsm/component/navigation/navigation';
 import Select from 'dss/component/select';
@@ -12,9 +11,6 @@ import FamilyMemberTab from 'dsm/pages/participant-page/rgp/family-member-tab';
 import { FamilyMember } from 'dsm/component/tabs/enums/familyMember-enum';
 import RgpParticipantPage from 'dsm/pages/participant-page/rgp/rgp-participant-page';
 
-const { RGP_USER_PASSWORD } = process.env;
-const probandName = user.patient.firstName;
-const brotherName = user.brother.firstName;
 let rgpEmail: string;
 
 test.describe.serial('DSM Family Enrollment Handling', () => {
