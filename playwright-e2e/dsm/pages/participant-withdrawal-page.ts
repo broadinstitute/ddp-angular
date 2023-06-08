@@ -30,9 +30,12 @@ export default class ParticipantWithdrawalPage {
     await expect(this.getWithdrawButton().toLocator()).toBeDisabled();
   }
 
-  public async withdrawParticipant(id: string): Promise<void> {
+  /*
+   * Withdraw a participantEnter by GUID
+   */
+  public async withdrawParticipant(guid: string): Promise<void> {
     const input = new Input(this.page, { label: 'Participant ID' });
-    await input.fill(id);
+    await input.fill(guid);
 
     await Promise.all([
       waitForResponse(this.page, { uri: 'ui/exitParticipant' }),

@@ -47,16 +47,33 @@ test.describe('Participants Withdrawal', () => {
         const participantIdColumnIndex = await participantsTable.getHeaderIndex('Participant ID');
         const participantId = await participantsTable.cell(0, participantIdColumnIndex).innerText();
 
+        // Withdraw participant
+        // Loading Participant Withdrawal page
         const withdrawalPage = await ParticipantWithdrawalPage.goto(page, request);
+
+        await expect(page.locator('.instructions_list li')).toHaveText([
+          // eslint-disable-next-line max-len
+          'Enter their Participant ID above (Note: This is their 20 character Internal Participant ID found on their individual participant page, not their 6 character Short ID)',
+          'Click the "Withdraw Participant" button'
+        ]);
+
+        // Page shows list of previously withdrawn pts
+        const withdrewTable = withdrawalPage.withdrewTable();
+        const rows = await withdrewTable.getRowsCount();
+        expect(rows).toBeGreaterThanOrEqual(1);
+
+        const headers = await withdrewTable.getHeaderNames();
+        const expectedHeaders = ['DDP-Realm', 'Short ID', 'Participant ID', 'User', 'Date'];
+        assertTableHeaders(headers, expectedHeaders);
+
+        // checks every row to make sure Participant ID is not blank
+        await withdrewTable.assertColumnNotEmpty('Participant ID');
+
+        // Enter Participant ID to withdraw
         await withdrawalPage.withdrawParticipant(participantId);
         logParticipantWithdrew(participantId, shortIdColumnId);
 
-        const table = withdrawalPage.withdrewTable();
-        const headers = await table.getHeaderNames();
-        const orderedHeaders = ['DDP-Realm', 'Short ID', 'Participant ID', 'User', 'Date'];
-        assertTableHeaders(headers, orderedHeaders);
-
-        // Go back to Participant List page
+        // Reload Participant List page
         const navigation = new Navigation(page, request);
         await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
         await participantListPage.waitForReady();
@@ -65,12 +82,14 @@ test.describe('Participants Withdrawal', () => {
         await customizeViewPanel.selectColumns('Participant Columns', ['Participant ID']);
 
         await searchPanel.open();
+        // Search until withdrew participant id is found and status is Exited
         await expect(async () => {
             await searchPanel.clear();
             await searchPanel.text('Participant ID', { textValue: participantId });
             await searchPanel.search();
             await expect(participantsTable.rowLocator()).toHaveCount(1);
             const participantStatus = await participantsTable.findCell('Participant ID', participantId, 'Status');
+            // Status of PT is now “Exited after enrollment” or “Exited before enrollment”
             await expect(participantStatus!).toHaveText(/Exited (before|after) Enrollment/);
         }).toPass();
 
@@ -87,7 +106,20 @@ test.describe('Participants Withdrawal', () => {
             day: 'numeric',
         });
         expect(regDate).toContain(formatDate);
+
+        // Participant Page shows a red message on the top stating that the “Participant was withdrawn from the study!”
         await expect(page.locator('h3.Color--warn')).toHaveText('Participant was withdrawn from the study!');
+
+        await participantPage.backToList();
+
+        // Open bug https://broadworkbench.atlassian.net/browse/PEPPER-898
+        /*
+        // Click Participant Withdrawn button to list withdrawn participants
+        await participantListPage.showParticipantWithdrawnButton();
+        // At least one withdrawn participant using the button
+        const numWithdrawnParticipants = await participantsTable.numOfParticipants();
+        expect(numWithdrawnParticipants).toBeGreaterThan(1);
+      */
       });
     }
 });
