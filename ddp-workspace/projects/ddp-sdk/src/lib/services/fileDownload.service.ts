@@ -1,5 +1,7 @@
 import {Inject, Injectable} from '@angular/core';
-import {ConfigurationService, LoggingService, SessionMementoService} from 'ddp-sdk';
+import { LoggingService } from './logging.service';
+import { ConfigurationService } from './configuration.service';
+import { SessionMementoService } from './sessionMemento.service';
 import { UserServiceAgent } from './serviceAgents/userServiceAgent.service';
 import {HttpClient} from '@angular/common/http';
 import {Observable, throwError} from 'rxjs';
