@@ -32,7 +32,6 @@ import {WindowRef} from '../../../services/windowRef';
                 (valueChanged)="enteredValue$.next($event)"
                 (componentBusy)="componentBusy.next($event)">
             </ddp-activity-answer>
-
             <ng-container *ngIf="block.shown && block.enabled">
                 <div class="ddp-activity-validation" *ngIf="errorMessage$ | async as errorMsg">
                     <ddp-validation-message [message]="errorMsg" [translationParams]="errorMessageTranslationParams$ | async">
@@ -49,6 +48,7 @@ export class ActivityQuestionComponent implements OnInit, OnDestroy {
     public validationRequested$ = new BehaviorSubject<boolean>(false);
     scroll_up$: Observable<boolean>;
 
+    
     @Input() set validationRequested(requested: boolean) {
         this.validationRequested$.next(requested);
     }
