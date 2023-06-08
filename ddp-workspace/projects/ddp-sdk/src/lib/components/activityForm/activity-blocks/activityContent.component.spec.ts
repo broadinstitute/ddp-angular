@@ -3,12 +3,19 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { ActivityContentBlock } from '../../../models/activity/activityContentBlock';
 import { ActivityContentComponent } from './activityContent.component';
+import {FileDownloadService} from '../../../services/fileDownload.service';
+import {of} from 'rxjs';
+import {ActivitySection} from 'ddp-sdk';
 
 describe('ActivityContentComponent', () => {
     const contentBlock = {
         content: 'Some text',
         title: null
     } as ActivityContentBlock;
+
+    const section = {
+        blocks: []
+    } as ActivitySection;
 
     @Component({
         template: `
@@ -18,16 +25,25 @@ describe('ActivityContentComponent', () => {
     class TestHostComponent {
         block = contentBlock;
     }
+    let fileDownloadService: jasmine.SpyObj<FileDownloadService>;
+
 
     let component: ActivityContentComponent;
     let fixture: ComponentFixture<ActivityContentComponent>;
     let debugElement: DebugElement;
 
+
     beforeEach(() => {
+        fileDownloadService = jasmine.createSpyObj('FileDownloadService', ['getDownloadUrl']);
+        fileDownloadService.getDownloadUrl.and.returnValue(of({downloadUrl: 'someUrl'}));
+
         TestBed.configureTestingModule({
             declarations: [
                 TestHostComponent,
                 ActivityContentComponent
+            ],
+            providers: [
+                {provide: FileDownloadService, useValue: fileDownloadService },
             ]
         }).compileComponents();
 
@@ -35,6 +51,7 @@ describe('ActivityContentComponent', () => {
         component = fixture.componentInstance;
         debugElement = fixture.debugElement;
         component.block = contentBlock;
+        component.section = section;
         fixture.detectChanges();
     });
 
