@@ -21,6 +21,10 @@ export const generateEmailAlias = (email: string | undefined): string => {
   return `${name}+${Math.floor(Math.random() * 1000000000)}@${domain}`;
 };
 
+/**
+ * Set the guid given a saved action that occurs on a page e.g. entering input
+ * @param page The current page where an action is taken that may lead to the guid being retreived
+ */
 export const setPatientParticipantGuid = async (page: Page) => {
   const [response] = await Promise.all([
     page.waitForResponse((resp) => resp.url().includes('/participants') && resp.status() === 200)
@@ -29,6 +33,14 @@ export const setPatientParticipantGuid = async (page: Page) => {
   const participantResponse = response.url();
   const urlArray = participantResponse.split('/');
   user.patient.participantGuid = urlArray[6];
+};
+
+/**
+ * Set the user guid with a given parameter
+ * @param guid The guid of a study participant
+ */
+export const saveParticipantGuid = (guid: string) => {
+  user.patient.participantGuid = guid;
 };
 
 export const calculateBirthDate = (month: string, day: string, year: string): number => {

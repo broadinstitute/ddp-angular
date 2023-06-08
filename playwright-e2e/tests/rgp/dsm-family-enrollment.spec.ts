@@ -2,7 +2,7 @@ import { expect, Page } from '@playwright/test';
 import * as auth from 'authentication/auth-rgp';
 import * as user from 'data/fake-user.json';
 import { test } from 'fixtures/dsm-fixture';
-import { calculateBirthDate, getRandomInteger } from 'utils/faker-utils';
+import { calculateBirthDate, getRandomInteger, saveParticipantGuid, setPatientParticipantGuid } from 'utils/faker-utils';
 import { login } from 'authentication/auth-dsm';
 import { Navigation } from 'dsm/component/navigation/navigation';
 import Select from 'dss/component/select';
@@ -17,7 +17,7 @@ const probandName = user.patient.firstName;
 const brotherName = user.brother.firstName;
 let rgpEmail: string;
 
-test.describe('DSM Family Enrollment Handling', () => {
+test.describe.serial('DSM Family Enrollment Handling', () => {
 test('Verify the display and functionality of family account dynamic fields @functional @rgp', async ({ page, request}) => {
     await login(page);
     const navigation = new Navigation(page, request);
@@ -30,7 +30,8 @@ test('Verify the display and functionality of family account dynamic fields @fun
     await participantListPage.assertPageTitle();
     await participantListPage.waitForReady();
     const participantGuid = await participantListPage.getGuidOfMostRecentAutomatedParticipant(true);
-    await participantListPage.filterListByParticipantGUID(participantGuid);
+    await saveParticipantGuid(participantGuid);
+    await participantListPage.filterListByParticipantGUID(user.patient.participantGuid);
     await participantListPage.selectParticipant(participantGuid);
 
     //Confirm the 'Add Family Member' button is visible
@@ -89,9 +90,9 @@ test('Verify the display and functionality of family account dynamic fields @fun
     const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
     await participantListPage.assertPageTitle();
     await participantListPage.waitForReady();
-    const participantGuid = await participantListPage.getGuidOfMostRecentAutomatedParticipant(true);
-    await participantListPage.filterListByParticipantGUID(participantGuid);
-    await participantListPage.selectParticipant(participantGuid);
+    //const participantGuid = await participantListPage.getGuidOfMostRecentAutomatedParticipant(true);
+    await participantListPage.filterListByParticipantGUID(user.patient.participantGuid);
+    await participantListPage.selectParticipant(user.patient.participantGuid);
 
     //Verify that the proband tab is present (and includes the text RGP and 3 as proband subject ids have the format RGP_{family id}_3)
     const proband = new FamilyMemberTab(page, FamilyMember.PROBAND);
@@ -227,8 +228,8 @@ test('Verify the display and functionality of family account dynamic fields @fun
     const familyAccount = new RgpParticipantPage(page);
     await familyAccount.backToList();
     participantListPage.filters.reloadWithDefaultFilters;
-    await participantListPage.filterListByParticipantGUID(participantGuid);
-    await participantListPage.selectParticipant(participantGuid);
+    await participantListPage.filterListByParticipantGUID(user.patient.participantGuid);
+    await participantListPage.selectParticipant(user.patient.participantGuid);
 
     //After refreshing participant list and page, check that the input for the above textareas are as expected
     //Note: Proband tab is usually the tab that is open/selected upon visiting participant page/family account page
@@ -518,9 +519,9 @@ test('Verify the display and functionality of family account dynamic fields @fun
     const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
     await participantListPage.assertPageTitle();
     await participantListPage.waitForReady();
-    const participantGuid = await participantListPage.getGuidOfMostRecentAutomatedParticipant(true);
-    await participantListPage.filterListByParticipantGUID(participantGuid);
-    await participantListPage.selectParticipant(participantGuid);
+    //const participantGuid = await participantListPage.getGuidOfMostRecentAutomatedParticipant(true);
+    await participantListPage.filterListByParticipantGUID(user.patient.participantGuid);
+    await participantListPage.selectParticipant(user.patient.participantGuid);
 
     //Add a new family member
     const rgpParticipantPage = new RgpParticipantPage(page);
@@ -624,9 +625,9 @@ test('Verify the display and functionality of family account dynamic fields @fun
     const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
     await participantListPage.assertPageTitle();
     await participantListPage.waitForReady();
-    const participantGuid = await participantListPage.getGuidOfMostRecentAutomatedParticipant(true);
-    await participantListPage.filterListByParticipantGUID(participantGuid);
-    await participantListPage.selectParticipant(participantGuid);
+    //const participantGuid = await participantListPage.getGuidOfMostRecentAutomatedParticipant(true);
+    await participantListPage.filterListByParticipantGUID(user.patient.participantGuid);
+    await participantListPage.selectParticipant(user.patient.participantGuid);
 
     //Add a new family member
     const rgpParticipantPage = new RgpParticipantPage(page);
@@ -681,9 +682,9 @@ test('Verify the display and functionality of family account dynamic fields @fun
     const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
     await participantListPage.assertPageTitle();
     await participantListPage.waitForReady();
-    const participantGuid = await participantListPage.getGuidOfMostRecentAutomatedParticipant(true);
-    await participantListPage.filterListByParticipantGUID(participantGuid);
-    await participantListPage.selectParticipant(participantGuid);
+    //const participantGuid = await participantListPage.getGuidOfMostRecentAutomatedParticipant(true);
+    await participantListPage.filterListByParticipantGUID(user.patient.participantGuid);
+    await participantListPage.selectParticipant(user.patient.participantGuid);
 
     //Setup the family members to check
     const rgpParticipantPage = new RgpParticipantPage(page);
