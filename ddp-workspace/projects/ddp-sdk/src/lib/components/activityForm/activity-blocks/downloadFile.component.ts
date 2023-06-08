@@ -2,7 +2,7 @@ import {
     ChangeDetectionStrategy,
     Component,
     Input
-} from "@angular/core";
+} from '@angular/core';
 
 @Component({
     selector: 'ddp-download-file',

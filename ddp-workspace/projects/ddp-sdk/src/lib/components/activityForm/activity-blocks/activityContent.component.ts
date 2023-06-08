@@ -1,12 +1,12 @@
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { ActivityContentBlock } from '../../../models/activity/activityContentBlock';
-import {ActivityQuestionBlock} from "../../../models/activity/activityQuestionBlock";
-import {ActivitySection} from "../../../models/activity/activitySection";
-import {FileDownloadService} from "../../../services/fileDownload.service";
-import {pluck} from "rxjs/operators";
-import {Observable} from "rxjs";
-import {BlockType} from "../../../models/activity/blockType";
+import {ActivityQuestionBlock} from '../../../models/activity/activityQuestionBlock';
+import {ActivitySection} from '../../../models/activity/activitySection';
+import {FileDownloadService} from '../../../services/fileDownload.service';
+import {pluck} from 'rxjs/operators';
+import {Observable} from 'rxjs';
+import {BlockType} from '../../../models/activity/blockType';
 
 @Component({
     selector: 'ddp-activity-content',

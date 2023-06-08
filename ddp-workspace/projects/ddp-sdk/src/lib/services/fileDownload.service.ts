@@ -1,10 +1,10 @@
-import {Inject, Injectable} from "@angular/core";
-import {ConfigurationService, LoggingService, SessionMementoService} from "ddp-sdk";
+import {Inject, Injectable} from '@angular/core';
+import {ConfigurationService, LoggingService, SessionMementoService} from 'ddp-sdk';
 import { UserServiceAgent } from './serviceAgents/userServiceAgent.service';
-import {HttpClient} from "@angular/common/http";
-import {Observable, throwError} from "rxjs";
-import {catchError} from "rxjs/operators";
-import {FileDownloadResponse} from "../models/fileDownloadResponse";
+import {HttpClient} from '@angular/common/http';
+import {Observable, throwError} from 'rxjs';
+import {catchError} from 'rxjs/operators';
+import {FileDownloadResponse} from '../models/fileDownloadResponse';
 
 @Injectable()
 export class FileDownloadService extends UserServiceAgent<any> {
