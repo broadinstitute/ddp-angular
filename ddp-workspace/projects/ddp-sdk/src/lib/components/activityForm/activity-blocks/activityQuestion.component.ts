@@ -48,7 +48,7 @@ export class ActivityQuestionComponent implements OnInit, OnDestroy {
     public validationRequested$ = new BehaviorSubject<boolean>(false);
     scroll_up$: Observable<boolean>;
 
-    
+
     @Input() set validationRequested(requested: boolean) {
         this.validationRequested$.next(requested);
     }
