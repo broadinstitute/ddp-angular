@@ -9,7 +9,7 @@ export function logParticipantCreated(participantEmail: string, participantName:
 
 export function logParticipantWithdrew(participantId: string, shortId: string) {
   test.info().annotations.push({
-    type: 'participant withdrawal',
+    type: 'participant withdrawn',
     description: `participant ID: ${participantId}, Short ID: ${shortId}`
   });
 }
