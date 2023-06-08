@@ -77,7 +77,7 @@ test('Verify the display and functionality of family account dynamic fields @fun
     await dropdownOptions.filter({ hasText: '5' }).click();
   });
 
-  test('Verify that the proband family member tab can be filled out @functional @rgp', async ({ page, request }) => {
+  test('Verify that the proband family member tab can be filled out @functional @rgp @proband', async ({ page, request }) => {
     //Go into DSM
     await login(page);
     const navigation = new Navigation(page, request);
@@ -555,6 +555,7 @@ test('Verify the display and functionality of family account dynamic fields @fun
     await expect(copyProbandInfo).not.toBeChecked();
 
     const submitButton = rgpParticipantPage.getAddFamilyMemberFormSubmitButton();
+    await expect(submitButton).toBeEnabled();
     await submitButton.click();
 
     const successfullyAddedFamilyMemberMessage = rgpParticipantPage.getAddFamilyMemberSuccessfulMessage();

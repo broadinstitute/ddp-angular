@@ -6,19 +6,14 @@ import Select from 'dss/component/select';
 import { KitUploadInfo } from 'dsm/pages/kitUpload-page/models/kitUpload-model';
 import {StudyEnum} from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import { KitTypeEnum } from 'dsm/component/kitType/enums/kitType-enum';
-import {WelcomePage} from 'dsm/pages/welcome-page';
-import HomePage from 'dsm/pages/home-page';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
 import {StudyNavEnum} from 'dsm/component/navigation/enums/studyNav-enum';
-import ParticipantPage from 'dsm/pages/participant-page/participant-page';
 import * as user from 'data/fake-user.json';
+import crypto from 'crypto';
 import KitUploadPage from 'dsm/pages/kitUpload-page/kitUpload-page';
 import {SamplesNavEnum} from 'dsm/component/navigation/enums/samplesNav-enum';
 import FamilyMemberTab from 'dsm/pages/participant-page/rgp/family-member-tab';
 import { FamilyMember } from 'dsm/component/tabs/enums/familyMember-enum';
-import DSMHomePage from 'dsm/pages/home-page';
-import DSSHomePage from 'dss/pages/rgp/home-page';
-import DashboardPage from 'dss/pages/rgp/dashboard-page';
 import KitsWithoutLabelPage from 'dsm/pages/kitsInfo-pages/kitsWithoutLabel-page';
 import {KitsColumnsEnum} from 'dsm/pages/kitsInfo-pages/enums/kitsColumns-enum';
 import KitsSentPage from 'dsm/pages/kitsInfo-pages/kitsSentPage';
@@ -28,7 +23,7 @@ import RgpFinalScanPage from 'dsm/pages/scanner-pages/rgpFinalScan-page';
 import { simplifyShortID } from 'utils/faker-utils';
 
 test.describe('Blood & RNA Kit Upload', () => {
-test('Verify that a blood rna kit can be uploaded @upload @rgp @functional', async ({ page, request}, testInfo) => {
+test('Verify that a blood & rna kit can be uploaded @rgp @functional @upload', async ({ page, request}, testInfo) => {
     const testResultDirectory = testInfo.outputDir;
     console.log(`Directory: ${testResultDirectory}`);
 
@@ -67,7 +62,6 @@ test('Verify that a blood rna kit can be uploaded @upload @rgp @functional', asy
     const probandSubjectID = proband.getSubjectID();
     await expect(probandSubjectID).not.toBeEmpty();
     const shortID = await probandSubjectID.inputValue();
-    console.log(`Proband's subject ID: ${shortID}`);
 
     //The rest of the kit upload information - RGP kits are by family member instead of by account - using the proband's info to make a kit
     const kitUploadInfo = new KitUploadInfo(shortID, user.patient.firstName, user.patient.lastName);

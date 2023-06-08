@@ -4,6 +4,7 @@
     "middleName": "Tester",
     "lastName": "Playwright",
     "fullName": "E2E Tester Playwright",
+    "participantGuid": "",
     "relationshipID": "3",
     "birthDate": {
       "MM": "10",

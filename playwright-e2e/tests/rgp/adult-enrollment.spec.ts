@@ -25,7 +25,7 @@ test.describe.serial('Adult Self Enrollment', () => {
     await expect(locator).toContainText(itemName);
   };
 
-  test('Can complete application @functional @enrollment @rgp', async ({ page }) => {
+  test('Can complete application @functional @enrollment @rgp @proband', async ({ page }) => {
     const homePage = new HomePage(page);
     await homePage.clickGetStarted();
 
@@ -65,7 +65,7 @@ test.describe.serial('Adult Self Enrollment', () => {
 
     const tellUsAboutYourFamily = new TellUsAboutYourFamilyPage(page);
 
-    //await setPatientParticipantGuid(page);
+    await setPatientParticipantGuid(page);
 
     await tellUsAboutYourFamily.waitForReady();
 
@@ -156,7 +156,7 @@ test.describe.serial('Adult Self Enrollment', () => {
     expect(await tellUsAboutYourFamily.yourFirstName().isDisabled()).toEqual(true);
   });
 
-  test('Go to DSM to verify the newly created account can be found @functional @rgp', async ({ page, request }) => {
+  test('Go to DSM to verify the newly created account can be found @functional @rgp @proband', async ({ page, request }) => {
     //Go to DSM to verify the newly created account can be found there
     await login(page);
     const navigation = new Navigation(page, request);
@@ -169,9 +169,7 @@ test.describe.serial('Adult Self Enrollment', () => {
     await participantListPage.assertPageTitle();
 
     await participantListPage.waitForReady();
-    const participantGuid = await participantListPage.getGuidOfMostRecentAutomatedParticipant(true);
-    console.log(`Newest guid: ${participantGuid}`);
-    await participantListPage.filterListByParticipantGUID(participantGuid);
-    await participantListPage.selectParticipant(participantGuid);
+    await participantListPage.filterListByParticipantGUID(user.patient.participantGuid);
+    await participantListPage.selectParticipant(user.patient.participantGuid);
   });
 });

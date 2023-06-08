@@ -103,35 +103,35 @@ export default class FamilyMemberTab {
     }
 
     public getParticipantInfoMenuLink(): Locator {
-        return this.page.locator("//a[contains(text(), 'Participant Info')]");
+        return this.page.getByRole('tabpanel').locator('a').filter({ hasText: 'Participant Info' });
     }
 
     public getContactInfoMenuLink(): Locator {
-        return this.page.locator("//a[contains(text(), 'Contact Info')]");
+        return this.page.getByRole('tabpanel').locator('a').filter({ hasText: 'Contact Info' });
     }
 
     public getStudyStatusMenuLink(): Locator {
-        return this.page.locator("//a[contains(text(), 'Study Status')]");
+        return this.page.getByRole('tabpanel').locator('a').filter({ hasText: 'Study Status' });
     }
 
     public getMedicalRecordsMenuLink(): Locator {
-        return this.page.locator("//a[contains(text(), 'Medical records')]");
+        return this.page.getByRole('tabpanel').locator('a').filter({ hasText: 'Medical records' });
     }
 
     public getPrimarySampleMenuLink(): Locator {
-        return this.page.locator("//a[contains(text(), 'Primary Sample')]");
+        return this.page.getByRole('tabpanel').locator('a').filter({ hasText: 'Primary Sample' });
     }
 
     public getTissueMenuLink(): Locator {
-        return this.page.locator("//a[text()='Tissue']");
+        return this.page.getByRole('tabpanel').locator('a').filter({ hasText: 'Tissue' });
     }
 
     public getRORMenuLink(): Locator {
-        return this.page.locator("//a[contains(text(), 'ROR')]");
+        return this.page.getByRole('tabpanel').locator('a').filter({ hasText: 'ROR' });
     }
 
     public getSurveyMenuLink(): Locator {
-        return this.page.locator("//a[text()='Survey']");
+        return this.page.getByRole('tabpanel').locator('a').filter({ hasText: 'Survey' });
     }
 
     public getParticipantInfoSection(): Locator {
