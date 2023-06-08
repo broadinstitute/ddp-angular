@@ -19,7 +19,7 @@ test.describe('Child Enrollment', () => {
     await expect(locator).toContainText(itemName);
   };
 
-  test.skip('Enroll a child (under 18) @functional @enrollment @rgp @visual', async ({ page }) => {
+  test('Enroll a child (under 18) @functional @enrollment @rgp @visual', async ({ page }) => {
     const child = user.child;
     const adult = user.adult;
 

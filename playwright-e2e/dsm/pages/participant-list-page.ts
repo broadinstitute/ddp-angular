@@ -1,8 +1,10 @@
-import { APIRequestContext, expect, Locator, Page } from '@playwright/test';
+import { APIRequestContext, Download, expect, Locator, Page } from '@playwright/test';
 import Modal from 'dsm/component/modal';
 import { StudyNavEnum } from 'dsm/component/navigation/enums/studyNav-enum';
 import { Navigation } from 'dsm/component/navigation/navigation';
+import { FileFormatEnum, TextFormatEnum } from 'dsm/pages/participant-page/enums/download-format-enum';
 import { WelcomePage } from 'dsm/pages/welcome-page';
+import Checkbox from 'dss/component/checkbox';
 import { waitForNoSpinner, waitForResponse } from 'utils/test-utils';
 import { Filters } from 'dsm/component/filters/filters';
 import { ParticipantListTable } from 'dsm/component/tables/participant-list-table';
@@ -99,12 +101,17 @@ export default class ParticipantListPage {
    * @returns the contents of the specified column in the specified row
    */
   private async getCellDataForColumn(columnName: string, rowNumber: number): Promise<string> {
-    const numberOfPrecedingColumns = await this.page.locator(`//table/thead/th[contains(., '${columnName}')]/preceding-sibling::*`).count();
+    const numberOfPrecedingColumns = await this.page.locator(`//table/thead/th[contains(., '${columnName}')]/preceding-sibling::th`).count();
     const columnIndex = numberOfPrecedingColumns + 1;
     //Find the cell in a specific row and column
     const cell = this.page.locator(`((//tbody/tr)[${rowNumber}]/descendant::td)[${columnIndex}]`);
     const cellContent = await cell.innerText();
     return cellContent;
+  }
+
+  public async selectAll(): Promise<void> {
+    const checkbox = new Checkbox(this.page, { label: 'Select all', root: '//*'});
+    await checkbox.check({ timeout: 30 * 1000 }); // long delay
   }
 
   public async addBulkCohortTags(): Promise<void> {
@@ -159,6 +166,48 @@ export default class ParticipantListPage {
       waitForNoSpinner(this.page),
       waitForResponse(this.page, {uri: '/ui/saveFilter?'})
     ]);
+  }
+
+  /**
+   * Click Download button to download participant list.
+   * @param {{fileFormat?: FileFormatEnum, textFormat?: TextFormatEnum, includeCompletionOfActivity?: boolean, timeout?: number}} opts
+   * @returns {Promise<Download>}
+   */
+    public async downloadParticipant(opts: {
+      fileFormat?: FileFormatEnum,
+      textFormat?: TextFormatEnum,
+      includeCompletionOfActivity?: boolean,
+      timeout?: number
+    } = {}): Promise<Download> {
+    const {
+      fileFormat = FileFormatEnum.XLSX,
+      textFormat = TextFormatEnum.HUMAN_READABLE,
+      includeCompletionOfActivity = true,
+      timeout = 2 * 60 * 1000
+    } = opts;
+
+    const button = this.page.locator('button').filter({has: this.page.locator('[data-icon="file-download"]')});
+    await button.click();
+
+    const modal = new Modal(this.page);
+    await expect(modal.headerLocator()).toHaveText('Configure export');
+
+    const fileFormatRadio = modal.getRadiobutton(new RegExp('File format:'));
+    await fileFormatRadio.check(fileFormat);
+
+    const textFormatRadio = modal.getRadiobutton(new RegExp('Option text format:'));
+    await textFormatRadio.check(textFormat);
+
+    const booleanText = includeCompletionOfActivity ? 'Yes' : 'No';
+    const includeAllCompletionOfActivityRadio = modal.getRadiobutton(new RegExp('Include all completions of an activity:'));
+    await includeAllCompletionOfActivityRadio.check(booleanText);
+
+    // exporting participant list may take several minutes
+    const [download] = await Promise.all([
+      this.page.waitForEvent('download', { timeout }),
+      modal.getButton({ label: 'Download' }).click()
+    ]);
+    return download;
   }
 
   /* Locators */

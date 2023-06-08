@@ -11,29 +11,13 @@ import { StudyNavEnum } from 'dsm/component/navigation/enums/studyNav-enum';
 import FamilyMemberTab from 'dsm/pages/participant-page/rgp/family-member-tab';
 import { FamilyMember } from 'dsm/component/tabs/enums/familyMember-enum';
 import RgpParticipantPage from 'dsm/pages/participant-page/rgp/rgp-participant-page';
-import DSMHomePage from 'dsm/pages/home-page';
-import DSSHomePage from 'dss/pages/rgp/home-page';
-import DashboardPage from 'dss/pages/rgp/dashboard-page';
-import { WelcomePage } from 'dsm/pages/welcome-page';
-import KitUploadPage from 'dsm/pages/kitUpload-page/kitUpload-page';
-import {SamplesNavEnum} from 'dsm/component/navigation/enums/samplesNav-enum';
-import { KitUploadInfo } from 'dsm/pages/kitUpload-page/models/kitUpload-model';
-import {StudyEnum} from 'dsm/component/navigation/enums/selectStudyNav-enum';
-import { KitTypeEnum } from 'dsm/component/kitType/enums/kitType-enum';
-import KitsWithoutLabelPage from 'dsm/pages/kitsInfo-pages/kitsWithoutLabel-page';
-import {KitsColumnsEnum} from 'dsm/pages/kitsInfo-pages/enums/kitsColumns-enum';
-import KitsSentPage from 'dsm/pages/kitsInfo-pages/kitsSentPage';
-import KitsReceivedPage from 'dsm/pages/kitsInfo-pages/kitsReceived-page/kitsReceivedPage';
-import TrackingScanPage from 'dsm/pages/scanner-pages/trackingScan-page';
-import RgpFinalScanPage from 'dsm/pages/scanner-pages/rgpFinalScan-page';
-import { simplifyShortID } from 'utils/faker-utils';
 
 const { RGP_USER_PASSWORD } = process.env;
 const probandName = user.patient.firstName;
 const brotherName = user.brother.firstName;
 let rgpEmail: string;
 
-test.describe.serial('DSM Family Enrollment Handling', () => {
+test.describe('DSM Family Enrollment Handling', () => {
 test('Verify the display and functionality of family account dynamic fields @functional @rgp', async ({ page, request}) => {
     await login(page);
     const navigation = new Navigation(page, request);

@@ -16,6 +16,16 @@ import KitUploadPage from 'dsm/pages/kitUpload-page/kitUpload-page';
 import {SamplesNavEnum} from 'dsm/component/navigation/enums/samplesNav-enum';
 import FamilyMemberTab from 'dsm/pages/participant-page/rgp/family-member-tab';
 import { FamilyMember } from 'dsm/component/tabs/enums/familyMember-enum';
+import DSMHomePage from 'dsm/pages/home-page';
+import DSSHomePage from 'dss/pages/rgp/home-page';
+import DashboardPage from 'dss/pages/rgp/dashboard-page';
+import KitsWithoutLabelPage from 'dsm/pages/kitsInfo-pages/kitsWithoutLabel-page';
+import {KitsColumnsEnum} from 'dsm/pages/kitsInfo-pages/enums/kitsColumns-enum';
+import KitsSentPage from 'dsm/pages/kitsInfo-pages/kitsSentPage';
+import KitsReceivedPage from 'dsm/pages/kitsInfo-pages/kitsReceived-page/kitsReceivedPage';
+import TrackingScanPage from 'dsm/pages/scanner-pages/trackingScan-page';
+import RgpFinalScanPage from 'dsm/pages/scanner-pages/rgpFinalScan-page';
+import { simplifyShortID } from 'utils/faker-utils';
 
 test.describe('Blood & RNA Kit Upload', () => {
 test('Verify that a blood rna kit can be uploaded @upload @rgp @functional', async ({ page, request}, testInfo) => {
@@ -79,7 +89,7 @@ test('Verify that a blood rna kit can be uploaded @upload @rgp @functional', asy
     //await kitUploadPage.assertInstructionSnapshot();
     await kitUploadPage.uploadFile(kitType, [kitUploadInfo], study, testResultDirectory);
 
-    //Go to Kits w/o :abel to extract a shipping ID
+    //Go to Kits w/o Label to extract a shipping ID
     const kitsWithoutLabelPage = await navigation.selectFromSamples<KitsWithoutLabelPage>(SamplesNavEnum.KITS_WITHOUT_LABELS);
     await kitsWithoutLabelPage.waitForLoad();
     await kitsWithoutLabelPage.selectKitType(kitType);
@@ -87,12 +97,12 @@ test('Verify that a blood rna kit can be uploaded @upload @rgp @functional', asy
     await kitsWithoutLabelPage.assertReloadKitListBtn();
     await kitsWithoutLabelPage.assertTableHeader();
     await kitsWithoutLabelPage.assertPageTitle();
+
     const simpleShortId = simplifyShortID(shortID, 'RGP');
     await kitsWithoutLabelPage.search(KitsColumnsEnum.SHORT_ID, simpleShortId);
     const shippingID = (await kitsWithoutLabelPage.getData(KitsColumnsEnum.SHIPPING_ID)).trim();
-    console.log(`Shipping ID/DSM Label: ${shippingID}`);
 
-    // tracking scan
+    //Tracking scan
     const labelNumber = crypto.randomUUID().toString().substring(0, 10);
     const kitLabel = `RGP_${labelNumber}`;
     const trackingScanPage = await navigation.selectFromSamples<TrackingScanPage>(SamplesNavEnum.TRACKING_SCAN);
@@ -101,12 +111,29 @@ test('Verify that a blood rna kit can be uploaded @upload @rgp @functional', asy
     await trackingScanPage.fillScanPairs([trackingLabel, kitLabel]);
     await trackingScanPage.save();
 
-    //RGP final scan page
+    //RGP final scan page - RNA labels must have the prefix 'RNA' (all caps)
     const finalScanPage = await navigation.selectFromSamples<RgpFinalScanPage>(SamplesNavEnum.RGP_FINAL_SCAN);
     const rnaNumber = crypto.randomUUID().toString().substring(0, 10);
     const rnaLabel = `RNA${rnaNumber}`;
-    //await finalScanPage.assertPageTitle();
+    await finalScanPage.assertPageTitle();
     await finalScanPage.fillScanTrio(kitLabel, rnaLabel, shippingID, 1);
     await finalScanPage.save();
+
+    //Kits Sent Page
+    const kitsSentPage = await navigation.selectFromSamples<KitsSentPage>(SamplesNavEnum.SENT);
+    await kitsSentPage.waitForLoad();
+    await kitsSentPage.assertPageTitle();
+    await kitsSentPage.assertDisplayedKitTypes(expectedKitTypes);
+    await kitsSentPage.selectKitType(kitType);
+    await kitsSentPage.search(KitsColumnsEnum.MF_CODE, kitLabel);
+
+    //Kits Received Page
+    const kitsReceivedPage = await navigation.selectFromSamples<KitsReceivedPage>(SamplesNavEnum.RECEIVED);
+    await kitsReceivedPage.waitForLoad();
+    await kitsReceivedPage.assertPageTitle();
+    await kitsReceivedPage.kitReceivedRequest(kitLabel);
+    await kitsReceivedPage.assertDisplayedKitTypes(expectedKitTypes);
+    await kitsReceivedPage.selectKitType(kitType);
+    await kitsReceivedPage.search(KitsColumnsEnum.MF_CODE, kitLabel);
     });
 });
