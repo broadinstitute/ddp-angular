@@ -30,7 +30,7 @@ import {ActivityResponse, SessionMementoService} from 'ddp-sdk';
   providers: [actualParticipantIdProvider]
 })
 export class ActivityPageComponent extends ActivityRedesignedComponent implements OnInit {
-  public rerender = false
+  public rerender = false;
 
   constructor(
     @Inject(ACTUAL_PARTICIPANT_ID_TOKEN) private readonly participantId$: Observable<string>,
@@ -49,12 +49,12 @@ export class ActivityPageComponent extends ActivityRedesignedComponent implement
     this.setParticipantGuid();
   }
 
-  override navigate(response: ActivityResponse) {
+  override navigate(response: ActivityResponse): void {
     super.navigate(response);
-    this.rerenderActivity();
+    response.activityCode === 'SOMATIC_RESULTS' && this.rerenderActivity();
   }
 
-  protected rerenderActivity(): void {
+  private rerenderActivity(): void {
     this.rerender = true;
     this.cdr.detectChanges();
     this.rerender = false;

@@ -7,8 +7,8 @@ import {
     OnInit,
     Output
 } from '@angular/core';
-import {BehaviorSubject, combineLatest, Observable, of, Subject} from 'rxjs';
-import {delay, filter, map, pluck, shareReplay, startWith, takeUntil, tap,} from 'rxjs/operators';
+import {BehaviorSubject, combineLatest, Observable, Subject} from 'rxjs';
+import {delay, filter, map, shareReplay, startWith, takeUntil, tap,} from 'rxjs/operators';
 
 import {ActivityQuestionBlock} from '../../../models/activity/activityQuestionBlock';
 import {AnswerValue} from '../../../models/activity/answerValue';
@@ -16,7 +16,6 @@ import {SubmissionManager} from '../../../services/serviceAgents/submissionManag
 import {ConfigurationService} from '../../../services/configuration.service';
 import {ActivityValidationResult} from '../../../models/activity/activityValidationResult';
 import {LayoutType} from '../../../models/layout/layoutType';
-import {FileDownloadService} from "../../../services/fileDownload.service";
 
 @Component({
     selector: 'ddp-activity-question',
@@ -39,14 +38,6 @@ import {FileDownloadService} from "../../../services/fileDownload.service";
                     </ddp-validation-message>
                 </div>
             </ng-container>
-
-<!--            <ng-container *ngIf="shouldDisplayDownloadButton">-->
-<!--                <ddp-download-file [activityGuid]="activityGuid"-->
-<!--                                   [downloadURL]="downloadUrl$ | async"-->
-<!--                                   [studyGuid]="studyGuid"-->
-<!--                                   [block]="block"></ddp-download-file>-->
-<!--            </ng-container>-->
-
         </div>`,
 })
 export class ActivityQuestionComponent implements OnInit, OnDestroy {
@@ -56,8 +47,6 @@ export class ActivityQuestionComponent implements OnInit, OnDestroy {
     public enteredValue$ = new Subject<AnswerValue>();
     public validationRequested$ = new BehaviorSubject<boolean>(false);
     scroll_up$: Observable<boolean>;
-    public downloadUrl$: Observable<any>;
-
 
     @Input() set validationRequested(requested: boolean) {
         this.validationRequested$.next(requested);
@@ -65,8 +54,6 @@ export class ActivityQuestionComponent implements OnInit, OnDestroy {
 
     @Input() studyGuid: string;
     @Input() activityGuid: string;
-    @Input() activityCode: string;
-    @Input() activityStatusCode: string;
     @Output() valueChanged: EventEmitter<AnswerValue> = new EventEmitter();
     @Output() componentBusy = new EventEmitter<boolean>();
     public errorMessage$: Observable<string | string[] | null>;
@@ -79,8 +66,7 @@ export class ActivityQuestionComponent implements OnInit, OnDestroy {
 
     constructor(
         @Inject('ddp.config') public config: ConfigurationService,
-        private submissionManager: SubmissionManager,
-        private fileDownloadService: FileDownloadService) {
+        private submissionManager: SubmissionManager) {
     }
 
     get isReadonly(): boolean {
@@ -91,15 +77,7 @@ export class ActivityQuestionComponent implements OnInit, OnDestroy {
         this.setupErrorMessage();
         this.setupSavingData();
         this.setupScrollToErrorAction();
-        this.downloadUrl$ = this.fileDownloadService
-            .getDownloadUrl(this.studyGuid, this.activityGuid, this.block.id)
-            .pipe(pluck('downloadUrl'));
     }
-
-    // public get shouldDisplayDownloadButton(): boolean {
-    //     return this.block.answer === true && this.activityCode === 'SOMATIC_RESULTS' &&
-    //         this.activityStatusCode === 'COMPLETE';
-    // }
 
     private setupErrorMessage(): void {
         const firstFailedValidator$ =  combineLatest([
