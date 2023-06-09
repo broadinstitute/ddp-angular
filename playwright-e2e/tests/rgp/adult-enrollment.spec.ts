@@ -168,6 +168,14 @@ test.describe.serial('Adult Self Enrollment', () => {
 
     await participantListPage.waitForReady();
     await participantListPage.filterListByParticipantGUID(user.patient.participantGuid);
-    await participantListPage.selectParticipant(user.patient.participantGuid);
+
+    //Make sure the newly created participant can be found and it's participant page can be accessed
+    const participantListTable = participantListPage.participantListTable;
+    const participantListRowCount = await participantListTable.rowsCount;
+    expect(participantListRowCount, 'More than 1 participant was returned from the participant guid search').toBe(1);
+    const participantIndex = participantListRowCount - 1;
+    await participantListTable.openParticipantPageAt(participantIndex);
+    await expect(page.getByRole('heading', { name: 'Participant Page' })).toBeVisible();
+    await expect(page.getByRole('cell', { name: user.patient.participantGuid })).toBeVisible();
   });
 });
