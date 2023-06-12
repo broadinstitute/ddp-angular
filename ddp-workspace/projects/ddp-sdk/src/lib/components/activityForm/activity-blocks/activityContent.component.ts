@@ -4,8 +4,8 @@ import { ActivityContentBlock } from '../../../models/activity/activityContentBl
 import {ActivityQuestionBlock} from '../../../models/activity/activityQuestionBlock';
 import {ActivitySection} from '../../../models/activity/activitySection';
 import {FileDownloadService} from '../../../services/fileDownload.service';
-import {catchError, finalize, pluck} from 'rxjs/operators';
-import {Subscription, throwError} from 'rxjs';
+import {finalize, pluck} from 'rxjs/operators';
+import {Subscription} from 'rxjs';
 import {BlockType} from '../../../models/activity/blockType';
 
 interface StudyContactInformation {
@@ -21,12 +21,12 @@ interface StudyContactInformation {
 
 <!--    Button for Result File Download-->
     <ng-container *ngIf="shouldDisplayDownloadButton">
-        <ddp-download-file [isError]="isErrorButton"
-                           [isLoading]="isLoadingButton"
+        <ddp-download-file [isError]="isNoSuchFileError"
+                           [isLoading]="isLoading"
                            [btnText]="'Download Results'"
                            (btnClicked)="downloadPDF()">
 
-            <p *ngIf="isErrorButton">This file is not available. Please contact the study team at
+            <p *ngIf="isNoSuchFileError">This file is not available. Please contact the study team at
                 <a class="Link" [href]="'mailTo:info@' + studyContactInformation.studyName +'project.org'">
                     {{'info@'+ studyContactInformation.studyName + 'project.org'}}</a> or
                 <a class="Link" [href]="'tel:' + studyContactInformation.phoneNumber">{{studyContactInformation.phoneNumber}}</a>
@@ -39,8 +39,8 @@ interface StudyContactInformation {
 })
 export class ActivityContentComponent implements OnInit, OnChanges, OnDestroy {
     public sanitizedContent: SafeHtml;
-    public isLoadingButton = false;
-    public isErrorButton = false;
+    public isLoading = false;
+    public isNoSuchFileError = false;
 
     private fileDownloadSubscription: Subscription;
 
@@ -94,23 +94,23 @@ export class ActivityContentComponent implements OnInit, OnChanges, OnDestroy {
      *  PDF download for the SOMATIC_RESULTS activity
      */
     public downloadPDF(): void {
-        this.isLoadingButton = true;
+        this.isLoading = true;
         this.componentBusy.emit(true);
         this.fileDownloadSubscription = this.fileDownloadService
             .getDownloadUrl(this.studyGuid, this.activityGuid,'RESULT_FILE').pipe(
                 pluck('downloadUrl'),
-                catchError((error) => {
-                    this.isErrorButton = true;
-                    return throwError(() => error);
-                }),
                 finalize(() => {
                     this.componentBusy.emit(false);
-                    this.isLoadingButton = false;
+                    this.isLoading = false;
                 })
             )
             .subscribe({
                 next: (downloadUrl) => this.openPDF(downloadUrl),
-                error: error => console.log(error, 'ERROR')
+                error: ({status, code}) => {
+                    if(status === 404 && code === 'NO_SUCH_ELEMENT') {
+                       this.isNoSuchFileError = true;
+                    }
+                }
             });
     }
 
