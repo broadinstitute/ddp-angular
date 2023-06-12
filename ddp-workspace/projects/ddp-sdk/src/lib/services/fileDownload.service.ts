@@ -4,9 +4,8 @@ import { ConfigurationService } from './configuration.service';
 import { SessionMementoService } from './sessionMemento.service';
 import { UserServiceAgent } from './serviceAgents/userServiceAgent.service';
 import {HttpClient} from '@angular/common/http';
-import {Observable, throwError} from 'rxjs';
+import {mergeMap, Observable, throwError} from 'rxjs';
 import {catchError} from 'rxjs/operators';
-import {FileDownloadResponse} from '../models/fileDownloadResponse';
 import {CommunicationAspect} from './communicationAspect.service';
 import { beforeMethod } from 'kaop-ts';
 
@@ -22,15 +21,23 @@ export class FileDownloadService extends UserServiceAgent<any> {
 
     @beforeMethod(CommunicationAspect.intrcept)
     public getDownloadUrl(studyGuid: string, activityGuid: string, questionStableId: string):
-        Observable<FileDownloadResponse> {
+        Observable<any> {
         const path = `/studies/${studyGuid}/activities/${activityGuid}/questions/${questionStableId}/download`;
         const url = this.getBackendUrl() + path;
-        return this.http.get<FileDownloadResponse>(url)
+        return this.getHeaders(null)
             .pipe(
-                catchError(error => {
-                    this.logger.logDebug('getDownloadUrl error', error);
-                    return throwError(() => error.error);
+                mergeMap((data) => this.http.get(url, {
+                    headers: data.headers,
+                    observe: data.observe,
+                    responseType: data.responseType,
+                    withCredentials: data.withCredentials
                 })
+                .pipe(
+                    catchError(error => {
+                        this.logger.logDebug('getDownloadUrl error', error);
+                        return throwError(() => error.error);
+                    })
+                ))
             );
     }
 }
