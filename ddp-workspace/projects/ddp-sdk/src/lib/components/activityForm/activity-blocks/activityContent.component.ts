@@ -74,7 +74,7 @@ export class ActivityContentComponent implements OnInit, OnChanges, OnDestroy {
                 studyName = 'lms';
                 break;
             default:
-                throw new Error(`The name is not available fot ${this.studyGuid} study guid`)
+                throw new Error(`The name is not available fot ${this.studyGuid} study guid`);
         }
         return studyName;
     }
