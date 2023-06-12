@@ -19,7 +19,16 @@ import {BlockType} from '../../../models/activity/blockType';
         <ddp-download-file [isError]="isErrorButton"
                            [isLoading]="isLoadingButton"
                            [btnText]="'Download Results'"
-                           (btnClicked)="downloadPDF()"></ddp-download-file>
+                           (btnClicked)="downloadPDF()">
+
+            <p *ngIf="isErrorButton">This file is not available. Please contact the study team at
+                <a class="Link" [href]="'mailTo:info@' + studyName +'project.org'">
+                    {{'info@'+ studyName + 'project.org'}}</a> or
+                <a class="Link" href="tel:651-403-5556">651-403-5556</a>
+                if you have any questions.
+            </p>
+
+        </ddp-download-file>
     </ng-container>
     `,
 })
@@ -28,7 +37,7 @@ export class ActivityContentComponent implements OnInit, OnChanges, OnDestroy {
     public isLoadingButton = false;
     public isErrorButton = false;
 
-    private subscription: Subscription;
+    private fileDownloadSubscription: Subscription;
 
     @Input() block: ActivityContentBlock;
     @Input() section: ActivitySection;
@@ -52,7 +61,22 @@ export class ActivityContentComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     ngOnDestroy(): void {
-        this.subscription.unsubscribe();
+        this.fileDownloadSubscription?.unsubscribe();
+    }
+
+    public get studyName(): string {
+        let studyName: string;
+        switch (this.studyGuid.toLowerCase()) {
+            case 'cmi-osteo':
+                studyName = 'osteo';
+                break;
+            case 'cmi-lms':
+                studyName = 'lms';
+                break;
+            default:
+                throw new Error(`The name is not available fot ${this.studyGuid} study guid`)
+        }
+        return studyName;
     }
 
     /**
@@ -61,7 +85,7 @@ export class ActivityContentComponent implements OnInit, OnChanges, OnDestroy {
     public downloadPDF(): void {
         this.isLoadingButton = true;
         this.componentBusy.emit(true);
-        this.subscription = this.fileDownloadService
+        this.fileDownloadSubscription = this.fileDownloadService
             .getDownloadUrl(this.studyGuid, this.activityGuid,'RESULT_FILE').pipe(
                 pluck('downloadUrl'),
                 catchError((error) => {

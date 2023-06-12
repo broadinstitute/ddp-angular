@@ -1,5 +1,5 @@
 import {ChangeDetectorRef, Component, EventEmitter, Inject, Input, OnDestroy, OnInit, Output} from '@angular/core';
-import {Observable, Subscription} from 'rxjs';
+import {Subscription} from 'rxjs';
 
 import {ActivitySection} from '../../models/activity/activitySection';
 import {ActivityBlock} from '../../models/activity/activityBlock';

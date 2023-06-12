@@ -16,13 +16,8 @@ import {
             </button>
         </div>
 
-        <ng-container *ngIf="isError">
-            <p>This file is not available. Please contact the study team at
-                <a href="mailTo: info@lmsproject.org">info@lmsproject.org</a> or
-                <a href="tel: 651-403-5556">651-403-5556</a>
-                if you have any questions.
-            </p>
-        </ng-container>
+<!--        any additional content goes here-->
+        <ng-content></ng-content>
 
         <ng-template #spinner>
             <div class="loading-spinner"></div>
