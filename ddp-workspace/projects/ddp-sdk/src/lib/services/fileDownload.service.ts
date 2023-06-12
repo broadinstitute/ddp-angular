@@ -7,7 +7,7 @@ import {HttpClient} from '@angular/common/http';
 import {Observable, throwError} from 'rxjs';
 import {catchError} from 'rxjs/operators';
 import {FileDownloadResponse} from '../models/fileDownloadResponse';
-import {CommunicationAspect} from "./communicationAspect.service";
+import {CommunicationAspect} from './communicationAspect.service';
 import { beforeMethod } from 'kaop-ts';
 
 @Injectable()

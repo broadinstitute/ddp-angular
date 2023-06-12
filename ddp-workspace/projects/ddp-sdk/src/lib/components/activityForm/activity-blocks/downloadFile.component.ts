@@ -51,9 +51,9 @@ import {
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DownloadFileComponent {
-    @Input() btnText: string = 'Download';
-    @Input() isLoading: boolean = false;
-    @Input() isError: boolean = false;
+    @Input() btnText = 'Download';
+    @Input() isLoading = false;
+    @Input() isError = false;
 
     @Output() btnClicked = new EventEmitter<void>();
 

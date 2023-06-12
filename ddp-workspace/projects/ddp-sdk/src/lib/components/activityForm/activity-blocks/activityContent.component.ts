@@ -25,8 +25,8 @@ import {BlockType} from '../../../models/activity/blockType';
 })
 export class ActivityContentComponent implements OnInit, OnChanges, OnDestroy {
     public sanitizedContent: SafeHtml;
-    public isLoadingButton: boolean = false;
-    public isErrorButton: boolean = false;
+    public isLoadingButton = false;
+    public isErrorButton = false;
 
     private subscription: Subscription;
 
@@ -76,7 +76,7 @@ export class ActivityContentComponent implements OnInit, OnChanges, OnDestroy {
             .subscribe({
                 next: (downloadUrl) => this.openPDF(downloadUrl),
                 error: error => console.log(error, 'ERROR')
-            })
+            });
     }
 
     public get shouldDisplayDownloadButton(): boolean {
@@ -93,7 +93,7 @@ export class ActivityContentComponent implements OnInit, OnChanges, OnDestroy {
             const splitUrl = pdfUrl.split('/');
             anchorElement.href = pdfUrl;
             anchorElement.download = splitUrl[splitUrl.length - 1];
-            anchorElement.target = '_blank'
+            anchorElement.target = '_blank';
             anchorElement.click();
         } catch (e: any) {
             window.open(pdfUrl, '_blank');
