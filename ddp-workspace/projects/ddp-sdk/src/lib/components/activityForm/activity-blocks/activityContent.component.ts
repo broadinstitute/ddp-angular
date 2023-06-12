@@ -7,7 +7,7 @@ import {FileDownloadService} from '../../../services/fileDownload.service';
 import {finalize, pluck} from 'rxjs/operators';
 import {Subscription} from 'rxjs';
 import {BlockType} from '../../../models/activity/blockType';
-import {HttpErrorResponse} from "@angular/common/http";
+import {HttpErrorResponse} from '@angular/common/http';
 
 interface StudyContactInformation {
     studyName: string;

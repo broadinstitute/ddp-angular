@@ -34,7 +34,6 @@ export class FileDownloadService extends UserServiceAgent<any> {
                 })
                 .pipe(
                     catchError(error => {
-                        console.log(error, 'ERROR')
                         this.logger.logDebug('getDownloadUrl error', error);
                         return throwError(() => error);
                     })
