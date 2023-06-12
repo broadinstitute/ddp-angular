@@ -7,6 +7,7 @@ import {FileDownloadService} from '../../../services/fileDownload.service';
 import {finalize, pluck} from 'rxjs/operators';
 import {Subscription} from 'rxjs';
 import {BlockType} from '../../../models/activity/blockType';
+import {HttpErrorResponse} from "@angular/common/http";
 
 interface StudyContactInformation {
     studyName: string;
@@ -106,9 +107,12 @@ export class ActivityContentComponent implements OnInit, OnChanges, OnDestroy {
             )
             .subscribe({
                 next: (downloadUrl) => this.openPDF(downloadUrl),
-                error: ({status, code}) => {
-                    if(status === 404 && code === 'NO_SUCH_ELEMENT') {
-                       this.isNoSuchFileError = true;
+                error: (error: any) => {
+                    if(error instanceof HttpErrorResponse) {
+                        const {code} = error.error;
+                        if(error.status === 404 && code === 'NO_SUCH_ELEMENT') {
+                            this.isNoSuchFileError = true;
+                        }
                     }
                 }
             });
