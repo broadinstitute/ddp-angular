@@ -61,7 +61,8 @@
                               [activityCode]="activityCode"
                               [activityStatusCode]="activityStatusCode"
                               [section]="section"
-                              [block]="block"></ddp-activity-content>
+                              [block]="block"
+                              (componentBusy)="componentBusy.emit($event)"></ddp-activity-content>
     </div>
     <div *ngIf="shouldBlockBeShown(block, BlockType.Group)">
         <ddp-group-block [block]="block"
