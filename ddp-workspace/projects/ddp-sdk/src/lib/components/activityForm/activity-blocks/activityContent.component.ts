@@ -8,6 +8,11 @@ import {catchError, finalize, pluck} from 'rxjs/operators';
 import {Subscription, throwError} from 'rxjs';
 import {BlockType} from '../../../models/activity/blockType';
 
+interface StudyContactInformation {
+    studyName: string;
+    phoneNumber: string;
+}
+
 @Component({
     selector: 'ddp-activity-content',
     template: `
@@ -22,9 +27,9 @@ import {BlockType} from '../../../models/activity/blockType';
                            (btnClicked)="downloadPDF()">
 
             <p *ngIf="isErrorButton">This file is not available. Please contact the study team at
-                <a class="Link" [href]="'mailTo:info@' + studyName +'project.org'">
-                    {{'info@'+ studyName + 'project.org'}}</a> or
-                <a class="Link" href="tel:651-403-5556">651-403-5556</a>
+                <a class="Link" [href]="'mailTo:info@' + studyContactInformation.studyName +'project.org'">
+                    {{'info@'+ studyContactInformation.studyName + 'project.org'}}</a> or
+                <a class="Link" [href]="'tel:' + studyContactInformation.phoneNumber">{{studyContactInformation.phoneNumber}}</a>
                 if you have any questions.
             </p>
 
@@ -64,17 +69,23 @@ export class ActivityContentComponent implements OnInit, OnChanges, OnDestroy {
         this.fileDownloadSubscription?.unsubscribe();
     }
 
-    public get studyName(): string {
-        let studyName: string;
+    public get studyContactInformation(): StudyContactInformation {
+        let studyName: StudyContactInformation;
         switch (this.studyGuid.toLowerCase()) {
             case 'cmi-osteo':
-                studyName = 'osteo';
+                studyName = {
+                    studyName: 'os',
+                    phoneNumber: '651-602-2020'
+                };
                 break;
             case 'cmi-lms':
-                studyName = 'lms';
+                studyName = studyName = {
+                    studyName: 'lms',
+                    phoneNumber: '651-403-5556'
+                };
                 break;
             default:
-                throw new Error(`The name is not available fot ${this.studyGuid} study guid`);
+                throw new Error(`The information is not available fot ${this.studyGuid} study guid`);
         }
         return studyName;
     }
