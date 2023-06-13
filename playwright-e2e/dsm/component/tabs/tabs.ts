@@ -2,11 +2,13 @@ import {Locator, Page} from '@playwright/test';
 import {TabEnum} from 'dsm/component/tabs/enums/tab-enum';
 import ContactInformationTab from 'dsm/component/tabs/contactInformationTab';
 import SampleInformationTab from 'dsm/component/tabs/sampleInformationTab';
+import OncHistoryTab from './oncHistoryTab';
 
 export default class Tabs {
   private readonly tabs = new Map<string, object>([
     [TabEnum.CONTACT_INFORMATION, new ContactInformationTab(this.page)],
-    [TabEnum.SAMPLE_INFORMATION, new SampleInformationTab(this.page)]
+    [TabEnum.SAMPLE_INFORMATION, new SampleInformationTab(this.page)],
+    [TabEnum.ONC_HISTORY, new OncHistoryTab(this.page)]
   ])
 
   constructor(private readonly page: Page) {}
