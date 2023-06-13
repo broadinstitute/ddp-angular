@@ -4,10 +4,10 @@ import { ActivityContentBlock } from '../../../models/activity/activityContentBl
 import {ActivityQuestionBlock} from '../../../models/activity/activityQuestionBlock';
 import {ActivitySection} from '../../../models/activity/activitySection';
 import {FileDownloadService} from '../../../services/fileDownload.service';
-import {finalize, pluck} from 'rxjs/operators';
+import {finalize, map, pluck} from 'rxjs/operators';
 import {Subscription} from 'rxjs';
 import {BlockType} from '../../../models/activity/blockType';
-import {HttpErrorResponse} from '@angular/common/http';
+import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
 
 interface StudyContactInformation {
     studyName: string;
@@ -22,12 +22,12 @@ interface StudyContactInformation {
 
 <!--    Button for Result File Download-->
     <ng-container *ngIf="shouldDisplayDownloadButton">
-        <ddp-download-file [isError]="isNoSuchFileError"
+        <ddp-download-file [isError]="isNoSuchElementError"
                            [isLoading]="isLoading"
                            [btnText]="'Download Results'"
                            (btnClicked)="downloadPDF()">
 
-            <p *ngIf="isNoSuchFileError">This file is not available. Please contact the study team at
+            <p *ngIf="isNoSuchElementError">This file is not available. Please contact the study team at
                 <a class="Link" [href]="'mailTo:info@' + studyContactInformation.studyName +'project.org'">
                     {{'info@'+ studyContactInformation.studyName + 'project.org'}}</a> or
                 <a class="Link" [href]="'tel:' + studyContactInformation.phoneNumber">{{studyContactInformation.phoneNumber}}</a>
@@ -41,7 +41,7 @@ interface StudyContactInformation {
 export class ActivityContentComponent implements OnInit, OnChanges, OnDestroy {
     public sanitizedContent: SafeHtml;
     public isLoading = false;
-    public isNoSuchFileError = false;
+    public isNoSuchElementError = false;
 
     private fileDownloadSubscription: Subscription;
 
@@ -99,6 +99,8 @@ export class ActivityContentComponent implements OnInit, OnChanges, OnDestroy {
         this.componentBusy.emit(true);
         this.fileDownloadSubscription = this.fileDownloadService
             .getDownloadUrl(this.studyGuid, this.activityGuid,'RESULT_FILE').pipe(
+                map((responseData: any) =>
+                    responseData instanceof HttpResponse ? responseData.body : responseData),
                 pluck('downloadUrl'),
                 finalize(() => {
                     this.componentBusy.emit(false);
@@ -106,12 +108,12 @@ export class ActivityContentComponent implements OnInit, OnChanges, OnDestroy {
                 })
             )
             .subscribe({
-                next: (downloadUrl) => this.openPDF(downloadUrl),
+                next: (downloadUrl: string) => this.openPDF(downloadUrl),
                 error: (error: any) => {
                     if(error instanceof HttpErrorResponse) {
                         const {code} = error.error;
                         if(error.status === 404 && code === 'NO_SUCH_ELEMENT') {
-                            this.isNoSuchFileError = true;
+                            this.isNoSuchElementError = true;
                         }
                     }
                 }
