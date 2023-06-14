@@ -9,10 +9,16 @@ import TellUsAboutYourFamilyPage from 'dss/pages/rgp/enrollment/tell-us-about-yo
 import TellUsYourStoryPage, { WHO } from 'dss/pages/rgp/enrollment/tell-us-your-story-page';
 import HomePage from 'dss/pages/rgp/home-page';
 import { setAuth0UserEmailVerified } from 'utils/api-utils';
+import { setPatientParticipantGuid } from 'utils/faker-utils';
+import { login } from 'authentication/auth-dsm';
+import Select from 'dss/component/select';
+import { Navigation } from 'dsm/component/navigation/navigation';
+import ParticipantListPage from 'dsm/pages/participant-list-page';
+import { StudyNavEnum } from 'dsm/component/navigation/enums/studyNav-enum';
 
 const { RGP_USER_EMAIL, RGP_USER_PASSWORD } = process.env;
 
-test.describe('Adult Self Enrollment', () => {
+test.describe.serial('Adult Self Enrollment', () => {
   const assertProgressActiveItem = async (page: Page, itemName: string): Promise<void> => {
     const locator = page.locator('li.activity-stepper__step-container button.stepper-btn.stepper-btn--active');
     await expect(locator).toHaveCount(1);
@@ -58,6 +64,7 @@ test.describe('Adult Self Enrollment', () => {
     await auth.login(page, { email: userEmail });
 
     const tellUsAboutYourFamily = new TellUsAboutYourFamilyPage(page);
+    await setPatientParticipantGuid(page);
     await tellUsAboutYourFamily.waitForReady();
     await assertProgressActiveItem(page, '1');
 
@@ -145,5 +152,31 @@ test.describe('Adult Self Enrollment', () => {
     // fields should be disabled. check one field to verify is disabled
     expect(await tellUsAboutYourFamily.yourTitle().isDisabled()).toEqual(true);
     expect(await tellUsAboutYourFamily.yourFirstName().isDisabled()).toEqual(true);
+  });
+
+  //Skipping until PEPPER-692 is done - which will let this pass consistently in dev and not just test
+  test.skip('Go to DSM to verify the newly created account can be found @functional @rgp', async ({ page, request }) => {
+    //Go to DSM to verify the newly created account can be found there
+    await login(page);
+    const navigation = new Navigation(page, request);
+
+    //select RGP study
+    await new Select(page, { label: 'Select study' }).selectOption('RGP');
+
+    const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
+
+    await participantListPage.assertPageTitle();
+
+    await participantListPage.waitForReady();
+    await participantListPage.filterListByParticipantGUID(user.patient.participantGuid);
+
+    //Make sure the newly created participant can be found and it's participant page can be accessed
+    const participantListTable = participantListPage.participantListTable;
+    const participantListRowCount = await participantListTable.rowsCount;
+    expect(participantListRowCount, 'More than 1 participant was returned from the participant guid search').toBe(1);
+    const participantIndex = participantListRowCount - 1;
+    await participantListTable.openParticipantPageAt(participantIndex);
+    await expect(page.getByRole('heading', { name: 'Participant Page' })).toBeVisible();
+    await expect(page.getByRole('cell', { name: user.patient.participantGuid })).toBeVisible();
   });
 });
