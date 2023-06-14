@@ -1,4 +1,4 @@
-export enum RequestEnum {
+export enum RequestStatusEnum {
     NEEDS_REVIEW = 'Needs Review',
     DONT_REQUEST = "Don't Request",
     ON_HOLD = 'On Hold',
