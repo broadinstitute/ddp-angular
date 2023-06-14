@@ -16,8 +16,11 @@ import {
   LoggingService,
   ParticipantsSearchServiceAgent,
   SubmitAnnouncementService,
-  WindowRef
+  WindowRef,
+  StudyContactInformation
 } from 'ddp-sdk';
+import {ToolkitConfigurationService} from 'toolkit';
+
 import { Subscription } from 'rxjs';
 
 import { SubmitButtonPlacement } from '../types';
@@ -49,7 +52,8 @@ export class ActivityComponent extends ActivityRedesignedComponent implements On
     analytics: AnalyticsEventsService,
     participantsSearch: ParticipantsSearchServiceAgent,
     @Inject(DOCUMENT) document: any,
-    injector: Injector
+    injector: Injector,
+    @Inject('toolkit.toolkitConfig') private toolkitConfig: ToolkitConfigurationService,
   ) {
     super(
       logger,
@@ -87,6 +91,13 @@ export class ActivityComponent extends ActivityRedesignedComponent implements On
     } else {
       this.showEmptyNestedActivityError = true;
     }
+  }
+
+  public get studyContactInformation(): StudyContactInformation {
+    return {
+      email: this.toolkitConfig.infoEmail,
+      phoneNumber: this.toolkitConfig.phone
+    };
   }
 
   public updateErrorMessageDisplayState = (): boolean =>

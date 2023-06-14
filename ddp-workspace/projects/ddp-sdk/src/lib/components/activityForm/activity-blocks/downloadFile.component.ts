@@ -8,7 +8,7 @@ import {
     selector: 'ddp-download-file',
     template: `
         <div id="fileDownloadButton" class="fileDownloadButton">
-            <button [disabled]="isLoading || isError" (click)="downloadFile()"
+            <button [disabled]="isLoading || isError" (click)="onButtonClick()"
                     class='button button_medium button_primary button_right downloadButton'>
                 <ng-container *ngIf="!isLoading else spinner">
                     {{btnText}}
@@ -53,7 +53,7 @@ export class DownloadFileComponent {
     @Output() btnClicked = new EventEmitter<void>();
 
 
-    public downloadFile(): void {
+    public onButtonClick(): void {
         this.btnClicked.emit();
     }
 

@@ -4,15 +4,11 @@ import { ActivityContentBlock } from '../../../models/activity/activityContentBl
 import {ActivityQuestionBlock} from '../../../models/activity/activityQuestionBlock';
 import {ActivitySection} from '../../../models/activity/activitySection';
 import {FileDownloadService} from '../../../services/fileDownload.service';
-import {finalize, map, pluck} from 'rxjs/operators';
-import {Subscription} from 'rxjs';
+import {finalize, mergeMap, pluck} from 'rxjs/operators';
+import {Subscription, throwError} from 'rxjs';
 import {BlockType} from '../../../models/activity/blockType';
-import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
-
-interface StudyContactInformation {
-    studyName: string;
-    phoneNumber: string;
-}
+import {HttpErrorResponse} from '@angular/common/http';
+import {StudyContactInformation} from '../../../models/activity/studyContactInformation';
 
 @Component({
     selector: 'ddp-activity-content',
@@ -28,9 +24,8 @@ interface StudyContactInformation {
                            (btnClicked)="downloadPDF()">
 
             <p *ngIf="isNoSuchElementError">This file is not available. Please contact the study team at
-                <a class="Link" [href]="'mailTo:info@' + studyContactInformation.studyName +'project.org'">
-                    {{'info@'+ studyContactInformation.studyName + 'project.org'}}</a> or
-                <a class="Link" [href]="'tel:' + studyContactInformation.phoneNumber">{{studyContactInformation.phoneNumber}}</a>
+                <a class="Link" [href]="'mailTo:' + studyContactInformation?.email">{{studyContactInformation?.email}}</a> or
+                <a class="Link" [href]="'tel:' + studyContactInformation?.phoneNumber">{{studyContactInformation?.phoneNumber}}</a>
                 if you have any questions.
             </p>
 
@@ -51,9 +46,9 @@ export class ActivityContentComponent implements OnInit, OnChanges, OnDestroy {
     @Input() activityGuid: string;
     @Input() activityCode: string;
     @Input() activityStatusCode: string;
+    @Input() studyContactInformation: StudyContactInformation;
 
     @Output() componentBusy = new EventEmitter<boolean>(true);
-
 
     constructor(public sanitizer: DomSanitizer,
                 private fileDownloadService: FileDownloadService) {}
@@ -70,27 +65,6 @@ export class ActivityContentComponent implements OnInit, OnChanges, OnDestroy {
         this.fileDownloadSubscription?.unsubscribe();
     }
 
-    public get studyContactInformation(): StudyContactInformation {
-        let studyName: StudyContactInformation;
-        switch (this.studyGuid.toLowerCase()) {
-            case 'cmi-osteo':
-                studyName = {
-                    studyName: 'os',
-                    phoneNumber: '651-602-2020'
-                };
-                break;
-            case 'cmi-lms':
-                studyName = studyName = {
-                    studyName: 'lms',
-                    phoneNumber: '651-403-5556'
-                };
-                break;
-            default:
-                throw new Error(`The information is not available fot ${this.studyGuid} study guid`);
-        }
-        return studyName;
-    }
-
     /**
      *  PDF download for the SOMATIC_RESULTS activity
      */
@@ -99,8 +73,6 @@ export class ActivityContentComponent implements OnInit, OnChanges, OnDestroy {
         this.componentBusy.emit(true);
         this.fileDownloadSubscription = this.fileDownloadService
             .getDownloadUrl(this.studyGuid, this.activityGuid,'RESULT_FILE').pipe(
-                map((responseData: any) =>
-                    responseData instanceof HttpResponse ? responseData.body : responseData),
                 pluck('downloadUrl'),
                 finalize(() => {
                     this.componentBusy.emit(false);

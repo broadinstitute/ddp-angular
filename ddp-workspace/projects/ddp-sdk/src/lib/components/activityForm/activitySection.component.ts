@@ -9,6 +9,7 @@ import {ConfigurationService} from '../../services/configuration.service';
 import {ActivityActivityBlock} from '../../models/activity/activityActivityBlock';
 import {SubmissionManager} from '../../services/serviceAgents/submissionManager.service';
 import {ActivityInstance} from '../../models/activityInstance';
+import {StudyContactInformation} from '../../models/activity/studyContactInformation';
 
 @Component({
     selector: 'ddp-activity-section',
@@ -22,6 +23,7 @@ export class ActivitySectionComponent implements OnInit, OnDestroy {
     @Input() public activityGuid: string;
     @Input() public activityCode: string;
     @Input() public activityStatusCode: string;
+    @Input() public studyContactInformation: StudyContactInformation;
 
     @Output() embeddedComponentsValidationStatus: EventEmitter<boolean> = new EventEmitter();
     @Output() componentBusy: EventEmitter<boolean> = new EventEmitter(true);

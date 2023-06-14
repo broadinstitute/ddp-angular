@@ -62,6 +62,7 @@
                               [activityStatusCode]="activityStatusCode"
                               [section]="section"
                               [block]="block"
+                              [studyContactInformation]="studyContactInformation"
                               (componentBusy)="componentBusy.emit($event)"></ddp-activity-content>
     </div>
     <div *ngIf="shouldBlockBeShown(block, BlockType.Group)">

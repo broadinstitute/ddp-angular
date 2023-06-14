@@ -3,9 +3,9 @@ import { LoggingService } from './logging.service';
 import { ConfigurationService } from './configuration.service';
 import { SessionMementoService } from './sessionMemento.service';
 import { UserServiceAgent } from './serviceAgents/userServiceAgent.service';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpResponse} from '@angular/common/http';
 import {mergeMap, Observable, throwError} from 'rxjs';
-import {catchError} from 'rxjs/operators';
+import {catchError, map} from 'rxjs/operators';
 import {CommunicationAspect} from './communicationAspect.service';
 import { beforeMethod } from 'kaop-ts';
 
@@ -33,6 +33,8 @@ export class FileDownloadService extends UserServiceAgent<any> {
                     withCredentials: data.withCredentials
                 })
                 .pipe(
+                    map((responseData: any) =>
+                        responseData instanceof HttpResponse ? responseData?.body : responseData),
                     catchError(error => {
                         this.logger.logDebug('getDownloadUrl error', error);
                         return throwError(() => error);
