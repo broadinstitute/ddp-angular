@@ -49,7 +49,7 @@ export class ParticipantListTable extends Table {
 
   public async numOfParticipants(): Promise<number> {
     const total = await this.getTableRowsTotal('# of participants');
-    if (total) {
+    if (total != null) {
       return total;
     }
     throw new Error('Failed to get Total number of participants in Participant List table');

@@ -195,4 +195,10 @@ public async filterListByParticipantGUID(participantGUID: string): Promise<void>
       }
     }
   }
+
+  async showParticipantWithdrawnButton(): Promise<void> {
+    const button = this.page.locator('button').filter({has: this.page.locator('[data-icon="quidditch"]')});
+    await button.click();
+    await waitForNoSpinner(this.page);
+  }
 }
