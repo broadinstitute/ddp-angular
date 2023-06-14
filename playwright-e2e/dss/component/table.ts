@@ -217,6 +217,20 @@ export default class Table {
     return Math.floor(Math.random() * rowsCount);
   }
 
+  /**
+   * Checks every row in this column to make sure cell value is not blank or empty.
+   * @param {string} column
+   * @returns {Promise<void>}
+   */
+  async assertColumnNotEmpty(column: string): Promise<void> {
+    const rows = await this.getRowsCount();
+    const columnIndex = await this.getHeaderIndex('Participant ID');
+    for (let rowIndex = 0; rowIndex < rows; rowIndex++) {
+      const cellLocator = this.cell(rowIndex, columnIndex);
+      await expect(cellLocator).toHaveText(/^\s*([0-9a-zA-Z]+)\s*$/);
+    }
+  }
+
   private parseForNumber(text: string): number | null {
     const numericalStr = text.match(/(\d|\.)+/g);
     if (numericalStr) {

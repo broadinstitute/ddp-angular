@@ -110,7 +110,7 @@ test('Osteo adult self enroll @osteo', async ({ page }) => {
   await surveyAboutOsteosarcoma.initialBodyLocation().toCheckbox('Other').check();
   await surveyAboutOsteosarcoma.initialBodyLocation().checkAndFillInInput('Other', {inputText: 'A different part of my body' });
   await surveyAboutOsteosarcoma.currentBodyLocation().toCheckbox('Lung (both)').check();
-  await surveyAboutOsteosarcoma.hadRadiationAsTreatment().toRadiobutton().check('No', { exact: true });
+  await surveyAboutOsteosarcoma.hadRadiationAsTreatment().toRadiobutton().check(/^\s+No/);
   await surveyAboutOsteosarcoma.hadReceivedTherapies().toCheckbox('Cisplatin').check();
   await surveyAboutOsteosarcoma.hadReceivedTherapies().toCheckbox('Methotrexate').check();
   await surveyAboutOsteosarcoma.isCurrentlyBeingTreated().toRadiobutton().check('Yes');
@@ -131,7 +131,7 @@ test('Osteo adult self enroll @osteo', async ({ page }) => {
   await surveyAboutYou.race().toCheckbox('Cuban').check();
   await surveyAboutYou.race().toCheckbox('Dominican').check();
   await surveyAboutYou.isMixedRace().toRadiobutton().check('Yes');
-  await surveyAboutYou.isIndigenousNative().toRadiobutton().check('No', { exact: true });
+  await surveyAboutYou.isIndigenousNative().toRadiobutton().check(/^\s+No/);
   await surveyAboutYou.tellUsAnythingElse().toTextarea().fill('testing comments!');
 
 

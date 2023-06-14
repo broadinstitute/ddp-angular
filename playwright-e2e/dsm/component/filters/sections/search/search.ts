@@ -1,7 +1,8 @@
 import { expect, Locator, Page } from '@playwright/test';
-import {CheckboxConfig, DateConfig, RadioButtonConfig, TextConfig} from 'dsm/component/filters/sections/search/search-types';
+import DatePicker from 'dsm/component/date-picker';
+import { CheckboxConfig, DateConfig, RadioButtonConfig, TextConfig } from 'dsm/component/filters/sections/search/search-types';
 import { AdditionalFilter } from 'dsm/component/filters/sections/search/search-enums';
-import {waitForNoSpinner, waitForResponse} from 'utils/test-utils';
+import { waitForNoSpinner, waitForResponse } from 'utils/test-utils';
 
 export class Search {
   private readonly enUSDateRegExp = new RegExp(/\b(0[1-9]|1[012])([/])(0[1-9]|[12]\d|3[01])\2(\d{4})/);
@@ -15,9 +16,15 @@ export class Search {
   }
 
   public async search(): Promise<void> {
-    await this.page.locator("//div[@id='searchTable']/button[1][span[text()='Search']]").click();
-    await waitForResponse(this.page, {uri: 'ui/filterList?'});
+    await Promise.all([
+      waitForResponse(this.page, {uri: 'ui/filterList?'}),
+      this.page.locator("//div[@id='searchTable']/button[1][span[text()='Search']]").click()
+    ]);
     await waitForNoSpinner(this.page);
+  }
+
+  public async clear(): Promise<void> {
+    await this.page.locator("//div[@id='searchTable']/button[.//span[text()='Clear']][1]").click(); // Two Clear buttons, use first one.
   }
 
   public async dates(columnName: string, { from: fromValue, to: toValue, additionalFilters }: Partial<DateConfig>): Promise<void> {
@@ -37,7 +44,7 @@ export class Search {
     }
 
     if (toValue instanceof Date) {
-      fromDate = new Intl.DateTimeFormat('en-US').format(toValue);
+      toDate = new Intl.DateTimeFormat('en-US').format(toValue);
     } else if (toValue && this.enUSDateRegExp.test(toValue)) {
       toDate = toValue;
     } else if (toValue && this.todayTextInDateRegExp.test(toValue)) {
@@ -83,6 +90,17 @@ export class Search {
     }
   }
 
+  public async openDatePicker(column: string, opts: { open?: boolean } = {}): Promise<DatePicker> {
+    const { open = true } = opts;
+    const datePicker = new DatePicker(this.page, { root: this.baseColumnXPath(column) });
+    if (open) {
+      await datePicker.open();
+    } else {
+      await datePicker.close();
+    }
+    return datePicker;
+  }
+
   private async setAdditionalFilters(
     columnName: string,
     additionalFilters: AdditionalFilter[] | null | undefined,
@@ -116,7 +134,7 @@ export class Search {
 
   private async isAdditionalFiltersOpen(columnName: string, isTextField = false): Promise<boolean> {
     const baseColumnXPath = isTextField ? this.baseTextColumnXPath(columnName) : this.baseColumnXPath(columnName);
-    return await this.page.locator(baseColumnXPath + this.minusIconXPath)?.isVisible();
+    return this.page.locator(baseColumnXPath + this.minusIconXPath)?.isVisible();
   }
 
   private async setTodayFor(columnName: string, nth = 0): Promise<void> {
@@ -144,7 +162,7 @@ export class Search {
       `//mat-radio-group//mat-radio-button[label[.//*[text()[normalize-space()="${radioButtonName}"]]]]`);
   }
 
-  private textInputLocator(columnName: string): Locator {
+  public textInputLocator(columnName: string): Locator {
     return this.page.locator(`${this.baseTextColumnXPath(columnName)}//mat-form-field//input`);
   }
 

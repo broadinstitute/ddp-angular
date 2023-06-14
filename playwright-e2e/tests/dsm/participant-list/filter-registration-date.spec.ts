@@ -54,12 +54,12 @@ test.describe('Participants Search', () => {
 
       // Search filter with date range (don't need to open Search panel because it does not close automatically)
       const today = getDate(new Date());
-      const thirtyDaysAgo = offsetDaysFromToday(30);
-      await searchPanel.dates(MainInfoEnum.REGISTRATION_DATE, { additionalFilters: [AdditionalFilter.RANGE], from: thirtyDaysAgo, to: today});
+      const yearAgo = offsetDaysFromToday(365);
+      await searchPanel.dates(MainInfoEnum.REGISTRATION_DATE, { additionalFilters: [AdditionalFilter.RANGE], from: yearAgo, to: today});
       await searchPanel.search();
 
       const numParticipants2 = await participantsTable.numOfParticipants();
-      console.log(`Search by Registration Date Range returns ${numParticipants2} participants`);
+      console.log(`Search by Registration Date Range (from: ${yearAgo}, to: ${today}) returns ${numParticipants2} participants`);
       expect(numParticipants2).toBeGreaterThan(1);
       expect(numParticipants2).not.toEqual(numParticipants1); // Expect Participants list table has reloaded and changed
 
