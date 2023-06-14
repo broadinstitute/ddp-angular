@@ -4,8 +4,8 @@ import { ActivityContentBlock } from '../../../models/activity/activityContentBl
 import {ActivityQuestionBlock} from '../../../models/activity/activityQuestionBlock';
 import {ActivitySection} from '../../../models/activity/activitySection';
 import {FileDownloadService} from '../../../services/fileDownload.service';
-import {finalize, mergeMap, pluck} from 'rxjs/operators';
-import {Subscription, throwError} from 'rxjs';
+import {finalize, pluck} from 'rxjs/operators';
+import {Subscription} from 'rxjs';
 import {BlockType} from '../../../models/activity/blockType';
 import {HttpErrorResponse} from '@angular/common/http';
 import {StudyContactInformation} from '../../../models/activity/studyContactInformation';
