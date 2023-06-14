@@ -383,6 +383,11 @@ select:disabled {
     font-size: 1.2rem!important;
 }
 
+// Somatic Results inline h3 tag
+.activity-question-make-inline-h {
+    display: inline!important;
+}
+
 .picklist {
     .ddp-date-field-margin:first-child {
         margin: 0 1.5rem 0 0;
