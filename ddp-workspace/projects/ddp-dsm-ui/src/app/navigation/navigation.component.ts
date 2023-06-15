@@ -8,11 +8,7 @@ import {DomSanitizer, Title} from '@angular/platform-browser';
 import {Location} from '@angular/common';
 import {Observable} from 'rxjs';
 import {LocalStorageService} from '../services/local-storage.service';
-
-enum selectedStudyEnum {
-  OC_PE_CGS = 'OS PE-CGS',
-  LMS = 'Leiomyosarcoma'
-}
+import {studyNameEnum} from "../enums/studyNameEnum";
 
 @Component({
   selector: 'app-navigation',
@@ -23,7 +19,7 @@ export class NavigationComponent implements OnInit {
 
   selectedStudy: Observable<string>;
   readonly oncHistoryUploadPageAllowedStudies: string[] =
-    [selectedStudyEnum.OC_PE_CGS, selectedStudyEnum.LMS];
+    [studyNameEnum.OC_PE_CGS, studyNameEnum.LMS];
 
 
   constructor(private router: Router, private auth: Auth, private location: Location, sanitizer: DomSanitizer,
