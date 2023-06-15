@@ -37,9 +37,11 @@ test.describe('Participants Withdrawal', () => {
         expect(numParticipants).toBeGreaterThan(1);
 
         // Sort Registration Date in ascending order to pick the oldest participant
-        await participantsTable.sort('Registration Date', SortOrder.ASC);
+        await participantsTable.sort('Registration Date', SortOrder.DESC);
 
         // Select record on first row for withdrawal
+        const registrationDateColumnIndex = await participantsTable.getHeaderIndex('Registration Date');
+        const registrationDate = await participantsTable.cell(0, registrationDateColumnIndex).innerText();
         // First row Registration Date
         const shortIdColumnIndex = await participantsTable.getHeaderIndex('Short ID');
         const shortIdColumnId = await participantsTable.cell(0, shortIdColumnIndex).innerText();
@@ -71,7 +73,7 @@ test.describe('Participants Withdrawal', () => {
 
         // Enter Participant ID to withdraw
         await withdrawalPage.withdrawParticipant(participantId);
-        logParticipantWithdrew(participantId, shortIdColumnId);
+        logParticipantWithdrew(participantId, shortIdColumnId, registrationDate);
 
         // Reload Participant List page
         const navigation = new Navigation(page, request);
