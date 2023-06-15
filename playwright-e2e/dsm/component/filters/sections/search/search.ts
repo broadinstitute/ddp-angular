@@ -154,7 +154,9 @@ export class Search {
   /* Locators */
 
   private checkboxLocator(columnName: string, checkboxName: string): Locator {
-    return this.page.locator(`${this.baseColumnXPath(columnName)}//mat-checkbox[label[.//*[text()[normalize-space()='${checkboxName}']]]]`);
+    return checkboxName !== 'undefined'
+      ? this.page.locator(`${this.baseColumnXPath(columnName)}//mat-checkbox[label[.//*[text()[normalize-space()="${checkboxName}"]]]]`)
+      : this.page.locator(`${this.baseColumnXPath(columnName)}//mat-checkbox[label[.//*[text()=""]]]`);
   }
 
   private radioBtnLocator(columnName: string, radioButtonName: string): Locator {

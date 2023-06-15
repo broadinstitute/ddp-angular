@@ -1,9 +1,9 @@
-import {expect, Locator, Page} from '@playwright/test';
+import { expect, Locator, Page } from '@playwright/test';
 import Select from 'dss/component/select';
 import { waitForResponse } from 'utils/test-utils';
-import {MainInfoEnum} from 'dsm/pages/participant-page/enums/main-info-enum';
+import { MainInfoEnum } from 'dsm/pages/participant-page/enums/main-info-enum';
 import Tab from 'dsm/component/tabs/tab';
-import {TabEnum} from 'dsm/component/tabs/enums/tab-enum';
+import { TabEnum } from 'dsm/component/tabs/enums/tab-enum';
 
 export default class ParticipantPage {
   private readonly PAGE_TITLE: string = 'Participant Page';
@@ -126,7 +126,7 @@ export default class ParticipantPage {
       .toBe(value);
   }
 
-  public get addFamilyMember() {
+  public get addFamilyMemberDialog() {
     const page = this.page;
     const modal = '[role="dialog"]';
 
@@ -136,25 +136,56 @@ export default class ParticipantPage {
         await expect(page.locator(modal)).toBeVisible();
       }
 
-      _rootLocator(): Locator {
+      get _rootLocator(): Locator {
         return page.locator(modal).locator('table.family-member-form');
+      }
+
+      get firstName(): Locator {
+        return this._rootLocator.locator('input[name="first-name"]');
+      }
+
+      get lastName(): Locator {
+        return this._rootLocator.locator('input[name="last-name"]');
+      }
+
+      get subjectId(): Locator {
+        return this._rootLocator.locator('input[name="subjectId"]');
+      }
+
+      get relation(): Select {
+        return new Select(page, { root: this._rootLocator.locator('//tr[.//text()[normalize-space()="Relation"]]') });
+      }
+
+      get copyProbandInfo(): Locator {
+        return this._rootLocator.locator('tr', { hasText: 'Copy Proband Info' }).locator('mat-checkbox');
+      }
+
+      get submit(): Locator {
+        return this._rootLocator.locator('text="Submit"');
       }
 
       async fillInfo(opts: {
         firstName: string,
         lastName: string,
         relationshipId: number,
-        relation: string,
-        copyProbandInfo?: boolean }): Promise<void> {
+        relation?: string,
+        copyProbandInfo?: boolean }): Promise<string> {
           const { firstName, lastName, relationshipId, relation, copyProbandInfo = true } = opts;
+
           await this._open();
-          await this._rootLocator().locator('input[name="first-name"]').fill(firstName);
-          await this._rootLocator().locator('input[name="last-name"]').fill(lastName);
-          await this._rootLocator().locator('input[name="subjectId"]').fill(relationshipId.toString());
-          await new Select(page, { root: this._rootLocator().locator('//tr[.//text()[normalize-space()="Relation"]]') }).selectOption(relation);
-          copyProbandInfo && await this._rootLocator().locator('tr', { hasText: 'Copy Proband Info' }).locator('mat-checkbox').click();
-          await this._rootLocator().locator('text="Submit"').click();
-          await page.pause();
+          await this.firstName.fill(firstName);
+          await this.lastName.fill(lastName);
+          await this.subjectId.fill(relationshipId.toString());
+          relation ? await this.relation.selectOption(relation) : await this.relation.selectOption(relation);
+          copyProbandInfo && await this.copyProbandInfo.click();
+
+          const selectedRelation = await this.relation.toLocator().locator('.mat-select-value-text').innerText();
+          await this.submit.click();
+
+          await expect(page.locator(modal)).toHaveText('Successfully added family member');
+          await page.locator('h1').click(); // close popup with a click outside
+
+          return selectedRelation;
       }
     }
   }
