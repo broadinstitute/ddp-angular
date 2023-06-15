@@ -1,9 +1,12 @@
 export enum ContactInfoEnum {
-  STREET_1 = 'Street 1',
   CITY = 'City',
-  STATE = 'State',
   COUNTRY = 'Country',
-  ZIP = 'Zip',
+  EMAIL = 'Preferred Email',
+  PHONE = 'Phone number',
+  PHONE_PRIMARY = 'Phone (Primary)',
+  STATE = 'State',
+  STREET_1 = 'Street 1',
+  STREET_2 = 'Street 2',
   VALID = 'Valid',
-  PHONE = 'Phone number'
+  ZIP = 'Zip'
 }

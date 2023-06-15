@@ -3,7 +3,7 @@ import {TabEnum} from 'dsm/component/tabs/enums/tab-enum';
 import ContactInformationTab from 'dsm/component/tabs/contactInformationTab';
 import SampleInformationTab from 'dsm/component/tabs/sampleInformationTab';
 
-export default class Tabs {
+export default class Tab {
   private readonly tabs = new Map<string, object>([
     [TabEnum.CONTACT_INFORMATION, new ContactInformationTab(this.page)],
     [TabEnum.SAMPLE_INFORMATION, new SampleInformationTab(this.page)]
@@ -33,12 +33,12 @@ export default class Tabs {
   }
 
   /* Locators */
-  public tabLocator(tabName: TabEnum): Locator {
+  public tabLocator(tabName: TabEnum | string): Locator {
     return this.page.locator(this.getTabXPath(tabName))
   }
 
   /* XPaths */
-  private getTabXPath(tabName: TabEnum) {
-    return `//tabset/ul[@role='tablist']/li[a[span[text()[normalize-space()='${tabName}']]]]`
+  private getTabXPath(tabName: TabEnum | string) {
+    return `//tabset/ul[@role="tablist"]//a[@role="tab" and contains(normalize-space(), "${tabName}")]`
   }
 }

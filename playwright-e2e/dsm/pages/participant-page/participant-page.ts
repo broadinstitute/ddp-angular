@@ -1,12 +1,13 @@
 import {expect, Locator, Page} from '@playwright/test';
-import {waitForResponse} from 'utils/test-utils';
+import Select from 'dss/component/select';
+import { waitForResponse } from 'utils/test-utils';
 import {MainInfoEnum} from 'dsm/pages/participant-page/enums/main-info-enum';
-import Tabs from 'dsm/component/tabs/tabs';
+import Tab from 'dsm/component/tabs/tab';
 import {TabEnum} from 'dsm/component/tabs/enums/tab-enum';
 
 export default class ParticipantPage {
   private readonly PAGE_TITLE: string = 'Participant Page';
-  private readonly tabs = new Tabs(this.page);
+  private readonly tabs = new Tab(this.page);
 
   constructor(private readonly page: Page) {}
 
@@ -123,5 +124,38 @@ export default class ParticipantPage {
     await expect(await this.notes.inputValue(),
       "Participant page - participant's value doesn't match the provided one")
       .toBe(value);
+  }
+
+  public get addFamilyMember() {
+    const page = this.page;
+    const modal = '[role="dialog"]';
+
+    return new class {
+      async _open(): Promise<void> {
+        await page.locator('.family-member-button button').click();
+        await expect(page.locator(modal)).toBeVisible();
+      }
+
+      _rootLocator(): Locator {
+        return page.locator(modal).locator('table.family-member-form');
+      }
+
+      async fillInfo(opts: {
+        firstName: string,
+        lastName: string,
+        relationshipId: number,
+        relation: string,
+        copyProbandInfo?: boolean }): Promise<void> {
+          const { firstName, lastName, relationshipId, relation, copyProbandInfo = true } = opts;
+          await this._open();
+          await this._rootLocator().locator('input[name="first-name"]').fill(firstName);
+          await this._rootLocator().locator('input[name="last-name"]').fill(lastName);
+          await this._rootLocator().locator('input[name="subjectId"]').fill(relationshipId.toString());
+          await new Select(page, { root: this._rootLocator().locator('//tr[.//text()[normalize-space()="Relation"]]') }).selectOption(relation);
+          copyProbandInfo && await this._rootLocator().locator('tr', { hasText: 'Copy Proband Info' }).locator('mat-checkbox').click();
+          await this._rootLocator().locator('text="Submit"').click();
+          await page.pause();
+      }
+    }
   }
 }
