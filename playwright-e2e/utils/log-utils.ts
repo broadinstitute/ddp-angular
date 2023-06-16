@@ -7,10 +7,10 @@ export function logParticipantCreated(participantEmail: string, participantName:
   });
 }
 
-export function logParticipantWithdrew(participantId: string, shortId: string) {
+export function logParticipantWithdrew(participantId: string, shortId: string, registrationDate: string) {
   test.info().annotations.push({
     type: 'participant withdrawn',
-    description: `participant ID: ${participantId}, Short ID: ${shortId}`
+    description: `participant ID: ${participantId}, Short ID: ${shortId}, Registration Date: ${registrationDate}`
   });
 }
 
