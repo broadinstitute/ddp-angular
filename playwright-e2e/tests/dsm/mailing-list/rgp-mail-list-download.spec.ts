@@ -2,16 +2,16 @@ import { expect } from '@playwright/test';
 import { login } from 'authentication/auth-dsm';
 import { APP } from 'data/constants';
 import { test } from 'fixtures/rgp-fixture';
-import { MiscellaneousEnum } from 'lib/component/dsm/navigation/enums/miscellaneousNav-enum';
-import { StudyEnum } from 'lib/component/dsm/navigation/enums/selectStudyNav-enum';
-import { Navigation } from 'lib/component/dsm/navigation/navigation';
-import { SortOrder } from 'lib/component/table';
+import { MiscellaneousEnum } from 'dsm/component/navigation/enums/miscellaneousNav-enum';
+import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
+import { Navigation } from 'dsm/component/navigation/navigation';
+import { SortOrder } from 'dss/component/table';
 import * as lodash from 'lodash';
-import MailingListPage, { COLUMN } from 'pages/dsm/mailing-list-page';
-import { WelcomePage } from 'pages/dsm/welcome-page';
-import TellUsYourStoryPage, { WHO } from 'pages/rgp/enrollment/tell-us-your-story-page';
-import HomePage from 'pages/rgp/home-page';
-import HowItWorksPage from 'pages/rgp/how-it-works-page';
+import MailingListPage, { COLUMN } from 'dsm/pages/mailing-list-page';
+import { WelcomePage } from 'dsm/pages/welcome-page';
+import TellUsYourStoryPage, { WHO } from 'dss/pages/rgp/enrollment/tell-us-your-story-page';
+import HomePage from 'dss/pages/rgp/home-page';
+import HowItWorksPage from 'dss/pages/rgp/how-it-works-page';
 import { assertTableHeaders } from 'utils/assertion-helper';
 import { getDate, getMailingListDownloadedFileDate, mailingListCreatedDate } from 'utils/date-utils';
 import { generateEmailAlias } from 'utils/faker-utils';
@@ -33,7 +33,6 @@ test.describe.serial('When an interested participant does NOT meet participation
     await tellUsYourStoryPage.waitForReady();
 
     // Check all but one checkbox (i.e. don't check all the boxes so that user fails to meet requirements)
-    await tellUsYourStoryPage.who().check(WHO.UnderstandEnglishOrSpanish);
     await tellUsYourStoryPage.who().check(WHO.LivesInUS);
     await tellUsYourStoryPage.who().check(WHO.HasRareGeneticallyUndiagnosedCondition);
     await tellUsYourStoryPage.submit();

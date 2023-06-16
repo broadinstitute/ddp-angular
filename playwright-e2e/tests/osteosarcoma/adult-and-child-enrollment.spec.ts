@@ -1,9 +1,10 @@
 import { expect } from '@playwright/test';
 import { test } from 'fixtures/osteo-fixture';
-import HomePage from 'pages/osteo/home-page';
-import PrequalPage from 'pages/osteo/prequal-page';
-import ConsentAssentPage from 'pages/osteo/consent-assent-page';
+import HomePage from 'dss/pages/osteo/home-page';
+import PrequalPage from 'dss/pages/osteo/prequal-page';
+import ConsentAssentPage from 'dss/pages/osteo/consent-assent-page';
 import * as auth from 'authentication/auth-angio';
+import { waitForResponse } from 'utils/test-utils';
 
 const { OSTEO_USER_EMAIL, OSTEO_USER_PASSWORD } = process.env;
 
@@ -77,13 +78,17 @@ test('Osteo enroll self and kid together @osteo', async ({ page }) => {
 
   await page.locator('span').filter({ hasText: 'Yes' }).click();
   await expect(page.getByTestId('answer:SOMATIC_SINGATURE_PEDIATRIC')).toBeVisible();
-  await page.getByTestId('answer:SOMATIC_SINGATURE_PEDIATRIC').fill('Playwright Parent');
-  await page.getByTestId('answer:SOMATIC_SINGATURE_PEDIATRIC').blur({ timeout: 2000 });
+
+  const resp = waitForResponse(page, { uri: '/answers'});
+  await Promise.all([
+    page.getByTestId('answer:SOMATIC_SINGATURE_PEDIATRIC').fill('Playwright Parent'),
+    resp
+  ]);
 
   await consentAssentPage.next();
 
-  await page.getByText('Consent Form Addendum: Learning About Your Child').click();
-  await page.getByText('Assent Form Addendum: Learning About Your Tumor').click();
+  // await page.getByText('Consent Form Addendum: Learning About Your Child').click();
+  // await page.getByText('Assent Form Addendum: Learning About Your Tumor').click();
   await page.getByText('The form below will tell you more about another part of the research study that ').click();
   await page.getByText('Yes').click();
   await page.locator('#mat-input-16').click();
@@ -104,7 +109,12 @@ test('Osteo enroll self and kid together @osteo', async ({ page }) => {
   await page.getByText('By completing this information, you are agreeing to allow us to contact these ph').click();
   await page.getByText('I have already read and signed the informed consent document for this study, whi').click();
   await page.getByLabel('Full Name').click();
-  await page.getByRole('combobox', { name: 'Full Name' }).fill('Playwright McTestsAlot');
+
+  const responsePromise = waitForResponse(page, { uri: '/answers'});
+  await Promise.all([
+    responsePromise,
+    page.getByRole('combobox', { name: 'Full Name' }).fill('Playwright McTestsAlot')
+  ]);
 
   await consentAssentPage.submit();
 

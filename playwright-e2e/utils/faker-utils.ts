@@ -1,4 +1,6 @@
 import { faker } from '@faker-js/faker';
+import { Page } from '@playwright/test';
+import * as user from 'data/fake-user.json';
 
 export const generateUserName = (namePrefix: string): string => {
   return `${namePrefix}-${faker.name.lastName()}${faker.random.word()}`;
@@ -16,4 +18,18 @@ export const generateEmailAlias = (email: string | undefined): string => {
   const name = splintedEmail[0];
   const domain = splintedEmail[1];
   return `${name}+${Math.floor(Math.random() * 1000000000)}@${domain}`;
+};
+
+/**
+ * Set the guid given a saved action that occurs on a page e.g. entering input
+ * @param page The current page where an action is taken that may lead to the guid being retreived
+ */
+export const setPatientParticipantGuid = async (page: Page) => {
+  const [response] = await Promise.all([
+    page.waitForResponse((resp) => resp.url().includes('/participants') && resp.status() === 200)
+  ]);
+
+  const participantResponse = response.url();
+  const urlArray = participantResponse.split('/');
+  user.patient.participantGuid = urlArray[6];
 };

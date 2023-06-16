@@ -3,11 +3,11 @@ import * as auth from 'authentication/auth-rgp';
 import * as user from 'data/fake-user.json';
 import { APP } from 'data/constants';
 import { test } from 'fixtures/rgp-fixture';
-import DashboardPage from 'pages/rgp/dashboard-page';
-import HowItWorksPage from 'pages/rgp/how-it-works-page';
-import TellUsAboutYourFamilyPage from 'pages/rgp/enrollment/tell-us-about-your-family-page';
-import TellUsYourStoryPage, { WHO } from 'pages/rgp/enrollment/tell-us-your-story-page';
-import HomePage from 'pages/rgp/home-page';
+import DashboardPage from 'dss/pages/rgp/dashboard-page';
+import HowItWorksPage from 'dss/pages/rgp/how-it-works-page';
+import TellUsAboutYourFamilyPage from 'dss/pages/rgp/enrollment/tell-us-about-your-family-page';
+import TellUsYourStoryPage, { WHO } from 'dss/pages/rgp/enrollment/tell-us-your-story-page';
+import HomePage from 'dss/pages/rgp/home-page';
 import { setAuth0UserEmailVerified } from 'utils/api-utils';
 
 const { RGP_USER_EMAIL, RGP_USER_PASSWORD } = process.env;
@@ -32,7 +32,6 @@ test.describe('Child Enrollment', () => {
     const tellUsYourStoryPage = new TellUsYourStoryPage(page);
     await tellUsYourStoryPage.waitForReady();
     // Check all checkboxes
-    await tellUsYourStoryPage.who().check(WHO.UnderstandEnglishOrSpanish);
     await tellUsYourStoryPage.who().check(WHO.LivesInUS);
     await tellUsYourStoryPage.who().check(WHO.HasRareGeneticallyUndiagnosedCondition);
     await tellUsYourStoryPage.who().check(WHO.IsUnderCare);

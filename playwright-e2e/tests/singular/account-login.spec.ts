@@ -1,10 +1,10 @@
 import { expect } from '@playwright/test';
 import { login } from 'authentication/auth-singular';
 import { test } from 'fixtures/singular-fixture';
-import Modal from 'lib/component/modal';
-import EnrollMyselfPage from 'pages/singular/enrollment/enroll-myself-page';
+import Modal from 'dss/component/modal';
+import EnrollMyselfPage from 'dss/pages/singular/enrollment/enroll-myself-page';
 import { assertActivityHeader } from 'utils/assertion-helper';
-import { NavSelectors } from 'pages/singular/navbar';
+import { NavSelectors } from 'dss/pages/singular/navbar';
 
 test.skip('Continue enrollment after log out @visual @singular', async ({ page, dashboardPage }) => {
   await dashboardPage.logOut();

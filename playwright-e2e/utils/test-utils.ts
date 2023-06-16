@@ -1,7 +1,8 @@
 import {BrowserContext, Download, expect, Locator, Page, Response} from '@playwright/test';
-import Input from 'lib/widget/input';
-import Checkbox from 'lib/widget/checkbox';
-import Select from 'lib/widget/select';
+import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
+import Input from 'dss/component/input';
+import Checkbox from 'dss/component/checkbox';
+import Select from 'dss/component/select';
 import axios from 'axios';
 
 export interface WaitForResponse {
@@ -18,7 +19,10 @@ export async function waitForNoSpinner(page: Page): Promise<void> {
 
 export async function waitForResponse(page: Page, {uri, status = 200, timeout = 30000}: WaitForResponse): Promise<Response> {
   try {
-    return await page.waitForResponse((response: Response) => response.url().includes(uri) && response.status() === status, {timeout})
+    return page.waitForResponse(
+      (response: Response) => response.url().includes(uri) && response.status() === status,
+      {timeout}
+    )
   } catch (error: any) {
     throw new Error(`Timeout ${timeout}ms exceeded while waiting for ${uri} URI response with status - ${status}`)
   }
@@ -151,3 +155,25 @@ export const getEnv = (value: string | undefined, defaultValue: string): string 
   }
   return value == null ? defaultValue : value;
 };
+
+/**
+ * Verify DSM Participant List download file name with a fixed pattern.
+ * @param {Download} download
+ * @param {string} study
+ */
+export function assertParticipantListDownloadFileName(download: Download, study: string) {
+  const actualFileName = download.suggestedFilename();
+  let name;
+  switch (study) {
+    case StudyEnum.OSTEO2:
+      name = 'osteo2';
+      break;
+    case StudyEnum.LMS:
+      name = 'cmi-lms';
+      break;
+    default:
+      name = study;
+  }
+  const expectedFileName = `${name}_export.zip`;
+  expect(actualFileName.toLowerCase()).toEqual(expectedFileName.toLowerCase());
+}
