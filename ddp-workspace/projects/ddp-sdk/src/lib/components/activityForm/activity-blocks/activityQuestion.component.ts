@@ -1,22 +1,22 @@
-import { Component, ElementRef, EventEmitter, Inject, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
-import { BehaviorSubject, combineLatest, Observable, Subject } from 'rxjs';
 import {
-    delay,
-    filter,
-    map,
-    shareReplay,
-    startWith,
-    takeUntil,
-    tap,
-} from 'rxjs/operators';
+    Component,
+    EventEmitter,
+    Inject,
+    Input,
+    OnDestroy,
+    OnInit,
+    Output
+} from '@angular/core';
+import {BehaviorSubject, combineLatest, Observable, Subject} from 'rxjs';
+import {delay, filter, map, shareReplay, startWith, takeUntil, tap,} from 'rxjs/operators';
 
-import { ActivityQuestionBlock } from '../../../models/activity/activityQuestionBlock';
-import { WindowRef } from '../../../services/windowRef';
-import { AnswerValue } from '../../../models/activity/answerValue';
-import { SubmissionManager } from '../../../services/serviceAgents/submissionManager.service';
-import { ConfigurationService } from '../../../services/configuration.service';
-import { ActivityValidationResult } from '../../../models/activity/activityValidationResult';
-import { LayoutType } from '../../../models/layout/layoutType';
+import {ActivityQuestionBlock} from '../../../models/activity/activityQuestionBlock';
+import {AnswerValue} from '../../../models/activity/answerValue';
+import {SubmissionManager} from '../../../services/serviceAgents/submissionManager.service';
+import {ConfigurationService} from '../../../services/configuration.service';
+import {ActivityValidationResult} from '../../../models/activity/activityValidationResult';
+import {LayoutType} from '../../../models/layout/layoutType';
+import {WindowRef} from '../../../services/windowRef';
 
 @Component({
     selector: 'ddp-activity-question',
