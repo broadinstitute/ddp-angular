@@ -1,23 +1,15 @@
-import {
-    ChangeDetectorRef,
-    Component,
-    EventEmitter,
-    Inject,
-    Input,
-    OnDestroy,
-    OnInit,
-    Output
-} from '@angular/core';
-import { Subscription } from 'rxjs';
+import {ChangeDetectorRef, Component, EventEmitter, Inject, Input, OnDestroy, OnInit, Output} from '@angular/core';
+import {Subscription} from 'rxjs';
 
-import { ActivitySection } from '../../models/activity/activitySection';
-import { ActivityBlock } from '../../models/activity/activityBlock';
-import { BlockType } from '../../models/activity/blockType';
-import { BlockVisibility } from '../../models/activity/blockVisibility';
-import { ConfigurationService } from '../../services/configuration.service';
-import { ActivityActivityBlock } from '../../models/activity/activityActivityBlock';
-import { SubmissionManager } from '../../services/serviceAgents/submissionManager.service';
-import { ActivityInstance } from '../../models/activityInstance';
+import {ActivitySection} from '../../models/activity/activitySection';
+import {ActivityBlock} from '../../models/activity/activityBlock';
+import {BlockType} from '../../models/activity/blockType';
+import {BlockVisibility} from '../../models/activity/blockVisibility';
+import {ConfigurationService} from '../../services/configuration.service';
+import {ActivityActivityBlock} from '../../models/activity/activityActivityBlock';
+import {SubmissionManager} from '../../services/serviceAgents/submissionManager.service';
+import {ActivityInstance} from '../../models/activityInstance';
+import {StudyContactInformation} from '../../models/activity/studyContactInformation';
 
 @Component({
     selector: 'ddp-activity-section',
@@ -29,8 +21,13 @@ export class ActivitySectionComponent implements OnInit, OnDestroy {
     @Input() public validationRequested = false;
     @Input() public studyGuid: string;
     @Input() public activityGuid: string;
+    @Input() public activityCode: string;
+    @Input() public activityStatusCode: string;
+    @Input() public studyContactInformation: StudyContactInformation;
+
     @Output() embeddedComponentsValidationStatus: EventEmitter<boolean> = new EventEmitter();
     @Output() componentBusy: EventEmitter<boolean> = new EventEmitter(true);
+
     private subscription: Subscription;
     private embeddedValidationStatus = new Map();
 

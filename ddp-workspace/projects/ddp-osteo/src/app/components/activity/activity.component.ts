@@ -10,13 +10,14 @@ import {
 } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import {
-  ActivityActionsAgent,
-  ActivityRedesignedComponent,
-  AnalyticsEventsService,
-  LoggingService,
-  ParticipantsSearchServiceAgent,
-  SubmitAnnouncementService,
-  WindowRef
+    ActivityActionsAgent,
+    ActivityRedesignedComponent,
+    AnalyticsEventsService,
+    LoggingService,
+    ParticipantsSearchServiceAgent,
+    StudyContactInformation,
+    SubmitAnnouncementService,
+    WindowRef
 } from 'ddp-sdk';
 import { Subscription } from 'rxjs';
 
@@ -26,6 +27,7 @@ import {
   isAboutYouOrChildActivity,
   isEnabledModalActivityBlock
 } from '../../utils';
+import {ToolkitConfigurationService} from 'toolkit';
 
 @Component({
   selector: 'app-activity',
@@ -53,7 +55,8 @@ export class ActivityComponent extends ActivityRedesignedComponent implements On
     analytics: AnalyticsEventsService,
     participantsSearch: ParticipantsSearchServiceAgent,
     @Inject(DOCUMENT) document: any,
-    injector: Injector
+    injector: Injector,
+    @Inject('toolkit.toolkitConfig') private toolkitConfig: ToolkitConfigurationService,
   ) {
     super(
       logger,
@@ -83,6 +86,13 @@ export class ActivityComponent extends ActivityRedesignedComponent implements On
     this.dialogsClosedSubscription.unsubscribe();
     this.activityInstanceDeletedSubscription.unsubscribe();
   }
+
+    public get studyContactInformation(): StudyContactInformation {
+        return {
+            email: this.toolkitConfig.infoEmail,
+            phoneNumber: this.toolkitConfig.phone
+        };
+    }
 
   public incrementStep(): void {
     if (this.allNestedActivitiesHaveAnswers) {
