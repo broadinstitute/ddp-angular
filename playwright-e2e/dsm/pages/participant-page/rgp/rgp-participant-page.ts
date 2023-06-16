@@ -1,5 +1,6 @@
+import Select from 'dss/component/select';
 import ParticipantPage from '../participant-page';
-import { Locator, Page } from '@playwright/test';
+import { Locator, Page, expect } from '@playwright/test';
 
 /**
  * Captures the webelements in between profile section and the Family Member section
@@ -9,46 +10,72 @@ export default class RgpParticipantPage extends ParticipantPage {
         super(page);
     }
 
-    public getAddFamilyMemberButton(): Locator {
-        return this.page.locator("//span[contains(text(), 'Add Family Member')]/preceding-sibling::button");
-    }
+    public get addFamilyMemberDialog() {
+        const page = this.page;
+        const modal = '[role="dialog"]';
 
-    public getAddFamilyMemberPopup(): Locator {
-        return this.page.locator("//mat-dialog-container//mat-dialog-content//div[@class='family-member-popup']");
-    }
+        return new class {
+            async _open(): Promise<void> {
+            await page.locator('.family-member-button button').click();
+            await expect(page.locator(modal)).toBeVisible();
+            }
 
-    public getFamilyMemberFirstName(): Locator {
-        return this.page.locator("//mat-dialog-container//table[contains(@class, 'family-member-form')]" +
-        "//td[contains(.,'First Name')]/following-sibling::td/input");
-    }
+            get _addFamilyMemberButton(): Locator {
+                return page.locator('.family-member-button button');
+            }
 
-    public getFamilyMemberLastName(): Locator {
-        return this.page.locator("//mat-dialog-container//table[contains(@class, 'family-member-form')]" +
-        "//td[contains(.,'Last Name')]/following-sibling::td/input");
-    }
+            get _rootLocator(): Locator {
+            return page.locator(modal).locator('table.family-member-form');
+            }
 
-    public getFamilyMemberRelationshipID(): Locator {
-        return this.page.locator("//mat-dialog-container//table[contains(@class, 'family-member-form')]" +
-        "//td[contains(.,'Relationship ID')]/following-sibling::td/input");
-    }
+            get firstName(): Locator {
+            return this._rootLocator.locator('input[name="first-name"]');
+            }
 
-    public getFamilyMemberRelation(): Locator {
-        return this.page.locator("//mat-dialog-container//table[contains(@class, 'family-member-form')]" +
-        "//td[contains(.,'Relation')]/following-sibling::td/mat-select");
-    }
+            get lastName(): Locator {
+            return this._rootLocator.locator('input[name="last-name"]');
+            }
 
+            get subjectId(): Locator {
+            return this._rootLocator.locator('input[name="subjectId"]');
+            }
 
-    public getCopyProbandInfo(): Locator {
-        return this.page.locator("//mat-dialog-container//table[contains(@class, 'family-member-form')]//td[contains(.,'Copy Proband Info')]" +
-        "/following-sibling::td/mat-checkbox//span[contains(@class, 'mat-checkbox-inner-container')]");
-    }
+            get relation(): Select {
+            return new Select(page, { root: this._rootLocator.locator('//tr[.//text()[normalize-space()="Relation"]]') });
+            }
 
-    public getAddFamilyMemberFormSubmitButton(): Locator {
-        return this.page.locator("//mat-dialog-container//table[contains(@class, 'family-member-form')]//button[text()='Submit']");
-    }
+            get copyProbandInfo(): Locator {
+            return this._rootLocator.locator('tr', { hasText: 'Copy Proband Info' }).locator('mat-checkbox');
+            }
 
-    public getAddFamilyMemberSuccessfulMessage(): Locator {
-        return this.page.getByText('Successfully added family member');
+            get submit(): Locator {
+            return this._rootLocator.locator('text="Submit"');
+            }
+
+            async fillInfo(opts: {
+            firstName: string,
+            lastName: string,
+            relationshipId: number,
+            relation?: string,
+            copyProbandInfo?: boolean }): Promise<string> {
+                const { firstName, lastName, relationshipId, relation, copyProbandInfo = true } = opts;
+
+                await this._open();
+                await this.firstName.fill(firstName);
+                await this.lastName.fill(lastName);
+                await this.subjectId.fill(relationshipId.toString());
+                relation ? await this.relation.selectOption(relation) : await this.relation.selectOption(relation);
+                copyProbandInfo && await this.copyProbandInfo.click();
+
+                const selectedRelation = await this.relation.toLocator().locator('.mat-select-value-text').innerText();
+                await this.submit.click();
+
+                await expect(page.locator(modal)).toHaveText('Successfully added family member');
+                await page.locator('h1').click(); // close popup with a click outside
+
+                return selectedRelation;
+            }
+        }
     }
 
     /**

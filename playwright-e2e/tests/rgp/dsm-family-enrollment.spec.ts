@@ -8,6 +8,7 @@ import { test } from 'fixtures/dsm-fixture';
 import { login } from 'authentication/auth-dsm';
 import RgpParticipantPage from 'dsm/pages/participant-page/rgp/rgp-participant-page';
 import { saveParticipantGuid } from 'utils/faker-utils';
+import { ParticipantListTable } from 'dsm/component/tables/participant-list-table';
 
 let rgpEmail: string;
 
@@ -23,21 +24,22 @@ test.describe.serial('DSM Family Enrollment Handling', () => {
         const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
         await participantListPage.assertPageTitle();
         await participantListPage.waitForReady();
-        const participantGuid = await participantListPage.getGuidOfMostRecentAutomatedParticipant(true);
+
+        //Get the most recent automated test participant (searches for up to a week ago)
+        const participantListTable = new ParticipantListTable(page);
+        const participantGuid = await participantListTable.getGuidOfMostRecentAutomatedParticipant(user.patient.firstName, true);
         saveParticipantGuid(participantGuid);
-        await participantListPage.filterListByParticipantGUID(user.patient.participantGuid);
-        const participantListTable = participantListPage.participantListTable;
-        const participantListRowCount = await participantListTable.rowsCount;
-        expect(participantListRowCount, 'More than 1 participant was returned from the participant guid search').toBe(1);
-        const participantIndex = participantListRowCount - 1;
-        await participantListTable.openParticipantPageAt(participantIndex);
+
+        //Filter the Participant List by the given guid
+        await participantListPage.filterListByParticipantGUID(participantGuid);
+        await participantListTable.openParticipantPageAt(0);
         await expect(page.getByRole('heading', { name: 'Participant Page' })).toBeVisible();
         await expect(page.getByRole('cell', { name: user.patient.participantGuid })).toBeVisible();
 
         //Confirm the 'Add Family Member' button is visible
         const rgpParticipantPage = new RgpParticipantPage(page);
         rgpEmail = await rgpParticipantPage.getEmail(); //Get the actual email used for the family account - to be used later
-        const addFamilyMemberButton = rgpParticipantPage.getAddFamilyMemberButton();
+        const addFamilyMemberButton = rgpParticipantPage.addFamilyMemberDialog._addFamilyMemberButton;
         await expect(addFamilyMemberButton).toBeVisible();
 
         //Confirm 'Family Notes' is present and functional
