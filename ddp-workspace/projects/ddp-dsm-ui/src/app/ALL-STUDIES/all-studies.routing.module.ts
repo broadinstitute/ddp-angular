@@ -36,8 +36,8 @@ import {StoolUploadComponent} from '../stool-upload/stool-upload.component';
 import {ExportHelpComponent} from '../help/help.component';
 import {DashboardStatisticsComponent} from '../dashboard-statistics/dashboard-statistics.component';
 import {ScannerComponent} from '../scanner/scanner.component';
-import {OncHistoryUploadComponent} from "../oncHistoryUpload/oncHistoryUpload.component";
-import {OncHistoryUploadGuard} from "../guards/oncHistoryUpload.guard";
+import {OncHistoryUploadComponent} from '../oncHistoryUpload/oncHistoryUpload.component';
+import {OncHistoryUploadGuard} from '../guards/oncHistoryUpload.guard';
 
 
 

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
-import {studyGuidEnum} from "../enums/studyNameEnum";
-import {SessionService} from "../services/session.service";
+import {studyGuidEnum} from '../enums/studyNameEnum';
+import {SessionService} from '../services/session.service';
 
 @Injectable()
 export class OncHistoryUploadGuard implements CanActivate {

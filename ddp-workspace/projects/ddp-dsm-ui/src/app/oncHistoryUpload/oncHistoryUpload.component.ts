@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { DSMService } from '../services/dsm.service';
-import {finalize} from "rxjs/operators";
-import {SessionService} from "../services/session.service";
-import {MatDialog} from "@angular/material/dialog";
-import {LoadingModalComponent} from "../modals/loading-modal.component";
-import {HttpErrorResponse} from "@angular/common/http";
+import {finalize} from 'rxjs/operators';
+import {SessionService} from '../services/session.service';
+import {MatDialog} from '@angular/material/dialog';
+import {LoadingModalComponent} from '../modals/loading-modal.component';
+import {HttpErrorResponse} from '@angular/common/http';
 
 enum UploadStatus {
   SUCCESS,
@@ -43,7 +43,7 @@ export class OncHistoryUploadComponent {
         next: () => this.uploadStatus = UploadStatus.SUCCESS,
         error: (error: any) => {
           if (error instanceof HttpErrorResponse) {
-            console.log(error)
+            console.log(error);
             this.uploadStatus = UploadStatus.FAIL;
             this.errorMessage = error.error;
           }

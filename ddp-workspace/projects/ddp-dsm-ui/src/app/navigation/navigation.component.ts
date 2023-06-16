@@ -8,7 +8,7 @@ import {DomSanitizer, Title} from '@angular/platform-browser';
 import {Location} from '@angular/common';
 import {Observable} from 'rxjs';
 import {LocalStorageService} from '../services/local-storage.service';
-import {studyNameEnum} from "../enums/studyNameEnum";
+import {studyNameEnum} from '../enums/studyNameEnum';
 
 @Component({
   selector: 'app-navigation',

@@ -138,8 +138,8 @@ import {DateRangeErrorPipe} from '../dashboard-statistics/pipes/dateRangeError.p
 import {KeyValuePairPipe} from '../dashboard-statistics/pipes/KeyValuePair.pipe';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {ScannerComponent} from '../scanner/scanner.component';
-import {OncHistoryUploadComponent} from "../oncHistoryUpload/oncHistoryUpload.component";
-import {OncHistoryUploadGuard} from "../guards/oncHistoryUpload.guard";
+import {OncHistoryUploadComponent} from '../oncHistoryUpload/oncHistoryUpload.component';
+import {OncHistoryUploadGuard} from '../guards/oncHistoryUpload.guard';
 
 
 PlotlyModule.plotlyjs = PlotlyJS;

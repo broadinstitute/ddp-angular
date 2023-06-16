@@ -15,7 +15,7 @@ export const lmsColumns = [
   'SLIDES_TO_REQUEST',
   'SLIDES_TOTAL',
   'REQUEST_STATUS'
-]
+];
 
 export const osteoColumns = [
   'RECORD_ID',
@@ -37,4 +37,4 @@ export const osteoColumns = [
   'DECALCIFICATION',
   'BLOCK_TO_REQUEST',
   'REQUEST_STATUS'
-]
+];
