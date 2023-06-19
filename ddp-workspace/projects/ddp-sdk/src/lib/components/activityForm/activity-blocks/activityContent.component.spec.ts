@@ -3,6 +3,11 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { ActivityContentBlock } from '../../../models/activity/activityContentBlock';
 import { ActivityContentComponent } from './activityContent.component';
+import {FileDownloadService} from '../../../services/fileDownload.service';
+import {of} from 'rxjs';
+import {ActivitySection} from 'ddp-sdk';
+import {DownloadFileComponent} from './downloadFile.component';
+import {expect} from '@angular/flex-layout/_private-utils/testing';
 
 describe('ActivityContentComponent', () => {
     const contentBlock = {
@@ -10,24 +15,38 @@ describe('ActivityContentComponent', () => {
         title: null
     } as ActivityContentBlock;
 
+    const section = {
+        blocks: []
+    } as ActivitySection;
+
     @Component({
         template: `
-        <ddp-activity-content [block]="block">
+        <ddp-activity-content  [studyGuid]="'CMI-LMS'" [block]="block">
         </ddp-activity-content>`
     })
     class TestHostComponent {
         block = contentBlock;
     }
+    let fileDownloadService: jasmine.SpyObj<FileDownloadService>;
+
 
     let component: ActivityContentComponent;
     let fixture: ComponentFixture<ActivityContentComponent>;
     let debugElement: DebugElement;
 
+
     beforeEach(() => {
+        fileDownloadService = jasmine.createSpyObj('FileDownloadService', ['getDownloadUrl']);
+        fileDownloadService.getDownloadUrl.and.returnValue(of({downloadUrl: 'someUrl'}));
+
         TestBed.configureTestingModule({
             declarations: [
                 TestHostComponent,
-                ActivityContentComponent
+                ActivityContentComponent,
+                DownloadFileComponent
+            ],
+            providers: [
+                {provide: FileDownloadService, useValue: fileDownloadService },
             ]
         }).compileComponents();
 
@@ -35,6 +54,7 @@ describe('ActivityContentComponent', () => {
         component = fixture.componentInstance;
         debugElement = fixture.debugElement;
         component.block = contentBlock;
+        component.section = section;
         fixture.detectChanges();
     });
 
@@ -55,5 +75,13 @@ describe('ActivityContentComponent', () => {
         expect(data.length).toBe(2);
         expect(data[0].nativeElement.innerText).toBe('Some title');
         expect(data[1].nativeElement.innerText).toBe('Some text');
+    });
+
+    it('should display file download button',  () => {
+        spyOnProperty(component, 'shouldDisplayDownloadButton', 'get')
+            .and.returnValue(true);
+        fixture.detectChanges();
+        const childComponent = debugElement.query(By.directive(DownloadFileComponent)).componentInstance;
+        expect(childComponent).toBeTruthy('File Download Button is not visible');
     });
 });
