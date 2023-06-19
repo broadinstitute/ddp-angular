@@ -1,4 +1,5 @@
 export interface SharedLearningsFile {
   name: string,
-  uploadDate: string | Date
+  uploadDate: string | Date;
+  sentDate: string | Date;
 }

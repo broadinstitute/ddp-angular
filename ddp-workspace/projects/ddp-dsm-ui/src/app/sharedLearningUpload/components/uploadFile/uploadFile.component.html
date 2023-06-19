@@ -1,13 +1,14 @@
 <div id="uploadFile" class="upload">
-  <button (click)="browse()" class="upload-selectBtn">Select a PDF</button>
+  <button [disabled]="unauthorized" (click)="browse()" class="upload-selectBtn">Select a PDF</button>
   <input type="file" accept=".pdf" #hiddenInput (change)="onFileSelection($event)" class="upload-hiddenInput">
   <span class="upload-selectedFileName">{{selectedFileName}}</span>
-  <button (mouseleave)="retryOrNot(false)" (mouseover)="retryOrNot(true)"
-          #uploadButton class="upload-uploadBtn" (click)="upload()" [disabled]="!isFileSelected || uploadStatus === 1"
+  <button  (mouseleave)="retryOrNot(false)" (mouseover)="retryOrNot(true)"
+          #uploadButton class="upload-uploadBtn" (click)="upload()"
+           [disabled]="unauthorized || (!isFileSelected || uploadStatus === 'SUCCESS')"
           [ngClass]="
-          uploadStatus === 1 ? 'uploadSuccess'
-          : uploadStatus === 2 ? 'uploadFail'
-          : uploadStatus === 4 ? 'uploadRetry'
+          uploadStatus === 'SUCCESS' ? 'uploadSuccess'
+          : uploadStatus === 'FAIL' ? 'uploadFail'
+          : uploadStatus === 'RETRY' ? 'uploadRetry'
           : ''"
   >{{uploadButtonText}}</button>
 </div>

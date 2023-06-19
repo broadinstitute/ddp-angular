@@ -7,7 +7,7 @@ main {
     &.fileUpload {
       @include common.flexContainer(center, center);
       width: 100%;
-      app-browse-files {
+      app-upload-files {
         width: 35em;
       }
     }
@@ -22,6 +22,18 @@ main {
         background-color: rgba(216, 240, 251, 0.7);
         width: 50%;
       }
+    }
+
+    &.error-note {
+      p {
+        margin: 0;
+        padding: 0;
+      }
+      margin-top: 1em;
+      width: 100%;
+      padding: 1em;
+      text-align: center;
+      background-color: rgba(255, 113, 121, 0.7);
     }
 
     &.files {

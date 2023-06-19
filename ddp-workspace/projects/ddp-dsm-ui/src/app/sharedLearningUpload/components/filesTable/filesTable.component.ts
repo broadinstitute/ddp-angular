@@ -1,9 +1,6 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  Input
-} from "@angular/core";
+import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, Output, SimpleChanges} from "@angular/core";
 import {SharedLearningsFile} from "../../interfaces/sharedLearningsFile";
+import {HttpRequestStatusEnum} from "../../enums/httpRequestStatus-enum";
 
 @Component({
   selector: 'app-files-table',
@@ -11,7 +8,18 @@ import {SharedLearningsFile} from "../../interfaces/sharedLearningsFile";
   styleUrls: ['filesTable.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class FilesTableComponent {
+export class FilesTableComponent implements OnChanges {
+  public readonly columnNames: string[] = ['Name', 'UploadDate', 'SendToParticipant', 'SentDate', 'Delete'];
+
   @Input() uploadedFiles: SharedLearningsFile[] = [];
-  public readonly columnNames: string[] = ['Name', 'UploadDate'];
+  @Input() sendToParticipantStatus: HttpRequestStatusEnum = HttpRequestStatusEnum.DEFAULT;
+  @Input() deleteStatus: HttpRequestStatusEnum = HttpRequestStatusEnum.DEFAULT;
+
+  @Output() sendToParticipant = new EventEmitter();
+  @Output() delete = new EventEmitter();
+
+  ngOnChanges(changes: SimpleChanges) {
+    console.log(changes, 'FILE_TABLE_CHANGES')
+  }
+
 }

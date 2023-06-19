@@ -1,11 +1,21 @@
 <main id="sharedLearningUpload">
   <section class="fileUpload">
-    <app-browse-files (fileUploaded)="onFileUpload($event)"></app-browse-files>
+    <app-upload-files
+      [participantId]="participantId"
+      [unauthorized]="isUnauthorized"
+      (fileUploaded)="onFileUpload($event)"></app-upload-files>
   </section>
+
   <section class="note">
     <p>This file will be made available to the participant</p>
   </section>
-  <section class="files">
+
+  <section *ngIf="errorLoadingData" class="error-note">
+    <p>We couldn't load the data</p>
+    <p>The error message: {{errorLoadingData}}</p>
+  </section>
+
+  <section *ngIf="!errorLoadingData" class="files">
     <ng-container *ngIf="!isLoading; else spinner" >
       <app-files-table [uploadedFiles]="sharedLearningsFiles"></app-files-table>
     </ng-container>

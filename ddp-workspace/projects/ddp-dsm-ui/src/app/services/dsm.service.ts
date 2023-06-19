@@ -19,6 +19,7 @@ import { BulkCohortTag } from '../tags/cohort-tag/bulk-cohort-tag-modal/bulk-coh
 import {LocalStorageService} from './local-storage.service';
 import {IDateRange} from '../dashboard-statistics/interfaces/IDateRange';
 import {StatisticsEnum} from '../dashboard-statistics/enums/statistics.enum';
+import {SomaticResultSignedUrl} from "../sharedLearningUpload/interfaces/somaticResultSignedUrl";
 
 declare var DDP_ENV: any;
 
@@ -641,6 +642,48 @@ export class DSMService {
     map.push({name: 'carrier', value: carrier});
     map.push( {name: 'skipAddressValidation', value: skipAddressValidation} );
     return this.http.post(url, file, this.buildQueryUploadHeader(map)).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  public getSomaticResults(realm: string, participantId: string): Observable<any> {
+    const url = this.baseUrl + DSMService.UI + 'somaticResults';
+    const map: { name: string; value: any }[] = [];
+    map.push({name: DSMService.REALM, value: realm});
+    map.push({name: 'userId', value: this.role.userID()});
+    map.push({name: 'ddpParticipantId', value: participantId});
+    return this.http.get(url, this.buildQueryUploadHeader(map)).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  public getSomaticResultFileUploadSignedUrl(
+    realm: string,
+    participantId: string,
+    fileInformation: SomaticResultSignedUrl): Observable<any> {
+    const url = this.baseUrl + DSMService.UI + 'somaticResults';
+    const map: { name: string; value: any }[] = [];
+    map.push({name: DSMService.REALM, value: realm});
+    map.push({name: 'userId', value: this.role.userID()});
+    map.push({name: 'ddpParticipantId', value: participantId});
+    return this.http.post(url, fileInformation, this.buildQueryUploadHeader(map)).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  public uploadSomaticResult(signedUrl: string, file: File): Observable<any> {
+    return this.http.post(signedUrl, file).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  public deleteSomaticResult(realm: string, somaticDocumentId: string): Observable<any> {
+    const url = this.baseUrl + DSMService.UI + 'somaticResults';
+    const map: { name: string; value: any }[] = [];
+    map.push({name: DSMService.REALM, value: realm});
+    map.push({name: 'userId', value: this.role.userID()});
+    map.push({name: 'somaticDocumentId', value: somaticDocumentId});
+    return this.http.delete(url, this.buildQueryUploadHeader(map)).pipe(
       catchError(this.handleError)
     );
   }

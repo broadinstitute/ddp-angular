@@ -1083,13 +1083,6 @@ participant.data.dsm['diagnosisYear'] != null">
                 </app-medical-record-abstraction>
               </div>
             </tab>
-
-            <tab (selectTab)="sharedLearningsTabSelected()" heading="Shared Learnings">
-              <legend class="Group--Title">
-                <app-shared-learnings-upload [tabActivated]="sharedLearningsTabSubject.asObservable()"></app-shared-learnings-upload>
-              </legend>
-            </tab>
-
           <ng-container *ngIf="settings | dynamicFormTypeAndStudyRGP; else groupForm">
             <ng-container *ngFor="let relative of participant.participantData">
               <!--RGP tabs from fieldSettings-->
@@ -1235,7 +1228,19 @@ participant.data.dsm['diagnosisYear'] != null">
               </ng-container>
             </ng-container>
           </ng-template>
-        </tabset>
+
+          <ng-container *ngIf="true">
+            <tab  (selectTab)="sharedLearningsTabSelected()" heading="Shared Learnings">
+              <legend class="Group--Title">
+                <app-shared-learnings-upload
+                  [tabActivated]="sharedLearningsTabSubject.asObservable()"
+                  [participantId]="participant.data.profile['guid']"
+                ></app-shared-learnings-upload>
+              </legend>
+            </tab>
+          </ng-container>
+
+          </tabset>
       </div>
     </div>
   </div>

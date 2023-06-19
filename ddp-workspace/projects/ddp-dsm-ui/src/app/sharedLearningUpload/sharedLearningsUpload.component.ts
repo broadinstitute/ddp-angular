@@ -1,11 +1,12 @@
 import {
   ChangeDetectionStrategy,
-  Component, Input, OnDestroy, OnInit,
+  Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges,
 } from "@angular/core";
 import {SharedLearningsFile} from "./interfaces/sharedLearningsFile";
-import {EMPTY, iif, Observable, Subscription, switchMap, tap} from "rxjs";
+import {defaultIfEmpty, EMPTY, iif, Observable, of, Subscription, switchMap, tap, throwError} from "rxjs";
 import {SharedLearningsHTTPService} from "./services/sharedLearningsHTTP.service";
-import {finalize} from "rxjs/operators";
+import {catchError, finalize, take} from "rxjs/operators";
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-shared-learnings-upload',
@@ -14,13 +15,23 @@ import {finalize} from "rxjs/operators";
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [SharedLearningsHTTPService]
 })
-export class SharedLearningsUploadComponent implements OnInit, OnDestroy {
-  @Input() tabActivated: Observable<void>;
-  public sharedLearningsFiles: SharedLearningsFile[];
+export class SharedLearningsUploadComponent implements OnInit, OnDestroy, OnChanges {
+  public sharedLearningsFiles: SharedLearningsFile[] | null;
   public isLoading: boolean = false;
-  private subscription: Subscription
+  public isUnauthorized: boolean = false;
+  public errorLoadingData: string | null;
+
+  private subscription: Subscription;
+
+  @Input() tabActivated: Observable<void>;
+  @Input() participantId: string;
+
 
   constructor(private readonly sharedLearningsHTTPService: SharedLearningsHTTPService) {
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    // console.log(changes, 'SHARED_LEARNING_PARTICIPANT_ID')
   }
 
   ngOnInit(): void {
@@ -38,12 +49,19 @@ export class SharedLearningsUploadComponent implements OnInit, OnDestroy {
   private get loadFiles(): Observable<any> {
     this.isLoading = true;
     return this.tabActivated.pipe(
-      switchMap(() => iif(() => !this.sharedLearningsFiles,
-        this.sharedLearningsHTTPService.tempFiles,
-        EMPTY)),
+      switchMap(() => iif(() => !(!!this.sharedLearningsFiles) || !!this.errorLoadingData,
+        this.sharedLearningsHTTPService.getFiles(this.participantId), of(null))),
       tap((files: SharedLearningsFile[]) => {
-        this.sharedLearningsFiles = files;
-        this.isLoading = false;
+        console.log(files, 'FILES')
+        this.sharedLearningsFiles = files || null;
+      }),
+      take(1),
+      catchError((err: any) => {
+        if(err instanceof HttpErrorResponse) {
+          this.errorLoadingData = err.error;
+          this.isUnauthorized = err.status === 403;
+        }
+        return throwError(() => err);
       }),
       finalize(() => this.isLoading = false)
     )
