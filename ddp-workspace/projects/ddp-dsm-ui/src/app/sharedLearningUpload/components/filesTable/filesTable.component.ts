@@ -6,13 +6,13 @@ import {
   Input, OnDestroy,
   Output, Renderer2,
 } from "@angular/core";
-import {SharedLearningsFile} from "../../interfaces/sharedLearningsFile";
+import {SomaticResultsFile} from "../../interfaces/somaticResultsFile";
 import {HttpRequestStatusEnum} from "../../enums/httpRequestStatus-enum";
 import {SharedLearningsHTTPService} from "../../services/sharedLearningsHTTP.service";
-import {Subject, Subscription} from "rxjs";
+import {pipe, Subject, Subscription, takeUntil} from "rxjs";
 import {MatIcon} from "@angular/material/icon";
 
-interface SharedLearningsWithStatus extends SharedLearningsFile {
+interface SomaticResultsFileWithStatus extends SomaticResultsFile {
   sendToParticipantStatus: {
     status: HttpRequestStatusEnum;
     message: string | null;
@@ -32,13 +32,13 @@ interface SharedLearningsWithStatus extends SharedLearningsFile {
 export class FilesTableComponent implements OnDestroy {
   public readonly columnNames: string[] = ['Name', 'UploadDate', 'SendToParticipant', 'SentDate', 'Delete'];
   public httpRequestStatusEnum = HttpRequestStatusEnum;
-  public sharedLearnings: SharedLearningsWithStatus[] = [];
+  public sharedLearnings: SomaticResultsFileWithStatus[] = [];
 
-  private sharedLearningsSubject$ = new Subject<SharedLearningsWithStatus[]>();
-  private sharedLearningsSubscription: Subscription;
+  private sharedLearningsSubject$ = new Subject<SomaticResultsFileWithStatus[]>();
+  private subscriptionSubject = new Subject<boolean>();
 
-  @Input() set uploadedFiles(sharedLearnings: SharedLearningsFile[]) {
-    const sharedLearningsWithStatuses: SharedLearningsWithStatus[] = sharedLearnings.map((file) =>
+  @Input() set uploadedFiles(sharedLearnings: SomaticResultsFile[]) {
+    const sharedLearningsWithStatuses: SomaticResultsFileWithStatus[] = sharedLearnings.map((file) =>
       ({...file,
         sendToParticipantStatus: {status: HttpRequestStatusEnum.NONE, message: null},
         deleteStatus: {status: HttpRequestStatusEnum.NONE, message: null}
@@ -53,49 +53,57 @@ export class FilesTableComponent implements OnDestroy {
     private readonly sharedLearningsHTTPService: SharedLearningsHTTPService,
     private readonly renderer: Renderer2
   ) {
-    this.sharedLearningsSubscription = this.sharedLearningsSubject$
-      .subscribe((sharedLearnings: SharedLearningsWithStatus[]) => this.sharedLearnings = sharedLearnings)
+    this.sharedLearningsSubject$
+      .pipe(takeUntil(this.subscriptionSubject))
+      .subscribe((sharedLearnings: SomaticResultsFileWithStatus[]) => this.sharedLearnings = sharedLearnings)
   }
 
   ngOnDestroy(): void {
-    this.sharedLearningsSubscription?.unsubscribe();
+    this.subscriptionSubject.complete();
+    this.subscriptionSubject.unsubscribe();
   }
 
   // @TODO mocked
-  public onSendToParticipant(file: SharedLearningsWithStatus): void {
-    console.log(file, 'SENDING_TO_PARTICIPANT');
-    this.sharedLearningsSubject$
-      .next(this.updateSendToStatus(this.sharedLearnings, file.id, HttpRequestStatusEnum.IN_PROGRESS, null))
-    setTimeout(() => {
-      this.cdr.markForCheck()
-      const status = HttpRequestStatusEnum.SUCCESS;
+  public onSendToParticipant(somaticResultsFile: SomaticResultsFileWithStatus): void {
+    console.log(somaticResultsFile, 'SENDING_TO_PARTICIPANT');
+    if(somaticResultsFile.isVirusFree) {
       this.sharedLearningsSubject$
-        .next(this.updateSendToStatus(this.sharedLearnings, file.id, status, 'Could not send the file'))
-      // @ts-ignore
-      if(status !== HttpRequestStatusEnum.FAIL) {
-        setTimeout(() => {
-          this.cdr.markForCheck()
-          this.sharedLearningsSubject$
-            .next(this.updateSendToStatus(this.sharedLearnings, file.id, HttpRequestStatusEnum.NONE, null))
-        }, 2000)
-      }
-    }, 3000)
+        .next(this.updateSendToStatus(this.sharedLearnings, somaticResultsFile.somaticDocumentId, HttpRequestStatusEnum.IN_PROGRESS, null))
+      setTimeout(() => {
+        this.cdr.markForCheck()
+        const status = HttpRequestStatusEnum.SUCCESS;
+        this.sharedLearningsSubject$
+          .next(this.updateSendToStatus(this.sharedLearnings, somaticResultsFile.somaticDocumentId, status, 'Could not send the file'))
+        // @ts-ignore
+        if(status !== HttpRequestStatusEnum.FAIL) {
+          setTimeout(() => {
+            this.cdr.markForCheck()
+            this.sharedLearningsSubject$
+              .next(this.updateSendToStatus(this.sharedLearnings, somaticResultsFile.somaticDocumentId, HttpRequestStatusEnum.NONE, null))
+          }, 2000)
+        }
+      }, 3000)
+    }
   }
 
   // @TODO mocked
-  public onDelete(file: SharedLearningsWithStatus): void {
-    console.log(file, 'DELETING');
-    this.sharedLearningsSubject$
-      .next(this.updateDeleteStatus(this.sharedLearnings, file.id, HttpRequestStatusEnum.IN_PROGRESS, null))
-    setTimeout(() => {
-      this.cdr.markForCheck();
-
-      this.sharedLearningsSubject$.next(this.sharedLearnings.filter((sharedLearningFile) => sharedLearningFile.id !== file.id))
-
-      // @TODO mocked fail case
-      // this.sharedLearningsSubject$
-      //   .next(this.updateDeleteStatus(this.sharedLearnings, file.id, HttpRequestStatusEnum.SUCCESS, "Could not delete the file"))
-    }, 3000)
+  public onDelete(somaticDocumentId: number): void {
+    this.sharedLearningsHTTPService.delete(somaticDocumentId)
+      .pipe(takeUntil(this.subscriptionSubject))
+      .subscribe((data: any) => {
+        console.log(data, 'DELETED_RESPONSE')
+      })
+    // this.sharedLearningsSubject$
+    //   .next(this.updateDeleteStatus(this.sharedLearnings, somaticDocumentId, HttpRequestStatusEnum.IN_PROGRESS, null))
+    // setTimeout(() => {
+    //   this.cdr.markForCheck();
+    //
+    //   this.sharedLearningsSubject$.next(this.sharedLearnings.filter(({somaticDocumentId : id}) => id !== somaticDocumentId))
+    //
+    //   // @TODO mocked fail case
+    //   // this.sharedLearningsSubject$
+    //   //   .next(this.updateDeleteStatus(this.sharedLearnings, file.id, HttpRequestStatusEnum.FAIL, "Could not delete the file"))
+    // }, 3000)
   }
 
   public retryOrNot(shouldRetry: boolean, matIcon: MatIcon): void {
@@ -106,15 +114,15 @@ export class FilesTableComponent implements OnDestroy {
       this.renderer.removeClass(matIconNative, 'retry-icon')
   }
 
-  private updateSendToStatus(sharedLearnings: SharedLearningsWithStatus[], id: number, status: HttpRequestStatusEnum, message): SharedLearningsWithStatus[] {
-    return sharedLearnings.map((sharedLearning: SharedLearningsWithStatus) =>
-      sharedLearning.id === id ? {...sharedLearning, sendToParticipantStatus: {status, message}} : sharedLearning)
+  private updateSendToStatus(sharedLearnings: SomaticResultsFileWithStatus[], id: number, status: HttpRequestStatusEnum, message): SomaticResultsFileWithStatus[] {
+    return sharedLearnings.map((sharedLearning: SomaticResultsFileWithStatus) =>
+      sharedLearning.somaticDocumentId === id ? {...sharedLearning, sendToParticipantStatus: {status, message}} : sharedLearning)
   }
 
-  private updateDeleteStatus(sharedLearnings: SharedLearningsWithStatus[], id: number,
-                             status: HttpRequestStatusEnum.NONE | HttpRequestStatusEnum.IN_PROGRESS | HttpRequestStatusEnum.FAIL, message): SharedLearningsWithStatus[] {
-    return sharedLearnings.map((sharedLearning: SharedLearningsWithStatus) =>
-      sharedLearning.id === id ? {...sharedLearning, deleteStatus: {status, message}} : sharedLearning)
+  private updateDeleteStatus(sharedLearnings: SomaticResultsFileWithStatus[], id: number,
+                             status: HttpRequestStatusEnum.NONE | HttpRequestStatusEnum.IN_PROGRESS | HttpRequestStatusEnum.FAIL, message): SomaticResultsFileWithStatus[] {
+    return sharedLearnings.map((sharedLearning: SomaticResultsFileWithStatus) =>
+      sharedLearning.somaticDocumentId === id ? {...sharedLearning, deleteStatus: {status, message}} : sharedLearning)
   }
 
 }

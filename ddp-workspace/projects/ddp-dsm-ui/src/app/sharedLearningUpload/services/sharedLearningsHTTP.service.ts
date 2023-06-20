@@ -1,10 +1,12 @@
 import {Injectable} from "@angular/core";
-import {delay, mergeMap, Observable, of, pipe, switchMap} from "rxjs";
-import {SharedLearningsFile} from "../interfaces/sharedLearningsFile";
+import {Observable} from "rxjs";
+import {SomaticResultsFile} from "../interfaces/somaticResultsFile";
 import {DSMService} from "../../services/dsm.service";
 import {ComponentService} from "../../services/component.service";
-import {catchError, map} from "rxjs/operators";
-import {SomaticResultSignedUrl} from "../interfaces/somaticResultSignedUrl";
+import {
+  SomaticResultSignedUrlRequest,
+  SomaticResultSignedUrlResponse
+} from "../interfaces/somaticResultSignedUrlRequest";
 
 @Injectable()
 export class SharedLearningsHTTPService {
@@ -12,31 +14,25 @@ export class SharedLearningsHTTPService {
   constructor(private readonly dsmService: DSMService) {
   }
 
-  public getFiles(participantId: string): Observable<SharedLearningsFile[]> {
+  public getFiles(participantId: string): Observable<SomaticResultsFile[]> {
     return this.dsmService.getSomaticResults(this.selectedRealm, participantId)
-      // @TODO mocked data
-      .pipe(map(() => [
-        {name: 'some.pdf', sentDate: new Date(), uploadDate: new Date(), id: 123},
-        {name: 'other.pdf', sentDate: new Date(), uploadDate: new Date(), id: 124},
-        {name: 'several.pdf', sentDate: new Date(), uploadDate: new Date(), id: 125},
-      ]))
   }
 
-  public uploadFile(participantId: string, file: File): Observable<any> {
-    const fileInformation: SomaticResultSignedUrl = {
-      fileName: file.name,
-      mimeType: file.type,
-      fileSize: file.size
+  public getSignedUrl({name, type, size}: File, participantId: string): Observable<SomaticResultSignedUrlResponse> {
+    const fileInformation: SomaticResultSignedUrlRequest = {
+      fileName: name,
+      mimeType: type,
+      fileSize: size
     }
-    return this.dsmService.getSomaticResultFileUploadSignedUrl(
-      this.selectedRealm,
-      participantId,
-      fileInformation
-    ).pipe(
-      mergeMap((signedUrl: string) => this.dsmService.uploadSomaticResult(signedUrl, file)),
-      // @TODO mocked response
-      catchError(() => of({name: 'several.pdf', sentDate: new Date(), uploadDate: new Date(), id: Math.floor(Math.random() * 124)}))
-    )
+    return this.dsmService.getSomaticResultFileUploadSignedUrl(this.selectedRealm, participantId, fileInformation);
+  }
+
+  public upload(signedUrl: string, file: File): Observable<any> {
+    return this.dsmService.uploadSomaticResult(signedUrl, file);
+  }
+
+  public delete(somaticDocumentId: number): Observable<any> {
+    return this.dsmService.deleteSomaticResult(this.selectedRealm, somaticDocumentId);
   }
 
   private get selectedRealm(): string {

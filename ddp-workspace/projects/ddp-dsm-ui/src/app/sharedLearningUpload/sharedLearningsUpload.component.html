@@ -7,7 +7,7 @@
   </section>
 
   <section class="note">
-    <p>This file will be made available to the participant</p>
+    <p>Upload Shared Learnings Letter here. Click Send to Participant to deliver the file to the participant’s Dashboard</p>
   </section>
 
   <section *ngIf="errorLoadingData" class="error-note">
@@ -17,7 +17,7 @@
 
   <section *ngIf="!errorLoadingData" class="files">
     <ng-container *ngIf="!isLoading; else spinner" >
-      <app-files-table [uploadedFiles]="sharedLearningsFiles"></app-files-table>
+      <app-files-table [uploadedFiles]="somaticResultsFiles"></app-files-table>
     </ng-container>
   </section>
 </main>

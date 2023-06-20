@@ -143,6 +143,9 @@ import {MatListModule} from "@angular/material/list";
 import {MatPaginatorModule} from "@angular/material/paginator";
 import {UploadFileComponent} from "../sharedLearningUpload/components/uploadFile/uploadFile.component";
 import {FilesTableComponent} from "../sharedLearningUpload/components/filesTable/filesTable.component";
+import {
+  ConfirmationModalComponent
+} from "../sharedLearningUpload/components/confirmationModal/confirmationModal.component";
 
 
 PlotlyModule.plotlyjs = PlotlyJS;
@@ -243,6 +246,7 @@ PlotlyModule.plotlyjs = PlotlyJS;
     SharedLearningsUploadComponent,
     UploadFileComponent,
     FilesTableComponent,
+    ConfirmationModalComponent
   ],
   imports: [
     CommonModule,

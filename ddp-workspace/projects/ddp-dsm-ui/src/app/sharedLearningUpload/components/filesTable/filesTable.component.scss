@@ -15,6 +15,12 @@ main.filesTable {
     text-align: center;
   }
 
+  .mat-column-Name {
+    max-width: 17em;
+    overflow: auto;
+    word-wrap: break-word;
+  }
+
   table {
     width: 85%;
     max-height: 35em;
@@ -28,12 +34,24 @@ main.filesTable {
         @include common.flexContainer(center, center);
         width: 100%;
 
+        .icon-button {
+          @include common.flexContainer(center, center);
+          background: none;
+          outline: none;
+          border: none;
+        }
+
         mat-icon {
           font-size: 2.2em;
           text-align: center;
 
           &:hover {
             cursor: pointer;
+          }
+
+          &.disableIcon {
+            color: rgba(174, 172, 172, 0.78);
+            cursor: default;
           }
 
           &.send-icon {

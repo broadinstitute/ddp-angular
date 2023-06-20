@@ -19,7 +19,7 @@ import { BulkCohortTag } from '../tags/cohort-tag/bulk-cohort-tag-modal/bulk-coh
 import {LocalStorageService} from './local-storage.service';
 import {IDateRange} from '../dashboard-statistics/interfaces/IDateRange';
 import {StatisticsEnum} from '../dashboard-statistics/enums/statistics.enum';
-import {SomaticResultSignedUrl} from "../sharedLearningUpload/interfaces/somaticResultSignedUrl";
+import {SomaticResultSignedUrlRequest} from "../sharedLearningUpload/interfaces/somaticResultSignedUrlRequest";
 
 declare var DDP_ENV: any;
 
@@ -660,7 +660,7 @@ export class DSMService {
   public getSomaticResultFileUploadSignedUrl(
     realm: string,
     participantId: string,
-    fileInformation: SomaticResultSignedUrl): Observable<any> {
+    fileInformation: SomaticResultSignedUrlRequest): Observable<any> {
     const url = this.baseUrl + DSMService.UI + 'somaticResults';
     const map: { name: string; value: any }[] = [];
     map.push({name: DSMService.REALM, value: realm});
@@ -676,7 +676,7 @@ export class DSMService {
     );
   }
 
-  public deleteSomaticResult(realm: string, somaticDocumentId: string): Observable<any> {
+  public deleteSomaticResult(realm: string, somaticDocumentId: number): Observable<any> {
     const url = this.baseUrl + DSMService.UI + 'somaticResults';
     const map: { name: string; value: any }[] = [];
     map.push({name: DSMService.REALM, value: realm});

@@ -2,10 +2,10 @@ import {
   ChangeDetectionStrategy,
   Component, Input, OnDestroy, OnInit,
 } from "@angular/core";
-import {SharedLearningsFile} from "./interfaces/sharedLearningsFile";
-import {iif, Observable, of, Subscription, switchMap, tap, throwError} from "rxjs";
+import {SomaticResultsFile} from "./interfaces/somaticResultsFile";
+import {Observable, Subscription, switchMap, takeWhile, tap, throwError} from "rxjs";
 import {SharedLearningsHTTPService} from "./services/sharedLearningsHTTP.service";
-import {catchError, finalize, take} from "rxjs/operators";
+import {catchError, filter, finalize} from "rxjs/operators";
 import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
@@ -16,7 +16,7 @@ import {HttpErrorResponse} from "@angular/common/http";
   providers: [SharedLearningsHTTPService]
 })
 export class SharedLearningsUploadComponent implements OnInit, OnDestroy {
-  public sharedLearningsFiles: SharedLearningsFile[] | null;
+  public somaticResultsFiles: SomaticResultsFile[] | null;
   public isLoading: boolean = false;
   public isUnauthorized: boolean = false;
   public errorLoadingData: string | null;
@@ -25,7 +25,6 @@ export class SharedLearningsUploadComponent implements OnInit, OnDestroy {
 
   @Input() tabActivated: Observable<void>;
   @Input() participantId: string;
-
 
   constructor(private readonly sharedLearningsHTTPService: SharedLearningsHTTPService) {}
 
@@ -37,19 +36,17 @@ export class SharedLearningsUploadComponent implements OnInit, OnDestroy {
     this.subscription?.unsubscribe();
   }
 
-  public onFileUpload(file: SharedLearningsFile): void {
-    this.sharedLearningsFiles = [...this.sharedLearningsFiles, file]
+  public onFileUpload(file: SomaticResultsFile): void {
+    this.somaticResultsFiles = [...this.somaticResultsFiles, file]
   }
 
   private get loadFiles(): Observable<any> {
     this.isLoading = true;
     return this.tabActivated.pipe(
-      switchMap(() => iif(() => !(!!this.sharedLearningsFiles) || !!this.errorLoadingData,
-        this.sharedLearningsHTTPService.getFiles(this.participantId), of(null))),
-      tap((files: SharedLearningsFile[]) => {
-        this.sharedLearningsFiles = files || null;
-      }),
-      take(1),
+      switchMap(() => this.sharedLearningsHTTPService.getFiles(this.participantId)),
+      tap((somaticResultsFiles: SomaticResultsFile[]) =>
+        this.somaticResultsFiles = somaticResultsFiles.filter((somaticFile: SomaticResultsFile) => !somaticFile.deletedByUserId)),
+      takeWhile(() => !(!!this.somaticResultsFiles) || !!this.errorLoadingData),
       catchError((err: any) => {
         if(err instanceof HttpErrorResponse) {
           this.errorLoadingData = err.error;
