@@ -18,7 +18,7 @@
             <ng-container *ngTemplateOutlet="sendTemplate; context: {file: sharedLearningsFile}"></ng-container>
           </ng-container>
           <ng-container *ngSwitchCase="httpRequestStatusEnum.SUCCESS">
-            <mat-icon matTooltip="Sent successfully!" class="success-icon">check_circle</mat-icon>
+            <ng-container *ngTemplateOutlet="successTemplate"></ng-container>
           </ng-container>
           <ng-container *ngSwitchCase="httpRequestStatusEnum.FAIL">
             <ng-container
@@ -86,6 +86,12 @@
 <ng-template #spinnerTemplate>
   <div class="icon-container">
     <mat-spinner diameter="25"></mat-spinner>
+  </div>
+</ng-template>
+
+<ng-template #successTemplate>
+  <div class="icon-container">
+    <mat-icon matTooltip="Sent successfully!" class="success-icon">check_circle</mat-icon>
   </div>
 </ng-template>
 
