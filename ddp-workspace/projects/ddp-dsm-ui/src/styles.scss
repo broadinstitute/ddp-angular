@@ -12,6 +12,12 @@ md-hint.ErrorMessageForm {
   font-style: normal;
 }
 
+.sharedLearnings-error-tooltip {
+  background-color: #FF595E!important;
+  font-size: 1em!important;
+  font-family: Montserrat-Regular, sans-serif;
+}
+
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   /* display: none; <- Crashes Chrome on hover */

@@ -1,9 +1,9 @@
 import {
   ChangeDetectionStrategy,
-  Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges,
+  Component, Input, OnDestroy, OnInit,
 } from "@angular/core";
 import {SharedLearningsFile} from "./interfaces/sharedLearningsFile";
-import {defaultIfEmpty, EMPTY, iif, Observable, of, Subscription, switchMap, tap, throwError} from "rxjs";
+import {iif, Observable, of, Subscription, switchMap, tap, throwError} from "rxjs";
 import {SharedLearningsHTTPService} from "./services/sharedLearningsHTTP.service";
 import {catchError, finalize, take} from "rxjs/operators";
 import {HttpErrorResponse} from "@angular/common/http";
@@ -15,7 +15,7 @@ import {HttpErrorResponse} from "@angular/common/http";
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [SharedLearningsHTTPService]
 })
-export class SharedLearningsUploadComponent implements OnInit, OnDestroy, OnChanges {
+export class SharedLearningsUploadComponent implements OnInit, OnDestroy {
   public sharedLearningsFiles: SharedLearningsFile[] | null;
   public isLoading: boolean = false;
   public isUnauthorized: boolean = false;
@@ -27,12 +27,7 @@ export class SharedLearningsUploadComponent implements OnInit, OnDestroy, OnChan
   @Input() participantId: string;
 
 
-  constructor(private readonly sharedLearningsHTTPService: SharedLearningsHTTPService) {
-  }
-
-  ngOnChanges(changes: SimpleChanges) {
-    // console.log(changes, 'SHARED_LEARNING_PARTICIPANT_ID')
-  }
+  constructor(private readonly sharedLearningsHTTPService: SharedLearningsHTTPService) {}
 
   ngOnInit(): void {
     this.subscription = this.loadFiles.subscribe();
@@ -52,7 +47,6 @@ export class SharedLearningsUploadComponent implements OnInit, OnDestroy, OnChan
       switchMap(() => iif(() => !(!!this.sharedLearningsFiles) || !!this.errorLoadingData,
         this.sharedLearningsHTTPService.getFiles(this.participantId), of(null))),
       tap((files: SharedLearningsFile[]) => {
-        console.log(files, 'FILES')
         this.sharedLearningsFiles = files || null;
       }),
       take(1),

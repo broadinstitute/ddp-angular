@@ -1,9 +1,9 @@
 import {Injectable} from "@angular/core";
-import {delay, Observable, of, pipe, switchMap} from "rxjs";
+import {delay, mergeMap, Observable, of, pipe, switchMap} from "rxjs";
 import {SharedLearningsFile} from "../interfaces/sharedLearningsFile";
 import {DSMService} from "../../services/dsm.service";
 import {ComponentService} from "../../services/component.service";
-import {catchError} from "rxjs/operators";
+import {catchError, map} from "rxjs/operators";
 import {SomaticResultSignedUrl} from "../interfaces/somaticResultSignedUrl";
 
 @Injectable()
@@ -13,11 +13,13 @@ export class SharedLearningsHTTPService {
   }
 
   public getFiles(participantId: string): Observable<SharedLearningsFile[]> {
-    return this.dsmService.getSomaticResults(sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM), participantId)
-      // @TODO it's mocked data
-      .pipe(catchError(() => of([
-        {name: 'some.pdf', uploadDate: '02/01/2023', sentDate: '09/19/2023'}
-      ])));
+    return this.dsmService.getSomaticResults(this.selectedRealm, participantId)
+      // @TODO mocked data
+      .pipe(map(() => [
+        {name: 'some.pdf', sentDate: new Date(), uploadDate: new Date(), id: 123},
+        {name: 'other.pdf', sentDate: new Date(), uploadDate: new Date(), id: 124},
+        {name: 'several.pdf', sentDate: new Date(), uploadDate: new Date(), id: 125},
+      ]))
   }
 
   public uploadFile(participantId: string, file: File): Observable<any> {
@@ -27,12 +29,18 @@ export class SharedLearningsHTTPService {
       fileSize: file.size
     }
     return this.dsmService.getSomaticResultFileUploadSignedUrl(
-      sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM),
+      this.selectedRealm,
       participantId,
       fileInformation
     ).pipe(
-      switchMap((signedUrl: string) => this.dsmService.uploadSomaticResult(signedUrl, file))
+      mergeMap((signedUrl: string) => this.dsmService.uploadSomaticResult(signedUrl, file)),
+      // @TODO mocked response
+      catchError(() => of({name: 'several.pdf', sentDate: new Date(), uploadDate: new Date(), id: Math.floor(Math.random() * 124)}))
     )
+  }
+
+  private get selectedRealm(): string {
+    return sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM);
   }
 
 }

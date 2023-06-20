@@ -1,14 +1,16 @@
-<div id="uploadFile" class="upload">
+<main id="uploadFile" class="upload">
   <button [disabled]="unauthorized" (click)="browse()" class="upload-selectBtn">Select a PDF</button>
   <input type="file" accept=".pdf" #hiddenInput (change)="onFileSelection($event)" class="upload-hiddenInput">
   <span class="upload-selectedFileName">{{selectedFileName}}</span>
   <button  (mouseleave)="retryOrNot(false)" (mouseover)="retryOrNot(true)"
           #uploadButton class="upload-uploadBtn" (click)="upload()"
-           [disabled]="unauthorized || (!isFileSelected || uploadStatus === 'SUCCESS')"
+           [disabled]="unauthorized || (!isFileSelected || uploadStatus === httpRequestStatusEnum.SUCCESS)"
           [ngClass]="
-          uploadStatus === 'SUCCESS' ? 'uploadSuccess'
-          : uploadStatus === 'FAIL' ? 'uploadFail'
-          : uploadStatus === 'RETRY' ? 'uploadRetry'
+          uploadStatus === httpRequestStatusEnum.SUCCESS ? 'uploadSuccess'
+          : uploadStatus === httpRequestStatusEnum.FAIL ? 'uploadFail'
+          : uploadStatus === httpRequestStatusEnum.RETRY ? 'uploadRetry'
           : ''"
+           [matTooltip]="errorMessage"
+           matTooltipClass="sharedLearnings-error-tooltip"
   >{{uploadButtonText}}</button>
-</div>
+</main>

@@ -664,7 +664,6 @@ export class DSMService {
     const url = this.baseUrl + DSMService.UI + 'somaticResults';
     const map: { name: string; value: any }[] = [];
     map.push({name: DSMService.REALM, value: realm});
-    map.push({name: 'userId', value: this.role.userID()});
     map.push({name: 'ddpParticipantId', value: participantId});
     return this.http.post(url, fileInformation, this.buildQueryUploadHeader(map)).pipe(
       catchError(this.handleError)

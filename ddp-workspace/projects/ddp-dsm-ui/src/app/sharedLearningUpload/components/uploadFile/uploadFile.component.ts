@@ -8,12 +8,13 @@ import {
 } from "@angular/core";
 import {SharedLearningsFile} from "../../interfaces/sharedLearningsFile";
 import {SharedLearningsHTTPService} from "../../services/sharedLearningsHTTP.service";
-import {delay, of, Subscription} from "rxjs";
-import {catchError, finalize} from "rxjs/operators";
+import {Subscription} from "rxjs";
+import {finalize} from "rxjs/operators";
 import {UploadButtonText} from "../../enums/uploadButtonText-enum";
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {LoadingModalComponent} from "../../../modals/loading-modal.component";
 import {HttpRequestStatusEnum} from "../../enums/httpRequestStatus-enum";
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-upload-files',
@@ -32,7 +33,9 @@ export class UploadFileComponent implements OnDestroy {
   public selectedFileName = 'No File';
   public uploadButtonText = UploadButtonText.UPLOAD;
   public isFileSelected: boolean = false;
-  public uploadStatus: HttpRequestStatusEnum = HttpRequestStatusEnum.DEFAULT;
+  public uploadStatus: HttpRequestStatusEnum = HttpRequestStatusEnum.NONE;
+  public errorMessage: string | null = null;
+  public httpRequestStatusEnum = HttpRequestStatusEnum;
 
   private subscription: Subscription;
 
@@ -60,21 +63,21 @@ export class UploadFileComponent implements OnDestroy {
     this.subscription = this.sharedLearningsHTTPService
       .uploadFile(this.participantId, file)
       .pipe(
-        delay(2000), // @TODO it's mocked delay
-        // catchError(() => of(true)), // @TODO it's mocked data
         finalize(() => openLoadingDialog.close())
       )
       .subscribe({
-        next: () => {
+        next: (newFIle: any) => {
           this.updateUploadButton(HttpRequestStatusEnum.SUCCESS);
           this.fileUploaded.emit({
+            id: newFIle.id,
             name: file.name,
             uploadDate: new Date(),
             sentDate: new Date()
           })
-        }, error: () => {
+        }, error: (error: any) => {
           this.cdr.markForCheck();
           this.updateUploadButton(HttpRequestStatusEnum.FAIL);
+          this.errorMessage = error instanceof HttpErrorResponse ? error.error : null;
         }
       })
   }
@@ -84,7 +87,7 @@ export class UploadFileComponent implements OnDestroy {
     if (files.length) {
       this.selectedFileName &&= this.displayFileName(files.item(0).name);
       this.isFileSelected = true;
-      this.uploadStatus = HttpRequestStatusEnum.DEFAULT;
+      this.uploadStatus = HttpRequestStatusEnum.NONE;
       this.uploadButtonText = UploadButtonText.UPLOAD;
     }
   }
@@ -120,7 +123,7 @@ export class UploadFileComponent implements OnDestroy {
         this.uploadButtonText = UploadButtonText.UPLOAD_FAIL;
         break;
       case  HttpRequestStatusEnum.IN_PROGRESS:
-        this.uploadStatus = HttpRequestStatusEnum.DEFAULT;
+        this.uploadStatus = HttpRequestStatusEnum.NONE;
         this.uploadButtonText = UploadButtonText.UPLOAD_IN_PROGRESS;
         break;
       case  HttpRequestStatusEnum.RETRY:
@@ -128,7 +131,7 @@ export class UploadFileComponent implements OnDestroy {
         this.uploadButtonText = UploadButtonText.UPLOAD_RETRY;
         break;
       default:
-        this.uploadStatus = HttpRequestStatusEnum.DEFAULT;
+        this.uploadStatus = HttpRequestStatusEnum.NONE;
         this.uploadButtonText = UploadButtonText.UPLOAD;
         break;
     }

@@ -1,5 +1,10 @@
 @use 'commonStyles' as common ;
 
+$error-color: #FF595E;
+$success-color: #8AC926;
+$retry-color: #FFCA3A;
+$default-color: #5FA8D3;
+
 .upload {
   @include common.flexContainer(center, center);
   position: relative;
@@ -16,7 +21,7 @@
     width: 40%;
     height: 100%;
     border: none;
-    background-color: #5FA8D3;
+    background-color: $default-color;
     color: white;
     &:hover {
       background-color: #CAE9FF;
@@ -29,16 +34,16 @@
 
   &-uploadBtn {
     &.uploadSuccess {
-      background-color: #8AC926;
+      background-color: $success-color;
     }
     &.uploadFail {
-      background-color: #FF595E;
+      background-color: $error-color;
     }
     &.uploadRetry {
-      background-color: #FFCA3A;
+      background-color: $retry-color;
     }
     &.upload {
-      background-color: #5FA8D3;
+      background-color: $default-color;
     }
   }
 
