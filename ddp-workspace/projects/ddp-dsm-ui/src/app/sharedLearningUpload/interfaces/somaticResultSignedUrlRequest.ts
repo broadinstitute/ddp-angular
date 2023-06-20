@@ -26,7 +26,7 @@ export interface SomaticResultSignedUrlResponse {
     mimeType: string;
     participantId: number;
     sentAt: number;
-    somaticDocumentId: number
-  }
+    somaticDocumentId: number;
+  };
 
 }

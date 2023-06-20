@@ -1,12 +1,12 @@
 import {
   ChangeDetectionStrategy,
   Component, Input, OnDestroy, OnInit,
-} from "@angular/core";
-import {SomaticResultsFile} from "./interfaces/somaticResultsFile";
-import {Observable, Subscription, switchMap, takeWhile, tap, throwError} from "rxjs";
-import {SharedLearningsHTTPService} from "./services/sharedLearningsHTTP.service";
-import {catchError, filter, finalize} from "rxjs/operators";
-import {HttpErrorResponse} from "@angular/common/http";
+} from '@angular/core';
+import {SomaticResultsFile} from './interfaces/somaticResultsFile';
+import {Observable, Subscription, switchMap, takeWhile, tap, throwError} from 'rxjs';
+import {SharedLearningsHTTPService} from './services/sharedLearningsHTTP.service';
+import {catchError, filter, finalize} from 'rxjs/operators';
+import {HttpErrorResponse} from '@angular/common/http';
 
 @Component({
   selector: 'app-shared-learnings-upload',
@@ -17,8 +17,8 @@ import {HttpErrorResponse} from "@angular/common/http";
 })
 export class SharedLearningsUploadComponent implements OnInit, OnDestroy {
   public somaticResultsFiles: SomaticResultsFile[] | null;
-  public isLoading: boolean = false;
-  public isUnauthorized: boolean = false;
+  public isLoading = false;
+  public isUnauthorized = false;
   public errorLoadingData: string | null;
 
   private subscription: Subscription;
@@ -37,7 +37,7 @@ export class SharedLearningsUploadComponent implements OnInit, OnDestroy {
   }
 
   public onFileUpload(file: SomaticResultsFile): void {
-    this.somaticResultsFiles = [...this.somaticResultsFiles, file]
+    this.somaticResultsFiles = [...this.somaticResultsFiles, file];
   }
 
   private get loadFiles(): Observable<any> {
@@ -55,7 +55,7 @@ export class SharedLearningsUploadComponent implements OnInit, OnDestroy {
         return throwError(() => err);
       }),
       finalize(() => this.isLoading = false)
-    )
+    );
   }
 
 }

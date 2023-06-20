@@ -19,7 +19,7 @@ import { BulkCohortTag } from '../tags/cohort-tag/bulk-cohort-tag-modal/bulk-coh
 import {LocalStorageService} from './local-storage.service';
 import {IDateRange} from '../dashboard-statistics/interfaces/IDateRange';
 import {StatisticsEnum} from '../dashboard-statistics/enums/statistics.enum';
-import {SomaticResultSignedUrlRequest} from "../sharedLearningUpload/interfaces/somaticResultSignedUrlRequest";
+import {SomaticResultSignedUrlRequest} from '../sharedLearningUpload/interfaces/somaticResultSignedUrlRequest';
 
 declare var DDP_ENV: any;
 

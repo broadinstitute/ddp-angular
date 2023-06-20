@@ -1,5 +1,5 @@
 export interface SomaticResultsFile {
-  blobPath: string
+  blobPath: string;
   bucket: string;
   createdAt: number;
   createdByUserId: number;

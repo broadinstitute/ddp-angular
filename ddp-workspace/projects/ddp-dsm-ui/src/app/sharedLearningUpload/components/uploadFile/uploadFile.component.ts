@@ -5,17 +5,17 @@ import {
   ElementRef, EventEmitter, Input, OnDestroy,
   Output,
   ViewChild
-} from "@angular/core";
-import {SomaticResultsFile} from "../../interfaces/somaticResultsFile";
-import {SharedLearningsHTTPService} from "../../services/sharedLearningsHTTP.service";
-import {mergeMap, Subscription, tap} from "rxjs";
-import {finalize} from "rxjs/operators";
-import {UploadButtonText} from "../../enums/uploadButtonText-enum";
-import {MatDialog, MatDialogRef} from "@angular/material/dialog";
-import {LoadingModalComponent} from "../../../modals/loading-modal.component";
-import {HttpRequestStatusEnum} from "../../enums/httpRequestStatus-enum";
-import {HttpErrorResponse} from "@angular/common/http";
-import {SomaticResultSignedUrlResponse} from "../../interfaces/somaticResultSignedUrlRequest";
+} from '@angular/core';
+import {SomaticResultsFile} from '../../interfaces/somaticResultsFile';
+import {SharedLearningsHTTPService} from '../../services/sharedLearningsHTTP.service';
+import {mergeMap, Subscription, tap} from 'rxjs';
+import {finalize} from 'rxjs/operators';
+import {UploadButtonText} from '../../enums/uploadButtonText-enum';
+import {MatDialog, MatDialogRef} from '@angular/material/dialog';
+import {LoadingModalComponent} from '../../../modals/loading-modal.component';
+import {HttpRequestStatusEnum} from '../../enums/httpRequestStatus-enum';
+import {HttpErrorResponse} from '@angular/common/http';
+import {SomaticResultSignedUrlResponse} from '../../interfaces/somaticResultSignedUrlRequest';
 
 @Component({
   selector: 'app-upload-files',
@@ -28,7 +28,7 @@ export class UploadFileComponent implements OnDestroy {
 
   public selectedFileName: string = this.NO_FILE;
   public uploadButtonText = UploadButtonText.UPLOAD;
-  public isFileSelected: boolean = false;
+  public isFileSelected = false;
   public uploadStatus: HttpRequestStatusEnum = HttpRequestStatusEnum.NONE;
   public errorMessage: string | null = null;
   public httpRequestStatusEnum = HttpRequestStatusEnum;
@@ -36,8 +36,8 @@ export class UploadFileComponent implements OnDestroy {
   private subscription: Subscription;
 
   @Input() participantId: string;
-  @Input() unauthorized: boolean = false;
-  @Output() fileUploaded = new EventEmitter<SomaticResultsFile>()
+  @Input() unauthorized = false;
+  @Output() fileUploaded = new EventEmitter<SomaticResultsFile>();
 
   @ViewChild('hiddenInput', {static: true}) inputElement: ElementRef<HTMLInputElement>;
   @ViewChild('uploadButton') uploadButton: ElementRef<HTMLButtonElement>;
@@ -66,20 +66,20 @@ export class UploadFileComponent implements OnDestroy {
       .getSignedUrl(selectedFile, this.participantId)
       .pipe(
         tap((somaticResultsResponse: SomaticResultSignedUrlResponse) =>  {
-          console.log(somaticResultsResponse, 'SOMATIC_RESPONSE')
+          console.log(somaticResultsResponse, 'SOMATIC_RESPONSE');
         }),
         mergeMap(({signedUrl}: SomaticResultSignedUrlResponse) => this.sharedLearningsHTTPService.upload(signedUrl, selectedFile)),
         finalize(() => openLoadingDialog.close())
       )
       .subscribe({
         next: (uploadedFile: any) => {
-          console.log(uploadedFile, 'UPLOAD_SUCCESS')
+          console.log(uploadedFile, 'UPLOAD_SUCCESS');
         },
         error: (error: any) => this.handleError(error)
-      })
+      });
   }
 
-  public onFileSelection(event: Event) {
+  public onFileSelection(event: Event): void {
     const files: FileList = (event.target as HTMLInputElement).files;
     if (files.length) {
       this.selectedFileName &&= this.displayFileName(files.item(0).name);
@@ -122,10 +122,10 @@ export class UploadFileComponent implements OnDestroy {
     const fileExtension = splitName.slice(-1);
     const fileName = splitName.slice(0, -1).join('.');
     return `${fileName.length > 16 ? fileName.slice(0, 8) + ' ... ' + fileName.slice(-8) :
-      fileName}.${fileExtension}`
+      fileName}.${fileExtension}`;
   }
 
-  private updateUploadButton(uploadStatus: HttpRequestStatusEnum) {
+  private updateUploadButton(uploadStatus: HttpRequestStatusEnum): void {
     this.cdr.markForCheck();
     switch (uploadStatus) {
       case  HttpRequestStatusEnum.SUCCESS:

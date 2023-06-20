@@ -170,7 +170,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
     });
   }
 
-  public sharedLearningsTabSelected() {
+  public sharedLearningsTabSelected(): void {
     this.sharedLearningsTabSubject.next();
   }
 
