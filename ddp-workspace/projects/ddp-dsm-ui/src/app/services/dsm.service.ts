@@ -671,7 +671,7 @@ export class DSMService {
   }
 
   public uploadSomaticResult(signedUrl: string, file: File): Observable<any> {
-    return this.http.post(signedUrl, file).pipe(
+    return this.http.put(signedUrl, file).pipe(
       catchError(this.handleError)
     );
   }
