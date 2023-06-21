@@ -2,16 +2,18 @@ import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {SomaticResultsFile} from '../interfaces/somaticResultsFile';
 import {DSMService} from '../../services/dsm.service';
-import {ComponentService} from '../../services/component.service';
 import {
   SomaticResultSignedUrlRequest,
   SomaticResultSignedUrlResponse
 } from '../interfaces/somaticResultSignedUrlRequest';
+import {SessionService} from "../../services/session.service";
 
 @Injectable()
 export class SharedLearningsHTTPService {
 
-  constructor(private readonly dsmService: DSMService) {
+  constructor(
+    private readonly dsmService: DSMService,
+    private readonly sessionService: SessionService) {
   }
 
   public getFiles(participantId: string): Observable<SomaticResultsFile[]> {
@@ -43,7 +45,7 @@ export class SharedLearningsHTTPService {
   }
 
   private get selectedRealm(): string {
-    return sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM);
+    return this.sessionService.selectedRealm;
   }
 
 }
