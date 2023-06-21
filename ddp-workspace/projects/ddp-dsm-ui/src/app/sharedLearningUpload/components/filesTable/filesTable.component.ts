@@ -59,7 +59,7 @@ export class FilesTableComponent implements OnDestroy {
     private readonly matDialog: MatDialog
   ) {
     this.somaticResultsFilesWithStatuses$
-      .pipe(tap(() => console.log('SENT_DATE_UPDATED')),takeUntil(this.subscriptionSubject$))
+      .pipe(takeUntil(this.subscriptionSubject$))
       .subscribe((sharedLearnings: SomaticResultsFileWithStatus[]) => this.sharedLearnings = sharedLearnings);
   }
 
