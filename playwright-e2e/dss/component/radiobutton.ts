@@ -26,7 +26,7 @@ export default class Radiobutton extends WidgetBase {
     const isChecked = await this.isChecked(label);
     if (!isChecked) {
       const radio = this.getRadiobuttonByLabel(label);
-      await radio.click();
+      await radio.locator('label, .mat-radio-label-content').first().click();
       await expect(radio).toHaveClass(/radio-checked/);
     }
   }

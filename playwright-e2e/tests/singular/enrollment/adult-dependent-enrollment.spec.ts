@@ -128,7 +128,7 @@ test.describe.skip('Enrol an adult dependent', () => {
     await patientSurveyPage.race().check('White');
     await patientSurveyPage.isHispanic().check('No', { exactMatch: true });
     await patientSurveyPage.selectVentricleDiagnosis().check('Other');
-    await patientSurveyPage.selectVentricleDiagnosis().toInput('Please specify (or write Unsure)').fill('Unsure');
+    await patientSurveyPage.selectVentricleDiagnosis().toInput({ label: 'Please specify (or write Unsure)' }).fill('Unsure');
     await patientSurveyPage.submit();
 
     // Assert contents in My Dashboard table
