@@ -1,3 +1,5 @@
+import {SomaticResultsFile} from "./somaticResultsFile";
+
 export interface SomaticResultSignedUrlRequest {
   fileName: string;
   mimeType: string;
@@ -12,21 +14,5 @@ export interface SomaticResultSignedUrlResponse {
     supportedSomaticFileTypes: string[];
   };
   signedUrl: string;
-  somaticResultUpload: {
-    blobPath: string;
-    bucket: string;
-    createdAt: number;
-    createdByUserId: number;
-    ddpInstanceId: number;
-    ddpParticipantId: string;
-    deletedAt: number;
-    deletedByUserId: number;
-    fileName: string;
-    isVirusFree: boolean;
-    mimeType: string;
-    participantId: number;
-    sentAt: number;
-    somaticDocumentId: number;
-  };
-
+  somaticResultUpload: SomaticResultsFile;
 }

@@ -651,8 +651,18 @@ export class DSMService {
     const url = this.baseUrl + DSMService.UI + 'somaticResults';
     const map: { name: string; value: any }[] = [];
     map.push({name: DSMService.REALM, value: realm});
-    map.push({name: 'userId', value: this.role.userID()});
     map.push({name: 'ddpParticipantId', value: participantId});
+    return this.http.get(url, this.buildQueryHeader(map)).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  public getSomaticResultsFile(realm: string, participantId: string, somaticDocumentId: number): Observable<any> {
+    const url = this.baseUrl + DSMService.UI + 'somaticResults';
+    const map: { name: string; value: any }[] = [];
+    map.push({name: DSMService.REALM, value: realm});
+    map.push({name: 'ddpParticipantId', value: participantId});
+    map.push({name: 'somaticDocumentId', value: somaticDocumentId});
     return this.http.get(url, this.buildQueryHeader(map)).pipe(
       catchError(this.handleError)
     );

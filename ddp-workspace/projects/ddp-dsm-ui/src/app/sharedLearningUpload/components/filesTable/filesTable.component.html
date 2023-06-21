@@ -1,5 +1,24 @@
 <main id="filesTable" class="filesTable" *ngIf="sharedLearnings.length; else noFiles">
   <table mat-table [dataSource]="sharedLearnings">
+
+    <ng-container matColumnDef="VirusStatus">
+      <th mat-header-cell *matHeaderCellDef> Status </th>
+      <td mat-cell *matCellDef="let sharedLearningsFile">
+        <ng-container [ngSwitch]="sharedLearningsFile.isInfected">
+          <ng-container *ngSwitchCase="SRFVirusStatusEnum.CLEAN">
+            <ng-container *ngTemplateOutlet="bugFreeTemplate"></ng-container>
+          </ng-container>
+          <ng-container *ngSwitchCase="SRFVirusStatusEnum.INFECTED">
+            <ng-container *ngTemplateOutlet="bugTemplate"></ng-container>
+          </ng-container>
+          <ng-container *ngSwitchCase="SRFVirusStatusEnum.SCANNING">
+            <ng-container *ngTemplateOutlet="spinnerTemplate; context: {tooltip: 'Scanning for viruses'}">
+            </ng-container>
+          </ng-container>
+        </ng-container>
+      </td>
+    </ng-container>
+
     <ng-container matColumnDef="Name">
       <th mat-header-cell *matHeaderCellDef> File </th>
       <td mat-cell *matCellDef="let sharedLearningsFile"> {{sharedLearningsFile.fileName}} </td>
@@ -38,7 +57,7 @@
 
     <ng-container matColumnDef="SentDate">
       <th mat-header-cell *matHeaderCellDef> Date Sent </th>
-      <td mat-cell *matCellDef="let sharedLearningFile">{{sharedLearningFile.sentDate || null | date: 'shortDate'}}</td>
+      <td mat-cell *matCellDef="let sharedLearningFile">{{sharedLearningFile.sentAt || null | date: 'shortDate'}}</td>
     </ng-container>
 
     <ng-container matColumnDef="Delete">
@@ -79,13 +98,16 @@
 
 <ng-template #sendTemplate let-file="file">
   <div class="icon-container">
-    <mat-icon (click)="onSendToParticipant(file)" class="send-icon">send</mat-icon>
+    <mat-icon
+      [matTooltip]="shouldNotAllowSendOrDelete(file.isInfected) ? 'File can not be sent' : null"
+      [ngClass]="shouldNotAllowSendOrDelete(file.isInfected) ? 'disabled-icon' : 'send-icon'"
+      (click)="onSendToParticipant(file)">send</mat-icon>
   </div>
 </ng-template>
 
-<ng-template #spinnerTemplate>
+<ng-template #spinnerTemplate let-tooltip="tooltip">
   <div class="icon-container">
-    <mat-spinner diameter="25"></mat-spinner>
+    <mat-spinner diameter="25" [matTooltip]="tooltip"></mat-spinner>
   </div>
 </ng-template>
 
@@ -97,7 +119,10 @@
 
 <ng-template #deleteTemplate let-file="file">
   <div class="icon-container">
-    <mat-icon (click)="deleteFile(file)" class="delete-icon" >delete_forever</mat-icon>
+    <mat-icon
+      [matTooltip]="shouldNotAllowSendOrDelete(file.isInfected) ? 'File can not be deleted' : null"
+      [ngClass]="shouldNotAllowSendOrDelete(file.isInfected) ? 'disabled-icon' : 'delete-icon'"
+      (click)="deleteFile(file)">delete_forever</mat-icon>
   </div>
 </ng-template>
 
@@ -110,5 +135,17 @@
               [matTooltip]="message"
               matTooltipClass="sharedLearnings-error-tooltip"
               class="error-icon">error</mat-icon>
+  </div>
+</ng-template>
+
+<ng-template #bugTemplate>
+  <div class="icon-container">
+    <mat-icon matTooltip="File deleted. Virus found" class="bug-icon">bug_report</mat-icon>
+  </div>
+</ng-template>
+
+<ng-template #bugFreeTemplate>
+  <div class="icon-container">
+    <mat-icon matTooltip="File scanned" class="bug-free-icon">check_circle_outline</mat-icon>
   </div>
 </ng-template>

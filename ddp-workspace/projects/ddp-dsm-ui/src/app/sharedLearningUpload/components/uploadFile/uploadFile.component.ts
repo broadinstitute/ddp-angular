@@ -15,7 +15,7 @@ import {LoadingModalComponent} from '../../../modals/loading-modal.component';
 import {HttpRequestStatusEnum} from '../../enums/httpRequestStatus-enum';
 import {HttpErrorResponse} from '@angular/common/http';
 import {SomaticResultSignedUrlResponse} from '../../interfaces/somaticResultSignedUrlRequest';
-import {UploadedFileShortInfo} from '../../interfaces/helperInterfaces';
+import {SomaticResultsFile} from "../../interfaces/somaticResultsFile";
 
 @Component({
   selector: 'app-upload-files',
@@ -39,7 +39,7 @@ export class UploadFileComponent implements OnDestroy {
 
   @Input() participantId: string;
   @Input() unauthorized = false;
-  @Output() fileUploaded = new EventEmitter<UploadedFileShortInfo>();
+  @Output() fileUploaded = new EventEmitter<SomaticResultsFile>();
 
   @ViewChild('hiddenInput', {static: true}) inputElement: ElementRef<HTMLInputElement>;
   @ViewChild('uploadButton') uploadButton: ElementRef<HTMLButtonElement>;
@@ -63,19 +63,19 @@ export class UploadFileComponent implements OnDestroy {
       const selectedFile: File = selectedFiles.item(0);
       this.updateUploadButtonBy(HttpRequestStatusEnum.IN_PROGRESS);
       const openLoadingDialog = this.openLoadingDialog(selectedFile.name);
-      let uploadedFileInfo: UploadedFileShortInfo;
+      let somaticResultsFile: SomaticResultsFile;
 
       this.subscription = this.sharedLearningsHTTPService
         .getSignedUrl(selectedFile, this.participantId)
         .pipe(
-          tap(({somaticResultUpload: {somaticDocumentId, fileName}}: SomaticResultSignedUrlResponse) =>
-            uploadedFileInfo = {fileName, somaticDocumentId}),
+          tap(({somaticResultUpload}: SomaticResultSignedUrlResponse) =>
+            somaticResultsFile = somaticResultUpload),
           mergeMap(({signedUrl}: SomaticResultSignedUrlResponse) =>
             this.sharedLearningsHTTPService.upload(signedUrl, selectedFile)),
           finalize(() => openLoadingDialog.close())
         )
         .subscribe({
-          next: () => this.handleSuccess(uploadedFileInfo),
+          next: () => this.handleSuccess(somaticResultsFile),
           error: (error: any) => this.handleError(error)
         });
     }
@@ -136,7 +136,7 @@ export class UploadFileComponent implements OnDestroy {
       this.uploadButtonText === UploadButtonText.FILE_NAME_TOO_LARGE;
   }
 
-  private handleSuccess(uploadedFileInfo: UploadedFileShortInfo): void {
+  private handleSuccess(uploadedFileInfo: SomaticResultsFile): void {
     this.updateUploadButtonBy(HttpRequestStatusEnum.SUCCESS);
     this.fileUploaded.next(uploadedFileInfo);
     // Resetting the selected file, in order to be able to upload the same file multiple times at the same time
@@ -149,7 +149,13 @@ export class UploadFileComponent implements OnDestroy {
 
   private handleError(error: any): void {
     this.updateUploadButtonBy(HttpRequestStatusEnum.FAIL);
-    this.errorMessage = error instanceof HttpErrorResponse ? error.error : null;
+    if(error instanceof HttpErrorResponse) {
+      if(error.error instanceof Object && error.error.hasOwnProperty('authorizeResultType')) {
+        this.errorMessage = error.error.authorizeResultType.split('_').join(' ').toLowerCase();
+      } else {
+        this.errorMessage = error.error;
+      }
+    }
   }
 
   private openLoadingDialog(fileName: string): MatDialogRef<LoadingModalComponent> {

@@ -4,6 +4,8 @@ $error-color: #FF595E;
 $success-color: #8AC926;
 $default-color: #5FA8D3;
 $retry-color: #FFCA3A;
+$bug-color: #ef476f;
+$bug-free-color: #06d6a0;
 
 
 main.filesTable {
@@ -49,22 +51,17 @@ main.filesTable {
             cursor: pointer;
           }
 
-          &.disableIcon {
-            color: rgba(174, 172, 172, 0.78);
-            cursor: default;
-          }
-
           &.send-icon {
             color: $default-color;
             &:hover {
-              color: rgba(95, 168, 211, 0.68);
+              color: rgba($default-color, 0.68);
             }
           }
 
           &.delete-icon {
             color: $error-color;
             &:hover {
-              color: rgba(255, 89, 94, 0.68);
+              color: rgba($error-color, 0.68);
             }
           }
 
@@ -81,6 +78,28 @@ main.filesTable {
 
           &.retry-icon {
             color: $retry-color;
+          }
+
+          &.bug-icon {
+            color: $bug-color;
+
+            &:hover {
+              cursor: default;
+              color: rgba($bug-color, 0.68)
+            }
+          }
+
+          &.disabled-icon {
+            color: rgba(174, 172, 172, 0.78);
+            cursor: default;
+          }
+
+          &.bug-free-icon {
+            color: $bug-free-color;
+            &:hover {
+              cursor: default;
+              color: rgba($bug-free-color, 0.68)
+            }
           }
         }
       }

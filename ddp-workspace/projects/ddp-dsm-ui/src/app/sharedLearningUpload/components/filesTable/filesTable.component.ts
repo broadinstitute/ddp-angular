@@ -9,12 +9,13 @@ import {
 import {SomaticResultsFile, SomaticResultsFileWithStatus} from '../../interfaces/somaticResultsFile';
 import {HttpRequestStatusEnum} from '../../enums/httpRequestStatus-enum';
 import {SharedLearningsHTTPService} from '../../services/sharedLearningsHTTP.service';
-import {Subject, takeUntil} from 'rxjs';
+import {delay, mergeMap, Observable, repeatWhen, Subject, takeUntil, takeWhile, tap} from 'rxjs';
 import {MatIcon} from '@angular/material/icon';
 import {HttpErrorResponse} from '@angular/common/http';
 import {MatDialog} from '@angular/material/dialog';
 import {ConfirmationModalComponent} from '../confirmationModal/confirmationModal.component';
 import {take} from 'rxjs/operators';
+import {SomaticResultsFileVirusStatusEnum} from "../../enums/somaticResultsFileVirusStatus-enum";
 
 
 @Component({
@@ -24,20 +25,27 @@ import {take} from 'rxjs/operators';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FilesTableComponent implements OnDestroy {
-  public readonly columnNames: string[] = ['Name', 'UploadDate', 'SendToParticipant', 'SentDate', 'Delete'];
+  public readonly columnNames: string[] = ['VirusStatus', 'Name', 'UploadDate', 'SendToParticipant', 'SentDate', 'Delete'];
   public httpRequestStatusEnum = HttpRequestStatusEnum;
+  public SRFVirusStatusEnum = SomaticResultsFileVirusStatusEnum;
   public sharedLearnings: SomaticResultsFileWithStatus[] = [];
 
   private somaticResultsFilesWithStatuses$ = new Subject<SomaticResultsFileWithStatus[]>();
-  private subscriptionSubject$ = new Subject<boolean>();
+  private subscriptionSubject$ = new Subject<void>();
 
   @Input() participantId: string;
+
   @Input() set uploadedFiles(sharedLearnings: SomaticResultsFile[]) {
-    const sharedLearningsWithStatuses: SomaticResultsFileWithStatus[] = sharedLearnings ? sharedLearnings.map((file) =>
-      ({...file,
-        sendToParticipantStatus: {status: HttpRequestStatusEnum.NONE, message: null},
-        deleteStatus: {status: HttpRequestStatusEnum.NONE, message: null}
-      })) : [];
+    const sharedLearningsWithStatuses: SomaticResultsFileWithStatus[] = sharedLearnings ?
+      sharedLearnings.map((somaticResultsFile: SomaticResultsFile) =>
+        ({
+          ...somaticResultsFile,
+          createdAt: somaticResultsFile.createdAt * 1000,
+          deletedAt: somaticResultsFile.deletedAt * 1000,
+          sendToParticipantStatus: {status: HttpRequestStatusEnum.NONE, message: null},
+          deleteStatus: {status: HttpRequestStatusEnum.NONE, message: null},
+          isInfected: this.handleAndReturnVirusStatusFor(somaticResultsFile)
+        })) : [];
     this.somaticResultsFilesWithStatuses$.next(sharedLearningsWithStatuses);
   }
 
@@ -51,45 +59,49 @@ export class FilesTableComponent implements OnDestroy {
     private readonly matDialog: MatDialog
   ) {
     this.somaticResultsFilesWithStatuses$
-      .pipe(takeUntil(this.subscriptionSubject$))
+      .pipe(tap(() => console.log('SENT_DATE_UPDATED')),takeUntil(this.subscriptionSubject$))
       .subscribe((sharedLearnings: SomaticResultsFileWithStatus[]) => this.sharedLearnings = sharedLearnings);
   }
 
   ngOnDestroy(): void {
+    this.subscriptionSubject$.next();
     this.subscriptionSubject$.complete();
-    this.subscriptionSubject$.unsubscribe();
   }
 
-  public onSendToParticipant(somaticResultsFileWithStatus: SomaticResultsFileWithStatus): void {
-    // @TODO when virus scan is on place, I should check for that before proceeding
-    const { sendToParticipantStatus, deleteStatus, ...somaticResultsFile } = somaticResultsFileWithStatus;
-    const {somaticDocumentId} = somaticResultsFile as SomaticResultsFile;
+  public onSendToParticipant({somaticDocumentId, isInfected}: SomaticResultsFileWithStatus): void {
+    if (!this.shouldNotAllowSendOrDelete(isInfected)) {
+      this.somaticResultsFilesWithStatuses$
+        .next(this.updateSendToStatus(somaticDocumentId, HttpRequestStatusEnum.IN_PROGRESS, null));
 
-    this.somaticResultsFilesWithStatuses$
-      .next(this.updateSendToStatus(this.sharedLearnings, somaticDocumentId, HttpRequestStatusEnum.IN_PROGRESS, null));
-
-    this.sharedLearningsHTTPService.sendToParticipant(this.participantId, somaticDocumentId)
-      .pipe(takeUntil(this.subscriptionSubject$))
-      .subscribe({
-        next: () => this.handleSendToSuccess(somaticDocumentId),
-        error: (error: any) => error instanceof HttpErrorResponse &&
-          this.handleSendToFail(somaticDocumentId, error.error)
-      });
+      this.sharedLearningsHTTPService.sendToParticipant(this.participantId, somaticDocumentId)
+        .pipe(
+          mergeMap(() => this.sharedLearningsHTTPService.getFile(this.participantId, somaticDocumentId)),
+          takeUntil(this.subscriptionSubject$)
+        )
+        .subscribe({
+          next: ({sentAt}: SomaticResultsFile) => {
+            this.handleSentDateUpdate(somaticDocumentId, sentAt);
+            this.handleSendToSuccess(somaticDocumentId);
+          },
+          error: (error: any) => error instanceof HttpErrorResponse &&
+            this.handleSendToFail(somaticDocumentId, error.error)
+        });
+    }
   }
 
-  public deleteFile({somaticDocumentId, fileName}: SomaticResultsFileWithStatus): void {
-    // @TODO when virus scan is on place, I should check for that before proceeding
-
-    const activeConfirmationDialog = this.matDialog.open(ConfirmationModalComponent,
-      {data: {fileName}, width: '500px'});
-    activeConfirmationDialog.afterClosed()
-      .pipe(
-        take(1),
-        takeUntil(this.subscriptionSubject$)
-      )
-      .subscribe({
-        next: (deleteOrNot: boolean) => deleteOrNot && this.onDelete(somaticDocumentId)
-      });
+  public deleteFile({somaticDocumentId, fileName, isInfected}: SomaticResultsFileWithStatus): void {
+    if (!this.shouldNotAllowSendOrDelete(isInfected)) {
+      const activeConfirmationDialog = this.matDialog.open(ConfirmationModalComponent,
+        {data: {fileName}, width: '500px'});
+      activeConfirmationDialog.afterClosed()
+        .pipe(
+          take(1),
+          takeUntil(this.subscriptionSubject$)
+        )
+        .subscribe({
+          next: (deleteOrNot: boolean) => deleteOrNot && this.onDelete(somaticDocumentId)
+        });
+    }
   }
 
   public retryOrNot(shouldRetry: boolean, matIcon: MatIcon): void {
@@ -100,12 +112,15 @@ export class FilesTableComponent implements OnDestroy {
       this.renderer.removeClass(matIconNative, 'retry-icon');
   }
 
-  private onDelete(somaticDocumentId: number): void {
-    // @TODO when virus scan is on place, I should check for that before proceeding
+  public shouldNotAllowSendOrDelete(isInfected: SomaticResultsFileVirusStatusEnum): boolean {
+    return isInfected === SomaticResultsFileVirusStatusEnum.INFECTED ||
+      isInfected === SomaticResultsFileVirusStatusEnum.SCANNING
+  }
 
+  private onDelete(somaticDocumentId: number): void {
     this.cdr.markForCheck();
     this.somaticResultsFilesWithStatuses$
-      .next(this.updateDeleteStatus(this.sharedLearnings, somaticDocumentId, HttpRequestStatusEnum.IN_PROGRESS, null));
+      .next(this.updateDeleteStatus(somaticDocumentId, HttpRequestStatusEnum.IN_PROGRESS, null));
 
     this.sharedLearningsHTTPService.delete(somaticDocumentId)
       .pipe(takeUntil(this.subscriptionSubject$))
@@ -118,15 +133,15 @@ export class FilesTableComponent implements OnDestroy {
 
   private handleSendToSuccess(somaticDocumentId: number): void {
     this.cdr.markForCheck();
-    const updatedSomaticResultsFiles = this.updateSendToStatus(this.sharedLearnings,
-      somaticDocumentId, HttpRequestStatusEnum.SUCCESS, null);
+    const updatedSomaticResultsFiles =
+      this.updateSendToStatus(somaticDocumentId, HttpRequestStatusEnum.SUCCESS, null);
     this.somaticResultsFilesWithStatuses$.next(updatedSomaticResultsFiles);
 
     // Resetting back to send icon, as the file can be sent multiple times
     setTimeout(() => {
       this.cdr.markForCheck();
-      const updatedSomaticResultsFiles2 = this.updateSendToStatus(this.sharedLearnings,
-        somaticDocumentId, HttpRequestStatusEnum.NONE, null);
+      const updatedSomaticResultsFiles2 =
+        this.updateSendToStatus(somaticDocumentId, HttpRequestStatusEnum.NONE, null);
       this.somaticResultsFilesWithStatuses$.next(updatedSomaticResultsFiles2);
     }, 2000);
   }
@@ -134,32 +149,104 @@ export class FilesTableComponent implements OnDestroy {
   private handleDeleteSuccess(somaticDocumentId: number): void {
     this.cdr.markForCheck();
     this.somaticResultsFilesWithStatuses$
-      .next(this.sharedLearnings.filter(({somaticDocumentId : id}) => id !== somaticDocumentId));
+      .next(this.sharedLearnings.filter(({somaticDocumentId: id}) => id !== somaticDocumentId));
   }
 
   private handleSendToFail(somaticDocumentId: number, error: string): void {
     this.cdr.markForCheck();
     this.somaticResultsFilesWithStatuses$
-      .next(this.updateSendToStatus(this.sharedLearnings, somaticDocumentId, HttpRequestStatusEnum.FAIL, error));
+      .next(this.updateSendToStatus(somaticDocumentId, HttpRequestStatusEnum.FAIL, error));
   }
 
   private handleDeleteFail(somaticDocumentId: number, error: string): void {
     this.cdr.markForCheck();
     this.somaticResultsFilesWithStatuses$
-      .next(this.updateDeleteStatus(this.sharedLearnings, somaticDocumentId, HttpRequestStatusEnum.FAIL, error));
+      .next(this.updateDeleteStatus(somaticDocumentId, HttpRequestStatusEnum.FAIL, error));
   }
 
-  private updateSendToStatus(sharedLearnings: SomaticResultsFileWithStatus[], id: number,
-                             status: HttpRequestStatusEnum, message): SomaticResultsFileWithStatus[] {
-    return sharedLearnings.map((sharedLearning: SomaticResultsFileWithStatus) =>
-      sharedLearning.somaticDocumentId === id ? {...sharedLearning, sendToParticipantStatus: {status, message}} : sharedLearning);
+  private handleInfectedStatusUpdate(id: number, isInfected: SomaticResultsFileVirusStatusEnum): void {
+    this.cdr.markForCheck();
+    this.somaticResultsFilesWithStatuses$
+      .next(this.updateInfectedStatus(id, isInfected));
   }
 
-  private updateDeleteStatus(sharedLearnings: SomaticResultsFileWithStatus[], id: number,
+  private handleSentDateUpdate(id: number, sentDate: number): void {
+    this.cdr.markForCheck();
+    this.somaticResultsFilesWithStatuses$
+      .next(this.updateSentDate(id, sentDate));
+  }
+
+  private updateSendToStatus(id: number, status: HttpRequestStatusEnum, message): SomaticResultsFileWithStatus[] {
+    return this.sharedLearnings.map((sharedLearning: SomaticResultsFileWithStatus) =>
+      sharedLearning.somaticDocumentId === id ? {
+        ...sharedLearning,
+        sendToParticipantStatus: {status, message}
+      } : sharedLearning);
+  }
+
+  private updateDeleteStatus(id: number,
                              status: HttpRequestStatusEnum.NONE | HttpRequestStatusEnum.IN_PROGRESS | HttpRequestStatusEnum.FAIL,
                              message): SomaticResultsFileWithStatus[] {
-    return sharedLearnings.map((sharedLearning: SomaticResultsFileWithStatus) =>
+    return this.sharedLearnings.map((sharedLearning: SomaticResultsFileWithStatus) =>
       sharedLearning.somaticDocumentId === id ? {...sharedLearning, deleteStatus: {status, message}} : sharedLearning);
+  }
+
+  private updateInfectedStatus(id: number, isInfected: SomaticResultsFileVirusStatusEnum):
+    SomaticResultsFileWithStatus[] {
+    return this.sharedLearnings.map((sharedLearning: SomaticResultsFileWithStatus) =>
+      sharedLearning.somaticDocumentId === id ? {...sharedLearning, isInfected} : sharedLearning);
+  }
+
+  private updateSentDate(id: number, sentDate: number): SomaticResultsFileWithStatus[] {
+    return this.sharedLearnings.map((sharedLearning: SomaticResultsFileWithStatus) =>
+      sharedLearning.somaticDocumentId === id ? {...sharedLearning, sentAt: sentDate} : sharedLearning);
+  }
+
+  private handleAndReturnVirusStatusFor({
+                                          isVirusFree,
+                                          deletedAt,
+                                          somaticDocumentId
+                                        }: SomaticResultsFile): SomaticResultsFileVirusStatusEnum {
+    let isFileDeleted = !!deletedAt;
+
+    if (!isVirusFree && isFileDeleted) { // file has been scanned and is infected
+      return SomaticResultsFileVirusStatusEnum.INFECTED
+    } else if (!isVirusFree && !isFileDeleted) {
+      // file has not been scanned, so it till scan file as well
+      this.scanForVirus(somaticDocumentId);
+      return SomaticResultsFileVirusStatusEnum.SCANNING
+    } else if (isVirusFree && !isFileDeleted) { // file has already been scanned for viruses and is clean
+      return SomaticResultsFileVirusStatusEnum.CLEAN
+    } else {
+      // It should not happen, but anyway:
+      // file has already been scanned for viruses and is clean but still deleted, so it's assumed as an infected
+      return SomaticResultsFileVirusStatusEnum.INFECTED
+    }
+  }
+
+  private scanForVirus(somaticDocumentId: number): void {
+    let uploadedFileHasBeenScanned = false;
+    this.sharedLearningsHTTPService
+      .getFile(this.participantId, somaticDocumentId)
+      .pipe(
+        repeatWhen((notifications: Observable<any>) =>
+          notifications.pipe(
+            takeWhile(() => !uploadedFileHasBeenScanned),
+            delay(3000)
+          )
+        ),
+        takeUntil(this.subscriptionSubject$)
+      )
+      .subscribe(({isVirusFree, deletedAt, somaticDocumentId}: SomaticResultsFile) => {
+        let isFileDeleted = !!deletedAt;
+        if (isVirusFree && !isFileDeleted) {
+          uploadedFileHasBeenScanned = true;
+          this.handleInfectedStatusUpdate(somaticDocumentId, SomaticResultsFileVirusStatusEnum.CLEAN);
+        } else if (!isVirusFree && isFileDeleted) {
+          uploadedFileHasBeenScanned = true;
+          this.handleInfectedStatusUpdate(somaticDocumentId, SomaticResultsFileVirusStatusEnum.INFECTED);
+        }
+      })
   }
 
 }

@@ -3,13 +3,18 @@ import {
   Component, Input, OnDestroy, OnInit,
 } from '@angular/core';
 import {SomaticResultsFile} from './interfaces/somaticResultsFile';
-import {Observable, Subject, switchMap, takeUntil, takeWhile, tap, throwError} from 'rxjs';
+import {
+  Observable,
+  Subject,
+  switchMap,
+  takeUntil,
+  takeWhile,
+  tap,
+  throwError
+} from 'rxjs';
 import {SharedLearningsHTTPService} from './services/sharedLearningsHTTP.service';
 import {catchError, finalize} from 'rxjs/operators';
 import {HttpErrorResponse} from '@angular/common/http';
-import {MatDialog, MatDialogRef} from '@angular/material/dialog';
-import {LoadingModalComponent} from '../modals/loading-modal.component';
-import {UploadedFileShortInfo} from './interfaces/helperInterfaces';
 
 @Component({
   selector: 'app-shared-learnings-upload',
@@ -31,7 +36,7 @@ export class SharedLearningsUploadComponent implements OnInit, OnDestroy {
 
   constructor(
     private readonly sharedLearningsHTTPService: SharedLearningsHTTPService,
-    private readonly matDialog: MatDialog) {}
+  ) {}
 
   ngOnInit(): void {
     this.initialLoad
@@ -40,24 +45,12 @@ export class SharedLearningsUploadComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    this.takeUntilSubject$.next();
     this.takeUntilSubject$.complete();
-    this.takeUntilSubject$.unsubscribe();
   }
 
-  public onFileUpload({fileName, somaticDocumentId}: UploadedFileShortInfo): void {
-    // @TODO long polling once virus scan is on place
-    const openDialog: MatDialogRef<any> = this.openLoadingDialog(fileName);
-
-    this.getSomaticResultsFiles
-      .pipe(
-        takeUntil(this.takeUntilSubject$),
-        finalize(() => openDialog.close())
-      )
-      .subscribe({
-        next: (somaticResultsFiles: SomaticResultsFile[]) =>
-          this.somaticResultsFiles = this.filterDeletedFiles(somaticResultsFiles),
-        error: (error: any) => this.handleError(error)
-      });
+  public onFileUpload(somaticResultsFiles: SomaticResultsFile): void {
+    this.somaticResultsFiles = [...this.somaticResultsFiles, somaticResultsFiles];
   }
 
   private get initialLoad(): Observable<any> {
@@ -77,12 +70,7 @@ export class SharedLearningsUploadComponent implements OnInit, OnDestroy {
   }
 
   private filterDeletedFiles(somaticResultsFiles: SomaticResultsFile[]): SomaticResultsFile[] {
-    return somaticResultsFiles.filter((somaticFile: SomaticResultsFile) => !somaticFile.deletedByUserId);
-  }
-
-  private openLoadingDialog(fileName: string): MatDialogRef<LoadingModalComponent> {
-    return this.matDialog.open(LoadingModalComponent,
-      {data: {message: `The file (${fileName}) is undergoing virus scanning`}, disableClose: true});
+    return somaticResultsFiles.filter((somaticFile: SomaticResultsFile) => !(!!somaticFile.deletedByUserId));
   }
 
   private handleError(error: any): Observable<any> {

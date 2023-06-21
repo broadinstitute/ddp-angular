@@ -16,6 +16,10 @@ md-hint.ErrorMessageForm {
   background-color: #FF595E!important;
   font-size: 1em!important;
   font-family: Montserrat-Regular, sans-serif;
+
+  &::first-letter {
+    text-transform: uppercase;
+  }
 }
 
 input::-webkit-outer-spin-button,
