@@ -91,11 +91,11 @@ export class UploadFileComponent implements OnDestroy {
       if(fileName.length > this.MAX_FILE_NAME_LENGTH) {
         this.uploadStatus = HttpRequestStatusEnum.FAIL;
         this.uploadButtonText = UploadButtonText.FILE_NAME_TOO_LARGE;
-        this.errorMessage = 'File name size has exceeded 255 characters'
+        this.errorMessage = 'File name size has exceeded 255 characters';
       } else if(fileSize > this.MAX_FILE_SIZE) {
         this.uploadStatus = HttpRequestStatusEnum.FAIL;
         this.uploadButtonText = UploadButtonText.FILE_SIZE_TOO_LARGE;
-        this.errorMessage = 'File size has exceeded 30MB'
+        this.errorMessage = 'File size has exceeded 30MB';
       } else {
         this.uploadStatus = HttpRequestStatusEnum.NONE;
         this.uploadButtonText = UploadButtonText.UPLOAD;
@@ -111,29 +111,29 @@ export class UploadFileComponent implements OnDestroy {
   }
 
   public get shouldDisableButton(): boolean {
-    return this.unauthorized || !this.isFileSelected || this.uploadStatus === HttpRequestStatusEnum.SUCCESS
+    return this.unauthorized || !this.isFileSelected || this.uploadStatus === HttpRequestStatusEnum.SUCCESS;
   }
 
   public get btnClass(): string {
     return this.uploadStatus === HttpRequestStatusEnum.SUCCESS ? 'uploadSuccess'
       : this.uploadStatus === HttpRequestStatusEnum.FAIL ? 'uploadFail'
         : this.uploadStatus === HttpRequestStatusEnum.RETRY ? 'uploadRetry'
-          : ''
+          : '';
   }
 
   private get retryOnHoverOrNot(): boolean {
     return (this.uploadStatus === HttpRequestStatusEnum.FAIL || this.uploadStatus === HttpRequestStatusEnum.RETRY) &&
-      this.fileMeetsCriteria
+      this.fileMeetsCriteria;
   }
 
   private get fileMeetsCriteria(): boolean {
     return this.uploadButtonText !== UploadButtonText.FILE_SIZE_TOO_LARGE &&
-      this.uploadButtonText !== UploadButtonText.FILE_NAME_TOO_LARGE
+      this.uploadButtonText !== UploadButtonText.FILE_NAME_TOO_LARGE;
   }
 
   private get doNotAllowUpload(): boolean {
     return this.uploadButtonText === UploadButtonText.FILE_SIZE_TOO_LARGE ||
-      this.uploadButtonText === UploadButtonText.FILE_NAME_TOO_LARGE
+      this.uploadButtonText === UploadButtonText.FILE_NAME_TOO_LARGE;
   }
 
   private handleSuccess(uploadedFileInfo: UploadedFileShortInfo): void {
