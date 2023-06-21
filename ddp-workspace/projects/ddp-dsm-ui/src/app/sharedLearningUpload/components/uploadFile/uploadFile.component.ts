@@ -103,7 +103,7 @@ export class UploadFileComponent implements OnDestroy {
       this.cdr.markForCheck();
       this.inputElement.nativeElement.value = '';
       this.selectedFileName = this.NO_FILE;
-    }, 2000);
+    });
   }
 
   private handleError(error: any): void {

@@ -6,23 +6,16 @@ import {
   Input, OnDestroy,
   Output, Renderer2,
 } from '@angular/core';
-import {SomaticResultsFile} from '../../interfaces/somaticResultsFile';
+import {SomaticResultsFile, SomaticResultsFileWithStatus} from '../../interfaces/somaticResultsFile';
 import {HttpRequestStatusEnum} from '../../enums/httpRequestStatus-enum';
 import {SharedLearningsHTTPService} from '../../services/sharedLearningsHTTP.service';
 import {Subject, takeUntil} from 'rxjs';
 import {MatIcon} from '@angular/material/icon';
 import {HttpErrorResponse} from '@angular/common/http';
+import {MatDialog} from "@angular/material/dialog";
+import {ConfirmationModalComponent} from "../confirmationModal/confirmationModal.component";
+import {take} from "rxjs/operators";
 
-interface SomaticResultsFileWithStatus extends SomaticResultsFile {
-  sendToParticipantStatus: {
-    status: HttpRequestStatusEnum;
-    message: string | null;
-  };
-  deleteStatus: {
-    status: HttpRequestStatusEnum.NONE | HttpRequestStatusEnum.IN_PROGRESS | HttpRequestStatusEnum.FAIL;
-    message: string | null;
-  };
-}
 
 @Component({
   selector: 'app-files-table',
@@ -54,7 +47,8 @@ export class FilesTableComponent implements OnDestroy {
   constructor(
     private readonly cdr: ChangeDetectorRef,
     private readonly sharedLearningsHTTPService: SharedLearningsHTTPService,
-    private readonly renderer: Renderer2
+    private readonly renderer: Renderer2,
+    private readonly matDialog: MatDialog
   ) {
     this.somaticResultsFilesWithStatuses$
       .pipe(takeUntil(this.subscriptionSubject$))
@@ -83,8 +77,33 @@ export class FilesTableComponent implements OnDestroy {
       });
   }
 
-  public onDelete({somaticDocumentId}: SomaticResultsFileWithStatus): void {
+  public deleteFile({somaticDocumentId, fileName}: SomaticResultsFileWithStatus): void {
     // @TODO when virus scan is on place, I should check for that before proceeding
+
+    const activeConfirmationDialog = this.matDialog.open(ConfirmationModalComponent,
+      {data: {fileName}, width: '500px', height: '230px'});
+    activeConfirmationDialog.afterClosed()
+      .pipe(
+        take(1),
+        takeUntil(this.subscriptionSubject$)
+      )
+      .subscribe({
+        next: (deleteOrNot: boolean) => deleteOrNot && this.onDelete(somaticDocumentId)
+      })
+  }
+
+  public retryOrNot(shouldRetry: boolean, matIcon: MatIcon): void {
+    const matIconNative = matIcon._elementRef.nativeElement;
+    matIconNative.innerText = shouldRetry ? 'replay' : 'error';
+    shouldRetry ?
+      this.renderer.addClass(matIconNative, 'retry-icon') :
+      this.renderer.removeClass(matIconNative, 'retry-icon');
+  }
+
+  private onDelete(somaticDocumentId: number): void {
+    // @TODO when virus scan is on place, I should check for that before proceeding
+
+    this.cdr.markForCheck();
     this.somaticResultsFilesWithStatuses$
       .next(this.updateDeleteStatus(this.sharedLearnings, somaticDocumentId, HttpRequestStatusEnum.IN_PROGRESS, null));
 
@@ -95,14 +114,6 @@ export class FilesTableComponent implements OnDestroy {
         error: (error: any) => error instanceof HttpErrorResponse &&
           this.handleDeleteFail(somaticDocumentId, error.error)
       });
-  }
-
-  public retryOrNot(shouldRetry: boolean, matIcon: MatIcon): void {
-    const matIconNative = matIcon._elementRef.nativeElement;
-    matIconNative.innerText = shouldRetry ? 'replay' : 'error';
-    shouldRetry ?
-      this.renderer.addClass(matIconNative, 'retry-icon') :
-      this.renderer.removeClass(matIconNative, 'retry-icon');
   }
 
   private handleSendToSuccess(somaticDocumentId: number): void {

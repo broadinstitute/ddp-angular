@@ -62,7 +62,6 @@ export class SharedLearningsUploadComponent implements OnInit, OnDestroy {
 
   private get initialLoad(): Observable<any> {
     return this.tabActivated$.pipe(
-      tap((data) => console.log(data, 'INITIAL_LOAD')),
       switchMap(() => this.getSomaticResultsFiles),
       tap((somaticResultsFiles: SomaticResultsFile[]) =>
         this.somaticResultsFiles = this.filterDeletedFiles(somaticResultsFiles)),

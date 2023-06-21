@@ -55,7 +55,7 @@
             <ng-container *ngTemplateOutlet="errorTemplate;
             context: {
             file: sharedLearningsFile,
-            method: onDelete.bind(this),
+            method: deleteFile.bind(this),
             message: sharedLearningsFile.deleteStatus.message}">
             </ng-container>
           </ng-container>
@@ -97,7 +97,7 @@
 
 <ng-template #deleteTemplate let-file="file">
   <div class="icon-container">
-    <mat-icon (click)="onDelete(file)" class="delete-icon" >delete_forever</mat-icon>
+    <mat-icon (click)="deleteFile(file)" class="delete-icon" >delete_forever</mat-icon>
   </div>
 </ng-template>
 

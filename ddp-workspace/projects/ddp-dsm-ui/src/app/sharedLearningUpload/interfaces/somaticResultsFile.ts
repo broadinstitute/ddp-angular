@@ -1,3 +1,5 @@
+import {HttpRequestStatusEnum} from "../enums/httpRequestStatus-enum";
+
 export interface SomaticResultsFile {
   blobPath: string;
   bucket: string;
@@ -13,4 +15,15 @@ export interface SomaticResultsFile {
   participantId: number;
   sentAt: number;
   somaticDocumentId: number;
+}
+
+export interface SomaticResultsFileWithStatus extends SomaticResultsFile {
+  sendToParticipantStatus: {
+    status: HttpRequestStatusEnum;
+    message: string | null;
+  };
+  deleteStatus: {
+    status: HttpRequestStatusEnum.NONE | HttpRequestStatusEnum.IN_PROGRESS | HttpRequestStatusEnum.FAIL;
+    message: string | null;
+  };
 }
