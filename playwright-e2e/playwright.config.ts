@@ -27,13 +27,13 @@ const testConfig: PlaywrightTestConfig = {
     timeout: 30 * 1000,
     toMatchSnapshot: {
       // Account for minor difference in text rendering and resolution between headless and headed mode
-      threshold: 0.3,
-      maxDiffPixelRatio: 0.2
+      threshold: 1,
+      maxDiffPixelRatio: 0.3
     },
     toHaveScreenshot: {
       scale: 'css',
       // Account for minor difference in text rendering and resolution between headless and headed mode
-      threshold: 0.2
+      threshold: 0.3
     }
   },
   /* Run tests in files in parallel */

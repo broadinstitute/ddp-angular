@@ -146,6 +146,8 @@ import {FilesTableComponent} from '../sharedLearningUpload/components/filesTable
 import {
   ConfirmationModalComponent
 } from '../sharedLearningUpload/components/confirmationModal/confirmationModal.component';
+import {OncHistoryUploadComponent} from '../oncHistoryUpload/oncHistoryUpload.component';
+import {OncHistoryUploadGuard} from '../guards/oncHistoryUpload.guard';
 
 
 PlotlyModule.plotlyjs = PlotlyJS;
@@ -246,7 +248,8 @@ PlotlyModule.plotlyjs = PlotlyJS;
     SharedLearningsUploadComponent,
     UploadFileComponent,
     FilesTableComponent,
-    ConfirmationModalComponent
+    ConfirmationModalComponent,
+    OncHistoryUploadComponent
   ],
   imports: [
     CommonModule,
@@ -297,7 +300,8 @@ PlotlyModule.plotlyjs = PlotlyJS;
     AuthGuard,
     Statics,
     Language,
-    DashboardStatisticsService
+    DashboardStatisticsService,
+    OncHistoryUploadGuard
   ],
   exports: [RouterModule, MatFormFieldModule, MatInputModule]
 })

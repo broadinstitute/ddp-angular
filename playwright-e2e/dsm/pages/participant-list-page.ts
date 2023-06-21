@@ -1,11 +1,13 @@
-import { APIRequestContext, expect, Locator, Page } from '@playwright/test';
+import { APIRequestContext, Download, expect, Locator, Page } from '@playwright/test';
 import Modal from 'dsm/component/modal';
 import { StudyNavEnum } from 'dsm/component/navigation/enums/studyNav-enum';
 import { Navigation } from 'dsm/component/navigation/navigation';
+import { FileFormatEnum, TextFormatEnum } from 'dsm/pages/participant-page/enums/download-format-enum';
 import { WelcomePage } from 'dsm/pages/welcome-page';
+import Checkbox from 'dss/component/checkbox';
 import { waitForNoSpinner, waitForResponse } from 'utils/test-utils';
 import { Filters } from 'dsm/component/filters/filters';
-import { ParticipantListTable } from 'dsm/component/tables/participantListTable';
+import { ParticipantListTable } from 'dsm/component/tables/participant-list-table';
 
 export default class ParticipantListPage {
   private readonly PAGE_TITLE: string = 'Participant List';
@@ -31,6 +33,11 @@ export default class ParticipantListPage {
 
   public async waitForReady(): Promise<void> {
     await waitForNoSpinner(this.page);
+  }
+
+  public async selectAll(): Promise<void> {
+    const checkbox = new Checkbox(this.page, { label: 'Select all', root: '//*'});
+    await checkbox.check({ timeout: 30 * 1000 }); // long delay
   }
 
   public async addBulkCohortTags(): Promise<void> {
@@ -87,6 +94,63 @@ export default class ParticipantListPage {
     ]);
   }
 
+  /**
+   * Click Download button to download participant list.
+   * @param {{fileFormat?: FileFormatEnum, textFormat?: TextFormatEnum, includeCompletionOfActivity?: boolean, timeout?: number}} opts
+   * @returns {Promise<Download>}
+   */
+  public async downloadParticipant(opts: {
+      fileFormat?: FileFormatEnum,
+      textFormat?: TextFormatEnum,
+      includeCompletionOfActivity?: boolean,
+      timeout?: number
+    } = {}): Promise<Download> {
+    const {
+      fileFormat = FileFormatEnum.XLSX,
+      textFormat = TextFormatEnum.HUMAN_READABLE,
+      includeCompletionOfActivity = true,
+      timeout = 2 * 60 * 1000
+    } = opts;
+
+    const button = this.page.locator('button').filter({has: this.page.locator('[data-icon="file-download"]')});
+    await button.click();
+
+    const modal = new Modal(this.page);
+    await expect(modal.headerLocator()).toHaveText('Configure export');
+
+    const fileFormatRadio = modal.getRadiobutton(new RegExp('File format:'));
+    await fileFormatRadio.check(fileFormat);
+
+    const textFormatRadio = modal.getRadiobutton(new RegExp('Option text format:'));
+    await textFormatRadio.check(textFormat);
+
+    const booleanText = includeCompletionOfActivity ? 'Yes' : 'No';
+    const includeAllCompletionOfActivityRadio = modal.getRadiobutton(new RegExp('Include all completions of an activity:'));
+    await includeAllCompletionOfActivityRadio.check(booleanText);
+
+    // exporting participant list may take several minutes
+    const [download] = await Promise.all([
+      this.page.waitForEvent('download', { timeout }),
+      modal.getButton({ label: 'Download' }).click()
+    ]);
+    return download;
+  }
+
+/**
+ * Filters the participant list to search for a specific participant when given their guid
+ * @param participantGUID the guid of the specific participant to search for
+ */
+public async filterListByParticipantGUID(participantGUID: string): Promise<void> {
+  const customizeViewPanel = this.filters.customizeViewPanel;
+  await customizeViewPanel.open();
+  await customizeViewPanel.selectColumns('Participant Columns', ['Participant ID']);
+
+  const searchPanel = this.filters.searchPanel;
+  await searchPanel.open();
+  await searchPanel.text('Participant ID', {textValue: participantGUID });
+  await searchPanel.search();
+}
+
   /* Locators */
   private get tableRowsLocator(): Locator {
     return this.page.locator('[role="row"]:not([mat-header-row]):not(mat-header-row), tbody tr');
@@ -130,5 +194,11 @@ export default class ParticipantListPage {
         }
       }
     }
+  }
+
+  async showParticipantWithdrawnButton(): Promise<void> {
+    const button = this.page.locator('button').filter({has: this.page.locator('[data-icon="quidditch"]')});
+    await button.click();
+    await waitForNoSpinner(this.page);
   }
 }

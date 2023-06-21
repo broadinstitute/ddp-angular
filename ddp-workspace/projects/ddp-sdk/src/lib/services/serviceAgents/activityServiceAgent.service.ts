@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { combineLatest, Observable, of, throwError } from 'rxjs';
+import {combineLatest, Observable, of, throwError} from 'rxjs';
 import { mergeMap, catchError, map, switchMap } from 'rxjs/operators';
 
 import { ActivityConverter } from '../activity/activityConverter.service';

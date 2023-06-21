@@ -56,5 +56,6 @@ export class Navigation {
 
   private async selectFrom(from: MainMenuEnum, selection: Selection): Promise<void> {
     await new Dropdown(this.page, from).selectOption(selection);
+    await waitForNoSpinner(this.page);
   }
 }

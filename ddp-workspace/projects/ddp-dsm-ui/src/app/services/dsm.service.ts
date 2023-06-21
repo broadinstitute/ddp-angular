@@ -709,6 +709,16 @@ export class DSMService {
     );
   }
 
+  public uploadOncHistoryTextFile(realm: string, file: File): Observable<any> {
+    const url = this.baseUrl + DSMService.UI + 'oncHistory';
+    const map: { name: string; value: any }[] = [];
+    map.push({name: DSMService.REALM, value: realm});
+    map.push({name: 'userId', value: this.role.userID()});
+    return this.http.post(url, file, this.buildQueryUploadHeader(map)).pipe(
+      catchError(this.handleError)
+    );
+  }
+
   public getSignedUrl( ddpParticipantId: string, {fileName, bucket, blobName, guid}, realm: string):
     Observable<any> {
     const url = this.baseUrl + DSMService.UI + 'downloadFile';

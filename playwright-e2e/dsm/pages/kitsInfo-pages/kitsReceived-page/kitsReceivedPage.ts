@@ -1,10 +1,12 @@
 import {KitType} from 'dsm/component/kitType/kitType';
-import {KitsTable} from 'dsm/component/tables/kitsTable';
+import {KitsTable} from 'dsm/component/tables/kits-table';
 import {APIRequestContext, expect, Page} from '@playwright/test';
 import {KitTypeEnum} from 'dsm/component/kitType/enums/kitType-enum';
 import {waitForNoSpinner, waitForResponse} from 'utils/test-utils';
 import {KitsColumnsEnum} from 'dsm/pages/kitsInfo-pages/enums/kitsColumns-enum';
 import {assertTableHeaders} from 'utils/assertion-helper';
+import {KitsPaginator} from 'lib/component/dsm/paginators/kitsPaginator';
+import {rows} from 'lib/component/dsm/paginators/types/rowsPerPage';
 
 const { BSP_TOKEN, DSM_BASE_URL } = process.env;
 
@@ -19,6 +21,14 @@ export default class KitsReceivedPage {
 
   constructor(private readonly page: Page,
               private readonly request: APIRequestContext) {
+  }
+
+  public async goToPage(page: number): Promise<void> {
+    await this.kitsTable.goToPage(page);
+  }
+
+  public async rowsPerPage(rows: rows): Promise<void> {
+    await this.kitsTable.rowsPerPage(rows);
   }
 
   public async waitForLoad(): Promise<void> {

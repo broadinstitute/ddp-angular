@@ -1,6 +1,6 @@
 import { Component, Inject, Input, OnDestroy, OnInit, Output, EventEmitter, ViewChild } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
-import { iif, Observable, of, Subscription, merge, BehaviorSubject } from 'rxjs';
+import { iif, Observable, of, Subscription, merge, BehaviorSubject, forkJoin } from 'rxjs';
 import { map, mergeMap, filter, concatMap, tap } from 'rxjs/operators';
 import { PopupWithCheckboxComponent } from '../popupWithCheckbox.component';
 import { CompositeDisposable } from '../../compositeDisposable';
@@ -14,6 +14,8 @@ import { LanguageServiceAgent } from '../../services/serviceAgents/languageServi
 import { UserProfileServiceAgent } from '../../services/serviceAgents/userProfileServiceAgent.service';
 import { LoggingService } from '../../services/logging.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { GovernedParticipantsServiceAgent } from '../../services/serviceAgents/governedParticipantsServiceAgent.service';
+import { ParticipantProfileServiceAgent } from '../../services/serviceAgents/participantProfileServiceAgent.service';
 
 @Component({
     selector: 'ddp-language-selector',
@@ -105,6 +107,8 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
         private language: LanguageService,
         private logger: LoggingService,
         private profileServiceAgent: UserProfileServiceAgent,
+        private participantProfileService: ParticipantProfileServiceAgent,
+        private governedParticipantsServiceAgent: GovernedParticipantsServiceAgent,
         private route: ActivatedRoute,
         private router: Router,
         @Inject('ddp.config') private config: ConfigurationService,
@@ -267,13 +271,38 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
 
     // Update the language in the profile to the current language
     private updateProfileLanguage(): Observable<any> {
-        const profileModifications: UserProfile = new UserProfile();
-        profileModifications.preferredLanguage = this.currentLanguage.languageCode;
-        return this.profileServiceAgent.updateProfile(profileModifications)
-            .pipe(
-                tap(() => this.afterProfileLanguageChange.emit()),
-                tap(() => this.language.notifyOfProfileLanguageUpdate())
-            );
+        if (this.config.updatePreferredLanguageForGovernedParticipants) {
+            return this.governedParticipantsServiceAgent.getGovernedStudyParticipants(this.config.studyGuid)
+                .pipe(
+                    mergeMap(participants => {
+                        const participantsToUpdate = [
+                            {
+                                guid: this.session.session.userGuid,
+                                profile: {
+                                    preferredLanguage: this.currentLanguage.languageCode
+                                } as UserProfile
+                            },
+                            ...participants.map(participant => ({
+                                guid: participant.userGuid,
+                                profile: {
+                                preferredLanguage: this.currentLanguage.languageCode
+                            } as UserProfile
+                        }))];
+
+                        return forkJoin(this.participantProfileService.updateParticipantProfiles(participantsToUpdate));
+                    }),
+                    tap(() => this.afterProfileLanguageChange.emit()),
+                    tap(() => this.language.notifyOfProfileLanguageUpdate())
+                );
+        } else {
+            const profileModifications: UserProfile = new UserProfile();
+            profileModifications.preferredLanguage = this.currentLanguage.languageCode;
+            return this.profileServiceAgent.updateProfile(profileModifications)
+                .pipe(
+                    tap(() => this.afterProfileLanguageChange.emit()),
+                    tap(() => this.language.notifyOfProfileLanguageUpdate())
+                );
+        }
     }
 
     private getNextObservable(lang: StudyLanguage, obs: Observable<StudyLanguage>): Observable<StudyLanguage> {

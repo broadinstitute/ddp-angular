@@ -75,7 +75,7 @@
         </td>
         <td>
           <mat-form-field [ngClass]="{'Input': true, 'Color--Field--Patched': isPatchedCurrently('locationPx', i)}">
-            <input matInput class="Width--100 Input--Min-WIDTH" maxlength="200" [disabled]="!editable || participantExited"
+            <input matInput class="Width--100 Input--Min-WIDTH" maxlength="1000" [disabled]="!editable || participantExited"
                    [(ngModel)]="oncHis.locationPx" (change)="valueChanged($event, 'locationPx', i)"
                    (blur)="currentField(null, null)" (focus)="currentField('locationPx', i)">
           </mat-form-field>

@@ -1,10 +1,11 @@
 import {expect, Page} from '@playwright/test';
 import {KitType} from 'dsm/component/kitType/kitType';
-import {KitsTable} from 'dsm/component/tables/kitsTable';
+import {KitsTable} from 'dsm/component/tables/kits-table';
 import {KitTypeEnum} from 'dsm/component/kitType/enums/kitType-enum';
 import {waitForNoSpinner, waitForResponse} from 'utils/test-utils';
 import {KitsColumnsEnum} from 'dsm/pages/kitsInfo-pages/enums/kitsColumns-enum';
 import {assertTableHeaders} from 'utils/assertion-helper';
+import {rows} from 'lib/component/dsm/paginators/types/rowsPerPage';
 
 export default class KitsSentPage {
   private readonly PAGE_TITLE = 'Kits Sent';
@@ -17,6 +18,14 @@ export default class KitsSentPage {
   private readonly kitsTable = new KitsTable(this.page);
 
   constructor(private readonly page: Page) {
+  }
+
+  public async goToPage(page: number): Promise<void> {
+    await this.kitsTable.goToPage(page);
+  }
+
+  public async rowsPerPage(rows: rows): Promise<void> {
+    await this.kitsTable.rowsPerPage(rows);
   }
 
   public async waitForLoad(): Promise<void> {
@@ -35,8 +44,8 @@ export default class KitsSentPage {
     await this.kitsTable.searchBy(columnName, value);
   }
 
-  public async getData(columnName: KitsColumnsEnum): Promise<string> {
-    return await this.kitsTable.getData(columnName);
+  public getData(columnName: KitsColumnsEnum): Promise<string> {
+    return this.kitsTable.getData(columnName);
   }
 
   /* Assertions */

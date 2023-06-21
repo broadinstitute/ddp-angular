@@ -127,6 +127,7 @@ config.usesVerticalStepper = [
 config.alwaysShowQuestionsCountInModalNestedActivity = true;
 config.validateOnlyVisibleSections = true;
 config.institutionsAdditionalFields = { PHYSICIAN: ['COUNTRY'] };
+config.updatePreferredLanguageForGovernedParticipants = true;
 
 export function translateFactory(
     translate: TranslateService,
