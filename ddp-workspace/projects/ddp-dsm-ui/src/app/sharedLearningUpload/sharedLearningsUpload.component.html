@@ -11,8 +11,10 @@
   </section>
 
   <section *ngIf="errorLoadingData" class="error-note">
-    <p>We couldn't load the data</p>
-    <p>The error message: {{errorLoadingData}}</p>
+    <main>
+      <p>We couldn't load the data</p>
+      <p>The error message: {{errorLoadingData}}</p>
+    </main>
   </section>
 
   <section *ngIf="!errorLoadingData" class="files">
