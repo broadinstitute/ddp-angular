@@ -26,7 +26,7 @@ import KitsReceivedPage from 'dsm/pages/kitsInfo-pages/kitsReceived-page/kitsRec
 import TrackingScanPage from 'dsm/pages/scanner-pages/trackingScan-page';
 
 // don't run in parallel
-test.describe.skip('Blood Kits upload flow', () => {
+test.describe('Blood Kits upload flow', () => {
   let welcomePage: WelcomePage;
   let homePage: HomePage;
   let navigation: Navigation;
