@@ -11,7 +11,7 @@ import {HttpRequestStatusEnum} from '../../enums/httpRequestStatus-enum';
 import {SharedLearningsHTTPService} from '../../services/sharedLearningsHTTP.service';
 import {Subject, takeUntil} from 'rxjs';
 import {MatIcon} from '@angular/material/icon';
-import {HttpErrorResponse} from "@angular/common/http";
+import {HttpErrorResponse} from '@angular/common/http';
 
 interface SomaticResultsFileWithStatus extends SomaticResultsFile {
   sendToParticipantStatus: {
@@ -80,7 +80,7 @@ export class FilesTableComponent implements OnDestroy {
         next: () => this.handleSendToSuccess(somaticDocumentId),
         error: (error: any) => error instanceof HttpErrorResponse &&
           this.handleSendToFail(somaticDocumentId, error.error)
-      })
+      });
   }
 
   public onDelete({somaticDocumentId}: SomaticResultsFileWithStatus): void {
@@ -114,16 +114,16 @@ export class FilesTableComponent implements OnDestroy {
     // Resetting back to send icon, as the file can be sent multiple times
     setTimeout(() => {
       this.cdr.markForCheck();
-      const updatedSomaticResultsFiles = this.updateSendToStatus(this.sharedLearnings,
+      const updatedSomaticResultsFiles2 = this.updateSendToStatus(this.sharedLearnings,
         somaticDocumentId, HttpRequestStatusEnum.NONE, null);
-      this.somaticResultsFilesWithStatuses$.next(updatedSomaticResultsFiles);
-    }, 2000)
+      this.somaticResultsFilesWithStatuses$.next(updatedSomaticResultsFiles2);
+    }, 2000);
   }
 
   private handleDeleteSuccess(somaticDocumentId: number): void {
     this.cdr.markForCheck();
     this.somaticResultsFilesWithStatuses$
-      .next(this.sharedLearnings.filter(({somaticDocumentId : id}) => id !== somaticDocumentId))
+      .next(this.sharedLearnings.filter(({somaticDocumentId : id}) => id !== somaticDocumentId));
   }
 
   private handleSendToFail(somaticDocumentId: number, error: string): void {

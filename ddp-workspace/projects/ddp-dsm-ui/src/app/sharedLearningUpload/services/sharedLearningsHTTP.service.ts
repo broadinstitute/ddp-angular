@@ -35,7 +35,7 @@ export class SharedLearningsHTTPService {
     return this.dsmService.sendSomaticResultsToParticipant(this.selectedRealm, {
       participantId,
       somaticDocumentId
-    })
+    });
   }
 
   public delete(somaticDocumentId: number): Observable<any> {

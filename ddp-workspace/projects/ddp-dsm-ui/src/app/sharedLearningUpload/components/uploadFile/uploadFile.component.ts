@@ -15,7 +15,7 @@ import {LoadingModalComponent} from '../../../modals/loading-modal.component';
 import {HttpRequestStatusEnum} from '../../enums/httpRequestStatus-enum';
 import {HttpErrorResponse} from '@angular/common/http';
 import {SomaticResultSignedUrlResponse} from '../../interfaces/somaticResultSignedUrlRequest';
-import {UploadedFileShortInfo} from "../../interfaces/helperInterfaces";
+import {UploadedFileShortInfo} from '../../interfaces/helperInterfaces';
 
 @Component({
   selector: 'app-upload-files',
@@ -103,7 +103,7 @@ export class UploadFileComponent implements OnDestroy {
       this.cdr.markForCheck();
       this.inputElement.nativeElement.value = '';
       this.selectedFileName = this.NO_FILE;
-    }, 2000)
+    }, 2000);
   }
 
   private handleError(error: any): void {

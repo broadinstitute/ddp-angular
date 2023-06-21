@@ -20,7 +20,7 @@ import {LocalStorageService} from './local-storage.service';
 import {IDateRange} from '../dashboard-statistics/interfaces/IDateRange';
 import {StatisticsEnum} from '../dashboard-statistics/enums/statistics.enum';
 import {SomaticResultSignedUrlRequest} from '../sharedLearningUpload/interfaces/somaticResultSignedUrlRequest';
-import {SendToParticipantRequest} from "../sharedLearningUpload/interfaces/sendToParticipant";
+import {SendToParticipantRequest} from '../sharedLearningUpload/interfaces/sendToParticipant';
 
 declare var DDP_ENV: any;
 

@@ -7,9 +7,9 @@ import {Observable, Subject, switchMap, takeUntil, takeWhile, tap, throwError} f
 import {SharedLearningsHTTPService} from './services/sharedLearningsHTTP.service';
 import {catchError, finalize} from 'rxjs/operators';
 import {HttpErrorResponse} from '@angular/common/http';
-import {MatDialog, MatDialogRef} from "@angular/material/dialog";
-import {LoadingModalComponent} from "../modals/loading-modal.component";
-import {UploadedFileShortInfo} from "./interfaces/helperInterfaces";
+import {MatDialog, MatDialogRef} from '@angular/material/dialog';
+import {LoadingModalComponent} from '../modals/loading-modal.component';
+import {UploadedFileShortInfo} from './interfaces/helperInterfaces';
 
 @Component({
   selector: 'app-shared-learnings-upload',
@@ -57,7 +57,7 @@ export class SharedLearningsUploadComponent implements OnInit, OnDestroy {
         next: (somaticResultsFiles: SomaticResultsFile[]) =>
           this.somaticResultsFiles = this.filterDeletedFiles(somaticResultsFiles),
         error: (error: any) => this.handleError(error)
-      })
+      });
   }
 
   private get initialLoad(): Observable<any> {
@@ -78,7 +78,7 @@ export class SharedLearningsUploadComponent implements OnInit, OnDestroy {
   }
 
   private filterDeletedFiles(somaticResultsFiles: SomaticResultsFile[]): SomaticResultsFile[] {
-    return somaticResultsFiles.filter((somaticFile: SomaticResultsFile) => !somaticFile.deletedByUserId)
+    return somaticResultsFiles.filter((somaticFile: SomaticResultsFile) => !somaticFile.deletedByUserId);
   }
 
   private openLoadingDialog(fileName: string): MatDialogRef<LoadingModalComponent> {
