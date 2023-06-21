@@ -15,7 +15,7 @@ import {HttpErrorResponse} from '@angular/common/http';
 import {MatDialog} from '@angular/material/dialog';
 import {ConfirmationModalComponent} from '../confirmationModal/confirmationModal.component';
 import {take} from 'rxjs/operators';
-import {SomaticResultsFileVirusStatusEnum} from "../../enums/somaticResultsFileVirusStatus-enum";
+import {SomaticResultsFileVirusStatusEnum} from '../../enums/somaticResultsFileVirusStatus-enum';
 
 
 @Component({
@@ -110,7 +110,7 @@ export class FilesTableComponent implements OnDestroy {
 
   public shouldNotAllowSendOrDelete(isInfected: SomaticResultsFileVirusStatusEnum): boolean {
     return isInfected === SomaticResultsFileVirusStatusEnum.INFECTED ||
-      isInfected === SomaticResultsFileVirusStatusEnum.SCANNING
+      isInfected === SomaticResultsFileVirusStatusEnum.SCANNING;
   }
 
   private mapFile(somaticResultsFile: SomaticResultsFile): SomaticResultsFileWithStatus {
@@ -121,7 +121,7 @@ export class FilesTableComponent implements OnDestroy {
       sendToParticipantStatus: {status: HttpRequestStatusEnum.NONE, message: null},
       deleteStatus: {status: HttpRequestStatusEnum.NONE, message: null},
       isInfected: this.handleAndReturnVirusStatusFor(somaticResultsFile)
-    }
+    };
   }
 
   private onDelete(somaticDocumentId: number): void {
@@ -219,20 +219,20 @@ export class FilesTableComponent implements OnDestroy {
                                           deletedAt,
                                           somaticDocumentId
                                         }: SomaticResultsFile): SomaticResultsFileVirusStatusEnum {
-    let isFileDeleted = !!deletedAt;
+    const isFileDeleted = !!deletedAt;
 
     if (!isVirusFree && isFileDeleted) { // file has been scanned and is infected
-      return SomaticResultsFileVirusStatusEnum.INFECTED
+      return SomaticResultsFileVirusStatusEnum.INFECTED;
     } else if (!isVirusFree && !isFileDeleted) {
       // file has not been scanned, so it till scan file as well
       this.scanForVirus(somaticDocumentId);
-      return SomaticResultsFileVirusStatusEnum.SCANNING
+      return SomaticResultsFileVirusStatusEnum.SCANNING;
     } else if (isVirusFree && !isFileDeleted) { // file has already been scanned for viruses and is clean
-      return SomaticResultsFileVirusStatusEnum.CLEAN
+      return SomaticResultsFileVirusStatusEnum.CLEAN;
     } else {
       // It should not happen, but anyway:
       // file has already been scanned for viruses and is clean but still deleted, so it's assumed as an infected
-      return SomaticResultsFileVirusStatusEnum.INFECTED
+      return SomaticResultsFileVirusStatusEnum.INFECTED;
     }
   }
 
@@ -249,16 +249,16 @@ export class FilesTableComponent implements OnDestroy {
         ),
         takeUntil(this.subscriptionSubject$)
       )
-      .subscribe(({isVirusFree, deletedAt, somaticDocumentId}: SomaticResultsFile) => {
-        let isFileDeleted = !!deletedAt;
+      .subscribe(({isVirusFree, deletedAt, somaticDocumentId: id}: SomaticResultsFile) => {
+        const isFileDeleted = !!deletedAt;
         if (isVirusFree && !isFileDeleted) {
           uploadedFileHasBeenScanned = true;
-          this.handleInfectedStatusUpdate(somaticDocumentId, SomaticResultsFileVirusStatusEnum.CLEAN);
+          this.handleInfectedStatusUpdate(id, SomaticResultsFileVirusStatusEnum.CLEAN);
         } else if (!isVirusFree && isFileDeleted) {
           uploadedFileHasBeenScanned = true;
-          this.handleInfectedStatusUpdate(somaticDocumentId, SomaticResultsFileVirusStatusEnum.INFECTED);
+          this.handleInfectedStatusUpdate(id, SomaticResultsFileVirusStatusEnum.INFECTED);
         }
-      })
+      });
   }
 
 }

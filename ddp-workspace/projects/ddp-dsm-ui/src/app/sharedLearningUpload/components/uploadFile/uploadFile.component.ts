@@ -15,7 +15,7 @@ import {LoadingModalComponent} from '../../../modals/loading-modal.component';
 import {HttpRequestStatusEnum} from '../../enums/httpRequestStatus-enum';
 import {HttpErrorResponse} from '@angular/common/http';
 import {SomaticResultSignedUrlResponse} from '../../interfaces/somaticResultSignedUrlRequest';
-import {SomaticResultsFile} from "../../interfaces/somaticResultsFile";
+import {SomaticResultsFile} from '../../interfaces/somaticResultsFile';
 
 @Component({
   selector: 'app-upload-files',

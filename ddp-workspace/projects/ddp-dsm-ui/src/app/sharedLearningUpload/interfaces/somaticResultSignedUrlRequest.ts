@@ -1,4 +1,4 @@
-import {SomaticResultsFile} from "./somaticResultsFile";
+import {SomaticResultsFile} from './somaticResultsFile';
 
 export interface SomaticResultSignedUrlRequest {
   fileName: string;

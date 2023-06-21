@@ -1,5 +1,5 @@
 import {HttpRequestStatusEnum} from '../enums/httpRequestStatus-enum';
-import {SomaticResultsFileVirusStatusEnum} from "../enums/somaticResultsFileVirusStatus-enum";
+import {SomaticResultsFileVirusStatusEnum} from '../enums/somaticResultsFileVirusStatus-enum';
 
 export interface SomaticResultsFile {
   blobPath: string;
