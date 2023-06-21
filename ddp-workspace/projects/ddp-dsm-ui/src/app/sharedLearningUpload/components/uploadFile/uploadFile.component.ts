@@ -25,15 +25,17 @@ import {UploadedFileShortInfo} from '../../interfaces/helperInterfaces';
 })
 export class UploadFileComponent implements OnDestroy {
   private readonly NO_FILE = 'No File';
+  private readonly MAX_FILE_SIZE = 31457280;
+  private readonly MAX_FILE_NAME_LENGTH = 255;
+
+  private subscription: Subscription;
 
   public selectedFileName: string = this.NO_FILE;
   public uploadButtonText = UploadButtonText.UPLOAD;
   public isFileSelected = false;
   public uploadStatus: HttpRequestStatusEnum = HttpRequestStatusEnum.NONE;
   public errorMessage: string | null = null;
-  public httpRequestStatusEnum = HttpRequestStatusEnum;
 
-  private subscription: Subscription;
 
   @Input() participantId: string;
   @Input() unauthorized = false;
@@ -56,47 +58,86 @@ export class UploadFileComponent implements OnDestroy {
   }
 
   public upload(): void {
-    const selectedFiles: FileList = this.inputElement.nativeElement.files;
-    const selectedFile: File = selectedFiles.item(0);
-    this.updateUploadButton(HttpRequestStatusEnum.IN_PROGRESS);
-    const openLoadingDialog = this.openLoadingDialog(selectedFile.name);
-    let uploadedFileInfo: UploadedFileShortInfo;
+    if(!this.doNotAllowUpload) {
+      const selectedFiles: FileList = this.inputElement.nativeElement.files;
+      const selectedFile: File = selectedFiles.item(0);
+      this.updateUploadButtonBy(HttpRequestStatusEnum.IN_PROGRESS);
+      const openLoadingDialog = this.openLoadingDialog(selectedFile.name);
+      let uploadedFileInfo: UploadedFileShortInfo;
 
-    this.subscription = this.sharedLearningsHTTPService
-      .getSignedUrl(selectedFile, this.participantId)
-      .pipe(
-        tap(({somaticResultUpload: {somaticDocumentId, fileName}}: SomaticResultSignedUrlResponse) =>
-          uploadedFileInfo = {fileName, somaticDocumentId}),
-        mergeMap(({signedUrl}: SomaticResultSignedUrlResponse) =>
-          this.sharedLearningsHTTPService.upload(signedUrl, selectedFile)),
-        finalize(() => openLoadingDialog.close())
-      )
-      .subscribe({
-        next: () => this.handleSuccess(uploadedFileInfo),
-        error: (error: any) => this.handleError(error)
-      });
+      this.subscription = this.sharedLearningsHTTPService
+        .getSignedUrl(selectedFile, this.participantId)
+        .pipe(
+          tap(({somaticResultUpload: {somaticDocumentId, fileName}}: SomaticResultSignedUrlResponse) =>
+            uploadedFileInfo = {fileName, somaticDocumentId}),
+          mergeMap(({signedUrl}: SomaticResultSignedUrlResponse) =>
+            this.sharedLearningsHTTPService.upload(signedUrl, selectedFile)),
+          finalize(() => openLoadingDialog.close())
+        )
+        .subscribe({
+          next: () => this.handleSuccess(uploadedFileInfo),
+          error: (error: any) => this.handleError(error)
+        });
+    }
   }
 
   public onFileSelection(event: Event): void {
-    const files: FileList = (event.target as HTMLInputElement).files;
-    if (files.length) {
-      this.selectedFileName &&= this.displayFileName(files.item(0).name);
+    const selectedFiles: FileList = (event.target as HTMLInputElement).files;
+    if (selectedFiles.length) {
       this.isFileSelected = true;
       this.errorMessage = null;
-      this.uploadStatus = HttpRequestStatusEnum.NONE;
-      this.uploadButtonText = UploadButtonText.UPLOAD;
+      const {name: fileName, size: fileSize} = selectedFiles.item(0);
+      this.selectedFileName &&= this.displayFileName(fileName);
+      if(fileName.length > this.MAX_FILE_NAME_LENGTH) {
+        this.uploadStatus = HttpRequestStatusEnum.FAIL;
+        this.uploadButtonText = UploadButtonText.FILE_NAME_TOO_LARGE;
+        this.errorMessage = 'File name size has exceeded 255 characters'
+      } else if(fileSize > this.MAX_FILE_SIZE) {
+        this.uploadStatus = HttpRequestStatusEnum.FAIL;
+        this.uploadButtonText = UploadButtonText.FILE_SIZE_TOO_LARGE;
+        this.errorMessage = 'File size has exceeded 30MB'
+      } else {
+        this.uploadStatus = HttpRequestStatusEnum.NONE;
+        this.uploadButtonText = UploadButtonText.UPLOAD;
+      }
     }
   }
 
   public retryOrNot(isMouseOver: boolean): void {
-    if (this.uploadStatus === HttpRequestStatusEnum.FAIL || this.uploadStatus === HttpRequestStatusEnum.RETRY) {
+    if (this.retryOnHoverOrNot) {
       const currentStatus = isMouseOver ? HttpRequestStatusEnum.RETRY : HttpRequestStatusEnum.FAIL;
-      this.updateUploadButton(currentStatus);
+      this.updateUploadButtonBy(currentStatus);
     }
   }
 
+  public get shouldDisableButton(): boolean {
+    return this.unauthorized || !this.isFileSelected || this.uploadStatus === HttpRequestStatusEnum.SUCCESS
+  }
+
+  public get btnClass(): string {
+    return this.uploadStatus === HttpRequestStatusEnum.SUCCESS ? 'uploadSuccess'
+      : this.uploadStatus === HttpRequestStatusEnum.FAIL ? 'uploadFail'
+        : this.uploadStatus === HttpRequestStatusEnum.RETRY ? 'uploadRetry'
+          : ''
+  }
+
+  private get retryOnHoverOrNot(): boolean {
+    return (this.uploadStatus === HttpRequestStatusEnum.FAIL || this.uploadStatus === HttpRequestStatusEnum.RETRY) &&
+      this.fileMeetsCriteria
+  }
+
+  private get fileMeetsCriteria(): boolean {
+    return this.uploadButtonText !== UploadButtonText.FILE_SIZE_TOO_LARGE &&
+      this.uploadButtonText !== UploadButtonText.FILE_NAME_TOO_LARGE
+  }
+
+  private get doNotAllowUpload(): boolean {
+    return this.uploadButtonText === UploadButtonText.FILE_SIZE_TOO_LARGE ||
+      this.uploadButtonText === UploadButtonText.FILE_NAME_TOO_LARGE
+  }
+
   private handleSuccess(uploadedFileInfo: UploadedFileShortInfo): void {
-    this.updateUploadButton(HttpRequestStatusEnum.SUCCESS);
+    this.updateUploadButtonBy(HttpRequestStatusEnum.SUCCESS);
     this.fileUploaded.next(uploadedFileInfo);
     // Resetting the selected file, in order to be able to upload the same file multiple times at the same time
     setTimeout(() => {
@@ -107,7 +148,7 @@ export class UploadFileComponent implements OnDestroy {
   }
 
   private handleError(error: any): void {
-    this.updateUploadButton(HttpRequestStatusEnum.FAIL);
+    this.updateUploadButtonBy(HttpRequestStatusEnum.FAIL);
     this.errorMessage = error instanceof HttpErrorResponse ? error.error : null;
   }
 
@@ -124,9 +165,9 @@ export class UploadFileComponent implements OnDestroy {
       fileName}.${fileExtension}`;
   }
 
-  private updateUploadButton(uploadStatus: HttpRequestStatusEnum): void {
+  private updateUploadButtonBy(uploadHttpStatus: HttpRequestStatusEnum): void {
     this.cdr.markForCheck();
-    switch (uploadStatus) {
+    switch (uploadHttpStatus) {
       case  HttpRequestStatusEnum.SUCCESS:
         this.errorMessage = null;
         this.uploadStatus = HttpRequestStatusEnum.SUCCESS;
