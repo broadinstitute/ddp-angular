@@ -12,9 +12,9 @@ import {SharedLearningsHTTPService} from '../../services/sharedLearningsHTTP.ser
 import {Subject, takeUntil} from 'rxjs';
 import {MatIcon} from '@angular/material/icon';
 import {HttpErrorResponse} from '@angular/common/http';
-import {MatDialog} from "@angular/material/dialog";
-import {ConfirmationModalComponent} from "../confirmationModal/confirmationModal.component";
-import {take} from "rxjs/operators";
+import {MatDialog} from '@angular/material/dialog';
+import {ConfirmationModalComponent} from '../confirmationModal/confirmationModal.component';
+import {take} from 'rxjs/operators';
 
 
 @Component({
@@ -89,7 +89,7 @@ export class FilesTableComponent implements OnDestroy {
       )
       .subscribe({
         next: (deleteOrNot: boolean) => deleteOrNot && this.onDelete(somaticDocumentId)
-      })
+      });
   }
 
   public retryOrNot(shouldRetry: boolean, matIcon: MatIcon): void {

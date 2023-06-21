@@ -1,4 +1,4 @@
-import {HttpRequestStatusEnum} from "../enums/httpRequestStatus-enum";
+import {HttpRequestStatusEnum} from '../enums/httpRequestStatus-enum';
 
 export interface SomaticResultsFile {
   blobPath: string;
