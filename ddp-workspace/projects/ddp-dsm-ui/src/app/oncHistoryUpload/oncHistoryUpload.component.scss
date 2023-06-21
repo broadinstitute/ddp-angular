@@ -1,0 +1,23 @@
+.message {
+  height: 2em;
+  width: 100%;
+  overflow: auto;
+  font-weight: bold;
+  &-success {
+    color: green;
+  }
+  &-fail {
+    color: red;
+  }
+}
+.upload {
+  margin-top: 1em;
+}
+.upload-instructions {
+  margin-top: 1em;
+  font-weight: bold;
+
+  .table {
+    margin-top: .5em;
+  }
+}

@@ -1,5 +1,5 @@
 <div class="FilePicker--Button Float--left">
-  <input type="file" id="{{id}}" (change)="userFile($event)" style="display: none;"/>
+  <input [accept]="fileFormat"  type="file" id="{{id}}" (change)="userFile($event)" style="display: none;"/>
   <label class="label-button" for="{{id}}">Browse...</label>
 </div>
 
