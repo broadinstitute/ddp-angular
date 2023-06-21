@@ -81,7 +81,7 @@ export class FilesTableComponent implements OnDestroy {
     // @TODO when virus scan is on place, I should check for that before proceeding
 
     const activeConfirmationDialog = this.matDialog.open(ConfirmationModalComponent,
-      {data: {fileName}, width: '500px', height: '230px'});
+      {data: {fileName}, width: '500px'});
     activeConfirmationDialog.afterClosed()
       .pipe(
         take(1),
