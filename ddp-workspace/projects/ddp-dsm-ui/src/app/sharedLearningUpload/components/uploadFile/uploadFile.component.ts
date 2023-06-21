@@ -25,7 +25,7 @@ import {UploadedFileShortInfo} from '../../interfaces/helperInterfaces';
 })
 export class UploadFileComponent implements OnDestroy {
   private readonly NO_FILE = 'No File';
-  private readonly MAX_FILE_SIZE = 31457280;
+  private readonly MAX_FILE_SIZE = 30000000;
   private readonly MAX_FILE_NAME_LENGTH = 255;
 
   private subscription: Subscription;
