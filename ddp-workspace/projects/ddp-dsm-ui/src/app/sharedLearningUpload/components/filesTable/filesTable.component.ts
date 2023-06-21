@@ -35,17 +35,13 @@ export class FilesTableComponent implements OnDestroy {
 
   @Input() participantId: string;
 
+  @Input() set uploadedFile(somaticResultsFile: SomaticResultsFile | null | undefined) {
+    somaticResultsFile && this.handleUploadedFile(somaticResultsFile);
+  }
+
   @Input() set uploadedFiles(sharedLearnings: SomaticResultsFile[]) {
     const sharedLearningsWithStatuses: SomaticResultsFileWithStatus[] = sharedLearnings ?
-      sharedLearnings.map((somaticResultsFile: SomaticResultsFile) =>
-        ({
-          ...somaticResultsFile,
-          createdAt: somaticResultsFile.createdAt * 1000,
-          deletedAt: somaticResultsFile.deletedAt * 1000,
-          sendToParticipantStatus: {status: HttpRequestStatusEnum.NONE, message: null},
-          deleteStatus: {status: HttpRequestStatusEnum.NONE, message: null},
-          isInfected: this.handleAndReturnVirusStatusFor(somaticResultsFile)
-        })) : [];
+      sharedLearnings.map((somaticResultsFile: SomaticResultsFile) => this.mapFile(somaticResultsFile)) : [];
     this.somaticResultsFilesWithStatuses$.next(sharedLearningsWithStatuses);
   }
 
@@ -117,6 +113,17 @@ export class FilesTableComponent implements OnDestroy {
       isInfected === SomaticResultsFileVirusStatusEnum.SCANNING
   }
 
+  private mapFile(somaticResultsFile: SomaticResultsFile): SomaticResultsFileWithStatus {
+    return {
+      ...somaticResultsFile,
+      createdAt: somaticResultsFile.createdAt * 1000,
+      deletedAt: somaticResultsFile.deletedAt * 1000,
+      sendToParticipantStatus: {status: HttpRequestStatusEnum.NONE, message: null},
+      deleteStatus: {status: HttpRequestStatusEnum.NONE, message: null},
+      isInfected: this.handleAndReturnVirusStatusFor(somaticResultsFile)
+    }
+  }
+
   private onDelete(somaticDocumentId: number): void {
     this.cdr.markForCheck();
     this.somaticResultsFilesWithStatuses$
@@ -174,6 +181,11 @@ export class FilesTableComponent implements OnDestroy {
     this.cdr.markForCheck();
     this.somaticResultsFilesWithStatuses$
       .next(this.updateSentDate(id, sentDate));
+  }
+
+  private handleUploadedFile(somaticResultsFile: SomaticResultsFile): void {
+    this.somaticResultsFilesWithStatuses$
+      .next([...this.sharedLearnings, this.mapFile(somaticResultsFile)]);
   }
 
   private updateSendToStatus(id: number, status: HttpRequestStatusEnum, message): SomaticResultsFileWithStatus[] {

@@ -25,6 +25,7 @@ import {HttpErrorResponse} from '@angular/common/http';
 })
 export class SharedLearningsUploadComponent implements OnInit, OnDestroy {
   public somaticResultsFiles: SomaticResultsFile[] | null;
+  public uploadedSomaticResultsFile: SomaticResultsFile | null;
   public isLoading = false;
   public isUnauthorized = false;
   public errorLoadingData: string | null;
@@ -35,7 +36,7 @@ export class SharedLearningsUploadComponent implements OnInit, OnDestroy {
   @Input() participantId: string;
 
   constructor(
-    private readonly sharedLearningsHTTPService: SharedLearningsHTTPService,
+    private readonly sharedLearningsHTTPService: SharedLearningsHTTPService
   ) {}
 
   ngOnInit(): void {
@@ -50,7 +51,7 @@ export class SharedLearningsUploadComponent implements OnInit, OnDestroy {
   }
 
   public onFileUpload(somaticResultsFiles: SomaticResultsFile): void {
-    this.somaticResultsFiles = [...this.somaticResultsFiles, somaticResultsFiles];
+    this.uploadedSomaticResultsFile = somaticResultsFiles;
   }
 
   private get initialLoad(): Observable<any> {

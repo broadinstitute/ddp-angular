@@ -19,7 +19,7 @@
 
   <section *ngIf="!errorLoadingData" class="files">
     <ng-container *ngIf="!isLoading; else spinner" >
-      <app-files-table [participantId]="participantId" [uploadedFiles]="somaticResultsFiles"></app-files-table>
+      <app-files-table [participantId]="participantId" [uploadedFile]="uploadedSomaticResultsFile" [uploadedFiles]="somaticResultsFiles"></app-files-table>
     </ng-container>
   </section>
 </main>
