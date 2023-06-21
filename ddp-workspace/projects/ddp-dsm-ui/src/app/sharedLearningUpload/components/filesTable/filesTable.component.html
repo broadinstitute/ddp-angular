@@ -46,7 +46,7 @@
       <td mat-cell *matCellDef="let sharedLearningsFile">
         <ng-container [ngSwitch]="sharedLearningsFile.deleteStatus.status">
           <ng-container *ngSwitchCase="httpRequestStatusEnum.NONE">
-            <ng-container *ngTemplateOutlet="deleteTemplate; context: {id: sharedLearningsFile.somaticDocumentId}"></ng-container>
+            <ng-container *ngTemplateOutlet="deleteTemplate; context: {file: sharedLearningsFile}"></ng-container>
           </ng-container>
           <ng-container  *ngSwitchCase="httpRequestStatusEnum.IN_PROGRESS">
             <ng-container *ngTemplateOutlet="spinnerTemplate"></ng-container>
@@ -79,8 +79,7 @@
 
 <ng-template #sendTemplate let-file="file">
   <div class="icon-container">
-    <mat-icon (click)="onSendToParticipant(file)" [matTooltip]="!file.isVirusFree ? 'Can not be sent' : ''"
-              [ngClass]="!file.isVirusFree ? 'disableIcon' : 'send-icon'" >send</mat-icon>
+    <mat-icon (click)="onSendToParticipant(file)" class="send-icon">send</mat-icon>
   </div>
 </ng-template>
 
@@ -96,9 +95,9 @@
   </div>
 </ng-template>
 
-<ng-template #deleteTemplate let-id="id">
+<ng-template #deleteTemplate let-file="file">
   <div class="icon-container">
-    <mat-icon (click)="onDelete(id)" class="delete-icon" >delete_forever</mat-icon>
+    <mat-icon (click)="onDelete(file)" class="delete-icon" >delete_forever</mat-icon>
   </div>
 </ng-template>
 

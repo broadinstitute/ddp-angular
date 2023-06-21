@@ -1272,7 +1272,7 @@ participant.data.dsm['diagnosisYear'] != null">
             <tab (selectTab)="sharedLearningsTabSelected()" heading="Shared Learnings">
               <legend class="Group--Title">
                 <app-shared-learnings-upload
-                  [tabActivated]="sharedLearningsTabSubject.asObservable()"
+                  [tabActivated$]="sharedLearningsTabSubject.asObservable()"
                   [participantId]="participant.data.profile['guid']"
                 ></app-shared-learnings-upload>
               </legend>

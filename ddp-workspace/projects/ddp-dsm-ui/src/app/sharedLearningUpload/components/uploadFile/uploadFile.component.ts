@@ -6,7 +6,6 @@ import {
   Output,
   ViewChild
 } from '@angular/core';
-import {SomaticResultsFile} from '../../interfaces/somaticResultsFile';
 import {SharedLearningsHTTPService} from '../../services/sharedLearningsHTTP.service';
 import {mergeMap, Subscription, tap} from 'rxjs';
 import {finalize} from 'rxjs/operators';
@@ -16,6 +15,7 @@ import {LoadingModalComponent} from '../../../modals/loading-modal.component';
 import {HttpRequestStatusEnum} from '../../enums/httpRequestStatus-enum';
 import {HttpErrorResponse} from '@angular/common/http';
 import {SomaticResultSignedUrlResponse} from '../../interfaces/somaticResultSignedUrlRequest';
+import {UploadedFileShortInfo} from "../../interfaces/helperInterfaces";
 
 @Component({
   selector: 'app-upload-files',
@@ -37,7 +37,7 @@ export class UploadFileComponent implements OnDestroy {
 
   @Input() participantId: string;
   @Input() unauthorized = false;
-  @Output() fileUploaded = new EventEmitter<SomaticResultsFile>();
+  @Output() fileUploaded = new EventEmitter<UploadedFileShortInfo>();
 
   @ViewChild('hiddenInput', {static: true}) inputElement: ElementRef<HTMLInputElement>;
   @ViewChild('uploadButton') uploadButton: ElementRef<HTMLButtonElement>;
@@ -59,22 +59,20 @@ export class UploadFileComponent implements OnDestroy {
     const selectedFiles: FileList = this.inputElement.nativeElement.files;
     const selectedFile: File = selectedFiles.item(0);
     this.updateUploadButton(HttpRequestStatusEnum.IN_PROGRESS);
-
     const openLoadingDialog = this.openLoadingDialog(selectedFile.name);
+    let uploadedFileInfo: UploadedFileShortInfo;
 
     this.subscription = this.sharedLearningsHTTPService
       .getSignedUrl(selectedFile, this.participantId)
       .pipe(
-        tap((somaticResultsResponse: SomaticResultSignedUrlResponse) =>  {
-          console.log(somaticResultsResponse, 'SOMATIC_RESPONSE');
-        }),
-        mergeMap(({signedUrl}: SomaticResultSignedUrlResponse) => this.sharedLearningsHTTPService.upload(signedUrl, selectedFile)),
+        tap(({somaticResultUpload: {somaticDocumentId, fileName}}: SomaticResultSignedUrlResponse) =>
+          uploadedFileInfo = {fileName, somaticDocumentId}),
+        mergeMap(({signedUrl}: SomaticResultSignedUrlResponse) =>
+          this.sharedLearningsHTTPService.upload(signedUrl, selectedFile)),
         finalize(() => openLoadingDialog.close())
       )
       .subscribe({
-        next: (uploadedFile: any) => {
-          console.log(uploadedFile, 'UPLOAD_SUCCESS');
-        },
+        next: () => this.handleSuccess(uploadedFileInfo),
         error: (error: any) => this.handleError(error)
       });
   }
@@ -97,15 +95,16 @@ export class UploadFileComponent implements OnDestroy {
     }
   }
 
-  // private handleSuccess(uploadedFile: any, selectedFile: File): void {
-  //   this.updateUploadButton(HttpRequestStatusEnum.SUCCESS);
-  //   this.fileUploaded.emit({
-  //     id: uploadedFile.id,
-  //     name: selectedFile.name,
-  //     uploadDate: new Date(),
-  //     sentDate: new Date()
-  //   })
-  // }
+  private handleSuccess(uploadedFileInfo: UploadedFileShortInfo): void {
+    this.updateUploadButton(HttpRequestStatusEnum.SUCCESS);
+    this.fileUploaded.next(uploadedFileInfo);
+    // Resetting the selected file, in order to be able to upload the same file multiple times at the same time
+    setTimeout(() => {
+      this.cdr.markForCheck();
+      this.inputElement.nativeElement.value = '';
+      this.selectedFileName = this.NO_FILE;
+    }, 2000)
+  }
 
   private handleError(error: any): void {
     this.updateUploadButton(HttpRequestStatusEnum.FAIL);

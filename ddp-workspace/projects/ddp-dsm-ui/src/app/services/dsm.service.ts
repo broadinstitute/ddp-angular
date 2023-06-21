@@ -20,6 +20,7 @@ import {LocalStorageService} from './local-storage.service';
 import {IDateRange} from '../dashboard-statistics/interfaces/IDateRange';
 import {StatisticsEnum} from '../dashboard-statistics/enums/statistics.enum';
 import {SomaticResultSignedUrlRequest} from '../sharedLearningUpload/interfaces/somaticResultSignedUrlRequest';
+import {SendToParticipantRequest} from "../sharedLearningUpload/interfaces/sendToParticipant";
 
 declare var DDP_ENV: any;
 
@@ -646,18 +647,18 @@ export class DSMService {
     );
   }
 
-  public getSomaticResults(realm: string, participantId: string): Observable<any> {
+  public getSomaticResultsFiles(realm: string, participantId: string): Observable<any> {
     const url = this.baseUrl + DSMService.UI + 'somaticResults';
     const map: { name: string; value: any }[] = [];
     map.push({name: DSMService.REALM, value: realm});
     map.push({name: 'userId', value: this.role.userID()});
     map.push({name: 'ddpParticipantId', value: participantId});
-    return this.http.get(url, this.buildQueryUploadHeader(map)).pipe(
+    return this.http.get(url, this.buildQueryHeader(map)).pipe(
       catchError(this.handleError)
     );
   }
 
-  public getSomaticResultFileUploadSignedUrl(
+  public getSomaticResultsFileUploadSignedUrl(
     realm: string,
     participantId: string,
     fileInformation: SomaticResultSignedUrlRequest): Observable<any> {
@@ -665,24 +666,34 @@ export class DSMService {
     const map: { name: string; value: any }[] = [];
     map.push({name: DSMService.REALM, value: realm});
     map.push({name: 'ddpParticipantId', value: participantId});
-    return this.http.post(url, fileInformation, this.buildQueryUploadHeader(map)).pipe(
+    return this.http.post(url, fileInformation, this.buildQueryHeader(map)).pipe(
       catchError(this.handleError)
     );
   }
 
-  public uploadSomaticResult(signedUrl: string, file: File): Observable<any> {
+  public uploadSomaticResultsFile(signedUrl: string, file: File): Observable<any> {
     return this.http.put(signedUrl, file).pipe(
       catchError(this.handleError)
     );
   }
 
-  public deleteSomaticResult(realm: string, somaticDocumentId: number): Observable<any> {
+  public sendSomaticResultsToParticipant(realm: string, payload: SendToParticipantRequest): Observable<any> {
+    const url = this.baseUrl + DSMService.UI + 'triggerSomaticResultsSurvey';
+    const map: { name: string; value: any }[] = [];
+    map.push({name: DSMService.REALM, value: realm});
+    map.push({name: 'surveyName', value: 'SOMATIC_RESULTS'});
+    map.push({name: 'surveyType', value: 'REPEATING'});
+    return this.http.post(url, payload, this.buildQueryHeader(map)).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  public deleteSomaticResultsFile(realm: string, somaticDocumentId: number): Observable<any> {
     const url = this.baseUrl + DSMService.UI + 'somaticResults';
     const map: { name: string; value: any }[] = [];
     map.push({name: DSMService.REALM, value: realm});
-    map.push({name: 'userId', value: this.role.userID()});
     map.push({name: 'somaticDocumentId', value: somaticDocumentId});
-    return this.http.delete(url, this.buildQueryUploadHeader(map)).pipe(
+    return this.http.delete(url, this.buildQueryHeader(map)).pipe(
       catchError(this.handleError)
     );
   }

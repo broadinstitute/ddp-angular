@@ -21,7 +21,7 @@ export interface SomaticResultSignedUrlResponse {
     ddpParticipantId: string;
     deletedAt: number;
     deletedByUserId: number;
-    fileName: number;
+    fileName: string;
     isVirusFree: boolean;
     mimeType: string;
     participantId: number;
