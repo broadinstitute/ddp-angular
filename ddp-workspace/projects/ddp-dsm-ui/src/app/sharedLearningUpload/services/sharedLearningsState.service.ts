@@ -1,7 +1,7 @@
-import {Injectable} from "@angular/core";
-import {Observable, Subject} from "rxjs";
-import {SomaticResultsFile, SomaticResultsFileWithStatus} from "../interfaces/somaticResultsFile";
-import {SharedLearningsHTTPService} from "./sharedLearningsHTTP.service";
+import {Injectable} from '@angular/core';
+import {Observable, Subject} from 'rxjs';
+import {SomaticResultsFile, SomaticResultsFileWithStatus} from '../interfaces/somaticResultsFile';
+import {SharedLearningsHTTPService} from './sharedLearningsHTTP.service';
 
 @Injectable()
 export class SharedLearningsStateService {

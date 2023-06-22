@@ -14,11 +14,11 @@ import {
 import {SharedLearningsHTTPService} from './services/sharedLearningsHTTP.service';
 import {catchError, finalize, map, take} from 'rxjs/operators';
 import {HttpErrorResponse} from '@angular/common/http';
-import {SharedLearningsStateService} from "./services/sharedLearningsState.service";
-import {SomaticResultsFileVirusStatusEnum} from "./enums/somaticResultsFileVirusStatus-enum";
-import {HttpRequestStatusEnum} from "./enums/httpRequestStatus-enum";
-import {ConfirmationModalComponent} from "./components/confirmationModal/confirmationModal.component";
-import {MatDialog} from "@angular/material/dialog";
+import {SharedLearningsStateService} from './services/sharedLearningsState.service';
+import {SomaticResultsFileVirusStatusEnum} from './enums/somaticResultsFileVirusStatus-enum';
+import {HttpRequestStatusEnum} from './enums/httpRequestStatus-enum';
+import {ConfirmationModalComponent} from './components/confirmationModal/confirmationModal.component';
+import {MatDialog} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-shared-learnings-upload',
@@ -53,7 +53,7 @@ export class SharedLearningsUploadComponent implements OnInit, OnDestroy {
     this.somaticResultsFilesWithStatus$
       .pipe(takeUntil(this.takeUntilSubject$))
       .subscribe((somaticResultsFilesWithStatus: SomaticResultsFileWithStatus[]) =>
-        this.somaticResultsFilesWithStatus = somaticResultsFilesWithStatus)
+        this.somaticResultsFilesWithStatus = somaticResultsFilesWithStatus);
   }
 
   ngOnDestroy(): void {
@@ -76,7 +76,7 @@ export class SharedLearningsUploadComponent implements OnInit, OnDestroy {
           .getFile(this.participantId, somaticDocumentId)
           .pipe(catchError((error: any) => {
             if(error instanceof HttpErrorResponse) {
-              this.handleSentDateUpdate(somaticDocumentId, null)
+              this.handleSentDateUpdate(somaticDocumentId, null);
               this.handleSendToSuccess(somaticDocumentId);
             }
             return throwError(null);
@@ -125,7 +125,7 @@ export class SharedLearningsUploadComponent implements OnInit, OnDestroy {
       ),
       takeWhile(() => !(!!this.somaticResultsFilesWithStatus) || !!this.errorLoadingData),
       catchError((error: any) => this.handleError(error))
-    )
+    );
   }
 
   /* Mappers */
