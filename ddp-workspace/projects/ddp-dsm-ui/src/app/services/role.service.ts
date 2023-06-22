@@ -36,7 +36,7 @@ export class RoleService {
   private _viewStatisticsDashboard = false;
   private _viewSeqOrderStatus = false;
   private _uploadRorFile = false;
-  private _viewSharedLearnings = false
+  private _viewSharedLearnings = false;
   private _userId: string;
   private _user: string;
   private _userEmail: string;

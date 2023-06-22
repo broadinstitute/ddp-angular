@@ -10,7 +10,7 @@ import {HttpRequestStatusEnum} from '../../enums/httpRequestStatus-enum';
 import {SharedLearningsHTTPService} from '../../services/sharedLearningsHTTP.service';
 import {MatIcon} from '@angular/material/icon';
 import {SomaticResultsFileVirusStatusEnum} from '../../enums/somaticResultsFileVirusStatus-enum';
-import {RoleService} from "../../../services/role.service";
+import {RoleService} from '../../../services/role.service';
 
 
 @Component({
@@ -69,13 +69,13 @@ export class FilesTableComponent {
 
   public sendIconTooltip(virusStatus: SomaticResultsFileVirusStatusEnum): string | null {
     const shouldAllowSend = this.shouldAllowSendOrDelete(virusStatus);
-    return !this.allowToSendFile ? "You don't have permission to send the file" :
+    return !this.allowToSendFile ? 'You don\'t have permission to send the file' :
       !shouldAllowSend ? 'File can not be sent' : null;
   }
 
   public deleteIconTooltip(virusStatus: SomaticResultsFileVirusStatusEnum): string | null {
     const shouldAllowDelete = this.shouldAllowSendOrDelete(virusStatus);
-    return !this.allowToDeleteFile ? "You don't have permission to delete the file" :
+    return !this.allowToDeleteFile ? 'You don\'t have permission to delete the file' :
       !shouldAllowDelete ? 'File can not be deleted' : null;
   }
 

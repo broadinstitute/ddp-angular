@@ -16,7 +16,7 @@ import {HttpRequestStatusEnum} from '../../enums/httpRequestStatus-enum';
 import {HttpErrorResponse} from '@angular/common/http';
 import {SomaticResultSignedUrlResponse} from '../../interfaces/somaticResultSignedUrlRequest';
 import {SomaticResultsFile} from '../../interfaces/somaticResultsFile';
-import {RoleService} from "../../../services/role.service";
+import {RoleService} from '../../../services/role.service';
 
 @Component({
   selector: 'app-upload-files',

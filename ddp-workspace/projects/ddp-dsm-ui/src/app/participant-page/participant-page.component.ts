@@ -1642,7 +1642,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
     const sub1 = this.dsmService.getMercuryEligibleSamples(this.participant.data.profile['guid'], realm).subscribe({
       next: data => {
         const jsonData = data;
-        this.sequencingOrdersArray$.next([])
+        this.sequencingOrdersArray$.next([]);
         if (jsonData) {
           this.sequencingOrdersArray$.next(jsonData.map(json => SequencingOrder.parse(json)));
         }
@@ -1796,7 +1796,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
           return mercuryAllow && studyAllow && hasConsentedToTissueSample &&
             (somaticConsentAddendumTumorAdult?.answer ||
               (somaticConsentTumorPediatric?.answer && somaticAssentAddendum?.answer)
-            )
+            );
         })
       );
   }
