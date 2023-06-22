@@ -4,7 +4,7 @@
     <ng-container matColumnDef="VirusStatus">
       <th mat-header-cell *matHeaderCellDef> Status </th>
       <td mat-cell *matCellDef="let somaticResultsFile">
-        <ng-container [ngSwitch]="somaticResultsFile.isInfected">
+        <ng-container [ngSwitch]="somaticResultsFile.virusStatus">
           <ng-container *ngSwitchCase="SRFVirusStatusEnum.CLEAN">
             <ng-container *ngTemplateOutlet="bugFreeTemplate"></ng-container>
           </ng-container>
@@ -113,8 +113,8 @@
 <ng-template #sendTemplate let-file="file">
   <div class="icon-container">
     <mat-icon
-      [matTooltip]="shouldNotAllowSendOrDelete(file.isInfected) ? 'File can not be sent' : null"
-      [ngClass]="shouldNotAllowSendOrDelete(file.isInfected) ? 'disabled-icon' : 'send-icon'"
+      [matTooltip]="sendIconTooltip(file.virusStatus)"
+      [ngClass]="sendIconClass(file.virusStatus)"
       (click)="onSendToParticipant(file)">send</mat-icon>
   </div>
 </ng-template>
@@ -134,8 +134,8 @@
 <ng-template #deleteTemplate let-file="file">
   <div class="icon-container">
     <mat-icon
-      [matTooltip]="shouldNotAllowSendOrDelete(file.isInfected) ? 'File can not be deleted' : null"
-      [ngClass]="shouldNotAllowSendOrDelete(file.isInfected) ? 'disabled-icon' : 'delete-icon'"
+      [matTooltip]="deleteIconTooltip(file.virusStatus)"
+      [ngClass]="deleteIconClass(file.virusStatus)"
       (click)="deleteFile(file)">delete_forever</mat-icon>
   </div>
 </ng-template>

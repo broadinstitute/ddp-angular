@@ -7,7 +7,6 @@ import {
   SomaticResultSignedUrlResponse
 } from '../interfaces/somaticResultSignedUrlRequest';
 import {SessionService} from '../../services/session.service';
-import {map} from 'rxjs/operators';
 
 @Injectable()
 export class SharedLearningsHTTPService {
@@ -18,13 +17,7 @@ export class SharedLearningsHTTPService {
   ) {}
 
   public getFiles(participantId: string): Observable<SomaticResultsFile[]> {
-    return this.dsmService.getSomaticResultsFiles(this.selectedRealm, participantId)
-      // @TODO remove when backend fixed
-      .pipe(map((somaticResults: SomaticResultsFile[]) => somaticResults.map((file: SomaticResultsFile) => {
-          file.isVirusFree = true;
-          file.deletedAt = 0;
-          return file;
-        })));
+    return this.dsmService.getSomaticResultsFiles(this.selectedRealm, participantId);
   }
 
   public getFile(participantId: string, somaticDocumentId: number): Observable<SomaticResultsFile> {

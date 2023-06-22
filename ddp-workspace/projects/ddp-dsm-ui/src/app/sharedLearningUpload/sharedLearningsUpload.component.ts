@@ -136,7 +136,7 @@ export class SharedLearningsUploadComponent implements OnInit, OnDestroy {
       deletedAt: somaticResultsFile.deletedAt * 1000,
       sendToParticipantStatus: {status: HttpRequestStatusEnum.NONE, message: null},
       deleteStatus: {status: HttpRequestStatusEnum.NONE, message: null},
-      isInfected: this.handleAndReturnVirusStatusFor(somaticResultsFile)
+      virusStatus: this.handleAndReturnVirusStatusFor(somaticResultsFile)
     };
   }
 
@@ -212,8 +212,8 @@ export class SharedLearningsUploadComponent implements OnInit, OnDestroy {
       });
   }
 
-  private handleInfectedStatusUpdate(id: number, isInfected: SomaticResultsFileVirusStatusEnum): void {
-    const updatedState = this.updateInfectedStatus(id, isInfected);
+  private handleInfectedStatusUpdate(id: number, virusStatus: SomaticResultsFileVirusStatusEnum): void {
+    const updatedState = this.updateInfectedStatus(id, virusStatus);
     this.stateService.updateState(updatedState);
   }
 
@@ -278,10 +278,10 @@ export class SharedLearningsUploadComponent implements OnInit, OnDestroy {
       sharedLearning.somaticDocumentId === id ? {...sharedLearning, deleteStatus: {status, message}} : sharedLearning);
   }
 
-  private updateInfectedStatus(id: number, isInfected: SomaticResultsFileVirusStatusEnum):
+  private updateInfectedStatus(id: number, virusStatus: SomaticResultsFileVirusStatusEnum):
     SomaticResultsFileWithStatus[] {
     return this.somaticResultsFilesWithStatus.map((sharedLearning: SomaticResultsFileWithStatus) =>
-      sharedLearning.somaticDocumentId === id ? {...sharedLearning, isInfected} : sharedLearning);
+      sharedLearning.somaticDocumentId === id ? {...sharedLearning, virusStatus} : sharedLearning);
   }
 
   private updateSentDate(id: number, sentDate: number): SomaticResultsFileWithStatus[] {

@@ -19,7 +19,7 @@ export interface SomaticResultsFile {
 }
 
 export interface SomaticResultsFileWithStatus extends SomaticResultsFile {
-  isInfected: SomaticResultsFileVirusStatusEnum;
+  virusStatus: SomaticResultsFileVirusStatusEnum;
   sendToParticipantStatus: {
     status: HttpRequestStatusEnum;
     message: string | null;

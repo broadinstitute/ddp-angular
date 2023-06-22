@@ -16,6 +16,7 @@ import {HttpRequestStatusEnum} from '../../enums/httpRequestStatus-enum';
 import {HttpErrorResponse} from '@angular/common/http';
 import {SomaticResultSignedUrlResponse} from '../../interfaces/somaticResultSignedUrlRequest';
 import {SomaticResultsFile} from '../../interfaces/somaticResultsFile';
+import {RoleService} from "../../../services/role.service";
 
 @Component({
   selector: 'app-upload-files',
@@ -46,7 +47,8 @@ export class UploadFileComponent implements OnDestroy {
 
   constructor(private readonly cdr: ChangeDetectorRef,
               private readonly sharedLearningsHTTPService: SharedLearningsHTTPService,
-              private readonly matDialog: MatDialog) {
+              private readonly matDialog: MatDialog,
+              private readonly roleService: RoleService) {
   }
 
   public ngOnDestroy(): void {
@@ -111,7 +113,8 @@ export class UploadFileComponent implements OnDestroy {
   }
 
   public get shouldDisableButton(): boolean {
-    return this.unauthorized || !this.isFileSelected || this.uploadStatus === HttpRequestStatusEnum.SUCCESS;
+    return !this.roleService.allowUploadRorFile ||
+      (this.unauthorized || !this.isFileSelected || this.uploadStatus === HttpRequestStatusEnum.SUCCESS);
   }
 
   public get btnClass(): string {

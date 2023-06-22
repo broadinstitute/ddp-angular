@@ -10,6 +10,7 @@ import {HttpRequestStatusEnum} from '../../enums/httpRequestStatus-enum';
 import {SharedLearningsHTTPService} from '../../services/sharedLearningsHTTP.service';
 import {MatIcon} from '@angular/material/icon';
 import {SomaticResultsFileVirusStatusEnum} from '../../enums/somaticResultsFileVirusStatus-enum';
+import {RoleService} from "../../../services/role.service";
 
 
 @Component({
@@ -32,20 +33,23 @@ export class FilesTableComponent {
     private readonly cdr: ChangeDetectorRef,
     private readonly sharedLearningsHTTPService: SharedLearningsHTTPService,
     private readonly renderer: Renderer2,
+    private readonly roleService: RoleService
   ) {}
 
+  /* Event handlers */
   public onSendToParticipant(somaticResultsFileWithStatus: SomaticResultsFileWithStatus): void {
-    if (!this.shouldNotAllowSendOrDelete(somaticResultsFileWithStatus.isInfected)) {
+    if (this.shouldAllowSendOrDelete(somaticResultsFileWithStatus.virusStatus)) {
       this.sendToParticipant.emit(somaticResultsFileWithStatus);
     }
   }
 
   public deleteFile(somaticResultsFileWithStatus: SomaticResultsFileWithStatus): void {
-    if (!this.shouldNotAllowSendOrDelete(somaticResultsFileWithStatus.isInfected)) {
+    if (this.shouldAllowSendOrDelete(somaticResultsFileWithStatus.virusStatus)) {
       this.delete.emit(somaticResultsFileWithStatus);
     }
   }
 
+  /* Template methods */
   public retryOrNot(shouldRetry: boolean, matIcon: MatIcon): void {
     const matIconNative = matIcon._elementRef.nativeElement;
     matIconNative.innerText = shouldRetry ? 'replay' : 'error';
@@ -54,13 +58,44 @@ export class FilesTableComponent {
       this.renderer.removeClass(matIconNative, 'retry-icon');
   }
 
-  public shouldNotAllowSendOrDelete(isInfected: SomaticResultsFileVirusStatusEnum): boolean {
+  public shouldAllowSendOrDelete(virusStatus: SomaticResultsFileVirusStatusEnum): boolean {
     const disableStatesList = [
       SomaticResultsFileVirusStatusEnum.INFECTED,
       SomaticResultsFileVirusStatusEnum.SCANNING,
       SomaticResultsFileVirusStatusEnum.UNABLE_TO_SCAN
     ];
-    return  disableStatesList.includes(isInfected);
+    return !disableStatesList.includes(virusStatus);
+  }
+
+  public sendIconTooltip(virusStatus: SomaticResultsFileVirusStatusEnum): string | null {
+    const shouldAllowSend = this.shouldAllowSendOrDelete(virusStatus);
+    return !this.allowToSendFile ? "You don't have permission to send the file" :
+      !shouldAllowSend ? 'File can not be sent' : null;
+  }
+
+  public deleteIconTooltip(virusStatus: SomaticResultsFileVirusStatusEnum): string | null {
+    const shouldAllowDelete = this.shouldAllowSendOrDelete(virusStatus);
+    return !this.allowToDeleteFile ? "You don't have permission to delete the file" :
+      !shouldAllowDelete ? 'File can not be deleted' : null;
+  }
+
+  public sendIconClass(virusStatus: SomaticResultsFileVirusStatusEnum): string {
+    const shouldAllowDelete = this.shouldAllowSendOrDelete(virusStatus);
+    return !this.allowToSendFile || !shouldAllowDelete ? 'disabled-icon' : 'send-icon';
+  }
+
+  public deleteIconClass(virusStatus: SomaticResultsFileVirusStatusEnum): string {
+    const shouldAllowDelete = this.shouldAllowSendOrDelete(virusStatus);
+    return !this.allowToDeleteFile || !shouldAllowDelete ? 'disabled-icon' : 'delete-icon';
+  }
+
+  /* Permissions */
+  private get allowToSendFile(): boolean {
+    return this.roleService.allowUploadRorFile && this.roleService.allowedToCreateSurveys();
+  }
+
+  private get allowToDeleteFile(): boolean {
+    return this.roleService.allowUploadRorFile;
   }
 
 }

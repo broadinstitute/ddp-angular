@@ -929,14 +929,16 @@ participant.data.dsm['diagnosisYear'] != null">
               <b>Error: Participant lives in New York or Canada and is not eligible for clinical sequencing</b><br/>
             </ng-container>
 
-            <ng-container *ngIf="canBeSequencedBasedOnLocation && sequencingOrdersArray.length < 1">
-              <b>No samples are ready for sequencing at this point</b><br/>
-            </ng-container>
+            <ng-container *ngIf="(sequencingOrdersArray$.asObservable() | async) as sequencingOrdersArray">
+              <ng-container *ngIf="canBeSequencedBasedOnLocation && sequencingOrdersArray.length < 1">
+                <b>No samples are ready for sequencing at this point</b><br/>
+              </ng-container>
 
-            <ng-container *ngIf="canBeSequencedBasedOnLocation && sequencingOrdersArray.length > 0">
-              <app-sequencing-order [participant]="participant"
-                                    [samples]="sequencingOrdersArray">
-              </app-sequencing-order>
+              <ng-container *ngIf="canBeSequencedBasedOnLocation && sequencingOrdersArray.length > 0">
+                <app-sequencing-order [participant]="participant"
+                                      [samples]="sequencingOrdersArray">
+                </app-sequencing-order>
+              </ng-container>
             </ng-container>
           </tab>
           <tab heading="First Medical Record Abstraction" [active]="tabActive('abstraction')"
@@ -991,7 +993,7 @@ participant.data.dsm['diagnosisYear'] != null">
           </tab>
 
           <tab
-            *ngIf="participant?.data?.files && participant.data.files.length > 0 && this.role.allowedToDownloadParticipantFiles()"
+            *ngIf="participant?.data?.files && participant.data.files.length > 0 && hasRole().allowedToDownloadParticipantFiles()"
             heading="Participant Files">
             <app-file-download
               [participant]="participant" (downloadFileEvent)="downloadParticipantFile($event)">
@@ -1268,15 +1270,17 @@ participant.data.dsm['diagnosisYear'] != null">
             </ng-container>
           </ng-template>
 
-          <ng-container *ngIf="true">
-            <tab (selectTab)="sharedLearningsTabSelected()" heading="Shared Learnings">
-              <legend class="Group--Title">
-                <app-shared-learnings-upload
-                  [tabActivated$]="sharedLearningsTabSubject.asObservable()"
-                  [participantId]="participant.data.profile['guid']"
-                ></app-shared-learnings-upload>
-              </legend>
-            </tab>
+          <ng-container *ngIf="isUserAllowed">
+            <ng-container *ngIf="isParticipantAllowed | async">
+              <tab (selectTab)="sharedLearningsTabSelected()" heading="Shared Learnings">
+                <legend class="Group--Title">
+                  <app-shared-learnings-upload
+                    [tabActivated$]="sharedLearningsTabSubject.asObservable()"
+                    [participantId]="participant.data.profile['guid']"
+                  ></app-shared-learnings-upload>
+                </legend>
+              </tab>
+            </ng-container>
           </ng-container>
 
         </tabset>
