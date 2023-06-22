@@ -19,6 +19,7 @@ import {SomaticResultsFileVirusStatusEnum} from './enums/somaticResultsFileVirus
 import {HttpRequestStatusEnum} from './enums/httpRequestStatus-enum';
 import {ConfirmationModalComponent} from './components/confirmationModal/confirmationModal.component';
 import {MatDialog} from '@angular/material/dialog';
+import {RoleService} from "../services/role.service";
 
 @Component({
   selector: 'app-shared-learnings-upload',
@@ -44,7 +45,8 @@ export class SharedLearningsUploadComponent implements OnInit, OnDestroy {
   constructor(
     private readonly sharedLearningsHTTPService: SharedLearningsHTTPService,
     private readonly stateService: SharedLearningsStateService,
-    private readonly matDialog: MatDialog
+    private readonly matDialog: MatDialog,
+    private readonly roleService: RoleService
   ) {}
 
   ngOnInit(): void {
@@ -59,6 +61,11 @@ export class SharedLearningsUploadComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.takeUntilSubject$.next();
     this.takeUntilSubject$.complete();
+  }
+
+  /* Template functions*/
+  public get allowToSeeTitle(): boolean {
+    return this.roleService.allowUploadRorFile;
   }
 
   /* Event Listeners */

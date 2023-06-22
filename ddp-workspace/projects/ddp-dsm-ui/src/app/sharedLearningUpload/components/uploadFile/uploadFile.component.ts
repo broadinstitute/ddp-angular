@@ -113,8 +113,7 @@ export class UploadFileComponent implements OnDestroy {
   }
 
   public get shouldDisableButton(): boolean {
-    return !this.roleService.allowUploadRorFile ||
-      (this.unauthorized || !this.isFileSelected || this.uploadStatus === HttpRequestStatusEnum.SUCCESS);
+    return this.unauthorized || !this.isFileSelected || this.uploadStatus === HttpRequestStatusEnum.SUCCESS;
   }
 
   public get btnClass(): string {
@@ -122,6 +121,10 @@ export class UploadFileComponent implements OnDestroy {
       : this.uploadStatus === HttpRequestStatusEnum.FAIL ? 'uploadFail'
         : this.uploadStatus === HttpRequestStatusEnum.RETRY ? 'uploadRetry'
           : '';
+  }
+
+  public get isAllowedToUpload(): boolean {
+    return this.roleService.allowUploadRorFile;
   }
 
   private get retryOnHoverOrNot(): boolean {

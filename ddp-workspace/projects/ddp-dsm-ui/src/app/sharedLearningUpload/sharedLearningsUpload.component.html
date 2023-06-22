@@ -6,9 +6,11 @@
       (fileUploaded)="onFileUpload($event)"></app-upload-files>
   </section>
 
-  <section class="note">
-    <p>Upload Shared Learnings Letter here. Click Send to Participant to deliver the file to the participant’s Dashboard</p>
-  </section>
+  <ng-container  *ngIf="allowToSeeTitle; else notAllowedSection">
+    <section class="note">
+      <p>Upload Shared Learnings Letter here. Click Send to Participant to deliver the file to the participant’s Dashboard</p>
+    </section>
+  </ng-container>
 
   <section *ngIf="errorLoadingData" class="error-note">
     <main>
@@ -32,4 +34,10 @@
   <div class="spinner">
     <mat-spinner></mat-spinner>
   </div>
+</ng-template>
+
+<ng-template #notAllowedSection>
+  <section class="note">
+    <p>View shared learnings here</p>
+  </section>
 </ng-template>
