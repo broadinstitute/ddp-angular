@@ -42,7 +42,7 @@ export class UploadFileComponent implements OnDestroy {
   @Input() unauthorized = false;
   @Output() fileUploaded = new EventEmitter<SomaticResultsFile>();
 
-  @ViewChild('hiddenInput', {static: true}) inputElement: ElementRef<HTMLInputElement>;
+  @ViewChild('hiddenInput') inputElement: ElementRef<HTMLInputElement>;
   @ViewChild('uploadButton') uploadButton: ElementRef<HTMLButtonElement>;
 
   constructor(private readonly cdr: ChangeDetectorRef,
