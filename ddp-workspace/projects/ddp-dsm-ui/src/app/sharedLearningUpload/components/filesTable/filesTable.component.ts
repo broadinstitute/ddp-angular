@@ -38,13 +38,13 @@ export class FilesTableComponent {
 
   /* Event handlers */
   public onSendToParticipant(somaticResultsFileWithStatus: SomaticResultsFileWithStatus): void {
-    if (this.shouldAllowSendOrDelete(somaticResultsFileWithStatus.virusStatus)) {
+    if (this.allowToSendFile && this.shouldAllowSendOrDelete(somaticResultsFileWithStatus.virusStatus)) {
       this.sendToParticipant.emit(somaticResultsFileWithStatus);
     }
   }
 
   public deleteFile(somaticResultsFileWithStatus: SomaticResultsFileWithStatus): void {
-    if (this.shouldAllowSendOrDelete(somaticResultsFileWithStatus.virusStatus)) {
+    if (this.allowToDeleteFile && this.shouldAllowSendOrDelete(somaticResultsFileWithStatus.virusStatus)) {
       this.delete.emit(somaticResultsFileWithStatus);
     }
   }
