@@ -29,7 +29,7 @@
 
     <ng-container matColumnDef="UploadDate">
       <th mat-header-cell *matHeaderCellDef> Date Uploaded </th>
-      <td mat-cell *matCellDef="let somaticResultsFile"> {{somaticResultsFile.createdAt | date: 'shortDate'}} </td>
+      <td mat-cell *matCellDef="let somaticResultsFile"> {{somaticResultsFile.createdAt | date: 'short'}} </td>
     </ng-container>
 
     <ng-container matColumnDef="SendToParticipant">
@@ -62,7 +62,7 @@
       <th mat-header-cell *matHeaderCellDef> Date Sent </th>
       <td mat-cell *matCellDef="let somaticResultsFile">
         <ng-container *ngIf="somaticResultsFile.sentAt !== null">
-          {{somaticResultsFile.sentAt || null | date: 'shortDate'}}
+          {{somaticResultsFile.sentAt || null | date: 'short'}}
         </ng-container>
         <ng-container *ngIf="somaticResultsFile.sentAt === null">
           <ng-container *ngTemplateOutlet="unableTemplate; context: {tooltip: 'Unable to set sent date'}"></ng-container>
