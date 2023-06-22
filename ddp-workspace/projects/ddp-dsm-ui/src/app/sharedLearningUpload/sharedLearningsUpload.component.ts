@@ -19,7 +19,7 @@ import {SomaticResultsFileVirusStatusEnum} from './enums/somaticResultsFileVirus
 import {HttpRequestStatusEnum} from './enums/httpRequestStatus-enum';
 import {ConfirmationModalComponent} from './components/confirmationModal/confirmationModal.component';
 import {MatDialog} from '@angular/material/dialog';
-import {RoleService} from "../services/role.service";
+import {RoleService} from '../services/role.service';
 
 @Component({
   selector: 'app-shared-learnings-upload',
