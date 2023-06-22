@@ -43,9 +43,12 @@ export class OncHistoryUploadComponent {
         next: () => this.uploadStatus = UploadStatus.SUCCESS,
         error: (error: any) => {
           if (error instanceof HttpErrorResponse) {
-            console.log(error);
-            this.uploadStatus = UploadStatus.FAIL;
-            this.errorMessage = error.error;
+            if(error.status === 200) {
+              this.uploadStatus = UploadStatus.SUCCESS;
+            } else {
+              this.uploadStatus = UploadStatus.FAIL;
+              this.errorMessage = error.error;
+            }
           }
         },
       });

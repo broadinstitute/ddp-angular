@@ -12,7 +12,7 @@ import {ErrorsService} from '../services/errors.service';
 
 @Injectable()
 export class HttpInterceptorService implements HttpInterceptor {
-  private readonly ignoreStatuses: number[] = [401];
+  private readonly ignoreStatuses: number[] = [401, 200];
 
   constructor(private errorsService: ErrorsService) {}
 
