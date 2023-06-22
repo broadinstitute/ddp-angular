@@ -16,7 +16,9 @@
             </ng-container>
           </ng-container>
           <ng-container *ngSwitchCase="SRFVirusStatusEnum.UNABLE_TO_SCAN">
-            <ng-container *ngTemplateOutlet="unableTemplate; context: {tooltip: 'Unable to scan file'}"></ng-container>
+            <ng-container *ngTemplateOutlet="unableTemplate;
+            context: {tooltip: 'Status unknown. You may need to reload this participant'}">
+            </ng-container>
           </ng-container>
         </ng-container>
       </td>
@@ -65,7 +67,9 @@
           {{somaticResultsFile.sentAt || null | date: 'MM/dd/YYYY h:mm:ss aa'}}
         </ng-container>
         <ng-container *ngIf="somaticResultsFile.sentAt === null">
-          <ng-container *ngTemplateOutlet="unableTemplate; context: {tooltip: 'Unable to set sent date'}"></ng-container>
+          <ng-container *ngTemplateOutlet="unableTemplate;
+          context: {tooltip: 'Unable to determine sent date. You may need to reload this participant'}">
+          </ng-container>
         </ng-container>
       </td>
     </ng-container>
