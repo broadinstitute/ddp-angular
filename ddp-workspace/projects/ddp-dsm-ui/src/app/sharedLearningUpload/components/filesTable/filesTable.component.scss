@@ -33,15 +33,8 @@ main.filesTable {
     td {
 
       .icon-container {
-        @include common.flexContainer(center, center);
+        @include common.flexContainer(baseline, center);
         width: 100%;
-
-        .icon-button {
-          @include common.flexContainer(center, center);
-          background: none;
-          outline: none;
-          border: none;
-        }
 
         mat-icon {
           font-size: 2.2em;
