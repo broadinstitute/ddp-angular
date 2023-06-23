@@ -19,6 +19,8 @@ import { BulkCohortTag } from '../tags/cohort-tag/bulk-cohort-tag-modal/bulk-coh
 import {LocalStorageService} from './local-storage.service';
 import {IDateRange} from '../dashboard-statistics/interfaces/IDateRange';
 import {StatisticsEnum} from '../dashboard-statistics/enums/statistics.enum';
+import {SomaticResultSignedUrlRequest} from '../sharedLearningUpload/interfaces/somaticResultSignedUrlRequest';
+import {SendToParticipantRequest} from '../sharedLearningUpload/interfaces/sendToParticipant';
 
 declare var DDP_ENV: any;
 
@@ -641,6 +643,67 @@ export class DSMService {
     map.push({name: 'carrier', value: carrier});
     map.push( {name: 'skipAddressValidation', value: skipAddressValidation} );
     return this.http.post(url, file, this.buildQueryUploadHeader(map)).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  public getSomaticResultsFiles(realm: string, participantId: string): Observable<any> {
+    const url = this.baseUrl + DSMService.UI + 'somaticResults';
+    const map: { name: string; value: any }[] = [];
+    map.push({name: DSMService.REALM, value: realm});
+    map.push({name: 'ddpParticipantId', value: participantId});
+    return this.http.get(url, this.buildQueryHeader(map)).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  public getSomaticResultsFile(realm: string, participantId: string, somaticDocumentId: number): Observable<any> {
+    const url = this.baseUrl + DSMService.UI + 'somaticResults';
+    const map: { name: string; value: any }[] = [];
+    map.push({name: DSMService.REALM, value: realm});
+    map.push({name: 'ddpParticipantId', value: participantId});
+    map.push({name: 'somaticDocumentId', value: somaticDocumentId});
+    return this.http.get(url, this.buildQueryHeader(map)).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  public getSomaticResultsFileUploadSignedUrl(
+    realm: string,
+    participantId: string,
+    fileInformation: SomaticResultSignedUrlRequest): Observable<any> {
+    const url = this.baseUrl + DSMService.UI + 'somaticResults';
+    const map: { name: string; value: any }[] = [];
+    map.push({name: DSMService.REALM, value: realm});
+    map.push({name: 'ddpParticipantId', value: participantId});
+    return this.http.post(url, fileInformation, this.buildQueryHeader(map)).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  public uploadSomaticResultsFile(signedUrl: string, file: File): Observable<any> {
+    return this.http.put(signedUrl, file).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  public sendSomaticResultsToParticipant(realm: string, payload: SendToParticipantRequest): Observable<any> {
+    const url = this.baseUrl + DSMService.UI + 'triggerSomaticResultsSurvey';
+    const map: { name: string; value: any }[] = [];
+    map.push({name: DSMService.REALM, value: realm});
+    map.push({name: 'surveyName', value: 'SOMATIC_RESULTS'});
+    map.push({name: 'surveyType', value: 'REPEATING'});
+    return this.http.post(url, payload, this.buildQueryHeader(map)).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  public deleteSomaticResultsFile(realm: string, somaticDocumentId: number): Observable<any> {
+    const url = this.baseUrl + DSMService.UI + 'somaticResults';
+    const map: { name: string; value: any }[] = [];
+    map.push({name: DSMService.REALM, value: realm});
+    map.push({name: 'somaticDocumentId', value: somaticDocumentId});
+    return this.http.delete(url, this.buildQueryHeader(map)).pipe(
       catchError(this.handleError)
     );
   }
