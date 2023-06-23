@@ -163,15 +163,14 @@ export class SharedLearningsUploadComponent implements OnInit, OnDestroy {
     if (!isVirusFree && isFileDeleted) { // file has been scanned and is infected
       return SomaticResultsFileVirusStatusEnum.INFECTED;
     } else if (!isVirusFree && !isFileDeleted) {
-      // file has not been scanned, so it till scan file as well
+      // file has not been scanned, so it will scan file as well
       this.scanForVirus(somaticDocumentId);
       return SomaticResultsFileVirusStatusEnum.SCANNING;
     } else if (isVirusFree && !isFileDeleted) { // file has already been scanned for viruses and is clean
       return SomaticResultsFileVirusStatusEnum.CLEAN;
     } else {
-      // It should not happen, but anyway:
-      // file has already been scanned for viruses and is clean but still deleted, so it's assumed as an infected
-      return SomaticResultsFileVirusStatusEnum.INFECTED;
+      // file has been cleaned and it's deleted
+      return SomaticResultsFileVirusStatusEnum.CLEAN;
     }
   }
 
@@ -193,14 +192,14 @@ export class SharedLearningsUploadComponent implements OnInit, OnDestroy {
           const isFileDeleted = !!deletedAt;
           if (isVirusFree && !isFileDeleted) {
             uploadedFileHasBeenScanned = true;
-            this.handleInfectedStatusUpdate(id, SomaticResultsFileVirusStatusEnum.CLEAN);
+            this.handleVirusStatusUpdate(id, SomaticResultsFileVirusStatusEnum.CLEAN);
           } else if (!isVirusFree && isFileDeleted) {
             uploadedFileHasBeenScanned = true;
-            this.handleInfectedStatusUpdate(id, SomaticResultsFileVirusStatusEnum.INFECTED);
+            this.handleVirusStatusUpdate(id, SomaticResultsFileVirusStatusEnum.INFECTED);
           }
         },
       error: (error: any) => error instanceof HttpErrorResponse &&
-        this.handleInfectedStatusUpdate(somaticDocumentId, SomaticResultsFileVirusStatusEnum.UNABLE_TO_SCAN)}
+        this.handleVirusStatusUpdate(somaticDocumentId, SomaticResultsFileVirusStatusEnum.UNABLE_TO_SCAN)}
       );
   }
 
@@ -219,8 +218,8 @@ export class SharedLearningsUploadComponent implements OnInit, OnDestroy {
       });
   }
 
-  private handleInfectedStatusUpdate(id: number, virusStatus: SomaticResultsFileVirusStatusEnum): void {
-    const updatedState = this.updateInfectedStatus(id, virusStatus);
+  private handleVirusStatusUpdate(id: number, virusStatus: SomaticResultsFileVirusStatusEnum): void {
+    const updatedState = this.updateVirusStatus(id, virusStatus);
     this.stateService.updateState(updatedState);
   }
 
@@ -285,7 +284,7 @@ export class SharedLearningsUploadComponent implements OnInit, OnDestroy {
       sharedLearning.somaticDocumentId === id ? {...sharedLearning, deleteStatus: {status, message}} : sharedLearning);
   }
 
-  private updateInfectedStatus(id: number, virusStatus: SomaticResultsFileVirusStatusEnum):
+  private updateVirusStatus(id: number, virusStatus: SomaticResultsFileVirusStatusEnum):
     SomaticResultsFileWithStatus[] {
     return this.somaticResultsFilesWithStatus.map((sharedLearning: SomaticResultsFileWithStatus) =>
       sharedLearning.somaticDocumentId === id ? {...sharedLearning, virusStatus} : sharedLearning);
