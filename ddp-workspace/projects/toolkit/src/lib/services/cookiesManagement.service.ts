@@ -71,6 +71,8 @@ export class CookiesManagementService {
   private setDefaultConsent(): void {
     this.consent = { decision: false, status: 'default_reject', cookies: {} };
     this.cookiesTypes.forEach(x => this.consent.cookies[x] = null);
+    // analytical cookies are default opt-out
+    this.consent.cookies['Analytical'] = false;
     this.updateLocalStorageConsent();
   }
 

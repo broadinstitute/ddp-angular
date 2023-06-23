@@ -11,11 +11,13 @@ export class AnalyticsEventsService {
 
     private events = new Subject<GoogleAnalyticsEvent>();
 
+    /* we no longer use GA so this method is a no-op */
     public emitCustomEvent(
         eventCategory: string,
         eventAction: string,
         eventLabel: string | null = null,
         eventValue: string | null = null): void {
+        /*
         const event: AnalyticsEvent = {
             hitType: 'event',
             // set page directly in order to exclude sensitive query params
@@ -29,15 +31,21 @@ export class AnalyticsEventsService {
         };
         this.events.next(event);
         this.events.next(this.buildGTagEvent(eventCategory, eventAction));
+        */
     }
 
+    /* we no longer use GA so this method is a no-op */
     public emitCustomGtagEvent(eventName: string, clickText?: string, clickUrl?: string): void {
+        /*
         const newEvent = this.buildGTagEvent(eventName, clickText, clickUrl);
         this.events.next(newEvent);
         return;
+         */
     }
 
+    /* we no longer use GA so this method is a no-op */
     public emitNavigationEvent(): void {
+        /*
         const event: AnalyticsEvent = {
             hitType: 'pageview',
             // set page directly in order to exclude sensitive query params
@@ -48,6 +56,7 @@ export class AnalyticsEventsService {
         this.events.next(event);
         // this is a gtag "recommended event" https://developers.google.com/tag-platform/gtagjs/reference/events#page_view
         this.events.next(this.buildGTagEvent('page_view'));
+         */
     }
 
     public get analyticEvents(): Observable<AnalyticsEvent> {

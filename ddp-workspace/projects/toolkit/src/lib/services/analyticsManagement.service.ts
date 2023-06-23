@@ -12,11 +12,13 @@ export class AnalyticsManagementService {
   }
 
   public trackAnalytics(): void {
-    this.startGATracking();
+    // we are no longer tracking with GA
+    // this.startGATracking();
   }
 
   public doNotTrackAnalytics(): void {
-    this.doNotTrackGA();
+    // we are no longer tracking with GA
+    // this.doNotTrackGA();
   }
 
   private doNotTrackGA(): void {
