@@ -169,9 +169,8 @@ export class SharedLearningsUploadComponent implements OnInit, OnDestroy {
     } else if (isVirusFree && !isFileDeleted) { // file has already been scanned for viruses and is clean
       return SomaticResultsFileVirusStatusEnum.CLEAN;
     } else {
-      // It should not happen, but anyway:
-      // file has already been scanned for viruses and is clean but still deleted, so it's assumed as an infected
-      return SomaticResultsFileVirusStatusEnum.INFECTED;
+      // file has been cleaned and it's deleted
+      return SomaticResultsFileVirusStatusEnum.CLEAN;
     }
   }
 

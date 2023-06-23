@@ -34,6 +34,7 @@ import {AddFamilyMemberComponent} from '../popups/add-family-member/add-family-m
 import {Sample} from '../participant-list/models/sample.model';
 import {ParticipantDSMInformation} from '../participant-list/models/participant.model';
 import {ActivityData} from '../activity-data/activity-data.model';
+import {SessionService} from "../services/session.service";
 
 const fileSaver = require('file-saver');
 
@@ -157,7 +158,8 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
   subscriptions: Subscription = new Subscription();
 
   constructor(private auth: Auth, private compService: ComponentService, private dsmService: DSMService, private router: Router,
-              private role: RoleService, private util: Utils, private route: ActivatedRoute, public dialog: MatDialog) {
+              private role: RoleService, private util: Utils, private route: ActivatedRoute, public dialog: MatDialog,
+              private readonly sessionService: SessionService) {
     if (!auth.authenticated()) {
       auth.sessionLogout();
     }
@@ -1775,8 +1777,8 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
           const mercuryAllow = sequencingOrders
             .some(({pdoOrderId, sampleType}: SequencingOrder) => pdoOrderId && sampleType === 'Tumor');
 
-          const allowedStudies = ['cmi-osteo', 'cmi-lms'];
-          const studyAllow = allowedStudies.includes(this.participant.data.ddp?.toLowerCase());
+          const allowedStudies = ['osteo2', 'cmi-lms'];
+          const studyAllow = allowedStudies.includes(this.sessionService.selectedRealm);
 
           const hasConsentedToTissueSample = this.participant.data.dsm?.['hasConsentedToTissueSample'];
 
