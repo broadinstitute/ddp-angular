@@ -1782,11 +1782,6 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
 
           const hasConsentedToTissueSample = this.participant.data.dsm?.['hasConsentedToTissueSample'];
 
-          const consentAddendum = this.participant.data.activities
-            ?.find(({activityCode}) => activityCode === 'CONSENT_ADDENDUM');
-          const somaticConsentAddendumTumorAdult = consentAddendum?.questionsAnswers
-            ?.find(({answer, stableId}) => stableId === 'SOMATIC_CONSENT_ADDENDUM_TUMOR' && answer);
-
           const consentAddendumPediatric = this.participant.data.activities
             ?.find(({activityCode}) => activityCode === 'CONSENT_ADDENDUM_PEDIATRIC');
 
@@ -1794,6 +1789,20 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
             ?.find(({answer, stableId}) => stableId === 'SOMATIC_CONSENT_TUMOR_PEDIATRIC' && answer);
           const somaticAssentAddendum = consentAddendumPediatric?.questionsAnswers
             ?.find(({answer, stableId}) => stableId === 'SOMATIC_ASSENT_ADDENDUM' && answer);
+
+          const consentAddendum = this.participant.data.activities
+            ?.find(({activityCode}) => activityCode === 'CONSENT_ADDENDUM');
+
+          let somaticConsentAddendumTumorAdult;
+
+          if (this.participant.data.ddp?.toLowerCase() == 'cmi-lms') {
+            somaticConsentAddendumTumorAdult = consentAddendum?.questionsAnswers
+              ?.find(({answer, stableId}) => stableId === 'SOMATIC_CONSENT_ADDENDUM_TUMOR' && answer);
+
+          } else if (this.participant.data.ddp?.toLowerCase() == 'cmi-osteo') {
+              somaticConsentAddendumTumorAdult = consentAddendum?.questionsAnswers
+                ?.find(({answer, stableId}) => stableId === 'SOMATIC_CONSENT_TUMOR' && answer);
+          }
 
           return mercuryAllow && studyAllow && hasConsentedToTissueSample &&
             (somaticConsentAddendumTumorAdult?.answer ||
