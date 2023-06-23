@@ -1,0 +1,57 @@
+@use 'commonStyles' as common ;
+
+$error-color: #FF595E;
+$success-color: #8AC926;
+$retry-color: #FFCA3A;
+$default-color: #5FA8D3;
+
+.upload {
+  @include common.flexContainer(center, center);
+  position: relative;
+  max-width: 40em;
+  height: 3em;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em, rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em, rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;
+  font-family: Montserrat-Medium, sans-serif;
+
+  &-hiddenInput {
+    display: none;
+  }
+
+  &-selectBtn, &-uploadBtn {
+    width: 40%;
+    height: 100%;
+    border: none;
+    background-color: $default-color;
+    color: white;
+    &:hover {
+      background-color: #CAE9FF;
+    }
+    &:disabled {
+      background-color: grey;
+      cursor: not-allowed;
+    }
+  }
+
+  &-uploadBtn {
+    &.uploadSuccess {
+      background-color: $success-color;
+    }
+    &.uploadFail {
+      background-color: $error-color;
+    }
+    &.uploadRetry {
+      background-color: $retry-color;
+    }
+    &.upload {
+      background-color: $default-color;
+    }
+  }
+
+  &-selectedFileName {
+    @include common.flexContainer(center, center);
+    width: 60%;
+    height: 100%;
+    text-align: center;
+  }
+
+}

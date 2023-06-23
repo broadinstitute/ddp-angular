@@ -1,0 +1,55 @@
+@use 'commonStyles' as common;
+
+$yes-color: #FF595E;
+$no-color: #5FA8D3;
+$warning-color: #ffb703;
+
+.confirmationModal {
+  font-family: Montserrat-Regular, sans-serif;
+
+  &-content {
+    p {
+      font-size: 1.5em;
+    }
+    i {
+      font-size: 1em;
+      span {
+        color: $warning-color
+      }
+    }
+  }
+
+  &-buttons {
+    @include common.flexContainer(center, space-around);
+    width: 100%;
+    margin-top: 1.5em;
+
+    button {
+      font-family: Montserrat-SemiBold, sans-serif;
+      outline: none;
+      border: none;
+      width: 40%;
+      height: 4em;
+      border-radius: .5em;
+      color: #ffffff;
+      &:hover {
+        cursor: pointer;
+        box-shadow: rgba(0, 0, 0, 0.18) 0px 2px 4px;
+      }
+    }
+
+    &-yes {
+      background-color: $yes-color;
+      &:hover {
+        background-color: rgba(255, 89, 94, 0.6);
+      }
+    }
+
+    &-no {
+      background-color: $no-color;
+      &:hover {
+        background-color: rgba(95, 168, 211, 0.6);
+      }
+    }
+  }
+}

@@ -2,7 +2,7 @@ import {AfterViewChecked, Component, EventEmitter, Input, OnDestroy, OnInit, Out
 import {MatDialog} from '@angular/material/dialog';
 import {TabDirective} from 'ngx-bootstrap/tabs';
 import {ActivatedRoute, Router} from '@angular/router';
-import {mergeMap, Subscription} from 'rxjs';
+import {BehaviorSubject, mergeMap, Observable, Subject, Subscription} from 'rxjs';
 import {ActivityDefinition} from '../activity-data/models/activity-definition.model';
 import {FieldSettings} from '../field-settings/field-settings.model';
 import {ESFile} from '../participant-list/models/file.model';
@@ -11,7 +11,7 @@ import {PreferredLanguage} from '../participant-list/models/preferred-languages.
 import {Participant} from '../participant-list/participant-list.model';
 import {PDFModel} from '../pdf-download/pdf-download.model';
 import {SequencingOrder} from '../sequencing-order/sequencing-order.model';
-import {take} from 'rxjs/operators';
+import {map, take} from 'rxjs/operators';
 
 import {ComponentService} from '../services/component.service';
 import {Auth} from '../services/auth.service';
@@ -34,6 +34,7 @@ import {AddFamilyMemberComponent} from '../popups/add-family-member/add-family-m
 import {Sample} from '../participant-list/models/sample.model';
 import {ParticipantDSMInformation} from '../participant-list/models/participant.model';
 import {ActivityData} from '../activity-data/activity-data.model';
+import {SessionService} from '../services/session.service';
 
 const fileSaver = require('file-saver');
 
@@ -69,6 +70,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
   @Output() leaveParticipant = new EventEmitter();
   @Output('ngModelChange') update = new EventEmitter();
 
+  public sharedLearningsTabSubject = new Subject<void>();
   participantExited = true;
   participantNotConsented = true;
 
@@ -133,7 +135,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
   private scrolled: boolean;
   private canSequence: boolean;
 
-  sequencingOrdersArray = [];
+  public readonly sequencingOrdersArray$ = new BehaviorSubject<SequencingOrder[] | []>([]);
 
   private ENROLLED = 'ENROLLED';
   private PREQUAL = 'PREQUAL';
@@ -156,7 +158,8 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
   subscriptions: Subscription = new Subscription();
 
   constructor(private auth: Auth, private compService: ComponentService, private dsmService: DSMService, private router: Router,
-              private role: RoleService, private util: Utils, private route: ActivatedRoute, public dialog: MatDialog) {
+              private role: RoleService, private util: Utils, private route: ActivatedRoute, public dialog: MatDialog,
+              private readonly sessionService: SessionService) {
     if (!auth.authenticated()) {
       auth.sessionLogout();
     }
@@ -167,6 +170,10 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
         this.leaveParticipant.emit(null);
       }
     });
+  }
+
+  public sharedLearningsTabSelected(): void {
+    this.sharedLearningsTabSubject.next();
   }
 
 
@@ -191,7 +198,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
 
     this.sortActivities();
     this.addMedicalProviderInformation();
-    if((this.role.allowedToDoOrderSequencing() || this.role.canViewSeqOrderStatus()) && this.hasSequencingOrders) {
+    if ((this.role.allowedToDoOrderSequencing() || this.role.canViewSeqOrderStatus()) && this.hasSequencingOrders) {
       this.getMercuryEligibleSamples();
       this.canSequence = this.canHaveSequencing(this.participant);
     }
@@ -270,7 +277,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
   sortActivities(): void {
     this.participant.data.activities.sort(
       ({activityCode: previousActivityCode}: ActivityData, {activityCode: currentActivityCode}: ActivityData) =>
-      this.displayOrder(previousActivityCode) - this.displayOrder(currentActivityCode)
+        this.displayOrder(previousActivityCode) - this.displayOrder(currentActivityCode)
     );
   }
 
@@ -829,14 +836,14 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
                 this.oncHistoryValueChanged(oncHis.faxSent, 'faxSent', oncHis);
               } else if (oncHis.faxSent2 == null) {
                 //If current date is not already on FaxSent1
-                if(oncHis.faxSent !== formattedDate) {
+                if (oncHis.faxSent !== formattedDate) {
                   oncHis.faxSent2 = formattedDate;
                   oncHis.faxSent2By = this.role.userID();
                   this.oncHistoryValueChanged(oncHis.faxSent2, 'faxSent2', oncHis);
                 }
               } else if (oncHis.faxSent3 == null) {
                 //If current date is not already on either FaxSent1 or FaxSent2
-                if(oncHis.faxSent !== formattedDate && oncHis.faxSent2 !== formattedDate) {
+                if (oncHis.faxSent !== formattedDate && oncHis.faxSent2 !== formattedDate) {
                   oncHis.faxSent3 = formattedDate;
                   oncHis.faxSent3By = this.role.userID();
                   this.oncHistoryValueChanged(oncHis.faxSent3, 'faxSent3', oncHis);
@@ -884,7 +891,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
       this.activeTab = tabName;
     }
     if (tabName === 'sequencing' && (this.role.allowedToDoOrderSequencing() || this.role.canViewSeqOrderStatus())
-     && this.hasSequencingOrders) {
+      && this.hasSequencingOrders) {
       this.getMercuryEligibleSamples();
     }
   }
@@ -1354,9 +1361,9 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
   }
 
   getConditionalParticipantForDynamicField(fieldSetting: FieldSettings): any[] {
-      const conditionalDisplayData: [] = this.getConditionalDisplayData(fieldSetting);
+    const conditionalDisplayData: [] = this.getConditionalDisplayData(fieldSetting);
     if (conditionalDisplayData?.length > 0) {
-        return this.getParticipantAnswersForConditionalDynamicField(conditionalDisplayData);
+      return this.getParticipantAnswersForConditionalDynamicField(conditionalDisplayData);
     }
     return [];
   }
@@ -1443,13 +1450,13 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
 
       let actionWithConditionalDisplay;
 
-      if(value.checkbox) {
+      if (value.checkbox) {
         actionWithConditionalDisplay = fieldSetting.actions.find(action => action.conditionalFieldSetting.columnName === value.key);
       } else {
         actionWithConditionalDisplay = fieldSetting.actions.find(action => action.condition === value.key);
       }
 
-      if (actionWithConditionalDisplay){
+      if (actionWithConditionalDisplay) {
         const newFieldSetting = actionWithConditionalDisplay.conditionalFieldSetting;
         this.formPatch(value.value, newFieldSetting, groupSetting, dataId);
       }
@@ -1461,23 +1468,23 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
     const OTHER_SPECIFY = '_OTHER_SPECIFY';
 
     Object.keys(ptData).filter((key: string) => key.includes(SPECIFY)).forEach((key: string) => {
-      if(key.includes('DIAGNOSIS')) {
-        const keyForDiagnosis = key.slice(10,-SPECIFY.length);
+      if (key.includes('DIAGNOSIS')) {
+        const keyForDiagnosis = key.slice(10, -SPECIFY.length);
 
-        if(ptData['DIAGNOSIS'] !== keyForDiagnosis) {
+        if (ptData['DIAGNOSIS'] !== keyForDiagnosis) {
           delete ptData[key];
         }
-      } else if(key.includes('OTHER')) {
+      } else if (key.includes('OTHER')) {
         const keyForOtherField = key.slice(0, -OTHER_SPECIFY.length);
 
-        if(ptData[keyForOtherField] !== 'OTHER') {
+        if (ptData[keyForOtherField] !== 'OTHER') {
           delete ptData[key];
         }
 
       } else {
         const keyForCheckboxSpecify = key.slice(0, -SPECIFY.length);
 
-        if(!ptData[keyForCheckboxSpecify]) {
+        if (!ptData[keyForCheckboxSpecify]) {
           delete ptData[key];
         }
       }
@@ -1637,13 +1644,9 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
     const sub1 = this.dsmService.getMercuryEligibleSamples(this.participant.data.profile['guid'], realm).subscribe({
       next: data => {
         const jsonData = data;
-        this.sequencingOrdersArray = [];
+        this.sequencingOrdersArray$.next([]);
         if (jsonData) {
-          jsonData.forEach((json) => {
-              const order = SequencingOrder.parse(json);
-              this.sequencingOrdersArray.push(order);
-            }
-          );
+          this.sequencingOrdersArray$.next(jsonData.map(json => SequencingOrder.parse(json)));
         }
 
       }
@@ -1749,7 +1752,6 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
   private setDownloadMessageAndStatus(message: string, downloading: boolean): void {
     this.message = message;
     this.downloading = downloading;
-
   }
 
   public get hasMrViewPermission(): boolean {
@@ -1761,6 +1763,52 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
   }
 
   public isLostToFollowUp(): boolean {
-    return this.participant.data['status']=== 'CONSENT_SUSPENDED';
+    return this.participant.data['status'] === 'CONSENT_SUSPENDED';
+  }
+
+  public get isUserAllowed(): boolean {
+    return this.hasRole().allowViewSharedLearnings || this.hasRole().allowUploadRorFile;
+  }
+
+  public get isParticipantAllowed(): Observable<boolean> {
+    return this.sequencingOrdersArray$
+      .pipe(
+        map((sequencingOrders: SequencingOrder[]) => {
+          const mercuryAllow = sequencingOrders
+            .some(({pdoOrderId, sampleType}: SequencingOrder) => pdoOrderId && sampleType === 'Tumor');
+
+          const allowedStudies = ['osteo2', 'cmi-lms'];
+          const studyAllow = allowedStudies.includes(this.sessionService.selectedRealm);
+
+          const hasConsentedToTissueSample = this.participant.data.dsm?.['hasConsentedToTissueSample'];
+
+          const consentAddendumPediatric = this.participant.data.activities
+            ?.find(({activityCode}) => activityCode === 'CONSENT_ADDENDUM_PEDIATRIC');
+
+          const somaticConsentTumorPediatric = consentAddendumPediatric?.questionsAnswers
+            ?.find(({answer, stableId}) => stableId === 'SOMATIC_CONSENT_TUMOR_PEDIATRIC' && answer);
+          const somaticAssentAddendum = consentAddendumPediatric?.questionsAnswers
+            ?.find(({answer, stableId}) => stableId === 'SOMATIC_ASSENT_ADDENDUM' && answer);
+
+          const consentAddendum = this.participant.data.activities
+            ?.find(({activityCode}) => activityCode === 'CONSENT_ADDENDUM');
+
+          let somaticConsentAddendumTumorAdult;
+
+          if (this.participant.data.ddp?.toLowerCase() === 'cmi-lms') {
+            somaticConsentAddendumTumorAdult = consentAddendum?.questionsAnswers
+              ?.find(({answer, stableId}) => stableId === 'SOMATIC_CONSENT_ADDENDUM_TUMOR' && answer);
+
+          } else if (this.participant.data.ddp?.toLowerCase() === 'cmi-osteo') {
+              somaticConsentAddendumTumorAdult = consentAddendum?.questionsAnswers
+                ?.find(({answer, stableId}) => stableId === 'SOMATIC_CONSENT_TUMOR' && answer);
+          }
+
+          return mercuryAllow && studyAllow && hasConsentedToTissueSample &&
+            (somaticConsentAddendumTumorAdult?.answer ||
+              (somaticConsentTumorPediatric?.answer && somaticAssentAddendum?.answer)
+            );
+        })
+      );
   }
 }

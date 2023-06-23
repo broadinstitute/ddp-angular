@@ -24,6 +24,8 @@ export class SurveyComponent implements OnInit {
   @ViewChild(FieldFilepickerComponent)
   public filepicker: FieldFilepickerComponent;
 
+  public hideSurveyInputs = false;
+
   errorMessage: string;
   additionalMessage: string;
   loading = false;
@@ -131,7 +133,11 @@ export class SurveyComponent implements OnInit {
   }
 
   getListOfSurveyStatus(): void {
+    this.hideSurveyInputs = false;
     if (this.realm !== '' && (this.survey != null && this.survey.name !== '')) {
+      if(this.survey.name === 'SOMATIC_RESULTS') {
+        this.hideSurveyInputs = true;
+      }
       this.errorMessage = null;
       this.additionalMessage = null;
       this.loading = true;

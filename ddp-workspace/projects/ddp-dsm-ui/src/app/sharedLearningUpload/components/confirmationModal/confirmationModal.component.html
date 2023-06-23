@@ -1,0 +1,10 @@
+<main id="confirmationModal" class="confirmationModal">
+  <section class="confirmationModal-content">
+    <p>Are you sure you want to delete {{fileName}}?</p>
+    <i><span>Warning:</span> this action can't be undone</i>
+  </section>
+  <section class="confirmationModal-buttons">
+    <button class="confirmationModal-buttons-no" (click)="confirmationAnswerIs(false)">No, Close</button>
+    <button class="confirmationModal-buttons-yes" (click)="confirmationAnswerIs(true)">Yes, Delete</button>
+  </section>
+</main>

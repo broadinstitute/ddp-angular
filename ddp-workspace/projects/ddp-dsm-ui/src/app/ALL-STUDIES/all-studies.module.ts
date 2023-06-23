@@ -138,6 +138,16 @@ import {DateRangeErrorPipe} from '../dashboard-statistics/pipes/dateRangeError.p
 import {KeyValuePairPipe} from '../dashboard-statistics/pipes/KeyValuePair.pipe';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {ScannerComponent} from '../scanner/scanner.component';
+import {SharedLearningsUploadComponent} from '../sharedLearningUpload/sharedLearningsUpload.component';
+import {MatListModule} from '@angular/material/list';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {UploadFileComponent} from '../sharedLearningUpload/components/uploadFile/uploadFile.component';
+import {FilesTableComponent} from '../sharedLearningUpload/components/filesTable/filesTable.component';
+import {
+  ConfirmationModalComponent
+} from '../sharedLearningUpload/components/confirmationModal/confirmationModal.component';
+import {OncHistoryUploadComponent} from '../oncHistoryUpload/oncHistoryUpload.component';
+import {OncHistoryUploadGuard} from '../guards/oncHistoryUpload.guard';
 
 
 PlotlyModule.plotlyjs = PlotlyJS;
@@ -234,7 +244,12 @@ PlotlyModule.plotlyjs = PlotlyJS;
     DateRangeComponent,
     DateRangeErrorPipe,
     KeyValuePairPipe,
-    ScannerComponent
+    ScannerComponent,
+    SharedLearningsUploadComponent,
+    UploadFileComponent,
+    FilesTableComponent,
+    ConfirmationModalComponent,
+    OncHistoryUploadComponent
   ],
   imports: [
     CommonModule,
@@ -275,7 +290,9 @@ PlotlyModule.plotlyjs = PlotlyJS;
     MatSortModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatListModule,
+    MatPaginatorModule
   ],
   providers: [
     Utils,
@@ -283,7 +300,8 @@ PlotlyModule.plotlyjs = PlotlyJS;
     AuthGuard,
     Statics,
     Language,
-    DashboardStatisticsService
+    DashboardStatisticsService,
+    OncHistoryUploadGuard
   ],
   exports: [RouterModule, MatFormFieldModule, MatInputModule]
 })

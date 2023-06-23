@@ -35,7 +35,8 @@ export class RoleService {
   private _viewOnlyDssData = false;
   private _viewStatisticsDashboard = false;
   private _viewSeqOrderStatus = false;
-
+  private _uploadRorFile = false;
+  private _viewSharedLearnings = false;
   private _userId: string;
   private _user: string;
   private _userEmail: string;
@@ -79,6 +80,8 @@ export class RoleService {
     this._viewOnlyDssData = false;
     this._viewStatisticsDashboard = false;
     this._viewSeqOrderStatus = false;
+    this._uploadRorFile = false;
+    this._viewSharedLearnings = false;
   }
 
   public setRoles( token: string ): void {
@@ -178,6 +181,12 @@ export class RoleService {
           }
           else if (entry === 'view_seq_order_status'){
             this._viewSeqOrderStatus = true;
+          }
+          else if (entry === 'upload_ror_file'){
+            this._uploadRorFile = true;
+          }
+          else if (entry === 'view_shared_learnings') {
+            this._viewSharedLearnings = true;
           }
         }
       }
@@ -332,5 +341,13 @@ export class RoleService {
 
   public canViewSeqOrderStatus(): boolean {
     return this._viewSeqOrderStatus;
+  }
+
+  public get allowUploadRorFile(): boolean {
+    return this._uploadRorFile;
+  }
+
+  public get allowViewSharedLearnings(): boolean {
+    return this._viewSharedLearnings;
   }
 }
