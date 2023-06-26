@@ -1785,10 +1785,12 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
           const consentAddendumPediatric = this.participant.data.activities
             ?.find(({activityCode}) => activityCode === 'CONSENT_ADDENDUM_PEDIATRIC');
 
+          const consentAddendumPediatricStatus = consentAddendumPediatric?.status;
+
           const somaticConsentTumorPediatric = consentAddendumPediatric?.questionsAnswers
-            ?.find(({answer, stableId}) => stableId === 'SOMATIC_CONSENT_TUMOR_PEDIATRIC' && answer);
+            ?.find(({answer, stableId}) => stableId === 'SOMATIC_CONSENT_TUMOR_PEDIATRIC');
           const somaticAssentAddendum = consentAddendumPediatric?.questionsAnswers
-            ?.find(({answer, stableId}) => stableId === 'SOMATIC_ASSENT_ADDENDUM' && answer);
+            ?.find(({answer, stableId}) => stableId === 'SOMATIC_ASSENT_ADDENDUM');
 
           const consentAddendum = this.participant.data.activities
             ?.find(({activityCode}) => activityCode === 'CONSENT_ADDENDUM');
@@ -1806,7 +1808,9 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
 
           return mercuryAllow && studyAllow && hasConsentedToTissueSample &&
             (somaticConsentAddendumTumorAdult?.answer ||
-              (somaticConsentTumorPediatric?.answer && somaticAssentAddendum?.answer)
+              (somaticConsentTumorPediatric?.answer && somaticAssentAddendum?.answer) ||
+              (somaticConsentTumorPediatric?.answer && consentAddendumPediatricStatus === "COMPLETE"
+                && somaticAssentAddendum === undefined)
             );
         })
       );
