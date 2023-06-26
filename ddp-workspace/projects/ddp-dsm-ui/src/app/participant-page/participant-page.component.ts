@@ -1809,7 +1809,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
           return mercuryAllow && studyAllow && hasConsentedToTissueSample &&
             (somaticConsentAddendumTumorAdult?.answer ||
               (somaticConsentTumorPediatric?.answer && somaticAssentAddendum?.answer) ||
-              (somaticConsentTumorPediatric?.answer && consentAddendumPediatricStatus === "COMPLETE"
+              (somaticConsentTumorPediatric?.answer && consentAddendumPediatricStatus === 'COMPLETE'
                 && somaticAssentAddendum === undefined)
             );
         })
