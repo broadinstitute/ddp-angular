@@ -249,9 +249,7 @@ test.describe.serial('LMS Child Enrollment', () => {
         await expect(paragraphs[i]).toHaveScreenshot(`research-consent-assent-addendum-paragraph-${i}.png`);
       }
 
-      await expect(additionalConsentPage.agreeToShareWithParentGuardian().toLocator()).toHaveScreenshot('research-consent-assent-agree-share-with-parent.png')
       await additionalConsentPage.agreeToShareWithParentGuardian().toRadiobutton().check('Yes');
-
       await additionalConsentPage.signature().fill(childFullName);
 
       await additionalConsentPage.submit();

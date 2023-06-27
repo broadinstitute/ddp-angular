@@ -24,11 +24,13 @@ export default class Radiobutton extends WidgetBase {
 
   async check(label: string | RegExp): Promise<void> {
     const isChecked = await this.isChecked(label);
-    const radio: Locator = this.getRadiobuttonByLabel(label);
+    const radiobuttonLocator: Locator = this.getRadiobuttonByLabel(label);
     if (!isChecked) {
-      await radio.locator('label, .mat-radio-label-content').first().click();
+      const radiobutton = await radiobuttonLocator.locator('label, .mat-radio-label-content').first();
+      await radiobutton.scrollIntoViewIfNeeded();
+      await radiobutton.click();
     }
-    await expect(radio).toHaveClass(/radio-checked/);
+    await expect(radiobuttonLocator).toHaveClass(/radio-checked/);
   }
 
   private async isChecked(label: string | RegExp): Promise<boolean> {
