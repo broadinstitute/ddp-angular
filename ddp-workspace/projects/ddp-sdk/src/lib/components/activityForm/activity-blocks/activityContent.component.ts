@@ -8,7 +8,6 @@ import {finalize, pluck} from 'rxjs/operators';
 import {Subscription} from 'rxjs';
 import {BlockType} from '../../../models/activity/blockType';
 import {HttpErrorResponse} from '@angular/common/http';
-import {StudyContactInformation} from '../../../models/activity/studyContactInformation';
 
 @Component({
     selector: 'ddp-activity-content',
@@ -24,8 +23,8 @@ import {StudyContactInformation} from '../../../models/activity/studyContactInfo
                            (btnClicked)="downloadPDF()">
 
             <p *ngIf="isNoSuchElementError">This file is not available. Please contact the study team at
-                <a class="Link" [href]="'mailTo:' + studyContactInformation?.email">{{studyContactInformation?.email}}</a> or
-                <a class="Link" [href]="'tel:' + studyContactInformation?.phoneNumber">{{studyContactInformation?.phoneNumber}}</a>
+                <a class="Link" [href]="'mailTo:' + studyEmail">{{studyEmail}}</a> or
+                <a class="Link" [href]="'tel:' + studyPhone">{{studyPhone}}</a>
                 if you have any questions.
             </p>
 
@@ -46,7 +45,8 @@ export class ActivityContentComponent implements OnInit, OnChanges, OnDestroy {
     @Input() activityGuid: string;
     @Input() activityCode: string;
     @Input() activityStatusCode: string;
-    @Input() studyContactInformation: StudyContactInformation;
+    @Input() studyEmail: string;
+    @Input() studyPhone: string;
 
     @Output() componentBusy = new EventEmitter<boolean>(true);
 

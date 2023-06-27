@@ -17,7 +17,6 @@ import {
   ParticipantsSearchServiceAgent,
   SubmitAnnouncementService,
   WindowRef,
-  StudyContactInformation
 } from 'ddp-sdk';
 import {ToolkitConfigurationService} from 'toolkit';
 
@@ -93,12 +92,14 @@ export class ActivityComponent extends ActivityRedesignedComponent implements On
     }
   }
 
-  public get studyContactInformation(): StudyContactInformation {
-    return {
-      email: this.toolkitConfig.infoEmail,
-      phoneNumber: this.toolkitConfig.phone
-    };
+  public get studyEmail(): string {
+    return this.toolkitConfig.infoEmail;
   }
+
+  public get studyPhone(): string {
+    return this.toolkitConfig.phone;
+  }
+
 
   public updateErrorMessageDisplayState = (): boolean =>
     this.showEmptyNestedActivityError = !this.allNestedActivitiesHaveAnswers;
