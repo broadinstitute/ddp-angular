@@ -17,6 +17,7 @@ export interface TestID {
   assentChildSignature: string;
   bloodSamples: string;
   assentTissue: string;
+  agreeToShareWithMeResults: string;
 }
 
 export interface PatientData {

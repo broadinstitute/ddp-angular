@@ -32,7 +32,7 @@ test.describe('Redirect to Brain cancer project', () => {
     // See a popup redirects
     const modal = new Modal(page);
     await expect(modal.toLocator().locator('.confirm-dialog-title')).toHaveText('Your participation');
-    expect(await modal.toLocator().screenshot()).toMatchSnapshot('modal-redirect.png');
+    await expect(modal.toLocator()).toHaveScreenshot('modal-redirect.png');
     await modal.getButton({ label: 'Go to project' }).click();
 
     // Enter site password
@@ -40,7 +40,7 @@ test.describe('Redirect to Brain cancer project', () => {
 
     await expect(page).toHaveTitle('Brain Tumor Project');
     await assertHeader(page, 'Help transform our understanding of brain tumors');
-    expect(await page.locator('.introduction__text').screenshot()).toMatchSnapshot('brain-cancer-project-introduction-text.png');
-    expect(await page.locator('.about__info').screenshot()).toMatchSnapshot('brain-cancer-project-about-info.png');
+    await expect(page.locator('.introduction__text')).toHaveScreenshot('brain-cancer-project-introduction-text.png');
+    await expect(page.locator('.about__info')).toHaveScreenshot('brain-cancer-project-about-info.png');
   });
 });

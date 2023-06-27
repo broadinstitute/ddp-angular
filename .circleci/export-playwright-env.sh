@@ -71,3 +71,9 @@ echo "export EMAIL_CLIENT_ID=$emailClientId" >> playwright-env/envvars
 echo "export EMAIL_CLIENT_SECRET=$emailClientSecret" >> playwright-env/envvars
 echo "export EMAIL_REDIRECT_URL=$emailRedirectUri" >> playwright-env/envvars
 echo "export MIN_EMAIL_WAIT_TIME=$emailWaitTime" >> playwright-env/envvars
+
+# LMS
+export lmsUser=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[] | select(.app==\"lms\") | .userName")
+export lmsUserPassword=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[] | select(.app==\"lms\") | .password")
+echo "export LMS_USER_PASSWORD=$lmsUserPassword" >> playwright-env/envvars
+echo "export LMS_USER_EMAIL=$lmsUser" >> playwright-env/envvars
