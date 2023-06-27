@@ -5,6 +5,6 @@ export interface WidgetInterface {
   errorMessage(): Locator;
   toQuestion(): Locator;
   click(): Promise<void>;
-  isDisabled(): Promise<boolean>
-  getAttribute(attributeName: string): Promise<string | null>
+  isDisabled(): Promise<boolean>;
+  getAttribute(attributeName: string): Promise<string | null>;
 }

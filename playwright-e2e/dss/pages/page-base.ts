@@ -134,6 +134,7 @@ export default abstract class PageBase implements PageInterface {
       await expect(this.page.locator('.error-message')).toBeHidden();
     }
 
+    await expect(locator).toBeVisible();
     if (waitForNav) {
       await Promise.all([
         locator.click(),
@@ -411,5 +412,11 @@ export default abstract class PageBase implements PageInterface {
     return opts
       ? new Input(this.page, { ddpTestID: opts.testId })
       : new Question(this.page, { prompt: 'Signature' }).toInput();
+  }
+
+  async getDate(): Promise<Date> {
+    const locator = this.page.locator('//*[./h3[text()="Date"]]/following-sibling::*/p');
+    const str = (await locator.innerText()).trim().replace(' ', '');
+    return new Date(str);
   }
 }

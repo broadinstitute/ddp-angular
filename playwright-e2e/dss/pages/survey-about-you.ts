@@ -66,7 +66,7 @@ export default class SurveyAboutYou extends PageBase {
    * @returns {Question}
    */
   tellUsAnythingElse(): Question {
-    return new Question(this.page, { prompt: 'Tell us anything else you would like about yourself or your cancer.' });
+    return new Question(this.page, { prompt: /Tell us anything else you would like about (yourself|your child) or (your|their) cancer/ });
   }
 
   /**
