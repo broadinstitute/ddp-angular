@@ -165,9 +165,8 @@ test.describe.serial('LMS Adult Enrollment', () => {
       const medicalReleasePage = new LmsMedicalReleasePage(page);
       await medicalReleasePage.waitForReady();
 
-      const contents = await page.locator('ddp-activity-content').all();
-      // Checking first 3 paragraphs
-      for (let i = 0; i < 3; i++) {
+      const contents = await page.locator('//ddp-activity-content[not(contains(.,"Date"))]').all();
+      for (let i = 0; i < contents.length; i++) {
         await expect(contents[i]).toHaveScreenshot(`medical-release-content-${i}.png`);
       }
       await expect(page.locator('.ddp-activity-question.Question--AGREEMENT')).toHaveScreenshot(`medical-release-agreement.png`);

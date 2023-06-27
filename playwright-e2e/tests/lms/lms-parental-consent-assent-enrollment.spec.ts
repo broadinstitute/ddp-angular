@@ -261,7 +261,7 @@ test.describe.serial('LMS Child Enrollment', () => {
       const medicalReleasePage = new LmsMedicalReleasePage(page);
       await medicalReleasePage.waitForReady();
 
-      const contents = await page.locator('ddp-activity-content').all();
+      const contents = await page.locator('//ddp-activity-content[not(contains(.,"Date"))]').all();
       for (let i = 0; i < contents.length; i++) {
         await expect(contents[i]).toHaveScreenshot(`medical-release-content-${i}.png`);
       }
