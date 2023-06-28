@@ -150,7 +150,7 @@ export class SharedLearningsUploadComponent implements OnInit, OnDestroy {
             delay(3000)
           )),
         finalize(() => this.isScanningForViruses = false)
-      )
+      );
   }
 
   private get getFiles(): Observable<SomaticResultsFileWithStatus[]> {
@@ -160,7 +160,7 @@ export class SharedLearningsUploadComponent implements OnInit, OnDestroy {
         map((somaticResultsFiles: SomaticResultsFile[]) => this.filterDeletedFiles(somaticResultsFiles)),
         map((somaticResultsFiles: SomaticResultsFile[]) =>
           somaticResultsFiles.map((somaticResultsFile: SomaticResultsFile) => this.mapStatusesToFile(somaticResultsFile)))
-      )
+      );
   }
 
   /* Mappers */
