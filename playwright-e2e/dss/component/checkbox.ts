@@ -57,8 +57,13 @@ export default class Checkbox extends WidgetBase {
    */
   async fill(value: string | undefined): Promise<void> {
     if (value) {
-      const inputLocator = this.toLocator().locator('xpath=ancestor::mat-list-item//input[contains(@class, "mat-input-element")]');
+      const inputLocator = this.toLocator().locator('xpath=ancestor-or-self::mat-list-item//input[contains(@class, "mat-input-element")]');
       await inputLocator.fill(value);
     }
+  }
+
+  getNestedCheckbox(label?: string | RegExp): Checkbox {
+    const root = this.toLocator().locator('xpath=ancestor-or-self::mat-list-item/following-sibling::*[contains(@class, "ddp-nested-picklist")]');
+    return new Checkbox(this.page, { label, root });
   }
 }

@@ -124,7 +124,7 @@ test.describe('Adult Enrollment', () => {
     await medicalReleaseForm.otherBiopsiesOrSurgeries().toInput('City').fill(user.secondDoctor.city);
     await medicalReleaseForm.otherBiopsiesOrSurgeries().toInput('State').fill(user.secondDoctor.state);
 
-    await medicalReleaseForm.agreeToAllowUsToContactPhysicians();
+    await medicalReleaseForm.agreeToAllowUsToContactPhysicianToObtainRecords();
     await medicalReleaseForm.submit();
 
     // Dashboard verification
