@@ -76,13 +76,13 @@ export class SharedLearningsUploadComponent implements OnInit, OnDestroy {
   public onSendToParticipant({somaticDocumentId}: SomaticResultsFileWithStatus): void {
     this.stateService.sendFileToParticipant(this.participantId, somaticDocumentId)
       .pipe(takeUntil(this.takeUntilSubject$))
-      .subscribe()
+      .subscribe();
   }
 
   public onDeleteFile({somaticDocumentId, fileName}: SomaticResultsFileWithStatus): void {
     this.stateService.deleteFile(somaticDocumentId, fileName)
       .pipe(takeUntil(this.takeUntilSubject$))
-      .subscribe()
+      .subscribe();
   }
 
   /* Template functions*/

@@ -17,12 +17,12 @@ import {
   SomaticResultsFileWithStatus
 } from '../interfaces/somaticResultsFile';
 import {SharedLearningsHTTPService} from './sharedLearningsHTTP.service';
-import {HttpRequestStatusEnum} from "../enums/httpRequestStatus-enum";
-import {catchError, finalize, map, take} from "rxjs/operators";
-import {HttpErrorResponse} from "@angular/common/http";
-import {ConfirmationModalComponent} from "../components/confirmationModal/confirmationModal.component";
-import {SomaticResultsFileVirusStatusEnum} from "../enums/somaticResultsFileVirusStatus-enum";
-import {MatDialog} from "@angular/material/dialog";
+import {HttpRequestStatusEnum} from '../enums/httpRequestStatus-enum';
+import {catchError, finalize, map, take} from 'rxjs/operators';
+import {HttpErrorResponse} from '@angular/common/http';
+import {ConfirmationModalComponent} from '../components/confirmationModal/confirmationModal.component';
+import {SomaticResultsFileVirusStatusEnum} from '../enums/somaticResultsFileVirusStatus-enum';
+import {MatDialog} from '@angular/material/dialog';
 
 @Injectable()
 export class SharedLearningsStateService {
@@ -82,7 +82,7 @@ export class SharedLearningsStateService {
 
           return throwError(error);
         })
-      )
+      );
   }
 
   public deleteFile(somaticDocumentId: number, fileName: string): Observable<any> {
@@ -93,7 +93,7 @@ export class SharedLearningsStateService {
       .pipe(
         mergeMap((deleteOrNot: boolean) => deleteOrNot && this.handleFileDeletion(somaticDocumentId)),
         take(1)
-      )
+      );
   }
 
   public getAndScanFiles(participantID: string): Observable<any> {
@@ -140,7 +140,7 @@ export class SharedLearningsStateService {
 
     return somaticDocument && somaticDocument.sendToParticipantStatus?.status !== HttpRequestStatusEnum.NONE ?
       somaticDocument.sendToParticipantStatus :
-      {status: HttpRequestStatusEnum.NONE, message: null}
+      {status: HttpRequestStatusEnum.NONE, message: null};
   }
 
   private latestDeleteStatus(documentID: number): SomaticResultsFileDeleteStatus {
@@ -149,7 +149,7 @@ export class SharedLearningsStateService {
 
     return somaticDocument && somaticDocument.deleteStatus?.status !== HttpRequestStatusEnum.NONE ?
       somaticDocument.deleteStatus :
-      {status: HttpRequestStatusEnum.NONE, message: null}
+      {status: HttpRequestStatusEnum.NONE, message: null};
   }
 
   /* Filter functions */
@@ -188,10 +188,10 @@ export class SharedLearningsStateService {
       .pipe(
         tap(() => this.handleDeleteSuccess(somaticDocumentId)),
         catchError((error: any) => {
-          error instanceof HttpErrorResponse && this.handleDeleteFail(somaticDocumentId, error.error)
+          error instanceof HttpErrorResponse && this.handleDeleteFail(somaticDocumentId, error.error);
           return throwError(error);
         })
-      )
+      );
   }
 
   private handleUploadedFile(somaticResultsFile: SomaticResultsFile): void {
