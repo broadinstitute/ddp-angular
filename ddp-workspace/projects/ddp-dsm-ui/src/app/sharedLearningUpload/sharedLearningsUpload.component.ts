@@ -12,7 +12,7 @@ import {
   throwError
 } from 'rxjs';
 import {SharedLearningsHTTPService} from './services/sharedLearningsHTTP.service';
-import {catchError, finalize, map, take} from 'rxjs/operators';
+import {catchError, finalize, first, map, take} from 'rxjs/operators';
 import {HttpErrorResponse} from '@angular/common/http';
 import {SharedLearningsStateService} from './services/sharedLearningsState.service';
 import {SomaticResultsFileVirusStatusEnum} from './enums/somaticResultsFileVirusStatus-enum';
@@ -38,6 +38,7 @@ export class SharedLearningsUploadComponent implements OnInit, OnDestroy {
   public errorLoadingData: string | null;
 
   private takeUntilSubject$ = new Subject<void>();
+  private isScanningForViruses = false;
 
   @Input() tabActivated$: Observable<void>;
   @Input() participantId: string;
@@ -71,6 +72,11 @@ export class SharedLearningsUploadComponent implements OnInit, OnDestroy {
   /* Event Listeners */
   public onFileUpload(somaticResultsFiles: SomaticResultsFile): void {
     this.handleUploadedFile(somaticResultsFiles);
+    if(!this.isScanningForViruses) {
+      this.getAndScanFiles
+        .pipe(takeUntil(this.takeUntilSubject$))
+        .subscribe();
+    }
   }
 
   public onSendToParticipant({somaticDocumentId}: SomaticResultsFileWithStatus): void {
@@ -120,19 +126,41 @@ export class SharedLearningsUploadComponent implements OnInit, OnDestroy {
   private loadData(): Observable<any> {
     this.isLoading = true;
     return this.tabActivated$.pipe(
-      switchMap(() => this.stateService
-        .getSomaticResultsFiles(this.participantId)
-        .pipe(
-          map((somaticResultsFiles: SomaticResultsFile[]) => this.filterDeletedFiles(somaticResultsFiles)),
-          map((somaticResultsFiles: SomaticResultsFile[]) =>
-            somaticResultsFiles.map((somaticResultsFile: SomaticResultsFile) => this.mapStatusesToFile(somaticResultsFile))),
-          tap((somaticResultsFilesWithStatus: SomaticResultsFileWithStatus[]) =>
-            this.stateService.updateState(somaticResultsFilesWithStatus)),
-          finalize(() => this.isLoading = false))
+      first(),
+      switchMap(() => this.getAndScanFiles
+        .pipe(finalize(() => this.isLoading = false))
       ),
-      takeWhile(() => !(!!this.somaticResultsFilesWithStatus) || !!this.errorLoadingData),
+      tap(() => this.isLoading = false),
+      takeUntil(this.takeUntilSubject$),
       catchError((error: any) => this.handleError(error))
     );
+  }
+
+  private get getAndScanFiles(): Observable<any> {
+    this.isScanningForViruses = true;
+    return this.getFiles
+      .pipe(
+        tap((somaticResultsFilesWithStatus: SomaticResultsFileWithStatus[]) =>
+          this.stateService.updateState(somaticResultsFilesWithStatus)),
+        repeatWhen((notifications: Observable<void>) =>
+          notifications.pipe(
+            takeWhile(() =>
+              this.somaticResultsFilesWithStatus
+                .some(file => file.virusStatus === SomaticResultsFileVirusStatusEnum.SCANNING)),
+            delay(3000)
+          )),
+        finalize(() => this.isScanningForViruses = false)
+      );
+  }
+
+  private get getFiles(): Observable<SomaticResultsFileWithStatus[]> {
+    return this.stateService
+      .getSomaticResultsFiles(this.participantId)
+      .pipe(
+        map((somaticResultsFiles: SomaticResultsFile[]) => this.filterDeletedFiles(somaticResultsFiles)),
+        map((somaticResultsFiles: SomaticResultsFile[]) =>
+          somaticResultsFiles.map((somaticResultsFile: SomaticResultsFile) => this.mapStatusesToFile(somaticResultsFile)))
+      );
   }
 
   /* Mappers */
@@ -164,7 +192,6 @@ export class SharedLearningsUploadComponent implements OnInit, OnDestroy {
       return SomaticResultsFileVirusStatusEnum.INFECTED;
     } else if (!isVirusFree && !isFileDeleted) {
       // file has not been scanned, so it will scan file as well
-      this.scanForVirus(somaticDocumentId);
       return SomaticResultsFileVirusStatusEnum.SCANNING;
     } else if (isVirusFree && !isFileDeleted) { // file has already been scanned for viruses and is clean
       return SomaticResultsFileVirusStatusEnum.CLEAN;
@@ -172,35 +199,6 @@ export class SharedLearningsUploadComponent implements OnInit, OnDestroy {
       // file has been cleaned and it's deleted
       return SomaticResultsFileVirusStatusEnum.CLEAN;
     }
-  }
-
-  private scanForVirus(somaticDocumentId: number): void {
-    let uploadedFileHasBeenScanned = false;
-    this.sharedLearningsHTTPService
-      .getFile(this.participantId, somaticDocumentId)
-      .pipe(
-        repeatWhen((notifications: Observable<any>) =>
-          notifications.pipe(
-            takeWhile(() => !uploadedFileHasBeenScanned),
-            delay(3000)
-          )
-        ),
-        takeUntil(this.takeUntilSubject$)
-      )
-      .subscribe({
-        next: ({isVirusFree, deletedAt, somaticDocumentId: id}: SomaticResultsFile) => {
-          const isFileDeleted = !!deletedAt;
-          if (isVirusFree && !isFileDeleted) {
-            uploadedFileHasBeenScanned = true;
-            this.handleVirusStatusUpdate(id, SomaticResultsFileVirusStatusEnum.CLEAN);
-          } else if (!isVirusFree && isFileDeleted) {
-            uploadedFileHasBeenScanned = true;
-            this.handleVirusStatusUpdate(id, SomaticResultsFileVirusStatusEnum.INFECTED);
-          }
-        },
-      error: (error: any) => error instanceof HttpErrorResponse &&
-        this.handleVirusStatusUpdate(somaticDocumentId, SomaticResultsFileVirusStatusEnum.UNABLE_TO_SCAN)}
-      );
   }
 
 
@@ -216,11 +214,6 @@ export class SharedLearningsUploadComponent implements OnInit, OnDestroy {
         error: (error: any) => error instanceof HttpErrorResponse &&
           this.handleDeleteFail(somaticDocumentId, error.error)
       });
-  }
-
-  private handleVirusStatusUpdate(id: number, virusStatus: SomaticResultsFileVirusStatusEnum): void {
-    const updatedState = this.updateVirusStatus(id, virusStatus);
-    this.stateService.updateState(updatedState);
   }
 
   private handleUploadedFile(somaticResultsFile: SomaticResultsFile): void {
@@ -261,7 +254,7 @@ export class SharedLearningsUploadComponent implements OnInit, OnDestroy {
 
 
   private handleError(error: any): Observable<any> {
-    if(error instanceof HttpErrorResponse) {
+    if (error instanceof HttpErrorResponse) {
       this.errorLoadingData = error.error;
       this.isUnauthorized = error.status === 403;
     }
