@@ -23,8 +23,8 @@
     <ng-container *ngIf="!isLoading; else spinner" >
       <app-files-table
         (sendToParticipant)="onSendToParticipant($event)"
-        (delete)="deleteFile($event)"
-        [somaticResultsFiles]="somaticResultsFilesWithStatus"></app-files-table>
+        (delete)="onDeleteFile($event)"
+        [somaticResultsFiles]="somaticResultsFilesWithStatus$ | async"></app-files-table>
     </ng-container>
   </section>
 </main>
