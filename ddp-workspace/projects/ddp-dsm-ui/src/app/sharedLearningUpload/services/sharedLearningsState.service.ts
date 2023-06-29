@@ -130,7 +130,7 @@ export class SharedLearningsStateService {
       deletedAt: somaticResultsFile.deletedAt * 1000,
       sendToParticipantStatus: this.latestSendToParticipantStatus(somaticResultsFile.somaticDocumentId),
       deleteStatus: this.latestDeleteStatus(somaticResultsFile.somaticDocumentId),
-      virusStatus: this.handleAndReturnVirusStatusFor(somaticResultsFile)
+      virusStatus: this.handleVirusStatusFor(somaticResultsFile)
     };
   }
 
@@ -157,18 +157,15 @@ export class SharedLearningsStateService {
     return somaticResultsFiles.filter((somaticFile: SomaticResultsFile) => !(!!somaticFile.deletedByUserId));
   }
 
-  /* Virus scanner functions */
-  private handleAndReturnVirusStatusFor({
-                                          isVirusFree,
-                                          deletedAt,
-                                          somaticDocumentId
-                                        }: SomaticResultsFile): SomaticResultsFileVirusStatusEnum {
+
+  /** Handlers */
+  private handleVirusStatusFor({isVirusFree, deletedAt}: SomaticResultsFile): SomaticResultsFileVirusStatusEnum {
     const isFileDeleted = !!deletedAt;
 
     if (!isVirusFree && isFileDeleted) { // file has been scanned and is infected
       return SomaticResultsFileVirusStatusEnum.INFECTED;
     } else if (!isVirusFree && !isFileDeleted) {
-      // file has not been scanned, so it will scan file as well
+      // file is being scanned
       return SomaticResultsFileVirusStatusEnum.SCANNING;
     } else if (isVirusFree && !isFileDeleted) { // file has already been scanned for viruses and is clean
       return SomaticResultsFileVirusStatusEnum.CLEAN;
@@ -178,8 +175,6 @@ export class SharedLearningsStateService {
     }
   }
 
-
-  /** Handlers */
   private handleFileDeletion(somaticDocumentId: number): Observable<any> {
     const updatedState = this.updateDeleteStatus(somaticDocumentId, HttpRequestStatusEnum.IN_PROGRESS, null);
     this.updateState(updatedState);
