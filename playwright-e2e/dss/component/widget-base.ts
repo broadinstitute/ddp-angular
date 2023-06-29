@@ -16,6 +16,10 @@ export default abstract class WidgetBase implements WidgetInterface {
     }
   }
 
+  toRootLocator(): Locator {
+    return this.root;
+  }
+
   toLocator(): Locator {
     return this.element?.nth(this.nth) as Locator;
   }

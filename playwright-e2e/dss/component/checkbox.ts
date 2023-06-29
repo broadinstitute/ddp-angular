@@ -18,13 +18,13 @@ export default class Checkbox extends WidgetBase {
       if (label) {
         if (typeof label === 'string') {
           this.element = exactMatch
-            ? this.root.locator(`xpath=//mat-checkbox[.//input[@type="checkbox" and @id=(//label[.//text()[normalize-space()="${label}"]]/@for)]]`)
-            : this.root.locator(`xpath=//mat-checkbox[.//input[@type="checkbox" and @id=(//label[contains(normalize-space(.),"${label}")]/@for)]]`);
+            ? this.root.locator(`xpath=.//mat-checkbox[.//input[@type="checkbox" and @id=(//label[.//text()[normalize-space()="${label}"]]/@for)]]`)
+            : this.root.locator(`xpath=.//mat-checkbox[.//input[@type="checkbox" and @id=(//label[contains(normalize-space(.),"${label}")]/@for)]]`);
         } else {
           this.element = this.root.locator('mat-checkbox').filter({ has: this.page.locator('label', { hasText: label }) });
         }
       } else {
-        this.element = this.root.locator(`xpath=//mat-checkbox[.//input[@id=(//label/@for)]]`);
+        this.element = this.root.locator(`xpath=.//mat-checkbox[.//input[@id=(//label/@for)]]`);
       }
     }
   }
@@ -62,8 +62,7 @@ export default class Checkbox extends WidgetBase {
     }
   }
 
-  getNestedCheckbox(label?: string | RegExp): Checkbox {
-    const root = this.toLocator().locator('xpath=ancestor-or-self::mat-list-item/following-sibling::*[contains(@class, "ddp-nested-picklist")]');
-    return new Checkbox(this.page, { label, root });
+  getNestedCheckbox(label?: string | RegExp): Locator {
+    return this.toRootLocator().locator('xpath=.//mat-list-item/following-sibling::*[contains(@class, "ddp-nested-picklist")]');
   }
 }

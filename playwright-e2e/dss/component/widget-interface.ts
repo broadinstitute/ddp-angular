@@ -2,6 +2,7 @@ import { Locator } from '@playwright/test';
 
 export interface WidgetInterface {
   toLocator(): Locator;
+  toRootLocator(): Locator;
   toLocators(): Promise<Array<Locator>>;
   errorMessage(): Locator;
   toQuestion(): Locator;

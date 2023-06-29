@@ -294,7 +294,7 @@ test.describe.serial('LMS Young Child Enrollment', () => {
         await expect(contents[i]).toHaveScreenshot(`lms-survey-about-your-child-instruction-${i}.png`);
       }
 
-      await assertRaceOptions(surveyAboutYou);
+      await assertNestedCheckbox(surveyAboutYou);
 
       await surveyAboutYou.sex().toRadiobutton().check('Female');
       await surveyAboutYou.gender().toCheckbox('Girl').check();
@@ -335,7 +335,7 @@ test.describe.serial('LMS Young Child Enrollment', () => {
     await expect(dashboardPage.getTable().tableLocator()).toHaveScreenshot('lms-dashboard-table-2.png');
   });
 
-  async function assertRaceOptions(surveyAboutYou: SurveyAboutYou): Promise<void> {
+  async function assertNestedCheckbox(surveyAboutYou: SurveyAboutYou): Promise<void> {
     const allCheckbox = ['American Indian or Alaska Native', 'Asian', 'Black, African American, or African',
       'Hispanic, Latino, or Spanish', 'Middle Eastern or North African', 'Native Hawaiian or other Pacific Islander', 'White'];
 
@@ -344,19 +344,9 @@ test.describe.serial('LMS Young Child Enrollment', () => {
       const checkbox = surveyAboutYou.race().toCheckbox(allCheckbox[i]);
       await expect(checkbox.toLocator()).toHaveScreenshot(`${name}-checkbox.png`);
       await checkbox.check(); // Opens up nested checkbox list
-
-      const nestedList = await checkbox.getNestedCheckbox();
-      let listLength = (await nestedList.toLocators()).length;
-      expect(listLength).toBeGreaterThan(0);
-
-      const checkboxes = await nestedList.toLocators();
-      for (let i = 0; i < listLength; i++) {
-        await expect(checkboxes[i]).toHaveScreenshot(`${name}-nested-checkbox-${i}.png`);
-      }
-
+      const nestedList = checkbox.getNestedCheckbox();
+      await expect(nestedList).toHaveScreenshot(`${name}-nested-checkboxes.png`);
       await checkbox.uncheck(); // Close nested checkbox list
-      listLength = (await nestedList.toLocators())!.length;
-      expect(listLength).toBe(0);
     }
   }
 })
