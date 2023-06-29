@@ -36,25 +36,25 @@ export class Navigation {
   constructor(private readonly page: Page, private readonly request: APIRequestContext) {}
 
   public async selectStudy(studyName: StudyEnum): Promise<void> {
-    await this.selectFrom(MainMenuEnum.SELECTED_STUDY, studyName);
+    await this.selectMenu(MainMenuEnum.SELECTED_STUDY, studyName);
   }
 
   public async selectFromSamples<T extends object>(sampleNav: SamplesNavEnum): Promise<T> {
-    await this.selectFrom(MainMenuEnum.SAMPLES, sampleNav);
+    await this.selectMenu(MainMenuEnum.SAMPLES, sampleNav);
     await waitForNoSpinner(this.page);
     return (this.navigationItems.samples as Map<string, object>).get(sampleNav) as T;
   }
 
   public async selectFromStudy<T extends object>(studyNav: StudyNavEnum): Promise<T> {
-    await this.selectFrom(MainMenuEnum.STUDY, studyNav);
+    await this.selectMenu(MainMenuEnum.STUDY, studyNav);
     return (this.navigationItems.study as Map<string, object>).get(studyNav) as T;
   }
 
   public async selectMiscellaneous(miscName: MiscellaneousEnum): Promise<void> {
-    await this.selectFrom(MainMenuEnum.MISCELLANEOUS, miscName);
+    await this.selectMenu(MainMenuEnum.MISCELLANEOUS, miscName);
   }
 
-  private async selectFrom(from: MainMenuEnum, selection: Selection): Promise<void> {
+  public async selectMenu(from: MainMenuEnum, selection: Selection): Promise<void> {
     await new Dropdown(this.page, from).selectOption(selection);
     await waitForNoSpinner(this.page);
   }

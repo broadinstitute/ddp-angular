@@ -33,12 +33,12 @@ export default class Radiobutton extends WidgetBase {
     await expect(radiobuttonLocator).toHaveClass(/radio-checked/);
   }
 
-  private async isChecked(label: string | RegExp): Promise<boolean> {
+  async isChecked(label: string | RegExp): Promise<boolean> {
     const isChecked = (await this.getRadiobuttonByLabel(label).getAttribute('class'))?.includes('mat-radio-checked');
     return isChecked ? isChecked : false;
   }
 
-  private getRadiobuttonByLabel(label: string | RegExp): Locator {
+  getRadiobuttonByLabel(label: string | RegExp): Locator {
     return this.toLocator()
       .locator('mat-radio-button')
       .filter({ hasText: label });

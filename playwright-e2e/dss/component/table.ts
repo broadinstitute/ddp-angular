@@ -112,6 +112,17 @@ export default class Table {
     return this.rowLocator().nth(row).allInnerTexts();
   }
 
+  async getRowInnerText(row: number, column: string): Promise<string | null> {
+    // Find column index
+    const columns = await this.getHeaderNames();
+    const columnIndex = await this.getHeaderIndex(column);
+    if (columnIndex === -1) {
+      return null; // Not found
+    }
+    const cell = this.cell(row, columnIndex);
+    return await cell.innerText();
+  }
+
   /**
    * Finds table column header names. Returns an array of string.
    * @returns {Array<string>}

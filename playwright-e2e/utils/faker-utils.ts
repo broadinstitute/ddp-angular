@@ -2,6 +2,10 @@ import { faker } from '@faker-js/faker';
 import { Page } from '@playwright/test';
 import * as user from 'data/fake-user.json';
 
+export const generateAlphaNumeric = (leng?: number): string => {
+  return faker.random.alphaNumeric(leng ? leng : 6);
+};
+
 export const generateUserName = (namePrefix: string): string => {
   return `${namePrefix}-${faker.name.lastName()}${faker.random.word()}`;
 };

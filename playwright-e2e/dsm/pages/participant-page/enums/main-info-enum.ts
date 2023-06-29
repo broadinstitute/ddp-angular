@@ -10,5 +10,5 @@ export enum MainInfoEnum {
   DATE_OF_BIRTH = 'Date of Birth',
   DATE_OF_DIAGNOSIS = 'Date of Diagnosis',
   GENDER = 'Gender',
-  PREFERRED_LANGUAGE = 'Preferred Language'
+  PREFERRED_LANGUAGE = 'Preferred Language',
 }
