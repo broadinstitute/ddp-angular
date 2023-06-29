@@ -23,10 +23,6 @@ export const LmsPatientsData: Patient = {
     testId: {
       firstName: 'answer:CONSENT_ASSENT_CHILD_FIRSTNAME',
       lastName: 'answer:CONSENT_ASSENT_CHILD_LASTNAME',
-      signature: 'answer:CONSENT_SIGNATURE',
-      authorizationSignature: 'answer:CONSENT_SELF_SIGNATURE_SUBJECT',
-      dateOfBirthLocation: "Your Child's Date of Birth",
-      relationshipChild: 'Relationship to Child ',
       assentFirstName: 'answer:CONSENT_ASSENT_FIRSTNAME',
       assentLastName: 'answer:CONSENT_ASSENT_LASTNAME',
       assentSignature: 'answer:CONSENT_ASSENT_PARENT_SIGNATURE',
@@ -44,10 +40,6 @@ export const LmsPatientsData: Patient = {
     testId: {
       firstName: 'answer:PARENTAL_CONSENT_CHILD_FIRSTNAME',
       lastName: 'answer:PARENTAL_CONSENT_CHILD_LASTNAME',
-      signature: 'answer:CONSENT_SIGNATURE',
-      authorizationSignature: 'answer:CONSENT_SELF_SIGNATURE_SUBJECT',
-      dateOfBirthLocation: "Your Child's Date of Birth",
-      relationshipChild: 'Relationship to Child ',
       assentFirstName: 'answer:PARENTAL_CONSENT_FIRSTNAME',
       assentLastName: 'answer:PARENTAL_CONSENT_LASTNAME',
       assentSignature: 'answer:PARENTAL_CONSENT_SIGNATURE',
@@ -65,9 +57,6 @@ export const LmsPatientsData: Patient = {
     testId: {
       firstName: 'answer:CONSENT_FIRSTNAME',
       lastName: 'answer:CONSENT_LASTNAME',
-      signature: 'answer:CONSENT_SIGNATURE',
-      authorizationSignature: 'answer:CONSENT_SELF_SIGNATURE_SUBJECT',
-      dateOfBirthLocation: 'Date of Birth',
       bloodSamples: 'boolean-answer-CONSENT_BLOOD',
       assentTissue: 'boolean-answer-CONSENT_TISSUE',
       agreeToShareWithMeResults: 'answer:SOMATIC_CONSENT_ADDENDUM_TUMOR'

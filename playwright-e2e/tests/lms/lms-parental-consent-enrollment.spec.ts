@@ -19,7 +19,7 @@ import { waitForResponse } from 'utils/test-utils';
 
 const { LMS_USER_EMAIL, LMS_USER_PASSWORD } = process.env;
 
-test.describe.serial('LMS Young Child Enrollment', () => {
+test.describe.serial('LMS Child Enrollment', () => {
   let userEmail: string;
 
   let dashboardPage: LmsDashboardPage;
