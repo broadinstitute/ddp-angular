@@ -29,7 +29,8 @@ export const LmsPatientsData: Patient = {
       assentChildSignature: 'answer:CONSENT_ASSENT_CHILD_SIGNATURE',
       bloodSamples: 'boolean-answer-CONSENT_ASSENT_BLOOD',
       assentTissue: 'boolean-answer-CONSENT_ASSENT_TISSUE',
-      agreeToShareWithMeResults: 'answer:SOMATIC_CONSENT_TUMOR_PEDIATRIC'
+      agreeToShareWithMeResults: 'answer:SOMATIC_CONSENT_TUMOR_PEDIATRIC',
+      relationshipChild: 'Relationship to Child '
     }
   },
   secondChild: {
@@ -46,7 +47,8 @@ export const LmsPatientsData: Patient = {
       assentChildSignature: 'answer:CONSENT_ASSENT_CHILD_SIGNATURE',
       bloodSamples: 'boolean-answer-PARENTAL_CONSENT_BLOOD',
       assentTissue: 'boolean-answer-PARENTAL_CONSENT_TISSUE',
-      agreeToShareWithMeResults: 'answer:SOMATIC_CONSENT_TUMOR_PEDIATRIC'
+      agreeToShareWithMeResults: 'answer:SOMATIC_CONSENT_TUMOR_PEDIATRIC',
+      relationshipChild: 'Relationship to Child '
     }
   },
   adult: {
