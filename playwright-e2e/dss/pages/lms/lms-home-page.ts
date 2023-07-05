@@ -17,6 +17,7 @@ export default class LmsHomePage extends LmsPageBase {
     await expect(this.page).toHaveTitle('Leiomyosarcoma Project');
     await expect(this.countMeInButton.first()).toBeVisible();
     await expect(this.learnMoreButton).toBeVisible();
+    await expect(this.getLogInButton()).toBeVisible();
     await waitForNoSpinner(this.page);
   }
 

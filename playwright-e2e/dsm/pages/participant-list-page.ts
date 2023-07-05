@@ -109,7 +109,7 @@ export default class ParticipantListPage {
       fileFormat = FileFormatEnum.XLSX,
       textFormat = TextFormatEnum.HUMAN_READABLE,
       includeCompletionOfActivity = true,
-      timeout = 2 * 60 * 1000
+      timeout = 3 * 60 * 1000
     } = opts;
 
     const button = this.page.locator('button').filter({has: this.page.locator('[data-icon="file-download"]')});

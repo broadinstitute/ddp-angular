@@ -94,7 +94,7 @@ test('Osteo adult self enroll @osteo', async ({ page }) => {
     nth: 1
   });
 
-  await medicalReleasePage.agreeToAllowUsToContactPhysicians();
+  await medicalReleasePage.agreeToAllowUsToContactPhysicianToObtainRecords();
   await medicalReleasePage.fillInFullName(fullName);
   await medicalReleasePage.submit()
 
