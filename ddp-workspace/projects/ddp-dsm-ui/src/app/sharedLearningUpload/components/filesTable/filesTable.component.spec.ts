@@ -1,29 +1,29 @@
-import {ComponentFixture, TestBed, waitForAsync} from "@angular/core/testing";
-import {FilesTableComponent} from "./filesTable.component";
-import {MatIconModule} from "@angular/material/icon";
-import {MatTableModule} from "@angular/material/table";
-import {RoleService} from "../../../services/role.service";
-import {DebugElement} from "@angular/core";
-import {MaterialHarnesses} from "../../../test-helpers/MaterialHarnesses";
-import {TestbedHarnessEnvironment} from "@angular/cdk/testing/testbed";
-import {expect} from "@angular/flex-layout/_private-utils/testing";
-import {ConfigurationService} from "ddp-sdk";
-import {By} from "@angular/platform-browser";
-import {HttpRequestStatusEnum} from "../../enums/httpRequestStatus-enum";
-import {SomaticResultsFileVirusStatusEnum} from "../../enums/somaticResultsFileVirusStatus-enum";
-import {MatTooltipModule} from "@angular/material/tooltip";
-import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
-import {DatePipe} from "@angular/common";
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
+import {FilesTableComponent} from './filesTable.component';
+import {MatIconModule} from '@angular/material/icon';
+import {MatTableModule} from '@angular/material/table';
+import {RoleService} from '../../../services/role.service';
+import {DebugElement} from '@angular/core';
+import {MaterialHarnesses} from '../../../test-helpers/MaterialHarnesses';
+import {TestbedHarnessEnvironment} from '@angular/cdk/testing/testbed';
+import {expect} from '@angular/flex-layout/_private-utils/testing';
+import {ConfigurationService} from 'ddp-sdk';
+import {By} from '@angular/platform-browser';
+import {HttpRequestStatusEnum} from '../../enums/httpRequestStatus-enum';
+import {SomaticResultsFileVirusStatusEnum} from '../../enums/somaticResultsFileVirusStatus-enum';
+import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {DatePipe} from '@angular/common';
 import { cloneDeep } from 'lodash';
-import {SomaticResultsFileWithStatus} from "../../interfaces/somaticResultsFile";
+import {SomaticResultsFileWithStatus} from '../../interfaces/somaticResultsFile';
 
 const testDocuments: any = [
   // Clean, Sent File
   {
-    "somaticDocumentId": 111,
-    "fileName": "testFileSuccessSent.pdf",
-    "createdAt": 1688476158,
-    "sentAt": 1688476500,
+    somaticDocumentId: 111,
+    fileName: 'testFileSuccessSent.pdf',
+    createdAt: 1688476158,
+    sentAt: 1688476500,
     virusStatus: SomaticResultsFileVirusStatusEnum.CLEAN,
     sendToParticipantStatus: {
       status: HttpRequestStatusEnum.NONE,
@@ -34,7 +34,7 @@ const testDocuments: any = [
       message: null
     }
   }
-]
+];
 
 enum DocumentIconsEnum {
   CLEAN = 'check_circle_outline',
@@ -76,18 +76,18 @@ describe('FilesTableComponent', () => {
         provide: 'ddp.config',
         useValue: sdkConfig
       }]
-    }).compileComponents()
-  }))
+    }).compileComponents();
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(FilesTableComponent);
     component = fixture.debugElement.componentInstance;
     componentHTML = fixture.debugElement;
     materialHarnessLoader = new MaterialHarnesses(TestbedHarnessEnvironment.loader(fixture));
-  })
+  });
 
   it('should create component', () => {
-    expect(component).toBeTruthy('Component has not been instantiated')
+    expect(component).toBeTruthy('Component has not been instantiated');
   });
 
   it('should display No files found', () => {
@@ -218,7 +218,7 @@ describe('FilesTableComponent', () => {
     let cellData = '';
 
     // looking for cell data for the provided column
-    for(let cell of cells) {
+    for(const cell of cells) {
       if(await cell.getColumnName() === columName) {
         cellData = await cell.getText();
         break;
@@ -227,8 +227,8 @@ describe('FilesTableComponent', () => {
 
     // returns either matIcon text or SCANNING (matSpinner doesn't have text)
     return (cellData  || 'SPINNING') as DocumentIconsEnum;
-  }
+  };
 
   const formatDate = (milliseconds: number): string =>
     datePipe.transform(milliseconds, dateFormat);
-})
+});

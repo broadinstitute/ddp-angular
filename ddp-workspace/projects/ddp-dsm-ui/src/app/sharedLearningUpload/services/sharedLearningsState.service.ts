@@ -89,7 +89,7 @@ export class SharedLearningsStateService {
           error instanceof HttpErrorResponse
           && this.handleSendToFail(somaticDocumentId, error.error);
 
-          return throwError(error);
+          return throwError(() => error);
         })
       );
   }
@@ -171,7 +171,7 @@ export class SharedLearningsStateService {
         tap(() => this.handleDeleteSuccess(somaticDocumentId)),
         catchError((error: any) => {
           error instanceof HttpErrorResponse && this.handleDeleteFail(somaticDocumentId, error.error);
-          return throwError(error);
+          return throwError(() => error);
         })
       );
   }

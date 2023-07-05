@@ -1,27 +1,27 @@
-import {ComponentFixture, TestBed, waitForAsync} from "@angular/core/testing";
-import {ConfigurationService} from "ddp-sdk";
-import {MatTooltipModule} from "@angular/material/tooltip";
-import {RoleService} from "../../../services/role.service";
-import {DebugElement} from "@angular/core";
-import {UploadFileComponent} from "./uploadFile.component";
-import {SharedLearningsHTTPService} from "../../services/sharedLearningsHTTP.service";
-import {DSMService} from "../../../services/dsm.service";
-import {of} from "rxjs";
-import {SessionService} from "../../../services/session.service";
-import {SomaticResultSignedUrlResponse} from "../../interfaces/somaticResultSignedUrlRequest";
-import {expect} from "@angular/flex-layout/_private-utils/testing";
-import {MatDialogModule} from "@angular/material/dialog";
-import {By} from "@angular/platform-browser";
-import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
+import {ConfigurationService} from 'ddp-sdk';
+import {MatTooltipModule} from '@angular/material/tooltip';
+import {RoleService} from '../../../services/role.service';
+import {DebugElement} from '@angular/core';
+import {UploadFileComponent} from './uploadFile.component';
+import {SharedLearningsHTTPService} from '../../services/sharedLearningsHTTP.service';
+import {DSMService} from '../../../services/dsm.service';
+import {of} from 'rxjs';
+import {SessionService} from '../../../services/session.service';
+import {SomaticResultSignedUrlResponse} from '../../interfaces/somaticResultSignedUrlRequest';
+import {expect} from '@angular/flex-layout/_private-utils/testing';
+import {MatDialogModule} from '@angular/material/dialog';
+import {By} from '@angular/platform-browser';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 
 const singleTestDocument: any = {
-  "somaticDocumentId": 429,
-  "deletedByUserId": 0,
-  "deletedAt": 0,
-  "isVirusFree": true,
-  "sentAt": 0
-}
+  somaticDocumentId: 429,
+  deletedByUserId: 0,
+  deletedAt: 0,
+  isVirusFree: true,
+  sentAt: 0
+};
 
 describe('UploadFileComponent', () => {
   let fixture: ComponentFixture<UploadFileComponent>;
@@ -54,20 +54,20 @@ describe('UploadFileComponent', () => {
       declarations: [UploadFileComponent],
       imports: [MatDialogModule, MatTooltipModule, BrowserAnimationsModule],
       providers: [{
-        provide: SharedLearningsHTTPService!,
+        provide: SharedLearningsHTTPService,
         useValue: httpService
       }, {
         provide: RoleService,
         useValue: roleService
       }]
-    }).compileComponents()
-  }))
+    }).compileComponents();
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(UploadFileComponent);
     component = fixture.componentInstance;
     componentHTML = fixture.debugElement;
-  })
+  });
 
   it('should create component',  () => {
     expect(component).toBeTruthy('Component has not been instantiated');
@@ -89,7 +89,7 @@ describe('UploadFileComponent', () => {
     component.onFileSelection(fileEvent);
     fixture.detectChanges();
     const HTMLInputElement = document.createElement('input');
-    HTMLInputElement.type = "file";
+    HTMLInputElement.type = 'file';
     Object.defineProperty(component.inputElement, 'nativeElement', {value: HTMLInputElement});
     component.inputElement.nativeElement.files = (fileEvent.target as HTMLInputElement).files;
     const uploadButton = componentHTML.query(By.css('button.upload-uploadBtn'));
@@ -107,13 +107,13 @@ describe('UploadFileComponent', () => {
     inputElement.files = createFilePDFAndGetFileList();
     Object.defineProperty(event, 'target', {value: inputElement});
     return event;
-  }
+  };
 
   const createFilePDFAndGetFileList = (): FileList => {
     const file = new File(['PDF content'], testFileName, { type: 'application/pdf' });
     const dataTransfer = new DataTransfer();
     dataTransfer.items.add(file);
     return dataTransfer.files;
-  }
+  };
 
-})
+});

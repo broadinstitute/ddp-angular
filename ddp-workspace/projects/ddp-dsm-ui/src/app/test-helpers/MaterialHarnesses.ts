@@ -1,7 +1,7 @@
 import {ComponentHarness, HarnessLoader, HarnessQuery} from '@angular/cdk/testing';
 import {MatFormFieldHarness} from '@angular/material/form-field/testing';
 import {MatDateRangeInputHarness} from '@angular/material/datepicker/testing';
-import {MatTableHarness} from "@angular/material/table/testing";
+import {MatTableHarness} from '@angular/material/table/testing';
 
 /**
  * @CLASS Used for testing common Angular Material Components

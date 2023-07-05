@@ -17,7 +17,7 @@ import {HttpErrorResponse} from '@angular/common/http';
 import {SharedLearningsStateService} from './services/sharedLearningsState.service';
 import {MatDialog} from '@angular/material/dialog';
 import {RoleService} from '../services/role.service';
-import {ConfirmationModalComponent} from "./components/confirmationModal/confirmationModal.component";
+import {ConfirmationModalComponent} from './components/confirmationModal/confirmationModal.component';
 
 @Component({
   selector: 'app-shared-learnings-upload',
