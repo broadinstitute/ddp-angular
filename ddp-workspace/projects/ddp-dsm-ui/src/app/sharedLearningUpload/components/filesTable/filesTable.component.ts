@@ -1,13 +1,11 @@
 import {
   ChangeDetectionStrategy,
-  ChangeDetectorRef,
   Component,
   EventEmitter,
   Input, Output, Renderer2
 } from '@angular/core';
 import {SomaticResultsFileWithStatus} from '../../interfaces/somaticResultsFile';
 import {HttpRequestStatusEnum} from '../../enums/httpRequestStatus-enum';
-import {SharedLearningsHTTPService} from '../../services/sharedLearningsHTTP.service';
 import {MatIcon} from '@angular/material/icon';
 import {SomaticResultsFileVirusStatusEnum} from '../../enums/somaticResultsFileVirusStatus-enum';
 import {RoleService} from '../../../services/role.service';
@@ -30,8 +28,6 @@ export class FilesTableComponent {
   @Output() delete = new EventEmitter<SomaticResultsFileWithStatus>();
 
   constructor(
-    private readonly cdr: ChangeDetectorRef,
-    private readonly sharedLearningsHTTPService: SharedLearningsHTTPService,
     private readonly renderer: Renderer2,
     private readonly roleService: RoleService
   ) {}

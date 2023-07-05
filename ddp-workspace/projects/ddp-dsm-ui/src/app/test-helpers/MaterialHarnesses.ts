@@ -1,6 +1,7 @@
 import {ComponentHarness, HarnessLoader, HarnessQuery} from '@angular/cdk/testing';
 import {MatFormFieldHarness} from '@angular/material/form-field/testing';
 import {MatDateRangeInputHarness} from '@angular/material/datepicker/testing';
+import {MatTableHarness} from "@angular/material/table/testing";
 
 /**
  * @CLASS Used for testing common Angular Material Components
@@ -29,4 +30,10 @@ export class MaterialHarnesses {
    */
   public readonly getMatDateRangeInputHarness = async (): Promise<MatDateRangeInputHarness> =>
     await this.getMatHarness<MatDateRangeInputHarness>(MatDateRangeInputHarness);
+
+  /**
+   * @return matTable component
+   */
+  public readonly getMatTableHarness = async (): Promise<MatTableHarness> =>
+    await this.getMatHarness<MatTableHarness>(MatTableHarness);
 }

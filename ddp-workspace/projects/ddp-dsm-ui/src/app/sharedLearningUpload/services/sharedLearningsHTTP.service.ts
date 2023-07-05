@@ -37,14 +37,14 @@ export class SharedLearningsHTTPService {
     return this.dsmService.uploadSomaticResultsFile(signedUrl, file);
   }
 
-  public sendToParticipant(participantId: string, somaticDocumentId: number): Observable<any> {
+  public sendToParticipant(participantId: string, somaticDocumentId: number): Observable<object> {
     return this.dsmService.sendSomaticResultsToParticipant(this.selectedRealm, {
       participantId,
       somaticDocumentId
     });
   }
 
-  public delete(somaticDocumentId: number): Observable<any> {
+  public delete(somaticDocumentId: number): Observable<SomaticResultsFile> {
     return this.dsmService.deleteSomaticResultsFile(this.selectedRealm, somaticDocumentId);
   }
 

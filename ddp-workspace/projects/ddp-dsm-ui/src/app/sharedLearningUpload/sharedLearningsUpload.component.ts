@@ -4,6 +4,7 @@ import {
 } from '@angular/core';
 import {SomaticResultsFile, SomaticResultsFileWithStatus} from './interfaces/somaticResultsFile';
 import {
+  mergeMap,
   Observable,
   Subject, switchMap,
   takeUntil,
@@ -11,11 +12,12 @@ import {
   throwError
 } from 'rxjs';
 import {SharedLearningsHTTPService} from './services/sharedLearningsHTTP.service';
-import {catchError, finalize, first} from 'rxjs/operators';
+import {catchError, finalize, first, take} from 'rxjs/operators';
 import {HttpErrorResponse} from '@angular/common/http';
 import {SharedLearningsStateService} from './services/sharedLearningsState.service';
 import {MatDialog} from '@angular/material/dialog';
 import {RoleService} from '../services/role.service';
+import {ConfirmationModalComponent} from "./components/confirmationModal/confirmationModal.component";
 
 @Component({
   selector: 'app-shared-learnings-upload',
@@ -25,12 +27,10 @@ import {RoleService} from '../services/role.service';
   providers: [SharedLearningsHTTPService, SharedLearningsStateService]
 })
 export class SharedLearningsUploadComponent implements OnInit, OnDestroy {
-  public somaticResultsFilesWithStatus$: Observable<SomaticResultsFileWithStatus[]> =
-    this.stateService.somaticResultsFiles$;
+  public somaticResultsFilesWithStatus$: Observable<SomaticResultsFileWithStatus[]>;
 
   public isLoading = false;
   public isUnauthorized = false;
-  public errorLoadingData: string | null;
 
   private takeUntilSubject$ = new Subject<void>();
 
@@ -45,6 +45,7 @@ export class SharedLearningsUploadComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    this.somaticResultsFilesWithStatus$ = this.stateService.somaticResultsFiles$;
     this.loadData().subscribe();
   }
 
@@ -80,9 +81,16 @@ export class SharedLearningsUploadComponent implements OnInit, OnDestroy {
   }
 
   public onDeleteFile({somaticDocumentId, fileName}: SomaticResultsFileWithStatus): void {
-    this.stateService.deleteFile(somaticDocumentId, fileName)
-      .pipe(takeUntil(this.takeUntilSubject$))
-      .subscribe();
+    const activeConfirmationDialog = this.matDialog
+      .open(ConfirmationModalComponent, {data: {fileName}, width: '500px'});
+
+     activeConfirmationDialog.afterClosed()
+      .pipe(
+        mergeMap((deleteOrNot: boolean) =>
+          deleteOrNot && this.stateService.deleteFile(somaticDocumentId)),
+        take(1),
+        takeUntil(this.takeUntilSubject$)
+      ).subscribe();
   }
 
   /* Template functions*/
@@ -93,7 +101,6 @@ export class SharedLearningsUploadComponent implements OnInit, OnDestroy {
   /** Handlers */
   private handleError(error: any): Observable<any> {
     if (error instanceof HttpErrorResponse) {
-      this.errorLoadingData = error.error;
       this.isUnauthorized = error.status === 403;
     }
     return throwError(() => error);

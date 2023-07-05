@@ -18,11 +18,9 @@ import {
 } from '../interfaces/somaticResultsFile';
 import {SharedLearningsHTTPService} from './sharedLearningsHTTP.service';
 import {HttpRequestStatusEnum} from '../enums/httpRequestStatus-enum';
-import {catchError, finalize, map, take} from 'rxjs/operators';
+import {catchError, finalize, map} from 'rxjs/operators';
 import {HttpErrorResponse} from '@angular/common/http';
-import {ConfirmationModalComponent} from '../components/confirmationModal/confirmationModal.component';
 import {SomaticResultsFileVirusStatusEnum} from '../enums/somaticResultsFileVirusStatus-enum';
-import {MatDialog} from '@angular/material/dialog';
 
 @Injectable()
 export class SharedLearningsStateService {
@@ -32,9 +30,7 @@ export class SharedLearningsStateService {
 
   public readonly somaticResultsFiles$ = this.somaticResultsFilesSubject$.asObservable();
 
-  constructor(private readonly httpService: SharedLearningsHTTPService,
-              private readonly sharedLearningsHTTPService: SharedLearningsHTTPService,
-              private readonly matDialog: MatDialog) {}
+  constructor(private readonly sharedLearningsHTTPService: SharedLearningsHTTPService) {}
 
   /* Unsubscription */
   public unsubscribe(): void {
@@ -42,11 +38,24 @@ export class SharedLearningsStateService {
     this.takeUntilSubject$.complete();
   }
 
-  public getSomaticResultsFiles(participantID: string): Observable<SomaticResultsFile[]> {
-    return this.httpService.getFiles(participantID);
+  /* Event Listeners */
+  public getAndScanFiles(participantID: string): Observable<any> {
+    this.isScanningForViruses = true;
+    return this.getFiles(participantID)
+      .pipe(
+        tap((somaticResultsFilesWithStatus: SomaticResultsFileWithStatus[]) =>
+          this.updateState(somaticResultsFilesWithStatus)),
+        repeatWhen((notifications: Observable<void>) =>
+          notifications.pipe(
+            takeWhile(() =>
+              this.latestValue
+                .some(file => file.virusStatus === SomaticResultsFileVirusStatusEnum.SCANNING)),
+            delay(3000)
+          )),
+        finalize(() => this.isScanningForViruses = false)
+      );
   }
 
-  /* Event Listeners */
   public addFile(somaticResultsFiles: SomaticResultsFile, participantID: string): void {
     this.handleUploadedFile(somaticResultsFiles);
     if(!this.isScanningForViruses) {
@@ -85,36 +94,14 @@ export class SharedLearningsStateService {
       );
   }
 
-  public deleteFile(somaticDocumentId: number, fileName: string): Observable<any> {
-    const activeConfirmationDialog = this.matDialog
-      .open(ConfirmationModalComponent, {data: {fileName}, width: '500px'});
-
-    return activeConfirmationDialog.afterClosed()
-      .pipe(
-        mergeMap((deleteOrNot: boolean) => deleteOrNot && this.handleFileDeletion(somaticDocumentId)),
-        take(1)
-      );
+  public deleteFile(somaticDocumentId: number): Observable<any> {
+    return this.handleFileDeletion(somaticDocumentId);
   }
 
-  public getAndScanFiles(participantID: string): Observable<any> {
-    this.isScanningForViruses = true;
-    return this.getFiles(participantID)
-      .pipe(
-        tap((somaticResultsFilesWithStatus: SomaticResultsFileWithStatus[]) =>
-          this.updateState(somaticResultsFilesWithStatus)),
-        repeatWhen((notifications: Observable<void>) =>
-          notifications.pipe(
-            takeWhile(() =>
-              this.latestValue
-                .some(file => file.virusStatus === SomaticResultsFileVirusStatusEnum.SCANNING)),
-            delay(3000)
-          )),
-        finalize(() => this.isScanningForViruses = false)
-      );
-  }
+  /* Fetching and mapping statuses to documents */
 
   private getFiles(participantID: string): Observable<SomaticResultsFileWithStatus[]> {
-    return this.getSomaticResultsFiles(participantID)
+    return this.sharedLearningsHTTPService.getFiles(participantID)
       .pipe(
         map((somaticResultsFiles: SomaticResultsFile[]) => this.filterDeletedFiles(somaticResultsFiles)),
         map((somaticResultsFiles: SomaticResultsFile[]) =>
