@@ -16,7 +16,7 @@ import {SharedLearningsStateService} from './services/sharedLearningsState.servi
 import {MatDialog} from '@angular/material/dialog';
 import {RoleService} from '../services/role.service';
 import {ConfirmationModalComponent} from './components/confirmationModal/confirmationModal.component';
-import {HttpErrorResponse} from "@angular/common/http";
+import {HttpErrorResponse} from '@angular/common/http';
 
 @Component({
   selector: 'app-shared-learnings-upload',
@@ -103,7 +103,7 @@ export class SharedLearningsUploadComponent implements OnInit, OnDestroy {
   /** Handlers */
   private handleError(error: any): Observable<any> {
     if (error instanceof HttpErrorResponse) {
-      this.displayedError = error.error
+      this.displayedError = error.error;
     }
     return throwError(() => error);
   }
