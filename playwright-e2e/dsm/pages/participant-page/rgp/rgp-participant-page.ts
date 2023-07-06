@@ -56,7 +56,7 @@ export default class RgpParticipantPage extends ParticipantPage {
             firstName: string,
             lastName: string,
             relationshipId: number,
-            relation?: string,
+            relation: string,
             copyProbandInfo?: boolean }): Promise<string> {
                 const { firstName, lastName, relationshipId, relation, copyProbandInfo = true } = opts;
 
@@ -64,7 +64,7 @@ export default class RgpParticipantPage extends ParticipantPage {
                 await this.firstName.fill(firstName);
                 await this.lastName.fill(lastName);
                 await this.subjectId.fill(relationshipId.toString());
-                relation ? await this.relation.selectOption(relation) : await this.relation.selectOption(relation);
+                await this.relation.selectOption(relation);
                 copyProbandInfo && await this.copyProbandInfo.click();
 
                 const selectedRelation = await this.relation.toLocator().locator('.mat-select-value-text').innerText();
