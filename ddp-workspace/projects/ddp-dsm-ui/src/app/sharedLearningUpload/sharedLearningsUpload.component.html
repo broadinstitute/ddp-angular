@@ -2,7 +2,6 @@
   <section class="fileUpload">
     <app-upload-files
       [participantId]="participantId"
-      [unauthorized]="isUnauthorized"
       (fileUploaded)="onFileUpload($event)"></app-upload-files>
   </section>
 
@@ -11,6 +10,16 @@
       <p>Upload Shared Learnings Letter here. Click Send to Participant to deliver the file to the participant’s Dashboard</p>
     </section>
   </ng-container>
+
+  <ng-container *ngIf="displayedError">
+    <section  class="error-note">
+      <main>
+        <p>We couldn't load the data</p>
+        <p>The error message: {{displayedError}}</p>
+      </main>
+    </section>
+  </ng-container>
+
 
   <section class="files">
     <ng-container *ngIf="!isLoading; else spinner" >

@@ -8,16 +8,15 @@ import {
   Observable,
   Subject, switchMap,
   takeUntil,
-  tap,
-  throwError
+  tap, throwError,
 } from 'rxjs';
 import {SharedLearningsHTTPService} from './services/sharedLearningsHTTP.service';
 import {catchError, finalize, first, take} from 'rxjs/operators';
-import {HttpErrorResponse} from '@angular/common/http';
 import {SharedLearningsStateService} from './services/sharedLearningsState.service';
 import {MatDialog} from '@angular/material/dialog';
 import {RoleService} from '../services/role.service';
 import {ConfirmationModalComponent} from './components/confirmationModal/confirmationModal.component';
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-shared-learnings-upload',
@@ -30,7 +29,7 @@ export class SharedLearningsUploadComponent implements OnInit, OnDestroy {
   public somaticResultsFilesWithStatus$: Observable<SomaticResultsFileWithStatus[]>;
 
   public isLoading = false;
-  public isUnauthorized = false;
+  public displayedError: string | null = null;
 
   private takeUntilSubject$ = new Subject<void>();
 
@@ -61,7 +60,10 @@ export class SharedLearningsUploadComponent implements OnInit, OnDestroy {
     return this.tabActivated$.pipe(
       first(),
       switchMap(() => this.stateService.getAndScanFiles(this.participantId)
-        .pipe(finalize(() => this.isLoading = false))
+        .pipe(
+          tap(() => this.displayedError = null),
+          finalize(() => this.isLoading = false)
+        )
       ),
       tap(() => this.isLoading = false),
       takeUntil(this.takeUntilSubject$),
@@ -84,7 +86,7 @@ export class SharedLearningsUploadComponent implements OnInit, OnDestroy {
     const activeConfirmationDialog = this.matDialog
       .open(ConfirmationModalComponent, {data: {fileName}, width: '500px'});
 
-     activeConfirmationDialog.afterClosed()
+    activeConfirmationDialog.afterClosed()
       .pipe(
         mergeMap((deleteOrNot: boolean) =>
           deleteOrNot && this.stateService.deleteFile(somaticDocumentId)),
@@ -101,7 +103,7 @@ export class SharedLearningsUploadComponent implements OnInit, OnDestroy {
   /** Handlers */
   private handleError(error: any): Observable<any> {
     if (error instanceof HttpErrorResponse) {
-      this.isUnauthorized = error.status === 403;
+      this.displayedError = error.error
     }
     return throwError(() => error);
   }

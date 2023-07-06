@@ -94,7 +94,7 @@ describe('FilesTableComponent', () => {
     fixture.detectChanges();
     const noFilesNote = componentHTML.query(By.css('.noFilesNote p'));
     expect(noFilesNote.nativeElement.textContent)
-      .toEqual('No files found', 'No files found note is not displayed');
+      .toEqual('No files were found', 'No files found note is not displayed');
   });
 
   /* Text data */

@@ -12,7 +12,8 @@ import {
   throwError
 } from 'rxjs';
 import {
-  SomaticResultsFile, SomaticResultsFileDeleteStatus,
+  SomaticResultsFile,
+  SomaticResultsFileDeleteStatus,
   SomaticResultsFileSendToParticipantStatus,
   SomaticResultsFileWithStatus
 } from '../interfaces/somaticResultsFile';
@@ -39,7 +40,7 @@ export class SharedLearningsStateService {
   }
 
   /* Event Listeners */
-  public getAndScanFiles(participantID: string): Observable<any> {
+  public getAndScanFiles(participantID: string): Observable<SomaticResultsFileWithStatus[]> {
     this.isScanningForViruses = true;
     return this.getFiles(participantID)
       .pipe(
@@ -56,11 +57,17 @@ export class SharedLearningsStateService {
       );
   }
 
-  public addFile(somaticResultsFiles: SomaticResultsFile, participantID: string): void {
-    this.handleUploadedFile(somaticResultsFiles);
+  public addFile(somaticResultsFile: SomaticResultsFile, participantID: string): void {
+    this.handleUploadedFile(somaticResultsFile);
     if(!this.isScanningForViruses) {
       this.getAndScanFiles(participantID)
-        .pipe(takeUntil(this.takeUntilSubject$))
+        .pipe(
+          catchError((error) => {
+            this.handleVirusStatusManualUpdate(somaticResultsFile.somaticDocumentId);
+            return throwError(() => error);
+          }),
+          takeUntil(this.takeUntilSubject$)
+        )
         .subscribe();
     }
   }
@@ -160,6 +167,11 @@ export class SharedLearningsStateService {
       // file has been cleaned and it's deleted
       return SomaticResultsFileVirusStatusEnum.CLEAN;
     }
+  }
+
+  private handleVirusStatusManualUpdate(somaticDocumentId: number): void {
+    const updatedState = this.updateVirusStatus(somaticDocumentId, SomaticResultsFileVirusStatusEnum.UNABLE_TO_SCAN);
+    this.updateState(updatedState);
   }
 
   private handleFileDeletion(somaticDocumentId: number): Observable<any> {
