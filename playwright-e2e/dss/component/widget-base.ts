@@ -16,8 +16,20 @@ export default abstract class WidgetBase implements WidgetInterface {
     }
   }
 
+  toRootLocator(): Locator {
+    return this.root;
+  }
+
   toLocator(): Locator {
     return this.element?.nth(this.nth) as Locator;
+  }
+
+  /**
+   * When locator points to a list of elements, returns array of locators, pointing to respective elements.
+   * @returns {Promise<Array<Locator> | undefined>}
+   */
+  async toLocators(): Promise<Array<Locator>> {
+    return this.element!.all();
   }
 
   toQuestion(): Locator {
@@ -36,6 +48,10 @@ export default abstract class WidgetBase implements WidgetInterface {
 
   async isDisabled(): Promise<boolean> {
     return (await this.toLocator().getAttribute('disabled')) !== null;
+  }
+
+  async isVisible(): Promise<boolean> {
+    return this.toLocator().isVisible();
   }
 
   async getAttribute(attributeName: string): Promise<string | null> {

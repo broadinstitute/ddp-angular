@@ -155,7 +155,7 @@ test.describe.serial('LMS Adult Enrollment', () => {
       await expect(paragraphELocator).toHaveScreenshot(`research-consent-additional-consent-page-E-paragraph.png`);
 
       const additionalConsentPage = new LmsAdditionalConsentPage(page);
-      await additionalConsentPage.agreeToShareWithMeResults().check('Yes');
+      await additionalConsentPage.agreeToShareWithMeResults('Yes');
       const requestPromise = waitForResponse(page, { uri: '/answers'});
       await Promise.all([additionalConsentPage.signature().fill(fullName), requestPromise]);
       await additionalConsentPage.submit();
@@ -172,7 +172,7 @@ test.describe.serial('LMS Adult Enrollment', () => {
       await expect(page.locator('.ddp-activity-question.Question--AGREEMENT')).toHaveScreenshot(`medical-release-agreement.png`);
 
       await medicalReleasePage.fillInPhysicianInstitution();
-      await medicalReleasePage.agreeToAllowUsToContactPhysicians();
+      await medicalReleasePage.agreeToAllowUsToContactPhysicianToObtainRecords();
       await medicalReleasePage.fillInFullName(fullName);
       await medicalReleasePage.submit();
     })
