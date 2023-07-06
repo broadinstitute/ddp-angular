@@ -189,8 +189,13 @@ export class SharedLearningsStateService {
   }
 
   private handleUploadedFile(somaticResultsFile: SomaticResultsFile): void {
-    const updatedState = [...this.latestValue, this.mapStatusesToFile(somaticResultsFile)];
-    this.updateState(updatedState);
+    const duplicatedFileIndex = this.latestValue
+      .findIndex(({somaticDocumentId}) => somaticDocumentId === somaticResultsFile.somaticDocumentId);
+
+    if (duplicatedFileIndex === -1) {
+      const updatedState = [...this.latestValue, this.mapStatusesToFile(somaticResultsFile)];
+      this.updateState(updatedState);
+    }
   }
 
   private handleSendToSuccess(somaticDocumentId: number): void {
