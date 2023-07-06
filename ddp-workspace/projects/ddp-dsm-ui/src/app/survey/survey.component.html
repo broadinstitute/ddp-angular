@@ -35,7 +35,7 @@
 
     <br/>
 
-    <div *ngIf="survey != null" class="Width--100">
+    <div *ngIf="survey != null && !hideSurveyInputs" class="Width--100">
       <div>
         <table class="Width--100">
           <tr>
@@ -62,7 +62,7 @@
               [disabled]="disableButton()">Create Survey</button>
     </div>
 
-    <div class="Float--left Width--80">
+    <div class="Float--left Width--80" *ngIf="!hideSurveyInputs">
       <b>
         <br/>
         <br/>

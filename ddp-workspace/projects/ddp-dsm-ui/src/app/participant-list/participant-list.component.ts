@@ -936,7 +936,6 @@ export class ParticipantListComponent implements OnInit {
               this.selectedColumns[ key ] = [];
             });
             this.refillWithDefaultColumns();
-            this.sendAnalyticsMetric();
           },
           error: err => {
             if (err._body === Auth.AUTHENTICATION_ERROR) {
@@ -1090,7 +1089,6 @@ export class ParticipantListComponent implements OnInit {
             this.loadedTimeStamp = Utils.getDateFormatted(date, Utils.DATE_STRING_IN_EVENT_CVS);
           }
           this.loadingParticipants = null;
-          this.sendAnalyticsMetric();
         },
         error: err => {
           if (err._body === Auth.AUTHENTICATION_ERROR) {
@@ -2477,11 +2475,6 @@ export class ParticipantListComponent implements OnInit {
       this.allFieldNames.add(tmp + '.' + filter.participantColumn.name);
      });
      this.orderColumns();
-  }
-
-  private sendAnalyticsMetric(): void {
-    const passed = new Date().getTime() - this.start;
-    this.dsmService.sendAnalyticsMetric(this.getRealm(), passed).subscribe({});
   }
 
 

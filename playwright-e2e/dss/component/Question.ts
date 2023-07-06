@@ -49,8 +49,9 @@ export default class Question {
   /**
    * <br> Tag name: input (text or number)
    */
-  toInput(label?: string | RegExp): Input {
-    return new Input(this.page, { label, root: this.toLocator() });
+  toInput(opts: { label?: string | RegExp, nth?: number } = {}): Input {
+    const { label, nth = 0 } = opts;
+    return new Input(this.page, { label, root: this.toLocator(), nth });
   }
 
   toTextarea(): TextArea {
@@ -84,9 +85,11 @@ export default class Question {
   /**
    * Typing text. If text triggers an autocomplete dropdown, automatically selects the first option.
    * @param value
+   * @param opts
    */
-  async fill(value: string): Promise<void> {
-    await this.toInput().fill(value);
+  async fill(value: string, opts: { label?: string | RegExp, nth?: number } = {}): Promise<void> {
+    await this.toLocator().scrollIntoViewIfNeeded();
+    await this.toInput(opts).fill(value);
   }
 
   /**

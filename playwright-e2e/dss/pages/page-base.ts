@@ -6,7 +6,7 @@ import Checkbox from 'dss/component/checkbox';
 import Input from 'dss/component/input';
 import { assertSelectedOption } from 'utils/assertion-helper';
 import { generateRandomPhoneNum } from 'utils/faker-utils';
-import { waitForNoSpinner } from 'utils/test-utils';
+import { waitForNoSpinner, waitForResponse } from 'utils/test-utils';
 import { PageInterface } from 'dss/pages/page-interface';
 import * as user from 'data/fake-user.json';
 
@@ -133,6 +133,8 @@ export default abstract class PageBase implements PageInterface {
     if (!forceClick && waitForNav) {
       await expect(this.page.locator('.error-message')).toBeHidden();
     }
+
+    await expect(locator).toBeVisible();
     if (waitForNav) {
       await Promise.all([
         locator.click(),
@@ -144,12 +146,14 @@ export default abstract class PageBase implements PageInterface {
   }
 
   /**
-   * <br> Question: By completing this information, you are agreeing to allow us to contact these physician(s) and hospital(s) / institution(s) to obtain your records.
+   * <br> Question: By completing this information, you are agreeing to allow us to contact these physician(s) and hospital(s) / institution(s) to obtain your (child's) records.
    *
    * @returns {Checkbox}
    */
-  async agreeToAllowUsToContactPhysicians(): Promise<void> {
-    await new Checkbox(this.page, { label: 'I have already read and signed the informed consent document' }).check();
+  async agreeToAllowUsToContactPhysicianToObtainRecords(answer = true): Promise<void> {
+    const question = new Question(this.page, { cssClassAttribute: '.Question--AGREEMENT' });
+    answer && await question.check();
+    // await new Checkbox(this.page, { label: 'I have already read and signed the informed consent document' }).check();
   }
 
   async finish(): Promise<void> {
@@ -171,6 +175,7 @@ export default abstract class PageBase implements PageInterface {
   /** Click "Submit" button */
   async submit(opts: { waitForNav?: boolean } = {}): Promise<void> {
     const { waitForNav = true } = opts;
+    await this.page.waitForTimeout(500);
     await this.clickAndWaitForNav(this.getSubmitButton(), { waitForNav });
   }
 
@@ -328,7 +333,7 @@ export default abstract class PageBase implements PageInterface {
   }
 
   async fillInFullName(fullName: string, opts?: { testId: string }): Promise<void> {
-    const waitForResponsePromise = this.page.waitForResponse(response => response.status() === 200);
+    const waitForResponsePromise = waitForResponse(this.page, { uri: '/answers'});
     await Promise.all([
       opts ? this.page.getByTestId(opts.testId).fill(fullName) : this.page.getByRole('combobox', { name: 'Full Name' }).fill(fullName),
       waitForResponsePromise
@@ -409,5 +414,11 @@ export default abstract class PageBase implements PageInterface {
     return opts
       ? new Input(this.page, { ddpTestID: opts.testId })
       : new Question(this.page, { prompt: 'Signature' }).toInput();
+  }
+
+  async getDate(): Promise<Date> {
+    const locator = this.page.locator('//*[./h3[text()="Date"]]/following-sibling::*/p');
+    const str = (await locator.innerText()).trim().replace(' ', '');
+    return new Date(str);
   }
 }

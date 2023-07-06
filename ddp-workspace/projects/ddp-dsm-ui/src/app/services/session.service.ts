@@ -4,6 +4,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 @Injectable({providedIn: 'root'})
 export class SessionService {
   static DSM_TOKEN_NAME = 'dsm_token';
+  private readonly SELECTED_REALM = 'selectedRealm';
 
   private jwtHelper = new JwtHelperService();
   private isLoggedIn = false;
@@ -33,6 +34,10 @@ export class SessionService {
 
   public isAuthenticated(): boolean {
     return this.isLoggedIn;
+  }
+
+  public get selectedRealm(): string {
+    return sessionStorage.getItem(this.SELECTED_REALM);
   }
 
   public logout(): void {

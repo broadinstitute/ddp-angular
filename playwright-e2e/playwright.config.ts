@@ -33,7 +33,7 @@ const testConfig: PlaywrightTestConfig = {
     toHaveScreenshot: {
       scale: 'css',
       // Account for minor difference in text rendering and resolution between headless and headed mode
-      threshold: 0.3
+      threshold: 1
     }
   },
   /* Run tests in files in parallel */

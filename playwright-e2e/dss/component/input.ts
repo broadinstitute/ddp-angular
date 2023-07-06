@@ -7,25 +7,26 @@ export default class Input extends WidgetBase {
    * @param {{label?: string, ddpTestID?: string, root?: Locator | string, exactMatch?: boolean}} opts
    */
   constructor(page: Page, opts: { label?: string | RegExp; ddpTestID?: string; root?: Locator | string; exactMatch?: boolean; nth?: number } = {}) {
-    const { label, ddpTestID, root, exactMatch = false, nth } = opts;
+    const { label, ddpTestID, root = 'mat-form-field', exactMatch = false, nth } = opts;
     super(page, { root, testId: ddpTestID, nth });
 
     if (!ddpTestID) {
-      this.root = this.root.locator('mat-form-field');
+      const partialXpath = 'input[contains(@class, "mat-input-element")]';
       if (label) {
         if (typeof label === 'string') {
           this.element = exactMatch
+            /* eslint-disable max-len */
             ? this.root.locator(
-              `xpath=.//input[@id=(//label[.//text()[normalize-space()="${label}"]]/@for)] | .//input[@data-placeholder="${label}"]`
+              `xpath=.//${partialXpath}[@id=(//label[.//text()[normalize-space()="${label}"]]/@for)] | .//${partialXpath}[@data-placeholder="${label}"]`
             )
             : this.root.locator(
-              `xpath=.//input[@id=(//label[contains(normalize-space(.),"${label}")]/@for)] | .//input[contains(@data-placeholder,"${label}")]`
+              `xpath=.//${partialXpath}[@id=(//label[contains(normalize-space(.),"${label}")]/@for)] | .//${partialXpath}[contains(@data-placeholder,"${label}")]`
             );
         } else {
-          this.element = this.root.filter({ has: this.page.locator(`text=${label}`) }).locator('input');
+          this.element = this.root.filter({ has: this.page.locator(`text=${label}`) }).locator(`xpath=.//${partialXpath}`);
         }
       } else {
-        this.element = this.root.locator('input');
+        this.element = this.root.locator(`xpath=.//${partialXpath}`);
       }
     }
   }

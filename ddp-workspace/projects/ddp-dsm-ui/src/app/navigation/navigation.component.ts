@@ -8,6 +8,7 @@ import {DomSanitizer, Title} from '@angular/platform-browser';
 import {Location} from '@angular/common';
 import {Observable} from 'rxjs';
 import {LocalStorageService} from '../services/local-storage.service';
+import {studyNameEnum} from '../enums/studyNameEnum';
 
 @Component({
   selector: 'app-navigation',
@@ -17,6 +18,8 @@ import {LocalStorageService} from '../services/local-storage.service';
 export class NavigationComponent implements OnInit {
 
   selectedStudy: Observable<string>;
+  readonly oncHistoryUploadPageAllowedStudies: string[] =
+    [studyNameEnum.OC_PE_CGS, studyNameEnum.LMS];
 
 
   constructor(private router: Router, private auth: Auth, private location: Location, sanitizer: DomSanitizer,
@@ -43,6 +46,10 @@ export class NavigationComponent implements OnInit {
         }
       });
 
+  }
+
+  public showOncHistoryUploadPage(selectedStudy: string | null): boolean {
+    return selectedStudy && this.oncHistoryUploadPageAllowedStudies.includes(selectedStudy);
   }
 
   selectRealm(realmName, realmValue): void {

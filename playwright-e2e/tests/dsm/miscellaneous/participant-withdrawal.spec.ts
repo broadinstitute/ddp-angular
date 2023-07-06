@@ -1,4 +1,5 @@
 import { expect } from '@playwright/test';
+import { AdditionalFilter } from 'dsm/component/filters/sections/search/search-enums';
 import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import { StudyNavEnum } from 'dsm/component/navigation/enums/studyNav-enum';
 import { Navigation } from 'dsm/component/navigation/navigation';
@@ -9,6 +10,7 @@ import { SortOrder } from 'dss/component/table';
 import { test } from 'fixtures/dsm-fixture';
 import { assertTableHeaders } from 'utils/assertion-helper';
 import { logParticipantWithdrew } from 'utils/log-utils';
+import * as user from 'data/fake-user.json';
 
 test.describe('Participants Withdrawal', () => {
   const studies = [StudyEnum.LMS];
@@ -29,6 +31,8 @@ test.describe('Participants Withdrawal', () => {
         // Search for Status NOT EQUALS TO Exited before/after Enrollment
         const searchPanel = participantListPage.filters.searchPanel;
         await searchPanel.open();
+        // eslint-disable-next-line max-len
+        await searchPanel.text('First Name', { textValue: user.adult.firstName, additionalFilters: [AdditionalFilter.EXACT_MATCH], exactMatch: false });
         await searchPanel.checkboxes('Status', { checkboxValues: ['Enrolled', 'Lost to Followup', 'Registered'] });
         await searchPanel.search();
 

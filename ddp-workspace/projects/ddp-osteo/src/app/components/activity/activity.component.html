@@ -64,7 +64,8 @@
                     [activityGuid]="activityGuid"
                     [activityCode]="model.activityCode"
                     [activityStatusCode]="model.statusCode"
-                    [studyContactInformation]="studyContactInformation"
+                    [studyEmail]="studyEmail"
+                    [studyPhone]="studyPhone"
                     (embeddedComponentsValidationStatus)="updateEmbeddedComponentValidationStatus(1, $event)"
                     (componentBusy)="embeddedComponentBusy$[1].next($event)">
                 </ddp-activity-section>

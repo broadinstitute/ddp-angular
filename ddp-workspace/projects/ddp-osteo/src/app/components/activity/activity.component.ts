@@ -15,7 +15,6 @@ import {
     AnalyticsEventsService,
     LoggingService,
     ParticipantsSearchServiceAgent,
-    StudyContactInformation,
     SubmitAnnouncementService,
     WindowRef
 } from 'ddp-sdk';
@@ -87,11 +86,12 @@ export class ActivityComponent extends ActivityRedesignedComponent implements On
     this.activityInstanceDeletedSubscription.unsubscribe();
   }
 
-    public get studyContactInformation(): StudyContactInformation {
-        return {
-            email: this.toolkitConfig.infoEmail,
-            phoneNumber: this.toolkitConfig.phone
-        };
+    public get studyEmail(): string {
+        return this.toolkitConfig.infoEmail;
+    }
+
+    public get studyPhone(): string {
+        return this.toolkitConfig.phone;
     }
 
   public incrementStep(): void {

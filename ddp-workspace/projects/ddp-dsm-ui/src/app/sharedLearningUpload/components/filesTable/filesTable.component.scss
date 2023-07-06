@@ -1,0 +1,123 @@
+@use 'commonStyles' as common;
+
+$error-color: #FF595E;
+$success-color: #8AC926;
+$default-color: #5FA8D3;
+$retry-color: #FFCA3A;
+$bug-color: #ef476f;
+$bug-free-color: #06d6a0;
+
+
+main.filesTable {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+
+  .mat-header-cell, .mat-cell {
+    text-align: center;
+  }
+
+  .mat-column-Name {
+    max-width: 17em;
+    overflow: auto;
+    word-wrap: break-word;
+  }
+
+  table {
+    width: 85%;
+    max-height: 35em;
+    margin: 1em 0;
+    box-shadow: rgba(67, 71, 85, 0.27) 0px 0px 0.25em, rgba(90, 125, 188, 0.05) 0px 0.25em 1em;
+    overflow: auto;
+
+    td {
+
+      .icon-container {
+        @include common.flexContainer(baseline, center);
+        width: 100%;
+
+        mat-icon {
+          font-size: 2.2em;
+          text-align: center;
+
+          &:hover {
+            cursor: pointer;
+          }
+
+          &.send-icon {
+            color: $default-color;
+            &:hover {
+              color: rgba($default-color, 0.68);
+            }
+          }
+
+          &.delete-icon {
+            color: $error-color;
+            &:hover {
+              color: rgba($error-color, 0.68);
+            }
+          }
+
+          &.success-icon {
+            color: $success-color;
+            &:hover {
+              cursor: default;
+            }
+          }
+
+          &.error-icon {
+            color: $error-color;
+          }
+
+          &.retry-icon {
+            color: $retry-color;
+          }
+
+          &.bug-icon {
+            color: $bug-color;
+
+            &:hover {
+              cursor: default;
+              color: rgba($bug-color, 0.68)
+            }
+          }
+
+          &.disabled-icon {
+            color: rgba(174, 172, 172, 0.78);
+            cursor: default;
+          }
+
+          &.bug-free-icon {
+            color: $bug-free-color;
+            &:hover {
+              cursor: default;
+              color: rgba($bug-free-color, 0.68)
+            }
+          }
+        }
+      }
+
+
+    }
+
+    .mat-header-cell {
+      font-weight: bold;
+      font-family: Montserrat-SemiBold, sans-serif;
+      color: black;
+      font-size: .8em;
+    }
+  }
+}
+
+.noFilesNote {
+  @include common.flexContainer(center, center);
+  margin-top: 1em;
+  width: 100%;
+  p {
+    padding: 1em;
+    text-align: center;
+    background-color: rgba(220, 230, 241, 0.7);
+    width: 50%;
+  }
+}
+
