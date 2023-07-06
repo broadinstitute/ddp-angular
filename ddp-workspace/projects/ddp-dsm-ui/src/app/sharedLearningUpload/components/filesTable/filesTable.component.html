@@ -1,5 +1,5 @@
 <main id="filesTable" class="filesTable" *ngIf="somaticResultsFiles.length; else noFiles">
-  <table mat-table [dataSource]="somaticResultsFiles">
+  <table mat-table [dataSource]="somaticResultsFiles" [trackBy]="trackBy">
 
     <ng-container matColumnDef="VirusStatus">
       <th mat-header-cell *matHeaderCellDef> Status </th>

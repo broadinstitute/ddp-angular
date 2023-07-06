@@ -11,7 +11,7 @@ import {
   tap, throwError,
 } from 'rxjs';
 import {SharedLearningsHTTPService} from './services/sharedLearningsHTTP.service';
-import {catchError, finalize, first, take} from 'rxjs/operators';
+import {catchError, filter, finalize, first, take} from 'rxjs/operators';
 import {SharedLearningsStateService} from './services/sharedLearningsState.service';
 import {MatDialog} from '@angular/material/dialog';
 import {RoleService} from '../services/role.service';
@@ -88,8 +88,8 @@ export class SharedLearningsUploadComponent implements OnInit, OnDestroy {
 
     activeConfirmationDialog.afterClosed()
       .pipe(
-        mergeMap((deleteOrNot: boolean) =>
-          deleteOrNot && this.stateService.deleteFile(somaticDocumentId)),
+        filter((answer: boolean) => answer),
+        mergeMap(() => this.stateService.deleteFile(somaticDocumentId)),
         take(1),
         takeUntil(this.takeUntilSubject$)
       ).subscribe();

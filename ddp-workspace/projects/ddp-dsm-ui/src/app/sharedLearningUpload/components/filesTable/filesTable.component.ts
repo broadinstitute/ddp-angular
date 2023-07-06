@@ -46,6 +46,11 @@ export class FilesTableComponent {
   }
 
   /* Template methods */
+  public trackBy(_: number, somaticResultsFile: SomaticResultsFileWithStatus): any {
+    const {deleteStatus, sendToParticipantStatus, sentAt, virusStatus} = somaticResultsFile;
+    return deleteStatus.status ||  sendToParticipantStatus.status || sentAt || virusStatus;
+  }
+
   public retryOrNot(shouldRetry: boolean, matIcon: MatIcon): void {
     const matIconNative = matIcon._elementRef.nativeElement;
     matIconNative.innerText = shouldRetry ? 'replay' : 'error';
