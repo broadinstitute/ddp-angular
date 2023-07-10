@@ -2945,13 +2945,7 @@
                 "glob": "*.*",
                 "input": "projects/ddp-sdk/src/assets/",
                 "output": "assets/shared"
-              },
-                {
-                    "glob": "*.*",
-                    "input": "projects/ddp-dsm-ui/src/app/",
-                    "output": "/",
-                    "ignore": ["test-helpers/**"]
-                }
+              }
             ],
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
