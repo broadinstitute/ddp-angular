@@ -8,8 +8,7 @@ import {MAT_DIALOG_DATA} from '@angular/material/dialog';
     <mat-dialog-content>
         {{ data.message }}
     </mat-dialog-content>
-  `,
-  styles: [``]
+  `
 })
 
 export class LoadingModalComponent {

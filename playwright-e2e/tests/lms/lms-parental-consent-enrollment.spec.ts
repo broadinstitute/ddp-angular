@@ -31,7 +31,7 @@ test.describe.serial('LMS Child Enrollment', () => {
     await expect(page.locator('.activity-step.active')).toHaveText(expectedText);
   };
 
-  test('Parental consent child is three years old @visual @enrollment @lms @functional', async ({ page }) => {
+  test('Parental consent child is three years old @visual @enrollment @lms', async ({ page }) => {
     researchConsentPage = new LmsResearchConsentPage(page, 'secondChild');
     additionalConsentPage = new LmsAdditionalConsentPage(page);
 

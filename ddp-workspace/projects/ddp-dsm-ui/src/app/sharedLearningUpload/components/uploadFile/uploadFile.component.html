@@ -1,5 +1,5 @@
 <main id="uploadFile" class="upload" *ngIf="isAllowedToUpload">
-  <button [disabled]="unauthorized" (click)="browse()" class="upload-selectBtn">Select a PDF</button>
+  <button (click)="browse()" class="upload-selectBtn">Select a PDF</button>
   <input type="file" accept=".pdf" #hiddenInput (change)="onFileSelection($event)" class="upload-hiddenInput">
   <span class="upload-selectedFileName">{{selectedFileName}}</span>
   <button  (mouseleave)="retryOrNot(false)" (mouseover)="retryOrNot(true)"

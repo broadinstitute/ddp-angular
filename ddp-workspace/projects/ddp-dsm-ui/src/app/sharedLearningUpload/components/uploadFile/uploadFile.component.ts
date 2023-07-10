@@ -39,7 +39,6 @@ export class UploadFileComponent implements OnDestroy {
 
 
   @Input() participantId: string;
-  @Input() unauthorized = false;
   @Output() fileUploaded = new EventEmitter<SomaticResultsFile>();
 
   @ViewChild('hiddenInput') inputElement: ElementRef<HTMLInputElement>;
@@ -113,7 +112,7 @@ export class UploadFileComponent implements OnDestroy {
   }
 
   public get shouldDisableButton(): boolean {
-    return this.unauthorized || !this.isFileSelected || this.uploadStatus === HttpRequestStatusEnum.SUCCESS;
+    return !this.isFileSelected || this.uploadStatus === HttpRequestStatusEnum.SUCCESS;
   }
 
   public get btnClass(): string {
