@@ -2,7 +2,6 @@ import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
 import {FilesTableComponent} from './filesTable.component';
 import {MatIconModule} from '@angular/material/icon';
 import {MatTableModule} from '@angular/material/table';
-import {RoleService} from '../../../services/role.service';
 import {DebugElement} from '@angular/core';
 import {MaterialHarnesses} from '../../../test-helpers/MaterialHarnesses';
 import {TestbedHarnessEnvironment} from '@angular/cdk/testing/testbed';

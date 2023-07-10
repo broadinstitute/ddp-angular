@@ -37,7 +37,6 @@ export class SharedLearningsUploadComponent implements OnInit, OnDestroy {
   @Input() participantId: string;
 
   constructor(
-    private readonly sharedLearningsHTTPService: SharedLearningsHTTPService,
     private readonly stateService: SharedLearningsStateService,
     private readonly matDialog: MatDialog,
     private readonly roleService: RoleService
