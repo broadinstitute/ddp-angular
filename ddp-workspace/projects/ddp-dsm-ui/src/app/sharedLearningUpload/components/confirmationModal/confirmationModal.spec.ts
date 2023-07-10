@@ -1,8 +1,8 @@
-import {ConfirmationModalComponent} from "./confirmationModal.component";
-import {ComponentFixture, TestBed, waitForAsync} from "@angular/core/testing";
-import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {DebugElement} from "@angular/core";
-import {By} from "@angular/platform-browser";
+import {ConfirmationModalComponent} from './confirmationModal.component';
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import {DebugElement} from '@angular/core';
+import {By} from '@angular/platform-browser';
 
 describe('ConfirmationModalComponent', () => {
   let fixture: ComponentFixture<ConfirmationModalComponent>;
@@ -24,7 +24,7 @@ describe('ConfirmationModalComponent', () => {
         ]
       }).compileComponents();
    }
-  ))
+  ));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ConfirmationModalComponent);
@@ -32,7 +32,7 @@ describe('ConfirmationModalComponent', () => {
     componentHTML = fixture.debugElement;
 
     fixture.detectChanges();
-  })
+  });
 
   it('should create component',  () => {
     expect(component).toBeTruthy('Component has not been instantiated');
@@ -46,4 +46,4 @@ describe('ConfirmationModalComponent', () => {
     expect(fileName).toContain('testFile.pdf', 'File name is not displayed');
   });
 
-})
+});
