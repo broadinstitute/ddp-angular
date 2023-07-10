@@ -23,7 +23,7 @@ const newEmail = generateEmailAlias(PANCAN_USER_EMAIL);
 const firstName = generateUserName('PANCAN');
 const lastName = generateUserName('PANCAN');
 
-test.describe.serial('Join Pancan Mailing List', () => {
+test.describe.serial('Join Mailing List', () => {
   test('Join Mail List @dss @visual @pancan', async ({ page }) => {
     const homePage = new HomePage(page);
     await homePage.waitForReady();
@@ -33,10 +33,10 @@ test.describe.serial('Join Pancan Mailing List', () => {
     await homePage.joinMailingListButton.click();
     const modal = new Modal(page);
     await expect(modal.toLocator().locator('h1.Modal-title')).toHaveText('Stay informed!');
-    expect(await modal.toLocator().screenshot()).toMatchSnapshot('stay-informed-modal.png');
+    await expect(modal.toLocator()).toHaveScreenshot('stay-informed-modal.png');
   });
 
-  test('DSM download Mail List @dsm @pancan', async ({ page, request }) => {
+  test('DSM download Mail List @dsm @pancan @functional', async ({ page, request }) => {
     await login(page);
 
     const welcomePage = new WelcomePage(page);
