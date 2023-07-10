@@ -20,9 +20,11 @@ describe('SharedLearningsUploadComponent', () => {
 
   let sharedLearningsStateService;
   let roleService;
+  let dsmService;
 
   beforeEach(waitForAsync(() => {
     roleService = jasmine.createSpyObj('RoleService', ['allowUploadRorFile']);
+    dsmService = jasmine.createSpyObj('DSMService', ['']);
 
     sharedLearningsStateService =
       jasmine.createSpyObj('SharedLearningsStateService', [
@@ -46,7 +48,7 @@ describe('SharedLearningsUploadComponent', () => {
         },
         {
           provide: DSMService,
-          useValue: {}
+          useValue: dsmService
         }
       ],
       imports: [MatDialogModule, MatTooltipModule, MatProgressSpinnerModule]
