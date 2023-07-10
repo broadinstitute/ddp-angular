@@ -2,7 +2,6 @@
   <section class="fileUpload">
     <app-upload-files
       [participantId]="participantId"
-      [unauthorized]="isUnauthorized"
       (fileUploaded)="onFileUpload($event)"></app-upload-files>
   </section>
 
@@ -12,19 +11,22 @@
     </section>
   </ng-container>
 
-  <section *ngIf="errorLoadingData" class="error-note">
-    <main>
-      <p>We couldn't load the data</p>
-      <p>The error message: {{errorLoadingData}}</p>
-    </main>
-  </section>
+  <ng-container *ngIf="displayedError">
+    <section  class="error-note">
+      <main>
+        <p>We couldn't load the data</p>
+        <p>The error message: {{displayedError}}</p>
+      </main>
+    </section>
+  </ng-container>
 
-  <section *ngIf="!errorLoadingData" class="files">
+
+  <section class="files">
     <ng-container *ngIf="!isLoading; else spinner" >
       <app-files-table
         (sendToParticipant)="onSendToParticipant($event)"
-        (delete)="deleteFile($event)"
-        [somaticResultsFiles]="somaticResultsFilesWithStatus"></app-files-table>
+        (delete)="onDeleteFile($event)"
+        [somaticResultsFiles]="somaticResultsFilesWithStatus$ | async"></app-files-table>
     </ng-container>
   </section>
 </main>

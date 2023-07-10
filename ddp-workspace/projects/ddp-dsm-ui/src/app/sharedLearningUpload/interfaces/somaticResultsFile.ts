@@ -20,12 +20,14 @@ export interface SomaticResultsFile {
 
 export interface SomaticResultsFileWithStatus extends SomaticResultsFile {
   virusStatus: SomaticResultsFileVirusStatusEnum;
-  sendToParticipantStatus: {
-    status: HttpRequestStatusEnum;
-    message: string | null;
-  };
-  deleteStatus: {
-    status: HttpRequestStatusEnum.NONE | HttpRequestStatusEnum.IN_PROGRESS | HttpRequestStatusEnum.FAIL;
-    message: string | null;
-  };
+  sendToParticipantStatus: SomaticResultsFileSendToParticipantStatus;
+  deleteStatus: SomaticResultsFileDeleteStatus;
+}
+export interface SomaticResultsFileSendToParticipantStatus {
+  status: HttpRequestStatusEnum;
+  message: string | null;
+}
+export interface SomaticResultsFileDeleteStatus {
+  status: HttpRequestStatusEnum.NONE | HttpRequestStatusEnum.IN_PROGRESS | HttpRequestStatusEnum.FAIL;
+  message: string | null;
 }
