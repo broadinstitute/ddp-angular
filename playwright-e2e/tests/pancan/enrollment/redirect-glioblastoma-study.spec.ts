@@ -9,7 +9,7 @@ import { assertHeader } from 'utils/assertion-helper';
 import { fillSitePassword } from 'utils/test-utils';
 
 test.describe('Redirect to Brain cancer project', () => {
-  test('When selecting Glioblastoma as diagnosed cancer @enrollment @pancan', async ({ page }) => {
+  test('When selecting Glioblastoma as diagnosed cancer @enrollment @pancan @functional', async ({ page }) => {
     const pancanHomePage = new HomePage(page);
     await pancanHomePage.join({ waitForNav: true });
 

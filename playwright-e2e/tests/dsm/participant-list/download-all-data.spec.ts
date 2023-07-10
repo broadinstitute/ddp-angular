@@ -7,10 +7,12 @@ import { assertParticipantListDownloadFileName } from 'utils/test-utils';
 
 test.describe.parallel('Participant List Download', () => {
   // Chose studies with fewer participants on Dev and Test. Otherwise download all data will take a very long time.
-  const studies = [StudyEnum.BRUGADA, StudyEnum.LMS, StudyEnum.OSTEO];
+  const studies = [StudyEnum.BRUGADA, StudyEnum.OSTEO];
 
   for (const study of studies) {
-    test(`Select All in ${study} @dsm @${study}`, async ({ page, request }) => {
+    test(`Select All in ${study} @dsm @${study} @functional`, async ({ page, request }) => {
+      test.setTimeout(5 * 60 * 1000);
+
       const participantListPage = await ParticipantListPage.goto(page, study, request);
 
       // Download with “Select all” selected

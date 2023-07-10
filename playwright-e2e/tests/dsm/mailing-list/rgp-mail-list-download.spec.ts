@@ -16,13 +16,14 @@ import { assertTableHeaders } from 'utils/assertion-helper';
 import { getDate, getMailingListDownloadedFileDate, mailingListCreatedDate } from 'utils/date-utils';
 import { generateEmailAlias } from 'utils/faker-utils';
 import { MailListCSV, readMailListCSVFile } from 'utils/file-utils';
+import exp from 'constants';
 
 
 const RGP_USER_EMAIL = process.env.RGP_USER_EMAIL as string;
 const newEmail = generateEmailAlias(RGP_USER_EMAIL);
 
 test.describe.serial('When an interested participant does NOT meet participation requirements', () => {
-  test('Join Mail List @visual @dsm @rgp', async ({ page }) => {
+  test('Join Mail List @visual @dsm @rgp @functional', async ({ page }) => {
     const homePage = new HomePage(page);
     await homePage.clickGetStarted();
 
@@ -53,7 +54,7 @@ test.describe.serial('When an interested participant does NOT meet participation
     await page.locator('button[type="submit"]:has-text("Join Mailing List")').click();
   });
 
-  test('DSM download Mail List @visual @dsm @rgp', async ({ page, request }) => {
+  test('DSM download Mail List @visual @dsm @rgp @functional', async ({ page, request }) => {
     await login(page);
 
     const welcomePage = new WelcomePage(page);

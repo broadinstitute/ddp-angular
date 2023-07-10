@@ -11,7 +11,7 @@ import { logParticipantCreated } from 'utils/log-utils';
 
 const { OSTEO_USER_EMAIL, OSTEO_USER_PASSWORD } = process.env;
 
-test('Osteo enroll kid @osteo', async ({ page }) => {
+test('Osteo enroll kid @osteo @functional', async ({ page }) => {
   test.slow();
   const childFirstName = generateUserName('OS');
   const childLastName = generateUserName('OS');

@@ -23,7 +23,7 @@ const assertActiveActivityStep = async (page: Page, expectedText: string) => {
   await expect(page.locator('.activity-step.active')).toHaveText(expectedText);
 };
 
-test('Osteo adult self enroll @osteo', async ({ page }) => {
+test('Osteo adult self enroll @osteo @functional', async ({ page }) => {
   test.slow();
 
   const firstName = generateUserName('OS');
@@ -94,7 +94,7 @@ test('Osteo adult self enroll @osteo', async ({ page }) => {
     nth: 1
   });
 
-  await medicalReleasePage.agreeToAllowUsToContactPhysicians();
+  await medicalReleasePage.agreeToAllowUsToContactPhysicianToObtainRecords();
   await medicalReleasePage.fillInFullName(fullName);
   await medicalReleasePage.submit()
 

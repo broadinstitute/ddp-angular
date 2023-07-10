@@ -8,7 +8,7 @@ import { waitForResponse } from 'utils/test-utils';
 
 const { OSTEO_USER_EMAIL, OSTEO_USER_PASSWORD } = process.env;
 
-test('Osteo enroll self and kid together @osteo', async ({ page }) => {
+test('Osteo enroll self and kid together @osteo @functional', async ({ page }) => {
   test.slow();
 
   const homePage = new HomePage(page);

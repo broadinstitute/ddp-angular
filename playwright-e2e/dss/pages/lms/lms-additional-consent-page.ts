@@ -21,8 +21,8 @@ export default class LmsAdditionalConsentPage extends LmsPageBase {
    * Question: You can share with me any available results from the sequencing of tumor sample[s] that the study has received.
    * @returns {Radiobutton}
    */
-  agreeToShareWithMeResults(): Radiobutton {
-    return new Radiobutton(this.page, { ddpTestID: PatientsData[this.typePatient].testId.agreeToShareWithMeResults });
+  async agreeToShareWithMeResults(answer = 'Yes'): Promise<void> {
+    await new Radiobutton(this.page, { ddpTestID: PatientsData[this.typePatient].testId.agreeToShareWithMeResults }).check(answer);
   }
 
   agreeToShareWithParentGuardian(): Question {

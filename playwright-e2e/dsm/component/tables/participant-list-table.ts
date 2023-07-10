@@ -1,8 +1,12 @@
-import { Locator, Page } from '@playwright/test';
+import { Locator, Page, expect } from '@playwright/test';
 import Table from 'dss/component/table';
 import ParticipantPage from 'dsm/pages/participant-page/participant-page';
 import {ParticipantsListPaginator} from 'lib/component/dsm/paginators/participantsListPaginator';
 import {rows} from 'lib/component/dsm/paginators/types/rowsPerPage';
+import { getDate, offsetDaysFromToday } from 'utils/date-utils';
+import { AdditionalFilter } from '../filters/sections/search/search-enums';
+import ParticipantListPage from 'dsm/pages/participant-list-page';
+import addColumnsToParticipantList from 'dsm/pages/participant-list-page';
 
 export class ParticipantListTable extends Table {
   private readonly _participantPage: ParticipantPage = new ParticipantPage(this.page);
@@ -55,6 +59,56 @@ export class ParticipantListTable extends Table {
     throw new Error('Failed to get Total number of participants in Participant List table');
   }
 
+  /**
+ * Returns the guid of the most recently created playwright participant
+ * @param isRGPStudy mark as true or false if this is being ran in RGP - parameter is only needed if method is ran in RGP study
+ * @returns the guid of the most recently registered playwright participant
+ */
+  public async getGuidOfMostRecentAutomatedParticipant(participantName: string, isRGPStudy?: boolean): Promise<string> {
+    //Select the columns to be used to help find the most recent automated participant
+    const participantListPage = new ParticipantListPage(this.page);
+    await participantListPage.addColumnsToParticipantList('Participant Columns', ['Participant ID', 'Registration Date', 'First Name']);
+
+    // Only RGP has a default filter with a different First Name field (in Participant Info Columns) - make sure to deselect it before continuing
+    // otherwise there will be 2 different First Name fields in the search section (and in the Participant List)
+    if (isRGPStudy) {
+      const customizeViewPanel = participantListPage.filters.customizeViewPanel;
+      await customizeViewPanel.deselectColumns('Participant Info Columns', ['First Name']);
+    }
+
+    //First filter the participant list to only show participants registered within the past week
+    const searchPanel = participantListPage.filters.searchPanel;
+    await searchPanel.open();
+    const today = getDate(new Date());
+    const previousWeek = offsetDaysFromToday(7);
+    await searchPanel.dates('Registration Date', { from: previousWeek, to: today, additionalFilters: [AdditionalFilter.RANGE] });
+
+    //Also make sure to conduct the search for participants with the given first name of the automated participant
+    await searchPanel.text('First Name', {textValue: participantName});
+    await searchPanel.search();
+
+    //Get the first returned participant to use for testing - and verify at least one participant is returned
+    const numberOfParticipants = await this.rowsCount;
+    expect(numberOfParticipants, `No recent test participants were found with the given first name: ${participantName}`).toBeGreaterThanOrEqual(1);
+    const participantGuid = this.getCellDataForColumn('Participant ID', 1);
+    return participantGuid;
+  }
+
+   /**
+   * Given a column name and a row number, return the contents of the cell in the participant list
+   * @param columnName the column name e.g. Participant ID
+   * @param rowNumber the row number
+   * @returns the contents of the specified column in the specified row
+   */
+    private async getCellDataForColumn(columnName: string, rowNumber: number): Promise<string> {
+      const numberOfPrecedingColumns = await this.page.locator(`//table/thead/th[contains(., '${columnName}')]/preceding-sibling::th`).count();
+      const columnIndex = numberOfPrecedingColumns + 1;
+      //Find the cell in a specific row and column
+      const cell = this.page.locator(`((//tbody/tr)[${rowNumber}]/descendant::td)[${columnIndex}]`);
+      const cellContent = await cell.innerText();
+      return cellContent;
+    }
+
   private getParticipantAt(position: number): Locator {
     return this.page.locator(`//table/tbody/tr`).nth(position);
   }
@@ -73,7 +127,7 @@ export class ParticipantListTable extends Table {
     )
   }
 
-  private getParticipantDataAtXPath(position: number, columnName: string) {
+  public getParticipantDataAtXPath(position: number, columnName: string) {
     return `//table/tbody/tr[${position + 1}]//td[position()=${this.theadCount(columnName)}]`;
   }
 

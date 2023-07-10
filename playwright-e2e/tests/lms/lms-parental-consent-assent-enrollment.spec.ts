@@ -24,7 +24,7 @@ test.describe.serial('LMS Child Enrollment', () => {
     await expect(page.locator('.activity-step.active')).toHaveText(expectedText);
   };
 
-  test('Consent & Assent @visual @enrollment @lms', async ({ page }) => {
+  test('Consent & Assent @visual @enrollment @lms @functional', async ({ page }) => {
     researchConsentPage = new LmsResearchConsentPage(page, 'child');
     additionalConsentPage = new LmsAdditionalConsentPage(page);
 
@@ -232,7 +232,7 @@ test.describe.serial('LMS Child Enrollment', () => {
       const paragraphELocator = page.locator('//li[contains(@class, "ddp-li")][.//*[contains(normalize-space(), "Who do I contact if I have questions about the research study?")]]');
       await expect(paragraphELocator).toHaveScreenshot(`research-consent-additional-consent-page-E-paragraph.png`);
 
-      await additionalConsentPage.agreeToShareWithMeResults().check('Yes');
+      await additionalConsentPage.agreeToShareWithMeResults('Yes');
 
       const requestPromise = waitForResponse(page, { uri: '/answers'});
       await Promise.all([additionalConsentPage.signature().fill(childFullName), requestPromise]);
@@ -267,7 +267,7 @@ test.describe.serial('LMS Child Enrollment', () => {
       await expect(page.locator('.ddp-activity-question.Question--AGREEMENT')).toHaveScreenshot(`medical-release-agreement.png`);
 
       await medicalReleasePage.fillInPhysicianInstitution();
-      await medicalReleasePage.agreeToAllowUsToContactPhysicians();
+      await medicalReleasePage.agreeToAllowUsToContactPhysicianToObtainRecords();
       await medicalReleasePage.fillInFullName(childFullName);
 
       await medicalReleasePage.submit();

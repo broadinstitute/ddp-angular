@@ -33,3 +33,12 @@ export const setPatientParticipantGuid = async (page: Page) => {
   const urlArray = participantResponse.split('/');
   user.patient.participantGuid = urlArray[6];
 };
+
+/**
+ * Set the user guid with a given parameter
+ * @param guid The guid of a study participant
+ */
+export const saveParticipantGuid = (guid: string) => {
+  user.patient.participantGuid = guid;
+};
+

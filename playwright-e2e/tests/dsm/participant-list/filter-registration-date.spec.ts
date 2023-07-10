@@ -11,7 +11,7 @@ test.describe('Participants Search', () => {
   const studies = [StudyEnum.LMS, StudyEnum.OSTEO2];
 
   for (const study of studies) {
-    test(`Search by Registration Date in ${study} @dsm @${study}`, async ({ page, request }) => {
+    test(`Search by Registration Date in ${study} @dsm @${study} @functional`, async ({ page, request }) => {
       const participantListPage = await ParticipantListPage.goto(page, study, request);
       const participantsTable = participantListPage.participantListTable;
 

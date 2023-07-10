@@ -11,7 +11,7 @@ test.describe('Participant List Download', () => {
   test.describe('As human-readable', () => {
     for (const study of studies) {
       // Mix of columns from Participant Columns and Sample Columns
-      test(`Subset of data in ${study} @dsm`, async ({ page, request }) => {
+      test(`Subset of data in ${study} @dsm @functional`, async ({ page, request }) => {
         const participantListPage = await ParticipantListPage.goto(page, study, request);
 
         const customizeViewPanel = participantListPage.filters.customizeViewPanel;

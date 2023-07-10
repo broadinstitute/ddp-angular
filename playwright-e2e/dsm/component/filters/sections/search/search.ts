@@ -137,7 +137,7 @@ export class Search {
     return this.page.locator(baseColumnXPath + this.minusIconXPath)?.isVisible();
   }
 
-  private async setTodayFor(columnName: string, nth = 0): Promise<void> {
+  public async setTodayFor(columnName: string, nth = 0): Promise<void> {
     await this.page.locator(this.todayButtonXPath(columnName)).nth(nth).click();
   }
 

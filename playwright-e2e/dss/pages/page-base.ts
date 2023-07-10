@@ -146,12 +146,14 @@ export default abstract class PageBase implements PageInterface {
   }
 
   /**
-   * <br> Question: By completing this information, you are agreeing to allow us to contact these physician(s) and hospital(s) / institution(s) to obtain your records.
+   * <br> Question: By completing this information, you are agreeing to allow us to contact these physician(s) and hospital(s) / institution(s) to obtain your (child's) records.
    *
    * @returns {Checkbox}
    */
-  async agreeToAllowUsToContactPhysicians(): Promise<void> {
-    await new Checkbox(this.page, { label: 'I have already read and signed the informed consent document' }).check();
+  async agreeToAllowUsToContactPhysicianToObtainRecords(answer = true): Promise<void> {
+    const question = new Question(this.page, { cssClassAttribute: '.Question--AGREEMENT' });
+    answer && await question.check();
+    // await new Checkbox(this.page, { label: 'I have already read and signed the informed consent document' }).check();
   }
 
   async finish(): Promise<void> {
