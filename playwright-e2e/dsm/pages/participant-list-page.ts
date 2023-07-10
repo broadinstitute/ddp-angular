@@ -15,18 +15,18 @@ export default class ParticipantListPage {
   private readonly _table: ParticipantListTable = new ParticipantListTable(this.page);
 
   static async goto(page: Page, study: string, request: APIRequestContext): Promise<ParticipantListPage> {
-      const welcomePage = new WelcomePage(page);
-      await welcomePage.selectStudy(study);
+    const welcomePage = new WelcomePage(page);
+    await welcomePage.selectStudy(study);
 
-      const navigation = new Navigation(page, request);
-      const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
-      await participantListPage.waitForReady();
-      await participantListPage.assertPageTitle();
+    const navigation = new Navigation(page, request);
+    const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
+    await participantListPage.waitForReady();
+    await participantListPage.assertPageTitle();
 
-      const participantsTable = participantListPage.participantListTable;
-      const rowsTotal = await participantsTable.rowLocator().count();
-      expect(rowsTotal).toBeGreaterThanOrEqual(1); // Participant List table has loaded
-      return participantListPage;
+    const participantsTable = participantListPage.participantListTable;
+    const rowsTotal = await participantsTable.rowLocator().count();
+    expect(rowsTotal).toBeGreaterThanOrEqual(1); // Participant List table has loaded
+    return participantListPage;
   }
 
   constructor(private readonly page: Page) {}
@@ -136,20 +136,26 @@ export default class ParticipantListPage {
     return download;
   }
 
-/**
- * Filters the participant list to search for a specific participant when given their guid
- * @param participantGUID the guid of the specific participant to search for
- */
-public async filterListByParticipantGUID(participantGUID: string): Promise<void> {
-  const customizeViewPanel = this.filters.customizeViewPanel;
-  await customizeViewPanel.open();
-  await customizeViewPanel.selectColumns('Participant Columns', ['Participant ID']);
+  /**
+   * Filters the participant list to search for a specific participant when given their guid
+   * @param participantGUID the guid of the specific participant to search for
+   */
+  public async filterListByParticipantGUID(participantGUID: string): Promise<void> {
+    const customizeViewPanel = this.filters.customizeViewPanel;
+    await customizeViewPanel.open();
+    await customizeViewPanel.selectColumns('Participant Columns', ['Participant ID']);
 
-  const searchPanel = this.filters.searchPanel;
-  await searchPanel.open();
-  await searchPanel.text('Participant ID', {textValue: participantGUID });
-  await searchPanel.search();
-}
+    const searchPanel = this.filters.searchPanel;
+    await searchPanel.open();
+    await searchPanel.text('Participant ID', {textValue: participantGUID });
+    await searchPanel.search();
+  }
+
+  public async addColumnsToParticipantList(columnGroup: string, columnOptions: string[]): Promise<void> {
+    const customizeViewPanel = this.filters.customizeViewPanel;
+    await customizeViewPanel.open();
+    await customizeViewPanel.selectColumns(columnGroup, columnOptions);
+  }
 
   /* Locators */
   private get tableRowsLocator(): Locator {

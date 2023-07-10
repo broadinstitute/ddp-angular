@@ -8,7 +8,7 @@ export default class ParticipantPage {
   private readonly PAGE_TITLE: string = 'Participant Page';
   private readonly tabs = new Tabs(this.page);
 
-  constructor(private readonly page: Page) {}
+  constructor(protected readonly page: Page) {}
 
   public async backToList(): Promise<void> {
     await this.page.locator('//div/a[.//*[contains(text(), "<< back to \'List\' ")]]').click();
