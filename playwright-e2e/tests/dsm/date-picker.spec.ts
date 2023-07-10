@@ -6,7 +6,7 @@ import { test } from 'fixtures/dsm-fixture';
 import { getDate } from 'utils/date-utils';
 
 test.describe('DSM Date Picker', () => {
-  test('Pick 12/20/1995 as date of birth on Participant List @dsm @functional', async ({ page, request }) => {
+  test('Pick 12/20/1995 as date of birth on Participant List @dsm', async ({ page, request }) => {
     const today = new Date();
     const splits = getDate(today).split('/'); // mm/dd/yyyy
     const date = splits[1];

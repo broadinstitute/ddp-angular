@@ -24,7 +24,7 @@ test.describe.serial('LMS Child Enrollment', () => {
     await expect(page.locator('.activity-step.active')).toHaveText(expectedText);
   };
 
-  test('Consent & Assent @visual @enrollment @lms @functional', async ({ page }) => {
+  test('Consent & Assent @visual @enrollment @lms', async ({ page }) => {
     researchConsentPage = new LmsResearchConsentPage(page, 'child');
     additionalConsentPage = new LmsAdditionalConsentPage(page);
 

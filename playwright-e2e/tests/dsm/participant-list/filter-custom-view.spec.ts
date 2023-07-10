@@ -9,7 +9,7 @@ test.describe('Participants list search and filter', () => {
   const studies = [StudyEnum.LMS, StudyEnum.OSTEO2];
 
   for (const study of studies) {
-    test(`Save Custom View in ${study} @dsm @${study} @functional`, async ({ page, request }) => {
+    test(`Save Custom View in ${study} @dsm @${study}`, async ({ page, request }) => {
       const participantListPage = await ParticipantListPage.goto(page, study, request);
       const participantsTable = participantListPage.participantListTable;
 

@@ -24,7 +24,7 @@ const firstName = generateUserName('PANCAN');
 const lastName = generateUserName('PANCAN');
 
 test.describe.serial('Join Pancan Mailing List', () => {
-  test('Join Mail List @dss @visual @pancan @functional', async ({ page }) => {
+  test('Join Mail List @dss @visual @pancan', async ({ page }) => {
     const homePage = new HomePage(page);
     await homePage.waitForReady();
     await homePage.fillInStayInformedModal(firstName, lastName, newEmail);

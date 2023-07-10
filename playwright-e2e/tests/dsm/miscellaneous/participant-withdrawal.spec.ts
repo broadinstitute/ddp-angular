@@ -16,7 +16,7 @@ test.describe('Participants Withdrawal', () => {
   const studies = [StudyEnum.LMS];
 
     for (const study of studies) {
-      test(`In ${study} @dsm @functional`, async ({ page, request }) => {
+      test(`In ${study} @dsm`, async ({ page, request }) => {
         const participantListPage = await ParticipantListPage.goto(page, study, request);
         const participantsTable = participantListPage.participantListTable;
 
