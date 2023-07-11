@@ -14,7 +14,6 @@ let rgpEmail: string;
 
 test.describe.serial('DSM Family Enrollment Handling', () => {
     test('Verify the display and functionality of family account dynamic fields @functional @rgp', async ({ page, request}) => {
-        await login(page);
         const navigation = new Navigation(page, request);
 
         //select RGP study
