@@ -5,7 +5,6 @@ import ParticipantListPage from 'dsm/pages/participant-list-page';
 import Select from 'dss/component/select';
 import * as user from 'data/fake-user.json';
 import { test } from 'fixtures/dsm-fixture';
-import { login } from 'authentication/auth-dsm';
 import RgpParticipantPage from 'dsm/pages/participant-page/rgp/rgp-participant-page';
 import { saveParticipantGuid } from 'utils/faker-utils';
 import { ParticipantListTable } from 'dsm/component/tables/participant-list-table';
@@ -14,7 +13,6 @@ let rgpEmail: string;
 
 test.describe.serial('DSM Family Enrollment Handling', () => {
     test('Verify the display and functionality of family account dynamic fields @functional @rgp', async ({ page, request}) => {
-        await login(page);
         const navigation = new Navigation(page, request);
 
         //select RGP study
