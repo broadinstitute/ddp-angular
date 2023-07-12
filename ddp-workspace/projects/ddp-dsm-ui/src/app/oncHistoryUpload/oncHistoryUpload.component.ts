@@ -5,7 +5,7 @@ import {SessionService} from '../services/session.service';
 import {MatDialog} from '@angular/material/dialog';
 import {LoadingModalComponent} from '../modals/loading-modal.component';
 import {HttpErrorResponse} from '@angular/common/http';
-import {Subject, takeUntil} from "rxjs";
+import {Subject, takeUntil} from 'rxjs';
 
 enum RequestStatus {
   SUCCESS,
@@ -75,7 +75,7 @@ export class OncHistoryUploadComponent implements OnDestroy {
           window.open(url);
         },
         error: (error: any) => this.handleError(error)
-      })
+      });
   }
 
   private handleError(error: any): void {
