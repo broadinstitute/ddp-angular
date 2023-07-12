@@ -595,6 +595,16 @@ export class DSMService {
     );
   }
 
+  public downloadOncHistoryTemplateAndDirectory(realm: string): Observable<any> {
+    const url = this.baseUrl + DSMService.UI + 'oncHistory/template';
+    const map: { name: string; value: any }[] = [];
+    map.push({name: DSMService.REALM, value: realm});
+
+    return this.http.get(url, this.buildZipDownloadHeader(map)).pipe(
+      catchError(this.handleError)
+    );
+  }
+
   public getKitTypes(realm: string): Observable<any> {
     const url = this.baseUrl + DSMService.UI + 'kitTypes/' + realm;
     const map: { name: string; value: any }[] = [];
@@ -1197,6 +1207,14 @@ export class DSMService {
     return {headers: this.uploadHeader(), withCredentials: true, params};
   }
 
+  private buildZipDownloadHeader(map: any[]): any {
+    let params: HttpParams = new HttpParams();
+    for (const param of map) {
+      params = params.append(param.name, param.value);
+    }
+    return {headers: this.zipDownloadHeaders(), withCredentials: true, params, responseType: 'arraybuffer'};
+  }
+
   private buildJsonAuthHeader(): HttpHeaders {
     if (this.checkCookieBeforeCall()) {
       return new HttpHeaders({
@@ -1212,6 +1230,15 @@ export class DSMService {
       return new HttpHeaders({
         'Content-Type': 'application/json',
         'Access-Control-Allow-Origin': '*',
+      } );
+    }
+  }
+
+  private zipDownloadHeaders(): HttpHeaders {
+    if (this.checkCookieBeforeCall()) {
+      return new HttpHeaders({
+        'Content-Type': 'application/zip',
+        Authorization: this.sessionService.getAuthBearerHeaderValue()
       } );
     }
   }

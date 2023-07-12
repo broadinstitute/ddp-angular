@@ -1,12 +1,13 @@
-import { Component } from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 import { DSMService } from '../services/dsm.service';
 import {finalize} from 'rxjs/operators';
 import {SessionService} from '../services/session.service';
 import {MatDialog} from '@angular/material/dialog';
 import {LoadingModalComponent} from '../modals/loading-modal.component';
 import {HttpErrorResponse} from '@angular/common/http';
+import {Subject, takeUntil} from "rxjs";
 
-enum UploadStatus {
+enum RequestStatus {
   SUCCESS,
   FAIL,
   DEFAULT
@@ -17,18 +18,24 @@ enum UploadStatus {
   templateUrl: 'oncHistoryUpload.component.html',
   styleUrls: ['oncHistoryUpload.component.scss']
 })
-export class OncHistoryUploadComponent {
-  public uploadStatus: UploadStatus = UploadStatus.DEFAULT;
+export class OncHistoryUploadComponent implements OnDestroy {
+  public requestStatus: RequestStatus = RequestStatus.DEFAULT;
   public errorMessage: string;
   public selectedTextFile: File;
+
+  private subscriptionSubject = new Subject<void>();
 
   constructor(private readonly dsmService: DSMService,
               private readonly session: SessionService,
               private readonly dialog: MatDialog) {}
 
+  ngOnDestroy(): void {
+    this.subscriptionSubject.next();
+    this.subscriptionSubject.complete();
+  }
 
   upload(): void {
-    this.uploadStatus = UploadStatus.DEFAULT;
+    this.requestStatus = RequestStatus.DEFAULT;
 
     const tempDialog = this.dialog
       .open(LoadingModalComponent, {data: {message: 'Uploading, this may take a while'}, disableClose: true});
@@ -37,17 +44,12 @@ export class OncHistoryUploadComponent {
       this.session.selectedRealm,
       this.selectedTextFile
     ).pipe(
+      takeUntil(this.subscriptionSubject),
       finalize(() => tempDialog.close())
     )
       .subscribe({
-        next: () => this.uploadStatus = UploadStatus.SUCCESS,
-        error: (error: any) => {
-          if (error instanceof HttpErrorResponse) {
-            console.log(error);
-            this.uploadStatus = UploadStatus.FAIL;
-            this.errorMessage = error.error;
-          }
-        },
+        next: () => this.requestStatus = RequestStatus.SUCCESS,
+        error: (error: any) => this.handleError(error)
       });
   }
 
@@ -59,6 +61,27 @@ export class OncHistoryUploadComponent {
   }
 
   public downloadTemplateAndDirectory(): void {
-    console.log('Downloading...');
+    const tempDialog = this.dialog
+      .open(LoadingModalComponent, {data: {message: 'Downloading... this may take a while'}, disableClose: true});
+
+    this.dsmService.downloadOncHistoryTemplateAndDirectory(this.session.selectedRealm)
+      .pipe(takeUntil(this.subscriptionSubject), finalize(() => tempDialog.close()))
+      .subscribe({
+        next: (arrayBuffer: ArrayBuffer) => {
+          const blob = new Blob([arrayBuffer], {
+            type: 'application/zip'
+          });
+          const url = window.URL.createObjectURL(blob);
+          window.open(url);
+        },
+        error: (error: any) => this.handleError(error)
+      })
+  }
+
+  private handleError(error: any): void {
+    if (error instanceof HttpErrorResponse) {
+      this.requestStatus = RequestStatus.FAIL;
+      this.errorMessage = error.error;
+    }
   }
 }
