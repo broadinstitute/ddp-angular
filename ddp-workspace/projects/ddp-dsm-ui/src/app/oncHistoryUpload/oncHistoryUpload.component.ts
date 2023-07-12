@@ -57,4 +57,8 @@ export class OncHistoryUploadComponent {
     }
     this.selectedTextFile = file;
   }
+
+  public downloadTemplateAndDirectory(): void {
+    console.log('Downloading...');
+  }
 }
