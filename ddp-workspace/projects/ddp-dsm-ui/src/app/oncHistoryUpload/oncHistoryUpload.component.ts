@@ -4,7 +4,7 @@ import {finalize} from 'rxjs/operators';
 import {SessionService} from '../services/session.service';
 import {MatDialog} from '@angular/material/dialog';
 import {LoadingModalComponent} from '../modals/loading-modal.component';
-import {HttpErrorResponse} from '@angular/common/http';
+import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
 import {Subject, takeUntil} from 'rxjs';
 
 enum RequestStatus {
@@ -67,12 +67,27 @@ export class OncHistoryUploadComponent implements OnDestroy {
     this.dsmService.downloadOncHistoryTemplateAndDirectory(this.session.selectedRealm)
       .pipe(takeUntil(this.subscriptionSubject), finalize(() => tempDialog.close()))
       .subscribe({
-        next: (arrayBuffer: ArrayBuffer) => {
+        next: (response: HttpResponse<ArrayBuffer>) => {
+          const arrayBuffer = response.body;
+          const contentDisposition =  response.headers.get('Content-Disposition');
           const blob = new Blob([arrayBuffer], {
             type: 'application/zip'
           });
+
+          const filenameRegex = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/;
+          const matches = filenameRegex.exec(contentDisposition);
+          let filename = 'Onc_history.zip'; // Default filename in case extraction fails
+          if (matches != null && matches[1]) {
+            filename = matches[1].replace(/['"]/g, '');
+          }
+
           const url = window.URL.createObjectURL(blob);
-          window.open(url);
+          const link = document.createElement('a');
+          link.href = url;
+          link.download = filename;
+
+          link.click();
+          window.URL.revokeObjectURL(url);
         },
         error: (error: any) => this.handleError(error)
       });

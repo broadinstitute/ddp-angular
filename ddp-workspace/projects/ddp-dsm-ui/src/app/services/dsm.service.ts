@@ -1212,7 +1212,12 @@ export class DSMService {
     for (const param of map) {
       params = params.append(param.name, param.value);
     }
-    return {headers: this.zipDownloadHeaders(), withCredentials: true, params, responseType: 'arraybuffer'};
+    return {headers: this.zipDownloadHeaders(),
+      withCredentials: true,
+      params,
+      responseType: 'arraybuffer',
+      observe: 'response'
+    };
   }
 
   private buildJsonAuthHeader(): HttpHeaders {
