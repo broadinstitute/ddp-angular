@@ -77,3 +77,9 @@ export lmsUser=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".da
 export lmsUserPassword=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[] | select(.app==\"lms\") | .password")
 echo "export LMS_USER_PASSWORD=$lmsUserPassword" >> playwright-env/envvars
 echo "export LMS_USER_EMAIL=$lmsUser" >> playwright-env/envvars
+
+# ATCP
+export atcpUser=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[] | select(.app==\"atcp\") | .userName")
+export atcpUserPassword=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[] | select(.app==\"atcp\") | .password")
+echo "export ATCP_USER_PASSWORD=$atcpUserPassword" >> playwright-env/envvars
+echo "export ATCP_USER_EMAIL=$atcpUser" >> playwright-env/envvars
