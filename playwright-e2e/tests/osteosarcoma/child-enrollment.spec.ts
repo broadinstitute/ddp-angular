@@ -91,6 +91,7 @@ test('Osteo enroll kid @osteo', async ({ page }) => {
   await page.getByText('MASSACHUSETTS').click();
   await page.getByLabel('Zip Code *').click();
   await page.getByLabel('Zip Code *').fill('02420');
+  await page.getByText('Suggested:').waitFor({ state: 'visible', timeout: 30 * 1000});
   await page.getByText('Suggested:').click();
   await page.waitForTimeout(2000);
 
