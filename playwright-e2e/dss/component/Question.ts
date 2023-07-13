@@ -89,9 +89,10 @@ export default class Question {
    * @param value
    * @param opts
    */
-  async fill(value: string, opts: { label?: string | RegExp, nth?: number } = {}): Promise<void> {
+  async fill(value: string, opts: { label?: string | RegExp, nth?: number, waitForSaveRequest?: boolean } = {}): Promise<void> {
+    const { waitForSaveRequest } = opts;
     await this.toLocator().scrollIntoViewIfNeeded();
-    await this.toInput(opts).fill(value);
+    await this.toInput(opts).fill(value, { waitForSaveRequest});
   }
 
   /**

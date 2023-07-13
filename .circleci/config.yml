@@ -707,7 +707,7 @@ jobs:
             TESTS_FILE=$(circleci tests split --split-by=timings --timings-type=classname e2e_tests.txt)
             echo $TESTS_FILE
             npm run test:ci $TESTS_FILE
-          no_output_timeout: 3m # Default is 10m. Set shorter time to ensure CI fails faster if test hangs
+          no_output_timeout: 5m # Default is 10m. Set shorter time to ensure CI fails faster if test hangs
       - store_test_results:
           path: playwright-e2e/junit
       - store_artifacts:

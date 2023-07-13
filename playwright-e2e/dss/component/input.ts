@@ -38,8 +38,8 @@ export default class Input extends WidgetBase {
    * @param opts
    * @returns {Promise<void>}
    */
-  async fill(value: string | number, opts: { dropdownOption?: string, type?: boolean, nth?: number, waitForSavingRequest?: boolean } = {}): Promise<void> {
-    const { dropdownOption, type, nth, waitForSavingRequest = false } = opts;
+  async fill(value: string | number, opts: { dropdownOption?: string, type?: boolean, nth?: number, waitForSaveRequest?: boolean } = {}): Promise<void> {
+    const { dropdownOption, type, nth, waitForSaveRequest = false } = opts;
 
     const useType = type ? type : false;
     nth ? this.nth = nth : this.nth;
@@ -63,7 +63,7 @@ export default class Input extends WidgetBase {
         .click();
       }
       const pressEnter = this.toLocator().press('Tab');
-      waitForSavingRequest ? await Promise.all([waitForResponse(this.page, { uri: '/answers'}), pressEnter]) : await pressEnter;
+      waitForSaveRequest ? await Promise.all([waitForResponse(this.page, { uri: '/answers'}), pressEnter]) : await pressEnter;
     }
   }
 }

@@ -159,10 +159,10 @@ test.describe('ATCP adult self-consent enrollment', () => {
 
     const doctor = user.secondDoctor;
     const address = `${doctor.hospital}, ${doctor.address}`;
-    await contactPhysicianPage.physicianFirstName.fill(doctor.firstName, { waitForSavingRequest: true });
-    await contactPhysicianPage.physicianLastName.fill(doctor.lastName, { waitForSavingRequest: true });
-    await contactPhysicianPage.physicianMailingAddress.fill(address, { waitForSavingRequest: true });
-    await contactPhysicianPage.physicianPhone.fill(doctor.phone, { waitForSavingRequest: true });
+    await contactPhysicianPage.physicianFirstName.fill(doctor.firstName, { waitForSaveRequest: true });
+    await contactPhysicianPage.physicianLastName.fill(doctor.lastName, { waitForSaveRequest: true });
+    await contactPhysicianPage.physicianMailingAddress.fill(address, { waitForSaveRequest: true });
+    await contactPhysicianPage.physicianPhone.fill(doctor.phone, { waitForSaveRequest: true });
     await contactPhysicianPage.saveAndSubmit();
 
     const medicalHistory = new AtcpMedicalHistoryPage(page);
@@ -223,9 +223,9 @@ test.describe('ATCP adult self-consent enrollment', () => {
     await medicalHistory.next();
 
     // antibiotics
-    await medicalHistory.medicationName.fill('Penicillin', { waitForSavingRequest: true });
+    await medicalHistory.medicationName.fill('Penicillin', { waitForSaveRequest: true });
     await medicalHistory.addAnotherMedication();
-    await medicalHistory.medicationName.fill('Tetracycline', { nth: 1, waitForSavingRequest: true });
+    await medicalHistory.medicationName.fill('Tetracycline', { nth: 1, waitForSaveRequest: true });
     await medicalHistory.next();
 
     await medicalHistory.takeAnyOverTheCounterNutritionalSupplements.check('No', { exactMatch: true });
