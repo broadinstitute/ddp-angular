@@ -11,8 +11,8 @@ export function dateFormat(): Intl.DateTimeFormat {
  * @param {Date} date
  * @returns {string}
  */
-export function getDate(date: Date): string {
-  return dateFormat().format(date);
+export function getDate(date?: Date): string {
+  return dateFormat().format(date ? date : new Date());
 }
 
 export function mailingListCreatedDate(date: Date): string {

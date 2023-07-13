@@ -68,7 +68,12 @@ export async function fillSitePassword(page: Page, password = SITE_PASSWORD): Pr
   }
   await page.locator('input[type="password"]').waitFor({ state: 'visible', timeout: 30 * 1000 });
   await page.locator('input[type="password"]').fill(password);
-  await Promise.all([page.waitForNavigation(), page.locator('button >> text=Submit').click()]);
+
+  const passwordCheckRequestPromise = waitForResponse(page, { uri: '/irb-password-check' });
+  await Promise.all([
+    passwordCheckRequestPromise,
+    page.keyboard.press('Enter')
+  ]);
 }
 
 /**

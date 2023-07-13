@@ -20,7 +20,7 @@ export async function fillInEmailPassword(
   await passwordInput.fill(password);
 
   const authPromise = waitForAuth ? page.locator('.auth0-loading').first().waitFor({ state: 'visible' }) : Promise.resolve();
-  const navigationPromise = waitForNavigation ? page.waitForNavigation({ waitUntil: 'load' }) : Promise.resolve();
+  const navigationPromise = waitForNavigation ? page.waitForLoadState('load') : Promise.resolve();
   await Promise.all([authPromise, navigationPromise, page.locator('button[name="submit"]:visible, button[type="submit"]:visible').click()]);
 }
 

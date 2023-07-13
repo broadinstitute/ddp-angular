@@ -109,7 +109,7 @@ test.describe('Adult Enrollment', () => {
 
     await medicalReleaseForm.yourPhysiciansNames().toButton('ADD ANOTHER PHYSICIAN').click();
 
-    await medicalReleaseForm.yourPhysiciansNames(1).toInput('Physician Name').fill(user.secondDoctor.name);
+    await medicalReleaseForm.yourPhysiciansNames(1).toInput('Physician Name').fill(user.secondDoctor.fullName);
     await medicalReleaseForm.yourPhysiciansNames(1).toInput('Institution (if any)').fill(user.secondDoctor.hospital);
     await medicalReleaseForm.yourPhysiciansNames(1).toInput('City').fill(user.secondDoctor.city);
     await medicalReleaseForm.yourPhysiciansNames(1).toInput('State').fill(user.secondDoctor.state);
