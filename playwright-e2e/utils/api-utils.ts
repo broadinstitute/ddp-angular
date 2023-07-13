@@ -40,10 +40,10 @@ function buildAuth0ClientCredentials(app: APP): string {
       domain = process.env.RGP_AUTH0_DOMAIN;
       break;
     case 'AT':
-      clientId = process.env.AT_AUTH0_CLIENT_ID;
-      clientSecret = process.env.AT_AUTH0_CLIENT_SECRET;
-      audience = process.env.AT_AUTH0_AUDIENCE;
-      domain = process.env.AT_AUTH0_DOMAIN;
+      clientId = process.env.ATCP_AUTH0_CLIENT_ID;
+      clientSecret = process.env.ATCP_AUTH0_CLIENT_SECRET;
+      audience = process.env.ATCP_AUTH0_AUDIENCE;
+      domain = process.env.ATCP_AUTH0_DOMAIN;
       break;
     default:
       throw Error(`Undefined app name: ${app}`);
@@ -127,8 +127,9 @@ export async function getAuth0UserByEmail(app: APP, email: string, accessToken: 
 }
 
 export async function setAuth0UserEmailVerified(app: APP, email: string, opts: { isEmailVerified?: boolean; accessToken?: string }): Promise<string> {
-  const credentials = JSON.parse(buildAuth0ClientCredentials(app));
   const { isEmailVerified = true, accessToken = await getAuth0AccessToken(app) } = opts;
+
+  const credentials = JSON.parse(buildAuth0ClientCredentials(app));
   const user = await getAuth0UserByEmail(app, email, accessToken);
 
   const userId = JSON.parse(JSON.stringify(user)).user_id;

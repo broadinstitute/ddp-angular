@@ -112,6 +112,20 @@ export default class Table {
     return this.rowLocator().nth(row).allInnerTexts();
   }
 
+  /**
+   * Returns an array of string in every row under a column
+   * @param {string} column Column name
+   * @returns {Promise<void>}
+   */
+  async getColumnValues(column: string): Promise<Array<string>> {
+    const columnIndex = await this.getHeaderIndex(column);
+    let rowText = new Array<string>();
+    for (let i = 0; i < await this.getRowsCount(); i++) {
+      rowText.push(await this.cell(i, columnIndex).innerText());
+    }
+    return rowText;
+  }
+
   async getRowInnerText(row: number, column: string): Promise<string | null> {
     // Find column index
     const columns = await this.getHeaderNames();

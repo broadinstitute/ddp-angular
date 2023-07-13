@@ -10,10 +10,12 @@ export default class Question {
   private readonly page: Page;
   private readonly locator: Locator;
   private readonly rootLocator: Locator;
+  private readonly exactMatch: boolean;
 
-  constructor(page: Page, opts: { prompt?: string | RegExp; cssClassAttribute?: string; parentSelector?: Locator }) {
-    const { prompt, cssClassAttribute, parentSelector } = opts;
+  constructor(page: Page, opts: { prompt?: string | RegExp; cssClassAttribute?: string; parentSelector?: Locator, exactMatch?: boolean }) {
+    const { prompt, cssClassAttribute, parentSelector, exactMatch = false } = opts;
     this.page = page;
+    this.exactMatch = exactMatch;
     this.rootLocator = parentSelector ? parentSelector : this.page.locator('ddp-activity-question');
     // Look for text somewhere inside element. Text matching is case-insensitive and searches for a substring or regex.
     // Caution: If text contains a punctuation colon or/and single quote, find is likely to fail.
@@ -99,7 +101,7 @@ export default class Question {
    * @returns {Promise<void>}
    */
   async check(label?: string, opts: { exactMatch?: boolean } = {}): Promise<void> {
-    const { exactMatch = false } = opts;
+    const { exactMatch = this.exactMatch } = opts;
 
     const locator = this.toLocator().locator('mat-radio-button, mat-checkbox');
     const textLocator = exactMatch ? this.page.locator(`text="${label}"`) : this.page.locator('label', { hasText: label });
