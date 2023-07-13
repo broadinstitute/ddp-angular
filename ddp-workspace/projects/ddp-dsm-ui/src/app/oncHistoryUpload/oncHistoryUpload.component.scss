@@ -1,3 +1,5 @@
+@use 'commonStyles' as common;
+
 .message {
   height: 2em;
   width: 100%;
@@ -19,5 +21,14 @@
 
   .table {
     margin-top: .5em;
+  }
+}
+
+.download-button {
+  @include common.flexContainer(center, space-between);
+  width: 42em;
+  p {
+    margin: 0;
+    padding: 0;
   }
 }
