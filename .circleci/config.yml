@@ -770,7 +770,7 @@ parameters:
     default: false
   e2e-test-parallelism:
     type: integer
-    default: 2
+    default: 1
   scheduled-playwright:
     type: boolean
     default: false
@@ -919,7 +919,7 @@ workflows:
           <<: *filter-develop-branch
           env: dev
           test_suite: UNKNOWN
-          parallelism_num: 2
+          parallelism_num: 1
           requires:
             - playwright-build
             - app-deploy
