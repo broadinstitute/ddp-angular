@@ -1,0 +1,107 @@
+<mat-accordion multi>
+  <mat-expansion-panel hideToggle [disabled]="doNotAllowCollapse" >
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        {{user.email}}
+      </mat-panel-title>
+      <mat-panel-description>
+        <main class="header">
+          <section class="header-text">
+            <p>Name:
+              <span *ngIf="!isUserEditing" class="header-text-name">{{user.name}}</span>
+              <input *ngIf="isUserEditing"
+                     [(ngModel)]="user.name"
+                     class="header-text-editing-name"
+                     type="text"
+                     [value]="user.name"
+                     (click)="$event.stopPropagation()" />
+            </p>
+            <p>Phone:
+              <span *ngIf="!isUserEditing" class="header-text-phone">{{user.phone}}</span>
+              <input
+                *ngIf="isUserEditing"
+                [(ngModel)]="user.phone"
+                class="header-text-editing-phone"
+                type="text"
+                [value]="user.phone"
+                (click)="$event.stopPropagation()" />
+            </p>
+              <button
+                color="primary"
+                *ngIf="isUserEditing"
+                class="header-text-saveButton"
+                matTooltip="Update user"
+                mat-stroked-button
+                (click)="saveEditedUser($event)">
+                <ng-container *ngIf="!isEditUserLoading; else spinnerTemplate">
+                  Save
+                </ng-container>
+              </button>
+          </section>
+          <section class="header-buttons">
+            <button class="header-buttons-compare"
+                    matTooltip="Compare Permissions"
+                    mat-icon-button
+                    (click)="compareUser($event, user)">
+              <mat-icon>compare_arrows</mat-icon>
+            </button>
+            <button class="header-buttons-edit"
+                    matTooltip="Edit User"
+                    mat-icon-button
+                    (click)="editUser($event, user)">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <ng-container *ngIf="!isDeleteUserLoading; else spinnerTemplate">
+              <button class="header-buttons-delete"
+                      matTooltip="Delete User"
+                      mat-icon-button
+                      (click)="deleteUser($event, user)">
+                <mat-icon>delete_forever</mat-icon>
+              </button>
+            </ng-container>
+          </section>
+        </main>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <section class="title">
+      <h3>Permissions</h3>
+    </section>
+
+    <mat-divider></mat-divider>
+
+    <section class="permissions">
+      <section class="permissions-selectSingle">
+        <ng-container *ngIf="user.roles.length">
+          <app-permission-checkbox
+            (checkboxChanged)="onCheckboxChanged($event)"
+            *ngFor="let role of user.roles" [role]="role">
+          </app-permission-checkbox>
+        </ng-container>
+      </section>
+    </section>
+
+    <mat-divider></mat-divider>
+
+    <section class="actionButtons">
+      <button [disabled]="areActionButtonsDisabled || isEditPermissionsLoading" mat-stroked-button color="primary" class="actionButtons-save"
+              (click)="saveChanges()">
+        <ng-container *ngIf="!isEditPermissionsLoading; else spinnerTemplate">
+          Save
+        </ng-container>
+      </button>
+      <button [disabled]="areActionButtonsDisabled || isEditPermissionsLoading" mat-stroked-button color="warn" class="actionButtons-discard"
+              (click)="discardChanges()">Discard changes
+      </button>
+    </section>
+
+  </mat-expansion-panel>
+</mat-accordion>
+
+
+<!--  Templates -->
+<ng-template #spinnerTemplate>
+  <div class="spinner-container">
+    <mat-spinner diameter="25"></mat-spinner>
+  </div>
+</ng-template>

@@ -148,6 +148,10 @@ import {
 } from '../sharedLearningUpload/components/confirmationModal/confirmationModal.component';
 import {OncHistoryUploadComponent} from '../oncHistoryUpload/oncHistoryUpload.component';
 import {OncHistoryUploadGuard} from '../guards/oncHistoryUpload.guard';
+import {
+  UsersAndPermissionsCanActivateGuard,
+  UsersAndPermissionsCanLoadGuard
+} from "../guards/usersAndPermissions.guard";
 
 
 PlotlyModule.plotlyjs = PlotlyJS;
@@ -301,7 +305,9 @@ PlotlyModule.plotlyjs = PlotlyJS;
     Statics,
     Language,
     DashboardStatisticsService,
-    OncHistoryUploadGuard
+    OncHistoryUploadGuard,
+    UsersAndPermissionsCanLoadGuard,
+    UsersAndPermissionsCanActivateGuard
   ],
   exports: [RouterModule, MatFormFieldModule, MatInputModule]
 })

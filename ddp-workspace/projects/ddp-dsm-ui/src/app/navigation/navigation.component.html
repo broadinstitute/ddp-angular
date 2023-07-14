@@ -85,6 +85,7 @@
           <li *ngIf="hasRole().allowedToDownloadNDI()"><a href="#" [routerLink]="['ndi']"> NDI Download </a></li>
           <li *ngIf="showOncHistoryUploadPage(selectedStudy | async)"><a [routerLink]="['oncHistoryUpload']">Onc History Upload</a></li>
           <li ><a href="#" [routerLink]="['drugList']"> Drug List </a></li>
+          <li ><a href="#" [routerLink]="['usersAndPermissions']"> Users And Permissions </a></li>
         </ul>
       </li>
     </ul>

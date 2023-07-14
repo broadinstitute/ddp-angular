@@ -1,0 +1,16 @@
+<div class="checkbox-container">
+  <input class="inp-cbx" [id]="idRandomizer" type="checkbox"
+         (change)="onChange($event, role)" [checked]="role.isSelected"/>
+  <label class="cbx" [for]="idRandomizer">
+    <span>
+      <svg width="12px" height="10px">
+        <use xlink:href="#check-4"></use>
+      </svg>
+    </span>
+    <span>{{role.name}}</span></label>
+  <svg class="inline-svg">
+    <symbol id="check-4" viewbox="0 0 12 10">
+      <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+    </symbol>
+  </svg>
+</div>

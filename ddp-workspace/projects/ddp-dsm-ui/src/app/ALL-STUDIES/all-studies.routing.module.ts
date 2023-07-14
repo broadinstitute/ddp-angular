@@ -38,6 +38,10 @@ import {DashboardStatisticsComponent} from '../dashboard-statistics/dashboard-st
 import {ScannerComponent} from '../scanner/scanner.component';
 import {OncHistoryUploadComponent} from '../oncHistoryUpload/oncHistoryUpload.component';
 import {OncHistoryUploadGuard} from '../guards/oncHistoryUpload.guard';
+import {
+  UsersAndPermissionsCanActivateGuard,
+  UsersAndPermissionsCanLoadGuard
+} from "../guards/usersAndPermissions.guard";
 
 
 
@@ -94,6 +98,12 @@ export const AppRoutes: Routes = [
       {path: 'oncHistoryUpload', component: OncHistoryUploadComponent, canActivate: [AuthGuard, OncHistoryUploadGuard]},
 
       {path: 'userSettings', component: UserSettingComponent, canActivate: [AuthGuard]},
+      {path: 'usersAndPermissions',
+        canActivate: [UsersAndPermissionsCanActivateGuard],
+        canLoad: [UsersAndPermissionsCanLoadGuard],
+        loadChildren: () =>
+          import('../usersAndPermissions/usersAndPermissions.module').then(m => m.UsersAndPermissionsModule)
+      },
 
       // Permalink
       {
