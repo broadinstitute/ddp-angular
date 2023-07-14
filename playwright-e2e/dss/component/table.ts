@@ -108,8 +108,33 @@ export default class Table {
    * @param {number} row 0-indexed. 0 selects first row.
    * @returns {Promise<void>}
    */
-  async getRowValues(row = 0): Promise<Array<string>> {
+  async getRowAllTexts(row = 0): Promise<Array<string>> {
     return this.rowLocator().nth(row).allInnerTexts();
+  }
+
+  /**
+   * Returns an array of string in every row under a column
+   * @param {string} column Column name
+   * @returns {Promise<void>}
+   */
+  async getColumnAllTexts(column: string): Promise<Array<string>> {
+    const columnIndex = await this.getHeaderIndex(column);
+    const rowText = new Array<string>();
+    for (let i = 0; i < await this.getRowsCount(); i++) {
+      rowText.push(await this.cell(i, columnIndex).innerText());
+    }
+    return rowText;
+  }
+
+  async getRowText(row: number, column: string): Promise<string | null> {
+    // Find column index
+    const columns = await this.getHeaderNames();
+    const columnIndex = await this.getHeaderIndex(column);
+    if (columnIndex === -1) {
+      return null; // Not found
+    }
+    const cell = this.cell(row, columnIndex);
+    return await cell.innerText();
   }
 
   /**
@@ -118,13 +143,6 @@ export default class Table {
    */
   async getHeaderNames(): Promise<Array<string>> {
     return this.headerLocator().allInnerTexts();
-    /*
-    const columns = await this.headerLocator().elementHandles();
-    return await Promise.all(
-      _.map(columns, async (column) => {
-        return await column.innerText();
-      })
-    ); */
   }
 
   async getHeaderIndex(name: string, opts: { exactMatch?: boolean } = {}): Promise<number> {

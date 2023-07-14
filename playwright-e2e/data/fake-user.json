@@ -64,7 +64,10 @@
     "phone": "6177147000"
   },
   "secondDoctor": {
-    "name": "John Stack",
+    "firstName": "E2E",
+    "middleName": "PlaywrightTest",
+    "lastName": "Stark",
+    "fullName": "E2E PlaywrightTest Stark",
     "specialty": "PRIMARY_CARE",
     "phone": "6187247123",
     "hospital": "Brigham and Women's Hospital",

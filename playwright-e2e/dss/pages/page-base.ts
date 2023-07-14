@@ -395,7 +395,7 @@ export default abstract class PageBase implements PageInterface {
    */
   country(): Question {
     return new Question(this.page, {
-      prompt: new RegExp(/((?:choose|select) country\b)|(country\b)/i)
+      prompt: new RegExp(/((?:choose|select) country)|(country\b)/i)
     });
   }
 
@@ -406,7 +406,7 @@ export default abstract class PageBase implements PageInterface {
    */
   state(): Question {
     return new Question(this.page, {
-      prompt: new RegExp(/((?:choose|select) (state\b|province\b))|(state\b)/i)
+      prompt: new RegExp(/((?:choose|select) (state|province))|(state\b)/i)
     });
   }
 

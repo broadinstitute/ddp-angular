@@ -2,7 +2,7 @@ import { Locator, Page } from '@playwright/test';
 import { WidgetInterface } from 'dss/component/widget-interface';
 
 export default abstract class WidgetBase implements WidgetInterface {
-  protected readonly nth: number;
+  protected nth: number;
   protected root: Locator;
   protected element: Locator | undefined;
 

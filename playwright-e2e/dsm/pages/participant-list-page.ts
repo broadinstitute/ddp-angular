@@ -207,4 +207,44 @@ export default class ParticipantListPage {
     await button.click();
     await waitForNoSpinner(this.page);
   }
+
+  async findParticipantForKitUpload(): Promise<number> {
+    const participantListTable = this.participantListTable;
+
+    const searchPanel = this.filters.searchPanel;
+    await searchPanel.open();
+    await searchPanel.checkboxes('Status', {checkboxValues: ['Enrolled']});
+    await searchPanel.search();
+    await expect(participantListTable.rowLocator().first()).toBeVisible();
+
+    const normalCollaboratorSampleIDColumn = 'Normal Collaborator Sample ID';
+    const validColumn = 'Valid';
+
+    const customizeViewPanel = this.filters.customizeViewPanel;
+    await customizeViewPanel.open();
+    await customizeViewPanel.selectColumns('Sample Columns', [normalCollaboratorSampleIDColumn]);
+    await customizeViewPanel.selectColumns('Contact Information Columns', [validColumn]);
+
+    await expect(participantListTable.rowLocator().first()).toBeVisible();
+
+    let testParticipantIndex = 0;
+    let participantsRowsCount = await participantListTable.rowsCount;
+    expect(participantsRowsCount).toBeGreaterThanOrEqual(1);
+
+    for (let count = 0; count < participantsRowsCount; count++) {
+      const normalCollaboratorSampleID = await participantListTable.getParticipantDataAt(count, normalCollaboratorSampleIDColumn);
+      const isAddressValid = await participantListTable.getParticipantDataAt(count, validColumn);
+      if (normalCollaboratorSampleID.split('\n').length < 28 &&
+        isAddressValid.trim().toLowerCase() === 'true') {
+        testParticipantIndex = count;
+        break;
+      }
+      if (count === participantsRowsCount - 1) {
+        await participantListTable.nextPage();
+        participantsRowsCount = await participantListTable.rowsCount;
+      }
+    }
+
+    return testParticipantIndex;
+  }
 }
