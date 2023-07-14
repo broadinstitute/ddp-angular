@@ -65,6 +65,7 @@ executors:
     working_directory: *playwright_path
     environment:
       NODE_ENV: development # Needed if playwright is in devDependencies
+      TZ: America/New_York
 
 commands:
   checkout-code:
