@@ -21,3 +21,10 @@ export function logEmailVerificationResult(emailSubject: string, passed: boolean
     description: `${testResult} ${emailSubject}`
   });
 }
+
+export function logGenomeStudySampleKitReceived(shortId: string) {
+  test.info().annotations.push({
+    type: 'Genome Study Sample Kit Received',
+    description: `Mark kit received for participant short_id: ${shortId}`
+  });
+}

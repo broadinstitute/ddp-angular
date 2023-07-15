@@ -18,16 +18,18 @@ export class CustomizeView {
     }
   }
 
-  public async selectColumns(columnsGroupName: string, columns: string[]): Promise<void> {
+  public async selectColumns(columnsGroupName: string, columns: string[], opts: { nth?: number } = {}): Promise<void> {
+    const { nth } = opts;
     this.activeColumnsGroup = columnsGroupName;
-    await this.openColumnsGroup();
+    await this.openColumnsGroup({nth});
     await this.select(columns);
     await this.closeColumnsGroup();
   }
 
-  public async deselectColumns(columnsGroupName: string, columns: string[]): Promise<void> {
+  public async deselectColumns(columnsGroupName: string, columns: string[], opts: { nth?: number } = {}): Promise<void> {
+    const { nth } = opts;
     this.activeColumnsGroup = columnsGroupName;
-    await this.openColumnsGroup();
+    await this.openColumnsGroup({nth});
     await this.select(columns, true);
     await this.closeColumnsGroup();
   }
@@ -49,13 +51,15 @@ export class CustomizeView {
       }
   }
 
-  private async openColumnsGroup(): Promise<void> {
-    const columnsGroupButton = this.columnsGroupButton;
+  private async openColumnsGroup(opts: { nth?: number } = {}): Promise<void> {
+    const { nth } = opts;
+    const columnsGroupButton = this.columnsGroupButton({nth});
     !(await this.isExpanded(columnsGroupButton)) && (await columnsGroupButton.click());
   }
 
-  private async closeColumnsGroup(): Promise<void> {
-    const columnsGroupButton = this.columnsGroupButton;
+  private async closeColumnsGroup(opts: { nth?: number } = {}): Promise<void> {
+    const { nth } = opts;
+    const columnsGroupButton = this.columnsGroupButton({nth});
     (await this.isExpanded(columnsGroupButton)) && (await columnsGroupButton.click());
   }
 
@@ -71,8 +75,9 @@ export class CustomizeView {
 
   /* Locators */
 
-  private get columnsGroupButton(): Locator {
-    return this.page.locator(`${this.columnsGroupXPath}/button`);
+  private columnsGroupButton(opts: { nth?: number } = {}): Locator {
+    const { nth = 0 } = opts;
+    return this.page.locator(`${this.columnsGroupXPath}/button`).nth(nth);
   }
 
   /* XPaths */
