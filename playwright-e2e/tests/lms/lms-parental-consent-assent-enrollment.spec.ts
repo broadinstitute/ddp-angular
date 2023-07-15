@@ -11,7 +11,7 @@ import LmsSurveyAboutLmsPage from 'dss/pages/lms/lms-survey-about-lms-page';
 import SurveyAboutYou from 'dss/pages/survey-about-you';
 import { test } from 'fixtures/lms-fixture';
 import { assertActivityHeader } from 'utils/assertion-helper';
-import { dateFormat, getDate } from 'utils/date-utils';
+import { getDate } from 'utils/date-utils';
 import { generateUserName } from 'utils/faker-utils';
 import { logParticipantCreated } from 'utils/log-utils';
 import { waitForResponse } from 'utils/test-utils';
