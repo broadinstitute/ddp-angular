@@ -1,6 +1,7 @@
 <mat-accordion multi>
   <mat-expansion-panel hideToggle [disabled]="doNotAllowCollapse">
-    <mat-expansion-panel-header>
+    <mat-expansion-panel-header
+      [ngStyle]="user.email === activeUserEmail && {'backgroundColor': 'rgba(144, 224, 239, 0.42)'}">
       <mat-panel-title>
         {{user.email}}
       </mat-panel-title>

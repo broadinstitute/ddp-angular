@@ -9,6 +9,7 @@ import {AdministrationUserRole} from "../../interfaces/AdministrationUserRole";
 import {cloneDeep} from 'lodash';
 import {MatDialog} from "@angular/material/dialog";
 import {ComparePermissionsComponent} from "../comparePermissions/comparePermissions.component";
+import {RoleService} from "../../../services/role.service";
 
 @Component({
   selector: 'app-administration-user',
@@ -34,7 +35,8 @@ export class AdministrationUserComponent {
 
   @Output() comparingUser = new EventEmitter<AdministrationUser>();
 
-  constructor(private readonly cdr: ChangeDetectorRef) {
+  constructor(private readonly cdr: ChangeDetectorRef,
+              private readonly roleService: RoleService) {
   }
 
   /* Event Handlers */
@@ -112,6 +114,10 @@ export class AdministrationUserComponent {
 
   public get disableUserActionButtons(): boolean {
     return this.isEditUserLoading || this.isDeleteUserLoading || this.isEditPermissionsLoading;
+  }
+
+  public get activeUserEmail(): string {
+    return this.roleService.userMail();
   }
 
 

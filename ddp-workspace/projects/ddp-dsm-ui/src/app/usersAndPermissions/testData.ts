@@ -63,8 +63,8 @@ export const testData: AdministrationUser[] = [
     ]
   },
   {
-    name: 'Fourth User',
-    email: 'fourthUser@gmail.com',
+    name: 'Giorgi Charkviani',
+    email: 'gcharkvi@broadinstitute.org',
     phone: '12-31321-31231',
     roles: [
       {
