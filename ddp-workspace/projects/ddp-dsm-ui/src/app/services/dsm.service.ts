@@ -458,6 +458,15 @@ export class DSMService {
     );
   }
 
+  public getUsersAndPermissions(realm: string): Observable<any> {
+    const url = this.baseUrl + DSMService.UI + 'admin/userRole';
+    const map: { name: string; value: any }[] = [];
+    map.push({name: DSMService.REALM, value: realm});
+    return this.http.get(url, this.buildQueryHeader(map)).pipe(
+      catchError(this.handleError)
+    );
+  }
+
   public getMedicalRecord(participantId: string, institutionId: string): Observable<any> {
     const url = this.baseUrl + DSMService.UI + 'participant/' + participantId + '/institution/' + institutionId;
     return this.http.get(url, this.buildHeader()).pipe(

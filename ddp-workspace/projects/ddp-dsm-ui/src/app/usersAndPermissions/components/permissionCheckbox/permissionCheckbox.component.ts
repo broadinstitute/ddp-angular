@@ -9,6 +9,9 @@ import {AdministrationUserRole} from "../../interfaces/AdministrationUserRole";
 })
 export class PermissionCheckboxComponent implements OnInit {
   @Input() role: AdministrationUserRole;
+  @Input() onlyCheckbox: boolean = false;
+  @Input() isDisabled: boolean = false;
+
   @Output() checkboxChanged = new EventEmitter<AdministrationUserRole>();
 
   public idRandomizer: string;

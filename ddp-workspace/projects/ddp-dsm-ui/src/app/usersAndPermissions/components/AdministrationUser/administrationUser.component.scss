@@ -8,6 +8,10 @@
   margin: 1em;
 }
 
+mat-expansion-panel-header {
+  padding: 2em 18px;
+}
+
 p {
   margin: 0;
   padding: 0;
@@ -30,34 +34,50 @@ mat-panel-description {
     width: 100%;
     height: auto;
 
-    &-text {
-      @include common.flexContainer(center, space-between);
-      width: 55%;
-      font-size: small;
-
-      &-name, &-phone {
-        overflow: auto;
-        width: 2em;
-
-        span {
-          font-family: Montserrat-SemiBold, sans-serif;
-        }
+    button:disabled {
+      mat-icon {
+        color: grey;
       }
+    }
 
-      &-editing-name, &-editing-phone {
-        border: none;
-        background-color: inherit;
-        border-bottom: 1px solid #003049;
-        outline: none;
-        text-align: center;
+    &-text {
+      @include common.flexContainer(center);
 
-        &:focus-within {
-          border-bottom: 1px solid rgba(0, 48, 73, 0.49);
+      width: 55%;
+      &-inputs {
+        &-name, &-phone {
+          overflow: auto;
+          width: 2em;
+          max-width: 100%;
+          font-weight: bold;
+
+          span {
+            font-family: Montserrat-SemiBold, sans-serif;
+          }
+        }
+
+        &-editing-name, &-editing-phone {
+          border: none;
+          background-color: inherit;
+          border-bottom: 1px solid #003049;
+          outline: none;
+
+          &:focus-within {
+            border-bottom: 1px solid rgba(0, 48, 73, 0.49);
+          }
         }
       }
 
       &-saveButton {
         @include common.flexContainer(center, center);
+
+        mat-icon {
+          color: #386641;
+
+          &:hover {
+            color: rgba(56, 102, 65, 0.25);
+          }
+        }
       }
     }
 

@@ -14,6 +14,10 @@ import {AdministrationUserComponent} from "./components/AdministrationUser/admin
 import {MatInputModule} from "@angular/material/input";
 import {FormsModule} from "@angular/forms";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import {ComparePermissionsComponent} from "./components/comparePermissions/comparePermissions.component";
+import {MatDialogModule} from "@angular/material/dialog";
+import {MatTableModule} from "@angular/material/table";
+import {MatSelectModule} from "@angular/material/select";
 
 const routes: Routes = [
   {path: '', component: UsersAndPermissionsComponent}
@@ -24,7 +28,8 @@ const routes: Routes = [
     UsersAndPermissionsComponent,
     ListAdministrationUsersComponent,
     PermissionCheckboxComponent,
-    AdministrationUserComponent
+    AdministrationUserComponent,
+    ComparePermissionsComponent
   ],
   imports: [
     CommonModule,
@@ -37,7 +42,10 @@ const routes: Routes = [
     MatTooltipModule,
     MatInputModule,
     FormsModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatDialogModule,
+    MatTableModule,
+    MatSelectModule
   ],
 })
 export class UsersAndPermissionsModule {}

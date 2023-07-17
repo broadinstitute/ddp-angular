@@ -1,12 +1,14 @@
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
-  Component,
-  Input
+  Component, EventEmitter,
+  Input, OnInit, Output
 } from "@angular/core";
 import {AdministrationUser} from "../../interfaces/administrationUser";
 import {AdministrationUserRole} from "../../interfaces/AdministrationUserRole";
 import {cloneDeep} from 'lodash';
+import {MatDialog} from "@angular/material/dialog";
+import {ComparePermissionsComponent} from "../comparePermissions/comparePermissions.component";
 
 @Component({
   selector: 'app-administration-user',
@@ -19,7 +21,7 @@ export class AdministrationUserComponent {
   private rolesBeforeChange: AdministrationUserRole[];
 
   /* Switchers */
-  public areActionButtonsDisabled = true;
+  public arePermissionActionButtonsDisabled = true;
   public isUserEditing = false;
   public isEditUserLoading = false;
   public isEditPermissionsLoading = false;
@@ -30,12 +32,17 @@ export class AdministrationUserComponent {
     this.rolesBeforeChange = cloneDeep(user.roles);
   };
 
+  @Output() comparingUser = new EventEmitter<AdministrationUser>();
+
   constructor(private readonly cdr: ChangeDetectorRef) {
   }
+
+  /* Event Handlers */
 
   public compareUser(event: Event, user: AdministrationUser): void {
     event.stopPropagation();
     console.log(user, 'COMPARE_USER')
+    this.comparingUser.emit(user);
   }
 
   public editUser(event: Event, user: AdministrationUser): void {
@@ -82,7 +89,7 @@ export class AdministrationUserComponent {
 
   public saveChanges(): void {
     this.rolesBeforeChange = this.user.roles;
-    this.areActionButtonsDisabled = true;
+    this.arePermissionActionButtonsDisabled = true;
     this.isEditPermissionsLoading = true;
 
     // mocking
@@ -100,8 +107,11 @@ export class AdministrationUserComponent {
   /* Template methods */
 
   public get doNotAllowCollapse(): boolean {
-    return this.permissionsChanged || this.isEditUserLoading ||
-      this.isEditPermissionsLoading || this.isDeleteUserLoading;
+    return this.permissionsChanged || this.disableUserActionButtons;
+  }
+
+  public get disableUserActionButtons(): boolean {
+    return this.isEditUserLoading || this.isDeleteUserLoading || this.isEditPermissionsLoading;
   }
 
 
@@ -113,7 +123,7 @@ export class AdministrationUserComponent {
   }
 
   private changeActionButtonsState(isDisabled: boolean): void {
-    this.areActionButtonsDisabled = isDisabled;
+    this.arePermissionActionButtonsDisabled = isDisabled;
   }
 
 }

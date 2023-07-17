@@ -1,0 +1,50 @@
+<main class="compare-container">
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <!-- Position Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Role</th>
+      <td mat-cell *matCellDef="let role"> {{role.name}} </td>
+    </ng-container>
+
+    <ng-container [matColumnDef]="firstUser.email">
+      <th mat-header-cell *matHeaderCellDef> {{firstUser.email}} </th>
+      <td mat-cell *matCellDef="let role">
+        <ng-container *ngIf="findRoleForFirstUser(role.roleGuid) as foundRole">
+          <app-permission-checkbox [onlyCheckbox]="true"
+                                   [isDisabled]="true"
+                                   [role]="foundRole">
+          </app-permission-checkbox>
+        </ng-container>
+      </td>
+    </ng-container>
+
+    <ng-container [matColumnDef]="displayedColumns[2] || 'selectUser'">
+      <th mat-header-cell *matHeaderCellDef>
+        <ng-container *ngTemplateOutlet="selectUserTemplate">
+        </ng-container>
+      </th>
+      <td mat-cell *matCellDef="let role">
+        <ng-container *ngIf="displayedColumns[2] !== 'selectUser' && findRoleForSecondUser(role.roleGuid) as foundRole">
+          <app-permission-checkbox [onlyCheckbox]="true"
+                                   [isDisabled]="true"
+                                   [role]="foundRole">
+          </app-permission-checkbox>
+        </ng-container>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+
+
+  <ng-template #selectUserTemplate>
+    <mat-form-field>
+      <mat-label>{{secondUser?.email || 'Select User Email'}}</mat-label>
+      <mat-select (selectionChange)="userSelected($event)">
+        <mat-option *ngFor="let userEmail of allUsers" [value]="userEmail">{{userEmail}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </ng-template>
+</main>
