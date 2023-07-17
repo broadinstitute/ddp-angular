@@ -37,6 +37,8 @@ test.describe('Receive Kit', () => {
     });
 
     test(`Receive genome sample kit for ${study} @dsm @${study} @functional`, async ({page, request}) => {
+      // Instead using UI table filter and search, it is much quicker and more accurate to intercept DSM API request to find the right participant to use.
+      // Find a Playwright test user that does not have GENOME_STUDY_SPIT_KIT_BARCODE.
       await page.route('**/*', async (route, request): Promise<void> => {
          if (!shortId) {
            // only search for shortId one time to avoid duplicated searching
