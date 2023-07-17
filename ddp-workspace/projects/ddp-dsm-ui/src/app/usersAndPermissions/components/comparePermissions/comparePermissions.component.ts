@@ -29,13 +29,13 @@ export class ComparePermissionsComponent implements OnInit {
     // this.dataSource.push(...foundUser.roles);
     this.displayedColumns = ['name', this.firstUser.email];
     this.displayedColumns.push(foundUser.email);
+    this.dataSource = [...this.firstUser.roles];
 
     for(let role of foundUser.roles) {
       if(this.dataSource.findIndex(r => r.roleGuid === role.roleGuid) === -1) {
         this.dataSource.push(role)
       }
     }
-    // this.dataSource = [...this.dataSource, ...foundUser.roles];
 
     this.secondUser = foundUser;
     console.log(this.dataSource, 'AFTER_CHANGE')
