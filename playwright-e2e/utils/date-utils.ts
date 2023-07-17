@@ -3,7 +3,7 @@ export function dateFormat(): Intl.DateTimeFormat {
     month: '2-digit',
     day: '2-digit',
     year: 'numeric',
-    timeZone: 'America/New_York'
+   // timeZone: 'America/New_York'
   })
 }
 
