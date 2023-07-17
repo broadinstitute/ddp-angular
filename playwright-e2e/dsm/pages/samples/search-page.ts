@@ -17,7 +17,7 @@ export default class SearchPage {
     await expect(this.page.locator('h1')).toHaveText('Kit Search');
   }
 
-  async searchByField(searchField: string, value: string): Promise<Table> {
+  async searchByField(searchField: SearchByField, value: string): Promise<Table> {
     const select = new Select(this.page, { label: 'Search by Field', root: 'app-shipping-search' });
     await select.selectOption(searchField);
     const locator = this.page.locator('//div[button[normalize-space()="Search Kit"]]');
