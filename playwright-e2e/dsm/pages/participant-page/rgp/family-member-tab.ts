@@ -272,10 +272,11 @@ export default class FamilyMemberTab {
      * @param notes the notes to be inputted
      */
     public async inputMixedRaceNotes(notes: string): Promise<void> {
-        const responsePromise = this.page.waitForResponse('**/ui/patch');
-        await this.page.locator("//textarea[contains(@data-placeholder, 'Mixed Race Notes')]").fill(`${notes}`);
-        await this.page.locator("//textarea[contains(@data-placeholder, 'Mixed Race Notes')]").blur();
-        const response = await responsePromise;
+        await Promise.all([
+            this.page.waitForResponse(resp => resp.url().includes('**/ui/patch') && resp.status() === 200),
+            await this.page.locator("//textarea[contains(@data-placeholder, 'Mixed Race Notes')]").fill(`${notes}`),
+            await this.page.locator("//textarea[contains(@data-placeholder, 'Mixed Race Notes')]").press('Tab')
+        ]);
     }
 
     /**
