@@ -419,6 +419,6 @@ export default abstract class PageBase implements PageInterface {
     const locator = this.page.locator('//*[./h3[text()="Date"]]/following-sibling::*/p');
     const dateString = await locator.innerText();
     const [MM, DD, YYYY] = dateString.split('/');
-    return `${MM}/${DD}/${YYYY}`;
+    return `${MM.trim()}/${DD.trim()}/${YYYY.trim()}`;
   }
 }
