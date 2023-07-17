@@ -4,7 +4,6 @@ import Institution from 'dss/component/institution';
 import Question from 'dss/component/Question';
 import Input from 'dss/component/input';
 import { assertSelectedOption } from 'utils/assertion-helper';
-import { dateFormat } from 'utils/date-utils';
 import { generateRandomPhoneNum } from 'utils/faker-utils';
 import { waitForNoSpinner, waitForResponse } from 'utils/test-utils';
 import { PageInterface } from 'dss/pages/page-interface';
@@ -420,8 +419,6 @@ export default abstract class PageBase implements PageInterface {
     const locator = this.page.locator('//*[./h3[text()="Date"]]/following-sibling::*/p');
     const dateString = await locator.innerText();
     const [MM, DD, YYYY] = dateString.split('/');
-    const date = dateFormat().format(new Date(parseInt(YYYY), parseInt(MM) - 1, parseInt(DD)));
-    console.log('displayed date is ', date);
-    return date;
+    return `${MM}/${DD}/${YYYY}`;
   }
 }

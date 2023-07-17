@@ -238,10 +238,7 @@ test.describe.serial('LMS Child Enrollment', () => {
       await Promise.all([additionalConsentPage.signature().fill(childFullName), requestPromise]);
 
       // Date text shows today's date with mm/dd/yyyy format
-
-      const uiDate = await additionalConsentPage.getDisplayedDate();
-      const todayDate = getDate();
-      expect(uiDate).toBe(todayDate);
+      expect(await additionalConsentPage.getDisplayedDate()).toBe(getDate(new Date()));
 
       await additionalConsentPage.next();
 
