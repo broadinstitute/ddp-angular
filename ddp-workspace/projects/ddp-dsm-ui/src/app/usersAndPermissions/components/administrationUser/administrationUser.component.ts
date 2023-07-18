@@ -5,7 +5,7 @@ import {
   Input, OnInit, Output
 } from "@angular/core";
 import {AdministrationUser} from "../../interfaces/administrationUser";
-import {AdministrationUserRole} from "../../interfaces/AdministrationUserRole";
+import {AdministrationUserRole} from "../../interfaces/administrationUserRole";
 import {cloneDeep} from 'lodash';
 import {MatDialog} from "@angular/material/dialog";
 import {ComparePermissionsComponent} from "../comparePermissions/comparePermissions.component";

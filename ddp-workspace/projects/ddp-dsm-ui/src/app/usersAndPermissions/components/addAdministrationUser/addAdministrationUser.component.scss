@@ -1,0 +1,45 @@
+@use "commonStyles" as common;
+
+.addUserForm {
+
+  &-title {
+    font-family: Montserrat-SemiBold, sans-serif;
+    text-align: center;
+    margin-bottom: 1em;
+  }
+
+  &-permissions {
+    &-title {
+      text-align: center;
+    }
+  }
+
+  &-buttons {
+    @include common.flexContainer(center, center);
+    margin-top: 1em;
+  }
+
+  &-compare {
+    margin-top: .2em;
+    padding: 1em;
+    mat-divider {
+      margin: .5em;
+    }
+
+    &-input {
+      &-text {
+        font-family: Montserrat-SemiBold, sans-serif;
+      }
+      &-actions {
+        @include common.flexContainer(center, center);
+        &-button {
+          margin-left: 1em;
+        }
+      }
+    }
+
+    &-roles {
+      margin: 1em 0;
+    }
+  }
+}

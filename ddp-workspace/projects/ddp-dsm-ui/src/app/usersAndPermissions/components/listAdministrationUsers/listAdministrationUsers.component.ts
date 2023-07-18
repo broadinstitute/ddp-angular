@@ -1,5 +1,4 @@
 import {ChangeDetectionStrategy, Component, Input, OnInit} from "@angular/core";
-import {testData} from "../../testData";
 import {AdministrationUser} from "../../interfaces/administrationUser";
 import {MatDialog} from "@angular/material/dialog";
 import {ComparePermissionsComponent} from "../comparePermissions/comparePermissions.component";
@@ -12,7 +11,7 @@ import {UsersAndPermissionsHttpServiceService} from "../../services/usersAndPerm
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ListAdministrationUsersComponent implements OnInit {
-  @Input() usersList: AdministrationUser[] = testData;
+  @Input() usersList: AdministrationUser[];
 
   constructor(private readonly matDialog: MatDialog,
               private readonly httpService: UsersAndPermissionsHttpServiceService) {

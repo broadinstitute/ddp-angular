@@ -2,7 +2,7 @@ import {Component, Inject, OnInit} from "@angular/core";
 import {MAT_DIALOG_DATA} from "@angular/material/dialog";
 import {AdministrationUser} from "../../interfaces/administrationUser";
 import {MatSelectChange} from "@angular/material/select";
-import {AdministrationUserRole} from "../../interfaces/AdministrationUserRole";
+import {AdministrationUserRole} from "../../interfaces/administrationUserRole";
 
 @Component({
   selector: 'app-compare-permissions',

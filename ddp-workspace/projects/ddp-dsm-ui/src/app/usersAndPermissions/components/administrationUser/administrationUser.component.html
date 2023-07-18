@@ -12,7 +12,6 @@
               <p>Name:
                 <span *ngIf="!isUserEditing" class="header-text-inputs-name">{{user.name}}</span>
                 <input *ngIf="isUserEditing"
-                       [(ngModel)]="user.name"
                        class="header-text-inputs-editing-name"
                        type="text"
                        [value]="user.name"
@@ -22,7 +21,6 @@
                 <span *ngIf="!isUserEditing" class="header-text-inputs-phone">{{user.phone}}</span>
                 <input
                   *ngIf="isUserEditing"
-                  [(ngModel)]="user.phone"
                   class="header-text-inputs-editing-phone"
                   type="text"
                   [value]="user.phone"

@@ -95,3 +95,26 @@ export const testData: AdministrationUser[] = [
     ]
   }
 ]
+
+export const availableRoles = [
+  {
+    roleGuid: 'survey_creation',
+    name: 'Create surveys',
+  },
+  {
+    roleGuid: 'mercury_order_sequencing',
+    name: 'Mercury order sequencing',
+  },
+  {
+    roleGuid: 'view_shared_learnings',
+    name: 'View shared learnings',
+  },
+  {
+    roleGuid: 'upload_ror_file',
+    name: 'Upload return of results file',
+  },
+  {
+    roleGuid: 'upload_onc_history',
+    name: 'Upload onc history',
+  }
+]

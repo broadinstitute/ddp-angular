@@ -21,6 +21,7 @@ import {IDateRange} from '../dashboard-statistics/interfaces/IDateRange';
 import {StatisticsEnum} from '../dashboard-statistics/enums/statistics.enum';
 import {SomaticResultSignedUrlRequest} from '../sharedLearningUpload/interfaces/somaticResultSignedUrlRequest';
 import {SendToParticipantRequest} from '../sharedLearningUpload/interfaces/sendToParticipant';
+import {AddAdministrationUserRequest} from "../usersAndPermissions/interfaces/addAdministrationUser";
 
 declare var DDP_ENV: any;
 
@@ -458,11 +459,20 @@ export class DSMService {
     );
   }
 
-  public getUsersAndPermissions(realm: string): Observable<any> {
+  public getUsers(realm: string): Observable<any> {
     const url = this.baseUrl + DSMService.UI + 'admin/userRole';
     const map: { name: string; value: any }[] = [];
     map.push({name: DSMService.REALM, value: realm});
     return this.http.get(url, this.buildQueryHeader(map)).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  public addUser(realm: string, body: AddAdministrationUserRequest): Observable<any> {
+    const url = this.baseUrl + DSMService.UI + 'admin/user';
+    const map: { name: string; value: any }[] = [];
+    map.push({name: DSMService.REALM, value: realm});
+    return this.http.post(url, {users: [body]}, this.buildQueryHeader(map)).pipe(
       catchError(this.handleError)
     );
   }

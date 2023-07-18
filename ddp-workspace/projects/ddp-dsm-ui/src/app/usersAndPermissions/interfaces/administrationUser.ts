@@ -1,4 +1,4 @@
-import {AdministrationUserRole} from "./AdministrationUserRole";
+import {AdministrationUserRole} from "./administrationUserRole";
 
 export interface AdministrationUser {
   email: string;

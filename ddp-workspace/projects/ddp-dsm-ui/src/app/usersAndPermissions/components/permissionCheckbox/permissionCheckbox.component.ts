@@ -1,5 +1,5 @@
 import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output} from "@angular/core";
-import {AdministrationUserRole} from "../../interfaces/AdministrationUserRole";
+import {AdministrationUserRole} from "../../interfaces/administrationUserRole";
 
 @Component({
   selector: 'app-permission-checkbox',
@@ -17,7 +17,9 @@ export class PermissionCheckboxComponent implements OnInit {
   public idRandomizer: string;
 
   ngOnInit(): void {
-    this.idRandomizer = this.role.roleGuid + Math.floor(Math.random() * 100000);
+    this.idRandomizer =
+      (this.role?.roleGuid || 'defaultGuid1994') +
+      Math.floor(Math.random() * 100000);
   }
 
   public onChange(changeEvent: Event, role: AdministrationUserRole): void {
