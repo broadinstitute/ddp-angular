@@ -2,7 +2,8 @@ export function dateFormat(): Intl.DateTimeFormat {
   return new Intl.DateTimeFormat('en-US', {
     month: '2-digit',
     day: '2-digit',
-    year: 'numeric'
+    year: 'numeric',
+   // timeZone: 'America/New_York'
   })
 }
 
@@ -13,6 +14,13 @@ export function dateFormat(): Intl.DateTimeFormat {
  */
 export function getDate(date?: Date): string {
   return dateFormat().format(date ? date : new Date());
+}
+
+export function getUtcDate(): string {
+  const utc = new Date(new Date().toUTCString());
+  const day = (`0${utc.getUTCDate()}`).slice(-2);
+  const month = (`0${utc.getUTCMonth() + 1}`).slice(-2);
+  return `${month}/${day}/${utc.getFullYear()}`; // mm/dd/yyyy
 }
 
 export function mailingListCreatedDate(date: Date): string {

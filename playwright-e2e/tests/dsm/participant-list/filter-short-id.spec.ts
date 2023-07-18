@@ -2,6 +2,7 @@ import { expect } from '@playwright/test';
 import { test } from 'fixtures/dsm-fixture';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
 import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
+import { studyShortName } from 'utils/test-utils';
 
 test.describe('Participants Search', () => {
   const studies = [StudyEnum.LMS, StudyEnum.OSTEO2];
@@ -24,23 +25,7 @@ test.describe('Participants Search', () => {
       expect(await participantsTable.rowLocator().count(),
         `Participant List page - Displayed participants count is not 1`)
         .toEqual(1);
-      expect(guid).toEqual(getStudyDisplayName(study));
+      expect(guid).toEqual(studyShortName(study).shortName);
     });
-  }
-
-  function getStudyDisplayName(study: StudyEnum): string | null {
-    let studyName: string | null;
-    switch (study) {
-      case StudyEnum.LMS:
-        studyName = 'cmi-lms';
-        break;
-      case StudyEnum.OSTEO2:
-        studyName = 'cmi-osteo';
-        break;
-      default:
-        studyName = null;
-        break;
-    }
-    return studyName;
   }
 });

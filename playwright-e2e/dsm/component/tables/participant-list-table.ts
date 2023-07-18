@@ -42,8 +42,8 @@ export class ParticipantListTable extends Table {
     return await this.page.locator(this.participantDataByXPath(columnName, columnValue, xColumnName)).innerText();
   }
 
-  public async getParticipantDataAt(position: number, columnName: string): Promise<string> {
-    const columnIndex = await this.getHeaderIndex(columnName);
+  public async getParticipantDataAt(position: number, columnName: string, opts: { exactMatch?: boolean } = {}): Promise<string> {
+    const columnIndex = await this.getHeaderIndex(columnName, opts);
     return this.cell(position, columnIndex).innerText();
   }
 

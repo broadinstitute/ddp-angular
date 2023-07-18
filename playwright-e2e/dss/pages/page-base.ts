@@ -2,7 +2,6 @@ import { expect, Locator, Page, Response } from '@playwright/test';
 import Address from 'dss/component/address';
 import Institution from 'dss/component/institution';
 import Question from 'dss/component/Question';
-import Checkbox from 'dss/component/checkbox';
 import Input from 'dss/component/input';
 import { assertSelectedOption } from 'utils/assertion-helper';
 import { generateRandomPhoneNum } from 'utils/faker-utils';
@@ -416,9 +415,10 @@ export default abstract class PageBase implements PageInterface {
       : new Question(this.page, { prompt: 'Signature' }).toInput();
   }
 
-  async getDate(): Promise<Date> {
+  async getDisplayedDate(): Promise<string> {
     const locator = this.page.locator('//*[./h3[text()="Date"]]/following-sibling::*/p');
-    const str = (await locator.innerText()).trim().replace(' ', '');
-    return new Date(str);
+    const dateString = await locator.innerText();
+    const [MM, DD, YYYY] = dateString.split('/');
+    return `${MM.trim()}/${DD.trim()}/${YYYY.trim()}`;
   }
 }
