@@ -28,7 +28,7 @@
   <section class="addUserForm-buttons">
     <button class="addUserForm-buttons-add"
             color="accent"
-            [disabled]="addUserForm.invalid || !(!!onlySelectedRoles?.length)"
+            [disabled]="!allowAddingUser"
             (click)="addUser()" mat-raised-button>Add User</button>
   </section>
 

@@ -79,6 +79,7 @@
         <ng-container *ngIf="user.roles.length">
           <app-permission-checkbox
             (checkboxChanged)="onCheckboxChanged($event)"
+            [isDisabled]="isEditPermissionsLoading"
             *ngFor="let role of user.roles" [role]="role">
           </app-permission-checkbox>
         </ng-container>

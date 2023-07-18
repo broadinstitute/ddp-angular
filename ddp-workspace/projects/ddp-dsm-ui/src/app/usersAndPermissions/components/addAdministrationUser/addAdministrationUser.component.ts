@@ -28,11 +28,13 @@ export class AddAdministrationUserComponent {
   ) {}
 
   public addUser(): void {
-    const userToAdd: AddAdministrationUserRequest = {
-      ...this.addUserForm.getRawValue(),
-      roles: this.chosenRoles.map(r => r.roleGuid)
+    if (this.allowAddingUser) {
+      const userToAdd: AddAdministrationUserRequest = {
+        ...this.addUserForm.getRawValue(),
+        roles: this.chosenRoles.map(r => r.roleGuid)
+      }
+      this.matDialogRef.close(userToAdd);
     }
-    this.matDialogRef.close(userToAdd);
   }
 
   public get roles(): AdministrationUserRole[] {
@@ -41,6 +43,10 @@ export class AddAdministrationUserComponent {
 
   public get onlySelectedRoles(): AdministrationUserRole[] {
     return this.chosenRoles;
+  }
+
+  public get allowAddingUser(): boolean {
+    return this.addUserForm.valid && !!this.onlySelectedRoles?.length;
   }
 
   public roleSelected(role: AdministrationUserRole): void {
