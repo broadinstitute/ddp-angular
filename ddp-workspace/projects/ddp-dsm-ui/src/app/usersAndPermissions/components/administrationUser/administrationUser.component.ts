@@ -7,9 +7,8 @@ import {
 import {AdministrationUser} from "../../interfaces/administrationUser";
 import {AdministrationUserRole} from "../../interfaces/administrationUserRole";
 import {cloneDeep} from 'lodash';
-import {MatDialog} from "@angular/material/dialog";
-import {ComparePermissionsComponent} from "../comparePermissions/comparePermissions.component";
 import {RoleService} from "../../../services/role.service";
+import {FormBuilder, FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'app-administration-user',
@@ -17,7 +16,9 @@ import {RoleService} from "../../../services/role.service";
   styleUrls: ['administrationUser.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AdministrationUserComponent {
+export class AdministrationUserComponent implements OnInit {
+  public editUserForm: FormGroup;
+
   public user: AdministrationUser;
   private rolesBeforeChange: AdministrationUserRole[];
 
@@ -34,9 +35,19 @@ export class AdministrationUserComponent {
   };
 
   @Output() comparingUser = new EventEmitter<AdministrationUser>();
+  @Output() editingUser = new EventEmitter<AdministrationUser>();
+  @Output() deletingUser = new EventEmitter<AdministrationUser>();
 
   constructor(private readonly cdr: ChangeDetectorRef,
-              private readonly roleService: RoleService) {
+              private readonly roleService: RoleService,
+              private readonly formBuilder: FormBuilder) {
+  }
+
+  ngOnInit(): void {
+    this.editUserForm = this.formBuilder.group({
+      name: [this.user.name],
+      phone: [this.user.phone]
+    })
   }
 
   /* Event Handlers */
@@ -56,11 +67,16 @@ export class AdministrationUserComponent {
   public saveEditedUser(event: Event): void {
     event.stopPropagation();
     this.isEditUserLoading = true;
+    this.editUserForm.disable();
+
 
     console.log(this.user, 'SAVED_EDITED')
 
     // mocking
     setTimeout(() => {
+      this.editUserForm.enable();
+      this.user.name = this.editUserForm.get('name').value;
+      this.user.phone = this.editUserForm.get('phone').value;
       this.cdr.markForCheck()
       this.isEditUserLoading = false
     }, 3000)
@@ -74,7 +90,7 @@ export class AdministrationUserComponent {
 
     // mocking
     setTimeout(() => {
-      this.cdr.markForCheck()
+      this.cdr.markForCheck();
       this.isDeleteUserLoading = false
     }, 3000)
   }

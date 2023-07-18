@@ -8,10 +8,11 @@
       <mat-panel-description>
         <main class="header">
           <section class="header-text">
-            <div class="header-text-inputs">
+            <form [formGroup]="editUserForm" class="header-text-inputs">
               <p>Name:
                 <span *ngIf="!isUserEditing" class="header-text-inputs-name">{{user.name}}</span>
                 <input *ngIf="isUserEditing"
+                       formControlName="name"
                        class="header-text-inputs-editing-name"
                        type="text"
                        [value]="user.name"
@@ -21,18 +22,20 @@
                 <span *ngIf="!isUserEditing" class="header-text-inputs-phone">{{user.phone}}</span>
                 <input
                   *ngIf="isUserEditing"
+                  formControlName="phone"
                   class="header-text-inputs-editing-phone"
                   type="text"
                   [value]="user.phone"
                   (click)="$event.stopPropagation()"/>
               </p>
-            </div>
+            </form>
             <button
               color="primary"
               *ngIf="isUserEditing"
               class="header-text-saveButton"
               matTooltip="Update user"
               mat-icon-button
+              [disabled]="editUserForm.invalid"
               (click)="saveEditedUser($event)">
               <ng-container *ngIf="!isEditUserLoading; else spinnerTemplate">
                 <mat-icon>save</mat-icon>
