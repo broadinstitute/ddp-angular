@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, OnDestroy} from "@angular/core";
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy} from "@angular/core";
 import {UsersAndPermissionsHttpServiceService} from "./services/usersAndPermissionsHttpService.service";
 import {availableRoles, testData} from "./testData";
 import {MatDialog} from "@angular/material/dialog";
@@ -19,7 +19,8 @@ export class UsersAndPermissionsComponent implements OnDestroy {
 
   constructor(
     private readonly httpService: UsersAndPermissionsHttpServiceService,
-    private readonly matDialog: MatDialog) {}
+    private readonly matDialog: MatDialog,
+    private readonly cdr: ChangeDetectorRef) {}
 
   ngOnDestroy(): void {
     this.subscriptionSubject.next();
@@ -37,7 +38,21 @@ export class UsersAndPermissionsComponent implements OnDestroy {
         take(1),
         takeUntil(this.subscriptionSubject)
       )
-      .subscribe(user => console.log(user, 'AFTER_CLOSE'))
+      .subscribe(user => {
+        if (user) {
+          this.usersList = [...this.usersList,
+            {...user, roles: [...availableRoles.map(r => {
+                return {
+                  ...r,
+                  isSelected: !!user.roles.find(rr => rr === r.roleGuid)
+                }
+              })]}
+          ]
+        }
+        this.cdr.markForCheck();
+        console.log(this.usersList, 'UPDATED_USER_LIST')
+        console.log(user, 'AFTER_CLOSE')
+      })
   }
 
 }
