@@ -37,11 +37,12 @@ import { BulkCohortTagModalComponent } from '../tags/cohort-tag/bulk-cohort-tag-
 import { CohortTagComponent } from '../tags/cohort-tag/cohort-tag.component';
 import { CohortTag } from '../tags/cohort-tag/cohort-tag.model';
 import {FieldSettingsModel, ValueModel} from '../models';
+import {ExportHelpComponent} from "../help/help.component";
 
 @Component({
   selector: 'app-participant-list',
   templateUrl: './participant-list.component.html',
-  styleUrls: ['./participant-list.component.css']
+  styleUrls: ['./participant-list.component.scss']
 })
 export class ParticipantListComponent implements OnInit {
 
@@ -2240,6 +2241,12 @@ export class ParticipantListComponent implements OnInit {
       name = column.participantColumn.name;
     }
     return this.getPersonFieldFromDataRow(personData, column, name, participant);
+  }
+
+  public openExportHelpModal(): void {
+    this.dialog.open(ExportHelpComponent, {
+      height: '80%',
+    });
   }
 
   getPersonFieldFromDataRow(personData: ParticipantData, column: Filter, name: string, participant: Participant): any {

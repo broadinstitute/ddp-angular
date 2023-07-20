@@ -995,7 +995,7 @@
       </ng-container>
       <ng-container *ngIf="modalAnchor === 'exportOptions'">
         <h4>Configure export
-          <a [routerLink]="['../help']" target="_blank"><span class="fa fa-question-circle"></span></a>
+          <span matTooltip="Export Help" class="export-help-icon" (click)="openExportHelpModal()"><span class="fa fa-question-circle"></span></span>
         </h4>
       </ng-container>
 
@@ -1011,7 +1011,7 @@
       </ng-container>
       <ng-container *ngIf="modalAnchor === 'exportOptions'">
         <mat-radio-group [(ngModel)]="exportFileFormat">
-          File format: <a [routerLink]="['../help']" target="_blank"><span class="fa fa-question-circle"></span></a>
+          File format: <span matTooltip="Export Help" class="export-help-icon" (click)="openExportHelpModal()"><span class="fa fa-question-circle"></span></span>
           <div>
             <mat-radio-button color="primary" disableRipple value="xlsx">
               <span tooltip="Microsoft Excel workbook">Excel (.xlsx)</span>
@@ -1023,7 +1023,7 @@
         </mat-radio-group>
         <br/>
         <mat-radio-group [(ngModel)]="exportHumanReadable">
-          Option text format: <a [routerLink]="['../help']" target="_blank"><span class="fa fa-question-circle"></span></a>
+          Option text format: <span matTooltip="Export Help" class="export-help-icon" (click)="openExportHelpModal()"><span class="fa fa-question-circle"></span></span>
           <div>
              <mat-radio-button color="primary" disableRipple [value]="false">
               <span tooltip="Each option of a multiselect will be displayed in a separate column, with 0/1 indicating selection">Analysis-friendly</span>
@@ -1035,7 +1035,7 @@
         </mat-radio-group>
         <br/>
         <mat-radio-group [(ngModel)]="exportOnlyMostRecent">
-          Include all completions of an activity: <a [routerLink]="['../help']" target="_blank"><span class="fa fa-question-circle"></span></a>
+          Include all completions of an activity: <span matTooltip="Export Help" class="export-help-icon" (click)="openExportHelpModal()"><span class="fa fa-question-circle"></span></span>
           <div>
             <mat-radio-button color="primary" disableRipple [value]="false">
               <span tooltip="Include all, with each activity completion in a separate column">Yes</span>
