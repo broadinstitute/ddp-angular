@@ -77,3 +77,19 @@ export lmsUser=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".da
 export lmsUserPassword=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[] | select(.app==\"lms\") | .password")
 echo "export LMS_USER_PASSWORD=$lmsUserPassword" >> playwright-env/envvars
 echo "export LMS_USER_EMAIL=$lmsUser" >> playwright-env/envvars
+
+# ATCP
+export atcpUser=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[] | select(.app==\"atcp\") | .userName")
+export atcpUserPassword=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[] | select(.app==\"atcp\") | .password")
+echo "export ATCP_USER_EMAIL=$atcpUser" >> playwright-env/envvars
+echo "export ATCP_USER_PASSWORD=$atcpUserPassword" >> playwright-env/envvars
+
+# Read Auth0 ATCP client credentials
+export atcpDomain=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.auth0 | .[] | select(.app==\"atcp\" and .env==\"$ENV\") | .domain")
+export atcpAudience=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.auth0 | .[] | select(.app==\"atcp\" and .env==\"$ENV\") | .audience")
+export atcpClientId=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.auth0 | .[] | select(.app==\"atcp\" and .env==\"$ENV\") | .clientId")
+export atcpClientSecret=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.auth0 | .[] | select(.app==\"atcp\" and .env==\"$ENV\") | .clientSecret")
+echo "export ATCP_AUTH0_DOMAIN=$atcpDomain" >> playwright-env/envvars
+echo "export ATCP_AUTH0_AUDIENCE=$atcpAudience" >> playwright-env/envvars
+echo "export ATCP_AUTH0_CLIENT_ID=$atcpClientId" >> playwright-env/envvars
+echo "export ATCP_AUTH0_CLIENT_SECRET=$atcpClientSecret" >> playwright-env/envvars

@@ -1,5 +1,6 @@
 import { Locator, Page } from '@playwright/test';
 import WidgetBase from 'dss/component/widget-base';
+import { waitForResponse } from 'utils/test-utils';
 
 export default class Input extends WidgetBase {
   /**
@@ -37,8 +38,12 @@ export default class Input extends WidgetBase {
    * @param opts
    * @returns {Promise<void>}
    */
-  async fill(value: string | number, opts?: { dropdownOption: string, type?: boolean }): Promise<void> {
-    const useType = opts?.type ? opts.type : false;
+  async fill(value: string | number, opts: { dropdownOption?: string, type?: boolean, nth?: number, waitForSaveRequest?: boolean } = {}): Promise<void> {
+    const { dropdownOption, type, nth, waitForSaveRequest = false } = opts;
+
+    const useType = type ? type : false;
+    nth ? this.nth = nth : this.nth;
+
     const existValue = await this.toLocator().inputValue();
     if (existValue !== value) {
       const autocomplete = await this.getAttribute('aria-autocomplete');
@@ -50,14 +55,15 @@ export default class Input extends WidgetBase {
       if (autocomplete === 'list' && expanded === 'true') {
         const dropdown = this.page.locator('.mat-autocomplete-visible[role="listbox"][id]');
         await dropdown.waitFor({ state: 'visible', timeout: 30 * 1000 });
-        const dropdownOption = opts ? opts.dropdownOption : value as string;
-          await dropdown
-            .locator('[role="option"]') //, { has: this.page.locator(`span.mat-option-text:text("${dropdownOption}")`) })
-            .filter({ hasText: dropdownOption })
-            .first()
-            .click();
+        const option = opts ? dropdownOption : value as string;
+        await dropdown
+        .locator('[role="option"]') //, { has: this.page.locator(`span.mat-option-text:text("${dropdownOption}")`) })
+        .filter({ hasText: option })
+        .first()
+        .click();
       }
-      await this.toLocator().press('Tab');
+      const pressEnter = this.toLocator().press('Tab');
+      waitForSaveRequest ? await Promise.all([waitForResponse(this.page, { uri: '/answers'}), pressEnter]) : await pressEnter;
     }
   }
 }

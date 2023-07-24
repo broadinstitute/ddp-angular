@@ -87,7 +87,13 @@ test.describe.serial('When an interested participant does NOT meet participation
     lodash.forEach(respJson, item => {
       const dateInJson = getDate(new Date(parseInt(item.dateCreated) * 1000)); // Transform to dd/mm/yyyy
       const emailInJson = item.email;
-      const finding = lodash.filter(rows, row => row.email === emailInJson && row.dateCreated === dateInJson);
+      const finding = lodash.filter(rows, row => {
+        if (row.email === emailInJson) {
+          console.log(row.email, row.dateCreated);
+          return row.dateCreated === dateInJson
+        }
+        return false;
+      });
       expect(finding.length,
         `Matching record for email: "${emailInJson}" and dateCreated: "${dateInJson}" in downloaded csv file.`)
       .toEqual(1);

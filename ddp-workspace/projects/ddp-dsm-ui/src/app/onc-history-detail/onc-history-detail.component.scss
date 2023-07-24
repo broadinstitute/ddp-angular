@@ -1,0 +1,9 @@
+.request-td {
+  min-width: 10em;
+}
+
+.setting-td {
+  &:has(mat-select) {
+    min-width: 15em;
+  }
+}

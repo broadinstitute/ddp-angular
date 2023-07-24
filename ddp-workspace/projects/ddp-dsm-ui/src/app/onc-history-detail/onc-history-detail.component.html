@@ -129,7 +129,7 @@
           </mat-hint>
         </td>
         <ng-container *ngFor="let col of settings['oD']">
-          <td>
+          <td class="setting-td">
             <mat-form-field *ngIf="col.displayType === 'TEXT' || col.displayType === ''|| col.displayType == null"
               [ngClass]="{'Input--Phone-Number': true, 'Input': true, 'Color--Field--Patched': isPatchedCurrently(col.columnName, i)}">
               <input matInput maxlength="200" [disabled]="!editable || participantExited"
@@ -170,7 +170,7 @@
             <i class="fas fa-comment-alt fa-lg" data-fa-transform="down-2"></i>
           </button>
         </td>
-        <td *ngIf="oncHis.request !== 'unableObtainTissue'">
+        <td class="request-td" *ngIf="oncHis.request !== 'unableObtainTissue'">
           <mat-select [(ngModel)]="oncHis.request" (selectionChange)="onRequestChange(i)" [disabled]="!editable || participantExited"
                      [ngClass]="{'Color--Field--Patched': isPatchedCurrently('request', i)}">
             <mat-option value="review">Needs Review</mat-option>

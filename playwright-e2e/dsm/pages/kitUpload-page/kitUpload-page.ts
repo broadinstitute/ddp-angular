@@ -7,6 +7,7 @@ import {KitUploadInfo} from 'dsm/pages/kitUpload-page/models/kitUpload-model';
 import {StudyEnum} from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import {KitUploadResponse} from 'dsm/pages/kitUpload-page/interfaces/kitUpload';
 import {kitUploadResponseEnum} from 'dsm/pages/kitUpload-page/enums/kitUploadResponse-enum';
+import path from 'path';
 
 export default class KitUploadPage {
   private readonly PAGE_TITLE = 'Kit Upload';
@@ -28,9 +29,9 @@ export default class KitUploadPage {
 
   public async uploadFile(kitType: KitTypeEnum, kitInfo: KitUploadInfo[], study: StudyEnum, testResultDir?: string) {
     const dir = testResultDir ? testResultDir : __dirname;
-    const path = `${dir}/${kitType}_${study}-${new Date().getTime()}.txt`;
-    createTextFileSync(path, this.T_HEAD + this.createKitUploadBody(kitInfo));
-    await this.fileInput.setInputFiles(path);
+    const filePath = path.join(dir, `${kitType}_${study}-${new Date().getTime()}.txt`);
+    createTextFileSync(dir, filePath, this.T_HEAD + this.createKitUploadBody(kitInfo));
+    await this.fileInput.setInputFiles(filePath);
 
     await expect(this.uploadKitsBtn, 'Kit Upload page - Upload Kits button is disabled').toBeEnabled();
 
@@ -42,7 +43,7 @@ export default class KitUploadPage {
       .textContent(), "Kit Upload page - Couldn't upload kits - something went wrong")
       .toEqual('All participants were uploaded.');
 
-    deleteFileSync(path);
+    deleteFileSync(filePath);
   }
 
   /* Helper functions */

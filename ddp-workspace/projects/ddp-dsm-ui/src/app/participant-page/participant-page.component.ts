@@ -41,7 +41,7 @@ const fileSaver = require('file-saver');
 @Component({
   selector: 'app-participant-page',
   templateUrl: './participant-page.component.html',
-  styleUrls: ['./participant-page.component.css']
+  styleUrls: ['./participant-page.component.scss']
 })
 export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChecked {
   @ViewChild(ModalComponent)

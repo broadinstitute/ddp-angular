@@ -13,8 +13,9 @@ export interface WaitForResponse {
 
 const { SITE_PASSWORD } = process.env;
 
-export async function waitForNoSpinner(page: Page): Promise<void> {
-  await page.locator('[data-icon="spinner"].fa-spin, mat-spinner[role="progressbar"]').waitFor({ state: 'hidden', timeout: 60 * 1000 });
+export async function waitForNoSpinner(page: Page, opts: { timeout?: number } = {}): Promise<void> {
+  const { timeout = 60 * 1000 } = opts;
+  await page.locator('[data-icon="spinner"].fa-spin, mat-spinner[role="progressbar"]').waitFor({ state: 'hidden', timeout });
 }
 
 export async function waitForResponse(page: Page, {uri, status = 200, timeout = 30000}: WaitForResponse): Promise<Response> {
@@ -68,7 +69,12 @@ export async function fillSitePassword(page: Page, password = SITE_PASSWORD): Pr
   }
   await page.locator('input[type="password"]').waitFor({ state: 'visible', timeout: 30 * 1000 });
   await page.locator('input[type="password"]').fill(password);
-  await Promise.all([page.waitForNavigation(), page.locator('button >> text=Submit').click()]);
+
+  const passwordCheckRequestPromise = waitForResponse(page, { uri: '/irb-password-check' });
+  await Promise.all([
+    passwordCheckRequestPromise,
+    page.keyboard.press('Enter')
+  ]);
 }
 
 /**
@@ -176,4 +182,46 @@ export function assertParticipantListDownloadFileName(download: Download, study:
   }
   const expectedFileName = `${name}_export.zip`;
   expect(actualFileName.toLowerCase()).toEqual(expectedFileName.toLowerCase());
+}
+
+export function studyShortName(study: StudyEnum): {shortName: string | null; realm: string | null} {
+  let shortName = null;
+  let realm = null;
+  switch (study) {
+    case StudyEnum.LMS:
+      shortName = 'cmi-lms';
+      realm = 'cmi-lms';
+      break;
+    case StudyEnum.OSTEO2:
+      shortName = 'cmi-osteo';
+      realm = 'osteo2';
+      break;
+    case StudyEnum.AT:
+      shortName = 'AT';
+      realm = 'atcp';
+      break;
+    case StudyEnum.PANCAN:
+      shortName = 'cmi-pancan';
+      realm = 'PanCan';
+      break;
+    case StudyEnum.RAREX:
+      shortName = 'rarex';
+      realm = 'RareX';
+      break;
+    case StudyEnum.MBC:
+      shortName = 'cmi-mbc';
+      realm = 'Pepper-MBC';
+      break;
+    case StudyEnum.BRAIN:
+      shortName = 'cmi-brain';
+      realm = 'Brain';
+      break;
+    case StudyEnum.ANGIO:
+      shortName = 'angio';
+      realm = 'Angio';
+      break;
+    default:
+      break;
+  }
+  return {shortName, realm};
 }

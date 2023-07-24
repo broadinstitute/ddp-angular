@@ -1,6 +1,7 @@
 import { expect } from '@playwright/test';
 import * as auth from 'authentication/auth-osteo';
 import * as user from 'data/fake-user.json';
+import ResearchConsentFormPage from 'dss/pages/osteo/research-consent-page';
 import { test } from 'fixtures/osteo-fixture';
 import GetStartedPage from 'dss/pages/osteo/get-started-page';
 import HomePage from 'dss/pages/osteo/home-page';
@@ -39,6 +40,8 @@ test('Osteo enroll kid @osteo', async ({ page }) => {
   logParticipantCreated(userEmail, childFullName);
 
   await assertActivityHeader(page, 'Research Consent Form');
+  const researchConsentPage = new ResearchConsentFormPage(page, 'child');
+  await researchConsentPage.waitForReady();
 
   await page.getByRole('heading', { name: 'Research Consent Form' }).click();
   await page.getByText('Please read through the consent form text below and click "Next" when you are do').click();
@@ -76,25 +79,17 @@ test('Osteo enroll kid @osteo', async ({ page }) => {
   await page.locator('#mat-input-5').press('Tab');
   await page.locator('#mat-input-6').fill('Zimmer');
   await page.getByText('Parent', { exact: true }).click();
-  await page.getByLabel('Full Name *').click();
-  await page.getByLabel('Full Name *').fill(childFullName);
-  await page.getByLabel('Full Name *').press('Tab');
-  await page.getByRole('combobox', { name: 'Country/Territory Country/Territory' }).getByText('Country/Territory').click();
-  await page.getByText('UNITED STATES', { exact: true }).click();
-  await page.getByPlaceholder('Enter a location').click();
-  await page.getByPlaceholder('Enter a location').fill('75 AMES STREEt');
-  await page.getByPlaceholder('Enter a location').press('Tab');
-  await page.getByLabel('Apt/Floor #').press('Tab');
-  await page.getByLabel('City *').fill('CAMBRIDGe');
-  await page.getByLabel('City *').press('Tab');
-  await page.getByRole('combobox', { name: 'State State' }).getByText('State').click();
-  await page.getByText('MASSACHUSETTS').click();
-  await page.getByLabel('Zip Code *').click();
-  await page.getByLabel('Zip Code *').fill('02420');
-  await page.getByText('Suggested:').click();
-  await page.waitForTimeout(2000);
 
-  await page.getByRole('button', { name: 'Submit' }).click();
+  await researchConsentPage.fillInContactAddress({
+    fullName: childFullName,
+    country: patient.country.name,
+    state: patient.state.name,
+    street: patient.streetAddress,
+    city: patient.city,
+    zipCode: patient.zip
+  });
+  await researchConsentPage.submit();
+
   await page.getByText('1. Consent Addendum').click();
   await page.getByText('1. Consent Addendum').click();
   await page

@@ -56,38 +56,10 @@ test.describe('Saliva Kits upload flow', () => {
       await participantListPage.assertPageTitle();
 
       // find the right participant
-      const customizeViewPanel = participantListPage.filters.customizeViewPanel;
-      const participantListTable = participantListPage.participantListTable;
-      const searchPanel = participantListPage.filters.searchPanel;
-      await searchPanel.open();
-      await searchPanel.checkboxes('Status', {checkboxValues: ['Enrolled']});
-      await searchPanel.search();
-
-      const normalCollaboratorSampleIDColumn = 'Normal Collaborator Sample ID';
-      const validColumn = 'Valid';
-
-      await customizeViewPanel.open();
-      await customizeViewPanel.selectColumns('Sample Columns', [normalCollaboratorSampleIDColumn]);
-      await customizeViewPanel.selectColumns('Contact Information Columns', [validColumn]);
-
-      let testParticipantIndex = 0;
-      let participantsRowsCount = await participantListTable.rowsCount;
-
-      for (let count = 0; count < participantsRowsCount; count++) {
-        const normalCollaboratorSampleID = await participantListTable.getParticipantDataAt(count, normalCollaboratorSampleIDColumn);
-        const isAddressValid = await participantListTable.getParticipantDataAt(count, validColumn);
-        if (normalCollaboratorSampleID.split('\n').length < 28 &&
-          isAddressValid.trim().toLowerCase() === 'true') {
-          testParticipantIndex = count;
-          break;
-        }
-        if (count === participantsRowsCount - 1) {
-          await participantListTable.nextPage();
-          participantsRowsCount = await participantListTable.rowsCount;
-        }
-      }
+      const testParticipantIndex = await participantListPage.findParticipantForKitUpload();
 
       // Collects all the necessary data for kit upload
+      const participantListTable = participantListPage.participantListTable;
       const participantPage: ParticipantPage = await participantListTable.openParticipantPageAt(testParticipantIndex);
       const shortID = await participantPage.getShortId();
       const firstName = await participantPage.getFirstName();
@@ -187,7 +159,8 @@ test.describe('Saliva Kits upload flow', () => {
       // checks if the uploaded kit is displayed on the participant's page, in the sample information tab
       await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
       await participantListPage.assertPageTitle();
-      await participantListPage.filters.searchPanel;
+
+      const searchPanel = participantListPage.filters.searchPanel;
       await searchPanel.open();
       await searchPanel.text('Short ID', {textValue: shortID});
       await searchPanel.search();

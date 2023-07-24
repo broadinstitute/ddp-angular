@@ -33,7 +33,7 @@ test.describe.serial('Join Pancan Mailing List', () => {
     await homePage.joinMailingListButton.click();
     const modal = new Modal(page);
     await expect(modal.toLocator().locator('h1.Modal-title')).toHaveText('Stay informed!');
-    expect(await modal.toLocator().screenshot()).toMatchSnapshot('stay-informed-modal.png');
+    await expect(modal.toLocator()).toHaveScreenshot('stay-informed-modal.png');
   });
 
   test('DSM download Mail List @dsm @pancan', async ({ page, request }) => {

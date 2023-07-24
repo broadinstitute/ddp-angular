@@ -151,11 +151,29 @@ export default class ParticipantListPage {
     await searchPanel.search();
   }
 
+  public async filterListByShortId(shortId: string, opts: { resultsCount?: number } = {}): Promise<void> {
+    if (!shortId) {
+      throw new Error('shortId cannot be null');
+    }
+    const { resultsCount = 1 } = opts;
+    const participantsTable = this.participantListTable;
+    await this.waitForReady();
+
+    const searchPanel = this.filters.searchPanel;
+    await searchPanel.open();
+    await searchPanel.text('Short ID', { textValue: shortId });
+    await searchPanel.search();
+
+    await expect(participantsTable.footerLocator().first()).toBeVisible();
+    await expect(await participantsTable.rowsCount).toBe(resultsCount);
+  }
+
   public async addColumnsToParticipantList(columnGroup: string, columnOptions: string[]): Promise<void> {
     const customizeViewPanel = this.filters.customizeViewPanel;
     await customizeViewPanel.open();
     await customizeViewPanel.selectColumns(columnGroup, columnOptions);
   }
+
 
   /* Locators */
   private get tableRowsLocator(): Locator {
@@ -206,5 +224,45 @@ export default class ParticipantListPage {
     const button = this.page.locator('button').filter({has: this.page.locator('[data-icon="quidditch"]')});
     await button.click();
     await waitForNoSpinner(this.page);
+  }
+
+  async findParticipantForKitUpload(): Promise<number> {
+    const participantListTable = this.participantListTable;
+
+    const searchPanel = this.filters.searchPanel;
+    await searchPanel.open();
+    await searchPanel.checkboxes('Status', {checkboxValues: ['Enrolled']});
+    await searchPanel.search();
+    await expect(participantListTable.rowLocator().first()).toBeVisible();
+
+    const normalCollaboratorSampleIDColumn = 'Normal Collaborator Sample ID';
+    const validColumn = 'Valid';
+
+    const customizeViewPanel = this.filters.customizeViewPanel;
+    await customizeViewPanel.open();
+    await customizeViewPanel.selectColumns('Sample Columns', [normalCollaboratorSampleIDColumn]);
+    await customizeViewPanel.selectColumns('Contact Information Columns', [validColumn]);
+
+    await expect(participantListTable.rowLocator().first()).toBeVisible();
+
+    let testParticipantIndex = 0;
+    let participantsRowsCount = await participantListTable.rowsCount;
+    expect(participantsRowsCount).toBeGreaterThanOrEqual(1);
+
+    for (let count = 0; count < participantsRowsCount; count++) {
+      const normalCollaboratorSampleID = await participantListTable.getParticipantDataAt(count, normalCollaboratorSampleIDColumn);
+      const isAddressValid = await participantListTable.getParticipantDataAt(count, validColumn);
+      if (normalCollaboratorSampleID.split('\n').length < 28 &&
+        isAddressValid.trim().toLowerCase() === 'true') {
+        testParticipantIndex = count;
+        break;
+      }
+      if (count === participantsRowsCount - 1) {
+        await participantListTable.nextPage();
+        participantsRowsCount = await participantListTable.rowsCount;
+      }
+    }
+
+    return testParticipantIndex;
   }
 }

@@ -8,8 +8,9 @@ export interface MailListCSV {
   lastName?: string;
 }
 
-export function createTextFileSync(pathName: string, data: string) {
+export function createTextFileSync(dir: string, pathName: string, data: string) {
   try {
+    fs.mkdirSync(dir, { recursive: true });
     fs.writeFileSync(pathName, data);
     console.log(`File: ${pathName} - created successfully`)
   } catch (error) {
