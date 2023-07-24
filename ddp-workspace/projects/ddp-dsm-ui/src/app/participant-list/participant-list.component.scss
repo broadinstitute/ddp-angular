@@ -17,6 +17,18 @@ hr, ul {
   color: transparent;
 }
 
+.export-help-icon {
+  color: #337ab7;
+   &:hover {
+     color: #10528b;
+     cursor: pointer;
+   }
+}
+
+mat-dialog-container {
+  overflow: auto;
+}
+
 button.mat-icon-button {
   width: auto;
 }
