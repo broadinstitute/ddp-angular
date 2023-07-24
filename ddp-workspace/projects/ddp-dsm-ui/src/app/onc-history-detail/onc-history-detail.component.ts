@@ -19,7 +19,7 @@ import { Lookup } from '../lookup/lookup.model';
 @Component({
   selector: 'app-onc-history-detail',
   templateUrl: './onc-history-detail.component.html',
-  styleUrls: [ './onc-history-detail.component.css' ]
+  styleUrls: [ './onc-history-detail.component.scss' ]
 })
 export class OncHistoryDetailComponent implements OnInit {
   @ViewChild(ModalComponent)
