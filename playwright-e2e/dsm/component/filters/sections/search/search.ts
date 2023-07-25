@@ -12,7 +12,9 @@ export class Search {
   constructor(private readonly page: Page) {}
 
   public async open(): Promise<void> {
-    await this.page.locator(this.openButtonXPath).click();
+    const open = await this.isOpen();
+    !open && await this.page.locator(this.openButtonXPath).click();
+    await expect(async () => expect(await this.isOpen()).toBe(true)).toPass();
   }
 
   public async search(): Promise<void> {
@@ -164,6 +166,10 @@ export class Search {
 
   public textInputLocator(columnName: string): Locator {
     return this.page.locator(`${this.baseTextColumnXPath(columnName)}//mat-form-field//input`);
+  }
+
+  private async isOpen(): Promise<boolean> {
+    return this.page.locator('#searchTable').isVisible();
   }
 
   private additionalFilterCheckboxLocator(columnName: string, checkboxName: AdditionalFilter, isTextField = false): Locator {

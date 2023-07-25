@@ -151,11 +151,29 @@ export default class ParticipantListPage {
     await searchPanel.search();
   }
 
+  public async filterListByShortId(shortId: string, opts: { resultsCount?: number } = {}): Promise<void> {
+    if (!shortId) {
+      throw new Error('shortId cannot be null');
+    }
+    const { resultsCount = 1 } = opts;
+    const participantsTable = this.participantListTable;
+    await this.waitForReady();
+
+    const searchPanel = this.filters.searchPanel;
+    await searchPanel.open();
+    await searchPanel.text('Short ID', { textValue: shortId });
+    await searchPanel.search();
+
+    await expect(participantsTable.footerLocator().first()).toBeVisible();
+    await expect(await participantsTable.rowsCount).toBe(resultsCount);
+  }
+
   public async addColumnsToParticipantList(columnGroup: string, columnOptions: string[]): Promise<void> {
     const customizeViewPanel = this.filters.customizeViewPanel;
     await customizeViewPanel.open();
     await customizeViewPanel.selectColumns(columnGroup, columnOptions);
   }
+
 
   /* Locators */
   private get tableRowsLocator(): Locator {

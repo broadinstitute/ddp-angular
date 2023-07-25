@@ -1,6 +1,7 @@
 export enum TabEnum {
-  SURVEY_DATA = 'Survey Data',
   CONTACT_INFORMATION = 'Contact Information',
+  GENOME_STUDY = 'Genome Study',
+  INVITAE = 'Invitae',
   SAMPLE_INFORMATION = 'Sample Information',
-  INVITAE = 'Invitae'
+  SURVEY_DATA = 'Survey Data',
 }
