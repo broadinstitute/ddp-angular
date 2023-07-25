@@ -1,7 +1,10 @@
 <div class="checkbox-container">
-  <input class="inp-cbx" [disabled]="isDisabled" [id]="idRandomizer" type="checkbox"
+  <input class="inp-cbx"
+         [disabled]="isDisabled" [id]="idRandomizer" type="checkbox"
          (change)="onChange($event, role)" [checked]="role?.isSelected"/>
-  <label [ngStyle]="{'justify-content': onlyCheckbox && 'center'}" class="cbx" [for]="idRandomizer">
+  <label [ngClass]="{'labelDisabled': isDisabled}"
+         [ngStyle]="{'justify-content': onlyCheckbox && 'center'}"
+         class="cbx" [for]="idRandomizer">
     <span>
       <svg width="12px" height="10px">
         <use xlink:href="#check-4"></use>

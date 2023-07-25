@@ -23,6 +23,11 @@
       background: rgba(0, 119, 255, 0.06);
     }
 
+    &.labelDisabled:hover {
+      background: none;
+      cursor: default;
+    }
+
     span {
       float: left;
       vertical-align: middle;
@@ -81,6 +86,11 @@
       background: #66bb6a;
       border-color: #66bb6a;
       animation: wave-4 0.4s ease;
+    }
+
+    &:checked:disabled + .cbx span:first-child {
+      background: rgba(102, 187, 106, 0.57);
+      border-color: rgba(102, 187, 106, 0.53);
     }
 
     &:checked + .cbx span:first-child svg {
