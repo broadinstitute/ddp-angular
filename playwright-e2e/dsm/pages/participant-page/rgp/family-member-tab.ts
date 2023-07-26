@@ -1,4 +1,5 @@
-import { Locator, Page } from '@playwright/test';
+import { expect, Locator, Page } from '@playwright/test';
+import exp from 'constants';
 import { FamilyMember } from 'dsm/component/tabs/enums/familyMember-enum';
 
 /**
@@ -248,11 +249,17 @@ export default class FamilyMemberTab {
      * @param notes the notes to be inputted
      */
     public async inputMixedRaceNotes(notes: string): Promise<void> {
+        const textarea = this.page.locator("//textarea[contains(@data-placeholder, 'Mixed Race Notes')]");
+        await textarea.clear();
+        await expect(textarea).toBeEmpty();
+
         await Promise.all([
             this.page.waitForResponse(response => response.url().includes('/ui/patch') && response.status() === 200),
-            this.page.locator("//textarea[contains(@data-placeholder, 'Mixed Race Notes')]").fill(`${notes}`),
-            this.page.locator("//textarea[contains(@data-placeholder, 'Mixed Race Notes')]").press('Tab'),
+            textarea.fill(`${notes}`),
+            textarea.press('Tab'),
         ]);
+        //const content = textarea.inputValue();
+        //expect(content).toEqual(notes);
     }
 
     /**

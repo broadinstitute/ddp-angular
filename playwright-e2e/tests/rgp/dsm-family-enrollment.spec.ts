@@ -93,6 +93,8 @@ test.describe.serial('DSM Family Enrollment Handling', () => {
     await participantListPage.assertPageTitle();
     await participantListPage.waitForReady();
     const participantListTable = new ParticipantListTable(page);
+    const participantGuid = await participantListTable.getGuidOfMostRecentAutomatedParticipant(user.patient.firstName, true);
+    saveParticipantGuid(participantGuid);
     await participantListPage.filterListByParticipantGUID(user.patient.participantGuid);
     //Check that the filtered list returns at least one participant
     const filteredList = page.locator('tr.ng-star-inserted');
