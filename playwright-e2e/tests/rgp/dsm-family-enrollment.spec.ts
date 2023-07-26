@@ -223,7 +223,7 @@ test.describe.serial('DSM Family Enrollment Handling', () => {
     await ethnicity.click();
     await dropdownOptions.filter({ hasText: 'Not Hispanic' }).click();
 
-    await proband.inputMixedRaceNotes('Testing notes here - Mixed Race Notes');
+    await proband.inputMixedRaceNotes('Testing');
 
     //Verify that the input to Important Notes, Process Notes, Mixed Race Notes has been saved even when page is re-visited
     const importantNotes = await proband.getImportantNotesContent();

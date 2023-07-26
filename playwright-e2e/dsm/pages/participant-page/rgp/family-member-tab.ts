@@ -255,11 +255,10 @@ export default class FamilyMemberTab {
 
         await Promise.all([
             this.page.waitForResponse(response => response.url().includes('/ui/patch') && response.status() === 200),
-            textarea.fill(`${notes}`),
+            textarea.click(),
+            textarea.type(notes, {delay: 100}),
             textarea.press('Tab'),
         ]);
-        //const content = textarea.inputValue();
-        //expect(content).toEqual(notes);
     }
 
     /**
