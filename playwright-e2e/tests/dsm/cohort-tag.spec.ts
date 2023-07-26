@@ -1,3 +1,4 @@
+import { expect } from '@playwright/test';
 import { WelcomePage } from 'dsm/pages/welcome-page';
 import { test } from 'fixtures/dsm-fixture';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
@@ -20,7 +21,7 @@ test.describe('Cohort tags', () => {
     });
 
     test(`Ensure cohort tags update and delete properly for ${studyName} @dsm @functional`, async ({ page, request }) => {
-      // Inspect network requests to find a Playwright test user that does not have any cohort tag.
+      // Inspect network requests to find a Playwright test user that does not have any cohort tag and notes
       await page.route('**/*', async (route, request): Promise<void> => {
         if (!shortId) {
           // only search for shortId one time to avoid duplicated searching
@@ -36,9 +37,11 @@ test.describe('Cohort tags', () => {
               }
               participantShortId = profile.hruid;
               const dsmData = json.participants[i].esData.dsm;
-              if (dsmData['cohortTag']) {
-                console.log('short id set to null');
-                participantShortId = null;
+              if (dsmData['cohortTag']?.length > 0) {
+                participantShortId = null; // cohort tags already exists
+              }
+              if (dsmData.participant['notes']?.length > 0) {
+                participantShortId = null; // notes already exists
               }
               if (participantShortId) {
                 shortId = participantShortId;
@@ -67,9 +70,13 @@ test.describe('Cohort tags', () => {
       await customizeViewPanel.selectColumns('Cohort Tags Columns', ['Cohort Tag Name']);
 
       // Search participant by Short ID
+      console.log(`Participant Short ID: ${shortId}`);
       await participantListPage.filterListByShortId(shortId);
 
       const participantListTable = participantListPage.participantListTable;
+      let cohortTagColumn = await participantListTable.getParticipantDataAt(0, 'Cohort Tag Name');
+      expect(cohortTagColumn.length).toBe(0); // No Cohort Tags
+
       const participantPage: ParticipantPage = await participantListTable.openParticipantPageAt(0);
       await participantPage.assertPageTitle();
 
@@ -84,12 +91,10 @@ test.describe('Cohort tags', () => {
       await participantListPage.assertPageTitle();
       await participantListPage.waitForReady();
 
-      await customizeViewPanel.open();
-      await customizeViewPanel.selectColumns('Medical Record Columns', ['Initial MR Received']);
-      await customizeViewPanel.selectColumns('Participant Columns', ['Status']);
-
       // Open participant again to verify cohort tags
       await participantListPage.filterListByShortId(shortId);
+      cohortTagColumn = await participantListTable.getParticipantDataAt(0, 'Cohort Tag Name');
+      expect(cohortTagColumn.length).toBeGreaterThan(1); // Cohort Tags exist
       await participantListTable.openParticipantPageAt(0);
 
       // Verify tags and note existence
@@ -116,6 +121,10 @@ test.describe('Cohort tags', () => {
 
       await cohortTag.remove(cohortTagValue3);
       await cohortTag.assertCohortTagToHaveCount(cohortTagValue3, 0);
+
+      await participantPage.backToList();
+      cohortTagColumn = await participantListTable.getParticipantDataAt(0, 'Cohort Tag Name');
+      expect(cohortTagColumn.length).toBe(0); // No more Cohort Tag
     });
   }
 });
