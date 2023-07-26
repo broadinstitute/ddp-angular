@@ -38,30 +38,6 @@ export default class FamilyMemberTab {
         return this._familyID;
     }
 
-    public set relationToProband(relationToProband: FamilyMember) {
-        this._relationToProband = relationToProband;
-    }
-
-    public get relationToProband(): FamilyMember {
-        return this._relationToProband
-    }
-
-    public set firstName(firstName: string) {
-        this._firstName = firstName;
-    }
-
-    public get firstName(): string {
-        return this._firstName;
-    }
-
-    public set lastName(lastName: string) {
-        this._lastName = lastName;
-    }
-
-    public get lastName(): string {
-        return this._lastName;
-    }
-
     /* RGP specific utility methods */
 
     /**
@@ -272,10 +248,18 @@ export default class FamilyMemberTab {
      * @param notes the notes to be inputted
      */
     public async inputMixedRaceNotes(notes: string): Promise<void> {
+        //Due to flakiness with this textarea with automated input - check to make sure it does not have prior input
+        const currentNotes = this.getMixedRaceNotesContent();
+        const amountOfNotes = (await currentNotes).length;
+        if (amountOfNotes > 0) {
+            const textarea = this.getMixedRaceNotes();
+            await textarea.clear();
+        }
+
         await Promise.all([
-            this.page.waitForResponse(resp => resp.url().includes('**/ui/patch') && resp.status() === 200),
+            this.page.waitForRequest(request => request.url().includes('/ui/patch')),
             await this.page.locator("//textarea[contains(@data-placeholder, 'Mixed Race Notes')]").fill(`${notes}`),
-            await this.page.locator("//textarea[contains(@data-placeholder, 'Mixed Race Notes')]").press('Tab')
+            await this.page.locator("//textarea[contains(@data-placeholder, 'Mixed Race Notes')]").blur(),
         ]);
     }
 

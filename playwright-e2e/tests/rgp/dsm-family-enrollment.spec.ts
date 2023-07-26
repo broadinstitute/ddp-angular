@@ -10,7 +10,7 @@ import { FamilyMember } from 'dsm/component/tabs/enums/familyMember-enum';
 import RgpParticipantPage from 'dsm/pages/participant-page/rgp/rgp-participant-page';
 import { saveParticipantGuid } from 'utils/faker-utils';
 import { ParticipantListTable } from 'dsm/component/tables/participant-list-table';
-import { calculateBirthDate } from 'utils/date-utils';
+import { calculateAge } from 'utils/date-utils';
 
 let rgpEmail: string;
 
@@ -94,6 +94,9 @@ test.describe.serial('DSM Family Enrollment Handling', () => {
     await participantListPage.waitForReady();
     const participantListTable = new ParticipantListTable(page);
     await participantListPage.filterListByParticipantGUID(user.patient.participantGuid);
+    //Check that the filtered list returns at least one participant
+    const filteredList = page.locator('tr.ng-star-inserted');
+    await expect(filteredList).toHaveCount(1);
     await participantListTable.openParticipantPageAt(0);
 
     //Verify that the proband tab is present (and includes the text RGP and 3 as proband subject ids have the format RGP_{family id}_3)
@@ -195,7 +198,7 @@ test.describe.serial('DSM Family Enrollment Handling', () => {
     //section for Participant Info -> Age Today; check that the age is automatically calculated and inputted into
     //Age Today field is the the correct age given the age inputted in DOB field
     const ageToday = proband.getAgeToday();
-    const estimatedAge = calculateBirthDate(user.patient.birthDate.MM, user.patient.birthDate.DD, user.patient.birthDate.YYYY);
+    const estimatedAge = calculateAge(user.patient.birthDate.MM, user.patient.birthDate.DD, user.patient.birthDate.YYYY);
     await expect(ageToday).toHaveValue(estimatedAge.toString());
 
     //The default value for Participant Info -> Alive/Deceased is an Alive status
@@ -219,7 +222,6 @@ test.describe.serial('DSM Family Enrollment Handling', () => {
     await dropdownOptions.filter({ hasText: 'Not Hispanic' }).click();
 
     await proband.inputMixedRaceNotes('Testing notes here - Mixed Race Notes');
-    //await mixedRaceTextarea.blur(); //This blur action is needed to make sure automated input stays for later verification - lessens but does not get totally rid of flakiness
 
     //Verify that the input to Important Notes, Process Notes, Mixed Race Notes has been saved even when page is re-visited
     const importantNotes = await proband.getImportantNotesContent();
