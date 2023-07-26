@@ -248,14 +248,6 @@ export default class FamilyMemberTab {
      * @param notes the notes to be inputted
      */
     public async inputMixedRaceNotes(notes: string): Promise<void> {
-        //Due to flakiness with this textarea with automated input - check to make sure it does not have prior input
-        const currentNotes = this.getMixedRaceNotesContent();
-        const amountOfNotes = (await currentNotes).length;
-        if (amountOfNotes > 0) {
-            const textarea = this.getMixedRaceNotes();
-            await textarea.clear();
-        }
-
         await Promise.all([
             this.page.waitForRequest(request => request.url().includes('/ui/patch')),
             await this.page.locator("//textarea[contains(@data-placeholder, 'Mixed Race Notes')]").fill(`${notes}`),
