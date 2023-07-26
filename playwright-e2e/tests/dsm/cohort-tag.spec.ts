@@ -1,119 +1,120 @@
-import { test } from '@playwright/test';
-import { login } from 'authentication/auth-dsm';
+import { WelcomePage } from 'dsm/pages/welcome-page';
+import { test } from 'fixtures/dsm-fixture';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
-import HomePage from 'dsm/pages/home-page';
 import ParticipantPage from 'dsm/pages/participant-page/participant-page';
 import CohortTag from 'dsm/component/cohort-tag';
 import { StudyNavEnum } from 'dsm/component/navigation/enums/studyNav-enum';
 import { Navigation } from 'dsm/component/navigation/navigation';
 import * as crypto from 'crypto';
-import { AdditionalFilter } from 'dsm/component/filters/sections/search/search-enums';
-import { WelcomePage } from 'dsm/pages/welcome-page';
 import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
 
-test.describe.skip('Cohort tags', () => {
-  let welcomePage: WelcomePage;
-  let homePage: HomePage;
-  let navigation: Navigation;
-  let cohortTag: CohortTag;
+test.describe('Cohort tags', () => {
+  let shortId: string;
 
-  const studyNames = [StudyEnum.BRAIN, StudyEnum.PANCAN];
-
-  test.beforeEach(async ({ page, request }) => {
-    await login(page);
-    welcomePage = new WelcomePage(page);
-    homePage = new HomePage(page);
-    navigation = new Navigation(page, request);
-    cohortTag = new CohortTag(page);
-  });
+  const studyNames = [StudyEnum.PANCAN];
 
   for (const studyName of studyNames) {
-    test(`Ensure cohort tags update and delete properly for ${studyName} @dsm @functional`, async ({ page }) => {
+    test.beforeEach(async ({page}) => {
+      const welcomePage = new WelcomePage(page);
       await welcomePage.selectStudy(studyName);
+    });
+
+    test(`Ensure cohort tags update and delete properly for ${studyName} @dsm @functional`, async ({ page, request }) => {
+      // Inspect network requests to find a Playwright test user that does not have any cohort tag.
+      await page.route('**/*', async (route, request): Promise<void> => {
+        if (!shortId) {
+          // only search for shortId one time to avoid duplicated searching
+          let participantShortId;
+          const regex = new RegExp(/(applyFilter|filterList)\?realm=.*&parent=participantList/i);
+          if (request.url().match(regex)) {
+            const response = await route.fetch();
+            const json = JSON.parse(await response.text());
+            for (const i in json.participants) {
+              const profile = json.participants[i].esData.profile;
+              if (!profile.firstName.includes('E2E')) {
+                continue;
+              }
+              participantShortId = profile.hruid;
+              const dsmData = json.participants[i].esData.dsm;
+              if (dsmData['cohortTag']) {
+                console.log('short id set to null');
+                participantShortId = null;
+              }
+              if (participantShortId) {
+                shortId = participantShortId;
+                break; // finished searching
+              }
+            }
+          }
+        }
+        return route.continue();
+      });
 
       /* Test Values */
-      const cohortTagValue1 = `1_${studyName}-${crypto.randomUUID().toString().substring(0, 10)}`;
-      const cohortTagValue2 = `2_${studyName}-${crypto.randomUUID().toString().substring(0, 10)}`;
-      const cohortTagValue3 = `3_${studyName}-${crypto.randomUUID().toString().substring(0, 10)}`;
-      const participantNoteValue = `This is a test note_${studyName}-${crypto.randomUUID()}`;
+      const uuid = crypto.randomUUID().toString().replace('-', '').substring(0, 6);
+      const cohortTagValue1 = `tag1-${uuid}`;
+      const cohortTagValue2 = `tag2-${uuid}`;
+      const cohortTagValue3 = `tag3-${uuid}`;
+      const notes = `Test note ${studyName}-${uuid}`;
 
-      /* Step-By-Step navigation through the website and making assertions as needed */
-      await homePage.assertWelcomeTitle();
-      await homePage.assertSelectedStudyTitle(studyName);
-
-      const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
-      const customizeViewPanel = participantListPage.filters.customizeViewPanel;
-      const searchPanel = participantListPage.filters.searchPanel;
-      const participantListTable = participantListPage.participantListTable;
-
+      const participantListPage = await new Navigation(page, request).selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
       await participantListPage.assertPageTitle();
-
       await participantListPage.waitForReady();
 
+      // Apply filter in search for the right participant on Participant List page
+      const customizeViewPanel = participantListPage.filters.customizeViewPanel;
       await customizeViewPanel.open();
-      await customizeViewPanel.selectColumns('Medical Record Columns', ['Initial MR Received']);
-      await customizeViewPanel.selectColumns('Participant Columns', ['Status']);
+      await customizeViewPanel.selectColumns('Cohort Tags Columns', ['Cohort Tag Name']);
 
-      await searchPanel.open();
-      await searchPanel.dates('Initial MR Received', { additionalFilters: [AdditionalFilter.NOT_EMPTY] });
-      await searchPanel.checkboxes('Status', { checkboxValues: ['Enrolled'] });
-      await searchPanel.search();
+      // Search participant by Short ID
+      await participantListPage.filterListByShortId(shortId);
 
-      await participantListPage.waitForReady();
-
-      await participantListPage.assertParticipantsCountGreaterOrEqual(1);
-
+      const participantListTable = participantListPage.participantListTable;
       const participantPage: ParticipantPage = await participantListTable.openParticipantPageAt(0);
-
       await participantPage.assertPageTitle();
 
+      const cohortTag = new CohortTag(page);
       await cohortTag.add(cohortTagValue1);
       await cohortTag.remove(cohortTagValue1);
       await cohortTag.add(cohortTagValue2);
       await cohortTag.add(cohortTagValue3);
-      await participantPage.fillNotes(participantNoteValue);
-      await page.reload();
+      await participantPage.fillNotes(notes);
+      await participantPage.backToList();
 
       await participantListPage.assertPageTitle();
-
       await participantListPage.waitForReady();
 
       await customizeViewPanel.open();
       await customizeViewPanel.selectColumns('Medical Record Columns', ['Initial MR Received']);
       await customizeViewPanel.selectColumns('Participant Columns', ['Status']);
 
-      await searchPanel.open();
-      await searchPanel.dates('Initial MR Received', { additionalFilters: [AdditionalFilter.NOT_EMPTY] });
-      await searchPanel.checkboxes('Status', { checkboxValues: ['Enrolled'] });
-      await searchPanel.search();
-
+      // Open participant again to verify cohort tags
+      await participantListPage.filterListByShortId(shortId);
       await participantListTable.openParticipantPageAt(0);
 
-      await participantPage.assertPageTitle();
+      // Verify tags and note existence
+      await participantPage.assertNotesToBe(notes);
       await cohortTag.assertCohortTagToHaveCount(cohortTagValue1, 0);
       await cohortTag.assertCohortTagToHaveCount(cohortTagValue2, 1);
-
-      await cohortTag.remove(cohortTagValue2);
-
       await cohortTag.assertCohortTagToHaveCount(cohortTagValue3, 1);
 
+      // Cannot add new tag which already exist
       await cohortTag.add(cohortTagValue3, false);
-
       await cohortTag.assertDuplicateCohortTagMessage();
-
-      await participantPage.assertNotesToBe(participantNoteValue);
 
       await participantPage.backToList();
       await participantListTable.selectCheckboxForParticipantAt(0);
       await participantListPage.addBulkCohortTags();
       await cohortTag.add(cohortTagValue3, false);
       await cohortTag.submitAndExit();
-      await participantListTable.openParticipantPageAt(0);
 
+      await participantListTable.openParticipantPageAt(0);
       await cohortTag.assertCohortTagToHaveCount(cohortTagValue3, 1);
 
-      await cohortTag.remove(cohortTagValue3);
+      await cohortTag.remove(cohortTagValue2);
+      await cohortTag.assertCohortTagToHaveCount(cohortTagValue2, 0);
 
+      await cohortTag.remove(cohortTagValue3);
       await cohortTag.assertCohortTagToHaveCount(cohortTagValue3, 0);
     });
   }
