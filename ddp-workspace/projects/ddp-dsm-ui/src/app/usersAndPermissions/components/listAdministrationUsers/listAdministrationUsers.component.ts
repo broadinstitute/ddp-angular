@@ -10,15 +10,10 @@ import {UsersAndPermissionsHttpServiceService} from "../../services/usersAndPerm
   styleUrls: ['listAdministrationUsers.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ListAdministrationUsersComponent implements OnInit {
+export class ListAdministrationUsersComponent {
   @Input() usersList: AdministrationUser[];
 
-  constructor(private readonly matDialog: MatDialog,
-              private readonly httpService: UsersAndPermissionsHttpServiceService) {
-  }
-
-  ngOnInit() {
-    // this.httpService.usersAndPermissions.subscribe(data => console.log(data, 'HTTP-RESPONSE'))
+  constructor(private readonly matDialog: MatDialog) {
   }
 
   public trackBy(index: number, {name, phone, email}: AdministrationUser): any {

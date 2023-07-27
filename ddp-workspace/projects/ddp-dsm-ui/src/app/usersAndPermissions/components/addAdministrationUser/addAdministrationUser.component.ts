@@ -4,6 +4,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {AdministrationUserRole} from "../../interfaces/administrationUserRole";
 import {AddAdministrationUserModal, AddAdministrationUserRequest} from "../../interfaces/addAdministrationUser";
 import {MatSelectChange} from "@angular/material/select";
+import {cloneDeep} from 'lodash';
 
 @Component({
   selector: 'app-addAdministrationUser',
@@ -12,14 +13,16 @@ import {MatSelectChange} from "@angular/material/select";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AddAdministrationUserComponent {
+  public availableRoles = cloneDeep(this.data.availableRoles).map(role => ({...role, hasRole: false}));
   public selectedUserRoles: AdministrationUserRole[];
-  private chosenRoles: AdministrationUserRole[] = [];
 
   public readonly addUserForm = this.formBuilder.group({
     email: [null, Validators.required],
     name: [null, Validators.required],
     phone: [null, Validators.required],
   })
+
+  private onlySelectedRoles: AdministrationUserRole[] = [];
 
   constructor(
     @Inject(MAT_DIALOG_DATA) private data: AddAdministrationUserModal,
@@ -31,32 +34,25 @@ export class AddAdministrationUserComponent {
     if (this.allowAddingUser) {
       const userToAdd: AddAdministrationUserRequest = {
         ...this.addUserForm.getRawValue(),
-        roles: this.chosenRoles.map(r => r.roleGuid)
+        roles: this.onlySelectedRoles.map(r => r.name)
       }
       this.matDialogRef.close(userToAdd);
     }
   }
 
-  public get roles(): AdministrationUserRole[] {
-    return this.data.availableRoles as AdministrationUserRole[];
-  }
-
-  public get onlySelectedRoles(): AdministrationUserRole[] {
-    return this.chosenRoles;
-  }
 
   public get allowAddingUser(): boolean {
     return this.addUserForm.valid && !!this.onlySelectedRoles?.length;
   }
 
   public roleSelected(role: AdministrationUserRole): void {
-    const foundRoleIndex = this.chosenRoles.findIndex(r => r.roleGuid === role.roleGuid);
-    if(foundRoleIndex > -1 && role.isSelected) {
-      this.chosenRoles[foundRoleIndex] = role;
-    } else if (foundRoleIndex == -1 && role.isSelected) {
-      this.chosenRoles.push(role);
-    } else if (foundRoleIndex > -1 && !role.isSelected) {
-      this.chosenRoles.splice(foundRoleIndex, 1);
+    const foundRoleIndex = this.onlySelectedRoles.findIndex(r => r.name === role.name);
+    if(foundRoleIndex > -1 && role.hasRole) {
+      this.onlySelectedRoles[foundRoleIndex] = role;
+    } else if (foundRoleIndex == -1 && role.hasRole) {
+      this.onlySelectedRoles.push(role);
+    } else if (foundRoleIndex > -1 && !role.hasRole) {
+      this.onlySelectedRoles.splice(foundRoleIndex, 1);
     }
   }
 
@@ -69,11 +65,11 @@ export class AddAdministrationUserComponent {
   }
 
   public applyRoles(): void {
-    this.data.availableRoles = this.roles.map((role) => ({
+    this.availableRoles = this.availableRoles.map((role: AdministrationUserRole) => ({
       ...role,
-      isSelected: this.selectedUserRoles.find(r => r.roleGuid === role.roleGuid)?.isSelected || false
+      hasRole: this.selectedUserRoles.find(r => r.name === role.name)?.hasRole || false
     })) as any
 
-    this.chosenRoles = (this.data.availableRoles as AdministrationUserRole[]).filter(r => r.isSelected);
+    this.onlySelectedRoles = this.availableRoles.filter(r => r.hasRole);
   }
 }

@@ -20,7 +20,7 @@
   <section class="addUserForm-permissions">
     <h4 class="addUserForm-permissions-title">Permissions</h4>
     <app-permission-checkbox
-      *ngFor="let role of roles"
+      *ngFor="let role of availableRoles"
       (checkboxChanged)="roleSelected($event)"
       [role]="role">
     </app-permission-checkbox>

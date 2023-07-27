@@ -9,6 +9,8 @@
   }
 
   &-permissions {
+    overflow: auto;
+    max-height: 500px;
     &-title {
       text-align: center;
     }

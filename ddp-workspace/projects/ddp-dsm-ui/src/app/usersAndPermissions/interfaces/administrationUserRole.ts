@@ -1,11 +1,14 @@
-import {AdministrationUser} from "./administrationUser";
-
 export interface AdministrationUserRole {
-  roleGuid: string;
   name: string;
-  isSelected: boolean;
+  displayText: string;
+  hasRole: boolean;
 }
 
-export interface AdministrationUserRolesResponse {
-  userRoles: AdministrationUser[];
+export interface AvailableRole {
+  name: string;
+  displayText: string;
+}
+
+export interface AvailableStudyRolesResponse {
+  roles: AvailableRole[]
 }

@@ -11,7 +11,7 @@ import {AdministrationUserRole} from "../../interfaces/administrationUserRole";
 })
 export class ComparePermissionsComponent implements OnInit {
   public displayedColumns = ['name', this.firstUser.email, 'selectUser'];
-  public dataSource = []
+  public roles = []
   public secondUser: AdministrationUser;
 
   constructor(@Inject(MAT_DIALOG_DATA)
@@ -19,9 +19,9 @@ export class ComparePermissionsComponent implements OnInit {
 
   ngOnInit() {
     console.log(this.data, 'COMPARE_DATA')
-    this.dataSource = [...this.firstUser.roles];
+    this.roles = [...this.firstUser.roles];
 
-    console.log(this.dataSource, 'DATA_SOURCE')
+    console.log(this.roles, 'DATA_SOURCE')
   }
 
   public userSelected({value: selectedUserEmail}: MatSelectChange): void {
@@ -29,16 +29,16 @@ export class ComparePermissionsComponent implements OnInit {
     // this.dataSource.push(...foundUser.roles);
     this.displayedColumns = ['name', this.firstUser.email];
     this.displayedColumns.push(foundUser.email);
-    this.dataSource = [...this.firstUser.roles];
+    this.roles = this.firstUser.roles;
 
     for(let role of foundUser.roles) {
-      if(this.dataSource.findIndex(r => r.roleGuid === role.roleGuid) === -1) {
-        this.dataSource.push(role)
+      if(this.roles.findIndex(role => role.name === role.name) === -1) {
+        this.roles.push(role)
       }
     }
 
     this.secondUser = foundUser;
-    console.log(this.dataSource, 'AFTER_CHANGE')
+    console.log(this.roles, 'AFTER_CHANGE')
   }
 
   public get firstUser(): AdministrationUser {
@@ -50,12 +50,12 @@ export class ComparePermissionsComponent implements OnInit {
       .map((user) => user.email);
   }
 
-  public findRoleForFirstUser(roleGuid: string): AdministrationUserRole {
-    return this.firstUser.roles.find(role => role.roleGuid === roleGuid);
+  public findRoleForFirstUser(roleName: string): AdministrationUserRole {
+    return this.firstUser.roles.find(role => role.name === roleName);
   }
 
-  public findRoleForSecondUser(roleGuid: string): AdministrationUserRole {
-    return this.secondUser.roles.find(role => role.roleGuid === roleGuid);
+  public findRoleForSecondUser(roleName: string): AdministrationUserRole {
+    return this.secondUser.roles.find(role => role.name === roleName);
   }
 
 }

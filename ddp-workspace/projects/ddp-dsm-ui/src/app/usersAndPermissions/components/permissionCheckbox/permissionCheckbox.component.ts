@@ -18,12 +18,12 @@ export class PermissionCheckboxComponent implements OnInit {
 
   ngOnInit(): void {
     this.idRandomizer =
-      (this.role?.roleGuid || 'defaultGuid1994') +
+      (this.role?.name || 'defaultGuid1994') +
       Math.floor(Math.random() * 100000);
   }
 
   public onChange(changeEvent: Event, role: AdministrationUserRole): void {
     const {checked} = changeEvent.target as HTMLInputElement;
-    this.checkboxChanged.next({...role, isSelected: checked});
+    this.checkboxChanged.next({...role, hasRole: checked});
   }
 }

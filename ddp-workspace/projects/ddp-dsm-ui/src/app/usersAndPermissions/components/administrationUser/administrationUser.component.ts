@@ -97,12 +97,12 @@ export class AdministrationUserComponent implements OnInit {
 
   public onCheckboxChanged(changedRole: AdministrationUserRole): void {
     this.user.roles = this.user.roles.map((role) =>
-      changedRole.roleGuid === role.roleGuid ?
-        {...role, isSelected: changedRole.isSelected} :
+      changedRole.name === role.name ?
+        {...role, hasRole: changedRole.hasRole} :
         role
     )
 
-    this.changeActionButtonsState(!this.permissionsChanged);
+    this.changeActionButtonsState(!this.hasPermissionsChanged);
   }
 
   public saveChanges(): void {
@@ -125,7 +125,7 @@ export class AdministrationUserComponent implements OnInit {
   /* Template methods */
 
   public get doNotAllowCollapse(): boolean {
-    return this.permissionsChanged || this.disableUserActionButtons;
+    return this.hasPermissionsChanged || this.disableUserActionButtons;
   }
 
   public get disableUserActionButtons(): boolean {
@@ -139,9 +139,9 @@ export class AdministrationUserComponent implements OnInit {
 
   /* Helper functions */
 
-  private get permissionsChanged(): boolean {
-    return !this.rolesBeforeChange.every(({isSelected}, index) =>
-      isSelected === this.user.roles[index].isSelected)
+  private get hasPermissionsChanged(): boolean {
+    return !this.rolesBeforeChange.every(({hasRole}, index) =>
+      hasRole === this.user.roles[index].hasRole)
   }
 
   private changeActionButtonsState(isDisabled: boolean): void {

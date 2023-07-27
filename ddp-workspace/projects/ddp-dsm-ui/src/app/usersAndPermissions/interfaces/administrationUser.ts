@@ -6,3 +6,7 @@ export interface AdministrationUser {
   phone: string;
   roles: AdministrationUserRole[];
 }
+
+export interface AdministrationUsersResponse {
+  users: AdministrationUser[];
+}

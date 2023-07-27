@@ -9,6 +9,6 @@ export interface AddAdministrationUserRequest {
 }
 
 export interface AddAdministrationUserModal {
-  availableRoles: Partial<AdministrationUserRole>,
+  availableRoles: Partial<AdministrationUserRole[]>,
   existingUsers: AdministrationUser[]
 }
