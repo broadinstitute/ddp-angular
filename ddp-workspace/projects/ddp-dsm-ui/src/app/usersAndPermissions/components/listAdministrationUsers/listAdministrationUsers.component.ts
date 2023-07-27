@@ -1,8 +1,7 @@
-import {ChangeDetectionStrategy, Component, Input, OnInit} from "@angular/core";
-import {AdministrationUser} from "../../interfaces/administrationUser";
-import {MatDialog} from "@angular/material/dialog";
-import {ComparePermissionsComponent} from "../comparePermissions/comparePermissions.component";
-import {UsersAndPermissionsHttpServiceService} from "../../services/usersAndPermissionsHttpService.service";
+import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
+import {AdministrationUser} from '../../interfaces/administrationUser';
+import {MatDialog} from '@angular/material/dialog';
+import {ComparePermissionsComponent} from '../comparePermissions/comparePermissions.component';
 
 @Component({
   selector: 'app-list-users',
@@ -20,11 +19,11 @@ export class ListAdministrationUsersComponent {
     return name || phone || email;
   }
 
-  public openPermissionsComparisonModal(firstUser: AdministrationUser) {
+  public openPermissionsComparisonModal(firstUser: AdministrationUser): void {
     this.matDialog.open(ComparePermissionsComponent, {data: {
       firstUser,
       allUsers: this.usersList
-      }, maxHeight: '50em', width: '70%'})
+      }, maxHeight: '50em', width: '70%'});
   }
 
 }

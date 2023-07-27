@@ -1,5 +1,5 @@
-import {AdministrationUserRole} from "./administrationUserRole";
-import {AdministrationUser} from "./administrationUser";
+import {AdministrationUserRole} from './administrationUserRole';
+import {AdministrationUser} from './administrationUser';
 
 export interface AddAdministrationUserRequest {
   email: string;
@@ -9,6 +9,6 @@ export interface AddAdministrationUserRequest {
 }
 
 export interface AddAdministrationUserModal {
-  availableRoles: Partial<AdministrationUserRole[]>,
-  existingUsers: AdministrationUser[]
+  availableRoles: Partial<AdministrationUserRole[]>;
+  existingUsers: AdministrationUser[];
 }

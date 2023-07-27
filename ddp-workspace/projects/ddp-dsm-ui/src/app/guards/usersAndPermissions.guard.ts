@@ -1,4 +1,4 @@
-import {Injectable} from "@angular/core";
+import {Injectable} from '@angular/core';
 import {
   ActivatedRouteSnapshot,
   CanActivate,
@@ -8,8 +8,8 @@ import {
   RouterStateSnapshot,
   UrlSegment,
   UrlTree
-} from "@angular/router";
-import {SessionService} from "../services/session.service";
+} from '@angular/router';
+import {SessionService} from '../services/session.service';
 
 @Injectable()
 export class UsersAndPermissionsCanLoadGuard implements CanLoad {

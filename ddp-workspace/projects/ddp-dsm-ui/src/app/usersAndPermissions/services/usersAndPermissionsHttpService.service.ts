@@ -1,10 +1,10 @@
-import {Injectable} from "@angular/core";
-import {Observable} from "rxjs";
-import {AdministrationUser, AdministrationUsersResponse} from "../interfaces/administrationUser";
-import {DSMService} from "../../services/dsm.service";
-import {SessionService} from "../../services/session.service";
-import {AddAdministrationUserRequest} from "../interfaces/addAdministrationUser";
-import {AvailableStudyRolesResponse} from "../interfaces/administrationUserRole";
+import {Injectable} from '@angular/core';
+import {Observable} from 'rxjs';
+import {AdministrationUser, AdministrationUsersResponse} from '../interfaces/administrationUser';
+import {DSMService} from '../../services/dsm.service';
+import {SessionService} from '../../services/session.service';
+import {AddAdministrationUserRequest} from '../interfaces/addAdministrationUser';
+import {AvailableStudyRolesResponse} from '../interfaces/administrationUserRole';
 
 @Injectable()
 export class UsersAndPermissionsHttpServiceService {

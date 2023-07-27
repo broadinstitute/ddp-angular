@@ -3,12 +3,12 @@ import {
   ChangeDetectorRef,
   Component, EventEmitter,
   Input, OnInit, Output
-} from "@angular/core";
-import {AdministrationUser} from "../../interfaces/administrationUser";
-import {AdministrationUserRole} from "../../interfaces/administrationUserRole";
+} from '@angular/core';
+import {AdministrationUser} from '../../interfaces/administrationUser';
+import {AdministrationUserRole} from '../../interfaces/administrationUserRole';
 import {cloneDeep} from 'lodash';
-import {RoleService} from "../../../services/role.service";
-import {FormBuilder, FormGroup} from "@angular/forms";
+import {RoleService} from '../../../services/role.service';
+import {FormBuilder, FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-administration-user',
@@ -32,7 +32,7 @@ export class AdministrationUserComponent implements OnInit {
   @Input('user') set administrationUser(user: AdministrationUser) {
     this.user = user;
     this.rolesBeforeChange = cloneDeep(user.roles);
-  };
+  }
 
   @Output() comparingUser = new EventEmitter<AdministrationUser>();
   @Output() editingUser = new EventEmitter<AdministrationUser>();
@@ -47,20 +47,20 @@ export class AdministrationUserComponent implements OnInit {
     this.editUserForm = this.formBuilder.group({
       name: [this.user.name],
       phone: [this.user.phone]
-    })
+    });
   }
 
   /* Event Handlers */
 
   public compareUser(event: Event, user: AdministrationUser): void {
     event.stopPropagation();
-    console.log(user, 'COMPARE_USER')
+    console.log(user, 'COMPARE_USER');
     this.comparingUser.emit(user);
   }
 
   public editUser(event: Event, user: AdministrationUser): void {
-    event.stopPropagation()
-    console.log(user, 'EDIT_USER')
+    event.stopPropagation();
+    console.log(user, 'EDIT_USER');
     this.isUserEditing = !this.isUserEditing;
   }
 
@@ -70,29 +70,29 @@ export class AdministrationUserComponent implements OnInit {
     this.editUserForm.disable();
 
 
-    console.log(this.user, 'SAVED_EDITED')
+    console.log(this.user, 'SAVED_EDITED');
 
     // mocking
     setTimeout(() => {
       this.editUserForm.enable();
       this.user.name = this.editUserForm.get('name').value;
       this.user.phone = this.editUserForm.get('phone').value;
-      this.cdr.markForCheck()
-      this.isEditUserLoading = false
-    }, 3000)
+      this.cdr.markForCheck();
+      this.isEditUserLoading = false;
+    }, 3000);
   }
 
   public deleteUser(event: Event, user: AdministrationUser): void {
     event.stopPropagation();
     this.isDeleteUserLoading = true;
 
-    console.log(user, 'SAVED_EDITED')
+    console.log(user, 'SAVED_EDITED');
 
     // mocking
     setTimeout(() => {
       this.cdr.markForCheck();
-      this.isDeleteUserLoading = false
-    }, 3000)
+      this.isDeleteUserLoading = false;
+    }, 3000);
   }
 
   public onCheckboxChanged(changedRole: AdministrationUserRole): void {
@@ -100,7 +100,7 @@ export class AdministrationUserComponent implements OnInit {
       changedRole.name === role.name ?
         {...role, hasRole: changedRole.hasRole} :
         role
-    )
+    );
 
     this.changeActionButtonsState(!this.hasPermissionsChanged);
   }
@@ -112,9 +112,9 @@ export class AdministrationUserComponent implements OnInit {
 
     // mocking
     setTimeout(() => {
-      this.cdr.markForCheck()
-      this.isEditPermissionsLoading = false
-    }, 3000)
+      this.cdr.markForCheck();
+      this.isEditPermissionsLoading = false;
+    }, 3000);
   }
 
   public discardChanges(): void {
@@ -141,7 +141,7 @@ export class AdministrationUserComponent implements OnInit {
 
   private get hasPermissionsChanged(): boolean {
     return !this.rolesBeforeChange.every(({hasRole}, index) =>
-      hasRole === this.user.roles[index].hasRole)
+      hasRole === this.user.roles[index].hasRole);
   }
 
   private changeActionButtonsState(isDisabled: boolean): void {

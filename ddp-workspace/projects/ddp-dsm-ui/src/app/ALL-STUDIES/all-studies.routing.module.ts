@@ -41,7 +41,7 @@ import {OncHistoryUploadGuard} from '../guards/oncHistoryUpload.guard';
 import {
   UsersAndPermissionsCanActivateGuard,
   UsersAndPermissionsCanLoadGuard
-} from "../guards/usersAndPermissions.guard";
+} from '../guards/usersAndPermissions.guard';
 
 
 

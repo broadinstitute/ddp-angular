@@ -1,11 +1,11 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit} from "@angular/core";
-import {UsersAndPermissionsHttpServiceService} from "./services/usersAndPermissionsHttpService.service";
-import {MatDialog} from "@angular/material/dialog";
-import {BehaviorSubject, mergeMap, Observable, of, Subject, takeUntil, tap} from "rxjs";
-import {finalize, pluck, withLatestFrom} from "rxjs/operators";
-import {AddAdministrationUserComponent} from "./components/addAdministrationUser/addAdministrationUser.component";
-import {AddAdministrationUserRequest} from "./interfaces/addAdministrationUser";
-import {UsersAndPermissionsStateService} from "./services/usersAndPermissionsState.service";
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
+import {UsersAndPermissionsHttpServiceService} from './services/usersAndPermissionsHttpService.service';
+import {MatDialog} from '@angular/material/dialog';
+import {BehaviorSubject, mergeMap, Observable, of, Subject, takeUntil, tap} from 'rxjs';
+import {finalize, pluck, withLatestFrom} from 'rxjs/operators';
+import {AddAdministrationUserComponent} from './components/addAdministrationUser/addAdministrationUser.component';
+import {AddAdministrationUserRequest} from './interfaces/addAdministrationUser';
+import {UsersAndPermissionsStateService} from './services/usersAndPermissionsState.service';
 
 @Component({
   selector: 'app-users-and-permissions',
@@ -48,7 +48,7 @@ export class UsersAndPermissionsComponent implements OnDestroy, OnInit {
   public onAddUser(): void {
     this.stateService.addUser()
       .pipe(takeUntil(this.subscriptionSubject))
-      .subscribe()
+      .subscribe();
   }
 
 

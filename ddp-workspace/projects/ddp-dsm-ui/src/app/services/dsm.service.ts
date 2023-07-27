@@ -21,7 +21,7 @@ import {IDateRange} from '../dashboard-statistics/interfaces/IDateRange';
 import {StatisticsEnum} from '../dashboard-statistics/enums/statistics.enum';
 import {SomaticResultSignedUrlRequest} from '../sharedLearningUpload/interfaces/somaticResultSignedUrlRequest';
 import {SendToParticipantRequest} from '../sharedLearningUpload/interfaces/sendToParticipant';
-import {AddAdministrationUserRequest} from "../usersAndPermissions/interfaces/addAdministrationUser";
+import {AddAdministrationUserRequest} from '../usersAndPermissions/interfaces/addAdministrationUser';
 
 declare var DDP_ENV: any;
 

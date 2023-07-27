@@ -10,5 +10,5 @@ export interface AvailableRole {
 }
 
 export interface AvailableStudyRolesResponse {
-  roles: AvailableRole[]
+  roles: AvailableRole[];
 }

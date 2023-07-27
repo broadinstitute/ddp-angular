@@ -1,10 +1,10 @@
-import {Injectable} from "@angular/core";
-import {UsersAndPermissionsHttpServiceService} from "./usersAndPermissionsHttpService.service";
-import {BehaviorSubject, mergeMap, Observable, of, Subject, takeUntil, tap} from "rxjs";
-import {pluck} from "rxjs/operators";
-import {AddAdministrationUserComponent} from "../components/addAdministrationUser/addAdministrationUser.component";
-import {AddAdministrationUserRequest} from "../interfaces/addAdministrationUser";
-import {MatDialog} from "@angular/material/dialog";
+import {Injectable} from '@angular/core';
+import {UsersAndPermissionsHttpServiceService} from './usersAndPermissionsHttpService.service';
+import {BehaviorSubject, mergeMap, Observable, of, Subject, takeUntil, tap} from 'rxjs';
+import {pluck} from 'rxjs/operators';
+import {AddAdministrationUserComponent} from '../components/addAdministrationUser/addAdministrationUser.component';
+import {AddAdministrationUserRequest} from '../interfaces/addAdministrationUser';
+import {MatDialog} from '@angular/material/dialog';
 
 @Injectable()
 export class UsersAndPermissionsStateService {
@@ -30,7 +30,7 @@ export class UsersAndPermissionsStateService {
           pluck('roles'),
           tap(roles => this.availableRolesSubject$.next(roles))
         ))
-    )
+    );
   }
 
   public addUser(): Observable<any> {
@@ -49,7 +49,7 @@ export class UsersAndPermissionsStateService {
         ),
         tap(() => newUser && this.pushUser(newUser)),
         takeUntil(this.subscriptionSubject)
-      )
+      );
   }
 
   public unsubscribe(): void {

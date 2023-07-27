@@ -1,8 +1,8 @@
-import {Component, Inject, OnInit} from "@angular/core";
-import {MAT_DIALOG_DATA} from "@angular/material/dialog";
-import {AdministrationUser} from "../../interfaces/administrationUser";
-import {MatSelectChange} from "@angular/material/select";
-import {AdministrationUserRole} from "../../interfaces/administrationUserRole";
+import {Component, Inject, OnInit} from '@angular/core';
+import {MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {AdministrationUser} from '../../interfaces/administrationUser';
+import {MatSelectChange} from '@angular/material/select';
+import {AdministrationUserRole} from '../../interfaces/administrationUserRole';
 
 @Component({
   selector: 'app-compare-permissions',
@@ -11,17 +11,17 @@ import {AdministrationUserRole} from "../../interfaces/administrationUserRole";
 })
 export class ComparePermissionsComponent implements OnInit {
   public displayedColumns = ['name', this.firstUser.email, 'selectUser'];
-  public roles = []
+  public roles = [];
   public secondUser: AdministrationUser;
 
   constructor(@Inject(MAT_DIALOG_DATA)
-              private data: {firstUser: AdministrationUser, allUsers: AdministrationUser[]}) {}
+              private data: {firstUser: AdministrationUser; allUsers: AdministrationUser[]}) {}
 
-  ngOnInit() {
-    console.log(this.data, 'COMPARE_DATA')
+  ngOnInit(): void {
+    console.log(this.data, 'COMPARE_DATA');
     this.roles = [...this.firstUser.roles];
 
-    console.log(this.roles, 'DATA_SOURCE')
+    console.log(this.roles, 'DATA_SOURCE');
   }
 
   public userSelected({value: selectedUserEmail}: MatSelectChange): void {
@@ -31,14 +31,14 @@ export class ComparePermissionsComponent implements OnInit {
     this.displayedColumns.push(foundUser.email);
     this.roles = this.firstUser.roles;
 
-    for(let role of foundUser.roles) {
-      if(this.roles.findIndex(role => role.name === role.name) === -1) {
-        this.roles.push(role)
+    for(const role of foundUser.roles) {
+      if(this.roles.findIndex(r => r.name === role.name) === -1) {
+        this.roles.push(role);
       }
     }
 
     this.secondUser = foundUser;
-    console.log(this.roles, 'AFTER_CHANGE')
+    console.log(this.roles, 'AFTER_CHANGE');
   }
 
   public get firstUser(): AdministrationUser {

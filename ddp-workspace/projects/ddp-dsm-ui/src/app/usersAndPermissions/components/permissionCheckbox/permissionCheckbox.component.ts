@@ -1,5 +1,5 @@
-import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output} from "@angular/core";
-import {AdministrationUserRole} from "../../interfaces/administrationUserRole";
+import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {AdministrationUserRole} from '../../interfaces/administrationUserRole';
 
 @Component({
   selector: 'app-permission-checkbox',
@@ -9,8 +9,8 @@ import {AdministrationUserRole} from "../../interfaces/administrationUserRole";
 })
 export class PermissionCheckboxComponent implements OnInit {
   @Input() role: AdministrationUserRole;
-  @Input() onlyCheckbox: boolean = false;
-  @Input() isDisabled: boolean = false;
+  @Input() onlyCheckbox = false;
+  @Input() isDisabled = false;
 
   @Output() checkboxChanged = new EventEmitter<AdministrationUserRole>();
 
