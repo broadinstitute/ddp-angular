@@ -1,7 +1,14 @@
-<ng-container *ngFor="let user of usersList; trackBy: trackBy">
-  <app-administration-user
-    [user]="user"
-    (comparingUser)="openPermissionsComparisonModal($event)"
-  ></app-administration-user>
+<ng-container *ngIf="usersList.length; else noUsersTemplate">
+  <ng-container *ngFor="let user of usersList; trackBy: trackBy">
+    <app-administration-user
+      [user]="user"
+      (comparingUser)="openPermissionsComparisonModal($event)"
+    ></app-administration-user>
+  </ng-container>
 </ng-container>
 
+<ng-template #noUsersTemplate>
+  <div class="no-users">
+    <p>No Available Users</p>
+  </div>
+</ng-template>

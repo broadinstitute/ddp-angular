@@ -1,5 +1,15 @@
 <section class="title">
   <h1>Users And Permissions</h1>
 </section>
-<button color="accent" class="addUserButton" mat-raised-button color="primary" (click)="onAddUser()">+ Add User</button>
-<app-list-users [usersList]="usersList$ | async"></app-list-users>
+<ng-container *ngIf="!isLoading; else loadingTemplate">
+  <button color="accent" class="addUserButton" mat-raised-button color="primary" (click)="onAddUser()">+ Add User
+  </button>
+  <app-list-users [usersList]="usersList$ | async"></app-list-users>
+</ng-container>
+
+
+<ng-template #loadingTemplate>
+  <div class="loading-spinner">
+    <mat-spinner></mat-spinner>
+  </div>
+</ng-template>
