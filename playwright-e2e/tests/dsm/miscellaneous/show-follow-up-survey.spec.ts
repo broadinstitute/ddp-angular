@@ -4,7 +4,7 @@ import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import FollowUpSurveyPage from 'dsm/pages/follow-up-survey-page';
 
 
-test.describe.parallel('Follow-Up Surveys', () => {
+test.describe('Follow-Up Surveys', () => {
   let followupSurveyPage: FollowUpSurveyPage;
 
   const studies = [StudyEnum.PANCAN, StudyEnum.ANGIO, StudyEnum.OSTEO, StudyEnum.LMS, StudyEnum.OSTEO2, StudyEnum.PROSTATE, StudyEnum.ESC];

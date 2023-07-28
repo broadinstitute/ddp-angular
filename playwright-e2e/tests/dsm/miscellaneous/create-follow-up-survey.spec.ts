@@ -7,7 +7,7 @@ import { getDate } from 'utils/date-utils';
 import { generateRandomNum } from 'utils/faker-utils';
 
 
-test.describe.parallel('Create Follow-Up Survey', () => {
+test.describe('Create Follow-Up Survey', () => {
   const studies = [StudyEnum.PANCAN, StudyEnum.ANGIO, StudyEnum.PROSTATE, StudyEnum.ESC];
   let followupSurveyPage: FollowUpSurveyPage;
 
