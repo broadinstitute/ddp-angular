@@ -195,8 +195,8 @@ export default class Table {
 
   async sort(column: string, order: SortOrder): Promise<void> {
     const header = this.getHeaderByName(RegExp(column));
+    await expect(header).toBeVisible();
     const headerLink = header.locator('a');
-
     if (await headerLink.count() > 0) {
       await headerLink.click();
     } else {

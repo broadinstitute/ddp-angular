@@ -89,7 +89,6 @@ test.describe.serial('When an interested participant does NOT meet participation
       const emailInJson = item.email;
       const finding = lodash.filter(rows, row => {
         if (row.email === emailInJson) {
-          console.log(row.email, row.dateCreated);
           return row.dateCreated === dateInJson
         }
         return false;

@@ -70,7 +70,7 @@ test.describe('Cohort tags', () => {
       await customizeViewPanel.selectColumns('Cohort Tags Columns', ['Cohort Tag Name']);
 
       // Search participant by Short ID
-      console.log(`Participant Short ID: ${shortId}`);
+      // console.log(`Participant Short ID: ${shortId}`);
       await participantListPage.filterListByShortId(shortId);
 
       const participantListTable = participantListPage.participantListTable;
