@@ -4,7 +4,7 @@ import { test } from 'fixtures/dsm-fixture';
 import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import FollowUpSurveyPage from 'dsm/pages/follow-up-survey-page';
 import { getDate } from 'utils/date-utils';
-import { generateRandomNum } from 'utils/faker-utils';
+import { generateAlphaNumeric, generateRandomNum } from 'utils/faker-utils';
 
 
 test.describe('Create Follow-Up Survey', () => {
@@ -22,7 +22,7 @@ test.describe('Create Follow-Up Survey', () => {
     const participantId = await previousSurveysTable.getRowText(0, 'Participant ID');
     expect(participantId).not.toBeNull();
 
-    // Fill out fields
+    // Fill out participant ID and reason
     await followupSurveyPage.participantId(participantId!);
     await followupSurveyPage.reasonForFollowUpSurvey(`playwright testing ${getDate()}`);
     await followupSurveyPage.createSurvey();
@@ -52,21 +52,26 @@ test.describe('Create Follow-Up Survey', () => {
       expect(rowsCount).toBeGreaterThanOrEqual(1);
 
       // Find any participant ID to create new survey (repeating)
-      const randRowIndx = generateRandomNum(0, rowsCount);
-      const participantId = await previousSurveysTable.getRowText(randRowIndx, 'Participant ID');
+      const randRowIndex = generateRandomNum(0, rowsCount);
+      const participantId = await previousSurveysTable.getRowText(randRowIndex, 'Participant ID');
       expect(participantId).not.toBeNull();
 
-      await previousSurveysTable.searchByColumn('Participant ID', participantId!);
-      const oldRowsCount = await previousSurveysTable.rowLocator().count();
-
+      // Create new survey by fill out participant ID and reason
+      const reason = `playwright testing ${generateAlphaNumeric()}`;
       await followupSurveyPage.participantId(participantId!);
-      await followupSurveyPage.reasonForFollowUpSurvey(`playwright testing ${getDate()}`);
+      await followupSurveyPage.reasonForFollowUpSurvey(reason);
       await followupSurveyPage.createSurvey();
 
+      // Verify new survey created
+      const responsePromise = page.waitForResponse(resp => resp.url().includes('surveyName='));
       await followupSurveyPage.reloadTable();
-      await previousSurveysTable.searchByColumn('Participant ID', participantId!);
-      const newRowsCount = await previousSurveysTable.rowLocator().count();
-      expect(newRowsCount).toEqual(oldRowsCount + 1);
+      const response = await responsePromise;
+
+      const json = JSON.parse(await response.text());
+      const filterResult = json.filter((item: { surveyInfo: { participantId: string | null; }; reason: string; }) => {
+          return item.surveyInfo.participantId === participantId && item.reason === reason
+        })
+      await expect(filterResult.length).toEqual(1);
     });
   }
 

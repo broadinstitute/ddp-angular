@@ -257,10 +257,15 @@ export default class Table {
     }
   }
 
-  async searchByColumn(columnName: string, value: string): Promise<void> {
-    const columnIndex = await this.getHeaderIndex(columnName, { exactMatch: false });
-    const input = this.page.locator(this.headerRowCss).nth(1).locator('th').nth(columnIndex).locator('input.form-control');
-    await input.fill(value);
+  async searchByColumn(column1Name: string, value1: string, opts?: { column2Name: string, value2: string }): Promise<void> {
+    const column1Index = await this.getHeaderIndex(column1Name, { exactMatch: false });
+    const input1 = this.page.locator(this.headerRowCss).nth(1).locator('th').nth(column1Index).locator('input.form-control');
+    await input1.fill(value1);
+    if (opts) {
+      const column2Index = await this.getHeaderIndex(opts.column2Name, { exactMatch: false });
+      const input2 = this.page.locator(this.headerRowCss).nth(1).locator('th').nth(column2Index).locator('input.form-control');
+      await input2.fill(opts.value2);
+    }
     await waitForNoSpinner(this.page);
   }
 
