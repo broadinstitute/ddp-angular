@@ -7,9 +7,9 @@ import FollowUpSurveyPage from 'dsm/pages/follow-up-survey-page';
 test.describe.parallel('Follow-Up Surveys', () => {
   let followupSurveyPage: FollowUpSurveyPage;
 
-  const studiesInTest1 = [StudyEnum.PANCAN, StudyEnum.ANGIO, StudyEnum.OSTEO, StudyEnum.LMS, StudyEnum.OSTEO2, StudyEnum.PROSTATE, StudyEnum.ESC];
+  const studies = [StudyEnum.PANCAN, StudyEnum.ANGIO, StudyEnum.OSTEO, StudyEnum.LMS, StudyEnum.OSTEO2, StudyEnum.PROSTATE, StudyEnum.ESC];
 
-  for (const study of studiesInTest1) {
+  for (const study of studies) {
     test(`Shows list of follow-up surveys configured in @${study} @dsm @functional`, async ({ page, request }) => {
       followupSurveyPage = await FollowUpSurveyPage.goto(page, study, request);
       await followupSurveyPage.waitForReady();
