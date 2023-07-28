@@ -13,6 +13,7 @@ export default class Table {
   private readonly rowCss: string;
   private readonly cellCss: string;
   private readonly footerCss: string;
+  private readonly headerRowCss: string;
   private readonly nth: number;
 
   constructor(protected readonly page: Page, opts: { cssClassAttribute?: string; ddpTestID?: string; nth?: number } = {}) {
@@ -23,14 +24,15 @@ export default class Table {
         : cssClassAttribute
             ? `table${cssClassAttribute}, mat-table${cssClassAttribute}`
             : 'table, mat-table, [role="table"]';
-    this.headerCss = 'th, [role="columnheader"]';
+    this.headerCss = 'thead th, [role="columnheader"]';
+    this.headerRowCss = 'thead tr';
     this.rowCss = '[role="row"]:not([mat-header-row]):not(mat-header-row), tbody tr';
     this.cellCss = '[role="cell"], td';
     this.footerCss = 'tfoot tr';
   }
 
-  async waitForReady() {
-    await expect(this.tableLocator().locator(this.headerCss).first()).toBeVisible();
+  async waitForReady(timeout?: number) {
+    await expect(this.tableLocator().locator(this.headerCss).first()).toBeVisible({ timeout });
     expect(await this.rowLocator().count()).toBeGreaterThanOrEqual(1);
   }
 
@@ -126,6 +128,12 @@ export default class Table {
     return rowText;
   }
 
+  /**
+   * Finds text in row underneath specified column name
+   * @param {number} row  It's zero based, nth(0) selects the first row.
+   * @param {string} column
+   * @returns {Promise<string | null>}
+   */
   async getRowText(row: number, column: string): Promise<string | null> {
     // Find column index
     const columns = await this.getHeaderNames();
@@ -247,6 +255,13 @@ export default class Table {
       const cellLocator = this.cell(rowIndex, columnIndex);
       await expect(cellLocator).toHaveText(/^\s*([0-9a-zA-Z]+)\s*$/);
     }
+  }
+
+  async searchByColumn(columnName: string, value: string): Promise<void> {
+    const columnIndex = await this.getHeaderIndex(columnName, { exactMatch: false });
+    const input = this.page.locator(this.headerRowCss).nth(1).locator('th').nth(columnIndex).locator('input.form-control');
+    await input.fill(value);
+    await waitForNoSpinner(this.page);
   }
 
   private parseForNumber(text: string): number | null {

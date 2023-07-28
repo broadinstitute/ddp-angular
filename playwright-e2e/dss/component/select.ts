@@ -71,4 +71,32 @@ export default class Select extends WidgetBase {
         break;
     }
   }
+
+  /**
+   * Finds all options in a Select or mat-select
+   * @returns {Promise<string[]>}
+   */
+  async getAllOptions(): Promise<string[]> {
+    let options;
+    const tagName = await this.toLocator().evaluate((elem) => elem.tagName);
+    switch (tagName) {
+      case 'SELECT':
+        options = await this.toLocator().locator('option').allInnerTexts();
+        break;
+      default:
+        // Click first to open mat-select dropdown
+        await this.toLocator().click();
+        const ariaControlsId = await this.toLocator().getAttribute('aria-controls');
+        if (!ariaControlsId) {
+          throw Error('ERROR: Cannot find attribute "aria-controls"');
+        }
+        const dropdown = this.page.locator(`#${ariaControlsId}[role="listbox"]`);
+        options = await dropdown.locator('mat-option .mat-option-text').allInnerTexts();
+        break;
+    }
+    if (!options) {
+      throw new Error(`Failed to find all options in Select or mat-select`);
+    }
+    return options!;
+  }
 }
