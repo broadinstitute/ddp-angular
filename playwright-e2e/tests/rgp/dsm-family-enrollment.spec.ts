@@ -234,8 +234,6 @@ test.describe.serial('DSM Family Enrollment Handling', () => {
 
     //Go back to Participant List and refresh using Reload with Default Filters
     const familyAccount = new RgpParticipantPage(page);
-    const backToListButton = familyAccount.backToListButton();
-    (await backToListButton).scrollIntoViewIfNeeded;
     await familyAccount.backToList();
     participantListPage.filters.reloadWithDefaultFilters;
     await expect(filteredList).toHaveCount(1);
