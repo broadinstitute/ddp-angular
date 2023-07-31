@@ -223,18 +223,22 @@ test.describe.serial('DSM Family Enrollment Handling', () => {
     await ethnicity.click();
     await dropdownOptions.filter({ hasText: 'Not Hispanic' }).click();
 
-    await proband.inputMixedRaceNotes('Testing');
+    const mixedRaceTestingNotes = 'Testing';
+    await proband.inputMixedRaceNotes(mixedRaceTestingNotes);
 
     //Verify that the input to Important Notes, Process Notes, Mixed Race Notes has been saved even when page is re-visited
     const importantNotes = await proband.getImportantNotesContent();
     const processNotes = await proband.getProcessNotesContent();
     const mixedRaceNotes = await proband.getMixedRaceNotesContent();
+    expect(mixedRaceNotes).toEqual(mixedRaceTestingNotes);
 
     //Go back to Participant List and refresh using Reload with Default Filters
     const familyAccount = new RgpParticipantPage(page);
+    const backToListButton = familyAccount.backToListButton();
+    (await backToListButton).scrollIntoViewIfNeeded;
     await familyAccount.backToList();
     participantListPage.filters.reloadWithDefaultFilters;
-    await participantListPage.filterListByParticipantGUID(user.patient.participantGuid);
+    await expect(filteredList).toHaveCount(1);
     await participantListTable.openParticipantPageAt(0);
 
     //After refreshing participant list and page, check that the input for the above textareas are as expected
