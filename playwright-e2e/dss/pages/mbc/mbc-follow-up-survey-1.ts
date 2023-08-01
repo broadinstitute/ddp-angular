@@ -1,7 +1,7 @@
-import {MBCPageBase} from "./mbc-page-base";
-import {expect, Locator, Page} from "@playwright/test";
-import {waitForNoSpinner} from "../../../utils/test-utils";
-import Question from "../../component/Question";
+import {MBCPageBase} from './mbc-page-base';
+import {expect, Locator, Page} from '@playwright/test';
+import {waitForNoSpinner} from '../../../utils/test-utils';
+import Question from '../../component/Question';
 
 type yesNoDontKnow = 'Yes' | 'No' | "I don't know";
 interface MedicationDetails {
@@ -82,7 +82,7 @@ export class MBCFollowUpSurvey1 extends MBCPageBase {
   private async medicationAnswer(cssClass: string, opts: MedicationDetails): Promise<void> {
     const question = new Question(this.page, {cssClassAttribute: cssClass})
     await this.page.waitForTimeout(3000);
-    if(opts) {
+    if (opts) {
       await question.toInput().fill(opts.medication);
 
       await question.toSelect('Choose month...')
@@ -94,5 +94,4 @@ export class MBCFollowUpSurvey1 extends MBCPageBase {
         .selectOption(opts.year)
     }
   }
-
 }

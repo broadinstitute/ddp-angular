@@ -1,6 +1,6 @@
-import {MBCPageBase} from "./mbc-page-base";
-import {expect, Locator, Page} from "@playwright/test";
-import Question from "../../component/Question";
+import {MBCPageBase} from './mbc-page-base';
+import {expect, Locator, Page} from '@playwright/test';
+import Question from '../../component/Question';
 
 type yesNo = 'Yes' | 'No';
 
@@ -40,5 +40,4 @@ export class MBCResearchConsentPage extends MBCPageBase {
   public async dateOfBirth(month: string, day: string, year: string): Promise<void> {
     await this.fillInDateOfBirth(month, day, year);
   }
-
 }

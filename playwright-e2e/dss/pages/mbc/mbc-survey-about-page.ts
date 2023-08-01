@@ -1,8 +1,8 @@
-import {expect, Locator, Page} from "@playwright/test";
-import {MBCPatientsData as PatientsData, TypePatient} from "../mbc/mbc-patient-type";
-import {waitForNoSpinner} from "../../../utils/test-utils";
-import Question from "../../component/Question";
-import {MBCPageBase} from "./mbc-page-base";
+import {expect, Locator, Page} from '@playwright/test';
+import {MBCPatientsData as PatientsData, TypePatient} from '../mbc/mbc-patient-type';
+import {waitForNoSpinner} from '../../../utils/test-utils';
+import Question from '../../component/Question';
+import {MBCPageBase} from './mbc-page-base';
 
 enum CancerTypeQuestionText {
   BREAST_CANCER = 'When were you first diagnosed with breast cancer?',
@@ -13,7 +13,6 @@ enum CancerTypeQuestionText {
 type yesNoDontKnow = 'Yes' | 'No' | "I don't know";
 
 export class MBCSurveyAboutPage extends MBCPageBase {
-
   constructor(page: Page, private typePatient: TypePatient = 'patient') {
     super(page);
   }
@@ -147,10 +146,10 @@ export class MBCSurveyAboutPage extends MBCPageBase {
   /**
    * <br> Question: Which categories describe you? Select all that apply. Note, you may select more than one group.
    */
-  public async race(answer: string, secondAnswer: string = ''): Promise<void> {
+  public async race(answer: string, secondAnswer = ''): Promise<void> {
     const question = new Question(this.page, {cssClassAttribute: '.picklist-answer-SELF_RACE'});
     await question.toCheckbox(answer).check();
-    if(secondAnswer) {
+    if (secondAnswer) {
       await question.toCheckbox(secondAnswer).check();
     }
   }
@@ -158,13 +157,12 @@ export class MBCSurveyAboutPage extends MBCPageBase {
   /**
    * <br> Question: What is your gender identity? Select all that apply
    */
-  public async gender(answer: string, secondAnswer: string = ''): Promise<void> {
+  public async gender(answer: string, secondAnswer = ''): Promise<void> {
     const question = new Question(this.page, {cssClassAttribute: '.picklist-answer-GENDER_IDENTITY'});
     await question.toCheckbox(answer).check();
-    if(secondAnswer) {
+    if (secondAnswer) {
       await question.toCheckbox(secondAnswer).check();
     }
-
   }
 
   /**
@@ -198,7 +196,4 @@ export class MBCSurveyAboutPage extends MBCPageBase {
       .toSelect('Choose month...')
       .toLocator();
   }
-
-
-
 }

@@ -1,22 +1,21 @@
-import {test} from "@playwright/test";
-import * as utils from "../../utils/test-utils";
-import * as user from "../../data/fake-user.json";
-import {generateUserName} from "../../utils/faker-utils";
-import {MBCHomePage} from "../../dss/pages/mbc/mbc-home-page";
-import {MBCJoinPage} from "../../dss/pages/mbc/mbc-join-page";
-import * as auth from "../../authentication/auth-lms";
-import {logParticipantCreated} from "../../utils/log-utils";
-import {MBCSurveyAboutPage} from "../../dss/pages/mbc/mbc-survey-about-page";
-import {MBCPatientsData} from "../../dss/pages/mbc/mbc-patient-type";
-import {MBCResearchConsentPage} from "../../dss/pages/mbc/mbc-research-consent-page";
-import {MBCMedicalReleasePage} from "../../dss/pages/mbc/mbc-medical-release-page";
-import {MBCFollowUpSurvey1} from "../../dss/pages/mbc/mbc-follow-up-survey-1";
+import {test} from '@playwright/test';
+import * as utils from '../../utils/test-utils';
+import * as user from '../../data/fake-user.json';
+import {generateUserName} from '../../utils/faker-utils';
+import {MBCHomePage} from '../../dss/pages/mbc/mbc-home-page';
+import {MBCJoinPage} from '../../dss/pages/mbc/mbc-join-page';
+import * as auth from '../../authentication/auth-lms';
+import {logParticipantCreated} from '../../utils/log-utils';
+import {MBCSurveyAboutPage} from '../../dss/pages/mbc/mbc-survey-about-page';
+import {MBCPatientsData} from '../../dss/pages/mbc/mbc-patient-type';
+import {MBCResearchConsentPage} from '../../dss/pages/mbc/mbc-research-consent-page';
+import {MBCMedicalReleasePage} from '../../dss/pages/mbc/mbc-medical-release-page';
+import {MBCFollowUpSurvey1} from '../../dss/pages/mbc/mbc-follow-up-survey-1';
 
 const {MBC_USER_EMAIL, MBC_USER_PASSWORD, MBC_BASE_URL, SITE_PASSWORD} = process.env;
 
 
 test.describe.serial('MBC enrolment @mbc', () => {
-
   test('join the movement @visual @enrollment @mbc', async ({page}) => {
     const participant = user.adult;
     const firstName = generateUserName(participant.firstName);
@@ -126,9 +125,5 @@ test.describe.serial('MBC enrolment @mbc', () => {
 
       await page.waitForTimeout(3000);
     })
-
-
   })
-
-
 })

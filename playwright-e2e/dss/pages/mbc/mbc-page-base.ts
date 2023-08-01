@@ -1,5 +1,5 @@
-import PageBase from "../page-base";
-import {Page} from "@playwright/test";
+import PageBase from '../page-base';
+import {Page} from '@playwright/test';
 
 export class MBCPageBase extends PageBase {
   protected constructor(page: Page) {
@@ -9,5 +9,4 @@ export class MBCPageBase extends PageBase {
     }
     super(page, MBC_BASE_URL);
   }
-
 }

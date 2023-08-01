@@ -1,8 +1,8 @@
-import {expect, Locator, Page} from "@playwright/test";
-import {MBCPageBase} from "./mbc-page-base";
-import {waitForNoSpinner} from "../../../utils/test-utils";
-import * as user from "../../../data/fake-user.json";
-import Institution from "../../component/institution";
+import {expect, Locator, Page} from '@playwright/test';
+import {MBCPageBase} from './mbc-page-base';
+import {waitForNoSpinner} from '../../../utils/test-utils';
+import * as user from '../../../data/fake-user.json';
+import Institution from '../../component/institution';
 
 
 export class MBCMedicalReleasePage extends MBCPageBase {
@@ -73,11 +73,9 @@ export class MBCMedicalReleasePage extends MBCPageBase {
    * Question: Where were any other biopsies or surgeries for your breast cancer performed (i.e. biopsy, lumpectomy, partial mastectomy, mastectomy)?
    * @param nth
    */
-  public async addAndFillAnotherInstitution(nth: number = 0): Promise<void> {
+  public async addAndFillAnotherInstitution(nth = 0): Promise<void> {
     const institution = new Institution(this.page, { label: /other biopsies/});
     await institution.toButton('ADD ANOTHER INSTITUTION').click();
     await this.yourHospitalOrInstitution({label: /institution/, nth});
   }
-
-
 }
