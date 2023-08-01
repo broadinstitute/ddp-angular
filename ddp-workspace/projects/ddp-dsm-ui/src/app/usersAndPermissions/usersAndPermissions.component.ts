@@ -3,8 +3,8 @@ import {UsersAndPermissionsHttpServiceService} from './services/usersAndPermissi
 import {MatDialog} from '@angular/material/dialog';
 import {BehaviorSubject, mergeMap, Observable, of, Subject, takeUntil, tap} from 'rxjs';
 import {finalize, pluck, withLatestFrom} from 'rxjs/operators';
-import {AddAdministrationUserComponent} from './components/addAdministrationUser/addAdministrationUser.component';
-import {AddAdministrationUserRequest} from './interfaces/addAdministrationUser';
+import {AddUserComponent} from './components/addUser/addUser.component';
+import {AddUsersRequest} from './interfaces/addRemoveUsers';
 import {UsersAndPermissionsStateService} from './services/usersAndPermissionsState.service';
 
 @Component({
@@ -18,7 +18,7 @@ export class UsersAndPermissionsComponent implements OnDestroy, OnInit {
   public usersList$ = this.stateService.usersList$;
   public isLoading = false;
 
-  private readonly subscriptionSubject = new Subject<void>();
+  private readonly subscriptionSubject$ = new Subject<void>();
 
 
   constructor(
@@ -30,7 +30,7 @@ export class UsersAndPermissionsComponent implements OnDestroy, OnInit {
     this.isLoading = true;
     this.stateService.initData()
       .pipe(
-        takeUntil(this.subscriptionSubject),
+        takeUntil(this.subscriptionSubject$),
         finalize(() => {
           this.isLoading = false;
           this.cdr.markForCheck();
@@ -41,13 +41,13 @@ export class UsersAndPermissionsComponent implements OnDestroy, OnInit {
 
   ngOnDestroy(): void {
     this.stateService.unsubscribe();
-    this.subscriptionSubject.next();
-    this.subscriptionSubject.complete();
+    this.subscriptionSubject$.next();
+    this.subscriptionSubject$.complete();
   }
 
   public onAddUser(): void {
     this.stateService.addUser()
-      .pipe(takeUntil(this.subscriptionSubject))
+      .pipe(takeUntil(this.subscriptionSubject$))
       .subscribe();
   }
 

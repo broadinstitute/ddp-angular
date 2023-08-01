@@ -2,13 +2,18 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component, EventEmitter,
-  Input, OnInit, Output
+  Input, OnDestroy, OnInit, Output
 } from '@angular/core';
-import {AdministrationUser} from '../../interfaces/administrationUser';
-import {AdministrationUserRole} from '../../interfaces/administrationUserRole';
+import {User} from '../../interfaces/user';
+import {Role} from '../../interfaces/role';
 import {cloneDeep} from 'lodash';
 import {RoleService} from '../../../services/role.service';
 import {FormBuilder, FormGroup} from '@angular/forms';
+import {UsersAndPermissionsStateService} from "../../services/usersAndPermissionsState.service";
+import {RemoveUsersRequest} from "../../interfaces/addRemoveUsers";
+import {Subject, takeUntil} from "rxjs";
+import {finalize} from "rxjs/operators";
+import {EditUsers} from "../../interfaces/editUsers";
 
 @Component({
   selector: 'app-administration-user',
@@ -16,11 +21,12 @@ import {FormBuilder, FormGroup} from '@angular/forms';
   styleUrls: ['administrationUser.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AdministrationUserComponent implements OnInit {
+export class AdministrationUserComponent implements OnInit, OnDestroy {
   public editUserForm: FormGroup;
 
-  public user: AdministrationUser;
-  private rolesBeforeChange: AdministrationUserRole[];
+  public user: User;
+  private rolesBeforeChange: Role[];
+  private subscriptionSubject$ = new Subject<void>();
 
   /* Switchers */
   public arePermissionActionButtonsDisabled = true;
@@ -29,18 +35,17 @@ export class AdministrationUserComponent implements OnInit {
   public isEditPermissionsLoading = false;
   public isDeleteUserLoading = false;
 
-  @Input('user') set administrationUser(user: AdministrationUser) {
+  @Input('user') set administrationUser(user: User) {
     this.user = user;
     this.rolesBeforeChange = cloneDeep(user.roles);
   }
 
-  @Output() comparingUser = new EventEmitter<AdministrationUser>();
-  @Output() editingUser = new EventEmitter<AdministrationUser>();
-  @Output() deletingUser = new EventEmitter<AdministrationUser>();
+  @Output() comparingUser = new EventEmitter<User>();
 
   constructor(private readonly cdr: ChangeDetectorRef,
               private readonly roleService: RoleService,
-              private readonly formBuilder: FormBuilder) {
+              private readonly formBuilder: FormBuilder,
+              private readonly stateService: UsersAndPermissionsStateService) {
   }
 
   ngOnInit(): void {
@@ -50,17 +55,20 @@ export class AdministrationUserComponent implements OnInit {
     });
   }
 
-  /* Event Handlers */
-
-  public compareUser(event: Event, user: AdministrationUser): void {
-    event.stopPropagation();
-    console.log(user, 'COMPARE_USER');
-    this.comparingUser.emit(user);
+  ngOnDestroy(): void {
+    this.subscriptionSubject$.next();
+    this.subscriptionSubject$.complete();
   }
 
-  public editUser(event: Event, user: AdministrationUser): void {
+  /* Event Handlers */
+
+  public compareUser(event: Event): void {
     event.stopPropagation();
-    console.log(user, 'EDIT_USER');
+    this.comparingUser.emit(this.user);
+  }
+
+  public editUser(event: Event): void {
+    event.stopPropagation();
     this.isUserEditing = !this.isUserEditing;
   }
 
@@ -68,34 +76,44 @@ export class AdministrationUserComponent implements OnInit {
     event.stopPropagation();
     this.isEditUserLoading = true;
     this.editUserForm.disable();
+    const userToEdit: EditUsers = {
+      users: [
+        {email: this.user.email, ...this.editUserForm.getRawValue()}
+      ]
+    }
 
-
-    console.log(this.user, 'SAVED_EDITED');
-
-    // mocking
-    setTimeout(() => {
-      this.editUserForm.enable();
-      this.user.name = this.editUserForm.get('name').value;
-      this.user.phone = this.editUserForm.get('phone').value;
-      this.cdr.markForCheck();
-      this.isEditUserLoading = false;
-    }, 3000);
+    this.stateService.editUsers(userToEdit)
+      .pipe(
+        takeUntil(this.subscriptionSubject$),
+        finalize(() => {
+          this.cdr.markForCheck();
+          this.isEditUserLoading = false;
+          this.editUserForm.enable();
+        })
+      )
+      .subscribe();
   }
 
-  public deleteUser(event: Event, user: AdministrationUser): void {
+  public removeUser(event: Event): void {
     event.stopPropagation();
     this.isDeleteUserLoading = true;
 
-    console.log(user, 'SAVED_EDITED');
+    const usersToRemove: RemoveUsersRequest = {
+      removeUsers: [this.user.email]
+    }
 
-    // mocking
-    setTimeout(() => {
-      this.cdr.markForCheck();
-      this.isDeleteUserLoading = false;
-    }, 3000);
+    this.stateService.removeUsers(usersToRemove)
+      .pipe(
+        takeUntil(this.subscriptionSubject$),
+        finalize(() => {
+          this.cdr.markForCheck();
+          this.isDeleteUserLoading = false;
+        })
+      )
+      .subscribe();
   }
 
-  public onCheckboxChanged(changedRole: AdministrationUserRole): void {
+  public onCheckboxChanged(changedRole: Role): void {
     this.user.roles = this.user.roles.map((role) =>
       changedRole.name === role.name ?
         {...role, hasRole: changedRole.hasRole} :
@@ -106,15 +124,30 @@ export class AdministrationUserComponent implements OnInit {
   }
 
   public saveChanges(): void {
-    this.rolesBeforeChange = this.user.roles;
-    this.arePermissionActionButtonsDisabled = true;
     this.isEditPermissionsLoading = true;
 
-    // mocking
-    setTimeout(() => {
-      this.cdr.markForCheck();
-      this.isEditPermissionsLoading = false;
-    }, 3000);
+    const userRolesToEdit = {
+      users: [this.user.email],
+      roles: this.user.roles.filter(role => role.hasRole).map(role => role.name)
+    }
+
+    this.stateService.editUserRoles(userRolesToEdit)
+      .pipe(
+        takeUntil(this.subscriptionSubject$),
+        finalize(() => {
+          this.cdr.markForCheck();
+          this.isEditPermissionsLoading = false;
+        })
+      )
+      .subscribe({
+        next: () => {
+          this.rolesBeforeChange = this.user.roles;
+          this.arePermissionActionButtonsDisabled = true;
+        },
+        error: () => {
+          // @TODO handle error
+        }
+      })
   }
 
   public discardChanges(): void {

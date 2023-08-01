@@ -47,14 +47,14 @@
                     matTooltip="Compare Permissions"
                     mat-icon-button
                     [disabled]="disableUserActionButtons"
-                    (click)="compareUser($event, user)">
+                    (click)="compareUser($event)">
               <mat-icon>compare_arrows</mat-icon>
             </button>
             <button class="header-buttons-edit"
                     matTooltip="Edit User"
                     mat-icon-button
                     [disabled]="disableUserActionButtons"
-                    (click)="editUser($event, user)">
+                    (click)="editUser($event)">
               <mat-icon>edit</mat-icon>
             </button>
             <ng-container *ngIf="!isDeleteUserLoading; else spinnerTemplate">
@@ -62,7 +62,7 @@
                       matTooltip="Delete User"
                       mat-icon-button
                       [disabled]="disableUserActionButtons"
-                      (click)="deleteUser($event, user)">
+                      (click)="removeUser($event)">
                 <mat-icon>delete_forever</mat-icon>
               </button>
             </ng-container>

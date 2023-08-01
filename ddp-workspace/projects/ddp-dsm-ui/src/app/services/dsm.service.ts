@@ -21,7 +21,9 @@ import {IDateRange} from '../dashboard-statistics/interfaces/IDateRange';
 import {StatisticsEnum} from '../dashboard-statistics/enums/statistics.enum';
 import {SomaticResultSignedUrlRequest} from '../sharedLearningUpload/interfaces/somaticResultSignedUrlRequest';
 import {SendToParticipantRequest} from '../sharedLearningUpload/interfaces/sendToParticipant';
-import {AddAdministrationUserRequest} from '../usersAndPermissions/interfaces/addAdministrationUser';
+import {AddUsersRequest, RemoveUsersRequest} from '../usersAndPermissions/interfaces/addRemoveUsers';
+import {EditUsers} from "../usersAndPermissions/interfaces/editUsers";
+import {EditUserRoles} from "../usersAndPermissions/interfaces/role";
 
 declare var DDP_ENV: any;
 
@@ -468,11 +470,38 @@ export class DSMService {
     );
   }
 
-  public addUser(realm: string, body: AddAdministrationUserRequest): Observable<any> {
+  public addUser(realm: string, addUsers: AddUsersRequest): Observable<any> {
     const url = this.baseUrl + DSMService.UI + 'admin/user';
     const map: { name: string; value: any }[] = [];
     map.push({name: DSMService.REALM, value: realm});
-    return this.http.post(url, {users: [body]}, this.buildQueryHeader(map)).pipe(
+    return this.http.post(url, addUsers, this.buildQueryHeader(map)).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  public removeUser(realm: string, removeUsers: RemoveUsersRequest): Observable<any> {
+    const url = this.baseUrl + DSMService.UI + 'admin/user';
+    const map: { name: string; value: any }[] = [];
+    map.push({name: DSMService.REALM, value: realm});
+    return this.http.post(url, removeUsers, this.buildQueryHeader(map)).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  public editUsers(realm: string, editUser: EditUsers): Observable<any> {
+    const url = this.baseUrl + DSMService.UI + 'admin/user';
+    const map: { name: string; value: any }[] = [];
+    map.push({name: DSMService.REALM, value: realm});
+    return this.http.put(url, editUser, this.buildQueryHeader(map)).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  public editUsersRoles(realm: string, userRoles: EditUserRoles): Observable<any> {
+    const url = this.baseUrl + DSMService.UI + 'admin/userRole';
+    const map: { name: string; value: any }[] = [];
+    map.push({name: DSMService.REALM, value: realm});
+    return this.http.put(url, userRoles, this.buildQueryHeader(map)).pipe(
       catchError(this.handleError)
     );
   }

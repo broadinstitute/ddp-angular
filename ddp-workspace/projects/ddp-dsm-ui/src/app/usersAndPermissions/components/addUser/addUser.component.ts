@@ -1,38 +1,38 @@
 import {ChangeDetectionStrategy, Component, Inject} from '@angular/core';
 import {FormBuilder, Validators} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {AdministrationUserRole} from '../../interfaces/administrationUserRole';
-import {AddAdministrationUserModal, AddAdministrationUserRequest} from '../../interfaces/addAdministrationUser';
+import {Role} from '../../interfaces/role';
+import {AddUser, AddUserModal, AddUsersRequest} from '../../interfaces/addRemoveUsers';
 import {MatSelectChange} from '@angular/material/select';
 import {cloneDeep} from 'lodash';
 
 @Component({
   selector: 'app-add-administration-user',
-  templateUrl: 'addAdministrationUser.component.html',
-  styleUrls: ['addAdministrationUser.component.scss'],
+  templateUrl: 'addUser.component.html',
+  styleUrls: ['addUser.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AddAdministrationUserComponent {
+export class AddUserComponent {
   public availableRoles = cloneDeep(this.data.availableRoles).map(role => ({...role, hasRole: false}));
-  public selectedUserRoles: AdministrationUserRole[];
+  public selectedUserRoles: Role[];
 
   public readonly addUserForm = this.formBuilder.group({
-    email: [null, Validators.required],
+    email: [null, [Validators.required, Validators.email]],
     name: [null, Validators.required],
     phone: [null, Validators.required],
   });
 
-  private onlySelectedRoles: AdministrationUserRole[] = [];
+  private onlySelectedRoles: Role[] = [];
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) private data: AddAdministrationUserModal,
-    private readonly matDialogRef: MatDialogRef<AddAdministrationUserComponent>,
+    @Inject(MAT_DIALOG_DATA) private data: AddUserModal,
+    private readonly matDialogRef: MatDialogRef<AddUserComponent>,
     private readonly formBuilder: FormBuilder
   ) {}
 
   public addUser(): void {
     if (this.allowAddingUser) {
-      const userToAdd: AddAdministrationUserRequest = {
+      const userToAdd: AddUser = {
         ...this.addUserForm.getRawValue(),
         roles: this.onlySelectedRoles.map(r => r.name)
       };
@@ -45,7 +45,7 @@ export class AddAdministrationUserComponent {
     return this.addUserForm.valid && !!this.onlySelectedRoles?.length;
   }
 
-  public roleSelected(role: AdministrationUserRole): void {
+  public roleSelected(role: Role): void {
     const foundRoleIndex = this.onlySelectedRoles.findIndex(r => r.name === role.name);
     if(foundRoleIndex > -1 && role.hasRole) {
       this.onlySelectedRoles[foundRoleIndex] = role;
@@ -65,7 +65,7 @@ export class AddAdministrationUserComponent {
   }
 
   public applyRoles(): void {
-    this.availableRoles = this.availableRoles.map((role: AdministrationUserRole) => ({
+    this.availableRoles = this.availableRoles.map((role: Role) => ({
       ...role,
       hasRole: this.selectedUserRoles.find(r => r.name === role.name)?.hasRole || false
     })) as any;

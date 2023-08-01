@@ -1,8 +1,8 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
-import {AdministrationUser} from '../../interfaces/administrationUser';
+import {User} from '../../interfaces/user';
 import {MatSelectChange} from '@angular/material/select';
-import {AdministrationUserRole} from '../../interfaces/administrationUserRole';
+import {Role} from '../../interfaces/role';
 
 @Component({
   selector: 'app-compare-permissions',
@@ -12,10 +12,10 @@ import {AdministrationUserRole} from '../../interfaces/administrationUserRole';
 export class ComparePermissionsComponent implements OnInit {
   public displayedColumns = ['name', this.firstUser.email, 'selectUser'];
   public roles = [];
-  public secondUser: AdministrationUser;
+  public secondUser: User;
 
   constructor(@Inject(MAT_DIALOG_DATA)
-              private data: {firstUser: AdministrationUser; allUsers: AdministrationUser[]}) {}
+              private data: {firstUser: User; allUsers: User[]}) {}
 
   ngOnInit(): void {
     console.log(this.data, 'COMPARE_DATA');
@@ -41,7 +41,7 @@ export class ComparePermissionsComponent implements OnInit {
     console.log(this.roles, 'AFTER_CHANGE');
   }
 
-  public get firstUser(): AdministrationUser {
+  public get firstUser(): User {
     return this.data.firstUser;
   }
 
@@ -50,11 +50,11 @@ export class ComparePermissionsComponent implements OnInit {
       .map((user) => user.email);
   }
 
-  public findRoleForFirstUser(roleName: string): AdministrationUserRole {
+  public findRoleForFirstUser(roleName: string): Role {
     return this.firstUser.roles.find(role => role.name === roleName);
   }
 
-  public findRoleForSecondUser(roleName: string): AdministrationUserRole {
+  public findRoleForSecondUser(roleName: string): Role {
     return this.secondUser.roles.find(role => role.name === roleName);
   }
 

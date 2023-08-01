@@ -1,7 +1,12 @@
-export interface AdministrationUserRole {
+export interface Role {
   name: string;
   displayText: string;
   hasRole: boolean;
+}
+
+export interface EditUserRoles {
+  users: string[],
+  roles: string[]
 }
 
 export interface AvailableRole {

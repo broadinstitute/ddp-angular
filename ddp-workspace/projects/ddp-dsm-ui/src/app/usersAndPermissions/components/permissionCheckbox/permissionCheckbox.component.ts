@@ -1,5 +1,5 @@
 import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {AdministrationUserRole} from '../../interfaces/administrationUserRole';
+import {Role} from '../../interfaces/role';
 
 @Component({
   selector: 'app-permission-checkbox',
@@ -8,11 +8,11 @@ import {AdministrationUserRole} from '../../interfaces/administrationUserRole';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PermissionCheckboxComponent implements OnInit {
-  @Input() role: AdministrationUserRole;
+  @Input() role: Role;
   @Input() onlyCheckbox = false;
   @Input() isDisabled = false;
 
-  @Output() checkboxChanged = new EventEmitter<AdministrationUserRole>();
+  @Output() checkboxChanged = new EventEmitter<Role>();
 
   public idRandomizer: string;
 
@@ -22,7 +22,7 @@ export class PermissionCheckboxComponent implements OnInit {
       Math.floor(Math.random() * 100000);
   }
 
-  public onChange(changeEvent: Event, role: AdministrationUserRole): void {
+  public onChange(changeEvent: Event, role: Role): void {
     const {checked} = changeEvent.target as HTMLInputElement;
     this.checkboxChanged.next({...role, hasRole: checked});
   }

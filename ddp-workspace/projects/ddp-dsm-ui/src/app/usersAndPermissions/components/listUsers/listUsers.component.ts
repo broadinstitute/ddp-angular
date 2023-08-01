@@ -1,25 +1,25 @@
 import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
-import {AdministrationUser} from '../../interfaces/administrationUser';
+import {User} from '../../interfaces/user';
 import {MatDialog} from '@angular/material/dialog';
 import {ComparePermissionsComponent} from '../comparePermissions/comparePermissions.component';
 
 @Component({
   selector: 'app-list-users',
-  templateUrl: 'listAdministrationUsers.component.html',
-  styleUrls: ['listAdministrationUsers.component.scss'],
+  templateUrl: 'listUsers.component.html',
+  styleUrls: ['listUsers.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ListAdministrationUsersComponent {
-  @Input() usersList: AdministrationUser[];
+export class ListUsersComponent {
+  @Input() usersList: User[];
 
   constructor(private readonly matDialog: MatDialog) {
   }
 
-  public trackBy(index: number, {name, phone, email}: AdministrationUser): any {
+  public trackBy(index: number, {name, phone, email}: User): any {
     return name || phone || email;
   }
 
-  public openPermissionsComparisonModal(firstUser: AdministrationUser): void {
+  public openPermissionsComparisonModal(firstUser: User): void {
     this.matDialog.open(ComparePermissionsComponent, {data: {
       firstUser,
       allUsers: this.usersList
