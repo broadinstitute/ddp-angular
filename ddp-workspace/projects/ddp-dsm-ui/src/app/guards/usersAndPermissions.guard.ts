@@ -19,7 +19,7 @@ export class UsersAndPermissionsCanLoadGuard implements CanLoad {
   }
 
   canLoad(route: Route, segments: UrlSegment[]): boolean | UrlTree {
-    return this.session.selectedRealm === 'cmi-lms';
+    return true;
   }
 }
 
@@ -32,6 +32,6 @@ export class UsersAndPermissionsCanActivateGuard implements CanActivate {
   ) {}
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot):  boolean | UrlTree {
-    return this.session.selectedRealm === 'cmi-lms';
+    return true;
   }
 }

@@ -4,12 +4,14 @@
 <ng-container *ngIf="errorMessage">
   <app-error-message errorText="Couldn't load users" [errorMessage]="errorMessage"></app-error-message>
 </ng-container>
-<ng-container *ngIf="(usersList$ | async) as usersList">
-  <ng-container *ngIf="(availableRoles$ | async) as availableRoles">
-    <ng-container *ngIf="!isLoading; else loadingTemplate">
-      <button color="accent" class="addUserButton" mat-raised-button color="primary" (click)="onAddUser(usersList, availableRoles)">+ Add User
-      </button>
-      <app-list-users [usersList]="usersList"></app-list-users>
+<ng-container *ngIf="!errorMessage">
+  <ng-container *ngIf="(usersList$ | async) as usersList">
+    <ng-container *ngIf="(availableRoles$ | async) as availableRoles">
+      <ng-container *ngIf="!isLoading; else loadingTemplate">
+        <button color="accent" class="addUserButton" mat-raised-button color="primary" (click)="onAddUser(usersList, availableRoles)">+ Add User
+        </button>
+        <app-list-users [usersList]="usersList"></app-list-users>
+      </ng-container>
     </ng-container>
   </ng-container>
 </ng-container>
