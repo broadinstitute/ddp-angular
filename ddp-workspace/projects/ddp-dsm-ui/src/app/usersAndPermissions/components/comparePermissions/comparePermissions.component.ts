@@ -18,10 +18,7 @@ export class ComparePermissionsComponent implements OnInit {
               private data: {firstUser: User; allUsers: User[]}) {}
 
   ngOnInit(): void {
-    console.log(this.data, 'COMPARE_DATA');
     this.roles = [...this.firstUser.roles];
-
-    console.log(this.roles, 'DATA_SOURCE');
   }
 
   public userSelected({value: selectedUserEmail}: MatSelectChange): void {
@@ -38,7 +35,6 @@ export class ComparePermissionsComponent implements OnInit {
     }
 
     this.secondUser = foundUser;
-    console.log(this.roles, 'AFTER_CHANGE');
   }
 
   public get firstUser(): User {
