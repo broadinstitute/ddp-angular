@@ -1,10 +1,10 @@
 import {Injectable} from '@angular/core';
 import {UsersAndPermissionsHttpService} from './usersAndPermissionsHttp.service';
 import {BehaviorSubject, mergeMap, Observable, tap} from 'rxjs';
-import {pluck} from 'rxjs/operators';
+import {map, pluck} from 'rxjs/operators';
 import {AddUser, RemoveUsersRequest} from '../interfaces/addRemoveUsers';
 import {User} from "../interfaces/user";
-import {AvailableRole, EditUserRoles} from "../interfaces/role";
+import {AvailableRole, EditUserRoles, Role} from "../interfaces/role";
 import {EditUsers} from "../interfaces/editUsers";
 
 @Injectable()
@@ -12,8 +12,23 @@ export class UsersAndPermissionsStateService {
   private readonly usersListSubject$ = new BehaviorSubject<User[]>([]);
   private readonly availableRolesSubject$ = new BehaviorSubject<AvailableRole[]>([]);
 
-  public readonly usersList$ = this.usersListSubject$.asObservable();
-  public readonly availableRoles$ = this.availableRolesSubject$.asObservable();
+  public readonly usersList$ = this.usersListSubject$.asObservable()
+    .pipe(
+      map((users: User[]) =>
+        users.map((user: User) =>
+          ({
+            ...user,
+            roles: this.sortRoles(user.roles.slice())
+          })
+        )
+      )
+    );
+
+  public readonly availableRoles$ = this.availableRolesSubject$.asObservable()
+    .pipe(
+      map((roles: Role[]) => this.sortRoles(roles))
+    );
+
 
   constructor(private readonly httpService: UsersAndPermissionsHttpService) {
   }
@@ -75,5 +90,9 @@ export class UsersAndPermissionsStateService {
   private removeUser(removedUsersEmails: string[]): void {
     this.usersListSubject$
       .next(this.usersListSubject$.getValue().filter(user => !removedUsersEmails.includes(user.email)))
+  }
+
+  private sortRoles(roles: Role[]): Role[] {
+    return roles.sort(({displayText: role1}, {displayText: role2}) => role1.localeCompare(role2))
   }
 }

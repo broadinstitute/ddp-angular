@@ -185,8 +185,8 @@ export class AdministrationUserComponent implements OnInit, OnDestroy {
   /* Helper functions */
 
   private get hasPermissionsChanged(): boolean {
-    return !this.rolesBeforeChange?.every(({hasRole}, index) =>
-      hasRole === this.user.roles[index].hasRole);
+    return !this.rolesBeforeChange?.every(({hasRole, name}) =>
+      hasRole === this.user.roles.find(({name: name2}) => name === name2).hasRole);
   }
 
   private changeActionButtonsState(isDisabled: boolean): void {
@@ -194,7 +194,7 @@ export class AdministrationUserComponent implements OnInit, OnDestroy {
   }
 
   private handleError(error: any, text: string): void {
-    if(error instanceof HttpErrorResponse) {
+    if (error instanceof HttpErrorResponse) {
       this.reportError.emit({
         displayError: true,
         errorText: text,
