@@ -2,6 +2,7 @@ import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
 import {User} from '../../interfaces/user';
 import {MatDialog} from '@angular/material/dialog';
 import {ComparePermissionsComponent} from '../comparePermissions/comparePermissions.component';
+import {ErrorUi} from "../../interfaces/error-ui";
 
 @Component({
   selector: 'app-list-users',
@@ -11,12 +12,15 @@ import {ComparePermissionsComponent} from '../comparePermissions/comparePermissi
 })
 export class ListUsersComponent {
   @Input() usersList: User[];
+  public displayError: boolean = false;
+  public errorMessage: string | null = null;
+  public errorText: string | null  = null;
 
   constructor(private readonly matDialog: MatDialog) {
   }
 
   public trackBy(index: number, {name, phone, email}: User): any {
-    return name || phone || email;
+    return `${name}_${phone}_${email}\``;
   }
 
   public openPermissionsComparisonModal(firstUser: User): void {
@@ -24,6 +28,12 @@ export class ListUsersComponent {
       firstUser,
       allUsers: this.usersList
       }, maxHeight: '50em', width: '70%'});
+  }
+
+  public onError({displayError, errorText, errorMessage}: ErrorUi): void {
+    this.displayError = displayError;
+    this.errorText = errorText;
+    this.errorMessage = errorMessage;
   }
 
 }

@@ -12,3 +12,8 @@
 .loading-spinner {
   @include common.flexContainer(normal, center);
 }
+
+app-error-message {
+  @include common.flexContainer(center, center);
+  margin-bottom: .7em;
+}

@@ -1,13 +1,8 @@
 @use "commonStyles" as common;
 
-.no-users {
-  @include common.flexContainer(normal, center);
-  padding: 3em;
-  p {
-    font-family: Montserrat-SemiBold, sans-serif;
-    text-align: center;
-    background-color: rgba(104, 189, 213, 0.6);
-    border-radius: 1em;
-    padding: 3em;
-  }
+
+
+app-error-message {
+  @include common.flexContainer(center, center);
+  margin-bottom: .7em;
 }

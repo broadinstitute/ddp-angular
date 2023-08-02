@@ -1,26 +1,23 @@
 import {Injectable} from '@angular/core';
-import {UsersAndPermissionsHttpServiceService} from './usersAndPermissionsHttpService.service';
-import {BehaviorSubject, mergeMap, Observable, of, Subject, takeUntil, tap} from 'rxjs';
+import {UsersAndPermissionsHttpService} from './usersAndPermissionsHttp.service';
+import {BehaviorSubject, mergeMap, Observable, tap} from 'rxjs';
 import {pluck} from 'rxjs/operators';
-import {AddUserComponent} from '../components/addUser/addUser.component';
-import {AddUser, AddUsersRequest, RemoveUsersRequest} from '../interfaces/addRemoveUsers';
-import {MatDialog} from '@angular/material/dialog';
+import {AddUser, RemoveUsersRequest} from '../interfaces/addRemoveUsers';
 import {User} from "../interfaces/user";
 import {AvailableRole, EditUserRoles} from "../interfaces/role";
 import {EditUsers} from "../interfaces/editUsers";
 
 @Injectable()
 export class UsersAndPermissionsStateService {
-  private usersListSubject$ = new BehaviorSubject<User[]>([]);
-  private availableRolesSubject$ = new BehaviorSubject<AvailableRole[]>([]);
-  private readonly subscriptionSubject = new Subject<void>();
+  private readonly usersListSubject$ = new BehaviorSubject<User[]>([]);
+  private readonly availableRolesSubject$ = new BehaviorSubject<AvailableRole[]>([]);
 
-  public usersList$ = this.usersListSubject$.asObservable();
+  public readonly usersList$ = this.usersListSubject$.asObservable();
+  public readonly availableRoles$ = this.availableRolesSubject$.asObservable();
 
-
-  constructor(private readonly httpService: UsersAndPermissionsHttpServiceService,
-              private readonly matDialog: MatDialog) {
+  constructor(private readonly httpService: UsersAndPermissionsHttpService) {
   }
+
 
   /* Events */
 
@@ -36,23 +33,9 @@ export class UsersAndPermissionsStateService {
     );
   }
 
-  public addUser(): Observable<any> {
-    let newUser: AddUser;
-
-    const activeUserAddDialog = this.matDialog.open(AddUserComponent, {data:{
-        availableRoles: this.availableRolesSubject$.getValue(),
-        existingUsers: this.usersListSubject$.getValue()
-      }, height: '95%'});
-
-    return activeUserAddDialog.afterClosed()
-      .pipe(
-        tap((user: AddUser) => newUser = user),
-        mergeMap((addUser: AddUser) =>
-          addUser ? this.httpService.addUsers({addUsers: [addUser]}) : of(addUser)
-        ),
-        tap(() => newUser && this.pushUser(newUser)),
-        takeUntil(this.subscriptionSubject)
-      );
+  public addUser(user: AddUser): Observable<any> {
+    return this.httpService.addUsers({addUsers: [user]})
+      .pipe(tap(() => this.pushUser(user)));
   }
 
   public editUserRoles(userRoles: EditUserRoles): Observable<User[]> {
@@ -67,15 +50,7 @@ export class UsersAndPermissionsStateService {
   }
 
   public editUsers(editUsers: EditUsers): Observable<any> {
-    return this.httpService.editUsers(editUsers)
-      .pipe(
-        tap(() => this.editUser(editUsers))
-      );
-  }
-
-  public unsubscribe(): void {
-    this.subscriptionSubject.next();
-    this.subscriptionSubject.complete();
+    return this.httpService.editUsers(editUsers);
   }
 
   /* Helper functions */
@@ -96,9 +71,6 @@ export class UsersAndPermissionsStateService {
     );
   }
 
-  private editUser({users: [userToEdit]}: EditUsers): void {
-    this.usersListSubject$.next([...this.usersListSubject$.getValue(), {...userToEdit} as User])
-  }
 
   private removeUser(removedUsersEmails: string[]): void {
     this.usersListSubject$

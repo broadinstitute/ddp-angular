@@ -19,6 +19,9 @@
   &-buttons {
     @include common.flexContainer(center, center);
     margin-top: 1em;
+    &-add {
+      @include common.flexContainer(center, center);
+    }
   }
 
   .userData-divider {
@@ -48,4 +51,14 @@
       margin: 1em 0;
     }
   }
+}
+
+.loading-spinner {
+  @include common.flexContainer(center, center);
+  padding: 0.5em 0;
+}
+
+app-error-message {
+  @include common.flexContainer(center, center);
+  margin-bottom: .7em;
 }

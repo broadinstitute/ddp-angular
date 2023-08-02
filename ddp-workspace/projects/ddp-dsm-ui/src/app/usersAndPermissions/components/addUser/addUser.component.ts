@@ -1,10 +1,14 @@
-import {ChangeDetectionStrategy, Component, Inject} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject} from '@angular/core';
 import {FormBuilder, Validators} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {Role} from '../../interfaces/role';
-import {AddUser, AddUserModal, AddUsersRequest} from '../../interfaces/addRemoveUsers';
+import {AddUser, AddUserModal} from '../../interfaces/addRemoveUsers';
 import {MatSelectChange} from '@angular/material/select';
 import {cloneDeep} from 'lodash';
+import {UsersAndPermissionsStateService} from "../../services/usersAndPermissionsState.service";
+import {Subject, takeUntil} from "rxjs";
+import {HttpErrorResponse} from "@angular/common/http";
+import {finalize} from "rxjs/operators";
 
 @Component({
   selector: 'app-add-administration-user',
@@ -15,6 +19,8 @@ import {cloneDeep} from 'lodash';
 export class AddUserComponent {
   public availableRoles = cloneDeep(this.data.availableRoles).map(role => ({...role, hasRole: false}));
   public selectedUserRoles: Role[];
+  public errorMessage: string | null = null;
+  public isLoading: boolean = false;
 
   public readonly addUserForm = this.formBuilder.group({
     email: [null, [Validators.required, Validators.email]],
@@ -23,20 +29,36 @@ export class AddUserComponent {
   });
 
   private onlySelectedRoles: Role[] = [];
+  private subscriptionSubject$ = new Subject<void>();
 
   constructor(
     @Inject(MAT_DIALOG_DATA) private data: AddUserModal,
     private readonly matDialogRef: MatDialogRef<AddUserComponent>,
-    private readonly formBuilder: FormBuilder
+    private readonly formBuilder: FormBuilder,
+    private readonly stateService: UsersAndPermissionsStateService,
+    private readonly cdr: ChangeDetectorRef
   ) {}
 
   public addUser(): void {
     if (this.allowAddingUser) {
+      this.isLoading = true;
+      this.errorMessage = null;
       const userToAdd: AddUser = {
         ...this.addUserForm.getRawValue(),
         roles: this.onlySelectedRoles.map(r => r.name)
       };
-      this.matDialogRef.close(userToAdd);
+      this.stateService.addUser(userToAdd)
+        .pipe(
+          takeUntil(this.subscriptionSubject$),
+          finalize(() => {
+            this.cdr.markForCheck();
+            this.isLoading = false
+          })
+          )
+        .subscribe({
+          next: () => this.matDialogRef.close(userToAdd),
+          error: (error) => this.handleError(error)
+        })
     }
   }
 
@@ -71,5 +93,11 @@ export class AddUserComponent {
     })) as any;
 
     this.onlySelectedRoles = this.availableRoles.filter(r => r.hasRole);
+  }
+
+  private handleError(error: any): void {
+    if (error instanceof HttpErrorResponse) {
+      this.errorMessage = error.error;
+    }
   }
 }

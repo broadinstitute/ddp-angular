@@ -79,7 +79,7 @@
 
     <section class="permissions">
       <section class="permissions-selectSingle">
-        <ng-container *ngIf="user.roles.length">
+        <ng-container *ngIf="user.roles?.length">
           <app-permission-checkbox
             (checkboxChanged)="onCheckboxChanged($event)"
             [isDisabled]="isEditPermissionsLoading"

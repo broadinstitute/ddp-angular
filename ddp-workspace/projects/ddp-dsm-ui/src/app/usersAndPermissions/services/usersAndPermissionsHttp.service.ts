@@ -8,7 +8,7 @@ import {AvailableStudyRolesResponse, EditUserRoles} from '../interfaces/role';
 import {EditUsers} from "../interfaces/editUsers";
 
 @Injectable()
-export class UsersAndPermissionsHttpServiceService {
+export class UsersAndPermissionsHttpService {
 
   constructor(private readonly dsmService: DSMService,
               private readonly sessionService: SessionService) {

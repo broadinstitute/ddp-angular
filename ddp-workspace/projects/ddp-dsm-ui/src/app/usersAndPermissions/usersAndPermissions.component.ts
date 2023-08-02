@@ -1,54 +1,70 @@
 import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
-import {UsersAndPermissionsHttpServiceService} from './services/usersAndPermissionsHttpService.service';
-import {MatDialog} from '@angular/material/dialog';
-import {BehaviorSubject, mergeMap, Observable, of, Subject, takeUntil, tap} from 'rxjs';
-import {finalize, pluck, withLatestFrom} from 'rxjs/operators';
-import {AddUserComponent} from './components/addUser/addUser.component';
-import {AddUsersRequest} from './interfaces/addRemoveUsers';
+import {Observable, Subject, takeUntil} from 'rxjs';
+import {finalize} from 'rxjs/operators';
 import {UsersAndPermissionsStateService} from './services/usersAndPermissionsState.service';
+import {HttpErrorResponse} from "@angular/common/http";
+import {AddUserComponent} from "./components/addUser/addUser.component";
+import {MatDialog} from "@angular/material/dialog";
+import {User} from "./interfaces/user";
+import {Role} from "./interfaces/role";
 
 @Component({
   selector: 'app-users-and-permissions',
   templateUrl: 'usersAndPermissions.component.html',
   styleUrls: ['usersAndPermissions.component.scss'],
-  providers: [UsersAndPermissionsHttpServiceService, UsersAndPermissionsStateService],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class UsersAndPermissionsComponent implements OnDestroy, OnInit {
   public usersList$ = this.stateService.usersList$;
+  public availableRoles$ = this.stateService.availableRoles$;
+
   public isLoading = false;
+  public errorMessage: string | null = null;
 
   private readonly subscriptionSubject$ = new Subject<void>();
 
-
   constructor(
     private readonly stateService: UsersAndPermissionsStateService,
-    private readonly cdr: ChangeDetectorRef) {
+    private readonly cdr: ChangeDetectorRef,
+    private readonly matDialog: MatDialog) {
   }
 
   ngOnInit(): void {
+    this.initData()
+      .pipe(takeUntil(this.subscriptionSubject$))
+      .subscribe({
+        error: (error) => this.handleError(error)
+      })
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptionSubject$.next();
+    this.subscriptionSubject$.complete();
+  }
+
+  public onAddUser(usersList: User[], availableRoles: Role[]): void {
+    this.matDialog.open(AddUserComponent, {data:{
+        existingUsers: usersList,
+        availableRoles: availableRoles,
+      }, height: '95%'});
+  }
+
+  private initData(): Observable<any> {
     this.isLoading = true;
-    this.stateService.initData()
+    this.errorMessage = null;
+    return this.stateService.initData()
       .pipe(
-        takeUntil(this.subscriptionSubject$),
         finalize(() => {
           this.isLoading = false;
           this.cdr.markForCheck();
         })
       )
-      .subscribe();
   }
 
-  ngOnDestroy(): void {
-    this.stateService.unsubscribe();
-    this.subscriptionSubject$.next();
-    this.subscriptionSubject$.complete();
-  }
-
-  public onAddUser(): void {
-    this.stateService.addUser()
-      .pipe(takeUntil(this.subscriptionSubject$))
-      .subscribe();
+  private handleError(error: any): void {
+    if(error instanceof HttpErrorResponse) {
+      this.errorMessage = error.error;
+    }
   }
 
 

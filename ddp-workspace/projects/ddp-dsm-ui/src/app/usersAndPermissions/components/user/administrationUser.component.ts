@@ -14,6 +14,8 @@ import {RemoveUsersRequest} from "../../interfaces/addRemoveUsers";
 import {Subject, takeUntil} from "rxjs";
 import {finalize} from "rxjs/operators";
 import {EditUsers} from "../../interfaces/editUsers";
+import {HttpErrorResponse} from "@angular/common/http";
+import {ErrorUi} from "../../interfaces/error-ui";
 
 @Component({
   selector: 'app-administration-user',
@@ -41,6 +43,7 @@ export class AdministrationUserComponent implements OnInit, OnDestroy {
   }
 
   @Output() comparingUser = new EventEmitter<User>();
+  @Output() reportError = new EventEmitter<Partial<ErrorUi>>();
 
   constructor(private readonly cdr: ChangeDetectorRef,
               private readonly roleService: RoleService,
@@ -75,6 +78,7 @@ export class AdministrationUserComponent implements OnInit, OnDestroy {
   public saveEditedUser(event: Event): void {
     event.stopPropagation();
     this.isEditUserLoading = true;
+    this.reportError.emit({displayError: false});
     this.editUserForm.disable();
     const userToEdit: EditUsers = {
       users: [
@@ -91,12 +95,19 @@ export class AdministrationUserComponent implements OnInit, OnDestroy {
           this.editUserForm.enable();
         })
       )
-      .subscribe();
+      .subscribe({
+        next: () => {
+          this.user.name = this.editUserForm.get('name').value;
+          this.user.phone = this.editUserForm.get('phone').value;
+        },
+        error: (error) => this.handleError(error, `Couldn't edit the user - ${this.user.email}`)
+      });
   }
 
   public removeUser(event: Event): void {
     event.stopPropagation();
     this.isDeleteUserLoading = true;
+    this.reportError.emit({displayError: false});
 
     const usersToRemove: RemoveUsersRequest = {
       removeUsers: [this.user.email]
@@ -110,7 +121,9 @@ export class AdministrationUserComponent implements OnInit, OnDestroy {
           this.isDeleteUserLoading = false;
         })
       )
-      .subscribe();
+      .subscribe({
+        error: (error) => this.handleError(error, `Couldn't remove the user - ${this.user.email}`)
+      });
   }
 
   public onCheckboxChanged(changedRole: Role): void {
@@ -125,6 +138,7 @@ export class AdministrationUserComponent implements OnInit, OnDestroy {
 
   public saveChanges(): void {
     this.isEditPermissionsLoading = true;
+    this.reportError.emit({displayError: false});
 
     const userRolesToEdit = {
       users: [this.user.email],
@@ -144,9 +158,7 @@ export class AdministrationUserComponent implements OnInit, OnDestroy {
           this.rolesBeforeChange = this.user.roles;
           this.arePermissionActionButtonsDisabled = true;
         },
-        error: () => {
-          // @TODO handle error
-        }
+        error: (error) => this.handleError(error, `Couldn't update roles for the user - ${this.user.email}`)
       })
   }
 
@@ -173,12 +185,22 @@ export class AdministrationUserComponent implements OnInit, OnDestroy {
   /* Helper functions */
 
   private get hasPermissionsChanged(): boolean {
-    return !this.rolesBeforeChange.every(({hasRole}, index) =>
+    return !this.rolesBeforeChange?.every(({hasRole}, index) =>
       hasRole === this.user.roles[index].hasRole);
   }
 
   private changeActionButtonsState(isDisabled: boolean): void {
     this.arePermissionActionButtonsDisabled = isDisabled;
+  }
+
+  private handleError(error: any, text: string): void {
+    if(error instanceof HttpErrorResponse) {
+      this.reportError.emit({
+        displayError: true,
+        errorText: text,
+        errorMessage: error.error
+      });
+    }
   }
 
 }

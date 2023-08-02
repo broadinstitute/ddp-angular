@@ -2,6 +2,9 @@
   <section class="addUserForm-title">
     <h3>Create User</h3>
   </section>
+  <ng-container *ngIf="errorMessage">
+    <app-error-message errorText="Couldn't create user" [errorMessage]="errorMessage"></app-error-message>
+  </ng-container>
   <section class="addUserForm-inputs">
     <mat-form-field class="addUserForm-inputs-name">
       <mat-label>Email</mat-label>
@@ -40,8 +43,12 @@
   <section class="addUserForm-buttons">
     <button class="addUserForm-buttons-add"
             color="accent"
-            [disabled]="!allowAddingUser"
-            (click)="addUser()" mat-raised-button>Add User</button>
+            [disabled]="!allowAddingUser || isLoading"
+            (click)="addUser()" mat-raised-button>
+      <ng-container *ngIf="!isLoading; else loadingTemplate">
+        Add User
+      </ng-container>
+    </button>
   </section>
 
   <section class="addUserForm-compare">
@@ -75,3 +82,10 @@
   </section>
 
 </form>
+
+
+<ng-template #loadingTemplate>
+  <div class="loading-spinner">
+    <mat-spinner diameter="25"></mat-spinner>
+  </div>
+</ng-template>

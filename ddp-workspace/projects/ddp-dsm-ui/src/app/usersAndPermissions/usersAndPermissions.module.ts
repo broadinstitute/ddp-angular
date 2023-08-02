@@ -21,6 +21,9 @@ import {MatSelectModule} from '@angular/material/select';
 import {AddUserComponent} from './components/addUser/addUser.component';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {ErrorMessageComponent} from "./components/error-message/error-message.component";
+import {UsersAndPermissionsHttpService} from "./services/usersAndPermissionsHttp.service";
+import {UsersAndPermissionsStateService} from "./services/usersAndPermissionsState.service";
 
 const routes: Routes = [
   {path: '', component: UsersAndPermissionsComponent}
@@ -33,7 +36,8 @@ const routes: Routes = [
     PermissionCheckboxComponent,
     AdministrationUserComponent,
     ComparePermissionsComponent,
-    AddUserComponent
+    AddUserComponent,
+    ErrorMessageComponent
   ],
   imports: [
     CommonModule,
@@ -55,5 +59,10 @@ const routes: Routes = [
     ReactiveFormsModule,
     MatAutocompleteModule
   ],
+  providers: [
+    UsersAndPermissionsHttpService,
+    UsersAndPermissionsStateService
+  ]
 })
-export class UsersAndPermissionsModule {}
+export class UsersAndPermissionsModule {
+}
