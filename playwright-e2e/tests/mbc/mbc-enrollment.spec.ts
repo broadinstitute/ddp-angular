@@ -127,7 +127,7 @@ test.describe.serial('MBC enrolment @mbc', () => {
             month: '5',
             year: '2016',
           }
-        })
+        });
 
         await followUpSurvey1.submit();
 
