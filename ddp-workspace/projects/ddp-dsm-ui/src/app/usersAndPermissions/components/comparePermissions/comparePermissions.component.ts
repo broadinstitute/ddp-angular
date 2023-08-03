@@ -23,7 +23,6 @@ export class ComparePermissionsComponent implements OnInit {
 
   public userSelected({value: selectedUserEmail}: MatSelectChange): void {
     const foundUser = this.data.allUsers.find(({email}) => email === selectedUserEmail);
-    // this.dataSource.push(...foundUser.roles);
     this.displayedColumns = ['name', this.firstUser.email];
     this.displayedColumns.push(foundUser.email);
     this.roles = this.firstUser.roles;
