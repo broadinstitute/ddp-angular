@@ -145,7 +145,7 @@ import {UploadFileComponent} from '../sharedLearningUpload/components/uploadFile
 import {FilesTableComponent} from '../sharedLearningUpload/components/filesTable/filesTable.component';
 import {
   ConfirmationModalComponent
-} from '../sharedLearningUpload/components/confirmationModal/confirmationModal.component';
+} from '../Shared/components/confirmationModal/confirmationModal.component';
 import {OncHistoryUploadComponent} from '../oncHistoryUpload/oncHistoryUpload.component';
 import {OncHistoryUploadGuard} from '../guards/oncHistoryUpload.guard';
 import {

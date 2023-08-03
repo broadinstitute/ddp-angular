@@ -11,11 +11,13 @@ import {RoleService} from '../../../services/role.service';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {UsersAndPermissionsStateService} from '../../services/usersAndPermissionsState.service';
 import {RemoveUsersRequest} from '../../interfaces/addRemoveUsers';
-import {Subject, takeUntil} from 'rxjs';
-import {finalize} from 'rxjs/operators';
+import {mergeMap, Subject, takeUntil, tap} from 'rxjs';
+import {filter, finalize, take} from 'rxjs/operators';
 import {EditUsers} from '../../interfaces/editUsers';
 import {HttpErrorResponse} from '@angular/common/http';
 import {ErrorUi} from '../../interfaces/error-ui';
+import {ConfirmationModalComponent} from "../../../Shared/components/confirmationModal/confirmationModal.component";
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-administration-user',
@@ -48,7 +50,8 @@ export class AdministrationUserComponent implements OnInit, OnDestroy {
   constructor(private readonly cdr: ChangeDetectorRef,
               private readonly roleService: RoleService,
               private readonly formBuilder: FormBuilder,
-              private readonly stateService: UsersAndPermissionsStateService) {
+              private readonly stateService: UsersAndPermissionsStateService,
+              private readonly matDialog: MatDialog) {
   }
 
   ngOnInit(): void {
@@ -102,24 +105,34 @@ export class AdministrationUserComponent implements OnInit, OnDestroy {
 
   public removeUser(event: Event): void {
     event.stopPropagation();
-    this.isDeleteUserLoading = true;
     this.reportError.emit({displayError: false});
 
     const usersToRemove: RemoveUsersRequest = {
       removeUsers: [this.user.email]
     };
 
-    this.stateService.removeUsers(usersToRemove)
+    const activeConfirmationDialog = this.matDialog
+      .open(ConfirmationModalComponent, {data: {name: this.user.email}, width: '500px'});
+
+    activeConfirmationDialog.afterClosed()
       .pipe(
-        takeUntil(this.subscriptionSubject$),
-        finalize(() => {
+        filter((answer: boolean) => answer),
+        tap(() => {
           this.cdr.markForCheck();
-          this.isDeleteUserLoading = false;
-        })
-      )
-      .subscribe({
-        error: (error) => this.handleError(error, `Couldn't remove the user - ${this.user.email}`)
-      });
+          this.isDeleteUserLoading = true;
+        }),
+        mergeMap(() => this.stateService.removeUsers(usersToRemove)
+          .pipe(
+            finalize(() => {
+              this.cdr.markForCheck();
+              this.isDeleteUserLoading = false;
+            })
+          )),
+        take(1),
+        takeUntil(this.subscriptionSubject$)
+      ).subscribe({
+      error: (error) => this.handleError(error, `Couldn't remove the user - ${this.user.email}`)
+    })
   }
 
   public onCheckboxChanged(changedRole: Role): void {
