@@ -16,8 +16,8 @@ import {filter, finalize, take} from 'rxjs/operators';
 import {EditUsers} from '../../interfaces/editUsers';
 import {HttpErrorResponse} from '@angular/common/http';
 import {ErrorUi} from '../../interfaces/error-ui';
-import {ConfirmationModalComponent} from "../../../Shared/components/confirmationModal/confirmationModal.component";
-import {MatDialog} from "@angular/material/dialog";
+import {ConfirmationModalComponent} from '../../../Shared/components/confirmationModal/confirmationModal.component';
+import {MatDialog} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-administration-user',
@@ -132,7 +132,7 @@ export class AdministrationUserComponent implements OnInit, OnDestroy {
         takeUntil(this.subscriptionSubject$)
       ).subscribe({
       error: (error) => this.handleError(error, `Couldn't remove the user - ${this.user.email}`)
-    })
+    });
   }
 
   public onCheckboxChanged(changedRole: Role): void {
