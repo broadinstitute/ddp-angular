@@ -96,10 +96,6 @@ export class AdministrationUserComponent implements OnInit, OnDestroy {
         })
       )
       .subscribe({
-        next: () => {
-          this.user.name = this.editUserForm.get('name').value;
-          this.user.phone = this.editUserForm.get('phone').value;
-        },
         error: (error) => this.handleError(error, `Couldn't edit the user - ${this.user.email}`)
       });
   }

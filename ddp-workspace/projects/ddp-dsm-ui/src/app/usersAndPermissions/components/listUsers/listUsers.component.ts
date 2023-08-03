@@ -20,7 +20,7 @@ export class ListUsersComponent {
   }
 
   public trackBy(index: number, {name, phone, email}: User): any {
-    return `${name}_${phone}_${email}\``;
+    return `${name}_${phone}_${email}`;
   }
 
   public openPermissionsComparisonModal(firstUser: User): void {

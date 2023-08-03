@@ -65,7 +65,8 @@ export class UsersAndPermissionsStateService {
   }
 
   public editUsers(editUsers: EditUsers): Observable<any> {
-    return this.httpService.editUsers(editUsers);
+    return this.httpService.editUsers(editUsers)
+      .pipe(tap(() => this.editUser(editUsers.users[0])));
   }
 
   /* Helper functions */
@@ -86,13 +87,24 @@ export class UsersAndPermissionsStateService {
     );
   }
 
+  private editUser(editedUser: Partial<User>): void {
+    this.usersListSubject$.next(this.usersListSubject$.getValue().map((user) => {
+      if (editedUser.email === user.email) {
+        user.name = editedUser.name;
+        user.phone = editedUser.phone;
+      }
+      return user
+    }))
+  }
+
 
   private removeUser(removedUsersEmails: string[]): void {
     this.usersListSubject$
       .next(this.usersListSubject$.getValue().filter(user => !removedUsersEmails.includes(user.email)))
   }
 
-  private sortRoles(roles: Role[]): Role[] {
-    return roles.sort(({displayText: role1}, {displayText: role2}) => role1.localeCompare(role2))
+  private sortRoles(roles: Role[] | AvailableRole[]): Role[] | AvailableRole[] {
+    return roles.sort(({displayText: role1}, {displayText: role2}) =>
+      role1.localeCompare(role2));
   }
 }
