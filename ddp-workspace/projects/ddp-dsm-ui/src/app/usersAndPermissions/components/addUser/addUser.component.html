@@ -1,0 +1,91 @@
+<form class="addUserForm" [formGroup]="addUserForm">
+  <section class="addUserForm-title">
+    <h3>Create User</h3>
+  </section>
+  <ng-container *ngIf="errorMessage">
+    <app-error-message errorText="Couldn't create user" [errorMessage]="errorMessage"></app-error-message>
+  </ng-container>
+  <section class="addUserForm-inputs">
+    <mat-form-field class="addUserForm-inputs-name">
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email">
+      <mat-error *ngIf="addUserForm.get('email').hasError('email')">
+        Wrong email
+      </mat-error>
+      <mat-error *ngIf="addUserForm.get('email').hasError('required')">
+        Required field
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="addUserForm-inputs-name">
+      <mat-label>First Name & Last Name</mat-label>
+      <input matInput formControlName="name">
+      <mat-error *ngIf="addUserForm.get('name').hasError('required')">
+        Required field
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="addUserForm-inputs-phone">
+      <mat-label>Phone</mat-label>
+      <input matInput formControlName="phone">
+      <mat-error *ngIf="addUserForm.get('phone').hasError('required')">
+        Required field
+      </mat-error>
+    </mat-form-field>
+  </section>
+  <mat-divider class="userData-divider"></mat-divider>
+  <section class="addUserForm-permissions">
+    <h4 class="addUserForm-permissions-title">Permissions</h4>
+    <app-permission-checkbox
+      *ngFor="let role of availableRoles"
+      (checkboxChanged)="roleSelected($event)"
+      [role]="role">
+    </app-permission-checkbox>
+  </section>
+  <section class="addUserForm-buttons">
+    <button class="addUserForm-buttons-add"
+            color="accent"
+            [disabled]="!allowAddingUser || isLoading"
+            (click)="addUser()" mat-raised-button>
+      <ng-container *ngIf="!isLoading; else loadingTemplate">
+        Add User
+      </ng-container>
+    </button>
+  </section>
+
+  <section class="addUserForm-compare">
+    <mat-divider></mat-divider>
+    <div class="addUserForm-compare-input">
+      <p class="addUserForm-compare-input-text">Compare permissions to the selected user:</p>
+      <div class="addUserForm-compare-input-actions">
+        <mat-form-field>
+          <mat-label>Select User</mat-label>
+          <mat-select (selectionChange)="userSelected($event)">
+            <mat-option *ngFor="let email of existingUsersEmails" [value]="email">
+              {{email}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <button *ngIf="selectedUserRoles"
+                color="primary"
+                class="addUserForm-compare-input-actions-button"
+                matTooltip="The same roles will be applied to the new user"
+                (click)="applyRoles()" mat-stroked-button>Apply roles</button>
+      </div>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="addUserForm-compare-roles" *ngIf="selectedUserRoles">
+      <app-permission-checkbox
+        *ngFor="let role of selectedUserRoles"
+        [isDisabled]="true"
+        [role]="role">
+      </app-permission-checkbox>
+    </div>
+  </section>
+
+</form>
+
+
+<ng-template #loadingTemplate>
+  <div class="loading-spinner">
+    <mat-spinner diameter="25"></mat-spinner>
+  </div>
+</ng-template>

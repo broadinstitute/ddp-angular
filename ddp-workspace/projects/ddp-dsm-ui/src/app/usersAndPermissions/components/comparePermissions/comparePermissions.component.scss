@@ -1,0 +1,19 @@
+.compare-container {
+
+  &-title {
+    font-family: Montserrat-SemiBold, sans-serif;
+    text-align: center;
+    margin: 1em 0;
+    h3 {
+      margin: 0;
+    }
+  }
+
+  table {
+    width: 100%;
+  }
+
+  th.mat-header-cell {
+    text-align: center!important;
+  }
+}

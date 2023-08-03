@@ -15,7 +15,7 @@ import {catchError, filter, finalize, first, take} from 'rxjs/operators';
 import {SharedLearningsStateService} from './services/sharedLearningsState.service';
 import {MatDialog} from '@angular/material/dialog';
 import {RoleService} from '../services/role.service';
-import {ConfirmationModalComponent} from './components/confirmationModal/confirmationModal.component';
+import {ConfirmationModalComponent} from '../Shared/components/confirmationModal/confirmationModal.component';
 import {HttpErrorResponse} from '@angular/common/http';
 
 @Component({
@@ -83,7 +83,7 @@ export class SharedLearningsUploadComponent implements OnInit, OnDestroy {
 
   public onDeleteFile({somaticDocumentId, fileName}: SomaticResultsFileWithStatus): void {
     const activeConfirmationDialog = this.matDialog
-      .open(ConfirmationModalComponent, {data: {fileName}, width: '500px'});
+      .open(ConfirmationModalComponent, {data: {name: fileName}, width: '500px'});
 
     activeConfirmationDialog.afterClosed()
       .pipe(
