@@ -16,7 +16,7 @@ const {MBC_USER_EMAIL, MBC_USER_PASSWORD, MBC_BASE_URL, SITE_PASSWORD} = process
 
 
 test.describe.serial('MBC enrolment @mbc', () => {
-  test('join the movement @visual @enrollment @mbc', async ({page}) => {
+  test('join the movement @enrollment @mbc', async ({page}) => {
     const participant = user.adult;
     const firstName = generateUserName(participant.firstName);
     const lastName = generateUserName(participant.lastName);
@@ -104,26 +104,34 @@ test.describe.serial('MBC enrolment @mbc', () => {
 
     await test.step('Follow-up survey #1: Additional details about your cancer & treatments page',
       async () => {
-      const followUpSurvey1 = new MBCFollowUpSurvey1(page);
-      await followUpSurvey1.waitForReady();
-      await followUpSurvey1.currentCancerLocation('Liver');
-      await followUpSurvey1.diagnosisCancerLocation('Brain');
-      await followUpSurvey1.anytimeCancerLocation('Skin');
-      await followUpSurvey1.cancerIdentification("I don't know");
-      await followUpSurvey1.currentlyMedicated('Yes', {
-        medication: 'Test medication',
-        month: '3',
-        year: '2014',
-      });
-      await followUpSurvey1.previouslyMedicated('Yes', {
-        medication: 'Test medication 2',
-        month: '4',
-        year: '2015',
+        const followUpSurvey1 = new MBCFollowUpSurvey1(page);
+        await followUpSurvey1.waitForReady();
+        await followUpSurvey1.currentCancerLocation('Liver');
+        await followUpSurvey1.diagnosisCancerLocation('Brain');
+        await followUpSurvey1.anytimeCancerLocation('Skin');
+        await followUpSurvey1.cancerIdentification("I don't know");
+        await followUpSurvey1.currentlyMedicated('Yes', {
+          medication: 'Test current medication',
+          startDate: {
+            month: '3',
+            year: '2014',
+          }
+        });
+        await followUpSurvey1.previouslyMedicated('Yes', {
+          medication: 'Test past medication',
+          startDate: {
+            month: '4',
+            year: '2015',
+          },
+          endDate: {
+            month: '5',
+            year: '2016',
+          }
+        })
+
+        await followUpSurvey1.submit();
+
+        await page.waitForTimeout(3000);
       })
-
-      await followUpSurvey1.submit();
-
-      await page.waitForTimeout(3000);
-    })
   })
 })

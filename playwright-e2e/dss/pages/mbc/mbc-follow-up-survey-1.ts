@@ -4,10 +4,17 @@ import {waitForNoSpinner} from '../../../utils/test-utils';
 import Question from '../../component/Question';
 
 type yesNoDontKnow = 'Yes' | 'No' | "I don't know";
+
 interface MedicationDetails {
   medication: string,
-  month: string,
-  year: string
+  startDate: {
+    month: string,
+    year: string
+  },
+  endDate?: {
+    month: string,
+    year: string
+  }
 }
 
 export class MBCFollowUpSurvey1 extends MBCPageBase {
@@ -63,7 +70,7 @@ export class MBCFollowUpSurvey1 extends MBCPageBase {
     await new Question(this.page, {cssClassAttribute: '.picklist-answer-CURRENTLY_MEDICATED'})
       .radioButton(answer, {exactMatch: true}).click();
     if (opts) {
-      await this.medicationAnswer('.composite-answer-CURRENT_MED_LIST', opts);
+      await this.currentMedicationAnswer(opts);
     }
   }
 
@@ -74,24 +81,63 @@ export class MBCFollowUpSurvey1 extends MBCPageBase {
     await new Question(this.page, {cssClassAttribute: '.picklist-answer-PREVIOUSLY_MEDICATED'})
       .radioButton(answer, {exactMatch: true}).click();
     if (opts) {
-      await this.medicationAnswer('.composite-answer-PAST_MED_LIST', opts);
+      await this.pastMedicationAnswer(opts);
     }
   }
 
   /* Helper functions */
-  private async medicationAnswer(cssClass: string, opts: MedicationDetails): Promise<void> {
-    const question = new Question(this.page, {cssClassAttribute: cssClass})
-    await this.page.waitForTimeout(3000);
-    if (opts) {
-      await question.toInput().fill(opts.medication);
+  private async currentMedicationAnswer(opts: MedicationDetails): Promise<void> {
+    await this.page.waitForLoadState('networkidle');
 
-      await question.toSelect('Choose month...')
-        .toLocator()
-        .selectOption(opts.month);
+    if (opts?.medication) {
+      const medication = new Question(this.page, {cssClassAttribute: '.composite-answer-CURRENT_MED_LIST'});
+      await medication.toInput().fill(opts.medication);
+    }
 
-      await question.toSelect('Choose year...')
+    await this.fillCurrentAndPastMedicationDates('CURRENT', opts);
+  }
+
+  private async pastMedicationAnswer(opts: MedicationDetails): Promise<void> {
+    if (opts?.medication) {
+      const medication = new Question(this.page, {cssClassAttribute: '.composite-answer-PAST_MED_LIST'});
+      await medication.toInput().fill(opts.medication);
+    }
+    await this.fillCurrentAndPastMedicationDates('PAST', opts);
+  }
+
+  private async fillCurrentAndPastMedicationDates(cssClassPart: 'CURRENT' | 'PAST', {
+    startDate,
+    endDate
+  }: MedicationDetails): Promise<void> {
+    if (startDate) {
+      const startDateQuestion = new Question(this.page,
+        {
+          cssClassAttribute: '.picklist',
+          parentSelector: this.page.locator(`.date-answer-${cssClassPart}_MED_START`)
+        });
+      await startDateQuestion.toSelect('Choose month...')
         .toLocator()
-        .selectOption(opts.year)
+        .selectOption(startDate.month);
+
+      await startDateQuestion.toSelect('Choose year...')
+        .toLocator()
+        .selectOption(startDate.year)
+    }
+
+    if (endDate) {
+      const endDateQuestion = new Question(this.page,
+        {
+          cssClassAttribute: '.picklist',
+          parentSelector: this.page.locator(`.date-answer-${cssClassPart}_MED_END`)
+        }
+      );
+      await endDateQuestion.toSelect('Choose month...')
+        .toLocator()
+        .selectOption(endDate.month);
+
+      await endDateQuestion.toSelect('Choose year...')
+        .toLocator()
+        .selectOption(endDate.year);
     }
   }
 }
