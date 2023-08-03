@@ -19,7 +19,7 @@ describe('ConfirmationModalComponent', () => {
           },
           {
             provide: MAT_DIALOG_DATA,
-            useValue: {fileName: 'testFile.pdf'}
+            useValue: {name: 'testFile.pdf'}
           }
         ]
       }).compileComponents();
@@ -38,12 +38,12 @@ describe('ConfirmationModalComponent', () => {
     expect(component).toBeTruthy('Component has not been instantiated');
   });
 
-  it('should display file name',  () => {
+  it('should display name',  () => {
     const fileName = componentHTML
       .query(By.css('section.confirmationModal-content p'))
       .nativeElement.textContent;
 
-    expect(fileName).toContain('testFile.pdf', 'File name is not displayed');
+    expect(fileName).toContain('testFile.pdf', 'Name is not displayed');
   });
 
 });
