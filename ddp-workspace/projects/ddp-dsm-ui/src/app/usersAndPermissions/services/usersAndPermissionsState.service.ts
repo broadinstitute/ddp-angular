@@ -3,9 +3,9 @@ import {UsersAndPermissionsHttpService} from './usersAndPermissionsHttp.service'
 import {BehaviorSubject, mergeMap, Observable, tap} from 'rxjs';
 import {map, pluck} from 'rxjs/operators';
 import {AddUser, RemoveUsersRequest} from '../interfaces/addRemoveUsers';
-import {User} from "../interfaces/user";
-import {AvailableRole, EditUserRoles, Role} from "../interfaces/role";
-import {EditUsers} from "../interfaces/editUsers";
+import {User} from '../interfaces/user';
+import {AvailableRole, EditUserRoles, Role} from '../interfaces/role';
+import {EditUsers} from '../interfaces/editUsers';
 
 @Injectable()
 export class UsersAndPermissionsStateService {
@@ -93,14 +93,14 @@ export class UsersAndPermissionsStateService {
         user.name = editedUser.name;
         user.phone = editedUser.phone;
       }
-      return user
-    }))
+      return user;
+    }));
   }
 
 
   private removeUser(removedUsersEmails: string[]): void {
     this.usersListSubject$
-      .next(this.usersListSubject$.getValue().filter(user => !removedUsersEmails.includes(user.email)))
+      .next(this.usersListSubject$.getValue().filter(user => !removedUsersEmails.includes(user.email)));
   }
 
   private sortRoles(roles: Role[] | AvailableRole[]): Role[] | AvailableRole[] {

@@ -9,13 +9,13 @@ import {Role} from '../../interfaces/role';
 import {cloneDeep} from 'lodash';
 import {RoleService} from '../../../services/role.service';
 import {FormBuilder, FormGroup} from '@angular/forms';
-import {UsersAndPermissionsStateService} from "../../services/usersAndPermissionsState.service";
-import {RemoveUsersRequest} from "../../interfaces/addRemoveUsers";
-import {Subject, takeUntil} from "rxjs";
-import {finalize} from "rxjs/operators";
-import {EditUsers} from "../../interfaces/editUsers";
-import {HttpErrorResponse} from "@angular/common/http";
-import {ErrorUi} from "../../interfaces/error-ui";
+import {UsersAndPermissionsStateService} from '../../services/usersAndPermissionsState.service';
+import {RemoveUsersRequest} from '../../interfaces/addRemoveUsers';
+import {Subject, takeUntil} from 'rxjs';
+import {finalize} from 'rxjs/operators';
+import {EditUsers} from '../../interfaces/editUsers';
+import {HttpErrorResponse} from '@angular/common/http';
+import {ErrorUi} from '../../interfaces/error-ui';
 
 @Component({
   selector: 'app-administration-user',
@@ -84,7 +84,7 @@ export class AdministrationUserComponent implements OnInit, OnDestroy {
       users: [
         {email: this.user.email, ...this.editUserForm.getRawValue()}
       ]
-    }
+    };
 
     this.stateService.editUsers(userToEdit)
       .pipe(
@@ -107,7 +107,7 @@ export class AdministrationUserComponent implements OnInit, OnDestroy {
 
     const usersToRemove: RemoveUsersRequest = {
       removeUsers: [this.user.email]
-    }
+    };
 
     this.stateService.removeUsers(usersToRemove)
       .pipe(
@@ -139,7 +139,7 @@ export class AdministrationUserComponent implements OnInit, OnDestroy {
     const userRolesToEdit = {
       users: [this.user.email],
       roles: this.user.roles.filter(role => role.hasRole).map(role => role.name)
-    }
+    };
 
     this.stateService.editUserRoles(userRolesToEdit)
       .pipe(
@@ -155,7 +155,7 @@ export class AdministrationUserComponent implements OnInit, OnDestroy {
           this.arePermissionActionButtonsDisabled = true;
         },
         error: (error) => this.handleError(error, `Couldn't update roles for the user - ${this.user.email}`)
-      })
+      });
   }
 
   public discardChanges(): void {

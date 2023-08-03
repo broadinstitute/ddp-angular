@@ -2,11 +2,11 @@ import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit
 import {Observable, Subject, takeUntil} from 'rxjs';
 import {finalize} from 'rxjs/operators';
 import {UsersAndPermissionsStateService} from './services/usersAndPermissionsState.service';
-import {HttpErrorResponse} from "@angular/common/http";
-import {AddUserComponent} from "./components/addUser/addUser.component";
-import {MatDialog} from "@angular/material/dialog";
-import {User} from "./interfaces/user";
-import {Role} from "./interfaces/role";
+import {HttpErrorResponse} from '@angular/common/http';
+import {AddUserComponent} from './components/addUser/addUser.component';
+import {MatDialog} from '@angular/material/dialog';
+import {User} from './interfaces/user';
+import {Role} from './interfaces/role';
 
 @Component({
   selector: 'app-users-and-permissions',
@@ -34,7 +34,7 @@ export class UsersAndPermissionsComponent implements OnDestroy, OnInit {
       .pipe(takeUntil(this.subscriptionSubject$))
       .subscribe({
         error: (error) => this.handleError(error)
-      })
+      });
   }
 
   ngOnDestroy(): void {
@@ -58,7 +58,7 @@ export class UsersAndPermissionsComponent implements OnDestroy, OnInit {
           this.isLoading = false;
           this.cdr.markForCheck();
         })
-      )
+      );
   }
 
   private handleError(error: any): void {

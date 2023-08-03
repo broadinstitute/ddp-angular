@@ -5,7 +5,7 @@ import {DSMService} from '../../services/dsm.service';
 import {SessionService} from '../../services/session.service';
 import {AddUsersRequest, RemoveUsersRequest} from '../interfaces/addRemoveUsers';
 import {AvailableStudyRolesResponse, EditUserRoles} from '../interfaces/role';
-import {EditUsers} from "../interfaces/editUsers";
+import {EditUsers} from '../interfaces/editUsers';
 
 @Injectable()
 export class UsersAndPermissionsHttpService {

@@ -5,10 +5,10 @@ import {Role} from '../../interfaces/role';
 import {AddUser, AddUserModal} from '../../interfaces/addRemoveUsers';
 import {MatSelectChange} from '@angular/material/select';
 import {cloneDeep} from 'lodash';
-import {UsersAndPermissionsStateService} from "../../services/usersAndPermissionsState.service";
-import {Subject, takeUntil} from "rxjs";
-import {HttpErrorResponse} from "@angular/common/http";
-import {finalize} from "rxjs/operators";
+import {UsersAndPermissionsStateService} from '../../services/usersAndPermissionsState.service';
+import {Subject, takeUntil} from 'rxjs';
+import {HttpErrorResponse} from '@angular/common/http';
+import {finalize} from 'rxjs/operators';
 
 @Component({
   selector: 'app-add-administration-user',
@@ -20,7 +20,7 @@ export class AddUserComponent {
   public availableRoles = cloneDeep(this.data.availableRoles).map(role => ({...role, hasRole: false}));
   public selectedUserRoles: Role[];
   public errorMessage: string | null = null;
-  public isLoading: boolean = false;
+  public isLoading = false;
 
   public readonly addUserForm = this.formBuilder.group({
     email: [null, [Validators.required, Validators.email]],
@@ -52,13 +52,13 @@ export class AddUserComponent {
           takeUntil(this.subscriptionSubject$),
           finalize(() => {
             this.cdr.markForCheck();
-            this.isLoading = false
+            this.isLoading = false;
           })
           )
         .subscribe({
           next: () => this.matDialogRef.close(userToAdd),
           error: (error) => this.handleError(error)
-        })
+        });
     }
   }
 

@@ -8,7 +8,7 @@ import {
   UrlSegment,
   UrlTree
 } from '@angular/router';
-import {RoleService} from "../services/role.service";
+import {RoleService} from '../services/role.service';
 
 @Injectable()
 export class UsersAndPermissionsCanLoadGuard implements CanLoad {

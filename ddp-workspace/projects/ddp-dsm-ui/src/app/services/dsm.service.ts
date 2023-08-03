@@ -22,8 +22,8 @@ import {StatisticsEnum} from '../dashboard-statistics/enums/statistics.enum';
 import {SomaticResultSignedUrlRequest} from '../sharedLearningUpload/interfaces/somaticResultSignedUrlRequest';
 import {SendToParticipantRequest} from '../sharedLearningUpload/interfaces/sendToParticipant';
 import {AddUsersRequest, RemoveUsersRequest} from '../usersAndPermissions/interfaces/addRemoveUsers';
-import {EditUsers} from "../usersAndPermissions/interfaces/editUsers";
-import {EditUserRoles} from "../usersAndPermissions/interfaces/role";
+import {EditUsers} from '../usersAndPermissions/interfaces/editUsers';
+import {EditUserRoles} from '../usersAndPermissions/interfaces/role';
 
 declare var DDP_ENV: any;
 

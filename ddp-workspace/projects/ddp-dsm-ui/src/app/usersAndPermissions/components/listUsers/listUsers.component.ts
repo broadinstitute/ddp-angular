@@ -2,7 +2,7 @@ import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
 import {User} from '../../interfaces/user';
 import {MatDialog} from '@angular/material/dialog';
 import {ComparePermissionsComponent} from '../comparePermissions/comparePermissions.component';
-import {ErrorUi} from "../../interfaces/error-ui";
+import {ErrorUi} from '../../interfaces/error-ui';
 
 @Component({
   selector: 'app-list-users',
@@ -12,7 +12,7 @@ import {ErrorUi} from "../../interfaces/error-ui";
 })
 export class ListUsersComponent {
   @Input() usersList: User[];
-  public displayError: boolean = false;
+  public displayError = false;
   public errorMessage: string | null = null;
   public errorText: string | null  = null;
 

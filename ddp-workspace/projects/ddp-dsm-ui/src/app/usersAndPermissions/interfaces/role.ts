@@ -5,8 +5,8 @@ export interface Role {
 }
 
 export interface EditUserRoles {
-  users: string[],
-  roles: string[]
+  users: string[];
+  roles: string[];
 }
 
 export interface AvailableRole {

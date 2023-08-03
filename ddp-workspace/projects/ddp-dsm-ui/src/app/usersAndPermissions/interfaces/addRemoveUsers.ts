@@ -9,7 +9,7 @@ export interface AddUser {
 }
 
 export interface AddUsersRequest {
-  addUsers: AddUser[]
+  addUsers: AddUser[];
 }
 
 export interface RemoveUsersRequest {
