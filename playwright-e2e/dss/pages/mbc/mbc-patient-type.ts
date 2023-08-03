@@ -1,3 +1,6 @@
+export type TypePatient = 'patient' | 'other';
+
+
 export const MBCPatientsData: any = {
   patient: {
     whoIsSigningUp: 'I have been diagnosed with metastatic breast cancer (also known as advanced or stage IV breast ' +
