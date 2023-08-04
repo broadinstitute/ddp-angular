@@ -105,7 +105,6 @@ export class AdministrationUserComponent implements OnInit, OnDestroy {
 
   public removeUser(event: Event): void {
     event.stopPropagation();
-    this.reportError.emit({displayError: false});
 
     const usersToRemove: RemoveUsersRequest = {
       removeUsers: [this.user.email]
@@ -119,6 +118,7 @@ export class AdministrationUserComponent implements OnInit, OnDestroy {
         filter((answer: boolean) => answer),
         tap(() => {
           this.cdr.markForCheck();
+          this.reportError.emit({displayError: false});
           this.isDeleteUserLoading = true;
         }),
         mergeMap(() => this.stateService.removeUsers(usersToRemove)

@@ -8,6 +8,13 @@
     margin-bottom: 1em;
   }
 
+  &-inputs {
+    @include common.flexContainer(normal, center);
+    mat-form-field:not(:last-of-type) {
+      margin-right: .5em;
+    }
+  }
+
   &-permissions {
     overflow: auto;
     max-height: 500px;
