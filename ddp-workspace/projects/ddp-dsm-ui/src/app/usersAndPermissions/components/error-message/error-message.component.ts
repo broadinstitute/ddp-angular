@@ -29,6 +29,7 @@ import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
       font-family:  Montserrat-SemiBold, sans-serif;
     }
     .error-message {
+      word-wrap: break-word;
       font-family:  Montserrat-Regular, sans-serif;
     }
     .error-message-text {
