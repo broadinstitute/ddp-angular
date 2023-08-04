@@ -1,6 +1,6 @@
 <form class="addUserForm" [formGroup]="addUserForm">
   <section class="addUserForm-title">
-    <h3>Create User</h3>
+    <h3>Add User</h3>
   </section>
   <ng-container *ngIf="errorMessage">
     <app-error-message errorText="Couldn't create user" [errorMessage]="errorMessage"></app-error-message>
@@ -10,7 +10,7 @@
       <mat-label>Email</mat-label>
       <input matInput formControlName="email">
       <mat-error *ngIf="addUserForm.get('email').hasError('email')">
-        Wrong email
+        Invalid email
       </mat-error>
       <mat-error *ngIf="addUserForm.get('email').hasError('required')">
         Required field
@@ -26,9 +26,6 @@
     <mat-form-field class="addUserForm-inputs-phone">
       <mat-label>Phone</mat-label>
       <input matInput formControlName="phone">
-      <mat-error *ngIf="addUserForm.get('phone').hasError('required')">
-        Required field
-      </mat-error>
     </mat-form-field>
   </section>
   <mat-divider class="userData-divider"></mat-divider>
@@ -40,6 +37,7 @@
       [role]="role">
     </app-permission-checkbox>
   </section>
+  <mat-divider class="userData-divider"></mat-divider>
   <section class="addUserForm-buttons">
     <button class="addUserForm-buttons-add"
             color="accent"
@@ -78,6 +76,7 @@
         [isDisabled]="true"
         [role]="role">
       </app-permission-checkbox>
+      <mat-divider class="userData-divider"></mat-divider>
     </div>
   </section>
 

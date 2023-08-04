@@ -25,7 +25,7 @@ export class AddUserComponent {
   public readonly addUserForm = this.formBuilder.group({
     email: [null, [Validators.required, Validators.email]],
     name: [null, Validators.required],
-    phone: [null, Validators.required],
+    phone: [null],
   });
 
   private onlySelectedRoles: Role[] = [];
