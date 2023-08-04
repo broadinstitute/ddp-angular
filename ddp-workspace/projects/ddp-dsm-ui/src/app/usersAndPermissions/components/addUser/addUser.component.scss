@@ -1,0 +1,64 @@
+@use "commonStyles" as common;
+
+.addUserForm {
+
+  &-title {
+    font-family: Montserrat-SemiBold, sans-serif;
+    text-align: center;
+    margin-bottom: 1em;
+  }
+
+  &-permissions {
+    overflow: auto;
+    max-height: 500px;
+    &-title {
+      text-align: center;
+    }
+  }
+
+  &-buttons {
+    @include common.flexContainer(center, center);
+    margin-top: 1em;
+    &-add {
+      @include common.flexContainer(center, center);
+    }
+  }
+
+  .userData-divider {
+    margin-top: .7em;
+  }
+
+  &-compare {
+    margin-top: .2em;
+    padding: 1em;
+    mat-divider {
+      margin: .5em;
+    }
+
+    &-input {
+      &-text {
+        font-family: Montserrat-SemiBold, sans-serif;
+      }
+      &-actions {
+        @include common.flexContainer(center, center);
+        &-button {
+          margin-left: 1em;
+        }
+      }
+    }
+
+    &-roles {
+      margin: 1em 0;
+    }
+  }
+}
+
+.loading-spinner {
+  @include common.flexContainer(center, center);
+  padding: 0.5em 0;
+}
+
+app-error-message {
+  @include common.flexContainer(center, center);
+  margin-bottom: .7em;
+}

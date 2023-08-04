@@ -41,7 +41,8 @@ export class RoleService {
   private _user: string;
   private _userEmail: string;
   private _userSetting: UserSetting;
-
+  private _studyUserAdmin = false;
+  private _pepperAdmin = false;
 
   constructor( private sessionService: SessionService,
                @Inject( 'ddp.config' ) private config: ConfigurationService ) {
@@ -82,6 +83,8 @@ export class RoleService {
     this._viewSeqOrderStatus = false;
     this._uploadRorFile = false;
     this._viewSharedLearnings = false;
+    this._studyUserAdmin = false;
+    this._pepperAdmin = false;
   }
 
   public setRoles( token: string ): void {
@@ -187,6 +190,12 @@ export class RoleService {
           }
           else if (entry === 'view_shared_learnings') {
             this._viewSharedLearnings = true;
+          }
+          else if (entry === 'study_user_admin') {
+            this._studyUserAdmin = true;
+          }
+          else if (entry === 'pepper_admin') {
+            this._pepperAdmin = true;
           }
         }
       }
@@ -311,7 +320,7 @@ export class RoleService {
     return this._isParticipantEdit;
   }
 
-  private getClaimByKeyName( token: any, key: string ): any {
+  public getClaimByKeyName( token: any, key: string ): any {
     return this.sessionService.getDSMClaims( token )[ this.config.auth0ClaimNameSpace + key ];
   }
 
@@ -349,5 +358,13 @@ export class RoleService {
 
   public get allowViewSharedLearnings(): boolean {
     return this._viewSharedLearnings;
+  }
+
+  public get isStudyUserAdmin(): boolean {
+    return this._studyUserAdmin;
+  }
+
+  public get isPepperAdmin(): boolean {
+    return this._pepperAdmin;
   }
 }

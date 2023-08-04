@@ -1,0 +1,159 @@
+@use "commonStyles" as common;
+
+.mat-accordion .mat-expansion-panel {
+  margin-bottom: 10px;
+}
+
+.mat-expansion-panel-spacing {
+  margin: 1em;
+}
+
+mat-expansion-panel-header {
+  padding: 2em 18px;
+}
+
+p {
+  margin: 0;
+  padding: 0;
+}
+
+mat-panel-title {
+  align-items: center;
+  font-family: Montserrat-SemiBold, sans-serif;
+  flex-grow: 0;
+  width: 30%;
+  overflow: auto;
+}
+
+mat-panel-description {
+  align-items: center;
+  flex-grow: 1;
+
+  .header {
+    @include common.flexContainer(normal, space-between);
+    width: 100%;
+    height: auto;
+
+    button:disabled {
+      mat-icon {
+        color: grey;
+      }
+    }
+
+    &-text {
+      @include common.flexContainer(center);
+
+      width: 55%;
+      &-inputs {
+        &-name, &-phone {
+          overflow: auto;
+          width: 2em;
+          max-width: 100%;
+          font-weight: bold;
+
+          span {
+            font-family: Montserrat-SemiBold, sans-serif;
+          }
+        }
+
+        &-editing-name, &-editing-phone {
+          border: none;
+          background-color: inherit;
+          border-bottom: 1px solid #003049;
+          outline: none;
+
+          &:focus-within {
+            border-bottom: 1px solid rgba(0, 48, 73, 0.49);
+          }
+        }
+      }
+
+      &-saveButton {
+        @include common.flexContainer(center, center);
+
+        mat-icon {
+          color: #386641;
+
+          &:hover {
+            color: rgba(56, 102, 65, 0.25);
+          }
+        }
+      }
+    }
+
+    &-buttons {
+      @include common.flexContainer(normal, flex-end);
+      width: 45%;
+
+      &-compare {
+        mat-icon {
+          color: #003049;
+
+          &:hover {
+            color: rgba(0, 48, 73, 0.25);
+          }
+        }
+      }
+
+      &-edit {
+        mat-icon {
+          color: #fcbf49;
+
+          &:hover {
+            color: rgba(252, 191, 73, 0.25);
+          }
+        }
+      }
+
+      &-delete {
+        mat-icon {
+          color: #d62828;
+
+          &:hover {
+            color: rgba(214, 40, 40, 0.25);
+          }
+        }
+      }
+    }
+  }
+}
+
+.title {
+  text-align: center;
+  font-family: Montserrat-SemiBold, sans-serif;
+}
+
+.permissions {
+  width: 100%;
+
+  &-selectAll {
+    @include common.flexContainer(center, center);
+  }
+
+  &-selectSingle {
+    @include common.flexContainer;
+    flex-wrap: wrap;
+    padding: 1em;
+
+
+    app-permission-checkbox {
+      flex-basis: 20%;
+      max-width: 20%;
+    }
+  }
+}
+
+.actionButtons {
+  @include common.flexContainer(normal, center);
+  margin-top: .7em;
+
+  &-save {
+    @include common.flexContainer(center, center);
+    margin-right: .7em;
+  }
+}
+
+.spinner-container {
+  @include common.flexContainer(center, center);
+}
+
