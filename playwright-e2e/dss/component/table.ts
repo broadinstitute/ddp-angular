@@ -31,7 +31,12 @@ export default class Table {
     this.footerCss = 'tfoot tr';
   }
 
+  async exists(): Promise<boolean> {
+    return await this.tableLocator().count() === 1;
+  }
+
   async waitForReady(timeout?: number) {
+    await this.tableLocator().waitFor({ state: 'attached' });
     await expect(this.tableLocator().locator(this.headerCss).first()).toBeVisible({ timeout });
     expect(await this.rowLocator().count()).toBeGreaterThanOrEqual(1);
   }

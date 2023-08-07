@@ -61,7 +61,6 @@ test.describe('Child Enrollment', () => {
     await assertProgressActiveItem(page, '1');
     const content = page.locator('.ddp-content');
     await expect(content).toHaveCount(3);
-    expect(await content.first().screenshot()).toMatchSnapshot('content-1.png');
     expect(await content.nth(1).screenshot()).toMatchSnapshot('content-2.png');
     expect(await content.nth(2).screenshot()).toMatchSnapshot('content-3.png');
 

@@ -45,8 +45,8 @@ export default abstract class PageBase implements PageInterface {
 
   async waitForReady(): Promise<void> {
     await this.page.waitForLoadState('networkidle');
-    await waitForNoSpinner(this.page);
     await expect(this.page).toHaveTitle(/\D+/);
+    await waitForNoSpinner(this.page);
   }
 
   /**
