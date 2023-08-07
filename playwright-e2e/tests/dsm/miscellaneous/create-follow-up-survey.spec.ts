@@ -8,7 +8,7 @@ import { generateAlphaNumeric, generateRandomNum } from 'utils/faker-utils';
 
 
 test.describe('Create Follow-Up Survey', () => {
-  const studies = [StudyEnum.PANCAN, StudyEnum.ANGIO, StudyEnum.PROSTATE, StudyEnum.ESC];
+  const studies = [StudyEnum.PANCAN, StudyEnum.PROSTATE, StudyEnum.ESC];
   let followupSurveyPage: FollowUpSurveyPage;
 
   test(`FAMILY_HISTORY (NONREPEATING) in @pancan @dsm @functional`, async ({ page, request }) => {
@@ -80,9 +80,6 @@ test.describe('Create Follow-Up Survey', () => {
     switch (study) {
       case StudyEnum.PANCAN:
         survey = 'BLOOD_CONSENT (REPEATING)';
-        break;
-      case StudyEnum.ANGIO:
-        survey = 'followupconsent (REPEATING)';
         break;
       case StudyEnum.PROSTATE:
         survey = 'FOLLOWUP (REPEATING)';

@@ -11,7 +11,6 @@ import ParticipantPage from 'dsm/pages/participant-page/participant-page';
 import AtcpSearchPage, { SearchByField } from 'dsm/pages/samples/search-page';
 import { WelcomePage } from 'dsm/pages/welcome-page';
 import Radiobutton from 'dss/component/radiobutton';
-import { SortOrder } from 'dss/component/table';
 import { test } from 'fixtures/dsm-fixture';
 import { getUtcDate } from 'utils/date-utils';
 import { generateAlphaNumeric } from 'utils/faker-utils';
@@ -40,31 +39,29 @@ test.describe('Receive Kit', () => {
       // Instead using UI table filter and search, it is much quicker and more accurate to intercept DSM API request to find the right participant to use.
       // Find a Playwright test user that does not have GENOME_STUDY_SPIT_KIT_BARCODE.
       await page.route('**/*', async (route, request): Promise<void> => {
-         if (!shortId) {
-           // only search for shortId one time to avoid duplicated searching
-           let participantShortId;
-           const regex = new RegExp(/realm=.*participantList/i);
-           if (request.url().match(regex)) {
-             const response = await route.fetch();
-             const json = JSON.parse(await response.text());
-             for (const i in json.participants) {
-               const profile = json.participants[i].esData.profile;
-               if (!profile.firstName.includes('E2E')) {
+         const regex = new RegExp(/applyFilter\?realm=.*&parent=participantList/i);
+         if (request.url().match(regex)) {
+           console.log(`Intercepting API request ${request.url()} for a E2E participant`);
+           const response = await route.fetch();
+           const json = JSON.parse(await response.text());
+           for (const i in json.participants) {
+             const profile = json.participants[i].esData.profile;
+             if (!profile.firstName.includes('E2E')) {
+               continue;
+             }
+             const participantData = json.participants[i].esData.dsm.participantData;
+             for (const dataId in participantData) {
+               const data = participantData[dataId].data as string;
+               if (data.includes('GENOME_STUDY_SPIT_KIT_BARCODE')) {
                  continue;
                }
-               participantShortId = profile.hruid;
-               const participantData = json.participants[i].esData.dsm.participantData;
-               for (const dataId in participantData) {
-                 const data = participantData[dataId].data as string;
-                 if (data.includes('GENOME_STUDY_SPIT_KIT_BARCODE')) {
-                   participantShortId = null;
-                 }
-               }
-               if (participantShortId) {
-                 shortId = participantShortId;
-                 console.log('short id: ', shortId);
-                 break; // finished searching for a participant who is Playwright automation test created and does not have genome study kit barcode
-               }
+             }
+             // eslint-disable-next-line prefer-const
+             const participantShortId = profile.hruid;
+             if (participantShortId) {
+               shortId = participantShortId;
+               console.log('short id: ', shortId);
+               break; // finished searching for a participant who is Playwright automation test created and does not have genome study kit barcode
              }
            }
          }
@@ -89,25 +86,23 @@ test.describe('Receive Kit', () => {
         await searchPanel.checkboxes('Status', { checkboxValues: ['Registered', 'Enrolled'] });
         await searchPanel.text('Sample kit barcode for genome study', { additionalFilters: [AdditionalFilter.EMPTY] });
         await searchPanel.search();
-
-        // Sort Registration Date from latest to oldest
-        await participantsTable.sort('Registration Date', SortOrder.ASC);
       });
 
       await test.step('Verify participant detail on Participant page', async () => {
-        // Open the Participant page
-        const participantsTable = participantListPage.participantListTable;
+        const searchPanel = participantListPage.filters.searchPanel;
+        await searchPanel.clear();
         await participantListPage.filterListByShortId(shortId);
-
         logGenomeStudySampleKitReceived(shortId)
 
         const row = 0;
+        const participantsTable = participantListPage.participantListTable;
         const status = await participantsTable.getParticipantDataAt(row, 'Status');
         expect(status).toMatch(/Enrolled|Registered/);
         const rowShortId = await participantsTable.getParticipantDataAt(row, 'Short ID');
         expect(rowShortId).toBe(shortId);
         const registrationDate = await participantsTable.getParticipantDataAt(row, 'Registration Date', { exactMatch: false });
 
+        // Open the Participant page
         participantPage = await participantsTable.openParticipantPageAt(row);
 
         expect(await participantPage.getStatus()).toBe(status);

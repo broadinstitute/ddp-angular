@@ -5,7 +5,7 @@ import {ParticipantsListPaginator} from 'lib/component/dsm/paginators/participan
 import {rows} from 'lib/component/dsm/paginators/types/rowsPerPage';
 import { getDate, offsetDaysFromToday } from 'utils/date-utils';
 import { waitForNoSpinner } from 'utils/test-utils';
-import { AdditionalFilter } from '../filters/sections/search/search-enums';
+import { AdditionalFilter } from 'dsm/component/filters/sections/search/search-enums';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
 
 export class ParticipantListTable extends Table {

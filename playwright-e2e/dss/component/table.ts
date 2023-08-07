@@ -78,7 +78,6 @@ export default class Table {
     const { exactMatch = true } = opts;
 
     // Find the search column header index
-    const columnNames = await this.getHeaderNames();
     const columnIndex = await this.getHeaderIndex(searchHeader, { exactMatch });
     if (columnIndex === -1) {
       return null; // Not found
@@ -202,7 +201,8 @@ export default class Table {
     } else {
       await header.click();
     }
-
+    await waitForNoSpinner(this.page);
+    await expect(header).toBeVisible({ timeout: 30000 });
     let ariaLabel = await header.locator('span').last().getAttribute('aria-label');
     if (ariaLabel) {
       if (ariaLabel !== order) {

@@ -5,7 +5,8 @@ import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
 import { offsetDaysFromToday } from 'utils/date-utils';
 
-test.describe('Participants list search and filter', () => {
+// Test is broken until bug is fixed. https://broadworkbench.atlassian.net/browse/PEPPER-1031
+test.describe.fixme('Participants list search and filter', () => {
   const studies = [StudyEnum.LMS, StudyEnum.OSTEO2];
 
   for (const study of studies) {
