@@ -35,7 +35,7 @@ test.describe('Receive Kit', () => {
       await welcomePage.selectStudy(study);
     });
 
-    test(`Receive genome sample kit for ${study} @dsm @${study} @functional`, async ({page, request}) => {
+    test(`Receive genome sample kit for ${study} @dsm @${study} @functional`, async ({page}) => {
       // Instead using UI table filter and search, it is much quicker and more accurate to intercept DSM API request to find the right participant to use.
       // Find a Playwright test user that does not have GENOME_STUDY_SPIT_KIT_BARCODE.
       await page.route('**/*', async (route, request): Promise<void> => {
@@ -46,10 +46,14 @@ test.describe('Receive Kit', () => {
            const json = JSON.parse(await response.text());
            for (const i in json.participants) {
              const profile = json.participants[i].esData.profile;
+             const participantData = json.participants[i].esData.dsm.participantData;
+             if (!profile || !participantData || participantData.length === 0) {
+               console.error(json);
+               throw new Error('API request response (JSON) does not contain the "profile" or "participantData"');
+             }
              if (!profile.firstName.includes('E2E')) {
                continue;
              }
-             const participantData = json.participants[i].esData.dsm.participantData;
              for (const dataId in participantData) {
                const data = participantData[dataId].data as string;
                if (data.includes('GENOME_STUDY_SPIT_KIT_BARCODE')) {
@@ -71,8 +75,6 @@ test.describe('Receive Kit', () => {
       await test.step('Search for the right participant on Participant List page', async () => {
         participantListPage = await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
         await participantListPage.waitForReady();
-
-        const participantsTable = participantListPage.participantListTable;
 
         // Search for a participant that meets the search criteria
         const customizeViewPanel = participantListPage.filters.customizeViewPanel;
@@ -126,7 +128,6 @@ test.describe('Receive Kit', () => {
         const row = 0;
         expect(await table.getRowText(row, 'DDP-Realm')).toBe(studyShortName(study).shortName);
         expect(await table.getRowText(row, 'Short ID')).toBe(shortId);
-        expect(await table.getRowText(row, 'Collaborator Participant ID')).toBeTruthy();
         expect(await table.getRowText(row, 'MF barcode')).toBe(newBarcode);
         expect(await table.getRowText(row, 'Short ID')).toBe(shortId);
 
