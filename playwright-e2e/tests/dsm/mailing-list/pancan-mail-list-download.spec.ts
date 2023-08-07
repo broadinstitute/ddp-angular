@@ -71,9 +71,7 @@ test.describe.serial('Join Pancan Mailing List', () => {
       const dateInJson = getDate(new Date(parseInt(item.dateCreated) * 1000)); // Transform to dd/mm/yyyy
       const emailInJson = item.email;
       const finding = lodash.filter(rows, row => row.email === emailInJson && row.dateCreated === dateInJson);
-      expect(finding.length,
-        `Matching record for email: "${emailInJson}" and dateCreated: "${dateInJson}" in downloaded csv file.`)
-      .toEqual(1);
+      expect(finding.length).toEqual(1);
     });
 
     // Verify Mailing List table
@@ -87,9 +85,10 @@ test.describe.serial('Join Pancan Mailing List', () => {
     // Verify new Pancan participant email is found inside table.
     // To handle any delay, retry blocks of code until email is found successfully.
     await expect(async () => {
+      await mailingListPage.reload(); // page reload to trigger new request
       await table.sort(COLUMN.DATE, SortOrder.DESC); // Sorting to get newest record to display first
       const cell = await table.findCell(COLUMN.EMAIL, newEmail, COLUMN.EMAIL);
-      await expect(cell, `Matching email ${newEmail} in Mailing List table`).toBeTruthy();
+      await expect(cell).toBeTruthy();
     }).toPass();
 
     // Verify date signed up is found inside table

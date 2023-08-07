@@ -21,7 +21,6 @@ export default class ParticipantListPage {
     const navigation = new Navigation(page, request);
     const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
     await participantListPage.waitForReady();
-    await participantListPage.assertPageTitle();
 
     const participantsTable = participantListPage.participantListTable;
     const rowsTotal = await participantsTable.rowLocator().count();
@@ -32,7 +31,9 @@ export default class ParticipantListPage {
   constructor(private readonly page: Page) {}
 
   public async waitForReady(): Promise<void> {
+    await this.assertPageTitle();
     await waitForNoSpinner(this.page);
+    await expect(this.page.locator(this.filters.searchPanel.openButtonXPath)).toBeVisible();
   }
 
   public async selectAll(): Promise<void> {

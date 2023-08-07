@@ -14,11 +14,13 @@ export default class LmsHomePage extends LmsPageBase {
   }
 
   async waitForReady(): Promise<void> {
-    await expect(this.page).toHaveTitle('Leiomyosarcoma Project');
-    await expect(this.countMeInButton.first()).toBeVisible();
-    await expect(this.learnMoreButton).toBeVisible();
-    await expect(this.getLogInButton()).toBeVisible();
     await waitForNoSpinner(this.page);
+    await Promise.all([
+      expect(this.page).toHaveTitle('Leiomyosarcoma Project'),
+      expect(this.countMeInButton.first()).toBeVisible(),
+      expect(this.learnMoreButton).toBeVisible(),
+      expect(this.getLogInButton()).toBeVisible()
+    ])
   }
 
   async countMeIn(): Promise<void> {

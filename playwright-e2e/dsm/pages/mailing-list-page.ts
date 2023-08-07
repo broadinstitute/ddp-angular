@@ -1,4 +1,5 @@
 import { Download, expect, Locator, Page } from '@playwright/test';
+import DsmPageBase from 'dsm/pages/dsm-page-base';
 import Table from 'dss/component/table';
 
 export const COLUMN = {
@@ -8,11 +9,12 @@ export const COLUMN = {
   LAST_NAME: 'Last Name'
 }
 
-export default class MailingListPage {
+export default class MailingListPage extends DsmPageBase {
   private readonly title: string | RegExp;
   readonly downloadButton: Locator;
 
-  constructor(private readonly page: Page, study: string|RegExp) {
+  constructor(page: Page, study: string|RegExp) {
+    super(page);
     this.title = study;
     this.downloadButton = this.page.getByRole('button', { name: 'Download mailing list' })
   }
