@@ -40,28 +40,26 @@ test.describe('Receive Kit', () => {
       // Find a Playwright test user that does not have GENOME_STUDY_SPIT_KIT_BARCODE.
       await page.route('**/*', async (route, request): Promise<void> => {
          const regex = new RegExp(/applyFilter\?realm=.*&parent=participantList/i);
-         if (request.url().match(regex)) {
+         if (!shortId && request.url().match(regex)) {
            console.log(`Intercepting API request ${request.url()} for a E2E participant`);
            const response = await route.fetch();
            const json = JSON.parse(await response.text());
            for (const i in json.participants) {
+             let participantShortId;
              const profile = json.participants[i].esData.profile;
              const participantData = json.participants[i].esData.dsm.participantData;
-             if (!profile || !participantData || participantData.length === 0) {
-               console.error(json);
-               throw new Error('API request response (JSON) does not contain the "profile" or "participantData"');
-             }
              if (!profile.firstName.includes('E2E')) {
                continue;
              }
+             participantShortId = profile.hruid;
              for (const dataId in participantData) {
-               const data = participantData[dataId].data as string;
-               if (data.includes('GENOME_STUDY_SPIT_KIT_BARCODE')) {
-                 continue;
+               if ((participantData[dataId].fieldTypeId as string) === 'AT_GROUP_GENOME_STUDY') {
+                 if ((participantData[dataId].data as string).indexOf('GENOME_STUDY_SPIT_KIT_BARCODE') !== -1) {
+                   participantShortId = null;
+                   break;
+                 }
                }
              }
-             // eslint-disable-next-line prefer-const
-             const participantShortId = profile.hruid;
              if (participantShortId) {
                shortId = participantShortId;
                console.log('short id: ', shortId);
@@ -141,6 +139,8 @@ test.describe('Receive Kit', () => {
 
       await test.step('Verify participant detail has updated on Participant page', async () => {
         participantListPage = await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
+        await participantListPage.waitForReady();
+
         await participantListPage.filterListByShortId(shortId);
         await participantListPage.participantListTable.openParticipantPageAt(0);
 

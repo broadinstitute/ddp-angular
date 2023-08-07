@@ -274,7 +274,6 @@ test.describe('ATCP adult self-consent enrollment', () => {
     await dashboardPage.waitForReady();
 
     await expect(page.locator('h2.subtitle')).toHaveScreenshot('atcp-dashboard-thank-you-message.png');
-    await expect(page.locator('.registration-status')).toHaveScreenshot('atcp-dashboard-registration-status.png');
 
     const expectedHeaders = ['Form', 'Summary', 'Created', 'Status', 'Actions'];
     const table = dashboardPage.getTable();

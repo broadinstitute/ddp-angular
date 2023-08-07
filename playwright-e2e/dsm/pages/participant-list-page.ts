@@ -33,6 +33,7 @@ export default class ParticipantListPage {
   public async waitForReady(): Promise<void> {
     await this.assertPageTitle();
     await waitForNoSpinner(this.page);
+    await expect(this.page.locator(this.filters.searchPanel.openButtonXPath)).toBeVisible();
   }
 
   public async selectAll(): Promise<void> {
