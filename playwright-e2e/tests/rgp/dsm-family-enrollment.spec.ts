@@ -81,7 +81,8 @@ test.describe.serial('DSM Family Enrollment Handling', () => {
         await dropdownOptions.filter({ hasText: '5' }).click();
     });
 
-    test('Verify that the proband family member tab can be filled out @functional @rgp @proband', async ({ page, request }) => {
+    //Skipping until housekeeping stuff is fixed
+    test.skip('Verify that the proband family member tab can be filled out @functional @rgp @proband', async ({ page, request }) => {
     //Go into DSM
     const navigation = new Navigation(page, request);
 
