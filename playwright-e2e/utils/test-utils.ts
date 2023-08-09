@@ -15,7 +15,8 @@ const { SITE_PASSWORD } = process.env;
 
 export async function waitForNoSpinner(page: Page, opts: { timeout?: number } = {}): Promise<void> {
   const { timeout = 60 * 1000 } = opts;
-  await page.locator('[data-icon="spinner"].fa-spin, mat-spinner[role="progressbar"]').waitFor({ state: 'hidden', timeout });
+  const locator = page.locator('[data-icon="spinner"].fa-spin, mat-spinner[role="progressbar"]');
+  await locator.first().waitFor({ state: 'hidden', timeout }); // if more than one spinners are found, only wait for first one to disappear.
 }
 
 export async function waitForResponse(page: Page, {uri, status = 200, timeout = 30000}: WaitForResponse): Promise<Response> {

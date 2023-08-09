@@ -78,6 +78,12 @@ export lmsUserPassword=$(vault read --format=json secret/pepper/test/v1/e2e | jq
 echo "export LMS_USER_PASSWORD=$lmsUserPassword" >> playwright-env/envvars
 echo "export LMS_USER_EMAIL=$lmsUser" >> playwright-env/envvars
 
+# MBC
+export mbcUser=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[] | select(.app==\"mbc\") | .userName")
+export mbcUserPassword=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[] | select(.app==\"mbc\") | .password")
+echo "export MBC_USER_PASSWORD=$mbcUserPassword" >> playwright-env/envvars
+echo "export MBC_USER_EMAIL=$mbcUser" >> playwright-env/envvars
+
 # ATCP
 export atcpUser=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[] | select(.app==\"atcp\") | .userName")
 export atcpUserPassword=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[] | select(.app==\"atcp\") | .password")

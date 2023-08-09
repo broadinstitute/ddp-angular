@@ -2,6 +2,7 @@ import { Locator, Page } from '@playwright/test';
 import Button from 'dss/component/button';
 import Input from 'dss/component/input';
 import Radiobutton from 'dss/component/radiobutton';
+import { waitForNoSpinner } from 'utils/test-utils';
 
 export default class Modal {
   private readonly rootSelector: Locator;
@@ -29,6 +30,15 @@ export default class Modal {
 
   async getHeader(): Promise<string> {
     return this.headerLocator().innerText();
+  }
+
+  async getBodyText(): Promise<string> {
+    return this.bodyLocator().innerText();
+  }
+
+  async close(): Promise<void> {
+    await this.getButton({ label: 'Close' }).click();
+    await waitForNoSpinner(this.page);
   }
 
   public getButton(opts: { label?: string | RegExp; ddpTestID?: string }): Button {

@@ -1,0 +1,13 @@
+<ng-container *ngIf="displayError">
+  <app-error-message [errorText]="errorText" [errorMessage]="errorMessage"></app-error-message>
+</ng-container>
+
+<ng-container>
+  <ng-container *ngFor="let user of usersList; trackBy: trackBy">
+    <app-administration-user
+      [user]="user"
+      (comparingUser)="openPermissionsComparisonModal($event)"
+      (reportError)="onError($event)"
+    ></app-administration-user>
+  </ng-container>
+</ng-container>

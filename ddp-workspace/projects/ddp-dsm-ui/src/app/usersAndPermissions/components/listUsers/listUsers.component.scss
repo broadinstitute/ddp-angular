@@ -1,0 +1,8 @@
+@use "commonStyles" as common;
+
+
+
+app-error-message {
+  @include common.flexContainer(center, center);
+  margin-bottom: .7em;
+}

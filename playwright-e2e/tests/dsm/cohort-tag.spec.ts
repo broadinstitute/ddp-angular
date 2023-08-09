@@ -26,8 +26,9 @@ test.describe('Cohort tags', () => {
         if (!shortId) {
           // only search for shortId one time to avoid duplicated searching
           let participantShortId;
-          const regex = new RegExp(/(applyFilter|filterList)\?realm=.*&parent=participantList/i);
+          const regex = new RegExp(/applyFilter\?realm=.*&parent=participantList/i);
           if (request.url().match(regex)) {
+            console.log(`Intercepting API request ${request.url()} for a E2E participant`);
             const response = await route.fetch();
             const json = JSON.parse(await response.text());
             for (const i in json.participants) {
@@ -70,7 +71,7 @@ test.describe('Cohort tags', () => {
       await customizeViewPanel.selectColumns('Cohort Tags Columns', ['Cohort Tag Name']);
 
       // Search participant by Short ID
-      console.log(`Participant Short ID: ${shortId}`);
+      // console.log(`Participant Short ID: ${shortId}`);
       await participantListPage.filterListByShortId(shortId);
 
       const participantListTable = participantListPage.participantListTable;

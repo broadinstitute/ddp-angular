@@ -319,11 +319,11 @@ test.describe.serial('LMS Child Enrollment', () => {
 
       await expect(page.locator('.infobox_dashboard')).toHaveScreenshot('lms-dashboard-message.png');
       await expect(dashboardPage.getTable().tableLocator()).toHaveScreenshot('lms-dashboard-table-1.png');
-
-      // Log out
-      await dashboardPage.getLogOutButton().click();
-      await homePage.waitForReady();
     })
+
+    // Log out
+    await dashboardPage.getLogOutButton().click();
+    await homePage.waitForReady();
   });
 
   test('New participant sign in @visual @enrollment @lms', async ({ page }) => {
