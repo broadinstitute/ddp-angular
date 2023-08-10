@@ -1,0 +1,22 @@
+export enum FamilyMember {
+    PROBAND = 'Self',
+    SISTER = 'Sister',
+    BROTHER = 'Brother',
+    MOTHER = 'Mother',
+    FATHER = 'Father',
+    PATERNAL_GRANDMOTHER = 'Paternal Grandmother',
+    PATERNAL_GRANDFATHER = 'Paternal Grandfather',
+    MATERNAL_GRANDMOTHER = 'Maternal Grandmother',
+    MATERNAL_GRANDFATHER = 'Maternal Grandfather',
+    DAUGHTER = 'Daughter',
+    SON = 'Son',
+    OTHER = 'Other',
+    HALF_SIBLING_MATERNAL = 'Half Sibling Maternal',
+    HALF_SIBLING_PATERNAL = 'Half Sibling Paternal',
+    MATERNAL_AUNT = 'Maternal Aunt',
+    MATERNAL_FIRST_COUSIN = 'Maternal First Cousin',
+    MATERNAL_UNCLE = 'Maternal Uncle',
+    PATERNAL_AUNT = 'Paternal Aunt',
+    PATERNAL_FIRST_COUSIN = 'Paternal First Cousin',
+    PATERNAL_UNCLE = 'Paternal Uncle'
+}

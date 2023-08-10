@@ -56,3 +56,18 @@ export function offsetDaysFromToday(number = 1, opts: { isAdd?: boolean } = {}):
   }
   return today;
 }
+
+export const calculateAge = (month: string, day: string, year: string): number => {
+  const dateOfBirth = new Date(Number(year), Number(month), Number(day));
+  const today = new Date();
+
+  let resultAge = today.getFullYear() - dateOfBirth.getFullYear();
+  const resultMonth = today.getMonth() - dateOfBirth.getMonth();
+
+  //Adjust age result depending on if birthday has not yet occurred for the year
+  if (resultMonth < 0 || (resultMonth === 0 && today.getDate() < dateOfBirth.getDate())) {
+    resultAge--;
+  }
+
+  return resultAge;
+};
