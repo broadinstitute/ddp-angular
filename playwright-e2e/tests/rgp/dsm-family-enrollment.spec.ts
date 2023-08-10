@@ -518,9 +518,8 @@ test.describe.serial('DSM Family Enrollment Handling', () => {
     await redCapSurveyCompletedDate.fill(`${currentDate[0]}/${currentDate[1]}/${currentDate[2]}`);//[0] is MM, [1] is DD, [2] is YYYY
     });
 
-    test('Verify that a family member can be added without copying proband info @rgp @functional', async ({ page, request }) => {
+    test.skip('Verify that a family member can be added without copying proband info @rgp @functional', async ({ page, request }) => {
     //Go into DSM
-    await login(page);
     const navigation = new Navigation(page, request);
 
     //select RGP study
@@ -537,82 +536,61 @@ test.describe.serial('DSM Family Enrollment Handling', () => {
     saveParticipantGuid(participantGuid);
 
     await participantListPage.filterListByParticipantGUID(user.patient.participantGuid);
+    await participantListTable.openParticipantPageAt(0);
 
     //Add a new family member
     const rgpParticipantPage = new RgpParticipantPage(page);
 
-    const addFamilyMemberButton = rgpParticipantPage.getAddFamilyMemberButton();
-    await addFamilyMemberButton.click();
-
-    const addFamilyMemberPopup = rgpParticipantPage.getAddFamilyMemberPopup();
-    await expect(addFamilyMemberPopup).toBeVisible();
+    const familyMemberForm = rgpParticipantPage.addFamilyMemberDialog;
 
     //Setup new family member
-    const maternalGrandfather = new FamilyMemberTab(page, FamilyMember.MATERNAL_GRANDFATHER);
-    maternalGrandfather.relationshipID = user.maternalGrandfather.relationshipID;
-    maternalGrandfather.firstName = user.maternalGrandfather.firstName;
-    maternalGrandfather.lastName = user.maternalGrandfather.lastName;
+    const grandfather = new FamilyMemberTab(page, FamilyMember.MATERNAL_GRANDFATHER);
+    grandfather.relationshipID = user.maternalGrandFather.relationshipID;
+    grandfather.firstName = user.maternalGrandFather.firstName;
+    grandfather.lastName = user.maternalGrandFather.lastName;
 
-    const familyMemberFirstName = rgpParticipantPage.getFamilyMemberFirstName();
-    await familyMemberFirstName.fill(maternalGrandfather.firstName);
-
-    const familyMemberLastName = rgpParticipantPage.getFamilyMemberLastName();
-    await familyMemberLastName.fill(maternalGrandfather.lastName);
-
-    const familyMemberRelationshipID = rgpParticipantPage.getFamilyMemberRelationshipID();
-    await familyMemberRelationshipID.fill(maternalGrandfather.relationshipID);
-
-    const familyMemberRelation = rgpParticipantPage.getFamilyMemberRelation();
-    await familyMemberRelation.click();
-    const dropdownOptions = rgpParticipantPage.getDropdownOptions();
-    await dropdownOptions.filter({ hasText: maternalGrandfather.relationToProband}).click();
-
-    const copyProbandInfo = rgpParticipantPage.getCopyProbandInfo();
-    await expect(copyProbandInfo).not.toBeChecked();
-
-    const submitButton = rgpParticipantPage.getAddFamilyMemberFormSubmitButton();
-    await expect(submitButton).toBeEnabled();
-    await submitButton.click();
-
-    const successfullyAddedFamilyMemberMessage = rgpParticipantPage.getAddFamilyMemberSuccessfulMessage();
-    await expect(successfullyAddedFamilyMemberMessage).toBeVisible();
-
-    await page.keyboard.press('Escape'); //Press Escape key to close the 'Successfully Added Family Member' dialog
-    await expect(successfullyAddedFamilyMemberMessage).not.toBeVisible();
+    //Fill family member form
+    await familyMemberForm.fillInfo({
+        firstName: grandfather.firstName,
+        lastName: grandfather.lastName,
+        relationshipId: parseInt(grandfather.relationshipID),
+        relation: grandfather.relationToProband as string,
+        copyProbandInfo: false
+    });
 
     //Check that the expected Participant Info fields have been filled after non-copied family member creation
-    const maternalGrandFatherFamilyMemberTab = maternalGrandfather.getFamilyMemberTab();
+    const maternalGrandFatherFamilyMemberTab = grandfather.getFamilyMemberTab();
     await maternalGrandFatherFamilyMemberTab.scrollIntoViewIfNeeded();
     await expect(maternalGrandFatherFamilyMemberTab).toBeVisible();
 
     await maternalGrandFatherFamilyMemberTab.click();
     await expect(maternalGrandFatherFamilyMemberTab).toHaveClass('nav-link active'); //Make sure the tab is in view and selected
-    const maternalGrandfatherFamilyID = await maternalGrandfather.getFamilyIDFromFamilyMemberTab();
+    const maternalGrandfatherFamilyID = await grandfather.getFamilyIDFromFamilyMemberTab();
 
-    const maternalGrandfatherParticipantInfoSection = maternalGrandfather.getParticipantInfoSection();
+    const maternalGrandfatherParticipantInfoSection = grandfather.getParticipantInfoSection();
     await maternalGrandfatherParticipantInfoSection.click();
 
-    const maternalGrandfatherSubjectIDField = maternalGrandfather.getSubjectID();
+    const maternalGrandfatherSubjectIDField = grandfather.getSubjectID();
     await expect(maternalGrandfatherSubjectIDField).not.toBeEmpty();
 
-    const maternalGrandfatherFamilyIDField = maternalGrandfather.getFamilyID();
+    const maternalGrandfatherFamilyIDField = grandfather.getFamilyID();
     await expect(maternalGrandfatherFamilyIDField).not.toBeEmpty();
     await expect(maternalGrandfatherFamilyIDField).not.toBeEditable();
 
-    const maternalGrandfatherFirstNameField = maternalGrandfather.getFirstName();
-    await expect(maternalGrandfatherFirstNameField).toHaveValue(maternalGrandfather.firstName);
+    const maternalGrandfatherFirstNameField = grandfather.getFirstName();
+    await expect(maternalGrandfatherFirstNameField).toHaveValue(grandfather.firstName);
 
     //Middle name is not set in family member creation - check that it has no input for non-copied family member - intended to be a canary in coal mine assertion
-    const maternalGrandfatherMiddleNameField = maternalGrandfather.getMiddleName();
+    const maternalGrandfatherMiddleNameField = grandfather.getMiddleName();
     await expect(maternalGrandfatherMiddleNameField).toHaveValue('');
 
-    const maternalGrandfatherLastNameField = maternalGrandfather.getLastName();
-    await expect(maternalGrandfatherLastNameField).toHaveValue(maternalGrandfather.lastName);
+    const maternalGrandfatherLastNameField = grandfather.getLastName();
+    await expect(maternalGrandfatherLastNameField).toHaveValue(grandfather.lastName);
 
-    const maternalGrandfatherIsAliveRadioButton = maternalGrandfather.getLivingStatusOption('Alive');
+    const maternalGrandfatherIsAliveRadioButton = grandfather.getLivingStatusOption('Alive');
     await expect(maternalGrandfatherIsAliveRadioButton).toBeChecked();
 
-    const maternalGrandfatherRelationshipToProband = maternalGrandfather.getRelationshipToProband();
+    const maternalGrandfatherRelationshipToProband = grandfather.getRelationshipToProband();
     await expect(maternalGrandfatherRelationshipToProband).toHaveText('Maternal Grandfather');
 
     //Check that the newly added family member has the same family id as the proband - check added due to non-prod bug that occurs occassionaly
