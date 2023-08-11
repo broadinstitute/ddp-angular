@@ -40,6 +40,7 @@ test.describe.serial('DSM Family Enrollment Handling', () => {
         //Confirm the 'Add Family Member' button is visible
         const rgpParticipantPage = new RgpParticipantPage(page);
         rgpEmail = await rgpParticipantPage.getEmail(); //Get the actual email used for the family account - to be used later
+        expect(rgpEmail).not.toBeNull();
         const addFamilyMemberButton = rgpParticipantPage.addFamilyMemberDialog._addFamilyMemberButton;
         await expect(addFamilyMemberButton).toBeVisible();
 
@@ -514,5 +515,44 @@ test.describe.serial('DSM Family Enrollment Handling', () => {
 
     const redCapSurveyCompletedDate = proband.getRedCapSurveyCompletedDate();
     await redCapSurveyCompletedDate.fill(`${currentDate[0]}/${currentDate[1]}/${currentDate[2]}`);//[0] is MM, [1] is DD, [2] is YYYY
+    });
+
+    test.skip('Verify that a family member can be added using copied proband info @rgp @functional', async ({ page, request }) => {
+    //Go into DSM
+    const navigation = new Navigation(page, request);
+
+    //select RGP study
+    await new Select(page, { label: 'Select study' }).selectOption('RGP');
+
+    //Verify the Participant List is displayed
+    const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
+    await participantListPage.assertPageTitle();
+    await participantListPage.waitForReady();
+    const participantListTable = new ParticipantListTable(page);
+    const participantGuid = await participantListTable.getGuidOfMostRecentAutomatedParticipant(user.patient.firstName, true);
+    saveParticipantGuid(participantGuid);
+
+    await participantListPage.filterListByParticipantGUID(user.patient.participantGuid);
+    await participantListTable.openParticipantPageAt(0);
+
+    //Add a new family member
+    const rgpParticipantPage = new RgpParticipantPage(page);
+
+    const familyMemberForm = rgpParticipantPage.addFamilyMemberDialog;
+
+    //Setup new family member
+    const brother = new FamilyMemberTab(page, FamilyMember.BROTHER);
+    brother.relationshipID = user.brother.relationshipID;
+    brother.firstName = user.brother.firstName;
+    brother.lastName = user.brother.lastName;
+
+    //Fill family member form
+    await familyMemberForm.fillInfo({
+        firstName: brother.firstName,
+        lastName: brother.lastName,
+        relationshipId: parseInt(brother.relationshipID),
+        relation: brother.relationToProband as string,
+        copyProbandInfo: false
+    });
     });
 });
