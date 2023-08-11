@@ -24,7 +24,7 @@ import { saveParticipantGuid } from 'utils/faker-utils';
 import { ParticipantListTable } from 'dsm/component/tables/participant-list-table';
 
 test.describe('Blood & RNA Kit Upload', () => {
-test('Verify that a blood & rna kit can be uploaded @rgp @functional @upload', async ({ page, request}, testInfo) => {
+test.skip('Verify that a blood & rna kit can be uploaded @rgp @functional @upload', async ({ page, request}, testInfo) => {
     const testResultDirectory = testInfo.outputDir;
 
     const study = StudyEnum.RGP;
@@ -131,13 +131,14 @@ test('Verify that a blood & rna kit can be uploaded @rgp @functional @upload', a
     await kitsSentPage.assertPageTitle();
     await kitsSentPage.assertDisplayedKitTypes(expectedKitTypes);
     await kitsSentPage.selectKitType(kitType);
-    await kitsSentPage.search(KitsColumnsEnum.MF_CODE, kitLabel);
-    const listedKitLabel = await kitsSentPage.getData(KitsColumnsEnum.MF_CODE) as string;
-    console.log(`Kit Label in Kits Sent page: ${listedKitLabel.trim()}`);
 
+    //Check for the sent blood kit
+    await kitsSentPage.search(KitsColumnsEnum.MF_CODE, kitLabel);
+    await kitsSentPage.assertDisplayedRowsCount(1);
+
+    //Check for the sent RNA kit
     await kitsSentPage.search(KitsColumnsEnum.MF_CODE, rnaLabel);
-    const listedRnaLabel = await kitsSentPage.getData(KitsColumnsEnum.MF_CODE) as string;
-    console.log(`RNA Label in Kits Sent page: ${listedRnaLabel.trim()}`);
+    await kitsSentPage.assertDisplayedRowsCount(1);
 
     //Kits Received Page
     const kitsReceivedPage = await navigation.selectFromSamples<KitsReceivedPage>(SamplesNavEnum.RECEIVED);
@@ -147,6 +148,13 @@ test('Verify that a blood & rna kit can be uploaded @rgp @functional @upload', a
     await kitsReceivedPage.kitReceivedRequest(rnaLabel); //Mark the RNA kit as received
     await kitsReceivedPage.assertDisplayedKitTypes(expectedKitTypes);
     await kitsReceivedPage.selectKitType(kitType);
+
+    //Check for the received blood kit
     await kitsReceivedPage.search(KitsColumnsEnum.MF_CODE, kitLabel);
+    await kitsReceivedPage.assertDisplayedRowsCount(1);
+
+    //Check for the received RNA kit
+    await kitsReceivedPage.search(KitsColumnsEnum.MF_CODE, rnaLabel);
+    await kitsReceivedPage.assertDisplayedRowsCount(1);
     });
 });

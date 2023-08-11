@@ -40,7 +40,7 @@ export default class RgpFinalScanPage {
 
     public async save(): Promise<void> {
         const scanPairButton = this.getSaveScanPairsButton();
-        await expect(scanPairButton, 'RGP FInal Scan page - Save Scan Pairs button is not enabled like expected').toBeEnabled();
+        await expect(scanPairButton, 'RGP Final Scan page - Save Scan Pairs button is not enabled like expected').toBeEnabled();
         await scanPairButton.focus();
         await scanPairButton.click();
     }
