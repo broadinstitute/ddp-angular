@@ -39,6 +39,26 @@ export default class FamilyMemberTab {
         return this._familyID;
     }
 
+    public set firstName(firstName: string) {
+        this._firstName = firstName;
+    }
+
+    public get firstName(): string {
+        return this._firstName
+    }
+
+    public set lastName(lastName: string) {
+        this._lastName = lastName;
+    }
+
+    public get lastName(): string {
+        return this._lastName;
+    }
+
+    public get relationToProband(): FamilyMember {
+        return this._relationToProband;
+    }
+
     /* RGP specific utility methods */
 
     /**
