@@ -1,5 +1,4 @@
 import { expect, Locator, Page } from '@playwright/test';
-import exp from 'constants';
 import { FamilyMember } from 'dsm/component/tabs/enums/familyMember-enum';
 
 /**

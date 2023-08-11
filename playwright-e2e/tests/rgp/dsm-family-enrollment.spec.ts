@@ -83,7 +83,7 @@ test.describe.serial('DSM Family Enrollment Handling', () => {
     });
 
     //Skipping until housekeeping stuff is fixed
-    test.skip('Verify that the proband family member tab can be filled out @functional @rgp @proband', async ({ page, request }) => {
+    test('Verify that the proband family member tab can be filled out @functional @rgp @proband', async ({ page, request }) => {
     //Go into DSM
     const navigation = new Navigation(page, request);
 
@@ -517,7 +517,7 @@ test.describe.serial('DSM Family Enrollment Handling', () => {
     await redCapSurveyCompletedDate.fill(`${currentDate[0]}/${currentDate[1]}/${currentDate[2]}`);//[0] is MM, [1] is DD, [2] is YYYY
     });
 
-    test.skip('Verify that a family member can be added using copied proband info @rgp @functional', async ({ page, request }) => {
+    test('Verify that a family member can be added using copied proband info @rgp @functional', async ({ page, request }) => {
     //Go into DSM
     const navigation = new Navigation(page, request);
 
