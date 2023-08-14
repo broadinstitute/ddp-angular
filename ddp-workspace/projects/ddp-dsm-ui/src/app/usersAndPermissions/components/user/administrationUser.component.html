@@ -16,6 +16,7 @@
                        class="header-text-inputs-editing-name"
                        type="text"
                        [value]="user.name"
+                       (keydown)="onKeyDown($event)"
                        (click)="$event.stopPropagation()"/>
               </p>
               <p>Phone:
@@ -26,6 +27,7 @@
                   class="header-text-inputs-editing-phone"
                   type="text"
                   [value]="user.phone"
+                  (keydown)="onKeyDown($event)"
                   (click)="$event.stopPropagation()"/>
               </p>
             </form>
