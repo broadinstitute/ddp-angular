@@ -1,5 +1,6 @@
 import { expect, Locator, Page } from '@playwright/test';
 import { FamilyMember } from 'dsm/component/tabs/enums/familyMember-enum';
+import { text } from 'stream/consumers';
 
 /**
  * Captures the webelements that can be interacted with for RGP Family Members
@@ -277,7 +278,7 @@ export default class FamilyMemberTab {
         await Promise.all([
             this.page.waitForResponse(response => response.url().includes('/ui/patch') && response.status() === 200),
             textarea.click(),
-            textarea.type(notes, {delay: 100}),
+            textarea.type(notes, {delay: 150}),
             textarea.press('Tab'),
         ]);
     }
