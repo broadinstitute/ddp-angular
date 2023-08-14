@@ -87,4 +87,8 @@ export class FilterColumnComponent implements OnInit {
     this.dataFilter.notEmpty = false;
     this.dataFilter.empty = false;
   }
+
+  hideCheckbox(dataFilter: Filter): boolean {
+    return dataFilter?.participantColumn?.name === 'r21';
+  }
 }

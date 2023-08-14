@@ -22,7 +22,7 @@
     <mat-checkbox color="primary" disableRipple
                [checked]="dataFilter.value1" [(ngModel)]="dataFilter.value1" (change)="changeValue($event, dataFilter)"> Yes
     </mat-checkbox>
-    <mat-checkbox color="primary" disableRipple
+    <mat-checkbox *ngIf="!(hideCheckbox(dataFilter))" color="primary" disableRipple
                 [checked]="dataFilter.value2" [(ngModel)]="dataFilter.value2" (change)="changeValue2($event, dataFilter)"> No
     </mat-checkbox>
   </ng-container>
