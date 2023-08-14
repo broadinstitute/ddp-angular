@@ -177,6 +177,9 @@ export class AdministrationUserComponent implements OnInit, OnDestroy {
   }
 
   /* Template methods */
+  public onKeyDown(event: KeyboardEvent): void {
+    event.stopPropagation();
+  }
 
   public get doNotAllowCollapse(): boolean {
     return this.hasPermissionsChanged || this.disableUserActionButtons;
