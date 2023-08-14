@@ -4,6 +4,7 @@ import { FamilyMember } from 'dsm/component/tabs/enums/familyMember-enum';
 /**
  * Captures the webelements that can be interacted with for RGP Family Members
  * Family Member tabs are usually displayed to the right of the Participant Page -> Survey Data tab
+ * Note: The proband is the person who is the main participant in the study
  */
 export default class FamilyMemberTab {
     private _firstName!: string;

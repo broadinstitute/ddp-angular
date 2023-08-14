@@ -46,3 +46,17 @@ export const saveParticipantGuid = (guid: string) => {
   user.patient.participantGuid = guid;
 };
 
+/**
+ * Takes a short id that is presumed to have the study in it e.g. RGP_1234_56 and
+ * returns the short id without the study name prefix e.g. 1234_56
+ * @param shortId the short id
+ * @param studyName the study name/alias used in the short id e.g. RGP
+ * @returns simplified short id
+ */
+export const simplifyShortID = (shortId: string, studyName: string): string => {
+  const shortIdParts = shortId.split(`${studyName}_`); // Use 'RGP_' to determine where to split
+  const rgpPrefix = shortIdParts[0]; //RGP_ prefix
+  const subjectID = shortIdParts[1]; //The subject id to be used as short id
+  const simplifiedShortID = subjectID;
+  return simplifiedShortID;
+}
