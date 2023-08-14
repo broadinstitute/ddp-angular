@@ -30,7 +30,7 @@
   }, "brother": {
     "firstName": "Test Brother",
     "lastName": "Playwright",
-    "relationshipID": "10"
+    "relationshipID": "14"
   }, 
   "maternalGrandFather": {
     "firstName": "Test Maternal Grandfather",

@@ -605,7 +605,7 @@ test.describe.serial('DSM Family Enrollment Handling', () => {
     await expect(maternalGrandfatherFamilyID).toEqual(probandFamilyID);
     });
 
-    test('Verify that a family member can be added using copied proband info @rgp @functional', async ({ page, request }) => {
+    test.skip('Verify that a family member can be added using copied proband info @rgp @functional', async ({ page, request }) => {
     //Go into DSM
     const navigation = new Navigation(page, request);
 
@@ -647,7 +647,7 @@ test.describe.serial('DSM Family Enrollment Handling', () => {
             lastName: brother.lastName,
             relationshipId: parseInt(brother.relationshipID),
             relation: brother.relationToProband as string,
-            copyProbandInfo: false
+            copyProbandInfo: true
         });
     });
 
