@@ -14,6 +14,11 @@ export class FilterColumnComponent implements OnInit {
   showOptions = false;
   selected: number;
 
+  // Hide a search parameter for the following RGP columns
+  rgpColumnFilter = [
+    { displayName: "Specialty Project: R21", name: "r21", tableAlias: "r" }
+  ];
+
   ngOnInit(): void {
     if (this.dataFilter.singleOption) {
       for (const [ key, value ] of Object.entries(this.dataFilter.selectedOptions)) {
@@ -88,7 +93,13 @@ export class FilterColumnComponent implements OnInit {
     this.dataFilter.empty = false;
   }
 
-  hideCheckbox(dataFilter: Filter): boolean {
-    return dataFilter?.participantColumn?.name === 'r21';
+  // Special case: Remove the search parameter if column is a RGP column exists in rgpColumnFilter array.
+  removeSearchParameterIfRGPColumn(dataFilter: Filter): boolean {
+    const found = this.rgpColumnFilter.find(column => {
+      return dataFilter?.participantColumn?.display === column.displayName 
+        && dataFilter?.participantColumn?.name === column.name
+        && dataFilter?.participantColumn?.tableAlias === column.tableAlias
+    });
+    return !!found;
   }
 }
