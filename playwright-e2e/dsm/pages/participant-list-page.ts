@@ -8,6 +8,7 @@ import Checkbox from 'dss/component/checkbox';
 import { waitForNoSpinner, waitForResponse } from 'utils/test-utils';
 import { Filters } from 'dsm/component/filters/filters';
 import { ParticipantListTable } from 'dsm/component/tables/participant-list-table';
+import { KitTypeEnum } from 'dsm/component/kitType/enums/kitType-enum';
 
 export default class ParticipantListPage {
   private readonly PAGE_TITLE: string = 'Participant List';
@@ -225,6 +226,50 @@ export default class ParticipantListPage {
     const button = this.page.locator('button').filter({has: this.page.locator('[data-icon="quidditch"]')});
     await button.click();
     await waitForNoSpinner(this.page);
+  }
+
+  /**
+   * Function to search for a participant that does not have a specific kit type
+   * @param kitType the kit type being searched for to make sure the participant has no history e.g. they have not had a saliva kit sent or received
+   * @returns the short id of the matched participant
+   */
+  async findParticipantWithoutKitType(kitType: KitTypeEnum): Promise<string> {
+    const participantListTable = this.participantListTable;
+
+    //First filter for enrolled participants
+    const searchPanel = this.filters.searchPanel;
+    await searchPanel.open();
+    await searchPanel.checkboxes('Status', { checkboxValues: ['Enrolled'] });
+    await searchPanel.search();
+    expect(await participantListTable.rowsCount).toBeGreaterThanOrEqual(1);
+
+    //Make sure the following columns are selected - not all studies might have the following columns selected as part of their default filter:
+    //Participant Columns -> Short ID (usually selected in the default filter)
+    //Sample Columns -> Sample Type, Status
+    const customizeViewPanel = this.filters.customizeViewPanel;
+    await customizeViewPanel.open();
+
+    //Note: Not all studies have a Sample Columns group
+    expect(await customizeViewPanel.columnGroupIsDisplayed('Sample Columns'), 'ERROR: Sample Columns group is not displayed').toBe(true);
+
+    await customizeViewPanel.deselectColumns('Participant Columns', ['Status']); //To reduce confusion when Sample Columns -> Status is added and filtered
+    await customizeViewPanel.selectColumns('Sample Columns', ['Sample Type', 'Status']);
+
+    await searchPanel.open();
+    await searchPanel.checkboxes('Sample Type', { checkboxValues: ['SALIVA'] });
+    await searchPanel.radioButton('Status', { radioButtonValue: 'Waiting on GP' });
+    await searchPanel.search();
+
+    const kitSampleTypeColumn = 'Sample Type';
+    const kitSampleStatusColumn = 'Status';
+    const participantListRows = await participantListTable.rowsCount;
+
+    for (let count = 0; count < participantListRows; count++) {
+      const participantSampleStatus: string[] = (await participantListTable.getParticipantDataAt(count, kitSampleStatusColumn)).split('/n');
+      console.log(`Participant Sample Status info: ${participantSampleStatus.length} \n`);
+    }
+
+    return 'some promise string';
   }
 
   async findParticipantForKitUpload(): Promise<number> {
