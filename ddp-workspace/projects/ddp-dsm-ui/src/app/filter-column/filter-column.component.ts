@@ -16,7 +16,7 @@ export class FilterColumnComponent implements OnInit {
 
   // Hide a search parameter for the following RGP columns
   rgpHideSearchParamColumns = [
-    { displayName: "Specialty Project: R21", name: "r21", tableAlias: "r" }
+    { displayName: 'Specialty Project: R21', name: 'r21', tableAlias: 'r' }
   ];
 
   ngOnInit(): void {
@@ -99,11 +99,9 @@ export class FilterColumnComponent implements OnInit {
    * @returns Return true if dataFilter column is not found in hardcoded rgpHideSearchParamColumns array.
    */
   showSearchParameter(dataFilter: Filter): boolean {
-    const found = this.rgpHideSearchParamColumns.findIndex(column => {
-      return dataFilter?.participantColumn?.display === column.displayName 
+    const found = this.rgpHideSearchParamColumns.findIndex(column => dataFilter?.participantColumn?.display === column.displayName
         && dataFilter?.participantColumn?.name === column.name
-        && dataFilter?.participantColumn?.tableAlias === column.tableAlias
-    });
+        && dataFilter?.participantColumn?.tableAlias === column.tableAlias);
     return found === -1;
   }
 }

@@ -86,6 +86,10 @@ export class OncHistoryDetailComponent implements OnInit {
       }
     }
     if (v != null) {
+      let ddpParticipantId = this.participant.data.profile['guid'];
+      if (this.participant.data.profile['legacyAltPid']) {
+        ddpParticipantId = this.participant.data.profile['legacyAltPid'];
+      }
       const realm: string = sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM);
       const patch1 = new PatchUtil(
         this.oncHistory[index].oncHistoryDetailId, this.role.userMail(),
@@ -93,7 +97,7 @@ export class OncHistoryDetailComponent implements OnInit {
           name: parameterName,
           value: v
         }, null, 'participantId', this.participant.participant.participantId,
-        Statics.ONCDETAIL_ALIAS, null, realm, this.participant.data.profile['guid']
+        Statics.ONCDETAIL_ALIAS, null, realm, ddpParticipantId
       );
       const patch = patch1.getPatch();
       this.patchFinished = false;
