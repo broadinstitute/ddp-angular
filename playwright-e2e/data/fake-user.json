@@ -27,6 +27,10 @@
     "zip": "02142-1027",
     "phone": "6177147000",
     "secondaryPhoneNumber": "6171234000"
+  }, "brother": {
+    "firstName": "Test Brother",
+    "lastName": "Playwright",
+    "relationshipID": "14"
   }, 
   "maternalGrandFather": {
     "firstName": "Test Maternal Grandfather",

@@ -14,6 +14,11 @@ export class FilterColumnComponent implements OnInit {
   showOptions = false;
   selected: number;
 
+  // Hide a search parameter for the following RGP columns
+  rgpHideSearchParamColumns = [
+    { displayName: "Specialty Project: R21", name: "r21", tableAlias: "r" }
+  ];
+
   ngOnInit(): void {
     if (this.dataFilter.singleOption) {
       for (const [ key, value ] of Object.entries(this.dataFilter.selectedOptions)) {
@@ -86,5 +91,19 @@ export class FilterColumnComponent implements OnInit {
   inputValueChanged(): void {
     this.dataFilter.notEmpty = false;
     this.dataFilter.empty = false;
+  }
+
+  /**
+   * Show or hide (remove) a search parameter.
+   * @param dataFilter
+   * @returns Return true if dataFilter column is not found in hardcoded rgpHideSearchParamColumns array.
+   */
+  showSearchParameter(dataFilter: Filter): boolean {
+    const found = this.rgpHideSearchParamColumns.findIndex(column => {
+      return dataFilter?.participantColumn?.display === column.displayName 
+        && dataFilter?.participantColumn?.name === column.name
+        && dataFilter?.participantColumn?.tableAlias === column.tableAlias
+    });
+    return found === -1;
   }
 }
