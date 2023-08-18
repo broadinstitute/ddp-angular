@@ -39,14 +39,6 @@ export class LoggingService {
         return this.config.logLevel <= level;
     }
 
-    private stringify(obj: object): string {
-        try {
-            return JSON.stringify(obj);
-        } catch (e) {
-            return obj.toString();
-        }
-    }
-
     public logToCloud(payload: string, labels?: {[key: string]: string}, severity = 'INFO'): Observable<void> {
         if (!this.config.doCloudLogging || !this.config.cloudLoggingUrl) {
             return of(void 0);
@@ -60,9 +52,6 @@ export class LoggingService {
             labels: { userGuid: session?.userGuid, isTemporarySession: String(this.session.isTemporarySession()), ...labels },
             httpRequest: { requestUrl: location.href, userAgent: navigator.userAgent }
         };
-
-        console.log(JSON.stringify(body, null, 2));
-        console.log("***");
         
         if (this.session.isSessionExpired()) {
             this.logEvent(`${this.LOG_SOURCE}.logToCloud Session is expired`);
