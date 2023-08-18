@@ -1,4 +1,5 @@
 import { Injectable, Inject, ErrorHandler } from '@angular/core';
+import { throwError } from 'rxjs';
 import { ConfigurationService } from './configuration.service';
 import { SessionMementoService } from './sessionMemento.service';
 import StackdriverErrorReporter from 'stackdriver-errors-js';
@@ -30,11 +31,15 @@ export class StackdriverErrorReporterService extends ErrorHandler {
   }
 
   public handleError(error: Error | string): void {
-    if (this.config.doGcpErrorReporting) {
-      this.errorHandler.report(error);
-    }
-    // Pass the error to the original handleError otherwise it gets swallowed in the browser console
     super.handleError(error);
+    if (this.config.doGcpErrorReporting) {
+      try {
+        this.errorHandler.report(error);
+      } catch (err) {
+        console.error.apply(window.console, err);
+        throwError(() => err);
+      }
+    }    
   }
 
   private checkReportingParams(key: string, projectId: string): void {

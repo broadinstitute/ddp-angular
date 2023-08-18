@@ -195,7 +195,7 @@ export class ServiceAgent<TEntity> {
                         withCredentials: x.withCredentials
                     }).pipe(
                         catchError((error: any) => {
-                            this.logger.logError(this.LOG_SOURCE, `HTTP DELETE: ${url}. Error:`, error);
+                            this.logger.logError(this.LOG_SOURCE, `HTTP DELETE: ${url}`, error);
                             if (throwErrorObject) {
                                 return throwError(() => error);
                             } else {

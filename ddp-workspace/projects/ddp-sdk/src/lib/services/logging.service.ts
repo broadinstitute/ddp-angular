@@ -22,12 +22,10 @@ export class LoggingService {
 
     public logError: Logger = this.showEvent(LogLevel.Error) ?
         (...args) => {
-            const stringifiedArgs = args.map(item => (
-                 (typeof item === 'object') ? this.stringify(item) : item
-            ));
-
-            this.stackdriverErrorReporterService.handleError(stringifiedArgs.join(', '));
-            console.error.apply(window.console, stringifiedArgs);
+            args.forEach(arg => { 
+                console.error.apply(window.console, arg);
+                this.stackdriverErrorReporterService.handleError(arg); 
+            });
         }
       : () => { };
 
@@ -42,7 +40,11 @@ export class LoggingService {
     }
 
     private stringify(obj: object): string {
-        return Object.keys(obj).map(key => `${key}: ${obj[key]}`).join(', ');
+        try {
+            return JSON.stringify(obj);
+        } catch (e) {
+            return obj.toString();
+        }
     }
 
     public logToCloud(payload: string, labels?: {[key: string]: string}, severity = 'INFO'): Observable<void> {
@@ -59,12 +61,19 @@ export class LoggingService {
             httpRequest: { requestUrl: location.href, userAgent: navigator.userAgent }
         };
 
+        console.log(JSON.stringify(body, null, 2));
+        console.log("***");
+        
+        if (this.session.isSessionExpired()) {
+            this.logEvent(`${this.LOG_SOURCE}.logToCloud Session is expired`);
+        }
+
         return this.http.post(
             url,
             body,
             { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) }).pipe(
             catchError((error: any) => {
-                this.logError(this.LOG_SOURCE, `HTTP POST: ${url}. Error:`, error);
+                this.logError(this.LOG_SOURCE, `HTTP POST: ${url}`, error);
                 return of(null);
             }),
             map(() => void 0)
