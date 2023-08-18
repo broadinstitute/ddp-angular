@@ -130,12 +130,12 @@ export class Auth0AdapterService implements OnDestroy {
             sessionStorage.setItem('localAdminAuth', 'false');
             sessionStorage.setItem('localAuthParams', JSON.stringify(auth0Params));
         }
-        // This Auth0 call gives a warning starts with "Following parameters are not allowed on the `/authorize` endpoint: " 
+        // This Auth0 call gives a warning starts with "Following parameters are not allowed on the `/authorize` endpoint: "
         // because custom params are not found in Auth0 parameters-whitelist.js
         try {
             this.webAuth.authorize(auth0Params);
         } catch (error) {
-            this.log.logToCloud(`${this.LOG_SOURCE}.showAuth0Modal`, error);   
+            this.log.logToCloud(`${this.LOG_SOURCE}.showAuth0Modal`, error);
         }
     }
 
@@ -304,7 +304,7 @@ export class Auth0AdapterService implements OnDestroy {
                     clientID: this.configuration.auth0ClientId
                 });
             }
-        }); 
+        });
         this.log.logEvent(this.LOG_SOURCE, `Successfully logged out user ${userGuid}`);
     }
 

@@ -39,7 +39,7 @@ export class StackdriverErrorReporterService extends ErrorHandler {
         console.error.apply(window.console, err);
         throwError(() => err);
       }
-    }    
+    }
   }
 
   private checkReportingParams(key: string, projectId: string): void {

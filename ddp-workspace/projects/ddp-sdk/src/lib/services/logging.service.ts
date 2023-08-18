@@ -22,9 +22,9 @@ export class LoggingService {
 
     public logError: Logger = this.showEvent(LogLevel.Error) ?
         (...args) => {
-            args.forEach(arg => { 
+            args.forEach(arg => {
                 console.error.apply(window.console, arg);
-                this.stackdriverErrorReporterService.handleError(arg); 
+                this.stackdriverErrorReporterService.handleError(arg);
             });
         }
       : () => { };
@@ -52,7 +52,11 @@ export class LoggingService {
             labels: { userGuid: session?.userGuid, isTemporarySession: String(this.session.isTemporarySession()), ...labels },
             httpRequest: { requestUrl: location.href, userAgent: navigator.userAgent }
         };
-        
+
+        console.log(`${this.LOG_SOURCE}.logToCloud URL: ${url}`);
+        console.log(JSON.stringify(body, null, 2));
+        console.log('***');
+
         if (this.session.isSessionExpired()) {
             this.logEvent(`${this.LOG_SOURCE}.logToCloud Session is expired`);
         }
