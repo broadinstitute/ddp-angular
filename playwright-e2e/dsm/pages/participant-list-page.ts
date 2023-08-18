@@ -9,6 +9,7 @@ import { waitForNoSpinner, waitForResponse } from 'utils/test-utils';
 import { Filters } from 'dsm/component/filters/filters';
 import { ParticipantListTable } from 'dsm/component/tables/participant-list-table';
 import { KitTypeEnum } from 'dsm/component/kitType/enums/kitType-enum';
+import { KitStatus } from 'dsm/component/filters/sections/search/search-enums';
 
 export default class ParticipantListPage {
   private readonly PAGE_TITLE: string = 'Participant List';
@@ -255,20 +256,7 @@ export default class ParticipantListPage {
     await customizeViewPanel.deselectColumns('Participant Columns', ['Status']); //To reduce confusion when Sample Columns -> Status is added and filtered
     await customizeViewPanel.selectColumns('Sample Columns', ['Sample Type', 'Status']);
 
-    await searchPanel.open();
-    await searchPanel.checkboxes('Sample Type', { checkboxValues: ['SALIVA'] });
-    await searchPanel.radioButton('Status', { radioButtonValue: 'Waiting on GP' });
-    await searchPanel.search();
-
-    const kitSampleTypeColumn = 'Sample Type';
-    const kitSampleStatusColumn = 'Status';
-    const participantListRows = await participantListTable.rowsCount;
-
-    for (let count = 0; count < participantListRows; count++) {
-      const participantSampleStatus: string[] = (await participantListTable.getParticipantDataAt(count, kitSampleStatusColumn)).split('/n');
-      console.log(`Participant Sample Status info: ${participantSampleStatus.length} \n`);
-    }
-
+    await searchPanel.searchForKitSampleStatus([KitTypeEnum.SALIVA], KitStatus.WAITING_ON_GP);
     return 'some promise string';
   }
 

@@ -1,8 +1,9 @@
 import { expect, Locator, Page } from '@playwright/test';
 import DatePicker from 'dsm/component/date-picker';
 import { CheckboxConfig, DateConfig, RadioButtonConfig, TextConfig } from 'dsm/component/filters/sections/search/search-types';
-import { AdditionalFilter } from 'dsm/component/filters/sections/search/search-enums';
+import { AdditionalFilter, EnrollmentStatus, KitStatus, SampleColumns } from 'dsm/component/filters/sections/search/search-enums';
 import { waitForNoSpinner, waitForResponse } from 'utils/test-utils';
+import { KitTypeEnum } from 'dsm/component/kitType/enums/kitType-enum';
 
 export class Search {
   private readonly enUSDateRegExp = new RegExp(/\b(0[1-9]|1[012])([/])(0[1-9]|[12]\d|3[01])\2(\d{4})/);
@@ -151,6 +152,21 @@ export class Search {
   private async isDisabled(locator: Locator | undefined): Promise<boolean> {
     const isDisabled = (await locator?.getAttribute('class'))?.includes('mat-checkbox-disabled');
     return isDisabled || false;
+  }
+
+  public async searchForParticipantsWithEnrollmentStatus(enrollmentStatuses: EnrollmentStatus[]): Promise<void> {
+    await this.open();
+    const amountOfStatusesToSelect = enrollmentStatuses.length;
+    for (let statusIndex = 0; statusIndex < amountOfStatusesToSelect; statusIndex++) {
+      
+    }
+  }
+
+  public async searchForKitSampleStatus(kitTypes: KitTypeEnum[], kitStatus: KitStatus): Promise<void> {
+    await this.open();
+    await this.checkboxes(SampleColumns.SAMPLE_TYPE, { checkboxValues: kitTypes });
+    await this.radioButton(SampleColumns.STATUS, { radioButtonValue: kitStatus });
+    await this.search();
   }
 
   /* Locators */
