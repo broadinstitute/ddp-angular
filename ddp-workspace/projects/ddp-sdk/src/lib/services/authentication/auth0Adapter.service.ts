@@ -130,9 +130,16 @@ export class Auth0AdapterService implements OnDestroy {
             sessionStorage.setItem('localAdminAuth', 'false');
             sessionStorage.setItem('localAuthParams', JSON.stringify(auth0Params));
         }
+        // This call gives a Auth0 warning "Following parameters are not allowed on the `/authorize` endpoint: " 
+        // because custom params are not in Auth0 parameters-whitelist.js
         this.webAuth.authorize(
             auth0Params,
-            () => this.log.logError(`${this.LOG_SOURCE}.showAuth0Modal`, 'auth0 error'));
+            (error, result) => {
+                this.log.logEvent(`${this.LOG_SOURCE}.showAuth0Modal result: ${result}`);
+                if (error) {
+                    this.log.logError(`${this.LOG_SOURCE}.showAuth0Modal`, error);
+                }
+            })
     }
 
     /**
@@ -191,9 +198,6 @@ export class Auth0AdapterService implements OnDestroy {
             if (authResult && authResult.accessToken && authResult.idToken) {
                 this.windowRef.nativeWindow.location.hash = '';
                 this.setSession(authResult);
-                this.log.logEvent(`${this.LOG_SOURCE}.handleAuthentication succeeded`);
-                this.log.logToCloud(`${this.LOG_SOURCE}.handleAuthentication, authResult: ${JSON.stringify(authResult)}`)
-                    .pipe(take(1)).subscribe();
                 this.analytics.emitCustomEvent(AnalyticsEventCategories.Authentication, AnalyticsEventActions.Login);
             } else if (err) {
                 this.log.logError(`${this.LOG_SOURCE}.handleAuthentication`, err);
@@ -256,7 +260,7 @@ export class Auth0AdapterService implements OnDestroy {
         if (!userGuid) {
             this.log.logError(this.LOG_SOURCE, `No user guid found in jwt: ${JSON.stringify(decodedJwt)}`);
         } else {
-            this.log.logEvent(this.LOG_SOURCE, `Logged in user: ${userGuid}`);
+            this.log.logEvent(this.LOG_SOURCE, `Logged in user ${userGuid}`);
             this.log.logToCloud(`${this.LOG_SOURCE} Logged in user ${userGuid}`, { userGuid }).pipe(take(1)).subscribe();
         }
         let locale = decodedJwt['locale'];
@@ -273,17 +277,18 @@ export class Auth0AdapterService implements OnDestroy {
             authResult.participantGuid,
             isAdmin);
         this.isAdminSession = isAdmin;
-        this.log.logEvent(this.LOG_SOURCE, `Successfully updated session token`);
-        this.log.logToCloud(`${this.LOG_SOURCE} Successfully updated session token: ${JSON.stringify(decodedJwt)}`)
+        this.log.logEvent(this.LOG_SOURCE, `Successfully updated session token for user ${userGuid}`);
+        this.log.logToCloud(`${this.LOG_SOURCE} Successfully updated session token for user ${userGuid}`)
             .pipe(take(1)).subscribe();
     }
 
     public logout(returnToUrl: string = ''): void {
         const baseUrl = this.configuration.baseUrl;
-        this.log.logToCloud(`${this.LOG_SOURCE} logout for user`).pipe(take(1)).subscribe(() => {
+        const userGuid = this.session.session.userGuid;
+        this.log.logToCloud(`${this.LOG_SOURCE} logged out user ${userGuid}`).pipe(take(1)).subscribe(() => {
             // Remove tokens and expiry time from localStorage
             this.session.clear();
-            this.log.logEvent(this.LOG_SOURCE, 'logout');
+            this.log.logEvent(this.LOG_SOURCE, `logged out user ${userGuid}`);
             this.analytics.emitCustomEvent(AnalyticsEventCategories.Authentication, AnalyticsEventActions.Logout);
 
             let returnTo = `${baseUrl}${baseUrl.endsWith('/') ? '' : '/'}${returnToUrl}`;

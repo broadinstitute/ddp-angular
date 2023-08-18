@@ -26,7 +26,7 @@ export class LoggingService {
                  (typeof item === 'object') ? this.stringify(item) : item
             ));
 
-            this.stackdriverErrorReporterService.handleError(stringifiedArgs.join(', '));
+            this.stackdriverErrorReporterService.handleError(new Error(stringifiedArgs.join(', ')));
             console.error.apply(window.console, stringifiedArgs);
         }
       : () => { };
@@ -42,13 +42,22 @@ export class LoggingService {
     }
 
     private stringify(obj: object): string {
-        return Object.keys(obj).map(key => `${key}: ${obj[key]}`).join(', ');
+        try {
+            return JSON.stringify(obj);
+        } catch (e) {
+            return obj.toString();
+        }
     }
 
     public logToCloud(payload: string, labels?: {[key: string]: string}, severity = 'INFO'): Observable<void> {
         if (!this.config.doCloudLogging || !this.config.cloudLoggingUrl) {
             return of(void 0);
         }
+
+        if (this.session.isSessionExpired()) {
+            console.log(`\n*** session expired ***\n`);
+        }
+
         const session =  this.session.session;
         const url = this.config.cloudLoggingUrl;
         const body = {
@@ -59,15 +68,26 @@ export class LoggingService {
             httpRequest: { requestUrl: location.href, userAgent: navigator.userAgent }
         };
 
+        const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+
+        console.log(`\n`)
+        console.log(`http: ${this.http}`)
+        console.log(`session: ${JSON.stringify(session, null, 2)}`)
+        console.log(`logToCloud url: ${url}`)
+        console.log(`logToCloud body: ${JSON.stringify(body, null, 2)}`)
+        console.log(`logToCloud severity: ${severity}`)
+        console.log(`\n`)
+        
         return this.http.post(
             url,
             body,
-            { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) }).pipe(
-            catchError((error: any) => {
-                this.logError(this.LOG_SOURCE, `HTTP POST: ${url}. Error:`, error);
-                return of(null);
-            }),
-            map(() => void 0)
+            {headers})
+            .pipe(
+                catchError((error: any) => {
+                    this.logError(this.LOG_SOURCE, `HTTP POST: ${url}`, error);
+                    return of(null);
+                }),
+                map(() => void 0)
         );
     }
 }
