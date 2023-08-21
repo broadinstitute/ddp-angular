@@ -11,12 +11,14 @@ export class NGXTranslateService {
     public getTranslation(words: Array<string>, interpolateParams?: object): Observable<object>;
 
     public getTranslation(word: string | Array<string>, interpolateParams?: object): Observable<object | string> {
-        return merge(
-            of(null),
-            this.translate.onLangChange,
-            this.translate.onDefaultLangChange).pipe(
+        return this.translate ?
+            merge(
+                of(null),
+                this.translate.onLangChange,
+                this.translate.onDefaultLangChange).pipe(
                 mergeMap(() => this.translate.get(word, interpolateParams))
-        );
+            ) :
+            of('Translate service has not been initialized');
     }
 
     public getTranslationObject<T>(transKey: string): Observable<T> {
