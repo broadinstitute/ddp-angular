@@ -1,21 +1,21 @@
 import { Component, OnInit, Inject, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { forkJoin, Observable, of } from 'rxjs';
-import { map, take, switchMap, tap, skipWhile, mergeMap, filter } from 'rxjs/operators';
+import {forkJoin, mergeMap, Observable, of} from 'rxjs';
+import { map, take, switchMap, tap } from 'rxjs/operators';
 
 import {
-  SessionMementoService,
-  ConfigurationService,
-  GovernedParticipantsServiceAgent,
-  UserProfile,
-  ActivityInstance,
-  UserActivityServiceAgent,
-  UserManagementServiceAgent,
-  WorkflowServiceAgent,
-  LanguageService,
-  CompositeDisposable,
-  UserStatusServiceAgent,
-  ParticipantProfileServiceAgent
+    SessionMementoService,
+    ConfigurationService,
+    GovernedParticipantsServiceAgent,
+    UserProfile,
+    ActivityInstance,
+    UserActivityServiceAgent,
+    UserManagementServiceAgent,
+    WorkflowServiceAgent,
+    LanguageService,
+    CompositeDisposable,
+    UserStatusServiceAgent,
+    UserProfileServiceAgent, UserProfileDecorator
 } from 'ddp-sdk';
 
 import { ActivityService } from '../../services/activity.service';
@@ -23,6 +23,7 @@ import { RegistrationStatusService } from '../../services/registrationStatus.ser
 import * as RouterResources from '../../router-resources';
 import { ActivityCodes } from '../../sdk/constants/activityCodes';
 import { WorkflowModel } from '../../models/workflow.model';
+import {AddParticipantPayload} from '../../../../../ddp-sdk/src/lib/models/addParticipantPayload';
 
 export interface Participant {
   guid: string;
@@ -55,7 +56,7 @@ export class ParticipantListComponent implements OnInit, OnDestroy {
     private readonly userStatusService: UserStatusServiceAgent,
     private readonly registrationStatusService: RegistrationStatusService,
     @Inject('ddp.config') private readonly config: ConfigurationService,
-    private participantProfileService: ParticipantProfileServiceAgent
+    private readonly userProfileServiceAgent: UserProfileServiceAgent,
   ) {}
 
   ngOnInit(): void {
@@ -79,24 +80,32 @@ export class ParticipantListComponent implements OnInit, OnDestroy {
 
   onAddParticipantClick(): void {
     this.disableAddParticipantsButton = true;
+      const payload: AddParticipantPayload = {
+          timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+      };
 
-    this.governedParticipantsAgent
-      .addParticipant(this.config.studyGuid)
-      .pipe(
-        take(1),
-        tap(participantGuid => this.session.setParticipant(participantGuid)),
-        switchMap(() => this.workflowAgent.fromParticipantList()),
-      )
-      .subscribe({
-        next: () => {
-          this.disableAddParticipantsButton = false;
-          this.activityService.setCurrentActivity(null);
-          this.router.navigateByUrl(RouterResources.Survey);
-        },
-        error: () => {
-          this.disableAddParticipantsButton = false;
-        }
-      });
+    const addParticipantObs = this.userProfileServiceAgent.profile
+        .pipe(
+            mergeMap(({profile: {preferredLanguage}}: UserProfileDecorator) =>
+                this.governedParticipantsAgent
+                    .addParticipant(this.config.studyGuid, {...payload, languageCode: preferredLanguage})
+            ),
+            take(1),
+            tap(participantGuid => this.session.setParticipant(participantGuid)),
+            switchMap(() => this.workflowAgent.fromParticipantList())
+        )
+        .subscribe({
+            next: () => {
+                this.disableAddParticipantsButton = false;
+                this.activityService.setCurrentActivity(null);
+                this.router.navigateByUrl(RouterResources.Survey);
+            },
+            error: () => {
+                this.disableAddParticipantsButton = false;
+            }
+        });
+
+      this.anchor.addNew(addParticipantObs);
   }
 
   private getParticipants(): void {
