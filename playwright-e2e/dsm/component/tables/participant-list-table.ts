@@ -114,9 +114,13 @@ export class ParticipantListTable extends Table {
     return this.page.locator(`//table/tbody/tr`).nth(position);
   }
 
+  /**
+   * Returns the number of the last page of the participant list
+   * @returns The number of the last page button e.g. if there are 3 pages, this method returns: 3
+   */
   public async getLastPageNumber(): Promise<number> {
     const lastPageButton = this.lastPage;
-    const pageButtonContents = (await lastPageButton.innerText()).split(`You're on page`);
+    const pageButtonContents = (await lastPageButton.innerText()).split('page');
     const pageNumber = pageButtonContents[1].trim();
     return parseInt(pageNumber);
   }
@@ -129,8 +133,6 @@ export class ParticipantListTable extends Table {
   }
 
   public async onLastPage(): Promise<boolean> {
-    console.log(`Current Page #: ${await this.getCurrentPageNumber()}`);
-    console.log(`Last Page #: ${await this.getLastPageNumber()}`);
     if (await this.getCurrentPageNumber() === await this.getLastPageNumber()) {
       return true;
     }
