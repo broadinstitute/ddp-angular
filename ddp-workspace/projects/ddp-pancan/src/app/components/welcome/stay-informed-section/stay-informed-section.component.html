@@ -17,6 +17,7 @@
         <a class="social-media__link"
            [href]="'App.social.instagram' | translate"
            target="_blank"
+           *ngIf="!isPediHCC"
            (click)="sendSocialMediaAnalytics('instagram')">
             <img class="social-media__logo" lazy-resource src="assets/images/instagram.png"
                  [alt]="'Common.Alts.Instagram' | translate">

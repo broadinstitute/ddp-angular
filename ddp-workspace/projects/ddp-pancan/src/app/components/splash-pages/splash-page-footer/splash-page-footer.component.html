@@ -6,7 +6,7 @@
             <mat-icon>arrow_drop_up</mat-icon>
             {{'App.Footer.BackToTopButton' | translate}}
         </button>
-        <p class="text" [innerHTML]="text | translate"></p>
+        <p *ngIf="text" class="text" [innerHTML]="text | translate"></p>
     </div>
 
     <div class="contacts">

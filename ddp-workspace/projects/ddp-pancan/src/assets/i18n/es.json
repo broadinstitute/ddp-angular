@@ -249,6 +249,7 @@
                 "Collapse": "Contraer todo",
                 "MoreFAQs": "Más preguntas frecuentes"
             },
+            "Info": "For information on how to become a partner, contact the team at <a class='Link' href='https://info@joincountmein.org.'>info@joincountmein.org</a>.",
             "Questions": [
                 {
                     "Question": "¿Qué es Count Me In?",
@@ -488,7 +489,7 @@
         "Footer": {
             "BackToTopButton": "Volver Arriba",
             "Contacts": "Contáctenos",
-            "Copyright": "Copyright © 2021 Count Me In. Todos los derechos reservados.",
+            "Copyright": "Todos los derechos reservados.",
             "Email": "Correo electrónico",
             "Phone": "Teléfono",
             "PrivacyPolicy": "Política de privacidad"

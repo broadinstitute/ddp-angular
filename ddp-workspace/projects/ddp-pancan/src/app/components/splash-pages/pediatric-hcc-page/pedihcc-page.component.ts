@@ -4,8 +4,8 @@ import { ToolkitConfigurationService } from 'toolkit';
 
 @Component({
     selector: 'app-pedihcc-page',
-    templateUrl: './pedihcc-page.component.html',
-    styleUrls: ['./pedihcc-page.component.scss'],
+    templateUrl: 'pedihcc-page.component.html',
+    styleUrls: ['pedihcc-page.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PediHCCPageComponent {

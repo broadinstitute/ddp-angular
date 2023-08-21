@@ -14,4 +14,8 @@ export class FooterComponent extends BaseFooterComponent {
     constructor(private _windowRef: WindowRef) {
         super(_windowRef);
     }
+
+    public get currentYear(): number {
+        return new Date().getFullYear();
+    }
 }
