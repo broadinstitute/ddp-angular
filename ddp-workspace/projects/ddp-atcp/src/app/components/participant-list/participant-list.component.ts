@@ -23,7 +23,7 @@ import { RegistrationStatusService } from '../../services/registrationStatus.ser
 import * as RouterResources from '../../router-resources';
 import { ActivityCodes } from '../../sdk/constants/activityCodes';
 import { WorkflowModel } from '../../models/workflow.model';
-import {AddParticipantPayload} from "../../../../../ddp-sdk/src/lib/models/addParticipantPayload";
+import {AddParticipantPayload} from '../../../../../ddp-sdk/src/lib/models/addParticipantPayload';
 
 export interface Participant {
   guid: string;
