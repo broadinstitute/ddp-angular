@@ -13,6 +13,7 @@ import { AnalyticsEventCategories, AnalyticsEventsService } from 'ddp-sdk';
 })
 export class StayInformedSectionComponent {
     @Input() isColorectal: boolean;
+    @Input() isPediHCC: boolean;
     readonly AppRoutes = AppRoutes;
     readonly twitterUrl: string;
     readonly facebookUrl: string;

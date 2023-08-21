@@ -2,8 +2,8 @@
     <section class="introduction">
         <div class="flex">
             <div class="description">
-                <h2 class="title static-page-title" translate>App.PediHccPage.IntroductionSection.Title</h2>
-                <p class="text static-page-paragraph-text" translate>App.PediHccPage.IntroductionSection.Text</p>
+                <h2 class="title static-page-title" translate>App.PedihccPage.IntroductionSection.Title</h2>
+                <p class="text static-page-paragraph-text" translate>App.PedihccPage.IntroductionSection.Text</p>
                 <a mat-flat-button
                    [routerLink]="'/' + AppRoutes.CountMeIn"
                    queryParamsHandling="merge"
@@ -27,8 +27,8 @@
     </section>
 
     <section class="learn-more">
-        <h2 class="title static-page-title" translate>App.ColorectalPage.LearnMoreSection.Title</h2>
-        <ng-container *ngFor="let item of 'App.ColorectalPage.LearnMoreSection.Paragraphs' | translate">
+        <h2 class="title static-page-title" translate>App.PedihccPage.LearnMoreSection.Title</h2>
+        <ng-container *ngFor="let item of 'App.PedihccPage.LearnMoreSection.Paragraphs' | translate">
             <p class="text static-page-paragraph-text" [innerHTML]="item"></p>
         </ng-container>
 
@@ -47,7 +47,7 @@
     <section class="faq">
         <h2 class="title static-page-title" translate>App.FAQ.Title</h2>
         <div class="container">
-            <app-faq-section questions="App.ColorectalPage.FAQ.Questions" [isColorectal]="true"></app-faq-section>
+            <app-faq-section questions="App.PedihccPage.FAQ.Questions" [isColorectal]="true"></app-faq-section>
         </div>
 
         <a mat-stroked-button
@@ -55,70 +55,20 @@
            queryParamsHandling="merge"
            class="btn more-faq-btn center small-letter-spacing button button_small button_secondary">
             {{'App.FAQ.Button.MoreFAQs' | translate}}
+            <mat-icon>chevron_right</mat-icon>
         </a>
-    </section>
 
-    <section class="partners">
-        <h2 class="title static-page-title" translate>App.ColorectalPage.Partners.Title</h2>
-        <div class="logos">
-            <a href="https://ccran.org/" target="_blank">
-                <img lazy-resource src="assets/images/CCRAN_logo.png"
-                     [alt]="'App.ColorectalPage.Partners.Alts.CCResource' | translate"
-                     width="309" height="188">
-            </a>
-            <a href="https://www.theraymondfoundation.org/" target="_blank">
-                <img lazy-resource src="assets/images/Raymond_logo.png"
-                     [alt]="'App.ColorectalPage.Partners.Alts.Raymond' | translate"
-                     width="460" height="104">
-            </a>
-            <a href="https://www.gicancersalliance.org/" target="_blank">
-                <img lazy-resource src="assets/images/GICA_logo.png"
-                     [alt]="'App.ColorectalPage.Partners.Alts.GICAlliance' | translate"
-                     width="320" height="214">
-            </a>
-            <a href="https://www.colorectalcancercanada.com/" target="_blank">
-                <img lazy-resource src="assets/images/CCC_logo.png"
-                     [alt]="'App.ColorectalPage.Partners.Alts.CCCanada' | translate"
-                     width="503" height="95">
-            </a>
-            <a href="https://fightcolorectalcancer.org/" target="_blank">
-                <img lazy-resource src="assets/images/FightCC_logo.png"
-                     [alt]="'App.ColorectalPage.Partners.Alts.FightCC' | translate"
-                     width="333" height="125">
-            </a>
-            <a href="https://www.colonstars.org/" target="_blank">
-                <img lazy-resource src="assets/images/Colon_Cancer_Stars_logo.jpg"
-                     [alt]="'App.ColorectalPage.Partners.Alts.ColonCancerStars' | translate" width="330px">
-            </a>
-            <a href="https://www.globalcca.org/" target="_blank">
-                <img lazy-resource src="assets/images/GCCA_logo.png"
-                     [alt]="'App.ColorectalPage.Partners.Alts.GCCA' | translate" width="330px">
-            </a>
-            <a href="https://www.ccalliance.org/" target="_blank">
-                <img lazy-resource src="assets/images/Hi-Res_logo.png"
-                     [alt]="'App.ColorectalPage.Partners.Alts.CCAlliance' | translate" width="400px">
-            </a>
-            <a href="https://coloncancercoalition.org/" target="_blank">
-                <img lazy-resource src="assets/images/Colon_Cancer_Coalition_logo.png"
-                     [alt]="'App.ColorectalPage.Partners.Alts.ColonCancerCoalition' | translate" width="330px">
-            </a>
-        </div>
-        <p class="text static-page-paragraph-text" [innerHTML]="'App.ColorectalPage.Partners.Text' | translate"></p>
+        <p [innerHTML]="'App.FAQ.Info' | translate"></p>
     </section>
 
     <section class="stay-informed">
-        <app-stay-informed-section [isColorectal]="true"></app-stay-informed-section>
+        <app-stay-informed-section [isPediHCC]="true"></app-stay-informed-section>
     </section>
 
     <section class="join-cmi">
         <app-join-cmi-section
-            title="App.ColorectalPage.CountMeInSection.Title"
+            title="App.PedihccPage.CountMeInSection.Title"
             [isColorectalTheme]="true">
         </app-join-cmi-section>
     </section>
 </main>
-<app-splash-page-footer
-    text='App.ColorectalPage.Footer.Text'
-    [phone]="phone"
-    [email]="email">
-</app-splash-page-footer>
