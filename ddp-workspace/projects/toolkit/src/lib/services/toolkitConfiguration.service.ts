@@ -65,6 +65,8 @@ export class ToolkitConfigurationService {
     dataEmail: string;
     colorectalPagePhone: string;
     colorectalPageEmail: string;
+    pediHCCPagePhone: string;
+    pediHCCPageEmail: string;
     lmsPagePhone: string;
     lmsPageEmail: string;
     twitterAccountId: string;
