@@ -19,6 +19,7 @@ export class AppComponent extends AppRedesignedBaseComponent {
     isSplashPage: boolean;
     isColorectalPage: boolean;
     isLmsPage: boolean;
+    isPediHCCPage: boolean;
 
     constructor(
         _communicationService: CommunicationService,
@@ -39,6 +40,7 @@ export class AppComponent extends AppRedesignedBaseComponent {
                 return;
             }
             this.isColorectalPage = event.url.includes(AppRoutes.ColorectalPage);
+            this.isPediHCCPage = event.url.includes(AppRoutes.PediHCCPage);
             this.isLmsPage = event.url.includes(AppRoutes.LMS);
             this.isSplashPage = this.isColorectalPage || this.isLmsPage;
         });
