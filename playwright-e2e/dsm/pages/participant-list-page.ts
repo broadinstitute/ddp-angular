@@ -9,7 +9,7 @@ import { waitForNoSpinner, waitForResponse } from 'utils/test-utils';
 import { Filters } from 'dsm/component/filters/filters';
 import { ParticipantListTable } from 'dsm/component/tables/participant-list-table';
 import { KitTypeEnum } from 'dsm/component/kitType/enums/kitType-enum';
-import { KitStatus } from 'dsm/component/filters/sections/search/search-enums';
+import { CustomViewColumns, EnrollmentStatus, KitStatus, ParticipantColumns } from 'dsm/component/filters/sections/search/search-enums';
 
 export default class ParticipantListPage {
   private readonly PAGE_TITLE: string = 'Participant List';
@@ -230,33 +230,40 @@ export default class ParticipantListPage {
   }
 
   /**
-   * Function to search for a participant that does not have a specific kit type
+   * Function to search for a participant that has not had a specific kit type sent out
    * @param kitType the kit type being searched for to make sure the participant has no history e.g. they have not had a saliva kit sent or received
    * @returns the short id of the matched participant
    */
-  async findParticipantWithoutKitType(kitType: KitTypeEnum): Promise<string> {
+  async findParticipantWithoutSentKitType(kitType: KitTypeEnum): Promise<string> {
     const participantListTable = this.participantListTable;
 
-    //First filter for enrolled participants
     const searchPanel = this.filters.searchPanel;
-    await searchPanel.open();
-    await searchPanel.checkboxes('Status', { checkboxValues: ['Enrolled'] });
-    await searchPanel.search();
+    await searchPanel.searchForParticipantsWithEnrollmentStatus([EnrollmentStatus.ENROLLED]);
     expect(await participantListTable.rowsCount).toBeGreaterThanOrEqual(1);
 
-    //Make sure the following columns are selected - not all studies might have the following columns selected as part of their default filter:
-    //Participant Columns -> Short ID (usually selected in the default filter)
-    //Sample Columns -> Sample Type, Status
     const customizeViewPanel = this.filters.customizeViewPanel;
     await customizeViewPanel.open();
-
-    //Note: Not all studies have a Sample Columns group
-    expect(await customizeViewPanel.columnGroupIsDisplayed('Sample Columns'), 'ERROR: Sample Columns group is not displayed').toBe(true);
+    expect(await customizeViewPanel.columnGroupIsDisplayed(CustomViewColumns.SAMPLE), 'ERROR: Sample Columns group is not displayed').toBe(true);
 
     await customizeViewPanel.deselectColumns('Participant Columns', ['Status']); //To reduce confusion when Sample Columns -> Status is added and filtered
     await customizeViewPanel.selectColumns('Sample Columns', ['Sample Type', 'Status']);
+    await searchPanel.open();
+    let validTestParticipantShortID: string;
 
-    await searchPanel.searchForKitSampleStatus([KitTypeEnum.SALIVA], KitStatus.WAITING_ON_GP);
+    switch (kitType) {
+      case KitTypeEnum.SALIVA: {
+        //Many study groups e.g. CMI have a saliva kit that gets automatically created and be found in Kits w/o Label; usually has Waiting on GP status
+        validTestParticipantShortID = await searchPanel.searchForParticipantWithUnsentSalivaKit();
+        break;
+      }
+      case KitTypeEnum.BLOOD: {
+        //TODO Fill the case for blood kits; Note: blood kits are not usually automatically created
+        break;
+      }
+      default: {
+        break;
+      }
+    }
     return 'some promise string';
   }
 

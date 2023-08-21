@@ -114,9 +114,40 @@ export class ParticipantListTable extends Table {
     return this.page.locator(`//table/tbody/tr`).nth(position);
   }
 
+  public async getLastPageNumber(): Promise<number> {
+    const lastPageButton = this.lastPage;
+    const pageButtonContents = (await lastPageButton.innerText()).split(`You're on page`);
+    const pageNumber = pageButtonContents[1].trim();
+    return parseInt(pageNumber);
+  }
+
+  public async getCurrentPageNumber(): Promise<number> {
+    const currentPageButton = this.currentPage;
+    const pageButtonContents = (await currentPageButton.innerText()).split(`You're on page`);
+    const pageNumber = pageButtonContents[1].trim();
+    return parseInt(pageNumber);
+  }
+
+  public async onLastPage(): Promise<boolean> {
+    console.log(`Current Page #: ${await this.getCurrentPageNumber()}`);
+    console.log(`Last Page #: ${await this.getLastPageNumber()}`);
+    if (await this.getCurrentPageNumber() === await this.getLastPageNumber()) {
+      return true;
+    }
+    return false;
+  }
+
   /* Locators */
   public get rowsCount(): Promise<number> {
     return this.getRowsCount();
+  }
+
+  public get lastPage(): Locator {
+    return this.page.locator(`//li[contains(@class, 'pagination-next')]/preceding-sibling::li[1]`);
+  }
+
+  public get currentPage(): Locator {
+    return this.page.locator(`//li[contains(@class, 'current')]`);
   }
 
   /* XPaths */

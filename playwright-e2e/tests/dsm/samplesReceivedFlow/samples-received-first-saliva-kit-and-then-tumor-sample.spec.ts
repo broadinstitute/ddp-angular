@@ -37,7 +37,7 @@ test.describe('Samples Received Event - Recieved saliva kit first and then tumor
             await participantListPage.assertPageTitle();
             await participantListPage.waitForReady();
 
-            const shortID = await participantListPage.findParticipantWithoutKitType(KitTypeEnum.SALIVA);
+            const shortID = await participantListPage.findParticipantWithoutSentKitType(KitTypeEnum.SALIVA);
 
             //Upload a saliva kit for the participant
 
