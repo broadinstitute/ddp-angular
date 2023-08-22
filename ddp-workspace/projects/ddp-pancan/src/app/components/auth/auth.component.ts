@@ -13,7 +13,7 @@ import { AppRoutes } from '../app-routes';
            [class.dashboard-button]="isAuthenticated"
            [routerLink]="isAuthenticated ? AppRoutes.Dashboard : AppRoutes.CountMeIn"
            queryParamsHandling="merge"
-           [color]="isColorectalTheme ? 'colorectal' : 'primary'">
+           [color]="isColorectalTheme ? 'colorectal' : isPediHCCTheme ? 'pedihcc' : 'primary'">
             <ng-container *ngIf="isAuthenticated; else join">
                 <mat-icon>perm_identity</mat-icon>
                 <span translate>App.Navigation.Dashboard</span>
@@ -24,6 +24,7 @@ import { AppRoutes } from '../app-routes';
 })
 export class AuthComponent {
     @Input() isColorectalTheme: boolean;
+    @Input() isPediHCCTheme: boolean;
     readonly AppRoutes = AppRoutes;
     constructor(private session: SessionMementoService) { }
 
