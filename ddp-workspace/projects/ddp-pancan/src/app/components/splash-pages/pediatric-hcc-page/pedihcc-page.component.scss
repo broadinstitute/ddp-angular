@@ -43,7 +43,7 @@ section {
     &.learn-more {
         padding-top: 4.56rem;
         padding-bottom: 3.875rem;
-        background-color: $accent-colorectal-color;
+        background-color: $accent-pedihcc-color;
 
         .title, .text {
             max-width: 962px;
@@ -59,7 +59,7 @@ section {
     }
 
     &.participate {
-        background-color: $primary-colorectal-color;
+        background-color: $primary-pedihcc-color;
         color: white;
         padding-top: 5.18rem;
         padding-bottom: 3.75rem;
@@ -109,7 +109,7 @@ section {
     }
 
     &.stay-informed {
-        background-color: $primary-colorectal-color;
+        background-color: $stay-informed-pedihcc-color;
         color: white;
 
         ::ng-deep .container {

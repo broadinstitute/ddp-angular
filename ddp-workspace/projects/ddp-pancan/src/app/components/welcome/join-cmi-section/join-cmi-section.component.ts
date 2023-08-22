@@ -9,6 +9,7 @@ import { AppRoutes } from '../../app-routes';
 })
 export class JoinCmiSectionComponent {
     @Input() isColorectalTheme: boolean;
+    @Input() isPediHCCTheme: boolean;
     @Input() title = 'App.HomePage.CountMeInSection.Title';
     @Input() text = 'App.HomePage.CountMeInSection.Text';
     @Input() btnText = 'App.HomePage.JoinCountMeInButton';

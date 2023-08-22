@@ -20,7 +20,7 @@
     </div>
 </div>
 <div class="container container__button">
-    <a *ngIf="isColorectalTheme; else strokedButton"
+    <a *ngIf="isColorectalTheme || isPediHCCTheme; else strokedButton"
        mat-flat-button
        [routerLink]="'/' + AppRoutes.Participation"
        queryParamsHandling="merge"

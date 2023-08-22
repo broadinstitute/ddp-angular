@@ -8,11 +8,11 @@
                    [routerLink]="'/' + AppRoutes.CountMeIn"
                    queryParamsHandling="merge"
                    class="btn join-cmi-btn center button button_small"
-                   color="colorectal">
+                   color="pedihcc">
                     {{'App.HomePage.JoinCountMeInButton' | translate}}
                 </a>
             </div>
-            <img src="assets/images/colorectal_main.png" class="image"
+            <img src="assets/images/pedihcc_main.png" class="image"
                  [alt]="'App.ImageAlts.SplashPageImg' | translate"
                  width="390" height="385">
         </div>
@@ -41,13 +41,13 @@
     </section>
 
     <section class="participate">
-        <app-participation-section [isColorectalTheme]="true"></app-participation-section>
+        <app-participation-section [isPediHCCTheme]="true"></app-participation-section>
     </section>
 
     <section class="faq">
         <h2 class="title static-page-title" translate>App.FAQ.Title</h2>
         <div class="container">
-            <app-faq-section questions="App.PedihccPage.FAQ.Questions" [isColorectal]="true"></app-faq-section>
+            <app-faq-section questions="App.PedihccPage.FAQ.Questions" [isPedihcc]="true"></app-faq-section>
         </div>
 
         <a mat-stroked-button
@@ -62,13 +62,13 @@
     </section>
 
     <section class="stay-informed">
-        <app-stay-informed-section [isPediHCC]="true"></app-stay-informed-section>
+        <app-stay-informed-section [isPedihcc]="true"></app-stay-informed-section>
     </section>
 
     <section class="join-cmi">
         <app-join-cmi-section
             title="App.PedihccPage.CountMeInSection.Title"
-            [isColorectalTheme]="true">
+            [isPediHCCTheme]="true">
         </app-join-cmi-section>
     </section>
 </main>

@@ -42,7 +42,7 @@ export class AppComponent extends AppRedesignedBaseComponent {
             this.isColorectalPage = event.url.includes(AppRoutes.ColorectalPage);
             this.isPediHCCPage = event.url.includes(AppRoutes.PediHCCPage);
             this.isLmsPage = event.url.includes(AppRoutes.LMS);
-            this.isSplashPage = this.isColorectalPage || this.isLmsPage;
+            this.isSplashPage = this.isColorectalPage || this.isLmsPage || this.isPediHCCPage;
         });
     }
 }
