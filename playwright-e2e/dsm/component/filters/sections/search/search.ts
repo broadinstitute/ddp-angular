@@ -168,6 +168,10 @@ export class Search {
     await this.search();
   }
 
+  /**
+   * Searches for the first instance of a participant that has no sent saliva kits
+   * @returns the short id of the found participant
+   */
   public async searchForParticipantWithUnsentSalivaKit(): Promise<string> {
     const [filterListReponse] = await Promise.all([
       this.page.waitForResponse(response => response.url().includes('/ui/filterList') && response.status() === 200),

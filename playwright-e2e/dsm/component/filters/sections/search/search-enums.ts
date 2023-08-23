@@ -71,3 +71,17 @@ export enum KitStatus {
   SHIPPED = 'Shipped',
   RECEIVED = 'Received',
 }
+
+/* Contact Information Columns group enums */
+
+export enum ContactInformation {
+  CITY = 'City',
+  COUNTRY = 'Country',
+  MAIL_TO_NAME = 'Mail To Name',
+  PHONE = 'Phone',
+  STATE = 'State',
+  STREET_ONE = 'Street 1',
+  STREET_TWO = 'Street 2',
+  VALID = 'Valid',
+  ZIP = 'Zip',
+}
