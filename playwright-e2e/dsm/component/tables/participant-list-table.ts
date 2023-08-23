@@ -7,6 +7,7 @@ import { getDate, offsetDaysFromToday } from 'utils/date-utils';
 import { waitForNoSpinner } from 'utils/test-utils';
 import { AdditionalFilter } from 'dsm/component/filters/sections/search/search-enums';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
+import { ScreenReaderText } from '../navigation/enums/accessibility-enum';
 
 export class ParticipantListTable extends Table {
   private readonly _participantPage: ParticipantPage = new ParticipantPage(this.page);
@@ -120,14 +121,14 @@ export class ParticipantListTable extends Table {
    */
   public async getLastPageNumber(): Promise<number> {
     const lastPageButton = this.lastPage;
-    const pageButtonContents = (await lastPageButton.innerText()).split('page');
-    const pageNumber = pageButtonContents[1].trim();
+    const pageButtonContents0Based = (await lastPageButton.innerText()).split(ScreenReaderText.GENERAL_PAGE);
+    const pageNumber = pageButtonContents0Based[1].trim();
     return parseInt(pageNumber);
   }
 
   public async getCurrentPageNumber(): Promise<number> {
     const currentPageButton = this.currentPage;
-    const pageButtonContents = (await currentPageButton.innerText()).split(`You're on page`);
+    const pageButtonContents = (await currentPageButton.innerText()).split(ScreenReaderText.CURRENT_PAGE);
     const pageNumber = pageButtonContents[1].trim();
     return parseInt(pageNumber);
   }

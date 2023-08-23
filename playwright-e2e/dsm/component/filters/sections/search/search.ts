@@ -174,9 +174,10 @@ export class Search {
       this.searchForKitSampleStatus([KitTypeEnum.SALIVA], KitStatus.WAITING_ON_GP),
     ]);
     let responseBody = JSON.parse(await filterListReponse.text());
+
     const participantListTable = new ParticipantListTable(this.page);
     const amountOfRowsDisplayed = await participantListTable.rowsCount;
-    console.log(`Amount of rows displayed: ${amountOfRowsDisplayed}`);
+    let validTestParticipantShortIDFound;
 
     //Check for a participant with a saliva kit that neither has scanDate or deactivatedDate
     for (let index = 0; index < amountOfRowsDisplayed; index++) {
@@ -185,6 +186,23 @@ export class Search {
         break;
       }
       console.log(`Participant ${index}'s information: ${responseBody.participants[index].esData.profile.hruid}`);
+      const kitInformation = responseBody.participants[index].kits;
+      const amountOfKits = kitInformation.length;
+      console.log(`Participant kit amount: ${kitInformation.length}`);
+      for (let kitNumber = 0; kitNumber < amountOfKits; kitNumber++) {
+        console.log(`Participant kit info: ${kitInformation[kitNumber].kitTypeName}`);
+        if ((kitInformation[kitNumber].kitTypeName) === KitTypeEnum.SALIVA) {
+          if (kitInformation[kitNumber].scanDate === undefined && kitInformation[kitNumber].deactivatedDate === undefined) {
+            console.log(`ALERT: Valid participant found!`);
+            validTestParticipantShortIDFound = responseBody.participants[index].esData.profile.hruid;
+            break;
+          }
+        }
+      }
+
+      if (validTestParticipantShortIDFound) {
+        break;
+      }
 
       if (this.isReadyToGoToTheNextPage(index, amountOfRowsDisplayed)) {
         const [nextResponse] = await Promise.all([
@@ -197,7 +215,7 @@ export class Search {
         console.log('Should be on the next page now');
       }
     }
-    return 'stuff';
+    return validTestParticipantShortIDFound;
   }
 
   /**

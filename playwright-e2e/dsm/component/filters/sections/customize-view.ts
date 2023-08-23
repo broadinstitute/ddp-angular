@@ -97,7 +97,7 @@ export class CustomizeView {
     return `/ul/li/mat-checkbox[label[.//*[text()[normalize-space()='${columnName}']]]]`;
   }
 
-  public async columnGroupIsDisplayed(columnGroupName: string): Promise<boolean> {
+  public async isColumnGroupDisplayed(columnGroupName: string): Promise<boolean> {
     //Note: Some studies have column groups that share the same name
     const numberOfMatches = await this.page.locator(`//button[contains(@data-toggle, 'dropdown') and contains(., '${columnGroupName}')]`).count();
     if (numberOfMatches > 0) {

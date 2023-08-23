@@ -230,7 +230,7 @@ export default class ParticipantListPage {
   }
 
   /**
-   * Function to search for a participant that has not had a specific kit type sent out
+   * Searches for a participant that has not had a specific kit type sent out
    * @param kitType the kit type being searched for to make sure the participant has no history e.g. they have not had a saliva kit sent or received
    * @returns the short id of the matched participant
    */
@@ -243,12 +243,12 @@ export default class ParticipantListPage {
 
     const customizeViewPanel = this.filters.customizeViewPanel;
     await customizeViewPanel.open();
-    expect(await customizeViewPanel.columnGroupIsDisplayed(CustomViewColumns.SAMPLE), 'ERROR: Sample Columns group is not displayed').toBe(true);
+    expect(await customizeViewPanel.isColumnGroupDisplayed(CustomViewColumns.SAMPLE), 'ERROR: Sample Columns group is not displayed').toBe(true);
 
     await customizeViewPanel.deselectColumns('Participant Columns', ['Status']); //To reduce confusion when Sample Columns -> Status is added and filtered
     await customizeViewPanel.selectColumns('Sample Columns', ['Sample Type', 'Status']);
     await searchPanel.open();
-    let validTestParticipantShortID: string;
+    let validTestParticipantShortID = '';
 
     switch (kitType) {
       case KitTypeEnum.SALIVA: {
@@ -264,7 +264,7 @@ export default class ParticipantListPage {
         break;
       }
     }
-    return 'some promise string';
+    return validTestParticipantShortID;
   }
 
   async findParticipantForKitUpload(): Promise<number> {
