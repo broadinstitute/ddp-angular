@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { SessionMementoService } from 'ddp-sdk';
 import { AppRoutes } from '../app-routes';
-import {ThemePalette} from '@angular/material/core';
+import { ThemePalette } from '@angular/material/core';
 
 @Component({
     selector: 'app-auth',

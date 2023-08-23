@@ -8,7 +8,7 @@ import { of, Observable } from 'rxjs';
 import { mockComponent, WindowRef } from 'ddp-sdk';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { FooterComponent } from './footer.component';
-import {MatDialogModule} from '@angular/material/dialog';
+import { MatDialogModule } from '@angular/material/dialog';
 
 class TranslateLoaderMock implements TranslateLoader {
     getTranslation(code: string = ''): Observable<object> {

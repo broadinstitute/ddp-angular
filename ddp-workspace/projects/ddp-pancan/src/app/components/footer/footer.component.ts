@@ -30,4 +30,11 @@ export class FooterComponent extends BaseFooterComponent {
         });
 
     }
+
+    public get copyrightYear(): number {
+        if (this.isPediHCCTheme) {
+            return 2023;
+        }
+        return 2021;
+    }
 }

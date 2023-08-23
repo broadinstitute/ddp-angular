@@ -19,7 +19,7 @@ export class FaqSectionComponent {
     constructor(private dialog: MatDialog) {}
 
     public openJoinMailingList(): void {
-        const info = this.isColorectal ? ['Colorectal'] : this.isPedihcc ? ['PediHCC'] : null;
+        const info = this.isColorectal ? ['Colorectal'] : this.isPedihcc ? ['Pedihcc'] : null;
         this.dialog.open(JoinMailingListComponent, {
             ...JOIN_MAILING_LIST_DIALOG_SETTINGS,
             data: { info }
