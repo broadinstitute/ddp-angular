@@ -22,10 +22,6 @@ export class FooterComponent extends BaseFooterComponent {
         super(_windowRef);
     }
 
-    public get currentYear(): number {
-        return new Date().getFullYear();
-    }
-
     public openJoinMailingList(): void {
         const info = 'Pedihcc';
         this.dialog.open(JoinMailingListComponent, {

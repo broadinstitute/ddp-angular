@@ -10,7 +10,6 @@
             </button>
             <app-navigation></app-navigation>
             <a mat-button
-               *ngIf="!isPediHCCTheme"
                target="_blank"
                href="privacy_policy.pdf"
                class="footer-btn button button_small">
@@ -29,7 +28,7 @@
         </div>
     </div>
     <div class="info">
-        <span>Copyright © {{currentYear}} Count Me In. {{'App.Footer.Copyright' | translate}} </span>
+        <span>Copyright © 2023 Count Me In. {{'App.Footer.Copyright' | translate}} </span>
         <div class="contacts">
             <span translate class="contacts__label">App.Footer.Contacts</span>
             <a target="_blank" class="contacts__item" href="mailto:{{email}}">{{email}}</a>
