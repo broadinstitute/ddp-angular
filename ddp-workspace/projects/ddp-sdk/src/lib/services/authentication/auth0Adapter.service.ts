@@ -156,7 +156,7 @@ export class Auth0AdapterService implements OnDestroy {
     public signup(additionalParams?: Record<string, string>): void {
         const temporarySession = this.session.isTemporarySession() ? this.session.session : null;
         if (!temporarySession || !temporarySession.userGuid) {
-            this.log.logError(`${this.LOG_SOURCE}.signup.No temporal user guid`);
+            this.log.logError(`${this.LOG_SOURCE}.signup: No temporal user guid`);
         }
         const params = {
             ...(temporarySession && {
@@ -170,7 +170,7 @@ export class Auth0AdapterService implements OnDestroy {
             // @todo : hack delete when done
             serverUrl: this.configuration.backendUrl
         };
-        this.log.logToCloud(`Auth0 signup modal is open for user: ${JSON.stringify(params)}`, { auth0Mode: Auth0Mode.SignupOnly })
+        this.log.logToCloud(`Auth0 signup modal is open for user ${params.temp_user_guid}: ${JSON.stringify(params)}`, { auth0Mode: Auth0Mode.SignupOnly })
             .pipe(take(1)).subscribe(() => this.showAuth0Modal(Auth0Mode.SignupOnly, params));
     }
 
@@ -192,8 +192,6 @@ export class Auth0AdapterService implements OnDestroy {
                 this.windowRef.nativeWindow.location.hash = '';
                 this.setSession(authResult);
                 this.log.logEvent(`${this.LOG_SOURCE}.handleAuthentication succeeded`);
-                this.log.logToCloud(`${this.LOG_SOURCE}.handleAuthentication, authResult: ${JSON.stringify(authResult)}`)
-                    .pipe(take(1)).subscribe();
                 this.analytics.emitCustomEvent(AnalyticsEventCategories.Authentication, AnalyticsEventActions.Login);
             } else if (err) {
                 this.log.logError(`${this.LOG_SOURCE}.handleAuthentication`, err);
@@ -201,7 +199,7 @@ export class Auth0AdapterService implements OnDestroy {
                 try {
                     error = JSON.parse(decodeURIComponent(err.errorDescription));
                 } catch (e) {
-                    this.log.logError(`${this.LOG_SOURCE}.handleAuthentication.Problem decoding authentication error`, e);
+                    this.log.logError(`${this.LOG_SOURCE}.handleAuthentication: Problem decoding authentication error`, e);
                 }
                 if (onErrorCallback && error) {
                     // We might encounter errors from Auth0 that is not in expected
@@ -280,7 +278,8 @@ export class Auth0AdapterService implements OnDestroy {
 
     public logout(returnToUrl: string = ''): void {
         const baseUrl = this.configuration.baseUrl;
-        this.log.logToCloud(`${this.LOG_SOURCE} logout for user`).pipe(take(1)).subscribe(() => {
+        const userGuid = this.session.session.userGuid;
+        this.log.logToCloud(`${this.LOG_SOURCE} logout for user ${userGuid}`).pipe(take(1)).subscribe(() => {
             // Remove tokens and expiry time from localStorage
             this.session.clear();
             this.log.logEvent(this.LOG_SOURCE, 'logout');
@@ -303,6 +302,7 @@ export class Auth0AdapterService implements OnDestroy {
                 });
             }
         });
+        this.log.logEvent(this.LOG_SOURCE, `Successfully logged out user ${userGuid}`);
     }
 
     public auth0RenewToken(): Observable<Session | null> {

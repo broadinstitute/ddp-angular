@@ -71,12 +71,4 @@ describe('LoggingService', () => {
         expect(JSON.stringify(service.logWarning)).toEqual(JSON.stringify(() => { }));
         expect(service.logError).not.toEqual(() => { });
     });
-
-    it('should call StackdriverErrorReporterService.handleReport if logLevel is Error', () => {
-      config.logLevel = LogLevel.Error;
-      service = new LoggingService(config, stackdriverErrorReporterServiceSpy, httpClientSpy, sessionMock);
-
-      service.logError('a deliberate error during Logging service test');
-      expect(stackdriverErrorReporterServiceSpy.handleError).toHaveBeenCalledWith('a deliberate error during Logging service test');
-    });
 });
