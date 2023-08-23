@@ -40,7 +40,7 @@ export class WelcomeComponent implements OnInit, OnDestroy {
   public ngOnInit(): void {
     if(this.ngxTranslate) {
         const translate$ = this.ngxTranslate.getTranslation(['HomePage.Participate.Steps.Second.Ul'])
-            .subscribe((list: string[]) => {
+            .subscribe((list: object) => {
                 this.list = list['HomePage.Participate.Steps.Second.Ul'];
             });
         this.anchor.addNew(translate$);

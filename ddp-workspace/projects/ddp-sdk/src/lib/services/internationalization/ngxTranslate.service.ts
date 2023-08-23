@@ -18,7 +18,7 @@ export class NGXTranslateService {
                 this.translate.onDefaultLangChange).pipe(
                 mergeMap(() => this.translate.get(word, interpolateParams))
             ) :
-            of('Translate service has not been initialized');
+            of({});
     }
 
     public getTranslationObject<T>(transKey: string): Observable<T> {
