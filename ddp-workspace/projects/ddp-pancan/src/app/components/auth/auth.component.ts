@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { SessionMementoService } from 'ddp-sdk';
 import { AppRoutes } from '../app-routes';
-import {ThemePalette} from "@angular/material/core";
+import {ThemePalette} from '@angular/material/core';
 
 @Component({
     selector: 'app-auth',
@@ -24,9 +24,9 @@ import {ThemePalette} from "@angular/material/core";
     styleUrls: ['./auth.component.scss']
 })
 export class AuthComponent {
-    @Input() isColorectalTheme: boolean = false;
-    @Input() isPediHCCTheme: boolean = false;
-    @Input() isInFooter: boolean = false;
+    @Input() isColorectalTheme = false;
+    @Input() isPediHCCTheme = false;
+    @Input() isInFooter = false;
 
     readonly AppRoutes = AppRoutes;
 
@@ -40,11 +40,11 @@ export class AuthComponent {
         let color = 'primary';
 
         if (this.isColorectalTheme)
-            color = 'colorectal';
+            {color = 'colorectal';}
         if(this.isPediHCCTheme)
-            color = 'pedihcc';
+            {color = 'pedihcc';}
         if(this.isPediHCCTheme && this.isInFooter)
-            color = 'secondary';
+            {color = 'secondary';}
 
         return color as ThemePalette;
     }
