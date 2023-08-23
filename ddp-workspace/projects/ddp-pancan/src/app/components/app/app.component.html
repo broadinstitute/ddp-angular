@@ -1,11 +1,8 @@
 <div class="wrapper" [class.lms-page]="isLmsPage">
-    <app-header *ngIf="isColorectalPage"
-        [isColorectalTheme]="isColorectalPage">
-    </app-header>
-    <app-header *ngIf="isPediHCCPage"
-        [isPediHCCTheme]="isPediHCCPage">
-    </app-header>
-    <app-header></app-header>
+    <app-header *ngIf="!isLmsPage"
+                [isColorectalTheme]="isColorectalPage"
+                [isPediHCCTheme]="isPediHCCPage"
+    ></app-header>
     <router-outlet></router-outlet>
     <app-footer *ngIf="!isSplashPage"
                 [phone]="phone"
