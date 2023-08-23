@@ -15,10 +15,15 @@
                class="footer-btn button button_small">
                 {{'App.Footer.PrivacyPolicy' | translate}}
             </a>
+            <a mat-button
+                class="footer-btn button button_small"
+                (click)="openJoinMailingList()">
+                {{'App.HomePage.StayInformedSection.JoinMailingListButton' | translate}}
+            </a>
         </div>
         <div class="auth">
             <ddp-language-selector></ddp-language-selector>
-            <app-auth></app-auth>
+            <app-auth [isPediHCCTheme]="isPediHCCTheme"></app-auth>
         </div>
     </div>
     <div class="info">

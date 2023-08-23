@@ -26,6 +26,7 @@ export class AuthComponent {
     @Input() isColorectalTheme: boolean;
     @Input() isPediHCCTheme: boolean;
     readonly AppRoutes = AppRoutes;
+
     constructor(private session: SessionMementoService) { }
 
     public get isAuthenticated(): boolean {
