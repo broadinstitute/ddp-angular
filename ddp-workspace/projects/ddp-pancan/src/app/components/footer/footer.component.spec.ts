@@ -8,7 +8,7 @@ import { of, Observable } from 'rxjs';
 import { mockComponent, WindowRef } from 'ddp-sdk';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { FooterComponent } from './footer.component';
-import {MatDialog, MatDialogModule} from '@angular/material/dialog';
+import {MatDialogModule} from '@angular/material/dialog';
 
 class TranslateLoaderMock implements TranslateLoader {
     getTranslation(code: string = ''): Observable<object> {
@@ -19,7 +19,7 @@ class TranslateLoaderMock implements TranslateLoader {
     }
 }
 
-fdescribe('FooterComponent', () => {
+describe('FooterComponent', () => {
     let fixture: ComponentFixture<FooterComponent>;
     let component: FooterComponent;
     let nativeWindowSpy: jasmine.SpyObj<Window>;
