@@ -9,11 +9,6 @@
     align-items: center;
 }
 
-.pedihccBtnColor {
-    background-color: $stay-informed-pedihcc-color!important;
-    border-color: $stay-informed-pedihcc-color!important;
-}
-
 @media screen and (max-width: $tablet-breakpoint) {
     :host {
         flex-wrap: wrap;

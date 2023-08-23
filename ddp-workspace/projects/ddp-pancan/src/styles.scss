@@ -309,6 +309,10 @@ section {
 }
 
 .mat-pedihcc {
-    background-color: $primary-pedihcc-color !important;
+    background-color: $stay-informed-pedihcc-color !important;
     color: #fff !important;
+
+    &:hover {
+        background-color: grey;
+    }
 }

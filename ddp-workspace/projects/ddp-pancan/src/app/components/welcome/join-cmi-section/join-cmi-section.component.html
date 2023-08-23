@@ -9,8 +9,7 @@
        [routerLink]="'/' + AppRoutes.CountMeIn"
        queryParamsHandling="merge"
        class="btn join-cmi-btn  button button_small"
-       [color]="isColorectalTheme ? 'colorectal' : 'primary'"
-       [ngClass]="{'pedihccBtnColor': isPediHCCTheme}">
+       [color]="isColorectalTheme ? 'colorectal' : isPediHCCTheme ? 'pedihcc' : 'primary'">
         {{btnText | translate}}
     </a>
 </div>
