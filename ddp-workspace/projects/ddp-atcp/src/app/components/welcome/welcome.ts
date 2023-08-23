@@ -38,11 +38,13 @@ export class WelcomeComponent implements OnInit, OnDestroy {
   }
 
   public ngOnInit(): void {
-    const translate$ = this.ngxTranslate.getTranslation(['HomePage.Participate.Steps.Second.Ul'])
-      .subscribe((list: string[]) => {
-        this.list = list['HomePage.Participate.Steps.Second.Ul'];
-      });
-    this.anchor.addNew(translate$);
+    if(this.ngxTranslate) {
+        const translate$ = this.ngxTranslate.getTranslation(['HomePage.Participate.Steps.Second.Ul'])
+            .subscribe((list: object) => {
+                this.list = list['HomePage.Participate.Steps.Second.Ul'];
+            });
+        this.anchor.addNew(translate$);
+    }
   }
 
   public ngOnDestroy(): void {

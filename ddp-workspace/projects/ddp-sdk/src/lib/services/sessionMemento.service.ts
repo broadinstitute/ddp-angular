@@ -183,7 +183,6 @@ export class SessionMementoService implements OnDestroy {
         if (session === null) {
             return false;
         }
-
         return new Date().getTime() > session.expiresAt;
     }
 
