@@ -10,12 +10,14 @@
             </button>
             <app-navigation></app-navigation>
             <a mat-button
+               *ngIf="!isPediHCCTheme"
                target="_blank"
                href="privacy_policy.pdf"
                class="footer-btn button button_small">
                 {{'App.Footer.PrivacyPolicy' | translate}}
             </a>
             <a mat-button
+               *ngIf="isPediHCCTheme"
                 class="footer-btn button button_small"
                 (click)="openJoinMailingList()">
                 {{'App.HomePage.StayInformedSection.JoinMailingListButton' | translate}}
@@ -23,7 +25,7 @@
         </div>
         <div class="auth">
             <ddp-language-selector></ddp-language-selector>
-            <app-auth [isPediHCCTheme]="isPediHCCTheme"></app-auth>
+            <app-auth [isInFooter]="true" [isPediHCCTheme]="isPediHCCTheme"></app-auth>
         </div>
     </div>
     <div class="info">

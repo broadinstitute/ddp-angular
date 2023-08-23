@@ -250,7 +250,6 @@
                 "Collapse": "Collapse all",
                 "MoreFAQs": "More FAQs"
             },
-            "Info": "For information on how to become a partner, contact the team at <a class='Link' href='https://info@joincountmein.org.'>info@joincountmein.org</a>.",
             "Questions": [
                 {
                     "Question": "What is Count Me In?",
@@ -430,8 +429,8 @@
             "LearnMoreSection": {
                 "Title": "What is this project about?",
                 "Paragraphs": [
-                    "The Pediatric Hepatocellular Carcinoma (HCC) & HCC-Like Tumors Project is part of <a class='Link' href='https://joincountmein.org'>Count Me In</a>, a research initiative that enables cancer patients to directly transform cancer research and discovery. Any individual in the United States or Canada who has ever been diagnosed with hepatocellular carcinoma before the age of 21, hepatocellular neoplasm not otherwise specified (HCN NOS), or hepatoblastoma diagnosed at 6 or older can share information about their experience through completing surveys, sharing biological sample(s), and copies of their medical records with researchers in order to speed the pace of discovery.",
-                    "The goal of <a class='Link' href='https://joincountmein.org'>Count Me In</a> is to generate a large dataset of linked patient-reported, genomic, clinical, and molecular information that can be shared with the biomedical community. Every patient's story holds a piece of the puzzle that can help us better understand cancer. By discovering the genes and the variants that drive cancer and sharing this data, we hope insights can be gained to develop more effective therapies."
+                    "The Pediatric Hepatocellular Carcinoma (HCC) & HCC-Like Tumors Project is part of <a class='Link' target='_blank' href='https://joincountmein.org'>Count Me In</a>, a research initiative that enables cancer patients to directly transform cancer research and discovery. Any individual in the United States or Canada who has ever been diagnosed with hepatocellular carcinoma before the age of 21, hepatocellular neoplasm not otherwise specified (HCN NOS), or hepatoblastoma diagnosed at 6 or older can share information about their experience through completing surveys, sharing biological sample(s), and copies of their medical records with researchers in order to speed the pace of discovery.",
+                    "The goal of <a class='Link' target='_blank' href='https://joincountmein.org'>Count Me In</a> is to generate a large dataset of linked patient-reported, genomic, clinical, and molecular information that can be shared with the biomedical community. Every patient's story holds a piece of the puzzle that can help us better understand cancer. By discovering the genes and the variants that drive cancer and sharing this data, we hope insights can be gained to develop more effective therapies."
                 ]
             },
             "ParticipateSection": {
@@ -505,6 +504,11 @@
                         ]
                     }
                 ]
+            },
+            "Partners": {
+                "Title": "Partners",
+                "Alts": {},
+                "Text": "For information on how to become a partner, contact the team at <a class='Link' href='https://info@joincountmein.org.'>info@joincountmein.org</a>."
             },
             "CountMeInSection": {
                 "Title": "Join the movement and say Count Me In"

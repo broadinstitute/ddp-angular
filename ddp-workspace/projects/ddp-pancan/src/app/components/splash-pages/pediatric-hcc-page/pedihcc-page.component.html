@@ -8,7 +8,7 @@
                    [routerLink]="'/' + AppRoutes.CountMeIn"
                    queryParamsHandling="merge"
                    class="btn join-cmi-btn center button button_small"
-                   color="pedihcc">
+                   >
                     {{'App.HomePage.JoinCountMeInButton' | translate}}
                 </a>
             </div>
@@ -57,8 +57,14 @@
             {{'App.FAQ.Button.MoreFAQs' | translate}}
             <mat-icon>chevron_right</mat-icon>
         </a>
+    </section>
 
-        <p class="faq-block__text_info" [innerHTML]="'App.FAQ.Info' | translate"></p>
+    <section class="partners">
+<!--        <h2 class="title static-page-title" translate>App.PedihccPage.Partners.Title</h2>-->
+<!--        <div class="logos">-->
+<!--            here goes partners-->
+<!--        </div>-->
+        <p class="text static-page-paragraph-text" [innerHTML]="'App.PedihccPage.Partners.Text' | translate"></p>
     </section>
 
     <section class="stay-informed">

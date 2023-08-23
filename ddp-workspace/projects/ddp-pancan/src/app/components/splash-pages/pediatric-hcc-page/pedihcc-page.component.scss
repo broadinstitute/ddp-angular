@@ -82,19 +82,12 @@ section {
             margin: 4rem auto 3.125rem;
             max-width: 1007px;
         }
-
-        .faq-block__text_info {
-            line-height: 34px;
-            font-size: 1.5rem;
-            margin: 2em auto;
-            width: 52%;
-        }
     }
 
     &.partners {
         max-width: 1081px;
         margin: 0 auto;
-        padding-top: 4.875rem;
+        //padding-top: 4.875rem;
         padding-bottom: 5.5rem;
 
         .title {
@@ -127,6 +120,8 @@ section {
 
 .join-cmi-btn {
     margin-top: 12px;
+    background-color: $stay-informed-pedihcc-color;
+    color: white;
 }
 
 :host ::ng-deep {
