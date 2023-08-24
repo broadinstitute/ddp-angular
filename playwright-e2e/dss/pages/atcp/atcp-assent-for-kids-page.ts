@@ -1,7 +1,8 @@
-import { expect, Page } from '@playwright/test';
+import { expect, Locator, Page } from '@playwright/test';
 import Input from 'dss/component/input';
 import Question from 'dss/component/Question';
 import { AtcpPageBase } from 'dss/pages/atcp/atcp-page-base';
+import { waitForNoSpinner } from 'utils/test-utils';
 
 export default class AtcpAssentForKidsPage extends AtcpPageBase {
   constructor(page: Page) {
@@ -12,6 +13,13 @@ export default class AtcpAssentForKidsPage extends AtcpPageBase {
     await super.waitForReady();
     await expect(this.page.locator('h1.activity-header')).toHaveText(/^Assent for Kids$/);
     await expect(this.getNextButton()).toBeVisible();
+    await expect(this.page.locator('.activity-steps-kids')).toBeVisible();
+    await expect(this.downloadAssentForm).toBeVisible();
+    await waitForNoSpinner(this.page);
+  }
+
+  get downloadAssentForm(): Locator {
+    return this.page.locator('a[download="A-T_Research_Assent_Form.EN.pdf"]');
   }
 
   /**
