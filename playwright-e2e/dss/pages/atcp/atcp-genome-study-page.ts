@@ -9,8 +9,7 @@ export default class AtcpGenomeStudyPage extends AtcpPageBase {
 
   async waitForReady(): Promise<void> {
     await super.waitForReady();
-    await expect(this.page.locator('app-workflow-progress .current .number')).toHaveText(/^5$/);
-    await expect(this.page.locator('app-workflow-progress .current .name')).toHaveText('Genome Study');
+    await expect(this.page.locator('h1.activity-header')).toHaveText(/^Genome Study$/);
   }
 
   /**

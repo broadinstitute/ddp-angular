@@ -29,6 +29,9 @@ test.describe('Receive Kit', () => {
     let participantListPage: ParticipantListPage;
     let navigation: Navigation;
 
+    // Fallback to use non-e2e participant if all e2e participants have kit received before
+    let nonE2EParticipants: string[];
+
     test.beforeEach(async ({page, request}) => {
       navigation = new Navigation(page, request);
       const welcomePage = new WelcomePage(page);
@@ -39,32 +42,41 @@ test.describe('Receive Kit', () => {
       // Instead using UI table filter and search, it is much quicker and more accurate to intercept DSM API request to find the right participant to use.
       // Find a Playwright test user that does not have GENOME_STUDY_SPIT_KIT_BARCODE.
       await page.route('**/*', async (route, request): Promise<void> => {
-         const regex = new RegExp(/applyFilter\?realm=.*&parent=participantList/i);
+         const regex = new RegExp(/applyFilter\?realm=atcp.*&parent=participantList/i);
          if (!shortId && request.url().match(regex)) {
-           console.log(`Intercepting API request ${request.url()} for a E2E participant`);
+           console.log(`Intercepting API request ${request.url()} to search for a E2E participant`);
            const response = await route.fetch();
            const json = JSON.parse(await response.text());
+
            for (const i in json.participants) {
-             let participantShortId;
              const profile = json.participants[i].esData.profile;
              const participantData = json.participants[i].esData.dsm.participantData;
-             if (!profile.firstName.includes('E2E')) {
-               continue;
-             }
-             participantShortId = profile.hruid;
+             let hruId = profile.hruid;
+             expect(hruId).not.toBeNull(); // hruid must exists
+
+             let existField = false;
              for (const dataId in participantData) {
                if ((participantData[dataId].fieldTypeId as string) === 'AT_GROUP_GENOME_STUDY') {
+                 existField = true;
                  if ((participantData[dataId].data as string).indexOf('GENOME_STUDY_SPIT_KIT_BARCODE') !== -1) {
-                   participantShortId = null;
-                   break;
+                   hruId = null; // discard this participant because person has received genome study kit before
                  }
+                 break;
                }
              }
-             if (participantShortId) {
-               shortId = participantShortId;
-               console.log('short id: ', shortId);
-               break; // finished searching for a participant who is Playwright automation test created and does not have genome study kit barcode
+             expect(existField).toBe(true); // AT_GROUP_GENOME_STUDY must exists in participantData
+
+             if (hruId) {
+               if (profile.firstName.includes('E2E')) {
+                 shortId = hruId;
+                 console.log('Found a E2E test participant: Short ID: ', shortId);
+                 break; // finish searching for a participant who is Playwright automation test created and does not have genome study kit barcode
+               } else {
+                 // save non-e2e participant short id then check next participant
+                 nonE2EParticipants.push(hruId);
+               }
              }
+             // check next participant
            }
          }
          return route.continue();
@@ -91,6 +103,13 @@ test.describe('Receive Kit', () => {
       await test.step('Verify participant detail on Participant page', async () => {
         const searchPanel = participantListPage.filters.searchPanel;
         await searchPanel.clear();
+
+        if (!shortId) {
+          // Attempt to find a non-e2e test participant
+          const [firstParticipant] = nonE2EParticipants;
+          shortId = firstParticipant;
+        }
+
         await participantListPage.filterListByShortId(shortId);
         logGenomeStudySampleKitReceived(shortId)
 

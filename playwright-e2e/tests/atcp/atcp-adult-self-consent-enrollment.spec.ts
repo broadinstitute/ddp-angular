@@ -7,6 +7,7 @@ import AtcpDashboardPage from 'dss/pages/atcp/atcp-dashboard-page';
 import AtcpGenomeStudyPage from 'dss/pages/atcp/atcp-genome-study-page';
 import AtcpHomePage from 'dss/pages/atcp/atcp-home-page';
 import AtcpMedicalHistoryPage from 'dss/pages/atcp/atcp-medical-history-page';
+import AtcpRegistrationPage from 'dss/pages/atcp/atcp-registration-page';
 import AtcpReviewSubmissionPage from 'dss/pages/atcp/atcp-review-submission-page';
 import { test } from 'fixtures/atcp-fixture';
 import * as auth from 'authentication/auth-atcp';
@@ -66,8 +67,10 @@ test.describe('ATCP adult self-consent enrollment', () => {
 
     // Send Auth0 API to verify user email
     await setAuth0UserEmailVerified(APP.AT, userEmail, { isEmailVerified: true });
+    await auth.login(page, { email: userEmail });
 
-    const registrationPage = await auth.login(page, { email: userEmail });
+    const registrationPage = new AtcpRegistrationPage(page);
+    await registrationPage.waitForReady();
 
     await expect(registrationPage.participantFirstName.toInput().toLocator()).toHaveValue(adultFirstName);
     await expect(registrationPage.participantLastName.toInput().toLocator()).toHaveValue(adultLastName);
@@ -152,7 +155,7 @@ test.describe('ATCP adult self-consent enrollment', () => {
     await expect(page.locator('ddp-activity-content')).toHaveScreenshot('atcp-consent-form-step-8.png');
     await consentPage.signature().fill(adultFullName);
     await consentPage.participantDOB.fill(dob);
-    await consentPage.signAndConsent.click();
+    await consentPage.signAndConsent();
 
     const contactPhysicianPage = new AtcpContactPhysicianPage(page);
     await contactPhysicianPage.waitForReady();

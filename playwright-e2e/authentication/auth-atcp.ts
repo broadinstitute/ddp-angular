@@ -4,7 +4,7 @@ import { generateEmailAlias } from 'utils/faker-utils';
 
 const { ATCP_USER_EMAIL, ATCP_USER_PASSWORD } = process.env;
 
-export async function login(page: Page, opts: { email?: string; password?: string } = {}): Promise<AtcpRegistrationPage> {
+export async function login(page: Page, opts: { email?: string; password?: string } = {}): Promise<void> {
   const { email = ATCP_USER_EMAIL, password = ATCP_USER_PASSWORD } = opts;
   if (!email) {
     throw Error('Invalid ATCP email');
@@ -18,10 +18,6 @@ export async function login(page: Page, opts: { email?: string; password?: strin
   await page.locator('#login input#email').fill(email);
   await page.locator('#login input#password').fill(password);
   await page.click('button >> text="Sign In"');
-
-  const registrationPage = new AtcpRegistrationPage(page);
-  await registrationPage.waitForReady();
-  return registrationPage;
 }
 
 export async function createAccountWithEmailAlias(
