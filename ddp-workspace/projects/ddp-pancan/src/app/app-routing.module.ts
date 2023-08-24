@@ -24,6 +24,7 @@ import { ScientificResearchComponent } from './components/scientific-research/sc
 import { ColorectalPageComponent } from './components/splash-pages/colorectal-page/colorectal-page.component';
 import { LmsPageComponent } from './components/splash-pages/lms-page/lms-page.component';
 import { ActivityPageComponent } from './components/activity-page/activity-page.component';
+import { PediHCCPageComponent } from './components/splash-pages/pediatric-hcc-page/pedihcc-page.component';
 
 const routes: Routes = [
     {
@@ -63,6 +64,11 @@ const routes: Routes = [
     {
         path: AppRoutes.ColorectalPage,
         component: ColorectalPageComponent,
+        canActivate: [IrbGuard]
+    },
+    {
+        path: AppRoutes.PediHCCPage,
+        component: PediHCCPageComponent,
         canActivate: [IrbGuard]
     },
     {

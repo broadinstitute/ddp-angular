@@ -1,0 +1,214 @@
+@import '../../../../styles/variables';
+
+section {
+    text-align: center;
+    padding-left: 3rem;
+    padding-right: 3rem;
+
+    &.introduction {
+        padding: 5.125rem 5rem 1.5rem;
+
+        .flex {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .description {
+            flex: 0 1 auto;
+            text-align: left;
+            max-width: 651px;
+            padding-right: 2rem;
+
+            .title  {
+                margin: 0;
+            }
+        }
+
+        .image {
+            flex: 0 1 auto;
+        }
+
+        .logos {
+            padding: 2rem 0 1rem;
+        }
+
+        .text {
+            font-size: 1.25rem;
+            line-height: 30px;
+        }
+    }
+
+    &.learn-more {
+        padding-top: 4.56rem;
+        padding-bottom: 3.875rem;
+        background-color: $accent-pedihcc-color;
+
+        .title, .text {
+            max-width: 962px;
+            margin: 0 auto;
+        }
+        .text {
+            text-align: left;
+            margin-top: 2.5rem;
+            margin-bottom: 2.5rem;
+            font-size: 1.25rem;
+            line-height: 30px;
+        }
+    }
+
+    &.participate {
+        background-color: $primary-pedihcc-color;
+        color: white;
+        padding-top: 5.18rem;
+        padding-bottom: 3.75rem;
+        text-align: left;
+
+        ::ng-deep .steps {
+            color: black;
+        }
+    }
+
+    &.faq {
+        padding-top: 6.875rem;
+        padding-bottom: 2.875rem;
+
+        .title {
+            margin-top: 0;
+        }
+
+        .container {
+            margin: 4rem auto 3.125rem;
+            max-width: 1007px;
+        }
+    }
+
+    &.partners {
+        max-width: 1081px;
+        margin: 0 auto;
+        //padding-top: 4.875rem;
+        padding-bottom: 5.5rem;
+
+        .title {
+            margin-top: 0;
+        }
+
+        .text {
+            opacity: 1;
+            margin: 5.5rem 0 0;
+        }
+
+        .logos {
+            display: flex;
+            gap: 5rem;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+        }
+    }
+
+    &.stay-informed {
+        background-color: $stay-informed-pedihcc-color;
+        color: white;
+
+        ::ng-deep .container {
+            max-width: 1062px;
+        }
+    }
+}
+
+.join-cmi-btn {
+    margin-top: 12px;
+}
+
+:host ::ng-deep {
+    .Link {
+        color: black;
+        text-decoration: underline;
+        font-weight: bold;
+    }
+
+    .static-page-paragraph-text {
+        font-size: 1.5rem;
+        line-height: 36px;
+    }
+}
+
+@media screen and (max-width: $desktop-breakpoint) {
+    section {
+        &.introduction {
+            padding-left: 3rem;
+            padding-right: 3rem;
+
+            .description {
+                min-width: 365px;
+            }
+
+            .image {
+                width: 320px;
+                height: 315px;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: $tablet-breakpoint) {
+    section {
+        &.introduction {
+            .flex {
+                flex-direction: column;
+                align-items: center;
+                gap: 2rem;
+            }
+
+            .description {
+                text-align: center;
+                padding: 0;
+            }
+
+            .image {
+                width: 260px;
+                height: 255px;
+            }
+
+            .logos img:first-child {
+                margin-right: 3rem;
+            }
+        }
+
+        &.partners {
+            .logos {
+                flex-direction: column;
+                max-width: 100%;
+
+                img {
+                    max-width: 100%;
+                    height: auto;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: $mobile-breakpoint) {
+    section {
+        padding-left: 1.5rem !important;
+        padding-right: 1.5rem !important;
+
+        &.introduction {
+            .description {
+                min-width: unset;
+            }
+
+            .image {
+                display: none;
+            }
+
+            .logos img {
+                display: block;
+                margin: 0 auto 5px !important;
+            }
+        }
+    }
+}

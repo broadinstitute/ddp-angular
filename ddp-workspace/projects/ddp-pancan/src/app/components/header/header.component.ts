@@ -10,6 +10,7 @@ import { WindowRef } from 'ddp-sdk';
 })
 export class HeaderComponent implements OnInit {
     @Input() isColorectalTheme: boolean;
+    @Input() isPediHCCTheme: boolean;
 
     public isPanelOpened = false;
     public isPageScrolled = false;
