@@ -67,7 +67,7 @@ export default abstract class PageBase implements PageInterface {
    * Returns "Log Out" button locator
    */
   getLogOutButton(): Locator {
-    return this.page.locator('button[data-ddp-test="signOutButton"]');
+    return this.page.locator('button[data-ddp-test="signOutButton"]').first();
   }
 
   async signOut(): Promise<void> {

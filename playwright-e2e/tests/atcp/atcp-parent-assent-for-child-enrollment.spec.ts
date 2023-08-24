@@ -191,9 +191,10 @@ test.describe('ATCP parent consent enrollment', () => {
       await assentForKidsPage.waitForReady();
 
       const paragraphs = await page.locator('ddp-group-block-list p').all();
-      for (const p of paragraphs) {
-        await expect(p).toHaveScreenshot('atcp-assent-for-kids-step-1.png');
+      for (const [index, paragraph] of paragraphs.entries()) {
+        await expect(paragraph).toHaveScreenshot(`atcp-assent-for-kids-step-${index}.png`)
       }
+
       await assentForKidsPage.next();
 
       await expect(page.locator('ddp-group-block-list')).toHaveScreenshot('atcp-assent-for-kids-step-2.png');
