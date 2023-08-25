@@ -22,14 +22,9 @@ export class LoggingService {
 
     public logError: Logger = this.showEvent(LogLevel.Error) ?
         (...args) => {
-            const stringifiedArgs = args.map(arg => {
-                if (arg instanceof Error) {
-                    return arg.stack ? arg.stack : arg.message;
-                }
-                if (arg instanceof Object) {
-                    return this.stringify(arg);
-                }
-                return arg;
+            const stringifiedArgs = args.map((arg) => {
+                let str = (typeof arg === 'object') ? this.stringify(arg) : arg;
+                return str += arg instanceof Error ? `, ${arg.stack}` : '';
             });
             this.logToCloud(stringifiedArgs.join(',\n'), null, 'ERROR').pipe(take(1)).subscribe();
             console.error.apply(window.console, stringifiedArgs);
@@ -47,7 +42,8 @@ export class LoggingService {
     }
 
     private stringify(obj: object): string {
-        return Object.keys(obj).map(key => `${key}: ${obj[key]}`).join(', ');
+        return Object.keys(obj).map(key => (typeof obj[key] === 'object') ? `${key}: ${JSON.stringify(obj[key])}` : `${key}: ${obj[key]}`)
+            .join(', ');
     }
 
     public logToCloud(payload: string, labels?: {[key: string]: string}, severity = 'INFO'): Observable<void> {
