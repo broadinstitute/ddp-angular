@@ -94,7 +94,6 @@ export default class FamilyMemberTab {
     public async getFamilyMemberTab(): Promise<Locator> {
         //todo Needs a better general locator - the last contains could capture more webelements than intended once family id is in 3,000's
         const familyMemberTabs = this.page.locator(`//li//a[contains(., 'RGP_')]`).all();
-        console.log(`Amount of tabs: ${(await familyMemberTabs).length}`);
         const amountOfFamilyMembers = (await familyMemberTabs).length;
         let relationID;
         let familyID;
