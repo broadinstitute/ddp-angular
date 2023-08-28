@@ -93,14 +93,14 @@ export default class FamilyMemberTab {
      */
     public async getFamilyMemberTab(): Promise<Locator> {
         //todo Needs a better general locator - the last contains could capture more webelements than intended once family id is in 3,000's
-        const familyMemberTabs = [this.page.locator(`//li//a[contains(., 'RGP_')]`)];
-        console.log(`Amount of tabs: ${familyMemberTabs.length}`);
+        const familyMemberTabs = this.page.locator(`//li//a[contains(., 'RGP_')]`).all();
+        console.log(`Amount of tabs: ${(await familyMemberTabs).length}`);
+        const amountOfFamilyMembers = (await familyMemberTabs).length;
         let relationID;
         let familyID;
         let familyMemberTab: Locator;
-        for (let familyMemberIndex = 0; familyMemberIndex < familyMemberTabs.length; familyMemberIndex++) {
-            const familyMember = familyMemberTabs[familyMemberIndex];
-            console.log(`Current tab: ${familyMember}`);
+        for (let familyMemberIndex = 0; familyMemberIndex < amountOfFamilyMembers; familyMemberIndex++) {
+            const familyMember = (await familyMemberTabs)[familyMemberIndex];
             const tabText = await familyMember.innerText();
             const familyMemberTabParts = tabText.split('_');
             relationID = familyMemberTabParts[2] as string;
@@ -109,7 +109,6 @@ export default class FamilyMemberTab {
             }
             if (relationID === this._relationshipID) {
                 familyID = familyMemberTabParts[1] as string;
-                console.log(`Family ID: ${familyID}`);
                 familyMemberTab = this.page.locator(`//li//a[contains(., 'RGP') and contains(., '${familyID}_${relationID}')]`);
                 break;
             }
