@@ -8,6 +8,7 @@ import { StudyNavEnum } from 'dsm/component/navigation/enums/studyNav-enum';
 import { Navigation } from 'dsm/component/navigation/navigation';
 import * as crypto from 'crypto';
 import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
+import { logInfo } from 'utils/log-utils';
 
 test.describe('Cohort tags', () => {
   let shortId: string;
@@ -23,31 +24,27 @@ test.describe('Cohort tags', () => {
     test(`Ensure cohort tags update and delete properly for ${studyName} @dsm @functional`, async ({ page, request }) => {
       // Inspect network requests to find a Playwright test user that does not have any cohort tag and notes
       await page.route('**/*', async (route, request): Promise<void> => {
-        if (!shortId) {
-          // only search for shortId one time to avoid duplicated searching
-          let participantShortId;
-          const regex = new RegExp(/applyFilter\?realm=.*&parent=participantList/i);
-          if (request.url().match(regex)) {
-            console.log(`Intercepting API request ${request.url()} for a E2E participant`);
-            const response = await route.fetch();
-            const json = JSON.parse(await response.text());
-            for (const i in json.participants) {
-              const profile = json.participants[i].esData.profile;
-              if (!profile.firstName.includes('E2E')) {
-                continue;
-              }
-              participantShortId = profile.hruid;
-              const dsmData = json.participants[i].esData.dsm;
-              if (dsmData['cohortTag']?.length > 0) {
-                participantShortId = null; // cohort tags already exists
-              }
-              if (dsmData.participant['notes']?.length > 0) {
-                participantShortId = null; // notes already exists
-              }
-              if (participantShortId) {
-                shortId = participantShortId;
-                break; // finished searching
-              }
+        const regex = new RegExp(/applyFilter\?realm=.*&parent=participantList/i);
+        if (request && !shortId && request.url().match(regex)) {
+          logInfo(`Intercepting API request ${request.url()} for a E2E participant`);
+          const response = await route.fetch({ timeout: 50000 });
+          const json = JSON.parse(await response.text());
+          for (const i in json.participants) {
+            const profile = json.participants[i].esData.profile;
+            if (!profile.firstName.includes('E2E')) {
+              continue;
+            }
+            let participantShortId = profile.hruid;
+            const dsmData = json.participants[i].esData.dsm;
+            const cohortTag: string[] = dsmData['cohortTag'];
+            const notes: string = dsmData.participant['notes'];
+
+            if ((notes && notes.length > 0) || (cohortTag && Object.keys(cohortTag).length > 0)) {
+              participantShortId = null; // cohort tags already exists
+            }
+            if (participantShortId) {
+              shortId = participantShortId;
+              break; // finished searching
             }
           }
         }
@@ -59,10 +56,9 @@ test.describe('Cohort tags', () => {
       const cohortTagValue1 = `tag1-${uuid}`;
       const cohortTagValue2 = `tag2-${uuid}`;
       const cohortTagValue3 = `tag3-${uuid}`;
-      const notes = `Test note ${studyName}-${uuid}`;
+      const notes = `Playwright testing ${studyName}-${uuid}`;
 
       const participantListPage = await new Navigation(page, request).selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
-      await participantListPage.assertPageTitle();
       await participantListPage.waitForReady();
 
       // Apply filter in search for the right participant on Participant List page
@@ -71,7 +67,7 @@ test.describe('Cohort tags', () => {
       await customizeViewPanel.selectColumns('Cohort Tags Columns', ['Cohort Tag Name']);
 
       // Search participant by Short ID
-      // console.log(`Participant Short ID: ${shortId}`);
+      logInfo(`Participant Short ID: ${shortId}`);
       await participantListPage.filterListByShortId(shortId);
 
       const participantListTable = participantListPage.participantListTable;
@@ -100,6 +96,8 @@ test.describe('Cohort tags', () => {
 
       // Verify tags and note existence
       await participantPage.assertNotesToBe(notes);
+      await participantPage.fillNotes(); // remove notes
+
       await cohortTag.assertCohortTagToHaveCount(cohortTagValue1, 0);
       await cohortTag.assertCohortTagToHaveCount(cohortTagValue2, 1);
       await cohortTag.assertCohortTagToHaveCount(cohortTagValue3, 1);
