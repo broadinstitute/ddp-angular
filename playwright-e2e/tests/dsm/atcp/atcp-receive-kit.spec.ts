@@ -133,7 +133,14 @@ test.describe('Receive Kit', () => {
       await test.step('Set new sample kit barcode', async () => {
         newBarcode = `${shortId}-${newBarcode}`;
         const genomeStudyTab = await participantPage.clickTab<GenomeStudyTab>(TabEnum.GENOME_STUDY);
-        await genomeStudyTab.setValue('Sample kit barcode for genome study', newBarcode);
+        await Promise.all([
+          genomeStudyTab.setValue('Sample kit barcode for genome study', newBarcode),
+          page.waitForResponse(resp => {
+            return resp.url().includes('/ui/patch')
+              && resp.status() === 200
+              && (resp.request().postDataJSON().nameValues[0].value as string).includes(newBarcode)
+          })
+        ]);
         await participantPage.backToList();
       });
 
