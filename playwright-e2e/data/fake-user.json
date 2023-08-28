@@ -30,12 +30,12 @@
   }, "brother": {
     "firstName": "Test Brother",
     "lastName": "Playwright",
-    "relationshipID": "14"
+    "relationshipID": "89"
   }, 
   "maternalGrandFather": {
     "firstName": "Test Maternal Grandfather",
     "lastName": "Playwright",
-    "relationshipID": "70"
+    "relationshipID": "97"
   },
   "doctor": {
     "name": "John Strange",

@@ -77,7 +77,7 @@ export default class FamilyMemberTab {
      * @returns the family id from the family member tab
      */
     public async getFamilyIDFromFamilyMemberTab(): Promise<number> {
-        const familyMemberTab = this.getFamilyMemberTab();
+        const familyMemberTab = await this.getFamilyMemberTab();
         const memberTabParts = (await familyMemberTab.innerText()).split('-'); //Family member tabs are usually {first name} - {subject id}
         const retreivedSubjectID = memberTabParts[1];
         const subjectIDParts = retreivedSubjectID.split('_'); //Subject id is usually in the format of RGP_{family id here}_{relationship id here}
@@ -91,9 +91,30 @@ export default class FamilyMemberTab {
      * Uses the relationshipID to find the family member tab to be returned, must be ran only after setting the relationshipID
      * @returns locator for a family member's tab
      */
-    public getFamilyMemberTab(): Locator {
+    public async getFamilyMemberTab(): Promise<Locator> {
         //todo Needs a better general locator - the last contains could capture more webelements than intended once family id is in 3,000's
-        return this.page.locator(`//li//a[contains(., 'RGP') and contains(., '_${this.relationshipID}')]`);
+        const familyMemberTabs = [this.page.locator(`//li//a[contains(., 'RGP_')]`)];
+        console.log(`Amount of tabs: ${familyMemberTabs.length}`);
+        let relationID;
+        let familyID;
+        let familyMemberTab: Locator;
+        for (let familyMemberIndex = 0; familyMemberIndex < familyMemberTabs.length; familyMemberIndex++) {
+            const familyMember = familyMemberTabs[familyMemberIndex];
+            console.log(`Current tab: ${familyMember}`);
+            const tabText = await familyMember.innerText();
+            const familyMemberTabParts = tabText.split('_');
+            relationID = familyMemberTabParts[2] as string;
+            if (!(relationID === this._relationshipID)) {
+                continue;
+            }
+            if (relationID === this._relationshipID) {
+                familyID = familyMemberTabParts[1] as string;
+                console.log(`Family ID: ${familyID}`);
+                familyMemberTab = this.page.locator(`//li//a[contains(., 'RGP') and contains(., '${familyID}_${relationID}')]`);
+                break;
+            }
+        }
+        return familyMemberTab!;
     }
 
     public getJumpToMenuText(): Locator {
