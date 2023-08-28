@@ -2,7 +2,7 @@
 @import '../../../styles/breakpoints';
 
 .wrapper {
-  height: 92px;
+  min-height: 92px;
   display: flex;
   margin: 5rem 0;
   position: relative;
@@ -30,7 +30,7 @@
   &_active {
     color: map-get($colors, 'progress_bar-active');
 
-    & .circular { 
+    & .circular {
       background: map-get($colors, 'progress_bar-active');
       border: 3px solid map-get($colors, 'progress_bar-active-border');
       & .number {
@@ -43,7 +43,7 @@
     }
 
     &_white {
-      & .circular { 
+      & .circular {
         background: map-get($colors, 'white');
         border: 3px solid map-get($colors, 'progress_bar-active-border');
         & .number {
