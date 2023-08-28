@@ -26,3 +26,31 @@ export enum GeneralAnswer {
     NO = 'No',
     UNKNOWN = 'Unknown',
 }
+
+/* Lists the placements of certain columns in the onc history. Note: Number assumes 0-based/counting from zero */
+export enum OncHistoryColumn {
+    DATE_OF_PX = 2,
+    TYPE_OF_PX = 3,
+    LOCATION_OF_PX = 4,
+    HISTOLOGY = 5,
+    ACCESSION_NUMBER = 6,
+    FACILITY = 7,
+    PHONE = 8,
+    FAX = 9,
+    DESTRUCTION_POLICY = 10,
+    OS2_SAMPLE_FROM_LOCAL_CONTROL = 11,
+    LMS_TUMOR_SIZE = 11,
+    OS2_DECALCIFICATION = 12,
+    LMS_SLIDES_TO_REQUEST = 12,
+    OS2_FFPE = 13,
+    LMS_FACILITY_WHERE_SAMPLE_REVIEWED = 13,
+    OS2_BLOCKS_WITH_TUMOR = 14,
+    LMS_SLIDES_TOTAL = 14,
+    OS2_TUMOR_SIZE = 15,
+    LMS_BLOCKS_TO_REQUEST = 15,
+    OS2_NECROSIS = 16,
+    LMS_TREATMENT_EFFECT = 16,
+    VIABLE_TUMOR = 17,
+    LMS_NECROSIS = 18,
+    REQUEST_STATUS = 21,
+}

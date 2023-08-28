@@ -58,7 +58,7 @@ export enum SampleColumns {
   SAMPLE_RECEIVED = 'Sample Received',
   SAMPLE_SENT = 'Sample Sent',
   SAMPLE_TYPE = 'Sample Type',
-  SEQUENCING_RESTRICTION = 'Sequecung Restriction',
+  SEQUENCING_RESTRICTION = 'Sequencing Restriction',
   STATUS = 'Status',
   TRACKING_IN = 'Tracking-in',
   TRACKING_OUT = 'Tracking-out',

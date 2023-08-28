@@ -117,15 +117,20 @@ export class ParticipantListTable extends Table {
 
   /**
    * Returns the number of the last page of the participant list
+   * @type pagebuttonContents - 0 based- string array that splits "page" and {page number}
    * @returns The number of the last page button e.g. if there are 3 pages, this method returns: 3
    */
   public async getLastPageNumber(): Promise<number> {
     const lastPageButton = this.lastPage;
-    const pageButtonContents0Based = (await lastPageButton.innerText()).split(ScreenReaderText.GENERAL_PAGE);
-    const pageNumber = pageButtonContents0Based[1].trim();
+    const pageButtonContents = (await lastPageButton.innerText()).split(ScreenReaderText.GENERAL_PAGE);
+    const pageNumber = pageButtonContents[1].trim();
     return parseInt(pageNumber);
   }
 
+  /**
+   * Return the current page number
+   * @returns @type pagebuttonContents - 0 based- string array that splits "You're on page" and {page number}
+   */
   public async getCurrentPageNumber(): Promise<number> {
     const currentPageButton = this.currentPage;
     const pageButtonContents = (await currentPageButton.innerText()).split(ScreenReaderText.CURRENT_PAGE);
