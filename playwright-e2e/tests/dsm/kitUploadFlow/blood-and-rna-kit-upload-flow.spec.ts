@@ -24,7 +24,7 @@ import { saveParticipantGuid } from 'utils/faker-utils';
 import { ParticipantListTable } from 'dsm/component/tables/participant-list-table';
 
 test.describe('Blood & RNA Kit Upload', () => {
-test.skip('Verify that a blood & rna kit can be uploaded @rgp @functional @upload', async ({ page, request}, testInfo) => {
+test('Verify that a blood & rna kit can be uploaded @rgp @functional @upload', async ({ page, request}, testInfo) => {
     const testResultDirectory = testInfo.outputDir;
 
     const study = StudyEnum.RGP;
@@ -53,7 +53,7 @@ test.skip('Verify that a blood & rna kit can be uploaded @rgp @functional @uploa
     const proband = new FamilyMemberTab(page, FamilyMember.PROBAND);
     proband.relationshipID = user.patient.relationshipID;
 
-    const probandTab = proband.getFamilyMemberTab();
+    const probandTab = await proband.getFamilyMemberTab();
     await expect(probandTab).toBeVisible();
     await probandTab.click();
     await expect(probandTab).toHaveClass('nav-link active');//Make sure the tab is in view and selected
