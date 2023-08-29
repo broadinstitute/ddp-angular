@@ -65,7 +65,12 @@ export default class AtcpConsentPage extends AtcpPageBase {
     return new Question(this.page, { prompt: 'DOB of Participant'});
   }
 
-  get signAndConsent(): Button {
-    return new Button(this.page, { label: 'Sign & Consent', root: '.activity-buttons' });
+  /**
+   * <br> Question: DOB of Parent or Legal Guardian
+   *
+   * <br> Type: Date
+   */
+  get parentDoB(): Question {
+    return new Question(this.page, { prompt: 'DOB of Parent or Legal Guardian'});
   }
 }

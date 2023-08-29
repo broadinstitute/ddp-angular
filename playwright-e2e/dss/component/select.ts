@@ -1,4 +1,4 @@
-import { Locator, Page } from '@playwright/test';
+import { expect, Locator, Page } from '@playwright/test';
 import WidgetBase from 'dss/component/widget-base';
 
 /**
@@ -68,6 +68,7 @@ export default class Select extends WidgetBase {
           // Use tab to close multiSelectable dropdown
           await this.page.keyboard.press('Tab');
         }
+        await expect(dropdown).toBeVisible({ visible: false }); // dropdown should close automatically
         break;
     }
   }

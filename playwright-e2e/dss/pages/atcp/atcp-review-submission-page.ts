@@ -9,8 +9,7 @@ export default class AtcpReviewSubmissionPage extends AtcpPageBase {
 
   async waitForReady(): Promise<void> {
     await super.waitForReady();
-    await expect(this.page.locator('app-workflow-progress .current .number')).toHaveText(/^6$/);
-    await expect(this.page.locator('app-workflow-progress .current .name')).toHaveText('Review & Submission');
+    await expect(this.page.locator('h1.activity-header')).toHaveText(/^Review & Submission$/);
   }
 
   async saveAndSubmitEnrollment(): Promise<void> {

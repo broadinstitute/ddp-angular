@@ -1,5 +1,6 @@
 import { expect, Page } from '@playwright/test';
 import Input from 'dss/component/input';
+import Question from 'dss/component/Question';
 import { AtcpPageBase } from 'dss/pages/atcp/atcp-page-base';
 
 export default class AtcpContactPhysicianPage extends AtcpPageBase {
@@ -9,8 +10,7 @@ export default class AtcpContactPhysicianPage extends AtcpPageBase {
 
   async waitForReady(): Promise<void> {
     await super.waitForReady();
-    await expect(this.page.locator('app-workflow-progress .current .number')).toHaveText(/^3$/);
-    await expect(this.page.locator('app-workflow-progress .current .name')).toHaveText('Contacting Physician');
+    await expect(this.page.locator('h1.activity-header')).toHaveText(/^Contacting Physician$/);
   }
 
   get physicianFirstName(): Input {
@@ -27,5 +27,14 @@ export default class AtcpContactPhysicianPage extends AtcpPageBase {
 
   get physicianPhone(): Input {
     return new Input(this.page, { ddpTestID: 'answer:PHYSICIAN_PHONE' });
+  }
+
+  /**
+   * <br> Question: <child_name> has been evaluated at (if applicable):
+   *
+   * <br> Type: Checkbox list
+   */
+  get evaluatedInstitution(): Question {
+    return new Question(this.page, { cssClassAttribute: '.picklist-answer-EVALUATION'});
   }
 }
