@@ -42,8 +42,10 @@ export class LoggingService {
     }
 
     private stringify(obj: object): string {
-        return Object.keys(obj).map(key => (typeof obj[key] === 'object') ? `${key}: ${JSON.stringify(obj[key])}` : `${key}: ${obj[key]}`)
-            .join(', ');
+        return Object.keys(obj).map(key => {
+            const value = obj[key];
+            return (typeof value === 'object') ? `${key}: ${JSON.stringify(value)}` : `${key}: ${value}`;
+        }).join(', ');
     }
 
     public logToCloud(payload: string, labels?: {[key: string]: string}, severity = 'INFO'): Observable<void> {
