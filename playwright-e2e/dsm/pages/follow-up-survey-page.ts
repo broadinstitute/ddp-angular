@@ -30,7 +30,7 @@ export default class FollowUpSurveyPage {
 
   public async waitForReady(): Promise<void> {
     await expect(this.page.locator('h1')).toHaveText(/^\s*Follow-Up Survey\s*$/);
-    await expect(this.select().toLocator()).toBeVisible({ timeout: 30000 });
+    await expect(this.select().toLocator()).toBeVisible();
     await waitForNoSpinner(this.page);
   }
 

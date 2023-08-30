@@ -43,7 +43,7 @@ export default class Input extends WidgetBase {
 
     const useType = type ? type : false;
     nth ? this.nth = nth : this.nth;
-
+    await this.toLocator().scrollIntoViewIfNeeded();
     const existValue = await this.toLocator().inputValue();
     if (existValue !== value) {
       const autocomplete = await this.getAttribute('aria-autocomplete');

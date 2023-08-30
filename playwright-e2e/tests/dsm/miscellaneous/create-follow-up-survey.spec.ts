@@ -63,7 +63,7 @@ test.describe('Create Follow-Up Survey', () => {
       await followupSurveyPage.createSurvey();
 
       // Verify new survey created
-      const responsePromise = page.waitForResponse(resp => resp.url().includes('surveyName='), { timeout: 50000 });
+      const responsePromise = page.waitForResponse(resp => resp.url().includes('surveyName='));
       await followupSurveyPage.reloadTable();
       const response = await responsePromise;
 

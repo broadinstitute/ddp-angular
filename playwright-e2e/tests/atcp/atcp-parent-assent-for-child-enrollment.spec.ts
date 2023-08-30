@@ -98,7 +98,7 @@ test.describe('ATCP parent consent enrollment', () => {
       await registrationPage.participantCity.fill(child.city);
       await registrationPage.participantStreetPostalCode.fill(child.zip);
       // Wait for the very long patch requests to finish before select country and state
-      await expect(registrationPage.register.toLocator()).toBeVisible({ timeout: 50000 });
+      await expect(registrationPage.register.toLocator()).toBeVisible();
       await registrationPage.fillInCountry(child.country.abbreviation, { state: 'US-MA' });
       await registrationPage.register.click();
 

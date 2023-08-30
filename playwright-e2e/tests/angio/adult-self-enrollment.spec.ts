@@ -137,8 +137,7 @@ test.describe('Adult Enrollment', () => {
 
     await expect
       .poll(async () => dashboardTable.rowLocator().count(), {
-        message: 'Error in dashboard table: Expected rows not found',
-        timeout: 10000
+        message: 'Error in dashboard table: Expected rows not found'
       })
       .toBe(3);
 
