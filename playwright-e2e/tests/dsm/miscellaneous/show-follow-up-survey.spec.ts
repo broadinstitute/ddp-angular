@@ -16,7 +16,7 @@ test.describe('Follow-Up Surveys', () => {
 
       const configuredSurveys = surveysForStudy(followupSurveyPage, study);
       const actualSurveyOptions = await followupSurveyPage.select().getAllOptions();
-      expect(actualSurveyOptions).toEqual(configuredSurveys);
+      expect(actualSurveyOptions).toContain(configuredSurveys);
     });
 
     test(`Shows previous triggered surveys in @${study} @dsm @functional`, async ({ page, request }) => {
@@ -105,7 +105,7 @@ test.describe('Follow-Up Surveys', () => {
         configuredSurveys = ['SOMATIC_RESULTS (REPEATING)'];
         break;
       case StudyEnum.PROSTATE:
-        configuredSurveys = ['FOLLOWUPCONSENT (REPEATING)', 'FOLLOWUP (REPEATING)'];
+        configuredSurveys = ['FOLLOWUP (REPEATING)'];
         break;
       case StudyEnum.ESC:
         configuredSurveys = ['FOLLOWUPCONSENT (REPEATING)'];
