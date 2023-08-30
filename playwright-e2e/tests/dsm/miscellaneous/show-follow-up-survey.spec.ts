@@ -105,7 +105,7 @@ test.describe('Follow-Up Surveys', () => {
         configuredSurveys = ['SOMATIC_RESULTS (REPEATING)'];
         break;
       case StudyEnum.PROSTATE:
-        configuredSurveys = ['FOLLOWUP (REPEATING)'];
+        configuredSurveys = ['FOLLOWUPCONSENT (REPEATING)', 'FOLLOWUP (REPEATING)'];
         break;
       case StudyEnum.ESC:
         configuredSurveys = ['FOLLOWUPCONSENT (REPEATING)'];

@@ -13,7 +13,6 @@ export default class AtcpDashboardPage extends AtcpPageBase {
     await super.waitForReady();
     await expect(this.page.locator('h1.title')).toHaveText('Thank you for joining the Global A-T Family Data Platform!');
     await waitForNoSpinner(this.page);
-    await this.getTable().waitForReady();
   }
 
   getTable(): Table {
@@ -25,7 +24,10 @@ export default class AtcpDashboardPage extends AtcpPageBase {
     await waitForNoSpinner(this.page);
   }
 
-  async expand(): Promise<void> {
-    return this.page.getByRole('button', { name: 'Expand' }).click();
+  async expandTable(): Promise<void> {
+    const isVisible = await this.getTable().headerLocator().isVisible();
+    if (!isVisible) {
+      return this.page.getByRole('button', { name: 'Expand' }).click();
+    }
   }
 }

@@ -55,15 +55,15 @@ export default class Input extends WidgetBase {
       if (autocomplete === 'list' && expanded === 'true') {
         const dropdown = this.page.locator('.mat-autocomplete-visible[role="listbox"][id]');
         await dropdown.waitFor({ state: 'visible', timeout: 30 * 1000 });
-        const option = opts ? dropdownOption : value as string;
+        const option = dropdownOption ? dropdownOption : value;
         await dropdown
-        .locator('[role="option"]') //, { has: this.page.locator(`span.mat-option-text:text("${dropdownOption}")`) })
-        .filter({ hasText: option })
-        .first()
-        .click();
+          .locator('[role="option"]') //, { has: this.page.locator(`span.mat-option-text:text("${dropdownOption}")`) })
+          .filter({ hasText: option.toString() })
+          .first()
+          .click();
       }
-      const pressEnter = this.toLocator().press('Tab');
-      waitForSaveRequest ? await Promise.all([waitForResponse(this.page, { uri: '/answers'}), pressEnter]) : await pressEnter;
+      const pressTab = this.toLocator().press('Tab');
+      waitForSaveRequest ? await Promise.all([waitForResponse(this.page, { uri: '/answers'}), pressTab]) : await pressTab;
     }
   }
 }

@@ -373,9 +373,10 @@ test.describe('ATCP parent consent enrollment', () => {
       await expect(page.locator('.participant-expandable__name')).toHaveText(childFullName);
 
       const dashboardPage = new AtcpDashboardPage(page);
-      const table = dashboardPage.getTable();
-      await dashboardPage.expand();
+      await dashboardPage.waitForReady();
 
+      await dashboardPage.expandTable();
+      const table = dashboardPage.getTable();
       const expectedHeaders = ['Form', 'Summary', 'Created', 'Status', 'Actions'];
       const actualHeaders = await table.getHeaderNames();
       await assertTableHeaders(actualHeaders, expectedHeaders);

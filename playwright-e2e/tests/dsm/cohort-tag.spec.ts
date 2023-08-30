@@ -24,23 +24,25 @@ test.describe('Cohort tags', () => {
     test(`Ensure cohort tags update and delete properly for ${studyName} @dsm @functional`, async ({ page, request }) => {
       // Inspect network requests to find a Playwright test user that does not have any cohort tag and notes
       await page.route('**/*', async (route, request): Promise<void> => {
-        const regex = new RegExp(/applyFilter\?realm=.*&parent=participantList/i);
+        const regex = new RegExp(/applyFilter\?realm=.*&userId=.*&parent=participantList/i);
         if (request && !shortId && request.url().match(regex)) {
           logInfo(`Intercepting API request ${request.url()} for a E2E participant`);
           const response = await route.fetch({ timeout: 50000 });
           const json = JSON.parse(await response.text());
+
           for (const i in json.participants) {
-            const profile = json.participants[i].esData.profile;
-            if (!profile.firstName.includes('E2E')) {
+            const participant = json.participants[i];
+            const profile = participant.esData.profile;
+            const participantShortId = profile.hruid;
+            const dsmData = participant.esData.dsm;
+            const cohortTag: string[] = dsmData?.cohortTag;
+            const notes: string = dsmData?.participant?.notes;
+
+            if (!profile.firstName?.includes('E2E')) {
               continue;
             }
-            let participantShortId = profile.hruid;
-            const dsmData = json.participants[i].esData.dsm;
-            const cohortTag: string[] = dsmData['cohortTag'];
-            const notes: string = dsmData.participant['notes'];
-
             if ((notes && notes.length > 0) || (cohortTag && Object.keys(cohortTag).length > 0)) {
-              participantShortId = null; // cohort tags already exists
+              continue; // cohort tags or notes already exists
             }
             if (participantShortId) {
               shortId = participantShortId;

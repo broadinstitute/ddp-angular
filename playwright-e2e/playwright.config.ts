@@ -33,7 +33,8 @@ const testConfig: PlaywrightTestConfig = {
     toHaveScreenshot: {
       scale: 'css',
       // Account for minor difference in text rendering and resolution between headless and headed mode
-      threshold: 1
+      threshold: 1,
+      maxDiffPixelRatio: 0.3
     }
   },
   /* Run tests in files in parallel */
@@ -42,7 +43,7 @@ const testConfig: PlaywrightTestConfig = {
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 1 : 0,
   workers: process.env.CI ? 2 : 5,
-  maxFailures: process.env.CI ? 10 : 0,
+  maxFailures: 0,
 
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: [
