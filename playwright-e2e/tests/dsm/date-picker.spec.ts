@@ -4,6 +4,7 @@ import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
 import { test } from 'fixtures/dsm-fixture';
 import { getDate } from 'utils/date-utils';
+import { logInfo } from 'utils/log-utils';
 
 test.describe('DSM Date Picker', () => {
   test('Pick 12/20/1995 as date of birth on Participant List @dsm', async ({ page, request }) => {
@@ -71,7 +72,7 @@ test.describe('DSM Date Picker', () => {
 
     // Verify date value match
     const selectDate = getDate(new Date(1995, 11, 20));
-    console.log(`Date picker: Pick date is ${selectDate}`);
+    logInfo(`Date picker: Pick date is ${selectDate}`);
 
     const value = await searchPanel.textInputLocator('Date of Birth').inputValue();
     expect(value).toBe(selectDate);

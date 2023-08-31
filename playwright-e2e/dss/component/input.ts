@@ -1,5 +1,6 @@
-import { Locator, Page } from '@playwright/test';
+import { expect, Locator, Page } from '@playwright/test';
 import WidgetBase from 'dss/component/widget-base';
+import { logError } from 'utils/log-utils';
 import { waitForResponse } from 'utils/test-utils';
 
 export default class Input extends WidgetBase {
@@ -40,9 +41,12 @@ export default class Input extends WidgetBase {
    */
   async fill(value: string | number, opts: { dropdownOption?: string, type?: boolean, nth?: number, waitForSaveRequest?: boolean } = {}): Promise<void> {
     const { dropdownOption, type, nth, waitForSaveRequest = false } = opts;
-
     const useType = type ? type : false;
     nth ? this.nth = nth : this.nth;
+
+    await this.toLocator().scrollIntoViewIfNeeded().catch(err => logError(`${err}\n${this.toLocator()}`));
+    // Is Saving button visible before typing? tests could become flaky if saving is in progress before adding another new patch request
+    await expect(this.page.locator('button:visible', { hasText: 'Saving' })).toBeHidden();
 
     const existValue = await this.toLocator().inputValue();
     if (existValue !== value) {
@@ -55,15 +59,24 @@ export default class Input extends WidgetBase {
       if (autocomplete === 'list' && expanded === 'true') {
         const dropdown = this.page.locator('.mat-autocomplete-visible[role="listbox"][id]');
         await dropdown.waitFor({ state: 'visible', timeout: 30 * 1000 });
-        const option = opts ? dropdownOption : value as string;
+        const option = dropdownOption ? dropdownOption : value;
         await dropdown
-        .locator('[role="option"]') //, { has: this.page.locator(`span.mat-option-text:text("${dropdownOption}")`) })
-        .filter({ hasText: option })
-        .first()
-        .click();
+          .locator('[role="option"]') //, { has: this.page.locator(`span.mat-option-text:text("${dropdownOption}")`) })
+          .filter({ hasText: option.toString() })
+          .first()
+          .click();
       }
-      const pressEnter = this.toLocator().press('Tab');
-      waitForSaveRequest ? await Promise.all([waitForResponse(this.page, { uri: '/answers'}), pressEnter]) : await pressEnter;
+      const pressTab = this.toLocator().press('Tab');
+      if (waitForSaveRequest) {
+        await Promise.all([
+          waitForResponse(this.page, { uri: '/answers'}),
+          pressTab
+        ]);
+      } else {
+        await pressTab;
+        await this.page.waitForTimeout(200); // short delay to detect triggered saving request
+      }
+      await expect(this.page.locator('button:visible', { hasText: 'Saving' })).toBeHidden();
     }
   }
 }

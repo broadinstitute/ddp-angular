@@ -89,7 +89,7 @@ test.describe.serial('Join Pancan Mailing List', () => {
       await table.sort(COLUMN.DATE, SortOrder.DESC); // Sorting to get newest record to display first
       const cell = await table.findCell(COLUMN.EMAIL, newEmail, COLUMN.EMAIL);
       await expect(cell).toBeTruthy();
-    }).toPass();
+    }).toPass({ timeout: 30000 });
 
     // Verify date signed up is found inside table
     const tCell = await table.findCell(COLUMN.EMAIL, newEmail, COLUMN.DATE, { exactMatch: false });

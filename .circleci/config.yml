@@ -64,6 +64,7 @@ executors:
       - image: mcr.microsoft.com/playwright:v1.31.0-focal
     working_directory: *playwright_path
     environment:
+      TZ: "America/New_York"
       NODE_ENV: development # Needed if playwright is in devDependencies
 
 commands:
@@ -700,7 +701,7 @@ jobs:
           command: npx playwright install --with-deps chromium # Only need Chrome browser
 
       - run:
-          name: Running Playwright tests
+          name: Running Playwright tests on << parameters.env >>
           working_directory: *playwright_path
           command: |            
             npx playwright test --list | grep -o 'tests/.*.spec.ts' | sort | uniq > e2e_tests.txt
@@ -843,15 +844,6 @@ workflows:
     jobs:
       - deploy-stored-build-job:
           study_key: << pipeline.parameters.study_key >>
-      - playwright-build:
-          env: << pipeline.parameters.deploy_env >>
-      - playwright-test:
-          env: << pipeline.parameters.deploy_env >>
-          parallelism_num: 2
-          test_suite: UNKNOWN
-          requires:
-            - playwright-build
-            - deploy-stored-build-job
 
   api-run-tests-workflow:
     # Run ui tests for study specified in api call by run_ci.sh and tests for sdk and toolkit
