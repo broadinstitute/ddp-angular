@@ -64,6 +64,7 @@ executors:
       - image: mcr.microsoft.com/playwright:v1.31.0-focal
     working_directory: *playwright_path
     environment:
+      TZ: "America/New_York"
       NODE_ENV: development # Needed if playwright is in devDependencies
 
 commands:
