@@ -25,9 +25,10 @@ export default class AtcpDashboardPage extends AtcpPageBase {
   }
 
   async expandTable(): Promise<void> {
-    const isVisible = await this.getTable().headerLocator().isVisible();
-    if (!isVisible) {
-      return this.page.getByRole('button', { name: 'Expand' }).click();
+    try {
+      return this.getTable().headerLocator().waitFor({ state: 'visible', timeout: 5000 });
+    } catch (err) {
+      return this.page.locator('.participant-expandable button.participant-expandable__control').click();
     }
   }
 }

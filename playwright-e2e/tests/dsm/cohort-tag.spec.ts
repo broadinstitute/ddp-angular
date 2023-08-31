@@ -21,7 +21,7 @@ test.describe('Cohort tags', () => {
       await welcomePage.selectStudy(studyName);
     });
 
-    test(`Ensure cohort tags update and delete properly for ${studyName} @dsm @functional`, async ({ page, request }) => {
+    test(`Ensure cohort tags update and delete properly for @${studyName} @dsm @functional @cohort-tag`, async ({ page, request }) => {
       // Inspect network requests to find a Playwright test user that does not have any cohort tag and notes
       await page.route('**/*', async (route, request): Promise<void> => {
         const regex = new RegExp(/applyFilter\?realm=.*&userId=.*&parent=participantList/i);
