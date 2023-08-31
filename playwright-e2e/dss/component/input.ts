@@ -40,14 +40,13 @@ export default class Input extends WidgetBase {
    */
   async fill(value: string | number, opts: { dropdownOption?: string, type?: boolean, nth?: number, waitForSaveRequest?: boolean } = {}): Promise<void> {
     const { dropdownOption, type, nth, waitForSaveRequest = false } = opts;
-
     const useType = type ? type : false;
     nth ? this.nth = nth : this.nth;
 
+    await this.toLocator().scrollIntoViewIfNeeded();
     // Is Saving button visible before typing? tests could become flaky if saving is in progress before adding another new patch request
     await expect(this.page.locator('button:visible', { hasText: 'Saving' })).toBeHidden();
 
-    await this.toLocator().scrollIntoViewIfNeeded();
     const existValue = await this.toLocator().inputValue();
     if (existValue !== value) {
       const autocomplete = await this.getAttribute('aria-autocomplete');
@@ -67,7 +66,16 @@ export default class Input extends WidgetBase {
           .click();
       }
       const pressTab = this.toLocator().press('Tab');
-      waitForSaveRequest ? await Promise.all([waitForResponse(this.page, { uri: '/answers'}), pressTab]) : await pressTab;
+      if (waitForSaveRequest) {
+        await Promise.all([
+          waitForResponse(this.page, { uri: '/answers'}),
+          pressTab
+        ]);
+      } else {
+        await pressTab;
+        await this.page.waitForTimeout(200); // short delay to detect triggered saving request
+      }
+      await expect(this.page.locator('button:visible', { hasText: 'Saving' })).toBeHidden();
     }
   }
 }
