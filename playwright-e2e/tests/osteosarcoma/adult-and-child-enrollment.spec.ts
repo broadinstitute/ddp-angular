@@ -4,7 +4,6 @@ import HomePage from 'dss/pages/osteo/home-page';
 import PrequalPage from 'dss/pages/osteo/prequal-page';
 import ConsentAssentPage from 'dss/pages/osteo/consent-assent-page';
 import * as auth from 'authentication/auth-angio';
-import testConfig from 'playwright.config';
 import { waitForResponse } from 'utils/test-utils';
 
 const { OSTEO_USER_EMAIL, OSTEO_USER_PASSWORD } = process.env;
