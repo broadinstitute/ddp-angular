@@ -1,4 +1,4 @@
-import { Locator, Page } from '@playwright/test';
+import { expect, Locator, Page } from '@playwright/test';
 import WidgetBase from 'dss/component/widget-base';
 import { waitForResponse } from 'utils/test-utils';
 
@@ -43,6 +43,10 @@ export default class Input extends WidgetBase {
 
     const useType = type ? type : false;
     nth ? this.nth = nth : this.nth;
+
+    // Is Saving button visible before typing? tests could become flaky if saving is in progress before adding another new patch request
+    await expect(this.page.locator('button:visible', { hasText: 'Saving' })).toBeHidden();
+
     await this.toLocator().scrollIntoViewIfNeeded();
     const existValue = await this.toLocator().inputValue();
     if (existValue !== value) {

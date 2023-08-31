@@ -31,7 +31,7 @@ export default class KitsWithoutLabelPage {
   public async waitForLoad(): Promise<void> {
     await waitForNoSpinner(this.page);
     await expect(async () => expect(await this.page.locator('mat-checkbox[id]').count()).toBeGreaterThanOrEqual(1))
-      .toPass();
+      .toPass({ timeout: 60000 });
   }
 
   public async selectKitType(kitType: KitTypeEnum): Promise<void> {
