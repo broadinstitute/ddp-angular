@@ -11,10 +11,12 @@ import RgpParticipantPage from 'dsm/pages/participant-page/rgp/rgp-participant-p
 import { saveParticipantGuid } from 'utils/faker-utils';
 import { ParticipantListTable } from 'dsm/component/tables/participant-list-table';
 import { calculateAge } from 'utils/date-utils';
+import { logInfo } from 'utils/log-utils';
 
-let rgpEmail: string;
 
 test.describe.serial('DSM Family Enrollment Handling', () => {
+    let rgpEmail: string;
+
     test.skip('Verify the display and functionality of family account dynamic fields @functional @rgp', async ({ page, request}) => {
         const navigation = new Navigation(page, request);
 
@@ -81,7 +83,6 @@ test.describe.serial('DSM Family Enrollment Handling', () => {
         await expectedNumberToSequence.click();
         await dropdownOptions.filter({ hasText: '5' }).click();
     });
-
 
     //Skipping until housekeeping stuff is fixed
     test.skip('Verify that the proband family member tab can be filled out @functional @rgp @proband', async ({ page, request }) => {
@@ -424,7 +425,7 @@ test.describe.serial('DSM Family Enrollment Handling', () => {
     await expect(methlytation).toHaveText('No');
 
     //The default value of Blood RNASeq? is 'N/A'
-    const bloodRNASeqNotApplicable = proband.getBloodRnaSeq('N/A')
+    const bloodRNASeqNotApplicable = proband.getBloodRnaSeq('N/A');
     await expect(bloodRNASeqNotApplicable).toBeChecked();
 
     //Fill out Tissue section
@@ -601,7 +602,7 @@ test.describe.serial('DSM Family Enrollment Handling', () => {
     await expect(probandFamilyMemberTab).toBeVisible();
     const probandFamilyID = await proband.getFamilyIDFromFamilyMemberTab();
 
-    console.log(`grandfather family id ${maternalGrandfatherFamilyID} vs proband family id: ${probandFamilyID}`);
+    logInfo(`grandfather family id ${maternalGrandfatherFamilyID} vs proband family id: ${probandFamilyID}`);
     await expect(maternalGrandfatherFamilyID).toEqual(probandFamilyID);
     });
 
