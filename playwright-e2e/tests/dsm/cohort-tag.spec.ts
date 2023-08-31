@@ -22,7 +22,7 @@ test.describe('Cohort tags', () => {
     });
 
     test(`Ensure cohort tags update and delete properly for @${studyName} @dsm @functional @cohort-tag`, async ({ page, request }) => {
-      // Inspect network requests to find a Playwright test user that does not have any cohort tag and notes
+      // Inspect network requests to find a Playwright test user that does not have any cohort tag
       await page.route('**/*', async (route, request): Promise<void> => {
         const regex = new RegExp(/applyFilter\?realm=.*&userId=.*&parent=participantList/i);
         if (request && !shortId && request.url().match(regex)) {
@@ -36,13 +36,12 @@ test.describe('Cohort tags', () => {
             const participantShortId = profile.hruid;
             const dsmData = participant.esData.dsm;
             const cohortTag: string[] = dsmData?.cohortTag;
-            const notes: string = dsmData?.participant?.notes;
 
             if (!profile.firstName?.includes('E2E')) {
               continue;
             }
-            if ((notes && notes.length > 0) || (cohortTag && Object.keys(cohortTag).length > 0)) {
-              continue; // cohort tags or notes already exists
+            if (cohortTag && Object.keys(cohortTag).length > 0) {
+              continue; // cohort tags already exists
             }
             if (participantShortId) {
               shortId = participantShortId;
@@ -58,7 +57,6 @@ test.describe('Cohort tags', () => {
       const cohortTagValue1 = `tag1-${uuid}`;
       const cohortTagValue2 = `tag2-${uuid}`;
       const cohortTagValue3 = `tag3-${uuid}`;
-      const notes = `Playwright testing ${studyName}-${uuid}`;
 
       const participantListPage = await new Navigation(page, request).selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
       await participantListPage.waitForReady();
@@ -73,8 +71,8 @@ test.describe('Cohort tags', () => {
       await participantListPage.filterListByShortId(shortId);
 
       const participantListTable = participantListPage.participantListTable;
-      let cohortTagColumn = await participantListTable.getParticipantDataAt(0, 'Cohort Tag Name');
-      expect(cohortTagColumn.length).toBe(0); // No Cohort Tags
+      let cohortTagName = await participantListTable.getParticipantDataAt(0, 'Cohort Tag Name');
+      expect(cohortTagName.length).toBe(0); // No Cohort Tags
 
       const participantPage: ParticipantPage = await participantListTable.openParticipantPageAt(0);
       await participantPage.assertPageTitle();
@@ -84,7 +82,6 @@ test.describe('Cohort tags', () => {
       await cohortTag.remove(cohortTagValue1);
       await cohortTag.add(cohortTagValue2);
       await cohortTag.add(cohortTagValue3);
-      await participantPage.fillNotes(notes);
       await participantPage.backToList();
 
       await participantListPage.assertPageTitle();
@@ -92,14 +89,11 @@ test.describe('Cohort tags', () => {
 
       // Open participant again to verify cohort tags
       await participantListPage.filterListByShortId(shortId);
-      cohortTagColumn = await participantListTable.getParticipantDataAt(0, 'Cohort Tag Name');
-      expect(cohortTagColumn.length).toBeGreaterThan(1); // Cohort Tags exist
+      cohortTagName = await participantListTable.getParticipantDataAt(0, 'Cohort Tag Name');
+      expect(cohortTagName.length).toBeGreaterThan(1); // Cohort Tags exist
       await participantListTable.openParticipantPageAt(0);
 
-      // Verify tags and note existence
-      await participantPage.assertNotesToBe(notes);
-      await participantPage.fillNotes(); // remove notes
-
+      // Verify tags existence
       await cohortTag.assertCohortTagToHaveCount(cohortTagValue1, 0);
       await cohortTag.assertCohortTagToHaveCount(cohortTagValue2, 1);
       await cohortTag.assertCohortTagToHaveCount(cohortTagValue3, 1);
@@ -124,8 +118,8 @@ test.describe('Cohort tags', () => {
       await cohortTag.assertCohortTagToHaveCount(cohortTagValue3, 0);
 
       await participantPage.backToList();
-      cohortTagColumn = await participantListTable.getParticipantDataAt(0, 'Cohort Tag Name');
-      expect(cohortTagColumn.length).toBe(0); // No more Cohort Tag
+      cohortTagName = await participantListTable.getParticipantDataAt(0, 'Cohort Tag Name');
+      expect(cohortTagName.length).toBe(0); // No more Cohort Tag
     });
   }
 });
