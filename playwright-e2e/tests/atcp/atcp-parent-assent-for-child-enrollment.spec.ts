@@ -69,7 +69,7 @@ test.describe('ATCP parent consent enrollment', () => {
 
       // Send Auth0 request to verify user email
       await setAuth0UserEmailVerified(APP.AT, userEmail, { isEmailVerified: true });
-      await page.waitForTimeout(5000); // short sleep after set email-verified true
+      await page.waitForTimeout(2000); // short sleep after set email-verified true
     });
 
     await test.step("New Participant's Enrollment Process: Log in", async () => {

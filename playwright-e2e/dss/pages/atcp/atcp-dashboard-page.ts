@@ -25,10 +25,8 @@ export default class AtcpDashboardPage extends AtcpPageBase {
   }
 
   async expandTable(): Promise<void> {
-    try {
-      return this.getTable().headerLocator().waitFor({ state: 'visible', timeout: 5000 });
-    } catch (err) {
-      return this.page.locator('.participant-expandable button.participant-expandable__control').click();
-    }
+    await waitForNoSpinner(this.page);
+    return this.getTable().headerLocator().waitFor({ state: 'visible', timeout: 5000 })
+      .catch(() => this.page.locator('.participant-expandable button.participant-expandable__control').click());
   }
 }
