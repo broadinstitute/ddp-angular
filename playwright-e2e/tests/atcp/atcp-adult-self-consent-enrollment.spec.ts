@@ -195,7 +195,7 @@ test.describe('ATCP adult self-consent enrollment', () => {
     await medicalHistory.physicianHospitalName.fill(doctor.hospital);
     await medicalHistory.physicianHospitalCity.fill(doctor.city);
     await medicalHistory.physicianHospitalState.fill(doctor.state);
-    await medicalHistory.physicianHospitalCountry.fill('USA');
+    await medicalHistory.physicianHospitalCountry.fill('USA', { waitForSaveRequest: true });
     await medicalHistory.next();
 
     await medicalHistory.haveHistoryOfCancer.check('No');

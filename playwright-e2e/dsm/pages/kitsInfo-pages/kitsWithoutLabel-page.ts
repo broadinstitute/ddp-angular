@@ -29,14 +29,17 @@ export default class KitsWithoutLabelPage {
   }
 
   public async waitForLoad(): Promise<void> {
-    await this.page.waitForLoadState('networkidle');
     await waitForNoSpinner(this.page);
+    await expect(async () => expect(await this.page.locator('mat-checkbox[id]').count()).toBeGreaterThanOrEqual(1))
+      .toPass({ timeout: 60000 });
   }
 
   public async selectKitType(kitType: KitTypeEnum): Promise<void> {
     await waitForNoSpinner(this.page);
-    await this.kitType.selectKitType(kitType);
-    await waitForResponse(this.page, {uri: '/kitRequests'});
+    await Promise.all([
+      waitForResponse(this.page, { uri: 'ui/kitRequests' }),
+      this.kitType.selectKitType(kitType)
+    ]);
     await waitForNoSpinner(this.page);
   }
 

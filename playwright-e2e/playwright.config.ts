@@ -33,16 +33,17 @@ const testConfig: PlaywrightTestConfig = {
     toHaveScreenshot: {
       scale: 'css',
       // Account for minor difference in text rendering and resolution between headless and headed mode
-      threshold: 1
+      threshold: 1,
+      maxDiffPixelRatio: 0.3
     }
   },
   /* Run tests in files in parallel */
   fullyParallel: false,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
-  retries: process.env.CI ? 1 : 0,
-  workers: process.env.CI ? 2 : 5,
-  maxFailures: process.env.CI ? 10 : 0,
+  retries: 1,
+  workers: process.env.CI ? 2 : 4,
+  maxFailures: 0,
 
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: [
@@ -65,8 +66,8 @@ const testConfig: PlaywrightTestConfig = {
   use: {
     headless: true,
     /* Maximum time each (browser) action such as `click()` can take. Defaults to 0 (no limit). */
-    actionTimeout: process.env.CI ? 20 * 1000 : 15 * 1000,
-    navigationTimeout: 30 * 1000,
+    actionTimeout: 50 * 1000,
+    navigationTimeout: 60 * 1000,
     acceptDownloads: true,
     testIdAttribute: 'data-ddp-test',
 

@@ -69,8 +69,8 @@ test.describe('ATCP parent consent enrollment', () => {
 
       // Send Auth0 request to verify user email
       await setAuth0UserEmailVerified(APP.AT, userEmail, { isEmailVerified: true });
-      await page.waitForTimeout(5000); // short sleep after set email-verified true
-    })
+      await page.waitForTimeout(2000); // short sleep after set email-verified true
+    });
 
     await test.step("New Participant's Enrollment Process: Log in", async () => {
       await auth.login(page, { email: userEmail });
@@ -83,7 +83,7 @@ test.describe('ATCP parent consent enrollment', () => {
 
       const dashboardPage = new AtcpDashboardPage(page);
       await dashboardPage.addParticipantButton();
-    })
+    });
 
     await test.step("New Participant's Enrollment Process: Registration", async () => {
       await assertWorkflowInProgressStep(page, 'Registration');
@@ -98,7 +98,7 @@ test.describe('ATCP parent consent enrollment', () => {
       await registrationPage.participantCity.fill(child.city);
       await registrationPage.participantStreetPostalCode.fill(child.zip);
       // Wait for the very long patch requests to finish before select country and state
-      await expect(registrationPage.register.toLocator()).toBeVisible({ timeout: 50000 });
+      await expect(registrationPage.register.toLocator()).toBeVisible();
       await registrationPage.fillInCountry(child.country.abbreviation, { state: 'US-MA' });
       await registrationPage.register.click();
 
@@ -106,7 +106,7 @@ test.describe('ATCP parent consent enrollment', () => {
         .toContainText('You must confirm that this participant was diagnosed with ataxia-telangiectasia before continuing.');
       await registrationPage.agreement.toCheckbox('I have been diagnosed with ataxia-telangiectasia').check();
       await registrationPage.register.click();
-    })
+    });
 
     await test.step("New Participant's Enrollment Process: Consent", async () => {
       await assertWorkflowInProgressStep(page, 'Consent');
@@ -182,7 +182,7 @@ test.describe('ATCP parent consent enrollment', () => {
       await consentPage.signature().fill(adultFullName);
       await consentPage.parentDoB.fill(adultDoB);
       await consentPage.signAndConsent();
-    })
+    });
 
     await test.step("New Participant's Enrollment Process: Assent for Kids", async () => {
       await assertWorkflowInProgressStep(page, 'Assent for Kids');
@@ -228,7 +228,7 @@ test.describe('ATCP parent consent enrollment', () => {
       await assentForKidsPage.signatureOfParent.fill(adultFullName);
       await assentForKidsPage.assentDate.fill(getDate());
       await assentForKidsPage.signAndAssent();
-    })
+    });
 
     await test.step("New Participant's Enrollment Process: Contacting Physician", async () => {
       await assertWorkflowInProgressStep(page, 'Contacting Physician');
@@ -245,7 +245,7 @@ test.describe('ATCP parent consent enrollment', () => {
 
       await expect(contactPhysicianPage.evaluatedInstitution.toLocator().locator('ddp-activity-checkboxes-picklist-question')).toHaveScreenshot('atcp-medical-institution-list.png');
       await contactPhysicianPage.saveAndSubmit();
-    })
+    });
 
     await test.step("New Participant's Enrollment Process: Medical History", async () => {
       await assertWorkflowInProgressStep(page, 'Medical History');
@@ -331,7 +331,7 @@ test.describe('ATCP parent consent enrollment', () => {
 
       await expect(page.locator('.ddp-li')).toHaveScreenshot('atcp-medical-history-submit-form.png');
       await medicalHistory.submit();
-    })
+    });
 
     await test.step("New Participant's Enrollment Process: Genome Study", async () => {
       await assertWorkflowInProgressStep(page, 'Genome Study');
@@ -348,7 +348,7 @@ test.describe('ATCP parent consent enrollment', () => {
       await genomeStudyPage.sendMeSalivaSampleCollectionKit.check();
       await genomeStudyPage.chooseEthnicity.toSelect().selectOption('CAUCASIAN');
       await genomeStudyPage.saveAndSubmit();
-    })
+    });
 
     await test.step("New Participant's Enrollment Process: Review & Submission", async () => {
       await assertWorkflowInProgressStep(page, 'Review & Submission');
@@ -364,18 +364,19 @@ test.describe('ATCP parent consent enrollment', () => {
       }
 
       await reviewSubmissionPage.saveAndSubmitEnrollment();
-    })
+    });
 
     await test.step("New Participant's Enrollment Process: Dashboard Verification", async () => {
+      const dashboardPage = new AtcpDashboardPage(page);
+      await dashboardPage.waitForReady();
+
       await expect(page.locator('h1.title')).toHaveScreenshot('atcp-dashboard-h1-title.png');
       await expect(page.locator('h2.subtitle')).toHaveScreenshot('atcp-dashboard-h2-subtitle.png');
       await expect(page.locator('h2.title')).toHaveScreenshot('atcp-dashboard-h2-title.png');
       await expect(page.locator('.participant-expandable__name')).toHaveText(childFullName);
 
-      const dashboardPage = new AtcpDashboardPage(page);
+      await dashboardPage.expandTable();
       const table = dashboardPage.getTable();
-      await dashboardPage.expand();
-
       const expectedHeaders = ['Form', 'Summary', 'Created', 'Status', 'Actions'];
       const actualHeaders = await table.getHeaderNames();
       await assertTableHeaders(actualHeaders, expectedHeaders);
@@ -411,7 +412,7 @@ test.describe('ATCP parent consent enrollment', () => {
       expect(await editButton.isVisible()).toBeTruthy();
 
       await dashboardPage.signOut();
-    })
+    });
 
     await test.step('Signed out', async () => {
       const homePage = new AtcpHomePage(page);
@@ -421,6 +422,6 @@ test.describe('ATCP parent consent enrollment', () => {
       await expect(page.locator('.first-display h2')).toHaveScreenshot('atcp-home-page-h2-message.png');
       await expect(page.locator('.participate-display')).toHaveScreenshot('atcp-home-page-how-to-participant-message.png');
       await expect(page.locator('.together-display h3')).toHaveScreenshot('atcp-home-page-together-message.png');
-    })
+    });
   });
 });
