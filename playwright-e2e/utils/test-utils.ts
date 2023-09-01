@@ -16,17 +16,26 @@ const { SITE_PASSWORD } = process.env;
 export async function waitForNoSpinner(page: Page, opts: { timeout?: number } = {}): Promise<void> {
   const { timeout = 60 * 1000 } = opts;
   const locator = page.locator('[data-icon="spinner"].fa-spin, mat-spinner[role="progressbar"]');
-  await locator.first().waitFor({ state: 'hidden', timeout }); // if more than one spinners are found, only wait for first one to disappear.
+  try {
+    // if more than one spinners are found, only wait for first one to disappear.
+    await locator.first().waitFor({ state: 'hidden', timeout });
+  } catch (error) {
+    const snackbar = page.locator('app-error-snackbar .snackbar-content');
+    if (await snackbar.isVisible()) {
+      throw new Error(await snackbar.innerText());
+    }
+    throw error;
+  }
 }
 
-export async function waitForResponse(page: Page, {uri, status = 200, timeout = 30000}: WaitForResponse): Promise<Response> {
+export async function waitForResponse(page: Page, { uri, status = 200, timeout }: WaitForResponse): Promise<Response> {
   try {
     return page.waitForResponse(
       (response: Response) => response.url().includes(uri) && response.status() === status,
       {timeout}
-    )
+    );
   } catch (error: any) {
-    throw new Error(`Timeout ${timeout}ms exceeded while waiting for ${uri} URI response with status - ${status}`)
+    throw new Error(`Timeout exceeded while waiting for ${uri} URI response with status - ${status}`);
   }
 }
 

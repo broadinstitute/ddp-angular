@@ -1,5 +1,6 @@
 import fs from 'fs';
 import csv from 'csv-parser';
+import { logError, logInfo } from 'utils/log-utils';
 
 export interface MailListCSV {
   email: string;
@@ -12,9 +13,9 @@ export function createTextFileSync(dir: string, pathName: string, data: string) 
   try {
     fs.mkdirSync(dir, { recursive: true });
     fs.writeFileSync(pathName, data);
-    console.log(`File: ${pathName} - created successfully`)
+    logInfo(`File: ${pathName} - created successfully`)
   } catch (error) {
-    console.error(`Couldn't create the File: ${pathName}`);
+    logError(`Couldn't create the File: ${pathName}`);
     throw error;
   }
 }
@@ -22,9 +23,9 @@ export function createTextFileSync(dir: string, pathName: string, data: string) 
 export function deleteFileSync(pathName: string) {
   try {
     fs.unlinkSync(pathName);
-    console.log(`File: ${pathName} - deleted successfully`);
+    logInfo(`File: ${pathName} - deleted successfully`);
   } catch (error) {
-    console.error(`Couldn't delete the File: ${pathName}`);
+    logError(`Couldn't delete the File: ${pathName}`);
     throw error;
   }
 }
