@@ -36,7 +36,7 @@
       </mat-form-field>
       <button mat-raised-button type="button" color="primary"
               (click)="searchKit()"
-              [disabled]="!((searchValue != null && searchValue !== '') && searchField != null)">Search Kit</button>
+              [disabled]="buttonDisabled()">Search Kit</button>
     </div>
     <br/>
 

@@ -6,6 +6,7 @@ import { DSMService } from '../services/dsm.service';
 import { KitRequest } from '../shipping/shipping.model';
 import { RoleService } from '../services/role.service';
 import { Observable, defer } from 'rxjs';
+import { ComponentService } from '../services/component.service';
 
 @Component({
   selector: 'app-shipping-search',
@@ -13,6 +14,7 @@ import { Observable, defer } from 'rxjs';
   styleUrls: ['./shipping-search.component.css']
 })
 export class ShippingSearchComponent implements OnInit {
+  realm: string;
   errorMessage: string;
   additionalMessage: string;
   searchValue: string | null = null;
@@ -22,26 +24,40 @@ export class ShippingSearchComponent implements OnInit {
   kit: KitRequest[] = [];
   private currentPatchField: string | null;
   PECGS_RESEARCH = 'PECGS_RESEARCH';
+  disabled = true;
 
-  constructor(private dsmService: DSMService, private auth: Auth, private role: RoleService) {
+  constructor(private dsmService: DSMService, private auth: Auth, private role: RoleService, private compService: ComponentService) {
     if (!auth.authenticated()) {
       auth.sessionLogout();
     }
   }
 
   ngOnInit(): void {
+    if (sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM) != null) {
+      this.realm = sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM);
+    } else {
+      this.errorMessage = 'Please select a study';
+    }
     this.checkRight();
   }
 
   private checkRight(): void {
+    let allowedToSeeInformation = false;
     this.allowedRealms = [];
     let jsonData: any[];
     this.dsmService.getRealmsAllowed(Statics.SHIPPING).subscribe({
       next: data => {
         jsonData = data;
         jsonData.forEach((val) => {
-          this.allowedRealms.push(val);
+          if (sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM) === val) {
+            allowedToSeeInformation = true;
+            this.allowedRealms.push(val);
+            this.disabled = false;
+          }
         });
+        if (!allowedToSeeInformation) {
+          this.errorMessage = 'You are not allowed to see kit information of the selected study';
+        }
       },
       error: () => null
     });
@@ -165,5 +181,9 @@ saveCompleted(): void{
       return (kitRequest.message && kitRequest.message === this.PECGS_RESEARCH);
     }
     return false;
+  }
+
+  buttonDisabled(): boolean {
+    return this.disabled || this.searchField == null || this.searchValue == null || !this.searchValue.trim().length;
   }
 }
