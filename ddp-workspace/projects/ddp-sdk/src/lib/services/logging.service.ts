@@ -67,7 +67,7 @@ export class LoggingService {
             body,
             { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) }).pipe(
             catchError((error: any) => {
-                const message = `${this.LOG_SOURCE}: Stackdriver logging failed.\nURL: "${url}"\nBody: body.toString()`;
+                const message = `${this.LOG_SOURCE}: ${JSON.stringify(body)}`;
                 this.stackdriverErrorReporterService.handleError(message);
                 console.error.apply(window.console, message);
                 return of(null);
