@@ -17,10 +17,25 @@
         <a class="social-media__link"
            [href]="'App.social.instagram' | translate"
            target="_blank"
-           *ngIf="!isPedihcc"
            (click)="sendSocialMediaAnalytics('instagram')">
             <img class="social-media__logo" lazy-resource src="assets/images/instagram.png"
                  [alt]="'Common.Alts.Instagram' | translate">
+        </a>
+        <a class="social-media__link"
+           [href]="'App.social.linkedin' | translate"
+           target="_blank"
+           *ngIf="isPedihcc"
+           (click)="sendSocialMediaAnalytics('linkedin')">
+            <img class="social-media__logo" lazy-resource src="assets/images/linkedin.svg"
+                 [alt]="'Common.Alts.LinkedIn' | translate">
+        </a>
+        <a class="social-media__link"
+           [href]="'App.social.threads' | translate"
+           target="_blank"
+           *ngIf="isPedihcc"
+           (click)="sendSocialMediaAnalytics('threads')">
+            <img class="social-media__logo" lazy-resource src="assets/images/threads.svg"
+                 [alt]="'Common.Alts.Threads' | translate">
         </a>
     </div>
     <h2 class="title static-page-title" translate>App.HomePage.StayInformedSection.Title</h2>
