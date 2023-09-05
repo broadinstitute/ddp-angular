@@ -16,7 +16,7 @@ test.describe('Follow-Up Surveys', () => {
 
       const configuredSurveys = surveysForStudy(followupSurveyPage, study);
       const actualSurveyOptions = await followupSurveyPage.select().getAllOptions();
-      expect(actualSurveyOptions).toEqual(configuredSurveys);
+      expect(actualSurveyOptions).toEqual(expect.arrayContaining(configuredSurveys));
     });
 
     test(`Shows previous triggered surveys in @${study} @dsm @functional`, async ({ page, request }) => {

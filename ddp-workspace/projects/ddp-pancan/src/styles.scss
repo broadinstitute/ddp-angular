@@ -307,3 +307,12 @@ section {
     background-color: $primary-colorectal-color !important;
     color: #fff !important;
 }
+
+.mat-pedihcc {
+    background-color: $stay-informed-pedihcc-color !important;
+    color: #fff !important;
+
+    &:hover {
+        background-color: grey;
+    }
+}

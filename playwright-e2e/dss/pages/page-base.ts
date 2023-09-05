@@ -67,7 +67,11 @@ export default abstract class PageBase implements PageInterface {
    * Returns "Log Out" button locator
    */
   getLogOutButton(): Locator {
-    return this.page.locator('.header button[data-ddp-test="signOutButton"]:has-text("Log Out")');
+    return this.page.locator('button[data-ddp-test="signOutButton"]').first();
+  }
+
+  async signOut(): Promise<void> {
+    return this.getLogOutButton().click();
   }
 
   getFinishButton(): Locator {
@@ -285,8 +289,7 @@ export default abstract class PageBase implements PageInterface {
           resp.request().postDataJSON().zip === zipCode.toUpperCase()
         );
       }),
-      this.page.waitForResponse((resp) => resp.request().method() === 'POST' && resp.url().includes('/address/verify') && resp.status() === 200,
-        { timeout: 30 * 1000 })
+      this.page.waitForResponse((resp) => resp.request().method() === 'POST' && resp.url().includes('/address/verify') && resp.status() === 200)
     ]);
     await mailAddressForm.toInput(labels.phone).fill(telephone.toString());
     // Wait for Address Suggestion card
@@ -420,5 +423,21 @@ export default abstract class PageBase implements PageInterface {
     const dateString = await locator.innerText();
     const [MM, DD, YYYY] = dateString.split('/');
     return `${MM.trim()}/${DD.trim()}/${YYYY.trim()}`;
+  }
+
+  /**
+   * <br> Question: I am a Parent or Legal Guardian of:
+   * <br> Type: Input
+   */
+  parentOrLegalGuardianOf(): Question {
+    return new Question(this.page, { prompt: 'I am a Parent or Legal Guardian of:' });
+  }
+
+  /**
+   * <br> Question: My relationship to the participant is:
+   * <br> Type: Input
+   */
+  myRelationshipToParticipant(): Question {
+    return new Question(this.page, { prompt: 'My relationship to the participant is:' });
   }
 }

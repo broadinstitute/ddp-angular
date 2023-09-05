@@ -47,6 +47,7 @@ import { SplashPageFooterComponent } from './components/splash-pages/splash-page
 import { LmsPageComponent } from './components/splash-pages/lms-page/lms-page.component';
 import { ActivityComponent } from './components/activity/activity.component';
 import { ActivityPageComponent } from './components/activity-page/activity-page.component';
+import { PediHCCPageComponent } from './components/splash-pages/pediatric-hcc-page/pedihcc-page.component';
 
 const base = document.querySelector('base')?.getAttribute('href') || '';
 
@@ -68,6 +69,8 @@ toolkitConfig.instagramId = 'countmein';
 toolkitConfig.countMeInUrl = 'https://joincountmein.org';
 toolkitConfig.colorectalPagePhone = '651-403-5315';
 toolkitConfig.colorectalPageEmail = 'info@colorectalcancerproject.org';
+toolkitConfig.pediHCCPagePhone = '651-287-1608';
+toolkitConfig.pediHCCPageEmail = 'info@joincountmein.org';
 toolkitConfig.lmsPagePhone = '';  // TODO: add real phone
 toolkitConfig.lmsPageEmail = 'info@lmsproject.org';
 toolkitConfig.lmsStudyGuid = 'cmi-lms';
@@ -160,6 +163,7 @@ export function translateFactory(translate: TranslateService,
         LmsPageComponent,
         ActivityComponent,
         ActivityPageComponent,
+        PediHCCPageComponent,
     ],
     imports: [
         BrowserModule,

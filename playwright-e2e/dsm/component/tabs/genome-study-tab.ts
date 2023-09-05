@@ -6,6 +6,7 @@ export default class GenomeStudyTab {
 
   async setValue(field: string, value: string): Promise<void> {
     await this.getField(field).locator('input').fill(value);
+    await this.getField(field).press('Tab'); // tab out to trigger patch request
   }
 
   async clearSelection(field: string): Promise<void> {

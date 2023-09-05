@@ -17,9 +17,13 @@ export default class ParticipantPage {
   }
 
   /* Actions */
-  public async fillNotes(value: string): Promise<void> {
+  public async fillNotes(value?: string): Promise<void> {
     const textArea = this.notes;
-    await textArea.fill(value);
+    if (value) {
+      await textArea.fill(value);
+    } else {
+      await textArea.clear();
+    }
     await textArea.blur();
     await waitForResponse(this.page, {uri: '/ui/patch'});
   }

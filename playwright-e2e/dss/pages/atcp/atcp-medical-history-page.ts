@@ -11,8 +11,7 @@ export default class AtcpMedicalHistoryPage extends AtcpPageBase {
 
   async waitForReady(): Promise<void> {
     await super.waitForReady();
-    await expect(this.page.locator('app-workflow-progress .current .number')).toHaveText(/^4$/);
-    await expect(this.page.locator('app-workflow-progress .current .name')).toHaveText('Medical History');
+    await expect(this.page.locator('h1.activity-header')).toHaveText(/^Medical History$/);
   }
 
   /**

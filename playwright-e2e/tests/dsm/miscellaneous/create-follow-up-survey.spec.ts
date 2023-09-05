@@ -5,6 +5,7 @@ import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import FollowUpSurveyPage from 'dsm/pages/follow-up-survey-page';
 import { getDate } from 'utils/date-utils';
 import { generateAlphaNumeric, generateRandomNum } from 'utils/faker-utils';
+import { waitForResponse } from 'utils/test-utils';
 
 
 test.describe('Create Follow-Up Survey', () => {
@@ -63,7 +64,7 @@ test.describe('Create Follow-Up Survey', () => {
       await followupSurveyPage.createSurvey();
 
       // Verify new survey created
-      const responsePromise = page.waitForResponse(resp => resp.url().includes('surveyName='));
+      const responsePromise = waitForResponse(page, { uri: 'surveyName=' });
       await followupSurveyPage.reloadTable();
       const response = await responsePromise;
 

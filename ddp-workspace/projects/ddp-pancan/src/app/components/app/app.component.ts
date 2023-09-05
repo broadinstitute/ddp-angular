@@ -19,17 +19,16 @@ export class AppComponent extends AppRedesignedBaseComponent {
     isSplashPage: boolean;
     isColorectalPage: boolean;
     isLmsPage: boolean;
+    isPediHCCPage: boolean;
 
     constructor(
         _communicationService: CommunicationService,
         _dialog: MatDialog,
         _renewNotifier: RenewSessionNotifier,
         _router: Router,
-        @Inject('toolkit.toolkitConfig') _config: ToolkitConfigurationService
+        @Inject('toolkit.toolkitConfig') private _config: ToolkitConfigurationService
     ) {
         super(_communicationService, _dialog, _renewNotifier, _router, _config);
-        this.phone = _config.phone;
-        this.email = _config.infoEmail;
         this.initRouterEvents();
     }
 
@@ -39,8 +38,12 @@ export class AppComponent extends AppRedesignedBaseComponent {
                 return;
             }
             this.isColorectalPage = event.url.includes(AppRoutes.ColorectalPage);
+            this.isPediHCCPage = event.url.includes(AppRoutes.PediHCCPage);
             this.isLmsPage = event.url.includes(AppRoutes.LMS);
             this.isSplashPage = this.isColorectalPage || this.isLmsPage;
+
+            this.phone = this.isPediHCCPage ?  this._config.pediHCCPagePhone : this._config.phone;
+            this.email = this.isPediHCCPage ? this._config.pediHCCPageEmail : this._config.infoEmail;
         });
     }
 }

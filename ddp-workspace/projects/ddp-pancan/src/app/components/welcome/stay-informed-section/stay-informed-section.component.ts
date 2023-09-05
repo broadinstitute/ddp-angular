@@ -13,6 +13,7 @@ import { AnalyticsEventCategories, AnalyticsEventsService } from 'ddp-sdk';
 })
 export class StayInformedSectionComponent {
     @Input() isColorectal: boolean;
+    @Input() isPedihcc: boolean;
     readonly AppRoutes = AppRoutes;
     readonly twitterUrl: string;
     readonly facebookUrl: string;
@@ -29,7 +30,7 @@ export class StayInformedSectionComponent {
     }
 
     public openJoinMailingList(): void {
-        const info = this.isColorectal ? ['Colorectal'] : null;
+        const info = this.isColorectal ? ['Colorectal'] : this.isPedihcc ? ['Pedihcc'] : null;
         this.dialog.open(JoinMailingListComponent, {
             ...JOIN_MAILING_LIST_DIALOG_SETTINGS,
             data: { info },

@@ -6,6 +6,7 @@ import { MainInfoEnum } from 'dsm/pages/participant-page/enums/main-info-enum';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
 import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import { getDate, offsetDaysFromToday } from 'utils/date-utils';
+import { logInfo } from 'utils/log-utils';
 
 test.describe('Participants Search', () => {
   const studies = [StudyEnum.LMS, StudyEnum.OSTEO2];
@@ -25,7 +26,6 @@ test.describe('Participants Search', () => {
       // Save Registration Date found on first row for use in search
       const registrationDate = await participantsTable.getParticipantDataAt(0, MainInfoEnum.REGISTRATION_DATE);
       const randomDate = getDate(new Date(registrationDate)); // Returns a formatted date mm/dd/yyyy
-      // console.log('Search by registration date: ', randomDate);
 
       // Search by random date
       const searchPanel = participantListPage.filters.searchPanel;
@@ -34,9 +34,7 @@ test.describe('Participants Search', () => {
       await searchPanel.search();
 
       const numParticipants1 = await participantsTable.numOfParticipants();
-      // console.log(`Search by Registration Date ${randomDate} returns ${numParticipants1} participants`);
       expect(numParticipants1).toBeGreaterThanOrEqual(1);
-
 
       // Check first row data
       // Verify Registration Date
@@ -59,7 +57,7 @@ test.describe('Participants Search', () => {
       await searchPanel.search();
 
       const numParticipants2 = await participantsTable.numOfParticipants();
-      console.log(`Search by Registration Date Range (from: ${yearAgo}, to: ${today}) returns ${numParticipants2} participants`);
+      logInfo(`Search by Registration Date Range (from: ${yearAgo}, to: ${today}) returns ${numParticipants2} participants`);
       expect(numParticipants2).toBeGreaterThan(1);
       expect(numParticipants2).not.toEqual(numParticipants1); // Expect Participants list table has reloaded and changed
 

@@ -9,7 +9,7 @@
         <app-navigation class="nav"></app-navigation>
         <div class="controls">
             <ddp-language-selector></ddp-language-selector>
-            <app-auth [isColorectalTheme]="isColorectalTheme"></app-auth>
+            <app-auth [isPediHCCTheme]="isPediHCCTheme" [isColorectalTheme]="isColorectalTheme"></app-auth>
             <button class="hamburger hamburger--slider" [ngClass]="{'is-active': isPanelOpened}"
                     [attr.aria-label]="'Common.Buttons.HeaderMenu.AriaLabel' | translate" (click)="openCloseMenu()">
             <span class="hamburger-box">

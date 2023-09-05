@@ -2184,6 +2184,7 @@ mat-form-field.mat-form-field-type-mat-input {
   input {
     border: 1px solid #cecece !important;
     height: 35px !important;
+      padding-left: 0.6em;
   }
 }
 
@@ -2529,6 +2530,17 @@ ddp-activity-composite-answer .ddp-answer-container {
 .mat-select-placeholder {
     color: mat.get-color-from-palette($app-theme, 1700);
 }
+
+select.mat-input-element {
+    padding-top: 0!important;
+    padding-left: 0.6em;
+}
+
+.mat-form-field-type-mat-native-select .mat-form-field-infix::after {
+    right: 3%!important;
+    top: 32%!important;
+}
+
 
 .mat-checkbox-frame {
   border-color: #CECECE;
