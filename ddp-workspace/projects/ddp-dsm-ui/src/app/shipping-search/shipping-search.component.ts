@@ -183,7 +183,7 @@ saveCompleted(): void{
     return false;
   }
 
-  buttonDisabled(): boolean {
+  get buttonDisabled(): boolean {
     return this.disabled || this.searchField == null || this.searchValue == null || !this.searchValue.trim().length;
   }
 }
