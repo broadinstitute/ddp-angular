@@ -1,4 +1,4 @@
-import { BrowserContext, Download, expect, Locator, Page, Response } from '@playwright/test';
+import {BrowserContext, Download, expect, Locator, Page, Response, Request} from '@playwright/test';
 import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import Input from 'dss/component/input';
 import Checkbox from 'dss/component/checkbox';
@@ -6,10 +6,12 @@ import Select from 'dss/component/select';
 import axios from 'axios';
 import { logError } from './log-utils';
 
-export interface WaitForResponse {
+export interface WaitForRequest {
   uri: string;
-  status?: number;
   timeout?: number;
+}
+export interface WaitForResponse extends WaitForRequest {
+  status?: number;
 }
 
 const { SITE_PASSWORD } = process.env;
@@ -44,6 +46,17 @@ export async function waitForResponse(page: Page, { uri, status = 200, timeout }
     );
   } catch (error: any) {
     throw new Error(`Timed out while waiting for ${uri} URI response with status - ${status}: ${error}`);
+  }
+}
+
+export async function waitForRequest(page: Page, { uri, timeout }: WaitForRequest): Promise<Request> {
+  try {
+    return page.waitForRequest(
+      (request: Request) => request.url().includes(uri),
+      {timeout}
+    );
+  } catch (error: any) {
+    throw new Error(`Timeout exceeded while waiting for ${uri} URI request`);
   }
 }
 
