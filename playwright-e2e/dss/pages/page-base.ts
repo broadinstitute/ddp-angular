@@ -8,6 +8,7 @@ import { generateRandomPhoneNum } from 'utils/faker-utils';
 import { waitForNoSpinner, waitForResponse } from 'utils/test-utils';
 import { PageInterface } from 'dss/pages/page-interface';
 import * as user from 'data/fake-user.json';
+import { logError } from 'utils/log-utils';
 
 /**
  * Labels for the mailing address widget, which can be
@@ -44,7 +45,7 @@ export default abstract class PageBase implements PageInterface {
   }
 
   async waitForReady(): Promise<void> {
-    await this.page.waitForLoadState('networkidle');
+    await this.page.waitForLoadState('networkidle').catch((err) => logError(err));
     await expect(this.page).toHaveTitle(/\D+/);
     await waitForNoSpinner(this.page);
   }

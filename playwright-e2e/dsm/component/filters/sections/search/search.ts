@@ -3,6 +3,7 @@ import DatePicker from 'dsm/component/date-picker';
 import { CheckboxConfig, DateConfig, RadioButtonConfig, TextConfig } from 'dsm/component/filters/sections/search/search-types';
 import { AdditionalFilter } from 'dsm/component/filters/sections/search/search-enums';
 import { waitForNoSpinner, waitForResponse } from 'utils/test-utils';
+import { logError } from 'utils/log-utils';
 
 export class Search {
   private readonly enUSDateRegExp = new RegExp(/\b(0[1-9]|1[012])([/])(0[1-9]|[12]\d|3[01])\2(\d{4})/);
@@ -97,6 +98,10 @@ export class Search {
     const datePicker = new DatePicker(this.page, { root: this.baseColumnXPath(column) });
     if (open) {
       await datePicker.open();
+      await datePicker.toLocator().scrollIntoViewIfNeeded().catch((error) => {
+        // Log error only
+        logError(`Fail scrollIntoViewIfNeeded(). Locator: "${datePicker.toLocator()}" ${error}`);
+      });
     } else {
       await datePicker.close();
     }

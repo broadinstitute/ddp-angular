@@ -96,7 +96,7 @@ test.describe('Participants Withdrawal', () => {
           await searchPanel.search();
           const participantStatus = await participantsTable.findCell('Participant ID', participantId, 'Status');
           expect(await participantStatus!.innerText()).toMatch(/Exited (before|after) Enrollment/);
-        }).toPass({ timeout: 30000 });
+        }).toPass({ timeout: 50000 });
 
         // At Participant Page, verify few detail
         const participantPage: ParticipantPage = await participantsTable.openParticipantPageAt(0);

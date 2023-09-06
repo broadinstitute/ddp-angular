@@ -1,4 +1,4 @@
-import {BrowserContext, Download, expect, Locator, Page, Response} from '@playwright/test';
+import { BrowserContext, Download, expect, Locator, Page, Response } from '@playwright/test';
 import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import Input from 'dss/component/input';
 import Checkbox from 'dss/component/checkbox';
@@ -14,17 +14,19 @@ export interface WaitForResponse {
 const { SITE_PASSWORD } = process.env;
 
 export async function waitForNoSpinner(page: Page, opts: { timeout?: number } = {}): Promise<void> {
-  const { timeout = 60 * 1000 } = opts;
-  const locator = page.locator('[data-icon="spinner"].fa-spin, mat-spinner[role="progressbar"]');
-  try {
-    // if more than one spinners are found, only wait for first one to disappear.
-    await locator.first().waitFor({ state: 'hidden', timeout });
-  } catch (error) {
-    const snackbar = page.locator('app-error-snackbar .snackbar-content');
-    if (await snackbar.isVisible()) {
-      throw new Error(await snackbar.innerText());
-    }
-    throw error;
+  const { timeout = 50 * 1000 } = opts;
+  const spinner = page.locator('[data-icon="spinner"].fa-spin, mat-spinner[role="progressbar"]');
+  const appError = page.locator('app-error-snackbar .snackbar-content');
+  await page.waitForLoadState();
+  const pageStatus = await Promise.race([
+    expect(spinner.first()).toBeHidden({ timeout }).then(() => 'Hidden'),
+    expect(appError).toBeVisible({ timeout }).then(() => 'Error'),
+  ]);
+  if (pageStatus === 'Hidden') {
+    return;
+  }
+  if (pageStatus === 'Error') {
+    throw new Error(await appError.innerText());
   }
 }
 
@@ -85,6 +87,7 @@ export async function fillSitePassword(page: Page, password = SITE_PASSWORD): Pr
     passwordCheckRequestPromise,
     page.keyboard.press('Enter')
   ]);
+  await page.waitForTimeout(200);
 }
 
 /**
