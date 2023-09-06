@@ -4,6 +4,7 @@ import Input from 'dss/component/input';
 import Checkbox from 'dss/component/checkbox';
 import Select from 'dss/component/select';
 import axios from 'axios';
+import { logError } from './log-utils';
 
 export interface WaitForResponse {
   uri: string;
@@ -17,7 +18,7 @@ export async function waitForNoSpinner(page: Page, opts: { timeout?: number } = 
   const { timeout = 50 * 1000 } = opts;
   const spinner = page.locator('[data-icon="spinner"].fa-spin, mat-spinner[role="progressbar"]');
   const appError = page.locator('app-error-snackbar .snackbar-content');
-  await page.waitForLoadState();
+  await page.waitForLoadState().catch((err) => logError(err));
   const pageStatus = await Promise.race([
     expect(spinner.first()).toBeHidden({ timeout }).then(() => 'Hidden'),
     expect(appError).toBeVisible({ timeout }).then(() => 'Error'),
