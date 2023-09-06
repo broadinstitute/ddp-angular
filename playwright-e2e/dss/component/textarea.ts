@@ -21,12 +21,16 @@ export default class TextArea extends WidgetBase {
     }
   }
 
-  async fill(value: string): Promise<void> {
+  async fill(value: string, pressTab = true): Promise<void> {
     await this.toLocator().fill(value);
-    await this.toLocator().press('Tab');
+    pressTab && await this.toLocator().press('Tab');
   }
 
   async getText(): Promise<string> {
     return this.toLocator().inputValue();
+  }
+
+  async blur(): Promise<void> {
+    await this.toLocator().blur();
   }
 }
