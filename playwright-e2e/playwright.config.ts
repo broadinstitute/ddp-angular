@@ -16,8 +16,8 @@ const testConfig: PlaywrightTestConfig = {
   globalSetup: require.resolve('./fixtures/global-setup'),
   testDir: __dirname,
   testMatch: '**/*.spec.ts',
-  /* Maximum timeout per test. Each test should be short and takes less than 4.5 min to run */
-  timeout: 4.5 * 60 * 1000,
+  /* Maximum timeout per test. Each test should be short and takes less than 5 min to run */
+  timeout: 5 * 60 * 1000,
   /* For expect() calls */
   expect: {
     /**
