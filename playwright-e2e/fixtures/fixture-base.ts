@@ -15,7 +15,7 @@ const REQUEST_EXCLUDES = ['google-analytics', 'facebook'];
 // This fixture runs per test when called.
 export const fixtureBase = base.extend({
   page: async ({ page }, use) => {
-    await page.route('**/*', (route) => {
+    await page.route('**/*', async (route) => {
       return REQUEST_EXCLUDES.some((urlPart) => route.request().url().includes(urlPart)) ? route.abort() : route.continue();
     });
     await use(page);

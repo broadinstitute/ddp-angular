@@ -54,8 +54,8 @@ export default class KitUploadPage {
     }).join();
   }
 
-  private waitForKitUploadResponse(): Promise<Response> {
-    return waitForResponse(this.page, {uri: '/kitUpload'});
+  private async waitForKitUploadResponse(): Promise<Response> {
+    return await waitForResponse(this.page, {uri: '/kitUpload'});
   }
 
   private async handleKitUploadResponse(): Promise<void> {

@@ -71,15 +71,28 @@ module.exports = {
     'template-curly-spacing': 'warn',
     'vars-on-top': 'warn',
     'comma-dangle': 'off',
+    
     '@typescript-eslint/comma-dangle': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
-    '@typescript-eslint/no-floating-promises': 'warn',
+    '@typescript-eslint/no-floating-promises': 'error',
     '@typescript-eslint/require-await': 'error',
     '@typescript-eslint/await-thenable': 'error',
+    "@typescript-eslint/no-misused-promises": "error",
+    "@typescript-eslint/promise-function-async": "error",
 
     'import/first': 'warn',
     'import/no-anonymous-default-export': ['warn', { allowObject: true }],
     'no-debugger': 'warn',
+    "no-restricted-imports": ["error",
+      {
+        "patterns": [
+          {
+            "group": ["../"],
+            "message": "Relative import is not allowed."
+          }
+        ]
+      }
+    ],
 
     '@typescript-eslint/no-non-null-assertion': 'off',
     'max-len': [

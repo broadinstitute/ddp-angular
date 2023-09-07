@@ -74,8 +74,8 @@ export default class SampleInformationTab {
     return await selection.isVisible() ? selection.textContent() : '';
   }
 
-  private deactivatedText(at: number): Promise<string | null> {
-    return this.sampleFieldset.nth(at).locator(this.getDeactivatedSampleInfoXPath).textContent();
+  private async deactivatedText(at: number): Promise<string | null> {
+    return await this.sampleFieldset.nth(at).locator(this.getDeactivatedSampleInfoXPath).textContent();
   }
 
   private get sampleFieldset(): Locator {

@@ -1,4 +1,4 @@
-import PageBase from '../page-base';
+import PageBase from 'dss/pages/page-base';
 import {Page} from '@playwright/test';
 
 export class MBCPageBase extends PageBase {

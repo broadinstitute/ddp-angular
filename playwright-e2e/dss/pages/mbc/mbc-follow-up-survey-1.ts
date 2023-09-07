@@ -1,7 +1,7 @@
 import {MBCPageBase} from './mbc-page-base';
 import {expect, Locator, Page} from '@playwright/test';
 import {waitForNoSpinner} from 'utils/test-utils';
-import Question from '../../component/Question';
+import Question from 'dss/component/Question';
 
 type yesNoDontKnow = 'Yes' | 'No' | "I don't know";
 

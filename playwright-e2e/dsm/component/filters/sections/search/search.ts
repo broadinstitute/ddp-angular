@@ -98,7 +98,7 @@ export class Search {
     const datePicker = new DatePicker(this.page, { root: this.baseColumnXPath(column) });
     if (open) {
       await datePicker.open();
-      await datePicker.toLocator().scrollIntoViewIfNeeded().catch((error) => logError(`Locator: "${datePicker.toLocator()}" ${error}`));
+      await datePicker.toLocator().scrollIntoViewIfNeeded().catch((error) => logError(error));
     } else {
       await datePicker.close();
     }

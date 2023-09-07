@@ -1,6 +1,6 @@
 import {MBCPageBase} from './mbc-page-base';
 import {expect, Locator, Page} from '@playwright/test';
-import Question from '../../component/Question';
+import Question from 'dss/component/Question';
 
 type yesNo = 'Yes' | 'No';
 

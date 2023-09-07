@@ -1,8 +1,8 @@
 import {expect, Locator, Page} from '@playwright/test';
 import {MBCPageBase} from './mbc-page-base';
-import {waitForNoSpinner} from '../../../utils/test-utils';
-import * as user from '../../../data/fake-user.json';
-import Institution from '../../component/institution';
+import {waitForNoSpinner} from 'utils/test-utils';
+import * as user from 'data/fake-user.json';
+import Institution from 'dss/component/institution';
 
 
 export class MBCMedicalReleasePage extends MBCPageBase {

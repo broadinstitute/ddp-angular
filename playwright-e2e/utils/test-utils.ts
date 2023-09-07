@@ -37,7 +37,7 @@ export async function waitForNoSpinner(page: Page, opts: { timeout?: number } = 
 
 export async function waitForResponse(page: Page, { uri, status = 200, timeout }: WaitForResponse): Promise<Response> {
   try {
-    return page.waitForResponse(
+    return await page.waitForResponse(
       (response: Response) => response.url().includes(uri) && response.status() === status,
       {timeout}
     );
@@ -82,7 +82,7 @@ export async function downloadConsentPdf(context: BrowserContext, locator: Locat
  */
 export async function fillSitePassword(page: Page, password = SITE_PASSWORD): Promise<void> {
   if (password == null) {
-    throw Error(`Invalid parameter: password is "${SITE_PASSWORD}"`);
+    throw Error(`Invalid parameter: password is null`);
   }
   await page.locator('input[type="password"]').waitFor({ state: 'visible', timeout: 30 * 1000 });
   await page.locator('input[type="password"]').fill(password);

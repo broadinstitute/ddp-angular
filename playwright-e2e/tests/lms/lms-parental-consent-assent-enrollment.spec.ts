@@ -184,7 +184,7 @@ test.describe.serial('LMS Child Enrollment', () => {
       await researchConsentPage.fillInDateOfBirth(participant.birthDate.MM, participant.birthDate.DD, participant.birthDate.YYYY);
       await researchConsentPage.fillInFullName(childFullName); // Your Child’s Full name
       await researchConsentPage.fillInYourFullName(adultFirstName, adultLastName); // Your Full name
-      await researchConsentPage.fillInSignature(adultFullName) // Your Signature (Full Name)
+      await researchConsentPage.fillInSignature(adultFullName); // Your Signature (Full Name)
       await researchConsentPage.selectRelationshipToChild('Parent');
       await researchConsentPage.fillInContactAddress({
         fullName: childFullName,
@@ -206,7 +206,7 @@ test.describe.serial('LMS Child Enrollment', () => {
         await expect(paragraphs[i]).toHaveScreenshot(`research-consent-assent-full-form-sign-assent-paragraph-${i}.png`);
       }
 
-      await researchConsentPage.fillInChildSignature(childFullName) // Child/Adolescent Assent
+      await researchConsentPage.fillInChildSignature(childFullName); // Child/Adolescent Assent
 
       await researchConsentPage.submit();
     });
@@ -323,7 +323,7 @@ test.describe.serial('LMS Child Enrollment', () => {
       await surveyAboutYou.howDidYouHearAboutProject().check('Word of mouth (friend/family, study staff, study participants, patient, support group, etc.)');
       await surveyAboutYou.howDidYouHearAboutProject().toCheckbox(/Brochure/).check();
       await surveyAboutYou.howOftenDoYouNeedHelpReadHospitalMaterials().toRadiobutton().check('None of the time');
-      await surveyAboutYou.howOftenDoYouHaveProblemsUnderstandWrittenInformation().toRadiobutton().check('None of the time')
+      await surveyAboutYou.howOftenDoYouHaveProblemsUnderstandWrittenInformation().toRadiobutton().check('None of the time');
       await surveyAboutYou.howConfidentAreYouFillingOutFormsByYourself().toRadiobutton().check('Always');
       await surveyAboutYou.highestLevelOfSchoolCompleted().toRadiobutton().check('Graduate or professional school (for example Masters, PhD, MD, JD/LLB)');
       await surveyAboutYou.speakLanguage().toRadiobutton().check('English');
