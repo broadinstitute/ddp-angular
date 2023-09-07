@@ -112,7 +112,7 @@ test.describe('Receive Genome Study Kit', () => {
         }
 
         await participantListPage.filterListByShortId(shortId);
-        logGenomeStudySampleKitReceived(shortId)
+        logGenomeStudySampleKitReceived(shortId);
 
         const row = 0;
         const participantsTable = participantListPage.participantListTable;

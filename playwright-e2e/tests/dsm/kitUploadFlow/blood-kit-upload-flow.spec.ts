@@ -172,11 +172,9 @@ test.describe('Blood Kits upload flow', () => {
       await participantListTable.openParticipantPageAt(0);
       await participantPage.assertPageTitle();
       const sampleInformationTab = await participantPage.clickTab<SampleInformationTab>(TabEnum.SAMPLE_INFORMATION);
-      await sampleInformationTab.assertKitType(kitLabel, kitType)
-      await sampleInformationTab
-        .assertValue(kitLabel, {info: SampleInfoEnum.STATUS, value: SampleStatusEnum.RECEIVED})
-      await sampleInformationTab
-        .assertValue(kitLabel, {info: SampleInfoEnum.RECEIVED, value: receivedDate})
+      await sampleInformationTab.assertKitType(kitLabel, kitType);
+      await sampleInformationTab.assertValue(kitLabel, {info: SampleInfoEnum.STATUS, value: SampleStatusEnum.RECEIVED});
+      await sampleInformationTab.assertValue(kitLabel, {info: SampleInfoEnum.RECEIVED, value: receivedDate});
     })
   }
 })

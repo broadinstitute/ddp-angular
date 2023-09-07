@@ -28,7 +28,7 @@ test.describe('Participant List Download', () => {
         expect(downloadedFile).toBeTruthy();
       });
     }
-  })
+  });
 
   test.describe('As analysis-friendly', () => {
     test('Subset of data in @dsm @prostate',
@@ -51,5 +51,5 @@ test.describe('Participant List Download', () => {
         const downloadedFile = await download.path();
         expect(downloadedFile).toBeTruthy();
       });
-  })
-});
+  });
+})

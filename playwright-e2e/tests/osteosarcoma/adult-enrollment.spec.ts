@@ -63,7 +63,7 @@ test('Osteo adult self enroll @dss @osteo', async ({ page }) => {
   await researchConsentPage.agreeToDrawBloodSamples();
   await researchConsentPage.requestStoredSamples('Yes');
   await researchConsentPage.fillInName(firstName, lastName);
-  await researchConsentPage.fillInDateOfBirth(patient.birthDate.MM, patient.birthDate.DD, patient.birthDate.YYYY)
+  await researchConsentPage.fillInDateOfBirth(patient.birthDate.MM, patient.birthDate.DD, patient.birthDate.YYYY);
   await researchConsentPage.fillInContactAddress({
     fullName,
     country: user.patient.country.name,
@@ -79,7 +79,7 @@ test('Osteo adult self enroll @dss @osteo', async ({ page }) => {
   await consentAddendumPage.agreeToShareAvailableResults().check('Yes');
   await consentAddendumPage.signature().fill(fullName);
   await page.waitForTimeout(2000);
-  await consentAddendumPage.submit()
+  await consentAddendumPage.submit();
 
   const medicalReleasePage = new MedicalReleasePage(page);
   await medicalReleasePage.waitForReady();
@@ -96,9 +96,9 @@ test('Osteo adult self enroll @dss @osteo', async ({ page }) => {
 
   await medicalReleasePage.agreeToAllowUsToContactPhysicianToObtainRecords();
   await medicalReleasePage.fillInFullName(fullName);
-  await medicalReleasePage.submit()
+  await medicalReleasePage.submit();
 
-  await assertActivityHeader(page, 'Survey: About Your Osteosarcoma')
+  await assertActivityHeader(page, 'Survey: About Your Osteosarcoma');
   const surveyAboutOsteosarcoma = new SurveyAboutYourOsteosarcoma(page);
   await surveyAboutOsteosarcoma.waitForReady();
   await surveyAboutOsteosarcoma.next();
@@ -137,7 +137,7 @@ test('Osteo adult self enroll @dss @osteo', async ({ page }) => {
 
   await surveyAboutYou.howDidYouHearAboutProject().check('General internet/Online sources (search engines, patient advocacy group website,');
   await surveyAboutYou.howOftenDoYouNeedHelpReadHospitalMaterials().toRadiobutton().check('Most of the time');
-  await surveyAboutYou.howOftenDoYouHaveProblemsUnderstandWrittenInformation().toRadiobutton().check('A little of the time')
+  await surveyAboutYou.howOftenDoYouHaveProblemsUnderstandWrittenInformation().toRadiobutton().check('A little of the time');
   await surveyAboutYou.howConfidentAreYouFillingOutFormsByYourself().toRadiobutton().check('Occasionally');
   await surveyAboutYou.highestLevelOfSchoolCompleted().toRadiobutton().check('High school graduate or equivalent');
   await surveyAboutYou.speakLanguage().toRadiobutton().check('English');

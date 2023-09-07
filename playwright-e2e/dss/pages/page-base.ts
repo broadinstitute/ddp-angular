@@ -238,7 +238,9 @@ export default abstract class PageBase implements PageInterface {
     } = opts;
 
     let labels;
-    if (!opts.labels) {
+    if (opts.labels) {
+      labels = opts.labels;
+    } else {
       labels = {
         phone: 'Phone',
         country: 'Country',
@@ -246,8 +248,6 @@ export default abstract class PageBase implements PageInterface {
         zip: 'Zip Code',
         city: 'City'
       };
-    } else {
-      labels = opts.labels;
     }
 
     const mailAddressForm = new Address(this.page, {

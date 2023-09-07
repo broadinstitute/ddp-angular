@@ -13,7 +13,7 @@ test.describe('Participants Search', () => {
       const participantsTable = participantListPage.participantListTable;
 
       // Save DDP and Short ID found on first row
-      const row = 0
+      const row = 0;
       const guid = await participantsTable.getParticipantDataAt(row, 'DDP');
       const shortId = await participantsTable.getParticipantDataAt(row, 'Short ID');
 
