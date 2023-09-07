@@ -26,7 +26,7 @@ export default class CountMeInPage extends AngioPageBase {
    * <br> Self Describe
    * <br> Type: Radiobutton picklist
    */
-  diagnosedWithAngiosarcoma(label: DESCRIBE_SELF): Promise<void> {
-    return new Radiobutton(this.page).check(label);
+  async diagnosedWithAngiosarcoma(label: DESCRIBE_SELF): Promise<void> {
+    return await new Radiobutton(this.page).check(label);
   }
 }

@@ -91,8 +91,7 @@ export class ParticipantListTable extends Table {
     //Get the first returned participant to use for testing - and verify at least one participant is returned
     const numberOfParticipants = await this.rowsCount;
     expect(numberOfParticipants, `No recent test participants were found with the given first name: ${participantName}`).toBeGreaterThanOrEqual(1);
-    const participantGuid = this.getCellDataForColumn('Participant ID', 1);
-    return participantGuid;
+    return this.getCellDataForColumn('Participant ID', 1);
   }
 
    /**
@@ -106,8 +105,7 @@ export class ParticipantListTable extends Table {
       const columnIndex = numberOfPrecedingColumns + 1;
       //Find the cell in a specific row and column
       const cell = this.page.locator(`((//tbody/tr)[${rowNumber}]/descendant::td)[${columnIndex}]`);
-      const cellContent = await cell.innerText();
-      return cellContent;
+      return cell.innerText();
     }
 
   private getParticipantAt(position: number): Locator {

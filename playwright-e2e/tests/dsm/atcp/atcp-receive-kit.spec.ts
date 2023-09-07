@@ -112,7 +112,7 @@ test.describe('Receive Genome Study Kit', () => {
         }
 
         await participantListPage.filterListByShortId(shortId);
-        logGenomeStudySampleKitReceived(shortId)
+        logGenomeStudySampleKitReceived(shortId);
 
         const row = 0;
         const participantsTable = participantListPage.participantListTable;
@@ -172,14 +172,14 @@ test.describe('Receive Genome Study Kit', () => {
         await participantListPage.participantListTable.openParticipantPageAt(0);
 
         const genomeStudyTab = await participantPage.clickTab<GenomeStudyTab>(TabEnum.GENOME_STUDY);
-        let field = await genomeStudyTab.getField('Status of genome study sample kit');
+        let field = genomeStudyTab.getField('Status of genome study sample kit');
 
         // "Sample kit received from participant" is checked
         const radiobuttonGroup = new Radiobutton(page, { root: field });
         expect(await radiobuttonGroup.isChecked('Sample kit received from participant')).toBe(true);
 
         // "Genome study date of receipt of sample kit from participant" will show the received date (today)
-        field = await genomeStudyTab.getField('Genome study date of receipt of sample kit from participant');
+        field = genomeStudyTab.getField('Genome study date of receipt of sample kit from participant');
         const fieldValue = await field.locator('input[data-placeholder="mm/dd/yyyy"]').inputValue();
         expect(fieldValue).toBe(getUtcDate());
       });

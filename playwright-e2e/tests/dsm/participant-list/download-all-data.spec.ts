@@ -11,7 +11,7 @@ test.describe.parallel('Participant List Download', () => {
 
   for (const study of studies) {
     test(`Select All in @dsm @${study}`, async ({ page, request }) => {
-      test.setTimeout(5 * 60 * 1000);
+      test.slow();
 
       const participantListPage = await ParticipantListPage.goto(page, study, request);
 

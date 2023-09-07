@@ -17,7 +17,7 @@ const testConfig: PlaywrightTestConfig = {
   testDir: __dirname,
   testMatch: '**/*.spec.ts',
   /* Maximum timeout per test. Each test should be short and takes less than 4 min to run */
-  timeout: 240 * 1000,
+  timeout: 4 * 60 * 1000,
   /* For expect() calls */
   expect: {
     /**
@@ -41,7 +41,7 @@ const testConfig: PlaywrightTestConfig = {
   fullyParallel: false,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
-  retries: 1,
+  retries: process.env.CI ? 1 : 0,
   workers: process.env.CI ? 2 : 4,
   maxFailures: 0,
 
@@ -67,7 +67,7 @@ const testConfig: PlaywrightTestConfig = {
     headless: true,
     /* Maximum time each (browser) action such as `click()` can take. Defaults to 0 (no limit). */
     actionTimeout: 50 * 1000,
-    navigationTimeout: 60 * 1000,
+    navigationTimeout: 50 * 1000,
     acceptDownloads: true,
     testIdAttribute: 'data-ddp-test',
 

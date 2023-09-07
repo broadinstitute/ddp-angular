@@ -16,10 +16,6 @@ export default class FamilyMemberTab {
 
     constructor(page: Page, relationToProband: FamilyMember) {
         this.page = page;
-        this._firstName; //proband starts with this as unknown, first name is used as an identifier in DSM (family member tab) & DSS (dashboard messaging)
-        this._lastName; //proband starts with this as unknown
-        this._familyID;
-        this._relationshipID;
         this._relationToProband = relationToProband;
     }
 
@@ -157,8 +153,7 @@ export default class FamilyMemberTab {
      * @returns contents of the Important Notes textarea
      */
     public async getImportantNotesContent(): Promise<string> {
-        const content = (await this.page.locator("//textarea[contains(@data-placeholder, 'Important Notes')]").inputValue()).toString();
-        return content;
+        return (await this.page.locator("//textarea[contains(@data-placeholder, 'Important Notes')]").inputValue()).toString();
     }
 
     /**
@@ -182,8 +177,7 @@ export default class FamilyMemberTab {
      * @returns contents of the Process Notes textarea
      */
     public async getProcessNotesContent(): Promise<string> {
-        const content = (await this.page.locator("//textarea[contains(@data-placeholder, 'Process Notes')]").inputValue()).toString();
-        return content;
+        return (await this.page.locator("//textarea[contains(@data-placeholder, 'Process Notes')]").inputValue()).toString();
     }
 
     /**
@@ -287,8 +281,7 @@ export default class FamilyMemberTab {
      * @returns contents of the Mixed Race Notes textarea
      */
     public async getMixedRaceNotesContent(): Promise<string> {
-        const content = (await this.page.locator("//textarea[contains(@data-placeholder, 'Mixed Race Notes')]").inputValue()).toString();
-        return content;
+        return (await this.page.locator("//textarea[contains(@data-placeholder, 'Mixed Race Notes')]").inputValue()).toString();
     }
 
     /**

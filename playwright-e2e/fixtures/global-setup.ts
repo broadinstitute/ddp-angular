@@ -6,7 +6,7 @@ import path from 'path';
  * See https://playwright.dev/docs/test-advanced#global-setup-and-teardown
  * @param config
  */
-async function globalSetup(config: FullConfig) {
+function globalSetup(config: FullConfig) {
   // setting environment variables to make data available to all tests.
   process.env.ROOT_DIR = path.resolve(__dirname, '../');
 }
