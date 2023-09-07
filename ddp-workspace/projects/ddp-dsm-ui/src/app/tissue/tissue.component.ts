@@ -96,8 +96,9 @@ export class TissueComponent {
     return null;
   }
 
-  valueChanged(value: any, parameterName: string, pName?: string, pId?, alias?, smId?, smIdArray?, index?, value2?, parameter2?): void {
+  valueChanged(value: any, parameterName: string, pName?: string, pId?, alias?, smId?, smIdArray?, index?, value2?, parameter2?): boolean {
     let v;
+    let result = false;
     let parentName = 'oncHistoryDetailId';
     if (pName) {
       parentName = pName;
@@ -181,6 +182,7 @@ export class TissueComponent {
           if (data['smIdPk']) {
             smIdArray[index].smIdPk = data['smIdPk'];
           }
+          result = true;
         },
         error: err => {
           this.dup = true;
@@ -193,13 +195,17 @@ export class TissueComponent {
           if (err._body === Auth.AUTHENTICATION_ERROR) {
             this.auth.doLogout();
           }
+          result= false;
         },
       });
     }
+    return result;
   }
 
   deleteTissue(): void {
-    this.tissue.deleted = true;
+    if (this.valueChanged('1', 'deleted')){
+      this.tissue.deleted = true;
+    }
   }
 
   public getStyleDisplay(): string {
