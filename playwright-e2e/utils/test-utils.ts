@@ -17,7 +17,7 @@ const { SITE_PASSWORD } = process.env;
 export async function waitForNoSpinner(page: Page, opts: { timeout?: number } = {}): Promise<void> {
   const { timeout = 50 * 1000 } = opts;
   const spinner = page.locator('[data-icon="spinner"].fa-spin, mat-spinner[role="progressbar"]').first();
-  const appError = page.locator('app-error-snackbar .snackbar-content');
+  const appError = page.locator('app-error-snackbar .snackbar-content').first();
   await page.waitForLoadState().catch((err) => logError(err));
   const pageStatus = await Promise.race([
     expect(spinner).toBeHidden({ timeout }).then(() => 'Ready'),
