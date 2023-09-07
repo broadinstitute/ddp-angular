@@ -72,7 +72,7 @@ test.describe('Create Follow-Up Survey', () => {
       const filterResult = json.filter((item: { surveyInfo: { participantId: string | null; }; reason: string; }) => {
           return item.surveyInfo.participantId === participantId && item.reason === reason
         })
-      await expect(filterResult.length).toEqual(1);
+      expect(filterResult.length).toEqual(1);
     });
   }
 

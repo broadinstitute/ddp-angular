@@ -74,7 +74,7 @@ export default class KitsSentPage {
   }
 
   public async assertDisplayedRowsCount(count: number): Promise<void> {
-    await expect(await this.kitsTable.rows.count(),
+    expect(await this.kitsTable.rows.count(),
       "Kits Sent page - displayed rows count doesn't match the provided one")
       .toEqual(count)
   }

@@ -11,7 +11,7 @@ import ResearchConsentPage from 'dss/pages/brain/consent-page';
 
 const { BRAIN_USER_EMAIL, BRAIN_USER_PASSWORD, MIN_EMAIL_WAIT_TIME, BRAIN_BASE_URL, SITE_PASSWORD } = process.env;
 
-test('Brain statics @brain', async ({ page }) => {
+test('Brain statics @dss @brain', async ({ page }) => {
   await page.goto(BRAIN_BASE_URL!);
   await utils.fillSitePassword(page, SITE_PASSWORD);
   await page.waitForTimeout(1000);
@@ -136,7 +136,7 @@ test('Brain statics @brain', async ({ page }) => {
   await page.getByRole('img', { name: 'The Angiosarcoma Project data release diagram' }).click();
 });
 
-test.fixme('Brain enroll kid on their behalf @brain', async ({ page }) => {
+test.fixme('Brain enroll kid on their behalf @dss @brain', async ({ page }) => {
   test.slow();
   await page.goto(BRAIN_BASE_URL!);
   const userEmail = generateEmailAlias(BRAIN_USER_EMAIL);
@@ -299,7 +299,7 @@ test.fixme('Brain enroll kid on their behalf @brain', async ({ page }) => {
   await page.getByRole('button', { name: 'View', exact: true }).click();
 });
 
-test.fixme('Brain enroll self @brain', async ({ page }) => {
+test.fixme('Brain enroll self @dss @brain', async ({ page }) => {
   test.slow();
   await page.goto(BRAIN_BASE_URL!);
   const checkForEmailsAfter = Date.now() + Number.parseInt(MIN_EMAIL_WAIT_TIME!);

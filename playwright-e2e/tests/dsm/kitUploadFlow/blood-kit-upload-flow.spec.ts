@@ -51,7 +51,7 @@ test.describe('Blood Kits upload flow', () => {
   });
 
   for (const study of studies) {
-    test(`Should upload a single kit for one participant @functional @visual @dsm @${study}`, async ({page}, testInfo) => {
+    test(`Should upload a single kit for one participant @functional @dsm @${study}`, async ({page}, testInfo) => {
       testResultDir = testInfo.outputDir;
 
       await welcomePage.selectStudy(study);

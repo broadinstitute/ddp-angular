@@ -39,7 +39,7 @@ export default class KitUploadPage {
     await this.handleKitUploadResponse();
     await waitForNoSpinner(this.page);
 
-    await expect(await this.page.locator('h3')
+    expect(await this.page.locator('h3')
       .textContent(), "Kit Upload page - Couldn't upload kits - something went wrong")
       .toEqual('All participants were uploaded.');
 

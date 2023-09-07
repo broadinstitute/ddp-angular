@@ -31,7 +31,7 @@ test.describe.serial('LMS Child Enrollment', () => {
     await expect(page.locator('.activity-step.active')).toHaveText(expectedText);
   };
 
-  test('Parental consent child is three years old @visual @enrollment @lms', async ({ page }) => {
+  test('Parental consent child is three years old @visual @dss @lms', async ({ page }) => {
     researchConsentPage = new LmsResearchConsentPage(page, 'secondChild');
     additionalConsentPage = new LmsAdditionalConsentPage(page);
 
@@ -171,8 +171,8 @@ test.describe.serial('LMS Child Enrollment', () => {
       await assertActiveActivityStep(page, '3. Sign Consent');
 
       await expect(page.locator('p.secondary-text')).toHaveScreenshot(`lms-research-consent-sign-consent-info.png`);
-      await expect(await researchConsentPage.agreeToDrawBloodQuestion.toLocator()).toHaveScreenshot('lms-agree-to-draw-blood-question.png');
-      await expect(await researchConsentPage.canRequestStoredTumorSamples.toLocator()).toHaveScreenshot('lms-can-request-tumor-samples-question.png');
+      await expect(researchConsentPage.agreeToDrawBloodQuestion.toLocator()).toHaveScreenshot('lms-agree-to-draw-blood-question.png');
+      await expect(researchConsentPage.canRequestStoredTumorSamples.toLocator()).toHaveScreenshot('lms-can-request-tumor-samples-question.png');
 
       await researchConsentPage.agreeToDrawBloodSamples();
       await researchConsentPage.requestStoredSamples();
@@ -326,7 +326,7 @@ test.describe.serial('LMS Child Enrollment', () => {
     await homePage.waitForReady();
   });
 
-  test('New participant sign in @visual @enrollment @lms', async ({ page }) => {
+  test('New participant sign in @visual @dss @lms', async ({ page }) => {
     await auth.login(page, {email: userEmail, password: LMS_USER_PASSWORD});
 
     dashboardPage = new LmsDashboardPage(page);

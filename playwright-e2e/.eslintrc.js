@@ -74,6 +74,8 @@ module.exports = {
     '@typescript-eslint/comma-dangle': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/no-floating-promises': 'warn',
+    '@typescript-eslint/require-await': 'error',
+    '@typescript-eslint/await-thenable': 'error',
 
     'import/first': 'warn',
     'import/no-anonymous-default-export': ['warn', { allowObject: true }],

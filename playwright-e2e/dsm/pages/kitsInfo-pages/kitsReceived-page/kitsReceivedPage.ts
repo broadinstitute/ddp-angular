@@ -5,7 +5,6 @@ import {KitTypeEnum} from 'dsm/component/kitType/enums/kitType-enum';
 import {waitForNoSpinner, waitForResponse} from 'utils/test-utils';
 import {KitsColumnsEnum} from 'dsm/pages/kitsInfo-pages/enums/kitsColumns-enum';
 import {assertTableHeaders} from 'utils/assertion-helper';
-import {KitsPaginator} from 'lib/component/dsm/paginators/kitsPaginator';
 import {rows} from 'lib/component/dsm/paginators/types/rowsPerPage';
 
 const { BSP_TOKEN, DSM_BASE_URL } = process.env;
@@ -58,7 +57,7 @@ export default class KitsReceivedPage {
     } catch (error) {
       throw new Error(`Couldn't send the kit received request - something went wrong\n${error}`)
     }
-    await expect(response.ok()).toBeTruthy();
+    expect(response.ok()).toBeTruthy();
     expect(jsonResponse).toHaveProperty('kit_label', kitLabel);
   }
 
@@ -96,7 +95,7 @@ export default class KitsReceivedPage {
   }
 
   public async assertDisplayedRowsCount(count: number): Promise<void> {
-    await expect(await this.kitsTable.rows.count(),
+    expect(await this.kitsTable.rows.count(),
       "Kits Received page - displayed rows count doesn't match the provided one")
       .toEqual(count)
   }

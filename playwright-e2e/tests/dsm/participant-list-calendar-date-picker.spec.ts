@@ -8,7 +8,7 @@ import { logInfo } from 'utils/log-utils';
 
 test.describe('DSM Date Picker', () => {
   const study = StudyEnum.ANGIO;
-  const searchColumn = 'Date of Birth';
+  const dobColumn = 'Date of Birth';
   // DoB is 12/20/1995
   const dob = {
     yyyy: 1995,
@@ -79,13 +79,13 @@ test.describe('DSM Date Picker', () => {
 
       // Verify date match expected
       const selectDate = getDate(new Date(1995, 11, 20));
-      const value = await searchPanel.textInputLocator(searchColumn).inputValue();
+      const value = await searchPanel.textInputLocator(dobColumn).inputValue();
       expect(value).toBe(selectDate);
       logInfo(`Picked date ${selectDate} from DoB calendar`);
 
       // Click "Today" button
-      await searchPanel.setTodayFor(searchColumn);
-      const newValue = await searchPanel.textInputLocator(searchColumn).inputValue();
+      await searchPanel.setTodayFor(dobColumn);
+      const newValue = await searchPanel.textInputLocator(dobColumn).inputValue();
       expect(newValue).toBe(formatedDate);
     });
 });

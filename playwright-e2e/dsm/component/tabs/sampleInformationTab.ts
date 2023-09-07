@@ -89,7 +89,7 @@ export default class SampleInformationTab {
     await expect(this.page.locator(MFBarcodeXPath),
       `MFBarcode - '${MFBarcode}' can't be found`).toBeVisible();
 
-    await expect(await this.page.locator(MFBarcodeXPath + this.ancestorSampleTypeXPath(type)).textContent(),
+      expect(await this.page.locator(MFBarcodeXPath + this.ancestorSampleTypeXPath(type)).textContent(),
       `Provided MFBarcode (${MFBarcode}) has different sample type than - ${type}`)
       .toContain(type);
   }

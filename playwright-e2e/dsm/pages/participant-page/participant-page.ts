@@ -124,7 +124,7 @@ export default class ParticipantPage {
   }
 
   public async assertNotesToBe(value: string): Promise<void> {
-    await expect(await this.notes.inputValue(),
+    expect(await this.notes.inputValue(),
       "Participant page - participant's value doesn't match the provided one")
       .toBe(value);
   }

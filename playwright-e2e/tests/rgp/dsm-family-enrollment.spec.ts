@@ -17,7 +17,7 @@ import { logInfo } from 'utils/log-utils';
 test.describe.serial('DSM Family Enrollment Handling', () => {
     let rgpEmail: string;
 
-    test.skip('Verify the display and functionality of family account dynamic fields @functional @rgp', async ({ page, request}) => {
+    test.skip('Verify the display and functionality of family account dynamic fields @dss @functional @rgp', async ({ page, request}) => {
         const navigation = new Navigation(page, request);
 
         //select RGP study
@@ -85,7 +85,7 @@ test.describe.serial('DSM Family Enrollment Handling', () => {
     });
 
     //Skipping until housekeeping stuff is fixed
-    test.skip('Verify that the proband family member tab can be filled out @functional @rgp @proband', async ({ page, request }) => {
+    test.skip('Verify that the proband family member tab can be filled out @dss @functional @rgp @proband', async ({ page, request }) => {
     //Go into DSM
     const navigation = new Navigation(page, request);
 
@@ -158,8 +158,8 @@ test.describe.serial('DSM Family Enrollment Handling', () => {
     const familyIDFromSubjectID = await proband.getFamilyIDFromSubjectID();
     const familyIDFromFamilyMemberTab = await proband.getFamilyIDFromFamilyMemberTab();
 
-    await expect(familyIDFromSubjectID).toEqual(proband.familyID);
-    await expect(familyIDFromFamilyMemberTab).toEqual(proband.familyID);
+    expect(familyIDFromSubjectID).toEqual(proband.familyID);
+    expect(familyIDFromFamilyMemberTab).toEqual(proband.familyID);
 
     //Prep for checking note content  in Participant Info later on
     const importantNotesTextarea = proband.getImportantNotes();
@@ -519,7 +519,7 @@ test.describe.serial('DSM Family Enrollment Handling', () => {
     await redCapSurveyCompletedDate.fill(`${currentDate[0]}/${currentDate[1]}/${currentDate[2]}`);//[0] is MM, [1] is DD, [2] is YYYY
     });
 
-    test.skip('Verify that a family member can be added without copying proband info @rgp @functional', async ({ page, request }) => {
+    test.skip('Verify that a family member can be added without copying proband info @dss @rgp @functional', async ({ page, request }) => {
     //Add a new family member
     //Go into DSM
     const navigation = new Navigation(page, request);
@@ -603,10 +603,10 @@ test.describe.serial('DSM Family Enrollment Handling', () => {
     const probandFamilyID = await proband.getFamilyIDFromFamilyMemberTab();
 
     logInfo(`grandfather family id ${maternalGrandfatherFamilyID} vs proband family id: ${probandFamilyID}`);
-    await expect(maternalGrandfatherFamilyID).toEqual(probandFamilyID);
+    expect(maternalGrandfatherFamilyID).toEqual(probandFamilyID);
     });
 
-    test.skip('Verify that a family member can be added using copied proband info @rgp @functional', async ({ page, request }) => {
+    test.skip('Verify that a family member can be added using copied proband info @dss @rgp @functional', async ({ page, request }) => {
     //Go into DSM
     const navigation = new Navigation(page, request);
 

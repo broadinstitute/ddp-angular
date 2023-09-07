@@ -16,7 +16,7 @@ const {MBC_USER_EMAIL, MBC_USER_PASSWORD, MBC_BASE_URL, SITE_PASSWORD} = process
 
 
 test.describe.serial('MBC enrolment @mbc', () => {
-  test('join the movement @enrollment @mbc', async ({page}) => {
+  test('join the movement @dss @functional @mbc', async ({page}) => {
     const participant = user.adult;
     const firstName = generateUserName(participant.firstName);
     const lastName = generateUserName(participant.lastName);
