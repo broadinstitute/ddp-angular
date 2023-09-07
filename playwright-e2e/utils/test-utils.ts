@@ -20,8 +20,8 @@ export async function waitForNoSpinner(page: Page, opts: { timeout?: number } = 
   const appError = page.locator('app-error-snackbar .snackbar-content').first();
   await page.waitForLoadState().catch((err) => logError(err));
   const pageStatus = await Promise.race([
-    expect(spinner).toBeHidden({ timeout }).then(() => 'Ready'),
-    expect(appError).toBeVisible({ timeout }).then(() => 'Error'),
+    spinner.waitFor({ state: 'hidden', timeout }).then(() => 'Ready'),
+    appError.waitFor({ state: 'visible', timeout }).then(() => 'Error')
   ]);
   if (pageStatus === 'Ready') {
     // Check again for app error after spinner stopped
@@ -87,12 +87,11 @@ export async function fillSitePassword(page: Page, password = SITE_PASSWORD): Pr
   await page.locator('input[type="password"]').waitFor({ state: 'visible', timeout: 30 * 1000 });
   await page.locator('input[type="password"]').fill(password);
 
-  const passwordCheckRequestPromise = waitForResponse(page, { uri: '/irb-password-check' });
   await Promise.all([
-    passwordCheckRequestPromise,
+    waitForResponse(page, { uri: '/irb-password-check' }),
     page.keyboard.press('Enter')
   ]);
-  await page.waitForTimeout(200);
+  await expect(page.locator('app-root')).toBeAttached();
 }
 
 /**

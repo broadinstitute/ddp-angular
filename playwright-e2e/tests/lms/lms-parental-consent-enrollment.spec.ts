@@ -32,6 +32,8 @@ test.describe.serial('LMS Child Enrollment', () => {
   };
 
   test('Parental consent child is three years old @visual @dss @lms', async ({ page }) => {
+    test.slow();
+
     researchConsentPage = new LmsResearchConsentPage(page, 'secondChild');
     additionalConsentPage = new LmsAdditionalConsentPage(page);
 

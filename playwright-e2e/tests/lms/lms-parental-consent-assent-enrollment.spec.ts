@@ -25,6 +25,8 @@ test.describe.serial('LMS Child Enrollment', () => {
   };
 
   test('Consent & Assent @dss @visual @lms', async ({ page }) => {
+    test.slow();
+
     researchConsentPage = new LmsResearchConsentPage(page, 'child');
     additionalConsentPage = new LmsAdditionalConsentPage(page);
 

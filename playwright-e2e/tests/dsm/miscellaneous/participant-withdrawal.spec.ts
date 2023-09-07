@@ -31,9 +31,9 @@ test.describe('Participants Withdrawal', () => {
         // Search for Status NOT EQUALS TO Exited before/after Enrollment
         const searchPanel = participantListPage.filters.searchPanel;
         await searchPanel.open();
-        // eslint-disable-next-line max-len
-        await searchPanel.text('First Name', { textValue: user.adult.firstName, additionalFilters: [AdditionalFilter.EXACT_MATCH], exactMatch: false });
-        await searchPanel.checkboxes('Status', { checkboxValues: ['Enrolled', 'Lost to Followup', 'Registered'] });
+        await searchPanel.text('First Name',
+          { textValue: user.adult.firstName, additionalFilters: [AdditionalFilter.EXACT_MATCH], exactMatch: false });
+        await searchPanel.checkboxes('Status', { checkboxValues: ['Enrolled', 'Registered'] });
         await searchPanel.search();
 
         // At least one participant after search

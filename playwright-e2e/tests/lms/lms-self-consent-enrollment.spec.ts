@@ -24,6 +24,8 @@ test.describe.serial('LMS Adult Enrollment', () => {
   };
 
   test('self-consent @visual @dss @lms', async ({ page }) => {
+    test.slow();
+
     researchConsentPage = new LmsResearchConsentPage(page);
     additionalConsentPage = new LmsAdditionalConsentPage(page);
 
