@@ -15,14 +15,18 @@ import {
 } from "../tabs/interfaces/onc-history-inputs-types";
 import {waitForResponse} from "../../../utils/test-utils";
 import Select from "../../../dss/component/select";
+import TissueInformationPage from "../../pages/tissue-information-page/tissue-information-page";
 
 export default class OncHistoryTable extends Table {
+  private readonly tissueInformationPage = new TissueInformationPage(this.page);
+
   constructor(private readonly page: Page) {
     super(page, {cssClassAttribute: '.table'});
   }
 
-  public async openTissueRequestPage(index: number): Promise<void> {
+  public async openTissueInformationPage(index: number): Promise<TissueInformationPage> {
     await this.tissueRequestPageButton(index).click();
+    return this.tissueInformationPage;
   }
 
   public async selectDeselectRow(index: number): Promise<void> {
@@ -161,8 +165,13 @@ export default class OncHistoryTable extends Table {
   }
 
   private async selectRequest(root: Locator, selectRequest: OncHistorySelectRequestEnum): Promise<void> {
-    const selectInput = new Select(this.page, {root: root});
-    await selectInput.selectOption(selectRequest);
+    const matSelect = this.activeSelectedRequestListItem(root);
+    const selectedValue = await matSelect.textContent();
+    if(selectedValue?.trim() !== selectRequest) {
+      const selectInput = new Select(this.page, {root: root});
+      await selectInput.selectOption(selectRequest);
+      await waitForResponse(this.page, {uri: 'patch'});
+    }
   }
 
   private async lookup(selectIndex: number = 0): Promise<void> {
@@ -263,10 +272,6 @@ export default class OncHistoryTable extends Table {
   }
 
   private get inputXPath(): string {
-    return '//mat-form-field//input'
-  }
-
-  private get textAreaPath(): string {
     return '//mat-form-field//input'
   }
 
