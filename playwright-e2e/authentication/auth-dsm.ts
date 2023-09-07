@@ -24,7 +24,7 @@ export async function login(page: Page, opts: { email?: string; password?: strin
     throw Error('Invalid parameter: DSM base URL is undefined or null.');
   }
 
-  await page.goto(DSM_BASE_URL, { waitUntil: 'load' });
+  await page.goto(DSM_BASE_URL, { waitUntil: 'networkidle' });
   await fillInEmailPassword(page, { email, password, waitForNavigation: false });
   try {
     await assertLoggedIn(page);
