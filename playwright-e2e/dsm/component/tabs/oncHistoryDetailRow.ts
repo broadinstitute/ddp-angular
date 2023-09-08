@@ -541,7 +541,7 @@ export default class OncHistoryDetailRow implements OncHistoryDetail {
     }
 
     public async accessTissueRequestPage(): Promise<void> {
-        const button = await this.getTissueRequestPageButton();
+        const button = this.getTissueRequestPageButton();
         await button.click();
     }
 
