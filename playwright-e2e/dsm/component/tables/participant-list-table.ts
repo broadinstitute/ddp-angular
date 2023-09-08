@@ -7,6 +7,7 @@ import { getDate, offsetDaysFromToday } from 'utils/date-utils';
 import { waitForNoSpinner } from 'utils/test-utils';
 import { AdditionalFilter } from 'dsm/component/filters/sections/search/search-enums';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
+import { ScreenReaderText } from 'dsm/component/navigation/enums/accessibility-enum';
 
 export class ParticipantListTable extends Table {
   private readonly _participantPage: ParticipantPage = new ParticipantPage(this.page);
@@ -112,9 +113,47 @@ export class ParticipantListTable extends Table {
     return this.page.locator(`//table/tbody/tr`).nth(position);
   }
 
+  /**
+   * Returns the number of the last page of the participant list
+   * @type pagebuttonContents - 0 based- string array that splits "page" and {page number}
+   * @returns The number of the last page button e.g. if there are 3 pages, this method returns: 3
+   */
+  public async getLastPageNumber(): Promise<number> {
+    const lastPageButton = this.lastPage;
+    const pageButtonContents = (await lastPageButton.innerText()).split(ScreenReaderText.GENERAL_PAGE);
+    const pageNumber = pageButtonContents[1].trim();
+    return parseInt(pageNumber);
+  }
+
+  /**
+   * Return the current page number
+   * @returns @type pagebuttonContents - 0 based- string array that splits "You're on page" and {page number}
+   */
+  public async getCurrentPageNumber(): Promise<number> {
+    const currentPageButton = this.currentPage;
+    const pageButtonContents = (await currentPageButton.innerText()).split(ScreenReaderText.CURRENT_PAGE);
+    const pageNumber = pageButtonContents[1].trim();
+    return parseInt(pageNumber);
+  }
+
+  public async onLastPage(): Promise<boolean> {
+    if (await this.getCurrentPageNumber() === await this.getLastPageNumber()) {
+      return true;
+    }
+    return false;
+  }
+
   /* Locators */
   public get rowsCount(): Promise<number> {
     return this.getRowsCount();
+  }
+
+  public get lastPage(): Locator {
+    return this.page.locator(`//li[contains(@class, 'pagination-next')]/preceding-sibling::li[1]`);
+  }
+
+  public get currentPage(): Locator {
+    return this.page.locator(`//li[contains(@class, 'current')]`);
   }
 
   /* XPaths */

@@ -8,6 +8,8 @@ import Checkbox from 'dss/component/checkbox';
 import { waitForNoSpinner, waitForResponse } from 'utils/test-utils';
 import { Filters } from 'dsm/component/filters/filters';
 import { ParticipantListTable } from 'dsm/component/tables/participant-list-table';
+import { KitTypeEnum } from 'dsm/component/kitType/enums/kitType-enum';
+import { CustomViewColumns, EnrollmentStatus, KitStatus, ParticipantColumns } from 'dsm/component/filters/sections/search/search-enums';
 
 export default class ParticipantListPage {
   private readonly PAGE_TITLE: string = 'Participant List';
@@ -225,6 +227,44 @@ export default class ParticipantListPage {
     const button = this.page.locator('button').filter({has: this.page.locator('[data-icon="quidditch"]')});
     await button.click();
     await waitForNoSpinner(this.page);
+  }
+
+  /**
+   * Searches for a participant that has not had a specific kit type sent out
+   * @param kitType the kit type being searched for to make sure the participant has no history e.g. they have not had a saliva kit sent or received
+   * @returns the short id of the matched participant
+   */
+  async findParticipantWithoutSentKitType(kitType: KitTypeEnum): Promise<string> {
+    const participantListTable = this.participantListTable;
+
+    const searchPanel = this.filters.searchPanel;
+    await searchPanel.searchForParticipantsWithEnrollmentStatus([EnrollmentStatus.ENROLLED]);
+    expect(await participantListTable.rowsCount).toBeGreaterThanOrEqual(1);
+
+    const customizeViewPanel = this.filters.customizeViewPanel;
+    await customizeViewPanel.open();
+    expect(await customizeViewPanel.isColumnGroupDisplayed(CustomViewColumns.SAMPLE), 'ERROR: Sample Columns group is not displayed').toBe(true);
+
+    await customizeViewPanel.deselectColumns('Participant Columns', ['Status']); //To reduce confusion when Sample Columns -> Status is added and filtered
+    await customizeViewPanel.selectColumns('Sample Columns', ['Sample Type', 'Status']);
+    await searchPanel.open();
+    let validTestParticipantShortID = '';
+
+    switch (kitType) {
+      case KitTypeEnum.SALIVA: {
+        //Many study groups e.g. CMI have a saliva kit that gets automatically created and be found in Kits w/o Label; usually has Waiting on GP status
+        validTestParticipantShortID = await searchPanel.searchForParticipantWithUnsentSalivaKit();
+        break;
+      }
+      case KitTypeEnum.BLOOD: {
+        //TODO Fill the case for blood kits; Note: blood kits are not usually automatically created
+        break;
+      }
+      default: {
+        break;
+      }
+    }
+    return validTestParticipantShortID;
   }
 
   async findParticipantForKitUpload(): Promise<number> {

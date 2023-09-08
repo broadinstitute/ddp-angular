@@ -1,9 +1,11 @@
 import { expect, Locator, Page } from '@playwright/test';
 import DatePicker from 'dsm/component/date-picker';
 import { CheckboxConfig, DateConfig, RadioButtonConfig, TextConfig } from 'dsm/component/filters/sections/search/search-types';
-import { AdditionalFilter } from 'dsm/component/filters/sections/search/search-enums';
+import { AdditionalFilter, EnrollmentStatus, KitStatus, ParticipantColumns, SampleColumns } from 'dsm/component/filters/sections/search/search-enums';
 import { waitForNoSpinner, waitForResponse } from 'utils/test-utils';
 import { logError } from 'utils/log-utils';
+import { KitTypeEnum } from 'dsm/component/kitType/enums/kitType-enum';
+import { ParticipantListTable } from 'dsm/component/tables/participant-list-table';
 
 export class Search {
   private readonly enUSDateRegExp = new RegExp(/\b(0[1-9]|1[012])([/])(0[1-9]|[12]\d|3[01])\2(\d{4})/);
@@ -153,6 +155,79 @@ export class Search {
   private async isDisabled(locator: Locator | undefined): Promise<boolean> {
     const isDisabled = (await locator?.getAttribute('class'))?.includes('mat-checkbox-disabled');
     return isDisabled || false;
+  }
+
+  public async searchForParticipantsWithEnrollmentStatus(enrollmentStatuses: EnrollmentStatus[]): Promise<void> {
+    await this.open();
+    await this.checkboxes(ParticipantColumns.STATUS, { checkboxValues: enrollmentStatuses });
+    await this.search();
+  }
+
+  public async searchForKitSampleStatus(kitTypes: KitTypeEnum[], kitStatus: KitStatus): Promise<void> {
+    await this.open();
+    await this.checkboxes(SampleColumns.SAMPLE_TYPE, { checkboxValues: kitTypes });
+    await this.radioButton(SampleColumns.STATUS, { radioButtonValue: kitStatus });
+    await this.search();
+  }
+
+  public async searchForParticipantWithUnsentSalivaKit(): Promise<string> {
+    const [filterListReponse] = await Promise.all([
+      this.page.waitForResponse(response => response.url().includes('/ui/filterList') && response.status() === 200),
+      this.searchForKitSampleStatus([KitTypeEnum.SALIVA], KitStatus.WAITING_ON_GP),
+    ]);
+    let responseBody = JSON.parse(await filterListReponse.text());
+
+    const participantListTable = new ParticipantListTable(this.page);
+    const amountOfRowsDisplayed = await participantListTable.rowsCount;
+    let validTestParticipantShortIDFound;
+
+    //Check for a participant with a saliva kit that neither has scanDate or deactivatedDate
+    for (let index = 0; index < amountOfRowsDisplayed; index++) {
+      if (await participantListTable.onLastPage()) {
+        console.log('On last page');
+        break;
+      }
+      console.log(`Participant ${index}'s information: ${responseBody.participants[index].esData.profile.hruid}`);
+      const kitInformation = responseBody.participants[index].kits;
+      const amountOfKits = kitInformation.length;
+      console.log(`Participant kit amount: ${kitInformation.length}`);
+      for (let kitNumber = 0; kitNumber < amountOfKits; kitNumber++) {
+        console.log(`Participant kit info: ${kitInformation[kitNumber].kitTypeName}`);
+        if ((kitInformation[kitNumber].kitTypeName) === KitTypeEnum.SALIVA) {
+          if (kitInformation[kitNumber].scanDate === undefined && kitInformation[kitNumber].deactivatedDate === undefined) {
+            console.log(`ALERT: Valid participant found!`);
+            validTestParticipantShortIDFound = responseBody.participants[index].esData.profile.hruid;
+            break;
+          }
+        }
+      }
+
+      if (validTestParticipantShortIDFound) {
+        break;
+      }
+
+      if (this.isReadyToGoToTheNextPage(index, amountOfRowsDisplayed)) {
+        const [nextResponse] = await Promise.all([
+          this.page.waitForResponse(response => response.url().includes('/ui/filterList') && response.status() === 200),
+          await participantListTable.nextPage(),
+        ]);
+        await participantListTable.waitForReady();
+        responseBody = JSON.parse(await nextResponse.text());
+        index = -1;
+        console.log('Should be on the next page now');
+      }
+    }
+    return validTestParticipantShortIDFound;
+  }
+
+  /**
+   * Determines if it's time to go to the next page based on the current index used in a for-loop & whether the last row was looked at
+   * @param index Current index being used in a for-loop in a different method
+   * @param amountOfRowsDisplayed The amount of rows currently displayed in the DSM Participant List
+   * @returns if it's time to turn the page
+   */
+  private isReadyToGoToTheNextPage(index: number, amountOfRowsDisplayed: number): boolean {
+    return (index > 0) && (index % (amountOfRowsDisplayed - 1) === 0);
   }
 
   /* Locators */

@@ -3,6 +3,8 @@ import {waitForResponse} from 'utils/test-utils';
 import {MainInfoEnum} from 'dsm/pages/participant-page/enums/main-info-enum';
 import Tabs from 'dsm/component/tabs/tabs';
 import {TabEnum} from 'dsm/component/tabs/enums/tab-enum';
+import { KitUploadInfo } from 'dsm/pages/kitUpload-page/models/kitUpload-model';
+import ContactInformationTab from 'dsm/component/tabs/contactInformationTab';
 
 export default class ParticipantPage {
   private readonly PAGE_TITLE: string = 'Participant Page';
@@ -93,6 +95,41 @@ export default class ParticipantPage {
   private async readMainCheckboxValueFor(key: MainInfoEnum) {
     return await this.page.locator(this.getMainCheckboxValueInfoXPath(key)).isChecked();
   }
+
+  /**
+   * Checks a participant's Contact Information tab in order to make a KitUploadInfo object
+   * @param shortID participant's short id
+   * @returns KitUploadInfo object that can be used for kit upload
+   */
+  public async getContactInformation(shortID: string): Promise<KitUploadInfo> {
+    //Check to make sure only the intended participant's contact information is used
+    const pageShortID = await this.getShortId();
+    expect(pageShortID, `ERROR - Wrong participant page: Currently on ${pageShortID}'s participant page, not ${shortID}'s`).toEqual(shortID);
+
+    //Check for Contact Information tab since not all studies have it
+    const hasContactInformationTab = await this.isTabVisible(TabEnum.CONTACT_INFORMATION);
+    expect(hasContactInformationTab, `Participant ${shortID} does not have a Contact Information Tab`).toBe(true);
+    const kitUploadInfo = new KitUploadInfo(
+      shortID,
+      await this.getFirstName(),
+      await this.getLastName(),
+    );
+
+    //If participant's address is valid, use that - else just use the test address which is already set
+    if (hasContactInformationTab) {
+      const contactInformationTab = await this.clickTab<ContactInformationTab>(TabEnum.CONTACT_INFORMATION);
+      const hasValidAddress = JSON.parse(await contactInformationTab.getValid());
+      if (hasValidAddress) {
+        kitUploadInfo.street1 = await contactInformationTab.getStreet1();
+        kitUploadInfo.city = await contactInformationTab.getCity();
+        kitUploadInfo.postalCode = await contactInformationTab.getZip();
+        kitUploadInfo.state = await contactInformationTab.getState();
+        kitUploadInfo.country = await contactInformationTab.getCountry();
+      }
+    }
+    return kitUploadInfo;
+  }
+
   /* ---- */
 
   /* Locators */
