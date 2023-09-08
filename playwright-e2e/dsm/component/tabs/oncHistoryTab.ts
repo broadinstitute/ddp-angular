@@ -1,7 +1,7 @@
 import {Locator, Page} from '@playwright/test';
 import OncHistoryDetailRow from './oncHistoryDetailRow';
 import { Decalcification, GeneralAnswer } from './enums/oncHistory-enum';
-import { StudyEnum } from '../navigation/enums/selectStudyNav-enum';
+import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
 
 export default class OncHistoryTab {
     constructor(private readonly page: Page) {}

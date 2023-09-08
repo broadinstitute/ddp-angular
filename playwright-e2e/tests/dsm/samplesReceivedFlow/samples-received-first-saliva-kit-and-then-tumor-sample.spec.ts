@@ -112,15 +112,15 @@ test.describe('Samples Received Event - Recieved saliva kit first and then tumor
 
             //Input a new row of onc history data, where at least the following is added: Date of PX + Accession Number; Afterwards change request status to 'Request'
             const oncHistoryTab = new OncHistoryTab(page);
-            await oncHistoryTab.addOncHistory.createOncHistoryDetail({
+            /*await oncHistoryTab.addOncHistory.createOncHistoryDetail({
                 study,
                 dateOfPX: '09/08/2023',
                 accessionNumber: 'AccessionExampleNumber123',
                 facility: 'MGH',
                 phone: '123-456-7890',
                 fax: '111-222-3333',
-            });
-            /*await oncHistoryTab.addOncHistory.createOncHistoryDetail({
+            });*/
+            await oncHistoryTab.addOncHistory.createOncHistoryDetail({
                 study,
                 dateOfPX: '09/08/2023',
                 accessionNumber: 'AccessionExampleNumber123',
@@ -143,7 +143,7 @@ test.describe('Samples Received Event - Recieved saliva kit first and then tumor
                 facilityWhereSampleWasReviewed: 'Tufts',
                 slidesTotal: 'Description of total amount of slides',
                 treatmentEffect: 'Description of extensive treatment effect'
-            });*/
+            });
 
             //Verify the Request checkbox appears
 
