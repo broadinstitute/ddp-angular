@@ -1,4 +1,4 @@
-export enum TissueInformationEnums {
+export enum TissueInformationEnum {
   ASSIGNEE = 'Assignee',
   SHORT_ID = 'Short ID',
   FULL_NAME = 'Full Name',
@@ -55,7 +55,15 @@ export enum TissueDynamicFieldsEnum {
   FIRST_SM_ID = 'First SM ID',
   SM_ID_FOR_H_E = 'SM ID for H&E',
   DATE_SENT_TO_GP = 'Date sent to GP',
-  SEQUENCING_RESULTS = 'Sequencing Results'
+  SEQUENCING_RESULTS = 'Sequencing Results',
+  EXPECTED_RETURN_DATE = 'Expected Return Date',
+  RETURN_DATE = 'Return Date',
+  BLOCK_TO_SHL = 'Block to SHL',
+  SCROLLS_BACK_FROM_SHL = 'Scrolls back from SHL',
+  BLOCK_ID_TO_SHL = 'Scrolls back from SHL',
+  TUMOR_PERCENTAGE_AS_REPORTED_BY_SHL = 'Tumor Percentage as reported by SHL',
+  SHL_WORK_NUMBER = 'SHL Work Number',
+  TRACKING_NUMBER = 'Tracking Number'
 }
 
 export enum ProblemWithTissueEnum {
