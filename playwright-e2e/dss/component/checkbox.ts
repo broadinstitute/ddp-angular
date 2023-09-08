@@ -51,6 +51,10 @@ export default class Checkbox extends WidgetBase {
     }
   }
 
+  async isCheckboxDisabled(): Promise<boolean> {
+    return (await this.toLocator().getAttribute('class'))?.includes('mat-checkbox-disabled') as boolean;
+  }
+
   /**
    * Typing text in an Input field, visible after checked a checkbox.
    * @param value

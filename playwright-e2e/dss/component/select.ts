@@ -100,4 +100,12 @@ export default class Select extends WidgetBase {
     }
     return options!;
   }
+
+  get selectedOption(): Promise<string> {
+    return this.toLocator().locator('span.mat-select-min-line').textContent() as Promise<string>;
+  }
+
+  async isSelectDisabled(): Promise<boolean> {
+    return (await this.toLocator().getAttribute('class'))?.includes('mat-select-disabled') as boolean;
+  }
 }

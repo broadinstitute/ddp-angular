@@ -10,10 +10,9 @@ import {
   OncHistorySelectRequestEnum
 } from "../../../dsm/component/tabs/enums/onc-history-input-columns-enum";
 import {
-  SequencingResultsEnum,
-  TissueTypesEnum,
-  TumorTypesEnum
-} from "../../../dsm/pages/tissue-information-page/enums/tissue-information-enums";
+  ProblemWithTissueEnum, SequencingResultsEnum,
+  TissueInformationEnum, TissueTypesEnum, TumorTypesEnum
+} from "../../../dsm/pages/tissue-information-page/enums/tissue-information-enum";
 
 
 test.describe('Tissue Request Flow', () => {
@@ -45,23 +44,7 @@ test.describe('Tissue Request Flow', () => {
 
       const tissueInformationPage = await oncHistoryTable.openTissueInformationPage(0);
       await tissueInformationPage.assertPageTitle();
-      const tissue = tissueInformationPage.tissue();
-      await tissueInformationPage.fillFaxSentDates({today: true})
-      await tissue
-        .fillMaterialsReceived(
-          {uss: 666, block: 777, he: 888, scroll: 999, tissueType: TissueTypesEnum.SLIDE}
-        )
-      await tissue.fillPathologyReport('Yes');
-      await tissue.fillTumorType(TumorTypesEnum.PRIMARY);
-      await tissue.fillTissueSite('Tissue site');
-      await tissue.fillTumorCollaboratorSampleID('Collaborator sample ID');
-      await tissue.fillSKID('SK ID');
-      await tissue.fillFirstSMID('First SM ID')
-      await tissue.fillSMIDForHE('SM ID for H&E')
-      await tissue.fillDateSentToGP({today: true});
-      await tissue.fillSequencingResults(SequencingResultsEnum.SUCCESS);
-
-
+      await tissueInformationPage.fillFaxSentDates({today: true});
 
       // console.log(await tissueInformationPage.getParticipantInformation(TissueInformationEnum.ASSIGNEE))
       // console.log(await tissueInformationPage.getParticipantInformation(TissueInformationEnum.REQUEST))
@@ -86,6 +69,32 @@ test.describe('Tissue Request Flow', () => {
       // console.log(await tissueInformationPage.getParticipantInformation(TissueInformationEnum.FACILITY))
       // console.log(await tissueInformationPage.getParticipantInformation(TissueInformationEnum.PHONE))
       // console.log(await tissueInformationPage.getParticipantInformation(TissueInformationEnum.FAX))
+      //
+      // await tissueInformationPage.addTissue();
+      // await tissueInformationPage.deleteTissueByIndex(1);
+      // await tissueInformationPage.fillFaxSentDates({today: true}, {date: {yyyy: 2023, month: 4, dayOfMonth: 3}}, {date: {yyyy: 2023, month: 5, dayOfMonth: 13}});
+      // await tissueInformationPage.fillTissueReceivedDate({today: true});
+      // await tissueInformationPage.problemsWithTissue(ProblemWithTissueEnum.NO_PROBLEM, false);
+      // await tissueInformationPage.fillNotes('Test new note');
+      // await tissueInformationPage.fillDestructionPolicy(787);
+      // await tissueInformationPage.selectGender('Male');
+
+
+      const tissue = await tissueInformationPage.tissue();
+
+      await tissue
+        .fillMaterialsReceived(
+          {uss: 666, block: 777, he: 888, scroll: 999, tissueType: TissueTypesEnum.SLIDE}
+        )
+      await tissue.fillPathologyReport('Yes');
+      await tissue.fillTumorType(TumorTypesEnum.PRIMARY);
+      await tissue.fillTissueSite('Tissue site');
+      await tissue.fillTumorCollaboratorSampleID('Collaborator sample ID');
+      await tissue.fillSKID('SK ID');
+      await tissue.fillFirstSMID('First SM ID')
+      await tissue.fillSMIDForHE('SM ID for H&E')
+      await tissue.fillDateSentToGP({today: true});
+      await tissue.fillSequencingResults(SequencingResultsEnum.SUCCESS);
 
       // console.log(await oncHistoryTable.getFieldValue(OncHistoryInputColumnsEnum.REQUEST))
       // console.log(await oncHistoryTable.getFieldValue(OncHistoryInputColumnsEnum.TYPE_OF_PX))
