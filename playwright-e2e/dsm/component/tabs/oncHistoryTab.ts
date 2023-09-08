@@ -1,6 +1,6 @@
 import {Locator, Page} from '@playwright/test';
-import { LMSOncHistoryDetail, OncHistoryDetail, Osteo2OncHistoryDetail } from 'dsm/component/tabs/model/oncHistoryDetailModel';
-import { GeneralAnswer, Decalcification } from './enums/oncHistory-enum';
+import OncHistoryDetailRow from './oncHistoryDetailRow';
+import { Decalcification, GeneralAnswer } from './enums/oncHistory-enum';
 import { StudyEnum } from '../navigation/enums/selectStudyNav-enum';
 
 export default class OncHistoryTab {
@@ -8,9 +8,11 @@ export default class OncHistoryTab {
 
     public get addOncHistory() {
         const page = this.page;
+        let oncHistoryDetails: OncHistoryDetailRow[];
 
-        return new class implements OncHistoryDetail, Osteo2OncHistoryDetail, LMSOncHistoryDetail {
+        return new class {
             async createOncHistoryDetail(opts: {
+                study: StudyEnum,
                 dateOfPX: string,
                 accessionNumber: string,
                 facility: string,
@@ -19,37 +21,105 @@ export default class OncHistoryTab {
                 typeOfPX?: string,
                 locationOfPX?: string,
                 histology?: string,
-                destructionPolicy?: string
+                destructionPolicy?: string,
+                localControl?: GeneralAnswer,
+                decalcification?: Decalcification,
+                ffpe?: GeneralAnswer,
+                blocksWithTumor?: string,
+                tumorSize?: string,
+                blocksToRequest?: string,
+                necrosis?: string,
+                viableTumor?: string,
+                slidesToRequest?: string,
+                facilityWhereSampleWasReviewed?: string,
+                slidesTotal?: string,
+                treatmentEffect?: string
             }): Promise<void> {
-                const { dateOfPX, accessionNumber, facility, phone, fax, typeOfPX, locationOfPX, histology, destructionPolicy } = opts;
-            }
-
-            async createOsteoOncHistoryDetail(opts: {
-                dateOfPX: string,
-                accessionNumber: string,
-                facility: string,
-                phone: string,
-                fax: string,
-                typeOfPX?: string,
-                locationOfPX?: string,
-                histology?: string,
-                destructionPolicy?: string
-            }): Promise<void> {
-                const { dateOfPX, accessionNumber, facility, phone, fax, typeOfPX, locationOfPX, histology, destructionPolicy } = opts;
-            }
-
-            async createLMSOncHistoryDetail(opts: {
-                dateOfPX: string,
-                accessionNumber: string,
-                facility: string,
-                phone: string,
-                fax: string,
-                typeOfPX?: string,
-                locationOfPX?: string,
-                histology?: string,
-                destructionPolicy?: string
-            }): Promise<void> {
-                const { dateOfPX, accessionNumber, facility, phone, fax, typeOfPX, locationOfPX, histology, destructionPolicy } = opts;
+                const {
+                    study,
+                    dateOfPX,
+                    accessionNumber,
+                    facility,
+                    phone,
+                    fax,
+                    typeOfPX = '',
+                    locationOfPX = '',
+                    histology = '',
+                    destructionPolicy = '',
+                    localControl = GeneralAnswer.BLANK,
+                    decalcification = Decalcification.BLANK,
+                    ffpe = GeneralAnswer.BLANK,
+                    blocksWithTumor = '',
+                    tumorSize = '',
+                    blocksToRequest = '',
+                    necrosis = '',
+                    viableTumor = '',
+                    slidesToRequest = '',
+                    facilityWhereSampleWasReviewed = '',
+                    slidesTotal = '',
+                    treatmentEffect = ''
+                } = opts;
+                const row = new OncHistoryDetailRow(page);
+                switch (study) {
+                    case StudyEnum.OSTEO2:
+                        //Handle OS2 (CMI Clinical Study)
+                        await row.inputOncHistoryOsteo({
+                            dateOfPX,
+                            accessionNumber,
+                            facility,
+                            phone,
+                            fax,
+                            typeOfPX,
+                            locationOfPX,
+                            histology,
+                            destructionPolicy,
+                            blocksWithTumor,
+                            tumorSize,
+                            localControl,
+                            necrosis,
+                            viableTumor,
+                            ffpe,
+                            decalcification,
+                            blocksToRequest
+                        });
+                        break;
+                    case StudyEnum.LMS:
+                        //Handle LMS (CMI Clinical Study)
+                        await row.inputOncHistoryLMS({
+                            dateOfPX,
+                            accessionNumber,
+                            facility,
+                            phone,
+                            fax,
+                            typeOfPX,
+                            locationOfPX,
+                            histology,
+                            destructionPolicy,
+                            tumorSize,
+                            slidesToRequest,
+                            facilityWhereSampleWasReviewed,
+                            slidesTotal,
+                            blocksToRequest,
+                            treatmentEffect,
+                            viableTumor,
+                            necrosis
+                        });
+                        break;
+                    default:
+                        //Handle CMI Research studies
+                        await row.inputOncHistory({
+                            dateOfPX,
+                            accessionNumber,
+                            facility,
+                            phone,
+                            fax,
+                            typeOfPX,
+                            locationOfPX,
+                            histology,
+                            destructionPolicy,
+                        });
+                        break;
+                }
             }
         }
     }

@@ -18,6 +18,8 @@ import InitialScanPage from 'dsm/pages/scanner-pages/initialScan-page';
 import { KitsColumnsEnum } from 'dsm/pages/kitsInfo-pages/enums/kitsColumns-enum';
 import FinalScanPage from 'dsm/pages/scanner-pages/finalScan-page';
 import { TabEnum } from 'dsm/component/tabs/enums/tab-enum';
+import OncHistoryTab from 'dsm/component/tabs/oncHistoryTab';
+import { Decalcification, GeneralAnswer } from 'dsm/component/tabs/enums/oncHistory-enum';
 
 test.describe('Samples Received Event - Recieved saliva kit first and then tumor sample', () => {
     const studies = [StudyEnum.OSTEO2, StudyEnum.LMS];
@@ -36,7 +38,7 @@ test.describe('Samples Received Event - Recieved saliva kit first and then tumor
     });
 
     for (const study of studies) {
-        test(`${study} - Verify SAMPLES_RECEIVED occurs if the saliva kit is received before the tumor sample`, async ({ page }, testInfo) => {
+        test(`@${study} - Verify SAMPLES_RECEIVED occurs if the saliva kit is received before the tumor sample`, async ({ page }, testInfo) => {
             const testResultDirectory = testInfo.outputDir;
 
             //Select the study
@@ -106,9 +108,42 @@ test.describe('Samples Received Event - Recieved saliva kit first and then tumor
             await participantListTable.openParticipantPageAt(0);
 
             //Go into their Onc History tab
-
+            await participantPage.clickTab(TabEnum.ONC_HISTORY);
 
             //Input a new row of onc history data, where at least the following is added: Date of PX + Accession Number; Afterwards change request status to 'Request'
+            const oncHistoryTab = new OncHistoryTab(page);
+            await oncHistoryTab.addOncHistory.createOncHistoryDetail({
+                study,
+                dateOfPX: '09/08/2023',
+                accessionNumber: 'AccessionExampleNumber123',
+                facility: 'MGH',
+                phone: '123-456-7890',
+                fax: '111-222-3333',
+            });
+            /*await oncHistoryTab.addOncHistory.createOncHistoryDetail({
+                study,
+                dateOfPX: '09/08/2023',
+                accessionNumber: 'AccessionExampleNumber123',
+                facility: 'MGH',
+                phone: '123-456-7890',
+                fax: '111-222-3333',
+                typeOfPX: 'Type of PX Playwright Example',
+                locationOfPX: 'Unknown location',
+                histology: 'Histology example',
+                destructionPolicy: 'indefinitely',
+                localControl: GeneralAnswer.YES,
+                decalcification: Decalcification.NITRIC_ACID,
+                ffpe: GeneralAnswer.UNKNOWN,
+                blocksWithTumor: 'Blocks with Tumor Description',
+                tumorSize: 'Description of tumor size',
+                blocksToRequest: 'Description of blocks to request',
+                necrosis: 'Unknown necrosis percentage',
+                viableTumor: 'Unknown amount of viable tumor',
+                slidesToRequest: 'Description of slides to request',
+                facilityWhereSampleWasReviewed: 'Tufts',
+                slidesTotal: 'Description of total amount of slides',
+                treatmentEffect: 'Description of extensive treatment effect'
+            });*/
 
             //Verify the Request checkbox appears
 

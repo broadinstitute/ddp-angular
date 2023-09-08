@@ -1,10 +1,10 @@
 import { Decalcification, GeneralAnswer, OncHistoryRequestStatus } from '../enums/oncHistory-enum'
 
 export interface OncHistoryDetail {
-    _oncHistoryID?: number,
+    oncHistoryID?: number,
     requestOncHistoryDetail(): Promise<void>,
     accessTissueRequestPage(): Promise<void>,
-    dateOfPX?: string | Date,
+    dateOfPX?: string,
     typeOfPX?: string,
     locationOfPX?: string,
     histology?: string,
@@ -13,10 +13,6 @@ export interface OncHistoryDetail {
     phone?: string,
     fax?: string,
     destructionPolicy?: string | number,
-    setOncHistoryRequestStatus(status: OncHistoryRequestStatus): Promise<void>,
-}
-
-export interface Osteo2OncHistoryDetail extends OncHistoryDetail{
     localControl?: GeneralAnswer,
     decalcification?: Decalcification,
     ffpe?: GeneralAnswer,
@@ -25,15 +21,9 @@ export interface Osteo2OncHistoryDetail extends OncHistoryDetail{
     blockToRequest?: string,
     necrosis?: string,
     viableTumor?: string,
-}
-
-export interface LMSOncHistoryDetail extends OncHistoryDetail{
-    tumorSize?: string,
     slidesToRequest?: string,
     facilityWhereSampleWasReviewed?: string,
     slidesTotal?: string,
-    blocksToRequest?: string,
     treatmentEffect?: string,
-    viableTumor?: string,
-    necrosis?: string,
+    setOncHistoryRequestStatus(status: OncHistoryRequestStatus): Promise<void>,
 }

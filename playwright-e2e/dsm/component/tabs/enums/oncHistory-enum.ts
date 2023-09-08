@@ -19,12 +19,14 @@ export enum Decalcification {
     OTHER = 'Other',
     UNKNOWN = 'Unknown',
     IMMUNOCAL = 'Immunocal/Soft Decal',
+    BLANK = '',
 }
 
 export enum GeneralAnswer {
     YES = 'Yes',
     NO = 'No',
     UNKNOWN = 'Unknown',
+    BLANK = '',
 }
 
 /* Lists the placements of certain columns in the onc history. Note: Number assumes 0-based/counting from zero */
@@ -38,7 +40,7 @@ export enum OncHistoryColumn {
     PHONE = 8,
     FAX = 9,
     DESTRUCTION_POLICY = 10,
-    OS2_SAMPLE_FROM_LOCAL_CONTROL = 11,
+    OS2_LOCAL_CONTROL = 11,
     LMS_TUMOR_SIZE = 11,
     OS2_DECALCIFICATION = 12,
     LMS_SLIDES_TO_REQUEST = 12,
