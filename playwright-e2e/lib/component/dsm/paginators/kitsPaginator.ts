@@ -7,7 +7,7 @@ export class KitsPaginator {
 
   public async pageAt(page: number): Promise<void> {
     const paginatorLocator = this.page.locator(this.pageXPath(page));
-    await expect(paginatorLocator, `The page number - ${page} is not visible`).toBeVisible()
+    await expect(paginatorLocator, `The page number - ${page} is not visible`).toBeVisible();
     return paginatorLocator.click();
   }
 

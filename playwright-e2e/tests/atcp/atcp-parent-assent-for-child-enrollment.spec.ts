@@ -28,7 +28,7 @@ test.describe('ATCP parent consent enrollment', () => {
     await expect(page.locator('.activity-steps .active p')).toHaveText(expectedText);
   };
 
-  test('Parent assent for a child @enrollment @atcp @visual', async ({ page }) => {
+  test('Parent assent for a child @dss @atcp @visual', async ({ page }) => {
     let userEmail: string;
 
     const adult = user.adult;
@@ -379,7 +379,7 @@ test.describe('ATCP parent consent enrollment', () => {
       const table = dashboardPage.getTable();
       const expectedHeaders = ['Form', 'Summary', 'Created', 'Status', 'Actions'];
       const actualHeaders = await table.getHeaderNames();
-      await assertTableHeaders(actualHeaders, expectedHeaders);
+      assertTableHeaders(actualHeaders, expectedHeaders);
 
       expect(await table.getRowsCount()).toBe(7);
 

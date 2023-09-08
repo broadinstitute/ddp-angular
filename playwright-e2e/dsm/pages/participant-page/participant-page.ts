@@ -74,8 +74,8 @@ export default class ParticipantPage {
     return await this.readMainTextInfoFor(MainInfoEnum.PREFERRED_LANGUAGE) || '';
   }
 
-  public isTabVisible(tabName: TabEnum): Promise<boolean> {
-    return this.tabs.isTabVisible(tabName);
+  public async isTabVisible(tabName: TabEnum): Promise<boolean> {
+    return await this.tabs.isTabVisible(tabName);
   }
 
   public async clickTab<T extends object>(tabName: TabEnum): Promise<T> {
@@ -84,16 +84,16 @@ export default class ParticipantPage {
     return await this.tabs.clickTab<T>(tabName) as T;
   }
 
-  private readMainTextInfoFor(key: MainInfoEnum) {
-   return this.page.locator(this.getMainTextInfoXPath(key)).textContent();
+  private async readMainTextInfoFor(key: MainInfoEnum) {
+   return await this.page.locator(this.getMainTextInfoXPath(key)).textContent();
   }
 
-  private readMainInputValueFor(key: MainInfoEnum) {
-    return this.page.locator(this.getMainInputValueInfoXPath(key)).inputValue();
+  private async readMainInputValueFor(key: MainInfoEnum) {
+    return await this.page.locator(this.getMainInputValueInfoXPath(key)).inputValue();
   }
 
-  private readMainCheckboxValueFor(key: MainInfoEnum) {
-    return this.page.locator(this.getMainCheckboxValueInfoXPath(key)).isChecked();
+  private async readMainCheckboxValueFor(key: MainInfoEnum) {
+    return await this.page.locator(this.getMainCheckboxValueInfoXPath(key)).isChecked();
   }
 
   /**
@@ -161,7 +161,7 @@ export default class ParticipantPage {
   }
 
   public async assertNotesToBe(value: string): Promise<void> {
-    await expect(await this.notes.inputValue(),
+    expect(await this.notes.inputValue(),
       "Participant page - participant's value doesn't match the provided one")
       .toBe(value);
   }

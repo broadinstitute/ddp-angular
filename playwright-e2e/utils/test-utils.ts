@@ -1,9 +1,10 @@
-import {BrowserContext, Download, expect, Locator, Page, Response} from '@playwright/test';
+import { BrowserContext, Download, expect, Locator, Page, Response } from '@playwright/test';
 import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import Input from 'dss/component/input';
 import Checkbox from 'dss/component/checkbox';
 import Select from 'dss/component/select';
 import axios from 'axios';
+import { logError } from './log-utils';
 
 export interface WaitForResponse {
   uri: string;
@@ -14,23 +15,29 @@ export interface WaitForResponse {
 const { SITE_PASSWORD } = process.env;
 
 export async function waitForNoSpinner(page: Page, opts: { timeout?: number } = {}): Promise<void> {
-  const { timeout = 60 * 1000 } = opts;
-  const locator = page.locator('[data-icon="spinner"].fa-spin, mat-spinner[role="progressbar"]');
-  try {
-    // if more than one spinners are found, only wait for first one to disappear.
-    await locator.first().waitFor({ state: 'hidden', timeout });
-  } catch (error) {
-    const snackbar = page.locator('app-error-snackbar .snackbar-content');
-    if (await snackbar.isVisible()) {
-      throw new Error(await snackbar.innerText());
+  const { timeout = 50 * 1000 } = opts;
+  const spinner = page.locator('[data-icon="spinner"].fa-spin, mat-spinner[role="progressbar"]').first();
+  const appError = page.locator('app-error-snackbar .snackbar-content').first();
+  await page.waitForLoadState().catch((err) => logError(err));
+  const pageStatus = await Promise.race([
+    spinner.waitFor({ state: 'hidden', timeout }).then(() => 'Ready'),
+    appError.waitFor({ state: 'visible', timeout }).then(() => 'Error')
+  ]);
+  if (pageStatus === 'Ready') {
+    // Check again for app error after spinner stopped
+    const visible = await appError.isVisible();
+    if (visible) {
+      throw new Error(await appError.innerText());
     }
-    throw error;
+  }
+  if (pageStatus === 'Error') {
+    throw new Error(await appError.innerText());
   }
 }
 
 export async function waitForResponse(page: Page, { uri, status = 200, timeout }: WaitForResponse): Promise<Response> {
   try {
-    return page.waitForResponse(
+    return await page.waitForResponse(
       (response: Response) => response.url().includes(uri) && response.status() === status,
       {timeout}
     );
@@ -75,16 +82,16 @@ export async function downloadConsentPdf(context: BrowserContext, locator: Locat
  */
 export async function fillSitePassword(page: Page, password = SITE_PASSWORD): Promise<void> {
   if (password == null) {
-    throw Error(`Invalid parameter: password is "${SITE_PASSWORD}"`);
+    throw Error(`Invalid parameter: password is null`);
   }
   await page.locator('input[type="password"]').waitFor({ state: 'visible', timeout: 30 * 1000 });
   await page.locator('input[type="password"]').fill(password);
 
-  const passwordCheckRequestPromise = waitForResponse(page, { uri: '/irb-password-check' });
   await Promise.all([
-    passwordCheckRequestPromise,
+    waitForResponse(page, { uri: '/irb-password-check' }),
     page.keyboard.press('Enter')
   ]);
+  await expect(page.locator('app-root')).toBeAttached();
 }
 
 /**

@@ -22,7 +22,7 @@ test.describe('ATCP adult self-consent enrollment', () => {
     await expect(page.locator('.activity-steps .active p')).toHaveText(expectedText);
   };
 
-  test('Welcome page @enrollment @atcp @visual', async ({ page }) => {
+  test('Welcome page @dss @atcp @visual', async ({ page }) => {
     const homePage = new AtcpHomePage(page);
     await homePage.waitForReady();
 
@@ -37,7 +37,7 @@ test.describe('ATCP adult self-consent enrollment', () => {
     }
   });
 
-  test('Should be able to complete self-enrollment @enrollment @atcp @visual', async ({ page }) => {
+  test('Should be able to complete self-enrollment @dss @atcp @visual', async ({ page }) => {
     const adult = user.adult;
     const adultFirstName = generateUserName(adult.firstName);
     const adultLastName = generateUserName(adult.lastName);
@@ -281,7 +281,7 @@ test.describe('ATCP adult self-consent enrollment', () => {
     const expectedHeaders = ['Form', 'Summary', 'Created', 'Status', 'Actions'];
     const table = dashboardPage.getTable();
     const actualHeaders = await table.getHeaderNames();
-    await assertTableHeaders(actualHeaders, expectedHeaders);
+    assertTableHeaders(actualHeaders, expectedHeaders);
 
     expect(await table.getRowsCount()).toBe(6);
 

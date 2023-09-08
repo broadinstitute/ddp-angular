@@ -6,7 +6,7 @@ const { ATCP_BASE_URL } = process.env;
 // Use this fixture in ATCP test
 const fixture = base.extend({
   page: async ({ page }, use) => {
-    await page.goto(`${ATCP_BASE_URL}/password`);
+    await page.goto(`${ATCP_BASE_URL}/password`, { waitUntil: 'networkidle' });
     await fillSitePassword(page);
     await use(page);
   }

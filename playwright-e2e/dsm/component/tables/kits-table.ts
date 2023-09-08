@@ -34,7 +34,7 @@ export class KitsTable {
     await expect(column, `Kits Table - the column ${columnName} doesn't exist`)
       .toBeVisible();
 
-    const td = await this.td(columnName);
+    const td = this.td(columnName);
     await expect(td, 'Kits Table - more than one data was found').toHaveCount(1);
 
     return await td.textContent() || '';
