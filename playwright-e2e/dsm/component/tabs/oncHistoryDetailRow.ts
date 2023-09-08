@@ -1,8 +1,7 @@
 import { OncHistoryDetail } from 'dsm/component/tabs/model/oncHistoryDetailModel';
 import { Locator, Page, expect } from '@playwright/test';
 import { Decalcification, GeneralAnswer, OncHistoryColumn, OncHistoryRequestStatus } from './enums/oncHistory-enum';
-import { waitForResponse } from 'utils/test-utils';
-import { StudyEnum } from '../navigation/enums/selectStudyNav-enum';
+import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
 
 export default class OncHistoryDetailRow implements OncHistoryDetail {
     private _oncHistoryID!: number;
@@ -203,7 +202,8 @@ export default class OncHistoryDetailRow implements OncHistoryDetail {
 
     public async fillLocalControlDropdown(currentRow: Locator, sampleIsFromLocalControl: GeneralAnswer): Promise<void> {
         this._localControl = sampleIsFromLocalControl;
-        const localcontrolDropdown = currentRow.locator(`//td[${OncHistoryColumn.OS2_LOCAL_CONTROL}]`);
+        const localcontrolDropdown = currentRow.locator(`//td[${OncHistoryColumn.OS2_LOCAL_CONTROL}]//mat-select`);
+        await localcontrolDropdown.click();
         const answer = this._localControl as string;
         await localcontrolDropdown.filter({ hasText: answer }).click();
     }
@@ -218,7 +218,8 @@ export default class OncHistoryDetailRow implements OncHistoryDetail {
 
     public async fillDecalcificationDropdown(currentRow: Locator, decalcification: Decalcification): Promise<void> {
         this._decalcification = decalcification;
-        const decalcificationDropdown = currentRow.locator(`//td[${OncHistoryColumn.OS2_DECALCIFICATION}]`);
+        const decalcificationDropdown = currentRow.locator(`//td[${OncHistoryColumn.OS2_DECALCIFICATION}]//mat-select`);
+        await decalcificationDropdown.click();
         const answer = this._decalcification as string;
         await decalcificationDropdown.filter({ hasText: answer }).click();
     }
@@ -233,7 +234,8 @@ export default class OncHistoryDetailRow implements OncHistoryDetail {
 
     public async fillFFPEDropdown(currentRow: Locator, ffpe: GeneralAnswer): Promise<void> {
         this._ffpe = ffpe;
-        const ffpeDropdown = currentRow.locator(`//td[${OncHistoryColumn.OS2_FFPE}]`);
+        const ffpeDropdown = currentRow.locator(`//td[${OncHistoryColumn.OS2_FFPE}]//mat-select`);
+        await ffpeDropdown.click();
         const answer = this._ffpe as string;
         await ffpeDropdown.filter({ hasText: answer }).click();
     }
@@ -265,10 +267,10 @@ export default class OncHistoryDetailRow implements OncHistoryDetail {
         this._tumorSize = tumorDescription;
         switch (studyName) {
             case StudyEnum.OSTEO2:
-                tumorSizeField = currentRow.locator(`//td[${OncHistoryColumn.OS2_TUMOR_SIZE}]//mat-form-field//textarea`);
+                tumorSizeField = currentRow.locator(`//td[${OncHistoryColumn.OS2_TUMOR_SIZE}]//textarea`);
                 break;
             case StudyEnum.LMS:
-                tumorSizeField = currentRow.locator(`//td[${OncHistoryColumn.LMS_TUMOR_SIZE}]//mat-form-field//textarea`);
+                tumorSizeField = currentRow.locator(`//td[${OncHistoryColumn.LMS_TUMOR_SIZE}]//textarea`);
                 break;
             default:
                 //Throw error since only OS2 and LMS have a tumor size field
