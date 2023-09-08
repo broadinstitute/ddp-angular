@@ -3,7 +3,7 @@ import {waitForResponse} from 'utils/test-utils';
 import {MainInfoEnum} from 'dsm/pages/participant-page/enums/main-info-enum';
 import Tabs from 'dsm/component/tabs/tabs';
 import {TabEnum} from 'dsm/component/tabs/enums/tab-enum';
-import { KitUploadInfo } from '../kitUpload-page/models/kitUpload-model';
+import { KitUploadInfo } from 'dsm/pages/kitUpload-page/models/kitUpload-model';
 import ContactInformationTab from 'dsm/component/tabs/contactInformationTab';
 
 export default class ParticipantPage {

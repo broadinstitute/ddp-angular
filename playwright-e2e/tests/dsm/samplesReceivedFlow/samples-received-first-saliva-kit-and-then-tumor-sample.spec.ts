@@ -31,7 +31,7 @@ test.describe('Samples Received Event - Recieved saliva kit first and then tumor
     const kitType = KitTypeEnum.SALIVA;
     const expectedKitTypes = [KitTypeEnum.SALIVA, KitTypeEnum.BLOOD];
 
-    test.beforeEach(async ({ page, request }) => {
+    test.beforeEach(({ page, request }) => {
         navigation = new Navigation(page, request);
         welcomePage = new WelcomePage(page);
         homePage = new HomePage(page);

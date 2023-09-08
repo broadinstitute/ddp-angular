@@ -1,4 +1,4 @@
-import { Decalcification, GeneralAnswer, OncHistoryRequestStatus } from '../enums/oncHistory-enum'
+import { Decalcification, GeneralAnswer, OncHistoryRequestStatus } from 'dsm/component/tabs/enums/oncHistory-enum'
 
 export interface OncHistoryDetail {
     oncHistoryID?: number,

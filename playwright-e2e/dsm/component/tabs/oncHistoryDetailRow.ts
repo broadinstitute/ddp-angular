@@ -581,7 +581,7 @@ export default class OncHistoryDetailRow implements OncHistoryDetail {
         return checkbox;
     }
 
-    private async getTissueRequestPageButton(): Promise<Locator> {
+    private getTissueRequestPageButton(): Locator {
         const id = this.assertOncHistoryIDIsAssigned();
         const button = this.page.locator(`//tr[@id='${id}']//button[@tooltip='Tissue information']`);
         return button;

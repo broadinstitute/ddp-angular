@@ -7,7 +7,7 @@ import { getDate, offsetDaysFromToday } from 'utils/date-utils';
 import { waitForNoSpinner } from 'utils/test-utils';
 import { AdditionalFilter } from 'dsm/component/filters/sections/search/search-enums';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
-import { ScreenReaderText } from '../navigation/enums/accessibility-enum';
+import { ScreenReaderText } from 'dsm/component/navigation/enums/accessibility-enum';
 
 export class ParticipantListTable extends Table {
   private readonly _participantPage: ParticipantPage = new ParticipantPage(this.page);
