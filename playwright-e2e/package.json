@@ -39,6 +39,7 @@
     "lodash": "^4.17.21",
     "mailparser": "^3.6.3",
     "node-vault": "^0.9.22",
+    "pdf-parse": "^1.1.1",
     "typescript": "^4.9.5"
   },
   "engines": {

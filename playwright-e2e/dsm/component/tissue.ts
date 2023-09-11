@@ -1,7 +1,7 @@
 import {waitForResponse} from "../../utils/test-utils";
 import {expect, Locator, Page} from "@playwright/test";
 import {
-  SequencingResultsEnum,
+  SequencingResultsEnum, SMIdEnum,
   TissueDynamicFieldsEnum, TissueTypesEnum,
   TumorTypesEnum
 } from "../pages/tissue-information-page/enums/tissue-information-enum";
@@ -17,8 +17,11 @@ import {FillTissue} from "../pages/tissue-information-page/interfaces/fill-tissu
 import {tissueInputs} from "../pages/tissue-information-page/models/tissue-inputs";
 import {InputTypeEnum} from "./tabs/enums/onc-history-input-columns-enum";
 import Button from "../../dss/component/button";
+import SMID from "./smid";
 
 export default class Tissue {
+  private readonly SMIDModal: SMID = new SMID(this.page, this.tissueIndex);
+
   constructor(private readonly page: Page, private readonly tissueIndex: number = 0) {
   }
 
@@ -56,6 +59,14 @@ export default class Tissue {
     }
 
     return value;
+  }
+
+  public async fillSmIDs(SMID: SMIdEnum): Promise<SMID> {
+    const SMIDLocator = await this.getField(SMID);
+    const SMIDPlusBtn = new Button(this.page, {root: SMIDLocator});
+    await SMIDPlusBtn.click();
+
+    return this.SMIDModal;
   }
 
   public async fillField(dynamicField: TissueDynamicFieldsEnum, {
@@ -177,7 +188,7 @@ export default class Tissue {
     return currentValue?.trim();
   }
 
-  private async getField(dynamicField: TissueDynamicFieldsEnum, byText: boolean = false): Promise<Locator> {
+  private async getField(dynamicField: TissueDynamicFieldsEnum | SMIdEnum, byText: boolean = false): Promise<Locator> {
     const fieldLocator = byText ? this.tissue.getByText(dynamicField) : this.findField(dynamicField);
     await expect(fieldLocator, `'${dynamicField}' is not visible`).toBeVisible();
 
@@ -185,7 +196,7 @@ export default class Tissue {
   }
 
   /* Locator */
-  private findField(field: TissueDynamicFieldsEnum): Locator {
+  private findField(field: TissueDynamicFieldsEnum | SMIdEnum): Locator {
     return this.tissue
       .locator(this.fieldXPath(field));
   }
@@ -200,7 +211,7 @@ export default class Tissue {
   }
 
   /* XPaths */
-  private fieldXPath(fieldName: TissueDynamicFieldsEnum): string {
+  private fieldXPath(fieldName: TissueDynamicFieldsEnum | SMIdEnum): string {
     return `//td[text()[normalize-space()='${fieldName}']]/following-sibling::td[1]`
   }
 

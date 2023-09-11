@@ -1,8 +1,10 @@
-import {expect, Locator, Page} from "@playwright/test";
+import {Download, expect, Locator, Page} from "@playwright/test";
 import OncHistoryTable from "../tables/onc-history-table";
 import {waitForResponse} from "../../../utils/test-utils";
 import Select from "../../../dss/component/select";
 import Button from "../../../dss/component/button";
+const fs = require('fs');
+const pdf = require('pdf-parse');
 
 
 export default class OncHistoryTab {
@@ -63,8 +65,28 @@ export default class OncHistoryTab {
     await expect(downloadPDFBundleBtn, `Download Request Documents Button disabled`).toBeEnabled();
 
     await downloadPDFBundleBtn.click();
-    await this.requestAnyway();
-    await waitForResponse(this.page, {uri: 'downloadPDF'});
+    const downloadPDF = await this.downloadPDF();
+    const fileName = downloadPDF.suggestedFilename();
+    const filePath = await downloadPDF.path();
+    await downloadPDF.saveAs(fileName);
+    console.log(fileName)
+    console.log(filePath)
+    /* download */
+    // const download = await downloadPromise;
+    // console.log(await download.path());
+    // await download.saveAs('tempFile.pdf');
+    /* ------- */
+
+    // await waitForResponse(this.page, {uri: 'downloadPDF'});
+
+    const downloadFinishedText = this.page.getByText('Download finished.');
+    await expect(downloadFinishedText, 'Downloading finished is not visible').toBeVisible();
+
+    let dataBuffer = fs.readFileSync(filePath);
+    pdf(dataBuffer)
+      .then((data: any) => {
+        console.log(data.text)
+      })
   }
 
   /* Helper Functions */
@@ -73,6 +95,14 @@ export default class OncHistoryTab {
     if(await requestAnywayBtn.isVisible()) {
       await requestAnywayBtn.click();
     }
+  }
+
+  private async downloadPDF(): Promise<Download> {
+    const [download] = await Promise.all([
+      this.page.waitForEvent('download'),
+      this.requestAnyway()
+    ]);
+    return download;
   }
 
 
