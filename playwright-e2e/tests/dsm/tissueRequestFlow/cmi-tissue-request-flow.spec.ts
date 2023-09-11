@@ -10,8 +10,10 @@ import {
   OncHistorySelectRequestEnum
 } from "../../../dsm/component/tabs/enums/onc-history-input-columns-enum";
 import {
-  ProblemWithTissueEnum, SequencingResultsEnum,
-  TissueInformationEnum, TissueTypesEnum, TumorTypesEnum
+  SequencingResultsEnum,
+  TissueDynamicFieldsEnum,
+  TissueTypesEnum,
+  TumorTypesEnum
 } from "../../../dsm/pages/tissue-information-page/enums/tissue-information-enum";
 
 
@@ -39,12 +41,25 @@ test.describe('Tissue Request Flow', () => {
       const shortID = await participantPage.getShortId();
 
       const oncHistoryTab = await participantPage.clickTab<OncHistoryTab>(TabEnum.ONC_HISTORY);
-      const oncHistoryTable = oncHistoryTab.table;
-      await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.REQUEST, {select: OncHistorySelectRequestEnum.REQUEST })
 
-      const tissueInformationPage = await oncHistoryTable.openTissueInformationPage(0);
-      await tissueInformationPage.assertPageTitle();
-      await tissueInformationPage.fillFaxSentDates({today: true});
+      // await oncHistoryTab.openFilesOrderModal();
+      // await oncHistoryTab.selectFilesOrderAndDownload('Tissue Request PDF', 3);
+      // await oncHistoryTab.selectFilesOrderAndDownload('IRB Letter', 2);
+      // await oncHistoryTab.selectFilesOrderAndDownload('LMS parental consent & assent pdf', 7);
+      // await oncHistoryTab.downloadPDFBundleAfterOrder();
+
+      // await oncHistoryTab.downloadRequestDocuments();
+
+
+      // const oncHistoryTable = oncHistoryTab.table;
+      // await oncHistoryTable.fillNotes('TESTING OTHER NOTE');
+      // await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.REQUEST, {select: OncHistorySelectRequestEnum.REQUEST })
+
+      // const tissueInformationPage = await oncHistoryTable.openTissueInformationPage(0);
+      // await tissueInformationPage.assertPageTitle();
+      // await tissueInformationPage.fillFaxSentDates({today: true});
+      //
+      // await tissueInformationPage.backToList();
 
       // console.log(await tissueInformationPage.getParticipantInformation(TissueInformationEnum.ASSIGNEE))
       // console.log(await tissueInformationPage.getParticipantInformation(TissueInformationEnum.REQUEST))
@@ -80,21 +95,59 @@ test.describe('Tissue Request Flow', () => {
       // await tissueInformationPage.selectGender('Male');
 
 
-      const tissue = await tissueInformationPage.tissue();
+      // const tissue = await tissueInformationPage.tissue();
+      //
+      // await tissue.fillField(TissueDynamicFieldsEnum.NOTES, {inputValue: 'Test Notes'});
+      // await tissue.fillField(TissueDynamicFieldsEnum.USS, {inputValue: 7766});
+      // await tissue.fillField(TissueDynamicFieldsEnum.BLOCK, {inputValue: 8899});
+      // await tissue.fillField(TissueDynamicFieldsEnum.H_E, {inputValue: 3212});
+      // await tissue.fillField(TissueDynamicFieldsEnum.SCROLL, {inputValue: 8800});
+      // await tissue.fillField(TissueDynamicFieldsEnum.TISSUE_TYPE, {select: TissueTypesEnum.BLOCK});
+      // await tissue.fillField(TissueDynamicFieldsEnum.EXPECTED_RETURN_DATE, {dates: {today: true}});
+      // await tissue.fillField(TissueDynamicFieldsEnum.RETURN_DATE, {dates: {date: {yyyy: 2023, month: 4, dayOfMonth: 3}}});
+      // await tissue.fillField(TissueDynamicFieldsEnum.TRACKING_NUMBER, {inputValue: 3322});
+      // await tissue.fillField(TissueDynamicFieldsEnum.PATHOLOGY_REPORT, {select: 'Yes'});
+      // await tissue.fillField(TissueDynamicFieldsEnum.TUMOR_TYPE, {select: TumorTypesEnum.RECURRENT});
+      // await tissue.fillField(TissueDynamicFieldsEnum.TISSUE_SITE, {inputValue: 'Test tissue site'});
+      // await tissue.fillField(TissueDynamicFieldsEnum.TUMOR_COLLABORATOR_SAMPLE_ID, {inputValue: 'Test Tumor Collaborator Sample ID'});
+      // await tissue.fillField(TissueDynamicFieldsEnum.BLOCK_TO_SHL, {dates: {date: {yyyy: 2023, month: 5, dayOfMonth: 13}}});
+      // await tissue.fillField(TissueDynamicFieldsEnum.SCROLLS_BACK_FROM_SHL, {dates: {date: {yyyy: 2023, month: 7, dayOfMonth: 22}}});
+      // await tissue.fillField(TissueDynamicFieldsEnum.SK_ID, {inputValue: 'Test SK ID'});
+      // await tissue.fillField(TissueDynamicFieldsEnum.FIRST_SM_ID, {inputValue: 'Test FIRST SM ID'});
+      // await tissue.fillField(TissueDynamicFieldsEnum.SM_ID_FOR_H_E, {inputValue: 'Test SM ID FOR H&E'});
+      // await tissue.fillField(TissueDynamicFieldsEnum.DATE_SENT_TO_GP, {dates: {today: true}});
+      // await tissue.fillField(TissueDynamicFieldsEnum.BLOCK_ID_TO_SHL, {inputValue: 'Test Block ID to SHL'});
+      // await tissue.fillField(TissueDynamicFieldsEnum.TUMOR_PERCENTAGE_AS_REPORTED_BY_SHL, {inputValue: 33});
+      // await tissue.fillField(TissueDynamicFieldsEnum.SHL_WORK_NUMBER, {inputValue: 9900});
+      // await tissue.fillField(TissueDynamicFieldsEnum.SEQUENCING_RESULTS, {select: SequencingResultsEnum.SUCCESS});
+      //
+      // console.log(await tissue.getFieldValue(TissueDynamicFieldsEnum.NOTES))
+      // console.log(await tissue.getFieldValue(TissueDynamicFieldsEnum.USS))
+      // console.log(await tissue.getFieldValue(TissueDynamicFieldsEnum.BLOCK))
+      // console.log(await tissue.getFieldValue(TissueDynamicFieldsEnum.H_E))
+      // console.log(await tissue.getFieldValue(TissueDynamicFieldsEnum.SCROLL))
+      // console.log(await tissue.getFieldValue(TissueDynamicFieldsEnum.TISSUE_TYPE))
+      // console.log(await tissue.getFieldValue(TissueDynamicFieldsEnum.EXPECTED_RETURN_DATE))
+      // console.log(await tissue.getFieldValue(TissueDynamicFieldsEnum.RETURN_DATE))
+      // console.log(await tissue.getFieldValue(TissueDynamicFieldsEnum.TRACKING_NUMBER))
+      // console.log(await tissue.getFieldValue(TissueDynamicFieldsEnum.PATHOLOGY_REPORT))
+      // console.log(await tissue.getFieldValue(TissueDynamicFieldsEnum.TUMOR_TYPE))
+      // console.log(await tissue.getFieldValue(TissueDynamicFieldsEnum.TISSUE_SITE))
+      // console.log(await tissue.getFieldValue(TissueDynamicFieldsEnum.TUMOR_COLLABORATOR_SAMPLE_ID))
+      // console.log(await tissue.getFieldValue(TissueDynamicFieldsEnum.BLOCK_TO_SHL))
+      // console.log(await tissue.getFieldValue(TissueDynamicFieldsEnum.SK_ID))
+      // console.log(await tissue.getFieldValue(TissueDynamicFieldsEnum.FIRST_SM_ID))
+      // console.log(await tissue.getFieldValue(TissueDynamicFieldsEnum.SM_ID_FOR_H_E))
+      // console.log(await tissue.getFieldValue(TissueDynamicFieldsEnum.DATE_SENT_TO_GP))
+      // console.log(await tissue.getFieldValue(TissueDynamicFieldsEnum.BLOCK_ID_TO_SHL))
+      // console.log(await tissue.getFieldValue(TissueDynamicFieldsEnum.TUMOR_PERCENTAGE_AS_REPORTED_BY_SHL))
+      // console.log(await tissue.getFieldValue(TissueDynamicFieldsEnum.SHL_WORK_NUMBER))
+      // console.log(await tissue.getFieldValue(TissueDynamicFieldsEnum.SEQUENCING_RESULTS))
 
-      await tissue
-        .fillMaterialsReceived(
-          {uss: 666, block: 777, he: 888, scroll: 999, tissueType: TissueTypesEnum.SLIDE}
-        )
-      await tissue.fillPathologyReport('Yes');
-      await tissue.fillTumorType(TumorTypesEnum.PRIMARY);
-      await tissue.fillTissueSite('Tissue site');
-      await tissue.fillTumorCollaboratorSampleID('Collaborator sample ID');
-      await tissue.fillSKID('SK ID');
-      await tissue.fillFirstSMID('First SM ID')
-      await tissue.fillSMIDForHE('SM ID for H&E')
-      await tissue.fillDateSentToGP({today: true});
-      await tissue.fillSequencingResults(SequencingResultsEnum.SUCCESS);
+
+
+
+
 
       // console.log(await oncHistoryTable.getFieldValue(OncHistoryInputColumnsEnum.REQUEST))
       // console.log(await oncHistoryTable.getFieldValue(OncHistoryInputColumnsEnum.TYPE_OF_PX))

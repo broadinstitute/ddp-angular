@@ -60,7 +60,7 @@ export enum TissueDynamicFieldsEnum {
   RETURN_DATE = 'Return Date',
   BLOCK_TO_SHL = 'Block to SHL',
   SCROLLS_BACK_FROM_SHL = 'Scrolls back from SHL',
-  BLOCK_ID_TO_SHL = 'Scrolls back from SHL',
+  BLOCK_ID_TO_SHL = 'Block ID to SHL',
   TUMOR_PERCENTAGE_AS_REPORTED_BY_SHL = 'Tumor Percentage as reported by SHL',
   SHL_WORK_NUMBER = 'SHL Work Number',
   TRACKING_NUMBER = 'Tracking Number'

@@ -1,4 +1,5 @@
 export enum OncHistoryInputColumnsEnum {
+  NOTES = 'Notes',
   DATE_OF_PX = 'Date of PX',
   TYPE_OF_PX = 'Type of PX',
   LOCATION_OF_PX = 'Location of PX',

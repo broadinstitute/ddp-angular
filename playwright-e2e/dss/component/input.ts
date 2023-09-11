@@ -85,11 +85,15 @@ export default class Input extends WidgetBase {
     await this.toLocator().blur();
   }
 
-  public get inputValue(): Promise<string> {
+  public get currentValue(): Promise<string> {
     return this.toLocator().inputValue();
   }
 
   public async blur(): Promise<void> {
     await this.toLocator().blur();
+  }
+
+  public get maxLength(): Promise<string | null> {
+    return this.toLocator().getAttribute('maxlength');
   }
 }

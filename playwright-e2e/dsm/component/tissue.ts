@@ -6,129 +6,152 @@ import {
   TumorTypesEnum
 } from "../pages/tissue-information-page/enums/tissue-information-enum";
 import TextArea from "../../dss/component/textarea";
-import {FillDate, MaterialsReceived} from "../pages/tissue-information-page/interfaces/tissue-information-interfaces";
+import {
+  FillDate,
+  TissueInputsMapValue
+} from "../pages/tissue-information-page/interfaces/tissue-information-interfaces";
 import Select from "../../dss/component/select";
 import DatePicker from "./date-picker";
 import Input from "../../dss/component/input";
+import {FillTissue} from "../pages/tissue-information-page/interfaces/fill-tissue-interface";
+import {tissueInputs} from "../pages/tissue-information-page/models/tissue-inputs";
+import {InputTypeEnum} from "./tabs/enums/onc-history-input-columns-enum";
+import Button from "../../dss/component/button";
 
 export default class Tissue {
   constructor(private readonly page: Page, private readonly tissueIndex: number = 0) {
   }
 
-  public async getValueFor(dynamicFieldsEnum: TissueDynamicFieldsEnum): Promise<string> {
+  public async getFieldValue(dynamicField: TissueDynamicFieldsEnum): Promise<string> {
+    const {
+      type: inputType,
+      byText
+    } = tissueInputs.get(dynamicField) as TissueInputsMapValue;
 
+    let value: Promise<any>;
+
+    switch (inputType) {
+      case InputTypeEnum.INPUT: {
+        const inputLocator = await this.getField(dynamicField, byText);
+        value = new Input(this.page, {root: inputLocator}).currentValue;
+        break;
+      }
+      case InputTypeEnum.DATE: {
+        const inputLocator = await this.getField(dynamicField);
+        value = new Input(this.page, {root: inputLocator}).currentValue;
+        break;
+      }
+      case InputTypeEnum.TEXTAREA: {
+        const textAreaLocator = await this.getField(dynamicField);
+        value = new TextArea(this.page, {root: textAreaLocator}).currentValue;
+        break;
+      }
+      case InputTypeEnum.SELECT: {
+        const selectLocator = await this.getField(dynamicField);
+        value = new Select(this.page, {root: selectLocator}).currentValue;
+        break;
+      }
+      default:
+        throw new Error(`Incorrect input type - ${inputType}`)
+    }
+
+    return value;
   }
 
+  public async fillField(dynamicField: TissueDynamicFieldsEnum, {
+    inputValue,
+    select,
+    dates
+  }: FillTissue): Promise<void> {
 
-  public async fillNotes(value: string): Promise<void> {
-    await this.fillTextareaField(TissueDynamicFieldsEnum.NOTES, value);
+    const {
+      type: inputType,
+      hasLookup,
+      byText
+    } = tissueInputs.get(dynamicField) as TissueInputsMapValue;
+
+    switch (inputType) {
+      case InputTypeEnum.DATE: {
+        dates && await this.fillDateFields(dynamicField, dates);
+        break;
+      }
+      case InputTypeEnum.INPUT: {
+        inputValue && await this.fillInputField(dynamicField, inputValue, byText, hasLookup);
+        break;
+      }
+      case InputTypeEnum.TEXTAREA: {
+        inputValue && await this.fillTextareaField(dynamicField, inputValue);
+        break;
+      }
+      case InputTypeEnum.SELECT: {
+        select && await this.selectField(dynamicField, select);
+        break;
+      }
+      default:
+        throw new Error(`Incorrect input type - ${inputType}`)
+    }
+
   }
-
-  public async fillMaterialsReceived({uss, block, he, scroll, tissueType}: MaterialsReceived): Promise<void> {
-    uss &&  await this.fillInputField(TissueDynamicFieldsEnum.USS, uss.toString(), true);
-    block &&  await this.fillInputField(TissueDynamicFieldsEnum.USS, block.toString(), true);
-    he &&  await this.fillInputField(TissueDynamicFieldsEnum.USS, he.toString(), true);
-    scroll &&  await this.fillInputField(TissueDynamicFieldsEnum.USS, scroll.toString(), true);
-    tissueType && await this.selectField(TissueDynamicFieldsEnum.TISSUE_TYPE, tissueType);
-  }
-
-  public async fillTissueSite(value: string): Promise<void> {
-    await this.fillInputField(TissueDynamicFieldsEnum.TISSUE_SITE, value);
-    await this.lookup();
-  }
-
-  public async fillTumorCollaboratorSampleID(value: string): Promise<void> {
-    await this.fillInputField(TissueDynamicFieldsEnum.TUMOR_COLLABORATOR_SAMPLE_ID, value);
-  }
-
-  public async fillSKID(value: string): Promise<void> {
-    await this.fillInputField(TissueDynamicFieldsEnum.SK_ID, value);
-  }
-
-  public async fillFirstSMID(value: string): Promise<void> {
-    await this.fillInputField(TissueDynamicFieldsEnum.FIRST_SM_ID, value);
-  }
-
-  public async fillSMIDForHE(value: string): Promise<void> {
-    await this.fillInputField(TissueDynamicFieldsEnum.SM_ID_FOR_H_E, value);
-  }
-
-  public async fillDateSentToGP(fillDate: FillDate): Promise<void> {
-    await this.fillDateFields(TissueDynamicFieldsEnum.DATE_SENT_TO_GP, fillDate);
-  }
-
-  public async selectPathologyReport(pathologyReport: 'Yes' | 'No'): Promise<void> {
-    await this.selectField(TissueDynamicFieldsEnum.PATHOLOGY_REPORT, pathologyReport);
-  }
-
-  public async selectTumorType(tumorType: TumorTypesEnum): Promise<void> {
-    await this.selectField(TissueDynamicFieldsEnum.TUMOR_TYPE, tumorType);
-  }
-
-  public async selectSequencingResults(sequencingResults: SequencingResultsEnum): Promise<void> {
-    await this.selectField(TissueDynamicFieldsEnum.SEQUENCING_RESULTS, sequencingResults);
-  }
-
 
   /* Helper Functions */
-  private async fillTextareaField(dynamicFieldsEnum: TissueDynamicFieldsEnum, value: string): Promise<void> {
-    const textAreaLocator = this.findField(dynamicFieldsEnum);
-    await expect(textAreaLocator, `${dynamicFieldsEnum} is not visible`).toBeVisible();
-
+  private async fillTextareaField(dynamicField: TissueDynamicFieldsEnum, value: string | number): Promise<void> {
+    const textAreaLocator = await this.getField(dynamicField);
     const textarea = new TextArea(this.page, {root: textAreaLocator});
-    const existingValue = await textarea.getText();
-    const isDisabled = await textarea.isDisabled();
+    const currentValue = await this.getCurrentValue(dynamicField, textarea);
+    let actualValue = typeof value === 'number' ? value.toString() : value;
+    const maxLength = await textarea.maxLength;
 
-    if (!isDisabled && existingValue.trim() !== value) {
-      await textarea.fill(value, false);
+    if(maxLength && actualValue.length > Number(maxLength)) {
+      actualValue = actualValue.slice(0, Number(maxLength));
+    }
+
+    if (currentValue !== actualValue) {
+      await textarea.fill(actualValue, false);
       await textarea.blur();
       await waitForResponse(this.page, {uri: 'patch'});
     }
   }
 
-  private async selectField(dynamicFieldsEnum: TissueDynamicFieldsEnum, selection: TumorTypesEnum | TissueTypesEnum | SequencingResultsEnum | 'Yes' | 'No'): Promise<void> {
-    const selectLocator = this.findField(dynamicFieldsEnum);
-    await expect(selectLocator, `${dynamicFieldsEnum} is not visible`).toBeVisible();
-
+  private async selectField(dynamicField: TissueDynamicFieldsEnum, selection: TumorTypesEnum | TissueTypesEnum | SequencingResultsEnum | 'Yes' | 'No'): Promise<void> {
+    const selectLocator = await this.getField(dynamicField);
     const selectElement = new Select(this.page, {root: selectLocator});
-    const existingValue = await selectElement.selectedOption;
-    const isDisabled = await selectElement.isSelectDisabled();
+    const currentValue = await this.getCurrentValue(dynamicField, selectElement);
 
-    if (!isDisabled && existingValue !== selection) {
+    if (currentValue !== selection) {
       await selectElement.selectOption(selection);
       await waitForResponse(this.page, {uri: 'patch'});
     }
   }
 
-  private async fillInputField(dynamicFieldsEnum: TissueDynamicFieldsEnum, value: string, byText: boolean = false): Promise<void> {
-    const inputLocator = byText ? this.tissue.getByText(dynamicFieldsEnum) : this.findField(dynamicFieldsEnum);
-    await expect(inputLocator, `${dynamicFieldsEnum} is not visible`).toBeVisible();
-
+  private async fillInputField(dynamicField: TissueDynamicFieldsEnum, value: string | number, byText: boolean = false, hasLookup: boolean = false): Promise<void> {
+    const inputLocator = await this.getField(dynamicField, byText);
     const inputElement = new Input(this.page, {root: inputLocator});
-    const existingValue = await inputElement.inputValue;
-    const isDisabled = await inputElement.isDisabled();
+    const currentValue = await this.getCurrentValue(dynamicField, inputElement);
+    let actualValue = typeof value === 'number' ? value.toString() : value;
+    const maxLength = await inputElement.maxLength;
 
-    if (!isDisabled && existingValue !== value.toString()) {
-      await inputElement.fillSimple(value.toString());
+    if(maxLength && actualValue.length > Number(maxLength)) {
+      actualValue = actualValue.slice(0, Number(maxLength));
+    }
+
+    if (currentValue !== actualValue) {
+      await inputElement.fillSimple(actualValue);
       await waitForResponse(this.page, {uri: 'patch'});
+      hasLookup && await this.lookup();
     }
   }
 
-  private async fillDateFields(dynamicFieldsEnum: TissueDynamicFieldsEnum, value: FillDate): Promise<void> {
-    const dateLocator = this.findField(dynamicFieldsEnum);
-    await expect(dateLocator, `${dynamicFieldsEnum} is not visible`).toBeVisible();
-
+  private async fillDateFields(dynamicField: TissueDynamicFieldsEnum, value: FillDate): Promise<void> {
+    const dateLocator = await this.getField(dynamicField);
     await this.fillDates(dateLocator, value);
   }
 
   private async fillDates(root: Locator, {date, today}: FillDate): Promise<void> {
     if(today) {
-      const todayBtn = root.getByRole('button', {name: 'Today'});
+      const todayBtn = new Button(this.page, {root: root, label: 'Today'});
       await todayBtn.click();
       await waitForResponse(this.page, {uri: 'patch'});
-      return;
-    }
-    if(date) {
+    } else if (date) {
       const datePicker = new DatePicker(this.page, {root: root});
       await datePicker.open();
       await datePicker.pickDate(date);
@@ -138,13 +161,27 @@ export default class Tissue {
   }
 
   private async lookup(selectIndex: number = 0): Promise<void> {
-    await waitForResponse(this.page, {uri: 'lookup'});
     const lookupList = this.lookupList;
     const count = await lookupList.count();
     if (count > 0 && selectIndex < count) {
       await lookupList.nth(selectIndex).click();
       await waitForResponse(this.page, {uri: 'patch'});
     }
+  }
+
+  private async getCurrentValue(dynamicField: TissueDynamicFieldsEnum, element: any): Promise<string> {
+    const currentValue = await element?.currentValue;
+
+    await expect(element, `${dynamicField}' is disabled`).toBeEnabled();
+
+    return currentValue?.trim();
+  }
+
+  private async getField(dynamicField: TissueDynamicFieldsEnum, byText: boolean = false): Promise<Locator> {
+    const fieldLocator = byText ? this.tissue.getByText(dynamicField) : this.findField(dynamicField);
+    await expect(fieldLocator, `'${dynamicField}' is not visible`).toBeVisible();
+
+    return fieldLocator;
   }
 
   /* Locator */
