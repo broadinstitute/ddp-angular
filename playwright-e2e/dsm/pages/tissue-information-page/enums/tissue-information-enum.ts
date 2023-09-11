@@ -36,6 +36,12 @@ export enum DynamicFieldsEnum {
   GENDER = 'Gender'
 }
 
+export enum SMIdEnum {
+  USS_SM_IDS = 'USS SM-IDS',
+  SCROLLS_SM_IDS = 'scrolls SM-IDS',
+  H_E_SM_IDS = 'H&E SM-IDS',
+}
+
 export enum TissueDynamicFieldsEnum {
   NOTES = 'Notes',
   MATERIALS_RECEIVED = 'Materials received',
@@ -44,9 +50,6 @@ export enum TissueDynamicFieldsEnum {
   H_E = 'H&E(s)',
   SCROLL = 'Scroll(s)',
   TISSUE_TYPE = 'Tissue Type',
-  USS_SM_IDS = 'USS SM-IDS',
-  SCROLLS_SM_IDS = 'scrolls SM-IDS',
-  H_E_SM_IDS = 'H&E SM-IDS',
   PATHOLOGY_REPORT = 'Pathology Report',
   TUMOR_TYPE = 'Tumor Type',
   TISSUE_SITE = 'Tissue Site',

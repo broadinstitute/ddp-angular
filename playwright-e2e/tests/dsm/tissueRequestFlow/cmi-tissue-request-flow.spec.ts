@@ -9,12 +9,6 @@ import {
   OncHistoryInputColumnsEnum,
   OncHistorySelectRequestEnum
 } from "../../../dsm/component/tabs/enums/onc-history-input-columns-enum";
-import {
-  SequencingResultsEnum,
-  TissueDynamicFieldsEnum,
-  TissueTypesEnum,
-  TumorTypesEnum
-} from "../../../dsm/pages/tissue-information-page/enums/tissue-information-enum";
 
 
 test.describe('Tissue Request Flow', () => {
@@ -48,10 +42,12 @@ test.describe('Tissue Request Flow', () => {
       // await oncHistoryTab.selectFilesOrderAndDownload('LMS parental consent & assent pdf', 7);
       // await oncHistoryTab.downloadPDFBundleAfterOrder();
 
-      // await oncHistoryTab.downloadRequestDocuments();
+      const oncHistoryTable = oncHistoryTab.table;
+      await oncHistoryTable.selectDeselectRow(0);
+      await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.REQUEST, {select: OncHistorySelectRequestEnum.REQUEST});
+      await oncHistoryTab.downloadRequestDocuments();
 
 
-      // const oncHistoryTable = oncHistoryTab.table;
       // await oncHistoryTable.fillNotes('TESTING OTHER NOTE');
       // await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.REQUEST, {select: OncHistorySelectRequestEnum.REQUEST })
 
@@ -96,7 +92,46 @@ test.describe('Tissue Request Flow', () => {
 
 
       // const tissue = await tissueInformationPage.tissue();
+
+      // const smids = await tissue.fillSmIDs(SMIdEnum.USS_SM_IDS);
+      // await smids.fillInputs([
+      //   {value: 'smidtesting1222933'},
+      //   {value: 'smidtesting1282354'},
+      //   {value: 'smidtesting1671253', selectCheckbox: true},
+      //   'somesmdstring1462312',
+      //   {value: 'smidtesting1232463'},
+      //   {value: 'smidtesting121753', selectCheckbox: true}
+      // ]);
+      // await smids.deleteInputAt(1);
+      // console.log(await smids.getValueAt(0));
+      // console.log(await smids.getValueAt(1));
+      // await smids.onlyKeepSelectedSMIDs();
+
+      // await smids.close();
       //
+      // const smids2 = await tissue.fillSmIDs(SMIdEnum.H_E_SM_IDS);
+      //
+      // await smids2.fillInputs(['string_tests3mds2143', 'string_testsmd5s2135', 'string_tests2mds21513', 'string_te3stsmds21313']);
+      // await smids.deleteInputAt(0);
+      // console.log(await smids.getValueAt(0));
+      // console.log(await smids.getValueAt(1));
+      // await smids.close();
+      //
+      // const smids3 = await tissue.fillSmIDs(SMIdEnum.SCROLLS_SM_IDS);
+      //
+      // await smids3.fillInputs([
+      //   {value: 'smidtestin5g1293'},
+      //   {value: 'smid5testing1283'},
+      //   {value: 'smidtesting1723', selectCheckbox: true},
+      //   'somesmdstr5ing12312'
+      // ]);
+      // await smids.deleteInputAt(3)
+      // console.log(await smids.getValueAt(0));
+      // console.log(await smids.getValueAt(1));
+      // await smids.close();
+
+
+
       // await tissue.fillField(TissueDynamicFieldsEnum.NOTES, {inputValue: 'Test Notes'});
       // await tissue.fillField(TissueDynamicFieldsEnum.USS, {inputValue: 7766});
       // await tissue.fillField(TissueDynamicFieldsEnum.BLOCK, {inputValue: 8899});
