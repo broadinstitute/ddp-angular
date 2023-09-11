@@ -310,7 +310,7 @@
           </td>
           <td [ngClass]="{'highlight_sample': isResearchSample(kitRequest)}">
             <!--            kit type-->
-            {{kitRequest.kitTypeName}}
+            {{kitRequest.kitTypeDisplayName? kitRequest.kitTypeDisplayName : kitRequest.kitTypeName}}
           </td>
           <td *ngIf="isClinicalStudy && shippingPage !== UPLOADED" [ngClass]="{'highlight_sample': isResearchSample(kitRequest)}">
             <!--            sample type-->
