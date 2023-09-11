@@ -22,7 +22,3 @@ export const OncHistoryInputs = new Map<OncHistoryInputColumnsEnum, OncHistoryIn
   .set(OncHistoryInputColumnsEnum.VOCAB_CHECK, {type: InputTypeEnum.INPUT, hasLookup: false})
   .set(OncHistoryInputColumnsEnum.ONC_HISTORY_DATE, {type: InputTypeEnum.DATE, hasLookup: false})
   .set(OncHistoryInputColumnsEnum.REQUEST, {type: InputTypeEnum.SELECT, hasLookup: false})
-
-
-
-

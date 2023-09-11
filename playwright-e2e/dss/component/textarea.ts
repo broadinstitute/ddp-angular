@@ -26,11 +26,15 @@ export default class TextArea extends WidgetBase {
     pressTab && await this.toLocator().press('Tab');
   }
 
-  async getText(): Promise<string> {
+  get currentValue(): Promise<string> {
     return this.toLocator().inputValue();
   }
 
   async blur(): Promise<void> {
     await this.toLocator().blur();
+  }
+
+  public get maxLength(): Promise<string | null> {
+    return this.toLocator().getAttribute('maxlength');
   }
 }

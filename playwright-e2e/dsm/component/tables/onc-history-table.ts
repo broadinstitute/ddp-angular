@@ -16,6 +16,7 @@ import {
 import {waitForResponse} from "../../../utils/test-utils";
 import Select from "../../../dss/component/select";
 import TissueInformationPage from "../../pages/tissue-information-page/tissue-information-page";
+import Button from "../../../dss/component/button";
 
 export default class OncHistoryTable extends Table {
   private readonly tissueInformationPage = new TissueInformationPage(this.page);
@@ -64,7 +65,7 @@ export default class OncHistoryTable extends Table {
       }
       case InputTypeEnum.TEXTAREA: {
         const textArea = new TextArea(this.page, {root: cell});
-        value = textArea.getText();
+        value = textArea.currentValue;
         break;
       }
       case InputTypeEnum.SELECT: {
@@ -76,6 +77,19 @@ export default class OncHistoryTable extends Table {
     }
 
     return value;
+  }
+
+  public async fillNotes(note: string, index: number = 0): Promise<void> {
+    const notesIcon = this.notesIconButton(index);
+    await expect(notesIcon, `Notes icon at ${index} index is not visible`).toBeVisible();
+    await notesIcon.click();
+    const notesModalContent = this.notesModalContent;
+    await expect(notesModalContent, `Notes modal at ${index} index is not visible`).toBeVisible();
+    const textarea = new TextArea(this.page, {root: notesModalContent});
+    await textarea.fill(note);
+    await waitForResponse(this.page, {uri: 'patch'});
+    const saveAndCloseBtn = new Button(this.page, {root: notesModalContent, label: 'Save & Close'});
+    await saveAndCloseBtn.click();
   }
 
   public async fillField(columnName: OncHistoryInputColumnsEnum, {
@@ -148,7 +162,7 @@ export default class OncHistoryTable extends Table {
 
   private async fillTextArea(root: Locator, value: string, hasLookup: boolean, force: boolean): Promise<void> {
     const textArea = new TextArea(this.page, {root: root});
-    const hasValue = await textArea.getText();
+    const hasValue = await textArea.currentValue;
     if (hasValue && !force) {
       return;
     }
@@ -191,6 +205,14 @@ export default class OncHistoryTable extends Table {
 
   private activeSelectedRequestListItem(root: Locator): Locator {
     return root.locator('mat-select').locator('span.mat-select-min-line');
+  }
+
+  private notesIconButton(index: number = 0): Locator {
+    return this.row(index).locator('td').locator('//button[.//*[name()=\'svg\' and @data-icon=\'comment-alt\']]');
+  }
+
+  private get notesModalContent(): Locator {
+    return this.page.locator('app-onc-history-detail').locator('app-modal').locator('.modal-content');
   }
 
   private deleteRowButton(index: number = 0): Locator {

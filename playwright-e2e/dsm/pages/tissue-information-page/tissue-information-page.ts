@@ -21,6 +21,16 @@ export default class TissueInformationPage {
     return new Tissue(this.page, index);
   }
 
+  public async backToParticipantPage(): Promise<void> {
+    await this.page.getByText('<< back to Participant Page').click();
+    await this.page.waitForLoadState('load');
+  }
+
+  public async backToList(): Promise<void> {
+    await this.page.getByText('<< back to List').click();
+    await this.page.waitForLoadState('load');
+  }
+
   public async addTissue(): Promise<Tissue> {
     const addTissueBtnLocator = this.addTissueButton;
     await expect(addTissueBtnLocator, `Add Tissue button is not visible`).toBeVisible();
@@ -78,7 +88,7 @@ export default class TissueInformationPage {
 
     const textarea = new TextArea(this.page, {root: notesLocator});
     const isTextareaDisabled = await textarea.isDisabled();
-    const existingValue = await textarea.getText();
+    const existingValue = await textarea.currentValue;
 
     if(!isTextareaDisabled && existingValue !== value) {
       await textarea.fill(value, false);
@@ -96,7 +106,7 @@ export default class TissueInformationPage {
 
     await this.checkCheckbox(destructionPolicyLocator, keptIndefinitelySelection);
 
-    const existingValue = await destructionPolicyYears.inputValue;
+    const existingValue = await destructionPolicyYears.currentValue;
     const isAllowedToEnterValue = !keptIndefinitelySelection && !isInputDisabled && existingValue.trim() !== value.toString();
 
     if (isAllowedToEnterValue) {
@@ -113,7 +123,7 @@ export default class TissueInformationPage {
       .toBeVisible();
 
     const selectElement = new Select(this.page, {root: problemsWithTissueLocator});
-    const selectedValue = await selectElement.selectedOption;
+    const selectedValue = await selectElement.currentValue;
     const isDisabled = await selectElement.isSelectDisabled();
     const allowSelection = !isDisabled && selectedValue?.trim() !== newValue;
 
@@ -131,7 +141,7 @@ export default class TissueInformationPage {
       .toBeVisible();
 
     const selectElement = new Select(this.page, {root: genderLocator});
-    const selectedValue = await selectElement.selectedOption;
+    const selectedValue = await selectElement.currentValue;
     const isDisabled = await selectElement.isSelectDisabled();
 
     if (!isDisabled && selectedValue?.trim() !== gender) {
