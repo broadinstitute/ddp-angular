@@ -1,7 +1,7 @@
 import {expect, Locator, Page} from '@playwright/test';
-import {MBCPatientsData as PatientsData, TypePatient} from '../mbc/mbc-patient-type';
-import {waitForNoSpinner} from '../../../utils/test-utils';
-import Question from '../../component/Question';
+import {MBCPatientsData as PatientsData, TypePatient} from 'dss/pages/mbc/mbc-patient-type';
+import {waitForNoSpinner} from 'utils/test-utils';
+import Question from 'dss/component/Question';
 import {MBCPageBase} from './mbc-page-base';
 
 enum CancerTypeQuestionText {

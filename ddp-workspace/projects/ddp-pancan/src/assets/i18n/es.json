@@ -17,6 +17,8 @@
             "Twitter": "Twitter logo",
             "Facebook": "Facebook logo",
             "Instagram": "Instagram logo",
+            "LinkedIn": "LinkedIn logo",
+            "Threads": "Threads logo",
             "JoinCMI": "Join Count Me In logo"
         }
     },
@@ -24,7 +26,9 @@
         "social": {
             "twitter": "https://twitter.com/CMI_Espanol",
             "facebook": "https://www.facebook.com/CMIespanol",
-            "instagram": "https://www.instagram.com/countmein"
+            "instagram": "https://www.instagram.com/countmein",
+            "linkedin": "https://www.linkedin.com/company/count-me-in-patient-partnered-research/",
+            "threads": "https://www.threads.net/@countmein"
         },
         "HomePage": {
             "JoinCountMeInButton": "Únase a Count Me In",

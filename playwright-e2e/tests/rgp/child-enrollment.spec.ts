@@ -19,7 +19,7 @@ test.describe('Child Enrollment', () => {
     await expect(locator).toContainText(itemName);
   };
 
-  test('Enroll a child (under 18) @functional @enrollment @rgp @visual', async ({ page }) => {
+  test('Enroll a child (under 18) @functional @dss @rgp @visual', async ({ page }) => {
     const child = user.child;
     const adult = user.adult;
 
@@ -167,7 +167,7 @@ test.describe('Child Enrollment', () => {
     const actionsCell = await table.findCell('Form', 'Tell us about your family', 'Actions');
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const viewButton = table.findButtonInCell(actionsCell!, { label: 'View' });
-    await expect(viewButton).toBeTruthy();
+    expect(viewButton).toBeTruthy();
     // Make sure the View button in table cell is working by clicking it and checks page navigation
     await viewButton.click();
     await tellUsAboutYourFamily.waitForReady();

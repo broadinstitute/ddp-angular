@@ -1,8 +1,6 @@
 import { Locator, Page } from '@playwright/test';
 import { SingularPage } from 'dss/pages/singular/singular-page';
-import Question from 'dss/component/Question';
 import TextInput from 'dss/component/input';
-import Checkbox from 'dss/component/checkbox';
 
 export default class AboutMePage extends SingularPage {
   constructor(page: Page) {

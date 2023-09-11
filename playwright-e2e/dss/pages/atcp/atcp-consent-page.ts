@@ -1,5 +1,4 @@
 import { expect, Page } from '@playwright/test';
-import Button from 'dss/component/button';
 import Question from 'dss/component/Question';
 import { AtcpPageBase } from 'dss/pages/atcp/atcp-page-base';
 

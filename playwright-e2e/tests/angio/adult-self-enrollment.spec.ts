@@ -27,7 +27,7 @@ test.describe('Adult Enrollment', () => {
       : await expect(page.locator('.WizardSteps').nth(nth)).not.toHaveClass(/active/);
   };
 
-  test('Join for self @functional @enrollment @angio', async ({ page }) => {
+  test('Join for self @dss @functional @angio', async ({ page }) => {
     const homePage = new HomePage(page);
     await homePage.countMeIn();
 
@@ -148,14 +148,14 @@ test.describe('Adult Enrollment', () => {
 
     statusCell = await dashboardTable.findCell('Form', 'Research Consent Form', 'Status');
     expect(statusCell).toBeTruthy();
-    await expect((await statusCell?.innerText()) ?? '').toContain('Complete');
+    expect((await statusCell?.innerText()) ?? '').toContain('Complete');
 
     statusCell = await dashboardTable.findCell('Form', 'Medical Release Form', 'Status');
     expect(statusCell).toBeTruthy();
-    await expect((await statusCell?.innerText()) ?? '').toContain('Complete');
+    expect((await statusCell?.innerText()) ?? '').toContain('Complete');
 
     const todayDate = new Date().toLocaleDateString('en-US', { day: '2-digit', month: '2-digit', year: 'numeric' });
     const createdCell = await dashboardTable.findCell('Form', 'Initial Enrollment Survey', 'Created');
-    await expect((await createdCell?.innerText()) ?? 'null').toEqual(todayDate);
+    expect((await createdCell?.innerText()) ?? 'null').toEqual(todayDate);
   });
 });

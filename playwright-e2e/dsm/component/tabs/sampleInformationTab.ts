@@ -74,8 +74,8 @@ export default class SampleInformationTab {
     return await selection.isVisible() ? selection.textContent() : '';
   }
 
-  private deactivatedText(at: number): Promise<string | null> {
-    return this.sampleFieldset.nth(at).locator(this.getDeactivatedSampleInfoXPath).textContent();
+  private async deactivatedText(at: number): Promise<string | null> {
+    return await this.sampleFieldset.nth(at).locator(this.getDeactivatedSampleInfoXPath).textContent();
   }
 
   private get sampleFieldset(): Locator {
@@ -89,7 +89,7 @@ export default class SampleInformationTab {
     await expect(this.page.locator(MFBarcodeXPath),
       `MFBarcode - '${MFBarcode}' can't be found`).toBeVisible();
 
-    await expect(await this.page.locator(MFBarcodeXPath + this.ancestorSampleTypeXPath(type)).textContent(),
+      expect(await this.page.locator(MFBarcodeXPath + this.ancestorSampleTypeXPath(type)).textContent(),
       `Provided MFBarcode (${MFBarcode}) has different sample type than - ${type}`)
       .toContain(type);
   }
