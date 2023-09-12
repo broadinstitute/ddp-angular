@@ -1,13 +1,16 @@
 import {expect, Locator, Page} from '@playwright/test';
 import {KitsColumnsEnum} from 'dsm/pages/kitsInfo-pages/enums/kitsColumns-enum';
+import Table from 'dss/component/table';
 import {KitsPaginator} from 'lib/component/dsm/paginators/kitsPaginator';
 import {rows} from 'lib/component/dsm/paginators/types/rowsPerPage';
 
 
-export class KitsTable {
+export class KitsTable extends Table {
   private readonly paginator = new KitsPaginator(this.page);
 
-  constructor(private readonly page: Page) {}
+  constructor(page: Page) {
+    super(page, {cssClassAttribute: '.table'});
+  }
 
   public async goToPage(page: number): Promise<void> {
     await this.paginator.pageAt(page);

@@ -79,11 +79,11 @@ test.skip('Verify that a blood & rna kit can be uploaded @dsm @rgp @functional @
 
     //The rest of the kit upload information - RGP kits are by family member instead of by account - using the proband's info to make a kit
     const kitUploadInfo = new KitUploadInfo(shortID, user.patient.firstName, user.patient.lastName);
-    kitUploadInfo.street1 = user.patient.streetAddress;
-    kitUploadInfo.city = user.patient.city;
-    kitUploadInfo.postalCode = user.patient.zip;
-    kitUploadInfo.state = user.patient.state.abbreviation;
-    kitUploadInfo.country = user.patient.country.abbreviation;
+    kitUploadInfo.address.street1 = user.patient.streetAddress;
+    kitUploadInfo.address.city = user.patient.city;
+    kitUploadInfo.address.postalCode = user.patient.zip;
+    kitUploadInfo.address.state = user.patient.state.abbreviation;
+    kitUploadInfo.address.country = user.patient.country.abbreviation;
 
     //Upload a Blood & RNA kit
     const kitUploadPage = await navigation.selectFromSamples<KitUploadPage>(SamplesNavEnum.KIT_UPLOAD);

@@ -78,11 +78,11 @@ test.describe('Blood Kits upload flow', () => {
       // collects data from the contact information tab if the tab is available
       if (isContactInformationTabVisible) {
         const contactInformationTab = await participantPage.clickTab<ContactInformationTab>(TabEnum.CONTACT_INFORMATION);
-        kitUploadInfo.street1 = (await contactInformationTab.getStreet1()) || kitUploadInfo.street1;
-        kitUploadInfo.city = (await contactInformationTab.getCity()) || kitUploadInfo.city;
-        kitUploadInfo.postalCode = (await contactInformationTab.getZip()) || kitUploadInfo.postalCode;
-        kitUploadInfo.state = (await contactInformationTab.getState()) || kitUploadInfo.state;
-        kitUploadInfo.country = (await contactInformationTab.getCountry()) || kitUploadInfo.country;
+        kitUploadInfo.address.street1 = (await contactInformationTab.getStreet1()) || kitUploadInfo.address.street1;
+        kitUploadInfo.address.city = (await contactInformationTab.getCity()) || kitUploadInfo.address.city;
+        kitUploadInfo.address.postalCode = (await contactInformationTab.getZip()) || kitUploadInfo.address.postalCode;
+        kitUploadInfo.address.state = (await contactInformationTab.getState()) || kitUploadInfo.address.state;
+        kitUploadInfo.address.country = (await contactInformationTab.getCountry()) || kitUploadInfo.address.country;
       }
 
       // deactivate all kits for the participant

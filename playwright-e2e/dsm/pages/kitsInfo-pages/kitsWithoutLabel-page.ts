@@ -20,6 +20,10 @@ export default class KitsWithoutLabelPage {
 
   constructor(private readonly page: Page) {}
 
+  public get kitsWithoutLabelTable(): KitsTable {
+    return this.kitsTable;
+  }
+
   public async goToPage(page: number): Promise<void> {
     await this.kitsTable.goToPage(page);
   }
@@ -92,7 +96,7 @@ export default class KitsWithoutLabelPage {
   }
 
   public async assertReloadKitListBtn(): Promise<void> {
-    await expect(this.page.locator(this.reloadKitListBtnXPath),
+    await expect(this.createLabelsButton,
       'Kits Without Label page - Reload Kit List Button is not visible').toBeVisible();
   }
 
@@ -104,6 +108,10 @@ export default class KitsWithoutLabelPage {
 
   public async assertTableHeader(): Promise<void> {
     assertTableHeaders(await this.kitsTable.getHeaderTexts(), this.TABLE_HEADERS);
+  }
+
+  public get createLabelsButton(): Locator {
+    return this.page.locator(this.reloadKitListBtnXPath);
   }
 
   /* XPaths */

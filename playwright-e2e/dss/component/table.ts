@@ -1,6 +1,7 @@
 import { expect, Locator, Page } from '@playwright/test';
 import Button from 'dss/component/button';
-import { waitForNoSpinner } from 'utils/test-utils';
+import { check, waitForNoSpinner } from 'utils/test-utils';
+import Checkbox from './checkbox';
 
 export enum SortOrder {
   DESC = 'desc',
@@ -138,12 +139,12 @@ export default class Table {
    * @param {string} column
    * @returns {Promise<string | null>}
    */
-  async getRowText(row: number, column: string): Promise<string | null> {
+  async getRowText(row: number, column: string): Promise<string> {
     // Find column index
     const columns = await this.getHeaderNames();
     const columnIndex = await this.getHeaderIndex(column);
     if (columnIndex === -1) {
-      return null; // Not found
+      throw new Error(`Column: ${column} not found.`);
     }
     const cell = this.cell(row, columnIndex);
     return await cell.innerText();
@@ -272,6 +273,47 @@ export default class Table {
       await input2.fill(opts.value2);
     }
     await waitForNoSpinner(this.page);
+  }
+
+  /**
+   * Click "Select" checkbox by column and cell text.
+   * @param columnHeader {string} Search column name.
+   * @param columnCellText {string} Cell text.
+   * @param opts: Optional flag for text exact match
+   * @returns
+   */
+  async selectRowByColumn(columnHeader: string, columnCellText: string, opts: { exactMatch?: boolean } = {}): Promise<Checkbox> {
+    const { exactMatch = true } = opts;
+
+    // Find column header index
+    const columnIndex = await this.getHeaderIndex(columnHeader, { exactMatch });
+    if (columnIndex === -1) {
+      throw new Error(`Column: ${columnHeader} not found.`);
+    }
+
+    // Find row which contains searchCellValue
+    const allRows = await this.rowLocator().elementHandles();
+    const allCellValues = await Promise.all(
+      allRows.map(async (row) => {
+        const cells = await row.$$(this.cellCss);
+        return cells[columnIndex].innerText();
+      })
+    );
+    const searchRowIndex = allCellValues.findIndex((cellValue) => cellValue === columnCellText);
+    if (searchRowIndex === -1) {
+      throw new Error(`Column cell text: ${columnCellText} not found.`);
+    }
+
+    const cell = this.cell(searchRowIndex, 0); // column index is 0 because Select checkbox is located on first column
+    const checkbox = new Checkbox(this.page, {root: cell});
+    await checkbox.click();
+    return checkbox;
+  }
+
+  async selectRowByRowIndex(rowIndex = 0): Promise<void> {
+    const cell = this.cell(rowIndex, 0);
+    const checkbox = new Checkbox(this.page, { root: cell });
+    await checkbox.click();
   }
 
   private parseForNumber(text: string): number | null {
