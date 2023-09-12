@@ -24,7 +24,9 @@ test.describe.serial('LMS Child Enrollment', () => {
     await expect(page.locator('.activity-step.active')).toHaveText(expectedText);
   };
 
-  test('Consent & Assent @visual @enrollment @lms', async ({ page }) => {
+  test('Consent & Assent @dss @visual @lms', async ({ page }) => {
+    test.slow();
+
     researchConsentPage = new LmsResearchConsentPage(page, 'child');
     additionalConsentPage = new LmsAdditionalConsentPage(page);
 
@@ -60,7 +62,7 @@ test.describe.serial('LMS Child Enrollment', () => {
         password: process.env.LMS_USER_PASSWORD
       });
       logParticipantCreated(userEmail, childFullName);
-    })
+    });
 
     await test.step('Asserting contents on Research Consent & Assent Form: Step 1. Key Points', async () => {
       await assertActivityHeader(page, 'Research Consent & Assent Form');
@@ -74,7 +76,7 @@ test.describe.serial('LMS Child Enrollment', () => {
         await expect(paragraphs[i]).toHaveScreenshot(`research-consent-assent-form-paragraph-${i}.png`);
       }
       await researchConsentPage.next();
-    })
+    });
 
     await test.step('Asserting contents on Research Consent & Assent Form: Step 2. Full Form', async () => {
       await assertActiveActivityStep(page, '2. Full Form');
@@ -158,14 +160,14 @@ test.describe.serial('LMS Child Enrollment', () => {
       await expect(questionPLocator).toHaveScreenshot(`research-consent-assent-full-form-page-P-paragraph.png`);
 
       await researchConsentPage.next();
-    })
+    });
 
     await test.step('Asserting contents on Research Consent & Assent Form: Step 3. Sign Consent', async () => {
       await assertActiveActivityStep(page, '3. Sign Consent');
 
       await expect(page.locator('p.secondary-text')).toHaveScreenshot(`research-consent-sign-consent-info.png`);
-      await expect(await researchConsentPage.agreeToDrawBloodQuestion.toLocator()).toHaveScreenshot('research-consent-agree-to-draw-blood-question.png');
-      await expect(await researchConsentPage.canRequestStoredTumorSamples.toLocator()).toHaveScreenshot('research-consent-can-request-tumor-samples-question.png');
+      await expect(researchConsentPage.agreeToDrawBloodQuestion.toLocator()).toHaveScreenshot('research-consent-agree-to-draw-blood-question.png');
+      await expect(researchConsentPage.canRequestStoredTumorSamples.toLocator()).toHaveScreenshot('research-consent-can-request-tumor-samples-question.png');
 
       await researchConsentPage.agreeToDrawBloodSamples();
       await researchConsentPage.requestStoredSamples();
@@ -182,7 +184,7 @@ test.describe.serial('LMS Child Enrollment', () => {
       await researchConsentPage.fillInDateOfBirth(participant.birthDate.MM, participant.birthDate.DD, participant.birthDate.YYYY);
       await researchConsentPage.fillInFullName(childFullName); // Your Child’s Full name
       await researchConsentPage.fillInYourFullName(adultFirstName, adultLastName); // Your Full name
-      await researchConsentPage.fillInSignature(adultFullName) // Your Signature (Full Name)
+      await researchConsentPage.fillInSignature(adultFullName); // Your Signature (Full Name)
       await researchConsentPage.selectRelationshipToChild('Parent');
       await researchConsentPage.fillInContactAddress({
         fullName: childFullName,
@@ -194,7 +196,7 @@ test.describe.serial('LMS Child Enrollment', () => {
       });
 
       await researchConsentPage.next();
-    })
+    });
 
     await test.step('Asserting contents on Research Consent & Assent Form: Step 4. Sign Assent', async () => {
       await assertActiveActivityStep(page, '4. Sign Assent');
@@ -204,10 +206,10 @@ test.describe.serial('LMS Child Enrollment', () => {
         await expect(paragraphs[i]).toHaveScreenshot(`research-consent-assent-full-form-sign-assent-paragraph-${i}.png`);
       }
 
-      await researchConsentPage.fillInChildSignature(childFullName) // Child/Adolescent Assent
+      await researchConsentPage.fillInChildSignature(childFullName); // Child/Adolescent Assent
 
       await researchConsentPage.submit();
-    })
+    });
 
     // Additional Consent Form: Learning About Your Child's Tumor
     await test.step("Asserting contents on Additional Consent Form: Learning About Your Child's Tumor", async () => {
@@ -253,7 +255,7 @@ test.describe.serial('LMS Child Enrollment', () => {
       await additionalConsentPage.signature().fill(childFullName);
 
       await additionalConsentPage.submit();
-    })
+    });
 
     await test.step('Asserting contents on Medical Release Form', async () => {
       const medicalReleasePage = new LmsMedicalReleasePage(page);
@@ -271,7 +273,7 @@ test.describe.serial('LMS Child Enrollment', () => {
       await medicalReleasePage.fillInFullName(childFullName);
 
       await medicalReleasePage.submit();
-    })
+    });
 
     // Next page: Survey: Your Child's LMS
     await test.step("Asserting contents on Survey: Your Child's LMS", async () => {
@@ -299,7 +301,7 @@ test.describe.serial('LMS Child Enrollment', () => {
       await surveyAboutLms.medicationsChemotherapyReceived().fill('AFATINIB', { nth: 1 });
 
       await surveyAboutLms.submit();
-    })
+    });
 
     // Next page: Survey: About Your Child
     await test.step('Asserting contents on Survey: About Your Child', async () => {
@@ -321,17 +323,17 @@ test.describe.serial('LMS Child Enrollment', () => {
       await surveyAboutYou.howDidYouHearAboutProject().check('Word of mouth (friend/family, study staff, study participants, patient, support group, etc.)');
       await surveyAboutYou.howDidYouHearAboutProject().toCheckbox(/Brochure/).check();
       await surveyAboutYou.howOftenDoYouNeedHelpReadHospitalMaterials().toRadiobutton().check('None of the time');
-      await surveyAboutYou.howOftenDoYouHaveProblemsUnderstandWrittenInformation().toRadiobutton().check('None of the time')
+      await surveyAboutYou.howOftenDoYouHaveProblemsUnderstandWrittenInformation().toRadiobutton().check('None of the time');
       await surveyAboutYou.howConfidentAreYouFillingOutFormsByYourself().toRadiobutton().check('Always');
       await surveyAboutYou.highestLevelOfSchoolCompleted().toRadiobutton().check('Graduate or professional school (for example Masters, PhD, MD, JD/LLB)');
       await surveyAboutYou.speakLanguage().toRadiobutton().check('English');
 
       await surveyAboutYou.submit();
-    })
+    });
 
     // On Dashboard
     await expect(page.locator('h1.dashboard-title-section__title span')).toHaveText('Participant Dashboard');
     await expect(page.locator('.infobox_dashboard')).toHaveScreenshot('dashboard-message.png');
     await expect(page.locator('ddp-user-activities [role="table"]')).toHaveScreenshot('dashboard-table.png');
   });
-})
+});

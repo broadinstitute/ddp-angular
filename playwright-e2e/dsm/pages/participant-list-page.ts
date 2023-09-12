@@ -65,7 +65,7 @@ export default class ParticipantListPage {
   }
 
   public async assertParticipantsCountGreaterOrEqual(count: number): Promise<void> {
-    await expect(await this.participantsCount(),
+    expect(await this.participantsCount(),
       `Participant List page - Displayed participants count is not greater or equal to ${count}`)
       .toBeGreaterThanOrEqual(count);
   }
@@ -166,7 +166,7 @@ export default class ParticipantListPage {
     await searchPanel.search();
 
     await expect(participantsTable.footerLocator().first()).toBeVisible();
-    await expect(await participantsTable.rowsCount).toBe(resultsCount);
+    expect(await participantsTable.rowsCount).toBe(resultsCount);
   }
 
   public async addColumnsToParticipantList(columnGroup: string, columnOptions: string[]): Promise<void> {

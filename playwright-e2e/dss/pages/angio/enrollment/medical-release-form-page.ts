@@ -1,6 +1,5 @@
 import { expect, Locator, Page } from '@playwright/test';
 import Institution from 'dss/component/institution';
-import Checkbox from 'dss/component/checkbox';
 import { AngioPageBase } from 'dss/pages/angio/angio-page-base';
 import { waitForNoSpinner } from 'utils/test-utils';
 

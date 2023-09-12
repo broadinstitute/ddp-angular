@@ -99,7 +99,7 @@ export default class Table {
     const allCellValues = await Promise.all(
       allRows.map(async (row) => {
         const cells = await row.$$(this.cellCss);
-        return await cells[columnIndex].innerText();
+        return cells[columnIndex].innerText();
       })
     );
     const searchRowIndex = allCellValues.findIndex((cellValue) => cellValue === searchCellValue);

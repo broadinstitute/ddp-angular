@@ -1,7 +1,7 @@
 import {MBCPageBase} from './mbc-page-base';
 import {expect, Locator, Page} from '@playwright/test';
-import {waitForNoSpinner} from '../../../utils/test-utils';
-import * as auth from '../../../authentication/auth-lms';
+import {waitForNoSpinner} from 'utils/test-utils';
+import * as auth from 'authentication/auth-lms';
 
 export class MBCHomePage extends MBCPageBase {
   countMeInButton: Locator;
