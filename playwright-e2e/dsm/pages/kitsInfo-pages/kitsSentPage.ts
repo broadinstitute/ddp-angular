@@ -31,6 +31,7 @@ export default class KitsSentPage {
   public async waitForLoad(): Promise<void> {
     await this.page.waitForLoadState('networkidle');
     await waitForNoSpinner(this.page);
+    await this.assertPageTitle();
   }
 
   public async selectKitType(kitType: KitTypeEnum): Promise<void> {

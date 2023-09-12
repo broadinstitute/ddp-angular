@@ -16,6 +16,7 @@ import KitsSentPage from 'dsm/pages/kitsInfo-pages/kitsSentPage';
 import KitsReceivedPage from 'dsm/pages/kitsInfo-pages/kitsReceived-page/kitsReceivedPage';
 import TrackingScanPage from 'dsm/pages/scanner-pages/trackingScan-page';
 import RgpFinalScanPage from 'dsm/pages/scanner-pages/rgpFinalScan-page';
+import ErrorPage from 'dsm/pages/samples/error-page';
 
 
 type Selection = StudyNavEnum | StudyEnum | SamplesNavEnum | MiscellaneousEnum;
@@ -32,6 +33,7 @@ export class Navigation {
       [SamplesNavEnum.KIT_UPLOAD, new KitUploadPage(this.page)],
       [SamplesNavEnum.SENT, new KitsSentPage(this.page)],
       [SamplesNavEnum.RECEIVED, new KitsReceivedPage(this.page, this.request)],
+      [SamplesNavEnum.ERROR, new ErrorPage(this.page)],
     ])
   };
 

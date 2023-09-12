@@ -263,14 +263,18 @@ export default class Table {
     }
   }
 
-  async searchByColumn(column1Name: string, value1: string, opts?: { column2Name: string, value2: string }): Promise<void> {
+  async searchByColumn(column1Name: string, value1: string, opts: { column2Name?: string, value2?: string, clear?: boolean } = {}): Promise<void> {
+    const { column2Name, value2, clear = true } = opts;
     const column1Index = await this.getHeaderIndex(column1Name, { exactMatch: false });
     const input1 = this.page.locator(this.headerRowCss).nth(1).locator('th').nth(column1Index).locator('input.form-control');
+    if (clear) {
+      await input1.clear();
+    }
     await input1.fill(value1);
-    if (opts) {
-      const column2Index = await this.getHeaderIndex(opts.column2Name, { exactMatch: false });
+    if (column2Name && value2) {
+      const column2Index = await this.getHeaderIndex(column2Name, { exactMatch: false });
       const input2 = this.page.locator(this.headerRowCss).nth(1).locator('th').nth(column2Index).locator('input.form-control');
-      await input2.fill(opts.value2);
+      await input2.fill(value2);
     }
     await waitForNoSpinner(this.page);
   }
@@ -314,6 +318,7 @@ export default class Table {
     const cell = this.cell(rowIndex, 0);
     const checkbox = new Checkbox(this.page, { root: cell });
     await checkbox.click();
+    await waitForNoSpinner(this.page);
   }
 
   private parseForNumber(text: string): number | null {

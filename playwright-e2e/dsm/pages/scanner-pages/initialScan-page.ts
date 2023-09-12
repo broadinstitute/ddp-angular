@@ -8,6 +8,10 @@ export default class InitialScanPage {
 
   constructor(private readonly page: Page) {}
 
+  public async waitForReady(): Promise<void> {
+    await this.assertPageTitle();
+  }
+
   public async fillScanPairs(fieldsInputs: string[]): Promise<void> {
     let extractValueIndex = -1;
     for (let i = 0; i < fieldsInputs.length / 2; i++) {

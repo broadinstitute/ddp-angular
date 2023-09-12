@@ -42,7 +42,7 @@ export async function waitForResponse(page: Page, { uri, status = 200, timeout }
       {timeout}
     );
   } catch (error: any) {
-    throw new Error(`Timeout exceeded while waiting for ${uri} URI response with status - ${status}`);
+    throw new Error(`Timed out while waiting for ${uri} URI response with status - ${status}: ${error}`);
   }
 }
 

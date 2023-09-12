@@ -13,6 +13,7 @@ export default class KitUploadPage {
   private readonly PAGE_TITLE = 'Kit Upload';
   private readonly T_HEAD = 'shortId\tfirstName\tlastName\tstreet1\tstreet2\tcity\tpostalCode\tstate\tcountry';
   private readonly kitType = new KitType(this.page);
+  private readonly expectedKitTypes = [KitTypeEnum.SALIVA, KitTypeEnum.BLOOD];
 
   constructor(private readonly page: Page) {
   }
@@ -20,6 +21,8 @@ export default class KitUploadPage {
   public async waitForLoad(): Promise<void> {
     await this.page.waitForLoadState('networkidle');
     await waitForNoSpinner(this.page);
+    await this.assertPageTitle();
+    await this.assertDisplayedKitTypes(this.expectedKitTypes);
   }
 
   public async selectKitType(kitType: KitTypeEnum): Promise<void> {
