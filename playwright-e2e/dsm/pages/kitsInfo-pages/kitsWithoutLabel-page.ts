@@ -48,10 +48,10 @@ export default class KitsWithoutLabelPage {
     await waitForNoSpinner(this.page);
     const kitsCount = await this.kitsTable.rows.count();
     if (kitsCount) {
-      await this.deactivateKit(await this.kitsTable.deactivateButtons.nth(0));
+      await this.deactivateKit(this.kitsTable.deactivateButtons.nth(0));
       await this.kitsTable.rows.count() && await this.deactivateAllKitsFor(shortId)
     }
-    await expect(await this.kitsTable.rows,
+    await expect(this.kitsTable.rows,
       'Kits Without Label page - All kits were not removed')
       .toHaveCount(0)
   }

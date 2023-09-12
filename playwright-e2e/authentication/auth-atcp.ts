@@ -1,5 +1,4 @@
 import { Page } from '@playwright/test';
-import AtcpRegistrationPage from 'dss/pages/atcp/atcp-registration-page';
 import { generateEmailAlias } from 'utils/faker-utils';
 
 const { ATCP_USER_EMAIL, ATCP_USER_PASSWORD } = process.env;

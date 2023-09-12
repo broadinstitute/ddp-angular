@@ -36,7 +36,7 @@ test.describe('Adult self-enroll & child (consent) enrollment', () => {
   /**
    * Participant first go through adult self enrollment, then be taken to the dashboard to continue child’s enrollment
    */
-  test('Adult enroll self and a child (non-assent) at same time @enrollment @pancan @functional', async ({ page }) => {
+  test('Adult enroll self and a child (non-assent) at same time @enrollment @dss @pancan @functional', async ({ page }) => {
     const pancanHomePage = new HomePage(page);
     await pancanHomePage.join({ waitForNav: true });
 
@@ -140,13 +140,13 @@ test.describe('Adult self-enroll & child (consent) enrollment', () => {
     expect(headers).toHaveLength(4); // Four columns in table
     expect(headers).toEqual(orderedHeaders);
     let researchStatusCell = await table.findCell('Form', 'Research Consent Form', 'Status');
-    await expect(await researchStatusCell?.innerText()).toEqual('Complete');
+    expect(await researchStatusCell?.innerText()).toEqual('Complete');
     let medicalReleaseStatusCell = await table.findCell('Form', 'Medical Release Form', 'Status');
-    await expect(await medicalReleaseStatusCell?.innerText()).toEqual('Complete');
+    expect(await medicalReleaseStatusCell?.innerText()).toEqual('Complete');
     const cervicalCancerStatusCell = await table.findCell('Form', 'Survey: Your Cervical cancer', 'Status');
-    await expect(await cervicalCancerStatusCell?.innerText()).toEqual('Complete');
+    expect(await cervicalCancerStatusCell?.innerText()).toEqual('Complete');
     const aboutYouStatusCell = await table.findCell('Form', 'Survey: About You', 'Status');
-    await expect(await aboutYouStatusCell?.innerText()).toEqual('Complete');
+    expect(await aboutYouStatusCell?.innerText()).toEqual('Complete');
     await table.hide();
 
     // Click Add Participant button to add child
@@ -221,16 +221,16 @@ test.describe('Adult self-enroll & child (consent) enrollment', () => {
     expect(headers).toHaveLength(4); // Four columns in table
     expect(headers).toEqual(orderedHeaders);
     researchStatusCell = await table2.findCell('Form', 'Research Consent Form - Parent or Guardian', 'Status');
-    await expect(await researchStatusCell?.innerText()).toEqual('Complete');
+    expect(await researchStatusCell?.innerText()).toEqual('Complete');
     medicalReleaseStatusCell = await table2.findCell('Form', 'Medical Release Form', 'Status');
-    await expect(await medicalReleaseStatusCell?.innerText()).toEqual('Complete');
+    expect(await medicalReleaseStatusCell?.innerText()).toEqual('Complete');
     const pancreaticCancerStatusCell = await table2.findCell(
       'Form',
       "Survey: Your Child's Pancreatic cancer / Pancreatic ductal adenocarcinoma (PDAC)",
       'Status'
     );
-    await expect(await pancreaticCancerStatusCell?.innerText()).toEqual('Complete');
+    expect(await pancreaticCancerStatusCell?.innerText()).toEqual('Complete');
     const aboutYouChildStatusCell = await table2.findCell('Form', 'Survey: About Your Child', 'Status');
-    await expect(await aboutYouChildStatusCell?.innerText()).toEqual('Complete');
+    expect(await aboutYouChildStatusCell?.innerText()).toEqual('Complete');
   });
 });

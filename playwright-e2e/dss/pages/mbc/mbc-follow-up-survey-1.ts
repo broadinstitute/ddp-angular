@@ -1,7 +1,7 @@
 import {MBCPageBase} from './mbc-page-base';
 import {expect, Locator, Page} from '@playwright/test';
 import {waitForNoSpinner} from 'utils/test-utils';
-import Question from '../../component/Question';
+import Question from 'dss/component/Question';
 
 type yesNoDontKnow = 'Yes' | 'No' | "I don't know";
 
@@ -87,8 +87,6 @@ export class MBCFollowUpSurvey1 extends MBCPageBase {
 
   /* Helper functions */
   private async currentMedicationAnswer(opts: MedicationDetails): Promise<void> {
-    await this.page.waitForLoadState('networkidle');
-
     if (opts?.medication) {
       const medication = new Question(this.page, {cssClassAttribute: '.composite-answer-CURRENT_MED_LIST'});
       await medication.toInput().fill(opts.medication);

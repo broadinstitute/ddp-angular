@@ -8,7 +8,6 @@ export default class Modal {
   private readonly rootSelector: Locator;
 
   constructor(private readonly page: Page) {
-    this.page = page;
     this.rootSelector = this.page.locator('.modal-dialog');
   }
 

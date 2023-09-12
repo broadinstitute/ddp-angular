@@ -20,7 +20,7 @@ export default class PreScreeningPage extends SingularPage {
   async signMeUp(opts: { waitForNav?: boolean } = {}): Promise<void> {
     const { waitForNav = false } = opts;
     const navigationPromise = waitForNav ? this.page.waitForNavigation() : Promise.resolve();
-    await Promise.all([navigationPromise, await this.getSignUpButton().click()]);
+    await Promise.all([navigationPromise, this.getSignUpButton().click()]);
   }
 
   /**

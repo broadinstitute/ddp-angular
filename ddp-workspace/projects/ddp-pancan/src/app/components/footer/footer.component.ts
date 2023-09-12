@@ -23,7 +23,7 @@ export class FooterComponent extends BaseFooterComponent {
     }
 
     public openJoinMailingList(): void {
-        const info = 'Pedihcc';
+        const info = ['Pedihcc'];
         this.dialog.open(JoinMailingListComponent, {
             ...JOIN_MAILING_LIST_DIALOG_SETTINGS,
             data: { info },
