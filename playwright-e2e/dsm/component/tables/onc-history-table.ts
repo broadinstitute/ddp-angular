@@ -22,7 +22,7 @@ import Input from '../../../dss/component/input';
 export default class OncHistoryTable extends Table {
   private readonly tissueInformationPage = new TissueInformationPage(this.page);
 
-  constructor(private readonly page: Page) {
+  constructor(protected readonly page: Page) {
     super(page, {cssClassAttribute: '.table'});
   }
 
