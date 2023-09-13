@@ -21,7 +21,14 @@ import { logInfo } from 'utils/log-utils';
 import { waitForResponse } from 'utils/test-utils';
 
 /**
- * Blood sample kit type check with Canada and New York address for LMS and Osteo2 studies
+ * Blood kit prefix check with Canada and New York address for LMS and Osteo2 studies.
+ *
+ * For Blood kit:
+ *  - Upload a kit with address for Canada or NY state
+ *  - Trigger label creation
+ *  - Kit will be on error page
+ *  - Tracking scan
+ *  - Final scan
  */
 
 // don't run in parallel
