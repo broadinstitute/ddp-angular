@@ -176,8 +176,6 @@ export default class TissueInformationPage {
     await this.fillDate(faxSentLocator, date);
   }
 
-  //app-tissue-page/div/div[last()]/table[not(contains(@class, 'table'))]/tr[td[1][text()[normalize-space()='Fax Sent']]]/td[2]
-
   private async fillDate(root: Locator, {date, today}: FillDate): Promise<void> {
     if (today) {
       const todayBtn = new Button(this.page, {root, exactMatch: true, label: 'Today'});
