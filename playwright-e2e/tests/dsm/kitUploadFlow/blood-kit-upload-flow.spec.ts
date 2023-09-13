@@ -87,8 +87,7 @@ test.describe('Blood Kits upload flow', () => {
 
       // deactivate all kits for the participant
       const kitsWithoutLabelPage = await navigation.selectFromSamples<KitsWithoutLabelPage>(SamplesNavEnum.KITS_WITHOUT_LABELS);
-      await kitsWithoutLabelPage.waitForLoad();
-      await kitsWithoutLabelPage.assertPageTitle();
+      await kitsWithoutLabelPage.waitForReady();
       await kitsWithoutLabelPage.selectKitType(kitType);
       await kitsWithoutLabelPage.assertCreateLabelsBtn();
       await kitsWithoutLabelPage.assertReloadKitListBtn();
@@ -97,7 +96,7 @@ test.describe('Blood Kits upload flow', () => {
 
       // Uploads kit
       const kitUploadPage = await navigation.selectFromSamples<KitUploadPage>(SamplesNavEnum.KIT_UPLOAD);
-      await kitUploadPage.waitForLoad();
+      await kitUploadPage.waitForReady();
       await kitUploadPage.assertDisplayedKitTypes(expectedKitTypes);
       await kitUploadPage.selectKitType(kitType);
       await kitUploadPage.assertBrowseBtn();
@@ -114,7 +113,7 @@ test.describe('Blood Kits upload flow', () => {
 
       // Kits without label for extracting a shipping ID
       await navigation.selectFromSamples<KitsWithoutLabelPage>(SamplesNavEnum.KITS_WITHOUT_LABELS);
-      await kitsWithoutLabelPage.waitForLoad();
+      await kitsWithoutLabelPage.waitForReady();
       await kitsWithoutLabelPage.selectKitType(kitType);
       await kitsWithoutLabelPage.assertCreateLabelsBtn();
       await kitsWithoutLabelPage.assertReloadKitListBtn();

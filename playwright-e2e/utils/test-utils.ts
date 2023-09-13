@@ -20,8 +20,9 @@ export async function waitForNoSpinner(page: Page, opts: { timeout?: number } = 
   const appError = page.locator('app-error-snackbar .snackbar-content').first();
   await page.waitForLoadState().catch((err) => logError(err));
   const pageStatus = await Promise.race([
-    spinner.waitFor({ state: 'hidden', timeout }).then(() => 'Ready'),
-    appError.waitFor({ state: 'visible', timeout }).then(() => 'Error')
+    spinner.waitFor({ state: 'hidden' }).then(() => 'Ready'),
+    appError.waitFor({ state: 'visible' }).then(() => 'Error'),
+    new Promise((_, reject) => setTimeout(() => reject(Error('Time out waiting for loading spinner to stop or a app error.')), timeout)),
   ]);
   if (pageStatus === 'Ready') {
     // Check again for app error after spinner stopped
@@ -241,4 +242,12 @@ export function studyShortName(study: StudyEnum): {shortName: string | null; rea
       break;
   }
   return {shortName, realm};
+}
+
+export function shuffle(array: any[]): any[] {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
 }

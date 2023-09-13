@@ -8,6 +8,7 @@ import Checkbox from 'dss/component/checkbox';
 import { waitForNoSpinner, waitForResponse } from 'utils/test-utils';
 import { Filters } from 'dsm/component/filters/filters';
 import { ParticipantListTable } from 'dsm/component/tables/participant-list-table';
+import { SortOrder } from 'dss/component/table';
 
 export default class ParticipantListPage {
   private readonly PAGE_TITLE: string = 'Participant List';
@@ -237,33 +238,38 @@ export default class ParticipantListPage {
     await expect(participantListTable.rowLocator().first()).toBeVisible();
 
     const normalCollaboratorSampleIDColumn = 'Normal Collaborator Sample ID';
+    const registrationDate = 'Registration Date';
     const validColumn = 'Valid';
 
     const customizeViewPanel = this.filters.customizeViewPanel;
     await customizeViewPanel.open();
+    await customizeViewPanel.selectColumns('Participant Columns', [registrationDate]);
     await customizeViewPanel.selectColumns('Sample Columns', [normalCollaboratorSampleIDColumn]);
     await customizeViewPanel.selectColumns('Contact Information Columns', [validColumn]);
 
     await expect(participantListTable.rowLocator().first()).toBeVisible();
 
-    let testParticipantIndex = 0;
-    let participantsRowsCount = await participantListTable.rowsCount;
-    expect(participantsRowsCount).toBeGreaterThanOrEqual(1);
+    let testParticipantIndex = -1;
+    let participantsCount = await participantListTable.rowsCount;
+    expect(participantsCount).toBeGreaterThanOrEqual(1);
 
-    for (let count = 0; count < participantsRowsCount; count++) {
-      const normalCollaboratorSampleID = await participantListTable.getParticipantDataAt(count, normalCollaboratorSampleIDColumn);
-      const isAddressValid = await participantListTable.getParticipantDataAt(count, validColumn);
-      if (normalCollaboratorSampleID.split('\n').length < 28 &&
-        isAddressValid.trim().toLowerCase() === 'true') {
+    for (let count = 0; count < Math.floor(Math.random() * participantsCount); count++) {
+      // Sort Registration Date to pick newest participants
+      await participantListTable.sort(registrationDate, SortOrder.ASC);
+      const normalCollaboratorSampleID = await participantListTable.getTextAt(count, normalCollaboratorSampleIDColumn);
+      const [isAddressValid] = await participantListTable.getTextAt(count, validColumn);
+      if (normalCollaboratorSampleID.length <= 5 && isAddressValid.toLowerCase() === 'true') {
         testParticipantIndex = count;
         break;
       }
-      if (count === participantsRowsCount - 1) {
+      if (count === participantsCount - 1) {
         await participantListTable.nextPage();
-        participantsRowsCount = await participantListTable.rowsCount;
+        participantsCount = await participantListTable.rowsCount;
       }
     }
-
+    if (testParticipantIndex === -1) {
+      throw new Error(`Failed to find a participant for Kit Upload`);
+    }
     return testParticipantIndex;
   }
 }

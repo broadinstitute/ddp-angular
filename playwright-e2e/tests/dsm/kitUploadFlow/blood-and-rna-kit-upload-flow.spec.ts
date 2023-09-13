@@ -69,7 +69,7 @@ test.skip('Verify that a blood & rna kit can be uploaded @dsm @rgp @functional @
     //Deactivate existing kits for participant
     //Note: no blood kits are automatically created for RGP - preliminary deactivation of existing kits is done in case of prior test run
     const kitsWithoutLabelPage = await navigation.selectFromSamples<KitsWithoutLabelPage>(SamplesNavEnum.KITS_WITHOUT_LABELS);
-    await kitsWithoutLabelPage.waitForLoad();
+    await kitsWithoutLabelPage.waitForReady();
     await kitsWithoutLabelPage.assertPageTitle();
     await kitsWithoutLabelPage.selectKitType(kitType);
     await kitsWithoutLabelPage.assertCreateLabelsBtn();
@@ -87,7 +87,7 @@ test.skip('Verify that a blood & rna kit can be uploaded @dsm @rgp @functional @
 
     //Upload a Blood & RNA kit
     const kitUploadPage = await navigation.selectFromSamples<KitUploadPage>(SamplesNavEnum.KIT_UPLOAD);
-    await kitUploadPage.waitForLoad();
+    await kitUploadPage.waitForReady();
     await kitUploadPage.assertPageTitle();
     await kitUploadPage.assertDisplayedKitTypes(expectedKitTypes);
     await kitUploadPage.selectKitType(kitType);
@@ -98,7 +98,7 @@ test.skip('Verify that a blood & rna kit can be uploaded @dsm @rgp @functional @
 
     //Go to Kits w/o Label to extract a shipping ID
     await navigation.selectFromSamples<KitsWithoutLabelPage>(SamplesNavEnum.KITS_WITHOUT_LABELS);
-    await kitsWithoutLabelPage.waitForLoad();
+    await kitsWithoutLabelPage.waitForReady();
     await kitsWithoutLabelPage.selectKitType(kitType);
     await kitsWithoutLabelPage.assertCreateLabelsBtn();
     await kitsWithoutLabelPage.assertReloadKitListBtn();

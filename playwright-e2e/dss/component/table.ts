@@ -314,11 +314,30 @@ export default class Table {
     return checkbox;
   }
 
-  async selectRowByRowIndex(rowIndex = 0): Promise<void> {
+  async selectSingleRowByIndex(rowIndex = 0): Promise<void> {
     const cell = this.cell(rowIndex, 0);
     const checkbox = new Checkbox(this.page, { root: cell });
     await checkbox.click();
     await waitForNoSpinner(this.page);
+  }
+
+  public async getTextAt(rowIndex: number, columnName: string, opts: { exactMatch?: boolean } = {}): Promise<string[]> {
+    const values: string[] = [];
+    const columnIndex = await this.getHeaderIndex(columnName, opts);
+    if (columnIndex === -1) {
+      throw new Error(`Column ${columnName}: Not found`);
+    }
+    const cell = this.cell(rowIndex, columnIndex);
+    const li = await cell.locator('li').count() > 0;
+    if (li) {
+      const allLi = await cell.locator('li').all();
+      for (const item of allLi) {
+        values.push((await item.innerText()).trim());
+      }
+    } else {
+      values.push((await cell.innerText()).trim());
+    }
+    return values;
   }
 
   private parseForNumber(text: string): number | null {

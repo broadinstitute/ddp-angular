@@ -3,6 +3,7 @@ import {KitsColumnsEnum} from 'dsm/pages/kitsInfo-pages/enums/kitsColumns-enum';
 import Table from 'dss/component/table';
 import {KitsPaginator} from 'lib/component/dsm/paginators/kitsPaginator';
 import {rows} from 'lib/component/dsm/paginators/types/rowsPerPage';
+import { waitForNoSpinner } from 'utils/test-utils';
 
 
 export class KitsTable extends Table {
@@ -30,6 +31,7 @@ export class KitsTable extends Table {
       .toBeVisible();
 
     await searchInputHeader.fill(value);
+    await waitForNoSpinner(this.page);
   }
 
   public async getData(columnName: KitsColumnsEnum): Promise<string> {

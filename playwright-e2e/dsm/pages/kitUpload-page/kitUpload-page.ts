@@ -18,7 +18,7 @@ export default class KitUploadPage {
   constructor(private readonly page: Page) {
   }
 
-  public async waitForLoad(): Promise<void> {
+  public async waitForReady(): Promise<void> {
     await this.page.waitForLoadState('networkidle');
     await waitForNoSpinner(this.page);
     await this.assertPageTitle();

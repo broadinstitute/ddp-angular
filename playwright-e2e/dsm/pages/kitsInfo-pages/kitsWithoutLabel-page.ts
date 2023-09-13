@@ -32,7 +32,7 @@ export default class KitsWithoutLabelPage {
     await this.kitsTable.rowsPerPage(rows);
   }
 
-  public async waitForLoad(): Promise<void> {
+  public async waitForReady(): Promise<void> {
     await this.assertPageTitle();
     await waitForNoSpinner(this.page);
     await expect(async () => expect(await this.page.locator('mat-checkbox[id]').count()).toBeGreaterThanOrEqual(1))
