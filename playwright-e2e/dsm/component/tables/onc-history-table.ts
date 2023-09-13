@@ -9,7 +9,6 @@ import {
 } from "../tabs/enums/onc-history-input-columns-enum";
 import {OncHistoryInputs} from "../tabs/models/onc-history-inputs";
 import {
-  OncHistoryDateInput,
   OncHistoryInputsMapValue,
   OncHistoryInputsTypes
 } from "../tabs/interfaces/onc-history-inputs-types";
@@ -17,6 +16,8 @@ import {waitForResponse} from "../../../utils/test-utils";
 import Select from "../../../dss/component/select";
 import TissueInformationPage from "../../pages/tissue-information-page/tissue-information-page";
 import Button from "../../../dss/component/button";
+import {FillDate} from "../../pages/tissue-information-page/interfaces/tissue-information-interfaces";
+import Input from "../../../dss/component/input";
 
 export default class OncHistoryTable extends Table {
   private readonly tissueInformationPage = new TissueInformationPage(this.page);
@@ -54,22 +55,19 @@ export default class OncHistoryTable extends Table {
 
     switch (inputType) {
       case InputTypeEnum.INPUT: {
-        const inputLocator = this.input(cell);
-        value = inputLocator.inputValue();
+        value = new Input(this.page, {root: cell}).currentValue;
         break;
       }
       case InputTypeEnum.DATE: {
-        const inputLocator = this.input(cell);
-        value = inputLocator.inputValue();
+        value = new Input(this.page, {root: cell}).currentValue;
         break;
       }
       case InputTypeEnum.TEXTAREA: {
-        const textArea = new TextArea(this.page, {root: cell});
-        value = textArea.currentValue;
+        value = new TextArea(this.page, {root: cell}).currentValue;
         break;
       }
       case InputTypeEnum.SELECT: {
-        value = this.activeSelectedRequestListItem(cell).textContent();
+        value = new Select(this.page, {root: cell}).currentValue;
         break;
       }
       default:
@@ -86,8 +84,11 @@ export default class OncHistoryTable extends Table {
     const notesModalContent = this.notesModalContent;
     await expect(notesModalContent, `Notes modal at ${index} index is not visible`).toBeVisible();
     const textarea = new TextArea(this.page, {root: notesModalContent});
-    await textarea.fill(note);
-    await waitForResponse(this.page, {uri: 'patch'});
+    const currentValue = await textarea.currentValue;
+    if(currentValue.trim() !== note) {
+      await textarea.fill(note);
+      await waitForResponse(this.page, {uri: 'patch'});
+    }
     const saveAndCloseBtn = new Button(this.page, {root: notesModalContent, label: 'Save & Close'});
     await saveAndCloseBtn.click();
   }
@@ -95,8 +96,7 @@ export default class OncHistoryTable extends Table {
   public async fillField(columnName: OncHistoryInputColumnsEnum, {
     date,
     select,
-    value,
-    force = true
+    value
   }: OncHistoryInputsTypes, rowIndex: number = 0): Promise<void> {
     const cell = await this.checkColumnAndCellValidity(columnName, rowIndex);
 
@@ -107,15 +107,15 @@ export default class OncHistoryTable extends Table {
 
     switch (inputType) {
       case InputTypeEnum.DATE: {
-        await this.fillDate(cell, date as OncHistoryDateInput, hasLookup, force);
+        date && await this.fillDate(cell, date);
         break;
       }
       case InputTypeEnum.INPUT: {
-        await this.fillInput(cell, String(value), hasLookup, force);
+        await this.fillInput(cell, String(value), hasLookup);
         break;
       }
       case InputTypeEnum.TEXTAREA: {
-        await this.fillTextArea(cell, String(value), hasLookup, force);
+        await this.fillTextArea(cell, String(value), hasLookup);
         break;
       }
       case InputTypeEnum.SELECT: {
@@ -128,60 +128,59 @@ export default class OncHistoryTable extends Table {
   }
 
   /* Helper Functions */
-  private async fillInput(root: Locator, value: string, hasLookup: boolean, force: boolean): Promise<void> {
-    const inputLocator = this.input(root);
-    const hasInputValue = await inputLocator.inputValue();
-    if (hasInputValue && !force) {
-      return;
+  private async fillInput(root: Locator, value: string | number, hasLookup: boolean): Promise<void> {
+    const inputElement = new Input(this.page, {root});
+    const currentValue = await this.getCurrentValue(inputElement);
+    let actualValue = typeof value === 'number' ? value.toString() : value;
+    const maxLength = await inputElement.maxLength;
+
+    if (maxLength && actualValue.length > Number(maxLength)) {
+      actualValue = actualValue.slice(0, Number(maxLength));
     }
-    if (hasInputValue && force) {
-      const tempFillValue = hasLookup ? new Date().getTime().toString() : '';
-      await inputLocator.fill(tempFillValue);
-      await inputLocator.blur();
+
+    if (currentValue !== actualValue) {
+      await inputElement.fillSimple(actualValue);
       await waitForResponse(this.page, {uri: 'patch'});
+      hasLookup && await this.lookup();
     }
-    await inputLocator.fill(value);
-    await inputLocator.blur();
-    hasLookup && await this.lookup(2);
-    await waitForResponse(this.page, {uri: 'patch'});
   }
 
-  private async fillDate(root: Locator, date: OncHistoryDateInput, hasLookup: boolean, force: boolean): Promise<void> {
-    const inputLocator = this.input(root);
-    const hasInputValue = await inputLocator.inputValue();
-    if (hasInputValue && !force) {
-      return;
-    }
-    const datePicker = new DatePicker(this.page, {root: root});
-    await datePicker.open();
-    await datePicker.pickDate(date);
-    await datePicker.close();
-    hasLookup && await this.lookup();
-    await waitForResponse(this.page, {uri: 'patch'});
-  }
-
-  private async fillTextArea(root: Locator, value: string, hasLookup: boolean, force: boolean): Promise<void> {
-    const textArea = new TextArea(this.page, {root: root});
-    const hasValue = await textArea.currentValue;
-    if (hasValue && !force) {
-      return;
-    }
-    if (hasValue && force) {
-      const tempFillValue = hasLookup ? new Date().getTime().toString() : '';
-      await textArea.fill(tempFillValue, false);
-      await textArea.blur();
+  private async fillDate(root: Locator, {date, today}: FillDate): Promise<void> {
+    if (today) {
+      const todayBtn = new Button(this.page, {root: root, label: 'Today'});
+      await todayBtn.click();
+      await waitForResponse(this.page, {uri: 'patch'});
+    } else if (date) {
+      const datePicker = new DatePicker(this.page, {root: root});
+      await datePicker.open();
+      await datePicker.pickDate(date);
+      await datePicker.close();
       await waitForResponse(this.page, {uri: 'patch'});
     }
-    await textArea.fill(value, false);
-    await textArea.blur();
-    hasLookup && await this.lookup();
-    await waitForResponse(this.page, {uri: 'patch'});
+  }
+
+  private async fillTextArea(root: Locator, value: string | number, hasLookup: boolean): Promise<void> {
+    const textarea = new TextArea(this.page, {root});
+    const currentValue = await this.getCurrentValue(textarea);
+    let actualValue = typeof value === 'number' ? value.toString() : value;
+    const maxLength = await textarea.maxLength;
+
+    if(maxLength && actualValue.length > Number(maxLength)) {
+      actualValue = actualValue.slice(0, Number(maxLength));
+    }
+
+    if (currentValue !== actualValue) {
+      await textarea.fill(actualValue, false);
+      await textarea.blur();
+      await waitForResponse(this.page, {uri: 'patch'});
+      hasLookup && await this.lookup();
+    }
   }
 
   private async selectRequest(root: Locator, selectRequest: OncHistorySelectRequestEnum): Promise<void> {
     const matSelect = this.activeSelectedRequestListItem(root);
     const selectedValue = await matSelect.textContent();
-    if(selectedValue?.trim() !== selectRequest) {
+    if (selectedValue?.trim() !== selectRequest) {
       const selectInput = new Select(this.page, {root: root});
       await selectInput.selectOption(selectRequest);
       await waitForResponse(this.page, {uri: 'patch'});
@@ -189,12 +188,21 @@ export default class OncHistoryTable extends Table {
   }
 
   private async lookup(selectIndex: number = 0): Promise<void> {
-    await waitForResponse(this.page, {uri: 'lookup'});
     const lookupList = this.lookupList;
     const count = await lookupList.count();
     if (count > 0 && selectIndex < count) {
       await lookupList.nth(selectIndex).click();
+      await waitForResponse(this.page, {uri: 'patch'});
     }
+  }
+
+  private async getCurrentValue(element: Input | Select | TextArea): Promise<string> {
+    const currentValue = await element.currentValue;
+    const isDisabled = await element.isDisabled();
+
+    await expect(isDisabled, `Input field is disabled`).toBeFalsy();
+
+    return currentValue?.trim();
   }
 
 
@@ -243,14 +251,10 @@ export default class OncHistoryTable extends Table {
     return this.page.locator(this.tdXPath(columnName));
   }
 
-  private input(root: Locator): Locator {
-    return root.locator(this.inputXPath);
-  }
-
   /* Assertions */
   private async checkColumnAndCellValidity(columnName: OncHistoryInputColumnsEnum, rowIndex: number): Promise<Locator> {
     let column = this.column(columnName);
-    if(await column.count() > 1) {
+    if (await column.count() > 1) {
       column = column.nth(1);
     }
     await expect(column, `Onc History Table - the column ${columnName} doesn't exist`)

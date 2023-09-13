@@ -6,7 +6,7 @@ import path from 'path';
  * https://github.com/motdotla/dotenv
  */
 import * as dotenv from 'dotenv';
-dotenv.config({ path: path.resolve(__dirname, '.env') });
+dotenv.config({ path: path.resolve(__dirname, 'config','.env.dev') });
 
 /**
  * Base Playwright TestConfig.
@@ -41,7 +41,7 @@ const testConfig: PlaywrightTestConfig = {
   fullyParallel: false,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
-  retries: 1,
+  retries: 0,
   workers: process.env.CI ? 2 : 4,
   maxFailures: 0,
 
@@ -80,7 +80,7 @@ const testConfig: PlaywrightTestConfig = {
       mode: 'only-on-failure',
       fullPage: true
     },
-    video: 'retain-on-failure', // Limit load on CI system because trace and video add load
+    video: 'on', // Limit load on CI system because trace and video add load
 
     userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36',
     viewport: { width: 1280, height: 960 },

@@ -1,10 +1,8 @@
-import {Download, expect, Locator, Page} from "@playwright/test";
+import {expect, Locator, Page} from "@playwright/test";
 import OncHistoryTable from "../tables/onc-history-table";
 import {waitForResponse} from "../../../utils/test-utils";
 import Select from "../../../dss/component/select";
 import Button from "../../../dss/component/button";
-const fs = require('fs');
-const pdf = require('pdf-parse');
 
 
 export default class OncHistoryTab {
@@ -43,11 +41,27 @@ export default class OncHistoryTab {
 
   public async downloadPDFBundle(): Promise<void> {
     const downloadPDFBundleBtn = this.downloadPDFBundleButton;
+    await this.downloadPDFFlow(downloadPDFBundleBtn);
 
-    await expect(downloadPDFBundleBtn, `Download PDF Bundle Button is not visible`).toBeVisible();
-    await expect(downloadPDFBundleBtn, `Download PDF Bundle Button is not enabled`).toBeEnabled();
+  }
 
-    await downloadPDFBundleBtn.click();
+  public async downloadRequestDocuments(): Promise<void> {
+    const downloadPDFBundleBtn = this.downloadRequestDocumentsButton;
+    await this.downloadPDFFlow(downloadPDFBundleBtn);
+  }
+
+
+
+  /* Helper Functions */
+
+  /*
+    @TODO: once the PDF file is fixed, this will be updated
+   */
+  private async downloadPDFFlow(downloadBtn: Locator): Promise<void> {
+    await expect(downloadBtn, `Download PDF Bundle Button is not visible`).toBeVisible();
+    await expect(downloadBtn, `Download PDF Bundle Button is not enabled`).toBeEnabled();
+
+    await downloadBtn.click();
     await this.requestAnyway();
     const downloadingText = this.page.getByText('Downloading... This might take a while');
     await expect(downloadingText, 'Downloading text is not visible').toBeVisible();
@@ -58,38 +72,6 @@ export default class OncHistoryTab {
     await expect(downloadFinishedText, 'Downloading finished is not visible').toBeVisible();
   }
 
-  public async downloadRequestDocuments(): Promise<void> {
-    const downloadPDFBundleBtn = this.downloadRequestDocumentsButton;
-
-    await expect(downloadPDFBundleBtn, `Download Request Documents is not visible`).toBeVisible();
-    await expect(downloadPDFBundleBtn, `Download Request Documents Button disabled`).toBeEnabled();
-
-    await downloadPDFBundleBtn.click();
-    const downloadPDF = await this.downloadPDF();
-    const fileName = downloadPDF.suggestedFilename();
-    const filePath = await downloadPDF.path();
-    await downloadPDF.saveAs(fileName);
-    console.log(fileName)
-    console.log(filePath)
-    /* download */
-    // const download = await downloadPromise;
-    // console.log(await download.path());
-    // await download.saveAs('tempFile.pdf');
-    /* ------- */
-
-    // await waitForResponse(this.page, {uri: 'downloadPDF'});
-
-    const downloadFinishedText = this.page.getByText('Download finished.');
-    await expect(downloadFinishedText, 'Downloading finished is not visible').toBeVisible();
-
-    let dataBuffer = fs.readFileSync(filePath);
-    pdf(dataBuffer)
-      .then((data: any) => {
-        console.log(data.text)
-      })
-  }
-
-  /* Helper Functions */
   private async requestAnyway(): Promise<void> {
     const requestAnywayBtn = this.page.getByRole('button', {name: 'Request Anyway'});
     if(await requestAnywayBtn.isVisible()) {
@@ -97,12 +79,20 @@ export default class OncHistoryTab {
     }
   }
 
-  private async downloadPDF(): Promise<Download> {
-    const [download] = await Promise.all([
+  private async downloadPDF(downloadBtn: Locator): Promise<string | null> {
+    await downloadBtn.click();
+
+    const [downloadedPDF] = await Promise.all([
       this.page.waitForEvent('download'),
+      waitForResponse(this.page, {uri: 'downloadPDF'}),
       this.requestAnyway()
     ]);
-    return download;
+
+    const fileName = downloadedPDF.suggestedFilename();
+    const filePath = await downloadedPDF.path();
+    await downloadedPDF.saveAs(fileName);
+
+    return filePath;
   }
 
 

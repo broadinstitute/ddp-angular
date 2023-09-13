@@ -1,8 +1,10 @@
 import {waitForResponse} from "../../utils/test-utils";
 import {expect, Locator, Page} from "@playwright/test";
 import {
-  SequencingResultsEnum, SMIdEnum,
-  TissueDynamicFieldsEnum, TissueTypesEnum,
+  SequencingResultsEnum,
+  SMIdEnum,
+  TissueDynamicFieldsEnum,
+  TissueTypesEnum,
   TumorTypesEnum
 } from "../pages/tissue-information-page/enums/tissue-information-enum";
 import TextArea from "../../dss/component/textarea";
@@ -61,7 +63,7 @@ export default class Tissue {
     return value;
   }
 
-  public async fillSmIDs(SMID: SMIdEnum): Promise<SMID> {
+  public async fillSMIDs(SMID: SMIdEnum): Promise<SMID> {
     const SMIDLocator = await this.getField(SMID);
     const SMIDPlusBtn = new Button(this.page, {root: SMIDLocator});
     await SMIDPlusBtn.click();
@@ -146,6 +148,11 @@ export default class Tissue {
     }
 
     if (currentValue !== actualValue) {
+      if(!currentValue && dynamicField == TissueDynamicFieldsEnum.TUMOR_COLLABORATOR_SAMPLE_ID) {
+        await inputElement.focus();
+        const dropDown = this.page.locator("//ul[contains(@class, 'Lookup--Dropdown')]/li");
+        await dropDown.nth(0).click();
+      }
       await inputElement.fillSimple(actualValue);
       await waitForResponse(this.page, {uri: 'patch'});
       hasLookup && await this.lookup();
@@ -180,10 +187,11 @@ export default class Tissue {
     }
   }
 
-  private async getCurrentValue(dynamicField: TissueDynamicFieldsEnum, element: any): Promise<string> {
-    const currentValue = await element?.currentValue;
+  private async getCurrentValue(dynamicField: TissueDynamicFieldsEnum, element: Input | Select | TextArea): Promise<string> {
+    const currentValue = await element.currentValue;
+    const isDisabled = await element.isDisabled();
 
-    await expect(element, `${dynamicField}' is disabled`).toBeEnabled();
+    await expect(isDisabled, `'${dynamicField}' is disabled`).toBeFalsy();
 
     return currentValue?.trim();
   }
