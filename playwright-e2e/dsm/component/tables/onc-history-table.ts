@@ -1,23 +1,23 @@
-import {expect, Locator, Page} from "@playwright/test";
-import Table from "dss/component/table";
-import DatePicker from "../date-picker";
-import TextArea from "../../../dss/component/textarea";
+import {expect, Locator, Page} from '@playwright/test';
+import Table from 'dss/component/table';
+import DatePicker from '../date-picker';
+import TextArea from '../../../dss/component/textarea';
 import {
   InputTypeEnum,
   OncHistoryInputColumnsEnum,
   OncHistorySelectRequestEnum
-} from "../tabs/enums/onc-history-input-columns-enum";
-import {OncHistoryInputs} from "../tabs/models/onc-history-inputs";
+} from '../tabs/enums/onc-history-input-columns-enum';
+import {OncHistoryInputs} from '../tabs/models/onc-history-inputs';
 import {
   OncHistoryInputsMapValue,
   OncHistoryInputsTypes
-} from "../tabs/interfaces/onc-history-inputs-types";
-import {waitForResponse} from "../../../utils/test-utils";
-import Select from "../../../dss/component/select";
-import TissueInformationPage from "../../pages/tissue-information-page/tissue-information-page";
-import Button from "../../../dss/component/button";
-import {FillDate} from "../../pages/tissue-information-page/interfaces/tissue-information-interfaces";
-import Input from "../../../dss/component/input";
+} from '../tabs/interfaces/onc-history-inputs-types';
+import {waitForResponse} from '../../../utils/test-utils';
+import Select from '../../../dss/component/select';
+import TissueInformationPage from '../../pages/tissue-information-page/tissue-information-page';
+import Button from '../../../dss/component/button';
+import {FillDate} from '../../pages/tissue-information-page/interfaces/tissue-information-interfaces';
+import Input from '../../../dss/component/input';
 
 export default class OncHistoryTable extends Table {
   private readonly tissueInformationPage = new TissueInformationPage(this.page);
@@ -44,7 +44,7 @@ export default class OncHistoryTable extends Table {
     await waitForResponse(this.page, {uri: 'patch'});
   }
 
-  public async getFieldValue(columnName: OncHistoryInputColumnsEnum, rowIndex: number = 0): Promise<string> {
+  public async getFieldValue(columnName: OncHistoryInputColumnsEnum, rowIndex = 0): Promise<string> {
     const cell = await this.checkColumnAndCellValidity(columnName, rowIndex);
 
     const {
@@ -77,7 +77,7 @@ export default class OncHistoryTable extends Table {
     return value;
   }
 
-  public async fillNotes(note: string, index: number = 0): Promise<void> {
+  public async fillNotes(note: string, index = 0): Promise<void> {
     const notesIcon = this.notesIconButton(index);
     await expect(notesIcon, `Notes icon at ${index} index is not visible`).toBeVisible();
     await notesIcon.click();
@@ -85,7 +85,7 @@ export default class OncHistoryTable extends Table {
     await expect(notesModalContent, `Notes modal at ${index} index is not visible`).toBeVisible();
     const textarea = new TextArea(this.page, {root: notesModalContent});
     const currentValue = await textarea.currentValue;
-    if(currentValue.trim() !== note) {
+    if (currentValue.trim() !== note) {
       await textarea.fill(note);
       await waitForResponse(this.page, {uri: 'patch'});
     }
@@ -97,7 +97,7 @@ export default class OncHistoryTable extends Table {
     date,
     select,
     value
-  }: OncHistoryInputsTypes, rowIndex: number = 0): Promise<void> {
+  }: OncHistoryInputsTypes, rowIndex = 0): Promise<void> {
     const cell = await this.checkColumnAndCellValidity(columnName, rowIndex);
 
     const {
@@ -147,11 +147,11 @@ export default class OncHistoryTable extends Table {
 
   private async fillDate(root: Locator, {date, today}: FillDate): Promise<void> {
     if (today) {
-      const todayBtn = new Button(this.page, {root: root, label: 'Today'});
+      const todayBtn = new Button(this.page, {root, label: 'Today'});
       await todayBtn.click();
       await waitForResponse(this.page, {uri: 'patch'});
     } else if (date) {
-      const datePicker = new DatePicker(this.page, {root: root});
+      const datePicker = new DatePicker(this.page, {root});
       await datePicker.open();
       await datePicker.pickDate(date);
       await datePicker.close();
@@ -165,7 +165,7 @@ export default class OncHistoryTable extends Table {
     let actualValue = typeof value === 'number' ? value.toString() : value;
     const maxLength = await textarea.maxLength;
 
-    if(maxLength && actualValue.length > Number(maxLength)) {
+    if (maxLength && actualValue.length > Number(maxLength)) {
       actualValue = actualValue.slice(0, Number(maxLength));
     }
 
@@ -181,13 +181,13 @@ export default class OncHistoryTable extends Table {
     const matSelect = this.activeSelectedRequestListItem(root);
     const selectedValue = await matSelect.textContent();
     if (selectedValue?.trim() !== selectRequest) {
-      const selectInput = new Select(this.page, {root: root});
+      const selectInput = new Select(this.page, {root});
       await selectInput.selectOption(selectRequest);
       await waitForResponse(this.page, {uri: 'patch'});
     }
   }
 
-  private async lookup(selectIndex: number = 0): Promise<void> {
+  private async lookup(selectIndex = 0): Promise<void> {
     const lookupList = this.lookupList;
     const count = await lookupList.count();
     if (count > 0 && selectIndex < count) {
@@ -215,7 +215,7 @@ export default class OncHistoryTable extends Table {
     return root.locator('mat-select').locator('span.mat-select-min-line');
   }
 
-  private notesIconButton(index: number = 0): Locator {
+  private notesIconButton(index = 0): Locator {
     return this.row(index).locator('td').locator('//button[.//*[name()=\'svg\' and @data-icon=\'comment-alt\']]');
   }
 
@@ -223,11 +223,11 @@ export default class OncHistoryTable extends Table {
     return this.page.locator('app-onc-history-detail').locator('app-modal').locator('.modal-content');
   }
 
-  private deleteRowButton(index: number = 0): Locator {
+  private deleteRowButton(index = 0): Locator {
     return this.row(index).locator('td').last().getByRole('button');
   }
 
-  private selectRowCheckbox(index: number = 0): Locator {
+  private selectRowCheckbox(index = 0): Locator {
     return this.firstRequestColumn(index).locator('mat-checkbox');
   }
 
@@ -261,7 +261,7 @@ export default class OncHistoryTable extends Table {
       .toBeVisible();
 
     const cell: Locator = this.td(columnName).nth(rowIndex);
-    await expect(cell, 'Kits Table - more than one column was found with the same name ' + columnName)
+    await expect(cell, `Kits Table - more than one column was found with the same name ${columnName}`)
       .toHaveCount(1);
 
     return cell;
@@ -300,5 +300,4 @@ export default class OncHistoryTable extends Table {
   private get inputXPath(): string {
     return '//mat-form-field//input'
   }
-
 }

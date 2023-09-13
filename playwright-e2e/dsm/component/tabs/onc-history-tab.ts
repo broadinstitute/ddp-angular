@@ -1,8 +1,8 @@
-import {expect, Locator, Page} from "@playwright/test";
-import OncHistoryTable from "../tables/onc-history-table";
-import {waitForResponse} from "../../../utils/test-utils";
-import Select from "../../../dss/component/select";
-import Button from "../../../dss/component/button";
+import {expect, Locator, Page} from '@playwright/test';
+import OncHistoryTable from '../tables/onc-history-table';
+import {waitForResponse} from '../../../utils/test-utils';
+import Select from '../../../dss/component/select';
+import Button from '../../../dss/component/button';
 
 
 export default class OncHistoryTab {
@@ -42,14 +42,12 @@ export default class OncHistoryTab {
   public async downloadPDFBundle(): Promise<void> {
     const downloadPDFBundleBtn = this.downloadPDFBundleButton;
     await this.downloadPDFFlow(downloadPDFBundleBtn);
-
   }
 
   public async downloadRequestDocuments(): Promise<void> {
     const downloadPDFBundleBtn = this.downloadRequestDocumentsButton;
     await this.downloadPDFFlow(downloadPDFBundleBtn);
   }
-
 
 
   /* Helper Functions */
@@ -74,7 +72,7 @@ export default class OncHistoryTab {
 
   private async requestAnyway(): Promise<void> {
     const requestAnywayBtn = this.page.getByRole('button', {name: 'Request Anyway'});
-    if(await requestAnywayBtn.isVisible()) {
+    if (await requestAnywayBtn.isVisible()) {
       await requestAnywayBtn.click();
     }
   }
@@ -106,11 +104,11 @@ export default class OncHistoryTab {
   }
 
   private filesOrderModalBodyContent(name: string): Locator {
-    return this.page.locator(`//app-participant-page/app-modal//div[@class='modal-body']//table/tbody/tr[td[text()[normalize-space()='${name}']]]/td[1]`);
+    return this.page.locator(`//app-participant-page/app-modal//div[@class='modal-body']` +
+      `//table/tbody/tr[td[text()[normalize-space()='${name}']]]/td[1]`);
   }
 
   private get filesOrderModalFooter(): Locator {
     return this.page.locator(`//app-participant-page/app-modal//div[@class='modal-footer']`);
   }
-
 }

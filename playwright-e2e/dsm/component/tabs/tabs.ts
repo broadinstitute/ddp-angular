@@ -3,7 +3,7 @@ import {TabEnum} from 'dsm/component/tabs/enums/tab-enum';
 import ContactInformationTab from 'dsm/component/tabs/contact-information-tab';
 import GenomeStudyTab from 'dsm/component/tabs/genome-study-tab';
 import SampleInformationTab from 'dsm/component/tabs/sample-information-tab';
-import OncHistoryTab from "./onc-history-tab";
+import OncHistoryTab from './onc-history-tab';
 
 export default class Tabs {
   private readonly tabs = new Map<string, object>([

@@ -71,7 +71,7 @@ export enum TissueDynamicFieldsEnum {
 
 export enum ProblemWithTissueEnum {
   INSUFFICIENT_MATERIAL_PER_PATH = 'Insufficient material per path',
-  INSUFFICIENT_MATERIAL_PER_SHL =  'Insufficient material per SHL',
+  INSUFFICIENT_MATERIAL_PER_SHL = 'Insufficient material per SHL',
   NO_E_SIGNATURES = 'No e signatures',
   PATH_DEPARTMENT_POLICY = 'Path department policy',
   PATH_DEPARTMENT_UNABLE_TO_LOCATE = 'Path department unable to locate',

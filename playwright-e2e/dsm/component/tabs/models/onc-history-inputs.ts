@@ -1,5 +1,5 @@
-import {InputTypeEnum, OncHistoryInputColumnsEnum} from "../enums/onc-history-input-columns-enum";
-import {OncHistoryInputsMapValue} from "../interfaces/onc-history-inputs-types";
+import {InputTypeEnum, OncHistoryInputColumnsEnum} from '../enums/onc-history-input-columns-enum';
+import {OncHistoryInputsMapValue} from '../interfaces/onc-history-inputs-types';
 
 export const OncHistoryInputs = new Map<OncHistoryInputColumnsEnum, OncHistoryInputsMapValue>()
   .set(OncHistoryInputColumnsEnum.DATE_OF_PX, {type: InputTypeEnum.DATE, hasLookup: false})

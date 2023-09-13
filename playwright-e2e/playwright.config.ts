@@ -6,7 +6,7 @@ import path from 'path';
  * https://github.com/motdotla/dotenv
  */
 import * as dotenv from 'dotenv';
-dotenv.config({ path: path.resolve(__dirname, 'config','.env.dev') });
+dotenv.config({ path: path.resolve(__dirname, 'config', '.env.dev') });
 
 /**
  * Base Playwright TestConfig.
