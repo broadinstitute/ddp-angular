@@ -1,6 +1,6 @@
-import {InputTypeEnum} from "../../../component/tabs/enums/onc-history-input-columns-enum";
-import {TissueInputsMapValue} from "../interfaces/tissue-information-interfaces";
-import {TissueDynamicFieldsEnum} from "../enums/tissue-information-enum";
+import {InputTypeEnum} from '../../../component/tabs/enums/onc-history-input-columns-enum';
+import {TissueInputsMapValue} from '../interfaces/tissue-information-interfaces';
+import {TissueDynamicFieldsEnum} from '../enums/tissue-information-enum';
 
 export const tissueInputs = new Map<TissueDynamicFieldsEnum, TissueInputsMapValue>()
   .set(TissueDynamicFieldsEnum.NOTES, {type: InputTypeEnum.TEXTAREA, hasLookup: false, byText: false})

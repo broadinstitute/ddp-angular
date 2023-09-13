@@ -1,25 +1,25 @@
-import {waitForResponse} from "../../utils/test-utils";
-import {expect, Locator, Page} from "@playwright/test";
+import {waitForResponse} from '../../utils/test-utils';
+import {expect, Locator, Page} from '@playwright/test';
 import {
   SequencingResultsEnum,
   SMIdEnum,
   TissueDynamicFieldsEnum,
   TissueTypesEnum,
   TumorTypesEnum
-} from "../pages/tissue-information-page/enums/tissue-information-enum";
-import TextArea from "../../dss/component/textarea";
+} from '../pages/tissue-information-page/enums/tissue-information-enum';
+import TextArea from '../../dss/component/textarea';
 import {
   FillDate,
   TissueInputsMapValue
-} from "../pages/tissue-information-page/interfaces/tissue-information-interfaces";
-import Select from "../../dss/component/select";
-import DatePicker from "./date-picker";
-import Input from "../../dss/component/input";
-import {FillTissue} from "../pages/tissue-information-page/interfaces/fill-tissue-interface";
-import {tissueInputs} from "../pages/tissue-information-page/models/tissue-inputs";
-import {InputTypeEnum} from "./tabs/enums/onc-history-input-columns-enum";
-import Button from "../../dss/component/button";
-import SMID from "./smid";
+} from '../pages/tissue-information-page/interfaces/tissue-information-interfaces';
+import Select from '../../dss/component/select';
+import DatePicker from './date-picker';
+import Input from '../../dss/component/input';
+import {FillTissue} from '../pages/tissue-information-page/interfaces/fill-tissue-interface';
+import {tissueInputs} from '../pages/tissue-information-page/models/tissue-inputs';
+import {InputTypeEnum} from './tabs/enums/onc-history-input-columns-enum';
+import Button from '../../dss/component/button';
+import SMID from './smid';
 
 export default class Tissue {
   private readonly SMIDModal: SMID = new SMID(this.page, this.tissueIndex);
@@ -76,7 +76,6 @@ export default class Tissue {
     select,
     dates
   }: FillTissue): Promise<void> {
-
     const {
       type: inputType,
       hasLookup,
@@ -103,7 +102,6 @@ export default class Tissue {
       default:
         throw new Error(`Incorrect input type - ${inputType}`)
     }
-
   }
 
   /* Helper Functions */
@@ -114,7 +112,7 @@ export default class Tissue {
     let actualValue = typeof value === 'number' ? value.toString() : value;
     const maxLength = await textarea.maxLength;
 
-    if(maxLength && actualValue.length > Number(maxLength)) {
+    if (maxLength && actualValue.length > Number(maxLength)) {
       actualValue = actualValue.slice(0, Number(maxLength));
     }
 
@@ -125,7 +123,9 @@ export default class Tissue {
     }
   }
 
-  private async selectField(dynamicField: TissueDynamicFieldsEnum, selection: TumorTypesEnum | TissueTypesEnum | SequencingResultsEnum | 'Yes' | 'No'): Promise<void> {
+  private async selectField(dynamicField: TissueDynamicFieldsEnum,
+                            selection: TumorTypesEnum | TissueTypesEnum | SequencingResultsEnum | 'Yes' | 'No')
+    : Promise<void> {
     const selectLocator = await this.getField(dynamicField);
     const selectElement = new Select(this.page, {root: selectLocator});
     const currentValue = await this.getCurrentValue(dynamicField, selectElement);
@@ -136,19 +136,19 @@ export default class Tissue {
     }
   }
 
-  private async fillInputField(dynamicField: TissueDynamicFieldsEnum, value: string | number, byText: boolean = false, hasLookup: boolean = false): Promise<void> {
+  private async fillInputField(dynamicField: TissueDynamicFieldsEnum, value: string | number, byText = false, hasLookup = false): Promise<void> {
     const inputLocator = await this.getField(dynamicField, byText);
     const inputElement = new Input(this.page, {root: inputLocator});
     const currentValue = await this.getCurrentValue(dynamicField, inputElement);
     let actualValue = typeof value === 'number' ? value.toString() : value;
     const maxLength = await inputElement.maxLength;
 
-    if(maxLength && actualValue.length > Number(maxLength)) {
+    if (maxLength && actualValue.length > Number(maxLength)) {
       actualValue = actualValue.slice(0, Number(maxLength));
     }
 
     if (currentValue !== actualValue) {
-      if(!currentValue && dynamicField == TissueDynamicFieldsEnum.TUMOR_COLLABORATOR_SAMPLE_ID) {
+      if (!currentValue && dynamicField === TissueDynamicFieldsEnum.TUMOR_COLLABORATOR_SAMPLE_ID) {
         await inputElement.focus();
         const dropDown = this.page.locator("//ul[contains(@class, 'Lookup--Dropdown')]/li");
         await dropDown.nth(0).click();
@@ -165,12 +165,12 @@ export default class Tissue {
   }
 
   private async fillDates(root: Locator, {date, today}: FillDate): Promise<void> {
-    if(today) {
-      const todayBtn = new Button(this.page, {root: root, label: 'Today'});
+    if (today) {
+      const todayBtn = new Button(this.page, {root, label: 'Today'});
       await todayBtn.click();
       await waitForResponse(this.page, {uri: 'patch'});
     } else if (date) {
-      const datePicker = new DatePicker(this.page, {root: root});
+      const datePicker = new DatePicker(this.page, {root});
       await datePicker.open();
       await datePicker.pickDate(date);
       await datePicker.close();
@@ -178,7 +178,7 @@ export default class Tissue {
     }
   }
 
-  private async lookup(selectIndex: number = 0): Promise<void> {
+  private async lookup(selectIndex = 0): Promise<void> {
     const lookupList = this.lookupList;
     const count = await lookupList.count();
     if (count > 0 && selectIndex < count) {
@@ -196,7 +196,7 @@ export default class Tissue {
     return currentValue?.trim();
   }
 
-  private async getField(dynamicField: TissueDynamicFieldsEnum | SMIdEnum, byText: boolean = false): Promise<Locator> {
+  private async getField(dynamicField: TissueDynamicFieldsEnum | SMIdEnum, byText = false): Promise<Locator> {
     const fieldLocator = byText ? this.tissue.getByText(dynamicField) : this.findField(dynamicField);
     await expect(fieldLocator, `'${dynamicField}' is not visible`).toBeVisible();
 

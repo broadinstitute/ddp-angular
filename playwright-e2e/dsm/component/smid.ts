@@ -1,7 +1,7 @@
-import {expect, Locator, Page} from "@playwright/test";
-import Button from "../../dss/component/button";
-import Input from "../../dss/component/input";
-import {waitForResponse} from "../../utils/test-utils";
+import {expect, Locator, Page} from '@playwright/test';
+import Button from '../../dss/component/button';
+import Input from '../../dss/component/input';
+import {waitForResponse} from '../../utils/test-utils';
 
 interface InputData {
   value: string;
@@ -18,13 +18,13 @@ export default class SMID {
   }
 
   public async fillInputs(inputData: (InputData|string)[]): Promise<void> {
-    for(let i = 0; i < inputData.length; i++) {
+    for (let i = 0; i < inputData.length; i++) {
         const field = inputData[i];
-        const value = typeof field === "object" ? field.value : field;
-        const selectCheckbox = typeof field === "object" ? field.selectCheckbox : false;
+        const value = typeof field === 'object' ? field.value : field;
+        const selectCheckbox = typeof field === 'object' ? field.selectCheckbox : false;
 
         const isInputVisible = await this.isInputVisible(i);
-        if(isInputVisible) {
+        if (isInputVisible) {
           await this.fillField(value, i);
           selectCheckbox && await this.selectCheckbox(i);
         } else {

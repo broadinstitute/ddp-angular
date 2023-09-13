@@ -1,14 +1,14 @@
-import {expect, Locator, Page} from "@playwright/test";
-import {DynamicFieldsEnum, ProblemWithTissueEnum, TissueInformationEnum} from "./enums/tissue-information-enum";
-import DatePicker from "../../component/date-picker";
-import {waitForResponse} from "../../../utils/test-utils";
-import {FillDate} from "./interfaces/tissue-information-interfaces";
-import Select from "../../../dss/component/select";
-import TextArea from "../../../dss/component/textarea";
-import Tissue from "../../component/tissue";
-import Checkbox from "../../../dss/component/checkbox";
-import Button from "../../../dss/component/button";
-import Input from "../../../dss/component/input";
+import {expect, Locator, Page} from '@playwright/test';
+import {DynamicFieldsEnum, ProblemWithTissueEnum, TissueInformationEnum} from './enums/tissue-information-enum';
+import DatePicker from '../../component/date-picker';
+import {waitForResponse} from '../../../utils/test-utils';
+import {FillDate} from './interfaces/tissue-information-interfaces';
+import Select from '../../../dss/component/select';
+import TextArea from '../../../dss/component/textarea';
+import Tissue from '../../component/tissue';
+import Checkbox from '../../../dss/component/checkbox';
+import Button from '../../../dss/component/button';
+import Input from '../../../dss/component/input';
 
 
 export default class TissueInformationPage {
@@ -16,7 +16,7 @@ export default class TissueInformationPage {
 
   constructor(private readonly page: Page) {}
 
-  public async tissue(index: number = 0): Promise<Tissue> {
+  public async tissue(index = 0): Promise<Tissue> {
     await this.tissuesCountCheck(index);
     return new Tissue(this.page, index);
   }
@@ -37,7 +37,7 @@ export default class TissueInformationPage {
     const button = new Button(this.page, {root: addTissueBtnLocator});
     const isDisabled = await button.isDisabled();
 
-    if(isDisabled) {
+    if (isDisabled) {
       throw new Error('Add tissue button is disabled');
     }
 
@@ -54,7 +54,7 @@ export default class TissueInformationPage {
     const button = new Button(this.page, {root: deleteTissueBtnLocator});
     const isDisabled = await button.isDisabled();
 
-    if(isDisabled) {
+    if (isDisabled) {
       throw new Error('Delete tissue button is disabled');
     }
 
@@ -90,14 +90,14 @@ export default class TissueInformationPage {
     const isTextareaDisabled = await textarea.isDisabled();
     const existingValue = await textarea.currentValue;
 
-    if(!isTextareaDisabled && existingValue !== value) {
+    if (!isTextareaDisabled && existingValue !== value) {
       await textarea.fill(value, false);
       await textarea.blur();
       await waitForResponse(this.page, {uri: 'patch'});
     }
   }
 
-  public async fillDestructionPolicy(value: number, keptIndefinitelySelection: boolean = false, applyToAll: boolean = false): Promise<void> {
+  public async fillDestructionPolicy(value: number, keptIndefinitelySelection = false, applyToAll = false): Promise<void> {
     const destructionPolicyLocator = this.locatorFor(DynamicFieldsEnum.DESTRUCTION_POLICY);
     await expect(destructionPolicyLocator, 'Destruction Policy Years is not visible').toBeVisible();
 
@@ -117,7 +117,7 @@ export default class TissueInformationPage {
     applyToAll && await this.applyToAll(destructionPolicyLocator);
   }
 
-  public async problemsWithTissue(newValue: ProblemWithTissueEnum, unableToObtainSelection: boolean = false): Promise<void> {
+  public async problemsWithTissue(newValue: ProblemWithTissueEnum, unableToObtainSelection = false): Promise<void> {
     const problemsWithTissueLocator = this.locatorFor(DynamicFieldsEnum.PROBLEM_WITH_TISSUE);
     await expect(problemsWithTissueLocator, 'Problems with Tissue selection is not visible')
       .toBeVisible();
@@ -187,7 +187,7 @@ export default class TissueInformationPage {
       }
     }
     if (date) {
-      const datePicker = new DatePicker(this.page, {root: root});
+      const datePicker = new DatePicker(this.page, {root});
       await datePicker.open();
       await datePicker.pickDate(date);
       await datePicker.close();
@@ -203,7 +203,7 @@ export default class TissueInformationPage {
       await checkbox.check();
       await waitForResponse(this.page, {uri: 'patch'});
     }
-    if(!check && isChecked && !isDisabled) {
+    if (!check && isChecked && !isDisabled) {
       await checkbox.uncheck();
       await waitForResponse(this.page, {uri: 'patch'});
     }
@@ -211,7 +211,7 @@ export default class TissueInformationPage {
 
   private async tissuesCountCheck(index: number): Promise<void> {
     const tissuesCount = await this.tissuesCount;
-    if(index > tissuesCount - 1 || index < 0) {
+    if (index > tissuesCount - 1 || index < 0) {
       throw new Error(`Incorrect index number - ${index}`);
     }
   }
@@ -272,7 +272,7 @@ export default class TissueInformationPage {
     return `${this.dynamicField(DynamicFieldsEnum.PROBLEM_WITH_TISSUE, 3)}`;
   }
 
-  private dynamicField(dynamicField: DynamicFieldsEnum, index: number = 2): string {
+  private dynamicField(dynamicField: DynamicFieldsEnum, index = 2): string {
     return `${this.participantDynamicInformationTableXPath}/tr[td[1][text()[normalize-space()='${dynamicField}']]]/td[${index}]`
   }
 
@@ -291,5 +291,4 @@ export default class TissueInformationPage {
   private get pageXPath(): string {
     return '//app-tissue-page'
   }
-
 }

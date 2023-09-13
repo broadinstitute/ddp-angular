@@ -1,5 +1,5 @@
-import {InputTypeEnum, OncHistorySelectRequestEnum} from "../enums/onc-history-input-columns-enum";
-import {FillDate} from "../../../pages/tissue-information-page/interfaces/tissue-information-interfaces";
+import {InputTypeEnum, OncHistorySelectRequestEnum} from '../enums/onc-history-input-columns-enum';
+import {FillDate} from '../../../pages/tissue-information-page/interfaces/tissue-information-interfaces';
 
 export interface OncHistoryInputsTypes {
   value?: string | number;

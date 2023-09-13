@@ -1,18 +1,18 @@
-import {StudyEnum} from "../../../dsm/component/navigation/enums/selectStudyNav-enum";
+import {StudyEnum} from '../../../dsm/component/navigation/enums/selectStudyNav-enum';
 import {test} from 'fixtures/dsm-fixture';
-import ParticipantListPage from "../../../dsm/pages/participant-list-page";
-import {AdditionalFilter} from "../../../dsm/component/filters/sections/search/search-enums";
-import ParticipantPage from "../../../dsm/pages/participant-page/participant-page";
-import {TabEnum} from "../../../dsm/component/tabs/enums/tab-enum";
-import OncHistoryTab from "../../../dsm/component/tabs/onc-history-tab";
+import ParticipantListPage from '../../../dsm/pages/participant-list-page';
+import {AdditionalFilter} from '../../../dsm/component/filters/sections/search/search-enums';
+import ParticipantPage from '../../../dsm/pages/participant-page/participant-page';
+import {TabEnum} from '../../../dsm/component/tabs/enums/tab-enum';
+import OncHistoryTab from '../../../dsm/component/tabs/onc-history-tab';
 import {
   OncHistoryInputColumnsEnum,
   OncHistorySelectRequestEnum
-} from "../../../dsm/component/tabs/enums/onc-history-input-columns-enum";
+} from '../../../dsm/component/tabs/enums/onc-history-input-columns-enum';
 import {
   ProblemWithTissueEnum, SequencingResultsEnum, SMIdEnum, TissueDynamicFieldsEnum,
   TissueInformationEnum, TissueTypesEnum, TumorTypesEnum
-} from "../../../dsm/pages/tissue-information-page/enums/tissue-information-enum";
+} from '../../../dsm/pages/tissue-information-page/enums/tissue-information-enum';
 
 
 test.describe('Tissue Request Flow', () => {
@@ -71,24 +71,42 @@ test.describe('Tissue Request Flow', () => {
           }
         }
       }, testOncHistoryIndex)
-      await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.TYPE_OF_PX, {value: 'Test Type of PX'}, testOncHistoryIndex)
-      await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.LOCATION_OF_PX, {value: 'Test location of px'}, testOncHistoryIndex)
-      await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.HISTOLOGY, {value: 'Test histology'}, testOncHistoryIndex)
-      await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.ACCESSION_NUMBER, {value: 3312}, testOncHistoryIndex)
-      await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.FACILITY, {value: 'Test Facility'}, testOncHistoryIndex)
-      await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.PHONE, {value: '111-222-3333'}, testOncHistoryIndex)
-      await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.FAX, {value: '222-333-222'}, testOncHistoryIndex)
-      await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.DESTRUCTION_POLICY, {value: 3344}, testOncHistoryIndex)
-      await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.TUMOR_SIZE, {value: 'Test tumor size'}, testOncHistoryIndex)
-      await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.SLIDES_TO_REQUEST, {value: 'Test slides to request'}, testOncHistoryIndex)
-      await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.FACILITY_WHERE_SAMPLE_WAS_REVIEWED, {value: 'Test FACILITY RECEIVED'}, testOncHistoryIndex)
-      await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.TOTAL_NUMBER_SLIDES_MENTIONED, {value: 5}, testOncHistoryIndex)
-      await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.BLOCK_TO_REQUEST, {value: 'Test block to request'}, testOncHistoryIndex)
-      await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.EXTENSIVE_TREATMENT_EFFECT, {value: 'Test Extensive Treatment Effect'}, testOncHistoryIndex)
-      await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.VIABLE_TUMOR, {value: 'Test viable tumor'}, testOncHistoryIndex)
-      await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.NECROSIS, {value: 'Test necrosis'}, testOncHistoryIndex)
-      await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.VOCAB_CHECK, {value: 'Test vocab check'}, testOncHistoryIndex)
-      await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.REQUEST, {select: OncHistorySelectRequestEnum.ON_HOLD}, testOncHistoryIndex)
+      await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.TYPE_OF_PX,
+        {value: 'Test Type of PX'}, testOncHistoryIndex)
+      await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.LOCATION_OF_PX,
+        {value: 'Test location of px'}, testOncHistoryIndex)
+      await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.HISTOLOGY,
+        {value: 'Test histology'}, testOncHistoryIndex)
+      await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.ACCESSION_NUMBER,
+        {value: 3312}, testOncHistoryIndex)
+      await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.FACILITY,
+        {value: 'Test Facility'}, testOncHistoryIndex)
+      await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.PHONE,
+        {value: '111-222-3333'}, testOncHistoryIndex)
+      await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.FAX,
+        {value: '222-333-222'}, testOncHistoryIndex)
+      await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.DESTRUCTION_POLICY,
+        {value: 3344}, testOncHistoryIndex)
+      await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.TUMOR_SIZE,
+        {value: 'Test tumor size'}, testOncHistoryIndex)
+      await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.SLIDES_TO_REQUEST,
+        {value: 'Test slides to request'}, testOncHistoryIndex)
+      await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.FACILITY_WHERE_SAMPLE_WAS_REVIEWED,
+        {value: 'Test FACILITY RECEIVED'}, testOncHistoryIndex)
+      await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.TOTAL_NUMBER_SLIDES_MENTIONED,
+        {value: 5}, testOncHistoryIndex)
+      await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.BLOCK_TO_REQUEST,
+        {value: 'Test block to request'}, testOncHistoryIndex)
+      await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.EXTENSIVE_TREATMENT_EFFECT,
+        {value: 'Test Extensive Treatment Effect'}, testOncHistoryIndex)
+      await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.VIABLE_TUMOR,
+        {value: 'Test viable tumor'}, testOncHistoryIndex)
+      await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.NECROSIS,
+        {value: 'Test necrosis'}, testOncHistoryIndex)
+      await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.VOCAB_CHECK,
+        {value: 'Test vocab check'}, testOncHistoryIndex)
+      await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.REQUEST,
+        {select: OncHistorySelectRequestEnum.ON_HOLD}, testOncHistoryIndex)
       await oncHistoryTable.fillNotes('TESTING OTHER NOTE 1123', testOncHistoryIndex);
 
 
@@ -155,7 +173,8 @@ test.describe('Tissue Request Flow', () => {
       await tissue.fillField(TissueDynamicFieldsEnum.PATHOLOGY_REPORT, {select: 'Yes'});
       await tissue.fillField(TissueDynamicFieldsEnum.TUMOR_TYPE, {select: TumorTypesEnum.RECURRENT});
       await tissue.fillField(TissueDynamicFieldsEnum.TISSUE_SITE, {inputValue: 'Test tissue site'});
-      await tissue.fillField(TissueDynamicFieldsEnum.TUMOR_COLLABORATOR_SAMPLE_ID, {inputValue: 'PWTVCT_312231' + new Date().getTime().toString().slice(-4)});
+      await tissue.fillField(TissueDynamicFieldsEnum.TUMOR_COLLABORATOR_SAMPLE_ID,
+        {inputValue: `PWTVCT_312231${new Date().getTime().toString().slice(-4)}`});
       await tissue.fillField(TissueDynamicFieldsEnum.BLOCK_TO_SHL, {
         dates: {
           date: {
@@ -174,24 +193,32 @@ test.describe('Tissue Request Flow', () => {
           }
         }
       });
-      await tissue.fillField(TissueDynamicFieldsEnum.SK_ID, {inputValue: 'Test SK ID' + new Date().getTime().toString().slice(-4)});
-      await tissue.fillField(TissueDynamicFieldsEnum.FIRST_SM_ID, {inputValue: 'Test FIRST SM ID' + new Date().getTime().toString().slice(-4)});
-      await tissue.fillField(TissueDynamicFieldsEnum.SM_ID_FOR_H_E, {inputValue: 'Test SM ID FOR H&E' + new Date().getTime().toString().slice(-4)});
-      await tissue.fillField(TissueDynamicFieldsEnum.DATE_SENT_TO_GP, {dates: {today: true}});
-      await tissue.fillField(TissueDynamicFieldsEnum.BLOCK_ID_TO_SHL, {inputValue: 'Test Block ID to SHL' + new Date().getTime().toString().slice(-4)});
-      await tissue.fillField(TissueDynamicFieldsEnum.TUMOR_PERCENTAGE_AS_REPORTED_BY_SHL, {inputValue: 33});
-      await tissue.fillField(TissueDynamicFieldsEnum.SHL_WORK_NUMBER, {inputValue: 9900});
-      await tissue.fillField(TissueDynamicFieldsEnum.SEQUENCING_RESULTS, {select: SequencingResultsEnum.SUCCESS});
+      await tissue.fillField(TissueDynamicFieldsEnum.SK_ID,
+        {inputValue: `Test SK ID${new Date().getTime().toString().slice(-4)}`});
+      await tissue.fillField(TissueDynamicFieldsEnum.FIRST_SM_ID,
+        {inputValue: `Test FIRST SM ID${new Date().getTime().toString().slice(-4)}`});
+      await tissue.fillField(TissueDynamicFieldsEnum.SM_ID_FOR_H_E,
+        {inputValue: `Test SM ID FOR H&E${new Date().getTime().toString().slice(-4)}`});
+      await tissue.fillField(TissueDynamicFieldsEnum.DATE_SENT_TO_GP,
+        {dates: {today: true}});
+      await tissue.fillField(TissueDynamicFieldsEnum.BLOCK_ID_TO_SHL,
+        {inputValue: `Test Block ID to SHL${new Date().getTime().toString().slice(-4)}`});
+      await tissue.fillField(TissueDynamicFieldsEnum.TUMOR_PERCENTAGE_AS_REPORTED_BY_SHL,
+        {inputValue: 33});
+      await tissue.fillField(TissueDynamicFieldsEnum.SHL_WORK_NUMBER,
+        {inputValue: 9900});
+      await tissue.fillField(TissueDynamicFieldsEnum.SEQUENCING_RESULTS,
+        {select: SequencingResultsEnum.SUCCESS});
 
 
       const smids = await tissue.fillSMIDs(SMIdEnum.USS_SM_IDS);
       await smids.fillInputs([
-        {value: 'smid22tes2t' + new Date().getTime().toString().slice(-4)},
-        {value: 'smisdadtes2t' + new Date().getTime().toString().slice(-4)},
-        {value: 'smidtes2t' + new Date().getTime().toString().slice(-4), selectCheckbox: true},
-        'smid31tes2t' + new Date().getTime().toString().slice(-4),
-        {value: 'smidte22s2t' + new Date().getTime().toString().slice(-4)},
-        {value: 'smi33dtes2t' + new Date().getTime().toString().slice(-4), selectCheckbox: true}
+        {value: `smid22tes2t${new Date().getTime().toString().slice(-4)}`},
+        {value: `smisdadtes2t${new Date().getTime().toString().slice(-4)}`},
+        {value: `smidtes2t${new Date().getTime().toString().slice(-4)}`, selectCheckbox: true},
+        `smid31tes2t${new Date().getTime().toString().slice(-4)}`,
+        {value: `smidte22s2t${new Date().getTime().toString().slice(-4)}`},
+        {value: `smi33dtes2t${new Date().getTime().toString().slice(-4)}`, selectCheckbox: true}
       ]);
       await smids.deleteInputAt(1);
       console.log(await smids.getValueAt(0));
@@ -202,10 +229,10 @@ test.describe('Tissue Request Flow', () => {
 
       const smids2 = await tissue.fillSMIDs(SMIdEnum.H_E_SM_IDS);
 
-      await smids2.fillInputs(['string2ds21543' + new Date().getTime().toString().slice(-4),
-        'string_3ssmd52s2135' + new Date().getTime().toString().slice(-4),
-        'string_3t42mds513' + new Date().getTime().toString().slice(-4),
-        'string6_t1ms21313' + new Date().getTime().toString().slice(-4)]);
+      await smids2.fillInputs([`string2ds21543${new Date().getTime().toString().slice(-4)}`,
+        `string_3ssmd52s2135${new Date().getTime().toString().slice(-4)}`,
+        `string_3t42mds513${new Date().getTime().toString().slice(-4)}`,
+        `string6_t1ms21313${new Date().getTime().toString().slice(-4)}`]);
       await smids.deleteInputAt(0);
       console.log(await smids.getValueAt(0));
       console.log(await smids.getValueAt(1));
@@ -214,10 +241,10 @@ test.describe('Tissue Request Flow', () => {
       const smids3 = await tissue.fillSMIDs(SMIdEnum.SCROLLS_SM_IDS);
 
       await smids3.fillInputs([
-        {value: 'smidqtes9ti' + new Date().getTime().toString().slice(-4)},
-        {value: 'smid5tes2313' + new Date().getTime().toString().slice(-4)},
-        {value: 'smidte5511g1723' + new Date().getTime().toString().slice(-4), selectCheckbox: true},
-        'somesmdstr53132312' + new Date().getTime().toString().slice(-4)
+        {value: `smidqtes9ti${new Date().getTime().toString().slice(-4)}`},
+        {value: `smid5tes2313${new Date().getTime().toString().slice(-4)}`},
+        {value: `smidte5511g1723${new Date().getTime().toString().slice(-4)}`, selectCheckbox: true},
+        `somesmdstr53132312${new Date().getTime().toString().slice(-4)}`
       ]);
       await smids.deleteInputAt(3)
       console.log(await smids.getValueAt(0));
@@ -264,5 +291,4 @@ test.describe('Tissue Request Flow', () => {
       // await oncHistoryTab.downloadPDFBundle();
     })
   }
-
 })
