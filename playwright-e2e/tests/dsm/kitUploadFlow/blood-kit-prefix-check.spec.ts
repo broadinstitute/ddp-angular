@@ -1,5 +1,6 @@
 import { expect } from '@playwright/test';
 import { test } from 'fixtures/dsm-fixture';
+import crypto from 'crypto';
 import * as mock from 'data/mock-address.json';
 import { KitTypeEnum } from 'dsm/component/kitType/enums/kitType-enum';
 import { SamplesNavEnum } from 'dsm/component/navigation/enums/samplesNav-enum';
