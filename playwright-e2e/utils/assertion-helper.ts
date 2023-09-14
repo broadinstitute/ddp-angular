@@ -35,5 +35,5 @@ export const assertTableHeaders = (actualHeaders: string[], expectedHeaders: str
   const filterActualHeaders = actualHeaders.filter(value => !!value);
   const filterExpectedHeaders = expectedHeaders.filter(value => !!value);
   expect(filterActualHeaders).toHaveLength(filterExpectedHeaders.length);
-  expect(filterActualHeaders).toBe(filterExpectedHeaders);
+  expect(filterActualHeaders).toStrictEqual(filterExpectedHeaders);
 };
