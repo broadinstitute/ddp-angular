@@ -163,7 +163,7 @@ test.describe.serial('LMS Child Enrollment', () => {
       }
 
       const questionPLocator = page.locator('//li[contains(@class, "ddp-li")][.//*[contains(normalize-space(), "Participation Information")]]');
-      await toHaveScreenshot(page, questionPLocator, 'ms-research-consent-full-form-page-P-paragraph.png');
+      await toHaveScreenshot(page, questionPLocator, 'lms-research-consent-full-form-page-P-paragraph.png');
 
       await researchConsentPage.next();
     })

@@ -113,7 +113,7 @@ test.describe.serial('LMS Adult Enrollment', () => {
 
       await toHaveScreenshot(page, 'p.secondary-text', 'research-consent-sign-consent-info.png');
       await toHaveScreenshot(page, researchConsentPage.agreeToDrawBloodQuestion.toLocator(), 'research-consent-agree-to-draw-blood-question.png');
-      await toHaveScreenshot(page, researchConsentPage.canRequestStoredTumorSamples.toLocator(), 'esearch-consent-can-request-tumor-samples-question.png');
+      await toHaveScreenshot(page, researchConsentPage.canRequestStoredTumorSamples.toLocator(), 'research-consent-can-request-tumor-samples-question.png');
 
       await researchConsentPage.agreeToDrawBloodSamples();
       await researchConsentPage.requestStoredSamples();
