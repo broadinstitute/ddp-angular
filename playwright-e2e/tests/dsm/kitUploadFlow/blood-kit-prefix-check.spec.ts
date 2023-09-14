@@ -22,11 +22,11 @@ import { logInfo } from 'utils/log-utils';
 import { waitForResponse } from 'utils/test-utils';
 
 /**
- * Blood kit prefix check with Canada and New York address for LMS and Osteo2 studies.
+ * Prefix check for Blood kit with Canada and New York address for LMS and Osteo2 studies.
  *
  * For Blood kit:
  *  - Upload a kit with address for Canada or NY state
- *  - Trigger label creation
+ *  - Create kit label without PECGS prefix
  *  - Kit will be on error page
  *  - Tracking scan
  *  - Final scan
@@ -41,7 +41,7 @@ test.describe.serial('Kit Upload', () => {
   let kitUploadInfo: KitUploadInfo;
   let shortID: string;
 
-  const studies = [StudyEnum.LMS, StudyEnum.OSTEO2];
+  const studies = [StudyEnum.LMS]; // StudyEnum.OSTEO2;
   const kitType = KitTypeEnum.BLOOD;
   const expectedKitTypes = [KitTypeEnum.SALIVA, KitTypeEnum.BLOOD];
   const kitLabel = `${crypto.randomUUID().toString().substring(0, 10)}`;

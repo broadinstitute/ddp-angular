@@ -228,7 +228,7 @@ export default class ParticipantListPage {
     await waitForNoSpinner(this.page);
   }
 
-  async findParticipantForKitUpload(): Promise<number> {
+  async findParticipantForKitUpload(firstNameSubstring?: string): Promise<number> {
     const participantListTable = this.participantListTable;
 
     const searchPanel = this.filters.searchPanel;
@@ -249,17 +249,25 @@ export default class ParticipantListPage {
 
     await expect(participantListTable.rowLocator().first()).toBeVisible();
 
-    let testParticipantIndex = -1;
+    let rowIndex = -1;
     let participantsCount = await participantListTable.rowsCount;
     expect(participantsCount).toBeGreaterThanOrEqual(1);
 
+    // randomize iteration order
     for (let count = 0; count < Math.floor(Math.random() * participantsCount); count++) {
       // Sort Registration Date to pick newest participants
       await participantListTable.sort(registrationDate, SortOrder.ASC);
+
+      let matchedName = true;
+      if (firstNameSubstring) {
+        const fname = await participantListTable.getTextAt(count, 'First Name');
+        matchedName = fname.indexOf(firstNameSubstring) !== -1
+      }
+
       const normalCollaboratorSampleID = await participantListTable.getTextAt(count, normalCollaboratorSampleIDColumn);
       const [isAddressValid] = await participantListTable.getTextAt(count, validColumn);
-      if (normalCollaboratorSampleID.length <= 5 && isAddressValid.toLowerCase() === 'true') {
-        testParticipantIndex = count;
+      if (matchedName && normalCollaboratorSampleID.length <= 5 && isAddressValid.toLowerCase() === 'true') {
+        rowIndex = count;
         break;
       }
       if (count === participantsCount - 1) {
@@ -267,9 +275,9 @@ export default class ParticipantListPage {
         participantsCount = await participantListTable.rowsCount;
       }
     }
-    if (testParticipantIndex === -1) {
+    if (rowIndex === -1) {
       throw new Error(`Failed to find a participant for Kit Upload`);
     }
-    return testParticipantIndex;
+    return rowIndex;
   }
 }
