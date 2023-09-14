@@ -251,3 +251,13 @@ export function shuffle(array: any[]): any[] {
   }
   return array;
 }
+
+export async function toHaveScreenshot(page: Page, locator: Locator | string, name: string): Promise<void> {
+  // https://github.com/microsoft/playwright/issues/18827
+  const loc = typeof locator === 'string' ? page.locator(locator) : locator;
+  const box = await loc.boundingBox();
+  if (box == null) {
+    throw new Error(`Locator ${locator}: Not found.`);
+  }
+  await expect.soft(page).toHaveScreenshot(name, { clip: box });
+}
