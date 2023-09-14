@@ -9,6 +9,7 @@ export enum SortOrder {
 }
 
 export default class Table {
+  private readonly root: Locator;
   private readonly tableCss: string;
   private readonly headerCss: string;
   private readonly rowCss: string;
@@ -17,9 +18,16 @@ export default class Table {
   private readonly headerRowCss: string;
   private readonly nth: number;
 
-  constructor(protected readonly page: Page, opts: { cssClassAttribute?: string; ddpTestID?: string; nth?: number } = {}) {
-    const { cssClassAttribute: clas = '', ddpTestID: testId, nth = 0 } = opts;
+  constructor(protected readonly page: Page,
+      opts: {
+        cssClassAttribute?: string;
+        ddpTestID?: string;
+        nth?: number,
+        root?: Locator | string
+      } = {}) {
+    const {cssClassAttribute: clas = '', ddpTestID: testId, nth = 0, root = 'app-root'} = opts;
     this.nth = nth;
+    this.root = typeof root === 'string' ? this.page.locator(root) : root;
     this.tableCss = testId
       ? `[data-ddp-test="${testId}"]`
       : `table${clas}, mat-table${clas}, [role="table"]${clas}`;
@@ -38,6 +46,10 @@ export default class Table {
     await expect(this.tableLocator()).toHaveCount(1);
     await expect(this.headerLocator().first()).toBeVisible({ timeout });
     expect(await this.rowLocator().count()).toBeGreaterThanOrEqual(1);
+  }
+
+  rootLocator(): Locator {
+    return this.root;
   }
 
   tableLocator(): Locator {
