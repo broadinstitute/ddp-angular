@@ -730,10 +730,10 @@ test.describe.serial('DSM Family Enrollment Handling', () => {
         expect(brotherProcessNotesContent).toEqual(probandProcessNotesContent);
 
         const probandMiddleNameField = proband.getMiddleName();
-        //expect(brotherMiddleNameField).toEqual(probandMiddleNameField); - commented out due to expect.toEqual() method failing in circleci
+        expect(brotherMiddleNameField).toBe(probandMiddleNameField);
 
         const probandNameSuffix = proband.getNameSuffix();
-        //expect(brotherNameSuffix).toEqual(probandNameSuffix); - commented out due to expect.toEqual() method failing in circleci
+        expect(brotherNameSuffix).toBe(probandNameSuffix);
 
         const probandPreferredLanguage = proband.getPreferredLanguage();
         await expect(brotherPreferredLanguage).toHaveText(await probandPreferredLanguage.innerText());
@@ -745,10 +745,10 @@ test.describe.serial('DSM Family Enrollment Handling', () => {
         await expect(brotherPronouns).toHaveText(await probandPronouns.innerText());
 
         const probandDateOfBirth = proband.getDateOfBirth();
-        //expect(brotherDateOfBirth).toEqual(probandDateOfBirth); - commented out due to expect.toEqual() method failing in circleci
+        expect(brotherDateOfBirth).toBe(probandDateOfBirth);
 
         const probandAgeToday = proband.getAgeToday();
-        //expect(brotherAgeToday).toEqual(probandAgeToday); - commented out due to expect.toEqual() method failing in circleci
+        expect(brotherAgeToday).toBe(probandAgeToday);
 
         const probandIsAliveRadioBUtton = proband.getLivingStatusOption('Alive');
         await expect(probandIsAliveRadioBUtton).toBeChecked();
