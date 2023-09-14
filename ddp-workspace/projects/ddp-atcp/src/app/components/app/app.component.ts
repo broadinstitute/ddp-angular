@@ -111,7 +111,7 @@ export class AppComponent implements OnInit, OnDestroy {
       });
     });
     const modalClose = this.communicationService.closePopupMessage$.subscribe(() => {
-      this.dialog.getDialogById('ServerMessage').close();
+      this.dialog.getDialogById('ServerMessage')?.close();
     });
     this.anchor.addNew(modalOpen).addNew(modalClose);
   }

@@ -39,20 +39,24 @@ export class AppRedesignedBaseComponent implements OnInit, OnDestroy {
     }
 
     private initMailingListDialogListener(): void {
-        const modalOpen = this.communicationService.openJoinDialog$.subscribe(() => {
-            this.dialog.open(JoinMailingListComponent, this.DIALOG_BASE_SETTINGS);
-        });
-        this.anchor.addNew(modalOpen);
+        if(this.communicationService) {
+            const modalOpen = this.communicationService.openJoinDialog$.subscribe(() => {
+                this.dialog?.open(JoinMailingListComponent, this.DIALOG_BASE_SETTINGS);
+            });
+            this.anchor.addNew(modalOpen);
+        }
     }
 
     private initSessionExpiredDialogListener(): void {
-        const modalOpen = this.renewNotifier.openDialogEvents.subscribe(() => {
-            this.dialog.open(SessionWillExpireComponent, { ...this.DIALOG_BASE_SETTINGS, disableClose: true });
-        });
-        const modalClose = this.renewNotifier.closeDialogEvents.subscribe(() => {
-            this.dialog.closeAll();
-        });
-        this.anchor.addNew(modalOpen).addNew(modalClose);
+        if(this.renewNotifier) {
+            const modalOpen = this.renewNotifier.openDialogEvents.subscribe(() => {
+                this.dialog?.open(SessionWillExpireComponent, { ...this.DIALOG_BASE_SETTINGS, disableClose: true });
+            });
+            const modalClose = this.renewNotifier.closeDialogEvents.subscribe(() => {
+                this.dialog?.closeAll();
+            });
+            this.anchor.addNew(modalOpen).addNew(modalClose);
+        }
     }
 
     private initRouterListener(): void {
