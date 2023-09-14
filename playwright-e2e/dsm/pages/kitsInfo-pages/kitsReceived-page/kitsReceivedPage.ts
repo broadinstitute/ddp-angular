@@ -97,7 +97,7 @@ export default class KitsReceivedPage {
   public async assertDisplayedRowsCount(count: number): Promise<void> {
     expect(await this.kitsTable.rows.count(),
       "Kits Received page - displayed rows count doesn't match the provided one")
-      .toEqual(count)
+      .toBe(count)
   }
 
   /* XPaths */

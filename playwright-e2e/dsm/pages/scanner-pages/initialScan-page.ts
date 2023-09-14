@@ -41,7 +41,7 @@ export default class InitialScanPage {
 
     const message = await this.page.locator('h3').textContent();
     expect(message, 'Initial Scan page - All kits have not been scanned successfully')
-      .toEqual('Data saved');
+      .toBe('Data saved');
   }
 
   /* Assertions */

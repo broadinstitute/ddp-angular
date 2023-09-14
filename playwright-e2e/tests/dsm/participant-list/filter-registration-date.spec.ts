@@ -48,7 +48,7 @@ test.describe('Participants Search', () => {
       // Verify First Short ID is not empty or null and length is 6
       const shortId = await participantsTable.getParticipantDataAt(0, 'Short ID');
       expect(shortId).toBeTruthy();
-      expect(shortId.length).toEqual(6);
+      expect(shortId.length).toBe(6);
 
       // Search filter with date range (don't need to open Search panel because it does not close automatically)
       const today = getDate(new Date());
@@ -59,7 +59,7 @@ test.describe('Participants Search', () => {
       const numParticipants2 = await participantsTable.numOfParticipants();
       logInfo(`Search by Registration Date Range (from: ${yearAgo}, to: ${today}) returns ${numParticipants2} participants`);
       expect(numParticipants2).toBeGreaterThan(1);
-      expect(numParticipants2).not.toEqual(numParticipants1); // Expect Participants list table has reloaded and changed
+      expect(numParticipants2).not.toBe(numParticipants1); // Expect Participants list table has reloaded and changed
 
       // Use Registration Date column filter to verify date range in table
       await participantsTable.sort(MainInfoEnum.REGISTRATION_DATE, SortOrder.DESC);

@@ -44,7 +44,7 @@ export default class KitUploadPage {
 
     expect(await this.page.locator('h3')
       .textContent(), "Kit Upload page - Couldn't upload kits - something went wrong")
-      .toEqual('All participants were uploaded.');
+      .toBe('All participants were uploaded.');
 
     deleteFileSync(filePath);
   }

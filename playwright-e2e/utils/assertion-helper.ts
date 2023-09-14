@@ -27,7 +27,7 @@ export const assertActivityStep = async (page: Page, expectedText: string) => {
 export const assertSelectedOption = async (locator: Locator, expectedOption: string) => {
   await expect(async () => {
     const selectedOption = await locator.evaluate<string, HTMLSelectElement>((node) => node.value);
-    expect(selectedOption).toEqual(expectedOption);
+    expect(selectedOption).toBe(expectedOption);
   }).toPass({ timeout: 5000 });
 };
 
@@ -35,5 +35,5 @@ export const assertTableHeaders = (actualHeaders: string[], expectedHeaders: str
   const filterActualHeaders = actualHeaders.filter(value => !!value);
   const filterExpectedHeaders = expectedHeaders.filter(value => !!value);
   expect(filterActualHeaders).toHaveLength(filterExpectedHeaders.length);
-  expect(filterActualHeaders).toEqual(filterExpectedHeaders);
+  expect(filterActualHeaders).toBe(filterExpectedHeaders);
 };

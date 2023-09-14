@@ -199,7 +199,7 @@ export function assertParticipantListDownloadFileName(download: Download, study:
       name = study;
   }
   const expectedFileName = `${name}_export.zip`;
-  expect(actualFileName.toLowerCase()).toEqual(expectedFileName.toLowerCase());
+  expect(actualFileName.toLowerCase()).toBe(expectedFileName.toLowerCase());
 }
 
 export function studyShortName(study: StudyEnum): {shortName: string | null; realm: string | null} {
@@ -255,5 +255,5 @@ export function shuffle(array: any[]): any[] {
 export async function toHaveScreenshot(page: Page, locator: Locator | string, name: string): Promise<void> {
   // https://github.com/microsoft/playwright/issues/18827
   const loc = typeof locator === 'string' ? page.locator(locator) : locator;
-  await expect.soft(loc).toHaveScreenshot(name, { maxDiffPixels: 0.5, maxDiffPixelRatio: 0.5 });
+  await expect.soft(loc).toHaveScreenshot(name);
 }
