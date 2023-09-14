@@ -1,7 +1,8 @@
 import {expect, Locator, Page} from '@playwright/test';
-import Button from '../../dss/component/button';
-import Input from '../../dss/component/input';
-import {waitForResponse} from '../../utils/test-utils';
+import Button from 'dss/component/button';
+import Input from 'dss/component/input';
+import {waitForResponse} from 'utils/test-utils';
+import Modal from "./modal";
 
 interface InputData {
   value: string;
@@ -9,7 +10,10 @@ interface InputData {
 }
 
 export default class SMID {
+  private readonly modalComponent: Modal;
+
   constructor(private readonly page: Page, private readonly tissueIndex: number) {
+    this.modalComponent = new Modal(this.page, {root: this.modal});
   }
 
   public async getValueAt(index: number): Promise<string> {
@@ -17,21 +21,18 @@ export default class SMID {
     return input.currentValue;
   }
 
-  public async fillInputs(inputData: (InputData|string)[]): Promise<void> {
+  public async fillInputs(inputData: (InputData | string)[]): Promise<void> {
     for (let i = 0; i < inputData.length; i++) {
-        const field = inputData[i];
-        const value = typeof field === 'object' ? field.value : field;
-        const selectCheckbox = typeof field === 'object' ? field.selectCheckbox : false;
+      const field = inputData[i];
+      const value = typeof field === 'object' ? field.value : field;
+      const selectCheckbox = typeof field === 'object' ? field.selectCheckbox : false;
 
-        const isInputVisible = await this.isInputVisible(i);
-        if (isInputVisible) {
-          await this.fillField(value, i);
-          selectCheckbox && await this.selectCheckbox(i);
-        } else {
-          await this.addField();
-          await this.fillField(value, i);
-          selectCheckbox && await this.selectCheckbox(i);
-        }
+      const isInputVisible = await this.isInputVisible(i);
+      if (!isInputVisible) {
+        await this.addField();
+      }
+      await this.fillField(value, i);
+      selectCheckbox && await this.selectCheckbox(i);
     }
   }
 
@@ -43,19 +44,11 @@ export default class SMID {
   }
 
   public async close(): Promise<void> {
-    const closeBtnLocator = this.modal.locator("//div[@class='modal-footer']/div");
-    await expect(closeBtnLocator, `Close button is not visible`).toBeVisible();
-
-    const closeBtn = new Button(this.page, {root: closeBtnLocator, label: 'close'});
-    await closeBtn.click();
+    await this.clickModalBtn('close');
   }
 
   public async onlyKeepSelectedSMIDs(): Promise<void> {
-    const closeBtnLocator = this.modal.locator("//div[@class='modal-footer']/div");
-    await expect(closeBtnLocator, `Only Keep Selected SM-IDs button is not visible`).toBeVisible();
-
-    const closeBtn = new Button(this.page, {root: closeBtnLocator, label: 'Only keep selected SM-IDs'});
-    await closeBtn.click();
+    await this.clickModalBtn('Only keep selected SM-IDs');
     await waitForResponse(this.page, {uri: 'patch'});
   }
 
@@ -89,17 +82,31 @@ export default class SMID {
     return new Input(this.page, {root: fieldLocator});
   }
 
+  private async clickModalBtn(label: 'Only keep selected SM-IDs' | 'close'): Promise<void> {
+    const modalLocator = this.modalFooter;
+    const closeBtn = new Button(this.page, {root: modalLocator, label: label});
+    await closeBtn.click();
+  }
+
 
   /* Locators */
+  private get modalFooter(): Locator {
+    return this.modalComponent.footerLocator();
+  }
+
+  private get modalBody(): Locator {
+    return this.modalComponent.bodyLocator();
+  }
+
   private get modal(): Locator {
     return this.page.locator(`(//app-tissue)[${this.tissueIndex + 1}]/app-modal`);
   }
 
   private get fields(): Locator {
-    return this.modal.locator('//table/tr[td[md-input-container]]');
+    return this.modalBody.locator('//table/tr[td[md-input-container]]');
   }
 
   private get addBtn(): Locator {
-    return this.modal.locator(`//div[@class='app-modal-body']/button`);
+    return this.modalBody.locator(`//div[@class='app-modal-body']/button`);
   }
 }

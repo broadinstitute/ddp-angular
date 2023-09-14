@@ -7,7 +7,8 @@ import { waitForNoSpinner } from 'utils/test-utils';
 export default class Modal {
   private readonly rootSelector: Locator;
 
-  constructor(private readonly page: Page) {
+  constructor(private readonly page: Page, opts: {root?: Locator} = {}) {
+    this.page = page;
     this.rootSelector = this.page.locator('.modal-dialog');
   }
 
