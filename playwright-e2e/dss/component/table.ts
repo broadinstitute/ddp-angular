@@ -1,6 +1,6 @@
 import { expect, Locator, Page } from '@playwright/test';
 import Button from 'dss/component/button';
-import { check, waitForNoSpinner } from 'utils/test-utils';
+import { waitForNoSpinner } from 'utils/test-utils';
 import Checkbox from './checkbox';
 
 export enum SortOrder {
@@ -18,13 +18,11 @@ export default class Table {
   private readonly nth: number;
 
   constructor(protected readonly page: Page, opts: { cssClassAttribute?: string; ddpTestID?: string; nth?: number } = {}) {
-    const { cssClassAttribute, ddpTestID, nth = 0 } = opts;
+    const { cssClassAttribute: clas = '', ddpTestID: testId, nth = 0 } = opts;
     this.nth = nth;
-    this.tableCss = ddpTestID
-        ? `[data-ddp-test="${ddpTestID}"]`
-        : cssClassAttribute
-            ? `table${cssClassAttribute}, mat-table${cssClassAttribute}`
-            : 'table, mat-table, [role="table"]';
+    this.tableCss = testId
+      ? `[data-ddp-test="${testId}"]`
+      : `table${clas}, mat-table${clas}, [role="table"]${clas}`;
     this.headerCss = 'thead th, [role="columnheader"]';
     this.headerRowCss = 'thead tr';
     this.rowCss = '[role="row"]:not([mat-header-row]):not(mat-header-row), tbody tr';
@@ -37,8 +35,8 @@ export default class Table {
   }
 
   async waitForReady(timeout?: number) {
-    await this.tableLocator().waitFor({ state: 'attached' });
-    await expect(this.tableLocator().locator(this.headerCss).first()).toBeVisible({ timeout });
+    await expect(this.tableLocator()).toHaveCount(1);
+    await expect(this.headerLocator().first()).toBeVisible({ timeout });
     expect(await this.rowLocator().count()).toBeGreaterThanOrEqual(1);
   }
 
