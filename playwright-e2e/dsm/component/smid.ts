@@ -2,7 +2,7 @@ import {expect, Locator, Page} from '@playwright/test';
 import Button from 'dss/component/button';
 import Input from 'dss/component/input';
 import {waitForResponse} from 'utils/test-utils';
-import Modal from "./modal";
+import Modal from './modal';
 
 interface InputData {
   value: string;
@@ -84,7 +84,7 @@ export default class SMID {
 
   private async clickModalBtn(label: 'Only keep selected SM-IDs' | 'close'): Promise<void> {
     const modalLocator = this.modalFooter;
-    const closeBtn = new Button(this.page, {root: modalLocator, label: label});
+    const closeBtn = new Button(this.page, {root: modalLocator, label});
     await closeBtn.click();
   }
 
