@@ -85,7 +85,7 @@ export default class Input extends WidgetBase {
     await this.toLocator().blur();
   }
 
-  public get currentValue(): Promise<string> {
+  public async currentValue(): Promise<string> {
     return this.toLocator().inputValue();
   }
 
@@ -97,7 +97,7 @@ export default class Input extends WidgetBase {
     await this.toLocator().focus();
   }
 
-  public get maxLength(): Promise<string | null> {
+  public async maxLength(): Promise<string | null> {
     return this.toLocator().getAttribute('maxlength');
   }
 }
