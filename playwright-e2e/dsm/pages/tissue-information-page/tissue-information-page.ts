@@ -172,7 +172,7 @@ export default class TissueInformationPage {
   private async fillFaxSentDate(dateIndex: number, date: FillDate): Promise<void> {
     const faxSentLocator = this.locatorFor(DynamicFieldsEnum.FAX_SENT).locator('app-field-datepicker')
       .nth(dateIndex);
-    if(await faxSentLocator.isVisible()) {
+    if (await faxSentLocator.isVisible()) {
       await this.fillDate(faxSentLocator, date);
     }
   }

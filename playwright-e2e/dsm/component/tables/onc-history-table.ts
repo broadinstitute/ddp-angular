@@ -18,7 +18,7 @@ import TissueInformationPage from '../../pages/tissue-information-page/tissue-in
 import Button from 'dss/component/button';
 import {FillDate} from '../../pages/tissue-information-page/interfaces/tissue-information-interfaces';
 import Input from 'dss/component/input';
-import Checkbox from "dss/component/checkbox";
+import Checkbox from 'dss/component/checkbox';
 
 export default class OncHistoryTable extends Table {
   private readonly tissueInformationPage: TissueInformationPage;

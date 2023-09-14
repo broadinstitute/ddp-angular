@@ -25,7 +25,7 @@ export default class Tissue {
   private readonly SMIDModal: SMID;
 
   constructor(private readonly page: Page, private readonly tissueIndex: number = 0) {
-    this.SMIDModal = new SMID(this.page, this.tissueIndex);;
+    this.SMIDModal = new SMID(this.page, this.tissueIndex);
   }
 
   public async getFieldValue(dynamicField: TissueDynamicFieldsEnum): Promise<string> {
