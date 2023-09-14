@@ -1,7 +1,7 @@
 import {expect, Locator, Page} from '@playwright/test';
 import Table from 'dss/component/table';
 import DatePicker from '../date-picker';
-import TextArea from '../../../dss/component/textarea';
+import TextArea from 'dss/component/textarea';
 import {
   InputTypeEnum,
   OncHistoryInputColumnsEnum,
@@ -12,29 +12,31 @@ import {
   OncHistoryInputsMapValue,
   OncHistoryInputsTypes
 } from '../tabs/interfaces/onc-history-inputs-types';
-import {waitForResponse} from '../../../utils/test-utils';
-import Select from '../../../dss/component/select';
+import {waitForResponse} from 'utils/test-utils';
+import Select from 'dss/component/select';
 import TissueInformationPage from '../../pages/tissue-information-page/tissue-information-page';
-import Button from '../../../dss/component/button';
+import Button from 'dss/component/button';
 import {FillDate} from '../../pages/tissue-information-page/interfaces/tissue-information-interfaces';
-import Input from '../../../dss/component/input';
+import Input from 'dss/component/input';
+import Checkbox from "dss/component/checkbox";
 
 export default class OncHistoryTable extends Table {
-  private readonly tissueInformationPage = new TissueInformationPage(this.page);
+  private readonly tissueInformationPage: TissueInformationPage;
 
   constructor(protected readonly page: Page) {
     super(page, {cssClassAttribute: '.table'});
+    this.tissueInformationPage = new TissueInformationPage(this.page);
   }
 
   public async openTissueInformationPage(index: number): Promise<TissueInformationPage> {
-    await this.tissueRequestPageButton(index).click();
+    const button = new Button(this.page, {root: this.firstRequestColumn(index)});
+    await button.click();
     return this.tissueInformationPage;
   }
 
-  public async selectDeselectRow(index: number): Promise<void> {
-    const selectRowCheckbox = this.selectRowCheckbox(index);
-    await expect(selectRowCheckbox, 'Select row checkbox is not visible').toBeVisible();
-    await selectRowCheckbox.click();
+  public async selectRow(index: number): Promise<void> {
+    const checkbox = new Checkbox(this.page, {root: this.firstRequestColumn(index)});
+    await checkbox.click();
   }
 
   public async deleteRow(index: number): Promise<void> {
@@ -227,14 +229,6 @@ export default class OncHistoryTable extends Table {
     return this.row(index).locator('td').last().getByRole('button');
   }
 
-  private selectRowCheckbox(index = 0): Locator {
-    return this.firstRequestColumn(index).locator('mat-checkbox');
-  }
-
-  private tissueRequestPageButton(index: number): Locator {
-    return this.firstRequestColumn(index).locator('button');
-  }
-
   private firstRequestColumn(index: number): Locator {
     return this.row(index).locator('td').first();
   }
@@ -295,9 +289,5 @@ export default class OncHistoryTable extends Table {
 
   private get headerXPath(): string {
     return '//table/thead/tr[1]'
-  }
-
-  private get inputXPath(): string {
-    return '//mat-form-field//input'
   }
 }

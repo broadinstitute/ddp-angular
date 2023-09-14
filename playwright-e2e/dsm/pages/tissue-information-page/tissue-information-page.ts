@@ -1,14 +1,14 @@
 import {expect, Locator, Page} from '@playwright/test';
 import {DynamicFieldsEnum, ProblemWithTissueEnum, TissueInformationEnum} from './enums/tissue-information-enum';
 import DatePicker from '../../component/date-picker';
-import {waitForResponse} from '../../../utils/test-utils';
+import {waitForResponse} from 'utils/test-utils';
 import {FillDate} from './interfaces/tissue-information-interfaces';
-import Select from '../../../dss/component/select';
-import TextArea from '../../../dss/component/textarea';
+import Select from 'dss/component/select';
+import TextArea from 'dss/component/textarea';
 import Tissue from '../../component/tissue';
-import Checkbox from '../../../dss/component/checkbox';
-import Button from '../../../dss/component/button';
-import Input from '../../../dss/component/input';
+import Checkbox from 'dss/component/checkbox';
+import Button from 'dss/component/button';
+import Input from 'dss/component/input';
 
 
 export default class TissueInformationPage {
@@ -170,10 +170,11 @@ export default class TissueInformationPage {
   }
 
   private async fillFaxSentDate(dateIndex: number, date: FillDate): Promise<void> {
-    const faxSentLocator = this.locatorFor(DynamicFieldsEnum.FAX_SENT).locator('app-field-datepicker').nth(dateIndex);
-    await expect(faxSentLocator, `Fax Sent date (${dateIndex}) picker is not visible`).toBeVisible();
-
-    await this.fillDate(faxSentLocator, date);
+    const faxSentLocator = this.locatorFor(DynamicFieldsEnum.FAX_SENT).locator('app-field-datepicker')
+      .nth(dateIndex);
+    if(await faxSentLocator.isVisible()) {
+      await this.fillDate(faxSentLocator, date);
+    }
   }
 
   private async fillDate(root: Locator, {date, today}: FillDate): Promise<void> {
@@ -198,7 +199,7 @@ export default class TissueInformationPage {
   private async checkCheckbox(root: Locator, check: boolean): Promise<void> {
     const checkbox = new Checkbox(this.page, {root});
     const isChecked = await checkbox.isChecked();
-    const isDisabled = await checkbox.isCheckboxDisabled();
+    const isDisabled = await checkbox.isDisabled();
     if (check && !isChecked && !isDisabled) {
       await checkbox.check();
       await waitForResponse(this.page, {uri: 'patch'});

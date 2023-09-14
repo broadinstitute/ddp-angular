@@ -51,7 +51,7 @@ export default class Checkbox extends WidgetBase {
     }
   }
 
-  async isCheckboxDisabled(): Promise<boolean> {
+  async isDisabled(): Promise<boolean> {
     return (await this.toLocator().getAttribute('class'))?.includes('mat-checkbox-disabled') as boolean;
   }
 

@@ -7,24 +7,25 @@ import {
   TissueTypesEnum,
   TumorTypesEnum
 } from '../pages/tissue-information-page/enums/tissue-information-enum';
-import TextArea from '../../dss/component/textarea';
+import TextArea from 'dss/component/textarea';
 import {
   FillDate,
   TissueInputsMapValue
 } from '../pages/tissue-information-page/interfaces/tissue-information-interfaces';
-import Select from '../../dss/component/select';
+import Select from 'dss/component/select';
 import DatePicker from './date-picker';
-import Input from '../../dss/component/input';
+import Input from 'dss/component/input';
 import {FillTissue} from '../pages/tissue-information-page/interfaces/fill-tissue-interface';
 import {tissueInputs} from '../pages/tissue-information-page/models/tissue-inputs';
 import {InputTypeEnum} from './tabs/enums/onc-history-input-columns-enum';
-import Button from '../../dss/component/button';
+import Button from 'dss/component/button';
 import SMID from './smid';
 
 export default class Tissue {
-  private readonly SMIDModal: SMID = new SMID(this.page, this.tissueIndex);
+  private readonly SMIDModal: SMID;
 
   constructor(private readonly page: Page, private readonly tissueIndex: number = 0) {
+    this.SMIDModal = new SMID(this.page, this.tissueIndex);;
   }
 
   public async getFieldValue(dynamicField: TissueDynamicFieldsEnum): Promise<string> {
