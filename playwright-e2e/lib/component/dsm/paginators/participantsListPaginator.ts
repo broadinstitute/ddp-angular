@@ -27,7 +27,7 @@ export class ParticipantsListPaginator {
   public async hasNext(): Promise<boolean> {
     const nextLocator = this.page.locator(this.nextXPath);
     const isVisible = await nextLocator.isVisible();
-    return isVisible ? true : !!(await nextLocator.getAttribute('class'))?.includes('disabled');
+    return isVisible ? !!(await nextLocator.getAttribute('class'))?.includes('disabled') : false;
   }
 
   private async paginate(xpath: string): Promise<void> {
