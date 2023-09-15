@@ -27,6 +27,8 @@ import TrackingScanPage from 'dsm/pages/scanner-pages/trackingScan-page';
 
 // don't run in parallel
 test.describe('Blood Kits upload flow', () => {
+  test.describe.configure({ mode: 'serial' });
+
   let welcomePage: WelcomePage;
   let homePage: HomePage;
   let navigation: Navigation;

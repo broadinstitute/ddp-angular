@@ -27,6 +27,8 @@ import {SampleTypesEnum} from 'dsm/pages/kitsInfo-pages/enums/sampleTypes-enum';
 
 // don't run in parallel
 test.describe('Saliva Kits upload flow', () => {
+  test.describe.configure({ mode: 'serial' });
+
   let welcomePage: WelcomePage;
   let homePage: HomePage;
   let navigation: Navigation;

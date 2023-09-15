@@ -3,18 +3,18 @@ import { test } from 'fixtures/dsm-fixture';
 import { Navigation } from 'dsm/component/navigation/navigation';
 import Select from 'dss/component/select';
 import { KitUploadInfo } from 'dsm/pages/kitUpload-page/models/kitUpload-model';
-import {StudyEnum} from 'dsm/component/navigation/enums/selectStudyNav-enum';
+import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import { KitTypeEnum } from 'dsm/component/kitType/enums/kitType-enum';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
-import {StudyNavEnum} from 'dsm/component/navigation/enums/studyNav-enum';
+import { StudyNavEnum } from 'dsm/component/navigation/enums/studyNav-enum';
 import * as user from 'data/fake-user.json';
 import crypto from 'crypto';
 import KitUploadPage from 'dsm/pages/kitUpload-page/kitUpload-page';
-import {SamplesNavEnum} from 'dsm/component/navigation/enums/samplesNav-enum';
+import { SamplesNavEnum } from 'dsm/component/navigation/enums/samplesNav-enum';
 import FamilyMemberTab from 'dsm/pages/participant-page/rgp/family-member-tab';
 import { FamilyMember } from 'dsm/component/tabs/enums/familyMember-enum';
 import KitsWithoutLabelPage from 'dsm/pages/kitsInfo-pages/kitsWithoutLabel-page';
-import {KitsColumnsEnum} from 'dsm/pages/kitsInfo-pages/enums/kitsColumns-enum';
+import { KitsColumnsEnum } from 'dsm/pages/kitsInfo-pages/enums/kitsColumns-enum';
 import KitsSentPage from 'dsm/pages/kitsInfo-pages/kitsSentPage';
 import KitsReceivedPage from 'dsm/pages/kitsInfo-pages/kitsReceived-page/kitsReceivedPage';
 import TrackingScanPage from 'dsm/pages/scanner-pages/trackingScan-page';
@@ -24,7 +24,9 @@ import { saveParticipantGuid } from 'utils/faker-utils';
 import { ParticipantListTable } from 'dsm/component/tables/participant-list-table';
 
 test.describe('Blood & RNA Kit Upload', () => {
-test.skip('Verify that a blood & rna kit can be uploaded @dsm @rgp @functional @upload', async ({ page, request}, testInfo) => {
+  test.describe.configure({ mode: 'serial' });
+
+  test.skip('Verify that a blood & rna kit can be uploaded @dsm @rgp @functional @upload', async ({ page, request }, testInfo) => {
     const testResultDirectory = testInfo.outputDir;
 
     const study = StudyEnum.RGP;
@@ -156,5 +158,5 @@ test.skip('Verify that a blood & rna kit can be uploaded @dsm @rgp @functional @
     //Check for the received RNA kit
     await kitsReceivedPage.search(KitsColumnsEnum.MF_CODE, rnaLabel);
     await kitsReceivedPage.assertDisplayedRowsCount(1);
-    });
+  });
 });
