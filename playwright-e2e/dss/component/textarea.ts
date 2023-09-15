@@ -34,7 +34,7 @@ export default class TextArea extends WidgetBase {
     await this.toLocator().blur();
   }
 
-  public get maxLength(): Promise<string | null> {
+  public async maxLength(): Promise<string | null> {
     return this.toLocator().getAttribute('maxlength');
   }
 }

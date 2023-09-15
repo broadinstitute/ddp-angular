@@ -1,8 +1,6 @@
 import fs from 'fs';
 import csv from 'csv-parser';
 import { logError, logInfo } from 'utils/log-utils';
-import {Result} from 'pdf-parse';
-import pdf from 'pdf-parse'
 
 
 export interface MailListCSV {
@@ -48,15 +46,4 @@ export async function readMailListCSVFile(filePath: string | null): Promise<Mail
   });
 }
 
-/**
- * @TODO: This function will need refactoring
- */
-export async function parsePDF(pdfFilePath: string | null): Promise<Result | void> {
-  if (pdfFilePath == null) {
-    throw Error('filePath is null');
-  }
-  const dataBuffer = fs.readFileSync(pdfFilePath);
-  return pdf(dataBuffer, {version: 'v2.0.550'})
-    .catch(() => console.error(`Error while parsing pdf. Path: ${pdfFilePath}`));
-}
 

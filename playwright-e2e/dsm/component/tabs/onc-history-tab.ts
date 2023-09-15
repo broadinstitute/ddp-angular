@@ -6,9 +6,11 @@ import Button from '../../../dss/component/button';
 
 
 export default class OncHistoryTab {
-  private readonly oncHistoryTable = new OncHistoryTable(this.page);
+  private readonly oncHistoryTable: OncHistoryTable;
 
-  constructor(private readonly page: Page) {}
+  constructor(private readonly page: Page) {
+    this.oncHistoryTable = new OncHistoryTable(this.page);
+  }
 
   public get table(): OncHistoryTable {
     return this.oncHistoryTable;
@@ -40,13 +42,11 @@ export default class OncHistoryTab {
   }
 
   public async downloadPDFBundle(): Promise<void> {
-    const downloadPDFBundleBtn = this.downloadPDFBundleButton;
-    await this.downloadPDFFlow(downloadPDFBundleBtn);
+    await this.downloadPDFFlow(this.downloadPDFBundleButton);
   }
 
   public async downloadRequestDocuments(): Promise<void> {
-    const downloadPDFBundleBtn = this.downloadRequestDocumentsButton;
-    await this.downloadPDFFlow(downloadPDFBundleBtn);
+    await this.downloadPDFFlow(this.downloadRequestDocumentsButton);
   }
 
 

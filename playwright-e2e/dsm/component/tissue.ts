@@ -1,4 +1,4 @@
-import {waitForResponse} from '../../utils/test-utils';
+import {waitForResponse} from 'utils/test-utils';
 import {expect, Locator, Page} from '@playwright/test';
 import {
   SequencingResultsEnum,
@@ -35,26 +35,23 @@ export default class Tissue {
     } = tissueInputs.get(dynamicField) as TissueInputsMapValue;
 
     let value: Promise<any>;
+    const inputLocator = await this.getField(dynamicField, byText);
 
     switch (inputType) {
       case InputTypeEnum.INPUT: {
-        const inputLocator = await this.getField(dynamicField, byText);
-        value = new Input(this.page, {root: inputLocator}).currentValue;
+        value = new Input(this.page, {root: inputLocator}).currentValue();
         break;
       }
       case InputTypeEnum.DATE: {
-        const inputLocator = await this.getField(dynamicField);
-        value = new Input(this.page, {root: inputLocator}).currentValue;
+        value = new Input(this.page, {root: inputLocator}).currentValue();
         break;
       }
       case InputTypeEnum.TEXTAREA: {
-        const textAreaLocator = await this.getField(dynamicField);
-        value = new TextArea(this.page, {root: textAreaLocator}).currentValue;
+        value = new TextArea(this.page, {root: inputLocator}).currentValue();
         break;
       }
       case InputTypeEnum.SELECT: {
-        const selectLocator = await this.getField(dynamicField);
-        value = new Select(this.page, {root: selectLocator}).currentValue;
+        value = new Select(this.page, {root: inputLocator}).currentValue();
         break;
       }
       default:
@@ -111,7 +108,7 @@ export default class Tissue {
     const textarea = new TextArea(this.page, {root: textAreaLocator});
     const currentValue = await this.getCurrentValue(dynamicField, textarea);
     let actualValue = typeof value === 'number' ? value.toString() : value;
-    const maxLength = await textarea.maxLength;
+    const maxLength = await textarea.maxLength();
 
     if (maxLength && actualValue.length > Number(maxLength)) {
       actualValue = actualValue.slice(0, Number(maxLength));
@@ -142,7 +139,7 @@ export default class Tissue {
     const inputElement = new Input(this.page, {root: inputLocator});
     const currentValue = await this.getCurrentValue(dynamicField, inputElement);
     let actualValue = typeof value === 'number' ? value.toString() : value;
-    const maxLength = await inputElement.maxLength;
+    const maxLength = await inputElement.maxLength();
 
     if (maxLength && actualValue.length > Number(maxLength)) {
       actualValue = actualValue.slice(0, Number(maxLength));
@@ -189,7 +186,7 @@ export default class Tissue {
   }
 
   private async getCurrentValue(dynamicField: TissueDynamicFieldsEnum, element: Input | Select | TextArea): Promise<string> {
-    const currentValue = await element.currentValue;
+    const currentValue = await element.currentValue();
     const isDisabled = await element.isDisabled();
 
     await expect(isDisabled, `'${dynamicField}' is disabled`).toBeFalsy();
