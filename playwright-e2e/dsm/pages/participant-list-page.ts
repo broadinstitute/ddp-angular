@@ -268,20 +268,16 @@ export default class ParticipantListPage {
 
     // Sort by Registration Date to pick newest participants
     await participantListTable.sort(registrationDate, SortOrder.ASC);
-
-    while (participantsCount > 0) {
+    const endTime = Date.now() + 30 * 1000;
+    while (participantsCount > 0 && Date.now() < endTime) {
       let rowIndex = -1;
       // Iterate rows in random order
       const array = shuffle([...Array(participantsCount).keys()]); // [0, 1, 2, ...];
-      console.log(`array: ${array}`)
       for (const index of array) {
         rowIndex = await compare(index);
         if (rowIndex !== -1) {
-          break;
+          return rowIndex;
         }
-      }
-      if (rowIndex !== -1) {
-        return rowIndex;
       }
       const hasNextPage = await participantListTable.paginator.hasNext();
       if (hasNextPage) {
