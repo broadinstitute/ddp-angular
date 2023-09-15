@@ -1,22 +1,22 @@
 import {expect, Locator, Page} from '@playwright/test';
 import Table from 'dss/component/table';
-import DatePicker from '../date-picker';
+import DatePicker from 'dsm/component/date-picker';
 import TextArea from 'dss/component/textarea';
 import {
   InputTypeEnum,
   OncHistoryInputColumnsEnum,
   OncHistorySelectRequestEnum
-} from '../tabs/enums/onc-history-input-columns-enum';
-import {OncHistoryInputs} from '../tabs/models/onc-history-inputs';
+} from 'dsm/component/tabs/enums/onc-history-input-columns-enum';
+import {OncHistoryInputs} from 'dsm/component/tabs/models/onc-history-inputs';
 import {
   OncHistoryInputsMapValue,
   OncHistoryInputsTypes
-} from '../tabs/interfaces/onc-history-inputs-types';
+} from 'dsm/component/tabs/interfaces/onc-history-inputs-types';
 import {waitForResponse} from 'utils/test-utils';
 import Select from 'dss/component/select';
-import TissueInformationPage from '../../pages/tissue-information-page/tissue-information-page';
+import TissueInformationPage from 'dsm/pages/tissue-information-page/tissue-information-page';
 import Button from 'dss/component/button';
-import {FillDate} from '../../pages/tissue-information-page/interfaces/tissue-information-interfaces';
+import {FillDate} from 'dsm/pages/tissue-information-page/interfaces/tissue-information-interfaces';
 import Input from 'dss/component/input';
 import Checkbox from 'dss/component/checkbox';
 
@@ -40,7 +40,7 @@ export default class OncHistoryTable extends Table {
   }
 
   public async deleteRow(index: number): Promise<void> {
-    const deleteRowBtn = await this.deleteRowButton(index);
+    const deleteRowBtn = this.deleteRowButton(index);
     await expect(deleteRowBtn, 'Delete row button is not visible').toBeVisible();
     await deleteRowBtn.click();
     await waitForResponse(this.page, {uri: 'patch'});
@@ -56,26 +56,21 @@ export default class OncHistoryTable extends Table {
     let value: Promise<any>;
 
     switch (inputType) {
-      case InputTypeEnum.INPUT: {
+      case InputTypeEnum.INPUT:
         value = new Input(this.page, {root: cell}).currentValue();
         break;
-      }
-      case InputTypeEnum.DATE: {
+      case InputTypeEnum.DATE:
         value = new Input(this.page, {root: cell}).currentValue();
         break;
-      }
-      case InputTypeEnum.TEXTAREA: {
+      case InputTypeEnum.TEXTAREA:
         value = new TextArea(this.page, {root: cell}).currentValue();
         break;
-      }
-      case InputTypeEnum.SELECT: {
+      case InputTypeEnum.SELECT:
         value = new Select(this.page, {root: cell}).currentValue();
         break;
-      }
       default:
         throw new Error(`Incorrect input type - ${inputType}`)
     }
-
     return value;
   }
 
@@ -202,7 +197,7 @@ export default class OncHistoryTable extends Table {
     const currentValue = await element.currentValue();
     const isDisabled = await element.isDisabled();
 
-    await expect(isDisabled, `Input field is disabled`).toBeFalsy();
+    expect(isDisabled, `Input field is disabled`).toBeFalsy();
 
     return currentValue?.trim();
   }

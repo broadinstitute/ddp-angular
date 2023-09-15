@@ -1,8 +1,8 @@
 import {expect, Locator, Page} from '@playwright/test';
-import OncHistoryTable from '../tables/onc-history-table';
-import {waitForResponse} from '../../../utils/test-utils';
-import Select from '../../../dss/component/select';
-import Button from '../../../dss/component/button';
+import OncHistoryTable from 'dsm/component/tables/onc-history-table';
+import {waitForResponse} from 'utils/test-utils';
+import Select from 'dss/component/select';
+import Button from 'dss/component/button';
 
 
 export default class OncHistoryTab {

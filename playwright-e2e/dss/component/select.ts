@@ -102,7 +102,7 @@ export default class Select extends WidgetBase {
   }
 
   async currentValue(): Promise<string> {
-    return this.toLocator().locator('span.mat-select-min-line').textContent() as Promise<string>;
+    return (await this.toLocator().locator('span.mat-select-min-line').textContent()) as string;
   }
 
   async isSelectDisabled(): Promise<boolean> {

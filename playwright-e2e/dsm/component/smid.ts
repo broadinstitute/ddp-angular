@@ -1,5 +1,4 @@
 import {expect, Locator, Page} from '@playwright/test';
-import Button from 'dss/component/button';
 import Input from 'dss/component/input';
 import {waitForResponse} from 'utils/test-utils';
 import Modal from './modal';
@@ -53,7 +52,7 @@ export default class SMID {
   }
 
   /* Helper Functions */
-  private isInputVisible(index: number): Promise<boolean> {
+  private async isInputVisible(index: number): Promise<boolean> {
     return this.fields.nth(index).isVisible();
   }
 

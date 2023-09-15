@@ -6,17 +6,17 @@ import {
   TissueDynamicFieldsEnum,
   TissueTypesEnum,
   TumorTypesEnum
-} from '../pages/tissue-information-page/enums/tissue-information-enum';
+} from 'dsm/pages/tissue-information-page/enums/tissue-information-enum';
 import TextArea from 'dss/component/textarea';
 import {
   FillDate,
   TissueInputsMapValue
-} from '../pages/tissue-information-page/interfaces/tissue-information-interfaces';
+} from 'dsm/pages/tissue-information-page/interfaces/tissue-information-interfaces';
 import Select from 'dss/component/select';
 import DatePicker from './date-picker';
 import Input from 'dss/component/input';
-import {FillTissue} from '../pages/tissue-information-page/interfaces/fill-tissue-interface';
-import {tissueInputs} from '../pages/tissue-information-page/models/tissue-inputs';
+import {FillTissue} from 'dsm/pages/tissue-information-page/interfaces/fill-tissue-interface';
+import {tissueInputs} from 'dsm/pages/tissue-information-page/models/tissue-inputs';
 import {InputTypeEnum} from './tabs/enums/onc-history-input-columns-enum';
 import Button from 'dss/component/button';
 import SMID from './smid';
@@ -38,22 +38,18 @@ export default class Tissue {
     const inputLocator = await this.getField(dynamicField, byText);
 
     switch (inputType) {
-      case InputTypeEnum.INPUT: {
+      case InputTypeEnum.INPUT:
         value = new Input(this.page, {root: inputLocator}).currentValue();
         break;
-      }
-      case InputTypeEnum.DATE: {
+      case InputTypeEnum.DATE:
         value = new Input(this.page, {root: inputLocator}).currentValue();
         break;
-      }
-      case InputTypeEnum.TEXTAREA: {
+      case InputTypeEnum.TEXTAREA:
         value = new TextArea(this.page, {root: inputLocator}).currentValue();
         break;
-      }
-      case InputTypeEnum.SELECT: {
+      case InputTypeEnum.SELECT:
         value = new Select(this.page, {root: inputLocator}).currentValue();
         break;
-      }
       default:
         throw new Error(`Incorrect input type - ${inputType}`)
     }
@@ -189,7 +185,7 @@ export default class Tissue {
     const currentValue = await element.currentValue();
     const isDisabled = await element.isDisabled();
 
-    await expect(isDisabled, `'${dynamicField}' is disabled`).toBeFalsy();
+    expect(isDisabled, `'${dynamicField}' is disabled`).toBeFalsy();
 
     return currentValue?.trim();
   }
