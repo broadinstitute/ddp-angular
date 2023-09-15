@@ -33,7 +33,9 @@ import { waitForResponse } from 'utils/test-utils';
  */
 
 // don't run in parallel
-test.describe.serial('Kit Upload', () => {
+test.describe('Kit Upload', () => {
+  test.describe.configure({ mode: 'serial' });
+
   let welcomePage: WelcomePage;
   let navigation: Navigation;
   let participantPage: ParticipantPage;
