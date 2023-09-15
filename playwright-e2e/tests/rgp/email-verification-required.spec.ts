@@ -8,7 +8,7 @@ import HomePage from 'dss/pages/rgp/home-page';
 const { RGP_USER_EMAIL, RGP_USER_PASSWORD, RGP_BASE_URL } = process.env;
 
 test.describe('Registration requires email Verification', () => {
-  test('Login is blocked without verification @functional @enrollment @rgp', async ({ page }) => {
+  test('Login is blocked without verification @functional @dss @rgp', async ({ page }) => {
     const homePage = new HomePage(page);
     await homePage.clickGetStarted();
 
@@ -35,6 +35,6 @@ test.describe('Registration requires email Verification', () => {
 
     await expect(page.locator('.PageHeader-title')).toHaveText('Email verification required');
     await expect(page.locator('p.Paragraph')).toHaveText('Please verify your email using the link that was sent to your email address.');
-    expect(page.url()).toEqual(`${RGP_BASE_URL}/email-verification-required`);
+    expect(page.url()).toBe(`${RGP_BASE_URL}/email-verification-required`);
   });
 });

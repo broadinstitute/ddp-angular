@@ -95,7 +95,7 @@ test.describe.serial('When an interested participant does NOT meet participation
       });
       expect(finding.length,
         `Matching record for email: "${emailInJson}" and dateCreated: "${dateInJson}" in downloaded csv file.`)
-      .toEqual(1);
+      .toBe(1);
     });
 
     // Verify Mailing List table
@@ -109,11 +109,11 @@ test.describe.serial('When an interested participant does NOT meet participation
     // Verify new RGP participant email is found inside table
     await table.sort(COLUMN.DATE, SortOrder.DESC); // Sorting to get newest record to display first
     let tCell = await table.findCell(COLUMN.EMAIL, newEmail, COLUMN.EMAIL);
-    await expect(tCell, `Matching email ${newEmail} in Mailing List table`).toBeTruthy();
+    expect(tCell, `Matching email ${newEmail} in Mailing List table`).toBeTruthy();
 
     // Verify date signed up is found inside table
     tCell = await table.findCell(COLUMN.EMAIL, newEmail, COLUMN.DATE, { exactMatch: false });
-    await expect(tCell, `Find column ${COLUMN.DATE} in Mailing List table`).toBeTruthy();
+    expect(tCell, `Find column ${COLUMN.DATE} in Mailing List table`).toBeTruthy();
 
     // Retrieve new RGP user Date Signed Up from API response body, compare with what's displayed in table
     const user: MailListCSV[] = lodash.filter(respJson, row => row.email === newEmail);

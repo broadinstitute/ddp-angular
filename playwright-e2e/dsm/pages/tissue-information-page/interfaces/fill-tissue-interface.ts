@@ -1,4 +1,4 @@
-import {SequencingResultsEnum, TissueTypesEnum, TumorTypesEnum} from '../enums/tissue-information-enum';
+import {SequencingResultsEnum, TissueTypesEnum, TumorTypesEnum} from 'dsm/pages/tissue-information-page/enums/tissue-information-enum';
 import {FillDate} from './tissue-information-interfaces';
 
 export interface FillTissue {

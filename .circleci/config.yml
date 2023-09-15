@@ -61,7 +61,7 @@ executors:
     resource_class: medium+
     docker:
       # Playwright docker image version MUST match Playwright version in project
-      - image: mcr.microsoft.com/playwright:v1.31.0-focal
+      - image: mcr.microsoft.com/playwright:v1.38.0-jammy
     working_directory: *playwright_path
     environment:
       TZ: "America/New_York"

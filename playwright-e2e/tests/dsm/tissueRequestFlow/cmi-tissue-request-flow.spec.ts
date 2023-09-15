@@ -1,19 +1,10 @@
-import {StudyEnum} from '../../../dsm/component/navigation/enums/selectStudyNav-enum';
+import {StudyEnum} from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import {test} from 'fixtures/dsm-fixture';
-import ParticipantListPage from '../../../dsm/pages/participant-list-page';
-import {AdditionalFilter} from '../../../dsm/component/filters/sections/search/search-enums';
-import ParticipantPage from '../../../dsm/pages/participant-page/participant-page';
-import {TabEnum} from '../../../dsm/component/tabs/enums/tab-enum';
-import OncHistoryTab from '../../../dsm/component/tabs/onc-history-tab';
-import {
-  OncHistoryInputColumnsEnum,
-  OncHistorySelectRequestEnum
-} from '../../../dsm/component/tabs/enums/onc-history-input-columns-enum';
-import {
-  ProblemWithTissueEnum, SequencingResultsEnum, SMIdEnum, TissueDynamicFieldsEnum,
-  TissueInformationEnum, TissueTypesEnum, TumorTypesEnum
-} from '../../../dsm/pages/tissue-information-page/enums/tissue-information-enum';
-
+import ParticipantListPage from 'dsm/pages/participant-list-page';
+import {AdditionalFilter} from 'dsm/component/filters/sections/search/search-enums';
+import ParticipantPage from 'dsm/pages/participant-page/participant-page';
+import {TabEnum} from 'dsm/component/tabs/enums/tab-enum';
+import OncHistoryTab from 'dsm/component/tabs/onc-history-tab';
 
 test.describe('Tissue Request Flow', () => {
   const studies = [StudyEnum.LMS];
@@ -40,4 +31,4 @@ test.describe('Tissue Request Flow', () => {
       const oncHistoryTable = oncHistoryTab.table;
     })
   }
-})
+});

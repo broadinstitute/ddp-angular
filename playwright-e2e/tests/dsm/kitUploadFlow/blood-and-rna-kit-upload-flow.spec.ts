@@ -24,7 +24,7 @@ import { saveParticipantGuid } from 'utils/faker-utils';
 import { ParticipantListTable } from 'dsm/component/tables/participant-list-table';
 
 test.describe('Blood & RNA Kit Upload', () => {
-test.skip('Verify that a blood & rna kit can be uploaded @rgp @functional @upload', async ({ page, request}, testInfo) => {
+test.skip('Verify that a blood & rna kit can be uploaded @dsm @rgp @functional @upload', async ({ page, request}, testInfo) => {
     const testResultDirectory = testInfo.outputDir;
 
     const study = StudyEnum.RGP;
@@ -69,7 +69,7 @@ test.skip('Verify that a blood & rna kit can be uploaded @rgp @functional @uploa
     //Deactivate existing kits for participant
     //Note: no blood kits are automatically created for RGP - preliminary deactivation of existing kits is done in case of prior test run
     const kitsWithoutLabelPage = await navigation.selectFromSamples<KitsWithoutLabelPage>(SamplesNavEnum.KITS_WITHOUT_LABELS);
-    await kitsWithoutLabelPage.waitForLoad();
+    await kitsWithoutLabelPage.waitForReady();
     await kitsWithoutLabelPage.assertPageTitle();
     await kitsWithoutLabelPage.selectKitType(kitType);
     await kitsWithoutLabelPage.assertCreateLabelsBtn();
@@ -79,15 +79,15 @@ test.skip('Verify that a blood & rna kit can be uploaded @rgp @functional @uploa
 
     //The rest of the kit upload information - RGP kits are by family member instead of by account - using the proband's info to make a kit
     const kitUploadInfo = new KitUploadInfo(shortID, user.patient.firstName, user.patient.lastName);
-    kitUploadInfo.street1 = user.patient.streetAddress;
-    kitUploadInfo.city = user.patient.city;
-    kitUploadInfo.postalCode = user.patient.zip;
-    kitUploadInfo.state = user.patient.state.abbreviation;
-    kitUploadInfo.country = user.patient.country.abbreviation;
+    kitUploadInfo.address.street1 = user.patient.streetAddress;
+    kitUploadInfo.address.city = user.patient.city;
+    kitUploadInfo.address.postalCode = user.patient.zip;
+    kitUploadInfo.address.state = user.patient.state.abbreviation;
+    kitUploadInfo.address.country = user.patient.country.abbreviation;
 
     //Upload a Blood & RNA kit
     const kitUploadPage = await navigation.selectFromSamples<KitUploadPage>(SamplesNavEnum.KIT_UPLOAD);
-    await kitUploadPage.waitForLoad();
+    await kitUploadPage.waitForReady();
     await kitUploadPage.assertPageTitle();
     await kitUploadPage.assertDisplayedKitTypes(expectedKitTypes);
     await kitUploadPage.selectKitType(kitType);
@@ -98,7 +98,7 @@ test.skip('Verify that a blood & rna kit can be uploaded @rgp @functional @uploa
 
     //Go to Kits w/o Label to extract a shipping ID
     await navigation.selectFromSamples<KitsWithoutLabelPage>(SamplesNavEnum.KITS_WITHOUT_LABELS);
-    await kitsWithoutLabelPage.waitForLoad();
+    await kitsWithoutLabelPage.waitForReady();
     await kitsWithoutLabelPage.selectKitType(kitType);
     await kitsWithoutLabelPage.assertCreateLabelsBtn();
     await kitsWithoutLabelPage.assertReloadKitListBtn();

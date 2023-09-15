@@ -16,6 +16,7 @@ export class ScientificResearchComponent {
         MBC: 'https://www.mbcproject.org/',
         MBCSpanish: 'http://mbcprojectenespanol.org/',
         MPC: 'https://mpcproject.org/',
-        Osteo: 'https://osproject.org/'
+        Osteo: 'https://osproject.org/',
+        PediHCC: '/pedihcc'
     };
 }

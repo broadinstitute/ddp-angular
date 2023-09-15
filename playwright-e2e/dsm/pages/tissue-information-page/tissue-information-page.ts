@@ -1,11 +1,11 @@
 import {expect, Locator, Page} from '@playwright/test';
 import {DynamicFieldsEnum, ProblemWithTissueEnum, TissueInformationEnum} from './enums/tissue-information-enum';
-import DatePicker from '../../component/date-picker';
+import DatePicker from 'dsm/component/date-picker';
 import {waitForResponse} from 'utils/test-utils';
 import {FillDate} from './interfaces/tissue-information-interfaces';
 import Select from 'dss/component/select';
 import TextArea from 'dss/component/textarea';
-import Tissue from '../../component/tissue';
+import Tissue from 'dsm/component/tissue';
 import Checkbox from 'dss/component/checkbox';
 import Button from 'dss/component/button';
 import Input from 'dss/component/input';

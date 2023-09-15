@@ -40,8 +40,8 @@ export default class ContactInformationTab {
     return this.split(phone);
   }
 
-  public isNotEnteredVisible(): Promise<boolean> {
-    return this.page.locator(this.notEnteredInfoXPath).isVisible();
+  public async isNotEnteredVisible(): Promise<boolean> {
+    return await this.page.locator(this.notEnteredInfoXPath).isVisible();
   }
 
   private async readInfoFor(key: ContactInfoEnum): Promise<string | null> {

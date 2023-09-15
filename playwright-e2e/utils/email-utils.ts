@@ -95,6 +95,6 @@ export async function checkUserReceivedEmails(emailedTo: string, emailChecks: Em
   for (let i = 0; i < emailChecks.length; i++) {
     const email = emailChecks[i];
     const foundEmail = await hasUserReceivedEmail(emailedTo, email.subject, email.textProbe);
-    await expect.soft(foundEmail, `Email '${email.subject}' to ${emailedTo}`).toBeTruthy();
+    expect.soft(foundEmail, `Email '${email.subject}' to ${emailedTo}`).toBeTruthy();
   }
 }

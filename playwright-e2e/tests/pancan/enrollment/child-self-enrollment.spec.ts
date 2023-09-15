@@ -20,7 +20,7 @@ const { PANCAN_USER_EMAIL, PANCAN_USER_PASSWORD } = process.env;
 test.describe('Enroll child ', () => {
   const lastName = generateUserName(user.patient.lastName);
 
-  test('can complete child-enrollment @enrollment @pancan @functional', async ({ page }) => {
+  test('can complete child-enrollment @dss @pancan @functional', async ({ page }) => {
     const pancanHomePage = new HomePage(page);
     await pancanHomePage.join();
 
@@ -119,12 +119,12 @@ test.describe('Enroll child ', () => {
     expect(headers).toEqual(orderedHeaders);
 
     const researchConsentFormStatusCell = await table.findCell('Form', 'Research Consent Form - Parent or Guardian', 'Status');
-    await expect(await researchConsentFormStatusCell?.innerText()).toEqual('Complete');
+    expect(await researchConsentFormStatusCell?.innerText()).toBe('Complete');
     const medicalReleaseFormStatusCell = await table.findCell('Form', 'Medical Release Form', 'Status');
-    await expect(await medicalReleaseFormStatusCell?.innerText()).toEqual('Complete');
+    expect(await medicalReleaseFormStatusCell?.innerText()).toBe('Complete');
     const leukemiaCancerStatusCell = await table.findCell('Form', "Survey: Your Child's Leukemia (not otherwise specified)", 'Status');
-    await expect(await leukemiaCancerStatusCell?.innerText()).toEqual('Complete');
+    expect(await leukemiaCancerStatusCell?.innerText()).toBe('Complete');
     const aboutYourChildFormStatusCell = await table.findCell('Form', 'Survey: About Your Child', 'Status');
-    await expect(await aboutYourChildFormStatusCell?.innerText()).toEqual('Complete');
+    expect(await aboutYourChildFormStatusCell?.innerText()).toBe('Complete');
   });
 });

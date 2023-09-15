@@ -71,8 +71,8 @@ test.describe('Create Follow-Up Survey', () => {
       const json = JSON.parse(await response.text());
       const filterResult = json.filter((item: { surveyInfo: { participantId: string | null; }; reason: string; }) => {
           return item.surveyInfo.participantId === participantId && item.reason === reason
-        })
-      await expect(filterResult.length).toEqual(1);
+        });
+      expect(filterResult.length).toBe(1);
     });
   }
 
@@ -93,4 +93,4 @@ test.describe('Create Follow-Up Survey', () => {
     }
     return survey;
   }
-})
+});

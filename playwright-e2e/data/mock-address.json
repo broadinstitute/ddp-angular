@@ -1,0 +1,66 @@
+{
+  "boston": {
+    "name": "Broad",
+    "country": {
+      "name": "UNITED STATES",
+      "abbreviation": "US"
+    },
+    "state": {
+      "name": "MASSACHUSETTS",
+      "abbreviation": "MA"
+    },
+    "street": "105 Broadway",
+    "street2": "",
+    "city": "Cambridge",
+    "zip": "02142-1027",
+    "phone": "6177149000"
+  },
+  "hospital": {
+    "name": "Mass General",
+    "country": {
+      "name": "UNITED STATES",
+      "abbreviation": "US"
+    },
+    "state": {
+      "name": "MASSACHUSETTS",
+      "abbreviation": "MA"
+    },
+    "street": "55 Fruit Street",
+    "street2": "",
+    "city": "Boston",
+    "zip": "02114",
+    "phone": "6187247123"
+  },
+  "canada": {
+    "name": "red maple",
+    "country": {
+      "name": "CANADA",
+      "abbreviation": "CA"
+    },
+    "state": {
+      "name": "ONTARIO",
+      "abbreviation": "ON"
+    },
+    "street": "160 Main Street",
+    "street2": "Suite A10",
+    "city": "Ottawa",
+    "zip": "11111",
+    "phone": "6139333692"
+  },
+  "newyork": {
+    "name": "NY",
+    "country": {
+      "name": "UNITED STATES",
+      "abbreviation": "US"
+    },
+    "state": {
+      "name": "MASSACHUSETTS",
+      "abbreviation": "MA"
+    },
+    "street": "101010 Eighth Avenue",
+    "street2": "Suite A1000",
+    "city": "New York",
+    "zip": "11111",
+    "phone": "6669999666"
+  }
+}

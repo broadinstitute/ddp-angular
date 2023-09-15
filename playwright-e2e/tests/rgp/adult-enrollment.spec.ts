@@ -25,7 +25,7 @@ test.describe.serial('Adult Self Enrollment', () => {
     await expect(locator).toContainText(itemName);
   };
 
-  test('Can complete application @functional @enrollment @rgp', async ({ page }) => {
+  test('Can complete application @functional @@dss @rgp', async ({ page }) => {
     const homePage = new HomePage(page);
     await homePage.clickGetStarted();
 
@@ -145,17 +145,17 @@ test.describe.serial('Adult Self Enrollment', () => {
     const actionsCell = await table.findCell('Form', 'Tell us about your family', 'Actions');
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const viewButton = table.findButtonInCell(actionsCell!, { label: 'View' });
-    await expect(viewButton).toBeTruthy();
+    expect(viewButton).toBeTruthy();
     // Make sure the View button in table cell is working by clicking it and checks page navigation
     await viewButton.click();
     await tellUsAboutYourFamily.waitForReady();
     // fields should be disabled. check one field to verify is disabled
-    expect(await tellUsAboutYourFamily.yourTitle().isDisabled()).toEqual(true);
-    expect(await tellUsAboutYourFamily.yourFirstName().isDisabled()).toEqual(true);
+    expect(await tellUsAboutYourFamily.yourTitle().isDisabled()).toBe(true);
+    expect(await tellUsAboutYourFamily.yourFirstName().isDisabled()).toBe(true);
   });
 
   //Skipping until PEPPER-692 is done - which will let this pass consistently in dev and not just test
-  test.skip('Go to DSM to verify the newly created account can be found @functional @rgp', async ({ page, request }) => {
+  test.skip('Go to DSM to verify the newly created account can be found @dss @functional @rgp', async ({ page, request }) => {
     //Go to DSM to verify the newly created account can be found there
     await login(page);
     const navigation = new Navigation(page, request);

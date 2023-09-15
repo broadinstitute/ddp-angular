@@ -17,7 +17,7 @@ export default class Tabs {
 
   public async clickTab<T extends object>(tabName: TabEnum): Promise<T> {
     await this.tabLocator(tabName).click();
-    await expect(await new Tabs(this.page).isOpen(tabName)).toBe(true);
+    expect(await new Tabs(this.page).isOpen(tabName)).toBe(true);
     return (this.tabs as Map<string, object>).get(tabName) as T;
   }
 
