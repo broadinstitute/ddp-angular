@@ -233,21 +233,17 @@ export default class ParticipantListPage {
     const registrationDate = 'Registration Date';
     const validColumn = 'Valid';
 
-    const findHelper = async (index: number): Promise<number> => {
-      //const array = shuffle([...Array(rowCount).keys()]); // [0, 1, 2, ...];
-      //for (const index of array) {
-        console.log(`findHelper() index: ${index}`);
-        const fname = await participantListTable.getTextAt(index, 'First Name');
-        const normalCollaboratorSampleID = await participantListTable.getTextAt(index, normalCollaboratorSampleIDColumn);
-        const [isAddressValid] = await participantListTable.getTextAt(index, validColumn);
-        let matchedFirstName = true;
-        if (firstNameSubstring) {
-          matchedFirstName = fname.indexOf(firstNameSubstring) !== -1
-        }
-        if (matchedFirstName && normalCollaboratorSampleID.length <= 5 && isAddressValid.toLowerCase() === 'true') {
-          return index;
-        }
-      //}
+    const compare = async (index: number): Promise<number> => {
+      const fname = await participantListTable.getTextAt(index, 'First Name');
+      const normalCollaboratorSampleID = await participantListTable.getTextAt(index, normalCollaboratorSampleIDColumn);
+      const [isAddressValid] = await participantListTable.getTextAt(index, validColumn);
+      let matchedFirstName = true;
+      if (firstNameSubstring) {
+        matchedFirstName = fname.indexOf(firstNameSubstring) !== -1
+      }
+      if (matchedFirstName && normalCollaboratorSampleID.length <= 5 && isAddressValid.toLowerCase() === 'true') {
+        return index;
+      }
       return -1;
     };
 
@@ -258,7 +254,6 @@ export default class ParticipantListPage {
 
     const participantListTable = this.participantListTable;
     await expect(participantListTable.rowLocator().first()).toBeVisible();
-
 
     const customizeViewPanel = this.filters.customizeViewPanel;
     await customizeViewPanel.open();
@@ -274,14 +269,13 @@ export default class ParticipantListPage {
     // Sort by Registration Date to pick newest participants
     await participantListTable.sort(registrationDate, SortOrder.ASC);
 
-    // randomize iteration order
-    // const shuffledArray = shuffle([...Array(participantsCount).keys()]); // [0, 1, 2, ...];
     while (participantsCount > 0) {
       let rowIndex = -1;
+      // Iterate rows in random order
       const array = shuffle([...Array(participantsCount).keys()]); // [0, 1, 2, ...];
+      console.log(`array: ${array}`)
       for (const index of array) {
-        console.log(`forloop index: ${index}`);
-        rowIndex = await findHelper(index);
+        rowIndex = await compare(index);
         if (rowIndex !== -1) {
           break;
         }
@@ -289,10 +283,14 @@ export default class ParticipantListPage {
       if (rowIndex !== -1) {
         return rowIndex;
       }
-      await participantListTable.nextPage();
+      const hasNextPage = await participantListTable.paginator.hasNext();
+      if (hasNextPage) {
+        await participantListTable.nextPage();
+      } else {
+        throw new Error('No more table page to find a participant for Kit Upload');
+      }
       participantsCount = await participantListTable.rowsCount;
     }
-    // rowIndex === -1
     throw new Error(`Failed to find a participant for Kit Upload`);
   }
 }
