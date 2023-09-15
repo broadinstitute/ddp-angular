@@ -77,17 +77,16 @@ test.describe('Saliva Kits upload flow', () => {
       // collects data from the contact information tab if the tab is available
       if (isContactInformationTabVisible) {
         const contactInformationTab = await participantPage.clickTab<ContactInformationTab>(TabEnum.CONTACT_INFORMATION);
-        kitUploadInfo.street1 = (await contactInformationTab.getStreet1()) || kitUploadInfo.street1;
-        kitUploadInfo.city = (await contactInformationTab.getCity()) || kitUploadInfo.city;
-        kitUploadInfo.postalCode = (await contactInformationTab.getZip()) || kitUploadInfo.postalCode;
-        kitUploadInfo.state = (await contactInformationTab.getState()) || kitUploadInfo.state;
-        kitUploadInfo.country = (await contactInformationTab.getCountry()) || kitUploadInfo.country;
+        kitUploadInfo.address.street1 = (await contactInformationTab.getStreet1()) || kitUploadInfo.address.street1;
+        kitUploadInfo.address.city = (await contactInformationTab.getCity()) || kitUploadInfo.address.city;
+        kitUploadInfo.address.postalCode = (await contactInformationTab.getZip()) || kitUploadInfo.address.postalCode;
+        kitUploadInfo.address.state = (await contactInformationTab.getState()) || kitUploadInfo.address.state;
+        kitUploadInfo.address.country = (await contactInformationTab.getCountry()) || kitUploadInfo.address.country;
       }
 
       // deactivate all kits for the participant
       const kitsWithoutLabelPage = await navigation.selectFromSamples<KitsWithoutLabelPage>(SamplesNavEnum.KITS_WITHOUT_LABELS);
-      await kitsWithoutLabelPage.waitForLoad();
-      await kitsWithoutLabelPage.assertPageTitle();
+      await kitsWithoutLabelPage.waitForReady();
       await kitsWithoutLabelPage.selectKitType(kitType);
       await kitsWithoutLabelPage.assertCreateLabelsBtn();
       await kitsWithoutLabelPage.assertReloadKitListBtn();
@@ -96,7 +95,7 @@ test.describe('Saliva Kits upload flow', () => {
 
       // Uploads kit
       const kitUploadPage = await navigation.selectFromSamples<KitUploadPage>(SamplesNavEnum.KIT_UPLOAD);
-      await kitUploadPage.waitForLoad();
+      await kitUploadPage.waitForReady();
       await kitUploadPage.assertPageTitle();
       await kitUploadPage.assertDisplayedKitTypes(expectedKitTypes);
       await kitUploadPage.selectKitType(kitType);
@@ -114,7 +113,7 @@ test.describe('Saliva Kits upload flow', () => {
 
       // Kits without label for extracting a shipping ID
       await navigation.selectFromSamples<KitsWithoutLabelPage>(SamplesNavEnum.KITS_WITHOUT_LABELS);
-      await kitsWithoutLabelPage.waitForLoad();
+      await kitsWithoutLabelPage.waitForReady();
       await kitsWithoutLabelPage.selectKitType(kitType);
       await kitsWithoutLabelPage.assertCreateLabelsBtn();
       await kitsWithoutLabelPage.assertReloadKitListBtn();
@@ -185,7 +184,7 @@ test.describe('Saliva Kits upload flow', () => {
 async function sampleTypeCheck(kitUploadInfo: KitUploadInfo, sentOrReceivedPage: KitsSentPage | KitsReceivedPage):
   Promise<void > {
   const sampleType = await sentOrReceivedPage.getData(KitsColumnsEnum.SAMPLE_TYPE);
-  const {country, state} = kitUploadInfo;
-  const isResearchKit = (country === 'US' && state === 'NY') || country === 'CA';
+  const {address} = kitUploadInfo;
+  const isResearchKit = (address.country === 'US' && address.state === 'NY') || address.country === 'CA';
   expect(sampleType.trim()).toBe(isResearchKit ? SampleTypesEnum.RESEARCH : SampleTypesEnum.CLINICAL)
 }

@@ -150,8 +150,8 @@ test.describe.serial('Adult Self Enrollment', () => {
     await viewButton.click();
     await tellUsAboutYourFamily.waitForReady();
     // fields should be disabled. check one field to verify is disabled
-    expect(await tellUsAboutYourFamily.yourTitle().isDisabled()).toEqual(true);
-    expect(await tellUsAboutYourFamily.yourFirstName().isDisabled()).toEqual(true);
+    expect(await tellUsAboutYourFamily.yourTitle().isDisabled()).toBe(true);
+    expect(await tellUsAboutYourFamily.yourFirstName().isDisabled()).toBe(true);
   });
 
   //Skipping until PEPPER-692 is done - which will let this pass consistently in dev and not just test

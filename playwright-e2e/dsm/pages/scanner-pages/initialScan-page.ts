@@ -8,6 +8,10 @@ export default class InitialScanPage {
 
   constructor(private readonly page: Page) {}
 
+  public async waitForReady(): Promise<void> {
+    await this.assertPageTitle();
+  }
+
   public async fillScanPairs(fieldsInputs: string[]): Promise<void> {
     let extractValueIndex = -1;
     for (let i = 0; i < fieldsInputs.length / 2; i++) {
@@ -37,7 +41,7 @@ export default class InitialScanPage {
 
     const message = await this.page.locator('h3').textContent();
     expect(message, 'Initial Scan page - All kits have not been scanned successfully')
-      .toEqual('Data saved');
+      .toBe('Data saved');
   }
 
   /* Assertions */

@@ -20,6 +20,10 @@ export default class KitsWithoutLabelPage {
 
   constructor(private readonly page: Page) {}
 
+  public get kitsWithoutLabelTable(): KitsTable {
+    return this.kitsTable;
+  }
+
   public async goToPage(page: number): Promise<void> {
     await this.kitsTable.goToPage(page);
   }
@@ -28,7 +32,8 @@ export default class KitsWithoutLabelPage {
     await this.kitsTable.rowsPerPage(rows);
   }
 
-  public async waitForLoad(): Promise<void> {
+  public async waitForReady(): Promise<void> {
+    await this.assertPageTitle();
     await waitForNoSpinner(this.page);
     await expect(async () => expect(await this.page.locator('mat-checkbox[id]').count()).toBeGreaterThanOrEqual(1))
       .toPass({ timeout: 60000 });
@@ -106,22 +111,26 @@ export default class KitsWithoutLabelPage {
     assertTableHeaders(await this.kitsTable.getHeaderTexts(), this.TABLE_HEADERS);
   }
 
+  public get createLabelsButton(): Locator {
+    return this.page.locator(this.createLabelsBtnXPath);
+  }
+
   /* XPaths */
   private get deactivateReasonInputXPath(): string {
     return "//app-modal/div[@class='modal fade in']//table/tr"
-    + "[td[1][text()[normalize-space()='Reason:']]]/td[2]/mat-form-field//input"
+      + "[td[1][text()[normalize-space()='Reason:']]]/td[2]/mat-form-field//input";
   }
 
   private get deactivateReasonBtnXPath(): string {
     return "//app-modal/div[@class='modal fade in']"
-      + "//div[@class='app-modal-footer']/button[text()[normalize-space()='Deactivate']]"
+      + "//div[@class='app-modal-footer']/button[text()[normalize-space()='Deactivate']]";
   }
 
   private get reloadKitListBtnXPath(): string {
-    return "//button[span[text()[normalize-space()='Reload Kit List']]]"
+    return '//button[normalize-space()="Reload Kit List"]';
   }
 
   private get createLabelsBtnXPath(): string {
-    return "//button[span[text()[normalize-space()='Create Labels']]]"
+    return '//button[normalize-space()="Create Labels"]';
   }
 }

@@ -13,13 +13,16 @@ export default class KitUploadPage {
   private readonly PAGE_TITLE = 'Kit Upload';
   private readonly T_HEAD = 'shortId\tfirstName\tlastName\tstreet1\tstreet2\tcity\tpostalCode\tstate\tcountry';
   private readonly kitType = new KitType(this.page);
+  private readonly expectedKitTypes = [KitTypeEnum.SALIVA, KitTypeEnum.BLOOD];
 
   constructor(private readonly page: Page) {
   }
 
-  public async waitForLoad(): Promise<void> {
+  public async waitForReady(): Promise<void> {
     await this.page.waitForLoadState('networkidle');
     await waitForNoSpinner(this.page);
+    await this.assertPageTitle();
+    await this.assertDisplayedKitTypes(this.expectedKitTypes);
   }
 
   public async selectKitType(kitType: KitTypeEnum): Promise<void> {
@@ -41,7 +44,7 @@ export default class KitUploadPage {
 
     expect(await this.page.locator('h3')
       .textContent(), "Kit Upload page - Couldn't upload kits - something went wrong")
-      .toEqual('All participants were uploaded.');
+      .toBe('All participants were uploaded.');
 
     deleteFileSync(filePath);
   }
@@ -49,8 +52,9 @@ export default class KitUploadPage {
   /* Helper functions */
   private createKitUploadBody(kitInfo: KitUploadInfo[]): string {
     return kitInfo.map((kitInfo: KitUploadInfo) => {
-      const {shortId, firstName, lastName, street1, street2, city, postalCode, state, country} = kitInfo;
-      return `\n${shortId}\t${firstName}\t${lastName}\t${street1}\t${street2}\t${city}\t${postalCode}\t${state}\t${country}`;
+      const {shortId, firstName, lastName, address} = kitInfo;
+      // eslint-disable-next-line max-len
+      return `\n${shortId}\t${firstName}\t${lastName}\t${address.street1}\t${address.street2}\t${address.city}\t${address.postalCode}\t${address.state}\t${address.country}`;
     }).join();
   }
 
@@ -134,6 +138,10 @@ export default class KitUploadPage {
     await expect(this.page.getByText('Upload Kits'),
       'Kit Upload page - Kit Uploads button is not visible')
       .toBeVisible();
+  }
+
+  public async skipAddressValidation(value = false): Promise<void> {
+    value && await this.page.locator('//mat-checkbox[.//*[@class="mat-checkbox-label" and text()="Skip address validation on upload"]]').click();
   }
 
   /* XPaths */
