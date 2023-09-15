@@ -38,7 +38,6 @@ test.describe('Tissue Request Flow', () => {
 
       const oncHistoryTab = await participantPage.clickTab<OncHistoryTab>(TabEnum.ONC_HISTORY);
       const oncHistoryTable = oncHistoryTab.table;
-
     })
   }
 })
