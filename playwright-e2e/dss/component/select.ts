@@ -101,7 +101,7 @@ export default class Select extends WidgetBase {
     return options!;
   }
 
-  get currentValue(): Promise<string> {
+  async currentValue(): Promise<string> {
     return this.toLocator().locator('span.mat-select-min-line').textContent() as Promise<string>;
   }
 

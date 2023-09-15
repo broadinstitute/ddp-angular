@@ -13,12 +13,12 @@ export default class SMID {
   private readonly modalComponent: Modal;
 
   constructor(private readonly page: Page, private readonly tissueIndex: number) {
-    this.modalComponent = new Modal(this.page, {root: this.modal});
+    this.modalComponent = new Modal(this.page);
   }
 
   public async getValueAt(index: number): Promise<string> {
     const input = await this.getInputAt(index);
-    return input.currentValue;
+    return input.currentValue();
   }
 
   public async fillInputs(inputData: (InputData | string)[]): Promise<void> {
@@ -63,7 +63,7 @@ export default class SMID {
 
   private async fillField(value: string, index: number): Promise<void> {
     const fieldInput = await this.getInputAt(index);
-    const currentValue = await fieldInput.currentValue;
+    const currentValue = await fieldInput.currentValue();
     if (currentValue.trim() !== value) {
       await fieldInput.fillSimple(value);
       await waitForResponse(this.page, {uri: 'patch'});
@@ -83,17 +83,11 @@ export default class SMID {
   }
 
   private async clickModalBtn(label: 'Only keep selected SM-IDs' | 'close'): Promise<void> {
-    const modalLocator = this.modalFooter;
-    const closeBtn = new Button(this.page, {root: modalLocator, label});
-    await closeBtn.click();
+    await this.modalComponent.getButton({label}).click();
   }
 
 
   /* Locators */
-  private get modalFooter(): Locator {
-    return this.modalComponent.footerLocator();
-  }
-
   private get modalBody(): Locator {
     return this.modalComponent.bodyLocator();
   }

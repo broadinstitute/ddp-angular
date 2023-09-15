@@ -57,19 +57,19 @@ export default class OncHistoryTable extends Table {
 
     switch (inputType) {
       case InputTypeEnum.INPUT: {
-        value = new Input(this.page, {root: cell}).currentValue;
+        value = new Input(this.page, {root: cell}).currentValue();
         break;
       }
       case InputTypeEnum.DATE: {
-        value = new Input(this.page, {root: cell}).currentValue;
+        value = new Input(this.page, {root: cell}).currentValue();
         break;
       }
       case InputTypeEnum.TEXTAREA: {
-        value = new TextArea(this.page, {root: cell}).currentValue;
+        value = new TextArea(this.page, {root: cell}).currentValue();
         break;
       }
       case InputTypeEnum.SELECT: {
-        value = new Select(this.page, {root: cell}).currentValue;
+        value = new Select(this.page, {root: cell}).currentValue();
         break;
       }
       default:
@@ -86,7 +86,7 @@ export default class OncHistoryTable extends Table {
     const notesModalContent = this.notesModalContent;
     await expect(notesModalContent, `Notes modal at ${index} index is not visible`).toBeVisible();
     const textarea = new TextArea(this.page, {root: notesModalContent});
-    const currentValue = await textarea.currentValue;
+    const currentValue = await textarea.currentValue();
     if (currentValue.trim() !== note) {
       await textarea.fill(note);
       await waitForResponse(this.page, {uri: 'patch'});
@@ -134,7 +134,7 @@ export default class OncHistoryTable extends Table {
     const inputElement = new Input(this.page, {root});
     const currentValue = await this.getCurrentValue(inputElement);
     let actualValue = typeof value === 'number' ? value.toString() : value;
-    const maxLength = await inputElement.maxLength;
+    const maxLength = await inputElement.maxLength();
 
     if (maxLength && actualValue.length > Number(maxLength)) {
       actualValue = actualValue.slice(0, Number(maxLength));
@@ -165,7 +165,7 @@ export default class OncHistoryTable extends Table {
     const textarea = new TextArea(this.page, {root});
     const currentValue = await this.getCurrentValue(textarea);
     let actualValue = typeof value === 'number' ? value.toString() : value;
-    const maxLength = await textarea.maxLength;
+    const maxLength = await textarea.maxLength();
 
     if (maxLength && actualValue.length > Number(maxLength)) {
       actualValue = actualValue.slice(0, Number(maxLength));
@@ -199,7 +199,7 @@ export default class OncHistoryTable extends Table {
   }
 
   private async getCurrentValue(element: Input | Select | TextArea): Promise<string> {
-    const currentValue = await element.currentValue;
+    const currentValue = await element.currentValue();
     const isDisabled = await element.isDisabled();
 
     await expect(isDisabled, `Input field is disabled`).toBeFalsy();
@@ -255,7 +255,7 @@ export default class OncHistoryTable extends Table {
       .toBeVisible();
 
     const cell: Locator = this.td(columnName).nth(rowIndex);
-    await expect(cell, `Kits Table - more than one column was found with the same name ${columnName}`)
+    await expect(cell, `Kits Table - more than one or no column was found with the name ${columnName}`)
       .toHaveCount(1);
 
     return cell;
