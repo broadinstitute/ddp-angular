@@ -71,7 +71,7 @@ test.describe.serial('Join Pancan Mailing List', () => {
       const dateInJson = getDate(new Date(parseInt(item.dateCreated) * 1000)); // Transform to dd/mm/yyyy
       const emailInJson = item.email;
       const finding = lodash.filter(rows, row => row.email === emailInJson && row.dateCreated === dateInJson);
-      expect(finding.length).toEqual(1);
+      expect(finding.length).toBe(1);
     });
 
     // Verify Mailing List table

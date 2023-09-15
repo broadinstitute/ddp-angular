@@ -25,7 +25,7 @@ test.describe.skip('Home page', () => {
     const partners: Locator = page.locator('.partners .partners-list-item a');
     const count = await partners.count();
 
-    expect(count).toEqual(4); // Total 4 partners at the time of writing
+    expect(count).toBe(4); // Total 4 partners at the time of writing
     for (let i = 0; i < count; i++) {
       await expect(partners.nth(i)).toBeVisible(); // Ensure visible
     }
@@ -35,7 +35,7 @@ test.describe.skip('Home page', () => {
       })
     );
 
-    expect(actualHrefs).toEqual(orderedHrefs); // Ensure href match
+    expect(actualHrefs).toBe(orderedHrefs); // Ensure href match
   });
 
   test('match participating steps @home @visual @singular', async ({ page, homePage }) => {
@@ -45,7 +45,7 @@ test.describe.skip('Home page', () => {
     await expect(steps.first()).toBeVisible();
     const count = await steps.count();
 
-    expect(count).toEqual(3);
+    expect(count).toBe(3);
 
     const step1Title = page.locator('.participating-steps-step', { hasText: 'STEP 1' });
 

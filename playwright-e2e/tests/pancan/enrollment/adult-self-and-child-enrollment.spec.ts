@@ -18,6 +18,8 @@ import HomePage from 'dss/pages/pancan/home-page';
 const { PANCAN_USER_EMAIL, PANCAN_USER_PASSWORD } = process.env;
 
 test.describe('Adult self-enroll & child (consent) enrollment', () => {
+  test.slow();
+
   // Randomize patient last name
   const lastName = generateUserName(user.adult.lastName);
 
@@ -140,13 +142,13 @@ test.describe('Adult self-enroll & child (consent) enrollment', () => {
     expect(headers).toHaveLength(4); // Four columns in table
     expect(headers).toEqual(orderedHeaders);
     let researchStatusCell = await table.findCell('Form', 'Research Consent Form', 'Status');
-    expect(await researchStatusCell?.innerText()).toEqual('Complete');
+    expect(await researchStatusCell?.innerText()).toBe('Complete');
     let medicalReleaseStatusCell = await table.findCell('Form', 'Medical Release Form', 'Status');
-    expect(await medicalReleaseStatusCell?.innerText()).toEqual('Complete');
+    expect(await medicalReleaseStatusCell?.innerText()).toBe('Complete');
     const cervicalCancerStatusCell = await table.findCell('Form', 'Survey: Your Cervical cancer', 'Status');
-    expect(await cervicalCancerStatusCell?.innerText()).toEqual('Complete');
+    expect(await cervicalCancerStatusCell?.innerText()).toBe('Complete');
     const aboutYouStatusCell = await table.findCell('Form', 'Survey: About You', 'Status');
-    expect(await aboutYouStatusCell?.innerText()).toEqual('Complete');
+    expect(await aboutYouStatusCell?.innerText()).toBe('Complete');
     await table.hide();
 
     // Click Add Participant button to add child

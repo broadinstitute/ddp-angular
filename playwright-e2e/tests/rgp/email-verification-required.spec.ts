@@ -35,6 +35,6 @@ test.describe('Registration requires email Verification', () => {
 
     await expect(page.locator('.PageHeader-title')).toHaveText('Email verification required');
     await expect(page.locator('p.Paragraph')).toHaveText('Please verify your email using the link that was sent to your email address.');
-    expect(page.url()).toEqual(`${RGP_BASE_URL}/email-verification-required`);
+    expect(page.url()).toBe(`${RGP_BASE_URL}/email-verification-required`);
   });
 });

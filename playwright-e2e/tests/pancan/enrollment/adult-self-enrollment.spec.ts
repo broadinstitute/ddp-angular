@@ -107,12 +107,12 @@ test.describe('Enroll myself as adult', () => {
     expect(headers).toHaveLength(4); // Four columns in table
     expect(headers).toEqual(orderedHeaders);
     const statusResearchCell = await table.findCell('Form', 'Research Consent Form', 'Status');
-    expect(await statusResearchCell?.innerText()).toEqual('Complete');
+    expect(await statusResearchCell?.innerText()).toBe('Complete');
     const statusMedicalReleaseCell = await table.findCell('Form', 'Medical Release Form', 'Status');
-    expect(await statusMedicalReleaseCell?.innerText()).toEqual('Complete');
+    expect(await statusMedicalReleaseCell?.innerText()).toBe('Complete');
     const statusCervicalCancerCell = await table.findCell('Form', 'Survey: Your Cervical cancer', 'Status');
-    expect(await statusCervicalCancerCell?.innerText()).toEqual('Complete');
+    expect(await statusCervicalCancerCell?.innerText()).toBe('Complete');
     const statusAboutYouCell = await table.findCell('Form', 'Survey: About You', 'Status');
-    expect(await statusAboutYouCell?.innerText()).toEqual('Complete');
+    expect(await statusAboutYouCell?.innerText()).toBe('Complete');
   });
 });

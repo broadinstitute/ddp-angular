@@ -20,8 +20,9 @@ export async function waitForNoSpinner(page: Page, opts: { timeout?: number } = 
   const appError = page.locator('app-error-snackbar .snackbar-content').first();
   await page.waitForLoadState().catch((err) => logError(err));
   const pageStatus = await Promise.race([
-    spinner.waitFor({ state: 'hidden', timeout }).then(() => 'Ready'),
-    appError.waitFor({ state: 'visible', timeout }).then(() => 'Error')
+    spinner.waitFor({ state: 'hidden' }).then(() => 'Ready'),
+    appError.waitFor({ state: 'visible' }).then(() => 'Error'),
+    new Promise((_, reject) => setTimeout(() => reject(Error('Time out waiting for loading spinner to stop or a app error.')), timeout)),
   ]);
   if (pageStatus === 'Ready') {
     // Check again for app error after spinner stopped
@@ -42,7 +43,7 @@ export async function waitForResponse(page: Page, { uri, status = 200, timeout }
       {timeout}
     );
   } catch (error: any) {
-    throw new Error(`Timeout exceeded while waiting for ${uri} URI response with status - ${status}`);
+    throw new Error(`Timed out while waiting for ${uri} URI response with status - ${status}: ${error}`);
   }
 }
 
@@ -198,7 +199,7 @@ export function assertParticipantListDownloadFileName(download: Download, study:
       name = study;
   }
   const expectedFileName = `${name}_export.zip`;
-  expect(actualFileName.toLowerCase()).toEqual(expectedFileName.toLowerCase());
+  expect(actualFileName.toLowerCase()).toBe(expectedFileName.toLowerCase());
 }
 
 export function studyShortName(study: StudyEnum): {shortName: string | null; realm: string | null} {
@@ -241,4 +242,18 @@ export function studyShortName(study: StudyEnum): {shortName: string | null; rea
       break;
   }
   return {shortName, realm};
+}
+
+export function shuffle(array: any[]): any[] {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+}
+
+export async function toHaveScreenshot(page: Page, locator: Locator | string, name: string): Promise<void> {
+  // https://github.com/microsoft/playwright/issues/18827
+  const loc = typeof locator === 'string' ? page.locator(locator) : locator;
+  await expect.soft(loc).toHaveScreenshot(name);
 }
