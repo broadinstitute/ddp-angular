@@ -49,28 +49,6 @@ export async function waitForResponse(page: Page, { uri, status = 200, timeout }
   }
 }
 
-export async function waitForRequest(page: Page, { uri, timeout }: WaitForRequest): Promise<Request> {
-  try {
-    return page.waitForRequest(
-      (request: Request) => request.url().includes(uri),
-      {timeout}
-    );
-  } catch (error: any) {
-    throw new Error(`Timeout exceeded while waiting for ${uri} URI request`);
-  }
-}
-
-export async function waitForRequest(page: Page, { uri, timeout }: WaitForRequest): Promise<Request> {
-  try {
-    return page.waitForRequest(
-      (request: Request) => request.url().includes(uri),
-      {timeout}
-    );
-  } catch (error: any) {
-    throw new Error(`Timeout exceeded while waiting for ${uri} URI request`);
-  }
-}
-
 export async function waitUntilRemoved(locator: Locator): Promise<void> {
   await expect(locator).toHaveCount(0);
 }
