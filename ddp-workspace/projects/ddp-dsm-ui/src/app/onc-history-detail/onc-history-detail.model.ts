@@ -55,12 +55,17 @@ export class OncHistoryDetail {
   }
 
   static parse(json: OncHistoryDetailsInterface): OncHistoryDetail {
+    if (json.deleted) {
+      return null;
+    }
     const tissues: Array<Tissue> = [];
     const jsonData = json.tissues;
     if (jsonData != null) {
       jsonData.forEach((val) => {
         const tissue = Tissue.parse(val);
-        tissues.push(tissue);
+        if (tissue) {
+          tissues.push(tissue);
+        }
       });
     }
 

@@ -16,6 +16,9 @@ export class Tissue {
   }
 
   static parse(json): Tissue {
+    if (json.deleted) {
+      return null;
+    }
     let additionalValuesJson: {};
     let jsonData = json.dynamicFields;
     if (jsonData != null) {

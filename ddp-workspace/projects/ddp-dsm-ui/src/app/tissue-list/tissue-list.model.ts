@@ -13,11 +13,15 @@ export class TissueList {
 
   static parse(json): TissueList {
     const oncHistory: OncHistoryDetail = OncHistoryDetail.parse(json.oncHistoryDetails);
-    let tissue: Tissue;
-    if (json.tissue != null) {
-      tissue = Tissue.parse(json.tissue);
+    if (oncHistory) {
+      let tissue: Tissue;
+      if (json.tissue != null) {
+        tissue = Tissue.parse(json.tissue);
+      }
+      if (tissue) {
+        const participant = ParticipantDSMInformation.parse(json.participant);
+        return new TissueList(oncHistory, tissue, json.ddpParticipantId, json.participantId, participant);
+      }
     }
-    const participant = ParticipantDSMInformation.parse(json.participant);
-    return new TissueList(oncHistory, tissue, json.ddpParticipantId, json.participantId, participant);
   }
 }
