@@ -288,7 +288,7 @@ export default class ParticipantListPage {
       if (hasNextPage) {
         await participantListTable.nextPage();
       } else {
-        throw new Error('No more table page to find a participant for Kit Upload');
+        throw new Error('Table "Next Page" link is not visible.');
       }
       participantsCount = await participantListTable.rowsCount;
     }
