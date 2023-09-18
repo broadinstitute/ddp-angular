@@ -34,12 +34,12 @@ export default class OncHistoryTable extends Table {
     return this.tissueInformationPage;
   }
 
-  public async selectRow(index: number): Promise<void> {
+  public async selectRowAt(index: number): Promise<void> {
     const checkbox = new Checkbox(this.page, {root: this.firstRequestColumn(index)});
     await checkbox.click();
   }
 
-  public async deleteRow(index: number): Promise<void> {
+  public async deleteRowAt(index: number): Promise<void> {
     const deleteRowBtn = this.deleteRowButton(index);
     await expect(deleteRowBtn, 'Delete row button is not visible').toBeVisible();
     await deleteRowBtn.click();

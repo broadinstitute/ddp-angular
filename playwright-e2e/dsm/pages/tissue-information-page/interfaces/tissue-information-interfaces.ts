@@ -7,14 +7,6 @@ export interface FillDate {
   today?: boolean;
 }
 
-export interface MaterialsReceived {
-  uss?: number;
-  block?: number;
-  he?: number;
-  scroll?: number;
-  tissueType?: TissueTypesEnum;
-}
-
 export interface TissueInputsMapValue {
   type: InputTypeEnum;
   hasLookup: boolean;
