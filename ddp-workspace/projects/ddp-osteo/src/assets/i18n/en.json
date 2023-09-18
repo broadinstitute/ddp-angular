@@ -948,6 +948,9 @@
             "SignIn": "Log In",
             "SignOut": "Log Out"
         },
+        "LanguageSelector": {
+            "LanguageSelection": "language selection"
+        },
         "UserActivities": {
             "ActivityName": "Form",
             "Summary": "Summary",

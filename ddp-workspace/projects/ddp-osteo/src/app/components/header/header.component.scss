@@ -10,6 +10,13 @@
     z-index: 1;
     height: 6.25rem;
     transition: all 200ms linear;
+
+    .languageSelection {
+        display: flex;
+        justify-content: flex-end;
+        width: 100%;
+        padding-right: 1em;
+    }
 }
 
 .header_shadow {
@@ -41,6 +48,10 @@
         .nav,
         .auth {
             display: flex;
+        }
+
+        .languageSelection {
+            display: none;
         }
 
         .navigation {

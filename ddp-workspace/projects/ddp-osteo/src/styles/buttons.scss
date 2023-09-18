@@ -85,6 +85,24 @@
     line-height: 1.375rem;
     font-family: inherit;
     white-space: nowrap;
+
+    ddp-language-selector & {
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+        &:hover {
+            text-decoration: none;
+        }
+
+        &:active {
+            text-decoration: none;
+        }
+
+        &:focus {
+            text-decoration: none;
+        }
+
+    }
 }
 
 .simple-button:hover,
