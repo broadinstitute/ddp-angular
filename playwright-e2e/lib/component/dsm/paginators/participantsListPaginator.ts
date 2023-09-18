@@ -20,6 +20,11 @@ export class ParticipantsListPaginator {
     await this.paginate(this.nextXPath);
   }
 
+  public async hasNext(): Promise<boolean> {
+    const nextLocator = this.page.locator(this.nextXPath);
+    return nextLocator.isVisible();
+  }
+
   public async previous(): Promise<void> {
     await this.paginate(this.previousXPath);
   }
@@ -27,10 +32,11 @@ export class ParticipantsListPaginator {
   private async paginate(xpath: string): Promise<void> {
     const paginatorLocator = this.page.locator(xpath);
     const isDisabled = (await paginatorLocator.getAttribute('class'))?.includes('disabled');
-    if (!isDisabled) {
-      await paginatorLocator.click();
-      await this.waitForReady();
+    if (isDisabled) {
+      throw new Error('Table "Next Page" link is disabled.');
     }
+    await paginatorLocator.click();
+    await this.waitForReady();
   }
 
   private async paginateAt(page: number): Promise<void> {
