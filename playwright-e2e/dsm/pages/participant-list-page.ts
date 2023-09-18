@@ -261,6 +261,7 @@ export default class ParticipantListPage {
     await customizeViewPanel.selectColumns('Participant Columns', [registrationDateColumn]);
     await customizeViewPanel.selectColumns('Sample Columns', [normalCollaboratorSampleIDColumn]);
     await customizeViewPanel.selectColumns('Contact Information Columns', [validColumn]);
+    await customizeViewPanel.close();
 
     expect(participantListTable.getHeaderIndex(registrationDateColumn)).not.toBe(-1);
     expect(participantListTable.getHeaderIndex(normalCollaboratorSampleIDColumn)).not.toBe(-1);
@@ -272,7 +273,7 @@ export default class ParticipantListPage {
 
     // Sort by Registration Date to pick newest participants
     await participantListTable.sort(registrationDateColumn, SortOrder.ASC);
-    const endTime = Date.now() + 30 * 1000;
+    const endTime = Date.now() + 90 * 1000;
     while (participantsCount > 0 && Date.now() < endTime) {
       let rowIndex = -1;
       // Iterate rows in random order
@@ -291,6 +292,6 @@ export default class ParticipantListPage {
       }
       participantsCount = await participantListTable.rowsCount;
     }
-    throw new Error(`Failed to find a participant for Kit Upload`);
+    throw new Error(`Failed to find a suitable participant for Kit Upload within max waiting time 90 seconds.`);
   }
 }
