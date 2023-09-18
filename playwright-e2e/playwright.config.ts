@@ -90,7 +90,7 @@ const testConfig: PlaywrightTestConfig = {
       mode: 'only-on-failure',
       fullPage: true
     },
-    video: 'retain-on-failure', // Limit load on CI system because trace and video add load
+    video: 'retain-on-failure',
   },
 
   /* Configure projects for chromium browser */
