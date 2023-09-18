@@ -38,10 +38,12 @@ export async function waitForNoSpinner(page: Page, opts: { timeout?: number } = 
 
 export async function waitForResponse(page: Page, { uri, status = 200, timeout }: WaitForResponse): Promise<Response> {
   try {
-    return await page.waitForResponse(
-      (response: Response) => response.url().includes(uri) && response.status() === status,
-      {timeout}
-    );
+    const response = await page.waitForResponse((response: Response) => response.url().includes(uri), {timeout});
+    const respStatus = response.status();
+    if (respStatus === status) {
+      return response;
+    }
+    throw new Error(await response.text());
   } catch (error: any) {
     throw new Error(`Timed out while waiting for ${uri} URI response with status - ${status}: ${error}`);
   }
