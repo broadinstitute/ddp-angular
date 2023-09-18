@@ -10,7 +10,7 @@ test.describe.fixme('Participants list search and filter', () => {
   const studies = [StudyEnum.LMS, StudyEnum.OSTEO2];
 
   for (const study of studies) {
-    test(`Save Custom View in ${study} @dsm @${study}`, async ({ page, request }) => {
+    test(`Save Custom View @dsm @${study}`, async ({ page, request }) => {
       const participantListPage = await ParticipantListPage.goto(page, study, request);
       const participantsTable = participantListPage.participantListTable;
 
@@ -66,7 +66,7 @@ test.describe.fixme('Participants list search and filter', () => {
       // Open saved custom view
       const savedViewPanel = participantListPage.savedFilters;
       await savedViewPanel.open(newViewName);
-      expect(await participantsTable.numOfParticipants()).toEqual(newViewNumParticipants);
+      expect(await participantsTable.numOfParticipants()).toBe(newViewNumParticipants);
 
       // Delete saved custom view
       await savedViewPanel.delete(newViewName);

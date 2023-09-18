@@ -8,6 +8,7 @@ import { generateRandomPhoneNum } from 'utils/faker-utils';
 import { waitForNoSpinner, waitForResponse } from 'utils/test-utils';
 import { PageInterface } from 'dss/pages/page-interface';
 import * as user from 'data/fake-user.json';
+import { logError } from 'utils/log-utils';
 
 /**
  * Labels for the mailing address widget, which can be
@@ -44,7 +45,7 @@ export default abstract class PageBase implements PageInterface {
   }
 
   async waitForReady(): Promise<void> {
-    await this.page.waitForLoadState('networkidle');
+    await this.page.waitForLoadState().catch((err) => logError(err));
     await expect(this.page).toHaveTitle(/\D+/);
     await waitForNoSpinner(this.page);
   }
@@ -237,7 +238,9 @@ export default abstract class PageBase implements PageInterface {
     } = opts;
 
     let labels;
-    if (!opts.labels) {
+    if (opts.labels) {
+      labels = opts.labels;
+    } else {
       labels = {
         phone: 'Phone',
         country: 'Country',
@@ -245,8 +248,6 @@ export default abstract class PageBase implements PageInterface {
         zip: 'Zip Code',
         city: 'City'
       };
-    } else {
-      labels = opts.labels;
     }
 
     const mailAddressForm = new Address(this.page, {

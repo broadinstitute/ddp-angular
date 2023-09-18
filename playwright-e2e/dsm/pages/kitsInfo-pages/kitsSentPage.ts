@@ -31,6 +31,7 @@ export default class KitsSentPage {
   public async waitForLoad(): Promise<void> {
     await this.page.waitForLoadState('networkidle');
     await waitForNoSpinner(this.page);
+    await this.assertPageTitle();
   }
 
   public async selectKitType(kitType: KitTypeEnum): Promise<void> {
@@ -44,8 +45,8 @@ export default class KitsSentPage {
     await this.kitsTable.searchBy(columnName, value);
   }
 
-  public getData(columnName: KitsColumnsEnum): Promise<string> {
-    return this.kitsTable.getData(columnName);
+  public async getData(columnName: KitsColumnsEnum): Promise<string> {
+    return await this.kitsTable.getData(columnName);
   }
 
   /* Assertions */
@@ -74,9 +75,9 @@ export default class KitsSentPage {
   }
 
   public async assertDisplayedRowsCount(count: number): Promise<void> {
-    await expect(await this.kitsTable.rows.count(),
+    expect(await this.kitsTable.rows.count(),
       "Kits Sent page - displayed rows count doesn't match the provided one")
-      .toEqual(count)
+      .toBe(count)
   }
 
   /* XPaths */

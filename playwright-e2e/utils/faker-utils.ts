@@ -56,7 +56,6 @@ export const saveParticipantGuid = (guid: string) => {
 export const simplifyShortID = (shortId: string, studyName: string): string => {
   const shortIdParts = shortId.split(`${studyName}_`); // Use 'RGP_' to determine where to split
   const rgpPrefix = shortIdParts[0]; //RGP_ prefix
-  const subjectID = shortIdParts[1]; //The subject id to be used as short id
-  const simplifiedShortID = subjectID;
+  const simplifiedShortID = shortIdParts[1]; //The subject id to be used as short id
   return simplifiedShortID;
-}
+};

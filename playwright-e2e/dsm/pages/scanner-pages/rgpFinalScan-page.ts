@@ -29,13 +29,11 @@ export default class RgpFinalScanPage {
     }
 
     public async getNumberOfScannableRows(): Promise<number> {
-        const numberOfRows = this.page.locator('//form/div').count();
-        return numberOfRows;
+        return this.page.locator('//form/div').count();
     }
 
     private getSaveScanPairsButton(): Locator {
-        const scanPairButton = this.page.getByRole('button', { name: 'Save Scan Pairs' });
-        return scanPairButton;
+        return this.page.getByRole('button', { name: 'Save Scan Pairs' });
     }
 
     public async save(): Promise<void> {

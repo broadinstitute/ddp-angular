@@ -71,7 +71,7 @@ test.describe.serial('Join Pancan Mailing List', () => {
       const dateInJson = getDate(new Date(parseInt(item.dateCreated) * 1000)); // Transform to dd/mm/yyyy
       const emailInJson = item.email;
       const finding = lodash.filter(rows, row => row.email === emailInJson && row.dateCreated === dateInJson);
-      expect(finding.length).toEqual(1);
+      expect(finding.length).toBe(1);
     });
 
     // Verify Mailing List table
@@ -88,12 +88,12 @@ test.describe.serial('Join Pancan Mailing List', () => {
       await mailingListPage.reload(); // page reload to trigger new request
       await table.sort(COLUMN.DATE, SortOrder.DESC); // Sorting to get newest record to display first
       const cell = await table.findCell(COLUMN.EMAIL, newEmail, COLUMN.EMAIL);
-      await expect(cell).toBeTruthy();
+      expect(cell).toBeTruthy();
     }).toPass({ timeout: 30000 });
 
     // Verify date signed up is found inside table
     const tCell = await table.findCell(COLUMN.EMAIL, newEmail, COLUMN.DATE, { exactMatch: false });
-    await expect(tCell, `Find column ${COLUMN.DATE} in Mailing List table`).toBeTruthy();
+    expect(tCell, `Find column ${COLUMN.DATE} in Mailing List table`).toBeTruthy();
 
     // Retrieve new Pancan user Date Signed Up from API response body, compare with what's displayed in table
     const user: MailListCSV[] = lodash.filter(respJson, row => row.email === newEmail);

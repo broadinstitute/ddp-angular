@@ -81,7 +81,7 @@ export async function getAuth0AccessToken(app: APP): Promise<string> {
       audience: `${credentials.audience}`
     })
   })
-    .then((res) => res.json())
+    .then(async (res) => res.json())
     .then((json) => {
       return json.access_token;
     })

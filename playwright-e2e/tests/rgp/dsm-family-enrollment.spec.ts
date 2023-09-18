@@ -17,7 +17,7 @@ import { logInfo } from 'utils/log-utils';
 test.describe.serial('DSM Family Enrollment Handling', () => {
     let rgpEmail: string;
 
-    test.skip('Verify the display and functionality of family account dynamic fields @functional @rgp', async ({ page, request}) => {
+    test.skip('Verify the display and functionality of family account dynamic fields @dss @functional @rgp', async ({ page, request}) => {
         const navigation = new Navigation(page, request);
 
         //select RGP study
@@ -85,7 +85,7 @@ test.describe.serial('DSM Family Enrollment Handling', () => {
     });
 
     //Skipping until housekeeping stuff is fixed
-    test.skip('Verify that the proband family member tab can be filled out @functional @rgp @proband', async ({ page, request }) => {
+    test.skip('Verify that the proband family member tab can be filled out @dss @functional @rgp @proband', async ({ page, request }) => {
     //Go into DSM
     const navigation = new Navigation(page, request);
 
@@ -158,8 +158,8 @@ test.describe.serial('DSM Family Enrollment Handling', () => {
     const familyIDFromSubjectID = await proband.getFamilyIDFromSubjectID();
     const familyIDFromFamilyMemberTab = await proband.getFamilyIDFromFamilyMemberTab();
 
-    await expect(familyIDFromSubjectID).toEqual(proband.familyID);
-    await expect(familyIDFromFamilyMemberTab).toEqual(proband.familyID);
+    expect(familyIDFromSubjectID).toBe(proband.familyID);
+    expect(familyIDFromFamilyMemberTab).toBe(proband.familyID);
 
     //Prep for checking note content  in Participant Info later on
     const importantNotesTextarea = proband.getImportantNotes();
@@ -234,12 +234,12 @@ test.describe.serial('DSM Family Enrollment Handling', () => {
     const importantNotes = await proband.getImportantNotesContent();
     const processNotes = await proband.getProcessNotesContent();
     const mixedRaceNotes = await proband.getMixedRaceNotesContent();
-    expect(mixedRaceNotes).toEqual(mixedRaceTestingNotes);
+    expect(mixedRaceNotes).toBe(mixedRaceTestingNotes);
 
     //Go back to Participant List and refresh using Reload with Default Filters
     const familyAccount = new RgpParticipantPage(page);
     await familyAccount.backToList();
-    participantListPage.filters.reloadWithDefaultFilters;
+    await participantListPage.filters.reloadWithDefaultFilters();
     await expect(filteredList).toHaveCount(1);
     await participantListTable.openParticipantPageAt(0);
 
@@ -249,9 +249,9 @@ test.describe.serial('DSM Family Enrollment Handling', () => {
     await expect(probandTab).toHaveClass('nav-link active'); //Make sure proband tab is opened
 
     await participantInfoSection.click();
-    expect(await importantNotesTextarea.inputValue()).toEqual(importantNotes);
-    expect(await processNotesTextarea.inputValue()).toEqual(processNotes);
-    expect(await mixedRaceTextarea.inputValue()).toEqual(mixedRaceNotes);
+    expect(await importantNotesTextarea.inputValue()).toBe(importantNotes);
+    expect(await processNotesTextarea.inputValue()).toBe(processNotes);
+    expect(await mixedRaceTextarea.inputValue()).toBe(mixedRaceNotes);
 
     //Fill out Contact Info section
     const contactInfoSection = proband.getContactInfoSection();
@@ -266,7 +266,7 @@ test.describe.serial('DSM Family Enrollment Handling', () => {
     //Verify that the proband's preferred email matches the email of the family account
     const email = proband.getPreferredEmail();
     const familyAccountEmail = await familyAccount.getEmail();
-    expect(await email.inputValue()).toEqual(familyAccountEmail);
+    expect(await email.inputValue()).toBe(familyAccountEmail);
 
     //Verify that Send Secure has a default value of 'Unknown'
     const sendSecure = proband.getSendSecure();
@@ -519,7 +519,7 @@ test.describe.serial('DSM Family Enrollment Handling', () => {
     await redCapSurveyCompletedDate.fill(`${currentDate[0]}/${currentDate[1]}/${currentDate[2]}`);//[0] is MM, [1] is DD, [2] is YYYY
     });
 
-    test.skip('Verify that a family member can be added without copying proband info @rgp @functional', async ({ page, request }) => {
+    test.skip('Verify that a family member can be added without copying proband info @dss @rgp @functional', async ({ page, request }) => {
     //Add a new family member
     //Go into DSM
     const navigation = new Navigation(page, request);
@@ -603,10 +603,10 @@ test.describe.serial('DSM Family Enrollment Handling', () => {
     const probandFamilyID = await proband.getFamilyIDFromFamilyMemberTab();
 
     logInfo(`grandfather family id ${maternalGrandfatherFamilyID} vs proband family id: ${probandFamilyID}`);
-    await expect(maternalGrandfatherFamilyID).toEqual(probandFamilyID);
+    expect(maternalGrandfatherFamilyID).toBe(probandFamilyID);
     });
 
-    test.skip('Verify that a family member can be added using copied proband info @rgp @functional', async ({ page, request }) => {
+    test.skip('Verify that a family member can be added using copied proband info @dss @rgp @functional', async ({ page, request }) => {
     //Go into DSM
     const navigation = new Navigation(page, request);
 
@@ -720,20 +720,20 @@ test.describe.serial('DSM Family Enrollment Handling', () => {
         const probandFamilyID = await proband.getFamilyIDFromSubjectID();
 
         //Compare family member family ids
-        expect(brotherFamilyID).toEqual(probandFamilyID);
+        expect(brotherFamilyID).toBe(probandFamilyID);
 
         //Compare the rest of the expected copied Participant Info fields
         const probandImportantNotesContent = await proband.getImportantNotesContent();
-        expect(brotherImportantNotesContents).toEqual(probandImportantNotesContent);
+        expect(brotherImportantNotesContents).toBe(probandImportantNotesContent);
 
         const probandProcessNotesContent = await proband.getProcessNotesContent();
-        expect(brotherProcessNotesContent).toEqual(probandProcessNotesContent);
+        expect(brotherProcessNotesContent).toBe(probandProcessNotesContent);
 
         const probandMiddleNameField = proband.getMiddleName();
-        expect(brotherMiddleNameField).toEqual(probandMiddleNameField);
+        expect(brotherMiddleNameField).toBe(probandMiddleNameField);
 
         const probandNameSuffix = proband.getNameSuffix();
-        expect(brotherNameSuffix).toEqual(probandNameSuffix);
+        expect(brotherNameSuffix).toBe(probandNameSuffix);
 
         const probandPreferredLanguage = proband.getPreferredLanguage();
         await expect(brotherPreferredLanguage).toHaveText(await probandPreferredLanguage.innerText());
@@ -745,10 +745,10 @@ test.describe.serial('DSM Family Enrollment Handling', () => {
         await expect(brotherPronouns).toHaveText(await probandPronouns.innerText());
 
         const probandDateOfBirth = proband.getDateOfBirth();
-        expect(brotherDateOfBirth).toEqual(probandDateOfBirth);
+        expect(brotherDateOfBirth).toBe(probandDateOfBirth);
 
         const probandAgeToday = proband.getAgeToday();
-        expect(brotherAgeToday).toEqual(probandAgeToday);
+        expect(brotherAgeToday).toBe(probandAgeToday);
 
         const probandIsAliveRadioBUtton = proband.getLivingStatusOption('Alive');
         await expect(probandIsAliveRadioBUtton).toBeChecked();
@@ -764,7 +764,7 @@ test.describe.serial('DSM Family Enrollment Handling', () => {
         await expect(brotherEthnicity).toHaveText(await probandEthnicity.innerText());
 
         const probandMixedRaceNotesContent = await proband.getMixedRaceNotesContent();
-        expect(brotherMixedRaceNotes).toEqual(probandMixedRaceNotesContent);
+        expect(brotherMixedRaceNotes).toBe(probandMixedRaceNotesContent);
     })
     });
 });

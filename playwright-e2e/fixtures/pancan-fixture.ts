@@ -6,7 +6,7 @@ const { PANCAN_BASE_URL } = process.env;
 // Use this fixture in Pancan test
 const fixture = base.extend({
   page: async ({ page }, use) => {
-    await page.goto(`${PANCAN_BASE_URL}/password`);
+    await page.goto(`${PANCAN_BASE_URL}/password`, { waitUntil: 'networkidle' });
     await fillSitePassword(page);
     await use(page);
   }
