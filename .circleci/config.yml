@@ -690,9 +690,17 @@ jobs:
             # export env from file (created in build-playwright-job)
             cat playwright-env/envvars | awk '{print "export " $0}' >> "$BASH_ENV"
             source $BASH_ENV
-      - node/install:
-          install-yarn: false
-          node-version: '18.13.0' # LTS version
+      - run:
+          name: Install nvm and latest LTS version of node (latest LTS: Hydrogen)
+          working_directory: *playwright_path
+          command: |
+            # https://nodejs.org/en/download/package-manager#nvm
+            curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash
+            export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+            source ~/.bashrc
+            nvm install v18.18.0
+            nvm list
       - run:
           working_directory: *playwright_path
           command: npm install --quiet
