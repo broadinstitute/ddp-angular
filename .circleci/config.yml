@@ -61,6 +61,7 @@ references:
     name: Setup Node
     working_directory: *playwright_path
     command: |
+      apk --update add libc6-compat
       nvm install 18.18.0
       nvm use node
       node -v
