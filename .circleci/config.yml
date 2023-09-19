@@ -75,15 +75,16 @@ commands:
             curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
             echo 'export NVM_DIR=$HOME/.nvm' >> $BASH_ENV
             echo 'source $NVM_DIR/nvm.sh' >> $BASH_ENV
+
   install-node:
     steps:
       - run:
-        command: |
-          nvm install 18.18.0
-          nvm use node
-          node -v
-          npm i -g npm
-          npm -v
+          command: |
+            nvm install 18.18.0
+            nvm use node
+            node -v
+            npm i -g npm
+            npm -v
 
   checkout-code:
     description: "Git checkout and install dependencies"
