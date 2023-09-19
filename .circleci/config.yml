@@ -660,8 +660,8 @@ jobs:
             echo "export ENV=<< parameters.env >>" >> $BASH_ENV
             source $BASH_ENV
             .circleci/export-playwright-env.sh
-      - *node
-      - *nvm
+      - run: *node
+      - run: *nvm
       - run:
           name: Check node version
           working_directory: *playwright_path
