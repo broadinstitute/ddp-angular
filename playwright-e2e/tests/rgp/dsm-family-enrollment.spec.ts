@@ -239,7 +239,7 @@ test.describe.serial('DSM Family Enrollment Handling', () => {
     //Go back to Participant List and refresh using Reload with Default Filters
     const familyAccount = new RgpParticipantPage(page);
     await familyAccount.backToList();
-    await participantListPage.filters.reloadWithDefaultFilters();
+    await participantListPage.filters.searchPanel.search();
     await expect(filteredList).toHaveCount(1);
     await participantListTable.openParticipantPageAt(0);
 
@@ -730,10 +730,10 @@ test.describe.serial('DSM Family Enrollment Handling', () => {
         expect(brotherProcessNotesContent).toBe(probandProcessNotesContent);
 
         const probandMiddleNameField = proband.getMiddleName();
-        expect(brotherMiddleNameField).toBe(probandMiddleNameField);
+        expect(await brotherMiddleNameField.innerText()).toBe(await probandMiddleNameField.innerText());
 
         const probandNameSuffix = proband.getNameSuffix();
-        expect(brotherNameSuffix).toBe(probandNameSuffix);
+        expect(await brotherNameSuffix.innerText()).toBe(await probandNameSuffix.innerText());
 
         const probandPreferredLanguage = proband.getPreferredLanguage();
         await expect(brotherPreferredLanguage).toHaveText(await probandPreferredLanguage.innerText());

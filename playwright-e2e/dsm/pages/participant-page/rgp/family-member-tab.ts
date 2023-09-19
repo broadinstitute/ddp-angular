@@ -271,7 +271,7 @@ export default class FamilyMemberTab {
         await Promise.all([
             this.page.waitForResponse(response => response.url().includes('/ui/patch') && response.status() === 200),
             textarea.click(),
-            textarea.type(notes, {delay: 150}),
+            textarea.pressSequentially(notes, { delay: 150 }),
             textarea.press('Tab'),
         ]);
     }
