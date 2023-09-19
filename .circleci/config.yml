@@ -702,7 +702,7 @@ jobs:
             cat playwright-env/envvars | awk '{print "export " $0}' >> "$BASH_ENV"
             source $BASH_ENV
       - run:
-          name: Install nvm and latest LTS version of node (latest LTS: Hydrogen)
+          name: Install nvm and latest LTS version of node
           working_directory: *playwright_path
           command: |
             # https://nodejs.org/en/download/package-manager#nvm
