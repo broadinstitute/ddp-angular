@@ -661,11 +661,11 @@ jobs:
       - run:
           name: Install node
           working_directory: *playwright_path
-          command: *node
+          *node
       - run:
           name: Install nvm
           working_directory: *playwright_path
-          command: *nvm
+          *nvm
       - run:
           name: Check node version
           working_directory: *playwright_path
