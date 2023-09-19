@@ -51,6 +51,7 @@ references:
 
   install-nvm: &nvm
     name: Install NVM
+    working_directory: *playwright_path
     command: |
       curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
       echo 'export NVM_DIR=$HOME/.nvm' >> $BASH_ENV
@@ -58,6 +59,7 @@ references:
 
   install-node: &node
     name: Setup Node
+    working_directory: *playwright_path
     command: |
       nvm install 18.18.0
       nvm use node
@@ -658,14 +660,8 @@ jobs:
             echo "export ENV=<< parameters.env >>" >> $BASH_ENV
             source $BASH_ENV
             .circleci/export-playwright-env.sh
-      - run:
-          name: Install node
-          working_directory: *playwright_path
-          *node
-      - run:
-          name: Install nvm
-          working_directory: *playwright_path
-          *nvm
+      - *node
+      - *nvm
       - run:
           name: Check node version
           working_directory: *playwright_path
