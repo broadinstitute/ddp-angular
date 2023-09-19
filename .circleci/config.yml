@@ -648,9 +648,13 @@ jobs:
           working_directory: *playwright_path
           command: |
             # https://nodejs.org/en/download/package-manager#nvm
-            curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash
 
-            env VERSION=`python tools/getnodeversion.py` make install DESTDIR=`nvm_version_path v$VERSION` PREFIX=""
+            set +e
+            curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash &&  sudo /opt/circleci/.nvm/nvm.sh
+
+            export NVM_DIR="/opt/circleci/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+
             nvm install v18.18.0
             nvm list
       - run:
