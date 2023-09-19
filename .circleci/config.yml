@@ -49,6 +49,21 @@ references:
           - /^rc.*/
           - /^hotfix.*/
 
+  install-nvm: &nvm
+    name: Install NVM
+    command: |
+      curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
+      echo 'export NVM_DIR=$HOME/.nvm' >> $BASH_ENV
+      echo 'source $NVM_DIR/nvm.sh' >> $BASH_ENV
+
+  install-node: &node
+    name: Setup Node
+    command: |
+      nvm install 18.18.0
+      nvm use node
+      node -v
+      npm -v
+
 # Container for all the builds
 executors:
   build-executor:
@@ -68,24 +83,6 @@ executors:
       NODE_ENV: development # Needed if playwright is in devDependencies
 
 commands:
-  install-nvm:
-    steps:
-      - run:
-          command: |
-            curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
-            echo 'export NVM_DIR=$HOME/.nvm' >> $BASH_ENV
-            echo 'source $NVM_DIR/nvm.sh' >> $BASH_ENV
-
-  install-node:
-    steps:
-      - run:
-          command: |
-            nvm install
-            nvm use node
-            node -v
-            npm i -g npm
-            npm -v
-
   checkout-code:
     description: "Git checkout and install dependencies"
     steps:
@@ -661,8 +658,14 @@ jobs:
             echo "export ENV=<< parameters.env >>" >> $BASH_ENV
             source $BASH_ENV
             .circleci/export-playwright-env.sh
-      - install-nvm
-      - install-node
+      - run:
+          name: Install node
+          working_directory: *playwright_path
+          command: *node
+      - run:
+          name: Install nvm
+          working_directory: *playwright_path
+          command: *nvm
       - run:
           name: Check node version
           working_directory: *playwright_path
