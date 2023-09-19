@@ -66,7 +66,7 @@ test.describe.fixme('Participants list search and filter', () => {
       // Open saved custom view
       const savedViewPanel = participantListPage.savedFilters;
       await savedViewPanel.open(newViewName);
-      expect(await participantsTable.numOfParticipants()).toEqual(newViewNumParticipants);
+      expect(await participantsTable.numOfParticipants()).toBe(newViewNumParticipants);
 
       // Delete saved custom view
       await savedViewPanel.delete(newViewName);

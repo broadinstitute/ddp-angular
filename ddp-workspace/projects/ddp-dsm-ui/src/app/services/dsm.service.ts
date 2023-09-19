@@ -1138,9 +1138,11 @@ export class DSMService {
     );
   }
 
-  public applyDestructionPolicyToAll(source: string, json: string): Observable<any> {
+  public applyDestructionPolicyToAll(realm: string, json: string): Observable<any> {
     const url = this.baseUrl + DSMService.UI + 'institutions';
-    return this.http.patch(url, json, this.buildHeader()).pipe(
+    const map: { name: string; value: any }[] = [];
+    map.push({name: DSMService.REALM, value: realm});
+    return this.http.patch(url, json, this.buildQueryHeader(map)).pipe(
       catchError(this.handleError)
     );
   }

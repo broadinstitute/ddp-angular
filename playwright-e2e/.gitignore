@@ -6,7 +6,7 @@ node_modules/
 build/
 junit/
 
-**/.env
+**/.env*
 
 **/.idea/
 **/*.iml

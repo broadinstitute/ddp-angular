@@ -172,9 +172,9 @@ test.describe('Child Enrollment', () => {
     await viewButton.click();
     await tellUsAboutYourFamily.waitForReady();
     // fields should be disabled. check one field to verify is disabled
-    expect(await tellUsAboutYourFamily.yourTitle().isDisabled()).toEqual(true);
+    expect(await tellUsAboutYourFamily.yourTitle().isDisabled()).toBe(true);
     expect(await tellUsAboutYourFamily.yourTitle().toQuestion().screenshot()).toMatchSnapshot('your-title-field-disabled.png');
 
-    expect(await tellUsAboutYourFamily.yourFirstName().isDisabled()).toEqual(true);
+    expect(await tellUsAboutYourFamily.yourFirstName().isDisabled()).toBe(true);
   });
 });

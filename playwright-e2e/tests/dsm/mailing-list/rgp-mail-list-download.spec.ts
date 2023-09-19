@@ -95,7 +95,7 @@ test.describe.serial('When an interested participant does NOT meet participation
       });
       expect(finding.length,
         `Matching record for email: "${emailInJson}" and dateCreated: "${dateInJson}" in downloaded csv file.`)
-      .toEqual(1);
+      .toBe(1);
     });
 
     // Verify Mailing List table
