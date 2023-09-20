@@ -287,11 +287,61 @@ export default class ParticipantListPage {
       const hasNextPage = await participantListTable.paginator.hasNext();
       if (hasNextPage) {
         await participantListTable.nextPage();
+        participantsCount = await participantListTable.rowsCount;
       } else {
-        throw new Error('Table "Next Page" link is not visible.');
+        participantsCount = 0;
       }
-      participantsCount = await participantListTable.rowsCount;
     }
     throw new Error(`Failed to find a suitable participant for Kit Upload within max waiting time 90 seconds.`);
+  }
+
+  async findParticipantFor(columnGroup: string, columnName: string, opts: {value?: string, nth?: number} = {}): Promise<number> {
+    const { value, nth = 1 } = opts;
+
+    const compareForMatch = async (index: number): Promise<number> => {
+      const columnText = await participantListTable.getTextAt(index, columnName);
+      if (value) {
+        return columnText.some(text => text.indexOf(value) !== -1) ? index : -1;
+      }
+      return columnText.length === 1 && columnText[0].trim().length === 0 ? index : -1;
+    };
+
+    const searchPanel = this.filters.searchPanel;
+    await searchPanel.open();
+    await searchPanel.checkboxes('Status', { checkboxValues: ['Enrolled'] });
+    await searchPanel.search();
+
+    const participantListTable = this.participantListTable;
+    await expect(participantListTable.rowLocator().first()).toBeVisible();
+
+    const customizeViewPanel = this.filters.customizeViewPanel;
+    await customizeViewPanel.open();
+    await customizeViewPanel.selectColumns(columnGroup, [columnName], {nth});
+    await customizeViewPanel.close();
+
+    let participantsCount = await participantListTable.rowsCount;
+    expect(participantsCount).toBeGreaterThanOrEqual(1);
+
+    const endTime = Date.now() + 90 * 1000;
+    while (participantsCount > 0 && Date.now() < endTime) {
+      let rowIndex = -1;
+      // Iterate rows in random order
+      const array = shuffle([...Array(participantsCount).keys()]);
+      for (const index of array) {
+        rowIndex = await compareForMatch(index);
+        if (rowIndex !== -1) {
+          return rowIndex;
+        }
+      }
+      // Next page in table
+      const hasNextPage = await participantListTable.paginator.hasNext();
+      if (hasNextPage) {
+        await participantListTable.nextPage();
+        participantsCount = await participantListTable.rowsCount;
+      } else {
+        participantsCount = 0;
+      }
+    }
+    throw new Error(`Failed to find a suitable participant for ${columnGroup}: ${columnName} = "${value}" within max waiting time 90 seconds.`);
   }
 }

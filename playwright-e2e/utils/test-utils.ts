@@ -37,14 +37,17 @@ export async function waitForNoSpinner(page: Page, opts: { timeout?: number } = 
 }
 
 export async function waitForResponse(page: Page, { uri, status = 200, timeout }: WaitForResponse): Promise<Response> {
-  try {
-    return await page.waitForResponse(
-      (response: Response) => response.url().includes(uri) && response.status() === status,
-      {timeout}
-    );
-  } catch (error: any) {
-    throw new Error(`Timed out while waiting for ${uri} URI response with status - ${status}: ${error}`);
+  const response = await page.waitForResponse((response: Response) => response.url().includes(uri), { timeout });
+  await response.finished();
+  const respStatus = response.status();
+  if (respStatus === status) {
+    return response;
   }
+  const url = response.url();
+  const method = response.request().method().toUpperCase;
+  const unexpectedStatus = response.status();
+  const body = await response.text();
+  throw new Error(`Waiting for URI: ${uri} with status: ${status}.\n  ${method} ${url}\n  Response Status: ${unexpectedStatus}\n  Text: ${body}`);
 }
 
 export async function waitUntilRemoved(locator: Locator): Promise<void> {

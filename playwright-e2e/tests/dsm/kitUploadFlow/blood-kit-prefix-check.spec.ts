@@ -33,7 +33,7 @@ import { waitForResponse } from 'utils/test-utils';
  */
 
 // don't run in parallel
-test.describe.serial('Kit Upload', () => {
+test.describe.serial('Blood Kit Upload', () => {
   let welcomePage: WelcomePage;
   let navigation: Navigation;
   let participantPage: ParticipantPage;
@@ -70,7 +70,7 @@ test.describe.serial('Kit Upload', () => {
   });
 
   for (const [index, study] of studies.entries()) {
-    test(`CMI Research blood kit type check @functional @pecgs @cmi-lms @dsm @${study} @kit`, async ({ page }, testInfo) => {
+    test(`Kit prefix check @cmi @dsm @${study} @kit`, async ({ page }, testInfo) => {
       const testResultDir = testInfo.outputDir;
 
       await welcomePage.selectStudy(study);
