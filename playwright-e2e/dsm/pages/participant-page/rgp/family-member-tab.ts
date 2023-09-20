@@ -15,6 +15,7 @@ export default class FamilyMemberTab {
     private _familyID!: number;
     private _relationToProband: FamilyMember;
     private readonly page: Page;
+    private readonly MIN_POSSIBLE_RELATIONSHIP_ID_VALUE: number = 0;
     private readonly MAX_POSSIBLE_RELATIONSHIP_ID_VALUE: number = 1000;
 
     constructor(page: Page, relationToProband: FamilyMember) {
@@ -647,11 +648,29 @@ export default class FamilyMemberTab {
         let searchingForID = true;
         let possibleID;
         while (searchingForID) {
-            possibleID = Math.floor(Math.random() * this.MAX_POSSIBLE_RELATIONSHIP_ID_VALUE);
+            //possibleID = Math.floor(Math.random() * this.MAX_POSSIBLE_RELATIONSHIP_ID_VALUE);
+            possibleID = this.getRandomNumber(this.MIN_POSSIBLE_RELATIONSHIP_ID_VALUE, this.MAX_POSSIBLE_RELATIONSHIP_ID_VALUE, usedRelationshipIDs);
             searchingForID = this.isPreviouslyUsedSubjectID(possibleID, usedRelationshipIDs);
         }
         this._relationshipID = possibleID!.toString();
     }
+
+    /**
+     * From https://stackoverflow.com/questions/5520835/how-can-i-generate-a-random-number-within-a-range-but-exclude-some/64910550#64910550
+     * Alex found a neat method that is useful
+     * @param min minimum number
+     * @param max maximum numbr
+     * @param exclude array of numbers to exclude
+     * @returns random number
+     */
+    private getRandomNumber = (min: number, max: number, exclude: number[] = []) => {
+        let num = Math.floor(Math.random() * (max - min + 1 - exclude.length) + min);
+        exclude
+          .slice()
+          .sort((a, b) => a - b)
+          .every((exeption) => exeption <= num && (num++, true));
+        return num;
+      };
 
     private isPreviouslyUsedSubjectID(subjectID: number, listOfIDs: Array<number>): boolean {
         let previouslyUsed = false;

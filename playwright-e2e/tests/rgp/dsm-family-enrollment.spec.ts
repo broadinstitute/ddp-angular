@@ -18,7 +18,7 @@ import { v4 as uuid } from 'uuid';
 test.describe.serial('DSM Family Enrollment Handling', () => {
     let rgpEmail: string;
 
-    test('Verify the display and functionality of family account dynamic fields @dss @functional @rgp', async ({ page, request}) => {
+    test('Verify the display and functionality of family account dynamic fields @dsm @functional @rgp', async ({ page, request}) => {
         const navigation = new Navigation(page, request);
 
         //select RGP study
@@ -86,7 +86,7 @@ test.describe.serial('DSM Family Enrollment Handling', () => {
     });
 
     //Skipping until housekeeping stuff is fixed
-    test('Verify that the proband family member tab can be filled out @dss @functional @rgp @proband', async ({ page, request }) => {
+    test('Verify that the proband family member tab can be filled out @dsm @functional @rgp @proband', async ({ page, request }) => {
     //Go into DSM
     const navigation = new Navigation(page, request);
 
@@ -520,7 +520,7 @@ test.describe.serial('DSM Family Enrollment Handling', () => {
     await redCapSurveyCompletedDate.fill(`${currentDate[0]}/${currentDate[1]}/${currentDate[2]}`);//[0] is MM, [1] is DD, [2] is YYYY
     });
 
-    test('Verify that a family member can be added without copying proband info @dss @rgp @functional', async ({ page, request }) => {
+    test('Verify that a family member can be added without copying proband info @dsm @rgp @functional', async ({ page, request }) => {
     //Add a new family member
     //Go into DSM
     const navigation = new Navigation(page, request);
