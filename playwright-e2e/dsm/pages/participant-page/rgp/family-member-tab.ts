@@ -267,13 +267,9 @@ export default class FamilyMemberTab {
         const textarea = this.page.locator("//textarea[contains(@data-placeholder, 'Mixed Race Notes')]");
         await textarea.clear();
         await expect(textarea).toBeEmpty();
-
-        await Promise.all([
-            this.page.waitForResponse(response => response.url().includes('/ui/patch') && response.status() === 200),
-            textarea.click(),
-            textarea.pressSequentially(notes, { delay: 150 }),
-            textarea.press('Tab'),
-        ]);
+        await textarea.fill(notes);
+        await textarea.blur();
+        await this.page.waitForResponse(response => response.url().includes('/ui/patch') && response.status() === 200);
     }
 
     /**
