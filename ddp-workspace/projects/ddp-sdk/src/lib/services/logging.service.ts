@@ -67,9 +67,12 @@ export class LoggingService {
             body,
             { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) }).pipe(
             catchError((error: any) => {
-                const message = `${this.LOG_SOURCE}: ${JSON.stringify(body)}`;
-                this.stackdriverErrorReporterService.handleError(message);
-                console.error.apply(window.console, message);
+                const message = JSON.stringify(body);
+                if (body.severity === 'ERROR') {
+                    this.stackdriverErrorReporterService.handleError(message);
+                }
+                this.logWarning(error);
+                this.logWarning(message);
                 return of(null);
             }),
             map(() => void 0)
