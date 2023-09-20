@@ -14,7 +14,8 @@ export default class TextArea extends WidgetBase {
       if (label) {
         this.element = exactMatch
           ? this.root.locator(`//textarea[@id=(//label[.//text()[normalize-space()="${label}"]]/@for)]`)
-          : this.root.locator(`//textarea[@id=(//label[contains(normalize-space(.),"${label}")]/@for)]`);
+          : this.root.locator(`//textarea[normalize-space(@data-placeholder)="${label}" or ` +
+              `@id=(//label[contains(normalize-space(.),"${label}")]/@for)]`);
       } else {
         this.element = this.root.locator('textarea');
       }
@@ -28,5 +29,13 @@ export default class TextArea extends WidgetBase {
 
   async getText(): Promise<string> {
     return this.toLocator().inputValue();
+  }
+
+  async clear(): Promise<void> {
+    await this.toLocator().focus();
+    await this.toLocator().scrollIntoViewIfNeeded().catch();
+    await this.click();
+    await this.page.keyboard.press('Meta+A');
+    await this.page.keyboard.press('Backspace');
   }
 }

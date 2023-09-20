@@ -1,5 +1,7 @@
 import { expect, Locator, Page } from '@playwright/test';
 import { FamilyMember } from 'dsm/component/tabs/enums/familyMember-enum';
+import TextArea from 'dss/component/textarea';
+import { waitForResponse } from 'utils/test-utils';
 
 /**
  * Captures the webelements that can be interacted with for RGP Family Members
@@ -264,12 +266,12 @@ export default class FamilyMemberTab {
      * @param notes the notes to be inputted
      */
     public async inputMixedRaceNotes(notes: string): Promise<void> {
-        const textarea = this.page.locator("//textarea[contains(@data-placeholder, 'Mixed Race Notes')]");
+        const textarea = new TextArea(this.page, {label: 'Mixed Race Notes'});
         await textarea.clear();
-        await expect(textarea).toBeEmpty();
-        await textarea.fill(notes);
-        await textarea.blur();
-        await this.page.waitForResponse(response => response.url().includes('/ui/patch') && response.status() === 200);
+        await Promise.all([
+            waitForResponse(this.page, {uri: 'ui/patch'}),
+            textarea.fill(notes)
+        ]);
     }
 
     /**
