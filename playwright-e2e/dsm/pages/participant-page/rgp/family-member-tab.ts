@@ -15,7 +15,7 @@ export default class FamilyMemberTab {
     private _familyID!: number;
     private _relationToProband: FamilyMember;
     private readonly page: Page;
-    private readonly MAX_POSSIBLE_RELATIONSHIP_ID_VALUE: number = 1000;
+    private readonly MAX_POSSIBLE_RELATIONSHIP_ID_VALUE: number = 4;
 
     constructor(page: Page, relationToProband: FamilyMember) {
         this.page = page;
@@ -660,7 +660,7 @@ export default class FamilyMemberTab {
         for (const familyMember of currentFamilyMembers) {
             const familyRelationshipID = await this.getRelationshipIDFromFamilyMemberTab(familyMember);
             usedRelationshipIDs.push(familyRelationshipID);
-            console.log(`Used id: ${usedRelationshipIDs}`);
+            console.log(`Used id: ${familyRelationshipID}`);
         }
         return usedRelationshipIDs;
     }
@@ -670,6 +670,6 @@ export default class FamilyMemberTab {
         const splitFamilyMemberInfo = familyMemberInfo.split('-'); //Split between {name e.g. George} and {rgp info e.g. RGP_1234_5}
         const rgpInfo = splitFamilyMemberInfo[1];
         const splitRGPInfo = rgpInfo.split('_') //Split between {RGP}_{family id}_{relationship id}
-        const familyRelationshipID = splitRGPInfo[2];
+        return parseInt(splitRGPInfo[2]);
     }
 }

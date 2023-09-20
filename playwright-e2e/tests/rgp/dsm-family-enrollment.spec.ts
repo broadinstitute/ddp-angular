@@ -746,7 +746,7 @@ test.describe.serial('DSM Family Enrollment Handling', () => {
         await expect(brotherPronouns).toHaveText(await probandPronouns.innerText());
 
         const probandDateOfBirth = proband.getDateOfBirth();
-        expect(brotherDateOfBirth).toBe(probandDateOfBirth);
+        expect(await brotherDateOfBirth.innerText()).toBe(await probandDateOfBirth.innerText());
 
         const probandAgeToday = proband.getAgeToday();
         expect(brotherAgeToday).toBe(probandAgeToday);
