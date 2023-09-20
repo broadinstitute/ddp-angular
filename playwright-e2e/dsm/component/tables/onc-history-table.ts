@@ -124,7 +124,7 @@ export default class OncHistoryTable extends Table {
   }
 
   /* Helper Functions */
-  private async fillInput(root: Locator, value: string | number, hasLookup: boolean, lookupSelectIndex: number = 0): Promise<void> {
+  private async fillInput(root: Locator, value: string | number, hasLookup: boolean, lookupSelectIndex = 0): Promise<void> {
     const inputElement = new Input(this.page, {root});
     const currentValue = await this.getCurrentValue(inputElement);
     let actualValue = typeof value === 'number' ? value.toString() : value;
@@ -155,7 +155,7 @@ export default class OncHistoryTable extends Table {
     }
   }
 
-  private async fillTextArea(root: Locator, value: string | number, hasLookup: boolean, lookupSelectIndex: number = 0): Promise<void> {
+  private async fillTextArea(root: Locator, value: string | number, hasLookup: boolean, lookupSelectIndex = 0): Promise<void> {
     const textarea = new TextArea(this.page, {root});
     const currentValue = await this.getCurrentValue(textarea);
     let actualValue = typeof value === 'number' ? value.toString() : value;
@@ -183,7 +183,7 @@ export default class OncHistoryTable extends Table {
     }
   }
 
-  private async lookup(selectIndex = 0, isFacility: boolean = false): Promise<void> {
+  private async lookup(selectIndex = 0, isFacility = false): Promise<void> {
     const lookupList = this.lookupList;
     const count = await lookupList.count();
     if (count > 0 && selectIndex < count) {
@@ -205,7 +205,7 @@ export default class OncHistoryTable extends Table {
   }
 
   /* Assertions */
-  public async assertRowSelectionCheckbox(index: number = 0): Promise<void> {
+  public async assertRowSelectionCheckbox(index = 0): Promise<void> {
     const checkbox = this.firstRequestColumn(index).locator('//mat-checkbox');
     await expect(checkbox, 'Row selection checkbox is not visible').toBeVisible();
   }

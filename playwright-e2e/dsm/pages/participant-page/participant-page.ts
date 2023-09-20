@@ -3,7 +3,7 @@ import {waitForResponse} from 'utils/test-utils';
 import {MainInfoEnum} from 'dsm/pages/participant-page/enums/main-info-enum';
 import Tabs from 'dsm/component/tabs/tabs';
 import {TabEnum} from 'dsm/component/tabs/enums/tab-enum';
-import Input from "../../../dss/component/input";
+import Input from 'dss/component/input';
 
 export default class ParticipantPage {
   private readonly PAGE_TITLE: string = 'Participant Page';

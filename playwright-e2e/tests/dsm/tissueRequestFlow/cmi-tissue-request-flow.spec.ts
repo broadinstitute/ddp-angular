@@ -8,9 +8,9 @@ import OncHistoryTab from 'dsm/component/tabs/onc-history-tab';
 import {
   OncHistoryInputColumnsEnum,
   OncHistorySelectRequestEnum
-} from "dsm/component/tabs/enums/onc-history-input-columns-enum";
-import {expect} from "@playwright/test";
-import {getDate} from "utils/date-utils";
+} from 'dsm/component/tabs/enums/onc-history-input-columns-enum';
+import {expect} from '@playwright/test';
+import {getDate} from 'utils/date-utils';
 
 test.describe('Tissue Request Flow', () => {
   const studies = [StudyEnum.PANCAN];
@@ -37,7 +37,7 @@ test.describe('Tissue Request Flow', () => {
       })
 
       const participantListTable = participantListPage.participantListTable;
-      let participantPage: ParticipantPage = await participantListTable.openParticipantPageAt(0);
+      const participantPage: ParticipantPage = await participantListTable.openParticipantPageAt(0);
       const oncHistoryTab = await participantPage.clickTab<OncHistoryTab>(TabEnum.ONC_HISTORY);
       const oncHistoryTable = oncHistoryTab.table;
 
@@ -50,7 +50,7 @@ test.describe('Tissue Request Flow', () => {
         await participantListTable.openParticipantPageAt(0);
 
         const oncHistoryCreatedDate = participantPage.oncHistoryCreatedDate();
-        await expect(oncHistoryCreatedDate, 'Onc History Date has not been updated').toBeTruthy();
+        expect(oncHistoryCreatedDate, 'Onc History Date has not been updated').toBeTruthy();
       })
 
       await participantPage.clickTab<OncHistoryTab>(TabEnum.ONC_HISTORY);
@@ -117,7 +117,6 @@ test.describe('Tissue Request Flow', () => {
         await tissueInformationPage.addTissue();
         await tissueInformationPage.deleteTissueAt(1);
       })
-
     })
   }
 });
