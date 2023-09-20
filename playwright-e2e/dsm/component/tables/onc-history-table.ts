@@ -91,7 +91,8 @@ export default class OncHistoryTable extends Table {
   public async fillField(columnName: OncHistoryInputColumnsEnum, {
     date,
     select,
-    value
+    value,
+    lookupSelectIndex
   }: OncHistoryInputsTypes, rowIndex = 0): Promise<void> {
     const cell = await this.checkColumnAndCellValidity(columnName, rowIndex);
 
@@ -106,11 +107,11 @@ export default class OncHistoryTable extends Table {
         break;
       }
       case InputTypeEnum.INPUT: {
-        await this.fillInput(cell, String(value), hasLookup);
+        await this.fillInput(cell, String(value), hasLookup, lookupSelectIndex);
         break;
       }
       case InputTypeEnum.TEXTAREA: {
-        await this.fillTextArea(cell, String(value), hasLookup);
+        await this.fillTextArea(cell, String(value), hasLookup, lookupSelectIndex);
         break;
       }
       case InputTypeEnum.SELECT: {
@@ -123,7 +124,7 @@ export default class OncHistoryTable extends Table {
   }
 
   /* Helper Functions */
-  private async fillInput(root: Locator, value: string | number, hasLookup: boolean): Promise<void> {
+  private async fillInput(root: Locator, value: string | number, hasLookup: boolean, lookupSelectIndex: number = 0): Promise<void> {
     const inputElement = new Input(this.page, {root});
     const currentValue = await this.getCurrentValue(inputElement);
     let actualValue = typeof value === 'number' ? value.toString() : value;
@@ -136,7 +137,7 @@ export default class OncHistoryTable extends Table {
     if (currentValue !== actualValue) {
       await inputElement.fillSimple(actualValue);
       await waitForResponse(this.page, {uri: 'patch'});
-      hasLookup && await this.lookup();
+      hasLookup && await this.lookup(lookupSelectIndex, true);
     }
   }
 
@@ -154,7 +155,7 @@ export default class OncHistoryTable extends Table {
     }
   }
 
-  private async fillTextArea(root: Locator, value: string | number, hasLookup: boolean): Promise<void> {
+  private async fillTextArea(root: Locator, value: string | number, hasLookup: boolean, lookupSelectIndex: number = 0): Promise<void> {
     const textarea = new TextArea(this.page, {root});
     const currentValue = await this.getCurrentValue(textarea);
     let actualValue = typeof value === 'number' ? value.toString() : value;
@@ -168,7 +169,7 @@ export default class OncHistoryTable extends Table {
       await textarea.fill(actualValue, false);
       await textarea.blur();
       await waitForResponse(this.page, {uri: 'patch'});
-      hasLookup && await this.lookup();
+      hasLookup && await this.lookup(lookupSelectIndex);
     }
   }
 
@@ -182,10 +183,15 @@ export default class OncHistoryTable extends Table {
     }
   }
 
-  private async lookup(selectIndex = 0): Promise<void> {
+  private async lookup(selectIndex = 0, isFacility: boolean = false): Promise<void> {
     const lookupList = this.lookupList;
     const count = await lookupList.count();
     if (count > 0 && selectIndex < count) {
+      if (isFacility) {
+        const isComplete = (await lookupList.nth(selectIndex).locator('span').count()) === 3;
+        expect(isComplete, `Lookup value is not complete at provided index - ${selectIndex}`)
+          .toBeTruthy()
+      }
       await lookupList.nth(selectIndex).click();
       await waitForResponse(this.page, {uri: 'patch'});
     }
@@ -196,6 +202,12 @@ export default class OncHistoryTable extends Table {
     const isDisabled = await element.isDisabled();
     expect(isDisabled, `Input field is disabled`).toBeFalsy();
     return currentValue?.trim();
+  }
+
+  /* Assertions */
+  public async assertRowSelectionCheckbox(index: number = 0): Promise<void> {
+    const checkbox = this.firstRequestColumn(index).locator('//mat-checkbox');
+    await expect(checkbox, 'Row selection checkbox is not visible').toBeVisible();
   }
 
 

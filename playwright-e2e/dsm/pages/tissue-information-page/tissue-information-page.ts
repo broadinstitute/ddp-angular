@@ -46,7 +46,7 @@ export default class TissueInformationPage {
     return this.tissue(tissuesCount - 1);
   }
 
-  public async deleteTissueByIndex(tissueIndex: number): Promise<void> {
+  public async deleteTissueAt(tissueIndex: number): Promise<void> {
     await this.tissuesCountCheck(tissueIndex);
     const deleteTissueBtnLocator = this.deleteTissueButton(tissueIndex);
     await expect(deleteTissueBtnLocator, `Tissue at index '${tissueIndex}' is not visible`).toBeVisible();
@@ -67,6 +67,33 @@ export default class TissueInformationPage {
 
     const data = await participantInformation.textContent();
     return data?.trim() as string;
+  }
+
+  public async getFaxSentDate(dateIndex: number = 0): Promise<string> {
+    const faxSentLocator = this.locatorFor(DynamicFieldsEnum.FAX_SENT).locator('app-field-datepicker')
+      .nth(dateIndex);
+
+    await expect(faxSentLocator, `Fax sent date is not visible at ${dateIndex} index`).toBeVisible();
+
+    const inputField = new Input(this.page, {root: faxSentLocator});
+    return inputField.currentValue();
+  }
+
+  public async getTissueReceivedDate(): Promise<string> {
+    const tissueReceivedLocator = this.locatorFor(DynamicFieldsEnum.TISSUE_RECEIVED);
+
+    await expect(tissueReceivedLocator, 'Tissue Received Date is not visible').toBeVisible();
+
+    const inputField = new Input(this.page, {root: tissueReceivedLocator});
+    return inputField.currentValue();
+  }
+
+  public async getNotes(): Promise<string> {
+    const notesLocator = this.locatorFor(DynamicFieldsEnum.NOTES);
+    await expect(notesLocator, 'Notes textarea is not visible').toBeVisible();
+
+    const textarea = new TextArea(this.page, {root: notesLocator});
+    return textarea.currentValue();
   }
 
   public async fillFaxSentDates(date1: FillDate, date2?: FillDate, date3?: FillDate): Promise<void> {
@@ -150,6 +177,13 @@ export default class TissueInformationPage {
     }
   }
 
+  /* Assertions */
+  public async assertFaxSentDatesCount(count: number): Promise<void> {
+    const faxSentDates = this.locatorFor(DynamicFieldsEnum.FAX_SENT).locator('app-field-datepicker');
+    const dateInputs = await faxSentDates.count();
+    expect(dateInputs, `Fax sent dates count doesn't equal ${count}`).toEqual(count);
+  }
+
   /* Helper Functions */
   private async applyToAll(root: Locator): Promise<void> {
     const applyToAllBtn = new Button(this.page,
@@ -164,7 +198,11 @@ export default class TissueInformationPage {
       const isModalBtnDisabled = await modalBtn.isDisabled();
       if (!isModalBtnDisabled) {
         await modalBtn.click();
-        await waitForResponse(this.page, {uri: 'patch'});
+        await waitForResponse(this.page, {uri: 'institutions', timeout: 40000});
+
+        const successModalBtn = new Button(this.page,
+          {root: this.page.locator('app-modal'), label: 'Ok', exactMatch: true})
+        await successModalBtn.click();
       }
     }
   }

@@ -3,6 +3,7 @@ import {FillDate} from 'dsm/pages/tissue-information-page/interfaces/tissue-info
 
 export interface OncHistoryInputsTypes {
   value?: string | number;
+  lookupSelectIndex?: number;
   select?: OncHistorySelectRequestEnum,
   date?: FillDate,
 }
