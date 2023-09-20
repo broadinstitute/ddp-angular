@@ -11,4 +11,5 @@ export enum CustomViewColumns {
   PARTICIPANT = 'Participant Columns',
   RESEARCH_CONSENT_FORM = 'Research Consent Form Columns',
   SAMPLE = 'Sample Columns',
+  DIAGNOSIS_TYPE = 'Survey: Your Child\'s/Your [DIAGNOSIS TYPE] Columns'
 }

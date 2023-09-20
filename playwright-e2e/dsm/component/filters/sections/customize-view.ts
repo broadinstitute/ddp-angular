@@ -90,10 +90,10 @@ export class CustomizeView {
   }
 
   private get columnsGroupXPath(): string {
-    return `//div[button[@data-toggle='dropdown'] and button[.//*[text()[normalize-space()='${this.activeColumnsGroup}']]]]`;
+    return `//div[button[@data-toggle="dropdown"] and button[.//*[text()[normalize-space()="${this.activeColumnsGroup}"]]]]`;
   }
 
   private columnPathXPath(columnName: string): string {
-    return `/ul/li/mat-checkbox[label[.//*[text()[normalize-space()='${columnName}']]]]`;
+    return `/ul/li/mat-checkbox[label[.//*[text()[normalize-space()="${columnName}"]]]]`;
   }
 }
