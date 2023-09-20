@@ -2,7 +2,7 @@ import { expect, Page } from '@playwright/test';
 import DatePicker from 'dsm/component/date-picker';
 import Select from 'dss/component/select';
 import Table from 'dss/component/table';
-import { waitForNoSpinner } from 'utils/test-utils';
+import { waitForNoSpinner, waitForResponse } from 'utils/test-utils';
 
 export enum SearchByField {
   SHORT_ID = 'Short ID',
@@ -23,6 +23,7 @@ export default class SearchPage {
     const locator = this.page.locator('//div[button[normalize-space()="Search Kit"]]');
     await locator.locator('//input').fill(value);
     await locator.locator('//button').click();
+    await waitForResponse(this.page, {uri: '/ui/searchKit'});
     await waitForNoSpinner(this.page);
 
     const table = new Table(this.page);
