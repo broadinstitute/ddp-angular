@@ -22,7 +22,12 @@ export class ParticipantsListPaginator {
 
   public async hasNext(): Promise<boolean> {
     const nextLocator = this.page.locator(this.nextXPath);
-    return nextLocator.isVisible();
+    const isvisible = await nextLocator.isVisible();
+    const isDisabled = isvisible ? (await nextLocator.getAttribute('class'))?.includes('disabled') : true;
+    if (isDisabled) {
+      return false;
+    }
+    return true;
   }
 
   public async previous(): Promise<void> {
