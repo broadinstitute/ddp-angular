@@ -17,7 +17,7 @@ export default class ParticipantWithdrawalPage {
     const navigation = new Navigation(page, request);
     const [mailListResponse] = await Promise.all([
       waitForResponse(page, { uri: 'ui/exitParticipant/' }),
-      navigation.selectMiscellaneous(MiscellaneousEnum.PARTICIPANT_WITHDRAWAL)
+      navigation.selectFromMiscellaneous(MiscellaneousEnum.PARTICIPANT_WITHDRAWAL)
     ]);
     return new ParticipantWithdrawalPage(page);
   }

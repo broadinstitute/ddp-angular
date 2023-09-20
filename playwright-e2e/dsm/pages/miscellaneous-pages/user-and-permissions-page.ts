@@ -1,5 +1,5 @@
 import {expect, Locator, Page} from '@playwright/test';
-import {StudyEnum} from '../../component/navigation/enums/selectStudyNav-enum';
+import {StudyEnum} from 'dsm/component/navigation/enums/selectStudyNav-enum';
 
 export default class UserPermissionPage {
   private readonly PAGE_TITLE: string = 'Users And Permissions';
@@ -41,6 +41,11 @@ export default class UserPermissionPage {
   public async assertPageTitle(): Promise<void> {
     await expect(this.page.getByRole('heading', { name: `${this.PAGE_TITLE}` }),
       `ERROR - ${this.PAGE_TITLE}'s page title is not displayed`).toBeVisible();
+  }
+
+  public async assertAddUserButtonDisplayed(): Promise<void> {
+    const button = this.getAddUserButton();
+    await expect(button).toBeVisible();
   }
 
   public async assertStudyAdminInfo(email: string, name: string, phone?: string): Promise<void> {

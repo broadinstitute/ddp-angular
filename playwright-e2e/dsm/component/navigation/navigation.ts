@@ -17,6 +17,7 @@ import KitsReceivedPage from 'dsm/pages/kitsInfo-pages/kitsReceived-page/kitsRec
 import TrackingScanPage from 'dsm/pages/scanner-pages/trackingScan-page';
 import RgpFinalScanPage from 'dsm/pages/scanner-pages/rgpFinalScan-page';
 import ErrorPage from 'dsm/pages/samples/error-page';
+import UserPermissionPage from 'dsm/pages/miscellaneous-pages/user-and-permissions-page';
 
 
 type Selection = StudyNavEnum | StudyEnum | SamplesNavEnum | MiscellaneousEnum;
@@ -34,7 +35,8 @@ export class Navigation {
       [SamplesNavEnum.SENT, new KitsSentPage(this.page)],
       [SamplesNavEnum.RECEIVED, new KitsReceivedPage(this.page, this.request)],
       [SamplesNavEnum.ERROR, new ErrorPage(this.page)],
-    ])
+    ]),
+    miscellaneous: new Map<string, object>([[MiscellaneousEnum.USERS_AND_PERMISSIONS, new UserPermissionPage(this.page)]]),
   };
 
   constructor(private readonly page: Page, private readonly request: APIRequestContext) {}
@@ -54,7 +56,7 @@ export class Navigation {
     return (this.navigationItems.study as Map<string, object>).get(studyNav) as T;
   }
 
-  public async selectMiscellaneous(miscName: MiscellaneousEnum): Promise<void> {
+  public async selectFromMiscellaneous(miscName: MiscellaneousEnum): Promise<void> {
     await this.selectFrom(MainMenuEnum.MISCELLANEOUS, miscName);
   }
 
