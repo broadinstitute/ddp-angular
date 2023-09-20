@@ -287,10 +287,10 @@ export default class ParticipantListPage {
       const hasNextPage = await participantListTable.paginator.hasNext();
       if (hasNextPage) {
         await participantListTable.nextPage();
+        participantsCount = await participantListTable.rowsCount;
       } else {
-        throw new Error('Table "Next Page" link is not visible.');
+        participantsCount = 0;
       }
-      participantsCount = await participantListTable.rowsCount;
     }
     throw new Error(`Failed to find a suitable participant for Kit Upload within max waiting time 90 seconds.`);
   }
