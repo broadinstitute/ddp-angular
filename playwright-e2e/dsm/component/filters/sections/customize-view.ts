@@ -7,7 +7,6 @@ export class CustomizeView {
   public async open(): Promise<void> {
     const isOpen = await this.isPanelOpen();
     if (!isOpen) {
-      await this.page.locator(this.openButtonXPath).scrollIntoViewIfNeeded().catch();
       await this.page.locator(this.openButtonXPath).click();
     }
   }
@@ -15,7 +14,6 @@ export class CustomizeView {
   public async close(): Promise<void> {
     const isOpen = await this.isPanelOpen();
     if (isOpen) {
-      await this.page.locator(this.openButtonXPath).scrollIntoViewIfNeeded().catch();
       await this.page.locator(this.openButtonXPath).click();
     }
   }
@@ -62,7 +60,7 @@ export class CustomizeView {
   private async closeColumnsGroup(opts: { nth?: number } = {}): Promise<void> {
     const { nth } = opts;
     const columnsGroupButton = this.columnsGroupButton({nth});
-    (await this.isExpanded(columnsGroupButton)) && (await columnsGroupButton.click());
+    (await this.isExpanded(columnsGroupButton)) && (await columnsGroupButton.click({force: true}));
   }
 
   private async isChecked(locator: Locator | undefined): Promise<boolean> {
