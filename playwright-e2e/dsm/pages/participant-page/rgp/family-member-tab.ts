@@ -15,6 +15,7 @@ export default class FamilyMemberTab {
     private _familyID!: number;
     private _relationToProband: FamilyMember;
     private readonly page: Page;
+    private readonly MAX_POSSIBLE_RELATIONSHIP_ID_VALUE: number = 1000;
 
     constructor(page: Page, relationToProband: FamilyMember) {
         this.page = page;
@@ -629,5 +630,46 @@ export default class FamilyMemberTab {
 
     public getRedCapSurveyCompletedDate(): Locator {
         return this.page.locator("//td[contains(text(), 'RedCap Survey Completed Date')]/following-sibling::td//div/input");
+    }
+
+    /* Utility methods */
+    public async setRandomRelationshipID(): Promise<void> {
+        const usedRelationshipIDs = await this.getListOfUsedSubjectIDs();
+        let searchingForID = true;
+        let possibleID;
+        while (searchingForID) {
+            possibleID = Math.floor(Math.random() * this.MAX_POSSIBLE_RELATIONSHIP_ID_VALUE);
+            searchingForID = this.isPreviouslyUsedSubjectID(possibleID, usedRelationshipIDs);
+        }
+        this._relationshipID = possibleID!.toString();
+    }
+
+    private isPreviouslyUsedSubjectID(subjectID: number, listOfIDs: Array<number>): boolean {
+        let previouslyUsed = false;
+        for (const id of listOfIDs) {
+            if (id === subjectID) {
+                previouslyUsed = true;
+            }
+        }
+        return previouslyUsed;
+    }
+
+    private async getListOfUsedSubjectIDs(): Promise<Array<number>> {
+        const usedRelationshipIDs: number[] = [];
+        const currentFamilyMembers = await this.page.locator(`//app-participant-page//ul//li//a[contains(., 'RGP')]`).all();
+        for (const familyMember of currentFamilyMembers) {
+            const familyRelationshipID = await this.getRelationshipIDFromFamilyMemberTab(familyMember);
+            usedRelationshipIDs.push(familyRelationshipID);
+            console.log(`Used id: ${usedRelationshipIDs}`);
+        }
+        return usedRelationshipIDs;
+    }
+
+    private async getRelationshipIDFromFamilyMemberTab(familyMember: Locator): Promise<number> {
+        const familyMemberInfo = await familyMember.innerText();
+        const splitFamilyMemberInfo = familyMemberInfo.split('-'); //Split between {name e.g. George} and {rgp info e.g. RGP_1234_5}
+        const rgpInfo = splitFamilyMemberInfo[1];
+        const splitRGPInfo = rgpInfo.split('_') //Split between {RGP}_{family id}_{relationship id}
+        const familyRelationshipID = splitRGPInfo[2];
     }
 }

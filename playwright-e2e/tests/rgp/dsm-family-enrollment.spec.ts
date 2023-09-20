@@ -546,7 +546,7 @@ test.describe.serial('DSM Family Enrollment Handling', () => {
 
     //Setup new family member
     const grandfather = new FamilyMemberTab(page, FamilyMember.MATERNAL_GRANDFATHER);
-    grandfather.relationshipID = user.maternalGrandFather.relationshipID;
+    await grandfather.setRandomRelationshipID();
     grandfather.firstName = user.maternalGrandFather.firstName;
     grandfather.lastName = user.maternalGrandFather.lastName;
 
@@ -629,7 +629,7 @@ test.describe.serial('DSM Family Enrollment Handling', () => {
 
     //Setup family members - for creation and comparison
     const brother = new FamilyMemberTab(page, FamilyMember.BROTHER);
-    brother.relationshipID = user.brother.relationshipID;
+    await brother.setRandomRelationshipID();
     brother.firstName = user.brother.firstName;
     brother.lastName = user.brother.lastName;
 
