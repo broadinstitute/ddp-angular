@@ -16,24 +16,24 @@ import ParticipantListPage from 'dsm/pages/participant-list-page';
 import ParticipantPage from 'dsm/pages/participant-page/participant-page';
 import ErrorPage from 'dsm/pages/samples/error-page';
 import FinalScanPage from 'dsm/pages/scanner-pages/finalScan-page';
-import TrackingScanPage from 'dsm/pages/scanner-pages/trackingScan-page';
 import { WelcomePage } from 'dsm/pages/welcome-page';
 import { logInfo } from 'utils/log-utils';
 import { waitForResponse } from 'utils/test-utils';
+import InitialScanPage from 'dsm/pages/scanner-pages/initialScan-page';
 
 /**
- * Prefix check for Blood kit with Canada and New York address for LMS and Osteo2 studies.
+ * Prefix check for Saliva kit with Canada and New York address for Osteo2
  *
- * For Blood kit:
+ * For Saliva kit:
  *  - Upload a kit with address for Canada or NY state
- *  - Create kit label without PECGS prefix
- *  - Kit will be on error page
- *  - Tracking scan
+ *  - Create kit label
+ *  - Kit will be on Error page
+ *  - Initial scan (with a 14 char kit label)
  *  - Final scan
  */
 
 // don't run in parallel
-test.describe.serial('Blood Kit Upload', () => {
+test.describe.serial('Saliva Kit Upload with a Canadian or New York address', () => {
   let welcomePage: WelcomePage;
   let navigation: Navigation;
   let participantPage: ParticipantPage;
@@ -41,10 +41,10 @@ test.describe.serial('Blood Kit Upload', () => {
   let kitUploadInfo: KitUploadInfo;
   let shortID: string;
 
-  const studies = [StudyEnum.LMS]; // StudyEnum.OSTEO2;
-  const kitType = KitTypeEnum.BLOOD;
+  const studies = [StudyEnum.OSTEO2];
+  const kitType = KitTypeEnum.SALIVA;
   const expectedKitTypes = [KitTypeEnum.SALIVA, KitTypeEnum.BLOOD];
-  const kitLabel = `${crypto.randomUUID().toString().substring(0, 10)}`;
+  const kitLabel = `saliva-${crypto.randomUUID().toString().substring(0, 7)}`; // alphanumerical string length should be 14
 
   const mockedCanadaAddress = {
     street1: mock.canada.street,
@@ -107,14 +107,14 @@ test.describe.serial('Blood Kit Upload', () => {
       await test.step('Deactivate existing blood and saliva kits', async () => {
         const kitsWithoutLabelPage = await navigation.selectFromSamples<KitsWithoutLabelPage>(SamplesNavEnum.KITS_WITHOUT_LABELS);
         await kitsWithoutLabelPage.waitForReady();
+        // Note: This could break other Kit tests running concurrently
         for (const kit of expectedKitTypes) {
           await kitsWithoutLabelPage.selectKitType(kit);
           await kitsWithoutLabelPage.deactivateAllKitsFor(shortID);
         }
       });
 
-      // Uploads new kit
-      await test.step('Upload new blood kit', async () => {
+      await test.step('Upload new saliva kit', async () => {
         const kitUploadPage = await navigation.selectFromSamples<KitUploadPage>(SamplesNavEnum.KIT_UPLOAD);
         await kitUploadPage.waitForReady();
         await kitUploadPage.assertPageTitle();
@@ -166,19 +166,17 @@ test.describe.serial('Blood Kit Upload', () => {
         }).toPass({ timeout: 60 * 1000 });
         await kitListTable.searchByColumn(KitsColumnsEnum.SHIPPING_ID, shippingID);
         await expect(async () => {
-          // create label could take some time
+          // create label (previous step) could take some time
           await errorPage.reloadKitList();
           await expect(kitListTable.rows).toHaveCount(1, { timeout: 10 * 1000 });
         }).toPass({ timeout: 90 * 1000 });
       });
 
-      // For blood kit, requires tracking label
-      await test.step('Create tracking label', async () => {
-        const trackingScanPage = await navigation.selectFromSamples<TrackingScanPage>(SamplesNavEnum.TRACKING_SCAN);
-        await trackingScanPage.assertPageTitle();
-        const trackingLabel = `tracking-${crypto.randomUUID().toString().substring(0, 10)}`;
-        await trackingScanPage.fillScanPairs([trackingLabel, kitLabel]);
-        await trackingScanPage.save();
+      await test.step('Initial scan', async () => {
+        const initialScanPage = await navigation.selectFromSamples<InitialScanPage>(SamplesNavEnum.INITIAL_SCAN);
+        await initialScanPage.assertPageTitle();
+        await initialScanPage.fillScanPairs([kitLabel, shortID]);
+        await initialScanPage.save();
       });
 
       await test.step('Final scan', async () => {
