@@ -648,7 +648,6 @@ export default class FamilyMemberTab {
         let possibleID;
         while (searchingForID) {
             possibleID = Math.floor(Math.random() * this.MAX_POSSIBLE_RELATIONSHIP_ID_VALUE);
-            console.log(`Generated number: ${possibleID}`);
             searchingForID = this.isPreviouslyUsedSubjectID(possibleID, usedRelationshipIDs);
         }
         this._relationshipID = possibleID!.toString();
@@ -670,7 +669,6 @@ export default class FamilyMemberTab {
         for (const familyMember of currentFamilyMembers) {
             const familyRelationshipID = await this.getRelationshipIDFromFamilyMemberTab(familyMember);
             usedRelationshipIDs.push(familyRelationshipID);
-            console.log(`Used id: ${familyRelationshipID}`);
         }
         return usedRelationshipIDs;
     }
