@@ -9,6 +9,7 @@ import { test } from 'fixtures/dsm-fixture';
 test.describe('View Sequencing Order Permission Test', () => {
     //Current clinical studies
     const studies = [StudyEnum.OSTEO2, StudyEnum.LMS];
+    let testEmail = 'redacted';
 
     for (const study of studies) {
         test(`Verify the view_seq_order permissions work as expected in @${study}`, async ({ page, request }) => {
@@ -27,8 +28,8 @@ test.describe('View Sequencing Order Permission Test', () => {
                 await userPermissionsPage.assertAddUserButtonDisplayed();
 
                 //Verify the expected study admin can be seen
-                await userPermissionsPage.assertStudyAdminInfo('kwestbro+6858@broadinstitute.org', 'Kiara6858 Test User', '111-222-3333');
-                const studyAdmin = userPermissionsPage.getStudyAdmin('kwestbro+6858@broadinstitute.org');
+                await userPermissionsPage.assertStudyAdminInfo(testEmail, 'Kiara6858 Test User', '111-222-3333');
+                const studyAdmin = userPermissionsPage.getStudyAdmin(testEmail);
             })
 
             await test.step('Verify that the current DSM user is able to view the Clinical Order Columns in Participant List', async () => {
