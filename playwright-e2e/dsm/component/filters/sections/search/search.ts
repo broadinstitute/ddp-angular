@@ -14,8 +14,11 @@ export class Search {
 
   public async open(): Promise<void> {
     const open = await this.isOpen();
-    !open && await this.page.locator(this.openButtonXPath).click();
-    await expect(async () => expect(await this.isOpen()).toBe(true)).toPass({ timeout: 5000 });
+    if (!open) {
+      await this.page.locator(this.openButtonXPath).scrollIntoViewIfNeeded().catch();
+      await this.page.locator(this.openButtonXPath).click();
+      await expect(async () => expect(await this.isOpen()).toBe(true)).toPass({ timeout: 5000 });
+    }
   }
 
   public async search(): Promise<void> {

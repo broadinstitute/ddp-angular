@@ -7,6 +7,7 @@ export class CustomizeView {
   public async open(): Promise<void> {
     const isOpen = await this.isPanelOpen();
     if (!isOpen) {
+      await this.page.locator(this.openButtonXPath).scrollIntoViewIfNeeded().catch();
       await this.page.locator(this.openButtonXPath).click();
     }
   }
@@ -14,6 +15,7 @@ export class CustomizeView {
   public async close(): Promise<void> {
     const isOpen = await this.isPanelOpen();
     if (isOpen) {
+      await this.page.locator(this.openButtonXPath).scrollIntoViewIfNeeded().catch();
       await this.page.locator(this.openButtonXPath).click();
     }
   }
