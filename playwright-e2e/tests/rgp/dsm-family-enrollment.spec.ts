@@ -12,6 +12,7 @@ import { saveParticipantGuid } from 'utils/faker-utils';
 import { ParticipantListTable } from 'dsm/component/tables/participant-list-table';
 import { calculateAge } from 'utils/date-utils';
 import { logInfo } from 'utils/log-utils';
+import { v4 as uuid } from 'uuid';
 
 
 test.describe.serial('DSM Family Enrollment Handling', () => {
@@ -161,11 +162,6 @@ test.describe.serial('DSM Family Enrollment Handling', () => {
     expect(familyIDFromSubjectID).toBe(proband.familyID);
     expect(familyIDFromFamilyMemberTab).toBe(proband.familyID);
 
-    //Prep for checking note content  in Participant Info later on
-    const importantNotesTextarea = proband.getImportantNotes();
-    const processNotesTextarea = proband.getProcessNotes();
-    const mixedRaceTextarea = proband.getMixedRaceNotes();
-
     //Confirm that input entered in Important Notes and Process Notes is saved
     await proband.inputImportantNotes('Testing notes here - Important Notes');
     await proband.inputProcessNotes('Testing notes here - Process Notes');
@@ -227,8 +223,8 @@ test.describe.serial('DSM Family Enrollment Handling', () => {
     await ethnicity.click();
     await dropdownOptions.filter({ hasText: 'Not Hispanic' }).click();
 
-    const datetime = new Date();
-    const mixedRaceTestingNotes = `Testing done on ${datetime}`;
+    const uniqueID = uuid();
+    const mixedRaceTestingNotes = `Testing using id ${uniqueID}`;
     await proband.inputMixedRaceNotes(mixedRaceTestingNotes);
 
     //Verify that the input to Important Notes, Process Notes, Mixed Race Notes has been saved even when page is re-visited
@@ -250,6 +246,10 @@ test.describe.serial('DSM Family Enrollment Handling', () => {
     await expect(probandTab).toHaveClass('nav-link active'); //Make sure proband tab is opened
 
     await participantInfoSection.click();
+    //Checking textarea content
+    const importantNotesTextarea = proband.getImportantNotes();
+    const processNotesTextarea = proband.getProcessNotes();
+    const mixedRaceTextarea = proband.getMixedRaceNotes();
     expect(await importantNotesTextarea.inputValue()).toBe(importantNotes);
     expect(await processNotesTextarea.inputValue()).toBe(processNotes);
     expect(await mixedRaceTextarea.inputValue()).toBe(mixedRaceNotes);
