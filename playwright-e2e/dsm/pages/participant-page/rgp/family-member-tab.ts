@@ -15,7 +15,7 @@ export default class FamilyMemberTab {
     private _familyID!: number;
     private _relationToProband: FamilyMember;
     private readonly page: Page;
-    private readonly MAX_POSSIBLE_RELATIONSHIP_ID_VALUE: number = 4;
+    private readonly MAX_POSSIBLE_RELATIONSHIP_ID_VALUE: number = 1000;
 
     constructor(page: Page, relationToProband: FamilyMember) {
         this.page = page;
@@ -76,7 +76,7 @@ export default class FamilyMemberTab {
      * @returns the family id from the family member tab
      */
     public async getFamilyIDFromFamilyMemberTab(): Promise<number> {
-        const familyMemberTab = this.getFamilyMemberTab();
+        const familyMemberTab = await this.getFamilyMemberTab();
         const memberTabParts = (await familyMemberTab.innerText()).split('-'); //Family member tabs are usually {first name} - {subject id}
         const retreivedSubjectID = memberTabParts[1];
         const subjectIDParts = retreivedSubjectID.split('_'); //Subject id is usually in the format of RGP_{family id here}_{relationship id here}
@@ -90,9 +90,18 @@ export default class FamilyMemberTab {
      * Uses the relationshipID to find the family member tab to be returned, must be ran only after setting the relationshipID
      * @returns locator for a family member's tab
      */
-    public getFamilyMemberTab(): Locator {
+    public async getFamilyMemberTab(): Promise<Locator> {
         //todo Needs a better general locator - the last contains could capture more webelements than intended once family id is in 3,000's
-        return this.page.locator(`//li//a[contains(., 'RGP') and contains(., '_${this.relationshipID}')]`);
+        const possibleFamilyMemberTabs = await this.page.locator(`//li//a[contains(., 'RGP') and contains(., '_${this.relationshipID}')]`).all();
+        let actualFamilyMember: Locator;
+        for (const familyMember of possibleFamilyMemberTabs) {
+            const familyMemberID = await this.getRelationshipIDFromFamilyMemberTab(familyMember);
+            if (familyMemberID === parseInt(this._relationshipID)) {
+                actualFamilyMember = familyMember;
+                break;
+            }
+        }
+        return actualFamilyMember!;
     }
 
     public getJumpToMenuText(): Locator {
@@ -639,6 +648,7 @@ export default class FamilyMemberTab {
         let possibleID;
         while (searchingForID) {
             possibleID = Math.floor(Math.random() * this.MAX_POSSIBLE_RELATIONSHIP_ID_VALUE);
+            console.log(`Generated number: ${possibleID}`);
             searchingForID = this.isPreviouslyUsedSubjectID(possibleID, usedRelationshipIDs);
         }
         this._relationshipID = possibleID!.toString();

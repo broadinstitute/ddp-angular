@@ -112,7 +112,7 @@ test.describe.serial('DSM Family Enrollment Handling', () => {
     //Initial setup
     proband.relationshipID = user.patient.relationshipID;
 
-    const probandTab = proband.getFamilyMemberTab();
+    const probandTab = await proband.getFamilyMemberTab();
     await expect(probandTab).toBeVisible();
 
     //Verify that the dynamic form menu is present
@@ -560,7 +560,7 @@ test.describe.serial('DSM Family Enrollment Handling', () => {
     });
 
     //Check that the expected Participant Info fields have been filled after non-copied family member creation
-    const maternalGrandFatherFamilyMemberTab = grandfather.getFamilyMemberTab();
+    const maternalGrandFatherFamilyMemberTab = await grandfather.getFamilyMemberTab();
     await maternalGrandFatherFamilyMemberTab.scrollIntoViewIfNeeded();
     await expect(maternalGrandFatherFamilyMemberTab).toBeVisible();
 
@@ -599,7 +599,7 @@ test.describe.serial('DSM Family Enrollment Handling', () => {
     const proband = new FamilyMemberTab(page, FamilyMember.PROBAND);
     proband.relationshipID = user.patient.relationshipID;
 
-    const probandFamilyMemberTab = proband.getFamilyMemberTab();
+    const probandFamilyMemberTab = await proband.getFamilyMemberTab();
     await expect(probandFamilyMemberTab).toBeVisible();
     const probandFamilyID = await proband.getFamilyIDFromFamilyMemberTab();
 
@@ -607,7 +607,7 @@ test.describe.serial('DSM Family Enrollment Handling', () => {
     expect(maternalGrandfatherFamilyID).toBe(probandFamilyID);
     });
 
-    test('Verify that a family member can be added using copied proband info @dss @rgp @functional', async ({ page, request }) => {
+    test('Verify that a family member can be added using copied proband info @dsm @rgp @functional', async ({ page, request }) => {
     //Go into DSM
     const navigation = new Navigation(page, request);
 
@@ -654,7 +654,7 @@ test.describe.serial('DSM Family Enrollment Handling', () => {
     });
 
     await test.step(`Check that brother's info matches proband info`, async () => {
-        const brotherFamilyMemberTab = brother.getFamilyMemberTab();
+        const brotherFamilyMemberTab = await brother.getFamilyMemberTab();
         await brotherFamilyMemberTab.scrollIntoViewIfNeeded();
         await expect(brotherFamilyMemberTab).toBeVisible();
         await brotherFamilyMemberTab.click();
@@ -706,7 +706,7 @@ test.describe.serial('DSM Family Enrollment Handling', () => {
         const brotherMixedRaceNotes = await brother.getMixedRaceNotesContent();
 
         //Do Participant Info comparison of proband and brother
-        const probandTab = proband.getFamilyMemberTab();
+        const probandTab = await proband.getFamilyMemberTab();
         await probandTab.click();
 
         const probandParticipantInfoSection = proband.getParticipantInfoSection();
@@ -749,7 +749,7 @@ test.describe.serial('DSM Family Enrollment Handling', () => {
         expect(await brotherDateOfBirth.innerText()).toBe(await probandDateOfBirth.innerText());
 
         const probandAgeToday = proband.getAgeToday();
-        expect(brotherAgeToday).toBe(probandAgeToday);
+        expect(await brotherAgeToday.innerText()).toBe(await probandAgeToday.innerText());
 
         const probandIsAliveRadioBUtton = proband.getLivingStatusOption('Alive');
         await expect(probandIsAliveRadioBUtton).toBeChecked();
