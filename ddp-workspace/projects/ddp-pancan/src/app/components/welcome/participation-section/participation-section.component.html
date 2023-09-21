@@ -9,7 +9,7 @@
                  width="150" height="150"
                  [alt]="step.ImageAlt">
         </div>
-        <div class="step__info">
+        <div class="step__info" [style.height]="isPediHCCTheme ? '257px' : '219px'">
             <div class="step__info-background"></div>
             <div class="step__info-text">
                 <div class="step__title participate-step-label">{{step.Title}}</div>

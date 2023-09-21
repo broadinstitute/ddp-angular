@@ -9,27 +9,33 @@ import { AdditionalFilter } from 'dsm/component/filters/sections/search/search-e
 import ParticipantListPage from 'dsm/pages/participant-list-page';
 
 export class ParticipantListTable extends Table {
-  private readonly _participantPage: ParticipantPage = new ParticipantPage(this.page);
-  private readonly _paginator: ParticipantsListPaginator = new ParticipantsListPaginator(this.page);
+  private readonly _participantPage: ParticipantPage;
+  private readonly _paginator: ParticipantsListPaginator;
 
   constructor(page: Page) {
     super(page, { cssClassAttribute: '.table' });
+    this._paginator = new ParticipantsListPaginator(this.page);
+    this._participantPage = new ParticipantPage(this.page);
+  }
+
+  public get paginator(): ParticipantsListPaginator {
+    return this._paginator;
   }
 
   public async goToPage(page: number): Promise<void> {
-    await this._paginator.pageAt(page);
+    await this.paginator.pageAt(page);
   }
 
   public async nextPage(): Promise<void> {
-    await this._paginator.next();
+    await this.paginator.next();
   }
 
   public async previousPage(): Promise<void> {
-    await this._paginator.previous();
+    await this.paginator.previous();
   }
 
   public async rowsPerPage(rows: rows): Promise<void> {
-    await this._paginator.rowsPerPage(rows);
+    await this.paginator.rowsPerPage(rows);
   }
 
   public async openParticipantPageAt(position: number): Promise<ParticipantPage> {
