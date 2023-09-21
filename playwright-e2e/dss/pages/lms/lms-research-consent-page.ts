@@ -2,6 +2,7 @@ import { expect, Locator, Page } from '@playwright/test';
 import Question from 'dss/component/Question';
 import { LmsPageBase } from 'dss/pages/lms/lms-page-base';
 import { LmsPatientsData as PatientsData, TypePatient } from 'dss/pages/lms/lms-patient-type';
+import { waitForNoSpinner } from 'utils/test-utils';
 
 export default class LmsResearchConsentPage extends LmsPageBase {
   private readonly pageTitle: Locator;
@@ -12,8 +13,9 @@ export default class LmsResearchConsentPage extends LmsPageBase {
   }
 
   async waitForReady(): Promise<void> {
-    await expect(this.pageTitle).toHaveText('Research Consent Form');
     await super.waitForReady();
+    await expect(this.pageTitle).toHaveText('Research Consent Form');
+    await waitForNoSpinner(this.page);
   }
 
   get agreeToDrawBloodQuestion(): Question {

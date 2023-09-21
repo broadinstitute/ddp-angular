@@ -96,6 +96,11 @@ const testConfig: PlaywrightTestConfig = {
   /* Configure projects for chromium browser */
   projects: [
     {
+      name: 'chromium',
+      testMatch: '**/*.spec.ts',
+      use: {}
+    },
+    {
       // Listing tests: npx playwright test --list --project="dsm"
       // Running tests serially: npx playwright test --project="kit" --workers=1
       name: 'dsm',
