@@ -56,18 +56,23 @@ export class CustomizeView {
   private async openColumnsGroup(opts: { nth?: number } = {}): Promise<void> {
     const { nth } = opts;
     const columnsGroupButton = this.columnsGroupButton({nth});
-    !(await this.isExpanded(columnsGroupButton)) && (await columnsGroupButton.locator('.//*[@class="caret"]').click());
+    !(await this.isExpanded(columnsGroupButton)) && (await columnsGroupButton.locator('xpath=//*[@class="caret"]').click());
   }
 
   private async closeColumnsGroup(opts: { nth?: number } = {}): Promise<void> {
     const { nth } = opts;
     const columnsGroupButton = this.columnsGroupButton({nth});
-    (await this.isExpanded(columnsGroupButton)) && (await columnsGroupButton.locator('.//*[@class="caret"]').click());
+    (await this.isExpanded(columnsGroupButton)) && (await columnsGroupButton.locator('xpath=//*[@class="caret"]').click());
   }
 
-  private async isExpanded(locator: Locator): Promise<boolean> {
-    const isExpanded = await locator.getAttribute('aria-expanded');
-    return isExpanded ? isExpanded === 'true' : false;
+  private async isChecked(locator: Locator | undefined): Promise<boolean> {
+    const isChecked = (await locator?.getAttribute('class'))?.includes('mat-checkbox-checked');
+    return isChecked || false;
+  }
+
+  private async isExpanded(locator: Locator | undefined): Promise<boolean> {
+    const isExpanded = await locator?.getAttribute('aria-expanded');
+    return isExpanded === 'true' || false;
   }
 
   /* Locators */
@@ -79,20 +84,18 @@ export class CustomizeView {
 
   /* XPaths */
   private get openButtonXPath(): string {
-    return `//*[text()[normalize-space()="Customize View"]]/button`;
+    return `xpath=//*[text()[normalize-space()="Customize View"]]/button`;
   }
 
   private async isPanelOpen(): Promise<boolean> {
-    const attr = await this.page.locator(this.columnsGroupXPath).getAttribute('class');
-    return attr ? attr.indexOf('open') !== -1 : false;
+    return await this.page.locator('.btn-group').count() >= 1;
   }
 
   private get columnsGroupXPath(): string {
-    return `//div[button[@data-toggle="dropdown" and normalize-space()="${this.activeColumnsGroup}"]]`;
+    return `xpath=//div[button[@data-toggle="dropdown" and normalize-space()="${this.activeColumnsGroup}"]]`
   }
 
   private columnCheckbox(columnName: string): Checkbox {
     return new Checkbox(this.page, { root: this.columnsGroupXPath, label: columnName })
-    // return `/ul[@class="dropdown-menu"]//mat-checkbox[label[.//*[text()[normalize-space()="${columnName}"]]]]`;
   }
 }
