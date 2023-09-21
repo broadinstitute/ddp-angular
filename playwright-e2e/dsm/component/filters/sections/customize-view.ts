@@ -1,4 +1,5 @@
 import { Locator, Page } from '@playwright/test';
+import Checkbox from 'dss/component/checkbox';
 
 export class CustomizeView {
   private activeColumnsGroup = '';
@@ -39,38 +40,34 @@ export class CustomizeView {
   }
 
   private async selectOrDeselect(columnName: string, deselect = false): Promise<void> {
-    const columnXPath = this.columnsGroupXPath + this.columnPathXPath(columnName);
-    const column = this.page.locator(columnXPath);
-
-    if (!deselect) {
-      if (!(await this.isChecked(column))) {
-        await this.page.locator(columnXPath).click()
+    const checkbox = this.columnCheckbox(columnName);
+    const checked = await checkbox.isChecked();
+    if (deselect) {
+      if (checked) {
+        return checkbox.check();
       }
-    } else if (await this.isChecked(column)) {
-        await this.page.locator(columnXPath).click()
-      }
+      return;
+    }
+    if (!checked) {
+      return checkbox.check();
+    }
   }
 
   private async openColumnsGroup(opts: { nth?: number } = {}): Promise<void> {
     const { nth } = opts;
     const columnsGroupButton = this.columnsGroupButton({nth});
-    !(await this.isExpanded(columnsGroupButton)) && (await columnsGroupButton.click());
+    !(await this.isExpanded(columnsGroupButton)) && (await columnsGroupButton.locator('.//*[@class="caret"]').click());
   }
 
   private async closeColumnsGroup(opts: { nth?: number } = {}): Promise<void> {
     const { nth } = opts;
     const columnsGroupButton = this.columnsGroupButton({nth});
-    (await this.isExpanded(columnsGroupButton)) && (await columnsGroupButton.click({force: true}));
+    (await this.isExpanded(columnsGroupButton)) && (await columnsGroupButton.locator('.//*[@class="caret"]').click());
   }
 
-  private async isChecked(locator: Locator | undefined): Promise<boolean> {
-    const isChecked = (await locator?.getAttribute('class'))?.includes('mat-checkbox-checked');
-    return isChecked || false;
-  }
-
-  private async isExpanded(locator: Locator | undefined): Promise<boolean> {
-    const isExpanded = await locator?.getAttribute('aria-expanded');
-    return isExpanded === 'true' || false;
+  private async isExpanded(locator: Locator): Promise<boolean> {
+    const isExpanded = await locator.getAttribute('aria-expanded');
+    return isExpanded ? isExpanded === 'true' : false;
   }
 
   /* Locators */
@@ -86,14 +83,16 @@ export class CustomizeView {
   }
 
   private async isPanelOpen(): Promise<boolean> {
-    return await this.page.locator('.btn-group').count() >= 1;
+    const attr = await this.page.locator(this.columnsGroupXPath).getAttribute('class');
+    return attr ? attr.indexOf('open') !== -1 : false;
   }
 
   private get columnsGroupXPath(): string {
-    return `//div[button[@data-toggle="dropdown"] and button[.//*[text()[normalize-space()="${this.activeColumnsGroup}"]]]]`;
+    return `//div[button[@data-toggle="dropdown" and normalize-space()="${this.activeColumnsGroup}"]]`;
   }
 
-  private columnPathXPath(columnName: string): string {
-    return `/ul/li/mat-checkbox[label[.//*[text()[normalize-space()="${columnName}"]]]]`;
+  private columnCheckbox(columnName: string): Checkbox {
+    return new Checkbox(this.page, { root: this.columnsGroupXPath, label: columnName })
+    // return `/ul[@class="dropdown-menu"]//mat-checkbox[label[.//*[text()[normalize-space()="${columnName}"]]]]`;
   }
 }
