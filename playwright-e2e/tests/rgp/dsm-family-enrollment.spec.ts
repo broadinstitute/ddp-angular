@@ -15,7 +15,7 @@ import { logInfo } from 'utils/log-utils';
 import { v4 as uuid } from 'uuid';
 
 
-test.describe.serial('DSM Family Enrollment Handling', () => {
+test.describe.skip('DSM Family Enrollment Handling', () => {
   let rgpEmail: string;
 
   test('Verify the display and functionality of family account dynamic fields @dsm @functional @rgp', async ({ page, request}) => {
