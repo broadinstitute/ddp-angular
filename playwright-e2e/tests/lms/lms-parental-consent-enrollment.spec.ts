@@ -70,6 +70,7 @@ test.describe.serial('LMS Child Enrollment', () => {
     })
 
     await test.step('Asserting contents on Research Consent Form: Step 1. Key Points', async () => {
+      await researchConsentPage.waitForReady();
       await assertActivityHeader(page, 'Research Consent Form');
       await assertActiveActivityStep(page, '1. Key Points');
 
@@ -84,6 +85,7 @@ test.describe.serial('LMS Child Enrollment', () => {
     })
 
     await test.step('Asserting contents on Research Consent Form: Step 2. Full Form', async () => {
+      await researchConsentPage.waitForReady();
       await assertActiveActivityStep(page, '2. Full Form');
 
       // Paragraphs A to P are checked with screenshots
@@ -169,6 +171,7 @@ test.describe.serial('LMS Child Enrollment', () => {
     })
 
     await test.step('Asserting contents on Research Consent & Assent Form: Step 3. Sign Consent', async () => {
+      await researchConsentPage.waitForReady();
       await assertActiveActivityStep(page, '3. Sign Consent');
 
       await toHaveScreenshot(page, 'p.secondary-text', 'lms-research-consent-sign-consent-info.png');
@@ -207,11 +210,11 @@ test.describe.serial('LMS Child Enrollment', () => {
 
     // Additional Consent Form: Learning About Your Child's Tumor
     await test.step("Asserting contents on Additional Consent Form: Learning About Your Child's Tumor", async () => {
-      await assertActivityHeader(page, 'Additional Consent Form: Learning About Your Child’s Tumor');
-      await assertActiveActivityStep(page, '1. Consent Addendum');
-
       const additionalConsentPage = new LmsAdditionalConsentPage(page, 'secondChild');
       await additionalConsentPage.waitForReady();
+
+      await assertActivityHeader(page, 'Additional Consent Form: Learning About Your Child’s Tumor');
+      await assertActiveActivityStep(page, '1. Consent Addendum');
 
       const paragraphALocator = page.locator('//li[contains(@class, "ddp-li")][.//*[contains(normalize-space(), "Introduction")]]');
       await toHaveScreenshot(page, paragraphALocator, 'lms-additional-consent-page-A-paragraph.png');
