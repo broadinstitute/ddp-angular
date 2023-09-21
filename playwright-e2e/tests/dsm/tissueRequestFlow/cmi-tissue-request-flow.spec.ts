@@ -11,6 +11,7 @@ import {
 } from 'dsm/component/tabs/enums/onc-history-input-columns-enum';
 import {expect} from '@playwright/test';
 import {getDate} from 'utils/date-utils';
+import {TissueDynamicFieldsEnum} from "dsm/pages/tissue-information-page/enums/tissue-information-enum";
 
 test.describe('Tissue Request Flow', () => {
   const studies = [StudyEnum.PANCAN];
@@ -93,9 +94,11 @@ test.describe('Tissue Request Flow', () => {
       const tissueInformationPage = await oncHistoryTable.openTissueInformationPage(0);
 
       await test.step('Downloading Tissue Request Documents - Updates Fax Sent', async () => {
-        const faxSentDate = await tissueInformationPage.getFaxSentDate();
+        const faxSentDate1 = await tissueInformationPage.getFaxSentDate();
+        const faxSentDate2 = await tissueInformationPage.getFaxSentDate(1);
         const tissueReceivedDate = await tissueInformationPage.getTissueReceivedDate();
-        expect(faxSentDate.trim(), 'Fax sent date is not set to today').toEqual(getDate());
+        expect(faxSentDate1.trim(), 'Fax sent date 1 is not set to today').toEqual(getDate());
+        expect(faxSentDate2.trim(), 'Fax sent date 2 is not empty').toBe('');
         expect(tissueReceivedDate.trim(), 'Tissue received date is not empty').toBeFalsy();
       })
 
@@ -111,6 +114,15 @@ test.describe('Tissue Request Flow', () => {
 
       await test.step('Add a destruction policy and click on Apply to All', async () => {
         await tissueInformationPage.fillDestructionPolicy(2233, false, true);
+      })
+
+      await test.step('Add Material count', async () => {
+        const testValue = 21;
+        const tissue = await tissueInformationPage.tissue();
+        await tissue.fillField(TissueDynamicFieldsEnum.USS, {inputValue: testValue});
+        await tissue.fillField(TissueDynamicFieldsEnum.BLOCK, {inputValue: testValue});
+        await tissue.fillField(TissueDynamicFieldsEnum.H_E, {inputValue: testValue});
+        await tissue.fillField(TissueDynamicFieldsEnum.SCROLL, {inputValue: testValue});
       })
 
       await test.step('Deleting OncHistory tab row', async () => {
