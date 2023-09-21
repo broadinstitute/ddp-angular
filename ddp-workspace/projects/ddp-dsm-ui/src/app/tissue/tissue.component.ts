@@ -182,6 +182,11 @@ export class TissueComponent {
           if (data['smIdPk']) {
             smIdArray[index].smIdPk = data['smIdPk'];
           }
+          if (tAlias === 'sm') {
+            if (this.smIdDuplicate[this.currentSMIDField].has(this.createDuplicateIndex(index))) {
+              this.smIdDuplicate[this.currentSMIDField].delete(this.createDuplicateIndex(index));
+            }
+          }
           result = true;
         },
         error: err => {
