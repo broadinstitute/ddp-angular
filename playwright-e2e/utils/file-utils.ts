@@ -2,6 +2,7 @@ import fs from 'fs';
 import csv from 'csv-parser';
 import { logError, logInfo } from 'utils/log-utils';
 
+
 export interface MailListCSV {
   email: string;
   dateCreated: string;
@@ -44,3 +45,5 @@ export async function readMailListCSVFile(filePath: string | null): Promise<Mail
     .on('error', (error) => reject(error));
   });
 }
+
+

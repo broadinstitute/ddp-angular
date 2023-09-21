@@ -100,7 +100,7 @@ test.describe.serial('Blood Kit Upload', () => {
           shortID,
           firstName,
           lastName,
-          Math.round(Math.random() * 1) === 0 ? mockedCanadaAddress : mockedNewYorkAddress
+          Math.round(Math.random()) === 0 ? mockedCanadaAddress : mockedNewYorkAddress
         );
       });
 

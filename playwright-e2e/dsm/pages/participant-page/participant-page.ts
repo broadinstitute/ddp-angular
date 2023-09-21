@@ -3,6 +3,7 @@ import {waitForResponse} from 'utils/test-utils';
 import {MainInfoEnum} from 'dsm/pages/participant-page/enums/main-info-enum';
 import Tabs from 'dsm/component/tabs/tabs';
 import {TabEnum} from 'dsm/component/tabs/enums/tab-enum';
+import Input from 'dss/component/input';
 
 export default class ParticipantPage {
   private readonly PAGE_TITLE: string = 'Participant Page';
@@ -82,6 +83,16 @@ export default class ParticipantPage {
     return await this.tabs.clickTab<T>(tabName) as T;
   }
 
+  public async oncHistoryCreatedDate(): Promise<string> {
+    const oncHistoryCreatedLocator = this.oncHistoryCreated;
+    await expect(oncHistoryCreatedLocator, 'Onc History Created is not visible').toBeVisible();
+    const inputField = new Input(this.page, {root: oncHistoryCreatedLocator});
+
+    return inputField.currentValue();
+  }
+
+  /* Helper functions */
+
   private async readMainTextInfoFor(key: MainInfoEnum) {
    return await this.page.locator(this.getMainTextInfoXPath(key)).textContent();
   }
@@ -98,6 +109,10 @@ export default class ParticipantPage {
   /* Locators */
   private get notes(): Locator {
     return this.page.locator('//table[.//td[contains(normalize-space(),"Participant Notes")]]//td/textarea');
+  }
+
+  private get oncHistoryCreated(): Locator {
+    return this.page.locator('//table//td[contains(text(),"Onc History Created")]/following-sibling::td');
   }
 
   /* XPaths */

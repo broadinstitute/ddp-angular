@@ -1,6 +1,6 @@
 import {expect, Locator, Page} from '@playwright/test';
 import {SampleInfoEnum} from 'dsm/component/tabs/enums/sampleInfo-enum';
-import SampleInformation from 'dsm/component/tabs/model/sampleInformationModel';
+import SampleInformation from 'dsm/component/tabs/models/sample-information-model';
 import {KitTypeEnum} from 'dsm/component/kitType/enums/kitType-enum';
 
 interface SampleInfo {
