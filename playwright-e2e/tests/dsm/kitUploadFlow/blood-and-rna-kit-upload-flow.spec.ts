@@ -53,7 +53,7 @@ test.describe('Blood & RNA Kit Upload', () => {
     const proband = new FamilyMemberTab(page, FamilyMember.PROBAND);
     proband.relationshipID = user.patient.relationshipID;
 
-    const probandTab = proband.getFamilyMemberTab();
+    const probandTab = await proband.getFamilyMemberTab();
     await expect(probandTab).toBeVisible();
     await probandTab.click();
     await expect(probandTab).toHaveClass('nav-link active');//Make sure the tab is in view and selected
@@ -87,9 +87,8 @@ test.describe('Blood & RNA Kit Upload', () => {
 
     //Upload a Blood & RNA kit
     const kitUploadPage = await navigation.selectFromSamples<KitUploadPage>(SamplesNavEnum.KIT_UPLOAD);
-    await kitUploadPage.waitForReady();
+    await kitUploadPage.waitForReady(expectedKitTypes);
     await kitUploadPage.assertPageTitle();
-    await kitUploadPage.assertDisplayedKitTypes(expectedKitTypes);
     await kitUploadPage.selectKitType(kitType);
     await kitUploadPage.assertBrowseBtn();
     await kitUploadPage.assertUploadKitsBtn();

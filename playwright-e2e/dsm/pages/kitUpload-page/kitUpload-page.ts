@@ -18,11 +18,12 @@ export default class KitUploadPage {
   constructor(private readonly page: Page) {
   }
 
-  public async waitForReady(): Promise<void> {
+  public async waitForReady(kitTypes?: KitTypeEnum[]): Promise<void> {
+    const knownKitTypes = kitTypes ?? this.expectedKitTypes; //Use the param kit types if provided, if they are not, then use the general expected kit types
     await this.page.waitForLoadState('networkidle');
     await waitForNoSpinner(this.page);
     await this.assertPageTitle();
-    await this.assertDisplayedKitTypes(this.expectedKitTypes);
+    await this.assertDisplayedKitTypes(knownKitTypes);
   }
 
   public async selectKitType(kitType: KitTypeEnum): Promise<void> {

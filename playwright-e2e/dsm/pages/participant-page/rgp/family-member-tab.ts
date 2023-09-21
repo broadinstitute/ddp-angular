@@ -646,13 +646,13 @@ export default class FamilyMemberTab {
     public async setRandomRelationshipID(): Promise<void> {
         const usedRelationshipIDs = await this.getListOfUsedSubjectIDs();
         let searchingForID = true;
-        let possibleID;
+        let possibleID = -1;
         while (searchingForID) {
             //possibleID = Math.floor(Math.random() * this.MAX_POSSIBLE_RELATIONSHIP_ID_VALUE);
             possibleID = this.getRandomNumber(this.MIN_POSSIBLE_RELATIONSHIP_ID_VALUE, this.MAX_POSSIBLE_RELATIONSHIP_ID_VALUE, usedRelationshipIDs);
             searchingForID = this.isPreviouslyUsedSubjectID(possibleID, usedRelationshipIDs);
         }
-        this._relationshipID = possibleID!.toString();
+        this._relationshipID = possibleID.toString();
     }
 
     /**
