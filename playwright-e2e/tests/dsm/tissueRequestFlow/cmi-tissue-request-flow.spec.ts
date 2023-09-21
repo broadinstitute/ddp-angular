@@ -11,7 +11,7 @@ import {
 } from 'dsm/component/tabs/enums/onc-history-input-columns-enum';
 import {expect} from '@playwright/test';
 import {getDate} from 'utils/date-utils';
-import {TissueDynamicFieldsEnum} from "dsm/pages/tissue-information-page/enums/tissue-information-enum";
+import {TissueDynamicFieldsEnum} from 'dsm/pages/tissue-information-page/enums/tissue-information-enum';
 
 test.describe('Tissue Request Flow', () => {
   const studies = [StudyEnum.PANCAN];
