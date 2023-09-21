@@ -56,13 +56,21 @@ export class CustomizeView {
   private async openColumnsGroup(opts: { nth?: number } = {}): Promise<void> {
     const { nth } = opts;
     const columnsGroupButton = this.columnsGroupButton({nth});
-    !(await this.isExpanded(columnsGroupButton)) && (await columnsGroupButton.locator('xpath=//*[@class="caret"]').click());
+    const expanded = await this.isExpanded(columnsGroupButton);
+    if (!expanded) {
+      await columnsGroupButton.focus();
+      await columnsGroupButton.click();
+    }
   }
 
   private async closeColumnsGroup(opts: { nth?: number } = {}): Promise<void> {
     const { nth } = opts;
     const columnsGroupButton = this.columnsGroupButton({nth});
-    (await this.isExpanded(columnsGroupButton)) && (await columnsGroupButton.locator('xpath=//*[@class="caret"]').click());
+    const expanded = await this.isExpanded(columnsGroupButton);
+    if (expanded) {
+      await columnsGroupButton.focus();
+      await columnsGroupButton.click();
+    }
   }
 
   private async isChecked(locator: Locator | undefined): Promise<boolean> {
