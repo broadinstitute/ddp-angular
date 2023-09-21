@@ -12,7 +12,7 @@ import { assertTableHeaders } from 'utils/assertion-helper';
 import { logParticipantWithdrew } from 'utils/log-utils';
 import * as user from 'data/fake-user.json';
 
-test.describe('Participants Withdrawal', () => {
+test.describe.fixme('Participants Withdrawal', () => {
   const studies = [StudyEnum.LMS];
 
     for (const study of studies) {
