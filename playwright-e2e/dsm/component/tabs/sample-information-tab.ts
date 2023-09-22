@@ -29,7 +29,7 @@ export default class SampleInformationTab {
         sent: SampleInfoEnum.SENT,
         received: SampleInfoEnum.RECEIVED,
         results: SampleInfoEnum.RESULTS
-      }
+      };
 
       const inputValues: SampleInfo = {
         collectionDate: SampleInfoEnum.COLLECTION_DATE,

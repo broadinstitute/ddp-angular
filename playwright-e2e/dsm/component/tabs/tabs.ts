@@ -11,7 +11,7 @@ export default class Tabs {
     [TabEnum.SAMPLE_INFORMATION, new SampleInformationTab(this.page)],
     [TabEnum.GENOME_STUDY, new GenomeStudyTab(this.page)],
     [TabEnum.ONC_HISTORY, new OncHistoryTab(this.page)],
-  ])
+  ]);
 
   constructor(private readonly page: Page) {}
 
@@ -38,7 +38,7 @@ export default class Tabs {
 
   private async HasContactInformationTabEnteredData(): Promise<boolean> {
     const isNotEnteredVisible = await (this.tabs.get(TabEnum.CONTACT_INFORMATION) as ContactInformationTab)
-      .isNotEnteredVisible()
+      .isNotEnteredVisible();
     return !isNotEnteredVisible;
   }
 

@@ -1,4 +1,4 @@
-import { expect, Locator, Page } from '@playwright/test';
+import { Locator, Page } from '@playwright/test';
 import { FamilyMember } from 'dsm/component/tabs/enums/familyMember-enum';
 import TextArea from 'dss/component/textarea';
 import { waitForResponse } from 'utils/test-utils';
@@ -13,7 +13,7 @@ export default class FamilyMemberTab {
     private _lastName!: string;
     private _relationshipID!: string;
     private _familyID!: number;
-    private _relationToProband: FamilyMember;
+    private readonly _relationToProband: FamilyMember;
     private readonly page: Page;
     private readonly MIN_POSSIBLE_RELATIONSHIP_ID_VALUE: number = 0;
     private readonly MAX_POSSIBLE_RELATIONSHIP_ID_VALUE: number = 1000;

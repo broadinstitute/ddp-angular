@@ -188,20 +188,20 @@ export default class TissueInformationPage {
   private async applyToAll(root: Locator): Promise<void> {
     const applyToAllBtn = new Button(this.page,
       { root, label: 'APPLY TO ALL', exactMatch: true }
-    )
+    );
     const isApplyToAllBtnDisabled = await applyToAllBtn.isDisabled();
     if (!isApplyToAllBtnDisabled) {
       await applyToAllBtn.click();
       const modalBtn = new Button(this.page,
         { root: this.page.locator('app-modal'), label: 'Yes', exactMatch: true }
-      )
+      );
       const isModalBtnDisabled = await modalBtn.isDisabled();
       if (!isModalBtnDisabled) {
         await modalBtn.click();
         await waitForResponse(this.page, { uri: 'institutions', timeout: 40000 });
 
         const successModalBtn = new Button(this.page,
-          { root: this.page.locator('app-modal'), label: 'Ok', exactMatch: true })
+          { root: this.page.locator('app-modal'), label: 'Ok', exactMatch: true });
         await successModalBtn.click();
       }
     }
