@@ -8,3 +8,29 @@ input::-webkit-inner-spin-button {
 .changed{
   color: #b02727;
 }
+
+.onlyFlex {
+  display: flex;
+}
+
+.inputField {
+  border: 1px solid #5a8dda;
+  border-radius: 3px;
+  padding: .2em;
+}
+
+.displayFlexCenter {
+  display: flex;
+  justify-content: center;
+  margin-bottom: .5em;
+}
+
+.deleteBtn {
+  margin-left: 1em;
+  margin-bottom: .5em;
+}
+
+md-hint.ErrorMessageForm {
+  height: 0;
+}
+

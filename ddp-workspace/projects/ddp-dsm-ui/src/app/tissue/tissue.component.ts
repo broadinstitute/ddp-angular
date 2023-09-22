@@ -300,11 +300,18 @@ export class TissueComponent {
     this.SMIDModal.hide();
   }
 
-  goNext( name: string, i: number ): void {
+  goNext( name: 'HE' | 'USS' | 'scrolls' , i: number ): void {
+
     const nextId = name + ( i + 1 );
     const nextElement = document.getElementById( nextId );
     if (nextElement) {
       nextElement.focus();
+    }
+  }
+
+  addNextField(i: number, dataArray: any[]): void {
+    if(i === dataArray.length - 1) {
+      this.addSMId(this.currentSMIDField);
     }
   }
 
