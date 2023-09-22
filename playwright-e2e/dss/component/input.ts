@@ -79,4 +79,25 @@ export default class Input extends WidgetBase {
       await expect(this.page.locator('button:visible', { hasText: 'Saving' })).toBeHidden();
     }
   }
+
+  public async fillSimple(value: string): Promise<void> {
+    await this.toLocator().fill(value);
+    await this.toLocator().blur();
+  }
+
+  public async currentValue(): Promise<string> {
+    return this.toLocator().inputValue();
+  }
+
+  public async blur(): Promise<void> {
+    await this.toLocator().blur();
+  }
+
+  public async focus(): Promise<void> {
+    await this.toLocator().focus();
+  }
+
+  public async maxLength(): Promise<string | null> {
+    return this.toLocator().getAttribute('maxlength');
+  }
 }
