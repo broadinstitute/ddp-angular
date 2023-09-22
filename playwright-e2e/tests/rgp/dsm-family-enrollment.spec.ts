@@ -15,6 +15,7 @@ import { v4 as uuid } from 'uuid';
 import ParticipantPage from 'dsm/pages/participant-page/participant-page';
 import { WelcomePage } from 'dsm/pages/welcome-page';
 import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
+import * as crypto from 'crypto';
 
 
 test.describe.serial('DSM Family Enrollment Handling', () => {
