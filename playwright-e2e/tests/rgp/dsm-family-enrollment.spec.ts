@@ -104,8 +104,8 @@ test.describe.serial('DSM Family Enrollment Handling', () => {
     saveParticipantGuid(participantGuid);
     await participantListPage.filterListByParticipantGUID(user.patient.participantGuid);
     //Check that the filtered list returns at least one participant
-    const filteredList = page.locator('tr.ng-star-inserted');
-    await expect(filteredList).toHaveCount(1);
+    const filteredList = await participantListTable.numOfParticipants();
+    expect(filteredList).toBe(1);
     await participantListTable.openParticipantPageAt(0);
 
     //Verify that the proband tab is present (and includes the text RGP and 3 as proband subject ids have the format RGP_{family id}_3)
@@ -239,7 +239,7 @@ test.describe.serial('DSM Family Enrollment Handling', () => {
     const familyAccount = new RgpParticipantPage(page);
     await familyAccount.backToList();
     await participantListPage.filters.searchPanel.search();
-    await expect(filteredList).toHaveCount(1);
+    expect(filteredList).toBe(1);
     await participantListTable.openParticipantPageAt(0);
 
     //After refreshing participant list and page, check that the input for the above textareas are as expected

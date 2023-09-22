@@ -298,7 +298,7 @@ export default class FamilyMemberTab {
      * @returns contents of the Mixed Race Notes textarea
      */
     public async getMixedRaceNotesContent(): Promise<string> {
-        return (await this.page.locator("//textarea[contains(@data-placeholder, 'Mixed Race Notes')]").inputValue()).toString();
+        return new TextArea(this.page, {label: 'Mixed Race Notes'}).getText();
     }
 
     /**
