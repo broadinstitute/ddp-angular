@@ -200,7 +200,7 @@ export default class TissueInformationPage {
         await modalBtn.click();
         await waitForResponse(this.page, { uri: 'institutions' });
 
-        const successModalBtn = new Button(this.page,{ root: this.page.locator('app-modal'), label: 'Ok', exactMatch: true });
+        const successModalBtn = new Button(this.page, { root: this.page.locator('app-modal'), label: 'Ok', exactMatch: true });
         await successModalBtn.click();
       }
     }
