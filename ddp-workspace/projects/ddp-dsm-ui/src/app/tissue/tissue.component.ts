@@ -319,30 +319,38 @@ export class TissueComponent {
       nextElement.focus();
     }
 
-    // Add the next field
-    this.addNextField(SMIDName, currentIndex, totalFields);
-  }
-
-  addNextField(SMIDName: SMIDs , currentIndex: number, totalFields: number): void {
+    // Check if this is the last field
     const isLastField = currentIndex === totalFields - 1;
+
+    // If it's the last field, add the next field
     if(isLastField) {
-      this.addSMId(this.currentSMIDField);
-      setTimeout(() => this.moveFocus(SMIDName));
+      this.addNextField(SMIDName);
     }
   }
 
+  addNextField(SMIDName: SMIDs): void {
+    this.addSMId(this.currentSMIDField);
+    // Move the focus after adding the field
+    setTimeout(() => this.moveFocus(SMIDName));
+  }
+
   private moveFocus(SMIDName: SMIDs): void {
+    // Define a map of SMID names to corresponding input field lists
     const inputFieldsMap: Record<SMIDs, QueryList<ElementRef>> = {
       USS: this.USSInputFields,
       scrolls: this.ScrollsInputFields,
       HE: this.HEInputFields,
     };
+
+    // Attempt to get the last input field of the specified group
     const lastInputField = inputFieldsMap[SMIDName]?.last;
 
+    // If the last input field is not found, throw an error
     if (!lastInputField) {
       throw new Error('Provided SMID name is wrong - ' + SMIDName);
     }
 
+    // Set focus on the last input field's native element
     lastInputField?.nativeElement?.focus();
   }
 
