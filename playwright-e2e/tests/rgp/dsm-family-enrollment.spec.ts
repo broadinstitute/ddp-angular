@@ -23,7 +23,7 @@ test.describe.serial('DSM Family Enrollment Handling', () => {
   test('Verify the display and functionality of family account dynamic fields @dsm @functional @rgp', async ({ page, request}) => {
     const welcomePage = new WelcomePage(page);
     await welcomePage.selectStudy(StudyEnum.RGP);
-        
+
     const navigation = new Navigation(page, request);
 
     //Verify the Participant List is displayed
@@ -529,7 +529,7 @@ test.describe.serial('DSM Family Enrollment Handling', () => {
 
     const welcomePage = new WelcomePage(page);
     await welcomePage.selectStudy(StudyEnum.RGP);
-  
+
     //Verify the Participant List is displayed
     const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
     await participantListPage.assertPageTitle();
@@ -614,7 +614,7 @@ test.describe.serial('DSM Family Enrollment Handling', () => {
 
     const welcomePage = new WelcomePage(page);
     await welcomePage.selectStudy(StudyEnum.RGP);
-  
+
     //Verify the Participant List is displayed
     const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
     await participantListPage.assertPageTitle();
