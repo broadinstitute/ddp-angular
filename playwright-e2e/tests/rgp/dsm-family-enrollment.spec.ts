@@ -378,7 +378,7 @@ test.describe.serial('DSM Family Enrollment Handling', () => {
 
     const referralSource = proband.getReferralSource();
     await referralSource.scrollIntoViewIfNeeded();
-    await expect(referralSource, `ERROR: RGP Referral Source - Expected '${participantReferralSource}' but got: ${await referralSource.innerText()}`)
+    await expect(referralSource, `RGP Referral Source - Expected '${participantReferralSource}' but got: ${await referralSource.innerText()}`)
     .toHaveText(participantReferralSource);
 
     await proband.inputReferralNotes('Testing notes here - Referral Notes');
