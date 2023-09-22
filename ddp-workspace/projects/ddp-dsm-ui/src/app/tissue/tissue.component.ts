@@ -331,10 +331,10 @@ export class TissueComponent {
   addNextField(SMIDName: SMIDs): void {
     this.addSMId(this.currentSMIDField);
     // Move the focus after adding the field
-    setTimeout(() => this.moveFocus(SMIDName));
+    setTimeout(() => this.moveFocusToTheLastField(SMIDName));
   }
 
-  private moveFocus(SMIDName: SMIDs): void {
+  private moveFocusToTheLastField(SMIDName: SMIDs): void {
     // Define a map of SMID names to corresponding input field lists
     const inputFieldsMap: Record<SMIDs, QueryList<ElementRef>> = {
       USS: this.USSInputFields,
