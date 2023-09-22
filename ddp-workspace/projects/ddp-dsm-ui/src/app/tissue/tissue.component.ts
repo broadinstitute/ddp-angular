@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild } from '@angular/core';
+import {Component, ElementRef, Input, QueryList, ViewChild, ViewChildren} from '@angular/core';
 import { FieldSettings } from '../field-settings/field-settings.model';
 import { OncHistoryDetail } from '../onc-history-detail/onc-history-detail.model';
 import { Participant } from '../participant-list/participant-list.model';
@@ -15,6 +15,9 @@ import { PatchUtil } from '../utils/patch.model';
 import { ModalComponent } from '../modal/modal.component';
 import {TissueSmId} from './sm-id.model';
 
+
+type SMIDs = 'HE' | 'USS' | 'scrolls';
+
 @Component({
   selector: 'app-tissue',
   templateUrl: './tissue.component.html',
@@ -24,6 +27,9 @@ export class TissueComponent {
   @ViewChild('collaboratorSampleId') collaboratorSampleIdInputField;
   @ViewChild( ModalComponent )
   public SMIDModal: ModalComponent;
+  @ViewChildren('HEInputField') HEInputFields: QueryList<ElementRef>;
+  @ViewChildren('USSInputField') USSInputFields: QueryList<ElementRef>;
+  @ViewChildren('ScrollsInputField') ScrollsInputFields: QueryList<ElementRef>;
 
   @Input() participant: Participant;
   @Input() oncHistoryDetail: OncHistoryDetail;
@@ -300,19 +306,44 @@ export class TissueComponent {
     this.SMIDModal.hide();
   }
 
-  goNext( name: 'HE' | 'USS' | 'scrolls' , i: number ): void {
+  goNext(SMIDName: SMIDs , currentIndex: number, totalFields: number): void {
+    // Generate the ID of the next element
+    const nextIndex = currentIndex + 1;
+    const nextId = `${SMIDName}${nextIndex}`;
 
-    const nextId = name + ( i + 1 );
-    const nextElement = document.getElementById( nextId );
+    // Attempt to find the next element by ID
+    const nextElement = document.getElementById(nextId);
+
+    // If found, focus on it
     if (nextElement) {
       nextElement.focus();
     }
+
+    // Add the next field
+    this.addNextField(SMIDName, currentIndex, totalFields);
   }
 
-  addNextField(i: number, dataArray: any[]): void {
-    if(i === dataArray.length - 1) {
+  addNextField(SMIDName: SMIDs , currentIndex: number, totalFields: number): void {
+    const isLastField = currentIndex === totalFields - 1;
+    if(isLastField) {
       this.addSMId(this.currentSMIDField);
+      setTimeout(() => this.moveFocus(SMIDName));
     }
+  }
+
+  private moveFocus(SMIDName: SMIDs): void {
+    const inputFieldsMap: Record<SMIDs, QueryList<ElementRef>> = {
+      USS: this.USSInputFields,
+      scrolls: this.ScrollsInputFields,
+      HE: this.HEInputFields,
+    };
+    const lastInputField = inputFieldsMap[SMIDName]?.last;
+
+    if (!lastInputField) {
+      throw new Error('Provided SMID name is wrong - ' + SMIDName);
+    }
+
+    lastInputField?.nativeElement?.focus();
   }
 
   smIdCountMatch( array: any[], num: number ): boolean {
