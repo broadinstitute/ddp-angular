@@ -284,12 +284,13 @@ export default class FamilyMemberTab {
      */
     public async inputMixedRaceNotes(notes: string): Promise<void> {
         const textarea = new TextArea(this.page, {label: 'Mixed Race Notes'});
+        console.log(`Previous text: ${await textarea.getText()}`);
         await textarea.clear();
         await Promise.all([
             waitForResponse(this.page, {uri: 'ui/patch'}),
             textarea.fill(notes),
         ]);
-        console.log(`Textarea text: ${await textarea.getText()}`);
+        console.log(`New text: ${await textarea.getText()}`);
     }
 
     /**
@@ -658,9 +659,10 @@ export default class FamilyMemberTab {
     }
 
     private async getAllParticipantReferralSources(): Promise<Locator[]> {
-      const findOutSection = this.howDidYouFindOutAboutThisProjectSection();
+      //const findOutSection = this.howDidYouFindOutAboutThisProjectSection();
       //Uses the following xpath to get all listed sources: //app-activity-data//h5[contains(., 'FIND_OUT')]/parent::div//div//ul[@class='ng-star-inserted']
-      return findOutSection.locator(`/parent::div//div//ul[contains(@class, 'ng-star-inserted')]`).all();
+      //return findOutSection.locator(`/parent::div//div//ul[contains(@class, 'ng-star-inserted')]`).all();
+      return this.page.locator(`//app-activity-data//h5[contains(., 'FIND_OUT')]/parent::div//div//ul[@class='ng-star-inserted']`).all();
     }
 
     private getSingleReferralSource(): Locator {
