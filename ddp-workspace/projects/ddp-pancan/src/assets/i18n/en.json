@@ -17,6 +17,8 @@
             "Twitter": "Twitter logo",
             "Facebook": "Facebook logo",
             "Instagram": "Instagram logo",
+            "LinkedIn": "LinkedIn logo",
+            "Threads": "Threads logo",
             "JoinCMI": "Join Count Me In logo"
         }
     },
@@ -24,7 +26,9 @@
         "social": {
             "twitter": "https://twitter.com/count_me_in",
             "facebook": "https://www.facebook.com/joincountmein",
-            "instagram": "https://www.instagram.com/countmein"
+            "instagram": "https://www.instagram.com/countmein",
+            "linkedin": "https://www.linkedin.com/company/count-me-in-patient-partnered-research/",
+            "threads": "https://www.threads.net/@countmein"
         },
         "HomePage": {
             "JoinCountMeInButton": "Join Count Me In",
@@ -158,7 +162,8 @@
                         { "key": "MBC", "label": "Metastatic Breast Cancer Project" },
                         { "key": "MBCSpanish", "label": "Metastatic Breast Cancer Project in Spanish" },
                         { "key": "MPC", "label": "Metastatic Prostate Cancer Project" },
-                        { "key": "Osteo", "label": "Osteosarcoma Project" }
+                        { "key": "Osteo", "label": "Osteosarcoma Project" },
+                        { "key": "PediHCC", "label": "Pediatric Hepatocellular Carcinoma (HCC) and HCC-Like Tumor Project" }
                     ]
                 },
                 {
@@ -421,6 +426,99 @@
                 "Text": "The Colorectal Cancer Project is part of <span class='bold'>Count Me In</span>, a research initiative that brings together patients and scientists as partners to speed up discoveries in cancer research."
             }
         },
+        "PedihccPage": {
+            "IntroductionSection": {
+                "Title": "You can help drive discoveries for pediatric liver cancers.",
+                "Text": "If you or your child has ever been diagnosed with hepatocellular carcinoma (prior to age 21) or a HCC-like tumor (mixed hepatoblastoma/HCC, ages 6 or older), you can join a nationwide movement to contribute samples, medical records, and your experience for cancer research. Together, we have the power to move research forward for these rare and difficult-to-treat diseases."
+            },
+            "LearnMoreSection": {
+                "Title": "What is this project about?",
+                "Paragraphs": [
+                    "The Pediatric Hepatocellular Carcinoma (HCC) & HCC-Like Tumors Project is part of <a class='Link' target='_blank' href='https://joincountmein.org'>Count Me In</a>, a research initiative that enables cancer patients to directly transform cancer research and discovery. Any individual in the United States or Canada who has ever been diagnosed with hepatocellular carcinoma before the age of 21, hepatocellular neoplasm not otherwise specified (HCN NOS), or hepatoblastoma diagnosed at 6 or older can share information about their experience through completing surveys, sharing biological sample(s), and copies of their medical records with researchers in order to speed the pace of discovery.",
+                    "The goal of <a class='Link' target='_blank' href='https://joincountmein.org'>Count Me In</a> is to generate a large dataset of linked patient-reported, genomic, clinical, and molecular information that can be shared with the biomedical community. Every patient's story holds a piece of the puzzle that can help us better understand cancer. By discovering the genes and the variants that drive cancer and sharing this data, we hope insights can be gained to develop more effective therapies."
+                ]
+            },
+            "ParticipateSection": {
+                "Title": "Here’s how to participate",
+                "Steps": [
+                    {
+                        "Title": "STEP 1",
+                        "Time": "10-15 minutes",
+                        "Description": "Provide consent and tell us where you or your child has been treated",
+                        "ImageAlt": "Computer screen displaying online consent form"
+                    },
+                    {
+                        "Title": "STEP 2",
+                        "Time": "5 minutes",
+                        "Description": "Answer questions about your cancer experience",
+                        "ImageAlt": "Computer screen displaying online survey"
+                    },
+                    {
+                        "Title": "STEP 3",
+                        "Time": "10 minutes",
+                        "Description": "Provide samples (we’ll send a kit)",
+                        "ImageAlt": "Sample collection kit"
+                    },
+                    {
+                        "Title": "STEP 4",
+                        "Time": "Ongoing",
+                        "Description": "Learn with us along the way",
+                        "ImageAlt": "Speech bubbles sharing hearts and data visualizations"
+                    }
+                ],
+                "LearnMoreAboutParticipationButton": "Learn more about participation"
+            },
+            "FAQ": {
+                "Questions": [
+                    {
+                        "Question": "What is the goal of the Pediatric Hepatocellular Carcinoma (HCC) & HCC-Like Tumors Project?",
+                        "Paragraphs": [
+                            "The goal of this project is to generate a comprehensive dataset of de-identified clinical, genomic, molecular, and patient or parent/guardian reported data that will be shared with the research community in order to develop a better understanding of these diseases.",
+                            "Because pediatric hepatocellular carcinoma and HCC-like (also known as mixed hepatoblastoma and HCC or hepatocellular carcinoma not otherwise specified, HCN NOS) tumors are so rare, very few patients have the ability to contribute their samples and clinical data to cancer research, largely because they do not have a way of doing so. We believe that everyone should have the opportunity to contribute to research.",
+                            "We hope that the data generated through this project will enable researchers to better understand the natural history and biology of these rare, understudied, and difficult-to-treat diseases, leading to better treatment strategies in the future. We will provide regular updates via email to all participants about the status of the project, data releases, and any discoveries that come out of the research."
+                        ]
+                    },
+                    {
+                        "Question": "Who is eligible to participate?",
+                        "Paragraphs": [
+                            "Anyone who has ever been diagnosed with hepatocellular carcinoma before the age of 21, hepatocellular neoplasm not otherwise specified (HCN NOS), or hepatoblastoma diagnosed at 6 years of age or older may participate if they live in the USA or Canada. You or your child do not need to be in active treatment to join. We welcome people of all ages, races, ethnicities, genders, sexual orientations, abilities, religions, and socioeconomic backgrounds. At this time, we are not able to enroll patients who have passed away.",
+                            "Hepatoblastoma tumors diagnosed at or over the age of 6 years are believed to behave more similarly to a “mixed” hepatocellular carcinoma and hepatoblastoma (or HCC-like) tumor with features of both diseases. By enrolling those who have been diagnosed with HCN NOS or hepatoblastoma >6 years of age, we believe we’ll be able to better understand the spectrum of these diseases and how to treat them.",
+                            "If you are a parent or guardian of a child diagnosed with one of these diseases, you can provide consent for them to participate in the project. Depending on their age, we may also ask them to provide permission to participate through assent."
+                        ]
+                    },
+                    {
+                        "Question": "Who is conducting this research?",
+                        "Paragraphs": [
+                            "This project is part of Count Me In, a research initiative that enables cancer patients to directly transform cancer research and discovery. Any individual in the United States or Canada who has ever been diagnosed with these cancers can share information about their experience through completing surveys, sharing biological sample(s), and copies of their medical records with researchers to speed the pace of discovery.",
+                            "The goal of Count Me In is to generate a large dataset of linked patient/parent-reported, genomic, clinical, and molecular information that can be shared with the biomedical community. Every patient’s story holds a piece of the puzzle that can help us better understand cancer. By discovering the genes and the variants that drive cancer and sharing this data, we hope insights can be gained to develop more effective therapies."
+                        ]
+                    },
+                    {
+                        "Question": "Who has been involved in the development of this project?",
+                        "Paragraphs": [
+                            "We have worked closely with parents and patient advocates within the pediatric hepatocellular carcinoma and hepatocellular-like tumor community in the development of this project. The community has provided guidance and input on many aspects of the project including name, outreach and messaging strategies, and the design of this website.",
+                            "Dr. Allison O’Neill, Clinical Director of the Solid Tumor Center, Director of Medical Therapies of the Liver Tumor Center of Excellence, and Senior Physician at Dana-Farber Cancer Institute / Boston Children's Cancer and Blood Disorders Center is the scientific lead for this project, and has been involved in the development since inception, including in scientific goals, messaging, and strategy."
+                        ]
+                    },
+                    {
+                        "Question": "What does Count Me In do with the data collected through this project?",
+                        "Paragraphs": [
+                            "Samples and health information for participants will be available to study staff and researchers at Count Me In, the Broad Institute of MIT and Harvard, and Dana-Farber Cancer Institute. More details about how we protect participant information and samples can be found in the consent form.",
+                            "After removing a participant’s name and other readily identifiable information, data is shared freely to accelerate discoveries, enabling researchers to identify patterns in data. Batches of data are released publicly and are available to all researchers—so that everyone may use the data to make discoveries and advance progress against cancer, including new medicines and diagnostics.",
+                            "Data will be shared in established public scientific databases (for example, cBioPortal for Cancer Genomics, and data portals developed by the National Institute of Health/National Cancer Institute such as the Genomic Data Commons and database of Genotypes and Phenotypes (dbGaP)). Some of these databases are publicly viewable by anyone with internet access, and some are restricted to qualified researchers."
+                        ]
+                    }
+                ]
+            },
+            "Partners": {
+                "Title": "Partners",
+                "Alts": {},
+                "Text": "For information on how to become a partner, contact the team at <a class='Link' href='https://info@joincountmein.org.'>info@joincountmein.org</a>."
+            },
+            "CountMeInSection": {
+                "Title": "Join the movement and say Count Me In"
+            }
+        },
         "LmsPage": {
             "Title": "<span>Enrolling Soon:</span> <span>The Leiomyosarcoma (LMS) Project</span>",
             "IntroductionSection": {
@@ -490,7 +588,7 @@
         "Footer": {
             "BackToTopButton": "Back to top",
             "Contacts": "Contact Us",
-            "Copyright": "Copyright © 2021 Count Me In. All rights reserved.",
+            "Copyright": "All rights reserved.",
             "Email": "Email",
             "Phone": "Phone",
             "PrivacyPolicy": "Privacy Policy"

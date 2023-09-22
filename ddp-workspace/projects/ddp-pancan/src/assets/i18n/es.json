@@ -17,6 +17,8 @@
             "Twitter": "Twitter logo",
             "Facebook": "Facebook logo",
             "Instagram": "Instagram logo",
+            "LinkedIn": "LinkedIn logo",
+            "Threads": "Threads logo",
             "JoinCMI": "Join Count Me In logo"
         }
     },
@@ -24,7 +26,9 @@
         "social": {
             "twitter": "https://twitter.com/CMI_Espanol",
             "facebook": "https://www.facebook.com/CMIespanol",
-            "instagram": "https://www.instagram.com/countmein"
+            "instagram": "https://www.instagram.com/countmein",
+            "linkedin": "https://www.linkedin.com/company/count-me-in-patient-partnered-research/",
+            "threads": "https://www.threads.net/@countmein"
         },
         "HomePage": {
             "JoinCountMeInButton": "Únase a Count Me In",
@@ -419,6 +423,99 @@
                 "Text": "El Proyecto de cáncer colorrectal forma parte de <span class='bold'>Count Me In</span>, una iniciativa de investigación que une a pacientes y científicos para juntos acelerar los descubrimientos en la investigación del cáncer."
             }
         },
+        "PedihccPage": {
+            "IntroductionSection": {
+                "Title": "Ayude a impulsar descubrimientos sobre los cánceres de hígado pediátricos.",
+                "Text": "Si a usted o a su hijo(a) le han diagnosticado alguna vez un carcinoma hepatocelular (CHC) antes de los 21 años o un tumor similar al CHC (hepatoblastoma o CHC mixto) después de cumplir los 6 años de edad, puede unirse a este movimiento nacional para aportar sus muestras, historias clínicas y experiencia a la investigación del cáncer. Juntos, tenemos el poder de promover la investigación de estas enfermedades raras y difíciles de tratar."
+            },
+            "LearnMoreSection": {
+                "Title": "¿De qué se trata este proyecto?",
+                "Paragraphs": [
+                    "El Proyecto sobre carcinoma hepatocelular (CHC) pediátrico y tumores similares al CHC forma parte de <a class='Link' target='_blank' href='https://joincountmein.org'>Count Me In</a>, una iniciativa de investigación que permite que los pacientes con cáncer transformen de forma directa la investigación y los descubrimientos en torno al cáncer. Toda persona en Estados Unidos o Canadá y que alguna vez haya recibido un diagnóstico de carcinoma hepatocelular antes de los 21 años, neoplasia hepatocelular no especificada (HCN NOS, por su sigla en inglés) o hepatoblastoma diagnosticado después de los 6 años de edad puede compartir información sobre su experiencia respondiendo encuestas y compartiendo muestras biológicas y copias de su historia clínica con los investigadores a los fines de agilizar los descubrimientos.",
+                    "El objetivo de <a class='Link' target='_blank' href='https://joincountmein.org'>Count Me In</a> es generar un gran conjunto de datos de información genómica, clínica y molecular aportada por los pacientes que pueda compartirse con la comunidad biomédica. La historia de cada paciente es una pieza del rompecabezas que puede ayudarnos a comprender mejor el cáncer. Al descubrir los genes y las variaciones que dan lugar al cáncer y compartir estos datos, esperamos poder obtener información valiosa para desarrollar tratamientos más eficaces."
+                ]
+            },
+            "ParticipateSection": {
+                "Title": "Cómo participar",
+                "Steps": [
+                    {
+                        "Title": "PASO 1",
+                        "Time": "De 10 a 15 minutos",
+                        "Description": "Dé su consentimiento e indique dónde usted o su hijo(a) ha recibido tratamiento",
+                        "ImageAlt": "Pantalla de computadora que muestra un formulario de consentimiento en línea"
+                    },
+                    {
+                        "Title": "PASO 2",
+                        "Time": "5 minutos",
+                        "Description": "Responda preguntas sobre su experiencia con el cáncer",
+                        "ImageAlt": "Pantalla de computadora que muestra una encuesta en línea"
+                    },
+                    {
+                        "Title": "PASO 3",
+                        "Time": "10 minutos",
+                        "Description": "Proporcione muestras (le enviaremos un kit)",
+                        "ImageAlt": "Kit de obtención de muestras"
+                    },
+                    {
+                        "Title": "PASO 4",
+                        "Time": "Continuo",
+                        "Description": "Aprenda a la par de nosotros",
+                        "ImageAlt": "Burbujas de diálogo que comparten corazones y visualizaciones de datos"
+                    }
+                ],
+                "LearnMoreAboutParticipationButton": "Más información sobre la participación"
+            },
+            "FAQ": {
+                "Questions": [
+                    {
+                        "Question": "¿Cuál es el objetivo del Proyecto sobre carcinoma hepatocelular (CHC) pediátrico y tumores similares al CHC?",
+                        "Paragraphs": [
+                            "El objetivo de este proyecto es crear un conjunto extenso de datos anónimos clínicos, genómicos y moleculares proporcionados por pacientes o por progenitores o tutores de pacientes que se compartirá con la comunidad científica con el fin de lograr una mayor comprensión de estas enfermedades.",
+                            "Debido a que el carcinoma hepatocelular pediátrico y los tumores similares al CHC (también conocidos como hepatoblastoma y CHC mixto o carcinoma hepatocelular no especificado [HCN NOS, por su sigla en inglés]) son tan poco frecuentes, son muy pocos los pacientes que pueden contribuir con sus muestras y datos clínicos a la investigación del cáncer, principalmente porque no tienen forma de hacerlo. Creemos que todos deben tener la oportunidad de aportar a la investigación.",
+                            "Esperamos que los datos generados a través de este proyecto permitan a los investigadores comprender mejor la historia natural y los aspectos biológicos de estas enfermedades raras, poco estudiadas y difíciles de tratar con el fin de desarrollar mejores estrategias de tratamiento en el futuro. Proporcionaremos actualizaciones periódicas por correo electrónico a todos los participantes sobre el estado del proyecto, publicaciones de los datos y cualquier descubrimiento que se origine de esta investigación."
+                        ]
+                    },
+                    {
+                        "Question": "¿Quiénes reúnen las condiciones para participar?",
+                        "Paragraphs": [
+                            "Pueden participar todas las personas que vivan en Estados Unidos o Canadá a las que se les haya diagnosticado alguna vez un carcinoma hepatocelular antes de los 21 años, una neoplasia hepatocelular no especificada (HCN NOS, por su sigla en inglés) o un hepatoblastoma diagnosticado después de los 6 años de edad. Para unirse no es necesario que usted o su hijo(a) estén en tratamiento activo. Recibimos a personas de todas las edades, razas, etnias, sexos, orientaciones sexuales, capacidades, religiones y condiciones socioeconómicas. Sin embargo, en este momento, no podemos inscribir a pacientes que hayan fallecido.",
+                            "Se piensa que los tumores de hepatoblastoma que se diagnostican después de los 6 años de edad se comportan de manera similar a un tumor \"mixto\" de carcinoma hepatocelular y hepatoblastoma (o similar a un CHC) con características de ambas enfermedades. Mediante la inscripción de quienes han sido diagnosticados con HCN NOS o hepatoblastoma después de los 6 años de edad, creemos que seremos capaces de comprender mejor el espectro de estas enfermedades y su tratamiento.",
+                            "Si usted es padre, madre o tutor de un menor diagnosticado con una de estas enfermedades, puede otorgar su consentimiento para que participe en el proyecto. Asimismo, dependiendo de su edad, podemos solicitarle permiso directamente al menor para participar con el respectivo asentimiento."
+                        ]
+                    },
+                    {
+                        "Question": "¿Quién realiza esta investigación?",
+                        "Paragraphs": [
+                            "Este proyecto forma parte de Count Me In, una iniciativa de investigación que permite que los pacientes con cáncer transformen de forma directa la investigación y los descubrimientos en torno al cáncer. Toda persona en Estados Unidos o Canadá que alguna vez haya recibido un diagnóstico de estos tipos de cáncer puede compartir información sobre su experiencia respondiendo encuestas y compartiendo muestras biológicas y copias de su historia clínica con los investigadores para agilizar los descubrimientos.",
+                            "El objetivo de Count Me In es generar un gran conjunto de datos de información genómica, clínica y molecular aportada por los pacientes o sus progenitores que pueda compartirse con la comunidad biomédica. La historia de cada paciente es una pieza del rompecabezas que puede ayudarnos a comprender mejor el cáncer. Al descubrir los genes y las variaciones que dan lugar al cáncer y compartir estos datos, esperamos poder obtener información valiosa para desarrollar tratamientos más eficaces."
+                        ]
+                    },
+                    {
+                        "Question": "¿Quién ha participado en el desarrollo de este proyecto?",
+                        "Paragraphs": [
+                            "Este proyecto se desarrolló con la colaboración estrecha de la comunidad de padres y pacientes con carcinoma hepatocelular pediátrico y tumores similares al hepatocelular. La comunidad ha proporcionado orientación y ha contribuido en numerosos aspectos del proyecto, como el nombre, las estrategias de captación y comunicación, así como en el diseño del sitio web.",
+                            "La Dra. Allison O’Neill (directora clínica del Solid Tumor Center, directora de tratamiento médico del Liver Tumor Center of Excellence y médica sénior del Dana-Farber Cancer Institute/Boston Children's Cancer and Blood Disorders Center) es la investigadora principal de este proyecto y ha participado en su desarrollo desde el principio, incluidos los objetivos científicos, los mensajes y la estrategia."
+                        ]
+                    },
+                    {
+                        "Question": "¿Qué hace la iniciativa Count Me In con los datos que se obtienen a través de este proyecto?",
+                        "Paragraphs": [
+                            "Las muestras e información médica estarán a disposición del equipo y los investigadores del estudio de Count Me In, del Instituto Broad de MIT y Harvard, y Dana-Farber Cancer Institute. En el formulario de consentimiento encontrará más detalles sobre cómo protegemos la información de los participantes y sus muestras.",
+                            "Después de eliminar el nombre y toda la información que identificaría con facilidad a los participantes, los datos se comparten libremente con el objetivo de agilizar los descubrimientos, al permitir que los investigadores identifiquen patrones en los datos. Los lotes de datos se divulgan al público y están disponibles para todos los investigadores, de manera que todos pueden utilizarlos para hacer descubrimientos y avances contra el cáncer, que incluyen nuevos medicamentos y métodos de diagnóstico.",
+                            "Los datos se compartirán en bases de datos científicas consumadas de acceso público (como, por ejemplo, en el cBioPortal for Cancer Genomics y portales de datos desarrollados por el National Institute of Health/National Cancer Institute, entre ellos, el Genomic Data Commons y la base de datos de genotipos y fenotipos [dbGaP]). Algunas de estas bases de datos son de acceso público, y otras están restringidas a investigadores acreditados."
+                        ]
+                    }
+                ]
+            },
+            "Partners": {
+                "Title": "Socios",
+                "Alts": {},
+                "Text": "Si desea obtener información sobre cómo convertirse en socio, envíe un correo electrónico al equipo a <a class='Link' href='https://info@joincountmein.org.'>info@joincountmein.org</a>."
+            },
+            "CountMeInSection": {
+                "Title": "Únase al movimiento Count Me In y comparta su experiencia"
+            }
+        },
         "LmsPage": {
             "Title": "<span>Enrolling Soon:</span> <span>The Leiomyosarcoma (LMS) Project</span>",
             "IntroductionSection": {
@@ -488,7 +585,7 @@
         "Footer": {
             "BackToTopButton": "Volver Arriba",
             "Contacts": "Contáctenos",
-            "Copyright": "Copyright © 2021 Count Me In. Todos los derechos reservados.",
+            "Copyright": "Todos los derechos reservados.",
             "Email": "Correo electrónico",
             "Phone": "Teléfono",
             "PrivacyPolicy": "Política de privacidad"

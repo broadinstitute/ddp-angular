@@ -3,6 +3,7 @@ import DatePicker from 'dsm/component/date-picker';
 import { CheckboxConfig, DateConfig, RadioButtonConfig, TextConfig } from 'dsm/component/filters/sections/search/search-types';
 import { AdditionalFilter } from 'dsm/component/filters/sections/search/search-enums';
 import { waitForNoSpinner, waitForResponse } from 'utils/test-utils';
+import { logError } from 'utils/log-utils';
 
 export class Search {
   private readonly enUSDateRegExp = new RegExp(/\b(0[1-9]|1[012])([/])(0[1-9]|[12]\d|3[01])\2(\d{4})/);
@@ -14,7 +15,7 @@ export class Search {
   public async open(): Promise<void> {
     const open = await this.isOpen();
     !open && await this.page.locator(this.openButtonXPath).click();
-    await expect(async () => expect(await this.isOpen()).toBe(true)).toPass();
+    await expect(async () => expect(await this.isOpen()).toBe(true)).toPass({ timeout: 5000 });
   }
 
   public async search(): Promise<void> {
@@ -31,6 +32,8 @@ export class Search {
 
   public async dates(columnName: string, { from: fromValue, to: toValue, additionalFilters }: Partial<DateConfig>): Promise<void> {
     await this.setAdditionalFilters(columnName, additionalFilters);
+
+    if (!fromValue && !toValue) { return; }
 
     let fromDate!: string;
     let toDate!: string;
@@ -82,7 +85,7 @@ export class Search {
     await this.setAdditionalFilters(columnName, additionalFilters);
     if (checkboxValues && checkboxValues.length) {
       for (const checkboxValue of checkboxValues) {
-        const checkboxLocator = await this.checkboxLocator(columnName, checkboxValue);
+        const checkboxLocator = this.checkboxLocator(columnName, checkboxValue);
 
         const isChecked = await this.isChecked(checkboxLocator);
         const isDisabled = await this.isDisabled(checkboxLocator);
@@ -97,6 +100,7 @@ export class Search {
     const datePicker = new DatePicker(this.page, { root: this.baseColumnXPath(column) });
     if (open) {
       await datePicker.open();
+      await datePicker.toLocator().scrollIntoViewIfNeeded().catch((error) => logError(error));
     } else {
       await datePicker.close();
     }
@@ -128,7 +132,7 @@ export class Search {
   }
 
   private async setExactMatch(columnName: string, isTextField = false): Promise<void> {
-    const additionalFilterCheckbox = await this.additionalFilterCheckboxLocator(columnName, AdditionalFilter.EXACT_MATCH, isTextField);
+    const additionalFilterCheckbox = this.additionalFilterCheckboxLocator(columnName, AdditionalFilter.EXACT_MATCH, isTextField);
     const isCheckedOrDisabled = await this.isChecked(additionalFilterCheckbox);
 
     isCheckedOrDisabled && (await additionalFilterCheckbox.click());

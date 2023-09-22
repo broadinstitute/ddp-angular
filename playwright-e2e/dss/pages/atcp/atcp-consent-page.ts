@@ -1,5 +1,4 @@
 import { expect, Page } from '@playwright/test';
-import Button from 'dss/component/button';
 import Question from 'dss/component/Question';
 import { AtcpPageBase } from 'dss/pages/atcp/atcp-page-base';
 
@@ -65,7 +64,12 @@ export default class AtcpConsentPage extends AtcpPageBase {
     return new Question(this.page, { prompt: 'DOB of Participant'});
   }
 
-  get signAndConsent(): Button {
-    return new Button(this.page, { label: 'Sign & Consent', root: '.activity-buttons' });
+  /**
+   * <br> Question: DOB of Parent or Legal Guardian
+   *
+   * <br> Type: Date
+   */
+  get parentDoB(): Question {
+    return new Question(this.page, { prompt: 'DOB of Parent or Legal Guardian'});
   }
 }

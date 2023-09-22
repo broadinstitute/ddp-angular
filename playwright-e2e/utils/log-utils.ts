@@ -28,3 +28,17 @@ export function logGenomeStudySampleKitReceived(shortId: string) {
     description: `Mark kit received for participant short_id: ${shortId}`
   });
 }
+
+export function logError(err: string) {
+  test.info().annotations.push({
+    type: 'ERROR',
+    description: err
+  });
+}
+
+export function logInfo(info: string) {
+  test.info().annotations.push({
+    type: 'Info',
+    description: info
+  });
+}

@@ -1,0 +1,81 @@
+<main class="main">
+    <section class="introduction">
+        <div class="flex">
+            <div class="description">
+                <h2 class="title static-page-title" translate>App.PedihccPage.IntroductionSection.Title</h2>
+                <p class="text static-page-paragraph-text" translate>App.PedihccPage.IntroductionSection.Text</p>
+                <a mat-flat-button
+                   [routerLink]="'/' + AppRoutes.CountMeIn"
+                   queryParamsHandling="merge"
+                   color="pedihcc"
+                   class="btn join-cmi-btn center button button_small"
+                   >
+                    {{'App.HomePage.JoinCountMeInButton' | translate}}
+                </a>
+            </div>
+            <img src="assets/images/pedihcc_main.png" class="image"
+                 [alt]="'App.ImageAlts.SplashPageImg' | translate"
+                 width="390" height="385">
+        </div>
+        <div class="logos">
+            <img src="assets/images/logo-broad.svg"
+                 [alt]="'App.HomePage.IntroductionSection.BroadAlt' | translate"
+                 width="124" height="32">
+            <img src="assets/images/dana-farber-logo.png"
+                 [alt]="'App.HomePage.IntroductionSection.DanaFarberAlt' | translate"
+                 width="124" height="32">
+        </div>
+    </section>
+
+    <section class="learn-more">
+        <h2 class="title static-page-title" translate>App.PedihccPage.LearnMoreSection.Title</h2>
+        <ng-container *ngFor="let item of 'App.PedihccPage.LearnMoreSection.Paragraphs' | translate">
+            <p class="text static-page-paragraph-text" [innerHTML]="item"></p>
+        </ng-container>
+
+        <a mat-stroked-button
+           [routerLink]="'/' + AppRoutes.AboutUs"
+           queryParamsHandling="merge"
+           class="btn learn-more-btn center small-letter-spacing button button_small button_secondary">
+            {{'App.HomePage.LearnMoreSection.LearnMoreAboutUsButton' | translate}}
+        </a>
+    </section>
+
+    <section class="participate">
+        <app-participation-section [isPediHCCTheme]="true"></app-participation-section>
+    </section>
+
+    <section class="faq">
+        <h2 class="title static-page-title" translate>App.FAQ.Title</h2>
+        <div class="container">
+            <app-faq-section questions="App.PedihccPage.FAQ.Questions" [isPedihcc]="true"></app-faq-section>
+        </div>
+
+        <a mat-stroked-button
+           [routerLink]="'/' + AppRoutes.FAQ"
+           queryParamsHandling="merge"
+           class="btn more-faq-btn center small-letter-spacing button button_small button_secondary">
+            {{'App.FAQ.Button.MoreFAQs' | translate}}
+            <mat-icon>chevron_right</mat-icon>
+        </a>
+    </section>
+
+    <section class="partners">
+<!--        <h2 class="title static-page-title" translate>App.PedihccPage.Partners.Title</h2>-->
+<!--        <div class="logos">-->
+<!--            here goes partners-->
+<!--        </div>-->
+        <p class="text static-page-paragraph-text" [innerHTML]="'App.PedihccPage.Partners.Text' | translate"></p>
+    </section>
+
+    <section class="stay-informed">
+        <app-stay-informed-section [isPedihcc]="true"></app-stay-informed-section>
+    </section>
+
+    <section class="join-cmi">
+        <app-join-cmi-section
+            title="App.PedihccPage.CountMeInSection.Title"
+            [isPediHCCTheme]="true">
+        </app-join-cmi-section>
+    </section>
+</main>

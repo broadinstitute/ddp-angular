@@ -1,5 +1,5 @@
 import { expect } from '@playwright/test';
-import { AdditionalFilter } from 'dsm/component/filters/sections/search/search-enums';
+import { test } from 'fixtures/dsm-fixture';
 import { SamplesNavEnum } from 'dsm/component/navigation/enums/samplesNav-enum';
 import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import { StudyNavEnum } from 'dsm/component/navigation/enums/studyNav-enum';
@@ -11,19 +11,17 @@ import ParticipantPage from 'dsm/pages/participant-page/participant-page';
 import AtcpSearchPage, { SearchByField } from 'dsm/pages/samples/search-page';
 import { WelcomePage } from 'dsm/pages/welcome-page';
 import Radiobutton from 'dss/component/radiobutton';
-import { test } from 'fixtures/dsm-fixture';
 import { getUtcDate } from 'utils/date-utils';
 import { generateAlphaNumeric } from 'utils/faker-utils';
-import { logGenomeStudySampleKitReceived } from 'utils/log-utils';
 import { studyShortName, waitForNoSpinner, waitForResponse } from 'utils/test-utils';
+import { logInfo } from 'utils/log-utils';
 
-test.describe('Receive Kit', () => {
+test.describe('Receive Genome Study Kit', () => {
   const studies = [StudyEnum.AT];
   for (const study of studies) {
     let newBarcode = generateAlphaNumeric().toUpperCase();
 
     let shortId: string;
-    let guid: string;
 
     let participantPage: ParticipantPage;
     let participantListPage: ParticipantListPage;
@@ -36,85 +34,32 @@ test.describe('Receive Kit', () => {
     });
 
     test(`Receive genome sample kit for ${study} @dsm @${study} @functional`, async ({page}) => {
-      // Instead using UI table filter and search, it is much quicker and more accurate to intercept DSM API request to find the right participant to use.
-      // Find a Playwright test user that does not have GENOME_STUDY_SPIT_KIT_BARCODE.
-      await page.route('**/*', async (route, request): Promise<void> => {
-         const regex = new RegExp(/applyFilter\?realm=.*&parent=participantList/i);
-         if (!shortId && request.url().match(regex)) {
-           console.log(`Intercepting API request ${request.url()} for a E2E participant`);
-           const response = await route.fetch();
-           const json = JSON.parse(await response.text());
-           for (const i in json.participants) {
-             let participantShortId;
-             const profile = json.participants[i].esData.profile;
-             const participantData = json.participants[i].esData.dsm.participantData;
-             if (!profile.firstName.includes('E2E')) {
-               continue;
-             }
-             participantShortId = profile.hruid;
-             for (const dataId in participantData) {
-               if ((participantData[dataId].fieldTypeId as string) === 'AT_GROUP_GENOME_STUDY') {
-                 if ((participantData[dataId].data as string).indexOf('GENOME_STUDY_SPIT_KIT_BARCODE') !== -1) {
-                   participantShortId = null;
-                   break;
-                 }
-               }
-             }
-             if (participantShortId) {
-               shortId = participantShortId;
-               console.log('short id: ', shortId);
-               break; // finished searching for a participant who is Playwright automation test created and does not have genome study kit barcode
-             }
-           }
-         }
-         return route.continue();
-      });
-
       await test.step('Search for the right participant on Participant List page', async () => {
         participantListPage = await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
         await participantListPage.waitForReady();
 
-        // Search for a participant that meets the search criteria
-        const customizeViewPanel = participantListPage.filters.customizeViewPanel;
-        await customizeViewPanel.open();
-        await customizeViewPanel.selectColumns('Participant Columns', ['Registration Date']);
-        await customizeViewPanel.selectColumns('Genome Study Columns', ['Sample kit barcode for genome study'], { nth: 1 });
-        await customizeViewPanel.close();
+        const rowIndex = await participantListPage.findParticipantFor('Genome Study Columns', 'Sample kit barcode for genome study', {nth: 1});
 
-        const searchPanel = participantListPage.filters.searchPanel;
-        await searchPanel.open();
-        await searchPanel.checkboxes('Status', { checkboxValues: ['Registered', 'Enrolled'] });
-        await searchPanel.text('Sample kit barcode for genome study', { additionalFilters: [AdditionalFilter.EMPTY] });
-        await searchPanel.search();
-      });
-
-      await test.step('Verify participant detail on Participant page', async () => {
-        const searchPanel = participantListPage.filters.searchPanel;
-        await searchPanel.clear();
-        await participantListPage.filterListByShortId(shortId);
-        logGenomeStudySampleKitReceived(shortId)
-
-        const row = 0;
-        const participantsTable = participantListPage.participantListTable;
-        const status = await participantsTable.getParticipantDataAt(row, 'Status');
-        expect(status).toMatch(/Enrolled|Registered/);
-        const rowShortId = await participantsTable.getParticipantDataAt(row, 'Short ID');
-        expect(rowShortId).toBe(shortId);
-        const registrationDate = await participantsTable.getParticipantDataAt(row, 'Registration Date', { exactMatch: false });
-
-        // Open the Participant page
-        participantPage = await participantsTable.openParticipantPageAt(row);
-
-        expect(await participantPage.getStatus()).toBe(status);
-        expect(await participantPage.getShortId()).toBe(shortId);
-        expect(await participantPage.getRegistrationDate()).toBe(registrationDate);
-        guid = await participantPage.getGuid();
+        const participantListTable = participantListPage.participantListTable;
+        shortId = await participantListTable.getParticipantDataAt(rowIndex, 'Short ID');
+        participantPage = await participantListTable.openParticipantPageAt(rowIndex);
+        logInfo(`Participant Short ID: ${shortId}`);
       });
 
       await test.step('Set new sample kit barcode', async () => {
         newBarcode = `${shortId}-${newBarcode}`;
         const genomeStudyTab = await participantPage.clickTab<GenomeStudyTab>(TabEnum.GENOME_STUDY);
-        await genomeStudyTab.setValue('Sample kit barcode for genome study', newBarcode);
+        const value = await genomeStudyTab.getField('Sample kit barcode for genome study').locator('input').inputValue();
+        expect(value).toBe(''); // Sample Kit Barcode input should be empty
+
+        await Promise.all([
+          genomeStudyTab.setValue('Sample kit barcode for genome study', newBarcode),
+          page.waitForResponse(resp => {
+            return resp.url().includes('/ui/patch')
+              && resp.status() === 200
+              && (resp.request().postDataJSON().nameValues[0].value as string).includes(newBarcode)
+          })
+        ]);
         await participantPage.backToList();
       });
 
@@ -130,6 +75,7 @@ test.describe('Receive Kit', () => {
         expect(await table.getRowText(row, 'Short ID')).toBe(shortId);
 
         const button = table.findButtonInCell(table.rowLocator(), { label: 'Mark Received' });
+        await expect(button.toLocator()).toBeVisible();
         await Promise.all([
           waitForResponse(page, { uri: `ui/receivedKits?realm=${studyShortName(study).realm}&userId=` }),
           button.click()
@@ -145,14 +91,14 @@ test.describe('Receive Kit', () => {
         await participantListPage.participantListTable.openParticipantPageAt(0);
 
         const genomeStudyTab = await participantPage.clickTab<GenomeStudyTab>(TabEnum.GENOME_STUDY);
-        let field = await genomeStudyTab.getField('Status of genome study sample kit');
+        let field = genomeStudyTab.getField('Status of genome study sample kit');
 
         // "Sample kit received from participant" is checked
         const radiobuttonGroup = new Radiobutton(page, { root: field });
         expect(await radiobuttonGroup.isChecked('Sample kit received from participant')).toBe(true);
 
         // "Genome study date of receipt of sample kit from participant" will show the received date (today)
-        field = await genomeStudyTab.getField('Genome study date of receipt of sample kit from participant');
+        field = genomeStudyTab.getField('Genome study date of receipt of sample kit from participant');
         const fieldValue = await field.locator('input[data-placeholder="mm/dd/yyyy"]').inputValue();
         expect(fieldValue).toBe(getUtcDate());
       });

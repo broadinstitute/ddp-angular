@@ -137,7 +137,7 @@ test.describe.skip('Enrol an adult dependent', () => {
     const table = dashboardPage.getDashboardTable();
     const headers = await table.getHeaderNames();
     expect(headers).toHaveLength(4); // Four columns in table
-    expect(headers).toEqual(orderedHeaders);
+    expect(headers).toBe(orderedHeaders);
 
     const summaryCell = await table.findCell('Title', 'Consent Form for Adult Dependent', 'Summary');
     await expect(summaryCell!).toHaveText('Thank you for signing the consent form -- welcome to Project Singular!');

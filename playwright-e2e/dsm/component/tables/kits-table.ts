@@ -1,13 +1,17 @@
 import {expect, Locator, Page} from '@playwright/test';
 import {KitsColumnsEnum} from 'dsm/pages/kitsInfo-pages/enums/kitsColumns-enum';
+import Table from 'dss/component/table';
 import {KitsPaginator} from 'lib/component/dsm/paginators/kitsPaginator';
 import {rows} from 'lib/component/dsm/paginators/types/rowsPerPage';
+import { waitForNoSpinner } from 'utils/test-utils';
 
 
-export class KitsTable {
+export class KitsTable extends Table {
   private readonly paginator = new KitsPaginator(this.page);
 
-  constructor(private readonly page: Page) {}
+  constructor(page: Page) {
+    super(page, {cssClassAttribute: '.table'});
+  }
 
   public async goToPage(page: number): Promise<void> {
     await this.paginator.pageAt(page);
@@ -27,6 +31,7 @@ export class KitsTable {
       .toBeVisible();
 
     await searchInputHeader.fill(value);
+    await waitForNoSpinner(this.page);
   }
 
   public async getData(columnName: KitsColumnsEnum): Promise<string> {
@@ -34,7 +39,7 @@ export class KitsTable {
     await expect(column, `Kits Table - the column ${columnName} doesn't exist`)
       .toBeVisible();
 
-    const td = await this.td(columnName);
+    const td = this.td(columnName);
     await expect(td, 'Kits Table - more than one data was found').toHaveCount(1);
 
     return await td.textContent() || '';

@@ -15,18 +15,24 @@
                class="footer-btn button button_small">
                 {{'App.Footer.PrivacyPolicy' | translate}}
             </a>
+            <a mat-button
+               *ngIf="isPediHCCTheme"
+                class="footer-btn button button_small"
+                (click)="openJoinMailingList()">
+                {{'App.HomePage.StayInformedSection.JoinMailingListButton' | translate}}
+            </a>
         </div>
         <div class="auth">
             <ddp-language-selector></ddp-language-selector>
-            <app-auth></app-auth>
+            <app-auth [isInFooter]="true" [isPediHCCTheme]="isPediHCCTheme"></app-auth>
         </div>
     </div>
     <div class="info">
-        <span translate>App.Footer.Copyright</span>
+        <span>Copyright © {{ copyrightYear }} Count Me In. {{'App.Footer.Copyright' | translate}} </span>
         <div class="contacts">
             <span translate class="contacts__label">App.Footer.Contacts</span>
-            <a target="_blank" class="contacts__item" href="tel:{{phone}}}">{{phone}}</a>
             <a target="_blank" class="contacts__item" href="mailto:{{email}}">{{email}}</a>
+            <a target="_blank" class="contacts__item" href="tel:{{phone}}}">{{phone}}</a>
         </div>
     </div>
 </footer>

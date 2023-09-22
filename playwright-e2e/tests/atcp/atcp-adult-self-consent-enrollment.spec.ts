@@ -7,6 +7,7 @@ import AtcpDashboardPage from 'dss/pages/atcp/atcp-dashboard-page';
 import AtcpGenomeStudyPage from 'dss/pages/atcp/atcp-genome-study-page';
 import AtcpHomePage from 'dss/pages/atcp/atcp-home-page';
 import AtcpMedicalHistoryPage from 'dss/pages/atcp/atcp-medical-history-page';
+import AtcpRegistrationPage from 'dss/pages/atcp/atcp-registration-page';
 import AtcpReviewSubmissionPage from 'dss/pages/atcp/atcp-review-submission-page';
 import { test } from 'fixtures/atcp-fixture';
 import * as auth from 'authentication/auth-atcp';
@@ -21,7 +22,7 @@ test.describe('ATCP adult self-consent enrollment', () => {
     await expect(page.locator('.activity-steps .active p')).toHaveText(expectedText);
   };
 
-  test('Welcome page @enrollment @atcp @visual', async ({ page }) => {
+  test('Welcome page @dss @atcp @visual', async ({ page }) => {
     const homePage = new AtcpHomePage(page);
     await homePage.waitForReady();
 
@@ -36,7 +37,7 @@ test.describe('ATCP adult self-consent enrollment', () => {
     }
   });
 
-  test('Should be able to complete self-enrollment @enrollment @atcp @visual', async ({ page }) => {
+  test('Should be able to complete self-enrollment @dss @atcp @visual', async ({ page }) => {
     const adult = user.adult;
     const adultFirstName = generateUserName(adult.firstName);
     const adultLastName = generateUserName(adult.lastName);
@@ -66,8 +67,10 @@ test.describe('ATCP adult self-consent enrollment', () => {
 
     // Send Auth0 API to verify user email
     await setAuth0UserEmailVerified(APP.AT, userEmail, { isEmailVerified: true });
+    await auth.login(page, { email: userEmail });
 
-    const registrationPage = await auth.login(page, { email: userEmail });
+    const registrationPage = new AtcpRegistrationPage(page);
+    await registrationPage.waitForReady();
 
     await expect(registrationPage.participantFirstName.toInput().toLocator()).toHaveValue(adultFirstName);
     await expect(registrationPage.participantLastName.toInput().toLocator()).toHaveValue(adultLastName);
@@ -152,7 +155,7 @@ test.describe('ATCP adult self-consent enrollment', () => {
     await expect(page.locator('ddp-activity-content')).toHaveScreenshot('atcp-consent-form-step-8.png');
     await consentPage.signature().fill(adultFullName);
     await consentPage.participantDOB.fill(dob);
-    await consentPage.signAndConsent.click();
+    await consentPage.signAndConsent();
 
     const contactPhysicianPage = new AtcpContactPhysicianPage(page);
     await contactPhysicianPage.waitForReady();
@@ -192,7 +195,7 @@ test.describe('ATCP adult self-consent enrollment', () => {
     await medicalHistory.physicianHospitalName.fill(doctor.hospital);
     await medicalHistory.physicianHospitalCity.fill(doctor.city);
     await medicalHistory.physicianHospitalState.fill(doctor.state);
-    await medicalHistory.physicianHospitalCountry.fill('USA');
+    await medicalHistory.physicianHospitalCountry.fill('USA', { waitForSaveRequest: true });
     await medicalHistory.next();
 
     await medicalHistory.haveHistoryOfCancer.check('No');
@@ -278,7 +281,7 @@ test.describe('ATCP adult self-consent enrollment', () => {
     const expectedHeaders = ['Form', 'Summary', 'Created', 'Status', 'Actions'];
     const table = dashboardPage.getTable();
     const actualHeaders = await table.getHeaderNames();
-    await assertTableHeaders(actualHeaders, expectedHeaders);
+    assertTableHeaders(actualHeaders, expectedHeaders);
 
     expect(await table.getRowsCount()).toBe(6);
 

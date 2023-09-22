@@ -1,4 +1,4 @@
-import { Locator, Page } from '@playwright/test';
+import { expect, Locator, Page } from '@playwright/test';
 import WidgetBase from 'dss/component/widget-base';
 
 /**
@@ -68,6 +68,7 @@ export default class Select extends WidgetBase {
           // Use tab to close multiSelectable dropdown
           await this.page.keyboard.press('Tab');
         }
+        await expect(dropdown).toBeVisible({ visible: false }); // dropdown should close automatically
         break;
     }
   }
@@ -98,5 +99,13 @@ export default class Select extends WidgetBase {
       throw new Error(`Failed to find all options in Select or mat-select`);
     }
     return options!;
+  }
+
+  async currentValue(): Promise<string> {
+    return (await this.toLocator().locator('span.mat-select-min-line').textContent()) as string;
+  }
+
+  async isSelectDisabled(): Promise<boolean> {
+    return (await this.toLocator().getAttribute('class'))?.includes('mat-select-disabled') as boolean;
   }
 }

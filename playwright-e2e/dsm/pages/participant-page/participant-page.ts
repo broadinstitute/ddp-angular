@@ -3,6 +3,7 @@ import {waitForResponse} from 'utils/test-utils';
 import {MainInfoEnum} from 'dsm/pages/participant-page/enums/main-info-enum';
 import Tabs from 'dsm/component/tabs/tabs';
 import {TabEnum} from 'dsm/component/tabs/enums/tab-enum';
+import Input from 'dss/component/input';
 
 export default class ParticipantPage {
   private readonly PAGE_TITLE: string = 'Participant Page';
@@ -15,9 +16,13 @@ export default class ParticipantPage {
   }
 
   /* Actions */
-  public async fillNotes(value: string): Promise<void> {
+  public async fillNotes(value?: string): Promise<void> {
     const textArea = this.notes;
-    await textArea.fill(value);
+    if (value) {
+      await textArea.fill(value);
+    } else {
+      await textArea.clear();
+    }
     await textArea.blur();
     await waitForResponse(this.page, {uri: '/ui/patch'});
   }
@@ -68,8 +73,8 @@ export default class ParticipantPage {
     return await this.readMainTextInfoFor(MainInfoEnum.PREFERRED_LANGUAGE) || '';
   }
 
-  public isTabVisible(tabName: TabEnum): Promise<boolean> {
-    return this.tabs.isTabVisible(tabName);
+  public async isTabVisible(tabName: TabEnum): Promise<boolean> {
+    return await this.tabs.isTabVisible(tabName);
   }
 
   public async clickTab<T extends object>(tabName: TabEnum): Promise<T> {
@@ -78,22 +83,36 @@ export default class ParticipantPage {
     return await this.tabs.clickTab<T>(tabName) as T;
   }
 
-  private readMainTextInfoFor(key: MainInfoEnum) {
-   return this.page.locator(this.getMainTextInfoXPath(key)).textContent();
+  public async oncHistoryCreatedDate(): Promise<string> {
+    const oncHistoryCreatedLocator = this.oncHistoryCreated;
+    await expect(oncHistoryCreatedLocator, 'Onc History Created is not visible').toBeVisible();
+    const inputField = new Input(this.page, {root: oncHistoryCreatedLocator});
+
+    return inputField.currentValue();
   }
 
-  private readMainInputValueFor(key: MainInfoEnum) {
-    return this.page.locator(this.getMainInputValueInfoXPath(key)).inputValue();
+  /* Helper functions */
+
+  private async readMainTextInfoFor(key: MainInfoEnum) {
+   return await this.page.locator(this.getMainTextInfoXPath(key)).textContent();
   }
 
-  private readMainCheckboxValueFor(key: MainInfoEnum) {
-    return this.page.locator(this.getMainCheckboxValueInfoXPath(key)).isChecked();
+  private async readMainInputValueFor(key: MainInfoEnum) {
+    return await this.page.locator(this.getMainInputValueInfoXPath(key)).inputValue();
+  }
+
+  private async readMainCheckboxValueFor(key: MainInfoEnum) {
+    return await this.page.locator(this.getMainCheckboxValueInfoXPath(key)).isChecked();
   }
   /* ---- */
 
   /* Locators */
   private get notes(): Locator {
     return this.page.locator('//table[.//td[contains(normalize-space(),"Participant Notes")]]//td/textarea');
+  }
+
+  private get oncHistoryCreated(): Locator {
+    return this.page.locator('//table//td[contains(text(),"Onc History Created")]/following-sibling::td');
   }
 
   /* XPaths */
@@ -120,7 +139,7 @@ export default class ParticipantPage {
   }
 
   public async assertNotesToBe(value: string): Promise<void> {
-    await expect(await this.notes.inputValue(),
+    expect(await this.notes.inputValue(),
       "Participant page - participant's value doesn't match the provided one")
       .toBe(value);
   }

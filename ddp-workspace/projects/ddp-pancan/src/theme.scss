@@ -2,6 +2,8 @@
 @import '@angular/material/theming';
 @import 'styles/variables';
 
+mat.$theme-ignore-duplication-warnings: true;
+
 $custom-typography: mat.define-typography-config($font-family: $primary-font);
 @include mat.core($custom-typography);
 

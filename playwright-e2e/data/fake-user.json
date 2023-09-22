@@ -27,6 +27,15 @@
     "zip": "02142-1027",
     "phone": "6177147000",
     "secondaryPhoneNumber": "6171234000"
+  }, "brother": {
+    "firstName": "Test Brother",
+    "lastName": "Playwright",
+    "relationshipID": "14"
+  },
+  "maternalGrandFather": {
+    "firstName": "Test Maternal Grandfather",
+    "lastName": "Playwright",
+    "relationshipID": "70"
   },
   "doctor": {
     "name": "John Strange",
@@ -102,7 +111,20 @@
     "streetAddress": "415 Main Street",
     "city": "Cambridge",
     "zip": "02142-1027",
-    "phone": "6177147000"
+    "phone": "6177147000",
+    "doctor": {
+      "fullName": "Will Stone",
+      "firstName": "Will",
+      "lastName": "Stone",
+      "specialty": "PRIMARY_CARE",
+      "phone": "6172223333",
+      "hospital": "Massachusetts General Hospital",
+      "address": "55 Fruit Street, Boston, MA 02114",
+      "street": "55 Fruit Street",
+      "city": "Boston",
+      "state": "MA",
+      "zip": "02114"
+    }
   },
   "adultDependent": {
     "firstName": "E2E-Adult-Dependent",

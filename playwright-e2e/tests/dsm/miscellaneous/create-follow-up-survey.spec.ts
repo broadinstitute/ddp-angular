@@ -5,6 +5,7 @@ import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import FollowUpSurveyPage from 'dsm/pages/follow-up-survey-page';
 import { getDate } from 'utils/date-utils';
 import { generateAlphaNumeric, generateRandomNum } from 'utils/faker-utils';
+import { waitForResponse } from 'utils/test-utils';
 
 
 test.describe('Create Follow-Up Survey', () => {
@@ -63,15 +64,15 @@ test.describe('Create Follow-Up Survey', () => {
       await followupSurveyPage.createSurvey();
 
       // Verify new survey created
-      const responsePromise = page.waitForResponse(resp => resp.url().includes('surveyName='));
+      const responsePromise = waitForResponse(page, { uri: 'surveyName=' });
       await followupSurveyPage.reloadTable();
       const response = await responsePromise;
 
       const json = JSON.parse(await response.text());
       const filterResult = json.filter((item: { surveyInfo: { participantId: string | null; }; reason: string; }) => {
           return item.surveyInfo.participantId === participantId && item.reason === reason
-        })
-      await expect(filterResult.length).toEqual(1);
+        });
+      expect(filterResult.length).toBe(1);
     });
   }
 
@@ -92,4 +93,4 @@ test.describe('Create Follow-Up Survey', () => {
     }
     return survey;
   }
-})
+});

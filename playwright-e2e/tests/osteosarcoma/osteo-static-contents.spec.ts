@@ -1,6 +1,8 @@
 import { test } from 'fixtures/osteo-fixture';
 
-test('Osteo Static Content @osteo', async ({ page }) => {
+test('Osteo Static Content @dss @osteo', async ({ page }) => {
+  test.slow();
+
   await page
     .getByRole('heading', {
       name: 'Together, the osteosarcoma community has the power to move research forward'

@@ -1,13 +1,15 @@
 <h2 class="title static-page-title" translate>App.HomePage.ParticipateSection.Title</h2>
 <div class="steps container">
-    <div class="step" *ngFor="let step of 'App.HomePage.ParticipateSection.Steps' | translate; let i = index;">
+    <div class="step" *ngFor="let step of
+    (isPediHCCTheme ? 'App.PedihccPage.ParticipateSection.Steps' :'App.HomePage.ParticipateSection.Steps') | translate;
+    let i = index;">
         <div class="step__image-container">
             <img class="step__image"
                  [src]="'assets/images/' + participationStepsImages[i]"
                  width="150" height="150"
                  [alt]="step.ImageAlt">
         </div>
-        <div class="step__info">
+        <div class="step__info" [style.height]="isPediHCCTheme ? '257px' : '219px'">
             <div class="step__info-background"></div>
             <div class="step__info-text">
                 <div class="step__title participate-step-label">{{step.Title}}</div>
@@ -20,7 +22,7 @@
     </div>
 </div>
 <div class="container container__button">
-    <a *ngIf="isColorectalTheme; else strokedButton"
+    <a *ngIf="isColorectalTheme || isPediHCCTheme; else strokedButton"
        mat-flat-button
        [routerLink]="'/' + AppRoutes.Participation"
        queryParamsHandling="merge"

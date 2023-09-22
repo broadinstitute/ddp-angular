@@ -15,6 +15,8 @@ import {MiscellaneousEnum} from 'dsm/component/navigation/enums/miscellaneousNav
 import KitsSentPage from 'dsm/pages/kitsInfo-pages/kitsSentPage';
 import KitsReceivedPage from 'dsm/pages/kitsInfo-pages/kitsReceived-page/kitsReceivedPage';
 import TrackingScanPage from 'dsm/pages/scanner-pages/trackingScan-page';
+import RgpFinalScanPage from 'dsm/pages/scanner-pages/rgpFinalScan-page';
+import ErrorPage from 'dsm/pages/samples/error-page';
 
 
 type Selection = StudyNavEnum | StudyEnum | SamplesNavEnum | MiscellaneousEnum;
@@ -27,9 +29,11 @@ export class Navigation {
       [SamplesNavEnum.INITIAL_SCAN, new InitialScanPage(this.page)],
       [SamplesNavEnum.TRACKING_SCAN, new TrackingScanPage(this.page)],
       [SamplesNavEnum.FINAL_SCAN, new FinalScanPage(this.page)],
+      [SamplesNavEnum.RGP_FINAL_SCAN, new RgpFinalScanPage(this.page)],
       [SamplesNavEnum.KIT_UPLOAD, new KitUploadPage(this.page)],
       [SamplesNavEnum.SENT, new KitsSentPage(this.page)],
       [SamplesNavEnum.RECEIVED, new KitsReceivedPage(this.page, this.request)],
+      [SamplesNavEnum.ERROR, new ErrorPage(this.page)],
     ])
   };
 

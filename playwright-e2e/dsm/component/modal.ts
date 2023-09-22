@@ -9,7 +9,7 @@ export default class Modal {
 
   constructor(private readonly page: Page) {
     this.page = page;
-    this.rootSelector = this.page.locator('.modal-dialog');
+    this.rootSelector = this.page.locator('app-modal, .modal-dialog');
   }
 
   public toLocator(): Locator {

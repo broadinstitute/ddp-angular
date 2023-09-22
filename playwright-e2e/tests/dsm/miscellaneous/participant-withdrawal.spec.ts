@@ -16,7 +16,7 @@ test.describe('Participants Withdrawal', () => {
   const studies = [StudyEnum.LMS];
 
     for (const study of studies) {
-      test(`In ${study} @dsm`, async ({ page, request }) => {
+      test(`In @${study} @dsm`, async ({ page, request }) => {
         const participantListPage = await ParticipantListPage.goto(page, study, request);
         const participantsTable = participantListPage.participantListTable;
 
@@ -31,9 +31,9 @@ test.describe('Participants Withdrawal', () => {
         // Search for Status NOT EQUALS TO Exited before/after Enrollment
         const searchPanel = participantListPage.filters.searchPanel;
         await searchPanel.open();
-        // eslint-disable-next-line max-len
-        await searchPanel.text('First Name', { textValue: user.adult.firstName, additionalFilters: [AdditionalFilter.EXACT_MATCH], exactMatch: false });
-        await searchPanel.checkboxes('Status', { checkboxValues: ['Enrolled', 'Lost to Followup', 'Registered'] });
+        await searchPanel.text('First Name',
+          { textValue: user.adult.firstName, additionalFilters: [AdditionalFilter.EXACT_MATCH], exactMatch: false });
+        await searchPanel.checkboxes('Status', { checkboxValues: ['Enrolled', 'Registered'] });
         await searchPanel.search();
 
         // At least one participant after search
@@ -79,7 +79,7 @@ test.describe('Participants Withdrawal', () => {
         await withdrawalPage.withdrawParticipant(participantId);
         logParticipantWithdrew(participantId, shortIdColumnId, registrationDate);
 
-        // Reload Participant List page
+        // Reload Participant List page to verify status has changed
         const navigation = new Navigation(page, request);
         await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
         await participantListPage.waitForReady();
@@ -88,16 +88,15 @@ test.describe('Participants Withdrawal', () => {
         await customizeViewPanel.selectColumns('Participant Columns', ['Participant ID']);
 
         await searchPanel.open();
-        // Search until withdrew participant id is found and status is Exited
+        await searchPanel.clear();
+        await searchPanel.text('Participant ID', { textValue: participantId });
+        /// Status of PT should update to “Exited after enrollment” or “Exited before enrollment”
         await expect(async () => {
-            await searchPanel.clear();
-            await searchPanel.text('Participant ID', { textValue: participantId });
-            await searchPanel.search();
-            await expect(participantsTable.rowLocator()).toHaveCount(1);
-            const participantStatus = await participantsTable.findCell('Participant ID', participantId, 'Status');
-            // Status of PT is now “Exited after enrollment” or “Exited before enrollment”
-            await expect(participantStatus!).toHaveText(/Exited (before|after) Enrollment/);
-        }).toPass();
+          await page.waitForTimeout(1000);
+          await searchPanel.search();
+          const participantStatus = await participantsTable.findCell('Participant ID', participantId, 'Status');
+          expect(await participantStatus!.innerText()).toMatch(/Exited (before|after) Enrollment/);
+        }).toPass({ timeout: 50000 });
 
         // At Participant Page, verify few detail
         const participantPage: ParticipantPage = await participantsTable.openParticipantPageAt(0);

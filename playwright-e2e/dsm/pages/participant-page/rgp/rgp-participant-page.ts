@@ -1,5 +1,5 @@
 import Select from 'dss/component/select';
-import ParticipantPage from '../participant-page';
+import ParticipantPage from 'dsm/pages/participant-page/participant-page';
 import { Locator, Page, expect } from '@playwright/test';
 
 /**
@@ -13,6 +13,7 @@ export default class RgpParticipantPage extends ParticipantPage {
     public get addFamilyMemberDialog() {
         const page = this.page;
         const modal = '[role="dialog"]';
+        const familyMemberAddedSuccessfullyModal = 'app-participant-update-result-dialog';
 
         return new class {
             async _open(): Promise<void> {
@@ -70,8 +71,8 @@ export default class RgpParticipantPage extends ParticipantPage {
                 const selectedRelation = await this.relation.toLocator().locator('.mat-select-value-text').innerText();
                 await this.submit.click();
 
-                await expect(page.locator(modal)).toHaveText('Successfully added family member');
-                await page.locator('h1').click(); // close popup with a click outside
+                await expect(page.locator(familyMemberAddedSuccessfullyModal)).toHaveText('Successfully added family member');
+                await page.keyboard.press('Escape'); //Press Escape key to close the 'Successfully Added Family Member' dialog
 
                 return selectedRelation;
             }

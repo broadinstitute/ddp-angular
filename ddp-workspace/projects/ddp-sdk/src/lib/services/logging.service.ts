@@ -2,7 +2,7 @@ import { Injectable, Inject } from '@angular/core';
 import { ConfigurationService } from './configuration.service';
 import { LogLevel } from '../models/logLevel';
 import { StackdriverErrorReporterService } from './stackdriverErrorReporter.service';
-import { catchError, map } from 'rxjs/operators';
+import { catchError, map, take } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { SessionMementoService } from './sessionMemento.service';
@@ -22,11 +22,11 @@ export class LoggingService {
 
     public logError: Logger = this.showEvent(LogLevel.Error) ?
         (...args) => {
-            const stringifiedArgs = args.map(item => (
-                 (typeof item === 'object') ? this.stringify(item) : item
-            ));
-
-            this.stackdriverErrorReporterService.handleError(stringifiedArgs.join(', '));
+            const stringifiedArgs = args.map((arg) => {
+                let str = (typeof arg === 'object') ? this.stringify(arg) : arg;
+                return str += arg instanceof Error ? `, ${arg.stack}` : '';
+            });
+            this.logToCloud(stringifiedArgs.join(',\n'), null, 'ERROR').pipe(take(1)).subscribe();
             console.error.apply(window.console, stringifiedArgs);
         }
       : () => { };
@@ -42,7 +42,10 @@ export class LoggingService {
     }
 
     private stringify(obj: object): string {
-        return Object.keys(obj).map(key => `${key}: ${obj[key]}`).join(', ');
+        return Object.keys(obj).map(key => {
+            const value = obj[key];
+            return (typeof value === 'object') ? `${key}: ${JSON.stringify(value)}` : `${key}: ${value}`;
+        }).join(', ');
     }
 
     public logToCloud(payload: string, labels?: {[key: string]: string}, severity = 'INFO'): Observable<void> {
@@ -64,7 +67,9 @@ export class LoggingService {
             body,
             { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) }).pipe(
             catchError((error: any) => {
-                this.logError(this.LOG_SOURCE, `HTTP POST: ${url}. Error:`, error);
+                this.stackdriverErrorReporterService.handleError(`${this.LOG_SOURCE}: HTTP POST: ${url}`);
+                this.stackdriverErrorReporterService.handleError(error);
+                console.error.apply(window.console, error);
                 return of(null);
             }),
             map(() => void 0)

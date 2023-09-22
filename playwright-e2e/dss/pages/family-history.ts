@@ -1,6 +1,6 @@
 import { Page } from '@playwright/test';
 import Question from 'dss/component/Question';
-import { booleanToYesOrNo } from 'utils/test-utils';
+import { booleanToYesOrNo, waitForResponse } from 'utils/test-utils';
 import { CancerSelector } from 'dss/pages/cancer-selector';
 import { BrainBasePage } from 'dss/pages/brain/brain-base-page';
 
@@ -138,7 +138,9 @@ export class FamilyHistory extends BrainBasePage {
         .selectOption({ label: p.sexAtBirth });
     }
 
-    await this.page.getByRole('button', { name: 'Save' }).click();
-    await this.page.waitForResponse((resp) => resp.url().includes('/summary') && resp.status() === 200);
+    await Promise.all([
+      waitForResponse(this.page, { uri: '/summary' }),
+      this.page.getByRole('button', { name: 'Save' }).click(),
+    ]);
   }
 }
