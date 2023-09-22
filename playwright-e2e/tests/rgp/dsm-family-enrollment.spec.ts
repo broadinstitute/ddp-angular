@@ -251,11 +251,12 @@ test.describe.serial('DSM Family Enrollment Handling', () => {
     //Checking textarea content
     const importantNotesTextarea = proband.getImportantNotes();
     const processNotesTextarea = proband.getProcessNotes();
-    const mixedRaceTextarea = proband.getMixedRaceNotes();
+    //const mixedRaceTextarea = proband.getMixedRaceNotes();
+    const mixedRaceTextarea = await proband.getMixedRaceNotesContent();
     expect(await importantNotesTextarea.inputValue()).toBe(importantNotes);
     expect(await processNotesTextarea.inputValue()).toBe(processNotes);
-    expect(mixedRaceNotes).toBe(mixedRaceTestingNotes); //Check notes again to see what's happening
-    expect(await mixedRaceTextarea.inputValue()).toBe(mixedRaceNotes);
+    expect(mixedRaceTextarea).toBe(mixedRaceTestingNotes);
+    //expect(await mixedRaceTextarea.inputValue()).toBe(mixedRaceNotes);
 
     //Fill out Contact Info section
     const contactInfoSection = proband.getContactInfoSection();
@@ -374,8 +375,11 @@ test.describe.serial('DSM Family Enrollment Handling', () => {
     console.log(`Participant Referral Source: ${participantReferralSource}`);
     await probandTab.click();
     await medicalRecordsSection.click();
+
     const referralSource = proband.getReferralSource();
-    await expect(referralSource).toHaveText(participantReferralSource);
+    await referralSource.scrollIntoViewIfNeeded();
+    await expect(referralSource, `ERROR: RGP Referral Source - Expected '${participantReferralSource}' but got: ${await referralSource.innerText()}`)
+    .toHaveText(participantReferralSource);
 
     await proband.inputReferralNotes('Testing notes here - Referral Notes');
 
