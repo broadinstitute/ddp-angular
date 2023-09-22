@@ -254,6 +254,7 @@ test.describe.serial('DSM Family Enrollment Handling', () => {
     const mixedRaceTextarea = proband.getMixedRaceNotes();
     expect(await importantNotesTextarea.inputValue()).toBe(importantNotes);
     expect(await processNotesTextarea.inputValue()).toBe(processNotes);
+    expect(mixedRaceNotes).toBe(mixedRaceTestingNotes); //Check notes again to see what's happening
     expect(await mixedRaceTextarea.inputValue()).toBe(mixedRaceNotes);
 
     //Fill out Contact Info section
@@ -364,10 +365,17 @@ test.describe.serial('DSM Family Enrollment Handling', () => {
     const familyProvidedURL = proband.getFamilyUrlProvided();
     await familyProvidedURL.fill('https://en.wikipedia.org/wiki/Broad_Institute');
 
-    //todo Update testing Referral Source to check for functionality from ticket PEPPER-575 (ticket in-progress)
+    //Check Survey Data to get the referral source and then check the proband tab to make sure the related source is selected as expected
+    const surveyData = proband.getSurveyDataTab();
+    await surveyData.scrollIntoViewIfNeeded();
+    await surveyData.click();
+
+    const participantReferralSource = await proband.getStudyParticipantResponseForReferralSource();
+    console.log(`Participant Referral Source: ${participantReferralSource}`);
+    await probandTab.click();
+    await medicalRecordsSection.click();
     const referralSource = proband.getReferralSource();
-    await referralSource.click();
-    await dropdownOptions.filter({ hasText: 'Doctor' }).click();
+    await expect(referralSource).toHaveText(participantReferralSource);
 
     await proband.inputReferralNotes('Testing notes here - Referral Notes');
 

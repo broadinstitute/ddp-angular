@@ -1,6 +1,7 @@
 import { expect, Locator, Page } from '@playwright/test';
 import { FamilyMember } from 'dsm/component/tabs/enums/familyMember-enum';
 import TextArea from 'dss/component/textarea';
+import { find } from 'lodash';
 import { waitForResponse } from 'utils/test-utils';
 
 /**
@@ -107,6 +108,11 @@ export default class FamilyMemberTab {
 
     public getJumpToMenuText(): Locator {
         return this.page.getByRole('tabpanel').getByText('Jump to:');
+    }
+
+    //todo Should probably make this a more general method to be applied across studies
+    public getSurveyDataTab(): Locator {
+      return this.page.locator(`//app-participant-page//ul//a[contains(., 'Survey Data')]`);
     }
 
     public getParticipantInfoMenuLink(): Locator {
@@ -281,8 +287,9 @@ export default class FamilyMemberTab {
         await textarea.clear();
         await Promise.all([
             waitForResponse(this.page, {uri: 'ui/patch'}),
-            textarea.fill(notes)
+            textarea.fill(notes),
         ]);
+        console.log(`Textarea text: ${await textarea.getText()}`);
     }
 
     /**
@@ -642,7 +649,50 @@ export default class FamilyMemberTab {
         return this.page.locator("//td[contains(text(), 'RedCap Survey Completed Date')]/following-sibling::td//div/input");
     }
 
+    public getTellUsAboutYourFamilySection(): Locator {
+        return this.page.locator(`//app-activity-data//mat-expansion-panel[@id='ENROLLMENT']`);
+    }
+
+    private howDidYouFindOutAboutThisProjectSection(): Locator {
+        return this.page.locator(`//app-activity-data//h5[contains(., 'FIND_OUT')]`);
+    }
+
+    private async getAllParticipantReferralSources(): Promise<Locator[]> {
+      const findOutSection = this.howDidYouFindOutAboutThisProjectSection();
+      //Uses the following xpath to get all listed sources: //app-activity-data//h5[contains(., 'FIND_OUT')]/parent::div//div//ul[@class='ng-star-inserted']
+      return findOutSection.locator(`/parent::div//div//ul[contains(@class, 'ng-star-inserted')]`).all();
+    }
+
+    private getSingleReferralSource(): Locator {
+      const findOutSection = this.howDidYouFindOutAboutThisProjectSection();
+      return findOutSection.locator(`/parent::div//div//ul[@class='ng-star-inserted']//li//b`);
+    }
+
     /* Utility methods */
+    public async getStudyParticipantResponseForReferralSource(): Promise<string> {
+      const surveyData = this.getSurveyDataTab();
+      await surveyData.click();
+      await expect(surveyData, 'ERROR - RGP: Survey Data tab is not selected').toHaveAttribute('aria-selected', 'true');
+
+      const tellUsAboutYourFamilySection = this.getTellUsAboutYourFamilySection();
+      await expect(tellUsAboutYourFamilySection, 'ERROR - RGP: Tell Us About Your Family section is not visible in Survey Data tab').toBeVisible();
+      await tellUsAboutYourFamilySection.click();
+
+      const participantReferralSources = this.getAllParticipantReferralSources();
+      const amountOfReferralSources = (await participantReferralSources).length;
+      let referralSource = 'unknown';
+
+      //Determine the official referral source based on how many sources the study participant selected/provided
+      if (amountOfReferralSources === 0) {
+        referralSource = 'Not provided';
+      } else if (amountOfReferralSources === 1) {
+        referralSource = await this.getSingleReferralSource().innerText();
+      } else if (amountOfReferralSources > 1) {
+        referralSource = 'More than one';
+      }
+      return referralSource;
+    }
+
     public async setRandomRelationshipID(): Promise<void> {
         const usedRelationshipIDs = await this.getListOfUsedSubjectIDs();
         let searchingForID = true;
