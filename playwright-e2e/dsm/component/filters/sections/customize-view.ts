@@ -1,5 +1,6 @@
 import { Locator, Page } from '@playwright/test';
 import Checkbox from 'dss/component/checkbox';
+import { check } from 'utils/test-utils';
 
 export class CustomizeView {
   private activeColumnsGroup = '';
@@ -41,16 +42,7 @@ export class CustomizeView {
 
   private async selectOrDeselect(columnName: string, deselect = false): Promise<void> {
     const checkbox = this.columnCheckbox(columnName);
-    const checked = await checkbox.isChecked();
-    if (deselect) {
-      if (checked) {
-        return checkbox.check();
-      }
-      return;
-    }
-    if (!checked) {
-      return checkbox.check();
-    }
+    deselect ? await checkbox.uncheck() : await checkbox.check();
   }
 
   private async openColumnsGroup(opts: { nth?: number } = {}): Promise<void> {
@@ -104,6 +96,6 @@ export class CustomizeView {
   }
 
   private columnCheckbox(columnName: string): Checkbox {
-    return new Checkbox(this.page, { root: this.columnsGroupXPath, label: columnName })
+    return new Checkbox(this.page, { root: this.columnsGroupXPath, label: columnName, exactMatch: true })
   }
 }

@@ -105,13 +105,7 @@ const testConfig: PlaywrightTestConfig = {
     {
       name: 'dss',
       testDir: 'tests',
-      testIgnore: ['dsm/**/*.spec.ts'],
-      use: {}
-    },
-    {
-      name: 'kit',
-      testDir: 'tests/dsm/kitUploadFlow',
-      fullyParallel: false,
+      testIgnore: ['tests/dsm/**/*.spec.ts'],
       use: {}
     }
   ]
