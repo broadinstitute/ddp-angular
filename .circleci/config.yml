@@ -691,21 +691,6 @@ jobs:
             cat playwright-env/envvars | awk '{print "export " $0}' >> "$BASH_ENV"
             source $BASH_ENV
       - run:
-          name: "Update node.js and npm"
-          command: |
-            set +e
-            wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.36.0/install.sh | bash
-            
-            export NVM_DIR="$HOME/.nvm"
-            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-            [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
-
-            nvm install v18
-            nvm alias default 18.18.0
-
-            echo 'export NVM_DIR="$HOME/.nvm"' >> $BASH_ENV
-            echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"' >> $BASH_ENV
-      - run:
           name: Check current version of node
           command: node -v
       - run:
