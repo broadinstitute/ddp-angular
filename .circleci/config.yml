@@ -670,7 +670,7 @@ jobs:
         enum: [ dev, test, staging, prod, UNKNOWN ]
       parallelism_num:
         type: integer
-        default: 1
+        default: 2
       test_suite:
         # to trigger E2E tests with labels matching study key:
         # [basil, osteo, angio, brain, mbc, testboston, mpc, atcp, rarex, rgp, esc, prion, cgc, circadia, pancan, singular, brugada, lms, fon]
@@ -699,16 +699,25 @@ jobs:
       - run:
           working_directory: *playwright_path
           command: npx playwright install --with-deps chromium # Only need Chrome browser
-
+      - run: echo ${CIRCLE_NODE_INDEX}
       - run:
-          name: Running Playwright tests on << parameters.env >>
+          name: Run all DSM tests on << parameters.env >>: CIRCLE_NODE_INDEX == 0
           working_directory: *playwright_path
-          command: |            
-            npx playwright test --list | grep -o 'tests/.*.spec.ts' | sort | uniq > e2e_tests.txt
-            TESTS_FILE=$(circleci tests split --split-by=timings --timings-type=classname e2e_tests.txt)
-            echo $TESTS_FILE
-            npm run test:ci $TESTS_FILE
-          no_output_timeout: 5m # Default is 10m. Set shorter time to ensure CI fails faster if test hangs
+          command: |
+            if [ ${CIRCLE_NODE_INDEX} == "0" ];
+            then
+              npx playwright test --project="dsm"
+            fi
+          no_output_timeout: 5m
+      - run:
+          name: Run all DSS tests on << parameters.env >>: CIRCLE_NODE_INDEX == 1
+          working_directory: *playwright_path
+          command: |
+            if [ ${CIRCLE_NODE_INDEX} == "1" ];
+            then
+              npx playwright test --project="dss"
+            fi
+          no_output_timeout: 5m
       - store_test_results:
           path: playwright-e2e/junit
       - store_artifacts:
