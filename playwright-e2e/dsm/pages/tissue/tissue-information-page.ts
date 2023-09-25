@@ -197,8 +197,8 @@ export default class TissueInformationPage {
       const isModalBtnDisabled = await yesBtn.isDisabled();
       if (!isModalBtnDisabled) {
         await yesBtn.click();
+        await yesBtn.toLocator().waitFor({ state: 'detached' });
         const successModalBtn = new Button(this.page, { root: this.page.locator('app-modal'), label: 'Ok', exactMatch: true });
-        await waitForResponse(this.page, { uri: 'institutions' });
         await successModalBtn.click();
       }
     }
