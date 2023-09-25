@@ -693,8 +693,8 @@ jobs:
       - run:
           name: "Update node.js and npm"
           command: |
-            curl -sSL "https://nodejs.org/dist/latest-v18.x//node-v18.18.0-linux-x64.tar.xz" | sudo tar --strip-components=2 -xJ -C /usr/local/bin/ node-v18.18.0-linux-x64/bin/node
-            curl https://www.npmjs.com/install.sh | sudo bash
+            curl -sSL "https://nodejs.org/dist/latest-v18.x//node-v18.18.0-linux-x64.tar.xz" | tar --strip-components=2 -xJ -C /usr/local/bin/ node-v18.18.0-linux-x64/bin/node
+            curl https://www.npmjs.com/install.sh | bash
       - run:
           name: Check current version of node
           command: node -v
