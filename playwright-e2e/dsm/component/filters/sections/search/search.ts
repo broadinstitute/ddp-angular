@@ -33,6 +33,10 @@ export class Search {
   public async dates(columnName: string, { from: fromValue, to: toValue, additionalFilters }: Partial<DateConfig>): Promise<void> {
     await this.setAdditionalFilters(columnName, additionalFilters);
 
+    if (!fromValue && !toValue) {
+      return;
+    }
+
     let fromDate!: string;
     let toDate!: string;
 
