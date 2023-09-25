@@ -701,7 +701,7 @@ jobs:
           command: npx playwright install --with-deps chromium # Only need Chrome browser
       - run: echo ${CIRCLE_NODE_INDEX}
       - run:
-          name: Run all DSM tests on << parameters.env >>: CIRCLE_NODE_INDEX == 0
+          name: Run all DSM tests on << parameters.env >> CIRCLE_NODE_INDEX = 0
           working_directory: *playwright_path
           command: |
             if [ ${CIRCLE_NODE_INDEX} == "0" ];
@@ -710,7 +710,7 @@ jobs:
             fi
           no_output_timeout: 5m
       - run:
-          name: Run all DSS tests on << parameters.env >>: CIRCLE_NODE_INDEX == 1
+          name: Run all DSS tests on << parameters.env >> CIRCLE_NODE_INDEX = 1
           working_directory: *playwright_path
           command: |
             if [ ${CIRCLE_NODE_INDEX} == "1" ];
