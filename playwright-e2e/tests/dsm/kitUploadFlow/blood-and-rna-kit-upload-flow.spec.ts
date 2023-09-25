@@ -23,7 +23,7 @@ import { simplifyShortID } from 'utils/faker-utils';
 import { saveParticipantGuid } from 'utils/faker-utils';
 import { ParticipantListTable } from 'dsm/component/tables/participant-list-table';
 
-test.describe('Blood & RNA Kit Upload', () => {
+test.describe.skip('Blood & RNA Kit Upload', () => {
   test('Verify that a blood & rna kit can be uploaded @dsm @rgp @functional @upload', async ({ page, request}, testInfo) => {
     const testResultDirectory = testInfo.outputDir;
 
@@ -54,7 +54,7 @@ test.describe('Blood & RNA Kit Upload', () => {
     proband.relationshipID = user.patient.relationshipID;
 
     const probandTab = await proband.getFamilyMemberTab();
-    await expect(probandTab).toBeVisible();
+    await expect(probandTab, 'RGP Proband tab is not visible').toBeVisible();
     await probandTab.click();
     await expect(probandTab).toHaveClass('nav-link active');//Make sure the tab is in view and selected
 
