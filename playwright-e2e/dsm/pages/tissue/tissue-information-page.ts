@@ -188,23 +188,26 @@ export default class TissueInformationPage {
   /* Helper Functions */
   private async applyToAll(root: Locator): Promise<void> {
     const applyToAllBtn = new Button(this.page, { root, label: 'APPLY TO ALL', exactMatch: true });
-    const isApplyToAllBtnDisabled = await applyToAllBtn.isDisabled();
 
     await applyToAllBtn.click();
     await this.page.waitForTimeout(2000); // Important: Don't do anything for 2 seconds
 
-    const modal = new Modal(this.page);
-    const yesBtn = modal.getButton({ label: 'Yes' }).toLocator();
-    await yesBtn.waitFor({ state: 'attached'});
-    const isBtnDisabled = await yesBtn.isDisabled();
-    if (!isBtnDisabled) {
-      await yesBtn.click({force: true});
-      await yesBtn.waitFor({ state: 'detached' }); // modal close
-      await this.page.waitForTimeout(500); // Important: Don't do anything for half second
-      await expect(modal.bodyLocator()).toHaveText(/Successfully/); // new modal window
-      const successModalBtn = modal.getButton({ label: 'Ok' });
-      await successModalBtn.click();
-    }
+    const modal1 = new Modal(this.page);
+    await expect(modal1.bodyLocator()).toHaveText(/Are you sure you want to change the destruction policy for all of the tissues from this facility/);
+
+    const yesBtn = modal1.getButton({ label: 'Yes' }).toLocator();
+    await expect(yesBtn).toBeVisible();
+    await Promise.all([
+      waitForResponse(this.page, { uri: '/institutions' }),
+      yesBtn.click(),
+    ]);
+    await this.page.waitForTimeout(100); // Important: Don't do anything for a second
+
+    const modal2 = new Modal(this.page);
+    await Promise.all([
+      expect(modal2.bodyLocator()).toHaveText(/Successfully/),
+      modal2.getButton({ label: 'Ok' }).toLocator().click(),
+    ]);
   }
 
   private async fillFaxSentDate(dateIndex: number, date: FillDate): Promise<void> {
