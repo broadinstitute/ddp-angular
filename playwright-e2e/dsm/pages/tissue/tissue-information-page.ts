@@ -9,6 +9,7 @@ import Tissue from 'dsm/component/tissue';
 import Checkbox from 'dss/component/checkbox';
 import Button from 'dss/component/button';
 import Input from 'dss/component/input';
+import Modal from 'dsm/component/modal';
 
 
 export default class TissueInformationPage {
@@ -186,21 +187,23 @@ export default class TissueInformationPage {
 
   /* Helper Functions */
   private async applyToAll(root: Locator): Promise<void> {
-    const applyToAllBtn = new Button(this.page,
-      { root, label: 'APPLY TO ALL', exactMatch: true }
-    );
+    const applyToAllBtn = new Button(this.page, { root, label: 'APPLY TO ALL', exactMatch: true });
     const isApplyToAllBtnDisabled = await applyToAllBtn.isDisabled();
-    if (!isApplyToAllBtnDisabled) {
-      await applyToAllBtn.click();
-      const yesBtn = new Button(this.page, { root: this.page.locator('app-modal'), label: 'Yes', exactMatch: true });
-      await yesBtn.toLocator().waitFor({ state: 'attached'});
-      const isModalBtnDisabled = await yesBtn.isDisabled();
-      if (!isModalBtnDisabled) {
-        await yesBtn.click();
-        await yesBtn.toLocator().waitFor({ state: 'detached' });
-        const successModalBtn = new Button(this.page, { root: this.page.locator('app-modal'), label: 'Ok', exactMatch: true });
-        await successModalBtn.click();
-      }
+
+    await applyToAllBtn.click();
+    await this.page.waitForTimeout(2000); // Important: Don't do anything for 2 seconds
+
+    const modal = new Modal(this.page);
+    const yesBtn = modal.getButton({ label: 'Yes' }).toLocator();
+    await yesBtn.waitFor({ state: 'attached'});
+    const isBtnDisabled = await yesBtn.isDisabled();
+    if (!isBtnDisabled) {
+      await yesBtn.click({force: true});
+      await yesBtn.waitFor({ state: 'detached' }); // modal close
+      await this.page.waitForTimeout(500); // Important: Don't do anything for half second
+      await expect(modal.bodyLocator()).toHaveText(/Successfully/); // new modal window
+      const successModalBtn = modal.getButton({ label: 'Ok' });
+      await successModalBtn.click();
     }
   }
 
