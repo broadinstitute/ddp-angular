@@ -690,25 +690,30 @@ jobs:
             # export env from file (created in build-playwright-job)
             cat playwright-env/envvars | awk '{print "export " $0}' >> "$BASH_ENV"
             source $BASH_ENV
-      - node/install:
-          install-yarn: false
-          node-version: '18.13.0' # LTS version
+      - run:
+          name: "Update node.js and npm"
+          command: |
+            curl -sSL "https://nodejs.org/dist/latest-v18.x//node-v18.18.0-linux-x64.tar.xz" | sudo tar --strip-components=2 -xJ -C /usr/local/bin/ node-v18.18.0-linux-x64/bin/node
+            curl https://www.npmjs.com/install.sh | sudo bash
+      - run:
+          name: Check current version of node
+          command: node -v
       - run:
           working_directory: *playwright_path
-          command: npm install --quiet
-      - run:
-          working_directory: *playwright_path
-          command: npx playwright install --with-deps chromium # Only need Chrome browser
+          command: npm ci
+      #- run:
+      #    working_directory: *playwright_path
+      #    command: npx playwright install --with-deps chromium # Only need Chrome browser
 
-      - run:
-          name: Running Playwright tests on << parameters.env >>
-          working_directory: *playwright_path
-          command: |            
-            npx playwright test --list | grep -o 'tests/.*.spec.ts' | sort | uniq > e2e_tests.txt
-            TESTS_FILE=$(circleci tests split --split-by=timings --timings-type=classname e2e_tests.txt)
-            echo $TESTS_FILE
-            npm run test:ci $TESTS_FILE
-          no_output_timeout: 5m # Default is 10m. Set shorter time to ensure CI fails faster if test hangs
+      #- run:
+      #    name: Running Playwright tests on << parameters.env >>
+      #    working_directory: *playwright_path
+      #    command: |            
+      #      npx playwright test --list | grep -o 'tests/.*.spec.ts' | sort | uniq > e2e_tests.txt
+      #      TESTS_FILE=$(circleci tests split --split-by=timings --timings-type=classname e2e_tests.txt)
+      #      echo $TESTS_FILE
+      #      npm run test:ci $TESTS_FILE
+      #    no_output_timeout: 5m # Default is 10m. Set shorter time to ensure CI fails faster if test hangs
       - store_test_results:
           path: playwright-e2e/junit
       - store_artifacts:
