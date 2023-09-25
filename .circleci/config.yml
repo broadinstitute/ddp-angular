@@ -696,19 +696,19 @@ jobs:
       - run:
           working_directory: *playwright_path
           command: npm ci
-      #- run:
-      #    working_directory: *playwright_path
-      #    command: npx playwright install --with-deps chromium # Only need Chrome browser
+      - run:
+          working_directory: *playwright_path
+          command: npx playwright install --with-deps chromium # Only need Chrome browser
 
-      #- run:
-      #    name: Running Playwright tests on << parameters.env >>
-      #    working_directory: *playwright_path
-      #    command: |            
-      #      npx playwright test --list | grep -o 'tests/.*.spec.ts' | sort | uniq > e2e_tests.txt
-      #      TESTS_FILE=$(circleci tests split --split-by=timings --timings-type=classname e2e_tests.txt)
-      #      echo $TESTS_FILE
-      #      npm run test:ci $TESTS_FILE
-      #    no_output_timeout: 5m # Default is 10m. Set shorter time to ensure CI fails faster if test hangs
+      - run:
+          name: Running Playwright tests on << parameters.env >>
+          working_directory: *playwright_path
+          command: |            
+            npx playwright test --list | grep -o 'tests/.*.spec.ts' | sort | uniq > e2e_tests.txt
+            TESTS_FILE=$(circleci tests split --split-by=timings --timings-type=classname e2e_tests.txt)
+            echo $TESTS_FILE
+            npm run test:ci $TESTS_FILE
+          no_output_timeout: 5m # Default is 10m. Set shorter time to ensure CI fails faster if test hangs
       - store_test_results:
           path: playwright-e2e/junit
       - store_artifacts:
