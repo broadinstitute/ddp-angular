@@ -192,16 +192,14 @@ export default class TissueInformationPage {
     const isApplyToAllBtnDisabled = await applyToAllBtn.isDisabled();
     if (!isApplyToAllBtnDisabled) {
       await applyToAllBtn.click();
-      const modalBtn = new Button(this.page, { root: this.page.locator('app-modal'), label: 'Yes', exactMatch: true }
-      );
-      await modalBtn.toLocator().waitFor({ state: 'attached'});
-      const isModalBtnDisabled = await modalBtn.isDisabled();
+      const yesBtn = new Button(this.page, { root: this.page.locator('app-modal'), label: 'Yes', exactMatch: true });
+      await yesBtn.toLocator().waitFor({ state: 'attached'});
+      const isModalBtnDisabled = await yesBtn.isDisabled();
       if (!isModalBtnDisabled) {
-        await modalBtn.click();
-
+        await yesBtn.click();
         const successModalBtn = new Button(this.page, { root: this.page.locator('app-modal'), label: 'Ok', exactMatch: true });
         await waitForResponse(this.page, { uri: 'institutions' });
-        await successModalBtn.isVisible() && await successModalBtn.click();
+        await successModalBtn.click();
       }
     }
   }
