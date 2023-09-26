@@ -699,7 +699,6 @@ jobs:
       - run:
           working_directory: *playwright_path
           command: npx playwright install --with-deps chromium # Only need Chrome browser
-      - run: echo ${CIRCLE_NODE_INDEX}
       - run:
           name: Running Playwright tests on << parameters.env >>
           working_directory: *playwright_path
