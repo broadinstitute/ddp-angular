@@ -44,7 +44,7 @@ test.describe.serial('Blood Kit Upload', () => {
   const studies = [StudyEnum.LMS]; // StudyEnum.OSTEO2;
   const kitType = KitTypeEnum.BLOOD;
   const expectedKitTypes = [KitTypeEnum.SALIVA, KitTypeEnum.BLOOD];
-  const kitLabel = `${crypto.randomUUID().toString().substring(0, 10)}`;
+  const kitLabel = crypto.randomUUID().toString().substring(0, 14);
 
   const mockedCanadaAddress = {
     street1: mock.canada.street,
