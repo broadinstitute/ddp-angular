@@ -7,7 +7,7 @@ export const generateAlphaNumeric = (length?: number): string => {
 };
 
 export const generateUserName = (namePrefix: string): string => {
-  return `${namePrefix}-${faker.name.lastName()}${faker.lorem.word()}`;
+  return `${namePrefix}-${faker.person.lastName()}${faker.lorem.word()}`;
 };
 
 export const generateRandomPhoneNum = (): string => Math.random().toString().slice(2, 11);
