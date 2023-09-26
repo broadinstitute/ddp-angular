@@ -714,6 +714,7 @@ jobs:
               npx playwright test --list --project="dss" | grep -o 'tests/.*.spec.ts' | sort | uniq > e2e_tests.txt
             fi
 
+            echo ""
             TESTS_FILE=$(circleci tests split --split-by=timings --timings-type=classname e2e_tests.txt)
             echo ${TESTS_FILE}
             
