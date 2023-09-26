@@ -673,7 +673,7 @@ jobs:
         default: 2
       test_suite:
         # Trigger DSS, DSM or all tests
-        type: string
+        type: enum
         default: [ dss, dsm, UNKNOWN ]
     parallelism: << parameters.parallelism_num >>
     steps:
