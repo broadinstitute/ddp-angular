@@ -8,7 +8,7 @@ import { logInfo } from 'utils/log-utils';
 test.describe('Pancan study picklist search', () => {
   // CMI research studies
   const studies = [StudyEnum.PANCAN];
-  const cancers = ['Lung cancers', 'Neuroblastoma (NB)', 'Gallbladder cancer', 'Small intestine cancer'];
+  const cancers = ['Gynecologic cancers', 'Leukemias', 'Sarcomas', 'Small intestine cancer', 'Gastrointestinal cancers'];
 
   for (const study of studies) {
     test(`@${study} @dsm`, async ({ page, request }) => {
