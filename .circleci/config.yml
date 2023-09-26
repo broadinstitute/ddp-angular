@@ -643,9 +643,9 @@ jobs:
             echo "export ENV=<< parameters.env >>" >> $BASH_ENV
             source $BASH_ENV
             .circleci/export-playwright-env.sh
-      - node/install-packages:
-          app-dir: *playwright_path
-          override-ci-command: npm install
+      - run:
+          working_directory: *playwright_path
+          command: npm ci
       - run:
           working_directory: *playwright_path
           command: npm run lint -- --max-warnings 0
@@ -670,12 +670,11 @@ jobs:
         enum: [ dev, test, staging, prod, UNKNOWN ]
       parallelism_num:
         type: integer
-        default: 1
+        default: 2
       test_suite:
-        # to trigger E2E tests with labels matching study key:
-        # [basil, osteo, angio, brain, mbc, testboston, mpc, atcp, rarex, rgp, esc, prion, cgc, circadia, pancan, singular, brugada, lms, fon]
+        # Trigger DSS, DSM or all tests
         type: string
-        default: << pipeline.parameters.study_key >>
+        default: [ dss, dsm, UNKNOWN ]
     parallelism: << parameters.parallelism_num >>
     steps:
       - halt-playwright-check:
@@ -699,16 +698,26 @@ jobs:
       - run:
           working_directory: *playwright_path
           command: npx playwright install --with-deps chromium # Only need Chrome browser
-
+      - run: echo ${CIRCLE_NODE_INDEX}
       - run:
           name: Running Playwright tests on << parameters.env >>
           working_directory: *playwright_path
-          command: |            
-            npx playwright test --list | grep -o 'tests/.*.spec.ts' | sort | uniq > e2e_tests.txt
+          command: |
+            if [ "<< parameters.test_suite >>" == "UNKNOWN" ]
+            then
+              npx playwright test --list | grep -o 'tests/.*.spec.ts' | sort | uniq > e2e_tests.txt
+            else if [ "<< parameters.test_suite >>" == "dsm" ]
+            then
+              npx playwright test --list --project="dsm" | grep -o 'tests/.*.spec.ts' | sort | uniq > e2e_tests.txt
+            else
+              npx playwright test --list --project="dss" | grep -o 'tests/.*.spec.ts' | sort | uniq > e2e_tests.txt
+            fi
+
             TESTS_FILE=$(circleci tests split --split-by=timings --timings-type=classname e2e_tests.txt)
-            echo $TESTS_FILE
-            npm run test:ci $TESTS_FILE
-          no_output_timeout: 5m # Default is 10m. Set shorter time to ensure CI fails faster if test hangs
+            echo ${TESTS_FILE}
+            
+            npm run test:ci ${TESTS_FILE}
+          no_output_timeout: 5m
       - store_test_results:
           path: playwright-e2e/junit
       - store_artifacts:
@@ -769,9 +778,6 @@ parameters:
   do-builds:
     type: boolean
     default: false
-  e2e-test-parallelism:
-    type: integer
-    default: 2
   scheduled-playwright:
     type: boolean
     default: false
@@ -865,13 +871,16 @@ workflows:
     when:
       and:
         - equal: [ "run-e2e-tests", << pipeline.parameters.api_call >> ]
+        - or:
+            - equal: [ "UNKNOWN", << pipeline.parameters.deploy_env >> ]
+            - equal: [ "dev", << pipeline.parameters.deploy_env >> ]
+            - equal: [ "test", << pipeline.parameters.deploy_env >> ]
     jobs:
       - playwright-build:
           env: << pipeline.parameters.deploy_env >>
       - playwright-test:
           env: << pipeline.parameters.deploy_env >>
           test_suite: << pipeline.parameters.study_key >>
-          parallelism_num: << pipeline.parameters.e2e-test-parallelism >>
           requires:
             - playwright-build
 
@@ -881,6 +890,8 @@ workflows:
       and:
         - not: << pipeline.parameters.do-builds >>
         - not: << pipeline.parameters.scheduled-playwright >>
+        - not:
+            equal: [ "run-e2e-tests", << pipeline.parameters.api_call >> ]
     jobs:
       - api-unit-test:
           <<: *filter-develop-branch
@@ -1027,7 +1038,7 @@ workflows:
           study_key: fon
 
   scheduled-playwright-test:
-    # Triggered every 4 hours on Monday through Friday
+    # Triggered on Monday through Friday
     when:
       and:
         - equal: [ scheduled_pipeline, << pipeline.trigger_source >> ]
