@@ -188,26 +188,13 @@ export default class TissueInformationPage {
   /* Helper Functions */
   private async applyToAll(root: Locator): Promise<void> {
     const applyToAllBtn = new Button(this.page, { root, label: 'APPLY TO ALL', exactMatch: true });
-
     await applyToAllBtn.click();
-    await this.page.waitForTimeout(2000); // Important: Don't do anything for 2 seconds
 
-    const modal1 = new Modal(this.page);
-    await expect(modal1.bodyLocator()).toHaveText(/Are you sure you want to change the destruction policy for all of the tissues from this facility/);
-
-    const yesBtn = modal1.getButton({ label: 'Yes' }).toLocator();
-    await expect(yesBtn).toBeVisible();
-    await Promise.all([
-      waitForResponse(this.page, { uri: '/institutions' }),
-      yesBtn.click(),
-    ]);
-    await this.page.waitForTimeout(100); // Important: Don't do anything for a second
-
-    const modal2 = new Modal(this.page);
-    await Promise.all([
-      expect(modal2.bodyLocator()).toHaveText(/Successfully/),
-      modal2.getButton({ label: 'Ok' }).toLocator().click(),
-    ]);
+    const modal = new Modal(this.page);
+    await expect(modal.bodyLocator()).toHaveText(/Are you sure you want to change the destruction policy for all of the tissues from this facility/);
+    const yesBtn = modal.getButton({ label: 'Yes' }).toLocator();
+    await yesBtn.click();
+    // after click Yes button, dialog window is automatically handled by Playwright
   }
 
   private async fillFaxSentDate(dateIndex: number, date: FillDate): Promise<void> {
