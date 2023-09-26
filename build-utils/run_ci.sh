@@ -25,12 +25,12 @@ if [[ -z $COMMAND || -z $STUDY_KEY || -z $BRANCH || ($COMMAND == "deploy" && -z 
   echo "    run-e2e-tests"
   echo "        Run Playwright E2E tests on develop branch against specified TARGET_ENV (dev or test)"
   echo ""
-  echo "        BRANCH: develop or pr_branch_name"
+  echo "        BRANCH: pr_branch_name"
   echo "        TARGET_ENV: dev or test"
   echo ""
-  echo "        Example 1 (run all tests on Dev env): ./run_ci.sh run-e2e-tests UNKNOWN develop dev"
-  echo "        Example 2 (run dsm tests on Dev env): ./run_ci.sh run-e2e-tests dsm develop dev"
-  echo "        Example 2 (run dss tests on Dev env): ./run_ci.sh run-e2e-tests dss develop dev"
+  echo "        Example 1 (run all tests on Dev env): ./run_ci.sh run-e2e-tests UNKNOWN pr_branch_name dev"
+  echo "        Example 2 (run dsm tests on Dev env): ./run_ci.sh run-e2e-tests dsm pr_branch_name dev"
+  echo "        Example 2 (run dss tests on Dev env): ./run_ci.sh run-e2e-tests dss pr_branch_name dev"
   echo ""
   exit 1
 fi

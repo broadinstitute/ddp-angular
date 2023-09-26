@@ -148,7 +148,7 @@ In **/tests/singular** dir, run Singular tests only:
   - CI workflow name is `playwright-e2e-test-workflow`. Trigger this workflow via `build-utils/run_ci.sh`.
     - If this is the first time, set personal CI token in `$HOME/.circleci-token` file. To know how to generate a personal token, see https://app.circleci.com/settings/user/tokens
     - `<STUDY_NAME>` dss, dsm or UNKNOWN
-    - `<BRANCH_NAME>` pr_branch_name or develop
+    - `<BRANCH_NAME>` pr_branch_name
     - `<ENV_NAME>` Environment name: dev or test
     
     ```
@@ -160,15 +160,15 @@ In **/tests/singular** dir, run Singular tests only:
     
     - Run all tests against Dev env
       > 
-      > ./run_ci.sh run-e2e-tests UNKNOWN develop dev
+      > ./run_ci.sh run-e2e-tests UNKNOWN playwright-new-test dev
     
     - Run all DSS tests against Dev env
       > 
-      > ./run_ci.sh run-e2e-tests dss develop dev
+      > ./run_ci.sh run-e2e-tests dss playwright-new-test dev
       
     - Run all DSM tests against Dev env
        >
-       > ./run_ci.sh run-e2e-tests dsm develop dev
+       > ./run_ci.sh run-e2e-tests dsm playwright-new-test dev
 
 ### Debugging in Intellij
 
