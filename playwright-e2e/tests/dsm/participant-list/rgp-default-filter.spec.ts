@@ -9,6 +9,12 @@ test.describe('Participants list', () => {
     const searchPanel = participantListPage.filters.searchPanel;
     await searchPanel.open();
 
+    // Check for few fields that do not exists in default search filters
+    expect.soft(await searchPanel.textInputExists('Short ID')).toBe(false);
+    expect.soft(await searchPanel.checkboxExists('Status', 'Registered')).toBe(false);
+    expect.soft(await searchPanel.checkboxExists('Status', 'Enrolled')).toBe(false);
+
+    // study-specific default search filters
     expect.soft(await searchPanel.textInputExists('Family ID')).toBe(true);
     expect.soft(await searchPanel.textInputExists('Subject ID')).toBe(true);
     expect.soft(await searchPanel.textInputExists('First Name')).toBe(true);
