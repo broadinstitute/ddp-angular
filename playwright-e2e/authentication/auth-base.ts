@@ -1,5 +1,6 @@
 import { Page } from '@playwright/test';
 import { generateEmailAlias } from 'utils/faker-utils';
+import { logInfo } from 'utils/log-utils';
 
 /**
  *
@@ -37,5 +38,6 @@ export async function createAccountWithEmailAlias(
   }
   const emailAlias = generateEmailAlias(email);
   await fillInEmailPassword(page, { email: emailAlias, password, waitForNavigation, waitForAuth });
+  logInfo(`Created account with email alias: ${emailAlias}`);
   return emailAlias;
 }
