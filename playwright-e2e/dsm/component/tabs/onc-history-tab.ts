@@ -68,8 +68,6 @@ export default class OncHistoryTab {
 
     const downloadFinishedText = this.page.getByText('Download finished.');
     await expect(downloadFinishedText, 'Downloading finished is not visible').toBeVisible();
-
-    await this.page.locator('h1').click(); // Click page header to close Chrome download prompt
   }
 
   private async requestAnyway(): Promise<void> {
