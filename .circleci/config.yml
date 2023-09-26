@@ -891,12 +891,6 @@ workflows:
       and:
         - not: << pipeline.parameters.do-builds >>
         - not: << pipeline.parameters.scheduled-playwright >>
-        - not:
-            equal: ["run-e2e-tests", << pipeline.parameters.api_call >>]
-        - not:
-            equal: ["dss", << pipeline.parameters.study_key >>]
-        - not:
-            equal: ["dsm", << pipeline.parameters.study_key >>]
     jobs:
       - api-unit-test:
           <<: *filter-develop-branch
