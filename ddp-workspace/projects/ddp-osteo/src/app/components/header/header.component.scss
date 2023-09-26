@@ -14,7 +14,6 @@
     .languageSelection {
         display: flex;
         justify-content: flex-end;
-        width: 100%;
         padding-right: 1em;
     }
 }
@@ -95,6 +94,15 @@
     padding: 0 1.5625rem;
 }
 
+.wider-header {
+    max-width: 80%!important;
+    justify-content: center;
+
+    .languageSelection {
+        margin-left: 3em;
+    }
+}
+
 .panel-controls {
     opacity: 0;
     visibility: hidden;
@@ -148,7 +156,6 @@
 }
 
 .activity-heading {
-    width: 700px;
     margin: 0 1.5rem;
 }
 
@@ -276,6 +283,7 @@
     }
 
     .languageSelection {
+        width: 100%;
         padding: 0!important;
     }
 
@@ -304,6 +312,12 @@
     }
 }
 
+@media only screen and (max-width: 1669px) {
+    .wider-header {
+        max-width: 90%!important;
+    }
+}
+
 @media only screen and (max-width: 650px) {
     .activity-heading {
         margin: 0 1rem;
@@ -311,8 +325,16 @@
 }
 
 @media only screen and (max-width: 480px) {
+    .header {
+        padding: .5em 0;
+    }
     .header-content {
         padding: 0 5px;
+        justify-content: space-around;
+        max-width: 100% !important;
+        .languageSelection {
+            margin-left: 0;
+        }
     }
 }
 
