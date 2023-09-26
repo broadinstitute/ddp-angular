@@ -87,10 +87,10 @@
 
 .header-content {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     align-items: center;
     height: 6.25rem;
-    max-width: 1200px;
+    max-width: 60%;
     margin: auto;
     padding: 0 1.5625rem;
 }
@@ -270,9 +270,13 @@
     text-decoration: underline;
 }
 
-@media screen and (max-width: 945px) {
+@media screen and (max-width: 1410px) {
     .hamburger {
         display: flex;
+    }
+
+    .languageSelection {
+        padding: 0!important;
     }
 
     .header-button {
@@ -282,6 +286,11 @@
     .nav,
     .auth {
         display: none;
+    }
+
+    .header-content {
+        justify-content: space-between;
+        max-width: 100%;
     }
 }
 

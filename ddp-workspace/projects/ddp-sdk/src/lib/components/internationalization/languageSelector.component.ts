@@ -47,7 +47,7 @@ import { ParticipantProfileServiceAgent } from '../../services/serviceAgents/par
 
         <ng-template #regularLanguageSelectorTmpl>
             <button
-                class="SimpleButton"
+                class="SimpleButton language-selector-btn"
                 [ngClass]="{'SimpleButton--Scrolled': isScrolled}"
                 *ngIf="currentLanguage !== null && currentLanguage !== undefined"
                 [matMenuTriggerFor]="menu"

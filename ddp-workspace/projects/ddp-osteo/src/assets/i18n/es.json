@@ -2,346 +2,346 @@
     "Common": {
         "Buttons": {
             "CountMeIn": "Count Me In",
-            "LearnMore": "Learn More",
-            "LearnMoreAboutParticipating": "Learn More About Participating",
-            "FAQ": "View More FAQs",
-            "VisitFAQ": "Visit FAQ",
-            "ReturnHome": "Return home",
+            "LearnMore": "Más información",
+            "LearnMoreAboutParticipating": "Más información sobre la participación",
+            "FAQ": "Ver más preguntas frecuentes",
+            "VisitFAQ": "Ir a preguntas frecuentes",
+            "ReturnHome": "Volver a inicio",
             "Submit": {
-                "Title": "Submit",
-                "AriaLabel": "Submit button"
+                "Title": "Enviar",
+                "AriaLabel": "Botón Enviar"
             },
             "Login": {
-                "Title": "Log In",
-                "AriaLabel": "Log In button"
+                "Title": "Iniciar sesión",
+                "AriaLabel": "Botón Iniciar sesión"
             },
             "MailingList": {
-                "Title": "Join Mailing List",
-                "AriaLabel": "Join Mailing List button"
+                "Title": "Suscríbase a la lista de correo",
+                "AriaLabel": "Botón Suscríbase a la lista de correo"
             },
             "HeaderMenu": {
-                "AriaLabel": "Header menu button"
+                "AriaLabel": "Botón Menú del encabezado"
             }
         },
         "CMI": "Count Me In",
         "Alts": {
-            "CMI": "Count Me In logo",
-            "Twitter": "Twitter logo",
-            "Facebook": "Facebook logo",
-            "Instagram": "Instagram logo"
+            "CMI": "Logotipo de Count Me In",
+            "Twitter": "Logotipo de Twitter",
+            "Facebook": "Logotipo de Facebook",
+            "Instagram": "Logotipo de Instagram"
         },
         "Navigation": {
-            "Home": "Home",
-            "FAQ": "FAQs",
-            "AboutUs": "About Us",
-            "Physicians": "For Your Physician",
-            "Dashboard": "Dashboard",
-            "Participation": "Participation",
-            "ScientificImpact": "Scientific Impact"
+            "Home": "Inicio",
+            "FAQ": "Preguntas frecuentes",
+            "AboutUs": "Sobre nosotros",
+            "Physicians": "Información para su médico",
+            "Dashboard": "Panel",
+            "Participation": "Participación",
+            "ScientificImpact": "Impacto científico"
         }
     },
     "Header": {
         "Logo": {
-            "Title": "Osteosarcoma<br>Project",
+            "Title": "Proyecto<br> sobre Osteosarcoma",
             "ImageAlt": "Osteosarcoma project logo"
         }
     },
     "Footer": {
         "Info": {
             "Text": {
-                "Part1": "The Osteosarcoma Project is part of",
-                "Part2": "a research initiative that brings together patients and scientists as partners to speed up discoveries in cancer research."
+                "Part1": "El Proyecto sobre Osteosarcoma forma parte de",
+                "Part2": "una iniciativa de investigación que une a pacientes y científicos como socios para agilizar los descubrimientos en la investigación del cáncer."
             }
         },
         "Contacts": {
-            "Title": "Contact Us",
-            "Address": "Count Me In<br>415 Main St, Cambridge, MA<br>02142, United States"
+            "Title": "Comuníquese con nosotros",
+            "Address": "Count Me In<br>415 Main St, Cambridge, MA<br>02142, Estados Unidos"
         }
     },
     "BehindScenesGallery": {
         "Items": [
             {
                 "id": 0,
-                "title": "Touring the Genomics Platform",
-                "text": "Members of the Count Me In Team and the OSP Project Advisory Council tour the Genomics Platform at the Broad Institute.",
+                "title": "Visita a la plataforma de investigación genómica",
+                "text": "Miembros del equipo de Count Me In y el Consejo Asesor del Proyecto sobre Osteosarcoma visitan la plataforma de investigación genómica en el Broad Institute.",
                 "image": "assets/images/osteo-team.jpg",
-                "alt": "Lab selfie"
+                "alt": "Fotografía en el laboratorio"
             },
             {
                 "id": 1,
-                "title": "Medical Record Requesting",
-                "text": "Clinical research coordinators like Netsanet, Fergie, and Tania request records for OSP participants, in order to gain a comprehensive view of procedure and treatment history.",
+                "title": "Solicitud de historia clínica",
+                "text": "Los coordinadores de investigación clínica como Netsanet, Fergie y Tania solicitan la historia clínica de los participantes del Proyecto sobre Osteosarcoma, con el objetivo de obtener un panorama completo de los procedimientos y tratamientos realizados anteriormente.",
                 "image": "assets/images/coordinators.jpg",
-                "alt": "Project coordinators"
+                "alt": "Coordinadores del proyecto"
             },
             {
                 "id": 2,
-                "title": "Project Advisory Council",
-                "text": "We are so grateful to the PACs that worked with us to build the OSP. Every page of this site was built with their partnership and with this community in mind. Learn more about each one of them on the About Us page.",
+                "title": "Consejo Asesor del Proyecto",
+                "text": "Agradecemos mucho a los consejos asesores de proyectos que colaboraron con nosotros para desarrollar el Proyecto sobre Osteosarcoma. Cada página de este sitio se creó con su colaboración y teniendo en cuenta esta comunidad. Obtenga más información sobre cada uno de ellos en la página “Sobre nosotros”.",
                 "image": "assets/images/pac.jpg",
-                "alt": "Project Advisory Council"
+                "alt": "Consejo Asesor del Proyecto"
             },
             {
                 "id": 3,
-                "title": "This is not just a box",
-                "text": "Each saliva and blood sample we receive from OSP participants represents an important contribution towards future research. This powerful way to contribute can enhance our understanding of osteosarcoma and accelerate future discoveries.",
+                "title": "No es solo un estuche",
+                "text": "Cada muestra de saliva y sangre que recibimos de los participantes del Proyecto sobre Osteosarcoma representa una contribución importante para el futuro de la investigación. Esta poderosa manera de contribuir amplía nuestra compresión del osteosarcoma y agiliza futuros descubrimientos.",
                 "image": "assets/images/box.jpg",
-                "alt": "Count Me In box"
+                "alt": "Estuche Count Me In"
             }
         ],
-        "BackArrowAlt": "Back arrow",
-        "ForwardArrowAlt": "Forward arrow"
+        "BackArrowAlt": "Flecha atrás",
+        "ForwardArrowAlt": "Flecha adelante"
     },
     "PhysiciansPage": {
         "step": {
-            "Button": "Download printable PDF to share with your care team"
+            "Button": "Descargue el PDF para imprimir y compártalo con su equipo de atención."
         },
         "introduction": {
-            "Text": "<strong>The Osteosarcoma Project (OSproject)</strong> is part of Count Me In, a nonprofit organization that brings together patients and researchers as partners to accelerate discoveries in cancer research. Count Me In is stewarded by the Broad Institute of MIT and Harvard, a leading nonprofit biomedical research institution; the Dana-Farber Cancer Institute, a leading cancer hospital; and Emerson Collective, a California-based social change organization. Count Me In's Osteosarcoma (OS) Project is supported by a grant from the National Cancer Institute's Cancer Moonshot program and is part of the Participant Engagement and Cancer Genome Sequencing (PE-CGS) Network of research centers. By partnering directly with patients, we can accelerate discoveries in osteosarcoma, leading to the development of new therapies and treatment strategies."
+            "Text": "<strong>El Proyecto sobre Osteosarcoma (OS)</strong> es parte de Count Me In, una organización sin fines de lucro que une a pacientes e investigadores como socios para agilizar los descubrimientos en la investigación del cáncer. Count Me In cuenta con el patrocinio del Broad Institute del MIT y Harvard, una institución de investigación biomédica sin fines de lucro líder; Dana-Farber Cancer Institute, un hospital oncológico líder; y Emerson Collective, una organización orientada al cambio social con sede en California. El Proyecto sobre Osteosarcoma de Count Me In cuenta con el apoyo de una subvención del programa Cancer Moonshot del Instituto Nacional del Cáncer y forma parte de la red de Participant Engagement and Cancer Genome Sequencing (PE-CGS) de los centros de investigación. La alianza directa con los pacientes nos permite acelerar los descubrimientos relacionados con el osteosarcoma e impulsar el desarrollo de nuevas terapias y estrategias de tratamiento."
         },
         "WISection": [
             {
-                "Title": "<strong>What is the goal of the Osteosarcoma Project?</strong>",
-                "Text": "The goal of the OSproject is to transform cancer care by enabling all patients who have ever been diagnosed with osteosarcoma to accelerate biomedical research through sharing their cancer samples, clinical information, and their experiences. In order to achieve these goals, datasets containing linked clinical, genomic, molecular, and patient-reported data (without including any personal information) will be regularly shared with the biomedical research community through scientific repositories such as cBioPortal for Cancer Genomics and the National Cancer Institute (NCI) Genomic Data Commons."
+                "Title": "<strong>¿Cuál es el objetivo del Proyecto sobre Osteosarcoma? </strong>",
+                "Text": "El objetivo de este proyecto es transformar la atención oncológica al permitir que todos los pacientes a los que alguna vez se les haya diagnosticado osteosarcoma aceleren la investigación biomédica al compartir sus muestras de cáncer, información clínica y sus experiencias. Para lograr estos objetivos, los conjuntos de datos que contienen datos clínicos, genómicos, moleculares y notificados por los pacientes vinculados (sin incluir ninguna información personal) se compartirán periódicamente con la comunidad de investigación biomédica a través de repositorios científicos como el CBioPortal for Cancer Genomics y el Genomic Data Commons del Instituto Nacional del Cáncer (NCI)."
             },
             {
-                "Title": "<strong>What steps are involved for participants?</strong>",
-                "Text": "Participants register for the study online at OSproject.org. By consenting to the study, patients allow us to request and obtain copies of their medical records, archived tumor samples (if available), and a saliva and optional blood sample. If desired, the participant may also opt-in to providing an additional saliva sample to learn more about their germline (or “normal”) DNA, described in further detail later on this page."
+                "Title": "<strong>¿Qué pasos deben seguir los participantes?</strong>",
+                "Text": "Los participantes se inscriben en el estudio en línea en OSproject.org. Cuando los pacientes otorgan su consentimiento para el estudio, nos autorizan a solicitar y obtener copias de sus historias clínicas, muestras archivadas de tejido tumoral (si están disponibles) y muestras opcionales de saliva y de sangre. Asimismo, es decisión del participante proporcionar una muestra de saliva adicional para obtener más información sobre su ADN de línea germinal (o “normal”). Esto se describe con más detalle posteriormente en esta página. "
             },
             {
-                "Title": "<strong>What steps are involved for the physician’s offices of enrolled participants?</strong>",
-                "Text": "When they enroll, participants provide information about where they have received care for their osteosarcoma. The study team works directly with medical record and pathology departments to obtain copies of medical records and portions of archived tumor samples. We will ask pathology departments to share only a part of tumor tissue, and not to share anything with us that might be needed for clinical care."
+                "Title": "<strong>¿Qué medidas deben tomar los consultorios médicos de los participantes inscritos?</strong>",
+                "Text": "Al inscribirse, los participantes proporcionan información sobre el lugar donde recibieron atención médica para el osteosarcoma. El equipo del estudio se comunica directamente con los departamentos de registros médicos y anatomía patológica para obtener copias de las historias clínicas y muestras archivadas del tumor. Solicitaremos al departamento de anatomía patológica que comparta solo una porción de tejido tumoral, y que no nos entreguen nada que sea pueda ser necesario para la atención médica."
             },
             {
-                "Title": "<strong>Do participants receive individual results back from this study?</strong>",
-                "Text": "If a participant elects to share archive tissue samples with the project, we may be able to share information about what we learned from the genomic sequencing of the tumor sample back with the participant. This information is intended to highlight how participant sample(s) are contributing to research and will not have implications for their treatment or prognosis. Because of regulatory restrictions, we are unable to share results with participants in New York and Canada. <br><br>The project is also partnering with Invitae in order to sequence and share information on germline DNA (or “normal” DNA) from saliva samples. During the project, participants may be able to decide if they would like to provide an additional saliva sample to learn more about their normal DNA and speak with a genetic counselor to understand these results. If a participant does not participate in this process, their data will not be shared with Invitae. This process is not available for participants in Canada, as Invitae is not licensed to provide genetic counseling services there."
+                "Title": "<strong>¿Se entrega a los participantes resultados individuales de este estudio?</strong>",
+                "Text": "Si el participante decide compartir muestras de tejido archivadas con el proyecto, es posible que podamos comunicarle información sobre lo que hemos aprendido de la secuenciación genómica de la muestra del tumor. Esta información tiene por objeto resaltar cómo las muestras del participante contribuyen a la investigación y no tendrá ninguna repercusión en su tratamiento o pronóstico. Debido a ciertas restricciones reglamentarias, no podemos compartir los resultados con los participantes de Nueva York y Canadá. <br><br>El proyecto también se asoció con Invitae para secuenciar y compartir información sobre ADN de línea germinal (o ADN “normal”) a partir de muestras de saliva. Durante el proyecto, los participantes podrán decidir si desean proporcionar una muestra de saliva adicional para adquirir más información sobre su ADN normal y consultar con un asesor genético para comprender estos resultados. Si el participante no desea formar parte de este proceso, sus datos no se compartirán con Invitae. Este proceso no está disponible para los participantes de Canadá, ya que Invitae no está autorizada a prestar servicios de asesoramiento genético allí."
             },
             {
-                "Title": "<strong>What makes this project different from existing studies?</strong>",
-                "Text": "The Osteosarcoma Project seeks to empower patients and families to accelerate cancer research by sharing their samples, clinical information, and experiences with the research community. Most patients are cared for in community settings where genomic studies are not typically conducted, so this study connects osteosarcoma patients around the country with genomics research performed at the Broad Institute, allowing them to participate regardless of where they live. The study was designed in partnership with osteosarcoma patients, families, advocates, and advocacy groups, who continue to provide input on future directions."
+                "Title": "<strong>¿Qué diferencia a este proyecto de otros estudios existentes?</strong>",
+                "Text": "El Proyecto sobre Osteosarcoma pretende empoderar a los pacientes y familiares con el fin de acelerar la investigación sobre el cáncer al compartir sus muestras, información clínica y experiencias con la comunidad científica. La mayoría de los pacientes reciben atención médica en entornos comunitarios en los que no suelen realizarse análisis genómicos, por lo que este estudio conecta a pacientes de osteosarcoma de todo el país con la investigación genómica realizada en el Broad Institute y, de este modo, les permite participar independientemente de su lugar de residencia. El estudio se diseñó en colaboración con pacientes de osteosarcoma, familiares, defensores de los pacientes y grupos promotores, que continúan realizando aportes para el futuro."
             },
             {
-                "Title": "<strong>How is the genomic and clinical data shared with the research community?</strong>",
-                "Text": "Next generation sequencing (whole exome and transcriptome sequencing) is performed on tumor and germline DNA. Sequencing data are linked to de-identified clinical information, and the resulting data are used to identify drivers of tumorigenesis, mechanisms of response and resistance to therapies, and diagnostic, prognostic, and therapeutic biomarkers. The database of clinically annotated genomic information is shared on publicly available platforms such as cBioPortal and the NIH."
+                "Title": "<strong>¿Cómo se comparten los datos genómicos y clínicos con la comunidad científica?</strong>",
+                "Text": "La secuenciación de nueva generación (secuenciación del exoma completo y del transcriptoma) se realiza en el ADN tumoral y de la línea germinal. Los datos de secuenciación se vinculan a la información clínica anonimizada, y la información resultante se utiliza para identificar conductores de la tumorigénesis, mecanismos de respuesta y resistencia a las terapias, y biomarcadores diagnósticos, pronósticos y terapéuticos. La base de datos de la información genómica relacionada con la clínica se comparte en plataformas disponibles al público, tales como cBioPortal y el NIH."
             },
             {
-                "Title": "<strong>What kinds of questions is this project aiming to address?</strong>",
-                "Text": "Over the past decade, genomic characterization of tumors has shed enormous light on the molecular underpinnings of cancer. These discoveries have led to the development of novel therapies and preventive measures that have already revolutionized cancer care. Despite this progress, the genomics of osteosarcoma remains poorly understood.<br><br>The types of questions we strive to answer include:<br><br><span>&#8226;</span> What are all the genes and mutations that can lead to osteosarcoma?<br><span>&#8226;</span> What explains why some patients show extraordinary responses to a particular treatment?<br> <span>&#8226;</span> What explains why some tumors never respond to a particular treatment?<br><span>&#8226;</span> How can we develop better treatments for osteosarcoma?<br><br>Despite the progress that has been made to begin to answer these questions, we remain far from the goal. To get there, the detailed genomic characterization of many thousands of clinically annotated cancer samples will be required.<br><br>If you have any questions about this study, please reach out to us at <a href=\"mailto:info@osproject.org\" class=\"Link\">info@osproject.org</a> or <a class=\"Link\" href=\"tel:651-602-2020\">651-602-2020</a>.<br><br>The Osteosarcoma Project is part of Count Me In"
+                "Title": "<strong>¿Qué tipo de interrogantes pretende abordar este proyecto?</strong>",
+                "Text": "En la última década, la caracterización genómica de los tumores ha iluminado los fundamentos moleculares del cáncer. Estos descubrimientos han conducido al desarrollo de tratamientos innovadores y medidas preventivas que ya han revolucionado la atención médica del cáncer. A pesar de este progreso, se desconoce mucho sobre la genómica del osteosarcoma.<br><br>Algunos de los diversos interrogantes que nos planteamos son los siguientes:<br><br><span>•</span> ¿Cuáles son todos los genes y las mutaciones que pueden inducir la aparición de un osteosarcoma?<br><span>•</span> ¿Qué explica que algunos pacientes muestren respuestas extraordinarias a un tratamiento concreto?<br> <span>•</span> ¿Qué explica que algunos tumores nunca respondan a un determinado tratamiento?<br><span>•</span> ¿Cómo podemos desarrollar mejores tratamientos para el osteosarcoma?<br><br>A pesar de los progresos que se han hecho para empezar a responder a estas preguntas, seguimos lejos del objetivo. Para conseguirlo, será necesaria la caracterización genómica detallada de miles de muestras de cáncer relacionadas con información clínica.<br><br>Si tiene alguna pregunta sobre este estudio, póngase en contacto con nosotros al siguiente correo electrónico <a href=\"mailto:info@osproject.org\" class=\"Link\">info@osproject.org</a> o llame al <a class=\"Link\" href=\"tel:651-602-2020\">651-602-2020</a>.<br><br>El Proyecto sobre Osteosarcoma forma parte de Count Me In"
             }
 
 
 
         ],
         "IntroSection": {
-            "Title": "For your physician",
-            "Text": "The purpose of this page is to provide details about the Osteosarcoma Project to your physician and care team so they can learn more about the project. You can show them this website, or print out a PDF below with the same information to discuss at your next appointment"
+            "Title": "Información para su médico",
+            "Text": "El objetivo de esta página es aportar detalles sobre el Proyecto sobre Osteosarcoma a su médico y equipo de atención médica para que puedan obtener información al respecto. Puede mostrarles este sitio web o imprimir el siguiente PDF que contiene la misma información y consúltela en su próxima cita."
         },
-        "ISection" : {
-            "Title": "For your physician"
+        "ISection": {
+            "Title": "Información para su médico"
         }
     },
 
-    "DashboardIntro" : {
-        "isParent": "Thank you for being part of the Osteosarcoma project. This page contains links to your forms and surveys that are part of the study. Over time, we may add additional surveys for your consideration. The information you provide will help drive our understanding of cancer.<br><br>If at any time you have questions or would like to share updated information, please contact the study team at <a class=\"Link\" href=\"mailto:info@osproject.org\">info@osproject.org</a> or call <a class=\"Link\" href='tel:651-602-2020'>651-602-2020. </a>",
-        "isChild" : "Thank you for being part of the Osteosarcoma project. This page contains links to your child’s forms and surveys that are part of the study. Over time, we may add additional surveys for your consideration. The information you provide will help drive our understanding of cancer.<br><br>If at any time you have questions or would like to share updated information, please contact the study team at <a class=\"Link\" href=\"mailto:info@osproject.org\">info@osproject.org</a> or call <a class=\"Link\" href='tel:651-602-2020'>651-602-2020</a>.",
-        "isLovedOne": "Thank you for being part of the Osteosarcoma Project and sharing your Loved One’s experience with osteosarcoma. This page contains a link that will take you to the survey so you can complete it.<br><br>If at any time you have questions or would like to share updated information, please contact the study team at <a class=\"Link\" href=\"mailto:info@osproject.org\">info@osproject.org</a> or call <a class=\"Link\" href='tel:651-602-2020'>651-602-2020</a>."
+    "DashboardIntro": {
+        "isParent": "Gracias por formar parte del Proyecto sobre Osteosarcoma. Esta página contiene enlaces a los formularios y encuestas que forman parte del estudio. Con el tiempo, podemos añadir encuestas adicionales para su consideración. La información que nos proporcione nos ayudará a entender mejor el cáncer.<br><br>Si, en algún momento, tiene preguntas o desea compartir información actualizada, comuníquese con el equipo del estudio por correo electrónico a <a class=\"Link\" href=\"mailto:info@osproject.org\">info@osproject.org</a> o llame al <a class=\"Link\" href='tel:651-602-2020'>651-602-2020. </a>",
+        "isChild": "Gracias por formar parte del Proyecto sobre Osteosarcoma. Esta página contiene enlaces a los formularios y las encuestas de su hijo(a) que forman parte del estudio. Con el tiempo, podemos añadir encuestas adicionales para su consideración. La información que nos proporcione nos ayudará a entender mejor el cáncer.<br><br>Si, en algún momento, tiene preguntas o desea compartir información actualizada, comuníquese con el equipo del estudio por correo electrónico a <a class=\"Link\" href=\"mailto:info@osproject.org\">info@osproject.org</a> o llame al <a class=\"Link\" href='tel:651-602-2020'>651-602-2020</a>.",
+        "isLovedOne": "Gracias por ser parte del Proyecto sobre Osteosarcoma y contarnos la experiencia de su ser querido con el osteosarcoma. Esta página contiene un enlace directo a la encuesta para que pueda responderla.<br><br>Si, en algún momento, tiene preguntas o desea compartir información actualizada, comuníquese con el equipo del estudio por correo electrónico a <a class=\"Link\" href=\"mailto:info@osproject.org\">info@osproject.org</a> o llame al <a class=\"Link\" href='tel:651-602-2020'>651-602-2020</a>."
     },
     "HomePage": {
         "IntroductionSection": {
-            "Title": "Together, the osteosarcoma community has the power to move research forward",
-            "Text": "By generating the most comprehensive osteosarcoma database, we can accelerate research and the development of new therapies. Only you hold the key to unlock future discoveries.",
-            "IframeTitle": "Introduction YouTube video"
+            "Title": "Juntos, la comunidad del osteosarcoma tiene el poder de impulsar la investigación.",
+            "Text": "La creación de la base de datos más exhaustiva sobre el osteosarcoma nos permitirá acelerar la investigación y el desarrollo de nuevos tratamientos. La clave de los futuros descubrimientos solo la tiene usted.",
+            "IframeTitle": "Video introductorio de YouTube"
         },
         "ClosingSection": {
-            "Title": "Please join us in saying “Count Me In!”",
-            "Text": "With your help, the osteosarcoma community can be the driving force behind transformative research."
+            "Title": "¡Únase al movimiento y comparta su experiencia!",
+            "Text": "Con su ayuda, la comunidad del osteosarcoma puede ser la fuerza impulsora detrás de una investigación transformadora."
         },
         "GallerySection": {
-            "Title": "Behind the scenes",
+            "Title": "Detrás de escena",
             "TitleImageAlt": "Molecule"
         },
         "SocialMediaSection": {
-            "Title": "Follow us on social media",
-            "TwitterFeedTitle": "Twitter feed",
-            "InstagramFeedTitle": "Instagram feed"
+            "Title": "Síganos en las redes sociales",
+            "TwitterFeedTitle": "Notificaciones en Twitter",
+            "InstagramFeedTitle": "Notificaciones en Instagram"
         },
         "PartnersSection": {
-            "Title": "Advocacy Partners",
+            "Title": "Promotores aliados",
             "ImagesAlts": {
-                "MBI": "Make It Better Agents logo",
-                "QUADW": "The QuadW Foundation logo",
-                "ZSOF": "The Zach Sobiech Osteosarcoma Fund logo",
-                "BoD": "Because Of Daniel logo",
-                "OsCollaborative": "The Osteosarcoma Collaborative logo",
-                "MCAMF": "Mason Chandler Allen Memorial Foundation logo",
-                "OSINST": "OS Institute advocacy partner logo"
+                "MBI": "Logotipo de Make It Better Agents",
+                "QUADW": "Logotipo de The QuadW Foundation",
+                "ZSOF": "Logotipo de The Zach Sobiech Osteosarcoma Fund",
+                "BoD": "Logotipo de Because Of Daniel ",
+                "OsCollaborative": "Logotipo de The Osteosarcoma Collaborative",
+                "MCAMF": "Logotipo de Mason Chandler Allen Memorial Foundation",
+                "OSINST": "Logotipo de promotores aliados del OS Institute"
             }
         },
         "MailingListSection": {
-            "Title": "Want to stay informed on the OS Project?",
-            "Text": "We'll keep you up-to-date on developments, you can unsubscribe at any time."
+            "Title": "¿Quiere mantenerse informado sobre el Proyecto sobre Osteosarcoma?",
+            "Text": "Le informaremos de las novedades y podrá darse de baja en cualquier momento."
         },
         "NavigationSection": {
             "Button": {
-                "Alt": "Arrow down"
+                "Alt": "Flecha hacia abajo"
             }
         },
         "OrganizationsSection": {
             "BroadLogo": {
-                "Alt": "Broad Institute logo"
+                "Alt": "Logotipo del Broad Institute"
             },
             "DanaFarberLogo": {
-                "Alt": "Dana Farber logo"
+                "Alt": "Logotipo de Dana Farber"
             }
         },
         "StepsSection": {
-            "Title": "You can help drive discoveries",
+            "Title": "Usted puede ayudar a promover descubrimientos",
             "Step1": {
-                "Text": "Share your experiences, access to medical records, and samples.",
+                "Text": "Comparta sus experiencias, permita el acceso a sus historias clínicas y muestras.",
                 "ImageAlt": "Clipboard"
             },
             "Step2": {
-                "Text": "The anonymous study data is shared widely with the biomedical community so all may learn together.",
+                "Text": "Los datos anónimos del estudio se comparten ampliamente con la comunidad biomédica para que todos puedan aprender juntos.",
                 "ImageAlt": "Microscope"
             },
             "Step3": {
-                "Text": "This will accelerate the ability of researchers to make discoveries.",
+                "Text": "Esto acelerara la capacidad de los investigadores para hacer descubrimientos.",
                 "ImageAlt": "Heart"
             },
             "Step4": {
-                "Text": "In some cases, we may be able to share learnings from the genomic sequencing of your samples back with you.",
+                "Text": "En algunos casos, podremos compartir con usted los hallazgos de la secuenciación genómica de sus muestras.",
                 "ImageAlt": "People"
             },
-            "NextStepArrowAlt": "Next step arrow"
+            "NextStepArrowAlt": "Flecha “Siguiente paso”"
         },
         "HelpSection": {
-            "Title": "Here’s how you can help",
+            "Title": "Así es como puede ayudar",
             "Diagnosed": {
-                "Title": "If you or your child have ever been diagnosed with osteosarcoma",
-                "Text": "You can make an impact by telling us about your or your child’s cancer. Share experiences, access to medical records, a saliva sample, and if you choose, tissue and blood samples to drive new discoveries. Depending on the age at enrollment, patients may enroll themselves. Younger patients will need the help of their parents."
+                "Title": "Si usted o su hijo(a) alguna vez han recibido un diagnóstico de osteosarcoma alguna vez",
+                "Text": "Puede ayudarnos a generar un impacto al compartir su experiencia o la de su hijo(a) con el cáncer. Comparta sus experiencias, permita el acceso a sus historias clínicas, a una muestra de saliva y, si lo desea, también a muestras de tejido y sangre para impulsar nuevos descubrimientos. Según la edad que tengan al momento de la inscripción, los pacientes pueden registrarse por su cuenta. Los pacientes más jóvenes necesitarán la ayuda de sus padres."
             },
             "PassedAway": {
-                "Title": "If your child has passed away from osteosarcoma",
-                "Text": "You can make an impact by answering questions about your child’s diagnosis and experiences to advance our understanding of osteosarcoma."
+                "Title": "Si su hijo(a) falleció por osteosarcoma",
+                "Text": "Puede generar un impacto respondiendo a las preguntas sobre el diagnóstico y la experiencia de su hijo(a) para avanzar en nuestro conocimiento del osteosarcoma."
             }
         },
         "ParticipatingSection": {
-            "Title": "Participating is easy",
+            "Title": "Participar es sencillo",
             "AllowList": {
-                "Title": "You can choose to allow the study team to:",
-                "Option1": "send you a simple kit to collect a saliva sample",
-                "Option2": "request copies of your medical records"
+                "Title": "Si lo desea, puede autorizar que el equipo del estudio:",
+                "Option1": "le envíe un kit simple para obtener una muestra de saliva, y",
+                "Option2": "solicite copias de sus historias clínicas."
             },
             "Opt-inToList": {
-                "Title": "You may also opt-in to:",
-                "Option1": "sharing a blood sample",
-                "Option2": "allowing the team to request a portion of tumor tissue (if available)",
-                "Option3": "receiving information about what we've learned from the genomic sequencing of your / your child's tumor sample (if we are able to send these to you)",
-                "Option4": "providing an additional saliva sample to learn more about your/your child's normal DNA with the help of a genetic counselor"
+                "Title": "También puede optar por:",
+                "Option1": "permitir que le tomen una muestra de sangre,",
+                "Option2": "autorizar al equipo a que solicite una porción del tejido tumoral (si está disponible),",
+                "Option3": "recibir información sobre lo que hemos averiguado a partir de la secuenciación genómica de su muestra tumoral o la de su hijo(a) (siempre que podamos enviársela), y",
+                "Option4": "proporcionar una muestra de saliva adicional para obtener más información sobre su ADN normal o el de su hijo(a) con la ayuda de un asesor genético."
             },
             "ClosingText": {
-                "Part1": "We will do the rest",
-                "Part2": " — with your permission, we’ll obtain copies of your medical records and send you a saliva kit."
+                "Part1": "Nosotros haremos el resto",
+                "Part2": " Con su permiso, obtendremos copias de sus historias clínicas y le enviaremos un kit de saliva."
             },
-            "IframeTitle": "YouTube video about participating"
+            "IframeTitle": "Video de YouTube sobre cómo participar"
         },
         "ParticipateSection": {
-            "Title": "Here’s how to participate",
+            "Title": "Cómo participar",
             "Steps": [
                 {
-                    "Title": "STEP 1",
-                    "Time": "10-15 minutes",
-                    "Description": "Provide consent and tell us where you’ve been treated",
+                    "Title": "PASO 1",
+                    "Time": "De 10 a 15 minutos",
+                    "Description": "Dé su consentimiento e indique dónde ha recibido tratamiento",
                     "ImageAlt": "Computer screen displaying online consent form"
                 },
                 {
-                    "Title": "STEP 2",
-                    "Time": "5 minutes",
-                    "Description": "Answer questions about your cancer",
+                    "Title": "PASO 2",
+                    "Time": "5 minutos",
+                    "Description": "Responda preguntas sobre su cáncer",
                     "ImageAlt": "Computer screen displaying online survey"
                 },
                 {
-                    "Title": "STEP 3",
-                    "Time": "10 minutes",
-                    "Description": "Provide samples (we’ll send a kit)",
+                    "Title": "PASO 3",
+                    "Time": "10 minutos",
+                    "Description": "Proporcione muestras (le enviaremos un kit)",
                     "ImageAlt": "Sample collection kit"
                 },
                 {
-                    "Title": "STEP 4",
-                    "Time": "Ongoing",
-                    "Description": "Learn with us along the way",
+                    "Title": "PASO 4",
+                    "Time": "Continuo",
+                    "Description": "Aprenda a la par de nosotros",
                     "ImageAlt": "Speech bubbles sharing hearts and data visualizations"
                 }
             ],
-            "LearnMoreAboutParticipationButton": "Learn more about participation"
+            "LearnMoreAboutParticipationButton": "Más información sobre la participación"
         },
         "StayInformedSection": {
-            "Title": "Stay informed",
-            "Text": "Sign up for our mailing list or follow us on social media",
-            "JoinMailingListButton": "Join Mailing List"
+            "Title": "Noticias y novedades",
+            "Text": "Suscríbase a nuestra lista de correo o síganos en las redes sociales.",
+            "JoinMailingListButton": "Suscríbase a la lista de correo"
         },
         "CountMeInSection": {
-            "Title": "Join the movement and say Count Me In",
-            "Text": "With your help, patients can be the driving force behind transformative cancer research.",
+            "Title": "Únase al movimiento Count Me In y comparta su experiencia",
+            "Text": "Con su ayuda, los pacientes pueden ser la fuerza impulsora detrás de una investigación del cáncer transformadora.",
             "ImageAlt": "Hands raised to volunteer"
         }
     },
 
     "ParticipationPage": {
-        "Title": "Here’s how to participate",
+        "Title": "Cómo participar",
         "Steps": [
             {
-                "Step": "STEP 1",
-                "Time": "10-15 minutes",
-                "Title": "Provide consent for the study",
-                "Text": "The consent form is how participants give researchers their permission to take part in the study. This section consists of several pages, we encourage participants to take their time. Any progress will be automatically saved and can be re-accessed later. For participants who are signing up for / with their child, depending on their age, we may also ask the child to “assent” or agree that they would also like to participate in the study.",
-                "Button": "View Consent Document",
+                "Step": "PASO 1",
+                "Time": "De 10 a 15 minutos",
+                "Title": "Dé su consentimiento para el estudio",
+                "Text": "El formulario de consentimiento es la manera en que los participantes les otorgan su permiso a los investigadores para participar en el estudio. Esta sección contiene varias páginas, por lo que recomendamos a los participantes que se tomen el tiempo necesario para revisarla. Todo progreso se guardará de manera automática y podrá reanudar su lectura más tarde. En el caso de los participantes que se inscriben por su hijo(a) o con este(a), dependiendo de la edad del/de la niño(a), es posible que se les solicite que den su “asentimiento” o que acepten que también desean participar en el estudio.",
+                "Button": "Ver el documento de consentimiento",
                 "ImageAlt": "Computer screen displaying online consent form"
             },
             {
-                "Step": "STEP 2",
-                "Time": "5 minutes",
-                "Title": "Tell us where you’ve been treated",
-                "Text": "We ask where patients have been treated for their cancer, so that we can request medical records, and if applicable, archived tumor tissue.",
-                "Button": "View Medical Release",
+                "Step": "PASO 2",
+                "Time": "5 minutos",
+                "Title": "Indique dónde ha recibido tratamiento",
+                "Text": "Les preguntamos a los pacientes dónde han recibido tratamiento para su cáncer para poder solicitar sus historias clínicas y, según corresponda, el tejido almacenado de su tumor.",
+                "Button": "Ver el formulario de divulgación de información médica",
                 "ImageAlt": "Computer screen displaying medical center"
             },
             {
-                "Step": "STEP 3",
-                "Time": "Time varies by survey",
-                "Title": "Respond to surveys about you and your experience with cancer",
-                "Text": "In these surveys we ask questions about a participant’s experience with osteosarcoma, like when they were diagnosed and the types of treatments they've had.",
-                "Button": "View Surveys",
+                "Step": "PASO 3",
+                "Time": "El tiempo necesario para cada encuesta es diferente",
+                "Title": "Responda unas encuestas sobre usted y su experiencia como paciente con cáncer",
+                "Text": "Estas encuestas contienen preguntas sobre la experiencia de los participantes con el osteosarcoma, como cuándo fueron diagnosticados y los tipos de tratamiento que han recibido.",
+                "Button": "Ver encuestas",
                 "ImageAlt": "Computer screen displaying online survey"
             },
             {
-                "Step": "STEP 4",
-                "Time": "10 minutes",
-                "Title": "Provide a saliva and/or blood sample",
-                "Text": "We will send participants a kit to collect a sample of their saliva and/or blood, along with easy to follow instructions. We will study these samples to help improve our understanding of cancer by comparing the normal DNA in a participant's saliva or blood to their tumor DNA from any tumor samples we may collect.",
-                "Button": "View Kit Instructions",
+                "Step": "PASO 4",
+                "Time": "10 minutos",
+                "Title": "Proporcione una muestra de saliva o de sangre",
+                "Text": "Se les enviará a los participantes un kit para obtener muestras de saliva o sangre, junto con instrucciones fáciles de seguir. Analizaremos estas muestras para ayudar a mejorar nuestra comprensión del cáncer al comparar el ADN normal de la saliva o la sangre del participante con el ADN tumoral de toda muestra de tejido tumoral que podamos obtener.",
+                "Button": "Ver las instrucciones para el kit",
                 "ImageAlt": "Sample collection kit"
             }
         ]
     },
     "BenefitsParticipation": {
-        "Title": "Benefits of Participation",
+        "Title": "Beneficios de participar",
         "Participations": [
             {
-                "step": "Stay involved",
-                "Text": "Over time, we will provide participants with regular updates about the status of the research and share any discoveries that they have enabled us to make. We may also contact participants to participate in focus groups or provide additional feedback related to the overall project experience — we want to hear what’s important to you.",
+                "step": "Manténgase involucrado",
+                "Text": "Con el tiempo, brindaremos a los participantes actualizaciones periódicas sobre el estado de la investigación y compartiremos los descubrimientos que nos hayan permitido realizar. También podemos comunicarnos con los participantes para que formen parte de grupos de enfoque o para que den su opinión sobre la experiencia general en el proyecto. Queremos descubrir qué es importante para usted.",
                 "ImageAlt": "Speech bubbles sharing hearts and data visualizations"
             },
             {
-                "step": "Receive information about what we've learned from your tumor sample, if you choose",
-                "Text": "If participants choose to share archive tissue samples with the project, we may be able to share information about what we've learned from the genomic sequencing of a participant's tumor sample back with them. This information is intended to highlight how participants are contributing to research and will not have implications for their treatment or prognosis. Because of regulatory restrictions, we are unable to share results with participants in New York and Canada.",
-                "Button": "What types of information is shared about tumor samples?",
-                "Button1": "Download printable PDF to share with your care team",
+                "step": "Recibirá información sobre los hallazgos obtenidos a partir de la muestra de su tumor, si así lo desea",
+                "Text": "Si el participante decide compartir muestras de tejido archivadas con el proyecto, es posible que podamos comunicarle información sobre lo que hemos aprendido de la secuenciación genómica de la muestra de su tumor. Esta información tiene por objeto resaltar cómo los participantes contribuyen a la investigación y no tendrá ninguna repercusión en su tratamiento o pronóstico. Debido a ciertas restricciones reglamentarias, no podemos compartir los resultados con los participantes de Nueva York y Canadá.",
+                "Button": "¿Qué tipo de información se comparte sobre las muestras tumorales?",
+                "Button1": "Descargue el PDF para imprimir y compártalo con su equipo de atención.",
                 "ImageAlt": "Computer screen displaying medical center"
             },
             {
-                "step": "Learn more about your normal DNA, if you choose",
-                "Text": "The OSproject is also partnering with Invitae in order to sequence and share information on germline DNA (or “normal” DNA) from saliva samples. During the project, participants may be able to decide if they’d like to provide an additional saliva sample to learn more about their/their child’s normal DNA and speak with a genetic counselor to understand these results. If a participant does not participate in this process, their data will not be shared with Invitae. This process is not available for participants in Canada, as Invitae is not licensed to provide genetic counseling services there.",
+                "step": "Obtenga más información sobre su ADN normal, sí así lo desea",
+                "Text": "El Proyecto sobre Osteosarcoma también se asoció con Invitae para secuenciar y compartir información sobre ADN de línea germinal (o ADN “normal”) a partir de muestras de saliva. Durante el proyecto, los participantes podrán decidir si desean proporcionar una muestra de saliva adicional para adquirir más información sobre su ADN normal o el de su hijo(a) y consultar con un asesor genético para comprender estos resultados. Si el participante no desea formar parte de este proceso, sus datos no se compartirán con Invitae. Este proceso no está disponible para los participantes de Canadá, ya que Invitae no está autorizada a prestar servicios de asesoramiento genético allí.",
                 "ImageAlt": "Computer screen displaying online survey"
             }
         ]
@@ -353,128 +353,128 @@
 
     "SIPage": {
         "introduction": {
-            "Title": "Scientific Impact"
+            "Title": "Impacto científico"
         },
         "PASection": {
-            "Paragraph1": "<h4> Goals </h4>",
-            "Text": "The goal of the OSproject is to transform cancer care by enabling all patients who have ever been diagnosed with osteosarcoma to accelerate biomedical research through sharing their cancer samples, clinical information, and their experiences. In order to achieve these goals, datasets containing linked clinical, genomic, molecular, and patient-reported data (without including any personal information) will be regularly shared with the biomedical research community through scientific repositories such as cBioPortal for Cancer Genomics and the National Cancer Institute (NCI) Genomic Data Commons."
+            "Paragraph1": "<h4> Objetivos </h4>",
+            "Text": "El objetivo de este proyecto es transformar la atención oncológica al permitir que todos los pacientes a los que alguna vez se les haya diagnosticado osteosarcoma aceleren la investigación biomédica al compartir sus muestras de cáncer, información clínica y sus experiencias. Para lograr estos objetivos, los conjuntos de datos que contienen datos clínicos, genómicos, moleculares y notificados por los pacientes vinculados (sin incluir ninguna información personal) se compartirán periódicamente con la comunidad de investigación biomédica a través de repositorios científicos como el CBioPortal for Cancer Genomics y el Genomic Data Commons del Instituto Nacional del Cáncer (NCI)."
         },
         "DASection": {
-            "Paragraph2": "<h4>How We Collect Data</h4>",
+            "Paragraph2": "<h4>Cómo recopilamos datos</h4>",
             "Desc": [
-                "<span>&#8226;</span> <strong>Surveys:</strong> All participants in the OSproject will be able to provide patient-reported data through a series of surveys during enrollment and over time.",
-                "<span>&#8226;</span> <strong>Saliva and Blood samples:</strong> Participants will also be able to provide <a class=\"Link italic\" href=\"./Kit_Instructions.pdf\" target=\"_blank\">Saliva</a> and <a class=\"Link italic\" href=\"./Blood_Instructions.pdf\" target=\"_blank\">Blood</a> samples, which provide us with information about their DNA.",
-                "<span>&#8226;</span> <strong>Medical Records:</strong>  The project team requests copies of medical records from all institutions where participants have received care. This allows the project to understand a participant's history of treatments, procedures, and other clinical details.",
-                "<span>&#8226;</span> <strong>Tumor Samples:</strong> Participants may give us permission to request stored tumor samples from institutions where they have been treated. These are used together with saliva and blood samples to generate genomic and molecular data for analysis.",
-                "<span>&#8226;</span> <strong>Interviews or focus groups:</strong> Some participants will also be contacted to participate in focus groups or provide additional feedback related to the overall project experience and their perspectives on participating in genomic research.",
-                "Examples of important documents such as the consent form, surveys, and kit instructions can be found on our <a class=\"Link italic\" href='/participation'>Participation page.</a>"
+                "<span>&#8226;</span> <strong>Encuestas:</strong> todos los participantes del Proyecto sobre Osteosarcoma podrán proporcionar datos informados por pacientes por medio de una serie de encuestas durante la inscripción y a lo largo del tiempo.",
+                "<span>&#8226;</span> <strong>Muestras de saliva y sangre:</strong> los participantes también podrán proporcionar muestras de <a class=\"Link italic\" href=\"./Kit_Instructions.pdf\" target=\"_blank\">saliva</a> y <a class=\"Link italic\" href=\"./Blood_Instructions.pdf\" target=\"_blank\">sangre</a>, que nos permiten acceder a información sobre su ADN.",
+                "<span>&#8226;</span> <strong>Historias clínicas:</strong> el equipo del proyecto solicita copias de las historias clínicas de todas las instituciones donde los participantes han recibido atención médica. Esto permite que el proyecto cuente con los antecedentes del participante en cuanto a tratamientos, procedimientos y demás detalles clínicos.",
+                "<span>&#8226;</span> <strong>Muestras de tumores:</strong> los participantes otorgarnos permiso para solicitar muestras tumorales archivadas ante las instituciones donde han recibido tratamiento. Estas se utilizan junto con las muestras de saliva y sangre para generar datos genómicos y moleculares para su análisis.",
+                "<span>&#8226;</span> <strong>Grupos de enfoque y entrevistas:</strong> algunos participantes también serán contactados para formar parte de grupos de enfoque o para dar su opinión sobre la experiencia general con el proyecto y su punto de vista acerca de participar en una investigación genómica.",
+                "Puede encontrar ejemplos de documentos importantes como el formulario de consentimiento, las encuestas y las instrucciones del kit en nuestra <a class=\"Link italic\" href='/participation'>página de participación.</a>"
             ]
         },
         "ELSection": {
-            "Paragraph3": "<h4>Elements of Data that we Release</h4>",
-            "Text": "Thanks to the participation and contributions of patients enrolled in the OSproject, we will be able to release several types of data to the research community, allowing researchers to analyze many different aspects of how osteosarcoma works. The types of data we collect includes:",
+            "Paragraph3": "<h4>Datos que divulgamos</h4>",
+            "Text": "Gracias a la participación y a los aportes de los pacientes inscritos en el Proyecto sobre Osteosarcoma, podremos publicar diversos tipos de información para la comunidad científica. Esto permitirá a los investigadores analizar muchos aspectos diferentes de cómo funciona el osteosarcoma. Entre los datos que recopilamos se incluyen los siguientes:",
             "Desc": [
-                "<span>&#8226;</span> <strong>Genomic Information: </strong> Whole Exome Sequencing (WES) information will be included for tumor samples, including mutations, small insertions/deletions, amplifications, and deletions.",
-                "<span>&#8226;</span> <strong>Medical Record Information:</strong> Information about diagnosis and treatment will be abstracted from patients’ medical records. These responses will be modified and formatted to prevent individual identification without altering scientific utility.",
-                "<span>&#8226;</span> <strong>Pathology Report Information:</strong>  Detailed histologic information about each sample will be abstracted from pathology reports associated with each sample.",
-                "<span>&#8226;</span><strong>Patient-reported Data (PRD): </strong> Every patient that registers for the study has the option of completing multiple surveys about their experiences with osteosarcoma. Select questions from <a class=\"Link italic\" href=\"./surveys.pdf\" target=\"_blank\">these surveys</a> will be abstracted for inclusion. These responses will be modified and formatted to prevent individual identification without altering scientific utility. <ul type='circle'> <li>Specific types of questions include those about:</li> <ul type='square'> <li>Demographic and diagnostic information</li> <li>Information about any treatments and surgeries received</li> <li>The current location(s) / status of the participant’s osteosarcoma</li> <li>A place for participants to share any additional information that they’d like about their osteosarcoma</li> <li>A participant’s family history of cancer</li> <li>A participant’s current treatments for osteosarcoma</li> <li>A participant’s current quality of life</li></ul></ul>"
+                "<span>&#8226;</span> <strong>Información genómica: </strong>se determinará la información de secuenciación del exoma completo (Whole Exome Sequencing, WES) de las muestras tumorales, lo que incluye mutaciones, inserciones o deleciones pequeñas, amplificaciones y deleciones.",
+                "<span>&#8226;</span> <strong>Información sobre historias clínicas:</strong> se extraerá información relacionada con el diagnóstico y el tratamiento de las historias clínicas de los pacientes. Estas respuestas se modificarán y recibirán un formato nuevo para impedir la identificación de la persona sin modificar su utilidad científica.",
+                "<span>&#8226;</span> <strong>Datos de informes de anatomía patológica:</strong> se extraerá información histológica detallada de los informes de anatomía patológica asociados a cada muestra.",
+                "<span>&#8226;</span><strong>Datos notificados por el paciente: </strong>cada paciente que se inscribe en el estudio tiene la opción de completar múltiples encuestas sobre su experiencia con el osteosarcoma. Se obtendrán algunas preguntas determinadas de <a class=\"Link italic\" href=\"./surveys.pdf\" target=\"_blank\">estas encuestas</a> para incluirlas en el estudio. Estas respuestas se modificarán y recibirán un formato nuevo para impedir la identificación de la persona sin modificar su utilidad científica. <ul type='circle'> <li>Los tipos específicos de preguntas incluyen aquellas relacionadas con lo siguiente:</li> <ul type='square'> <li>Datos demográficos y de diagnóstico</li> <li>Información sobre todo tratamiento y procedimiento quirúrgico realizado</li> <li>La localización actual y el estado del osteosarcoma del participante</li> <li>Un sitio para que los participantes compartan cualquier información adicional que les gustaría dar a conocer sobre su osteosarcoma</li> <li>Antecedentes familiares de cáncer del participante</li> <li>Tratamientos en curso para el osteosarcoma del participante</li> <li>Calidad de vida actual del participante</li></ul></ul>"
             ]
         },
         "WDSection": {
-            "Paragraph4": "<h4>What does a data release look like?</h4>",
-            "Text": "Below are links out to publicly available datasets from other Count Me In projects. This is what we’re working towards for the Osteosarcoma Project. If you have questions about our data release process, please email us at <a href=\"mailto:info@osproject.org\" class='emailColor'>info@osproject.org.</a>"
+            "Paragraph4": "<h4>¿Qué características tiene una publicación de datos?</h4>",
+            "Text": "A continuación, encontrará enlaces a conjuntos de datos de acceso público procedentes de otros proyectos de Count Me In. Esto es lo que pretendemos con el Proyecto sobre Osteosarcoma. Si tiene alguna pregunta sobre el proceso de publicación de datos, escríbanos por correo electrónico a <a href=\"mailto:info@osproject.org\" class='emailColor'>info@osproject.org.</a>"
         },
         "IMGSection": {
-            "Text1": "<strong>The Angiosarcoma Project</strong>",
-            "Text2": "<strong>The Metastatic Prostate Cancer Project</strong>",
-            "Text3": "<strong>The Metastatic Breast Cancer Project</strong>"
+            "Text1": "<strong>El Proyecto sobre Angiosarcoma</strong>",
+            "Text2": "<strong>Proyecto sobre Cáncer de Próstata Metastásico</strong>",
+            "Text3": "<strong>El Proyecto sobre Cáncer de Mama Metastásico</strong>"
         },
         "TermSection": {
-            "Paragraph5": "<h4>Understanding Terms Used in Cancer Research</h4>",
-            "Text": "<span>&#8226;</span> For reference to common terms used in cancer care and research, the National Cancer Institute has developed a Dictionary of Cancer Terms, found <a class=\"Link italic\" href=\"https://www.cancer.gov/publications/dictionaries/cancer-terms/\" target=\"_blank\">here.</a>"
+            "Paragraph5": "<h4>Explicación de los términos utilizados en la investigación del cáncer</h4>",
+            "Text": "<span>&#8226;</span> A modo de referencia para los términos frecuentes utilizados en la atención e investigación del cáncer, el Instituto Nacional del Cáncer ha desarrollado un diccionario de términos relacionados con el cáncer que puede consultar <a class=\"Link italic\" href=\"https://www.cancer.gov/publications/dictionaries/cancer-terms/\" target=\"_blank\">aquí.</a>"
         }
     },
     "AboutUsPage": {
         "IntroductionSection": {
-            "Title": "About Us",
-            "HeroImgAlt": "Broad hero",
+            "Title": "Sobre nosotros",
+            "HeroImgAlt": "Héroe general",
             "Text": {
-                "Main": "The <span class=\"normal bold\">Osteosarcoma Project</span> is part of <span class=\"normal italic\">Count Me In</span>, a nonprofit organization that <span class=\"normal bold\">brings together patients and researchers</span> as partners to accelerate discoveries in cancer research.",
-                "Link": "Visit <span class=\"italic\">Count Me In</span> website"
+                "Main": "El <span class=\"normal bold\">Proyecto sobre Osteosarcoma</span> es parte de <span class=\"normal italic\">Count Me In</span>, una organización sin fines de lucro que <span class=\"normal bold\">une a pacientes e investigadores</span> como socios para agilizar los descubrimientos en la investigación del cáncer.",
+                "Link": "Visite el sitio web de <span class=\"italic\">Count Me In</span>"
             }
         },
         "CMISection": {
-            "Paragraph1": "is stewarded by the Broad Institute of MIT and Harvard, the Dana-Farber Cancer Institute and Emerson Collective.",
-            "Paragraph2": "Count Me In's Osteosarcoma (OS) Project is supported by a grant from the National Cancer Institute's Cancer Moonshot program and is part of the Participant Engagement and Cancer Genome Sequencing (PE-CGS) Network of research centers.",
-            "Paragraph3": "The Osteosarcoma Project has been designed and implemented collaboratively with osteosarcoma patients, advocates, caregivers, loved ones, cancer researchers, and clinicians."
+            "Paragraph1": "es gestionado por el Broad Institute del MIT y Harvard, el Dana-Farber Cancer Institute y Emerson Collective.",
+            "Paragraph2": "El Proyecto sobre Osteosarcoma de Count Me In cuenta con el apoyo de una subvención del programa Cancer Moonshot del Instituto Nacional del Cáncer y forma parte de la red de Participant Engagement and Cancer Genome Sequencing (PE-CGS) de los centros de investigación.",
+            "Paragraph3": "El Proyecto sobre Osteosarcoma se ha diseñado e implementado en estrecha colaboración con pacientes de osteosarcoma, defensores, cuidadores, seres queridos, investigadores de cáncer y médicos especialistas."
         },
         "PACSection": {
-            "Title": "Project Advisory Council",
-            "Text": "The Osteosarcoma Project Advisory Council (PAC) is made up of <span class=\"bold\">patients, advocates, caregivers,</span> and <span class=\"bold\">loved ones</span> who have been impacted by osteosarcoma. The PAC meets regularly with the project operations team via video calls to <span class=\"bold\">develop all aspects of the project,</span> including survey questions, the project website, the project name and logo, and sample kits.",
+            "Title": "Consejo Asesor del Proyecto",
+            "Text": "El Consejo Asesor del Proyecto sobre Osteosarcoma está compuesto por <span class=\"bold\">pacientes, defensores, cuidadores</span> y <span class=\"bold\">seres queridos</span> afectados por el osteosarcoma. El Consejo Asesor se reúne periódicamente con el equipo de operaciones del proyecto a través de videollamadas para <span class=\"bold\">desarrollar todos los aspectos del proyecto,</span> entre ellos, las preguntas de las encuestas, el sitio web del proyecto, el nombre y logotipo del proyecto y los kits de muestras.",
             "Members": [
                 {
                     "Name": "Theresa Beech",
-                    "Bio": "Theresa Beech is the mother of two kids, Daniel and Sara. When Daniel was 11, he was diagnosed with osteosarcoma. Two years later, at the age of 13, he was dead. Daniel had a smile that would light up a room, and all throughout treatment, he never quit smiling. While Daniel was on hospice, Theresa taught herself genomics and started doing research into osteosarcoma genetics. She was able to identify two drugs which corresponded to mutations in Daniel’s tumor and prolonged his life. Since Daniel’s death on August 28, 2016, she has continued her patient advocacy and genomics research and is the Principal Investigator of POWR, the Patient/parent Osteosarcoma genome-Wide Registry, believed to be one of the largest genomic and medical history registry of osteosarcoma data in the world. She has presented her research findings at numerous scientific conferences in the US and internationally, and has been invited to speak at a variety of forums. A TV long-story on Daniel and her work won the prestigious National 2018 June L. Biedler Award for TV journalism. In 2019, she started a closed Facebook group called the Osteosarcoma Information Group to provide scientific and medical information and explanations to osteosarcoma patients and their families. Today, there are well over 500 members and doctors and researchers are now joining the group as well. She is the founder and President of “Because of Daniel '', a charitable foundation dedicated to osteosarcoma research and clinical trials. She is also a co-founder and board member of the Osteosarcoma Collaborative, a charitable foundation dedicated to promoting collaboration in osteosarcoma. In her day job, Theresa is a space engineer (aka rocket scientist) for NASA.",
+                    "Bio": "Theresa Beech es madre de dos niños: Daniel y Sara. Cuando Daniel tenía 11 años, le diagnosticaron osteosarcoma. Dos años más tarde, falleció a la edad de 13 años. La sonrisa de Daniel era capaz de iluminar una habitación y, durante todo el tratamiento, nunca dejó de sonreír. Mientras Daniel estaba en cuidados paliativos, Theresa aprendió sobre genómica y empezó a investigar sobre la genética del osteosarcoma. Consiguió identificar dos fármacos que correspondían a mutaciones del tumor de Daniel y que prolongaron su vida. Desde la muerte de Daniel el 28 de agosto del 2016, Theresa continúa dedicándose a apoyar a estos pacientes y a la investigación genómica. Hoy en día, es la investigadora principal del registro Patient/parent Osteosarcoma genome-Wide Registry (POWR), considerado uno de los registros de datos genómicos y de historias clínicas de osteosarcoma más grandes del mundo. Ha presentado los resultados de sus investigaciones en numerosas conferencias científicas tanto en los Estados Unidos como en el extranjero, y ha sido invitada como oradora en diversos foros. Un documental de televisión sobre Daniel y su trabajo ganó el prestigioso premio nacional de periodismo June L. Biedler en 2018. En 2019, creó un grupo cerrado en Facebook llamado Osteosarcoma Information Group para proporcionar información y explicaciones científicas y médicas a los pacientes con osteosarcoma y a sus familiares. En la actualidad, hay más de 500 miembros en el grupo, al que también se están uniendo médicos e investigadores. Es la fundadora y presidente de “Because of Daniel”, una fundación benéfica dedicada a las investigaciones y ensayos clínicos sobre el osteosarcoma. Además, es cofundadora y miembro de la junta directiva de la Osteosarcoma Collaborative, una fundación benéfica dedicada a promover la colaboración en el estudio del osteosarcoma. En su trabajo diario, Theresa es ingeniera espacial para la NASA.",
                     "Image": "assets/images/PAC-Theresa-Beech.jpg",
-                    "Alt": "Theresa Beech photo"
+                    "Alt": "Fotografía de Theresa Beech"
                 },
                 {
                     "Name": "Ann Graham",
-                    "Bio": "Ann is the founder and President of MIB Agents Osteosarcoma Alliance. At age 43, Ann was diagnosed with osteosarcoma and was treated in the Pediatric Center at Memorial Sloan Kettering Cancer Center. She was in awe of the courage of her fellow patients. Like most, she was unaware of how little funding pediatric cancers receive, and that osteosarcoma patients lose limbs, fertility, hearing, organ function and too often, their lives. She knew there had to be a way to Make It Better. She began MIB Agents, a nationwide 501c3 non-profit and the FACTOR Conference. Together with MIB Agents everywhere, they endeavor to Make It Better for osteosarcoma patients. She is an Advocate with the A2A Alliance, The Mighty, and a member of CAC2.",
+                    "Bio": "Ann es la fundadora y presidente de MIB Agents Osteosarcoma Alliance. Ann fue diagnosticada con osteosarcoma a la edad de 43 años y recibió tratamiento en el Centro Pediátrico del Memorial Sloan Kettering Cancer Center. Le asombraba la valentía de sus compañeros. Como la mayoría, desconocía la poca financiación que reciben los estudios sobre cánceres pediátricos y que los pacientes de osteosarcoma pierden extremidades, fertilidad, audición, función de órganos y, con demasiada frecuencia, la vida. Supo que tenía que haber una forma de mejorar las cosa y, por eso, creó MIB Agents, una organización nacional sin fines de lucro conforme al artículo 501(c)3 y la Conferencia FACTOR. Junto con los miembros de MIB Agents de todo el mundo, se esfuerzan por mejorar las oportunidades de los pacientes con osteosarcoma. Se desempeña como defensora de pacientes en la A2A Alliance, The Mighty, y es miembro del CAC2.",
                     "Image": "assets/images/PAC-Ann-Graham.jpg",
-                    "Alt": "Ann Graham photo"
+                    "Alt": "Fotografía de Ann Graham"
                 },
                 {
                     "Name": "Alexis Johnson",
-                    "Bio": "Alexis Johnson is a 12-year Osteosarcoma Cancer survivor and an amputee. During her treatment, Alexis spent countless hours in the hospital and became close with the patients around her. It was here that she met some of the most incredible children who never let their illness stand in their way. She watched them bravely battle Osteosarcoma and many losing their fight due to exhausting all treatment options. Alexis learned that there has been no new treatments and not enough research done. This drove Alexis to wanting to do something to help change this outcome. Alexis has dedicated her life to becoming an advocate in the fight against Osteosarcoma. She is involved in the wonderful organization MIB and worked on several initiatives with them. She has also used the power of her voice to raise awareness and help others who are currently in the fight. Alexis is currently in medical school at the University of Arizona with an end goal of becoming a pediatric oncologist. She is tremendously proud to be a part of this project and understands what the power of knowledge and data can do to greatly change this outcome.",
+                    "Bio": "Alexis Johnson es una sobreviviente del cáncer de osteosarcoma desde hace 12 años que ha sido amputada. Durante su tratamiento, Alexis pasó incontables horas en el hospital y desarrolló una relación estrecha con los pacientes a su alrededor. Fue allí donde conoció a algunos de los niños más increíbles, que nunca dejaron que su enfermedad se interpusiera en su camino. Fue testigo de su valiente lucha contra el osteosarcoma y vio a muchos de ellos perder la batalla después de agotar todas las opciones de tratamiento. Alexis descubrió que no han surgido nuevos tratamientos y que la investigación no ha sido suficiente. Esto la motivó a querer hacer algo para ayudar a cambiar este resultado. Alexis ha dedicado su vida a abogar por la lucha contra el osteosarcoma. Participa en la maravillosa organización MIB y trabajó en varias iniciativas con ellos. También ha usado el poder de su voz para crear conciencia y ayudar a otras personas que hoy combaten la enfermedad. Alexis está estudiando medicina en la Universidad de Arizona, con la meta final de convertirse en oncóloga pediatra. Está sumamente orgullosa de formar parte de este proyecto y entiende lo que el poder del conocimiento y la información pueden hacer para cambiar este resultado.",
                     "Image": "assets/images/PAC-Alexis-Johnson.jpg",
-                    "Alt": "Alexis Johnson photo"
+                    "Alt": "Fotografía de Alexis Johnson"
                 },
                 {
                     "Name": "Ryan Kennington",
-                    "Bio": "At the age of 17 years old, Ryan was diagnosed with Osteosarcoma in the femoral head of his right femur. At the University of Pennsylvania Abramson Cancer Center, he underwent treatment and a limb salvaging surgery. One year after he completed treatment, he had a relapse in his lungs and had a video-assisted thoracoscopic surgery to remove the single nodule. Today, Ryan has been cancer free for over 4 years and is enjoying life free of disease. Active in the cancer community, Ryan is involved in non-profit organizations such as MIB agents, Steps to Cure Sarcoma, and UDANCE in order to help raise awareness and funds for cancer research. Motivated by his experiences with Osteosarcoma, he is currently working on earning his Bachelor of Science degree in biology at the University of Delaware and is focusing his attention on improving the outcome of Osteosarcoma patients.",
+                    "Bio": "A los 17 años, Ryan fue diagnosticado con osteosarcoma en la cabeza del fémur derecho. En el Centro Oncológico Abramson de la Universidad de Pensilvania, recibió tratamiento y se sometió a una cirugía de conservación de extremidades. Un año después de concluido el tratamiento, presentó una recaída en los pulmones y le realizaron una cirugía toracoscópica asistida por video para extraer el único nódulo. Hoy Ryan lleva más de cuatro años libre de cáncer y disfruta de una vida sin enfermedad. Como miembro activo de la comunidad de cáncer, Ryan participa en organizaciones sin fines de lucro, tales como MIB Agents, Steps to Cure Sarcoma y UDANCE, con el fin de ayudar a crear conciencia y recaudar fondos para la investigación del cáncer. Motivado por sus experiencias con el osteosarcoma, está estudiando para obtener una Licenciatura en Ciencias Biológicas de la Universidad de Delaware y se centra en mejorar los resultados de los pacientes con osteosarcoma.",
                     "Image": "assets/images/PAC-Ryan-Kennington.jpg",
-                    "Alt": "Ryan Kennington photo"
+                    "Alt": "Fotografía de Ryan Kennington"
                 },
                 {
                     "Name": "Ben Moody",
-                    "Bio": "Ben Moody is the father of Claire, who was diagnosed with osteosarcoma in 2012 and who passed away in 2016, aged 24.  She was a bright light; she lit up every room. Claire was irrepressibly happy; teeming with energy, she flapped, she twirled, she loved to laugh. One of Claire’s many doctors wrote “Claire is an inspiration to all of us that care for sarcoma patients or do sarcoma research; she is the motivation that pushes us on our journey to find a cure.” Since Claire’s death, Ben has been dedicated to collaborating with those who are passionately focused on finding a cure for osteosarcoma, including as a member of the Board of the Osteosarcoma Collaborative.  Ben is also co-founder of Pan American Finance, an advisory firm based in Miami, Florida, with a key focus on raising capital for renewable energy. Ben has over 35 years of investment banking and private equity experience, and is a graduate of the University of Oxford. ",
+                    "Bio": "Ben Moody es el padre de Claire, quien fue diagnosticada con osteosarcoma en 2012 y falleció en 2016, a los 24 años. Claire era brillante e iluminaba cualquier lugar al que entraba. Era inconteniblemente feliz, rebosaba de energía, era animada, hacía piruetas y le encantaba reír.  Uno de los muchos médicos de Claire escribió: “Claire es una inspiración para todos los que atendemos a pacientes de sarcoma o investigamos los sarcomas; es la motivación que nos impulsa en nuestra travesía hacia encontrar la cura”. Desde la muerte de Claire, Ben se ha dedicado a colaborar con todo aquél apasionado por encontrar una cura para el osteosarcoma, lo que incluye su participación como miembro de la junta directiva de la Osteosarcoma Collaborative. Además, es cofundador de Pan American Finance, una empresa de consultoría con sede en Miami, Florida, y el objetivo principal de recaudar fondos para la energía renovable.  Ben tiene más de 35 años de experiencia en inversiones bancarias y capital de riesgo, y se ha graduado de la Universidad de Oxford. ",
                     "Image": "assets/images/PAC-Ben-Moody.jpg",
-                    "Alt": "Ben Moody photo"
+                    "Alt": "Fotografía de Ben Moody"
                 },
                 {
-                    "Name": "Laura Sobeich",
-                    "Bio": "Laura Sobiech’s son, Zach, died from osteosarcoma at the age of 18. In the last year of Zach’s life, he wrote a song called “Clouds” that became an international hit. After Zach died, Laura wrote a book called Fly a Little Higher: How God Answered a Mom’s Small Prayer in a Big Way, to tell the story of Zach’s battle with osteosarcoma and how he chose to live despite the disease. This year, Laura’s book is being made into a film by Warner Brothers. Laura works at Children’s Cancer Research Fund, a nonprofit that raises seed grant money for research, and where the Zach Sobiech Osteosarcoma Fund was established in 2012. All proceeds from Zach’s music are donated to the fund to support Zach’s wish that no other kids will have to die from osteosarcoma.",
+                    "Name": "Laura Sobiech",
+                    "Bio": "El hijo de Laura Sobiech, Zach, falleció de osteosarcoma a los 18 años. Durante el último año de vida de Zach, Laura escribió una canción titulada “Clouds” (que significa “nubes”) que se convirtió en un hit internacional.  Luego de su muerte, escribió el libro Fly a Little Higher: How God Answered a Mom's Small Prayer in a Big Way (Vuela un poco más alto: cómo Dios dio una gran respuesta a la pequeña plegaria de una madre) para contar la historia de la lucha de Zach contra el osteosarcoma y de cómo eligió vivir a pesar de la enfermedad. Este año, Warner Brothers llevará el libro de Laura a la pantalla grande. Laura trabaja en el Children's Cancer Research Fund, una organización sin fines de lucro que recauda capital semilla para la investigación y donde se creó el Zach Sobiech Osteosarcoma Fund en 2012. Todo el producido de la música de Zach se dona al fondo para honrar su deseo de que ningún otro niño tenga que morir de osteosarcoma. ",
                     "Image": "assets/images/PAC-Laura-Sobeich.jpg",
-                    "Alt": "Laura Sobeich photo"
+                    "Alt": "Fotografía de Laura Sobiech"
                 }
             ]
         },
         "SACSection": {
-            "Title": "Scientific Advisory Council",
+            "Title": "Consejo de Asesoría Científica",
             "Members": [
                 {
                     "Name": "Katherine Janeway",
                     "Affiliations": [
                         "Dana-Farber Cancer Institute",
                         "Boston Children’s Hospital",
-                        "Harvard Medical School"
+                        "Escuela de Medicina de Harvard"
                     ],
                     "Url": "http://www.danafarberbostonchildrens.org/finddoctor/details.aspx?ID=29736",
                     "Image": "assets/images/SAC-Katherine-Janeway.jpg",
-                    "Alt": "Katherine Janeway photo"
+                    "Alt": "Fotografía de Katherine Janeway"
                 },
                 {
                     "Name": "Brian Crompton",
                     "Affiliations": [
                         "Dana-Farber Cancer Institute",
                         "Boston Children’s Hospital",
-                        "Harvard Medical School",
-                        "Broad Institute of MIT and Harvard"
+                        "Escuela de Medicina de Harvard",
+                        "Broad Institute del MIT y Harvard"
                     ],
                     "Url": "http://research.danafarberbostonchildrens.org/crompton/people/",
                     "Image": "assets/images/SAC-Brian-Crompton.jpg",
-                    "Alt": "Brian Crompton photo"
+                    "Alt": "Fotografía de Brian Crompton"
                 },
                 {
                     "Name": "Alejandro Sweet-Cordero",
@@ -484,72 +484,72 @@
                     ],
                     "Url": "https://cancer.ucsf.edu/people/profiles/sweetcordero_alejandro.8106",
                     "Image": "assets/images/SAC-Alejandro-Sweet-Cordero.jpg",
-                    "Alt": "Alejandro Sweet-Cordero photo"
+                    "Alt": "Fotografía de Alejandro Sweet-Cordero"
                 },
                 {
                     "Name": "Richard Gorlick",
                     "Affiliations": [
-                        "The University of Texas MD Anderson Cancer Center"
+                        "Centro Oncológico MD Anderson de la Universidad de Texas"
                     ],
                     "Url": "https://faculty.mdanderson.org/profiles/richard_gorlick.html",
                     "Image": "assets/images/SAC-Richard-Gorlick.jpg",
-                    "Alt": "Richard Gorlick photo"
+                    "Alt": "Fotografía de Richard Gorlick"
                 },
                 {
                     "Name": "David Malkin",
                     "Affiliations": [
                         "The Hospital for Sick Children",
-                        "University of Toronto"
+                        "Universidad de Toronto"
                     ],
                     "Url": "http://www.sickkids.ca/AboutSickKids/Directory/People/M/David-Malkin-staff-profile.html",
                     "Image": "assets/images/SAC-David-Malkin.jpg",
-                    "Alt": "David Malkin photo"
+                    "Alt": "Fotografía de David Malkin"
                 },
                 {
                     "Name": "Nathalie Gaspar",
                     "Affiliations": [
-                        "Institut Gustave Roussy"
+                        "Instituto Gustave Roussy"
                     ],
                     "Url": "",
                     "Image": "assets/images/SAC-Nathalie-Gaspar.jpg",
-                    "Alt": "Nathalie Gaspar photo"
+                    "Alt": "Fotografía de Nathalie Gaspar"
                 }
             ]
         },
         "CCSection": {
-            "Title": "Clinical Champions",
+            "Title": "Promotores de la salud",
             "Members": [
                 {
                     "Name": "Megan Anderson",
                     "Affiliations": [
                         "Boston Children’s Hospital",
-                        "Harvard Medical School"
+                        "Escuela de Medicina de Harvard"
                     ],
                     "Url": "",
                     "Image": "assets/images/Anderson.jpg",
-                    "Alt": "Megan Anderson photo"
+                    "Alt": "Fotografía de Megan Anderson"
                 },
                 {
                     "Name": "Brian Crompton",
                     "Affiliations": [
                         "Dana-Farber Cancer Institute",
                         "Boston Children’s Hospital",
-                        "Harvard Medical School",
-                        "Broad Institute of MIT and Harvard"
+                        "Escuela de Medicina de Harvard",
+                        "Broad Institute del MIT y Harvard"
                     ],
                     "Url": "http://research.danafarberbostonchildrens.org/crompton/people/",
                     "Image": "assets/images/SAC-Brian-Crompton.jpg",
-                    "Alt": "Brian Crompton photo"
+                    "Alt": "Fotografía de Brian Crompton"
                 },
                 {
                     "Name": "Suzanne George",
                     "Affiliations": [
                         "Dana-Farber Cancer Institute",
-                        "Harvard Medical School"
+                        "Escuela de Medicina de Harvard"
                     ],
                     "Url": "",
                     "Image": "assets/images/George.jpg",
-                    "Alt": "Suzanne George photo"
+                    "Alt": "Fotografía de Suzanne George"
                 },
                 {
                     "Name": "Candace Haddox",
@@ -558,574 +558,574 @@
                     ],
                     "Url": "",
                     "Image": "assets/images/Haddox.jpg",
-                    "Alt": "Candace Haddox photo"
+                    "Alt": "Fotografía de Candace Haddox"
                 },
                 {
                     "Name": "Priscilla Merriam",
                     "Affiliations": [
                         "Dana-Farber Cancer Institute",
-                        "Harvard Medical School"
+                        "Escuela de Medicina de Harvard"
                     ],
                     "Url": "",
                     "Image": "assets/images/Merriam.jpg",
-                    "Alt": "Priscilla Merriam photo"
+                    "Alt": "Fotografía de Priscilla Merriam"
                 },
                 {
                     "Name": "Michael Nathenson",
                     "Affiliations": [
                         "Brigham and Women’s Hospital",
                         "Dana-Farber Cancer Institute",
-                        "Harvard Medical School"
+                        "Escuela de Medicina de Harvard"
                     ],
                     "Url": "",
                     "Image": "assets/images/Nathenson.jpg",
-                    "Alt": "Michael Nathenson photo"
+                    "Alt": "Fotografía de Michael Nathenson"
                 },
                 {
                     "Name": "Jay Oza",
                     "Affiliations": [
                         "Dana-Farber Cancer Institute",
-                        "Harvard Medical School"
+                        "Escuela de Medicina de Harvard"
 
                     ],
                     "Url": "",
                     "Image": "assets/images/Oza.jpg",
-                    "Alt": "Jay Oza photo"
+                    "Alt": "Fotografía de Jay Oza"
                 },
                 {
                     "Name": "Chandrajit Raut",
                     "Affiliations": [
                         "Brigham and Women’s Hospital",
                         "Dana-Farber Cancer Institute",
-                        "Harvard Medical School"
+                        "Escuela de Medicina de Harvard"
                     ],
                     "Url": "",
                     "Image": "assets/images/Raut.jpg",
-                    "Alt": "Chandrajit Raut photo"
+                    "Alt": "Fotografía de Chandrajit Raut"
                 }
 
             ]
         },
         "LearnMoreSection": {
-            "Text": "Learn more about the Osteosarcoma Project"
+            "Text": "Más información sobre el Proyecto sobre Osteosarcoma"
         }
     },
     "FaqPage": {
-        "Title": "Frequently Asked Questions",
+        "Title": "Preguntas frecuentes",
         "Button": {
-            "Expand": "Expand all",
-            "Collapse": "Collapse all",
-            "MoreFAQs": "More FAQs"
+            "Expand": "Expandir todo",
+            "Collapse": "Contraer todo",
+            "MoreFAQs": "Más preguntas frecuentes"
         },
         "IntroText": {
-            "Paragraph1": "As part of the OSproject, patients contribute their experiences, clinical information, and samples to make data freely available for any OS researchers. By generating the most comprehensive dataset for OS, the entire cancer research community can make discoveries that can lead to a better understanding of the disease and changes for future treatments. The project is part of Count Me In, a nonprofit organization that brings together patients and researchers as partners to accelerate discoveries in cancer research. The project also works in collaboration with a growing coalition of nonprofit advocacy partners.",
+            "Paragraph1": "Como parte del Proyecto sobre Osteosarcoma (OS), los pacientes contribuyen con sus experiencias, información clínica y muestras para reunir información y ponerla a disposición de cualquier investigador de osteosarcoma. Al generar el conjunto de datos sobre el osteosarcoma más exhaustivo, toda la comunidad de investigación del cáncer puede hacer descubrimientos que conduzcan a un mejor entendimiento de la enfermedad y a cambios en los futuros tratamientos. El proyecto es parte de Count Me In, una organización sin fines de lucro que une a pacientes e investigadores como socios para agilizar los descubrimientos en la investigación del cáncer. El proyecto también trabaja en colaboración con una creciente coalición de promotores aliados sin fines de lucro.",
             "Paragraph2": {
-                "Part1": "This project has been built with the guidance and input of many different members of the OS community. Below we have answered some general questions about this project, as well as questions that are specific to different members of the community - please read any and all that may apply. If you have any questions, please feel free to reach out to us at",
-                "Part2": "or by phone at"
+                "Part1": "Este proyecto se ha desarrollado con la orientación y aportaciones de muchos miembros diferentes de la comunidad del osteosarcoma. A continuación, hemos respondido algunas preguntas generales acerca de este proyecto, así como preguntas específicas para los diferentes miembros de la comunidad. Lea todas y cada una de las preguntas que correspondan. Si tiene alguna pregunta, puede escribirnos un correo electrónico a",
+                "Part2": "o llamarnos al"
             }
         },
         "FaqSections": [
             {
-                "Title": "General FAQ",
+                "Title": "Preguntas frecuentes generales",
                 "Items": [
                     {
-                        "Question": "What is the goal of the OSproject?",
+                        "Question": "¿Cuál es el objetivo del Proyecto sobre Osteosarcoma?",
                         "Paragraphs": [
-                            "The goal of the OSproject is to transform cancer care by enabling all patients who have ever been diagnosed with osteosarcoma to accelerate biomedical research through sharing their cancer samples, clinical information, and their experiences. In order to achieve these goals, datasets containing linked clinical, genomic, molecular, and patient-reported data (without including any personal information) will be regularly shared with the biomedical research community through scientific repositories such as cBioPortal for Cancer Genomics and the National Cancer Institute (NCI) Genomic Data Commons."
+                            "El objetivo de este proyecto es transformar la atención oncológica al permitir que todos los pacientes a los que alguna vez se les haya diagnosticado osteosarcoma aceleren la investigación biomédica al compartir sus muestras de cáncer, información clínica y sus experiencias. Para lograr estos objetivos, los conjuntos de datos que contienen datos clínicos, genómicos, moleculares y notificados por los pacientes vinculados (sin incluir ninguna información personal) se compartirán periódicamente con la comunidad de investigación biomédica a través de repositorios científicos como el CBioPortal for Cancer Genomics y el Genomic Data Commons del Instituto Nacional del Cáncer (NCI)."
                         ]
                     },
                     {
-                        "Question": "What does participation look like?",
+                        "Question": "¿En qué consiste la participación?",
                         "Paragraphs": [
-                            "Participants can join through the project website to share their information and experiences with us.",
-                            "<span>&#8226; <b>Provide consent: </b></span> The consent form is how participants give researchers their permission to take part in the study. It will also allow people to elect to share samples of saliva, blood, and/or tissue, as well as copies of their medical records. This document is several pages, but we encourage participants to take their time and reach out to the project team with any questions.",
-                            "<span>&#8226; <b>Tell us where you’ve been treated: </b></span> We ask where participants have been treated, so that we can request medical records, and if applicable, archived tumor tissue.",
-                            "<span>&#8226; <b>Respond to surveys: </b></span> In these surveys we ask questions about a participant’s experience with OS, like when they were diagnosed and the types of treatments they've had. Participants may also be contacted by the team to participate in focus groups or additional surveys about their experiences participating in the project.",
-                            "<span>&#8226; <b>Provide a saliva and/or blood sample: </b></span>  We will send participants a kit to collect a sample of their saliva and/or blood, along with easy to follow instructions. We will study these samples to help improve our understanding of cancer by comparing the normal DNA in a participant's saliva or blood to their tumor DNA from any tumor samples we may collect."
+                            "Los participantes pueden unirse a través del sitio web del proyecto para compartir su información y experiencias con nosotros.",
+                            "<span>&#8226; <b>Dé su consentimiento: </b></span>el formulario de consentimiento es la manera en que los participantes les otorgan su permiso a los investigadores para participar en el estudio. También permite que las personas decidan compartir o no muestras de saliva, sangre o tejido, así como copias de sus historias clínicas. Este documento contiene varias páginas, pero recomendamos a los participantes que se tomen el tiempo necesario para leerlo y que se comuniquen con el equipo del proyecto si tienen alguna pregunta.",
+                            "<span>&#8226; <b>Indique dónde ha recibido tratamiento: </b></span>les preguntamos a los participantes dónde han recibido tratamiento para poder solicitar sus historias clínicas y, según corresponda, el tejido almacenado de su tumor.",
+                            "<span>&#8226; <b>Responda encuestas: </b></span>estas encuestas contienen preguntas sobre la experiencia de los participantes con el osteosarcoma, como cuándo fueron diagnosticados y los tipos de tratamiento que han recibido. Es posible que el equipo también se comunique con los participantes para formar parte de grupos de enfoque o responder a encuestas adicionales sobre sus experiencias al participar en el proyecto.",
+                            "<span>&#8226; <b>Proporcione una muestra de saliva o sangre: </b></span>se les enviará a los participantes un kit para obtener muestras de saliva o sangre, junto con instrucciones fáciles de seguir. Analizaremos estas muestras para ayudar a mejorar nuestra comprensión del cáncer al comparar el ADN normal de la saliva o la sangre del participante con el ADN tumoral de toda muestra de tejido tumoral que podamos obtener."
                         ]
                     },
                     {
-                        "Id": "participationBenefits",
-                        "Question": "Are there any benefits that participants receive for participating?",
+                        "Id": "Beneficios de la participación",
+                        "Question": "¿La participación otorga algún beneficio?",
                         "Paragraphs": [
-                            "<a id='Pbenefits'>While there are no explicit benefits that individuals receive for enrolling in the OSproject, the project offers some optional opportunities to become more involved that may be of interest to participants looking to learn more about the samples they provide.</a>",
-                            "<span>&#8226; <b>Receive information about what we’ve learned from your tumor sample (optional): </b></span> If a participant elects to share archive tissue samples with the project, we may be able to share information from the genomic sequencing of the tumor sample back with the participant. This information is intended to highlight how participant sample(s) are contributing to research and will not have implications for their treatment or prognosis. Because of regulatory restrictions, we are unable to share results with participants in New York and Canada.",
-                            "<span>&#8226; <b>Learn more about your normal DNA (optional): </b></span> The project is also partnering with Invitae in order to sequence and share information on germline DNA (or “normal” DNA) from saliva samples. During the project, participants may be able to decide if they would like to provide an additional saliva sample to learn more about their normal DNA and speak with a genetic counselor to understand these results. If a participant does not participate in this process, their data will not be shared with Invitae. This process is not available for participants in Canada, as Invitae is not licensed to provide genetic counseling services there."
+                            "<a id='Pbenefits'>Si bien no existen beneficios tácitos que los individuos puedan recibir por su participación en el Proyecto sobre Osteosarcoma, el proyecto ofrece algunas oportunidades opcionales para involucrarse más que podrían interesarles a aquellos participantes que deseen obtener más información acerca de las muestras que proporcionan.</a>",
+                            "<span>&#8226; <b>Reciba información sobre los hallazgos obtenidos de la muestra de su tumor (opcional): </b></span>si el participante decide compartir muestras de tejido archivadas con el proyecto, es posible que podamos comunicarle información de la secuenciación genómica de la muestra del tumor. Esta información tiene por objeto resaltar cómo las muestras del participante contribuyen a la investigación y no tendrá ninguna repercusión en su tratamiento o pronóstico. Debido a ciertas restricciones reglamentarias, no podemos compartir los resultados con los participantes de Nueva York y Canadá.",
+                            "<span>&#8226; <b>Obtenga más información sobre su ADN normal (opcional): </b></span>el proyecto también se asoció con Invitae para secuenciar y compartir información sobre ADN de línea germinal (o ADN “normal”) a partir de muestras de saliva. Durante el proyecto, los participantes podrán decidir si desean proporcionar una muestra de saliva adicional para adquirir más información sobre su ADN normal y consultar con un asesor genético para comprender estos resultados. Si el participante no desea formar parte de este proceso, sus datos no se compartirán con Invitae. Este proceso no está disponible para los participantes de Canadá, ya que Invitae no está autorizada a prestar servicios de asesoramiento genético allí."
                         ]
                     },
                     {
-                        "Question": "Who is conducting this research?",
+                        "Question": "¿Quién realiza esta investigación?",
                         "Paragraphs": [
-                            "This project is being conducted by the Broad Institute of MIT and Harvard, Dana-Farber Cancer Institute, and Count Me In, a non-profit research initiative that conducts patient-partnered studies of cancer. Count Me In's Osteosarcoma (OS) Project and Leiomyosarcoma (LMS) Project are supported by a grant from the National Cancer Institute's Cancer Moonshot program and are part of the <a class=\"Link\" href=\"https://www.cancer.gov/research/key-initiatives/moonshot-cancer-initiative/implementation/patient-engagement\" target=\"_blank\"> Participant Engagement and Cancer Genome Sequencing (PE-CGS) Network of research centers.</a>"
+                            "Este proyecto es llevado a cabo por el Broad Institute del MIT y Harvard, Dana-Farber Cancer Institute y Count Me In, una iniciativa de investigación sin fines de lucro que realiza estudios de cáncer en colaboración con pacientes. El Proyecto sobre Osteosarcoma y el Proyecto sobre Leiomiosarcoma de Count Me In cuentan con el apoyo de una subvención del programa Cancer Moonshot del Instituto Nacional del Cáncer y forman parte de la <a class=\"Link\" href=\"https://www.cancer.gov/research/key-initiatives/moonshot-cancer-initiative/implementation/patient-engagement\" target=\"_blank\">red de Participant Engagement and Cancer Genome Sequencing (PE-CGS) de los centros de investigación.</a>"
                         ]
                     },
                     {
-                        "Question": "Who is eligible to participate?",
+                        "Question": "¿Quiénes reúnen las condiciones para participar?",
                         "Paragraphs": [
-                            "Anyone who has been diagnosed with osteosarcoma (OS) at any point may participate if they live in the USA or Canada. We welcome people of all ages, genders, races, ethnicities, and abilities.",
-                            "If you are a parent of a child diagnosed with OS, you can provide consent for them to participate in the project. Depending on their age, we may also ask them to provide permission to participate through assent.",
-                            "At this time, we are only able to obtain samples and medical records from patients who live in the United States and Canada, as there are regulatory restrictions that do not allow us to obtain saliva, blood, tumor samples and medical records from international patients."
+                            "Todas las personas que hayan recibido un diagnóstico de osteosarcoma (OS) en algún momento de su vida pueden participar si viven en Estados Unidos o Canadá. Las personas de cualquier edad, sexo, raza, origen étnico y capacidad son bienvenidas.",
+                            "Si usted es padre o madre de un menor diagnosticado con osteosarcoma, puede otorgar su consentimiento para que participe en el proyecto. Asimismo, dependiendo de su edad, podemos solicitarle permiso directamente al menor para participar con el respectivo asentimiento.",
+                            "En este momento, solo podemos obtener muestras e historias médicas de pacientes que viven en Estados Unidos y Canadá, ya que existen restricciones reglamentarias que no nos permiten obtener muestras de saliva, sangre y tumorales, así como historias clínicas de pacientes internacionales."
                         ]
                     },
                     {
-                        "Question": "Are there any costs for participants to participate?",
+                        "Question": "¿La participación tiene algún costo?",
                         "Paragraphs": [
-                            "No, there are no costs for the participant associated with any step in the project."
+                            "No, no hay costos para el participante asociados con ninguna etapa del proyecto."
                         ]
                     },
                     {
-                        "Question": "Is this research being conducted for profit?",
+                        "Question": "¿Esta investigación tiene fines de lucro?",
                         "Paragraphs": [
-                            "No. This project is a not-for-profit research endeavor. Our mission is to generate, aggregate, and freely share data with the research community in order to accelerate discoveries. All data shared with the research community will have readily identifiable information removed."
+                            "No. Este proyecto es una investigación sin fines de lucro. Nuestra misión es generar, consolidar y compartir de forma gratuita información con la comunidad de investigación, con el fin de agilizar descubrimientos. Todos los datos compartidos con la comunidad de investigación serán anonimizados."
                         ]
                     },
                     {
-                        "Question": "How has the OS community been involved in the design of this project?",
+                        "Question": "¿De qué manera ha participado la comunidad del osteosarcoma en el diseño de este proyecto?",
                         "Paragraphs": [
-                            "We have worked closely with patients, parents, and patient advocates within the OS community from the beginning of this project through its design and implementation. The community has been involved in all aspects including concept, goals, messaging, surveys, and the design of this website. The project also partners with leading researchers working in OS.",
-                            "We're proud to have our Advocacy Partners MIB Agents, QuadW, The Zach Sobiech Osteosarcoma Fund, Because of Daniel, and The Osteosarcoma Collaborative to partner with and support this project."
+                            "Hemos colaborado estrechamente con pacientes, padres y defensores de pacientes de la comunidad del osteosarcoma desde el principio de este proyecto, es decir, desde su diseño hasta su implementación. La comunidad participó en todos los aspectos, incluidos el concepto, los objetivos, las comunicaciones, las encuestas y el diseño del sitio web. El proyecto también cuenta con la colaboración de destacados investigadores que estudian el osteosarcoma.",
+                            "Nos enorgullece contar con nuestros promotores aliados MIB Agents, QuadW, The Zach Sobiech Osteosarcoma Fund, Because of Daniel y The Osteosarcoma Collaborative, quienes colaboran y respaldan este proyecto."
                         ]
                     },
                     {
-                        "Question": "Is this study a clinical trial?",
+                        "Question": "¿Es este estudio un ensayo clínico?",
                         "Paragraphs": [
-                            "This study is not a clinical trial. A <a class=\"Link\" href=\"https://www.cancer.gov/publications/dictionaries/cancer-terms/def/clinical-trial\" target=\"_blank\"> clinical trial</a> is “a type of research study that tests how well new medical approaches work in people. These studies test new methods of screening, prevention, diagnosis, or treatment of a disease.”",
-                            "Participation in the OSproject will not have any impact on the participant’s course of care for osteosarcoma. We are not permitted to give any clinical advice as part of participation in this project. The testing we are performing is for research and may not provide information about a participant’s tumor that would lead to changes in their care and treatment plan.",
+                            "Este estudio no es un ensayo clínico. Un <a class=\"Link\" href=\"https://www.cancer.gov/publications/dictionaries/cancer-terms/def/clinical-trial\" target=\"_blank\">ensayo clínico</a> es “un tipo de estudio de investigación que evalúa qué tan bien funcionan los abordajes médicos nuevos en las personas. Estos estudios ponen a prueba nuevos métodos de detección, prevención, diagnóstico o tratamiento de una enfermedad”.",
+                            "La participación en el Proyecto sobre Osteoporosis no tendrá repercusiones en el tratamiento del osteosarcoma de los participantes. No nos está permitido proporcionar asesoramiento médico como parte de la participación en este proyecto. Las pruebas que realizamos tienen fines de investigación y no proporcionan información acerca del tumor del participante que pudiera derivar en cambios en su plan de atención y tratamiento.",
                             [
-                                "If participants elect to share tumor samples with the project and we are able to successfully sequence sample(s), we  will share what we’ve learned from tumor sequencing with participants. When a participant consents to the study, they will be able to choose whether or not to receive this information. An example of what this information could look like can be found",
+                                "Si los participantes deciden compartir muestras de tumores con el proyecto y podemos secuenciarlas con éxito, compartiremos con ellos lo que hayamos aprendido de la secuenciación tumoral. Cuando un participante otorga su consentimiento para el estudio, puede decidir si desea recibir o no esta información. Puede encontrarse un ejemplo de este tipo de información",
                                 {
                                     "type": "link",
                                     "href": "./somatic_shared_learnings_letter.pdf",
-                                    "content": "here."
+                                    "content": "aquí."
                                 }
                             ],
-                            "In some cases, we may not be able to share what we’ve learned from tumor sequencing with participants. Because of regulatory restrictions, we are unable to share results with participants living in or samples from institutions in New York and Canada. More details on NY state restrictions can be found <a class='Link' href='https://www.wadsworth.org/regulatory/clep/clinical-labs' target='_blank'>here</a>."
+                            "En algunos casos, es posible que no podamos compartir con el participante lo que hemos aprendido de la secuenciación del tumor. Debido a restricciones reglamentarias, no podemos compartir los resultados con los participantes que viven en Nueva York o Canadá ni de las muestras provenientes de estos sitios. <a class='Link' href='https://www.wadsworth.org/regulatory/clep/clinical-labs' target='_blank'>Aquí</a> puede consultar más detalles sobre las restricciones del estado de Nueva York."
                         ]
                     },
                     {
-                        "Question": "What is the difference between tumor and germline DNA?",
+                        "Question": "¿Cuál es la diferencia entre el ADN tumoral y el de línea germinal?",
                         "Paragraphs": [
-                            "Tumors are made of cells in a person's body whose DNA has mutated so they are no longer healthy and normally-functioning. A person’s  germline (also called “normal”) DNA is the DNA that is in all the healthy cells in the body. We can compare a person’s tumor DNA to the germline to learn more about the genetic mutations that are present in their cancer. Germline testing looks at the “normal” DNA in a person’s body. This is sometimes done to see if there is a mutation present that may have been inherited."
+                            "Los tumores están compuestos por células del cuerpo de una persona cuyo ADN ha mutado, por lo que ya no son sanas y no funcionan de manera normal. El ADN de línea germinal (también denominado “normal”) se refiere al ADN presente en todas las células sanas del cuerpo. Podemos comparar el ADN tumoral con el de línea germinal para adquirir más conocimientos sobre las mutaciones genéticas presentes en el cáncer de una persona. Las pruebas de línea germinal analizan el ADN “normal” del cuerpo de una persona. A veces esto se realiza para ver si hay alguna mutación que pudiera haberse heredado."
                         ]
                     },
                     {
-                        "Question": "How is this different from clinical/commercial genomic testing?",
+                        "Question": "¿De qué modo se diferencia esto del análisis genómico clínico/comercial?",
                         "Paragraphs": [
-                            "There are many types of genetic testing, also called sequencing. Clinical-grade genetic sequencing is done in a particular type of lab (called a CLIA lab) that has stricter parameters to make sure that the data produced meets certain quality standards. Our genetic sequencing is clinical-grade and done in a CLIA lab, so we are able to share what we’ve learned from participants' tumor samples with them.",
-                            "There are also different types of genetic sequencing depending on what a researcher or physician is interested in. A panel test might be ordered to look at one or several segments of DNA (called genes) that are already known to have an impact on humans if mutated.",
-                            "This project performs Whole Exome Sequencing (WES) on tumor samples, meaning that we look at all of the parts of the DNA that are being used by the body to make proteins. For germline sequencing, Invitae will conduct a panel test for specific genes known to be associated with sarcoma, many of these genes are also associated with an increased risk of other cancer types."
+                            "Existen muchos tipos de pruebas genéticas, también denominadas secuenciación. La secuenciación genética de grado clínico se realiza en un tipo de laboratorio particular (denominado laboratorio CLIA) que tiene parámetros más estrictos para asegurar que los datos producidos cumplan con ciertas normas de calidad. Nuestra secuenciación genética es de grado clínico y se lleva a cabo en un laboratorio CLIA, de modo que podemos compartir con los participantes nuestros hallazgos sobre sus muestras tumorales.",
+                            "También hay diferentes tipos de secuenciación genética, dependiendo del interés que tengan los investigadores o médicos. Se puede ordenar una serie de pruebas para examinar uno o varios segmentos de ADN (denominados genes) que ya se sabe que afectan a los seres humanos cuando mutan.",
+                            "En este proyecto se realiza una secuenciación del exoma completo (Whole Exome Sequencing, WES) de las muestras tumorales, lo cual significa que analizamos todas las partes del ADN que el organismo utiliza para producir proteínas. Para la secuenciación de línea germinal, Invitae realizará una serie de pruebas de genes específicos que se sabe que están asociados con el sarcoma, muchos de los cuales también están relacionados con un mayor riesgo de desarrollar otros tipos de cáncer."
                         ]
                     },
                     {
-                        "Question": "Can these results be shared with a participant’s doctor/clinical team?",
+                        "Question": "¿Estos resultados pueden ser compartidos con el médico/equipo clínico del participante?",
                         "Paragraphs": [
-                            "The tumor sequencing is performed in a clinical laboratory and so if a participant chooses to share the results with their doctor, their doctor can place the information in the participant's medical record.",
-                            "If you or your doctor thinks having your tumor sequenced or profiled will help with your care, then we recommend that standard testing for clinical purposes be ordered by your doctor."
+                            "La secuenciación tumoral se realiza en un laboratorio clínico, de modo que, si un participante elige compartir los resultados con su médico, este último podrá registrar la información en la historia clínica del participante.",
+                            "Si usted o su médico consideran que una secuenciación o perfil tumoral pueden ayudar con su atención médica, recomendamos que su médico ordene la realización de pruebas estándar para propósitos clínicos."
                         ]
                     },
                     {
-                        "Question": "Who will use participant samples and see participant information?",
+                        "Question": "¿Quiénes utilizarán las muestras de los participantes y consultarán su información?",
                         "Paragraphs": [
-                            "Samples and health information for participants will be available to study staff and researchers at Count Me In, the Broad Institute of MIT and Harvard, and Dana-Farber Cancer Institute. More details about how we protect participant information and samples can be found in the consent form.",
-                            "After removing a participant’s name and other readily identifiable information, we will share results obtained from their participation with the greater research community via established public scientific databases (for example, the National Institute of Health/National Cancer Institute data portals such as the Genomic Data Commons and dbGaP, and the cBioPortal for Cancer Genomics). Some of these databases are publicly viewable by anyone with internet access, and some are restricted to qualified researchers.",
-                            "If a participant has germline sequencing done with Invitae, Invitae will be provided with the participant’s name and contact information. The data and report generated by Invitae will be shared with the participant and with study staff associated with the project. The germline results from Invitae will not be shared in scientific databases."
+                            "Las muestras y la información médica de los participantes estarán a disposición del equipo y los investigadores del estudio de Count Me In, el Broad Institute del MIT y Harvard y Dana-Farber Cancer Institute. En el formulario de consentimiento encontrará más detalles sobre cómo protegemos la información de los participantes y sus muestras.",
+                            "Después de que eliminemos el nombre y cualquier otro tipo de información que pueda identificar a los participantes, compartiremos los resultados obtenidos gracias a su participación con la comunidad de investigación a través de reconocidas bases de datos científicos de acceso público (por ejemplo, las bases de datos de los Institutos Nacionales de la Salud y el Instituto Nacional del Cáncer, como el Genomic Data Commons, el dbGaP y el cBioPortal for Cancer Genomics). Algunas de estas bases de datos son de acceso público, y otras están restringidas a investigadores acreditados.",
+                            "Si la secuenciación de línea germinal de un participante se realiza con Invitae, esta empresa recibirá su nombre e información de contacto. Los datos e informes generados por Invitae se compartirán con el participante y con el personal del estudio que esté asociado con el proyecto. Los resultados de línea germinal de Invitae no se compartirán en bases de datos científicas."
                         ]
                     }
                 ]
             },
             {
-                "Title": "I have / my child has been diagnosed with OS",
+                "Title": "Recibí o mi hijo(a) recibió un diagnóstico de osteosarcoma",
                 "Items": [
                     {
-                        "Question": "What happens when my child with OS becomes an adult?",
+                        "Question": "¿Qué sucederá cuando mi hijo(a) con osteosarcoma llegue a la edad adulta?",
                         "Paragraphs": [
-                            "When your child reaches the age where they can consent for themselves, they need to do so to continue to participate in the project. For the US and Canada, this varies by locations and is between ages 18 and 21.",
-                            "If your child remains in the study when they reach the age where they can consent for themselves, the project team will contact them to re-consent to the study. We will contact you to get your child’s contact information. If your child consents, the project team will continue to request medical records and tissue samples from any point in your child’s treatment."
+                            "Cuando su hijo(a) alcance la edad en la que puede dar su propio consentimiento, debe hacerlo para continuar participando en el proyecto. En Estados Unidos y Canadá, esto varía según la ubicación geográfica y oscila entre los 18 y 21 años de edad.",
+                            "Si su hijo(a) permanece en el estudio cuando alcance la edad de dar su consentimiento por sí mismo(a), el equipo del proyecto se pondrá en contacto con él(ella) para que vuelva a dar su consentimiento para el estudio. Nos pondremos en contacto con usted para obtener la información de contacto de su hijo(a). Si su hijo(a) da su consentimiento, el equipo del proyecto continuará solicitando las historias clínicas y muestras de tejido de cualquier momento durante el tratamiento de su hijo(a)."
                         ]
                     },
                     {
-                        "Question": "What if I or my child signed up for the OS project before 2022?",
+                        "Question": "¿Qué sucede si me inscribí o mi hijo(a) se inscribió en el Proyecto sobre Osteosarcoma antes de 2022?",
                         "Paragraphs": [
-                            "If you signed up for the OS project before 2022, there are new, optional opportunities to become more involved if you would like, including:<br><span>&#8226; <b>Responding to additional surveys  </b></span><br><span>&#8226; <b>Receiving information about what we learned from your/your child’s tumor sequencing,  </b></span><br><span>&#8226; <b>Learning more about your/your child’s normal DNA.  </b></span>",
+                            "Si usted se inscribió en el Proyecto sobre Osteosarcoma antes de 2022, ahora cuenta con nuevas oportunidades opcionales para involucrarse más en el proyecto si así lo desea, entre ellas:<br><span>&#8226; <b>Responder a encuestas adicionales </b></span><br><span>&#8226; <b>Recibir información acerca de los hallazgos que obtuvimos a partir de la secuenciación de su tumor o del de su hijo(a) </b></span><br><span>&#8226; <b>Obtener más información sobre su ADN normal o el de su hijo(a) </b></span>",
                             [
-                                "For more details on the new opportunities, see the FAQ",
+                                "Para obtener información más detallada sobre las nuevas oportunidades, consulte las preguntas frecuentes",
                                 {
-                                    "itemIdToScrollTo": "participationBenefits",
+                                    "itemIdToScrollTo": "Beneficios de la participación",
                                     "type": "link",
-                                    "content": "“Are there any benefits that participants receive for participating?“"
+                                    "content": "“¿La participación otorga algún beneficio?”"
                                 }
                             ],
-                            "To take part in these activities, please log into your dashboard to sign additional consent forms and provide updates to your/your child’s participation. If you have any questions, please reach out to the study team at <a href=\"mailto:info@osproject.org\" class='emailColor'>info@osproject.org</a> or <a class=\"Link\" href=\"tel:651-602-2020\">651-602-2020</a>."
+                            "Para participar en estas actividades, inicie sesión en su panel para firmar formularios de consentimiento adicionales y brindar actualizaciones sobre su participación o la de su hijo(a). Si tiene alguna pregunta, comuníquese con el equipo del estudio al siguiente correo electrónico <a href=\"mailto:info@osproject.org\" class='emailColor'>info@osproject.org</a> o llame al <a class=\"Link\" href=\"tel:651-602-2020\">651-602-2020</a>."
                         ]
                     }
                 ]
             },
             {
-                "Title": "My child passed away from osteosarcoma",
+                "Title": "Mi hijo(a) falleció por osteosarcoma",
                 "Items": [
                     {
-                        "Question": "Can I participate if my child has passed away from osteosarcoma?",
+                        "Question": "¿Puedo participar yo si mi hijo(a) murió de osteosarcoma?",
                         "Paragraphs": [
-                            "Yes. You can click \"Count Me In\", and there will be an option to indicate that your child has passed away. This will lead to a survey that will ask questions about your child’s experience with osteosarcoma. Your responses will give researchers unique insights into this cancer and has the power to inform future directions for studies in this rare cancer.",
-                            "We will provide regular updates as the study progresses about the status of the project and information about new studies that we are conducting. We will also share any discoveries from these research projects with you."
+                            "Sí. Puede hacer clic en “Count Me In”, donde encontrará una opción para indicar que su hijo(a) ha fallecido. Se le redirigirá a una encuesta para responder a preguntas sobre la experiencia de su hijo(a) con el osteosarcoma. Sus respuestas proporcionarán a los investigadores perspectivas únicas de este cáncer y tienen el poder de determinar futuras indicaciones para los estudios sobre este cáncer poco frecuente.",
+                            "A medida que avance el estudio, nos comunicaremos con usted para brindarle novedades sobre el estado del proyecto e información acerca de nuevos estudios que estemos llevando a cabo. También compartiremos con usted los descubrimientos realizados a partir de estos proyectos de investigación."
                         ]
                     },
                     {
-                        "Question": "Can I provide access to medical records and tissue on behalf of someone who passed away? ",
+                        "Question": "¿Puedo otorgar acceso a historias clínicas y tejido en representación de una persona difunta? ",
                         "Paragraphs": [
-                            "The OSProject cannot currently obtain medical records or tissue samples for individuals who have passed away. We are exploring future plans for a next-of-kin process, but this will take time to develop. Through the Loved Ones survey, you may choose to opt-in to be re-contacted by the study if a process is developed to enable this."
+                            "En este momento, el Proyecto sobre Osteosarcoma no puede obtener historias clínicas o muestras de tejido de personas que han fallecido. Estamos explorando planes a futuro para un proceso para parientes cercanos, pero su desarrollo llevará tiempo. Mediante la encuesta para seres queridos, puede elegir la opción de que el equipo del estudio se vuelva a poner en contacto con usted en caso de desarrollarse un proceso que lo permita."
                         ]
                     }
                 ]
             },
             {
-                "Title": "I am a member of the community who would like to get involved",
+                "Title": "Soy miembro de la comunidad y quiero involucrarme",
                 "Items": [
                     {
-                        "Question": "How can I spread the word about the OSProject?",
+                        "Question": "¿Cómo puedo difundir el Proyecto sobre Osteosarcoma?",
                         "Paragraphs": [
-                            "If you would like to learn more about how to spread the word about the project, or if you have any suggestions or questions about the project, please email us at <a class=\"Link\" href=\"mailto:info@osproject.org\">info@osproject.org</a>."
+                            "Si desea saber más acerca de cómo dar a conocer el proyecto o si tiene alguna sugerencia o pregunta acerca del proyecto, envíenos un correo electrónico a <a class=\"Link\" href=\"mailto:info@osproject.org\">info@osproject.org</a>."
                         ]
                     },
                     {
-                        "Question": "How can I receive updates on the OSProject?",
+                        "Question": "¿Cómo puedo recibir noticias sobre el Proyecto sobre Osteosarcoma?",
                         "Paragraphs": [
-                            "If you would like updates on the project, please <a class=\"Link\" href=\"/join-list\">sign up for our mailing list</a>."
+                            "Si desea recibir novedades sobre el proyecto, <a class=\"Link\" href=\"/join-list\">suscríbase a nuestra lista de correo</a>."
                         ]
                     }
                 ]
             }
         ],
         "NeedInfo": {
-            "Paragraph": "Still have more questions? Feel free to reach out to us at <a class=\"Link\" href=\"mailto:info@osproject.org\">info@osproject.org</a> or by phone at <a class=\"Link\" href='tel:651-602-2020'>651-602-2020.</a>"
+            "Paragraph": "¿Tiene más preguntas? Puede enviarnos un correo electrónico a <a class=\"Link\" href=\"mailto:info@osproject.org\">info@osproject.org</a> o llamarnos al <a class=\"Link\" href='tel:651-602-2020'>651-602-2020.</a>"
         }
     },
     "WorkflowProgress": {
-        "AboutYou": "About You",
-        "Consent": "Consent Form",
-        "MedicalRelease": "Medical Release",
-        "Questionnaire": "Surveys",
-        "FamilyHistory": "Family History"
+        "AboutYou": "Sobre usted",
+        "Consent": "Formulario de consentimiento",
+        "MedicalRelease": "Divulgación de información médica",
+        "Questionnaire": "Encuestas",
+        "FamilyHistory": "Antecedentes familiares"
     },
     "ThankYouFamilyHistory": {
-        "Title": "Thank you for working with us to make\n this research possible.",
-        "Subtitle": "If you’d like to update or review your answers to this survey, you can access it\n from your dashboard at any time.",
-        "ReturnToDashboard": "Return to dashboard",
+        "Title": "Gracias por colaborar con nosotros para hacer\nposible esta investigación.",
+        "Subtitle": "Si desea actualizar o revisar sus respuestas a esta encuesta, puede acceder a ella\ndesde su panel en cualquier momento.",
+        "ReturnToDashboard": "Regresar al panel",
         "FirstImage": "First image",
         "SecondImage": "Second image"
     },
     "Toolkit": {
         "Dashboard": {
-            "Title": "Dashboard",
-            "ParticipantsTitle": "Participant Dashboard",
-            "AddParticipant": "Add Participant",
-            "ShowPanel": "Show",
-            "HidePanel": "Hide",
-            "UserLabel": "You",
-            "ChildLabel": "Your child{{suffix}}",
-            "EditUser": "Edit profile"
+            "Title": "Panel",
+            "ParticipantsTitle": "Panel del participante",
+            "AddParticipant": "Agregar participante",
+            "ShowPanel": "Mostrar",
+            "HidePanel": "Ocultar",
+            "UserLabel": "Usted",
+            "ChildLabel": "Su hijo{{suffix}}",
+            "EditUser": "Editar perfil"
         },
         "ErrorPage": {
-            "Title": "We've encountered an error",
-            "Text": "We're sorry, but an error has occurred.",
+            "Title": "Hubo un error.",
+            "Text": "Lamentablemente, se produjo un error.",
             "DefaultText": {
-                "TextPt1": "Please wait a moment and retry. If the trouble persists, please email us at",
-                "TextPt2": "or call us at"
+                "TextPt1": "Espere un momento y vuelva a intentarlo. Si el problema continúa, envíenos un mensaje a",
+                "TextPt2": "o llámenos al"
             }
         },
         "ErrorCodes": {
-            "PASSWORD_RESET_LINK_EXPIRED": "Your password reset link has expired."
+            "PASSWORD_RESET_LINK_EXPIRED": "El enlace para restablecer su contraseña ha caducado."
         },
         "Password": {
-            "Title": "Please enter the password",
-            "Text": "Please enter your password *",
-            "InputPlaceholder": "Password",
-            "PasswordWrongError": "Incorrect password. Please try again.",
-            "OtherError": "We're sorry, but an error has occurred. Please try again.",
-            "PasswordRequiredError": "Password is required"
+            "Title": "Ingrese la contraseña.",
+            "Text": "Ingrese su contraseña.*",
+            "InputPlaceholder": "Contraseña",
+            "PasswordWrongError": "Contraseña incorrecta. Vuelva a intentarlo.",
+            "OtherError": "Lamentablemente, se produjo un error. Vuelva a intentarlo.",
+            "PasswordRequiredError": "La contraseña es obligatoria."
         },
         "StayInformed": {
-            "Title": "Stay informed",
-            "Text": "Thank you for joining the email list. We'll send you updates and keep you informed. You can unsubscribe at any time. If you have any questions about your status in the project, please email"
+            "Title": "Noticias y novedades",
+            "Text": "Gracias por unirse a la lista de correo electrónico. Le enviaremos noticias y lo mantendremos informado. Puede cancelar su suscripción en cualquier momento. Si tiene alguna pregunta sobre su condición en el proyecto, envíenos un correo electrónico"
         },
         "LovedOneThankYou": {
-            "Title": "Thank you!",
-            "ThankYou": "Thank you for taking the time to take the survey and share your Loved One’s experience with osteosarcoma.",
-            "StayInTouch": "We’ll stay in touch with you so that you can see the progress that we are making towards advancements in the understanding of osteosarcoma.",
+            "Title": "¡Gracias!",
+            "ThankYou": "Gracias por tomarse el tiempo de responder a la encuesta y de compartir la experiencia de su ser querido con el osteosarcoma.",
+            "StayInTouch": "Nos mantendremos en contacto con usted para que pueda ver los avances que estamos haciendo en la comprensión del osteosarcoma.",
             "Contacts": {
-                "TextPt1": "We'd also like to hear from you if you have any additional thoughts you'd like to share — please feel free to email us at ",
-                "TextPt2": "or call us at"
+                "TextPt1": "También nos gustaría que se ponga en contacto con nosotros con cualquier comentario adicional que pueda tener. Puede enviarnos un correo electrónico a ",
+                "TextPt2": "o llamarnos al"
             },
-            "ThankYouAgain": "Thank you again for sharing with us and supporting the entire osteosarcoma community. If you’d like to help us reach patients or other community members, feel free to share the project. Together, we can move research forward for the osteosarcoma community."
+            "ThankYouAgain": "Gracias nuevamente por compartir su experiencia con nosotros y por apoyar a toda la comunidad del osteosarcoma. Si desea ayudarnos a contactar a pacientes u otros miembros de la comunidad, comparta el proyecto. Juntos podemos impulsar las investigaciones para la comunidad del osteosarcoma."
         },
         "AgeUpThankYou": {
-            "Title": "Thank you!",
-            "EmailVerified": "Your email address has been verified. We will be sending an email with more information on re-consent shortly after your birthday.",
+            "Title": "¡Gracias!",
+            "EmailVerified": "Su dirección de correo electrónico ha sido verificada. Le enviaremos un correo electrónico con más información sobre la renovación del consentimiento poco después de su cumpleaños.",
             "EmailCollected": {
-                "TextPt1": "An email will be sent to your child to confirm their address and tell them about the upcoming re-consent process. If you need to change the email you provided for your child, please contact the project team at",
-                "TextPt2": "or",
-                "Button": "Go to Dashboard"
+                "TextPt1": "Le enviaremos un correo electrónico a su hijo(a) para confirmar su dirección e informarle acerca del proceso para renovar el consentimiento. Si necesita cambiar la dirección de correo electrónico que proporcionó para su hijo(a), comuníquese con el equipo del proyecto en",
+                "TextPt2": "o",
+                "Button": "Ir al panel"
             },
             "ImageAlt": "Email sent"
         },
         "SessionExpired": {
-            "Text": "You were away for a while, so we logged you out as a security precaution. Please log in again to return to the last page you were on."
+            "Text": "No hubo actividad en su cuenta durante varios minutos, así que por su seguridad cerramos la sesión. Vuelva a iniciar sesión para regresar a la última página que visitó."
         },
         "Dialogs": {
             "JoinMailingList": {
-                "Title": "Stay informed",
-                "Text": "Provide your email below and we'll keep you up-to-date on developments.<br>You can unsubscribe at any time.",
+                "Title": "Noticias y novedades",
+                "Text": "Proporcione su correo electrónico a continuación y le enviaremos noticias sobre los avances.<br>Puede cancelar su suscripción en cualquier momento.",
                 "Fields": {
                     "FirstName": {
-                        "Placeholder": "First Name",
-                        "Error": "First Name is required"
+                        "Placeholder": "Nombre",
+                        "Error": "El nombre es obligatorio"
                     },
                     "LastName": {
-                        "Placeholder": "Last Name",
-                        "Error": "Last Name is required"
+                        "Placeholder": "Apellido",
+                        "Error": "El apellido es obligatorio"
                     },
                     "Email": {
-                        "Placeholder": "Email address",
-                        "Error": "Please enter a valid email address"
+                        "Placeholder": "Dirección de correo electrónico",
+                        "Error": "Ingrese una dirección de correo electrónico válida."
                     },
                     "ConfirmEmail": {
-                        "Placeholder": "Email confirmation",
-                        "Error": "Please enter a valid email address"
+                        "Placeholder": "Confirmación del correo electrónico",
+                        "Error": "Ingrese una dirección de correo electrónico válida."
                     }
                 },
-                "CancelButton": "Cancel",
-                "SubmitButton": "Join",
+                "CancelButton": "Cancelar",
+                "SubmitButton": "Únase",
                 "Required": "",
-                "MatchEmailsError": "Please ensure that both email fields are filled in and that the addresses match.",
-                "LoadingError": "We're sorry, but an error has occurred."
+                "MatchEmailsError": "Asegúrese de haber completado los dos campos para el correo electrónico y de que las direcciones coincidan.",
+                "LoadingError": "Lamentablemente, se produjo un error."
             },
             "SessionWillExpire": {
-                "Title": "Your session will time-out soon",
-                "Text": "To protect your privacy, the system is going to log you out because you have been away for a while. Click “Continue” to stay logged in. Click “Sign Out” if you are done for now.",
-                "SignOut": "Sign Out",
-                "Continue": "Continue",
-                "RenewalFailed": "Session renewal failed. Please log out and log back in again."
+                "Title": "Su sesión terminará pronto.",
+                "Text": "Para proteger su privacidad, el sistema cerrará la sesión porque no hubo actividad en su cuenta durante varios minutos. Haga clic en “Continuar” para seguir en su cuenta. Haga clic en “Cerrar sesión” si por ahora ya terminó.",
+                "SignOut": "Cerrar sesión",
+                "Continue": "Continuar",
+                "RenewalFailed": "La sesión no se pudo renovar. Cierre la sesión y vuelva a iniciarla."
             }
         }
     },
     "SDK": {
-        "FinishButton": "Finish",
-        "SubmitButton": "Submit",
-        "CloseButton": "Close",
-        "AddButton": "ADD",
-        "CancelButton": "CANCEL",
-        "NextButton": "Next",
-        "PreviousButton": "Back",
-        "SavingButton": "Saving",
-        "CompleteButton": "View Completed",
-        "EditButton": "Continue Editing",
-        "StartButton": "Edit",
-        "SaveButton": "Save",
-        "DeleteButton": "Delete",
-        "ReviewButton": "View Completed",
-        "AgreeButton": "I agree",
-        "NotAgreeButton": "I am not ready to agree",
-        "ValidateError": "Submission cannot proceed. Please review messages in form for details.",
-        "CompletionError": "Please enter information for the family member above or remove the empty entry.",
-        "CommunicationError": "There was a problem saving your data. Please check the form and your answers before submitting",
-        "SaveError": "We're sorry but an error occurred",
+        "FinishButton": "Terminar",
+        "SubmitButton": "Enviar",
+        "CloseButton": "Cerrar",
+        "AddButton": "AGREGAR",
+        "CancelButton": "CANCELAR",
+        "NextButton": "Siguiente",
+        "PreviousButton": "Atrás",
+        "SavingButton": "Guardando...",
+        "CompleteButton": "Vista completada",
+        "EditButton": "Continuar editando",
+        "StartButton": "Editar",
+        "SaveButton": "Guardar",
+        "DeleteButton": "Eliminar",
+        "ReviewButton": "Vista completada",
+        "AgreeButton": "Acepto",
+        "NotAgreeButton": "Todavía no quiero aceptar",
+        "ValidateError": "No se puede continuar con el proceso. Revise los mensajes del formulario para obtener más información.",
+        "CompletionError": "Ingrese información para el familiar o elimine la entrada vacía.",
+        "CommunicationError": "Hubo un problema al guardar sus datos. Revise el formulario y sus respuestas antes de enviar todo.",
+        "SaveError": "Lamentablemente, se produjo un error.",
         "ExportStudy": {
-            "Export": "EXPORT"
+            "Export": "EXPORTAR"
         },
         "ListStudies": {
-            "StudyName": "Study Name",
-            "ParticipantCount": "Participant Count"
+            "StudyName": "Nombre del estudio",
+            "ParticipantCount": "Cantidad de participantes"
         },
         "ListWorkspaces": {
-            "WorkspaceName": "Workspace Name",
-            "WorkspaceNamespace": "Workspace Namespace"
+            "WorkspaceName": "Nombre del espacio de trabajo",
+            "WorkspaceNamespace": "Espacio de nombre del espacio de trabajo"
         },
         "Login": {
-            "Login": "LOG IN",
-            "Logout": "LOG OUT"
+            "Login": "INICIAR SESIÓN",
+            "Logout": "CERRAR SESIÓN"
         },
         "SignInOut": {
-            "SignIn": "Log In",
-            "SignOut": "Log Out"
+            "SignIn": "Iniciar sesión",
+            "SignOut": "Cerrar sesión"
         },
         "UserActivities": {
-            "ActivityName": "Form",
-            "Summary": "Summary",
-            "ActivityStatus": "Status",
-            "ActivityDate": "Created",
-            "ActivityActions": "Actions"
+            "ActivityName": "Formulario",
+            "Summary": "Resumen",
+            "ActivityStatus": "Estado",
+            "ActivityDate": "Creado",
+            "ActivityActions": "Acciones"
         },
         "ManageParticipants": {
-            "GovernedParticipants": "Governed participants",
-            "ParticipantPlaceholder": "Participant",
-            "ParticipantsList": "Participants"
+            "GovernedParticipants": "Participantes controlados",
+            "ParticipantPlaceholder": "Participante",
+            "ParticipantsList": "Participantes"
         },
         "ParticipantProfile": {
-            "OpenProfile": "Profile",
-            "ViewAs": "View As",
-            "ManageParticipants": "Manage participants"
+            "OpenProfile": "Perfil",
+            "ViewAs": "Ver como",
+            "ManageParticipants": "Administrar participantes"
         },
         "UserPreferences": {
-            "UserPreferencesTitle": "User preferences"
+            "UserPreferencesTitle": "Preferencias del usuario"
         },
         "Dashboard": {
-            "Title": "My Dashboard",
-            "Text": "The dashboard below describes each Osteosarcoma Project form and its status."
+            "Title": "Mi panel",
+            "Text": "En el siguiente panel se pueden ver los formularios del Proyecto sobre Osteosarcoma y se indica su estado."
         },
         "DatePicker": {
-            "Day": "Choose day...",
-            "Month": "Choose month...",
-            "Year": "Choose year...",
-            "January": "January",
-            "February": "February",
-            "March": "March",
-            "April": "April",
-            "May": "May",
-            "June": "June",
-            "July": "July",
-            "August": "August",
-            "September": "September",
-            "October": "October",
-            "November": "November",
-            "December": "December"
+            "Day": "Elija el día...",
+            "Month": "Elija el mes...",
+            "Year": "Elija el año...",
+            "January": "Enero",
+            "February": "Febrero",
+            "March": "Marzo",
+            "April": "Abril",
+            "May": "Mayo",
+            "June": "Junio",
+            "July": "Julio",
+            "August": "Agosto",
+            "September": "Septiembre",
+            "October": "Octubre",
+            "November": "Noviembre",
+            "December": "Diciembre"
         },
         "DateLabel": {
-            "YYYY": "YYYY",
+            "YYYY": "AAAA",
             "MM": "MM",
             "DD": "DD"
         },
         "UserMenu": {
-            "DashboardButton": "Dashboard",
-            "SignOutButton": "Sign Out"
+            "DashboardButton": "Panel",
+            "SignOutButton": "Cerrar sesión"
         },
         "DetailsPlaceholder": {
-            "PluralForm": "characters remaining",
-            "SingularForm": "character remaining"
+            "PluralForm": "caracteres restantes",
+            "SingularForm": "carácter restante"
         },
         "Title": {
-            "Default": "Osteosarcoma Project",
-            "Alert": "Your session will time-out soon"
+            "Default": "Proyecto sobre Osteosarcoma",
+            "Alert": "Su sesión terminará pronto."
         },
         "EmailEntry": {
-            "InvalidEmail": "Please enter a valid email"
+            "InvalidEmail": "Ingrese un correo electrónico válido."
         },
         "Institutions": {
             "Fields": {
-                "Name": "Physician Name",
-                "Institution": "Institution",
-                "InstitutionAny": "Institution (if any)",
-                "City": "City",
-                "State": "State",
-                "Country": "Country"
+                "Name": "Nombre del médico",
+                "Institution": "Institución",
+                "InstitutionAny": "Institución (si la hay)",
+                "City": "Ciudad",
+                "State": "Estado",
+                "Country": "País"
             },
             "Form": {
-                "OtherPhysician": "Other physician",
-                "OtherInstitution": "Other institution"
+                "OtherPhysician": "Otro médico",
+                "OtherInstitution": "Otra institución"
             },
-            "PhysicianValidation": "Please fill out all required fields"
+            "PhysicianValidation": "Complete todos los campos obligatorios."
         },
         "MailAddress": {
             "Fields": {
-                "Name": "Full Name",
-                "Country": "Country/Territory",
-                "Street1": "Street Address",
-                "Street2": "Apt/Floor #",
+                "Name": "Nombre completo",
+                "Country": "País/territorio",
+                "Street1": "Dirección",
+                "Street2": "N.º de apartamento/piso",
                 "State": {
-                    "State": "State",
-                    "Province": "Province",
-                    "State/Province/Region": "State/Province/Region"
+                    "State": "Estado",
+                    "Province": "Provincia",
+                    "State/Province/Region": "Estado/Provincia/Región"
                 },
-                "City": "City",
-                "Phone": "Phone",
+                "City": "Ciudad",
+                "Phone": "Teléfono",
                 "Zip": {
-                    "Zip Code": "Zip Code",
-                    "Postal Code": "Postal Code",
-                    "Zip/Postal Code": "Zip/Postal Code"
+                    "Zip Code": "Código postal",
+                    "Postal Code": "Código postal",
+                    "Zip/Postal Code": "Código postal"
                 },
-                "Choose": "Choose {{field}} ..."
+                "Choose": "Elija {{field}}..."
             },
             "Suggestion": {
-                "Title": "We have checked your address entry and have suggested changes that could help ensure delivery.",
-                "Subtitle": "Click \"Suggested\" to update form. You will be able to click \"As entered\" to restore your original entries.",
-                "Suggested": "Suggested:",
-                "AsEntered": "As Entered:"
+                "Title": "Hemos verificado la dirección que ingresó y le sugerimos cambios para ayudar a que la entrega se haga correctamente.",
+                "Subtitle": "Haga clic en “Sugerencias” para actualizar el formulario. Podrá hacer clic en la opción “Datos originales” para que los datos queden tal como estaban.",
+                "Suggested": "Sugerencias:",
+                "AsEntered": "Datos originales:"
             },
             "Error": {
-                "InvalidAddress": "Invalid address.",
-                "CannotVerify": "Could not verify address, please double-check your address.",
-                "UnknownVerifyError": "An unknown error occurred while verifying address.",
-                "FieldIsRequired": "{{field}} is required",
-                "FieldIsInvalid": "{{field}} has an invalid value",
-                "InvalidHouseNumber": "Street number could not be found",
-                "INTERNAL_SERVER_ERROR": "We're sorry, something went wrong. If the problem persists please contact us at support@easypost.com.",
-                "NOT_ACCEPTABLE": "The resource identified by the request is only capable of generating response entities which have content characteristics not acceptable according to the accept headers sent in the request.",
-                "NOT_FOUND": "The requested resource could not be found.",
-                "FORBIDDEN": "Unable to access the requested resource.",
-                "PAYMENT_REQUIRED": "Insufficient funds. Please check your billing settings at http://www.easypost.com/account/billing.",
-                "UNAUTHORIZED": "Unable to access the requested resource, authorization failed.",
-                "BAD_REQUEST": "Malformed request. Please check the contents and retry.",
-                "PAYMENT_GATEWAY.ERROR": "The payment processor could not handle the request. Please try again or contact support@easypost.com if the problem persists.",
-                "MODE.UNAUTHORIZED": "This resource requires a production API Key to access.",
-                "MODE.CONFLICT": "API Key mode conflicted with parameter mode.",
-                "DATE.PARSE.FAILURE": "At least one date was formatted incorrectly and could not be parsed.",
-                "PARAMETER.FORBIDDEN": "The request could not be completed due to forbidden properties present in the parameters.",
-                "PARAMETER.REQUIRED": "Missing required parameter.",
-                "ADDRESS.PARAMETERS.INVALID_CHARACTER": "The parameters passed contained an invalid character.",
-                "ADDRESS.PARAMETERS.INVALID": "The parameters passed to create an Address were missing or invalid.",
-                "ADDRESS.COUNTRY.INVALID": "Invalid 'country', please provide a 2 character ISO country code.",
-                "ADDRESS.VERIFICATION.NOT_FOUND": "Address Not Found.",
-                "ADDRESS.VERIFICATION.FAILURE": "The address was unable to be verified.",
-                "ADDRESS.VERIFY.UNAVAILABLE": "Address verification is not available. Please try again.",
-                "ADDRESS.VERIFICATION.INVALID": "One of the verifications selected is invalid.",
-                "ADDRESS.VERIFY.FAILURE": "Unable to verify address.",
-                "ADDRESS.VERIFY.CARRIER_INVALID": "Unable to verify address using provided carrier.",
-                "ADDRESS.VERIFY.UPSTREAM_UNAVAILABLE": "Address verification is not available due to an upstream service not responding. Please try again.",
-                "ADDRESS.VERIFY.ONLY_US": "USPS can only validate US addresses.",
-                "ADDRESS.VERIFY.INTL_NOT_ENABLED": "International Verification not enabled on this account. Please contact support@easypost.com.",
-                "ADDRESS.VERIFY.MISSING_STREET": "Insufficient address data provided. A street must be provided.",
-                "ADDRESS.VERIFY.MISSING_CITY_STATE_ZIP": "Insufficient address data provided. A city and state or a zip must be provided.",
-                "E.COUNTRY.UNSUPPORTED": "This country is not supported in this mode. Try in production mode.",
-                "E.ENGINE.UNAVAILABLE": "No verification engine is available to service this country. Please try again later.",
-                "E.QUERY.UNANSWERABLE": "We can not provide enough data in this country to satisfy this request. Please try again later.",
-                "E.ADDRESS.NOT_FOUND": "We could not find the entered address.",
-                "E.SECONDARY_INFORMATION.INVALID": "Invalid secondary information(Apt/Suite#). Please note, this can show up as an error on a successful request.",
-                "E.SECONDARY_INFORMATION.MISSING": "Missing secondary information(Apt/Suite#). Please note, this can show up as an error on a successful request.",
-                "E.HOUSE_NUMBER.MISSING": "House number is missing.",
-                "E.HOUSE_NUMBER.INVALID": "We could not find the street number provided.",
-                "E.STREET.MISSING": "Street is missing.",
-                "E.STREET.INVALID": "Street is invalid.",
-                "E.BOX_NUMBER.MISSING": "Box number is missing.",
-                "E.BOX_NUMBER.INVALID": "Box number is invalid.",
-                "E.ADDRESS.INVALID": "Invalid city/state/ZIP.",
-                "E.ZIP.NOT_FOUND": "Zip not found.",
-                "E.ZIP.INVALID": "Zip invalid.",
-                "E.ZIP.PLUS4.NOT_FOUND": "Zip + 4 not found.",
-                "E.ADDRESS.MULTIPLE": "Multiple addresses were returned with the same zip.",
-                "E.ADDRESS.INSUFFICIENT": "Insufficient/incorrect address data.",
-                "E.ADDRESS.DUAL": "Dual address.",
-                "E.STREET.MAGNET": "Street address is ambiguous.",
-                "E.CITY_STATE.INVALID": "Unverifiable city / state.",
-                "E.STATE.INVALID": "Invalid State.",
-                "E.ADDRESS.DELIVERY.INVALID": "Invalid delivery address.",
-                "E.TIMED_OUT": "Exceeded max timeout.",
-                "E.TIME_ZONE.UNAVAILABLE": "The time zone service is currently unavailable.",
-                "E.PO_BOX.INTERNATIONAL": "Cannot verify international PO Box. Please note, this can show up as an error on a successful request."
+                "InvalidAddress": "Dirección no válida.",
+                "CannotVerify": "No pudimos verificar la dirección. Revise si es correcta.",
+                "UnknownVerifyError": "Se produjo un error desconocido al verificar la dirección.",
+                "FieldIsRequired": "El campo {{field}} es obligatorio.",
+                "FieldIsInvalid": "El campo {{field}} tiene un valor no válido.",
+                "InvalidHouseNumber": "No se encontró el número de la calle.",
+                "INTERNAL_SERVER_ERROR": "Lamentablemente, algo salió mal. Si el problema continúa, envíe un mensaje a support@easypost.com.",
+                "NOT_ACCEPTABLE": "El recurso detectado por la solicitud solo puede generar entidades de respuesta cuyo contenido tiene características inaceptables según los encabezados aceptables enviados en la solicitud.",
+                "NOT_FOUND": "No se encontró el recurso solicitado.",
+                "FORBIDDEN": "No se puede acceder al recurso solicitado.",
+                "PAYMENT_REQUIRED": "Fondos insuficientes. Verifique las opciones de facturación en http://www.easypost.com/account/billing.",
+                "UNAUTHORIZED": "No se puede acceder al recurso solicitado. Hubo un error de autorización.",
+                "BAD_REQUEST": "Solicitud con estructura incorrecta. Verifique el contenido y vuelva a intentarlo.",
+                "PAYMENT_GATEWAY.ERROR": "El procesador de pagos no pudo gestionar la solicitud. Vuelva a intentarlo o envíe un mensaje a support@easypost.com si el problema continúa.",
+                "MODE.UNAUTHORIZED": "Este recurso requiere una clave API de producción para permitir el acceso.",
+                "MODE.CONFLICT": "El modo de la clave API está en conflicto con el modo de los parámetros.",
+                "DATE.PARSE.FAILURE": "Al menos una fecha tiene un formato incorrecto y no se pudo analizar.",
+                "PARAMETER.FORBIDDEN": "La solicitud no se pudo llevar a cabo porque los parámetros tienen propiedades prohibidas.",
+                "PARAMETER.REQUIRED": "Falta un parámetro obligatorio.",
+                "ADDRESS.PARAMETERS.INVALID_CHARACTER": "Los parámetros utilizados tenían un carácter no válido.",
+                "ADDRESS.PARAMETERS.INVALID": "Faltan los parámetros utilizados para crear la dirección o no son válidos.",
+                "ADDRESS.COUNTRY.INVALID": "País no válido. Indique un código de país ISO de dos caracteres.",
+                "ADDRESS.VERIFICATION.NOT_FOUND": "No se encontró la dirección.",
+                "ADDRESS.VERIFICATION.FAILURE": "No se pudo verificar la dirección.",
+                "ADDRESS.VERIFY.UNAVAILABLE": "No es posible verificar la dirección. Vuelva a intentarlo.",
+                "ADDRESS.VERIFICATION.INVALID": "Una de las verificaciones seleccionadas no es válida.",
+                "ADDRESS.VERIFY.FAILURE": "No se pudo verificar la dirección.",
+                "ADDRESS.VERIFY.CARRIER_INVALID": "No se puede verificar la dirección con el proveedor indicado.",
+                "ADDRESS.VERIFY.UPSTREAM_UNAVAILABLE": "No se puede verificar la dirección porque un servicio en la secuencia no responde. Vuelva a intentarlo.",
+                "ADDRESS.VERIFY.ONLY_US": "USPS solo permite validar direcciones de EE. UU.",
+                "ADDRESS.VERIFY.INTL_NOT_ENABLED": "En esta cuenta no se permite la verificación internacional. Envíe un mensaje a support@easypost.com.",
+                "ADDRESS.VERIFY.MISSING_STREET": "No se indicaron suficientes datos para la dirección. Se debe indicar una calle.",
+                "ADDRESS.VERIFY.MISSING_CITY_STATE_ZIP": "No se proporcionaron suficientes datos para la dirección. Se deben indicar una ciudad y un estado o un código postal.",
+                "E.COUNTRY.UNSUPPORTED": "Este país no se admite en este modo. Intente con el modo de producción.",
+                "E.ENGINE.UNAVAILABLE": "No hay ningún motor de verificación para prestar servicio a este país. Vuelva a intentarlo más tarde.",
+                "E.QUERY.UNANSWERABLE": "No podemos brindar suficientes datos en este país para llevar a cabo esa solicitud. Vuelva a intentarlo más tarde.",
+                "E.ADDRESS.NOT_FOUND": "No encontramos la dirección ingresada.",
+                "E.SECONDARY_INFORMATION.INVALID": "Información secundaria no válida (N.º de apartamento/oficina). Tenga en cuenta que eso puede causar errores en solicitudes correctas.",
+                "E.SECONDARY_INFORMATION.MISSING": "Falta información secundaria (N.º de apartamento/oficina). Tenga en cuenta que eso puede causar errores en solicitudes correctas.",
+                "E.HOUSE_NUMBER.MISSING": "Falta el número de casa.",
+                "E.HOUSE_NUMBER.INVALID": "No encontramos el número de calle indicado.",
+                "E.STREET.MISSING": "Falta la calle.",
+                "E.STREET.INVALID": "La calle no es válida.",
+                "E.BOX_NUMBER.MISSING": "Falta el número de casilla postal.",
+                "E.BOX_NUMBER.INVALID": "El número de casilla postal no es válido.",
+                "E.ADDRESS.INVALID": "Ciudad/Estado/Código postal no válidos.",
+                "E.ZIP.NOT_FOUND": "No se encontró el código postal.",
+                "E.ZIP.INVALID": "Código postal no válido.",
+                "E.ZIP.PLUS4.NOT_FOUND": "No se encontró el código postal + 4.",
+                "E.ADDRESS.MULTIPLE": "Encontramos varias direcciones con el mismo código postal.",
+                "E.ADDRESS.INSUFFICIENT": "Datos insuficientes/incorrectos en la dirección.",
+                "E.ADDRESS.DUAL": "Dirección duplicada.",
+                "E.STREET.MAGNET": "La dirección es ambigua.",
+                "E.CITY_STATE.INVALID": "Ciudad/Estado no verificables.",
+                "E.STATE.INVALID": "Estado no válido.",
+                "E.ADDRESS.DELIVERY.INVALID": "Dirección de entrega no válida.",
+                "E.TIMED_OUT": "Se superó el tiempo máximo de espera.",
+                "E.TIME_ZONE.UNAVAILABLE": "El servicio de zona horaria no está disponible en este momento.",
+                "E.PO_BOX.INTERNATIONAL": "No se puede verificar la casilla postal internacional. Tenga en cuenta que eso puede causar errores en solicitudes correctas."
             },
-            "UseAsEntered": "We are unable to confirm that the address is valid. Please check this box to use the address as entered."
+            "UseAsEntered": "No se pudo confirmar la validez de la dirección. Seleccione esta casilla para usar la dirección tal como se introdujo."
         },
-        "TooltipAlt": "Information",
+        "TooltipAlt": "Información",
         "Validators": {
-            "DateNavyValidationRule": "Entered date is invalid"
+            "DateNavyValidationRule": "La fecha introducida no es válida"
         },
         "ModalActivityBlock": {
-            "NumQuestionsAnswered": "{{number}} questions answered",
-            "Complete": "Complete",
-            "EditButton": "Edit",
-            "DeleteButton": "Delete",
-            "SaveButton": "Save",
-            "CancelButton": "Cancel"
+            "NumQuestionsAnswered": "{{number}} preguntas respondidas",
+            "Complete": "Completar",
+            "EditButton": "Editar",
+            "DeleteButton": "Eliminar",
+            "SaveButton": "Guardar",
+            "CancelButton": "Cancelar"
         },
-        "ConfirmDeletion": "Are you sure you want to delete \nthis information?",
-        "CancelBtn": "Cancel"
+        "ConfirmDeletion": "¿Está seguro de que desea eliminar\nesta información?",
+        "CancelBtn": "Cancelar"
     }
 }
