@@ -703,14 +703,14 @@ jobs:
           name: Running Playwright tests on << parameters.env >>
           working_directory: *playwright_path
           command: |
-            if [ "<< parameters.test_suite >>" == "UNKNOWN" ]
+            if [ "<< parameters.test_suite >>" == "dss" ]
             then
-              npx playwright test --list | grep -o 'tests/.*.spec.ts' | sort | uniq > e2e_tests.txt
+              npx playwright test --list --project="dss" | grep -o 'tests/.*.spec.ts' | sort | uniq > e2e_tests.txt
             elif [ "<< parameters.test_suite >>" == "dsm" ]
             then
               npx playwright test --list --project="dsm" | grep -o 'tests/.*.spec.ts' | sort | uniq > e2e_tests.txt
             else
-              npx playwright test --list --project="dss" | grep -o 'tests/.*.spec.ts' | sort | uniq > e2e_tests.txt
+              npx playwright test --list | grep -o 'tests/.*.spec.ts' | sort | uniq > e2e_tests.txt
             fi
 
             echo ""
