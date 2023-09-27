@@ -174,6 +174,18 @@ export class Search {
     return this.page.locator(`${this.baseTextColumnXPath(columnName)}//mat-form-field//input`);
   }
 
+  public async textInputExists(columnName: string): Promise<boolean> {
+    return this.textInputLocator(columnName).isVisible();
+  }
+
+  public async checkboxExists(columnName: string, checkboxName: string): Promise<boolean> {
+    return this.checkboxLocator(columnName, checkboxName).isVisible();
+  }
+
+  public async dateInputExists(columnName: string): Promise<boolean> {
+    return this.page.locator(this.dateInputFieldXPath(columnName)).isVisible();
+  }
+
   private async isOpen(): Promise<boolean> {
     return this.page.locator('#searchTable').isVisible();
   }

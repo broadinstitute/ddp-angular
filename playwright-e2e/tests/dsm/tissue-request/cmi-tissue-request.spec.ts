@@ -5,10 +5,7 @@ import { AdditionalFilter } from 'dsm/component/filters/sections/search/search-e
 import ParticipantPage from 'dsm/pages/participant-page/participant-page';
 import { TabEnum } from 'dsm/component/tabs/enums/tab-enum';
 import OncHistoryTab from 'dsm/component/tabs/onc-history-tab';
-import {
-  OncHistoryInputColumnsEnum,
-  OncHistorySelectRequestEnum
-} from 'dsm/component/tabs/enums/onc-history-input-columns-enum';
+import { OncHistoryInputColumnsEnum, OncHistorySelectRequestEnum } from 'dsm/component/tabs/enums/onc-history-input-columns-enum';
 import { expect } from '@playwright/test';
 import { getDate } from 'utils/date-utils';
 import { TissueDynamicFieldsEnum } from 'dsm/pages/tissue/enums/tissue-information-enum';

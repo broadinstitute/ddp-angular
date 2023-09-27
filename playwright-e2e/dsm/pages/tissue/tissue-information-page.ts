@@ -9,6 +9,7 @@ import Tissue from 'dsm/component/tissue';
 import Checkbox from 'dss/component/checkbox';
 import Button from 'dss/component/button';
 import Input from 'dss/component/input';
+import Modal from 'dsm/component/modal';
 
 
 export default class TissueInformationPage {
@@ -186,22 +187,14 @@ export default class TissueInformationPage {
 
   /* Helper Functions */
   private async applyToAll(root: Locator): Promise<void> {
-    const applyToAllBtn = new Button(this.page,
-      { root, label: 'APPLY TO ALL', exactMatch: true }
-    );
-    const isApplyToAllBtnDisabled = await applyToAllBtn.isDisabled();
-    if (!isApplyToAllBtnDisabled) {
-      await applyToAllBtn.click();
-      const yesBtn = new Button(this.page, { root: this.page.locator('app-modal'), label: 'Yes', exactMatch: true });
-      await yesBtn.toLocator().waitFor({ state: 'attached'});
-      const isModalBtnDisabled = await yesBtn.isDisabled();
-      if (!isModalBtnDisabled) {
-        await yesBtn.click();
-        const successModalBtn = new Button(this.page, { root: this.page.locator('app-modal'), label: 'Ok', exactMatch: true });
-        await waitForResponse(this.page, { uri: 'institutions' });
-        await successModalBtn.click();
-      }
-    }
+    const applyToAllBtn = new Button(this.page, { root, label: 'APPLY TO ALL', exactMatch: true });
+    await applyToAllBtn.click();
+
+    const modal = new Modal(this.page);
+    await expect(modal.bodyLocator()).toHaveText(/Are you sure you want to change the destruction policy for all of the tissues from this facility/);
+    const yesBtn = modal.getButton({ label: 'Yes' }).toLocator();
+    await yesBtn.click();
+    // after click Yes button, dialog window is automatically handled by Playwright
   }
 
   private async fillFaxSentDate(dateIndex: number, date: FillDate): Promise<void> {
