@@ -23,7 +23,7 @@ if [[ -z $COMMAND || -z $STUDY_KEY || -z $BRANCH || ($COMMAND == "deploy" && -z 
   echo "    run-tests"
   echo "        Run unit tests for given study and given branch"
   echo "    run-e2e-tests"
-  echo "        Run Playwright tests for given branch on given env (dev or test)"
+  echo "        Run Playwright tests for given branch on given env (dev or test). Use this to verify new or modified E2E tests on CircleCI."
   echo ""
   echo "        TEST_SUITE: [TEST_SUITE_NAME]"
   echo "        BRANCH: [PR_BRANCH_NAME]"
