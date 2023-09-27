@@ -42,7 +42,7 @@ const testConfig: PlaywrightTestConfig = {
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 1 : 0,
-  workers: process.env.CI ? 2 : 4,
+  workers: process.env.CI ? 2 : 3,
   maxFailures: 0,
 
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
@@ -71,7 +71,7 @@ const testConfig: PlaywrightTestConfig = {
       // Account for minor difference in text rendering and resolution between headless and headed mode
       ignoreDefaultArgs: ['--hide-scrollbars']
     },
-    userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36',
+    userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36',
     viewport: { width: 1280, height: 960 },
     ignoreHTTPSErrors: true,
 
@@ -105,13 +105,7 @@ const testConfig: PlaywrightTestConfig = {
     {
       name: 'dss',
       testDir: 'tests',
-      testIgnore: ['dsm/**/*.spec.ts'],
-      use: {}
-    },
-    {
-      name: 'kit',
-      testDir: 'tests/dsm/kitUploadFlow',
-      fullyParallel: false,
+      testIgnore: ['tests/dsm/**/*.spec.ts'],
       use: {}
     }
   ]

@@ -1,5 +1,7 @@
-import { expect, Locator, Page } from '@playwright/test';
+import { Locator, Page } from '@playwright/test';
 import { FamilyMember } from 'dsm/component/tabs/enums/familyMember-enum';
+import TextArea from 'dss/component/textarea';
+import { waitForResponse } from 'utils/test-utils';
 
 /**
  * Captures the webelements that can be interacted with for RGP Family Members
@@ -11,8 +13,10 @@ export default class FamilyMemberTab {
     private _lastName!: string;
     private _relationshipID!: string;
     private _familyID!: number;
-    private _relationToProband: FamilyMember;
+    private readonly _relationToProband: FamilyMember;
     private readonly page: Page;
+    private readonly MIN_POSSIBLE_RELATIONSHIP_ID_VALUE: number = 0;
+    private readonly MAX_POSSIBLE_RELATIONSHIP_ID_VALUE: number = 1000;
 
     constructor(page: Page, relationToProband: FamilyMember) {
         this.page = page;
@@ -73,7 +77,7 @@ export default class FamilyMemberTab {
      * @returns the family id from the family member tab
      */
     public async getFamilyIDFromFamilyMemberTab(): Promise<number> {
-        const familyMemberTab = this.getFamilyMemberTab();
+        const familyMemberTab = await this.getFamilyMemberTab();
         const memberTabParts = (await familyMemberTab.innerText()).split('-'); //Family member tabs are usually {first name} - {subject id}
         const retreivedSubjectID = memberTabParts[1];
         const subjectIDParts = retreivedSubjectID.split('_'); //Subject id is usually in the format of RGP_{family id here}_{relationship id here}
@@ -87,9 +91,18 @@ export default class FamilyMemberTab {
      * Uses the relationshipID to find the family member tab to be returned, must be ran only after setting the relationshipID
      * @returns locator for a family member's tab
      */
-    public getFamilyMemberTab(): Locator {
+    public async getFamilyMemberTab(): Promise<Locator> {
         //todo Needs a better general locator - the last contains could capture more webelements than intended once family id is in 3,000's
-        return this.page.locator(`//li//a[contains(., 'RGP') and contains(., '_${this.relationshipID}')]`);
+        const possibleFamilyMemberTabs = await this.page.locator(`//li//a[contains(., 'RGP') and contains(., '_${this.relationshipID}')]`).all();
+        let actualFamilyMember: Locator;
+        for (const familyMember of possibleFamilyMemberTabs) {
+            const familyMemberID = await this.getRelationshipIDFromFamilyMemberTab(familyMember);
+            if (familyMemberID === parseInt(this._relationshipID)) {
+                actualFamilyMember = familyMember;
+                break;
+            }
+        }
+        return actualFamilyMember!;
     }
 
     public getJumpToMenuText(): Locator {
@@ -264,15 +277,11 @@ export default class FamilyMemberTab {
      * @param notes the notes to be inputted
      */
     public async inputMixedRaceNotes(notes: string): Promise<void> {
-        const textarea = this.page.locator("//textarea[contains(@data-placeholder, 'Mixed Race Notes')]");
+        const textarea = new TextArea(this.page, {label: 'Mixed Race Notes'});
         await textarea.clear();
-        await expect(textarea).toBeEmpty();
-
         await Promise.all([
-            this.page.waitForResponse(response => response.url().includes('/ui/patch') && response.status() === 200),
-            textarea.click(),
-            textarea.type(notes, {delay: 150}),
-            textarea.press('Tab'),
+            waitForResponse(this.page, {uri: 'ui/patch'}),
+            textarea.fill(notes)
         ]);
     }
 
@@ -631,5 +640,63 @@ export default class FamilyMemberTab {
 
     public getRedCapSurveyCompletedDate(): Locator {
         return this.page.locator("//td[contains(text(), 'RedCap Survey Completed Date')]/following-sibling::td//div/input");
+    }
+
+    /* Utility methods */
+    public async setRandomRelationshipID(): Promise<void> {
+        const usedRelationshipIDs = await this.getListOfUsedSubjectIDs();
+        let searchingForID = true;
+        let possibleID = -1;
+        while (searchingForID) {
+            //possibleID = Math.floor(Math.random() * this.MAX_POSSIBLE_RELATIONSHIP_ID_VALUE);
+            possibleID = this.getRandomNumber(this.MIN_POSSIBLE_RELATIONSHIP_ID_VALUE, this.MAX_POSSIBLE_RELATIONSHIP_ID_VALUE, usedRelationshipIDs);
+            searchingForID = this.isPreviouslyUsedSubjectID(possibleID, usedRelationshipIDs);
+        }
+        this._relationshipID = possibleID.toString();
+    }
+
+    /**
+     * From https://stackoverflow.com/questions/5520835/how-can-i-generate-a-random-number-within-a-range-but-exclude-some/64910550#64910550
+     * Alex found a neat method that is useful
+     * @param min minimum number
+     * @param max maximum numbr
+     * @param exclude array of numbers to exclude
+     * @returns random number
+     */
+    private getRandomNumber = (min: number, max: number, exclude: number[] = []) => {
+        let num = Math.floor(Math.random() * (max - min + 1 - exclude.length) + min);
+        exclude
+          .slice()
+          .sort((a, b) => a - b)
+          .every((exeption) => exeption <= num && (num++, true));
+        return num;
+      };
+
+    private isPreviouslyUsedSubjectID(subjectID: number, listOfIDs: Array<number>): boolean {
+        let previouslyUsed = false;
+        for (const id of listOfIDs) {
+            if (id === subjectID) {
+                previouslyUsed = true;
+            }
+        }
+        return previouslyUsed;
+    }
+
+    private async getListOfUsedSubjectIDs(): Promise<Array<number>> {
+        const usedRelationshipIDs: number[] = [];
+        const currentFamilyMembers = await this.page.locator(`//app-participant-page//ul//li//a[contains(., 'RGP')]`).all();
+        for (const familyMember of currentFamilyMembers) {
+            const familyRelationshipID = await this.getRelationshipIDFromFamilyMemberTab(familyMember);
+            usedRelationshipIDs.push(familyRelationshipID);
+        }
+        return usedRelationshipIDs;
+    }
+
+    private async getRelationshipIDFromFamilyMemberTab(familyMember: Locator): Promise<number> {
+        const familyMemberInfo = await familyMember.innerText();
+        const splitFamilyMemberInfo = familyMemberInfo.split('-'); //Split between {name e.g. George} and {rgp info e.g. RGP_1234_5}
+        const rgpInfo = splitFamilyMemberInfo[1];
+        const splitRGPInfo = rgpInfo.split('_') //Split between {RGP}_{family id}_{relationship id}
+        return parseInt(splitRGPInfo[2]);
     }
 }

@@ -33,6 +33,10 @@ export class Search {
   public async dates(columnName: string, { from: fromValue, to: toValue, additionalFilters }: Partial<DateConfig>): Promise<void> {
     await this.setAdditionalFilters(columnName, additionalFilters);
 
+    if (!fromValue && !toValue) {
+      return;
+    }
+
     let fromDate!: string;
     let toDate!: string;
 
@@ -168,6 +172,18 @@ export class Search {
 
   public textInputLocator(columnName: string): Locator {
     return this.page.locator(`${this.baseTextColumnXPath(columnName)}//mat-form-field//input`);
+  }
+
+  public async textInputExists(columnName: string): Promise<boolean> {
+    return this.textInputLocator(columnName).isVisible();
+  }
+
+  public async checkboxExists(columnName: string, checkboxName: string): Promise<boolean> {
+    return this.checkboxLocator(columnName, checkboxName).isVisible();
+  }
+
+  public async dateInputExists(columnName: string): Promise<boolean> {
+    return this.page.locator(this.dateInputFieldXPath(columnName)).isVisible();
   }
 
   private async isOpen(): Promise<boolean> {

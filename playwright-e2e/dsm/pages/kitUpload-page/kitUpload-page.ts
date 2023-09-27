@@ -18,11 +18,15 @@ export default class KitUploadPage {
   constructor(private readonly page: Page) {
   }
 
-  public async waitForReady(): Promise<void> {
-    await this.page.waitForLoadState('networkidle');
+  public async waitForReady(kitTypes?: KitTypeEnum[]): Promise<void> {
+    const knownKitTypes = kitTypes ?? this.expectedKitTypes; //Use the param kit types if provided, if they are not, then use the general expected kit types
+    await Promise.all([
+      this.page.waitForLoadState(),
+      this.assertPageTitle()
+    ]);
+    await expect(this.skipAddressValidationCheckbox).toBeVisible();
     await waitForNoSpinner(this.page);
-    await this.assertPageTitle();
-    await this.assertDisplayedKitTypes(this.expectedKitTypes);
+    await this.assertDisplayedKitTypes(knownKitTypes);
   }
 
   public async selectKitType(kitType: KitTypeEnum): Promise<void> {
@@ -141,7 +145,11 @@ export default class KitUploadPage {
   }
 
   public async skipAddressValidation(value = false): Promise<void> {
-    value && await this.page.locator('//mat-checkbox[.//*[@class="mat-checkbox-label" and text()="Skip address validation on upload"]]').click();
+    value && await this.skipAddressValidationCheckbox.click();
+  }
+
+  public get skipAddressValidationCheckbox(): Locator {
+    return this.page.locator('//mat-checkbox[.//*[@class="mat-checkbox-label" and text()="Skip address validation on upload"]]');
   }
 
   /* XPaths */
