@@ -1,10 +1,16 @@
-export function dateFormat(): Intl.DateTimeFormat {
-  return new Intl.DateTimeFormat('en-US', {
-    month: '2-digit',
-    day: '2-digit',
-    year: 'numeric',
-    timeZone: 'America/New_York'
-  })
+export function dateFormat(timeZone?: string): Intl.DateTimeFormat {
+  return timeZone
+    ? new Intl.DateTimeFormat('en-US', {
+        month: '2-digit',
+        day: '2-digit',
+        year: 'numeric',
+        timeZone
+    })
+    : new Intl.DateTimeFormat('en-US', {
+        month: '2-digit',
+        day: '2-digit',
+        year: 'numeric'
+    });
 }
 
 /**
@@ -14,6 +20,10 @@ export function dateFormat(): Intl.DateTimeFormat {
  */
 export function getDate(date?: Date): string {
   return dateFormat().format(date ? date : new Date());
+}
+
+export function getDateEasternTimeZone(date?: Date): string {
+  return dateFormat('America/New_York').format(date ? date : new Date());
 }
 
 export function getUtcDate(): string {

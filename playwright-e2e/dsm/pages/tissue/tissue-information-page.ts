@@ -193,8 +193,25 @@ export default class TissueInformationPage {
     const modal = new Modal(this.page);
     await expect(modal.bodyLocator()).toHaveText(/Are you sure you want to change the destruction policy for all of the tissues from this facility/);
     const yesBtn = modal.getButton({ label: 'Yes' }).toLocator();
-    await yesBtn.click();
-    // after click Yes button, dialog window is automatically handled by Playwright
+
+    await Promise.all([
+      waitForResponse(this.page, { uri: '/institutions' }),
+      yesBtn.click(),
+    ]);
+
+    // After click Yes button, a second dialog window should open automatically and handled by Playwright automatically.
+    // However, if it isn't (sometimes) closed, then close it manually.
+    // Don't delete sleep of 5 seconds.
+    await this.page.waitForTimeout(5000);
+    try {
+      const okBtn = modal.getButton({ label: 'Ok' }).toLocator();
+      await expect(okBtn).toBeVisible({ timeout: 1000 });
+      await okBtn.click();
+    } catch (e) {
+      // alert was closed by Playwright
+    }
+
+    await expect(modal.toLocator()).not.toBeVisible();
   }
 
   private async fillFaxSentDate(dateIndex: number, date: FillDate): Promise<void> {
