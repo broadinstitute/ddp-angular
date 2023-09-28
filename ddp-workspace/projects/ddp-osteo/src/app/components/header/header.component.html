@@ -1,5 +1,5 @@
 <header class="header" [ngClass]="{'panel-opened': isPanelOpened, 'header_shadow': isPageScrolled}">
-    <div class="header-content" [ngClass]="{'header-content_sticky': headerConfig.stickySubtitle}">
+    <div class="header-content" [ngClass]="{'header-content_sticky': headerConfig.stickySubtitle, 'wider-header': headerConfig.showBreadcrumbs}">
         <a class="project-logo" routerLink="/">
             <img class="project-logo__img" src="assets/images/logo-osteo.svg"
                 [alt]="'Header.Logo.ImageAlt' | translate">
@@ -66,6 +66,9 @@
             </li>
         </ul>
     </nav>
+    <div class="languageSelection">
+        <ddp-language-selector></ddp-language-selector>
+    </div>
     <div class="auth">
         <div *ngIf="isAuthenticated && headerConfig.showDashboardButton" class="auth__dashboard">
             <ng-container *ngTemplateOutlet="dashboardButton"></ng-container>

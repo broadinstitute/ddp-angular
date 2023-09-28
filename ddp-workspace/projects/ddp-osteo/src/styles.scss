@@ -244,3 +244,13 @@ $tooltip-icon-size: 24px;
         font-size: 1rem;
     }
 }
+
+// language selector
+ddp-language-selector {
+    .ddp-globe {
+        stroke: #000000;
+        fill: transparent;
+        vertical-align: middle;
+        margin-right: 0.2rem;
+    }
+}
