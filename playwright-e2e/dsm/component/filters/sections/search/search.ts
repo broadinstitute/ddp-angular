@@ -18,9 +18,10 @@ export class Search {
     await expect(async () => expect(await this.isOpen()).toBe(true)).toPass({ timeout: 5000 });
   }
 
-  public async search(): Promise<void> {
+  public async search(opts: { uri?: string } = {}): Promise<void> {
+    const { uri = 'ui/filterList?' } = opts;
     await Promise.all([
-      waitForResponse(this.page, {uri: 'ui/filterList?'}),
+      waitForResponse(this.page, { uri }),
       this.page.locator("//div[@id='searchTable']/button[1][span[text()='Search']]").click()
     ]);
     await waitForNoSpinner(this.page);
