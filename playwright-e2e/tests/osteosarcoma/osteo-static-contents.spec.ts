@@ -1,6 +1,9 @@
 import { test } from 'fixtures/osteo-fixture';
 
 test('Osteo Static Content @dss @osteo', async ({ page }) => {
+  const size = page.viewportSize();
+  console.log(`port size: ${size}`);
+
   test.slow();
 
   await page
