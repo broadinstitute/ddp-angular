@@ -37,6 +37,9 @@ test.describe('Participants List', () => {
       const searchPanel = participantListPage.filters.searchPanel;
       await searchPanel.open();
       await searchPanel.clear();
+      // Clearing the search does not change the amount of participants seen in participant list
+      const numParticipantsAfterClear = await participantsTable.numOfParticipants();
+      expect(numParticipantsAfterClear).toBe(numParticipants);
       await searchPanel.search({ uri: '/ui/applyFilter?' });
 
       // Count of participants does not change

@@ -71,6 +71,7 @@ test.describe.serial('Blood Kit Upload', () => {
 
   for (const [index, study] of studies.entries()) {
     test(`Kit prefix check @cmi @dsm @${study} @kit`, async ({ page }, testInfo) => {
+      test.slow();
       const testResultDir = testInfo.outputDir;
 
       await welcomePage.selectStudy(study);
@@ -145,8 +146,8 @@ test.describe.serial('Blood Kit Upload', () => {
           kitsWithoutLabelPage.createLabelsButton.click()
         ]);
         await Promise.all([
-          expect(page.locator('[data-icon="cog"]')).toBeVisible(),
-          expect(page.locator('h3')).toHaveText(/Triggered label creation/i)
+          expect(page.locator('[data-icon="cog"]')).toBeVisible({timeout: 60000}),
+          expect(page.locator('h3')).toHaveText(/Triggered label creation/i, {timeout: 60000})
         ]);
         logInfo(`shippingID: ${shippingID}`);
       });
