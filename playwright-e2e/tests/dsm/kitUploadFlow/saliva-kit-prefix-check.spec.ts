@@ -71,6 +71,7 @@ test.describe.serial('Saliva Kit Upload with a Canadian or New York address', ()
 
   for (const [index, study] of studies.entries()) {
     test(`Kit prefix check @cmi @dsm @${study} @kit`, async ({ page }, testInfo) => {
+      test.slow();
       const testResultDir = testInfo.outputDir;
 
       await welcomePage.selectStudy(study);
