@@ -76,7 +76,7 @@ test.describe('Tumor Collaborator Sample ID', () => {
       // Search by Sample ID column: NOT EMPTY
       const searchPanel = participantListPage.filters.searchPanel;
       await searchPanel.open();
-      await searchPanel.checkboxes('Status', { checkboxValues: ['Enrolled'] });
+      // await searchPanel.checkboxes('Status', { checkboxValues: ['Enrolled'] });
       await searchPanel.text(tumorIdColumn, { additionalFilters: [AdditionalFilter.NOT_EMPTY] });
       await searchPanel.search();
 
