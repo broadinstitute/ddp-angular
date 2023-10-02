@@ -5,7 +5,6 @@ import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
 import { studyShortName } from 'utils/test-utils';
 import { logInfo } from 'utils/log-utils';
-import { ParticipantListTable } from 'dsm/component/tables/participant-list-table';
 
 /**
 * Collaborator Prefixes per study:
