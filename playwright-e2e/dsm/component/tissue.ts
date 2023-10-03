@@ -104,6 +104,7 @@ export default class Tissue {
 
     await inputElement.focus();
     await inputElement.clear();
+    await inputElement.blur();
 
     const dropDown = inputLocator.locator("//ul[contains(@class, 'Lookup--Dropdown')]/li");
     await expect(dropDown).toHaveCount(1);

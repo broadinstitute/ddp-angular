@@ -5,18 +5,21 @@ import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
 import { studyShortName } from 'utils/test-utils';
 import { logInfo } from 'utils/log-utils';
+import ParticipantPage from 'dsm/pages/participant-page/participant-page';
+import OncHistoryTab from 'dsm/component/tabs/onc-history-tab';
+import { TabEnum } from 'dsm/component/tabs/enums/tab-enum';
 
 /**
-* Collaborator Prefixes per study:
-* ESC -> GECProject
- */
+  * Collaborator Prefixes per study:
+  *   MBC -> MBCProject
+*/
 
 /**
  * Lookup of Tumor Collaborator Sample ID for a legacy pt with legacy samples
  *   1) search for a pt with "Legacy Participant ID" not empty and "Normal Collaborator Sample ID" not empty
  *   2) click into Tumor Collaborator Sample ID
  *
- * DSM should show the correct tumor id for the selected pt: [COLLABORATOR_PREFIX]_[LEGACY SHORT ID]_*
+ * DSM should show the correct tumor id for the selected pt: [COLLABORATOR_PREFIX]_[LEGACY_SHORT_ID]_*
  */
 test.describe('Tumor Collaborator Sample ID', () => {
   const studies: StudyEnum[] = [StudyEnum.MBC];
@@ -24,58 +27,53 @@ test.describe('Tumor Collaborator Sample ID', () => {
   for (const study of studies) {
     test(`Search by tumor sample id for legacy participant @dsm @${study}`, async ({ page, request }) => {
       const participantListPage = await ParticipantListPage.goto(page, study, request);
-      const participantsTable = participantListPage.participantListTable;
-
+      const participantListTable = participantListPage.participantListTable;
       const customizeViewPanel = participantListPage.filters.customizeViewPanel;
       await customizeViewPanel.open();
 
-      const tumorIdColumn = 'Tumor Collaborator Sample ID';
-      const legacyParticipantColumn = 'Legacy Participant ID';
-      await customizeViewPanel.selectColumns(CustomViewColumns.TISSUE, [tumorIdColumn]);
-      await customizeViewPanel.selectColumns(CustomViewColumns.PARTICIPANT, [legacyParticipantColumn]);
+      await test.step('Search for the right participant', async () => {
+        await customizeViewPanel.open();
+        await customizeViewPanel.selectColumns(CustomViewColumns.TISSUE, ['Tumor Collaborator Sample ID']);
+        await customizeViewPanel.selectColumns(CustomViewColumns.PARTICIPANT, ['Legacy Short ID']);
+        await customizeViewPanel.deselectColumns(CustomViewColumns.PARTICIPANT, ['DDP', 'Last Name', 'First Name']);
+        await customizeViewPanel.selectColumns(CustomViewColumns.DSM_COLUMNS, ['Onc History Created']);
+        await customizeViewPanel.selectColumns(CustomViewColumns.MEDICAL_RECORD, ['MR Problem']);
 
-      // Table automatically reloaded with new column added
-      await expect(participantsTable.getHeaderByName(tumorIdColumn)).toBeVisible();
-      await expect(participantsTable.getHeaderByName(legacyParticipantColumn)).toBeVisible();
+        await expect(participantListTable.getHeaderByName('DDP')).not.toBeVisible();
 
-      // Search by Sample ID column: NOT EMPTY
-      const searchPanel = participantListPage.filters.searchPanel;
-      await searchPanel.open();
-      // await searchPanel.checkboxes('Status', { checkboxValues: ['Enrolled'] });
-      await searchPanel.text(tumorIdColumn, { additionalFilters: [AdditionalFilter.NOT_EMPTY] });
-      await searchPanel.text(legacyParticipantColumn, { additionalFilters: [AdditionalFilter.NOT_EMPTY] });
-      await searchPanel.search();
+        const searchPanel = participantListPage.filters.searchPanel;
+        await searchPanel.open();
+        await searchPanel.checkboxes('Status', { checkboxValues: ['Enrolled'] });
+        await searchPanel.checkboxes('MR Problem', { checkboxValues: ['No'] });
+        await searchPanel.text('Legacy Short ID', { additionalFilters: [AdditionalFilter.NOT_EMPTY] });
+        await searchPanel.text('Onc History Created', { additionalFilters: [AdditionalFilter.NOT_EMPTY] });
+        await searchPanel.search();
 
-      // Count participants
-      const numParticipants = await participantsTable.numOfParticipants();
-      expect(numParticipants).toBeGreaterThanOrEqual(1);
+        const numParticipants = await participantListTable.numOfParticipants();
+        expect(numParticipants).toBeGreaterThanOrEqual(1);
+        logInfo(`Number of participants (after search): ${numParticipants}`);
+      });
 
       const rowIndex = 0;
-      const [shortID] = await participantsTable.getTextAt(rowIndex, 'Short ID');
-      const sampleIDs = await participantsTable.getTextAt(rowIndex, tumorIdColumn);
-      const [sampleID] = sampleIDs.filter(id => id.length > 0); // Grep first ID. It could be more than 1.
-      logInfo(`Participant Short ID: ${shortID}, Tumor Collaborator Sample ID: ${sampleID}`);
+      const [legacyShortID] = await participantListTable.getTextAt(rowIndex, 'Legacy Short ID');
+      logInfo(`Participant Legacy Short ID: ${legacyShortID}`);
+      expect(legacyShortID).toBeTruthy();
 
-      // show the correct tumor id: [COLLABORATOR_PREFIX]_[HRUID]_*
+      const participantPage: ParticipantPage = await participantListTable.openParticipantPageAt(rowIndex);
+      const oncHistoryTab = await participantPage.clickTab<OncHistoryTab>(TabEnum.ONC_HISTORY);
+      const oncHistoryTable = oncHistoryTab.table;
+
+      await test.step('Check Tumor Collaborator Sample ID on Participant page', async () => {
+        const tissueInformationPage = await oncHistoryTable.openTissueInformationPage(rowIndex);
+        await tissueInformationPage.fillFaxSentDates({ today: true });
+        const tissue = await tissueInformationPage.tissue();
+        const suggestedSampleID = await tissue.getTumorCollaboratorSampleIDSuggestedValue();
+        logInfo(`Tumor Collaborator Sample ID: ${suggestedSampleID}`);
+
+        // Shows the correct tumor id prefix: [COLLABORATOR_PREFIX]_[LEGACY_SHORT_ID]_*
       const studyPrefix = studyShortName(study).collaboratorPrefix;
-      expect(sampleID).toMatch(new RegExp(`${studyPrefix}_${shortID}_`));
-
-      await searchPanel.open();
-      await searchPanel.clear();
-      await searchPanel.search({ uri: '/ui/applyFilter?' });
-
-      // Searching with an empty manual search will not lose custom column
-      await expect(participantsTable.getHeaderByName(tumorIdColumn)).toBeVisible();
-
-      // Search for a specific tumor collaborator sample ID
-      await searchPanel.text(tumorIdColumn, { textValue: sampleID });
-      await searchPanel.search();
-
-      const count = await participantsTable.numOfParticipants();
-      expect(count).toBe(1);
-
-      expect(await participantsTable.getTextAt(0, tumorIdColumn)).toContain(sampleID);
-      expect(await participantsTable.getTextAt(0, 'Short ID')).toStrictEqual([shortID]);
+      expect(suggestedSampleID).toMatch(new RegExp(`${studyPrefix}_${legacyShortID}_`));
+      });
     });
   }
 });

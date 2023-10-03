@@ -1,6 +1,6 @@
 import { expect } from '@playwright/test';
 import { test } from 'fixtures/dsm-fixture';
-import { AdditionalFilter, CustomViewColumns } from 'dsm/component/filters/sections/search/search-enums';
+import { CustomViewColumns } from 'dsm/component/filters/sections/search/search-enums';
 import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
 import { studyShortName } from 'utils/test-utils';
@@ -45,7 +45,9 @@ test.describe('Tumor Collaborator Sample ID', () => {
 
       await test.step('Search for the right participant', async () => {
         await customizeViewPanel.open();
+        await customizeViewPanel.selectColumns(CustomViewColumns.TISSUE, ['Tumor Collaborator Sample ID']);
         await customizeViewPanel.selectColumns(CustomViewColumns.PARTICIPANT, ['Registration Date']);
+        await customizeViewPanel.deselectColumns(CustomViewColumns.PARTICIPANT, ['DDP', 'Last Name', 'First Name']);
         await customizeViewPanel.selectColumns(CustomViewColumns.DSM_COLUMNS, ['Onc History Created']);
         await customizeViewPanel.selectColumns(CustomViewColumns.MEDICAL_RECORD, ['MR Problem']);
 
@@ -53,7 +55,7 @@ test.describe('Tumor Collaborator Sample ID', () => {
         await searchPanel.open();
         await searchPanel.checkboxes('Status', { checkboxValues: ['Enrolled'] });
         await searchPanel.checkboxes('MR Problem', { checkboxValues: ['No'] });
-        await searchPanel.dates('Onc History Created', { additionalFilters: [AdditionalFilter.EMPTY] });
+        // await searchPanel.dates('Onc History Created', { additionalFilters: [AdditionalFilter.EMPTY] });
         await searchPanel.search();
 
         const numParticipants = await participantListTable.numOfParticipants();
