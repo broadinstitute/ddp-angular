@@ -95,9 +95,14 @@ export default class Input extends WidgetBase {
 
   public async focus(): Promise<void> {
     await this.toLocator().focus();
+    await this.toLocator().click();
   }
 
   public async maxLength(): Promise<string | null> {
     return this.toLocator().getAttribute('maxlength');
+  }
+
+  public async clear(): Promise<void> {
+    await this.toLocator().clear();
   }
 }

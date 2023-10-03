@@ -24,7 +24,7 @@ export default class OncHistoryTable extends Table {
   private readonly tissueInformationPage: TissueInformationPage;
 
   constructor(protected readonly page: Page) {
-    super(page, { cssClassAttribute: '.table' });
+    super(page, { cssClassAttribute: '.table', root: 'app-onc-history-detail' });
     this.tissueInformationPage = new TissueInformationPage(this.page);
   }
 
@@ -236,8 +236,10 @@ export default class OncHistoryTable extends Table {
     return this.row(index).locator('td').first();
   }
 
-  private row(index: number): Locator {
-    return this.page.locator(this.tableXPath + this.rowXPath).nth(index);
+  public row(index?: number): Locator {
+    return index
+      ? this.page.locator(this.tableXPath + this.rowXPath).nth(index)
+      : this.page.locator(this.tableXPath + this.rowXPath);
   }
 
   private column(columnName: OncHistoryInputColumnsEnum): Locator {
