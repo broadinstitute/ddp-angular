@@ -101,10 +101,14 @@ export default class Tissue {
   public async getTumorCollaboratorSampleIDSuggestedValue(): Promise<string> {
     const inputLocator = await this.getField(TissueDynamicFieldsEnum.TUMOR_COLLABORATOR_SAMPLE_ID, false);
     const inputElement = new Input(this.page, { root: inputLocator });
+    const currentValue = await inputElement.currentValue();
 
     await inputElement.focus();
-    await inputElement.clear();
-    await inputElement.blur();
+    if (currentValue.length >= 0) {
+      await inputElement.clear();
+      await inputElement.blur();
+      await inputElement.focus();
+    }
 
     const dropDown = inputLocator.locator("//ul[contains(@class, 'Lookup--Dropdown')]/li");
     await expect(dropDown).toHaveCount(1);
