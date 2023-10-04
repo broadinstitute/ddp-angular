@@ -7,12 +7,11 @@ import Select from 'dss/component/select';
 import { test } from 'fixtures/dsm-fixture';
 
 test.describe('View Sequencing Order Permission Test', () => {
-    //Current clinical studies
-    const studies = [StudyEnum.OSTEO2, StudyEnum.LMS];
-    let testEmail = 'redacted';
+    const studies = [StudyEnum.OSTEO2, StudyEnum.LMS]; //Current clinical studies
+    const testEmail = process.env.DSM_USER_EMAIL as string;
 
     for (const study of studies) {
-        test(`Verify the view_seq_order permissions work as expected in @${study}`, async ({ page, request }) => {
+        test(`@${study}: Verify the view_seq_order permissions work as expected`, async ({ page, request }) => {
             const navigation = new Navigation(page, request);
 
             await test.step('Verify that the current DSM user has the permissions: pt_list_view and view_seq_order_status selected', async () => {
@@ -28,7 +27,7 @@ test.describe('View Sequencing Order Permission Test', () => {
                 await userPermissionsPage.assertAddUserButtonDisplayed();
 
                 //Verify the expected study admin can be seen
-                await userPermissionsPage.assertStudyAdminInfo(testEmail, 'Kiara6858 Test User', '111-222-3333');
+                await userPermissionsPage.assertStudyAdminInfo(testEmail, 'Kiara HelloWorld Test', '111-222-3333');
                 const studyAdmin = userPermissionsPage.getStudyAdmin(testEmail);
             })
 

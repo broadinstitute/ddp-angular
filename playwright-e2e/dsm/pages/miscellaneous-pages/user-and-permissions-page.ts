@@ -1,16 +1,23 @@
 import {expect, Locator, Page} from '@playwright/test';
 import {StudyEnum} from 'dsm/component/navigation/enums/selectStudyNav-enum';
+import { UserPermission } from './enums/userPermission-enum';
 
 export default class UserPermissionPage {
   private readonly PAGE_TITLE: string = 'Users And Permissions';
-  constructor(protected readonly page: Page) {}
+  private currentStudyPermissions: UserPermission[];
+
+  constructor(protected readonly page: Page, study: StudyEnum) {
+    this.currentStudyPermissions = this.setStudyPermissions(study);
+  }
+
   /* Locators */
   public getAddUserButton(): Locator {
     return this.page.locator(`//button[contains(@class, 'addUserButton')]`);
   }
 
   public getStudyAdmin(email: string): Locator {
-    return this.page.locator(`//mat-panel-title[contains(text(), '${email}')]`);
+    //return this.page.locator(`//mat-expansion-panel//mat-panel-title[contains(text(), '${email}')]`);
+    return this.page.getByText(`${email}`);
   }
 
   public getComparePermissionsButton(studyAdmin: Locator): Locator {
@@ -51,15 +58,18 @@ export default class UserPermissionPage {
   public async assertStudyAdminInfo(email: string, name: string, phone?: string): Promise<void> {
     //Get the relevant study admin's section
     const studyAdmin = this.getStudyAdmin(email);
+
     //Verify the email is as expected
     const studyAdminEmail = await studyAdmin.innerText();
     expect(studyAdminEmail).toBe(email);
+
     //Verify the name is as expected
-    const studyAdminName = await this.getStudyAdminName(studyAdmin);
+    const studyAdminName = await this.getStudyAdminName(name);
     expect(studyAdminName).toBe(name);
+
     if (phone) {
       //If phone information is provided, verify that it is shown in the page as expected
-      const studyAdminPhoneNumber = await this.getStudyAdminPhoneNumber(studyAdmin);
+      const studyAdminPhoneNumber = await this.getStudyAdminPhoneNumber(phone);
       expect(studyAdminPhoneNumber).toBe(phone);
     }
   }
@@ -71,13 +81,46 @@ export default class UserPermissionPage {
   }
 
   /* Utility methods */
-  public async getStudyAdminName(studyAdmin: Locator): Promise<string> {
-    const name = studyAdmin.locator(`/following-sibling::mat-panel-description//span[contains(@class,'header-text-inputs-name')]`);
-    return await name.innerText();
+  public async getStudyAdminName(name: string): Promise<string> {
+    const studyAdminName = this.page.getByText(`${name}`);
+    return studyAdminName.innerText();
   }
 
-  public async getStudyAdminPhoneNumber(studyAdmin: Locator): Promise<string> {
-    const phone = studyAdmin.locator(`/following-sibling::mat-panel-description//span[contains(@class,'header-text-inputs-phone')]`);
-    return await phone.innerText();
+  public async getStudyAdminPhoneNumber(phoneNumber: string): Promise<string> {
+    const studyAdminPhoneNumber = this.page.getByText(`${phoneNumber}`);
+    return studyAdminPhoneNumber.innerText();
+  }
+
+  private determineStudyGroup(study: StudyEnum): string {
+    let studyGroup = '';
+
+    if (StudyEnum.ANGIO || StudyEnum.BRAIN || StudyEnum.ESC || StudyEnum.MBC || StudyEnum.OSTEO || StudyEnum.PANCAN || StudyEnum.PROSTATE) {
+      //Study is a CMI research study
+      studyGroup = 'cmi';
+    } else if (StudyEnum.OSTEO2 || StudyEnum.LMS) {
+      //Study is a CMI clinical study
+      studyGroup = 'pecgs';
+    } else if (StudyEnum.RGP) {
+      //Study is the RGP study
+      studyGroup = 'malab';
+    } else if (StudyEnum.PRION) {
+      //Study is the Prion study
+      studyGroup = 'prion';
+    } else if (StudyEnum.AT) {
+      //Study is the ATCP study
+      studyGroup = 'atcp';
+    } else if (StudyEnum.BRUGADA) {
+      //Study is the Brugada study
+      studyGroup = 'brugada';
+    } else if (StudyEnum.DARWIN) {
+      //Study is the Darwin study
+      studyGroup = 'darwin'
+    }
+    return studyGroup;
+  }
+
+  private setStudyPermissions(study: StudyEnum): UserPermission[] {
+    let permissions: UserPermission[];
+
   }
 }
