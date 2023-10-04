@@ -98,6 +98,25 @@ export default class Tissue {
     }
   }
 
+  public async getTumorCollaboratorSampleIDSuggestedValue(): Promise<string> {
+    const inputLocator = await this.getField(TissueDynamicFieldsEnum.TUMOR_COLLABORATOR_SAMPLE_ID, false);
+    const inputElement = new Input(this.page, { root: inputLocator });
+    const currentValue = await inputElement.currentValue();
+
+    await inputElement.focus();
+    if (currentValue.length >= 0) {
+      await inputElement.clear();
+      await inputElement.blur();
+      await inputElement.focus();
+    }
+
+    const dropDown = inputLocator.locator("//ul[contains(@class, 'Lookup--Dropdown')]/li");
+    await expect(dropDown).toHaveCount(1);
+
+    await dropDown.nth(0).click();
+    return this.getCurrentValue(TissueDynamicFieldsEnum.TUMOR_COLLABORATOR_SAMPLE_ID, inputElement);
+  }
+
   /* Helper Functions */
   private async fillTextareaField(dynamicField: TissueDynamicFieldsEnum, value: string | number): Promise<void> {
     const textAreaLocator = await this.getField(dynamicField);
@@ -134,16 +153,16 @@ export default class Tissue {
     const inputLocator = await this.getField(dynamicField, byText);
     const inputElement = new Input(this.page, { root: inputLocator });
     const currentValue = await this.getCurrentValue(dynamicField, inputElement);
-    let actualValue = typeof value === 'number' ? value.toString() : value;
+    let actualValue = typeof value === 'number' ? value.toString() : value.trim();
     const maxLength = await inputElement.maxLength();
 
     if (maxLength && actualValue.length > Number(maxLength)) {
       actualValue = actualValue.slice(0, Number(maxLength));
     }
 
+    await inputElement.focus();
     if (currentValue !== actualValue) {
       if (!currentValue && dynamicField === TissueDynamicFieldsEnum.TUMOR_COLLABORATOR_SAMPLE_ID) {
-        await inputElement.focus();
         const dropDown = this.page.locator("//ul[contains(@class, 'Lookup--Dropdown')]/li");
         await dropDown.nth(0).click();
       }

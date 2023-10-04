@@ -177,6 +177,9 @@ In **/tests/singular** dir, run Singular tests only:
 ### Test Development Tips
 - In */playwright-e2e* dir, use npm script `npm run lint:singular` to find eslint issues in *singular* dir. Note: Not all eslint rules are fixable by `--fix`.
 
+- To skip a test if env is Test, add a `test.skip` condition inside the `test.describe` block.
+  > `test.skip(process.env.ENV?.indexOf('test') !== -1);`
+
 - For a click action that initiate page navigation, it's a good practice to wait for `navigation` and `load` events.
   - For an example, below is a function that clicks the `submit` button and waits for events.
   ```
