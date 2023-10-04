@@ -20,7 +20,7 @@ test.describe('View Sequencing Order Permission Test', () => {
 
                 //Verify that the User and Permissions Page can be seen; Miscellaneous -> Users and Permissions
                 await navigation.selectFromMiscellaneous(MiscellaneousEnum.USERS_AND_PERMISSIONS);
-                const userPermissionsPage = new UserPermissionPage(page);
+                const userPermissionsPage = new UserPermissionPage(page, study);
 
                 //Verify expected webelements can be seen
                 await userPermissionsPage.assertPageTitle();
