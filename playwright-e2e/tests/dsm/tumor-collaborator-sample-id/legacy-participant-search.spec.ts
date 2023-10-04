@@ -19,7 +19,7 @@ import { TabEnum } from 'dsm/component/tabs/enums/tab-enum';
  *   1) search for a pt with "Legacy Participant ID" not empty and "Normal Collaborator Sample ID" not empty
  *   2) click into Tumor Collaborator Sample ID
  *
- * DSM should show the correct tumor id for the selected pt: [COLLABORATOR_PREFIX]_[LEGACY_SHORT_ID]_*
+ * DSM should show the correct tumor id for the selected pt: [COLLABORATOR_PREFIX]_[SHORT_ID]_*
  */
 test.describe('Tumor Collaborator Sample ID', () => {
   const studies: StudyEnum[] = [StudyEnum.MBC];
@@ -55,9 +55,9 @@ test.describe('Tumor Collaborator Sample ID', () => {
       });
 
       const rowIndex = 0;
-      const [legacyShortID] = await participantListTable.getTextAt(rowIndex, 'Legacy Short ID');
-      logInfo(`Participant Legacy Short ID: ${legacyShortID}`);
-      expect(legacyShortID).toBeTruthy();
+      const [shortID] = await participantListTable.getTextAt(rowIndex, 'Short ID');
+      logInfo(`Participant Short ID: ${shortID}`);
+      expect(shortID).toBeTruthy();
 
       const participantPage: ParticipantPage = await participantListTable.openParticipantPageAt(rowIndex);
       const oncHistoryTab = await participantPage.clickTab<OncHistoryTab>(TabEnum.ONC_HISTORY);
@@ -71,8 +71,8 @@ test.describe('Tumor Collaborator Sample ID', () => {
         logInfo(`Tumor Collaborator Sample ID: ${suggestedSampleID}`);
 
         // Shows the correct tumor id prefix: [COLLABORATOR_PREFIX]_[LEGACY_SHORT_ID]_*
-      const studyPrefix = studyShortName(study).collaboratorPrefix;
-      expect(suggestedSampleID).toMatch(new RegExp(`${studyPrefix}_${legacyShortID}_`));
+        const studyPrefix = studyShortName(study).collaboratorPrefix;
+        expect(suggestedSampleID).toMatch(new RegExp(`${studyPrefix}_${shortID}_`));
       });
     });
   }
