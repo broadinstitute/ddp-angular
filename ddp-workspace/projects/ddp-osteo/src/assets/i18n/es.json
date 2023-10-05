@@ -94,6 +94,7 @@
     },
     "PhysiciansPage": {
         "step": {
+            "href": "For_Physician_ES.pdf",
             "Button": "Descargue el PDF para imprimir y compártalo con su equipo de atención."
         },
         "introduction": {
@@ -295,6 +296,7 @@
                 "Time": "De 10 a 15 minutos",
                 "Title": "Dé su consentimiento para el estudio",
                 "Text": "El formulario de consentimiento es la manera en que los participantes les otorgan su permiso a los investigadores para participar en el estudio. Esta sección contiene varias páginas, por lo que recomendamos a los participantes que se tomen el tiempo necesario para revisarla. Todo progreso se guardará de manera automática y podrá reanudar su lectura más tarde. En el caso de los participantes que se inscriben por su hijo(a) o con este(a), dependiendo de la edad del/de la niño(a), es posible que se les solicite que den su “asentimiento” o que acepten que también desean participar en el estudio.",
+                "href": "consent_ES.pdf",
                 "Button": "Ver el documento de consentimiento",
                 "ImageAlt": "Computer screen displaying online consent form"
             },
@@ -303,6 +305,7 @@
                 "Time": "5 minutos",
                 "Title": "Indique dónde ha recibido tratamiento",
                 "Text": "Les preguntamos a los pacientes dónde han recibido tratamiento para su cáncer para poder solicitar sus historias clínicas y, según corresponda, el tejido almacenado de su tumor.",
+                "href": "medical_release_ES.pdf",
                 "Button": "Ver el formulario de divulgación de información médica",
                 "ImageAlt": "Computer screen displaying medical center"
             },
@@ -311,6 +314,7 @@
                 "Time": "El tiempo necesario para cada encuesta es diferente",
                 "Title": "Responda unas encuestas sobre usted y su experiencia como paciente con cáncer",
                 "Text": "Estas encuestas contienen preguntas sobre la experiencia de los participantes con el osteosarcoma, como cuándo fueron diagnosticados y los tipos de tratamiento que han recibido.",
+                "href": "surveys_ES.pdf",
                 "Button": "Ver encuestas",
                 "ImageAlt": "Computer screen displaying online survey"
             },
@@ -319,6 +323,7 @@
                 "Time": "10 minutos",
                 "Title": "Proporcione una muestra de saliva o de sangre",
                 "Text": "Se les enviará a los participantes un kit para obtener muestras de saliva o sangre, junto con instrucciones fáciles de seguir. Analizaremos estas muestras para ayudar a mejorar nuestra comprensión del cáncer al comparar el ADN normal de la saliva o la sangre del participante con el ADN tumoral de toda muestra de tejido tumoral que podamos obtener.",
+                "href": "Saliva_Kit_Instructions.pdf",
                 "Button": "Ver las instrucciones para el kit",
                 "ImageAlt": "Sample collection kit"
             }
@@ -656,7 +661,7 @@
                     {
                         "Question": "¿Quién realiza esta investigación?",
                         "Paragraphs": [
-                            "Este proyecto es llevado a cabo por el Broad Institute del MIT y Harvard, Dana-Farber Cancer Institute y Count Me In, una iniciativa de investigación sin fines de lucro que realiza estudios de cáncer en colaboración con pacientes. El Proyecto sobre Osteosarcoma y el Proyecto sobre Leiomiosarcoma de Count Me In cuentan con el apoyo de una subvención del programa Cancer Moonshot del Instituto Nacional del Cáncer y forman parte de la <a class=\"Link\" href=\"https://www.cancer.gov/research/key-initiatives/moonshot-cancer-initiative/implementation/patient-engagement\" target=\"_blank\">red de Participant Engagement and Cancer Genome Sequencing (PE-CGS) de los centros de investigación.</a>"
+                            "Este proyecto es llevado a cabo por el Broad Institute del MIT y Harvard, Dana-Farber Cancer Institute y Count Me In, una iniciativa de investigación sin fines de lucro que realiza estudios de cáncer en colaboración con pacientes. El Proyecto sobre Osteosarcoma y el Proyecto sobre Leiomiosarcoma de Count Me In cuentan con el apoyo de una subvención del programa Cancer Moonshot del Instituto Nacional del Cáncer y forman parte de la <a class=\"Link\" href=\"https://pe-cgs.org\" target=\"_blank\">red de Participant Engagement and Cancer Genome Sequencing (PE-CGS) de los centros de investigación.</a>"
                         ]
                     },
                     {

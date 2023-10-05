@@ -94,6 +94,7 @@
     },
     "PhysiciansPage": {
         "step": {
+            "href": "For_Physician.pdf",
             "Button": "Download printable PDF to share with your care team"
         },
         "introduction": {
@@ -295,6 +296,7 @@
                 "Time": "10-15 minutes",
                 "Title": "Provide consent for the study",
                 "Text": "The consent form is how participants give researchers their permission to take part in the study. This section consists of several pages, we encourage participants to take their time. Any progress will be automatically saved and can be re-accessed later. For participants who are signing up for / with their child, depending on their age, we may also ask the child to “assent” or agree that they would also like to participate in the study.",
+                "href": "consent.pdf",
                 "Button": "View Consent Document",
                 "ImageAlt": "Computer screen displaying online consent form"
             },
@@ -303,6 +305,7 @@
                 "Time": "5 minutes",
                 "Title": "Tell us where you’ve been treated",
                 "Text": "We ask where patients have been treated for their cancer, so that we can request medical records, and if applicable, archived tumor tissue.",
+                "href": "medical_release.pdf",
                 "Button": "View Medical Release",
                 "ImageAlt": "Computer screen displaying medical center"
             },
@@ -312,6 +315,7 @@
                 "Title": "Respond to surveys about you and your experience with cancer",
                 "Text": "In these surveys we ask questions about a participant’s experience with osteosarcoma, like when they were diagnosed and the types of treatments they've had.",
                 "Button": "View Surveys",
+                "href": "surveys.pdf",
                 "ImageAlt": "Computer screen displaying online survey"
             },
             {
@@ -319,6 +323,7 @@
                 "Time": "10 minutes",
                 "Title": "Provide a saliva and/or blood sample",
                 "Text": "We will send participants a kit to collect a sample of their saliva and/or blood, along with easy to follow instructions. We will study these samples to help improve our understanding of cancer by comparing the normal DNA in a participant's saliva or blood to their tumor DNA from any tumor samples we may collect.",
+                "href": "Kit_Instructions.pdf",
                 "Button": "View Kit Instructions",
                 "ImageAlt": "Sample collection kit"
             }
