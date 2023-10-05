@@ -329,6 +329,7 @@
             }
         ]
     },
+
     "BenefitsParticipation": {
         "Title": "Benefits of Participation",
         "Participations": [
@@ -351,11 +352,6 @@
             }
         ]
     },
-
-
-
-
-
     "SIPage": {
         "introduction": {
             "Title": "Scientific Impact"

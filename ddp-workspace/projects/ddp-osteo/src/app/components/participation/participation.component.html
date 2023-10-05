@@ -18,7 +18,7 @@
             <a *ngIf="step.Button && stepsHref[i]"
                 mat-stroked-button
                 target="_blank"
-                [href]="stepsHref[i]"
+                [href]="step.href"
                 class="step__btn button button_small small-letter-spacing button_secondary">
                 {{step.Button}}
             </a>
