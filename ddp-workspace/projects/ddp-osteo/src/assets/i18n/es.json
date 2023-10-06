@@ -94,7 +94,8 @@
     },
     "PhysiciansPage": {
         "step": {
-            "Button": "Descargue el PDF para imprimir y compártalo con su equipo de atención."
+            "href": "For_physician_ES.pdf",
+            "Button": "Descargue el PDF para imprimir y compártalo con su equipo de atención"
         },
         "introduction": {
             "Text": "<strong>El Proyecto sobre Osteosarcoma (OS)</strong> es parte de Count Me In, una organización sin fines de lucro que une a pacientes e investigadores como socios para agilizar los descubrimientos en la investigación del cáncer. Count Me In cuenta con el patrocinio del Broad Institute del MIT y Harvard, una institución de investigación biomédica sin fines de lucro líder; Dana-Farber Cancer Institute, un hospital oncológico líder; y Emerson Collective, una organización orientada al cambio social con sede en California. El Proyecto sobre Osteosarcoma de Count Me In cuenta con el apoyo de una subvención del programa Cancer Moonshot del Instituto Nacional del Cáncer y forma parte de la red de Participant Engagement and Cancer Genome Sequencing (PE-CGS) de los centros de investigación. La alianza directa con los pacientes nos permite acelerar los descubrimientos relacionados con el osteosarcoma e impulsar el desarrollo de nuevas terapias y estrategias de tratamiento."
@@ -295,6 +296,7 @@
                 "Time": "De 10 a 15 minutos",
                 "Title": "Dé su consentimiento para el estudio",
                 "Text": "El formulario de consentimiento es la manera en que los participantes les otorgan su permiso a los investigadores para participar en el estudio. Esta sección contiene varias páginas, por lo que recomendamos a los participantes que se tomen el tiempo necesario para revisarla. Todo progreso se guardará de manera automática y podrá reanudar su lectura más tarde. En el caso de los participantes que se inscriben por su hijo(a) o con este(a), dependiendo de la edad del/de la niño(a), es posible que se les solicite que den su “asentimiento” o que acepten que también desean participar en el estudio.",
+                "href": "consent_ES.pdf",
                 "Button": "Ver el documento de consentimiento",
                 "ImageAlt": "Computer screen displaying online consent form"
             },
@@ -303,6 +305,7 @@
                 "Time": "5 minutos",
                 "Title": "Indique dónde ha recibido tratamiento",
                 "Text": "Les preguntamos a los pacientes dónde han recibido tratamiento para su cáncer para poder solicitar sus historias clínicas y, según corresponda, el tejido almacenado de su tumor.",
+                "href": "medical_release_ES.pdf",
                 "Button": "Ver el formulario de divulgación de información médica",
                 "ImageAlt": "Computer screen displaying medical center"
             },
@@ -311,6 +314,7 @@
                 "Time": "El tiempo necesario para cada encuesta es diferente",
                 "Title": "Responda unas encuestas sobre usted y su experiencia como paciente con cáncer",
                 "Text": "Estas encuestas contienen preguntas sobre la experiencia de los participantes con el osteosarcoma, como cuándo fueron diagnosticados y los tipos de tratamiento que han recibido.",
+                "href": "surveys_ES.pdf",
                 "Button": "Ver encuestas",
                 "ImageAlt": "Computer screen displaying online survey"
             },
@@ -319,6 +323,7 @@
                 "Time": "10 minutos",
                 "Title": "Proporcione una muestra de saliva o de sangre",
                 "Text": "Se les enviará a los participantes un kit para obtener muestras de saliva o sangre, junto con instrucciones fáciles de seguir. Analizaremos estas muestras para ayudar a mejorar nuestra comprensión del cáncer al comparar el ADN normal de la saliva o la sangre del participante con el ADN tumoral de toda muestra de tejido tumoral que podamos obtener.",
+                "href": "Saliva_Kit_Instructions_ES.pdf",
                 "Button": "Ver las instrucciones para el kit",
                 "ImageAlt": "Sample collection kit"
             }
@@ -347,10 +352,6 @@
         ]
     },
 
-
-
-
-
     "SIPage": {
         "introduction": {
             "Title": "Impacto científico"
@@ -363,7 +364,7 @@
             "Paragraph2": "<h4>Cómo recopilamos datos</h4>",
             "Desc": [
                 "<span>&#8226;</span> <strong>Encuestas:</strong> todos los participantes del Proyecto sobre Osteosarcoma podrán proporcionar datos informados por pacientes por medio de una serie de encuestas durante la inscripción y a lo largo del tiempo.",
-                "<span>&#8226;</span> <strong>Muestras de saliva y sangre:</strong> los participantes también podrán proporcionar muestras de <a class=\"Link italic\" href=\"./Kit_Instructions.pdf\" target=\"_blank\">saliva</a> y <a class=\"Link italic\" href=\"./Blood_Instructions.pdf\" target=\"_blank\">sangre</a>, que nos permiten acceder a información sobre su ADN.",
+                "<span>&#8226;</span> <strong>Muestras de saliva y sangre:</strong> los participantes también podrán proporcionar muestras de <a class=\"Link italic\" href=\"./Saliva_Kit_Instructions_ES.pdf\" target=\"_blank\">saliva</a> y <a class=\"Link italic\" href=\"./Blood_Kit_Instructions_ES.pdf\" target=\"_blank\">sangre</a>, que nos permiten acceder a información sobre su ADN.",
                 "<span>&#8226;</span> <strong>Historias clínicas:</strong> el equipo del proyecto solicita copias de las historias clínicas de todas las instituciones donde los participantes han recibido atención médica. Esto permite que el proyecto cuente con los antecedentes del participante en cuanto a tratamientos, procedimientos y demás detalles clínicos.",
                 "<span>&#8226;</span> <strong>Muestras de tumores:</strong> los participantes otorgarnos permiso para solicitar muestras tumorales archivadas ante las instituciones donde han recibido tratamiento. Estas se utilizan junto con las muestras de saliva y sangre para generar datos genómicos y moleculares para su análisis.",
                 "<span>&#8226;</span> <strong>Grupos de enfoque y entrevistas:</strong> algunos participantes también serán contactados para formar parte de grupos de enfoque o para dar su opinión sobre la experiencia general con el proyecto y su punto de vista acerca de participar en una investigación genómica.",
@@ -656,7 +657,7 @@
                     {
                         "Question": "¿Quién realiza esta investigación?",
                         "Paragraphs": [
-                            "Este proyecto es llevado a cabo por el Broad Institute del MIT y Harvard, Dana-Farber Cancer Institute y Count Me In, una iniciativa de investigación sin fines de lucro que realiza estudios de cáncer en colaboración con pacientes. El Proyecto sobre Osteosarcoma y el Proyecto sobre Leiomiosarcoma de Count Me In cuentan con el apoyo de una subvención del programa Cancer Moonshot del Instituto Nacional del Cáncer y forman parte de la <a class=\"Link\" href=\"https://www.cancer.gov/research/key-initiatives/moonshot-cancer-initiative/implementation/patient-engagement\" target=\"_blank\">red de Participant Engagement and Cancer Genome Sequencing (PE-CGS) de los centros de investigación.</a>"
+                            "Este proyecto es llevado a cabo por el Broad Institute del MIT y Harvard, Dana-Farber Cancer Institute y Count Me In, una iniciativa de investigación sin fines de lucro que realiza estudios de cáncer en colaboración con pacientes. El Proyecto sobre Osteosarcoma y el Proyecto sobre Leiomiosarcoma de Count Me In cuentan con el apoyo de una subvención del programa Cancer Moonshot del Instituto Nacional del Cáncer y forman parte de la <a class=\"Link\" href=\"https://pe-cgs.org\" target=\"_blank\">red de Participant Engagement and Cancer Genome Sequencing (PE-CGS) de los centros de investigación.</a>"
                         ]
                     },
                     {
