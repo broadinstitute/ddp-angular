@@ -8,6 +8,8 @@ import path from 'path';
 import * as dotenv from 'dotenv';
 dotenv.config({ path: path.resolve(__dirname, '.env') });
 
+const { CI } = process.env;
+
 /**
  * Base Playwright TestConfig.
  * See https://playwright.dev/docs/test-configuration.
@@ -40,9 +42,9 @@ const testConfig: PlaywrightTestConfig = {
   /* Run tests in files in parallel */
   fullyParallel: false,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
-  forbidOnly: !!process.env.CI,
-  retries: process.env.CI ? 1 : 0,
-  workers: process.env.CI ? 2 : 3,
+  forbidOnly: !!CI,
+  retries: CI ? 1 : 0,
+  workers: CI ? 1 : 3,
   maxFailures: 0,
 
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
