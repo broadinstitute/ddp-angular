@@ -94,8 +94,8 @@
     },
     "PhysiciansPage": {
         "step": {
-            "href": "For_Physician_ES.pdf",
-            "Button": "Descargue el PDF para imprimir y compártalo con su equipo de atención."
+            "href": "For_physician_ES.pdf",
+            "Button": "Descargue el PDF para imprimir y compártalo con su equipo de atención"
         },
         "introduction": {
             "Text": "<strong>El Proyecto sobre Osteosarcoma (OS)</strong> es parte de Count Me In, una organización sin fines de lucro que une a pacientes e investigadores como socios para agilizar los descubrimientos en la investigación del cáncer. Count Me In cuenta con el patrocinio del Broad Institute del MIT y Harvard, una institución de investigación biomédica sin fines de lucro líder; Dana-Farber Cancer Institute, un hospital oncológico líder; y Emerson Collective, una organización orientada al cambio social con sede en California. El Proyecto sobre Osteosarcoma de Count Me In cuenta con el apoyo de una subvención del programa Cancer Moonshot del Instituto Nacional del Cáncer y forma parte de la red de Participant Engagement and Cancer Genome Sequencing (PE-CGS) de los centros de investigación. La alianza directa con los pacientes nos permite acelerar los descubrimientos relacionados con el osteosarcoma e impulsar el desarrollo de nuevas terapias y estrategias de tratamiento."

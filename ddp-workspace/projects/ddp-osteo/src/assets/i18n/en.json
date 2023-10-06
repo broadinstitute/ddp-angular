@@ -94,7 +94,7 @@
     },
     "PhysiciansPage": {
         "step": {
-            "href": "For_Physician.pdf",
+            "href": "For_physician.pdf",
             "Button": "Download printable PDF to share with your care team"
         },
         "introduction": {
