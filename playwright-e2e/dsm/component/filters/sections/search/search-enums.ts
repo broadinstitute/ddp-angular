@@ -10,6 +10,7 @@ export enum CustomViewColumns {
   COHORT_TAGS = 'Cohort Tags Columns',
   DSM_COLUMNS = 'Participant - DSM Columns',
   MEDICAL_RECORD = 'Medical Record Columns',
+  ONC_HISTORY = 'Onc History Columns',
   PARTICIPANT = 'Participant Columns',
   RESEARCH_CONSENT_FORM = 'Research Consent Form Columns',
   SAMPLE = 'Sample Columns',
