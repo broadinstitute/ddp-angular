@@ -341,7 +341,7 @@
                 "step": "Recibirá información sobre los hallazgos obtenidos a partir de la muestra de su tumor, si así lo desea",
                 "Text": "Si el participante decide compartir muestras de tejido archivadas con el proyecto, es posible que podamos comunicarle información sobre lo que hemos aprendido de la secuenciación genómica de la muestra de su tumor. Esta información tiene por objeto resaltar cómo los participantes contribuyen a la investigación y no tendrá ninguna repercusión en su tratamiento o pronóstico. Debido a ciertas restricciones reglamentarias, no podemos compartir los resultados con los participantes de Nueva York y Canadá.",
                 "Button": "¿Qué tipo de información se comparte sobre las muestras tumorales?",
-                "Button1": "Descargue el PDF para imprimir y compártalo con su equipo de atención.",
+                "href": "tumor_samples_ES.pdf",
                 "ImageAlt": "Computer screen displaying medical center"
             },
             {

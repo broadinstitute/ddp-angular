@@ -342,7 +342,7 @@
                 "step": "Receive information about what we've learned from your tumor sample, if you choose",
                 "Text": "If participants choose to share archive tissue samples with the project, we may be able to share information about what we've learned from the genomic sequencing of a participant's tumor sample back with them. This information is intended to highlight how participants are contributing to research and will not have implications for their treatment or prognosis. Because of regulatory restrictions, we are unable to share results with participants in New York and Canada.",
                 "Button": "What types of information is shared about tumor samples?",
-                "Button1": "Download printable PDF to share with your care team",
+                "href": "tumor_samples.pdf",
                 "ImageAlt": "Computer screen displaying medical center"
             },
             {
