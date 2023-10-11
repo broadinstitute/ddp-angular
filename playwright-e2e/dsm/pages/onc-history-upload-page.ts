@@ -1,7 +1,8 @@
 import { Locator, Page, expect } from '@playwright/test';
 import DsmPageBase from './dsm-page-base';
-import { waitForNoSpinner } from 'utils/test-utils';
-import { OsteoOncHistoryUpload } from 'dsm/component/tabs/interfaces/onc-history-inputs-types';
+import { waitForNoSpinner, waitForResponse } from 'utils/test-utils';
+import { createTextFileSync, deleteFileSync } from 'utils/file-utils';
+import path from 'path';
 
 export default class OncHistoryUploadPage extends DsmPageBase {
   downloadButton: Locator;
@@ -15,17 +16,23 @@ export default class OncHistoryUploadPage extends DsmPageBase {
     await expect(this.page.locator('h1')).toHaveText('Onc History Upload');
     await waitForNoSpinner(this.page);
     await expect(this.page.locator('.download-button'))
-      .toHaveText('Click here to download the Onc History upload template and data dictionary');
+      .toHaveText(/Click here to download the Onc History upload template and data dictionary/);
     await expect(this.uploadBtn).toBeDisabled();
     await waitForNoSpinner(this.page);
   }
 
-  createUploadBody(oncHistories: OsteoOncHistoryUpload[]): string {
-    return oncHistories.map((oncHistory: OsteoOncHistoryUpload) => {
-      const {shortId, firstName, lastName, address} = oncHistory;
-      // eslint-disable-next-line max-len
-      return `\n${shortId}\t${firstName}\t${lastName}\t${address.street1}\t${address.street2}\t${address.city}\t${address.postalCode}\t${address.state}\t${address.country}`;
-    }).join();
+  public async uploadFile(study: string, data: string, testResultDir?: string) {
+    const dir = testResultDir ? testResultDir : __dirname;
+    const filePath = path.join(dir, `${study.trim().replace('\\s', '')}-OncHistory-${new Date().getTime()}.txt`);
+
+    createTextFileSync(dir, filePath, data);
+    await this.fileInput.setInputFiles(filePath);
+    await this.uploadBtn.click();
+
+    await waitForResponse(this.page, {uri: '/oncHistory', });
+    await waitForNoSpinner(this.page);
+
+    deleteFileSync(filePath);
   }
 
   private get fileInput(): Locator {

@@ -74,7 +74,7 @@ const testConfig: PlaywrightTestConfig = {
       ignoreDefaultArgs: ['--hide-scrollbars']
     },
     userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36',
-    viewport: { width: 1920, height: 1080 },
+    viewport: { width: 1536, height: 960 },
     ignoreHTTPSErrors: true,
 
     /* Maximum time each (browser) action such as `click()` can take. Defaults to 0 (no limit). */

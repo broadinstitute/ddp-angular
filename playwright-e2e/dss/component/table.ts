@@ -53,7 +53,7 @@ export default class Table {
   }
 
   tableLocator(): Locator {
-    return this.page.locator(this.tableCss).nth(this.nth);
+    return this.rootLocator().locator(this.tableCss).nth(this.nth);
   }
 
   rowLocator(): Locator {
@@ -168,10 +168,10 @@ export default class Table {
     return this.headerLocator().allInnerTexts();
   }
 
-  async getHeaderIndex(name: string, opts: { exactMatch?: boolean } = {}): Promise<number> {
+  async getHeaderIndex(column: string, opts: { exactMatch?: boolean } = {}): Promise<number> {
     const { exactMatch = true } = opts;
     const allColumnNames = await this.getHeaderNames();
-    return allColumnNames.findIndex((text: string) => exactMatch ? text === name : text.includes(name));
+    return allColumnNames.findIndex((text: string) => exactMatch ? text.trim() === column : text.trim().includes(column));
   }
 
   getHeaderByName(name: RegExp | string): Locator {

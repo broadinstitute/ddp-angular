@@ -20,23 +20,23 @@ export interface OncHistoryDateInput {
 }
 
 export interface OsteoOncHistoryUpload {
-  readonly RECORD_ID: string,
-  readonly DATE_PX: string,
-  readonly TYPE_PX: string,
-  readonly LOCATION_PX: string,
-  readonly HISTOLOGY?: string,
-  readonly ACCESSION?: string,
-  readonly FACILITY?: string,
-  readonly PHONE?: string;
-  readonly FAX?: string;
-  readonly DESTRUCTION?: string;
-  readonly BLOCKS_WITH_TUMOR?: string;
-  readonly TUMOR_SIZE?: string;
-  readonly LOCAL_CONTROL?: string;
-  readonly NECROSIS?: string;
-  readonly VIABLE_TUMOR?: string;
-  readonly FFPE?: string;
-  readonly DECALCIFICATION?: string;
-  readonly BLOCK_TO_REQUEST?: string;
-  readonly REQUEST_STATUS: string;
+  RECORD_ID: string,
+  REQUEST_STATUS: string;
+  DATE_PX?: string,
+  TYPE_PX?: string,
+  LOCATION_PX?: string,
+  HISTOLOGY?: string,
+  ACCESSION?: string,
+  FACILITY?: string,
+  PHONE?: string;
+  FAX?: string;
+  DESTRUCTION?: string;
+  BLOCKS_WITH_TUMOR?: string;
+  TUMOR_SIZE?: string;
+  LOCAL_CONTROL?: string;
+  NECROSIS?: string;
+  VIABLE_TUMOR?: string;
+  FFPE?: string;
+  DECALCIFICATION?: string;
+  BLOCK_TO_REQUEST?: string;
 }
