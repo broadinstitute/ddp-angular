@@ -6,7 +6,7 @@ import ParticipantListPage from 'dsm/pages/participant-list-page';
 import OncHistoryTab from 'dsm/component/tabs/onc-history-tab';
 import { TabEnum } from 'dsm/component/tabs/enums/tab-enum';
 import { shuffle } from 'utils/test-utils';
-import { OsteoOncHistoryUpload } from 'dsm/component/tabs/interfaces/onc-history-inputs-types';
+import { LmsOncHistoryUpload } from 'dsm/component/tabs/interfaces/onc-history-inputs-types';
 import { getDate } from 'utils/date-utils';
 import { MiscellaneousEnum } from 'dsm/component/navigation/enums/miscellaneousNav-enum';
 import { Navigation } from 'dsm/component/navigation/navigation';
@@ -19,38 +19,34 @@ import { generateAlphaNumeric, generateRandomPhoneNum } from 'utils/faker-utils'
 
 test.describe('Upload Onc History', () => {
   // Upload feature is only available for Leiomyosarcoma and OS PE-CGS studies.
-  const study = StudyEnum.OSTEO2;
+  const study = StudyEnum.LMS;
   let shortId: string;
+
   // Create unique values to be used in upload file
   const today = getDate();
-  const phone = generateRandomPhoneNum();
-  const fax = generateRandomPhoneNum();
   const pxType = generateAlphaNumeric(10);
   const assession = generateAlphaNumeric(10);
 
-  const mockOncHistory: OsteoOncHistoryUpload = {
+  const mockOncHistory: LmsOncHistoryUpload = {
     ACCESSION: assession,
     DATE_PX: today,
     TYPE_PX: pxType,
     LOCATION_PX: 'Pancreatic',
     HISTOLOGY: '',
-    FACILITY: 'BostonMemorial',
-    PHONE: phone,
-    FAX: fax,
-    DESTRUCTION: 'indefinitely',
-    TUMOR_SIZE: '',
-    BLOCKS_WITH_TUMOR: '',
+    FACILITY_PATH_REVIEW: 'BostonMemorial',
+    FACILITY_PX: 'MGH',
+    TX_EFFECT: 'unknown',
+    TUMOR_SIZE: 'huge',
     VIABLE_TUMOR: 'No',
     NECROSIS: '',
     REQUEST_STATUS: 'request', //  Valid values are: [review, no, hold, request, sent, received, returned, unableObtainTissue]
-    BLOCK_TO_REQUEST: '',
-    DECALCIFICATION: 'EDTA',
-    FFPE: 'Unknown',
-    LOCAL_CONTROL: 'Yes',
-    RECORD_ID: ''
+    BLOCKS_TO_REQUEST: '1',
+    SLIDES_TOTAL: '5',
+    SLIDES_TO_REQUEST: '3',
+    RECORD_ID: '',
   }
 
-  test(`Upload for study @osteo2 @dsm`, async ({ page, request }, testInfo) => {
+  test(`Upload for study @lms @dsm`, async ({ page, request }, testInfo) => {
     const testResultDir = testInfo.outputDir;
     const navigation = new Navigation(page, request);
 
@@ -83,7 +79,7 @@ test.describe('Upload Onc History', () => {
       // RECORD_ID corresponds to Short ID in upload .txt file
       // shortId = await participantListTable.getParticipantDataAt(rowIndex, 'Short ID');
       // TODO Remove hardcode ID
-      shortId = 'PY7QFA';
+      shortId = 'PEX93B';
       mockOncHistory.RECORD_ID = shortId;
 
       logInfo(`Participant Short ID: ${shortId}`);
@@ -122,7 +118,7 @@ test.describe('Upload Onc History', () => {
         const dateValue = await oncHistoryTable.getFieldValue(OncHistoryInputColumnsEnum.DATE_OF_PX, i);
         const faxValue = await oncHistoryTable.getFieldValue(OncHistoryInputColumnsEnum.FAX, i);
         const phoneValue = await oncHistoryTable.getFieldValue(OncHistoryInputColumnsEnum.PHONE, i);
-        if (pxValue === pxType && dateValue === today && faxValue === fax && phoneValue === phone) {
+        if (pxValue === pxType && dateValue === today) {
           rowIndex = i;
           match = true;
           break;

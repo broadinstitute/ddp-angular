@@ -40,3 +40,22 @@ export interface OsteoOncHistoryUpload {
   DECALCIFICATION?: string;
   BLOCK_TO_REQUEST?: string;
 }
+
+export interface LmsOncHistoryUpload {
+  RECORD_ID: string,
+  FACILITY_PATH_REVIEW?: string,
+  FACILITY_PX?: string;
+  ACCESSION?: string,
+  DATE_PX?: string,
+  TYPE_PX?: string,
+  LOCATION_PX?: string,
+  HISTOLOGY?: string,
+  REQUEST_STATUS: string;
+  TUMOR_SIZE?: string;
+  VIABLE_TUMOR?: string;
+  NECROSIS?: string;
+  TX_EFFECT?: string;
+  BLOCKS_TO_REQUEST?: string;
+  SLIDES_TO_REQUEST?: string;
+  SLIDES_TOTAL?: string;
+}

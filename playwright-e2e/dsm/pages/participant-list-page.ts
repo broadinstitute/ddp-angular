@@ -163,6 +163,7 @@ export default class ParticipantListPage {
 
     const searchPanel = this.filters.searchPanel;
     await searchPanel.open();
+    await searchPanel.clear();
     await searchPanel.text('Short ID', { textValue: shortId });
     await searchPanel.search();
 
