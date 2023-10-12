@@ -22,12 +22,12 @@ export default class TextArea extends WidgetBase {
     }
   }
 
-  async fill(value: string): Promise<void> {
+  async fill(value: string, pressTab = true): Promise<void> {
     await this.toLocator().fill(value);
-    await this.toLocator().press('Tab');
+    pressTab && await this.toLocator().press('Tab');
   }
 
-  async getText(): Promise<string> {
+  async currentValue(): Promise<string> {
     return this.toLocator().inputValue();
   }
 
@@ -37,5 +37,13 @@ export default class TextArea extends WidgetBase {
     await this.click();
     await this.page.keyboard.press('Meta+A');
     await this.page.keyboard.press('Backspace');
+  }
+
+  async blur(): Promise<void> {
+    await this.toLocator().blur();
+  }
+
+  public async maxLength(): Promise<string | null> {
+    return this.toLocator().getAttribute('maxlength');
   }
 }

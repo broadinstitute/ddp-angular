@@ -44,7 +44,7 @@ test.describe.serial('Saliva Kit Upload with a Canadian or New York address', ()
   const studies = [StudyEnum.OSTEO2];
   const kitType = KitTypeEnum.SALIVA;
   const expectedKitTypes = [KitTypeEnum.SALIVA, KitTypeEnum.BLOOD];
-  const kitLabel = `saliva-${crypto.randomUUID().toString().substring(0, 7)}`; // alphanumerical string length should be 14
+  const kitLabel = crypto.randomUUID().toString().substring(0, 14); // alphanumerical string length should be 14
 
   const mockedCanadaAddress = {
     street1: mock.canada.street,
@@ -71,6 +71,7 @@ test.describe.serial('Saliva Kit Upload with a Canadian or New York address', ()
 
   for (const [index, study] of studies.entries()) {
     test(`Kit prefix check @cmi @dsm @${study} @kit`, async ({ page }, testInfo) => {
+      test.slow();
       const testResultDir = testInfo.outputDir;
 
       await welcomePage.selectStudy(study);

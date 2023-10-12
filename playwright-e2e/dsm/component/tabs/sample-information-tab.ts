@@ -1,6 +1,6 @@
 import {expect, Locator, Page} from '@playwright/test';
 import {SampleInfoEnum} from 'dsm/component/tabs/enums/sampleInfo-enum';
-import SampleInformation from 'dsm/component/tabs/model/sampleInformationModel';
+import SampleInformation from 'dsm/component/tabs/model/sample-information-model';
 import {KitTypeEnum} from 'dsm/component/kitType/enums/kitType-enum';
 
 interface SampleInfo {
@@ -29,7 +29,7 @@ export default class SampleInformationTab {
         sent: SampleInfoEnum.SENT,
         received: SampleInfoEnum.RECEIVED,
         results: SampleInfoEnum.RESULTS
-      }
+      };
 
       const inputValues: SampleInfo = {
         collectionDate: SampleInfoEnum.COLLECTION_DATE,
@@ -89,7 +89,7 @@ export default class SampleInformationTab {
     await expect(this.page.locator(MFBarcodeXPath),
       `MFBarcode - '${MFBarcode}' can't be found`).toBeVisible();
 
-      expect(await this.page.locator(MFBarcodeXPath + this.ancestorSampleTypeXPath(type)).textContent(),
+    expect(await this.page.locator(MFBarcodeXPath + this.ancestorSampleTypeXPath(type)).textContent(),
       `Provided MFBarcode (${MFBarcode}) has different sample type than - ${type}`)
       .toContain(type);
   }

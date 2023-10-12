@@ -76,7 +76,7 @@ export default class DatePicker {
     await this.monthPicker().locator(this.clickableCell(), { hasText: monthName }).click();
 
     // pick day of month
-    await this.dayPicker().locator(this.clickableCell(), { hasText: date }).click();
+    await this.dayPicker().locator(this.clickableCell(), { hasText: date }).first().click();
 
     // calendar close automatically
     return getDate(new Date(yyyy, month, parseInt(date)));
