@@ -12,9 +12,11 @@ export default class UserPermissionPage {
   private BRUGADA_STUDY_GROUP = 'brugada';
   private DARWIN_ARK_STUDY_GROUP = 'darwin';
   private currentStudyPermissions: UserPermission[];
+  private readonly page: Page;
 
-  constructor(protected readonly page: Page, study: StudyEnum) {
-    this.currentStudyPermissions = this.setStudyPermissions(study);
+  constructor(page: Page) {
+    this.page = page;
+    this.currentStudyPermissions = [];
   }
 
   /* Locators */
@@ -84,9 +86,41 @@ export default class UserPermissionPage {
   public async assertAllPossibleStudyPermissionsAreVisible(study: StudyEnum, email: string): Promise<void> {
     //Verify that all possible permissions for the study are available for the study admin to select
     const studyAdmin = this.getStudyAdmin(email);
-    const allPossiblePermissions = this.getPermissionsSection(studyAdmin);
+    const allPossiblePermissions = await this.getPermissionsSection(studyAdmin);
+    const amountOfPermissions = allPossiblePermissions.length;
+    console.log(`Amount of permissions: ${amountOfPermissions}`);
 
-    //WIP
+    for (let index = 0; index < amountOfPermissions; index++) {
+      const permissionCheckbox = allPossiblePermissions[index];
+      const permission = permissionCheckbox.locator(`//span[@class='ng-star-inserted']`);
+      const currentPermission = (await permission.innerText()).trim();
+      //console.log(`Current permission: ${currentPermission}`);
+      const currentPermissionCastedAsEnum = currentPermission as UserPermission;
+      const verifiedPermission = Object.values(this.currentStudyPermissions).indexOf(currentPermissionCastedAsEnum) >= 0;
+      if (!verifiedPermission) {
+        throw new Error(`The ${currentPermission} permission is not a valid permission for ${study}`);
+      }
+    }
+  }
+
+  public async assertSelectedPermissions(studyAdmin: Locator, permissions: UserPermission[]): Promise<void> {
+    const amountOfPermissionstoCheckFor = permissions.length;
+
+    for (let index = 0; index < amountOfPermissionstoCheckFor; index++) {
+      const checkbox = this.getPermissionCheckbox(studyAdmin, permissions[index]);
+      await expect(checkbox).toBeChecked();
+    }
+  }
+
+  private getPermissionCheckbox(studyAdmin: Locator, permission: UserPermission, forSelection?: boolean): Locator {
+    const permissionName = permission as string;
+    console.log(`Permission Name: ${permissionName}`);
+    if (forSelection) {
+      //below xpath works best for selection/clicking
+      return studyAdmin.locator(`//ancestor::mat-expansion-panel//app-permission-checkbox[contains(.,'${permissionName}')]//div`)
+    }
+    //below xpath works best for determining if the checkbox is currently selected
+    return studyAdmin.locator(`//ancestor::mat-expansion-panel//app-permission-checkbox[contains(.,'${permissionName}')]//input`);
   }
 
   /* Utility methods */
@@ -100,28 +134,46 @@ export default class UserPermissionPage {
     return studyAdminPhoneNumber.innerText();
   }
 
+  private isCMIStudy(study: StudyEnum): boolean {
+    return study === (
+      StudyEnum.ANGIO ||
+      StudyEnum.BRAIN ||
+      StudyEnum.ESC ||
+      StudyEnum.MBC ||
+      StudyEnum.OSTEO ||
+      StudyEnum.PANCAN ||
+      StudyEnum.PROSTATE)
+  }
+
+  private isPECGSStudy(study: StudyEnum): boolean {
+    return study === (
+      StudyEnum.OSTEO2 ||
+      StudyEnum.LMS
+    )
+  }
+
   private determineStudyGroup(study: StudyEnum): string {
     let studyGroup = '';
 
-    if (StudyEnum.ANGIO || StudyEnum.BRAIN || StudyEnum.ESC || StudyEnum.MBC || StudyEnum.OSTEO || StudyEnum.PANCAN || StudyEnum.PROSTATE) {
+    if (this.isCMIStudy(study)) {
       //Study is a CMI research study
       studyGroup = this.CMI_STUDY_GROUP;
-    } else if (StudyEnum.OSTEO2 || StudyEnum.LMS) {
+    } else if (this.isPECGSStudy(study)) {
       //Study is a CMI clinical study
       studyGroup = this.PECGS_STUDY_GROUP;
-    } else if (StudyEnum.RGP) {
+    } else if (study === StudyEnum.RGP) {
       //Study is the RGP study
       studyGroup = this.RGP_STUDY_GROUP;
-    } else if (StudyEnum.PRION) {
+    } else if (study === StudyEnum.PRION) {
       //Study is the Prion study
       studyGroup = this.PRION_STUDY_GROUP;
-    } else if (StudyEnum.AT) {
+    } else if (study === StudyEnum.AT) {
       //Study is the ATCP study
       studyGroup = this.ATCP_STUDY_GROUP;
-    } else if (StudyEnum.BRUGADA) {
+    } else if (study === StudyEnum.BRUGADA) {
       //Study is the Brugada study
       studyGroup = this.BRUGADA_STUDY_GROUP;
-    } else if (StudyEnum.DARWIN) {
+    } else if (study === StudyEnum.DARWIN) {
       //Study is the Darwin study
       studyGroup = this.DARWIN_ARK_STUDY_GROUP;
     }
@@ -129,7 +181,7 @@ export default class UserPermissionPage {
     return studyGroup;
   }
 
-  private setStudyPermissions(study: StudyEnum): UserPermission[] {
+  public setStudyPermissions(study: StudyEnum): void {
     const permissions: UserPermission[] = [];
     const studyGroup = this.determineStudyGroup(study);
 
@@ -142,7 +194,6 @@ export default class UserPermissionPage {
           UserPermission.KIT_VIEW_AND_DEACTIVATION_REACTIVATION,
           UserPermission.KIT_CREATE_OVERNIGHT_SHIPPING_LABELS,
           UserPermission.KIT_CLINICAL_ORDER,
-          UserPermission.KIT_SHIPPING,
           UserPermission.KIT_VIEW_KIT_PAGES,
           UserPermission.KIT_UPLOAD,
           UserPermission.KIT_UPLOAD_INVALID_ADDRESS,
@@ -171,7 +222,6 @@ export default class UserPermissionPage {
           UserPermission.KIT_VIEW_AND_DEACTIVATION_REACTIVATION,
           UserPermission.KIT_CREATE_OVERNIGHT_SHIPPING_LABELS,
           UserPermission.KIT_CLINICAL_ORDER,
-          UserPermission.KIT_SHIPPING,
           UserPermission.KIT_VIEW_KIT_PAGES,
           UserPermission.KIT_UPLOAD,
           UserPermission.KIT_UPLOAD_INVALID_ADDRESS,
@@ -201,7 +251,6 @@ export default class UserPermissionPage {
           UserPermission.KIT_DISCARD_SAMPLES,
           UserPermission.KIT_VIEW_AND_DEACTIVATION_REACTIVATION,
           UserPermission.KIT_CREATE_OVERNIGHT_SHIPPING_LABELS,
-          UserPermission.KIT_SHIPPING,
           UserPermission.KIT_VIEW_KIT_PAGES,
           UserPermission.KIT_UPLOAD,
           UserPermission.KIT_UPLOAD_INVALID_ADDRESS,
@@ -223,7 +272,6 @@ export default class UserPermissionPage {
         break;
       case this.ATCP_STUDY_GROUP:
         permissions.push(
-          UserPermission.KIT_SHIPPING,
           UserPermission.KIT_VIEW_KIT_PAGES,
           UserPermission.MAILING_LIST_VIEW_AND_DOWNLOAD,
           UserPermission.PARTICIPANT_EDIT,
@@ -233,7 +281,6 @@ export default class UserPermissionPage {
       case this.BRUGADA_STUDY_GROUP:
         permissions.push(
           UserPermission.KIT_VIEW_AND_DEACTIVATION_REACTIVATION,
-          UserPermission.KIT_SHIPPING,
           UserPermission.KIT_VIEW_KIT_PAGES,
           UserPermission.KIT_UPLOAD,
           UserPermission.KIT_UPLOAD_INVALID_ADDRESS,
@@ -248,16 +295,13 @@ export default class UserPermissionPage {
         permissions.push(
           UserPermission.KIT_VIEW_AND_DEACTIVATION_REACTIVATION,
           UserPermission.KIT_CREATE_OVERNIGHT_SHIPPING_LABELS,
-          UserPermission.KIT_SHIPPING,
           UserPermission.KIT_VIEW_KIT_PAGES,
           UserPermission.KIT_UPLOAD
         );
         break;
       default:
         throw new Error(`setStudyPermissions() does not have the logic to handle ${study}'s permissions`);
-        break;
     }
-
-    return permissions;
+    this.currentStudyPermissions = permissions;
   }
 }
