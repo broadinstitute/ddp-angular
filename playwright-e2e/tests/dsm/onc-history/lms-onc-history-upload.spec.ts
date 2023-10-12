@@ -86,11 +86,12 @@ test.describe('Upload Onc History', () => {
     });
 
     await test.step('Upload text file', async () => {
+      // From the 'Miscellaneous' menu, choose 'Onc History Upload'.
       await navigation.selectMiscellaneous(MiscellaneousEnum.ONC_HISTORY_UPLOAD);
       const oncHistoryPage = new OncHistoryUploadPage(page);
       await oncHistoryPage.waitForReady();
 
-      // The upload files must be tab separated. Other formats are invalid
+      // The upload files must be tab separated. Other formats are invalid.
       const keys = Object.keys(mockOncHistory).join('\t');
       const values = Object.values(mockOncHistory).join('\t');
       const data = [keys, values].join('\n');
@@ -100,6 +101,7 @@ test.describe('Upload Onc History', () => {
     });
 
     await test.step('Verify new Onc History', async () => {
+      // Confirm Onc history. Duplicate records are valid.
       participantListPage = await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
       await participantListPage.waitForReady();
 

@@ -90,6 +90,7 @@ test.describe('Upload Onc History', () => {
     });
 
     await test.step('Upload text file', async () => {
+      // From the 'Miscellaneous' menu, choose 'Onc History Upload'.
       await navigation.selectMiscellaneous(MiscellaneousEnum.ONC_HISTORY_UPLOAD);
       const oncHistoryPage = new OncHistoryUploadPage(page);
       await oncHistoryPage.waitForReady();
@@ -104,6 +105,7 @@ test.describe('Upload Onc History', () => {
     });
 
     await test.step('Verify new Onc History', async () => {
+      // Confirm Onc history. Duplicate records are valid.
       participantListPage = await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
       await participantListPage.waitForReady();
 
