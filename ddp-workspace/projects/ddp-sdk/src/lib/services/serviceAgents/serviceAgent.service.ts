@@ -69,7 +69,8 @@ export class ServiceAgent<TEntity> {
         path: string,
         body: any,
         options: any = {},
-        throwErrorObject: boolean = false): Observable<any> {
+        throwErrorObject: boolean = false,
+        logErrorToCloud: boolean = true): Observable<any> {
         const url = this.getBackendUrl() + path;
         return this.getHeaders(options).pipe(
           mergeMap(x => {
@@ -87,7 +88,9 @@ export class ServiceAgent<TEntity> {
                         withCredentials: x.withCredentials
                     }).pipe(
                         catchError((error: any) => {
-                            this.logger.logError(this.LOG_SOURCE, `HTTP POST: ${url}`, error);
+                            if (logErrorToCloud) {
+                                this.logger.logError(this.LOG_SOURCE, `HTTP POST: ${url}`, error);
+                            }
                             if (throwErrorObject) {
                                 return throwError(() => error);
                             } else {
