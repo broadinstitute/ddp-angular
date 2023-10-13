@@ -45,7 +45,7 @@ export class ServiceAgent<TEntity> {
                                     return throwError(() => error);
                                 }
                             }
-                            this.logger.logError(this.LOG_SOURCE, `HTTP GET: ${url}`, error);
+                            this.logger.logError(this.LOG_SOURCE, `HTTP GET: ${url}. ERROR:`, error);
                             return of(null);
                         }),
                         map(data => data && data['body']),
@@ -89,7 +89,7 @@ export class ServiceAgent<TEntity> {
                     }).pipe(
                         catchError((error: any) => {
                             if (logErrorToCloud) {
-                                this.logger.logError(this.LOG_SOURCE, `HTTP POST: ${url}`, error);
+                                this.logger.logError(this.LOG_SOURCE, `HTTP POST: ${url}. ERROR:`, error);
                             }
                             if (throwErrorObject) {
                                 return throwError(() => error);
@@ -129,7 +129,7 @@ export class ServiceAgent<TEntity> {
                         withCredentials: x.withCredentials
                     }).pipe(
                         catchError((error: any) => {
-                            this.logger.logError(this.LOG_SOURCE, `HTTP PATCH: ${url}`, error);
+                            this.logger.logError(this.LOG_SOURCE, `HTTP PATCH: ${url}. ERROR:`, error);
                             if (throwErrorObject) {
                                 return throwError(() => error);
                             } else {
@@ -164,7 +164,7 @@ export class ServiceAgent<TEntity> {
                         withCredentials: x.withCredentials
                     }).pipe(
                         catchError((error: any) => {
-                            this.logger.logError(this.LOG_SOURCE, `HTTP PUT: ${url}`,  error);
+                            this.logger.logError(this.LOG_SOURCE, `HTTP PUT: ${url}. ERROR:`,  error);
                             if (throwErrorObject) {
                                 return throwError(() => error);
                             } else {
@@ -198,7 +198,7 @@ export class ServiceAgent<TEntity> {
                         withCredentials: x.withCredentials
                     }).pipe(
                         catchError((error: any) => {
-                            this.logger.logError(this.LOG_SOURCE, `HTTP DELETE: ${url}`, error);
+                            this.logger.logError(this.LOG_SOURCE, `HTTP DELETE: ${url}. ERROR:`, error);
                             if (throwErrorObject) {
                                 return throwError(() => error);
                             } else {
