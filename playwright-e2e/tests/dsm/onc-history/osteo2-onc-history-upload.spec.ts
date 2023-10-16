@@ -70,7 +70,6 @@ test.describe('Upload Onc History', () => {
       await searchPanel.checkboxes('Status', { checkboxValues: ['Enrolled'] });
       await searchPanel.dates(oncHistoryCreatedColumn, { additionalFilters: [AdditionalFilter.EMPTY] });
       await searchPanel.dates(oncHistoryReviewedColumn, { additionalFilters: [AdditionalFilter.EMPTY] });
-
       await searchPanel.search();
     });
 
@@ -81,9 +80,9 @@ test.describe('Upload Onc History', () => {
       const newArray = shuffle([...Array(rows).keys()]);
       const rowIndex = newArray[0];
       // RECORD_ID corresponds to Short ID in upload .txt file
-      // shortId = await participantListTable.getParticipantDataAt(rowIndex, 'Short ID');
+      shortId = await participantListTable.getParticipantDataAt(rowIndex, 'Short ID');
       // TODO Remove hardcode ID
-      shortId = 'PY7QFA';
+      //shortId = 'PY7QFA';
       mockOncHistory.RECORD_ID = shortId;
 
       logInfo(`Participant Short ID: ${shortId}`);

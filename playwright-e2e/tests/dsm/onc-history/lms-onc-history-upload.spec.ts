@@ -66,7 +66,6 @@ test.describe('Upload Onc History', () => {
       await searchPanel.checkboxes('Status', { checkboxValues: ['Enrolled'] });
       await searchPanel.dates(oncHistoryCreatedColumn, { additionalFilters: [AdditionalFilter.EMPTY] });
       await searchPanel.dates(oncHistoryReviewedColumn, { additionalFilters: [AdditionalFilter.EMPTY] });
-
       await searchPanel.search();
     });
 
