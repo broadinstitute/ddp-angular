@@ -31,7 +31,7 @@ export class AddressService extends UserServiceAgent<Address> {
     }
 
     public verifyAddress(address: Address): Observable<AddressVerificationResponse> {
-        return this.postObservable(`${this.BASE_URL}/verify`, {...address, studyGuid: this.configuration.studyGuid}, null, true).pipe(
+        return this.postObservable(`${this.BASE_URL}/verify`, {...address, studyGuid: this.configuration.studyGuid}, null, false, false).pipe(
             map((data: any) => new AddressVerificationResponse(data.body)),
             catchError((error) => {
                 const verificationStatus = error.error as AddressVerificationStatus;
