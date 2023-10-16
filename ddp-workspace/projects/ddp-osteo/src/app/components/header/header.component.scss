@@ -10,6 +10,12 @@
     z-index: 1;
     height: 6.25rem;
     transition: all 200ms linear;
+
+    .languageSelection {
+        display: flex;
+        justify-content: flex-end;
+        padding-right: 1em;
+    }
 }
 
 .header_shadow {
@@ -41,6 +47,10 @@
         .nav,
         .auth {
             display: flex;
+        }
+
+        .languageSelection {
+            display: none;
         }
 
         .navigation {
@@ -76,12 +86,21 @@
 
 .header-content {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     align-items: center;
     height: 6.25rem;
-    max-width: 1200px;
+    max-width: 60%;
     margin: auto;
     padding: 0 1.5625rem;
+}
+
+.wider-header {
+    max-width: 80%!important;
+    justify-content: center;
+
+    .languageSelection {
+        margin-left: 3em;
+    }
 }
 
 .panel-controls {
@@ -137,7 +156,6 @@
 }
 
 .activity-heading {
-    width: 700px;
     margin: 0 1.5rem;
 }
 
@@ -259,9 +277,14 @@
     text-decoration: underline;
 }
 
-@media screen and (max-width: 945px) {
+@media screen and (max-width: 1410px) {
     .hamburger {
         display: flex;
+    }
+
+    .languageSelection {
+        width: 100%;
+        padding: 0!important;
     }
 
     .header-button {
@@ -271,6 +294,11 @@
     .nav,
     .auth {
         display: none;
+    }
+
+    .header-content {
+        justify-content: space-between;
+        max-width: 100%;
     }
 }
 
@@ -284,6 +312,12 @@
     }
 }
 
+@media only screen and (max-width: 1669px) {
+    .wider-header {
+        max-width: 90%!important;
+    }
+}
+
 @media only screen and (max-width: 650px) {
     .activity-heading {
         margin: 0 1rem;
@@ -291,8 +325,16 @@
 }
 
 @media only screen and (max-width: 480px) {
+    .header {
+        padding: .5em 0;
+    }
     .header-content {
         padding: 0 5px;
+        justify-content: space-around;
+        max-width: 100% !important;
+        .languageSelection {
+            margin-left: 0;
+        }
     }
 }
 

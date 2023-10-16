@@ -61,7 +61,7 @@ executors:
     resource_class: medium+
     docker:
       # Playwright docker image version MUST match Playwright version in project
-      - image: mcr.microsoft.com/playwright:v1.31.0-focal
+      - image: mcr.microsoft.com/playwright:v1.38.0-jammy
     working_directory: *playwright_path
     environment:
       TZ: "America/New_York"
@@ -643,15 +643,15 @@ jobs:
             echo "export ENV=<< parameters.env >>" >> $BASH_ENV
             source $BASH_ENV
             .circleci/export-playwright-env.sh
-      - node/install-packages:
-          app-dir: *playwright_path
-          override-ci-command: npm install
+      - run:
+          working_directory: *playwright_path
+          command: npm install
       - run:
           working_directory: *playwright_path
           command: npm run lint -- --max-warnings 0
       - run:
           working_directory: *playwright_path
-          name: Compile project
+          name: Build project
           command: npm run build
       - persist_to_workspace:
           root: .
@@ -670,12 +670,12 @@ jobs:
         enum: [ dev, test, staging, prod, UNKNOWN ]
       parallelism_num:
         type: integer
-        default: 1
+        default: 2
       test_suite:
-        # to trigger E2E tests with labels matching study key:
-        # [basil, osteo, angio, brain, mbc, testboston, mpc, atcp, rarex, rgp, esc, prion, cgc, circadia, pancan, singular, brugada, lms, fon]
-        type: string
-        default: << pipeline.parameters.study_key >>
+        # Trigger DSS, DSM or all tests
+        type: enum
+        enum: [ dss, dsm, UNKNOWN ]
+        default: UNKNOWN
     parallelism: << parameters.parallelism_num >>
     steps:
       - halt-playwright-check:
@@ -690,25 +690,35 @@ jobs:
             # export env from file (created in build-playwright-job)
             cat playwright-env/envvars | awk '{print "export " $0}' >> "$BASH_ENV"
             source $BASH_ENV
-      - node/install:
-          install-yarn: false
-          node-version: '18.13.0' # LTS version
+      - run:
+          name: Check current version of node
+          command: node -v
       - run:
           working_directory: *playwright_path
-          command: npm install --quiet
+          command: npm ci
       - run:
           working_directory: *playwright_path
           command: npx playwright install --with-deps chromium # Only need Chrome browser
-
       - run:
           name: Running Playwright tests on << parameters.env >>
           working_directory: *playwright_path
-          command: |            
-            npx playwright test --list | grep -o 'tests/.*.spec.ts' | sort | uniq > e2e_tests.txt
+          command: |
+            if [ "<< parameters.test_suite >>" == "dss" ]
+            then
+              npx playwright test --list --project="dss" | grep -o 'tests/.*.spec.ts' | sort | uniq > e2e_tests.txt
+            elif [ "<< parameters.test_suite >>" == "dsm" ]
+            then
+              npx playwright test --list --project="dsm" | grep -o 'tests/.*.spec.ts' | sort | uniq > e2e_tests.txt
+            else
+              npx playwright test --list | grep -o 'tests/.*.spec.ts' | sort | uniq > e2e_tests.txt
+            fi
+
+            echo ""
             TESTS_FILE=$(circleci tests split --split-by=timings --timings-type=classname e2e_tests.txt)
-            echo $TESTS_FILE
-            npm run test:ci $TESTS_FILE
-          no_output_timeout: 5m # Default is 10m. Set shorter time to ensure CI fails faster if test hangs
+            echo ${TESTS_FILE}
+            
+            npm run test:ci ${TESTS_FILE}
+          no_output_timeout: 5m
       - store_test_results:
           path: playwright-e2e/junit
       - store_artifacts:
@@ -760,7 +770,7 @@ parameters:
     default: "UNKNOWN"
   api_call:
     type: enum
-    enum: ["build-and-store","deploy", "run-tests", "run-e2e-tests", "UNKNOWN"]
+    enum: ["build-and-store", "deploy", "run-tests", "run-e2e-tests", "UNKNOWN"]
     default: "UNKNOWN"
   deploy_env:
     type: enum
@@ -769,12 +779,12 @@ parameters:
   do-builds:
     type: boolean
     default: false
-  e2e-test-parallelism:
-    type: integer
-    default: 2
   scheduled-playwright:
     type: boolean
     default: false
+  playwright_parallelism:
+    type: integer
+    default: 1
 
 workflows:
   version: 2
@@ -861,17 +871,20 @@ workflows:
 
   playwright-test-workflow:
     # Triggered by CI API (for example, run_ci.sh)
-    # Run Playwright tests against Dev and Test but not for Staging and Production
+    # Run tests supported on Dev or Test, but not for Staging and Production.
     when:
       and:
         - equal: [ "run-e2e-tests", << pipeline.parameters.api_call >> ]
+        - or:
+            - equal: [ "dev", << pipeline.parameters.deploy_env >> ]
+            - equal: [ "test", << pipeline.parameters.deploy_env >> ]
     jobs:
       - playwright-build:
           env: << pipeline.parameters.deploy_env >>
       - playwright-test:
           env: << pipeline.parameters.deploy_env >>
           test_suite: << pipeline.parameters.study_key >>
-          parallelism_num: << pipeline.parameters.e2e-test-parallelism >>
+          parallelism_num: << pipeline.parameters.playwright_parallelism >>
           requires:
             - playwright-build
 
@@ -1027,7 +1040,7 @@ workflows:
           study_key: fon
 
   scheduled-playwright-test:
-    # Triggered every 4 hours on Monday through Friday
+    # Triggered on Monday through Friday
     when:
       and:
         - equal: [ scheduled_pipeline, << pipeline.trigger_source >> ]
@@ -1040,7 +1053,7 @@ workflows:
       - playwright-test:
           <<: *filter-develop-branch
           env: << pipeline.parameters.deploy_env >>
-          parallelism_num: 2
+          parallelism_num: << pipeline.parameters.playwright_parallelism >>
           test_suite: UNKNOWN
           requires:
             - playwright-build

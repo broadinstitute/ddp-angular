@@ -24,8 +24,8 @@ test.describe('Participants Search', () => {
 
       expect(await participantsTable.rowLocator().count(),
         `Participant List page - Displayed participants count is not 1`)
-        .toEqual(1);
-      expect(guid).toEqual(studyShortName(study).shortName);
+        .toBe(1);
+      expect(guid).toBe(studyShortName(study).shortName);
     });
   }
 });

@@ -18,9 +18,10 @@ export class Search {
     await expect(async () => expect(await this.isOpen()).toBe(true)).toPass({ timeout: 5000 });
   }
 
-  public async search(): Promise<void> {
+  public async search(opts: { uri?: string } = {}): Promise<void> {
+    const { uri = 'ui/filterList?' } = opts;
     await Promise.all([
-      waitForResponse(this.page, {uri: 'ui/filterList?'}),
+      waitForResponse(this.page, { uri }),
       this.page.locator("//div[@id='searchTable']/button[1][span[text()='Search']]").click()
     ]);
     await waitForNoSpinner(this.page);
@@ -32,6 +33,10 @@ export class Search {
 
   public async dates(columnName: string, { from: fromValue, to: toValue, additionalFilters }: Partial<DateConfig>): Promise<void> {
     await this.setAdditionalFilters(columnName, additionalFilters);
+
+    if (!fromValue && !toValue) {
+      return;
+    }
 
     let fromDate!: string;
     let toDate!: string;
@@ -168,6 +173,18 @@ export class Search {
 
   public textInputLocator(columnName: string): Locator {
     return this.page.locator(`${this.baseTextColumnXPath(columnName)}//mat-form-field//input`);
+  }
+
+  public async textInputExists(columnName: string): Promise<boolean> {
+    return this.textInputLocator(columnName).isVisible();
+  }
+
+  public async checkboxExists(columnName: string, checkboxName: string): Promise<boolean> {
+    return this.checkboxLocator(columnName, checkboxName).isVisible();
+  }
+
+  public async dateInputExists(columnName: string): Promise<boolean> {
+    return this.page.locator(this.dateInputFieldXPath(columnName)).isVisible();
   }
 
   private async isOpen(): Promise<boolean> {

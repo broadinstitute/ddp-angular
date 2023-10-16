@@ -2,7 +2,6 @@ import { expect } from '@playwright/test';
 import { StudyNavEnum } from 'dsm/component/navigation/enums/studyNav-enum';
 import { Navigation } from 'dsm/component/navigation/navigation';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
-import Select from 'dss/component/select';
 import * as user from 'data/fake-user.json';
 import { test } from 'fixtures/dsm-fixture';
 import FamilyMemberTab from 'dsm/pages/participant-page/rgp/family-member-tab';
@@ -12,85 +11,89 @@ import { saveParticipantGuid } from 'utils/faker-utils';
 import { ParticipantListTable } from 'dsm/component/tables/participant-list-table';
 import { calculateAge } from 'utils/date-utils';
 import { logInfo } from 'utils/log-utils';
+import { v4 as uuid } from 'uuid';
+import ParticipantPage from 'dsm/pages/participant-page/participant-page';
+import { WelcomePage } from 'dsm/pages/welcome-page';
+import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
 
 
 test.describe.serial('DSM Family Enrollment Handling', () => {
-    let rgpEmail: string;
+  let rgpEmail: string;
 
-    test.skip('Verify the display and functionality of family account dynamic fields @dss @functional @rgp', async ({ page, request}) => {
-        const navigation = new Navigation(page, request);
+  test('Verify the display and functionality of family account dynamic fields @dsm @functional @rgp', async ({ page, request}) => {
+    const welcomePage = new WelcomePage(page);
+    await welcomePage.selectStudy(StudyEnum.RGP);
 
-        //select RGP study
-        await new Select(page, { label: 'Select study' }).selectOption('RGP');
-
-        //Verify the Participant List is displayed
-        const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
-        await participantListPage.assertPageTitle();
-        await participantListPage.waitForReady();
-
-        //Get the most recent automated test participant (searches for up to a week ago)
-        const participantListTable = new ParticipantListTable(page);
-        const participantGuid = await participantListTable.getGuidOfMostRecentAutomatedParticipant(user.patient.firstName, true);
-        saveParticipantGuid(participantGuid);
-
-        //Filter the Participant List by the given guid
-        await participantListPage.filterListByParticipantGUID(participantGuid);
-        await participantListTable.openParticipantPageAt(0);
-        await expect(page.getByRole('heading', { name: 'Participant Page' })).toBeVisible();
-        await expect(page.getByRole('cell', { name: user.patient.participantGuid })).toBeVisible();
-
-        //Confirm the 'Add Family Member' button is visible
-        const rgpParticipantPage = new RgpParticipantPage(page);
-        rgpEmail = await rgpParticipantPage.getEmail(); //Get the actual email used for the family account - to be used later
-        expect(rgpEmail).not.toBeNull();
-        const addFamilyMemberButton = rgpParticipantPage.addFamilyMemberDialog._addFamilyMemberButton;
-        await expect(addFamilyMemberButton).toBeVisible();
-
-        //Confirm 'Family Notes' is present and functional
-        const datetime = new Date();
-        await rgpParticipantPage.inputFamilyNotes(`Random text by playwright test on: '${datetime}'`);
-
-        //Confirm 'Seqr project' is present and functional
-        const seqrProject = rgpParticipantPage.getSeqrProject();
-        await expect(seqrProject).toBeVisible();
-        await seqrProject.click();
-        const dropdownOptions = rgpParticipantPage.getDropdownOptions();
-        await dropdownOptions.filter({ hasText: 'HMB Genome' }).click();
-
-        //Confirm 'Specialty Project: R21' is present and functional
-        const specialtyProjectR21 = rgpParticipantPage.getSpecialtyProjectR21();
-        await expect(specialtyProjectR21).toBeVisible();
-        await specialtyProjectR21.click();
-
-        //Confirm 'Specialty Project: CAGI 2022' is present and functional
-        const specialtyProjectCagi2022 = rgpParticipantPage.getSpecialtyProjectCagi2022();
-        await expect(specialtyProjectCagi2022).toBeVisible();
-        await specialtyProjectCagi2022.click();
-
-        //Confirm 'Specialty Project: CAGI 2023' is present and functional
-        const specialtyProjectCagi2023 = rgpParticipantPage.getSpecialtyProjectCagi2023();
-        await expect(specialtyProjectCagi2023).toBeVisible();
-        await specialtyProjectCagi2023.click();
-
-        //Confirm 'Specialty Project: CZI' is present and functional
-        const specialtyProjectCZI = rgpParticipantPage.getSpecialtyProjectCZI();
-        await expect(specialtyProjectCZI).toBeVisible();
-        await specialtyProjectCZI.click();
-
-        //Confirm 'Expected # to Sequence' is present and functional
-        const expectedNumberToSequence = rgpParticipantPage.getExpectedNumberToSequence();
-        await expect(expectedNumberToSequence).toBeVisible();
-        await expectedNumberToSequence.click();
-        await dropdownOptions.filter({ hasText: '5' }).click();
-    });
-
-    //Skipping until housekeeping stuff is fixed
-    test.skip('Verify that the proband family member tab can be filled out @dss @functional @rgp @proband', async ({ page, request }) => {
-    //Go into DSM
     const navigation = new Navigation(page, request);
 
-    //select RGP study
-    await new Select(page, { label: 'Select study' }).selectOption('RGP');
+    //Verify the Participant List is displayed
+    const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
+    await participantListPage.assertPageTitle();
+    await participantListPage.waitForReady();
+
+    //Get the most recent automated test participant (searches for up to a week ago)
+    const participantListTable = new ParticipantListTable(page);
+    const participantGuid = await participantListTable.getGuidOfMostRecentAutomatedParticipant(user.patient.firstName, true);
+    expect(participantGuid).toBeTruthy();
+    saveParticipantGuid(participantGuid);
+
+    //Filter the Participant List by the given guid
+    await participantListPage.filterListByParticipantGUID(participantGuid);
+    const participantPage: ParticipantPage = await participantListTable.openParticipantPageAt(0);
+
+    const guid = await participantPage.getGuid();
+    expect(guid).toBe(participantGuid);
+
+    //Confirm the 'Add Family Member' button is visible
+    const rgpParticipantPage = new RgpParticipantPage(page);
+    rgpEmail = await rgpParticipantPage.getEmail(); //Get the actual email used for the family account - to be used later
+    expect(rgpEmail).not.toBeNull();
+    const addFamilyMemberButton = rgpParticipantPage.addFamilyMemberDialog._addFamilyMemberButton;
+    await expect(addFamilyMemberButton).toBeVisible();
+
+    //Confirm 'Family Notes' is present and functional
+    const datetime = new Date();
+    await rgpParticipantPage.inputFamilyNotes(`Random text by playwright test on: '${datetime}'`);
+
+    //Confirm 'Seqr project' is present and functional
+    const seqrProject = rgpParticipantPage.getSeqrProject();
+    await expect(seqrProject).toBeVisible();
+    await seqrProject.click();
+    const dropdownOptions = rgpParticipantPage.getDropdownOptions();
+    await dropdownOptions.filter({ hasText: 'HMB Genome' }).click();
+
+    //Confirm 'Specialty Project: R21' is present and functional
+    const specialtyProjectR21 = rgpParticipantPage.getSpecialtyProjectR21();
+    await expect(specialtyProjectR21).toBeVisible();
+    await specialtyProjectR21.click();
+
+    //Confirm 'Specialty Project: CAGI 2022' is present and functional
+    const specialtyProjectCagi2022 = rgpParticipantPage.getSpecialtyProjectCagi2022();
+    await expect(specialtyProjectCagi2022).toBeVisible();
+    await specialtyProjectCagi2022.click();
+
+    //Confirm 'Specialty Project: CAGI 2023' is present and functional
+    const specialtyProjectCagi2023 = rgpParticipantPage.getSpecialtyProjectCagi2023();
+    await expect(specialtyProjectCagi2023).toBeVisible();
+    await specialtyProjectCagi2023.click();
+
+    //Confirm 'Specialty Project: CZI' is present and functional
+    const specialtyProjectCZI = rgpParticipantPage.getSpecialtyProjectCZI();
+    await expect(specialtyProjectCZI).toBeVisible();
+    await specialtyProjectCZI.click();
+
+    //Confirm 'Expected # to Sequence' is present and functional
+    const expectedNumberToSequence = rgpParticipantPage.getExpectedNumberToSequence();
+    await expect(expectedNumberToSequence).toBeVisible();
+    await expectedNumberToSequence.click();
+    await dropdownOptions.filter({ hasText: '5' }).click();
+  });
+
+  test.skip('Verify that the proband family member tab can be filled out @dsm @functional @rgp @proband', async ({ page, request }) => {
+    const navigation = new Navigation(page, request);
+
+    const welcomePage = new WelcomePage(page);
+    await welcomePage.selectStudy(StudyEnum.RGP);
 
     //Verify the Participant List is displayed
     const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
@@ -111,8 +114,8 @@ test.describe.serial('DSM Family Enrollment Handling', () => {
     //Initial setup
     proband.relationshipID = user.patient.relationshipID;
 
-    const probandTab = proband.getFamilyMemberTab();
-    await expect(probandTab).toBeVisible();
+    const probandTab = await proband.getFamilyMemberTab();
+    await expect(probandTab, 'RGP Proband tab is not visible').toBeVisible();
 
     //Verify that the dynamic form menu is present
     const jumpToMenuText = proband.getJumpToMenuText();
@@ -158,13 +161,8 @@ test.describe.serial('DSM Family Enrollment Handling', () => {
     const familyIDFromSubjectID = await proband.getFamilyIDFromSubjectID();
     const familyIDFromFamilyMemberTab = await proband.getFamilyIDFromFamilyMemberTab();
 
-    expect(familyIDFromSubjectID).toEqual(proband.familyID);
-    expect(familyIDFromFamilyMemberTab).toEqual(proband.familyID);
-
-    //Prep for checking note content  in Participant Info later on
-    const importantNotesTextarea = proband.getImportantNotes();
-    const processNotesTextarea = proband.getProcessNotes();
-    const mixedRaceTextarea = proband.getMixedRaceNotes();
+    expect(familyIDFromSubjectID).toBe(proband.familyID);
+    expect(familyIDFromFamilyMemberTab).toBe(proband.familyID);
 
     //Confirm that input entered in Important Notes and Process Notes is saved
     await proband.inputImportantNotes('Testing notes here - Important Notes');
@@ -227,19 +225,20 @@ test.describe.serial('DSM Family Enrollment Handling', () => {
     await ethnicity.click();
     await dropdownOptions.filter({ hasText: 'Not Hispanic' }).click();
 
-    const mixedRaceTestingNotes = 'Testing';
+    const uniqueID = uuid();
+    const mixedRaceTestingNotes = `Testing using id ${uniqueID}`;
     await proband.inputMixedRaceNotes(mixedRaceTestingNotes);
 
     //Verify that the input to Important Notes, Process Notes, Mixed Race Notes has been saved even when page is re-visited
     const importantNotes = await proband.getImportantNotesContent();
     const processNotes = await proband.getProcessNotesContent();
     const mixedRaceNotes = await proband.getMixedRaceNotesContent();
-    expect(mixedRaceNotes).toEqual(mixedRaceTestingNotes);
+    expect(mixedRaceNotes).toBe(mixedRaceTestingNotes);
 
     //Go back to Participant List and refresh using Reload with Default Filters
     const familyAccount = new RgpParticipantPage(page);
     await familyAccount.backToList();
-    await participantListPage.filters.reloadWithDefaultFilters();
+    await participantListPage.filters.searchPanel.search();
     await expect(filteredList).toHaveCount(1);
     await participantListTable.openParticipantPageAt(0);
 
@@ -249,9 +248,13 @@ test.describe.serial('DSM Family Enrollment Handling', () => {
     await expect(probandTab).toHaveClass('nav-link active'); //Make sure proband tab is opened
 
     await participantInfoSection.click();
-    expect(await importantNotesTextarea.inputValue()).toEqual(importantNotes);
-    expect(await processNotesTextarea.inputValue()).toEqual(processNotes);
-    expect(await mixedRaceTextarea.inputValue()).toEqual(mixedRaceNotes);
+    //Checking textarea content
+    const importantNotesTextarea = proband.getImportantNotes();
+    const processNotesTextarea = proband.getProcessNotes();
+    const mixedRaceTextarea = proband.getMixedRaceNotes();
+    expect(await importantNotesTextarea.inputValue()).toBe(importantNotes);
+    expect(await processNotesTextarea.inputValue()).toBe(processNotes);
+    expect(await mixedRaceTextarea.inputValue()).toBe(mixedRaceNotes);
 
     //Fill out Contact Info section
     const contactInfoSection = proband.getContactInfoSection();
@@ -266,7 +269,7 @@ test.describe.serial('DSM Family Enrollment Handling', () => {
     //Verify that the proband's preferred email matches the email of the family account
     const email = proband.getPreferredEmail();
     const familyAccountEmail = await familyAccount.getEmail();
-    expect(await email.inputValue()).toEqual(familyAccountEmail);
+    expect(await email.inputValue()).toBe(familyAccountEmail);
 
     //Verify that Send Secure has a default value of 'Unknown'
     const sendSecure = proband.getSendSecure();
@@ -517,15 +520,15 @@ test.describe.serial('DSM Family Enrollment Handling', () => {
 
     const redCapSurveyCompletedDate = proband.getRedCapSurveyCompletedDate();
     await redCapSurveyCompletedDate.fill(`${currentDate[0]}/${currentDate[1]}/${currentDate[2]}`);//[0] is MM, [1] is DD, [2] is YYYY
-    });
+  });
 
-    test.skip('Verify that a family member can be added without copying proband info @dss @rgp @functional', async ({ page, request }) => {
+  test.skip('Verify that a family member can be added without copying proband info @dsm @rgp @functional', async ({ page, request }) => {
     //Add a new family member
     //Go into DSM
     const navigation = new Navigation(page, request);
 
-    //select RGP study
-    await new Select(page, { label: 'Select study' }).selectOption('RGP');
+    const welcomePage = new WelcomePage(page);
+    await welcomePage.selectStudy(StudyEnum.RGP);
 
     //Verify the Participant List is displayed
     const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
@@ -545,7 +548,7 @@ test.describe.serial('DSM Family Enrollment Handling', () => {
 
     //Setup new family member
     const grandfather = new FamilyMemberTab(page, FamilyMember.MATERNAL_GRANDFATHER);
-    grandfather.relationshipID = user.maternalGrandFather.relationshipID;
+    await grandfather.setRandomRelationshipID();
     grandfather.firstName = user.maternalGrandFather.firstName;
     grandfather.lastName = user.maternalGrandFather.lastName;
 
@@ -559,7 +562,7 @@ test.describe.serial('DSM Family Enrollment Handling', () => {
     });
 
     //Check that the expected Participant Info fields have been filled after non-copied family member creation
-    const maternalGrandFatherFamilyMemberTab = grandfather.getFamilyMemberTab();
+    const maternalGrandFatherFamilyMemberTab = await grandfather.getFamilyMemberTab();
     await maternalGrandFatherFamilyMemberTab.scrollIntoViewIfNeeded();
     await expect(maternalGrandFatherFamilyMemberTab).toBeVisible();
 
@@ -598,20 +601,19 @@ test.describe.serial('DSM Family Enrollment Handling', () => {
     const proband = new FamilyMemberTab(page, FamilyMember.PROBAND);
     proband.relationshipID = user.patient.relationshipID;
 
-    const probandFamilyMemberTab = proband.getFamilyMemberTab();
+    const probandFamilyMemberTab = await proband.getFamilyMemberTab();
     await expect(probandFamilyMemberTab).toBeVisible();
     const probandFamilyID = await proband.getFamilyIDFromFamilyMemberTab();
 
     logInfo(`grandfather family id ${maternalGrandfatherFamilyID} vs proband family id: ${probandFamilyID}`);
-    expect(maternalGrandfatherFamilyID).toEqual(probandFamilyID);
-    });
+    expect(maternalGrandfatherFamilyID).toBe(probandFamilyID);
+  });
 
-    test.skip('Verify that a family member can be added using copied proband info @dss @rgp @functional', async ({ page, request }) => {
-    //Go into DSM
+  test.skip('Verify that a family member can be added using copied proband info @dsm @rgp @functional', async ({ page, request }) => {
     const navigation = new Navigation(page, request);
 
-    //select RGP study
-    await new Select(page, { label: 'Select study' }).selectOption('RGP');
+    const welcomePage = new WelcomePage(page);
+    await welcomePage.selectStudy(StudyEnum.RGP);
 
     //Verify the Participant List is displayed
     const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
@@ -628,7 +630,7 @@ test.describe.serial('DSM Family Enrollment Handling', () => {
 
     //Setup family members - for creation and comparison
     const brother = new FamilyMemberTab(page, FamilyMember.BROTHER);
-    brother.relationshipID = user.brother.relationshipID;
+    await brother.setRandomRelationshipID();
     brother.firstName = user.brother.firstName;
     brother.lastName = user.brother.lastName;
 
@@ -638,133 +640,133 @@ test.describe.serial('DSM Family Enrollment Handling', () => {
     proband.relationshipID = user.patient.relationshipID;
 
     await test.step('Create a copied family member a.k.a the brother', async () => {
-        //Add a new family member
-        const rgpParticipantPage = new RgpParticipantPage(page);
-        const familyMemberForm = rgpParticipantPage.addFamilyMemberDialog;
+      //Add a new family member
+      const rgpParticipantPage = new RgpParticipantPage(page);
+      const familyMemberForm = rgpParticipantPage.addFamilyMemberDialog;
 
-        //Fill family member form
-        await familyMemberForm.fillInfo({
-            firstName: brother.firstName,
-            lastName: brother.lastName,
-            relationshipId: parseInt(brother.relationshipID),
-            relation: brother.relationToProband as string,
-            copyProbandInfo: true
-        });
+      //Fill family member form
+      await familyMemberForm.fillInfo({
+        firstName: brother.firstName,
+        lastName: brother.lastName,
+        relationshipId: parseInt(brother.relationshipID),
+        relation: brother.relationToProband as string,
+        copyProbandInfo: true
+      });
     });
 
     await test.step(`Check that brother's info matches proband info`, async () => {
-        const brotherFamilyMemberTab = brother.getFamilyMemberTab();
-        await brotherFamilyMemberTab.scrollIntoViewIfNeeded();
-        await expect(brotherFamilyMemberTab).toBeVisible();
-        await brotherFamilyMemberTab.click();
-        await expect(brotherFamilyMemberTab).toHaveClass('nav-link active'); //Make sure the tab is in view and selected
+      const brotherFamilyMemberTab = await brother.getFamilyMemberTab();
+      await brotherFamilyMemberTab.scrollIntoViewIfNeeded();
+      await expect(brotherFamilyMemberTab).toBeVisible();
+      await brotherFamilyMemberTab.click();
+      await expect(brotherFamilyMemberTab).toHaveClass('nav-link active'); //Make sure the tab is in view and selected
 
-        //Verify Participant Info data is as expected - first gather brother's info
-        const brotherParticipantInfoSection = brother.getParticipantInfoSection();
-        await brotherParticipantInfoSection.click();
+      //Verify Participant Info data is as expected - first gather brother's info
+      const brotherParticipantInfoSection = brother.getParticipantInfoSection();
+      await brotherParticipantInfoSection.click();
 
-        const brotherSubjectID = brother.getSubjectID();
-        await expect(brotherSubjectID).not.toBeEmpty();
+      const brotherSubjectID = brother.getSubjectID();
+      await expect(brotherSubjectID).not.toBeEmpty();
 
-        const brotherFamilyID = await brother.getFamilyIDFromSubjectID(); //Compare this with proband's to make sure family members get the same family id
-        const brotherFamilyIDField = brother.getFamilyID();
-        await expect(brotherFamilyIDField).not.toBeEditable();
+      const brotherFamilyID = await brother.getFamilyIDFromSubjectID(); //Compare this with proband's to make sure family members get the same family id
+      const brotherFamilyIDField = brother.getFamilyID();
+      await expect(brotherFamilyIDField).not.toBeEditable();
 
-        const brotherImportantNotes = brother.getImportantNotes();
-        const brotherImportantNotesContents = await brother.getImportantNotesContent();
-        await expect(brotherImportantNotes).not.toBeEmpty();
+      const brotherImportantNotes = brother.getImportantNotes();
+      const brotherImportantNotesContents = await brother.getImportantNotesContent();
+      await expect(brotherImportantNotes).not.toBeEmpty();
 
-        const brotherProcessNotes = brother.getProcessNotes();
-        const brotherProcessNotesContent = await brother.getProcessNotesContent();
-        await expect(brotherProcessNotes).not.toBeEmpty();
+      const brotherProcessNotes = brother.getProcessNotes();
+      const brotherProcessNotesContent = await brother.getProcessNotesContent();
+      await expect(brotherProcessNotes).not.toBeEmpty();
 
-        const brotherFirstNameField = brother.getFirstName();
-        await expect(brotherFirstNameField).toHaveValue(user.brother.firstName);
+      const brotherFirstNameField = brother.getFirstName();
+      await expect(brotherFirstNameField).toHaveValue(user.brother.firstName);
 
-        const brotherMiddleNameField = brother.getMiddleName(); //Should have the same as proband, used for comparison later
+      const brotherMiddleNameField = brother.getMiddleName(); //Should have the same as proband, used for comparison later
 
-        const brotherLastNameField = brother.getLastName();
-        await expect(brotherLastNameField).toHaveValue(user.brother.lastName);
+      const brotherLastNameField = brother.getLastName();
+      await expect(brotherLastNameField).toHaveValue(user.brother.lastName);
 
-        const brotherNameSuffix = brother.getNameSuffix();
-        const brotherPreferredLanguage = brother.getPreferredLanguage();
-        const brotherSex = brother.getSex();
-        const brotherPronouns = brother.getPronouns();
-        const brotherDateOfBirth = brother.getDateOfBirth();
-        const brotherAgeToday = brother.getAgeToday();
+      const brotherNameSuffix = brother.getNameSuffix();
+      const brotherPreferredLanguage = brother.getPreferredLanguage();
+      const brotherSex = brother.getSex();
+      const brotherPronouns = brother.getPronouns();
+      const brotherDateOfBirth = brother.getDateOfBirth();
+      const brotherAgeToday = brother.getAgeToday();
 
-        const brotherIsAliveRadioButton = brother.getLivingStatusOption('Alive');
-        await expect(brotherIsAliveRadioButton).toBeChecked();
+      const brotherIsAliveRadioButton = brother.getLivingStatusOption('Alive');
+      await expect(brotherIsAliveRadioButton).toBeChecked();
 
-        const brotherRelationshipToProband = brother.getRelationshipToProband();
-        await expect(brotherRelationshipToProband).toHaveText('Brother');
+      const brotherRelationshipToProband = brother.getRelationshipToProband();
+      await expect(brotherRelationshipToProband).toHaveText('Brother');
 
-        const brotherAffectedStatus = brother.getAffectedStatus();
-        const brotherRace = brother.getRace();
-        const brotherEthnicity = brother.getEthnicity();
-        const brotherMixedRaceNotes = await brother.getMixedRaceNotesContent();
+      const brotherAffectedStatus = brother.getAffectedStatus();
+      const brotherRace = brother.getRace();
+      const brotherEthnicity = brother.getEthnicity();
+      const brotherMixedRaceNotes = await brother.getMixedRaceNotesContent();
 
-        //Do Participant Info comparison of proband and brother
-        const probandTab = proband.getFamilyMemberTab();
-        await probandTab.click();
+      //Do Participant Info comparison of proband and brother
+      const probandTab = await proband.getFamilyMemberTab();
+      await probandTab.click();
 
-        const probandParticipantInfoSection = proband.getParticipantInfoSection();
-        await probandParticipantInfoSection.click();
+      const probandParticipantInfoSection = proband.getParticipantInfoSection();
+      await probandParticipantInfoSection.click();
 
-        const probandSubjectID = proband.getSubjectID();
-        await expect(probandSubjectID).not.toBeEmpty();
+      const probandSubjectID = proband.getSubjectID();
+      await expect(probandSubjectID).not.toBeEmpty();
 
-        const probandFamilyIDField = proband.getFamilyID();
-        await expect(probandFamilyIDField).not.toBeEmpty();
-        await expect(probandFamilyIDField).not.toBeEditable();
-        const probandFamilyID = await proband.getFamilyIDFromSubjectID();
+      const probandFamilyIDField = proband.getFamilyID();
+      await expect(probandFamilyIDField).not.toBeEmpty();
+      await expect(probandFamilyIDField).not.toBeEditable();
+      const probandFamilyID = await proband.getFamilyIDFromSubjectID();
 
-        //Compare family member family ids
-        expect(brotherFamilyID).toEqual(probandFamilyID);
+      //Compare family member family ids
+      expect(brotherFamilyID).toBe(probandFamilyID);
 
-        //Compare the rest of the expected copied Participant Info fields
-        const probandImportantNotesContent = await proband.getImportantNotesContent();
-        expect(brotherImportantNotesContents).toEqual(probandImportantNotesContent);
+      //Compare the rest of the expected copied Participant Info fields
+      const probandImportantNotesContent = await proband.getImportantNotesContent();
+      expect(brotherImportantNotesContents).toBe(probandImportantNotesContent);
 
-        const probandProcessNotesContent = await proband.getProcessNotesContent();
-        expect(brotherProcessNotesContent).toEqual(probandProcessNotesContent);
+      const probandProcessNotesContent = await proband.getProcessNotesContent();
+      expect(brotherProcessNotesContent).toBe(probandProcessNotesContent);
 
-        const probandMiddleNameField = proband.getMiddleName();
-        expect(brotherMiddleNameField).toEqual(probandMiddleNameField);
+      const probandMiddleNameField = proband.getMiddleName();
+      expect(await brotherMiddleNameField.innerText()).toBe(await probandMiddleNameField.innerText());
 
-        const probandNameSuffix = proband.getNameSuffix();
-        expect(brotherNameSuffix).toEqual(probandNameSuffix);
+      const probandNameSuffix = proband.getNameSuffix();
+      expect(await brotherNameSuffix.innerText()).toBe(await probandNameSuffix.innerText());
 
-        const probandPreferredLanguage = proband.getPreferredLanguage();
-        await expect(brotherPreferredLanguage).toHaveText(await probandPreferredLanguage.innerText());
+      const probandPreferredLanguage = proband.getPreferredLanguage();
+      await expect(brotherPreferredLanguage).toHaveText(await probandPreferredLanguage.innerText());
 
-        const probandSex = proband.getSex();
-        await expect(brotherSex).toHaveText(await probandSex.innerText());
+      const probandSex = proband.getSex();
+      await expect(brotherSex).toHaveText(await probandSex.innerText());
 
-        const probandPronouns = proband.getPronouns();
-        await expect(brotherPronouns).toHaveText(await probandPronouns.innerText());
+      const probandPronouns = proband.getPronouns();
+      await expect(brotherPronouns).toHaveText(await probandPronouns.innerText());
 
-        const probandDateOfBirth = proband.getDateOfBirth();
-        expect(brotherDateOfBirth).toEqual(probandDateOfBirth);
+      const probandDateOfBirth = proband.getDateOfBirth();
+      expect(await brotherDateOfBirth.innerText()).toBe(await probandDateOfBirth.innerText());
 
-        const probandAgeToday = proband.getAgeToday();
-        expect(brotherAgeToday).toEqual(probandAgeToday);
+      const probandAgeToday = proband.getAgeToday();
+      expect(await brotherAgeToday.innerText()).toBe(await probandAgeToday.innerText());
 
-        const probandIsAliveRadioBUtton = proband.getLivingStatusOption('Alive');
-        await expect(probandIsAliveRadioBUtton).toBeChecked();
-        await expect(brotherIsAliveRadioButton).toBeChecked();
+      const probandIsAliveRadioBUtton = proband.getLivingStatusOption('Alive');
+      await expect(probandIsAliveRadioBUtton).toBeChecked();
+      await expect(brotherIsAliveRadioButton).toBeChecked();
 
-        const probandAffectedStatus = proband.getAffectedStatus();
-        await expect(brotherAffectedStatus).toHaveText(await probandAffectedStatus.innerText());
+      const probandAffectedStatus = proband.getAffectedStatus();
+      await expect(brotherAffectedStatus).toHaveText(await probandAffectedStatus.innerText());
 
-        const probandRace = proband.getRace();
-        await expect(brotherRace).toHaveText(await probandRace.innerText());
+      const probandRace = proband.getRace();
+      await expect(brotherRace).toHaveText(await probandRace.innerText());
 
-        const probandEthnicity = proband.getEthnicity();
-        await expect(brotherEthnicity).toHaveText(await probandEthnicity.innerText());
+      const probandEthnicity = proband.getEthnicity();
+      await expect(brotherEthnicity).toHaveText(await probandEthnicity.innerText());
 
-        const probandMixedRaceNotesContent = await proband.getMixedRaceNotesContent();
-        expect(brotherMixedRaceNotes).toEqual(probandMixedRaceNotesContent);
+      const probandMixedRaceNotesContent = await proband.getMixedRaceNotesContent();
+      expect(brotherMixedRaceNotes).toBe(probandMixedRaceNotesContent);
     })
-    });
+  });
 });

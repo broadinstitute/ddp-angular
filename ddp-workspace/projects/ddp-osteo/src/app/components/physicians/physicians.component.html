@@ -12,22 +12,14 @@
                 <p
                     [innerHTML]="'PhysiciansPage.IntroSection.Text' | translate"
                 ></p>
-                <section
-                    *ngFor="
-                        let step of 'BenefitsParticipation.Participations'
-                            | translate;
-                        let i = index
-                    "
-                    class="step"
-                >
+                <section class="step">
                     <div class="step__data">
                         <a
-                            *ngIf="step.Button && stepsHrf[i]"
                             target="_blank"
-                            [href]="stepsHrf[i]"
+                            [href]="'PhysiciansPage.step.href' | translate"
                         >
-                            <button>
-                                {{ step.Button1 | translate }}
+                            <button translate>
+                                PhysiciansPage.step.Button
                             </button>
                         </a>
                     </div>

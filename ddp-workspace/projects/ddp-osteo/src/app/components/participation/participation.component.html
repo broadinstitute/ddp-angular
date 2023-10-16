@@ -15,10 +15,10 @@
             <h2 class="step__title">{{step.Title}}</h2>
             <p class="step__text">{{step.Text}}</p>
 
-            <a *ngIf="step.Button && stepsHref[i]"
+            <a *ngIf="step.Button && step.href"
                 mat-stroked-button
                 target="_blank"
-                [href]="stepsHref[i]"
+                [href]="step.href"
                 class="step__btn button button_small small-letter-spacing button_secondary">
                 {{step.Button}}
             </a>
@@ -38,9 +38,9 @@
             <h2 class="step__step">{{step.step}}</h2>
             <p class="step__text">{{step.Text}}</p>
 
-            <a mat-stroked-button *ngIf="step.Button && stepsHrf[i]"
+            <a mat-stroked-button *ngIf="step.Button && step.href"
                target="_blank"
-               [href]="stepsHrf[i]"
+               [href]="step.href"
                class="step__btn button button_small small-letter-spacing button_secondary">
                 {{step.Button}}
             </a>

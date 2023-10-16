@@ -82,7 +82,7 @@ Note: Update docker image version when upgrading Playwright version
   > cd playwright-e2e/
 
 - Start running Playwright docker image
-  > docker run -v $PWD:/e2e -w /e2e -it --rm --ipc=host -p 9323:9323 mcr.microsoft.com/playwright:v1.31.0-focal /bin/bash
+  > docker run -v $PWD:/e2e -w /e2e -it --rm --ipc=host -p 9323:9323 mcr.microsoft.com/playwright:v1.38.0-jammy /bin/bash
 
 - Install dependencies inside docker container
   > npm install
@@ -144,33 +144,31 @@ In **/tests/singular** dir, run Singular tests only:
   > npx cross-env SITE_PASSWORD=<SITE_PASSWORD> SINGULAR_USER_EMAIL=<EMAIL> SINGULAR_USER_PASSWORD=<YOUR_PASSWORD> SINGULAR_BASE_URL=<HOME_URL> npx playwright test --config=playwright.config.ts login-visual.spec.ts
 
 ### Running tests on CircleCI
+* To verify new or modified tests working on CircleCI
   - CI workflow name is `playwright-e2e-test-workflow`. Trigger this workflow via `build-utils/run_ci.sh`.
     - If this is the first time, set personal CI token in `$HOME/.circleci-token` file. To know how to generate a personal token, see https://app.circleci.com/settings/user/tokens
-    - `<STUDY_NAME>` Any study name. Run Playwright tests matching this study.
-    - `<BRANCH_NAME>` develop
-    - `<ENV_NAME>` Environment name: dev or test
-    - `<E2E_TEST_PARALLELISM>` (Optional) CircleCI parallelism. Default value is 1
+    - `<STUDY_NAME>` [TEST_SUITE_NAME]: dss, dsm or UNKNOWN (lowercase)
+    - `<BRANCH_NAME>` [PR_BRANCH_NAME]
+    - `<ENV_NAME>` [ENV_NAME]: dev or test (lowercase)
+    
     ```
-    cd build-utils
-    ./run_ci.sh run-e2e-tests <STUDY_NAME> <BRANCH_NAME> <ENV_NAME> <E2E_TEST_PARALLELISM>
+    > cd build-utils
+    > ./run_ci.sh run-e2e-tests [TEST_SUITE_NAME] [PR_BRANCH_NAME] [ENV_NAME]
     ```
+
     Examples:
     
-    - Run all E2E tests against Dev env (on 1 CircleCI VM)
+    - Run all tests against Dev env
       > 
-      > ./run_ci.sh run-e2e-tests UNKNOWN develop dev
+      > ./run_ci.sh run-e2e-tests UNKNOWN playwright-new-test dev
     
-    - Run all Singular tests against Dev env (on 1 CircleCI VM)
+    - Run all DSS tests against Dev env
       > 
-      > ./run_ci.sh run-e2e-tests singular develop dev
+      > ./run_ci.sh run-e2e-tests dss playwright-new-test dev
       
-    - Run all Singular tests against Test env on 3 CircleCI VM in parallel
+    - Run all DSM tests against Dev env
        >
-       > ./run_ci.sh run-e2e-tests singular develop test 3
-    
-    - Run all Pancan tests against Test env on 2 CircleCI VM in parallel
-      >
-      > ./run_ci.sh run-e2e-tests pancan develop test 2
+       > ./run_ci.sh run-e2e-tests dsm playwright-new-test dev
 
 ### Debugging in Intellij
 
@@ -178,6 +176,9 @@ In **/tests/singular** dir, run Singular tests only:
 
 ### Test Development Tips
 - In */playwright-e2e* dir, use npm script `npm run lint:singular` to find eslint issues in *singular* dir. Note: Not all eslint rules are fixable by `--fix`.
+
+- To skip a test if env is Test, add a `test.skip` condition inside the `test.describe` block.
+  > `test.skip(process.env.ENV?.indexOf('test') !== -1);`
 
 - For a click action that initiate page navigation, it's a good practice to wait for `navigation` and `load` events.
   - For an example, below is a function that clicks the `submit` button and waits for events.

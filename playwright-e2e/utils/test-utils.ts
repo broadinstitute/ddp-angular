@@ -21,7 +21,8 @@ export async function waitForNoSpinner(page: Page, opts: { timeout?: number } = 
   await page.waitForLoadState().catch((err) => logError(err));
   const pageStatus = await Promise.race([
     spinner.waitFor({ state: 'hidden', timeout }).then(() => 'Ready'),
-    appError.waitFor({ state: 'visible', timeout }).then(() => 'Error')
+    appError.waitFor({ state: 'visible', timeout }).then(() => 'Error'),
+    new Promise((_, reject) => setTimeout(() => reject(Error('Time out waiting for loading spinner to stop or a app error.')), timeout)),
   ]);
   if (pageStatus === 'Ready') {
     // Check again for app error after spinner stopped
@@ -36,14 +37,17 @@ export async function waitForNoSpinner(page: Page, opts: { timeout?: number } = 
 }
 
 export async function waitForResponse(page: Page, { uri, status = 200, timeout }: WaitForResponse): Promise<Response> {
-  try {
-    return await page.waitForResponse(
-      (response: Response) => response.url().includes(uri) && response.status() === status,
-      {timeout}
-    );
-  } catch (error: any) {
-    throw new Error(`Timeout exceeded while waiting for ${uri} URI response with status - ${status}`);
+  const response = await page.waitForResponse((response: Response) => response.url().includes(uri), { timeout });
+  await response.finished();
+  const respStatus = response.status();
+  if (respStatus === status) {
+    return response;
   }
+  const url = response.url();
+  const method = response.request().method().toUpperCase;
+  const unexpectedStatus = response.status();
+  const body = await response.text();
+  throw new Error(`Waiting for URI: ${uri} with status: ${status}.\n  ${method} ${url}\n  Response Status: ${unexpectedStatus}\n  Text: ${body}`);
 }
 
 export async function waitUntilRemoved(locator: Locator): Promise<void> {
@@ -198,20 +202,28 @@ export function assertParticipantListDownloadFileName(download: Download, study:
       name = study;
   }
   const expectedFileName = `${name}_export.zip`;
-  expect(actualFileName.toLowerCase()).toEqual(expectedFileName.toLowerCase());
+  expect(actualFileName.toLowerCase()).toBe(expectedFileName.toLowerCase());
 }
 
-export function studyShortName(study: StudyEnum): {shortName: string | null; realm: string | null} {
+export function studyShortName(study: StudyEnum): { shortName: string | null; realm: string | null; collaboratorPrefix: string | null} {
   let shortName = null;
   let realm = null;
+  let collaboratorPrefix = null;
   switch (study) {
     case StudyEnum.LMS:
       shortName = 'cmi-lms';
       realm = 'cmi-lms';
+      collaboratorPrefix = 'PECGSProject';
+      break;
+    case StudyEnum.OSTEO:
+      shortName = 'cmi-osteo';
+      realm = 'Osteo';
+      collaboratorPrefix = 'OSProject';
       break;
     case StudyEnum.OSTEO2:
       shortName = 'cmi-osteo';
       realm = 'osteo2';
+      collaboratorPrefix = 'OSPECGS';
       break;
     case StudyEnum.AT:
       shortName = 'AT';
@@ -220,6 +232,7 @@ export function studyShortName(study: StudyEnum): {shortName: string | null; rea
     case StudyEnum.PANCAN:
       shortName = 'cmi-pancan';
       realm = 'PanCan';
+      collaboratorPrefix = 'Project';
       break;
     case StudyEnum.RAREX:
       shortName = 'rarex';
@@ -228,17 +241,44 @@ export function studyShortName(study: StudyEnum): {shortName: string | null; rea
     case StudyEnum.MBC:
       shortName = 'cmi-mbc';
       realm = 'Pepper-MBC';
+      collaboratorPrefix = 'MBCProject';
       break;
     case StudyEnum.BRAIN:
       shortName = 'cmi-brain';
       realm = 'Brain';
+      collaboratorPrefix = 'BrainProject';
       break;
     case StudyEnum.ANGIO:
       shortName = 'angio';
       realm = 'Angio';
+      collaboratorPrefix = 'Project Pepper';
+      break;
+    case StudyEnum.PROSTATE:
+      shortName = 'cmi-mpc';
+      realm = 'Prostate';
+      collaboratorPrefix = 'PCProject';
+      break;
+    case StudyEnum.ESC:
+      shortName = 'cmi-esc';
+      realm = 'cmi-esc';
+      collaboratorPrefix = 'GECProject';
       break;
     default:
-      break;
+      throw new Error(`Study ${study} is undefined.`);
   }
-  return {shortName, realm};
+  return { shortName, realm, collaboratorPrefix };
+}
+
+export function shuffle(array: any[]): any[] {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+}
+
+export async function toHaveScreenshot(page: Page, locator: Locator | string, name: string): Promise<void> {
+  // https://github.com/microsoft/playwright/issues/18827
+  const loc = typeof locator === 'string' ? page.locator(locator) : locator;
+  await expect.soft(loc).toHaveScreenshot(name);
 }

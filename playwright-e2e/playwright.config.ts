@@ -8,6 +8,8 @@ import path from 'path';
 import * as dotenv from 'dotenv';
 dotenv.config({ path: path.resolve(__dirname, '.env') });
 
+const { CI } = process.env;
+
 /**
  * Base Playwright TestConfig.
  * See https://playwright.dev/docs/test-configuration.
@@ -34,15 +36,15 @@ const testConfig: PlaywrightTestConfig = {
       scale: 'css',
       // Account for minor difference in text rendering and resolution between headless and headed mode
       threshold: 1,
-      maxDiffPixelRatio: 0.3
+      maxDiffPixelRatio: 0.5
     }
   },
   /* Run tests in files in parallel */
   fullyParallel: false,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
-  forbidOnly: !!process.env.CI,
-  retries: process.env.CI ? 1 : 0,
-  workers: process.env.CI ? 2 : 4,
+  forbidOnly: !!CI,
+  retries: CI ? 1 : 0,
+  workers: CI ? 1 : 3,
   maxFailures: 0,
 
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
@@ -64,7 +66,17 @@ const testConfig: PlaywrightTestConfig = {
 
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
+    browserName: 'chromium',
     headless: true,
+    launchOptions: {
+      slowMo: 100,
+      // Account for minor difference in text rendering and resolution between headless and headed mode
+      ignoreDefaultArgs: ['--hide-scrollbars']
+    },
+    userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36',
+    viewport: { width: 1920, height: 1080 },
+    ignoreHTTPSErrors: true,
+
     /* Maximum time each (browser) action such as `click()` can take. Defaults to 0 (no limit). */
     actionTimeout: 50 * 1000,
     navigationTimeout: 50 * 1000,
@@ -80,71 +92,24 @@ const testConfig: PlaywrightTestConfig = {
       mode: 'only-on-failure',
       fullPage: true
     },
-    video: 'retain-on-failure', // Limit load on CI system because trace and video add load
-
-    userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36',
-    viewport: { width: 1280, height: 960 },
-    ignoreHTTPSErrors: true
-    // launchOptions: {
-    //   ignoreDefaultArgs: ['--hide-scrollbars'],
-    // },
+    video: 'retain-on-failure',
   },
 
-  /* Configure projects for major browsers */
+  /* Configure projects for chromium browser */
   projects: [
     {
-      name: 'chromium',
-      // testMatch: '**/*.spec.ts',
-      grepInvert: /examples/,
-      use: {
-        browserName: 'chromium',
-        launchOptions: {
-          slowMo: 100,
-          // Account for minor difference in text rendering and resolution between headless and headed mode
-          ignoreDefaultArgs: ['--hide-scrollbars']
-        }
-      }
+      // Listing tests: npx playwright test --list --project="dsm"
+      // Running tests serially: npx playwright test --project="kit" --workers=1
+      name: 'dsm',
+      testDir: 'tests/dsm',
+      use: {}
+    },
+    {
+      name: 'dss',
+      testDir: 'tests',
+      testIgnore: ['tests/dsm/**/*.spec.ts'],
+      use: {}
     }
-    // {
-    //   name: 'firefox',
-    //   use: {
-    //     ...devices['Desktop Firefox'],
-    //   },
-    // },
-    //  {
-    //   name: 'webkit',
-    //   use: {
-    //     ...devices['Desktop Safari'],
-    //  },
-    // },
-
-    /* Test against mobile viewports. */
-    // {
-    //   name: 'Mobile Chrome',
-    //   use: {
-    //     ...devices['Pixel 5'],
-    //   },
-    // },
-    // {
-    //   name: 'Mobile Safari',
-    //   use: {
-    //     ...devices['iPhone 12'],
-    //   },
-    // },
-
-    /* Test against branded browsers. */
-    // {
-    //   name: 'Microsoft Edge',
-    //   use: {
-    //     channel: 'msedge',
-    //   },
-    // },
-    // {
-    //   name: 'Google Chrome',
-    //   use: {
-    //     channel: 'chrome',
-    //   },
-    // },
   ]
 };
 

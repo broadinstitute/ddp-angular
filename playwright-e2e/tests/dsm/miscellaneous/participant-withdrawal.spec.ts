@@ -12,7 +12,8 @@ import { assertTableHeaders } from 'utils/assertion-helper';
 import { logParticipantWithdrew } from 'utils/log-utils';
 import * as user from 'data/fake-user.json';
 
-test.describe('Participants Withdrawal', () => {
+// Enable after bug fix https://broadworkbench.atlassian.net/browse/PEPPER-1112
+test.describe.skip('Participants Withdrawal', () => {
   const studies = [StudyEnum.LMS];
 
     for (const study of studies) {

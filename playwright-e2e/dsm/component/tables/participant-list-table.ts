@@ -1,35 +1,41 @@
 import { Locator, Page, expect } from '@playwright/test';
 import Table from 'dss/component/table';
 import ParticipantPage from 'dsm/pages/participant-page/participant-page';
-import {ParticipantsListPaginator} from 'lib/component/dsm/paginators/participantsListPaginator';
-import {rows} from 'lib/component/dsm/paginators/types/rowsPerPage';
+import { ParticipantsListPaginator } from 'lib/component/dsm/paginators/participantsListPaginator';
+import { rows } from 'lib/component/dsm/paginators/types/rowsPerPage';
 import { getDate, offsetDaysFromToday } from 'utils/date-utils';
 import { waitForNoSpinner } from 'utils/test-utils';
 import { AdditionalFilter } from 'dsm/component/filters/sections/search/search-enums';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
 
 export class ParticipantListTable extends Table {
-  private readonly _participantPage: ParticipantPage = new ParticipantPage(this.page);
-  private readonly _paginator: ParticipantsListPaginator = new ParticipantsListPaginator(this.page);
+  private readonly _participantPage: ParticipantPage;
+  private readonly _paginator: ParticipantsListPaginator;
 
   constructor(page: Page) {
     super(page, { cssClassAttribute: '.table' });
+    this._paginator = new ParticipantsListPaginator(this.page);
+    this._participantPage = new ParticipantPage(this.page);
+  }
+
+  public get paginator(): ParticipantsListPaginator {
+    return this._paginator;
   }
 
   public async goToPage(page: number): Promise<void> {
-    await this._paginator.pageAt(page);
+    await this.paginator.pageAt(page);
   }
 
   public async nextPage(): Promise<void> {
-    await this._paginator.next();
+    await this.paginator.next();
   }
 
   public async previousPage(): Promise<void> {
-    await this._paginator.previous();
+    await this.paginator.previous();
   }
 
   public async rowsPerPage(rows: rows): Promise<void> {
-    await this._paginator.rowsPerPage(rows);
+    await this.paginator.rowsPerPage(rows);
   }
 
   public async openParticipantPageAt(position: number): Promise<ParticipantPage> {
@@ -61,10 +67,10 @@ export class ParticipantListTable extends Table {
   }
 
   /**
- * Returns the guid of the most recently created playwright participant
- * @param isRGPStudy mark as true or false if this is being ran in RGP - parameter is only needed if method is ran in RGP study
- * @returns the guid of the most recently registered playwright participant
- */
+    * Returns the guid of the most recently created playwright participant
+    * @param isRGPStudy mark as true or false if this is being ran in RGP - parameter is only needed if method is ran in RGP study
+    * @returns the guid of the most recently registered playwright participant
+  */
   public async getGuidOfMostRecentAutomatedParticipant(participantName: string, isRGPStudy?: boolean): Promise<string> {
     //Select the columns to be used to help find the most recent automated participant
     const participantListPage = new ParticipantListPage(this.page);
@@ -85,7 +91,7 @@ export class ParticipantListTable extends Table {
     await searchPanel.dates('Registration Date', { from: previousWeek, to: today, additionalFilters: [AdditionalFilter.RANGE] });
 
     //Also make sure to conduct the search for participants with the given first name of the automated participant
-    await searchPanel.text('First Name', {textValue: participantName});
+    await searchPanel.text('First Name', { textValue: participantName });
     await searchPanel.search();
 
     //Get the first returned participant to use for testing - and verify at least one participant is returned
@@ -94,19 +100,19 @@ export class ParticipantListTable extends Table {
     return this.getCellDataForColumn('Participant ID', 1);
   }
 
-   /**
-   * Given a column name and a row number, return the contents of the cell in the participant list
-   * @param columnName the column name e.g. Participant ID
-   * @param rowNumber the row number
-   * @returns the contents of the specified column in the specified row
-   */
-    private async getCellDataForColumn(columnName: string, rowNumber: number): Promise<string> {
-      const numberOfPrecedingColumns = await this.page.locator(`//table/thead/th[contains(., '${columnName}')]/preceding-sibling::th`).count();
-      const columnIndex = numberOfPrecedingColumns + 1;
-      //Find the cell in a specific row and column
-      const cell = this.page.locator(`((//tbody/tr)[${rowNumber}]/descendant::td)[${columnIndex}]`);
-      return cell.innerText();
-    }
+  /**
+  * Given a column name and a row number, return the contents of the cell in the participant list
+  * @param columnName the column name e.g. Participant ID
+  * @param rowNumber the row number
+  * @returns the contents of the specified column in the specified row
+  */
+  private async getCellDataForColumn(columnName: string, rowNumber: number): Promise<string> {
+    const numberOfPrecedingColumns = await this.page.locator(`//table/thead/th[contains(., '${columnName}')]/preceding-sibling::th`).count();
+    const columnIndex = numberOfPrecedingColumns + 1;
+    //Find the cell in a specific row and column
+    const cell = this.page.locator(`((//tbody/tr)[${rowNumber}]/descendant::td)[${columnIndex}]`);
+    return cell.innerText();
+  }
 
   private getParticipantAt(position: number): Locator {
     return this.page.locator(`//table/tbody/tr`).nth(position);

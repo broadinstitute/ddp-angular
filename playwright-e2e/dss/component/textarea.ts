@@ -14,19 +14,36 @@ export default class TextArea extends WidgetBase {
       if (label) {
         this.element = exactMatch
           ? this.root.locator(`//textarea[@id=(//label[.//text()[normalize-space()="${label}"]]/@for)]`)
-          : this.root.locator(`//textarea[@id=(//label[contains(normalize-space(.),"${label}")]/@for)]`);
+          : this.root.locator(`//textarea[normalize-space(@data-placeholder)="${label}" or ` +
+              `@id=(//label[contains(normalize-space(.),"${label}")]/@for)]`);
       } else {
         this.element = this.root.locator('textarea');
       }
     }
   }
 
-  async fill(value: string): Promise<void> {
+  async fill(value: string, pressTab = true): Promise<void> {
     await this.toLocator().fill(value);
-    await this.toLocator().press('Tab');
+    pressTab && await this.toLocator().press('Tab');
   }
 
-  async getText(): Promise<string> {
+  async currentValue(): Promise<string> {
     return this.toLocator().inputValue();
+  }
+
+  async clear(): Promise<void> {
+    await this.toLocator().focus();
+    await this.toLocator().scrollIntoViewIfNeeded().catch();
+    await this.click();
+    await this.page.keyboard.press('Meta+A');
+    await this.page.keyboard.press('Backspace');
+  }
+
+  async blur(): Promise<void> {
+    await this.toLocator().blur();
+  }
+
+  public async maxLength(): Promise<string | null> {
+    return this.toLocator().getAttribute('maxlength');
   }
 }

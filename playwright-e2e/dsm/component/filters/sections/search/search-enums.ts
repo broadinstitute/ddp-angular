@@ -7,8 +7,12 @@ export enum AdditionalFilter {
 
 export enum CustomViewColumns {
   CONTACT_INFORMATION = 'Contact Information Columns',
+  COHORT_TAGS = 'Cohort Tags Columns',
+  DSM_COLUMNS = 'Participant - DSM Columns',
   MEDICAL_RECORD = 'Medical Record Columns',
   PARTICIPANT = 'Participant Columns',
   RESEARCH_CONSENT_FORM = 'Research Consent Form Columns',
   SAMPLE = 'Sample Columns',
+  DIAGNOSIS_TYPE = 'Survey: Your Child\'s/Your [DIAGNOSIS TYPE] Columns',
+  TISSUE = 'Tissue Columns',
 }

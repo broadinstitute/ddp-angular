@@ -189,6 +189,8 @@ test('Osteo adult self enroll @dss @osteo', async ({ page }) => {
     ],
     ancestry: ['Ashkenazi']
   });
+  await expect(familyHistoryPage.getNextButton()).toBeVisible(); // wait for saving to finish
+
   await familyHistoryPage.addFamilyMember('PARENT2', {
     nickname: 'Dad',
     sexAtBirth: 'Male',
@@ -197,8 +199,8 @@ test('Osteo adult self enroll @dss @osteo', async ({ page }) => {
     cancers: [],
     ancestry: []
   });
-
   await familyHistoryPage.next();
+
   await familyHistoryPage.clickAddParentSibling();
   await familyHistoryPage.addFamilyMember('PARENT_SIBLING', {
     nickname: "Dad's sister",
@@ -209,6 +211,8 @@ test('Osteo adult self enroll @dss @osteo', async ({ page }) => {
     ancestry: [],
     sideOfFamily: 'Biological / Birth Parent 2: Assigned Male at birth'
   });
+  await expect(familyHistoryPage.getNextButton()).toBeVisible();
+
   await familyHistoryPage.clickAddParentSibling();
   await familyHistoryPage.addFamilyMember('PARENT_SIBLING', {
     nickname: "Mom's sister",
@@ -220,6 +224,7 @@ test('Osteo adult self enroll @dss @osteo', async ({ page }) => {
     sideOfFamily: 'Biological / Birth Parent 1: Assigned Female at birth'
   });
   await familyHistoryPage.next();
+
   await familyHistoryPage.clickAddGrandParent();
   await familyHistoryPage.addFamilyMember('GRANDPARENT', {
     nickname: "Mom's Dad",
@@ -237,6 +242,8 @@ test('Osteo adult self enroll @dss @osteo', async ({ page }) => {
     ancestry: [],
     sideOfFamily: 'Biological / Birth Parent 1: Assigned Female at birth'
   });
+  await expect(familyHistoryPage.getNextButton()).toBeVisible();
+
   await familyHistoryPage.clickAddGrandParent();
   await familyHistoryPage.addFamilyMember('GRANDPARENT', {
     nickname: "Mom's Mom",
@@ -254,6 +261,8 @@ test('Osteo adult self enroll @dss @osteo', async ({ page }) => {
     ancestry: [],
     sideOfFamily: 'Biological / Birth Parent 1: Assigned Female at birth'
   });
+  await expect(familyHistoryPage.getNextButton()).toBeVisible();
+
   await familyHistoryPage.clickAddGrandParent();
   await familyHistoryPage.addFamilyMember('GRANDPARENT', {
     nickname: "Dads's Mom",
@@ -271,6 +280,8 @@ test('Osteo adult self enroll @dss @osteo', async ({ page }) => {
     ancestry: [],
     sideOfFamily: 'Biological / Birth Parent 2: Assigned Male at birth'
   });
+  await expect(familyHistoryPage.getNextButton()).toBeVisible();
+
   await familyHistoryPage.clickAddGrandParent();
   await familyHistoryPage.addFamilyMember('GRANDPARENT', {
     nickname: "Dads's Dad",
@@ -282,6 +293,7 @@ test('Osteo adult self enroll @dss @osteo', async ({ page }) => {
     sideOfFamily: 'Biological / Birth Parent 2: Assigned Male at birth'
   });
   await familyHistoryPage.next();
+
   await familyHistoryPage.clickAddSibling();
   await familyHistoryPage.addFamilyMember('SIBLING', {
     nickname: 'Big Sis',
@@ -291,6 +303,8 @@ test('Osteo adult self enroll @dss @osteo', async ({ page }) => {
     cancers: [],
     ancestry: []
   });
+  await expect(familyHistoryPage.getNextButton()).toBeVisible();
+
   await familyHistoryPage.clickAddSibling();
   await familyHistoryPage.addFamilyMember('SIBLING', {
     nickname: 'Little Bro',
@@ -307,7 +321,6 @@ test('Osteo adult self enroll @dss @osteo', async ({ page }) => {
     ],
     ancestry: []
   });
-
   await familyHistoryPage.next();
 
   await familyHistoryPage.clickAddHalfSibling();
@@ -327,7 +340,6 @@ test('Osteo adult self enroll @dss @osteo', async ({ page }) => {
     ],
     ancestry: []
   });
-
   await familyHistoryPage.next();
 
   await familyHistoryPage.clickAddChild();
@@ -346,7 +358,6 @@ test('Osteo adult self enroll @dss @osteo', async ({ page }) => {
     ],
     ancestry: []
   });
-
   await familyHistoryPage.next();
 
   await new TextArea(page, { ddpTestID: 'answer:FH_OTHER_FACTORS_CANCER_RISK' }).toLocator().waitFor({

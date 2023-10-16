@@ -31,6 +31,7 @@ export default class KitsSentPage {
   public async waitForLoad(): Promise<void> {
     await this.page.waitForLoadState('networkidle');
     await waitForNoSpinner(this.page);
+    await this.assertPageTitle();
   }
 
   public async selectKitType(kitType: KitTypeEnum): Promise<void> {
@@ -76,7 +77,7 @@ export default class KitsSentPage {
   public async assertDisplayedRowsCount(count: number): Promise<void> {
     expect(await this.kitsTable.rows.count(),
       "Kits Sent page - displayed rows count doesn't match the provided one")
-      .toEqual(count)
+      .toBe(count)
   }
 
   /* XPaths */

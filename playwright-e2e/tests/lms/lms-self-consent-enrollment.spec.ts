@@ -13,7 +13,7 @@ import { test } from 'fixtures/lms-fixture';
 import { assertActivityHeader } from 'utils/assertion-helper';
 import { generateUserName } from 'utils/faker-utils';
 import { logParticipantCreated } from 'utils/log-utils';
-import { waitForResponse } from 'utils/test-utils';
+import { toHaveScreenshot, waitForResponse } from 'utils/test-utils';
 
 test.describe.serial('LMS Adult Enrollment', () => {
   let researchConsentPage: LmsResearchConsentPage;
@@ -41,7 +41,7 @@ test.describe.serial('LMS Adult Enrollment', () => {
 
       const getStartedPage = new LmsGetStartedPage(page);
       await getStartedPage.waitForReady();
-      await expect(page.locator('.ddp-content')).toHaveScreenshot('get-started-instruction.png');
+      await toHaveScreenshot(page, '.ddp-content', 'get-started-instruction.png');
       await getStartedPage.whoIsSigningUP().toCheckbox("I have been diagnosed with LMS and I'm signing myself up").check();
       await getStartedPage.next();
 
@@ -60,11 +60,12 @@ test.describe.serial('LMS Adult Enrollment', () => {
       await assertActivityHeader(page, 'Research Consent Form');
       await assertActiveActivityStep(page, '1. Key Points');
 
-      await expect(page.locator('.ddp-content')).toHaveScreenshot('research-consent-form-message.png');
-      await expect(page.locator('.activity-steps')).toHaveScreenshot('research-consent-activity-steps.png');
+      await toHaveScreenshot(page, '.ddp-content', 'research-consent-form-message.png');
+      await toHaveScreenshot(page, '.activity-steps', 'research-consent-activity-steps.png');
+
       const paragraphs = await page.locator('.ddp-li .ddp-block-body').all();
       for (let i = 0; i < paragraphs.length; i++) {
-        await expect(paragraphs[i]).toHaveScreenshot(`research-consent-key-points-page-paragraph-${i}.png`);
+        await toHaveScreenshot(page, paragraphs[i], `research-consent-key-points-page-paragraph-${i}.png`);
       }
     })
 
@@ -75,32 +76,32 @@ test.describe.serial('LMS Adult Enrollment', () => {
       const questionALocator = page.locator('//li[contains(@class, "ddp-li")][.//*[contains(normalize-space(), "Introduction")]]');
       let paragraphs = await questionALocator.locator('.ddp-block-body p').all();
       for (let i = 0; i < paragraphs.length; i++) {
-        await expect(paragraphs[i]).toHaveScreenshot(`research-consent-full-form-page-A-paragraph-${i}.png`);
+        await toHaveScreenshot(page, paragraphs[i], `research-consent-full-form-page-A-paragraph-${i}.png`);
       }
 
       const questionBLocator = page.locator('//li[contains(@class, "ddp-li")][.//*[contains(normalize-space(), "Why is this research study being done?")]]');
-      await expect(questionBLocator).toHaveScreenshot(`research-consent-full-form-page-B-paragraph.png`);
+      await toHaveScreenshot(page, questionBLocator, 'research-consent-full-form-page-B-paragraph.png');
 
       const questionCLocator = page.locator('//li[contains(@class, "ddp-li")][.//*[contains(normalize-space(), "What other options are there?")]]');
-      await expect(questionCLocator).toHaveScreenshot(`research-consent-full-form-page-C-paragraph.png`);
+      await toHaveScreenshot(page, questionCLocator, 'research-consent-full-form-page-C-paragraph.png');
 
       const questionDLocator = page.locator('//li[contains(@class, "ddp-li")][.//*[contains(normalize-space(), "What is involved in the research study?")]]');
       paragraphs = await questionDLocator.locator('.ddp-block-body p').all();
       for (let i = 0; i < paragraphs.length; i++) {
-        await expect(paragraphs[i]).toHaveScreenshot(`research-consent-full-form-page-D-paragraph-${i}.png`);
+        await toHaveScreenshot(page, paragraphs[i], `research-consent-full-form-page-D-paragraph-${i}.png`);
       }
 
       const questionELocator = page.locator('//li[contains(@class, "ddp-li")][.//*[contains(normalize-space(), "How long will I be in this research study?")]]');
-      await expect(questionELocator).toHaveScreenshot(`research-consent-full-form-page-E-paragraph.png`);
+      await toHaveScreenshot(page, questionELocator, 'research-consent-full-form-page-E-paragraph.png');
 
       const questionFLocator = page.locator('//li[contains(@class, "ddp-li")][.//*[contains(normalize-space(), "What kind of information could be found in this study and will I be able to see it?")]]');
       paragraphs = await questionFLocator.locator('.ddp-block-body p').all();
       for (let i = 0; i < paragraphs.length; i++) {
-        await expect(paragraphs[i]).toHaveScreenshot(`research-consent-full-form-page-F-paragraph-${i}.png`);
+        await toHaveScreenshot(page, paragraphs[i], `research-consent-full-form-page-F-paragraph-${i}.png`);
       }
 
       const questionGLocator = page.locator('//li[contains(@class, "ddp-li")][.//*[contains(normalize-space(), "What are the benefits of the research study?")]]');
-      await expect(questionGLocator).toHaveScreenshot(`research-consent-full-form-page-G-paragraph.png`);
+      await toHaveScreenshot(page, questionGLocator, 'research-consent-full-form-page-G-paragraph.png');
 
       // Note: Questions H to P are not checked
     })
@@ -110,18 +111,18 @@ test.describe.serial('LMS Adult Enrollment', () => {
     await test.step('Asserting text contents on Research Consent Form: Step 3. Sign Consent', async () => {
       await assertActiveActivityStep(page, '3. Sign Consent');
 
-      await expect(page.locator('p.secondary-text')).toHaveScreenshot(`research-consent-sign-consent-info.png`);
-      await expect(researchConsentPage.agreeToDrawBloodQuestion.toLocator()).toHaveScreenshot('research-consent-agree-to-draw-blood-question.png');
-      await expect(researchConsentPage.canRequestStoredTumorSamples.toLocator()).toHaveScreenshot('research-consent-can-request-tumor-samples-question.png');
+      await toHaveScreenshot(page, 'p.secondary-text', 'research-consent-sign-consent-info.png');
+      await toHaveScreenshot(page, researchConsentPage.agreeToDrawBloodQuestion.toLocator(), 'research-consent-agree-to-draw-blood-question.png');
+      await toHaveScreenshot(page, researchConsentPage.canRequestStoredTumorSamples.toLocator(), 'research-consent-can-request-tumor-samples-question.png');
 
       await researchConsentPage.agreeToDrawBloodSamples();
       await researchConsentPage.requestStoredSamples();
 
       const agreeToFollowing = page.locator('//ddp-activity-content[.//text()[normalize-space()= "In addition, I agree to all of the following:"]]');
-      await expect(agreeToFollowing).toHaveScreenshot(`research-consent-agree-to-following.png`);
+      await toHaveScreenshot(page, agreeToFollowing, 'research-consent-agree-to-following.png');
 
       const fullNameIndicatesFollowing = page.locator('//ddp-activity-content[.//text()[normalize-space()= "My full name below indicates:"]]');
-      await expect(fullNameIndicatesFollowing).toHaveScreenshot(`research-consent-full-name-indicates-following.png`);
+      await toHaveScreenshot(page, fullNameIndicatesFollowing, 'research-consent-full-name-indicates-following.png');
 
       await researchConsentPage.fillInName(firstName, lastName);
       await researchConsentPage.fillInDateOfBirth(participant.birthDate.MM, participant.birthDate.DD, participant.birthDate.YYYY);
@@ -142,19 +143,19 @@ test.describe.serial('LMS Adult Enrollment', () => {
       await assertActivityHeader(page, 'Additional Consent Form: Learning About Your Tumor');
 
       const paragraphALocator = page.locator('//li[contains(@class, "ddp-li")][.//*[contains(normalize-space(), "Introduction")]]');
-      await expect(paragraphALocator).toHaveScreenshot(`research-consent-additional-consent-page-A-paragraph.png`);
+      await toHaveScreenshot(page, paragraphALocator, 'research-consent-additional-consent-page-A-paragraph.png');
 
       const paragraphBLocator = page.locator('//li[contains(@class, "ddp-li")][.//*[contains(normalize-space(), "Brief Description of the Project")]]');
-      await expect(paragraphBLocator).toHaveScreenshot(`research-consent-additional-consent-page-B-paragraph.png`);
+      await toHaveScreenshot(page, paragraphBLocator, 'research-consent-additional-consent-page-B-paragraph.png');
 
       const paragraphCLocator = page.locator('//li[contains(@class, "ddp-li")][.//*[contains(normalize-space(), "What are the new procedures involved?")]]');
-      await expect(paragraphCLocator).toHaveScreenshot(`research-consent-additional-consent-page-C-paragraph.png`);
+      await toHaveScreenshot(page, paragraphCLocator, 'research-consent-additional-consent-page-C-paragraph.png');
 
       const paragraphDLocator = page.locator('//li[contains(@class, "ddp-li")][.//*[contains(normalize-space(), "Are there any new risks associated with participating in this portion of the research study?")]]');
-      await expect(paragraphDLocator).toHaveScreenshot(`research-consent-additional-consent-page-D-paragraph.png`);
+      await toHaveScreenshot(page, paragraphDLocator, 'research-consent-additional-consent-page-D-paragraph.png');
 
       const paragraphELocator = page.locator('//li[contains(@class, "ddp-li")][.//*[contains(normalize-space(), "Who do I contact if I have questions about the research study?")]]');
-      await expect(paragraphELocator).toHaveScreenshot(`research-consent-additional-consent-page-E-paragraph.png`);
+      await toHaveScreenshot(page, paragraphELocator, 'research-consent-additional-consent-page-E-paragraph.png');
 
       const additionalConsentPage = new LmsAdditionalConsentPage(page);
       await additionalConsentPage.agreeToShareWithMeResults('Yes');
@@ -169,9 +170,10 @@ test.describe.serial('LMS Adult Enrollment', () => {
 
       const contents = await page.locator('//ddp-activity-content[not(contains(.,"Date"))]').all();
       for (let i = 0; i < contents.length; i++) {
-        await expect(contents[i]).toHaveScreenshot(`medical-release-content-${i}.png`);
+        await toHaveScreenshot(page, contents[i], `medical-release-content-${i}.png`);
       }
-      await expect(page.locator('.ddp-activity-question.Question--AGREEMENT')).toHaveScreenshot(`medical-release-agreement.png`);
+
+      await toHaveScreenshot(page, '.ddp-activity-question.Question--AGREEMENT', 'medical-release-agreement.png');
 
       await medicalReleasePage.fillInPhysicianInstitution();
       await medicalReleasePage.agreeToAllowUsToContactPhysicianToObtainRecords();
@@ -188,7 +190,7 @@ test.describe.serial('LMS Adult Enrollment', () => {
 
       const contents = await page.locator('.ddp-content').all();
       for (let i = 0; i < contents.length; i++) {
-        await expect(contents[i]).toHaveScreenshot(`survey-your-lms-content-${i}.png`);
+        await toHaveScreenshot(page, contents[i], `survey-your-lms-content-${i}.png`);
       }
 
       await surveyAboutLms.fillInDiagnosedDate('February', '2000');
@@ -212,7 +214,7 @@ test.describe.serial('LMS Adult Enrollment', () => {
 
       const contents = await page.locator('.ddp-content').all();
       for (let i = 0; i < contents.length; i++) {
-        await expect(contents[i]).toHaveScreenshot(`survey-about-you-content-${i}.png`);
+        await toHaveScreenshot(page, contents[i], `survey-about-you-content-${i}.png`);
       }
 
       await surveyAboutYou.sex().toRadiobutton().check('Female');
@@ -232,7 +234,9 @@ test.describe.serial('LMS Adult Enrollment', () => {
 
     // Dashboard
     await expect(page.locator('h1.dashboard-title-section__title span')).toHaveText('Participant Dashboard');
-    await expect(page.locator('.infobox_dashboard')).toHaveScreenshot('dashboard-message.png');
-    await expect(page.locator('ddp-user-activities [role="table"]')).toHaveScreenshot('dashboard-table.png');
+    await toHaveScreenshot(page, '.infobox_dashboard', 'dashboard-message.png');
+    await toHaveScreenshot(page, 'ddp-user-activities [role="table"]', 'dashboard-table.png');
+
+    expect(test.info().errors).toHaveLength(0);
   });
 })
