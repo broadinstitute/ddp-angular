@@ -31,7 +31,7 @@ export class KitRequest {
       json.receiveDate, json.deactivatedDate, json.deactivationReason, json.participant, json.easypostAddressId, json.nameLabel,
       json.kitLabel, json.express, json.labelDate, json.noReturn, json.externalOrderNumber, json.externalOrderStatus,
       json.preferredLanguage, json.receiveDateString, json.hruid, json.gender, json.collectionDate, json.firstName,
-      json.lastName, json.dateOfBirth, json.shortId, json.receivedBy, json.sequencingRestriction, json.kitTypeDisplayName
+      json.lastName, json.dateOfBirth, json.shortId, json.receivedBy, json.sequencingRestriction, json.displayName
     );
   }
 
