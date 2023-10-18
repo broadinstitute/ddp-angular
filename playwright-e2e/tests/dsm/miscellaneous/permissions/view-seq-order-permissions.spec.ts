@@ -1,11 +1,15 @@
 import { expect } from '@playwright/test';
+import { AdditionalFilter } from 'dsm/component/filters/sections/search/search-enums';
 import { MiscellaneousEnum } from 'dsm/component/navigation/enums/miscellaneousNav-enum';
+import { SamplesNavEnum } from 'dsm/component/navigation/enums/samplesNav-enum';
 import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import { StudyNavEnum } from 'dsm/component/navigation/enums/studyNav-enum';
 import { Navigation } from 'dsm/component/navigation/navigation';
+import { TabEnum } from 'dsm/component/tabs/enums/tab-enum';
 import { UserPermission } from 'dsm/pages/miscellaneous-pages/enums/userPermission-enum';
 import UserPermissionPage from 'dsm/pages/miscellaneous-pages/user-and-permissions-page';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
+import ParticipantPage from 'dsm/pages/participant-page/participant-page';
 import Select from 'dss/component/select';
 import { testLimitedPermissions as test } from 'fixtures/dsm-fixture';
 
@@ -45,21 +49,42 @@ test.describe('View Sequencing Order Permission Test', () => {
                 ]);
             })
 
-            await test.step('Verify that the current DSM user is able to view the Clinical Order Columns in Participant List', async () => {
-                const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
-                await participantListPage.assertPageTitle();
-                await participantListPage.waitForReady();
-
-                const customizeViewPanel = participantListPage.filters.customizeViewPanel;
-                await customizeViewPanel.open();
-            })
-
             await test.step('Verify that the current DSM user is able to view the Clinical Order page (via the Samples menu)', async () => {
-                //Stuff here
+              await navigation.selectFromSamples(SamplesNavEnum.CLINICAL_ORDERS);
+
+              //TODO Check Clinical Orders page
+          })
+
+            await test.step('Verify that the current DSM user is able to view the Clinical Order Columns in Participant List', async () => {
+              const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
+              await participantListPage.assertPageTitle();
+              await participantListPage.waitForReady();
+
+              const customizeViewPanel = participantListPage.filters.customizeViewPanel;
+              await customizeViewPanel.open();
+              await customizeViewPanel.isDisplayed(['Clinical Orders Columns']);
+
+              //Filter the list to display study participants with a Not-Empty Clinical Orders Columns -> Clinical Order ID column
+              await customizeViewPanel.selectColumns('Clinical Orders Columns', ['Clinical Order Id']);
+
+              const searchPanel = participantListPage.filters.searchPanel;
+              await searchPanel.open();
+              await searchPanel.text('Clinical Order Id', { additionalFilters: [AdditionalFilter.NOT_EMPTY]});
+              await searchPanel.search();
+
+              const participantListTable = participantListPage.participantListTable;
+
+              //Check that at least 1 study participant already has a clinical order id
+              const numberOfParticipants = await participantListTable.numOfParticipants();
+              expect(numberOfParticipants).toBeGreaterThan(0);
+              await participantListTable.openParticipantPageAt(0);
             })
 
             await test.step('Verify that the current DSM user is able to view the Sequencing Order tab in Participant Page', async () => {
-                //Stuff here
+              //stuff - handled above
+              const participantPage = new ParticipantPage(page);
+              await participantPage.assertPageTitle();
+              await participantPage.clickTab(TabEnum.SEQUENCING_ORDER);
             })
 
             await test.step('Verify that the current DSM user is not able to submit sequencing orders for the chosen study participant', async () => {

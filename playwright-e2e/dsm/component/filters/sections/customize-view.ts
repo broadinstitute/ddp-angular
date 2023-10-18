@@ -1,4 +1,4 @@
-import { Locator, Page } from '@playwright/test';
+import { Locator, Page, expect } from '@playwright/test';
 
 export class CustomizeView {
   private activeColumnsGroup = '';
@@ -61,6 +61,20 @@ export class CustomizeView {
     const { nth } = opts;
     const columnsGroupButton = this.columnsGroupButton({nth});
     (await this.isExpanded(columnsGroupButton)) && (await columnsGroupButton.click());
+  }
+
+  public async isDisplayed(columns: string[]): Promise<boolean> {
+    let allColumnsAreDisplayed = true;
+    for (const column of columns) {
+      const customizeViewColumn = this.page.getByRole('button', { name: `${column}`});
+      await customizeViewColumn.scrollIntoViewIfNeeded();
+      const isDisplayed = await customizeViewColumn.isVisible();
+      if (!isDisplayed) {
+        allColumnsAreDisplayed = false;
+        break;
+      }
+    }
+    return allColumnsAreDisplayed;
   }
 
   private async isChecked(locator: Locator | undefined): Promise<boolean> {

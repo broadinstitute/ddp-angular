@@ -4,4 +4,5 @@ export enum TabEnum {
   INVITAE = 'Invitae',
   SAMPLE_INFORMATION = 'Sample Information',
   SURVEY_DATA = 'Survey Data',
+  SEQUENCING_ORDER = 'Sequencing Order',
 }
