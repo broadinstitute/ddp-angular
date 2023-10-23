@@ -6,6 +6,7 @@ import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import { StudyNavEnum } from 'dsm/component/navigation/enums/studyNav-enum';
 import { Navigation } from 'dsm/component/navigation/navigation';
 import { TabEnum } from 'dsm/component/tabs/enums/tab-enum';
+import SequeuncingOrderTab from 'dsm/component/tabs/sequencing-order-tab';
 import { UserPermission } from 'dsm/pages/miscellaneous-pages/enums/userPermission-enum';
 import UserPermissionPage from 'dsm/pages/miscellaneous-pages/user-and-permissions-page';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
@@ -78,17 +79,24 @@ test.describe('View Sequencing Order Permission Test', () => {
               const numberOfParticipants = await participantListTable.numOfParticipants();
               expect(numberOfParticipants).toBeGreaterThan(0);
               await participantListTable.openParticipantPageAt(0);
+
+              const participantPage = new ParticipantPage(page);
+              await participantPage.assertPageTitle();
+              await participantPage.clickTab(TabEnum.SEQUENCING_ORDER);
+
+              const sequencingOrderTab = new SequeuncingOrderTab(page);
+              await sequencingOrderTab.waitUntilReady();
+              const normalSample = await sequencingOrderTab.getRandomNormalSample();
+              const tumorSample = await sequencingOrderTab.getRandomTumorSample();
+              const placeOrderButton = sequencingOrderTab.getPlaceOrderButton();
             })
 
             await test.step('Verify that the current DSM user is able to view the Sequencing Order tab in Participant Page', async () => {
               //stuff - handled above
-              const participantPage = new ParticipantPage(page);
-              await participantPage.assertPageTitle();
-              await participantPage.clickTab(TabEnum.SEQUENCING_ORDER);
             })
 
             await test.step('Verify that the current DSM user is not able to submit sequencing orders for the chosen study participant', async () => {
-                //Stuff here
+                //Stuff - handled above
             })
 
             await test.step('Verify that the current DSM user is able to input collection dates for samples that do not have them', async () => {
