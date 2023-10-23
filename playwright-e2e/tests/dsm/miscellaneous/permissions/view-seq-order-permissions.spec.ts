@@ -11,6 +11,7 @@ import { UserPermission } from 'dsm/pages/miscellaneous-pages/enums/userPermissi
 import UserPermissionPage from 'dsm/pages/miscellaneous-pages/user-and-permissions-page';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
 import ParticipantPage from 'dsm/pages/participant-page/participant-page';
+import ClinicalOrdersPage from 'dsm/pages/samples/clinical-orders-page';
 import Select from 'dss/component/select';
 import { testLimitedPermissions as test } from 'fixtures/dsm-fixture';
 
@@ -52,8 +53,8 @@ test.describe('View Sequencing Order Permission Test', () => {
 
             await test.step('Verify that the current DSM user is able to view the Clinical Order page (via the Samples menu)', async () => {
               await navigation.selectFromSamples(SamplesNavEnum.CLINICAL_ORDERS);
-
-              //TODO Check Clinical Orders page
+              const clinicalOrdersPage = new ClinicalOrdersPage(page);
+              await clinicalOrdersPage.waitUntilReady();
           })
 
             await test.step('Verify that the current DSM user is able to view the Clinical Order Columns in Participant List', async () => {
