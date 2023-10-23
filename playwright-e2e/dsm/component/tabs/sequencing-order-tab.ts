@@ -22,14 +22,14 @@ export default class SequeuncingOrderTab {
   public async getRandomNormalSample(): Promise<Locator> {
     const samples = await this.getAllNormalSamples();
     const amountOfSamples = samples.length;
-    expect(amountOfSamples, 'There are no available normal samples in the Sequencing Tab').toBeGreaterThanOrEqual(1);
+    expect.soft(amountOfSamples, 'There are no available normal samples in the Sequencing Tab').toBeGreaterThanOrEqual(1);
     return samples[0];
   }
 
   public async getRandomTumorSample(): Promise<Locator> {
     const samples = await this.getAllTumorSamples();
     const amountOfSamples = samples.length;
-    expect(amountOfSamples, 'There are no available tumor samples in the Sequencing Tab').toBeGreaterThanOrEqual(1);
+    expect.soft(amountOfSamples, 'There are no available tumor samples in the Sequencing Tab').toBeGreaterThanOrEqual(1);
     return samples[0];
   }
 

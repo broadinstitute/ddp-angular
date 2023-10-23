@@ -71,6 +71,7 @@ test.describe('View Sequencing Order Permission Test', () => {
 
               const searchPanel = participantListPage.filters.searchPanel;
               await searchPanel.open();
+              await searchPanel.checkboxes('Status', { checkboxValues: ['Enrolled'] });
               await searchPanel.text('Clinical Order Id', { additionalFilters: [AdditionalFilter.NOT_EMPTY]});
               await searchPanel.search();
 
