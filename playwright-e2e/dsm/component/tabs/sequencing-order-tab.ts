@@ -7,7 +7,7 @@ export default class SequeuncingOrderTab {
   /* Actions */
 
   public async waitForReady(): Promise<void> {
-    const sequencingTab = this.page.locator(`//a[contains(.,'Sequencing Order')]`);
+    const sequencingTab = this.page.locator(`//tab[@heading='Sequencing Order']`);
     await sequencingTab.scrollIntoViewIfNeeded();
     await expect(sequencingTab, 'The Sequencing Tab is not currently active').toHaveClass(/active/);
   }
