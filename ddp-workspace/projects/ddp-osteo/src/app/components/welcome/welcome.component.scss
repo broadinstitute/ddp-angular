@@ -65,6 +65,13 @@
     justify-self: center;
 }
 
+.step-button {
+  // display: flex;
+  // flex-direction: column;
+  padding: 10px;
+  font-size: 1.4rem;
+}
+
 .step__img {
     background-color: white;
     height: 170px;

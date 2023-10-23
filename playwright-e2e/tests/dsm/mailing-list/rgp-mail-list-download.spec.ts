@@ -16,6 +16,7 @@ import { assertTableHeaders } from 'utils/assertion-helper';
 import { getDate, getMailingListDownloadedFileDate, mailingListCreatedDate } from 'utils/date-utils';
 import { generateEmailAlias } from 'utils/faker-utils';
 import { MailListCSV, readMailListCSVFile } from 'utils/file-utils';
+import { logInfo } from 'utils/log-utils';
 
 
 const RGP_USER_EMAIL = process.env.RGP_USER_EMAIL as string;
@@ -65,7 +66,7 @@ test.describe.serial('When an interested participant does NOT meet participation
       navigation.selectFromMiscellaneous(MiscellaneousEnum.MAILING_LIST)
     ]);
     const respJson: MailListCSV[] = JSON.parse(await mailListResponse.text());
-    expect(respJson.length).toBeGreaterThan(1); // response should contains at least one emails
+    expect.soft(respJson.length).toBeGreaterThan(1); // response should contains at least one emails
 
     const mailingListPage = new MailingListPage(page, APP.RGP);
     await mailingListPage.waitForReady();
@@ -74,7 +75,7 @@ test.describe.serial('When an interested participant does NOT meet participation
     const download = await mailingListPage.download();
     const actualFileName = download.suggestedFilename();
     const expectedFileName = `MailingList ${APP.RGP} ${getMailingListDownloadedFileDate()}.csv`;
-    expect(actualFileName).toBe(expectedFileName);
+    expect.soft(actualFileName).toBe(expectedFileName);
 
     const file = await download.path();
     const rows = await readMailListCSVFile(file)
@@ -87,13 +88,15 @@ test.describe.serial('When an interested participant does NOT meet participation
     lodash.forEach(respJson, item => {
       const dateInJson = getDate(new Date(parseInt(item.dateCreated) * 1000)); // Transform to dd/mm/yyyy
       const emailInJson = item.email;
+      logInfo(`JSON: ${emailInJson}: ${item.dateCreated}`);
       const finding = lodash.filter(rows, row => {
         if (row.email === emailInJson) {
+          logInfo(`Row: ${row.email}: ${row.dateCreated}`);
           return row.dateCreated === dateInJson
         }
         return false;
       });
-      expect(finding.length,
+      expect.soft(finding.length,
         `Matching record for email: "${emailInJson}" and dateCreated: "${dateInJson}" in downloaded csv file.`)
       .toBe(1);
     });
@@ -109,16 +112,18 @@ test.describe.serial('When an interested participant does NOT meet participation
     // Verify new RGP participant email is found inside table
     await table.sort(COLUMN.DATE, SortOrder.DESC); // Sorting to get newest record to display first
     let tCell = await table.findCell(COLUMN.EMAIL, newEmail, COLUMN.EMAIL);
-    expect(tCell, `Matching email ${newEmail} in Mailing List table`).toBeTruthy();
+    expect.soft(tCell, `Matching email ${newEmail} in Mailing List table`).toBeTruthy();
 
     // Verify date signed up is found inside table
     tCell = await table.findCell(COLUMN.EMAIL, newEmail, COLUMN.DATE, { exactMatch: false });
-    expect(tCell, `Find column ${COLUMN.DATE} in Mailing List table`).toBeTruthy();
+    expect.soft(tCell, `Find column ${COLUMN.DATE} in Mailing List table`).toBeTruthy();
 
     // Retrieve new RGP user Date Signed Up from API response body, compare with what's displayed in table
     const user: MailListCSV[] = lodash.filter(respJson, row => row.email === newEmail);
     const dateInJson = mailingListCreatedDate(new Date(parseInt(user[0].dateCreated) * 1000));
     const dateInTCell = mailingListCreatedDate(new Date(await tCell!.innerText()));
-    expect(dateInTCell, `Matching date ${dateInTCell}`).toEqual(dateInJson);
+    expect.soft(dateInTCell, `Matching date ${dateInTCell}`).toEqual(dateInJson);
+
+    expect(test.info().errors).toHaveLength(0);
   });
 });

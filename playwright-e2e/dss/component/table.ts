@@ -53,7 +53,7 @@ export default class Table {
   }
 
   tableLocator(): Locator {
-    return this.page.locator(this.tableCss).nth(this.nth);
+    return this.rootLocator().locator(this.tableCss).nth(this.nth);
   }
 
   rowLocator(): Locator {
@@ -168,10 +168,10 @@ export default class Table {
     return this.headerLocator().allInnerTexts();
   }
 
-  async getHeaderIndex(name: string, opts: { exactMatch?: boolean } = {}): Promise<number> {
+  async getHeaderIndex(column: string, opts: { exactMatch?: boolean } = {}): Promise<number> {
     const { exactMatch = true } = opts;
     const allColumnNames = await this.getHeaderNames();
-    return allColumnNames.findIndex((text: string) => exactMatch ? text === name : text.includes(name));
+    return allColumnNames.findIndex((text: string) => exactMatch ? text.trim() === column : text.trim().includes(column));
   }
 
   getHeaderByName(name: RegExp | string): Locator {
@@ -248,6 +248,11 @@ export default class Table {
   async getTableRowsTotal(searchString: RegExp | string): Promise<number | null> {
     const footer = await this.footerLocator().locator('td', { hasText: searchString }).innerText();
     return this.parseForNumber(footer);
+  }
+
+  async changeRowCount(rowCount = 10): Promise<void> {
+    await this.rowCountButton(rowCount).click();
+    await waitForNoSpinner(this.page);
   }
 
   /**
@@ -348,6 +353,10 @@ export default class Table {
       values.push((await cell.innerText()).trim());
     }
     return values;
+  }
+
+  public rowCountButton(rowCount = 10): Locator {
+    return this.footerLocator().locator(`xpath=//button[contains(., "${rowCount}")]`);
   }
 
   private parseForNumber(text: string): number | null {

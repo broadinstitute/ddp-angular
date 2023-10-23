@@ -67,9 +67,8 @@ export class LoggingService {
             body,
             { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) }).pipe(
             catchError((error: any) => {
-                this.stackdriverErrorReporterService.handleError(`${this.LOG_SOURCE}: HTTP POST: ${url}`);
-                this.stackdriverErrorReporterService.handleError(error);
-                console.error.apply(window.console, error);
+                this.logWarning(this.LOG_SOURCE, `logToCloud encountered error: ${error}`);
+                this.stackdriverErrorReporterService.handleError(JSON.stringify(body));
                 return of(null);
             }),
             map(() => void 0)

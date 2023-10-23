@@ -3,14 +3,18 @@ import { Page } from '@playwright/test';
 import * as user from 'data/fake-user.json';
 
 export const generateAlphaNumeric = (length?: number): string => {
-  return faker.random.alphaNumeric(length ? length : 6);
+  return faker.string.alphanumeric(length ? length : 6);
 };
 
 export const generateUserName = (namePrefix: string): string => {
-  return `${namePrefix}-${faker.name.lastName()}${faker.random.word()}`;
+  return `${namePrefix}-${faker.person.lastName()}${faker.lorem.word()}`;
 };
 
-export const generateRandomPhoneNum = (): string => Math.random().toString().slice(2, 11);
+// Generate US phone number (9 digits) with dashes
+export const generateRandomPhoneNum = (): string => {
+  const rand = Math.random().toString().slice(2, 12);
+  return rand.replace(/(\d{3})(\d{3})(\d{4})/, '$1-$2-$3');
+}
 
 export const generateRandomNum = (min = 1, max = 99): number => Math.floor(Math.random() * (max - min) + min);
 
@@ -55,7 +59,6 @@ export const saveParticipantGuid = (guid: string) => {
  */
 export const simplifyShortID = (shortId: string, studyName: string): string => {
   const shortIdParts = shortId.split(`${studyName}_`); // Use 'RGP_' to determine where to split
-  const rgpPrefix = shortIdParts[0]; //RGP_ prefix
   const simplifiedShortID = shortIdParts[1]; //The subject id to be used as short id
   return simplifiedShortID;
 };

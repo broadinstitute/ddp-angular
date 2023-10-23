@@ -5,7 +5,6 @@ COMMAND=$1
 STUDY_KEY=$2
 BRANCH=$3
 TARGET_ENV=$4
-E2E_TEST_PARALLELISM=${5:-2}
 
 CI_TOKEN=$(xargs <  ~/.circleci-token)
 if [[ -z $CI_TOKEN ]]; then
@@ -22,15 +21,17 @@ if [[ -z $COMMAND || -z $STUDY_KEY || -z $BRANCH || ($COMMAND == "deploy" && -z 
   echo "    deploy"
   echo "        Deploy saved build of corresponding to given branch to specified TARGET_ENV"
   echo "    run-tests"
-  echo "        Run tests for given study and given branch"
+  echo "        Run unit tests for given study and given branch"
   echo "    run-e2e-tests"
-  echo "        Run Playwright E2E tests on develop branch against specified TARGET_ENV (dev or test)"
-  echo "        STUDY_KEY: Run this study E2E test suite"
-  echo "        BRANCH: develop"
-  echo "        TARGET_ENV: dev or test"
-  echo "        E2E_TEST_PARALLELISM: Set CircleCi parallelism. Default value is 1"
-  echo "        Example 1 (run all tests against Dev env): ./run_ci.sh run-e2e-tests UNKNOWN develop dev 2"
-  echo "        Example 2 (run Singular test suite against Dev env): ./run_ci.sh run-e2e-tests singular develop dev"
+  echo "        Run E2E tests for given branch on given env (dev or test). Use this to verify new or modified tests on CircleCI."
+  echo ""
+  echo "        TEST_SUITE: [TEST_SUITE_NAME]"
+  echo "        BRANCH:     [PR_BRANCH_NAME]"
+  echo "        TARGET_ENV: [ENV_NAME]"
+  echo ""
+  echo "        Example (run all tests on dev env): ./run_ci.sh run-e2e-tests UNKNOWN pr_branch_name dev"
+  echo "        Example (run dsm tests on dev env): ./run_ci.sh run-e2e-tests dsm pr_branch_name dev"
+  echo "        Example (run dss tests on dev env): ./run_ci.sh run-e2e-tests dss pr_branch_name dev"
   echo ""
   exit 1
 fi
@@ -40,12 +41,12 @@ if [[ -n $TARGET_ENV ]] ; then
 fi
 
 echo "Will try to initiate build from branch: $BRANCH"
+
 curl -u "${CI_TOKEN}:" -X POST --header "Content-Type: application/json" -d "{
                                   \"branch\": \"$BRANCH\",
                                   \"parameters\": {
                                       $DEPLOY_ENV_PROPERTY
                                       \"study_key\": \"$STUDY_KEY\",
-                                      \"api_call\": \"$COMMAND\",
-                                      \"e2e-test-parallelism\": $E2E_TEST_PARALLELISM
+                                      \"api_call\": \"$COMMAND\"
                                   }
 }" "https://circleci.com/api/v2/project/${CI_PROJECT_SLUG}/pipeline"

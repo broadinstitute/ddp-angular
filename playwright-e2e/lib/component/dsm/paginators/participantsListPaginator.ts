@@ -24,10 +24,7 @@ export class ParticipantsListPaginator {
     const nextLocator = this.page.locator(this.nextXPath);
     const isvisible = await nextLocator.isVisible();
     const isDisabled = isvisible ? (await nextLocator.getAttribute('class'))?.includes('disabled') : true;
-    if (isDisabled) {
-      return false;
-    }
-    return true;
+    return !isDisabled;
   }
 
   public async previous(): Promise<void> {

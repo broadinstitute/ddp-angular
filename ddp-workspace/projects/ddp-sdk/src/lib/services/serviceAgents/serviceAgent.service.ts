@@ -45,7 +45,7 @@ export class ServiceAgent<TEntity> {
                                     return throwError(() => error);
                                 }
                             }
-                            this.logger.logError(this.LOG_SOURCE, `HTTP GET: ${url}. Error:`, error);
+                            this.logger.logError(this.LOG_SOURCE, `HTTP GET: ${url}. ERROR:`, error);
                             return of(null);
                         }),
                         map(data => data && data['body']),
@@ -69,7 +69,8 @@ export class ServiceAgent<TEntity> {
         path: string,
         body: any,
         options: any = {},
-        throwErrorObject: boolean = false): Observable<any> {
+        throwErrorObject: boolean = false,
+        logErrorToCloud: boolean = true): Observable<any> {
         const url = this.getBackendUrl() + path;
         return this.getHeaders(options).pipe(
           mergeMap(x => {
@@ -87,7 +88,9 @@ export class ServiceAgent<TEntity> {
                         withCredentials: x.withCredentials
                     }).pipe(
                         catchError((error: any) => {
-                            this.logger.logError(this.LOG_SOURCE, `HTTP POST: ${url}. Error:`, error);
+                            if (logErrorToCloud) {
+                                this.logger.logError(this.LOG_SOURCE, `HTTP POST: ${url}. ERROR:`, error);
+                            }
                             if (throwErrorObject) {
                                 return throwError(() => error);
                             } else {
@@ -126,7 +129,7 @@ export class ServiceAgent<TEntity> {
                         withCredentials: x.withCredentials
                     }).pipe(
                         catchError((error: any) => {
-                            this.logger.logError(this.LOG_SOURCE, `HTTP PATCH: ${url}. Error:`, error);
+                            this.logger.logError(this.LOG_SOURCE, `HTTP PATCH: ${url}. ERROR:`, error);
                             if (throwErrorObject) {
                                 return throwError(() => error);
                             } else {
@@ -161,7 +164,7 @@ export class ServiceAgent<TEntity> {
                         withCredentials: x.withCredentials
                     }).pipe(
                         catchError((error: any) => {
-                            this.logger.logError(this.LOG_SOURCE, `HTTP PUT: ${url}. Error:`,  error);
+                            this.logger.logError(this.LOG_SOURCE, `HTTP PUT: ${url}. ERROR:`,  error);
                             if (throwErrorObject) {
                                 return throwError(() => error);
                             } else {
@@ -195,7 +198,7 @@ export class ServiceAgent<TEntity> {
                         withCredentials: x.withCredentials
                     }).pipe(
                         catchError((error: any) => {
-                            this.logger.logError(this.LOG_SOURCE, `HTTP DELETE: ${url}. Error:`, error);
+                            this.logger.logError(this.LOG_SOURCE, `HTTP DELETE: ${url}. ERROR:`, error);
                             if (throwErrorObject) {
                                 return throwError(() => error);
                             } else {

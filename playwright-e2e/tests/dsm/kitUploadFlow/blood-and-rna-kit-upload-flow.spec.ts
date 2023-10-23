@@ -23,8 +23,8 @@ import { simplifyShortID } from 'utils/faker-utils';
 import { saveParticipantGuid } from 'utils/faker-utils';
 import { ParticipantListTable } from 'dsm/component/tables/participant-list-table';
 
-test.describe('Blood & RNA Kit Upload', () => {
-test.skip('Verify that a blood & rna kit can be uploaded @dsm @rgp @functional @upload', async ({ page, request}, testInfo) => {
+test.describe.skip('Blood & RNA Kit Upload', () => {
+  test('Verify that a blood & rna kit can be uploaded @dsm @rgp @functional @upload', async ({ page, request}, testInfo) => {
     const testResultDirectory = testInfo.outputDir;
 
     const study = StudyEnum.RGP;
@@ -53,8 +53,8 @@ test.skip('Verify that a blood & rna kit can be uploaded @dsm @rgp @functional @
     const proband = new FamilyMemberTab(page, FamilyMember.PROBAND);
     proband.relationshipID = user.patient.relationshipID;
 
-    const probandTab = proband.getFamilyMemberTab();
-    await expect(probandTab).toBeVisible();
+    const probandTab = await proband.getFamilyMemberTab();
+    await expect(probandTab, 'RGP Proband tab is not visible').toBeVisible();
     await probandTab.click();
     await expect(probandTab).toHaveClass('nav-link active');//Make sure the tab is in view and selected
 
@@ -87,9 +87,8 @@ test.skip('Verify that a blood & rna kit can be uploaded @dsm @rgp @functional @
 
     //Upload a Blood & RNA kit
     const kitUploadPage = await navigation.selectFromSamples<KitUploadPage>(SamplesNavEnum.KIT_UPLOAD);
-    await kitUploadPage.waitForReady();
+    await kitUploadPage.waitForReady(expectedKitTypes);
     await kitUploadPage.assertPageTitle();
-    await kitUploadPage.assertDisplayedKitTypes(expectedKitTypes);
     await kitUploadPage.selectKitType(kitType);
     await kitUploadPage.assertBrowseBtn();
     await kitUploadPage.assertUploadKitsBtn();
@@ -156,5 +155,5 @@ test.skip('Verify that a blood & rna kit can be uploaded @dsm @rgp @functional @
     //Check for the received RNA kit
     await kitsReceivedPage.search(KitsColumnsEnum.MF_CODE, rnaLabel);
     await kitsReceivedPage.assertDisplayedRowsCount(1);
-    });
+  });
 });

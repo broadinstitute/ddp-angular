@@ -20,8 +20,8 @@ export async function waitForNoSpinner(page: Page, opts: { timeout?: number } = 
   const appError = page.locator('app-error-snackbar .snackbar-content').first();
   await page.waitForLoadState().catch((err) => logError(err));
   const pageStatus = await Promise.race([
-    spinner.waitFor({ state: 'hidden' }).then(() => 'Ready'),
-    appError.waitFor({ state: 'visible' }).then(() => 'Error'),
+    spinner.waitFor({ state: 'hidden', timeout }).then(() => 'Ready'),
+    appError.waitFor({ state: 'visible', timeout }).then(() => 'Error'),
     new Promise((_, reject) => setTimeout(() => reject(Error('Time out waiting for loading spinner to stop or a app error.')), timeout)),
   ]);
   if (pageStatus === 'Ready') {
@@ -44,10 +44,9 @@ export async function waitForResponse(page: Page, { uri, status = 200, timeout }
     return response;
   }
   const url = response.url();
-  const method = response.request().method().toUpperCase;
-  const unexpectedStatus = response.status();
+  const method = response.request().method().toUpperCase();
   const body = await response.text();
-  throw new Error(`Waiting for URI: ${uri} with status: ${status}.\n  ${method} ${url}\n  Response Status: ${unexpectedStatus}\n  Text: ${body}`);
+  throw new Error(`Waiting for URI: ${uri} with status: ${status}.\n  ${method} ${url}\n  Status: ${respStatus}\n  Text: ${body}`);
 }
 
 export async function waitUntilRemoved(locator: Locator): Promise<void> {
@@ -205,17 +204,25 @@ export function assertParticipantListDownloadFileName(download: Download, study:
   expect(actualFileName.toLowerCase()).toBe(expectedFileName.toLowerCase());
 }
 
-export function studyShortName(study: StudyEnum): {shortName: string | null; realm: string | null} {
+export function studyShortName(study: StudyEnum): { shortName: string | null; realm: string | null; collaboratorPrefix: string | null} {
   let shortName = null;
   let realm = null;
+  let collaboratorPrefix = null;
   switch (study) {
     case StudyEnum.LMS:
       shortName = 'cmi-lms';
       realm = 'cmi-lms';
+      collaboratorPrefix = 'PECGSProject';
+      break;
+    case StudyEnum.OSTEO:
+      shortName = 'cmi-osteo';
+      realm = 'Osteo';
+      collaboratorPrefix = 'OSProject';
       break;
     case StudyEnum.OSTEO2:
       shortName = 'cmi-osteo';
       realm = 'osteo2';
+      collaboratorPrefix = 'OSPECGS';
       break;
     case StudyEnum.AT:
       shortName = 'AT';
@@ -224,6 +231,7 @@ export function studyShortName(study: StudyEnum): {shortName: string | null; rea
     case StudyEnum.PANCAN:
       shortName = 'cmi-pancan';
       realm = 'PanCan';
+      collaboratorPrefix = 'Project';
       break;
     case StudyEnum.RAREX:
       shortName = 'rarex';
@@ -232,19 +240,32 @@ export function studyShortName(study: StudyEnum): {shortName: string | null; rea
     case StudyEnum.MBC:
       shortName = 'cmi-mbc';
       realm = 'Pepper-MBC';
+      collaboratorPrefix = 'MBCProject';
       break;
     case StudyEnum.BRAIN:
       shortName = 'cmi-brain';
       realm = 'Brain';
+      collaboratorPrefix = 'BrainProject';
       break;
     case StudyEnum.ANGIO:
       shortName = 'angio';
       realm = 'Angio';
+      collaboratorPrefix = 'Project Pepper';
+      break;
+    case StudyEnum.PROSTATE:
+      shortName = 'cmi-mpc';
+      realm = 'Prostate';
+      collaboratorPrefix = 'PCProject';
+      break;
+    case StudyEnum.ESC:
+      shortName = 'cmi-esc';
+      realm = 'cmi-esc';
+      collaboratorPrefix = 'GECProject';
       break;
     default:
-      break;
+      throw new Error(`Study ${study} is undefined.`);
   }
-  return {shortName, realm};
+  return { shortName, realm, collaboratorPrefix };
 }
 
 export function shuffle(array: any[]): any[] {

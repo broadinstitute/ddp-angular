@@ -278,8 +278,8 @@ export class Auth0AdapterService implements OnDestroy {
 
     public logout(returnToUrl: string = ''): void {
         const baseUrl = this.configuration.baseUrl;
-        const userGuid = this.session.session.userGuid;
-        this.log.logToCloud(`${this.LOG_SOURCE} logout for user ${userGuid}`).pipe(take(1)).subscribe(() => {
+        const userGuid = this.session.session?.userGuid;
+        this.log.logToCloud(`${this.LOG_SOURCE} logout user: ${userGuid}`).pipe(take(1)).subscribe(() => {
             // Remove tokens and expiry time from localStorage
             this.session.clear();
             this.log.logEvent(this.LOG_SOURCE, 'logout');

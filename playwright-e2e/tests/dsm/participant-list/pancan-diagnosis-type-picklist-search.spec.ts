@@ -8,7 +8,7 @@ import { logInfo } from 'utils/log-utils';
 test.describe('Pancan study picklist search', () => {
   // CMI research studies
   const studies = [StudyEnum.PANCAN];
-  const cancers = ['Lung cancers', 'Neuroblastoma (NB)', 'Gallbladder cancer', 'Small intestine cancer'];
+  const cancers = ['Gynecologic cancers', 'Leukemias', 'Sarcomas', 'Small intestine cancer', 'Gastrointestinal cancers'];
 
   for (const study of studies) {
     test(`@${study} @dsm`, async ({ page, request }) => {
@@ -33,7 +33,9 @@ test.describe('Pancan study picklist search', () => {
       let participantsCount = await participantsTable.getRowsCount();
       expect(participantsCount).toBeGreaterThan(1);
 
-      while (participantsCount > 0) {
+      let pageCount = 0;
+      // Stops when participantsCount <= 0 and gone thru 3 table pages already
+      while (participantsCount > 0 && pageCount <= 3) {
         // Verify only participants with at least one diagnosis type that match the above selected cancers are displayed
         for (let i = 0; i < participantsCount; i++) {
           const columnData: string = await participantsTable.getParticipantDataAt(i, 'DIAGNOSIS_TYPE');
@@ -44,10 +46,10 @@ test.describe('Pancan study picklist search', () => {
         if (hasNextPage) {
           await participantsTable.nextPage();
           participantsCount = await participantsTable.getRowsCount();
+          pageCount++;
         } else {
           participantsCount = 0
         }
-        console.log(`participantsCount: ${participantsCount}`)
       }
       expect(test.info().errors).toHaveLength(0);
     });

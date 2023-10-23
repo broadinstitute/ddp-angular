@@ -8,7 +8,7 @@ export default class Modal {
   private readonly rootSelector: Locator;
 
   constructor(private readonly page: Page) {
-    this.rootSelector = this.page.locator('.modal-dialog');
+    this.rootSelector = this.page.locator('.modal-dialog').locator('visible=true');
   }
 
   public toLocator(): Locator {
@@ -23,8 +23,9 @@ export default class Modal {
     return this.toLocator().locator('.modal-footer');
   }
 
-  public bodyLocator(): Locator {
-    return this.toLocator().locator('.modal-body');
+  public bodyLocator(opts: { nth?: number } = {}): Locator {
+    const { nth = 0 } = opts;
+    return this.toLocator().locator('.modal-body').nth(nth);
   }
 
   async getHeader(): Promise<string> {
