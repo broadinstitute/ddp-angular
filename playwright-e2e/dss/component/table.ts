@@ -251,7 +251,7 @@ export default class Table {
   }
 
   async changeRowCount(rowCount = 10): Promise<void> {
-    await this.rowCountButton().click();
+    await this.rowCountButton(rowCount).click();
     await waitForNoSpinner(this.page);
   }
 
