@@ -1,5 +1,4 @@
 import { Locator, Page, expect } from '@playwright/test';
-import { SequencingOrderEnum } from './enums/sequencingOrder-enum';
 
 export default class SequeuncingOrderTab {
   constructor(private readonly page: Page) {
@@ -7,10 +6,10 @@ export default class SequeuncingOrderTab {
 
   /* Actions */
 
-  public async waitUntilReady(): Promise<void> {
+  public async waitForReady(): Promise<void> {
     const sequencingTab = this.page.locator(`//a[contains(.,'Sequencing Order')]`);
-    await expect(sequencingTab).toHaveAttribute('aria-selected', 'true');
-    //await expect(sequencingTab, 'The Sequencing Tab is not currently active').toHaveClass(/active/);
+    await sequencingTab.scrollIntoViewIfNeeded();
+    await expect(sequencingTab, 'The Sequencing Tab is not currently active').toHaveClass(/active/);
   }
 
   public async placeOrder(): Promise<void> {

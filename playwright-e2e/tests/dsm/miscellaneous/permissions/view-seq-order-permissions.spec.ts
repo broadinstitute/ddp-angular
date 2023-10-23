@@ -54,7 +54,7 @@ test.describe('View Sequencing Order Permission Test', () => {
             await test.step('Verify that the current DSM user is able to view the Clinical Order page (via the Samples menu)', async () => {
               await navigation.selectFromSamples(SamplesNavEnum.CLINICAL_ORDERS);
               const clinicalOrdersPage = new ClinicalOrdersPage(page);
-              await clinicalOrdersPage.waitUntilReady();
+              await clinicalOrdersPage.waitForReady();
           })
 
             await test.step('Verify that the current DSM user is able to view the Clinical Order Columns in Participant List', async () => {
@@ -86,7 +86,7 @@ test.describe('View Sequencing Order Permission Test', () => {
               await participantPage.clickTab(TabEnum.SEQUENCING_ORDER);
 
               const sequencingOrderTab = new SequeuncingOrderTab(page);
-              await sequencingOrderTab.waitUntilReady();
+              await sequencingOrderTab.waitForReady();
               const normalSample = await sequencingOrderTab.getRandomNormalSample();
               const tumorSample = await sequencingOrderTab.getRandomTumorSample();
               const placeOrderButton = sequencingOrderTab.getPlaceOrderButton();

@@ -5,7 +5,7 @@ export default class ClinicalOrdersPage {
 
   constructor(private readonly page: Page) {}
 
-  public async waitUntilReady(): Promise<void> {
+  public async waitForReady(): Promise<void> {
     const downloadListButton = this.getDownloadListButton();
     const reloadListButton = this.getReloadListButton();
     const clinicalOrdersTable = await this.getClinicalOrdersTable();
