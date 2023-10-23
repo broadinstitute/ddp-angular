@@ -18,6 +18,19 @@ export default class SequeuncingOrderTab {
     await placeOrderButton.click();
   }
 
+  public async assertNoSamplesCanBeSelected(): Promise<void> {
+    const allAvailableSamples = await this.getAllPossibleSamples();
+    for (const sample of allAvailableSamples) {
+      const sampleCheckbox = this.getCheckboxOfSample(sample);
+      await expect(sampleCheckbox).not.toBeVisible();
+    }
+  }
+
+  public async assertPlaceOrderButtonNotVisible(): Promise<void> {
+    const placeOrderButton = this.getPlaceOrderButton();
+    await expect(placeOrderButton).not.toBeVisible();
+  }
+
   /* Locators */
   public async getAllPossibleSamples(): Promise<Locator[]> {
     return this.page.locator(`//app-sequencing-order//tr[contains(.,'Normal') or contains(.,'Tumor')]`).all();
