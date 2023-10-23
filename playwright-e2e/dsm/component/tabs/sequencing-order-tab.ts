@@ -8,8 +8,9 @@ export default class SequeuncingOrderTab {
   /* Actions */
 
   public async waitUntilReady(): Promise<void> {
-    const sequencingTab = this.page.locator(`//tab[@heading='Sequencing Order']`);
-    await expect(sequencingTab, 'The Sequencing Tab is not currently active').toHaveClass('tab-pane ng-star-inserted active');
+    const sequencingTab = this.page.locator(`//a[contains(.,'Sequencing Order')]`);
+    await expect(sequencingTab).toHaveAttribute('aria-selected', 'true');
+    //await expect(sequencingTab, 'The Sequencing Tab is not currently active').toHaveClass(/active/);
   }
 
   public async placeOrder(): Promise<void> {
