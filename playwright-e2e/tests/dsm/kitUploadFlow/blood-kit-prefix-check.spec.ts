@@ -220,6 +220,7 @@ test.describe.serial('Blood Kit Upload', () => {
     // Enter the same pair again to trigger the scan errror
     await expect(page.locator('//h3[contains(@class, "Color--warn")]')).toHaveText('Error - Failed to save all changes');
     await expect(page.locator('//p[contains(@class, "Color--warn")]')).toHaveText(
-      `Error occurred sending this scan pair!\nKit Label "${kitLabel}" does not exist. For more information please contact your DSM developer`);
+      `Error occurred sending this scan pair!  Error occured for Kit Label "${kitLabel}" ` +
+      'For more information please contact your DSM developer');
   });
 })
