@@ -1,4 +1,4 @@
-import { expect, test } from '@playwright/test';
+import {expect, test} from '@playwright/test';
 import {WelcomePage} from 'dsm/pages/welcome-page';
 import HomePage from 'dsm/pages/home-page';
 import {Navigation} from 'dsm/component/navigation/navigation';
@@ -24,9 +24,10 @@ import {KitsColumnsEnum} from 'dsm/pages/kitsInfo-pages/enums/kitsColumns-enum';
 import KitsSentPage from 'dsm/pages/kitsInfo-pages/kitsSentPage';
 import KitsReceivedPage from 'dsm/pages/kitsInfo-pages/kitsReceived-page/kitsReceivedPage';
 import TrackingScanPage from 'dsm/pages/scanner-pages/trackingScan-page';
+import {getDate} from 'utils/date-utils';
 
 // don't run in parallel
-test.describe('Blood Kits upload flow', () => {
+test.describe.serial('Blood Kits upload flow', () => {
   let welcomePage: WelcomePage;
   let homePage: HomePage;
   let navigation: Navigation;
@@ -155,6 +156,9 @@ test.describe('Blood Kits upload flow', () => {
       await kitsSentPage.assertTableHeader();
       await kitsSentPage.search(KitsColumnsEnum.MF_CODE, kitLabel);
       await kitsSentPage.assertDisplayedRowsCount(1);
+
+      const sentDate = await kitsSentPage.getData(KitsColumnsEnum.SENT);
+      expect(getDate(new Date(sentDate))).toStrictEqual(getDate());
 
       // kits received page
       const kitsReceivedPage = await navigation.selectFromSamples<KitsReceivedPage>(SamplesNavEnum.RECEIVED);

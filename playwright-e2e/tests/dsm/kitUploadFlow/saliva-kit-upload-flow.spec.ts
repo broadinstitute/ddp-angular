@@ -24,9 +24,10 @@ import {KitsColumnsEnum} from 'dsm/pages/kitsInfo-pages/enums/kitsColumns-enum';
 import KitsSentPage from 'dsm/pages/kitsInfo-pages/kitsSentPage';
 import KitsReceivedPage from 'dsm/pages/kitsInfo-pages/kitsReceived-page/kitsReceivedPage';
 import {SampleTypesEnum} from 'dsm/pages/kitsInfo-pages/enums/sampleTypes-enum';
+import {getDate} from 'utils/date-utils';
 
 // don't run in parallel
-test.describe('Saliva Kits upload flow', () => {
+test.describe.serial('Saliva Kits upload flow', () => {
   let welcomePage: WelcomePage;
   let homePage: HomePage;
   let navigation: Navigation;
@@ -148,6 +149,8 @@ test.describe('Saliva Kits upload flow', () => {
       await kitsSentPage.assertDisplayedRowsCount(1);
       study === StudyEnum.OSTEO2 && await sampleTypeCheck(kitUploadInfo, kitsSentPage);
 
+      const sentDate = await kitsSentPage.getData(KitsColumnsEnum.SENT);
+      expect(getDate(new Date(sentDate))).toStrictEqual(getDate());
 
       // kits received page
       const kitsReceivedPage = await navigation.selectFromSamples<KitsReceivedPage>(SamplesNavEnum.RECEIVED);
@@ -160,6 +163,7 @@ test.describe('Saliva Kits upload flow', () => {
       await kitsReceivedPage.assertTableHeader();
       await kitsReceivedPage.search(KitsColumnsEnum.MF_CODE, kitLabel);
       await kitsReceivedPage.assertDisplayedRowsCount(1);
+
       const receivedDate = await kitsReceivedPage.getData(KitsColumnsEnum.RECEIVED);
       study === StudyEnum.OSTEO2 && await sampleTypeCheck(kitUploadInfo, kitsReceivedPage);
 
@@ -175,10 +179,9 @@ test.describe('Saliva Kits upload flow', () => {
       await participantPage.assertPageTitle();
       const sampleInformationTab = await participantPage.clickTab<SampleInformationTab>(TabEnum.SAMPLE_INFORMATION);
       await sampleInformationTab.assertKitType(kitLabel, kitType)
-      await sampleInformationTab
-        .assertValue(kitLabel, {info: SampleInfoEnum.STATUS, value: SampleStatusEnum.RECEIVED})
-      await sampleInformationTab
-        .assertValue(kitLabel, {info: SampleInfoEnum.RECEIVED, value: receivedDate})
+      await sampleInformationTab.assertValue(kitLabel, {info: SampleInfoEnum.STATUS, value: SampleStatusEnum.RECEIVED});
+      await sampleInformationTab.assertValue(kitLabel, {info: SampleInfoEnum.RECEIVED, value: receivedDate});
+      await sampleInformationTab.assertValue(kitLabel, {info: SampleInfoEnum.SENT, value: sentDate});
     })
   }
 })
