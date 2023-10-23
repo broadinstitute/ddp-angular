@@ -63,7 +63,7 @@ test.describe.serial('When an interested participant does NOT meet participation
     const navigation = new Navigation(page, request);
     const [mailListResponse] = await Promise.all([
       page.waitForResponse(response => response.url().includes('/ui/mailingList/RGP') && response.status() === 200),
-      navigation.selectFromMiscellaneous(MiscellaneousEnum.MAILING_LIST)
+      navigation.selectMiscellaneous(MiscellaneousEnum.MAILING_LIST)
     ]);
     const respJson: MailListCSV[] = JSON.parse(await mailListResponse.text());
     expect.soft(respJson.length).toBeGreaterThan(1); // response should contains at least one emails

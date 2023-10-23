@@ -45,7 +45,7 @@ test.describe.serial('Join Pancan Mailing List', () => {
     const navigation = new Navigation(page, request);
     const [mailListResponse] = await Promise.all([
       page.waitForResponse(response => response.url().includes('/ui/mailingList/PanCan') && response.status() === 200),
-      navigation.selectFromMiscellaneous(MiscellaneousEnum.MAILING_LIST)
+      navigation.selectMiscellaneous(MiscellaneousEnum.MAILING_LIST)
     ]);
     const respJson: MailListCSV[] = JSON.parse(await mailListResponse.text());
     expect(respJson.length).toBeGreaterThan(1); // response should contains at least one emails

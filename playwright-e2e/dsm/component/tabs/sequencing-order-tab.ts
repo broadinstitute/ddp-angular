@@ -38,16 +38,22 @@ export default class SequeuncingOrderTab {
     const allAvailableSamples = await this.getAllPossibleSamples();
     for (const sample of allAvailableSamples) {
       const collectionDateSection = sample.locator(`//td[${collectionDateIndex}]`); //Get Collection Date section
-      const collectionDateField = collectionDateSection.locator(`//input[@data-placeholder='mm/dd/yyyy']`); //Get date field
-      if (await collectionDateField.isEditable()) {
-        const today = getDate();
-        await collectionDateField.fill(today);
+      if (await this.isInteractiveDateField(collectionDateSection)) {
+        const collectionDateField = collectionDateSection.locator(`//input[@data-placeholder='mm/dd/yyyy']`); //Get date field
+        if (await collectionDateField.isEditable()) {
+          const today = getDate();
+          await collectionDateField.fill(today);
+        }
       }
     }
   }
 
-  private isInteractiveDateField(dateField: Locator): boolean {
-    const field = dateField.locator(`//input[@data-placeholder='mm/dd/yyyy']`);
+  private async isInteractiveDateField(dateField: Locator): Promise<boolean> {
+    const fieldInput = await dateField.innerText();
+    if (fieldInput === `mm/dd/yyyy\n  Today`) {
+      return true;
+    }
+    return false;
   }
 
   /* Locators */

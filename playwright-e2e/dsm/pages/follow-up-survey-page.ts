@@ -16,7 +16,7 @@ export default class FollowUpSurveyPage {
     await welcomePage.selectStudy(study);
 
     const navigation = new Navigation(page, request);
-    await navigation.selectFromMiscellaneous(MiscellaneousEnum.FOLLOW_UP_SURVEY);
+    await navigation.selectMiscellaneous(MiscellaneousEnum.FOLLOW_UP_SURVEY);
     const followUpPage = new FollowUpSurveyPage(page);
     await followUpPage.waitForReady();
     return followUpPage;

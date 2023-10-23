@@ -3,8 +3,9 @@ export enum MiscellaneousEnum {
   DRUG_LIST = 'Drug List',
   FOLLOW_UP_SURVEY = 'Follow-Up Survey',
   MAILING_LIST = 'Mailing List',
-  PARTICIPANT_EVENT = 'Participant Event',
-  PARTICIPANT_WITHDRAWAL = 'Participant Withdrawal',
   NDI_DOWNLOAD = 'NDI Download',
+  ONC_HISTORY_UPLOAD = 'Onc History Upload',
+  PARTICIPANT_WITHDRAWAL = 'Participant Withdrawal',
+  PARTICIPANT_EVENT = 'Participant Event',
   USERS_AND_PERMISSIONS = 'Users And Permissions',
 }

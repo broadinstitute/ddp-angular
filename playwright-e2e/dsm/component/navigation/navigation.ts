@@ -56,7 +56,7 @@ export class Navigation {
     return (this.navigationItems.study as Map<string, object>).get(studyNav) as T;
   }
 
-  public async selectFromMiscellaneous(miscName: MiscellaneousEnum): Promise<void> {
+  public async selectMiscellaneous(miscName: MiscellaneousEnum): Promise<void> {
     await this.selectFrom(MainMenuEnum.MISCELLANEOUS, miscName);
   }
 

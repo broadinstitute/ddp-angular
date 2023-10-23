@@ -28,7 +28,7 @@ test.describe('View Sequencing Order Permission Test', () => {
                 await new Select(page, { label: 'Select study' }).selectOption(`${study}`);
 
                 //Verify that the User and Permissions Page can be seen; Miscellaneous -> Users and Permissions
-                await navigation.selectFromMiscellaneous(MiscellaneousEnum.USERS_AND_PERMISSIONS);
+                await navigation.selectMiscellaneous(MiscellaneousEnum.USERS_AND_PERMISSIONS);
                 const userPermissionsPage = new UserPermissionPage(page);
 
                 //Verify expected webelements can be seen
