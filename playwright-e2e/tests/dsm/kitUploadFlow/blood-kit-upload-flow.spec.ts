@@ -1,4 +1,4 @@
-import { test } from '@playwright/test';
+import { expect, test } from '@playwright/test';
 import {WelcomePage} from 'dsm/pages/welcome-page';
 import HomePage from 'dsm/pages/home-page';
 import {Navigation} from 'dsm/component/navigation/navigation';
@@ -127,8 +127,10 @@ test.describe('Blood Kits upload flow', () => {
       finalScanPage = await navigation.selectFromSamples<FinalScanPage>(SamplesNavEnum.FINAL_SCAN);
       await finalScanPage.assertPageTitle();
       await finalScanPage.fillScanPairs([kitLabel, shippingID]);
-      await finalScanPage.save();
-
+      await finalScanPage.save({ verifySuccess: false });
+      await expect(page.locator('//h3[contains(@class, "Color--warn")]')).toHaveText('Error - Failed to save all changes');
+      await expect.soft(page.locator('//p[contains(@class, "Color--warn")]'))
+        .toHaveText(`Error occurred sending this scan pair!  Kit with DSM Label ${kitLabel} does not have a Tracking Label`);
 
       // Tracking scan
       const trackingScanPage = await navigation.selectFromSamples<TrackingScanPage>(SamplesNavEnum.TRACKING_SCAN);
@@ -181,6 +183,8 @@ test.describe('Blood Kits upload flow', () => {
       await sampleInformationTab.assertKitType(kitLabel, kitType);
       await sampleInformationTab.assertValue(kitLabel, {info: SampleInfoEnum.STATUS, value: SampleStatusEnum.RECEIVED});
       await sampleInformationTab.assertValue(kitLabel, {info: SampleInfoEnum.RECEIVED, value: receivedDate});
+
+      expect(test.info().errors).toHaveLength(0);
     })
   }
 })
