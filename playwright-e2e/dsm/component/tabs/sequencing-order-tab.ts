@@ -40,10 +40,8 @@ export default class SequeuncingOrderTab {
       const collectionDateSection = sample.locator(`//td[${collectionDateIndex}]`); //Get Collection Date section
       if (await this.isInteractiveDateField(collectionDateSection)) {
         const collectionDateField = collectionDateSection.locator(`//input[@data-placeholder='mm/dd/yyyy']`); //Get date field
-        if (await collectionDateField.isEditable()) {
-          const today = getDate();
-          await collectionDateField.fill(today);
-        }
+        const today = getDate();
+        await collectionDateField.fill(today);
       }
     }
   }
@@ -61,14 +59,22 @@ export default class SequeuncingOrderTab {
     return this.page.locator(`//app-sequencing-order//tr[contains(.,'Normal') or contains(.,'Tumor')]`).all();
   }
 
-  public async getRandomNormalSample(): Promise<Locator> {
+  /**
+   * Gets the first available normal sample
+   * @returns the first available sample - uses 0-based array
+   */
+  public async getFirstAvailableNormalSample(): Promise<Locator> {
     const samples = await this.getAllNormalSamples();
     const amountOfSamples = samples.length;
     expect.soft(amountOfSamples, 'There are no available normal samples in the Sequencing Tab').toBeGreaterThanOrEqual(1);
     return samples[0];
   }
 
-  public async getRandomTumorSample(): Promise<Locator> {
+  /**
+   * Gets the first available tumor sample
+   * @returns the first available sample - uses 0-based array
+   */
+  public async getFirstAvailableTumorSample(): Promise<Locator> {
     const samples = await this.getAllTumorSamples();
     const amountOfSamples = samples.length;
     expect.soft(amountOfSamples, 'There are no available tumor samples in the Sequencing Tab').toBeGreaterThanOrEqual(1);
