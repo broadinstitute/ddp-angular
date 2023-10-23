@@ -1,4 +1,5 @@
 import { Locator, Page, expect } from '@playwright/test';
+import { getDate } from 'utils/date-utils';
 
 export default class SequeuncingOrderTab {
   constructor(private readonly page: Page) {
@@ -29,6 +30,24 @@ export default class SequeuncingOrderTab {
   public async assertPlaceOrderButtonNotVisible(): Promise<void> {
     const placeOrderButton = this.getPlaceOrderButton();
     await expect(placeOrderButton).not.toBeVisible();
+  }
+
+  public async fillAvailableCollectionDateFields(opts: {canPlaceClinicalOrder?: boolean}): Promise<void> {
+    const { canPlaceClinicalOrder = true } = opts;
+    const collectionDateIndex = canPlaceClinicalOrder ? 5 : 4; //Index depending on whether test user has permission to place clinical order
+    const allAvailableSamples = await this.getAllPossibleSamples();
+    for (const sample of allAvailableSamples) {
+      const collectionDateSection = sample.locator(`//td[${collectionDateIndex}]`); //Get Collection Date section
+      const collectionDateField = collectionDateSection.locator(`//input[@data-placeholder='mm/dd/yyyy']`); //Get date field
+      if (await collectionDateField.isEditable()) {
+        const today = getDate();
+        await collectionDateField.fill(today);
+      }
+    }
+  }
+
+  private isInteractiveDateField(dateField: Locator): boolean {
+    const field = dateField.locator(`//input[@data-placeholder='mm/dd/yyyy']`);
   }
 
   /* Locators */

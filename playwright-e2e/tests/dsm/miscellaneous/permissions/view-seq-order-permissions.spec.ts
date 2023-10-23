@@ -91,6 +91,7 @@ test.describe('View Sequencing Order Permission Test', () => {
               //Verify that the current DSM user is not able to submit sequencing orders for the chosen study participant
               await sequencingOrderTab.assertNoSamplesCanBeSelected();
               await sequencingOrderTab.assertPlaceOrderButtonNotVisible();
+              await sequencingOrderTab.fillAvailableCollectionDateFields({canPlaceClinicalOrder: false});
             })
 
             await test.step('Verify that the current DSM user is able to input collection dates for samples that do not have them', async () => {
