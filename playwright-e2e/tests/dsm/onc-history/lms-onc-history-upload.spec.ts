@@ -1,6 +1,6 @@
 import { expect } from '@playwright/test';
 import { test } from 'fixtures/dsm-fixture';
-import { AdditionalFilter, CustomViewColumns } from 'dsm/component/filters/sections/search/search-enums';
+import { CustomViewColumns } from 'dsm/component/filters/sections/search/search-enums';
 import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
 import OncHistoryTab from 'dsm/component/tabs/onc-history-tab';
@@ -15,7 +15,7 @@ import { OncHistoryInputColumnsEnum } from 'dsm/component/tabs/enums/onc-history
 import { logInfo } from 'utils/log-utils';
 import { StudyNavEnum } from 'dsm/component/navigation/enums/studyNav-enum';
 import OncHistoryTable from 'dsm/component/tables/onc-history-table';
-import { generateAlphaNumeric, generateRandomPhoneNum } from 'utils/faker-utils';
+import { generateAlphaNumeric } from 'utils/faker-utils';
 
 test.describe('Upload Onc History', () => {
   // Upload feature is only available for Leiomyosarcoma and OS PE-CGS studies.
@@ -54,18 +54,17 @@ test.describe('Upload Onc History', () => {
     const participantListTable = participantListPage.participantListTable;
 
     await test.step('Search for a participant without Onc history', async () => {
-      const oncHistoryCreatedColumn = 'Onc History Created';
-      const oncHistoryReviewedColumn = 'Onc History Reviewed';
+      // Find a participant with existing Onc History
+      const oncHistoryRequestStatusColumn = 'Request Status';
 
       const customizeViewPanel = participantListPage.filters.customizeViewPanel;
       await customizeViewPanel.open();
-      await customizeViewPanel.selectColumns(CustomViewColumns.DSM_COLUMNS, [oncHistoryCreatedColumn, oncHistoryReviewedColumn]);
+      await customizeViewPanel.selectColumns(CustomViewColumns.ONC_HISTORY, [oncHistoryRequestStatusColumn]);
 
       const searchPanel = participantListPage.filters.searchPanel;
       await searchPanel.open();
       await searchPanel.checkboxes('Status', { checkboxValues: ['Enrolled'] });
-      await searchPanel.dates(oncHistoryCreatedColumn, { additionalFilters: [AdditionalFilter.EMPTY] });
-      await searchPanel.dates(oncHistoryReviewedColumn, { additionalFilters: [AdditionalFilter.EMPTY] });
+      await searchPanel.checkboxes(oncHistoryRequestStatusColumn, { checkboxValues: ['Request'] });
       await searchPanel.search();
     });
 
@@ -76,9 +75,9 @@ test.describe('Upload Onc History', () => {
       const newArray = shuffle([...Array(rows).keys()]);
       const rowIndex = newArray[0];
       // RECORD_ID corresponds to Short ID in upload .txt file
-      // shortId = await participantListTable.getParticipantDataAt(rowIndex, 'Short ID');
+      shortId = await participantListTable.getParticipantDataAt(rowIndex, 'Short ID');
       // TODO Remove hardcode ID
-      shortId = 'PEX93B';
+      // shortId = 'PEX93B';
       mockOncHistory.RECORD_ID = shortId;
 
       logInfo(`Participant Short ID: ${shortId}`);

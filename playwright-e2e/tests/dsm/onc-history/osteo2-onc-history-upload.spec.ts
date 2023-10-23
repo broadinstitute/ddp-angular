@@ -58,18 +58,17 @@ test.describe('Upload Onc History', () => {
     const participantListTable = participantListPage.participantListTable;
 
     await test.step('Search for a participant without Onc history', async () => {
-      const oncHistoryCreatedColumn = 'Onc History Created';
-      const oncHistoryReviewedColumn = 'Onc History Reviewed';
+      // Find a participant with existing Onc History
+      const oncHistoryRequestStatusColumn = 'Request Status';
 
       const customizeViewPanel = participantListPage.filters.customizeViewPanel;
       await customizeViewPanel.open();
-      await customizeViewPanel.selectColumns(CustomViewColumns.DSM_COLUMNS, [oncHistoryCreatedColumn, oncHistoryReviewedColumn]);
+      await customizeViewPanel.selectColumns(CustomViewColumns.ONC_HISTORY, [oncHistoryRequestStatusColumn]);
 
       const searchPanel = participantListPage.filters.searchPanel;
       await searchPanel.open();
       await searchPanel.checkboxes('Status', { checkboxValues: ['Enrolled'] });
-      await searchPanel.dates(oncHistoryCreatedColumn, { additionalFilters: [AdditionalFilter.EMPTY] });
-      await searchPanel.dates(oncHistoryReviewedColumn, { additionalFilters: [AdditionalFilter.EMPTY] });
+      await searchPanel.checkboxes(oncHistoryRequestStatusColumn, { checkboxValues: ['Request'] });
       await searchPanel.search();
     });
 
