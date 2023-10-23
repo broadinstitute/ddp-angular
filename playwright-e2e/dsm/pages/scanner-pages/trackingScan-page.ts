@@ -21,7 +21,8 @@ export default class TrackingScanPage {
     }
   }
 
-  public async save(): Promise<void> {
+  public async save(opts: { verifySuccess?: boolean } = {}): Promise<void> {
+    const { verifySuccess = true } = opts;
     const saveButton = this.page.locator(this.saveButtonXPath);
     await expect(saveButton, 'Tracking Scan page - Save Scan Pairs button is not enabled').toBeEnabled();
 
@@ -30,12 +31,13 @@ export default class TrackingScanPage {
 
     await waitForResponse(this.page, {uri: 'trackingScan'});
 
-    const textUnderScanPair = this.page.locator(this.textUnderScanPairXPath);
-    const textUnderScanPairCount = await textUnderScanPair.count();
-    for (let t = 0; t < textUnderScanPairCount; t++) {
-      expect(await textUnderScanPair.textContent(),
-        'Tracking Scan page - All kits have not been scanned successfully')
-        .toContain('Scanned successfully for');
+    if (verifySuccess) {
+      const textUnderScanPair = this.page.locator(this.textUnderScanPairXPath);
+      const textUnderScanPairCount = await textUnderScanPair.count();
+      for (let t = 0; t < textUnderScanPairCount; t++) {
+        expect(await textUnderScanPair.textContent(), 'Tracking Scan page - Kits have not been scanned successfully')
+          .toContain('Scanned successfully for');
+      }
     }
   }
 
