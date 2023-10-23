@@ -44,10 +44,9 @@ export async function waitForResponse(page: Page, { uri, status = 200, timeout }
     return response;
   }
   const url = response.url();
-  const method = response.request().method().toUpperCase;
-  const unexpectedStatus = response.status();
+  const method = response.request().method().toUpperCase();
   const body = await response.text();
-  throw new Error(`Waiting for URI: ${uri} with status: ${status}.\n  ${method} ${url}\n  Response Status: ${unexpectedStatus}\n  Text: ${body}`);
+  throw new Error(`Waiting for URI: ${uri} with status: ${status}.\n  ${method} ${url}\n  Status: ${respStatus}\n  Text: ${body}`);
 }
 
 export async function waitUntilRemoved(locator: Locator): Promise<void> {

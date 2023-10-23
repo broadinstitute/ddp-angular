@@ -4,7 +4,6 @@ import { waitForResponse } from 'utils/test-utils';
 import Select from 'dss/component/select';
 import Button from 'dss/component/button';
 
-
 export default class OncHistoryTab {
   private readonly oncHistoryTable: OncHistoryTable;
 
@@ -92,7 +91,6 @@ export default class OncHistoryTab {
 
     return filePath;
   }
-
 
   /* Locators */
   private get downloadPDFBundleButton(): Locator {

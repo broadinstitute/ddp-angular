@@ -10,7 +10,11 @@ export const generateUserName = (namePrefix: string): string => {
   return `${namePrefix}-${faker.person.lastName()}${faker.lorem.word()}`;
 };
 
-export const generateRandomPhoneNum = (): string => Math.random().toString().slice(2, 11);
+// Generate US phone number (9 digits) with dashes
+export const generateRandomPhoneNum = (): string => {
+  const rand = Math.random().toString().slice(2, 12);
+  return rand.replace(/(\d{3})(\d{3})(\d{4})/, '$1-$2-$3');
+}
 
 export const generateRandomNum = (min = 1, max = 99): number => Math.floor(Math.random() * (max - min) + min);
 
