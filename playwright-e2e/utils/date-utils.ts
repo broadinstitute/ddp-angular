@@ -67,6 +67,14 @@ export function offsetDaysFromToday(number = 1, opts: { isAdd?: boolean } = {}):
   return today;
 }
 
+export function offsetDaysFromDate(date: Date, number = 1, opts: { isAdd?: boolean } = {}): Date {
+  const { isAdd = false } = opts;
+  if (isAdd) {
+    return new Date(date.setDate(date.getDate() + number));
+  }
+  return new Date(date.setDate(date.getDate() - number));
+}
+
 export const calculateAge = (month: string, day: string, year: string): number => {
   const dateOfBirth = new Date(Number(year), Number(month), Number(day));
   const today = new Date();

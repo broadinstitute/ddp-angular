@@ -5,7 +5,6 @@ import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
 import OncHistoryTab from 'dsm/component/tabs/onc-history-tab';
 import { TabEnum } from 'dsm/component/tabs/enums/tab-enum';
-import { shuffle } from 'utils/test-utils';
 import { OsteoOncHistoryUpload } from 'dsm/component/tabs/interfaces/onc-history-inputs-types';
 import { getDate } from 'utils/date-utils';
 import { MiscellaneousEnum } from 'dsm/component/navigation/enums/miscellaneousNav-enum';
@@ -56,6 +55,7 @@ test.describe('Upload Onc History', () => {
 
     let participantListPage = await ParticipantListPage.goto(page, study, request);
     const participantListTable = participantListPage.participantListTable;
+    await participantListTable.changeRowCount(50);
 
     await test.step('Search for a participant without Onc history', async () => {
       // Find a participant with existing Onc History
@@ -68,20 +68,26 @@ test.describe('Upload Onc History', () => {
       const searchPanel = participantListPage.filters.searchPanel;
       await searchPanel.open();
       await searchPanel.checkboxes('Status', { checkboxValues: ['Enrolled'] });
-      await searchPanel.checkboxes(oncHistoryRequestStatusColumn, { checkboxValues: ['Request'] });
-      await searchPanel.search();
-    });
+      await searchPanel.checkboxes(oncHistoryRequestStatusColumn, { checkboxValues: ['Request', 'Received'] });
+      const filterListResponse = await searchPanel.search();
 
-    await test.step('Create mocked text file', async () => {
       const rows = await participantListTable.rowsCount;
       expect(rows).toBeGreaterThanOrEqual(1);
-      // Pick a random participant Short ID
-      const newArray = shuffle([...Array(rows).keys()]);
-      const rowIndex = newArray[0];
-      // RECORD_ID corresponds to Short ID in upload .txt file
-      shortId = await participantListTable.getParticipantDataAt(rowIndex, 'Short ID');
-      mockOncHistory.RECORD_ID = shortId;
+
+      // Find the first participant that has DSM Participant ID. Short ID is random.
+      const responseJson = JSON.parse(await filterListResponse.text());
+      for (const i in responseJson.participants) {
+        const dsmParticipantId = responseJson.participants[i].esData.dsm.participant?.participantId;
+        if (dsmParticipantId !== undefined) {
+          shortId = responseJson.participants[i].esData.profile?.hruid;
+          break;
+        }
+      }
+      expect(shortId).toBeTruthy();
       logInfo(`Participant Short ID: ${shortId}`);
+
+      // RECORD_ID corresponds to Short ID in upload .txt file
+      mockOncHistory.RECORD_ID = shortId;
     });
 
     await test.step('Upload text file', async () => {

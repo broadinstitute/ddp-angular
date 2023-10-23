@@ -250,6 +250,11 @@ export default class Table {
     return this.parseForNumber(footer);
   }
 
+  async changeRowCount(rowCount = 10): Promise<void> {
+    await this.rowCountButton().click();
+    await waitForNoSpinner(this.page);
+  }
+
   /**
    * Returns a random row index
    * @returns {Promise<number>}
@@ -348,6 +353,10 @@ export default class Table {
       values.push((await cell.innerText()).trim());
     }
     return values;
+  }
+
+  public rowCountButton(rowCount = 10): Locator {
+    return this.footerLocator().locator(`xpath=//button[contains(., "${rowCount}")]`);
   }
 
   private parseForNumber(text: string): number | null {
