@@ -122,9 +122,17 @@ test.describe('Saliva Kits upload flow', () => {
       await kitsWithoutLabelPage.search(KitsColumnsEnum.SHORT_ID, shortID);
       const shippingID = (await kitsWithoutLabelPage.getData(KitsColumnsEnum.SHIPPING_ID)).trim();
 
-      // final scan
+      // Final scan
       const finalScanPage = await navigation.selectFromSamples<FinalScanPage>(SamplesNavEnum.FINAL_SCAN);
       await finalScanPage.assertPageTitle();
+
+      // On Final Scan page, Kit Label for Saliva kit should be 14 char long and throws error
+      const kitLabelInvalid = crypto.randomUUID().toString().substring(0, 13);
+      await finalScanPage.fillScanPairs([kitLabelInvalid, shippingID]);
+      await finalScanPage.save({ verifySuccess: false });
+      await expect(page.locator('//h3[contains(@class, "Color--warn")]')).toHaveText('Error - Failed to save all changes');
+
+      // Entering a valid Kit Label (14 char)
       await finalScanPage.fillScanPairs([kitLabel, shippingID]);
       await finalScanPage.save();
 

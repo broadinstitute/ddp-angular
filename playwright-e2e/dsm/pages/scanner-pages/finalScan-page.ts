@@ -19,14 +19,17 @@ export default class FinalScanPage {
         if (extractValueIndex >= fieldsInputs.length - 1) { break; }
         const inputFieldToFill: inputField = !j ? 'Kit Label' : 'DSM Label' ;
         const inputField = this.page.locator(this.inputFieldXPath(inputFieldToFill)).nth(i);
+        await inputField.fill(''); // clear input field
         await inputField.fill(fieldsInputs[++extractValueIndex]);
         await inputField.blur();
       }
     }
   }
 
-  public async save(): Promise<void> {
+  public async save(opts: { verifySuccess?: boolean } = {}): Promise<void> {
     const saveButton = this.page.locator(this.saveButtonXPath);
+    const { verifySuccess = true } = opts;
+
     await expect(saveButton, 'Final Scan page - Save Scan Pairs button is not enabled').toBeEnabled();
 
     await saveButton.focus();
@@ -34,12 +37,14 @@ export default class FinalScanPage {
 
     await waitForResponse(this.page, {uri: 'finalScan'});
 
-    const textUnderScanPair = this.page.locator(this.textUnderScanPairXPath);
-    const textUnderScanPairCount = await textUnderScanPair.count();
-    for (let t = 0; t < textUnderScanPairCount; t++) {
-      expect(await textUnderScanPair.textContent(),
-        'Final Scan page - All kits have not been scanned successfully')
-        .toContain('Scanned successfully for');
+    if (verifySuccess) {
+      const textUnderScanPair = this.page.locator(this.textUnderScanPairXPath);
+      const textUnderScanPairCount = await textUnderScanPair.count();
+      for (let t = 0; t < textUnderScanPairCount; t++) {
+        expect(await textUnderScanPair.textContent(),
+          'Final Scan page - All kits have not been scanned successfully')
+          .toContain('Scanned successfully for');
+      }
     }
   }
 
