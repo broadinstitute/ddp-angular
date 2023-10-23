@@ -45,6 +45,7 @@ test.describe.serial('Blood Kit Upload', () => {
   const kitType = KitTypeEnum.BLOOD;
   const expectedKitTypes = [KitTypeEnum.SALIVA, KitTypeEnum.BLOOD];
   const kitLabel = crypto.randomUUID().toString().substring(0, 14);
+  const trackingLabel = `tracking-${crypto.randomUUID().toString().substring(0, 10)}`;
 
   const mockedCanadaAddress = {
     street1: mock.canada.street,
@@ -177,7 +178,6 @@ test.describe.serial('Blood Kit Upload', () => {
       await test.step('Create tracking label', async () => {
         const trackingScanPage = await navigation.selectFromSamples<TrackingScanPage>(SamplesNavEnum.TRACKING_SCAN);
         await trackingScanPage.assertPageTitle();
-        const trackingLabel = `tracking-${crypto.randomUUID().toString().substring(0, 10)}`;
         await trackingScanPage.fillScanPairs([trackingLabel, kitLabel]);
         await trackingScanPage.save();
       });
@@ -207,4 +207,19 @@ test.describe.serial('Blood Kit Upload', () => {
       });
     });
   }
+
+  test('Trigger Tracking Scan error @osteo2 @dsm @kit', async ({ page }) => {
+    await welcomePage.selectStudy(StudyEnum.OSTEO2);
+
+    const trackingScanPage = await navigation.selectFromSamples<TrackingScanPage>(SamplesNavEnum.TRACKING_SCAN);
+    await trackingScanPage.assertPageTitle();
+
+    await trackingScanPage.fillScanPairs([trackingLabel, kitLabel]);
+    await trackingScanPage.save({ verifySuccess: false });
+
+    // Enter the same pair again to trigger the scan errror
+    await expect(page.locator('//h3[contains(@class, "Color--warn")]')).toHaveText('Error - Failed to save all changes');
+    await expect(page.locator('//p[contains(@class, "Color--warn")]')).toHaveText(
+      `Error occurred sending this scan pair!\nKit Label "${kitLabel}" does not exist. For more information please contact your DSM developer`);
+  });
 })
