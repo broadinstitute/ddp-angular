@@ -30,6 +30,7 @@ test.describe('Blood Kits upload flow', () => {
   let welcomePage: WelcomePage;
   let homePage: HomePage;
   let navigation: Navigation;
+  let finalScanPage: FinalScanPage;
 
   let shortID: string;
   let kitUploadInfo: KitUploadInfo;
@@ -122,15 +123,22 @@ test.describe('Blood Kits upload flow', () => {
       await kitsWithoutLabelPage.search(KitsColumnsEnum.SHORT_ID, shortID);
       shippingID = (await kitsWithoutLabelPage.getData(KitsColumnsEnum.SHIPPING_ID)).trim();
 
-      // tracking scan
+      // On Final Scan page, if Blood kit was not scanned on the Tracking Scan page before, DSM should show an error
+      finalScanPage = await navigation.selectFromSamples<FinalScanPage>(SamplesNavEnum.FINAL_SCAN);
+      await finalScanPage.assertPageTitle();
+      await finalScanPage.fillScanPairs([kitLabel, shippingID]);
+      await finalScanPage.save();
+
+
+      // Tracking scan
       const trackingScanPage = await navigation.selectFromSamples<TrackingScanPage>(SamplesNavEnum.TRACKING_SCAN);
       await trackingScanPage.assertPageTitle();
       trackingLabel = `tracking-${crypto.randomUUID().toString().substring(0, 10)}`;
       await trackingScanPage.fillScanPairs([trackingLabel, kitLabel]);
       await trackingScanPage.save();
 
-      // final scan
-      const finalScanPage = await navigation.selectFromSamples<FinalScanPage>(SamplesNavEnum.FINAL_SCAN);
+      // Final scan
+      finalScanPage = await navigation.selectFromSamples<FinalScanPage>(SamplesNavEnum.FINAL_SCAN);
       await finalScanPage.assertPageTitle();
       await finalScanPage.fillScanPairs([kitLabel, shippingID]);
       await finalScanPage.save();
