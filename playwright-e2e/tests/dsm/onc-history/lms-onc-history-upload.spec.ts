@@ -76,10 +76,7 @@ test.describe('Upload Onc History', () => {
       const rowIndex = newArray[0];
       // RECORD_ID corresponds to Short ID in upload .txt file
       shortId = await participantListTable.getParticipantDataAt(rowIndex, 'Short ID');
-      // TODO Remove hardcode ID
-      // shortId = 'PEX93B';
       mockOncHistory.RECORD_ID = shortId;
-
       logInfo(`Participant Short ID: ${shortId}`);
     });
 

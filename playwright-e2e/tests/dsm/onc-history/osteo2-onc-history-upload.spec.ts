@@ -1,6 +1,6 @@
 import { expect } from '@playwright/test';
 import { test } from 'fixtures/dsm-fixture';
-import { AdditionalFilter, CustomViewColumns } from 'dsm/component/filters/sections/search/search-enums';
+import { CustomViewColumns } from 'dsm/component/filters/sections/search/search-enums';
 import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
 import OncHistoryTab from 'dsm/component/tabs/onc-history-tab';
@@ -80,10 +80,7 @@ test.describe('Upload Onc History', () => {
       const rowIndex = newArray[0];
       // RECORD_ID corresponds to Short ID in upload .txt file
       shortId = await participantListTable.getParticipantDataAt(rowIndex, 'Short ID');
-      // TODO Remove hardcode ID
-      //shortId = 'PY7QFA';
       mockOncHistory.RECORD_ID = shortId;
-
       logInfo(`Participant Short ID: ${shortId}`);
     });
 
