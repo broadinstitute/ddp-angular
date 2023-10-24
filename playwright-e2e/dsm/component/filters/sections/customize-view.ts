@@ -65,10 +65,10 @@ export class CustomizeView {
     }
   }
 
-  public async isDisplayed(columns: string[]): Promise<boolean> {
+  public async isColumnVisible(columns: string[]): Promise<boolean> {
     let allColumnsAreDisplayed = true;
     for (const column of columns) {
-      const customizeViewColumn = this.page.getByRole('button', { name: `${column}`});
+      const customizeViewColumn = this.page.getByRole('button', { name: column});
       await customizeViewColumn.scrollIntoViewIfNeeded();
       const isDisplayed = await customizeViewColumn.isVisible();
       if (!isDisplayed) {

@@ -64,7 +64,7 @@ test.describe('View Sequencing Order Permission Test', () => {
 
               const customizeViewPanel = participantListPage.filters.customizeViewPanel;
               await customizeViewPanel.open();
-              await customizeViewPanel.isDisplayed(['Clinical Orders Columns']);
+              await customizeViewPanel.isColumnVisible(['Clinical Orders Columns']);
 
               //Filter the list to display study participants with a Not-Empty Clinical Orders Columns -> Clinical Order ID column
               await customizeViewPanel.selectColumns('Clinical Orders Columns', ['Clinical Order Id']);
