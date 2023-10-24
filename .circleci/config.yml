@@ -875,6 +875,8 @@ workflows:
     when:
       and:
         - equal: [ "run-e2e-tests", << pipeline.parameters.api_call >> ]
+        - not:
+            equal: ["build-and-store", << pipeline.parameters.api_call >>]
         - or:
             - equal: [ "dev", << pipeline.parameters.deploy_env >> ]
             - equal: [ "test", << pipeline.parameters.deploy_env >> ]
