@@ -12,7 +12,16 @@ test.describe('Participants List', () => {
       const participantListPage = await ParticipantListPage.goto(page, study, request);
       const participantsTable = participantListPage.participantListTable;
 
-      const numParticipants = await participantsTable.numOfParticipants();
+      // Change numbers of rows displayed
+      await participantsTable.changeRowCount(50);
+
+      const rowsCount = await participantsTable.getRowsCount(); // number of table rows displayd
+      const numParticipants = await participantsTable.numOfParticipants(); // number of participants
+      if (numParticipants >= 50) {
+        expect(rowsCount).toStrictEqual(50);
+      } else {
+        expect(rowsCount).toStrictEqual(numParticipants);
+      }
 
       const customizeViewPanel = participantListPage.filters.customizeViewPanel;
       await customizeViewPanel.open();
@@ -37,7 +46,12 @@ test.describe('Participants List', () => {
       const searchPanel = participantListPage.filters.searchPanel;
       await searchPanel.open();
       await searchPanel.clear();
-      // Clearing the search does not change the amount of participants seen in participant list
+
+      // Clearing manual search does not change rows per page
+      const rowsCountAfterClear = await participantsTable.getRowsCount();
+      expect(rowsCountAfterClear).toBe(rowsCount);
+
+      // Clearing manual search does not change the amount of participants seen in participant list
       const numParticipantsAfterClear = await participantsTable.numOfParticipants();
       expect(numParticipantsAfterClear).toBe(numParticipants);
       await searchPanel.search({ uri: '/ui/applyFilter?' });
