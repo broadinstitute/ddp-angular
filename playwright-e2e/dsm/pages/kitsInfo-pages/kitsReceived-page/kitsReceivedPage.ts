@@ -22,6 +22,10 @@ export default class KitsReceivedPage {
               private readonly request: APIRequestContext) {
   }
 
+  public get getKitsTable(): KitsTable {
+    return this.kitsTable;
+  }
+
   public async goToPage(page: number): Promise<void> {
     await this.kitsTable.goToPage(page);
   }

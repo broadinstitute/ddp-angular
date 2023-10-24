@@ -1,4 +1,4 @@
-import { test } from '@playwright/test';
+import {expect, test} from '@playwright/test';
 import {WelcomePage} from 'dsm/pages/welcome-page';
 import HomePage from 'dsm/pages/home-page';
 import {Navigation} from 'dsm/component/navigation/navigation';
@@ -24,12 +24,14 @@ import {KitsColumnsEnum} from 'dsm/pages/kitsInfo-pages/enums/kitsColumns-enum';
 import KitsSentPage from 'dsm/pages/kitsInfo-pages/kitsSentPage';
 import KitsReceivedPage from 'dsm/pages/kitsInfo-pages/kitsReceived-page/kitsReceivedPage';
 import TrackingScanPage from 'dsm/pages/scanner-pages/trackingScan-page';
+import {getDate} from 'utils/date-utils';
 
 // don't run in parallel
-test.describe('Blood Kits upload flow', () => {
+test.describe.serial('Blood Kits upload flow', () => {
   let welcomePage: WelcomePage;
   let homePage: HomePage;
   let navigation: Navigation;
+  let finalScanPage: FinalScanPage;
 
   let shortID: string;
   let kitUploadInfo: KitUploadInfo;
@@ -122,15 +124,24 @@ test.describe('Blood Kits upload flow', () => {
       await kitsWithoutLabelPage.search(KitsColumnsEnum.SHORT_ID, shortID);
       shippingID = (await kitsWithoutLabelPage.getData(KitsColumnsEnum.SHIPPING_ID)).trim();
 
-      // tracking scan
+      // On Final Scan page, if Blood kit was not scanned on the Tracking Scan page before, DSM should show an error
+      finalScanPage = await navigation.selectFromSamples<FinalScanPage>(SamplesNavEnum.FINAL_SCAN);
+      await finalScanPage.assertPageTitle();
+      await finalScanPage.fillScanPairs([kitLabel, shippingID]);
+      await finalScanPage.save({ verifySuccess: false });
+      await expect(page.locator('//h3[contains(@class, "Color--warn")]')).toHaveText('Error - Failed to save all changes');
+      await expect.soft(page.locator('//p[contains(@class, "Color--warn")]'))
+        .toHaveText(`Error occurred sending this scan pair!  Kit with DSM Label ${kitLabel} does not have a Tracking Label`);
+
+      // Tracking scan
       const trackingScanPage = await navigation.selectFromSamples<TrackingScanPage>(SamplesNavEnum.TRACKING_SCAN);
       await trackingScanPage.assertPageTitle();
       trackingLabel = `tracking-${crypto.randomUUID().toString().substring(0, 10)}`;
       await trackingScanPage.fillScanPairs([trackingLabel, kitLabel]);
       await trackingScanPage.save();
 
-      // final scan
-      const finalScanPage = await navigation.selectFromSamples<FinalScanPage>(SamplesNavEnum.FINAL_SCAN);
+      // Final scan
+      finalScanPage = await navigation.selectFromSamples<FinalScanPage>(SamplesNavEnum.FINAL_SCAN);
       await finalScanPage.assertPageTitle();
       await finalScanPage.fillScanPairs([kitLabel, shippingID]);
       await finalScanPage.save();
@@ -145,6 +156,9 @@ test.describe('Blood Kits upload flow', () => {
       await kitsSentPage.assertTableHeader();
       await kitsSentPage.search(KitsColumnsEnum.MF_CODE, kitLabel);
       await kitsSentPage.assertDisplayedRowsCount(1);
+
+      const sentDate = await kitsSentPage.getData(KitsColumnsEnum.SENT);
+      expect(getDate(new Date(sentDate))).toStrictEqual(getDate());
 
       // kits received page
       const kitsReceivedPage = await navigation.selectFromSamples<KitsReceivedPage>(SamplesNavEnum.RECEIVED);
@@ -173,6 +187,8 @@ test.describe('Blood Kits upload flow', () => {
       await sampleInformationTab.assertKitType(kitLabel, kitType);
       await sampleInformationTab.assertValue(kitLabel, {info: SampleInfoEnum.STATUS, value: SampleStatusEnum.RECEIVED});
       await sampleInformationTab.assertValue(kitLabel, {info: SampleInfoEnum.RECEIVED, value: receivedDate});
+
+      expect(test.info().errors).toHaveLength(0);
     })
   }
 })

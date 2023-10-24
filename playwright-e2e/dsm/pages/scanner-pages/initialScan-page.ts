@@ -1,4 +1,5 @@
-import {expect, Page} from '@playwright/test';
+import {expect, Locator, Page} from '@playwright/test';
+import Input from 'dss/component/input';
 import {waitForResponse} from 'utils/test-utils';
 
 type inputField = 'Kit Label' | 'Short ID';
@@ -12,21 +13,27 @@ export default class InitialScanPage {
     await this.assertPageTitle();
   }
 
+  public getInput(input: inputField, nth?: number): Input {
+    return new Input(this.page, { label: input, nth });
+  }
+
   public async fillScanPairs(fieldsInputs: string[]): Promise<void> {
     let extractValueIndex = -1;
     for (let i = 0; i < fieldsInputs.length / 2; i++) {
       for (let j = 0; j < 2; j++) {
         if (extractValueIndex >= fieldsInputs.length - 1) { break; }
         const inputFieldToFill: inputField = !j ? 'Kit Label' : 'Short ID' ;
-        const inputField = this.page.locator(this.inputFieldXPath(inputFieldToFill)).nth(i);
+        // const inputField = this.page.locator(this.inputFieldXPath(inputFieldToFill)).nth(i);
+        const inputField = new Input(this.page, { label: inputFieldToFill, nth: i });
         await inputField.fill(fieldsInputs[++extractValueIndex]);
         await inputField.blur();
       }
     }
   }
 
-  public async save(): Promise<void> {
-    const saveButton = this.page.locator(this.saveButtonXPath);
+  public async save(opts: { verifySuccess?: boolean } = {}): Promise<void> {
+    const { verifySuccess = true } = opts;
+    const saveButton = this.saveButtonLocator;
     await expect(saveButton, 'Initial Scan page - Save Scan Pairs button is not enabled').toBeEnabled();
 
     await saveButton.focus();
@@ -35,13 +42,13 @@ export default class InitialScanPage {
     const response = await waitForResponse(this.page, {uri: 'initialScan'});
     const responseBody = await response.json();
 
-    expect(responseBody.every((d: any) => d === null),
-      `Initial Scan page - Error while uploading initial scan pairs: ${await response.text()}`)
-      .toBeTruthy();
-
-    const message = await this.page.locator('h3').textContent();
-    expect(message, 'Initial Scan page - All kits have not been scanned successfully')
-      .toBe('Data saved');
+    if (verifySuccess) {
+      expect(responseBody.every((d: any) => d === null),
+        `Initial Scan page - Error while uploading initial scan pairs: ${await response.text()}`)
+        .toBeTruthy();
+      const message = await this.page.locator('h3').textContent();
+      expect(message, 'Initial Scan page - All kits have not been scanned successfully').toBe('Data saved');
+    }
   }
 
   /* Assertions */
@@ -56,7 +63,7 @@ export default class InitialScanPage {
     return `//form//mat-form-field[.//label[.//*[text()[normalize-space()='${label}']]]]//input`;
   }
 
-  private get saveButtonXPath(): string {
-    return `//form/button[.//*[text()[normalize-space()='Save Scan Pairs']]]`;
+  public get saveButtonLocator(): Locator {
+    return this.page.locator('//form/button[.//*[text()[normalize-space()="Save Scan Pairs"]]]');
   }
 }
