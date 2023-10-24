@@ -64,19 +64,31 @@ test.describe('Participants Search', () => {
       await searchPanel.dates(MainInfoEnum.REGISTRATION_DATE, { additionalFilters: [AdditionalFilter.RANGE], from: yearAgo, to: today});
       await searchPanel.search();
 
+      const rowsCount = await participantsTable.getRowsCount();
       const numParticipants2 = await participantsTable.numOfParticipants();
       logInfo(`Search by Registration Date Range (from: ${yearAgo}, to: ${today}) returns ${numParticipants2} participants`);
       expect(numParticipants2).toBeGreaterThan(1);
       expect(numParticipants2).not.toBe(numParticipants1); // Expect Participants list table has reloaded and changed
 
-      // Use Registration Date column filter to verify date range in table
+      // Sort Registration Date column filter to verify date range in table
       await participantsTable.sort(MainInfoEnum.REGISTRATION_DATE, SortOrder.DESC);
-      const date1 = await participantsTable.cell(0, headerIndex).innerText();
+      const descFirstRowDate = await participantsTable.cell(0, headerIndex).innerText();
+      const descLastRowDate = await participantsTable.cell(rowsCount - 1, headerIndex).innerText();
+      // ascending
+      expect(new Date(descFirstRowDate) < new Date(descLastRowDate),
+        `descFirstRowDate: ${descFirstRowDate}, descLastRowDate: ${descLastRowDate}`)
+        .toBeTruthy();
 
+      // Sort in opposite order
       await participantsTable.sort(MainInfoEnum.REGISTRATION_DATE, SortOrder.ASC);
-      const date2 = await participantsTable.cell(0, headerIndex).innerText();
+      const ascFirstRowDate = await participantsTable.cell(0, headerIndex).innerText();
+      const ascLastRowDate = await participantsTable.cell(rowsCount - 1, headerIndex).innerText();
+      // descending
+      expect(new Date(ascFirstRowDate) > new Date(ascLastRowDate),
+        `descFirstRowDate: ${ascFirstRowDate}, descLastRowDate: ${ascLastRowDate}`)
+        .toBeTruthy();
 
-      expect(getDate(new Date(date1))).not.toEqual(date2);
+      expect(getDate(new Date(descFirstRowDate))).not.toEqual(ascFirstRowDate);
     });
   }
 });
