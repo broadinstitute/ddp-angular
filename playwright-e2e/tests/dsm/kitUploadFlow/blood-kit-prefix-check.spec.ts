@@ -217,7 +217,7 @@ test.describe.serial('Blood Kit Upload', () => {
     await trackingScanPage.fillScanPairs([trackingLabel, kitLabel]);
     await trackingScanPage.save({ verifySuccess: false });
 
-    // Enter the same pair again to trigger the scan errror
+    // Enter the same pair again to trigger the scan error
     await expect(page.locator('//h3[contains(@class, "Color--warn")]')).toHaveText('Error - Failed to save all changes');
     await expect(page.locator('//p[contains(@class, "Color--warn")]')).toHaveText(
       `Error occurred sending this scan pair!  Error occured for Kit Label "${kitLabel}" ` +
