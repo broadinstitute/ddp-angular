@@ -85,7 +85,7 @@ test.describe('Participants Search', () => {
       const ascLastRowDate = await participantsTable.cell(rowsCount - 1, headerIndex).innerText();
       // descending
       expect(new Date(ascFirstRowDate) > new Date(ascLastRowDate),
-        `descFirstRowDate: ${ascFirstRowDate}, descLastRowDate: ${ascLastRowDate}`)
+        `ascFirstRowDate: ${ascFirstRowDate}, ascLastRowDate: ${ascLastRowDate}`)
         .toBeTruthy();
 
       expect(getDate(new Date(descFirstRowDate))).not.toEqual(ascFirstRowDate);
