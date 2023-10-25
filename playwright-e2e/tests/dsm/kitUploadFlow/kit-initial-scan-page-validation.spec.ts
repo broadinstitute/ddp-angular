@@ -77,7 +77,7 @@ test.describe.serial('Initial Scan page', () => {
       // Click the button triggers error
       await expect(page.locator('//h3[contains(@class, "Color--warn")]')).toHaveText('Error - Failed to save all changes');
       await expect(page.locator('//p[contains(@class, "Color--warn")]')).toHaveText(
-        `Error occurred sending this scan pair!  Kit Label "${mfCode}" was already scanned.` +
+        `Error occurred sending this scan pair!  Kit for participant with ShortId "${shortId}" was not found.` +
         ' For more information please contact your DSM developer');
     });
   }
