@@ -5,6 +5,7 @@ import ParticipantListPage from 'dsm/pages/participant-list-page';
 import ParticipantPage from 'dsm/pages/participant-page/participant-page';
 import { logInfo } from 'utils/log-utils';
 import { faker } from '@faker-js/faker';
+import { MainInfoEnum } from 'dsm/pages/participant-page/enums/main-info-enum';
 
 test.describe('Editig Participant Information', () => {
   let participantPage: ParticipantPage;
@@ -55,15 +56,18 @@ test.describe('Editig Participant Information', () => {
       await test.step('Change participant first and last name', async () => {
         newFirstName = faker.person.firstName();
         newLastName = faker.person.lastName();
-        await participantPage.updateFirstName(newFirstName);
-        // await participantPage.updateLastName(newLastName);
-        // await participantPage.backToList();
+        await participantPage.updateInput(MainInfoEnum.FIRST_NAME, newFirstName);
+        await participantPage.updateInput(MainInfoEnum.LAST_NAME, newLastName);
+        //await participantPage.updateFirstName(newFirstName);
+        //await participantPage.updateLastName(newLastName);
+        await participantPage.backToList();
       });
 
       await test.step('Verify changed first name', async () => {
         await participantListPage.filterListByShortId(shortID);
         participantPage = await participantListTable.openParticipantPageAt(rowIndex);
         expect(await participantPage.getFirstName()).toEqual(newFirstName);
+        expect(await participantPage.getLastName()).toEqual(newLastName);
       });
     });
   }

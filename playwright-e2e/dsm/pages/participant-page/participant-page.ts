@@ -100,34 +100,19 @@ export default class ParticipantPage {
     return this.page.locator(this.getMainInputValueInfoXPath(MainInfoEnum.LAST_NAME))
   }
 
-  public async updateFirstName(newValue: string): Promise<void> {
-    const input = this.getFirstNameLocator;
+  public async updateInput(inputEnum: MainInfoEnum, newValue: string): Promise<void> {
+    const input = this.page.locator(this.getMainInputValueInfoXPath(inputEnum))
     await input.fill('');
     await input.fill(newValue);
 
-    const updateButton = this.page.locator(this.getMainInputUpdateButtonXPath(MainInfoEnum.FIRST_NAME));
+    const updateButton = this.page.locator(this.getMainInputUpdateButtonXPath(inputEnum));
     await updateButton.click();
     await waitForNoSpinner(this.page);
 
     const modal = new Modal(this.page);
     const content = await modal.getContent().innerText();
     expect(content).toStrictEqual('Participant successfully updated');
-    await this.page.reload(); // close modal and load Participants List page
-  }
-
-  public async updateLastName(newValue: string): Promise<void> {
-    const input = this.getLastNameLocator;
-    await input.fill('');
-    await input.fill(newValue);
-
-    const updateButton = this.page.locator(this.getMainInputUpdateButtonXPath(MainInfoEnum.LAST_NAME));
-    await updateButton.click();
-    await waitForNoSpinner(this.page);
-
-    const modal = new Modal(this.page);
-    const content = await modal.getContent().innerText();
-    expect(content).toStrictEqual('Participant successfully updated');
-    await this.page.reload(); // close modal and load Participants List page
+    await this.page.keyboard.press('Escape'); // close modal
   }
 
   /* Helper functions */
