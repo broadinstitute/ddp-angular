@@ -15,6 +15,8 @@ export default class KitsWithoutLabelPage {
     KitsColumnsEnum.DDP_REALM, KitsColumnsEnum.TYPE, ''];
   // the last item is empty string because the deactivate buttons columns doesn't have one
 
+  private readonly expectedKitTypes = [KitTypeEnum.SALIVA, KitTypeEnum.BLOOD];
+
   private readonly kitType = new KitType(this.page);
   private readonly kitsTable = new KitsTable(this.page);
 
@@ -22,6 +24,10 @@ export default class KitsWithoutLabelPage {
 
   public get kitsWithoutLabelTable(): KitsTable {
     return this.kitsTable;
+  }
+
+  public get kitTypeCheckbox(): KitType {
+    return this.kitType;
   }
 
   public async goToPage(page: number): Promise<void> {
@@ -32,11 +38,23 @@ export default class KitsWithoutLabelPage {
     await this.kitsTable.rowsPerPage(rows);
   }
 
-  public async waitForReady(): Promise<void> {
-    await this.assertPageTitle();
-    await waitForNoSpinner(this.page);
+  public async waitForReady(kitTypes?: KitTypeEnum[]): Promise<void> {
+    const knownKitTypes = kitTypes ?? this.expectedKitTypes; //Use the param kit types if provided, if they are not, then use the general expected kit types
+    await Promise.all([
+      this.page.waitForLoadState(),
+      this.assertPageTitle()
+    ]);
     await expect(async () => expect(await this.page.locator('mat-checkbox[id]').count()).toBeGreaterThanOrEqual(1))
       .toPass({ timeout: 60000 });
+    await this.assertDisplayedKitTypes(knownKitTypes);
+  }
+
+  public async assertDisplayedKitTypes(kitTypes: KitTypeEnum[]): Promise<void> {
+    await waitForNoSpinner(this.page);
+    for (const kitType of kitTypes) {
+      await expect(this.kitType.displayedKitType(kitType),
+        'Kit without Labels page - Displayed kit types checkboxes are wrong').toBeVisible()
+    }
   }
 
   public async selectKitType(kitType: KitTypeEnum): Promise<void> {
@@ -126,11 +144,11 @@ export default class KitsWithoutLabelPage {
       + "//div[@class='app-modal-footer']/button[text()[normalize-space()='Deactivate']]";
   }
 
-  private get reloadKitListBtnXPath(): string {
+  public get reloadKitListBtnXPath(): string {
     return '//button[normalize-space()="Reload Kit List"]';
   }
 
-  private get createLabelsBtnXPath(): string {
+  public get createLabelsBtnXPath(): string {
     return '//button[normalize-space()="Create Labels"]';
   }
 }

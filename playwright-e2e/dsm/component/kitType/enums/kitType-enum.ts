@@ -2,5 +2,7 @@ export enum KitTypeEnum {
   SALIVA = 'SALIVA',
   BLOOD = 'BLOOD',
   STOOL = 'STOOL',
-  BLOOD_AND_RNA = 'BLOOD & RNA'
+  BLOOD_AND_RNA = 'BLOOD & RNA',
+  FFPE_SECTION = 'FFPE-SECTION',
+  FFPE_SCROLL = 'FFPE-SCROLL'
 }

@@ -14,7 +14,7 @@ export class KitType {
   }
 
   /* XPaths */
-  private kitTypeCheckbox(kitType: KitTypeEnum): string {
+  public kitTypeCheckbox(kitType: KitTypeEnum): string {
     return `//mat-checkbox[.//label/span[text()[normalize-space()='${kitType}']]]`;
   }
 }

@@ -262,6 +262,11 @@ export function studyShortName(study: StudyEnum): { shortName: string | null; re
       realm = 'cmi-esc';
       collaboratorPrefix = 'GECProject';
       break;
+    case StudyEnum.RGP:
+      shortName = 'rgp';
+      realm = 'RGP';
+      collaboratorPrefix = 'NULL';
+      break;
     default:
       throw new Error(`Study ${study} is undefined.`);
   }

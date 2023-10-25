@@ -24,7 +24,7 @@ export default class KitUploadPage {
       this.page.waitForLoadState(),
       this.assertPageTitle()
     ]);
-    await expect(this.skipAddressValidationCheckbox).toBeVisible();
+    await expect(this.skipAddressValidationCheckbox).toBeVisible({timeout: 60 * 1000});
     await waitForNoSpinner(this.page);
     await this.assertDisplayedKitTypes(knownKitTypes);
   }
@@ -119,9 +119,7 @@ export default class KitUploadPage {
   }
 
   public async assertInstructionSnapshot() {
-    expect(await this.page.locator(this.uploadInstructionsXPath).screenshot(),
-      "Kit Upload page - Kit upload instructions screenshot doesn't match the provided one")
-      .toMatchSnapshot('upload_instructions.png');
+    await expect(this.page.locator(this.uploadInstructionsXPath)).toHaveScreenshot('upload_instructions.png');
   }
 
   public async assertDisplayedKitTypes(kitTypes: KitTypeEnum[]): Promise<void> {
@@ -133,7 +131,7 @@ export default class KitUploadPage {
   }
 
   public async assertBrowseBtn(): Promise<void> {
-    await expect(this.page.locator('//label[text()[normalize-space()=\'Browse...\']][@class=\'label-button\']'),
+    await expect(this.browseBtn,
       'Kit Upload page - Browse button is not visible')
       .toBeVisible();
   }
@@ -150,6 +148,10 @@ export default class KitUploadPage {
 
   public get skipAddressValidationCheckbox(): Locator {
     return this.page.locator('//mat-checkbox[.//*[@class="mat-checkbox-label" and text()="Skip address validation on upload"]]');
+  }
+
+  public get browseBtn(): Locator {
+    return this.page.locator('//label[text()[normalize-space()=\'Browse...\']][@class=\'label-button\']');
   }
 
   /* XPaths */
