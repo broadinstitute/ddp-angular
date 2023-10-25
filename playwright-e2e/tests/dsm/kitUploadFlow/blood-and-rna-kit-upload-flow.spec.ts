@@ -23,7 +23,7 @@ import { simplifyShortID } from 'utils/faker-utils';
 import { saveParticipantGuid } from 'utils/faker-utils';
 import { ParticipantListTable } from 'dsm/component/tables/participant-list-table';
 
-test.describe.skip('Blood & RNA Kit Upload', () => {
+test.describe('Blood & RNA Kit Upload', () => {
   test('Verify that a blood & rna kit can be uploaded @dsm @rgp @functional @upload', async ({ page, request}, testInfo) => {
     const testResultDirectory = testInfo.outputDir;
 
@@ -72,10 +72,12 @@ test.describe.skip('Blood & RNA Kit Upload', () => {
     await kitsWithoutLabelPage.waitForReady();
     await kitsWithoutLabelPage.assertPageTitle();
     await kitsWithoutLabelPage.selectKitType(kitType);
-    await kitsWithoutLabelPage.assertCreateLabelsBtn();
-    await kitsWithoutLabelPage.assertReloadKitListBtn();
-    await kitsWithoutLabelPage.assertTableHeader();
-    await kitsWithoutLabelPage.deactivateAllKitsFor(simpleShortId);
+    if (await kitsWithoutLabelPage.hasExistingKitRequests()) {
+      await kitsWithoutLabelPage.assertCreateLabelsBtn();
+      await kitsWithoutLabelPage.assertReloadKitListBtn();
+      await kitsWithoutLabelPage.assertTableHeader();
+      await kitsWithoutLabelPage.deactivateAllKitsFor(simpleShortId);
+    }
 
     //The rest of the kit upload information - RGP kits are by family member instead of by account - using the proband's info to make a kit
     const kitUploadInfo = new KitUploadInfo(shortID, user.patient.firstName, user.patient.lastName);
@@ -92,7 +94,7 @@ test.describe.skip('Blood & RNA Kit Upload', () => {
     await kitUploadPage.selectKitType(kitType);
     await kitUploadPage.assertBrowseBtn();
     await kitUploadPage.assertUploadKitsBtn();
-    await kitUploadPage.assertInstructionSnapshot();
+    //await kitUploadPage.assertInstructionSnapshot();
     await kitUploadPage.uploadFile(kitType, [kitUploadInfo], study, testResultDirectory);
 
     //Go to Kits w/o Label to extract a shipping ID

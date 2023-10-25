@@ -89,6 +89,14 @@ export default class KitsWithoutLabelPage {
     await waitForResponse(this.page, {uri: '/kitRequests'});
   }
 
+  public async hasExistingKitRequests(): Promise<boolean> {
+    const noCurrentKitRequests = this.page.getByText('There are no kit requests');
+    if (await noCurrentKitRequests.isVisible()) {
+      return false;
+    }
+    return true;
+  }
+
   /* Assertions */
   public async assertPageTitle(): Promise<void> {
     await expect(this.page.locator('h1'),
