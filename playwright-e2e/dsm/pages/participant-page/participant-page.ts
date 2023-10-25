@@ -17,7 +17,7 @@ export default class ParticipantPage {
   }
 
   /* Actions */
-  public async fillNotes(value?: string): Promise<void> {
+  public async fillParticipantNotes(value?: string): Promise<void> {
     const textArea = this.notes;
     if (value) {
       await textArea.fill(value);
@@ -131,7 +131,7 @@ export default class ParticipantPage {
   /* ---- */
 
   /* Locators */
-  private get notes(): Locator {
+  public get participantNotes(): Locator {
     return this.page.locator('//table[.//td[contains(normalize-space(),"Participant Notes")]]//td/textarea');
   }
 
