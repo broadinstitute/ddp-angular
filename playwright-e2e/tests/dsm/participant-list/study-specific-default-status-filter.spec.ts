@@ -8,7 +8,7 @@ test.describe('Display of Participants List Filter', () => {
   const cmiResearchStudies = [StudyEnum.BRAIN, StudyEnum.PANCAN];
   const cmiResearchStudies2 = [StudyEnum.ANGIO, StudyEnum.ESC, StudyEnum.MBC, StudyEnum.PROSTATE];
 
-  cmiClinicalStudies.concat(cmiResearchStudies).concat(cmiResearchStudies2).forEach(study => {
+  for (const study of cmiClinicalStudies.concat(cmiResearchStudies).concat(cmiResearchStudies2)) {
     test(`Status is displayed for every participant @${study} @dsm`, async ({ page, request }) => {
       const participantListPage = await ParticipantListPage.goto(page, study, request);
       const searchPanel = participantListPage.filters.searchPanel;
@@ -24,5 +24,5 @@ test.describe('Display of Participants List Filter', () => {
       }
       expect(test.info().errors).toHaveLength(0);
     });
-  });
+  }
 });
