@@ -5,6 +5,7 @@ import Checkbox from 'dss/component/checkbox';
 import Select from 'dss/component/select';
 import axios from 'axios';
 import { logError } from './log-utils';
+import { KitTypeEnum } from 'dsm/component/kitType/enums/kitType-enum';
 
 export interface WaitForResponse {
   uri: string;
@@ -273,19 +274,18 @@ export function studyShortName(study: StudyEnum): { shortName: string | null; re
   return { shortName, realm, collaboratorPrefix };
 }
 
-export function isCMIStudy(study: StudyEnum): boolean {
-  return (study === StudyEnum.ANGIO) ||
-  (study === StudyEnum.BRAIN) ||
-  (study === StudyEnum.ESC) ||
-  (study === StudyEnum.MBC) ||
-  (study === StudyEnum.OSTEO) ||
-  (study === StudyEnum.PANCAN) ||
-  (study === StudyEnum.PROSTATE);
-}
-
-export function isPECGSStudy(study: StudyEnum): boolean {
-  return (study === StudyEnum.OSTEO2) || (study === StudyEnum.LMS);
-}
+export function getExpectedKitSelection(study: StudyEnum): KitTypeEnum[] {
+    let types = [KitTypeEnum.SALIVA, KitTypeEnum.BLOOD];
+    switch (study) {
+      case StudyEnum.PANCAN:
+        types = types.concat([KitTypeEnum.STOOL]);
+      break;
+      case StudyEnum.RGP:
+        types = [KitTypeEnum.BLOOD, KitTypeEnum.BLOOD_AND_RNA];
+        break;
+    }
+    return types;
+  }
 
 export function shuffle(array: any[]): any[] {
   for (let i = array.length - 1; i > 0; i--) {

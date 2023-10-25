@@ -4,13 +4,11 @@ import {WelcomePage} from 'dsm/pages/welcome-page';
 import {Navigation} from 'dsm/component/navigation/navigation';
 import {StudyEnum} from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import {SamplesNavEnum} from 'dsm/component/navigation/enums/samplesNav-enum';
-import {KitTypeEnum} from 'dsm/component/kitType/enums/kitType-enum';
 import KitsWithoutLabelPage from 'dsm/pages/kitsInfo-pages/kitsWithoutLabel-page';
 import {KitsColumnsEnum} from 'dsm/pages/kitsInfo-pages/enums/kitsColumns-enum';
-import { studyShortName } from 'utils/test-utils';
+import {getExpectedKitSelection, studyShortName} from 'utils/test-utils';
 
-// don't run in parallel
-test.describe.serial('Blood Kits upload flow', () => {
+test.describe('Kits without Labels UI', () => {
   let welcomePage: WelcomePage;
   let navigation: Navigation;
 
@@ -22,12 +20,11 @@ test.describe.serial('Blood Kits upload flow', () => {
   });
 
   for (const study of studies) {
-    test(`Kit Upload page ui @dsm @${study} @kit`, async ({page}) => {
+    test(`Page verifications @dsm @${study} @kit`, async ({page}) => {
       const expectedKitSelection = getExpectedKitSelection(study);
       const { realm: expectedRealm } = studyShortName(study);
       await welcomePage.selectStudy(study);
 
-      // Kit Upload page
       const kitsWithoutLabelPage = await navigation.selectFromSamples<KitsWithoutLabelPage>(SamplesNavEnum.KITS_WITHOUT_LABELS);
       await kitsWithoutLabelPage.waitForReady(expectedKitSelection);
       const kitsTable = kitsWithoutLabelPage.kitsWithoutLabelTable;
@@ -56,18 +53,5 @@ test.describe.serial('Blood Kits upload flow', () => {
 
       expect(test.info().errors).toHaveLength(0);
     })
-  }
-
-  function getExpectedKitSelection(study: StudyEnum): KitTypeEnum[] {
-    let types = [KitTypeEnum.SALIVA, KitTypeEnum.BLOOD];
-    switch (study) {
-      case StudyEnum.PANCAN:
-        types = types.concat([KitTypeEnum.STOOL]);
-      break;
-      case StudyEnum.RGP:
-        types = [KitTypeEnum.BLOOD, KitTypeEnum.BLOOD_AND_RNA];
-        break;
-    }
-    return types;
   }
 })

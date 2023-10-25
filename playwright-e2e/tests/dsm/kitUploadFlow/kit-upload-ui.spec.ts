@@ -4,11 +4,10 @@ import {WelcomePage} from 'dsm/pages/welcome-page';
 import {Navigation} from 'dsm/component/navigation/navigation';
 import {StudyEnum} from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import {SamplesNavEnum} from 'dsm/component/navigation/enums/samplesNav-enum';
-import {KitTypeEnum} from 'dsm/component/kitType/enums/kitType-enum';
 import KitUploadPage from 'dsm/pages/kitUpload-page/kitUpload-page';
+import {getExpectedKitSelection} from 'utils/test-utils';
 
-// don't run in parallel
-test.describe.serial('Blood Kits upload flow', () => {
+test.describe('Kits Upload UI', () => {
   let welcomePage: WelcomePage;
   let navigation: Navigation;
 
@@ -20,11 +19,10 @@ test.describe.serial('Blood Kits upload flow', () => {
   });
 
   for (const study of studies) {
-    test(`Kit Upload page ui @dsm @${study} @kit`, async ({page}) => {
+    test(`Page verifications @dsm @${study} @kit`, async () => {
       const expectedKitSelection = getExpectedKitSelection(study);
       await welcomePage.selectStudy(study);
 
-      // Kit Upload page
       const kitUploadPage = await navigation.selectFromSamples<KitUploadPage>(SamplesNavEnum.KIT_UPLOAD);
       await kitUploadPage.waitForReady(expectedKitSelection);
 
@@ -37,18 +35,5 @@ test.describe.serial('Blood Kits upload flow', () => {
 
       expect(test.info().errors).toHaveLength(0);
     })
-  }
-
-  function getExpectedKitSelection(study: StudyEnum): KitTypeEnum[] {
-    let types = [KitTypeEnum.SALIVA, KitTypeEnum.BLOOD];
-    switch (study) {
-      case StudyEnum.PANCAN:
-        types = types.concat([KitTypeEnum.STOOL]);
-      break;
-      case StudyEnum.RGP:
-        types = [KitTypeEnum.BLOOD, KitTypeEnum.BLOOD_AND_RNA];
-        break;
-    }
-    return types;
   }
 })
