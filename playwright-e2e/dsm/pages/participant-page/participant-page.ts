@@ -1,9 +1,10 @@
 import {expect, Locator, Page} from '@playwright/test';
-import {waitForResponse} from 'utils/test-utils';
+import {waitForNoSpinner, waitForResponse} from 'utils/test-utils';
 import {MainInfoEnum} from 'dsm/pages/participant-page/enums/main-info-enum';
 import Tabs from 'dsm/component/tabs/tabs';
 import {TabEnum} from 'dsm/component/tabs/enums/tab-enum';
 import Input from 'dss/component/input';
+import Modal from 'dss/component/modal';
 
 export default class ParticipantPage {
   private readonly PAGE_TITLE: string = 'Participant Page';
@@ -91,6 +92,44 @@ export default class ParticipantPage {
     return inputField.currentValue();
   }
 
+  public get getFirstNameLocator(): Locator {
+    return this.page.locator(this.getMainInputValueInfoXPath(MainInfoEnum.FIRST_NAME))
+  }
+
+  public get getLastNameLocator(): Locator {
+    return this.page.locator(this.getMainInputValueInfoXPath(MainInfoEnum.LAST_NAME))
+  }
+
+  public async updateFirstName(newValue: string): Promise<void> {
+    const input = this.getFirstNameLocator;
+    await input.fill('');
+    await input.fill(newValue);
+
+    const updateButton = this.page.locator(this.getMainInputUpdateButtonXPath(MainInfoEnum.FIRST_NAME));
+    await updateButton.click();
+    await waitForNoSpinner(this.page);
+
+    const modal = new Modal(this.page);
+    const content = await modal.getContent().innerText();
+    expect(content).toStrictEqual('Participant successfully updated');
+    await this.page.reload(); // close modal and load Participants List page
+  }
+
+  public async updateLastName(newValue: string): Promise<void> {
+    const input = this.getLastNameLocator;
+    await input.fill('');
+    await input.fill(newValue);
+
+    const updateButton = this.page.locator(this.getMainInputUpdateButtonXPath(MainInfoEnum.LAST_NAME));
+    await updateButton.click();
+    await waitForNoSpinner(this.page);
+
+    const modal = new Modal(this.page);
+    const content = await modal.getContent().innerText();
+    expect(content).toStrictEqual('Participant successfully updated');
+    await this.page.reload(); // close modal and load Participants List page
+  }
+
   /* Helper functions */
 
   private async readMainTextInfoFor(key: MainInfoEnum) {
@@ -122,6 +161,10 @@ export default class ParticipantPage {
 
   private getMainInputValueInfoXPath(info: MainInfoEnum) {
     return `${this.getMainInfoXPath(info)}/input`
+  }
+
+  private getMainInputUpdateButtonXPath(info: MainInfoEnum) {
+    return `${this.getMainInfoXPath(info)}/button[contains(.,"Update")]`
   }
 
   private getMainCheckboxValueInfoXPath(info: MainInfoEnum) {
