@@ -18,7 +18,7 @@ export default class ParticipantPage {
 
   /* Actions */
   public async fillParticipantNotes(value?: string): Promise<void> {
-    const textArea = this.notes;
+    const textArea = this.participantNotes;
     if (value) {
       await textArea.fill(value);
     } else {
@@ -167,7 +167,7 @@ export default class ParticipantPage {
   }
 
   public async assertNotesToBe(value: string): Promise<void> {
-    expect(await this.notes.inputValue(),
+    expect(await this.participantNotes.inputValue(),
       "Participant page - participant's value doesn't match the provided one")
       .toBe(value);
   }
