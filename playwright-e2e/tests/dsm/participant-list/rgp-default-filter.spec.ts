@@ -2,6 +2,7 @@ import { expect } from '@playwright/test';
 import { test } from 'fixtures/dsm-fixture';
 import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
+import { CustomViewColumns } from 'dsm/component/filters/sections/search/search-enums';
 
 test.describe('Participants list', () => {
   test('RGP default filters @dsm @rgp', async ({ page, request }) => {
@@ -69,5 +70,18 @@ test.describe('Participants list', () => {
     expect.soft(await searchPanel.dateInputExists('Enrollment Date**')).toBe(true);
 
     expect(test.info().errors).toHaveLength(0);
+  });
+
+  test('Open Status filter @dsm @rgp', async ({ page, request }) => {
+    // Status column must be added. It's not part of default filters.
+    const participantListPage = await ParticipantListPage.goto(page, StudyEnum.RGP, request);
+    const customizeViewPanel = participantListPage.filters.customizeViewPanel;
+    await customizeViewPanel.open();
+    await customizeViewPanel.selectColumns(CustomViewColumns.PARTICIPANT, ['Status']);
+    await customizeViewPanel.close();
+
+    const searchPanel = participantListPage.filters.searchPanel;
+    await searchPanel.open();
+    expect(await searchPanel.checkboxExists('Status', 'Registered')).toBe(true);
   });
 });
