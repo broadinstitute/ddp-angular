@@ -132,6 +132,9 @@ test.describe('Blood & RNA Kit Upload', () => {
     await kitQueuePage.assertPageTitle();
     await kitQueuePage.assertDisplayedKitTypes([KitTypeEnum.BLOOD, KitTypeEnum.BLOOD_AND_RNA]);
     await kitQueuePage.selectKitType(KitTypeEnum.BLOOD_AND_RNA);
+    if (!await kitQueuePage.hasExistingKitRequests()) {
+      throw Error('No existing kit request in RGP -> Blood and RNA kit section');
+    }
     await kitQueuePage.assertReloadKitListBtn();
     await kitQueuePage.search(KitsColumnsEnum.SHIPPING_ID, shippingID);
 

@@ -36,6 +36,14 @@ export default class KitsQueuePage {
     await waitForNoSpinner(this.page);
   }
 
+  public async hasExistingKitRequests(): Promise<boolean> {
+    const noCurrentKitRequests = this.page.getByText('There are no kit requests');
+    if (await noCurrentKitRequests.isVisible()) {
+      return false;
+    }
+    return true;
+  }
+
   public async selectKitType(kitType: KitTypeEnum): Promise<void> {
     await waitForNoSpinner(this.page);
     await this.kitType.selectKitType(kitType);
