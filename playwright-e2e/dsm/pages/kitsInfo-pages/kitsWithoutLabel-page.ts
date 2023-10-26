@@ -61,6 +61,11 @@ export default class KitsWithoutLabelPage {
       .toHaveCount(0)
   }
 
+  public async waitUntilKitLabelCreationRequestProcessed(): Promise<void> {
+    //Wait until all instances seen instances of kit label creation has been processed
+    const pendingKitLabelCreation = this.page.locator('[data-icon="cog"]').all();
+  }
+
   public async search(columnName: KitsColumnsEnum, value: string): Promise<void> {
     await this.kitsTable.searchBy(columnName, value);
   }

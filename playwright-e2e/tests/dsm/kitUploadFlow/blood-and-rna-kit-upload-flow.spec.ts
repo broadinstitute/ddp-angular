@@ -23,6 +23,7 @@ import { simplifyShortID } from 'utils/faker-utils';
 import { saveParticipantGuid } from 'utils/faker-utils';
 import { ParticipantListTable } from 'dsm/component/tables/participant-list-table';
 import { waitForResponse } from 'utils/test-utils';
+import KitsQueuePage from 'dsm/pages/kitsInfo-pages/kitsQueue-page';
 
 test.describe('Blood & RNA Kit Upload', () => {
   test('Verify that a blood & rna kit can be uploaded @dsm @rgp @functional @upload', async ({ page, request}, testInfo) => {
@@ -125,6 +126,13 @@ test.describe('Blood & RNA Kit Upload', () => {
     ]);
 
     //Kit Queue
+    const kitQueuePage = await navigation.selectFromSamples<KitsQueuePage>(SamplesNavEnum.QUEUE);
+    await kitQueuePage.waitForLoad();
+    await kitQueuePage.assertPageTitle();
+    await kitQueuePage.assertDisplayedKitTypes([KitTypeEnum.BLOOD, KitTypeEnum.BLOOD_AND_RNA]);
+    await kitQueuePage.selectKitType(KitTypeEnum.BLOOD_AND_RNA);
+    await kitQueuePage.assertReloadKitListBtn();
+    await kitQueuePage.search(KitsColumnsEnum.SHIPPING_ID, shippingID);
 
     //Tracking scan
     const labelNumber = crypto.randomUUID().toString().substring(0, 10);
