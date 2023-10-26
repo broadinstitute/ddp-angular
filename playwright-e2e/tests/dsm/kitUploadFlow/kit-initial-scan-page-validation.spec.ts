@@ -82,6 +82,3 @@ test.describe.serial('Initial Scan page', () => {
     });
   }
 })
-
-// kit-d9b76c66-6
-// PAHV44
