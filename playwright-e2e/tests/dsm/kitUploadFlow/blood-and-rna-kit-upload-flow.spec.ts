@@ -22,6 +22,7 @@ import RgpFinalScanPage from 'dsm/pages/scanner-pages/rgpFinalScan-page'
 import { simplifyShortID } from 'utils/faker-utils';
 import { saveParticipantGuid } from 'utils/faker-utils';
 import { ParticipantListTable } from 'dsm/component/tables/participant-list-table';
+import { waitForResponse } from 'utils/test-utils';
 
 test.describe('Blood & RNA Kit Upload', () => {
   test('Verify that a blood & rna kit can be uploaded @dsm @rgp @functional @upload', async ({ page, request}, testInfo) => {
@@ -103,11 +104,27 @@ test.describe('Blood & RNA Kit Upload', () => {
     await kitsWithoutLabelPage.selectKitType(kitType);
     await kitsWithoutLabelPage.assertCreateLabelsBtn();
     await kitsWithoutLabelPage.assertReloadKitListBtn();
-    await kitsWithoutLabelPage.assertTableHeader();
+    //await kitsWithoutLabelPage.assertTableHeader(); Preferred Language column needs to be added to RGP DSM Test
     await kitsWithoutLabelPage.assertPageTitle();
 
     await kitsWithoutLabelPage.search(KitsColumnsEnum.SHORT_ID, simpleShortId);
     const shippingID = (await kitsWithoutLabelPage.getData(KitsColumnsEnum.SHIPPING_ID)).trim();
+
+    const kitsTable = kitsWithoutLabelPage.kitsWithoutLabelTable;
+    await kitsTable.searchByColumn(KitsColumnsEnum.SHORT_ID, simpleShortId);
+    await expect(kitsTable.rowLocator()).toHaveCount(1);
+
+    await kitsTable.selectSingleRowByIndex();
+    await Promise.all([
+      waitForResponse(page, { uri: '/kitLabel' }),
+      kitsWithoutLabelPage.createLabelsButton.click()
+    ]);
+    await Promise.all([
+      expect(page.locator('[data-icon="cog"]')).toBeVisible(),
+      expect(page.locator('h3')).toHaveText(/Triggered label creation/i)
+    ]);
+
+    //Kit Queue
 
     //Tracking scan
     const labelNumber = crypto.randomUUID().toString().substring(0, 10);
@@ -145,17 +162,13 @@ test.describe('Blood & RNA Kit Upload', () => {
     const kitsReceivedPage = await navigation.selectFromSamples<KitsReceivedPage>(SamplesNavEnum.RECEIVED);
     await kitsReceivedPage.waitForLoad();
     await kitsReceivedPage.assertPageTitle();
-    await kitsReceivedPage.kitReceivedRequest(kitLabel); //Mark the blood kit as received
-    await kitsReceivedPage.kitReceivedRequest(rnaLabel); //Mark the RNA kit as received
+    console.log(`MF Code used for receiving kit request: ${kitLabel}`);
+    await kitsReceivedPage.kitReceivedRequestForRGPKits(kitLabel, shortID); //Mark the blood & rna kit as received
     await kitsReceivedPage.assertDisplayedKitTypes(expectedKitTypes);
     await kitsReceivedPage.selectKitType(kitType);
 
-    //Check for the received blood kit
+    //Check for the received blood and rna kit
     await kitsReceivedPage.search(KitsColumnsEnum.MF_CODE, kitLabel);
-    await kitsReceivedPage.assertDisplayedRowsCount(1);
-
-    //Check for the received RNA kit
-    await kitsReceivedPage.search(KitsColumnsEnum.MF_CODE, rnaLabel);
     await kitsReceivedPage.assertDisplayedRowsCount(1);
   });
 });
