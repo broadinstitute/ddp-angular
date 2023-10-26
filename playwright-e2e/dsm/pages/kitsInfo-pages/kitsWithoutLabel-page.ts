@@ -61,9 +61,21 @@ export default class KitsWithoutLabelPage {
       .toHaveCount(0)
   }
 
-  public async waitUntilKitLabelCreationRequestProcessed(): Promise<void> {
+  public async waitUntilAllKitLabelCreationRequestsAreProcessed(): Promise<void> {
     //Wait until all instances seen instances of kit label creation has been processed
-    const pendingKitLabelCreation = this.page.locator('[data-icon="cog"]').all();
+    const pendingKitLabelCreation = await this.page.locator('[data-icon="cog"]').all();
+    for (const pendingKit of pendingKitLabelCreation) {
+      await expect(async () => {
+        await this.reloadKitList();
+        await expect(pendingKit).not.toBeVisible();
+      }).toPass({ timeout: 90 * 1000 });
+    }
+  }
+
+  public async reloadKitList(): Promise<void> {
+    const reloadKitListButton = this.page.locator(this.reloadKitListBtnXPath);
+    await reloadKitListButton.click();
+    await waitForNoSpinner(this.page);
   }
 
   public async search(columnName: KitsColumnsEnum, value: string): Promise<void> {

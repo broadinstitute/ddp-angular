@@ -47,6 +47,11 @@ export default class KitsQueuePage {
     await this.kitsTable.searchBy(columnName, value);
   }
 
+  public async reloadKitList(): Promise<void> {
+    await this.getReloadKitListButton().click();
+    await waitForNoSpinner(this.page);
+  }
+
   /* Assertions */
   public async assertPageTitle(): Promise<void> {
     await expect(this.page.locator('h1'),

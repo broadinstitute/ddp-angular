@@ -124,6 +124,7 @@ test.describe('Blood & RNA Kit Upload', () => {
       expect(page.locator('[data-icon="cog"]')).toBeVisible(),
       expect(page.locator('h3')).toHaveText(/Triggered label creation/i)
     ]);
+    await kitsWithoutLabelPage.waitUntilAllKitLabelCreationRequestsAreProcessed();
 
     //Kit Queue
     const kitQueuePage = await navigation.selectFromSamples<KitsQueuePage>(SamplesNavEnum.QUEUE);
