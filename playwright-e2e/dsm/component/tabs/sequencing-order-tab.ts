@@ -2,6 +2,8 @@ import { Locator, Page, expect } from '@playwright/test';
 import { getDate } from 'utils/date-utils';
 
 export default class SequeuncingOrderTab {
+  private readonly SAMPLE_ROW = '//app-sequencing-order//tr';
+
   constructor(private readonly page: Page) {
   }
 
@@ -19,7 +21,7 @@ export default class SequeuncingOrderTab {
     await placeOrderButton.click();
   }
 
-  public async assertNoSamplesCanBeSelected(): Promise<void> {
+  public async assertSamplesInvisible(): Promise<void> {
     const allAvailableSamples = await this.getAllPossibleSamples();
     for (const sample of allAvailableSamples) {
       const sampleCheckbox = this.getCheckboxOfSample(sample);
@@ -27,7 +29,7 @@ export default class SequeuncingOrderTab {
     }
   }
 
-  public async assertPlaceOrderButtonNotVisible(): Promise<void> {
+  public async assertPlaceOrderButtonInvisible(): Promise<void> {
     const placeOrderButton = this.getPlaceOrderButton();
     await expect(placeOrderButton).not.toBeVisible();
   }
@@ -66,7 +68,7 @@ export default class SequeuncingOrderTab {
   public async getFirstAvailableNormalSample(): Promise<Locator> {
     const samples = await this.getAllNormalSamples();
     const amountOfSamples = samples.length;
-    expect.soft(amountOfSamples, 'There are no available normal samples in the Sequencing Tab').toBeGreaterThanOrEqual(1);
+    expect(amountOfSamples, 'There are no available normal samples in the Sequencing Tab').toBeGreaterThanOrEqual(1);
     return samples[0];
   }
 
@@ -77,7 +79,7 @@ export default class SequeuncingOrderTab {
   public async getFirstAvailableTumorSample(): Promise<Locator> {
     const samples = await this.getAllTumorSamples();
     const amountOfSamples = samples.length;
-    expect.soft(amountOfSamples, 'There are no available tumor samples in the Sequencing Tab').toBeGreaterThanOrEqual(1);
+    expect(amountOfSamples, 'There are no available tumor samples in the Sequencing Tab').toBeGreaterThanOrEqual(1);
     return samples[0];
   }
 
@@ -90,12 +92,18 @@ export default class SequeuncingOrderTab {
   }
 
   private async getAllNormalSamples(): Promise<Locator[]> {
-    const samples = await this.page.locator(`//app-sequencing-order//tr[contains(.,'Normal')]`).all();
-    console.log(`Amount of normal samples: ${samples.length}`);
+    const normalSampleXPath = this.SAMPLE_ROW.concat(`[contains(.,'Normal')]`);
+    const samples = await this.page.locator(normalSampleXPath).all();
+    const amountOfSamples = samples.length;
+    expect(amountOfSamples, 'No normal samples were available in the Sequencing Tab').toBeGreaterThanOrEqual(1);
     return samples;
   }
 
   private async getAllTumorSamples(): Promise<Locator[]> {
-    return this.page.locator(`//app-sequencing-order//tr[contains(.,'Tumor')]`).all();
+    const tumorSampleXPath = this.SAMPLE_ROW.concat(`[contains(.,'Tumor')]`);
+    const samples = await this.page.locator(tumorSampleXPath).all();
+    const amountOfSamples = samples.length;
+    expect(amountOfSamples, 'No tumor samples were available in the Sequencing tab').toBeGreaterThanOrEqual(1);
+    return samples;
   }
 }
