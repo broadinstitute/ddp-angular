@@ -2,7 +2,8 @@ import { Locator, Page, expect } from '@playwright/test';
 import { getDate } from 'utils/date-utils';
 
 export default class SequeuncingOrderTab {
-  private readonly SAMPLE_ROW = '//app-sequencing-order//tr';
+  private readonly SAMPLE_ROW_XPATH = '//app-sequencing-order//tr';
+  private readonly DATE_FIELD_XPATH = `//input[@data-placeholder='mm/dd/yyyy']`;
 
   constructor(private readonly page: Page) {
   }
@@ -41,16 +42,17 @@ export default class SequeuncingOrderTab {
     for (const sample of allAvailableSamples) {
       const collectionDateSection = sample.locator(`//td[${collectionDateIndex}]`); //Get Collection Date section
       if (await this.isInteractiveDateField(collectionDateSection)) {
-        const collectionDateField = collectionDateSection.locator(`//input[@data-placeholder='mm/dd/yyyy']`); //Get date field
+        const collectionDateField = collectionDateSection.locator(this.DATE_FIELD_XPATH); //Get date field
         const today = getDate();
         await collectionDateField.fill(today);
+        await collectionDateField.press('Enter');
       }
     }
   }
 
   private async isInteractiveDateField(dateField: Locator): Promise<boolean> {
-    const fieldInput = await dateField.innerText();
-    if (fieldInput === `mm/dd/yyyy\n  Today`) {
+    const field = dateField.locator(this.DATE_FIELD_XPATH);
+    if (await field.isVisible()) {
       return true;
     }
     return false;
@@ -58,7 +60,7 @@ export default class SequeuncingOrderTab {
 
   /* Locators */
   public async getAllPossibleSamples(): Promise<Locator[]> {
-    const samplesXPath = this.SAMPLE_ROW.concat(`[contains(.,'Normal') or contains(.,'Tumor')]`);
+    const samplesXPath = this.SAMPLE_ROW_XPATH.concat(`[contains(.,'Normal') or contains(.,'Tumor')]`);
     return this.page.locator(samplesXPath).all();
   }
 
@@ -93,7 +95,7 @@ export default class SequeuncingOrderTab {
   }
 
   private async getAllNormalSamples(): Promise<Locator[]> {
-    const normalSampleXPath = this.SAMPLE_ROW.concat(`[contains(.,'Normal')]`);
+    const normalSampleXPath = this.SAMPLE_ROW_XPATH.concat(`[contains(.,'Normal')]`);
     const samples = await this.page.locator(normalSampleXPath).all();
     const amountOfSamples = samples.length;
     expect(amountOfSamples, 'No normal samples were available in the Sequencing Tab').toBeGreaterThanOrEqual(1);
@@ -101,7 +103,7 @@ export default class SequeuncingOrderTab {
   }
 
   private async getAllTumorSamples(): Promise<Locator[]> {
-    const tumorSampleXPath = this.SAMPLE_ROW.concat(`[contains(.,'Tumor')]`);
+    const tumorSampleXPath = this.SAMPLE_ROW_XPATH.concat(`[contains(.,'Tumor')]`);
     const samples = await this.page.locator(tumorSampleXPath).all();
     const amountOfSamples = samples.length;
     expect(amountOfSamples, 'No tumor samples were available in the Sequencing tab').toBeGreaterThanOrEqual(1);
