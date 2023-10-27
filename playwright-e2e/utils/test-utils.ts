@@ -269,21 +269,17 @@ export function studyShortName(study: StudyEnum): { shortName: string | null; re
 }
 
 export function isCMIStudy(study: StudyEnum): boolean {
-  return study === (
-    StudyEnum.ANGIO ||
-    StudyEnum.BRAIN ||
-    StudyEnum.ESC ||
-    StudyEnum.MBC ||
-    StudyEnum.OSTEO ||
-    StudyEnum.PANCAN ||
-    StudyEnum.PROSTATE)
+  return (study === StudyEnum.ANGIO) ||
+  (study === StudyEnum.BRAIN) ||
+  (study === StudyEnum.ESC) ||
+  (study === StudyEnum.MBC) ||
+  (study === StudyEnum.OSTEO) ||
+  (study === StudyEnum.PANCAN) ||
+  (study === StudyEnum.PROSTATE);
 }
 
 export function isPECGSStudy(study: StudyEnum): boolean {
-  return study === (
-    StudyEnum.OSTEO2 ||
-    StudyEnum.LMS
-  )
+  return (study === StudyEnum.OSTEO2) || (study === StudyEnum.LMS);
 }
 
 export function shuffle(array: any[]): any[] {

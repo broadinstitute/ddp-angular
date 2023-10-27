@@ -136,6 +136,11 @@ export default class UserPermissionPage {
     return studyAdminPhoneNumber.innerText();
   }
 
+  /**
+   * Takes the given study name and matches it to a study group so that the study's related permissions can be determined
+   * @param study the study name e.g. OS PE-CGS
+   * @returns the study group e.g. pecgs
+   */
   private determineStudyGroup(study: StudyEnum): string {
     let studyGroup = '';
 
@@ -154,7 +159,6 @@ export default class UserPermissionPage {
     } else if (study === StudyEnum.DARWIN) {
       studyGroup = this.DARWIN_ARK_STUDY_GROUP;
     }
-
     return studyGroup;
   }
 
