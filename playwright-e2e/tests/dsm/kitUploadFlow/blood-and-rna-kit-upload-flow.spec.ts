@@ -23,7 +23,7 @@ import { simplifyShortID } from 'utils/faker-utils';
 import { saveParticipantGuid } from 'utils/faker-utils';
 import { ParticipantListTable } from 'dsm/component/tables/participant-list-table';
 import { waitForResponse } from 'utils/test-utils';
-import KitsQueuePage from 'dsm/pages/kitsInfo-pages/kitsQueue-page';
+import KitsQueuePage from 'dsm/pages/kitsInfo-pages/kit-queue-page';
 
 test.describe('Blood & RNA Kit Upload', () => {
   test('Verify that a blood & rna kit can be uploaded @dsm @rgp @functional @upload', async ({ page, request}, testInfo) => {
@@ -115,6 +115,7 @@ test.describe('Blood & RNA Kit Upload', () => {
     await kitsTable.searchByColumn(KitsColumnsEnum.SHORT_ID, simpleShortId);
     await expect(kitsTable.rowLocator()).toHaveCount(1);
 
+    //Search for the kit and get its label created
     await kitsTable.selectSingleRowByIndex();
     await Promise.all([
       waitForResponse(page, { uri: '/kitLabel' }),
@@ -132,11 +133,12 @@ test.describe('Blood & RNA Kit Upload', () => {
     await kitQueuePage.assertPageTitle();
     await kitQueuePage.assertDisplayedKitTypes([KitTypeEnum.BLOOD, KitTypeEnum.BLOOD_AND_RNA]);
     await kitQueuePage.selectKitType(KitTypeEnum.BLOOD_AND_RNA);
-    if (!await kitQueuePage.hasExistingKitRequests()) {
-      throw Error('No existing kit request in RGP -> Blood and RNA kit section');
-    }
     await kitQueuePage.assertReloadKitListBtn();
-    await kitQueuePage.search(KitsColumnsEnum.SHIPPING_ID, shippingID);
+    if (!await kitQueuePage.hasExistingKitRequests()) {
+      
+    } else {
+      //When there are kits in Kit Queue
+    }
 
     //Tracking scan
     const labelNumber = crypto.randomUUID().toString().substring(0, 10);

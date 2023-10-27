@@ -44,6 +44,15 @@ export default class KitsQueuePage {
     return true;
   }
 
+  public async getAllSamplesOnPage(): Promise<Locator[]> {
+    return this.page.locator('//table//tbody//tr').all();
+  }
+
+  public getAmountOfSamplesOnPage(): number {
+    //stuff here
+    return 1;
+  }
+
   public async selectKitType(kitType: KitTypeEnum): Promise<void> {
     await waitForNoSpinner(this.page);
     await this.kitType.selectKitType(kitType);
@@ -53,6 +62,10 @@ export default class KitsQueuePage {
 
   public async search(columnName: KitsColumnsEnum, value: string): Promise<void> {
     await this.kitsTable.searchBy(columnName, value);
+  }
+
+  public async getData(columnName: KitsColumnsEnum): Promise<string> {
+    return await this.kitsTable.getData(columnName);
   }
 
   public async reloadKitList(): Promise<void> {

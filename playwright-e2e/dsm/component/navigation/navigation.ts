@@ -17,7 +17,7 @@ import KitsReceivedPage from 'dsm/pages/kitsInfo-pages/kitsReceived-page/kitsRec
 import TrackingScanPage from 'dsm/pages/scanner-pages/trackingScan-page';
 import RgpFinalScanPage from 'dsm/pages/scanner-pages/rgpFinalScan-page';
 import ErrorPage from 'dsm/pages/samples/error-page';
-import KitsQueuePage from 'dsm/pages/kitsInfo-pages/kitsQueue-page';
+import KitsQueuePage from 'dsm/pages/kitsInfo-pages/kit-queue-page';
 
 
 type Selection = StudyNavEnum | StudyEnum | SamplesNavEnum | MiscellaneousEnum;
