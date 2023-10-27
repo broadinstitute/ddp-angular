@@ -37,7 +37,7 @@ export class Navigation {
       [SamplesNavEnum.ERROR, new ErrorPage(this.page)],
     ]),
     miscellaneous: new Map<string, object>([
-      [MiscellaneousEnum.USERS_AND_PERMISSIONS, new UserPermissionPage(this.page)]
+      [MiscellaneousEnum.USERS_AND_PERMISSIONS, new UserPermissionPage(this.page)],
     ]),
   };
 
