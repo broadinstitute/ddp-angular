@@ -1,6 +1,7 @@
 import {expect, Locator, Page} from '@playwright/test';
 import {StudyEnum} from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import { UserPermission } from './enums/userPermission-enum';
+import { isCMIStudy, isPECGSStudy } from 'utils/test-utils';
 
 export default class UserPermissionPage {
   private readonly PAGE_TITLE: string = 'Users And Permissions';
@@ -135,30 +136,12 @@ export default class UserPermissionPage {
     return studyAdminPhoneNumber.innerText();
   }
 
-  private isCMIStudy(study: StudyEnum): boolean {
-    return study === (
-      StudyEnum.ANGIO ||
-      StudyEnum.BRAIN ||
-      StudyEnum.ESC ||
-      StudyEnum.MBC ||
-      StudyEnum.OSTEO ||
-      StudyEnum.PANCAN ||
-      StudyEnum.PROSTATE)
-  }
-
-  private isPECGSStudy(study: StudyEnum): boolean {
-    return study === (
-      StudyEnum.OSTEO2 ||
-      StudyEnum.LMS
-    )
-  }
-
   private determineStudyGroup(study: StudyEnum): string {
     let studyGroup = '';
 
-    if (this.isCMIStudy(study)) {
+    if (isCMIStudy(study)) {
       studyGroup = this.CMI_STUDY_GROUP;
-    } else if (this.isPECGSStudy(study)) {
+    } else if (isPECGSStudy(study)) {
       studyGroup = this.PECGS_STUDY_GROUP;
     } else if (study === StudyEnum.RGP) {
       studyGroup = this.RGP_STUDY_GROUP;

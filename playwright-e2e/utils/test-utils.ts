@@ -268,6 +268,24 @@ export function studyShortName(study: StudyEnum): { shortName: string | null; re
   return { shortName, realm, collaboratorPrefix };
 }
 
+export function isCMIStudy(study: StudyEnum): boolean {
+  return study === (
+    StudyEnum.ANGIO ||
+    StudyEnum.BRAIN ||
+    StudyEnum.ESC ||
+    StudyEnum.MBC ||
+    StudyEnum.OSTEO ||
+    StudyEnum.PANCAN ||
+    StudyEnum.PROSTATE)
+}
+
+export function isPECGSStudy(study: StudyEnum): boolean {
+  return study === (
+    StudyEnum.OSTEO2 ||
+    StudyEnum.LMS
+  )
+}
+
 export function shuffle(array: any[]): any[] {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
