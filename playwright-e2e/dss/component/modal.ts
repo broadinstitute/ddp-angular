@@ -22,4 +22,8 @@ export default class Modal {
     const { label } = opts;
     return new Input(this.page, { label, root: this.toLocator() });
   }
+
+  getContent(): Locator {
+    return this.toLocator().locator('.mat-dialog-content');
+  }
 }

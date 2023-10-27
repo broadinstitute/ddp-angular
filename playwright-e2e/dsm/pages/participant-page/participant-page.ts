@@ -1,9 +1,10 @@
 import {expect, Locator, Page} from '@playwright/test';
-import {waitForResponse} from 'utils/test-utils';
+import {waitForNoSpinner, waitForResponse} from 'utils/test-utils';
 import {MainInfoEnum} from 'dsm/pages/participant-page/enums/main-info-enum';
 import Tabs from 'dsm/component/tabs/tabs';
 import {TabEnum} from 'dsm/component/tabs/enums/tab-enum';
 import Input from 'dss/component/input';
+import Modal from 'dss/component/modal';
 
 export default class ParticipantPage {
   private readonly PAGE_TITLE: string = 'Participant Page';
@@ -16,8 +17,8 @@ export default class ParticipantPage {
   }
 
   /* Actions */
-  public async fillNotes(value?: string): Promise<void> {
-    const textArea = this.notes;
+  public async fillParticipantNotes(value?: string): Promise<void> {
+    const textArea = this.participantNotes;
     if (value) {
       await textArea.fill(value);
     } else {
@@ -91,6 +92,29 @@ export default class ParticipantPage {
     return inputField.currentValue();
   }
 
+  public get getFirstNameLocator(): Locator {
+    return this.page.locator(this.getMainInputValueInfoXPath(MainInfoEnum.FIRST_NAME))
+  }
+
+  public get getLastNameLocator(): Locator {
+    return this.page.locator(this.getMainInputValueInfoXPath(MainInfoEnum.LAST_NAME))
+  }
+
+  public async updateInput(inputEnum: MainInfoEnum, newValue: string): Promise<void> {
+    const input = this.page.locator(this.getMainInputValueInfoXPath(inputEnum))
+    await input.fill('');
+    await input.fill(newValue);
+
+    const updateButton = this.page.locator(this.getMainInputUpdateButtonXPath(inputEnum));
+    await updateButton.click();
+    await waitForNoSpinner(this.page);
+
+    const modal = new Modal(this.page);
+    const content = await modal.getContent().innerText();
+    expect(content).toStrictEqual('Participant successfully updated');
+    await this.page.keyboard.press('Escape'); // close modal
+  }
+
   /* Helper functions */
 
   private async readMainTextInfoFor(key: MainInfoEnum) {
@@ -107,7 +131,7 @@ export default class ParticipantPage {
   /* ---- */
 
   /* Locators */
-  private get notes(): Locator {
+  public get participantNotes(): Locator {
     return this.page.locator('//table[.//td[contains(normalize-space(),"Participant Notes")]]//td/textarea');
   }
 
@@ -122,6 +146,10 @@ export default class ParticipantPage {
 
   private getMainInputValueInfoXPath(info: MainInfoEnum) {
     return `${this.getMainInfoXPath(info)}/input`
+  }
+
+  private getMainInputUpdateButtonXPath(info: MainInfoEnum) {
+    return `${this.getMainInfoXPath(info)}/button[contains(.,"Update")]`
   }
 
   private getMainCheckboxValueInfoXPath(info: MainInfoEnum) {
@@ -139,7 +167,7 @@ export default class ParticipantPage {
   }
 
   public async assertNotesToBe(value: string): Promise<void> {
-    expect(await this.notes.inputValue(),
+    expect(await this.participantNotes.inputValue(),
       "Participant page - participant's value doesn't match the provided one")
       .toBe(value);
   }
