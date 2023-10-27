@@ -36,7 +36,9 @@ export class Navigation {
       [SamplesNavEnum.RECEIVED, new KitsReceivedPage(this.page, this.request)],
       [SamplesNavEnum.ERROR, new ErrorPage(this.page)],
     ]),
-    miscellaneous: new Map<string, object>([[MiscellaneousEnum.USERS_AND_PERMISSIONS, new UserPermissionPage(this.page)]]),
+    miscellaneous: new Map<string, object>([
+      [MiscellaneousEnum.USERS_AND_PERMISSIONS, new UserPermissionPage(this.page)]
+    ]),
   };
 
   constructor(private readonly page: Page, private readonly request: APIRequestContext) {}
