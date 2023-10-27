@@ -58,7 +58,8 @@ export default class SequeuncingOrderTab {
 
   /* Locators */
   public async getAllPossibleSamples(): Promise<Locator[]> {
-    return this.page.locator(`//app-sequencing-order//tr[contains(.,'Normal') or contains(.,'Tumor')]`).all();
+    const samplesXPath = this.SAMPLE_ROW.concat(`[contains(.,'Normal') or contains(.,'Tumor')]`);
+    return this.page.locator(samplesXPath).all();
   }
 
   /**
