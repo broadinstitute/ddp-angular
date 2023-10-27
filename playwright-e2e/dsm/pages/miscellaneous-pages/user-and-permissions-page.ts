@@ -25,7 +25,6 @@ export default class UserPermissionPage {
   }
 
   public getStudyAdmin(email: string): Locator {
-    //return this.page.locator(`//mat-expansion-panel//mat-panel-title[contains(text(), '${email}')]`);
     return this.page.getByText(`${email}`);
   }
 
@@ -64,6 +63,12 @@ export default class UserPermissionPage {
     await expect(button).toBeVisible();
   }
 
+  /**
+   * Checks that the values in the study admin's permission block match the given email, name, and phone number
+   * @param email study admin's email
+   * @param name study admin's name
+   * @param phone study admin's phone number
+   */
   public async assertStudyAdminInfo(email: string, name: string, phone?: string): Promise<void> {
     //Get the relevant study admin's section
     const studyAdmin = this.getStudyAdmin(email);
@@ -77,7 +82,7 @@ export default class UserPermissionPage {
     expect(studyAdminName).toBe(name);
 
     if (phone) {
-      //If phone information is provided, verify that it is shown in the page as expected
+      //Verify the given phone number is displayed in the study admin's permission block as expected
       const studyAdminPhoneNumber = await this.getStudyAdminPhoneNumber(phone);
       expect(studyAdminPhoneNumber).toBe(phone);
     }
@@ -94,7 +99,6 @@ export default class UserPermissionPage {
       const permissionCheckbox = allPossiblePermissions[index];
       const permission = permissionCheckbox.locator(`//span[@class='ng-star-inserted']`);
       const currentPermission = (await permission.innerText()).trim();
-      //console.log(`Current permission: ${currentPermission}`);
       const currentPermissionCastedAsEnum = currentPermission as UserPermission;
       const verifiedPermission = Object.values(this.currentStudyPermissions).indexOf(currentPermissionCastedAsEnum) >= 0;
       if (!verifiedPermission) {
@@ -116,14 +120,11 @@ export default class UserPermissionPage {
     const permissionName = permission as string;
     console.log(`Permission Name: ${permissionName}`);
     if (forSelection) {
-      //below xpath works best for selection/clicking
       return studyAdmin.locator(`//ancestor::mat-expansion-panel//app-permission-checkbox[contains(.,'${permissionName}')]//div`)
     }
-    //below xpath works best for determining if the checkbox is currently selected
     return studyAdmin.locator(`//ancestor::mat-expansion-panel//app-permission-checkbox[contains(.,'${permissionName}')]//input`);
   }
 
-  /* Utility methods */
   public async getStudyAdminName(name: string): Promise<string> {
     const studyAdminName = this.page.getByText(`${name}`);
     return studyAdminName.innerText();
@@ -156,25 +157,18 @@ export default class UserPermissionPage {
     let studyGroup = '';
 
     if (this.isCMIStudy(study)) {
-      //Study is a CMI research study
       studyGroup = this.CMI_STUDY_GROUP;
     } else if (this.isPECGSStudy(study)) {
-      //Study is a CMI clinical study
       studyGroup = this.PECGS_STUDY_GROUP;
     } else if (study === StudyEnum.RGP) {
-      //Study is the RGP study
       studyGroup = this.RGP_STUDY_GROUP;
     } else if (study === StudyEnum.PRION) {
-      //Study is the Prion study
       studyGroup = this.PRION_STUDY_GROUP;
     } else if (study === StudyEnum.AT) {
-      //Study is the ATCP study
       studyGroup = this.ATCP_STUDY_GROUP;
     } else if (study === StudyEnum.BRUGADA) {
-      //Study is the Brugada study
       studyGroup = this.BRUGADA_STUDY_GROUP;
     } else if (study === StudyEnum.DARWIN) {
-      //Study is the Darwin study
       studyGroup = this.DARWIN_ARK_STUDY_GROUP;
     }
 
