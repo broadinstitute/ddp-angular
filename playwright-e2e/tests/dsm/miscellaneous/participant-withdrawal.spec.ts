@@ -33,7 +33,7 @@ test.describe('Participants Withdrawal', () => {
         await searchPanel.open();
         await searchPanel.text('First Name',
           { textValue: user.adult.firstName, additionalFilters: [AdditionalFilter.EXACT_MATCH], exactMatch: false });
-        await searchPanel.checkboxes('Status', { checkboxValues: ['Registered'] });
+        await searchPanel.checkboxes('Status', { checkboxValues: ['Enrolled'] });
         await searchPanel.search();
 
         // At least one participant after search

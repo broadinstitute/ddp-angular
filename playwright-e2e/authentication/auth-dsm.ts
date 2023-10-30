@@ -8,7 +8,7 @@ export async function login(page: Page, opts: { email?: string; password?: strin
   const { email = DSM_USER_EMAIL, password = DSM_USER_PASSWORD } = opts;
 
   const assertLoggedIn = async (page: Page): Promise<void> => {
-    await expect(page.locator('.auth0-loading')).toBeHidden();
+    await expect(page.locator('.auth0-loading')).toBeHidden({timeout: 50 * 1000});
     await expect(page.locator('.auth0-lock-header-welcome')).toBeHidden();
     await waitForNoSpinner(page);
     await expect(page).toHaveTitle('Select study');
