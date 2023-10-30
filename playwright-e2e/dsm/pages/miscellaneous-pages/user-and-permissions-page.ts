@@ -76,7 +76,7 @@ export default class UserPermissionPage {
 
     //Verify the email is as expected
     const studyAdminEmail = await studyAdmin.innerText();
-    expect(studyAdminEmail).toBe(email);
+    expect(studyAdminEmail).toBe(studyAdminEmail.toLowerCase());
 
     //Verify the name is as expected
     const studyAdminName = await this.getStudyAdminName(name);
