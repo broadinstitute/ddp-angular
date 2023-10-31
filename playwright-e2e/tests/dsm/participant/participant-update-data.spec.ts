@@ -59,7 +59,7 @@ test.describe('Editig Participant Information', () => {
         logInfo(`Participant Short Id: ${shortID}`);
       });
 
-      await test.step('Change participant first and last name', async () => {
+      await test.step('Change participant First Name and Last Name', async () => {
         newFirstName = faker.person.firstName();
         newLastName = faker.person.lastName();
         await participantPage.updateInput(MainInfoEnum.FIRST_NAME, newFirstName);
@@ -68,7 +68,7 @@ test.describe('Editig Participant Information', () => {
         await participantListPage.waitForReady();
       });
 
-      await test.step('Verify changed first name', async () => {
+      await test.step('Verify changed First Name and Last Name', async () => {
         await expect(async () => {
           await page.reload();
           await waitForNoSpinner(page);
