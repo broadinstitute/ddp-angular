@@ -93,10 +93,6 @@ async function addOncHistory(page: Page, participantListPage: ParticipantListPag
         dayOfMonth: new Date().getDate()
       }
     });
-    // await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.TYPE_OF_PX, { value: generateAlphaNumeric(6) }, rowIndex);
-    // await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.LOCATION_OF_PX, { value: 'Pancreatic' }, rowIndex);
-    // await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.FACILITY, { value: 'm', lookupSelectIndex: 1 }, rowIndex);
-    // await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.REQUEST, { select: OncHistorySelectRequestEnum.REQUEST });
     expect(resp).toBeTruthy();
     logInfo(`${study} request payload:\n${JSON.stringify(resp?.request().postDataJSON())}`);
     expect(resp?.request().postDataJSON()).toHaveProperty('realm', realm);
