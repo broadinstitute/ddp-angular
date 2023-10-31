@@ -15,21 +15,21 @@ import { studyShortName } from 'utils/test-utils';
 
 const { DSM_USER_EMAIL, DSM_USER_PASSWORD } = process.env;
 
-test('Multiple browser tabs', async ({ browser, request }) => {
+test('Multiple browser tabs @dsm', async ({ browser, request }) => {
   const pancan = StudyEnum.PANCAN;
   const brain = StudyEnum.BRAIN;
 
   // Create two pages in same browser
-  const aContext = await browser.newContext();
-  const pancanPage = await aContext.newPage();
-  const brainPage = await aContext.newPage();
+  const browserContext = await browser.newContext();
 
   // Tab A: Open Participant List page, realm matches expected study PanCan
+  const pancanPage = await browserContext.newPage();
   const pancanParticipantListPage = await logIntoStudy(pancanPage, request, pancan);
   const pancanParticipantShortId = await findAnyParticipantShortId(pancanParticipantListPage);
   logInfo(`PanCan participant Short ID: ${pancanParticipantShortId}`);
 
   // Tab B: Open Participant List page, realm matches expected study Brain
+  const brainPage = await browserContext.newPage();
   const brainParticipantListPage = await logIntoStudy(brainPage, request, brain);
   const brainParticipantShortId = await findAnyParticipantShortId(brainParticipantListPage);
   logInfo(`Brain participant Short ID: ${brainParticipantShortId}`);
