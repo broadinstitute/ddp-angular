@@ -8,7 +8,7 @@ import { MainInfoEnum } from 'dsm/pages/participant-page/enums/main-info-enum';
 import { AdditionalFilter, CustomViewColumns } from 'dsm/component/filters/sections/search/search-enums';
 import { waitForNoSpinner } from 'utils/test-utils';
 
-test.describe('Editig Participant Information', () => {
+test.describe('Editing Participant Information', () => {
   let shortID: string;
   let firstName: string;
   let newFirstName: string;
