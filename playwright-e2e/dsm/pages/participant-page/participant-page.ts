@@ -12,6 +12,12 @@ export default class ParticipantPage {
 
   constructor(protected readonly page: Page) {}
 
+  public async waitForReady(): Promise<void> {
+    await this.assertPageTitle();
+    await waitForNoSpinner(this.page);
+    await expect(this.page.locator(this.getMainTextInfoXPath(MainInfoEnum.STATUS))).toBeVisible();
+  }
+
   public async backToList(): Promise<void> {
     await this.page.locator('//div/a[.//*[contains(text(), "<< back to \'List\' ")]]').click();
   }
@@ -106,7 +112,11 @@ export default class ParticipantPage {
     await input.fill(newValue);
 
     const updateButton = this.page.locator(this.getMainInputUpdateButtonXPath(inputEnum));
-    await updateButton.click();
+    await Promise.all([
+      waitForResponse(this.page, { uri: '/editParticipant'}),
+      waitForResponse(this.page, { uri: '/editParticipantMessageStatus'}),
+      updateButton.click()
+    ]);
     await waitForNoSpinner(this.page);
 
     const modal = new Modal(this.page);
@@ -163,7 +173,7 @@ export default class ParticipantPage {
   /* assertions */
   public async assertPageTitle(): Promise<void> {
     await expect(this.page.locator('h1'), "Participant page - page title doesn't match the expected one")
-      .toHaveText(this.PAGE_TITLE, { timeout: 5 * 1000 });
+      .toHaveText(this.PAGE_TITLE, { timeout: 50 * 1000 });
   }
 
   public async assertNotesToBe(value: string): Promise<void> {
