@@ -15,6 +15,7 @@ import { v4 as uuid } from 'uuid';
 import ParticipantPage from 'dsm/pages/participant-page/participant-page';
 import { WelcomePage } from 'dsm/pages/welcome-page';
 import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
+import * as crypto from 'crypto';
 
 
 test.describe.serial('DSM Family Enrollment Handling', () => {
@@ -104,8 +105,8 @@ test.describe.serial('DSM Family Enrollment Handling', () => {
     saveParticipantGuid(participantGuid);
     await participantListPage.filterListByParticipantGUID(user.patient.participantGuid);
     //Check that the filtered list returns at least one participant
-    const filteredList = page.locator('tr.ng-star-inserted');
-    await expect(filteredList).toHaveCount(1);
+    const filteredList = await participantListTable.numOfParticipants();
+    expect(filteredList).toBe(1);
     await participantListTable.openParticipantPageAt(0);
 
     //Verify that the proband tab is present (and includes the text RGP and 3 as proband subject ids have the format RGP_{family id}_3)
@@ -239,7 +240,7 @@ test.describe.serial('DSM Family Enrollment Handling', () => {
     const familyAccount = new RgpParticipantPage(page);
     await familyAccount.backToList();
     await participantListPage.filters.searchPanel.search();
-    await expect(filteredList).toHaveCount(1);
+    expect(filteredList).toBe(1);
     await participantListTable.openParticipantPageAt(0);
 
     //After refreshing participant list and page, check that the input for the above textareas are as expected
@@ -251,10 +252,12 @@ test.describe.serial('DSM Family Enrollment Handling', () => {
     //Checking textarea content
     const importantNotesTextarea = proband.getImportantNotes();
     const processNotesTextarea = proband.getProcessNotes();
-    const mixedRaceTextarea = proband.getMixedRaceNotes();
+    //const mixedRaceTextarea = proband.getMixedRaceNotes();
+    const mixedRaceTextarea = await proband.getMixedRaceNotesContent();
     expect(await importantNotesTextarea.inputValue()).toBe(importantNotes);
     expect(await processNotesTextarea.inputValue()).toBe(processNotes);
-    expect(await mixedRaceTextarea.inputValue()).toBe(mixedRaceNotes);
+    expect(mixedRaceTextarea).toBe(mixedRaceTestingNotes);
+    //expect(await mixedRaceTextarea.inputValue()).toBe(mixedRaceNotes);
 
     //Fill out Contact Info section
     const contactInfoSection = proband.getContactInfoSection();
@@ -364,10 +367,20 @@ test.describe.serial('DSM Family Enrollment Handling', () => {
     const familyProvidedURL = proband.getFamilyUrlProvided();
     await familyProvidedURL.fill('https://en.wikipedia.org/wiki/Broad_Institute');
 
-    //todo Update testing Referral Source to check for functionality from ticket PEPPER-575 (ticket in-progress)
+    //Check Survey Data to get the referral source and then check the proband tab to make sure the related source is selected as expected
+    const surveyData = proband.getSurveyDataTab();
+    await surveyData.scrollIntoViewIfNeeded();
+    await surveyData.click();
+
+    const participantReferralSource = await proband.getStudyParticipantResponseForReferralSource();
+    console.log(`Participant Referral Source: ${participantReferralSource}`);
+    await probandTab.click();
+    await medicalRecordsSection.click();
+
     const referralSource = proband.getReferralSource();
-    await referralSource.click();
-    await dropdownOptions.filter({ hasText: 'Doctor' }).click();
+    await referralSource.scrollIntoViewIfNeeded();
+    await expect(referralSource, `RGP Referral Source - Expected '${participantReferralSource}' but got: ${await referralSource.innerText()}`)
+    .toHaveText(participantReferralSource);
 
     await proband.inputReferralNotes('Testing notes here - Referral Notes');
 
