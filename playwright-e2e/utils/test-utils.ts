@@ -44,10 +44,9 @@ export async function waitForResponse(page: Page, { uri, status = 200, timeout }
     return response;
   }
   const url = response.url();
-  const method = response.request().method().toUpperCase;
-  const unexpectedStatus = response.status();
+  const method = response.request().method().toUpperCase();
   const body = await response.text();
-  throw new Error(`Waiting for URI: ${uri} with status: ${status}.\n  ${method} ${url}\n  Response Status: ${unexpectedStatus}\n  Text: ${body}`);
+  throw new Error(`Waiting for URI: ${uri} with status: ${status}.\n  ${method} ${url}\n  Status: ${respStatus}\n  Text: ${body}`);
 }
 
 export async function waitUntilRemoved(locator: Locator): Promise<void> {
@@ -267,6 +266,20 @@ export function studyShortName(study: StudyEnum): { shortName: string | null; re
       throw new Error(`Study ${study} is undefined.`);
   }
   return { shortName, realm, collaboratorPrefix };
+}
+
+export function isCMIStudy(study: StudyEnum): boolean {
+  return (study === StudyEnum.ANGIO) ||
+  (study === StudyEnum.BRAIN) ||
+  (study === StudyEnum.ESC) ||
+  (study === StudyEnum.MBC) ||
+  (study === StudyEnum.OSTEO) ||
+  (study === StudyEnum.PANCAN) ||
+  (study === StudyEnum.PROSTATE);
+}
+
+export function isPECGSStudy(study: StudyEnum): boolean {
+  return (study === StudyEnum.OSTEO2) || (study === StudyEnum.LMS);
 }
 
 export function shuffle(array: any[]): any[] {

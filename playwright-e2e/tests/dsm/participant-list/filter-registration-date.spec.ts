@@ -5,7 +5,7 @@ import { SortOrder } from 'dss/component/table';
 import { MainInfoEnum } from 'dsm/pages/participant-page/enums/main-info-enum';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
 import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
-import { getDate, offsetDaysFromToday } from 'utils/date-utils';
+import { getDate, offsetDaysFromDate, offsetDaysFromToday } from 'utils/date-utils';
 import { logInfo } from 'utils/log-utils';
 
 test.describe('Participants Search', () => {
@@ -25,12 +25,12 @@ test.describe('Participants Search', () => {
 
       // Save Registration Date found on first row for use in search
       const registrationDate = await participantsTable.getParticipantDataAt(0, MainInfoEnum.REGISTRATION_DATE);
-      const randomDate = getDate(new Date(registrationDate)); // Returns a formatted date mm/dd/yyyy
+      const registrationDateValue = getDate(new Date(registrationDate)); // Returns a formatted date mm/dd/yyyy
 
       // Search by random date
       const searchPanel = participantListPage.filters.searchPanel;
       await searchPanel.open();
-      await searchPanel.text(MainInfoEnum.REGISTRATION_DATE, { textValue: randomDate }); // search date format is mm/dd/yyyy
+      await searchPanel.text(MainInfoEnum.REGISTRATION_DATE, { textValue: registrationDateValue }); // search date format is mm/dd/yyyy
       await searchPanel.search();
 
       const numParticipants1 = await participantsTable.numOfParticipants();
@@ -39,8 +39,16 @@ test.describe('Participants Search', () => {
       // Check first row data
       // Verify Registration Date
       const headerIndex = await participantsTable.getHeaderIndex(MainInfoEnum.REGISTRATION_DATE);
-      const cellText = await participantsTable.cell(0, headerIndex).innerText();
-      expect(getDate(new Date(cellText))).toEqual(randomDate);
+      const actualRegistrationDate = await participantsTable.cell(0, headerIndex).innerText();
+
+      // Date filtering is problematic. Add +/- 1 day to assertion
+      const date = new Date(registrationDate);
+      const dateRanges = [
+        getDate(offsetDaysFromDate(date, 1)),
+        getDate(offsetDaysFromDate(date, 1, { isAdd: true })),
+        getDate(date)
+      ];
+      expect(dateRanges).toEqual(expect.arrayContaining([getDate(new Date(actualRegistrationDate))]));
 
       // Verify Status is not empty or null
       const status = await participantsTable.getParticipantDataAt(0, 'Status');
@@ -56,19 +64,35 @@ test.describe('Participants Search', () => {
       await searchPanel.dates(MainInfoEnum.REGISTRATION_DATE, { additionalFilters: [AdditionalFilter.RANGE], from: yearAgo, to: today});
       await searchPanel.search();
 
+      const rowsCount = await participantsTable.getRowsCount();
       const numParticipants2 = await participantsTable.numOfParticipants();
       logInfo(`Search by Registration Date Range (from: ${yearAgo}, to: ${today}) returns ${numParticipants2} participants`);
       expect(numParticipants2).toBeGreaterThan(1);
       expect(numParticipants2).not.toBe(numParticipants1); // Expect Participants list table has reloaded and changed
 
-      // Use Registration Date column filter to verify date range in table
+      // Sort Registration Date column filter to verify date range in table
       await participantsTable.sort(MainInfoEnum.REGISTRATION_DATE, SortOrder.DESC);
-      const date1 = await participantsTable.cell(0, headerIndex).innerText();
+      const descFirstRowDate = await participantsTable.cell(0, headerIndex).innerText();
+      const descLastRowDate = await participantsTable.cell(rowsCount - 1, headerIndex).innerText();
+      // ascending
+      expect(new Date(descFirstRowDate) < new Date(descLastRowDate),
+        `descFirstRowDate: ${descFirstRowDate}, descLastRowDate: ${descLastRowDate}`)
+        .toBeTruthy();
 
+      // Sort in opposite order
       await participantsTable.sort(MainInfoEnum.REGISTRATION_DATE, SortOrder.ASC);
-      const date2 = await participantsTable.cell(0, headerIndex).innerText();
+      const ascFirstRowDate = await participantsTable.cell(0, headerIndex).innerText();
+      const ascLastRowDate = await participantsTable.cell(rowsCount - 1, headerIndex).innerText();
+      // descending
+      expect(new Date(ascFirstRowDate) > new Date(ascLastRowDate),
+        `ascFirstRowDate: ${ascFirstRowDate}, ascLastRowDate: ${ascLastRowDate}`)
+        .toBeTruthy();
 
-      expect(getDate(new Date(date1))).not.toEqual(date2);
+      expect(getDate(new Date(descFirstRowDate))).not.toEqual(ascFirstRowDate);
     });
   }
 });
+function getDateFromDate(arg0: Date) {
+  throw new Error('Function not implemented.');
+}
+

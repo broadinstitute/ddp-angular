@@ -1,4 +1,4 @@
-import { expect, Locator, Page } from '@playwright/test';
+import { expect, Locator, Page, Response } from '@playwright/test';
 import DatePicker from 'dsm/component/date-picker';
 import { CheckboxConfig, DateConfig, RadioButtonConfig, TextConfig } from 'dsm/component/filters/sections/search/search-types';
 import { AdditionalFilter } from 'dsm/component/filters/sections/search/search-enums';
@@ -18,13 +18,14 @@ export class Search {
     await expect(async () => expect(await this.isOpen()).toBe(true)).toPass({ timeout: 5000 });
   }
 
-  public async search(opts: { uri?: string } = {}): Promise<void> {
+  public async search(opts: { uri?: string } = {}): Promise<Response> {
     const { uri = 'ui/filterList?' } = opts;
-    await Promise.all([
+    const [response] = await Promise.all([
       waitForResponse(this.page, { uri }),
       this.page.locator("//div[@id='searchTable']/button[1][span[text()='Search']]").click()
     ]);
     await waitForNoSpinner(this.page);
+    return response;
   }
 
   public async clear(): Promise<void> {
