@@ -49,6 +49,7 @@ export class OncHistoryDetailComponent implements OnInit {
   currentPatchField: string;
   currentPatchFieldRow: number;
   patchFinished = true;
+  errorMessage: string;
 
   constructor(private dsmService: DSMService, private compService: ComponentService, private role: RoleService,
                private router: Router, private util: Utils, private auth: Auth) {
@@ -138,6 +139,7 @@ export class OncHistoryDetailComponent implements OnInit {
   patch(patch: any, index: number): void {
     this.dsmService.patchParticipantRecord(JSON.stringify(patch)).subscribe({ // need to subscribe, otherwise it will not send!
       next: data => {
+        this.errorMessage = null;
         if (data instanceof Array) {
         data.forEach( ( val ) => {
               const nameValue = NameValue.parse(val);
@@ -242,7 +244,6 @@ export class OncHistoryDetailComponent implements OnInit {
   }
 
   deleteOncHistory(index: number): void {
-    this.oncHistory[ index ].deleted = true;
     const realm: string = sessionStorage.getItem(ComponentService.MENU_SELECTED_REALM);
     const patch1 = new PatchUtil(
       this.oncHistory[index].oncHistoryDetailId, this.role.userMail(),
@@ -255,14 +256,18 @@ export class OncHistoryDetailComponent implements OnInit {
     const patch = patch1.getPatch();
     this.patchFinished = false;
     this.dsmService.patchParticipantRecord(JSON.stringify(patch)).subscribe({ // need to subscribe, otherwise it will not send!
-      next: () => {
+      next: data => {
+        this.oncHistory[ index ].deleted = true;
         this.oncHistory.splice( index, 1 );
         this.patchFinished = true;
         this.currentPatchField = null;
+        this.errorMessage = null;
       },
       error: err => {
         if (err._body === Auth.AUTHENTICATION_ERROR) {
           this.auth.doLogout();
+        } else if (err.error === 'This object is used in a clinical order') {
+          this.errorMessage = 'Couldn\'t delete OncHistory, a clinical order is already placed for one of the tissues';
         }
       }
     });
