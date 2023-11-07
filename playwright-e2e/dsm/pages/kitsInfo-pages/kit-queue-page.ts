@@ -48,9 +48,8 @@ export default class KitsQueuePage {
     return this.page.locator('//table//tbody//tr').all();
   }
 
-  public getAmountOfSamplesOnPage(): number {
-    //stuff here
-    return 1;
+  public async getAmountOfSamplesOnPage(): Promise<number> {
+    return await this.page.locator('//table//tbody//tr').count();
   }
 
   public async selectKitType(kitType: KitTypeEnum): Promise<void> {

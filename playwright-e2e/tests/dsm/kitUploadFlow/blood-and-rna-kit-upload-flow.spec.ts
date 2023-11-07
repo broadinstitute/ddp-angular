@@ -24,6 +24,7 @@ import { saveParticipantGuid } from 'utils/faker-utils';
 import { ParticipantListTable } from 'dsm/component/tables/participant-list-table';
 import { waitForResponse } from 'utils/test-utils';
 import KitsQueuePage from 'dsm/pages/kitsInfo-pages/kit-queue-page';
+import ErrorPage from 'dsm/pages/samples/error-page';
 
 test.describe('Blood & RNA Kit Upload', () => {
   test('Verify that a blood & rna kit can be uploaded @dsm @rgp @functional @upload', async ({ page, request}, testInfo) => {
@@ -134,10 +135,21 @@ test.describe('Blood & RNA Kit Upload', () => {
     await kitQueuePage.assertDisplayedKitTypes([KitTypeEnum.BLOOD, KitTypeEnum.BLOOD_AND_RNA]);
     await kitQueuePage.selectKitType(KitTypeEnum.BLOOD_AND_RNA);
     await kitQueuePage.assertReloadKitListBtn();
+    let kitTable;
     if (!await kitQueuePage.hasExistingKitRequests()) {
-      
+      const kitErrorPage = await navigation.selectFromSamples<ErrorPage>(SamplesNavEnum.ERROR);
+      await kitErrorPage.waitForReady();
+      await kitErrorPage.selectKitType(KitTypeEnum.BLOOD_AND_RNA);
+      kitTable = kitErrorPage.kitListTable;
+      await kitTable.searchBy(KitsColumnsEnum.SHIPPING_ID, shippingID);
+      const errorPageShippingID = await kitTable.getData(KitsColumnsEnum.SHIPPING_ID);
+      expect(errorPageShippingID, `Shipping ID ${shippingID} was not seen in Kit Error Page`).toBe(shippingID);
     } else {
       //When there are kits in Kit Queue
+      kitTable = kitQueuePage.getKitsTable;
+      await kitTable.searchBy(KitsColumnsEnum.SHIPPING_ID, shippingID);
+      const kitQueuePageShippingID = (await kitTable.getData(KitsColumnsEnum.SHIPPING_ID)).trim();
+      expect(kitQueuePageShippingID, `Shipping ID ${shippingID} was not seen in Kit Queue Page`).toBe(shippingID);
     }
 
     //Tracking scan
