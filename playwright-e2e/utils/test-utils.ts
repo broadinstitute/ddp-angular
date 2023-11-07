@@ -5,6 +5,7 @@ import Checkbox from 'dss/component/checkbox';
 import Select from 'dss/component/select';
 import axios from 'axios';
 import { logError } from './log-utils';
+import { KitTypeEnum } from 'dsm/component/kitType/enums/kitType-enum';
 
 export interface WaitForResponse {
   uri: string;
@@ -262,6 +263,11 @@ export function studyShortName(study: StudyEnum): { shortName: string | null; re
       realm = 'cmi-esc';
       collaboratorPrefix = 'GECProject';
       break;
+    case StudyEnum.RGP:
+      shortName = 'rgp';
+      realm = 'RGP';
+      collaboratorPrefix = 'NULL';
+      break;
     default:
       throw new Error(`Study ${study} is undefined.`);
   }
@@ -294,4 +300,17 @@ export async function toHaveScreenshot(page: Page, locator: Locator | string, na
   // https://github.com/microsoft/playwright/issues/18827
   const loc = typeof locator === 'string' ? page.locator(locator) : locator;
   await expect.soft(loc).toHaveScreenshot(name);
+}
+
+export function defaultKitTypes(study: StudyEnum): KitTypeEnum[] {
+  let types = [KitTypeEnum.SALIVA, KitTypeEnum.BLOOD];
+  switch (study) {
+    case StudyEnum.PANCAN:
+      types = types.concat([KitTypeEnum.STOOL]);
+    break;
+    case StudyEnum.RGP:
+      types = [KitTypeEnum.BLOOD, KitTypeEnum.BLOOD_AND_RNA];
+      break;
+  }
+  return types;
 }

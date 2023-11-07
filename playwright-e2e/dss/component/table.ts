@@ -356,7 +356,7 @@ export default class Table {
   }
 
   public rowCountButton(rowCount = 10): Locator {
-    return this.footerLocator().locator(`xpath=//button[contains(., "${rowCount}")]`);
+    return this.footerLocator().locator(`xpath=//button[contains(., "${rowCount}")] | //a[contains(., "${rowCount}")]`);
   }
 
   private parseForNumber(text: string): number | null {
