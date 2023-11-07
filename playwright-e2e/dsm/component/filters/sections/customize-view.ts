@@ -1,4 +1,4 @@
-import { Locator, Page } from '@playwright/test';
+import { Locator, Page, expect } from '@playwright/test';
 import Checkbox from 'dss/component/checkbox';
 import { check } from 'utils/test-utils';
 
@@ -63,6 +63,20 @@ export class CustomizeView {
       await columnsGroupButton.focus();
       await columnsGroupButton.click();
     }
+  }
+
+  public async isColumnVisible(columns: string[]): Promise<boolean> {
+    let allColumnsAreDisplayed = true;
+    for (const column of columns) {
+      const customizeViewColumn = this.page.getByRole('button', { name: column});
+      await customizeViewColumn.scrollIntoViewIfNeeded();
+      const isDisplayed = await customizeViewColumn.isVisible();
+      if (!isDisplayed) {
+        allColumnsAreDisplayed = false;
+        break;
+      }
+    }
+    return allColumnsAreDisplayed;
   }
 
   private async isChecked(locator: Locator | undefined): Promise<boolean> {

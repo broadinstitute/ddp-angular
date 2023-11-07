@@ -1,4 +1,4 @@
-import { expect, Locator, Page } from '@playwright/test';
+import { expect, Locator, Page, Response } from '@playwright/test';
 import Table from 'dss/component/table';
 import DatePicker from 'dsm/component/date-picker';
 import TextArea from 'dss/component/textarea';
@@ -42,8 +42,10 @@ export default class OncHistoryTable extends Table {
   public async deleteRowAt(index: number): Promise<void> {
     const deleteRowBtn = this.deleteRowButton(index);
     await expect(deleteRowBtn, 'Delete row button is not visible').toBeVisible();
-    await deleteRowBtn.click();
-    await waitForResponse(this.page, { uri: 'patch' });
+    await Promise.all([
+      waitForResponse(this.page, { uri: 'patch' }),
+      deleteRowBtn.click()
+    ]);
   }
 
   public async getFieldValue(columnName: OncHistoryInputColumnsEnum, rowIndex = 0): Promise<string> {
@@ -81,8 +83,10 @@ export default class OncHistoryTable extends Table {
     const textarea = new TextArea(this.page, { root: notesModalContent });
     const currentValue = await textarea.currentValue();
     if (currentValue.trim() !== note) {
-      await textarea.fill(note);
-      await waitForResponse(this.page, { uri: 'patch' });
+      await Promise.all([
+        waitForResponse(this.page, { uri: 'patch' }),
+        textarea.fill(note)
+      ]);
     }
     const saveAndCloseBtn = new Button(this.page, { root: notesModalContent, label: 'Save & Close' });
     await saveAndCloseBtn.click();
@@ -129,58 +133,75 @@ export default class OncHistoryTable extends Table {
     const currentValue = await this.getCurrentValue(inputElement);
     let actualValue = typeof value === 'number' ? value.toString() : value;
     const maxLength = await inputElement.maxLength();
-
     if (maxLength && actualValue.length > Number(maxLength)) {
       actualValue = actualValue.slice(0, Number(maxLength));
     }
 
     if (currentValue !== actualValue) {
-      await inputElement.fillSimple(actualValue);
-      await waitForResponse(this.page, { uri: 'patch' });
+      await Promise.all([
+        waitForResponse(this.page, { uri: 'patch' }),
+        inputElement.fillSimple(actualValue)
+      ]);
       hasLookup && await this.lookup(lookupSelectIndex, true);
     }
   }
 
-  private async fillDate(root: Locator, { date, today }: FillDate): Promise<void> {
+  public async fillDate(root: Locator, { date, today }: FillDate): Promise<Response | null> {
     if (today) {
       const todayBtn = new Button(this.page, { root, label: 'Today' });
-      await todayBtn.click();
-      await waitForResponse(this.page, { uri: 'patch' });
-    } else if (date) {
+      await expect(todayBtn.toLocator()).toBeVisible();
+      const [resp] = await Promise.all([
+        waitForResponse(this.page, { uri: 'patch' }),
+        todayBtn.click()
+      ]);
+      return resp;
+    }
+    if (date) {
       const datePicker = new DatePicker(this.page, { root });
       await datePicker.open();
-      await datePicker.pickDate(date);
+      const [resp] = await Promise.all([
+        waitForResponse(this.page, { uri: 'patch' }),
+        datePicker.pickDate(date)
+      ]);
       await datePicker.close();
-      await waitForResponse(this.page, { uri: 'patch' });
+      return resp;
     }
+    return null;
   }
 
-  private async fillTextArea(root: Locator, value: string | number, hasLookup: boolean, lookupSelectIndex = 0): Promise<void> {
+  private async fillTextArea(root: Locator, value: string | number, hasLookup: boolean, lookupSelectIndex = 0): Promise<Response | null> {
     const textarea = new TextArea(this.page, { root });
     const currentValue = await this.getCurrentValue(textarea);
     let actualValue = typeof value === 'number' ? value.toString() : value;
     const maxLength = await textarea.maxLength();
-
     if (maxLength && actualValue.length > Number(maxLength)) {
       actualValue = actualValue.slice(0, Number(maxLength));
     }
 
     if (currentValue !== actualValue) {
-      await textarea.fill(actualValue, false);
-      await textarea.blur();
-      await waitForResponse(this.page, { uri: 'patch' });
+      const [resp] = await Promise.all([
+        waitForResponse(this.page, { uri: 'patch' }),
+        await textarea.fill(actualValue, false),
+        await textarea.blur()
+      ]);
       hasLookup && await this.lookup(lookupSelectIndex);
+      return resp;
     }
+    return null;
   }
 
-  private async selectRequest(root: Locator, selectRequest: OncHistorySelectRequestEnum): Promise<void> {
+  private async selectRequest(root: Locator, selectRequest: OncHistorySelectRequestEnum): Promise<Response | null> {
     const matSelect = this.activeSelectedRequestListItem(root);
     const selectedValue = await matSelect.textContent();
     if (selectedValue?.trim() !== selectRequest) {
       const selectInput = new Select(this.page, { root });
-      await selectInput.selectOption(selectRequest);
-      await waitForResponse(this.page, { uri: 'patch' });
+      const [resp] = await Promise.all([
+        waitForResponse(this.page, { uri: 'patch' }),
+        selectInput.selectOption(selectRequest)
+      ]);
+      return resp;
     }
+    return null;
   }
 
   private async lookup(selectIndex = 0, isFacility = false): Promise<void> {
@@ -192,8 +213,10 @@ export default class OncHistoryTable extends Table {
         expect(isComplete, `Lookup value is not complete at provided index - ${selectIndex}`)
           .toBeTruthy()
       }
-      await lookupList.nth(selectIndex).click();
-      await waitForResponse(this.page, { uri: 'patch' });
+      await Promise.all([
+        waitForResponse(this.page, { uri: 'patch' }),
+        lookupList.nth(selectIndex).click()
+      ]);
     }
   }
 
@@ -251,7 +274,7 @@ export default class OncHistoryTable extends Table {
   }
 
   /* Assertions */
-  private async checkColumnAndCellValidity(columnName: OncHistoryInputColumnsEnum, rowIndex: number): Promise<Locator> {
+  public async checkColumnAndCellValidity(columnName: OncHistoryInputColumnsEnum, rowIndex: number): Promise<Locator> {
     let column = this.column(columnName);
     if (await column.count() > 1) {
       column = column.nth(1);

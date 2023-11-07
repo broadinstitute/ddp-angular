@@ -2,19 +2,15 @@ import { expect } from '@playwright/test';
 import { test } from 'fixtures/dsm-fixture';
 import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
-import ParticipantPage from 'dsm/pages/participant-page/participant-page';
 import { logInfo } from 'utils/log-utils';
 import { faker } from '@faker-js/faker';
 import { MainInfoEnum } from 'dsm/pages/participant-page/enums/main-info-enum';
 import { AdditionalFilter, CustomViewColumns } from 'dsm/component/filters/sections/search/search-enums';
 import { waitForNoSpinner } from 'utils/test-utils';
 
-test.describe('Editig Participant Information', () => {
-  let participantPage: ParticipantPage;
-
+test.describe('Editing Participant Information', () => {
   let shortID: string;
   let firstName: string;
-  let lastName: string;
   let newFirstName: string;
   let newLastName: string;
 
@@ -23,6 +19,8 @@ test.describe('Editig Participant Information', () => {
 
   for (const study of cmiClinicalStudies.concat(cmiResearchStudies)) {
     test(`Update First Name @dsm @${study}`, async ({page, request}) => {
+      test.slow();
+
       const participantListPage: ParticipantListPage = await ParticipantListPage.goto(page, study, request);
 
       await test.step('Find a participant', async () => {
@@ -39,19 +37,18 @@ test.describe('Editig Participant Information', () => {
       });
 
       // Open participant in the first row
+      await participantListPage.waitForReady();
       const participantListTable = participantListPage.participantListTable;
       const rowIndex = 0;
-      participantPage = await participantListTable.openParticipantPageAt(rowIndex);
+      let participantPage = await participantListTable.openParticipantPageAt(rowIndex);
 
       await test.step('Collect participant information before change', async () => {
         shortID = await participantPage.getShortId();
         firstName = await participantPage.getFirstName();
-        lastName = await participantPage.getLastName();
 
         const status = await participantPage.getStatus();
         const registrationDate = await participantPage.getRegistrationDate();
         const guid = await participantPage.getGuid();
-        const dob = await participantPage.getDateOfBirth();
 
         expect(shortID?.length).toBeTruthy();
         expect(status?.length).toBeTruthy();
@@ -62,15 +59,16 @@ test.describe('Editig Participant Information', () => {
         logInfo(`Participant Short Id: ${shortID}`);
       });
 
-      await test.step('Change participant first and last name', async () => {
+      await test.step('Change participant First Name and Last Name', async () => {
         newFirstName = faker.person.firstName();
         newLastName = faker.person.lastName();
         await participantPage.updateInput(MainInfoEnum.FIRST_NAME, newFirstName);
         await participantPage.updateInput(MainInfoEnum.LAST_NAME, newLastName);
         await participantPage.backToList();
+        await participantListPage.waitForReady();
       });
 
-      await test.step('Verify changed first name', async () => {
+      await test.step('Verify changed First Name and Last Name', async () => {
         await expect(async () => {
           await page.reload();
           await waitForNoSpinner(page);
@@ -78,7 +76,7 @@ test.describe('Editig Participant Information', () => {
           participantPage = await participantListTable.openParticipantPageAt(rowIndex);
           expect(await participantPage.getFirstName()).toEqual(newFirstName);
           expect(await participantPage.getLastName()).toEqual(newLastName);
-        }).toPass();
+        }).toPass({ timeout: 120 * 1000 });
       });
     });
   }

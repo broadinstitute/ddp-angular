@@ -268,6 +268,20 @@ export function studyShortName(study: StudyEnum): { shortName: string | null; re
   return { shortName, realm, collaboratorPrefix };
 }
 
+export function isCMIStudy(study: StudyEnum): boolean {
+  return (study === StudyEnum.ANGIO) ||
+  (study === StudyEnum.BRAIN) ||
+  (study === StudyEnum.ESC) ||
+  (study === StudyEnum.MBC) ||
+  (study === StudyEnum.OSTEO) ||
+  (study === StudyEnum.PANCAN) ||
+  (study === StudyEnum.PROSTATE);
+}
+
+export function isPECGSStudy(study: StudyEnum): boolean {
+  return (study === StudyEnum.OSTEO2) || (study === StudyEnum.LMS);
+}
+
 export function shuffle(array: any[]): any[] {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
