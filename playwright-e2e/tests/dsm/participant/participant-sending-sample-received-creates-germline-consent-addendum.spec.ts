@@ -4,6 +4,7 @@ import { Navigation } from 'dsm/component/navigation/navigation';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
 import Select from 'dss/component/select';
 import { test } from 'fixtures/dsm-fixture';
+import { logInfo } from 'utils/log-utils';
 
 test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
   const studies = [StudyEnum.OSTEO2, StudyEnum.LMS]; //Only clinical (pecgs) studies get this event
@@ -39,25 +40,31 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
         ['SOMATIC_CONSENT_TUMOR_PEDIATRIC', 'SOMATIC_ASSENT_ADDENDUM']
       );
       await customizeViewPanel.selectColumns(
-        'Additional Consent: Learning More About Your DNA with Invitae Columns',
-        ['GERMLINE_CONSENT_ADDENDUM Survey Created']
+        `Additional Consent & Assent: Learning More About Your Child's DNA with Invitae Columns`,
+        ['GERMLINE_CONSENT_ADDENDUM_PEDIATRIC Survey Created']
       );
+
+      const searchPanel = participantListPage.filters.searchPanel;
     });
 
-    test(`${study} - Scenario 1: SALIVA kit received first, TUMOR sample received second`, async ({ page, request }) => {
+    test(`${study} - Scenario 1: SALIVA kit received first, TUMOR sample received second`, ({ page, request }) => {
       //stuff here
+      logInfo('stuff');
     });
 
-    test(`${study} - Scenario 2: BLOOD kit received first, TUMOR sample received second`, async ({ page, request }) => {
+    test(`${study} - Scenario 2: BLOOD kit received first, TUMOR sample received second`, ({ page, request }) => {
       //stuff here
+      logInfo('stuff');
     });
 
-    test(`${study} - Scenario 3: TUMOR sample received first, SALIVA kit received second`, async ({ page, request }) => {
+    test(`${study} - Scenario 3: TUMOR sample received first, SALIVA kit received second`, ({ page, request }) => {
       //Stuff here
+      logInfo('stuff');
     });
 
-    test(`${study} - Scenario 4: TUMOR sample received first, BLOOD kit received second`, async ({ page, request }) => {
+    test(`${study} - Scenario 4: TUMOR sample received first, BLOOD kit received second`, ({ page, request }) => {
       //Stuff here
+      logInfo('stuff');
     });
   }
 });
