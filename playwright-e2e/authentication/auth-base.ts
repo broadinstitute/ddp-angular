@@ -14,6 +14,14 @@ export async function fillInEmailPassword(
 ): Promise<void> {
   const { email, password, waitForNavigation = true, waitForAuth = true } = opts;
 
+  await page.waitForSelector('.auth0-lock-header-welcome', { state: 'visible' });
+
+  const notYourAcctLink = page.locator('#auth0-lock-container-1 .auth0-lock-alternative-link:has-text("Not your account")');
+  try {
+    await notYourAcctLink.click({ timeout: 2000 });
+  } catch (err) {
+    // ignored
+  }
   const emailInput = page.locator('input[type="email"]:visible');
   const passwordInput = page.locator('input[type="password"]:visible');
 
