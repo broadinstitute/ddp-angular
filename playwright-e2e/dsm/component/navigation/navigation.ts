@@ -18,6 +18,7 @@ import TrackingScanPage from 'dsm/pages/scanner-pages/trackingScan-page';
 import RgpFinalScanPage from 'dsm/pages/scanner-pages/rgpFinalScan-page';
 import ErrorPage from 'dsm/pages/samples/error-page';
 import UserPermissionPage from 'dsm/pages/miscellaneous-pages/user-and-permissions-page';
+import KitsQueuePage from 'dsm/pages/kitsInfo-pages/kit-queue-page';
 
 
 type Selection = StudyNavEnum | StudyEnum | SamplesNavEnum | MiscellaneousEnum;
@@ -27,6 +28,7 @@ export class Navigation {
     study: new Map<string, object>([[StudyNavEnum.PARTICIPANT_LIST, new ParticipantListPage(this.page)]]),
     samples: new Map<string, object>([
       [SamplesNavEnum.KITS_WITHOUT_LABELS, new KitsWithoutLabelPage(this.page)],
+      [SamplesNavEnum.QUEUE, new KitsQueuePage(this.page)],
       [SamplesNavEnum.INITIAL_SCAN, new InitialScanPage(this.page)],
       [SamplesNavEnum.TRACKING_SCAN, new TrackingScanPage(this.page)],
       [SamplesNavEnum.FINAL_SCAN, new FinalScanPage(this.page)],

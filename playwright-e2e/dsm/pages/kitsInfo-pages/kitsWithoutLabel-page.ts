@@ -61,6 +61,23 @@ export default class KitsWithoutLabelPage {
       .toHaveCount(0)
   }
 
+  public async waitUntilAllKitLabelCreationRequestsAreProcessed(): Promise<void> {
+    //Wait until all instances seen instances of kit label creation has been processed
+    const pendingKitLabelCreation = await this.page.locator('[data-icon="cog"]').all();
+    for (const pendingKit of pendingKitLabelCreation) {
+      await expect(async () => {
+        await this.reloadKitList();
+        await expect(pendingKit).not.toBeVisible();
+      }).toPass({ timeout: 90 * 1000 });
+    }
+  }
+
+  public async reloadKitList(): Promise<void> {
+    const reloadKitListButton = this.page.locator(this.reloadKitListBtnXPath);
+    await reloadKitListButton.click();
+    await waitForNoSpinner(this.page);
+  }
+
   public async search(columnName: KitsColumnsEnum, value: string): Promise<void> {
     await this.kitsTable.searchBy(columnName, value);
   }
@@ -87,6 +104,14 @@ export default class KitsWithoutLabelPage {
     await waitForResponse(this.page, {uri: '/deactivateKit'});
     await waitForNoSpinner(this.page);
     await waitForResponse(this.page, {uri: '/kitRequests'});
+  }
+
+  public async hasExistingKitRequests(): Promise<boolean> {
+    const noCurrentKitRequests = this.page.getByText('There are no kit requests');
+    if (await noCurrentKitRequests.isVisible()) {
+      return false;
+    }
+    return true;
   }
 
   /* Assertions */

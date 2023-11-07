@@ -12,5 +12,6 @@ export enum KitsColumnsEnum {
   SAMPLE_TYPE = 'Sample Type',
   DEACTIVATION_REASON = 'Deactivation Reason',
   DEACTIVATED = 'Deactivated',
-  PREFERRED_LANGUAGE = 'Preferred Language'
+  PREFERRED_LANGUAGE = 'Preferred Language',
+  ERROR_REASON = 'Error Reason',
 }

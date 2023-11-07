@@ -1,4 +1,4 @@
-import { Locator, Page, expect } from '@playwright/test';
+import { Locator, Page, expect, Response } from '@playwright/test';
 import DsmPageBase from './dsm-page-base';
 import { waitForNoSpinner, waitForResponse } from 'utils/test-utils';
 import { createTextFileSync, deleteFileSync } from 'utils/file-utils';
@@ -21,18 +21,20 @@ export default class OncHistoryUploadPage extends DsmPageBase {
     await waitForNoSpinner(this.page);
   }
 
-  public async uploadFile(study: string, data: string, testResultDir?: string) {
+  public async uploadFile(study: string, data: string, testResultDir?: string): Promise<Response> {
     const dir = testResultDir ? testResultDir : __dirname;
     const filePath = path.join(dir, `${study.trim().replace('\\s', '')}-OncHistory-${new Date().getTime()}.txt`);
 
     createTextFileSync(dir, filePath, data);
     await this.fileInput.setInputFiles(filePath);
-    await this.uploadBtn.click();
 
-    await waitForResponse(this.page, {uri: '/oncHistory', });
+    const [resp] = await Promise.all([
+      waitForResponse(this.page, {uri: '/oncHistory', }),
+      this.uploadBtn.click()
+    ]);
     await waitForNoSpinner(this.page);
-
     deleteFileSync(filePath);
+    return resp;
   }
 
   private get fileInput(): Locator {
