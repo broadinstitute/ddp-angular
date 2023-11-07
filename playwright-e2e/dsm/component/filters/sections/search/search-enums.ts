@@ -6,6 +6,7 @@ export enum AdditionalFilter {
 }
 
 export enum CustomViewColumns {
+  ADDITIONAL_CONSENT = 'Additional Consent: Learning About Your Tumor Columns',
   CONTACT_INFORMATION = 'Contact Information Columns',
   COHORT_TAGS = 'Cohort Tags Columns',
   DSM_COLUMNS = 'Participant - DSM Columns',
