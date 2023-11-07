@@ -65,6 +65,26 @@ export default class KitsReceivedPage {
     expect(jsonResponse).toHaveProperty('kit_label', kitLabel);
   }
 
+  public async kitReceivedRequestForRGPKits(kitLabel: string, subjectID: string): Promise<void> {
+    if (!BSP_TOKEN) {
+      throw Error('Invalid parameter: DSM BSP token is not provided.');
+    }
+    const response = await this.request.get(`${DSM_BASE_URL}/ddp/Kits/${kitLabel}`, {
+      headers: {
+        Authorization: `Bearer ${BSP_TOKEN}`
+      }
+    });
+    let jsonResponse;
+    try {
+      jsonResponse = await response.json()
+    } catch (error) {
+      throw new Error(`Couldn't send the kit received request - something went wrong\n${error}`)
+    }
+    expect(response.ok()).toBeTruthy();
+    //RGP does not seem to have kit_label in its kit received json response
+    expect(jsonResponse).toHaveProperty('collaboratorParticipantId', subjectID);
+  }
+
   public async search(columnName: KitsColumnsEnum, value: string): Promise<void> {
     await this.kitsTable.searchBy(columnName, value);
   }
