@@ -274,18 +274,19 @@ export function studyShortName(study: StudyEnum): { shortName: string | null; re
   return { shortName, realm, collaboratorPrefix };
 }
 
-export function getExpectedKitSelection(study: StudyEnum): KitTypeEnum[] {
-    let types = [KitTypeEnum.SALIVA, KitTypeEnum.BLOOD];
-    switch (study) {
-      case StudyEnum.PANCAN:
-        types = types.concat([KitTypeEnum.STOOL]);
-      break;
-      case StudyEnum.RGP:
-        types = [KitTypeEnum.BLOOD, KitTypeEnum.BLOOD_AND_RNA];
-        break;
-    }
-    return types;
-  }
+export function isCMIStudy(study: StudyEnum): boolean {
+  return (study === StudyEnum.ANGIO) ||
+  (study === StudyEnum.BRAIN) ||
+  (study === StudyEnum.ESC) ||
+  (study === StudyEnum.MBC) ||
+  (study === StudyEnum.OSTEO) ||
+  (study === StudyEnum.PANCAN) ||
+  (study === StudyEnum.PROSTATE);
+}
+
+export function isPECGSStudy(study: StudyEnum): boolean {
+  return (study === StudyEnum.OSTEO2) || (study === StudyEnum.LMS);
+}
 
 export function shuffle(array: any[]): any[] {
   for (let i = array.length - 1; i > 0; i--) {
@@ -299,4 +300,17 @@ export async function toHaveScreenshot(page: Page, locator: Locator | string, na
   // https://github.com/microsoft/playwright/issues/18827
   const loc = typeof locator === 'string' ? page.locator(locator) : locator;
   await expect.soft(loc).toHaveScreenshot(name);
+}
+
+export function defaultKitTypes(study: StudyEnum): KitTypeEnum[] {
+  let types = [KitTypeEnum.SALIVA, KitTypeEnum.BLOOD];
+  switch (study) {
+    case StudyEnum.PANCAN:
+      types = types.concat([KitTypeEnum.STOOL]);
+    break;
+    case StudyEnum.RGP:
+      types = [KitTypeEnum.BLOOD, KitTypeEnum.BLOOD_AND_RNA];
+      break;
+  }
+  return types;
 }

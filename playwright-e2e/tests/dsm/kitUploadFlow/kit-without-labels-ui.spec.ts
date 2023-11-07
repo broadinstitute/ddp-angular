@@ -6,7 +6,7 @@ import {StudyEnum} from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import {SamplesNavEnum} from 'dsm/component/navigation/enums/samplesNav-enum';
 import KitsWithoutLabelPage from 'dsm/pages/kitsInfo-pages/kitsWithoutLabel-page';
 import {KitsColumnsEnum} from 'dsm/pages/kitsInfo-pages/enums/kitsColumns-enum';
-import {getExpectedKitSelection, studyShortName} from 'utils/test-utils';
+import {defaultKitTypes, studyShortName} from 'utils/test-utils';
 
 test.describe('Kits without Labels UI', () => {
   let welcomePage: WelcomePage;
@@ -21,7 +21,7 @@ test.describe('Kits without Labels UI', () => {
 
   for (const study of studies) {
     test(`Page verifications @dsm @${study} @kit`, async ({page}) => {
-      const expectedKitSelection = getExpectedKitSelection(study);
+      const expectedKitSelection = defaultKitTypes(study);
       const { realm: expectedRealm } = studyShortName(study);
       await welcomePage.selectStudy(study);
 
@@ -43,15 +43,13 @@ test.describe('Kits without Labels UI', () => {
         for (let i = 0; i < rows; i++) {
           const typeValue = (await kitsTable.getRowText(i, KitsColumnsEnum.TYPE)).trim();
           // Kits in different types are not mixed. Kits should be uploaded for the right type.
-          expect.soft(typeValue).toStrictEqual(kitType);
+          expect(typeValue).toStrictEqual(kitType);
           const shortId = (await kitsTable.getRowText(i, KitsColumnsEnum.SHORT_ID)).trim();
           expect(shortId?.length).toBeTruthy();
           const realm = (await kitsTable.getRowText(i, KitsColumnsEnum.DDP_REALM)).trim();
           expect(realm).toStrictEqual(expectedRealm);
         }
       }
-
-      expect(test.info().errors).toHaveLength(0);
     })
   }
 })

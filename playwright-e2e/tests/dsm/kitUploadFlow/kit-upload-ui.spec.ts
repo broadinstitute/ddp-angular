@@ -5,7 +5,7 @@ import {Navigation} from 'dsm/component/navigation/navigation';
 import {StudyEnum} from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import {SamplesNavEnum} from 'dsm/component/navigation/enums/samplesNav-enum';
 import KitUploadPage from 'dsm/pages/kitUpload-page/kitUpload-page';
-import {getExpectedKitSelection} from 'utils/test-utils';
+import {defaultKitTypes} from 'utils/test-utils';
 
 test.describe('Kits Upload UI', () => {
   let welcomePage: WelcomePage;
@@ -19,8 +19,8 @@ test.describe('Kits Upload UI', () => {
   });
 
   for (const study of studies) {
-    test(`Page verifications @dsm @${study} @kit`, async () => {
-      const expectedKitSelection = getExpectedKitSelection(study);
+    test(`Page verifications @dsm @${study} @kit`, async ({page}) => {
+      const expectedKitSelection = defaultKitTypes(study);
       await welcomePage.selectStudy(study);
 
       const kitUploadPage = await navigation.selectFromSamples<KitUploadPage>(SamplesNavEnum.KIT_UPLOAD);
@@ -30,6 +30,7 @@ test.describe('Kits Upload UI', () => {
         await expect.soft(kitUploadPage.browseBtn).toBeHidden();
         await kitUploadPage.selectKitType(kitType);
         await expect.soft(kitUploadPage.browseBtn).toBeVisible();
+        await expect.soft(page.locator('app-filepicker .FilePicker--Text')).toHaveText('No File selected');
         await kitUploadPage.selectKitType(kitType); // un-check
       }
 

@@ -1,17 +1,20 @@
 import { Page, expect } from '@playwright/test';
+import DsmPageBase from './dsm-page-base';
+import { KitsTable } from 'dsm/component/tables/kits-table';
 import { KitTypeEnum } from 'dsm/component/kitType/enums/kitType-enum';
-import { KitType } from 'dsm/component/kitType/kitType';
 import Checkbox from 'dss/component/checkbox';
 import { waitForNoSpinner } from 'utils/test-utils';
-import KitPageBase from './kit-page-base';
 
-export default class KitQueuePage extends KitPageBase {
-  private readonly defaultKitTypes = [KitTypeEnum.SALIVA, KitTypeEnum.BLOOD];
+export default abstract class KitPageBase extends DsmPageBase {
+  protected abstract defaultKitTypes: KitTypeEnum[];
+  private readonly kitsQueueTable = new KitsTable(this.page);
 
-  private readonly kitType = new KitType(this.page);
-
-  constructor(page: Page) {
+  constructor(readonly page: Page) {
     super(page);
+  }
+
+  public get kitsTable(): KitsTable {
+    return this.kitsQueueTable;
   }
 
   public async waitForReady(kitTypes?: KitTypeEnum[]): Promise<void> {
@@ -27,7 +30,15 @@ export default class KitQueuePage extends KitPageBase {
 
   public async assertDisplayedKitTypes(kitTypes: KitTypeEnum[]): Promise<void> {
     for (const kitType of kitTypes) {
-      await expect(this.kitType.displayedKitType(kitType)).toBeVisible()
+      await expect(this.getKitCheckbox(kitType).toLocator()).toBeVisible();
     }
+  }
+
+  public getKitCheckbox(buttonLabel: KitTypeEnum): Checkbox {
+    return new Checkbox(this.page, { label: buttonLabel });
+  }
+
+  public async selectKitType(buttonLabel: KitTypeEnum): Promise<void> {
+    await this.getKitCheckbox(buttonLabel).check();
   }
 }

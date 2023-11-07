@@ -4,9 +4,10 @@ import {WelcomePage} from 'dsm/pages/welcome-page';
 import {Navigation} from 'dsm/component/navigation/navigation';
 import {StudyEnum} from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import {SamplesNavEnum} from 'dsm/component/navigation/enums/samplesNav-enum';
-import KitsWithoutLabelPage from 'dsm/pages/kitsInfo-pages/kitsWithoutLabel-page';
 import {KitsColumnsEnum} from 'dsm/pages/kitsInfo-pages/enums/kitsColumns-enum';
-import {getExpectedKitSelection, studyShortName} from 'utils/test-utils';
+import {defaultKitTypes, studyShortName} from 'utils/test-utils';
+import KitQueuePage from 'dsm/pages/kit-queue-page';
+import { KitTypeEnum } from 'dsm/component/kitType/enums/kitType-enum';
 
 test.describe('Kits without Labels UI', () => {
   let welcomePage: WelcomePage;
@@ -21,16 +22,20 @@ test.describe('Kits without Labels UI', () => {
 
   for (const study of studies) {
     test(`Page verifications @dsm @${study} @kit`, async ({page}) => {
-      const expectedKitSelection = getExpectedKitSelection(study);
+      const expectedKitSelection = defaultKitTypes(study);
       const { realm: expectedRealm } = studyShortName(study);
       await welcomePage.selectStudy(study);
 
-      const kitsWithoutLabelPage = await navigation.selectFromSamples<KitQueuePage>(SamplesNavEnum.QUEUE);
-      await kitsWithoutLabelPage.waitForReady(expectedKitSelection);
-      const kitsTable = kitsWithoutLabelPage.kitsWithoutLabelTable;
+      const kitQueuePage = await navigation.selectFromSamples<KitQueuePage>(SamplesNavEnum.QUEUE);
+      await kitQueuePage.waitForReady(expectedKitSelection);
+
+      expect(await kitQueuePage.getKitCheckbox(KitTypeEnum.SALIVA).isChecked()).toBeFalsy();
+      expect(await kitQueuePage.getKitCheckbox(KitTypeEnum.BLOOD).isChecked()).toBeFalsy();
+
+      const kitsTable = kitQueuePage.kitsTable;
 
       for (const kitType of expectedKitSelection) {
-        await kitsWithoutLabelPage.selectKitType(kitType);
+        await kitQueuePage.selectKitType(kitType);
         await expect(page.locator(kitsWithoutLabelPage.reloadKitListBtnXPath)).toBeEnabled();
         const rows = await kitsTable.getRowsCount();
         if (rows > 0) {
