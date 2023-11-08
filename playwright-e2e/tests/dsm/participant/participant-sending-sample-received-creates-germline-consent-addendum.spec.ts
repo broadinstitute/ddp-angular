@@ -25,7 +25,7 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
   const studies = [StudyEnum.OSTEO2, StudyEnum.LMS]; //Only clinical (pecgs) studies get this event
   let navigation;
   let shortID = '';
-  let mfCode = '';
+  let kitLabel = '';
   let participantListTable;
   let participantPage: ParticipantPage;
   let searchPanel;
@@ -45,7 +45,7 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
       //Prep the Saliva kit
       shortID = await findParticipantForGermlineConsentCreation(participantListPage);
       console.log(`Chosen short id: ${shortID}`);
-      mfCode = await prepareSentKit(shortID, KitTypeEnum.SALIVA, study, page, request, testInfo);
+      kitLabel = await prepareSentKit(shortID, KitTypeEnum.SALIVA, study, page, request, testInfo);
 
       //Get the Participant Page of the chosen test participant
       searchPanel = participantListPage.filters.searchPanel;
@@ -57,13 +57,29 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
       participantListTable = participantListPage.participantListTable;
       participantPage = await participantListTable.openParticipantPageAt(0);
 
-      //Input Onc History
+      /**
+       * Input Onc History - the following need to be inputted before accessioning a SM-ID / tumor sample:
+       * Date of PX (required)
+       * An Accession Number (required)
+       * Facility Name (Optional)
+       * Facilty Phone Number (Optional)
+       * Facility Fax Number (Optional)
+       */
       const oncHistoryTab = await participantPage.clickTab<OncHistoryTab>(TabEnum.ONC_HISTORY);
       const oncHistoryTable = oncHistoryTab.table;
 
-      //Navigate to the Onc History -> Tissue Request Page
+      //Mark Onc History as 'Request' status and navigate to the Onc History -> Tissue Request Page
 
-      //Create a tumor sample
+      /**
+       * Create Tumor Sample - the following need to be inputted in Tissue Request page before accessioning a SM-ID / tumor sample:
+       * Fax Sent Date (Automatically filled out when clicking Download Request Documents)
+       * Tissue Received Date
+       * Gender
+       * Materials Received amount (either USS [unstained slides] or Scrolls type)
+       * SM-IDs (either USS [unstained slides] or Scrolls)
+       * Tumor Collaborator Sample ID
+       * Date Sent to GP
+       */
 
       //Receive the saliva kit
 
