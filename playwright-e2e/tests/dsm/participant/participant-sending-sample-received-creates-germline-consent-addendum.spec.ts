@@ -23,6 +23,8 @@ import { TabEnum } from 'dsm/component/tabs/enums/tab-enum';
 import { OncHistoryInputColumnsEnum, OncHistorySelectRequestEnum } from 'dsm/component/tabs/enums/onc-history-input-columns-enum';
 import { SMIdEnum, TissueDynamicFieldsEnum } from 'dsm/pages/tissue/enums/tissue-information-enum';
 import KitsReceivedPage from 'dsm/pages/kitsInfo-pages/kitsReceived-page/kitsReceivedPage';
+import TissueInformationPage from 'dsm/pages/tissue/tissue-information-page';
+import { AdditionalFilter } from 'dsm/component/filters/sections/search/search-enums';
 
 test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
   const studies = [StudyEnum.OSTEO2, StudyEnum.LMS]; //Only clinical (pecgs) studies get this event
@@ -59,45 +61,17 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
       kitLabel = await prepareSentKit(shortID, KitTypeEnum.SALIVA, study, page, request, testInfo);
 
       //Get the Participant Page of the chosen test participant
-      await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
-      await participantListPage.assertPageTitle();
-      await participantListPage.waitForReady();
-      searchPanel = participantListPage.filters.searchPanel;
-      await searchPanel.open();
-      await searchPanel.text('Short ID', { textValue: shortID });
-      await searchPanel.search();
+      participantPage = await goToTestParticipantPage(shortID, navigation);
 
-      participantListTable = participantListPage.participantListTable;
-      participantPage = await participantListTable.openParticipantPageAt(0);
-
-      /**
-       * Input Onc History - the following need to be inputted before accessioning a SM-ID / tumor sample:
-       * Date of PX (required)
-       * An Accession Number (required)
-       * Facility Name (Optional)
-       * Facilty Phone Number (Optional)
-       * Facility Fax Number (Optional)
-       */
+      //Fill out an onc history and get back an accession number
       oncHistoryTab = await participantPage.clickTab<OncHistoryTab>(TabEnum.ONC_HISTORY);
-      oncHistoryTable = oncHistoryTab.table;
+      const oncHistoryTable = oncHistoryTab.table;
       today = getDate();
-      randomAccessionNumber = crypto.randomUUID().toString().substring(0, 10);
-      await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.DATE_OF_PX, { value: today });
-      await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.ACCESSION_NUMBER, { value: randomAccessionNumber });
-      await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.FACILITY, { value: facilityName });
-      await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.PHONE, { value: facilityPhoneNumber });
-      await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.FAX, { value: facilityFaxNumber });
-
-      //Mark Onc History as 'Request' status
-      await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.REQUEST, { select: OncHistorySelectRequestEnum.REQUEST });
-
-      //Click Download Request Documents in order to have the Fax Sent Date automatically filled out for recently inputted onc history
-      await oncHistoryTable.assertRowSelectionCheckbox();
-      await oncHistoryTable.selectRowAt(0);
-      await oncHistoryTab.downloadRequestDocuments();
+      randomAccessionNumber = await fillOncHistoryRow(participantPage, oncHistoryTab, facilityName, facilityPhoneNumber, facilityFaxNumber);
 
       //Navigate to the Tissue Request page
       const tissueInformationPage = await oncHistoryTable.openTissueInformationPage(0);
+      await tissueInformationPage.assertPageTitle();
 
       /**
        * Create Tumor Sample - the following need to be inputted in Tissue Request page before accessioning a SM-ID / tumor sample:
@@ -113,6 +87,7 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
       await tissueInformationPage.fillTissueReceivedDate({ today: true });
       const tissueReceivedDate = await tissueInformationPage.getTissueReceivedDate();
 
+      await tissueInformationPage.assertFaxSentDatesCount(1);
       expect(faxSentDate.trim(), `Fax Sent Date has unexpected input: expected ${today} but received ${faxSentDate}`).toBe(today);
       expect(tissueReceivedDate.trim(), `Tissue Received Date has unexpected input: expected ${getDate()} but received ${tissueReceivedDate}`).
         toBe(getDate());
@@ -136,6 +111,7 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
       const kitsReceivedPage = await navigation.selectFromSamples<KitsReceivedPage>(SamplesNavEnum.RECEIVED);
       await kitsReceivedPage.waitForLoad();
       await kitsReceivedPage.assertPageTitle();
+      await kitsReceivedPage.selectKitType(KitTypeEnum.SALIVA);
       await kitsReceivedPage.kitReceivedRequest({mfCode: kitLabel});
 
       //Accession the tumor sample (just receive the sample using the SM-ID)
@@ -146,7 +122,26 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
         tumorCollaboratorSampleID: tumorSampleID
       });
 
-      //Confirm that the germline consent addendum was created
+      //Confirm that the germline consent addendum was created - check that the GERMLINE_CONSENT_ADDENDUM_PEDIATRIC Survey Created column is not empty
+      await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
+      await participantListPage.assertPageTitle();
+      await participantListPage.waitForReady();
+
+      const customizeViewPanel = participantListPage.filters.customizeViewPanel;
+      await customizeViewPanel.open();
+      await customizeViewPanel.selectColumns(
+      `Additional Consent & Assent: Learning More About Your Child's DNA with Invitae Columns`,
+      ['GERMLINE_CONSENT_ADDENDUM_PEDIATRIC Survey Created']);
+
+      const searchPanel = participantListPage.filters.searchPanel;
+      await searchPanel.open();
+      await searchPanel.text('Short ID', { textValue: shortID });
+      await searchPanel.dates('GERMLINE_CONSENT_ADDENDUM_PEDIATRIC Survey Created', { additionalFilters: [AdditionalFilter.NOT_EMPTY] });
+      await searchPanel.search();
+
+      const participantListTable = participantListPage.participantListTable;
+      const germlineInfo = (await participantListTable.getParticipantDataAt(0, 'GERMLINE_CONSENT_ADDENDUM_PEDIATRIC Survey Created')).trim();
+      expect(germlineInfo).toBeTruthy();
     });
 
     test(`${study} - Scenario 2: BLOOD kit received first, TUMOR sample received second`, async ({ page, request }) => {
@@ -374,4 +369,58 @@ async function prepareSentKit(shortID: string,
 
   //Return the mf code a.k.a the kit label so that the kit can later be marked as received
   return kitLabel;
+}
+
+async function goToTestParticipantPage(shortID: string, navigation: Navigation): Promise<ParticipantPage> {
+  const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
+  await participantListPage.assertPageTitle();
+  await participantListPage.waitForReady();
+
+  const searchPanel = participantListPage.filters.searchPanel;
+  await searchPanel.open();
+  await searchPanel.text('Short ID', { textValue: shortID });
+  await searchPanel.search();
+
+  const participantListTable = participantListPage.participantListTable;
+  return await participantListTable.openParticipantPageAt(0);
+}
+
+ /**
+ * Input Onc History - the following need to be inputted before accessioning a SM-ID / tumor sample:
+ * Date of PX (required)
+ * An Accession Number (required)
+ * Facility Name (Optional)
+ * Facilty Phone Number (Optional)
+ * Facility Fax Number (Optional)
+ * returns the accession number to be used for checking that accessioning a tumor sample was successful
+ */
+async function fillOncHistoryRow(participantPage: ParticipantPage,
+  oncHistoryTab: OncHistoryTab,
+  facilityName: string,
+  facilityPhoneNumber: string,
+  facilityFaxNumber: string): Promise<string> {
+  const oncHistoryTable = oncHistoryTab.table;
+  const randomAccessionNumber = crypto.randomUUID().toString().substring(0, 10);
+  await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.DATE_OF_PX, {
+    date: {
+      date: {
+        yyyy: new Date().getFullYear(),
+        month: new Date().getMonth(),
+        dayOfMonth: new Date().getDate()
+      }
+    }
+  });
+  await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.ACCESSION_NUMBER, { value: randomAccessionNumber });
+  await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.FACILITY, { value: facilityName });
+  await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.PHONE, { value: facilityPhoneNumber });
+  await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.FAX, { value: facilityFaxNumber });
+
+  //Mark Onc History as 'Request' status
+  await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.REQUEST, { select: OncHistorySelectRequestEnum.REQUEST });
+
+  //Click Download Request Documents in order to have the Fax Sent Date automatically filled out for recently inputted onc history
+  await oncHistoryTable.assertRowSelectionCheckbox();
+  await oncHistoryTable.selectRowAt(0);
+  await oncHistoryTab.downloadRequestDocuments();
+  return randomAccessionNumber;
 }
