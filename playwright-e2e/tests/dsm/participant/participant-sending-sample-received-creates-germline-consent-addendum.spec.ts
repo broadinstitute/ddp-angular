@@ -20,9 +20,13 @@ import KitsSentPage from 'dsm/pages/kitsInfo-pages/kitsSentPage';
 import ParticipantPage from 'dsm/pages/participant-page/participant-page';
 import OncHistoryTab from 'dsm/component/tabs/onc-history-tab';
 import { TabEnum } from 'dsm/component/tabs/enums/tab-enum';
+import { OncHistoryInputColumnsEnum, OncHistorySelectRequestEnum } from 'dsm/component/tabs/enums/onc-history-input-columns-enum';
 
 test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
   const studies = [StudyEnum.OSTEO2, StudyEnum.LMS]; //Only clinical (pecgs) studies get this event
+  const facilityName = 'Dana Farber Cancer Institute';
+  const facilityPhoneNumber = '111-222-3333';
+  const facilityFaxNumber = '222-123-3333';
   let navigation;
   let shortID = '';
   let kitLabel = '';
@@ -31,6 +35,8 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
   let searchPanel;
   let oncHistoryTab;
   let oncHistoryTable;
+  let today;
+  let accessionNumber = '';
   let smID = '';
 
   for (const study of studies) {
@@ -65,10 +71,26 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
        * Facilty Phone Number (Optional)
        * Facility Fax Number (Optional)
        */
-      const oncHistoryTab = await participantPage.clickTab<OncHistoryTab>(TabEnum.ONC_HISTORY);
-      const oncHistoryTable = oncHistoryTab.table;
+      oncHistoryTab = await participantPage.clickTab<OncHistoryTab>(TabEnum.ONC_HISTORY);
+      oncHistoryTable = oncHistoryTab.table;
+      today = getDate();
+      accessionNumber = crypto.randomUUID().toString().substring(0, 10);
+      await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.DATE_OF_PX, { value: today });
+      await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.ACCESSION_NUMBER, { value: accessionNumber });
+      await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.FACILITY, { value: facilityName });
+      await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.PHONE, { value: facilityPhoneNumber });
+      await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.FAX, { value: facilityFaxNumber });
 
-      //Mark Onc History as 'Request' status and navigate to the Onc History -> Tissue Request Page
+      //Mark Onc History as 'Request' status
+      await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.REQUEST, { select: OncHistorySelectRequestEnum.REQUEST });
+
+      //Click Download Request Documents in order to have the Fax Sent Date automatically filled out for recently inputted onc history
+      await oncHistoryTable.assertRowSelectionCheckbox();
+      await oncHistoryTable.selectRowAt(0);
+      await oncHistoryTab.downloadRequestDocuments();
+
+      //Navigate to the Tissue Request page
+      const tissueInformationPage = await oncHistoryTable.openTissueInformationPage(0);
 
       /**
        * Create Tumor Sample - the following need to be inputted in Tissue Request page before accessioning a SM-ID / tumor sample:
@@ -80,6 +102,15 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
        * Tumor Collaborator Sample ID
        * Date Sent to GP
        */
+      const faxSentDate = await tissueInformationPage.getFaxSentDate();
+      await tissueInformationPage.fillTissueReceivedDate({ today: true });
+      const tissueReceivedDate = await tissueInformationPage.getTissueReceivedDate();
+
+      expect(faxSentDate.trim(), `Fax Sent Date has unexpected input: expected ${today} but received ${faxSentDate}`).toBe(today);
+      expect(tissueReceivedDate.trim(), `Tissue Received Date has unexpected input: expected ${getDate()} but received ${tissueReceivedDate}`).
+      toBe(getDate());
+
+      await tissueInformationPage.selectGender('Female');
 
       //Receive the saliva kit
 
