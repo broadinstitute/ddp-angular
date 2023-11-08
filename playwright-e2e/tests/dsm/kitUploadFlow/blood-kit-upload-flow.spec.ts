@@ -162,7 +162,7 @@ test.describe.serial('Blood Kits upload flow', () => {
 
       // kits received page
       const kitsReceivedPage = await navigation.selectFromSamples<KitsReceivedPage>(SamplesNavEnum.RECEIVED);
-      await kitsReceivedPage.kitReceivedRequest(kitLabel);
+      await kitsReceivedPage.kitReceivedRequest({mfCode: kitLabel});
       await kitsReceivedPage.waitForLoad();
       await kitsReceivedPage.selectKitType(kitType);
       await kitsReceivedPage.assertPageTitle();

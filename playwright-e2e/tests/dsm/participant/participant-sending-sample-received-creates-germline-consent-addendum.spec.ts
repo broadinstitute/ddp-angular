@@ -21,12 +21,15 @@ import ParticipantPage from 'dsm/pages/participant-page/participant-page';
 import OncHistoryTab from 'dsm/component/tabs/onc-history-tab';
 import { TabEnum } from 'dsm/component/tabs/enums/tab-enum';
 import { OncHistoryInputColumnsEnum, OncHistorySelectRequestEnum } from 'dsm/component/tabs/enums/onc-history-input-columns-enum';
+import { SMIdEnum, TissueDynamicFieldsEnum } from 'dsm/pages/tissue/enums/tissue-information-enum';
+import KitsReceivedPage from 'dsm/pages/kitsInfo-pages/kitsReceived-page/kitsReceivedPage';
 
 test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
   const studies = [StudyEnum.OSTEO2, StudyEnum.LMS]; //Only clinical (pecgs) studies get this event
   const facilityName = 'Dana Farber Cancer Institute';
   const facilityPhoneNumber = '111-222-3333';
   const facilityFaxNumber = '222-123-3333';
+  const materialsReceivedAmount = 1;
   let navigation;
   let shortID = '';
   let kitLabel = '';
@@ -36,8 +39,10 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
   let oncHistoryTab;
   let oncHistoryTable;
   let today;
-  let accessionNumber = '';
+  let randomAccessionNumber = '';
   let smID = '';
+  let tumorSampleID = '';
+  let tumorCollaboratorSampleIDPrefix = '';
 
   for (const study of studies) {
     test(`${study} - Scenario 1: SALIVA kit received first, TUMOR sample received second`, async ({ page, request }, testInfo) => {
@@ -54,9 +59,11 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
       kitLabel = await prepareSentKit(shortID, KitTypeEnum.SALIVA, study, page, request, testInfo);
 
       //Get the Participant Page of the chosen test participant
+      await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
+      await participantListPage.assertPageTitle();
+      await participantListPage.waitForReady();
       searchPanel = participantListPage.filters.searchPanel;
       await searchPanel.open();
-      await searchPanel.clear();
       await searchPanel.text('Short ID', { textValue: shortID });
       await searchPanel.search();
 
@@ -74,9 +81,9 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
       oncHistoryTab = await participantPage.clickTab<OncHistoryTab>(TabEnum.ONC_HISTORY);
       oncHistoryTable = oncHistoryTab.table;
       today = getDate();
-      accessionNumber = crypto.randomUUID().toString().substring(0, 10);
+      randomAccessionNumber = crypto.randomUUID().toString().substring(0, 10);
       await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.DATE_OF_PX, { value: today });
-      await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.ACCESSION_NUMBER, { value: accessionNumber });
+      await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.ACCESSION_NUMBER, { value: randomAccessionNumber });
       await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.FACILITY, { value: facilityName });
       await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.PHONE, { value: facilityPhoneNumber });
       await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.FAX, { value: facilityFaxNumber });
@@ -108,13 +115,36 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
 
       expect(faxSentDate.trim(), `Fax Sent Date has unexpected input: expected ${today} but received ${faxSentDate}`).toBe(today);
       expect(tissueReceivedDate.trim(), `Tissue Received Date has unexpected input: expected ${getDate()} but received ${tissueReceivedDate}`).
-      toBe(getDate());
+        toBe(getDate());
 
       await tissueInformationPage.selectGender('Female');
 
+      const tissue = await tissueInformationPage.tissue();
+      await tissue.fillField(TissueDynamicFieldsEnum.USS, { inputValue: materialsReceivedAmount });
+      smID = `SM-${crypto.randomUUID().toString().substring(0, 5)}`; //e.g. SM-12345
+      const smIDModal = await tissue.fillSMIDs(SMIdEnum.USS_SM_IDS);
+      await smIDModal.fillInputs([smID]);
+      await smIDModal.close();
+
+      tumorCollaboratorSampleIDPrefix = await tissue.getTumorCollaboratorSampleIDSuggestedValue();
+      tumorSampleID = `${tumorCollaboratorSampleIDPrefix}_${crypto.randomUUID().toString().substring(0, 4)}`;
+      await tissue.fillField(TissueDynamicFieldsEnum.TUMOR_COLLABORATOR_SAMPLE_ID, { inputValue: tumorSampleID });
+
+      await tissue.fillField(TissueDynamicFieldsEnum.DATE_SENT_TO_GP, { inputValue: today });
+
       //Receive the saliva kit
+      const kitsReceivedPage = await navigation.selectFromSamples<KitsReceivedPage>(SamplesNavEnum.RECEIVED);
+      await kitsReceivedPage.waitForLoad();
+      await kitsReceivedPage.assertPageTitle();
+      await kitsReceivedPage.kitReceivedRequest({mfCode: kitLabel});
 
       //Accession the tumor sample (just receive the sample using the SM-ID)
+      await kitsReceivedPage.kitReceivedRequest({
+        mfCode: smID,
+        isTumorSample: true,
+        accessionNumber: randomAccessionNumber,
+        tumorCollaboratorSampleID: tumorSampleID
+      });
 
       //Confirm that the germline consent addendum was created
     });
@@ -256,8 +286,23 @@ async function prepareSentKit(shortID: string,
     await kitsWithoutLabelPage.deactivateAllKitsFor(shortID);
   }
 
+  //Get first name and last name of the participant - Kit Upload checks that the names match the given short ids
+  const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
+  await participantListPage.assertPageTitle();
+  await participantListPage.waitForReady();
+
+  const searchPanel = participantListPage.filters.searchPanel;
+  await searchPanel.open();
+  await searchPanel.clear();
+  await searchPanel.text('Short ID', { textValue: shortID });
+  await searchPanel.search();
+
+  const participantListTable = participantListPage.participantListTable;
+  const firstName = (await participantListTable.getParticipantDataAt(0, 'First Name')).trim();
+  const lastName = (await participantListTable.getParticipantDataAt(0, 'Last Name')).trim();
+
   //Upload saliva kit
-  const kitUploadInfo = new KitUploadInfo(shortID, user.patient.firstName, user.patient.lastName);
+  const kitUploadInfo = new KitUploadInfo(shortID, firstName, lastName);
   kitUploadInfo.address.street1 = user.patient.streetAddress;
   kitUploadInfo.address.city = user.patient.city;
   kitUploadInfo.address.postalCode = user.patient.zip;
@@ -290,7 +335,11 @@ async function prepareSentKit(shortID: string,
   //Scan saliva kit in Initial Scan
   const initialScanPage = await navigation.selectFromSamples<InitialScanPage>(SamplesNavEnum.INITIAL_SCAN);
   await initialScanPage.assertPageTitle();
-  kitLabel = `PECGS-${crypto.randomUUID().toString().substring(0, 10)}`;
+  if (kitType === KitTypeEnum.SALIVA) {
+    kitLabel = `${crypto.randomUUID().toString().substring(0, 14)}`; //Clinical Saliva kits just need to be 14 chars
+  } else if (kitType === KitTypeEnum.BLOOD) {
+    kitLabel = `PECGS-${crypto.randomUUID().toString().substring(0, 10)}`; //Clinical Blood kits need a PECGS prefix
+  }
   await initialScanPage.fillScanPairs([kitLabel, shortID]);
   await initialScanPage.save();
 

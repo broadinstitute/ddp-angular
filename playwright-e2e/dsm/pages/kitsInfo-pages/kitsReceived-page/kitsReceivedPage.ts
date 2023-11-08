@@ -46,11 +46,14 @@ export default class KitsReceivedPage {
     await waitForNoSpinner(this.page);
   }
 
-  public async kitReceivedRequest(kitLabel: string): Promise<void> {
+  public async kitReceivedRequest(opts: { mfCode: string, isTumorSample?: boolean,
+    accessionNumber?: string,
+    tumorCollaboratorSampleID?: string }): Promise<void> {
+    const { mfCode = '', isTumorSample = false, accessionNumber = null, tumorCollaboratorSampleID = null } = opts;
     if (!BSP_TOKEN) {
       throw Error('Invalid parameter: DSM BSP token is not provided.');
     }
-    const response = await this.request.get(`${DSM_BASE_URL}/ddp/ClinicalKits/${kitLabel}`, {
+    const response = await this.request.get(`${DSM_BASE_URL}/ddp/ClinicalKits/${mfCode}`, {
       headers: {
         Authorization: `Bearer ${BSP_TOKEN}`
       }
@@ -62,7 +65,15 @@ export default class KitsReceivedPage {
       throw new Error(`Couldn't send the kit received request - something went wrong\n${error}`)
     }
     expect(response.ok()).toBeTruthy();
-    expect(jsonResponse).toHaveProperty('kit_label', kitLabel);
+
+    if (!isTumorSample) {
+      expect(jsonResponse).toHaveProperty('kit_label', mfCode); //only kits get this
+    }
+
+    if (isTumorSample && accessionNumber != null && tumorCollaboratorSampleID != null) {
+      expect(jsonResponse).toHaveProperty('accession_number', accessionNumber);
+      expect(jsonResponse).toHaveProperty('sample_id', tumorCollaboratorSampleID);
+    }
   }
 
   public async kitReceivedRequestForRGPKits(kitLabel: string, subjectID: string): Promise<void> {
