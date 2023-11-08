@@ -59,3 +59,31 @@ export interface LmsOncHistoryUpload {
   SLIDES_TO_REQUEST?: string;
   SLIDES_TOTAL?: string;
 }
+
+export interface PanCanOncHistoryUpload {
+  RECORD_ID: string,
+  REQUEST_STATUS: string;
+  DATE_PX?: string,
+  TYPE_PX?: string,
+  LOCATION_PX?: string,
+  HISTOLOGY?: string,
+  ACCESSION?: string,
+  FACILITY?: string,
+  PHONE?: string;
+  FAX?: string;
+  DESTRUCTION?: string;
+}
+
+export interface BrainOncHistoryUpload {
+  RECORD_ID: string,
+  FACILITY?: string,
+  PHONE?: string;
+  FAX?: string;
+  ACCESSION?: string,
+  DATE_PX?: string,
+  TYPE_PX?: string,
+  LOCATION_PX?: string,
+  HISTOLOGY?: string,
+  REQUEST_STATUS: string;
+  DESTRUCTION?: string;
+}
