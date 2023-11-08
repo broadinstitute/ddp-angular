@@ -141,6 +141,17 @@ async function findParticipantForGermlineConsentCreation(participantListPage: Pa
   return shortID;
 }
 
+/**
+ * Uploads and sends the given type of kit e.g. Saliva kit or Blood kit - method is used in order to not repeat
+ * similar steps for 4 test scenarios
+ * @param shortID the short id of the participant who is having a kit uploaded
+ * @param kitType the kit type of the upload
+ * @param study the study for which the kit is uploaded
+ * @param page
+ * @param request
+ * @param testInfo
+ * @returns the mf code a.k.a the kit label to be used to later mark the kit as sent
+ */
 async function prepareSentKit(shortID: string,
   kitType: KitTypeEnum,
   study: StudyEnum,
