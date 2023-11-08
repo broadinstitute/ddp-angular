@@ -6,11 +6,17 @@ export enum MainInfoEnum {
   GUID = 'Internal Participant ID',
   FIRST_NAME = 'First Name',
   LAST_NAME = 'Last Name',
+  FULL_NAME = 'Full Name',
   EMAIL = 'E-Mail',
   DO_NOT_CONTACT = 'Do Not Contact',
   DATE_OF_BIRTH = 'Date of Birth',
   DATE_OF_DIAGNOSIS = 'Date of Diagnosis',
   GENDER = 'Gender',
   PREFERRED_LANGUAGE = 'Preferred Language',
-  PARTICIPANT_ID = 'Participant ID',
+  CONSENT_BLOOD = 'Consent Blood',
+  CONSENT_TISSUE = 'Consent Tissue',
+  DDP = 'DDP',
+  ASSIGNEE = 'Assignee',
+  CURRENT_STATUS = 'Current Status',
+  INSTITUTION_INFO = 'Institution Info'
 }

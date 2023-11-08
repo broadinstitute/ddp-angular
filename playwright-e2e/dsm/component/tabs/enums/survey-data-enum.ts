@@ -1,0 +1,4 @@
+export enum SurveyDataPanelEnum {
+  MEDICAL_RELEASE_FORM = 'MEDICAL_RELEASE',
+  RESEARCH_CONSENT_FORM = 'CONSENT'
+}

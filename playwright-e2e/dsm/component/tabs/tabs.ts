@@ -4,6 +4,7 @@ import ContactInformationTab from 'dsm/component/tabs/contact-information-tab';
 import GenomeStudyTab from 'dsm/component/tabs/genome-study-tab';
 import SampleInformationTab from 'dsm/component/tabs/sample-information-tab';
 import OncHistoryTab from './onc-history-tab';
+import MedicalRecordsTab from 'dsm/pages/medical-records/medical-records-tab';
 
 export default class Tabs {
   private readonly tabs = new Map<string, object>([
@@ -11,6 +12,8 @@ export default class Tabs {
     [TabEnum.SAMPLE_INFORMATION, new SampleInformationTab(this.page)],
     [TabEnum.GENOME_STUDY, new GenomeStudyTab(this.page)],
     [TabEnum.ONC_HISTORY, new OncHistoryTab(this.page)],
+    [TabEnum.MEDICAL_RECORD, new MedicalRecordsTab(this.page)],
+    [TabEnum.SURVEY_DATA, new SurveyDataTab(this.page)],
   ]);
 
   constructor(private readonly page: Page) {}
