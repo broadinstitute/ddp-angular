@@ -167,8 +167,12 @@ export class TissueComponent {
       this.patchFinished = false;
       this.dsmService.patchParticipantRecord(JSON.stringify(patch)).subscribe({ // need to subscribe, otherwise it will not send!
         next: data => {
+          this.tissue.errorMessage = null;
           this.patchFinished = true;
           this.currentPatchField = null;
+          if (parameterName === 'deleted') {
+            this.tissue.deleted = true;
+          }
           if ( data && this.tissue.tissueId == null ) {
             this.tissue.tissueId = data['tissueId'];
             this.dup = false;
@@ -190,12 +194,19 @@ export class TissueComponent {
           result = true;
         },
         error: err => {
-          this.dup = true;
-          if (tAlias === 'sm') {
-            if (smIdArray && index && smId) {
-              smIdArray[ index ].smIdPk = smId;//for new sm ids
+          if (err.error === 'This object is used in a clinical order') {
+            this.tissue.errorMessage = 'Couldn\'t perform delete, a clinical order is already placed for it';
+            this.tissue.deleted = false;
+            return false;
+          } else {
+            this.tissue.errorMessage = null;
+            this.dup = true;
+            if (tAlias === 'sm') {
+              if (smIdArray && index && smId) {
+                smIdArray[index].smIdPk = smId;//for new sm ids
+              }
+              this.smIdDuplicate[this.currentSMIDField].add(this.createDuplicateIndex(index));
             }
-            this.smIdDuplicate[ this.currentSMIDField ].add(this.createDuplicateIndex( index ) );
           }
           if (err._body === Auth.AUTHENTICATION_ERROR) {
             this.auth.doLogout();
@@ -208,7 +219,7 @@ export class TissueComponent {
   }
 
   deleteTissue(): void {
-    if (this.valueChanged('1', 'deleted')){
+    if (this.valueChanged('1', 'deleted')) {
       this.tissue.deleted = true;
     }
   }

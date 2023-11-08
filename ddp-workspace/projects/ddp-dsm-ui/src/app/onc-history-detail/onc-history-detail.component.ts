@@ -267,7 +267,7 @@ export class OncHistoryDetailComponent implements OnInit {
         if (err._body === Auth.AUTHENTICATION_ERROR) {
           this.auth.doLogout();
         } else if (err.error === 'This object is used in a clinical order') {
-          this.errorMessage = 'Couldn\'t delete OncHistory, a clinical order is already placed for one of the tissues';
+          this.errorMessage = 'Couldn\'t perform delete, a clinical order is already placed for one of the tissues';
         }
       }
     });
