@@ -1,5 +1,4 @@
 import { APIRequestContext, Page, TestInfo, expect } from '@playwright/test';
-import { AdditionalFilter } from 'dsm/component/filters/sections/search/search-enums';
 import { KitTypeEnum } from 'dsm/component/kitType/enums/kitType-enum';
 import { SamplesNavEnum } from 'dsm/component/navigation/enums/samplesNav-enum';
 import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
@@ -18,12 +17,21 @@ import TrackingScanPage from 'dsm/pages/scanner-pages/trackingScan-page';
 import FinalScanPage from 'dsm/pages/scanner-pages/finalScan-page';
 import { getDate } from 'utils/date-utils';
 import KitsSentPage from 'dsm/pages/kitsInfo-pages/kitsSentPage';
+import ParticipantPage from 'dsm/pages/participant-page/participant-page';
+import OncHistoryTab from 'dsm/component/tabs/onc-history-tab';
+import { TabEnum } from 'dsm/component/tabs/enums/tab-enum';
 
 test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
   const studies = [StudyEnum.OSTEO2, StudyEnum.LMS]; //Only clinical (pecgs) studies get this event
   let navigation;
   let shortID = '';
   let mfCode = '';
+  let participantListTable;
+  let participantPage: ParticipantPage;
+  let searchPanel;
+  let oncHistoryTab;
+  let oncHistoryTable;
+  let smID = '';
 
   for (const study of studies) {
     test(`${study} - Scenario 1: SALIVA kit received first, TUMOR sample received second`, async ({ page, request }, testInfo) => {
@@ -34,9 +42,34 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
       await participantListPage.assertPageTitle();
       await participantListPage.waitForReady();
 
+      //Prep the Saliva kit
       shortID = await findParticipantForGermlineConsentCreation(participantListPage);
       console.log(`Chosen short id: ${shortID}`);
       mfCode = await prepareSentKit(shortID, KitTypeEnum.SALIVA, study, page, request, testInfo);
+
+      //Get the Participant Page of the chosen test participant
+      searchPanel = participantListPage.filters.searchPanel;
+      await searchPanel.open();
+      await searchPanel.clear();
+      await searchPanel.text('Short ID', { textValue: shortID });
+      await searchPanel.search();
+
+      participantListTable = participantListPage.participantListTable;
+      participantPage = await participantListTable.openParticipantPageAt(0);
+
+      //Input Onc History
+      const oncHistoryTab = await participantPage.clickTab<OncHistoryTab>(TabEnum.ONC_HISTORY);
+      const oncHistoryTable = oncHistoryTab.table;
+
+      //Navigate to the Onc History -> Tissue Request Page
+
+      //Create a tumor sample
+
+      //Receive the saliva kit
+
+      //Accession the tumor sample (just receive the sample using the SM-ID)
+
+      //Confirm that the germline consent addendum was created
     });
 
     test(`${study} - Scenario 2: BLOOD kit received first, TUMOR sample received second`, async ({ page, request }) => {
