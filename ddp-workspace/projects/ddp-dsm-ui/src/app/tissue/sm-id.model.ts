@@ -19,7 +19,9 @@ export class TissueSmId {
       return arr;
     }
     jsonArray.forEach( ( val ) => {
-      arr.push( this.parse( val ) );
+      if (!val.deleted) {
+        arr.push(this.parse(val));
+      }
     } );
     return arr;
   }

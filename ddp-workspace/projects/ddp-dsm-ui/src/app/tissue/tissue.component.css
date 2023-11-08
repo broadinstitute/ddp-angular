@@ -8,3 +8,8 @@ input::-webkit-inner-spin-button {
 .changed{
   color: #b02727;
 }
+
+.delete-error{
+  background-color: #b72c2c;
+  color: white;
+}
