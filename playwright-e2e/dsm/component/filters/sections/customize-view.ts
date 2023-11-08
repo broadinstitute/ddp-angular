@@ -28,6 +28,17 @@ export class CustomizeView {
     await this.closeColumnsGroup();
   }
 
+  public async selectColumnsByID(columnsGroupName: string, columns: string[], id: string, opts: { nth?: number } = {}): Promise<void> {
+    const { nth } = opts;
+    this.activeColumnsGroup = columnsGroupName;
+    await this.openColumnsGroup({nth});
+    for (const column of columns) {
+      const columnOption = this.page.locator(`//ul[@id='${id}']//mat-checkbox[contains(.,'${column}')]`);
+      await columnOption.click();
+    }
+    await this.closeColumnsGroup();
+  }
+
   public async deselectColumns(columnsGroupName: string, columns: string[], opts: { nth?: number } = {}): Promise<void> {
     const { nth } = opts;
     this.activeColumnsGroup = columnsGroupName;
@@ -110,6 +121,6 @@ export class CustomizeView {
   }
 
   private columnCheckbox(columnName: string): Checkbox {
-    return new Checkbox(this.page, { root: this.columnsGroupXPath, label: columnName, exactMatch: true })
+    return new Checkbox(this.page, { root: this.columnsGroupXPath, label: columnName, exactMatch: true });
   }
 }
