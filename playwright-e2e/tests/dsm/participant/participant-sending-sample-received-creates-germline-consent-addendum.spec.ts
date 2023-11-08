@@ -13,6 +13,11 @@ import * as user from 'data/fake-user.json';
 import { KitUploadInfo } from 'dsm/pages/kitUpload-page/models/kitUpload-model';
 import KitUploadPage from 'dsm/pages/kitUpload-page/kitUpload-page';
 import { KitsColumnsEnum } from 'dsm/pages/kitsInfo-pages/enums/kitsColumns-enum';
+import InitialScanPage from 'dsm/pages/scanner-pages/initialScan-page';
+import TrackingScanPage from 'dsm/pages/scanner-pages/trackingScan-page';
+import FinalScanPage from 'dsm/pages/scanner-pages/finalScan-page';
+import { getDate } from 'utils/date-utils';
+import KitsSentPage from 'dsm/pages/kitsInfo-pages/kitsSentPage';
 
 test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
   const studies = [StudyEnum.OSTEO2, StudyEnum.LMS]; //Only clinical (pecgs) studies get this event
@@ -145,7 +150,8 @@ async function prepareSentKit(shortID: string,
   const navigation = new Navigation(page, request);
   const expectedKitTypes = [KitTypeEnum.SALIVA, KitTypeEnum.BLOOD]; //Studies used for the current test only have Saliva and Blood kits
   const testResultDirectory = testInfo.outputDir;
-  let mfCode = '';
+  let kitLabel = '';
+  let trackingLabel = '';
 
   //Deactivate existing kits
   const kitsWithoutLabelPage = await navigation.selectFromSamples<KitsWithoutLabelPage>(SamplesNavEnum.KITS_WITHOUT_LABELS);
@@ -191,11 +197,41 @@ async function prepareSentKit(shortID: string,
   await expect(kitsTable.rowLocator()).toHaveCount(1);
 
   //Scan saliva kit in Initial Scan
+  const initialScanPage = await navigation.selectFromSamples<InitialScanPage>(SamplesNavEnum.INITIAL_SCAN);
+  await initialScanPage.assertPageTitle();
+  kitLabel = `PECGS-${crypto.randomUUID().toString().substring(0, 10)}`;
+  await initialScanPage.fillScanPairs([kitLabel, shortID]);
+  await initialScanPage.save();
 
   //If uploading a blood kit - make sure to also scan the kit in Tracking Scan page
+  if (kitType === KitTypeEnum.BLOOD) {
+    const trackingScanPage = await navigation.selectFromSamples<TrackingScanPage>(SamplesNavEnum.TRACKING_SCAN);
+    await trackingScanPage.assertPageTitle();
+    trackingLabel = `tracking-${crypto.randomUUID().toString().substring(0, 10)}`;
+    await trackingScanPage.fillScanPairs([trackingLabel, kitLabel]);
+    await trackingScanPage.save();
+  }
 
   //Scan saliva kit in Final Scan - which marks the kit as sent
+  const finalScanPage = await navigation.selectFromSamples<FinalScanPage>(SamplesNavEnum.FINAL_SCAN);
+  await finalScanPage.assertPageTitle();
+  await finalScanPage.fillScanPairs([kitLabel, shippingID]);
+  await finalScanPage.save();
 
-  //Return the mf code so that the kit can later be marked as received
-  return mfCode;
+  //Check for the kit in the Kits Sent page
+  const kitsSentPage = await navigation.selectFromSamples<KitsSentPage>(SamplesNavEnum.SENT);
+  await kitsSentPage.waitForLoad();
+  await kitsSentPage.assertPageTitle();
+  await kitsSentPage.assertDisplayedKitTypes(expectedKitTypes);
+  await kitsSentPage.selectKitType(kitType);
+  await kitsSentPage.assertReloadKitListBtn();
+  await kitsSentPage.assertTableHeader();
+  await kitsSentPage.search(KitsColumnsEnum.MF_CODE, kitLabel);
+  await kitsSentPage.assertDisplayedRowsCount(1);
+
+  const sentDate = await kitsSentPage.getData(KitsColumnsEnum.SENT);
+  expect(getDate(new Date(sentDate))).toStrictEqual(getDate());
+
+  //Return the mf code a.k.a the kit label so that the kit can later be marked as received
+  return kitLabel;
 }
