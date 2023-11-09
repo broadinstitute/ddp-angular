@@ -170,7 +170,7 @@ export class TissueComponent {
           this.tissue.errorMessage = null;
           this.patchFinished = true;
           this.currentPatchField = null;
-          if (parameterName === 'deleted') {
+          if (parameterName === 'deleted' && tAlias ===  Statics.TISSUE_ALIAS) {
             this.tissue.deleted = true;
           }
           if ( data && this.tissue.tissueId == null ) {
