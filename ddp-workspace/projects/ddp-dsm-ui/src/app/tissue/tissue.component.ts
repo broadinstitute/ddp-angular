@@ -172,6 +172,11 @@ export class TissueComponent {
           this.currentPatchField = null;
           if (parameterName === 'deleted' && tAlias ===  Statics.TISSUE_ALIAS) {
             this.tissue.deleted = true;
+          } else if (parameterName === 'deleted' && tAlias === Statics.SM_ID_ALIAS) {
+            smIdArray[index].deleted = true;
+            if (this.smIdDuplicate[this.currentSMIDField].has(this.createDuplicateIndex(index))) {
+              this.smIdDuplicate[this.currentSMIDField].delete(this.createDuplicateIndex(index));
+            }
           }
           if ( data && this.tissue.tissueId == null ) {
             this.tissue.tissueId = data['tissueId'];
@@ -359,15 +364,15 @@ export class TissueComponent {
     }
   }
 
-  deleteSMID( array: TissueSmId[], i: number ): void {
-    array[ i ].deleted = true;
-    if (array[ i ].smIdPk) {
-      this.changeSmId('1', 'deleted', array[ i ].smIdPk, array[ i ].smIdType, array, i );
+  deleteSMID(array: TissueSmId[], i: number): void {
+    if (array[i].smIdPk) {
+      this.changeSmId('1', 'deleted', array[i].smIdPk, array[i].smIdType, array, i);
+    } else {
+      array.splice(i, 1);
+      if (this.smIdDuplicate[this.currentSMIDField].has(this.createDuplicateIndex(i))) {
+        this.smIdDuplicate[this.currentSMIDField].delete(this.createDuplicateIndex(i));
+      }
     }
-    if (this.smIdDuplicate[ this.currentSMIDField ].has( this.createDuplicateIndex( i ) )) {
-      this.smIdDuplicate[ this.currentSMIDField ].delete( this.createDuplicateIndex( i ) );
-    }
-    array.splice( i, 1 );
   }
 
   checkboxChecked( event: any, smidArray: TissueSmId[], index: number ): void {
