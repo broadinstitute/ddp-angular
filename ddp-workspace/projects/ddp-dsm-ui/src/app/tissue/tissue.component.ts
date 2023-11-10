@@ -365,13 +365,12 @@ export class TissueComponent {
   }
 
   deleteSMID(array: TissueSmId[], i: number): void {
+    //only allow delete if the sm id has been created or the backend failed to create it
     if (array[i].smIdPk) {
       this.changeSmId('1', 'deleted', array[i].smIdPk, array[i].smIdType, array, i);
-    } else {
+    } else if (this.smIdDuplicate[this.currentSMIDField].has(this.createDuplicateIndex(i))) {
       array.splice(i, 1);
-      if (this.smIdDuplicate[this.currentSMIDField].has(this.createDuplicateIndex(i))) {
-        this.smIdDuplicate[this.currentSMIDField].delete(this.createDuplicateIndex(i));
-      }
+      this.smIdDuplicate[this.currentSMIDField].delete(this.createDuplicateIndex(i));
     }
   }
 
