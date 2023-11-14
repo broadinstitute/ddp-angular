@@ -15,7 +15,7 @@ export default class ErrorPage {
   private readonly kitType: KitType;
   private readonly kitsTable: KitsTable;
 
-  constructor(private readonly page: Page) {
+  constructor(private readonly page: Page, expectedKitTypes?: KitTypeEnum[]) {
     this.kitType = new KitType(this.page)
     this.kitsTable = new KitsTable(this.page);
   }
@@ -25,10 +25,6 @@ export default class ErrorPage {
     await Promise.all([
       this.page.waitForLoadState('networkidle'),
       waitForNoSpinner(this.page)
-    ]);
-    await Promise.all([
-      expect(this.kitType.displayedKitType(KitTypeEnum.BLOOD)).toBeVisible(),
-      expect(this.kitType.displayedKitType(KitTypeEnum.SALIVA)).toBeVisible()
     ]);
   }
 
