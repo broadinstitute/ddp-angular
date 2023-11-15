@@ -48,6 +48,7 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
 
   for (const study of studies) {
     test(`${study} - Scenario 1: SALIVA kit received first, TUMOR sample received second`, async ({ page, request }, testInfo) => {
+      test.slow();
       navigation = new Navigation(page, request);
       await new Select(page, { label: 'Select study' }).selectOption(`${study}`);
 
@@ -145,6 +146,7 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
     });
 
     test(`${study} - Scenario 2: BLOOD kit received first, TUMOR sample received second`, async ({ page, request }, testInfo) => {
+      test.slow();
       navigation = new Navigation(page, request);
       await new Select(page, { label: 'Select study' }).selectOption(`${study}`);
 
@@ -242,6 +244,7 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
     });
 
     test(`${study} - Scenario 3: TUMOR sample received first, SALIVA kit received second`, async ({ page, request }, testInfo) => {
+      test.slow();
       navigation = new Navigation(page, request);
       await new Select(page, { label: 'Select study' }).selectOption(`${study}`);
 
@@ -339,6 +342,7 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
     });
 
     test(`${study} - Scenario 4: TUMOR sample received first, BLOOD kit received second`, async ({ page, request }, testInfo) => {
+      test.slow();
       navigation = new Navigation(page, request);
       await new Select(page, { label: 'Select study' }).selectOption(`${study}`);
 
