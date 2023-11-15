@@ -138,11 +138,17 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
       await searchPanel.open();
       await searchPanel.text('Short ID', { textValue: shortID });
       await searchPanel.dates('GERMLINE_CONSENT_ADDENDUM_PEDIATRIC Survey Created', { additionalFilters: [AdditionalFilter.NOT_EMPTY] });
-      await searchPanel.search();
 
-      const participantListTable = participantListPage.participantListTable;
-      const germlineInfo = (await participantListTable.getParticipantDataAt(0, 'GERMLINE_CONSENT_ADDENDUM_PEDIATRIC Survey Created')).trim();
-      expect(germlineInfo).toBeTruthy();
+      //Occasionally, it will take a couple of seconds (and participant list refreshes) before info about the germline consent activity being created shows up
+      await expect(async () => {
+        await searchPanel.search();
+        const participantListTable = participantListPage.participantListTable;
+        const germlineInfo = (await participantListTable.getParticipantDataAt(0, 'GERMLINE_CONSENT_ADDENDUM_PEDIATRIC Survey Created')).trim();
+        expect(germlineInfo).toBeTruthy();
+      }).toPass({
+        intervals: [5_000],
+        timeout: 30_000
+      });
     });
 
     test(`${study} - Scenario 2: BLOOD kit received first, TUMOR sample received second`, async ({ page, request }, testInfo) => {
@@ -240,7 +246,13 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
 
       const participantListTable = participantListPage.participantListTable;
       const germlineInfo = (await participantListTable.getParticipantDataAt(0, 'GERMLINE_CONSENT_ADDENDUM_PEDIATRIC Survey Created')).trim();
-      expect(germlineInfo).toBeTruthy();
+
+      await expect(() => {
+        expect(germlineInfo).toBeTruthy();
+      }).toPass({
+        intervals: [5_000],
+        timeout: 30_000
+      });
     });
 
     test(`${study} - Scenario 3: TUMOR sample received first, SALIVA kit received second`, async ({ page, request }, testInfo) => {
@@ -338,7 +350,13 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
 
       const participantListTable = participantListPage.participantListTable;
       const germlineInfo = (await participantListTable.getParticipantDataAt(0, 'GERMLINE_CONSENT_ADDENDUM_PEDIATRIC Survey Created')).trim();
-      expect(germlineInfo).toBeTruthy();
+
+      await expect(() => {
+        expect(germlineInfo).toBeTruthy();
+      }).toPass({
+        intervals: [5_000],
+        timeout: 30_000
+      });
     });
 
     test(`${study} - Scenario 4: TUMOR sample received first, BLOOD kit received second`, async ({ page, request }, testInfo) => {
@@ -436,7 +454,13 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
 
       const participantListTable = participantListPage.participantListTable;
       const germlineInfo = (await participantListTable.getParticipantDataAt(0, 'GERMLINE_CONSENT_ADDENDUM_PEDIATRIC Survey Created')).trim();
-      expect(germlineInfo).toBeTruthy();
+
+      await expect(() => {
+        expect(germlineInfo).toBeTruthy();
+      }).toPass({
+        intervals: [5_000],
+        timeout: 30_000
+      });
     });
   }
 });
