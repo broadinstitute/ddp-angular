@@ -39,7 +39,9 @@ export class Participant {
     if (jsonData != null) {
       jsonData.forEach((val) => {
         const oncHistory = OncHistoryDetail.parse(val);
-        oncHistoryDetails.push(oncHistory);
+        if (oncHistory) {
+          oncHistoryDetails.push(oncHistory);
+        }
       });
     }
 

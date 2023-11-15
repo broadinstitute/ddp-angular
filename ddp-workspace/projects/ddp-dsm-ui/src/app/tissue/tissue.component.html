@@ -1,6 +1,11 @@
 <!--information added by assigneeMr-->
 <div class="Display--block" *ngIf="!tissue.deleted" [ngClass]="{'Green-background': tissue.tissueId === tissueId}">
   <table class="Width--100" style="border: 1px solid black;">
+    <tr *ngIf="tissue.errorMessage">
+      <td colspan="6" align="left" class="TD--Padding">
+        <p class="delete-error">{{tissue.errorMessage}}</p>
+      </td>
+    </tr>
     <tr>
       <td colspan="6" align="right" class="TD--Padding">
         <button mat-mini-fab color="warn" [disabled]="!editable"

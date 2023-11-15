@@ -161,7 +161,8 @@
                         { "key": "MBC", "label": "Metastatic Breast Cancer Project" },
                         { "key": "MBCSpanish", "label": "Proyecto de Cáncer de Mama Metastásico en Español" },
                         { "key": "MPC", "label": "Metastatic Prostate Cancer Project" },
-                        { "key": "Osteo", "label": "Osteosarcoma Project" }
+                        { "key": "Osteo", "label": "Osteosarcoma Project" },
+                        { "key": "PediHCC", "label": "Pediatric Hepatocellular Carcinoma (HCC) and HCC-Like Tumor Project" }
                     ]
                 },
                 {

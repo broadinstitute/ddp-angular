@@ -25,7 +25,7 @@ test.describe.serial('Adult Self Enrollment', () => {
     await expect(locator).toContainText(itemName);
   };
 
-  test('Can complete application @functional @@dss @rgp', async ({ page }) => {
+  test('Can complete application @functional @dss @rgp', async ({ page }) => {
     const homePage = new HomePage(page);
     await homePage.clickGetStarted();
 

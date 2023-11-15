@@ -96,8 +96,9 @@ export class TissueComponent {
     return null;
   }
 
-  valueChanged(value: any, parameterName: string, pName?: string, pId?, alias?, smId?, smIdArray?, index?, value2?, parameter2?): void {
+  valueChanged(value: any, parameterName: string, pName?: string, pId?, alias?, smId?, smIdArray?, index?, value2?, parameter2?): boolean {
     let v;
+    let result = false;
     let parentName = 'oncHistoryDetailId';
     if (pName) {
       parentName = pName;
@@ -166,8 +167,17 @@ export class TissueComponent {
       this.patchFinished = false;
       this.dsmService.patchParticipantRecord(JSON.stringify(patch)).subscribe({ // need to subscribe, otherwise it will not send!
         next: data => {
+          this.tissue.errorMessage = null;
           this.patchFinished = true;
           this.currentPatchField = null;
+          if (parameterName === 'deleted' && tAlias ===  Statics.TISSUE_ALIAS) {
+            this.tissue.deleted = true;
+          } else if (parameterName === 'deleted' && tAlias === Statics.SM_ID_ALIAS) {
+            smIdArray[index].deleted = true;
+            if (this.smIdDuplicate[this.currentSMIDField].has(this.createDuplicateIndex(index))) {
+              this.smIdDuplicate[this.currentSMIDField].delete(this.createDuplicateIndex(index));
+            }
+          }
           if ( data && this.tissue.tissueId == null ) {
             this.tissue.tissueId = data['tissueId'];
             this.dup = false;
@@ -181,25 +191,42 @@ export class TissueComponent {
           if (data['smIdPk']) {
             smIdArray[index].smIdPk = data['smIdPk'];
           }
+          if (tAlias === 'sm') {
+            if (this.smIdDuplicate[this.currentSMIDField].has(this.createDuplicateIndex(index))) {
+              this.smIdDuplicate[this.currentSMIDField].delete(this.createDuplicateIndex(index));
+            }
+          }
+          result = true;
         },
         error: err => {
-          this.dup = true;
-          if (tAlias === 'sm') {
-            if (smIdArray && index && smId) {
-              smIdArray[ index ].smIdPk = smId;//for new sm ids
+          if (err.error === 'This object is used in a clinical order') {
+            this.tissue.errorMessage = 'Couldn\'t perform delete, a clinical order is already placed for it';
+            this.tissue.deleted = false;
+            return false;
+          } else {
+            this.tissue.errorMessage = null;
+            this.dup = true;
+            if (tAlias === 'sm') {
+              if (smIdArray && index && smId) {
+                smIdArray[index].smIdPk = smId;//for new sm ids
+              }
+              this.smIdDuplicate[this.currentSMIDField].add(this.createDuplicateIndex(index));
             }
-            this.smIdDuplicate[ this.currentSMIDField ].add(this.createDuplicateIndex( index ) );
           }
           if (err._body === Auth.AUTHENTICATION_ERROR) {
             this.auth.doLogout();
           }
+          result= false;
         },
       });
     }
+    return result;
   }
 
   deleteTissue(): void {
-    this.tissue.deleted = true;
+    if (this.valueChanged('1', 'deleted')) {
+      this.tissue.deleted = true;
+    }
   }
 
   public getStyleDisplay(): string {
@@ -337,15 +364,14 @@ export class TissueComponent {
     }
   }
 
-  deleteSMID( array: TissueSmId[], i: number ): void {
-    array[ i ].deleted = true;
-    if (array[ i ].smIdPk) {
-      this.changeSmId('1', 'deleted', array[ i ].smIdPk, array[ i ].smIdType, array, i );
+  deleteSMID(array: TissueSmId[], i: number): void {
+    //only allow delete if the sm id has been created or the backend failed to create it
+    if (array[i].smIdPk) {
+      this.changeSmId('1', 'deleted', array[i].smIdPk, array[i].smIdType, array, i);
+    } else if (this.smIdDuplicate[this.currentSMIDField].has(this.createDuplicateIndex(i))) {
+      array.splice(i, 1);
+      this.smIdDuplicate[this.currentSMIDField].delete(this.createDuplicateIndex(i));
     }
-    if (this.smIdDuplicate[ this.currentSMIDField ].has( this.createDuplicateIndex( i ) )) {
-      this.smIdDuplicate[ this.currentSMIDField ].delete( this.createDuplicateIndex( i ) );
-    }
-    array.splice( i, 1 );
   }
 
   checkboxChecked( event: any, smidArray: TissueSmId[], index: number ): void {
