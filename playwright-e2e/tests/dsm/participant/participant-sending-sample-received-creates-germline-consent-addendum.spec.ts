@@ -23,8 +23,8 @@ import { TabEnum } from 'dsm/component/tabs/enums/tab-enum';
 import { OncHistoryInputColumnsEnum, OncHistorySelectRequestEnum } from 'dsm/component/tabs/enums/onc-history-input-columns-enum';
 import { SMIdEnum, TissueDynamicFieldsEnum } from 'dsm/pages/tissue/enums/tissue-information-enum';
 import KitsReceivedPage from 'dsm/pages/kitsInfo-pages/kitsReceived-page/kitsReceivedPage';
-import TissueInformationPage from 'dsm/pages/tissue/tissue-information-page';
 import { AdditionalFilter } from 'dsm/component/filters/sections/search/search-enums';
+import crypto from 'crypto';
 
 test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
   const studies = [StudyEnum.LMS]; //Only clinical (pecgs) studies get this event
