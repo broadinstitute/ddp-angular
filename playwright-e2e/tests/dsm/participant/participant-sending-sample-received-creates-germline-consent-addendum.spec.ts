@@ -56,7 +56,7 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
       await participantListPage.waitForReady();
 
       //Prep the Saliva kit
-      shortID = await findParticipantForGermlineConsentCreation(participantListPage);
+      shortID = await findParticipantForGermlineConsentCreation(participantListPage, study);
       console.log(`Chosen short id: ${shortID}`);
       kitLabel = await prepareSentKit(shortID, KitTypeEnum.SALIVA, study, page, request, testInfo);
 
@@ -107,14 +107,14 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
 
       await tissue.fillField(TissueDynamicFieldsEnum.DATE_SENT_TO_GP, { inputValue: today });
 
-      //Receive the saliva kit
+      //Receive the saliva kit first
       const kitsReceivedPage = await navigation.selectFromSamples<KitsReceivedPage>(SamplesNavEnum.RECEIVED);
       await kitsReceivedPage.waitForLoad();
       await kitsReceivedPage.assertPageTitle();
       await kitsReceivedPage.selectKitType(KitTypeEnum.SALIVA);
       await kitsReceivedPage.kitReceivedRequest({mfCode: kitLabel});
 
-      //Accession the tumor sample (just receive the sample using the SM-ID)
+      //Accession the tumor sample second (just receive the sample using the SM-ID)
       await kitsReceivedPage.kitReceivedRequest({
         mfCode: smID,
         isTumorSample: true,
@@ -153,7 +153,7 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
       await participantListPage.waitForReady();
 
       //Prep the Blood kit
-      shortID = await findParticipantForGermlineConsentCreation(participantListPage);
+      shortID = await findParticipantForGermlineConsentCreation(participantListPage, study);
       console.log(`Chosen short id: ${shortID}`);
       kitLabel = await prepareSentKit(shortID, KitTypeEnum.BLOOD, study, page, request, testInfo);
 
@@ -204,14 +204,14 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
 
       await tissue.fillField(TissueDynamicFieldsEnum.DATE_SENT_TO_GP, { inputValue: today });
 
-      //Receive the blood kit
+      //Receive the blood kit first
       const kitsReceivedPage = await navigation.selectFromSamples<KitsReceivedPage>(SamplesNavEnum.RECEIVED);
       await kitsReceivedPage.waitForLoad();
       await kitsReceivedPage.assertPageTitle();
       await kitsReceivedPage.selectKitType(KitTypeEnum.BLOOD);
       await kitsReceivedPage.kitReceivedRequest({mfCode: kitLabel});
 
-      //Accession the tumor sample (just receive the sample using the SM-ID)
+      //Accession the tumor sample second (just receive the sample using the SM-ID)
       await kitsReceivedPage.kitReceivedRequest({
         mfCode: smID,
         isTumorSample: true,
@@ -249,7 +249,93 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
       await participantListPage.assertPageTitle();
       await participantListPage.waitForReady();
 
-      shortID = await findParticipantForGermlineConsentCreation(participantListPage);
+      //Prep the Saliva kit
+      shortID = await findParticipantForGermlineConsentCreation(participantListPage, study);
+      console.log(`Chosen short id: ${shortID}`);
+      kitLabel = await prepareSentKit(shortID, KitTypeEnum.SALIVA, study, page, request, testInfo);
+
+      //Get the Participant Page of the chosen test participant
+      participantPage = await goToTestParticipantPage(shortID, navigation);
+
+      //Fill out an onc history and get back an accession number
+      oncHistoryTab = await participantPage.clickTab<OncHistoryTab>(TabEnum.ONC_HISTORY);
+      const oncHistoryTable = oncHistoryTab.table;
+      today = getDate();
+      randomAccessionNumber = await fillOncHistoryRow(participantPage, oncHistoryTab, facilityName, facilityPhoneNumber, facilityFaxNumber);
+
+      //Navigate to the Tissue Request page
+      const tissueInformationPage = await oncHistoryTable.openTissueInformationPage(0);
+      await tissueInformationPage.assertPageTitle();
+
+      /**
+       * Create Tumor Sample - the following need to be inputted in Tissue Request page before accessioning a SM-ID / tumor sample:
+       * Fax Sent Date (Automatically filled out when clicking Download Request Documents)
+       * Tissue Received Date
+       * Gender
+       * Materials Received amount (either USS [unstained slides] or Scrolls type)
+       * SM-IDs (either USS [unstained slides] or Scrolls)
+       * Tumor Collaborator Sample ID
+       * Date Sent to GP
+       */
+      const faxSentDate = await tissueInformationPage.getFaxSentDate();
+      await tissueInformationPage.fillTissueReceivedDate({ today: true });
+      const tissueReceivedDate = await tissueInformationPage.getTissueReceivedDate();
+
+      await tissueInformationPage.assertFaxSentDatesCount(1);
+      expect(faxSentDate.trim(), `Fax Sent Date has unexpected input: expected ${today} but received ${faxSentDate}`).toBe(today);
+      expect(tissueReceivedDate.trim(), `Tissue Received Date has unexpected input: expected ${getDate()} but received ${tissueReceivedDate}`).
+        toBe(getDate());
+
+      await tissueInformationPage.selectGender('Female');
+
+      const tissue = await tissueInformationPage.tissue();
+      await tissue.fillField(TissueDynamicFieldsEnum.USS, { inputValue: materialsReceivedAmount });
+      smID = `SM-${crypto.randomUUID().toString().substring(0, 5)}`; //e.g. SM-12345
+      const smIDModal = await tissue.fillSMIDs(SMIdEnum.USS_SM_IDS);
+      await smIDModal.fillInputs([smID]);
+      await smIDModal.close();
+
+      tumorCollaboratorSampleIDPrefix = await tissue.getTumorCollaboratorSampleIDSuggestedValue();
+      tumorSampleID = `${tumorCollaboratorSampleIDPrefix}_${crypto.randomUUID().toString().substring(0, 4)}`;
+      await tissue.fillField(TissueDynamicFieldsEnum.TUMOR_COLLABORATOR_SAMPLE_ID, { inputValue: tumorSampleID });
+
+      await tissue.fillField(TissueDynamicFieldsEnum.DATE_SENT_TO_GP, { inputValue: today });
+
+      //Accession the tumor sample first (just receive the sample using the SM-ID)
+      const kitsReceivedPage = await navigation.selectFromSamples<KitsReceivedPage>(SamplesNavEnum.RECEIVED);
+      await kitsReceivedPage.kitReceivedRequest({
+        mfCode: smID,
+        isTumorSample: true,
+        accessionNumber: randomAccessionNumber,
+        tumorCollaboratorSampleID: tumorSampleID
+      });
+
+      //Receive the saliva kit second
+      await kitsReceivedPage.waitForLoad();
+      await kitsReceivedPage.assertPageTitle();
+      await kitsReceivedPage.selectKitType(KitTypeEnum.SALIVA);
+      await kitsReceivedPage.kitReceivedRequest({mfCode: kitLabel});
+
+      //Confirm that the germline consent addendum was created - check that the GERMLINE_CONSENT_ADDENDUM_PEDIATRIC Survey Created column is not empty
+      await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
+      await participantListPage.assertPageTitle();
+      await participantListPage.waitForReady();
+
+      const customizeViewPanel = participantListPage.filters.customizeViewPanel;
+      await customizeViewPanel.open();
+      await customizeViewPanel.selectColumns(
+      `Additional Consent & Assent: Learning More About Your Child's DNA with Invitae Columns`,
+      ['GERMLINE_CONSENT_ADDENDUM_PEDIATRIC Survey Created']);
+
+      const searchPanel = participantListPage.filters.searchPanel;
+      await searchPanel.open();
+      await searchPanel.text('Short ID', { textValue: shortID });
+      await searchPanel.dates('GERMLINE_CONSENT_ADDENDUM_PEDIATRIC Survey Created', { additionalFilters: [AdditionalFilter.NOT_EMPTY] });
+      await searchPanel.search();
+
+      const participantListTable = participantListPage.participantListTable;
+      const germlineInfo = (await participantListTable.getParticipantDataAt(0, 'GERMLINE_CONSENT_ADDENDUM_PEDIATRIC Survey Created')).trim();
+      expect(germlineInfo).toBeTruthy();
     });
 
     test(`${study} - Scenario 4: TUMOR sample received first, BLOOD kit received second`, async ({ page, request }, testInfo) => {
@@ -260,7 +346,93 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
       await participantListPage.assertPageTitle();
       await participantListPage.waitForReady();
 
-      shortID = await findParticipantForGermlineConsentCreation(participantListPage);
+      //Prep the Blood kit
+      shortID = await findParticipantForGermlineConsentCreation(participantListPage, study);
+      console.log(`Chosen short id: ${shortID}`);
+      kitLabel = await prepareSentKit(shortID, KitTypeEnum.BLOOD, study, page, request, testInfo);
+
+      //Get the Participant Page of the chosen test participant
+      participantPage = await goToTestParticipantPage(shortID, navigation);
+
+      //Fill out an onc history and get back an accession number
+      oncHistoryTab = await participantPage.clickTab<OncHistoryTab>(TabEnum.ONC_HISTORY);
+      const oncHistoryTable = oncHistoryTab.table;
+      today = getDate();
+      randomAccessionNumber = await fillOncHistoryRow(participantPage, oncHistoryTab, facilityName, facilityPhoneNumber, facilityFaxNumber);
+
+      //Navigate to the Tissue Request page
+      const tissueInformationPage = await oncHistoryTable.openTissueInformationPage(0);
+      await tissueInformationPage.assertPageTitle();
+
+      /**
+       * Create Tumor Sample - the following need to be inputted in Tissue Request page before accessioning a SM-ID / tumor sample:
+       * Fax Sent Date (Automatically filled out when clicking Download Request Documents)
+       * Tissue Received Date
+       * Gender
+       * Materials Received amount (either USS [unstained slides] or Scrolls type)
+       * SM-IDs (either USS [unstained slides] or Scrolls)
+       * Tumor Collaborator Sample ID
+       * Date Sent to GP
+       */
+      const faxSentDate = await tissueInformationPage.getFaxSentDate();
+      await tissueInformationPage.fillTissueReceivedDate({ today: true });
+      const tissueReceivedDate = await tissueInformationPage.getTissueReceivedDate();
+
+      await tissueInformationPage.assertFaxSentDatesCount(1);
+      expect(faxSentDate.trim(), `Fax Sent Date has unexpected input: expected ${today} but received ${faxSentDate}`).toBe(today);
+      expect(tissueReceivedDate.trim(), `Tissue Received Date has unexpected input: expected ${getDate()} but received ${tissueReceivedDate}`).
+        toBe(getDate());
+
+      await tissueInformationPage.selectGender('Female');
+
+      const tissue = await tissueInformationPage.tissue();
+      await tissue.fillField(TissueDynamicFieldsEnum.USS, { inputValue: materialsReceivedAmount });
+      smID = `SM-${crypto.randomUUID().toString().substring(0, 5)}`; //e.g. SM-12345
+      const smIDModal = await tissue.fillSMIDs(SMIdEnum.USS_SM_IDS);
+      await smIDModal.fillInputs([smID]);
+      await smIDModal.close();
+
+      tumorCollaboratorSampleIDPrefix = await tissue.getTumorCollaboratorSampleIDSuggestedValue();
+      tumorSampleID = `${tumorCollaboratorSampleIDPrefix}_${crypto.randomUUID().toString().substring(0, 4)}`;
+      await tissue.fillField(TissueDynamicFieldsEnum.TUMOR_COLLABORATOR_SAMPLE_ID, { inputValue: tumorSampleID });
+
+      await tissue.fillField(TissueDynamicFieldsEnum.DATE_SENT_TO_GP, { inputValue: today });
+
+      //Accession the tumor sample first (just receive the sample using the SM-ID)
+      const kitsReceivedPage = await navigation.selectFromSamples<KitsReceivedPage>(SamplesNavEnum.RECEIVED);
+      await kitsReceivedPage.kitReceivedRequest({
+        mfCode: smID,
+        isTumorSample: true,
+        accessionNumber: randomAccessionNumber,
+        tumorCollaboratorSampleID: tumorSampleID
+      });
+
+      //Receive the blood kit second
+      await kitsReceivedPage.waitForLoad();
+      await kitsReceivedPage.assertPageTitle();
+      await kitsReceivedPage.selectKitType(KitTypeEnum.BLOOD);
+      await kitsReceivedPage.kitReceivedRequest({mfCode: kitLabel});
+
+      //Confirm that the germline consent addendum was created - check that the GERMLINE_CONSENT_ADDENDUM_PEDIATRIC Survey Created column is not empty
+      await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
+      await participantListPage.assertPageTitle();
+      await participantListPage.waitForReady();
+
+      const customizeViewPanel = participantListPage.filters.customizeViewPanel;
+      await customizeViewPanel.open();
+      await customizeViewPanel.selectColumns(
+      `Additional Consent & Assent: Learning More About Your Child's DNA with Invitae Columns`,
+      ['GERMLINE_CONSENT_ADDENDUM_PEDIATRIC Survey Created']);
+
+      const searchPanel = participantListPage.filters.searchPanel;
+      await searchPanel.open();
+      await searchPanel.text('Short ID', { textValue: shortID });
+      await searchPanel.dates('GERMLINE_CONSENT_ADDENDUM_PEDIATRIC Survey Created', { additionalFilters: [AdditionalFilter.NOT_EMPTY] });
+      await searchPanel.search();
+
+      const participantListTable = participantListPage.participantListTable;
+      const germlineInfo = (await participantListTable.getParticipantDataAt(0, 'GERMLINE_CONSENT_ADDENDUM_PEDIATRIC Survey Created')).trim();
+      expect(germlineInfo).toBeTruthy();
     });
   }
 });
@@ -274,7 +446,7 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
  * Does not already have a germline consent addendum
  * Does not already have a normal kit (i.e. a blood or saliva kit) sent out (for ease of testing)
  */
-async function findParticipantForGermlineConsentCreation(participantListPage: ParticipantListPage): Promise<string> {
+async function findParticipantForGermlineConsentCreation(participantListPage: ParticipantListPage, study: StudyEnum): Promise<string> {
   const searchPanel = participantListPage.filters.searchPanel;
   await searchPanel.open();
   await searchPanel.checkboxes('Status', { checkboxValues: ['Enrolled'] });
@@ -293,6 +465,9 @@ async function findParticipantForGermlineConsentCreation(participantListPage: Pa
     `Additional Consent & Assent: Learning More About Your Child's DNA with Invitae Columns`,
     ['GERMLINE_CONSENT_ADDENDUM_PEDIATRIC Survey Created']
   );
+
+  //Determine last name hint to use to search for Playwright E2E participants only
+  const lastnamePrefix = getPlaywrightParticipantLastNamePrefix(study);
 
   await searchPanel.open();
   await searchPanel.checkboxes('CONSENT_ASSENT_BLOOD', { checkboxValues: ['Yes'] });
@@ -330,6 +505,31 @@ async function findParticipantForGermlineConsentCreation(participantListPage: Pa
   }
 
   return shortID;
+}
+
+function getPlaywrightParticipantLastNamePrefix(study: StudyEnum): string {
+  let prefix = '';
+  switch (study) {
+    case StudyEnum.BRAIN:
+      prefix = 'BR';
+      break;
+    case StudyEnum.MBC:
+      prefix = 'testLastName';
+      break;
+    case StudyEnum.OSTEO2:
+      prefix = 'OS';
+      break;
+    case StudyEnum.ANGIO:
+    case StudyEnum.AT:
+    case StudyEnum.LMS:
+    case StudyEnum.PANCAN:
+      prefix = 'Playwright';
+      break;
+    default:
+      throw new Error(`${study} might not have end-to-end participants created using Playwright`);
+      break;
+  }
+  return prefix;
 }
 
 /**
