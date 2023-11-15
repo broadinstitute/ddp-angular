@@ -11,7 +11,8 @@ export default class MedicalRecordsTable extends Table {
   }
 
   public async openRequestPageByRowIndex(index: number): Promise<MedicalRecordsRequestPage> {
-    await this.rowLocator().nth(index).click();
+    await this.cell(0, 0).click();
+    // await this.rowLocator().nth(index).click();
     await this.medicalRecordsRequestPage.waitForReady();
     return this.medicalRecordsRequestPage;
   }

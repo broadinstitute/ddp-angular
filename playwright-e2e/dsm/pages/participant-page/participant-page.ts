@@ -72,6 +72,10 @@ export default class ParticipantPage {
     return await this.readMainTextInfoFor(MainInfoEnum.DATE_OF_BIRTH) || '';
   }
 
+  public async getDateOfMajority(): Promise<string> {
+    return await this.readMainTextInfoFor(MainInfoEnum.DATE_OF_MAJORITY) || '';
+  }
+
   public async getDateOfDiagnosis(): Promise<string> {
     return await this.readMainTextInfoFor(MainInfoEnum.DATE_OF_DIAGNOSIS) || '';
   }

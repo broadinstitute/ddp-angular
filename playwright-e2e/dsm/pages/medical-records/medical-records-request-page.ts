@@ -1,6 +1,6 @@
 import { expect, Locator, Page } from '@playwright/test';
-import { waitForNoSpinner } from 'utils/test-utils';
-import TextArea from 'dss/component/textarea';
+import { waitForNoSpinner, waitForResponse } from 'utils/test-utils';
+import { MainInfoEnum } from 'dsm/pages/participant-page/enums/main-info-enum';
 import Input from 'dss/component/input';
 
 export default class MedicalRecordsRequestPage {
@@ -13,7 +13,7 @@ export default class MedicalRecordsRequestPage {
     await waitForNoSpinner(this.page);
   }
 
-  public async backToParticipantPage(): Promise<void> {
+  public async backToPreviousPage(): Promise<void> {
     await this.page.getByText('<< back to previous page').click();
     await this.page.waitForLoadState('load');
     await waitForNoSpinner(this.page);
@@ -23,6 +23,31 @@ export default class MedicalRecordsRequestPage {
     await this.page.getByText("<< back to 'Participant List'").click();
     await this.page.waitForLoadState('load');
     await waitForNoSpinner(this.page);
+  }
+
+  public async getStaticText(infoFieldName: MainInfoEnum): Promise<string> {
+    const fieldLocator = this.staticInformationXpath(infoFieldName);
+    await expect(fieldLocator, `Field: ${infoFieldName} not found.`).toBeVisible();
+    const data = await fieldLocator.textContent();
+    return data?.trim() as string;
+  }
+
+  public async fillText(infoFieldName: MainInfoEnum, value: string): Promise<void> {
+    const fieldLocator = this.dynamicInformationXpath(infoFieldName);
+    await expect(fieldLocator, `Field: ${infoFieldName} not found.`).toBeVisible();
+
+    const input = new Input(this.page, { root: fieldLocator, });
+    const isDisabled = await input.isDisabled();
+    expect(isDisabled).toBeFalsy();
+    const existingValue = await input.currentValue();
+
+    if (existingValue !== value) {
+      await Promise.all([
+        waitForResponse(this.page, { uri: 'patch' }),
+        input.fill(value),
+        input.blur()
+      ]);
+    }
   }
 
   /* Assertions */
@@ -37,11 +62,19 @@ export default class MedicalRecordsRequestPage {
   }
 
   /* XPaths */
-  private get participantInformationTableXPath(): string {
+  private staticInformationXpath(infoFieldName: MainInfoEnum): Locator {
+    return this.page.locator(`${this.staticInformationTableXPath}/tr[td[text()[normalize-space()='${infoFieldName}']]]/td[2]`);
+  }
+
+  private get staticInformationTableXPath(): string {
     return `${this.pageXPath}//table[contains(@class, 'table-condensed')]/tbody`;
   }
 
-  private get participantDynamicInformationTableXPath(): string {
+  private dynamicInformationXpath(infoFieldName: MainInfoEnum, index = 2): Locator {
+    return this.page.locator(`${this.dynamicInformationTableXPath}/tr[td[1][text()[normalize-space()='${infoFieldName}']]]/td[${index}]`);
+  }
+
+  private get dynamicInformationTableXPath(): string {
     return `${this.pageXPath}//div[last()]/table[not(contains(@class, 'table'))]`;
   }
 

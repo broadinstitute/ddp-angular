@@ -155,6 +155,7 @@ export default class ParticipantListPage {
 
     const searchPanel = this.filters.searchPanel;
     await searchPanel.open();
+    await searchPanel.clear();
     await searchPanel.text('Participant ID', {textValue: participantGUID });
     await searchPanel.search();
   }

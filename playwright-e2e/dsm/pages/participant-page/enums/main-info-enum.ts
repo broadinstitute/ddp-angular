@@ -10,6 +10,7 @@ export enum MainInfoEnum {
   EMAIL = 'E-Mail',
   DO_NOT_CONTACT = 'Do Not Contact',
   DATE_OF_BIRTH = 'Date of Birth',
+  DATE_OF_MAJORITY = 'Date of Majority',
   DATE_OF_DIAGNOSIS = 'Date of Diagnosis',
   GENDER = 'Gender',
   PREFERRED_LANGUAGE = 'Preferred Language',
@@ -18,5 +19,6 @@ export enum MainInfoEnum {
   DDP = 'DDP',
   ASSIGNEE = 'Assignee',
   CURRENT_STATUS = 'Current Status',
-  INSTITUTION_INFO = 'Institution Info'
+  INSTITUTION_INFO = 'Institution Info',
+  CONFIRMED_INSTITUTION_NAME = 'Confirmed Institution Name'
 }
