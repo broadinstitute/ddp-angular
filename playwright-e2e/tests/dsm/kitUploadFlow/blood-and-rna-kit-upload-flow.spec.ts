@@ -33,6 +33,11 @@ test.describe('Blood & RNA Kit Upload', () => {
     const study = StudyEnum.RGP;
     const kitType = KitTypeEnum.BLOOD_AND_RNA;
     const expectedKitTypes = [KitTypeEnum.BLOOD, KitTypeEnum.BLOOD_AND_RNA]; //Later will be just Blood & RNA kit type for RGP
+    let kitTable;
+    let amountOfKits;
+    let kitErrorPage;
+    let kitQueueShippingID;
+    let kitErrorShippingID;
 
     //Go into DSM
     const navigation = new Navigation(page, request);
@@ -128,28 +133,45 @@ test.describe('Blood & RNA Kit Upload', () => {
     ]);
     await kitsWithoutLabelPage.waitUntilAllKitLabelCreationRequestsAreProcessed();
 
-    //Kit Queue
+    //Kit Queue or Kit Error page (depending on where easypost sends the kit - easypost tends to send the kit to error in non-prod envs)
     const kitQueuePage = await navigation.selectFromSamples<KitsQueuePage>(SamplesNavEnum.QUEUE);
     await kitQueuePage.waitForLoad();
     await kitQueuePage.assertPageTitle();
     await kitQueuePage.assertDisplayedKitTypes([KitTypeEnum.BLOOD, KitTypeEnum.BLOOD_AND_RNA]);
     await kitQueuePage.selectKitType(KitTypeEnum.BLOOD_AND_RNA);
     await kitQueuePage.assertReloadKitListBtn();
-    let kitTable;
-    if (!await kitQueuePage.hasExistingKitRequests()) {
-      const kitErrorPage = await navigation.selectFromSamples<ErrorPage>(SamplesNavEnum.ERROR);
+    const kitQueuePageHasExistingKitRequests = await kitQueuePage.hasExistingKitRequests();
+    if (kitQueuePageHasExistingKitRequests) {
+      //Search for the test kit using the shipping id
+      kitTable = kitQueuePage.getKitsTable;
+      await kitTable.searchBy(KitsColumnsEnum.SHIPPING_ID, shippingID);
+      amountOfKits = await kitTable.getRowsCount();
+      if (amountOfKits === 0) {
+        //If the kit is not found in Kit Queue -> go to Kit Error page and search for it there
+        kitErrorPage = await navigation.selectFromSamples<ErrorPage>(SamplesNavEnum.ERROR);
+        await kitErrorPage.waitForReady();
+        await kitErrorPage.selectKitType(KitTypeEnum.BLOOD_AND_RNA);
+        kitTable = kitErrorPage.kitListTable;
+        await kitTable.searchBy(KitsColumnsEnum.SHIPPING_ID, shippingID);
+        amountOfKits = await kitTable.getRowsCount();
+        expect(amountOfKits, `Kit with shipping id ${shippingID} was not found in either Kit Queue or Kit Error`).toBe(1);
+        kitErrorShippingID = (await kitTable.getData(KitsColumnsEnum.SHIPPING_ID)).trim();
+        expect(kitErrorShippingID).toBe(shippingID);
+      } else {
+        //A kit with the relevant shipping id was found
+        kitQueueShippingID = (await kitTable.getData(KitsColumnsEnum.SHIPPING_ID)).trim();
+        expect(kitQueueShippingID).toBe(shippingID);
+      }
+    } else if (!kitQueuePageHasExistingKitRequests) {
+      kitErrorPage = await navigation.selectFromSamples<ErrorPage>(SamplesNavEnum.ERROR);
       await kitErrorPage.waitForReady();
       await kitErrorPage.selectKitType(KitTypeEnum.BLOOD_AND_RNA);
       kitTable = kitErrorPage.kitListTable;
       await kitTable.searchBy(KitsColumnsEnum.SHIPPING_ID, shippingID);
-      const errorPageShippingID = await kitTable.getData(KitsColumnsEnum.SHIPPING_ID);
-      expect(errorPageShippingID, `Shipping ID ${shippingID} was not seen in Kit Error Page`).toBe(shippingID);
-    } else {
-      //When there are kits in Kit Queue
-      kitTable = kitQueuePage.getKitsTable;
-      await kitTable.searchBy(KitsColumnsEnum.SHIPPING_ID, shippingID);
-      const kitQueuePageShippingID = (await kitTable.getData(KitsColumnsEnum.SHIPPING_ID)).trim();
-      expect(kitQueuePageShippingID, `Shipping ID ${shippingID} was not seen in Kit Queue Page`).toBe(shippingID);
+      amountOfKits = await kitTable.getRowsCount();
+      expect(amountOfKits, `Kit with shipping id ${shippingID} was not found in either Kit Queue or Kit Error`).toBe(1);
+      kitErrorShippingID = (await kitTable.getData(KitsColumnsEnum.SHIPPING_ID)).trim();
+      expect(kitErrorShippingID).toBe(shippingID);
     }
 
     //Tracking scan

@@ -4,6 +4,7 @@ import { KitType } from 'dsm/component/kitType/kitType';
 import { KitsTable } from 'dsm/component/tables/kits-table';
 import { waitForNoSpinner, waitForResponse } from 'utils/test-utils';
 import { KitsColumnsEnum } from 'dsm/pages/kitsInfo-pages/enums/kitsColumns-enum';
+import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
 
 export enum SearchByField {
   SHORT_ID = 'Short ID',
@@ -14,10 +15,12 @@ export enum SearchByField {
 export default class ErrorPage {
   private readonly kitType: KitType;
   private readonly kitsTable: KitsTable;
+  private expectedKitTypes: KitTypeEnum[];
 
   constructor(private readonly page: Page) {
     this.kitType = new KitType(this.page)
     this.kitsTable = new KitsTable(this.page);
+    this.expectedKitTypes = [];
   }
 
   public async waitForReady(): Promise<void> {
@@ -26,10 +29,12 @@ export default class ErrorPage {
       this.page.waitForLoadState('networkidle'),
       waitForNoSpinner(this.page)
     ]);
-    await Promise.all([
-      expect(this.kitType.displayedKitType(KitTypeEnum.BLOOD)).toBeVisible(),
-      expect(this.kitType.displayedKitType(KitTypeEnum.SALIVA)).toBeVisible()
-    ]);
+    this.expectedKitTypes = await this.getAvailableKitTypes();
+    for (const kit of this.expectedKitTypes) {
+      await Promise.all([
+        expect(this.kitType.displayedKitType(kit)).toBeVisible()
+      ]);
+    }
   }
 
   public async selectKitType(kitType: KitTypeEnum): Promise<void> {
@@ -94,5 +99,24 @@ export default class ErrorPage {
   private get deactivateReasonBtnXPath(): string {
     return "//app-modal/div[@class='modal fade in']"
       + "//div[@class='app-modal-footer']/button[text()[normalize-space()='Deactivate']]";
+  }
+
+  private async getAvailableKitTypes(): Promise<KitTypeEnum[]> {
+    const studyNameLocation = this.page.locator(`//app-navigation//a[@data-toggle='dropdown']//i`);
+    const studyName = await studyNameLocation.innerText();
+    //Most studies have Blood and Saliva kits; RGP has Blood and 'Blood & RNA' kits; Pancan has Blood, Saliva, and Stool kits
+    let kitTypes;
+    switch (studyName) {
+      case StudyEnum.RGP:
+        kitTypes = [KitTypeEnum.BLOOD, KitTypeEnum.BLOOD_AND_RNA];
+        break;
+      case StudyEnum.PANCAN:
+        kitTypes = [KitTypeEnum.BLOOD, KitTypeEnum.SALIVA, KitTypeEnum.STOOL];
+        break;
+      default:
+        kitTypes = [KitTypeEnum.BLOOD, KitTypeEnum.SALIVA];
+        break;
+    }
+    return kitTypes;
   }
 }
