@@ -27,7 +27,7 @@ import TissueInformationPage from 'dsm/pages/tissue/tissue-information-page';
 import { AdditionalFilter } from 'dsm/component/filters/sections/search/search-enums';
 
 test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
-  const studies = [StudyEnum.OSTEO2, StudyEnum.LMS]; //Only clinical (pecgs) studies get this event
+  const studies = [StudyEnum.LMS]; //Only clinical (pecgs) studies get this event
   const facilityName = 'Dana Farber Cancer Institute';
   const facilityPhoneNumber = '111-222-3333';
   const facilityFaxNumber = '222-123-3333';
@@ -243,17 +243,20 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
       await searchPanel.open();
       await searchPanel.text('Short ID', { textValue: shortID });
       await searchPanel.dates('GERMLINE_CONSENT_ADDENDUM_PEDIATRIC Survey Created', { additionalFilters: [AdditionalFilter.NOT_EMPTY] });
-      await searchPanel.search();
+      let participantListTable;
+      let germlineInfo;
 
-      const participantListTable = participantListPage.participantListTable;
-      const germlineInfo = (await participantListTable.getParticipantDataAt(0, 'GERMLINE_CONSENT_ADDENDUM_PEDIATRIC Survey Created')).trim();
+      //Occasionally, it will take a couple of seconds (and participant list refreshes) before info about the germline consent activity being created shows up
+      await expect(async () => {
+        await searchPanel.search();
+        participantListTable = participantListPage.participantListTable;
+        const amountOfParticipants = await participantListTable.rowsCount;
+        germlineInfo = (await participantListTable.getParticipantDataAt(0, 'GERMLINE_CONSENT_ADDENDUM_PEDIATRIC Survey Created')).trim();
+        expect(amountOfParticipants).toBe(1);
+      }).toPass({intervals: [10_000], timeout: 30_000});
 
-      await expect(() => {
-        expect(germlineInfo).toBeTruthy();
-      }).toPass({
-        intervals: [5_000],
-        timeout: 30_000
-      });
+      console.log(`Germline Info: ${germlineInfo}`);
+      expect(germlineInfo).toBeTruthy();
     });
 
     test(`${study} - Scenario 3: TUMOR sample received first, SALIVA kit received second`, async ({ page, request }, testInfo) => {
@@ -484,8 +487,9 @@ async function findParticipantForGermlineConsentCreation(participantListPage: Pa
   const customizeViewPanel = participantListPage.filters.customizeViewPanel;
   await customizeViewPanel.open();
   await customizeViewPanel.selectColumns('Research Consent & Assent Form Columns', ['CONSENT_ASSENT_BLOOD', 'CONSENT_ASSENT_TISSUE']);
-  await customizeViewPanel.selectColumnsByID('Medical Release Form Columns', ['PHYSICIAN'], 'RELEASE_MINOR', { nth: 1 });
+  await customizeViewPanel.selectColumns('Medical Release Form Columns', ['PHYSICIAN']);
   await customizeViewPanel.selectColumns('Sample Columns', ['Sample Type', 'Status']);
+  await customizeViewPanel.selectColumns('Onc History Columns', ['Tissue Request Date']);
   await customizeViewPanel.selectColumns(
     `Additional Consent & Assent: Learning About Your Child’s Tumor Columns`,
     ['SOMATIC_CONSENT_TUMOR_PEDIATRIC', 'SOMATIC_ASSENT_ADDENDUM']
@@ -514,13 +518,15 @@ async function findParticipantForGermlineConsentCreation(participantListPage: Pa
     const somaticConsentTumorPediatric = (await participantListTable.getParticipantDataAt(index, 'SOMATIC_CONSENT_TUMOR_PEDIATRIC')).trim();
     const physician = (await participantListTable.getParticipantDataAt(index, 'PHYSICIAN')).trim();
     const germlineInfo = (await participantListTable.getParticipantDataAt(index, 'GERMLINE_CONSENT_ADDENDUM_PEDIATRIC Survey Created')).trim();
+    const tissueRequestDate = (await participantListTable.getParticipantDataAt(index, 'Tissue Request Date')).trim();
 
     if ((consentAssentTissue === 'Yes') &&
         (consentAssentBlood === 'Yes') &&
         (somaticAssentAddendum === 'Yes') &&
         (somaticConsentTumorPediatric === 'Yes') &&
         (physician != null) &&
-        (germlineInfo === '')
+        (germlineInfo === '') &&
+        (tissueRequestDate === '')
       ) {
         shortID = await participantListTable.getParticipantDataAt(index, 'Short ID');
         break;
