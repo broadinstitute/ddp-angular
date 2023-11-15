@@ -35,11 +35,8 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
   let navigation;
   let shortID = '';
   let kitLabel = '';
-  let participantListTable;
   let participantPage: ParticipantPage;
-  let searchPanel;
   let oncHistoryTab;
-  let oncHistoryTable;
   let today;
   let randomAccessionNumber = '';
   let smID = '';
@@ -149,7 +146,6 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
 
       const participantListTable = participantListPage.participantListTable;
       const germlineInfo = (await participantListTable.getParticipantDataAt(0, 'GERMLINE_CONSENT_ADDENDUM_PEDIATRIC Survey Created')).trim();
-      console.log(`Germline Info: ${germlineInfo}`);
       expect(germlineInfo).toBeTruthy();
     });
 
@@ -255,7 +251,6 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
 
       const participantListTable = participantListPage.participantListTable;
       const germlineInfo = (await participantListTable.getParticipantDataAt(0, 'GERMLINE_CONSENT_ADDENDUM_PEDIATRIC Survey Created')).trim();
-      console.log(`Germline Info: ${germlineInfo}`);
       expect(germlineInfo).toBeTruthy();
     });
 
@@ -361,7 +356,6 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
 
       const participantListTable = participantListPage.participantListTable;
       const germlineInfo = (await participantListTable.getParticipantDataAt(0, 'GERMLINE_CONSENT_ADDENDUM_PEDIATRIC Survey Created')).trim();
-      console.log(`Germline Info: ${germlineInfo}`);
       expect(germlineInfo).toBeTruthy();
     });
 
@@ -468,7 +462,6 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
 
       const participantListTable = participantListPage.participantListTable;
       const germlineInfo = (await participantListTable.getParticipantDataAt(0, 'GERMLINE_CONSENT_ADDENDUM_PEDIATRIC Survey Created')).trim();
-      console.log(`Germline Info: ${germlineInfo}`);
       expect(germlineInfo).toBeTruthy();
     });
   }
