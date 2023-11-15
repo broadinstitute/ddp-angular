@@ -170,7 +170,11 @@ export default class TissueInformationPage {
 
     const selectElement = new Select(this.page, { root: genderLocator });
     const selectedValue = await selectElement.currentValue();
-    const isDisabled = await selectElement.isSelectDisabled();
+    let isDisabled;
+    await expect(async () => {
+      isDisabled = await selectElement.isSelectDisabled();
+      expect(isDisabled).toBe(false); //Test goes too fast, it still thinks dropdown is disabled after inputting Tissue Received Date
+   }).toPass({ intervals: [10_000], timeout: 30_000 });
 
     if (!isDisabled && selectedValue?.trim() !== gender) {
       await selectElement.selectOption(gender);
