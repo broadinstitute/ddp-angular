@@ -470,6 +470,7 @@ async function findParticipantForGermlineConsentCreation(participantListPage: Pa
   const lastnamePrefix = getPlaywrightParticipantLastNamePrefix(study);
 
   await searchPanel.open();
+  await searchPanel.text('Last Name', { textValue: lastnamePrefix, additionalFilters: [AdditionalFilter.EXACT_MATCH], exactMatch: false });
   await searchPanel.checkboxes('CONSENT_ASSENT_BLOOD', { checkboxValues: ['Yes'] });
   await searchPanel.checkboxes('CONSENT_ASSENT_TISSUE', { checkboxValues: ['Yes'] });
   await searchPanel.search();
@@ -517,7 +518,7 @@ function getPlaywrightParticipantLastNamePrefix(study: StudyEnum): string {
       prefix = 'testLastName';
       break;
     case StudyEnum.OSTEO2:
-      prefix = 'OS';
+      prefix = 'KidLast';
       break;
     case StudyEnum.ANGIO:
     case StudyEnum.AT:
