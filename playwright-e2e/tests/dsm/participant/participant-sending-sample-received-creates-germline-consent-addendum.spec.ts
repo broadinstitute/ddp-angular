@@ -144,9 +144,10 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
         await searchPanel.search();
         const participantListTable = participantListPage.participantListTable;
         const germlineInfo = (await participantListTable.getParticipantDataAt(0, 'GERMLINE_CONSENT_ADDENDUM_PEDIATRIC Survey Created')).trim();
+        console.log(`Germline Info: ${germlineInfo}`);
         expect(germlineInfo).toBeTruthy();
       }).toPass({
-        intervals: [5_000],
+        intervals: [10_000],
         timeout: 30_000
       });
     });
@@ -466,7 +467,7 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
 });
 
 /**
- * TODO Use an adult study participant after PEPPER-1210 is fixed
+ * TODO Use an adult study participant after PEPPER-1210 is fixed - currently uses pediatric participants since search works better for them
  * Find an E2E playwright participant who meets the following criteria:
  * Answered 'Yes' in consent
  * Answered 'Yes' in consent addendum
