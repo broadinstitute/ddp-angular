@@ -20,5 +20,4 @@ export enum MainInfoEnum {
   ASSIGNEE = 'Assignee',
   CURRENT_STATUS = 'Current Status',
   INSTITUTION_INFO = 'Institution Info',
-  CONFIRMED_INSTITUTION_NAME = 'Confirmed Institution Name'
 }

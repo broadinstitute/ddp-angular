@@ -17,7 +17,7 @@ export default class SurveyDataTab {
     const data = region.locator(
       `xpath=/*[contains(@class, "mat-expansion-panel-body")]/div[.//*[contains(@class, "grey-color")][normalize-space()="${label}"]]`);
     return (await data.innerText()).split('\n+');
-  } 
+  }
 
   private activityDataPanel(name: string): Locator {
     return this.page.locator(`//app-activity-data[.//mat-expansion-panel-header[.//mat-panel-title[normalize-space(.)="${name}"]]]`);

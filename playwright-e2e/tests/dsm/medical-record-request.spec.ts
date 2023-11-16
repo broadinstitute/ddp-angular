@@ -3,16 +3,22 @@ import { test } from 'fixtures/dsm-fixture';
 import { AdditionalFilter, CustomViewColumns } from 'dsm/component/filters/sections/search/search-enums';
 import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
-import { assertDateFormat, shuffle } from 'utils/test-utils';
+import { assertDateFormat } from 'utils/test-utils';
 import { logInfo } from 'utils/log-utils';
 import ParticipantPage from 'dsm/pages/participant-page/participant-page';
 import { TabEnum } from 'dsm/component/tabs/enums/tab-enum';
-import { ParticipantListTable } from 'dsm/component/tables/participant-list-table';
 import MedicalRecordsTab from 'dsm/pages/medical-records/medical-records-tab';
 import { MainInfoEnum } from 'dsm/pages/participant-page/enums/main-info-enum';
 import { SortOrder } from 'dss/component/table';
+import MedicalRecordsRequestPage from 'dsm/pages/medical-records/medical-records-request-page';
+import { DynamicFieldsEnum } from 'dsm/pages/medical-records/medical-records-enums';
+import Input from 'dss/component/input';
+import MedicalRecordsTable from 'dsm/pages/medical-records/medical-records-table';
 
-test.describe('Medical records request workflow', () => {
+test.describe.serial('Medical records request workflow', () => {
+  let shortId: string;
+  let confirmedInstitution: string;
+
   const confirmedInstitutions = [
     'Massachusetts General Hospital',
     'Asante Three Rivers Medical Center',
@@ -26,27 +32,26 @@ test.describe('Medical records request workflow', () => {
   const studies: StudyEnum[] = [StudyEnum.OSTEO2];
 
   for (const study of studies) {
-    let participantListPage: ParticipantListPage;
-    let participantListTable: ParticipantListTable;
-    let participantPage: ParticipantPage;
-    let medicalRecordsTab: MedicalRecordsTab;
-    let rowIndex: number;
-    let shortId: string;
+    test(`Update Institution @dsm @${study}`, async ({ page, request }) => {
+      let participantPage: ParticipantPage;
+      let medicalRecordsRequestPage: MedicalRecordsRequestPage;
+      let rowIndex = -1;
 
-    test(`Update Institution Information with Confirmed Institution @dsm @${study}`, async ({ page, request }) => {
-      participantListPage = await ParticipantListPage.goto(page, study, request);
-      participantListTable = participantListPage.participantListTable;
+      const participantListPage = await ParticipantListPage.goto(page, study, request);
+      const participantListTable = participantListPage.participantListTable;
       const customizeViewPanel = participantListPage.filters.customizeViewPanel;
       const searchPanel = participantListPage.filters.searchPanel;
 
       await test.step('Find an enrolled participant', async () => {
         const registrationDateColumn = 'Registration Date';
-        // table columns displayed in Medical Records table
+        // These are columns displayed in Medical Records table
         const typeColumn = 'Type';
         const institutionNameColumn = 'Institution Name';
         const followUpColumn = 'Follow-Up required';
         const mrReviewColumn = 'MR Review';
         const mrProblemColumn = 'MR Review';
+        const initialMRRequestColumn = 'Initial MR Request';
+        const initialMRReceivedColumn = 'Initial MR Received';
 
         await customizeViewPanel.open();
         await customizeViewPanel.selectColumns(CustomViewColumns.PARTICIPANT, [registrationDateColumn]);
@@ -55,7 +60,9 @@ test.describe('Medical records request workflow', () => {
           typeColumn,
           followUpColumn,
           mrReviewColumn,
-          mrProblemColumn
+          mrProblemColumn,
+          initialMRRequestColumn,
+          initialMRReceivedColumn
         ]);
 
         await searchPanel.open();
@@ -65,6 +72,8 @@ test.describe('Medical records request workflow', () => {
         await searchPanel.checkboxes(followUpColumn, { checkboxValues: ['No'] });
         await searchPanel.checkboxes(mrReviewColumn, { checkboxValues: ['No'] });
         await searchPanel.checkboxes(mrProblemColumn, { checkboxValues: ['No'] });
+        await searchPanel.text(initialMRRequestColumn, { additionalFilters: [AdditionalFilter.EMPTY] });
+        await searchPanel.text(initialMRReceivedColumn, { additionalFilters: [AdditionalFilter.EMPTY] });
         await searchPanel.search();
 
         const participantsCount = await participantListTable.numOfParticipants();
@@ -74,7 +83,15 @@ test.describe('Medical records request workflow', () => {
         await participantListTable.sort(registrationDateColumn, SortOrder.ASC);
 
         const rowCount = await participantListTable.getRowsCount();
-        [rowIndex] = shuffle([...Array(rowCount).keys()]);
+        for (let i = 0; i < rowCount; i++) {
+          const initialMRReceivedDate = await participantListTable.getRowText(i, initialMRReceivedColumn);
+          if (initialMRReceivedDate.trim().length === 0) {
+            // this participant does not have Initial MR Received date
+            rowIndex = i;
+            break;
+          }
+        }
+        expect(rowIndex).toBeGreaterThanOrEqual(0);
       });
 
       await test.step('Assert participant information', async () => {
@@ -98,9 +115,7 @@ test.describe('Medical records request workflow', () => {
       });
 
       await test.step('Update institution information', async () => {
-        medicalRecordsTab = await participantPage.clickTab<MedicalRecordsTab>(TabEnum.MEDICAL_RECORD);
-        const medicalRecordTable = medicalRecordsTab.table;
-        expect(await medicalRecordTable.getRowsCount()).toBeGreaterThanOrEqual(1);
+        let medicalRecordTable = await openMedicalRecordsTab(participantPage);
 
         // Fetch information on first row
         const [typeValue] = await medicalRecordTable.getTextAt(0, 'Type');
@@ -125,7 +140,7 @@ test.describe('Medical records request workflow', () => {
         expect(mrFollowUpRequiredValue).toMatch(/Yes|No/);
 
         // Open Medical Records - Request Page
-        const medicalRecordsRequestPage = await medicalRecordTable.openRequestPageByRowIndex(0);
+        medicalRecordsRequestPage = await medicalRecordTable.openRequestPageByRowIndex(0);
 
         const currentStatus = await medicalRecordsRequestPage.getStaticText(MainInfoEnum.CURRENT_STATUS);
         expect(currentStatus).toStrictEqual(mrStatusValue);
@@ -138,40 +153,143 @@ test.describe('Medical records request workflow', () => {
 
         const instInfo = await medicalRecordsRequestPage.getStaticText(MainInfoEnum.INSTITUTION_INFO);
         expect(instInfo).toBeTruthy();
-        const instInfoArray = instInfo.split(/\n+/);
-        console.log(`instition info: ${instInfoArray}`);
         logInfo(`Participant provided Institution Info: ${instInfo}`);
 
-        const [confirmedInstitution] = confirmedInstitutions.filter(institution => institution !== institutionValue);
-        await medicalRecordsRequestPage.fillText(MainInfoEnum.CONFIRMED_INSTITUTION_NAME, confirmedInstitution);
+        // "No Action Needed" checkbox is displayed and unchecked
+        const noActionNeededCheckbox = await medicalRecordsRequestPage.getNoActionNeeded.isVisible();
+        expect(noActionNeededCheckbox).toBeTruthy();
+        expect(await medicalRecordsRequestPage.getNoActionNeeded.isChecked()).toBeFalsy();
+
+        // Pick one confirmed institution that does not match existing institution
+        [confirmedInstitution] = confirmedInstitutions.filter(institution => institution !== institutionValue);
+
+        await medicalRecordsRequestPage.fillText(DynamicFieldsEnum.CONFIRMED_INSTITUTION_NAME, confirmedInstitution);
         await medicalRecordsRequestPage.backToPreviousPage();
         await participantPage.waitForReady();
-
-        // Institution table will show updated institution name
-        const [changedInstitution] = await medicalRecordTable.getTextAt(0, 'Institution');
-        expect(changedInstitution).toStrictEqual(confirmedInstitution);
 
         await participantPage.backToList();
         await participantListPage.filterListByShortId(shortId);
         await participantListTable.openParticipantPageAt(0);
-        medicalRecordsTab = await participantPage.clickTab<MedicalRecordsTab>(TabEnum.MEDICAL_RECORD);
-        expect(await medicalRecordTable.getRowsCount()).toBeGreaterThanOrEqual(1);
-        const rowCount = await medicalRecordTable.getRowsCount();
-        let foundMatch = false;
-        for (let i = 0; i < rowCount; i++) {
-          const [cellValue] = await medicalRecordTable.getTextAt(i, 'Institution');
-          if (confirmedInstitution === cellValue) {
-            foundMatch = true;
-            break;
-          }
-        }
-        expect(foundMatch).toBeTruthy();
-      });
 
-
-      await test.step('Survey Data - Medical Release Form', async () => {
-        //const surveyData = await participantPage.clickTab<SurveyTab>(TabEnum.SURVEY_DATA);
+        medicalRecordTable = await openMedicalRecordsTab(participantPage);
+        await assertInstitution(medicalRecordTable, confirmedInstitution);
       });
     });
+
+    test(`Entering Initial MR Request @dsm @${study}`, async ({ page, request }) => {
+      // Find same participant used in the previous test
+      const participantListPage = await ParticipantListPage.goto(page, study, request);
+      const participantListTable = participantListPage.participantListTable;
+
+      await participantListPage.filterListByShortId(shortId);
+      const participantPage = await participantListTable.openParticipantPageAt(0);
+      let medicalRecordTable = await openMedicalRecordsTab(participantPage);
+
+      // Open Medical Request page
+      let medicalRecordsRequestPage = await medicalRecordTable.openRequestPageByRowIndex(0);
+
+      // Pre-edit checks: No more than 3 Initial MR Request fields
+      const initialMRRequest = medicalRecordsRequestPage.initialMRRequestDateLocator;
+      let count = await initialMRRequest.count();
+      expect(count).toBeGreaterThanOrEqual(1);
+      expect(count).toBeLessThanOrEqual(3);
+
+      // Entering new dates (using today)
+      if (count === 1) {
+        // Fill in the first date field
+        await medicalRecordsRequestPage.fillInitialMRRequestDates({date1: {today: true}});
+        await expect(initialMRRequest).toHaveCount(2); // another new date field appears
+        // new date field is empth
+        expect(await new Input(page, { root: initialMRRequest.nth(1) }).currentValue()).toEqual('');
+      } else if (count === 2) {
+        // Fill in the second date field
+        await medicalRecordsRequestPage.fillInitialMRRequestDates({date2: {today: true}});
+        await expect(initialMRRequest).toHaveCount(3); // another new date field appears
+        // new date field is empth
+        expect(await new Input(page, { root: initialMRRequest.nth(2) }).currentValue()).toEqual('');
+      } else {
+        // Fill in the third date field
+        await medicalRecordsRequestPage.fillInitialMRRequestDates({date3: {today: true}});
+        await expect(initialMRRequest).toHaveCount(3); // no more new date field appears. max is 3 date fields.
+      }
+
+      // Institution table on the Medical Record tab will now show MR Status "Fax Sent"
+      await medicalRecordsRequestPage.backToParticipantList();
+      await participantListPage.filterListByShortId(shortId);
+      await participantListTable.openParticipantPageAt(0);
+      medicalRecordTable = await openMedicalRecordsTab(participantPage);
+      let foundRow = await assertInstitution(medicalRecordTable, confirmedInstitution);
+
+      // Enter Initial MR Received
+      // Open Medical Request page again
+      medicalRecordsRequestPage = await medicalRecordTable.openRequestPageByRowIndex(foundRow);
+      const initialMRReceived = medicalRecordsRequestPage.initialMRReceivedDateLocator;
+
+      // After entering the Initial MR Received, Initial MR Request field which is not filled out (last empty one) will disappear.
+      // Initial MR Request field which is filled out (non-empty one) will not disappear.
+      count = await initialMRRequest.count();
+      const text = await new Input(page, { root: initialMRRequest.nth(count - 1) }).currentValue()
+      const willDisappear = text.length === 0;
+
+      // Initial MR Received date field should be empty to start with
+      expect(await new Input(page, { root: initialMRReceived }).currentValue()).toEqual('');
+      // Entering today date in Initial MR Received
+      await medicalRecordsRequestPage.fillInitialMRReceivedDates({today: true});
+      if (willDisappear) {
+        await expect(initialMRRequest).toHaveCount(count - 1);
+      } else {
+        await expect(initialMRRequest).toHaveCount(count);
+      }
+
+      await medicalRecordsRequestPage.backToPreviousPage();
+
+      // Iterate all rows to find matching Institution and MR Status
+      foundRow = await assertInstitution(medicalRecordTable, confirmedInstitution, 'MR Received');
+
+      // Check the "No Action Needed" checkbox and reload the page. Revisit the same participant, latest action is saved accordingly - The "No Action Needed" checkbox is checked.
+      medicalRecordsRequestPage = await medicalRecordTable.openRequestPageByRowIndex(foundRow);
+      await medicalRecordsRequestPage.getNoActionNeeded.check();
+      await medicalRecordsRequestPage.backToParticipantList();
+      await participantListPage.filterListByShortId(shortId);
+      await participantListTable.openParticipantPageAt(0);
+      medicalRecordTable = await openMedicalRecordsTab(participantPage);
+      medicalRecordsRequestPage = await medicalRecordTable.openRequestPageByRowIndex(foundRow);
+      const isChecked = await medicalRecordsRequestPage.getNoActionNeeded.isChecked();
+      expect(isChecked).toBeTruthy();
+    });
+  }
+
+  async function openMedicalRecordsTab(participantPage: ParticipantPage): Promise<MedicalRecordsTable> {
+    const medicalRecordsTab = await participantPage.clickTab<MedicalRecordsTab>(TabEnum.MEDICAL_RECORD);
+    const medicalRecordTable = medicalRecordsTab.table;
+    expect(await medicalRecordTable.getRowsCount()).toBeGreaterThanOrEqual(1);
+    return medicalRecordTable;
+  }
+
+  async function assertInstitution(medicalRecordTable: MedicalRecordsTable, institutionName: string, mrStatus?: string): Promise<number> {
+    const rowCount = await medicalRecordTable.getRowsCount();
+    let foundMatch = false;
+    let foundRow = -1;
+
+    for (let i = 0; i < rowCount; i++) {
+      const [institutionValue] = await medicalRecordTable.getTextAt(i, 'Institution');
+      if (institutionName === institutionValue) {
+        if (mrStatus) {
+          const [mrStatusValue] = await medicalRecordTable.getTextAt(i, 'MR Status');
+          if (mrStatus === mrStatusValue) {
+            foundMatch = true;
+            foundRow = i;
+            break;
+          }
+        } else {
+          foundMatch = true;
+          foundRow = i;
+          break;
+        }
+      }
+    }
+    expect(foundMatch, `Institution table does not show any institution with MR Status "Fax Sent"`).toBeTruthy();
+    expect(foundRow).toBeGreaterThanOrEqual(0);
+    return foundRow;
   }
 });

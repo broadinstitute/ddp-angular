@@ -7,3 +7,10 @@ export enum MedicalRecordsTableEnum {
   PAPER_CR_REQUIRED = 'Paper C/R Required',
   MR_FOLLOWUP_REQUIRED = 'MR Follow-Up Required'
 }
+
+export enum DynamicFieldsEnum {
+  INITIAL_MR_REQUEST = 'Initial MR Request',
+  INITIAL_MR_RECEIVED = 'Initial MR Received',
+  CONFIRMED_INSTITUTION_NAME = 'Confirmed Institution Name',
+  NO_ACTION_NEEDED = 'No Action Needed',
+}
