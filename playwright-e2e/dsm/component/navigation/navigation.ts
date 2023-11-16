@@ -64,6 +64,11 @@ export class Navigation {
     await this.selectFrom(MainMenuEnum.MISCELLANEOUS, miscName);
   }
 
+  public getDisplayedMainMenu(): MainMenuEnum[] {
+    const menuOptions = this.page.locator(`//app-navigation//ul[1]//li[contains(@class, 'dropdown')]`);
+    const displayedMenuOptions: MainMenuEnum[] = [];
+  } 
+
   private async selectFrom(from: MainMenuEnum, selection: Selection): Promise<void> {
     await new Dropdown(this.page, from).selectOption(selection);
     await waitForNoSpinner(this.page);
