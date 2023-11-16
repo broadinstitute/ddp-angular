@@ -29,7 +29,8 @@ test.describe.serial('Medical records request workflow', () => {
     'Boston Children\'s Hospital'
   ];
 
-  const studies: StudyEnum[] = [StudyEnum.OSTEO2];
+  // Two CMI Clinical and two CMI Research studies
+  const studies: StudyEnum[] = [StudyEnum.OSTEO2, StudyEnum.LMS, StudyEnum.PANCAN, StudyEnum.BRAIN];
 
   for (const study of studies) {
     test(`Update Institution @dsm @${study}`, async ({ page, request }) => {
@@ -119,7 +120,7 @@ test.describe.serial('Medical records request workflow', () => {
 
         // Fetch information on first row
         const [typeValue] = await medicalRecordTable.getTextAt(0, 'Type');
-        expect(typeValue).toMatch(/(Physician|Institution Initial Biopsy)/);
+        expect(typeValue).toMatch(/(Physician|Institution|Initial Biopsy)/);
 
         const [institutionValue] = await medicalRecordTable.getTextAt(0, 'Institution');
         expect(institutionValue).toBeTruthy();
