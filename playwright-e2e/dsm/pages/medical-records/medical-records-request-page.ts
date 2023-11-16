@@ -2,7 +2,7 @@ import { expect, Locator, Page } from '@playwright/test';
 import { waitForNoSpinner, waitForResponse } from 'utils/test-utils';
 import { MainInfoEnum } from 'dsm/pages/participant-page/enums/main-info-enum';
 import Input from 'dss/component/input';
-import { DynamicFieldsEnum } from 'dsm/pages/medical-records/medical-records-enums';
+import { FieldsEnum } from 'dsm/pages/medical-records/medical-records-enums';
 import { FillDate } from 'dsm/pages/tissue/interfaces/tissue-information-interfaces';
 import DatePicker from 'dsm/component/date-picker';
 import Checkbox from 'dss/component/checkbox';
@@ -29,14 +29,14 @@ export default class MedicalRecordsRequestPage {
     await waitForNoSpinner(this.page);
   }
 
-  public async getStaticText(infoFieldName: MainInfoEnum): Promise<string> {
+  public async getStaticText(infoFieldName: MainInfoEnum | FieldsEnum): Promise<string> {
     const fieldLocator = this.staticInformationXpath(infoFieldName);
     await expect(fieldLocator, `Field: ${infoFieldName} not found.`).toBeVisible();
     const data = await fieldLocator.textContent();
     return data?.trim() as string;
   }
 
-  public async fillText(infoFieldName: DynamicFieldsEnum, value: string): Promise<void> {
+  public async fillText(infoFieldName: FieldsEnum, value: string): Promise<void> {
     const fieldLocator = this.dynamicInformationXpath(infoFieldName);
     const input = new Input(this.page, { root: fieldLocator, });
     await expect(input.toLocator(), `Field: ${infoFieldName} is not visible.`).toBeVisible();
@@ -96,11 +96,11 @@ export default class MedicalRecordsRequestPage {
   }
 
   public get initialMRRequestDateLocator(): Locator {
-    return this.dynamicInformationXpath(DynamicFieldsEnum.INITIAL_MR_REQUEST).locator('app-field-datepicker');
+    return this.dynamicInformationXpath(FieldsEnum.INITIAL_MR_REQUEST).locator('app-field-datepicker');
   }
 
   public get initialMRReceivedDateLocator(): Locator {
-    return this.dynamicInformationXpath(DynamicFieldsEnum.INITIAL_MR_RECEIVED).locator('app-field-datepicker');
+    return this.dynamicInformationXpath(FieldsEnum.INITIAL_MR_RECEIVED).locator('app-field-datepicker');
   }
 
   /* Assertions */
@@ -115,11 +115,11 @@ export default class MedicalRecordsRequestPage {
   }
 
   public get getNoActionNeeded(): Checkbox {
-    return new Checkbox(this.page, { root: this.dynamicInformationXpath(DynamicFieldsEnum.NO_ACTION_NEEDED)});
+    return new Checkbox(this.page, { root: this.dynamicInformationXpath(FieldsEnum.NO_ACTION_NEEDED)});
   }
 
   /* XPaths */
-  private staticInformationXpath(infoFieldName: MainInfoEnum): Locator {
+  private staticInformationXpath(infoFieldName: MainInfoEnum | FieldsEnum): Locator {
     return this.page.locator(`${this.staticInformationTableXPath}//tr[td[text()[normalize-space()="${infoFieldName}"]]]/td[2]`);
   }
 
@@ -127,7 +127,7 @@ export default class MedicalRecordsRequestPage {
     return `${this.pageXPath}//table[contains(@class, "table-condensed")]/tbody`;
   }
 
-  private dynamicInformationXpath(infoFieldName: DynamicFieldsEnum, index = 2): Locator {
+  private dynamicInformationXpath(infoFieldName: FieldsEnum, index = 2): Locator {
     return this.page.locator(`${this.dynamicInformationTableXPath}//tr[td[normalize-space()="${infoFieldName}"]]/td`);
   }
 

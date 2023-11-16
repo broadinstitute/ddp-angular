@@ -11,7 +11,7 @@ import MedicalRecordsTab from 'dsm/pages/medical-records/medical-records-tab';
 import { MainInfoEnum } from 'dsm/pages/participant-page/enums/main-info-enum';
 import { SortOrder } from 'dss/component/table';
 import MedicalRecordsRequestPage from 'dsm/pages/medical-records/medical-records-request-page';
-import { DynamicFieldsEnum } from 'dsm/pages/medical-records/medical-records-enums';
+import { FieldsEnum } from 'dsm/pages/medical-records/medical-records-enums';
 import Input from 'dss/component/input';
 import MedicalRecordsTable from 'dsm/pages/medical-records/medical-records-table';
 
@@ -151,7 +151,7 @@ test.describe.serial('Medical records request workflow', () => {
 
         assertDateFormat(await medicalRecordsRequestPage.getStaticText(MainInfoEnum.DATE_OF_BIRTH));
 
-        const instInfo = await medicalRecordsRequestPage.getStaticText(MainInfoEnum.INSTITUTION_INFO);
+        const instInfo = await medicalRecordsRequestPage.getStaticText(FieldsEnum.INSTITUTION_INFO);
         expect(instInfo).toBeTruthy();
         logInfo(`Participant provided Institution Info: ${instInfo}`);
 
@@ -163,7 +163,7 @@ test.describe.serial('Medical records request workflow', () => {
         // Pick one confirmed institution that does not match existing institution
         [confirmedInstitution] = confirmedInstitutions.filter(institution => institution !== institutionValue);
 
-        await medicalRecordsRequestPage.fillText(DynamicFieldsEnum.CONFIRMED_INSTITUTION_NAME, confirmedInstitution);
+        await medicalRecordsRequestPage.fillText(FieldsEnum.CONFIRMED_INSTITUTION_NAME, confirmedInstitution);
         await medicalRecordsRequestPage.backToPreviousPage();
         await participantPage.waitForReady();
 

@@ -8,7 +8,8 @@ export enum MedicalRecordsTableEnum {
   MR_FOLLOWUP_REQUIRED = 'MR Follow-Up Required'
 }
 
-export enum DynamicFieldsEnum {
+export enum FieldsEnum {
+  INSTITUTION_INFO = 'Institution Info',
   INITIAL_MR_REQUEST = 'Initial MR Request',
   INITIAL_MR_RECEIVED = 'Initial MR Received',
   CONFIRMED_INSTITUTION_NAME = 'Confirmed Institution Name',
