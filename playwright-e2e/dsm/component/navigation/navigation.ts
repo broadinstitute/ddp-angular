@@ -1,4 +1,4 @@
-import {APIRequestContext, Page} from '@playwright/test';
+import {APIRequestContext, Locator, Page, expect} from '@playwright/test';
 import Dropdown from 'dsm/component/dropdown';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
 import { waitForNoSpinner } from 'utils/test-utils';
@@ -65,10 +65,44 @@ export class Navigation {
   }
 
   public async getDisplayedMainMenu(): Promise<MainMenuEnum[]> {
-    const menuOptions = await this.page.locator(`//app-navigation//ul[1]//li[contains(@class, 'dropdown')]//b`).all();
+    let menuOptions: Locator[] = [];
+    await expect(async () => {
+      menuOptions = await this.page.locator(`//app-navigation//ul[1]//li[contains(@class, 'dropdown')]//b`).all();
+      const amountOfMenuOptions = menuOptions.length;
+      console.log(`Amount of main menu options: ${amountOfMenuOptions}`);
+      expect(amountOfMenuOptions).toBeGreaterThanOrEqual(1);
+    }).toPass({
+      intervals: [5_000],
+      timeout: 30_000
+    });
+
     const displayedMenuOptions: MainMenuEnum[] = [];
     for (const option of menuOptions) {
-      const optionName = (await option.innerText()) as MainMenuEnum;
+      const optionName = ((await option.innerText()).trim()) as MainMenuEnum;
+      console.log(`Main menu option: ${optionName}`);
+      displayedMenuOptions.push(optionName);
+    }
+    return displayedMenuOptions;
+  }
+
+  public async getDisplayedSamplesMenuOptions(): Promise<SamplesNavEnum[]> {
+    let menuOptions: Locator[] = [];
+    await expect(async () => {
+      menuOptions = await this.page.
+      locator(`//app-navigation//ul[1]//li[contains(@class, 'dropdown')]//a[contains(.,'Samples')]/following-sibling::ul//li`).
+      all();
+      const amountOfMenuOptions = menuOptions.length;
+      console.log(`Amount of sample menu options: ${amountOfMenuOptions}`);
+      expect(amountOfMenuOptions).toBeGreaterThanOrEqual(1);
+    }).toPass({
+      intervals: [5_000],
+      timeout: 30_000
+    });
+
+    const displayedMenuOptions: SamplesNavEnum[] = [];
+    for (const option of menuOptions) {
+      const optionName = ((await option.innerText()).trim()) as SamplesNavEnum;
+      console.log(`Sample menu option: ${optionName}`);
       displayedMenuOptions.push(optionName);
     }
     return displayedMenuOptions;

@@ -16,6 +16,11 @@ test.describe('GP Collection Date Permissions Test', () => {
   const salivaKitType = KitTypeEnum.SALIVA; //Saliva kits are usually automatically created, so there'll be more of these to use for testing compared to blood kits
   const mfBarcodeIndex = 6;
   const collectionDateIndex = 12;
+  const expectedSampleMenuItems = [SamplesNavEnum.UNSENT_KITS_OVERVIEW, SamplesNavEnum.REPORT,
+    SamplesNavEnum.SUMMARY, SamplesNavEnum.KITS_WITHOUT_LABELS, SamplesNavEnum.QUEUE, SamplesNavEnum.ERROR,
+    SamplesNavEnum.INITIAL_SCAN, SamplesNavEnum.TRACKING_SCAN, SamplesNavEnum.FINAL_SCAN, SamplesNavEnum.RGP_FINAL_SCAN,
+    SamplesNavEnum.SENT, SamplesNavEnum.RECEIVED, SamplesNavEnum.SENT_RECEIVED_OVERVIEW,
+    SamplesNavEnum.SEARCH, SamplesNavEnum.LABEL_SETTINGS, SamplesNavEnum.CLINICAL_ORDERS];
   let todaysKits: Locator[] = [];
   let mfBarcode = '';
 
@@ -28,12 +33,12 @@ test.describe('GP Collection Date Permissions Test', () => {
         await new Select(page, { label: 'Select study' }).selectOption(`${study}`);
 
         //Verify the current user can only see the navigation menu options allowed by the kit_shipping permission (just 'Selected study' + 'Samples' menu)
-        const availableMenuOptions = await navigation.getDisplayedMainMenu();
-        const amountOfMenuOptionsAvailable = availableMenuOptions.length;
+        const availableNavigationMenuOptions = await navigation.getDisplayedMainMenu();
+        const amountOfMenuOptionsAvailable = availableNavigationMenuOptions.length;
         expect(amountOfMenuOptionsAvailable, 'Study admin with only kit_shipping permission should only have 2 menu options').toBe(2);
 
         expect(
-          availableMenuOptions,
+          availableNavigationMenuOptions,
           `Displayed menu options do not match those expected of kit_shipping permission. Expected: 'Selected study' & 'Samples' only`).
           toMatchObject(expectedAvailableMenuItems);
 
@@ -41,6 +46,13 @@ test.describe('GP Collection Date Permissions Test', () => {
         * Unsent Kits Overview, Report, Summary, Kits without Labels, Queue, Error, Initial Scan, Tracking Scan, Final Scan, RGP Final Scan,
         * Sent, Received, Sent/Received Overview, Search, Label Settings, Clinical Orders
         */
+        const availableSampleMenuOptions = await navigation.getDisplayedSamplesMenuOptions();
+        const amountOfSampleMenuOptions = availableSampleMenuOptions.length;
+        expect(
+          amountOfSampleMenuOptions,
+          `Expected 16 Sample menu options with kit_shipping permission, received ${amountOfSampleMenuOptions} instead`).
+          toBe(16);
+        expect(availableSampleMenuOptions).toMatchObject(expectedSampleMenuItems);
       })
 
       await test.step('Go to Kits Sent page in the Samples menu and select a mf barcode and copy it', async () => {
@@ -51,22 +63,13 @@ test.describe('GP Collection Date Permissions Test', () => {
         await kitsSentPage.assertDisplayedKitTypes(expectedKitTypes);
         await kitsSentPage.selectKitType(salivaKitType);
 
-        //Get a list of kits that have been sent on the current day (likely due to automated test) and save their mf barcode
+        //Get the most recent kit's mf barcode to be used in Kit Search page
       })
 
       await test.step(`Go to Kit Search page and select 'Search by mf barcode' and enter the barcode you copied and click on Search`, async () => {
         await navigation.selectFromSamples(SamplesNavEnum.SEARCH);
         const kitsSearchPage = new SearchPage(page);
         await kitsSearchPage.waitForReady();
-        for (const kits of todaysKits) {
-          //Logic to get mf barcode
-
-          //Use the mf barcode and select 'Search by mf barcode'
-          const resultTable = kitsSearchPage.searchByField(SearchByField.MANUFACTURE_BARCODE, mfBarcode);
-          await Promise.all([
-            (await resultTable).waitForReady()
-          ]);
-        }
       })
 
       await test.step('Enter a collection date for the kit that shows up and click Submit', async () => {
