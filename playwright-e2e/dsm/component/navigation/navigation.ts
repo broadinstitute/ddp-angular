@@ -64,10 +64,15 @@ export class Navigation {
     await this.selectFrom(MainMenuEnum.MISCELLANEOUS, miscName);
   }
 
-  public getDisplayedMainMenu(): MainMenuEnum[] {
-    const menuOptions = this.page.locator(`//app-navigation//ul[1]//li[contains(@class, 'dropdown')]`);
+  public async getDisplayedMainMenu(): Promise<MainMenuEnum[]> {
+    const menuOptions = await this.page.locator(`//app-navigation//ul[1]//li[contains(@class, 'dropdown')]//b`).all();
     const displayedMenuOptions: MainMenuEnum[] = [];
-  } 
+    for (const option of menuOptions) {
+      const optionName = (await option.innerText()) as MainMenuEnum;
+      displayedMenuOptions.push(optionName);
+    }
+    return displayedMenuOptions;
+  }
 
   private async selectFrom(from: MainMenuEnum, selection: Selection): Promise<void> {
     await new Dropdown(this.page, from).selectOption(selection);
