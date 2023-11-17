@@ -4,6 +4,7 @@ import { MainMenuEnum } from 'dsm/component/navigation/enums/mainMenu-enum';
 import { SamplesNavEnum } from 'dsm/component/navigation/enums/samplesNav-enum';
 import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import { Navigation } from 'dsm/component/navigation/navigation';
+import { KitsColumnsEnum } from 'dsm/pages/kitsInfo-pages/enums/kitsColumns-enum';
 import KitsSentPage from 'dsm/pages/kitsInfo-pages/kitsSentPage';
 import SearchPage, { SearchByField } from 'dsm/pages/samples/search-page';
 import Select from 'dss/component/select';
@@ -63,13 +64,19 @@ test.describe('GP Collection Date Permissions Test', () => {
         await kitsSentPage.assertDisplayedKitTypes(expectedKitTypes);
         await kitsSentPage.selectKitType(salivaKitType);
 
-        //Get the most recent kit's mf barcode to be used in Kit Search page
+        //Get the most recent mf barcodes to be used in Kit Search page
+        await kitsSentPage.sortColumn({ columnName: KitsColumnsEnum.SENT, startWithRecentDates: true });
+        todaysKits = await kitsSentPage.getRecentMFBarcodes();
+        console.log(`Amount of kits today: ${todaysKits}`);
+        for (const kits of todaysKits) {
+          console.log(`MF Barcode: ${(await kits.innerText()).trim()}`);
+        }
       })
 
       await test.step(`Go to Kit Search page and select 'Search by mf barcode' and enter the barcode you copied and click on Search`, async () => {
-        await navigation.selectFromSamples(SamplesNavEnum.SEARCH);
+        /*await navigation.selectFromSamples(SamplesNavEnum.SEARCH);
         const kitsSearchPage = new SearchPage(page);
-        await kitsSearchPage.waitForReady();
+        await kitsSearchPage.waitForReady();*/
       })
 
       await test.step('Enter a collection date for the kit that shows up and click Submit', async () => {

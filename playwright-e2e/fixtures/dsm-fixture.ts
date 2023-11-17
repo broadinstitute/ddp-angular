@@ -2,7 +2,7 @@ import { Fixtures } from '@playwright/test';
 import { login } from 'authentication/auth-dsm';
 import { fixtureBase as base } from 'fixtures/fixture-base';
 
-const { DSM_USER1_EMAIL, DSM_USER1_PASSWORD, DSM_USER2_EMAIL, DSM_USER2_PASSWORD, DSM_USER3_EMAIL, DSM_USER3_PASSWORD, } = process.env;
+const { DSM_USER1_EMAIL, DSM_USER1_PASSWORD, DSM_USER2_EMAIL, DSM_USER2_PASSWORD } = process.env;
 
 // Use this fixture for login in DSM tests
 const fixture = base.extend<Fixtures>({
@@ -22,7 +22,7 @@ const fixtureForLimitedPermissions = base.extend<Fixtures>({
 
 const fixtureForGPCollectionDateTest = base.extend<Fixtures>({
   page: async ({ page }, use) => {
-    await login(page, {email: DSM_USER3_EMAIL, password: DSM_USER3_PASSWORD});
+    await login(page, {email: DSM_USER2_EMAIL, password: DSM_USER2_PASSWORD});
     await use(page);
   }
 });

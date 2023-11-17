@@ -1,4 +1,4 @@
-import {expect, Page} from '@playwright/test';
+import {expect, Locator, Page} from '@playwright/test';
 import {KitType} from 'dsm/component/kitType/kitType';
 import {KitsTable} from 'dsm/component/tables/kits-table';
 import {KitTypeEnum} from 'dsm/component/kitType/enums/kitType-enum';
@@ -6,6 +6,7 @@ import {waitForNoSpinner, waitForResponse} from 'utils/test-utils';
 import {KitsColumnsEnum} from 'dsm/pages/kitsInfo-pages/enums/kitsColumns-enum';
 import {assertTableHeaders} from 'utils/assertion-helper';
 import {rows} from 'lib/component/dsm/paginators/types/rowsPerPage';
+import { getDate, offsetDaysFromToday } from 'utils/date-utils';
 
 export default class KitsSentPage {
   private readonly PAGE_TITLE = 'Kits Sent';
@@ -16,6 +17,8 @@ export default class KitsSentPage {
 
   private readonly kitType = new KitType(this.page);
   private readonly kitsTable = new KitsTable(this.page);
+  private readonly sentColumnIndex = 5;
+  private readonly mfBarcodeIndex = 1;
 
   constructor(private readonly page: Page) {
   }
@@ -55,11 +58,42 @@ export default class KitsSentPage {
    * String type columns - first click gives you A -> Z list; second click gives you Z -> A list
    * @param columnName name of the column to be sorted
    */
-  public async sortColumn(columnName: KitsColumnsEnum): Promise<void> {
+  public async sortColumn(opts: {
+    columnName: KitsColumnsEnum,
+    aToZ?: boolean,
+    zToA?: boolean,
+    startWithRecentDates?: boolean,
+    startWithPastDates?: boolean }): Promise<void> {
+    const { columnName, aToZ, zToA, startWithRecentDates, startWithPastDates } = opts;
+
     const column = columnName as string;
     const columnSorter = this.page.locator(`//app-shipping//table//th[contains(.,'${column}')]/mfdefaultsorter`);
     expect(columnSorter, `The column ${column} is not able to be sorted in the Kits Sent page`).toBeTruthy();
-    await columnSorter.click();
+
+    if (aToZ || startWithPastDates) {
+      //Only a single click is needed
+      await columnSorter.click();
+    } else if (zToA || startWithRecentDates) {
+      //Two clicks are needed to get the wanted result
+      await columnSorter.click();
+      await columnSorter.click();
+    }
+  }
+
+  public async getRecentMFBarcodes(): Promise<Locator[]> {
+    const today = getDate().trim();
+    const yesterday = getDate(offsetDaysFromToday(1, { isAdd: false })).trim();
+    console.log(`Yesterday: ${yesterday}`);
+    console.log(`Today: ${today}`);
+
+    const todayKits = await this.page.
+      locator(`//app-shipping//table//td[${this.sentColumnIndex}][contains(.,'${today}')]/following-sibling::td[${this.mfBarcodeIndex}]`).all();
+    const yesterdayKits = await this.page.
+    locator(`//app-shipping//table//td[${this.sentColumnIndex}][contains(.,'${yesterday}')]/following-sibling::td[${this.mfBarcodeIndex}]`).all();
+
+    const recentKits = todayKits.concat(yesterdayKits);
+    expect(todayKits, `No kits have been sent out between ${yesterday} - ${today}`).toBeTruthy();
+    return recentKits;
   }
 
   /* Assertions */
