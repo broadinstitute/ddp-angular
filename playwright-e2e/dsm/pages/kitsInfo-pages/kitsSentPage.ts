@@ -49,6 +49,19 @@ export default class KitsSentPage {
     return await this.kitsTable.getData(columnName);
   }
 
+  /**
+   * Sorts the given column by clicking on it.
+   * Date type columns - first click gives you list starting with dates from long ago; second click starts with recent dates
+   * String type columns - first click gives you A -> Z list; second click gives you Z -> A list
+   * @param columnName name of the column to be sorted
+   */
+  public async sortColumn(columnName: KitsColumnsEnum): Promise<void> {
+    const column = columnName as string;
+    const columnSorter = this.page.locator(`//app-shipping//table//th[contains(.,'${column}')]/mfdefaultsorter`);
+    expect(columnSorter, `The column ${column} is not able to be sorted in the Kits Sent page`).toBeTruthy();
+    await columnSorter.click();
+  }
+
   /* Assertions */
   public async assertPageTitle() {
     await expect(this.page.locator('h1'),

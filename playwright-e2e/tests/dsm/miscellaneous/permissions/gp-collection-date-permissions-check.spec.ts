@@ -50,7 +50,7 @@ test.describe('GP Collection Date Permissions Test', () => {
         const amountOfSampleMenuOptions = availableSampleMenuOptions.length;
         expect(
           amountOfSampleMenuOptions,
-          `Expected 16 Sample menu options with kit_shipping permission, received ${amountOfSampleMenuOptions} instead`).
+          `Expected 16 Sample menu options for a study admin with kit_shipping permission, received ${amountOfSampleMenuOptions} instead`).
           toBe(16);
         expect(availableSampleMenuOptions).toMatchObject(expectedSampleMenuItems);
       })
