@@ -6,6 +6,7 @@ import {KitsTable} from 'dsm/component/tables/kits-table';
 import {KitsColumnsEnum} from 'dsm/pages/kitsInfo-pages/enums/kitsColumns-enum';
 import {assertTableHeaders} from 'utils/assertion-helper';
 import {rows} from 'lib/component/dsm/paginators/types/rowsPerPage';
+import Modal from 'dsm/component/modal';
 
 
 export default class KitsWithoutLabelPage {
@@ -98,12 +99,15 @@ export default class KitsWithoutLabelPage {
       'Kits Without Label page - Deactivate reason button is not visible')
       .toBeVisible();
 
-    await deactivateReasonInput.fill(`testDeactivate-${new Date().getTime()}`);
-    await deactivateReasonButton.click();
+    await Promise.all([
+      waitForResponse(this.page, {uri: '/deactivateKit'}),
+      waitForResponse(this.page, {uri: '/kitRequests'}),
+      deactivateReasonInput.fill(`testDeactivate-${new Date().getTime()}`),
+      deactivateReasonButton.click(),
+    ]);
 
-    await waitForResponse(this.page, {uri: '/deactivateKit'});
+    await expect(new Modal(this.page).toLocator()).not.toBeVisible();
     await waitForNoSpinner(this.page);
-    await waitForResponse(this.page, {uri: '/kitRequests'});
   }
 
   public async hasExistingKitRequests(): Promise<boolean> {
