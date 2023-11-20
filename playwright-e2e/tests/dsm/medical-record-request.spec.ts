@@ -46,11 +46,9 @@ test.describe.serial('Medical records request workflow', () => {
       await test.step('Find an enrolled participant', async () => {
         const registrationDateColumn = 'Registration Date';
         // These are columns displayed in Medical Records table
-        const typeColumn = 'Type';
         const institutionNameColumn = 'Institution Name';
         const followUpColumn = 'Follow-Up required';
         const mrReviewColumn = 'MR Review';
-        const mrProblemColumn = 'MR Review';
         const initialMRRequestColumn = 'Initial MR Request';
         const initialMRReceivedColumn = 'Initial MR Received';
 
@@ -58,21 +56,17 @@ test.describe.serial('Medical records request workflow', () => {
         await customizeViewPanel.selectColumns(CustomViewColumns.PARTICIPANT, [registrationDateColumn]);
         await customizeViewPanel.selectColumns(CustomViewColumns.MEDICAL_RECORD, [
           institutionNameColumn,
-          typeColumn,
           followUpColumn,
           mrReviewColumn,
-          mrProblemColumn,
           initialMRRequestColumn,
           initialMRReceivedColumn
         ]);
 
         await searchPanel.open();
         await searchPanel.checkboxes('Status', { checkboxValues: ['Enrolled'] });
-        await searchPanel.checkboxes(typeColumn, { checkboxValues: ['Physician', 'Institution', 'Initial Biopsy'] });
-        await searchPanel.text(institutionNameColumn, { additionalFilters: [AdditionalFilter.NOT_EMPTY] });
+        await searchPanel.text(institutionNameColumn, { additionalFilters: [AdditionalFilter.EMPTY] });
         await searchPanel.checkboxes(followUpColumn, { checkboxValues: ['No'] });
         await searchPanel.checkboxes(mrReviewColumn, { checkboxValues: ['No'] });
-        await searchPanel.checkboxes(mrProblemColumn, { checkboxValues: ['No'] });
         await searchPanel.text(initialMRRequestColumn, { additionalFilters: [AdditionalFilter.EMPTY] });
         await searchPanel.text(initialMRReceivedColumn, { additionalFilters: [AdditionalFilter.EMPTY] });
         await searchPanel.search();
