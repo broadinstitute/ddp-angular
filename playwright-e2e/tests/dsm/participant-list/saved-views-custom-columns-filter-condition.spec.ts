@@ -1,16 +1,16 @@
 import { expect } from '@playwright/test';
-import { test } from 'fixtures/dsm-fixture';
-import { AdditionalFilter } from 'dsm/component/filters/sections/search/search-enums';
+import { testWithUser2 as test } from 'fixtures/dsm-fixture';
+import { AdditionalFilter, CustomViewColumns } from 'dsm/component/filters/sections/search/search-enums';
 import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
 import { offsetDaysFromToday } from 'utils/date-utils';
+import crypto from 'crypto';
 
-// Test is broken until bug is fixed. https://broadworkbench.atlassian.net/browse/PEPPER-1031
-test.describe.fixme('Participants list search and filter', () => {
+test.describe('Participants List Search with Filtering Condition', () => {
   const studies = [StudyEnum.LMS, StudyEnum.OSTEO2];
 
   for (const study of studies) {
-    test(`Save Custom View @dsm @${study}`, async ({ page, request }) => {
+    test(`Save Current View @dsm @${study}`, async ({ page, request }) => {
       const participantListPage = await ParticipantListPage.goto(page, study, request);
       const participantsTable = participantListPage.participantListTable;
 
@@ -19,23 +19,22 @@ test.describe.fixme('Participants list search and filter', () => {
 
       const customizeViewPanel = participantListPage.filters.customizeViewPanel;
       await customizeViewPanel.open();
-
-      await customizeViewPanel.selectColumns('Sample Columns', ['MF code']);
-      await customizeViewPanel.selectColumns('Participant Columns', ['Date of Majority']);
+      await customizeViewPanel.selectColumns(CustomViewColumns.SAMPLE, ['MF code']);
+      await customizeViewPanel.selectColumns(CustomViewColumns.PARTICIPANT, ['Date of Majority']);
+      await customizeViewPanel.close();
 
       // Table auto. reloaded with new columns added
       await expect(participantsTable.getHeaderByName('MF Code')).toBeVisible();
       await expect(participantsTable.getHeaderByName('Date of Majority')).toBeVisible();
-      const numParticipants1 = await participantsTable.numOfParticipants();
-      expect(numParticipants1).toBeGreaterThan(1);
+      const numParticipantsAfter = await participantsTable.numOfParticipants();
+      // Number of participants should be same
+      expect(numParticipantsAfter).toStrictEqual(defaultViewNumParticipants);
 
       // Open Customize View panel to add filter conditions: NOT EMPTY and Date Range
       const searchPanel = participantListPage.filters.searchPanel;
       await searchPanel.open();
-
       // Set MF code: NOT EMPTY
       await searchPanel.text('MF code', { additionalFilters: [AdditionalFilter.NOT_EMPTY] });
-
       // Set Date of Majority: NOT EMPTY and a date range: 10 years ago from today to 10 years after today
       const tenYearsAgo = offsetDaysFromToday(365 * 10, { isAdd: false });
       const TenYearAfter = offsetDaysFromToday(365 * 10, { isAdd: true });
@@ -44,32 +43,30 @@ test.describe.fixme('Participants list search and filter', () => {
         from: tenYearsAgo,
         to: TenYearAfter
       });
-
       await searchPanel.search();
 
-      const newViewNumParticipants = await participantsTable.numOfParticipants();
-      expect(newViewNumParticipants).toBeGreaterThan(1);
-
-      const mfCodeCellText = await participantsTable.getParticipantDataAt(0, 'MF code');
-      const mfCodes: string[] = mfCodeCellText.split(/[\r\n]+/);
-      expect(mfCodes).toBeTruthy();
-      expect(mfCodes.length).toBeGreaterThanOrEqual(1);
+      const numParticipantsAfterFilter = await participantsTable.numOfParticipants();
+      expect(numParticipantsAfterFilter).toBeGreaterThan(1);
+      // Number of participants should be changed
+      expect(numParticipantsAfterFilter).not.toStrictEqual(numParticipantsAfter);
 
       // Save custom view
-      const newViewName = `hunter_${new Date().getTime().toString()}`;
-      await participantListPage.saveNewView(newViewName);
+      const customViewName = `hunter-${crypto.randomUUID().toString().substring(1, 6)}`;
+      await participantListPage.saveCurrentView(customViewName);
 
-      // Reload default view to change table before open saved custom view
-      await participantListPage.reloadWithDefaultFilter();
-      expect(await participantsTable.numOfParticipants()).toBeGreaterThanOrEqual(defaultViewNumParticipants);
+      // Reload page to change table before open saved custom view
+      await page.reload();
+      const numOfPartipantsAfterReload = await participantsTable.numOfParticipants();
+      expect(numOfPartipantsAfterReload).toStrictEqual(defaultViewNumParticipants);
 
-      // Open saved custom view
+      // Open saved view
       const savedViewPanel = participantListPage.savedFilters;
-      await savedViewPanel.open(newViewName);
-      expect(await participantsTable.numOfParticipants()).toBe(newViewNumParticipants);
+      await savedViewPanel.open(customViewName);
+      const numOfParticipantOfView = await participantsTable.numOfParticipants();
+      expect(numOfParticipantOfView).toBe(numParticipantsAfterFilter);
 
       // Delete saved custom view
-      await savedViewPanel.delete(newViewName);
+      await savedViewPanel.delete(customViewName);
     });
   }
 });

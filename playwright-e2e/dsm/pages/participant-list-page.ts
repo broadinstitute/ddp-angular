@@ -88,7 +88,7 @@ export default class ParticipantListPage {
     await waitForNoSpinner(this.page);
   }
 
-  public async saveNewView(viewName: string): Promise<void> {
+  public async saveCurrentView(viewName: string): Promise<void> {
     const saveButton = this.page.locator('button').filter({ has: this.page.locator('[data-icon="save"]')});
     await saveButton.click();
 
