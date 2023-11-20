@@ -2,30 +2,32 @@ import { expect } from '@playwright/test';
 import { test } from 'fixtures/dsm-fixture';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
 import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
-import { studyShortName } from 'utils/test-utils';
+import { QuickFiltersEnum } from 'dsm/component/filters/quick-filters';
+import { assertTableHeaders } from 'utils/assertion-helper';
+import { SortOrder } from 'dss/component/table';
 
 test.describe('Participants Search', () => {
-  const studies = [StudyEnum.LMS, StudyEnum.OSTEO2];
+  const studies = [StudyEnum.LMS, StudyEnum.OSTEO2, StudyEnum.PANCAN];
 
   for (const study of studies) {
-    test(`Search by Short ID @dsm @${study}`, async ({ page, request }) => {
+    test(`Under Age Quick Search Filter @dsm @${study}`, async ({ page, request }) => {
       const participantListPage = await ParticipantListPage.goto(page, study, request);
       const participantsTable = participantListPage.participantListTable;
+      const quickFilters = participantListPage.quickFilters;
+      await quickFilters.click(QuickFiltersEnum.UNDER_AGE);
 
-      // Save DDP and Short ID found on first row
-      const row = 0;
-      const guid = await participantsTable.getParticipantDataAt(row, 'DDP');
-      const shortId = await participantsTable.getParticipantDataAt(row, 'Short ID');
+      expect(await participantsTable.rowLocator().count()).toBeGreaterThanOrEqual(1);
 
-      const searchPanel = participantListPage.filters.searchPanel;
-      await searchPanel.open();
-      await searchPanel.text('Short ID', { textValue: shortId });
-      await searchPanel.search();
+      // Verify table displayed headers
+      const orderedHeaderNames = ['DDP', 'Short ID', 'First Name', 'Last Name', 'Status', 'Date of Birth', 'Date of Majority', 'Status']; // from Sample Columns
+      const actualHeaderNames = await participantsTable.getHeaderNames();
+      assertTableHeaders(actualHeaderNames, orderedHeaderNames);
 
-      expect(await participantsTable.rowLocator().count(),
-        `Participant List page - Displayed participants count is not 1`)
-        .toBe(1);
-      expect(guid).toBe(studyShortName(study).shortName);
+      await participantsTable.sort('Date of Majority', SortOrder.DESC);
+      const dateOfMajoritySample = await participantsTable.getRowText(0, 'Date of Majority');
+      const dateOfMajority = new Date(dateOfMajoritySample);
+      const today = new Date();
+      expect(dateOfMajority > today, `Date of Majority "${dateOfMajority}" is not greater than today's date "${today}"`).toBeTruthy();
     });
   }
 });
