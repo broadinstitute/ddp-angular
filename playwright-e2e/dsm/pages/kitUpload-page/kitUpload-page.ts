@@ -1,4 +1,4 @@
-import {expect, Locator, Page, Response} from '@playwright/test';
+import {expect, Locator, Page} from '@playwright/test';
 import {KitType} from 'dsm/component/kitType/kitType';
 import {KitTypeEnum} from 'dsm/component/kitType/enums/kitType-enum';
 import {waitForNoSpinner, waitForResponse} from 'utils/test-utils';
@@ -42,9 +42,23 @@ export default class KitUploadPage {
 
     await expect(this.uploadKitsBtn, 'Kit Upload page - Upload Kits button is disabled').toBeEnabled();
 
-    await this.uploadKitsBtn.click();
-    await this.handleKitUploadResponse();
+    const [response] = await Promise.all([
+      waitForResponse(this.page, {uri: '/kitUpload'}),
+      this.uploadKitsBtn.click()
+    ]);
     await waitForNoSpinner(this.page);
+
+    const responseBody: KitUploadResponse = JSON.parse(await response.text());
+
+    for (const [key, value] of Object.entries(responseBody)) {
+      if (value instanceof Array && value.length) {
+        if (key === kitUploadResponseEnum.INVALID_KIT_ADDRESS_LIST) {
+          throw new Error('Invalid kit addresses array is not empty');
+        } else {
+          await this.handleDuplicatedOrSpecialKits();
+        }
+      }
+    }
 
     expect(await this.page.locator('h3')
       .textContent(), "Kit Upload page - Couldn't upload kits - something went wrong")
@@ -60,25 +74,6 @@ export default class KitUploadPage {
       // eslint-disable-next-line max-len
       return `\n${shortId}\t${firstName}\t${lastName}\t${address.street1}\t${address.street2}\t${address.city}\t${address.postalCode}\t${address.state}\t${address.country}`;
     }).join();
-  }
-
-  private async waitForKitUploadResponse(): Promise<Response> {
-    return await waitForResponse(this.page, {uri: '/kitUpload'});
-  }
-
-  private async handleKitUploadResponse(): Promise<void> {
-    const response = await this.waitForKitUploadResponse();
-    const responseBody: KitUploadResponse = JSON.parse(await response.text());
-
-    for (const [key, value] of Object.entries(responseBody)) {
-      if (value instanceof Array && value.length) {
-        if (key === kitUploadResponseEnum.INVALID_KIT_ADDRESS_LIST) {
-          throw new Error('Invalid kit addresses array is not empty');
-        } else {
-          await this.handleDuplicatedOrSpecialKits();
-        }
-      }
-    }
   }
 
   private async handleDuplicatedOrSpecialKits(): Promise<void> {
@@ -97,8 +92,10 @@ export default class KitUploadPage {
 
     await expect(uploadKitButton, 'Kit Upload page - Upload Kit button is disabled').toBeEnabled();
 
-    await uploadKitButton.click();
-    await this.waitForKitUploadResponse();
+    await Promise.all([
+      waitForResponse(this.page, {uri: '/kitUpload'}),
+      uploadKitButton.click()
+    ]);
     await waitForNoSpinner(this.page);
   }
 
