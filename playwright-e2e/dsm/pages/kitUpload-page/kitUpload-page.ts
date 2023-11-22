@@ -43,7 +43,7 @@ export default class KitUploadPage {
     await expect(this.uploadKitsBtn, 'Kit Upload page - Upload Kits button is disabled').toBeEnabled();
 
     await Promise.all([
-      waitForResponse(this.page, {uri: '/kitUpload'}).then(async (resp) => {
+      this.page.waitForResponse('/kitUpload').then(async (resp) => {
         const responseBody: KitUploadResponse = JSON.parse(await resp.text());
         for (const [key, value] of Object.entries(responseBody)) {
           if (value instanceof Array && value.length) {
