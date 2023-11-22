@@ -28,7 +28,16 @@ export default class Dropdown {
   }
 
   async selectOption(value: string): Promise<void> {
+    await (await this.getOption(value)).click();
+  }
+
+  async getOption(value: string): Promise<Locator> {
     await this.open();
-    await this.toLocator().locator('ul.dropdown-menu').locator('a').getByText(value, {exact: true}).click();
+    return this.toLocator().locator('ul.dropdown-menu').locator('a').getByText(value, {exact: true});
+  }
+
+  async getAllOptions(): Promise<Locator> {
+    await this.open();
+    return this.toLocator().locator('ul.dropdown-menu').locator('a');
   }
 }
