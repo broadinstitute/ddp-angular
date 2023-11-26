@@ -42,26 +42,24 @@ export default class KitUploadPage {
 
     await expect(this.uploadKitsBtn, 'Kit Upload page - Upload Kits button is disabled').toBeEnabled();
 
-    await Promise.all([
-      this.page.waitForResponse('/kitUpload').then(async (resp) => {
-        const responseBody: KitUploadResponse = JSON.parse(await resp.text());
-        for (const [key, value] of Object.entries(responseBody)) {
-          if (value instanceof Array && value.length) {
-            if (key === kitUploadResponseEnum.INVALID_KIT_ADDRESS_LIST) {
-              throw new Error('Invalid kit addresses array is not empty');
-            } else {
-              await this.handleDuplicatedOrSpecialKits();
-            }
-          }
+    const respPromise = this.page.waitForResponse(/\/ui\/kitUpload\?realm=/);
+    await this.uploadKitsBtn.click();
+    const response = await respPromise;
+    // Analyze response body for invalid kit address
+    const responseBody: KitUploadResponse = JSON.parse(await response.text());
+    for (const [key, value] of Object.entries(responseBody)) {
+      if (value instanceof Array && value.length) {
+        if (key === kitUploadResponseEnum.INVALID_KIT_ADDRESS_LIST) {
+          throw new Error('Invalid kit addresses array is not empty');
+        } else {
+          await this.handleDuplicatedOrSpecialKits();
         }
-      }),
-      this.uploadKitsBtn.click()
-    ]);
+      }
+    }
     await waitForNoSpinner(this.page);
 
-    expect(await this.page.locator('h3')
-      .textContent(), "Kit Upload page - Couldn't upload kits - something went wrong")
-      .toBe('All participants were uploaded.');
+    await expect(this.page.locator('h3'), "Kit Upload page - Couldn't upload kits - something went wrong")
+      .toHaveText(/All participants were uploaded/);
 
     deleteFileSync(filePath);
   }
