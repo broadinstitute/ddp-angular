@@ -46,7 +46,7 @@ export default class KitUploadPage {
     await this.uploadKitsBtn.click();
     const response = await respPromise;
     // Analyze response body for invalid kit address
-    const responseBody: KitUploadResponse = JSON.parse(await response.text());
+    const responseBody: KitUploadResponse = JSON.parse(await response.json());
     for (const [key, value] of Object.entries(responseBody)) {
       if (value instanceof Array && value.length) {
         if (key === kitUploadResponseEnum.INVALID_KIT_ADDRESS_LIST) {
