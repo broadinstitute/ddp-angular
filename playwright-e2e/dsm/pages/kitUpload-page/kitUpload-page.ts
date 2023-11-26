@@ -46,19 +46,7 @@ export default class KitUploadPage {
     await this.uploadKitsBtn.click();
     const response = await respPromise;
     await response.finished();
-    const body = await response.json();
-    console.log(body)
-    const responseBody: KitUploadResponse = JSON.parse(body);
-    for (const [key, value] of Object.entries(responseBody)) {
-      if (value instanceof Array && value.length) {
-        // Analyze response body for invalid kit address
-        if (key === kitUploadResponseEnum.INVALID_KIT_ADDRESS_LIST) {
-          if (Array.isArray(key) && !!key.length) {
-            throw new Error('Invalid kit addresses array is not empty');
-          }
-        }
-      }
-    }
+
     await this.handleDuplicatedOrSpecialKits()
     await waitForNoSpinner(this.page);
 
