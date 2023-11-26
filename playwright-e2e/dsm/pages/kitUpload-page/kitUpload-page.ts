@@ -42,7 +42,7 @@ export default class KitUploadPage {
 
     await expect(this.uploadKitsBtn, 'Kit Upload page - Upload Kits button is disabled').toBeEnabled();
 
-    const respPromise = this.page.waitForResponse(/\/ui\/kitUpload\?realm=/);
+    const respPromise = this.page.waitForResponse(/\/ui\/kitUpload\?realm=/, { timeout: 50 * 1000});
     await this.uploadKitsBtn.click();
     const response = await respPromise;
     // Analyze response body for invalid kit address
