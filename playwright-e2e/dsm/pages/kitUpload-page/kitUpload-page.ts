@@ -1,4 +1,4 @@
-import {expect, Locator, Page} from '@playwright/test';
+import {expect, Locator, Page, Response} from '@playwright/test';
 import {KitType} from 'dsm/component/kitType/kitType';
 import {KitTypeEnum} from 'dsm/component/kitType/enums/kitType-enum';
 import {waitForNoSpinner, waitForResponse} from 'utils/test-utils';
@@ -42,7 +42,7 @@ export default class KitUploadPage {
 
     await expect(this.uploadKitsBtn, 'Kit Upload page - Upload Kits button is disabled').toBeEnabled();
 
-    const respPromise = this.page.waitForResponse(new RegExp('kitUpload'), { timeout: 50 * 1000});
+    const respPromise = this.page.waitForResponse((resp: Response) => resp.url().includes('/kitUpload'), { timeout: 50 * 1000});
     await this.uploadKitsBtn.click();
     const response = await respPromise;
     await response.finished();
