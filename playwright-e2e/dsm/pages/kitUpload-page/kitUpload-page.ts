@@ -46,7 +46,7 @@ export default class KitUploadPage {
     await this.uploadKitsBtn.click();
     const response = await respPromise;
     await response.finished();
-    const body = await response.text();
+    const body = await response.json();
     console.log(body)
     const responseBody: KitUploadResponse = JSON.parse(body);
     for (const [key, value] of Object.entries(responseBody)) {
