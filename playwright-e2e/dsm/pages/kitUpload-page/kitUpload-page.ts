@@ -42,11 +42,13 @@ export default class KitUploadPage {
 
     await expect(this.uploadKitsBtn, 'Kit Upload page - Upload Kits button is disabled').toBeEnabled();
 
-    const respPromise = this.page.waitForResponse((resp: Response) => resp.url().includes('/kitUpload'), { timeout: 50 * 1000});
+    const respPromise = this.page.waitForResponse((resp: Response) => resp.url().includes('kitUpload'), { timeout: 50 * 1000});
     await this.uploadKitsBtn.click();
     const response = await respPromise;
     await response.finished();
-    const responseBody: KitUploadResponse = JSON.parse(await response.text());
+    const body = await response.text();
+    console.log(body)
+    const responseBody: KitUploadResponse = JSON.parse(body);
     for (const [key, value] of Object.entries(responseBody)) {
       if (value instanceof Array && value.length) {
         // Analyze response body for invalid kit address
