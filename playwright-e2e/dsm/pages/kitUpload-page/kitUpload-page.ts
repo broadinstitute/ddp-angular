@@ -41,25 +41,23 @@ export default class KitUploadPage {
     await this.fileInput.setInputFiles(filePath);
 
     await expect(this.uploadKitsBtn, 'Kit Upload page - Upload Kits button is disabled').toBeEnabled();
-await this.page.pause();
+
     const respPromise = this.page.waitForResponse(new RegExp('kitUpload'), { timeout: 50 * 1000});
     await this.uploadKitsBtn.click();
     const response = await respPromise;
-    console.log(`response url: ${await response.allHeaders()}`)
-await this.page.pause();
-    // Analyze response body for invalid kit address
+
     const responseBody: KitUploadResponse = JSON.parse(await response.text());
     for (const [key, value] of Object.entries(responseBody)) {
       if (value instanceof Array && value.length) {
+        // Analyze response body for invalid kit address
         if (key === kitUploadResponseEnum.INVALID_KIT_ADDRESS_LIST) {
-          if (!key.length) {
+          if (Array.isArray(key) && !!key.length) {
             throw new Error('Invalid kit addresses array is not empty');
           }
-        } else {
-          await this.handleDuplicatedOrSpecialKits();
         }
       }
     }
+    await this.handleDuplicatedOrSpecialKits()
     await waitForNoSpinner(this.page);
 
     await expect(this.page.locator('h3'), "Kit Upload page - Couldn't upload kits - something went wrong")
