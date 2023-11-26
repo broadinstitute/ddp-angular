@@ -45,7 +45,7 @@ export default class KitUploadPage {
     const respPromise = this.page.waitForResponse(new RegExp('kitUpload'), { timeout: 50 * 1000});
     await this.uploadKitsBtn.click();
     const response = await respPromise;
-
+    await response.finished();
     const responseBody: KitUploadResponse = JSON.parse(await response.text());
     for (const [key, value] of Object.entries(responseBody)) {
       if (value instanceof Array && value.length) {
