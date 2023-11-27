@@ -44,19 +44,19 @@ export default class Modal {
 
   public getButton(opts: { label?: string | RegExp; ddpTestID?: string }): Button {
     const { label, ddpTestID } = opts;
-    return new Button(this.page, { label, ddpTestID, root: this.toLocator() });
+    return new Button(this.page, { label, ddpTestID, root: this.bodyLocator() });
   }
 
   public getInput(opts: { label?: string | RegExp }): Input {
     const { label } = opts;
-    return new Input(this.page, { label, root: this.toLocator() });
+    return new Input(this.page, { label, root: this.bodyLocator() });
   }
 
   public getRadiobutton(label: string | RegExp): Radiobutton {
-    return new Radiobutton(this.page, { label, root: this.toLocator() });
+    return new Radiobutton(this.page, { label, root: this.bodyLocator() });
   }
 
-  public getCheckbox(label: string | RegExp): Checkbox {
-    return new Checkbox(this.page, { label, root: this.toLocator() });
+  public getCheckbox(label?: string | RegExp): Checkbox {
+    return new Checkbox(this.page, { label, root: this.bodyLocator() });
   }
 }

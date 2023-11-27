@@ -84,7 +84,7 @@ export default class KitUploadPage {
       return;
     }
     const btnLocator = modal.getButton({label: 'Upload Kit'}).toLocator();
-    const checkboxLocator = modal.bodyLocator().locator('xpath=//mat-checkbox');
+    const checkboxLocator = modal.getCheckbox().toLocator();
     const duplicatedKitsCount: number = await checkboxLocator.count();
 
     await expect(btnLocator).toBeDisabled();
