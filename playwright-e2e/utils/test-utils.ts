@@ -295,3 +295,8 @@ export async function toHaveScreenshot(page: Page, locator: Locator | string, na
   const loc = typeof locator === 'string' ? page.locator(locator) : locator;
   await expect.soft(loc).toHaveScreenshot(name);
 }
+
+// Validate date format is mm/dd/yyyy
+export function assertDateFormat(value: string) {
+  expect(value).toMatch(/^\d\d\/\d\d\/\d\d\d\d$/);
+}

@@ -72,12 +72,28 @@ export default class ParticipantPage {
     return await this.readMainTextInfoFor(MainInfoEnum.DATE_OF_BIRTH) || '';
   }
 
+  public async getDateOfMajority(): Promise<string> {
+    return await this.readMainTextInfoFor(MainInfoEnum.DATE_OF_MAJORITY) || '';
+  }
+
+  public async getDateOfDiagnosis(): Promise<string> {
+    return await this.readMainTextInfoFor(MainInfoEnum.DATE_OF_DIAGNOSIS) || '';
+  }
+
   public async getGender(): Promise<string> {
     return await this.readMainTextInfoFor(MainInfoEnum.GENDER) || '';
   }
 
   public async getPreferredLanguage(): Promise<string> {
     return await this.readMainTextInfoFor(MainInfoEnum.PREFERRED_LANGUAGE) || '';
+  }
+
+  public async getConsentBlood(): Promise<string> {
+    return await this.readMainTextInfoFor(MainInfoEnum.CONSENT_BLOOD) || '';
+  }
+
+  public async getConsentTissue(): Promise<string> {
+    return await this.readMainTextInfoFor(MainInfoEnum.CONSENT_TISSUE) || '';
   }
 
   public async isTabVisible(tabName: TabEnum): Promise<boolean> {

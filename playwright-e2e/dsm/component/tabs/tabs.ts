@@ -1,9 +1,12 @@
-import { expect, Locator, Page } from '@playwright/test';
+import {expect, Locator, Page} from '@playwright/test';
 import {TabEnum} from 'dsm/component/tabs/enums/tab-enum';
 import ContactInformationTab from 'dsm/component/tabs/contact-information-tab';
 import GenomeStudyTab from 'dsm/component/tabs/genome-study-tab';
 import SampleInformationTab from 'dsm/component/tabs/sample-information-tab';
 import OncHistoryTab from './onc-history-tab';
+import MedicalRecordsTab from 'dsm/pages/medical-records/medical-records-tab';
+import SurveyDataTab from './survey-data-tab';
+import {waitForNoSpinner} from 'utils/test-utils';
 
 export default class Tabs {
   private readonly tabs = new Map<string, object>([
@@ -11,13 +14,14 @@ export default class Tabs {
     [TabEnum.SAMPLE_INFORMATION, new SampleInformationTab(this.page)],
     [TabEnum.GENOME_STUDY, new GenomeStudyTab(this.page)],
     [TabEnum.ONC_HISTORY, new OncHistoryTab(this.page)],
+    [TabEnum.MEDICAL_RECORD, new MedicalRecordsTab(this.page)],
+    [TabEnum.SURVEY_DATA, new SurveyDataTab(this.page)],
   ]);
 
   constructor(private readonly page: Page) {}
 
   public async clickTab<T extends object>(tabName: TabEnum): Promise<T> {
-    await this.tabLocator(tabName).click();
-    expect(await new Tabs(this.page).isOpen(tabName)).toBe(true);
+    await this.open(tabName);
     return (this.tabs as Map<string, object>).get(tabName) as T;
   }
 
@@ -34,6 +38,16 @@ export default class Tabs {
   private async isOpen(tabName: TabEnum): Promise<boolean> {
     const clas = await this.tabLocator(tabName).getAttribute('class');
     return clas ? clas.includes('active') : false;
+  }
+
+  private async open(tabName: TabEnum): Promise<void> {
+    await expect(async () => {
+      if (!(await this.isOpen(tabName))) {
+        await this.tabLocator(tabName).click();
+      }
+      await waitForNoSpinner(this.page);
+      expect(await this.isOpen(tabName)).toBe(true);
+    }).toPass();
   }
 
   private async HasContactInformationTabEnteredData(): Promise<boolean> {
