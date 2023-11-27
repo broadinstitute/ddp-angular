@@ -93,7 +93,7 @@ export default class KitUploadPage {
 
     if (bodyText.indexOf('Participant already has a kit') > -1 || bodyText.indexOf('do you really want to upload a kit?') > -1) {
       for (let dupKit = 0; dupKit < duplicatedKitsCount; dupKit++) {
-        await this.page.locator(this.modalBodyContentCheckboxesXPath).nth(dupKit).check();
+        await this.page.locator(this.modalBodyContentCheckboxesXPath).nth(dupKit).click();
       }
       await clickKitUploadBtn(btnLocator);
       return;
