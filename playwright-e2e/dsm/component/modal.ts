@@ -1,5 +1,6 @@
 import { Locator, Page } from '@playwright/test';
 import Button from 'dss/component/button';
+import Checkbox from 'dss/component/checkbox';
 import Input from 'dss/component/input';
 import Radiobutton from 'dss/component/radiobutton';
 import { waitForNoSpinner } from 'utils/test-utils';
@@ -53,5 +54,9 @@ export default class Modal {
 
   public getRadiobutton(label: string | RegExp): Radiobutton {
     return new Radiobutton(this.page, { label, root: this.toLocator() });
+  }
+
+  public getCheckbox(label: string | RegExp): Checkbox {
+    return new Checkbox(this.page, { label, root: this.toLocator() });
   }
 }

@@ -6,6 +6,8 @@ import {createTextFileSync, deleteFileSync} from 'utils/file-utils';
 import {KitUploadInfo} from 'dsm/pages/kitUpload-page/models/kitUpload-model';
 import {StudyEnum} from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import path from 'path';
+import Modal from 'dsm/component/modal';
+import {logInfo} from 'utils/log-utils';
 
 export default class KitUploadPage {
   private readonly PAGE_TITLE = 'Kit Upload';
@@ -48,15 +50,12 @@ export default class KitUploadPage {
     await response.finished();
     await waitForNoSpinner(this.page);
 
-    // Handle edge cases
-    try {
-      await expect(this.page.locator('h3')).toHaveText(/All participants were uploaded/, { timeout: 1000 });
-    } catch (e) {
-      await this.handleDuplicatedOrSpecialKits();
-    }
+    // Handle Upload modal window if it's displayed
+    await this.handleDuplicatedOrSpecialKits();
 
-    deleteFileSync(filePath);
+    await expect(this.page.locator('h3')).toHaveText(/All participants were uploaded/, { timeout: 1000 });
     await expect(this.uploadKitsBtn, 'Kit Upload page - "Upload Kits" button should be disabled.').not.toBeEnabled();
+    deleteFileSync(filePath);
   }
 
   /* Helper functions */
@@ -69,26 +68,38 @@ export default class KitUploadPage {
   }
 
   private async handleDuplicatedOrSpecialKits(): Promise<void> {
-    await expect(this.page.locator(this.modalContentXPath),
-      'Kit Upload page - Duplicated kits modal is not visible')
-      .toBeVisible();
-    await expect(this.page.locator(this.modalUploadKitBtnXPath),
-      'Kit Upload page - Upload Kit button is enabled')
-      .toBeDisabled();
-
-    const duplicatedKitsCount: number = await this.page.locator(this.modalBodyContentCheckboxesXPath).count();
-    for (let dupKit = 0; dupKit < duplicatedKitsCount; dupKit++) {
-      await this.page.locator(this.modalBodyContentCheckboxesXPath).nth(dupKit).click();
+    const clickKitUploadBtn = async (locator: Locator): Promise<void> => {
+      await expect(locator).toBeEnabled();
+      await Promise.all([
+        waitForResponse(this.page, {uri: '/kitUpload'}),
+        locator.click()
+      ]);
+      await waitForNoSpinner(this.page);
     }
-    const uploadKitButton = this.page.locator(this.modalUploadKitBtnXPath);
 
-    await expect(uploadKitButton, 'Kit Upload page - Upload Kit button is disabled').toBeEnabled();
+    const modal = new Modal(this.page);
+    try {
+      await expect(modal.toLocator()).toBeVisible({timeout: 5000});
+    } catch (err) {
+      return;
+    }
+    const btnLocator = modal.getButton({label: 'Upload Kit'}).toLocator();
+    const checkboxLocator = modal.bodyLocator().locator('xpath=//mat-checkbox');
+    const duplicatedKitsCount: number = await checkboxLocator.count();
 
-    await Promise.all([
-      waitForResponse(this.page, {uri: '/kitUpload'}),
-      uploadKitButton.click()
-    ]);
-    await waitForNoSpinner(this.page);
+    await expect(btnLocator).toBeDisabled();
+
+    const bodyText = await modal.getBodyText();
+    logInfo(`Kit Upload modal: ${bodyText}`);
+
+    if (bodyText.indexOf('Participant already has a kit') > -1 || bodyText.indexOf('do you really want to upload a kit?') > -1) {
+      for (let dupKit = 0; dupKit < duplicatedKitsCount; dupKit++) {
+        await checkboxLocator.nth(dupKit).check();
+      }
+      await clickKitUploadBtn(btnLocator);
+      return;
+    }
+    throw new Error(`Unexpected modal: ${bodyText}`);
   }
 
   /* Locators */
