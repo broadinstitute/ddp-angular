@@ -203,6 +203,8 @@ export class Filter {
     new NameValue('abandonedGP', 'Abandoned at GP'),
     new NameValue('failedPurity', 'Failed Purity'),
     new NameValue('externalPathFailed', 'External Path Review Failed'),
+    new NameValue('successClinicalTumor', 'Success - Clinical'),
+    new NameValue('successResearchTumor', 'Success - Research'),
     new NameValue('success', 'Success')
   ]);
   public static SCROLLS_COUNT = new Filter(ParticipantColumn.SCROLLS_COUNT, Filter.NUMBER_TYPE);
