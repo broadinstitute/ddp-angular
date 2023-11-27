@@ -84,8 +84,7 @@ export default class KitUploadPage {
       return;
     }
     const btnLocator = modal.getButton({label: 'Upload Kit'}).toLocator();
-    const checkboxLocator = modal.getCheckbox().toLocator();
-    const duplicatedKitsCount: number = await checkboxLocator.count();
+    const duplicatedKitsCount: number = await this.page.locator(this.modalBodyContentCheckboxesXPath).count();
 
     await expect(btnLocator).toBeDisabled();
 
@@ -94,7 +93,7 @@ export default class KitUploadPage {
 
     if (bodyText.indexOf('Participant already has a kit') > -1 || bodyText.indexOf('do you really want to upload a kit?') > -1) {
       for (let dupKit = 0; dupKit < duplicatedKitsCount; dupKit++) {
-        await checkboxLocator.nth(dupKit).check();
+        await this.page.locator(this.modalBodyContentCheckboxesXPath).nth(dupKit).check();
       }
       await clickKitUploadBtn(btnLocator);
       return;
@@ -170,6 +169,6 @@ export default class KitUploadPage {
   }
 
   private get modalBodyContentCheckboxesXPath(): string {
-    return `${this.modalContentXPath}/div[@class="modal-body"]/div[@class="app-modal-body"]/div/mat-checkbox`;
+    return `${this.modalContentXPath}/div[@class="modal-body"]//mat-checkbox`;
   }
 }
