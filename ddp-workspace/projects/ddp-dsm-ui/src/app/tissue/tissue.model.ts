@@ -33,4 +33,12 @@ export class Tissue {
       TissueSmId.parseArray(json.scrollSMID), TissueSmId.parseArray(json.ussSMID), TissueSmId.parseArray(json.heSMID),
       json.deleted);
   }
+
+  static makeNullTissue(): Tissue{
+    return new Tissue(null, null,null,null,null,null,
+      null,null,null,null,null,null,null,
+      null,null,null,null,null,null,null,
+      null,null,null,null,null,null,
+      null,null,null,null,null, false);
+  }
 }
