@@ -23,6 +23,7 @@ test.describe('GP Collection Date Permissions Test', () => {
     SamplesNavEnum.SENT, SamplesNavEnum.RECEIVED, SamplesNavEnum.SENT_RECEIVED_OVERVIEW,
     SamplesNavEnum.SEARCH, SamplesNavEnum.LABEL_SETTINGS, SamplesNavEnum.CLINICAL_ORDERS];
   let todaysKits: Locator[] = [];
+  let todaysMFBarcodes: string[] = [];
   let mfBarcode = '';
 
   for (const study of studies) {
@@ -63,20 +64,34 @@ test.describe('GP Collection Date Permissions Test', () => {
         await kitsSentPage.assertPageTitle();
         await kitsSentPage.assertDisplayedKitTypes(expectedKitTypes);
         await kitsSentPage.selectKitType(salivaKitType);
+        await kitsSentPage.rowsPerPage(50);
 
-        //Get the most recent mf barcodes to be used in Kit Search page
+        //Get the most recent mf barcodes (from within the last week) to be used in Kit Search page
         await kitsSentPage.sortColumn({ columnName: KitsColumnsEnum.SENT, startWithRecentDates: true });
         todaysKits = await kitsSentPage.getRecentMFBarcodes();
-        console.log(`Amount of kits today: ${todaysKits}`);
         for (const kits of todaysKits) {
-          console.log(`MF Barcode: ${(await kits.innerText()).trim()}`);
+          mfBarcode = (await kits.innerText()).trim();
+          todaysMFBarcodes.push(mfBarcode);
         }
       })
 
       await test.step(`Go to Kit Search page and select 'Search by mf barcode' and enter the barcode you copied and click on Search`, async () => {
-        /*await navigation.selectFromSamples(SamplesNavEnum.SEARCH);
+        await navigation.selectFromSamples(SamplesNavEnum.SEARCH);
         const kitsSearchPage = new SearchPage(page);
-        await kitsSearchPage.waitForReady();*/
+        await kitsSearchPage.waitForReady();
+
+        //Find a kit that does not have a collection date and fill it out
+        for (let index = 0; index < todaysMFBarcodes.length; index++) {
+          mfBarcode = todaysMFBarcodes[index];
+          await kitsSearchPage.searchByField(SearchByField.MANUFACTURE_BARCODE, mfBarcode);
+          const currentKit = page.locator('//app-field-datepicker//input');
+          const collectionDateField = await kitsSearchPage.getKitCollectionDate({ rowIndex: 1 });
+          console.log(`Collection Date Field input: ${collectionDateField}`);
+          if (collectionDateField === '') {
+            await kitsSearchPage.inputCollectionDate({ dateField: currentKit, useTodayDate: true });
+            break;
+          }
+        }
       })
 
       await test.step('Enter a collection date for the kit that shows up and click Submit', async () => {

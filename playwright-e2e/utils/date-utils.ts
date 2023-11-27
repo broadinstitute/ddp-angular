@@ -25,14 +25,12 @@ export function getDate(date?: Date): string {
 export function getDateMonthAbbreviated(dateString: string): string {
   const date = new Date(dateString);
   const newDate = date.toDateString();
-  console.log(`Date string: ${newDate}`);
   const dateParts = newDate.split(' ');//[0] is the day e.g. Mon, [1] is the shortened month e.g. Nov, [2] is the 2-digit day e.g. 20, [3] is the year e.g. 2023
   const shortenedMonth = dateParts[1];
   const day = dateParts[2];
   const year = dateParts[3];
   const formattedDay = day.concat(','); //To make Nov 20, 2023
   const resultDate = shortenedMonth.concat(' ', formattedDay, ' ', year);
-  console.log(`Result date: ${resultDate}`);
   return resultDate;
 }
 
