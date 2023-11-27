@@ -1,6 +1,8 @@
 import { expect, Locator, Page } from '@playwright/test';
+import Button from 'dss/component/button';
 import Input from 'dss/component/input';
 import { getDate } from 'utils/date-utils';
+import { waitForResponse } from 'utils/test-utils';
 
 export default class DatePicker {
   locator: Locator;
@@ -43,9 +45,24 @@ export default class DatePicker {
    * @param {{yyyy?: number, month?: number, dayOfMonth?: number}} opts
    * @returns {Promise<string>}
    */
-  public async pickDate(opts: { yyyy?: number, month?: number, dayOfMonth?: number } = {}): Promise<string> {
+  public async pickDate(opts: {
+    yyyy?: number,
+    month?: number,
+    dayOfMonth?: number,
+    isToday?: boolean,
+  } = {}): Promise<string> {
     const today = new Date();
-    const { yyyy = today.getFullYear(), month = today.getMonth(), dayOfMonth = today.getDate() } = opts;
+    const { yyyy = today.getFullYear(), month = today.getMonth(), dayOfMonth = today.getDate(), isToday = false } = opts;
+
+    const todayBtn = new Button(this.page, { root: this.toLocator(), exactMatch: true, label: 'Today' });
+    const isEnabled = await todayBtn.isVisible() && !(await todayBtn.isDisabled());
+    if (isToday && isEnabled) {
+      await Promise.all([
+        waitForResponse(this.page, { uri: 'patch' }),
+        todayBtn.click()
+      ]);
+      return `${yyyy}/${month}/${dayOfMonth}`;
+    }
 
     const selectDate = new Date(yyyy, month, dayOfMonth);
     const date = getDate(selectDate).split('/')[1]; // get date with a leading zero if date < 10
