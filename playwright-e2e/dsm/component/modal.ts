@@ -44,7 +44,7 @@ export default class Modal {
 
   public getButton(opts: { label?: string | RegExp; ddpTestID?: string }): Button {
     const { label, ddpTestID } = opts;
-    return new Button(this.page, { label, ddpTestID, root: this.bodyLocator() });
+    return new Button(this.page, { label, ddpTestID, root: this.toLocator() });
   }
 
   public getInput(opts: { label?: string | RegExp }): Input {
