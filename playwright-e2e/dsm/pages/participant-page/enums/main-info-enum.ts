@@ -14,9 +14,9 @@ export enum MainInfoEnum {
   DATE_OF_DIAGNOSIS = 'Date of Diagnosis',
   GENDER = 'Gender',
   PREFERRED_LANGUAGE = 'Preferred Language',
+  PARTICIPANT_ID = 'Participant ID',
   CONSENT_BLOOD = 'Consent Blood',
   CONSENT_TISSUE = 'Consent Tissue',
-  DDP = 'DDP',
   ASSIGNEE = 'Assignee',
   CURRENT_STATUS = 'Current Status',
 }
