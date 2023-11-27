@@ -79,7 +79,7 @@ test.describe.serial('Medical records request workflow', () => {
 
         const rowCount = await participantListTable.getRowsCount();
         for (let i = 0; i < rowCount; i++) {
-          const initialMRReceivedDate = await participantListTable.getRowText(i, initialMRReceivedColumn);
+          const [initialMRReceivedDate] = await participantListTable.getTextAt(i, initialMRReceivedColumn);
           if (initialMRReceivedDate.trim().length === 0) {
             // this participant does not have Initial MR Received date
             rowIndex = i;

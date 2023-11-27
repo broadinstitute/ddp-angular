@@ -37,9 +37,10 @@ export default class Checkbox extends WidgetBase {
   async check(opts: { timeout?: number, callback?: () => any } = {}): Promise<void> {
     const { timeout, callback } = opts;
     const isChecked = await this.isChecked();
+    const callbackPromise = callback ? callback() : Promise.resolve();
     if (!isChecked) {
       await Promise.all([
-        callback && callback(),
+        callbackPromise,
         this.toLocator().click(),
         expect(this.toLocator()).toHaveClass(/checkbox-checked/, { timeout })
       ]);
@@ -50,8 +51,9 @@ export default class Checkbox extends WidgetBase {
     const { callback } = opts;
     const isChecked = await this.isChecked();
     if (isChecked) {
+      const callbackPromise = callback ? callback() : Promise.resolve();
       await Promise.all([
-        callback && callback(),
+        callbackPromise,
         this.toLocator().click(),
         expect(this.toLocator()).not.toHaveClass(/checkbox-checked/)
       ]);
