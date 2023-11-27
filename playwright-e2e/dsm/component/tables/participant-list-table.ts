@@ -81,11 +81,11 @@ export class ParticipantListTable extends Table {
       await customizeViewPanel.deselectColumns('Participant Info Columns', ['First Name']);
     }
 
-    //First filter the participant list to only show participants registered within the past week
+    //First filter the participant list to only show participants registered within the past two weeks
     const searchPanel = participantListPage.filters.searchPanel;
     await searchPanel.open();
     const today = getDate(new Date());
-    const previousWeek = offsetDaysFromToday(7);
+    const previousWeek = offsetDaysFromToday(2 * 7);
     await searchPanel.dates('Registration Date', { from: previousWeek, to: today, additionalFilters: [AdditionalFilter.RANGE] });
 
     //Also make sure to conduct the search for participants with the given first name of the automated participant

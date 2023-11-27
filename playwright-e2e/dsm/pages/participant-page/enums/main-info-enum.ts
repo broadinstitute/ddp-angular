@@ -1,4 +1,5 @@
 export enum MainInfoEnum {
+  DDP = 'DDP',
   STATUS = 'Status',
   REGISTRATION_DATE = 'Registration Date',
   SHORT_ID = 'Short ID',
@@ -10,5 +11,6 @@ export enum MainInfoEnum {
   DATE_OF_BIRTH = 'Date of Birth',
   DATE_OF_DIAGNOSIS = 'Date of Diagnosis',
   GENDER = 'Gender',
-  PREFERRED_LANGUAGE = 'Preferred Language'
+  PREFERRED_LANGUAGE = 'Preferred Language',
+  PARTICIPANT_ID = 'Participant ID',
 }

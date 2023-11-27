@@ -25,6 +25,7 @@ import { SMIdEnum, TissueDynamicFieldsEnum } from 'dsm/pages/tissue/enums/tissue
 import KitsReceivedPage from 'dsm/pages/kitsInfo-pages/kitsReceived-page/kitsReceivedPage';
 import { AdditionalFilter } from 'dsm/component/filters/sections/search/search-enums';
 import crypto from 'crypto';
+import { logInfo } from 'utils/log-utils';
 
 test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
   const studies = [StudyEnum.LMS]; //Only clinical (pecgs) studies get this event
@@ -55,7 +56,7 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
 
       //Prep the Saliva kit
       shortID = await findParticipantForGermlineConsentCreation(participantListPage, study);
-      console.log(`Chosen short id: ${shortID}`);
+      logInfo(`Chosen short id: ${shortID}`);
       kitLabel = await prepareSentKit(shortID, KitTypeEnum.SALIVA, study, page, request, testInfo);
 
       //Get the Participant Page of the chosen test participant
@@ -160,7 +161,7 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
 
       //Prep the Blood kit
       shortID = await findParticipantForGermlineConsentCreation(participantListPage, study);
-      console.log(`Chosen short id: ${shortID}`);
+      logInfo(`Chosen short id: ${shortID}`);
       kitLabel = await prepareSentKit(shortID, KitTypeEnum.BLOOD, study, page, request, testInfo);
 
       //Get the Participant Page of the chosen test participant
@@ -265,7 +266,7 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
 
       //Prep the Saliva kit
       shortID = await findParticipantForGermlineConsentCreation(participantListPage, study);
-      console.log(`Chosen short id: ${shortID}`);
+      logInfo(`Chosen short id: ${shortID}`);
       kitLabel = await prepareSentKit(shortID, KitTypeEnum.SALIVA, study, page, request, testInfo);
 
       //Get the Participant Page of the chosen test participant
@@ -370,7 +371,7 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
 
       //Prep the Blood kit
       shortID = await findParticipantForGermlineConsentCreation(participantListPage, study);
-      console.log(`Chosen short id: ${shortID}`);
+      logInfo(`Chosen short id: ${shortID}`);
       kitLabel = await prepareSentKit(shortID, KitTypeEnum.BLOOD, study, page, request, testInfo);
 
       //Get the Participant Page of the chosen test participant

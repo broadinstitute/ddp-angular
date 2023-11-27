@@ -20,6 +20,14 @@ const fixtureForLimitedPermissions = base.extend<Fixtures>({
   }
 });
 
+// Use this for general DSM tests with limited permissions
+const fixtureForGeneralTesting = base.extend<Fixtures>({
+  page: async ({ page }, use) => {
+    await login(page, {email: DSM_USER2_EMAIL, password: DSM_USER2_PASSWORD});
+    await use(page);
+  }
+});
+
 const fixtureForGPCollectionDateTest = base.extend<Fixtures>({
   page: async ({ page }, use) => {
     await login(page, {email: DSM_USER3_EMAIL, password: DSM_USER3_PASSWORD});
@@ -29,4 +37,5 @@ const fixtureForGPCollectionDateTest = base.extend<Fixtures>({
 
 export const test = fixture;
 export const testLimitedPermissions = fixtureForLimitedPermissions;
+export const testWithUser2 = fixtureForGeneralTesting;
 export const testGPCollectionDate = fixtureForGPCollectionDateTest;

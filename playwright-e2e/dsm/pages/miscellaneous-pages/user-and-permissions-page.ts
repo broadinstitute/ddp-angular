@@ -117,13 +117,12 @@ export default class UserPermissionPage {
     }
   }
 
-  private getPermissionCheckbox(studyAdmin: Locator, permission: UserPermission, forSelection?: boolean): Locator {
+  public getPermissionCheckbox(studyAdmin: Locator, permission: UserPermission, forSelection?: boolean): Locator {
     const permissionName = permission as string;
-    console.log(`Permission Name: ${permissionName}`);
     if (forSelection) {
-      return studyAdmin.locator(`//ancestor::mat-expansion-panel//app-permission-checkbox[contains(.,'${permissionName}')]//div`)
+      return studyAdmin.locator(`//ancestor::mat-expansion-panel//app-permission-checkbox[normalize-space()="${permissionName}"]//div`)
     }
-    return studyAdmin.locator(`//ancestor::mat-expansion-panel//app-permission-checkbox[contains(.,'${permissionName}')]//input`);
+    return studyAdmin.locator(`//ancestor::mat-expansion-panel//app-permission-checkbox[normalize-space()="${permissionName}"]//input`);
   }
 
   public async getStudyAdminName(name: string): Promise<string> {
