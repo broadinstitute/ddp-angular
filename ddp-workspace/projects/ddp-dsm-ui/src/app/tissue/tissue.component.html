@@ -383,7 +383,9 @@
           <mat-option value="abandonedGP">Abandoned at GP</mat-option>
           <mat-option value="failedPurity">Failed Purity</mat-option>
           <mat-option value="externalPathFailed">External Path Review Failed</mat-option>
-          <mat-option value="success">Success</mat-option>
+          <mat-option value="successClinicalTumor">Success - Clinical</mat-option>
+          <mat-option value="successResearchTumor">Success - Research</mat-option>
+          <mat-option value="success" [disabled]="true">Success</mat-option>
           <mat-option value=""></mat-option>
         </mat-select>
       </td>
