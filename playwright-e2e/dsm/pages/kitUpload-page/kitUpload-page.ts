@@ -33,7 +33,7 @@ export default class KitUploadPage {
   }
 
   public async uploadFile(kitType: KitTypeEnum, kitInfo: KitUploadInfo[], study: StudyEnum, testResultDir?: string) {
-    await expect(this.uploadKitsBtn, 'Kit Upload page - Upload Kits button is disabled').toBeEnabled();
+    await expect(this.uploadKitsBtn, 'Kit Upload page - Upload Kits button should be disabled.').not.toBeEnabled();
 
     // Prepare upload file
     const dir = testResultDir ? testResultDir : __dirname;
