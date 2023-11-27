@@ -15,9 +15,6 @@ test.describe('GP Collection Date Permissions Test', () => {
   const expectedKitTypes = [KitTypeEnum.BLOOD, KitTypeEnum.SALIVA];
   const expectedAvailableMenuItems = [MainMenuEnum.SELECTED_STUDY, MainMenuEnum.SAMPLES];
   const salivaKitType = KitTypeEnum.SALIVA; //Saliva kits are usually automatically created, so there'll be more of these to use for testing compared to blood kits
-  const mfBarcodeIndex = 6;
-  const collectionDateIndex = 12;
-  //const todaysMFBarcodes: string[] = [];
   const expectedSampleMenuItems = [SamplesNavEnum.UNSENT_KITS_OVERVIEW, SamplesNavEnum.REPORT,
     SamplesNavEnum.SUMMARY, SamplesNavEnum.KITS_WITHOUT_LABELS, SamplesNavEnum.QUEUE, SamplesNavEnum.ERROR,
     SamplesNavEnum.INITIAL_SCAN, SamplesNavEnum.TRACKING_SCAN, SamplesNavEnum.FINAL_SCAN, SamplesNavEnum.RGP_FINAL_SCAN,
@@ -29,6 +26,7 @@ test.describe('GP Collection Date Permissions Test', () => {
     test(`${study} - GP Collection Date Permissions Test`, async ({ page, request }) => {
       const navigation = new Navigation(page, request);
       const todaysMFBarcodes: string[] = [];
+      let currentKit: Locator;
 
       await test.step('Create a user or use an existing one that only has kit_shipping permissions in pecgs [study group]', async () => {
         //Select the study (either LMS or OS PE-CGS)
@@ -85,11 +83,10 @@ test.describe('GP Collection Date Permissions Test', () => {
           const mfBarcode = todaysMFBarcodes[index];
           console.log(`MF Barcode: ${mfBarcode}`);
           await kitsSearchPage.searchByField(SearchByField.MANUFACTURE_BARCODE, mfBarcode);
-          const currentKit = page.locator('//app-field-datepicker//input');
+          currentKit = page.locator('//app-field-datepicker//input');
           const collectionDateField = await kitsSearchPage.getKitCollectionDate({ rowIndex: 1 });
           console.log(`Collection Date Field input: ${collectionDateField}`);
           if (collectionDateField === '') {
-            await kitsSearchPage.inputCollectionDate({ dateField: currentKit, useTodayDate: true });
             break;
           }
           await page.reload();
@@ -98,6 +95,8 @@ test.describe('GP Collection Date Permissions Test', () => {
 
       await test.step('Enter a collection date for the kit that shows up and click Submit', async () => {
         //Stuff here
+        const kitsSearchPage = new SearchPage(page);
+        await kitsSearchPage.inputCollectionDate({ dateField: currentKit, useTodayDate: true });
       })
     })
   }
