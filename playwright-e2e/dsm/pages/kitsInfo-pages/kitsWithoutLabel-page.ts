@@ -118,6 +118,15 @@ export default class KitsWithoutLabelPage {
     return true;
   }
 
+  public async clickCreateLabels(): Promise<void> {
+    await Promise.all([
+      waitForResponse(this.page, { uri: '/kitLabel' }),
+      this.createLabelsButton.click()
+    ]);
+    await waitForNoSpinner(this.page);
+    await expect(this.page.locator('h3')).toHaveText(/Triggered label creation/i);
+  }
+
   /* Assertions */
   public async assertPageTitle(): Promise<void> {
     await expect(this.page.locator('h1'),

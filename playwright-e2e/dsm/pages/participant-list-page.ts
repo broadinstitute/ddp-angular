@@ -9,10 +9,12 @@ import { shuffle, waitForNoSpinner, waitForResponse } from 'utils/test-utils';
 import { Filters } from 'dsm/component/filters/filters';
 import { ParticipantListTable } from 'dsm/component/tables/participant-list-table';
 import { SortOrder } from 'dss/component/table';
+import QuickFilters from 'dsm/component/filters/quick-filters';
 
 export default class ParticipantListPage {
   private readonly PAGE_TITLE: string = 'Participant List';
   private readonly _filters: Filters = new Filters(this.page);
+  private readonly _quickFilters: QuickFilters = new QuickFilters(this.page);
   private readonly _table: ParticipantListTable = new ParticipantListTable(this.page);
 
   static async goto(page: Page, study: string, request: APIRequestContext): Promise<ParticipantListPage> {
@@ -50,6 +52,10 @@ export default class ParticipantListPage {
     return this._filters;
   }
 
+  public get quickFilters(): QuickFilters {
+    return this._quickFilters;
+  }
+
   public get participantListTable(): ParticipantListTable {
     return this._table;
   }
@@ -82,7 +88,7 @@ export default class ParticipantListPage {
     await waitForNoSpinner(this.page);
   }
 
-  public async saveNewView(viewName: string): Promise<void> {
+  public async saveCurrentView(viewName: string): Promise<void> {
     const saveButton = this.page.locator('button').filter({ has: this.page.locator('[data-icon="save"]')});
     await saveButton.click();
 

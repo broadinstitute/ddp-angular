@@ -210,7 +210,6 @@ test.describe('Blood & RNA Kit Upload', () => {
     const kitsReceivedPage = await navigation.selectFromSamples<KitsReceivedPage>(SamplesNavEnum.RECEIVED);
     await kitsReceivedPage.waitForLoad();
     await kitsReceivedPage.assertPageTitle();
-    console.log(`MF Code used for receiving kit request: ${kitLabel}`);
     await kitsReceivedPage.kitReceivedRequestForRGPKits(kitLabel, shortID); //Mark the blood & rna kit as received
     await kitsReceivedPage.kitReceivedRequestForRGPKits(rnaLabel, shortID); //Mark the kit with the rna label as received
     await kitsReceivedPage.assertDisplayedKitTypes(expectedKitTypes);

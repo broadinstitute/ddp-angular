@@ -18,7 +18,6 @@ import ErrorPage from 'dsm/pages/samples/error-page';
 import FinalScanPage from 'dsm/pages/scanner-pages/finalScan-page';
 import { WelcomePage } from 'dsm/pages/welcome-page';
 import { logInfo } from 'utils/log-utils';
-import { waitForResponse } from 'utils/test-utils';
 import InitialScanPage from 'dsm/pages/scanner-pages/initialScan-page';
 
 /**
@@ -139,17 +138,11 @@ test.describe.serial('Saliva Kit Upload with a Canadian or New York address', ()
         await kitsTable.searchByColumn(KitsColumnsEnum.SHORT_ID, shortID);
         await expect(kitsTable.rowLocator()).toHaveCount(1);
         shippingID = (await kitsTable.getRowText(0, KitsColumnsEnum.SHIPPING_ID)).trim();
+        expect(shippingID?.length).toBeTruthy();
+        logInfo(`shippingID: ${shippingID}`);
 
         await kitsTable.selectSingleRowByIndex();
-        await Promise.all([
-          waitForResponse(page, { uri: '/kitLabel' }),
-          kitsWithoutLabelPage.createLabelsButton.click()
-        ]);
-        await Promise.all([
-          expect(page.locator('[data-icon="cog"]')).toBeVisible(),
-          expect(page.locator('h3')).toHaveText(/Triggered label creation/i)
-        ]);
-        logInfo(`shippingID: ${shippingID}`);
+        await kitsWithoutLabelPage.clickCreateLabels();
       });
 
       // New kit will be listed on Error page because address is in either Canada or New York
