@@ -113,7 +113,7 @@ export class ParticipantListTable extends Table {
   }
 
   private getParticipantAt(position: number): Locator {
-    return this.page.locator(`//table/tbody/tr`).nth(position);
+    return this.page.locator('//table/tbody/tr').nth(position);
   }
 
   /* Locators */

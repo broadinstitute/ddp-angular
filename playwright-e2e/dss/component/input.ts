@@ -52,7 +52,7 @@ export default class Input extends WidgetBase {
     if (existValue !== value) {
       const autocomplete = await this.getAttribute('aria-autocomplete');
       useType
-        ? await this.toLocator().type(value as string, { delay: 200 })
+        ? await this.toLocator().pressSequentially(value as string, { delay: 200 })
         : await this.toLocator().fill(value as string);
 
       const expanded = await this.getAttribute('aria-expanded');
