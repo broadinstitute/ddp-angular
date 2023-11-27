@@ -19,6 +19,7 @@ export default class SearchPage {
 
   async searchByField(searchField: SearchByField, value: string): Promise<Table> {
     const select = new Select(this.page, { label: 'Search by Field', root: 'app-shipping-search' });
+    console.log(`Search field used: ${searchField}`);
     await select.selectOption(searchField);
     const locator = this.page.locator('//div[button[normalize-space()="Search Kit"]]');
     await locator.locator('//input').fill(value);
@@ -39,7 +40,7 @@ export default class SearchPage {
   async getKitCollectionDate(opts: {rowIndex?: number}): Promise<string> {
     const { rowIndex = 1 } = opts;
     const collectionDateField = this.page.locator(`//app-field-datepicker//input[${rowIndex}]`);
-    const collectionDate = (await collectionDateField.innerText()).trim();
+    const collectionDate = (await collectionDateField.inputValue()).trim();
     return collectionDate;
   }
 

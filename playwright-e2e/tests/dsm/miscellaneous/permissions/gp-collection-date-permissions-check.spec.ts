@@ -17,18 +17,18 @@ test.describe('GP Collection Date Permissions Test', () => {
   const salivaKitType = KitTypeEnum.SALIVA; //Saliva kits are usually automatically created, so there'll be more of these to use for testing compared to blood kits
   const mfBarcodeIndex = 6;
   const collectionDateIndex = 12;
+  //const todaysMFBarcodes: string[] = [];
   const expectedSampleMenuItems = [SamplesNavEnum.UNSENT_KITS_OVERVIEW, SamplesNavEnum.REPORT,
     SamplesNavEnum.SUMMARY, SamplesNavEnum.KITS_WITHOUT_LABELS, SamplesNavEnum.QUEUE, SamplesNavEnum.ERROR,
     SamplesNavEnum.INITIAL_SCAN, SamplesNavEnum.TRACKING_SCAN, SamplesNavEnum.FINAL_SCAN, SamplesNavEnum.RGP_FINAL_SCAN,
     SamplesNavEnum.SENT, SamplesNavEnum.RECEIVED, SamplesNavEnum.SENT_RECEIVED_OVERVIEW,
     SamplesNavEnum.SEARCH, SamplesNavEnum.LABEL_SETTINGS, SamplesNavEnum.CLINICAL_ORDERS];
   let todaysKits: Locator[] = [];
-  let todaysMFBarcodes: string[] = [];
-  let mfBarcode = '';
 
   for (const study of studies) {
     test(`${study} - GP Collection Date Permissions Test`, async ({ page, request }) => {
       const navigation = new Navigation(page, request);
+      const todaysMFBarcodes: string[] = [];
 
       await test.step('Create a user or use an existing one that only has kit_shipping permissions in pecgs [study group]', async () => {
         //Select the study (either LMS or OS PE-CGS)
@@ -70,7 +70,7 @@ test.describe('GP Collection Date Permissions Test', () => {
         await kitsSentPage.sortColumn({ columnName: KitsColumnsEnum.SENT, startWithRecentDates: true });
         todaysKits = await kitsSentPage.getRecentMFBarcodes();
         for (const kits of todaysKits) {
-          mfBarcode = (await kits.innerText()).trim();
+          const mfBarcode = (await kits.innerText()).trim();
           todaysMFBarcodes.push(mfBarcode);
         }
       })
@@ -82,7 +82,8 @@ test.describe('GP Collection Date Permissions Test', () => {
 
         //Find a kit that does not have a collection date and fill it out
         for (let index = 0; index < todaysMFBarcodes.length; index++) {
-          mfBarcode = todaysMFBarcodes[index];
+          const mfBarcode = todaysMFBarcodes[index];
+          console.log(`MF Barcode: ${mfBarcode}`);
           await kitsSearchPage.searchByField(SearchByField.MANUFACTURE_BARCODE, mfBarcode);
           const currentKit = page.locator('//app-field-datepicker//input');
           const collectionDateField = await kitsSearchPage.getKitCollectionDate({ rowIndex: 1 });
@@ -91,6 +92,7 @@ test.describe('GP Collection Date Permissions Test', () => {
             await kitsSearchPage.inputCollectionDate({ dateField: currentKit, useTodayDate: true });
             break;
           }
+          await page.reload();
         }
       })
 
