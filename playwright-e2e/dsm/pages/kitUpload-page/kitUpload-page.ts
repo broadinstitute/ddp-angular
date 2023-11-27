@@ -5,9 +5,9 @@ import {waitForNoSpinner, waitForResponse} from 'utils/test-utils';
 import {createTextFileSync, deleteFileSync} from 'utils/file-utils';
 import {KitUploadInfo} from 'dsm/pages/kitUpload-page/models/kitUpload-model';
 import {StudyEnum} from 'dsm/component/navigation/enums/selectStudyNav-enum';
-import {KitUploadResponse} from 'dsm/pages/kitUpload-page/interfaces/kitUpload';
-import {kitUploadResponseEnum} from 'dsm/pages/kitUpload-page/enums/kitUploadResponse-enum';
 import path from 'path';
+import Modal from 'dsm/component/modal';
+import {logInfo} from 'utils/log-utils';
 
 export default class KitUploadPage {
   private readonly PAGE_TITLE = 'Kit Upload';
@@ -35,21 +35,26 @@ export default class KitUploadPage {
   }
 
   public async uploadFile(kitType: KitTypeEnum, kitInfo: KitUploadInfo[], study: StudyEnum, testResultDir?: string) {
+    await expect(this.uploadKitsBtn, 'Kit Upload page - Upload Kits button should be disabled.').not.toBeEnabled();
+
+    // Prepare upload file
     const dir = testResultDir ? testResultDir : __dirname;
     const filePath = path.join(dir, `${kitType}_${study}-${new Date().getTime()}.txt`);
     createTextFileSync(dir, filePath, this.T_HEAD + this.createKitUploadBody(kitInfo));
     await this.fileInput.setInputFiles(filePath);
 
-    await expect(this.uploadKitsBtn, 'Kit Upload page - Upload Kits button is disabled').toBeEnabled();
-
+    // Wait for upload to finish
+    const respPromise = this.page.waitForResponse((resp: Response) => resp.url().includes('kitUpload'), { timeout: 50 * 1000});
     await this.uploadKitsBtn.click();
-    await this.handleKitUploadResponse();
+    const response = await respPromise;
+    await response.finished();
     await waitForNoSpinner(this.page);
 
-    expect(await this.page.locator('h3')
-      .textContent(), "Kit Upload page - Couldn't upload kits - something went wrong")
-      .toBe('All participants were uploaded.');
+    // Handle Upload modal window if it's displayed
+    await this.handleDuplicatedOrSpecialKits();
 
+    await expect(this.page.locator('h3')).toHaveText(/All participants were uploaded/, { timeout: 1000 });
+    await expect(this.uploadKitsBtn, 'Kit Upload page - "Upload Kits" button should be disabled.').not.toBeEnabled();
     deleteFileSync(filePath);
   }
 
@@ -62,44 +67,38 @@ export default class KitUploadPage {
     }).join();
   }
 
-  private async waitForKitUploadResponse(): Promise<Response> {
-    return await waitForResponse(this.page, {uri: '/kitUpload'});
-  }
-
-  private async handleKitUploadResponse(): Promise<void> {
-    const response = await this.waitForKitUploadResponse();
-    const responseBody: KitUploadResponse = JSON.parse(await response.text());
-
-    for (const [key, value] of Object.entries(responseBody)) {
-      if (value instanceof Array && value.length) {
-        if (key === kitUploadResponseEnum.INVALID_KIT_ADDRESS_LIST) {
-          throw new Error('Invalid kit addresses array is not empty');
-        } else {
-          await this.handleDuplicatedOrSpecialKits();
-        }
-      }
-    }
-  }
-
   private async handleDuplicatedOrSpecialKits(): Promise<void> {
-    await expect(this.page.locator(this.modalContentXPath),
-      'Kit Upload page - Duplicated kits modal is not visible')
-      .toBeVisible();
-    await expect(this.page.locator(this.modalUploadKitBtnXPath),
-      'Kit Upload page - Upload Kit button is enabled')
-      .toBeDisabled();
-
-    const duplicatedKitsCount: number = await this.page.locator(this.modalBodyContentCheckboxesXPath).count();
-    for (let dupKit = 0; dupKit < duplicatedKitsCount; dupKit++) {
-      await this.page.locator(this.modalBodyContentCheckboxesXPath).nth(dupKit).click();
+    const clickKitUploadBtn = async (locator: Locator): Promise<void> => {
+      await expect(locator).toBeEnabled();
+      await Promise.all([
+        waitForResponse(this.page, {uri: '/kitUpload'}),
+        locator.click()
+      ]);
+      await waitForNoSpinner(this.page);
     }
-    const uploadKitButton = this.page.locator(this.modalUploadKitBtnXPath);
 
-    await expect(uploadKitButton, 'Kit Upload page - Upload Kit button is disabled').toBeEnabled();
+    const modal = new Modal(this.page);
+    try {
+      await expect(modal.toLocator()).toBeVisible({timeout: 5000});
+    } catch (err) {
+      return;
+    }
+    const btnLocator = modal.getButton({label: 'Upload Kit'}).toLocator();
+    const duplicatedKitsCount: number = await this.page.locator(this.modalBodyContentCheckboxesXPath).count();
 
-    await uploadKitButton.click();
-    await this.waitForKitUploadResponse();
-    await waitForNoSpinner(this.page);
+    await expect(btnLocator).toBeDisabled();
+
+    const bodyText = await modal.getBodyText();
+    logInfo(`Kit Upload modal: ${bodyText}`);
+
+    if (bodyText.indexOf('Participant already has a kit') > -1 || bodyText.indexOf('do you really want to upload a kit?') > -1) {
+      for (let dupKit = 0; dupKit < duplicatedKitsCount; dupKit++) {
+        await this.page.locator(this.modalBodyContentCheckboxesXPath).nth(dupKit).click();
+      }
+      await clickKitUploadBtn(btnLocator);
+      return;
+    }
+    throw new Error(`Unexpected modal: ${bodyText}`);
   }
 
   /* Locators */
@@ -108,7 +107,7 @@ export default class KitUploadPage {
   }
 
   private get uploadKitsBtn(): Locator {
-    return this.page.locator('//button[.//span[text()[normalize-space()=\'Upload Kits\']]]');
+    return this.page.locator('//button[.//span[text()[normalize-space()="Upload Kits"]]]');
   }
 
   /* Assertions */
@@ -119,9 +118,9 @@ export default class KitUploadPage {
   }
 
   public async assertInstructionSnapshot() {
-    expect(await this.page.locator(this.uploadInstructionsXPath).screenshot(),
+    await expect(this.page.locator(this.uploadInstructionsXPath),
       "Kit Upload page - Kit upload instructions screenshot doesn't match the provided one")
-      .toMatchSnapshot('upload_instructions.png');
+      .toHaveScreenshot('upload_instructions.png');
   }
 
   public async assertDisplayedKitTypes(kitTypes: KitTypeEnum[]): Promise<void> {
@@ -133,14 +132,14 @@ export default class KitUploadPage {
   }
 
   public async assertBrowseBtn(): Promise<void> {
-    await expect(this.page.locator('//label[text()[normalize-space()=\'Browse...\']][@class=\'label-button\']'),
-      'Kit Upload page - Browse button is not visible')
+    await expect(this.page.locator('//label[text()[normalize-space()="Browse..."]][@class="label-button"]'),
+      'Kit Upload page - Browse... button should be visible.')
       .toBeVisible();
   }
 
   public async assertUploadKitsBtn(): Promise<void> {
     await expect(this.page.getByText('Upload Kits'),
-      'Kit Upload page - Kit Uploads button is not visible')
+      'Kit Upload page - Kit Uploads button should be visible.')
       .toBeVisible();
   }
 
@@ -154,26 +153,22 @@ export default class KitUploadPage {
 
   /* XPaths */
   private get uploadInstructionsXPath(): string {
-    return "//div[./b[text()[normalize-space()='Upload instructions:']]]"
+    return '//div[./b[text()[normalize-space()="Upload instructions:"]]]';
   }
 
   private get modalContentXPath(): string {
-    return "//div[@class='modal fade in']//div[@class='modal-content']"
-  }
-
-  private get modalHeaderXPath(): string {
-    return `${this.modalContentXPath}//div[@class='modal-header']`
+    return '//div[@class="modal fade in"]//div[@class="modal-content"]';
   }
 
   private get modalFooterXPath(): string {
-    return `${this.modalContentXPath}//div[@class='modal-footer']`
+    return `${this.modalContentXPath}//div[@class="modal-footer"]`;
   }
 
   private get modalUploadKitBtnXPath(): string {
-    return `${this.modalFooterXPath}//button[text()[normalize-space()='Upload Kit']]`
+    return `${this.modalFooterXPath}//button[text()[normalize-space()="Upload Kit"]]`;
   }
 
   private get modalBodyContentCheckboxesXPath(): string {
-    return `${this.modalContentXPath}/div[@class='modal-body']/div[@class='app-modal-body']/div/mat-checkbox`
+    return `${this.modalContentXPath}/div[@class="modal-body"]//mat-checkbox`;
   }
 }
