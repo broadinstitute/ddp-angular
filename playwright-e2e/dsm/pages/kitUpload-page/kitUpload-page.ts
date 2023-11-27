@@ -47,7 +47,6 @@ export default class KitUploadPage {
     const response = await respPromise;
     await response.finished();
     await waitForNoSpinner(this.page);
-    await expect(this.uploadKitsBtn, 'Kit Upload page - "Upload Kits" button should be disabled.').not.toBeEnabled();
 
     // Handle edge cases
     try {
@@ -55,7 +54,9 @@ export default class KitUploadPage {
     } catch (e) {
       await this.handleDuplicatedOrSpecialKits();
     }
+
     deleteFileSync(filePath);
+    await expect(this.uploadKitsBtn, 'Kit Upload page - "Upload Kits" button should be disabled.').not.toBeEnabled();
   }
 
   /* Helper functions */
