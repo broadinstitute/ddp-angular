@@ -69,14 +69,14 @@ export default class KitsWithoutLabelPage {
       await expect(async () => {
         await this.reloadKitList();
         await expect(pendingKit).not.toBeVisible();
-      }).toPass({ timeout: 90 * 1000 });
+      }).toPass({ timeout: 5 * 60 * 1000 });
     }
   }
 
   public async reloadKitList(): Promise<void> {
     const reloadKitListButton = this.page.locator(this.reloadKitListBtnXPath);
     await reloadKitListButton.click();
-    await waitForNoSpinner(this.page);
+    await waitForNoSpinner(this.page, { timeout: 2 * 60 * 1000 });
   }
 
   public async search(columnName: KitsColumnsEnum, value: string): Promise<void> {
