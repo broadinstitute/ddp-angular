@@ -6,7 +6,7 @@ import {waitForNoSpinner, waitForResponse} from 'utils/test-utils';
 import {KitsColumnsEnum} from 'dsm/pages/kitsInfo-pages/enums/kitsColumns-enum';
 import {assertTableHeaders} from 'utils/assertion-helper';
 import {rows} from 'lib/component/dsm/paginators/types/rowsPerPage';
-import { getDate, offsetDaysFromToday } from 'utils/date-utils';
+import { getDate, getDateMonthAbbreviated, offsetDaysFromToday } from 'utils/date-utils';
 
 export default class KitsSentPage {
   private readonly PAGE_TITLE = 'Kits Sent';
@@ -82,17 +82,34 @@ export default class KitsSentPage {
 
   public async getRecentMFBarcodes(): Promise<Locator[]> {
     const today = getDate().trim();
-    const yesterday = getDate(offsetDaysFromToday(1, { isAdd: false })).trim();
-    console.log(`Yesterday: ${yesterday}`);
-    console.log(`Today: ${today}`);
+    const todayFormatted = getDateMonthAbbreviated(today);
+    const aWeekAgo = getDate(offsetDaysFromToday(7, { isAdd: false })).trim();
+    const aWeekAgoFormatted = getDateMonthAbbreviated(aWeekAgo);
+    console.log(`A week ago: ${aWeekAgoFormatted}`);
+    console.log(`Today: ${todayFormatted}`);
+    let kitsFromToday: Locator[] = [];
+    let kitsFromAWeekAgo: Locator[] = [];
+    let totalAmountOfRecentKits = 0;
 
-    const todayKits = await this.page.
-      locator(`//app-shipping//table//td[${this.sentColumnIndex}][contains(.,'${today}')]/following-sibling::td[${this.mfBarcodeIndex}]`).all();
-    const yesterdayKits = await this.page.
-    locator(`//app-shipping//table//td[${this.sentColumnIndex}][contains(.,'${yesterday}')]/following-sibling::td[${this.mfBarcodeIndex}]`).all();
+    await expect(async () => {
+      kitsFromToday = await this.page.
+        locator(`//app-shipping//table//td[${this.sentColumnIndex}][contains(.,'${todayFormatted}')]/following-sibling::td[${this.mfBarcodeIndex}]`).
+        all();
+      kitsFromAWeekAgo = await this.page.
+        locator(`//app-shipping//table//td[${this.sentColumnIndex}][contains(.,'${aWeekAgoFormatted}')]` +
+        `/following-sibling::td[${this.mfBarcodeIndex}]`).all();
+      const amountOfTodayKits = kitsFromToday.length;
+      const amountOfYesterdayKits = kitsFromAWeekAgo.length;
+      totalAmountOfRecentKits = amountOfTodayKits + amountOfYesterdayKits;
+      console.log(`Total amount of recent kits: ${totalAmountOfRecentKits}`);
+      expect(totalAmountOfRecentKits).toBeGreaterThanOrEqual(1);
+    }).toPass({
+      intervals: [5_000],
+      timeout: 30_000
+    });
 
-    const recentKits = todayKits.concat(yesterdayKits);
-    expect(todayKits, `No kits have been sent out between ${yesterday} - ${today}`).toBeTruthy();
+    const recentKits = kitsFromToday.concat(kitsFromAWeekAgo);
+    expect(recentKits, `No kits have been sent out between ${aWeekAgo} and ${today}`).toBeTruthy();
     return recentKits;
   }
 
