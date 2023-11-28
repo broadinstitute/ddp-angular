@@ -3,7 +3,7 @@ import { test } from 'fixtures/dsm-fixture';
 import { AdditionalFilter, CustomViewColumns } from 'dsm/component/filters/sections/search/search-enums';
 import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
-import { assertDateFormat } from 'utils/test-utils';
+import { assertDateFormat, waitForResponse } from 'utils/test-utils';
 import { logInfo } from 'utils/log-utils';
 import ParticipantPage from 'dsm/pages/participant-page/participant-page';
 import { TabEnum } from 'dsm/component/tabs/enums/tab-enum';
@@ -30,7 +30,7 @@ test.describe.serial('Medical records request workflow', () => {
   ];
 
   // Two CMI Clinical and two CMI Research studies
-  const studies: StudyEnum[] = [StudyEnum.OSTEO2, StudyEnum.LMS, StudyEnum.PANCAN, StudyEnum.BRAIN];
+  const studies: StudyEnum[] = [StudyEnum.MBC, StudyEnum.OSTEO2, StudyEnum.LMS, StudyEnum.PANCAN];
 
   for (const study of studies) {
     test(`Update Institution @dsm @${study}`, async ({ page, request }) => {
@@ -79,7 +79,7 @@ test.describe.serial('Medical records request workflow', () => {
 
         const rowCount = await participantListTable.getRowsCount();
         for (let i = 0; i < rowCount; i++) {
-          const initialMRReceivedDate = await participantListTable.getRowText(i, initialMRReceivedColumn);
+          const [initialMRReceivedDate] = await participantListTable.getTextAt(i, initialMRReceivedColumn);
           if (initialMRReceivedDate.trim().length === 0) {
             // this participant does not have Initial MR Received date
             rowIndex = i;
@@ -112,7 +112,7 @@ test.describe.serial('Medical records request workflow', () => {
       await test.step('Update institution information', async () => {
         let medicalRecordTable = await openMedicalRecordsTab(participantPage);
 
-        // Fetch information on first row
+        // Fetch information on first row. Additional rows are ignored.
         const [typeValue] = await medicalRecordTable.getTextAt(0, 'Type');
         expect(typeValue).toMatch(/(Physician|Institution|Initial Biopsy)/);
 
@@ -153,6 +153,10 @@ test.describe.serial('Medical records request workflow', () => {
         // "No Action Needed" checkbox is displayed and unchecked
         const noActionNeededCheckbox = await medicalRecordsRequestPage.getNoActionNeeded.isVisible();
         expect(noActionNeededCheckbox).toBeTruthy();
+        const isChecked = await medicalRecordsRequestPage.getNoActionNeeded.isChecked();
+        if (isChecked) {
+          await medicalRecordsRequestPage.getNoActionNeeded.uncheck({ callback: async () => await waitForResponse(page, { uri: '/patch' }) });
+        }
         expect(await medicalRecordsRequestPage.getNoActionNeeded.isChecked()).toBeFalsy();
 
         // Pick one confirmed institution that does not match existing institution
@@ -243,7 +247,7 @@ test.describe.serial('Medical records request workflow', () => {
 
       // Check the "No Action Needed" checkbox and reload the page. Revisit the same participant, latest action is saved accordingly - The "No Action Needed" checkbox is checked.
       medicalRecordsRequestPage = await medicalRecordTable.openRequestPageByRowIndex(foundRow);
-      await medicalRecordsRequestPage.getNoActionNeeded.check();
+      await medicalRecordsRequestPage.getNoActionNeeded.check({ callback: async () => await waitForResponse(page, { uri: '/patch' }) });
       await medicalRecordsRequestPage.backToParticipantList();
       await participantListPage.filterListByShortId(shortId);
       await participantListTable.openParticipantPageAt(0);
@@ -251,6 +255,8 @@ test.describe.serial('Medical records request workflow', () => {
       medicalRecordsRequestPage = await medicalRecordTable.openRequestPageByRowIndex(foundRow);
       const isChecked = await medicalRecordsRequestPage.getNoActionNeeded.isChecked();
       expect(isChecked).toBeTruthy();
+      // reset back to unchecked
+      await medicalRecordsRequestPage.getNoActionNeeded.uncheck({ callback: async () => await waitForResponse(page, { uri: '/patch' }) });
     });
   }
 
