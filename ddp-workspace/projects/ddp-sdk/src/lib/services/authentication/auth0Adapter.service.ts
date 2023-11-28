@@ -366,11 +366,8 @@ export class Auth0AdapterService implements OnDestroy {
     }
 
     private handleExpiredTemporarySession(): void {
-        this.log.logToCloud(`${this.LOG_SOURCE} expired temporary session`).pipe(take(1)).subscribe(() => {
-                this.session.clear();
-                window.location.reload();
-            }
-        );
+        this.session.clear();
+        window.location.reload();
     }
 
     private getSessionExpiredUrl(): string {
