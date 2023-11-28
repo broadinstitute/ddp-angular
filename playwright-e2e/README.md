@@ -35,6 +35,7 @@ Worthy of note:
   * If you need to know common test users credential, read it from Vault. Try not to use common users for local development.
   > vault read -format=json secret/pepper/test/v1/e2e
  
+
 * Install dependencies and Playwright web browsers in **/playwright-e2e** dir.
   > cd playwright-e2e/
   > 
