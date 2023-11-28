@@ -30,7 +30,7 @@ test.describe.serial('Medical records request workflow', () => {
   ];
 
   // Two CMI Clinical and two CMI Research studies
-  const studies: StudyEnum[] = [StudyEnum.OSTEO2, StudyEnum.LMS, StudyEnum.PANCAN, StudyEnum.BRAIN];
+  const studies: StudyEnum[] = [StudyEnum.MBC, StudyEnum.OSTEO2, StudyEnum.LMS, StudyEnum.PANCAN];
 
   for (const study of studies) {
     test(`Update Institution @dsm @${study}`, async ({ page, request }) => {
@@ -112,7 +112,7 @@ test.describe.serial('Medical records request workflow', () => {
       await test.step('Update institution information', async () => {
         let medicalRecordTable = await openMedicalRecordsTab(participantPage);
 
-        // Fetch information on first row
+        // Fetch information on first row. Additional rows are ignored.
         const [typeValue] = await medicalRecordTable.getTextAt(0, 'Type');
         expect(typeValue).toMatch(/(Physician|Institution|Initial Biopsy)/);
 
