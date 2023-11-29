@@ -7,6 +7,7 @@ import {KitsColumnsEnum} from 'dsm/pages/kitsInfo-pages/enums/kitsColumns-enum';
 import {assertTableHeaders} from 'utils/assertion-helper';
 import {rows} from 'lib/component/dsm/paginators/types/rowsPerPage';
 import { getDate, getDateMonthAbbreviated, offsetDaysFromToday } from 'utils/date-utils';
+import { logInfo } from 'utils/log-utils';
 
 export default class KitsSentPage {
   private readonly PAGE_TITLE = 'Kits Sent';
@@ -80,13 +81,12 @@ export default class KitsSentPage {
     }
   }
 
-  public async getRecentMFBarcodes(): Promise<Locator[]> {
-    const today = getDate().trim();
+  public async getMFBarcodesSince(sinceDay: string): Promise<Locator[]> {
+    const today = getDate();
     const todayFormatted = getDateMonthAbbreviated(today);
-    const aWeekAgo = getDate(offsetDaysFromToday(7, { isAdd: false })).trim();
-    const aWeekAgoFormatted = getDateMonthAbbreviated(aWeekAgo);
-    console.log(`A week ago: ${aWeekAgoFormatted}`);
-    console.log(`Today: ${todayFormatted}`);
+    const sinceDateFormatted = getDateMonthAbbreviated(sinceDay);
+    logInfo(`A week ago: ${sinceDateFormatted}`);
+    logInfo(`Today: ${todayFormatted}`);
     let kitsFromToday: Locator[] = [];
     let kitsFromAWeekAgo: Locator[] = [];
     let totalAmountOfRecentKits = 0;
@@ -96,12 +96,12 @@ export default class KitsSentPage {
         locator(`//app-shipping//table//td[${this.sentColumnIndex}][contains(.,'${todayFormatted}')]/following-sibling::td[${this.mfBarcodeIndex}]`).
         all();
       kitsFromAWeekAgo = await this.page.
-        locator(`//app-shipping//table//td[${this.sentColumnIndex}][contains(.,'${aWeekAgoFormatted}')]` +
+        locator(`//app-shipping//table//td[${this.sentColumnIndex}][contains(.,'${sinceDateFormatted}')]` +
         `/following-sibling::td[${this.mfBarcodeIndex}]`).all();
       const amountOfTodayKits = kitsFromToday.length;
       const amountOfYesterdayKits = kitsFromAWeekAgo.length;
       totalAmountOfRecentKits = amountOfTodayKits + amountOfYesterdayKits;
-      console.log(`Total amount of recent kits: ${totalAmountOfRecentKits}`);
+      logInfo(`Total amount of recent kits: ${totalAmountOfRecentKits}`);
       expect(totalAmountOfRecentKits).toBeGreaterThanOrEqual(1);
     }).toPass({
       intervals: [5_000],
@@ -109,7 +109,7 @@ export default class KitsSentPage {
     });
 
     const recentKits = kitsFromToday.concat(kitsFromAWeekAgo);
-    expect(recentKits, `No kits have been sent out between ${aWeekAgo} and ${today}`).toBeTruthy();
+    expect(recentKits, `No kits have been sent out between ${sinceDay} and ${today}`).toBeTruthy();
     return recentKits;
   }
 

@@ -19,6 +19,7 @@ import RgpFinalScanPage from 'dsm/pages/scanner-pages/rgpFinalScan-page';
 import ErrorPage from 'dsm/pages/samples/error-page';
 import UserPermissionPage from 'dsm/pages/miscellaneous-pages/user-and-permissions-page';
 import KitsQueuePage from 'dsm/pages/kitsInfo-pages/kit-queue-page';
+import { logInfo } from 'utils/log-utils';
 
 
 type Selection = StudyNavEnum | StudyEnum | SamplesNavEnum | MiscellaneousEnum;
@@ -68,18 +69,17 @@ export class Navigation {
     let menuOptions: Locator[] = [];
     await expect(async () => {
       menuOptions = await this.page.locator(`//app-navigation//ul[1]//li[contains(@class, 'dropdown')]//b`).all();
-      const amountOfMenuOptions = menuOptions.length;
-      console.log(`Amount of main menu options: ${amountOfMenuOptions}`);
-      expect(amountOfMenuOptions).toBeGreaterThanOrEqual(1);
+      const countOfMenuOptions = menuOptions.length;
+      logInfo(`Amount of main menu options: ${countOfMenuOptions}`);
+      expect(countOfMenuOptions).toBeGreaterThanOrEqual(1);
     }).toPass({
-      intervals: [5_000],
-      timeout: 30_000
+      intervals: [5_000]
     });
 
     const displayedMenuOptions: MainMenuEnum[] = [];
     for (const option of menuOptions) {
       const optionName = ((await option.innerText()).trim()) as MainMenuEnum;
-      console.log(`Main menu option: ${optionName}`);
+      logInfo(`Main menu option: ${optionName}`);
       displayedMenuOptions.push(optionName);
     }
     return displayedMenuOptions;
@@ -91,12 +91,11 @@ export class Navigation {
       menuOptions = await this.page.
       locator(`//app-navigation//ul[1]//li[contains(@class, 'dropdown')]//a[contains(.,'Samples')]/following-sibling::ul//li`).
       all();
-      const amountOfMenuOptions = menuOptions.length;
-      console.log(`Amount of sample menu options: ${amountOfMenuOptions}`);
-      expect(amountOfMenuOptions).toBeGreaterThanOrEqual(1);
+      const countOfMenuOptions = menuOptions.length;
+      console.log(`Amount of sample menu options: ${countOfMenuOptions}`);
+      expect(countOfMenuOptions).toBeGreaterThanOrEqual(1);
     }).toPass({
-      intervals: [5_000],
-      timeout: 30_000
+      intervals: [5_000]
     });
 
     const displayedMenuOptions: SamplesNavEnum[] = [];

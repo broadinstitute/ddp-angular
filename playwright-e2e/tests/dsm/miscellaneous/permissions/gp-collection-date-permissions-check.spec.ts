@@ -10,7 +10,7 @@ import SearchPage, { SearchByField } from 'dsm/pages/samples/search-page';
 import Select from 'dss/component/select';
 import { testGPCollectionDate as test } from 'fixtures/dsm-fixture';
 
-test.describe('GP Collection Date Permissions Test', () => {
+test.describe.serial('GP Collection Date Permissions Test', () => {
   const studies = [StudyEnum.OSTEO2, StudyEnum.LMS];
   const expectedKitTypes = [KitTypeEnum.BLOOD, KitTypeEnum.SALIVA];
   const expectedAvailableMenuItems = [MainMenuEnum.SELECTED_STUDY, MainMenuEnum.SAMPLES];
@@ -39,7 +39,7 @@ test.describe('GP Collection Date Permissions Test', () => {
 
         expect(
           availableNavigationMenuOptions,
-          `Displayed menu options do not match those expected of kit_shipping permission. Expected: 'Selected study' & 'Samples' only`).
+          `Displayed menu options do not match those expected of kit_shipping permission.`).
           toMatchObject(expectedAvailableMenuItems);
 
         /*Verify that the current user can see all the following pages in the Samples menu:
@@ -66,7 +66,7 @@ test.describe('GP Collection Date Permissions Test', () => {
 
         //Get the most recent mf barcodes (from within the last week) to be used in Kit Search page
         await kitsSentPage.sortColumn({ columnName: KitsColumnsEnum.SENT, startWithRecentDates: true });
-        todaysKits = await kitsSentPage.getRecentMFBarcodes();
+        todaysKits = await kitsSentPage.getMFBarcodesSince('11/20/2023');
         for (const kits of todaysKits) {
           const mfBarcode = (await kits.innerText()).trim();
           todaysMFBarcodes.push(mfBarcode);
