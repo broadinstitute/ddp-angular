@@ -101,7 +101,6 @@ test.describe.serial('GP Collection Date Permissions Test', () => {
       })
 
       await test.step('Enter a collection date for the kit that shows up and click Submit', async () => {
-        //Stuff here
         const kitsSearchPage = new SearchPage(page);
         await kitsSearchPage.setKitCollectionDate({ dateField: currentKit, useTodayDate: true });
       })

@@ -2,6 +2,7 @@ import { expect, Locator, Page } from '@playwright/test';
 import DatePicker from 'dsm/component/date-picker';
 import Select from 'dss/component/select';
 import Table from 'dss/component/table';
+import { logInfo } from 'utils/log-utils';
 import { waitForNoSpinner, waitForResponse } from 'utils/test-utils';
 
 export enum SearchByField {
@@ -19,7 +20,6 @@ export default class SearchPage {
 
   async searchByField(searchField: SearchByField, value: string): Promise<Table> {
     const select = new Select(this.page, { label: 'Search by Field', root: 'app-shipping-search' });
-    console.log(`Search field used: ${searchField}`);
     await select.selectOption(searchField);
     const locator = this.page.locator('//div[button[normalize-space()="Search Kit"]]');
     await locator.locator('//input').fill(value);
