@@ -92,7 +92,7 @@ export class Navigation {
       locator(`//app-navigation//ul[1]//li[contains(@class, 'dropdown')]//a[contains(.,'Samples')]/following-sibling::ul//li`).
       all();
       const countOfMenuOptions = menuOptions.length;
-      console.log(`Amount of sample menu options: ${countOfMenuOptions}`);
+      logInfo(`Amount of sample menu options: ${countOfMenuOptions}`);
       expect(countOfMenuOptions).toBeGreaterThanOrEqual(1);
     }).toPass({
       intervals: [5_000]
@@ -101,7 +101,7 @@ export class Navigation {
     const displayedMenuOptions: SamplesNavEnum[] = [];
     for (const option of menuOptions) {
       const optionName = ((await option.innerText()).trim()) as SamplesNavEnum;
-      console.log(`Sample menu option: ${optionName}`);
+      logInfo(`Sample menu option: ${optionName}`);
       displayedMenuOptions.push(optionName);
     }
     return displayedMenuOptions;

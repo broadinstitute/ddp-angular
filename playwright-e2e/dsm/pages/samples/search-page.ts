@@ -44,7 +44,7 @@ export default class SearchPage {
     return collectionDate;
   }
 
-  async inputCollectionDate(opts: { dateField: Locator, collectionDate?: string, useTodayDate?: boolean }): Promise<void> {
+  async setKitCollectionDate(opts: { dateField: Locator, collectionDate?: string, useTodayDate?: boolean }): Promise<void> {
     const { dateField, collectionDate = '', useTodayDate = true} = opts;
     //Input the date
     if (useTodayDate) {

@@ -9,6 +9,8 @@ import KitsSentPage from 'dsm/pages/kitsInfo-pages/kitsSentPage';
 import SearchPage, { SearchByField } from 'dsm/pages/samples/search-page';
 import Select from 'dss/component/select';
 import { testGPCollectionDate as test } from 'fixtures/dsm-fixture';
+import { getDate, offsetDaysFromDate } from 'utils/date-utils';
+import { logInfo } from 'utils/log-utils';
 
 test.describe.serial('GP Collection Date Permissions Test', () => {
   const studies = [StudyEnum.OSTEO2, StudyEnum.LMS];
@@ -65,12 +67,16 @@ test.describe.serial('GP Collection Date Permissions Test', () => {
         await kitsSentPage.rowsPerPage(50);
 
         //Get the most recent mf barcodes (from within the last week) to be used in Kit Search page
-        await kitsSentPage.sortColumn({ columnName: KitsColumnsEnum.SENT, startWithRecentDates: true });
-        todaysKits = await kitsSentPage.getMFBarcodesSince('11/20/2023');
+        await kitsSentPage.sortColumnByDate({ columnName: KitsColumnsEnum.SENT, startWithRecentDates: true });
+        const today = new Date();
+        const aWeekAgo = getDate(offsetDaysFromDate(today, 7, { isAdd: false }));
+        todaysKits = await kitsSentPage.getMFBarcodesSince(aWeekAgo);
         for (const kits of todaysKits) {
           const mfBarcode = (await kits.innerText()).trim();
           todaysMFBarcodes.push(mfBarcode);
         }
+        const numberOfRecentMFBarcodes = todaysMFBarcodes.length;
+        expect(numberOfRecentMFBarcodes, 'No mf barcodes from recent kits have been found').toBeGreaterThanOrEqual(1);
       })
 
       await test.step(`Go to Kit Search page and select 'Search by mf barcode' and enter the barcode you copied and click on Search`, async () => {
@@ -81,22 +87,23 @@ test.describe.serial('GP Collection Date Permissions Test', () => {
         //Find a kit that does not have a collection date and fill it out
         for (let index = 0; index < todaysMFBarcodes.length; index++) {
           const mfBarcode = todaysMFBarcodes[index];
-          console.log(`MF Barcode: ${mfBarcode}`);
+          logInfo(`MF Barcode: ${mfBarcode}`);
           await kitsSearchPage.searchByField(SearchByField.MANUFACTURE_BARCODE, mfBarcode);
           currentKit = page.locator('//app-field-datepicker//input');
           const collectionDateField = await kitsSearchPage.getKitCollectionDate({ rowIndex: 1 });
-          console.log(`Collection Date Field input: ${collectionDateField}`);
+          logInfo(`Collection Date Field input: ${collectionDateField}`);
           if (collectionDateField === '') {
             break;
           }
           await page.reload();
         }
+        expect(currentKit, 'No kit has been chosen for the test').toBeTruthy();
       })
 
       await test.step('Enter a collection date for the kit that shows up and click Submit', async () => {
         //Stuff here
         const kitsSearchPage = new SearchPage(page);
-        await kitsSearchPage.inputCollectionDate({ dateField: currentKit, useTodayDate: true });
+        await kitsSearchPage.setKitCollectionDate({ dateField: currentKit, useTodayDate: true });
       })
     })
   }

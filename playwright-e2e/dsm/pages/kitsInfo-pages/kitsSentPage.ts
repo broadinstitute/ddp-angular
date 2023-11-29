@@ -6,8 +6,9 @@ import {waitForNoSpinner, waitForResponse} from 'utils/test-utils';
 import {KitsColumnsEnum} from 'dsm/pages/kitsInfo-pages/enums/kitsColumns-enum';
 import {assertTableHeaders} from 'utils/assertion-helper';
 import {rows} from 'lib/component/dsm/paginators/types/rowsPerPage';
-import { getDate, getDateMonthAbbreviated, offsetDaysFromToday } from 'utils/date-utils';
+import { getDate, getDateMonthAbbreviated, offsetDaysFromDate, offsetDaysFromToday } from 'utils/date-utils';
 import { logInfo } from 'utils/log-utils';
+import { all } from 'axios';
 
 export default class KitsSentPage {
   private readonly PAGE_TITLE = 'Kits Sent';
@@ -56,25 +57,43 @@ export default class KitsSentPage {
   /**
    * Sorts the given column by clicking on it.
    * Date type columns - first click gives you list starting with dates from long ago; second click starts with recent dates
-   * String type columns - first click gives you A -> Z list; second click gives you Z -> A list
    * @param columnName name of the column to be sorted
    */
-  public async sortColumn(opts: {
+  public async sortColumnByDate(opts: {
     columnName: KitsColumnsEnum,
-    aToZ?: boolean,
-    zToA?: boolean,
-    startWithRecentDates?: boolean,
-    startWithPastDates?: boolean }): Promise<void> {
-    const { columnName, aToZ, zToA, startWithRecentDates, startWithPastDates } = opts;
+    startWithRecentDates: boolean}): Promise<void> {
+    const { columnName, startWithRecentDates = true } = opts;
 
     const column = columnName as string;
     const columnSorter = this.page.locator(`//app-shipping//table//th[contains(.,'${column}')]/mfdefaultsorter`);
     expect(columnSorter, `The column ${column} is not able to be sorted in the Kits Sent page`).toBeTruthy();
 
-    if (aToZ || startWithPastDates) {
+    if (!startWithRecentDates) {
       //Only a single click is needed
       await columnSorter.click();
-    } else if (zToA || startWithRecentDates) {
+    } else if (startWithRecentDates) {
+      //Two clicks are needed to get the wanted result
+      await columnSorter.click();
+      await columnSorter.click();
+    }
+  }
+
+  /**
+   * Sorts the given column by clicking on it.
+   * String type columns - first click gives you A -> Z list; second click gives you Z -> A list
+   * @param columnName name of the column to be sorted
+   */
+  public async sortColumnAlphabetically(opts: {columnName: KitsColumnsEnum, aToZ: boolean}): Promise<void> {
+    const { columnName, aToZ = true } = opts;
+
+    const column = columnName as string;
+    const columnSorter = this.page.locator(`//app-shipping//table//th[contains(.,'${column}')]/mfdefaultsorter`);
+    expect(columnSorter, `The column ${column} is not able to be sorted in the Kits Sent page`).toBeTruthy();
+
+    if (aToZ) {
+      //Only a single click is needed
+      await columnSorter.click();
+    } else {
       //Two clicks are needed to get the wanted result
       await columnSorter.click();
       await columnSorter.click();
@@ -83,34 +102,31 @@ export default class KitsSentPage {
 
   public async getMFBarcodesSince(sinceDay: string): Promise<Locator[]> {
     const today = getDate();
-    const todayFormatted = getDateMonthAbbreviated(today);
+    let currentDay = (new Date()).getTime(); //Get today's date in milliseconds for comparison
+    const earliestDate = (new Date(sinceDay)).getTime(); //Get earliest requested date in milliseconds for comparison
+    let currentDayFormatted = getDateMonthAbbreviated(today);
     const sinceDateFormatted = getDateMonthAbbreviated(sinceDay);
-    logInfo(`A week ago: ${sinceDateFormatted}`);
-    logInfo(`Today: ${todayFormatted}`);
-    let kitsFromToday: Locator[] = [];
-    let kitsFromAWeekAgo: Locator[] = [];
-    let totalAmountOfRecentKits = 0;
+    logInfo(`Earliest date of expected kit: ${sinceDateFormatted}`);
+    logInfo(`Today: ${currentDayFormatted}`);
+    let allRelevantKits: Locator[] = [];
 
-    await expect(async () => {
-      kitsFromToday = await this.page.
-        locator(`//app-shipping//table//td[${this.sentColumnIndex}][contains(.,'${todayFormatted}')]/following-sibling::td[${this.mfBarcodeIndex}]`).
-        all();
-      kitsFromAWeekAgo = await this.page.
-        locator(`//app-shipping//table//td[${this.sentColumnIndex}][contains(.,'${sinceDateFormatted}')]` +
-        `/following-sibling::td[${this.mfBarcodeIndex}]`).all();
-      const amountOfTodayKits = kitsFromToday.length;
-      const amountOfYesterdayKits = kitsFromAWeekAgo.length;
-      totalAmountOfRecentKits = amountOfTodayKits + amountOfYesterdayKits;
-      logInfo(`Total amount of recent kits: ${totalAmountOfRecentKits}`);
-      expect(totalAmountOfRecentKits).toBeGreaterThanOrEqual(1);
-    }).toPass({
-      intervals: [5_000],
-      timeout: 30_000
-    });
-
-    const recentKits = kitsFromToday.concat(kitsFromAWeekAgo);
-    expect(recentKits, `No kits have been sent out between ${sinceDay} and ${today}`).toBeTruthy();
-    return recentKits;
+    while (currentDay >= earliestDate) {
+      const batchOfKits = await this.page.
+        locator(
+          `//app-shipping//table//td[${this.sentColumnIndex}][contains(.,'${currentDayFormatted}')]/following-sibling::td[${this.mfBarcodeIndex}]`
+        )
+        .all();
+      logInfo(`Amount of kits from ${currentDayFormatted}: ${batchOfKits.length}`);
+      allRelevantKits = allRelevantKits.concat(batchOfKits);
+      logInfo(`Current amount of recent kits: ${allRelevantKits.length}`);
+      const currentDayInDateFormat = new Date(currentDayFormatted);
+      const previousDay = getDate(offsetDaysFromDate(currentDayInDateFormat, 1, { isAdd: false }));
+      currentDayFormatted = getDateMonthAbbreviated(previousDay);
+      currentDay = (new Date(currentDayFormatted)).getTime();
+    }
+    expect(allRelevantKits, `No kits have been sent out between ${sinceDay} and ${today}`).toBeTruthy();
+    logInfo(`Total amount of recent kits: ${allRelevantKits.length}`);
+    return allRelevantKits;
   }
 
   /* Assertions */
