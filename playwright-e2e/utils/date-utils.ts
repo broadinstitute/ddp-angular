@@ -1,4 +1,4 @@
-import { logInfo } from "./log-utils";
+import { logInfo } from './log-utils';
 
 export function dateFormat(timeZone?: string): Intl.DateTimeFormat {
   return timeZone
