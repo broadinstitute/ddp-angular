@@ -68,7 +68,7 @@ export class Navigation {
   public async getDisplayedMainMenu(): Promise<MainMenuEnum[]> {
     let menuOptions: Locator[] = [];
     await expect(async () => {
-      menuOptions = await this.page.locator(`//app-navigation//ul[1]//li[contains(@class, 'dropdown')]//b`).all();
+      menuOptions = await this.page.locator(`//app-navigation//ul[1]//li[contains(@class, 'dropdown')]/a`).all();
       const countOfMenuOptions = menuOptions.length;
       logInfo(`Amount of main menu options: ${countOfMenuOptions}`);
       expect(countOfMenuOptions).toBeGreaterThanOrEqual(1);
@@ -77,10 +77,14 @@ export class Navigation {
     });
 
     const displayedMenuOptions: MainMenuEnum[] = [];
+    const selectedStudyText = MainMenuEnum.SELECTED_STUDY as string;
     for (const option of menuOptions) {
-      const optionName = ((await option.innerText()).trim()) as MainMenuEnum;
-      logInfo(`Main menu option: ${optionName}`);
-      displayedMenuOptions.push(optionName);
+      let name = (await option.innerText()).trim();
+      if (name.startsWith(selectedStudyText)) {
+        name = selectedStudyText;
+      }
+      logInfo(`Main menu option: ${name}`);
+      displayedMenuOptions.push(name as MainMenuEnum);
     }
     return displayedMenuOptions;
   }
