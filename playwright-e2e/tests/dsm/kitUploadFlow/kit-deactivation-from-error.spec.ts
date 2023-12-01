@@ -20,17 +20,6 @@ test.describe.serial('Kit Deactivation', () => {
       let shippingId: string;
       let kits: KitTypeEnum[];
 
-      switch (study) {
-        case StudyEnum.LMS:
-          kits = [KitTypeEnum.SALIVA, KitTypeEnum.BLOOD];
-          break;
-        case StudyEnum.RGP:
-          kits = [KitTypeEnum.BLOOD_AND_RNA, KitTypeEnum.BLOOD];
-          break;
-        default:
-          throw new Error(`Unhandled case of StudyEnum: ${study}`);
-      }
-
       const welcomePage = new WelcomePage(page);
       const navigation = new Navigation(page, request);
       await welcomePage.selectStudy(study);
@@ -42,6 +31,7 @@ test.describe.serial('Kit Deactivation', () => {
         kitsErrorPage = await navigation.selectFromSamples<ErrorPage>(SamplesNavEnum.ERROR);
         await kitsErrorPage.waitForReady();
         kitsTable = kitsErrorPage.getKitsTable;
+        kits = await kitsErrorPage.getStudyKitTypes();
 
         // Deactivated all kit types for one randomly selected participant
         for (const kit of kits) {

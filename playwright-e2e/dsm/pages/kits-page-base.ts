@@ -133,6 +133,9 @@ export default abstract class KitsPageBase extends DsmPageBase {
     // Most studies have Blood and Saliva kits; RGP has Blood and 'Blood & RNA' kits; Pancan has Blood, Saliva, and Stool kits
     let kitTypes;
     switch (studyName) {
+      case StudyEnum.LMS:
+        kitTypes = [KitTypeEnum.SALIVA, KitTypeEnum.BLOOD];
+        break;
       case StudyEnum.RGP:
         kitTypes = [KitTypeEnum.BLOOD, KitTypeEnum.BLOOD_AND_RNA];
         break;
