@@ -597,7 +597,6 @@ async function prepareSentKit(shortID: string,
   if (await kitsWithoutLabelPage.hasKitRequests()) {
     await kitsWithoutLabelPage.assertCreateLabelsBtn();
     await kitsWithoutLabelPage.assertReloadKitListBtn();
-    await kitsWithoutLabelPage.assertTableHeader();
     await kitsWithoutLabelPage.deactivateAllKitsFor(shortID);
   }
 

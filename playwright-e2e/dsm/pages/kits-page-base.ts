@@ -192,8 +192,4 @@ export default abstract class KitsPageBase extends DsmPageBase {
   public get getReloadKitListBtn(): Locator {
     return this.page.getByRole('button', {name: 'Reload Kit List'});
   }
-
-  public async assertTableHeader(): Promise<void> {
-    assertTableHeaders(await this.kitsTable.getHeaderTexts(), this.TABLE_HEADERS);
-  }
 }

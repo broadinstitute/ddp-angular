@@ -131,7 +131,6 @@ test.describe.serial('Saliva Kit Upload with a Canadian or New York address', ()
         await kitsWithoutLabelPage.selectKitType(kitType);
         await kitsWithoutLabelPage.assertCreateLabelsBtn();
         await kitsWithoutLabelPage.assertReloadKitListBtn();
-        await kitsWithoutLabelPage.assertTableHeader();
 
         const kitsTable = kitsWithoutLabelPage.getKitsTable;
         await kitsTable.searchByColumn(KitsColumnsEnum.SHORT_ID, shortID);

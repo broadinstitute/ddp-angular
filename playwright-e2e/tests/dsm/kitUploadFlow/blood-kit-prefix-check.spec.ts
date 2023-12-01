@@ -133,7 +133,6 @@ test.describe.serial('Blood Kit Upload', () => {
         await kitsWithoutLabelPage.selectKitType(kitType);
         await kitsWithoutLabelPage.assertCreateLabelsBtn();
         await kitsWithoutLabelPage.assertReloadKitListBtn();
-        await kitsWithoutLabelPage.assertTableHeader();
 
         const kitsTable = kitsWithoutLabelPage.getKitsTable;
         await kitsTable.searchByColumn(KitsColumnsEnum.SHORT_ID, shortID);

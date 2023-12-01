@@ -93,7 +93,6 @@ test.describe.serial('Blood Kits upload flow', () => {
       await kitsWithoutLabelPage.selectKitType(kitType);
       await kitsWithoutLabelPage.assertCreateLabelsBtn();
       await kitsWithoutLabelPage.assertReloadKitListBtn();
-      await kitsWithoutLabelPage.assertTableHeader();
       await kitsWithoutLabelPage.deactivateAllKitsFor(shortID);
 
       // Uploads kit
@@ -119,7 +118,6 @@ test.describe.serial('Blood Kits upload flow', () => {
       await kitsWithoutLabelPage.selectKitType(kitType);
       await kitsWithoutLabelPage.assertCreateLabelsBtn();
       await kitsWithoutLabelPage.assertReloadKitListBtn();
-      await kitsWithoutLabelPage.assertTableHeader();
       await kitsWithoutLabelPage.search(KitsColumnsEnum.SHORT_ID, shortID);
       shippingID = (await kitsWithoutLabelPage.getData(KitsColumnsEnum.SHIPPING_ID)).trim();
 

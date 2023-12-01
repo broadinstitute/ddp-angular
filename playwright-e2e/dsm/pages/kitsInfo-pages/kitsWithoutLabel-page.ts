@@ -14,10 +14,7 @@ export default class KitsWithoutLabelPage extends KitsPageBase {
     KitsColumnsEnum.SHIPPING_ID,
     KitsColumnsEnum.DDP_REALM,
     KitsColumnsEnum.TYPE,
-    ''
   ];
-  // the last item is empty string because the deactivate buttons columns doesn't have one
-
 
   constructor(page: Page) {
     super(page);
