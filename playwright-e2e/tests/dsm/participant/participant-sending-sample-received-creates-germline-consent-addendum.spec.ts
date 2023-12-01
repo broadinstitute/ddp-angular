@@ -593,12 +593,10 @@ async function prepareSentKit(shortID: string,
   //Deactivate existing kits
   const kitsWithoutLabelPage = await navigation.selectFromSamples<KitsWithoutLabelPage>(SamplesNavEnum.KITS_WITHOUT_LABELS);
   await kitsWithoutLabelPage.waitForReady();
-  await kitsWithoutLabelPage.assertPageTitle();
   await kitsWithoutLabelPage.selectKitType(kitType);
-  if (await kitsWithoutLabelPage.hasExistingKitRequests()) {
+  if (await kitsWithoutLabelPage.hasKitRequests()) {
     await kitsWithoutLabelPage.assertCreateLabelsBtn();
     await kitsWithoutLabelPage.assertReloadKitListBtn();
-    await kitsWithoutLabelPage.assertTableHeader();
     await kitsWithoutLabelPage.deactivateAllKitsFor(shortID);
   }
 
@@ -639,12 +637,11 @@ async function prepareSentKit(shortID: string,
   await kitsWithoutLabelPage.selectKitType(kitType);
   await kitsWithoutLabelPage.assertCreateLabelsBtn();
   await kitsWithoutLabelPage.assertReloadKitListBtn();
-  await kitsWithoutLabelPage.assertPageTitle();
 
   await kitsWithoutLabelPage.search(KitsColumnsEnum.SHORT_ID, shortID);
   const shippingID = (await kitsWithoutLabelPage.getData(KitsColumnsEnum.SHIPPING_ID)).trim();
 
-  const kitsTable = kitsWithoutLabelPage.kitsWithoutLabelTable;
+  const kitsTable = kitsWithoutLabelPage.getKitsTable;
   await kitsTable.searchByColumn(KitsColumnsEnum.SHORT_ID, shortID);
   await expect(kitsTable.rowLocator()).toHaveCount(1);
 

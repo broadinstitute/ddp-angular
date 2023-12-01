@@ -26,10 +26,10 @@ export default class TrackingScanPage {
     const saveButton = this.page.locator(this.saveButtonXPath);
     await expect(saveButton, 'Tracking Scan page - Save Scan Pairs button is not enabled').toBeEnabled();
 
+    const waitPromise = waitForResponse(this.page, {uri: 'trackingScan'});
     await saveButton.focus();
     await saveButton.click();
-
-    await waitForResponse(this.page, {uri: 'trackingScan'});
+    await waitPromise;
 
     if (verifySuccess) {
       const textUnderScanPair = this.page.locator(this.textUnderScanPairXPath);

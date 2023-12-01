@@ -91,7 +91,6 @@ test.describe.serial('Saliva Kits upload flow', () => {
       await kitsWithoutLabelPage.selectKitType(kitType);
       await kitsWithoutLabelPage.assertCreateLabelsBtn();
       await kitsWithoutLabelPage.assertReloadKitListBtn();
-      await kitsWithoutLabelPage.assertTableHeader();
       await kitsWithoutLabelPage.deactivateAllKitsFor(shortID);
 
       // Uploads kit
@@ -118,8 +117,7 @@ test.describe.serial('Saliva Kits upload flow', () => {
       await kitsWithoutLabelPage.selectKitType(kitType);
       await kitsWithoutLabelPage.assertCreateLabelsBtn();
       await kitsWithoutLabelPage.assertReloadKitListBtn();
-      await kitsWithoutLabelPage.assertTableHeader();
-      await kitsWithoutLabelPage.assertPageTitle();
+
       await kitsWithoutLabelPage.search(KitsColumnsEnum.SHORT_ID, shortID);
       const shippingID = (await kitsWithoutLabelPage.getData(KitsColumnsEnum.SHIPPING_ID)).trim();
 

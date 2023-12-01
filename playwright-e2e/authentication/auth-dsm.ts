@@ -10,6 +10,7 @@ export async function login(page: Page, opts: { email?: string; password?: strin
   const assertLoggedIn = async (page: Page): Promise<void> => {
     await expect(page.locator('.auth0-loading')).toBeHidden({timeout: 50 * 1000});
     await expect(page.locator('.auth0-lock-header-welcome')).toBeHidden();
+    await page.waitForLoadState();
     await waitForNoSpinner(page);
     await expect(page).toHaveTitle('Select study');
   };
@@ -30,13 +31,14 @@ export async function login(page: Page, opts: { email?: string; password?: strin
     await assertLoggedIn(page);
   } catch (err) {
     // Try log in again if login window re-appears (POST /auth0 fails intermittenly)
-    await page.waitForTimeout(2000);
-    const visible = await page.locator('.auth0-lock-header-welcome').isVisible();
-    if (visible) {
-      await fillInEmailPassword(page, { email, password, waitForNavigation: false });
-      await assertLoggedIn(page);
-      return;
-    }
-    throw err;
+    await waitForNoSpinner(page);
+    await page.waitForSelector('.auth0-lock-header-welcome', { state: 'visible', timeout: 2 * 1000 })
+      .then(async () => {
+        await fillInEmailPassword(page, { email, password, waitForNavigation: false });
+        await assertLoggedIn(page);
+      })
+      .catch((error) => {
+        throw new Error(error); // stops test
+      });
   }
 }

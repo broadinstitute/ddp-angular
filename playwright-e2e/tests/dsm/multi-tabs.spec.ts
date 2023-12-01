@@ -17,7 +17,7 @@ const { DSM_USER_EMAIL, DSM_USER_PASSWORD } = process.env;
 
 test('Multiple browser tabs @dsm', async ({ browser, request }) => {
   const pancan = StudyEnum.PANCAN;
-  const brain = StudyEnum.BRAIN;
+  const angio = StudyEnum.ANGIO;
 
   // Create two pages in same browser
   const browserContext = await browser.newContext();
@@ -28,17 +28,17 @@ test('Multiple browser tabs @dsm', async ({ browser, request }) => {
   const pancanParticipantShortId = await findAnyParticipantShortId(pancanParticipantListPage);
   logInfo(`PanCan participant Short ID: ${pancanParticipantShortId}`);
 
-  // Tab B: Open Participant List page, realm matches expected study Brain
-  const brainPage = await browserContext.newPage();
-  const brainParticipantListPage = await logIntoStudy(brainPage, request, brain);
-  const brainParticipantShortId = await findAnyParticipantShortId(brainParticipantListPage);
-  logInfo(`Brain participant Short ID: ${brainParticipantShortId}`);
+  // Tab B: Open Participant List page, realm matches expected study angio
+  const angioPage = await browserContext.newPage();
+  const angioParticipantListPage = await logIntoStudy(angioPage, request, angio);
+  const angioParticipantShortId = await findAnyParticipantShortId(angioParticipantListPage);
+  logInfo(`angio participant Short ID: ${angioParticipantShortId}`);
 
   // Add new Onc History for study PanCan in tab A
   await addOncHistory(pancanPage, pancanParticipantListPage, pancan);
 
-  // Add new Onc History for study Brain in tab B
-  await addOncHistory(brainPage, brainParticipantListPage, brain);
+  // Add new Onc History for study angio in tab B
+  await addOncHistory(angioPage, angioParticipantListPage, angio);
 });
 
 async function findAnyParticipantShortId(participantListPage: ParticipantListPage): Promise<string> {
@@ -53,7 +53,7 @@ async function findAnyParticipantShortId(participantListPage: ParticipantListPag
     const searchPanel = participantListPage.filters.searchPanel;
     await searchPanel.open();
     await searchPanel.checkboxes('Status', { checkboxValues: ['Enrolled'] });
-    await searchPanel.checkboxes(oncHistoryRequestStatusColumn, { checkboxValues: ['Request'] });
+    // await searchPanel.checkboxes(oncHistoryRequestStatusColumn, { checkboxValues: ['Request'] });
     const filterListResponse = await searchPanel.search();
 
     const participantListTable = participantListPage.participantListTable;
@@ -85,6 +85,7 @@ async function addOncHistory(page: Page, participantListPage: ParticipantListPag
     const oncHistoryTab = await participantPage.clickTab<OncHistoryTab>(TabEnum.ONC_HISTORY);
     const oncHistoryTable = oncHistoryTab.table;
     const rowIndex = await oncHistoryTable.getRowsCount() - 1;
+    expect(rowIndex).toBeGreaterThanOrEqual(0);
     const cell = await oncHistoryTable.checkColumnAndCellValidity(OncHistoryInputColumnsEnum.DATE_OF_PX, rowIndex);
     const resp = await oncHistoryTable.fillDate(cell, {
       date: {
