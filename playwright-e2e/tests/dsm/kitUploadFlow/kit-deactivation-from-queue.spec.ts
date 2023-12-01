@@ -44,7 +44,10 @@ test.describe.serial('Kit Deactivation', () => {
           if (rowCount > 0) {
             const rowIndex = await kitsTable.getRandomRowIndex();
             [shortId] = await kitsTable.getTextAt(rowIndex, 'Short ID');
+
             shippingId = await kitsQueuePage.deactivateKitFor({shortId});
+
+            await kitsQueuePage.reloadKit(kit);
 
             // Deactivated kit should be removed from the table
             const kitsExists = await kitsQueuePage.hasKitRequests();

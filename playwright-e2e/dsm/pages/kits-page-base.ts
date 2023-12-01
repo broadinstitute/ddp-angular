@@ -39,14 +39,20 @@ export default abstract class KitsPageBase extends DsmPageBase {
     await waitForNoSpinner(this.page);
   }
 
-  public async selectKitType(kitType: KitTypeEnum): Promise<void> {
+  public async reloadKit(kitType: KitTypeEnum): Promise<void> {
+    await this.page.reload();
+    await this.waitForReady();
+    await this.selectKitType(kitType);
+  }
+
+  public async selectKitType(kitType: KitTypeEnum): Promise<boolean> {
     await waitForNoSpinner(this.page);
     await Promise.all([
       waitForResponse(this.page, { uri: 'ui/kitRequests' }),
       this.kitType.selectKitType(kitType)
     ]);
     await waitForNoSpinner(this.page);
-    await this.hasKitRequests();
+    return await this.hasKitRequests();
   }
 
   public async deactivateKitFor(opts: { shortId?: string, shippingId?: string } = {}): Promise<string> {
@@ -133,9 +139,6 @@ export default abstract class KitsPageBase extends DsmPageBase {
     // Most studies have Blood and Saliva kits; RGP has Blood and 'Blood & RNA' kits; Pancan has Blood, Saliva, and Stool kits
     let kitTypes;
     switch (studyName) {
-      case StudyEnum.LMS:
-        kitTypes = [KitTypeEnum.SALIVA, KitTypeEnum.BLOOD];
-        break;
       case StudyEnum.RGP:
         kitTypes = [KitTypeEnum.BLOOD, KitTypeEnum.BLOOD_AND_RNA];
         break;
@@ -143,14 +146,16 @@ export default abstract class KitsPageBase extends DsmPageBase {
         kitTypes = [KitTypeEnum.BLOOD, KitTypeEnum.SALIVA, KitTypeEnum.STOOL];
         break;
       default:
-        kitTypes = [KitTypeEnum.BLOOD, KitTypeEnum.SALIVA];
+        kitTypes = [KitTypeEnum.SALIVA, KitTypeEnum.BLOOD];
         break;
     }
     return kitTypes;
   }
 
   public async reloadKitList(): Promise<void> {
+    const waitPromise = waitForResponse(this.page, {uri: '/kitRequests'});
     await this.getReloadKitListBtn.click();
+    await waitPromise;
     await waitForNoSpinner(this.page);
   }
 
