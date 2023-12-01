@@ -251,7 +251,7 @@ export default class OncHistoryTable extends Table {
     return this.page.locator('app-onc-history-detail').locator('app-modal').locator('.modal-content');
   }
 
-  private deleteRowButton(index = 0): Locator {
+  private deleteRowButton(index: number): Locator {
     return this.row(index).locator('td').last().getByRole('button');
   }
 
