@@ -15,7 +15,7 @@ export class KitType {
   }
 
   /* XPaths */
-  private kitTypeCheckbox(kitType: KitTypeEnum): Checkbox {
+  public kitTypeCheckbox(kitType: KitTypeEnum): Checkbox {
     return new Checkbox(this.page, { label: kitType, root: 'app-root' });
   }
 }

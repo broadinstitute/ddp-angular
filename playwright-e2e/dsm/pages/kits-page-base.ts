@@ -78,32 +78,6 @@ export default abstract class KitsPageBase extends DsmPageBase {
     return shippingId;
   }
 
-/*
-  public async deactivateKitFor(shortId?: string): Promise<string> {
-    expect(await this.kitsTable.exists()).toBeTruthy();
-    let kitsCount = await this.kitsTable.rows.count();
-    expect(kitsCount).toBeGreaterThanOrEqual(1);
-
-    if (!shortId) {
-      // Selects a random Short ID
-      const rowIndex = await this.kitsTable.getRandomRowIndex();
-      [shortId] = await this.kitsTable.getTextAt(rowIndex, KitsColumnsEnum.SHORT_ID);
-    }
-    expect(shortId.length).toBeTruthy();
-    await this.kitsTable.searchBy(KitsColumnsEnum.SHORT_ID, shortId);
-    await waitForNoSpinner(this.page);
-
-    kitsCount = await this.kitsTable.rows.count();
-    expect(kitsCount).toBeGreaterThanOrEqual(1);
-
-    const [shippingID] = await this.kitsTable.getTextAt(0, KitsColumnsEnum.SHIPPING_ID);
-    await this.deactivate(0);
-
-    logInfo(`Deactivated Kit: Short ID: ${shortId}, Shipping ID: ${shippingID}`);
-    return shippingID;
-  }
-*/
-
   public async deactivateAllKitsFor(shortId?: string): Promise<void> {
     if (!shortId) {
       // Selects a random Short ID
@@ -115,14 +89,18 @@ export default abstract class KitsPageBase extends DsmPageBase {
     await this.kitsTable.searchByColumn(KitsColumnsEnum.SHORT_ID, shortId);
     await waitForNoSpinner(this.page);
 
-    const kitsCount = await this.kitsTable.rows.count();
-    expect(kitsCount).toBeGreaterThanOrEqual(1);
-    for (let i = 0; i < kitsCount; i++) {
-      await this.deactivate(i);
-      await this.kitsTable.rows.count() && await this.deactivateAllKitsFor(shortId);
+    const hasKitRequests = await this.hasKitRequests();
+    if (hasKitRequests) {
+      const kitsCount = await this.kitsTable.rowLocator().count();
+      for (let i = 0; i < kitsCount; i++) {
+        await this.deactivate(i);
+        await this.kitsTable.rows.count() && await this.deactivateAllKitsFor(shortId);
+      }
     }
-    await expect(this.kitsTable.rows).toHaveCount(0);
-    logInfo(`Deactivated all kits. Short ID: ${shortId}`);
+
+    await expect(this.kitsTable.rowLocator()).toHaveCount(0);
+    const selectedKit = await this.getSelectKitType();
+    logInfo(`Deactivated all ${selectedKit} kits. Short ID: ${shortId}`);
   }
 
   public async hasKitRequests(): Promise<boolean> {
@@ -136,6 +114,17 @@ export default abstract class KitsPageBase extends DsmPageBase {
       return false;
     }
     return true;
+  }
+
+  public async getSelectKitType(): Promise<KitTypeEnum | null> {
+    const kits = await this.getStudyKitTypes();
+    for (const kit of kits) {
+      const isSelected = await this.kitType.kitTypeCheckbox(kit).isChecked();
+      if (isSelected) {
+        return kit;
+      }
+    }
+    return null;
   }
 
   public async getStudyKitTypes(): Promise<KitTypeEnum[]> {
