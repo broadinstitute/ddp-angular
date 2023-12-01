@@ -217,9 +217,8 @@ test.describe.serial('Blood Kit Upload', () => {
     await trackingScanPage.save({ verifySuccess: false });
 
     // Enter the same pair again to trigger the scan error
+    const errMsg = `Error occurred sending this scan pair!  Kit ${kitLabel} was already associated with tracking id ${trackingLabel}`;
     await expect(page.locator('//h3[contains(@class, "Color--warn")]')).toHaveText('Error - Failed to save all changes');
-    await expect(page.locator('//p[contains(@class, "Color--warn")]')).toHaveText(
-      `Error occurred sending this scan pair!  Error occured for Kit Label "${kitLabel}" ` +
-      'For more information please contact your DSM developer');
+    await expect(page.locator('//p[contains(@class, "Color--warn")]')).toHaveText(new RegExp(errMsg));
   });
 })
