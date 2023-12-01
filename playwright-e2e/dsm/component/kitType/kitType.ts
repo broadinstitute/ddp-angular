@@ -1,20 +1,21 @@
 import {Locator, Page} from '@playwright/test';
 import {KitTypeEnum} from 'dsm/component/kitType/enums/kitType-enum';
+import Checkbox from 'dss/component/checkbox';
 
 export class KitType {
   constructor(private readonly page: Page) {}
 
   public async selectKitType(kitType: KitTypeEnum): Promise<void> {
-    await this.page.locator(this.kitTypeCheckbox(kitType)).click();
+    await this.kitTypeCheckbox(kitType).check();
   }
 
   /* Locators */
   public displayedKitType(kitType: KitTypeEnum): Locator {
-    return this.page.locator(this.kitTypeCheckbox(kitType));
+    return this.kitTypeCheckbox(kitType).toLocator();
   }
 
   /* XPaths */
-  private kitTypeCheckbox(kitType: KitTypeEnum): string {
-    return `//mat-checkbox[.//label/span[text()[normalize-space()='${kitType}']]]`;
+  private kitTypeCheckbox(kitType: KitTypeEnum): Checkbox {
+    return new Checkbox(this.page, { label: kitType, root: 'app-root' });
   }
 }

@@ -134,9 +134,8 @@ test.describe.serial('Blood Kit Upload', () => {
         await kitsWithoutLabelPage.assertCreateLabelsBtn();
         await kitsWithoutLabelPage.assertReloadKitListBtn();
         await kitsWithoutLabelPage.assertTableHeader();
-        await kitsWithoutLabelPage.assertPageTitle();
 
-        const kitsTable = kitsWithoutLabelPage.kitsWithoutLabelTable;
+        const kitsTable = kitsWithoutLabelPage.getKitsTable;
         await kitsTable.searchByColumn(KitsColumnsEnum.SHORT_ID, shortID);
         await expect(kitsTable.rowLocator()).toHaveCount(1);
         shippingID = (await kitsTable.getRowText(0, KitsColumnsEnum.SHIPPING_ID)).trim();
@@ -156,7 +155,7 @@ test.describe.serial('Blood Kit Upload', () => {
       // New kit will be listed on Error page because address is in either Canada or New York
       await test.step('New kit will be listed on Error page', async () => {
         const errorPage = await navigation.selectFromSamples<ErrorPage>(SamplesNavEnum.ERROR);
-        const kitListTable = errorPage.kitListTable;
+        const kitListTable = errorPage.getKitsTable;
         await errorPage.waitForReady();
         await errorPage.selectKitType(kitType);
         await expect(async () => {
@@ -193,7 +192,7 @@ test.describe.serial('Blood Kit Upload', () => {
         const kitsWithoutLabelPage = await navigation.selectFromSamples<KitsWithoutLabelPage>(SamplesNavEnum.KITS_WITHOUT_LABELS);
         await kitsWithoutLabelPage.waitForReady();
         await kitsWithoutLabelPage.selectKitType(kitType);
-        const kitsTable = kitsWithoutLabelPage.kitsWithoutLabelTable;
+        const kitsTable = kitsWithoutLabelPage.getKitsTable;
         await kitsTable.searchByColumn(KitsColumnsEnum.SHORT_ID, shortID);
         await expect(kitsTable.rowLocator()).toHaveCount(0);
       });

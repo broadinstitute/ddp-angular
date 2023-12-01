@@ -924,7 +924,7 @@ workflows:
           <<: *filter-develop-branch
           env: dev
           test_suite: UNKNOWN
-          parallelism_num: 2
+          parallelism_num: 1
           requires:
             - playwright-build
             - app-deploy
