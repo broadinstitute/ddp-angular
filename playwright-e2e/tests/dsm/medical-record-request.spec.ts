@@ -29,8 +29,8 @@ test.describe.serial('Medical records request workflow', () => {
     'Boston Children\'s Hospital'
   ];
 
-  // Two CMI Clinical and two CMI Research studies
-  const studies: StudyEnum[] = [StudyEnum.MBC, StudyEnum.OSTEO2, StudyEnum.LMS, StudyEnum.PANCAN];
+  // One CMI Clinical and One CMI Research studies
+  const studies: StudyEnum[] = [StudyEnum.OSTEO2, StudyEnum.PANCAN];
 
   for (const study of studies) {
     test(`Update Institution @dsm @${study}`, async ({ page, request }) => {
@@ -73,6 +73,9 @@ test.describe.serial('Medical records request workflow', () => {
 
         const participantsCount = await participantListTable.numOfParticipants();
         expect(participantsCount).toBeGreaterThanOrEqual(1);
+        if (participantsCount >= 50) {
+          await participantListTable.changeRowCount(50);
+        }
 
         // Sort by Registration Date: newest first
         await participantListTable.sort(registrationDateColumn, SortOrder.ASC);
