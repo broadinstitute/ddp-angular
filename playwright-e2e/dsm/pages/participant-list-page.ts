@@ -95,11 +95,12 @@ export default class ParticipantListPage {
     const saveModal = new Modal(this.page);
     expect(await saveModal.getHeader()).toBe('Please enter a name for your filter');
     await saveModal.getInput({ label: 'Filter Name' }).fill(viewName);
-    await saveModal.getButton({ label: /Save Filter/ }).click();
+    console.log(`New filter name: ${viewName}`);
     await Promise.all([
-      waitForNoSpinner(this.page),
+      saveModal.getButton({ label: /Save Filter/ }).click(),
       waitForResponse(this.page, {uri: '/ui/saveFilter?'})
     ]);
+    await waitForNoSpinner(this.page);
   }
 
   /**
