@@ -11,9 +11,11 @@ export default class CohortTag {
   }
 
   public async remove(tagName: string): Promise<void> {
-    await this.getRemoveButtonFor(tagName).click();
-    await this.waitForOKResponse('deleteCohortTag');
-    await this.assertCohortTagToHaveCount(tagName, 0);
+    await Promise.all([
+      this.waitForOKResponse('deleteCohortTag'),
+      this.getRemoveButtonFor(tagName).click(),
+      this.assertCohortTagToHaveCount(tagName, 0),
+    ]);
   }
 
   public async submitAndExit(): Promise<void> {
