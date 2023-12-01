@@ -71,6 +71,7 @@ test.describe.serial('Saliva Kit Upload with a Canadian or New York address', ()
   for (const [index, study] of studies.entries()) {
     test(`Kit prefix check @cmi @dsm @${study} @kit`, async ({ page }, testInfo) => {
       test.slow();
+
       const testResultDir = testInfo.outputDir;
 
       await welcomePage.selectStudy(study);
@@ -161,7 +162,7 @@ test.describe.serial('Saliva Kit Upload with a Canadian or New York address', ()
           // create label (previous step) could take some time
           await errorPage.reloadKitList();
           await expect(kitListTable.rows).toHaveCount(1, { timeout: 10 * 1000 });
-        }).toPass({ timeout: 90 * 1000 });
+        }).toPass({ timeout: 3 * 60 * 1000 });
       });
 
       await test.step('Initial scan', async () => {

@@ -39,10 +39,17 @@ export default abstract class KitsPageBase extends DsmPageBase {
     await waitForNoSpinner(this.page);
   }
 
-  public async reloadKit(kitType: KitTypeEnum): Promise<void> {
+  public async reloadKitPage(kitType: KitTypeEnum): Promise<void> {
     await this.page.reload();
     await this.waitForReady();
     await this.selectKitType(kitType);
+  }
+
+  public async reloadKitList(): Promise<void> {
+    const waitPromise = waitForResponse(this.page, {uri: '/kitRequests'});
+    await this.getReloadKitListBtn.click();
+    await waitPromise;
+    await waitForNoSpinner(this.page);
   }
 
   public async selectKitType(kitType: KitTypeEnum): Promise<boolean> {
@@ -150,13 +157,6 @@ export default abstract class KitsPageBase extends DsmPageBase {
         break;
     }
     return kitTypes;
-  }
-
-  public async reloadKitList(): Promise<void> {
-    const waitPromise = waitForResponse(this.page, {uri: '/kitRequests'});
-    await this.getReloadKitListBtn.click();
-    await waitPromise;
-    await waitForNoSpinner(this.page);
   }
 
   private async deactivate(row = 0): Promise<string> {

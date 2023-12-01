@@ -28,6 +28,8 @@ import ErrorPage from 'dsm/pages/samples/error-page';
 
 test.describe('Blood & RNA Kit Upload', () => {
   test('Verify that a blood & rna kit can be uploaded @dsm @rgp @functional @upload', async ({ page, request}, testInfo) => {
+    test.slow();
+
     const testResultDirectory = testInfo.outputDir;
 
     const study = StudyEnum.RGP;

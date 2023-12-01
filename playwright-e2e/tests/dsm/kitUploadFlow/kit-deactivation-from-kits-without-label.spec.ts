@@ -47,7 +47,7 @@ test.describe.serial('Kit Deactivation', () => {
 
             shippingId = await kitsWithoutLabelPage.deactivateKitFor({shortId});
 
-            await kitsWithoutLabelPage.reloadKit(kit);
+            await kitsWithoutLabelPage.reloadKitPage(kit);
 
             // Deactivated kit should be removed from the table
             const kitsExists = await kitsWithoutLabelPage.hasKitRequests();

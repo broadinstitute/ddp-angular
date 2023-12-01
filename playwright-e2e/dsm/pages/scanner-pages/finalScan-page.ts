@@ -32,10 +32,10 @@ export default class FinalScanPage {
 
     await expect(saveButton, 'Final Scan page - Save Scan Pairs button is not enabled').toBeEnabled();
 
+    const waitPromise = waitForResponse(this.page, {uri: 'finalScan'});
     await saveButton.focus();
     await saveButton.click();
-
-    await waitForResponse(this.page, {uri: 'finalScan'});
+    await waitPromise;
 
     if (verifySuccess) {
       const textUnderScanPair = this.page.locator(this.textUnderScanPairXPath);
