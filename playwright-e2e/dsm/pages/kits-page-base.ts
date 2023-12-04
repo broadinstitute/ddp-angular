@@ -9,12 +9,17 @@ import { logInfo } from 'utils/log-utils';
 import { KitsColumnsEnum } from './kitsInfo-pages/enums/kitsColumns-enum';
 import Modal from 'dsm/component/modal';
 import { assertTableHeaders } from 'utils/assertion-helper';
+import { getDate, getDateMonthAbbreviated, offsetDaysFromDate } from 'utils/date-utils';
+import { SamplesNavEnum } from 'dsm/component/navigation/enums/samplesNav-enum';
 
 export default abstract class KitsPageBase extends DsmPageBase {
   protected abstract PAGE_TITLE: string;
   protected abstract TABLE_HEADERS: string[];
   protected readonly kitType: KitType;
   protected readonly kitsTable: KitsTable;
+  private readonly sentColumnIndex = 5;
+  private readonly receivedColumnIndex = 3;
+  private readonly mfBarcodeIndex = 1;
 
   constructor(readonly page: Page) {
     super(page);
@@ -177,6 +182,101 @@ export default abstract class KitsPageBase extends DsmPageBase {
     await expect(new Modal(this.page).toLocator()).not.toBeVisible();
     await waitForNoSpinner(this.page);
     return reason;
+  }
+
+  /**
+ * Sorts the given column by clicking on it.
+ * Date type columns - first click gives you list starting with dates from long ago; second click starts with recent dates
+ * @param columnName name of the column to be sorted
+ */
+  public async sortColumnByDate(opts: {
+    columnName: KitsColumnsEnum,
+    startWithRecentDates: boolean}): Promise<void> {
+    const { columnName, startWithRecentDates = true } = opts;
+
+    const column = columnName as string;
+    const columnSorter = this.page.locator(`//app-shipping//table//th[contains(.,'${column}')]/mfdefaultsorter`);
+    expect(columnSorter, `The column ${column} is not able to be sorted in the ${this.PAGE_TITLE} page`).toBeTruthy();
+
+    if (!startWithRecentDates) {
+      //Only a single click is needed
+      await columnSorter.click();
+    } else if (startWithRecentDates) {
+      //Two clicks are needed to get the wanted result
+      await columnSorter.click();
+      await columnSorter.click();
+    }
+  }
+
+  /**
+   * Sorts the given column by clicking on it.
+   * String type columns - first click gives you A -> Z list; second click gives you Z -> A list
+   * @param columnName name of the column to be sorted
+   */
+  public async sortColumnAlphabetically(opts: {columnName: KitsColumnsEnum, aToZ: boolean}): Promise<void> {
+    const { columnName, aToZ = true } = opts;
+
+    const column = columnName as string;
+    const columnSorter = this.page.locator(`//app-shipping//table//th[contains(.,'${column}')]/mfdefaultsorter`);
+    expect(columnSorter, `The column ${column} is not able to be sorted in the ${this.PAGE_TITLE} page`).toBeTruthy();
+
+    if (aToZ) {
+      //Only a single click is needed
+      await columnSorter.click();
+    } else {
+      //Two clicks are needed to get the wanted result
+      await columnSorter.click();
+      await columnSorter.click();
+    }
+  }
+
+  /**
+   * Gets the mf barcodes for kits that were sent or received since the given date
+   * @param sinceDay The earliest date to search for kits
+   * @param currentPage The current page being checked
+   * @returns Array of locators that have the mf barcode
+   */
+  public async getMFBarcodesSince(sinceDay: string, currentPage: SamplesNavEnum.SENT | SamplesNavEnum.RECEIVED):Promise<Locator[]> {
+    const today = getDate();
+    let currentDay = (new Date()).getTime(); //Get today's date in milliseconds for comparison
+    const earliestDate = (new Date(sinceDay)).getTime(); //Get earliest requested date in milliseconds for comparison
+    let currentDayFormatted = getDateMonthAbbreviated(today);
+    const sinceDateFormatted = getDateMonthAbbreviated(sinceDay);
+    logInfo(`Earliest date of expected kit: ${sinceDateFormatted}`);
+    logInfo(`Today: ${currentDayFormatted}`);
+    let allRelevantKits: Locator[] = [];
+
+    while (currentDay >= earliestDate) {
+      const mfBarcodeLocator = this.getMFBarcodeLocatorString(currentPage, currentDayFormatted);
+      const batchOfKits = await this.page.locator(mfBarcodeLocator).all();
+      logInfo(`Amount of kits from ${currentDayFormatted}: ${batchOfKits.length}`);
+      allRelevantKits = allRelevantKits.concat(batchOfKits);
+      logInfo(`Current amount of recent kits: ${allRelevantKits.length}`);
+      const currentDayInDateFormat = new Date(currentDayFormatted);
+      const previousDay = getDate(offsetDaysFromDate(currentDayInDateFormat, 1, { isAdd: false }));
+      currentDayFormatted = getDateMonthAbbreviated(previousDay);
+      currentDay = (new Date(currentDayFormatted)).getTime();
+    }
+    expect(allRelevantKits, `No kits have been sent out between ${sinceDay} and ${today}`).toBeTruthy();
+    logInfo(`Total amount of recent kits: ${allRelevantKits.length}`);
+    return allRelevantKits;
+  }
+
+  private getMFBarcodeLocatorString(
+    currentPage: SamplesNavEnum.SENT | SamplesNavEnum.RECEIVED,
+    day: string): string {
+    let result = '';
+    switch (currentPage) {
+      case SamplesNavEnum.SENT:
+        result = `//app-shipping//table//td[${this.sentColumnIndex}][contains(.,'${day}')]/following-sibling::td[${this.mfBarcodeIndex}]`;
+        break;
+      case SamplesNavEnum.RECEIVED:
+        result = `//app-shipping//table//td[${this.receivedColumnIndex}][contains(.,'${day}')]/following-sibling::td[${this.mfBarcodeIndex}]`;
+        break;
+      default:
+        break;
+    }
+    return result;
   }
 
   public get deactivateReasonInput(): Locator {

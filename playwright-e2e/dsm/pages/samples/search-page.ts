@@ -2,8 +2,9 @@ import { expect, Locator, Page } from '@playwright/test';
 import DatePicker from 'dsm/component/date-picker';
 import Select from 'dss/component/select';
 import Table from 'dss/component/table';
-import { logInfo } from 'utils/log-utils';
 import { waitForNoSpinner, waitForResponse } from 'utils/test-utils';
+import KitsPageBase from 'dsm/pages/kits-page-base';
+import { KitsColumnsEnum } from 'dsm/pages/kitsInfo-pages/enums/kitsColumns-enum';
 
 export enum SearchByField {
   SHORT_ID = 'Short ID',
@@ -11,8 +12,24 @@ export enum SearchByField {
   MANUFACTURE_BARCODE = 'Manufacturer Barcode'
 }
 
-export default class SearchPage {
-  constructor(private readonly page: Page) {}
+export default class SearchPage extends KitsPageBase {
+  constructor(page: Page) {
+    super(page);
+  }
+
+  protected PAGE_TITLE = 'Kits Search';
+  protected TABLE_HEADERS = [
+    KitsColumnsEnum.DDP_REALM,
+    KitsColumnsEnum.SHORT_ID,
+    KitsColumnsEnum.COLLABORATOR_PARTICIPANT_ID,
+    KitsColumnsEnum.COLLABORATOR_SAMPLE_ID,
+    KitsColumnsEnum.SHIPPING_ID,
+    KitsColumnsEnum.MF_CODE,
+    KitsColumnsEnum.TYPE,
+    KitsColumnsEnum.SENT,
+    KitsColumnsEnum.RECEIVED,
+    KitsColumnsEnum.COLLECTION_DATE
+  ];
 
   async waitForReady(): Promise<void> {
     await expect(this.page.locator('h1')).toHaveText('Kit Search');

@@ -70,7 +70,7 @@ test.describe.serial('GP Collection Date Permissions Test', () => {
         await kitsSentPage.sortColumnByDate({ columnName: KitsColumnsEnum.SENT, startWithRecentDates: true });
         const today = new Date();
         const aWeekAgo = getDate(offsetDaysFromDate(today, 7, { isAdd: false }));
-        todaysKits = await kitsSentPage.getMFBarcodesSince(aWeekAgo);
+        todaysKits = await kitsSentPage.getMFBarcodesSince(aWeekAgo, SamplesNavEnum.SENT);
         for (const kits of todaysKits) {
           const mfBarcode = (await kits.innerText()).trim();
           todaysMFBarcodes.push(mfBarcode);
