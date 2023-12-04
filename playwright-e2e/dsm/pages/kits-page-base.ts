@@ -8,7 +8,6 @@ import { KitType } from 'dsm/component/kitType/kitType';
 import { logInfo } from 'utils/log-utils';
 import { KitsColumnsEnum } from './kitsInfo-pages/enums/kitsColumns-enum';
 import Modal from 'dsm/component/modal';
-import { assertTableHeaders } from 'utils/assertion-helper';
 
 export default abstract class KitsPageBase extends DsmPageBase {
   protected abstract PAGE_TITLE: string;

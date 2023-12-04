@@ -30,6 +30,11 @@ export default class Checkbox extends WidgetBase {
   }
 
   async isChecked(): Promise<boolean> {
+    try {
+      await this.toLocator().scrollIntoViewIfNeeded();
+    } catch (error) {
+      // ignored
+    }
     const isChecked = (await this.toLocator().getAttribute('class'))?.includes('mat-checkbox-checked');
     return isChecked ? isChecked : false;
   }
