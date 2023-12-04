@@ -1,4 +1,5 @@
 import { Locator, expect } from '@playwright/test';
+import Dropdown from 'dsm/component/dropdown';
 import { KitTypeEnum } from 'dsm/component/kitType/enums/kitType-enum';
 import { MainMenuEnum } from 'dsm/component/navigation/enums/mainMenu-enum';
 import { SamplesNavEnum } from 'dsm/component/navigation/enums/samplesNav-enum';
@@ -48,7 +49,8 @@ test.describe.serial('GP Collection Date Permissions Test', () => {
         * Unsent Kits Overview, Report, Summary, Kits without Labels, Queue, Error, Initial Scan, Tracking Scan, Final Scan, RGP Final Scan,
         * Sent, Received, Sent/Received Overview, Search, Label Settings, Clinical Orders
         */
-        const availableSampleMenuOptions = await navigation.getDisplayedSamplesMenuOptions();
+        const sampleMenu = new Dropdown(page, 'Samples');
+        const availableSampleMenuOptions = await sampleMenu.getDisplayedOptions<SamplesNavEnum>();
         const amountOfSampleMenuOptions = availableSampleMenuOptions.length;
         expect(
           amountOfSampleMenuOptions,

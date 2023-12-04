@@ -89,28 +89,6 @@ export class Navigation {
     return displayedMenuOptions;
   }
 
-  public async getDisplayedSamplesMenuOptions(): Promise<SamplesNavEnum[]> {
-    let menuOptions: Locator[] = [];
-    await expect(async () => {
-      menuOptions = await this.page.
-      locator(`//app-navigation//ul[1]//li[contains(@class, 'dropdown')]//a[contains(.,'Samples')]/following-sibling::ul//li`).
-      all();
-      const countOfMenuOptions = menuOptions.length;
-      logInfo(`Amount of sample menu options: ${countOfMenuOptions}`);
-      expect(countOfMenuOptions).toBeGreaterThanOrEqual(1);
-    }).toPass({
-      intervals: [5_000]
-    });
-
-    const displayedMenuOptions: SamplesNavEnum[] = [];
-    for (const option of menuOptions) {
-      const optionName = ((await option.innerText()).trim()) as SamplesNavEnum;
-      logInfo(`Sample menu option: ${optionName}`);
-      displayedMenuOptions.push(optionName);
-    }
-    return displayedMenuOptions;
-  }
-
   private async selectFrom(from: MainMenuEnum, selection: Selection): Promise<void> {
     await new Dropdown(this.page, from).selectOption(selection);
     await waitForNoSpinner(this.page);

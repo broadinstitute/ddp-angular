@@ -28,8 +28,8 @@ echo "export DSM_USER2_EMAIL=$dsmUser2" >> playwright-env/envvars
 # Additional DSM User (DSM general testing)
 export dsmUser3=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[] | select(.app==\"dsm\") | .users[3] | .userName")
 export dsmUser3Password=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[] | select(.app==\"dsm\") | .users[3] | .password")
-echo "export DSM_USER3_PASSWORD=$dsmUser3Password" >> playwright-env/envvars
-echo "export DSM_USER3_EMAIL=$dsmUser3" >> playwright-env/envvars
+echo "export DSM_USER4_PASSWORD=$dsmUser4Password" >> playwright-env/envvars
+echo "export DSM_USER4_EMAIL=$dsmUser4" >> playwright-env/envvars
 
 # SINGULAR
 export singularUser=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[] | select(.app==\"singular\") | .userName")

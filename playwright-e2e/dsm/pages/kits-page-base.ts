@@ -195,7 +195,7 @@ export default abstract class KitsPageBase extends DsmPageBase {
     const { columnName, startWithRecentDates = true } = opts;
 
     const column = columnName as string;
-    const columnSorter = this.page.locator(`//app-shipping//table//th[contains(.,'${column}')]/mfdefaultsorter`);
+    const columnSorter = this.page.locator(`//table//th[contains(.,'${column}')]/mfdefaultsorter`);
     expect(columnSorter, `The column ${column} is not able to be sorted in the ${this.PAGE_TITLE} page`).toBeTruthy();
 
     if (!startWithRecentDates) {
@@ -217,13 +217,15 @@ export default abstract class KitsPageBase extends DsmPageBase {
     const { columnName, aToZ = true } = opts;
 
     const column = columnName as string;
-    const columnSorter = this.page.locator(`//app-shipping//table//th[contains(.,'${column}')]/mfdefaultsorter`);
+    const columnSorter = this.page.locator(`//table//th[contains(.,'${column}')]/mfdefaultsorter`);
     expect(columnSorter, `The column ${column} is not able to be sorted in the ${this.PAGE_TITLE} page`).toBeTruthy();
 
     if (aToZ) {
       //Only a single click is needed
       await columnSorter.click();
-    } else {
+    }
+
+    if (!aToZ) {
       //Two clicks are needed to get the wanted result
       await columnSorter.click();
       await columnSorter.click();
@@ -268,10 +270,10 @@ export default abstract class KitsPageBase extends DsmPageBase {
     let result = '';
     switch (currentPage) {
       case SamplesNavEnum.SENT:
-        result = `//app-shipping//table//td[${this.sentColumnIndex}][contains(.,'${day}')]/following-sibling::td[${this.mfBarcodeIndex}]`;
+        result = `//table//td[${this.sentColumnIndex}][contains(.,'${day}')]/following-sibling::td[${this.mfBarcodeIndex}]`;
         break;
       case SamplesNavEnum.RECEIVED:
-        result = `//app-shipping//table//td[${this.receivedColumnIndex}][contains(.,'${day}')]/following-sibling::td[${this.mfBarcodeIndex}]`;
+        result = `//table//td[${this.receivedColumnIndex}][contains(.,'${day}')]/following-sibling::td[${this.mfBarcodeIndex}]`;
         break;
       default:
         break;

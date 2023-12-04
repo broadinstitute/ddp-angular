@@ -15,9 +15,6 @@ export default class KitsSentPage extends KitsPageBase {
     KitsColumnsEnum.SENT, KitsColumnsEnum.MF_CODE, KitsColumnsEnum.DDP_REALM,
     KitsColumnsEnum.TYPE, KitsColumnsEnum.SAMPLE_TYPE];
 
-  protected readonly kitType = new KitType(this.page);
-  protected readonly kitsTable = new KitsTable(this.page);
-
   constructor(page: Page) {
     super(page);
   }
