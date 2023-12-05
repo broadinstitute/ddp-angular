@@ -34,7 +34,7 @@ export default class Select extends WidgetBase {
           this.element = this.root.locator('select, mat-select').filter({ has: this.page.locator('label', { hasText: label }) });
         }
     } else {
-      this.element = this.root.locator('select, mat-select').nth(1); // Set to first element
+      this.element = this.root.locator('select, mat-select').nth(0); // Set to first element
     }
   }
 
@@ -48,6 +48,7 @@ export default class Select extends WidgetBase {
    */
   async selectOption(value: string, opts: { exactMatch?: boolean, nth?: number } = {}): Promise<void> {
     const { exactMatch = true, nth = 0 } = opts;
+    await expect(this.toLocator()).toBeEnabled();
     const tagName = await this.toLocator().evaluate((elem) => elem.tagName);
     switch (tagName) {
       case 'SELECT':
