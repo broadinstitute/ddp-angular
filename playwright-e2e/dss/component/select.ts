@@ -5,12 +5,19 @@ import WidgetBase from 'dss/component/widget-base';
  * Works with "mat-select" and "select" web elements
  */
 export default class Select extends WidgetBase {
-  constructor(page: Page, opts: { label?: string | RegExp; ddpTestID?: string; root?: Locator | string; exactMatch?: boolean }) {
-    const { label, ddpTestID, root, exactMatch = false } = opts;
+  constructor(page: Page, opts: {
+    label?: string | RegExp;
+    ddpTestID?: string;
+    selector?: string;
+    root?: Locator | string;
+    exactMatch?: boolean
+  }) {
+    const { label, ddpTestID, selector, root, exactMatch = false } = opts;
     super(page, { root: root ? root : 'mat-form-field', testId: ddpTestID });
 
-    if (!ddpTestID) {
-      if (label) {
+    if (selector) {
+      this.element = this.root.locator(selector);
+    } else if (label) {
         if (typeof label === 'string') {
           this.element = exactMatch
             ? this.root.locator(
@@ -26,9 +33,8 @@ export default class Select extends WidgetBase {
         } else {
           this.element = this.root.locator('select, mat-select').filter({ has: this.page.locator('label', { hasText: label }) });
         }
-      } else {
-        this.element = this.root.locator('select, mat-select');
-      }
+    } else {
+      this.element = this.root.locator('select, mat-select').nth(0); // Set to first element
     }
   }
 
@@ -40,8 +46,9 @@ export default class Select extends WidgetBase {
    * @param opts
    * @returns {Promise<void>}
    */
-  async selectOption(value: string, opts: { exactMatch?: boolean } = {}): Promise<void> {
-    const { exactMatch = true } = opts;
+  async selectOption(value: string, opts: { exactMatch?: boolean, nth?: number } = {}): Promise<void> {
+    const { exactMatch = true, nth = 0 } = opts;
+    await expect(this.toLocator()).toBeEnabled();
     const tagName = await this.toLocator().evaluate((elem) => elem.tagName);
     switch (tagName) {
       case 'SELECT':
@@ -60,9 +67,9 @@ export default class Select extends WidgetBase {
         const ariaMultiSelectable = await dropdown.getAttribute('aria-multiselectable');
         const isMultiSelectable = ariaMultiSelectable ? ariaMultiSelectable === 'true' : false;
         if (exactMatch) {
-          await dropdown.locator(`mat-option .mat-option-text >> text="${value}"`).click();
+          await dropdown.locator(`mat-option .mat-option-text >> text="${value}"`).nth(nth).click();
         } else {
-          await dropdown.locator(`mat-option .mat-option-text >> text=${value}`).click();
+          await dropdown.locator(`mat-option .mat-option-text >> text=${value}`).nth(nth).click();
         }
         if (isMultiSelectable) {
           // Use tab to close multiSelectable dropdown

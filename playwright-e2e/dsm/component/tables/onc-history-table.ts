@@ -193,6 +193,7 @@ export default class OncHistoryTable extends Table {
   private async selectRequest(root: Locator, selectRequest: OncHistorySelectRequestEnum): Promise<Response | null> {
     const matSelect = this.activeSelectedRequestListItem(root);
     const selectedValue = await matSelect.textContent();
+
     if (selectedValue?.trim() !== selectRequest) {
       const selectInput = new Select(this.page, { root });
       const [resp] = await Promise.all([
@@ -259,10 +260,12 @@ export default class OncHistoryTable extends Table {
     return this.row(index).locator('td').first();
   }
 
-  public row(index?: number): Locator {
-    return index
-      ? this.page.locator(this.tableXPath + this.rowXPath).nth(index)
-      : this.page.locator(this.tableXPath + this.rowXPath);
+  public row(index: number): Locator {
+    return this.rowLocator().nth(index);
+  }
+
+  public rowLocator(): Locator {
+    return this.page.locator(this.tableXPath + this.rowXPath);
   }
 
   private column(columnName: OncHistoryInputColumnsEnum): Locator {

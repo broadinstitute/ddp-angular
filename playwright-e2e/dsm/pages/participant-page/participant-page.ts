@@ -166,7 +166,7 @@ export default class ParticipantPage {
   }
 
   /* XPaths */
-  private getMainTextInfoXPath(info: MainInfoEnum) {
+  public getMainTextInfoXPath(info: MainInfoEnum) {
     return this.getMainInfoXPath(info);
   }
 

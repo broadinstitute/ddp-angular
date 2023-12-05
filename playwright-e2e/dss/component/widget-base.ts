@@ -11,7 +11,7 @@ export default abstract class WidgetBase implements WidgetInterface {
     this.nth = nth;
     this.root = root ? (typeof root === 'string' ? this.page.locator(root) : root) : this.page.locator('app-root');
     if (testId) {
-      this.element = this.page.locator(`[data-ddp-test="${testId}"]`)
+      this.element = this.page.locator(`[data-ddp-test="${testId}"]`);
     }
   }
 
@@ -54,6 +54,6 @@ export default abstract class WidgetBase implements WidgetInterface {
   }
 
   async getAttribute(attributeName: string): Promise<string | null> {
-    return this.toLocator().getAttribute(attributeName)
+    return this.toLocator().getAttribute(attributeName);
   }
 }

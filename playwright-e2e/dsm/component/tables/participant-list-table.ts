@@ -1,7 +1,6 @@
 import { Locator, Page, expect } from '@playwright/test';
 import Table from 'dss/component/table';
 import ParticipantPage from 'dsm/pages/participant-page/participant-page';
-import { ParticipantsListPaginator } from 'lib/component/dsm/paginators/participantsListPaginator';
 import { rows } from 'lib/component/dsm/paginators/types/rowsPerPage';
 import { getDate, offsetDaysFromToday } from 'utils/date-utils';
 import { AdditionalFilter } from 'dsm/component/filters/sections/search/search-enums';
@@ -9,16 +8,10 @@ import ParticipantListPage from 'dsm/pages/participant-list-page';
 
 export class ParticipantListTable extends Table {
   private readonly _participantPage: ParticipantPage;
-  private readonly _paginator: ParticipantsListPaginator;
 
   constructor(page: Page) {
     super(page, { cssClassAttribute: '.table' });
-    this._paginator = new ParticipantsListPaginator(this.page);
     this._participantPage = new ParticipantPage(this.page);
-  }
-
-  public get paginator(): ParticipantsListPaginator {
-    return this._paginator;
   }
 
   public async goToPage(page: number): Promise<void> {
