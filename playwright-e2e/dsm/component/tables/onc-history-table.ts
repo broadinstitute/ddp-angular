@@ -260,9 +260,9 @@ export default class OncHistoryTable extends Table {
   }
 
   public row(index?: number): Locator {
-    return index
-      ? this.page.locator(this.tableXPath + this.rowXPath).nth(index)
-      : this.page.locator(this.tableXPath + this.rowXPath);
+    return index === undefined
+      ? this.page.locator(this.tableXPath + this.rowXPath)
+      : this.page.locator(this.tableXPath + this.rowXPath).nth(index);
   }
 
   private column(columnName: OncHistoryInputColumnsEnum): Locator {

@@ -292,7 +292,7 @@ test.describe.serial('Medical records request workflow', () => {
       await participantListPage.filterListByShortId(shortId);
       const participantPage = await participantListTable.openParticipantPageAt(0);
 
-      const existsDateOfMajority = !!(await participantPage.getDateOfMajority());
+      const existsDateOfMajority = await page.locator(participantPage.getMainTextInfoXPath(MainInfoEnum.DATE_OF_MAJORITY)).isVisible();
 
       // Open Medical Request page
       const medicalRecordTable = await openMedicalRecordsTab(participantPage);
@@ -302,19 +302,16 @@ test.describe.serial('Medical records request workflow', () => {
       const download = await medicalRecordsRequestPage.downloadPDFBundle();
       const saveAsFile = path.join(testLogDir, download.suggestedFilename());
       await download.saveAs(saveAsFile);
-      //await page.waitForTimeout(2000); // Needed so next DSM download will not fail
 
       // Download Cover PDF
       let pdf = PDFName.COVER;
       await downloadPdf(medicalRecordsRequestPage, pdf, testLogDir);
-      //await page.waitForTimeout(2000); // Needed so next DSM download will not fail
 
-      // IRB Letter PDF
+      // Download IRB Letter PDF
       pdf = PDFName.IRB_LETTER;
       await downloadPdf(medicalRecordsRequestPage, pdf, testLogDir);
-      //await page.waitForTimeout(2000); // Needed so next DSM download will not fail
 
-      // Somatic Consent Addendum PDF
+      // Download Somatic Consent Addendum PDF
       pdf = existsDateOfMajority
         ? `${pdfDownloadPrefix(study)} ${PDFName.SOMATIC_CONSENT_ADDENDUM_PEDIATRIC}`
         : `${pdfDownloadPrefix(study)} ${PDFName.SOMATIC_CONSENT_ADDENDUM}`;

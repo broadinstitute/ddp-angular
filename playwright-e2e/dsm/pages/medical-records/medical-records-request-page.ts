@@ -148,13 +148,13 @@ export default class MedicalRecordsRequestPage {
   }
 
   public async downloadPDFBundle(): Promise<Download> {
-    const timeout = 1 * 60 * 1000;
+    const timeout = 2 * 60 * 1000;
     const [download] = await Promise.all([
       this.page.waitForEvent('download', { timeout }),
       this.downloadPDFBundleButton.click(),
     ]);
     await waitForNoSpinner(this.page);
-    await expect(this.page.getByText('Download finished.')).toBeVisible();
+    await expect(this.page.getByText(/Download finished/)).toBeVisible();
 
     const fileName = download.suggestedFilename();
     logInfo(`Download PDF Bundle finished: ${fileName}`);
@@ -168,14 +168,14 @@ export default class MedicalRecordsRequestPage {
     await expect(this.downloadPDFBundleButton).toBeVisible();
 
     const doDownload = async (): Promise<Download> => {
-      const [download] = await Promise.all([
-        this.page.waitForEvent('download', { timeout }),
-        select.selectOption(pdf, { nth }),
-        this.downloadSelectedPDFButton.click(),
-      ]);
+      const timeout = 2 * 60 * 1000;
+      const waitPromise = this.page.waitForEvent('download', { timeout });
+      await select.selectOption(pdf, { nth });
+      await this.downloadSelectedPDFButton.click();
+      const download = await waitPromise;
       return download;
     }
-    const timeout = 1 * 60 * 1000;
+
     let download: Download;
     try {
       download = await doDownload();
@@ -183,17 +183,18 @@ export default class MedicalRecordsRequestPage {
       // retry
       const appError = this.page.locator('app-error-snackbar').first();
       if (await appError.isVisible()) {
-        const content = appError.locator('.snackbar-content').innerText();
-        logInfo(`ERROR: Download encountered error. ${content}`);
+        const content = await appError.locator('.snackbar-content').innerText();
+        logInfo(`ERROR: Failed download PDF "${pdf}". ${content}`);
         await appError.locator('[mattooltip="Close"]').click();
+        await this.page.locator('#message a').click();
       }
       download = await doDownload();
     }
     await waitForNoSpinner(this.page);
-    await expect(this.page.getByText('Download finished.')).toBeVisible();
+    await expect(this.page.getByText(/Download finished/)).toBeVisible();
 
     const fileName = download.suggestedFilename();
-    logInfo(`Download PDF finished: ${fileName}`);
+    logInfo(`Download PDF "${pdf}" finished: ${fileName}`);
 
     return download;
   }

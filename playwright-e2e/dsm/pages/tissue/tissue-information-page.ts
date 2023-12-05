@@ -138,8 +138,10 @@ export default class TissueInformationPage {
     const isAllowedToEnterValue = !keptIndefinitelySelection && !isInputDisabled && existingValue.trim() !== value.toString();
 
     if (isAllowedToEnterValue) {
-      await destructionPolicyYears.fillSimple(value.toString());
-      await waitForResponse(this.page, { uri: 'patch' });
+      await Promise.all([
+        waitForResponse(this.page, { uri: 'patch' }),
+        destructionPolicyYears.fillSimple(value.toString())
+      ]);
     }
 
     applyToAll && await this.applyToAll(destructionPolicyLocator);
@@ -156,8 +158,10 @@ export default class TissueInformationPage {
     const allowSelection = !isDisabled && selectedValue?.trim() !== newValue;
 
     if (allowSelection) {
-      await selectElement.selectOption(newValue);
-      await waitForResponse(this.page, { uri: 'patch' });
+      await Promise.all([
+        waitForResponse(this.page, { uri: 'patch' }),
+        selectElement.selectOption(newValue)
+      ]);
     }
 
     await this.checkCheckbox(this.problemsWithTissueUnableToObtainCheckbox, unableToObtainSelection);
@@ -177,8 +181,10 @@ export default class TissueInformationPage {
    }).toPass({ intervals: [10_000], timeout: 30_000 });
 
     if (!isDisabled && selectedValue?.trim() !== gender) {
-      await selectElement.selectOption(gender);
-      await waitForResponse(this.page, { uri: 'patch' });
+      await Promise.all([
+        waitForResponse(this.page, { uri: 'patch' }),
+        selectElement.selectOption(gender),
+      ]);
     }
   }
 
@@ -231,8 +237,10 @@ export default class TissueInformationPage {
       const todayBtn = new Button(this.page, { root, exactMatch: true, label: 'Today' });
       const isDisabled = await todayBtn.isDisabled();
       if (!isDisabled) {
-        await todayBtn.click();
-        await waitForResponse(this.page, { uri: 'patch' });
+        await Promise.all([
+          waitForResponse(this.page, { uri: 'patch' }),
+          todayBtn.click()
+        ]);
         return;
       }
     }
@@ -241,7 +249,6 @@ export default class TissueInformationPage {
       await datePicker.open();
       await datePicker.pickDate(date);
       await datePicker.close();
-      await waitForResponse(this.page, { uri: 'patch' });
     }
   }
 
@@ -250,12 +257,16 @@ export default class TissueInformationPage {
     const isChecked = await checkbox.isChecked();
     const isDisabled = await checkbox.isDisabled();
     if (check && !isChecked && !isDisabled) {
-      await checkbox.check();
-      await waitForResponse(this.page, { uri: 'patch' });
+      await Promise.all([
+        waitForResponse(this.page, { uri: 'patch' }),
+        checkbox.check()
+      ]);
     }
     if (!check && isChecked && !isDisabled) {
-      await checkbox.uncheck();
-      await waitForResponse(this.page, { uri: 'patch' });
+      await Promise.all([
+        waitForResponse(this.page, { uri: 'patch' }),
+        checkbox.uncheck()
+      ]);
     }
   }
 
