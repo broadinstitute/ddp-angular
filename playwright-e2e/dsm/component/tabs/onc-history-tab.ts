@@ -58,15 +58,15 @@ export default class OncHistoryTab {
     await expect(downloadBtn, `Download PDF Bundle Button is not visible`).toBeVisible();
     await expect(downloadBtn, `Download PDF Bundle Button is not enabled`).toBeEnabled();
 
+    const waitRespPromise = waitForResponse(this.page, { uri: 'downloadPDF' });
     await downloadBtn.click();
     await this.requestAnyway();
     const downloadingText = this.page.getByText('Downloading... This might take a while');
     await expect(downloadingText, 'Downloading text is not visible').toBeVisible();
-
-    await waitForResponse(this.page, { uri: 'downloadPDF' });
+    await waitRespPromise;
 
     const downloadFinishedText = this.page.getByText('Download finished.');
-    await expect(downloadFinishedText, 'Downloading finished is not visible').toBeVisible();
+    await expect(downloadFinishedText).toBeVisible();
   }
 
   private async requestAnyway(): Promise<void> {

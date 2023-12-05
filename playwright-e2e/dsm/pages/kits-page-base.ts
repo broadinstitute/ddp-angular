@@ -8,7 +8,6 @@ import { KitType } from 'dsm/component/kitType/kitType';
 import { logInfo } from 'utils/log-utils';
 import { KitsColumnsEnum } from './kitsInfo-pages/enums/kitsColumns-enum';
 import Modal from 'dsm/component/modal';
-import { assertTableHeaders } from 'utils/assertion-helper';
 import { getDate, getDateMonthAbbreviated, offsetDaysFromDate } from 'utils/date-utils';
 import { SamplesNavEnum } from 'dsm/component/navigation/enums/samplesNav-enum';
 

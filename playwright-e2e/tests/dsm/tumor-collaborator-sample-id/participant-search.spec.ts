@@ -32,7 +32,7 @@ import { SortOrder } from 'dss/component/table';
  *
  * DSM should show the correct tumor id prefix: [COLLABORATOR_PREFIX]_[HRUID]_*
  */
-test.describe('Tumor Collaborator Sample ID', () => {
+test.describe.serial('Tumor Collaborator Sample ID', () => {
   // Some studies are excluded due to lack of the suitable paricipants
   const studies: StudyEnum[] = [StudyEnum.OSTEO2, StudyEnum.PANCAN, StudyEnum.MBC, StudyEnum.BRAIN];
 
@@ -69,7 +69,7 @@ test.describe('Tumor Collaborator Sample ID', () => {
       const participantPage: ParticipantPage = await participantListTable.openParticipantPageAt(row);
       const oncHistoryTab = await participantPage.clickTab<OncHistoryTab>(TabEnum.ONC_HISTORY);
       const oncHistoryTable = oncHistoryTab.table;
-      const rows = await oncHistoryTable.row().count(); // append new row
+      const rows = await oncHistoryTable.rowLocator().count(); // append new row
       const rowIndex = rows - 1; // 0th-index
 
       await test.step('Insert new Onc History data', async () => {

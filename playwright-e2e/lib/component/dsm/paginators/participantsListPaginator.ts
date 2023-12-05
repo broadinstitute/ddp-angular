@@ -52,7 +52,10 @@ export class ParticipantsListPaginator {
   }
 
   private async waitForReady(): Promise<void> {
-    await waitForResponse(this.page, {uri: 'filterList'});
+    await Promise.race([
+      waitForResponse(this.page, {uri: 'filterList'}),
+      waitForResponse(this.page, {uri: 'applyFilter'})
+    ]);
     await waitForNoSpinner(this.page);
   }
 
