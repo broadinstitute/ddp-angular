@@ -96,7 +96,8 @@ async function addOncHistory(page: Page, participantListPage: ParticipantListPag
     });
     expect(resp).toBeTruthy();
     logInfo(`${study} request payload:\n${JSON.stringify(resp?.request().postDataJSON())}`);
-    expect(resp?.request().postDataJSON()).toHaveProperty('realm', realm);
+    const respData = resp?.request().postDataJSON();
+    expect(respData).toHaveProperty('realm', realm);
     await oncHistoryTable.deleteRowAt(rowIndex); // clean up
   });
 }
