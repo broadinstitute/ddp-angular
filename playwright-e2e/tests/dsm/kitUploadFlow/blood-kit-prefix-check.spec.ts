@@ -96,7 +96,7 @@ test.describe.serial('Blood Kit Upload', () => {
         expect(shortID).toBeTruthy();
         expect(firstName).toBeTruthy();
         expect(lastName).toBeTruthy();
-        logInfo(`shortId: ${shortID}`);
+        logInfo(`Participant Short ID: ${shortID}`);
 
         kitUploadInfo = new KitUploadInfo(
           shortID,

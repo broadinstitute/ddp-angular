@@ -12,6 +12,7 @@ import { SortOrder } from 'dss/component/table';
 import QuickFilters from 'dsm/component/filters/quick-filters';
 import { getDate, offsetDaysFromToday } from 'utils/date-utils';
 import { AdditionalFilter } from 'dsm/component/filters/sections/search/search-enums';
+import { logInfo } from 'utils/log-utils';
 
 export default class ParticipantListPage {
   private readonly PAGE_TITLE: string = 'Participant List';
@@ -247,19 +248,18 @@ export default class ParticipantListPage {
       const [isAddressValid] = await participantListTable.getTextAt(index, validColumn);
       const [country] = await participantListTable.getTextAt(index, countryColumn);
       const [state] = await participantListTable.getTextAt(index, stateOfResidence);
-      console.log(`Allow NY or Canadians: ${allowNewYorkerOrCanadian}`);
-      console.log(`PT info - country: ${country}, state: ${state}, valid: ${isAddressValid}`);
-      let isMatch = true;
+      logInfo(`Allow NY or Canadians: ${allowNewYorkerOrCanadian}`);
+      logInfo(`PT info - country: ${country}, state: ${state}, valid: ${isAddressValid}`);
+
+      let matchFirstName = true;
       if (firstNameSubstring) {
-        isMatch = fname.indexOf(firstNameSubstring) !== -1
+        matchFirstName = fname.indexOf(firstNameSubstring) !== -1;
       }
-      if (isMatch && normalCollaboratorSampleID.length <= 5 && isAddressValid.toLowerCase() === 'true') {
-        return index;
-      }
-      if (!allowNewYorkerOrCanadian &&
-        ((country === 'CA') ||
-        ((country === 'US') && (state === 'NY')))) {
+      if (!allowNewYorkerOrCanadian && (country === 'CA' || (country === 'US' && state === 'NY'))) {
         return -1;
+      }
+      if (matchFirstName && normalCollaboratorSampleID.length <= 5 && isAddressValid.toLowerCase().trim() === 'true') {
+        return index;
       }
       return -1;
     };
