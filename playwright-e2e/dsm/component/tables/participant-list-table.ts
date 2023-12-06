@@ -1,10 +1,7 @@
-import { Locator, Page, expect } from '@playwright/test';
+import { Locator, Page } from '@playwright/test';
 import Table from 'dss/component/table';
 import ParticipantPage from 'dsm/pages/participant-page/participant-page';
 import { rows } from 'lib/component/dsm/paginators/types/rowsPerPage';
-import { getDate, offsetDaysFromToday } from 'utils/date-utils';
-import { AdditionalFilter } from 'dsm/component/filters/sections/search/search-enums';
-import ParticipantListPage from 'dsm/pages/participant-list-page';
 
 export class ParticipantListTable extends Table {
   private readonly _participantPage: ParticipantPage;
@@ -58,49 +55,12 @@ export class ParticipantListTable extends Table {
   }
 
   /**
-    * Returns the guid of the most recently created playwright participant
-    * @param isRGPStudy mark as true or false if this is being ran in RGP - parameter is only needed if method is ran in RGP study
-    * @returns the guid of the most recently registered playwright participant
-  */
-  public async getGuidOfMostRecentAutomatedParticipant(participantName: string, isRGPStudy?: boolean): Promise<string> {
-    const participantListPage = new ParticipantListPage(this.page);
-    const customizeViewPanel = participantListPage.filters.customizeViewPanel;
-    await customizeViewPanel.open();
-
-    // Only RGP has a default filter with a different First Name field (in Participant Info Columns) - make sure to deselect it before continuing
-    // otherwise there will be 2 different First Name fields in the search section (and in the Participant List)
-    if (isRGPStudy) {
-      await customizeViewPanel.deselectColumns('Participant Info Columns', ['First Name']);
-      await expect(this.getHeaderByName('First Name')).not.toBeVisible();
-    }
-    // Add columns to be used to help find the most recent automated participant
-    await customizeViewPanel.selectColumns('Participant Columns', ['Participant ID', 'Registration Date', 'First Name']);
-    await customizeViewPanel.close();
-
-    //First filter the participant list to only show participants registered within the past two weeks
-    const searchPanel = participantListPage.filters.searchPanel;
-    await searchPanel.open();
-    const today = getDate(new Date());
-    const previousWeek = offsetDaysFromToday(2 * 7);
-    await searchPanel.dates('Registration Date', { from: previousWeek, to: today, additionalFilters: [AdditionalFilter.RANGE] });
-
-    //Also make sure to conduct the search for participants with the given first name of the automated participant
-    await searchPanel.text('First Name', { textValue: participantName });
-    await searchPanel.search();
-
-    //Get the first returned participant to use for testing - and verify at least one participant is returned
-    const numberOfParticipants = await this.rowsCount;
-    expect(numberOfParticipants, `No recent test participants were found with the given first name: ${participantName}`).toBeGreaterThanOrEqual(1);
-    return this.getCellDataForColumn('Participant ID', 1);
-  }
-
-  /**
   * Given a column name and a row number, return the contents of the cell in the participant list
   * @param columnName the column name e.g. Participant ID
   * @param rowNumber the row number
   * @returns the contents of the specified column in the specified row
   */
-  private async getCellDataForColumn(columnName: string, rowNumber: number): Promise<string> {
+  public async getCellDataForColumn(columnName: string, rowNumber: number): Promise<string> {
     const numberOfPrecedingColumns = await this.page.locator(`//table/thead/th[contains(., '${columnName}')]/preceding-sibling::th`).count();
     const columnIndex = numberOfPrecedingColumns + 1;
     //Find the cell in a specific row and column

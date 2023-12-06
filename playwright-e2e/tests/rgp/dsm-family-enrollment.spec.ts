@@ -32,13 +32,14 @@ test.describe.serial('DSM Family Enrollment Handling', () => {
     await participantListPage.waitForReady();
 
     //Get the most recent automated test participant (searches for up to a week ago)
-    const participantListTable = new ParticipantListTable(page);
-    const participantGuid = await participantListTable.getGuidOfMostRecentAutomatedParticipant(user.patient.firstName, true);
+    const participantGuid = await participantListPage.getGuidOfMostRecentAutomatedParticipant(user.patient.firstName, true);
     expect(participantGuid).toBeTruthy();
     saveParticipantGuid(participantGuid);
 
     //Filter the Participant List by the given guid
     await participantListPage.filterListByParticipantGUID(participantGuid);
+
+    const participantListTable = new ParticipantListTable(page);
     const participantPage: ParticipantPage = await participantListTable.openParticipantPageAt(0);
 
     const guid = await participantPage.getGuid();
@@ -99,13 +100,15 @@ test.describe.serial('DSM Family Enrollment Handling', () => {
     const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
     await participantListPage.assertPageTitle();
     await participantListPage.waitForReady();
-    const participantListTable = new ParticipantListTable(page);
-    const participantGuid = await participantListTable.getGuidOfMostRecentAutomatedParticipant(user.patient.firstName, true);
+
+    const participantGuid = await participantListPage.getGuidOfMostRecentAutomatedParticipant(user.patient.firstName, true);
     saveParticipantGuid(participantGuid);
     await participantListPage.filterListByParticipantGUID(user.patient.participantGuid);
     //Check that the filtered list returns at least one participant
     const filteredList = page.locator('tr.ng-star-inserted');
     await expect(filteredList).toHaveCount(1);
+
+    const participantListTable = new ParticipantListTable(page);
     await participantListTable.openParticipantPageAt(0);
 
     //Verify that the proband tab is present (and includes the text RGP and 3 as proband subject ids have the format RGP_{family id}_3)
@@ -536,11 +539,12 @@ test.describe.serial('DSM Family Enrollment Handling', () => {
     await participantListPage.waitForReady();
 
     //Get the most recent automated test participant (searches for up to a week ago)
-    const participantListTable = new ParticipantListTable(page);
-    const participantGuid = await participantListTable.getGuidOfMostRecentAutomatedParticipant(user.patient.firstName, true);
+    const participantGuid = await participantListPage.getGuidOfMostRecentAutomatedParticipant(user.patient.firstName, true);
     saveParticipantGuid(participantGuid);
 
     await participantListPage.filterListByParticipantGUID(user.patient.participantGuid);
+
+    const participantListTable = new ParticipantListTable(page);
     await participantListTable.openParticipantPageAt(0);
     const rgpParticipantPage = new RgpParticipantPage(page);
 
@@ -621,11 +625,12 @@ test.describe.serial('DSM Family Enrollment Handling', () => {
     await participantListPage.waitForReady();
 
     //Get the most recent automated test participant (searches for up to a week ago)
-    const participantListTable = new ParticipantListTable(page);
-    const participantGuid = await participantListTable.getGuidOfMostRecentAutomatedParticipant(user.patient.firstName, true);
+    const participantGuid = await participantListPage.getGuidOfMostRecentAutomatedParticipant(user.patient.firstName, true);
     saveParticipantGuid(participantGuid);
 
     await participantListPage.filterListByParticipantGUID(user.patient.participantGuid);
+
+    const participantListTable = new ParticipantListTable(page);
     await participantListTable.openParticipantPageAt(0);
 
     //Setup family members - for creation and comparison

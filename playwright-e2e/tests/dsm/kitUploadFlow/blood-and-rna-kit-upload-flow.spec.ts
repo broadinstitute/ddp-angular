@@ -53,7 +53,7 @@ test.describe('Blood & RNA Kit Upload', () => {
     await participantListPage.waitForReady();
 
     const participantListTable = new ParticipantListTable(page);
-    const participantGuid = await participantListTable.getGuidOfMostRecentAutomatedParticipant(user.patient.firstName, true);
+    const participantGuid = await participantListPage.getGuidOfMostRecentAutomatedParticipant(user.patient.firstName, true);
     saveParticipantGuid(participantGuid);
 
     await participantListPage.filterListByParticipantGUID(user.patient.participantGuid);
