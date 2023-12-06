@@ -98,6 +98,7 @@ test.describe.serial('GP Collection Date Permissions Test', () => {
             break;
           }
           await page.reload();
+          await kitsSearchPage.waitForReady();
         }
         expect(currentKit, 'No kit has been chosen for the test').toBeTruthy();
       })
