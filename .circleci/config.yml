@@ -890,7 +890,7 @@ workflows:
         - not:
             - equal: [ scheduled_pipeline, << pipeline.trigger_source >> ]
         - not:
-            - equal: [ true, << pipeline.parameters.scheduled-playwright >> ]
+            - << pipeline.parameters.scheduled-playwright >>
         - not:
             - equal: ["run-tests", << pipeline.parameters.api_call >>]
         - not:
