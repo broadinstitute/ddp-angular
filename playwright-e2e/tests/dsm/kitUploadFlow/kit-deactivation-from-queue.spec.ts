@@ -35,7 +35,7 @@ test.describe.serial('Kit Deactivation', () => {
 
         // Deactivated all kit types for one randomly selected participant
         for (const kit of kits) {
-          await page.reload();
+          await kitsQueuePage.reload();
           await kitsQueuePage.waitForReady();
 
           await kitsQueuePage.selectKitType(kit);

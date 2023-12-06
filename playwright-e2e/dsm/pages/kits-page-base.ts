@@ -35,6 +35,7 @@ export default abstract class KitsPageBase extends DsmPageBase {
       this.page.waitForLoadState(),
       expect(this.page.locator('h1')).toHaveText(this.PAGE_TITLE),
     ]);
+    await waitForNoSpinner(this.page);
     await expect(async () => expect(await this.page.locator('mat-checkbox[id]').count()).toBeGreaterThanOrEqual(1)).toPass({ timeout: 60000 });
     const kits = await this.getStudyKitTypes()
     for (const kit of kits) {
@@ -44,7 +45,7 @@ export default abstract class KitsPageBase extends DsmPageBase {
   }
 
   public async reloadKitPage(kitType: KitTypeEnum): Promise<void> {
-    await this.page.reload();
+    await this.reload();
     await this.waitForReady();
     await this.selectKitType(kitType);
   }
