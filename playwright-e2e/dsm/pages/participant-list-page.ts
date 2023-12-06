@@ -179,13 +179,6 @@ export default class ParticipantListPage {
     expect(await participantsTable.rowsCount).toBe(resultsCount);
   }
 
-  public async addColumnsToParticipantList(columnGroup: string, columnOptions: string[]): Promise<void> {
-    const customizeViewPanel = this.filters.customizeViewPanel;
-    await customizeViewPanel.open();
-    await customizeViewPanel.selectColumns(columnGroup, columnOptions);
-  }
-
-
   /* Locators */
   private get tableRowsLocator(): Locator {
     return this.page.locator('[role="row"]:not([mat-header-row]):not(mat-header-row), tbody tr');

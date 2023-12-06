@@ -63,16 +63,19 @@ export class ParticipantListTable extends Table {
     * @returns the guid of the most recently registered playwright participant
   */
   public async getGuidOfMostRecentAutomatedParticipant(participantName: string, isRGPStudy?: boolean): Promise<string> {
-    //Select the columns to be used to help find the most recent automated participant
     const participantListPage = new ParticipantListPage(this.page);
-    await participantListPage.addColumnsToParticipantList('Participant Columns', ['Participant ID', 'Registration Date', 'First Name']);
+    const customizeViewPanel = participantListPage.filters.customizeViewPanel;
+    await customizeViewPanel.open();
 
     // Only RGP has a default filter with a different First Name field (in Participant Info Columns) - make sure to deselect it before continuing
     // otherwise there will be 2 different First Name fields in the search section (and in the Participant List)
     if (isRGPStudy) {
-      const customizeViewPanel = participantListPage.filters.customizeViewPanel;
       await customizeViewPanel.deselectColumns('Participant Info Columns', ['First Name']);
+      await expect(this.getHeaderByName('First Name')).not.toBeVisible();
     }
+    // Add columns to be used to help find the most recent automated participant
+    await customizeViewPanel.selectColumns('Participant Columns', ['Participant ID', 'Registration Date', 'First Name']);
+    await customizeViewPanel.close();
 
     //First filter the participant list to only show participants registered within the past two weeks
     const searchPanel = participantListPage.filters.searchPanel;
