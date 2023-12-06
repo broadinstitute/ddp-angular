@@ -888,11 +888,11 @@ workflows:
       and:
         - not: << pipeline.parameters.do-builds >>
         - not:
-          and:
-            - equal: [ scheduled_pipeline, << pipeline.trigger_source >> ]
-            - equal: [ nightly-playwright-test, << pipeline.schedule.name >> ]
-            - equal: [ weekly-playwright-test, << pipeline.schedule.name >> ]
-            - << pipeline.parameters.scheduled-playwright >>
+            and:
+              - equal: [ scheduled_pipeline, << pipeline.trigger_source >> ]
+              - equal: [ nightly-playwright-test, << pipeline.schedule.name >> ]
+              - equal: [ weekly-playwright-test, << pipeline.schedule.name >> ]
+              - << pipeline.parameters.scheduled-playwright >>
     jobs:
       - api-unit-test:
           <<: *filter-develop-branch
