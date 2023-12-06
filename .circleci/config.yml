@@ -887,10 +887,9 @@ workflows:
     when:
       and:
         - not: << pipeline.parameters.do-builds >>
+        - not: << pipeline.parameters.scheduled-playwright >>
         - not:
             - equal: [ scheduled_pipeline, << pipeline.trigger_source >> ]
-        - not:
-            - << pipeline.parameters.scheduled-playwright >>
         - not:
             - equal: ["run-tests", << pipeline.parameters.api_call >>]
         - not:
