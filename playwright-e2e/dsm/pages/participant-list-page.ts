@@ -10,6 +10,8 @@ import { Filters } from 'dsm/component/filters/filters';
 import { ParticipantListTable } from 'dsm/component/tables/participant-list-table';
 import { SortOrder } from 'dss/component/table';
 import QuickFilters from 'dsm/component/filters/quick-filters';
+import { getDate, offsetDaysFromToday } from 'utils/date-utils';
+import { AdditionalFilter } from 'dsm/component/filters/sections/search/search-enums';
 
 export default class ParticipantListPage {
   private readonly PAGE_TITLE: string = 'Participant List';
@@ -178,13 +180,6 @@ export default class ParticipantListPage {
     await expect(participantsTable.footerLocator().first()).toBeVisible();
     expect(await participantsTable.rowsCount).toBe(resultsCount);
   }
-
-  public async addColumnsToParticipantList(columnGroup: string, columnOptions: string[]): Promise<void> {
-    const customizeViewPanel = this.filters.customizeViewPanel;
-    await customizeViewPanel.open();
-    await customizeViewPanel.selectColumns(columnGroup, columnOptions);
-  }
-
 
   /* Locators */
   private get tableRowsLocator(): Locator {
@@ -365,5 +360,42 @@ export default class ParticipantListPage {
       }
     }
     throw new Error(`Failed to find a suitable participant for ${columnGroup}: ${columnName} = "${value}" within max waiting time 90 seconds.`);
+  }
+
+
+  /**
+    * Returns the guid of the most recently created playwright participant
+    * @param isRGPStudy mark as true or false if this is being ran in RGP - parameter is only needed if method is ran in RGP study
+    * @returns the guid of the most recently registered playwright participant
+  */
+  public async getGuidOfMostRecentAutomatedParticipant(participantName: string, isRGPStudy?: boolean): Promise<string> {
+    const customizeViewPanel = this.filters.customizeViewPanel;
+    await customizeViewPanel.open();
+
+    // Only RGP has a default filter with a different First Name field (in Participant Info Columns) - make sure to deselect it before continuing
+    // otherwise there will be 2 different First Name fields in the search section (and in the Participant List)
+    if (isRGPStudy) {
+      await customizeViewPanel.deselectColumns('Participant Info Columns', ['First Name']);
+      await expect(this.participantListTable.getHeaderByName('First Name')).not.toBeVisible();
+    }
+    // Add columns to be used to help find the most recent automated participant
+    await customizeViewPanel.selectColumns('Participant Columns', ['Participant ID', 'Registration Date', 'First Name']);
+    await customizeViewPanel.close();
+
+    //First filter the participant list to only show participants registered within the past two weeks
+    const searchPanel = this.filters.searchPanel;
+    await searchPanel.open();
+    const today = getDate(new Date());
+    const previousWeek = offsetDaysFromToday(2 * 7);
+    await searchPanel.dates('Registration Date', { from: previousWeek, to: today, additionalFilters: [AdditionalFilter.RANGE] });
+
+    //Also make sure to conduct the search for participants with the given first name of the automated participant
+    await searchPanel.text('First Name', { textValue: participantName });
+    await searchPanel.search();
+
+    //Get the first returned participant to use for testing - and verify at least one participant is returned
+    const numberOfParticipants = await this.participantListTable.rowsCount;
+    expect(numberOfParticipants, `No recent test participants were found with the given first name: ${participantName}`).toBeGreaterThanOrEqual(1);
+    return this.participantListTable.getCellDataForColumn('Participant ID', 1);
   }
 }
