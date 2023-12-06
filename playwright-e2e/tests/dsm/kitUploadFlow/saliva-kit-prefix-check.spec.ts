@@ -81,7 +81,7 @@ test.describe.serial('Saliva Kit Upload with a Canadian or New York address', ()
         await participantListPage.waitForReady();
 
         // Find an existing suitable participant
-        const testParticipantIndex = await participantListPage.findParticipantForKitUpload();
+        const testParticipantIndex = await participantListPage.findParticipantForKitUpload({ allowNewYorkerOrCanadian: true });
 
         // Collects all the necessary data for kit upload
         const participantListTable = participantListPage.participantListTable;

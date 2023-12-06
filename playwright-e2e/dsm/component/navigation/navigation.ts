@@ -1,4 +1,4 @@
-import {APIRequestContext, Page} from '@playwright/test';
+import {APIRequestContext, Locator, Page, expect} from '@playwright/test';
 import Dropdown from 'dsm/component/dropdown';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
 import { waitForNoSpinner } from 'utils/test-utils';
@@ -19,6 +19,7 @@ import RgpFinalScanPage from 'dsm/pages/scanner-pages/rgpFinalScan-page';
 import ErrorPage from 'dsm/pages/samples/error-page';
 import UserPermissionPage from 'dsm/pages/miscellaneous-pages/user-and-permissions-page';
 import KitsQueuePage from 'dsm/pages/kitsInfo-pages/kit-queue-page';
+import { logInfo } from 'utils/log-utils';
 
 
 type Selection = StudyNavEnum | StudyEnum | SamplesNavEnum | MiscellaneousEnum;
@@ -62,6 +63,30 @@ export class Navigation {
 
   public async selectMiscellaneous(miscName: MiscellaneousEnum): Promise<void> {
     await this.selectFrom(MainMenuEnum.MISCELLANEOUS, miscName);
+  }
+
+  public async getDisplayedMainMenu(): Promise<MainMenuEnum[]> {
+    let menuOptions: Locator[] = [];
+    await expect(async () => {
+      menuOptions = await this.page.locator(`//app-navigation//ul[1]//li[contains(@class, 'dropdown')]/a`).all();
+      const countOfMenuOptions = menuOptions.length;
+      logInfo(`Amount of main menu options: ${countOfMenuOptions}`);
+      expect(countOfMenuOptions).toBeGreaterThanOrEqual(1);
+    }).toPass({
+      intervals: [5_000]
+    });
+
+    const displayedMenuOptions: MainMenuEnum[] = [];
+    const selectedStudyText = MainMenuEnum.SELECTED_STUDY as string;
+    for (const option of menuOptions) {
+      let name = (await option.innerText()).trim();
+      if (name.startsWith(selectedStudyText)) {
+        name = selectedStudyText;
+      }
+      logInfo(`Main menu option: ${name}`);
+      displayedMenuOptions.push(name as MainMenuEnum);
+    }
+    return displayedMenuOptions;
   }
 
   private async selectFrom(from: MainMenuEnum, selection: Selection): Promise<void> {

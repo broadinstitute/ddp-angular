@@ -14,7 +14,8 @@ export class KitsTable extends Table {
   }
 
   public async rowsPerPage(rows: rows): Promise<void> {
-    await this.paginator.rowsPerPage(rows);
+    //await this.paginator.rowsPerPage(rows);
+    await this.paginator.rowsPerPageForKits(rows);
   }
 
   public async searchBy(columnName: KitsColumnsEnum, value: string): Promise<void> {

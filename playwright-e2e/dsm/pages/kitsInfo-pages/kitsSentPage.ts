@@ -1,4 +1,4 @@
-import {expect, Page} from '@playwright/test';
+import {expect, Locator, Page} from '@playwright/test';
 import {KitType} from 'dsm/component/kitType/kitType';
 import {KitsTable} from 'dsm/component/tables/kits-table';
 import {KitTypeEnum} from 'dsm/component/kitType/enums/kitType-enum';
@@ -6,18 +6,17 @@ import {waitForNoSpinner, waitForResponse} from 'utils/test-utils';
 import {KitsColumnsEnum} from 'dsm/pages/kitsInfo-pages/enums/kitsColumns-enum';
 import {assertTableHeaders} from 'utils/assertion-helper';
 import {rows} from 'lib/component/dsm/paginators/types/rowsPerPage';
+import KitsPageBase from 'dsm/pages/kits-page-base';
 
-export default class KitsSentPage {
-  private readonly PAGE_TITLE = 'Kits Sent';
-  private readonly TABLE_HEADERS = [KitsColumnsEnum.SHORT_ID, KitsColumnsEnum.SHIPPING_ID,
+export default class KitsSentPage extends KitsPageBase {
+  protected PAGE_TITLE = 'Kits Sent';
+  protected TABLE_HEADERS = [KitsColumnsEnum.SHORT_ID, KitsColumnsEnum.SHIPPING_ID,
     KitsColumnsEnum.TRACKING_NUMBER, KitsColumnsEnum.TRACKING_RETURN,
     KitsColumnsEnum.SENT, KitsColumnsEnum.MF_CODE, KitsColumnsEnum.DDP_REALM,
     KitsColumnsEnum.TYPE, KitsColumnsEnum.SAMPLE_TYPE];
 
-  private readonly kitType = new KitType(this.page);
-  private readonly kitsTable = new KitsTable(this.page);
-
-  constructor(private readonly page: Page) {
+  constructor(page: Page) {
+    super(page);
   }
 
   public async goToPage(page: number): Promise<void> {
@@ -32,13 +31,6 @@ export default class KitsSentPage {
     await this.page.waitForLoadState('networkidle');
     await waitForNoSpinner(this.page);
     await this.assertPageTitle();
-  }
-
-  public async selectKitType(kitType: KitTypeEnum): Promise<void> {
-    await waitForNoSpinner(this.page);
-    await this.kitType.selectKitType(kitType);
-    await waitForResponse(this.page, {uri: '/kitRequests'});
-    await waitForNoSpinner(this.page);
   }
 
   public async search(columnName: KitsColumnsEnum, value: string): Promise<void> {

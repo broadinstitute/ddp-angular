@@ -1,3 +1,5 @@
+import { logInfo } from './log-utils';
+
 export function dateFormat(timeZone?: string): Intl.DateTimeFormat {
   return timeZone
     ? new Intl.DateTimeFormat('en-US', {
@@ -20,6 +22,23 @@ export function dateFormat(timeZone?: string): Intl.DateTimeFormat {
  */
 export function getDate(date?: Date): string {
   return dateFormat().format(date ? date : new Date());
+}
+
+/**
+ * Returns a given date in the Month DD, YYYY format
+ * @param dateString The date to format into Month DD, YYYY e.g. turn '11/29/2023' into 'Nov 29, 2023'
+ * @returns Newly formated date as a string
+ */
+export function getDateMonthAbbreviated(dateString: string): string {
+  const kitDateFormat: Intl.DateTimeFormatOptions = {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric'
+  };
+  const date = new Date(dateString);
+  const formattedDate = new Intl.DateTimeFormat('en-US', kitDateFormat).format(date);
+  logInfo(`Formatted date in Month DD, YYYY format: ${formattedDate}`);
+  return formattedDate;
 }
 
 export function getDateEasternTimeZone(date?: Date): string {

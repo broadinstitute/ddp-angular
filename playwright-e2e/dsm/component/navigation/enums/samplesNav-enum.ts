@@ -1,6 +1,7 @@
 export enum SamplesNavEnum {
   UNSENT_KITS_OVERVIEW = 'Unsent Kits Overview',
   REPORT = 'Report',
+  SUMMARY = 'Summary',
   KITS_WITHOUT_LABELS = 'Kits without Labels',
   QUEUE = 'Queue',
   ERROR = 'Error',
