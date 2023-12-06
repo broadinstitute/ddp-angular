@@ -888,6 +888,10 @@ workflows:
       and:
         - not: << pipeline.parameters.do-builds >>
         - not: << pipeline.parameters.scheduled-playwright >>
+        - not:
+            - equal: [ "run-tests", << pipeline.parameters.api_call >> ]
+        - not:
+            - equal: [ "run-e2e-tests", << pipeline.parameters.api_call >> ]
     jobs:
       - api-unit-test:
           <<: *filter-develop-branch
@@ -1029,7 +1033,7 @@ workflows:
     when:
       and:
         - equal: [ scheduled_pipeline, << pipeline.trigger_source >> ]
-        - equal: << pipeline.parameters.scheduled-playwright >>
+        - << pipeline.parameters.scheduled-playwright >>
     jobs:
       - playwright-build:
           <<: *filter-develop-branch
