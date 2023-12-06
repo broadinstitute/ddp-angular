@@ -205,6 +205,7 @@ export function assertParticipantListDownloadFileName(download: Download, study:
 }
 
 export function studyShortName(study: StudyEnum): { shortName: string | null; realm: string | null; collaboratorPrefix: string | null} {
+  const dsmEnv = getDsmEnv();
   let shortName = null;
   let realm = null;
   let collaboratorPrefix = null;
@@ -249,7 +250,7 @@ export function studyShortName(study: StudyEnum): { shortName: string | null; re
       break;
     case StudyEnum.ANGIO:
       shortName = 'angio';
-      realm = 'Angio';
+      realm = dsmEnv === 'dsm-test' ? 'Pepper-Angio' : 'Angio';
       collaboratorPrefix = 'Project Pepper';
       break;
     case StudyEnum.PROSTATE:
@@ -299,4 +300,9 @@ export async function toHaveScreenshot(page: Page, locator: Locator | string, na
 // Validate date format is mm/dd/yyyy
 export function assertDateFormat(value: string) {
   expect(value).toMatch(/^\d\d\/\d\d\/\d\d\d\d$/);
+}
+
+export function getDsmEnv(): string {
+  const { DSM_BASE_URL } = process.env;
+  return DSM_BASE_URL?.includes('dsm-test') ? 'dsm-test' : 'dsm-dev';
 }
