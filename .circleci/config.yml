@@ -1040,9 +1040,9 @@ workflows:
       and:
         - equal: [ scheduled_pipeline, << pipeline.trigger_source >> ]
         - << pipeline.parameters.scheduled-playwright >>
-        or:
-          - equal: [ weekly-playwright-test, << pipeline.schedule.name >> ]
-          - equal: [ nightly-playwright-test, << pipeline.schedule.name >> ]
+        - or:
+            - equal: [ weekly-playwright-test, << pipeline.schedule.name >> ]
+            - equal: [ nightly-playwright-test, << pipeline.schedule.name >> ]
     jobs:
       - playwright-build:
           <<: *filter-develop-branch
