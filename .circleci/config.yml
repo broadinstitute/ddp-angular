@@ -888,6 +888,10 @@ workflows:
       and:
         - not: << pipeline.parameters.do-builds >>
         - not: << pipeline.parameters.scheduled-playwright >>
+        - not:
+            matches:
+              pattern: ".*-tests$"
+              value: << pipeline.parameters.api_call >>
     jobs:
       - api-unit-test:
           <<: *filter-develop-branch
