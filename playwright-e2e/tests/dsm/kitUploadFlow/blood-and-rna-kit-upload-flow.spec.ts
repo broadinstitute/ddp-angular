@@ -22,7 +22,6 @@ import RgpFinalScanPage from 'dsm/pages/scanner-pages/rgpFinalScan-page'
 import { simplifyShortID } from 'utils/faker-utils';
 import { saveParticipantGuid } from 'utils/faker-utils';
 import { ParticipantListTable } from 'dsm/component/tables/participant-list-table';
-import { waitForResponse } from 'utils/test-utils';
 import KitsQueuePage from 'dsm/pages/kitsInfo-pages/kit-queue-page';
 import ErrorPage from 'dsm/pages/samples/error-page';
 
@@ -122,15 +121,7 @@ test.describe('Blood & RNA Kit Upload', () => {
 
     //Search for the kit and get its label created
     await kitsTable.selectSingleRowByIndex();
-    await Promise.all([
-      waitForResponse(page, { uri: '/kitLabel' }),
-      kitsWithoutLabelPage.createLabelsButton.click()
-    ]);
-    await Promise.all([
-      expect(page.locator('[data-icon="cog"]')).toBeVisible(),
-      expect(page.locator('h3')).toHaveText(/Triggered label creation/i)
-    ]);
-    await kitsWithoutLabelPage.waitUntilAllKitLabelCreationRequestsAreProcessed();
+    await kitsWithoutLabelPage.clickCreateLabels();
 
     //Kit Queue or Kit Error page (depending on where easypost sends the kit - easypost tends to send the kit to error in non-prod envs)
     const kitQueuePage = await navigation.selectFromSamples<KitsQueuePage>(SamplesNavEnum.QUEUE);

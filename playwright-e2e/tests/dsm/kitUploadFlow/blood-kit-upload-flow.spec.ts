@@ -25,6 +25,7 @@ import KitsSentPage from 'dsm/pages/kitsInfo-pages/kitsSentPage';
 import KitsReceivedPage from 'dsm/pages/kitsInfo-pages/kitsReceived-page/kitsReceivedPage';
 import TrackingScanPage from 'dsm/pages/scanner-pages/trackingScan-page';
 import {getDate} from 'utils/date-utils';
+import { logInfo } from 'utils/log-utils';
 
 // don't run in parallel
 test.describe.serial('Blood Kits upload flow', () => {
@@ -70,6 +71,8 @@ test.describe.serial('Blood Kits upload flow', () => {
       const participantListTable = participantListPage.participantListTable;
       const participantPage: ParticipantPage = await participantListTable.openParticipantPageAt(testParticipantIndex);
       shortID = await participantPage.getShortId();
+      logInfo(`Participant Short ID: ${shortID}`);
+
       const isContactInformationTabVisible = await participantPage.isTabVisible(TabEnum.CONTACT_INFORMATION);
       kitUploadInfo = new KitUploadInfo(
         shortID,

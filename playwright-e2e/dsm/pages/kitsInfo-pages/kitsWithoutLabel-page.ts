@@ -54,6 +54,10 @@ export default class KitsWithoutLabelPage extends KitsPageBase {
     ]);
     await waitForNoSpinner(this.page);
     await expect(this.page.locator('h3')).toHaveText(/Triggered label creation/i);
+    // Wait for pending kit label creation icon to appear
+    await expect(this.page.locator('[data-icon="cog"]')).toBeVisible();
+    // Wait for pending kit label creation icon to disappear
+    await this.waitUntilAllKitLabelCreationRequestsAreProcessed();
   }
 
   /* Assertions */
@@ -68,7 +72,7 @@ export default class KitsWithoutLabelPage extends KitsPageBase {
       .toBeVisible();
   }
 
-  public get createLabelsButton(): Locator {
+  private get createLabelsButton(): Locator {
     return this.page.locator(this.createLabelsBtnXPath);
   }
 

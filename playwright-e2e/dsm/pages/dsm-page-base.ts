@@ -11,7 +11,10 @@ export default abstract class DsmPageBase {
   }
 
   async reload(): Promise<void> {
+    const networkIdlePromise = this.page.waitForLoadState('networkidle');
     await this.page.reload();
+    await this.page.waitForLoadState();
     await waitForNoSpinner(this.page);
+    await networkIdlePromise;
   }
 }

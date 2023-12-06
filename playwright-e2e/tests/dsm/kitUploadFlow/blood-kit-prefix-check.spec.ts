@@ -19,7 +19,6 @@ import FinalScanPage from 'dsm/pages/scanner-pages/finalScan-page';
 import TrackingScanPage from 'dsm/pages/scanner-pages/trackingScan-page';
 import { WelcomePage } from 'dsm/pages/welcome-page';
 import { logInfo } from 'utils/log-utils';
-import { waitForResponse } from 'utils/test-utils';
 
 /**
  * Prefix check for Blood kit with Canada and New York address for LMS and Osteo2 studies.
@@ -97,7 +96,7 @@ test.describe.serial('Blood Kit Upload', () => {
         expect(shortID).toBeTruthy();
         expect(firstName).toBeTruthy();
         expect(lastName).toBeTruthy();
-        logInfo(`shortId: ${shortID}`);
+        logInfo(`Participant Short ID: ${shortID}`);
 
         kitUploadInfo = new KitUploadInfo(
           shortID,
@@ -141,14 +140,7 @@ test.describe.serial('Blood Kit Upload', () => {
         shippingID = (await kitsTable.getRowText(0, KitsColumnsEnum.SHIPPING_ID)).trim();
 
         await kitsTable.selectSingleRowByIndex();
-        await Promise.all([
-          waitForResponse(page, { uri: '/kitLabel' }),
-          kitsWithoutLabelPage.createLabelsButton.click()
-        ]);
-        await Promise.all([
-          expect(page.locator('[data-icon="cog"]')).toBeVisible({timeout: 60000}),
-          expect(page.locator('h3')).toHaveText(/Triggered label creation/i, {timeout: 60000})
-        ]);
+        await kitsWithoutLabelPage.clickCreateLabels();
         logInfo(`shippingID: ${shippingID}`);
       });
 

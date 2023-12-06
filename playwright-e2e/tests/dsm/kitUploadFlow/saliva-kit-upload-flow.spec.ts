@@ -25,6 +25,7 @@ import KitsSentPage from 'dsm/pages/kitsInfo-pages/kitsSentPage';
 import KitsReceivedPage from 'dsm/pages/kitsInfo-pages/kitsReceived-page/kitsReceivedPage';
 import {SampleTypesEnum} from 'dsm/pages/kitsInfo-pages/enums/sampleTypes-enum';
 import {getDate} from 'utils/date-utils';
+import {logInfo} from 'utils/log-utils';
 
 // don't run in parallel
 test.describe.serial('Saliva Kits upload flow', () => {
@@ -65,6 +66,7 @@ test.describe.serial('Saliva Kits upload flow', () => {
       const shortID = await participantPage.getShortId();
       const firstName = await participantPage.getFirstName();
       const lastName = await participantPage.getLastName();
+      logInfo(`Participant Short ID: ${shortID}`);
       expect(shortID, 'The short ID is empty').toBeTruthy();
       expect(firstName, 'The first name is empty').toBeTruthy();
       expect(lastName, 'The last name is empty').toBeTruthy();

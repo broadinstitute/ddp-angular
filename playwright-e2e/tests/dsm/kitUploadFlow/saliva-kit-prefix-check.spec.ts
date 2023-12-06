@@ -95,7 +95,7 @@ test.describe.serial('Saliva Kit Upload with a Canadian or New York address', ()
         expect(shortID).toBeTruthy();
         expect(firstName).toBeTruthy();
         expect(lastName).toBeTruthy();
-        logInfo(`shortId: ${shortID}`);
+        logInfo(`Participant Short ID: ${shortID}`);
 
         kitUploadInfo = new KitUploadInfo(
           shortID,
