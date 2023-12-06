@@ -237,22 +237,34 @@ export default class ParticipantListPage {
     await waitForNoSpinner(this.page);
   }
 
-  async findParticipantForKitUpload(firstNameSubstring?: string): Promise<number> {
+  async findParticipantForKitUpload(opts: { allowNewYorkerOrCanadian: boolean, firstNameSubstring?: string }): Promise<number> {
+    const { allowNewYorkerOrCanadian = false, firstNameSubstring } = opts;
     const normalCollaboratorSampleIDColumn = 'Normal Collaborator Sample ID';
     const registrationDateColumn = 'Registration Date';
     const validColumn = 'Valid';
+    const countryColumn = 'Country';
+    const stateOfResidence = 'State';
 
-    // Match data in First Name, Valid and Collaborator Sample ID columns. If no match, returns -1.
+    // Match data in First Name, Valid , Location and Collaborator Sample ID columns. If no match, returns -1.
     const compareForMatch = async (index: number): Promise<number> => {
       const fname = await participantListTable.getTextAt(index, 'First Name');
       const normalCollaboratorSampleID = await participantListTable.getTextAt(index, normalCollaboratorSampleIDColumn);
       const [isAddressValid] = await participantListTable.getTextAt(index, validColumn);
+      const [country] = await participantListTable.getTextAt(index, countryColumn);
+      const [state] = await participantListTable.getTextAt(index, stateOfResidence);
+      console.log(`Allow NY or Canadians: ${allowNewYorkerOrCanadian}`);
+      console.log(`PT info - country: ${country}, state: ${state}, valid: ${isAddressValid}`);
       let isMatch = true;
       if (firstNameSubstring) {
         isMatch = fname.indexOf(firstNameSubstring) !== -1
       }
       if (isMatch && normalCollaboratorSampleID.length <= 5 && isAddressValid.toLowerCase() === 'true') {
         return index;
+      }
+      if (!allowNewYorkerOrCanadian &&
+        ((country === 'CA') ||
+        ((country === 'US') && (state === 'NY')))) {
+        return -1;
       }
       return -1;
     };
@@ -270,6 +282,7 @@ export default class ParticipantListPage {
     await customizeViewPanel.selectColumns('Participant Columns', [registrationDateColumn]);
     await customizeViewPanel.selectColumns('Sample Columns', [normalCollaboratorSampleIDColumn]);
     await customizeViewPanel.selectColumns('Contact Information Columns', [validColumn]);
+    await customizeViewPanel.selectColumns('Contact Information Columns', [countryColumn, stateOfResidence]);
     await customizeViewPanel.close();
 
     expect(participantListTable.getHeaderIndex(registrationDateColumn)).not.toBe(-1);

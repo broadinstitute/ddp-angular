@@ -16,9 +16,7 @@ export class ParticipantsListPaginator {
   public async rowsPerPageForKits(rows: rows): Promise<void> {
     const rowsPerPageLocator = this.page.locator(this.rowsPerPageXpathForKitPages(rows));
     await expect(rowsPerPageLocator, `The row - ${rows} is not visible`).toBeVisible();
-    const waitPromise = this.waitForReady();
-    await rowsPerPageLocator.click();
-    await waitPromise;
+    await rowsPerPageLocator.click(); //No response seems to occur when the [amount of kits] row button is clicked
   }
 
   public async pageAt(page: number): Promise<void> {

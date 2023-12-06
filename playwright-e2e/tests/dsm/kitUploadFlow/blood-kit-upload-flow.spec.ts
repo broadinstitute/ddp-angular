@@ -64,7 +64,7 @@ test.describe.serial('Blood Kits upload flow', () => {
       await participantListPage.assertPageTitle();
 
       // find the right participant
-      const testParticipantIndex = await participantListPage.findParticipantForKitUpload();
+      const testParticipantIndex = await participantListPage.findParticipantForKitUpload({ allowNewYorkerOrCanadian: false });
 
       // Collects all the necessary data for kit upload
       const participantListTable = participantListPage.participantListTable;
