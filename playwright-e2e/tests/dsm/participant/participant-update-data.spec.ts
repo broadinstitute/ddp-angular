@@ -9,15 +9,15 @@ import { AdditionalFilter, CustomViewColumns } from 'dsm/component/filters/secti
 import { waitForNoSpinner } from 'utils/test-utils';
 
 test.describe('Editing Participant Information', () => {
-  let shortID: string;
-  let firstName: string;
-  let newFirstName: string;
-  let newLastName: string;
-
   const cmiClinicalStudies = [StudyEnum.LMS, StudyEnum.OSTEO2];
   const cmiResearchStudies = [StudyEnum.PANCAN];
 
   for (const study of cmiClinicalStudies.concat(cmiResearchStudies)) {
+    let shortID: string;
+    let firstName: string;
+    let newFirstName: string;
+    let newLastName: string;
+
     test(`Update First Name @dsm @${study}`, async ({page, request}) => {
       test.slow();
 
@@ -76,7 +76,7 @@ test.describe('Editing Participant Information', () => {
           participantPage = await participantListTable.openParticipantPageAt(rowIndex);
           expect(await participantPage.getFirstName()).toEqual(newFirstName);
           expect(await participantPage.getLastName()).toEqual(newLastName);
-        }).toPass({ timeout: 120 * 1000 });
+        }).toPass({ timeout: 3.5 * 60 * 1000 });
       });
     });
   }

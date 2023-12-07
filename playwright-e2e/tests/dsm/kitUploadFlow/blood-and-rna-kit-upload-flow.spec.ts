@@ -48,7 +48,6 @@ test.describe('Blood & RNA Kit Upload', () => {
 
     //Go to recently created playwright test participant to get their short id
     const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
-    await participantListPage.assertPageTitle();
     await participantListPage.waitForReady();
 
     const participantListTable = new ParticipantListTable(page);

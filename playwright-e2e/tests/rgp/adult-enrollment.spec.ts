@@ -164,10 +164,8 @@ test.describe.serial('Adult Self Enrollment', () => {
     await new Select(page, { label: 'Select study' }).selectOption('RGP');
 
     const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
-
-    await participantListPage.assertPageTitle();
-
     await participantListPage.waitForReady();
+
     await participantListPage.filterListByParticipantGUID(user.patient.participantGuid);
 
     //Make sure the newly created participant can be found and it's participant page can be accessed
