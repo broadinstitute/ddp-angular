@@ -5,19 +5,22 @@ import Select from 'dss/component/select';
 import WidgetBase from 'dss/component/widget-base';
 
 export default class Institution extends WidgetBase {
-  constructor(page: Page, opts: { label: string | RegExp; root?: Locator | string; nth?: number }) {
+  constructor(page: Page, opts: { label?: string | RegExp; root?: Locator | string; nth?: number }) {
     const { label, root, nth } = opts;
     super(page, { nth, root });
-    this.root = this.root.locator('ddp-institutions-form').filter({ hasText: label });
+    this.root = this.root.locator('ddp-institutions-form')
+    if (label) {
+      this.root = this.root.filter({ hasText: label });
+    }
     this.element = this.root.locator('ddp-institution');
   }
 
   toInput(label: string | RegExp): Input {
-    return new Input(this.page, { label, root: this.toLocator() });
+    return new Input(this.page, { label, root: this.toLocator().locator('xpath=//mat-form-field') });
   }
 
   toSelect(label: string | RegExp): Select {
-    return new Select(this.page, { label, root: this.toLocator() });
+    return new Select(this.page, { label, root: this.toLocator().locator('xpath=//mat-form-field') });
   }
 
   toButton(label: string): Button {
