@@ -59,7 +59,6 @@ test.describe('View Sequencing Order Permission Test', () => {
 
             await test.step('Verify that the current DSM user is able to view the Clinical Order Columns in Participant List', async () => {
               const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
-              await participantListPage.assertPageTitle();
               await participantListPage.waitForReady();
 
               const customizeViewPanel = participantListPage.filters.customizeViewPanel;

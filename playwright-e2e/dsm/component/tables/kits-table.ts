@@ -1,14 +1,10 @@
 import {expect, Locator, Page} from '@playwright/test';
 import {KitsColumnsEnum} from 'dsm/pages/kitsInfo-pages/enums/kitsColumns-enum';
 import Table from 'dss/component/table';
-import {KitsPaginator} from 'lib/component/dsm/paginators/kitsPaginator';
 import {rows} from 'lib/component/dsm/paginators/types/rowsPerPage';
 import { waitForNoSpinner } from 'utils/test-utils';
 
-
 export class KitsTable extends Table {
-  private readonly paginator = new KitsPaginator(this.page);
-
   constructor(page: Page) {
     super(page, {cssClassAttribute: '.table'});
   }
@@ -18,7 +14,8 @@ export class KitsTable extends Table {
   }
 
   public async rowsPerPage(rows: rows): Promise<void> {
-    await this.paginator.rowsPerPage(rows);
+    //await this.paginator.rowsPerPage(rows);
+    await this.paginator.rowsPerPageForKits(rows);
   }
 
   public async searchBy(columnName: KitsColumnsEnum, value: string): Promise<void> {

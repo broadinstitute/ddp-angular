@@ -1,4 +1,8 @@
 import { Locator, Page } from '@playwright/test';
+import { MiscellaneousEnum } from './navigation/enums/miscellaneousNav-enum';
+import { SamplesNavEnum } from './navigation/enums/samplesNav-enum';
+import { StudyNavEnum } from './navigation/enums/studyNav-enum';
+import { StudyEnum } from './navigation/enums/selectStudyNav-enum';
 
 export default class Dropdown {
   private readonly page: Page;
@@ -36,8 +40,14 @@ export default class Dropdown {
     return this.toLocator().locator('ul.dropdown-menu').locator('a').getByText(value, {exact: true});
   }
 
-  async getAllOptions(): Promise<Locator> {
+  async getDisplayedOptions<T extends MiscellaneousEnum | SamplesNavEnum | StudyNavEnum | StudyEnum>(): Promise<T[]> {
     await this.open();
-    return this.toLocator().locator('ul.dropdown-menu').locator('a');
+    const options: T[] = [];
+    const links: Locator[] = await this.toLocator().locator('ul.dropdown-menu').locator('a').all();
+    for (const link of links) {
+      const innerText = (await link.innerText()).trim();
+      options.push(innerText as T);
+    }
+    return options;
   }
 }

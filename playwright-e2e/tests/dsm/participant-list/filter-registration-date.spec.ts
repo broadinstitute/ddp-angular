@@ -92,7 +92,3 @@ test.describe('Participants Search', () => {
     });
   }
 });
-function getDateFromDate(arg0: Date) {
-  throw new Error('Function not implemented.');
-}
-

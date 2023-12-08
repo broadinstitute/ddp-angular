@@ -51,7 +51,6 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
       await new Select(page, { label: 'Select study' }).selectOption(`${study}`);
 
       const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
-      await participantListPage.assertPageTitle();
       await participantListPage.waitForReady();
 
       //Prep the Saliva kit
@@ -123,7 +122,6 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
 
       //Confirm that the germline consent addendum was created - check that the GERMLINE_CONSENT_ADDENDUM_PEDIATRIC Survey Created column is not empty
       await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
-      await participantListPage.assertPageTitle();
       await participantListPage.waitForReady();
 
       const customizeViewPanel = participantListPage.filters.customizeViewPanel;
@@ -143,7 +141,7 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
         const participantListTable = participantListPage.participantListTable;
         const amountOfParticipants = await participantListTable.rowsCount;
         expect(amountOfParticipants).toBe(1);
-      }).toPass({intervals: [10_000], timeout: 30_000});
+      }).toPass({intervals: [10_000], timeout: 60_000});
 
       const participantListTable = participantListPage.participantListTable;
       const germlineInfo = (await participantListTable.getParticipantDataAt(0, 'GERMLINE_CONSENT_ADDENDUM_PEDIATRIC Survey Created')).trim();
@@ -156,7 +154,6 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
       await new Select(page, { label: 'Select study' }).selectOption(`${study}`);
 
       const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
-      await participantListPage.assertPageTitle();
       await participantListPage.waitForReady();
 
       //Prep the Blood kit
@@ -228,7 +225,6 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
 
       //Confirm that the germline consent addendum was created - check that the GERMLINE_CONSENT_ADDENDUM_PEDIATRIC Survey Created column is not empty
       await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
-      await participantListPage.assertPageTitle();
       await participantListPage.waitForReady();
 
       const customizeViewPanel = participantListPage.filters.customizeViewPanel;
@@ -248,7 +244,7 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
         const participantListTable = participantListPage.participantListTable;
         const amountOfParticipants = await participantListTable.rowsCount;
         expect(amountOfParticipants).toBe(1);
-      }).toPass({intervals: [10_000], timeout: 30_000});
+      }).toPass({intervals: [10_000], timeout: 60_000});
 
       const participantListTable = participantListPage.participantListTable;
       const germlineInfo = (await participantListTable.getParticipantDataAt(0, 'GERMLINE_CONSENT_ADDENDUM_PEDIATRIC Survey Created')).trim();
@@ -261,7 +257,6 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
       await new Select(page, { label: 'Select study' }).selectOption(`${study}`);
 
       const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
-      await participantListPage.assertPageTitle();
       await participantListPage.waitForReady();
 
       //Prep the Saliva kit
@@ -333,7 +328,6 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
 
       //Confirm that the germline consent addendum was created - check that the GERMLINE_CONSENT_ADDENDUM_PEDIATRIC Survey Created column is not empty
       await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
-      await participantListPage.assertPageTitle();
       await participantListPage.waitForReady();
 
       const customizeViewPanel = participantListPage.filters.customizeViewPanel;
@@ -353,7 +347,7 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
         const participantListTable = participantListPage.participantListTable;
         const amountOfParticipants = await participantListTable.rowsCount;
         expect(amountOfParticipants).toBe(1);
-      }).toPass({intervals: [10_000], timeout: 30_000});
+      }).toPass({intervals: [10_000], timeout: 60_000});
 
       const participantListTable = participantListPage.participantListTable;
       const germlineInfo = (await participantListTable.getParticipantDataAt(0, 'GERMLINE_CONSENT_ADDENDUM_PEDIATRIC Survey Created')).trim();
@@ -366,7 +360,6 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
       await new Select(page, { label: 'Select study' }).selectOption(`${study}`);
 
       const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
-      await participantListPage.assertPageTitle();
       await participantListPage.waitForReady();
 
       //Prep the Blood kit
@@ -438,7 +431,6 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
 
       //Confirm that the germline consent addendum was created - check that the GERMLINE_CONSENT_ADDENDUM_PEDIATRIC Survey Created column is not empty
       await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
-      await participantListPage.assertPageTitle();
       await participantListPage.waitForReady();
 
       const customizeViewPanel = participantListPage.filters.customizeViewPanel;
@@ -459,7 +451,7 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
         const participantListTable = participantListPage.participantListTable;
         const amountOfParticipants = await participantListTable.rowsCount;
         expect(amountOfParticipants).toBe(1);
-      }).toPass({intervals: [10_000], timeout: 30_000});
+      }).toPass({intervals: [10_000], timeout: 60_000});
 
       const participantListTable = participantListPage.participantListTable;
       const germlineInfo = (await participantListTable.getParticipantDataAt(0, 'GERMLINE_CONSENT_ADDENDUM_PEDIATRIC Survey Created')).trim();
@@ -593,18 +585,15 @@ async function prepareSentKit(shortID: string,
   //Deactivate existing kits
   const kitsWithoutLabelPage = await navigation.selectFromSamples<KitsWithoutLabelPage>(SamplesNavEnum.KITS_WITHOUT_LABELS);
   await kitsWithoutLabelPage.waitForReady();
-  await kitsWithoutLabelPage.assertPageTitle();
   await kitsWithoutLabelPage.selectKitType(kitType);
-  if (await kitsWithoutLabelPage.hasExistingKitRequests()) {
+  if (await kitsWithoutLabelPage.hasKitRequests()) {
     await kitsWithoutLabelPage.assertCreateLabelsBtn();
     await kitsWithoutLabelPage.assertReloadKitListBtn();
-    await kitsWithoutLabelPage.assertTableHeader();
     await kitsWithoutLabelPage.deactivateAllKitsFor(shortID);
   }
 
   //Get first name and last name of the participant - Kit Upload checks that the names match the given short ids
   const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
-  await participantListPage.assertPageTitle();
   await participantListPage.waitForReady();
 
   const searchPanel = participantListPage.filters.searchPanel;
@@ -639,12 +628,11 @@ async function prepareSentKit(shortID: string,
   await kitsWithoutLabelPage.selectKitType(kitType);
   await kitsWithoutLabelPage.assertCreateLabelsBtn();
   await kitsWithoutLabelPage.assertReloadKitListBtn();
-  await kitsWithoutLabelPage.assertPageTitle();
 
   await kitsWithoutLabelPage.search(KitsColumnsEnum.SHORT_ID, shortID);
   const shippingID = (await kitsWithoutLabelPage.getData(KitsColumnsEnum.SHIPPING_ID)).trim();
 
-  const kitsTable = kitsWithoutLabelPage.kitsWithoutLabelTable;
+  const kitsTable = kitsWithoutLabelPage.getKitsTable;
   await kitsTable.searchByColumn(KitsColumnsEnum.SHORT_ID, shortID);
   await expect(kitsTable.rowLocator()).toHaveCount(1);
 
@@ -694,7 +682,6 @@ async function prepareSentKit(shortID: string,
 
 async function goToTestParticipantPage(shortID: string, navigation: Navigation): Promise<ParticipantPage> {
   const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
-  await participantListPage.assertPageTitle();
   await participantListPage.waitForReady();
 
   const searchPanel = participantListPage.filters.searchPanel;

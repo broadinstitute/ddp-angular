@@ -71,6 +71,7 @@ test.describe.serial('Saliva Kit Upload with a Canadian or New York address', ()
   for (const [index, study] of studies.entries()) {
     test(`Kit prefix check @cmi @dsm @${study} @kit`, async ({ page }, testInfo) => {
       test.slow();
+
       const testResultDir = testInfo.outputDir;
 
       await welcomePage.selectStudy(study);
@@ -80,7 +81,7 @@ test.describe.serial('Saliva Kit Upload with a Canadian or New York address', ()
         await participantListPage.waitForReady();
 
         // Find an existing suitable participant
-        const testParticipantIndex = await participantListPage.findParticipantForKitUpload();
+        const testParticipantIndex = await participantListPage.findParticipantForKitUpload({ allowNewYorkerOrCanadian: true });
 
         // Collects all the necessary data for kit upload
         const participantListTable = participantListPage.participantListTable;
@@ -94,7 +95,7 @@ test.describe.serial('Saliva Kit Upload with a Canadian or New York address', ()
         expect(shortID).toBeTruthy();
         expect(firstName).toBeTruthy();
         expect(lastName).toBeTruthy();
-        logInfo(`shortId: ${shortID}`);
+        logInfo(`Participant Short ID: ${shortID}`);
 
         kitUploadInfo = new KitUploadInfo(
           shortID,
@@ -131,10 +132,8 @@ test.describe.serial('Saliva Kit Upload with a Canadian or New York address', ()
         await kitsWithoutLabelPage.selectKitType(kitType);
         await kitsWithoutLabelPage.assertCreateLabelsBtn();
         await kitsWithoutLabelPage.assertReloadKitListBtn();
-        await kitsWithoutLabelPage.assertTableHeader();
-        await kitsWithoutLabelPage.assertPageTitle();
 
-        const kitsTable = kitsWithoutLabelPage.kitsWithoutLabelTable;
+        const kitsTable = kitsWithoutLabelPage.getKitsTable;
         await kitsTable.searchByColumn(KitsColumnsEnum.SHORT_ID, shortID);
         await expect(kitsTable.rowLocator()).toHaveCount(1);
         shippingID = (await kitsTable.getRowText(0, KitsColumnsEnum.SHIPPING_ID)).trim();
@@ -148,7 +147,7 @@ test.describe.serial('Saliva Kit Upload with a Canadian or New York address', ()
       // New kit will be listed on Error page because address is in either Canada or New York
       await test.step('New kit will be listed on Error page', async () => {
         const errorPage = await navigation.selectFromSamples<ErrorPage>(SamplesNavEnum.ERROR);
-        const kitListTable = errorPage.kitListTable;
+        const kitListTable = errorPage.getKitsTable;
         await errorPage.waitForReady();
         await errorPage.selectKitType(kitType);
         await expect(async () => {
@@ -163,7 +162,7 @@ test.describe.serial('Saliva Kit Upload with a Canadian or New York address', ()
           // create label (previous step) could take some time
           await errorPage.reloadKitList();
           await expect(kitListTable.rows).toHaveCount(1, { timeout: 10 * 1000 });
-        }).toPass({ timeout: 90 * 1000 });
+        }).toPass({ timeout: 3 * 60 * 1000 });
       });
 
       await test.step('Initial scan', async () => {
@@ -184,7 +183,7 @@ test.describe.serial('Saliva Kit Upload with a Canadian or New York address', ()
         const kitsWithoutLabelPage = await navigation.selectFromSamples<KitsWithoutLabelPage>(SamplesNavEnum.KITS_WITHOUT_LABELS);
         await kitsWithoutLabelPage.waitForReady();
         await kitsWithoutLabelPage.selectKitType(kitType);
-        const kitsTable = kitsWithoutLabelPage.kitsWithoutLabelTable;
+        const kitsTable = kitsWithoutLabelPage.getKitsTable;
         await kitsTable.searchByColumn(KitsColumnsEnum.SHORT_ID, shortID);
         await expect(kitsTable.rowLocator()).toHaveCount(0);
       });

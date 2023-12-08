@@ -14,4 +14,7 @@ export enum KitsColumnsEnum {
   DEACTIVATED = 'Deactivated',
   PREFERRED_LANGUAGE = 'Preferred Language',
   ERROR_REASON = 'Error Reason',
+  COLLABORATOR_PARTICIPANT_ID = 'Collaborator Participant ID',
+  COLLABORATOR_SAMPLE_ID = 'Collaborator Sample ID',
+  COLLECTION_DATE = 'Collection Date',
 }

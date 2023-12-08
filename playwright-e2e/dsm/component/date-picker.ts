@@ -58,7 +58,7 @@ export default class DatePicker {
     const isEnabled = await todayBtn.isVisible() && !(await todayBtn.isDisabled());
     if (isToday && isEnabled) {
       await Promise.all([
-        waitForResponse(this.page, { uri: 'patch' }),
+        waitForResponse(this.page, { uri: '/patch' }),
         todayBtn.click()
       ]);
       return `${yyyy}/${month}/${dayOfMonth}`;
@@ -93,7 +93,9 @@ export default class DatePicker {
     await this.monthPicker().locator(this.clickableCell(), { hasText: monthName }).click();
 
     // pick day of month
+    const networkIdlePromise = this.page.waitForLoadState('networkidle');
     await this.dayPicker().locator(this.clickableCell(), { hasText: date }).first().click();
+    await networkIdlePromise;
 
     // calendar close automatically
     return getDate(new Date(yyyy, month, parseInt(date)));

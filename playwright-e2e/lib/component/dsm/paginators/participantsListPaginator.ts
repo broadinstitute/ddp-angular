@@ -6,10 +6,17 @@ export class ParticipantsListPaginator {
   constructor(private readonly page: Page) {}
 
   public async rowsPerPage(rows: rows): Promise<void> {
-    const rowsPerPageLocator = this.page.locator(this.rowsPerPageXPath(rows));
+    const rowsPerPageLocator = this.page.locator(this.rowsPerPageXPathForParticipantList(rows));
     await expect(rowsPerPageLocator, `The row - ${rows} is not visible`).toBeVisible();
+    const waitPromise = this.waitForReady();
     await rowsPerPageLocator.click();
-    await this.waitForReady();
+    await waitPromise;
+  }
+
+  public async rowsPerPageForKits(rows: rows): Promise<void> {
+    const rowsPerPageLocator = this.page.locator(this.rowsPerPageXpathForKitPages(rows));
+    await expect(rowsPerPageLocator, `The row - ${rows} is not visible`).toBeVisible();
+    await rowsPerPageLocator.click(); //No response seems to occur when the [amount of kits] row button is clicked
   }
 
   public async pageAt(page: number): Promise<void> {
@@ -37,19 +44,24 @@ export class ParticipantsListPaginator {
     if (isDisabled) {
       throw new Error('Table "Next Page" link is disabled.');
     }
+    const waitPromise = this.waitForReady();
     await paginatorLocator.click();
-    await this.waitForReady();
+    await waitPromise;
   }
 
   private async paginateAt(page: number): Promise<void> {
     const pageLocator = this.page.locator(this.pageAtXPath(page));
     await expect(pageLocator, `The page - ${page} is not visible`).toBeVisible();
+    const waitPromise = this.waitForReady();
     await pageLocator.click();
-    await this.waitForReady();
+    await waitPromise;
   }
 
   private async waitForReady(): Promise<void> {
-    await waitForResponse(this.page, {uri: 'filterList'});
+    await Promise.race([
+      waitForResponse(this.page, {uri: 'filterList'}),
+      waitForResponse(this.page, {uri: 'applyFilter'})
+    ]);
     await waitForNoSpinner(this.page);
   }
 
@@ -70,7 +82,11 @@ export class ParticipantsListPaginator {
     return '//tfoot/tr[1]/td[1]/pagination-controls/pagination-template/ul/li';
   }
 
-  private rowsPerPageXPath(rows: rows): string {
+  private rowsPerPageXPathForParticipantList(rows: rows): string {
     return `//tfoot/tr[1]/td[2]/div/button[text()[normalize-space()='${rows}']]`;
+  }
+
+  private rowsPerPageXpathForKitPages(rows: rows): string {
+    return `//tfoot//tr//a[text()[normalize-space() = '${rows}']]`;
   }
 }

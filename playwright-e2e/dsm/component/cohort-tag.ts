@@ -5,21 +5,24 @@ export default class CohortTag {
   constructor(private readonly page: Page) {}
 
   public async add(tagName: string, waitForResponse = true): Promise<void> {
+    const waitPromise = waitForResponse ? this.waitForOKResponse('createCohortTag') : Promise.resolve();
     await this.inputField.fill(tagName);
     await this.inputField.blur();
-    waitForResponse && (await this.waitForOKResponse('createCohortTag'));
+    await waitPromise;
   }
 
   public async remove(tagName: string): Promise<void> {
+    const waitPromise = this.waitForOKResponse('deleteCohortTag');
     await this.getRemoveButtonFor(tagName).click();
-    await this.waitForOKResponse('deleteCohortTag');
+    await waitPromise;
     await this.assertCohortTagToHaveCount(tagName, 0);
   }
 
   public async submitAndExit(): Promise<void> {
     const submitButton = this.page.locator(this.getSubmitButtonXPath);
-    !(await submitButton.isDisabled()) && (await submitButton.click());
-    await this.waitForOKResponse('bulkCreateCohortTags');
+    const waitPromise = this.waitForOKResponse('bulkCreateCohortTags');
+    await submitButton.click();
+    await waitPromise;
     await this.page.keyboard.press('Escape');
   }
 

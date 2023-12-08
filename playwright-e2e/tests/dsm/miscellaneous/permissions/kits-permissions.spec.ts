@@ -46,8 +46,8 @@ test.describe('Kits Permissions', () => {
 
         await test.step('Verify Kits related menu options are not in Samples menu', async () => {
           const samplesMenu = new Dropdown(page, MainMenuEnum.SAMPLES);
-          const allOptions = await samplesMenu.getAllOptions();
-          expect(await allOptions.allInnerTexts()).toContainEqual(SamplesNavEnum.CLINICAL_ORDERS);
+          const allOptions = await samplesMenu.getDisplayedOptions<SamplesNavEnum>();
+          expect(allOptions.includes(SamplesNavEnum.CLINICAL_ORDERS)).toBeTruthy();
         });
       })
     }

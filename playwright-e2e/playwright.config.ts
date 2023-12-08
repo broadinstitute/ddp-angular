@@ -44,7 +44,7 @@ const testConfig: PlaywrightTestConfig = {
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!CI,
   retries: CI ? 1 : 0,
-  workers: CI ? 2 : 3,
+  workers: CI ? 1 : 2,
   maxFailures: 0,
 
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */

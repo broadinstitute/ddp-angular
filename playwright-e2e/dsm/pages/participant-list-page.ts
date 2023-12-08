@@ -10,8 +10,12 @@ import { Filters } from 'dsm/component/filters/filters';
 import { ParticipantListTable } from 'dsm/component/tables/participant-list-table';
 import { SortOrder } from 'dss/component/table';
 import QuickFilters from 'dsm/component/filters/quick-filters';
+import { getDate, offsetDaysFromToday } from 'utils/date-utils';
+import { AdditionalFilter } from 'dsm/component/filters/sections/search/search-enums';
+import { logInfo } from 'utils/log-utils';
+import DsmPageBase from './dsm-page-base';
 
-export default class ParticipantListPage {
+export default class ParticipantListPage extends DsmPageBase {
   private readonly PAGE_TITLE: string = 'Participant List';
   private readonly _filters: Filters = new Filters(this.page);
   private readonly _quickFilters: QuickFilters = new QuickFilters(this.page);
@@ -31,12 +35,15 @@ export default class ParticipantListPage {
     return participantListPage;
   }
 
-  constructor(private readonly page: Page) {}
+  constructor(page: Page) {
+    super(page);
+  }
 
   public async waitForReady(): Promise<void> {
-    await this.assertPageTitle();
-    await waitForNoSpinner(this.page);
+    await super.waitForReady();
+    await expect(this.page.locator('h1')).toHaveText(this.PAGE_TITLE);
     await expect(this.page.locator(this.filters.searchPanel.openButtonXPath)).toBeVisible();
+    await waitForNoSpinner(this.page);
   }
 
   public async selectAll(): Promise<void> {
@@ -65,11 +72,6 @@ export default class ParticipantListPage {
   }
 
   /* assertions */
-  public async assertPageTitle(): Promise<void> {
-    await expect(this.page.locator('h1'),
-      "Participant List page - page title doesn't match the expected one")
-      .toHaveText(this.PAGE_TITLE, { timeout: 30 * 1000 });
-  }
 
   public async assertParticipantsCountGreaterOrEqual(count: number): Promise<void> {
     expect(await this.participantsCount(),
@@ -93,13 +95,14 @@ export default class ParticipantListPage {
     await saveButton.click();
 
     const saveModal = new Modal(this.page);
+    await expect(saveModal.toLocator()).toBeVisible();
     expect(await saveModal.getHeader()).toBe('Please enter a name for your filter');
     await saveModal.getInput({ label: 'Filter Name' }).fill(viewName);
-    await saveModal.getButton({ label: /Save Filter/ }).click();
     await Promise.all([
-      waitForNoSpinner(this.page),
-      waitForResponse(this.page, {uri: '/ui/saveFilter?'})
+      waitForResponse(this.page, {uri: '/ui/saveFilter'}),
+      saveModal.getButton({ label: /Save Filter/ }).click()
     ]);
+    await waitForNoSpinner(this.page);
   }
 
   /**
@@ -178,13 +181,6 @@ export default class ParticipantListPage {
     expect(await participantsTable.rowsCount).toBe(resultsCount);
   }
 
-  public async addColumnsToParticipantList(columnGroup: string, columnOptions: string[]): Promise<void> {
-    const customizeViewPanel = this.filters.customizeViewPanel;
-    await customizeViewPanel.open();
-    await customizeViewPanel.selectColumns(columnGroup, columnOptions);
-  }
-
-
   /* Locators */
   private get tableRowsLocator(): Locator {
     return this.page.locator('[role="row"]:not([mat-header-row]):not(mat-header-row), tbody tr');
@@ -236,21 +232,32 @@ export default class ParticipantListPage {
     await waitForNoSpinner(this.page);
   }
 
-  async findParticipantForKitUpload(firstNameSubstring?: string): Promise<number> {
+  async findParticipantForKitUpload(opts: { allowNewYorkerOrCanadian: boolean, firstNameSubstring?: string }): Promise<number> {
+    const { allowNewYorkerOrCanadian = false, firstNameSubstring } = opts;
     const normalCollaboratorSampleIDColumn = 'Normal Collaborator Sample ID';
     const registrationDateColumn = 'Registration Date';
     const validColumn = 'Valid';
+    const countryColumn = 'Country';
+    const stateOfResidence = 'State';
 
-    // Match data in First Name, Valid and Collaborator Sample ID columns. If no match, returns -1.
+    // Match data in First Name, Valid , Location and Collaborator Sample ID columns. If no match, returns -1.
     const compareForMatch = async (index: number): Promise<number> => {
       const fname = await participantListTable.getTextAt(index, 'First Name');
       const normalCollaboratorSampleID = await participantListTable.getTextAt(index, normalCollaboratorSampleIDColumn);
       const [isAddressValid] = await participantListTable.getTextAt(index, validColumn);
-      let isMatch = true;
+      const [country] = await participantListTable.getTextAt(index, countryColumn);
+      const [state] = await participantListTable.getTextAt(index, stateOfResidence);
+      logInfo(`Allow NY or Canadians: ${allowNewYorkerOrCanadian}`);
+      logInfo(`PT info - country: ${country}, state: ${state}, valid: ${isAddressValid}`);
+
+      let matchFirstName = true;
       if (firstNameSubstring) {
-        isMatch = fname.indexOf(firstNameSubstring) !== -1
+        matchFirstName = fname.indexOf(firstNameSubstring) !== -1;
       }
-      if (isMatch && normalCollaboratorSampleID.length <= 5 && isAddressValid.toLowerCase() === 'true') {
+      if (!allowNewYorkerOrCanadian && (country === 'CA' || (country === 'US' && state === 'NY'))) {
+        return -1;
+      }
+      if (matchFirstName && normalCollaboratorSampleID.length <= 5 && isAddressValid.toLowerCase().trim() === 'true') {
         return index;
       }
       return -1;
@@ -269,6 +276,7 @@ export default class ParticipantListPage {
     await customizeViewPanel.selectColumns('Participant Columns', [registrationDateColumn]);
     await customizeViewPanel.selectColumns('Sample Columns', [normalCollaboratorSampleIDColumn]);
     await customizeViewPanel.selectColumns('Contact Information Columns', [validColumn]);
+    await customizeViewPanel.selectColumns('Contact Information Columns', [countryColumn, stateOfResidence]);
     await customizeViewPanel.close();
 
     expect(participantListTable.getHeaderIndex(registrationDateColumn)).not.toBe(-1);
@@ -351,5 +359,42 @@ export default class ParticipantListPage {
       }
     }
     throw new Error(`Failed to find a suitable participant for ${columnGroup}: ${columnName} = "${value}" within max waiting time 90 seconds.`);
+  }
+
+
+  /**
+    * Returns the guid of the most recently created playwright participant
+    * @param isRGPStudy mark as true or false if this is being ran in RGP - parameter is only needed if method is ran in RGP study
+    * @returns the guid of the most recently registered playwright participant
+  */
+  public async getGuidOfMostRecentAutomatedParticipant(participantName: string, isRGPStudy?: boolean): Promise<string> {
+    const customizeViewPanel = this.filters.customizeViewPanel;
+    await customizeViewPanel.open();
+
+    // Only RGP has a default filter with a different First Name field (in Participant Info Columns) - make sure to deselect it before continuing
+    // otherwise there will be 2 different First Name fields in the search section (and in the Participant List)
+    if (isRGPStudy) {
+      await customizeViewPanel.deselectColumns('Participant Info Columns', ['First Name']);
+      await expect(this.participantListTable.getHeaderByName('First Name')).not.toBeVisible();
+    }
+    // Add columns to be used to help find the most recent automated participant
+    await customizeViewPanel.selectColumns('Participant Columns', ['Participant ID', 'Registration Date', 'First Name']);
+    await customizeViewPanel.close();
+
+    //First filter the participant list to only show participants registered within the past two weeks
+    const searchPanel = this.filters.searchPanel;
+    await searchPanel.open();
+    const today = getDate(new Date());
+    const previousWeek = offsetDaysFromToday(2 * 7);
+    await searchPanel.dates('Registration Date', { from: previousWeek, to: today, additionalFilters: [AdditionalFilter.RANGE] });
+
+    //Also make sure to conduct the search for participants with the given first name of the automated participant
+    await searchPanel.text('First Name', { textValue: participantName });
+    await searchPanel.search();
+
+    //Get the first returned participant to use for testing - and verify at least one participant is returned
+    const numberOfParticipants = await this.participantListTable.rowsCount;
+    expect(numberOfParticipants, `No recent test participants were found with the given first name: ${participantName}`).toBeGreaterThanOrEqual(1);
+    return this.participantListTable.getCellDataForColumn('Participant ID', 1);
   }
 }

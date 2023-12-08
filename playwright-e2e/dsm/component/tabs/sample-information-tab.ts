@@ -105,7 +105,7 @@ export default class SampleInformationTab {
       .textContent();
 
     expect(textValue?.trim(),
-      `Provided MFBarcode (${MFBarcode}) has different info in - ${info} (provided value: ${value})`)
+      `Provided MFBarcode (${MFBarcode}) has different info in - ${info} (provided value: ${value.trim()})`)
       .toContain(value.trim());
   }
 

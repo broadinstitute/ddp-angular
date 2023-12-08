@@ -1,7 +1,9 @@
 import { expect, Locator, Page } from '@playwright/test';
 import Button from 'dss/component/button';
-import { waitForNoSpinner } from 'utils/test-utils';
+import { shuffle, waitForNoSpinner } from 'utils/test-utils';
 import Checkbox from './checkbox';
+import { ParticipantsListPaginator } from 'lib/component/dsm/paginators/participantsListPaginator';
+import { logInfo } from 'utils/log-utils';
 
 export enum SortOrder {
   DESC = 'desc',
@@ -17,6 +19,7 @@ export default class Table {
   private readonly footerCss: string;
   private readonly headerRowCss: string;
   private readonly nth: number;
+  private readonly _paginator: ParticipantsListPaginator;
 
   constructor(protected readonly page: Page,
       opts: {
@@ -36,6 +39,11 @@ export default class Table {
     this.rowCss = '[role="row"]:not([mat-header-row]):not(mat-header-row), tbody tr';
     this.cellCss = '[role="cell"], td';
     this.footerCss = 'tfoot tr';
+    this._paginator = new ParticipantsListPaginator(this.page);
+  }
+
+  get paginator(): ParticipantsListPaginator {
+    return this._paginator;
   }
 
   async exists(): Promise<boolean> {
@@ -118,6 +126,41 @@ export default class Table {
       return null;
     }
     return this.cell(searchRowIndex, resultColumnIndex);
+  }
+
+  async findRowBy(column: string, value: string): Promise<number> {
+    const compare = async (rowIndex: number): Promise<number> => {
+      const [actualValue] = await this.getTextAt(rowIndex, column);
+      const match = value === actualValue as string;
+      return match ? rowIndex : -1;
+    };
+
+    let rowCount = await this.getRowsCount();
+    expect(rowCount).toBeGreaterThanOrEqual(1);
+
+    // Max allowed search time is 90 seconds
+    const endTime = Date.now() + 90 * 1000;
+    while (rowCount > 0 && Date.now() <= endTime) {
+      let rowIndex = -1;
+      // Iterate rows in random order
+      const array = shuffle([...Array(rowCount).keys()]);
+      for (const index of array) {
+        rowIndex = await compare(index);
+        if (rowIndex !== -1) {
+          logInfo(`Found row index ${rowIndex} that match "${column}" : "${value}"`);
+          return rowIndex;
+        }
+      }
+      const hasNextPage = await this.paginator.hasNext();
+      if (hasNextPage) {
+        await this.paginator.next();
+        rowCount = await this.getRowsCount();
+      } else {
+        rowCount = 0;
+      }
+    }
+    logInfo(`Did not find a row that match "${column}" : "${value}"`);
+    return -1;
   }
 
   /**
@@ -251,8 +294,13 @@ export default class Table {
   }
 
   async changeRowCount(rowCount = 10): Promise<void> {
-    await this.rowCountButton(rowCount).click();
-    await waitForNoSpinner(this.page);
+    try {
+      await expect(this.rowCountButton(rowCount)).toBeVisible();
+      await this.rowCountButton(rowCount).click();
+      await waitForNoSpinner(this.page);
+    } catch (err) {
+      // Ignored
+    }
   }
 
   /**

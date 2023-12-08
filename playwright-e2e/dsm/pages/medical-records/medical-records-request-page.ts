@@ -1,4 +1,4 @@
-import { expect, Locator, Page } from '@playwright/test';
+import { Download, expect, Locator, Page } from '@playwright/test';
 import { waitForNoSpinner, waitForResponse } from 'utils/test-utils';
 import { MainInfoEnum } from 'dsm/pages/participant-page/enums/main-info-enum';
 import Input from 'dss/component/input';
@@ -6,6 +6,33 @@ import { FieldsEnum } from 'dsm/pages/medical-records/medical-records-enums';
 import { FillDate } from 'dsm/pages/tissue/interfaces/tissue-information-interfaces';
 import DatePicker from 'dsm/component/date-picker';
 import Checkbox from 'dss/component/checkbox';
+import Select from 'dss/component/select';
+import { logInfo } from 'utils/log-utils';
+
+export interface PDFType {
+  IRB_LETTER: string;
+  RELEASE: string;
+  RELEASE_PEDIATRIC: string;
+  COVER: string;
+  CONSENT_ASSENT: string;
+  CONSENT: string;
+  SOMATIC_CONSENT_ADDENDUM: string;
+  SOMATIC_CONSENT_ADDENDUM_PEDIATRIC: string;
+  SOMATIC_CONSENT_ASSENT_ADDENDUM_PEDIATRIC: string;
+}
+
+export const PDFName: PDFType = {
+  IRB_LETTER: 'IRB Letter',
+  RELEASE: 'release pdf',
+  RELEASE_PEDIATRIC: 'pediatric release pdf',
+  COVER: 'Cover PDF',
+  CONSENT_ASSENT: 'parental consent & assent pdf',
+  CONSENT: 'consent pdf v2',
+  SOMATIC_CONSENT_ADDENDUM: 'somatic consent addendum pdf',
+  SOMATIC_CONSENT_ADDENDUM_PEDIATRIC: 'somatic consent addendum pediatric pdf',
+  SOMATIC_CONSENT_ASSENT_ADDENDUM_PEDIATRIC: 'somatic consent assent addendum pediatric pdf',
+}
+
 
 export default class MedicalRecordsRequestPage {
   private readonly PAGE_TITLE = 'Medical Records - Request Page';
@@ -21,12 +48,14 @@ export default class MedicalRecordsRequestPage {
     await this.page.getByText('<< back to previous page').click();
     await this.page.waitForLoadState('load');
     await waitForNoSpinner(this.page);
+    await this.page.waitForLoadState('networkidle');
   }
 
   public async backToParticipantList(): Promise<void> {
     await this.page.getByText("<< back to 'Participant List'").click();
     await this.page.waitForLoadState('load');
     await waitForNoSpinner(this.page);
+    await this.page.waitForLoadState('networkidle');
   }
 
   public async getStaticText(infoFieldName: MainInfoEnum | FieldsEnum): Promise<string> {
@@ -118,7 +147,67 @@ export default class MedicalRecordsRequestPage {
     return new Checkbox(this.page, { root: this.dynamicInformationXpath(FieldsEnum.NO_ACTION_NEEDED)});
   }
 
-  /* XPaths */
+  public async downloadPDFBundle(): Promise<Download> {
+    const timeout = 2 * 60 * 1000;
+    const [download] = await Promise.all([
+      this.page.waitForEvent('download', { timeout }),
+      this.downloadPDFBundleButton.click(),
+    ]);
+    await waitForNoSpinner(this.page);
+    await expect(this.page.getByText(/Download finished/)).toBeVisible();
+
+    const fileName = download.suggestedFilename();
+    logInfo(`Download PDF Bundle finished: ${fileName}`);
+    return download;
+  }
+
+  public async downloadSinglePDF(pdf: string, opts: { nth?: number } = {}): Promise<Download> {
+    const { nth } = opts;
+    const select = new Select(this.page, { selector: '//mat-select[@placeholder="Select PDF"]', root: this.pageXPath });
+    await expect(select.toLocator()).toBeVisible();
+    await expect(this.downloadPDFBundleButton).toBeVisible();
+
+    const doDownload = async (): Promise<Download> => {
+      const timeout = 2 * 60 * 1000;
+      const waitPromise = this.page.waitForEvent('download', { timeout });
+      await select.selectOption(pdf, { nth });
+      await this.downloadSelectedPDFButton.click();
+      const download = await waitPromise;
+      return download;
+    }
+
+    let download: Download;
+    try {
+      download = await doDownload();
+    } catch (err) {
+      // retry
+      const appError = this.page.locator('app-error-snackbar').first();
+      if (await appError.isVisible()) {
+        const content = await appError.locator('.snackbar-content').innerText();
+        logInfo(`ERROR: Failed download PDF "${pdf}". ${content}`);
+        await appError.locator('[mattooltip="Close"]').click();
+        await this.page.locator('#message a').click();
+      }
+      download = await doDownload();
+    }
+    await waitForNoSpinner(this.page);
+    await expect(this.page.getByText(/Download finished/)).toBeVisible();
+
+    const fileName = download.suggestedFilename();
+    logInfo(`Download PDF "${pdf}" finished: ${fileName}`);
+
+    return download;
+  }
+
+  /* XPath and Locator */
+  private get downloadPDFBundleButton(): Locator {
+    return this.page.getByRole('button', { name: 'Download PDF Bundle' });
+  }
+
+  private get downloadSelectedPDFButton(): Locator {
+    return this.page.getByRole('button', { name: 'Download selected single PDF' });
+  }
+
   private staticInformationXpath(infoFieldName: MainInfoEnum | FieldsEnum): Locator {
     return this.page.locator(`${this.staticInformationTableXPath}//tr[td[text()[normalize-space()="${infoFieldName}"]]]/td[2]`);
   }

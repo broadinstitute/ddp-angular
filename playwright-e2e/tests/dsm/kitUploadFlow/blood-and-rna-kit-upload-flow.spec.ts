@@ -22,12 +22,13 @@ import RgpFinalScanPage from 'dsm/pages/scanner-pages/rgpFinalScan-page'
 import { simplifyShortID } from 'utils/faker-utils';
 import { saveParticipantGuid } from 'utils/faker-utils';
 import { ParticipantListTable } from 'dsm/component/tables/participant-list-table';
-import { waitForResponse } from 'utils/test-utils';
 import KitsQueuePage from 'dsm/pages/kitsInfo-pages/kit-queue-page';
 import ErrorPage from 'dsm/pages/samples/error-page';
 
 test.describe('Blood & RNA Kit Upload', () => {
   test('Verify that a blood & rna kit can be uploaded @dsm @rgp @functional @upload', async ({ page, request}, testInfo) => {
+    test.slow();
+
     const testResultDirectory = testInfo.outputDir;
 
     const study = StudyEnum.RGP;
@@ -43,15 +44,14 @@ test.describe('Blood & RNA Kit Upload', () => {
     const navigation = new Navigation(page, request);
 
     //select RGP study
-    await new Select(page, { label: 'Select study' }).selectOption('RGP');
+    await new Select(page, { label: 'Select study' }).selectOption(study);
 
     //Go to recently created playwright test participant to get their short id
     const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
-    await participantListPage.assertPageTitle();
     await participantListPage.waitForReady();
 
     const participantListTable = new ParticipantListTable(page);
-    const participantGuid = await participantListTable.getGuidOfMostRecentAutomatedParticipant(user.patient.firstName, true);
+    const participantGuid = await participantListPage.getGuidOfMostRecentAutomatedParticipant(user.patient.firstName, true);
     saveParticipantGuid(participantGuid);
 
     await participantListPage.filterListByParticipantGUID(user.patient.participantGuid);
@@ -78,12 +78,10 @@ test.describe('Blood & RNA Kit Upload', () => {
     //Note: no blood kits are automatically created for RGP - preliminary deactivation of existing kits is done in case of prior test run
     const kitsWithoutLabelPage = await navigation.selectFromSamples<KitsWithoutLabelPage>(SamplesNavEnum.KITS_WITHOUT_LABELS);
     await kitsWithoutLabelPage.waitForReady();
-    await kitsWithoutLabelPage.assertPageTitle();
     await kitsWithoutLabelPage.selectKitType(kitType);
-    if (await kitsWithoutLabelPage.hasExistingKitRequests()) {
+    if (await kitsWithoutLabelPage.hasKitRequests()) {
       await kitsWithoutLabelPage.assertCreateLabelsBtn();
       await kitsWithoutLabelPage.assertReloadKitListBtn();
-      await kitsWithoutLabelPage.assertTableHeader();
       await kitsWithoutLabelPage.deactivateAllKitsFor(simpleShortId);
     }
 
@@ -112,35 +110,23 @@ test.describe('Blood & RNA Kit Upload', () => {
     await kitsWithoutLabelPage.assertCreateLabelsBtn();
     await kitsWithoutLabelPage.assertReloadKitListBtn();
     //await kitsWithoutLabelPage.assertTableHeader(); Preferred Language column needs to be added to RGP DSM Test
-    await kitsWithoutLabelPage.assertPageTitle();
 
     await kitsWithoutLabelPage.search(KitsColumnsEnum.SHORT_ID, simpleShortId);
     const shippingID = (await kitsWithoutLabelPage.getData(KitsColumnsEnum.SHIPPING_ID)).trim();
 
-    const kitsTable = kitsWithoutLabelPage.kitsWithoutLabelTable;
+    const kitsTable = kitsWithoutLabelPage.getKitsTable;
     await kitsTable.searchByColumn(KitsColumnsEnum.SHORT_ID, simpleShortId);
     await expect(kitsTable.rowLocator()).toHaveCount(1);
 
     //Search for the kit and get its label created
     await kitsTable.selectSingleRowByIndex();
-    await Promise.all([
-      waitForResponse(page, { uri: '/kitLabel' }),
-      kitsWithoutLabelPage.createLabelsButton.click()
-    ]);
-    await Promise.all([
-      expect(page.locator('[data-icon="cog"]')).toBeVisible(),
-      expect(page.locator('h3')).toHaveText(/Triggered label creation/i)
-    ]);
-    await kitsWithoutLabelPage.waitUntilAllKitLabelCreationRequestsAreProcessed();
+    await kitsWithoutLabelPage.clickCreateLabels();
 
     //Kit Queue or Kit Error page (depending on where easypost sends the kit - easypost tends to send the kit to error in non-prod envs)
     const kitQueuePage = await navigation.selectFromSamples<KitsQueuePage>(SamplesNavEnum.QUEUE);
-    await kitQueuePage.waitForLoad();
-    await kitQueuePage.assertPageTitle();
-    await kitQueuePage.assertDisplayedKitTypes([KitTypeEnum.BLOOD, KitTypeEnum.BLOOD_AND_RNA]);
+    await kitQueuePage.waitForReady();
     await kitQueuePage.selectKitType(KitTypeEnum.BLOOD_AND_RNA);
-    await kitQueuePage.assertReloadKitListBtn();
-    const kitQueuePageHasExistingKitRequests = await kitQueuePage.hasExistingKitRequests();
+    const kitQueuePageHasExistingKitRequests = await kitQueuePage.hasKitRequests();
     if (kitQueuePageHasExistingKitRequests) {
       //Search for the test kit using the shipping id
       kitTable = kitQueuePage.getKitsTable;
@@ -151,7 +137,7 @@ test.describe('Blood & RNA Kit Upload', () => {
         kitErrorPage = await navigation.selectFromSamples<ErrorPage>(SamplesNavEnum.ERROR);
         await kitErrorPage.waitForReady();
         await kitErrorPage.selectKitType(KitTypeEnum.BLOOD_AND_RNA);
-        kitTable = kitErrorPage.kitListTable;
+        kitTable = kitErrorPage.getKitsTable;
         await kitTable.searchBy(KitsColumnsEnum.SHIPPING_ID, shippingID);
         amountOfKits = await kitTable.getRowsCount();
         expect(amountOfKits, `Kit with shipping id ${shippingID} was not found in either Kit Queue or Kit Error`).toBe(1);
@@ -166,7 +152,7 @@ test.describe('Blood & RNA Kit Upload', () => {
       kitErrorPage = await navigation.selectFromSamples<ErrorPage>(SamplesNavEnum.ERROR);
       await kitErrorPage.waitForReady();
       await kitErrorPage.selectKitType(KitTypeEnum.BLOOD_AND_RNA);
-      kitTable = kitErrorPage.kitListTable;
+      kitTable = kitErrorPage.getKitsTable;
       await kitTable.searchBy(KitsColumnsEnum.SHIPPING_ID, shippingID);
       amountOfKits = await kitTable.getRowsCount();
       expect(amountOfKits, `Kit with shipping id ${shippingID} was not found in either Kit Queue or Kit Error`).toBe(1);

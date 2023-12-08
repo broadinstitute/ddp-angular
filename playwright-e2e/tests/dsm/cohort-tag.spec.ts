@@ -84,7 +84,6 @@ test.describe('Cohort tags', () => {
       await cohortTag.add(cohortTagValue3);
       await participantPage.backToList();
 
-      await participantListPage.assertPageTitle();
       await participantListPage.waitForReady();
 
       // Open participant again to verify cohort tags

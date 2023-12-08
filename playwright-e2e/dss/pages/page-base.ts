@@ -364,10 +364,10 @@ export default abstract class PageBase implements PageInterface {
       labels = { ...defaultMailingAddressLabels }
     } = opts;
 
-    labels.physicianName = 'Physician Name';
-    labels.hospital = new RegExp(/Institution/);
+    labels.physicianName = /Physician Name/;
+    labels.hospital = /Hospital|Institution/;
 
-    const institution = new Institution(this.page, { label: /Physician/, nth });
+    const institution = new Institution(this.page, { label: /Physician|Institution/, nth });
     await institution.toInput(labels.physicianName).fill(physicianName);
     await institution.toInput(labels.hospital).fill(institutionName);
     await institution.toInput(labels.city!).fill(city);

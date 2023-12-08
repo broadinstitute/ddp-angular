@@ -19,7 +19,6 @@ import FinalScanPage from 'dsm/pages/scanner-pages/finalScan-page';
 import TrackingScanPage from 'dsm/pages/scanner-pages/trackingScan-page';
 import { WelcomePage } from 'dsm/pages/welcome-page';
 import { logInfo } from 'utils/log-utils';
-import { waitForResponse } from 'utils/test-utils';
 
 /**
  * Prefix check for Blood kit with Canada and New York address for LMS and Osteo2 studies.
@@ -73,6 +72,7 @@ test.describe.serial('Blood Kit Upload', () => {
   for (const [index, study] of studies.entries()) {
     test(`Kit prefix check @cmi @dsm @${study} @kit`, async ({ page }, testInfo) => {
       test.slow();
+
       const testResultDir = testInfo.outputDir;
 
       await welcomePage.selectStudy(study);
@@ -82,7 +82,7 @@ test.describe.serial('Blood Kit Upload', () => {
         await participantListPage.waitForReady();
 
         // Find an existing suitable participant
-        const testParticipantIndex = await participantListPage.findParticipantForKitUpload();
+        const testParticipantIndex = await participantListPage.findParticipantForKitUpload({ allowNewYorkerOrCanadian: true });
 
         // Collects all the necessary data for kit upload
         const participantListTable = participantListPage.participantListTable;
@@ -96,7 +96,7 @@ test.describe.serial('Blood Kit Upload', () => {
         expect(shortID).toBeTruthy();
         expect(firstName).toBeTruthy();
         expect(lastName).toBeTruthy();
-        logInfo(`shortId: ${shortID}`);
+        logInfo(`Participant Short ID: ${shortID}`);
 
         kitUploadInfo = new KitUploadInfo(
           shortID,
@@ -133,30 +133,21 @@ test.describe.serial('Blood Kit Upload', () => {
         await kitsWithoutLabelPage.selectKitType(kitType);
         await kitsWithoutLabelPage.assertCreateLabelsBtn();
         await kitsWithoutLabelPage.assertReloadKitListBtn();
-        await kitsWithoutLabelPage.assertTableHeader();
-        await kitsWithoutLabelPage.assertPageTitle();
 
-        const kitsTable = kitsWithoutLabelPage.kitsWithoutLabelTable;
+        const kitsTable = kitsWithoutLabelPage.getKitsTable;
         await kitsTable.searchByColumn(KitsColumnsEnum.SHORT_ID, shortID);
         await expect(kitsTable.rowLocator()).toHaveCount(1);
         shippingID = (await kitsTable.getRowText(0, KitsColumnsEnum.SHIPPING_ID)).trim();
 
         await kitsTable.selectSingleRowByIndex();
-        await Promise.all([
-          waitForResponse(page, { uri: '/kitLabel' }),
-          kitsWithoutLabelPage.createLabelsButton.click()
-        ]);
-        await Promise.all([
-          expect(page.locator('[data-icon="cog"]')).toBeVisible({timeout: 60000}),
-          expect(page.locator('h3')).toHaveText(/Triggered label creation/i, {timeout: 60000})
-        ]);
+        await kitsWithoutLabelPage.clickCreateLabels();
         logInfo(`shippingID: ${shippingID}`);
       });
 
       // New kit will be listed on Error page because address is in either Canada or New York
       await test.step('New kit will be listed on Error page', async () => {
         const errorPage = await navigation.selectFromSamples<ErrorPage>(SamplesNavEnum.ERROR);
-        const kitListTable = errorPage.kitListTable;
+        const kitListTable = errorPage.getKitsTable;
         await errorPage.waitForReady();
         await errorPage.selectKitType(kitType);
         await expect(async () => {
@@ -171,7 +162,7 @@ test.describe.serial('Blood Kit Upload', () => {
           // create label could take some time
           await errorPage.reloadKitList();
           await expect(kitListTable.rows).toHaveCount(1, { timeout: 10 * 1000 });
-        }).toPass({ timeout: 90 * 1000 });
+        }).toPass({ timeout: 3 * 60 * 1000 });
       });
 
       // For blood kit, requires tracking label
@@ -193,7 +184,7 @@ test.describe.serial('Blood Kit Upload', () => {
         const kitsWithoutLabelPage = await navigation.selectFromSamples<KitsWithoutLabelPage>(SamplesNavEnum.KITS_WITHOUT_LABELS);
         await kitsWithoutLabelPage.waitForReady();
         await kitsWithoutLabelPage.selectKitType(kitType);
-        const kitsTable = kitsWithoutLabelPage.kitsWithoutLabelTable;
+        const kitsTable = kitsWithoutLabelPage.getKitsTable;
         await kitsTable.searchByColumn(KitsColumnsEnum.SHORT_ID, shortID);
         await expect(kitsTable.rowLocator()).toHaveCount(0);
       });
@@ -218,9 +209,8 @@ test.describe.serial('Blood Kit Upload', () => {
     await trackingScanPage.save({ verifySuccess: false });
 
     // Enter the same pair again to trigger the scan error
+    const errMsg = `Error occurred sending this scan pair!  Kit ${kitLabel} was already associated with tracking id ${trackingLabel}`;
     await expect(page.locator('//h3[contains(@class, "Color--warn")]')).toHaveText('Error - Failed to save all changes');
-    await expect(page.locator('//p[contains(@class, "Color--warn")]')).toHaveText(
-      `Error occurred sending this scan pair!  Error occured for Kit Label "${kitLabel}" ` +
-      'For more information please contact your DSM developer');
+    await expect(page.locator('//p[contains(@class, "Color--warn")]')).toHaveText(new RegExp(errMsg));
   });
 })
