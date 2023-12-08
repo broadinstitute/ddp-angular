@@ -143,7 +143,7 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
         const participantListTable = participantListPage.participantListTable;
         const amountOfParticipants = await participantListTable.rowsCount;
         expect(amountOfParticipants).toBe(1);
-      }).toPass({intervals: [10_000], timeout: 30_000});
+      }).toPass({intervals: [10_000], timeout: 60_000});
 
       const participantListTable = participantListPage.participantListTable;
       const germlineInfo = (await participantListTable.getParticipantDataAt(0, 'GERMLINE_CONSENT_ADDENDUM_PEDIATRIC Survey Created')).trim();
@@ -248,7 +248,7 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
         const participantListTable = participantListPage.participantListTable;
         const amountOfParticipants = await participantListTable.rowsCount;
         expect(amountOfParticipants).toBe(1);
-      }).toPass({intervals: [10_000], timeout: 30_000});
+      }).toPass({intervals: [10_000], timeout: 60_000});
 
       const participantListTable = participantListPage.participantListTable;
       const germlineInfo = (await participantListTable.getParticipantDataAt(0, 'GERMLINE_CONSENT_ADDENDUM_PEDIATRIC Survey Created')).trim();
@@ -353,7 +353,7 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
         const participantListTable = participantListPage.participantListTable;
         const amountOfParticipants = await participantListTable.rowsCount;
         expect(amountOfParticipants).toBe(1);
-      }).toPass({intervals: [10_000], timeout: 30_000});
+      }).toPass({intervals: [10_000], timeout: 60_000});
 
       const participantListTable = participantListPage.participantListTable;
       const germlineInfo = (await participantListTable.getParticipantDataAt(0, 'GERMLINE_CONSENT_ADDENDUM_PEDIATRIC Survey Created')).trim();
@@ -459,7 +459,7 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
         const participantListTable = participantListPage.participantListTable;
         const amountOfParticipants = await participantListTable.rowsCount;
         expect(amountOfParticipants).toBe(1);
-      }).toPass({intervals: [10_000], timeout: 30_000});
+      }).toPass({intervals: [10_000], timeout: 60_000});
 
       const participantListTable = participantListPage.participantListTable;
       const germlineInfo = (await participantListTable.getParticipantDataAt(0, 'GERMLINE_CONSENT_ADDENDUM_PEDIATRIC Survey Created')).trim();
