@@ -50,8 +50,9 @@ export default class LmsResearchConsentPage extends LmsPageBase {
       });
   }
 
-  async fillInSignature(fullName: string): Promise<void> {
-    await super.signature({ testId: PatientsData[this.typePatient].testId.assentSignature! }).fill(fullName);
+  async fillInSignature(fullName: string, opts: { overwrite?: boolean } = {}): Promise<void> {
+    const { overwrite } = opts;
+    await super.signature({ testId: PatientsData[this.typePatient].testId.assentSignature! }).fill(fullName, { overwrite });
   }
 
   async selectRelationshipToChild(relationship: string): Promise<void> {

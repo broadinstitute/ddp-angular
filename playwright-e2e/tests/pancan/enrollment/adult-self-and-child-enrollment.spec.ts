@@ -103,8 +103,8 @@ test.describe('Adult self-enroll & child (consent) enrollment', () => {
     await assertActivityHeader(page, 'Medical Release Form');
     const medicalReleaseFormPage = new MedicalReleaseFormPage(page);
     await medicalReleaseFormPage.waitForReady();
-    expect(await page.locator('.ddp-content').first().screenshot()).toMatchSnapshot('medical-release-form-content.png');
-    expect(await medicalReleaseFormPage.agreeToAllowContactPhysician().toLocator().screenshot()).toMatchSnapshot('agree-to-contact-physician.png');
+    await expect(page.locator('.ddp-content').first()).toHaveScreenshot('medical-release-form-content.png');
+    await expect(medicalReleaseFormPage.agreeToAllowContactPhysician().toLocator()).toHaveScreenshot('agree-to-contact-physician.png');
     await medicalReleaseFormPage.fillInInPhysicianData();
     await medicalReleaseFormPage.agreeToAllowContactPhysician().check();
     await medicalReleaseFormPage.submit();
