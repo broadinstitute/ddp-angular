@@ -1,6 +1,6 @@
 import { Page } from '@playwright/test';
 import { fillInEmailPassword } from 'authentication/auth-base';
-import { NavSelectors } from 'dss/pages/singular/navbar';
+import { NavSelectors } from 'dss/pages/navbar-selectors';
 
 const { OSTEO_USER_EMAIL, OSTEO_USER_PASSWORD } = process.env;
 
