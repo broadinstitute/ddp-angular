@@ -10,6 +10,7 @@ import OncHistoryTab from 'dsm/component/tabs/onc-history-tab';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
 import ParticipantPage from 'dsm/pages/participant-page/participant-page';
 import { WelcomePage } from 'dsm/pages/welcome-page';
+import { SortOrder } from 'dss/component/table';
 import { logInfo } from 'utils/log-utils';
 import { studyShortName } from 'utils/test-utils';
 
@@ -25,13 +26,13 @@ test('Multiple browser tabs @dsm', async ({ browser, request }) => {
   // Tab A: Open Participant List page, realm matches expected study PanCan
   const pancanPage = await browserContext.newPage();
   const pancanParticipantListPage = await logIntoStudy(pancanPage, request, pancan);
-  const pancanParticipantShortId = await findAnyParticipantShortId(pancanParticipantListPage);
+  const pancanParticipantShortId = await findAdultParticipantShortId(pancanParticipantListPage);
   logInfo(`PanCan participant Short ID: ${pancanParticipantShortId}`);
 
   // Tab B: Open Participant List page, realm matches expected study angio
   const angioPage = await browserContext.newPage();
   const angioParticipantListPage = await logIntoStudy(angioPage, request, angio);
-  const angioParticipantShortId = await findAnyParticipantShortId(angioParticipantListPage);
+  const angioParticipantShortId = await findAdultParticipantShortId(angioParticipantListPage);
   logInfo(`angio participant Short ID: ${angioParticipantShortId}`);
 
   // Add new Onc History for study PanCan in tab A
@@ -41,37 +42,46 @@ test('Multiple browser tabs @dsm', async ({ browser, request }) => {
   await addOncHistory(angioPage, angioParticipantListPage, angio);
 });
 
-async function findAnyParticipantShortId(participantListPage: ParticipantListPage): Promise<string> {
+async function findAdultParticipantShortId(participantListPage: ParticipantListPage): Promise<string> {
   return await test.step('Search for a participant with Onc history', async () => {
     // Find a participant with existing Onc History
     const oncHistoryRequestStatusColumn = 'Request Status';
+    const registrationDateColumn = 'Registration Date';
 
     const customizeViewPanel = participantListPage.filters.customizeViewPanel;
     await customizeViewPanel.open();
+    await customizeViewPanel.selectColumns(CustomViewColumns.PARTICIPANT, [registrationDateColumn]);
     await customizeViewPanel.selectColumns(CustomViewColumns.ONC_HISTORY, [oncHistoryRequestStatusColumn]);
 
     const searchPanel = participantListPage.filters.searchPanel;
     await searchPanel.open();
     await searchPanel.checkboxes('Status', { checkboxValues: ['Enrolled'] });
     // await searchPanel.checkboxes(oncHistoryRequestStatusColumn, { checkboxValues: ['Request'] });
-    const filterListResponse = await searchPanel.search();
+    await searchPanel.search();
 
     const participantListTable = participantListPage.participantListTable;
     const rows = await participantListTable.rowsCount;
     expect(rows).toBeGreaterThanOrEqual(1);
 
-    // Find the first participant that has DSM Participant ID. Short ID is random.
-    let shortId;
+    await participantListTable.sort(registrationDateColumn, SortOrder.ASC);
+    const numParticipant = await participantListTable.numOfParticipants();
+    if (numParticipant > 50) {
+      await participantListTable.changeRowCount(50);
+    }
+
+    // There are participants without DSM Participant ID. So we want to filter to find an adult that has DSM Participant ID.
+    const filterListResponse = await searchPanel.search();
+    let shortId = undefined;
     const responseJson = JSON.parse(await filterListResponse.text());
     for (const i in responseJson.participants) {
+      const dateOfMajority = responseJson.participants[i].esData.dsm.dateOfMajority;
       const dsmParticipantId = responseJson.participants[i].esData.dsm.participant?.participantId;
-      if (dsmParticipantId !== undefined) {
+      if (dateOfMajority === undefined && dsmParticipantId !== undefined) {
         shortId = responseJson.participants[i].esData.profile?.hruid;
         break;
       }
     }
     expect(shortId).toBeTruthy();
-    logInfo(`Participant Short ID: ${shortId}`);
     return shortId;
   });
 }
