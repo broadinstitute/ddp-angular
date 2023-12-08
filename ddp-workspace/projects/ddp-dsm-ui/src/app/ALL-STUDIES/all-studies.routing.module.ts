@@ -42,6 +42,7 @@ import {
   UsersAndPermissionsCanActivateGuard,
   UsersAndPermissionsCanLoadGuard
 } from '../guards/usersAndPermissions.guard';
+import {PhiManifestComponent} from "../phi-manifest/phi-manifest.component";
 
 
 
@@ -96,6 +97,7 @@ export const AppRoutes: Routes = [
       {path: 'ndi', component: NDIUploadComponent, canActivate: [AuthGuard]},
       {path: 'stoolUpload', component: StoolUploadComponent, canActivate: [AuthGuard]},
       {path: 'oncHistoryUpload', component: OncHistoryUploadComponent, canActivate: [AuthGuard, OncHistoryUploadGuard]},
+      {path: 'phiManifest', component: PhiManifestComponent, canActivate: [AuthGuard, OncHistoryUploadGuard]},
 
       {path: 'userSettings', component: UserSettingComponent, canActivate: [AuthGuard]},
       {path: 'usersAndPermissions',
