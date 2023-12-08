@@ -9,7 +9,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "convert-atcp-auth-build-to-UMD": "rollup --config projects/ddp-atcp/src/auth0/auth0-scripts/rollup.config.js",
-    "preinstall": "npx npm-force-resolutions"
+    "preinstall": "npx npm-force-resolutions@0.0.3"
   },
   "resolutions": {
       "ua-parser-js": "0.7.33"
