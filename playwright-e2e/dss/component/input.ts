@@ -77,7 +77,7 @@ export default class Input extends WidgetBase {
 
     // safety check: prevent unintented overwrite value in wrong input field.
     if (!overwrite && oldValue.length > 0) {
-      throw new Error(`Overwriting an existing value: "${oldValue}". If intentional, set overwrite to true: ${this.toLocator()}`);
+      throw new Error(`Overwriting an existing value: "${oldValue}". If intentional, set overwrite to true. ${this.toLocator()}`);
     }
 
     if (typeof value === 'string' && value.length === 0) {
