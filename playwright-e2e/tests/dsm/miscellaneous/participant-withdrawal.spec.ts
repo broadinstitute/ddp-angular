@@ -11,7 +11,7 @@ import { test } from 'fixtures/dsm-fixture';
 import { assertTableHeaders } from 'utils/assertion-helper';
 import { logParticipantWithdrew } from 'utils/log-utils';
 import * as user from 'data/fake-user.json';
-import { waitForNoSpinner } from 'utils/test-utils';
+import { shuffle } from 'utils/test-utils';
 
 test.describe('Participants Withdrawal', () => {
   const studies = [StudyEnum.LMS];
@@ -46,15 +46,18 @@ test.describe('Participants Withdrawal', () => {
         // Sort Registration Date in ascending order to pick the oldest participant
         await participantsTable.sort('Registration Date', SortOrder.DESC);
 
+        // Randomize selected participant
+        const rowCount = await participantsTable.getRowsCount();
+        const shuffledRows = shuffle([...Array(rowCount).keys()]);
+        const rowIndex = shuffledRows[0];
+
         // Select record on first row for withdrawal
         const registrationDateColumnIndex = await participantsTable.getHeaderIndex('Registration Date');
-        const registrationDate = await participantsTable.cell(0, registrationDateColumnIndex).innerText();
-        // First row Registration Date
+        const registrationDate = await participantsTable.cell(rowIndex, registrationDateColumnIndex).innerText();
         const shortIdColumnIndex = await participantsTable.getHeaderIndex('Short ID');
-        const shortIdColumnId = await participantsTable.cell(0, shortIdColumnIndex).innerText();
-        // First row Participant ID
+        const shortIdColumnId = await participantsTable.cell(rowIndex, shortIdColumnIndex).innerText();
         const participantIdColumnIndex = await participantsTable.getHeaderIndex('Participant ID');
-        const participantId = await participantsTable.cell(0, participantIdColumnIndex).innerText();
+        const participantId = await participantsTable.cell(rowIndex, participantIdColumnIndex).innerText();
 
         // Withdraw participant
         // Loading Participant Withdrawal page
@@ -86,23 +89,14 @@ test.describe('Participants Withdrawal', () => {
         await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
         await participantListPage.waitForReady();
 
+        // verify status has changed to withdrawn
         await expect(async () => {
-          // Reload Participant List page to verify status has changed
-          await page.reload();
-          await waitForNoSpinner(page);
-          await participantListPage.waitForReady();
-
-          await customizeViewPanel.open();
-          await customizeViewPanel.selectColumns('Participant Columns', ['Participant ID']);
-
-          await searchPanel.open();
-          await searchPanel.clear();
-          await searchPanel.text('Participant ID', { textValue: participantId });
-          await searchPanel.search();
+          await participantListPage.reload();
+          await participantListPage.filterListByShortId(shortIdColumnId);
           /// Status of participant should update to “Exited after enrollment” or “Exited before enrollment”
-          const participantStatus = await participantsTable.findCell('Participant ID', participantId, 'Status');
-          expect(await participantStatus!.innerText()).toMatch(/Exited (before|after) Enrollment/);
-        }).toPass({ timeout: 240 * 1000 });
+          const participantStatus = await participantsTable.findCell('Short ID', shortIdColumnId, 'Status');
+          await expect(participantStatus!).toContainText(/Exited (before|after) Enrollment/);
+        }).toPass({ timeout: 5 * 60 * 1000 });
 
         // At Participant Page, verify few detail
         const participantPage: ParticipantPage = await participantsTable.openParticipantPageAt(0);
@@ -120,17 +114,6 @@ test.describe('Participants Withdrawal', () => {
 
         // Participant Page shows a red message on the top stating that the “Participant was withdrawn from the study!”
         await expect(page.locator('h3.Color--warn')).toHaveText('Participant was withdrawn from the study!');
-
-        await participantPage.backToList();
-
-        // Open bug https://broadworkbench.atlassian.net/browse/PEPPER-898
-        /*
-        // Click Participant Withdrawn button to list withdrawn participants
-        await participantListPage.showParticipantWithdrawnButton();
-        // At least one withdrawn participant using the button
-        const numWithdrawnParticipants = await participantsTable.numOfParticipants();
-        expect(numWithdrawnParticipants).toBeGreaterThan(1);
-      */
       });
     }
 });

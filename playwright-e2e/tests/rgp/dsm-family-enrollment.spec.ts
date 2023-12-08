@@ -28,7 +28,6 @@ test.describe.serial('DSM Family Enrollment Handling', () => {
 
     //Verify the Participant List is displayed
     const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
-    await participantListPage.assertPageTitle();
     await participantListPage.waitForReady();
 
     //Get the most recent automated test participant (searches for up to a week ago)
@@ -98,7 +97,6 @@ test.describe.serial('DSM Family Enrollment Handling', () => {
 
     //Verify the Participant List is displayed
     const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
-    await participantListPage.assertPageTitle();
     await participantListPage.waitForReady();
 
     const participantGuid = await participantListPage.getGuidOfMostRecentAutomatedParticipant(user.patient.firstName, true);
@@ -535,7 +533,6 @@ test.describe.serial('DSM Family Enrollment Handling', () => {
 
     //Verify the Participant List is displayed
     const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
-    await participantListPage.assertPageTitle();
     await participantListPage.waitForReady();
 
     //Get the most recent automated test participant (searches for up to a week ago)
@@ -621,7 +618,6 @@ test.describe.serial('DSM Family Enrollment Handling', () => {
 
     //Verify the Participant List is displayed
     const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
-    await participantListPage.assertPageTitle();
     await participantListPage.waitForReady();
 
     //Get the most recent automated test participant (searches for up to a week ago)

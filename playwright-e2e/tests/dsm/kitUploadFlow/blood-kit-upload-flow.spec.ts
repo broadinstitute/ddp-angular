@@ -62,7 +62,7 @@ test.describe.serial('Blood Kits upload flow', () => {
       await homePage.assertSelectedStudyTitle(study);
 
       const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
-      await participantListPage.assertPageTitle();
+      await participantListPage.waitForReady();
 
       // find the right participant
       const testParticipantIndex = await participantListPage.findParticipantForKitUpload({ allowNewYorkerOrCanadian: false });
@@ -175,7 +175,7 @@ test.describe.serial('Blood Kits upload flow', () => {
 
       // checks if the uploaded kit is displayed on the participant's page, in the sample information tab
       await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
-      await participantListPage.assertPageTitle();
+      await participantListPage.waitForReady();
 
       const searchPanel = participantListPage.filters.searchPanel;
       await searchPanel.open();

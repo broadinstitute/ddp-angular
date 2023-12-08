@@ -13,8 +13,9 @@ import QuickFilters from 'dsm/component/filters/quick-filters';
 import { getDate, offsetDaysFromToday } from 'utils/date-utils';
 import { AdditionalFilter } from 'dsm/component/filters/sections/search/search-enums';
 import { logInfo } from 'utils/log-utils';
+import DsmPageBase from './dsm-page-base';
 
-export default class ParticipantListPage {
+export default class ParticipantListPage extends DsmPageBase {
   private readonly PAGE_TITLE: string = 'Participant List';
   private readonly _filters: Filters = new Filters(this.page);
   private readonly _quickFilters: QuickFilters = new QuickFilters(this.page);
@@ -34,12 +35,15 @@ export default class ParticipantListPage {
     return participantListPage;
   }
 
-  constructor(private readonly page: Page) {}
+  constructor(page: Page) {
+    super(page);
+  }
 
   public async waitForReady(): Promise<void> {
-    await this.assertPageTitle();
-    await waitForNoSpinner(this.page);
+    await super.waitForReady();
+    await expect(this.page.locator('h1')).toHaveText(this.PAGE_TITLE);
     await expect(this.page.locator(this.filters.searchPanel.openButtonXPath)).toBeVisible();
+    await waitForNoSpinner(this.page);
   }
 
   public async selectAll(): Promise<void> {
@@ -68,11 +72,6 @@ export default class ParticipantListPage {
   }
 
   /* assertions */
-  public async assertPageTitle(): Promise<void> {
-    await expect(this.page.locator('h1'),
-      "Participant List page - page title doesn't match the expected one")
-      .toHaveText(this.PAGE_TITLE, { timeout: 30 * 1000 });
-  }
 
   public async assertParticipantsCountGreaterOrEqual(count: number): Promise<void> {
     expect(await this.participantsCount(),

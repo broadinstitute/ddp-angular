@@ -15,6 +15,12 @@ const fixture = base.extend<Fixtures>({
 // Use this for login in DSM tests with limited permissions - view sequencing permission test
 const fixtureForLimitedPermissions = base.extend<Fixtures>({
   page: async ({ page }, use) => {
+    if (DSM_USER1_EMAIL === undefined || DSM_USER1_EMAIL === null) {
+      throw Error('Invalid parameter: DSM_USER1_EMAIL is undefined or null.');
+    }
+    if (DSM_USER1_PASSWORD === undefined || DSM_USER1_PASSWORD === null) {
+      throw Error('Invalid parameter: DSM_USER1_PASSWORD is undefined or null.');
+    }
     await login(page, {email: DSM_USER1_EMAIL, password: DSM_USER1_PASSWORD});
     await use(page);
   }
@@ -23,6 +29,12 @@ const fixtureForLimitedPermissions = base.extend<Fixtures>({
 // Use this for general DSM tests with limited permissions
 const fixtureForGeneralTesting = base.extend<Fixtures>({
   page: async ({ page }, use) => {
+    if (DSM_USER2_EMAIL === undefined || DSM_USER2_EMAIL === null) {
+      throw Error('Invalid parameter: DSM_USER2_EMAIL is undefined or null.');
+    }
+    if (DSM_USER2_PASSWORD === undefined || DSM_USER2_PASSWORD === null) {
+      throw Error('Invalid parameter: DSM_USER2_PASSWORD is undefined or null.');
+    }
     await login(page, {email: DSM_USER2_EMAIL, password: DSM_USER2_PASSWORD});
     await use(page);
   }
@@ -30,6 +42,12 @@ const fixtureForGeneralTesting = base.extend<Fixtures>({
 
 const fixtureForGPCollectionDateTest = base.extend<Fixtures>({
   page: async ({ page }, use) => {
+    if (DSM_USER4_EMAIL === undefined || DSM_USER4_EMAIL === null) {
+      throw Error('Invalid parameter: DSM_USER4_EMAIL is undefined or null.');
+    }
+    if (DSM_USER4_PASSWORD === undefined || DSM_USER4_PASSWORD === null) {
+      throw Error('Invalid parameter: DSM_USER4_PASSWORD is undefined or null.');
+    }
     await login(page, {email: DSM_USER4_EMAIL, password: DSM_USER4_PASSWORD});
     await use(page);
   }

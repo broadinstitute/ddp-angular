@@ -184,7 +184,7 @@ test.describe.serial('LMS Child Enrollment', () => {
       await researchConsentPage.fillInDateOfBirth(participant.birthDate.MM, participant.birthDate.DD, participant.birthDate.YYYY);
       await researchConsentPage.fillInFullName(childFullName); // Your Child’s Full name
       await researchConsentPage.fillInYourFullName(adultFirstName, adultLastName); // Your Full name
-      await researchConsentPage.fillInSignature(adultFullName); // Your Signature (Full Name)
+      await researchConsentPage.fillInSignature(adultFullName, { overwrite: true }); // Your Signature (Full Name)
       await researchConsentPage.selectRelationshipToChild('Parent');
       await researchConsentPage.fillInContactAddress({
         fullName: childFullName,

@@ -8,7 +8,13 @@ export default class Input extends WidgetBase {
    * @param {Page} page
    * @param {{label?: string, ddpTestID?: string, root?: Locator | string, exactMatch?: boolean}} opts
    */
-  constructor(page: Page, opts: { label?: string | RegExp; ddpTestID?: string; root?: Locator | string; exactMatch?: boolean; nth?: number } = {}) {
+  constructor(page: Page, opts: {
+    label?: string | RegExp;
+    ddpTestID?: string;
+    root?: Locator | string;
+    exactMatch?: boolean;
+    nth?: number;
+  } = {}) {
     const { label, ddpTestID, root = 'mat-form-field', exactMatch = false, nth } = opts;
     super(page, { root, testId: ddpTestID, nth });
 
@@ -39,17 +45,49 @@ export default class Input extends WidgetBase {
    * @param opts
    * @returns {Promise<void>}
    */
-  async fill(value: string | number, opts: { dropdownOption?: string, type?: boolean, nth?: number, waitForSaveRequest?: boolean } = {}): Promise<void> {
-    const { dropdownOption, type, nth, waitForSaveRequest = false } = opts;
+  async fill(value: string | number, opts: {
+    dropdownOption?: string;
+    type?: boolean;
+    nth?: number;
+    waitForSaveRequest?: boolean;
+    overwrite?: boolean
+  } = {}): Promise<void> {
+    const { dropdownOption, type, nth, waitForSaveRequest = false, overwrite = false } = opts;
     const useType = type ? type : false;
     nth ? this.nth = nth : this.nth;
 
-    await this.toLocator().scrollIntoViewIfNeeded().catch(err => logError(`${err}\n${this.toLocator()}`));
+    const doAfterFill = async (): Promise<void> => {
+      const pressTab = this.toLocator().press('Tab');
+      if (waitForSaveRequest) {
+        await Promise.all([
+          waitForResponse(this.page, { uri: '/answers'}),
+          pressTab
+        ]);
+      } else {
+        await pressTab;
+        await this.page.waitForTimeout(200); // short delay to detect triggered saving request
+      }
+    }
+
     // Is Saving button visible before typing? tests could become flaky if saving is in progress before adding another new patch request
     await expect(this.page.locator('button:visible', { hasText: 'Saving' })).toBeHidden();
 
-    const existValue = await this.toLocator().inputValue();
-    if (existValue !== value) {
+    await this.toLocator().scrollIntoViewIfNeeded().catch(err => logError(`${err}\n${this.toLocator()}`));
+    const oldValue: string = (await this.toLocator().inputValue()).trim();
+
+    // safety check: prevent unintented overwrite value in wrong input field.
+    if (!overwrite && oldValue.length > 0) {
+      throw new Error(`Overwriting an existing value: "${oldValue}". If intentional, set overwrite to true. ${this.toLocator()}`);
+    }
+
+    if (typeof value === 'string' && value.length === 0) {
+      // clear the input field
+      await this.toLocator().fill(value);
+      await doAfterFill();
+      return;
+    }
+
+    if (oldValue !== value) {
       const autocomplete = await this.getAttribute('aria-autocomplete');
       useType
         ? await this.toLocator().pressSequentially(value as string, { delay: 200 })
@@ -66,18 +104,10 @@ export default class Input extends WidgetBase {
           .first()
           .click();
       }
-      const pressTab = this.toLocator().press('Tab');
-      if (waitForSaveRequest) {
-        await Promise.all([
-          waitForResponse(this.page, { uri: '/answers'}),
-          pressTab
-        ]);
-      } else {
-        await pressTab;
-        await this.page.waitForTimeout(200); // short delay to detect triggered saving request
-      }
-      await expect(this.page.locator('button:visible', { hasText: 'Saving' })).toBeHidden();
+      await doAfterFill();
     }
+
+    await expect(this.page.locator('button:visible', { hasText: 'Saving' })).toBeHidden();
   }
 
   public async fillSimple(value: string): Promise<void> {
