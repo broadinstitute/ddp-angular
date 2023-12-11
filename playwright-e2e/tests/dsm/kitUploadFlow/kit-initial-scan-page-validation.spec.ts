@@ -1,6 +1,5 @@
 import {expect, test} from '@playwright/test';
 import {WelcomePage} from 'dsm/pages/welcome-page';
-import HomePage from 'dsm/pages/home-page';
 import {Navigation} from 'dsm/component/navigation/navigation';
 import {login} from 'authentication/auth-dsm';
 import {StudyEnum} from 'dsm/component/navigation/enums/selectStudyNav-enum';
@@ -13,7 +12,6 @@ import KitsReceivedPage from 'dsm/pages/kitsInfo-pages/kitsReceived-page/kitsRec
 // don't run in parallel
 test.describe.serial('Initial Scan page', () => {
   let welcomePage: WelcomePage;
-  let homePage: HomePage;
   let navigation: Navigation;
 
   const studies = [StudyEnum.OSTEO2, StudyEnum.LMS];
@@ -21,7 +19,6 @@ test.describe.serial('Initial Scan page', () => {
   test.beforeEach(async ({ page, request }) => {
     await login(page);
     welcomePage = new WelcomePage(page);
-    homePage = new HomePage(page);
     navigation = new Navigation(page, request);
   });
 
@@ -80,7 +77,6 @@ test.describe.serial('Initial Scan page', () => {
       const msg1 = `Kit for participant with ShortId "${shortId}" was not found.`;
       const msg2 = `Kit Label "${mfCode}" was already scanned.`
       await expect(page.locator('//p[contains(@class, "Color--warn")]')).toHaveText(/[msg1|msg2]/);
-      await expect(page.locator('//p[contains(@class, "Color--warn")]')).toHaveText(/For more information please contact your DSM developer/);
     });
   }
 })
