@@ -1,6 +1,6 @@
 import { Page } from '@playwright/test';
 import { fillInEmailPassword } from 'authentication/auth-base';
-import { NavSelectors } from 'dss/pages/singular/navbar';
+import { Nav } from 'dss/pages/nav-selectors';
 
 const { OSTEO_USER_EMAIL, OSTEO_USER_PASSWORD } = process.env;
 
@@ -9,7 +9,7 @@ export async function login(page: Page, opts: { email?: string; password?: strin
   if (email == null || password == null) {
     throw Error('Invalid Osteo email or password: undefined');
   }
-  await page.locator(NavSelectors.Login).click();
+  await page.locator(Nav.Login).click();
   await fillInEmailPassword(page, { email, password });
 }
 

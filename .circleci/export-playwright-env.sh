@@ -31,12 +31,6 @@ export dsmUser4Password=$(vault read --format=json secret/pepper/test/v1/e2e | j
 echo "export DSM_USER4_PASSWORD=$dsmUser4Password" >> playwright-env/envvars
 echo "export DSM_USER4_EMAIL=$dsmUser4" >> playwright-env/envvars
 
-# SINGULAR
-export singularUser=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[] | select(.app==\"singular\") | .userName")
-export singularUserPassword=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[] | select(.app==\"singular\") | .password")
-echo "export SINGULAR_USER_EMAIL=$singularUser" >> playwright-env/envvars
-echo "export SINGULAR_USER_PASSWORD=$singularUserPassword" >> playwright-env/envvars
-
 # RGP
 export rgpUser=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[] | select(.app==\"rgp\") | .userName")
 export rgpUserPassword=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[] | select(.app==\"rgp\") | .password")

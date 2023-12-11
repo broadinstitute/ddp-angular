@@ -2,7 +2,7 @@ import type { PlaywrightTestConfig } from '@playwright/test';
 import path from 'path';
 
 /**
- * Read environment variables from .env.dsm.singular file.
+ * Read environment variables from .env file.
  * https://github.com/motdotla/dotenv
  */
 import * as dotenv from 'dotenv';
