@@ -4,8 +4,9 @@ import {ComponentService} from '../services/component.service';
 import {DSMService} from '../services/dsm.service';
 import {Statics} from '../utils/statics';
 import {Utils} from '../utils/utils';
-import {ActivatedRoute} from "@angular/router";
-import {PhiManifestModel} from "./phi-manifest.model";
+import {ActivatedRoute} from '@angular/router';
+import {PhiManifestResponseModel} from './phi-manifest-response.model';
+import {PhiManifestModel} from './phi-manifest.model';
 
 @Component({
     selector: 'app-phi-manifest',
@@ -69,15 +70,16 @@ export class PhiManifestComponent implements OnInit {
         this.errorMessage = null;
         if (this.realm != null && this.participantId && this.sequencingOrderId) {
             this.loading = true;
-            this.dsmService.getPhiReport(this.realm, this.participantId, this.sequencingOrderId).subscribe({// need to subscribe, otherwise it will not send!
+            this.dsmService.getPhiReport(this.realm, this.participantId, this.sequencingOrderId).subscribe(
+                {// need to subscribe, otherwise it will not send!
                 next: data => {
-                    console.info(`received: ${JSON.stringify(data, null, 2)}`);
-                    let phiManifestResponse = PhiManifestModel.parse(data);
+                    // console.info(`received: ${JSON.stringify(data, null, 2)}`);
+                    const phiManifestResponse = PhiManifestResponseModel.parse(data);
                     this.loading = false;
                     this.downloadManifest(phiManifestResponse);
                 },
                 error: err => {
-                    console.log(err);
+                    // console.log(err);
                     if (err._body === Auth.AUTHENTICATION_ERROR) {
                         this.auth.doLogout();
                     }
@@ -90,17 +92,19 @@ export class PhiManifestComponent implements OnInit {
         }
     }
 
-    public downloadManifest(phiManifestModel: PhiManifestModel): void {
-        if (phiManifestModel.errorMessage) {
-            this.additionalMessage = 'Error - ' + phiManifestModel.errorMessage;
+    public downloadManifest(phiManifestResponseModel: PhiManifestResponseModel): void {
+        if (phiManifestResponseModel.errorMessage) {
+            this.additionalMessage = 'Error - ' + phiManifestResponseModel.errorMessage;
             return;
         }
-        let data = phiManifestModel.data;
+        const phiManifestModel: PhiManifestModel = PhiManifestModel.parse(phiManifestResponseModel.data[1]);
+        const map: {}[] = [];
+        map.push(phiManifestModel.getReportAsMap(phiManifestResponseModel.data[0], phiManifestResponseModel.data[1]));
         Utils.createCSV(
-            data[0],
-            data[1],
-            'PHI_REPORT_PT' + phiManifestModel.ddpParticipantId + "_ORDER_" + phiManifestModel.orderNumber
-            + Statics.CSV_FILE_EXTENSION
+            phiManifestResponseModel.data[0],
+            map,
+            'PHI_REPORT_PT_' + phiManifestResponseModel.ddpParticipantId + '_ORDER_' +
+            phiManifestResponseModel.orderId + Statics.CSV_FILE_EXTENSION
         );
     }
 
