@@ -26,7 +26,6 @@ export class PhiManifestModel {
             const header = headers[i];
             map[header] = this.convertValue(data[i]);
         }
-        console.log(map);
         return map;
     }
 
