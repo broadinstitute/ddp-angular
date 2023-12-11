@@ -24,8 +24,7 @@ export class PhiManifestModel {
         const map: Map<string, string> = new Map();
         for (let i = 0; i < headers.length; i++) {
             const header = headers[i];
-            const value = this.convertValue(data[i]);
-            map[header] = value;
+            map[header] = this.convertValue(data[i]);
         }
         console.log(map);
         return map;
