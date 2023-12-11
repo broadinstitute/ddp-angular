@@ -47,8 +47,10 @@ export default class SMID {
   }
 
   public async onlyKeepSelectedSMIDs(): Promise<void> {
-    await this.clickModalBtn('Only keep selected SM-IDs');
-    await waitForResponse(this.page, { uri: 'patch' });
+    await Promise.all([
+      waitForResponse(this.page, { uri: 'patch' }),
+      this.clickModalBtn('Only keep selected SM-IDs')
+    ]);
   }
 
   /* Helper Functions */
@@ -64,8 +66,10 @@ export default class SMID {
     const fieldInput = await this.getInputAt(index);
     const currentValue = await fieldInput.currentValue();
     if (currentValue.trim() !== value) {
-      await fieldInput.fillSimple(value);
-      await waitForResponse(this.page, { uri: 'patch' });
+      await Promise.all([
+        waitForResponse(this.page, { uri: 'patch' }),
+        fieldInput.fillSimple(value)
+      ]);
     }
   }
 
