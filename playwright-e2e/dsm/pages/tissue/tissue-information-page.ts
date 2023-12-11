@@ -119,9 +119,10 @@ export default class TissueInformationPage {
     const existingValue = await textarea.currentValue();
 
     if (!isTextareaDisabled && existingValue !== value) {
+      const respPromise = waitForResponse(this.page, { uri: 'patch' });
       await textarea.fill(value, false);
       await textarea.blur();
-      await waitForResponse(this.page, { uri: 'patch' });
+      await respPromise;
     }
   }
 
