@@ -243,6 +243,7 @@ export default class ParticipantListPage extends DsmPageBase {
 
     let shortID = '';
     let firstName = '';
+
     const testParticipantFirstName = findPediatricParticipant ? user.child.firstName : user.adult.firstName; //Make sure to return automated test pts only
     const responseJson = JSON.parse(await applyFilterResponse.text());
 
