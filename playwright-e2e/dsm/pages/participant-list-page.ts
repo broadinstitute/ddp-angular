@@ -14,6 +14,8 @@ import { getDate, offsetDaysFromToday } from 'utils/date-utils';
 import { AdditionalFilter } from 'dsm/component/filters/sections/search/search-enums';
 import { logInfo } from 'utils/log-utils';
 import DsmPageBase from './dsm-page-base';
+import { TabEnum } from 'dsm/component/tabs/enums/tab-enum';
+import * as user from 'data/fake-user.json';
 
 export default class ParticipantListPage extends DsmPageBase {
   private readonly PAGE_TITLE: string = 'Participant List';
@@ -230,6 +232,47 @@ export default class ParticipantListPage extends DsmPageBase {
     const button = this.page.locator('button').filter({has: this.page.locator('[data-icon="quidditch"]')});
     await button.click();
     await waitForNoSpinner(this.page);
+  }
+
+  async findParticipantWithTab(opts: { findPediatricParticipant: boolean, tab?: TabEnum, rgpProbandTab?: boolean }): Promise<string> {
+    const { findPediatricParticipant = false, tab, rgpProbandTab = false } = opts;
+
+    const searchPanel = this.filters.searchPanel;
+    await searchPanel.open();
+    const applyFilterResponse = await searchPanel.search({ uri: '/ui/applyFilter' });
+
+    let shortID = '';
+    let firstName = '';
+
+    const testParticipantFirstName = findPediatricParticipant ? user.child.firstName : user.adult.firstName; //Make sure to return automated test pts only
+    const responseJson = JSON.parse(await applyFilterResponse.text());
+
+    //Find a participant who currently has the specified tab
+    for (const index in responseJson.participants) {
+      //The onc history tab will usually appear along with a medical record tab
+      //Checking for the medical record tab allows catching those who do not yet have an onc history detail/row/data (but have the tab itself)
+      if (tab === TabEnum.ONC_HISTORY) {
+        const medicalRecord = responseJson.participants[index].medicalRecords[0];
+        firstName = responseJson.participants[index].esData.profile.firstName;
+        if (medicalRecord && (firstName === testParticipantFirstName)) {
+          shortID = responseJson.participants[index].esData.profile.hruid;
+          logInfo(`Found the participant ${shortID} to have an onc history tab`);
+          break;
+        }
+      }
+
+      if (rgpProbandTab === true) {
+        //If the participant has participantData, this seems to mean there's a proband tab in the account
+        const participantData = responseJson.participants[index].participantData;
+        firstName = responseJson.participants[index].esData.profile.firstName;
+        if (participantData && (firstName === testParticipantFirstName)) {
+          shortID = responseJson.participants[index].esData.profile.hruid;
+          logInfo(`Found the RGP participant ${shortID} to have a proband tab`);
+          break;
+        }
+      }
+    }
+    return shortID;
   }
 
   async findParticipantForKitUpload(opts: { allowNewYorkerOrCanadian: boolean, firstNameSubstring?: string }): Promise<number> {
