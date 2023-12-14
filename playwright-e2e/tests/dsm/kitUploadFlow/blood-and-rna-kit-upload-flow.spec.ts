@@ -24,6 +24,7 @@ import { saveParticipantGuid } from 'utils/faker-utils';
 import { ParticipantListTable } from 'dsm/component/tables/participant-list-table';
 import KitsQueuePage from 'dsm/pages/kitsInfo-pages/kit-queue-page';
 import ErrorPage from 'dsm/pages/samples/error-page';
+import { CustomViewColumns } from 'dsm/component/filters/sections/search/search-enums';
 
 test.describe('Blood & RNA Kit Upload', () => {
   test('Verify that a blood & rna kit can be uploaded @dsm @rgp @functional @upload', async ({ page, request}, testInfo) => {
@@ -34,6 +35,7 @@ test.describe('Blood & RNA Kit Upload', () => {
     const study = StudyEnum.RGP;
     const kitType = KitTypeEnum.BLOOD_AND_RNA;
     const expectedKitTypes = [KitTypeEnum.BLOOD, KitTypeEnum.BLOOD_AND_RNA]; //Later will be just Blood & RNA kit type for RGP
+    const shortIDColumn = 'Short ID';
     let kitTable;
     let amountOfKits;
     let kitErrorPage;
@@ -51,11 +53,13 @@ test.describe('Blood & RNA Kit Upload', () => {
     await participantListPage.waitForReady();
 
     const participantListTable = new ParticipantListTable(page);
-    const participantShortID = await participantListPage.findParticipantWithTab({ rgpProbandTab: true });
-    const participantGuid = await participantListPage.getGuidOfMostRecentAutomatedParticipant(user.patient.firstName, true);
-    saveParticipantGuid(participantGuid);
+    const participantShortID = await participantListPage.findParticipantWithTab({ findPediatricParticipant: false, rgpProbandTab: true });
 
-    await participantListPage.filterListByParticipantGUID(user.patient.participantGuid);
+    const customizeViewPanel = participantListPage.filters.customizeViewPanel;
+    await customizeViewPanel.open();
+    await customizeViewPanel.selectColumns(CustomViewColumns.PARTICIPANT, [shortIDColumn]);
+
+    await participantListPage.filterListByShortId(participantShortID);
     await participantListTable.openParticipantPageAt(0);
 
     //For RGP, the short id needed for the kit upload is the family member's subject id
