@@ -26,12 +26,16 @@ test('Multiple browser tabs @dsm', async ({ browser, request }) => {
   // Tab A: Open Participant List page, realm matches expected study PanCan
   const pancanPage = await browserContext.newPage();
   const pancanParticipantListPage = await logIntoStudy(pancanPage, request, pancan);
+  const foundParticipant = await pancanParticipantListPage.findParticipantWithTab({ tab: TabEnum.ONC_HISTORY });
+  console.log(`Pancan pt: ${foundParticipant}`);
   const pancanParticipantShortId = await findAdultParticipantShortId(pancanParticipantListPage);
   logInfo(`PanCan participant Short ID: ${pancanParticipantShortId}`);
 
   // Tab B: Open Participant List page, realm matches expected study angio
   const angioPage = await browserContext.newPage();
   const angioParticipantListPage = await logIntoStudy(angioPage, request, angio);
+  const foundAngioParticipant = await angioParticipantListPage.findParticipantWithTab({ tab: TabEnum.ONC_HISTORY });
+  console.log(`Angio pt: ${foundAngioParticipant}`);
   const angioParticipantShortId = await findAdultParticipantShortId(angioParticipantListPage);
   logInfo(`angio participant Short ID: ${angioParticipantShortId}`);
 

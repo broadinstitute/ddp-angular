@@ -14,6 +14,7 @@ import { getDate, offsetDaysFromToday } from 'utils/date-utils';
 import { AdditionalFilter } from 'dsm/component/filters/sections/search/search-enums';
 import { logInfo } from 'utils/log-utils';
 import DsmPageBase from './dsm-page-base';
+import { TabEnum } from 'dsm/component/tabs/enums/tab-enum';
 
 export default class ParticipantListPage extends DsmPageBase {
   private readonly PAGE_TITLE: string = 'Participant List';
@@ -230,6 +231,39 @@ export default class ParticipantListPage extends DsmPageBase {
     const button = this.page.locator('button').filter({has: this.page.locator('[data-icon="quidditch"]')});
     await button.click();
     await waitForNoSpinner(this.page);
+  }
+
+  async findParticipantWithTab(opts: { tab?: TabEnum, rgpProbandTab?: boolean }): Promise<string> {
+    const { tab, rgpProbandTab = false } = opts;
+
+    const searchPanel = this.filters.searchPanel;
+    await searchPanel.open();
+    const applyFilterResponse = await searchPanel.search({ uri: '/ui/applyFilter' });
+    let shortID = '';
+    const responseJson = JSON.parse(await applyFilterResponse.text());
+    //Find a participant who currently has the specified tab
+    for (const index in responseJson.participants) {
+      //The onc history tab will usually appear along with a medical record tab
+      //Checking for the medical record tab allows catching those who do not yet have an onc history detail/row/data
+      if (tab === TabEnum.ONC_HISTORY) {
+        const medicalRecord = responseJson.participants[index].medicalRecords[0];
+        if (medicalRecord) {
+          shortID = responseJson.participants[index].esData.profile.hruid;
+          break;
+        }
+      }
+
+      if (rgpProbandTab === true) {
+        //If the participant has participantData, this seems to mean there's a proband tab in the account
+        const participantData = responseJson.participants[index].participantData;
+        if (participantData) {
+          shortID = responseJson.participants[index].esData.profile.hruid;
+          break;
+        }
+      }
+    }
+    console.log(`When looking for a participant with the ${tab} tab, found participant: ${shortID}`);
+    return shortID;
   }
 
   async findParticipantForKitUpload(opts: { allowNewYorkerOrCanadian: boolean, firstNameSubstring?: string }): Promise<number> {

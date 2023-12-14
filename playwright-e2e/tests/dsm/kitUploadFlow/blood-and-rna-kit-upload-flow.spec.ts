@@ -51,6 +51,7 @@ test.describe('Blood & RNA Kit Upload', () => {
     await participantListPage.waitForReady();
 
     const participantListTable = new ParticipantListTable(page);
+    const participantShortID = await participantListPage.findParticipantWithTab({ rgpProbandTab: true });
     const participantGuid = await participantListPage.getGuidOfMostRecentAutomatedParticipant(user.patient.firstName, true);
     saveParticipantGuid(participantGuid);
 
