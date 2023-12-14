@@ -26,6 +26,7 @@ import KitsReceivedPage from 'dsm/pages/kitsInfo-pages/kitsReceived-page/kitsRec
 import { AdditionalFilter } from 'dsm/component/filters/sections/search/search-enums';
 import crypto from 'crypto';
 import { logInfo } from 'utils/log-utils';
+import { login } from 'authentication/auth-angio';
 
 test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
   const studies = [StudyEnum.LMS]; //Only clinical (pecgs) studies get this event
@@ -497,7 +498,8 @@ async function findParticipantForGermlineConsentCreation(participantListPage: Pa
   await searchPanel.text('Last Name', { textValue: lastnamePrefix, additionalFilters: [AdditionalFilter.EXACT_MATCH], exactMatch: false });
   await searchPanel.checkboxes('CONSENT_ASSENT_BLOOD', { checkboxValues: ['Yes'] });
   await searchPanel.checkboxes('CONSENT_ASSENT_TISSUE', { checkboxValues: ['Yes'] });
-  await searchPanel.search();
+  const filterListResponse = await searchPanel.search({ uri: '/ui/filterList' });
+  const responseJson = JSON.parse(await filterListResponse.text());
 
   const participantListTable = participantListPage.participantListTable;
   const resultsPerPage = await participantListTable.rowsCount;
@@ -510,6 +512,7 @@ async function findParticipantForGermlineConsentCreation(participantListPage: Pa
     const physician = (await participantListTable.getParticipantDataAt(index, 'PHYSICIAN')).trim();
     const germlineInfo = (await participantListTable.getParticipantDataAt(index, 'GERMLINE_CONSENT_ADDENDUM_PEDIATRIC Survey Created')).trim();
     const tissueRequestDate = (await participantListTable.getParticipantDataAt(index, 'Tissue Request Date')).trim();
+    const medicalRecord = responseJson.participants[index].medicalRecords[0];
 
     if ((consentAssentTissue === 'Yes') &&
         (consentAssentBlood === 'Yes') &&
@@ -517,9 +520,11 @@ async function findParticipantForGermlineConsentCreation(participantListPage: Pa
         (somaticConsentTumorPediatric === 'Yes') &&
         (physician != null) &&
         (germlineInfo === '') &&
-        (tissueRequestDate === '')
+        (tissueRequestDate === '') &&
+        (medicalRecord != null)
       ) {
         shortID = await participantListTable.getParticipantDataAt(index, 'Short ID');
+        logInfo(`Test participant ${shortID} satisfies criteria for germline test`);
         break;
     }
 
@@ -527,7 +532,6 @@ async function findParticipantForGermlineConsentCreation(participantListPage: Pa
       index = 0;
       await participantListTable.nextPage();
     }
-
     //TODO add logic for if there are no more pages to use to search for participants
   }
 
