@@ -235,7 +235,7 @@ export default class ParticipantListPage extends DsmPageBase {
   }
 
   async findParticipantWithTab(opts: { findPediatricParticipant: boolean, tab?: TabEnum, rgpProbandTab?: boolean }): Promise<string> {
-    const { tab, rgpProbandTab = false, findPediatricParticipant = false } = opts;
+    const { findPediatricParticipant = false, tab, rgpProbandTab = false } = opts;
 
     const searchPanel = this.filters.searchPanel;
     await searchPanel.open();
