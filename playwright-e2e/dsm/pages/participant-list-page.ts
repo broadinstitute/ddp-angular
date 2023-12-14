@@ -240,19 +240,22 @@ export default class ParticipantListPage extends DsmPageBase {
     const searchPanel = this.filters.searchPanel;
     await searchPanel.open();
     const applyFilterResponse = await searchPanel.search({ uri: '/ui/applyFilter' });
+
     let shortID = '';
     let firstName = '';
     const testParticipantFirstName = findPediatricParticipant ? user.child.firstName : user.adult.firstName; //Make sure to return automated test pts only
     const responseJson = JSON.parse(await applyFilterResponse.text());
+
     //Find a participant who currently has the specified tab
     for (const index in responseJson.participants) {
       //The onc history tab will usually appear along with a medical record tab
-      //Checking for the medical record tab allows catching those who do not yet have an onc history detail/row/data
+      //Checking for the medical record tab allows catching those who do not yet have an onc history detail/row/data (but have the tab itself)
       if (tab === TabEnum.ONC_HISTORY) {
         const medicalRecord = responseJson.participants[index].medicalRecords[0];
         firstName = responseJson.participants[index].esData.profile.firstName;
         if (medicalRecord && (firstName === testParticipantFirstName)) {
           shortID = responseJson.participants[index].esData.profile.hruid;
+          logInfo(`Found the participant ${shortID} to have an onc history tab`);
           break;
         }
       }
@@ -263,11 +266,11 @@ export default class ParticipantListPage extends DsmPageBase {
         firstName = responseJson.participants[index].esData.profile.firstName;
         if (participantData && (firstName === testParticipantFirstName)) {
           shortID = responseJson.participants[index].esData.profile.hruid;
+          logInfo(`Found the RGP participant ${shortID} to have a proband tab`);
           break;
         }
       }
     }
-    console.log(`When looking for a participant with the ${tab} tab, found participant: ${shortID}`);
     return shortID;
   }
 
