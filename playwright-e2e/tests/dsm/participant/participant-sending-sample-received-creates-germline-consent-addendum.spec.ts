@@ -512,7 +512,7 @@ async function findParticipantForGermlineConsentCreation(participantListPage: Pa
     const physician = (await participantListTable.getParticipantDataAt(index, 'PHYSICIAN')).trim();
     const germlineInfo = (await participantListTable.getParticipantDataAt(index, 'GERMLINE_CONSENT_ADDENDUM_PEDIATRIC Survey Created')).trim();
     const tissueRequestDate = (await participantListTable.getParticipantDataAt(index, 'Tissue Request Date')).trim();
-    const medicalRecord = responseJson.participants[index].medicalRecords[0];
+    const medicalRecord = responseJson.participants[index].medicalRecords[0]; //Checking to make sure participant has onc history tab
 
     if ((consentAssentTissue === 'Yes') &&
         (consentAssentBlood === 'Yes') &&
