@@ -46,7 +46,7 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
   let tumorCollaboratorSampleIDPrefix = '';
 
   for (const study of studies) {
-    test(`${study} - Scenario 1: SALIVA kit received first, TUMOR sample received second @dsm`, async ({ page, request }, testInfo) => {
+    test(`${study} - Scenario 1: SALIVA kit received first, TUMOR sample received second @dsm @functional`, async ({ page, request }, testInfo) => {
       test.slow();
       navigation = new Navigation(page, request);
       await new Select(page, { label: 'Select study' }).selectOption(`${study}`);
@@ -149,7 +149,7 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
       expect(germlineInfo).toBeTruthy();
     });
 
-    test(`${study} - Scenario 2: BLOOD kit received first, TUMOR sample received second @dsm`, async ({ page, request }, testInfo) => {
+    test(`${study} - Scenario 2: BLOOD kit received first, TUMOR sample received second @dsm @functional`, async ({ page, request }, testInfo) => {
       test.slow();
       navigation = new Navigation(page, request);
       await new Select(page, { label: 'Select study' }).selectOption(`${study}`);
@@ -252,7 +252,7 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
       expect(germlineInfo).toBeTruthy();
     });
 
-    test(`${study} - Scenario 3: TUMOR sample received first, SALIVA kit received second @dsm`, async ({ page, request }, testInfo) => {
+    test(`${study} - Scenario 3: TUMOR sample received first, SALIVA kit received second @dsm @functional`, async ({ page, request }, testInfo) => {
       test.slow();
       navigation = new Navigation(page, request);
       await new Select(page, { label: 'Select study' }).selectOption(`${study}`);
@@ -355,7 +355,7 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
       expect(germlineInfo).toBeTruthy();
     });
 
-    test(`${study} - Scenario 4: TUMOR sample received first, BLOOD kit received second @dsm`, async ({ page, request }, testInfo) => {
+    test(`${study} - Scenario 4: TUMOR sample received first, BLOOD kit received second @dsm @functional`, async ({ page, request }, testInfo) => {
       test.slow();
       navigation = new Navigation(page, request);
       await new Select(page, { label: 'Select study' }).selectOption(`${study}`);
