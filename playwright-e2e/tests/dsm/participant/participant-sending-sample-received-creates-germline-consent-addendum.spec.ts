@@ -29,9 +29,9 @@ import { logInfo } from 'utils/log-utils';
 
 test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
   const studies = [StudyEnum.LMS]; //Only clinical (pecgs) studies get this event
-  const facilityName = 'Dana Farber Cancer Institute';
-  const facilityPhoneNumber = '111-222-3333';
-  const facilityFaxNumber = '222-123-3333';
+  const facilityName = user.doctor.hospital;
+  const facilityPhoneNumber = user.doctor.phone;
+  const facilityFaxNumber = user.doctor.fax;
   const materialsReceivedAmount = 1;
   let navigation;
   let shortID = '';
