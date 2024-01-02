@@ -245,10 +245,11 @@ export default class ParticipantListPage extends DsmPageBase {
     let firstName = '';
 
     const testParticipantFirstName = findPediatricParticipant ? user.child.firstName : user.adult.firstName; //Make sure to return automated test pts only
-    const responseJson = JSON.parse(await applyFilterResponse.text());
+    let responseJson = JSON.parse(await applyFilterResponse.text());
+    const amountOfParticipantsDisplayed = responseJson.participants.length;
 
     //Find a participant who currently has the specified tab
-    for (const index in responseJson.participants) {
+    for (let index = 0; index < amountOfParticipantsDisplayed; index++) {
       //The onc history tab will usually appear along with a medical record tab
       //Checking for the medical record tab allows catching those who do not yet have an onc history detail/row/data (but have the tab itself)
       if (tab === TabEnum.ONC_HISTORY) {
@@ -263,12 +264,32 @@ export default class ParticipantListPage extends DsmPageBase {
 
       if (rgpProbandTab === true) {
         //If the participant has participantData, this seems to mean there's a proband tab in the account
-        const participantData = responseJson.participants[index].participantData;
+        const participantData = responseJson.participants[index].participantData[0];
         firstName = responseJson.participants[index].esData.profile.firstName;
         if (participantData && (firstName === testParticipantFirstName)) {
           shortID = responseJson.participants[index].esData.profile.hruid;
           logInfo(`Found the RGP participant ${shortID} to have a proband tab`);
           break;
+        }
+      }
+
+      //Go to the next page if none of the participants in the current page are relevant
+      if (index === (amountOfParticipantsDisplayed - 1)) {
+        const hasNextPage = await this._table.paginator.hasNext();
+        if (hasNextPage) {
+          const [nextPageResponse] = await Promise.all([
+            waitForResponse(this.page, {uri: 'ui/filterList'}),
+            this._table.nextPage()
+          ]);
+          responseJson = JSON.parse(await nextPageResponse.text());
+          index = -1;
+        } else {
+          if (tab) {
+            throw new Error(`Could not find a participant with the ${tab} tab`);
+          }
+          if (rgpProbandTab) {
+            throw new Error(`Could not find a participant with the RGP Proband tab`);
+          }
         }
       }
     }
