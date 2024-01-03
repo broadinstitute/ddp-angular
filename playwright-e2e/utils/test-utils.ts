@@ -43,20 +43,18 @@ export async function waitForResponse(page: Page, { uri, status = 200, timeout, 
   if (messageBody) {
     response = await page.waitForResponse((response: Response) => response.url().includes(uri) &&
     messageBody.every(async message => (await response.text()).includes(message as string)), { timeout });
-  }
-
-  if (!messageBody) {
+  } else {
     response = await page.waitForResponse((response: Response) => response.url().includes(uri), { timeout });
   }
 
   await response.finished();
   const respStatus = response.status();
-  const body = await response.text();
   if (respStatus === status) {
     return response;
   }
   const url = response.url();
   const method = response.request().method().toUpperCase();
+  const body = await response.text();
   throw new Error(`Waiting for URI: ${uri} with status: ${status}.\n  ${method} ${url}\n  Status: ${respStatus}\n  Text: ${body}`);
 }
 
