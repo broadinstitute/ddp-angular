@@ -17,7 +17,6 @@ Worthy of note:
 * `/tests/angio` - Angiosarcoma Project (ANGIO) tests
 * `/tests/dsm` - DSM tests
 * `/tests/rgp` - Rare Genomic Project (RGP) tests
-* `/tests/singular` - Singular tests
 * `/lib` - Common UI widgets and components. For example, Checkbox, Question, etc.
 * `/utils` - Common test helper functions
 
@@ -86,15 +85,11 @@ Note: Update docker image version when upgrading Playwright version
 
 - Install dependencies inside docker container
   > npm install
-
   > npx playwright install
 
 - Start running tests inside docker container
-  - For example, to run Singular tests, change dir to **/singular** first
-  > cd tests/singular
-    
-  > npx playwright test pre-screening-page-visual.spec.ts -u
-    
+  > npx playwright test
+        
 - To view test results
   - In another Terminal window (outside docker container), from **/playwright-e2e** dir, run command:
   > npx playwright show-report html-test-results
@@ -105,12 +100,6 @@ By default, all tests will run in headless mode.
 * To see the list of available *Playwright test* options:
   > npx playwright test --help
 
-* Run all Singular tests
-  * Change dir to **/tests/singular**
-  > npx playwright test --config=playwright.config.ts
-  * Alternatively, run Singular tests from **/playwright-e2e** dir by specifying flag `--config`
-  >  npx playwright test --config=tests/singular/playwright.config.ts -g @singular
-
 * Run all DSM tests
   * Change dir to **/tests/dsm**
   * Alternatively, run DSM tests from **/playwright-e2e** dir by specifying flag `--config`
@@ -118,10 +107,8 @@ By default, all tests will run in headless mode.
 
 #### More Examples
 
-In **/tests/singular** dir, run Singular tests only:
-
 * Run all tests (visual, functional, nightly) in parallel in **headless** mode
-  > npx playwright test --config=playwright.config.ts
+  > npx playwright test
 
 * Run a single test in **headless** mode
   > npx playwright test --config=playwright.config.ts <TEST_FILE_NAME>
@@ -140,8 +127,8 @@ In **/tests/singular** dir, run Singular tests only:
 
 * If you don't set up `.env` file, you can also specify environment
   variables in cmd (Not recommended)
-  * For example, to run `login-visual.spec.ts` test:
-  > npx cross-env SITE_PASSWORD=<SITE_PASSWORD> SINGULAR_USER_EMAIL=<EMAIL> SINGULAR_USER_PASSWORD=<YOUR_PASSWORD> SINGULAR_BASE_URL=<HOME_URL> npx playwright test --config=playwright.config.ts login-visual.spec.ts
+  * For example:
+  > npx cross-env SITE_PASSWORD=<SITE_PASSWORD> DSM_USER1_EMAIL=<EMAIL> DSM_USER1_PASSWORD=<PASSWORD> DSM_BASE_URL=<URL> npx playwright test --project="dsm"
 
 ### Running tests on CircleCI
 * To verify new or modified tests working on CircleCI
@@ -175,7 +162,6 @@ In **/tests/singular** dir, run Singular tests only:
 - [TODO]
 
 ### Test Development Tips
-- In */playwright-e2e* dir, use npm script `npm run lint:singular` to find eslint issues in *singular* dir. Note: Not all eslint rules are fixable by `--fix`.
 
 - To skip a test if env is Test, add a `test.skip` condition inside the `test.describe` block.
   > `test.skip(process.env.ENV?.indexOf('test') !== -1);`
@@ -200,13 +186,13 @@ In **/tests/singular** dir, run Singular tests only:
   > npm run lint
 - Test fixture
   - To understand build-in support for fixture, see https://playwright.dev/docs/test-fixtures#creating-a-fixture
-  - `homePage` in `fixtures/singular-fixture.ts` is an example of custom user-defined fixture.
+  - `homePage` in `fixtures/pancan-fixture.ts` is an example of custom user-defined fixture.
   - To use above fixture in a test, for example,
   ```
     import { Page } from '@playwright/test';
-    import { test } from 'fixtures/singular-fixture';
-    test('an example', async ({ page, homePage }) => {
-      await homePage.signUp();
+    import { test } from 'fixtures/pancan-fixture';
+    test('an example', async ({ page }) => {
+      await page.signUp();
       ...
     }
   ```
