@@ -16,6 +16,5 @@ export enum StudyEnum {
   OSTEO2 = 'OS PE-CGS',
   RGP = 'RGP',
   RAREX = 'RareX',
-  SINGULAR = 'Singular',
   TEST_BOSTON = 'Test Boston'
 }
