@@ -5,9 +5,11 @@ import Tabs from 'dsm/component/tabs/tabs';
 import {TabEnum} from 'dsm/component/tabs/enums/tab-enum';
 import Input from 'dss/component/input';
 import Modal from 'dss/component/modal';
+import { MessageBodyResponseEnum } from './enums/message-body-response-enum';
 
 export default class ParticipantPage {
   private readonly PAGE_TITLE: string = 'Participant Page';
+  private readonly UPDATE_PROFILE_SUCCESS_MESSAGES = [MessageBodyResponseEnum.TASK_TYPE_UPDATE_PROFILE, MessageBodyResponseEnum.RESULT_TYPE_SUCCESS];
   private readonly tabs = new Tabs(this.page);
 
   constructor(protected readonly page: Page) {}
@@ -131,7 +133,7 @@ export default class ParticipantPage {
     const updateButton = this.page.locator(this.getMainInputUpdateButtonXPath(inputEnum));
     await Promise.all([
       waitForResponse(this.page, { uri: '/editParticipant'}),
-      waitForResponse(this.page, { uri: '/editParticipantMessageStatus'}),
+      waitForResponse(this.page, { uri: '/editParticipantMessageStatus', messageBody: this.UPDATE_PROFILE_SUCCESS_MESSAGES}),
       updateButton.click()
     ]);
     await waitForNoSpinner(this.page);

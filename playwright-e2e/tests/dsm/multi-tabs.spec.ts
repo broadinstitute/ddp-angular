@@ -96,8 +96,6 @@ async function addOncHistory(page: Page, shortID: string, participantListPage: P
   const realm = studyShortName(study).realm;
   await test.step(`Add Onc history for study ${study}`, async () => {
     await page.bringToFront();
-    //const pancanParticipantListTable = participantListPage.participantListTable;
-    //const participantPage: ParticipantPage = await pancanParticipantListTable.openParticipantPageAt(0);
     const searchPanel = participantListPage.filters.searchPanel;
     await searchPanel.open();
     await searchPanel.text('Short ID', { textValue: shortID });

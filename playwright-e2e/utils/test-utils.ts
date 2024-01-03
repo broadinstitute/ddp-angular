@@ -5,11 +5,13 @@ import Checkbox from 'dss/component/checkbox';
 import Select from 'dss/component/select';
 import axios from 'axios';
 import { logError } from './log-utils';
+import { MessageBodyResponseEnum } from 'dsm/pages/participant-page/enums/message-body-response-enum';
 
 export interface WaitForResponse {
   uri: string;
   status?: number;
   timeout?: number;
+  messageBody?: MessageBodyResponseEnum[];
 }
 
 const { SITE_PASSWORD } = process.env;
@@ -36,16 +38,33 @@ export async function waitForNoSpinner(page: Page, opts: { timeout?: number } = 
   }
 }
 
-export async function waitForResponse(page: Page, { uri, status = 200, timeout }: WaitForResponse): Promise<Response> {
-  const response = await page.waitForResponse((response: Response) => response.url().includes(uri), { timeout });
+export async function waitForResponse(page: Page, { uri, status = 200, timeout, messageBody }: WaitForResponse): Promise<Response> {
+  let response: Response;
+  if (messageBody) {
+    const [firstMessage] = messageBody;
+    console.log(`first message: ${firstMessage as string}`);
+    response = await page.waitForResponse(async (response: Response) => response.url().includes(uri) &&
+    (await response.text()).includes(firstMessage as string), { timeout });
+  }
+
+  if (!messageBody) {
+    response = await page.waitForResponse((response: Response) => response.url().includes(uri), { timeout });
+  }
+
+  //const response = await page.waitForResponse((response: Response) => response.url().includes(uri), { timeout });
   await response.finished();
   const respStatus = response.status();
+  const body = await response.text();
+  /*if (messageBody) {
+    for (const message of messageBody) {
+      expect(body, `Waiting for URI: ${uri} with status: ${status} to contain message: ${message as string}`).toContain(message as string);
+    }
+  }*/
   if (respStatus === status) {
     return response;
   }
   const url = response.url();
   const method = response.request().method().toUpperCase();
-  const body = await response.text();
   throw new Error(`Waiting for URI: ${uri} with status: ${status}.\n  ${method} ${url}\n  Status: ${respStatus}\n  Text: ${body}`);
 }
 
