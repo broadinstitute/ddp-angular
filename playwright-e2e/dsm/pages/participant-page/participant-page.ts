@@ -131,6 +131,7 @@ export default class ParticipantPage {
     await input.fill(newValue);
 
     const updateButton = this.page.locator(this.getMainInputUpdateButtonXPath(inputEnum));
+    // editParticipantMessageStatus seems to occur twice but usually only the second instance has UPDATE_PROFILE => SUCCESS message
     await Promise.all([
       waitForResponse(this.page, { uri: '/editParticipant'}),
       waitForResponse(this.page, { uri: '/editParticipantMessageStatus', messageBody: this.UPDATE_PROFILE_SUCCESS_MESSAGES}),
