@@ -39,27 +39,19 @@ export async function waitForNoSpinner(page: Page, opts: { timeout?: number } = 
 }
 
 export async function waitForResponse(page: Page, { uri, status = 200, timeout, messageBody }: WaitForResponse): Promise<Response> {
-  let response: Response;
+  let response: any;
   if (messageBody) {
-    const [firstMessage] = messageBody;
-    console.log(`first message: ${firstMessage as string}`);
-    response = await page.waitForResponse(async (response: Response) => response.url().includes(uri) &&
-    (await response.text()).includes(firstMessage as string), { timeout });
+    response = await page.waitForResponse((response: Response) => response.url().includes(uri) &&
+    messageBody.every(async message => (await response.text()).includes(message as string)), { timeout });
   }
 
   if (!messageBody) {
     response = await page.waitForResponse((response: Response) => response.url().includes(uri), { timeout });
   }
 
-  //const response = await page.waitForResponse((response: Response) => response.url().includes(uri), { timeout });
   await response.finished();
   const respStatus = response.status();
   const body = await response.text();
-  /*if (messageBody) {
-    for (const message of messageBody) {
-      expect(body, `Waiting for URI: ${uri} with status: ${status} to contain message: ${message as string}`).toContain(message as string);
-    }
-  }*/
   if (respStatus === status) {
     return response;
   }
