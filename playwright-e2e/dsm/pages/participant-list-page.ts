@@ -257,7 +257,7 @@ export default class ParticipantListPage extends DsmPageBase {
         if (tab === TabEnum.ONC_HISTORY) {
           const medicalRecord = value.medicalRecords[0];
           if (medicalRecord === undefined) {
-            continue;
+            continue; //Participant does not have a Medical Record tab for some reason, skip them
           }
           unformattedFirstName = JSON.stringify(value.esData.profile.firstName);
           firstName = unformattedFirstName.replace(/['"]+/g, ''); //Replace double quotes from JSON.stringify
@@ -272,7 +272,7 @@ export default class ParticipantListPage extends DsmPageBase {
           //If the participant has participantData, this seems to mean there's a proband tab in the account
           const participantData = value.participantData[0];
           if (participantData === undefined) {
-            continue;
+            continue; //Participant does not have a proband tab for some reason, skip them
           }
           unformattedFirstName = JSON.stringify(value.esData.profile.firstName);
           firstName = unformattedFirstName.replace(/['"]+/g, ''); //Replace double quotes from JSON.stringify
