@@ -74,7 +74,7 @@ test('Osteo enroll kid @dss @osteo', async ({ page }) => {
   await page.locator('#mat-input-1').press('Tab');
   await page.getByLabel('MM').fill('01');
   await page.getByLabel('DD', { exact: true }).fill('01');
-  await page.getByLabel('YYYY').fill('2017');
+  await page.getByLabel('YYYY').fill('2022');
   await page.locator('#mat-input-5').click();
   await page.locator('#mat-input-5').fill('Andrew');
   await page.locator('#mat-input-5').press('Tab');

@@ -5,11 +5,13 @@ import Checkbox from 'dss/component/checkbox';
 import Select from 'dss/component/select';
 import axios from 'axios';
 import { logError } from './log-utils';
+import { MessageBodyResponseEnum } from 'dsm/pages/participant-page/enums/message-body-response-enum';
 
 export interface WaitForResponse {
   uri: string;
   status?: number;
   timeout?: number;
+  messageBody?: MessageBodyResponseEnum[];
 }
 
 const { SITE_PASSWORD } = process.env;
@@ -36,8 +38,15 @@ export async function waitForNoSpinner(page: Page, opts: { timeout?: number } = 
   }
 }
 
-export async function waitForResponse(page: Page, { uri, status = 200, timeout }: WaitForResponse): Promise<Response> {
-  const response = await page.waitForResponse((response: Response) => response.url().includes(uri), { timeout });
+export async function waitForResponse(page: Page, { uri, status = 200, timeout, messageBody }: WaitForResponse): Promise<Response> {
+  let response: any;
+  if (messageBody) {
+    response = await page.waitForResponse((response: Response) => response.url().includes(uri) &&
+    messageBody.every(async message => (await response.text()).includes(message as string)), { timeout });
+  } else {
+    response = await page.waitForResponse((response: Response) => response.url().includes(uri), { timeout });
+  }
+
   await response.finished();
   const respStatus = response.status();
   if (respStatus === status) {

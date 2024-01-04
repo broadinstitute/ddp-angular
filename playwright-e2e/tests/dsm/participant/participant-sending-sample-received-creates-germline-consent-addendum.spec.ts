@@ -27,6 +27,7 @@ import { AdditionalFilter } from 'dsm/component/filters/sections/search/search-e
 import crypto from 'crypto';
 import { logInfo } from 'utils/log-utils';
 import { login } from 'authentication/auth-angio';
+import { waitForResponse } from 'utils/test-utils';
 
 test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
   const studies = [StudyEnum.LMS]; //Only clinical (pecgs) studies get this event
@@ -499,7 +500,7 @@ async function findParticipantForGermlineConsentCreation(participantListPage: Pa
   await searchPanel.checkboxes('CONSENT_ASSENT_BLOOD', { checkboxValues: ['Yes'] });
   await searchPanel.checkboxes('CONSENT_ASSENT_TISSUE', { checkboxValues: ['Yes'] });
   const filterListResponse = await searchPanel.search({ uri: '/ui/filterList' });
-  const responseJson = JSON.parse(await filterListResponse.text());
+  let responseJson = JSON.parse(await filterListResponse.text());
 
   const participantListTable = participantListPage.participantListTable;
   const resultsPerPage = await participantListTable.rowsCount;
@@ -529,10 +530,18 @@ async function findParticipantForGermlineConsentCreation(participantListPage: Pa
     }
 
     if (index === (resultsPerPage - 1)) {
-      index = 0;
-      await participantListTable.nextPage();
+      const hasNextPage = await participantListTable.paginator.hasNext();
+      if (hasNextPage) {
+        index = -1;
+        const [nextPageResponse] = await Promise.all([
+          waitForResponse(participantListPage.page, {uri: 'ui/filterList'}),
+          participantListTable.nextPage()
+        ]);
+        responseJson = JSON.parse(await nextPageResponse.text());
+      } else {
+        throw new Error(`No more valid participants available for use in SAMPLE_RECEIVED test`);
+      }
     }
-    //TODO add logic for if there are no more pages to use to search for participants
   }
 
   return shortID;
