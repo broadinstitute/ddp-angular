@@ -56,7 +56,7 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
       await participantListPage.waitForReady();
 
       //Prep the Saliva kit
-      shortID = await findParticipantForGermlineConsentCreation(page, participantListPage, study);
+      shortID = await findParticipantForGermlineConsentCreation(participantListPage, study);
       logInfo(`Chosen short id: ${shortID}`);
       kitLabel = await prepareSentKit(shortID, KitTypeEnum.SALIVA, study, page, request, testInfo);
 
@@ -159,7 +159,7 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
       await participantListPage.waitForReady();
 
       //Prep the Blood kit
-      shortID = await findParticipantForGermlineConsentCreation(page, participantListPage, study);
+      shortID = await findParticipantForGermlineConsentCreation(participantListPage, study);
       logInfo(`Chosen short id: ${shortID}`);
       kitLabel = await prepareSentKit(shortID, KitTypeEnum.BLOOD, study, page, request, testInfo);
 
@@ -262,7 +262,7 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
       await participantListPage.waitForReady();
 
       //Prep the Saliva kit
-      shortID = await findParticipantForGermlineConsentCreation(page, participantListPage, study);
+      shortID = await findParticipantForGermlineConsentCreation(participantListPage, study);
       logInfo(`Chosen short id: ${shortID}`);
       kitLabel = await prepareSentKit(shortID, KitTypeEnum.SALIVA, study, page, request, testInfo);
 
@@ -365,7 +365,7 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
       await participantListPage.waitForReady();
 
       //Prep the Blood kit
-      shortID = await findParticipantForGermlineConsentCreation(page, participantListPage, study);
+      shortID = await findParticipantForGermlineConsentCreation(participantListPage, study);
       logInfo(`Chosen short id: ${shortID}`);
       kitLabel = await prepareSentKit(shortID, KitTypeEnum.BLOOD, study, page, request, testInfo);
 
@@ -471,7 +471,7 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
  * Does not already have a germline consent addendum
  * Does not already have a normal kit (i.e. a blood or saliva kit) sent out (for ease of testing)
  */
-async function findParticipantForGermlineConsentCreation(page: Page, participantListPage: ParticipantListPage, study: StudyEnum): Promise<string> {
+async function findParticipantForGermlineConsentCreation(participantListPage: ParticipantListPage, study: StudyEnum): Promise<string> {
   const searchPanel = participantListPage.filters.searchPanel;
   await searchPanel.open();
   await searchPanel.checkboxes('Status', { checkboxValues: ['Enrolled'] });
@@ -534,7 +534,7 @@ async function findParticipantForGermlineConsentCreation(page: Page, participant
       if (hasNextPage) {
         index = -1;
         const [nextPageResponse] = await Promise.all([
-          waitForResponse(page, {uri: 'ui/filterList'}),
+          waitForResponse(participantListPage.page, {uri: 'ui/filterList'}),
           participantListTable.nextPage()
         ]);
         responseJson = JSON.parse(await nextPageResponse.text());
