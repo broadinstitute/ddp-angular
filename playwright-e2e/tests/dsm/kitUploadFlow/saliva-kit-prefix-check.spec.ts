@@ -19,6 +19,7 @@ import FinalScanPage from 'dsm/pages/scanner-pages/finalScan-page';
 import { WelcomePage } from 'dsm/pages/welcome-page';
 import { logInfo } from 'utils/log-utils';
 import InitialScanPage from 'dsm/pages/scanner-pages/initialScan-page';
+import TrackingScanPage from 'dsm/pages/scanner-pages/trackingScan-page';
 
 /**
  * Prefix check for Saliva kit with Canada and New York address for Osteo2
