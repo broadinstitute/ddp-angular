@@ -26,12 +26,14 @@ import KitsReceivedPage from 'dsm/pages/kitsInfo-pages/kitsReceived-page/kitsRec
 import { AdditionalFilter } from 'dsm/component/filters/sections/search/search-enums';
 import crypto from 'crypto';
 import { logInfo } from 'utils/log-utils';
+import { login } from 'authentication/auth-angio';
+import { waitForResponse } from 'utils/test-utils';
 
 test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
   const studies = [StudyEnum.LMS]; //Only clinical (pecgs) studies get this event
-  const facilityName = 'Dana Farber Cancer Institute';
-  const facilityPhoneNumber = '111-222-3333';
-  const facilityFaxNumber = '222-123-3333';
+  const facilityName = user.doctor.hospital;
+  const facilityPhoneNumber = user.doctor.phone;
+  const facilityFaxNumber = user.doctor.fax;
   const materialsReceivedAmount = 1;
   let navigation;
   let shortID = '';
@@ -45,7 +47,7 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
   let tumorCollaboratorSampleIDPrefix = '';
 
   for (const study of studies) {
-    test(`${study} - Scenario 1: SALIVA kit received first, TUMOR sample received second`, async ({ page, request }, testInfo) => {
+    test(`${study} - Scenario 1: SALIVA kit received first, TUMOR sample received second @dsm @functional`, async ({ page, request }, testInfo) => {
       test.slow();
       navigation = new Navigation(page, request);
       await new Select(page, { label: 'Select study' }).selectOption(`${study}`);
@@ -148,7 +150,7 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
       expect(germlineInfo).toBeTruthy();
     });
 
-    test(`${study} - Scenario 2: BLOOD kit received first, TUMOR sample received second`, async ({ page, request }, testInfo) => {
+    test(`${study} - Scenario 2: BLOOD kit received first, TUMOR sample received second @dsm @functional`, async ({ page, request }, testInfo) => {
       test.slow();
       navigation = new Navigation(page, request);
       await new Select(page, { label: 'Select study' }).selectOption(`${study}`);
@@ -251,7 +253,7 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
       expect(germlineInfo).toBeTruthy();
     });
 
-    test(`${study} - Scenario 3: TUMOR sample received first, SALIVA kit received second`, async ({ page, request }, testInfo) => {
+    test(`${study} - Scenario 3: TUMOR sample received first, SALIVA kit received second @dsm @functional`, async ({ page, request }, testInfo) => {
       test.slow();
       navigation = new Navigation(page, request);
       await new Select(page, { label: 'Select study' }).selectOption(`${study}`);
@@ -354,7 +356,7 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
       expect(germlineInfo).toBeTruthy();
     });
 
-    test(`${study} - Scenario 4: TUMOR sample received first, BLOOD kit received second`, async ({ page, request }, testInfo) => {
+    test(`${study} - Scenario 4: TUMOR sample received first, BLOOD kit received second @dsm @functional`, async ({ page, request }, testInfo) => {
       test.slow();
       navigation = new Navigation(page, request);
       await new Select(page, { label: 'Select study' }).selectOption(`${study}`);
@@ -497,7 +499,8 @@ async function findParticipantForGermlineConsentCreation(participantListPage: Pa
   await searchPanel.text('Last Name', { textValue: lastnamePrefix, additionalFilters: [AdditionalFilter.EXACT_MATCH], exactMatch: false });
   await searchPanel.checkboxes('CONSENT_ASSENT_BLOOD', { checkboxValues: ['Yes'] });
   await searchPanel.checkboxes('CONSENT_ASSENT_TISSUE', { checkboxValues: ['Yes'] });
-  await searchPanel.search();
+  const filterListResponse = await searchPanel.search({ uri: '/ui/filterList' });
+  let responseJson = JSON.parse(await filterListResponse.text());
 
   const participantListTable = participantListPage.participantListTable;
   const resultsPerPage = await participantListTable.rowsCount;
@@ -510,6 +513,7 @@ async function findParticipantForGermlineConsentCreation(participantListPage: Pa
     const physician = (await participantListTable.getParticipantDataAt(index, 'PHYSICIAN')).trim();
     const germlineInfo = (await participantListTable.getParticipantDataAt(index, 'GERMLINE_CONSENT_ADDENDUM_PEDIATRIC Survey Created')).trim();
     const tissueRequestDate = (await participantListTable.getParticipantDataAt(index, 'Tissue Request Date')).trim();
+    const medicalRecord = responseJson.participants[index].medicalRecords[0]; //Checking to make sure participant has onc history tab
 
     if ((consentAssentTissue === 'Yes') &&
         (consentAssentBlood === 'Yes') &&
@@ -517,18 +521,27 @@ async function findParticipantForGermlineConsentCreation(participantListPage: Pa
         (somaticConsentTumorPediatric === 'Yes') &&
         (physician != null) &&
         (germlineInfo === '') &&
-        (tissueRequestDate === '')
+        (tissueRequestDate === '') &&
+        (medicalRecord != null)
       ) {
         shortID = await participantListTable.getParticipantDataAt(index, 'Short ID');
+        logInfo(`Test participant ${shortID} satisfies criteria for germline test`);
         break;
     }
 
     if (index === (resultsPerPage - 1)) {
-      index = 0;
-      await participantListTable.nextPage();
+      const hasNextPage = await participantListTable.paginator.hasNext();
+      if (hasNextPage) {
+        index = -1;
+        const [nextPageResponse] = await Promise.all([
+          waitForResponse(participantListPage.page, {uri: 'ui/filterList'}),
+          participantListTable.nextPage()
+        ]);
+        responseJson = JSON.parse(await nextPageResponse.text());
+      } else {
+        throw new Error(`No more valid participants available for use in SAMPLE_RECEIVED test`);
+      }
     }
-
-    //TODO add logic for if there are no more pages to use to search for participants
   }
 
   return shortID;

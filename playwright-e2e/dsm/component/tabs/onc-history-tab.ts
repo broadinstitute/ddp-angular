@@ -33,11 +33,12 @@ export default class OncHistoryTab {
     await expect(downloadPDFBundleBtnLocator, `Download PDF Bundle button is not visible`).toBeVisible();
 
     const downloadPDFBundleBtn = new Button(this.page, { root: downloadPDFBundleBtnLocator, label: 'Download PDF Bundle' });
-    await downloadPDFBundleBtn.click();
 
-    await waitForResponse(this.page, { uri: 'downloadPDF' });
+    const respPromise = waitForResponse(this.page, { uri: 'downloadPDF' });
+    await downloadPDFBundleBtn.click();
     const downloadFinishedText = this.page.getByText('Download finished.');
     await expect(downloadFinishedText, 'Downloading finished is not visible').toBeVisible();
+    await respPromise;
   }
 
   public async downloadPDFBundle(): Promise<void> {

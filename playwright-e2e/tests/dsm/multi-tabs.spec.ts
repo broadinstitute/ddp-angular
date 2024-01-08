@@ -26,20 +26,26 @@ test('Multiple browser tabs @dsm', async ({ browser, request }) => {
   // Tab A: Open Participant List page, realm matches expected study PanCan
   const pancanPage = await browserContext.newPage();
   const pancanParticipantListPage = await logIntoStudy(pancanPage, request, pancan);
-  const pancanParticipantShortId = await findAdultParticipantShortId(pancanParticipantListPage);
+  const pancanParticipantShortId = await pancanParticipantListPage.findParticipantWithTab({
+    findPediatricParticipant: false,
+    tab: TabEnum.ONC_HISTORY
+  });
   logInfo(`PanCan participant Short ID: ${pancanParticipantShortId}`);
 
   // Tab B: Open Participant List page, realm matches expected study angio
   const angioPage = await browserContext.newPage();
   const angioParticipantListPage = await logIntoStudy(angioPage, request, angio);
-  const angioParticipantShortId = await findAdultParticipantShortId(angioParticipantListPage);
+  const angioParticipantShortId = await angioParticipantListPage.findParticipantWithTab({
+    findPediatricParticipant: false,
+    tab: TabEnum.ONC_HISTORY
+  });
   logInfo(`angio participant Short ID: ${angioParticipantShortId}`);
 
   // Add new Onc History for study PanCan in tab A
-  await addOncHistory(pancanPage, pancanParticipantListPage, pancan);
+  await addOncHistory(pancanPage, pancanParticipantShortId, pancanParticipantListPage, pancan);
 
   // Add new Onc History for study angio in tab B
-  await addOncHistory(angioPage, angioParticipantListPage, angio);
+  await addOncHistory(angioPage, angioParticipantShortId, angioParticipantListPage, angio);
 });
 
 async function findAdultParticipantShortId(participantListPage: ParticipantListPage): Promise<string> {
@@ -86,12 +92,17 @@ async function findAdultParticipantShortId(participantListPage: ParticipantListP
   });
 }
 
-async function addOncHistory(page: Page, participantListPage: ParticipantListPage, study: StudyEnum): Promise<void> {
+async function addOncHistory(page: Page, shortID: string, participantListPage: ParticipantListPage, study: StudyEnum): Promise<void> {
   const realm = studyShortName(study).realm;
   await test.step(`Add Onc history for study ${study}`, async () => {
     await page.bringToFront();
-    const pancanParticipantListTable = participantListPage.participantListTable;
-    const participantPage: ParticipantPage = await pancanParticipantListTable.openParticipantPageAt(0);
+    const searchPanel = participantListPage.filters.searchPanel;
+    await searchPanel.open();
+    await searchPanel.text('Short ID', { textValue: shortID });
+    await searchPanel.search();
+
+    const participantListTable = participantListPage.participantListTable;
+    const participantPage: ParticipantPage = await participantListTable.openParticipantPageAt(0);
     const oncHistoryTab = await participantPage.clickTab<OncHistoryTab>(TabEnum.ONC_HISTORY);
     const oncHistoryTable = oncHistoryTab.table;
     const rowIndex = await oncHistoryTable.getRowsCount() - 1;

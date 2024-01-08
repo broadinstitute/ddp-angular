@@ -1,4 +1,4 @@
-export const NavSelectors = {
+export const Nav = {
   Login: '.header button[data-ddp-test="signInButton"]:has-text("Log In")',
   LoadingSpinner: '.auth0-loading',
   AboutUs: '.header__nav >> text=About Us',

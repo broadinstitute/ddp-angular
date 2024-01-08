@@ -11,8 +11,9 @@ import { waitForNoSpinner } from 'utils/test-utils';
 test.describe('Editing Participant Information', () => {
   const cmiClinicalStudies = [StudyEnum.LMS, StudyEnum.OSTEO2];
   const cmiResearchStudies = [StudyEnum.PANCAN];
+  const chosenCMIStudies = cmiClinicalStudies.concat(cmiResearchStudies);
 
-  for (const study of cmiClinicalStudies.concat(cmiResearchStudies)) {
+  for (const study of chosenCMIStudies) {
     let shortID: string;
     let firstName: string;
     let newFirstName: string;

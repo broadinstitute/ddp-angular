@@ -47,7 +47,7 @@ test('Osteo enroll self and kid together @dss @osteo', async ({ page }) => {
 
   await consentAssentPage.bloodAndTissue(true, true);
   await consentAssentPage.fillInParentAndMinor('KidFirst', 'KidLast', 'ParentFirst', 'ParentLast');
-  await consentAssentPage.fillInDateOfBirth('01', '01', '2006');
+  await consentAssentPage.fillInDateOfBirth('01', '01', '2014');
 
   await page.getByText('Parent', { exact: true }).click();
 

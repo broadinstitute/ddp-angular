@@ -280,8 +280,8 @@ export default class FamilyMemberTab {
         const textarea = new TextArea(this.page, {label: 'Mixed Race Notes'});
         await textarea.clear();
         await Promise.all([
-            waitForResponse(this.page, {uri: 'ui/patch'}),
-            textarea.fill(notes)
+          waitForResponse(this.page, {uri: 'ui/patch'}),
+          textarea.fill(notes)
         ]);
     }
 
