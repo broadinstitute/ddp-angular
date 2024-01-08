@@ -21,21 +21,10 @@ export class PhiManifestModel {
     }
 
     public getReportAsMap(headers: string[], data: string[]): any {
-        const map: Map<string, string> = new Map();
-        for (let i = 0; i < headers.length; i++) {
-            const header = headers[i];
-            map[header] = this.convertValue(data[i]);
-        }
-        return map;
-    }
-
-    convertValue(value: string): string {
-        if (value === 'true') {
-            return 'Yes';
-        }
-        if (value === 'false') {
-            return 'No';
-        }
-        return value;
+      const map: Map<string, string> = new Map();
+      for (let i = 0; i < headers.length; i++) {
+        map[headers[i]] = data[i];
+      }
+      return map;
     }
 }

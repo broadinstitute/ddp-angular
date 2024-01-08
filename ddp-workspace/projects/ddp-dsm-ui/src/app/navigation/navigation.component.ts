@@ -48,7 +48,7 @@ export class NavigationComponent implements OnInit {
 
   }
 
-  public showPecgsFeatures(selectedStudy: string | null): boolean {
+  public shouldShowPecgsFeatures(selectedStudy: string | null): boolean {
     return selectedStudy && this.pecgsFeaturesAllowedStudies.includes(selectedStudy);
   }
 

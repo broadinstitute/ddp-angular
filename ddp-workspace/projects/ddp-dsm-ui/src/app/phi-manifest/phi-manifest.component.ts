@@ -65,7 +65,7 @@ export class PhiManifestComponent implements OnInit {
         window.scrollTo(0, 0);
     }
 
-    getPhiReport(): void {
+    downloadPhiReport(): void {
         this.additionalMessage = null;
         this.errorMessage = null;
         if (this.realm != null && this.participantId && this.sequencingOrderId) {
@@ -100,12 +100,13 @@ export class PhiManifestComponent implements OnInit {
         const phiManifestModel: PhiManifestModel = PhiManifestModel.parse(phiManifestResponseModel.data[1]);
         const map: {}[] = [];
         map.push(phiManifestModel.getReportAsMap(phiManifestResponseModel.data[0], phiManifestResponseModel.data[1]));
-        Utils.createCSV(
-            phiManifestResponseModel.data[0],
-            map,
-            'PHI_REPORT_PT_' + phiManifestResponseModel.ddpParticipantId + '_ORDER_' +
-            phiManifestResponseModel.orderId + Statics.CSV_FILE_EXTENSION
-        );
+        Utils.createCSV(phiManifestResponseModel.data[0], map, this.createFileName(phiManifestResponseModel));
+    }
+
+    createFileName(phiManifestResponseModel: PhiManifestResponseModel): string {
+      return 'PHI_REPORT_PT_' + phiManifestResponseModel.ddpParticipantId + '_ORDER_' +
+      phiManifestResponseModel.orderId + '_' + Utils.getDateFormatted( new Date(), Utils.DATE_STRING_CVS ) +
+      Statics.CSV_FILE_EXTENSION;
     }
 
 
