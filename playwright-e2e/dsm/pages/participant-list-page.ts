@@ -256,8 +256,9 @@ export default class ParticipantListPage extends DsmPageBase {
         //Checking for the medical record tab allows catching those who do not yet have an onc history detail/row/data (but have the tab itself)
         if (tab === TabEnum.ONC_HISTORY) {
           const medicalRecord = value.medicalRecords[0];
-          if (medicalRecord === undefined) {
-            continue; //Participant does not have a Medical Record tab for some reason, skip them
+          const hasConsentedToTissue = value.esData.dsm.hasConsentedToTissueSample;
+          if (medicalRecord === undefined || hasConsentedToTissue === false) {
+            continue; //Participant does not have a Medical Record tab for some reason or has not consented to tissue samples (so tab should be there but no history should be entered), skip them
           }
           unformattedFirstName = JSON.stringify(value.esData.profile.firstName);
           firstName = unformattedFirstName.replace(/['"]+/g, ''); //Replace double quotes from JSON.stringify
