@@ -172,6 +172,14 @@ test.describe.serial('Saliva Kit Upload with a Canadian or New York address', ()
         await initialScanPage.save();
       });
 
+      await test.step('Tracking Scan', async () => {
+        const trackingScanPage = await navigation.selectFromSamples<TrackingScanPage>(SamplesNavEnum.TRACKING_SCAN);
+        await trackingScanPage.assertPageTitle();
+        const trackingLabel = `trackingLabel-${crypto.randomUUID().toString().substring(0, 10)}`;
+        await trackingScanPage.fillScanPairs([trackingLabel, kitLabel]);
+        await trackingScanPage.save();
+      });
+
       await test.step('Final scan', async () => {
         const finalScanPage = await navigation.selectFromSamples<FinalScanPage>(SamplesNavEnum.FINAL_SCAN);
         await finalScanPage.waitForReady();

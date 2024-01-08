@@ -26,6 +26,7 @@ import KitsReceivedPage from 'dsm/pages/kitsInfo-pages/kitsReceived-page/kitsRec
 import {SampleTypesEnum} from 'dsm/pages/kitsInfo-pages/enums/sampleTypes-enum';
 import {getDate} from 'utils/date-utils';
 import {logInfo} from 'utils/log-utils';
+import TrackingScanPage from 'dsm/pages/scanner-pages/trackingScan-page';
 
 // don't run in parallel
 test.describe.serial('Saliva Kits upload flow', () => {
@@ -122,6 +123,13 @@ test.describe.serial('Saliva Kits upload flow', () => {
 
       await kitsWithoutLabelPage.search(KitsColumnsEnum.SHORT_ID, shortID);
       const shippingID = (await kitsWithoutLabelPage.getData(KitsColumnsEnum.SHIPPING_ID)).trim();
+
+      //Tracking Scan
+      const trackingScanPage = await navigation.selectFromSamples<TrackingScanPage>(SamplesNavEnum.TRACKING_SCAN);
+      await trackingScanPage.assertPageTitle();
+      const trackingLabel = `trackingLabel-${crypto.randomUUID().toString().substring(0, 10)}`;
+      await trackingScanPage.fillScanPairs([trackingLabel, kitLabel]);
+      await trackingScanPage.save();
 
       // Final scan
       const finalScanPage = await navigation.selectFromSamples<FinalScanPage>(SamplesNavEnum.FINAL_SCAN);
