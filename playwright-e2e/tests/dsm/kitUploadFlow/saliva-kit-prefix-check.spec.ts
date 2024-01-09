@@ -114,6 +114,11 @@ test.describe.serial('Saliva Kit Upload with a Canadian or New York address', ()
           await kitsWithoutLabelPage.selectKitType(kit);
           await kitsWithoutLabelPage.deactivateAllKitsFor(shortID);
         }
+
+        const kitErrorPage = await navigation.selectFromSamples<ErrorPage>(SamplesNavEnum.ERROR);
+        await kitErrorPage.waitForReady();
+        await kitErrorPage.selectKitType(kitType);
+        await kitErrorPage.deactivateAllKitsFor(shortID);
       });
 
       await test.step('Upload new saliva kit', async () => {

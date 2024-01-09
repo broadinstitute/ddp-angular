@@ -28,6 +28,7 @@ import crypto from 'crypto';
 import { logInfo } from 'utils/log-utils';
 import { login } from 'authentication/auth-angio';
 import { waitForResponse } from 'utils/test-utils';
+import ErrorPage from 'dsm/pages/samples/error-page';
 
 test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
   const studies = [StudyEnum.LMS]; //Only clinical (pecgs) studies get this event
@@ -604,6 +605,11 @@ async function prepareSentKit(shortID: string,
     await kitsWithoutLabelPage.assertReloadKitListBtn();
     await kitsWithoutLabelPage.deactivateAllKitsFor(shortID);
   }
+
+  const kitErrorPage = await navigation.selectFromSamples<ErrorPage>(SamplesNavEnum.ERROR);
+  await kitErrorPage.waitForReady();
+  await kitErrorPage.selectKitType(kitType);
+  await kitErrorPage.deactivateAllKitsFor(shortID);
 
   //Get first name and last name of the participant - Kit Upload checks that the names match the given short ids
   const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);

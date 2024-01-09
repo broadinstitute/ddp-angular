@@ -27,6 +27,7 @@ import {SampleTypesEnum} from 'dsm/pages/kitsInfo-pages/enums/sampleTypes-enum';
 import {getDate} from 'utils/date-utils';
 import {logInfo} from 'utils/log-utils';
 import TrackingScanPage from 'dsm/pages/scanner-pages/trackingScan-page';
+import ErrorPage from 'dsm/pages/samples/error-page';
 
 // don't run in parallel
 test.describe.serial('Saliva Kits upload flow', () => {
@@ -88,13 +89,18 @@ test.describe.serial('Saliva Kits upload flow', () => {
         kitUploadInfo.address.country = (await contactInformationTab.getCountry()) || kitUploadInfo.address.country;
       }
 
-      // deactivate all kits for the participant
+      // deactivate all kits for the participant (in both Kits w/o Label and Kit Error page)
       const kitsWithoutLabelPage = await navigation.selectFromSamples<KitsWithoutLabelPage>(SamplesNavEnum.KITS_WITHOUT_LABELS);
       await kitsWithoutLabelPage.waitForReady();
       await kitsWithoutLabelPage.selectKitType(kitType);
       await kitsWithoutLabelPage.assertCreateLabelsBtn();
       await kitsWithoutLabelPage.assertReloadKitListBtn();
       await kitsWithoutLabelPage.deactivateAllKitsFor(shortID);
+
+      const kitErrorPage = await navigation.selectFromSamples<ErrorPage>(SamplesNavEnum.ERROR);
+      await kitErrorPage.waitForReady();
+      await kitErrorPage.selectKitType(kitType);
+      await kitErrorPage.deactivateAllKitsFor(shortID);
 
       // Uploads kit
       const kitUploadPage = await navigation.selectFromSamples<KitUploadPage>(SamplesNavEnum.KIT_UPLOAD);
