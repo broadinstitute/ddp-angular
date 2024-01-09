@@ -234,12 +234,14 @@ export default class ParticipantListPage extends DsmPageBase {
     await waitForNoSpinner(this.page);
   }
 
-  async findParticipantWithTab(opts: { findPediatricParticipant: boolean, tab?: TabEnum, rgpProbandTab?: boolean }): Promise<string> {
-    const { findPediatricParticipant = false, tab, rgpProbandTab = false } = opts;
+  async findParticipantWithTab(
+    opts: { findPediatricParticipant: boolean, tab?: TabEnum, rgpProbandTab?: boolean, uriString?: string }
+    ): Promise<string> {
+    const { findPediatricParticipant = false, tab, rgpProbandTab = false, uriString = '/ui/applyFilter' } = opts;
 
     const searchPanel = this.filters.searchPanel;
     await searchPanel.open();
-    const applyFilterResponse = await searchPanel.search({ uri: '/ui/applyFilter' });
+    const applyFilterResponse = await searchPanel.search({ uri: uriString });
 
     let foundShortID = '';
     let unformattedFirstName = '';
