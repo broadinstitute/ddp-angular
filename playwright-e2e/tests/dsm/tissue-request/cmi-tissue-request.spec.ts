@@ -9,6 +9,7 @@ import { OncHistoryInputColumnsEnum, OncHistorySelectRequestEnum } from 'dsm/com
 import { expect } from '@playwright/test';
 import { getDate } from 'utils/date-utils';
 import { TissueDynamicFieldsEnum } from 'dsm/pages/tissue/enums/tissue-information-enum';
+import { logInfo } from 'utils/log-utils';
 
 test.describe('Tissue Request Flow', () => {
   const studies = [StudyEnum.PANCAN];
@@ -18,6 +19,7 @@ test.describe('Tissue Request Flow', () => {
       const participantListPage = await ParticipantListPage.goto(page, study, request);
       const customizeViewPanel = participantListPage.filters.customizeViewPanel;
       const searchPanel = participantListPage.filters.searchPanel;
+      let shortID = '';
 
       await test.step('Search for the right participant', async () => {
         await customizeViewPanel.open();
@@ -31,6 +33,13 @@ test.describe('Tissue Request Flow', () => {
         await searchPanel.dates('Onc History Created', { additionalFilters: [AdditionalFilter.EMPTY] });
         await searchPanel.text('Your Mailing Address *', { additionalFilters: [AdditionalFilter.NOT_EMPTY] });
 
+        await searchPanel.search();
+        shortID = await participantListPage.findParticipantWithTab(
+          { findPediatricParticipant: false, tab: TabEnum.ONC_HISTORY, uriString: 'ui/filterList'}
+        );
+        logInfo(`Short id: ${shortID}`);
+        await searchPanel.open();
+        await searchPanel.text('Short ID', { textValue: shortID });
         await searchPanel.search();
       })
 

@@ -19,6 +19,7 @@ import FinalScanPage from 'dsm/pages/scanner-pages/finalScan-page';
 import { WelcomePage } from 'dsm/pages/welcome-page';
 import { logInfo } from 'utils/log-utils';
 import InitialScanPage from 'dsm/pages/scanner-pages/initialScan-page';
+import TrackingScanPage from 'dsm/pages/scanner-pages/trackingScan-page';
 
 /**
  * Prefix check for Saliva kit with Canada and New York address for Osteo2
@@ -113,6 +114,11 @@ test.describe.serial('Saliva Kit Upload with a Canadian or New York address', ()
           await kitsWithoutLabelPage.selectKitType(kit);
           await kitsWithoutLabelPage.deactivateAllKitsFor(shortID);
         }
+
+        const kitErrorPage = await navigation.selectFromSamples<ErrorPage>(SamplesNavEnum.ERROR);
+        await kitErrorPage.waitForReady();
+        await kitErrorPage.selectKitType(kitType);
+        await kitErrorPage.deactivateAllKitsFor(shortID);
       });
 
       await test.step('Upload new saliva kit', async () => {
@@ -170,6 +176,14 @@ test.describe.serial('Saliva Kit Upload with a Canadian or New York address', ()
         await initialScanPage.assertPageTitle();
         await initialScanPage.fillScanPairs([kitLabel, shortID]);
         await initialScanPage.save();
+      });
+
+      await test.step('Tracking Scan', async () => {
+        const trackingScanPage = await navigation.selectFromSamples<TrackingScanPage>(SamplesNavEnum.TRACKING_SCAN);
+        await trackingScanPage.assertPageTitle();
+        const trackingLabel = `trackingLabel-${crypto.randomUUID().toString().substring(0, 10)}`;
+        await trackingScanPage.fillScanPairs([trackingLabel, kitLabel]);
+        await trackingScanPage.save();
       });
 
       await test.step('Final scan', async () => {
