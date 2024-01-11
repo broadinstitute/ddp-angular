@@ -78,12 +78,4 @@ export default class SearchPage extends KitsPageBase {
     await expect(saveDateButton).toBeVisible();
     await saveDateButton.click();
   }
-
-  /**
-   * Click Reload button
-   * @returns {Promise<void>}
-   */
-  async reload(): Promise<void> {
-    await this.page.locator('button', { hasText: 'Reload' }).click();
-  }
 }
