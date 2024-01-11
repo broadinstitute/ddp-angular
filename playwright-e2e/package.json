@@ -25,7 +25,8 @@
     "dotenv": "^16.3.1",
     "eslint": "^8.35.0",
     "eslint-plugin-import": "^2.27.5",
-    "uuid": "^9.0.1"
+    "uuid": "^9.0.1",
+    "xlsx": "https://cdn.sheetjs.com/xlsx-0.20.1/xlsx-0.20.1.tgz"
   },
   "dependencies": {
     "@google-cloud/local-auth": "^2.1.1",
