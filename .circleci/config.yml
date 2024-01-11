@@ -22,10 +22,10 @@ references:
 
   # Note: important that values of guids and keys have matching order!"
   study_keys: &study_keys
-    "basil dsm-ui osteo brain angio mbc testboston mpc prion atcp rarex rgp esc cgc circadia pancan singular brugada lms fon"
+    "basil dsm-ui osteo brain angio mbc testboston mpc prion atcp rgp esc cgc circadia pancan brugada lms"
 
   study_guids: &study_guids
-    "basil NA CMI-OSTEO cmi-brain ANGIO cmi-mbc testboston cmi-mpc PRION atcp rarex RGP cmi-esc cgc circadia cmi-pancan singular brugada cmi-lms fon"
+    "basil NA CMI-OSTEO cmi-brain ANGIO cmi-mbc testboston cmi-mpc PRION atcp RGP cmi-esc cgc circadia cmi-pancan brugada cmi-lms"
 
   # Job runs for develop branch only
   filter-develop-branch: &filter-develop-branch
@@ -512,8 +512,6 @@ jobs:
       - conditionally-launch-build-and-store:
           study_key: atcp
       - conditionally-launch-build-and-store:
-          study_key: rarex
-      - conditionally-launch-build-and-store:
           study_key: rgp
       - conditionally-launch-build-and-store:
           study_key: esc
@@ -526,13 +524,9 @@ jobs:
       - conditionally-launch-build-and-store:
           study_key: pancan
       - conditionally-launch-build-and-store:
-          study_key: singular
-      - conditionally-launch-build-and-store:
           study_key: brugada
       - conditionally-launch-build-and-store:
           study_key: lms
-      - conditionally-launch-build-and-store:
-          study_key: fon
 
   app-build:
     description: Run build and store build artifacts to Google cloud storage
@@ -806,7 +800,7 @@ workflows:
           matrix:
             alias: app-build
             parameters: &studies
-              study_key: [ dsm-ui, basil, osteo, brain, angio, mbc, testboston, mpc, prion, atcp, rarex, rgp, esc, cgc, circadia, pancan, singular, brugada, lms ]
+              study_key: [ dsm-ui, basil, osteo, brain, angio, mbc, testboston, mpc, prion, atcp, rgp, esc, cgc, circadia, pancan, brugada, lms ]
           check_changed: true
           requires:
             - << matrix.study_key >>-ui-unit-test-pr
@@ -1007,9 +1001,6 @@ workflows:
           study_key: atcp
       - deploy-stored-build-job:
           <<: *deploy_branch_filters
-          study_key: rarex
-      - deploy-stored-build-job:
-          <<: *deploy_branch_filters
           study_key: rgp
       - deploy-stored-build-job:
           <<: *deploy_branch_filters
@@ -1028,16 +1019,10 @@ workflows:
           study_key: pancan
       - deploy-stored-build-job:
           <<: *deploy_branch_filters
-          study_key: singular
-      - deploy-stored-build-job:
-          <<: *deploy_branch_filters
           study_key: brugada
       - deploy-stored-build-job:
           <<: *deploy_branch_filters
           study_key: lms
-      - deploy-stored-build-job:
-          <<: *deploy_branch_filters
-          study_key: fon
 
   scheduled-playwright-test:
     # Triggered on Monday through Friday
