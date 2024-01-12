@@ -27,8 +27,8 @@ Example:
 # Must first set personal `CI_TOKEN` in `$HOME/.circleci-token` file
 vi $HOME/.circleci-token
 
-# Run CI api-run-tests-workflow workflow for Singular project on your branch
-./run_ci.sh  run-tests singular $GITHUB_BRANCH
+# Run CI api-run-tests-workflow workflow for Pancan project on your branch
+./run_ci.sh  run-tests pancan $GITHUB_BRANCH
 
 ```
 
