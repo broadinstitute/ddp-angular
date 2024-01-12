@@ -15,6 +15,5 @@ export enum StudyEnum {
   LMS = 'Leiomyosarcoma',
   OSTEO2 = 'OS PE-CGS',
   RGP = 'RGP',
-  RAREX = 'RareX',
   TEST_BOSTON = 'Test Boston'
 }

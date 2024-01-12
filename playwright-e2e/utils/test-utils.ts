@@ -243,10 +243,6 @@ export function studyShortName(study: StudyEnum): { shortName: string | null; re
       realm = 'PanCan';
       collaboratorPrefix = 'Project';
       break;
-    case StudyEnum.RAREX:
-      shortName = 'rarex';
-      realm = 'RareX';
-      break;
     case StudyEnum.MBC:
       shortName = 'cmi-mbc';
       realm = 'Pepper-MBC';
