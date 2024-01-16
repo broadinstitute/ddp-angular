@@ -8,6 +8,7 @@ import * as XLSX from 'xlsx';
 import path from 'path';
 import { isNaN } from 'lodash';
 import { unzip } from 'utils/file-utils';
+import { logInfo } from 'utils/log-utils';
 
 test.describe.parallel('Participant List Download', () => {
   // Chose studies with fewer participants on Dev and Test. Otherwise download all data will take a very long time.
@@ -48,9 +49,11 @@ test.describe.parallel('Participant List Download', () => {
       const json = XLSX.utils.sheet_to_json(worksheet, {range: 1}); // use second row for header
       // Iterate rows to verify format of Registration Date
       json.map((row: any) => {
-        const regDate = row['Registration Date'];
-        expect(!isNaN(new Date(regDate))).toBeTruthy();
-        expect(regDate).toMatch(/^\d\d-\d\d-\d\d\d\d\s/); // mm-dd-yyyy
+        const regDate = row['Registration Date'].split(' ')[0].trim(); // Remove time substring
+        logInfo(`Analyzing Registration Date: ${regDate}`);
+        expect(!isNaN(new Date(regDate))).toBeTruthy(); // valid date
+        const match = new RegExp(/^(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])-([12]\d{3})$/).test(regDate); // mm-dd-yyyy
+        expect(match).toBeTruthy(); // valid format
       });
     });
   }
