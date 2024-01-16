@@ -20,8 +20,9 @@ export function dateFormat(timeZone?: string): Intl.DateTimeFormat {
  * @param {Date} date
  * @returns {string}
  */
-export function getDate(date?: Date): string {
-  return dateFormat().format(date ? date : new Date());
+export function getDate(date?: Date, opts: { timeZone?: string } = {}): string {
+  const { timeZone = 'America/New_York' } = opts;
+  return dateFormat(timeZone).format(date ? date : new Date());
 }
 
 /**

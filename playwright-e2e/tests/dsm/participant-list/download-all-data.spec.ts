@@ -3,10 +3,11 @@ import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
 import { FileFormatEnum } from 'dsm/pages/participant-page/enums/download-format-enum';
 import { test } from 'fixtures/dsm-fixture';
-import fs from 'fs';
 import { assertParticipantListDownloadFileName } from 'utils/test-utils';
 import * as XLSX from 'xlsx';
 import path from 'path';
+import { isNaN } from 'lodash';
+import { unzip } from 'utils/file-utils';
 
 test.describe.parallel('Participant List Download', () => {
   // Chose studies with fewer participants on Dev and Test. Otherwise download all data will take a very long time.
@@ -25,15 +26,32 @@ test.describe.parallel('Participant List Download', () => {
       const download = await participantListPage.downloadParticipant({ fileFormat: FileFormatEnum.XLSX });
       assertParticipantListDownloadFileName(download, study);
 
-      const logDir = testInfo.outputDir;
+      const dir = testInfo.outputDir;
       const fileName = download.suggestedFilename();
-      const downloadFile = path.join(logDir, fileName);
+      const zipFile = path.join(dir, fileName);
 
-      await download.saveAs(downloadFile);
+      await download.saveAs(zipFile);
+      expect(zipFile.endsWith('.zip')).toBeTruthy();
+      const targetFilePath = zipFile.split('.zip')[0];
+
+      const unzipFiles: string[] = unzip(zipFile, targetFilePath);
+      // Two files in zip
+      expect(unzipFiles.length).toStrictEqual(2);
+      expect(unzipFiles).toContain('DataDictionary.xlsx');
+      const [participantXlsx] = unzipFiles.filter(file => file.startsWith('Participant-') && file.endsWith('.xlsx'));
+
       // Verify Registration Date format is mm-dd-yyyy in Excel download file
-      const xlsxWorkbook = XLSX.readFile(downloadFile);
-      const firstSheet = xlsxWorkbook.Sheets[xlsxWorkbook.SheetNames[0]];
-      console.log(firstSheet);
+      const xlsxFilePath = path.join(targetFilePath, participantXlsx);
+      const xlsxWorkbook = XLSX.readFile(xlsxFilePath);
+      const worksheet = xlsxWorkbook.Sheets[xlsxWorkbook.SheetNames[0]]; // First Worksheet
+
+      const json = XLSX.utils.sheet_to_json(worksheet, {range: 1}); // use second row for header
+      // Iterate rows to verify format of Registration Date
+      json.map((row: any) => {
+        const regDate = row['Registration Date'];
+        expect(!isNaN(new Date(regDate))).toBeTruthy();
+        expect(regDate).toMatch(/^\d\d-\d\d-\d\d\d\d\s/); // mm-dd-yyyy
+      });
     });
   }
 });

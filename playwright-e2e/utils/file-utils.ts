@@ -1,6 +1,7 @@
 import fs from 'fs';
 import csv from 'csv-parser';
 import { logError, logInfo } from 'utils/log-utils';
+import admZip from 'adm-zip';
 
 export interface MailListCSV {
   email: string;
@@ -48,4 +49,21 @@ export async function readMailListCSVFile(filePath: string | null): Promise<Mail
 export function tabDelimitedString(data: string[]): string {
   const tabDelimited = data.join('\t');
   return tabDelimited;
+}
+
+// Unzip
+export function unzip(filepath: string, targetFilePath: string): string[] {
+  const files: string[] = [];
+  try {
+    const zip = new admZip(filepath);
+    zip.extractAllTo(targetFilePath);
+    for (const zipEntry of zip.getEntries()) {
+      // console.log(zipEntry.toString()); // uncomment for debug
+      files.push(zipEntry.name);
+    }
+  } catch (err) {
+    console.error(`Error reading zip file: ${filepath}`);
+    throw new Error(`${err}`);
+  }
+  return files;
 }
