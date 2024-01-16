@@ -51,7 +51,6 @@ export function tabDelimitedString(data: string[]): string {
   return tabDelimited;
 }
 
-// Unzip
 export function unzip(filepath: string, targetFilePath: string): string[] {
   const files: string[] = [];
   try {
@@ -62,7 +61,7 @@ export function unzip(filepath: string, targetFilePath: string): string[] {
       files.push(zipEntry.name);
     }
   } catch (err) {
-    console.error(`Error reading zip file: ${filepath}`);
+    console.error(`Error upzip file: ${filepath}`);
     throw new Error(`${err}`);
   }
   return files;
