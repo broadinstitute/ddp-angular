@@ -5,7 +5,7 @@ import Tabs from 'dsm/component/tabs/tabs';
 import {TabEnum} from 'dsm/component/tabs/enums/tab-enum';
 import Input from 'dss/component/input';
 import Modal from 'dss/component/modal';
-import { MessageBodyResponseEnum } from './enums/message-body-response-enum';
+import {MessageBodyResponseEnum} from './enums/message-body-response-enum';
 
 export default class ParticipantPage {
   private readonly PAGE_TITLE: string = 'Participant Page';
@@ -143,6 +143,8 @@ export default class ParticipantPage {
     const content = await modal.getContent().innerText();
     expect(content).toStrictEqual('Participant successfully updated');
     await this.page.keyboard.press('Escape'); // close modal
+
+    await this.page.waitForTimeout(15000); // Don't remove: sleep 15 seconds
   }
 
   /* Helper functions */
