@@ -40,12 +40,12 @@ export default class CohortTag {
   }
 
   /* XPaths */
-  private getCohortXPathTagFor(tagName: string): string {
-    return `//mat-chip-list//mat-chip[normalize-space(text())='${tagName}']`;
+  public getCohortXPathTagFor(tagName: string): string {
+    return `//mat-chip-list//mat-chip[normalize-space(text())="${tagName}"]`;
   }
 
   private get getSubmitButtonXPath(): string {
-    return "//mat-dialog-container//app-bulk-cohort-tag-modal//button[.//*[text()='Submit']]";
+    return '//mat-dialog-container//app-bulk-cohort-tag-modal//button[.//*[text()="Submit"]]';
   }
 
   /* assertions */

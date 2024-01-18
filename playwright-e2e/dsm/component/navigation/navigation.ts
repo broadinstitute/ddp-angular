@@ -20,6 +20,7 @@ import ErrorPage from 'dsm/pages/samples/error-page';
 import UserPermissionPage from 'dsm/pages/miscellaneous-pages/user-and-permissions-page';
 import KitsQueuePage from 'dsm/pages/kitsInfo-pages/kit-queue-page';
 import { logInfo } from 'utils/log-utils';
+import SearchPage from 'dsm/pages/samples/search-page';
 
 
 type Selection = StudyNavEnum | StudyEnum | SamplesNavEnum | MiscellaneousEnum;
@@ -38,6 +39,7 @@ export class Navigation {
       [SamplesNavEnum.SENT, new KitsSentPage(this.page)],
       [SamplesNavEnum.RECEIVED, new KitsReceivedPage(this.page, this.request)],
       [SamplesNavEnum.ERROR, new ErrorPage(this.page)],
+      [SamplesNavEnum.SEARCH, new SearchPage(this.page)],
     ]),
     miscellaneous: new Map<string, object>([
       [MiscellaneousEnum.USERS_AND_PERMISSIONS, new UserPermissionPage(this.page)],
