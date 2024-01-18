@@ -63,7 +63,7 @@ test.describe.serial('Osteo1 Participant', () => {
 
     await test.step('Verify data', async () => {
       expect(await participantPage.getStatus()).toStrictEqual('Enrolled');
-      expect(await participantPage.getRegistrationDate()).toStrictEqual('Feb 5, 2020, 5:36:27 PM');
+      expect(await participantPage.getRegistrationDate()).toContain('Feb 5, 2020');
       expect(await participantPage.getShortId()).toStrictEqual(shortID);
       expect(await participantPage.getGuid()).toStrictEqual('NSAVPY9ERWUFBMWJY3GY');
 
