@@ -271,7 +271,7 @@ export default class ParticipantListPage extends DsmPageBase {
           }
         }
 
-        if (rgpProbandTab === true) {
+        if (rgpProbandTab) {
           //If the participant has participantData, this seems to mean there's a proband tab in the account
           const participantData = value.participantData[0];
           if (participantData === undefined) {

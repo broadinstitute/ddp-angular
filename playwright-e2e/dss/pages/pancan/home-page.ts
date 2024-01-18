@@ -40,7 +40,7 @@ export default class HomePage extends PancanPageBase implements HomePageInterfac
     await modal.getInput({ label: 'Email Address'}).fill(email);
     await modal.getInput({ label: 'Email Confirmation (Reenter Email)'}).fill(email);
 
-    const [response] = await Promise.all([
+    await Promise.all([
       this.page.waitForResponse(response => response.url().includes('/v1/mailing-list')
         && response.request().method() === 'POST'
         && response.status() === 204),

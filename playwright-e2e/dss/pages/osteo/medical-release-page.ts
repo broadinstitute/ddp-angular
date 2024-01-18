@@ -21,7 +21,7 @@ export default class MedicalReleasePage extends OsteoPageBase {
     country: string
   ): Promise<void> {
     // type the search into the institution typeahead
-    await this.page.getByRole('combobox', { name: 'Institution (if any)' }).type(searchText, { delay: 200 });
+    await this.page.getByRole('combobox', { name: 'Institution (if any)' }).pressSequentially(searchText, { delay: 200 });
     await this.page.waitForTimeout(1000);
     for (let i = 0; i < pressArrowDownTimes; i++) {
       await this.page.getByRole('combobox', { name: 'Institution (if any)' }).press('ArrowDown');

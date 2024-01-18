@@ -52,10 +52,7 @@ export default class SequeuncingOrderTab {
 
   private async isInteractiveDateField(dateField: Locator): Promise<boolean> {
     const field = dateField.locator(this.DATE_FIELD_XPATH);
-    if (await field.isVisible()) {
-      return true;
-    }
-    return false;
+    return await field.isVisible();
   }
 
   /* Locators */

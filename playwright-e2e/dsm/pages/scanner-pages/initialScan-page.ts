@@ -58,11 +58,6 @@ export default class InitialScanPage {
       .toHaveText(this.PAGE_TITLE);
   }
 
-  /* XPaths */
-  private inputFieldXPath(label: string): string {
-    return `//form//mat-form-field[.//label[.//*[text()[normalize-space()='${label}']]]]//input`;
-  }
-
   public get saveButtonLocator(): Locator {
     return this.page.locator('//form/button[.//*[text()[normalize-space()="Save Scan Pairs"]]]');
   }

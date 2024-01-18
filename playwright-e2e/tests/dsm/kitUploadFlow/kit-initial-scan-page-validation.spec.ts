@@ -76,7 +76,8 @@ test.describe.serial('Initial Scan page', () => {
       await expect(page.locator('//p[contains(@class, "Color--warn")]')).toHaveText(/Error occurred sending this scan pair!/);
       const msg1 = `Kit for participant with ShortId "${shortId}" was not found.`;
       const msg2 = `Kit Label "${mfCode}" was already scanned.`
-      await expect(page.locator('//p[contains(@class, "Color--warn")]')).toHaveText(/[msg1|msg2]/);
+      const combined = `(${msg1}|${msg2})`;
+      await expect(page.locator('//p[contains(@class, "Color--warn")]')).toHaveText(new RegExp(combined));
     });
   }
 })
