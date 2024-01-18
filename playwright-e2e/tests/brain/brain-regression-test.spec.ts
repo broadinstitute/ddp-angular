@@ -408,7 +408,7 @@ test.fixme('Brain enroll self @dss @brain', async ({ page }) => {
   await page.locator('#mat-radio-11').getByText('Yes').click();
   await page.getByText('What type did your brain tumor change to and when?').click();
   await page.locator('.activity-text-input-OTHER_BRAIN_CANCER_TYPE').click();
-  await page.locator('.activity-text-input-OTHER_BRAIN_CANCER_TYPE').type('type 5');
+  await page.locator('.activity-text-input-OTHER_BRAIN_CANCER_TYPE').fill('type 5');
   await page.locator('select').nth(3).selectOption('2009');
   await page.locator('select').nth(4).selectOption('10');
   await page.locator('#mat-radio-16').getByText('No').click();

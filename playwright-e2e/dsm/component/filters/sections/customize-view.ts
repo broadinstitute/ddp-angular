@@ -1,6 +1,5 @@
-import { Locator, Page, expect } from '@playwright/test';
+import { Locator, Page } from '@playwright/test';
 import Checkbox from 'dss/component/checkbox';
-import { check } from 'utils/test-utils';
 
 export class CustomizeView {
   private activeColumnsGroup = '';

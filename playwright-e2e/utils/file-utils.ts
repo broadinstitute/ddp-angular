@@ -47,8 +47,7 @@ export async function readMailListCSVFile(filePath: string | null): Promise<Mail
 }
 
 export function tabDelimitedString(data: string[]): string {
-  const tabDelimited = data.join('\t');
-  return tabDelimited;
+  return data.join('\t');
 }
 
 export function unzip(filepath: string, targetFilePath: string): string[] {

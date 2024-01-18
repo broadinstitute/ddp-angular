@@ -26,7 +26,6 @@ import KitsReceivedPage from 'dsm/pages/kitsInfo-pages/kitsReceived-page/kitsRec
 import { AdditionalFilter } from 'dsm/component/filters/sections/search/search-enums';
 import crypto from 'crypto';
 import { logInfo } from 'utils/log-utils';
-import { login } from 'authentication/auth-angio';
 import { waitForResponse } from 'utils/test-utils';
 import ErrorPage from 'dsm/pages/samples/error-page';
 
@@ -568,7 +567,6 @@ function getPlaywrightParticipantLastNamePrefix(study: StudyEnum): string {
       break;
     default:
       throw new Error(`${study} might not have end-to-end participants created using Playwright`);
-      break;
   }
   return prefix;
 }
@@ -594,7 +592,6 @@ async function prepareSentKit(shortID: string,
   const expectedKitTypes = [KitTypeEnum.SALIVA, KitTypeEnum.BLOOD]; //Studies used for the current test only have Saliva and Blood kits
   const testResultDirectory = testInfo.outputDir;
   let kitLabel = '';
-  let trackingLabel = '';
 
   //Deactivate existing kits
   const kitsWithoutLabelPage = await navigation.selectFromSamples<KitsWithoutLabelPage>(SamplesNavEnum.KITS_WITHOUT_LABELS);
@@ -669,7 +666,7 @@ async function prepareSentKit(shortID: string,
   //Both Saliva and Blood kits will now require a tracking label - see PEPPER-1249
   const trackingScanPage = await navigation.selectFromSamples<TrackingScanPage>(SamplesNavEnum.TRACKING_SCAN);
   await trackingScanPage.assertPageTitle();
-  trackingLabel = `tracking-${crypto.randomUUID().toString().substring(0, 10)}`;
+  const trackingLabel = `tracking-${crypto.randomUUID().toString().substring(0, 10)}`;
   await trackingScanPage.fillScanPairs([trackingLabel, kitLabel]);
   await trackingScanPage.save();
 

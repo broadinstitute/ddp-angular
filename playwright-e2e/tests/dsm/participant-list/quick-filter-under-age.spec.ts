@@ -5,8 +5,10 @@ import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import { QuickFiltersEnum } from 'dsm/component/filters/quick-filters';
 import { assertTableHeaders } from 'utils/assertion-helper';
 import { SortOrder } from 'dss/component/table';
+import { getDate } from 'utils/date-utils';
+import { shuffle } from 'utils/test-utils';
 
-test.describe('Participants Search', () => {
+test.describe.serial('Participants Search', () => {
   const studies = [StudyEnum.LMS, StudyEnum.OSTEO2, StudyEnum.PANCAN];
 
   for (const study of studies) {
@@ -24,10 +26,15 @@ test.describe('Participants Search', () => {
       assertTableHeaders(actualHeaderNames, orderedHeaderNames);
 
       await participantsTable.sort('Date of Majority', SortOrder.DESC);
-      const dateOfMajoritySample = await participantsTable.getRowText(0, 'Date of Majority');
-      const dateOfMajority = new Date(dateOfMajoritySample);
-      const today = new Date();
-      expect(dateOfMajority > today, `Date of Majority "${dateOfMajority}" is not greater than today's date "${today}"`).toBeTruthy();
+
+      // Randomize rows
+      const rowCount = await participantsTable.getRowsCount();
+      const rowIndex = shuffle([...Array(rowCount).keys()])[0];
+
+      const dateOfMajoritySample = await participantsTable.getRowText(rowIndex, 'Date of Majority');
+      const dateOfMajority = getDate(new Date(dateOfMajoritySample));
+      const today = getDate();
+      expect(dateOfMajority >= today, `Date of Majority "${dateOfMajority}" should be later than today's date "${today}"`).toBeTruthy();
     });
   }
 });

@@ -20,7 +20,7 @@ export default abstract class KitsPageBase extends DsmPageBase {
   private readonly receivedColumnIndex = 3;
   private readonly mfBarcodeIndex = 1;
 
-  constructor(readonly page: Page) {
+  protected constructor(readonly page: Page) {
     super(page);
     this.kitType = new KitType(this.page);
     this.kitsTable = new KitsTable(this.page);
@@ -133,10 +133,7 @@ export default abstract class KitsPageBase extends DsmPageBase {
       expect(this.kitsTable.tableLocator()).toBeVisible(),
     ]);
     const existsText = await pageText.isVisible();
-    if (existsText) {
-      return false;
-    }
-    return true;
+    return !existsText;
   }
 
   public async getSelectKitType(): Promise<KitTypeEnum | null> {
