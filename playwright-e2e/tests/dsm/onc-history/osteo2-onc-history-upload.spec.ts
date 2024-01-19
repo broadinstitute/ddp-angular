@@ -15,6 +15,7 @@ import { logInfo } from 'utils/log-utils';
 import { StudyNavEnum } from 'dsm/component/navigation/enums/studyNav-enum';
 import OncHistoryTable from 'dsm/component/tables/onc-history-table';
 import { generateAlphaNumeric, generateRandomPhoneNum } from 'utils/faker-utils';
+import { studyShortName } from 'utils/test-utils';
 
 test.describe('Upload Onc History', () => {
   // Upload feature is only available for Leiomyosarcoma and OS PE-CGS studies.
@@ -69,20 +70,19 @@ test.describe('Upload Onc History', () => {
       await searchPanel.open();
       await searchPanel.checkboxes('Status', { checkboxValues: ['Enrolled'] });
       await searchPanel.checkboxes(oncHistoryRequestStatusColumn, { checkboxValues: ['Request', 'Received'] });
-      const filterListResponse = await searchPanel.search();
 
       const rows = await participantListTable.rowsCount;
       expect(rows).toBeGreaterThanOrEqual(1);
 
       // Find the first participant that has DSM Participant ID. Short ID is random.
-      const responseJson = JSON.parse(await filterListResponse.text());
-      for (const i in responseJson.participants) {
-        const dsmParticipantId = responseJson.participants[i].esData.dsm.participant?.participantId;
-        if (dsmParticipantId !== undefined) {
-          shortId = responseJson.participants[i].esData.profile?.hruid;
-          break;
-        }
-      }
+      const basicStudyInfo = studyShortName(StudyEnum.OSTEO2);
+      const playwrightTestUserPrefix = basicStudyInfo.playwrightPrefixAdult as string;
+      shortId = await participantListPage.findParticipantWithTab({
+        findPediatricParticipant: false,
+        tab: TabEnum.ONC_HISTORY,
+        uriString: 'filterList',
+        prefix: playwrightTestUserPrefix
+      });
       expect(shortId).toBeTruthy();
       logInfo(`Participant Short ID: ${shortId}`);
 

@@ -213,11 +213,18 @@ export function assertParticipantListDownloadFileName(download: Download, study:
   expect(actualFileName.toLowerCase()).toBe(expectedFileName.toLowerCase());
 }
 
-export function studyShortName(study: StudyEnum): { shortName: string | null; realm: string | null; collaboratorPrefix: string | null} {
+export function studyShortName(study: StudyEnum): {
+  shortName: string | null;
+  realm: string | null;
+  collaboratorPrefix: string | null;
+  playwrightPrefixAdult: string | null;
+  playwrightPrefixChild: string | null} {
   const dsmEnv = getDsmEnv();
   let shortName = null;
   let realm = null;
   let collaboratorPrefix = null;
+  let playwrightPrefixAdult = null;
+  let playwrightPrefixChild = null;
   switch (study) {
     case StudyEnum.LMS:
       shortName = 'cmi-lms';
@@ -233,6 +240,8 @@ export function studyShortName(study: StudyEnum): { shortName: string | null; re
       shortName = 'cmi-osteo';
       realm = 'osteo2';
       collaboratorPrefix = 'OSPECGS';
+      playwrightPrefixAdult = 'OS';
+      playwrightPrefixChild = 'KidFirst';
       break;
     case StudyEnum.AT:
       shortName = 'AT';
@@ -275,7 +284,7 @@ export function studyShortName(study: StudyEnum): { shortName: string | null; re
     default:
       throw new Error(`Study ${study} is undefined.`);
   }
-  return { shortName, realm, collaboratorPrefix };
+  return { shortName, realm, collaboratorPrefix, playwrightPrefixAdult, playwrightPrefixChild };
 }
 
 export function isCMIStudy(study: StudyEnum): boolean {
