@@ -686,45 +686,17 @@ jobs:
             cat playwright-env/envvars | awk '{print "export " $0}' >> "$BASH_ENV"
             source $BASH_ENV
       - run:
+          command: |
+            set -u
+            .circleci/set-est-timezone.sh
+            source $BASH_ENV
+      - run:
+          command: |
+            cat /etc/timezone
+            timedatectl | grep “Time zone”
+      - run:
           name: Check current version of node
           command: node -v
-      - run:
-          working_directory: *playwright_path
-          command: npm ci
-      - run:
-          working_directory: *playwright_path
-          command: npx playwright install --with-deps chromium # Only need Chrome browser
-      - run:
-          name: Running Playwright tests on << parameters.env >>
-          working_directory: *playwright_path
-          command: |
-            if [ "<< parameters.test_suite >>" == "dss" ]
-            then
-              npx playwright test --list --project="dss" | grep -o 'tests/.*.spec.ts' | sort | uniq > e2e_tests.txt
-            elif [ "<< parameters.test_suite >>" == "dsm" ]
-            then
-              npx playwright test --list --project="dsm" | grep -o 'tests/.*.spec.ts' | sort | uniq > e2e_tests.txt
-            else
-              npx playwright test --list | grep -o 'tests/.*.spec.ts' | sort | uniq > e2e_tests.txt
-            fi
-
-            echo ""
-            TESTS_FILE=$(circleci tests split --split-by=timings --timings-type=classname e2e_tests.txt)
-            echo ${TESTS_FILE}
-            
-            npm run test:ci ${TESTS_FILE}
-          no_output_timeout: 10m
-      - store_test_results:
-          path: playwright-e2e/junit
-      - store_artifacts:
-          path: playwright-e2e/junit
-          destination: junit
-      - store_artifacts:
-          path: playwright-e2e/test-results
-          destination: test-results
-      - store_artifacts:
-          path: playwright-e2e/html-test-results
-          destination: html-test-results
 
   api-unit-test:
     description: Lint code and run api unit tests for sdk and toolkit
