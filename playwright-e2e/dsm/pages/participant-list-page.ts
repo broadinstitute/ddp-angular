@@ -234,11 +234,19 @@ export default class ParticipantListPage extends DsmPageBase {
     await waitForNoSpinner(this.page);
   }
 
+  /**
+   * Find a participant with the requested tab
+   * @param opts findPediatricParticipant - determines if an adult or child participant should be returned
+   * @param opts tab - the tab to be searched for e.g. onc history tab
+   * @param opts rgpProbandTab - determines if a rgp proband tab is being searched for
+   * @param opts uriString - the uri string to use when initially filtering for participants. Defaults to '/ui/applyFilter'
+   * @param opts prefix - the prefix or name of the test users to be used in the search e.g. E2E or KidFirst for playwright created participants. Defaults to 'E2E'
+   * @returns A participant with the requested tab
+   */
   async findParticipantWithTab(
-    opts: { findPediatricParticipant: boolean, tab?: TabEnum, rgpProbandTab?: boolean, uriString?: string }
+    opts: { findPediatricParticipant: boolean, tab?: TabEnum, rgpProbandTab?: boolean, uriString?: string, prefix?: string }
     ): Promise<string> {
-    const { findPediatricParticipant = false, tab, rgpProbandTab = false, uriString = '/ui/applyFilter' } = opts;
-
+    const { findPediatricParticipant = false, tab, rgpProbandTab = false, uriString = '/ui/applyFilter', prefix } = opts;
     const searchPanel = this.filters.searchPanel;
     await searchPanel.open();
     const applyFilterResponse = await searchPanel.search({ uri: uriString });
@@ -246,8 +254,15 @@ export default class ParticipantListPage extends DsmPageBase {
     let foundShortID = '';
     let unformattedFirstName = '';
     let firstName = '';
+    let testParticipantFirstName = '';
 
-    const testParticipantFirstName = findPediatricParticipant ? user.child.firstName : user.adult.firstName; //Make sure to return automated test pts only
+    if (prefix) {
+      //If the automated participants for a study use a different prefix or name set-up than E2E, search for them using this info
+      testParticipantFirstName = prefix;
+    } else {
+      testParticipantFirstName = findPediatricParticipant ? user.child.firstName : user.adult.firstName; //Make sure to return automated test pts only
+    }
+
     let responseJson = JSON.parse(await applyFilterResponse.text());
     const amountOfParticipantsDisplayed = responseJson.participants.length;
 
@@ -264,7 +279,8 @@ export default class ParticipantListPage extends DsmPageBase {
           }
           unformattedFirstName = JSON.stringify(value.esData.profile.firstName);
           firstName = unformattedFirstName.replace(/['"]+/g, ''); //Replace double quotes from JSON.stringify
-          if (medicalRecord && (firstName === testParticipantFirstName)) {
+          const participantID = value.participant.participantId; //Make sure when searching for onc history that the participant has a participantId in ES
+          if (medicalRecord && participantID && (firstName.includes(testParticipantFirstName))) {
             foundShortID = JSON.stringify(value.esData.profile.hruid).replace(/['"]+/g, '');
             logInfo(`Found the participant ${foundShortID} to have an onc history tab`);
             break;
