@@ -240,7 +240,7 @@ export default class ParticipantListPage extends DsmPageBase {
    * @param opts tab - the tab to be searched for e.g. onc history tab
    * @param opts rgpProbandTab - determines if a rgp proband tab is being searched for
    * @param opts uriString - the uri string to use when initially filtering for participants. Defaults to '/ui/applyFilter'
-   * @param opts prefix - the prefix or name of the test users to be used in the search e.g. E2E or KidFirst for playwright created participants
+   * @param opts prefix - the prefix or name of the test users to be used in the search e.g. E2E or KidFirst for playwright created participants. Defaults to 'E2E'
    * @returns A participant with the requested tab
    */
   async findParticipantWithTab(
