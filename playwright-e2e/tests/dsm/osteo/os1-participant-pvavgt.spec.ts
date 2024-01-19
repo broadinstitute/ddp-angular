@@ -73,7 +73,7 @@ test.describe.serial('Osteo1 Participant', () => {
         { mask: [ptLocator.locator('app-cohort-tag mat-form-field')] });
 
       // Check visible tabs
-      const expectedTabs = ['Survey Data', 'Medical Records', 'Onc History', 'First Medical Record Abstraction'];
+      const expectedTabs = ['Survey Data', 'Sample Information', 'Medical Records', 'Onc History', 'First Medical Record Abstraction'];
 
       const tabs = await page.locator('tabset a[role="tab"]').allInnerTexts();
       expect(tabs).toStrictEqual(expectedTabs);
