@@ -688,10 +688,14 @@ jobs:
             source $BASH_ENV
       - run:
           command: |
+            cat /etc/timezone
+            timedatectl | grep “Time zone”
+      - run:
+          command: |
             set -u
             pwd
             ls -al
-            .circleci/set-est-timezone.sh
+            echo "export TZ=America/New_York" >> $BASH_ENV
             source $BASH_ENV
       - run:
           command: |
