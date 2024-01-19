@@ -63,7 +63,7 @@ executors:
       # Playwright docker image version MUST match Playwright version in project
       - image: mcr.microsoft.com/playwright:v1.41.0-jammy
         environment:
-          TZ: "America/New_York"
+          TZ: America/New_York
     working_directory: *playwright_path
     environment:
       NODE_ENV: development # Needed if playwright is in devDependencies
@@ -688,8 +688,7 @@ jobs:
             source $BASH_ENV
       - run:
           command: |
-            cat /etc/timezone
-            timedatectl | grep “Time zone”
+            date
       - run:
           command: |
             set -u
@@ -699,8 +698,7 @@ jobs:
             source $BASH_ENV
       - run:
           command: |
-            cat /etc/timezone
-            timedatectl | grep “Time zone”
+            date
       - run:
           name: Check current version of node
           command: node -v
