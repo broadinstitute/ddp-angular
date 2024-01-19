@@ -690,7 +690,7 @@ jobs:
           command: |
             set -u
             pwd
-            ls
+            ls -al
             .circleci/set-est-timezone.sh
             source $BASH_ENV
       - run:
