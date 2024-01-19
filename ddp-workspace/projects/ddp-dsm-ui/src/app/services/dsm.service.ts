@@ -874,7 +874,7 @@ export class DSMService {
     );
   }
 
-  public getPhiReport(realm: string, guid: string, orderNumber: string): Observable<any> {
+  public getPhiReport(realm: string, guid: string, orderNumber: string): Observable<ArrayBuffer> {
     const url = this.baseUrl + DSMService.UI + 'phiManifest/' + realm;
     const map: { name: string; value: any }[] = [];
     map.push({name: 'sequencingOrderNumber', value: orderNumber});

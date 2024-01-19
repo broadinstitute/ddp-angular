@@ -83,7 +83,7 @@ export class PhiManifestComponent implements OnInit {
                     if (err._body === Auth.AUTHENTICATION_ERROR) {
                         this.auth.doLogout();
                     }
-                    this.errorMessage = 'Error - Failed to download report</b>' + err.error;
+                    this.errorMessage = 'Error - Failed to download report ' + err.error;
                     this.loading = false;
                 }
             });

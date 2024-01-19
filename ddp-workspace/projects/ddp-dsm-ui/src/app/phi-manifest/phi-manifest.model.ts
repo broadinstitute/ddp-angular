@@ -20,7 +20,7 @@ export class PhiManifestModel {
             json.clinicalOrderId, json.clinicalPdoNumber, json.orderStatus, json.orderStatusDate);
     }
 
-    public getReportAsMap(headers: string[], data: string[]): any {
+    public getReportAsMap(headers: string[], data: string[]): Map<string, string> {
       const map: Map<string, string> = new Map();
       for (let i = 0; i < headers.length; i++) {
         map[headers[i]] = data[i];
