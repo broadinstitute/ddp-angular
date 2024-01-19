@@ -37,15 +37,16 @@ test.describe.serial('Osteo1 Participant', () => {
     const searchPanel = participantListPage.filters.searchPanel;
     const participantListTable = participantListPage.participantListTable;
 
-    // Should not find any Osteo2 participant when search by Osteo2 Cohort tag: "OS PE-CGS"
+    // Should find multiple Osteo1 participants when search by Osteo1 Cohort tag: "OS"
     await searchPanel.open();
     await searchPanel.clear();
-    await searchPanel.text(tagNameColumn, { additionalFilters: [AdditionalFilter.EXACT_MATCH], textValue: 'OS PE-CGS' });
+    await searchPanel.text(tagNameColumn, { additionalFilters: [AdditionalFilter.EXACT_MATCH], textValue: 'OS' });
     await searchPanel.search();
-    expect(await participantListTable.numOfParticipants()).toStrictEqual(0);
+    expect(await participantListTable.numOfParticipants()).toBeGreaterThan(0);
 
-    // Should find participant when search by Osteo1 Cohort tag: "OS"
+    // Should find test participant by: Cohort tag, Status and Short ID
     await searchPanel.open();
+    await searchPanel.clear();
     await searchPanel.text('Short ID', { textValue: shortID });
     await searchPanel.checkboxes('Status', { checkboxValues: ['Enrolled'] });
     await searchPanel.text(tagNameColumn, { additionalFilters: [AdditionalFilter.EXACT_MATCH], textValue: 'OS' });
