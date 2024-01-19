@@ -1,5 +1,5 @@
-import {PhiManifestComponent} from "./phi-manifest.component";
-import {DSMService} from "../services/dsm.service";
+import {PhiManifestComponent} from './phi-manifest.component';
+import {DSMService} from '../services/dsm.service';
 
 describe('Component: PhiManifestComponent', () => {
   let component: PhiManifestComponent;
