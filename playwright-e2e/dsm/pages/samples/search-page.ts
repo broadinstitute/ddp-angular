@@ -59,8 +59,7 @@ export default class SearchPage extends KitsPageBase {
   async getKitCollectionDate(opts: {rowIndex?: number}): Promise<string> {
     const { rowIndex = 1 } = opts;
     const collectionDateField = this.page.locator(`//app-field-datepicker//input[${rowIndex}]`);
-    const collectionDate = (await collectionDateField.inputValue()).trim();
-    return collectionDate;
+    return (await collectionDateField.inputValue()).trim();
   }
 
   async setKitCollectionDate(opts: { dateField: Locator, collectionDate?: string, useTodayDate?: boolean }): Promise<void> {
@@ -77,13 +76,5 @@ export default class SearchPage extends KitsPageBase {
     const saveDateButton = dateField.locator(`//ancestor::app-field-datepicker//button[normalize-space()='Save Date']`);
     await expect(saveDateButton).toBeVisible();
     await saveDateButton.click();
-  }
-
-  /**
-   * Click Reload button
-   * @returns {Promise<void>}
-   */
-  async reload(): Promise<void> {
-    await this.page.locator('button', { hasText: 'Reload' }).click();
   }
 }

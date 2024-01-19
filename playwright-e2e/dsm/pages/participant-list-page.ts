@@ -234,12 +234,14 @@ export default class ParticipantListPage extends DsmPageBase {
     await waitForNoSpinner(this.page);
   }
 
-  async findParticipantWithTab(opts: { findPediatricParticipant: boolean, tab?: TabEnum, rgpProbandTab?: boolean }): Promise<string> {
-    const { findPediatricParticipant = false, tab, rgpProbandTab = false } = opts;
+  async findParticipantWithTab(
+    opts: { findPediatricParticipant: boolean, tab?: TabEnum, rgpProbandTab?: boolean, uriString?: string }
+    ): Promise<string> {
+    const { findPediatricParticipant = false, tab, rgpProbandTab = false, uriString = '/ui/applyFilter' } = opts;
 
     const searchPanel = this.filters.searchPanel;
     await searchPanel.open();
-    const applyFilterResponse = await searchPanel.search({ uri: '/ui/applyFilter' });
+    const applyFilterResponse = await searchPanel.search({ uri: uriString });
 
     let foundShortID = '';
     let unformattedFirstName = '';
@@ -256,8 +258,9 @@ export default class ParticipantListPage extends DsmPageBase {
         //Checking for the medical record tab allows catching those who do not yet have an onc history detail/row/data (but have the tab itself)
         if (tab === TabEnum.ONC_HISTORY) {
           const medicalRecord = value.medicalRecords[0];
-          if (medicalRecord === undefined) {
-            continue; //Participant does not have a Medical Record tab for some reason, skip them
+          const hasConsentedToTissue = value.esData.dsm.hasConsentedToTissueSample;
+          if (medicalRecord === undefined || hasConsentedToTissue === false) {
+            continue; //Participant does not have a Medical Record tab for some reason or has not consented to tissue samples (so tab should be there but no history should be entered), skip them
           }
           unformattedFirstName = JSON.stringify(value.esData.profile.firstName);
           firstName = unformattedFirstName.replace(/['"]+/g, ''); //Replace double quotes from JSON.stringify
@@ -268,7 +271,7 @@ export default class ParticipantListPage extends DsmPageBase {
           }
         }
 
-        if (rgpProbandTab === true) {
+        if (rgpProbandTab) {
           //If the participant has participantData, this seems to mean there's a proband tab in the account
           const participantData = value.participantData[0];
           if (participantData === undefined) {

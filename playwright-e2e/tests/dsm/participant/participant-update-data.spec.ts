@@ -6,21 +6,21 @@ import { logInfo } from 'utils/log-utils';
 import { faker } from '@faker-js/faker';
 import { MainInfoEnum } from 'dsm/pages/participant-page/enums/main-info-enum';
 import { AdditionalFilter, CustomViewColumns } from 'dsm/component/filters/sections/search/search-enums';
-import { waitForNoSpinner } from 'utils/test-utils';
+import { shuffle } from 'utils/test-utils';
 
-test.describe('Editing Participant Information', () => {
+test.describe.serial('Editing Participant Information', () => {
   const cmiClinicalStudies = [StudyEnum.LMS, StudyEnum.OSTEO2];
   const cmiResearchStudies = [StudyEnum.PANCAN];
   const chosenCMIStudies = cmiClinicalStudies.concat(cmiResearchStudies);
 
   for (const study of chosenCMIStudies) {
-    let shortID: string;
-    let firstName: string;
-    let newFirstName: string;
-    let newLastName: string;
-
     test(`Update First Name @dsm @${study}`, async ({page, request}) => {
       test.slow();
+
+      let shortID: string;
+      let firstName: string;
+      let newFirstName: string;
+      let newLastName: string;
 
       const participantListPage: ParticipantListPage = await ParticipantListPage.goto(page, study, request);
 
@@ -40,7 +40,10 @@ test.describe('Editing Participant Information', () => {
       // Open participant in the first row
       await participantListPage.waitForReady();
       const participantListTable = participantListPage.participantListTable;
-      const rowIndex = 0;
+      // Randomize rows
+      const rowCount = await participantListTable.getRowsCount();
+      const rowIndex = shuffle([...Array(rowCount).keys()])[0];
+
       let participantPage = await participantListTable.openParticipantPageAt(rowIndex);
 
       await test.step('Collect participant information before change', async () => {
@@ -65,16 +68,14 @@ test.describe('Editing Participant Information', () => {
         newLastName = faker.person.lastName();
         await participantPage.updateInput(MainInfoEnum.FIRST_NAME, newFirstName);
         await participantPage.updateInput(MainInfoEnum.LAST_NAME, newLastName);
-        await participantPage.backToList();
-        await participantListPage.waitForReady();
       });
 
       await test.step('Verify changed First Name and Last Name', async () => {
         await expect(async () => {
           await page.reload();
-          await waitForNoSpinner(page);
+          await participantListPage.waitForReady();
           await participantListPage.filterListByShortId(shortID);
-          participantPage = await participantListTable.openParticipantPageAt(rowIndex);
+          participantPage = await participantListTable.openParticipantPageAt(0);
           expect(await participantPage.getFirstName()).toEqual(newFirstName);
           expect(await participantPage.getLastName()).toEqual(newLastName);
         }).toPass({ timeout: 3.5 * 60 * 1000 });

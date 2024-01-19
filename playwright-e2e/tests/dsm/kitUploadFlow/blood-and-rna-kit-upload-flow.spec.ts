@@ -20,7 +20,6 @@ import KitsReceivedPage from 'dsm/pages/kitsInfo-pages/kitsReceived-page/kitsRec
 import TrackingScanPage from 'dsm/pages/scanner-pages/trackingScan-page';
 import RgpFinalScanPage from 'dsm/pages/scanner-pages/rgpFinalScan-page'
 import { simplifyShortID } from 'utils/faker-utils';
-import { saveParticipantGuid } from 'utils/faker-utils';
 import { ParticipantListTable } from 'dsm/component/tables/participant-list-table';
 import KitsQueuePage from 'dsm/pages/kitsInfo-pages/kit-queue-page';
 import ErrorPage from 'dsm/pages/samples/error-page';

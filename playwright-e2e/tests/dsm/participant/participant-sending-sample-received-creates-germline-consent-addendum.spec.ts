@@ -26,8 +26,8 @@ import KitsReceivedPage from 'dsm/pages/kitsInfo-pages/kitsReceived-page/kitsRec
 import { AdditionalFilter } from 'dsm/component/filters/sections/search/search-enums';
 import crypto from 'crypto';
 import { logInfo } from 'utils/log-utils';
-import { login } from 'authentication/auth-angio';
 import { waitForResponse } from 'utils/test-utils';
+import ErrorPage from 'dsm/pages/samples/error-page';
 
 test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
   const studies = [StudyEnum.LMS]; //Only clinical (pecgs) studies get this event
@@ -567,7 +567,6 @@ function getPlaywrightParticipantLastNamePrefix(study: StudyEnum): string {
       break;
     default:
       throw new Error(`${study} might not have end-to-end participants created using Playwright`);
-      break;
   }
   return prefix;
 }
@@ -593,7 +592,6 @@ async function prepareSentKit(shortID: string,
   const expectedKitTypes = [KitTypeEnum.SALIVA, KitTypeEnum.BLOOD]; //Studies used for the current test only have Saliva and Blood kits
   const testResultDirectory = testInfo.outputDir;
   let kitLabel = '';
-  let trackingLabel = '';
 
   //Deactivate existing kits
   const kitsWithoutLabelPage = await navigation.selectFromSamples<KitsWithoutLabelPage>(SamplesNavEnum.KITS_WITHOUT_LABELS);
@@ -604,6 +602,11 @@ async function prepareSentKit(shortID: string,
     await kitsWithoutLabelPage.assertReloadKitListBtn();
     await kitsWithoutLabelPage.deactivateAllKitsFor(shortID);
   }
+
+  const kitErrorPage = await navigation.selectFromSamples<ErrorPage>(SamplesNavEnum.ERROR);
+  await kitErrorPage.waitForReady();
+  await kitErrorPage.selectKitType(kitType);
+  await kitErrorPage.deactivateAllKitsFor(shortID);
 
   //Get first name and last name of the participant - Kit Upload checks that the names match the given short ids
   const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
@@ -619,7 +622,7 @@ async function prepareSentKit(shortID: string,
   const firstName = (await participantListTable.getParticipantDataAt(0, 'First Name')).trim();
   const lastName = (await participantListTable.getParticipantDataAt(0, 'Last Name')).trim();
 
-  //Upload saliva kit
+  //Upload saliva or blood kit
   const kitUploadInfo = new KitUploadInfo(shortID, firstName, lastName);
   kitUploadInfo.address.street1 = user.patient.streetAddress;
   kitUploadInfo.address.city = user.patient.city;
@@ -635,7 +638,7 @@ async function prepareSentKit(shortID: string,
   await kitUploadPage.assertUploadKitsBtn();
   await kitUploadPage.uploadFile(kitType, [kitUploadInfo], study, testResultDirectory);
 
-  //Check for kit in Kits w.o Label and get the shipping ID
+  //Check for kit in Kits without Label and get the shipping ID
   await navigation.selectFromSamples<KitsWithoutLabelPage>(SamplesNavEnum.KITS_WITHOUT_LABELS);
   await kitsWithoutLabelPage.waitForReady();
   await kitsWithoutLabelPage.selectKitType(kitType);
@@ -649,7 +652,7 @@ async function prepareSentKit(shortID: string,
   await kitsTable.searchByColumn(KitsColumnsEnum.SHORT_ID, shortID);
   await expect(kitsTable.rowLocator()).toHaveCount(1);
 
-  //Scan saliva kit in Initial Scan
+  //Scan saliva and blood kit in Initial Scan
   const initialScanPage = await navigation.selectFromSamples<InitialScanPage>(SamplesNavEnum.INITIAL_SCAN);
   await initialScanPage.assertPageTitle();
   if (kitType === KitTypeEnum.SALIVA) {
@@ -660,16 +663,14 @@ async function prepareSentKit(shortID: string,
   await initialScanPage.fillScanPairs([kitLabel, shortID]);
   await initialScanPage.save();
 
-  //If uploading a blood kit - make sure to also scan the kit in Tracking Scan page
-  if (kitType === KitTypeEnum.BLOOD) {
-    const trackingScanPage = await navigation.selectFromSamples<TrackingScanPage>(SamplesNavEnum.TRACKING_SCAN);
-    await trackingScanPage.assertPageTitle();
-    trackingLabel = `tracking-${crypto.randomUUID().toString().substring(0, 10)}`;
-    await trackingScanPage.fillScanPairs([trackingLabel, kitLabel]);
-    await trackingScanPage.save();
-  }
+  //Both Saliva and Blood kits will now require a tracking label - see PEPPER-1249
+  const trackingScanPage = await navigation.selectFromSamples<TrackingScanPage>(SamplesNavEnum.TRACKING_SCAN);
+  await trackingScanPage.assertPageTitle();
+  const trackingLabel = `tracking-${crypto.randomUUID().toString().substring(0, 10)}`;
+  await trackingScanPage.fillScanPairs([trackingLabel, kitLabel]);
+  await trackingScanPage.save();
 
-  //Scan saliva kit in Final Scan - which marks the kit as sent
+  //Scan kit in Final Scan - which marks the kit as sent
   const finalScanPage = await navigation.selectFromSamples<FinalScanPage>(SamplesNavEnum.FINAL_SCAN);
   await finalScanPage.assertPageTitle();
   await finalScanPage.fillScanPairs([kitLabel, shippingID]);
