@@ -653,6 +653,7 @@ jobs:
           paths:
             - playwright-env # dir which contains env-variables file
             - playwright-e2e
+            - .circleci
 
   playwright-test:
     # Run Playwright tests only for targeted env: Dev or Test.
