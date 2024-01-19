@@ -282,7 +282,7 @@ export default class ParticipantListPage extends DsmPageBase {
           const participantID = value.participant.participantId; //Make sure when searching for onc history that the participant has a participantId in ES
           if (medicalRecord && participantID && (firstName.includes(testParticipantFirstName))) {
             foundShortID = JSON.stringify(value.esData.profile.hruid).replace(/['"]+/g, '');
-            console.log(`Found the participant ${foundShortID} to have an onc history tab`);
+            logInfo(`Found the participant ${foundShortID} to have an onc history tab`);
             break;
           }
         }
