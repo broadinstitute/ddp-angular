@@ -81,7 +81,7 @@ Note: Update docker image version when upgrading Playwright version
   > cd playwright-e2e/
 
 - Start running Playwright docker image
-  > docker run -v $PWD:/e2e -w /e2e -it --rm --ipc=host -p 9323:9323 mcr.microsoft.com/playwright:v1.38.0-jammy /bin/bash
+  > docker run -v $PWD:/e2e -w /e2e -it --rm --ipc=host -p 9323:9323 mcr.microsoft.com/playwright:v1.41.0-jammy /bin/bash
 
 - Install dependencies inside docker container
   > npm install
@@ -163,8 +163,8 @@ By default, all tests will run in headless mode.
 
 ### Test Development Tips
 
-- To skip a test if env is Test, add a `test.skip` condition inside the `test.describe` block.
-  > `test.skip(process.env.ENV?.indexOf('test') !== -1);`
+- To skip a DSM test if env is not Test, add a `test.skip` condition inside the `test.describe` block.
+  > `test.skip(DSM_BASE_URL === undefined || (DSM_BASE_URL as string).indexOf('test') === -1);`
 
 - For a click action that initiate page navigation, it's a good practice to wait for `navigation` and `load` events.
   - For an example, below is a function that clicks the `submit` button and waits for events.
