@@ -74,7 +74,7 @@ test.describe('Upload Onc History', () => {
       const rows = await participantListTable.rowsCount;
       expect(rows).toBeGreaterThanOrEqual(1);
 
-      // Find the first participant that has DSM Participant ID. Short ID is random.
+      // Find the first participant that has DSM and ES Participant ID.
       const basicStudyInfo = studyShortName(StudyEnum.OSTEO2);
       const playwrightTestUserPrefix = basicStudyInfo.playwrightPrefixAdult as string;
       shortId = await participantListPage.findParticipantWithTab({
