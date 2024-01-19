@@ -688,6 +688,8 @@ jobs:
       - run:
           command: |
             set -u
+            pwd
+            ls
             ../.circleci/set-est-timezone.sh
             source $BASH_ENV
       - run:
