@@ -66,6 +66,7 @@ executors:
           TZ: America/New_York
     working_directory: *playwright_path
     environment:
+      TZ: America/New_York
       NODE_ENV: development # Needed if playwright is in devDependencies
 
 commands:
