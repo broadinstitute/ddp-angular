@@ -34,7 +34,7 @@ test.describe.serial('Participants Search', () => {
       const dateOfMajoritySample = await participantsTable.getRowText(rowIndex, 'Date of Majority');
       const dateOfMajority = getDate(new Date(dateOfMajoritySample));
       const today = getDate();
-      expect(dateOfMajority >= today, `Date of Majority "${dateOfMajority}" should be later than today's date "${today}"`).toBeTruthy();
+      expect(new Date(dateOfMajority) >= new Date(today)).toBeTruthy();
     });
   }
 });
