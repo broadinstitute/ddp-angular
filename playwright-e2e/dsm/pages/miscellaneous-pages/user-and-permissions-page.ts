@@ -14,10 +14,12 @@ export default class UserPermissionPage {
   private DARWIN_ARK_STUDY_GROUP = 'darwin';
   private currentStudyPermissions: UserPermission[];
   private readonly page: Page;
+  private readonly root: Locator;
 
   constructor(page: Page) {
     this.page = page;
     this.currentStudyPermissions = [];
+    this.root = this.page.locator('app-users-and-permissions');
   }
 
   /* Locators */
@@ -26,7 +28,8 @@ export default class UserPermissionPage {
   }
 
   public getStudyAdmin(email: string): Locator {
-    return this.page.getByText(`${email}`);
+    return this.root.locator('app-list-users app-administration-user', { hasText: new RegExp(email) });
+    // return this.page.getByText(`${email}`);
   }
 
   public getComparePermissionsButton(studyAdmin: Locator): Locator {
@@ -51,6 +54,17 @@ export default class UserPermissionPage {
 
   public getDiscardChangesButton(studyAdmin: Locator) {
     return studyAdmin.locator(`//ancestor::mat-expansion-panel//button[contains(., 'Discard changes')]`);
+  }
+
+  public async expandPanel(email: string): Promise<void> {
+    const user = this.getStudyAdmin(email);
+    try {
+      await user.scrollIntoViewIfNeeded();
+    } catch (err) {
+      // ignore
+    }
+    await user.click();
+    await expect(user.locator('[role="region"]')).toBeVisible();
   }
 
   /* Assertions */

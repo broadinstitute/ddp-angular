@@ -31,6 +31,13 @@ export dsmUser4Password=$(vault read --format=json secret/pepper/test/v1/e2e | j
 echo "export DSM_USER4_PASSWORD=$dsmUser4Password" >> playwright-env/envvars
 echo "export DSM_USER4_EMAIL=$dsmUser4" >> playwright-env/envvars
 
+# Additional DSM User (mr-view-permission.spec)
+export dsmUser5=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[] | select(.app==\"dsm\") | .users[4] | .userName")
+export dsmUser5Password=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[] | select(.app==\"dsm\") | .users[4] | .password")
+echo "export DSM_USER5_PASSWORD=$dsmUser5Password" >> playwright-env/envvars
+echo "export DSM_USER5_EMAIL=$dsmUser5" >> playwright-env/envvars
+
+
 # RGP
 export rgpUser=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[] | select(.app==\"rgp\") | .userName")
 export rgpUserPassword=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[] | select(.app==\"rgp\") | .password")

@@ -40,7 +40,7 @@ export default class Tabs {
     return clas ? clas.includes('active') : false;
   }
 
-  private async open(tabName: TabEnum): Promise<void> {
+  public async open(tabName: TabEnum): Promise<void> {
     await expect(async () => {
       if (!(await this.isOpen(tabName))) {
         await this.tabLocator(tabName).click();
