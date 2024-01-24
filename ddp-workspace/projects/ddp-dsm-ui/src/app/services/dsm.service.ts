@@ -10,7 +10,6 @@ import { ViewFilter } from '../filter-column/models/view-filter.model';
 import { Abstraction } from '../medical-record-abstraction/model/medical-record-abstraction.model';
 import { OncHistoryDetail } from '../onc-history-detail/onc-history-detail.model';
 import { PDFModel } from '../pdf-download/pdf-download.model';
-import { Statics } from '../utils/statics';
 import { Value } from '../utils/value.model';
 import { ComponentService } from './component.service';
 import { RoleService } from './role.service';
@@ -873,6 +872,15 @@ export class DSMService {
     return this.http.get(url, this.buildHeader()).pipe(
       catchError(this.handleError)
     );
+  }
+
+  public getPhiReport(realm: string, guid: string, orderNumber: string): Observable<ArrayBuffer> {
+    const url = this.baseUrl + DSMService.UI + 'phiManifest/' + realm;
+    const map: { name: string; value: any }[] = [];
+    map.push({name: 'sequencingOrderNumber', value: orderNumber});
+    map.push({name: 'ddpParticipantId', value: guid});
+    map.push({name: 'userId', value: this.role.userID()});
+    return this.http.get(url, this.buildQueryHeader(map)).pipe(catchError(this.handleError));
   }
 
   public getSurveyStatus(realm: string, survey: string): Observable<any> {

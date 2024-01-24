@@ -18,7 +18,7 @@ import {studyNameEnum} from '../enums/studyNameEnum';
 export class NavigationComponent implements OnInit {
 
   selectedStudy: Observable<string>;
-  readonly oncHistoryUploadPageAllowedStudies: string[] =
+  readonly pecgsFeaturesAllowedStudies: string[] =
     [studyNameEnum.OC_PE_CGS, studyNameEnum.LMS];
 
 
@@ -48,8 +48,8 @@ export class NavigationComponent implements OnInit {
 
   }
 
-  public showOncHistoryUploadPage(selectedStudy: string | null): boolean {
-    return selectedStudy && this.oncHistoryUploadPageAllowedStudies.includes(selectedStudy);
+  public shouldShowPecgsFeatures(selectedStudy: string | null): boolean {
+    return selectedStudy && this.pecgsFeaturesAllowedStudies.includes(selectedStudy);
   }
 
   selectRealm(realmName, realmValue): void {

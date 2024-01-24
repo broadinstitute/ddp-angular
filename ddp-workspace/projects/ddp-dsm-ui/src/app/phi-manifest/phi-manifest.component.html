@@ -1,0 +1,48 @@
+<h1> PHI Manifest Download </h1>
+
+<div *ngIf="errorMessage != null">
+  <h3 class="Color--warn Line--Break">{{errorMessage}}</h3>
+  <br/>
+</div>
+<div *ngIf="additionalMessage != null">
+  <h4 class="Color--primary Line--Break">{{additionalMessage}}</h4>
+  <br/>
+</div>
+
+<span [hidden]="!loading" class="Width--100">
+    <div align="center" class="Width--100 Height--100">
+      <i class="fas fa-spinner fa-spin fa-5x Color--primary"></i>
+    </div>
+  </span>
+
+<div *ngIf="allowedToSeeInformation">
+  <div *ngIf="realm != null" class="Float--left Width--80">
+    <div>
+      <mat-form-field>
+        <input matInput type="text" [(ngModel)]="participantId" placeholder="Participant GUID" maxlength="200" style="width: 15cm">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput type="text" [(ngModel)]="sequencingOrderId" placeholder="Sequencing Order Id" maxlength="200" style="width: 15cm">
+      </mat-form-field>
+
+      <button mat-raised-button type="button" color="primary"
+              (click)="downloadPhiReport()"
+              [disabled]="participantId == null || sequencingOrderId == null ">Create PHI Report</button>
+    </div>
+    <div>
+      <p><b>To generate a Phi report:</b></p>
+      <ol class="instructions_list">
+        <li>Enter the Participant ID above (Note: This is their 20 character Internal Participant ID found on their
+          individual participant page, not their 6 character Short ID)</li>
+        <li>Enter the Sequencing Order ID, which can be found on the Sequencing Orders tab of the participant page, or
+          under the Samples menu  > Clinical Orders page”
+        </li>
+        <li>Click the "Create PHI Report" button</li>
+      </ol>
+    </div>
+    <br/>
+    <br/>
+    <br/>
+  </div>
+
+</div>

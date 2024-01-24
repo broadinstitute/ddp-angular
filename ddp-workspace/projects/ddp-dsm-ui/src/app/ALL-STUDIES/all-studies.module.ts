@@ -152,6 +152,7 @@ import {
   UsersAndPermissionsCanActivateGuard,
   UsersAndPermissionsCanLoadGuard
 } from '../guards/usersAndPermissions.guard';
+import {PhiManifestComponent} from '../phi-manifest/phi-manifest.component';
 
 
 PlotlyModule.plotlyjs = PlotlyJS;
@@ -253,7 +254,8 @@ PlotlyModule.plotlyjs = PlotlyJS;
     UploadFileComponent,
     FilesTableComponent,
     ConfirmationModalComponent,
-    OncHistoryUploadComponent
+    OncHistoryUploadComponent,
+    PhiManifestComponent
   ],
   imports: [
     CommonModule,
