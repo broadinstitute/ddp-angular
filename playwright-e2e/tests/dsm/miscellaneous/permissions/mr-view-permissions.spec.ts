@@ -18,8 +18,8 @@ import { logInfo } from 'utils/log-utils';
 const {
   OSTEO_USER_EMAIL,
   PANCAN_USER_EMAIL,
-  DSM_USER_EMAIL,
-  DSM_USER_PASSWORD,
+  DSM_USER1_EMAIL,
+  DSM_USER1_PASSWORD,
   DSM_USER5_EMAIL,
   DSM_USER5_PASSWORD,
 } = process.env;
@@ -30,7 +30,7 @@ test.describe.serial('View Medical Records Permission', () => {
 
   for (const [i, study] of studies.entries()) {
     test(`@${study}: Login as Hunter to verify test user has the right permissions selected`, async ({ page, request }) => {
-      await login(page, { email: DSM_USER_EMAIL, password: DSM_USER_PASSWORD });
+      await login(page, { email: DSM_USER1_EMAIL, password: DSM_USER1_PASSWORD });
       await new Select(page, { label: 'Select study' }).selectOption(study);
       await new Navigation(page, request).selectMiscellaneous(MiscellaneousEnum.USERS_AND_PERMISSIONS);
 
@@ -85,7 +85,7 @@ test.describe.serial('View Medical Records Permission', () => {
         const visibleTabs = page.locator('tabset a[role="tab"]');
         const tabNames = await visibleTabs.allInnerTexts();
         expect(tabNames).toStrictEqual(expectedTabs);
-        // All tab is enabled
+        // All tabs are enabled
         for (const tabName of tabNames) {
           const tab = new Tabs(page);
           await tab.open(tabName as TabEnum);
