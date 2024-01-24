@@ -2,10 +2,10 @@ import { Page, expect } from '@playwright/test';
 import { waitForNoSpinner } from 'utils/test-utils';
 import { fillInEmailPassword } from './auth-base';
 
-const { DSM_USER_EMAIL, DSM_USER_PASSWORD, DSM_BASE_URL } = process.env;
+const { DSM_USER1_EMAIL, DSM_USER1_PASSWORD, DSM_BASE_URL } = process.env;
 
 export async function login(page: Page, opts: { email?: string; password?: string } = {}): Promise<void> {
-  const { email = DSM_USER_EMAIL, password = DSM_USER_PASSWORD } = opts;
+  const { email = DSM_USER1_EMAIL, password = DSM_USER1_PASSWORD } = opts;
 
   const assertLoggedIn = async (page: Page): Promise<void> => {
     await expect(page.locator('.auth0-loading')).toBeHidden({timeout: 50 * 1000});
