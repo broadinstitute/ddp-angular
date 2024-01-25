@@ -5,7 +5,7 @@ import { fillInEmailPassword } from './auth-base';
 const { DSM_USER1_EMAIL, DSM_USER1_PASSWORD, DSM_BASE_URL } = process.env;
 
 export async function login(page: Page, opts: { email?: string; password?: string } = {}): Promise<void> {
-  const { email = DSM_USER1_EMAIL, password = DSM_USER1_PASSWORD } = opts;
+  const { email = DSM_USER1_EMAIL, password = DSM_USER1_PASSWORD } = opts; // Hunter Stormreaver
 
   const assertLoggedIn = async (page: Page): Promise<void> => {
     await expect(page.locator('.auth0-loading')).toBeHidden({timeout: 50 * 1000});
