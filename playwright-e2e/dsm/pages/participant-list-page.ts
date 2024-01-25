@@ -408,9 +408,10 @@ export default class ParticipantListPage extends DsmPageBase {
     const { value, nth = 0 } = opts;
 
     const compareForMatch = async (index: number): Promise<number> => {
+      console.log('\n\n');
       const columnText = await participantListTable.getTextAt(index, columnName);
       if (value) {
-        return columnText.some(text => text.indexOf(value) !== -1) ? index : -1;
+        return columnText.some(text => text.trim().length > 0 && new RegExp(value, 'i').test(text.trim())) ? index : -1;
       }
       return columnText.length === 1 && columnText[0].trim().length === 0 ? index : -1;
     };

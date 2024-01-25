@@ -12,6 +12,7 @@ import Tabs from 'dsm/component/tabs/tabs';
 import { UserPermission } from 'dsm/pages/miscellaneous-pages/enums/userPermission-enum';
 import UserPermissionPage from 'dsm/pages/miscellaneous-pages/user-and-permissions-page';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
+import { MainInfoEnum } from 'dsm/pages/participant-page/enums/main-info-enum';
 import Select from 'dss/component/select';
 import { logInfo } from 'utils/log-utils';
 
@@ -24,7 +25,7 @@ const {
   DSM_USER5_PASSWORD,
 } = process.env;
 
-test.describe.serial('View Medical Records Permission', () => {
+test.describe.serial('Medical Records View Permission', () => {
   const studies = [StudyEnum.OSTEO2, StudyEnum.PANCAN];
   const emails = [OSTEO_USER_EMAIL as string, PANCAN_USER_EMAIL as string];
 
@@ -54,37 +55,45 @@ test.describe.serial('View Medical Records Permission', () => {
 
       const navigation = new Navigation(page, request);
 
-      await test.step('Verify user only see the Selected Study and Study menus', async () => {
+      await test.step('Verify user see only Selected Study and Study menus', async () => {
+        // Visible Navigation menus user allowed to see
         const expectedNavigationMenus = [MainMenuEnum.SELECTED_STUDY, MainMenuEnum.STUDY];
         const visibleNavigationMenus = await navigation.getDisplayedMainMenu();
         expect(visibleNavigationMenus).toMatchObject(expectedNavigationMenus);
 
+        // Visible Study menu options user allowed to see
         const expectedStudyMenuOptions = [
           StudyNavEnum.DASHBOARD,
           StudyNavEnum.PARTICIPANT_LIST,
           StudyNavEnum.TISSUE_LIST,
         ];
-        const studyMenu = new Dropdown(page, 'Study');
+        const studyMenu = new Dropdown(page, MainMenuEnum.STUDY);
         const visibleMenuOptions = await studyMenu.getDisplayedOptions<StudyNavEnum>();
         expect(visibleMenuOptions).toMatchObject(expectedStudyMenuOptions);
       });
 
-      await test.step('Verify user can see all avialable medical records tabs in Participant page', async () => {
+      await test.step('Verify user see only avialable medical records tabs in Participant page', async () => {
         const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
         await participantListPage.waitForReady();
 
         // Find participant created by Playwright DSS test
-        const rowIndex = await participantListPage.findParticipantFor(CustomViewColumns.PARTICIPANT, 'Email', {value: emails[i] });
+        const rowIndex = await participantListPage.findParticipantFor(CustomViewColumns.PARTICIPANT, 'Email', {value: emails[i].split('@')[0] });
         const participantListTable = participantListPage.participantListTable;
-        const shortId = await participantListTable.getParticipantDataAt(rowIndex, 'Short ID');
-        logInfo(`Participant Short ID: ${shortId}`);
+        const shortId = await participantListTable.getParticipantDataAt(rowIndex, MainInfoEnum.SHORT_ID);
+        logInfo(`${study} Participant Short ID: ${shortId}`);
 
-        // Open Participant page to verify visible tabs
+        // Open Participant page, user is able to see all tabs
         await participantListTable.openParticipantPageAt(rowIndex);
-        const expectedTabs = ['Survey Data', 'Sample Information', 'Contact Information', 'Medical Records', 'Onc History'];
+        const expectedTabs = [
+          TabEnum.SURVEY_DATA,
+          TabEnum.SAMPLE_INFORMATION,
+          TabEnum.CONTACT_INFORMATION,
+          TabEnum.MEDICAL_RECORD,
+          TabEnum.ONC_HISTORY,
+        ];
         const visibleTabs = page.locator('tabset a[role="tab"]');
         const tabNames = await visibleTabs.allInnerTexts();
-        expect(tabNames).toStrictEqual(expectedTabs);
+        expect(tabNames).toStrictEqual(study === StudyEnum.OSTEO2 ? expectedTabs.concat([TabEnum.INVITAE]) : expectedTabs);
         // All tabs are enabled
         for (const tabName of tabNames) {
           const tab = new Tabs(page);

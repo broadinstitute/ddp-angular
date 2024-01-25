@@ -28,7 +28,7 @@ export default class UserPermissionPage {
   }
 
   public getStudyAdmin(email: string): Locator {
-    return this.root.locator('app-list-users app-administration-user', { hasText: new RegExp(email) });
+    return this.root.locator('app-list-users app-administration-user', { hasText: new RegExp(email, 'i') });
     // return this.page.getByText(`${email}`);
   }
 
@@ -89,16 +89,16 @@ export default class UserPermissionPage {
     const studyAdmin = this.getStudyAdmin(email);
 
     //Verify the email is as expected
-    const studyAdminEmail = await studyAdmin.innerText();
+    const studyAdminEmail = await this.getStudyEmail(studyAdmin);
     expect(studyAdminEmail.toLowerCase()).toBe(email.toLowerCase());
 
     //Verify the name is as expected
-    const studyAdminName = await this.getStudyAdminName(name);
+    const studyAdminName = await this.getStudyAdminName(studyAdmin);
     expect(studyAdminName).toBe(name);
 
     if (phone) {
       //Verify the given phone number is displayed in the study admin's permission block as expected
-      const studyAdminPhoneNumber = await this.getStudyAdminPhoneNumber(phone);
+      const studyAdminPhoneNumber = await this.getStudyAdminPhoneNumber(studyAdmin);
       expect(studyAdminPhoneNumber).toBe(phone);
     }
   }
@@ -108,7 +108,6 @@ export default class UserPermissionPage {
     const studyAdmin = this.getStudyAdmin(email);
     const allPossiblePermissions = await this.getPermissionsSection(studyAdmin);
     const amountOfPermissions = allPossiblePermissions.length;
-    console.log(`Amount of permissions: ${amountOfPermissions}`);
 
     for (let index = 0; index < amountOfPermissions; index++) {
       const permissionCheckbox = allPossiblePermissions[index];
@@ -123,11 +122,14 @@ export default class UserPermissionPage {
   }
 
   public async assertSelectedPermissions(studyAdmin: Locator, permissions: UserPermission[]): Promise<void> {
-    const amountOfPermissionstoCheckFor = permissions.length;
-
-    for (let index = 0; index < amountOfPermissionstoCheckFor; index++) {
-      const checkbox = this.getPermissionCheckbox(studyAdmin, permissions[index]);
-      await expect(checkbox).toBeChecked();
+    const allPermissions = await this.getPermissionsSection(studyAdmin);
+    for (let i = 0; i < allPermissions.length; i++) {
+      const permission = allPermissions[i];
+      const [match] = permissions.filter(async p => p === (await permission.innerText()).trim());
+      if (match) {
+        const checkbox = this.getPermissionCheckbox(studyAdmin, match);
+        await expect(checkbox).toBeChecked({timeout: 2000});
+      }
     }
   }
 
@@ -139,14 +141,19 @@ export default class UserPermissionPage {
     return studyAdmin.locator(`//ancestor::mat-expansion-panel//app-permission-checkbox[normalize-space()="${permissionName}"]//input`);
   }
 
-  public async getStudyAdminName(name: string): Promise<string> {
-    const studyAdminName = this.page.getByText(`${name}`);
-    return studyAdminName.innerText();
+  public async getStudyEmail(studyAdmin: Locator): Promise<string> {
+    const title = studyAdmin.locator('mat-panel-title');
+    return (await title.innerText()).trim();
   }
 
-  public async getStudyAdminPhoneNumber(phoneNumber: string): Promise<string> {
-    const studyAdminPhoneNumber = this.page.getByText(`${phoneNumber}`);
-    return studyAdminPhoneNumber.innerText();
+  public async getStudyAdminName(studyAdmin: Locator): Promise<string> {
+    const name = studyAdmin.locator('mat-panel-description .header-text-inputs-name');
+    return (await name.innerText()).trim();
+  }
+
+  public async getStudyAdminPhoneNumber(studyAdmin: Locator): Promise<string> {
+    const name = studyAdmin.locator('mat-panel-description .header-text-inputs-phone');
+    return (await name.innerText()).trim();
   }
 
   /**

@@ -65,9 +65,14 @@ If you don't want to use the `.env` file, you can also specify environment varia
 > process.env.DSM_USER5_EMAIL: Eli.Stormreaver@test.firecloud.org
 >
 >  ![Eli Stormreaver screenshot](data/readme/eli_stormreaver.png)
->
 
-> 
+> process.env.DSM_USER6_EMAIL: Paisley.Whiteclaw@test.firecloud.org
+>
+>  ![Paisley Whiteclaw screenshot](data/readme/paisley_whiteclaw.png)
+
+> process.env.DSM_USER7_EMAIL: Noah.Shadowmoon@test.firecloud.org
+>
+>  ![Noah Shadowmoon screenshot](data/readme/noah_shadowmoon.png)
 
 
 
