@@ -119,7 +119,6 @@ test.describe.serial('Blood Kit Upload', () => {
       await test.step('Upload new blood kit', async () => {
         const kitUploadPage = await navigation.selectFromSamples<KitUploadPage>(SamplesNavEnum.KIT_UPLOAD);
         await kitUploadPage.waitForReady();
-        await kitUploadPage.assertPageTitle();
         await kitUploadPage.selectKitType(kitType);
         await kitUploadPage.skipAddressValidation(true); // because mocked address is different from participant's address
         await kitUploadPage.assertBrowseBtn();

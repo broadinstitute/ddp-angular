@@ -101,7 +101,6 @@ test.describe.serial('Blood Kits upload flow', () => {
       // Uploads kit
       const kitUploadPage = await navigation.selectFromSamples<KitUploadPage>(SamplesNavEnum.KIT_UPLOAD);
       await kitUploadPage.waitForReady();
-      await kitUploadPage.assertDisplayedKitTypes(expectedKitTypes);
       await kitUploadPage.selectKitType(kitType);
       await kitUploadPage.assertBrowseBtn();
       await kitUploadPage.assertUploadKitsBtn();

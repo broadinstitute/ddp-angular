@@ -40,9 +40,8 @@ test.describe.serial('Join Pancan Mailing List', () => {
     await login(page);
 
     const welcomePage = new WelcomePage(page);
-    await welcomePage.selectStudy(StudyEnum.PANCAN);
-
     const navigation = new Navigation(page, request);
+    await welcomePage.selectStudy(StudyEnum.PANCAN);
     const [mailListResponse] = await Promise.all([
       page.waitForResponse(response => response.url().includes('/ui/mailingList/PanCan') && response.status() === 200),
       navigation.selectMiscellaneous(MiscellaneousEnum.MAILING_LIST)

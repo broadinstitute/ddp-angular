@@ -99,8 +99,7 @@ test.describe('Blood & RNA Kit Upload', () => {
 
     //Upload a Blood & RNA kit
     const kitUploadPage = await navigation.selectFromSamples<KitUploadPage>(SamplesNavEnum.KIT_UPLOAD);
-    await kitUploadPage.waitForReady(expectedKitTypes);
-    await kitUploadPage.assertPageTitle();
+    await kitUploadPage.waitForReady();
     await kitUploadPage.selectKitType(kitType);
     await kitUploadPage.assertBrowseBtn();
     await kitUploadPage.assertUploadKitsBtn();

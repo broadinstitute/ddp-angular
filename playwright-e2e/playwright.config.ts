@@ -45,7 +45,7 @@ const testConfig: PlaywrightTestConfig = {
   forbidOnly: !!CI,
   retries: CI ? 1 : 0,
   workers: CI ? 1 : 2,
-  maxFailures: 0,
+  maxFailures: CI ? 5 : 3,
 
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: [

@@ -1,4 +1,5 @@
 import { test as base } from '@playwright/test';
+import { logInfo } from 'utils/log-utils';
 
 /*
  * Intercept and abort all Google analytics "https://www.google-analytics.com/*" and facebook requests because
@@ -17,6 +18,12 @@ export const fixtureBase = base.extend({
   page: async ({ page }, use) => {
     await page.route('**/*', async (route) => {
       return REQUEST_EXCLUDES.some((urlPart) => route.request().url().includes(urlPart)) ? route.abort() : route.continue();
+    });
+    // Listen for all console events and log errors to the Terminal window
+    page.on('console', msg => {
+      if (msg.type() === 'error') {
+        logInfo(`Browser Console Error: "${msg.text()}"`);
+      }
     });
     await use(page);
   }

@@ -1,7 +1,7 @@
 import {APIRequestContext, Locator, Page, expect} from '@playwright/test';
 import Dropdown from 'dsm/component/dropdown';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
-import { waitForNoSpinner } from 'utils/test-utils';
+import { waitForNoSpinner, waitForResponse } from 'utils/test-utils';
 import {MainMenuEnum} from 'dsm/component/navigation/enums/mainMenu-enum';
 import {StudyNavEnum} from 'dsm/component/navigation/enums/studyNav-enum';
 import {StudyEnum} from 'dsm/component/navigation/enums/selectStudyNav-enum';
@@ -92,7 +92,10 @@ export class Navigation {
   }
 
   private async selectFrom(from: MainMenuEnum, selection: Selection): Promise<void> {
-    await new Dropdown(this.page, from).selectOption(selection);
+    await Promise.all([
+      waitForResponse(this.page, { uri: '/realmsAllowed' }),
+      new Dropdown(this.page, from).selectOption(selection),
+    ]);
     await waitForNoSpinner(this.page);
   }
 }
