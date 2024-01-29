@@ -86,13 +86,13 @@ const testConfig: PlaywrightTestConfig = {
     /* Base URL to use in actions like `await page.goto('/')`. */
     // baseURL: 'http://localhost:3000',
 
-    /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-    trace: 'retain-on-failure',
+    /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer#using-traceplaywrightdev */
+    trace: CI ? 'on-all-retries' : 'retain-on-failure', // https://playwright.dev/docs/trace-viewer#recording-a-trace-on-ci
     screenshot: {
       mode: 'only-on-failure',
       fullPage: true
     },
-    video: 'retain-on-failure',
+    video: CI ? 'on-first-retry' : 'retain-on-failure', // https://playwright.dev/docs/videos#record-video
   },
 
   /* Configure projects for chromium browser */

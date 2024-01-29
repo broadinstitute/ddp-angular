@@ -1,4 +1,4 @@
-import { Page } from '@playwright/test';
+import { Page, expect } from '@playwright/test';
 import { generateEmailAlias } from 'utils/faker-utils';
 import { logInfo } from 'utils/log-utils';
 
@@ -14,23 +14,28 @@ export async function fillInEmailPassword(
 ): Promise<void> {
   const { email, password, waitForNavigation = true, waitForAuth = true } = opts;
 
-  await Promise.race<boolean>([
-    page.locator('#signUpForm').isVisible(),
-    page.locator('.auth0-lock-header-welcome').isVisible()
+  const emailInput = page.locator('input[type="email"]').locator('visible=true');
+  const passwordInput = page.locator('input[type="password"]').locator('visible=true');
+  const notYourAcctLink = page.locator('.auth0-lock-alternative-link:has-text("Not your account")');
+
+  await Promise.race([
+    notYourAcctLink.waitFor({ state: 'visible', timeout: 10000 }),
+    emailInput.waitFor({ state: 'visible', timeout: 10000 }),
   ]);
 
-  const auth0Visible = await page.locator('.auth0-lock-header-welcome').isVisible({ timeout: 500 });
-  if (auth0Visible) {
-    const notYourAcctLink = page.locator('#auth0-lock-container-1 .auth0-lock-alternative-link:has-text("Not your account")');
-    try {
-      await notYourAcctLink.click({ timeout: 500 });
-    } catch (err) {
-      // ignored
+  try {
+    const existLink = await notYourAcctLink.isVisible();
+    if (existLink) {
+      await notYourAcctLink.click();
     }
+  } catch (e) {
+    console.error(e);
   }
 
-  const emailInput = page.locator('input[type="email"]:visible');
-  const passwordInput = page.locator('input[type="password"]:visible');
+  await Promise.all([
+    expect(emailInput).toBeVisible(),
+    expect(passwordInput).toBeVisible(),
+  ]);
 
   await emailInput.fill(email);
   await passwordInput.fill(password);

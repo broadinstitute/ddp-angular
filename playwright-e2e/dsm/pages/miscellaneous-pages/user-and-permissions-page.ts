@@ -122,23 +122,21 @@ export default class UserPermissionPage {
   }
 
   public async assertSelectedPermissions(studyAdmin: Locator, permissions: UserPermission[]): Promise<void> {
-    const allPermissions = await this.getPermissionsSection(studyAdmin);
-    for (let i = 0; i < allPermissions.length; i++) {
-      const permission = allPermissions[i];
-      const [match] = permissions.filter(async p => p === (await permission.innerText()).trim());
-      if (match) {
-        const checkbox = this.getPermissionCheckbox(studyAdmin, match);
-        await expect(checkbox).toBeChecked({timeout: 2000});
-      }
+    expect(permissions.length > 0).toBe(true);
+
+    for (let i = 0; i < permissions.length; i++) {
+      const permission = permissions[i];
+      const checkbox = this.getPermissionCheckbox(studyAdmin, permission);
+      await expect(checkbox).toBeChecked({timeout: 2000});
     }
   }
 
   public getPermissionCheckbox(studyAdmin: Locator, permission: UserPermission, forSelection?: boolean): Locator {
     const permissionName = permission as string;
     if (forSelection) {
-      return studyAdmin.locator(`//ancestor::mat-expansion-panel//app-permission-checkbox[normalize-space()="${permissionName}"]//div`)
+      return studyAdmin.locator(`//app-permission-checkbox[.//label[normalize-space()="${permissionName}"]]//div`)
     }
-    return studyAdmin.locator(`//ancestor::mat-expansion-panel//app-permission-checkbox[normalize-space()="${permissionName}"]//input`);
+    return studyAdmin.locator(`//app-permission-checkbox[.//label[normalize-space()="${permissionName}"]]//input`);
   }
 
   public async getStudyEmail(studyAdmin: Locator): Promise<string> {

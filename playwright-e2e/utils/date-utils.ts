@@ -46,8 +46,9 @@ export function getDateEasternTimeZone(date?: Date): string {
   return dateFormat('America/New_York').format(date ? date : new Date());
 }
 
-export function getUtcDate(): string {
-  const utc = new Date(new Date().toUTCString());
+// convert local date to UTC date
+export function getUtcDate(date?: Date): string {
+  const utc = new Date(date ? date : new Date().toUTCString());
   const day = (`0${utc.getUTCDate()}`).slice(-2);
   const month = (`0${utc.getUTCMonth() + 1}`).slice(-2);
   return `${month}/${day}/${utc.getFullYear()}`; // mm/dd/yyyy

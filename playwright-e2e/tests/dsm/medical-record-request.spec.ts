@@ -220,6 +220,7 @@ test.describe.serial('Medical records request workflow', () => {
         await medicalRecordsRequestPage.fillInitialMRRequestDates({date3: {today: true}});
         await expect(initialMRRequest).toHaveCount(3); // no more new date field appears. max is 3 date fields.
       }
+      await page.waitForTimeout(2000); // Do not delete: DB update speed is flaky
 
       // Save number of Initial MR Request for later tests
       count = await initialMRRequest.count();

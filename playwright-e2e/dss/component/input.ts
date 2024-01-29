@@ -69,7 +69,7 @@ export default class Input extends WidgetBase {
       }
     }
 
-    // Is Saving button visible before typing? tests could become flaky if saving is in progress before adding another new patch request
+    // Is Saving button visible before typing? tests become flaky if saving is in progress before adding another new patch request
     await expect(this.page.locator('button:visible', { hasText: 'Saving' })).toBeHidden();
 
     await this.toLocator().scrollIntoViewIfNeeded().catch(err => logError(`${err}\n${this.toLocator()}`));
@@ -88,22 +88,32 @@ export default class Input extends WidgetBase {
     }
 
     if (oldValue !== value) {
-      const autocomplete = await this.getAttribute('aria-autocomplete');
-      useType
-        ? await this.toLocator().pressSequentially(value as string, { delay: 200 })
-        : await this.toLocator().fill(value as string);
+      if (useType) { // typing with delay is used for selecting from a suggestion dropdown
+        try {
+          await Promise.all([
+            waitForResponse(this.page, { uri: '/suggestions', timeout: 10000 }),
+            this.toLocator().pressSequentially(value as string, { delay: 500 }),
+          ])
+        } catch (err) {
+          // ignore
+        }
+      } else {
+        await this.toLocator().fill(value as string);
+      }
 
+      const autocomplete = await this.getAttribute('aria-autocomplete');
       const expanded = await this.getAttribute('aria-expanded');
       if (autocomplete === 'list' && expanded === 'true') {
         const dropdown = this.page.locator('.mat-autocomplete-visible[role="listbox"][id]');
         await dropdown.waitFor({ state: 'visible', timeout: 30 * 1000 });
         const option = dropdownOption ? dropdownOption : value;
         await dropdown
-          .locator('[role="option"]') //, { has: this.page.locator(`span.mat-option-text:text("${dropdownOption}")`) })
+          .locator('[role="option"]')
           .filter({ hasText: option.toString() })
           .first()
           .click();
       }
+
       await doAfterFill();
     }
 

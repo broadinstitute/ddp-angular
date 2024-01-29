@@ -25,16 +25,18 @@ test.describe('Participants Search', () => {
 
       // Save Registration Date found on first row for use in search
       const registrationDate = await participantsTable.getParticipantDataAt(0, MainInfoEnum.REGISTRATION_DATE);
-      const registrationDateValue = getDate(new Date(registrationDate)); // Returns a formatted date mm/dd/yyyy
+      const formatRegistrationDate = getDate(new Date(registrationDate)); // Returns a formatted date mm/dd/yyyy
+      logInfo(`Found Registration Date: ${registrationDate}. Formatted to: ${formatRegistrationDate}`);
 
       // Search by random date
       const searchPanel = participantListPage.filters.searchPanel;
       await searchPanel.open();
-      await searchPanel.text(MainInfoEnum.REGISTRATION_DATE, { textValue: registrationDateValue }); // search date format is mm/dd/yyyy
+      await searchPanel.clear();
+      await searchPanel.text(MainInfoEnum.REGISTRATION_DATE, { textValue: formatRegistrationDate }); // search date format is mm/dd/yyyy
       await searchPanel.search();
 
       const numParticipants1 = await participantsTable.numOfParticipants();
-      expect(numParticipants1).toBeGreaterThanOrEqual(1);
+      expect(numParticipants1, `Registration Date: ${formatRegistrationDate} failed to find participants`).toBeGreaterThanOrEqual(1);
 
       // Check first row data
       // Verify Registration Date

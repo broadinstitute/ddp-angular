@@ -111,13 +111,18 @@ test.describe.serial('DSS View Only Permission', () => {
         logInfo(`${study} Participant Short ID: ${shortId}`);
 
         // Open Participant page to verify visible tabs
-        await participantListTable.openParticipantPageAt(rowIndex);
+        let tabNames: string[];
+        await expect(async () => {
+          await participantListPage.reload();
+          await participantListPage.filterListByShortId(shortId);
+          await participantListTable.openParticipantPageAt(0);
+          const visibleTabs = page.locator('tabset a[role="tab"]');
+          tabNames = await visibleTabs.allInnerTexts();
+          expect(tabNames).toStrictEqual(expectedTabs);
+        }).toPass({ timeout: 60 * 1000 });
 
-        const visibleTabs = page.locator('tabset a[role="tab"]');
-        const tabNames = await visibleTabs.allInnerTexts();
-        expect(tabNames).toStrictEqual(expectedTabs);
         // All tabs are enabled
-        for (const tabName of tabNames) {
+        for (const tabName of tabNames!) {
           const tab = new Tabs(page);
           await tab.open(tabName as TabEnum);
         }

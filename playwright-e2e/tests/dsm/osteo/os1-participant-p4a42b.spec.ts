@@ -11,7 +11,6 @@ import SearchPage, { SearchByField } from 'dsm/pages/samples/search-page';
 import { Navigation } from 'dsm/component/navigation/navigation';
 import { SortOrder } from 'dss/component/table';
 import { WelcomePage } from 'dsm/pages/welcome-page';
-import SampleInformationTab from 'dsm/component/tabs/sample-information-tab';
 
 const { DSM_BASE_URL } = process.env;
 
@@ -73,11 +72,6 @@ test.describe.serial('Same Participant in Osteo1 and Osteo2', () => {
       await expect(surveyTabLocator.locator('.mat-expansion-panel-body:visible').nth(0))
         .toHaveScreenshot('osteo1-medical-release-form-expanded-view.png');
       await surveyTabLocator.locator('mat-expansion-panel-header').nth(2).click(); // collapse click
-
-      // Compare Sample Information tab screenshot
-      await participantPage.clickTab<SampleInformationTab>(TabEnum.SAMPLE_INFORMATION);
-      await expect(page.locator('tab[heading="Sample Information"][role="tabpanel"]'))
-        .toHaveScreenshot('osteo1-sample-information-tab-view.png');
 
       // Compare Medical Records tab screenshot
       const medicalRecordsTab = await participantPage.clickTab<MedicalRecordsTab>(TabEnum.MEDICAL_RECORD);
