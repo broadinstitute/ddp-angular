@@ -14,6 +14,7 @@ import {
     LoggingService,
     SubmitAnnouncementService,
     SubmissionManager,
+    LanguageService,
 } from 'ddp-sdk';
 
 import { ToolkitModule, ToolkitConfigurationService } from 'toolkit';
@@ -132,7 +133,8 @@ config.updatePreferredLanguageForGovernedParticipants = true;
 export function translateFactory(
     translate: TranslateService,
     injector: Injector,
-    logger: LoggingService
+    logger: LoggingService,
+    language: LanguageService
 ): () => Promise<any> {
     return () =>
         new Promise<any>((resolve: any) => {
@@ -142,7 +144,8 @@ export function translateFactory(
                 Promise.resolve(null)
             );
             locationInitialized.then(() => {
-                const locale = 'en';
+                // const locale = 'en';
+                const locale = language.getAppLanguageCode();
                 translate.setDefaultLang(locale);
                 translate.use(locale).subscribe({
                     next: () => {
@@ -212,7 +215,7 @@ export function translateFactory(
         {
             provide: APP_INITIALIZER,
             useFactory: translateFactory,
-            deps: [TranslateService, Injector, LoggingService],
+            deps: [TranslateService, Injector, LoggingService, LanguageService],
             multi: true,
         },
         SubmitAnnouncementService,
