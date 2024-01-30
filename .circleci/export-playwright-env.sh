@@ -6,30 +6,38 @@ export sitePwd=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".da
 echo "export SITE_PASSWORD=$sitePwd" >> playwright-env/envvars
 
 # DSM
-export dsmUser=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[] | select(.app==\"dsm\") | .users[1] | .userName")
-export dsmUserPassword=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[] | select(.app==\"dsm\") | .users[1] | .password")
 export bspToken=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.bsp | .[] | select(.env==\"$ENV\") | .token")
-echo "export DSM_USER_EMAIL=$dsmUser" >> playwright-env/envvars
-echo "export DSM_USER_PASSWORD=$dsmUserPassword" >> playwright-env/envvars
 echo "export BSP_TOKEN=$bspToken" >> playwright-env/envvars
 
-# Additional DSM User (DSM permission testing)
 export dsmUser1=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[] | select(.app==\"dsm\") | .users[0] | .userName")
 export dsmUser1Password=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[] | select(.app==\"dsm\") | .users[0] | .password")
-echo "export DSM_USER1_PASSWORD=$dsmUser1Password" >> playwright-env/envvars
 echo "export DSM_USER1_EMAIL=$dsmUser1" >> playwright-env/envvars
+echo "export DSM_USER1_PASSWORD=$dsmUser1Password" >> playwright-env/envvars
 
-# Additional DSM User (DSM general testing)
-export dsmUser2=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[] | select(.app==\"dsm\") | .users[2] | .userName")
-export dsmUser2Password=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[] | select(.app==\"dsm\") | .users[2] | .password")
+# Additional DSM User (DSM permission testing)
+export dsmUser2=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[] | select(.app==\"dsm\") | .users[1] | .userName")
+export dsmUser2Password=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[] | select(.app==\"dsm\") | .users[1] | .password")
 echo "export DSM_USER2_PASSWORD=$dsmUser2Password" >> playwright-env/envvars
 echo "export DSM_USER2_EMAIL=$dsmUser2" >> playwright-env/envvars
+
+# Additional DSM User (DSM general testing)
+export dsmUser3=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[] | select(.app==\"dsm\") | .users[2] | .userName")
+export dsmUser3Password=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[] | select(.app==\"dsm\") | .users[2] | .password")
+echo "export DSM_USER3_PASSWORD=$dsmUser3Password" >> playwright-env/envvars
+echo "export DSM_USER3_EMAIL=$dsmUser3" >> playwright-env/envvars
 
 # Additional DSM User (DSM general testing)
 export dsmUser4=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[] | select(.app==\"dsm\") | .users[3] | .userName")
 export dsmUser4Password=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[] | select(.app==\"dsm\") | .users[3] | .password")
 echo "export DSM_USER4_PASSWORD=$dsmUser4Password" >> playwright-env/envvars
 echo "export DSM_USER4_EMAIL=$dsmUser4" >> playwright-env/envvars
+
+# Additional DSM User (mr-view-permission.spec)
+export dsmUser5=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[] | select(.app==\"dsm\") | .users[4] | .userName")
+export dsmUser5Password=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[] | select(.app==\"dsm\") | .users[4] | .password")
+echo "export DSM_USER5_PASSWORD=$dsmUser5Password" >> playwright-env/envvars
+echo "export DSM_USER5_EMAIL=$dsmUser5" >> playwright-env/envvars
+
 
 # RGP
 export rgpUser=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[] | select(.app==\"rgp\") | .userName")
