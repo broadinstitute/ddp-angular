@@ -329,6 +329,7 @@ export default class Table {
   async searchByColumn(column1Name: string, value1: string, opts: { column2Name?: string, value2?: string, clear?: boolean } = {}): Promise<void> {
     const { column2Name, value2, clear = true } = opts;
     const column1Index = await this.getHeaderIndex(column1Name, { exactMatch: false });
+    expect(column1Index, `Column ${column1Name} is not visible`).toBeGreaterThanOrEqual(0);
     const input1 = this.page.locator(this.headerRowCss).nth(1).locator('th').nth(column1Index).locator('input.form-control');
     if (clear) {
       await input1.clear();
@@ -336,6 +337,7 @@ export default class Table {
     await input1.fill(value1);
     if (column2Name && value2) {
       const column2Index = await this.getHeaderIndex(column2Name, { exactMatch: false });
+      expect(column2Index, `Column ${column2Name} is not visible`).toBeGreaterThanOrEqual(0);
       const input2 = this.page.locator(this.headerRowCss).nth(1).locator('th').nth(column2Index).locator('input.form-control');
       await input2.fill(value2);
     }

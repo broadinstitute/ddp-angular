@@ -44,7 +44,8 @@ test.describe.serial('Saliva Kit Upload with a Canadian or New York address', ()
   const studies = [StudyEnum.OSTEO2];
   const kitType = KitTypeEnum.SALIVA;
   const expectedKitTypes = [KitTypeEnum.SALIVA, KitTypeEnum.BLOOD];
-  const kitLabel = crypto.randomUUID().toString().substring(0, 14); // alphanumerical string length should be 14
+  const kitLabel = crypto.randomUUID().toString().substring(0, 14).replace(/-/, 'z'); // alphanumerical string length should be 14
+  const trackingLabel = `trackingLabel-${crypto.randomUUID().toString().substring(0, 10).replace(/-/, 'w')}`;
 
   const mockedCanadaAddress = {
     street1: mock.canada.street,
@@ -179,9 +180,9 @@ test.describe.serial('Saliva Kit Upload with a Canadian or New York address', ()
 
       await test.step('Tracking Scan', async () => {
         const trackingScanPage = await navigation.selectFromSamples<TrackingScanPage>(SamplesNavEnum.TRACKING_SCAN);
-        await trackingScanPage.assertPageTitle();
-        const trackingLabel = `trackingLabel-${crypto.randomUUID().toString().substring(0, 10)}`;
+        await trackingScanPage.waitForReady();
         await trackingScanPage.fillScanPairs([trackingLabel, kitLabel]);
+        // Saved without error
         await trackingScanPage.save();
       });
 
@@ -203,11 +204,28 @@ test.describe.serial('Saliva Kit Upload with a Canadian or New York address', ()
 
       await test.step('Verification: Kit sent', async () => {
         const kitsSentPage = await navigation.selectFromSamples<KitsSentPage>(SamplesNavEnum.SENT);
-        await kitsSentPage.waitForLoad();
+        await kitsSentPage.waitForReady();
         await kitsSentPage.selectKitType(kitType);
-        await kitsSentPage.search(KitsColumnsEnum.MF_CODE, kitLabel);
-        await kitsSentPage.assertDisplayedRowsCount(1);
+        await kitsSentPage.search(KitsColumnsEnum.MF_CODE, kitLabel, { count: 1 });
       });
+    });
+
+    test(`Should throw error if same kit label and tracking label is used again @functional @dsm @${study}`, async ({page}) => {
+      expect(shortID).toBeTruthy();
+      expect(trackingLabel).toBeTruthy();
+
+      await welcomePage.selectStudy(study);
+
+      const trackingScanPage = await navigation.selectFromSamples<TrackingScanPage>(SamplesNavEnum.TRACKING_SCAN);
+      await trackingScanPage.waitForReady();
+      await trackingScanPage.fillScanPairs([trackingLabel, kitLabel]);
+      await trackingScanPage.save({verifySuccess: false});
+
+      // Click "Save Scan Pairs" button triggers scan error
+      await expect(page.locator('//h3[contains(@class, "Color--warn")]')).toHaveText('Error - Failed to save all changes');
+      await expect(page.locator('//p[contains(@class, "Color--warn")]')).toHaveText(/Error occurred sending this scan pair!/);
+      const msg1 = `Kit ${kitLabel} was already associated with tracking id ${trackingLabel} by ${process.env.DSM_USER1_EMAIL}`;
+      await expect(page.locator('//p[contains(@class, "Color--warn")]')).toHaveText(new RegExp(msg1, 'i'));
     });
   }
 })

@@ -267,7 +267,8 @@ test.describe.serial('Medical records request workflow', () => {
         logInfo(`Asserting checkbox "No Action Needed" is checked at ${new Date().toLocaleTimeString()}`);
         // reload Participant until timeout or checkbox "No Action Needed" is checked.
         await medicalRecordsRequestPage.backToParticipantList();
-        await page.reload();
+        await participantListPage.waitForReady();
+        await participantListPage.reload();
         await participantListPage.waitForReady();
         await participantListPage.filterListByShortId(shortId);
         await participantListTable.openParticipantPageAt(0);

@@ -49,7 +49,7 @@ export class ParticipantListTable extends Table {
   }
 
   public async selectCheckboxForParticipantAt(position: number): Promise<void> {
-    return await this.getParticipantAt(position).nth(0).locator('mat-checkbox').click();
+    await this.getParticipantAt(position).nth(0).locator('mat-checkbox').click();
   }
 
   public async numOfParticipants(): Promise<number> {

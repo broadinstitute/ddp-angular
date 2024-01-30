@@ -8,7 +8,7 @@ import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import { getDate, offsetDaysFromDate, offsetDaysFromToday } from 'utils/date-utils';
 import { logInfo } from 'utils/log-utils';
 
-test.describe('Participants Search', () => {
+test.describe.serial('Participants Search', () => {
   const studies = [StudyEnum.LMS, StudyEnum.OSTEO2];
 
   for (const study of studies) {
@@ -25,18 +25,24 @@ test.describe('Participants Search', () => {
 
       // Save Registration Date found on first row for use in search
       const registrationDate = await participantsTable.getParticipantDataAt(0, MainInfoEnum.REGISTRATION_DATE);
-      const formatRegistrationDate = getDate(new Date(registrationDate)); // Returns a formatted date mm/dd/yyyy
-      logInfo(`Found Registration Date: ${registrationDate}. Formatted to: ${formatRegistrationDate}`);
+      const date = new Date(registrationDate);
+      const fromDate = getDate(date); // Returns a formatted date mm/dd/yyyy
+      logInfo(`Found a Registration Date: ${registrationDate}. Formatted to: ${fromDate}`);
 
-      // Search by random date
+      // Date filtering is problematic. Filter by date range: +1 day.
+      const toDate = getDate(offsetDaysFromDate(date, 1, { isAdd: true }));
       const searchPanel = participantListPage.filters.searchPanel;
       await searchPanel.open();
       await searchPanel.clear();
-      await searchPanel.text(MainInfoEnum.REGISTRATION_DATE, { textValue: formatRegistrationDate }); // search date format is mm/dd/yyyy
+      await searchPanel.dates(MainInfoEnum.REGISTRATION_DATE, {
+        from: fromDate,
+        to: toDate,
+        additionalFilters: [AdditionalFilter.RANGE]
+      });
       await searchPanel.search();
 
       const numParticipants1 = await participantsTable.numOfParticipants();
-      expect(numParticipants1, `Registration Date: ${formatRegistrationDate} failed to find participants`).toBeGreaterThanOrEqual(1);
+      expect(numParticipants1, `Registration Date: ${fromDate} failed to find participants`).toBeGreaterThanOrEqual(1);
 
       // Check first row data
       // Verify Registration Date
@@ -44,10 +50,9 @@ test.describe('Participants Search', () => {
       const actualRegistrationDate = await participantsTable.cell(0, headerIndex).innerText();
 
       // Date filtering is problematic. Add +/- 1 day to assertion
-      const date = new Date(registrationDate);
       const dateRanges = [
         getDate(offsetDaysFromDate(date, 1)),
-        getDate(offsetDaysFromDate(date, 1, { isAdd: true })),
+        toDate,
         getDate(date)
       ];
       expect(dateRanges).toEqual(expect.arrayContaining([getDate(new Date(actualRegistrationDate))]));
@@ -61,6 +66,8 @@ test.describe('Participants Search', () => {
       expect(shortId.length).toBe(6);
 
       // Search filter with date range (don't need to open Search panel because it does not close automatically)
+      await searchPanel.open();
+      await searchPanel.clear();
       const today = getDate(new Date());
       const yearAgo = offsetDaysFromToday(365);
       await searchPanel.dates(MainInfoEnum.REGISTRATION_DATE, { additionalFilters: [AdditionalFilter.RANGE], from: yearAgo, to: today});

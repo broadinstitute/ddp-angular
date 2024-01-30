@@ -11,14 +11,13 @@ import LmsSurveyAboutLmsPage from 'dss/pages/lms/lms-survey-about-lms-page';
 import SurveyAboutYou from 'dss/pages/survey-about-you';
 import { test } from 'fixtures/lms-fixture';
 import { assertActivityHeader } from 'utils/assertion-helper';
-import { getDate } from 'utils/date-utils';
+import { getDateInCentralTimezone } from 'utils/date-utils';
 import { generateUserName } from 'utils/faker-utils';
 import { logParticipantCreated } from 'utils/log-utils';
 import { toHaveScreenshot, waitForResponse } from 'utils/test-utils';
 
 test.describe.serial('LMS Child Enrollment', () => {
   let researchConsentPage: LmsResearchConsentPage;
-  let additionalConsentPage: LmsAdditionalConsentPage;
 
   const assertActiveActivityStep = async (page: Page, expectedText: string) => {
     await expect(page.locator('.activity-step.active')).toHaveText(expectedText);
@@ -28,7 +27,7 @@ test.describe.serial('LMS Child Enrollment', () => {
     test.slow();
 
     researchConsentPage = new LmsResearchConsentPage(page, 'child');
-    additionalConsentPage = new LmsAdditionalConsentPage(page);
+    const additionalConsentPage = new LmsAdditionalConsentPage(page);
 
     const participant = user.child;
     const childFirstName = generateUserName(participant.firstName);
@@ -239,8 +238,8 @@ test.describe.serial('LMS Child Enrollment', () => {
       const requestPromise = waitForResponse(page, { uri: '/answers'});
       await Promise.all([additionalConsentPage.signature().fill(childFullName), requestPromise]);
 
-      // Date text shows today's date with mm/dd/yyyy format
-      expect(await additionalConsentPage.getDisplayedDate()).toBe(getDate());
+      // Date text shows today's date in Central timezone with mm/dd/yyyy format
+      expect(await additionalConsentPage.getDisplayedDate()).toBe(getDateInCentralTimezone());
 
       await additionalConsentPage.next();
 

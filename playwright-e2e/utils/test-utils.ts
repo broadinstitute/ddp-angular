@@ -23,8 +23,8 @@ export async function waitForNoSpinner(page: Page, opts: { timeout?: number } = 
   const appError = page.locator('app-error-snackbar .snackbar-content').first();
   await page.waitForLoadState().catch((err) => logError(err));
   const pageStatus = await Promise.race([
-    spinner.waitFor({ state: 'hidden', timeout }).then(() => 'Ready'),
-    appError.waitFor({ state: 'visible', timeout }).then(() => 'Error'),
+    spinner.waitFor({ state: 'hidden' }).then(() => 'Ready'),
+    appError.waitFor({ state: 'visible' }).then(() => 'Error'),
     new Promise((_, reject) => setTimeout(() => reject(Error('Time out waiting for loading spinner to stop or a app error.')), timeout)),
   ]);
   if (pageStatus === 'Ready') {

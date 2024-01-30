@@ -15,26 +15,38 @@ export async function login(page: Page, opts: { email?: string; password?: strin
     throw Error('Invalid parameter: DSM base URL is undefined or null.');
   }
 
-  const assertLoggedIn = async (page: Page): Promise<void> => {
-    await expect(page).toHaveTitle('Select study');
+  const authWindow = page.locator('.auth0-lock-header-welcome');
+
+  const assertLogIn = async (page: Page): Promise<boolean> => {
+    const timeout = 30 * 1000;
+    const status = await Promise.race([
+      expect(authWindow).toBeVisible().then(() => 'Fail'),
+      expect(page).toHaveTitle('Select study').then(() => 'Pass'),
+      // Throw error when neither is resolved
+      new Promise((_, reject) => setTimeout(() => reject(Error('Timeout Error: Fail to confirm Log in successful.')), timeout)),
+    ]);
+    if (status === 'Pass') {
+      return true;
+    }
+    return false;
   };
 
-  const loginHelper = async () => {
-    await expect(page.locator('.auth0-lock-header-welcome')).toBeVisible({ timeout: 2 * 1000 });
+  const doLogIn = async () => {
+    // Before fill out email and password, ensure LogIn window completed loading.
+    await expect(authWindow).toBeVisible({ timeout: 5 * 1000 });
+    await expect(page.locator('.auth0-loading').first()).toBeHidden();
     await fillInEmailPassword(page, { email, password, waitForNavigation: false });
   }
 
-  await page.goto(DSM_BASE_URL);
-  await fillInEmailPassword(page, { email, password, waitForNavigation: false });
-
-  try {
-    await assertLoggedIn(page);
-  } catch (e) {
-    // Retry login if login window is found (POST /auth0 fails intermittenly)
-    const isLoginVisible = await page.locator('.auth0-lock-header-welcome').isVisible();
-    if (isLoginVisible) {
-      await loginHelper();
-    }
-    await assertLoggedIn(page);
+  await page.goto(DSM_BASE_URL, { waitUntil: 'load' });
+  await doLogIn();
+  const status = await assertLogIn(page);
+  if (status) {
+    return;
   }
+  // Retry login if login window is still present (POST /auth0 fails intermittenly)
+  console.log(`Retry log in`);
+  await doLogIn();
+  await assertLogIn(page);
+  await expect(page).toHaveTitle('Select study');
 }

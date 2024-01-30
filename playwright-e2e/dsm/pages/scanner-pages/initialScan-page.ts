@@ -36,7 +36,7 @@ export default class InitialScanPage {
     const saveButton = this.saveButtonLocator;
     await expect(saveButton, 'Initial Scan page - Save Scan Pairs button is not enabled').toBeEnabled();
 
-    const respPromise = waitForResponse(this.page, {uri: 'initialScan'});
+    const respPromise = waitForResponse(this.page, {uri: '/initialScan'});
     await saveButton.focus();
     await saveButton.click();
     const response = await respPromise;

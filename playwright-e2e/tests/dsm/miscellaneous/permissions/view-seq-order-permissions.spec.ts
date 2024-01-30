@@ -52,8 +52,7 @@ test.describe('View Sequencing Order Permission Test', () => {
       });
 
       await test.step('Verify that the current DSM user is able to view the Clinical Order page (via the Samples menu)', async () => {
-        await navigation.selectFromSamples(SamplesNavEnum.CLINICAL_ORDERS);
-        const clinicalOrdersPage = new ClinicalOrdersPage(page);
+        const clinicalOrdersPage = await navigation.selectFromSamples<ClinicalOrdersPage>(SamplesNavEnum.CLINICAL_ORDERS);
         await clinicalOrdersPage.waitForReady();
       });
 

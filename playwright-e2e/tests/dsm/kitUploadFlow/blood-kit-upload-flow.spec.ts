@@ -134,7 +134,7 @@ test.describe.serial('Blood Kits upload flow', () => {
 
       // Tracking scan
       const trackingScanPage = await navigation.selectFromSamples<TrackingScanPage>(SamplesNavEnum.TRACKING_SCAN);
-      await trackingScanPage.assertPageTitle();
+      await trackingScanPage.waitForReady();
       trackingLabel = `tracking-${crypto.randomUUID().toString().substring(0, 10)}`;
       await trackingScanPage.fillScanPairs([trackingLabel, kitLabel]);
       await trackingScanPage.save();
@@ -147,14 +147,12 @@ test.describe.serial('Blood Kits upload flow', () => {
 
       // kits sent page
       const kitsSentPage = await navigation.selectFromSamples<KitsSentPage>(SamplesNavEnum.SENT);
-      await kitsSentPage.waitForLoad();
-      await kitsSentPage.assertPageTitle();
+      await kitsSentPage.waitForReady();
       await kitsSentPage.assertDisplayedKitTypes(expectedKitTypes);
       await kitsSentPage.selectKitType(kitType);
       await kitsSentPage.assertReloadKitListBtn();
       await kitsSentPage.assertTableHeader();
-      await kitsSentPage.search(KitsColumnsEnum.MF_CODE, kitLabel);
-      await kitsSentPage.assertDisplayedRowsCount(1);
+      await kitsSentPage.search(KitsColumnsEnum.MF_CODE, kitLabel, { count: 1 });
 
       const sentDate = await kitsSentPage.getData(KitsColumnsEnum.SENT);
       expect(getDate(new Date(sentDate))).toStrictEqual(getDate());

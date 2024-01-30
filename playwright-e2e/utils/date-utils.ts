@@ -26,6 +26,14 @@ export function getDate(date?: Date, opts: { timeZone?: string } = {}): string {
 }
 
 /**
+ * Central timezone: America/Chicago
+ * Returns today date in format mm/dd/yyyy
+ */
+export function getDateInCentralTimezone(): string {
+  return getDate(new Date(), { timeZone: 'America/Chicago' });
+}
+
+/**
  * Returns a given date in the Month DD, YYYY format
  * @param dateString The date to format into Month DD, YYYY e.g. turn '11/29/2023' into 'Nov 29, 2023'
  * @returns Newly formated date as a string
