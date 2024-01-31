@@ -99,6 +99,11 @@ export class Search {
     }
   }
 
+  public async isFilterCheckboxChecked(columnName: string, checkboxName: string): Promise<boolean> {
+    const checkboxLocator = this.checkboxLocator(columnName, checkboxName);
+    return await this.isChecked(checkboxLocator);
+  }
+
   public async openDatePicker(column: string, opts: { open?: boolean } = {}): Promise<DatePicker> {
     const { open = true } = opts;
     const datePicker = new DatePicker(this.page, { root: this.baseColumnXPath(column) });

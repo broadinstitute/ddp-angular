@@ -24,6 +24,7 @@ test.describe('Tissue Request Flow', () => {
       await test.step('Search for the right participant', async () => {
         await customizeViewPanel.open();
         await customizeViewPanel.selectColumns('Medical Record Columns', ['MR Problem']);
+        await customizeViewPanel.selectColumns('Medical Record Columns', ['Institution Name']);
         await customizeViewPanel.selectColumns('Participant - DSM Columns', ['Onc History Created']);
         await customizeViewPanel.selectColumns('Research Consent Form Columns', ['Your Mailing Address *']);
 
@@ -32,6 +33,7 @@ test.describe('Tissue Request Flow', () => {
         await searchPanel.checkboxes('MR Problem', { checkboxValues: ['No'] });
         await searchPanel.dates('Onc History Created', { additionalFilters: [AdditionalFilter.EMPTY] });
         await searchPanel.text('Your Mailing Address *', { additionalFilters: [AdditionalFilter.NOT_EMPTY] });
+        await searchPanel.text('Institution Name', { additionalFilters: [AdditionalFilter.NOT_EMPTY] });
 
         await searchPanel.search();
         shortID = await participantListPage.findParticipantWithTab(

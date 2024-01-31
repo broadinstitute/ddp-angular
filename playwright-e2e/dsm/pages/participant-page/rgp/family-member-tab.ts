@@ -158,23 +158,21 @@ export default class FamilyMemberTab {
      * @param notes the notes to be inputted
      */
     public async inputImportantNotes(notes: string): Promise<void> {
-        await this.page.locator("//textarea[contains(@data-placeholder, 'Important Notes')]").fill(`${notes}`);
-    }
-
-    /**
-     * Returns the text content of the Important Notes textarea
-     * @returns contents of the Important Notes textarea
-     */
-    public async getImportantNotesContent(): Promise<string> {
-        return (await this.page.locator("//textarea[contains(@data-placeholder, 'Important Notes')]").inputValue()).toString();
+      const textarea = this.getImportantNotes();
+      await textarea.clear();
+      await Promise.all([
+        waitForResponse(this.page, {uri: 'ui/patch'}),
+        textarea.fill(notes, false),
+        textarea.blur(),
+      ]);
     }
 
     /**
      * Returns the locator for the Participant Info -> Important Notes textarea
      * @returns Important Notes textarea locator
      */
-    public getImportantNotes(): Locator {
-        return this.page.locator("//textarea[contains(@data-placeholder, 'Important Notes')]");
+    public getImportantNotes(): TextArea {
+      return new TextArea(this.page, {label: 'Important Notes'});
     }
 
     /**
@@ -182,23 +180,21 @@ export default class FamilyMemberTab {
      * @param notes the notes to be inputted
      */
     public async inputProcessNotes(notes: string): Promise<void> {
-        await this.page.locator("//textarea[contains(@data-placeholder, 'Process Notes')]").fill(`${notes}`);
-    }
-
-    /**
-     * Returns the text content of the Process Notes textarea
-     * @returns contents of the Process Notes textarea
-     */
-    public async getProcessNotesContent(): Promise<string> {
-        return (await this.page.locator("//textarea[contains(@data-placeholder, 'Process Notes')]").inputValue()).toString();
+      const textarea = this.getProcessNotes();
+      await textarea.clear();
+      await Promise.all([
+        waitForResponse(this.page, {uri: 'ui/patch'}),
+        textarea.fill(notes, false),
+        textarea.blur(),
+      ]);
     }
 
     /**
      * Returns the locator for the Participant Info -> Process Notes textarea
      * @returns Process Notes textarea locator
      */
-    public getProcessNotes(): Locator {
-        return this.page.locator("//textarea[contains(@data-placeholder, 'Process Notes')]");
+    public getProcessNotes(): TextArea {
+      return new TextArea(this.page, {label: 'Process Notes'});
     }
 
     public getFirstName(): Locator {
@@ -277,28 +273,21 @@ export default class FamilyMemberTab {
      * @param notes the notes to be inputted
      */
     public async inputMixedRaceNotes(notes: string): Promise<void> {
-        const textarea = new TextArea(this.page, {label: 'Mixed Race Notes'});
-        await textarea.clear();
-        await Promise.all([
-          waitForResponse(this.page, {uri: 'ui/patch'}),
-          textarea.fill(notes)
-        ]);
-    }
-
-    /**
-     * Returns the text content of the Mixed Race Notes textarea
-     * @returns contents of the Mixed Race Notes textarea
-     */
-    public async getMixedRaceNotesContent(): Promise<string> {
-        return (await this.page.locator("//textarea[contains(@data-placeholder, 'Mixed Race Notes')]").inputValue()).toString();
+      const textarea = this.getMixedRaceNotes();
+      await textarea.clear();
+      await Promise.all([
+        waitForResponse(this.page, {uri: 'ui/patch'}),
+        textarea.fill(notes, false),
+        textarea.blur(),
+      ]);
     }
 
     /**
      * Returns the locator for the Participant Info -> Mixed Race Notes textarea
      * @returns Mixed Race Notes textarea locator
      */
-    public getMixedRaceNotes(): Locator {
-        return this.page.locator("//textarea[contains(@data-placeholder, 'Mixed Race Notes')]");
+    public getMixedRaceNotes(): TextArea {
+      return new TextArea(this.page, {label: 'Mixed Race Notes'});
     }
 
     public getContactInfoSection(): Locator {
