@@ -168,6 +168,10 @@ test.describe.serial('DSM Family Enrollment Handling', () => {
     //Confirm that input entered in Important Notes and Process Notes is saved
     await proband.inputImportantNotes('Testing notes here - Important Notes');
     await proband.inputProcessNotes('Testing notes here - Process Notes');
+    const uniqueID = uuid();
+    const mixedRaceTestingNotes = `Testing using id ${uniqueID}`;
+    await proband.inputMixedRaceNotes(mixedRaceTestingNotes);
+    await page.waitForTimeout(10000);
 
     const firstName = proband.getFirstName();
     await firstName.fill(`${user.patient.firstName}_PROBAND`); // PROBAND suffix to make it easy to check for messages in DSS
@@ -225,10 +229,6 @@ test.describe.serial('DSM Family Enrollment Handling', () => {
     const ethnicity = proband.getEthnicity();
     await ethnicity.click();
     await dropdownOptions.filter({ hasText: 'Not Hispanic' }).click();
-
-    const uniqueID = uuid();
-    const mixedRaceTestingNotes = `Testing using id ${uniqueID}`;
-    await proband.inputMixedRaceNotes(mixedRaceTestingNotes);
 
     //Verify that the input to Important Notes, Process Notes, Mixed Race Notes has been saved even when page is re-visited
     const importantNotes = await proband.getImportantNotes().currentValue();
