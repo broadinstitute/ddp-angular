@@ -1,5 +1,5 @@
 import {expect, Page} from '@playwright/test';
-import {waitForResponse} from 'utils/test-utils';
+import {waitForNoSpinner, waitForResponse} from 'utils/test-utils';
 
 type inputField = 'Tracking Label' | 'Kit Label';
 
@@ -7,6 +7,12 @@ export default class TrackingScanPage {
   private readonly PAGE_TITLE = 'Tracking Scan';
 
   constructor(private readonly page: Page) {}
+
+  public async waitForReady(): Promise<void> {
+    await expect(this.page.locator('h1')).toHaveText(this.PAGE_TITLE);
+    await waitForNoSpinner(this.page);
+    await expect(this.page.locator(this.saveButtonXPath)).not.toBeEnabled();
+  }
 
   public async fillScanPairs(fieldsInputs: string[]): Promise<void> {
     let extractValueIndex = -1;
@@ -43,11 +49,6 @@ export default class TrackingScanPage {
 
 
   /* Assertions */
-  public async assertPageTitle() {
-    await expect(this.page.locator('h1'),
-      "Tracking Scan page - page title doesn't match the expected one")
-      .toHaveText(this.PAGE_TITLE);
-  }
 
   /* XPaths */
   private inputFieldXPath(label: string): string {

@@ -57,10 +57,12 @@ export default abstract class KitsPageBase extends DsmPageBase {
     await waitForNoSpinner(this.page);
   }
 
-  public async selectKitType(kitType: KitTypeEnum): Promise<boolean> {
+  public async selectKitType(kitType: KitTypeEnum, opts: { waitForResp?: string } = {}): Promise<boolean> {
+    const { waitForResp = 'ui/kitRequests' } = opts;
+    const waitPromise = waitForResp === 'undefined' ? Promise.resolve() : waitForResponse(this.page, { uri: waitForResp });
     await waitForNoSpinner(this.page);
     await Promise.all([
-      waitForResponse(this.page, { uri: 'ui/kitRequests' }),
+      waitPromise,
       this.kitType.selectKitType(kitType)
     ]);
     await waitForNoSpinner(this.page);

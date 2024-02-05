@@ -26,6 +26,14 @@ export function getDate(date?: Date, opts: { timeZone?: string } = {}): string {
 }
 
 /**
+ * Central timezone: America/Chicago
+ * Returns today date in format mm/dd/yyyy
+ */
+export function getDateInCentralTimezone(): string {
+  return getDate(new Date(), { timeZone: 'America/Chicago' });
+}
+
+/**
  * Returns a given date in the Month DD, YYYY format
  * @param dateString The date to format into Month DD, YYYY e.g. turn '11/29/2023' into 'Nov 29, 2023'
  * @returns Newly formated date as a string
@@ -46,8 +54,9 @@ export function getDateEasternTimeZone(date?: Date): string {
   return dateFormat('America/New_York').format(date ? date : new Date());
 }
 
-export function getUtcDate(): string {
-  const utc = new Date(new Date().toUTCString());
+// convert local date to UTC date
+export function getUtcDate(date?: Date): string {
+  const utc = new Date(date ? date : new Date().toUTCString());
   const day = (`0${utc.getUTCDate()}`).slice(-2);
   const month = (`0${utc.getUTCMonth() + 1}`).slice(-2);
   return `${month}/${day}/${utc.getFullYear()}`; // mm/dd/yyyy

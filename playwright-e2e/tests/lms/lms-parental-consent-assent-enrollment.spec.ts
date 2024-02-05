@@ -11,24 +11,27 @@ import LmsSurveyAboutLmsPage from 'dss/pages/lms/lms-survey-about-lms-page';
 import SurveyAboutYou from 'dss/pages/survey-about-you';
 import { test } from 'fixtures/lms-fixture';
 import { assertActivityHeader } from 'utils/assertion-helper';
-import { getDate } from 'utils/date-utils';
+import { getDateInCentralTimezone } from 'utils/date-utils';
 import { generateUserName } from 'utils/faker-utils';
 import { logParticipantCreated } from 'utils/log-utils';
 import { toHaveScreenshot, waitForResponse } from 'utils/test-utils';
 
 test.describe.serial('LMS Child Enrollment', () => {
   let researchConsentPage: LmsResearchConsentPage;
-  let additionalConsentPage: LmsAdditionalConsentPage;
 
   const assertActiveActivityStep = async (page: Page, expectedText: string) => {
     await expect(page.locator('.activity-step.active')).toHaveText(expectedText);
+  };
+
+  const assertActiveWorkflowStep = async (page: Page, expectedText: string) => {
+    await expect(page.locator('.workflow-content__text_current')).toHaveText(expectedText);
   };
 
   test('Consent & Assent @dss @visual @lms', async ({ page }) => {
     test.slow();
 
     researchConsentPage = new LmsResearchConsentPage(page, 'child');
-    additionalConsentPage = new LmsAdditionalConsentPage(page);
+    const additionalConsentPage = new LmsAdditionalConsentPage(page);
 
     const participant = user.child;
     const childFirstName = generateUserName(participant.firstName);
@@ -66,6 +69,7 @@ test.describe.serial('LMS Child Enrollment', () => {
 
     await test.step('Asserting contents on Research Consent & Assent Form: Step 1. Key Points', async () => {
       await assertActivityHeader(page, 'Research Consent & Assent Form');
+      await assertActiveWorkflowStep(page, 'Consent Form');
       await assertActiveActivityStep(page, '1. Key Points');
 
       await toHaveScreenshot(page, '.ddp-content', 'research-consent-assent-form-message.png');
@@ -79,6 +83,7 @@ test.describe.serial('LMS Child Enrollment', () => {
     });
 
     await test.step('Asserting contents on Research Consent & Assent Form: Step 2. Full Form', async () => {
+      await assertActiveWorkflowStep(page, 'Consent Form');
       await assertActiveActivityStep(page, '2. Full Form');
 
       // Paragraphs A to P are checked with screenshots
@@ -199,6 +204,7 @@ test.describe.serial('LMS Child Enrollment', () => {
     });
 
     await test.step('Asserting contents on Research Consent & Assent Form: Step 4. Sign Assent', async () => {
+      await assertActiveWorkflowStep(page, 'Consent Form');
       await assertActiveActivityStep(page, '4. Sign Assent');
 
       const paragraphs = await page.locator('.ddp-content p').all();
@@ -239,8 +245,8 @@ test.describe.serial('LMS Child Enrollment', () => {
       const requestPromise = waitForResponse(page, { uri: '/answers'});
       await Promise.all([additionalConsentPage.signature().fill(childFullName), requestPromise]);
 
-      // Date text shows today's date with mm/dd/yyyy format
-      expect(await additionalConsentPage.getDisplayedDate()).toBe(getDate());
+      // Date text shows today's date in Central timezone with mm/dd/yyyy format
+      expect(await additionalConsentPage.getDisplayedDate()).toBe(getDateInCentralTimezone());
 
       await additionalConsentPage.next();
 
@@ -260,6 +266,7 @@ test.describe.serial('LMS Child Enrollment', () => {
     await test.step('Asserting contents on Medical Release Form', async () => {
       const medicalReleasePage = new LmsMedicalReleasePage(page);
       await medicalReleasePage.waitForReady();
+      await assertActiveWorkflowStep(page, 'Medical Release');
 
       const contents = await page.locator('//ddp-activity-content[not(contains(.,"Date"))]').all();
       for (let i = 0; i < contents.length; i++) {
@@ -277,6 +284,7 @@ test.describe.serial('LMS Child Enrollment', () => {
 
     // Next page: Survey: Your Child's LMS
     await test.step("Asserting contents on Survey: Your Child's LMS", async () => {
+      await assertActiveWorkflowStep(page, 'Surveys');
       await assertActivityHeader(page, "Survey: Your Child's LMS");
 
       const surveyAboutLms = new LmsSurveyAboutLmsPage(page, 'child');
@@ -305,6 +313,7 @@ test.describe.serial('LMS Child Enrollment', () => {
 
     // Next page: Survey: About Your Child
     await test.step('Asserting contents on Survey: About Your Child', async () => {
+      await assertActiveWorkflowStep(page, 'Surveys');
       await assertActivityHeader(page, 'Survey: About Your Child');
 
       const surveyAboutYou = new SurveyAboutYou(page);

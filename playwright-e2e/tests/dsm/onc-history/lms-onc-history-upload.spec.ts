@@ -15,7 +15,6 @@ import { logInfo } from 'utils/log-utils';
 import { StudyNavEnum } from 'dsm/component/navigation/enums/studyNav-enum';
 import OncHistoryTable from 'dsm/component/tables/onc-history-table';
 import { generateAlphaNumeric } from 'utils/faker-utils';
-import { studyShortName } from 'utils/test-utils';
 
 test.describe('Upload Onc History', () => {
   // Upload feature is only available for Leiomyosarcoma and OS PE-CGS studies.

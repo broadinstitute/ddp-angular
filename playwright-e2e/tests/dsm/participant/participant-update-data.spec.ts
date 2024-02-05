@@ -6,7 +6,6 @@ import { logInfo } from 'utils/log-utils';
 import { faker } from '@faker-js/faker';
 import { MainInfoEnum } from 'dsm/pages/participant-page/enums/main-info-enum';
 import { AdditionalFilter, CustomViewColumns } from 'dsm/component/filters/sections/search/search-enums';
-import { shuffle } from 'utils/test-utils';
 
 test.describe.serial('Editing Participant Information', () => {
   const cmiClinicalStudies = [StudyEnum.LMS, StudyEnum.OSTEO2];
@@ -40,9 +39,7 @@ test.describe.serial('Editing Participant Information', () => {
       // Open participant in the first row
       await participantListPage.waitForReady();
       const participantListTable = participantListPage.participantListTable;
-      // Randomize rows
-      const rowCount = await participantListTable.getRowsCount();
-      const rowIndex = shuffle([...Array(rowCount).keys()])[0];
+      const rowIndex = (await participantListTable.randomizeRows())[0];
 
       let participantPage = await participantListTable.openParticipantPageAt(rowIndex);
 

@@ -154,8 +154,7 @@ test.describe.serial('Adult Self Enrollment', () => {
     expect(await tellUsAboutYourFamily.yourFirstName().isDisabled()).toBe(true);
   });
 
-  //Skipping until PEPPER-692 is done - which will let this pass consistently in dev and not just test
-  test.skip('Go to DSM to verify the newly created account can be found @dss @functional @rgp', async ({ page, request }) => {
+  test('Go to DSM to verify the newly created account can be found @dss @functional @rgp', async ({ page, request }) => {
     //Go to DSM to verify the newly created account can be found there
     await login(page);
     const navigation = new Navigation(page, request);

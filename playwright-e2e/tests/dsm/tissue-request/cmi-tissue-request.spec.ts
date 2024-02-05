@@ -56,7 +56,7 @@ test.describe('Tissue Request Flow', () => {
         await participantPage.backToList();
         await participantListTable.openParticipantPageAt(0);
 
-        const oncHistoryCreatedDate = participantPage.oncHistoryCreatedDate();
+        const oncHistoryCreatedDate = await participantPage.oncHistoryCreatedDate();
         expect(oncHistoryCreatedDate, 'Onc History Date has not been updated').toBeTruthy();
       })
 

@@ -1,6 +1,7 @@
-import { Page } from '@playwright/test';
+import { Page, expect } from '@playwright/test';
 import { generateEmailAlias } from 'utils/faker-utils';
 import { logInfo } from 'utils/log-utils';
+import { waitForNoSpinner } from 'utils/test-utils';
 
 /**
  *
@@ -14,30 +15,51 @@ export async function fillInEmailPassword(
 ): Promise<void> {
   const { email, password, waitForNavigation = true, waitForAuth = true } = opts;
 
-  await Promise.race<boolean>([
-    page.locator('#signUpForm').isVisible(),
-    page.locator('.auth0-lock-header-welcome').isVisible()
+  const emailInput = page.locator('input[type="email"]').locator('visible=true');
+  const passwordInput = page.locator('input[type="password"]').locator('visible=true');
+  const notYourAcctLink = page.locator('.auth0-lock-alternative-link:has-text("Not your account")');
+
+  const timeout = 10000;
+  await Promise.race([
+    notYourAcctLink.waitFor({ state: 'visible' }),
+    emailInput.waitFor({ state: 'visible' }),
+    new Promise((_, reject) => setTimeout(() => reject(Error('Timeout Error: Fail to confirm Log in successful.')), timeout)),
   ]);
 
-  const auth0Visible = await page.locator('.auth0-lock-header-welcome').isVisible({ timeout: 500 });
-  if (auth0Visible) {
-    const notYourAcctLink = page.locator('#auth0-lock-container-1 .auth0-lock-alternative-link:has-text("Not your account")');
-    try {
-      await notYourAcctLink.click({ timeout: 500 });
-    } catch (err) {
-      // ignored
+  try {
+    const existLink = await notYourAcctLink.isVisible();
+    if (existLink) {
+      await notYourAcctLink.click();
     }
+  } catch (e) {
+    console.error(e);
   }
 
-  const emailInput = page.locator('input[type="email"]:visible');
-  const passwordInput = page.locator('input[type="password"]:visible');
+  const authLoading = page.locator('.auth0-loading').first();
+
+  await Promise.all([
+    expect(emailInput).toBeEnabled(),
+    expect(passwordInput).toBeEnabled(),
+    expect(authLoading).toBeHidden(),
+  ]);
 
   await emailInput.fill(email);
   await passwordInput.fill(password);
 
-  const authPromise = waitForAuth ? page.locator('.auth0-loading').first().waitFor({ state: 'visible', timeout: 2000 }).catch() : Promise.resolve();
-  const navigationPromise = waitForNavigation ? page.waitForLoadState('load') : Promise.resolve();
-  await Promise.all([authPromise, navigationPromise, page.locator('button[name="submit"]:visible, button[type="submit"]:visible').click()]);
+  const authPromise = waitForAuth ? authLoading.waitFor({ state: 'visible', timeout: 2000 }).catch() : Promise.resolve();
+  const navigationPromise = waitForNavigation ? page.waitForLoadState() : Promise.resolve();
+  await Promise.all([
+    authPromise,
+    navigationPromise,
+    page.locator('button[name="submit"]:visible, button[type="submit"]:visible').click(),
+  ]);
+
+  await page.waitForTimeout(3000);
+  await Promise.all([
+    expect(authLoading).toBeHidden(),
+    await expect(emailInput).toBeHidden(),
+  ]);
+  await waitForNoSpinner(page);
 }
 
 export async function createAccountWithEmailAlias(

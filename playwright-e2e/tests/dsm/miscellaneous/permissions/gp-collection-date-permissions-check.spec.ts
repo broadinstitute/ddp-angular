@@ -60,10 +60,8 @@ test.describe.serial('GP Collection Date Permissions Test', () => {
       })
 
       await test.step('Go to Kits Sent page in the Samples menu and select a mf barcode and copy it', async () => {
-        await navigation.selectFromSamples(SamplesNavEnum.SENT);
-        const kitsSentPage = new KitsSentPage(page);
-        await kitsSentPage.waitForLoad();
-        await kitsSentPage.assertPageTitle();
+        const kitsSentPage = await navigation.selectFromSamples<KitsSentPage>(SamplesNavEnum.SENT);
+        await kitsSentPage.waitForReady();
         await kitsSentPage.assertDisplayedKitTypes(expectedKitTypes);
         await kitsSentPage.selectKitType(salivaKitType);
         await kitsSentPage.rowsPerPage(50);

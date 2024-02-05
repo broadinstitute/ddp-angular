@@ -30,6 +30,10 @@ test.describe.serial('LMS Child Enrollment', () => {
     await expect(page.locator('.activity-step.active')).toHaveText(expectedText);
   };
 
+  const assertActiveWorkflowStep = async (page: Page, expectedText: string) => {
+    await expect(page.locator('.workflow-content__text_current')).toHaveText(expectedText);
+  };
+
   test('Parental consent child is three years old @visual @dss @lms', async ({ page }) => {
     test.slow();
 
@@ -72,6 +76,7 @@ test.describe.serial('LMS Child Enrollment', () => {
     await test.step('Asserting contents on Research Consent Form: Step 1. Key Points', async () => {
       await researchConsentPage.waitForReady();
       await assertActivityHeader(page, 'Research Consent Form');
+      await assertActiveWorkflowStep(page, 'Consent Form');
       await assertActiveActivityStep(page, '1. Key Points');
 
       await toHaveScreenshot(page, '.ddp-content', 'lms-research-consent-form-message.png');
@@ -86,6 +91,7 @@ test.describe.serial('LMS Child Enrollment', () => {
 
     await test.step('Asserting contents on Research Consent Form: Step 2. Full Form', async () => {
       await researchConsentPage.waitForReady();
+      await assertActiveWorkflowStep(page, 'Consent Form');
       await assertActiveActivityStep(page, '2. Full Form');
 
       // Paragraphs A to P are checked with screenshots
@@ -172,6 +178,7 @@ test.describe.serial('LMS Child Enrollment', () => {
 
     await test.step('Asserting contents on Research Consent & Assent Form: Step 3. Sign Consent', async () => {
       await researchConsentPage.waitForReady();
+      await assertActiveWorkflowStep(page, 'Consent Form');
       await assertActiveActivityStep(page, '3. Sign Consent');
 
       await toHaveScreenshot(page, 'p.secondary-text', 'lms-research-consent-sign-consent-info.png');
@@ -245,6 +252,7 @@ test.describe.serial('LMS Child Enrollment', () => {
     await test.step('Asserting contents on Medical Release Form', async () => {
       const medicalReleasePage = new LmsMedicalReleasePage(page);
       await medicalReleasePage.waitForReady();
+      await assertActiveWorkflowStep(page, 'Medical Release');
 
       const contents = await page.locator('//ddp-activity-content[not(contains(.,"Date"))]').all();
       for (let i = 0; i < contents.length; i++) {
@@ -263,6 +271,7 @@ test.describe.serial('LMS Child Enrollment', () => {
     // Next page: Survey: Your Child's LMS
     await test.step("Asserting contents on Survey: Your Child's LMS", async () => {
       await assertActivityHeader(page, "Survey: Your Child's LMS");
+      await assertActiveWorkflowStep(page, 'Surveys');
 
       const surveyAboutLms = new LmsSurveyAboutLmsPage(page, 'secondChild');
       await surveyAboutLms.waitForReady();
@@ -289,6 +298,7 @@ test.describe.serial('LMS Child Enrollment', () => {
     // Next page: Survey: About Your Child
     await test.step('Asserting contents on Survey: About Your Child', async () => {
       await assertActivityHeader(page, 'Survey: About Your Child');
+      await assertActiveWorkflowStep(page, 'Surveys');
 
       const surveyAboutYou = new SurveyAboutYou(page);
       await surveyAboutYou.waitForReady();

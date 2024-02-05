@@ -1,4 +1,5 @@
-import { BrowserContext, Download, expect, Locator, Page, Response } from '@playwright/test';
+import { BrowserContext, Download, errors, expect, Locator, Page, Response } from '@playwright/test';
+import TimeoutError from '@playwright/test'
 import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import Input from 'dss/component/input';
 import Checkbox from 'dss/component/checkbox';
@@ -22,8 +23,8 @@ export async function waitForNoSpinner(page: Page, opts: { timeout?: number } = 
   const appError = page.locator('app-error-snackbar .snackbar-content').first();
   await page.waitForLoadState().catch((err) => logError(err));
   const pageStatus = await Promise.race([
-    spinner.waitFor({ state: 'hidden', timeout }).then(() => 'Ready'),
-    appError.waitFor({ state: 'visible', timeout }).then(() => 'Error'),
+    spinner.waitFor({ state: 'hidden' }).then(() => 'Ready'),
+    appError.waitFor({ state: 'visible' }).then(() => 'Error'),
     new Promise((_, reject) => setTimeout(() => reject(Error('Time out waiting for loading spinner to stop or a app error.')), timeout)),
   ]);
   if (pageStatus === 'Ready') {
@@ -40,14 +41,20 @@ export async function waitForNoSpinner(page: Page, opts: { timeout?: number } = 
 
 export async function waitForResponse(page: Page, { uri, status = 200, timeout, messageBody }: WaitForResponse): Promise<Response> {
   let response: any;
-  if (messageBody) {
-    response = await page.waitForResponse((response: Response) => response.url().includes(uri) &&
-    messageBody.every(async message => (await response.text()).includes(message as string)), { timeout });
-  } else {
-    response = await page.waitForResponse((response: Response) => response.url().includes(uri), { timeout });
+  try {
+    if (messageBody) {
+      response = await page.waitForResponse((response: Response) => response.url().includes(uri) &&
+      messageBody.every(async message => (await response.text()).includes(message as string)), { timeout });
+    } else {
+      response = await page.waitForResponse((response: Response) => response.url().includes(uri), { timeout });
+    }
+    await response.finished();
+  } catch (err) {
+    if (err instanceof errors.TimeoutError) {
+      throw new Error(`TimeoutError: waiting for URI: ${uri}: Timeout exceeded`);
+    }
+    throw err;
   }
-
-  await response.finished();
   const respStatus = response.status();
   if (respStatus === status) {
     return response;
@@ -55,7 +62,10 @@ export async function waitForResponse(page: Page, { uri, status = 200, timeout, 
   const url = response.url();
   const method = response.request().method().toUpperCase();
   const body = await response.text();
-  throw new Error(`Waiting for URI: ${uri} with status: ${status}.\n  ${method} ${url}\n  Status: ${respStatus}\n  Text: ${body}`);
+  const reqPayload = response.request().postData() || '';
+
+  throw new Error(
+    `Waiting for URI: ${uri} with status: ${status}.\n  ${method} ${url}\n  Status: ${respStatus}\n  Text: ${body}\n  Payload: ${reqPayload}`);
 }
 
 export async function waitUntilRemoved(locator: Locator): Promise<void> {

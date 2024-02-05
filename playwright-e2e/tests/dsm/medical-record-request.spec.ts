@@ -220,6 +220,7 @@ test.describe.serial('Medical records request workflow', () => {
         await medicalRecordsRequestPage.fillInitialMRRequestDates({date3: {today: true}});
         await expect(initialMRRequest).toHaveCount(3); // no more new date field appears. max is 3 date fields.
       }
+      await page.waitForTimeout(2000); // Do not delete: DB update speed is flaky
 
       // Save number of Initial MR Request for later tests
       count = await initialMRRequest.count();
@@ -266,7 +267,8 @@ test.describe.serial('Medical records request workflow', () => {
         logInfo(`Asserting checkbox "No Action Needed" is checked at ${new Date().toLocaleTimeString()}`);
         // reload Participant until timeout or checkbox "No Action Needed" is checked.
         await medicalRecordsRequestPage.backToParticipantList();
-        await page.reload();
+        await participantListPage.waitForReady();
+        await participantListPage.reload();
         await participantListPage.waitForReady();
         await participantListPage.filterListByShortId(shortId);
         await participantListTable.openParticipantPageAt(0);

@@ -631,8 +631,7 @@ async function prepareSentKit(shortID: string,
   kitUploadInfo.address.country = user.patient.country.abbreviation;
 
   const kitUploadPage = await navigation.selectFromSamples<KitUploadPage>(SamplesNavEnum.KIT_UPLOAD);
-  await kitUploadPage.waitForReady(expectedKitTypes);
-  await kitUploadPage.assertPageTitle();
+  await kitUploadPage.waitForReady();
   await kitUploadPage.selectKitType(kitType);
   await kitUploadPage.assertBrowseBtn();
   await kitUploadPage.assertUploadKitsBtn();
@@ -665,7 +664,7 @@ async function prepareSentKit(shortID: string,
 
   //Both Saliva and Blood kits will now require a tracking label - see PEPPER-1249
   const trackingScanPage = await navigation.selectFromSamples<TrackingScanPage>(SamplesNavEnum.TRACKING_SCAN);
-  await trackingScanPage.assertPageTitle();
+  await trackingScanPage.waitForReady();
   const trackingLabel = `tracking-${crypto.randomUUID().toString().substring(0, 10)}`;
   await trackingScanPage.fillScanPairs([trackingLabel, kitLabel]);
   await trackingScanPage.save();
@@ -678,14 +677,12 @@ async function prepareSentKit(shortID: string,
 
   //Check for the kit in the Kits Sent page
   const kitsSentPage = await navigation.selectFromSamples<KitsSentPage>(SamplesNavEnum.SENT);
-  await kitsSentPage.waitForLoad();
-  await kitsSentPage.assertPageTitle();
+  await kitsSentPage.waitForReady();
   await kitsSentPage.assertDisplayedKitTypes(expectedKitTypes);
   await kitsSentPage.selectKitType(kitType);
   await kitsSentPage.assertReloadKitListBtn();
   await kitsSentPage.assertTableHeader();
-  await kitsSentPage.search(KitsColumnsEnum.MF_CODE, kitLabel);
-  await kitsSentPage.assertDisplayedRowsCount(1);
+  await kitsSentPage.search(KitsColumnsEnum.MF_CODE, kitLabel, { count: 1 });
 
   const sentDate = await kitsSentPage.getData(KitsColumnsEnum.SENT);
   expect(getDate(new Date(sentDate))).toStrictEqual(getDate());

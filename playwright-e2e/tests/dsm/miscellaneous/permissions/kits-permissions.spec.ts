@@ -12,7 +12,7 @@ import { testLimitedPermissions as test } from 'fixtures/dsm-fixture';
 
 test.describe('Kits Permissions', () => {
     const studies = [StudyEnum.OSTEO2, StudyEnum.LMS];
-    const testEmail = process.env.DSM_USER1_EMAIL as string;
+    const testEmail = process.env.DSM_USER2_EMAIL as string; // Mason Whiteclaw
 
     for (const study of studies) {
       test(`@${study}: Without permissions, user cannot see Kits pages`, async ({ page, request }) => {

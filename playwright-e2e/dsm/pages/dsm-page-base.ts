@@ -1,4 +1,5 @@
-import { Page } from '@playwright/test';
+import { Page, Request } from '@playwright/test';
+import { logInfo } from 'utils/log-utils';
 import { waitForNoSpinner } from 'utils/test-utils';
 
 export default abstract class DsmPageBase {
@@ -11,11 +12,14 @@ export default abstract class DsmPageBase {
   }
 
   async reload(): Promise<void> {
-    const networkIdlePromise = this.page.waitForLoadState('networkidle');
-    await this.page.reload();
-    await this.page.waitForLoadState('load');
-    await networkIdlePromise;
+    const logRequest = (interceptedRequest: Request) => {
+      logInfo(`Failed request: ${interceptedRequest.url()}`);
+    }
+
+    this.page.on('requestfinished', logRequest);
+    await this.page.reload({ waitUntil: 'load' });
     await waitForNoSpinner(this.page);
+    this.page.removeListener('requestfinished', logRequest);
   }
 
   public async waitForReady(): Promise<void> {

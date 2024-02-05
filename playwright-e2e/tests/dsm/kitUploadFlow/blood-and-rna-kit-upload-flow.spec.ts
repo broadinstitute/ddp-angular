@@ -99,8 +99,7 @@ test.describe('Blood & RNA Kit Upload', () => {
 
     //Upload a Blood & RNA kit
     const kitUploadPage = await navigation.selectFromSamples<KitUploadPage>(SamplesNavEnum.KIT_UPLOAD);
-    await kitUploadPage.waitForReady(expectedKitTypes);
-    await kitUploadPage.assertPageTitle();
+    await kitUploadPage.waitForReady();
     await kitUploadPage.selectKitType(kitType);
     await kitUploadPage.assertBrowseBtn();
     await kitUploadPage.assertUploadKitsBtn();
@@ -168,7 +167,7 @@ test.describe('Blood & RNA Kit Upload', () => {
     const labelNumber = crypto.randomUUID().toString().substring(0, 10);
     const kitLabel = `RGP_${labelNumber}`;
     const trackingScanPage = await navigation.selectFromSamples<TrackingScanPage>(SamplesNavEnum.TRACKING_SCAN);
-    await trackingScanPage.assertPageTitle();
+    await trackingScanPage.waitForReady();
     const trackingLabel = `tracking-${crypto.randomUUID().toString().substring(0, 10)}`;
     await trackingScanPage.fillScanPairs([trackingLabel, kitLabel]);
     await trackingScanPage.save();
@@ -183,18 +182,15 @@ test.describe('Blood & RNA Kit Upload', () => {
 
     //Kits Sent Page
     const kitsSentPage = await navigation.selectFromSamples<KitsSentPage>(SamplesNavEnum.SENT);
-    await kitsSentPage.waitForLoad();
-    await kitsSentPage.assertPageTitle();
+    await kitsSentPage.waitForReady();
     await kitsSentPage.assertDisplayedKitTypes(expectedKitTypes);
     await kitsSentPage.selectKitType(kitType);
 
     //Check for the sent blood kit
-    await kitsSentPage.search(KitsColumnsEnum.MF_CODE, kitLabel);
-    await kitsSentPage.assertDisplayedRowsCount(1);
+    await kitsSentPage.search(KitsColumnsEnum.MF_CODE, kitLabel, { count: 1 });
 
     //Check for the sent RNA kit
-    await kitsSentPage.search(KitsColumnsEnum.MF_CODE, rnaLabel);
-    await kitsSentPage.assertDisplayedRowsCount(1);
+    await kitsSentPage.search(KitsColumnsEnum.MF_CODE, rnaLabel, { count: 1 });
 
     //Kits Received Page
     const kitsReceivedPage = await navigation.selectFromSamples<KitsReceivedPage>(SamplesNavEnum.RECEIVED);

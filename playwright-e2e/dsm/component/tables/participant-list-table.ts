@@ -2,6 +2,7 @@ import { Locator, Page } from '@playwright/test';
 import Table from 'dss/component/table';
 import ParticipantPage from 'dsm/pages/participant-page/participant-page';
 import { rows } from 'lib/component/dsm/paginators/types/rowsPerPage';
+import { shuffle } from 'utils/test-utils';
 
 export class ParticipantListTable extends Table {
   private readonly _participantPage: ParticipantPage;
@@ -27,6 +28,11 @@ export class ParticipantListTable extends Table {
     await this.paginator.rowsPerPage(rows);
   }
 
+  public async randomizeRows(): Promise<number[]> {
+    const rowCount = await this.getRowsCount();
+    return shuffle([...Array(rowCount).keys()]);
+  }
+
   public async openParticipantPageAt(position: number): Promise<ParticipantPage> {
     await this.getParticipantAt(position).click();
     await this._participantPage.waitForReady();
@@ -43,7 +49,7 @@ export class ParticipantListTable extends Table {
   }
 
   public async selectCheckboxForParticipantAt(position: number): Promise<void> {
-    return await this.getParticipantAt(position).nth(0).locator('mat-checkbox').click();
+    await this.getParticipantAt(position).nth(0).locator('mat-checkbox').click();
   }
 
   public async numOfParticipants(): Promise<number> {

@@ -1,7 +1,7 @@
 import {APIRequestContext, Locator, Page, expect} from '@playwright/test';
 import Dropdown from 'dsm/component/dropdown';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
-import { waitForNoSpinner } from 'utils/test-utils';
+import {waitForNoSpinner, waitForResponse} from 'utils/test-utils';
 import {MainMenuEnum} from 'dsm/component/navigation/enums/mainMenu-enum';
 import {StudyNavEnum} from 'dsm/component/navigation/enums/studyNav-enum';
 import {StudyEnum} from 'dsm/component/navigation/enums/selectStudyNav-enum';
@@ -19,8 +19,9 @@ import RgpFinalScanPage from 'dsm/pages/scanner-pages/rgpFinalScan-page';
 import ErrorPage from 'dsm/pages/samples/error-page';
 import UserPermissionPage from 'dsm/pages/miscellaneous-pages/user-and-permissions-page';
 import KitsQueuePage from 'dsm/pages/kitsInfo-pages/kit-queue-page';
-import { logInfo } from 'utils/log-utils';
+import {logInfo} from 'utils/log-utils';
 import SearchPage from 'dsm/pages/samples/search-page';
+import ClinicalOrdersPage from 'dsm/pages/samples/clinical-orders-page';
 
 
 type Selection = StudyNavEnum | StudyEnum | SamplesNavEnum | MiscellaneousEnum;
@@ -40,6 +41,7 @@ export class Navigation {
       [SamplesNavEnum.RECEIVED, new KitsReceivedPage(this.page, this.request)],
       [SamplesNavEnum.ERROR, new ErrorPage(this.page)],
       [SamplesNavEnum.SEARCH, new SearchPage(this.page)],
+      [SamplesNavEnum.CLINICAL_ORDERS, new ClinicalOrdersPage(this.page)],
     ]),
     miscellaneous: new Map<string, object>([
       [MiscellaneousEnum.USERS_AND_PERMISSIONS, new UserPermissionPage(this.page)],
@@ -92,7 +94,27 @@ export class Navigation {
   }
 
   private async selectFrom(from: MainMenuEnum, selection: Selection): Promise<void> {
-    await new Dropdown(this.page, from).selectOption(selection);
+    switch (selection) {
+      case SamplesNavEnum.INITIAL_SCAN:
+      case SamplesNavEnum.TRACKING_SCAN:
+      case SamplesNavEnum.FINAL_SCAN:
+      case SamplesNavEnum.RGP_FINAL_SCAN:
+      case MiscellaneousEnum.USERS_AND_PERMISSIONS:
+      case SamplesNavEnum.CLINICAL_ORDERS:
+      case MiscellaneousEnum.ONC_HISTORY_UPLOAD:
+        await Promise.all([
+          this.page.waitForLoadState(),
+          new Dropdown(this.page, from).selectOption(selection),
+        ]);
+      break;
+      default:
+        await Promise.all([
+          waitForResponse(this.page, { uri: '/realmsAllowed' }),
+          this.page.waitForLoadState(),
+          new Dropdown(this.page, from).selectOption(selection),
+        ]);
+      break;
+    }
     await waitForNoSpinner(this.page);
   }
 }

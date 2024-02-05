@@ -1,5 +1,4 @@
 import {expect, Locator, Page, Response} from '@playwright/test';
-import {KitType} from 'dsm/component/kitType/kitType';
 import {KitTypeEnum} from 'dsm/component/kitType/enums/kitType-enum';
 import {waitForNoSpinner, waitForResponse} from 'utils/test-utils';
 import {createTextFileSync, deleteFileSync} from 'utils/file-utils';
@@ -8,30 +7,24 @@ import {StudyEnum} from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import path from 'path';
 import Modal from 'dsm/component/modal';
 import {logInfo} from 'utils/log-utils';
+import KitsPageBase from 'dsm/pages/kits-page-base';
 
-export default class KitUploadPage {
-  private readonly PAGE_TITLE = 'Kit Upload';
+export default class KitUploadPage extends KitsPageBase {
+  TABLE_HEADERS = [];
+  PAGE_TITLE = 'Kit Upload';
   private readonly T_HEAD = 'shortId\tfirstName\tlastName\tstreet1\tstreet2\tcity\tpostalCode\tstate\tcountry';
-  private readonly kitType = new KitType(this.page);
-  private readonly expectedKitTypes = [KitTypeEnum.SALIVA, KitTypeEnum.BLOOD];
 
-  constructor(private readonly page: Page) {
+  constructor(page: Page) {
+    super(page);
   }
 
-  public async waitForReady(kitTypes?: KitTypeEnum[]): Promise<void> {
-    const knownKitTypes = kitTypes ?? this.expectedKitTypes; //Use the param kit types if provided, if they are not, then use the general expected kit types
-    await Promise.all([
-      this.page.waitForLoadState(),
-      this.assertPageTitle()
-    ]);
+  public async waitForReady(): Promise<void> {
+    await super.waitForReady();
     await expect(this.skipAddressValidationCheckbox).toBeVisible();
-    await waitForNoSpinner(this.page);
-    await this.assertDisplayedKitTypes(knownKitTypes);
   }
 
-  public async selectKitType(kitType: KitTypeEnum): Promise<void> {
-    await waitForNoSpinner(this.page);
-    await this.kitType.selectKitType(kitType);
+  public async selectKitType(kitType: KitTypeEnum): Promise<boolean> {
+    return super.selectKitType(kitType, { waitForResp: 'undefined' });
   }
 
   public async uploadFile(kitType: KitTypeEnum, kitInfo: KitUploadInfo[], study: StudyEnum, testResultDir?: string) {
@@ -111,24 +104,11 @@ export default class KitUploadPage {
   }
 
   /* Assertions */
-  public async assertPageTitle() {
-    await expect(this.page.locator('h1'),
-      "Kit Upload page - page title doesn't match the expected one")
-      .toHaveText(this.PAGE_TITLE);
-  }
 
   public async assertInstructionSnapshot() {
     await expect(this.page.locator(this.uploadInstructionsXPath),
       "Kit Upload page - Kit upload instructions screenshot doesn't match the provided one")
       .toHaveScreenshot('upload_instructions.png');
-  }
-
-  public async assertDisplayedKitTypes(kitTypes: KitTypeEnum[]): Promise<void> {
-    await waitForNoSpinner(this.page);
-    for (const kitType of kitTypes) {
-      await expect(this.kitType.displayedKitType(kitType),
-        'Kit Upload page - Displayed kit types checkboxes are wrong').toBeVisible()
-    }
   }
 
   public async assertBrowseBtn(): Promise<void> {

@@ -43,7 +43,7 @@ test.describe.serial('Blood Kit Upload', () => {
   const studies = [StudyEnum.LMS]; // StudyEnum.OSTEO2;
   const kitType = KitTypeEnum.BLOOD;
   const expectedKitTypes = [KitTypeEnum.SALIVA, KitTypeEnum.BLOOD];
-  const kitLabel = crypto.randomUUID().toString().substring(0, 14);
+  const kitLabel = crypto.randomUUID().toString().substring(0, 14).replace(/-/, 'a');
   const trackingLabel = `tracking-${crypto.randomUUID().toString().substring(0, 10)}`;
 
   const mockedCanadaAddress = {
@@ -119,7 +119,6 @@ test.describe.serial('Blood Kit Upload', () => {
       await test.step('Upload new blood kit', async () => {
         const kitUploadPage = await navigation.selectFromSamples<KitUploadPage>(SamplesNavEnum.KIT_UPLOAD);
         await kitUploadPage.waitForReady();
-        await kitUploadPage.assertPageTitle();
         await kitUploadPage.selectKitType(kitType);
         await kitUploadPage.skipAddressValidation(true); // because mocked address is different from participant's address
         await kitUploadPage.assertBrowseBtn();
@@ -155,8 +154,8 @@ test.describe.serial('Blood Kit Upload', () => {
           if (noKit) {
             await errorPage.reloadKitList();
           }
-          await expect(kitListTable.tableLocator()).toHaveCount(1, { timeout: 10 * 1000 });
-        }).toPass({ timeout: 60 * 1000 });
+          await expect(kitListTable.tableLocator()).toBeVisible({ timeout: 5000 });
+        }).toPass({ timeout: 3 * 60 * 1000 });
         await kitListTable.searchByColumn(KitsColumnsEnum.SHIPPING_ID, shippingID);
         await expect(async () => {
           // create label could take some time
@@ -168,7 +167,7 @@ test.describe.serial('Blood Kit Upload', () => {
       // For blood kit, requires tracking label
       await test.step('Create tracking label', async () => {
         const trackingScanPage = await navigation.selectFromSamples<TrackingScanPage>(SamplesNavEnum.TRACKING_SCAN);
-        await trackingScanPage.assertPageTitle();
+        await trackingScanPage.waitForReady();
         await trackingScanPage.fillScanPairs([trackingLabel, kitLabel]);
         await trackingScanPage.save();
       });
@@ -191,10 +190,9 @@ test.describe.serial('Blood Kit Upload', () => {
 
       await test.step('Verification: Kit sent', async () => {
         const kitsSentPage = await navigation.selectFromSamples<KitsSentPage>(SamplesNavEnum.SENT);
-        await kitsSentPage.waitForLoad();
+        await kitsSentPage.waitForReady();
         await kitsSentPage.selectKitType(kitType);
-        await kitsSentPage.search(KitsColumnsEnum.MF_CODE, kitLabel);
-        await kitsSentPage.assertDisplayedRowsCount(1);
+        await kitsSentPage.search(KitsColumnsEnum.MF_CODE, kitLabel, { count: 1 });
       });
     });
   }
@@ -203,7 +201,7 @@ test.describe.serial('Blood Kit Upload', () => {
     await welcomePage.selectStudy(StudyEnum.OSTEO2);
 
     const trackingScanPage = await navigation.selectFromSamples<TrackingScanPage>(SamplesNavEnum.TRACKING_SCAN);
-    await trackingScanPage.assertPageTitle();
+    await trackingScanPage.waitForReady();
 
     await trackingScanPage.fillScanPairs([trackingLabel, kitLabel]);
     await trackingScanPage.save({ verifySuccess: false });

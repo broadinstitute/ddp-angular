@@ -44,6 +44,39 @@ Worthy of note:
 If you don't want to use the `.env` file, you can also specify environment variables in cmd. See an example of this in **Examples** section.
 
 
+## Test Users
+
+> process.env.DSM_USER1_EMAIL: Hunter.Stormreaver@test.firecloud.org
+>
+> ![Hunter Stormreaver screenshot](data/readme/hunter_stormreaver.png)
+
+> process.env.DSM_USER2_EMAIL: Mason.Whiteclaw@test.firecloud.org
+>
+> ![Mason Whiteclaw screenshot](data/readme/mason_whiteclaw.png)
+
+> process.env.DSM_USER3_EMAIL: Maya.Bonechewer@test.firecloud.org
+>
+> ![Maya Bonechewer screenshot](data/readme/maya_bonechewer.png)
+
+> process.env.DSM_USER4_EMAIL: GP.Collection.Date@test.firecloud.org
+>
+> ![GP Collection screenshot](data/readme/gp_collection_date.png)
+
+> process.env.DSM_USER5_EMAIL: Eli.Stormreaver@test.firecloud.org
+>
+>  ![Eli Stormreaver screenshot](data/readme/eli_stormreaver.png)
+
+> process.env.DSM_USER6_EMAIL: Paisley.Whiteclaw@test.firecloud.org
+>
+>  ![Paisley Whiteclaw screenshot](data/readme/paisley_whiteclaw.png)
+
+> process.env.DSM_USER7_EMAIL: Noah.Shadowmoon@test.firecloud.org
+>
+>  ![Noah Shadowmoon screenshot](data/readme/noah_shadowmoon.png)
+
+
+
+
 ## Email forwarding
 * Tests run assertions that probe actual delivered email using gmail APIs.  In order for
   these tests to work properly, the emails that pepper sends need to be forwarded into a shared 

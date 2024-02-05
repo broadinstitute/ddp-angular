@@ -45,7 +45,7 @@ const testConfig: PlaywrightTestConfig = {
   forbidOnly: !!CI,
   retries: CI ? 1 : 0,
   workers: CI ? 1 : 2,
-  maxFailures: 0,
+  maxFailures: CI ? 10 : 0,
 
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: [
@@ -86,13 +86,13 @@ const testConfig: PlaywrightTestConfig = {
     /* Base URL to use in actions like `await page.goto('/')`. */
     // baseURL: 'http://localhost:3000',
 
-    /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-    trace: 'on-first-retry',
+    /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer#using-traceplaywrightdev */
+    trace: CI ? 'on-all-retries' : 'retain-on-failure', // https://playwright.dev/docs/trace-viewer#recording-a-trace-on-ci
     screenshot: {
       mode: 'only-on-failure',
       fullPage: true
     },
-    video: 'on-first-retry',
+    video: CI ? 'on-first-retry' : 'retain-on-failure', // https://playwright.dev/docs/videos#record-video
   },
 
   /* Configure projects for chromium browser */

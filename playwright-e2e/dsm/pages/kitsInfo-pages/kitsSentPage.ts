@@ -7,7 +7,7 @@ import {rows} from 'lib/component/dsm/paginators/types/rowsPerPage';
 import KitsPageBase from 'dsm/pages/kits-page-base';
 
 export default class KitsSentPage extends KitsPageBase {
-  protected PAGE_TITLE = 'Kits Sent';
+  PAGE_TITLE = 'Kits Sent';
   protected TABLE_HEADERS = [KitsColumnsEnum.SHORT_ID, KitsColumnsEnum.SHIPPING_ID,
     KitsColumnsEnum.TRACKING_NUMBER, KitsColumnsEnum.TRACKING_RETURN,
     KitsColumnsEnum.SENT, KitsColumnsEnum.MF_CODE, KitsColumnsEnum.DDP_REALM,
@@ -25,14 +25,14 @@ export default class KitsSentPage extends KitsPageBase {
     await this.kitsTable.rowsPerPage(rows);
   }
 
-  public async waitForLoad(): Promise<void> {
-    await this.page.waitForLoadState('networkidle');
-    await waitForNoSpinner(this.page);
-    await this.assertPageTitle();
-  }
-
-  public async search(columnName: KitsColumnsEnum, value: string): Promise<void> {
-    await this.kitsTable.searchBy(columnName, value);
+  public async search(columnName: KitsColumnsEnum, value: string, opts: { count?: number } = {}): Promise<void> {
+    const { count } = opts;
+    if (count) {
+      await this.kitsTable.searchBy(columnName, value);
+      await this.assertDisplayedRowsCount(count);
+    } else {
+      await this.kitsTable.searchBy(columnName, value);
+    }
   }
 
   public async getData(columnName: KitsColumnsEnum): Promise<string> {
@@ -40,11 +40,6 @@ export default class KitsSentPage extends KitsPageBase {
   }
 
   /* Assertions */
-  public async assertPageTitle() {
-    await expect(this.page.locator('h1'),
-      'Kits Sent page - page title is wrong')
-      .toHaveText(this.PAGE_TITLE);
-  }
 
   public async assertReloadKitListBtn() {
     await expect(this.page.locator(this.reloadKitListBtnXPath),
@@ -65,9 +60,12 @@ export default class KitsSentPage extends KitsPageBase {
   }
 
   public async assertDisplayedRowsCount(count: number): Promise<void> {
-    expect(await this.kitsTable.rows.count(),
-      "Kits Sent page - displayed rows count doesn't match the provided one")
-      .toBe(count)
+    await expect(async () => {
+      await this.reloadKitList();
+      await expect(this.kitsTable.rows,
+        "Kits Sent page - displayed rows count doesn't match the provided one")
+        .toHaveCount(count, { timeout: 20 * 1000 });
+    }).toPass({ timeout: 60 * 1000 });
   }
 
   /* XPaths */
