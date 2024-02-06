@@ -92,9 +92,9 @@ tkCfg.twitterAccountId = 'count_me_in';
 tkCfg.facebookGroupId = 'joincountmein';
 tkCfg.instagramId = 'countmein';
 tkCfg.useMultiParticipantDashboard = true;
-// to configure feed, go to: https://lightwidget.com/widget-info/814feee04df55de38ec37791efea075e
+// to configure feed, go to: https://lightwidget.com/widget-info/b095a6f8bf80532d8e05264ca5b8c3f4
 // need Instagram credentials for @osteosarcomaproject
-tkCfg.lightswitchInstagramWidgetId = '006168756c7f5d4a8a831488c63ea48c';
+tkCfg.lightswitchInstagramWidgetId = 'b095a6f8bf80532d8e05264ca5b8c3f4';
 tkCfg.countMeInUrl = 'https://joincountmein.org/';
 
 export const config = new ConfigurationService();
