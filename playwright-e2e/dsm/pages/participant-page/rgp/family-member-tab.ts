@@ -163,8 +163,8 @@ export default class FamilyMemberTab {
       await Promise.all([
         waitForResponse(this.page, {uri: 'ui/patch'}),
         textarea.fill(notes, false),
-        textarea.blur(),
       ]);
+      await textarea.blur();
     }
 
     /**
@@ -185,8 +185,8 @@ export default class FamilyMemberTab {
       await Promise.all([
         waitForResponse(this.page, {uri: 'ui/patch'}),
         textarea.fill(notes, false),
-        textarea.blur(),
       ]);
+      await textarea.blur();
     }
 
     /**
@@ -278,8 +278,8 @@ export default class FamilyMemberTab {
       await Promise.all([
         waitForResponse(this.page, {uri: 'ui/patch'}),
         textarea.fill(notes, false),
-        textarea.blur(),
       ]);
+      await textarea.blur();
     }
 
     /**

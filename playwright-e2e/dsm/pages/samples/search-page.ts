@@ -39,9 +39,9 @@ export default class SearchPage extends KitsPageBase {
     const select = new Select(this.page, { label: 'Search by Field', root: 'app-shipping-search' });
     await select.selectOption(searchField);
     const locator = this.page.locator('//div[button[normalize-space()="Search Kit"]]');
+    await locator.locator('//input').fill(value);
     await Promise.all([
       waitForResponse(this.page, {uri: '/ui/searchKit'}),
-      locator.locator('//input').fill(value),
       locator.locator('//button').click()
     ]);
     await waitForNoSpinner(this.page);

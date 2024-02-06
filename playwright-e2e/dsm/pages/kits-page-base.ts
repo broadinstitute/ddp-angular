@@ -176,10 +176,10 @@ export default abstract class KitsPageBase extends DsmPageBase {
     await expect(this.deactivateReasonBtn).toBeVisible();
 
     const reason = `testDeactivate-${new Date().getTime()}`;
+    await this.deactivateReasonInput.fill(reason);
     await Promise.all([
       waitForResponse(this.page, {uri: '/deactivateKit'}),
       waitForResponse(this.page, {uri: '/kitRequests'}),
-      this.deactivateReasonInput.fill(reason),
       this.deactivateReasonBtn.click(),
     ]);
 

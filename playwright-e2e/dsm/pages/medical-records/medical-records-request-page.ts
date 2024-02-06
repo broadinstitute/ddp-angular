@@ -76,8 +76,8 @@ export default class MedicalRecordsRequestPage {
       await Promise.all([
         waitForResponse(this.page, { uri: 'patch' }),
         input.fill(value, { overwrite: true }),
-        input.blur()
       ]);
+      await input.blur();
     }
   }
 

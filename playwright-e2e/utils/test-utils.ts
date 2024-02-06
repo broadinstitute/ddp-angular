@@ -1,5 +1,4 @@
 import { BrowserContext, Download, errors, expect, Locator, Page, Response } from '@playwright/test';
-import TimeoutError from '@playwright/test'
 import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import Input from 'dss/component/input';
 import Checkbox from 'dss/component/checkbox';
