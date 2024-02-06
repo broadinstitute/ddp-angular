@@ -4,6 +4,7 @@ import { shuffle, waitForNoSpinner } from 'utils/test-utils';
 import Checkbox from './checkbox';
 import { ParticipantsListPaginator } from 'lib/component/dsm/paginators/participantsListPaginator';
 import { logInfo } from 'utils/log-utils';
+import { ro } from '@faker-js/faker';
 
 export enum SortOrder {
   DESC = 'desc',
@@ -235,6 +236,11 @@ export default class Table {
   findButtonInCell(cellLocator: Locator, opts: { label?: string }): Button {
     const { label } = opts;
     return new Button(this.page, { root: cellLocator, label });
+  }
+
+  findButtonInRow(rowIndex = 0, opts: { label?: string } = {}): Button {
+    const { label } = opts;
+    return new Button(this.page, { root: this.rowLocator().nth(rowIndex), label });
   }
 
   async show(): Promise<void> {

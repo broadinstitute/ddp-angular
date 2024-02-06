@@ -10,6 +10,7 @@ import { KitsColumnsEnum } from './kitsInfo-pages/enums/kitsColumns-enum';
 import Modal from 'dsm/component/modal';
 import { getDate, getDateMonthAbbreviated, offsetDaysFromDate } from 'utils/date-utils';
 import { SamplesNavEnum } from 'dsm/component/navigation/enums/samplesNav-enum';
+import Checkbox from 'dss/component/checkbox';
 
 export default abstract class KitsPageBase extends DsmPageBase {
   protected abstract PAGE_TITLE: string;
@@ -124,7 +125,7 @@ export default abstract class KitsPageBase extends DsmPageBase {
     }
 
     await expect(this.kitsTable.rowLocator()).toHaveCount(0);
-    const selectedKit = await this.getSelectKitType();
+    const selectedKit = await this.getSelectedKitType();
     logInfo(`Deactivated all ${selectedKit} kits. Short ID: ${shortId}`);
   }
 
@@ -138,7 +139,7 @@ export default abstract class KitsPageBase extends DsmPageBase {
     return !existsText;
   }
 
-  public async getSelectKitType(): Promise<KitTypeEnum | null> {
+  public async getSelectedKitType(): Promise<KitTypeEnum | null> {
     const kits = await this.getStudyKitTypes();
     for (const kit of kits) {
       const isSelected = await this.kitType.kitTypeCheckbox(kit).isChecked();
@@ -149,9 +150,15 @@ export default abstract class KitsPageBase extends DsmPageBase {
     return null;
   }
 
-  public async getStudyKitTypes(): Promise<KitTypeEnum[]> {
-    const studyNameLocation = this.page.locator(`//app-navigation//a[@data-toggle='dropdown']//i`);
-    const studyName = await studyNameLocation.innerText();
+  public getKitCheckbox(kit: KitTypeEnum): Checkbox {
+    return this.kitType.kitTypeCheckbox(kit);
+  }
+
+  public async getStudyKitTypes(studyName?: StudyEnum): Promise<KitTypeEnum[]> {
+    if (!studyName) {
+      const studyNameLocation = this.page.locator(`//app-navigation//a[@data-toggle='dropdown']//i`);
+      studyName = await studyNameLocation.innerText() as StudyEnum;
+    }
     // Most studies have Blood and Saliva kits; RGP has Blood and 'Blood & RNA' kits; Pancan has Blood, Saliva, and Stool kits
     let kitTypes;
     switch (studyName) {
