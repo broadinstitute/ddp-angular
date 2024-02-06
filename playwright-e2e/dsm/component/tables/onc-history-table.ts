@@ -179,11 +179,11 @@ export default class OncHistoryTable extends Table {
     }
 
     if (currentValue !== actualValue) {
+      await textarea.fill(actualValue, false);
       const [resp] = await Promise.all([
         waitForResponse(this.page, { uri: 'patch' }),
-        textarea.fill(actualValue, false),
+        textarea.blur(),
       ]);
-      await textarea.blur();
       hasLookup && await this.lookup(lookupSelectIndex);
       return resp;
     }
