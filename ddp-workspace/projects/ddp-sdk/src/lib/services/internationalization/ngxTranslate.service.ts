@@ -22,11 +22,13 @@ export class NGXTranslateService {
     }
 
     public getTranslationObject<T>(transKey: string): Observable<T> {
-        return merge(
-            of(null),
-            this.translate.onLangChange,
-            this.translate.onDefaultLangChange.asObservable()).pipe(
-                mergeMap(() => this.translate.get(transKey))
-        );
+        return this.translate ?
+            merge(
+                of(null),
+                this.translate.onLangChange,
+                this.translate.onDefaultLangChange.asObservable()).pipe(
+                    mergeMap(() => this.translate.get(transKey))
+            ) :
+            of({});
     }
 }
