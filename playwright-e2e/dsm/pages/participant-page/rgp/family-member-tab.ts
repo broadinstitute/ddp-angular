@@ -159,12 +159,10 @@ export default class FamilyMemberTab {
      */
     public async inputImportantNotes(notes: string): Promise<void> {
       const textarea = this.getImportantNotes();
-      await textarea.clear();
-      await Promise.all([
-        waitForResponse(this.page, {uri: 'ui/patch'}),
-        textarea.fill(notes, false),
-        textarea.blur(),
-      ]);
+      const respPromise = waitForResponse(this.page, {uri: 'ui/patch'});
+      await textarea.fill(notes, false);
+      await textarea.blur();
+      await respPromise;
     }
 
     /**
@@ -181,12 +179,10 @@ export default class FamilyMemberTab {
      */
     public async inputProcessNotes(notes: string): Promise<void> {
       const textarea = this.getProcessNotes();
-      await textarea.clear();
-      await Promise.all([
-        waitForResponse(this.page, {uri: 'ui/patch'}),
-        textarea.fill(notes, false),
-        textarea.blur(),
-      ]);
+      const respPromise = waitForResponse(this.page, {uri: 'ui/patch'});
+      await textarea.fill(notes, false);
+      await textarea.blur();
+      await respPromise;
     }
 
     /**
@@ -274,12 +270,10 @@ export default class FamilyMemberTab {
      */
     public async inputMixedRaceNotes(notes: string): Promise<void> {
       const textarea = this.getMixedRaceNotes();
-      await textarea.clear();
-      await Promise.all([
-        waitForResponse(this.page, {uri: 'ui/patch'}),
-        textarea.fill(notes, false),
-        textarea.blur(),
-      ]);
+      const respPromise = waitForResponse(this.page, {uri: 'ui/patch'});
+      await textarea.fill(notes, false);
+      await textarea.blur();
+      await respPromise;
     }
 
     /**
