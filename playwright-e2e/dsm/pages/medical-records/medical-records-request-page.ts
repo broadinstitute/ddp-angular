@@ -73,11 +73,10 @@ export default class MedicalRecordsRequestPage {
 
     const existingValue = await input.currentValue();
     if (existingValue !== value) {
+      const respPromise = waitForResponse(this.page, { uri: 'patch' });
       await input.fill(value, { overwrite: true });
-      await Promise.all([
-        waitForResponse(this.page, { uri: 'patch' }),
-        input.blur(),
-      ]);
+      await input.blur();
+      await respPromise;
     }
   }
 
