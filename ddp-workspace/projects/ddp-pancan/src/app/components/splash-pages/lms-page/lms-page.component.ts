@@ -41,6 +41,7 @@ export class LmsPageComponent implements OnInit {
 
     ngOnInit(): void {
         this.useSpecificLanguage('en');
+        window.location.href = 'https://lmsproject.org/';
     }
 
     private useSpecificLanguage(languageCode: string): void {
