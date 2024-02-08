@@ -161,10 +161,9 @@ export default class FamilyMemberTab {
       const textarea = this.getImportantNotes();
       await textarea.clear();
       await textarea.fill(notes, false);
-      await Promise.all([
-        waitForResponse(this.page, {uri: 'ui/patch'}),
-        textarea.blur(),
-      ]);
+      const respPromise = waitForResponse(this.page, {uri: 'ui/patch'});
+      await textarea.blur();
+      await respPromise;
     }
 
     /**
@@ -183,10 +182,9 @@ export default class FamilyMemberTab {
       const textarea = this.getProcessNotes();
       await textarea.clear();
       await textarea.fill(notes, false);
-      await Promise.all([
-        waitForResponse(this.page, {uri: 'ui/patch'}),
-        textarea.blur(),
-      ]);
+      const respPromise = waitForResponse(this.page, {uri: 'ui/patch'});
+      await textarea.blur();
+      await respPromise;
     }
 
     /**
@@ -276,10 +274,9 @@ export default class FamilyMemberTab {
       const textarea = this.getMixedRaceNotes();
       await textarea.clear();
       await textarea.fill(notes, false);
-      await Promise.all([
-        waitForResponse(this.page, {uri: 'ui/patch'}),
-        textarea.blur(),
-      ]);
+      const respPromise = waitForResponse(this.page, {uri: 'ui/patch'});
+      await textarea.blur();
+      await respPromise;
     }
 
     /**
