@@ -41,6 +41,8 @@ export class LmsPageComponent implements OnInit {
 
     ngOnInit(): void {
         this.useSpecificLanguage('en');
+        // PEPPER-1327: If user opens /lms page, redirects url to lmsproject.og
+        window.location.href = 'https://lmsproject.org/';
     }
 
     private useSpecificLanguage(languageCode: string): void {
