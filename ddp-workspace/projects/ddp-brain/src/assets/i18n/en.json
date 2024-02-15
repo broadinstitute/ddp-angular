@@ -161,9 +161,9 @@
                         "Alt": "Dragon Master Foundation logo"
                     },
                     {
-                        "Website": "http://www.targetcancerfoundation.org/",
-                        "Logo": "assets/images/TargetCancer-logo.png",
-                        "Alt": "Target Cancer Foundation logo"
+                        "Website": "http://www.curethekids.org/",
+                        "Logo": "assets/images/PBTF-logo.png",
+                        "Alt": "Pediatric Brain Tumor Foundation logo"
                     }
                 ],
                 [
@@ -177,13 +177,6 @@
                         "Logo": "assets/images/CERN-logo.png",
                         "Alt": "CERN Foundation logo"
                     },
-                    {
-                        "Website": "http://www.curethekids.org/",
-                        "Logo": "assets/images/PBTF-logo.png",
-                        "Alt": "Pediatric Brain Tumor Foundation logo"
-                    }
-                ],
-                [
                     {
                         "Website": "https://www.braintumour.ca",
                         "Logo": "assets/images/BTFC-logo.png",
