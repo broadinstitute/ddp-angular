@@ -23,7 +23,7 @@ test.describe('Facility name', () => {
       const searchPanel = participantListPage.filters.searchPanel;
       let shortID: string;
 
-      await test.step('Search for the right participant', async () => {
+      await test.step('Find a participant', async () => {
         await customizeViewPanel.open();
         await customizeViewPanel.selectColumns('Medical Record Columns', ['MR Problem']);
         await customizeViewPanel.selectColumns('Participant - DSM Columns', ['Onc History Created']);
@@ -53,7 +53,7 @@ test.describe('Facility name', () => {
       await validateLookup(page, oncHistoryTable, lastRow, 'm', 'Memorial City Hospital');
 
       // Generate new facility name. Enter new facility name in last row.
-      const newFacilityName = `${faker.word.words({count: 3})} ${faker.phone.number}`;
+      const newFacilityName = `${faker.word.words({count: 3})} ${faker.phone.number()}`;
       await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.FACILITY, { value: newFacilityName }, lastRow);
       const actualFacilityValue = await oncHistoryTable.getFieldValue(OncHistoryInputColumnsEnum.FACILITY, lastRow);
       expect(actualFacilityValue).toStrictEqual(newFacilityName);
@@ -77,5 +77,9 @@ test.describe('Facility name', () => {
     const lookupListCount = await table.lookupList.count();
     expect(lookupListCount).toBeGreaterThanOrEqual(1);
     await expect(table.lookupList.getByText(lookupName).nth(0)).toBeVisible();
+
+    await table.lookupList.getByText(lookupName).first().click();
+    const value = await table.getFieldValue(OncHistoryInputColumnsEnum.FACILITY, row);
+    expect(value).toContain(lookupName);
   }
 });
