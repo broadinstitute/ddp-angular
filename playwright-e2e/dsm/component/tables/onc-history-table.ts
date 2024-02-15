@@ -84,7 +84,7 @@ export default class OncHistoryTable extends Table {
     const currentValue = await textarea.currentValue();
     if (currentValue.trim() !== note) {
       await Promise.all([
-        waitForResponse(this.page, { uri: 'patch' }),
+        waitForResponse(this.page, { uri: '/patch' }),
         textarea.fill(note)
       ]);
     }
@@ -128,7 +128,7 @@ export default class OncHistoryTable extends Table {
   }
 
   /* Helper Functions */
-  private async fillInput(root: Locator, value: string | number, hasLookup: boolean, lookupSelectIndex = 0): Promise<void> {
+  private async fillInput(root: Locator, value: string | number, hasLookup: boolean, lookupSelectIndex = 0): Promise<string> {
     const inputElement = new Input(this.page, { root });
     const currentValue = await this.getCurrentValue(inputElement);
     let actualValue = typeof value === 'number' ? value.toString() : value;
@@ -137,13 +137,20 @@ export default class OncHistoryTable extends Table {
       actualValue = actualValue.slice(0, Number(maxLength));
     }
 
+    let inputValue = currentValue;
     if (currentValue !== actualValue) {
+      inputValue = actualValue;
       await Promise.all([
-        waitForResponse(this.page, { uri: 'patch' }),
+        waitForResponse(this.page, { uri: '/patch' }),
         inputElement.fillSimple(actualValue)
       ]);
-      hasLookup && await this.lookup(lookupSelectIndex, true);
+      if (hasLookup) {
+        await this.lookup(lookupSelectIndex, true);
+      }
     }
+
+    expect(await inputElement.currentValue()).toStrictEqual(inputValue);
+    return inputValue;
   }
 
   public async fillDate(root: Locator, { date, today }: FillDate): Promise<Response | null> {
@@ -151,7 +158,7 @@ export default class OncHistoryTable extends Table {
       const todayBtn = new Button(this.page, { root, label: 'Today' });
       await expect(todayBtn.toLocator()).toBeVisible();
       const [resp] = await Promise.all([
-        waitForResponse(this.page, { uri: 'patch' }),
+        waitForResponse(this.page, { uri: '/patch' }),
         todayBtn.click()
       ]);
       return resp;
@@ -160,7 +167,7 @@ export default class OncHistoryTable extends Table {
       const datePicker = new DatePicker(this.page, { root });
       await datePicker.open();
       const [resp] = await Promise.all([
-        waitForResponse(this.page, { uri: 'patch' }),
+        waitForResponse(this.page, { uri: '/patch' }),
         datePicker.pickDate(date)
       ]);
       await datePicker.close();
@@ -179,7 +186,7 @@ export default class OncHistoryTable extends Table {
     }
 
     if (currentValue !== actualValue) {
-      const respPromise = waitForResponse(this.page, { uri: 'patch' });
+      const respPromise = waitForResponse(this.page, { uri: '/patch' });
       await textarea.fill(actualValue, false);
       await textarea.blur();
       const resp = await respPromise;
@@ -196,7 +203,7 @@ export default class OncHistoryTable extends Table {
     if (selectedValue?.trim() !== selectRequest) {
       const selectInput = new Select(this.page, { root });
       const [resp] = await Promise.all([
-        waitForResponse(this.page, { uri: 'patch' }),
+        waitForResponse(this.page, { uri: '/patch' }),
         selectInput.selectOption(selectRequest)
       ]);
       return resp;
@@ -235,7 +242,7 @@ export default class OncHistoryTable extends Table {
 
 
   /* Locators */
-  private get lookupList(): Locator {
+  public get lookupList(): Locator {
     return this.page.locator(this.lookupListXPath);
   }
 
@@ -244,7 +251,7 @@ export default class OncHistoryTable extends Table {
   }
 
   private notesIconButton(index = 0): Locator {
-    return this.row(index).locator('td').locator('//button[.//*[name()=\'svg\' and @data-icon=\'comment-alt\']]');
+    return this.row(index).locator('td').locator('//button[.//*[name()="svg" and @data-icon="comment-alt"]]');
   }
 
   private get notesModalContent(): Locator {
@@ -294,7 +301,7 @@ export default class OncHistoryTable extends Table {
 
   /* XPaths */
   private get tableXPath(): string {
-    return `//app-onc-history-detail//table[contains(@class,'table')]`
+    return `//app-onc-history-detail//table[contains(@class,"table")]`
   }
 
   private get rowXPath(): string {
@@ -314,7 +321,7 @@ export default class OncHistoryTable extends Table {
   }
 
   private columnXPath(columnName: OncHistoryInputColumnsEnum): string {
-    return `${this.headerXPath}/th[descendant-or-self::*[text()[normalize-space()='${columnName}']]]`;
+    return `${this.headerXPath}/th[descendant-or-self::*[text()[normalize-space()="${columnName}"]]]`;
   }
 
   private get headerXPath(): string {
