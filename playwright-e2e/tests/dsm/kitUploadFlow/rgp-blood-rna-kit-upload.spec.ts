@@ -175,8 +175,21 @@ test.describe('Blood & RNA Kit Upload', () => {
     //RGP final scan page - RNA labels must have the prefix 'RNA' (all caps)
     const finalScanPage = await navigation.selectFromSamples<RgpFinalScanPage>(SamplesNavEnum.RGP_FINAL_SCAN);
     const rnaNumber = crypto.randomUUID().toString().substring(0, 10);
-    const rnaLabel = `RNA${rnaNumber}`;
+
     await finalScanPage.assertPageTitle();
+
+    // No error should be visible
+    const pageError = page.locator('mat-error');
+    await expect(pageError).not.toBeVisible();
+
+    // An error is shown that the RNA label should start with "RNA"
+    const rnaInvalidLabel = `MA${rnaNumber}`;
+    await finalScanPage.fillScanTrio(kitLabel, rnaInvalidLabel, shippingID, 1);
+    // Check error text
+    await expect(pageError).toBeVisible();
+    expect(await pageError.innerText()).toStrictEqual('This barcode does not contain the “RNA” prefix');
+
+    const rnaLabel = `RNA${rnaNumber}`;
     await finalScanPage.fillScanTrio(kitLabel, rnaLabel, shippingID, 1);
     await finalScanPage.save();
 
