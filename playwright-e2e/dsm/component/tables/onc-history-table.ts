@@ -129,10 +129,10 @@ export default class OncHistoryTable extends Table {
 
   /* Helper Functions */
   private async fillInput(root: Locator, value: string | number, hasLookup: boolean, lookupSelectIndex = 0): Promise<string> {
-    const inputElement = new Input(this.page, { root });
-    const currentValue = await this.getCurrentValue(inputElement);
+    const input = new Input(this.page, { root });
+    const currentValue = await this.getCurrentValue(input);
     let actualValue = typeof value === 'number' ? value.toString() : value;
-    const maxLength = await inputElement.maxLength();
+    const maxLength = await input.maxLength();
     if (maxLength && actualValue.length > Number(maxLength)) {
       actualValue = actualValue.slice(0, Number(maxLength));
     }
@@ -142,14 +142,14 @@ export default class OncHistoryTable extends Table {
       inputValue = actualValue;
       await Promise.all([
         waitForResponse(this.page, { uri: '/patch' }),
-        inputElement.fillSimple(actualValue)
+        input.fillSimple(actualValue)
       ]);
       if (hasLookup) {
-        await this.lookup(lookupSelectIndex, true);
+        await this.lookup(input.toLocator(), lookupSelectIndex, true);
       }
     }
 
-    expect(await inputElement.currentValue()).toStrictEqual(inputValue);
+    expect(await input.currentValue()).toStrictEqual(inputValue);
     return inputValue;
   }
 
@@ -190,7 +190,7 @@ export default class OncHistoryTable extends Table {
       await textarea.fill(actualValue, false);
       await textarea.blur();
       const resp = await respPromise;
-      hasLookup && await this.lookup(lookupSelectIndex);
+      hasLookup && await this.lookup(textarea.toLocator(), lookupSelectIndex);
       return resp;
     }
     return null;
@@ -211,8 +211,8 @@ export default class OncHistoryTable extends Table {
     return null;
   }
 
-  private async lookup(selectIndex = 0, isFacility = false): Promise<void> {
-    const lookupList = this.lookupList;
+  private async lookup(root: Locator, selectIndex = 0, isFacility = false): Promise<void> {
+    const lookupList = this.lookupList(root);
     const count = await lookupList.count();
     if (count > 0 && selectIndex < count) {
       if (isFacility) {
@@ -242,8 +242,8 @@ export default class OncHistoryTable extends Table {
 
 
   /* Locators */
-  public get lookupList(): Locator {
-    return this.page.locator(this.lookupListXPath);
+  public lookupList(root: Locator): Locator {
+    return root.locator(this.lookupListXPath);
   }
 
   private activeSelectedRequestListItem(root: Locator): Locator {
@@ -309,7 +309,7 @@ export default class OncHistoryTable extends Table {
   }
 
   private get lookupListXPath(): string {
-    return '//app-lookup/div/ul/li'
+    return '//ancestor-or-self::td//app-lookup/div/ul/li'
   }
 
   private tdXPath(columnName: OncHistoryInputColumnsEnum): string {

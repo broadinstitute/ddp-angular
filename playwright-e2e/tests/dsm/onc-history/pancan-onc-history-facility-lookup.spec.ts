@@ -16,33 +16,32 @@ test.describe('Facility name', () => {
   const studies = [StudyEnum.PANCAN];
 
   for (const study of studies) {
-    test(`Selectable in the lookup ${study} @dsm`, async ({ page, request }) => {
+    test(`is visible and selectable in lookup ${study} @dsm`, async ({ page, request }) => {
       const participantListPage = await ParticipantListPage.goto(page, study, request);
       const participantListTable = participantListPage.participantListTable;
       const customizeViewPanel = participantListPage.filters.customizeViewPanel;
       const searchPanel = participantListPage.filters.searchPanel;
-      let shortID: string;
 
-      await test.step('Find a participant', async () => {
-        await customizeViewPanel.open();
-        await customizeViewPanel.selectColumns('Medical Record Columns', ['MR Problem']);
-        await customizeViewPanel.selectColumns('Participant - DSM Columns', ['Onc History Created']);
-        await customizeViewPanel.selectColumns('Research Consent Form Columns', ['Your Mailing Address *']);
+      // Find a participant
+      await customizeViewPanel.open();
+      await customizeViewPanel.selectColumns('Medical Record Columns', ['MR Problem']);
+      await customizeViewPanel.selectColumns('Participant - DSM Columns', ['Onc History Created']);
+      await customizeViewPanel.selectColumns('Research Consent Form Columns', ['Your Mailing Address *']);
 
-        await searchPanel.open();
-        await searchPanel.checkboxes('Status', { checkboxValues: ['Enrolled'] });
-        await searchPanel.checkboxes('MR Problem', { checkboxValues: ['No'] });
-        await searchPanel.dates('Onc History Created', { additionalFilters: [AdditionalFilter.EMPTY] });
-        await searchPanel.text('Your Mailing Address *', { additionalFilters: [AdditionalFilter.NOT_EMPTY] });
+      await searchPanel.open();
+      await searchPanel.checkboxes('Status', { checkboxValues: ['Enrolled'] });
+      await searchPanel.checkboxes('MR Problem', { checkboxValues: ['No'] });
+      await searchPanel.dates('Onc History Created', { additionalFilters: [AdditionalFilter.EMPTY] });
+      await searchPanel.text('Your Mailing Address *', { additionalFilters: [AdditionalFilter.NOT_EMPTY] });
 
-        await searchPanel.search();
-        shortID = await participantListPage.findParticipantWithTab(
-          { findPediatricParticipant: false, tab: TabEnum.ONC_HISTORY, uriString: 'ui/filterList'}
-        );
-        logInfo(`Short id: ${shortID}`);
-        expect(shortID?.length).toBeTruthy();
-      })
+      await searchPanel.search();
+      const shortID = await participantListPage.findParticipantWithTab(
+        { findPediatricParticipant: false, tab: TabEnum.ONC_HISTORY, uriString: 'ui/filterList'}
+      );
+      logInfo(`Short id: ${shortID}`);
+      expect(shortID?.length).toBeTruthy();
 
+      // Open Onc History tab
       await participantListPage.filterListByShortId(shortID!);
       const participantPage = await participantListTable.openParticipantPageAt(0);
       const oncHistoryTab = await participantPage.clickTab<OncHistoryTab>(TabEnum.ONC_HISTORY);
@@ -54,31 +53,54 @@ test.describe('Facility name', () => {
 
       // Generate new facility name. Enter new facility name in last row.
       const newFacilityName = `${faker.word.words({count: 3})} ${faker.phone.number()}`;
+      logInfo(`Onc History new Facility name: ${newFacilityName}`);
+
+      // In new row, enter new facility name
+      lastRow = ++lastRow;
+      await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.DATE_OF_PX,
+          {
+            date: {
+              date: {
+                yyyy: new Date().getFullYear(),
+                month: new Date().getMonth(),
+                dayOfMonth: new Date().getDate()
+              }
+            }
+          }, lastRow);
       await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.FACILITY, { value: newFacilityName }, lastRow);
       const actualFacilityValue = await oncHistoryTable.getFieldValue(OncHistoryInputColumnsEnum.FACILITY, lastRow);
       expect(actualFacilityValue).toStrictEqual(newFacilityName);
 
-      // New facility name becomes available for select in lookup
-      lastRow = lastRow++;
+      // New facility name becomes available for select in new lookup
+      lastRow = ++lastRow;
       const firstWord = newFacilityName.split(' ')[0].substring(0, 1); // first 2 chars in first word
       await validateLookup(page, oncHistoryTable, lastRow, firstWord, newFacilityName);
+
+      // clean up: delete two added rows
+      await oncHistoryTable.deleteRowAt(lastRow);
+      await oncHistoryTable.deleteRowAt(lastRow - 1);
     })
   }
 
   async function validateLookup(page: Page, table: OncHistoryTable, row: number, keyword: string, lookupName: string) {
     const cell = await table.checkColumnAndCellValidity(OncHistoryInputColumnsEnum.FACILITY, row);
     const input = new Input(page, { root: cell });
+    const inputLocator = input.toLocator();
 
     await Promise.all([
-      waitForResponse(page, { uri: '/patch' }),
+      waitForResponse(page, { uri: '/patch' }), // this /patch requeset invokes lookup
       input.fillSimple(keyword)
     ]);
 
-    const lookupListCount = await table.lookupList.count();
+    const lookupListCount = await table.lookupList(inputLocator).count();
     expect(lookupListCount).toBeGreaterThanOrEqual(1);
-    await expect(table.lookupList.getByText(lookupName).nth(0)).toBeVisible();
+    await expect(table.lookupList(inputLocator).getByText(lookupName).nth(0)).toBeVisible();
 
-    await table.lookupList.getByText(lookupName).first().click();
+    await Promise.all([
+      waitForResponse(page, { uri: '/patch' }), // this /patch request happens after select facility in lookup
+      table.lookupList(inputLocator).getByText(lookupName).first().click()
+    ]);
+
     const value = await table.getFieldValue(OncHistoryInputColumnsEnum.FACILITY, row);
     expect(value).toContain(lookupName);
   }
