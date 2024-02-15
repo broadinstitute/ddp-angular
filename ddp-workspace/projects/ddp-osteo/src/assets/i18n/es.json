@@ -193,6 +193,9 @@
             },
             "DanaFarberLogo": {
                 "Alt": "Logotipo de Dana Farber"
+            },
+            "PECGSLogo": {
+              "Alt": "Logotipo PE-CGS"
             }
         },
         "StepsSection": {
