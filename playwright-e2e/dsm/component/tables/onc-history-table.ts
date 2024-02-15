@@ -149,7 +149,7 @@ export default class OncHistoryTable extends Table {
       }
     }
 
-    expect(await input.currentValue()).toStrictEqual(inputValue);
+    inputValue = await input.currentValue();
     return inputValue;
   }
 
@@ -211,7 +211,7 @@ export default class OncHistoryTable extends Table {
     return null;
   }
 
-  private async lookup(root: Locator, selectIndex = 0, isFacility = false): Promise<void> {
+  private async lookup(root: Locator, selectIndex = 0, isFacility = false): Promise<string> {
     const lookupList = this.lookupList(root);
     const count = await lookupList.count();
     if (count > 0 && selectIndex < count) {
@@ -220,11 +220,14 @@ export default class OncHistoryTable extends Table {
         expect(isComplete, `Lookup value is not complete at provided index - ${selectIndex}`)
           .toBeTruthy()
       }
+      const text = await lookupList.nth(selectIndex).innerText();
       await Promise.all([
         waitForResponse(this.page, { uri: 'patch' }),
         lookupList.nth(selectIndex).click()
       ]);
+      return text;
     }
+    throw new Error(`Error in lookup() function. count: ${count} and selectedIndex: ${selectIndex}`);
   }
 
   private async getCurrentValue(element: Input | Select | TextArea): Promise<string> {

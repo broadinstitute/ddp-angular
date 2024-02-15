@@ -11,7 +11,7 @@ import { getDate } from 'utils/date-utils';
 import { TissueDynamicFieldsEnum } from 'dsm/pages/tissue/enums/tissue-information-enum';
 import { logInfo } from 'utils/log-utils';
 
-test.describe('Tissue Request Flow', () => {
+test.describe.serial('Tissue Request Flow', () => {
   const studies = [StudyEnum.PANCAN];
 
   for (const study of studies) {
