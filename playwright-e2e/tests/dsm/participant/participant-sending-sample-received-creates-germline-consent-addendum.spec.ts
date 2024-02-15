@@ -97,11 +97,10 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
 
       const tissue = await tissueInformationPage.tissue();
       await tissue.fillField(TissueDynamicFieldsEnum.USS, { inputValue: materialsReceivedAmount });
-      smID = `SM-${crypto.randomUUID().toString().substring(0, 5)}`; //e.g. SM-12345
-      secondSMID = `SM-${crypto.randomUUID().toString().substring(0, 5)}`; //e.g. SM-09876
+      smID = `SM-${crypto.randomUUID().toString().replace('-', '1').substring(0, 5)}`; //e.g. SM-12345
+      secondSMID = `SM-${crypto.randomUUID().toString().replace('-', '1').substring(0, 5)}`; //e.g. SM-09876
       const smIDModal = await tissue.fillSMIDs(SMIdEnum.USS_SM_IDS);
-      await smIDModal.fillInputs([smID]);
-      await smIDModal.fillInputs([secondSMID]);
+      await smIDModal.fillInputs([smID, secondSMID]);
       await smIDModal.close();
 
       await tissue.fillField(TissueDynamicFieldsEnum.TISSUE_TYPE, {select: TissueTypesEnum.BLOCK});
@@ -204,11 +203,10 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
 
       const tissue = await tissueInformationPage.tissue();
       await tissue.fillField(TissueDynamicFieldsEnum.USS, { inputValue: materialsReceivedAmount });
-      smID = `SM-${crypto.randomUUID().toString().substring(0, 5)}`; //e.g. SM-12345
-      secondSMID = `SM-${crypto.randomUUID().toString().substring(0, 5)}`; //e.g. SM-09876
+      smID = `SM-${crypto.randomUUID().toString().replace('-', '1').substring(0, 5)}`; //e.g. SM-12345
+      secondSMID = `SM-${crypto.randomUUID().toString().replace('-', '1').substring(0, 5)}`; //e.g. SM-09876
       const smIDModal = await tissue.fillSMIDs(SMIdEnum.USS_SM_IDS);
-      await smIDModal.fillInputs([smID]);
-      await smIDModal.fillInputs([secondSMID]);
+      await smIDModal.fillInputs([smID, secondSMID]);
       await smIDModal.close();
 
       await tissue.fillField(TissueDynamicFieldsEnum.TISSUE_TYPE, {select: TissueTypesEnum.BLOCK});
@@ -311,11 +309,10 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
 
       const tissue = await tissueInformationPage.tissue();
       await tissue.fillField(TissueDynamicFieldsEnum.USS, { inputValue: materialsReceivedAmount });
-      smID = `SM-${crypto.randomUUID().toString().substring(0, 5)}`; //e.g. SM-12345
-      secondSMID = `SM-${crypto.randomUUID().toString().substring(0, 5)}`; //e.g. SM-09876
+      smID = `SM-${crypto.randomUUID().toString().replace('-', '1').substring(0, 5)}`; //e.g. SM-12345
+      secondSMID = `SM-${crypto.randomUUID().toString().replace('-', '1').substring(0, 5)}`; //e.g. SM-09876
       const smIDModal = await tissue.fillSMIDs(SMIdEnum.USS_SM_IDS);
-      await smIDModal.fillInputs([smID]);
-      await smIDModal.fillInputs([secondSMID]);
+      await smIDModal.fillInputs([smID, secondSMID]);
       await smIDModal.close();
 
       await tissue.fillField(TissueDynamicFieldsEnum.TISSUE_TYPE, {select: TissueTypesEnum.BLOCK});
@@ -418,11 +415,10 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
 
       const tissue = await tissueInformationPage.tissue();
       await tissue.fillField(TissueDynamicFieldsEnum.USS, { inputValue: materialsReceivedAmount });
-      smID = `SM-${crypto.randomUUID().toString().substring(0, 5)}`; //e.g. SM-12345
-      secondSMID = `SM-${crypto.randomUUID().toString().substring(0, 5)}`; //e.g. SM-09876
+      smID = `SM-${crypto.randomUUID().toString().replace('-', '1').substring(0, 5)}`; //e.g. SM-12345
+      secondSMID = `SM-${crypto.randomUUID().toString().replace('-', '1').substring(0, 5)}`; //e.g. SM-09876
       const smIDModal = await tissue.fillSMIDs(SMIdEnum.USS_SM_IDS);
-      await smIDModal.fillInputs([smID]);
-      await smIDModal.fillInputs([secondSMID]);
+      await smIDModal.fillInputs([smID, secondSMID]);
       await smIDModal.close();
 
       await tissue.fillField(TissueDynamicFieldsEnum.TISSUE_TYPE, {select: TissueTypesEnum.BLOCK});
