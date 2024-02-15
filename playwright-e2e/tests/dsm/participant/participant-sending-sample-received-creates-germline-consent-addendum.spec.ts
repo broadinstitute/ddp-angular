@@ -21,7 +21,7 @@ import ParticipantPage from 'dsm/pages/participant-page/participant-page';
 import OncHistoryTab from 'dsm/component/tabs/onc-history-tab';
 import { TabEnum } from 'dsm/component/tabs/enums/tab-enum';
 import { OncHistoryInputColumnsEnum, OncHistorySelectRequestEnum } from 'dsm/component/tabs/enums/onc-history-input-columns-enum';
-import { SMIdEnum, TissueDynamicFieldsEnum } from 'dsm/pages/tissue/enums/tissue-information-enum';
+import { SMIdEnum, TissueDynamicFieldsEnum, TissueTypesEnum } from 'dsm/pages/tissue/enums/tissue-information-enum';
 import KitsReceivedPage from 'dsm/pages/kitsInfo-pages/kitsReceived-page/kitsReceivedPage';
 import { AdditionalFilter } from 'dsm/component/filters/sections/search/search-enums';
 import crypto from 'crypto';
@@ -34,7 +34,7 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
   const facilityName = user.doctor.hospital;
   const facilityPhoneNumber = user.doctor.phone;
   const facilityFaxNumber = user.doctor.fax;
-  const materialsReceivedAmount = 1;
+  const materialsReceivedAmount = 2;
   let navigation;
   let shortID = '';
   let kitLabel = '';
@@ -43,6 +43,7 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
   let today;
   let randomAccessionNumber = '';
   let smID = '';
+  let secondSMID = '';
   let tumorSampleID = '';
   let tumorCollaboratorSampleIDPrefix = '';
 
@@ -97,9 +98,13 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
       const tissue = await tissueInformationPage.tissue();
       await tissue.fillField(TissueDynamicFieldsEnum.USS, { inputValue: materialsReceivedAmount });
       smID = `SM-${crypto.randomUUID().toString().substring(0, 5)}`; //e.g. SM-12345
+      secondSMID = `SM-${crypto.randomUUID().toString().substring(0, 5)}`; //e.g. SM-09876
       const smIDModal = await tissue.fillSMIDs(SMIdEnum.USS_SM_IDS);
       await smIDModal.fillInputs([smID]);
+      await smIDModal.fillInputs([secondSMID]);
       await smIDModal.close();
+
+      await tissue.fillField(TissueDynamicFieldsEnum.TISSUE_TYPE, {select: TissueTypesEnum.BLOCK});
 
       tumorCollaboratorSampleIDPrefix = await tissue.getTumorCollaboratorSampleIDSuggestedValue();
       tumorSampleID = `${tumorCollaboratorSampleIDPrefix}_${crypto.randomUUID().toString().substring(0, 4)}`;
@@ -200,9 +205,13 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
       const tissue = await tissueInformationPage.tissue();
       await tissue.fillField(TissueDynamicFieldsEnum.USS, { inputValue: materialsReceivedAmount });
       smID = `SM-${crypto.randomUUID().toString().substring(0, 5)}`; //e.g. SM-12345
+      secondSMID = `SM-${crypto.randomUUID().toString().substring(0, 5)}`; //e.g. SM-09876
       const smIDModal = await tissue.fillSMIDs(SMIdEnum.USS_SM_IDS);
       await smIDModal.fillInputs([smID]);
+      await smIDModal.fillInputs([secondSMID]);
       await smIDModal.close();
+
+      await tissue.fillField(TissueDynamicFieldsEnum.TISSUE_TYPE, {select: TissueTypesEnum.BLOCK});
 
       tumorCollaboratorSampleIDPrefix = await tissue.getTumorCollaboratorSampleIDSuggestedValue();
       tumorSampleID = `${tumorCollaboratorSampleIDPrefix}_${crypto.randomUUID().toString().substring(0, 4)}`;
@@ -303,9 +312,13 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
       const tissue = await tissueInformationPage.tissue();
       await tissue.fillField(TissueDynamicFieldsEnum.USS, { inputValue: materialsReceivedAmount });
       smID = `SM-${crypto.randomUUID().toString().substring(0, 5)}`; //e.g. SM-12345
+      secondSMID = `SM-${crypto.randomUUID().toString().substring(0, 5)}`; //e.g. SM-09876
       const smIDModal = await tissue.fillSMIDs(SMIdEnum.USS_SM_IDS);
       await smIDModal.fillInputs([smID]);
+      await smIDModal.fillInputs([secondSMID]);
       await smIDModal.close();
+
+      await tissue.fillField(TissueDynamicFieldsEnum.TISSUE_TYPE, {select: TissueTypesEnum.BLOCK});
 
       tumorCollaboratorSampleIDPrefix = await tissue.getTumorCollaboratorSampleIDSuggestedValue();
       tumorSampleID = `${tumorCollaboratorSampleIDPrefix}_${crypto.randomUUID().toString().substring(0, 4)}`;
@@ -406,9 +419,13 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
       const tissue = await tissueInformationPage.tissue();
       await tissue.fillField(TissueDynamicFieldsEnum.USS, { inputValue: materialsReceivedAmount });
       smID = `SM-${crypto.randomUUID().toString().substring(0, 5)}`; //e.g. SM-12345
+      secondSMID = `SM-${crypto.randomUUID().toString().substring(0, 5)}`; //e.g. SM-09876
       const smIDModal = await tissue.fillSMIDs(SMIdEnum.USS_SM_IDS);
       await smIDModal.fillInputs([smID]);
+      await smIDModal.fillInputs([secondSMID]);
       await smIDModal.close();
+
+      await tissue.fillField(TissueDynamicFieldsEnum.TISSUE_TYPE, {select: TissueTypesEnum.BLOCK});
 
       tumorCollaboratorSampleIDPrefix = await tissue.getTumorCollaboratorSampleIDSuggestedValue();
       tumorSampleID = `${tumorCollaboratorSampleIDPrefix}_${crypto.randomUUID().toString().substring(0, 4)}`;
