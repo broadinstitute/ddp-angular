@@ -30,7 +30,7 @@ import { waitForResponse } from 'utils/test-utils';
 import ErrorPage from 'dsm/pages/samples/error-page';
 
 test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
-  const studies = [StudyEnum.LMS]; //Only clinical (pecgs) studies get this event
+  const studies = [StudyEnum.OSTEO2]; //Only clinical (pecgs) studies get this event
   const facilityName = user.doctor.hospital;
   const facilityPhoneNumber = user.doctor.phone;
   const facilityFaxNumber = user.doctor.fax;
@@ -493,7 +493,8 @@ async function findParticipantForGermlineConsentCreation(participantListPage: Pa
   const customizeViewPanel = participantListPage.filters.customizeViewPanel;
   await customizeViewPanel.open();
   await customizeViewPanel.selectColumns('Research Consent & Assent Form Columns', ['CONSENT_ASSENT_BLOOD', 'CONSENT_ASSENT_TISSUE']);
-  await customizeViewPanel.selectColumns('Medical Release Form Columns', ['PHYSICIAN']);
+  //await customizeViewPanel.selectColumns('Medical Release Form Columns', ['PHYSICIAN']);
+  await customizeViewPanel.selectColumnsByID('Medical Release Form Columns', ['PHYSICIAN'], 'RELEASE_MINOR', { nth: 1 });
   await customizeViewPanel.selectColumns('Sample Columns', ['Sample Type', 'Status']);
   await customizeViewPanel.selectColumns('Onc History Columns', ['Tissue Request Date']);
   await customizeViewPanel.selectColumns(

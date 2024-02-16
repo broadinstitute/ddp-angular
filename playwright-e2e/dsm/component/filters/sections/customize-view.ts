@@ -33,7 +33,8 @@ export class CustomizeView {
     await this.openColumnsGroup({nth});
     for (const column of columns) {
       const columnOption = this.page.locator(`//ul[@id='${id}']//mat-checkbox[contains(.,'${column}')]`);
-      await columnOption.click();
+      await columnOption.scrollIntoViewIfNeeded();
+      await columnOption.click({ force: true });
     }
     await this.closeColumnsGroup();
   }
