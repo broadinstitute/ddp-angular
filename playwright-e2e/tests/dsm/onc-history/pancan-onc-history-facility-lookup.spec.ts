@@ -69,7 +69,7 @@ test.describe.serial('Onc History', () => {
               }
             }
           }, lastRow);
-      await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.FACILITY, { value: newFacilityName }, lastRow);
+      await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.FACILITY, { value: newFacilityName, lookupSelectIndex: -1 }, lastRow);
       const actualFacilityValue = await oncHistoryTable.getFieldValue(OncHistoryInputColumnsEnum.FACILITY, lastRow);
       expect(actualFacilityValue).toStrictEqual(newFacilityName);
 
