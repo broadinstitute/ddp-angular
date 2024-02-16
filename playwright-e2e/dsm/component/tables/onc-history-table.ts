@@ -128,7 +128,7 @@ export default class OncHistoryTable extends Table {
   }
 
   /* Helper Functions */
-  private async fillInput(root: Locator, value: string | number, hasLookup: boolean, lookupSelectIndex = 0): Promise<string> {
+  private async fillInput(root: Locator, value: string | number, hasLookup: boolean, lookupSelectIndex = 0): Promise<Response | null> {
     const input = new Input(this.page, { root });
     const currentValue = await this.getCurrentValue(input);
     let actualValue = typeof value === 'number' ? value.toString() : value;
@@ -137,20 +137,17 @@ export default class OncHistoryTable extends Table {
       actualValue = actualValue.slice(0, Number(maxLength));
     }
 
-    let inputValue = currentValue;
     if (currentValue !== actualValue) {
-      inputValue = actualValue;
-      await Promise.all([
+      const [resp] = await Promise.all([
         waitForResponse(this.page, { uri: '/patch' }),
         input.fillSimple(actualValue)
       ]);
-      if (hasLookup) {
+      if (hasLookup && lookupSelectIndex >= 0) {
         await this.lookup(input.toLocator(), lookupSelectIndex, true);
       }
+      return resp;
     }
-
-    inputValue = await input.currentValue();
-    return inputValue;
+    return null;
   }
 
   public async fillDate(root: Locator, { date, today }: FillDate): Promise<Response | null> {
@@ -190,7 +187,9 @@ export default class OncHistoryTable extends Table {
       await textarea.fill(actualValue, false);
       await textarea.blur();
       const resp = await respPromise;
-      hasLookup && await this.lookup(textarea.toLocator(), lookupSelectIndex);
+      if (hasLookup && lookupSelectIndex >= 0) {
+        await this.lookup(textarea.toLocator(), lookupSelectIndex);
+      }
       return resp;
     }
     return null;
@@ -227,7 +226,7 @@ export default class OncHistoryTable extends Table {
       ]);
       return text;
     }
-    throw new Error(`Error in lookup() function. count: ${count} and selectedIndex: ${selectIndex}`);
+    return '';
   }
 
   private async getCurrentValue(element: Input | Select | TextArea): Promise<string> {

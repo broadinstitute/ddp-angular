@@ -12,11 +12,13 @@ import Input from 'dss/component/input';
 import { waitForResponse } from 'utils/test-utils';
 import OncHistoryTable from 'dsm/component/tables/onc-history-table';
 
-test.describe('Facility name', () => {
+test.describe.serial('Onc History', () => {
   const studies = [StudyEnum.PANCAN];
 
+  let shortID: string;
+
   for (const study of studies) {
-    test(`is visible and selectable in lookup ${study} @dsm`, async ({ page, request }) => {
+    test(`New Facility is visible and selectable in lookup ${study} @dsm`, async ({ page, request }) => {
       const participantListPage = await ParticipantListPage.goto(page, study, request);
       const participantListTable = participantListPage.participantListTable;
       const customizeViewPanel = participantListPage.filters.customizeViewPanel;
@@ -35,14 +37,14 @@ test.describe('Facility name', () => {
       await searchPanel.text('Your Mailing Address *', { additionalFilters: [AdditionalFilter.NOT_EMPTY] });
 
       await searchPanel.search();
-      const shortID = await participantListPage.findParticipantWithTab(
+      shortID = await participantListPage.findParticipantWithTab(
         { findPediatricParticipant: false, tab: TabEnum.ONC_HISTORY, uriString: 'ui/filterList'}
       );
       logInfo(`Short id: ${shortID}`);
       expect(shortID?.length).toBeTruthy();
 
       // Open Onc History tab
-      await participantListPage.filterListByShortId(shortID!);
+      await participantListPage.filterListByShortId(shortID);
       const participantPage = await participantListTable.openParticipantPageAt(0);
       const oncHistoryTab = await participantPage.clickTab<OncHistoryTab>(TabEnum.ONC_HISTORY);
       const oncHistoryTable = oncHistoryTab.table;
@@ -79,7 +81,7 @@ test.describe('Facility name', () => {
       // clean up: delete two added rows
       await oncHistoryTable.deleteRowAt(lastRow);
       await oncHistoryTable.deleteRowAt(lastRow - 1);
-    })
+    });
   }
 
   async function validateLookup(page: Page, table: OncHistoryTable, row: number, keyword: string, lookupName: string) {
