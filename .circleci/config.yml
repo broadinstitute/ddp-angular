@@ -883,11 +883,15 @@ workflows:
             - playwright-build
 
   build-and-deploy-all-apps-workflow:
-    # check all studies, launch GAE deploy if a study has changed.
+    # check all studies, launch GAE deploy only if a study has changed.
     when:
       and:
         - not: << pipeline.parameters.do-builds >>
         - not: << pipeline.parameters.scheduled-playwright >>
+        - not:
+            matches:
+              pattern: ".*-tests$"
+              value: << pipeline.parameters.api_call >>
     jobs:
       - api-unit-test:
           <<: *filter-develop-branch
@@ -1029,7 +1033,6 @@ workflows:
     when:
       and:
         - equal: [ scheduled_pipeline, << pipeline.trigger_source >> ]
-        - equal: [ nightly-playwright-test, << pipeline.schedule.name >> ]
         - << pipeline.parameters.scheduled-playwright >>
     jobs:
       - playwright-build:
