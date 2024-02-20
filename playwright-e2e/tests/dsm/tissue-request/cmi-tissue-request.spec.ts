@@ -37,11 +37,13 @@ test.describe('Tissue Request Flow', () => {
         shortID = await participantListPage.findParticipantWithTab(
           { findPediatricParticipant: false, tab: TabEnum.ONC_HISTORY, uriString: 'ui/filterList'}
         );
+        expect(shortID?.length).toStrictEqual(6);
         logInfo(`Short id: ${shortID}`);
-        await searchPanel.open();
-        await searchPanel.text('Short ID', { textValue: shortID });
-        await searchPanel.search();
       })
+
+      await searchPanel.open();
+      await searchPanel.text('Short ID', { textValue: shortID });
+      await searchPanel.search();
 
       const participantListTable = participantListPage.participantListTable;
       const participantPage: ParticipantPage = await participantListTable.openParticipantPageAt(0);
@@ -53,16 +55,20 @@ test.describe('Tissue Request Flow', () => {
       })
 
       await test.step('Automatically updated Onc History Created date', async () => {
+        const expectedDate = getDate();
         await participantPage.backToList();
-        await participantListTable.openParticipantPageAt(0);
-
-        const oncHistoryCreatedDate = await participantPage.oncHistoryCreatedDate();
-        expect(oncHistoryCreatedDate, 'Onc History Date has not been updated').toBeTruthy();
+        await expect(async () => {
+          await page.reload();
+          await participantListPage.waitForReady();
+          await participantListPage.filterListByShortId(shortID);
+          await participantListTable.openParticipantPageAt(0);
+          const actualOncHistoryCreatedDate = await participantPage.oncHistoryCreatedDate();
+          expect(actualOncHistoryCreatedDate, 'Onc History Date has not been updated').toStrictEqual(expectedDate);
+        }).toPass({timeout: 60 * 1000});
       })
 
-      await participantPage.clickTab<OncHistoryTab>(TabEnum.ONC_HISTORY);
-
       await test.step('Update Onc History data - Date of PX', async () => {
+        await participantPage.clickTab<OncHistoryTab>(TabEnum.ONC_HISTORY);
         await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.DATE_OF_PX,
           {
             date: {
