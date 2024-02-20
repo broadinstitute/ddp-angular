@@ -50,12 +50,14 @@ test.describe.serial('Tumor Collaborator Sample ID', () => {
         await customizeViewPanel.deselectColumns(CustomViewColumns.PARTICIPANT, ['DDP', 'Last Name', 'First Name']);
         await customizeViewPanel.selectColumns(CustomViewColumns.DSM_COLUMNS, ['Onc History Created']);
         await customizeViewPanel.selectColumns(CustomViewColumns.MEDICAL_RECORD, ['MR Problem']);
+        await customizeViewPanel.selectColumns(CustomViewColumns.RESEARCH_CONSENT_FORM, ['CONSENT_BLOOD', 'CONSENT_TISSUE']);
 
         const searchPanel = participantListPage.filters.searchPanel;
         await searchPanel.open();
         await searchPanel.checkboxes('Status', { checkboxValues: ['Enrolled'] });
         await searchPanel.checkboxes('MR Problem', { checkboxValues: ['No'] });
-        // await searchPanel.dates('Onc History Created', { additionalFilters: [AdditionalFilter.EMPTY] });
+        await searchPanel.checkboxes('CONSENT_BLOOD', { checkboxValues: ['Yes'] });
+        await searchPanel.checkboxes('CONSENT_TISSUE', { checkboxValues: ['Yes'] });
         await searchPanel.search();
 
         const numParticipants = await participantListTable.numOfParticipants();
@@ -65,7 +67,11 @@ test.describe.serial('Tumor Collaborator Sample ID', () => {
 
       // Open Participant page
       await participantListTable.sort('Registration Date', SortOrder.ASC);
-      const row = 0;
+      const [row] = await participantListTable.randomizeRows();
+      const shortID = await participantListTable.getParticipantDataAt(row, 'Short ID');
+      expect(shortID?.length).toStrictEqual(6);
+      logInfo(`Participant Short ID: ${shortID}`);
+
       const participantPage: ParticipantPage = await participantListTable.openParticipantPageAt(row);
       const oncHistoryTab = await participantPage.clickTab<OncHistoryTab>(TabEnum.ONC_HISTORY);
       const oncHistoryTable = oncHistoryTab.table;
