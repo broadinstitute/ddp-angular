@@ -10,8 +10,8 @@ import KitQueuePage from 'dsm/pages/kitsInfo-pages/kit-queue-page';
 
 test.describe.serial('Sample Kit Queue UI', () => {
   const studies = [
-    StudyEnum.ANGIO, StudyEnum.BASIL, StudyEnum.OSTEO, StudyEnum.OSTEO2, StudyEnum.PANCAN, StudyEnum.RGP,
-    StudyEnum.LMS, StudyEnum.ESC, StudyEnum.PROSTATE, StudyEnum.MBC
+    StudyEnum.ANGIO, StudyEnum.BRAIN, StudyEnum.OSTEO, StudyEnum.OSTEO2, StudyEnum.PANCAN,
+    StudyEnum.RGP, StudyEnum.LMS, StudyEnum.ESC, StudyEnum.PROSTATE
   ];
 
   for (const study of studies) {
