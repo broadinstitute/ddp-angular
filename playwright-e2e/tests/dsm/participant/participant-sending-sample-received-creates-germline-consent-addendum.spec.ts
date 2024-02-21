@@ -133,13 +133,13 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
       const customizeViewPanel = participantListPage.filters.customizeViewPanel;
       await customizeViewPanel.open();
       await customizeViewPanel.selectColumns(
-      `Additional Consent & Assent: Learning More About Your Child's DNA with Invitae Columns`,
-      ['GERMLINE_CONSENT_ADDENDUM_PEDIATRIC Survey Created']);
+      `Additional Consent: Learning More About Your DNA with Invitae Columns`,
+      ['GERMLINE_CONSENT_ADDENDUM Survey Created']);
 
       const searchPanel = participantListPage.filters.searchPanel;
       await searchPanel.open();
       await searchPanel.text('Short ID', { textValue: shortID });
-      await searchPanel.dates('GERMLINE_CONSENT_ADDENDUM_PEDIATRIC Survey Created', { additionalFilters: [AdditionalFilter.NOT_EMPTY] });
+      await searchPanel.dates('GERMLINE_CONSENT_ADDENDUM Survey Created', { additionalFilters: [AdditionalFilter.NOT_EMPTY] });
 
       //Occasionally, it will take a couple of seconds (and participant list refreshes) before info about the germline consent activity being created shows up
       await expect(async () => {
@@ -150,7 +150,7 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
       }).toPass({intervals: [10_000], timeout: 60_000});
 
       const participantListTable = participantListPage.participantListTable;
-      const germlineInfo = (await participantListTable.getParticipantDataAt(0, 'GERMLINE_CONSENT_ADDENDUM_PEDIATRIC Survey Created')).trim();
+      const germlineInfo = (await participantListTable.getParticipantDataAt(0, 'GERMLINE_CONSENT_ADDENDUM Survey Created')).trim();
       expect(germlineInfo).toBeTruthy();
     });
 
@@ -239,13 +239,13 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
       const customizeViewPanel = participantListPage.filters.customizeViewPanel;
       await customizeViewPanel.open();
       await customizeViewPanel.selectColumns(
-      `Additional Consent & Assent: Learning More About Your Child's DNA with Invitae Columns`,
-      ['GERMLINE_CONSENT_ADDENDUM_PEDIATRIC Survey Created']);
+      `Additional Consent: Learning More About Your DNA with Invitae Columns`,
+      ['GERMLINE_CONSENT_ADDENDUM Survey Created']);
 
       const searchPanel = participantListPage.filters.searchPanel;
       await searchPanel.open();
       await searchPanel.text('Short ID', { textValue: shortID });
-      await searchPanel.dates('GERMLINE_CONSENT_ADDENDUM_PEDIATRIC Survey Created', { additionalFilters: [AdditionalFilter.NOT_EMPTY] });
+      await searchPanel.dates('GERMLINE_CONSENT_ADDENDUM Survey Created', { additionalFilters: [AdditionalFilter.NOT_EMPTY] });
 
       //Occasionally, it will take a couple of seconds (and participant list refreshes) before info about the germline consent activity being created shows up
       await expect(async () => {
@@ -256,7 +256,7 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
       }).toPass({intervals: [10_000], timeout: 60_000});
 
       const participantListTable = participantListPage.participantListTable;
-      const germlineInfo = (await participantListTable.getParticipantDataAt(0, 'GERMLINE_CONSENT_ADDENDUM_PEDIATRIC Survey Created')).trim();
+      const germlineInfo = (await participantListTable.getParticipantDataAt(0, 'GERMLINE_CONSENT_ADDENDUM Survey Created')).trim();
       expect(germlineInfo).toBeTruthy();
     });
 
@@ -345,13 +345,13 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
       const customizeViewPanel = participantListPage.filters.customizeViewPanel;
       await customizeViewPanel.open();
       await customizeViewPanel.selectColumns(
-      `Additional Consent & Assent: Learning More About Your Child's DNA with Invitae Columns`,
-      ['GERMLINE_CONSENT_ADDENDUM_PEDIATRIC Survey Created']);
+      `Additional Consent: Learning More About Your DNA with Invitae Columns`,
+      ['GERMLINE_CONSENT_ADDENDUM Survey Created']);
 
       const searchPanel = participantListPage.filters.searchPanel;
       await searchPanel.open();
       await searchPanel.text('Short ID', { textValue: shortID });
-      await searchPanel.dates('GERMLINE_CONSENT_ADDENDUM_PEDIATRIC Survey Created', { additionalFilters: [AdditionalFilter.NOT_EMPTY] });
+      await searchPanel.dates('GERMLINE_CONSENT_ADDENDUM Survey Created', { additionalFilters: [AdditionalFilter.NOT_EMPTY] });
 
       //Occasionally, it will take a couple of seconds (and participant list refreshes) before info about the germline consent activity being created shows up
       await expect(async () => {
@@ -362,7 +362,7 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
       }).toPass({intervals: [10_000], timeout: 60_000});
 
       const participantListTable = participantListPage.participantListTable;
-      const germlineInfo = (await participantListTable.getParticipantDataAt(0, 'GERMLINE_CONSENT_ADDENDUM_PEDIATRIC Survey Created')).trim();
+      const germlineInfo = (await participantListTable.getParticipantDataAt(0, 'GERMLINE_CONSENT_ADDENDUM Survey Created')).trim();
       expect(germlineInfo).toBeTruthy();
     });
 
@@ -451,14 +451,13 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
       const customizeViewPanel = participantListPage.filters.customizeViewPanel;
       await customizeViewPanel.open();
       await customizeViewPanel.selectColumns(
-      `Additional Consent & Assent: Learning More About Your Child's DNA with Invitae Columns`,
-      ['GERMLINE_CONSENT_ADDENDUM_PEDIATRIC Survey Created']);
+      `Additional Consent: Learning More About Your DNA with Invitae Columns`,
+      ['GERMLINE_CONSENT_ADDENDUM Survey Created']);
 
       const searchPanel = participantListPage.filters.searchPanel;
       await searchPanel.open();
       await searchPanel.text('Short ID', { textValue: shortID });
-      await searchPanel.dates('GERMLINE_CONSENT_ADDENDUM_PEDIATRIC Survey Created', { additionalFilters: [AdditionalFilter.NOT_EMPTY] });
-
+      await searchPanel.dates('GERMLINE_CONSENT_ADDENDUM Survey Created', { additionalFilters: [AdditionalFilter.NOT_EMPTY] });
 
       //Occasionally, it will take a couple of seconds (and participant list refreshes) before info about the germline consent activity being created shows up
       await expect(async () => {
@@ -469,7 +468,7 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
       }).toPass({intervals: [10_000], timeout: 60_000});
 
       const participantListTable = participantListPage.participantListTable;
-      const germlineInfo = (await participantListTable.getParticipantDataAt(0, 'GERMLINE_CONSENT_ADDENDUM_PEDIATRIC Survey Created')).trim();
+      const germlineInfo = (await participantListTable.getParticipantDataAt(0, 'GERMLINE_CONSENT_ADDENDUM Survey Created')).trim();
       expect(germlineInfo).toBeTruthy();
     });
   }
@@ -492,18 +491,18 @@ async function findParticipantForGermlineConsentCreation(participantListPage: Pa
 
   const customizeViewPanel = participantListPage.filters.customizeViewPanel;
   await customizeViewPanel.open();
-  await customizeViewPanel.selectColumns('Research Consent & Assent Form Columns', ['CONSENT_ASSENT_BLOOD', 'CONSENT_ASSENT_TISSUE']);
+  await customizeViewPanel.selectColumns('Research Consent Form Columns', ['CONSENT_BLOOD', 'CONSENT_TISSUE']);
   //await customizeViewPanel.selectColumns('Medical Release Form Columns', ['PHYSICIAN']);
-  await customizeViewPanel.selectColumnsByID('Medical Release Form Columns', ['PHYSICIAN'], 'RELEASE_MINOR', { nth: 1 });
+  await customizeViewPanel.selectColumnsByID('Medical Release Form Columns', ['PHYSICIAN'], 'RELEASE_SELF', { nth: 0 });
   await customizeViewPanel.selectColumns('Sample Columns', ['Sample Type', 'Status']);
   await customizeViewPanel.selectColumns('Onc History Columns', ['Tissue Request Date']);
   await customizeViewPanel.selectColumns(
-    `Additional Consent & Assent: Learning About Your Child’s Tumor Columns`,
-    ['SOMATIC_CONSENT_TUMOR_PEDIATRIC', 'SOMATIC_ASSENT_ADDENDUM']
+    `Additional Consent: Learning About Your Tumor Columns`,
+    ['SOMATIC_CONSENT_TUMOR']
   );
   await customizeViewPanel.selectColumns(
-    `Additional Consent & Assent: Learning More About Your Child's DNA with Invitae Columns`,
-    ['GERMLINE_CONSENT_ADDENDUM_PEDIATRIC Survey Created']
+    `Additional Consent: Learning More About Your DNA with Invitae Columns`,
+    ['GERMLINE_CONSENT_ADDENDUM Survey Created']
   );
 
   //Determine last name hint to use to search for Playwright E2E participants only
@@ -511,8 +510,8 @@ async function findParticipantForGermlineConsentCreation(participantListPage: Pa
 
   await searchPanel.open();
   await searchPanel.text('Last Name', { textValue: lastnamePrefix, additionalFilters: [AdditionalFilter.EXACT_MATCH], exactMatch: false });
-  await searchPanel.checkboxes('CONSENT_ASSENT_BLOOD', { checkboxValues: ['Yes'] });
-  await searchPanel.checkboxes('CONSENT_ASSENT_TISSUE', { checkboxValues: ['Yes'] });
+  await searchPanel.checkboxes('CONSENT_BLOOD', { checkboxValues: ['Yes'] });
+  await searchPanel.checkboxes('CONSENT_TISSUE', { checkboxValues: ['Yes'] });
   const filterListResponse = await searchPanel.search({ uri: '/ui/filterList' });
   let responseJson = JSON.parse(await filterListResponse.text());
 
@@ -520,19 +519,18 @@ async function findParticipantForGermlineConsentCreation(participantListPage: Pa
   const resultsPerPage = await participantListTable.rowsCount;
   let shortID = '';
   for (let index = 0; index < resultsPerPage; index++) {
-    const consentAssentTissue = (await participantListTable.getParticipantDataAt(index, 'CONSENT_ASSENT_TISSUE')).trim();
-    const consentAssentBlood = (await participantListTable.getParticipantDataAt(index, 'CONSENT_ASSENT_BLOOD')).trim();
-    const somaticAssentAddendum = (await participantListTable.getParticipantDataAt(index, 'SOMATIC_ASSENT_ADDENDUM')).trim();
-    const somaticConsentTumorPediatric = (await participantListTable.getParticipantDataAt(index, 'SOMATIC_CONSENT_TUMOR_PEDIATRIC')).trim();
+    const consentTissue = (await participantListTable.getParticipantDataAt(index, 'CONSENT_TISSUE')).trim();
+    const consentBlood = (await participantListTable.getParticipantDataAt(index, 'CONSENT_BLOOD')).trim();
+    const somaticConsentTumor = (await participantListTable.getParticipantDataAt(index, 'SOMATIC_CONSENT_TUMOR')).trim();
     const physician = (await participantListTable.getParticipantDataAt(index, 'PHYSICIAN')).trim();
-    const germlineInfo = (await participantListTable.getParticipantDataAt(index, 'GERMLINE_CONSENT_ADDENDUM_PEDIATRIC Survey Created')).trim();
+    const germlineInfo = (await participantListTable.getParticipantDataAt(index, 'GERMLINE_CONSENT_ADDENDUM Survey Created')).trim();
     const tissueRequestDate = (await participantListTable.getParticipantDataAt(index, 'Tissue Request Date')).trim();
     const medicalRecord = responseJson.participants[index].medicalRecords[0]; //Checking to make sure participant has onc history tab
 
-    if ((consentAssentTissue === 'Yes') &&
-        (consentAssentBlood === 'Yes') &&
-        (somaticAssentAddendum === 'Yes') &&
-        (somaticConsentTumorPediatric === 'Yes') &&
+
+    if ((consentTissue === 'Yes') &&
+        (consentBlood === 'Yes') &&
+        (somaticConsentTumor === 'Yes') &&
         (physician != null) &&
         (germlineInfo === '') &&
         (tissueRequestDate === '') &&
@@ -541,7 +539,7 @@ async function findParticipantForGermlineConsentCreation(participantListPage: Pa
         shortID = await participantListTable.getParticipantDataAt(index, 'Short ID');
         logInfo(`Test participant ${shortID} satisfies criteria for germline test`);
         break;
-    }
+      }
 
     if (index === (resultsPerPage - 1)) {
       const hasNextPage = await participantListTable.paginator.hasNext();
@@ -571,7 +569,7 @@ function getPlaywrightParticipantLastNamePrefix(study: StudyEnum): string {
       prefix = 'testLastName';
       break;
     case StudyEnum.OSTEO2:
-      prefix = 'KidLast';
+      prefix = 'OS';
       break;
     case StudyEnum.ANGIO:
     case StudyEnum.AT:
