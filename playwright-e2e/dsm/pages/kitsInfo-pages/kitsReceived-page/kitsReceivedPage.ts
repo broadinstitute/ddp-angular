@@ -6,10 +6,11 @@ import {waitForNoSpinner, waitForResponse} from 'utils/test-utils';
 import {KitsColumnsEnum} from 'dsm/pages/kitsInfo-pages/enums/kitsColumns-enum';
 import {assertTableHeaders} from 'utils/assertion-helper';
 import {rows} from 'lib/component/dsm/paginators/types/rowsPerPage';
+import KitsPageBase from 'dsm/pages/kits-page-base';
 
 const { BSP_TOKEN, DSM_BASE_URL } = process.env;
 
-export default class KitsReceivedPage {
+export default class KitsReceivedPage extends KitsPageBase {
   private readonly PAGE_TITLE = 'Kits Received';
   private readonly TABLE_HEADERS = [KitsColumnsEnum.SHORT_ID, KitsColumnsEnum.SHIPPING_ID,
     KitsColumnsEnum.RECEIVED, KitsColumnsEnum.MF_CODE,
@@ -18,8 +19,8 @@ export default class KitsReceivedPage {
   private readonly kitType = new KitType(this.page);
   private readonly kitsTable = new KitsTable(this.page);
 
-  constructor(private readonly page: Page,
-              private readonly request: APIRequestContext) {
+  constructor(private readonly page: Page, private readonly request: APIRequestContext) {
+      super(page);
   }
 
   public get getKitsTable(): KitsTable {
@@ -36,13 +37,6 @@ export default class KitsReceivedPage {
 
   public async waitForLoad(): Promise<void> {
     await this.page.waitForLoadState('networkidle');
-    await waitForNoSpinner(this.page);
-  }
-
-  public async selectKitType(kitType: KitTypeEnum): Promise<void> {
-    await waitForNoSpinner(this.page);
-    await this.kitType.selectKitType(kitType);
-    await waitForResponse(this.page, {uri: '/kitRequests'});
     await waitForNoSpinner(this.page);
   }
 
