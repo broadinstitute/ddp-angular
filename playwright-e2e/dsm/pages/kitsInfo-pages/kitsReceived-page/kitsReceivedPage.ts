@@ -19,7 +19,7 @@ export default class KitsReceivedPage extends KitsPageBase {
   protected readonly kitType = new KitType(this.page);
   protected readonly kitsTable = new KitsTable(this.page);
 
-  constructor(private readonly page: Page, private readonly request: APIRequestContext) {
+  constructor(readonly page: Page, private readonly request: APIRequestContext) {
       super(page);
   }
 
