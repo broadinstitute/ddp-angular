@@ -293,8 +293,11 @@ export default class ParticipantListPage extends DsmPageBase {
           if (participantData === undefined) {
             continue; //Participant does not have a proband tab for some reason, skip them
           }
-          unformattedFirstName = JSON.stringify(value.esData.profile.firstName);
-          firstName = unformattedFirstName.replace(/['"]+/g, ''); //Replace double quotes from JSON.stringify
+          firstName = value.esData.profile?.firstName;
+          if (!firstName) {
+            continue;
+          }
+          unformattedFirstName = JSON.stringify(firstName);
           if (participantData && (firstName === testParticipantFirstName)) {
             foundShortID = JSON.stringify(value.esData.profile.hruid).replace(/['"]+/g, '');
             logInfo(`Found the RGP participant ${foundShortID} to have a proband tab`);
