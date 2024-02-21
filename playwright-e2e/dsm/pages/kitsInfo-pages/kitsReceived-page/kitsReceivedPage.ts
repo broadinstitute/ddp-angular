@@ -12,12 +12,12 @@ const { BSP_TOKEN, DSM_BASE_URL } = process.env;
 
 export default class KitsReceivedPage extends KitsPageBase {
   protected readonly PAGE_TITLE = 'Kits Received';
-  private readonly TABLE_HEADERS = [KitsColumnsEnum.SHORT_ID, KitsColumnsEnum.SHIPPING_ID,
+  protected readonly TABLE_HEADERS = [KitsColumnsEnum.SHORT_ID, KitsColumnsEnum.SHIPPING_ID,
     KitsColumnsEnum.RECEIVED, KitsColumnsEnum.MF_CODE,
     KitsColumnsEnum.DDP_REALM, KitsColumnsEnum.TYPE, KitsColumnsEnum.SAMPLE_TYPE];
 
-  private readonly kitType = new KitType(this.page);
-  private readonly kitsTable = new KitsTable(this.page);
+  protected readonly kitType = new KitType(this.page);
+  protected readonly kitsTable = new KitsTable(this.page);
 
   constructor(private readonly page: Page, private readonly request: APIRequestContext) {
       super(page);
