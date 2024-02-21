@@ -11,7 +11,7 @@ import KitsPageBase from 'dsm/pages/kits-page-base';
 const { BSP_TOKEN, DSM_BASE_URL } = process.env;
 
 export default class KitsReceivedPage extends KitsPageBase {
-  private readonly PAGE_TITLE = 'Kits Received';
+  protected readonly PAGE_TITLE = 'Kits Received';
   private readonly TABLE_HEADERS = [KitsColumnsEnum.SHORT_ID, KitsColumnsEnum.SHIPPING_ID,
     KitsColumnsEnum.RECEIVED, KitsColumnsEnum.MF_CODE,
     KitsColumnsEnum.DDP_REALM, KitsColumnsEnum.TYPE, KitsColumnsEnum.SAMPLE_TYPE];
