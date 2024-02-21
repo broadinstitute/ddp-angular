@@ -11,13 +11,11 @@ import KitsPageBase from 'dsm/pages/kits-page-base';
 const { BSP_TOKEN, DSM_BASE_URL } = process.env;
 
 export default class KitsReceivedPage extends KitsPageBase {
-  protected readonly PAGE_TITLE = 'Kits Received';
-  protected readonly TABLE_HEADERS = [KitsColumnsEnum.SHORT_ID, KitsColumnsEnum.SHIPPING_ID,
+  readonly PAGE_TITLE = 'Kits Received';
+  readonly TABLE_HEADERS = [KitsColumnsEnum.SHORT_ID, KitsColumnsEnum.SHIPPING_ID,
     KitsColumnsEnum.RECEIVED, KitsColumnsEnum.MF_CODE,
     KitsColumnsEnum.DDP_REALM, KitsColumnsEnum.TYPE, KitsColumnsEnum.SAMPLE_TYPE];
 
-  protected readonly kitType = new KitType(this.page);
-  protected readonly kitsTable = new KitsTable(this.page);
 
   constructor(readonly page: Page, private readonly request: APIRequestContext) {
       super(page);
