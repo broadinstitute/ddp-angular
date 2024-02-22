@@ -67,7 +67,7 @@ export default class SMID {
     const currentValue = await fieldInput.currentValue();
     if (currentValue.trim() !== value) {
       await Promise.all([
-        waitForResponse(this.page, { uri: 'patch' }),
+        waitForResponse(this.page, { uri: '/patch' }),
         fieldInput.fillSimple(value)
       ]);
     }

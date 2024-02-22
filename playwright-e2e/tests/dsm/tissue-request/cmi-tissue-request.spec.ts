@@ -19,27 +19,26 @@ test.describe.serial('Tissue Request Flow', () => {
       const participantListPage = await ParticipantListPage.goto(page, study, request);
       const customizeViewPanel = participantListPage.filters.customizeViewPanel;
       const searchPanel = participantListPage.filters.searchPanel;
-      let shortID = '';
 
-      await test.step('Search for the right participant', async () => {
-        await customizeViewPanel.open();
-        await customizeViewPanel.selectColumns('Medical Record Columns', ['MR Problem']);
-        await customizeViewPanel.selectColumns('Participant - DSM Columns', ['Onc History Created']);
-        await customizeViewPanel.selectColumns('Research Consent Form Columns', ['Your Mailing Address *']);
+      // Search for the right participant
+      await customizeViewPanel.open();
+      await customizeViewPanel.selectColumns('Medical Record Columns', ['MR Problem']);
+      await customizeViewPanel.selectColumns('Participant - DSM Columns', ['Onc History Created']);
+      await customizeViewPanel.selectColumns('Research Consent Form Columns', ['Your Mailing Address *']);
 
-        await searchPanel.open();
-        await searchPanel.checkboxes('Status', { checkboxValues: ['Enrolled'] });
-        await searchPanel.checkboxes('MR Problem', { checkboxValues: ['No'] });
-        await searchPanel.dates('Onc History Created', { additionalFilters: [AdditionalFilter.EMPTY] });
-        await searchPanel.text('Your Mailing Address *', { additionalFilters: [AdditionalFilter.NOT_EMPTY] });
+      await searchPanel.open();
+      await searchPanel.checkboxes('Status', { checkboxValues: ['Enrolled'] });
+      await searchPanel.checkboxes('MR Problem', { checkboxValues: ['No'] });
+      await searchPanel.dates('Onc History Created', { additionalFilters: [AdditionalFilter.EMPTY] });
+      await searchPanel.text('Your Mailing Address *', { additionalFilters: [AdditionalFilter.NOT_EMPTY] });
 
-        await searchPanel.search();
-        shortID = await participantListPage.findParticipantWithTab(
-          { findPediatricParticipant: false, tab: TabEnum.ONC_HISTORY, uriString: 'ui/filterList'}
-        );
-        expect(shortID?.length).toStrictEqual(6);
-        logInfo(`Short id: ${shortID}`);
-      })
+      await searchPanel.search();
+      const shortID = await participantListPage.findParticipantWithTab(
+        { findPediatricParticipant: false, tab: TabEnum.ONC_HISTORY, uriString: 'ui/filterList'}
+      );
+      expect(shortID?.length).toStrictEqual(6);
+      logInfo(`Short id: ${shortID}`);
+
 
       await searchPanel.open();
       await searchPanel.text('Short ID', { textValue: shortID });

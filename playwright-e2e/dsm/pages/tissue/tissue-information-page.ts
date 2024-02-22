@@ -1,7 +1,7 @@
 import { expect, Locator, Page } from '@playwright/test';
 import { DynamicFieldsEnum, ProblemWithTissueEnum, TissueInformationEnum } from './enums/tissue-information-enum';
 import DatePicker from 'dsm/component/date-picker';
-import { waitForResponse } from 'utils/test-utils';
+import { waitForNoSpinner, waitForResponse } from 'utils/test-utils';
 import { FillDate } from './interfaces/tissue-information-interfaces';
 import Select from 'dss/component/select';
 import TextArea from 'dss/component/textarea';
@@ -16,6 +16,11 @@ export default class TissueInformationPage {
   private readonly PAGE_TITLE = 'Tissue Request';
 
   constructor(private readonly page: Page) { }
+
+  public async waitForReady(): Promise<void> {
+    await this.assertPageTitle();
+    await waitForNoSpinner(this.page);
+  }
 
   public async tissue(index = 0): Promise<Tissue> {
     await this.tissuesCountCheck(index);
@@ -115,10 +120,9 @@ export default class TissueInformationPage {
     await expect(notesLocator, 'Notes textarea is not visible').toBeVisible();
 
     const textarea = new TextArea(this.page, { root: notesLocator });
-    const isTextareaDisabled = await textarea.isDisabled();
     const existingValue = await textarea.currentValue();
 
-    if (!isTextareaDisabled && existingValue !== value) {
+    if (existingValue !== value) {
       const respPromise = waitForResponse(this.page, { uri: 'patch' });
       await textarea.fill(value, false);
       await textarea.blur();
@@ -175,15 +179,14 @@ export default class TissueInformationPage {
 
     const selectElement = new Select(this.page, { root: genderLocator });
     const selectedValue = await selectElement.currentValue();
-    let isDisabled;
     await expect(async () => {
-      isDisabled = await selectElement.isSelectDisabled();
+      const isDisabled = await selectElement.isSelectDisabled();
       expect(isDisabled).toBe(false); //Test goes too fast, it still thinks dropdown is disabled after inputting Tissue Received Date
    }).toPass({ intervals: [10_000], timeout: 30_000 });
 
-    if (!isDisabled && selectedValue?.trim() !== gender) {
+    if (selectedValue?.trim() !== gender) {
       await Promise.all([
-        waitForResponse(this.page, { uri: 'patch' }),
+        waitForResponse(this.page, { uri: '/patch' }),
         selectElement.selectOption(gender),
       ]);
     }
@@ -228,22 +231,17 @@ export default class TissueInformationPage {
   private async fillFaxSentDate(dateIndex: number, date: FillDate): Promise<void> {
     const faxSentLocator = this.locatorFor(DynamicFieldsEnum.FAX_SENT).locator('app-field-datepicker')
       .nth(dateIndex);
-    if (await faxSentLocator.isVisible()) {
-      await this.fillDate(faxSentLocator, date);
-    }
+    await this.fillDate(faxSentLocator, date);
   }
 
   private async fillDate(root: Locator, { date, today }: FillDate): Promise<void> {
     if (today) {
       const todayBtn = new Button(this.page, { root, exactMatch: true, label: 'Today' });
-      const isDisabled = await todayBtn.isDisabled();
-      if (!isDisabled) {
-        await Promise.all([
-          waitForResponse(this.page, { uri: 'patch' }),
-          todayBtn.click()
-        ]);
-        return;
-      }
+      await Promise.all([
+        waitForResponse(this.page, { uri: '/patch' }),
+        todayBtn.click()
+      ]);
+      return;
     }
     if (date) {
       const datePicker = new DatePicker(this.page, { root });
@@ -259,13 +257,13 @@ export default class TissueInformationPage {
     const isDisabled = await checkbox.isDisabled();
     if (check && !isChecked && !isDisabled) {
       await Promise.all([
-        waitForResponse(this.page, { uri: 'patch' }),
+        waitForResponse(this.page, { uri: '/patch' }),
         checkbox.check()
       ]);
     }
     if (!check && isChecked && !isDisabled) {
       await Promise.all([
-        waitForResponse(this.page, { uri: 'patch' }),
+        waitForResponse(this.page, { uri: '/patch' }),
         checkbox.uncheck()
       ]);
     }

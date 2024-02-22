@@ -50,6 +50,9 @@ export default class KitsReceivedPage {
     accessionNumber?: string,
     tumorCollaboratorSampleID?: string }): Promise<void> {
     const { mfCode = '', isTumorSample = false, accessionNumber = null, tumorCollaboratorSampleID = null } = opts;
+    if (!DSM_BASE_URL) {
+      throw Error('Invalid parameter: DSM_BASE_URL is not provided.');
+    }
     if (!BSP_TOKEN) {
       throw Error('Invalid parameter: DSM BSP token is not provided.');
     }

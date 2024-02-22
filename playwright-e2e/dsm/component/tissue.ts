@@ -130,7 +130,7 @@ export default class Tissue {
     }
 
     if (currentValue !== actualValue) {
-      const respPromise = waitForResponse(this.page, { uri: 'patch' });
+      const respPromise = waitForResponse(this.page, { uri: '/patch' });
       await textarea.fill(actualValue, false);
       await textarea.blur();
       await respPromise;
@@ -146,7 +146,7 @@ export default class Tissue {
 
     if (currentValue !== selection) {
       await Promise.all([
-        waitForResponse(this.page, { uri: 'patch' }),
+        waitForResponse(this.page, { uri: '/patch' }),
         selectElement.selectOption(selection)
       ]);
     }
@@ -169,10 +169,9 @@ export default class Tissue {
         const dropDown = this.page.locator("//ul[contains(@class, 'Lookup--Dropdown')]/li");
         await dropDown.nth(0).click();
       }
-      await Promise.all([
-        waitForResponse(this.page, { uri: 'patch' }),
-        inputElement.fillSimple(actualValue)
-      ]);
+      const respPromise = waitForResponse(this.page, { uri: '/patch' });
+      await inputElement.fillSimple(actualValue);
+      await respPromise;
       hasLookup && await this.lookup();
     }
   }
@@ -186,13 +185,13 @@ export default class Tissue {
     if (today) {
       const todayBtn = new Button(this.page, { root, label: 'Today' });
       await Promise.all([
-        waitForResponse(this.page, { uri: 'patch' }),
+        waitForResponse(this.page, { uri: '/patch' }),
         todayBtn.click()
       ]);
     } else if (date) {
       const datePicker = new DatePicker(this.page, { root });
       await datePicker.open();
-      const respPromise = waitForResponse(this.page, { uri: 'patch' });
+      const respPromise = waitForResponse(this.page, { uri: '/patch' });
       await datePicker.pickDate(date);
       await datePicker.close();
       await respPromise;
@@ -204,7 +203,7 @@ export default class Tissue {
     const count = await lookupList.count();
     if (count > 0 && selectIndex < count) {
       await Promise.all([
-        waitForResponse(this.page, { uri: 'patch' }),
+        waitForResponse(this.page, { uri: '/patch' }),
         lookupList.nth(selectIndex).click()
       ]);
     }
@@ -219,7 +218,7 @@ export default class Tissue {
     return currentValue?.trim();
   }
 
-  private async getField(dynamicField: TissueDynamicFieldsEnum | SMIdEnum, byText = false): Promise<Locator> {
+  public async getField(dynamicField: TissueDynamicFieldsEnum | SMIdEnum, byText = false): Promise<Locator> {
     const fieldLocator = byText ? this.tissue.getByText(dynamicField) : this.findField(dynamicField);
     await expect(fieldLocator, `'${dynamicField}' is not visible`).toBeVisible();
 

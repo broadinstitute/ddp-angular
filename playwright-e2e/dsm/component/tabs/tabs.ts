@@ -6,6 +6,8 @@ import SampleInformationTab from 'dsm/component/tabs/sample-information-tab';
 import OncHistoryTab from './onc-history-tab';
 import MedicalRecordsTab from 'dsm/pages/medical-records/medical-records-tab';
 import SurveyDataTab from './survey-data-tab';
+import SequencingOrderTab from 'dsm/component/tabs/sequencing-order-tab';
+
 import {waitForNoSpinner} from 'utils/test-utils';
 
 export default class Tabs {
@@ -16,6 +18,7 @@ export default class Tabs {
     [TabEnum.ONC_HISTORY, new OncHistoryTab(this.page)],
     [TabEnum.MEDICAL_RECORD, new MedicalRecordsTab(this.page)],
     [TabEnum.SURVEY_DATA, new SurveyDataTab(this.page)],
+    [TabEnum.SEQUENCING_ORDER, new SequencingOrderTab(this.page)],
   ]);
 
   constructor(private readonly page: Page) {}

@@ -89,7 +89,7 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
       const tissueReceivedDate = await tissueInformationPage.getTissueReceivedDate();
 
       await tissueInformationPage.assertFaxSentDatesCount(1);
-      expect(faxSentDate.trim(), `Fax Sent Date has unexpected input: expected ${today} but received ${faxSentDate}`).toBe(today);
+      expect(faxSentDate?.trim(), `Fax Sent Date has unexpected input: expected ${today} but received ${faxSentDate}`).toBe(today);
       expect(tissueReceivedDate.trim(), `Tissue Received Date has unexpected input: expected ${getDate()} but received ${tissueReceivedDate}`).
         toBe(getDate());
 
