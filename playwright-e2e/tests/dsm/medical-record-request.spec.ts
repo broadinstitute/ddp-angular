@@ -1,7 +1,6 @@
 import { expect } from '@playwright/test';
 import { test } from 'fixtures/dsm-fixture';
-import { AdditionalFilter, CustomViewColumns } from 'dsm/component/filters/sections/search/search-enums';
-import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
+import { Filter, Column } from 'dsm/enums';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
 import { assertDateFormat, waitForResponse } from 'utils/test-utils';
 import { logInfo } from 'utils/log-utils';
@@ -17,6 +16,7 @@ import MedicalRecordsTable from 'dsm/pages/medical-records/medical-records-table
 import { QuickFiltersEnum } from 'dsm/component/filters/quick-filters';
 import { assertTableHeaders } from 'utils/assertion-helper';
 import path from 'path';
+import { StudyName } from 'dsm/component/navigation';
 
 // Tests depends on same participant
 test.describe.serial('Medical records request workflow', () => {
@@ -35,7 +35,7 @@ test.describe.serial('Medical records request workflow', () => {
   ];
 
   // One Clinical studies
-  const studies: StudyEnum[] = [StudyEnum.OSTEO2, StudyEnum.LMS];
+  const studies: StudyName[] = [StudyName.OSTEO2, StudyName.LMS];
 
   for (const study of studies) {
     test(`Update Institution @dsm @${study}`, async ({ page, request }) => {
@@ -58,8 +58,8 @@ test.describe.serial('Medical records request workflow', () => {
         const initialMRReceivedColumn = 'Initial MR Received';
 
         await customizeViewPanel.open();
-        await customizeViewPanel.selectColumns(CustomViewColumns.PARTICIPANT, [registrationDateColumn]);
-        await customizeViewPanel.selectColumns(CustomViewColumns.MEDICAL_RECORD, [
+        await customizeViewPanel.selectColumns(Column.PARTICIPANT, [registrationDateColumn]);
+        await customizeViewPanel.selectColumns(Column.MEDICAL_RECORD, [
           institutionNameColumn,
           followUpColumn,
           mrReviewColumn,
@@ -69,11 +69,11 @@ test.describe.serial('Medical records request workflow', () => {
 
         await searchPanel.open();
         await searchPanel.checkboxes('Status', { checkboxValues: ['Enrolled'] });
-        await searchPanel.text(institutionNameColumn, { additionalFilters: [AdditionalFilter.EMPTY] });
+        await searchPanel.text(institutionNameColumn, { additionalFilters: [Filter.EMPTY] });
         await searchPanel.checkboxes(followUpColumn, { checkboxValues: ['No'] });
         await searchPanel.checkboxes(mrReviewColumn, { checkboxValues: ['No'] });
-        await searchPanel.text(initialMRRequestColumn, { additionalFilters: [AdditionalFilter.EMPTY] });
-        await searchPanel.text(initialMRReceivedColumn, { additionalFilters: [AdditionalFilter.EMPTY] });
+        await searchPanel.text(initialMRRequestColumn, { additionalFilters: [Filter.EMPTY] });
+        await searchPanel.text(initialMRReceivedColumn, { additionalFilters: [Filter.EMPTY] });
         await searchPanel.search();
 
         const participantsCount = await participantListTable.numOfParticipants();
@@ -342,7 +342,7 @@ test.describe.serial('Medical records request workflow', () => {
       // Add Registration Date column to Quick Filter view
       const registrationDateColumn = 'Registration Date';
       await customizeViewPanel.open();
-      await customizeViewPanel.selectColumns(CustomViewColumns.PARTICIPANT, [registrationDateColumn]);
+      await customizeViewPanel.selectColumns(Column.PARTICIPANT, [registrationDateColumn]);
       await customizeViewPanel.close();
 
       // Sort by Registration Date: newest first
@@ -392,11 +392,11 @@ test.describe.serial('Medical records request workflow', () => {
   function pdfDownloadPrefix(study: string) {
     let name;
     switch (study) {
-      case StudyEnum.OSTEO:
-      case StudyEnum.OSTEO2:
+      case StudyName.OSTEO:
+      case StudyName.OSTEO2:
         name = 'Osteo';
         break;
-      case StudyEnum.LMS:
+      case StudyName.LMS:
         name = 'LMS';
         break;
       default:

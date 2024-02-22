@@ -1,15 +1,15 @@
 import { expect } from '@playwright/test';
 import { test } from 'fixtures/dsm-fixture';
-import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
 import { logInfo } from 'utils/log-utils';
 import { faker } from '@faker-js/faker';
 import { MainInfoEnum } from 'dsm/pages/participant-page/enums/main-info-enum';
-import { AdditionalFilter, CustomViewColumns } from 'dsm/component/filters/sections/search/search-enums';
+import { Filter, Column } from 'dsm/enums';
+import { StudyName } from 'dsm/component/navigation';
 
 test.describe.serial('Editing Participant Information', () => {
-  const cmiClinicalStudies = [StudyEnum.LMS, StudyEnum.OSTEO2];
-  const cmiResearchStudies = [StudyEnum.PANCAN];
+  const cmiClinicalStudies = [StudyName.LMS, StudyName.OSTEO2];
+  const cmiResearchStudies = [StudyName.PANCAN];
   const chosenCMIStudies = cmiClinicalStudies.concat(cmiResearchStudies);
 
   for (const study of chosenCMIStudies) {
@@ -27,12 +27,12 @@ test.describe.serial('Editing Participant Information', () => {
         const oncHistoryRequestStatusColumn = 'Request Status';
         const customizeViewPanel = participantListPage.filters.customizeViewPanel;
         await customizeViewPanel.open();
-        await customizeViewPanel.selectColumns(CustomViewColumns.ONC_HISTORY, [oncHistoryRequestStatusColumn]);
+        await customizeViewPanel.selectColumns(Column.ONC_HISTORY, [oncHistoryRequestStatusColumn]);
 
         const searchPanel = participantListPage.filters.searchPanel;
         await searchPanel.open();
         await searchPanel.checkboxes('Status', { checkboxValues: ['Enrolled'] });
-        await searchPanel.checkboxes(oncHistoryRequestStatusColumn, { additionalFilters: [AdditionalFilter.NOT_EMPTY] });
+        await searchPanel.checkboxes(oncHistoryRequestStatusColumn, { additionalFilters: [Filter.NOT_EMPTY] });
         await searchPanel.search();
       });
 

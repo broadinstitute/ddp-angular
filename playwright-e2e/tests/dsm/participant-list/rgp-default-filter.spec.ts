@@ -1,12 +1,12 @@
 import { expect } from '@playwright/test';
 import { test } from 'fixtures/dsm-fixture';
-import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
-import { CustomViewColumns } from 'dsm/component/filters/sections/search/search-enums';
+import { Column } from 'dsm/enums';
+import { StudyName } from 'dsm/component/navigation';
 
 test.describe('Participants list', () => {
   test('RGP default filters @dsm @rgp', async ({ page, request }) => {
-    const participantListPage = await ParticipantListPage.goto(page, StudyEnum.RGP, request);
+    const participantListPage = await ParticipantListPage.goto(page, StudyName.RGP, request);
     const searchPanel = participantListPage.filters.searchPanel;
     await searchPanel.open();
 
@@ -74,10 +74,10 @@ test.describe('Participants list', () => {
 
   test('Open Status filter @dsm @rgp', async ({ page, request }) => {
     // Status column must be added. It's not part of default filters.
-    const participantListPage = await ParticipantListPage.goto(page, StudyEnum.RGP, request);
+    const participantListPage = await ParticipantListPage.goto(page, StudyName.RGP, request);
     const customizeViewPanel = participantListPage.filters.customizeViewPanel;
     await customizeViewPanel.open();
-    await customizeViewPanel.selectColumns(CustomViewColumns.PARTICIPANT, ['Status']);
+    await customizeViewPanel.selectColumns(Column.PARTICIPANT, ['Status']);
     await customizeViewPanel.close();
 
     const searchPanel = participantListPage.filters.searchPanel;

@@ -1,12 +1,12 @@
 import { expect } from '@playwright/test';
-import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
+import { StudyName } from 'dsm/component/navigation';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
 import { FileFormatEnum, TextFormatEnum } from 'dsm/pages/participant-page/enums/download-format-enum';
 import { test } from 'fixtures/dsm-fixture';
 import { assertParticipantListDownloadFileName } from 'utils/test-utils';
 
 test.describe('Participant List Download', () => {
-  const studies = [StudyEnum.OSTEO2, StudyEnum.BRUGADA];
+  const studies = [StudyName.OSTEO2, StudyName.BRUGADA];
 
   test.describe('As human-readable', () => {
     for (const study of studies) {
@@ -33,7 +33,7 @@ test.describe('Participant List Download', () => {
   test.describe('As analysis-friendly', () => {
     test('Subset of data in @dsm @prostate',
       async ({ page, request }) => {
-        const participantListPage = await ParticipantListPage.goto(page, StudyEnum.PROSTATE, request);
+        const participantListPage = await ParticipantListPage.goto(page, StudyName.PROSTATE, request);
 
         const customizeViewPanel = participantListPage.filters.customizeViewPanel;
         await customizeViewPanel.open();
@@ -46,7 +46,7 @@ test.describe('Participant List Download', () => {
           fileFormat: FileFormatEnum.TSV,
           textFormat: TextFormatEnum.ANALYSIS_FRIENDLY
         });
-        assertParticipantListDownloadFileName(download, StudyEnum.PROSTATE);
+        assertParticipantListDownloadFileName(download, StudyName.PROSTATE);
 
         const downloadedFile = await download.path();
         expect(downloadedFile).toBeTruthy();

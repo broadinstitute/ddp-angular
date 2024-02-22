@@ -1,8 +1,7 @@
-import {KitType} from 'dsm/component/kitType/kitType';
 import {KitsTable} from 'dsm/component/tables/kits-table';
 import {APIRequestContext, expect, Page} from '@playwright/test';
-import {KitTypeEnum} from 'dsm/component/kitType/enums/kitType-enum';
-import {waitForNoSpinner, waitForResponse} from 'utils/test-utils';
+import {Kit} from 'dsm/enums';
+import {waitForNoSpinner} from 'utils/test-utils';
 import {KitsColumnsEnum} from 'dsm/pages/kitsInfo-pages/enums/kitsColumns-enum';
 import {assertTableHeaders} from 'utils/assertion-helper';
 import {rows} from 'lib/component/dsm/paginators/types/rowsPerPage';
@@ -109,7 +108,7 @@ export default class KitsReceivedPage extends KitsPageBase {
       .toBeVisible();
   }
 
-  public async assertDisplayedKitTypes(kitTypes: KitTypeEnum[]): Promise<void> {
+  public async assertDisplayedKitTypes(kitTypes: Kit[]): Promise<void> {
     await waitForNoSpinner(this.page);
     for (const kitType of kitTypes) {
       await expect(this.kitType.displayedKitType(kitType),

@@ -1,8 +1,6 @@
 import { expect } from '@playwright/test';
-import { AdditionalFilter } from 'dsm/component/filters/sections/search/search-enums';
-import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
-import { StudyNavEnum } from 'dsm/component/navigation/enums/studyNav-enum';
-import { Navigation } from 'dsm/component/navigation/navigation';
+import { Filter } from 'dsm/enums';
+import { Navigation, Study, StudyName } from 'dsm/component/navigation';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
 import ParticipantPage from 'dsm/pages/participant-page/participant-page';
 import ParticipantWithdrawalPage from 'dsm/pages/participant-withdrawal-page';
@@ -14,7 +12,7 @@ import * as user from 'data/fake-user.json';
 import { shuffle } from 'utils/test-utils';
 
 test.describe('Participants Withdrawal', () => {
-  const studies = [StudyEnum.LMS];
+  const studies = [StudyName.LMS];
 
     for (const study of studies) {
       test(`In @${study} @dsm`, async ({ page, request }) => {
@@ -35,7 +33,7 @@ test.describe('Participants Withdrawal', () => {
         const searchPanel = participantListPage.filters.searchPanel;
         await searchPanel.open();
         await searchPanel.text('First Name',
-          { textValue: user.adult.firstName, additionalFilters: [AdditionalFilter.EXACT_MATCH], exactMatch: false });
+          { textValue: user.adult.firstName, additionalFilters: [Filter.EXACT_MATCH], exactMatch: false });
         await searchPanel.checkboxes('Status', { checkboxValues: ['Enrolled'] });
         await searchPanel.search();
 
@@ -86,7 +84,7 @@ test.describe('Participants Withdrawal', () => {
         logParticipantWithdrew(participantId, shortIdColumnId, registrationDate);
 
         const navigation = new Navigation(page, request);
-        await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
+        await navigation.selectFromStudy<ParticipantListPage>(Study.PARTICIPANT_LIST);
         await participantListPage.waitForReady();
 
         // verify status has changed to withdrawn

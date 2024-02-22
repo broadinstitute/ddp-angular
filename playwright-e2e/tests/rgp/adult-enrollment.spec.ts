@@ -12,9 +12,8 @@ import { setAuth0UserEmailVerified } from 'utils/api-utils';
 import { setPatientParticipantGuid } from 'utils/faker-utils';
 import { login } from 'authentication/auth-dsm';
 import Select from 'dss/component/select';
-import { Navigation } from 'dsm/component/navigation/navigation';
+import { Navigation, Study } from 'dsm/component/navigation';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
-import { StudyNavEnum } from 'dsm/component/navigation/enums/studyNav-enum';
 
 const { RGP_USER_EMAIL, RGP_USER_PASSWORD } = process.env;
 
@@ -162,7 +161,7 @@ test.describe.serial('Adult Self Enrollment', () => {
     //select RGP study
     await new Select(page, { label: 'Select study' }).selectOption('RGP');
 
-    const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
+    const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(Study.PARTICIPANT_LIST);
     await participantListPage.waitForReady();
 
     await participantListPage.filterListByParticipantGUID(user.patient.participantGuid);

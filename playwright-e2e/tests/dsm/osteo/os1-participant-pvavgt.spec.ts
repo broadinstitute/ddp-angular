@@ -1,15 +1,13 @@
 import { Page, expect } from '@playwright/test';
 import { test } from 'fixtures/dsm-fixture';
-import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
-import { AdditionalFilter, CustomViewColumns } from 'dsm/component/filters/sections/search/search-enums';
+import { Filter, Column } from 'dsm/enums';
 import { TabEnum } from 'dsm/component/tabs/enums/tab-enum';
 import MedicalRecordsTab from 'dsm/pages/medical-records/medical-records-tab';
 import OncHistoryTab from 'dsm/component/tabs/onc-history-tab';
 import CohortTag from 'dsm/component/cohort-tag';
-import { SamplesNavEnum } from 'dsm/component/navigation/enums/samplesNav-enum';
 import SearchPage, { SearchByField } from 'dsm/pages/samples/search-page';
-import { Navigation } from 'dsm/component/navigation/navigation';
+import { Navigation, Samples, StudyName } from 'dsm/component/navigation';
 import { SortOrder } from 'dss/component/table';
 import { WelcomePage } from 'dsm/pages/welcome-page';
 
@@ -24,7 +22,7 @@ test.describe.serial('Osteo1 Participant', () => {
   test.skip(DSM_BASE_URL === undefined || (DSM_BASE_URL as string).indexOf('test') === -1);
 
   const shortID = 'PVAVGT';
-  const osteo1 = StudyEnum.OSTEO;
+  const osteo1 = StudyName.OSTEO;
 
   test(`Should find by Cohort Tag in Osteo1`, async ({page, request}) => {
     const participantListPage: ParticipantListPage = await ParticipantListPage.goto(page, osteo1, request);
@@ -32,7 +30,7 @@ test.describe.serial('Osteo1 Participant', () => {
     const tagNameColumn = 'Cohort Tag Name';
     const customizeViewPanel = participantListPage.filters.customizeViewPanel;
     await customizeViewPanel.open();
-    await customizeViewPanel.selectColumns(CustomViewColumns.COHORT_TAGS, [tagNameColumn]);
+    await customizeViewPanel.selectColumns(Column.COHORT_TAGS, [tagNameColumn]);
 
     const searchPanel = participantListPage.filters.searchPanel;
     const participantListTable = participantListPage.participantListTable;
@@ -40,7 +38,7 @@ test.describe.serial('Osteo1 Participant', () => {
     // Should find multiple Osteo1 participants when search by Osteo1 Cohort tag: "OS"
     await searchPanel.open();
     await searchPanel.clear();
-    await searchPanel.text(tagNameColumn, { additionalFilters: [AdditionalFilter.EXACT_MATCH], textValue: 'OS' });
+    await searchPanel.text(tagNameColumn, { additionalFilters: [Filter.EXACT_MATCH], textValue: 'OS' });
     await searchPanel.search();
     expect(await participantListTable.numOfParticipants()).toBeGreaterThan(0);
 
@@ -49,7 +47,7 @@ test.describe.serial('Osteo1 Participant', () => {
     await searchPanel.clear();
     await searchPanel.text('Short ID', { textValue: shortID });
     await searchPanel.checkboxes('Status', { checkboxValues: ['Enrolled'] });
-    await searchPanel.text(tagNameColumn, { additionalFilters: [AdditionalFilter.EXACT_MATCH], textValue: 'OS' });
+    await searchPanel.text(tagNameColumn, { additionalFilters: [Filter.EXACT_MATCH], textValue: 'OS' });
     await searchPanel.search();
     expect(await participantListTable.numOfParticipants()).toStrictEqual(1);
   });
@@ -112,7 +110,7 @@ test.describe.serial('Osteo1 Participant', () => {
 
   test(`Should match expected data in Osteo1 Kits Search page`, async ({page, request}) => {
     await new WelcomePage(page).selectStudy(osteo1);
-    const kitsSearchPage = await new Navigation(page, request).selectFromSamples<SearchPage>(SamplesNavEnum.SEARCH);
+    const kitsSearchPage = await new Navigation(page, request).selectFromSamples<SearchPage>(Samples.SEARCH);
     await kitsSearchPage.waitForReady();
 
     const table = await kitsSearchPage.searchByField(SearchByField.SHORT_ID, shortID);
@@ -121,7 +119,7 @@ test.describe.serial('Osteo1 Participant', () => {
   });
 
   test(`Should not find Osteo1 participant in Osteo2 study`, async ({page, request}) => {
-    const participantListPage: ParticipantListPage = await ParticipantListPage.goto(page, StudyEnum.OSTEO2, request);
+    const participantListPage: ParticipantListPage = await ParticipantListPage.goto(page, StudyName.OSTEO2, request);
     await participantListPage.filterListByShortId(shortID, { resultsCount: 0 });
   });
 

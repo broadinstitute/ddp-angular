@@ -1,13 +1,13 @@
 import { expect } from '@playwright/test';
 import { test } from 'fixtures/dsm-fixture';
-import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import FollowUpSurveyPage from 'dsm/pages/follow-up-survey-page';
+import { StudyName } from 'dsm/component/navigation';
 
 
 test.describe('Follow-Up Surveys', () => {
   let followupSurveyPage: FollowUpSurveyPage;
 
-  const studies = [StudyEnum.PANCAN, StudyEnum.ANGIO, StudyEnum.OSTEO, StudyEnum.LMS, StudyEnum.OSTEO2, StudyEnum.PROSTATE, StudyEnum.ESC];
+  const studies = [StudyName.PANCAN, StudyName.ANGIO, StudyName.OSTEO, StudyName.LMS, StudyName.OSTEO2, StudyName.PROSTATE, StudyName.ESC];
 
   for (const study of studies) {
     test(`Shows list of follow-up surveys configured in @${study} @dsm @functional`, async ({ page, request }) => {
@@ -67,21 +67,21 @@ test.describe('Follow-Up Surveys', () => {
   async function selectSurveyForStudy(followupSurveyPage: FollowUpSurveyPage, study: string): Promise<void> {
     let survey: string;
     switch (study) {
-      case StudyEnum.PANCAN:
+      case StudyName.PANCAN:
         survey = 'FAMILY_HISTORY  (NONREPEATING)';
         break;
-      case StudyEnum.ANGIO:
+      case StudyName.ANGIO:
         survey = 'followupconsent  (REPEATING)';
         break;
-      case StudyEnum.OSTEO:
-      case StudyEnum.LMS:
-      case StudyEnum.OSTEO2:
+      case StudyName.OSTEO:
+      case StudyName.LMS:
+      case StudyName.OSTEO2:
         survey = 'SOMATIC_RESULTS  (REPEATING)';
         break;
-      case StudyEnum.PROSTATE:
+      case StudyName.PROSTATE:
         survey = 'FOLLOWUP  (REPEATING)';
         break;
-      case StudyEnum.ESC:
+      case StudyName.ESC:
         survey = 'FOLLOWUPCONSENT  (REPEATING)';
         break;
       default:
@@ -93,21 +93,21 @@ test.describe('Follow-Up Surveys', () => {
   function surveysForStudy(followupSurveyPage: FollowUpSurveyPage, study: string): string[] {
     let configuredSurveys: string[];
     switch (study) {
-      case StudyEnum.PANCAN:
+      case StudyName.PANCAN:
         configuredSurveys = ['BLOOD_CONSENT (REPEATING)', 'FAMILY_HISTORY (NONREPEATING)', 'DIET_LIFESTYLE (NONREPEATING)'];
         break;
-      case StudyEnum.ANGIO:
+      case StudyName.ANGIO:
         configuredSurveys = ['followupconsent (REPEATING)'];
         break;
-      case StudyEnum.OSTEO:
-      case StudyEnum.LMS:
-      case StudyEnum.OSTEO2:
+      case StudyName.OSTEO:
+      case StudyName.LMS:
+      case StudyName.OSTEO2:
         configuredSurveys = ['SOMATIC_RESULTS (REPEATING)'];
         break;
-      case StudyEnum.PROSTATE:
+      case StudyName.PROSTATE:
         configuredSurveys = ['FOLLOWUP (REPEATING)'];
         break;
-      case StudyEnum.ESC:
+      case StudyName.ESC:
         configuredSurveys = ['FOLLOWUPCONSENT (REPEATING)'];
         break;
       default:

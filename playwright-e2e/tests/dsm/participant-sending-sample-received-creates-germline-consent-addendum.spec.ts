@@ -1,9 +1,6 @@
 import { APIRequestContext, Page, TestInfo, expect } from '@playwright/test';
-import { KitTypeEnum } from 'dsm/component/kitType/enums/kitType-enum';
-import { SamplesNavEnum } from 'dsm/component/navigation/enums/samplesNav-enum';
-import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
-import { StudyNavEnum } from 'dsm/component/navigation/enums/studyNav-enum';
-import { Navigation } from 'dsm/component/navigation/navigation';
+import { Kit, Filter } from 'dsm/enums';
+import { Navigation, Samples, Study, StudyName } from 'dsm/component/navigation';
 import KitsWithoutLabelPage from 'dsm/pages/kitsInfo-pages/kitsWithoutLabel-page';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
 import Select from 'dss/component/select';
@@ -23,14 +20,13 @@ import { TabEnum } from 'dsm/component/tabs/enums/tab-enum';
 import { OncHistoryInputColumnsEnum, OncHistorySelectRequestEnum } from 'dsm/component/tabs/enums/onc-history-input-columns-enum';
 import { SMIdEnum, TissueDynamicFieldsEnum, TissueTypesEnum } from 'dsm/pages/tissue/enums/tissue-information-enum';
 import KitsReceivedPage from 'dsm/pages/kitsInfo-pages/kitsReceived-page/kitsReceivedPage';
-import { AdditionalFilter } from 'dsm/component/filters/sections/search/search-enums';
 import crypto from 'crypto';
 import { logInfo } from 'utils/log-utils';
 import { waitForResponse } from 'utils/test-utils';
 import ErrorPage from 'dsm/pages/samples/error-page';
 
 test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
-  const studies = [StudyEnum.OSTEO2]; //Only clinical (pecgs) studies get this event
+  const studies = [StudyName.OSTEO2]; //Only clinical (pecgs) studies get this event
   const facilityName = user.doctor.hospital;
   const facilityPhoneNumber = user.doctor.phone;
   const facilityFaxNumber = user.doctor.fax;
@@ -53,13 +49,13 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
       navigation = new Navigation(page, request);
       await new Select(page, { label: 'Select study' }).selectOption(`${study}`);
 
-      const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
+      const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(Study.PARTICIPANT_LIST);
       await participantListPage.waitForReady();
 
       //Prep the Saliva kit
       shortID = await findParticipantForGermlineConsentCreation(participantListPage, study);
       logInfo(`Chosen short id: ${shortID}`);
-      kitLabel = await prepareSentKit(shortID, KitTypeEnum.SALIVA, study, page, request, testInfo);
+      kitLabel = await prepareSentKit(shortID, Kit.SALIVA, study, page, request, testInfo);
 
       //Get the Participant Page of the chosen test participant
       participantPage = await goToTestParticipantPage(shortID, navigation);
@@ -112,10 +108,10 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
       await tissue.fillField(TissueDynamicFieldsEnum.DATE_SENT_TO_GP, { inputValue: today });
 
       //Receive the saliva kit first
-      const kitsReceivedPage = await navigation.selectFromSamples<KitsReceivedPage>(SamplesNavEnum.RECEIVED);
+      const kitsReceivedPage = await navigation.selectFromSamples<KitsReceivedPage>(Samples.RECEIVED);
       await kitsReceivedPage.waitForLoad();
       await kitsReceivedPage.assertPageTitle();
-      await kitsReceivedPage.selectKitType(KitTypeEnum.SALIVA);
+      await kitsReceivedPage.selectKitType(Kit.SALIVA);
       await kitsReceivedPage.kitReceivedRequest({mfCode: kitLabel});
 
       //Accession the tumor sample second (just receive the sample using the SM-ID)
@@ -127,7 +123,7 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
       });
 
       //Confirm that the germline consent addendum was created - check that the GERMLINE_CONSENT_ADDENDUM_PEDIATRIC Survey Created column is not empty
-      await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
+      await navigation.selectFromStudy<ParticipantListPage>(Study.PARTICIPANT_LIST);
       await participantListPage.waitForReady();
 
       const customizeViewPanel = participantListPage.filters.customizeViewPanel;
@@ -139,7 +135,7 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
       const searchPanel = participantListPage.filters.searchPanel;
       await searchPanel.open();
       await searchPanel.text('Short ID', { textValue: shortID });
-      await searchPanel.dates('GERMLINE_CONSENT_ADDENDUM Survey Created', { additionalFilters: [AdditionalFilter.NOT_EMPTY] });
+      await searchPanel.dates('GERMLINE_CONSENT_ADDENDUM Survey Created', { additionalFilters: [Filter.NOT_EMPTY] });
 
       //Occasionally, it will take a couple of seconds (and participant list refreshes) before info about the germline consent activity being created shows up
       await expect(async () => {
@@ -159,13 +155,13 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
       navigation = new Navigation(page, request);
       await new Select(page, { label: 'Select study' }).selectOption(`${study}`);
 
-      const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
+      const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(Study.PARTICIPANT_LIST);
       await participantListPage.waitForReady();
 
       //Prep the Blood kit
       shortID = await findParticipantForGermlineConsentCreation(participantListPage, study);
       logInfo(`Chosen short id: ${shortID}`);
-      kitLabel = await prepareSentKit(shortID, KitTypeEnum.BLOOD, study, page, request, testInfo);
+      kitLabel = await prepareSentKit(shortID, Kit.BLOOD, study, page, request, testInfo);
 
       //Get the Participant Page of the chosen test participant
       participantPage = await goToTestParticipantPage(shortID, navigation);
@@ -218,10 +214,10 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
       await tissue.fillField(TissueDynamicFieldsEnum.DATE_SENT_TO_GP, { inputValue: today });
 
       //Receive the blood kit first
-      const kitsReceivedPage = await navigation.selectFromSamples<KitsReceivedPage>(SamplesNavEnum.RECEIVED);
+      const kitsReceivedPage = await navigation.selectFromSamples<KitsReceivedPage>(Samples.RECEIVED);
       await kitsReceivedPage.waitForLoad();
       await kitsReceivedPage.assertPageTitle();
-      await kitsReceivedPage.selectKitType(KitTypeEnum.BLOOD);
+      await kitsReceivedPage.selectKitType(Kit.BLOOD);
       await kitsReceivedPage.kitReceivedRequest({mfCode: kitLabel});
 
       //Accession the tumor sample second (just receive the sample using the SM-ID)
@@ -233,7 +229,7 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
       });
 
       //Confirm that the germline consent addendum was created - check that the GERMLINE_CONSENT_ADDENDUM_PEDIATRIC Survey Created column is not empty
-      await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
+      await navigation.selectFromStudy<ParticipantListPage>(Study.PARTICIPANT_LIST);
       await participantListPage.waitForReady();
 
       const customizeViewPanel = participantListPage.filters.customizeViewPanel;
@@ -245,7 +241,7 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
       const searchPanel = participantListPage.filters.searchPanel;
       await searchPanel.open();
       await searchPanel.text('Short ID', { textValue: shortID });
-      await searchPanel.dates('GERMLINE_CONSENT_ADDENDUM Survey Created', { additionalFilters: [AdditionalFilter.NOT_EMPTY] });
+      await searchPanel.dates('GERMLINE_CONSENT_ADDENDUM Survey Created', { additionalFilters: [Filter.NOT_EMPTY] });
 
       //Occasionally, it will take a couple of seconds (and participant list refreshes) before info about the germline consent activity being created shows up
       await expect(async () => {
@@ -265,13 +261,13 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
       navigation = new Navigation(page, request);
       await new Select(page, { label: 'Select study' }).selectOption(`${study}`);
 
-      const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
+      const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(Study.PARTICIPANT_LIST);
       await participantListPage.waitForReady();
 
       //Prep the Saliva kit
       shortID = await findParticipantForGermlineConsentCreation(participantListPage, study);
       logInfo(`Chosen short id: ${shortID}`);
-      kitLabel = await prepareSentKit(shortID, KitTypeEnum.SALIVA, study, page, request, testInfo);
+      kitLabel = await prepareSentKit(shortID, Kit.SALIVA, study, page, request, testInfo);
 
       //Get the Participant Page of the chosen test participant
       participantPage = await goToTestParticipantPage(shortID, navigation);
@@ -324,7 +320,7 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
       await tissue.fillField(TissueDynamicFieldsEnum.DATE_SENT_TO_GP, { inputValue: today });
 
       //Accession the tumor sample first (just receive the sample using the SM-ID)
-      const kitsReceivedPage = await navigation.selectFromSamples<KitsReceivedPage>(SamplesNavEnum.RECEIVED);
+      const kitsReceivedPage = await navigation.selectFromSamples<KitsReceivedPage>(Samples.RECEIVED);
       await kitsReceivedPage.kitReceivedRequest({
         mfCode: smID,
         isTumorSample: true,
@@ -335,11 +331,11 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
       //Receive the saliva kit second
       await kitsReceivedPage.waitForLoad();
       await kitsReceivedPage.assertPageTitle();
-      await kitsReceivedPage.selectKitType(KitTypeEnum.SALIVA);
+      await kitsReceivedPage.selectKitType(Kit.SALIVA);
       await kitsReceivedPage.kitReceivedRequest({mfCode: kitLabel});
 
       //Confirm that the germline consent addendum was created - check that the GERMLINE_CONSENT_ADDENDUM_PEDIATRIC Survey Created column is not empty
-      await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
+      await navigation.selectFromStudy<ParticipantListPage>(Study.PARTICIPANT_LIST);
       await participantListPage.waitForReady();
 
       const customizeViewPanel = participantListPage.filters.customizeViewPanel;
@@ -351,7 +347,7 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
       const searchPanel = participantListPage.filters.searchPanel;
       await searchPanel.open();
       await searchPanel.text('Short ID', { textValue: shortID });
-      await searchPanel.dates('GERMLINE_CONSENT_ADDENDUM Survey Created', { additionalFilters: [AdditionalFilter.NOT_EMPTY] });
+      await searchPanel.dates('GERMLINE_CONSENT_ADDENDUM Survey Created', { additionalFilters: [Filter.NOT_EMPTY] });
 
       //Occasionally, it will take a couple of seconds (and participant list refreshes) before info about the germline consent activity being created shows up
       await expect(async () => {
@@ -371,13 +367,13 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
       navigation = new Navigation(page, request);
       await new Select(page, { label: 'Select study' }).selectOption(`${study}`);
 
-      const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
+      const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(Study.PARTICIPANT_LIST);
       await participantListPage.waitForReady();
 
       //Prep the Blood kit
       shortID = await findParticipantForGermlineConsentCreation(participantListPage, study);
       logInfo(`Chosen short id: ${shortID}`);
-      kitLabel = await prepareSentKit(shortID, KitTypeEnum.BLOOD, study, page, request, testInfo);
+      kitLabel = await prepareSentKit(shortID, Kit.BLOOD, study, page, request, testInfo);
 
       //Get the Participant Page of the chosen test participant
       participantPage = await goToTestParticipantPage(shortID, navigation);
@@ -430,7 +426,7 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
       await tissue.fillField(TissueDynamicFieldsEnum.DATE_SENT_TO_GP, { inputValue: today });
 
       //Accession the tumor sample first (just receive the sample using the SM-ID)
-      const kitsReceivedPage = await navigation.selectFromSamples<KitsReceivedPage>(SamplesNavEnum.RECEIVED);
+      const kitsReceivedPage = await navigation.selectFromSamples<KitsReceivedPage>(Samples.RECEIVED);
       await kitsReceivedPage.kitReceivedRequest({
         mfCode: smID,
         isTumorSample: true,
@@ -441,11 +437,11 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
       //Receive the blood kit second
       await kitsReceivedPage.waitForLoad();
       await kitsReceivedPage.assertPageTitle();
-      await kitsReceivedPage.selectKitType(KitTypeEnum.BLOOD);
+      await kitsReceivedPage.selectKitType(Kit.BLOOD);
       await kitsReceivedPage.kitReceivedRequest({mfCode: kitLabel});
 
       //Confirm that the germline consent addendum was created - check that the GERMLINE_CONSENT_ADDENDUM_PEDIATRIC Survey Created column is not empty
-      await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
+      await navigation.selectFromStudy<ParticipantListPage>(Study.PARTICIPANT_LIST);
       await participantListPage.waitForReady();
 
       const customizeViewPanel = participantListPage.filters.customizeViewPanel;
@@ -457,7 +453,7 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
       const searchPanel = participantListPage.filters.searchPanel;
       await searchPanel.open();
       await searchPanel.text('Short ID', { textValue: shortID });
-      await searchPanel.dates('GERMLINE_CONSENT_ADDENDUM Survey Created', { additionalFilters: [AdditionalFilter.NOT_EMPTY] });
+      await searchPanel.dates('GERMLINE_CONSENT_ADDENDUM Survey Created', { additionalFilters: [Filter.NOT_EMPTY] });
 
       //Occasionally, it will take a couple of seconds (and participant list refreshes) before info about the germline consent activity being created shows up
       await expect(async () => {
@@ -483,7 +479,7 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
  * Does not already have a germline consent addendum
  * Does not already have a normal kit (i.e. a blood or saliva kit) sent out (for ease of testing)
  */
-async function findParticipantForGermlineConsentCreation(participantListPage: ParticipantListPage, study: StudyEnum): Promise<string> {
+async function findParticipantForGermlineConsentCreation(participantListPage: ParticipantListPage, study: StudyName): Promise<string> {
   const searchPanel = participantListPage.filters.searchPanel;
   await searchPanel.open();
   await searchPanel.checkboxes('Status', { checkboxValues: ['Enrolled'] });
@@ -509,7 +505,7 @@ async function findParticipantForGermlineConsentCreation(participantListPage: Pa
   const lastnamePrefix = getPlaywrightParticipantLastNamePrefix(study);
 
   await searchPanel.open();
-  await searchPanel.text('Last Name', { textValue: lastnamePrefix, additionalFilters: [AdditionalFilter.EXACT_MATCH], exactMatch: false });
+  await searchPanel.text('Last Name', { textValue: lastnamePrefix, additionalFilters: [Filter.EXACT_MATCH], exactMatch: false });
   await searchPanel.checkboxes('CONSENT_BLOOD', { checkboxValues: ['Yes'] });
   await searchPanel.checkboxes('CONSENT_TISSUE', { checkboxValues: ['Yes'] });
   const filterListResponse = await searchPanel.search({ uri: '/ui/filterList' });
@@ -559,22 +555,22 @@ async function findParticipantForGermlineConsentCreation(participantListPage: Pa
   return shortID;
 }
 
-function getPlaywrightParticipantLastNamePrefix(study: StudyEnum): string {
+function getPlaywrightParticipantLastNamePrefix(study: StudyName): string {
   let prefix = '';
   switch (study) {
-    case StudyEnum.BRAIN:
+    case StudyName.BRAIN:
       prefix = 'BR';
       break;
-    case StudyEnum.MBC:
+    case StudyName.MBC:
       prefix = 'testLastName';
       break;
-    case StudyEnum.OSTEO2:
+    case StudyName.OSTEO2:
       prefix = 'OS';
       break;
-    case StudyEnum.ANGIO:
-    case StudyEnum.AT:
-    case StudyEnum.LMS:
-    case StudyEnum.PANCAN:
+    case StudyName.ANGIO:
+    case StudyName.AT:
+    case StudyName.LMS:
+    case StudyName.PANCAN:
       prefix = 'Playwright';
       break;
     default:
@@ -595,18 +591,18 @@ function getPlaywrightParticipantLastNamePrefix(study: StudyEnum): string {
  * @returns the mf code a.k.a the kit label to be used to later mark the kit as sent
  */
 async function prepareSentKit(shortID: string,
-  kitType: KitTypeEnum,
-  study: StudyEnum,
+  kitType: Kit,
+  study: StudyName,
   page: Page,
   request: APIRequestContext,
   testInfo: TestInfo): Promise<string> {
   const navigation = new Navigation(page, request);
-  const expectedKitTypes = [KitTypeEnum.SALIVA, KitTypeEnum.BLOOD]; //Studies used for the current test only have Saliva and Blood kits
+  const expectedKitTypes = [Kit.SALIVA, Kit.BLOOD]; //Studies used for the current test only have Saliva and Blood kits
   const testResultDirectory = testInfo.outputDir;
   let kitLabel = '';
 
   //Deactivate existing kits
-  const kitsWithoutLabelPage = await navigation.selectFromSamples<KitsWithoutLabelPage>(SamplesNavEnum.KITS_WITHOUT_LABELS);
+  const kitsWithoutLabelPage = await navigation.selectFromSamples<KitsWithoutLabelPage>(Samples.KITS_WITHOUT_LABELS);
   await kitsWithoutLabelPage.waitForReady();
   await kitsWithoutLabelPage.selectKitType(kitType);
   if (await kitsWithoutLabelPage.hasKitRequests()) {
@@ -615,13 +611,13 @@ async function prepareSentKit(shortID: string,
     await kitsWithoutLabelPage.deactivateAllKitsFor(shortID);
   }
 
-  const kitErrorPage = await navigation.selectFromSamples<ErrorPage>(SamplesNavEnum.ERROR);
+  const kitErrorPage = await navigation.selectFromSamples<ErrorPage>(Samples.ERROR);
   await kitErrorPage.waitForReady();
   await kitErrorPage.selectKitType(kitType);
   await kitErrorPage.deactivateAllKitsFor(shortID);
 
   //Get first name and last name of the participant - Kit Upload checks that the names match the given short ids
-  const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
+  const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(Study.PARTICIPANT_LIST);
   await participantListPage.waitForReady();
 
   const searchPanel = participantListPage.filters.searchPanel;
@@ -642,7 +638,7 @@ async function prepareSentKit(shortID: string,
   kitUploadInfo.address.state = user.patient.state.abbreviation;
   kitUploadInfo.address.country = user.patient.country.abbreviation;
 
-  const kitUploadPage = await navigation.selectFromSamples<KitUploadPage>(SamplesNavEnum.KIT_UPLOAD);
+  const kitUploadPage = await navigation.selectFromSamples<KitUploadPage>(Samples.KIT_UPLOAD);
   await kitUploadPage.waitForReady();
   await kitUploadPage.selectKitType(kitType);
   await kitUploadPage.assertBrowseBtn();
@@ -650,7 +646,7 @@ async function prepareSentKit(shortID: string,
   await kitUploadPage.uploadFile(kitType, [kitUploadInfo], study, testResultDirectory);
 
   //Check for kit in Kits without Label and get the shipping ID
-  await navigation.selectFromSamples<KitsWithoutLabelPage>(SamplesNavEnum.KITS_WITHOUT_LABELS);
+  await navigation.selectFromSamples<KitsWithoutLabelPage>(Samples.KITS_WITHOUT_LABELS);
   await kitsWithoutLabelPage.waitForReady();
   await kitsWithoutLabelPage.selectKitType(kitType);
   await kitsWithoutLabelPage.assertCreateLabelsBtn();
@@ -664,31 +660,31 @@ async function prepareSentKit(shortID: string,
   await expect(kitsTable.rowLocator()).toHaveCount(1);
 
   //Scan saliva and blood kit in Initial Scan
-  const initialScanPage = await navigation.selectFromSamples<InitialScanPage>(SamplesNavEnum.INITIAL_SCAN);
+  const initialScanPage = await navigation.selectFromSamples<InitialScanPage>(Samples.INITIAL_SCAN);
   await initialScanPage.assertPageTitle();
-  if (kitType === KitTypeEnum.SALIVA) {
+  if (kitType === Kit.SALIVA) {
     kitLabel = `${crypto.randomUUID().toString().substring(0, 14)}`; //Clinical Saliva kits just need to be 14 chars
-  } else if (kitType === KitTypeEnum.BLOOD) {
+  } else if (kitType === Kit.BLOOD) {
     kitLabel = `PECGS-${crypto.randomUUID().toString().substring(0, 10)}`; //Clinical Blood kits need a PECGS prefix
   }
   await initialScanPage.fillScanPairs([kitLabel, shortID]);
   await initialScanPage.save();
 
   //Both Saliva and Blood kits will now require a tracking label - see PEPPER-1249
-  const trackingScanPage = await navigation.selectFromSamples<TrackingScanPage>(SamplesNavEnum.TRACKING_SCAN);
+  const trackingScanPage = await navigation.selectFromSamples<TrackingScanPage>(Samples.TRACKING_SCAN);
   await trackingScanPage.waitForReady();
   const trackingLabel = `tracking-${crypto.randomUUID().toString().substring(0, 10)}`;
   await trackingScanPage.fillScanPairs([trackingLabel, kitLabel]);
   await trackingScanPage.save();
 
   //Scan kit in Final Scan - which marks the kit as sent
-  const finalScanPage = await navigation.selectFromSamples<FinalScanPage>(SamplesNavEnum.FINAL_SCAN);
+  const finalScanPage = await navigation.selectFromSamples<FinalScanPage>(Samples.FINAL_SCAN);
   await finalScanPage.assertPageTitle();
   await finalScanPage.fillScanPairs([kitLabel, shippingID]);
   await finalScanPage.save();
 
   //Check for the kit in the Kits Sent page
-  const kitsSentPage = await navigation.selectFromSamples<KitsSentPage>(SamplesNavEnum.SENT);
+  const kitsSentPage = await navigation.selectFromSamples<KitsSentPage>(Samples.SENT);
   await kitsSentPage.waitForReady();
   await kitsSentPage.assertDisplayedKitTypes(expectedKitTypes);
   await kitsSentPage.selectKitType(kitType);
@@ -704,7 +700,7 @@ async function prepareSentKit(shortID: string,
 }
 
 async function goToTestParticipantPage(shortID: string, navigation: Navigation): Promise<ParticipantPage> {
-  const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
+  const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(Study.PARTICIPANT_LIST);
   await participantListPage.waitForReady();
 
   const searchPanel = participantListPage.filters.searchPanel;

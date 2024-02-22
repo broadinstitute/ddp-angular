@@ -1,13 +1,13 @@
 import { expect } from '@playwright/test';
-import { CustomViewColumns } from 'dsm/component/filters/sections/search/search-enums';
-import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
+import { StudyName } from 'dsm/component/navigation';
+import { Column } from 'dsm/enums';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
 import { test } from 'fixtures/dsm-fixture';
 import { getDate } from 'utils/date-utils';
 import { logInfo } from 'utils/log-utils';
 
-test.describe('DSM Date Picker', () => {
-  const study = StudyEnum.ANGIO;
+test.describe('DSM Date Picker in Participant List page', () => {
+  const study = StudyName.ANGIO;
   const dobColumn = 'Date of Birth';
   // DoB is 12/20/1995
   const dob = {
@@ -29,7 +29,7 @@ test.describe('DSM Date Picker', () => {
 
       const customizeViewPanel = participantListPage.filters.customizeViewPanel;
       await customizeViewPanel.open();
-      await customizeViewPanel.selectColumns(CustomViewColumns.RESEARCH_CONSENT_FORM, ['Date of Birth']);
+      await customizeViewPanel.selectColumns(Column.RESEARCH_CONSENT_FORM, ['Date of Birth']);
 
       const searchPanel = participantListPage.filters.searchPanel;
       await searchPanel.open();

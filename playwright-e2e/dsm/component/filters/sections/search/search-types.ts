@@ -1,7 +1,7 @@
-import { AdditionalFilter } from 'dsm/component/filters/sections/search/search-enums';
+import { Filter } from 'dsm/enums';
 
 type Today = 'today';
-type AdditionalFilters = AdditionalFilter[];
+type AdditionalFilters = Filter[];
 
 export interface DateConfig {
   from: string | Date | Today | null | undefined;

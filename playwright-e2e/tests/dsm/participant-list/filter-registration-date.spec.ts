@@ -1,15 +1,15 @@
 import { expect } from '@playwright/test';
 import { test } from 'fixtures/dsm-fixture';
-import { AdditionalFilter } from 'dsm/component/filters/sections/search/search-enums';
+import { Filter } from 'dsm/enums';
 import { SortOrder } from 'dss/component/table';
 import { MainInfoEnum } from 'dsm/pages/participant-page/enums/main-info-enum';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
-import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import { getDate, offsetDaysFromDate, offsetDaysFromToday } from 'utils/date-utils';
 import { logInfo } from 'utils/log-utils';
+import { StudyName } from 'dsm/component/navigation';
 
 test.describe.serial('Participants Search', () => {
-  const studies = [StudyEnum.LMS, StudyEnum.OSTEO2];
+  const studies = [StudyName.LMS, StudyName.OSTEO2];
 
   for (const study of studies) {
     test(`Search by Registration Date @dsm @${study}`, async ({ page, request }) => {
@@ -37,7 +37,7 @@ test.describe.serial('Participants Search', () => {
       await searchPanel.dates(MainInfoEnum.REGISTRATION_DATE, {
         from: fromDate,
         to: toDate,
-        additionalFilters: [AdditionalFilter.RANGE]
+        additionalFilters: [Filter.RANGE]
       });
       await searchPanel.search();
 
@@ -70,7 +70,7 @@ test.describe.serial('Participants Search', () => {
       await searchPanel.clear();
       const today = getDate(new Date());
       const yearAgo = offsetDaysFromToday(365);
-      await searchPanel.dates(MainInfoEnum.REGISTRATION_DATE, { additionalFilters: [AdditionalFilter.RANGE], from: yearAgo, to: today});
+      await searchPanel.dates(MainInfoEnum.REGISTRATION_DATE, { additionalFilters: [Filter.RANGE], from: yearAgo, to: today});
       await searchPanel.search();
 
       const rowsCount = await participantsTable.getRowsCount();

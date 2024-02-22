@@ -1,15 +1,15 @@
 import { expect } from '@playwright/test';
 import { test } from 'fixtures/dsm-fixture';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
-import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import { QuickFiltersEnum } from 'dsm/component/filters/quick-filters';
 import { assertTableHeaders } from 'utils/assertion-helper';
 import { SortOrder } from 'dss/component/table';
 import { getDate } from 'utils/date-utils';
 import { shuffle } from 'utils/test-utils';
+import { StudyName } from 'dsm/component/navigation';
 
 test.describe.serial('Participants Search', () => {
-  const studies = [StudyEnum.LMS, StudyEnum.OSTEO2, StudyEnum.PANCAN];
+  const studies = [StudyName.LMS, StudyName.OSTEO2, StudyName.PANCAN];
 
   for (const study of studies) {
     test(`Under Age Quick Search Filter @dsm @${study}`, async ({ page, request }) => {

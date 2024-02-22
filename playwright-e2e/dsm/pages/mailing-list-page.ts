@@ -10,17 +10,17 @@ export const COLUMN = {
 }
 
 export default class MailingListPage extends DsmPageBase {
-  private readonly title: string | RegExp;
+  private title: string | RegExp | undefined;
   readonly downloadButton: Locator;
 
-  constructor(page: Page, study: string|RegExp) {
+  constructor(page: Page, study?: string|RegExp) {
     super(page);
     this.title = study;
     this.downloadButton = this.page.getByRole('button', { name: 'Download mailing list' })
   }
 
   public async waitForReady(): Promise<void> {
-    await expect(this.page).toHaveTitle(this.title);
+    await expect(this.page).toHaveTitle(await this.getTitle());
     await expect(this.downloadButton).toBeVisible();
   }
 
@@ -36,5 +36,12 @@ export default class MailingListPage extends DsmPageBase {
       this.downloadButton.click()
     ]);
     return download;
+  }
+
+  private async getTitle(): Promise<string | RegExp> {
+    if (!this.title) {
+      this.title = await this.page.title();
+    }
+    return this.title;
   }
 }

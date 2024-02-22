@@ -1,7 +1,6 @@
-import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import { test } from 'fixtures/dsm-fixture';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
-import { AdditionalFilter } from 'dsm/component/filters/sections/search/search-enums';
+import { Filter } from 'dsm/enums';
 import ParticipantPage from 'dsm/pages/participant-page/participant-page';
 import { TabEnum } from 'dsm/component/tabs/enums/tab-enum';
 import OncHistoryTab from 'dsm/component/tabs/onc-history-tab';
@@ -10,9 +9,10 @@ import { expect } from '@playwright/test';
 import { getDate } from 'utils/date-utils';
 import { TissueDynamicFieldsEnum } from 'dsm/pages/tissue/enums/tissue-information-enum';
 import { logInfo } from 'utils/log-utils';
+import { StudyName } from 'dsm/component/navigation';
 
 test.describe.serial('Tissue Request Flow', () => {
-  const studies = [StudyEnum.PANCAN];
+  const studies = [StudyName.PANCAN];
 
   for (const study of studies) {
     test(`Tissue Request Flow for ${study} study @dsm @feature`, async ({ page, request }) => {
@@ -30,8 +30,8 @@ test.describe.serial('Tissue Request Flow', () => {
         await searchPanel.open();
         await searchPanel.checkboxes('Status', { checkboxValues: ['Enrolled'] });
         await searchPanel.checkboxes('MR Problem', { checkboxValues: ['No'] });
-        await searchPanel.dates('Onc History Created', { additionalFilters: [AdditionalFilter.EMPTY] });
-        await searchPanel.text('Your Mailing Address *', { additionalFilters: [AdditionalFilter.NOT_EMPTY] });
+        await searchPanel.dates('Onc History Created', { additionalFilters: [Filter.EMPTY] });
+        await searchPanel.text('Your Mailing Address *', { additionalFilters: [Filter.NOT_EMPTY] });
 
         await searchPanel.search();
         shortID = await participantListPage.findParticipantWithTab(

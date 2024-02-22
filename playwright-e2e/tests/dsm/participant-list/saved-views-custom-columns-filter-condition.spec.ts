@@ -1,13 +1,13 @@
 import { expect } from '@playwright/test';
 import { testWithUser2 as test } from 'fixtures/dsm-fixture';
-import { AdditionalFilter, CustomViewColumns } from 'dsm/component/filters/sections/search/search-enums';
-import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
+import { Filter, Column } from 'dsm/enums';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
 import { offsetDaysFromToday } from 'utils/date-utils';
 import crypto from 'crypto';
+import { StudyName } from 'dsm/component/navigation';
 
 test.describe('Participants List Search with Filtering Condition', () => {
-  const studies = [StudyEnum.LMS, StudyEnum.OSTEO2];
+  const studies = [StudyName.LMS, StudyName.OSTEO2];
 
   for (const study of studies) {
     test(`Save Current View @dsm @${study}`, async ({ page, request }) => {
@@ -19,8 +19,8 @@ test.describe('Participants List Search with Filtering Condition', () => {
 
       const customizeViewPanel = participantListPage.filters.customizeViewPanel;
       await customizeViewPanel.open();
-      await customizeViewPanel.selectColumns(CustomViewColumns.SAMPLE, ['MF code']);
-      await customizeViewPanel.selectColumns(CustomViewColumns.PARTICIPANT, ['Date of Majority']);
+      await customizeViewPanel.selectColumns(Column.SAMPLE, ['MF code']);
+      await customizeViewPanel.selectColumns(Column.PARTICIPANT, ['Date of Majority']);
       await customizeViewPanel.close();
 
       // Table auto. reloaded with new columns added
@@ -34,12 +34,12 @@ test.describe('Participants List Search with Filtering Condition', () => {
       const searchPanel = participantListPage.filters.searchPanel;
       await searchPanel.open();
       // Set MF code: NOT EMPTY
-      await searchPanel.text('MF code', { additionalFilters: [AdditionalFilter.NOT_EMPTY] });
+      await searchPanel.text('MF code', { additionalFilters: [Filter.NOT_EMPTY] });
       // Set Date of Majority: NOT EMPTY and a date range: 10 years ago from today to 10 years after today
       const tenYearsAgo = offsetDaysFromToday(365 * 10, { isAdd: false });
       const TenYearAfter = offsetDaysFromToday(365 * 10, { isAdd: true });
       await searchPanel.dates('Date of Majority', {
-        additionalFilters: [AdditionalFilter.RANGE],
+        additionalFilters: [Filter.RANGE],
         from: tenYearsAgo,
         to: TenYearAfter
       });

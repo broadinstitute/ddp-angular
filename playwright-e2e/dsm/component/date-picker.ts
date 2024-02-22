@@ -1,4 +1,4 @@
-import { expect, Locator, Page } from '@playwright/test';
+import { expect, Locator, Page, Response } from '@playwright/test';
 import Button from 'dss/component/button';
 import Input from 'dss/component/input';
 import { getDate } from 'utils/date-utils';
@@ -8,16 +8,18 @@ export default class DatePicker {
   locator: Locator;
 
 
-  constructor(private readonly page: Page, opts: { nth?: number, root?: Locator | string } = {}) {
-    const { nth = 0, root } = opts;
+  constructor(private readonly page: Page, opts: { label?: string, nth?: number, root?: Locator | string } = {}) {
+    const { label, nth = 0, root } = opts;
 
     this.locator = root
       ? typeof root === 'string'
         ? this.page.locator(root)
         : root
-      : this.page.locator('app-root');
-
-    this.locator.locator('app-field-datepicker').nth(nth);
+      : this.page.locator('xpath=//app-root');
+    if (label) {
+      this.locator.locator(`xpath=//tr[./*[normalize-space(.)="${label}"]]`);
+    }
+    this.locator.locator('xpath=//app-field-datepicker').nth(nth);
   }
 
   toLocator(): Locator {
@@ -26,6 +28,15 @@ export default class DatePicker {
 
   input(): Input {
     return new Input(this.page, { root: this.toLocator() });
+  }
+
+  public async today(): Promise<string> {
+    const todayBtn = new Button(this.page, { root: this.toLocator(), label: 'Today', exactMatch: true });
+    await Promise.all([
+      waitForResponse(this.page, { uri: '/patch' }),
+      todayBtn.click()
+    ]);
+    return this.input().currentValue();
   }
 
   dayPicker(): Locator {
@@ -57,6 +68,7 @@ export default class DatePicker {
     const todayBtn = new Button(this.page, { root: this.toLocator(), exactMatch: true, label: 'Today' });
     const isEnabled = await todayBtn.isVisible() && !(await todayBtn.isDisabled());
     if (isToday && isEnabled) {
+      // Click Today button
       await Promise.all([
         waitForResponse(this.page, { uri: '/patch' }),
         todayBtn.click()
@@ -64,6 +76,7 @@ export default class DatePicker {
       return `${yyyy}/${month}/${dayOfMonth}`;
     }
 
+    // Use calendar to choose date
     const selectDate = new Date(yyyy, month, dayOfMonth);
     const date = getDate(selectDate).split('/')[1]; // get date with a leading zero if date < 10
     const monthName = selectDate.toLocaleString('default', { month: 'long' }); // get name of month
@@ -92,12 +105,12 @@ export default class DatePicker {
     // pick month second
     await this.monthPicker().locator(this.clickableCell(), { hasText: monthName }).click();
 
-    // pick day of month
-    const networkIdlePromise = this.page.waitForLoadState('networkidle');
-    await this.dayPicker().locator(this.clickableCell(), { hasText: date }).first().click();
-    await networkIdlePromise;
+    // Pick day of month. After pick day, /patch request is automatically triggered. Calendar closed automatically.
+    await Promise.all([
+      waitForResponse(this.page, { uri: '/patch' }),
+      this.dayPicker().locator(this.clickableCell(), { hasText: date }).first().click()
+    ]);
 
-    // calendar close automatically
     return getDate(new Date(yyyy, month, parseInt(date)));
   }
 

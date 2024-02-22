@@ -1,13 +1,13 @@
 import {expect, Locator, Page, Response} from '@playwright/test';
-import {KitTypeEnum} from 'dsm/component/kitType/enums/kitType-enum';
+import {Kit} from 'dsm/enums';
 import {waitForNoSpinner, waitForResponse} from 'utils/test-utils';
 import {createTextFileSync, deleteFileSync} from 'utils/file-utils';
 import {KitUploadInfo} from 'dsm/pages/kitUpload-page/models/kitUpload-model';
-import {StudyEnum} from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import path from 'path';
 import Modal from 'dsm/component/modal';
 import {logInfo} from 'utils/log-utils';
 import KitsPageBase from 'dsm/pages/kits-page-base';
+import { StudyName } from 'dsm/component/navigation';
 
 export default class KitUploadPage extends KitsPageBase {
   TABLE_HEADERS = [];
@@ -23,11 +23,11 @@ export default class KitUploadPage extends KitsPageBase {
     await expect(this.skipAddressValidationCheckbox).toBeVisible();
   }
 
-  public async selectKitType(kitType: KitTypeEnum): Promise<boolean> {
+  public async selectKitType(kitType: Kit): Promise<boolean> {
     return super.selectKitType(kitType, { waitForResp: 'undefined' });
   }
 
-  public async uploadFile(kitType: KitTypeEnum, kitInfo: KitUploadInfo[], study: StudyEnum, testResultDir?: string) {
+  public async uploadFile(kitType: Kit, kitInfo: KitUploadInfo[], study: StudyName, testResultDir?: string) {
     await expect(this.uploadKitsBtn, 'Kit Upload page - Upload Kits button should be disabled.').not.toBeEnabled();
 
     // Prepare upload file

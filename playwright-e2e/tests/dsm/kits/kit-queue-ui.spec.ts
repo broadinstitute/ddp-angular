@@ -1,17 +1,15 @@
 import {expect} from '@playwright/test';
 import {test} from 'fixtures/dsm-fixture';
 import {WelcomePage} from 'dsm/pages/welcome-page';
-import {Navigation} from 'dsm/component/navigation/navigation';
-import {StudyEnum} from 'dsm/component/navigation/enums/selectStudyNav-enum';
-import {SamplesNavEnum} from 'dsm/component/navigation/enums/samplesNav-enum';
+import {Navigation, Samples, StudyName} from 'dsm/component/navigation';
 import {KitsColumnsEnum} from 'dsm/pages/kitsInfo-pages/enums/kitsColumns-enum';
 import {studyShortName} from 'utils/test-utils';
 import KitQueuePage from 'dsm/pages/kitsInfo-pages/kit-queue-page';
 
 test.describe.serial('Sample Kit Queue UI', () => {
   const studies = [
-    StudyEnum.ANGIO, StudyEnum.BRAIN, StudyEnum.OSTEO, StudyEnum.OSTEO2, StudyEnum.PANCAN,
-    StudyEnum.RGP, StudyEnum.LMS, StudyEnum.ESC, StudyEnum.PROSTATE
+    StudyName.ANGIO, StudyName.BRAIN, StudyName.OSTEO, StudyName.OSTEO2, StudyName.PANCAN,
+    StudyName.RGP, StudyName.LMS, StudyName.ESC, StudyName.PROSTATE
   ];
 
   for (const study of studies) {
@@ -22,7 +20,7 @@ test.describe.serial('Sample Kit Queue UI', () => {
       const navigation = new Navigation(page, request);
       await welcomePage.selectStudy(study);
 
-      const kitQueuePage = await navigation.selectFromSamples<KitQueuePage>(SamplesNavEnum.QUEUE);
+      const kitQueuePage = await navigation.selectFromSamples<KitQueuePage>(Samples.QUEUE);
       await kitQueuePage.waitForReady();
 
       const expectedKitSelection = await kitQueuePage.getStudyKitTypes(study);

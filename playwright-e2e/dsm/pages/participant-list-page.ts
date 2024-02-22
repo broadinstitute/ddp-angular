@@ -1,7 +1,6 @@
 import { APIRequestContext, Download, expect, Locator, Page } from '@playwright/test';
 import Modal from 'dsm/component/modal';
-import { StudyNavEnum } from 'dsm/component/navigation/enums/studyNav-enum';
-import { Navigation } from 'dsm/component/navigation/navigation';
+import { Navigation, Study } from 'dsm/component/navigation';
 import { FileFormatEnum, TextFormatEnum } from 'dsm/pages/participant-page/enums/download-format-enum';
 import { WelcomePage } from 'dsm/pages/welcome-page';
 import Checkbox from 'dss/component/checkbox';
@@ -11,7 +10,7 @@ import { ParticipantListTable } from 'dsm/component/tables/participant-list-tabl
 import { SortOrder } from 'dss/component/table';
 import QuickFilters from 'dsm/component/filters/quick-filters';
 import { getDate, offsetDaysFromToday } from 'utils/date-utils';
-import { AdditionalFilter } from 'dsm/component/filters/sections/search/search-enums';
+import { Filter } from 'dsm/enums';
 import { logInfo } from 'utils/log-utils';
 import DsmPageBase from './dsm-page-base';
 import { TabEnum } from 'dsm/component/tabs/enums/tab-enum';
@@ -28,7 +27,7 @@ export default class ParticipantListPage extends DsmPageBase {
     await welcomePage.selectStudy(study);
 
     const navigation = new Navigation(page, request);
-    const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
+    const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(Study.PARTICIPANT_LIST);
     await participantListPage.waitForReady();
 
     const participantsTable = participantListPage.participantListTable;
@@ -483,7 +482,7 @@ export default class ParticipantListPage extends DsmPageBase {
     await searchPanel.open();
     const today = getDate(new Date());
     const previousWeek = offsetDaysFromToday(2 * 7);
-    await searchPanel.dates('Registration Date', { from: previousWeek, to: today, additionalFilters: [AdditionalFilter.RANGE] });
+    await searchPanel.dates('Registration Date', { from: previousWeek, to: today, additionalFilters: [Filter.RANGE] });
 
     //Also make sure to conduct the search for participants with the given first name of the automated participant
     await searchPanel.text('First Name', { textValue: participantName });

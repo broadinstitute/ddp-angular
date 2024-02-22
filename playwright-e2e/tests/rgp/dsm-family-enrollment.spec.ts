@@ -1,6 +1,5 @@
 import { expect } from '@playwright/test';
-import { StudyNavEnum } from 'dsm/component/navigation/enums/studyNav-enum';
-import { Navigation } from 'dsm/component/navigation/navigation';
+import { Navigation, Study, StudyName } from 'dsm/component/navigation';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
 import * as user from 'data/fake-user.json';
 import { test } from 'fixtures/dsm-fixture';
@@ -14,7 +13,6 @@ import { logInfo } from 'utils/log-utils';
 import { v4 as uuid } from 'uuid';
 import ParticipantPage from 'dsm/pages/participant-page/participant-page';
 import { WelcomePage } from 'dsm/pages/welcome-page';
-import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import * as crypto from 'crypto';
 
 
@@ -23,12 +21,12 @@ test.describe.serial('DSM Family Enrollment Handling', () => {
 
   test('Verify the display and functionality of family account dynamic fields @dsm @functional @rgp', async ({ page, request}) => {
     const welcomePage = new WelcomePage(page);
-    await welcomePage.selectStudy(StudyEnum.RGP);
+    await welcomePage.selectStudy(StudyName.RGP);
 
     const navigation = new Navigation(page, request);
 
     //Verify the Participant List is displayed
-    const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
+    const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(Study.PARTICIPANT_LIST);
     await participantListPage.waitForReady();
 
     //Get the most recent automated test participant (searches for up to a week ago)
@@ -94,10 +92,10 @@ test.describe.serial('DSM Family Enrollment Handling', () => {
     const navigation = new Navigation(page, request);
 
     const welcomePage = new WelcomePage(page);
-    await welcomePage.selectStudy(StudyEnum.RGP);
+    await welcomePage.selectStudy(StudyName.RGP);
 
     //Verify the Participant List is displayed
-    const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
+    const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(Study.PARTICIPANT_LIST);
     await participantListPage.waitForReady();
 
     const participantGuid = await participantListPage.getGuidOfMostRecentAutomatedParticipant(user.patient.firstName, true);
@@ -527,10 +525,10 @@ test.describe.serial('DSM Family Enrollment Handling', () => {
     const navigation = new Navigation(page, request);
 
     const welcomePage = new WelcomePage(page);
-    await welcomePage.selectStudy(StudyEnum.RGP);
+    await welcomePage.selectStudy(StudyName.RGP);
 
     //Verify the Participant List is displayed
-    const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
+    const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(Study.PARTICIPANT_LIST);
     await participantListPage.waitForReady();
 
     //Get the most recent automated test participant (searches for up to a week ago)
@@ -612,10 +610,10 @@ test.describe.serial('DSM Family Enrollment Handling', () => {
     const navigation = new Navigation(page, request);
 
     const welcomePage = new WelcomePage(page);
-    await welcomePage.selectStudy(StudyEnum.RGP);
+    await welcomePage.selectStudy(StudyName.RGP);
 
     //Verify the Participant List is displayed
-    const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
+    const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(Study.PARTICIPANT_LIST);
     await participantListPage.waitForReady();
 
     //Get the most recent automated test participant (searches for up to a week ago)

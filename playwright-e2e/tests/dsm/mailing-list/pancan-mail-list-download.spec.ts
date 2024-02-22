@@ -2,9 +2,7 @@ import { expect } from '@playwright/test';
 import { APP } from 'data/constants';
 import { test } from 'fixtures/pancan-fixture';
 import { login } from 'authentication/auth-dsm';
-import {StudyEnum} from 'dsm/component/navigation/enums/selectStudyNav-enum';
-import {MiscellaneousEnum} from 'dsm/component/navigation/enums/miscellaneousNav-enum';
-import { Navigation } from 'dsm/component/navigation/navigation';
+import { Miscellaneous, Navigation, StudyName } from 'dsm/component/navigation';
 import Modal from 'dss/component/modal';
 import { SortOrder } from 'dss/component/table';
 import MailingListPage, { COLUMN } from 'dsm/pages/mailing-list-page';
@@ -41,10 +39,10 @@ test.describe.serial('Join Pancan Mailing List', () => {
 
     const welcomePage = new WelcomePage(page);
     const navigation = new Navigation(page, request);
-    await welcomePage.selectStudy(StudyEnum.PANCAN);
+    await welcomePage.selectStudy(StudyName.PANCAN);
     const [mailListResponse] = await Promise.all([
       page.waitForResponse(response => response.url().includes('/ui/mailingList/PanCan') && response.status() === 200),
-      navigation.selectMiscellaneous(MiscellaneousEnum.MAILING_LIST)
+      navigation.selectFromMiscellaneous(Miscellaneous.MAILING_LIST)
     ]);
     const respJson: MailListCSV[] = JSON.parse(await mailListResponse.text());
     expect(respJson.length).toBeGreaterThan(1); // response should contains at least one emails

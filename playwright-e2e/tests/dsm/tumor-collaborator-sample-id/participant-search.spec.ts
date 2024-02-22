@@ -1,7 +1,6 @@
 import { expect } from '@playwright/test';
 import { test } from 'fixtures/dsm-fixture';
-import { CustomViewColumns } from 'dsm/component/filters/sections/search/search-enums';
-import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
+import { Column } from 'dsm/enums';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
 import { studyShortName } from 'utils/test-utils';
 import { logInfo } from 'utils/log-utils';
@@ -10,6 +9,7 @@ import OncHistoryTab from 'dsm/component/tabs/onc-history-tab';
 import { TabEnum } from 'dsm/component/tabs/enums/tab-enum';
 import { OncHistoryInputColumnsEnum, OncHistorySelectRequestEnum } from 'dsm/component/tabs/enums/onc-history-input-columns-enum';
 import { SortOrder } from 'dss/component/table';
+import { StudyName } from 'dsm/component/navigation';
 
 /**
 * Collaborator Prefixes per study:
@@ -34,7 +34,7 @@ import { SortOrder } from 'dss/component/table';
  */
 test.describe.serial('Tumor Collaborator Sample ID', () => {
   // Some studies are excluded due to lack of the suitable paricipants
-  const studies: StudyEnum[] = [StudyEnum.OSTEO2, StudyEnum.PANCAN, StudyEnum.MBC, StudyEnum.BRAIN];
+  const studies: StudyName[] = [StudyName.OSTEO2, StudyName.PANCAN, StudyName.MBC, StudyName.BRAIN];
 
   for (const study of studies) {
     test(`Search by tumor sample id for non-legacy participant @dsm @${study}`, async ({ page, request }) => {
@@ -45,12 +45,12 @@ test.describe.serial('Tumor Collaborator Sample ID', () => {
 
       await test.step('Search for the right participant', async () => {
         await customizeViewPanel.open();
-        await customizeViewPanel.selectColumns(CustomViewColumns.TISSUE, ['Tumor Collaborator Sample ID']);
-        await customizeViewPanel.selectColumns(CustomViewColumns.PARTICIPANT, ['Registration Date']);
-        await customizeViewPanel.deselectColumns(CustomViewColumns.PARTICIPANT, ['DDP', 'Last Name', 'First Name']);
-        await customizeViewPanel.selectColumns(CustomViewColumns.DSM_COLUMNS, ['Onc History Created']);
-        await customizeViewPanel.selectColumns(CustomViewColumns.MEDICAL_RECORD, ['MR Problem']);
-        await customizeViewPanel.selectColumns(CustomViewColumns.RESEARCH_CONSENT_FORM, ['CONSENT_BLOOD', 'CONSENT_TISSUE']);
+        await customizeViewPanel.selectColumns(Column.TISSUE, ['Tumor Collaborator Sample ID']);
+        await customizeViewPanel.selectColumns(Column.PARTICIPANT, ['Registration Date']);
+        await customizeViewPanel.deselectColumns(Column.PARTICIPANT, ['DDP', 'Last Name', 'First Name']);
+        await customizeViewPanel.selectColumns(Column.DSM_COLUMNS, ['Onc History Created']);
+        await customizeViewPanel.selectColumns(Column.MEDICAL_RECORD, ['MR Problem']);
+        await customizeViewPanel.selectColumns(Column.RESEARCH_CONSENT_FORM, ['CONSENT_BLOOD', 'CONSENT_TISSUE']);
 
         const searchPanel = participantListPage.filters.searchPanel;
         await searchPanel.open();

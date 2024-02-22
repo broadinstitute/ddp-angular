@@ -1,9 +1,6 @@
 import { expect } from '@playwright/test';
 import { test } from 'fixtures/dsm-fixture';
-import { SamplesNavEnum } from 'dsm/component/navigation/enums/samplesNav-enum';
-import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
-import { StudyNavEnum } from 'dsm/component/navigation/enums/studyNav-enum';
-import { Navigation } from 'dsm/component/navigation/navigation';
+import { Navigation, Samples, Study, StudyName } from 'dsm/component/navigation';
 import { TabEnum } from 'dsm/component/tabs/enums/tab-enum';
 import GenomeStudyTab from 'dsm/component/tabs/genome-study-tab';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
@@ -17,7 +14,7 @@ import { studyShortName, waitForNoSpinner, waitForResponse } from 'utils/test-ut
 import { logInfo } from 'utils/log-utils';
 
 test.describe('Receive Genome Study Kit', () => {
-  const studies = [StudyEnum.AT];
+  const studies = [StudyName.AT];
   for (const study of studies) {
     let newBarcode = generateAlphaNumeric().toUpperCase();
 
@@ -35,7 +32,7 @@ test.describe('Receive Genome Study Kit', () => {
 
     test(`Receive genome sample kit for ${study} @dsm @${study} @functional`, async ({page}) => {
       await test.step('Search for the right participant on Participant List page', async () => {
-        participantListPage = await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
+        participantListPage = await navigation.selectFromStudy<ParticipantListPage>(Study.PARTICIPANT_LIST);
         await participantListPage.waitForReady();
 
         const rowIndex = await participantListPage.findParticipantFor('Genome Study Columns', 'Sample kit barcode for genome study', {nth: 1});
@@ -64,7 +61,7 @@ test.describe('Receive Genome Study Kit', () => {
       });
 
       await test.step('Mark sample kit barcode received', async () => {
-        await navigation.selectFromSamples(SamplesNavEnum.SEARCH);
+        await navigation.selectFromSamples(Samples.SEARCH);
         const atSearchPage = new AtcpSearchPage(page);
         const table = await atSearchPage.searchByField(SearchByField.MANUFACTURE_BARCODE, newBarcode);
 
@@ -84,7 +81,7 @@ test.describe('Receive Genome Study Kit', () => {
       });
 
       await test.step('Verify participant detail has updated on Participant page', async () => {
-        participantListPage = await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
+        participantListPage = await navigation.selectFromStudy<ParticipantListPage>(Study.PARTICIPANT_LIST);
         await participantListPage.waitForReady();
 
         await participantListPage.filterListByShortId(shortId);

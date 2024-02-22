@@ -1,13 +1,13 @@
 import { expect } from '@playwright/test';
 import { test } from 'fixtures/dsm-fixture';
-import { AdditionalFilter, CustomViewColumns } from 'dsm/component/filters/sections/search/search-enums';
-import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
+import { Filter, Column } from 'dsm/enums';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
 import { studyShortName } from 'utils/test-utils';
 import { logInfo } from 'utils/log-utils';
 import ParticipantPage from 'dsm/pages/participant-page/participant-page';
 import OncHistoryTab from 'dsm/component/tabs/onc-history-tab';
 import { TabEnum } from 'dsm/component/tabs/enums/tab-enum';
+import { StudyName } from 'dsm/component/navigation';
 
 /**
   * Collaborator Prefixes per study:
@@ -22,7 +22,7 @@ import { TabEnum } from 'dsm/component/tabs/enums/tab-enum';
  * DSM should show the correct tumor id for the selected pt: [COLLABORATOR_PREFIX]_[SHORT_ID]_*
  */
 test.describe('Tumor Collaborator Sample ID', () => {
-  const studies: StudyEnum[] = [StudyEnum.MBC];
+  const studies: StudyName[] = [StudyName.MBC];
 
   for (const study of studies) {
     test(`Search by tumor sample id for legacy participant @dsm @${study}`, async ({ page, request }) => {
@@ -33,11 +33,11 @@ test.describe('Tumor Collaborator Sample ID', () => {
 
       await test.step('Search for the right participant', async () => {
         await customizeViewPanel.open();
-        await customizeViewPanel.selectColumns(CustomViewColumns.TISSUE, ['Tumor Collaborator Sample ID']);
-        await customizeViewPanel.selectColumns(CustomViewColumns.PARTICIPANT, ['Legacy Short ID']);
-        await customizeViewPanel.deselectColumns(CustomViewColumns.PARTICIPANT, ['DDP', 'Last Name', 'First Name']);
-        await customizeViewPanel.selectColumns(CustomViewColumns.DSM_COLUMNS, ['Onc History Created']);
-        await customizeViewPanel.selectColumns(CustomViewColumns.MEDICAL_RECORD, ['MR Problem']);
+        await customizeViewPanel.selectColumns(Column.TISSUE, ['Tumor Collaborator Sample ID']);
+        await customizeViewPanel.selectColumns(Column.PARTICIPANT, ['Legacy Short ID']);
+        await customizeViewPanel.deselectColumns(Column.PARTICIPANT, ['DDP', 'Last Name', 'First Name']);
+        await customizeViewPanel.selectColumns(Column.DSM_COLUMNS, ['Onc History Created']);
+        await customizeViewPanel.selectColumns(Column.MEDICAL_RECORD, ['MR Problem']);
 
         await expect(participantListTable.getHeaderByName('DDP')).not.toBeVisible();
 
@@ -45,8 +45,8 @@ test.describe('Tumor Collaborator Sample ID', () => {
         await searchPanel.open();
         await searchPanel.checkboxes('Status', { checkboxValues: ['Enrolled'] });
         await searchPanel.checkboxes('MR Problem', { checkboxValues: ['No'] });
-        await searchPanel.text('Legacy Short ID', { additionalFilters: [AdditionalFilter.NOT_EMPTY] });
-        await searchPanel.text('Onc History Created', { additionalFilters: [AdditionalFilter.NOT_EMPTY] });
+        await searchPanel.text('Legacy Short ID', { additionalFilters: [Filter.NOT_EMPTY] });
+        await searchPanel.text('Onc History Created', { additionalFilters: [Filter.NOT_EMPTY] });
         await searchPanel.search();
 
         const numParticipants = await participantListTable.numOfParticipants();

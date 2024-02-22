@@ -1,19 +1,19 @@
 import { expect } from '@playwright/test';
 import Modal from 'dsm/component/modal';
 import { test } from 'fixtures/dsm-fixture';
-import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import FollowUpSurveyPage from 'dsm/pages/follow-up-survey-page';
 import { getDate } from 'utils/date-utils';
 import { generateAlphaNumeric, generateRandomNum } from 'utils/faker-utils';
 import { waitForResponse } from 'utils/test-utils';
+import { StudyName } from 'dsm/component/navigation';
 
 
 test.describe('Create Follow-Up Survey', () => {
-  const studies = [StudyEnum.PANCAN, StudyEnum.PROSTATE, StudyEnum.ESC];
+  const studies = [StudyName.PANCAN, StudyName.PROSTATE, StudyName.ESC];
   let followupSurveyPage: FollowUpSurveyPage;
 
   test(`FAMILY_HISTORY (NONREPEATING) in @pancan @dsm @functional`, async ({ page, request }) => {
-    followupSurveyPage = await FollowUpSurveyPage.goto(page, StudyEnum.PANCAN, request);
+    followupSurveyPage = await FollowUpSurveyPage.goto(page, StudyName.PANCAN, request);
     await followupSurveyPage.waitForReady();
 
     await followupSurveyPage.selectSurvey('FAMILY_HISTORY  (NONREPEATING)');
@@ -79,13 +79,13 @@ test.describe('Create Follow-Up Survey', () => {
   function surveysForStudy(study: string): string {
     let survey: string;
     switch (study) {
-      case StudyEnum.PANCAN:
+      case StudyName.PANCAN:
         survey = 'BLOOD_CONSENT (REPEATING)';
         break;
-      case StudyEnum.PROSTATE:
+      case StudyName.PROSTATE:
         survey = 'FOLLOWUP (REPEATING)';
         break;
-      case StudyEnum.ESC:
+      case StudyName.ESC:
         survey = 'FOLLOWUPCONSENT (REPEATING)';
         break;
       default:

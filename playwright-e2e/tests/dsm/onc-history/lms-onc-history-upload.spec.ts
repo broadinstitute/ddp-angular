@@ -1,24 +1,21 @@
 import { expect } from '@playwright/test';
 import { test } from 'fixtures/dsm-fixture';
-import { CustomViewColumns } from 'dsm/component/filters/sections/search/search-enums';
-import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
+import { Column } from 'dsm/enums';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
 import OncHistoryTab from 'dsm/component/tabs/onc-history-tab';
 import { TabEnum } from 'dsm/component/tabs/enums/tab-enum';
 import { LmsOncHistoryUpload } from 'dsm/component/tabs/interfaces/onc-history-inputs-types';
 import { getDate } from 'utils/date-utils';
-import { MiscellaneousEnum } from 'dsm/component/navigation/enums/miscellaneousNav-enum';
-import { Navigation } from 'dsm/component/navigation/navigation';
+import { Miscellaneous, Navigation, Study, StudyName } from 'dsm/component/navigation';
 import OncHistoryUploadPage from 'dsm/pages/onc-history-upload-page';
 import { OncHistoryInputColumnsEnum } from 'dsm/component/tabs/enums/onc-history-input-columns-enum';
 import { logInfo } from 'utils/log-utils';
-import { StudyNavEnum } from 'dsm/component/navigation/enums/studyNav-enum';
 import OncHistoryTable from 'dsm/component/tables/onc-history-table';
 import { generateAlphaNumeric } from 'utils/faker-utils';
 
 test.describe('Upload Onc History', () => {
   // Upload feature is only available for Leiomyosarcoma and OS PE-CGS studies.
-  const study = StudyEnum.LMS;
+  const study = StudyName.LMS;
   let shortId: string;
 
   // Create unique values to be used in upload file
@@ -59,7 +56,7 @@ test.describe('Upload Onc History', () => {
 
       const customizeViewPanel = participantListPage.filters.customizeViewPanel;
       await customizeViewPanel.open();
-      await customizeViewPanel.selectColumns(CustomViewColumns.ONC_HISTORY, [oncHistoryRequestStatusColumn]);
+      await customizeViewPanel.selectColumns(Column.ONC_HISTORY, [oncHistoryRequestStatusColumn]);
 
       const searchPanel = participantListPage.filters.searchPanel;
       await searchPanel.open();
@@ -86,7 +83,7 @@ test.describe('Upload Onc History', () => {
 
     await test.step('Upload text file', async () => {
       // From the 'Miscellaneous' menu, choose 'Onc History Upload'.
-      await navigation.selectMiscellaneous(MiscellaneousEnum.ONC_HISTORY_UPLOAD);
+      await navigation.selectFromMiscellaneous(Miscellaneous.ONC_HISTORY_UPLOAD);
       const oncHistoryPage = new OncHistoryUploadPage(page);
       await oncHistoryPage.waitForReady();
 
@@ -101,7 +98,7 @@ test.describe('Upload Onc History', () => {
 
     await test.step('Verify new Onc History', async () => {
       // Confirm Onc history. Duplicate records are valid.
-      participantListPage = await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
+      participantListPage = await navigation.selectFromStudy<ParticipantListPage>(Study.PARTICIPANT_LIST);
       await participantListPage.waitForReady();
 
       await participantListPage.filterListByShortId(shortId);

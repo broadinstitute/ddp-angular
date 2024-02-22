@@ -1,7 +1,6 @@
-import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import { test } from 'fixtures/dsm-fixture';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
-import { AdditionalFilter } from 'dsm/component/filters/sections/search/search-enums';
+import { Filter } from 'dsm/enums';
 import { TabEnum } from 'dsm/component/tabs/enums/tab-enum';
 import OncHistoryTab from 'dsm/component/tabs/onc-history-tab';
 import { OncHistoryInputColumnsEnum } from 'dsm/component/tabs/enums/onc-history-input-columns-enum';
@@ -11,9 +10,10 @@ import { faker } from '@faker-js/faker';
 import Input from 'dss/component/input';
 import { waitForResponse } from 'utils/test-utils';
 import OncHistoryTable from 'dsm/component/tables/onc-history-table';
+import { StudyName } from 'dsm/component/navigation';
 
 test.describe.serial('Onc History', () => {
-  const studies = [StudyEnum.PANCAN];
+  const studies = [StudyName.PANCAN];
 
   let shortID: string;
 
@@ -33,8 +33,8 @@ test.describe.serial('Onc History', () => {
       await searchPanel.open();
       await searchPanel.checkboxes('Status', { checkboxValues: ['Enrolled'] });
       await searchPanel.checkboxes('MR Problem', { checkboxValues: ['No'] });
-      await searchPanel.dates('Onc History Created', { additionalFilters: [AdditionalFilter.EMPTY] });
-      await searchPanel.text('Your Mailing Address *', { additionalFilters: [AdditionalFilter.NOT_EMPTY] });
+      await searchPanel.dates('Onc History Created', { additionalFilters: [Filter.EMPTY] });
+      await searchPanel.text('Your Mailing Address *', { additionalFilters: [Filter.NOT_EMPTY] });
 
       await searchPanel.search();
       shortID = await participantListPage.findParticipantWithTab(

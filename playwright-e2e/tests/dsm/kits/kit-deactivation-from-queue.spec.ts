@@ -1,9 +1,7 @@
 import { expect } from '@playwright/test';
 import { test } from 'fixtures/dsm-fixture';
-import { KitTypeEnum } from 'dsm/component/kitType/enums/kitType-enum';
-import { SamplesNavEnum } from 'dsm/component/navigation/enums/samplesNav-enum';
-import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
-import { Navigation } from 'dsm/component/navigation/navigation';
+import { Kit } from 'dsm/enums';
+import { Navigation, Samples, StudyName } from 'dsm/component/navigation';
 import { KitsColumnsEnum } from 'dsm/pages/kitsInfo-pages/enums/kitsColumns-enum';
 import { WelcomePage } from 'dsm/pages/welcome-page';
 import { logInfo } from 'utils/log-utils';
@@ -12,13 +10,13 @@ import KitsQueuePage from 'dsm/pages/kitsInfo-pages/kit-queue-page';
 
 // don't run in parallel
 test.describe.serial('Kit Deactivation', () => {
-  const studies = [StudyEnum.LMS, StudyEnum.RGP];
+  const studies = [StudyName.LMS, StudyName.RGP];
 
   for (const study of studies) {
     test(`From Queue page @dsm @${study} @kit`, async ({ page, request }) => {
       let shortId: string;
       let shippingId: string;
-      let kits: KitTypeEnum[];
+      let kits: Kit[];
 
       const welcomePage = new WelcomePage(page);
       const navigation = new Navigation(page, request);
@@ -28,7 +26,7 @@ test.describe.serial('Kit Deactivation', () => {
       let kitsTable: KitsTable;
 
       await test.step('Deactivate and verify', async () => {
-        kitsQueuePage = await navigation.selectFromSamples<KitsQueuePage>(SamplesNavEnum.QUEUE);
+        kitsQueuePage = await navigation.selectFromSamples<KitsQueuePage>(Samples.QUEUE);
         await kitsQueuePage.waitForReady();
         kitsTable = kitsQueuePage.getKitsTable;
         kits = await kitsQueuePage.getStudyKitTypes();

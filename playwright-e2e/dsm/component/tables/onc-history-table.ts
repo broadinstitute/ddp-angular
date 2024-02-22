@@ -150,27 +150,18 @@ export default class OncHistoryTable extends Table {
     return null;
   }
 
-  public async fillDate(root: Locator, { date, today }: FillDate): Promise<Response | null> {
-    if (today) {
-      const todayBtn = new Button(this.page, { root, label: 'Today' });
-      await expect(todayBtn.toLocator()).toBeVisible();
-      const [resp] = await Promise.all([
-        waitForResponse(this.page, { uri: '/patch' }),
-        todayBtn.click()
-      ]);
-      return resp;
-    }
-    if (date) {
-      const datePicker = new DatePicker(this.page, { root });
+  public async fillDate(root: Locator, { date, today }: FillDate): Promise<string> {
+    const datePicker = new DatePicker(this.page, { root });
+
+    if (today || date === undefined) {
+      await datePicker.today();
+    } else {
       await datePicker.open();
-      const [resp] = await Promise.all([
-        waitForResponse(this.page, { uri: '/patch' }),
-        datePicker.pickDate(date)
-      ]);
+      await datePicker.pickDate(date)
       await datePicker.close();
-      return resp;
     }
-    return null;
+
+    return datePicker.input().currentValue();
   }
 
   private async fillTextArea(root: Locator, value: string | number, hasLookup: boolean, lookupSelectIndex = 0): Promise<Response | null> {

@@ -1,13 +1,13 @@
 import { expect } from '@playwright/test';
 import { testWithUser2 as test } from 'fixtures/dsm-fixture';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
-import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import { MainInfoEnum } from 'dsm/pages/participant-page/enums/main-info-enum';
 import crypto from 'crypto';
-import { CustomViewColumns } from 'dsm/component/filters/sections/search/search-enums';
+import { Column } from 'dsm/enums';
+import { StudyName } from 'dsm/component/navigation';
 
 test.describe('Participant List Search without Filtering Condition', () => {
-  const studies = [StudyEnum.LMS, StudyEnum.OSTEO2, StudyEnum.PANCAN];
+  const studies = [StudyName.LMS, StudyName.OSTEO2, StudyName.PANCAN];
 
   for (const study of studies) {
     test(`Save and retrieve Views @dsm @${study}`, async ({ page, request }) => {
@@ -18,8 +18,8 @@ test.describe('Participant List Search without Filtering Condition', () => {
 
       const customizeViewPanel = participantListPage.filters.customizeViewPanel;
       await customizeViewPanel.open();
-      await customizeViewPanel.selectColumns(CustomViewColumns.PARTICIPANT, [MainInfoEnum.PARTICIPANT_ID]);
-      await customizeViewPanel.deselectColumns(CustomViewColumns.PARTICIPANT, [MainInfoEnum.DDP]);
+      await customizeViewPanel.selectColumns(Column.PARTICIPANT, [MainInfoEnum.PARTICIPANT_ID]);
+      await customizeViewPanel.deselectColumns(Column.PARTICIPANT, [MainInfoEnum.DDP]);
       await customizeViewPanel.close();
 
       const searchPanel = participantListPage.filters.searchPanel;

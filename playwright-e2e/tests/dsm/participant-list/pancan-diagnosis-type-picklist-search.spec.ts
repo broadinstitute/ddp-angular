@@ -1,13 +1,13 @@
 import { expect } from '@playwright/test';
 import { test } from 'fixtures/dsm-fixture';
-import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
-import { CustomViewColumns } from 'dsm/component/filters/sections/search/search-enums';
+import { Column } from 'dsm/enums';
 import { logInfo } from 'utils/log-utils';
+import { StudyName } from 'dsm/component/navigation';
 
 test.describe('Pancan study picklist search', () => {
   // CMI research studies
-  const studies = [StudyEnum.PANCAN];
+  const studies = [StudyName.PANCAN];
   const cancers = ['Gynecologic cancers', 'Leukemias', 'Sarcomas', 'Small intestine cancer', 'Gastrointestinal cancers'];
 
   for (const study of studies) {
@@ -17,7 +17,7 @@ test.describe('Pancan study picklist search', () => {
       // Select column Diagnosis_Type from Customize View
       const customizeViewPanel = participantListPage.filters.customizeViewPanel;
       await customizeViewPanel.open();
-      await customizeViewPanel.selectColumns(CustomViewColumns.DIAGNOSIS_TYPE, ['DIAGNOSIS_TYPE']);
+      await customizeViewPanel.selectColumns(Column.DIAGNOSIS_TYPE, ['DIAGNOSIS_TYPE']);
       await customizeViewPanel.close();
 
       // In the search menu, select some specific cancers along with some general one

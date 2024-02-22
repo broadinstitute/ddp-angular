@@ -1,11 +1,11 @@
 import { expect } from '@playwright/test';
 import { test } from 'fixtures/dsm-fixture';
-import { CustomViewColumns } from 'dsm/component/filters/sections/search/search-enums';
-import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
+import { Column } from 'dsm/enums';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
+import { StudyName } from 'dsm/component/navigation';
 
 test.describe('Participants List Manual Search', () => {
-  const studies = [StudyEnum.LMS, StudyEnum.PANCAN];
+  const studies = [StudyName.LMS, StudyName.PANCAN];
 
   for (const study of studies) {
     test(`With custom columns @dsm @${study}`, async ({ page, request }) => {
@@ -43,9 +43,9 @@ test.describe('Participants List Manual Search', () => {
 
       const customizeViewPanel = participantListPage.filters.customizeViewPanel;
       await customizeViewPanel.open();
-      await customizeViewPanel.selectColumns(CustomViewColumns.SAMPLE,
+      await customizeViewPanel.selectColumns(Column.SAMPLE,
         [collaboratorPtIdColumn, normalCollaboratorSampleIdColumn, sampleSentColumn, sampleReceivedColumn]);
-      await customizeViewPanel.selectColumns(CustomViewColumns.MEDICAL_RECORD,
+      await customizeViewPanel.selectColumns(Column.MEDICAL_RECORD,
         [institutionNameColumn, initialMRReceivedColumn, noActionNeededColumn]);
 
       // await customizeViewPanel.deselectColumns(CustomViewColumns.PARTICIPANT, [MainInfoEnum.DDP]);
@@ -61,7 +61,7 @@ test.describe('Participants List Manual Search', () => {
 
       // Should be able to hide any column
       await customizeViewPanel.open();
-      await customizeViewPanel.deselectColumns(CustomViewColumns.PARTICIPANT, ['DDP']);
+      await customizeViewPanel.deselectColumns(Column.PARTICIPANT, ['DDP']);
       await expect(participantsTable.getHeaderByName('DDP')).not.toBeVisible();
 
       // Clear search fields
