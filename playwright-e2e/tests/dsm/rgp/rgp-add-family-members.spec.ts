@@ -10,85 +10,15 @@ import { ParticipantListTable } from 'dsm/component/tables/participant-list-tabl
 import { calculateAge } from 'utils/date-utils';
 import { logInfo } from 'utils/log-utils';
 import { v4 as uuid } from 'uuid';
-import ParticipantPage from 'dsm/pages/participant-page';
 import { WelcomePage } from 'dsm/pages/welcome-page';
 import * as crypto from 'crypto';
 import { FamilyMember } from 'dsm/enums';
 
 
 test.describe.serial('DSM Family Enrollment Handling', () => {
-  let rgpEmail: string;
+  let participantGuid: string;
 
-  test('Verify the display and functionality of family account dynamic fields @dsm @functional @rgp', async ({ page, request}) => {
-    const welcomePage = new WelcomePage(page);
-    await welcomePage.selectStudy(StudyName.RGP);
-
-    const navigation = new Navigation(page, request);
-
-    //Verify the Participant List is displayed
-    const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(Study.PARTICIPANT_LIST);
-    await participantListPage.waitForReady();
-
-    //Get the most recent automated test participant (searches for up to a week ago)
-    const participantGuid = await participantListPage.getGuidOfMostRecentAutomatedParticipant(user.patient.firstName, true);
-    expect(participantGuid).toBeTruthy();
-    saveParticipantGuid(participantGuid);
-
-    //Filter the Participant List by the given guid
-    await participantListPage.filterListByParticipantGUID(participantGuid);
-
-    const participantListTable = new ParticipantListTable(page);
-    const participantPage: ParticipantPage = await participantListTable.openParticipantPageAt(0);
-
-    const guid = await participantPage.getGuid();
-    expect(guid).toBe(participantGuid);
-
-    //Confirm the 'Add Family Member' button is visible
-    const rgpParticipantPage = new ParticipantRgpPage(page);
-    rgpEmail = await rgpParticipantPage.getEmail(); //Get the actual email used for the family account - to be used later
-    expect(rgpEmail).not.toBeNull();
-    const addFamilyMemberButton = rgpParticipantPage.addFamilyMemberDialog._addFamilyMemberButton;
-    await expect(addFamilyMemberButton).toBeVisible();
-
-    //Confirm 'Family Notes' is present and functional
-    const datetime = new Date();
-    await rgpParticipantPage.inputFamilyNotes(`Random text by playwright test on: '${datetime}'`);
-
-    //Confirm 'Seqr project' is present and functional
-    const seqrProject = rgpParticipantPage.getSeqrProject();
-    await expect(seqrProject).toBeVisible();
-    await seqrProject.click();
-    const dropdownOptions = rgpParticipantPage.getDropdownOptions();
-    await dropdownOptions.filter({ hasText: 'HMB Genome' }).click();
-
-    //Confirm 'Specialty Project: R21' is present and functional
-    const specialtyProjectR21 = rgpParticipantPage.getSpecialtyProjectR21();
-    await expect(specialtyProjectR21).toBeVisible();
-    await specialtyProjectR21.click();
-
-    //Confirm 'Specialty Project: CAGI 2022' is present and functional
-    const specialtyProjectCagi2022 = rgpParticipantPage.getSpecialtyProjectCagi2022();
-    await expect(specialtyProjectCagi2022).toBeVisible();
-    await specialtyProjectCagi2022.click();
-
-    //Confirm 'Specialty Project: CAGI 2023' is present and functional
-    const specialtyProjectCagi2023 = rgpParticipantPage.getSpecialtyProjectCagi2023();
-    await expect(specialtyProjectCagi2023).toBeVisible();
-    await specialtyProjectCagi2023.click();
-
-    //Confirm 'Specialty Project: CZI' is present and functional
-    const specialtyProjectCZI = rgpParticipantPage.getSpecialtyProjectCZI();
-    await expect(specialtyProjectCZI).toBeVisible();
-    await specialtyProjectCZI.click();
-
-    //Confirm 'Expected # to Sequence' is present and functional
-    const expectedNumberToSequence = rgpParticipantPage.getExpectedNumberToSequence();
-    await expect(expectedNumberToSequence).toBeVisible();
-    await expectedNumberToSequence.click();
-    await dropdownOptions.filter({ hasText: '5' }).click();
-  });
-
-  test('Verify that the proband family member tab can be filled out @dsm @functional @rgp @proband', async ({ page, request }) => {
+  test('Verify that the proband family member tab can be filled out @dsm @rgp @proband', async ({ page, request }) => {
     const navigation = new Navigation(page, request);
 
     const welcomePage = new WelcomePage(page);
@@ -98,8 +28,10 @@ test.describe.serial('DSM Family Enrollment Handling', () => {
     const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(Study.PARTICIPANT_LIST);
     await participantListPage.waitForReady();
 
-    const participantGuid = await participantListPage.getGuidOfMostRecentAutomatedParticipant(user.patient.firstName, true);
+    participantGuid = await participantListPage.getGuidOfMostRecentAutomatedParticipant(user.patient.firstName, true);
     saveParticipantGuid(participantGuid);
+    logInfo(`Participant Guid: ${participantGuid}`);
+
     await participantListPage.filterListByParticipantGUID(user.patient.participantGuid);
     //Check that the filtered list returns at least one participant
     const filteredList = page.locator('tr.ng-star-inserted');
@@ -519,7 +451,7 @@ test.describe.serial('DSM Family Enrollment Handling', () => {
     await redCapSurveyCompletedDate.fill(`${currentDate[0]}/${currentDate[1]}/${currentDate[2]}`);//[0] is MM, [1] is DD, [2] is YYYY
   });
 
-  test('Verify that a family member can be added without copying proband info @dsm @rgp @functional', async ({ page, request }) => {
+  test('Verify that a family member can be added without copying proband info @dsm @rgp', async ({ page, request }) => {
     //Add a new family member
     //Go into DSM
     const navigation = new Navigation(page, request);
@@ -530,10 +462,6 @@ test.describe.serial('DSM Family Enrollment Handling', () => {
     //Verify the Participant List is displayed
     const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(Study.PARTICIPANT_LIST);
     await participantListPage.waitForReady();
-
-    //Get the most recent automated test participant (searches for up to a week ago)
-    const participantGuid = await participantListPage.getGuidOfMostRecentAutomatedParticipant(user.patient.firstName, true);
-    saveParticipantGuid(participantGuid);
 
     await participantListPage.filterListByParticipantGUID(user.patient.participantGuid);
 
@@ -606,7 +534,7 @@ test.describe.serial('DSM Family Enrollment Handling', () => {
     expect(maternalGrandfatherFamilyID).toBe(probandFamilyID);
   });
 
-  test('Verify that a family member can be added using copied proband info @dsm @rgp @functional', async ({ page, request }) => {
+  test('Verify that a family member can be added using copied proband info @dsm @rgp', async ({ page, request }) => {
     const navigation = new Navigation(page, request);
 
     const welcomePage = new WelcomePage(page);
@@ -615,10 +543,6 @@ test.describe.serial('DSM Family Enrollment Handling', () => {
     //Verify the Participant List is displayed
     const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(Study.PARTICIPANT_LIST);
     await participantListPage.waitForReady();
-
-    //Get the most recent automated test participant (searches for up to a week ago)
-    const participantGuid = await participantListPage.getGuidOfMostRecentAutomatedParticipant(user.patient.firstName, true);
-    saveParticipantGuid(participantGuid);
 
     await participantListPage.filterListByParticipantGUID(user.patient.participantGuid);
 

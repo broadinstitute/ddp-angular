@@ -9,6 +9,7 @@ import OncHistoryTab from 'dsm/component/tabs/onc-history-tab';
 import { OncHistoryInputColumnsEnum, OncHistorySelectRequestEnum } from 'dsm/component/tabs/enums/onc-history-input-columns-enum';
 import { SortOrder } from 'dss/component/table';
 import { StudyName } from 'dsm/component/navigation';
+import { getToday } from 'utils/date-utils';
 
 /**
 * Collaborator Prefixes per study:
@@ -78,17 +79,17 @@ test.describe.serial('Tumor Collaborator Sample ID', () => {
       const rowIndex = rows - 1; // 0th-index
 
       await test.step('Insert new Onc History data', async () => {
+        const today = getToday();
         await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.FACILITY, { value: 'm', lookupSelectIndex: 1 }, rowIndex);
-        await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.DATE_OF_PX,
-          {
+        await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.DATE_OF_PX, {
+          date: {
             date: {
-              date: {
-                yyyy: new Date().getFullYear(),
-                month: new Date().getMonth(),
-                dayOfMonth: new Date().getDate()
-              }
+              yyyy: today.getFullYear(),
+              month: today.getMonth(),
+              dayOfMonth: today.getDate()
             }
-          }, rowIndex);
+          }
+        }, rowIndex);
         await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.TYPE_OF_PX, { value: 'a', lookupSelectIndex: 4 }, rowIndex);
         await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.REQUEST, { select: OncHistorySelectRequestEnum.REQUEST }, rowIndex);
       });

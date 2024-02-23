@@ -10,6 +10,7 @@ import Input from 'dss/component/input';
 import { waitForResponse } from 'utils/test-utils';
 import OncHistoryTable from 'dsm/component/tables/onc-history-table';
 import { StudyName } from 'dsm/component/navigation';
+import { getToday } from 'utils/date-utils';
 
 test.describe.serial('Onc History', () => {
   const studies = [StudyName.PANCAN];
@@ -58,13 +59,14 @@ test.describe.serial('Onc History', () => {
 
       // In new row, enter new facility name
       lastRow = ++lastRow;
+      const today = getToday();
       await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.DATE_OF_PX,
           {
             date: {
               date: {
-                yyyy: new Date().getFullYear(),
-                month: new Date().getMonth(),
-                dayOfMonth: new Date().getDate()
+                yyyy: today.getFullYear(),
+                month: today.getMonth(),
+                dayOfMonth: today.getDate()
               }
             }
           }, lastRow);

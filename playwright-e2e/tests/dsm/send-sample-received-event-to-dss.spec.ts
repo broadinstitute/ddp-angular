@@ -12,7 +12,7 @@ import { KitsColumnsEnum } from 'dsm/pages/kits-info/enums/kitsColumns-enum';
 import KitsInitialScanPage from 'dsm/pages/kits-initial-scan-page';
 import KitsTrackingScanPage from 'dsm/pages/kits-tracking-scan-page';
 import KitsFinalScanPage from 'dsm/pages/kits-final-scan-page';
-import { getDate } from 'utils/date-utils';
+import { getDate, getToday } from 'utils/date-utils';
 import KitsSentPage from 'dsm/pages/kits-sent-page';
 import ParticipantPage from 'dsm/pages/participant-page';
 import OncHistoryTab from 'dsm/component/tabs/onc-history-tab';
@@ -732,13 +732,14 @@ async function fillOncHistoryRow(
   rowIndex: number): Promise<string> {
   const oncHistoryTable = oncHistoryTab.table;
 
+  const today = getToday();
   const randomAccessionNumber = crypto.randomUUID().toString().substring(0, 10);
   await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.DATE_OF_PX, {
     date: {
       date: {
-        yyyy: new Date().getFullYear(),
-        month: new Date().getMonth(),
-        dayOfMonth: new Date().getDate()
+        yyyy: today.getFullYear(),
+        month: today.getMonth(),
+        dayOfMonth: today.getDate()
       }
     }
   }, rowIndex);
