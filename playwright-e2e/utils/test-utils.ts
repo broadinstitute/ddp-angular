@@ -39,13 +39,16 @@ export async function waitForNoSpinner(page: Page, opts: { timeout?: number } = 
 }
 
 export async function waitForResponse(page: Page, { uri, status = 200, timeout, messageBody }: WaitForResponse): Promise<Response> {
-  let response: any;
+  let response: Response;
   try {
     if (messageBody) {
-      response = await page.waitForResponse((response: Response) => response.url().includes(uri) &&
-      messageBody.every(async message => (await response.text()).includes(message as string)), { timeout });
+      response = await page.waitForResponse(async (resp: Response) => {
+        return resp.url().includes(uri) &&
+          await response.text().then(text => messageBody.every((message: string) => text.includes(message))).catch(() => false)
+        },
+        { timeout });
     } else {
-      response = await page.waitForResponse((response: Response) => response.url().includes(uri), { timeout });
+      response = await page.waitForResponse((resp: Response) => resp.url().includes(uri));
     }
     await response.finished();
   } catch (err) {
@@ -54,17 +57,25 @@ export async function waitForResponse(page: Page, { uri, status = 200, timeout, 
     }
     throw err;
   }
+
+  let matchMsg = true;
+  const body = await response.text();
+  if (messageBody) {
+    matchMsg = messageBody.every(message => body.includes(message as string))
+  }
   const respStatus = response.status();
-  if (respStatus === status) {
+  if (matchMsg && respStatus === status) {
     return response;
   }
   const url = response.url();
   const method = response.request().method().toUpperCase();
-  const body = await response.text();
   const reqPayload = response.request().postData() || '';
 
   throw new Error(
-    `Waiting for URI: ${uri} with status: ${status}.\n  ${method} ${url}\n  Status: ${respStatus}\n  Text: ${body}\n  Payload: ${reqPayload}`);
+    `Waiting for URI: ${uri} with status: ${status}.\n` +
+    `  ${method} ${url}\n  Status: ${respStatus}\n` +
+    `  Text: ${body}\n` +
+    `  Payload: ${JSON.stringify(reqPayload, null, 2)}`);
 }
 
 export async function waitUntilRemoved(locator: Locator): Promise<void> {

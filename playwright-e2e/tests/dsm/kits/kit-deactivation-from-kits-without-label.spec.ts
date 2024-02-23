@@ -60,4 +60,4 @@ test.describe.serial('Kit Deactivation', () => {
       });
     });
   }
-})
+});

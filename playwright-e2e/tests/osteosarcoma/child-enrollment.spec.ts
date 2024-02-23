@@ -152,7 +152,7 @@ test('Osteo enroll kid @dss @osteo', async ({ page }) => {
   await page
     .locator('.composite-answer-OTHER_CANCERS_LIST')
     .getByRole('combobox', { name: 'Choose cancer...' })
-    .type('doma', { delay: 200 });
+    .fill('doma');
 
   await page.waitForTimeout(1000);
   await page

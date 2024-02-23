@@ -115,4 +115,4 @@ test.describe('Follow-Up Surveys', () => {
     }
     return configuredSurveys;
   }
-})
+});

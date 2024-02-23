@@ -14,6 +14,6 @@ export default class HowItWorksPage extends RgpPageBase {
   }
 
   async startApplication(): Promise<void> {
-    await Promise.all([this.page.waitForNavigation({ waitUntil: 'load' }), this.startApplicationButton.click()]);
+    await Promise.all([this.page.waitForLoadState(), this.startApplicationButton.click()]);
   }
 }

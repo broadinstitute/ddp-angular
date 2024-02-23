@@ -39,7 +39,7 @@ test.describe('Upload Onc History', () => {
     SLIDES_TOTAL: '5',
     SLIDES_TO_REQUEST: '3',
     RECORD_ID: '',
-  }
+  };
 
   test(`Upload for study @lms @dsm`, async ({ page, request }, testInfo) => {
     const testResultDir = testInfo.outputDir;
@@ -61,7 +61,7 @@ test.describe('Upload Onc History', () => {
       await searchPanel.open();
       await searchPanel.checkboxes('Status', { checkboxValues: ['Enrolled'] });
       await searchPanel.checkboxes(oncHistoryRequestStatusColumn, { checkboxValues: ['Request'] });
-      const filterListResponse = await searchPanel.search();
+      await searchPanel.search();
 
       const rows = await participantListTable.rowsCount;
       expect(rows).toBeGreaterThanOrEqual(1);
@@ -108,7 +108,7 @@ test.describe('Upload Onc History', () => {
       const numRows = await oncHistoryTable.getRowsCount();
       expect(numRows).toBeGreaterThanOrEqual(1);
 
-      let rowIndex = -1
+      let rowIndex = -1;
       let match = false;
       for (let i = 0; i < numRows; i++) {
         const pxValue = await oncHistoryTable.getFieldValue(OncHistoryInputColumnsEnum.TYPE_OF_PX, i);

@@ -72,9 +72,9 @@ test.describe.serial('Initial Scan page', () => {
       await expect(page.locator('//h3[contains(@class, "Color--warn")]')).toHaveText('Error - Failed to save all changes');
       await expect(page.locator('//p[contains(@class, "Color--warn")]')).toHaveText(/Error occurred sending this scan pair!/);
       const msg1 = `Kit for participant with ShortId "${shortId}" was not found.`;
-      const msg2 = `Kit Label "${mfCode}" was already scanned.`
+      const msg2 = `Kit Label "${mfCode}" was already scanned.`;
       const combined = `(${msg1}|${msg2})`;
       await expect(page.locator('//p[contains(@class, "Color--warn")]')).toHaveText(new RegExp(combined));
     });
   }
-})
+});

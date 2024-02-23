@@ -136,7 +136,7 @@ export default class ParticipantPage {
   }
 
   public async updateInput(inputEnum: Label, newValue: string): Promise<void> {
-    const input = this.page.locator(this.getMainInputValueInfoXPath(inputEnum))
+    const input = this.page.locator(this.getMainInputValueInfoXPath(inputEnum));
     await input.fill('');
     await input.fill(newValue);
 

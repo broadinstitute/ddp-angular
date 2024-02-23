@@ -44,7 +44,7 @@ test.describe('Upload Onc History', () => {
     FFPE: 'Unknown',
     LOCAL_CONTROL: 'Yes',
     RECORD_ID: ''
-  }
+  };
 
   test(`Upload for study @osteo2 @dsm`, async ({ page, request }, testInfo) => {
     const testResultDir = testInfo.outputDir;
@@ -114,7 +114,7 @@ test.describe('Upload Onc History', () => {
       const numRows = await oncHistoryTable.getRowsCount();
       expect(numRows).toBeGreaterThanOrEqual(1);
 
-      let rowIndex = -1
+      let rowIndex = -1;
       let match = false;
       for (let i = 0; i < numRows; i++) {
         const pxValue = await oncHistoryTable.getFieldValue(OncHistoryInputColumnsEnum.TYPE_OF_PX, i);

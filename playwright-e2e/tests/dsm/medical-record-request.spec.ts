@@ -237,7 +237,7 @@ test.describe.serial('Medical records request workflow', () => {
       // After entering the Initial MR Received, Initial MR Request field which is not filled out (last empty one) will disappear.
       // Initial MR Request field which is filled out (non-empty one) will not disappear.
       count = await initialMRRequest.count();
-      const text = await new Input(page, { root: initialMRRequest.nth(count - 1) }).currentValue()
+      const text = await new Input(page, { root: initialMRRequest.nth(count - 1) }).currentValue();
       const willDisappear = text.length === 0;
 
       // Initial MR Received date field should be empty to start with

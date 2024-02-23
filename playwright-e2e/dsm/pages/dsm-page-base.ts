@@ -14,7 +14,7 @@ export default abstract class DsmPageBase {
   async reload(): Promise<void> {
     const logRequest = (interceptedRequest: Request) => {
       logInfo(`Failed request: ${interceptedRequest.url()}`);
-    }
+    };
 
     this.page.on('requestfinished', logRequest);
     await this.page.reload({ waitUntil: 'load' });

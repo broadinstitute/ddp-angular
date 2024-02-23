@@ -95,4 +95,4 @@ test.describe.serial('Medical Records View Permission', () => {
       })
     });
   }
-})
+});

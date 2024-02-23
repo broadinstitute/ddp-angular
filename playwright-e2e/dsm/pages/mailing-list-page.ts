@@ -7,7 +7,7 @@ export const COLUMN = {
   DATE: 'Date signed up',
   FIRST_NAME: 'First Name',
   LAST_NAME: 'Last Name'
-}
+};
 
 export default class MailingListPage extends DsmPageBase {
   private title: string | RegExp | undefined;

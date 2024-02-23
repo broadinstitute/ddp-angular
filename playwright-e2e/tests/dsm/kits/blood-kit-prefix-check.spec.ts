@@ -50,7 +50,7 @@ test.describe.serial('Blood Kit Upload', () => {
     postalCode: mock.canada.zip,
     state: mock.canada.state.abbreviation,
     country: mock.canada.country.abbreviation,
-  }
+  };
 
   const mockedNewYorkAddress = {
     street1: mock.newyork.street,
@@ -59,7 +59,7 @@ test.describe.serial('Blood Kit Upload', () => {
     postalCode: mock.newyork.zip,
     state: mock.newyork.state.abbreviation,
     country: mock.newyork.country.abbreviation,
-  }
+  };
 
   test.beforeEach(({ page, request }) => {
     welcomePage = new WelcomePage(page);
@@ -208,4 +208,4 @@ test.describe.serial('Blood Kit Upload', () => {
     await expect(page.locator('//h3[contains(@class, "Color--warn")]')).toHaveText('Error - Failed to save all changes');
     await expect(page.locator('//p[contains(@class, "Color--warn")]')).toHaveText(new RegExp(errMsg));
   });
-})
+});

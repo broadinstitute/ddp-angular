@@ -35,7 +35,7 @@ export default class AtcpDashboardPage extends AtcpPageBase {
         await expand.click();
         await this.page.waitForTimeout(2000); // sometimes table collapse quickly automatically
       }
-    }
+    };
 
     await expect(async () => {
       await checkAndClick();

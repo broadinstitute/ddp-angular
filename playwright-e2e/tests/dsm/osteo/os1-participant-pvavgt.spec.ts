@@ -126,4 +126,4 @@ test.describe.serial('Osteo1 Participant', () => {
     const cohortTag = new CohortTag(page);
     return (await page.locator(cohortTag.getCohortXPathTagFor(tagName)).all()).length;
   }
-})
+});

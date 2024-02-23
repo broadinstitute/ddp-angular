@@ -8,7 +8,7 @@ export default class Institution extends WidgetBase {
   constructor(page: Page, opts: { label?: string | RegExp; root?: Locator | string; nth?: number }) {
     const { label, root, nth } = opts;
     super(page, { nth, root });
-    this.root = this.root.locator('ddp-institutions-form')
+    this.root = this.root.locator('ddp-institutions-form');
     if (label) {
       this.root = this.root.filter({ hasText: label });
     }

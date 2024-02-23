@@ -76,7 +76,7 @@ export default class Checkbox extends WidgetBase {
     }
   }
 
-  getNestedCheckbox(label?: string | RegExp): Locator {
+  getNestedCheckbox(): Locator {
     return this.toRootLocator().locator('xpath=.//mat-list-item/following-sibling::*[contains(@class, "ddp-nested-picklist")]');
   }
 }

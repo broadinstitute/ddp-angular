@@ -67,7 +67,7 @@ export default class Input extends WidgetBase {
         await pressTab;
         await this.page.waitForTimeout(200); // short delay to detect triggered saving request
       }
-    }
+    };
 
     // Is Saving button visible before typing? tests become flaky if saving is in progress before adding another new patch request
     await expect(this.page.locator('button:visible', { hasText: 'Saving' })).toBeHidden();
@@ -122,7 +122,7 @@ export default class Input extends WidgetBase {
 
   public async fillSimple(value: string): Promise<void> {
     await this.toLocator().fill(value);
-    await this.toLocator().blur();
+    await this.blur();
   }
 
   public async currentValue(): Promise<string> {

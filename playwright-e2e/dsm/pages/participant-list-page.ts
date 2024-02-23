@@ -251,7 +251,7 @@ export default class ParticipantListPage extends DsmPageBase {
     let foundShortID = '';
     let unformattedFirstName = '';
     let firstName = '';
-    let testParticipantFirstName = '';
+    let testParticipantFirstName: string;
 
     if (prefix) {
       //If the automated participants for a study use a different prefix or name set-up than E2E, search for them using this info

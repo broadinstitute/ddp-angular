@@ -677,7 +677,7 @@ export default class FamilyMemberTab extends ParticipantPage {
         const familyMemberInfo = await familyMember.innerText();
         const splitFamilyMemberInfo = familyMemberInfo.split('-'); //Split between {name e.g. George} and {rgp info e.g. RGP_1234_5}
         const rgpInfo = splitFamilyMemberInfo[1];
-        const splitRGPInfo = rgpInfo.split('_') //Split between {RGP}_{family id}_{relationship id}
+        const splitRGPInfo = rgpInfo.split('_'); //Split between {RGP}_{family id}_{relationship id}
         return parseInt(splitRGPInfo[2]);
     }
 }

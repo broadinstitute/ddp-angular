@@ -31,7 +31,6 @@ test.describe.serial('LMS Child Enrollment', () => {
     test.slow();
 
     researchConsentPage = new LmsResearchConsentPage(page, 'child');
-    const additionalConsentPage = new LmsAdditionalConsentPage(page);
 
     const participant = user.child;
     const childFirstName = generateUserName(participant.firstName);

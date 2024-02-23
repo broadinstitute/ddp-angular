@@ -17,7 +17,7 @@ import * as user from 'data/fake-user.json';
 import * as auth from 'authentication/auth-osteo';
 // import { checkUserReceivedEmails } from 'utils/email-utils';
 
-const { OSTEO_USER_EMAIL, OSTEO_USER_PASSWORD, OSTEO_BASE_URL } = process.env;
+const { OSTEO_USER_EMAIL, OSTEO_USER_PASSWORD } = process.env;
 
 const assertActiveActivityStep = async (page: Page, expectedText: string) => {
   await expect(page.locator('.activity-step.active')).toHaveText(expectedText);

@@ -36,7 +36,7 @@ export async function login(page: Page, opts: { email?: string; password?: strin
     await expect(authWindow).toBeVisible({ timeout: 5 * 1000 });
     await expect(page.locator('.auth0-loading').first()).toBeHidden();
     await fillInEmailPassword(page, { email, password, waitForNavigation: false });
-  }
+  };
 
   await page.goto(DSM_BASE_URL, { waitUntil: 'load' });
   await doLogIn();

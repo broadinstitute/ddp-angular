@@ -61,4 +61,4 @@ test.describe('Sample Kit Queue UI', () => {
       expect(test.info().errors).toHaveLength(0);
     })
   }
-})
+});

@@ -78,4 +78,4 @@ test.describe.serial('Editing Participant Information', () => {
       });
     });
   }
-})
+});

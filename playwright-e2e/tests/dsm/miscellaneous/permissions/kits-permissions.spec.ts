@@ -47,4 +47,4 @@ test.describe('Kits Permissions', () => {
         });
       })
     }
-})
+});

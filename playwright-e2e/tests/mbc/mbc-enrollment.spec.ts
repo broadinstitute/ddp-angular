@@ -42,7 +42,7 @@ test.describe.serial('MBC enrolment @mbc', () => {
         password: MBC_USER_PASSWORD
       });
       logParticipantCreated(userEmail, fullName);
-    })
+    });
 
     await test.step('About you page', async () => {
       const aboutYouPage = new MBCSurveyAboutPage(page);
@@ -67,7 +67,7 @@ test.describe.serial('MBC enrolment @mbc', () => {
       await aboutYouPage.howDidYouHear('How did you hear test');
 
       await aboutYouPage.submit();
-    })
+    });
 
     await test.step('Research Consent Form page', async () => {
       const researchConsentPage = new MBCResearchConsentPage(page);
@@ -84,7 +84,7 @@ test.describe.serial('MBC enrolment @mbc', () => {
       await researchConsentPage.fullName('Test Full Name');
       await researchConsentPage.dateOfBirth('3', '12', '1993');
       await researchConsentPage.submit();
-    })
+    });
 
     await test.step('Medical Release Form page', async () => {
       const medicalReleasePage = new MBCMedicalReleasePage(page);
@@ -100,7 +100,7 @@ test.describe.serial('MBC enrolment @mbc', () => {
       await medicalReleasePage.submit();
 
       await page.waitForTimeout(3000);
-    })
+    });
 
     await test.step('Follow-up survey #1: Additional details about your cancer & treatments page',
       async () => {
@@ -134,4 +134,4 @@ test.describe.serial('MBC enrolment @mbc', () => {
         await page.waitForTimeout(3000);
       })
   })
-})
+});

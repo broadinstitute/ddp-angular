@@ -52,4 +52,4 @@ test.describe('Participant List Download', () => {
         expect(downloadedFile).toBeTruthy();
       });
   });
-})
+});

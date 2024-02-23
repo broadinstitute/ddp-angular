@@ -182,13 +182,13 @@ test.describe.serial('Saliva Kits upload flow', () => {
       await participantListTable.openParticipantPageAt(0);
       await participantPage.assertPageTitle();
       const sampleInformationTab = await participantPage.clickTab<SampleInformationTab>(Tab.SAMPLE_INFORMATION);
-      await sampleInformationTab.assertKitType(kitLabel, kitType)
+      await sampleInformationTab.assertKitType(kitLabel, kitType);
       await sampleInformationTab.assertValue(kitLabel, {info: Label.STATUS, value: SampleStatus.RECEIVED});
       await sampleInformationTab.assertValue(kitLabel, {info: Label.RECEIVED, value: receivedDate});
       await sampleInformationTab.assertValue(kitLabel, {info: Label.SENT, value: sentDate});
     })
   }
-})
+});
 
 /**
  *

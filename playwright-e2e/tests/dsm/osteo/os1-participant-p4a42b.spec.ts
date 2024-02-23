@@ -125,4 +125,4 @@ test.describe.serial('Same Participant in Osteo1 and Osteo2', () => {
     const cohortTag = new CohortTag(page);
     return (await page.locator(cohortTag.getCohortXPathTagFor(tagName)).all()).length;
   }
-})
+});

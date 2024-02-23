@@ -4,7 +4,6 @@ import { shuffle, waitForNoSpinner } from 'utils/test-utils';
 import Checkbox from './checkbox';
 import { ParticipantsListPaginator } from 'lib/component/dsm/paginators/participantsListPaginator';
 import { logInfo } from 'utils/log-utils';
-import { ro } from '@faker-js/faker';
 
 export enum SortOrder {
   DESC = 'desc',

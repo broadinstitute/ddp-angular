@@ -34,7 +34,7 @@ export default abstract class KitsPageBase extends DsmPageBase {
     ]);
     await waitForNoSpinner(this.page);
     await expect(async () => expect(await this.page.locator('mat-checkbox[id]').count()).toBeGreaterThanOrEqual(1)).toPass({ timeout: 60000 });
-    const kits = await this.getStudyKitTypes()
+    const kits = await this.getStudyKitTypes();
     for (const kit of kits) {
       await expect(this.kitCheckbox(kit).toLocator()).toBeVisible();
     }

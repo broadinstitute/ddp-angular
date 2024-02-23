@@ -182,4 +182,4 @@ test.describe.serial('Blood Kits upload flow', () => {
       expect(test.info().errors).toHaveLength(0);
     })
   }
-})
+});

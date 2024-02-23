@@ -71,7 +71,7 @@ test.describe.serial('LMS Child Enrollment', () => {
         password: LMS_USER_PASSWORD
       });
       logParticipantCreated(userEmail, childFullName);
-    })
+    });
 
     await test.step('Asserting contents on Research Consent Form: Step 1. Key Points', async () => {
       await researchConsentPage.waitForReady();
@@ -87,7 +87,7 @@ test.describe.serial('LMS Child Enrollment', () => {
         await toHaveScreenshot(page, paragraphs[i], `lms-research-consent-form-paragraph-${i}.png`);
       }
       await researchConsentPage.next();
-    })
+    });
 
     await test.step('Asserting contents on Research Consent Form: Step 2. Full Form', async () => {
       await researchConsentPage.waitForReady();
@@ -174,7 +174,7 @@ test.describe.serial('LMS Child Enrollment', () => {
       await toHaveScreenshot(page, questionPLocator, 'lms-research-consent-full-form-page-P-paragraph.png');
 
       await researchConsentPage.next();
-    })
+    });
 
     await test.step('Asserting contents on Research Consent & Assent Form: Step 3. Sign Consent', async () => {
       await researchConsentPage.waitForReady();
@@ -201,7 +201,7 @@ test.describe.serial('LMS Child Enrollment', () => {
       await researchConsentPage.fillInChildFullName(childFirstName, childLastName);
       await researchConsentPage.fillInDateOfBirth(child.birthDate.MM, child.birthDate.DD, child.birthDate.YYYY);
       await researchConsentPage.fillInYourFullName(adultFirstName, adultLastName); // Your Full name
-      await researchConsentPage.fillInSignature(adultFullName) // Your Signature (Full Name)
+      await researchConsentPage.fillInSignature(adultFullName); // Your Signature (Full Name)
       await researchConsentPage.selectRelationshipToChild('Parent');
       await researchConsentPage.fillInContactAddress({ // Your Child’s Mailing Address:
         fullName: childFullName,
@@ -213,7 +213,7 @@ test.describe.serial('LMS Child Enrollment', () => {
       });
 
       await researchConsentPage.submit();
-    })
+    });
 
     // Additional Consent Form: Learning About Your Child's Tumor
     await test.step("Asserting contents on Additional Consent Form: Learning About Your Child's Tumor", async () => {
@@ -247,7 +247,7 @@ test.describe.serial('LMS Child Enrollment', () => {
       expect(await additionalConsentPage.getDisplayedDate()).toBe(getDate());
 
       await additionalConsentPage.submit();
-    })
+    });
 
     await test.step('Asserting contents on Medical Release Form', async () => {
       const medicalReleasePage = new LmsMedicalReleasePage(page);
@@ -266,7 +266,7 @@ test.describe.serial('LMS Child Enrollment', () => {
       await medicalReleasePage.fillInFullName(adultFullName);
 
       await medicalReleasePage.submit();
-    })
+    });
 
     // Next page: Survey: Your Child's LMS
     await test.step("Asserting contents on Survey: Your Child's LMS", async () => {
@@ -293,7 +293,7 @@ test.describe.serial('LMS Child Enrollment', () => {
       await surveyAboutLms.medicationsChemotherapyReceived().fill('AFATINIB', { nth: 1 });
 
       await surveyAboutLms.submit();
-    })
+    });
 
     // Next page: Survey: About Your Child
     await test.step('Asserting contents on Survey: About Your Child', async () => {
@@ -318,13 +318,13 @@ test.describe.serial('LMS Child Enrollment', () => {
       await surveyAboutYou.howDidYouHearAboutProject().check('Word of mouth (friend/family, study staff, study participants, patient, support group, etc.)');
       await surveyAboutYou.howDidYouHearAboutProject().toCheckbox(/Brochure/).check();
       await surveyAboutYou.howOftenDoYouNeedHelpReadHospitalMaterials().toRadiobutton().check('None of the time');
-      await surveyAboutYou.howOftenDoYouHaveProblemsUnderstandWrittenInformation().toRadiobutton().check('None of the time')
+      await surveyAboutYou.howOftenDoYouHaveProblemsUnderstandWrittenInformation().toRadiobutton().check('None of the time');
       await surveyAboutYou.howConfidentAreYouFillingOutFormsByYourself().toRadiobutton().check('Always');
       await surveyAboutYou.highestLevelOfSchoolCompleted().toRadiobutton().check('Graduate or professional school (for example Masters, PhD, MD, JD/LLB)');
       await surveyAboutYou.speakLanguage().toRadiobutton().check('English');
 
       await surveyAboutYou.submit();
-    })
+    });
 
     // On Dashboard
     await test.step('Asserting contents on Participant Dashboard page', async () => {
@@ -333,7 +333,7 @@ test.describe.serial('LMS Child Enrollment', () => {
 
       await toHaveScreenshot(page, '.infobox_dashboard', 'lms-dashboard-message.png');
       await toHaveScreenshot(page, dashboardPage.getTable().tableLocator(), 'lms-dashboard-table-1.png');
-    })
+    });
 
     // Log out
     await dashboardPage.getLogOutButton().click();
@@ -366,4 +366,4 @@ test.describe.serial('LMS Child Enrollment', () => {
       await checkbox.uncheck(); // Close nested checkbox list
     }
   }
-})
+});

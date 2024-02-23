@@ -38,7 +38,7 @@ test.describe.serial('Tissue Request Flow', () => {
         );
         expect(shortID?.length).toStrictEqual(6);
         logInfo(`Short id: ${shortID}`);
-      })
+      });
 
       await searchPanel.open();
       await searchPanel.text('Short ID', { textValue: shortID });
@@ -51,7 +51,7 @@ test.describe.serial('Tissue Request Flow', () => {
 
       await test.step('Update Onc History data - Facility', async () => {
         await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.FACILITY, { value: 'm', lookupSelectIndex: 1 });
-      })
+      });
 
       await test.step('Automatically updated Onc History Created date', async () => {
         await participantPage.backToList();
@@ -63,7 +63,7 @@ test.describe.serial('Tissue Request Flow', () => {
           const actualOncHistoryCreatedDate = await participantPage.oncHistoryCreatedDate();
           expect(actualOncHistoryCreatedDate, 'Onc History Date has not been updated').toStrictEqual(getDate());
         }).toPass({timeout: 60 * 1000});
-      })
+      });
 
       await test.step('Update Onc History data - Date of PX', async () => {
         const today = getToday();
@@ -78,26 +78,26 @@ test.describe.serial('Tissue Request Flow', () => {
               }
             }
           });
-      })
+      });
 
       await test.step('Update Onc History data - Type of PX', async () => {
         await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.TYPE_OF_PX, { value: 'a', lookupSelectIndex: 4 });
-      })
+      });
 
       await test.step('Update Onc History data - Request', async () => {
         await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.REQUEST, { select: OncHistorySelectRequestEnum.REQUEST });
-      })
+      });
 
       await test.step('Clicking Download PDF Bundle', async () => {
         await oncHistoryTable.assertRowSelectionCheckbox();
         await oncHistoryTable.selectRowAt(0);
         await oncHistoryTab.downloadPDFBundle();
-      })
+      });
 
       await test.step('Select Cover PDF - Download Request Documents', async () => {
         await oncHistoryTable.selectRowAt(0);
         await oncHistoryTab.downloadRequestDocuments();
-      })
+      });
 
       await participantPage.backToList();
       await participantListTable.openParticipantPageAt(0);
@@ -111,21 +111,21 @@ test.describe.serial('Tissue Request Flow', () => {
         expect(faxSentDate1.trim(), 'Fax sent date 1 is not set to today').toEqual(getDate());
         expect(faxSentDate2.trim(), 'Fax sent date 2 is not empty').toBe('');
         expect(tissueReceivedDate.trim(), 'Tissue received date is not empty').toBeFalsy();
-      })
+      });
 
       await test.step('Enter Tissue Received', async () => {
         await tissueInformationPage.fillFaxSentDates({ today: true }, { today: true });
         await tissueInformationPage.fillTissueReceivedDate({ today: true });
         await tissueInformationPage.assertFaxSentDatesCount(2);
-      })
+      });
 
       await test.step('Add Tissue Note', async () => {
         await tissueInformationPage.fillNotes('Test tissue notes');
-      })
+      });
 
       await test.step('Add a destruction policy and click on Apply to All', async () => {
         await tissueInformationPage.fillDestructionPolicy(2233, false, true);
-      })
+      });
 
       await test.step('Add Material count', async () => {
         const testValue = 21;
@@ -134,12 +134,12 @@ test.describe.serial('Tissue Request Flow', () => {
         await tissue.fillField(TissueDynamicFieldsEnum.BLOCK, { inputValue: testValue });
         await tissue.fillField(TissueDynamicFieldsEnum.H_E, { inputValue: testValue });
         await tissue.fillField(TissueDynamicFieldsEnum.SCROLL, { inputValue: testValue });
-      })
+      });
 
       await test.step('Deleting OncHistory tab row', async () => {
         await tissueInformationPage.addTissue();
         await tissueInformationPage.deleteTissueAt(1);
-      })
+      });
     })
   }
 });

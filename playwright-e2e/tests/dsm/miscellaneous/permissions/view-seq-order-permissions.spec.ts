@@ -87,4 +87,4 @@ test.describe('View Sequencing Order Permission Test', () => {
       });
     });
   }
-})
+});

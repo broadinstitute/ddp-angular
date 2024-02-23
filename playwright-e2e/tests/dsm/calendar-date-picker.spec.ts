@@ -14,7 +14,7 @@ test.describe('DSM Date Picker in Participant List page', () => {
     yyyy: 1995,
     month: 11, // December because month is 0-indexed
     dayOfMonth: 20
-  }
+  };
 
   test('Select date from calendar for Date of Birth on Participant List page @dsm @angio @functional @participant-list',
     async ({ page, request }) => {

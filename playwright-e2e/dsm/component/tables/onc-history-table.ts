@@ -157,7 +157,7 @@ export default class OncHistoryTable extends Table {
       await datePicker.today();
     } else {
       await datePicker.open();
-      await datePicker.pickDate(date)
+      await datePicker.pickDate(date);
       await datePicker.close();
     }
 

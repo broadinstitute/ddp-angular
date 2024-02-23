@@ -54,7 +54,7 @@ test.describe.serial('GP Collection Date Permissions Test', () => {
           `Expected 16 Sample menu options for a study admin with kit_shipping permission, received ${amountOfSampleMenuOptions} instead`).
           toBe(16);
         expect(availableSampleMenuOptions).toMatchObject(expectedSampleMenuItems);
-      })
+      });
 
       await test.step('Go to Kits Sent page in the Samples menu and select a mf barcode and copy it', async () => {
         const kitsSentPage = await navigation.selectFromSamples<KitsSentPage>(Samples.SENT);
@@ -74,7 +74,7 @@ test.describe.serial('GP Collection Date Permissions Test', () => {
         }
         const numberOfRecentMFBarcodes = todaysMFBarcodes.length;
         expect(numberOfRecentMFBarcodes, 'No mf barcodes from recent kits have been found').toBeGreaterThanOrEqual(1);
-      })
+      });
 
       await test.step(`Go to Kit Search page and select 'Search by mf barcode' and enter the barcode you copied and click on Search`, async () => {
         await navigation.selectFromSamples(Samples.SEARCH);
@@ -96,12 +96,12 @@ test.describe.serial('GP Collection Date Permissions Test', () => {
           await kitsSearchPage.waitForReady();
         }
         expect(currentKit, 'No kit has been chosen for the test').toBeTruthy();
-      })
+      });
 
       await test.step('Enter a collection date for the kit that shows up and click Submit', async () => {
         const kitsSearchPage = new KitsSearchPage(page);
         await kitsSearchPage.setKitCollectionDate({ dateField: currentKit, useTodayDate: true });
-      })
+      });
     })
   }
 });

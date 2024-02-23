@@ -51,7 +51,7 @@ test.describe.serial('Saliva Kit Upload with a Canadian or New York address', ()
     postalCode: mock.canada.zip,
     state: mock.canada.state.abbreviation,
     country: mock.canada.country.abbreviation,
-  }
+  };
 
   const mockedNewYorkAddress = {
     street1: mock.newyork.street,
@@ -60,7 +60,7 @@ test.describe.serial('Saliva Kit Upload with a Canadian or New York address', ()
     postalCode: mock.newyork.zip,
     state: mock.newyork.state.abbreviation,
     country: mock.newyork.country.abbreviation,
-  }
+  };
 
   test.beforeEach(({ page, request }) => {
     welcomePage = new WelcomePage(page);
@@ -225,4 +225,4 @@ test.describe.serial('Saliva Kit Upload with a Canadian or New York address', ()
       await expect(page.locator('//p[contains(@class, "Color--warn")]')).toHaveText(new RegExp(msg1, 'i'));
     });
   }
-})
+});

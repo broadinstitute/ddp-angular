@@ -68,7 +68,7 @@ export default class KitUploadPage extends KitsPageBase {
         locator.click()
       ]);
       await waitForNoSpinner(this.page);
-    }
+    };
 
     const modal = new Modal(this.page);
     try {

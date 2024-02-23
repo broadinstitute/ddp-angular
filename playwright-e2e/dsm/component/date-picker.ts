@@ -1,4 +1,4 @@
-import { expect, Locator, Page, Response } from '@playwright/test';
+import { expect, Locator, Page } from '@playwright/test';
 import Button from 'dss/component/button';
 import Input from 'dss/component/input';
 import { getDate } from 'utils/date-utils';

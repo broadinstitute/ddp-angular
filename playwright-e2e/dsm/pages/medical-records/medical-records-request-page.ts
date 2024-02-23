@@ -30,7 +30,7 @@ export const PDFName: PDFType = {
   SOMATIC_CONSENT_ADDENDUM: 'somatic consent addendum pdf',
   SOMATIC_CONSENT_ADDENDUM_PEDIATRIC: 'somatic consent addendum pediatric pdf',
   SOMATIC_CONSENT_ASSENT_ADDENDUM_PEDIATRIC: 'somatic consent assent addendum pediatric pdf',
-}
+};
 
 
 export default class MedicalRecordsRequestPage {
@@ -93,7 +93,7 @@ export default class MedicalRecordsRequestPage {
       } else {
         await datePicker.pickDate({ isToday: today });
       }
-    }
+    };
 
     date1 && await helper(0, date1);
     date2 && await helper(1, date2);
@@ -172,7 +172,7 @@ export default class MedicalRecordsRequestPage {
       await this.downloadSelectedPDFButton.click();
       const download = await waitPromise;
       return download;
-    }
+    };
 
     let download: Download;
     try {

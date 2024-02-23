@@ -54,7 +54,7 @@ test.describe.serial('LMS Adult Enrollment', () => {
         password: process.env.LMS_USER_PASSWORD
       });
       logParticipantCreated(userEmail, fullName);
-    })
+    });
 
     await test.step('Asserting text contents on Research Consent Form: Step 1. Key Points', async () => {
       await assertActivityHeader(page, 'Research Consent Form');
@@ -67,7 +67,7 @@ test.describe.serial('LMS Adult Enrollment', () => {
       for (let i = 0; i < paragraphs.length; i++) {
         await toHaveScreenshot(page, paragraphs[i], `research-consent-key-points-page-paragraph-${i}.png`);
       }
-    })
+    });
 
     await researchConsentPage.next();
 
@@ -104,7 +104,7 @@ test.describe.serial('LMS Adult Enrollment', () => {
       await toHaveScreenshot(page, questionGLocator, 'research-consent-full-form-page-G-paragraph.png');
 
       // Note: Questions H to P are not checked
-    })
+    });
 
     await researchConsentPage.next();
 
@@ -134,7 +134,7 @@ test.describe.serial('LMS Adult Enrollment', () => {
         city: user.patient.city,
         zipCode: user.patient.zip
       });
-    })
+    });
 
     await researchConsentPage.submit();
 
@@ -162,7 +162,7 @@ test.describe.serial('LMS Adult Enrollment', () => {
       const requestPromise = waitForResponse(page, { uri: '/answers'});
       await Promise.all([additionalConsentPage.signature().fill(fullName), requestPromise]);
       await additionalConsentPage.submit();
-    })
+    });
 
     await test.step('Asserting text contents on Medical Release Form', async () => {
       const medicalReleasePage = new LmsMedicalReleasePage(page);
@@ -179,7 +179,7 @@ test.describe.serial('LMS Adult Enrollment', () => {
       await medicalReleasePage.agreeToAllowUsToContactPhysicianToObtainRecords();
       await medicalReleasePage.fillInFullName(fullName);
       await medicalReleasePage.submit();
-    })
+    });
 
     // Next page: Survey: Your LMS
     await test.step('Asserting text contents on Survey: Your LMS', async () => {
@@ -203,7 +203,7 @@ test.describe.serial('LMS Adult Enrollment', () => {
       await surveyAboutLms.bodyLocationWhenFirstDiagnosed().button('Add medication/chemotherapy').click();
       await surveyAboutLms.medicationsChemotherapyReceived().fill('AFATINIB', { nth: 1 });
       await surveyAboutLms.submit();
-    })
+    });
 
     // Next page: Survey: About You
     await test.step('Asserting text contents on Survey: About You', async () => {
@@ -225,12 +225,12 @@ test.describe.serial('LMS Adult Enrollment', () => {
       await surveyAboutYou.howDidYouHearAboutProject().check('Word of mouth (friend/family, study staff, study participants, patient, support group, etc.)');
       await surveyAboutYou.howDidYouHearAboutProject().toCheckbox(/Brochure/).check();
       await surveyAboutYou.howOftenDoYouNeedHelpReadHospitalMaterials().toRadiobutton().check('None of the time');
-      await surveyAboutYou.howOftenDoYouHaveProblemsUnderstandWrittenInformation().toRadiobutton().check('None of the time')
+      await surveyAboutYou.howOftenDoYouHaveProblemsUnderstandWrittenInformation().toRadiobutton().check('None of the time');
       await surveyAboutYou.howConfidentAreYouFillingOutFormsByYourself().toRadiobutton().check('Always');
       await surveyAboutYou.highestLevelOfSchoolCompleted().toRadiobutton().check('Graduate or professional school (for example Masters, PhD, MD, JD/LLB)');
       await surveyAboutYou.speakLanguage().toRadiobutton().check('English');
       await surveyAboutYou.submit();
-    })
+    });
 
     // Dashboard
     await expect(page.locator('h1.dashboard-title-section__title span')).toHaveText('Participant Dashboard');
@@ -239,4 +239,4 @@ test.describe.serial('LMS Adult Enrollment', () => {
 
     expect(test.info().errors).toHaveLength(0);
   });
-})
+});
