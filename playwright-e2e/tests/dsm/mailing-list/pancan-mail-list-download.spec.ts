@@ -8,7 +8,7 @@ import { SortOrder } from 'dss/component/table';
 import MailingListPage, { COLUMN } from 'dsm/pages/mailing-list-page';
 import { WelcomePage } from 'dsm/pages/welcome-page';
 import { assertTableHeaders } from 'utils/assertion-helper';
-import { getDate, getMailingListDownloadedFileDate, mailingListCreatedDate } from 'utils/date-utils';
+import { dateFormat, getMailingListDownloadedFileDate, mailingListCreatedDate } from 'utils/date-utils';
 import { generateEmailAlias, generateUserName } from 'utils/faker-utils';
 import lodash from 'lodash';
 
@@ -65,7 +65,7 @@ test.describe.serial('Join Pancan Mailing List', () => {
 
     // Verify CSV file: Assert every user from API response body can also be found inside downloaded csv file
     lodash.forEach(respJson, item => {
-      const dateInJson = getDate(new Date(parseInt(item.dateCreated) * 1000)); // Transform to dd/mm/yyyy
+      const dateInJson = dateFormat().format(new Date(parseInt(item.dateCreated) * 1000)); // Transform to dd/mm/yyyy
       const emailInJson = item.email;
       const finding = lodash.filter(rows, row => row.email === emailInJson && row.dateCreated === dateInJson);
       expect(finding.length).toBe(1);

@@ -4,7 +4,7 @@ import { Miscellaneous, Navigation, Samples, Study, StudyName } from 'dsm/compon
 import SequencingOrderTab from 'dsm/component/tabs/sequencing-order-tab';
 import UserPermissionPage from 'dsm/pages/user-and-permissions-page';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
-import ParticipantPage from 'dsm/pages/participant-page/participant-page';
+import ParticipantPage from 'dsm/pages/participant-page';
 import SamplesClinicalOrdersPage from 'dsm/pages/samples-clinical-orders-page';
 import Select from 'dss/component/select';
 import { testLimitedPermissions as test } from 'fixtures/dsm-fixture';

@@ -15,14 +15,18 @@ export function dateFormat(timeZone?: string): Intl.DateTimeFormat {
     });
 }
 
+export function getToday(): Date {
+  return normalizeDate(new Date());
+}
+
 /**
  * Returns a date with format mm/dd/yyyy
  * @param {Date} date
  * @returns {string}
  */
 export function getDate(date?: Date, opts: { timeZone?: string } = {}): string {
-  const { timeZone = 'America/New_York' } = opts;
-  return dateFormat(timeZone).format(date ? date : new Date());
+  const { timeZone } = opts;
+  return dateFormat(timeZone).format(date ? normalizeDate(date) : getToday());
 }
 
 /**
@@ -117,4 +121,9 @@ export const calculateAge = (month: string, day: string, year: string): number =
   }
 
   return resultAge;
+};
+
+const normalizeDate = function(date: Date) {
+  date.setMinutes(date.getMinutes() + date.getTimezoneOffset());
+  return date;
 };

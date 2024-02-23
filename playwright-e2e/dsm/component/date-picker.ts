@@ -7,7 +7,6 @@ import { waitForResponse } from 'utils/test-utils';
 export default class DatePicker {
   locator: Locator;
 
-
   constructor(private readonly page: Page, opts: { label?: string, nth?: number, root?: Locator | string } = {}) {
     const { label, nth = 0, root } = opts;
 
@@ -108,12 +107,12 @@ export default class DatePicker {
 
     // Pick day of month. After pick day, /patch request is automatically triggered. Calendar closed automatically.
     if (saveToDB) {
-      await this.dayPicker().locator(this.clickableCell(), { hasText: date }).first().click();
-    } else {
       await Promise.all([
         waitForResponse(this.page, { uri: '/patch' }),
         this.dayPicker().locator(this.clickableCell(), { hasText: date }).first().click()
       ]);
+    } else {
+      await this.dayPicker().locator(this.clickableCell(), { hasText: date }).first().click();
     }
 
     return getDate(new Date(yyyy, month, parseInt(date)));

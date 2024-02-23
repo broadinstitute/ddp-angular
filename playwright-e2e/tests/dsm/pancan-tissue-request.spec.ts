@@ -1,11 +1,11 @@
 import { test } from 'fixtures/dsm-fixture';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
 import { Filter, Tab } from 'dsm/enums';
-import ParticipantPage from 'dsm/pages/participant-page/participant-page';
+import ParticipantPage from 'dsm/pages/participant-page';
 import OncHistoryTab from 'dsm/component/tabs/onc-history-tab';
 import { OncHistoryInputColumnsEnum, OncHistorySelectRequestEnum } from 'dsm/component/tabs/enums/onc-history-input-columns-enum';
 import { expect } from '@playwright/test';
-import { getDate } from 'utils/date-utils';
+import { getToday } from 'utils/date-utils';
 import { TissueDynamicFieldsEnum } from 'dsm/pages/tissue/enums/tissue-information-enum';
 import { logInfo } from 'utils/log-utils';
 import { StudyName } from 'dsm/component/navigation';
@@ -54,7 +54,6 @@ test.describe.serial('Tissue Request Flow', () => {
       })
 
       await test.step('Automatically updated Onc History Created date', async () => {
-        const expectedDate = getDate();
         await participantPage.backToList();
         await expect(async () => {
           await page.reload();
@@ -62,19 +61,20 @@ test.describe.serial('Tissue Request Flow', () => {
           await participantListPage.filterListByShortId(shortID);
           await participantListTable.openParticipantPageAt(0);
           const actualOncHistoryCreatedDate = await participantPage.oncHistoryCreatedDate();
-          expect(actualOncHistoryCreatedDate, 'Onc History Date has not been updated').toStrictEqual(expectedDate);
+          expect(actualOncHistoryCreatedDate, 'Onc History Date has not been updated').toStrictEqual(getToday());
         }).toPass({timeout: 60 * 1000});
       })
 
       await test.step('Update Onc History data - Date of PX', async () => {
+        const today = getToday();
         await participantPage.clickTab<OncHistoryTab>(Tab.ONC_HISTORY);
         await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.DATE_OF_PX,
           {
             date: {
               date: {
-                yyyy: new Date().getFullYear(),
-                month: new Date().getMonth(),
-                dayOfMonth: new Date().getDate()
+                yyyy: today.getFullYear(),
+                month: today.getMonth(),
+                dayOfMonth: today.getDate(),
               }
             }
           });
@@ -108,7 +108,7 @@ test.describe.serial('Tissue Request Flow', () => {
         const faxSentDate1 = await tissueInformationPage.getFaxSentDate();
         const faxSentDate2 = await tissueInformationPage.getFaxSentDate(1);
         const tissueReceivedDate = await tissueInformationPage.getTissueReceivedDate();
-        expect(faxSentDate1.trim(), 'Fax sent date 1 is not set to today').toEqual(getDate());
+        expect(faxSentDate1.trim(), 'Fax sent date 1 is not set to today').toEqual(getToday());
         expect(faxSentDate2.trim(), 'Fax sent date 2 is not empty').toBe('');
         expect(tissueReceivedDate.trim(), 'Tissue received date is not empty').toBeFalsy();
       })

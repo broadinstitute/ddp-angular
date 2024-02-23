@@ -99,7 +99,7 @@ const testConfig: PlaywrightTestConfig = {
   projects: [
     {
       // Listing tests: npx playwright test --list --project="dsm"
-      // Running tests serially: npx playwright test --project="kit" --workers=1
+      // Running tests serially: npx playwright test --project="dsm" --workers=1
       name: 'dsm',
       testDir: 'tests/dsm',
       use: {}

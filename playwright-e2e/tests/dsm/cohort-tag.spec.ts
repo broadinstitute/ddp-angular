@@ -2,7 +2,7 @@ import { expect } from '@playwright/test';
 import { WelcomePage } from 'dsm/pages/welcome-page';
 import { test } from 'fixtures/dsm-fixture';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
-import ParticipantPage from 'dsm/pages/participant-page/participant-page';
+import ParticipantPage from 'dsm/pages/participant-page';
 import CohortTag from 'dsm/component/cohort-tag';
 import { Navigation, Study, StudyName } from 'dsm/component/navigation';
 import * as crypto from 'crypto';

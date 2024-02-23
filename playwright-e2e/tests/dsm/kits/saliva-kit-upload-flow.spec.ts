@@ -4,16 +4,15 @@ import HomePage from 'dsm/pages/home-page';
 import {Navigation, Samples, Study, StudyName} from 'dsm/component/navigation';
 import {login} from 'authentication/auth-dsm';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
-import ParticipantPage from 'dsm/pages/participant-page/participant-page';
+import ParticipantPage from 'dsm/pages/participant-page';
 import {KitUploadInfo} from 'dsm/pages/kit-upload/models/kitUpload-model';
 import ContactInformationTab from 'dsm/component/tabs/contact-information-tab';
-import {Kit, Label, Tab} from 'dsm/enums';
+import {Kit, Label, SampleStatus, Tab} from 'dsm/enums';
 import KitUploadPage from 'dsm/pages/kit-upload-page';
 import KitsInitialScanPage from 'dsm/pages/kits-initial-scan-page';
 import KitsFinalScanPage from 'dsm/pages/kits-final-scan-page';
 import crypto from 'crypto';
 import SampleInformationTab from 'dsm/component/tabs/sample-information-tab';
-import {SampleStatusEnum} from 'dsm/component/tabs/enums/sampleStatus-enum';
 import KitsWithoutLabelPage from 'dsm/pages/kits-without-label-page';
 import {KitsColumnsEnum} from 'dsm/pages/kits-info/enums/kitsColumns-enum';
 import KitsSentPage from 'dsm/pages/kits-sent-page';
@@ -184,7 +183,7 @@ test.describe.serial('Saliva Kits upload flow', () => {
       await participantPage.assertPageTitle();
       const sampleInformationTab = await participantPage.clickTab<SampleInformationTab>(Tab.SAMPLE_INFORMATION);
       await sampleInformationTab.assertKitType(kitLabel, kitType)
-      await sampleInformationTab.assertValue(kitLabel, {info: Label.STATUS, value: SampleStatusEnum.RECEIVED});
+      await sampleInformationTab.assertValue(kitLabel, {info: Label.STATUS, value: SampleStatus.RECEIVED});
       await sampleInformationTab.assertValue(kitLabel, {info: Label.RECEIVED, value: receivedDate});
       await sampleInformationTab.assertValue(kitLabel, {info: Label.SENT, value: sentDate});
     })

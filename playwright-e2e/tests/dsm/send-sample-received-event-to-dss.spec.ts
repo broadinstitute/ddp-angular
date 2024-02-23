@@ -14,7 +14,7 @@ import KitsTrackingScanPage from 'dsm/pages/kits-tracking-scan-page';
 import KitsFinalScanPage from 'dsm/pages/kits-final-scan-page';
 import { getDate } from 'utils/date-utils';
 import KitsSentPage from 'dsm/pages/kits-sent-page';
-import ParticipantPage from 'dsm/pages/participant-page/participant-page';
+import ParticipantPage from 'dsm/pages/participant-page';
 import OncHistoryTab from 'dsm/component/tabs/onc-history-tab';
 import { OncHistoryInputColumnsEnum, OncHistorySelectRequestEnum } from 'dsm/component/tabs/enums/onc-history-input-columns-enum';
 import { SMIdEnum, TissueDynamicFieldsEnum, TissueTypesEnum } from 'dsm/pages/tissue/enums/tissue-information-enum';

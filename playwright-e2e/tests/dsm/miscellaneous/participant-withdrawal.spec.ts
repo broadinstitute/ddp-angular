@@ -2,7 +2,7 @@ import { expect } from '@playwright/test';
 import { Filter } from 'dsm/enums';
 import { Navigation, Study, StudyName } from 'dsm/component/navigation';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
-import ParticipantPage from 'dsm/pages/participant-page/participant-page';
+import ParticipantPage from 'dsm/pages/participant-page';
 import ParticipantWithdrawalPage from 'dsm/pages/participant-withdrawal-page';
 import { SortOrder } from 'dss/component/table';
 import { test } from 'fixtures/dsm-fixture';

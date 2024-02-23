@@ -1,25 +1,24 @@
 import { Locator, Page } from '@playwright/test';
-import { FamilyMember } from 'dsm/component/tabs/enums/familyMember-enum';
+import ParticipantPage from 'dsm/pages/participant-page';
 import TextArea from 'dss/component/textarea';
-import { waitForResponse } from 'utils/test-utils';
+import { FamilyMember } from 'dsm/enums';
 
 /**
  * Captures the webelements that can be interacted with for RGP Family Members
  * Family Member tabs are usually displayed to the right of the Participant Page -> Survey Data tab
  * Note: The proband is the person who is the main participant in the study
  */
-export default class FamilyMemberTab {
+export default class FamilyMemberTab extends ParticipantPage {
     private _firstName!: string;
     private _lastName!: string;
     private _relationshipID!: string;
     private _familyID!: number;
     private readonly _relationToProband: FamilyMember;
-    private readonly page: Page;
     private readonly MIN_POSSIBLE_RELATIONSHIP_ID_VALUE: number = 0;
     private readonly MAX_POSSIBLE_RELATIONSHIP_ID_VALUE: number = 1000;
 
     constructor(page: Page, relationToProband: FamilyMember) {
-        this.page = page;
+        super(page);
         this._relationToProband = relationToProband;
     }
 
@@ -159,9 +158,7 @@ export default class FamilyMemberTab {
      */
     public async inputImportantNotes(notes: string): Promise<void> {
       const textarea = this.getImportantNotes();
-      const respPromise = waitForResponse(this.page, {uri: 'ui/patch'});
-      await textarea.fillSimple(notes);
-      await respPromise;
+      await this.inputHelper(textarea, notes);
     }
 
     /**
@@ -178,10 +175,7 @@ export default class FamilyMemberTab {
      */
     public async inputProcessNotes(notes: string): Promise<void> {
       const textarea = this.getProcessNotes();
-      const respPromise = waitForResponse(this.page, {uri: 'ui/patch'});
-      await textarea.fill(notes, false);
-      await textarea.blur();
-      await respPromise;
+      await this.inputHelper(textarea, notes);
     }
 
     /**
@@ -192,7 +186,7 @@ export default class FamilyMemberTab {
       return new TextArea(this.page, {label: 'Process Notes'});
     }
 
-    public getFirstName(): Locator {
+    public getFamilyMemberFirstName(): Locator {
         return this.page.locator("//td[contains(text(), 'First Name')]/following-sibling::td//div/input[@data-placeholder='First Name']");
     }
 
@@ -200,7 +194,7 @@ export default class FamilyMemberTab {
         return this.page.locator("//input[@data-placeholder='Middle Name']");
     }
 
-    public getLastName(): Locator {
+    public getFamilyMemberLastName(): Locator {
         return this.page.locator("//td[contains(text(), 'Last Name')]/following-sibling::td//div/input[@data-placeholder='Last Name']");
     }
 
@@ -217,7 +211,7 @@ export default class FamilyMemberTab {
         return this.page.locator("//div[@role='listbox']").locator('//mat-option');
     }
 
-    public getPreferredLanguage(): Locator {
+    public getFamilyMemberPreferredLanguage(): Locator {
         return this.page.locator("//td[contains(text(), 'Preferred Language')]/following-sibling::td/mat-select");
     }
 
@@ -229,7 +223,7 @@ export default class FamilyMemberTab {
         return this.page.locator("//td[contains(text(), 'Pronouns')]/following-sibling::td/mat-select");
     }
 
-    public getDateOfBirth(): Locator {
+    public getFamilyMemberDateOfBirth(): Locator {
         return this.page.locator("//td[contains(text(), 'DOB')]/following-sibling::td//div//input[@data-placeholder='mm/dd/yyyy']");
     }
 
@@ -269,10 +263,7 @@ export default class FamilyMemberTab {
      */
     public async inputMixedRaceNotes(notes: string): Promise<void> {
       const textarea = this.getMixedRaceNotes();
-      const respPromise = waitForResponse(this.page, {uri: 'ui/patch'});
-      await textarea.fill(notes, false);
-      await textarea.blur();
-      await respPromise;
+      await this.inputHelper(textarea, notes);
     }
 
     /**
@@ -372,7 +363,8 @@ export default class FamilyMemberTab {
     }
 
     public async inputConsentingNotes(notes: string): Promise<void> {
-        await this.page.locator("//textarea[contains(@data-placeholder, 'Consenting Notes')]").fill(`${notes}`);
+      const textarea = new TextArea(this.page, { label: 'Consenting Notes' });
+      await this.inputHelper(textarea, notes);
     }
 
     /**
@@ -410,7 +402,8 @@ export default class FamilyMemberTab {
     }
 
     public async inputMedicalRecordsNotes(notes: string): Promise<void> {
-        await this.page.locator("//textarea[contains(@data-placeholder, 'Medical Records Notes')]").fill(`${notes}`);
+      const textarea = new TextArea(this.page, { label: 'Medical Records Notes' });
+      await this.inputHelper(textarea, notes);
     }
 
     /**
@@ -438,7 +431,8 @@ export default class FamilyMemberTab {
     }
 
     public async inputReferralNotes(notes: string): Promise<void> {
-        await this.page.locator("//textarea[contains(@data-placeholder, 'Referral Notes')]").fill(`${notes}`);
+      const textarea = new TextArea(this.page, { label: 'Referral Notes' });
+      await this.inputHelper(textarea, notes);
     }
 
     public getReferringClinician(): Locator {
@@ -491,7 +485,8 @@ export default class FamilyMemberTab {
     }
 
     public async inputSampleNotes(notes: string): Promise<void> {
-        await this.page.locator("//textarea[contains(@data-placeholder, 'Sample Notes')]").fill('Testing notes here - Sample Notes');
+      const textarea = new TextArea(this.page, { label: 'Sample Notes' });
+      await this.inputHelper(textarea, notes);
     }
 
     public getBloodSalivaProcessing(): Locator {
@@ -525,7 +520,8 @@ export default class FamilyMemberTab {
     }
 
     public async inputTissueNotes(notes: string): Promise<void> {
-        await this.page.locator("//textarea[contains(@data-placeholder, 'Tissue Notes')]").fill(`${notes}`);
+      const textarea = new TextArea(this.page, { label: 'Tissue Notes' });
+      await this.inputHelper(textarea, notes);
     }
 
     public getTissueTypeReceived(): Locator {
@@ -589,11 +585,13 @@ export default class FamilyMemberTab {
     }
 
     public async inputRorStatusNotes(notes: string): Promise<void> {
-        await this.page.locator("//textarea[contains(@data-placeholder, 'ROR Status/Notes')]").fill(`${notes}`);
+      const textarea = new TextArea(this.page, { label: 'ROR Status/Notes' });
+      await this.inputHelper(textarea, notes);
     }
 
     public async inputPostDisclosureNotes(notes: string): Promise<void> {
-        await this.page.locator("//textarea[contains(@data-placeholder, 'Post-disclosure notes')]").fill(`${notes}`);
+      const textarea = new TextArea(this.page, { label: 'Post-disclosure notes' });
+      await this.inputHelper(textarea, notes);
     }
 
     public getCollaboration(): Locator {
@@ -609,7 +607,8 @@ export default class FamilyMemberTab {
     }
 
     public async inputPublicationInfo(notes: string): Promise<void> {
-        await this.page.locator("//textarea[contains(@data-placeholder, 'Publication Info')]").fill(`${notes}`);
+      const textarea = new TextArea(this.page, { label: 'Publication Info' });
+      await this.inputHelper(textarea, notes);
     }
 
     public getSurveySection(): Locator {

@@ -1,6 +1,6 @@
 import { Locator, Page } from '@playwright/test';
 import Table from 'dss/component/table';
-import ParticipantPage from 'dsm/pages/participant-page/participant-page';
+import ParticipantPage from 'dsm/pages/participant-page';
 import { rows } from 'lib/component/dsm/paginators/types/rowsPerPage';
 import { shuffle } from 'utils/test-utils';
 

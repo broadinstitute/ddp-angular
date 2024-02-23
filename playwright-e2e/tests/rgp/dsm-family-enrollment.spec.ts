@@ -3,17 +3,17 @@ import { Navigation, Study, StudyName } from 'dsm/component/navigation';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
 import * as user from 'data/fake-user.json';
 import { test } from 'fixtures/dsm-fixture';
-import FamilyMemberTab from 'dsm/pages/participant-page/rgp/family-member-tab';
-import { FamilyMember } from 'dsm/component/tabs/enums/familyMember-enum';
-import RgpParticipantPage from 'dsm/pages/participant-page/rgp/rgp-participant-page';
+import FamilyMemberTab from 'dsm/component/tabs/family-member-tab';
+import ParticipantRgpPage from 'dsm/pages/participant-rgp-page';
 import { saveParticipantGuid } from 'utils/faker-utils';
 import { ParticipantListTable } from 'dsm/component/tables/participant-list-table';
 import { calculateAge } from 'utils/date-utils';
 import { logInfo } from 'utils/log-utils';
 import { v4 as uuid } from 'uuid';
-import ParticipantPage from 'dsm/pages/participant-page/participant-page';
+import ParticipantPage from 'dsm/pages/participant-page';
 import { WelcomePage } from 'dsm/pages/welcome-page';
 import * as crypto from 'crypto';
+import { FamilyMember } from 'dsm/enums';
 
 
 test.describe.serial('DSM Family Enrollment Handling', () => {
@@ -44,7 +44,7 @@ test.describe.serial('DSM Family Enrollment Handling', () => {
     expect(guid).toBe(participantGuid);
 
     //Confirm the 'Add Family Member' button is visible
-    const rgpParticipantPage = new RgpParticipantPage(page);
+    const rgpParticipantPage = new ParticipantRgpPage(page);
     rgpEmail = await rgpParticipantPage.getEmail(); //Get the actual email used for the family account - to be used later
     expect(rgpEmail).not.toBeNull();
     const addFamilyMemberButton = rgpParticipantPage.addFamilyMemberDialog._addFamilyMemberButton;
@@ -165,26 +165,26 @@ test.describe.serial('DSM Family Enrollment Handling', () => {
     expect(familyIDFromFamilyMemberTab).toBe(proband.familyID);
 
     //Confirm that input entered in Important Notes and Process Notes is saved
-    await proband.inputImportantNotes('Testing notes here - Important Notes');
-    await proband.inputProcessNotes('Testing notes here - Process Notes');
+    await proband.inputImportantNotes(`dsm-family-enrollment test: ${crypto.randomUUID().toString().substring(0, 5)}`);
+    await proband.inputProcessNotes(`dsm-family-enrollment test: ${crypto.randomUUID().toString().substring(0, 8)}`);
     const uniqueID = uuid();
     const mixedRaceTestingNotes = `Testing using id ${uniqueID}`;
     await proband.inputMixedRaceNotes(mixedRaceTestingNotes);
     await page.waitForTimeout(10000);
 
-    const firstName = proband.getFirstName();
+    const firstName = proband.getFamilyMemberFirstName();
     await firstName.fill(`${user.patient.firstName}_PROBAND`); // PROBAND suffix to make it easy to check for messages in DSS
 
     const middleName = proband.getMiddleName();
     await middleName.fill(user.patient.middleName);
 
-    const lastName = proband.getLastName();
+    const lastName = proband.getFamilyMemberLastName();
     await lastName.fill(user.patient.lastName);
 
     const suffix = proband.getNameSuffix();
     await suffix.fill('junior');
 
-    const preferredLanguage = proband.getPreferredLanguage();
+    const preferredLanguage = proband.getFamilyMemberPreferredLanguage();
     await preferredLanguage.click();
     const dropdownOptions = proband.getDropdownOptions(); // Only needs to be called once and can be re-used for dropdown options
     await dropdownOptions.filter({ hasText: 'Spanish' }).click();
@@ -198,7 +198,7 @@ test.describe.serial('DSM Family Enrollment Handling', () => {
     await dropdownOptions.filter({ hasText: 'they/them' }).click();
 
     //section for Participant Info -> DOB
-    const dateOfBirth = proband.getDateOfBirth();
+    const dateOfBirth = proband.getFamilyMemberDateOfBirth();
     await dateOfBirth.fill(`${user.patient.birthDate.MM}/${user.patient.birthDate.DD}/${user.patient.birthDate.YYYY}`);
     //DOB field must either use Enter press or be de-selected in order for age to show up in following Age Today field
     await dateOfBirth.blur();
@@ -236,7 +236,7 @@ test.describe.serial('DSM Family Enrollment Handling', () => {
     expect(mixedRaceNotes).toBe(mixedRaceTestingNotes);
 
     //Go back to Participant List and refresh using Reload with Default Filters
-    const familyAccount = new RgpParticipantPage(page);
+    const familyAccount = new ParticipantRgpPage(page);
     await familyAccount.backToList();
     await participantListPage.filters.searchPanel.search();
     await expect(filteredList).toHaveCount(1);
@@ -539,7 +539,7 @@ test.describe.serial('DSM Family Enrollment Handling', () => {
 
     const participantListTable = new ParticipantListTable(page);
     await participantListTable.openParticipantPageAt(0);
-    const rgpParticipantPage = new RgpParticipantPage(page);
+    const rgpParticipantPage = new ParticipantRgpPage(page);
 
     const familyMemberForm = rgpParticipantPage.addFamilyMemberDialog;
 
@@ -577,14 +577,14 @@ test.describe.serial('DSM Family Enrollment Handling', () => {
     await expect(maternalGrandfatherFamilyIDField).not.toBeEmpty();
     await expect(maternalGrandfatherFamilyIDField).not.toBeEditable();
 
-    const maternalGrandfatherFirstNameField = grandfather.getFirstName();
+    const maternalGrandfatherFirstNameField = grandfather.getFamilyMemberFirstName();
     await expect(maternalGrandfatherFirstNameField).toHaveValue(grandfather.firstName);
 
     //Middle name is not set in family member creation - check that it has no input for non-copied family member - intended to be a canary in coal mine assertion
     const maternalGrandfatherMiddleNameField = grandfather.getMiddleName();
     await expect(maternalGrandfatherMiddleNameField).toHaveValue('');
 
-    const maternalGrandfatherLastNameField = grandfather.getLastName();
+    const maternalGrandfatherLastNameField = grandfather.getFamilyMemberLastName();
     await expect(maternalGrandfatherLastNameField).toHaveValue(grandfather.lastName);
 
     const maternalGrandfatherIsAliveRadioButton = grandfather.getLivingStatusOption('Alive');
@@ -638,7 +638,7 @@ test.describe.serial('DSM Family Enrollment Handling', () => {
 
     await test.step('Create a copied family member a.k.a the brother', async () => {
       //Add a new family member
-      const rgpParticipantPage = new RgpParticipantPage(page);
+      const rgpParticipantPage = new ParticipantRgpPage(page);
       const familyMemberForm = rgpParticipantPage.addFamilyMemberDialog;
 
       //Fill family member form
@@ -677,19 +677,19 @@ test.describe.serial('DSM Family Enrollment Handling', () => {
       const brotherProcessNotesContent = await brother.getProcessNotes().currentValue();
       await expect(brotherProcessNotes.toLocator()).not.toBeEmpty();
 
-      const brotherFirstNameField = brother.getFirstName();
+      const brotherFirstNameField = brother.getFamilyMemberFirstName();
       await expect(brotherFirstNameField).toHaveValue(user.brother.firstName);
 
       const brotherMiddleNameField = brother.getMiddleName(); //Should have the same as proband, used for comparison later
 
-      const brotherLastNameField = brother.getLastName();
+      const brotherLastNameField = brother.getFamilyMemberLastName();
       await expect(brotherLastNameField).toHaveValue(user.brother.lastName);
 
       const brotherNameSuffix = brother.getNameSuffix();
-      const brotherPreferredLanguage = brother.getPreferredLanguage();
+      const brotherPreferredLanguage = brother.getFamilyMemberPreferredLanguage();
       const brotherSex = brother.getSex();
       const brotherPronouns = brother.getPronouns();
-      const brotherDateOfBirth = brother.getDateOfBirth();
+      const brotherDateOfBirth = brother.getFamilyMemberDateOfBirth();
       const brotherAgeToday = brother.getAgeToday();
 
       const brotherIsAliveRadioButton = brother.getLivingStatusOption('Alive');
@@ -734,7 +734,7 @@ test.describe.serial('DSM Family Enrollment Handling', () => {
       const probandNameSuffix = proband.getNameSuffix();
       expect(await brotherNameSuffix.innerText()).toBe(await probandNameSuffix.innerText());
 
-      const probandPreferredLanguage = proband.getPreferredLanguage();
+      const probandPreferredLanguage = proband.getFamilyMemberPreferredLanguage();
       await expect(brotherPreferredLanguage).toHaveText(await probandPreferredLanguage.innerText());
 
       const probandSex = proband.getSex();
@@ -743,7 +743,7 @@ test.describe.serial('DSM Family Enrollment Handling', () => {
       const probandPronouns = proband.getPronouns();
       await expect(brotherPronouns).toHaveText(await probandPronouns.innerText());
 
-      const probandDateOfBirth = proband.getDateOfBirth();
+      const probandDateOfBirth = proband.getFamilyMemberDateOfBirth();
       expect(await brotherDateOfBirth.innerText()).toBe(await probandDateOfBirth.innerText());
 
       const probandAgeToday = proband.getAgeToday();

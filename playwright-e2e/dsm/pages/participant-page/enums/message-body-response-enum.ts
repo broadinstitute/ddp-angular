@@ -1,4 +1,0 @@
-export enum MessageBodyResponseEnum {
-  RESULT_TYPE_SUCCESS = 'SUCCESS',
-  TASK_TYPE_UPDATE_PROFILE = 'UPDATE_PROFILE',
-}

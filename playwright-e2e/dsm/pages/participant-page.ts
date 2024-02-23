@@ -3,12 +3,12 @@ import {waitForNoSpinner, waitForResponse} from 'utils/test-utils';
 import Tabs from 'dsm/component/tabs/tabs';
 import Input from 'dss/component/input';
 import Modal from 'dss/component/modal';
-import {MessageBodyResponseEnum} from './enums/message-body-response-enum';
-import { Label, Tab } from 'dsm/enums';
+import { Label, Tab, ResponseBody } from 'dsm/enums';
+import TextArea from 'dss/component/textarea';
 
 export default class ParticipantPage {
   private readonly PAGE_TITLE: string = 'Participant Page';
-  private readonly UPDATE_PROFILE_SUCCESS_MESSAGES = [MessageBodyResponseEnum.TASK_TYPE_UPDATE_PROFILE, MessageBodyResponseEnum.RESULT_TYPE_SUCCESS];
+  private readonly UPDATE_PROFILE_SUCCESS_MESSAGES = [ResponseBody.TASK_TYPE_UPDATE_PROFILE, ResponseBody.RESULT_TYPE_SUCCESS];
   private readonly tabs = new Tabs(this.page);
 
   constructor(protected readonly page: Page) {}
@@ -26,16 +26,27 @@ export default class ParticipantPage {
   /* Actions */
   public async fillParticipantNotes(value?: string): Promise<void> {
     const textArea = this.participantNotes;
-    const respPromise = waitForResponse(this.page, {uri: '/ui/patch'});
-    if (value) {
-      await textArea.fill(value);
-    } else {
-      await textArea.clear();
-    }
-    await textArea.blur();
-    await respPromise;
+    await this.inputHelper(textArea, value);
   }
+
   /* --- */
+
+  public async inputHelper(input: TextArea | Input, value?: string): Promise<void> {
+    const currValue = await input.currentValue();
+    if (currValue?.length > 0) {
+      // Clear value, not checking equals to value.
+      const resPromise = waitForResponse(this.page, {uri: '/patch'});
+      await input.clear();
+      await input.blur();
+      await resPromise;
+      await this.page.waitForTimeout(200);
+    }
+    if (value) {
+      const resPromise = waitForResponse(this.page, {uri: '/patch'});
+      await input.fillSimple(value);
+      await resPromise;
+    }
+  }
 
   /* Participant Information */
   public async getStatus(): Promise<string> {
@@ -162,8 +173,8 @@ export default class ParticipantPage {
   /* ---- */
 
   /* Locators */
-  public get participantNotes(): Locator {
-    return this.page.locator('//table[.//td[contains(normalize-space(),"Participant Notes")]]//td/textarea');
+  public get participantNotes(): TextArea {
+    return new TextArea(this.page, {label: 'Participant Notes'});
   }
 
   private get oncHistoryCreated(): Locator {
@@ -198,7 +209,7 @@ export default class ParticipantPage {
   }
 
   public async assertNotesToBe(value: string): Promise<void> {
-    expect(await this.participantNotes.inputValue(),
+    expect(await this.participantNotes.currentValue(),
       "Participant page - participant's value doesn't match the provided one")
       .toBe(value);
   }

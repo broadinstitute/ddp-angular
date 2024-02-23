@@ -10,7 +10,7 @@ import { KitsColumnsEnum } from 'dsm/pages/kits-info/enums/kitsColumns-enum';
 import KitsSentPage from 'dsm/pages/kits-sent-page';
 import KitsWithoutLabelPage from 'dsm/pages/kits-without-label-page';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
-import ParticipantPage from 'dsm/pages/participant-page/participant-page';
+import ParticipantPage from 'dsm/pages/participant-page';
 import KitsWithErrorPage from 'dsm/pages/kits-with-error-page';
 import KitsFinalScanPage from 'dsm/pages/kits-final-scan-page';
 import { WelcomePage } from 'dsm/pages/welcome-page';

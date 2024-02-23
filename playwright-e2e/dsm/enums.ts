@@ -1,75 +1,3 @@
-export type NAVS = keyof typeof NAV;
-
-export const NAV = {
-  DROPDOWN: {
-    SELECTED_STUDY: 'Selected study',
-    SAMPLES: 'Samples',
-    STUDY: 'Study',
-    MISCELLANEOUS: 'Miscellaneous',
-  },
-  SELECTED_STUDY: {
-    AT: 'AT',
-    BRUGADA: 'Brugada',
-    BASIL: 'basil',
-    ANGIO: 'Angio',
-    BRAIN: 'Brain',
-    DARWIN: `Darwin's Ark`,
-    OSTEO: 'Osteo',
-    MBC: 'MBC',
-    PROSTATE: 'Prostate',
-    ESC: 'ESC',
-    PANCAN: 'PanCan',
-    PRION: 'Prion',
-    VOICES: 'Voices',
-    LMS: 'Leiomyosarcoma',
-    OSTEO2: 'OS PE-CGS',
-    RGP: 'RGP',
-    RAREX: 'RareX',
-    TEST_BOSTON: 'Test Boston',
-  },
-  SAMPLES: {
-    UNSENT_KITS_OVERVIEW: 'Unsent Kits Overview',
-    REPORT: 'Report',
-    SUMMARY: 'Summary',
-    KITS_WITHOUT_LABELS: 'Kits without Labels',
-    QUEUE: 'Queue',
-    ERROR: 'Error',
-    INITIAL_SCAN: 'Initial Scan',
-    TRACKING_SCAN: 'Tracking Scan',
-    FINAL_SCAN: 'Final Scan',
-    RGP_FINAL_SCAN: 'RGP Final Scan',
-    RECEIVING_SCAN: 'Receiving Scan',
-    SENT: 'Sent',
-    RECEIVED: 'Received',
-    SENT_RECEIVED_OVERVIEW: 'Sent/Received Overview',
-    DEACTIVATED: 'Deactivated',
-    SEARCH: 'Search',
-    KIT_UPLOAD: 'Kit Upload',
-    STOOL_SAMPLE_UPLOAD: 'Stool Sample Upload',
-    LABEL_SETTINGS: 'Label Settings',
-    CLINICAL_ORDERS: 'Clinical Orders',
-  },
-  STUDY: {
-    DASHBOARD: 'Dashboard',
-    STATISTICS_DASHBOARD: 'Statistics Dashboard',
-    PARTICIPANT_LIST: 'Participant List',
-    TISSUE_LIST: 'Tissue List',
-    FIELD_SETTINGS: 'Field Settings',
-    MR_ABSTRACTION_SETTINGS: 'MR Abstraction Settings',
-  },
-  MISCELLANEOUS: {
-    DOWNLOAD_PDF: 'Download PDF',
-    DRUG_LIST: 'Drug List',
-    FOLLOW_UP_SURVEY: 'Follow-Up Survey',
-    MAILING_LIST: 'Mailing List',
-    NDI_DOWNLOAD: 'NDI Download',
-    ONC_HISTORY_UPLOAD: 'Onc History Upload',
-    PARTICIPANT_WITHDRAWAL: 'Participant Withdrawal',
-    PARTICIPANT_EVENT: 'Participant Event',
-    USERS_AND_PERMISSIONS: 'Users And Permissions',
-  }
-}
-
 export enum Filter {
   NOT_EMPTY = 'Not Empty',
   EXACT_MATCH = 'Exact Match',
@@ -210,4 +138,40 @@ export enum DownloadFileFormat {
 export enum DownloadTextFormat {
   HUMAN_READABLE = 'Human-readable',
   ANALYSIS_FRIENDLY = 'Analysis-friendly'
+}
+
+export enum SampleStatus {
+  SHIPPED = 'shipped',
+  DEACTIVATED = 'deactivated',
+  WAITING_ON_GP = 'queue',
+  GP_MANUAL_LABEL = 'error',
+  RECEIVED = 'received'
+}
+
+export enum FamilyMember {
+  PROBAND = 'Self',
+  SISTER = 'Sister',
+  BROTHER = 'Brother',
+  MOTHER = 'Mother',
+  FATHER = 'Father',
+  PATERNAL_GRANDMOTHER = 'Paternal Grandmother',
+  PATERNAL_GRANDFATHER = 'Paternal Grandfather',
+  MATERNAL_GRANDMOTHER = 'Maternal Grandmother',
+  MATERNAL_GRANDFATHER = 'Maternal Grandfather',
+  DAUGHTER = 'Daughter',
+  SON = 'Son',
+  OTHER = 'Other',
+  HALF_SIBLING_MATERNAL = 'Half Sibling Maternal',
+  HALF_SIBLING_PATERNAL = 'Half Sibling Paternal',
+  MATERNAL_AUNT = 'Maternal Aunt',
+  MATERNAL_FIRST_COUSIN = 'Maternal First Cousin',
+  MATERNAL_UNCLE = 'Maternal Uncle',
+  PATERNAL_AUNT = 'Paternal Aunt',
+  PATERNAL_FIRST_COUSIN = 'Paternal First Cousin',
+  PATERNAL_UNCLE = 'Paternal Uncle',
+}
+
+export enum ResponseBody {
+  RESULT_TYPE_SUCCESS = 'SUCCESS',
+  TASK_TYPE_UPDATE_PROFILE = 'UPDATE_PROFILE',
 }

@@ -5,8 +5,9 @@ import {Navigation, Samples, StudyName} from 'dsm/component/navigation';
 import {KitsColumnsEnum} from 'dsm/pages/kits-info/enums/kitsColumns-enum';
 import {studyShortName} from 'utils/test-utils';
 import KitQueuePage from 'dsm/pages/kits-queue-page';
+import { Kit } from 'dsm/enums';
 
-test.describe.serial('Sample Kit Queue UI', () => {
+test.describe('Sample Kit Queue UI', () => {
   const studies = [
     StudyName.ANGIO, StudyName.BRAIN, StudyName.OSTEO, StudyName.OSTEO2, StudyName.PANCAN,
     StudyName.RGP, StudyName.LMS, StudyName.ESC, StudyName.PROSTATE
@@ -40,7 +41,11 @@ test.describe.serial('Sample Kit Queue UI', () => {
           for (let i = 0; i < rows; i++) {
             // Kits in different types are not mixed. Kits should be uploaded for the selected type.
             const typeValue = (await kitsTable.getRowText(i, KitsColumnsEnum.TYPE)).trim();
-            expect.soft(typeValue).toStrictEqual(kitType);
+            if (kitType === Kit.BLOOD_AND_RNA) {
+              expect.soft(typeValue).toStrictEqual('BLOOD and RNA');
+            } else {
+              expect.soft(typeValue).toStrictEqual(kitType);
+            }
             const shortId = (await kitsTable.getRowText(i, KitsColumnsEnum.SHORT_ID)).trim();
             expect(shortId?.length).toBeTruthy();
             const shippingId = (await kitsTable.getRowText(i, KitsColumnsEnum.SHIPPING_ID)).trim();

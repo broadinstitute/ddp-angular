@@ -3,7 +3,7 @@ import { test } from 'fixtures/dsm-fixture';
 import { Navigation, Samples, Study, StudyName } from 'dsm/component/navigation';
 import GenomeStudyTab from 'dsm/component/tabs/genome-study-tab';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
-import ParticipantPage from 'dsm/pages/participant-page/participant-page';
+import ParticipantPage from 'dsm/pages/participant-page';
 import AtcpSearchPage, { SearchByField } from 'dsm/pages/kits-search-page';
 import { WelcomePage } from 'dsm/pages/welcome-page';
 import Radiobutton from 'dss/component/radiobutton';

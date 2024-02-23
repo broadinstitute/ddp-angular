@@ -11,7 +11,7 @@ import TellUsYourStoryPage, { WHO } from 'dss/pages/rgp/enrollment/tell-us-your-
 import HomePage from 'dss/pages/rgp/home-page';
 import HowItWorksPage from 'dss/pages/rgp/how-it-works-page';
 import { assertTableHeaders } from 'utils/assertion-helper';
-import { getDate, getMailingListDownloadedFileDate, mailingListCreatedDate } from 'utils/date-utils';
+import { dateFormat, getMailingListDownloadedFileDate, mailingListCreatedDate } from 'utils/date-utils';
 import { generateEmailAlias } from 'utils/faker-utils';
 import { MailListCSV, readMailListCSVFile } from 'utils/file-utils';
 import { logInfo } from 'utils/log-utils';
@@ -84,7 +84,7 @@ test.describe.serial('When an interested participant does NOT meet participation
 
     // Verify CSV file: Assert every user from API response body can also be found inside downloaded csv file
     lodash.forEach(respJson, item => {
-      const dateInJson = getDate(new Date(parseInt(item.dateCreated) * 1000)); // Transform to dd/mm/yyyy
+      const dateInJson = dateFormat().format(new Date(parseInt(item.dateCreated) * 1000)); // Transform to dd/mm/yyyy
       const emailInJson = item.email;
       logInfo(`JSON: ${emailInJson}: ${item.dateCreated}`);
       const finding = lodash.filter(rows, row => {

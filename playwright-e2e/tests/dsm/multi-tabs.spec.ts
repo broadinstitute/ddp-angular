@@ -5,10 +5,10 @@ import { Navigation, Study, StudyName } from 'dsm/component/navigation';
 import { OncHistoryInputColumnsEnum } from 'dsm/component/tabs/enums/onc-history-input-columns-enum';
 import OncHistoryTab from 'dsm/component/tabs/onc-history-tab';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
-import ParticipantPage from 'dsm/pages/participant-page/participant-page';
+import ParticipantPage from 'dsm/pages/participant-page';
 import { WelcomePage } from 'dsm/pages/welcome-page';
 import { SortOrder } from 'dss/component/table';
-import { getDate } from 'utils/date-utils';
+import { dateFormat, getToday } from 'utils/date-utils';
 import { logInfo } from 'utils/log-utils';
 import { studyShortName } from 'utils/test-utils';
 
@@ -105,15 +105,17 @@ async function addOncHistory(page: Page, shortID: string, participantListPage: P
     const oncHistoryTable = oncHistoryTab.table;
     const rowIndex = await oncHistoryTable.getRowsCount() - 1;
     expect(rowIndex).toBeGreaterThanOrEqual(0);
+
     const cell = await oncHistoryTable.checkColumnAndCellValidity(OncHistoryInputColumnsEnum.DATE_OF_PX, rowIndex);
+    const today = getToday();
     const newDate = await oncHistoryTable.fillDate(cell, {
       date: {
-        yyyy: new Date().getFullYear(),
-        month: new Date().getMonth(),
-        dayOfMonth: new Date().getDate()
+        yyyy: today.getFullYear(),
+        month: today.getMonth(),
+        dayOfMonth: today.getDate(),
       }
     });
-    expect(newDate).toStrictEqual(getDate());
+    expect(newDate).toStrictEqual(dateFormat().format(today)); // check date format
 
     await oncHistoryTable.deleteRowAt(rowIndex); // clean up
   });
