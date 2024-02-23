@@ -3,8 +3,7 @@ import { test } from 'fixtures/dsm-fixture';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
 import { logInfo } from 'utils/log-utils';
 import { faker } from '@faker-js/faker';
-import { MainInfoEnum } from 'dsm/pages/participant-page/enums/main-info-enum';
-import { Filter, Column } from 'dsm/enums';
+import { Filter, Column, Label } from 'dsm/enums';
 import { StudyName } from 'dsm/component/navigation';
 
 test.describe.serial('Editing Participant Information', () => {
@@ -63,8 +62,8 @@ test.describe.serial('Editing Participant Information', () => {
       await test.step('Change participant First Name and Last Name', async () => {
         newFirstName = faker.person.firstName();
         newLastName = faker.person.lastName();
-        await participantPage.updateInput(MainInfoEnum.FIRST_NAME, newFirstName);
-        await participantPage.updateInput(MainInfoEnum.LAST_NAME, newLastName);
+        await participantPage.updateInput(Label.FIRST_NAME, newFirstName);
+        await participantPage.updateInput(Label.LAST_NAME, newLastName);
       });
 
       await test.step('Verify changed First Name and Last Name', async () => {

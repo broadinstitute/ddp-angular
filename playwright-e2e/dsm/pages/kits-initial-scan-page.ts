@@ -4,7 +4,7 @@ import {waitForResponse} from 'utils/test-utils';
 
 type inputField = 'Kit Label' | 'Short ID';
 
-export default class InitialScanPage {
+export default class KitsInitialScanPage {
   private readonly PAGE_TITLE = 'Initial Scan';
 
   constructor(private readonly page: Page) {}

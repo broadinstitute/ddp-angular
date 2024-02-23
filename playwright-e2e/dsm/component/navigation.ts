@@ -2,20 +2,20 @@ import {APIRequestContext, Locator, Page, expect} from '@playwright/test';
 import Dropdown from 'dsm/component/dropdown';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
 import {waitForNoSpinner, waitForResponse} from 'utils/test-utils';
-import KitsWithoutLabelPage from 'dsm/pages/kitsInfo-pages/kitsWithoutLabel-page';
-import InitialScanPage from 'dsm/pages/scanner-pages/initialScan-page';
-import FinalScanPage from 'dsm/pages/scanner-pages/finalScan-page';
-import KitUploadPage from 'dsm/pages/kitUpload-page/kitUpload-page';
-import KitsSentPage from 'dsm/pages/kitsInfo-pages/kitsSentPage';
-import KitsReceivedPage from 'dsm/pages/kitsInfo-pages/kitsReceived-page/kitsReceivedPage';
-import TrackingScanPage from 'dsm/pages/scanner-pages/trackingScan-page';
-import RgpFinalScanPage from 'dsm/pages/scanner-pages/rgpFinalScan-page';
-import ErrorPage from 'dsm/pages/samples/error-page';
-import UserPermissionPage from 'dsm/pages/miscellaneous-pages/user-and-permissions-page';
-import KitsQueuePage from 'dsm/pages/kitsInfo-pages/kit-queue-page';
+import KitsWithoutLabelPage from 'dsm/pages/kits-without-label-page';
+import KitsInitialScanPage from 'dsm/pages/kits-initial-scan-page';
+import KitsFinalScanPage from 'dsm/pages/kits-final-scan-page';
+import KitUploadPage from 'dsm/pages/kit-upload-page';
+import KitsSentPage from 'dsm/pages/kits-sent-page';
+import KitsReceivedPage from 'dsm/pages/kits-received-page';
+import KitsTrackingScanPage from 'dsm/pages/kits-tracking-scan-page';
+import RgpFinalScanPage from 'dsm/pages/kits-final-scan-rgp-page';
+import KitsWithErrorPage from 'dsm/pages/kits-with-error-page';
+import UserPermissionPage from 'dsm/pages/user-and-permissions-page';
+import KitsQueuePage from 'dsm/pages/kits-queue-page';
 import {logInfo} from 'utils/log-utils';
-import SearchPage from 'dsm/pages/samples/search-page';
-import ClinicalOrdersPage from 'dsm/pages/samples/clinical-orders-page';
+import KitsSearchPage from 'dsm/pages/kits-search-page';
+import SamplesClinicalOrdersPage from 'dsm/pages/samples-clinical-orders-page';
 import FollowUpSurveyPage from 'dsm/pages/follow-up-survey-page';
 import ParticipantWithdrawalPage from 'dsm/pages/participant-withdrawal-page';
 import MailingListPage from 'dsm/pages/mailing-list-page';
@@ -107,16 +107,16 @@ export class Navigation {
     samples: new Map<string, object>([
       [Samples.KITS_WITHOUT_LABELS, new KitsWithoutLabelPage(this.page)],
       [Samples.QUEUE, new KitsQueuePage(this.page)],
-      [Samples.INITIAL_SCAN, new InitialScanPage(this.page)],
-      [Samples.TRACKING_SCAN, new TrackingScanPage(this.page)],
-      [Samples.FINAL_SCAN, new FinalScanPage(this.page)],
+      [Samples.INITIAL_SCAN, new KitsInitialScanPage(this.page)],
+      [Samples.TRACKING_SCAN, new KitsTrackingScanPage(this.page)],
+      [Samples.FINAL_SCAN, new KitsFinalScanPage(this.page)],
       [Samples.RGP_FINAL_SCAN, new RgpFinalScanPage(this.page)],
       [Samples.KIT_UPLOAD, new KitUploadPage(this.page)],
       [Samples.SENT, new KitsSentPage(this.page)],
       [Samples.RECEIVED, new KitsReceivedPage(this.page, this.request)],
-      [Samples.ERROR, new ErrorPage(this.page)],
-      [Samples.SEARCH, new SearchPage(this.page)],
-      [Samples.CLINICAL_ORDERS, new ClinicalOrdersPage(this.page)],
+      [Samples.ERROR, new KitsWithErrorPage(this.page)],
+      [Samples.SEARCH, new KitsSearchPage(this.page)],
+      [Samples.CLINICAL_ORDERS, new SamplesClinicalOrdersPage(this.page)],
     ]),
     miscellaneous: new Map<string, object>([
       [Miscellaneous.USERS_AND_PERMISSIONS, new UserPermissionPage(this.page)],

@@ -1,9 +1,8 @@
 import { test, expect, Page, APIRequestContext } from '@playwright/test';
 import { login } from 'authentication/auth-dsm';
-import { Column } from 'dsm/enums';
+import { Column, Tab } from 'dsm/enums';
 import { Navigation, Study, StudyName } from 'dsm/component/navigation';
 import { OncHistoryInputColumnsEnum } from 'dsm/component/tabs/enums/onc-history-input-columns-enum';
-import { TabEnum } from 'dsm/component/tabs/enums/tab-enum';
 import OncHistoryTab from 'dsm/component/tabs/onc-history-tab';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
 import ParticipantPage from 'dsm/pages/participant-page/participant-page';
@@ -27,7 +26,7 @@ test('Multiple browser tabs @dsm', async ({ browser, request }) => {
   const pancanParticipantListPage = await logIntoStudy(pancanPage, request, pancan);
   const pancanParticipantShortId = await pancanParticipantListPage.findParticipantWithTab({
     findPediatricParticipant: false,
-    tab: TabEnum.ONC_HISTORY
+    tab: Tab.ONC_HISTORY
   });
   logInfo(`PanCan participant Short ID: ${pancanParticipantShortId}`);
 
@@ -36,7 +35,7 @@ test('Multiple browser tabs @dsm', async ({ browser, request }) => {
   const angioParticipantListPage = await logIntoStudy(angioPage, request, angio);
   const angioParticipantShortId = await angioParticipantListPage.findParticipantWithTab({
     findPediatricParticipant: false,
-    tab: TabEnum.ONC_HISTORY
+    tab: Tab.ONC_HISTORY
   });
   logInfo(`angio participant Short ID: ${angioParticipantShortId}`);
 
@@ -102,7 +101,7 @@ async function addOncHistory(page: Page, shortID: string, participantListPage: P
 
     const participantListTable = participantListPage.participantListTable;
     const participantPage: ParticipantPage = await participantListTable.openParticipantPageAt(0);
-    const oncHistoryTab = await participantPage.clickTab<OncHistoryTab>(TabEnum.ONC_HISTORY);
+    const oncHistoryTab = await participantPage.clickTab<OncHistoryTab>(Tab.ONC_HISTORY);
     const oncHistoryTable = oncHistoryTab.table;
     const rowIndex = await oncHistoryTable.getRowsCount() - 1;
     expect(rowIndex).toBeGreaterThanOrEqual(0);

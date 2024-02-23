@@ -3,7 +3,7 @@ import {waitForNoSpinner, waitForResponse} from 'utils/test-utils';
 
 type inputField = 'Tracking Label' | 'Kit Label';
 
-export default class TrackingScanPage {
+export default class KitsTrackingScanPage {
   private readonly PAGE_TITLE = 'Tracking Scan';
 
   constructor(private readonly page: Page) {}

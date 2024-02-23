@@ -1,7 +1,7 @@
 import { expect, Page } from '@playwright/test';
 import DatePicker from 'dsm/component/date-picker';
 
-export default class ReportPage {
+export default class KitsReportPage {
   constructor(private readonly page: Page) {}
 
   async waitForReady(): Promise<void> {

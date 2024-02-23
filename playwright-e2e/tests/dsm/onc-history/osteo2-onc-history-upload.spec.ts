@@ -1,9 +1,8 @@
 import { expect } from '@playwright/test';
 import { test } from 'fixtures/dsm-fixture';
-import { Column } from 'dsm/enums';
+import { Column, Tab } from 'dsm/enums';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
 import OncHistoryTab from 'dsm/component/tabs/onc-history-tab';
-import { TabEnum } from 'dsm/component/tabs/enums/tab-enum';
 import { OsteoOncHistoryUpload } from 'dsm/component/tabs/interfaces/onc-history-inputs-types';
 import { getDate } from 'utils/date-utils';
 import { Miscellaneous, Navigation, Study, StudyName } from 'dsm/component/navigation';
@@ -76,7 +75,7 @@ test.describe('Upload Onc History', () => {
       const playwrightTestUserPrefix = basicStudyInfo.playwrightPrefixAdult as string;
       shortId = await participantListPage.findParticipantWithTab({
         findPediatricParticipant: false,
-        tab: TabEnum.ONC_HISTORY,
+        tab: Tab.ONC_HISTORY,
         uriString: 'filterList',
         prefix: playwrightTestUserPrefix
       });
@@ -109,7 +108,7 @@ test.describe('Upload Onc History', () => {
 
       await participantListPage.filterListByShortId(shortId);
       const participantPage = await participantListTable.openParticipantPageAt(0);
-      const oncHistoryTab = await participantPage.clickTab<OncHistoryTab>(TabEnum.ONC_HISTORY);
+      const oncHistoryTab = await participantPage.clickTab<OncHistoryTab>(Tab.ONC_HISTORY);
       const oncHistoryTable: OncHistoryTable = oncHistoryTab.table;
 
       const numRows = await oncHistoryTable.getRowsCount();

@@ -2,24 +2,24 @@ import { expect } from '@playwright/test';
 import { test } from 'fixtures/dsm-fixture';
 import { Navigation, Samples, Study, StudyName } from 'dsm/component/navigation';
 import Select from 'dss/component/select';
-import { KitUploadInfo } from 'dsm/pages/kitUpload-page/models/kitUpload-model';
+import { KitUploadInfo } from 'dsm/pages/kit-upload/models/kitUpload-model';
 import { Kit, Column } from 'dsm/enums';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
 import * as user from 'data/fake-user.json';
 import crypto from 'crypto';
-import KitUploadPage from 'dsm/pages/kitUpload-page/kitUpload-page';
+import KitUploadPage from 'dsm/pages/kit-upload-page';
 import FamilyMemberTab from 'dsm/pages/participant-page/rgp/family-member-tab';
 import { FamilyMember } from 'dsm/component/tabs/enums/familyMember-enum';
-import KitsWithoutLabelPage from 'dsm/pages/kitsInfo-pages/kitsWithoutLabel-page';
-import {KitsColumnsEnum} from 'dsm/pages/kitsInfo-pages/enums/kitsColumns-enum';
-import KitsSentPage from 'dsm/pages/kitsInfo-pages/kitsSentPage';
-import KitsReceivedPage from 'dsm/pages/kitsInfo-pages/kitsReceived-page/kitsReceivedPage';
-import TrackingScanPage from 'dsm/pages/scanner-pages/trackingScan-page';
-import RgpFinalScanPage from 'dsm/pages/scanner-pages/rgpFinalScan-page'
+import KitsWithoutLabelPage from 'dsm/pages/kits-without-label-page';
+import {KitsColumnsEnum} from 'dsm/pages/kits-info/enums/kitsColumns-enum';
+import KitsSentPage from 'dsm/pages/kits-sent-page';
+import KitsReceivedPage from 'dsm/pages/kits-received-page';
+import KitsTrackingScanPage from 'dsm/pages/kits-tracking-scan-page';
+import RgpFinalScanPage from 'dsm/pages/kits-final-scan-rgp-page'
 import { simplifyShortID } from 'utils/faker-utils';
 import { ParticipantListTable } from 'dsm/component/tables/participant-list-table';
-import KitsQueuePage from 'dsm/pages/kitsInfo-pages/kit-queue-page';
-import ErrorPage from 'dsm/pages/samples/error-page';
+import KitsQueuePage from 'dsm/pages/kits-queue-page';
+import KitsWithErrorPage from 'dsm/pages/kits-with-error-page';
 
 test.describe('Blood & RNA Kit Upload', () => {
   test('Verify that a blood & rna kit can be uploaded @dsm @rgp @functional @upload', async ({ page, request}, testInfo) => {
@@ -133,7 +133,7 @@ test.describe('Blood & RNA Kit Upload', () => {
       amountOfKits = await kitTable.getRowsCount();
       if (amountOfKits === 0) {
         //If the kit is not found in Kit Queue -> go to Kit Error page and search for it there
-        kitErrorPage = await navigation.selectFromSamples<ErrorPage>(Samples.ERROR);
+        kitErrorPage = await navigation.selectFromSamples<KitsWithErrorPage>(Samples.ERROR);
         await kitErrorPage.waitForReady();
         await kitErrorPage.selectKitType(Kit.BLOOD_AND_RNA);
         kitTable = kitErrorPage.getKitsTable;
@@ -148,7 +148,7 @@ test.describe('Blood & RNA Kit Upload', () => {
         expect(kitQueueShippingID).toBe(shippingID);
       }
     } else if (!kitQueuePageHasExistingKitRequests) {
-      kitErrorPage = await navigation.selectFromSamples<ErrorPage>(Samples.ERROR);
+      kitErrorPage = await navigation.selectFromSamples<KitsWithErrorPage>(Samples.ERROR);
       await kitErrorPage.waitForReady();
       await kitErrorPage.selectKitType(Kit.BLOOD_AND_RNA);
       kitTable = kitErrorPage.getKitsTable;
@@ -162,7 +162,7 @@ test.describe('Blood & RNA Kit Upload', () => {
     //Tracking scan
     const labelNumber = crypto.randomUUID().toString().substring(0, 10);
     const kitLabel = `RGP_${labelNumber}`;
-    const trackingScanPage = await navigation.selectFromSamples<TrackingScanPage>(Samples.TRACKING_SCAN);
+    const trackingScanPage = await navigation.selectFromSamples<KitsTrackingScanPage>(Samples.TRACKING_SCAN);
     await trackingScanPage.waitForReady();
     const trackingLabel = `tracking-${crypto.randomUUID().toString().substring(0, 10)}`;
     await trackingScanPage.fillScanPairs([trackingLabel, kitLabel]);

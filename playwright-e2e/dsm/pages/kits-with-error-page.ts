@@ -1,6 +1,6 @@
 import { Page } from '@playwright/test';
 import KitsPageBase from 'dsm/pages/kits-page-base';
-import { KitsColumnsEnum } from 'dsm/pages/kitsInfo-pages/enums/kitsColumns-enum';
+import { KitsColumnsEnum } from 'dsm/pages/kits-info/enums/kitsColumns-enum';
 
 export enum SearchByField {
   SHORT_ID = 'Short ID',
@@ -8,7 +8,7 @@ export enum SearchByField {
   MANUFACTURE_BARCODE = 'Manufacturer Barcode'
 }
 
-export default class ErrorPage extends KitsPageBase {
+export default class KitsWithErrorPage extends KitsPageBase {
   protected PAGE_TITLE = 'Kits with Error';
   TABLE_HEADERS = [
     KitsColumnsEnum.PRINT_KIT,

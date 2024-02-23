@@ -5,22 +5,20 @@ import {Navigation, Samples, Study, StudyName} from 'dsm/component/navigation';
 import {login} from 'authentication/auth-dsm';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
 import ParticipantPage from 'dsm/pages/participant-page/participant-page';
-import {KitUploadInfo} from 'dsm/pages/kitUpload-page/models/kitUpload-model';
+import {KitUploadInfo} from 'dsm/pages/kit-upload/models/kitUpload-model';
 import ContactInformationTab from 'dsm/component/tabs/contact-information-tab';
-import {TabEnum} from 'dsm/component/tabs/enums/tab-enum';
-import {Kit} from 'dsm/enums';
-import KitUploadPage from 'dsm/pages/kitUpload-page/kitUpload-page';
-import InitialScanPage from 'dsm/pages/scanner-pages/initialScan-page';
-import FinalScanPage from 'dsm/pages/scanner-pages/finalScan-page';
+import {Kit, Label, Tab} from 'dsm/enums';
+import KitUploadPage from 'dsm/pages/kit-upload-page';
+import KitsInitialScanPage from 'dsm/pages/kits-initial-scan-page';
+import KitsFinalScanPage from 'dsm/pages/kits-final-scan-page';
 import crypto from 'crypto';
 import SampleInformationTab from 'dsm/component/tabs/sample-information-tab';
-import {SampleInfoEnum} from 'dsm/component/tabs/enums/sampleInfo-enum';
 import {SampleStatusEnum} from 'dsm/component/tabs/enums/sampleStatus-enum';
-import KitsWithoutLabelPage from 'dsm/pages/kitsInfo-pages/kitsWithoutLabel-page';
-import {KitsColumnsEnum} from 'dsm/pages/kitsInfo-pages/enums/kitsColumns-enum';
-import KitsSentPage from 'dsm/pages/kitsInfo-pages/kitsSentPage';
-import KitsReceivedPage from 'dsm/pages/kitsInfo-pages/kitsReceived-page/kitsReceivedPage';
-import TrackingScanPage from 'dsm/pages/scanner-pages/trackingScan-page';
+import KitsWithoutLabelPage from 'dsm/pages/kits-without-label-page';
+import {KitsColumnsEnum} from 'dsm/pages/kits-info/enums/kitsColumns-enum';
+import KitsSentPage from 'dsm/pages/kits-sent-page';
+import KitsReceivedPage from 'dsm/pages/kits-received-page';
+import KitsTrackingScanPage from 'dsm/pages/kits-tracking-scan-page';
 import {getDate} from 'utils/date-utils';
 import { logInfo } from 'utils/log-utils';
 
@@ -29,7 +27,7 @@ test.describe.serial('Blood Kits upload flow', () => {
   let welcomePage: WelcomePage;
   let homePage: HomePage;
   let navigation: Navigation;
-  let finalScanPage: FinalScanPage;
+  let finalScanPage: KitsFinalScanPage;
 
   let shortID: string;
   let kitUploadInfo: KitUploadInfo;
@@ -70,7 +68,7 @@ test.describe.serial('Blood Kits upload flow', () => {
       shortID = await participantPage.getShortId();
       logInfo(`Participant Short ID: ${shortID}`);
 
-      const isContactInformationTabVisible = await participantPage.isTabVisible(TabEnum.CONTACT_INFORMATION);
+      const isContactInformationTabVisible = await participantPage.isTabVisible(Tab.CONTACT_INFORMATION);
       kitUploadInfo = new KitUploadInfo(
         shortID,
         await participantPage.getFirstName(),
@@ -79,7 +77,7 @@ test.describe.serial('Blood Kits upload flow', () => {
 
       // collects data from the contact information tab if the tab is available
       if (isContactInformationTabVisible) {
-        const contactInformationTab = await participantPage.clickTab<ContactInformationTab>(TabEnum.CONTACT_INFORMATION);
+        const contactInformationTab = await participantPage.clickTab<ContactInformationTab>(Tab.CONTACT_INFORMATION);
         kitUploadInfo.address.street1 = (await contactInformationTab.getStreet1()) || kitUploadInfo.address.street1;
         kitUploadInfo.address.city = (await contactInformationTab.getCity()) || kitUploadInfo.address.city;
         kitUploadInfo.address.postalCode = (await contactInformationTab.getZip()) || kitUploadInfo.address.postalCode;
@@ -105,7 +103,7 @@ test.describe.serial('Blood Kits upload flow', () => {
       await kitUploadPage.uploadFile(kitType, [kitUploadInfo], study, testResultDir);
 
       // initial scan
-      const initialScanPage = await navigation.selectFromSamples<InitialScanPage>(Samples.INITIAL_SCAN);
+      const initialScanPage = await navigation.selectFromSamples<KitsInitialScanPage>(Samples.INITIAL_SCAN);
       await initialScanPage.assertPageTitle();
       kitLabel = `PECGS-${crypto.randomUUID().toString().substring(0, 10)}`;
       await initialScanPage.fillScanPairs([kitLabel, shortID]);
@@ -121,7 +119,7 @@ test.describe.serial('Blood Kits upload flow', () => {
       shippingID = (await kitsWithoutLabelPage.getData(KitsColumnsEnum.SHIPPING_ID)).trim();
 
       // On Final Scan page, if Blood kit was not scanned on the Tracking Scan page before, DSM should show an error
-      finalScanPage = await navigation.selectFromSamples<FinalScanPage>(Samples.FINAL_SCAN);
+      finalScanPage = await navigation.selectFromSamples<KitsFinalScanPage>(Samples.FINAL_SCAN);
       await finalScanPage.assertPageTitle();
       await finalScanPage.fillScanPairs([kitLabel, shippingID]);
       await finalScanPage.save({ verifySuccess: false });
@@ -130,14 +128,14 @@ test.describe.serial('Blood Kits upload flow', () => {
         .toHaveText(`Error occurred sending this scan pair!  Kit with DSM Label ${kitLabel} does not have a Tracking Label`);
 
       // Tracking scan
-      const trackingScanPage = await navigation.selectFromSamples<TrackingScanPage>(Samples.TRACKING_SCAN);
+      const trackingScanPage = await navigation.selectFromSamples<KitsTrackingScanPage>(Samples.TRACKING_SCAN);
       await trackingScanPage.waitForReady();
       trackingLabel = `tracking-${crypto.randomUUID().toString().substring(0, 10)}`;
       await trackingScanPage.fillScanPairs([trackingLabel, kitLabel]);
       await trackingScanPage.save();
 
       // Final scan
-      finalScanPage = await navigation.selectFromSamples<FinalScanPage>(Samples.FINAL_SCAN);
+      finalScanPage = await navigation.selectFromSamples<KitsFinalScanPage>(Samples.FINAL_SCAN);
       await finalScanPage.assertPageTitle();
       await finalScanPage.fillScanPairs([kitLabel, shippingID]);
       await finalScanPage.save();
@@ -177,10 +175,10 @@ test.describe.serial('Blood Kits upload flow', () => {
       await searchPanel.search();
       await participantListTable.openParticipantPageAt(0);
       await participantPage.assertPageTitle();
-      const sampleInformationTab = await participantPage.clickTab<SampleInformationTab>(TabEnum.SAMPLE_INFORMATION);
+      const sampleInformationTab = await participantPage.clickTab<SampleInformationTab>(Tab.SAMPLE_INFORMATION);
       await sampleInformationTab.assertKitType(kitLabel, kitType);
-      await sampleInformationTab.assertValue(kitLabel, {info: SampleInfoEnum.STATUS, value: SampleStatusEnum.RECEIVED});
-      await sampleInformationTab.assertValue(kitLabel, {info: SampleInfoEnum.RECEIVED, value: receivedDate});
+      await sampleInformationTab.assertValue(kitLabel, {info: Label.STATUS, value: SampleStatusEnum.RECEIVED});
+      await sampleInformationTab.assertValue(kitLabel, {info: Label.RECEIVED, value: receivedDate});
 
       expect(test.info().errors).toHaveLength(0);
     })

@@ -1,17 +1,17 @@
 import { expect } from '@playwright/test';
 import { test } from 'fixtures/dsm-fixture';
 import { Navigation, Samples, Study, StudyName } from 'dsm/component/navigation';
-import { TabEnum } from 'dsm/component/tabs/enums/tab-enum';
 import GenomeStudyTab from 'dsm/component/tabs/genome-study-tab';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
 import ParticipantPage from 'dsm/pages/participant-page/participant-page';
-import AtcpSearchPage, { SearchByField } from 'dsm/pages/samples/search-page';
+import AtcpSearchPage, { SearchByField } from 'dsm/pages/kits-search-page';
 import { WelcomePage } from 'dsm/pages/welcome-page';
 import Radiobutton from 'dss/component/radiobutton';
 import { getUtcDate } from 'utils/date-utils';
 import { generateAlphaNumeric } from 'utils/faker-utils';
 import { studyShortName, waitForNoSpinner, waitForResponse } from 'utils/test-utils';
 import { logInfo } from 'utils/log-utils';
+import { Tab } from 'dsm/enums';
 
 test.describe('Receive Genome Study Kit', () => {
   const studies = [StudyName.AT];
@@ -45,7 +45,7 @@ test.describe('Receive Genome Study Kit', () => {
 
       await test.step('Set new sample kit barcode', async () => {
         newBarcode = `${shortId}-${newBarcode}`;
-        const genomeStudyTab = await participantPage.clickTab<GenomeStudyTab>(TabEnum.GENOME_STUDY);
+        const genomeStudyTab = await participantPage.clickTab<GenomeStudyTab>(Tab.GENOME_STUDY);
         const value = await genomeStudyTab.getField('Sample kit barcode for genome study').locator('input').inputValue();
         expect(value).toBe(''); // Sample Kit Barcode input should be empty
 
@@ -87,7 +87,7 @@ test.describe('Receive Genome Study Kit', () => {
         await participantListPage.filterListByShortId(shortId);
         await participantListPage.participantListTable.openParticipantPageAt(0);
 
-        const genomeStudyTab = await participantPage.clickTab<GenomeStudyTab>(TabEnum.GENOME_STUDY);
+        const genomeStudyTab = await participantPage.clickTab<GenomeStudyTab>(Tab.GENOME_STUDY);
         let field = genomeStudyTab.getField('Status of genome study sample kit');
 
         // "Sample kit received from participant" is checked

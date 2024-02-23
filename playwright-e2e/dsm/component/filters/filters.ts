@@ -1,6 +1,6 @@
 import { Locator, Page } from '@playwright/test';
-import { CustomizeView } from 'dsm/component/filters/sections/customize-view';
-import { Search } from 'dsm/component/filters/sections/search/search';
+import { CustomizeView } from 'dsm/component/filters/customize-view';
+import { Search } from 'dsm/component/filters/search';
 
 export class Filters {
   private readonly CustomizeView: CustomizeView = new CustomizeView(this.page);

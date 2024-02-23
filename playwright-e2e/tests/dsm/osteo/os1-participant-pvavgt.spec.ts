@@ -1,12 +1,11 @@
 import { Page, expect } from '@playwright/test';
 import { test } from 'fixtures/dsm-fixture';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
-import { Filter, Column } from 'dsm/enums';
-import { TabEnum } from 'dsm/component/tabs/enums/tab-enum';
+import { Filter, Column, Tab } from 'dsm/enums';
 import MedicalRecordsTab from 'dsm/pages/medical-records/medical-records-tab';
 import OncHistoryTab from 'dsm/component/tabs/onc-history-tab';
 import CohortTag from 'dsm/component/cohort-tag';
-import SearchPage, { SearchByField } from 'dsm/pages/samples/search-page';
+import KitsSearchPage, { SearchByField } from 'dsm/pages/kits-search-page';
 import { Navigation, Samples, StudyName } from 'dsm/component/navigation';
 import { SortOrder } from 'dss/component/table';
 import { WelcomePage } from 'dsm/pages/welcome-page';
@@ -91,12 +90,12 @@ test.describe.serial('Osteo1 Participant', () => {
       await surveyTabLocator.locator('mat-expansion-panel-header').nth(2).click(); // collapse click
 
       // Compare Medical Records screenshot
-      const medicalRecordsTab = await participantPage.clickTab<MedicalRecordsTab>(TabEnum.MEDICAL_RECORD);
+      const medicalRecordsTab = await participantPage.clickTab<MedicalRecordsTab>(Tab.MEDICAL_RECORD);
       const medicalRecordTable = medicalRecordsTab.table;
       await expect(medicalRecordTable.tableLocator()).toHaveScreenshot('medical-records-view.png');
 
       // Compare Onc History screenshot
-      const oncHistoryTab = await participantPage.clickTab<OncHistoryTab>(TabEnum.ONC_HISTORY);
+      const oncHistoryTab = await participantPage.clickTab<OncHistoryTab>(Tab.ONC_HISTORY);
       const oncHistoryTable = oncHistoryTab.table;
       await expect(oncHistoryTable.tableLocator()).toHaveScreenshot('onc-history-view.png');
 
@@ -110,7 +109,7 @@ test.describe.serial('Osteo1 Participant', () => {
 
   test(`Should match expected data in Osteo1 Kits Search page`, async ({page, request}) => {
     await new WelcomePage(page).selectStudy(osteo1);
-    const kitsSearchPage = await new Navigation(page, request).selectFromSamples<SearchPage>(Samples.SEARCH);
+    const kitsSearchPage = await new Navigation(page, request).selectFromSamples<KitsSearchPage>(Samples.SEARCH);
     await kitsSearchPage.waitForReady();
 
     const table = await kitsSearchPage.searchByField(SearchByField.SHORT_ID, shortID);

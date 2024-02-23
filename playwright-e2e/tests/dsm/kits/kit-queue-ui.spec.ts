@@ -2,9 +2,9 @@ import {expect} from '@playwright/test';
 import {test} from 'fixtures/dsm-fixture';
 import {WelcomePage} from 'dsm/pages/welcome-page';
 import {Navigation, Samples, StudyName} from 'dsm/component/navigation';
-import {KitsColumnsEnum} from 'dsm/pages/kitsInfo-pages/enums/kitsColumns-enum';
+import {KitsColumnsEnum} from 'dsm/pages/kits-info/enums/kitsColumns-enum';
 import {studyShortName} from 'utils/test-utils';
-import KitQueuePage from 'dsm/pages/kitsInfo-pages/kit-queue-page';
+import KitQueuePage from 'dsm/pages/kits-queue-page';
 
 test.describe.serial('Sample Kit Queue UI', () => {
   const studies = [

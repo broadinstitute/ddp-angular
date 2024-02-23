@@ -1,13 +1,11 @@
 import { expect } from '@playwright/test';
-import { Filter } from 'dsm/enums';
+import { Filter, Tab, UserPermission } from 'dsm/enums';
 import { Miscellaneous, Navigation, Samples, Study, StudyName } from 'dsm/component/navigation';
-import { TabEnum } from 'dsm/component/tabs/enums/tab-enum';
 import SequencingOrderTab from 'dsm/component/tabs/sequencing-order-tab';
-import { UserPermission } from 'dsm/pages/miscellaneous-pages/enums/userPermission-enum';
-import UserPermissionPage from 'dsm/pages/miscellaneous-pages/user-and-permissions-page';
+import UserPermissionPage from 'dsm/pages/user-and-permissions-page';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
 import ParticipantPage from 'dsm/pages/participant-page/participant-page';
-import ClinicalOrdersPage from 'dsm/pages/samples/clinical-orders-page';
+import SamplesClinicalOrdersPage from 'dsm/pages/samples-clinical-orders-page';
 import Select from 'dss/component/select';
 import { testLimitedPermissions as test } from 'fixtures/dsm-fixture';
 
@@ -48,7 +46,7 @@ test.describe('View Sequencing Order Permission Test', () => {
       });
 
       await test.step('Verify that the current DSM user is able to view the Clinical Order page (via the Samples menu)', async () => {
-        const clinicalOrdersPage = await navigation.selectFromSamples<ClinicalOrdersPage>(Samples.CLINICAL_ORDERS);
+        const clinicalOrdersPage = await navigation.selectFromSamples<SamplesClinicalOrdersPage>(Samples.CLINICAL_ORDERS);
         await clinicalOrdersPage.waitForReady();
       });
 
@@ -78,7 +76,7 @@ test.describe('View Sequencing Order Permission Test', () => {
 
         const participantPage = new ParticipantPage(page);
         await participantPage.assertPageTitle();
-        await participantPage.clickTab(TabEnum.SEQUENCING_ORDER);
+        await participantPage.clickTab(Tab.SEQUENCING_ORDER);
 
         const sequencingOrderTab = new SequencingOrderTab(page);
         await sequencingOrderTab.waitForReady();

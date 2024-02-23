@@ -2,9 +2,9 @@ import { Locator, expect } from '@playwright/test';
 import Dropdown from 'dsm/component/dropdown';
 import { Kit } from 'dsm/enums';
 import { Menu, Navigation, Samples, StudyName } from 'dsm/component/navigation';
-import { KitsColumnsEnum } from 'dsm/pages/kitsInfo-pages/enums/kitsColumns-enum';
-import KitsSentPage from 'dsm/pages/kitsInfo-pages/kitsSentPage';
-import SearchPage, { SearchByField } from 'dsm/pages/samples/search-page';
+import { KitsColumnsEnum } from 'dsm/pages/kits-info/enums/kitsColumns-enum';
+import KitsSentPage from 'dsm/pages/kits-sent-page';
+import KitsSearchPage, { SearchByField } from 'dsm/pages/kits-search-page';
 import Select from 'dss/component/select';
 import { testGPCollectionDate as test } from 'fixtures/dsm-fixture';
 import { getDate, offsetDaysFromDate } from 'utils/date-utils';
@@ -78,7 +78,7 @@ test.describe.serial('GP Collection Date Permissions Test', () => {
 
       await test.step(`Go to Kit Search page and select 'Search by mf barcode' and enter the barcode you copied and click on Search`, async () => {
         await navigation.selectFromSamples(Samples.SEARCH);
-        const kitsSearchPage = new SearchPage(page);
+        const kitsSearchPage = new KitsSearchPage(page);
         await kitsSearchPage.waitForReady();
 
         //Find a kit that does not have a collection date and fill it out
@@ -99,7 +99,7 @@ test.describe.serial('GP Collection Date Permissions Test', () => {
       })
 
       await test.step('Enter a collection date for the kit that shows up and click Submit', async () => {
-        const kitsSearchPage = new SearchPage(page);
+        const kitsSearchPage = new KitsSearchPage(page);
         await kitsSearchPage.setKitCollectionDate({ dateField: currentKit, useTodayDate: true });
       })
     })

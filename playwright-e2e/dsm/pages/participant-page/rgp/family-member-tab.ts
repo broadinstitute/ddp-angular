@@ -160,8 +160,7 @@ export default class FamilyMemberTab {
     public async inputImportantNotes(notes: string): Promise<void> {
       const textarea = this.getImportantNotes();
       const respPromise = waitForResponse(this.page, {uri: 'ui/patch'});
-      await textarea.fill(notes, false);
-      await textarea.blur();
+      await textarea.fillSimple(notes);
       await respPromise;
     }
 

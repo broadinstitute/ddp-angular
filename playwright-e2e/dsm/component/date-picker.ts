@@ -61,9 +61,10 @@ export default class DatePicker {
     month?: number,
     dayOfMonth?: number,
     isToday?: boolean,
+    saveToDB?: boolean // to wait for /patch request to finish
   } = {}): Promise<string> {
     const today = new Date();
-    const { yyyy = today.getFullYear(), month = today.getMonth(), dayOfMonth = today.getDate(), isToday = false } = opts;
+    const { yyyy = today.getFullYear(), month = today.getMonth(), dayOfMonth = today.getDate(), isToday = false, saveToDB = true } = opts;
 
     const todayBtn = new Button(this.page, { root: this.toLocator(), exactMatch: true, label: 'Today' });
     const isEnabled = await todayBtn.isVisible() && !(await todayBtn.isDisabled());
@@ -106,10 +107,14 @@ export default class DatePicker {
     await this.monthPicker().locator(this.clickableCell(), { hasText: monthName }).click();
 
     // Pick day of month. After pick day, /patch request is automatically triggered. Calendar closed automatically.
-    await Promise.all([
-      waitForResponse(this.page, { uri: '/patch' }),
-      this.dayPicker().locator(this.clickableCell(), { hasText: date }).first().click()
-    ]);
+    if (saveToDB) {
+      await this.dayPicker().locator(this.clickableCell(), { hasText: date }).first().click();
+    } else {
+      await Promise.all([
+        waitForResponse(this.page, { uri: '/patch' }),
+        this.dayPicker().locator(this.clickableCell(), { hasText: date }).first().click()
+      ]);
+    }
 
     return getDate(new Date(yyyy, month, parseInt(date)));
   }

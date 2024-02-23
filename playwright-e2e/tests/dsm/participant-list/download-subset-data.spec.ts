@@ -1,7 +1,7 @@
 import { expect } from '@playwright/test';
 import { StudyName } from 'dsm/component/navigation';
+import { DownloadFileFormat, DownloadTextFormat } from 'dsm/enums';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
-import { FileFormatEnum, TextFormatEnum } from 'dsm/pages/participant-page/enums/download-format-enum';
 import { test } from 'fixtures/dsm-fixture';
 import { assertParticipantListDownloadFileName } from 'utils/test-utils';
 
@@ -43,8 +43,8 @@ test.describe('Participant List Download', () => {
 
         // Export as analysis-friendly, tab-delimited and include all completion of an activity
         const download = await participantListPage.downloadParticipant({
-          fileFormat: FileFormatEnum.TSV,
-          textFormat: TextFormatEnum.ANALYSIS_FRIENDLY
+          fileFormat: DownloadFileFormat.TSV,
+          textFormat: DownloadTextFormat.ANALYSIS_FRIENDLY
         });
         assertParticipantListDownloadFileName(download, StudyName.PROSTATE);
 

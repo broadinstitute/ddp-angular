@@ -75,7 +75,7 @@ test.describe('DSM Date Picker in Participant List page', () => {
       // Reopen calendar picker to select target date
       await searchPanel.openDatePicker('Date of Birth', { open: true });
       // Select 12/20/1995
-      await calendar.pickDate(dob);
+      await calendar.pickDate({...dob, saveToDB: false});
 
       // Verify date match expected
       const selectDate = getDate(new Date(1995, 11, 20));

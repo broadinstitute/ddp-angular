@@ -1,29 +1,28 @@
 import { APIRequestContext, Page, TestInfo, expect } from '@playwright/test';
-import { Kit, Filter } from 'dsm/enums';
+import { Kit, Filter, Tab } from 'dsm/enums';
 import { Navigation, Samples, Study, StudyName } from 'dsm/component/navigation';
-import KitsWithoutLabelPage from 'dsm/pages/kitsInfo-pages/kitsWithoutLabel-page';
+import KitsWithoutLabelPage from 'dsm/pages/kits-without-label-page';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
 import Select from 'dss/component/select';
 import { test } from 'fixtures/dsm-fixture';
 import * as user from 'data/fake-user.json';
-import { KitUploadInfo } from 'dsm/pages/kitUpload-page/models/kitUpload-model';
-import KitUploadPage from 'dsm/pages/kitUpload-page/kitUpload-page';
-import { KitsColumnsEnum } from 'dsm/pages/kitsInfo-pages/enums/kitsColumns-enum';
-import InitialScanPage from 'dsm/pages/scanner-pages/initialScan-page';
-import TrackingScanPage from 'dsm/pages/scanner-pages/trackingScan-page';
-import FinalScanPage from 'dsm/pages/scanner-pages/finalScan-page';
+import { KitUploadInfo } from 'dsm/pages/kit-upload/models/kitUpload-model';
+import KitUploadPage from 'dsm/pages/kit-upload-page';
+import { KitsColumnsEnum } from 'dsm/pages/kits-info/enums/kitsColumns-enum';
+import KitsInitialScanPage from 'dsm/pages/kits-initial-scan-page';
+import KitsTrackingScanPage from 'dsm/pages/kits-tracking-scan-page';
+import KitsFinalScanPage from 'dsm/pages/kits-final-scan-page';
 import { getDate } from 'utils/date-utils';
-import KitsSentPage from 'dsm/pages/kitsInfo-pages/kitsSentPage';
+import KitsSentPage from 'dsm/pages/kits-sent-page';
 import ParticipantPage from 'dsm/pages/participant-page/participant-page';
 import OncHistoryTab from 'dsm/component/tabs/onc-history-tab';
-import { TabEnum } from 'dsm/component/tabs/enums/tab-enum';
 import { OncHistoryInputColumnsEnum, OncHistorySelectRequestEnum } from 'dsm/component/tabs/enums/onc-history-input-columns-enum';
 import { SMIdEnum, TissueDynamicFieldsEnum, TissueTypesEnum } from 'dsm/pages/tissue/enums/tissue-information-enum';
-import KitsReceivedPage from 'dsm/pages/kitsInfo-pages/kitsReceived-page/kitsReceivedPage';
+import KitsReceivedPage from 'dsm/pages/kits-received-page';
 import crypto from 'crypto';
 import { logInfo } from 'utils/log-utils';
 import { waitForResponse } from 'utils/test-utils';
-import ErrorPage from 'dsm/pages/samples/error-page';
+import KitsWithErrorPage from 'dsm/pages/kits-with-error-page';
 
 test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
   const studies = [StudyName.OSTEO2]; //Only clinical (pecgs) studies get this event
@@ -61,13 +60,14 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
       participantPage = await goToTestParticipantPage(shortID, navigation);
 
       //Fill out an onc history and get back an accession number
-      oncHistoryTab = await participantPage.clickTab<OncHistoryTab>(TabEnum.ONC_HISTORY);
+      oncHistoryTab = await participantPage.clickTab<OncHistoryTab>(Tab.ONC_HISTORY);
       const oncHistoryTable = oncHistoryTab.table;
+      const lastRowIndex = await oncHistoryTable.getRowsCount() - 1;
       today = getDate();
-      randomAccessionNumber = await fillOncHistoryRow(participantPage, oncHistoryTab, facilityName, facilityPhoneNumber, facilityFaxNumber);
+      randomAccessionNumber = await fillOncHistoryRow(oncHistoryTab, facilityName, facilityPhoneNumber, facilityFaxNumber, lastRowIndex);
 
       //Navigate to the Tissue Request page
-      const tissueInformationPage = await oncHistoryTable.openTissueInformationPage(0);
+      const tissueInformationPage = await oncHistoryTable.openTissueInformationPage(lastRowIndex);
       await tissueInformationPage.assertPageTitle();
 
       /**
@@ -167,13 +167,14 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
       participantPage = await goToTestParticipantPage(shortID, navigation);
 
       //Fill out an onc history and get back an accession number
-      oncHistoryTab = await participantPage.clickTab<OncHistoryTab>(TabEnum.ONC_HISTORY);
+      oncHistoryTab = await participantPage.clickTab<OncHistoryTab>(Tab.ONC_HISTORY);
       const oncHistoryTable = oncHistoryTab.table;
+      const lastRowIndex = await oncHistoryTable.getRowsCount() - 1;
       today = getDate();
-      randomAccessionNumber = await fillOncHistoryRow(participantPage, oncHistoryTab, facilityName, facilityPhoneNumber, facilityFaxNumber);
+      randomAccessionNumber = await fillOncHistoryRow(oncHistoryTab, facilityName, facilityPhoneNumber, facilityFaxNumber, lastRowIndex);
 
       //Navigate to the Tissue Request page
-      const tissueInformationPage = await oncHistoryTable.openTissueInformationPage(0);
+      const tissueInformationPage = await oncHistoryTable.openTissueInformationPage(lastRowIndex);
       await tissueInformationPage.assertPageTitle();
 
       /**
@@ -273,13 +274,14 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
       participantPage = await goToTestParticipantPage(shortID, navigation);
 
       //Fill out an onc history and get back an accession number
-      oncHistoryTab = await participantPage.clickTab<OncHistoryTab>(TabEnum.ONC_HISTORY);
+      oncHistoryTab = await participantPage.clickTab<OncHistoryTab>(Tab.ONC_HISTORY);
       const oncHistoryTable = oncHistoryTab.table;
+      const lastRowIndex = await oncHistoryTable.getRowsCount() - 1;
       today = getDate();
-      randomAccessionNumber = await fillOncHistoryRow(participantPage, oncHistoryTab, facilityName, facilityPhoneNumber, facilityFaxNumber);
+      randomAccessionNumber = await fillOncHistoryRow(oncHistoryTab, facilityName, facilityPhoneNumber, facilityFaxNumber, lastRowIndex);
 
       //Navigate to the Tissue Request page
-      const tissueInformationPage = await oncHistoryTable.openTissueInformationPage(0);
+      const tissueInformationPage = await oncHistoryTable.openTissueInformationPage(lastRowIndex);
       await tissueInformationPage.assertPageTitle();
 
       /**
@@ -379,13 +381,14 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
       participantPage = await goToTestParticipantPage(shortID, navigation);
 
       //Fill out an onc history and get back an accession number
-      oncHistoryTab = await participantPage.clickTab<OncHistoryTab>(TabEnum.ONC_HISTORY);
+      oncHistoryTab = await participantPage.clickTab<OncHistoryTab>(Tab.ONC_HISTORY);
       const oncHistoryTable = oncHistoryTab.table;
+      const lastRowIndex = await oncHistoryTable.getRowsCount() - 1;
       today = getDate();
-      randomAccessionNumber = await fillOncHistoryRow(participantPage, oncHistoryTab, facilityName, facilityPhoneNumber, facilityFaxNumber);
+      randomAccessionNumber = await fillOncHistoryRow(oncHistoryTab, facilityName, facilityPhoneNumber, facilityFaxNumber, lastRowIndex);
 
       //Navigate to the Tissue Request page
-      const tissueInformationPage = await oncHistoryTable.openTissueInformationPage(0);
+      const tissueInformationPage = await oncHistoryTable.openTissueInformationPage(lastRowIndex);
       await tissueInformationPage.assertPageTitle();
 
       /**
@@ -551,7 +554,7 @@ async function findParticipantForGermlineConsentCreation(participantListPage: Pa
       }
     }
   }
-
+  expect(shortID?.length).toStrictEqual(6);
   return shortID;
 }
 
@@ -611,7 +614,7 @@ async function prepareSentKit(shortID: string,
     await kitsWithoutLabelPage.deactivateAllKitsFor(shortID);
   }
 
-  const kitErrorPage = await navigation.selectFromSamples<ErrorPage>(Samples.ERROR);
+  const kitErrorPage = await navigation.selectFromSamples<KitsWithErrorPage>(Samples.ERROR);
   await kitErrorPage.waitForReady();
   await kitErrorPage.selectKitType(kitType);
   await kitErrorPage.deactivateAllKitsFor(shortID);
@@ -660,7 +663,7 @@ async function prepareSentKit(shortID: string,
   await expect(kitsTable.rowLocator()).toHaveCount(1);
 
   //Scan saliva and blood kit in Initial Scan
-  const initialScanPage = await navigation.selectFromSamples<InitialScanPage>(Samples.INITIAL_SCAN);
+  const initialScanPage = await navigation.selectFromSamples<KitsInitialScanPage>(Samples.INITIAL_SCAN);
   await initialScanPage.assertPageTitle();
   if (kitType === Kit.SALIVA) {
     kitLabel = `${crypto.randomUUID().toString().substring(0, 14)}`; //Clinical Saliva kits just need to be 14 chars
@@ -671,14 +674,14 @@ async function prepareSentKit(shortID: string,
   await initialScanPage.save();
 
   //Both Saliva and Blood kits will now require a tracking label - see PEPPER-1249
-  const trackingScanPage = await navigation.selectFromSamples<TrackingScanPage>(Samples.TRACKING_SCAN);
+  const trackingScanPage = await navigation.selectFromSamples<KitsTrackingScanPage>(Samples.TRACKING_SCAN);
   await trackingScanPage.waitForReady();
   const trackingLabel = `tracking-${crypto.randomUUID().toString().substring(0, 10)}`;
   await trackingScanPage.fillScanPairs([trackingLabel, kitLabel]);
   await trackingScanPage.save();
 
   //Scan kit in Final Scan - which marks the kit as sent
-  const finalScanPage = await navigation.selectFromSamples<FinalScanPage>(Samples.FINAL_SCAN);
+  const finalScanPage = await navigation.selectFromSamples<KitsFinalScanPage>(Samples.FINAL_SCAN);
   await finalScanPage.assertPageTitle();
   await finalScanPage.fillScanPairs([kitLabel, shippingID]);
   await finalScanPage.save();
@@ -721,12 +724,14 @@ async function goToTestParticipantPage(shortID: string, navigation: Navigation):
  * Facility Fax Number (Optional)
  * returns the accession number to be used for checking that accessioning a tumor sample was successful
  */
-async function fillOncHistoryRow(participantPage: ParticipantPage,
+async function fillOncHistoryRow(
   oncHistoryTab: OncHistoryTab,
   facilityName: string,
   facilityPhoneNumber: string,
-  facilityFaxNumber: string): Promise<string> {
+  facilityFaxNumber: string,
+  rowIndex: number): Promise<string> {
   const oncHistoryTable = oncHistoryTab.table;
+
   const randomAccessionNumber = crypto.randomUUID().toString().substring(0, 10);
   await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.DATE_OF_PX, {
     date: {
@@ -736,18 +741,18 @@ async function fillOncHistoryRow(participantPage: ParticipantPage,
         dayOfMonth: new Date().getDate()
       }
     }
-  });
-  await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.ACCESSION_NUMBER, { value: randomAccessionNumber });
-  await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.FACILITY, { value: facilityName });
-  await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.PHONE, { value: facilityPhoneNumber });
-  await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.FAX, { value: facilityFaxNumber });
+  }, rowIndex);
+  await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.ACCESSION_NUMBER, { value: randomAccessionNumber }, rowIndex);
+  await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.FACILITY, { value: facilityName }, rowIndex);
+  await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.PHONE, { value: facilityPhoneNumber }, rowIndex);
+  await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.FAX, { value: facilityFaxNumber }, rowIndex);
 
   //Mark Onc History as 'Request' status
-  await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.REQUEST, { select: OncHistorySelectRequestEnum.REQUEST });
+  await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.REQUEST, { select: OncHistorySelectRequestEnum.REQUEST }, rowIndex);
 
   //Click Download Request Documents in order to have the Fax Sent Date automatically filled out for recently inputted onc history
-  await oncHistoryTable.assertRowSelectionCheckbox();
-  await oncHistoryTable.selectRowAt(0);
+  await oncHistoryTable.assertRowSelectionCheckbox(rowIndex);
+  await oncHistoryTable.selectRowAt(rowIndex);
   await oncHistoryTab.downloadRequestDocuments();
   return randomAccessionNumber;
 }

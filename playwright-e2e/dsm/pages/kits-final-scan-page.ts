@@ -3,7 +3,7 @@ import {waitForResponse} from 'utils/test-utils';
 
 type inputField = 'Kit Label' | 'DSM Label';
 
-export default class FinalScanPage {
+export default class KitsFinalScanPage {
   private readonly PAGE_TITLE = 'Final Scan';
 
   constructor(private readonly page: Page) {}

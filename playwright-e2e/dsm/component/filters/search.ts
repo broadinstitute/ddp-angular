@@ -1,9 +1,33 @@
 import { expect, Locator, Page, Response } from '@playwright/test';
 import DatePicker from 'dsm/component/date-picker';
-import { CheckboxConfig, DateConfig, RadioButtonConfig, TextConfig } from 'dsm/component/filters/sections/search/search-types';
-import { Filter } from 'dsm/enums';
 import { waitForNoSpinner, waitForResponse } from 'utils/test-utils';
 import { logError } from 'utils/log-utils';
+import { Filter } from 'dsm/enums';
+
+type Today = 'today';
+type AdditionalFilters = Filter[];
+
+export interface DateConfig {
+  from: string | Date | Today | null | undefined;
+  to: string | Date | Today | null | undefined;
+  additionalFilters: AdditionalFilters | null | undefined;
+}
+
+export interface TextConfig {
+  textValue: string | null | undefined;
+  additionalFilters: AdditionalFilters;
+  exactMatch: boolean;
+}
+
+export interface CheckboxConfig {
+  checkboxValues: string[] | null | undefined;
+  additionalFilters: AdditionalFilters;
+}
+
+export interface RadioButtonConfig {
+  radioButtonValue: string | null | undefined;
+  additionalFilters: AdditionalFilters;
+}
 
 export class Search {
   private readonly enUSDateRegExp = new RegExp(/\b(0[1-9]|1[012])([/])(0[1-9]|[12]\d|3[01])\2(\d{4})/);

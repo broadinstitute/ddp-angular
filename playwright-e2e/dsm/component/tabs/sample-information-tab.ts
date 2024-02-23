@@ -1,10 +1,9 @@
 import {expect, Locator, Page} from '@playwright/test';
-import {SampleInfoEnum} from 'dsm/component/tabs/enums/sampleInfo-enum';
 import SampleInformation from 'dsm/component/tabs/model/sample-information-model';
-import {Kit} from 'dsm/enums';
+import {Kit, Label} from 'dsm/enums';
 
 interface SampleInfo {
-  [fieldName: string]: SampleInfoEnum;
+  [fieldName: string]: Label;
 }
 
 export default class SampleInformationTab {
@@ -19,21 +18,21 @@ export default class SampleInformationTab {
     for (let s = 0; s < samplesCount; s++) {
       const sampleInformationInstance: SampleInformation = new SampleInformation();
       const sampleType = await samplesLocator.nth(s).locator('legend').textContent();
-      const selectionValue: SampleInfo = {sampleNotes: SampleInfoEnum.SEQUENCING_RESTRICTIONS};
+      const selectionValue: SampleInfo = {sampleNotes: Label.SEQUENCING_RESTRICTIONS};
 
       const textsValues: SampleInfo = {
-        status: SampleInfoEnum.STATUS,
-        kitUploadType: SampleInfoEnum.KIT_UPLOAD_TYPE,
-        normalCollaboratorSampleId: SampleInfoEnum.NORMAL_COLLABORATOR_SAMPLE_ID,
-        MFBarcode: SampleInfoEnum.MF_BARCODE,
-        sent: SampleInfoEnum.SENT,
-        received: SampleInfoEnum.RECEIVED,
-        results: SampleInfoEnum.RESULTS
+        status: Label.STATUS,
+        kitUploadType: Label.KIT_UPLOAD_TYPE,
+        normalCollaboratorSampleId: Label.NORMAL_COLLABORATOR_SAMPLE_ID,
+        MFBarcode: Label.MF_BARCODE,
+        sent: Label.SENT,
+        received: Label.RECEIVED,
+        results: Label.RESULTS
       };
 
       const inputValues: SampleInfo = {
-        collectionDate: SampleInfoEnum.COLLECTION_DATE,
-        sampleNotes: SampleInfoEnum.SAMPLE_NOTES
+        collectionDate: Label.COLLECTION_DATE,
+        sampleNotes: Label.SAMPLE_NOTES
       };
 
       sampleInformationInstance.type = sampleType?.split(':')[1].trim() || '';
@@ -57,18 +56,18 @@ export default class SampleInformationTab {
   }
 
   /* Helper Functions */
-  private async valueAtFor(at: number, sampleInfo: SampleInfoEnum): Promise<string> {
+  private async valueAtFor(at: number, sampleInfo: Label): Promise<string> {
     const element = this.sampleFieldset.nth(at).locator(this.getSampleInfoForXPath(sampleInfo))
       .locator('input');
     return await element.isVisible() ? element.inputValue() : '';
   }
 
-  private async textAtFor(at: number, sampleInfo: SampleInfoEnum): Promise<string | null> {
+  private async textAtFor(at: number, sampleInfo: Label): Promise<string | null> {
     const element = this.sampleFieldset.nth(at).locator(this.getSampleInfoForXPath(sampleInfo));
     return await element.isVisible() ? element.textContent() : '';
   }
 
-  private async selectionAtFor(at: number, sampleInfo: SampleInfoEnum): Promise<string | null> {
+  private async selectionAtFor(at: number, sampleInfo: Label): Promise<string | null> {
     const selection = this.sampleFieldset.nth(at).locator(`${this.getSampleInfoForXPath(sampleInfo)}//span`)
       .locator('span');
     return await selection.isVisible() ? selection.textContent() : '';
@@ -95,7 +94,7 @@ export default class SampleInformationTab {
   }
 
   public async assertValue(MFBarcode: string, {info, value}:
-    {info: SampleInfoEnum, value: string}): Promise<void> {
+    {info: Label, value: string}): Promise<void> {
     const MFBarcodeXPath = this.getSampleByMFBarcodeXPath(MFBarcode);
 
     await expect(this.page.locator(MFBarcodeXPath),
@@ -110,7 +109,7 @@ export default class SampleInformationTab {
   }
 
   /* XPaths */
-  private getSampleInfoForXPath(sampleInfo: SampleInfoEnum): string {
+  private getSampleInfoForXPath(sampleInfo: Label): string {
     return `//div/table/tr[td[contains(text(), '${sampleInfo}')]]/following-sibling::tr[1]/td`
   }
 
@@ -130,7 +129,7 @@ export default class SampleInformationTab {
     return `/ancestor::fieldset/legend[contains(text(), ${type})]`
   }
 
-  private ancestorSampleTextXPath(sampleInfo: SampleInfoEnum): string {
+  private ancestorSampleTextXPath(sampleInfo: Label): string {
     return `/ancestor::table/tr[td[contains(text(), '${sampleInfo}')]]/following-sibling::tr[1]/td`
   }
 }

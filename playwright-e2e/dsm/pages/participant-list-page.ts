@@ -1,7 +1,6 @@
 import { APIRequestContext, Download, expect, Locator, Page } from '@playwright/test';
 import Modal from 'dsm/component/modal';
 import { Navigation, Study } from 'dsm/component/navigation';
-import { FileFormatEnum, TextFormatEnum } from 'dsm/pages/participant-page/enums/download-format-enum';
 import { WelcomePage } from 'dsm/pages/welcome-page';
 import Checkbox from 'dss/component/checkbox';
 import { shuffle, waitForNoSpinner, waitForResponse } from 'utils/test-utils';
@@ -10,10 +9,9 @@ import { ParticipantListTable } from 'dsm/component/tables/participant-list-tabl
 import { SortOrder } from 'dss/component/table';
 import QuickFilters from 'dsm/component/filters/quick-filters';
 import { getDate, offsetDaysFromToday } from 'utils/date-utils';
-import { Filter } from 'dsm/enums';
+import { DownloadFileFormat, DownloadTextFormat, Filter, Tab } from 'dsm/enums';
 import { logInfo } from 'utils/log-utils';
 import DsmPageBase from './dsm-page-base';
-import { TabEnum } from 'dsm/component/tabs/enums/tab-enum';
 import * as user from 'data/fake-user.json';
 
 export default class ParticipantListPage extends DsmPageBase {
@@ -112,14 +110,14 @@ export default class ParticipantListPage extends DsmPageBase {
    * @returns {Promise<Download>}
    */
   public async downloadParticipant(opts: {
-      fileFormat?: FileFormatEnum,
-      textFormat?: TextFormatEnum,
+      fileFormat?: DownloadFileFormat,
+      textFormat?: DownloadTextFormat,
       includeCompletionOfActivity?: boolean,
       timeout?: number
     } = {}): Promise<Download> {
     const {
-      fileFormat = FileFormatEnum.XLSX,
-      textFormat = TextFormatEnum.HUMAN_READABLE,
+      fileFormat = DownloadFileFormat.XLSX,
+      textFormat = DownloadTextFormat.HUMAN_READABLE,
       includeCompletionOfActivity = true,
       timeout = 3 * 60 * 1000
     } = opts;
@@ -243,7 +241,7 @@ export default class ParticipantListPage extends DsmPageBase {
    * @returns A participant with the requested tab
    */
   async findParticipantWithTab(
-    opts: { findPediatricParticipant: boolean, tab?: TabEnum, rgpProbandTab?: boolean, uriString?: string, prefix?: string }
+    opts: { findPediatricParticipant: boolean, tab?: Tab, rgpProbandTab?: boolean, uriString?: string, prefix?: string }
     ): Promise<string> {
     const { findPediatricParticipant = false, tab, rgpProbandTab = false, uriString = '/ui/applyFilter', prefix } = opts;
     const searchPanel = this.filters.searchPanel;
@@ -270,7 +268,7 @@ export default class ParticipantListPage extends DsmPageBase {
       for (const [index, value] of [...responseJson.participants].entries()) {
         //The onc history tab will usually appear along with a medical record tab
         //Checking for the medical record tab allows catching those who do not yet have an onc history detail/row/data (but have the tab itself)
-        if (tab === TabEnum.ONC_HISTORY) {
+        if (tab === Tab.ONC_HISTORY) {
           const medicalRecord = value.medicalRecords[0];
           const hasConsentedToTissue = value.esData.dsm.hasConsentedToTissueSample;
           if (medicalRecord === undefined || hasConsentedToTissue === false) {

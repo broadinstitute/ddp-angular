@@ -1,14 +1,11 @@
 import { test, expect } from '@playwright/test';
 import { login } from 'authentication/auth-dsm';
 import Dropdown from 'dsm/component/dropdown';
-import { Column } from 'dsm/enums';
+import { Column, Tab, UserPermission } from 'dsm/enums';
 import { Menu, Miscellaneous, Navigation, Study, StudyName } from 'dsm/component/navigation';
-import { TabEnum } from 'dsm/component/tabs/enums/tab-enum';
 import Tabs from 'dsm/component/tabs/tabs';
-import { UserPermission } from 'dsm/pages/miscellaneous-pages/enums/userPermission-enum';
-import UserPermissionPage from 'dsm/pages/miscellaneous-pages/user-and-permissions-page';
+import UserPermissionPage from 'dsm/pages/user-and-permissions-page';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
-import { MainInfoEnum } from 'dsm/pages/participant-page/enums/main-info-enum';
 import Select from 'dss/component/select';
 import { logInfo } from 'utils/log-utils';
 
@@ -75,25 +72,25 @@ test.describe.serial('Medical Records View Permission', () => {
         // Find participant created by Playwright DSS test
         const rowIndex = await participantListPage.findParticipantFor(Column.PARTICIPANT, 'Email', {value: emails[i].split('@')[0] });
         const participantListTable = participantListPage.participantListTable;
-        const shortId = await participantListTable.getParticipantDataAt(rowIndex, MainInfoEnum.SHORT_ID);
+        const shortId = await participantListTable.getParticipantDataAt(rowIndex, Column.SHORT_ID);
         logInfo(`${study} Participant Short ID: ${shortId}`);
 
         // Open Participant page, user is able to see all tabs
         await participantListTable.openParticipantPageAt(rowIndex);
         const expectedTabs = [
-          TabEnum.SURVEY_DATA,
-          TabEnum.SAMPLE_INFORMATION,
-          TabEnum.CONTACT_INFORMATION,
-          TabEnum.MEDICAL_RECORD,
-          TabEnum.ONC_HISTORY,
+          Tab.SURVEY_DATA,
+          Tab.SAMPLE_INFORMATION,
+          Tab.CONTACT_INFORMATION,
+          Tab.MEDICAL_RECORD,
+          Tab.ONC_HISTORY,
         ];
         const visibleTabs = page.locator('tabset a[role="tab"]');
         const tabNames = await visibleTabs.allInnerTexts();
-        expect(tabNames).toStrictEqual(study === StudyName.OSTEO2 ? expectedTabs.concat([TabEnum.INVITAE]) : expectedTabs);
+        expect(tabNames).toStrictEqual(study === StudyName.OSTEO2 ? expectedTabs.concat([Tab.INVITAE]) : expectedTabs);
         // All tabs are enabled
         for (const tabName of tabNames) {
           const tab = new Tabs(page);
-          await tab.open(tabName as TabEnum);
+          await tab.open(tabName as Tab);
         }
       })
     });

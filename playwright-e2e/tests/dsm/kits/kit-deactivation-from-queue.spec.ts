@@ -2,11 +2,11 @@ import { expect } from '@playwright/test';
 import { test } from 'fixtures/dsm-fixture';
 import { Kit } from 'dsm/enums';
 import { Navigation, Samples, StudyName } from 'dsm/component/navigation';
-import { KitsColumnsEnum } from 'dsm/pages/kitsInfo-pages/enums/kitsColumns-enum';
+import { KitsColumnsEnum } from 'dsm/pages/kits-info/enums/kitsColumns-enum';
 import { WelcomePage } from 'dsm/pages/welcome-page';
 import { logInfo } from 'utils/log-utils';
 import { KitsTable } from 'dsm/component/tables/kits-table';
-import KitsQueuePage from 'dsm/pages/kitsInfo-pages/kit-queue-page';
+import KitsQueuePage from 'dsm/pages/kits-queue-page';
 
 // don't run in parallel
 test.describe.serial('Kit Deactivation', () => {

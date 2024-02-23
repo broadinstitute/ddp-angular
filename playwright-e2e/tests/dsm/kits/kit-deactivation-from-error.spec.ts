@@ -2,11 +2,11 @@ import { expect } from '@playwright/test';
 import { test } from 'fixtures/dsm-fixture';
 import { Kit } from 'dsm/enums';
 import { Navigation, Samples, StudyName } from 'dsm/component/navigation';
-import { KitsColumnsEnum } from 'dsm/pages/kitsInfo-pages/enums/kitsColumns-enum';
+import { KitsColumnsEnum } from 'dsm/pages/kits-info/enums/kitsColumns-enum';
 import { WelcomePage } from 'dsm/pages/welcome-page';
 import { logInfo } from 'utils/log-utils';
 import { KitsTable } from 'dsm/component/tables/kits-table';
-import ErrorPage from 'dsm/pages/samples/error-page';
+import KitsWithErrorPage from 'dsm/pages/kits-with-error-page';
 
 // don't run in parallel
 test.describe.serial('Kit Deactivation', () => {
@@ -22,11 +22,11 @@ test.describe.serial('Kit Deactivation', () => {
       const navigation = new Navigation(page, request);
       await welcomePage.selectStudy(study);
 
-      let kitsErrorPage: ErrorPage;
+      let kitsErrorPage: KitsWithErrorPage;
       let kitsTable: KitsTable;
 
       await test.step('Deactivate and verify', async () => {
-        kitsErrorPage = await navigation.selectFromSamples<ErrorPage>(Samples.ERROR);
+        kitsErrorPage = await navigation.selectFromSamples<KitsWithErrorPage>(Samples.ERROR);
         await kitsErrorPage.waitForReady();
         kitsTable = kitsErrorPage.getKitsTable;
         kits = await kitsErrorPage.getStudyKitTypes();

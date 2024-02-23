@@ -1,5 +1,9 @@
 import { Locator, Page, expect } from '@playwright/test';
-import { SurveyDataPanelEnum } from './enums/survey-data-enum';
+
+export enum SurveyDataPanelEnum {
+  MEDICAL_RELEASE_FORM = 'Medical Release Form',
+  RESEARCH_CONSENT_ASSENT_FORM = 'Research Consent & Assent Form'
+}
 
 export default class SurveyDataTab {
   constructor(private readonly page: Page) {

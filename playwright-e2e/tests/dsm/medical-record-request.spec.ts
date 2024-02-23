@@ -1,13 +1,11 @@
 import { expect } from '@playwright/test';
 import { test } from 'fixtures/dsm-fixture';
-import { Filter, Column } from 'dsm/enums';
+import { Filter, Column, Tab, Label } from 'dsm/enums';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
 import { assertDateFormat, waitForResponse } from 'utils/test-utils';
 import { logInfo } from 'utils/log-utils';
 import ParticipantPage from 'dsm/pages/participant-page/participant-page';
-import { TabEnum } from 'dsm/component/tabs/enums/tab-enum';
 import MedicalRecordsTab from 'dsm/pages/medical-records/medical-records-tab';
-import { MainInfoEnum } from 'dsm/pages/participant-page/enums/main-info-enum';
 import { SortOrder } from 'dss/component/table';
 import MedicalRecordsRequestPage, { PDFName } from 'dsm/pages/medical-records/medical-records-request-page';
 import { FieldsEnum } from 'dsm/pages/medical-records/medical-records-enums';
@@ -145,14 +143,14 @@ test.describe.serial('Medical records request workflow', () => {
         // Open Medical Records - Request Page
         medicalRecordsRequestPage = await medicalRecordTable.openRequestPageByRowIndex(0);
 
-        const currentStatus = await medicalRecordsRequestPage.getStaticText(MainInfoEnum.CURRENT_STATUS);
+        const currentStatus = await medicalRecordsRequestPage.getStaticText(Label.CURRENT_STATUS);
         expect(currentStatus).toStrictEqual(mrStatusValue);
         expect(currentStatus).toMatch(/(New|Fax Sent|MR Received)/);
 
-        const shortIdOnRequestPage = await medicalRecordsRequestPage.getStaticText(MainInfoEnum.SHORT_ID);
+        const shortIdOnRequestPage = await medicalRecordsRequestPage.getStaticText(Label.SHORT_ID);
         expect(shortIdOnRequestPage).toStrictEqual(shortId);
 
-        assertDateFormat(await medicalRecordsRequestPage.getStaticText(MainInfoEnum.DATE_OF_BIRTH));
+        assertDateFormat(await medicalRecordsRequestPage.getStaticText(Label.DATE_OF_BIRTH));
 
         const instInfo = await medicalRecordsRequestPage.getStaticText(FieldsEnum.INSTITUTION_INFO);
         expect(instInfo).toBeTruthy();
@@ -294,7 +292,7 @@ test.describe.serial('Medical records request workflow', () => {
       await participantListPage.filterListByShortId(shortId);
       const participantPage = await participantListTable.openParticipantPageAt(0);
 
-      const existsDateOfMajority = await page.locator(participantPage.getMainTextInfoXPath(MainInfoEnum.DATE_OF_MAJORITY)).isVisible();
+      const existsDateOfMajority = await page.locator(participantPage.getMainTextInfoXPath(Label.DATE_OF_MAJORITY)).isVisible();
 
       // Open Medical Request page
       const medicalRecordTable = await openMedicalRecordsTab(participantPage);
@@ -355,7 +353,7 @@ test.describe.serial('Medical records request workflow', () => {
   }
 
   async function openMedicalRecordsTab(participantPage: ParticipantPage): Promise<MedicalRecordsTable> {
-    const medicalRecordsTab = await participantPage.clickTab<MedicalRecordsTab>(TabEnum.MEDICAL_RECORD);
+    const medicalRecordsTab = await participantPage.clickTab<MedicalRecordsTab>(Tab.MEDICAL_RECORD);
     const medicalRecordTable = medicalRecordsTab.table;
     expect(await medicalRecordTable.getRowsCount()).toBeGreaterThanOrEqual(1);
     return medicalRecordTable;

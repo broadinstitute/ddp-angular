@@ -4,7 +4,7 @@ import Select from 'dss/component/select';
 import Table from 'dss/component/table';
 import { waitForNoSpinner, waitForResponse } from 'utils/test-utils';
 import KitsPageBase from 'dsm/pages/kits-page-base';
-import { KitsColumnsEnum } from 'dsm/pages/kitsInfo-pages/enums/kitsColumns-enum';
+import { KitsColumnsEnum } from 'dsm/pages/kits-info/enums/kitsColumns-enum';
 
 export enum SearchByField {
   SHORT_ID = 'Short ID',
@@ -12,7 +12,7 @@ export enum SearchByField {
   MANUFACTURE_BARCODE = 'Manufacturer Barcode'
 }
 
-export default class SearchPage extends KitsPageBase {
+export default class KitsSearchPage extends KitsPageBase {
   constructor(page: Page) {
     super(page);
   }

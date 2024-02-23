@@ -1,6 +1,5 @@
 import { expect } from '@playwright/test';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
-import { FileFormatEnum } from 'dsm/pages/participant-page/enums/download-format-enum';
 import { test } from 'fixtures/dsm-fixture';
 import { assertParticipantListDownloadFileName } from 'utils/test-utils';
 import * as XLSX from 'xlsx';
@@ -9,6 +8,7 @@ import { isNaN } from 'lodash';
 import { unzip } from 'utils/file-utils';
 import { logInfo } from 'utils/log-utils';
 import { StudyName } from 'dsm/component/navigation';
+import { DownloadFileFormat } from 'dsm/enums';
 
 test.describe.parallel('Participant List Download', () => {
   // Chose studies with fewer participants on Dev and Test. Otherwise download all data will take a very long time.
@@ -24,7 +24,7 @@ test.describe.parallel('Participant List Download', () => {
       await participantListPage.selectAll();
 
       // Export as human-readable, Excel and include all completion of an activity
-      const download = await participantListPage.downloadParticipant({ fileFormat: FileFormatEnum.XLSX });
+      const download = await participantListPage.downloadParticipant({ fileFormat: DownloadFileFormat.XLSX });
       assertParticipantListDownloadFileName(download, study);
 
       const dir = testInfo.outputDir;

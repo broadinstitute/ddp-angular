@@ -1,8 +1,8 @@
 import { expect } from '@playwright/test';
 import Dropdown from 'dsm/component/dropdown';
 import { Menu, Miscellaneous, Navigation, Samples, StudyName } from 'dsm/component/navigation';
-import { UserPermission } from 'dsm/pages/miscellaneous-pages/enums/userPermission-enum';
-import UserPermissionPage from 'dsm/pages/miscellaneous-pages/user-and-permissions-page';
+import { UserPermission } from 'dsm/enums';
+import UserPermissionPage from 'dsm/pages/user-and-permissions-page';
 import Select from 'dss/component/select';
 import { testLimitedPermissions as test } from 'fixtures/dsm-fixture';
 

@@ -1,7 +1,7 @@
 import {expect, Locator, Page} from '@playwright/test';
-import { UserPermission } from './enums/userPermission-enum';
 import { isCMIStudy, isPECGSStudy } from 'utils/test-utils';
 import { StudyName } from 'dsm/component/navigation';
+import { UserPermission } from 'dsm/enums';
 
 export default class UserPermissionPage {
   private readonly PAGE_TITLE: string = 'Users And Permissions';

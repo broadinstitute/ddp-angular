@@ -1,4 +1,4 @@
-import { KitsColumnsEnum } from './enums/kitsColumns-enum';
+import { KitsColumnsEnum } from './kits-info/enums/kitsColumns-enum';
 import { Locator, Page } from '@playwright/test';
 import {rows} from 'lib/component/dsm/paginators/types/rowsPerPage';
 import KitsPageBase from 'dsm/pages/kits-page-base';

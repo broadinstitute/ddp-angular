@@ -1,7 +1,6 @@
 import { test } from 'fixtures/dsm-fixture';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
-import { Filter } from 'dsm/enums';
-import { TabEnum } from 'dsm/component/tabs/enums/tab-enum';
+import { Filter, Tab } from 'dsm/enums';
 import OncHistoryTab from 'dsm/component/tabs/onc-history-tab';
 import { OncHistoryInputColumnsEnum } from 'dsm/component/tabs/enums/onc-history-input-columns-enum';
 import { Page, expect } from '@playwright/test';
@@ -38,7 +37,7 @@ test.describe.serial('Onc History', () => {
 
       await searchPanel.search();
       shortID = await participantListPage.findParticipantWithTab(
-        { findPediatricParticipant: false, tab: TabEnum.ONC_HISTORY, uriString: 'ui/filterList'}
+        { findPediatricParticipant: false, tab: Tab.ONC_HISTORY, uriString: 'ui/filterList'}
       );
       logInfo(`Short id: ${shortID}`);
       expect(shortID?.length).toBeTruthy();
@@ -46,7 +45,7 @@ test.describe.serial('Onc History', () => {
       // Open Onc History tab
       await participantListPage.filterListByShortId(shortID);
       const participantPage = await participantListTable.openParticipantPageAt(0);
-      const oncHistoryTab = await participantPage.clickTab<OncHistoryTab>(TabEnum.ONC_HISTORY);
+      const oncHistoryTab = await participantPage.clickTab<OncHistoryTab>(Tab.ONC_HISTORY);
       const oncHistoryTable = oncHistoryTab.table;
       let lastRow = await oncHistoryTable.getRowsCount() - 1;
 

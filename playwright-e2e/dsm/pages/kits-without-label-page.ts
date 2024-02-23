@@ -1,6 +1,6 @@
 import {expect, Locator, Page} from '@playwright/test';
 import {waitForNoSpinner, waitForResponse} from 'utils/test-utils';
-import {KitsColumnsEnum} from 'dsm/pages/kitsInfo-pages/enums/kitsColumns-enum';
+import {KitsColumnsEnum} from 'dsm/pages/kits-info/enums/kitsColumns-enum';
 import {rows} from 'lib/component/dsm/paginators/types/rowsPerPage';
 import KitsPageBase from 'dsm/pages/kits-page-base';
 

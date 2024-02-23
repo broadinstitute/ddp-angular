@@ -3,9 +3,9 @@ import {WelcomePage} from 'dsm/pages/welcome-page';
 import {Navigation, Samples, StudyName} from 'dsm/component/navigation';
 import {login} from 'authentication/auth-dsm';
 import {Kit} from 'dsm/enums';
-import InitialScanPage from 'dsm/pages/scanner-pages/initialScan-page';
-import {KitsColumnsEnum} from 'dsm/pages/kitsInfo-pages/enums/kitsColumns-enum';
-import KitsReceivedPage from 'dsm/pages/kitsInfo-pages/kitsReceived-page/kitsReceivedPage';
+import KitsInitialScanPage from 'dsm/pages/kits-initial-scan-page';
+import {KitsColumnsEnum} from 'dsm/pages/kits-info/enums/kitsColumns-enum';
+import KitsReceivedPage from 'dsm/pages/kits-received-page';
 
 // don't run in parallel
 test.describe.serial('Initial Scan page', () => {
@@ -25,7 +25,7 @@ test.describe.serial('Initial Scan page', () => {
       await welcomePage.selectStudy(study);
 
       // Initial Scan page
-      const initialScanPage = await navigation.selectFromSamples<InitialScanPage>(Samples.INITIAL_SCAN);
+      const initialScanPage = await navigation.selectFromSamples<KitsInitialScanPage>(Samples.INITIAL_SCAN);
       await initialScanPage.waitForReady();
 
       const kitLabelField = initialScanPage.getInput('Kit Label');
@@ -58,7 +58,7 @@ test.describe.serial('Initial Scan page', () => {
       const [mfCode] = await kitsTable.getTextAt(0, KitsColumnsEnum.MF_CODE);
 
       // Initial Scan page
-      const initialScanPage = await navigation.selectFromSamples<InitialScanPage>(Samples.INITIAL_SCAN);
+      const initialScanPage = await navigation.selectFromSamples<KitsInitialScanPage>(Samples.INITIAL_SCAN);
       await initialScanPage.waitForReady();
 
       const kitLabelField = initialScanPage.getInput('Kit Label');

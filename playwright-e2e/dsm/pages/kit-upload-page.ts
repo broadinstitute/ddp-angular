@@ -2,7 +2,7 @@ import {expect, Locator, Page, Response} from '@playwright/test';
 import {Kit} from 'dsm/enums';
 import {waitForNoSpinner, waitForResponse} from 'utils/test-utils';
 import {createTextFileSync, deleteFileSync} from 'utils/file-utils';
-import {KitUploadInfo} from 'dsm/pages/kitUpload-page/models/kitUpload-model';
+import {KitUploadInfo} from 'dsm/pages/kit-upload/models/kitUpload-model';
 import path from 'path';
 import Modal from 'dsm/component/modal';
 import {logInfo} from 'utils/log-utils';

@@ -4,19 +4,19 @@ import crypto from 'crypto';
 import * as mock from 'data/mock-address.json';
 import { Kit } from 'dsm/enums';
 import { Navigation, Samples, Study, StudyName } from 'dsm/component/navigation';
-import KitUploadPage from 'dsm/pages/kitUpload-page/kitUpload-page';
-import { KitUploadInfo } from 'dsm/pages/kitUpload-page/models/kitUpload-model';
-import { KitsColumnsEnum } from 'dsm/pages/kitsInfo-pages/enums/kitsColumns-enum';
-import KitsSentPage from 'dsm/pages/kitsInfo-pages/kitsSentPage';
-import KitsWithoutLabelPage from 'dsm/pages/kitsInfo-pages/kitsWithoutLabel-page';
+import KitUploadPage from 'dsm/pages/kit-upload-page';
+import { KitUploadInfo } from 'dsm/pages/kit-upload/models/kitUpload-model';
+import { KitsColumnsEnum } from 'dsm/pages/kits-info/enums/kitsColumns-enum';
+import KitsSentPage from 'dsm/pages/kits-sent-page';
+import KitsWithoutLabelPage from 'dsm/pages/kits-without-label-page';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
 import ParticipantPage from 'dsm/pages/participant-page/participant-page';
-import ErrorPage from 'dsm/pages/samples/error-page';
-import FinalScanPage from 'dsm/pages/scanner-pages/finalScan-page';
+import KitsWithErrorPage from 'dsm/pages/kits-with-error-page';
+import KitsFinalScanPage from 'dsm/pages/kits-final-scan-page';
 import { WelcomePage } from 'dsm/pages/welcome-page';
 import { logInfo } from 'utils/log-utils';
-import InitialScanPage from 'dsm/pages/scanner-pages/initialScan-page';
-import TrackingScanPage from 'dsm/pages/scanner-pages/trackingScan-page';
+import KitsInitialScanPage from 'dsm/pages/kits-initial-scan-page';
+import KitsTrackingScanPage from 'dsm/pages/kits-tracking-scan-page';
 
 /**
  * Prefix check for Saliva kit with Canada and New York address for Osteo2
@@ -113,7 +113,7 @@ test.describe.serial('Saliva Kit Upload with a Canadian or New York address', ()
           await kitsWithoutLabelPage.deactivateAllKitsFor(shortID);
         }
 
-        const kitErrorPage = await navigation.selectFromSamples<ErrorPage>(Samples.ERROR);
+        const kitErrorPage = await navigation.selectFromSamples<KitsWithErrorPage>(Samples.ERROR);
         await kitErrorPage.waitForReady();
         await kitErrorPage.selectKitType(kitType);
         await kitErrorPage.deactivateAllKitsFor(shortID);
@@ -149,7 +149,7 @@ test.describe.serial('Saliva Kit Upload with a Canadian or New York address', ()
 
       // New kit will be listed on Error page because address is in either Canada or New York
       await test.step('New kit will be listed on Error page', async () => {
-        const errorPage = await navigation.selectFromSamples<ErrorPage>(Samples.ERROR);
+        const errorPage = await navigation.selectFromSamples<KitsWithErrorPage>(Samples.ERROR);
         const kitListTable = errorPage.getKitsTable;
         await errorPage.waitForReady();
         await errorPage.selectKitType(kitType);
@@ -169,14 +169,14 @@ test.describe.serial('Saliva Kit Upload with a Canadian or New York address', ()
       });
 
       await test.step('Initial scan', async () => {
-        const initialScanPage = await navigation.selectFromSamples<InitialScanPage>(Samples.INITIAL_SCAN);
+        const initialScanPage = await navigation.selectFromSamples<KitsInitialScanPage>(Samples.INITIAL_SCAN);
         await initialScanPage.assertPageTitle();
         await initialScanPage.fillScanPairs([kitLabel, shortID]);
         await initialScanPage.save();
       });
 
       await test.step('Tracking Scan', async () => {
-        const trackingScanPage = await navigation.selectFromSamples<TrackingScanPage>(Samples.TRACKING_SCAN);
+        const trackingScanPage = await navigation.selectFromSamples<KitsTrackingScanPage>(Samples.TRACKING_SCAN);
         await trackingScanPage.waitForReady();
         await trackingScanPage.fillScanPairs([trackingLabel, kitLabel]);
         // Saved without error
@@ -184,7 +184,7 @@ test.describe.serial('Saliva Kit Upload with a Canadian or New York address', ()
       });
 
       await test.step('Final scan', async () => {
-        const finalScanPage = await navigation.selectFromSamples<FinalScanPage>(Samples.FINAL_SCAN);
+        const finalScanPage = await navigation.selectFromSamples<KitsFinalScanPage>(Samples.FINAL_SCAN);
         await finalScanPage.waitForReady();
         await finalScanPage.fillScanPairs([kitLabel, shippingID]);
         await finalScanPage.save();
@@ -213,7 +213,7 @@ test.describe.serial('Saliva Kit Upload with a Canadian or New York address', ()
 
       await welcomePage.selectStudy(study);
 
-      const trackingScanPage = await navigation.selectFromSamples<TrackingScanPage>(Samples.TRACKING_SCAN);
+      const trackingScanPage = await navigation.selectFromSamples<KitsTrackingScanPage>(Samples.TRACKING_SCAN);
       await trackingScanPage.waitForReady();
       await trackingScanPage.fillScanPairs([trackingLabel, kitLabel]);
       await trackingScanPage.save({verifySuccess: false});

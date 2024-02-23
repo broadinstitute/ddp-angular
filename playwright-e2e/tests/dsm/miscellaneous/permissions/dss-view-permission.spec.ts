@@ -1,14 +1,11 @@
 import { test, expect } from '@playwright/test';
 import { login } from 'authentication/auth-dsm';
 import Dropdown from 'dsm/component/dropdown';
-import { Column } from 'dsm/enums';
+import { Column, Tab, UserPermission } from 'dsm/enums';
 import { Menu, Miscellaneous, Navigation, Study, StudyName } from 'dsm/component/navigation';
-import { TabEnum } from 'dsm/component/tabs/enums/tab-enum';
 import Tabs from 'dsm/component/tabs/tabs';
-import { UserPermission } from 'dsm/pages/miscellaneous-pages/enums/userPermission-enum';
-import UserPermissionPage from 'dsm/pages/miscellaneous-pages/user-and-permissions-page';
+import UserPermissionPage from 'dsm/pages/user-and-permissions-page';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
-import { MainInfoEnum } from 'dsm/pages/participant-page/enums/main-info-enum';
 import Select from 'dss/component/select';
 import { logInfo } from 'utils/log-utils';
 
@@ -88,7 +85,7 @@ test.describe.serial('DSS View Only Permission', () => {
         await participantListPage.waitForReady();
 
         // User cannot see customize columns which are not related to the visible tabs
-        const expectedTabs = [TabEnum.SURVEY_DATA, TabEnum.SAMPLE_INFORMATION, TabEnum.CONTACT_INFORMATION];
+        const expectedTabs = [Tab.SURVEY_DATA, Tab.SAMPLE_INFORMATION, Tab.CONTACT_INFORMATION];
 
         const notVisibleColumns = [
           Column.MEDICAL_RECORD,
@@ -103,7 +100,7 @@ test.describe.serial('DSS View Only Permission', () => {
         // Find a participant created by Playwright DSS test
         const rowIndex = await participantListPage.findParticipantFor(Column.PARTICIPANT, 'Email', {value: emails[i].split('@')[0] });
         const participantListTable = participantListPage.participantListTable;
-        const shortId = await participantListTable.getParticipantDataAt(rowIndex, MainInfoEnum.SHORT_ID);
+        const shortId = await participantListTable.getParticipantDataAt(rowIndex, Column.SHORT_ID);
         logInfo(`${study} Participant Short ID: ${shortId}`);
 
         // Open Participant page to verify visible tabs
@@ -120,7 +117,7 @@ test.describe.serial('DSS View Only Permission', () => {
         // All tabs are enabled
         for (const tabName of tabNames!) {
           const tab = new Tabs(page);
-          await tab.open(tabName as TabEnum);
+          await tab.open(tabName as Tab);
         }
       })
     });

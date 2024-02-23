@@ -1,6 +1,5 @@
 import { Download, expect, Locator, Page } from '@playwright/test';
 import { waitForNoSpinner, waitForResponse } from 'utils/test-utils';
-import { MainInfoEnum } from 'dsm/pages/participant-page/enums/main-info-enum';
 import Input from 'dss/component/input';
 import { FieldsEnum } from 'dsm/pages/medical-records/medical-records-enums';
 import { FillDate } from 'dsm/pages/tissue/interfaces/tissue-information-interfaces';
@@ -8,6 +7,7 @@ import DatePicker from 'dsm/component/date-picker';
 import Checkbox from 'dss/component/checkbox';
 import Select from 'dss/component/select';
 import { logInfo } from 'utils/log-utils';
+import { Label } from 'dsm/enums';
 
 export interface PDFType {
   IRB_LETTER: string;
@@ -58,7 +58,7 @@ export default class MedicalRecordsRequestPage {
     await this.page.waitForLoadState('networkidle');
   }
 
-  public async getStaticText(infoFieldName: MainInfoEnum | FieldsEnum): Promise<string> {
+  public async getStaticText(infoFieldName: Label | FieldsEnum): Promise<string> {
     const fieldLocator = this.staticInformationXpath(infoFieldName);
     await expect(fieldLocator, `Field: ${infoFieldName} not found.`).toBeVisible();
     const data = await fieldLocator.textContent();
@@ -207,7 +207,7 @@ export default class MedicalRecordsRequestPage {
     return this.page.getByRole('button', { name: 'Download selected single PDF' });
   }
 
-  private staticInformationXpath(infoFieldName: MainInfoEnum | FieldsEnum): Locator {
+  private staticInformationXpath(infoFieldName: Label | FieldsEnum): Locator {
     return this.page.locator(`${this.staticInformationTableXPath}//tr[td[text()[normalize-space()="${infoFieldName}"]]]/td[2]`);
   }
 

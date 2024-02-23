@@ -1,8 +1,7 @@
 import { test } from 'fixtures/dsm-fixture';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
-import { Filter } from 'dsm/enums';
+import { Filter, Tab } from 'dsm/enums';
 import ParticipantPage from 'dsm/pages/participant-page/participant-page';
-import { TabEnum } from 'dsm/component/tabs/enums/tab-enum';
 import OncHistoryTab from 'dsm/component/tabs/onc-history-tab';
 import { OncHistoryInputColumnsEnum, OncHistorySelectRequestEnum } from 'dsm/component/tabs/enums/onc-history-input-columns-enum';
 import { expect } from '@playwright/test';
@@ -35,7 +34,7 @@ test.describe.serial('Tissue Request Flow', () => {
 
         await searchPanel.search();
         shortID = await participantListPage.findParticipantWithTab(
-          { findPediatricParticipant: false, tab: TabEnum.ONC_HISTORY, uriString: 'ui/filterList'}
+          { findPediatricParticipant: false, tab: Tab.ONC_HISTORY, uriString: 'ui/filterList'}
         );
         expect(shortID?.length).toStrictEqual(6);
         logInfo(`Short id: ${shortID}`);
@@ -47,7 +46,7 @@ test.describe.serial('Tissue Request Flow', () => {
 
       const participantListTable = participantListPage.participantListTable;
       const participantPage: ParticipantPage = await participantListTable.openParticipantPageAt(0);
-      const oncHistoryTab = await participantPage.clickTab<OncHistoryTab>(TabEnum.ONC_HISTORY);
+      const oncHistoryTab = await participantPage.clickTab<OncHistoryTab>(Tab.ONC_HISTORY);
       const oncHistoryTable = oncHistoryTab.table;
 
       await test.step('Update Onc History data - Facility', async () => {
@@ -68,7 +67,7 @@ test.describe.serial('Tissue Request Flow', () => {
       })
 
       await test.step('Update Onc History data - Date of PX', async () => {
-        await participantPage.clickTab<OncHistoryTab>(TabEnum.ONC_HISTORY);
+        await participantPage.clickTab<OncHistoryTab>(Tab.ONC_HISTORY);
         await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.DATE_OF_PX,
           {
             date: {
@@ -102,7 +101,7 @@ test.describe.serial('Tissue Request Flow', () => {
 
       await participantPage.backToList();
       await participantListTable.openParticipantPageAt(0);
-      await participantPage.clickTab<OncHistoryTab>(TabEnum.ONC_HISTORY);
+      await participantPage.clickTab<OncHistoryTab>(Tab.ONC_HISTORY);
       const tissueInformationPage = await oncHistoryTable.openTissueInformationPage(0);
 
       await test.step('Downloading Tissue Request Documents - Updates Fax Sent', async () => {

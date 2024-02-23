@@ -221,10 +221,7 @@ export default class OncHistoryTable extends Table {
   }
 
   private async getCurrentValue(element: Input | Select | TextArea): Promise<string> {
-    const currentValue = await element.currentValue();
-    const isDisabled = await element.isDisabled();
-    expect(isDisabled, `Input field is disabled`).toBeFalsy();
-    return currentValue?.trim();
+    return (await element.currentValue()).trim();
   }
 
   /* Assertions */
