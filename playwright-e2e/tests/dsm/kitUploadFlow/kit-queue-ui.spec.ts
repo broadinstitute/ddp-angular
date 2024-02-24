@@ -8,7 +8,7 @@ import {studyShortName} from 'utils/test-utils';
 import KitQueuePage from 'dsm/pages/kitsInfo-pages/kit-queue-page';
 import { Label } from 'dsm/enums';
 
-test.describe.serial('Sample Kit Queue UI', () => {
+test.describe('Sample Kit Queue UI', () => {
   const studies = [
     StudyEnum.ANGIO, StudyEnum.BRAIN, StudyEnum.OSTEO, StudyEnum.OSTEO2, StudyEnum.PANCAN,
     StudyEnum.RGP, StudyEnum.LMS, StudyEnum.ESC, StudyEnum.PROSTATE
@@ -58,4 +58,4 @@ test.describe.serial('Sample Kit Queue UI', () => {
       expect(test.info().errors).toHaveLength(0);
     })
   }
-})
+});
