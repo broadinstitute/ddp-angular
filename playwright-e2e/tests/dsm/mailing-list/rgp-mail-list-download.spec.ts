@@ -13,7 +13,7 @@ import TellUsYourStoryPage, { WHO } from 'dss/pages/rgp/enrollment/tell-us-your-
 import HomePage from 'dss/pages/rgp/home-page';
 import HowItWorksPage from 'dss/pages/rgp/how-it-works-page';
 import { assertTableHeaders } from 'utils/assertion-helper';
-import { getDate, getMailingListDownloadedFileDate, mailingListCreatedDate } from 'utils/date-utils';
+import { dateFormat, getMailingListDownloadedFileDate, mailingListCreatedDate } from 'utils/date-utils';
 import { generateEmailAlias } from 'utils/faker-utils';
 import { MailListCSV, readMailListCSVFile } from 'utils/file-utils';
 import { logInfo } from 'utils/log-utils';
@@ -79,7 +79,7 @@ test.describe.serial('When an interested participant does NOT meet participation
     expect.soft(actualFileName).toBe(expectedFileName);
 
     const file = await download.path();
-    const rows = await readMailListCSVFile(file)
+    const csvRows = await readMailListCSVFile(file)
       .catch((error) => {
         console.error(error);
         throw error;
@@ -87,18 +87,12 @@ test.describe.serial('When an interested participant does NOT meet participation
 
     // Verify CSV file: Assert every user from API response body can also be found inside downloaded csv file
     lodash.forEach(respJson, item => {
-      const dateInJson = getDate(new Date(parseInt(item.dateCreated) * 1000)); // Transform to dd/mm/yyyy
+      const dateInJson = dateFormat().format(new Date(parseInt(item.dateCreated) * 1000)); // Transform to dd/mm/yyyy
       const emailInJson = item.email;
-      logInfo(`JSON: ${emailInJson}: ${item.dateCreated}`);
-      const finding = lodash.filter(rows, row => {
-        if (row.email === emailInJson) {
-          logInfo(`Row: ${row.email}: ${row.dateCreated}`);
-          return row.dateCreated === dateInJson
-        }
-        return false;
-      });
+      logInfo(`JSON email: ${emailInJson} and date: ${item.dateCreated}`);
+      const finding = lodash.filter(csvRows, row => row.email === emailInJson && row.dateCreated === dateInJson);
       expect.soft(finding.length,
-        `Matching record for email: "${emailInJson}" and dateCreated: "${dateInJson}" in downloaded csv file.`)
+        `Fail to find match for email: "${emailInJson}" and dateCreated: "${dateInJson}" in downloaded csv file.`)
       .toBe(1);
     });
 

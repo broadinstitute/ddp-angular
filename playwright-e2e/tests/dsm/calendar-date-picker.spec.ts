@@ -3,7 +3,7 @@ import { CustomizeView, Label } from 'dsm/enums';
 import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
 import { test } from 'fixtures/dsm-fixture';
-import { getDate } from 'utils/date-utils';
+import { getDate, getToday } from 'utils/date-utils';
 import { logInfo } from 'utils/log-utils';
 
 test.describe('DSM Date Picker', () => {
@@ -16,10 +16,10 @@ test.describe('DSM Date Picker', () => {
     dayOfMonth: 20
   }
 
-  test('Select date from calendar for Date of Birth on Participant List page @dsm @angio @functional @participant-list',
+  test('Select date from calendar for Date of Birth on Participant List page @dsm @angio @participant-list',
     async ({ page, request }) => {
-      const today = new Date();
-      const formatedDate = getDate(today);
+      const today = getToday();
+      const formatedDate = getDate();
       const splits = formatedDate.split('/'); // mm/dd/yyyy
       const date = splits[1];
       const month = today.toLocaleString('default', { month: 'long' });
