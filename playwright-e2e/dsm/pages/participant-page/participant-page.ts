@@ -62,7 +62,7 @@ export default class ParticipantPage {
   }
 
   public async getEmail(): Promise<string> {
-    return await this.readMainInputValueFor(Label.EMAIL) || '';
+    return await this.readMainInputValueFor(Label.EMAIL_2) || '';
   }
 
   public async getDoNotContact(): Promise<boolean> {
