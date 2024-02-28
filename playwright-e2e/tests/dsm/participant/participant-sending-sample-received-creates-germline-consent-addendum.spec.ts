@@ -14,7 +14,7 @@ import KitUploadPage from 'dsm/pages/kitUpload-page/kitUpload-page';
 import InitialScanPage from 'dsm/pages/scanner-pages/initialScan-page';
 import TrackingScanPage from 'dsm/pages/scanner-pages/trackingScan-page';
 import FinalScanPage from 'dsm/pages/scanner-pages/finalScan-page';
-import { getDate } from 'utils/date-utils';
+import { getDate, getToday } from 'utils/date-utils';
 import KitsSentPage from 'dsm/pages/kitsInfo-pages/kitsSentPage';
 import ParticipantPage from 'dsm/pages/participant-page/participant-page';
 import OncHistoryTab from 'dsm/component/tabs/onc-history-tab';
@@ -65,11 +65,12 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
       //Fill out an onc history and get back an accession number
       oncHistoryTab = await participantPage.clickTab<OncHistoryTab>(Tab.ONC_HISTORY);
       const oncHistoryTable = oncHistoryTab.table;
-      today = getDate();
-      randomAccessionNumber = await fillOncHistoryRow(participantPage, oncHistoryTab, facilityName, facilityPhoneNumber, facilityFaxNumber);
+      const lastRow = await oncHistoryTable.getRowsCount() - 1;
+
+      randomAccessionNumber = await fillOncHistoryRow(participantPage, oncHistoryTab, facilityName, facilityPhoneNumber, facilityFaxNumber, lastRow);
 
       //Navigate to the Tissue Request page
-      const tissueInformationPage = await oncHistoryTable.openTissueInformationPage(0);
+      const tissueInformationPage = await oncHistoryTable.openTissueInformationPage(lastRow);
       await tissueInformationPage.assertPageTitle();
 
       /**
@@ -87,8 +88,10 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
       const tissueReceivedDate = await tissueInformationPage.getTissueReceivedDate();
 
       await tissueInformationPage.assertFaxSentDatesCount(1);
+
+      today = getDate();
       expect(faxSentDate.trim(), `Fax Sent Date has unexpected input: expected ${today} but received ${faxSentDate}`).toBe(today);
-      expect(tissueReceivedDate.trim(), `Tissue Received Date has unexpected input: expected ${getDate()} but received ${tissueReceivedDate}`).
+      expect(tissueReceivedDate.trim(), `Tissue Received Date has unexpected input: expected ${today} but received ${tissueReceivedDate}`).
         toBe(today);
 
       await tissueInformationPage.selectGender('Female');
@@ -170,11 +173,12 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
       //Fill out an onc history and get back an accession number
       oncHistoryTab = await participantPage.clickTab<OncHistoryTab>(Tab.ONC_HISTORY);
       const oncHistoryTable = oncHistoryTab.table;
-      today = getDate();
-      randomAccessionNumber = await fillOncHistoryRow(participantPage, oncHistoryTab, facilityName, facilityPhoneNumber, facilityFaxNumber);
+      const lastRow = await oncHistoryTable.getRowsCount() - 1;
+
+      randomAccessionNumber = await fillOncHistoryRow(participantPage, oncHistoryTab, facilityName, facilityPhoneNumber, facilityFaxNumber, lastRow);
 
       //Navigate to the Tissue Request page
-      const tissueInformationPage = await oncHistoryTable.openTissueInformationPage(0);
+      const tissueInformationPage = await oncHistoryTable.openTissueInformationPage(lastRow);
       await tissueInformationPage.assertPageTitle();
 
       /**
@@ -192,9 +196,11 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
       const tissueReceivedDate = await tissueInformationPage.getTissueReceivedDate();
 
       await tissueInformationPage.assertFaxSentDatesCount(1);
+
+      today = getDate();
       expect(faxSentDate.trim(), `Fax Sent Date has unexpected input: expected ${today} but received ${faxSentDate}`).toBe(today);
-      expect(tissueReceivedDate.trim(), `Tissue Received Date has unexpected input: expected ${getDate()} but received ${tissueReceivedDate}`).
-        toBe(getDate());
+      expect(tissueReceivedDate.trim(), `Tissue Received Date has unexpected input: expected ${today} but received ${tissueReceivedDate}`).
+        toBe(today);
 
       await tissueInformationPage.selectGender('Female');
 
@@ -275,11 +281,12 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
       //Fill out an onc history and get back an accession number
       oncHistoryTab = await participantPage.clickTab<OncHistoryTab>(Tab.ONC_HISTORY);
       const oncHistoryTable = oncHistoryTab.table;
-      today = getDate();
-      randomAccessionNumber = await fillOncHistoryRow(participantPage, oncHistoryTab, facilityName, facilityPhoneNumber, facilityFaxNumber);
+      const lastRow = await oncHistoryTable.getRowsCount() - 1;
+
+      randomAccessionNumber = await fillOncHistoryRow(participantPage, oncHistoryTab, facilityName, facilityPhoneNumber, facilityFaxNumber, lastRow);
 
       //Navigate to the Tissue Request page
-      const tissueInformationPage = await oncHistoryTable.openTissueInformationPage(0);
+      const tissueInformationPage = await oncHistoryTable.openTissueInformationPage(lastRow);
       await tissueInformationPage.assertPageTitle();
 
       /**
@@ -297,9 +304,11 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
       const tissueReceivedDate = await tissueInformationPage.getTissueReceivedDate();
 
       await tissueInformationPage.assertFaxSentDatesCount(1);
+
+      today = getDate();
       expect(faxSentDate.trim(), `Fax Sent Date has unexpected input: expected ${today} but received ${faxSentDate}`).toBe(today);
-      expect(tissueReceivedDate.trim(), `Tissue Received Date has unexpected input: expected ${getDate()} but received ${tissueReceivedDate}`).
-        toBe(getDate());
+      expect(tissueReceivedDate.trim(), `Tissue Received Date has unexpected input: expected ${today} but received ${tissueReceivedDate}`).
+        toBe(today);
 
       await tissueInformationPage.selectGender('Female');
 
@@ -380,11 +389,12 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
       //Fill out an onc history and get back an accession number
       oncHistoryTab = await participantPage.clickTab<OncHistoryTab>(Tab.ONC_HISTORY);
       const oncHistoryTable = oncHistoryTab.table;
-      today = getDate();
-      randomAccessionNumber = await fillOncHistoryRow(participantPage, oncHistoryTab, facilityName, facilityPhoneNumber, facilityFaxNumber);
+      const lastRow = await oncHistoryTable.getRowsCount() - 1;
+
+      randomAccessionNumber = await fillOncHistoryRow(participantPage, oncHistoryTab, facilityName, facilityPhoneNumber, facilityFaxNumber, lastRow);
 
       //Navigate to the Tissue Request page
-      const tissueInformationPage = await oncHistoryTable.openTissueInformationPage(0);
+      const tissueInformationPage = await oncHistoryTable.openTissueInformationPage(lastRow);
       await tissueInformationPage.assertPageTitle();
 
       /**
@@ -402,9 +412,11 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
       const tissueReceivedDate = await tissueInformationPage.getTissueReceivedDate();
 
       await tissueInformationPage.assertFaxSentDatesCount(1);
+
+      today = getDate();
       expect(faxSentDate.trim(), `Fax Sent Date has unexpected input: expected ${today} but received ${faxSentDate}`).toBe(today);
-      expect(tissueReceivedDate.trim(), `Tissue Received Date has unexpected input: expected ${getDate()} but received ${tissueReceivedDate}`).
-        toBe(getDate());
+      expect(tissueReceivedDate.trim(), `Tissue Received Date has unexpected input: expected ${today} but received ${tissueReceivedDate}`).
+        toBe(today);
 
       await tissueInformationPage.selectGender('Female');
 
@@ -721,29 +733,33 @@ async function fillOncHistoryRow(participantPage: ParticipantPage,
   oncHistoryTab: OncHistoryTab,
   facilityName: string,
   facilityPhoneNumber: string,
-  facilityFaxNumber: string): Promise<string> {
+  facilityFaxNumber: string,
+  lastRowIndex?: number): Promise<string> {
   const oncHistoryTable = oncHistoryTab.table;
+  const rowIndex = lastRowIndex ? lastRowIndex : await oncHistoryTable.getRowsCount() - 1;
   const randomAccessionNumber = crypto.randomUUID().toString().substring(0, 10);
+  const today = getToday();
+
   await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.DATE_OF_PX, {
     date: {
       date: {
-        yyyy: new Date().getFullYear(),
-        month: new Date().getMonth(),
-        dayOfMonth: new Date().getDate()
+        yyyy: today.getFullYear(),
+        month: today.getMonth(),
+        dayOfMonth: today.getDate()
       }
     }
-  });
-  await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.ACCESSION_NUMBER, { value: randomAccessionNumber });
-  await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.FACILITY, { value: facilityName });
-  await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.PHONE, { value: facilityPhoneNumber });
-  await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.FAX, { value: facilityFaxNumber });
+  }, rowIndex);
+  await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.ACCESSION_NUMBER, { value: randomAccessionNumber }, rowIndex);
+  await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.FACILITY, { value: facilityName }, rowIndex);
+  await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.PHONE, { value: facilityPhoneNumber }, rowIndex);
+  await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.FAX, { value: facilityFaxNumber }, rowIndex);
 
   //Mark Onc History as 'Request' status
-  await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.REQUEST, { select: OncHistorySelectRequestEnum.REQUEST });
+  await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.REQUEST, { select: OncHistorySelectRequestEnum.REQUEST }, rowIndex);
 
   //Click Download Request Documents in order to have the Fax Sent Date automatically filled out for recently inputted onc history
-  await oncHistoryTable.assertRowSelectionCheckbox();
-  await oncHistoryTable.selectRowAt(0);
+  await oncHistoryTable.assertRowSelectionCheckbox(rowIndex);
+  await oncHistoryTable.selectRowAt(rowIndex);
   await oncHistoryTab.downloadRequestDocuments();
   return randomAccessionNumber;
 }
