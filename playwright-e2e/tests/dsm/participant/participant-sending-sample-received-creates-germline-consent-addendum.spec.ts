@@ -131,7 +131,7 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
       const customizeViewPanel = participantListPage.filters.customizeViewPanel;
       await customizeViewPanel.open();
       await customizeViewPanel.selectColumns(CustomizeView.ADDITIONAL_CONSENT_LEARNING_DNA_WITH_INVITAE,
-        ['GERMLINE_CONSENT_ADDENDUM Survey Created']);
+        [Label.GERMLINE_CONSENT_ADDENDUM_SURVEY_CREATED]);
 
       const searchPanel = participantListPage.filters.searchPanel;
       await searchPanel.open();
