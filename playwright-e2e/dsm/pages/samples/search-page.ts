@@ -4,7 +4,7 @@ import Select from 'dss/component/select';
 import Table from 'dss/component/table';
 import { waitForNoSpinner, waitForResponse } from 'utils/test-utils';
 import KitsPageBase from 'dsm/pages/kits-page-base';
-import { KitsColumnsEnum } from 'dsm/pages/kitsInfo-pages/enums/kitsColumns-enum';
+import { Label } from 'dsm/enums';
 
 export enum SearchByField {
   SHORT_ID = 'Short ID',
@@ -19,16 +19,16 @@ export default class SearchPage extends KitsPageBase {
 
   protected PAGE_TITLE = 'Kits Search';
   protected TABLE_HEADERS = [
-    KitsColumnsEnum.DDP_REALM,
-    KitsColumnsEnum.SHORT_ID,
-    KitsColumnsEnum.COLLABORATOR_PARTICIPANT_ID,
-    KitsColumnsEnum.COLLABORATOR_SAMPLE_ID,
-    KitsColumnsEnum.SHIPPING_ID,
-    KitsColumnsEnum.MF_CODE,
-    KitsColumnsEnum.TYPE,
-    KitsColumnsEnum.SENT,
-    KitsColumnsEnum.RECEIVED,
-    KitsColumnsEnum.COLLECTION_DATE
+    Label.DDP_REALM,
+    Label.SHORT_ID,
+    Label.COLLABORATOR_PARTICIPANT_ID,
+    Label.COLLABORATOR_SAMPLE_ID,
+    Label.SHIPPING_ID,
+    Label.MF_CODE,
+    Label.TYPE,
+    Label.SENT,
+    Label.RECEIVED,
+    Label.COLLECTION_DATE
   ];
 
   async waitForReady(): Promise<void> {

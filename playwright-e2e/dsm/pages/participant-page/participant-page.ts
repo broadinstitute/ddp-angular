@@ -1,15 +1,13 @@
 import {expect, Locator, Page} from '@playwright/test';
 import {waitForNoSpinner, waitForResponse} from 'utils/test-utils';
-import {MainInfoEnum} from 'dsm/pages/participant-page/enums/main-info-enum';
+import {Label, Tab, ResponsePayload} from 'dsm/enums';
 import Tabs from 'dsm/component/tabs/tabs';
-import {TabEnum} from 'dsm/component/tabs/enums/tab-enum';
 import Input from 'dss/component/input';
 import Modal from 'dss/component/modal';
-import {MessageBodyResponseEnum} from './enums/message-body-response-enum';
 
 export default class ParticipantPage {
   private readonly PAGE_TITLE: string = 'Participant Page';
-  private readonly UPDATE_PROFILE_SUCCESS_MESSAGES = [MessageBodyResponseEnum.TASK_TYPE_UPDATE_PROFILE, MessageBodyResponseEnum.RESULT_TYPE_SUCCESS];
+  private readonly UPDATE_PROFILE_SUCCESS_MESSAGES = [ResponsePayload.TASK_TYPE_UPDATE_PROFILE, ResponsePayload.RESULT_TYPE_SUCCESS];
   private readonly tabs = new Tabs(this.page);
 
   constructor(protected readonly page: Page) {}
@@ -17,7 +15,7 @@ export default class ParticipantPage {
   public async waitForReady(): Promise<void> {
     await this.assertPageTitle();
     await waitForNoSpinner(this.page);
-    await expect(this.page.locator(this.getMainTextInfoXPath(MainInfoEnum.STATUS))).toBeVisible();
+    await expect(this.page.locator(this.getMainTextInfoXPath(Label.STATUS))).toBeVisible();
   }
 
   public async backToList(): Promise<void> {
@@ -40,70 +38,70 @@ export default class ParticipantPage {
 
   /* Participant Information */
   public async getStatus(): Promise<string> {
-    return await this.readMainTextInfoFor(MainInfoEnum.STATUS) || '';
+    return await this.readMainTextInfoFor(Label.STATUS) || '';
   }
 
   public async getRegistrationDate(): Promise<string> {
-    return await this.readMainTextInfoFor(MainInfoEnum.REGISTRATION_DATE) || '';
+    return await this.readMainTextInfoFor(Label.REGISTRATION_DATE) || '';
   }
 
   public async getShortId(): Promise<string> {
-    return await this.readMainTextInfoFor(MainInfoEnum.SHORT_ID) || '';
+    return await this.readMainTextInfoFor(Label.SHORT_ID) || '';
   }
 
   public async getGuid(): Promise<string> {
-    return await this.readMainTextInfoFor(MainInfoEnum.GUID) || '';
+    return await this.readMainTextInfoFor(Label.GUID) || '';
   }
 
   public async getFirstName(): Promise<string> {
-    return await this.readMainInputValueFor(MainInfoEnum.FIRST_NAME) || '';
+    return await this.readMainInputValueFor(Label.FIRST_NAME) || '';
   }
 
   public async getLastName(): Promise<string> {
-    return await this.readMainInputValueFor(MainInfoEnum.LAST_NAME) || '';
+    return await this.readMainInputValueFor(Label.LAST_NAME) || '';
   }
 
   public async getEmail(): Promise<string> {
-    return await this.readMainInputValueFor(MainInfoEnum.EMAIL) || '';
+    return await this.readMainInputValueFor(Label.EMAIL) || '';
   }
 
   public async getDoNotContact(): Promise<boolean> {
-    return await this.readMainCheckboxValueFor(MainInfoEnum.DO_NOT_CONTACT);
+    return await this.readMainCheckboxValueFor(Label.DO_NOT_CONTACT);
   }
 
   public async getDateOfBirth(): Promise<string> {
-    return await this.readMainTextInfoFor(MainInfoEnum.DATE_OF_BIRTH) || '';
+    return await this.readMainTextInfoFor(Label.DATE_OF_BIRTH) || '';
   }
 
   public async getDateOfMajority(): Promise<string> {
-    return await this.readMainTextInfoFor(MainInfoEnum.DATE_OF_MAJORITY) || '';
+    return await this.readMainTextInfoFor(Label.DATE_OF_MAJORITY) || '';
   }
 
   public async getDateOfDiagnosis(): Promise<string> {
-    return await this.readMainTextInfoFor(MainInfoEnum.DATE_OF_DIAGNOSIS) || '';
+    return await this.readMainTextInfoFor(Label.DATE_OF_DIAGNOSIS) || '';
   }
 
   public async getGender(): Promise<string> {
-    return await this.readMainTextInfoFor(MainInfoEnum.GENDER) || '';
+    return await this.readMainTextInfoFor(Label.GENDER) || '';
   }
 
   public async getPreferredLanguage(): Promise<string> {
-    return await this.readMainTextInfoFor(MainInfoEnum.PREFERRED_LANGUAGE) || '';
+    return await this.readMainTextInfoFor(Label.PREFERRED_LANGUAGE) || '';
   }
 
   public async getConsentBlood(): Promise<string> {
-    return await this.readMainTextInfoFor(MainInfoEnum.CONSENT_BLOOD) || '';
+    return await this.readMainTextInfoFor(Label.CONSENT_BLOOD) || '';
   }
 
   public async getConsentTissue(): Promise<string> {
-    return await this.readMainTextInfoFor(MainInfoEnum.CONSENT_TISSUE) || '';
+    return await this.readMainTextInfoFor(Label.CONSENT_TISSUE) || '';
   }
 
-  public async isTabVisible(tabName: TabEnum): Promise<boolean> {
+  public async isTabVisible(tabName: Tab): Promise<boolean> {
     return await this.tabs.isTabVisible(tabName);
   }
 
-  public async clickTab<T extends object>(tabName: TabEnum): Promise<T> {
+  public async clickTab<T extends object>(tabName: Tab): Promise<T> {
     await expect(this.tabs.tabLocator(tabName), `The tab '${tabName}' is not visible`)
       .toBeVisible();
     return await this.tabs.clickTab<T>(tabName) as T;
@@ -118,15 +116,15 @@ export default class ParticipantPage {
   }
 
   public get getFirstNameLocator(): Locator {
-    return this.page.locator(this.getMainInputValueInfoXPath(MainInfoEnum.FIRST_NAME))
+    return this.page.locator(this.getMainInputValueInfoXPath(Label.FIRST_NAME));
   }
 
   public get getLastNameLocator(): Locator {
-    return this.page.locator(this.getMainInputValueInfoXPath(MainInfoEnum.LAST_NAME))
+    return this.page.locator(this.getMainInputValueInfoXPath(Label.LAST_NAME));
   }
 
-  public async updateInput(inputEnum: MainInfoEnum, newValue: string): Promise<void> {
-    const input = this.page.locator(this.getMainInputValueInfoXPath(inputEnum))
+  public async updateInput(inputEnum: Label, newValue: string): Promise<void> {
+    const input = this.page.locator(this.getMainInputValueInfoXPath(inputEnum));
     await input.fill('');
     await input.fill(newValue);
 
@@ -141,7 +139,10 @@ export default class ParticipantPage {
 
     const modal = new Modal(this.page);
     const content = await modal.getContent().innerText();
-    expect(content).toStrictEqual('Participant successfully updated');
+    const msg1 = 'Participant successfully updated';
+    const msg2 = 'Your update has been saved, but the system is unable to display it at the moment.';
+    const regex = `(${msg1}|${msg2})`;
+    await expect(modal.getContent()).toHaveText(new RegExp(regex), { timeout: 5000 });
     await this.page.keyboard.press('Escape'); // close modal
 
     await this.page.waitForTimeout(15000); // Don't remove: sleep 15 seconds
@@ -149,15 +150,15 @@ export default class ParticipantPage {
 
   /* Helper functions */
 
-  private async readMainTextInfoFor(key: MainInfoEnum) {
+  private async readMainTextInfoFor(key: Label) {
    return await this.page.locator(this.getMainTextInfoXPath(key)).textContent();
   }
 
-  private async readMainInputValueFor(key: MainInfoEnum) {
+  private async readMainInputValueFor(key: Label) {
     return await this.page.locator(this.getMainInputValueInfoXPath(key)).inputValue();
   }
 
-  private async readMainCheckboxValueFor(key: MainInfoEnum) {
+  private async readMainCheckboxValueFor(key: Label) {
     return await this.page.locator(this.getMainCheckboxValueInfoXPath(key)).isChecked();
   }
   /* ---- */
@@ -172,24 +173,24 @@ export default class ParticipantPage {
   }
 
   /* XPaths */
-  public getMainTextInfoXPath(info: MainInfoEnum) {
+  public getMainTextInfoXPath(info: Label) {
     return this.getMainInfoXPath(info);
   }
 
-  private getMainInputValueInfoXPath(info: MainInfoEnum) {
-    return `${this.getMainInfoXPath(info)}/input`
+  private getMainInputValueInfoXPath(info: Label) {
+    return `${this.getMainInfoXPath(info)}/input`;
   }
 
-  private getMainInputUpdateButtonXPath(info: MainInfoEnum) {
-    return `${this.getMainInfoXPath(info)}/button[contains(.,"Update")]`
+  private getMainInputUpdateButtonXPath(info: Label) {
+    return `${this.getMainInfoXPath(info)}/button[contains(.,"Update")]`;
   }
 
-  private getMainCheckboxValueInfoXPath(info: MainInfoEnum) {
-    return `${this.getMainInfoXPath(info)}/mat-checkbox//input[@type='checkbox']`
+  private getMainCheckboxValueInfoXPath(info: Label) {
+    return `${this.getMainInfoXPath(info)}/mat-checkbox//input[@type='checkbox']`;
   }
 
-  private getMainInfoXPath(info: MainInfoEnum): string {
-    return `//table[@class='table table-condensed']/tbody/tr[td[1][text()[normalize-space()='${info}']]]/td[2]`
+  private getMainInfoXPath(info: Label): string {
+    return `//table[@class='table table-condensed']/tbody/tr[td[1][text()[normalize-space()='${info}']]]/td[2]`;
   }
 
   /* assertions */

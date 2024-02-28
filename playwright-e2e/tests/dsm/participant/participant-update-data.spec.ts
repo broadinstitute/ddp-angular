@@ -4,8 +4,7 @@ import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
 import { logInfo } from 'utils/log-utils';
 import { faker } from '@faker-js/faker';
-import { MainInfoEnum } from 'dsm/pages/participant-page/enums/main-info-enum';
-import { AdditionalFilter, CustomViewColumns } from 'dsm/component/filters/sections/search/search-enums';
+import { CustomizeView, DataFilter, Label } from 'dsm/enums';
 
 test.describe.serial('Editing Participant Information', () => {
   const cmiClinicalStudies = [StudyEnum.LMS, StudyEnum.OSTEO2];
@@ -24,15 +23,14 @@ test.describe.serial('Editing Participant Information', () => {
       const participantListPage: ParticipantListPage = await ParticipantListPage.goto(page, study, request);
 
       await test.step('Find a participant', async () => {
-        const oncHistoryRequestStatusColumn = 'Request Status';
         const customizeViewPanel = participantListPage.filters.customizeViewPanel;
         await customizeViewPanel.open();
-        await customizeViewPanel.selectColumns(CustomViewColumns.ONC_HISTORY, [oncHistoryRequestStatusColumn]);
+        await customizeViewPanel.selectColumns(CustomizeView.ONC_HISTORY, [Label.REQUEST_STATUS]);
 
         const searchPanel = participantListPage.filters.searchPanel;
         await searchPanel.open();
-        await searchPanel.checkboxes('Status', { checkboxValues: ['Enrolled'] });
-        await searchPanel.checkboxes(oncHistoryRequestStatusColumn, { additionalFilters: [AdditionalFilter.NOT_EMPTY] });
+        await searchPanel.checkboxes(Label.STATUS, { checkboxValues: [DataFilter.ENROLLED] });
+        await searchPanel.checkboxes(Label.REQUEST_STATUS, { additionalFilters: [DataFilter.NOT_EMPTY] });
         await searchPanel.search();
       });
 
@@ -63,8 +61,8 @@ test.describe.serial('Editing Participant Information', () => {
       await test.step('Change participant First Name and Last Name', async () => {
         newFirstName = faker.person.firstName();
         newLastName = faker.person.lastName();
-        await participantPage.updateInput(MainInfoEnum.FIRST_NAME, newFirstName);
-        await participantPage.updateInput(MainInfoEnum.LAST_NAME, newLastName);
+        await participantPage.updateInput(Label.FIRST_NAME, newFirstName);
+        await participantPage.updateInput(Label.LAST_NAME, newLastName);
       });
 
       await test.step('Verify changed First Name and Last Name', async () => {

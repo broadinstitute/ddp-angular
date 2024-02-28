@@ -2,6 +2,7 @@ import { expect } from '@playwright/test';
 import { test } from 'fixtures/dsm-fixture';
 import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import FollowUpSurveyPage from 'dsm/pages/follow-up-survey-page';
+import { Label } from 'dsm/enums';
 
 
 test.describe('Follow-Up Surveys', () => {
@@ -33,32 +34,32 @@ test.describe('Follow-Up Surveys', () => {
       const rowsCount = await previousSurveysTable.rowLocator().count();
 
       // Check search by column should be working
-      const row1ParticipantId = await previousSurveysTable.getRowText(0, 'Participant ID');
-      const row1ShortId = await previousSurveysTable.getRowText(0, 'Short ID');
+      const row1ParticipantId = await previousSurveysTable.getRowText(0, Label.PARTICIPANT_ID);
+      const row1ShortId = await previousSurveysTable.getRowText(0, Label.SHORT_ID);
 
       expect(row1ParticipantId).not.toBeNull();
       expect(row1ShortId).not.toBeNull();
 
       // Depending on REPEATING OR NONREPEATING surveys, rows count from search could be 1 or greater.
       // Search Participant ID found in first row
-      await previousSurveysTable.searchByColumn('Participant ID', row1ParticipantId!);
-      expect(await previousSurveysTable.getRowText(0, 'Short ID')).toBe(row1ShortId);
+      await previousSurveysTable.searchByColumn(Label.PARTICIPANT_ID, row1ParticipantId!);
+      expect(await previousSurveysTable.getRowText(0, Label.SHORT_ID)).toBe(row1ShortId);
 
       // Clear search
-      await previousSurveysTable.searchByColumn('Participant ID', '');
+      await previousSurveysTable.searchByColumn(Label.PARTICIPANT_ID, '');
       await expect(previousSurveysTable.rowLocator()).toHaveCount(rowsCount);
 
       // If there are more than 1 rows, fetch values in second row
       if (rowsCount > 1) {
-        const row2ParticipantId = await previousSurveysTable.getRowText(1, 'Participant ID');
-        const row2ShortId = await previousSurveysTable.getRowText(1, 'Short ID');
+        const row2ParticipantId = await previousSurveysTable.getRowText(1, Label.PARTICIPANT_ID);
+        const row2ShortId = await previousSurveysTable.getRowText(1, Label.SHORT_ID);
 
         expect(row2ParticipantId).not.toBeNull();
         expect(row2ShortId).not.toBeNull();
 
         // Search Participant ID found in second row
-        await previousSurveysTable.searchByColumn('Participant ID', row2ParticipantId!);
-        expect(await previousSurveysTable.getRowText(0, 'Short ID')).toBe(row2ShortId);
+        await previousSurveysTable.searchByColumn(Label.PARTICIPANT_ID, row2ParticipantId!);
+        expect(await previousSurveysTable.getRowText(0, Label.SHORT_ID)).toBe(row2ShortId);
       }
     });
   }

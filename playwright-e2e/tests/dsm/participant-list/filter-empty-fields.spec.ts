@@ -1,6 +1,6 @@
 import { expect } from '@playwright/test';
 import { test } from 'fixtures/dsm-fixture';
-import { CustomViewColumns } from 'dsm/component/filters/sections/search/search-enums';
+import { CustomizeView, Label } from 'dsm/enums';
 import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
 
@@ -30,30 +30,19 @@ test.describe('Participants List Manual Search', () => {
       const defaultRowsCount = await participantsTable.getRowsCount();
       expect(defaultRowsCount).toStrictEqual(10);
 
-      // Adding Sample Columns
-      const collaboratorPtIdColumn = 'Collaborator Participant ID';
-      const normalCollaboratorSampleIdColumn = 'Normal Collaborator Sample ID';
-      const sampleSentColumn = 'Sample Sent';
-      const sampleReceivedColumn = 'Sample Received';
-
-      // Adding Medical Record Columns
-      const institutionNameColumn = 'Institution Name';
-      const initialMRReceivedColumn = 'Initial MR Received';
-      const noActionNeededColumn = 'No Action Needed';
-
       const customizeViewPanel = participantListPage.filters.customizeViewPanel;
       await customizeViewPanel.open();
-      await customizeViewPanel.selectColumns(CustomViewColumns.SAMPLE,
-        [collaboratorPtIdColumn, normalCollaboratorSampleIdColumn, sampleSentColumn, sampleReceivedColumn]);
-      await customizeViewPanel.selectColumns(CustomViewColumns.MEDICAL_RECORD,
-        [institutionNameColumn, initialMRReceivedColumn, noActionNeededColumn]);
+      await customizeViewPanel.selectColumns(CustomizeView.SAMPLE,
+        [Label.COLLABORATOR_PARTICIPANT_ID, Label.NORMAL_COLLABORATOR_SAMPLE_ID, Label.SAMPLE_SENT, Label.SAMPLE_RECEIVED]);
+      await customizeViewPanel.selectColumns(CustomizeView.MEDICAL_RECORD,
+        [Label.INSTITUTION_NAME, Label.INITIAL_MR_RECEIVED, Label.NO_ACTION_NEEDED]);
 
       // await customizeViewPanel.deselectColumns(CustomViewColumns.PARTICIPANT, [MainInfoEnum.DDP]);
       await customizeViewPanel.close();
 
       // Table automatically reloaded with new column added. Random check few columns
-      await expect(participantsTable.getHeaderByName(normalCollaboratorSampleIdColumn)).toBeVisible();
-      await expect(participantsTable.getHeaderByName(institutionNameColumn)).toBeVisible();
+      await expect(participantsTable.getHeaderByName(Label.NORMAL_COLLABORATOR_SAMPLE_ID)).toBeVisible();
+      await expect(participantsTable.getHeaderByName(Label.INSTITUTION_NAME)).toBeVisible();
 
       // Count of participants does not change with new columns added.
       const numParticipantsWithColumn = await participantsTable.numOfParticipants();
@@ -61,7 +50,7 @@ test.describe('Participants List Manual Search', () => {
 
       // Should be able to hide any column
       await customizeViewPanel.open();
-      await customizeViewPanel.deselectColumns(CustomViewColumns.PARTICIPANT, ['DDP']);
+      await customizeViewPanel.deselectColumns(CustomizeView.PARTICIPANT, ['DDP']);
       await expect(participantsTable.getHeaderByName('DDP')).not.toBeVisible();
 
       // Clear search fields
@@ -89,13 +78,13 @@ test.describe('Participants List Manual Search', () => {
       await searchPanel.search({ uri: '/ui/applyFilter?' });
 
       // Empty manual search will not lose added columns
-      await expect(participantsTable.getHeaderByName(collaboratorPtIdColumn)).toBeVisible();
-      await expect(participantsTable.getHeaderByName(normalCollaboratorSampleIdColumn)).toBeVisible();
-      await expect(participantsTable.getHeaderByName(sampleSentColumn)).toBeVisible();
-      await expect(participantsTable.getHeaderByName(sampleReceivedColumn)).toBeVisible();
-      await expect(participantsTable.getHeaderByName(institutionNameColumn)).toBeVisible();
-      await expect(participantsTable.getHeaderByName(initialMRReceivedColumn)).toBeVisible();
-      await expect(participantsTable.getHeaderByName(noActionNeededColumn)).toBeVisible();
+      await expect(participantsTable.getHeaderByName(Label.COLLABORATOR_PARTICIPANT_ID)).toBeVisible();
+      await expect(participantsTable.getHeaderByName(Label.NORMAL_COLLABORATOR_SAMPLE_ID)).toBeVisible();
+      await expect(participantsTable.getHeaderByName(Label.SAMPLE_SENT)).toBeVisible();
+      await expect(participantsTable.getHeaderByName(Label.SAMPLE_RECEIVED)).toBeVisible();
+      await expect(participantsTable.getHeaderByName(Label.INSTITUTION_NAME)).toBeVisible();
+      await expect(participantsTable.getHeaderByName(Label.INITIAL_MR_RECEIVED)).toBeVisible();
+      await expect(participantsTable.getHeaderByName(Label.NO_ACTION_NEEDED)).toBeVisible();
 
       // Empty manual search will not change PT count
       let numOfParticipantsAfter = await participantsTable.numOfParticipants();
@@ -105,9 +94,9 @@ test.describe('Participants List Manual Search', () => {
       await searchPanel.open();
 
       // Search with No checkbox
-      await searchPanel.checkboxes(noActionNeededColumn, { checkboxValues: ['No'] });
+      await searchPanel.checkboxes(Label.NO_ACTION_NEEDED, { checkboxValues: ['No'] });
       // Check No will uncheck Yes automatically
-      expect(await searchPanel.isFilterCheckboxChecked(noActionNeededColumn, 'Yes')).toBe(false);
+      expect(await searchPanel.isFilterCheckboxChecked(Label.NO_ACTION_NEEDED, 'Yes')).toBe(false);
       await searchPanel.search();
 
       // Search will change PT count
@@ -116,14 +105,14 @@ test.describe('Participants List Manual Search', () => {
 
       // Column cell value should be No
       let rowIndex = await participantsTable.randomizeRows();
-      let value = await participantsTable.getParticipantDataAt(rowIndex[0], noActionNeededColumn);
+      let value = await participantsTable.getParticipantDataAt(rowIndex[0], Label.NO_ACTION_NEEDED);
       expect(value).toContain('No');
 
       // Search with Yes checkbox
       await searchPanel.open();
-      await searchPanel.checkboxes(noActionNeededColumn, { checkboxValues: ['Yes'] });
+      await searchPanel.checkboxes(Label.NO_ACTION_NEEDED, { checkboxValues: ['Yes'] });
       // Check Yes will uncheck No automatically
-      expect(await searchPanel.isFilterCheckboxChecked(noActionNeededColumn, 'No')).toBe(false);
+      expect(await searchPanel.isFilterCheckboxChecked(Label.NO_ACTION_NEEDED, 'No')).toBe(false);
       await searchPanel.search();
 
       // Search will again change PT count
@@ -132,7 +121,7 @@ test.describe('Participants List Manual Search', () => {
 
       // Column cell value should be Yes
       rowIndex = await participantsTable.randomizeRows();
-      value = await participantsTable.getParticipantDataAt(rowIndex[0], noActionNeededColumn);
+      value = await participantsTable.getParticipantDataAt(rowIndex[0], Label.NO_ACTION_NEEDED);
       expect(value).toContain('Yes');
     });
   }

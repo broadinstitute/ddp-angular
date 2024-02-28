@@ -1,13 +1,12 @@
 import { expect } from '@playwright/test';
 import { test } from 'fixtures/dsm-fixture';
-import { CustomViewColumns } from 'dsm/component/filters/sections/search/search-enums';
+import { CustomizeView, DataFilter, Label, Tab } from 'dsm/enums';
 import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
 import { studyShortName } from 'utils/test-utils';
 import { logInfo } from 'utils/log-utils';
 import ParticipantPage from 'dsm/pages/participant-page/participant-page';
 import OncHistoryTab from 'dsm/component/tabs/onc-history-tab';
-import { TabEnum } from 'dsm/component/tabs/enums/tab-enum';
 import { OncHistoryInputColumnsEnum, OncHistorySelectRequestEnum } from 'dsm/component/tabs/enums/onc-history-input-columns-enum';
 import { SortOrder } from 'dss/component/table';
 
@@ -45,19 +44,19 @@ test.describe.serial('Tumor Collaborator Sample ID', () => {
 
       await test.step('Search for the right participant', async () => {
         await customizeViewPanel.open();
-        await customizeViewPanel.selectColumns(CustomViewColumns.TISSUE, ['Tumor Collaborator Sample ID']);
-        await customizeViewPanel.selectColumns(CustomViewColumns.PARTICIPANT, ['Registration Date']);
-        await customizeViewPanel.deselectColumns(CustomViewColumns.PARTICIPANT, ['DDP', 'Last Name', 'First Name']);
-        await customizeViewPanel.selectColumns(CustomViewColumns.DSM_COLUMNS, ['Onc History Created']);
-        await customizeViewPanel.selectColumns(CustomViewColumns.MEDICAL_RECORD, ['MR Problem']);
-        await customizeViewPanel.selectColumns(CustomViewColumns.RESEARCH_CONSENT_FORM, ['CONSENT_BLOOD', 'CONSENT_TISSUE']);
+        await customizeViewPanel.selectColumns(CustomizeView.TISSUE, [Label.TUMOR_COLLABORATOR_SAMPLE_ID]);
+        await customizeViewPanel.selectColumns(CustomizeView.PARTICIPANT, [Label.REGISTRATION_DATE]);
+        await customizeViewPanel.deselectColumns(CustomizeView.PARTICIPANT, [Label.DDP, Label.LAST_NAME, Label.FIRST_NAME]);
+        await customizeViewPanel.selectColumns(CustomizeView.DSM_COLUMNS, [Label.ONC_HISTORY_CREATED]);
+        await customizeViewPanel.selectColumns(CustomizeView.MEDICAL_RECORD, [Label.MR_PROBLEM]);
+        await customizeViewPanel.selectColumns(CustomizeView.RESEARCH_CONSENT_FORM, ['CONSENT_BLOOD', 'CONSENT_TISSUE']);
 
         const searchPanel = participantListPage.filters.searchPanel;
         await searchPanel.open();
-        await searchPanel.checkboxes('Status', { checkboxValues: ['Enrolled'] });
-        await searchPanel.checkboxes('MR Problem', { checkboxValues: ['No'] });
-        await searchPanel.checkboxes('CONSENT_BLOOD', { checkboxValues: ['Yes'] });
-        await searchPanel.checkboxes('CONSENT_TISSUE', { checkboxValues: ['Yes'] });
+        await searchPanel.checkboxes(Label.STATUS, { checkboxValues: [DataFilter.ENROLLED] });
+        await searchPanel.checkboxes(Label.MR_PROBLEM, { checkboxValues: [DataFilter.NO] });
+        await searchPanel.checkboxes('CONSENT_BLOOD', { checkboxValues: [DataFilter.YES] });
+        await searchPanel.checkboxes('CONSENT_TISSUE', { checkboxValues: [DataFilter.YES] });
         await searchPanel.search();
 
         const numParticipants = await participantListTable.numOfParticipants();
@@ -66,14 +65,14 @@ test.describe.serial('Tumor Collaborator Sample ID', () => {
       });
 
       // Open Participant page
-      await participantListTable.sort('Registration Date', SortOrder.ASC);
+      await participantListTable.sort(Label.REGISTRATION_DATE, SortOrder.ASC);
       const [row] = await participantListTable.randomizeRows();
-      const shortID = await participantListTable.getParticipantDataAt(row, 'Short ID');
+      const shortID = await participantListTable.getParticipantDataAt(row, Label.SHORT_ID);
       expect(shortID?.length).toStrictEqual(6);
       logInfo(`Participant Short ID: ${shortID}`);
 
       const participantPage: ParticipantPage = await participantListTable.openParticipantPageAt(row);
-      const oncHistoryTab = await participantPage.clickTab<OncHistoryTab>(TabEnum.ONC_HISTORY);
+      const oncHistoryTab = await participantPage.clickTab<OncHistoryTab>(Tab.ONC_HISTORY);
       const oncHistoryTable = oncHistoryTab.table;
       const rows = await oncHistoryTable.rowLocator().count(); // append new row
       const rowIndex = rows - 1; // 0th-index

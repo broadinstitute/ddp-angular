@@ -9,7 +9,7 @@ import {StudyNavEnum} from 'dsm/component/navigation/enums/studyNav-enum';
 import ParticipantPage from 'dsm/pages/participant-page/participant-page';
 import {KitUploadInfo} from 'dsm/pages/kitUpload-page/models/kitUpload-model';
 import ContactInformationTab from 'dsm/component/tabs/contact-information-tab';
-import {TabEnum} from 'dsm/component/tabs/enums/tab-enum';
+import {Label, Tab} from 'dsm/enums';
 import {SamplesNavEnum} from 'dsm/component/navigation/enums/samplesNav-enum';
 import {KitTypeEnum} from 'dsm/component/kitType/enums/kitType-enum';
 import KitUploadPage from 'dsm/pages/kitUpload-page/kitUpload-page';
@@ -20,7 +20,6 @@ import SampleInformationTab from 'dsm/component/tabs/sample-information-tab';
 import {SampleInfoEnum} from 'dsm/component/tabs/enums/sampleInfo-enum';
 import {SampleStatusEnum} from 'dsm/component/tabs/enums/sampleStatus-enum';
 import KitsWithoutLabelPage from 'dsm/pages/kitsInfo-pages/kitsWithoutLabel-page';
-import {KitsColumnsEnum} from 'dsm/pages/kitsInfo-pages/enums/kitsColumns-enum';
 import KitsSentPage from 'dsm/pages/kitsInfo-pages/kitsSentPage';
 import KitsReceivedPage from 'dsm/pages/kitsInfo-pages/kitsReceived-page/kitsReceivedPage';
 import TrackingScanPage from 'dsm/pages/scanner-pages/trackingScan-page';
@@ -73,7 +72,7 @@ test.describe.serial('Blood Kits upload flow', () => {
       shortID = await participantPage.getShortId();
       logInfo(`Participant Short ID: ${shortID}`);
 
-      const isContactInformationTabVisible = await participantPage.isTabVisible(TabEnum.CONTACT_INFORMATION);
+      const isContactInformationTabVisible = await participantPage.isTabVisible(Tab.CONTACT_INFORMATION);
       kitUploadInfo = new KitUploadInfo(
         shortID,
         await participantPage.getFirstName(),
@@ -82,7 +81,7 @@ test.describe.serial('Blood Kits upload flow', () => {
 
       // collects data from the contact information tab if the tab is available
       if (isContactInformationTabVisible) {
-        const contactInformationTab = await participantPage.clickTab<ContactInformationTab>(TabEnum.CONTACT_INFORMATION);
+        const contactInformationTab = await participantPage.clickTab<ContactInformationTab>(Tab.CONTACT_INFORMATION);
         kitUploadInfo.address.street1 = (await contactInformationTab.getStreet1()) || kitUploadInfo.address.street1;
         kitUploadInfo.address.city = (await contactInformationTab.getCity()) || kitUploadInfo.address.city;
         kitUploadInfo.address.postalCode = (await contactInformationTab.getZip()) || kitUploadInfo.address.postalCode;
@@ -120,8 +119,8 @@ test.describe.serial('Blood Kits upload flow', () => {
       await kitsWithoutLabelPage.selectKitType(kitType);
       await kitsWithoutLabelPage.assertCreateLabelsBtn();
       await kitsWithoutLabelPage.assertReloadKitListBtn();
-      await kitsWithoutLabelPage.search(KitsColumnsEnum.SHORT_ID, shortID);
-      shippingID = (await kitsWithoutLabelPage.getData(KitsColumnsEnum.SHIPPING_ID)).trim();
+      await kitsWithoutLabelPage.search(Label.SHORT_ID, shortID);
+      shippingID = (await kitsWithoutLabelPage.getData(Label.SHIPPING_ID)).trim();
 
       // On Final Scan page, if Blood kit was not scanned on the Tracking Scan page before, DSM should show an error
       finalScanPage = await navigation.selectFromSamples<FinalScanPage>(SamplesNavEnum.FINAL_SCAN);
@@ -152,9 +151,9 @@ test.describe.serial('Blood Kits upload flow', () => {
       await kitsSentPage.selectKitType(kitType);
       await kitsSentPage.assertReloadKitListBtn();
       await kitsSentPage.assertTableHeader();
-      await kitsSentPage.search(KitsColumnsEnum.MF_CODE, kitLabel, { count: 1 });
+      await kitsSentPage.search(Label.MF_CODE, kitLabel, { count: 1 });
 
-      const sentDate = await kitsSentPage.getData(KitsColumnsEnum.SENT);
+      const sentDate = await kitsSentPage.getData(Label.SENT);
       expect(getDate(new Date(sentDate))).toStrictEqual(getDate());
 
       // kits received page
@@ -166,9 +165,9 @@ test.describe.serial('Blood Kits upload flow', () => {
       await kitsReceivedPage.assertDisplayedKitTypes(expectedKitTypes);
       await kitsReceivedPage.assertReloadKitListBtn();
       await kitsReceivedPage.assertTableHeader();
-      await kitsReceivedPage.search(KitsColumnsEnum.MF_CODE, kitLabel);
+      await kitsReceivedPage.search(Label.MF_CODE, kitLabel);
       await kitsReceivedPage.assertDisplayedRowsCount(1);
-      const receivedDate = await kitsReceivedPage.getData(KitsColumnsEnum.RECEIVED);
+      const receivedDate = await kitsReceivedPage.getData(Label.RECEIVED);
 
       // checks if the uploaded kit is displayed on the participant's page, in the sample information tab
       await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
@@ -176,11 +175,11 @@ test.describe.serial('Blood Kits upload flow', () => {
 
       const searchPanel = participantListPage.filters.searchPanel;
       await searchPanel.open();
-      await searchPanel.text('Short ID', {textValue: shortID});
+      await searchPanel.text(Label.SHORT_ID, {textValue: shortID});
       await searchPanel.search();
       await participantListTable.openParticipantPageAt(0);
       await participantPage.assertPageTitle();
-      const sampleInformationTab = await participantPage.clickTab<SampleInformationTab>(TabEnum.SAMPLE_INFORMATION);
+      const sampleInformationTab = await participantPage.clickTab<SampleInformationTab>(Tab.SAMPLE_INFORMATION);
       await sampleInformationTab.assertKitType(kitLabel, kitType);
       await sampleInformationTab.assertValue(kitLabel, {info: SampleInfoEnum.STATUS, value: SampleStatusEnum.RECEIVED});
       await sampleInformationTab.assertValue(kitLabel, {info: SampleInfoEnum.RECEIVED, value: receivedDate});

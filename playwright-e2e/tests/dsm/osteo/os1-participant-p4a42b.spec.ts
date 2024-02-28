@@ -2,7 +2,7 @@ import { Page, expect } from '@playwright/test';
 import { test } from 'fixtures/dsm-fixture';
 import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
-import { TabEnum } from 'dsm/component/tabs/enums/tab-enum';
+import { Label, Tab } from 'dsm/enums';
 import MedicalRecordsTab from 'dsm/pages/medical-records/medical-records-tab';
 import OncHistoryTab from 'dsm/component/tabs/onc-history-tab';
 import CohortTag from 'dsm/component/cohort-tag';
@@ -74,12 +74,12 @@ test.describe.serial('Same Participant in Osteo1 and Osteo2', () => {
       await surveyTabLocator.locator('mat-expansion-panel-header').nth(2).click(); // collapse click
 
       // Compare Medical Records tab screenshot
-      const medicalRecordsTab = await participantPage.clickTab<MedicalRecordsTab>(TabEnum.MEDICAL_RECORD);
+      const medicalRecordsTab = await participantPage.clickTab<MedicalRecordsTab>(Tab.MEDICAL_RECORD);
       const medicalRecordTable = medicalRecordsTab.table;
       await expect(medicalRecordTable.tableLocator()).toHaveScreenshot('osteo1-medical-records-tab-view.png');
 
       // Compare Onc History tab screenshot
-      const oncHistoryTab = await participantPage.clickTab<OncHistoryTab>(TabEnum.ONC_HISTORY);
+      const oncHistoryTab = await participantPage.clickTab<OncHistoryTab>(Tab.ONC_HISTORY);
       const oncHistoryTable = oncHistoryTab.table;
       await expect(oncHistoryTable.tableLocator()).toHaveScreenshot('osteo1-onc-history-tab-view.png');
 
@@ -97,7 +97,7 @@ test.describe.serial('Same Participant in Osteo1 and Osteo2', () => {
     await kitsSearchPage.waitForReady();
 
     const table = await kitsSearchPage.searchByField(SearchByField.SHORT_ID, shortID);
-    await table.sort('Type', SortOrder.ASC);
+    await table.sort(Label.TYPE, SortOrder.ASC);
     await expect(table.tableLocator()).toHaveScreenshot('kits-search-results.png');
   });
 
@@ -113,12 +113,12 @@ test.describe.serial('Same Participant in Osteo1 and Osteo2', () => {
     await expect(page.locator('tabset .nav-tabs')).toHaveScreenshot('osteo2-tabs-visible-view.png');
 
     // Compare Medical Records tab screenshot
-    const medicalRecordsTab = await participantPage.clickTab<MedicalRecordsTab>(TabEnum.MEDICAL_RECORD);
+    const medicalRecordsTab = await participantPage.clickTab<MedicalRecordsTab>(Tab.MEDICAL_RECORD);
     const medicalRecordTable = medicalRecordsTab.table;
     await expect(medicalRecordTable.tableLocator()).toHaveScreenshot('osteo2-medical-records-tab-view.png');
 
     // Compare Onc History tab screenshot
-    const oncHistoryTab = await participantPage.clickTab<OncHistoryTab>(TabEnum.ONC_HISTORY);
+    const oncHistoryTab = await participantPage.clickTab<OncHistoryTab>(Tab.ONC_HISTORY);
     const oncHistoryTable = oncHistoryTab.table;
     await expect(oncHistoryTable.tableLocator()).toHaveScreenshot('osteo2-onc-history-tab-view.png');
   });

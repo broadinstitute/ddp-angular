@@ -7,15 +7,15 @@ import {MiscellaneousEnum} from 'dsm/component/navigation/enums/miscellaneousNav
 import { Navigation } from 'dsm/component/navigation/navigation';
 import Modal from 'dss/component/modal';
 import { SortOrder } from 'dss/component/table';
-import MailingListPage, { COLUMN } from 'dsm/pages/mailing-list-page';
+import MailingListPage from 'dsm/pages/mailing-list-page';
 import { WelcomePage } from 'dsm/pages/welcome-page';
 import { assertTableHeaders } from 'utils/assertion-helper';
 import { getDate, getMailingListDownloadedFileDate, mailingListCreatedDate } from 'utils/date-utils';
 import { generateEmailAlias, generateUserName } from 'utils/faker-utils';
 import lodash from 'lodash';
-
 import HomePage from 'dss/pages/pancan/home-page';
 import { MailListCSV, readMailListCSVFile } from 'utils/file-utils';
+import { Label } from 'dsm/enums';
 
 
 const PANCAN_USER_EMAIL = process.env.PANCAN_USER_EMAIL as string;
@@ -77,7 +77,7 @@ test.describe.serial('Join Pancan Mailing List', () => {
 
     // Verify headers
     const table = await mailingListPage.getMailingListTable();
-    const orderedHeaders = [COLUMN.FIRST_NAME, COLUMN.LAST_NAME, COLUMN.EMAIL, COLUMN.DATE];
+    const orderedHeaders = [Label.FIRST_NAME, Label.LAST_NAME, 'Email', Label.DATE_SIGNED_UP];
     const actualHeaders: string[] = await table.getHeaderNames();
     assertTableHeaders(actualHeaders, orderedHeaders);
 
@@ -85,14 +85,14 @@ test.describe.serial('Join Pancan Mailing List', () => {
     // To handle any delay, retry blocks of code until email is found successfully.
     await expect(async () => {
       await mailingListPage.reload(); // page reload to trigger new request
-      await table.sort(COLUMN.DATE, SortOrder.DESC); // Sorting to get newest record to display first
-      const cell = await table.findCell(COLUMN.EMAIL, newEmail, COLUMN.EMAIL);
+      await table.sort(Label.DATE_SIGNED_UP, SortOrder.DESC); // Sorting to get newest record to display first
+      const cell = await table.findCell('Email', newEmail, 'Email');
       expect(cell).toBeTruthy();
     }).toPass({ timeout: 30000 });
 
     // Verify date signed up is found inside table
-    const tCell = await table.findCell(COLUMN.EMAIL, newEmail, COLUMN.DATE, { exactMatch: false });
-    expect(tCell, `Find column ${COLUMN.DATE} in Mailing List table`).toBeTruthy();
+    const tCell = await table.findCell('Email', newEmail, Label.DATE_SIGNED_UP, { exactMatch: false });
+    expect(tCell, `Find column ${Label.DATE_SIGNED_UP} in Mailing List table`).toBeTruthy();
 
     // Retrieve new Pancan user Date Signed Up from API response body, compare with what's displayed in table
     const user: MailListCSV[] = lodash.filter(respJson, row => row.email === newEmail);

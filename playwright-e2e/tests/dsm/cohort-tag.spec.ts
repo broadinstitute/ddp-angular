@@ -9,6 +9,7 @@ import { Navigation } from 'dsm/component/navigation/navigation';
 import * as crypto from 'crypto';
 import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import { logInfo } from 'utils/log-utils';
+import { CustomizeView, Label } from 'dsm/enums';
 
 test.describe('Cohort tags', () => {
   let shortId: string;
@@ -64,14 +65,14 @@ test.describe('Cohort tags', () => {
       // Apply filter in search for the right participant on Participant List page
       const customizeViewPanel = participantListPage.filters.customizeViewPanel;
       await customizeViewPanel.open();
-      await customizeViewPanel.selectColumns('Cohort Tags Columns', ['Cohort Tag Name']);
+      await customizeViewPanel.selectColumns(CustomizeView.COHORT_TAGS, [Label.COHORT_TAG_NAME]);
 
       // Search participant by Short ID
       logInfo(`Participant Short ID: ${shortId}`);
       await participantListPage.filterListByShortId(shortId);
 
       const participantListTable = participantListPage.participantListTable;
-      let cohortTagName = await participantListTable.getParticipantDataAt(0, 'Cohort Tag Name');
+      let cohortTagName = await participantListTable.getParticipantDataAt(0, Label.COHORT_TAG_NAME);
       expect(cohortTagName.length).toBe(0); // No Cohort Tags
 
       const participantPage: ParticipantPage = await participantListTable.openParticipantPageAt(0);
@@ -88,7 +89,7 @@ test.describe('Cohort tags', () => {
 
       // Open participant again to verify cohort tags
       await participantListPage.filterListByShortId(shortId);
-      cohortTagName = await participantListTable.getParticipantDataAt(0, 'Cohort Tag Name');
+      cohortTagName = await participantListTable.getParticipantDataAt(0, Label.COHORT_TAG_NAME);
       expect(cohortTagName.length).toBeGreaterThan(1); // Cohort Tags exist
       await participantListTable.openParticipantPageAt(0);
 
@@ -117,7 +118,7 @@ test.describe('Cohort tags', () => {
       await cohortTag.assertCohortTagToHaveCount(cohortTagValue3, 0);
 
       await participantPage.backToList();
-      cohortTagName = await participantListTable.getParticipantDataAt(0, 'Cohort Tag Name');
+      cohortTagName = await participantListTable.getParticipantDataAt(0, Label.COHORT_TAG_NAME);
       expect(cohortTagName.length).toBe(0); // No more Cohort Tag
     });
   }

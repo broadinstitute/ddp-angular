@@ -11,7 +11,6 @@ import { test } from 'fixtures/dsm-fixture';
 import * as user from 'data/fake-user.json';
 import { KitUploadInfo } from 'dsm/pages/kitUpload-page/models/kitUpload-model';
 import KitUploadPage from 'dsm/pages/kitUpload-page/kitUpload-page';
-import { KitsColumnsEnum } from 'dsm/pages/kitsInfo-pages/enums/kitsColumns-enum';
 import InitialScanPage from 'dsm/pages/scanner-pages/initialScan-page';
 import TrackingScanPage from 'dsm/pages/scanner-pages/trackingScan-page';
 import FinalScanPage from 'dsm/pages/scanner-pages/finalScan-page';
@@ -19,11 +18,10 @@ import { getDate } from 'utils/date-utils';
 import KitsSentPage from 'dsm/pages/kitsInfo-pages/kitsSentPage';
 import ParticipantPage from 'dsm/pages/participant-page/participant-page';
 import OncHistoryTab from 'dsm/component/tabs/onc-history-tab';
-import { TabEnum } from 'dsm/component/tabs/enums/tab-enum';
 import { OncHistoryInputColumnsEnum, OncHistorySelectRequestEnum } from 'dsm/component/tabs/enums/onc-history-input-columns-enum';
 import { SMIdEnum, TissueDynamicFieldsEnum, TissueTypesEnum } from 'dsm/pages/tissue/enums/tissue-information-enum';
 import KitsReceivedPage from 'dsm/pages/kitsInfo-pages/kitsReceived-page/kitsReceivedPage';
-import { AdditionalFilter } from 'dsm/component/filters/sections/search/search-enums';
+import { CustomizeView, DataFilter, Label, Tab } from 'dsm/enums';
 import crypto from 'crypto';
 import { logInfo } from 'utils/log-utils';
 import { waitForResponse } from 'utils/test-utils';
@@ -65,7 +63,7 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
       participantPage = await goToTestParticipantPage(shortID, navigation);
 
       //Fill out an onc history and get back an accession number
-      oncHistoryTab = await participantPage.clickTab<OncHistoryTab>(TabEnum.ONC_HISTORY);
+      oncHistoryTab = await participantPage.clickTab<OncHistoryTab>(Tab.ONC_HISTORY);
       const oncHistoryTable = oncHistoryTab.table;
       today = getDate();
       randomAccessionNumber = await fillOncHistoryRow(participantPage, oncHistoryTab, facilityName, facilityPhoneNumber, facilityFaxNumber);
@@ -132,14 +130,13 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
 
       const customizeViewPanel = participantListPage.filters.customizeViewPanel;
       await customizeViewPanel.open();
-      await customizeViewPanel.selectColumns(
-      `Additional Consent: Learning More About Your DNA with Invitae Columns`,
-      ['GERMLINE_CONSENT_ADDENDUM Survey Created']);
+      await customizeViewPanel.selectColumns(CustomizeView.ADDITIONAL_CONSENT_LEARNING_DNA_WITH_INVITAE,
+        ['GERMLINE_CONSENT_ADDENDUM Survey Created']);
 
       const searchPanel = participantListPage.filters.searchPanel;
       await searchPanel.open();
-      await searchPanel.text('Short ID', { textValue: shortID });
-      await searchPanel.dates('GERMLINE_CONSENT_ADDENDUM Survey Created', { additionalFilters: [AdditionalFilter.NOT_EMPTY] });
+      await searchPanel.text(Label.SHORT_ID, { textValue: shortID });
+      await searchPanel.dates(Label.GERMLINE_CONSENT_ADDENDUM_SURVEY_CREATED, { additionalFilters: [DataFilter.NOT_EMPTY] });
 
       //Occasionally, it will take a couple of seconds (and participant list refreshes) before info about the germline consent activity being created shows up
       await expect(async () => {
@@ -150,7 +147,7 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
       }).toPass({intervals: [10_000], timeout: 60_000});
 
       const participantListTable = participantListPage.participantListTable;
-      const germlineInfo = (await participantListTable.getParticipantDataAt(0, 'GERMLINE_CONSENT_ADDENDUM Survey Created')).trim();
+      const germlineInfo = (await participantListTable.getParticipantDataAt(0, Label.GERMLINE_CONSENT_ADDENDUM_SURVEY_CREATED)).trim();
       expect(germlineInfo).toBeTruthy();
     });
 
@@ -171,7 +168,7 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
       participantPage = await goToTestParticipantPage(shortID, navigation);
 
       //Fill out an onc history and get back an accession number
-      oncHistoryTab = await participantPage.clickTab<OncHistoryTab>(TabEnum.ONC_HISTORY);
+      oncHistoryTab = await participantPage.clickTab<OncHistoryTab>(Tab.ONC_HISTORY);
       const oncHistoryTable = oncHistoryTab.table;
       today = getDate();
       randomAccessionNumber = await fillOncHistoryRow(participantPage, oncHistoryTab, facilityName, facilityPhoneNumber, facilityFaxNumber);
@@ -238,14 +235,13 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
 
       const customizeViewPanel = participantListPage.filters.customizeViewPanel;
       await customizeViewPanel.open();
-      await customizeViewPanel.selectColumns(
-      `Additional Consent: Learning More About Your DNA with Invitae Columns`,
-      ['GERMLINE_CONSENT_ADDENDUM Survey Created']);
+      await customizeViewPanel.selectColumns(CustomizeView.ADDITIONAL_CONSENT_LEARNING_DNA_WITH_INVITAE,
+        [Label.GERMLINE_CONSENT_ADDENDUM_SURVEY_CREATED]);
 
       const searchPanel = participantListPage.filters.searchPanel;
       await searchPanel.open();
-      await searchPanel.text('Short ID', { textValue: shortID });
-      await searchPanel.dates('GERMLINE_CONSENT_ADDENDUM Survey Created', { additionalFilters: [AdditionalFilter.NOT_EMPTY] });
+      await searchPanel.text(Label.SHORT_ID, { textValue: shortID });
+      await searchPanel.dates(Label.GERMLINE_CONSENT_ADDENDUM_SURVEY_CREATED, { additionalFilters: [DataFilter.NOT_EMPTY] });
 
       //Occasionally, it will take a couple of seconds (and participant list refreshes) before info about the germline consent activity being created shows up
       await expect(async () => {
@@ -256,7 +252,7 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
       }).toPass({intervals: [10_000], timeout: 60_000});
 
       const participantListTable = participantListPage.participantListTable;
-      const germlineInfo = (await participantListTable.getParticipantDataAt(0, 'GERMLINE_CONSENT_ADDENDUM Survey Created')).trim();
+      const germlineInfo = (await participantListTable.getParticipantDataAt(0, Label.GERMLINE_CONSENT_ADDENDUM_SURVEY_CREATED)).trim();
       expect(germlineInfo).toBeTruthy();
     });
 
@@ -277,7 +273,7 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
       participantPage = await goToTestParticipantPage(shortID, navigation);
 
       //Fill out an onc history and get back an accession number
-      oncHistoryTab = await participantPage.clickTab<OncHistoryTab>(TabEnum.ONC_HISTORY);
+      oncHistoryTab = await participantPage.clickTab<OncHistoryTab>(Tab.ONC_HISTORY);
       const oncHistoryTable = oncHistoryTab.table;
       today = getDate();
       randomAccessionNumber = await fillOncHistoryRow(participantPage, oncHistoryTab, facilityName, facilityPhoneNumber, facilityFaxNumber);
@@ -344,14 +340,13 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
 
       const customizeViewPanel = participantListPage.filters.customizeViewPanel;
       await customizeViewPanel.open();
-      await customizeViewPanel.selectColumns(
-      `Additional Consent: Learning More About Your DNA with Invitae Columns`,
-      ['GERMLINE_CONSENT_ADDENDUM Survey Created']);
+      await customizeViewPanel.selectColumns(CustomizeView.ADDITIONAL_CONSENT_LEARNING_DNA_WITH_INVITAE,
+        [Label.GERMLINE_CONSENT_ADDENDUM_SURVEY_CREATED]);
 
       const searchPanel = participantListPage.filters.searchPanel;
       await searchPanel.open();
-      await searchPanel.text('Short ID', { textValue: shortID });
-      await searchPanel.dates('GERMLINE_CONSENT_ADDENDUM Survey Created', { additionalFilters: [AdditionalFilter.NOT_EMPTY] });
+      await searchPanel.text(Label.SHORT_ID, { textValue: shortID });
+      await searchPanel.dates(Label.GERMLINE_CONSENT_ADDENDUM_SURVEY_CREATED, { additionalFilters: [DataFilter.NOT_EMPTY] });
 
       //Occasionally, it will take a couple of seconds (and participant list refreshes) before info about the germline consent activity being created shows up
       await expect(async () => {
@@ -362,7 +357,7 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
       }).toPass({intervals: [10_000], timeout: 60_000});
 
       const participantListTable = participantListPage.participantListTable;
-      const germlineInfo = (await participantListTable.getParticipantDataAt(0, 'GERMLINE_CONSENT_ADDENDUM Survey Created')).trim();
+      const germlineInfo = (await participantListTable.getParticipantDataAt(0, Label.GERMLINE_CONSENT_ADDENDUM_SURVEY_CREATED)).trim();
       expect(germlineInfo).toBeTruthy();
     });
 
@@ -383,7 +378,7 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
       participantPage = await goToTestParticipantPage(shortID, navigation);
 
       //Fill out an onc history and get back an accession number
-      oncHistoryTab = await participantPage.clickTab<OncHistoryTab>(TabEnum.ONC_HISTORY);
+      oncHistoryTab = await participantPage.clickTab<OncHistoryTab>(Tab.ONC_HISTORY);
       const oncHistoryTable = oncHistoryTab.table;
       today = getDate();
       randomAccessionNumber = await fillOncHistoryRow(participantPage, oncHistoryTab, facilityName, facilityPhoneNumber, facilityFaxNumber);
@@ -450,14 +445,13 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
 
       const customizeViewPanel = participantListPage.filters.customizeViewPanel;
       await customizeViewPanel.open();
-      await customizeViewPanel.selectColumns(
-      `Additional Consent: Learning More About Your DNA with Invitae Columns`,
-      ['GERMLINE_CONSENT_ADDENDUM Survey Created']);
+      await customizeViewPanel.selectColumns(CustomizeView.ADDITIONAL_CONSENT_LEARNING_DNA_WITH_INVITAE,
+        [Label.GERMLINE_CONSENT_ADDENDUM_SURVEY_CREATED]);
 
       const searchPanel = participantListPage.filters.searchPanel;
       await searchPanel.open();
-      await searchPanel.text('Short ID', { textValue: shortID });
-      await searchPanel.dates('GERMLINE_CONSENT_ADDENDUM Survey Created', { additionalFilters: [AdditionalFilter.NOT_EMPTY] });
+      await searchPanel.text(Label.SHORT_ID, { textValue: shortID });
+      await searchPanel.dates(Label.GERMLINE_CONSENT_ADDENDUM_SURVEY_CREATED, { additionalFilters: [DataFilter.NOT_EMPTY] });
 
       //Occasionally, it will take a couple of seconds (and participant list refreshes) before info about the germline consent activity being created shows up
       await expect(async () => {
@@ -468,7 +462,7 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
       }).toPass({intervals: [10_000], timeout: 60_000});
 
       const participantListTable = participantListPage.participantListTable;
-      const germlineInfo = (await participantListTable.getParticipantDataAt(0, 'GERMLINE_CONSENT_ADDENDUM Survey Created')).trim();
+      const germlineInfo = (await participantListTable.getParticipantDataAt(0, Label.GERMLINE_CONSENT_ADDENDUM_SURVEY_CREATED)).trim();
       expect(germlineInfo).toBeTruthy();
     });
   }
@@ -486,30 +480,28 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
 async function findParticipantForGermlineConsentCreation(participantListPage: ParticipantListPage, study: StudyEnum): Promise<string> {
   const searchPanel = participantListPage.filters.searchPanel;
   await searchPanel.open();
-  await searchPanel.checkboxes('Status', { checkboxValues: ['Enrolled'] });
+  await searchPanel.checkboxes(Label.STATUS, { checkboxValues: [DataFilter.ENROLLED] });
   await searchPanel.search();
 
   const customizeViewPanel = participantListPage.filters.customizeViewPanel;
   await customizeViewPanel.open();
-  await customizeViewPanel.selectColumns('Research Consent Form Columns', ['CONSENT_BLOOD', 'CONSENT_TISSUE']);
+  await customizeViewPanel.selectColumns(CustomizeView.RESEARCH_CONSENT_FORM, ['CONSENT_BLOOD', 'CONSENT_TISSUE']);
   //await customizeViewPanel.selectColumns('Medical Release Form Columns', ['PHYSICIAN']);
-  await customizeViewPanel.selectColumnsByID('Medical Release Form Columns', ['PHYSICIAN'], 'RELEASE_SELF', { nth: 0 });
-  await customizeViewPanel.selectColumns('Sample Columns', ['Sample Type', 'Status']);
-  await customizeViewPanel.selectColumns('Onc History Columns', ['Tissue Request Date']);
-  await customizeViewPanel.selectColumns(
-    `Additional Consent: Learning About Your Tumor Columns`,
-    ['SOMATIC_CONSENT_TUMOR']
+  await customizeViewPanel.selectColumnsByID(CustomizeView.MEDICAL_RELEASE_FORM, [Label.PHYSICIAN], Label.RELEASE_SELF, { nth: 0 });
+  await customizeViewPanel.selectColumns(CustomizeView.SAMPLE, [Label.SAMPLE_TYPE, Label.STATUS]);
+  await customizeViewPanel.selectColumns(CustomizeView.ONC_HISTORY, [Label.TISSUE_REQUEST_DATE]);
+  await customizeViewPanel.selectColumns(CustomizeView.ADDITIONAL_CONSENT_LEARNING_ABOUT_TUMOR,
+    [Label.SOMATIC_CONSENT_TUMOR]
   );
-  await customizeViewPanel.selectColumns(
-    `Additional Consent: Learning More About Your DNA with Invitae Columns`,
-    ['GERMLINE_CONSENT_ADDENDUM Survey Created']
+  await customizeViewPanel.selectColumns(CustomizeView.ADDITIONAL_CONSENT_LEARNING_DNA_WITH_INVITAE,
+    [Label.GERMLINE_CONSENT_ADDENDUM_SURVEY_CREATED]
   );
 
   //Determine last name hint to use to search for Playwright E2E participants only
   const lastnamePrefix = getPlaywrightParticipantLastNamePrefix(study);
 
   await searchPanel.open();
-  await searchPanel.text('Last Name', { textValue: lastnamePrefix, additionalFilters: [AdditionalFilter.EXACT_MATCH], exactMatch: false });
+  await searchPanel.text(Label.LAST_NAME, { textValue: lastnamePrefix, additionalFilters: [DataFilter.EXACT_MATCH], exactMatch: false });
   await searchPanel.checkboxes('CONSENT_BLOOD', { checkboxValues: ['Yes'] });
   await searchPanel.checkboxes('CONSENT_TISSUE', { checkboxValues: ['Yes'] });
   const filterListResponse = await searchPanel.search({ uri: '/ui/filterList' });
@@ -521,10 +513,10 @@ async function findParticipantForGermlineConsentCreation(participantListPage: Pa
   for (let index = 0; index < resultsPerPage; index++) {
     const consentTissue = (await participantListTable.getParticipantDataAt(index, 'CONSENT_TISSUE')).trim();
     const consentBlood = (await participantListTable.getParticipantDataAt(index, 'CONSENT_BLOOD')).trim();
-    const somaticConsentTumor = (await participantListTable.getParticipantDataAt(index, 'SOMATIC_CONSENT_TUMOR')).trim();
-    const physician = (await participantListTable.getParticipantDataAt(index, 'PHYSICIAN')).trim();
-    const germlineInfo = (await participantListTable.getParticipantDataAt(index, 'GERMLINE_CONSENT_ADDENDUM Survey Created')).trim();
-    const tissueRequestDate = (await participantListTable.getParticipantDataAt(index, 'Tissue Request Date')).trim();
+    const somaticConsentTumor = (await participantListTable.getParticipantDataAt(index, Label.SOMATIC_CONSENT_TUMOR)).trim();
+    const physician = (await participantListTable.getParticipantDataAt(index, Label.PHYSICIAN)).trim();
+    const germlineInfo = (await participantListTable.getParticipantDataAt(index, Label.GERMLINE_CONSENT_ADDENDUM_SURVEY_CREATED)).trim();
+    const tissueRequestDate = (await participantListTable.getParticipantDataAt(index, Label.TISSUE_REQUEST_DATE)).trim();
     const medicalRecord = responseJson.participants[index].medicalRecords[0]; //Checking to make sure participant has onc history tab
 
 
@@ -536,7 +528,7 @@ async function findParticipantForGermlineConsentCreation(participantListPage: Pa
         (tissueRequestDate === '') &&
         (medicalRecord != null)
       ) {
-        shortID = await participantListTable.getParticipantDataAt(index, 'Short ID');
+        shortID = await participantListTable.getParticipantDataAt(index, Label.SHORT_ID);
         logInfo(`Test participant ${shortID} satisfies criteria for germline test`);
         break;
       }
@@ -627,12 +619,12 @@ async function prepareSentKit(shortID: string,
   const searchPanel = participantListPage.filters.searchPanel;
   await searchPanel.open();
   await searchPanel.clear();
-  await searchPanel.text('Short ID', { textValue: shortID });
+  await searchPanel.text(Label.SHORT_ID, { textValue: shortID });
   await searchPanel.search();
 
   const participantListTable = participantListPage.participantListTable;
-  const firstName = (await participantListTable.getParticipantDataAt(0, 'First Name')).trim();
-  const lastName = (await participantListTable.getParticipantDataAt(0, 'Last Name')).trim();
+  const firstName = (await participantListTable.getParticipantDataAt(0, Label.FIRST_NAME)).trim();
+  const lastName = (await participantListTable.getParticipantDataAt(0, Label.LAST_NAME)).trim();
 
   //Upload saliva or blood kit
   const kitUploadInfo = new KitUploadInfo(shortID, firstName, lastName);
@@ -656,11 +648,11 @@ async function prepareSentKit(shortID: string,
   await kitsWithoutLabelPage.assertCreateLabelsBtn();
   await kitsWithoutLabelPage.assertReloadKitListBtn();
 
-  await kitsWithoutLabelPage.search(KitsColumnsEnum.SHORT_ID, shortID);
-  const shippingID = (await kitsWithoutLabelPage.getData(KitsColumnsEnum.SHIPPING_ID)).trim();
+  await kitsWithoutLabelPage.search(Label.SHORT_ID, shortID);
+  const shippingID = (await kitsWithoutLabelPage.getData(Label.SHIPPING_ID)).trim();
 
   const kitsTable = kitsWithoutLabelPage.getKitsTable;
-  await kitsTable.searchByColumn(KitsColumnsEnum.SHORT_ID, shortID);
+  await kitsTable.searchByColumn(Label.SHORT_ID, shortID);
   await expect(kitsTable.rowLocator()).toHaveCount(1);
 
   //Scan saliva and blood kit in Initial Scan
@@ -694,9 +686,9 @@ async function prepareSentKit(shortID: string,
   await kitsSentPage.selectKitType(kitType);
   await kitsSentPage.assertReloadKitListBtn();
   await kitsSentPage.assertTableHeader();
-  await kitsSentPage.search(KitsColumnsEnum.MF_CODE, kitLabel, { count: 1 });
+  await kitsSentPage.search(Label.MF_CODE, kitLabel, { count: 1 });
 
-  const sentDate = await kitsSentPage.getData(KitsColumnsEnum.SENT);
+  const sentDate = await kitsSentPage.getData(Label.SENT);
   expect(getDate(new Date(sentDate))).toStrictEqual(getDate());
 
   //Return the mf code a.k.a the kit label so that the kit can later be marked as received
@@ -709,7 +701,7 @@ async function goToTestParticipantPage(shortID: string, navigation: Navigation):
 
   const searchPanel = participantListPage.filters.searchPanel;
   await searchPanel.open();
-  await searchPanel.text('Short ID', { textValue: shortID });
+  await searchPanel.text(Label.SHORT_ID, { textValue: shortID });
   await searchPanel.search();
 
   const participantListTable = participantListPage.participantListTable;

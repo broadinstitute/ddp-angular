@@ -1,14 +1,12 @@
 import { expect } from '@playwright/test';
-import { AdditionalFilter } from 'dsm/component/filters/sections/search/search-enums';
+import { CustomizeView, DataFilter, Label, Tab, UserPermission } from 'dsm/enums';
 import { MiscellaneousEnum } from 'dsm/component/navigation/enums/miscellaneousNav-enum';
 import { SamplesNavEnum } from 'dsm/component/navigation/enums/samplesNav-enum';
 import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import { StudyNavEnum } from 'dsm/component/navigation/enums/studyNav-enum';
 import { Navigation } from 'dsm/component/navigation/navigation';
-import { TabEnum } from 'dsm/component/tabs/enums/tab-enum';
 import SequencingOrderTab from 'dsm/component/tabs/sequencing-order-tab';
-import { UserPermission } from 'dsm/pages/miscellaneous-pages/enums/userPermission-enum';
-import UserPermissionPage from 'dsm/pages/miscellaneous-pages/user-and-permissions-page';
+import UserPermissionPage from 'dsm/pages/user-and-permissions-page';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
 import ParticipantPage from 'dsm/pages/participant-page/participant-page';
 import ClinicalOrdersPage from 'dsm/pages/samples/clinical-orders-page';
@@ -62,15 +60,15 @@ test.describe('View Sequencing Order Permission Test', () => {
 
         const customizeViewPanel = participantListPage.filters.customizeViewPanel;
         await customizeViewPanel.open();
-        await customizeViewPanel.isColumnVisible(['Clinical Orders Columns']);
+        await customizeViewPanel.isColumnVisible([CustomizeView.CLINICAL_ORDERS]);
 
         //Filter the list to display study participants with a Not-Empty Clinical Orders Columns -> Clinical Order ID column
-        await customizeViewPanel.selectColumns('Clinical Orders Columns', ['Clinical Order Id']);
+        await customizeViewPanel.selectColumns(CustomizeView.CLINICAL_ORDERS, [Label.CLINICAL_ORDER_ID]);
 
         const searchPanel = participantListPage.filters.searchPanel;
         await searchPanel.open();
-        await searchPanel.checkboxes('Status', { checkboxValues: ['Enrolled'] });
-        await searchPanel.text('Clinical Order Id', { additionalFilters: [AdditionalFilter.NOT_EMPTY]});
+        await searchPanel.checkboxes(Label.STATUS, { checkboxValues: ['Enrolled'] });
+        await searchPanel.text(Label.CLINICAL_ORDER_ID, { additionalFilters: [DataFilter.NOT_EMPTY]});
         await searchPanel.search();
 
         const participantListTable = participantListPage.participantListTable;
@@ -82,7 +80,7 @@ test.describe('View Sequencing Order Permission Test', () => {
 
         const participantPage = new ParticipantPage(page);
         await participantPage.assertPageTitle();
-        await participantPage.clickTab(TabEnum.SEQUENCING_ORDER);
+        await participantPage.clickTab(Tab.SEQUENCING_ORDER);
 
         const sequencingOrderTab = new SequencingOrderTab(page);
         await sequencingOrderTab.waitForReady();

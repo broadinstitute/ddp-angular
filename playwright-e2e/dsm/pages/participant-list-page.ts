@@ -2,7 +2,7 @@ import { APIRequestContext, Download, expect, Locator, Page } from '@playwright/
 import Modal from 'dsm/component/modal';
 import { StudyNavEnum } from 'dsm/component/navigation/enums/studyNav-enum';
 import { Navigation } from 'dsm/component/navigation/navigation';
-import { FileFormatEnum, TextFormatEnum } from 'dsm/pages/participant-page/enums/download-format-enum';
+import { Label, FileFormat, TextFormat, Tab, DataFilter, CustomizeView } from 'dsm/enums';
 import { WelcomePage } from 'dsm/pages/welcome-page';
 import Checkbox from 'dss/component/checkbox';
 import { shuffle, waitForNoSpinner, waitForResponse } from 'utils/test-utils';
@@ -11,10 +11,8 @@ import { ParticipantListTable } from 'dsm/component/tables/participant-list-tabl
 import { SortOrder } from 'dss/component/table';
 import QuickFilters from 'dsm/component/filters/quick-filters';
 import { getDate, offsetDaysFromToday } from 'utils/date-utils';
-import { AdditionalFilter } from 'dsm/component/filters/sections/search/search-enums';
 import { logInfo } from 'utils/log-utils';
 import DsmPageBase from './dsm-page-base';
-import { TabEnum } from 'dsm/component/tabs/enums/tab-enum';
 import * as user from 'data/fake-user.json';
 
 export default class ParticipantListPage extends DsmPageBase {
@@ -109,18 +107,18 @@ export default class ParticipantListPage extends DsmPageBase {
 
   /**
    * Click Download button to download participant list.
-   * @param {{fileFormat?: FileFormatEnum, textFormat?: TextFormatEnum, includeCompletionOfActivity?: boolean, timeout?: number}} opts
+   * @param {{fileFormat?: FileFormat, textFormat?: TextFormat, includeCompletionOfActivity?: boolean, timeout?: number}} opts
    * @returns {Promise<Download>}
    */
   public async downloadParticipant(opts: {
-      fileFormat?: FileFormatEnum,
-      textFormat?: TextFormatEnum,
+      fileFormat?: FileFormat,
+      textFormat?: TextFormat,
       includeCompletionOfActivity?: boolean,
       timeout?: number
     } = {}): Promise<Download> {
     const {
-      fileFormat = FileFormatEnum.XLSX,
-      textFormat = TextFormatEnum.HUMAN_READABLE,
+      fileFormat = FileFormat.XLSX,
+      textFormat = TextFormat.HUMAN_READABLE,
       includeCompletionOfActivity = true,
       timeout = 3 * 60 * 1000
     } = opts;
@@ -156,12 +154,12 @@ export default class ParticipantListPage extends DsmPageBase {
   public async filterListByParticipantGUID(participantGUID: string): Promise<void> {
     const customizeViewPanel = this.filters.customizeViewPanel;
     await customizeViewPanel.open();
-    await customizeViewPanel.selectColumns('Participant Columns', ['Participant ID']);
+    await customizeViewPanel.selectColumns(CustomizeView.PARTICIPANT, [Label.PARTICIPANT_ID]);
 
     const searchPanel = this.filters.searchPanel;
     await searchPanel.open();
     await searchPanel.clear();
-    await searchPanel.text('Participant ID', {textValue: participantGUID });
+    await searchPanel.text(Label.PARTICIPANT_ID, {textValue: participantGUID });
     await searchPanel.search();
   }
 
@@ -176,7 +174,7 @@ export default class ParticipantListPage extends DsmPageBase {
     const searchPanel = this.filters.searchPanel;
     await searchPanel.open();
     await searchPanel.clear();
-    await searchPanel.text('Short ID', { textValue: shortId });
+    await searchPanel.text(Label.SHORT_ID, { textValue: shortId });
     await searchPanel.search();
 
     await expect(participantsTable.footerLocator().first()).toBeVisible();
@@ -244,7 +242,7 @@ export default class ParticipantListPage extends DsmPageBase {
    * @returns A participant with the requested tab
    */
   async findParticipantWithTab(
-    opts: { findPediatricParticipant: boolean, tab?: TabEnum, rgpProbandTab?: boolean, uriString?: string, prefix?: string }
+    opts: { findPediatricParticipant: boolean, tab?: Tab, rgpProbandTab?: boolean, uriString?: string, prefix?: string }
     ): Promise<string> {
     const { findPediatricParticipant = false, tab, rgpProbandTab = false, uriString = '/ui/applyFilter', prefix } = opts;
     const searchPanel = this.filters.searchPanel;
@@ -252,9 +250,9 @@ export default class ParticipantListPage extends DsmPageBase {
     const applyFilterResponse = await searchPanel.search({ uri: uriString });
 
     let foundShortID = '';
-    let unformattedFirstName = '';
-    let firstName = '';
-    let testParticipantFirstName = '';
+    let unformattedFirstName: string;
+    let firstName: string;
+    let testParticipantFirstName: string;
 
     if (prefix) {
       //If the automated participants for a study use a different prefix or name set-up than E2E, search for them using this info
@@ -267,11 +265,11 @@ export default class ParticipantListPage extends DsmPageBase {
     const amountOfParticipantsDisplayed = responseJson.participants.length;
 
     //Find a participant who currently has the specified tab
-    while (!foundShortID) {
+    do {
       for (const [index, value] of [...responseJson.participants].entries()) {
         //The onc history tab will usually appear along with a medical record tab
         //Checking for the medical record tab allows catching those who do not yet have an onc history detail/row/data (but have the tab itself)
-        if (tab === TabEnum.ONC_HISTORY) {
+        if (tab === Tab.ONC_HISTORY) {
           const medicalRecord = value.medicalRecords[0];
           const hasConsentedToTissue = value.esData.dsm.hasConsentedToTissueSample;
           if (medicalRecord === undefined || hasConsentedToTissue === false) {
@@ -324,25 +322,20 @@ export default class ParticipantListPage extends DsmPageBase {
           }
         }
       }
-    }
+    } while (foundShortID === '');
     return foundShortID;
   }
 
   async findParticipantForKitUpload(opts: { allowNewYorkerOrCanadian: boolean, firstNameSubstring?: string }): Promise<number> {
     const { allowNewYorkerOrCanadian = false, firstNameSubstring } = opts;
-    const normalCollaboratorSampleIDColumn = 'Normal Collaborator Sample ID';
-    const registrationDateColumn = 'Registration Date';
-    const validColumn = 'Valid';
-    const countryColumn = 'Country';
-    const stateOfResidence = 'State';
 
     // Match data in First Name, Valid , Location and Collaborator Sample ID columns. If no match, returns -1.
     const compareForMatch = async (index: number): Promise<number> => {
-      const fname = await participantListTable.getTextAt(index, 'First Name');
-      const normalCollaboratorSampleID = await participantListTable.getTextAt(index, normalCollaboratorSampleIDColumn);
-      const [isAddressValid] = await participantListTable.getTextAt(index, validColumn);
-      const [country] = await participantListTable.getTextAt(index, countryColumn);
-      const [state] = await participantListTable.getTextAt(index, stateOfResidence);
+      const fname = await participantListTable.getTextAt(index, Label.FIRST_NAME);
+      const normalCollaboratorSampleID = await participantListTable.getTextAt(index, Label.NORMAL_COLLABORATOR_SAMPLE_ID);
+      const [isAddressValid] = await participantListTable.getTextAt(index, Label.VALID);
+      const [country] = await participantListTable.getTextAt(index, Label.COUNTRY);
+      const [state] = await participantListTable.getTextAt(index, Label.STATE);
       logInfo(`Allow NY or Canadians: ${allowNewYorkerOrCanadian}`);
       logInfo(`PT info - country: ${country}, state: ${state}, valid: ${isAddressValid}`);
 
@@ -361,7 +354,7 @@ export default class ParticipantListPage extends DsmPageBase {
 
     const searchPanel = this.filters.searchPanel;
     await searchPanel.open();
-    await searchPanel.checkboxes('Status', { checkboxValues: ['Enrolled'] });
+    await searchPanel.checkboxes(Label.STATUS, { checkboxValues: [DataFilter.ENROLLED] });
     await searchPanel.search();
 
     const participantListTable = this.participantListTable;
@@ -369,22 +362,22 @@ export default class ParticipantListPage extends DsmPageBase {
 
     const customizeViewPanel = this.filters.customizeViewPanel;
     await customizeViewPanel.open();
-    await customizeViewPanel.selectColumns('Participant Columns', [registrationDateColumn]);
-    await customizeViewPanel.selectColumns('Sample Columns', [normalCollaboratorSampleIDColumn]);
-    await customizeViewPanel.selectColumns('Contact Information Columns', [validColumn]);
-    await customizeViewPanel.selectColumns('Contact Information Columns', [countryColumn, stateOfResidence]);
+    await customizeViewPanel.selectColumns(CustomizeView.PARTICIPANT, [Label.REGISTRATION_DATE]);
+    await customizeViewPanel.selectColumns(CustomizeView.SAMPLE, [Label.NORMAL_COLLABORATOR_SAMPLE_ID]);
+    await customizeViewPanel.selectColumns(CustomizeView.CONTACT_INFORMATION, [Label.VALID]);
+    await customizeViewPanel.selectColumns(CustomizeView.CONTACT_INFORMATION, [Label.COUNTRY, Label.STATE]);
     await customizeViewPanel.close();
 
-    expect(participantListTable.getHeaderIndex(registrationDateColumn)).not.toBe(-1);
-    expect(participantListTable.getHeaderIndex(normalCollaboratorSampleIDColumn)).not.toBe(-1);
-    expect(participantListTable.getHeaderIndex(validColumn)).not.toBe(-1);
+    expect(participantListTable.getHeaderIndex(Label.REGISTRATION_DATE)).not.toBe(-1);
+    expect(participantListTable.getHeaderIndex(Label.NORMAL_COLLABORATOR_SAMPLE_ID)).not.toBe(-1);
+    expect(participantListTable.getHeaderIndex(Label.VALID)).not.toBe(-1);
     await expect(participantListTable.rowLocator().first()).toBeVisible();
 
     let participantsCount = await participantListTable.rowsCount;
     expect(participantsCount).toBeGreaterThanOrEqual(1);
 
     // Sort by Registration Date to pick newest participants
-    await participantListTable.sort(registrationDateColumn, SortOrder.ASC);
+    await participantListTable.sort(Label.REGISTRATION_DATE, SortOrder.ASC);
     const endTime = Date.now() + 90 * 1000;
     while (participantsCount > 0 && Date.now() < endTime) {
       let rowIndex = -1;
@@ -407,7 +400,7 @@ export default class ParticipantListPage extends DsmPageBase {
     throw new Error(`Failed to find a suitable participant for Kit Upload within max waiting time 90 seconds.`);
   }
 
-  async findParticipantFor(columnGroup: string, columnName: string, opts: {value?: string, nth?: number} = {}): Promise<number> {
+  async findParticipantFor(columnGroup: string, columnName: Label, opts: {value?: string, nth?: number} = {}): Promise<number> {
     const { value, nth = 0 } = opts;
 
     const compareForMatch = async (index: number): Promise<number> => {
@@ -421,7 +414,7 @@ export default class ParticipantListPage extends DsmPageBase {
 
     const searchPanel = this.filters.searchPanel;
     await searchPanel.open();
-    await searchPanel.checkboxes('Status', { checkboxValues: ['Enrolled'] });
+    await searchPanel.checkboxes(Label.STATUS, { checkboxValues: [DataFilter.ENROLLED] });
     await searchPanel.search();
 
     const participantListTable = this.participantListTable;
@@ -471,11 +464,11 @@ export default class ParticipantListPage extends DsmPageBase {
     // Only RGP has a default filter with a different First Name field (in Participant Info Columns) - make sure to deselect it before continuing
     // otherwise there will be 2 different First Name fields in the search section (and in the Participant List)
     if (isRGPStudy) {
-      await customizeViewPanel.deselectColumns('Participant Info Columns', ['First Name']);
-      await expect(this.participantListTable.getHeaderByName('First Name')).not.toBeVisible();
+      await customizeViewPanel.deselectColumns(CustomizeView.PARTICIPANT_INFO, [Label.FIRST_NAME]);
+      await expect(this.participantListTable.getHeaderByName(Label.FIRST_NAME)).not.toBeVisible();
     }
     // Add columns to be used to help find the most recent automated participant
-    await customizeViewPanel.selectColumns('Participant Columns', ['Participant ID', 'Registration Date', 'First Name']);
+    await customizeViewPanel.selectColumns(CustomizeView.PARTICIPANT, [Label.PARTICIPANT_ID, Label.REGISTRATION_DATE, Label.FIRST_NAME]);
     await customizeViewPanel.close();
 
     //First filter the participant list to only show participants registered within the past two weeks
@@ -483,15 +476,15 @@ export default class ParticipantListPage extends DsmPageBase {
     await searchPanel.open();
     const today = getDate(new Date());
     const previousWeek = offsetDaysFromToday(2 * 7);
-    await searchPanel.dates('Registration Date', { from: previousWeek, to: today, additionalFilters: [AdditionalFilter.RANGE] });
+    await searchPanel.dates(Label.REGISTRATION_DATE, { from: previousWeek, to: today, additionalFilters: [DataFilter.RANGE] });
 
     //Also make sure to conduct the search for participants with the given first name of the automated participant
-    await searchPanel.text('First Name', { textValue: participantName });
+    await searchPanel.text(Label.FIRST_NAME, { textValue: participantName });
     await searchPanel.search();
 
     //Get the first returned participant to use for testing - and verify at least one participant is returned
     const numberOfParticipants = await this.participantListTable.rowsCount;
     expect(numberOfParticipants, `No recent test participants were found with the given first name: ${participantName}`).toBeGreaterThanOrEqual(1);
-    return this.participantListTable.getCellDataForColumn('Participant ID', 1);
+    return this.participantListTable.getCellDataForColumn(Label.PARTICIPANT_ID, 1);
   }
 }

@@ -2,8 +2,7 @@ import { Page, expect } from '@playwright/test';
 import { test } from 'fixtures/dsm-fixture';
 import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
-import { AdditionalFilter, CustomViewColumns } from 'dsm/component/filters/sections/search/search-enums';
-import { TabEnum } from 'dsm/component/tabs/enums/tab-enum';
+import { CustomizeView, DataFilter, Label, Tab } from 'dsm/enums';
 import MedicalRecordsTab from 'dsm/pages/medical-records/medical-records-tab';
 import OncHistoryTab from 'dsm/component/tabs/onc-history-tab';
 import CohortTag from 'dsm/component/cohort-tag';
@@ -29,10 +28,9 @@ test.describe.serial('Osteo1 Participant', () => {
   test(`Should find by Cohort Tag in Osteo1`, async ({page, request}) => {
     const participantListPage: ParticipantListPage = await ParticipantListPage.goto(page, osteo1, request);
 
-    const tagNameColumn = 'Cohort Tag Name';
     const customizeViewPanel = participantListPage.filters.customizeViewPanel;
     await customizeViewPanel.open();
-    await customizeViewPanel.selectColumns(CustomViewColumns.COHORT_TAGS, [tagNameColumn]);
+    await customizeViewPanel.selectColumns(CustomizeView.COHORT_TAGS, [Label.COHORT_TAG_NAME]);
 
     const searchPanel = participantListPage.filters.searchPanel;
     const participantListTable = participantListPage.participantListTable;
@@ -40,16 +38,16 @@ test.describe.serial('Osteo1 Participant', () => {
     // Should find multiple Osteo1 participants when search by Osteo1 Cohort tag: "OS"
     await searchPanel.open();
     await searchPanel.clear();
-    await searchPanel.text(tagNameColumn, { additionalFilters: [AdditionalFilter.EXACT_MATCH], textValue: 'OS' });
+    await searchPanel.text(Label.COHORT_TAG_NAME, { additionalFilters: [DataFilter.EXACT_MATCH], textValue: 'OS' });
     await searchPanel.search();
     expect(await participantListTable.numOfParticipants()).toBeGreaterThan(0);
 
     // Should find test participant by: Cohort tag, Status and Short ID
     await searchPanel.open();
     await searchPanel.clear();
-    await searchPanel.text('Short ID', { textValue: shortID });
-    await searchPanel.checkboxes('Status', { checkboxValues: ['Enrolled'] });
-    await searchPanel.text(tagNameColumn, { additionalFilters: [AdditionalFilter.EXACT_MATCH], textValue: 'OS' });
+    await searchPanel.text(Label.SHORT_ID, { textValue: shortID });
+    await searchPanel.checkboxes(Label.STATUS, { checkboxValues: [DataFilter.ENROLLED] });
+    await searchPanel.text(Label.COHORT_TAG_NAME, { additionalFilters: [DataFilter.EXACT_MATCH], textValue: 'OS' });
     await searchPanel.search();
     expect(await participantListTable.numOfParticipants()).toStrictEqual(1);
   });
@@ -93,12 +91,12 @@ test.describe.serial('Osteo1 Participant', () => {
       await surveyTabLocator.locator('mat-expansion-panel-header').nth(2).click(); // collapse click
 
       // Compare Medical Records screenshot
-      const medicalRecordsTab = await participantPage.clickTab<MedicalRecordsTab>(TabEnum.MEDICAL_RECORD);
+      const medicalRecordsTab = await participantPage.clickTab<MedicalRecordsTab>(Tab.MEDICAL_RECORD);
       const medicalRecordTable = medicalRecordsTab.table;
       await expect(medicalRecordTable.tableLocator()).toHaveScreenshot('medical-records-view.png');
 
       // Compare Onc History screenshot
-      const oncHistoryTab = await participantPage.clickTab<OncHistoryTab>(TabEnum.ONC_HISTORY);
+      const oncHistoryTab = await participantPage.clickTab<OncHistoryTab>(Tab.ONC_HISTORY);
       const oncHistoryTable = oncHistoryTab.table;
       await expect(oncHistoryTable.tableLocator()).toHaveScreenshot('onc-history-view.png');
 
@@ -116,7 +114,7 @@ test.describe.serial('Osteo1 Participant', () => {
     await kitsSearchPage.waitForReady();
 
     const table = await kitsSearchPage.searchByField(SearchByField.SHORT_ID, shortID);
-    await table.sort('Type', SortOrder.ASC);
+    await table.sort(Label.TYPE, SortOrder.ASC);
     await expect(table.tableLocator()).toHaveScreenshot('kits-search-results.png');
   });
 

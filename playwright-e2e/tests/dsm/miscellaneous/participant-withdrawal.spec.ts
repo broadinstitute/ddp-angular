@@ -1,5 +1,5 @@
 import { expect } from '@playwright/test';
-import { AdditionalFilter } from 'dsm/component/filters/sections/search/search-enums';
+import { CustomizeView, DataFilter, Label } from 'dsm/enums';
 import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import { StudyNavEnum } from 'dsm/component/navigation/enums/studyNav-enum';
 import { Navigation } from 'dsm/component/navigation/navigation';
@@ -29,14 +29,14 @@ test.describe('Participants Withdrawal', () => {
         // Show Participant ID column
         const customizeViewPanel = participantListPage.filters.customizeViewPanel;
         await customizeViewPanel.open();
-        await customizeViewPanel.selectColumns('Participant Columns', ['Participant ID', 'Registration Date']);
+        await customizeViewPanel.selectColumns(CustomizeView.PARTICIPANT, [Label.PARTICIPANT_ID, Label.REGISTRATION_DATE]);
 
         // Search for Status NOT EQUALS TO Exited before/after Enrollment
         const searchPanel = participantListPage.filters.searchPanel;
         await searchPanel.open();
-        await searchPanel.text('First Name',
-          { textValue: user.adult.firstName, additionalFilters: [AdditionalFilter.EXACT_MATCH], exactMatch: false });
-        await searchPanel.checkboxes('Status', { checkboxValues: ['Enrolled'] });
+        await searchPanel.text(Label.FIRST_NAME,
+          { textValue: user.adult.firstName, additionalFilters: [DataFilter.EXACT_MATCH], exactMatch: false });
+        await searchPanel.checkboxes(Label.STATUS, { checkboxValues: [DataFilter.ENROLLED] });
         await searchPanel.search();
 
         // At least one participant after search
@@ -44,7 +44,7 @@ test.describe('Participants Withdrawal', () => {
         expect(numParticipants).toBeGreaterThan(1);
 
         // Sort Registration Date in ascending order to pick the oldest participant
-        await participantsTable.sort('Registration Date', SortOrder.DESC);
+        await participantsTable.sort(Label.REGISTRATION_DATE, SortOrder.DESC);
 
         // Randomize selected participant
         const rowCount = await participantsTable.getRowsCount();
@@ -52,11 +52,11 @@ test.describe('Participants Withdrawal', () => {
         const rowIndex = shuffledRows[0];
 
         // Select record on first row for withdrawal
-        const registrationDateColumnIndex = await participantsTable.getHeaderIndex('Registration Date');
+        const registrationDateColumnIndex = await participantsTable.getHeaderIndex(Label.REGISTRATION_DATE);
         const registrationDate = await participantsTable.cell(rowIndex, registrationDateColumnIndex).innerText();
-        const shortIdColumnIndex = await participantsTable.getHeaderIndex('Short ID');
+        const shortIdColumnIndex = await participantsTable.getHeaderIndex(Label.SHORT_ID);
         const shortIdColumnId = await participantsTable.cell(rowIndex, shortIdColumnIndex).innerText();
-        const participantIdColumnIndex = await participantsTable.getHeaderIndex('Participant ID');
+        const participantIdColumnIndex = await participantsTable.getHeaderIndex(Label.PARTICIPANT_ID);
         const participantId = await participantsTable.cell(rowIndex, participantIdColumnIndex).innerText();
 
         // Withdraw participant
@@ -79,7 +79,7 @@ test.describe('Participants Withdrawal', () => {
         assertTableHeaders(headers, expectedHeaders);
 
         // checks every row to make sure Participant ID is not blank
-        await withdrewTable.assertColumnNotEmpty('Participant ID');
+        await withdrewTable.assertColumnNotEmpty(Label.PARTICIPANT_ID);
 
         // Enter Participant ID to withdraw
         await withdrawalPage.withdrawParticipant(participantId);
@@ -94,7 +94,7 @@ test.describe('Participants Withdrawal', () => {
           await participantListPage.reload();
           await participantListPage.filterListByShortId(shortIdColumnId);
           /// Status of participant should update to “Exited after enrollment” or “Exited before enrollment”
-          const participantStatus = await participantsTable.findCell('Short ID', shortIdColumnId, 'Status');
+          const participantStatus = await participantsTable.findCell(Label.SHORT_ID, shortIdColumnId, Label.STATUS);
           await expect(participantStatus!).toContainText(/Exited (before|after) Enrollment/);
         }).toPass({ timeout: 5 * 60 * 1000 });
 

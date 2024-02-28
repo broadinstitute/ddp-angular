@@ -7,6 +7,7 @@ import { assertTableHeaders } from 'utils/assertion-helper';
 import { SortOrder } from 'dss/component/table';
 import { getDate } from 'utils/date-utils';
 import { shuffle } from 'utils/test-utils';
+import { Label } from 'dsm/enums';
 
 test.describe.serial('Participants Search', () => {
   const studies = [StudyEnum.LMS, StudyEnum.OSTEO2, StudyEnum.PANCAN];
@@ -21,17 +22,26 @@ test.describe.serial('Participants Search', () => {
       expect(await participantsTable.rowLocator().count()).toBeGreaterThanOrEqual(1);
 
       // Verify table displayed headers
-      const orderedHeaderNames = ['DDP', 'Short ID', 'First Name', 'Last Name', 'Status', 'Date of Birth', 'Date of Majority', 'Status']; // from Sample Columns
+      const orderedHeaderNames = [
+        Label.DDP,
+        Label.SHORT_ID,
+        Label.FIRST_NAME,
+        Label.LAST_NAME,
+        Label.STATUS,
+        Label.DATE_OF_BIRTH,
+        Label.DATE_OF_MAJORITY,
+        Label.STATUS
+]; // from Sample Columns
       const actualHeaderNames = await participantsTable.getHeaderNames();
       assertTableHeaders(actualHeaderNames, orderedHeaderNames);
 
-      await participantsTable.sort('Date of Majority', SortOrder.DESC);
+      await participantsTable.sort(Label.DATE_OF_MAJORITY, SortOrder.DESC);
 
       // Randomize rows
       const rowCount = await participantsTable.getRowsCount();
       const rowIndex = shuffle([...Array(rowCount).keys()])[0];
 
-      const dateOfMajoritySample = await participantsTable.getRowText(rowIndex, 'Date of Majority');
+      const dateOfMajoritySample = await participantsTable.getRowText(rowIndex, Label.DATE_OF_MAJORITY);
       const dateOfMajority = getDate(new Date(dateOfMajoritySample));
       const today = getDate();
       expect(new Date(dateOfMajority) >= new Date(today)).toBeTruthy();

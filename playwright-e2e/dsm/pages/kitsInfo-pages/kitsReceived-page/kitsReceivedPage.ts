@@ -1,20 +1,19 @@
-import {KitType} from 'dsm/component/kitType/kitType';
 import {KitsTable} from 'dsm/component/tables/kits-table';
 import {APIRequestContext, expect, Page} from '@playwright/test';
 import {KitTypeEnum} from 'dsm/component/kitType/enums/kitType-enum';
-import {waitForNoSpinner, waitForResponse} from 'utils/test-utils';
-import {KitsColumnsEnum} from 'dsm/pages/kitsInfo-pages/enums/kitsColumns-enum';
+import {waitForNoSpinner} from 'utils/test-utils';
 import {assertTableHeaders} from 'utils/assertion-helper';
 import {rows} from 'lib/component/dsm/paginators/types/rowsPerPage';
 import KitsPageBase from 'dsm/pages/kits-page-base';
+import { Label } from 'dsm/enums';
 
 const { BSP_TOKEN, DSM_BASE_URL } = process.env;
 
 export default class KitsReceivedPage extends KitsPageBase {
   readonly PAGE_TITLE = 'Kits Received';
-  readonly TABLE_HEADERS = [KitsColumnsEnum.SHORT_ID, KitsColumnsEnum.SHIPPING_ID,
-    KitsColumnsEnum.RECEIVED, KitsColumnsEnum.MF_CODE,
-    KitsColumnsEnum.DDP_REALM, KitsColumnsEnum.TYPE, KitsColumnsEnum.SAMPLE_TYPE];
+  readonly TABLE_HEADERS = [Label.SHORT_ID, Label.SHIPPING_ID,
+    Label.RECEIVED, Label.MF_CODE,
+    Label.DDP_REALM, Label.TYPE, Label.SAMPLE_TYPE];
 
 
   constructor(readonly page: Page, private readonly request: APIRequestContext) {
@@ -88,11 +87,11 @@ export default class KitsReceivedPage extends KitsPageBase {
     expect(jsonResponse).toHaveProperty('collaboratorParticipantId', subjectID);
   }
 
-  public async search(columnName: KitsColumnsEnum, value: string): Promise<void> {
+  public async search(columnName: Label, value: string): Promise<void> {
     await this.kitsTable.searchBy(columnName, value);
   }
 
-  public async getData(columnName: KitsColumnsEnum): Promise<string> {
+  public async getData(columnName: Label): Promise<string> {
     return await this.kitsTable.getData(columnName);
   }
 

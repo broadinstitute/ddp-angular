@@ -6,11 +6,11 @@ import { waitForNoSpinner, waitForResponse } from 'utils/test-utils';
 import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import { KitType } from 'dsm/component/kitType/kitType';
 import { logInfo } from 'utils/log-utils';
-import { KitsColumnsEnum } from './kitsInfo-pages/enums/kitsColumns-enum';
 import Modal from 'dsm/component/modal';
 import { getDate, getDateMonthAbbreviated, offsetDaysFromDate } from 'utils/date-utils';
 import { SamplesNavEnum } from 'dsm/component/navigation/enums/samplesNav-enum';
 import Checkbox from 'dss/component/checkbox';
+import { Label } from 'dsm/enums';
 
 export default abstract class KitsPageBase extends DsmPageBase {
   protected abstract PAGE_TITLE: string;
@@ -80,16 +80,16 @@ export default abstract class KitsPageBase extends DsmPageBase {
 
     let rowIndex = 0;
     if (shortId) {
-      await this.kitsTable.searchByColumn(KitsColumnsEnum.SHORT_ID, shortId, { column2Name: KitsColumnsEnum.SHIPPING_ID, value2: shippingId });
+      await this.kitsTable.searchByColumn(Label.SHORT_ID, shortId, { column2Name: Label.SHIPPING_ID, value2: shippingId });
       expect(await this.kitsTable.rowLocator().count()).toBeGreaterThanOrEqual(1);
-      const [actualShortId] = await this.kitsTable.getTextAt(rowIndex, KitsColumnsEnum.SHORT_ID);
+      const [actualShortId] = await this.kitsTable.getTextAt(rowIndex, Label.SHORT_ID);
       expect(actualShortId).toStrictEqual(shortId);
-      [shippingId] = await this.kitsTable.getTextAt(rowIndex, KitsColumnsEnum.SHIPPING_ID);
+      [shippingId] = await this.kitsTable.getTextAt(rowIndex, Label.SHIPPING_ID);
     } else {
       // Selects a random Short ID
       rowIndex = await this.kitsTable.getRandomRowIndex();
-      [shortId] = await this.kitsTable.getTextAt(rowIndex, KitsColumnsEnum.SHORT_ID);
-      [shippingId] = await this.kitsTable.getTextAt(rowIndex, KitsColumnsEnum.SHIPPING_ID);
+      [shortId] = await this.kitsTable.getTextAt(rowIndex, Label.SHORT_ID);
+      [shippingId] = await this.kitsTable.getTextAt(rowIndex, Label.SHIPPING_ID);
     }
     expect(shortId.length).toBeTruthy();
     expect(shippingId.length).toBeTruthy();
@@ -109,11 +109,11 @@ export default abstract class KitsPageBase extends DsmPageBase {
     if (!shortId) {
       // Selects a random Short ID
       const rowIndex = await this.kitsTable.getRandomRowIndex();
-      [shortId] = await this.kitsTable.getTextAt(rowIndex, KitsColumnsEnum.SHORT_ID);
+      [shortId] = await this.kitsTable.getTextAt(rowIndex, Label.SHORT_ID);
     }
     expect(shortId.length).toBeTruthy();
 
-    await this.kitsTable.searchByColumn(KitsColumnsEnum.SHORT_ID, shortId);
+    await this.kitsTable.searchByColumn(Label.SHORT_ID, shortId);
     await waitForNoSpinner(this.page);
 
     if (hasKitRequests) {
@@ -201,7 +201,7 @@ export default abstract class KitsPageBase extends DsmPageBase {
  * @param columnName name of the column to be sorted
  */
   public async sortColumnByDate(opts: {
-    columnName: KitsColumnsEnum,
+    columnName: Label,
     startWithRecentDates: boolean}): Promise<void> {
     const { columnName, startWithRecentDates = true } = opts;
 
@@ -224,7 +224,7 @@ export default abstract class KitsPageBase extends DsmPageBase {
    * String type columns - first click gives you A -> Z list; second click gives you Z -> A list
    * @param columnName name of the column to be sorted
    */
-  public async sortColumnAlphabetically(opts: {columnName: KitsColumnsEnum, aToZ: boolean}): Promise<void> {
+  public async sortColumnAlphabetically(opts: {columnName: Label, aToZ: boolean}): Promise<void> {
     const { columnName, aToZ = true } = opts;
 
     const column = columnName as string;

@@ -1,17 +1,17 @@
-import { KitsColumnsEnum } from './enums/kitsColumns-enum';
 import { Locator, Page } from '@playwright/test';
 import {rows} from 'lib/component/dsm/paginators/types/rowsPerPage';
 import KitsPageBase from 'dsm/pages/kits-page-base';
+import { Label } from 'dsm/enums';
 
 export default class KitsQueuePage extends KitsPageBase {
   PAGE_TITLE = 'Kit Queue';
   TABLE_HEADERS = [
-    KitsColumnsEnum.PRINT_KIT,
-    KitsColumnsEnum.SHORT_ID,
-    KitsColumnsEnum.PREFERRED_LANGUAGE,
-    KitsColumnsEnum.SHIPPING_ID,
-    KitsColumnsEnum.DDP_REALM,
-    KitsColumnsEnum.TYPE,
+    Label.PRINT_KIT,
+    Label.SHORT_ID,
+    Label.PREFERRED_LANGUAGE,
+    Label.SHIPPING_ID,
+    Label.DDP_REALM,
+    Label.TYPE,
     '',
     ''
   ]; //'Deactivate' and 'Generate Express Label' do not have column header names
@@ -36,11 +36,11 @@ export default class KitsQueuePage extends KitsPageBase {
     return await this.page.locator('//table//tbody//tr').count();
   }
 
-  public async search(columnName: KitsColumnsEnum, value: string): Promise<void> {
+  public async search(columnName: Label, value: string): Promise<void> {
     await this.kitsTable.searchBy(columnName, value);
   }
 
-  public async getData(columnName: KitsColumnsEnum): Promise<string> {
+  public async getData(columnName: Label): Promise<string> {
     return await this.kitsTable.getData(columnName);
   }
 }

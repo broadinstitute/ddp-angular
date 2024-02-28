@@ -5,13 +5,13 @@ import Checkbox from 'dss/component/checkbox';
 import Select from 'dss/component/select';
 import axios from 'axios';
 import { logError } from './log-utils';
-import { MessageBodyResponseEnum } from 'dsm/pages/participant-page/enums/message-body-response-enum';
+import { ResponsePayload } from 'dsm/enums';
 
 export interface WaitForResponse {
   uri: string;
   status?: number;
   timeout?: number;
-  messageBody?: MessageBodyResponseEnum[];
+  messageBody?: ResponsePayload[];
 }
 
 const { SITE_PASSWORD } = process.env;

@@ -1,8 +1,7 @@
 import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import { test } from 'fixtures/dsm-fixture';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
-import { AdditionalFilter } from 'dsm/component/filters/sections/search/search-enums';
-import { TabEnum } from 'dsm/component/tabs/enums/tab-enum';
+import { CustomizeView, DataFilter, Label, Tab } from 'dsm/enums';
 import OncHistoryTab from 'dsm/component/tabs/onc-history-tab';
 import { OncHistoryInputColumnsEnum } from 'dsm/component/tabs/enums/onc-history-input-columns-enum';
 import { Page, expect } from '@playwright/test';
@@ -26,19 +25,19 @@ test.describe.serial('Onc History', () => {
 
       // Find a participant
       await customizeViewPanel.open();
-      await customizeViewPanel.selectColumns('Medical Record Columns', ['MR Problem']);
-      await customizeViewPanel.selectColumns('Participant - DSM Columns', ['Onc History Created']);
-      await customizeViewPanel.selectColumns('Research Consent Form Columns', ['Your Mailing Address *']);
+      await customizeViewPanel.selectColumns(CustomizeView.MEDICAL_RECORD, [Label.MR_PROBLEM]);
+      await customizeViewPanel.selectColumns(CustomizeView.DSM_COLUMNS, [Label.ONC_HISTORY_CREATED]);
+      await customizeViewPanel.selectColumns(CustomizeView.RESEARCH_CONSENT_FORM, [Label.MAILING_ADDRESS]);
 
       await searchPanel.open();
-      await searchPanel.checkboxes('Status', { checkboxValues: ['Enrolled'] });
-      await searchPanel.checkboxes('MR Problem', { checkboxValues: ['No'] });
-      await searchPanel.dates('Onc History Created', { additionalFilters: [AdditionalFilter.EMPTY] });
-      await searchPanel.text('Your Mailing Address *', { additionalFilters: [AdditionalFilter.NOT_EMPTY] });
+      await searchPanel.checkboxes(Label.STATUS, { checkboxValues: [DataFilter.ENROLLED] });
+      await searchPanel.checkboxes(Label.MR_PROBLEM, { checkboxValues: [DataFilter.NO] });
+      await searchPanel.dates(Label.ONC_HISTORY_CREATED, { additionalFilters: [DataFilter.EMPTY] });
+      await searchPanel.text(Label.MAILING_ADDRESS, { additionalFilters: [DataFilter.NOT_EMPTY] });
 
       await searchPanel.search();
       shortID = await participantListPage.findParticipantWithTab(
-        { findPediatricParticipant: false, tab: TabEnum.ONC_HISTORY, uriString: 'ui/filterList'}
+        { findPediatricParticipant: false, tab: Tab.ONC_HISTORY, uriString: 'ui/filterList'}
       );
       logInfo(`Short id: ${shortID}`);
       expect(shortID?.length).toBeTruthy();
@@ -46,7 +45,7 @@ test.describe.serial('Onc History', () => {
       // Open Onc History tab
       await participantListPage.filterListByShortId(shortID);
       const participantPage = await participantListTable.openParticipantPageAt(0);
-      const oncHistoryTab = await participantPage.clickTab<OncHistoryTab>(TabEnum.ONC_HISTORY);
+      const oncHistoryTab = await participantPage.clickTab<OncHistoryTab>(Tab.ONC_HISTORY);
       const oncHistoryTable = oncHistoryTab.table;
       let lastRow = await oncHistoryTable.getRowsCount() - 1;
 

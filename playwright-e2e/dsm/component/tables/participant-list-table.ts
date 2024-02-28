@@ -3,6 +3,7 @@ import Table from 'dss/component/table';
 import ParticipantPage from 'dsm/pages/participant-page/participant-page';
 import { rows } from 'lib/component/dsm/paginators/types/rowsPerPage';
 import { shuffle } from 'utils/test-utils';
+import { Label } from 'dsm/enums';
 
 export class ParticipantListTable extends Table {
   private readonly _participantPage: ParticipantPage;
@@ -66,7 +67,7 @@ export class ParticipantListTable extends Table {
   * @param rowNumber the row number
   * @returns the contents of the specified column in the specified row
   */
-  public async getCellDataForColumn(columnName: string, rowNumber: number): Promise<string> {
+  public async getCellDataForColumn(columnName: Label, rowNumber: number): Promise<string> {
     const numberOfPrecedingColumns = await this.page.locator(`//table/thead/th[contains(., '${columnName}')]/preceding-sibling::th`).count();
     const columnIndex = numberOfPrecedingColumns + 1;
     //Find the cell in a specific row and column

@@ -14,7 +14,6 @@ import {SamplesNavEnum} from 'dsm/component/navigation/enums/samplesNav-enum';
 import FamilyMemberTab from 'dsm/pages/participant-page/rgp/family-member-tab';
 import { FamilyMember } from 'dsm/component/tabs/enums/familyMember-enum';
 import KitsWithoutLabelPage from 'dsm/pages/kitsInfo-pages/kitsWithoutLabel-page';
-import {KitsColumnsEnum} from 'dsm/pages/kitsInfo-pages/enums/kitsColumns-enum';
 import KitsSentPage from 'dsm/pages/kitsInfo-pages/kitsSentPage';
 import KitsReceivedPage from 'dsm/pages/kitsInfo-pages/kitsReceived-page/kitsReceivedPage';
 import TrackingScanPage from 'dsm/pages/scanner-pages/trackingScan-page';
@@ -23,7 +22,7 @@ import { simplifyShortID } from 'utils/faker-utils';
 import { ParticipantListTable } from 'dsm/component/tables/participant-list-table';
 import KitsQueuePage from 'dsm/pages/kitsInfo-pages/kit-queue-page';
 import ErrorPage from 'dsm/pages/samples/error-page';
-import { CustomViewColumns } from 'dsm/component/filters/sections/search/search-enums';
+import { CustomizeView, Label } from 'dsm/enums';
 
 test.describe('Blood & RNA Kit Upload', () => {
   test('Verify that a blood & rna kit can be uploaded @dsm @rgp @functional @upload', async ({ page, request}, testInfo) => {
@@ -34,7 +33,6 @@ test.describe('Blood & RNA Kit Upload', () => {
     const study = StudyEnum.RGP;
     const kitType = KitTypeEnum.BLOOD_AND_RNA;
     const expectedKitTypes = [KitTypeEnum.BLOOD, KitTypeEnum.BLOOD_AND_RNA]; //Later will be just Blood & RNA kit type for RGP
-    const shortIDColumn = 'Short ID';
     let kitTable;
     let amountOfKits;
     let kitErrorPage;
@@ -56,7 +54,7 @@ test.describe('Blood & RNA Kit Upload', () => {
 
     const customizeViewPanel = participantListPage.filters.customizeViewPanel;
     await customizeViewPanel.open();
-    await customizeViewPanel.selectColumns(CustomViewColumns.PARTICIPANT, [shortIDColumn]);
+    await customizeViewPanel.selectColumns(CustomizeView.PARTICIPANT, [Label.SHORT_ID]);
 
     await participantListPage.filterListByShortId(participantShortID);
     await participantListTable.openParticipantPageAt(0);
@@ -114,11 +112,11 @@ test.describe('Blood & RNA Kit Upload', () => {
     await kitsWithoutLabelPage.assertReloadKitListBtn();
     //await kitsWithoutLabelPage.assertTableHeader(); Preferred Language column needs to be added to RGP DSM Test
 
-    await kitsWithoutLabelPage.search(KitsColumnsEnum.SHORT_ID, simpleShortId);
-    const shippingID = (await kitsWithoutLabelPage.getData(KitsColumnsEnum.SHIPPING_ID)).trim();
+    await kitsWithoutLabelPage.search(Label.SHORT_ID, simpleShortId);
+    const shippingID = (await kitsWithoutLabelPage.getData(Label.SHIPPING_ID)).trim();
 
     const kitsTable = kitsWithoutLabelPage.getKitsTable;
-    await kitsTable.searchByColumn(KitsColumnsEnum.SHORT_ID, simpleShortId);
+    await kitsTable.searchByColumn(Label.SHORT_ID, simpleShortId);
     await expect(kitsTable.rowLocator()).toHaveCount(1);
 
     //Search for the kit and get its label created
@@ -133,7 +131,7 @@ test.describe('Blood & RNA Kit Upload', () => {
     if (kitQueuePageHasExistingKitRequests) {
       //Search for the test kit using the shipping id
       kitTable = kitQueuePage.getKitsTable;
-      await kitTable.searchBy(KitsColumnsEnum.SHIPPING_ID, shippingID);
+      await kitTable.searchBy(Label.SHIPPING_ID, shippingID);
       amountOfKits = await kitTable.getRowsCount();
       if (amountOfKits === 0) {
         //If the kit is not found in Kit Queue -> go to Kit Error page and search for it there
@@ -141,14 +139,14 @@ test.describe('Blood & RNA Kit Upload', () => {
         await kitErrorPage.waitForReady();
         await kitErrorPage.selectKitType(KitTypeEnum.BLOOD_AND_RNA);
         kitTable = kitErrorPage.getKitsTable;
-        await kitTable.searchBy(KitsColumnsEnum.SHIPPING_ID, shippingID);
+        await kitTable.searchBy(Label.SHIPPING_ID, shippingID);
         amountOfKits = await kitTable.getRowsCount();
         expect(amountOfKits, `Kit with shipping id ${shippingID} was not found in either Kit Queue or Kit Error`).toBe(1);
-        kitErrorShippingID = (await kitTable.getData(KitsColumnsEnum.SHIPPING_ID)).trim();
+        kitErrorShippingID = (await kitTable.getData(Label.SHIPPING_ID)).trim();
         expect(kitErrorShippingID).toBe(shippingID);
       } else {
         //A kit with the relevant shipping id was found
-        kitQueueShippingID = (await kitTable.getData(KitsColumnsEnum.SHIPPING_ID)).trim();
+        kitQueueShippingID = (await kitTable.getData(Label.SHIPPING_ID)).trim();
         expect(kitQueueShippingID).toBe(shippingID);
       }
     } else if (!kitQueuePageHasExistingKitRequests) {
@@ -156,10 +154,10 @@ test.describe('Blood & RNA Kit Upload', () => {
       await kitErrorPage.waitForReady();
       await kitErrorPage.selectKitType(KitTypeEnum.BLOOD_AND_RNA);
       kitTable = kitErrorPage.getKitsTable;
-      await kitTable.searchBy(KitsColumnsEnum.SHIPPING_ID, shippingID);
+      await kitTable.searchBy(Label.SHIPPING_ID, shippingID);
       amountOfKits = await kitTable.getRowsCount();
       expect(amountOfKits, `Kit with shipping id ${shippingID} was not found in either Kit Queue or Kit Error`).toBe(1);
-      kitErrorShippingID = (await kitTable.getData(KitsColumnsEnum.SHIPPING_ID)).trim();
+      kitErrorShippingID = (await kitTable.getData(Label.SHIPPING_ID)).trim();
       expect(kitErrorShippingID).toBe(shippingID);
     }
 
@@ -200,10 +198,10 @@ test.describe('Blood & RNA Kit Upload', () => {
     await kitsSentPage.selectKitType(kitType);
 
     //Check for the sent blood kit
-    await kitsSentPage.search(KitsColumnsEnum.MF_CODE, kitLabel, { count: 1 });
+    await kitsSentPage.search(Label.MF_CODE, kitLabel, { count: 1 });
 
     //Check for the sent RNA kit
-    await kitsSentPage.search(KitsColumnsEnum.MF_CODE, rnaLabel, { count: 1 });
+    await kitsSentPage.search(Label.MF_CODE, rnaLabel, { count: 1 });
 
     //Kits Received Page
     const kitsReceivedPage = await navigation.selectFromSamples<KitsReceivedPage>(SamplesNavEnum.RECEIVED);
@@ -215,7 +213,7 @@ test.describe('Blood & RNA Kit Upload', () => {
     await kitsReceivedPage.selectKitType(kitType);
 
     //Check for the received blood and rna kit
-    await kitsReceivedPage.search(KitsColumnsEnum.MF_CODE, kitLabel);
+    await kitsReceivedPage.search(Label.MF_CODE, kitLabel);
     await kitsReceivedPage.assertDisplayedRowsCount(1);
   });
 });

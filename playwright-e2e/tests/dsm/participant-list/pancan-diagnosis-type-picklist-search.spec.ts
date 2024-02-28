@@ -2,7 +2,7 @@ import { expect } from '@playwright/test';
 import { test } from 'fixtures/dsm-fixture';
 import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
-import { CustomViewColumns } from 'dsm/component/filters/sections/search/search-enums';
+import { CustomizeView, Label } from 'dsm/enums';
 import { logInfo } from 'utils/log-utils';
 
 test.describe('Pancan study picklist search', () => {
@@ -17,13 +17,13 @@ test.describe('Pancan study picklist search', () => {
       // Select column Diagnosis_Type from Customize View
       const customizeViewPanel = participantListPage.filters.customizeViewPanel;
       await customizeViewPanel.open();
-      await customizeViewPanel.selectColumns(CustomViewColumns.DIAGNOSIS_TYPE, ['DIAGNOSIS_TYPE']);
+      await customizeViewPanel.selectColumns(CustomizeView.DIAGNOSIS_TYPE, [Label.DIAGNOSIS_TYPE]);
       await customizeViewPanel.close();
 
       // In the search menu, select some specific cancers along with some general one
       const searchPanel = participantListPage.filters.searchPanel;
       await searchPanel.open();
-      await searchPanel.checkboxes('DIAGNOSIS_TYPE', {checkboxValues: cancers});
+      await searchPanel.checkboxes(Label.DIAGNOSIS_TYPE, {checkboxValues: cancers});
       await searchPanel.search();
 
       const participantsTable = participantListPage.participantListTable;
@@ -38,7 +38,7 @@ test.describe('Pancan study picklist search', () => {
       while (participantsCount > 0 && pageCount <= 3) {
         // Verify only participants with at least one diagnosis type that match the above selected cancers are displayed
         for (let i = 0; i < participantsCount; i++) {
-          const columnData: string = await participantsTable.getParticipantDataAt(i, 'DIAGNOSIS_TYPE');
+          const columnData: string = await participantsTable.getParticipantDataAt(i, Label.DIAGNOSIS_TYPE);
           const exists = cancers.some(cancer => columnData.indexOf(cancer) !== -1);
           expect.soft(exists).toBe(true);
         }

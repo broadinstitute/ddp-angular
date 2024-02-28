@@ -6,8 +6,8 @@ import {StudyEnum} from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import {SamplesNavEnum} from 'dsm/component/navigation/enums/samplesNav-enum';
 import {KitTypeEnum} from 'dsm/component/kitType/enums/kitType-enum';
 import InitialScanPage from 'dsm/pages/scanner-pages/initialScan-page';
-import {KitsColumnsEnum} from 'dsm/pages/kitsInfo-pages/enums/kitsColumns-enum';
 import KitsReceivedPage from 'dsm/pages/kitsInfo-pages/kitsReceived-page/kitsReceivedPage';
+import { Label } from 'dsm/enums';
 
 // don't run in parallel
 test.describe.serial('Initial Scan page', () => {
@@ -56,8 +56,8 @@ test.describe.serial('Initial Scan page', () => {
 
       // Save Short ID and MF code
       const kitsTable = kitsReceivedPage.getKitsTable;
-      const [shortId] = await kitsTable.getTextAt(0, KitsColumnsEnum.SHORT_ID);
-      const [mfCode] = await kitsTable.getTextAt(0, KitsColumnsEnum.MF_CODE);
+      const [shortId] = await kitsTable.getTextAt(0, Label.SHORT_ID);
+      const [mfCode] = await kitsTable.getTextAt(0, Label.MF_CODE);
 
       // Initial Scan page
       const initialScanPage = await navigation.selectFromSamples<InitialScanPage>(SamplesNavEnum.INITIAL_SCAN);

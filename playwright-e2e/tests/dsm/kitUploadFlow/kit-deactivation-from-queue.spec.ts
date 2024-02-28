@@ -4,11 +4,11 @@ import { KitTypeEnum } from 'dsm/component/kitType/enums/kitType-enum';
 import { SamplesNavEnum } from 'dsm/component/navigation/enums/samplesNav-enum';
 import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import { Navigation } from 'dsm/component/navigation/navigation';
-import { KitsColumnsEnum } from 'dsm/pages/kitsInfo-pages/enums/kitsColumns-enum';
 import { WelcomePage } from 'dsm/pages/welcome-page';
 import { logInfo } from 'utils/log-utils';
 import { KitsTable } from 'dsm/component/tables/kits-table';
 import KitsQueuePage from 'dsm/pages/kitsInfo-pages/kit-queue-page';
+import { Label } from 'dsm/enums';
 
 // don't run in parallel
 test.describe.serial('Kit Deactivation', () => {
@@ -43,7 +43,7 @@ test.describe.serial('Kit Deactivation', () => {
           logInfo(`${kit} kits table has ${rowCount} rows`);
           if (rowCount > 0) {
             const rowIndex = await kitsTable.getRandomRowIndex();
-            [shortId] = await kitsTable.getTextAt(rowIndex, 'Short ID');
+            [shortId] = await kitsTable.getTextAt(rowIndex, Label.SHORT_ID);
 
             shippingId = await kitsQueuePage.deactivateKitFor({shortId});
 
@@ -52,7 +52,7 @@ test.describe.serial('Kit Deactivation', () => {
             // Deactivated kit should be removed from the table
             const kitsExists = await kitsQueuePage.hasKitRequests();
             if (kitsExists) {
-              await kitsTable.searchByColumn(KitsColumnsEnum.SHIPPING_ID, shippingId);
+              await kitsTable.searchByColumn(Label.SHIPPING_ID, shippingId);
               await expect(kitsTable.rowLocator()).toHaveCount(0);
             }
           } else {
