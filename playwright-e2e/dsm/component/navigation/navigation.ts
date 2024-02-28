@@ -17,7 +17,7 @@ import KitsReceivedPage from 'dsm/pages/kitsInfo-pages/kitsReceived-page/kitsRec
 import TrackingScanPage from 'dsm/pages/scanner-pages/trackingScan-page';
 import RgpFinalScanPage from 'dsm/pages/scanner-pages/rgpFinalScan-page';
 import ErrorPage from 'dsm/pages/samples/error-page';
-import UserPermissionPage from 'dsm/pages/miscellaneous-pages/user-and-permissions-page';
+import UserPermissionPage from 'dsm/pages/user-and-permissions-page';
 import KitsQueuePage from 'dsm/pages/kitsInfo-pages/kit-queue-page';
 import {logInfo} from 'utils/log-utils';
 import SearchPage from 'dsm/pages/samples/search-page';

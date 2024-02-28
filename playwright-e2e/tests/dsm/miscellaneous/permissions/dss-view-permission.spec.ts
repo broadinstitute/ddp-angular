@@ -1,18 +1,15 @@
 import { test, expect } from '@playwright/test';
 import { login } from 'authentication/auth-dsm';
 import Dropdown from 'dsm/component/dropdown';
-import { CustomViewColumns } from 'dsm/component/filters/sections/search/search-enums';
+import { CustomizeView, Label, Tab, UserPermission } from 'dsm/enums';
 import { MainMenuEnum } from 'dsm/component/navigation/enums/mainMenu-enum';
 import { MiscellaneousEnum } from 'dsm/component/navigation/enums/miscellaneousNav-enum';
 import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import { StudyNavEnum } from 'dsm/component/navigation/enums/studyNav-enum';
 import { Navigation } from 'dsm/component/navigation/navigation';
-import { TabEnum } from 'dsm/component/tabs/enums/tab-enum';
 import Tabs from 'dsm/component/tabs/tabs';
-import { UserPermission } from 'dsm/pages/miscellaneous-pages/enums/userPermission-enum';
-import UserPermissionPage from 'dsm/pages/miscellaneous-pages/user-and-permissions-page';
+import UserPermissionPage from 'dsm/pages/user-and-permissions-page';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
-import { MainInfoEnum } from 'dsm/pages/participant-page/enums/main-info-enum';
 import Select from 'dss/component/select';
 import { logInfo } from 'utils/log-utils';
 
@@ -92,12 +89,12 @@ test.describe.serial('DSS View Only Permission', () => {
         await participantListPage.waitForReady();
 
         // User cannot see customize columns which are not related to the visible tabs
-        const expectedTabs = [TabEnum.SURVEY_DATA, TabEnum.SAMPLE_INFORMATION, TabEnum.CONTACT_INFORMATION];
+        const expectedTabs = [Tab.SURVEY_DATA, Tab.SAMPLE_INFORMATION, Tab.CONTACT_INFORMATION];
 
         const notVisibleColumns = [
-          CustomViewColumns.MEDICAL_RECORD,
-          CustomViewColumns.ONC_HISTORY,
-          CustomViewColumns.TISSUE,
+          CustomizeView.MEDICAL_RECORD,
+          CustomizeView.ONC_HISTORY,
+          CustomizeView.TISSUE,
         ];
 
         const customizeViewPanel = participantListPage.filters.customizeViewPanel;
@@ -105,9 +102,9 @@ test.describe.serial('DSS View Only Permission', () => {
         expect(await customizeViewPanel.isColumnVisible(notVisibleColumns)).toBe(false);
 
         // Find a participant created by Playwright DSS test
-        const rowIndex = await participantListPage.findParticipantFor(CustomViewColumns.PARTICIPANT, 'Email', {value: emails[i].split('@')[0] });
+        const rowIndex = await participantListPage.findParticipantFor(CustomizeView.PARTICIPANT, Label.EMAIL, {value: emails[i].split('@')[0] });
         const participantListTable = participantListPage.participantListTable;
-        const shortId = await participantListTable.getParticipantDataAt(rowIndex, MainInfoEnum.SHORT_ID);
+        const shortId = await participantListTable.getParticipantDataAt(rowIndex, Label.SHORT_ID);
         logInfo(`${study} Participant Short ID: ${shortId}`);
 
         // Open Participant page to verify visible tabs
@@ -124,7 +121,7 @@ test.describe.serial('DSS View Only Permission', () => {
         // All tabs are enabled
         for (const tabName of tabNames!) {
           const tab = new Tabs(page);
-          await tab.open(tabName as TabEnum);
+          await tab.open(tabName as Tab);
         }
       })
     });

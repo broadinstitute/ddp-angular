@@ -4,9 +4,9 @@ import {WelcomePage} from 'dsm/pages/welcome-page';
 import {Navigation} from 'dsm/component/navigation/navigation';
 import {StudyEnum} from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import {SamplesNavEnum} from 'dsm/component/navigation/enums/samplesNav-enum';
-import {KitsColumnsEnum} from 'dsm/pages/kitsInfo-pages/enums/kitsColumns-enum';
 import {studyShortName} from 'utils/test-utils';
 import KitQueuePage from 'dsm/pages/kitsInfo-pages/kit-queue-page';
+import { Label } from 'dsm/enums';
 
 test.describe.serial('Sample Kit Queue UI', () => {
   const studies = [
@@ -41,13 +41,13 @@ test.describe.serial('Sample Kit Queue UI', () => {
         if (rows > 0) {
           for (let i = 0; i < rows; i++) {
             // Kits in different types are not mixed. Kits should be uploaded for the selected type.
-            const typeValue = (await kitsTable.getRowText(i, KitsColumnsEnum.TYPE)).trim();
+            const typeValue = (await kitsTable.getRowText(i, Label.TYPE)).trim();
             expect.soft(typeValue).toStrictEqual(kitType);
-            const shortId = (await kitsTable.getRowText(i, KitsColumnsEnum.SHORT_ID)).trim();
+            const shortId = (await kitsTable.getRowText(i, Label.SHORT_ID)).trim();
             expect(shortId?.length).toBeTruthy();
-            const shippingId = (await kitsTable.getRowText(i, KitsColumnsEnum.SHIPPING_ID)).trim();
+            const shippingId = (await kitsTable.getRowText(i, Label.SHIPPING_ID)).trim();
             expect(shippingId?.length).toBeTruthy();
-            const realm = (await kitsTable.getRowText(i, KitsColumnsEnum.DDP_REALM)).trim();
+            const realm = (await kitsTable.getRowText(i, Label.DDP_REALM)).trim();
             expect(realm).toStrictEqual(expectedRealm);
             await expect(kitsTable.findButtonInRow(i, { label: 'Deactivate' }).toLocator()).toBeEnabled({timeout: 1000});
             await expect(kitsTable.findButtonInRow(i, { label: 'Generate Express Label' }).toLocator()).toBeEnabled({timeout: 1000});

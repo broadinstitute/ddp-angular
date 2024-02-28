@@ -5,8 +5,8 @@ import { MiscellaneousEnum } from 'dsm/component/navigation/enums/miscellaneousN
 import { SamplesNavEnum } from 'dsm/component/navigation/enums/samplesNav-enum';
 import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import { Navigation } from 'dsm/component/navigation/navigation';
-import { UserPermission } from 'dsm/pages/miscellaneous-pages/enums/userPermission-enum';
-import UserPermissionPage from 'dsm/pages/miscellaneous-pages/user-and-permissions-page';
+import { UserPermission } from 'dsm/enums';
+import UserPermissionPage from 'dsm/pages/user-and-permissions-page';
 import Select from 'dss/component/select';
 import { testLimitedPermissions as test } from 'fixtures/dsm-fixture';
 

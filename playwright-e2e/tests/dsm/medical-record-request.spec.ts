@@ -1,17 +1,14 @@
 import { expect } from '@playwright/test';
 import { test } from 'fixtures/dsm-fixture';
-import { AdditionalFilter, CustomViewColumns } from 'dsm/component/filters/sections/search/search-enums';
 import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
 import { assertDateFormat, waitForResponse } from 'utils/test-utils';
 import { logInfo } from 'utils/log-utils';
 import ParticipantPage from 'dsm/pages/participant-page/participant-page';
-import { TabEnum } from 'dsm/component/tabs/enums/tab-enum';
+import { CustomizeView, DataFilter, Label, Tab } from 'dsm/enums';
 import MedicalRecordsTab from 'dsm/pages/medical-records/medical-records-tab';
-import { MainInfoEnum } from 'dsm/pages/participant-page/enums/main-info-enum';
 import { SortOrder } from 'dss/component/table';
 import MedicalRecordsRequestPage, { PDFName } from 'dsm/pages/medical-records/medical-records-request-page';
-import { FieldsEnum } from 'dsm/pages/medical-records/medical-records-enums';
 import Input from 'dss/component/input';
 import MedicalRecordsTable from 'dsm/pages/medical-records/medical-records-table';
 import { QuickFiltersEnum } from 'dsm/component/filters/quick-filters';
@@ -49,31 +46,24 @@ test.describe.serial('Medical records request workflow', () => {
       const searchPanel = participantListPage.filters.searchPanel;
 
       await test.step('Find an enrolled participant', async () => {
-        const registrationDateColumn = 'Registration Date';
         // These are columns displayed in Medical Records table
-        const institutionNameColumn = 'Institution Name';
-        const followUpColumn = 'Follow-Up required';
-        const mrReviewColumn = 'MR Review';
-        const initialMRRequestColumn = 'Initial MR Request';
-        const initialMRReceivedColumn = 'Initial MR Received';
-
         await customizeViewPanel.open();
-        await customizeViewPanel.selectColumns(CustomViewColumns.PARTICIPANT, [registrationDateColumn]);
-        await customizeViewPanel.selectColumns(CustomViewColumns.MEDICAL_RECORD, [
-          institutionNameColumn,
-          followUpColumn,
-          mrReviewColumn,
-          initialMRRequestColumn,
-          initialMRReceivedColumn
+        await customizeViewPanel.selectColumns(CustomizeView.PARTICIPANT, [Label.REGISTRATION_DATE]);
+        await customizeViewPanel.selectColumns(CustomizeView.MEDICAL_RECORD, [
+          Label.INSTITUTION_NAME,
+          Label.FOLLOW_UP_REQUIRED,
+          Label.MR_REVIEW,
+          Label.INITIAL_MR_REQUEST,
+          Label.INITIAL_MR_RECEIVED
         ]);
 
         await searchPanel.open();
-        await searchPanel.checkboxes('Status', { checkboxValues: ['Enrolled'] });
-        await searchPanel.text(institutionNameColumn, { additionalFilters: [AdditionalFilter.EMPTY] });
-        await searchPanel.checkboxes(followUpColumn, { checkboxValues: ['No'] });
-        await searchPanel.checkboxes(mrReviewColumn, { checkboxValues: ['No'] });
-        await searchPanel.text(initialMRRequestColumn, { additionalFilters: [AdditionalFilter.EMPTY] });
-        await searchPanel.text(initialMRReceivedColumn, { additionalFilters: [AdditionalFilter.EMPTY] });
+        await searchPanel.checkboxes(Label.STATUS, { checkboxValues: ['Enrolled'] });
+        await searchPanel.text(Label.INSTITUTION_NAME, { additionalFilters: [DataFilter.EMPTY] });
+        await searchPanel.checkboxes(Label.FOLLOW_UP_REQUIRED, { checkboxValues: ['No'] });
+        await searchPanel.checkboxes(Label.MR_REVIEW, { checkboxValues: ['No'] });
+        await searchPanel.text(Label.INITIAL_MR_REQUEST, { additionalFilters: [DataFilter.EMPTY] });
+        await searchPanel.text(Label.INITIAL_MR_RECEIVED, { additionalFilters: [DataFilter.EMPTY] });
         await searchPanel.search();
 
         const participantsCount = await participantListTable.numOfParticipants();
@@ -83,11 +73,11 @@ test.describe.serial('Medical records request workflow', () => {
         }
 
         // Sort by Registration Date: newest first
-        await participantListTable.sort(registrationDateColumn, SortOrder.ASC);
+        await participantListTable.sort(Label.REGISTRATION_DATE, SortOrder.ASC);
 
         const rowCount = await participantListTable.getRowsCount();
         for (let i = 0; i < rowCount; i++) {
-          const [initialMRReceivedDate] = await participantListTable.getTextAt(i, initialMRReceivedColumn);
+          const [initialMRReceivedDate] = await participantListTable.getTextAt(i, Label.INITIAL_MR_RECEIVED);
           if (initialMRReceivedDate.trim().length === 0) {
             // this participant does not have Initial MR Received date
             rowIndex = i;
@@ -121,40 +111,40 @@ test.describe.serial('Medical records request workflow', () => {
         let medicalRecordTable = await openMedicalRecordsTab(participantPage);
 
         // Fetch information on first row. Additional rows are ignored.
-        const [typeValue] = await medicalRecordTable.getTextAt(0, 'Type');
+        const [typeValue] = await medicalRecordTable.getTextAt(0, Label.TYPE);
         expect(typeValue).toMatch(/(Physician|Institution|Initial Biopsy)/);
 
-        const [institutionValue] = await medicalRecordTable.getTextAt(0, 'Institution');
+        const [institutionValue] = await medicalRecordTable.getTextAt(0, Label.INSTITUTION);
         expect(institutionValue).toBeTruthy();
 
-        const [mrStatusValue] = await medicalRecordTable.getTextAt(0, 'MR Status');
+        const [mrStatusValue] = await medicalRecordTable.getTextAt(0, Label.MR_STATUS);
         expect(mrStatusValue).toMatch(/(New|Fax Sent|MR Received)/);
 
-        const [mrProblemValue] = await medicalRecordTable.getTextAt(0, 'MR Problem');
+        const [mrProblemValue] = await medicalRecordTable.getTextAt(0, Label.MR_PROBLEM);
         expect(mrProblemValue).toMatch(/Yes|No/);
 
-        const [mrRequiresReviewValue] = await medicalRecordTable.getTextAt(0, 'MR Requires Review');
+        const [mrRequiresReviewValue] = await medicalRecordTable.getTextAt(0, Label.MR_REQUIRES_REVIEW);
         expect(mrRequiresReviewValue).toMatch(/Yes|No/);
 
-        const [paperCRRequiredValue] = await medicalRecordTable.getTextAt(0, 'Paper C/R Required');
+        const [paperCRRequiredValue] = await medicalRecordTable.getTextAt(0, Label.PAPER_CR_REQUIRED);
         expect(paperCRRequiredValue).toMatch(/Yes|No/);
 
-        const [mrFollowUpRequiredValue] = await medicalRecordTable.getTextAt(0, 'MR Follow-Up Required');
+        const [mrFollowUpRequiredValue] = await medicalRecordTable.getTextAt(0, Label.MR_FOLLOWUP_REQUIRED);
         expect(mrFollowUpRequiredValue).toMatch(/Yes|No/);
 
         // Open Medical Records - Request Page
         medicalRecordsRequestPage = await medicalRecordTable.openRequestPageByRowIndex(0);
 
-        const currentStatus = await medicalRecordsRequestPage.getStaticText(MainInfoEnum.CURRENT_STATUS);
+        const currentStatus = await medicalRecordsRequestPage.getStaticText(Label.CURRENT_STATUS);
         expect(currentStatus).toStrictEqual(mrStatusValue);
         expect(currentStatus).toMatch(/(New|Fax Sent|MR Received)/);
 
-        const shortIdOnRequestPage = await medicalRecordsRequestPage.getStaticText(MainInfoEnum.SHORT_ID);
+        const shortIdOnRequestPage = await medicalRecordsRequestPage.getStaticText(Label.SHORT_ID);
         expect(shortIdOnRequestPage).toStrictEqual(shortId);
 
-        assertDateFormat(await medicalRecordsRequestPage.getStaticText(MainInfoEnum.DATE_OF_BIRTH));
+        assertDateFormat(await medicalRecordsRequestPage.getStaticText(Label.DATE_OF_BIRTH));
 
-        const instInfo = await medicalRecordsRequestPage.getStaticText(FieldsEnum.INSTITUTION_INFO);
+        const instInfo = await medicalRecordsRequestPage.getStaticText(Label.INSTITUTION_INFO);
         expect(instInfo).toBeTruthy();
         logInfo(`Participant provided Institution is ${instInfo}`);
 
@@ -170,7 +160,7 @@ test.describe.serial('Medical records request workflow', () => {
         // Pick one confirmed institution that does not match existing institution
         [confirmedInstitution] = confirmedInstitutions.filter(institution => institution !== institutionValue);
 
-        await medicalRecordsRequestPage.fillText(FieldsEnum.CONFIRMED_INSTITUTION_NAME, confirmedInstitution);
+        await medicalRecordsRequestPage.fillText(Label.CONFIRMED_INSTITUTION_NAME, confirmedInstitution);
         logInfo(`Confirmed Institution is ${confirmedInstitution}`);
 
         await medicalRecordsRequestPage.backToPreviousPage();
@@ -294,7 +284,7 @@ test.describe.serial('Medical records request workflow', () => {
       await participantListPage.filterListByShortId(shortId);
       const participantPage = await participantListTable.openParticipantPageAt(0);
 
-      const existsDateOfMajority = await page.locator(participantPage.getMainTextInfoXPath(MainInfoEnum.DATE_OF_MAJORITY)).isVisible();
+      const existsDateOfMajority = await page.locator(participantPage.getMainTextInfoXPath(Label.DATE_OF_MAJORITY)).isVisible();
 
       // Open Medical Request page
       const medicalRecordTable = await openMedicalRecordsTab(participantPage);
@@ -340,13 +330,12 @@ test.describe.serial('Medical records request workflow', () => {
       assertTableHeaders(actualHeaderNames, orderedHeaderNames);
 
       // Add Registration Date column to Quick Filter view
-      const registrationDateColumn = 'Registration Date';
       await customizeViewPanel.open();
-      await customizeViewPanel.selectColumns(CustomViewColumns.PARTICIPANT, [registrationDateColumn]);
+      await customizeViewPanel.selectColumns(CustomizeView.PARTICIPANT, [Label.REGISTRATION_DATE]);
       await customizeViewPanel.close();
 
       // Sort by Registration Date: newest first
-      await participantListTable.sort(registrationDateColumn, SortOrder.ASC);
+      await participantListTable.sort(Label.REGISTRATION_DATE, SortOrder.ASC);
 
       // Number of participants from quick filter should be unchanged with new column
       const numParticipantsAfter = await participantListTable.numOfParticipants();
@@ -355,7 +344,7 @@ test.describe.serial('Medical records request workflow', () => {
   }
 
   async function openMedicalRecordsTab(participantPage: ParticipantPage): Promise<MedicalRecordsTable> {
-    const medicalRecordsTab = await participantPage.clickTab<MedicalRecordsTab>(TabEnum.MEDICAL_RECORD);
+    const medicalRecordsTab = await participantPage.clickTab<MedicalRecordsTab>(Tab.MEDICAL_RECORD);
     const medicalRecordTable = medicalRecordsTab.table;
     expect(await medicalRecordTable.getRowsCount()).toBeGreaterThanOrEqual(1);
     return medicalRecordTable;
@@ -367,9 +356,9 @@ test.describe.serial('Medical records request workflow', () => {
     let foundRow = -1;
 
     for (let i = 0; i < rowCount; i++) {
-      const [institutionValue] = await medicalRecordTable.getTextAt(i, 'Institution');
+      const [institutionValue] = await medicalRecordTable.getTextAt(i, Label.INSTITUTION);
       if (institutionName === institutionValue) {
-        const [mrStatusValue] = await medicalRecordTable.getTextAt(i, 'MR Status');
+        const [mrStatusValue] = await medicalRecordTable.getTextAt(i, Label.MR_STATUS);
         if (mrStatus) {
           if (mrStatus === mrStatusValue) {
             foundMatch = true;

@@ -1,11 +1,10 @@
 import { test, expect, Page, APIRequestContext } from '@playwright/test';
 import { login } from 'authentication/auth-dsm';
-import { CustomViewColumns } from 'dsm/component/filters/sections/search/search-enums';
+import { CustomizeView, DataFilter, Label, Tab } from 'dsm/enums';
 import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import { StudyNavEnum } from 'dsm/component/navigation/enums/studyNav-enum';
 import { Navigation } from 'dsm/component/navigation/navigation';
 import { OncHistoryInputColumnsEnum } from 'dsm/component/tabs/enums/onc-history-input-columns-enum';
-import { TabEnum } from 'dsm/component/tabs/enums/tab-enum';
 import OncHistoryTab from 'dsm/component/tabs/onc-history-tab';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
 import ParticipantPage from 'dsm/pages/participant-page/participant-page';
@@ -28,7 +27,7 @@ test('Multiple browser tabs @dsm', async ({ browser, request }) => {
   const pancanParticipantListPage = await logIntoStudy(pancanPage, request, pancan);
   const pancanParticipantShortId = await pancanParticipantListPage.findParticipantWithTab({
     findPediatricParticipant: false,
-    tab: TabEnum.ONC_HISTORY
+    tab: Tab.ONC_HISTORY
   });
   logInfo(`PanCan participant Short ID: ${pancanParticipantShortId}`);
 
@@ -37,7 +36,7 @@ test('Multiple browser tabs @dsm', async ({ browser, request }) => {
   const angioParticipantListPage = await logIntoStudy(angioPage, request, angio);
   const angioParticipantShortId = await angioParticipantListPage.findParticipantWithTab({
     findPediatricParticipant: false,
-    tab: TabEnum.ONC_HISTORY
+    tab: Tab.ONC_HISTORY
   });
   logInfo(`angio participant Short ID: ${angioParticipantShortId}`);
 
@@ -51,17 +50,14 @@ test('Multiple browser tabs @dsm', async ({ browser, request }) => {
 async function findAdultParticipantShortId(participantListPage: ParticipantListPage): Promise<string> {
   return await test.step('Search for a participant with Onc history', async () => {
     // Find a participant with existing Onc History
-    const oncHistoryRequestStatusColumn = 'Request Status';
-    const registrationDateColumn = 'Registration Date';
-
     const customizeViewPanel = participantListPage.filters.customizeViewPanel;
     await customizeViewPanel.open();
-    await customizeViewPanel.selectColumns(CustomViewColumns.PARTICIPANT, [registrationDateColumn]);
-    await customizeViewPanel.selectColumns(CustomViewColumns.ONC_HISTORY, [oncHistoryRequestStatusColumn]);
+    await customizeViewPanel.selectColumns(CustomizeView.PARTICIPANT, [Label.REGISTRATION_DATE]);
+    await customizeViewPanel.selectColumns(CustomizeView.ONC_HISTORY, [Label.REQUEST_STATUS]);
 
     const searchPanel = participantListPage.filters.searchPanel;
     await searchPanel.open();
-    await searchPanel.checkboxes('Status', { checkboxValues: ['Enrolled'] });
+    await searchPanel.checkboxes(Label.STATUS, { checkboxValues: [DataFilter.ENROLLED] });
     // await searchPanel.checkboxes(oncHistoryRequestStatusColumn, { checkboxValues: ['Request'] });
     await searchPanel.search();
 
@@ -69,7 +65,7 @@ async function findAdultParticipantShortId(participantListPage: ParticipantListP
     const rows = await participantListTable.rowsCount;
     expect(rows).toBeGreaterThanOrEqual(1);
 
-    await participantListTable.sort(registrationDateColumn, SortOrder.ASC);
+    await participantListTable.sort(Label.REGISTRATION_DATE, SortOrder.ASC);
     const numParticipant = await participantListTable.numOfParticipants();
     if (numParticipant > 50) {
       await participantListTable.changeRowCount(50);
@@ -98,12 +94,12 @@ async function addOncHistory(page: Page, shortID: string, participantListPage: P
     await page.bringToFront();
     const searchPanel = participantListPage.filters.searchPanel;
     await searchPanel.open();
-    await searchPanel.text('Short ID', { textValue: shortID });
+    await searchPanel.text(Label.SHORT_ID, { textValue: shortID });
     await searchPanel.search();
 
     const participantListTable = participantListPage.participantListTable;
     const participantPage: ParticipantPage = await participantListTable.openParticipantPageAt(0);
-    const oncHistoryTab = await participantPage.clickTab<OncHistoryTab>(TabEnum.ONC_HISTORY);
+    const oncHistoryTab = await participantPage.clickTab<OncHistoryTab>(Tab.ONC_HISTORY);
     const oncHistoryTable = oncHistoryTab.table;
     const rowIndex = await oncHistoryTable.getRowsCount() - 1;
     expect(rowIndex).toBeGreaterThanOrEqual(0);
@@ -130,7 +126,7 @@ async function logIntoStudy(page: Page, request: APIRequestContext, study: Study
     await new WelcomePage(page).selectStudy(study);
     const participantListPage = await new Navigation(page, request).selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
     await participantListPage.waitForReady();
-    const [pancanRealm] = await participantListPage.participantListTable.getTextAt(0, 'DDP');
+    const [pancanRealm] = await participantListPage.participantListTable.getTextAt(0, Label.DDP);
     expect(pancanRealm).toStrictEqual(studyShortName(study).shortName);
     return participantListPage;
   });

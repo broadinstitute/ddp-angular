@@ -1,5 +1,5 @@
 import {expect, Locator, Page} from '@playwright/test';
-import {KitsColumnsEnum} from 'dsm/pages/kitsInfo-pages/enums/kitsColumns-enum';
+import { Label } from 'dsm/enums';
 import Table from 'dss/component/table';
 import {rows} from 'lib/component/dsm/paginators/types/rowsPerPage';
 import { waitForNoSpinner } from 'utils/test-utils';
@@ -18,7 +18,7 @@ export class KitsTable extends Table {
     await this.paginator.rowsPerPageForKits(rows);
   }
 
-  public async searchBy(columnName: KitsColumnsEnum, value: string): Promise<void> {
+  public async searchBy(columnName: Label, value: string): Promise<void> {
     const column = this.column(columnName);
     const searchInputHeader = this.searchHeader(columnName);
 
@@ -31,7 +31,7 @@ export class KitsTable extends Table {
     await waitForNoSpinner(this.page);
   }
 
-  public async getData(columnName: KitsColumnsEnum): Promise<string> {
+  public async getData(columnName: Label): Promise<string> {
     const column = this.column(columnName);
     await expect(column, `Kits Table - the column ${columnName} doesn't exist`)
       .toBeVisible();
@@ -54,15 +54,15 @@ export class KitsTable extends Table {
   }
 
   /* Locators */
-  public searchHeader(columnName: KitsColumnsEnum): Locator {
+  public searchHeader(columnName: Label): Locator {
     return this.page.locator(this.searchByXPath(columnName));
   }
 
-  public column(columnName: KitsColumnsEnum): Locator {
+  public column(columnName: Label): Locator {
     return this.page.locator(this.columnXPath(columnName));
   }
 
-  public td(columnName: KitsColumnsEnum): Locator {
+  public td(columnName: Label): Locator {
     return this.page.locator(this.tdXPath(columnName));
   }
 
@@ -79,19 +79,19 @@ export class KitsTable extends Table {
   }
 
   /* XPaths */
-  private searchByXPath(columnName: KitsColumnsEnum): string {
+  private searchByXPath(columnName: Label): string {
     return `(//table/thead/tr[2]/th)[${this.columnPositionXPath(columnName)}]/input`;
   }
 
-  private tdXPath(columnName: KitsColumnsEnum): string {
+  private tdXPath(columnName: Label): string {
     return `//table/tbody//td[position()=${this.columnPositionXPath(columnName)}]`;
   }
 
-  private columnPositionXPath(columnName: KitsColumnsEnum): string {
+  private columnPositionXPath(columnName: Label): string {
     return `count(${this.columnXPath(columnName)}/preceding-sibling::th)+1`;
   }
 
-  private columnXPath(columnName: KitsColumnsEnum): string {
+  private columnXPath(columnName: Label): string {
     return `${this.headerXPath}/th[descendant-or-self::*[text()[normalize-space()='${columnName}']]]`;
   }
 

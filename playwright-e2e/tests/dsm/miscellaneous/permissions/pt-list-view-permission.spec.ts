@@ -6,10 +6,9 @@ import { MiscellaneousEnum } from 'dsm/component/navigation/enums/miscellaneousN
 import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import { StudyNavEnum } from 'dsm/component/navigation/enums/studyNav-enum';
 import { Navigation } from 'dsm/component/navigation/navigation';
-import { TabEnum } from 'dsm/component/tabs/enums/tab-enum';
+import { Label, Tab, UserPermission } from 'dsm/enums';
 import Tabs from 'dsm/component/tabs/tabs';
-import { UserPermission } from 'dsm/pages/miscellaneous-pages/enums/userPermission-enum';
-import UserPermissionPage from 'dsm/pages/miscellaneous-pages/user-and-permissions-page';
+import UserPermissionPage from 'dsm/pages/user-and-permissions-page';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
 import Select from 'dss/component/select';
 import { logInfo } from 'utils/log-utils';
@@ -80,7 +79,7 @@ test.describe.serial('DSS View Only Permission', () => {
         // Find any participant
         const participantListTable = participantListPage.participantListTable;
         const rowIndex = (await participantListTable.randomizeRows())[0];
-        const subjectId = await participantListTable.getParticipantDataAt(rowIndex, 'Subject ID');
+        const subjectId = await participantListTable.getParticipantDataAt(rowIndex, Label.SUBJECT_ID);
         logInfo(`${study} Participant Subject ID: ${subjectId}`);
 
         // Open Participant page to verify visible tabs
@@ -89,7 +88,7 @@ test.describe.serial('DSS View Only Permission', () => {
         const visibleTabs = page.locator('tabset a[role="tab"]');
         const tabNames: string[] = await visibleTabs.allInnerTexts();
 
-        const expectedTabs = [TabEnum.SURVEY_DATA];
+        const expectedTabs = [Tab.SURVEY_DATA];
         expect(tabNames).toStrictEqual(expect.arrayContaining(expectedTabs));
         for (let i = 1; i < tabNames.length; i++) { // array index starts at 1
           expect(tabNames[i]).toContain('RGP_');
@@ -98,7 +97,7 @@ test.describe.serial('DSS View Only Permission', () => {
         // All tabs are enabled
         for (const tabName of tabNames) {
           const tab = new Tabs(page);
-          await tab.open(tabName as TabEnum);
+          await tab.open(tabName as Tab);
         }
       })
     });

@@ -76,8 +76,10 @@ export default class Input extends WidgetBase {
     const oldValue: string = (await this.toLocator().inputValue()).trim();
 
     // safety check: prevent unintented overwrite value in wrong input field.
-    if (!overwrite && oldValue.length > 0) {
-      throw new Error(`Overwriting an existing value: "${oldValue}". If intentional, set overwrite to true. ${this.toLocator()}`);
+    if (!overwrite) {
+      if (oldValue.length > 0 && oldValue !== value) {
+        throw new Error(`Overwriting an existing value: "${oldValue}" to new value: "${value}". If intentional, set overwrite to true. ${this.toLocator()}`);
+      }
     }
 
     if (typeof value === 'string' && value.length === 0) {

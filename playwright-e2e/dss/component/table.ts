@@ -4,7 +4,7 @@ import { shuffle, waitForNoSpinner } from 'utils/test-utils';
 import Checkbox from './checkbox';
 import { ParticipantsListPaginator } from 'lib/component/dsm/paginators/participantsListPaginator';
 import { logInfo } from 'utils/log-utils';
-import { ro } from '@faker-js/faker';
+import { Label } from 'dsm/enums';
 
 export enum SortOrder {
   DESC = 'desc',
@@ -99,7 +99,8 @@ export default class Table {
    * @param opts
    * @returns Cell locator
    */
-  async findCell(searchHeader: string, searchCellValue: string, resultHeader: string, opts: { exactMatch?: boolean} = {}): Promise<Locator | null> {
+  async findCell(searchHeader: string, searchCellValue: string, resultHeader: string,
+    opts: { exactMatch?: boolean} = {}): Promise<Locator | null> {
     const { exactMatch = true } = opts;
 
     // Find the search column header index
@@ -129,7 +130,7 @@ export default class Table {
     return this.cell(searchRowIndex, resultColumnIndex);
   }
 
-  async findRowBy(column: string, value: string): Promise<number> {
+  async findRowBy(column: Label, value: string): Promise<number> {
     const compare = async (rowIndex: number): Promise<number> => {
       const [actualValue] = await this.getTextAt(rowIndex, column);
       const match = value === actualValue as string;
@@ -215,7 +216,7 @@ export default class Table {
   async getHeaderIndex(column: string, opts: { exactMatch?: boolean } = {}): Promise<number> {
     const { exactMatch = true } = opts;
     const allColumnNames = await this.getHeaderNames();
-    return allColumnNames.findIndex((text: string) => exactMatch ? text.trim() === column : text.trim().includes(column));
+    return allColumnNames.findIndex((text: string) => exactMatch ? text.trim() === column : new RegExp(column, 'i').test(text));
   }
 
   getHeaderByName(name: RegExp | string): Locator {
@@ -257,7 +258,7 @@ export default class Table {
       .click();
   }
 
-  async sort(column: string, order: SortOrder): Promise<void> {
+  async sort(column: Label, order: SortOrder): Promise<void> {
     const header = this.getHeaderByName(RegExp(column));
     await expect(header).toBeVisible();
     const headerLink = header.locator('a');
@@ -323,16 +324,16 @@ export default class Table {
    * @param {string} column
    * @returns {Promise<void>}
    */
-  async assertColumnNotEmpty(column: string): Promise<void> {
+  async assertColumnNotEmpty(column: Label): Promise<void> {
     const rows = await this.getRowsCount();
-    const columnIndex = await this.getHeaderIndex('Participant ID');
+    const columnIndex = await this.getHeaderIndex(Label.PARTICIPANT_ID);
     for (let rowIndex = 0; rowIndex < rows; rowIndex++) {
       const cellLocator = this.cell(rowIndex, columnIndex);
       await expect(cellLocator).toHaveText(/^\s*([0-9a-zA-Z]+)\s*$/);
     }
   }
 
-  async searchByColumn(column1Name: string, value1: string, opts: { column2Name?: string, value2?: string, clear?: boolean } = {}): Promise<void> {
+  async searchByColumn(column1Name: Label, value1: string, opts: { column2Name?: Label, value2?: string, clear?: boolean } = {}): Promise<void> {
     const { column2Name, value2, clear = true } = opts;
     const column1Index = await this.getHeaderIndex(column1Name, { exactMatch: false });
     expect(column1Index, `Column ${column1Name} is not visible`).toBeGreaterThanOrEqual(0);
@@ -357,7 +358,7 @@ export default class Table {
    * @param opts: Optional flag for text exact match
    * @returns
    */
-  async selectRowByColumn(columnHeader: string, columnCellText: string, opts: { exactMatch?: boolean } = {}): Promise<Checkbox> {
+  async selectRowByColumn(columnHeader: Label, columnCellText: string, opts: { exactMatch?: boolean } = {}): Promise<Checkbox> {
     const { exactMatch = true } = opts;
 
     // Find column header index
@@ -392,7 +393,7 @@ export default class Table {
     await waitForNoSpinner(this.page);
   }
 
-  public async getTextAt(rowIndex: number, columnName: string, opts: { exactMatch?: boolean } = {}): Promise<string[]> {
+  public async getTextAt(rowIndex: number, columnName: Label, opts: { exactMatch?: boolean } = {}): Promise<string[]> {
     const values: string[] = [];
     const columnIndex = await this.getHeaderIndex(columnName, opts);
     if (columnIndex === -1) {

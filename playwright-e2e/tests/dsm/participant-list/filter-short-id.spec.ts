@@ -3,6 +3,7 @@ import { test } from 'fixtures/dsm-fixture';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
 import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import { studyShortName } from 'utils/test-utils';
+import { Label } from 'dsm/enums';
 
 test.describe('Participants Search', () => {
   const studies = [StudyEnum.LMS, StudyEnum.OSTEO2];
@@ -14,12 +15,12 @@ test.describe('Participants Search', () => {
 
       // Save DDP and Short ID found on first row
       const row = 0;
-      const guid = await participantsTable.getParticipantDataAt(row, 'DDP');
-      const shortId = await participantsTable.getParticipantDataAt(row, 'Short ID');
+      const guid = await participantsTable.getParticipantDataAt(row, Label.DDP);
+      const shortId = await participantsTable.getParticipantDataAt(row, Label.SHORT_ID);
 
       const searchPanel = participantListPage.filters.searchPanel;
       await searchPanel.open();
-      await searchPanel.text('Short ID', { textValue: shortId });
+      await searchPanel.text(Label.SHORT_ID, { textValue: shortId });
       await searchPanel.search();
 
       expect(await participantsTable.rowLocator().count(),

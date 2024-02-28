@@ -9,7 +9,6 @@ import { StudyNavEnum } from 'dsm/component/navigation/enums/studyNav-enum';
 import { Navigation } from 'dsm/component/navigation/navigation';
 import KitUploadPage from 'dsm/pages/kitUpload-page/kitUpload-page';
 import { KitUploadInfo } from 'dsm/pages/kitUpload-page/models/kitUpload-model';
-import { KitsColumnsEnum } from 'dsm/pages/kitsInfo-pages/enums/kitsColumns-enum';
 import KitsSentPage from 'dsm/pages/kitsInfo-pages/kitsSentPage';
 import KitsWithoutLabelPage from 'dsm/pages/kitsInfo-pages/kitsWithoutLabel-page';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
@@ -19,6 +18,7 @@ import FinalScanPage from 'dsm/pages/scanner-pages/finalScan-page';
 import TrackingScanPage from 'dsm/pages/scanner-pages/trackingScan-page';
 import { WelcomePage } from 'dsm/pages/welcome-page';
 import { logInfo } from 'utils/log-utils';
+import { Label } from 'dsm/enums';
 
 /**
  * Prefix check for Blood kit with Canada and New York address for LMS and Osteo2 studies.
@@ -44,7 +44,7 @@ test.describe.serial('Blood Kit Upload', () => {
   const kitType = KitTypeEnum.BLOOD;
   const expectedKitTypes = [KitTypeEnum.SALIVA, KitTypeEnum.BLOOD];
   const kitLabel = crypto.randomUUID().toString().substring(0, 14).replace(/-/, 'a');
-  const trackingLabel = `tracking-${crypto.randomUUID().toString().substring(0, 10)}`;
+  const trackingLabel = `tracking-${crypto.randomUUID().toString().substring(0, 10).replace(/-/, 'z')}`;
 
   const mockedCanadaAddress = {
     street1: mock.canada.street,
@@ -134,9 +134,9 @@ test.describe.serial('Blood Kit Upload', () => {
         await kitsWithoutLabelPage.assertReloadKitListBtn();
 
         const kitsTable = kitsWithoutLabelPage.getKitsTable;
-        await kitsTable.searchByColumn(KitsColumnsEnum.SHORT_ID, shortID);
+        await kitsTable.searchByColumn(Label.SHORT_ID, shortID);
         await expect(kitsTable.rowLocator()).toHaveCount(1);
-        shippingID = (await kitsTable.getRowText(0, KitsColumnsEnum.SHIPPING_ID)).trim();
+        shippingID = (await kitsTable.getRowText(0, Label.SHIPPING_ID)).trim();
 
         await kitsTable.selectSingleRowByIndex();
         await kitsWithoutLabelPage.clickCreateLabels();
@@ -156,7 +156,7 @@ test.describe.serial('Blood Kit Upload', () => {
           }
           await expect(kitListTable.tableLocator()).toBeVisible({ timeout: 5000 });
         }).toPass({ timeout: 3 * 60 * 1000 });
-        await kitListTable.searchByColumn(KitsColumnsEnum.SHIPPING_ID, shippingID);
+        await kitListTable.searchByColumn(Label.SHIPPING_ID, shippingID);
         await expect(async () => {
           // create label could take some time
           await errorPage.reloadKitList();
@@ -184,7 +184,7 @@ test.describe.serial('Blood Kit Upload', () => {
         await kitsWithoutLabelPage.waitForReady();
         await kitsWithoutLabelPage.selectKitType(kitType);
         const kitsTable = kitsWithoutLabelPage.getKitsTable;
-        await kitsTable.searchByColumn(KitsColumnsEnum.SHORT_ID, shortID);
+        await kitsTable.searchByColumn(Label.SHORT_ID, shortID);
         await expect(kitsTable.rowLocator()).toHaveCount(0);
       });
 
@@ -192,7 +192,7 @@ test.describe.serial('Blood Kit Upload', () => {
         const kitsSentPage = await navigation.selectFromSamples<KitsSentPage>(SamplesNavEnum.SENT);
         await kitsSentPage.waitForReady();
         await kitsSentPage.selectKitType(kitType);
-        await kitsSentPage.search(KitsColumnsEnum.MF_CODE, kitLabel, { count: 1 });
+        await kitsSentPage.search(Label.MF_CODE, kitLabel, { count: 1 });
       });
     });
   }

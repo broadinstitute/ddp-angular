@@ -1,5 +1,5 @@
 import {expect, Locator, Page} from '@playwright/test';
-import {TabEnum} from 'dsm/component/tabs/enums/tab-enum';
+import {Tab} from 'dsm/enums';
 import ContactInformationTab from 'dsm/component/tabs/contact-information-tab';
 import GenomeStudyTab from 'dsm/component/tabs/genome-study-tab';
 import SampleInformationTab from 'dsm/component/tabs/sample-information-tab';
@@ -10,37 +10,37 @@ import {waitForNoSpinner} from 'utils/test-utils';
 
 export default class Tabs {
   private readonly tabs = new Map<string, object>([
-    [TabEnum.CONTACT_INFORMATION, new ContactInformationTab(this.page)],
-    [TabEnum.SAMPLE_INFORMATION, new SampleInformationTab(this.page)],
-    [TabEnum.GENOME_STUDY, new GenomeStudyTab(this.page)],
-    [TabEnum.ONC_HISTORY, new OncHistoryTab(this.page)],
-    [TabEnum.MEDICAL_RECORD, new MedicalRecordsTab(this.page)],
-    [TabEnum.SURVEY_DATA, new SurveyDataTab(this.page)],
+    [Tab.CONTACT_INFORMATION, new ContactInformationTab(this.page)],
+    [Tab.SAMPLE_INFORMATION, new SampleInformationTab(this.page)],
+    [Tab.GENOME_STUDY, new GenomeStudyTab(this.page)],
+    [Tab.ONC_HISTORY, new OncHistoryTab(this.page)],
+    [Tab.MEDICAL_RECORD, new MedicalRecordsTab(this.page)],
+    [Tab.SURVEY_DATA, new SurveyDataTab(this.page)],
   ]);
 
   constructor(private readonly page: Page) {}
 
-  public async clickTab<T extends object>(tabName: TabEnum): Promise<T> {
+  public async clickTab<T extends object>(tabName: Tab): Promise<T> {
     await this.open(tabName);
     return (this.tabs as Map<string, object>).get(tabName) as T;
   }
 
-  public async isTabVisible(tabName: TabEnum): Promise<boolean> {
+  public async isTabVisible(tabName: Tab): Promise<boolean> {
     const isTabVisible: boolean = await this.tabLocator(tabName).isVisible();
     let contactInformationEntered = true;
-    if (isTabVisible && tabName === TabEnum.CONTACT_INFORMATION) {
+    if (isTabVisible && tabName === Tab.CONTACT_INFORMATION) {
       await this.clickTab(tabName);
       contactInformationEntered = await this.HasContactInformationTabEnteredData();
     }
     return isTabVisible && contactInformationEntered;
   }
 
-  private async isOpen(tabName: TabEnum): Promise<boolean> {
+  private async isOpen(tabName: Tab): Promise<boolean> {
     const clas = await this.tabLocator(tabName).getAttribute('class');
     return clas ? clas.includes('active') : false;
   }
 
-  public async open(tabName: TabEnum): Promise<void> {
+  public async open(tabName: Tab): Promise<void> {
     await expect(async () => {
       if (!(await this.isOpen(tabName))) {
         await this.tabLocator(tabName).click();
@@ -51,18 +51,18 @@ export default class Tabs {
   }
 
   private async HasContactInformationTabEnteredData(): Promise<boolean> {
-    const isNotEnteredVisible = await (this.tabs.get(TabEnum.CONTACT_INFORMATION) as ContactInformationTab)
+    const isNotEnteredVisible = await (this.tabs.get(Tab.CONTACT_INFORMATION) as ContactInformationTab)
       .isNotEnteredVisible();
     return !isNotEnteredVisible;
   }
 
   /* Locators */
-  public tabLocator(tabName: TabEnum): Locator {
+  public tabLocator(tabName: Tab): Locator {
     return this.page.locator(this.getTabXPath(tabName))
   }
 
   /* XPaths */
-  private getTabXPath(tabName: TabEnum) {
+  private getTabXPath(tabName: Tab) {
     return `//tabset/ul[@role='tablist']/li[a[span[text()[normalize-space()='${tabName}']]]]`
   }
 }

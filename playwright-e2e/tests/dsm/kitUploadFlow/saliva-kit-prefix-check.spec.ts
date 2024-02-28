@@ -9,7 +9,6 @@ import { StudyNavEnum } from 'dsm/component/navigation/enums/studyNav-enum';
 import { Navigation } from 'dsm/component/navigation/navigation';
 import KitUploadPage from 'dsm/pages/kitUpload-page/kitUpload-page';
 import { KitUploadInfo } from 'dsm/pages/kitUpload-page/models/kitUpload-model';
-import { KitsColumnsEnum } from 'dsm/pages/kitsInfo-pages/enums/kitsColumns-enum';
 import KitsSentPage from 'dsm/pages/kitsInfo-pages/kitsSentPage';
 import KitsWithoutLabelPage from 'dsm/pages/kitsInfo-pages/kitsWithoutLabel-page';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
@@ -20,6 +19,7 @@ import { WelcomePage } from 'dsm/pages/welcome-page';
 import { logInfo } from 'utils/log-utils';
 import InitialScanPage from 'dsm/pages/scanner-pages/initialScan-page';
 import TrackingScanPage from 'dsm/pages/scanner-pages/trackingScan-page';
+import { Label } from 'dsm/enums';
 
 /**
  * Prefix check for Saliva kit with Canada and New York address for Osteo2
@@ -140,9 +140,9 @@ test.describe.serial('Saliva Kit Upload with a Canadian or New York address', ()
         await kitsWithoutLabelPage.assertReloadKitListBtn();
 
         const kitsTable = kitsWithoutLabelPage.getKitsTable;
-        await kitsTable.searchByColumn(KitsColumnsEnum.SHORT_ID, shortID);
+        await kitsTable.searchByColumn(Label.SHORT_ID, shortID);
         await expect(kitsTable.rowLocator()).toHaveCount(1);
-        shippingID = (await kitsTable.getRowText(0, KitsColumnsEnum.SHIPPING_ID)).trim();
+        shippingID = (await kitsTable.getRowText(0, Label.SHIPPING_ID)).trim();
         expect(shippingID?.length).toBeTruthy();
         logInfo(`shippingID: ${shippingID}`);
 
@@ -163,7 +163,7 @@ test.describe.serial('Saliva Kit Upload with a Canadian or New York address', ()
           }
           await expect(kitListTable.tableLocator()).toHaveCount(1, { timeout: 10 * 1000 });
         }).toPass({ timeout: 60 * 1000 });
-        await kitListTable.searchByColumn(KitsColumnsEnum.SHIPPING_ID, shippingID);
+        await kitListTable.searchByColumn(Label.SHIPPING_ID, shippingID);
         await expect(async () => {
           // create label (previous step) could take some time
           await errorPage.reloadKitList();
@@ -198,7 +198,7 @@ test.describe.serial('Saliva Kit Upload with a Canadian or New York address', ()
         await kitsWithoutLabelPage.waitForReady();
         await kitsWithoutLabelPage.selectKitType(kitType);
         const kitsTable = kitsWithoutLabelPage.getKitsTable;
-        await kitsTable.searchByColumn(KitsColumnsEnum.SHORT_ID, shortID);
+        await kitsTable.searchByColumn(Label.SHORT_ID, shortID);
         await expect(kitsTable.rowLocator()).toHaveCount(0);
       });
 
@@ -206,7 +206,7 @@ test.describe.serial('Saliva Kit Upload with a Canadian or New York address', ()
         const kitsSentPage = await navigation.selectFromSamples<KitsSentPage>(SamplesNavEnum.SENT);
         await kitsSentPage.waitForReady();
         await kitsSentPage.selectKitType(kitType);
-        await kitsSentPage.search(KitsColumnsEnum.MF_CODE, kitLabel, { count: 1 });
+        await kitsSentPage.search(Label.MF_CODE, kitLabel, { count: 1 });
       });
     });
 

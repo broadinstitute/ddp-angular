@@ -1,17 +1,17 @@
 import {expect, Page} from '@playwright/test';
 import {KitTypeEnum} from 'dsm/component/kitType/enums/kitType-enum';
 import {waitForNoSpinner} from 'utils/test-utils';
-import {KitsColumnsEnum} from 'dsm/pages/kitsInfo-pages/enums/kitsColumns-enum';
 import {assertTableHeaders} from 'utils/assertion-helper';
 import {rows} from 'lib/component/dsm/paginators/types/rowsPerPage';
 import KitsPageBase from 'dsm/pages/kits-page-base';
+import { Label } from 'dsm/enums';
 
 export default class KitsSentPage extends KitsPageBase {
   PAGE_TITLE = 'Kits Sent';
-  protected TABLE_HEADERS = [KitsColumnsEnum.SHORT_ID, KitsColumnsEnum.SHIPPING_ID,
-    KitsColumnsEnum.TRACKING_NUMBER, KitsColumnsEnum.TRACKING_RETURN,
-    KitsColumnsEnum.SENT, KitsColumnsEnum.MF_CODE, KitsColumnsEnum.DDP_REALM,
-    KitsColumnsEnum.TYPE, KitsColumnsEnum.SAMPLE_TYPE];
+  protected TABLE_HEADERS = [Label.SHORT_ID, Label.SHIPPING_ID,
+    Label.TRACKING_NUMBER, Label.TRACKING_RETURN,
+    Label.SENT, Label.MF_CODE, Label.DDP_REALM,
+    Label.TYPE, Label.SAMPLE_TYPE];
 
   constructor(page: Page) {
     super(page);
@@ -25,7 +25,7 @@ export default class KitsSentPage extends KitsPageBase {
     await this.kitsTable.rowsPerPage(rows);
   }
 
-  public async search(columnName: KitsColumnsEnum, value: string, opts: { count?: number } = {}): Promise<void> {
+  public async search(columnName: Label, value: string, opts: { count?: number } = {}): Promise<void> {
     const { count } = opts;
     if (count) {
       await this.kitsTable.searchBy(columnName, value);
@@ -35,7 +35,7 @@ export default class KitsSentPage extends KitsPageBase {
     }
   }
 
-  public async getData(columnName: KitsColumnsEnum): Promise<string> {
+  public async getData(columnName: Label): Promise<string> {
     return await this.kitsTable.getData(columnName);
   }
 

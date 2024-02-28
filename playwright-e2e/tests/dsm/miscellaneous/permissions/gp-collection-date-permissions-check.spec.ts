@@ -5,7 +5,7 @@ import { MainMenuEnum } from 'dsm/component/navigation/enums/mainMenu-enum';
 import { SamplesNavEnum } from 'dsm/component/navigation/enums/samplesNav-enum';
 import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import { Navigation } from 'dsm/component/navigation/navigation';
-import { KitsColumnsEnum } from 'dsm/pages/kitsInfo-pages/enums/kitsColumns-enum';
+import { Label } from 'dsm/enums';
 import KitsSentPage from 'dsm/pages/kitsInfo-pages/kitsSentPage';
 import SearchPage, { SearchByField } from 'dsm/pages/samples/search-page';
 import Select from 'dss/component/select';
@@ -67,7 +67,7 @@ test.describe.serial('GP Collection Date Permissions Test', () => {
         await kitsSentPage.rowsPerPage(50);
 
         //Get the most recent mf barcodes (from within the last week) to be used in Kit Search page
-        await kitsSentPage.sortColumnByDate({ columnName: KitsColumnsEnum.SENT, startWithRecentDates: true });
+        await kitsSentPage.sortColumnByDate({ columnName: Label.SENT, startWithRecentDates: true });
         const today = new Date();
         const aWeekAgo = getDate(offsetDaysFromDate(today, 7, { isAdd: false }));
         todaysKits = await kitsSentPage.getMFBarcodesSince(aWeekAgo, SamplesNavEnum.SENT);

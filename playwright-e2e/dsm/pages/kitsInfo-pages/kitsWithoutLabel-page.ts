@@ -1,19 +1,19 @@
 import {expect, Locator, Page} from '@playwright/test';
 import {waitForNoSpinner, waitForResponse} from 'utils/test-utils';
-import {KitsColumnsEnum} from 'dsm/pages/kitsInfo-pages/enums/kitsColumns-enum';
 import {rows} from 'lib/component/dsm/paginators/types/rowsPerPage';
 import KitsPageBase from 'dsm/pages/kits-page-base';
+import { Label } from 'dsm/enums';
 
 
 export default class KitsWithoutLabelPage extends KitsPageBase {
   PAGE_TITLE = 'Kits without label';
   TABLE_HEADERS = [
-    KitsColumnsEnum.PRINT_KIT,
-    KitsColumnsEnum.SHORT_ID,
-    KitsColumnsEnum.PREFERRED_LANGUAGE,
-    KitsColumnsEnum.SHIPPING_ID,
-    KitsColumnsEnum.DDP_REALM,
-    KitsColumnsEnum.TYPE,
+    Label.PRINT_KIT,
+    Label.SHORT_ID,
+    Label.PREFERRED_LANGUAGE,
+    Label.SHIPPING_ID,
+    Label.DDP_REALM,
+    Label.TYPE,
   ];
 
   constructor(page: Page) {
@@ -39,11 +39,11 @@ export default class KitsWithoutLabelPage extends KitsPageBase {
     }
   }
 
-  public async search(columnName: KitsColumnsEnum, value: string): Promise<void> {
+  public async search(columnName: Label, value: string): Promise<void> {
     await this.kitsTable.searchBy(columnName, value);
   }
 
-  public async getData(columnName: KitsColumnsEnum): Promise<string> {
+  public async getData(columnName: Label): Promise<string> {
     return await this.kitsTable.getData(columnName);
   }
 

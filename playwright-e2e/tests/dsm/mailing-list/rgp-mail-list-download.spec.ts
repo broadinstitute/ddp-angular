@@ -17,6 +17,7 @@ import { getDate, getMailingListDownloadedFileDate, mailingListCreatedDate } fro
 import { generateEmailAlias } from 'utils/faker-utils';
 import { MailListCSV, readMailListCSVFile } from 'utils/file-utils';
 import { logInfo } from 'utils/log-utils';
+import { Label } from 'dsm/enums';
 
 
 const RGP_USER_EMAIL = process.env.RGP_USER_EMAIL as string;
@@ -110,12 +111,12 @@ test.describe.serial('When an interested participant does NOT meet participation
     assertTableHeaders(actualHeaders, orderedHeaders);
 
     // Verify new RGP participant email is found inside table
-    await table.sort(COLUMN.DATE, SortOrder.DESC); // Sorting to get newest record to display first
-    let tCell = await table.findCell(COLUMN.EMAIL, newEmail, COLUMN.EMAIL);
+    await table.sort(Label.DATE_SIGNED_UP, SortOrder.DESC); // Sorting to get newest record to display first
+    let tCell = await table.findCell('Email', newEmail, COLUMN.EMAIL);
     expect.soft(tCell, `Matching email ${newEmail} in Mailing List table`).toBeTruthy();
 
     // Verify date signed up is found inside table
-    tCell = await table.findCell(COLUMN.EMAIL, newEmail, COLUMN.DATE, { exactMatch: false });
+    tCell = await table.findCell('Email', newEmail, Label.DATE_SIGNED_UP, { exactMatch: false });
     expect.soft(tCell, `Find column ${COLUMN.DATE} in Mailing List table`).toBeTruthy();
 
     // Retrieve new RGP user Date Signed Up from API response body, compare with what's displayed in table

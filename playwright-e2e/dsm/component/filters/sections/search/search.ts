@@ -1,7 +1,7 @@
 import { expect, Locator, Page, Response } from '@playwright/test';
 import DatePicker from 'dsm/component/date-picker';
 import { CheckboxConfig, DateConfig, RadioButtonConfig, TextConfig } from 'dsm/component/filters/sections/search/search-types';
-import { AdditionalFilter } from 'dsm/component/filters/sections/search/search-enums';
+import { DataFilter, Label } from 'dsm/enums';
 import { waitForNoSpinner, waitForResponse } from 'utils/test-utils';
 import { logError } from 'utils/log-utils';
 
@@ -32,7 +32,7 @@ export class Search {
     await this.page.locator("//div[@id='searchTable']/button[.//span[text()='Clear']][1]").click(); // Two Clear buttons, use first one.
   }
 
-  public async dates(columnName: string, { from: fromValue, to: toValue, additionalFilters }: Partial<DateConfig>): Promise<void> {
+  public async dates(columnName: Label, { from: fromValue, to: toValue, additionalFilters }: Partial<DateConfig>): Promise<void> {
     await this.setAdditionalFilters(columnName, additionalFilters);
 
     if (!fromValue && !toValue) {
@@ -73,14 +73,14 @@ export class Search {
     toDate && (await dateInputFields.nth(1).fill(toDate));
   }
 
-  public async text(columnName: string, { textValue, additionalFilters, exactMatch = true }: Partial<TextConfig>): Promise<void> {
+  public async text(columnName: Label, { textValue, additionalFilters, exactMatch = true }: Partial<TextConfig>): Promise<void> {
     await this.setAdditionalFilters(columnName, additionalFilters, true);
     textValue && (await this.textInputLocator(columnName).fill(textValue));
 
     textValue && !exactMatch && (await this.setExactMatch(columnName, true));
   }
 
-  public async radioButton(columnName: string, { radioButtonValue, additionalFilters}: Partial<RadioButtonConfig>): Promise<void> {
+  public async radioButton(columnName: Label, { radioButtonValue, additionalFilters}: Partial<RadioButtonConfig>): Promise<void> {
     await this.setAdditionalFilters(columnName, additionalFilters);
     radioButtonValue && (await this.radioBtnLocator(columnName, radioButtonValue).click());
   }
@@ -104,7 +104,7 @@ export class Search {
     return await this.isChecked(checkboxLocator);
   }
 
-  public async openDatePicker(column: string, opts: { open?: boolean } = {}): Promise<DatePicker> {
+  public async openDatePicker(column: Label, opts: { open?: boolean } = {}): Promise<DatePicker> {
     const { open = true } = opts;
     const datePicker = new DatePicker(this.page, { root: this.baseColumnXPath(column) });
     if (open) {
@@ -118,7 +118,7 @@ export class Search {
 
   private async setAdditionalFilters(
     columnName: string,
-    additionalFilters: AdditionalFilter[] | null | undefined,
+    additionalFilters: DataFilter[] | null | undefined,
     isTextField = false
   ): Promise<void> {
     if (additionalFilters && additionalFilters.length) {
@@ -128,7 +128,7 @@ export class Search {
     }
   }
 
-  private async setAdditionalFilter(columnName: string, additionalFilter: AdditionalFilter, isTextField = false): Promise<void> {
+  private async setAdditionalFilter(columnName: string, additionalFilter: DataFilter, isTextField = false): Promise<void> {
     const baseColumnXPath = isTextField ? this.baseTextColumnXPath(columnName) : this.baseColumnXPath(columnName);
 
     !(await this.isAdditionalFiltersOpen(columnName, isTextField)) && (await this.page.locator(baseColumnXPath + this.plusIconXPath).click());
@@ -141,7 +141,7 @@ export class Search {
   }
 
   private async setExactMatch(columnName: string, isTextField = false): Promise<void> {
-    const additionalFilterCheckbox = this.additionalFilterCheckboxLocator(columnName, AdditionalFilter.EXACT_MATCH, isTextField);
+    const additionalFilterCheckbox = this.additionalFilterCheckboxLocator(columnName, DataFilter.EXACT_MATCH, isTextField);
     const isCheckedOrDisabled = await this.isChecked(additionalFilterCheckbox);
 
     isCheckedOrDisabled && (await additionalFilterCheckbox.click());
@@ -197,7 +197,7 @@ export class Search {
     return this.page.locator('#searchTable').isVisible();
   }
 
-  private additionalFilterCheckboxLocator(columnName: string, checkboxName: AdditionalFilter, isTextField = false): Locator {
+  private additionalFilterCheckboxLocator(columnName: string, checkboxName: DataFilter, isTextField = false): Locator {
     return this.page.locator(
       `${
         isTextField ? this.baseTextColumnXPath(columnName) : this.baseColumnXPath(columnName)

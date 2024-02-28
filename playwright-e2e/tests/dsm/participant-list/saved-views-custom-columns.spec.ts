@@ -2,9 +2,8 @@ import { expect } from '@playwright/test';
 import { testWithUser2 as test } from 'fixtures/dsm-fixture';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
 import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
-import { MainInfoEnum } from 'dsm/pages/participant-page/enums/main-info-enum';
+import { CustomizeView, Label } from 'dsm/enums';
 import crypto from 'crypto';
-import { CustomViewColumns } from 'dsm/component/filters/sections/search/search-enums';
 
 test.describe('Participant List Search without Filtering Condition', () => {
   const studies = [StudyEnum.LMS, StudyEnum.OSTEO2, StudyEnum.PANCAN];
@@ -18,8 +17,8 @@ test.describe('Participant List Search without Filtering Condition', () => {
 
       const customizeViewPanel = participantListPage.filters.customizeViewPanel;
       await customizeViewPanel.open();
-      await customizeViewPanel.selectColumns(CustomViewColumns.PARTICIPANT, [MainInfoEnum.PARTICIPANT_ID]);
-      await customizeViewPanel.deselectColumns(CustomViewColumns.PARTICIPANT, [MainInfoEnum.DDP]);
+      await customizeViewPanel.selectColumns(CustomizeView.PARTICIPANT, [Label.PARTICIPANT_ID]);
+      await customizeViewPanel.deselectColumns(CustomizeView.PARTICIPANT, [Label.DDP]);
       await customizeViewPanel.close();
 
       const searchPanel = participantListPage.filters.searchPanel;
@@ -27,8 +26,8 @@ test.describe('Participant List Search without Filtering Condition', () => {
       await searchPanel.open();
       await searchPanel.search({ uri: '/ui/applyFilter?' });
 
-      await expect(participantsTable.getHeaderByName(MainInfoEnum.DDP)).toBeHidden();
-      await expect(participantsTable.getHeaderByName(MainInfoEnum.PARTICIPANT_ID)).toBeVisible();
+      await expect(participantsTable.getHeaderByName(Label.DDP)).toBeHidden();
+      await expect(participantsTable.getHeaderByName(Label.PARTICIPANT_ID)).toBeVisible();
 
       const numOfParticipantsAfter = await participantsTable.numOfParticipants();
       expect(numOfParticipantsAfter).toStrictEqual(numOfParticipants);

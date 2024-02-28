@@ -6,6 +6,7 @@ import FollowUpSurveyPage from 'dsm/pages/follow-up-survey-page';
 import { getDate } from 'utils/date-utils';
 import { generateAlphaNumeric, generateRandomNum } from 'utils/faker-utils';
 import { waitForResponse } from 'utils/test-utils';
+import { Label } from 'dsm/enums';
 
 
 test.describe('Create Follow-Up Survey', () => {
@@ -20,7 +21,7 @@ test.describe('Create Follow-Up Survey', () => {
     const previousSurveysTable = followupSurveyPage.previousSurveysTable;
     await previousSurveysTable.waitForReady(60 * 1000);
 
-    const participantId = await previousSurveysTable.getRowText(0, 'Participant ID');
+    const participantId = await previousSurveysTable.getRowText(0, Label.PARTICIPANT_ID);
     expect(participantId).not.toBeNull();
 
     // Fill out participant ID and reason
@@ -37,7 +38,7 @@ test.describe('Create Follow-Up Survey', () => {
     expect(body).toBe(participantId);
     await modal.close();
 
-    await previousSurveysTable.searchByColumn('Participant ID', participantId!);
+    await previousSurveysTable.searchByColumn(Label.PARTICIPANT_ID, participantId!);
     await expect(previousSurveysTable.rowLocator()).toHaveCount(1);
   });
 
@@ -54,7 +55,7 @@ test.describe('Create Follow-Up Survey', () => {
 
       // Find any participant ID to create new survey (repeating)
       const randRowIndex = generateRandomNum(0, rowsCount);
-      const participantId = await previousSurveysTable.getRowText(randRowIndex, 'Participant ID');
+      const participantId = await previousSurveysTable.getRowText(randRowIndex, Label.PARTICIPANT_ID);
       expect(participantId).not.toBeNull();
 
       // Create new survey by fill out participant ID and reason

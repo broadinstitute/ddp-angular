@@ -1,10 +1,9 @@
 import { expect } from '@playwright/test';
 import { test } from 'fixtures/dsm-fixture';
-import { CustomViewColumns } from 'dsm/component/filters/sections/search/search-enums';
+import { CustomizeView, DataFilter, Label, Tab } from 'dsm/enums';
 import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
 import OncHistoryTab from 'dsm/component/tabs/onc-history-tab';
-import { TabEnum } from 'dsm/component/tabs/enums/tab-enum';
 import { LmsOncHistoryUpload } from 'dsm/component/tabs/interfaces/onc-history-inputs-types';
 import { getDate } from 'utils/date-utils';
 import { MiscellaneousEnum } from 'dsm/component/navigation/enums/miscellaneousNav-enum';
@@ -55,16 +54,15 @@ test.describe('Upload Onc History', () => {
 
     await test.step('Search for a participant without Onc history', async () => {
       // Find a participant with existing Onc History
-      const oncHistoryRequestStatusColumn = 'Request Status';
 
       const customizeViewPanel = participantListPage.filters.customizeViewPanel;
       await customizeViewPanel.open();
-      await customizeViewPanel.selectColumns(CustomViewColumns.ONC_HISTORY, [oncHistoryRequestStatusColumn]);
+      await customizeViewPanel.selectColumns(CustomizeView.ONC_HISTORY, [Label.REQUEST_STATUS]);
 
       const searchPanel = participantListPage.filters.searchPanel;
       await searchPanel.open();
-      await searchPanel.checkboxes('Status', { checkboxValues: ['Enrolled'] });
-      await searchPanel.checkboxes(oncHistoryRequestStatusColumn, { checkboxValues: ['Request'] });
+      await searchPanel.checkboxes(Label.STATUS, { checkboxValues: [DataFilter.ENROLLED] });
+      await searchPanel.checkboxes(Label.REQUEST_STATUS, { checkboxValues: [DataFilter.REQUEST] });
       const filterListResponse = await searchPanel.search();
 
       const rows = await participantListTable.rowsCount;
@@ -73,7 +71,7 @@ test.describe('Upload Onc History', () => {
       // Find the first participant that has DSM and ES Participant ID.
       shortId = await participantListPage.findParticipantWithTab({
         findPediatricParticipant: false,
-        tab: TabEnum.ONC_HISTORY,
+        tab: Tab.ONC_HISTORY,
         uriString: 'filterList'
       });
 
@@ -106,7 +104,7 @@ test.describe('Upload Onc History', () => {
 
       await participantListPage.filterListByShortId(shortId);
       const participantPage = await participantListTable.openParticipantPageAt(0);
-      const oncHistoryTab = await participantPage.clickTab<OncHistoryTab>(TabEnum.ONC_HISTORY);
+      const oncHistoryTab = await participantPage.clickTab<OncHistoryTab>(Tab.ONC_HISTORY);
       const oncHistoryTable: OncHistoryTable = oncHistoryTab.table;
 
       const numRows = await oncHistoryTable.getRowsCount();

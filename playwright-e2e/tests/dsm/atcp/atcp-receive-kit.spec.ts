@@ -4,7 +4,7 @@ import { SamplesNavEnum } from 'dsm/component/navigation/enums/samplesNav-enum';
 import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import { StudyNavEnum } from 'dsm/component/navigation/enums/studyNav-enum';
 import { Navigation } from 'dsm/component/navigation/navigation';
-import { TabEnum } from 'dsm/component/tabs/enums/tab-enum';
+import { CustomizeView, Label, Tab } from 'dsm/enums';
 import GenomeStudyTab from 'dsm/component/tabs/genome-study-tab';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
 import ParticipantPage from 'dsm/pages/participant-page/participant-page';
@@ -38,17 +38,17 @@ test.describe('Receive Genome Study Kit', () => {
         participantListPage = await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
         await participantListPage.waitForReady();
 
-        const rowIndex = await participantListPage.findParticipantFor('Genome Study Columns', 'Sample kit barcode for genome study', {nth: 1});
+        const rowIndex = await participantListPage.findParticipantFor(CustomizeView.GENOME_STUDY, Label.SAMPLE_KIT_BARCODE, {nth: 1});
 
         const participantListTable = participantListPage.participantListTable;
-        shortId = await participantListTable.getParticipantDataAt(rowIndex, 'Short ID');
+        shortId = await participantListTable.getParticipantDataAt(rowIndex, Label.SHORT_ID);
         participantPage = await participantListTable.openParticipantPageAt(rowIndex);
         logInfo(`Participant Short ID: ${shortId}`);
       });
 
       await test.step('Set new sample kit barcode', async () => {
         newBarcode = `${shortId}-${newBarcode}`;
-        const genomeStudyTab = await participantPage.clickTab<GenomeStudyTab>(TabEnum.GENOME_STUDY);
+        const genomeStudyTab = await participantPage.clickTab<GenomeStudyTab>(Tab.GENOME_STUDY);
         const value = await genomeStudyTab.getField('Sample kit barcode for genome study').locator('input').inputValue();
         expect(value).toBe(''); // Sample Kit Barcode input should be empty
 
@@ -69,10 +69,9 @@ test.describe('Receive Genome Study Kit', () => {
         const table = await atSearchPage.searchByField(SearchByField.MANUFACTURE_BARCODE, newBarcode);
 
         const row = 0;
-        expect(await table.getRowText(row, 'DDP-Realm')).toBe(studyShortName(study).shortName);
-        expect(await table.getRowText(row, 'Short ID')).toBe(shortId);
+        expect(await table.getRowText(row, Label.DDP_REALM)).toBe(studyShortName(study).shortName);
+        expect(await table.getRowText(row, Label.SHORT_ID)).toBe(shortId);
         expect(await table.getRowText(row, 'MF barcode')).toBe(newBarcode);
-        expect(await table.getRowText(row, 'Short ID')).toBe(shortId);
 
         const button = table.findButtonInCell(table.rowLocator(), { label: 'Mark Received' });
         await expect(button.toLocator()).toBeVisible();
@@ -90,7 +89,7 @@ test.describe('Receive Genome Study Kit', () => {
         await participantListPage.filterListByShortId(shortId);
         await participantListPage.participantListTable.openParticipantPageAt(0);
 
-        const genomeStudyTab = await participantPage.clickTab<GenomeStudyTab>(TabEnum.GENOME_STUDY);
+        const genomeStudyTab = await participantPage.clickTab<GenomeStudyTab>(Tab.GENOME_STUDY);
         let field = genomeStudyTab.getField('Status of genome study sample kit');
 
         // "Sample kit received from participant" is checked

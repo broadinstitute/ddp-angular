@@ -1,6 +1,6 @@
 import {expect, Locator, Page} from '@playwright/test';
 import {StudyEnum} from 'dsm/component/navigation/enums/selectStudyNav-enum';
-import { UserPermission } from './enums/userPermission-enum';
+import { UserPermission } from 'dsm/enums';
 import { isCMIStudy, isPECGSStudy } from 'utils/test-utils';
 
 export default class UserPermissionPage {

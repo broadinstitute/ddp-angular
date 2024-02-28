@@ -1,5 +1,5 @@
 import { expect } from '@playwright/test';
-import { CustomViewColumns } from 'dsm/component/filters/sections/search/search-enums';
+import { CustomizeView, Label } from 'dsm/enums';
 import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
 import { test } from 'fixtures/dsm-fixture';
@@ -29,13 +29,13 @@ test.describe('DSM Date Picker', () => {
 
       const customizeViewPanel = participantListPage.filters.customizeViewPanel;
       await customizeViewPanel.open();
-      await customizeViewPanel.selectColumns(CustomViewColumns.RESEARCH_CONSENT_FORM, ['Date of Birth']);
+      await customizeViewPanel.selectColumns(CustomizeView.RESEARCH_CONSENT_FORM, [Label.DATE_OF_BIRTH]);
 
       const searchPanel = participantListPage.filters.searchPanel;
       await searchPanel.open();
 
       // Open Date of Birth Date picker
-      const calendar = await searchPanel.openDatePicker('Date of Birth', { open: true });
+      const calendar = await searchPanel.openDatePicker(Label.DATE_OF_BIRTH, { open: true });
       expect(calendar.isVisible()).toBeTruthy();
 
       // Day picker
@@ -70,10 +70,10 @@ test.describe('DSM Date Picker', () => {
       await expect(calendarYearPicker.locator('td button.active')).toHaveText(year.toString(), { useInnerText: true });
 
       // Close Date of Birth Date picker to reset fields
-      await searchPanel.openDatePicker('Date of Birth', { open: false });
+      await searchPanel.openDatePicker(Label.DATE_OF_BIRTH, { open: false });
 
       // Reopen calendar picker to select target date
-      await searchPanel.openDatePicker('Date of Birth', { open: true });
+      await searchPanel.openDatePicker(Label.DATE_OF_BIRTH, { open: true });
       // Select 12/20/1995
       await calendar.pickDate(dob);
 

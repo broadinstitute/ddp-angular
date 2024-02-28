@@ -1,8 +1,7 @@
 import { expect } from '@playwright/test';
 import { test } from 'fixtures/dsm-fixture';
-import { AdditionalFilter } from 'dsm/component/filters/sections/search/search-enums';
+import { CustomizeView, DataFilter, Label } from 'dsm/enums';
 import { SortOrder } from 'dss/component/table';
-import { MainInfoEnum } from 'dsm/pages/participant-page/enums/main-info-enum';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
 import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import { getDate, offsetDaysFromDate, offsetDaysFromToday } from 'utils/date-utils';
@@ -18,13 +17,13 @@ test.describe.serial('Participants Search', () => {
 
       const customizeViewPanel = participantListPage.filters.customizeViewPanel;
       await customizeViewPanel.open();
-      await customizeViewPanel.selectColumns('Participant Columns', [MainInfoEnum.REGISTRATION_DATE]);
+      await customizeViewPanel.selectColumns(CustomizeView.PARTICIPANT, [Label.REGISTRATION_DATE]);
       await customizeViewPanel.close();
 
       // Participants table automatically reload and displays the Registration Date column as the last column
 
       // Save Registration Date found on first row for use in search
-      const registrationDate = await participantsTable.getParticipantDataAt(0, MainInfoEnum.REGISTRATION_DATE);
+      const registrationDate = await participantsTable.getParticipantDataAt(0, Label.REGISTRATION_DATE);
       const date = new Date(registrationDate);
       const fromDate = getDate(date); // Returns a formatted date mm/dd/yyyy
       logInfo(`Found a Registration Date: ${registrationDate}. Formatted to: ${fromDate}`);
@@ -34,10 +33,10 @@ test.describe.serial('Participants Search', () => {
       const searchPanel = participantListPage.filters.searchPanel;
       await searchPanel.open();
       await searchPanel.clear();
-      await searchPanel.dates(MainInfoEnum.REGISTRATION_DATE, {
+      await searchPanel.dates(Label.REGISTRATION_DATE, {
         from: fromDate,
         to: toDate,
-        additionalFilters: [AdditionalFilter.RANGE]
+        additionalFilters: [DataFilter.RANGE]
       });
       await searchPanel.search();
 
@@ -46,7 +45,7 @@ test.describe.serial('Participants Search', () => {
 
       // Check first row data
       // Verify Registration Date
-      const headerIndex = await participantsTable.getHeaderIndex(MainInfoEnum.REGISTRATION_DATE);
+      const headerIndex = await participantsTable.getHeaderIndex(Label.REGISTRATION_DATE);
       const actualRegistrationDate = await participantsTable.cell(0, headerIndex).innerText();
 
       // Date filtering is problematic. Add +/- 1 day to assertion
@@ -58,10 +57,10 @@ test.describe.serial('Participants Search', () => {
       expect(dateRanges).toEqual(expect.arrayContaining([getDate(new Date(actualRegistrationDate))]));
 
       // Verify Status is not empty or null
-      const status = await participantsTable.getParticipantDataAt(0, 'Status');
+      const status = await participantsTable.getParticipantDataAt(0, Label.STATUS);
       expect(status).toBeTruthy();
       // Verify First Short ID is not empty or null and length is 6
-      const shortId = await participantsTable.getParticipantDataAt(0, 'Short ID');
+      const shortId = await participantsTable.getParticipantDataAt(0, Label.SHORT_ID);
       expect(shortId).toBeTruthy();
       expect(shortId.length).toBe(6);
 
@@ -70,7 +69,7 @@ test.describe.serial('Participants Search', () => {
       await searchPanel.clear();
       const today = getDate(new Date());
       const yearAgo = offsetDaysFromToday(365);
-      await searchPanel.dates(MainInfoEnum.REGISTRATION_DATE, { additionalFilters: [AdditionalFilter.RANGE], from: yearAgo, to: today});
+      await searchPanel.dates(Label.REGISTRATION_DATE, { additionalFilters: [DataFilter.RANGE], from: yearAgo, to: today});
       await searchPanel.search();
 
       const rowsCount = await participantsTable.getRowsCount();
@@ -80,7 +79,7 @@ test.describe.serial('Participants Search', () => {
       expect(numParticipants2).not.toBe(numParticipants1); // Expect Participants list table has reloaded and changed
 
       // Sort Registration Date column filter to verify date range in table
-      await participantsTable.sort(MainInfoEnum.REGISTRATION_DATE, SortOrder.DESC);
+      await participantsTable.sort(Label.REGISTRATION_DATE, SortOrder.DESC);
       const descFirstRowDate = await participantsTable.cell(0, headerIndex).innerText();
       const descLastRowDate = await participantsTable.cell(rowsCount - 1, headerIndex).innerText();
       // ascending
@@ -89,7 +88,7 @@ test.describe.serial('Participants Search', () => {
         .toBeTruthy();
 
       // Sort in opposite order
-      await participantsTable.sort(MainInfoEnum.REGISTRATION_DATE, SortOrder.ASC);
+      await participantsTable.sort(Label.REGISTRATION_DATE, SortOrder.ASC);
       const ascFirstRowDate = await participantsTable.cell(0, headerIndex).innerText();
       const ascLastRowDate = await participantsTable.cell(rowsCount - 1, headerIndex).innerText();
       // descending

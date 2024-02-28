@@ -2,7 +2,7 @@ import { expect } from '@playwright/test';
 import { test } from 'fixtures/dsm-fixture';
 import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
-import { CustomViewColumns } from 'dsm/component/filters/sections/search/search-enums';
+import { CustomizeView, DataFilter, Label } from 'dsm/enums';
 
 test.describe('Participants list', () => {
   test('RGP default filters @dsm @rgp', async ({ page, request }) => {
@@ -77,11 +77,11 @@ test.describe('Participants list', () => {
     const participantListPage = await ParticipantListPage.goto(page, StudyEnum.RGP, request);
     const customizeViewPanel = participantListPage.filters.customizeViewPanel;
     await customizeViewPanel.open();
-    await customizeViewPanel.selectColumns(CustomViewColumns.PARTICIPANT, ['Status']);
+    await customizeViewPanel.selectColumns(CustomizeView.PARTICIPANT, [Label.STATUS]);
     await customizeViewPanel.close();
 
     const searchPanel = participantListPage.filters.searchPanel;
     await searchPanel.open();
-    expect(await searchPanel.checkboxExists('Status', 'Registered')).toBe(true);
+    expect(await searchPanel.checkboxExists(Label.STATUS, DataFilter.REGISTERED)).toBe(true);
   });
 });
