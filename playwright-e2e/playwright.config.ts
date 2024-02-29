@@ -45,7 +45,7 @@ const testConfig: PlaywrightTestConfig = {
   forbidOnly: !!CI,
   retries: CI ? 1 : 0,
   workers: CI ? 1 : 2,
-  maxFailures: CI ? 10 : 5,
+  maxFailures: CI ? 10 : 0,
 
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: [
@@ -74,7 +74,7 @@ const testConfig: PlaywrightTestConfig = {
       ignoreDefaultArgs: ['--hide-scrollbars']
     },
     userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36',
-    viewport: { width: 1920, height: 1080 },
+    viewport: { width: 1600, height: 960 },
     ignoreHTTPSErrors: true,
 
     /* Maximum time each (browser) action such as `click()` can take. Defaults to 0 (no limit). */
@@ -87,7 +87,7 @@ const testConfig: PlaywrightTestConfig = {
     // baseURL: 'http://localhost:3000',
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer#using-traceplaywrightdev */
-    trace: CI ? 'on-all-retries' : 'retain-on-failure', // https://playwright.dev/docs/trace-viewer#recording-a-trace-on-ci
+    trace: CI ? 'on-first-retry' : 'retain-on-failure', // https://playwright.dev/docs/trace-viewer#recording-a-trace-on-ci
     screenshot: {
       mode: 'only-on-failure',
       fullPage: true
@@ -98,8 +98,9 @@ const testConfig: PlaywrightTestConfig = {
   /* Configure projects for chromium browser */
   projects: [
     {
-      // Listing tests: npx playwright test --list --project="dsm"
-      // Running tests serially: npx playwright test --project="kit" --workers=1
+      // command examples:
+      // Listing DSM tests: npx playwright test --list --project="dsm"
+      // Running DSM tests serially: npx playwright test --project="dsm" --workers=1
       name: 'dsm',
       testDir: 'tests/dsm',
       use: {}

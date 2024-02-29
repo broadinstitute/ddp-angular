@@ -10,11 +10,12 @@ import { SortOrder } from 'dss/component/table';
 import MailingListPage from 'dsm/pages/mailing-list-page';
 import { WelcomePage } from 'dsm/pages/welcome-page';
 import { assertTableHeaders } from 'utils/assertion-helper';
-import { getDate, getMailingListDownloadedFileDate, mailingListCreatedDate } from 'utils/date-utils';
+import { dateFormat, getMailingListDownloadedFileDate, mailingListCreatedDate } from 'utils/date-utils';
 import { generateEmailAlias, generateUserName } from 'utils/faker-utils';
 import lodash from 'lodash';
 import HomePage from 'dss/pages/pancan/home-page';
 import { MailListCSV, readMailListCSVFile } from 'utils/file-utils';
+import { logInfo } from 'utils/log-utils';
 import { Label } from 'dsm/enums';
 
 
@@ -59,7 +60,7 @@ test.describe.serial('Join Pancan Mailing List', () => {
     expect(actualFileName).toBe(expectedFileName);
 
     const file = await download.path();
-    const rows = await readMailListCSVFile(file)
+    const csvRows = await readMailListCSVFile(file)
     .catch((error) => {
       console.error(error);
       throw error;
@@ -67,10 +68,13 @@ test.describe.serial('Join Pancan Mailing List', () => {
 
     // Verify CSV file: Assert every user from API response body can also be found inside downloaded csv file
     lodash.forEach(respJson, item => {
-      const dateInJson = getDate(new Date(parseInt(item.dateCreated) * 1000)); // Transform to dd/mm/yyyy
+      const dateInJson = dateFormat().format(new Date(parseInt(item.dateCreated) * 1000)); // Transform to dd/mm/yyyy
       const emailInJson = item.email;
-      const finding = lodash.filter(rows, row => row.email === emailInJson && row.dateCreated === dateInJson);
-      expect(finding.length).toBe(1);
+      logInfo(`JSON date: ${dateInJson} and email: ${emailInJson}`);
+      const finding = lodash.filter(csvRows, row => row.email === emailInJson && row.dateCreated === dateInJson);
+      expect.soft(finding.length,
+        `Fail to find match for email: "${emailInJson}" and dateCreated: "${dateInJson}" in downloaded csv file.`)
+      .toBe(1);
     });
 
     // Verify Mailing List table
