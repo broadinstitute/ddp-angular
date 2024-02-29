@@ -14,21 +14,21 @@ import {
 } from 'dsm/component/tabs/interfaces/onc-history-inputs-types';
 import { waitForResponse } from 'utils/test-utils';
 import Select from 'dss/component/select';
-import TissueInformationPage from 'dsm/pages/tissue/tissue-information-page';
+import TissueRequestPage from 'dsm/pages/tissue-request-page';
 import Button from 'dss/component/button';
 import { FillDate } from 'dsm/pages/tissue/interfaces/tissue-information-interfaces';
 import Input from 'dss/component/input';
 import Checkbox from 'dss/component/checkbox';
 
 export default class OncHistoryTable extends Table {
-  private readonly tissueInformationPage: TissueInformationPage;
+  private readonly tissueInformationPage: TissueRequestPage;
 
-  constructor(protected readonly page: Page) {
-    super(page, { cssClassAttribute: '.table', root: 'app-onc-history-detail' });
-    this.tissueInformationPage = new TissueInformationPage(this.page);
+  constructor(protected readonly page: Page, root: string) {
+    super(page, { cssClassAttribute: '.table', root });
+    this.tissueInformationPage = new TissueRequestPage(this.page);
   }
 
-  public async openTissueInformationPage(index: number): Promise<TissueInformationPage> {
+  public async openTissueInformationPage(index: number): Promise<TissueRequestPage> {
     const button = new Button(this.page, { root: this.firstRequestColumn(index) });
     await button.click();
     return this.tissueInformationPage;

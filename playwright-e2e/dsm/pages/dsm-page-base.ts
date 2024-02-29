@@ -1,6 +1,8 @@
 import { Page, Request } from '@playwright/test';
+import Input from 'dss/component/input';
+import TextArea from 'dss/component/textarea';
 import { logInfo } from 'utils/log-utils';
-import { waitForNoSpinner } from 'utils/test-utils';
+import { waitForNoSpinner, waitForResponse } from 'utils/test-utils';
 
 export default abstract class DsmPageBase {
   public readonly page: Page;
@@ -26,5 +28,22 @@ export default abstract class DsmPageBase {
     await this.page.waitForLoadState('networkidle');
     await this.page.waitForLoadState('load');
     await waitForNoSpinner(this.page);
+  }
+
+  protected async fillAndBlur(input: TextArea | Input, value?: string): Promise<void> {
+    const currValue = await input.currentValue();
+    if (currValue?.length > 0) {
+      // Clear value, not checking for equals to new value.
+      const resPromise = waitForResponse(this.page, {uri: '/patch'});
+      await input.clear();
+      await input.blur();
+      await resPromise;
+      await this.page.waitForTimeout(200);
+    }
+    if (value) {
+      const resPromise = waitForResponse(this.page, {uri: '/patch'});
+      await input.fillSimple(value);
+      await resPromise;
+    }
   }
 }

@@ -6,7 +6,7 @@ import ParticipantListPage from 'dsm/pages/participant-list-page';
 import { studyShortName } from 'utils/test-utils';
 import { logInfo } from 'utils/log-utils';
 import ParticipantPage from 'dsm/pages/participant-page/participant-page';
-import OncHistoryTab from 'dsm/component/tabs/onc-history-tab';
+import OncHistoryTab from 'dsm/pages/tab-pages/onc-history-tab';
 
 /**
   * Collaborator Prefixes per study:
@@ -59,7 +59,7 @@ test.describe('Tumor Collaborator Sample ID', () => {
       expect(shortID).toBeTruthy();
 
       const participantPage: ParticipantPage = await participantListTable.openParticipantPageAt(rowIndex);
-      const oncHistoryTab = await participantPage.clickTab<OncHistoryTab>(Tab.ONC_HISTORY);
+      const oncHistoryTab = await participantPage.tab(Tab.ONC_HISTORY).click<OncHistoryTab>();
       const oncHistoryTable = oncHistoryTab.table;
 
       await test.step('Check Tumor Collaborator Sample ID on Participant page', async () => {

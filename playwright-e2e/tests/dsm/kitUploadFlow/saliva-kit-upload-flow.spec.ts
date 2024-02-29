@@ -71,7 +71,7 @@ test.describe.serial('Saliva Kits upload flow', () => {
       expect(shortID, 'The short ID is empty').toBeTruthy();
       expect(firstName, 'The first name is empty').toBeTruthy();
       expect(lastName, 'The last name is empty').toBeTruthy();
-      const isContactInformationTabVisible = await participantPage.isTabVisible(Tab.CONTACT_INFORMATION);
+      const isContactInformationTabVisible = await participantPage.tab(Tab.CONTACT_INFORMATION).isVisible();
       const kitUploadInfo = new KitUploadInfo(
         shortID,
         firstName,
@@ -80,7 +80,7 @@ test.describe.serial('Saliva Kits upload flow', () => {
 
       // collects data from the contact information tab if the tab is available
       if (isContactInformationTabVisible) {
-        const contactInformationTab = await participantPage.clickTab<ContactInformationTab>(Tab.CONTACT_INFORMATION);
+        const contactInformationTab = await participantPage.tab(Tab.CONTACT_INFORMATION).click<ContactInformationTab>();
         kitUploadInfo.address.street1 = (await contactInformationTab.getStreet1()) || kitUploadInfo.address.street1;
         kitUploadInfo.address.city = (await contactInformationTab.getCity()) || kitUploadInfo.address.city;
         kitUploadInfo.address.postalCode = (await contactInformationTab.getZip()) || kitUploadInfo.address.postalCode;
@@ -186,7 +186,7 @@ test.describe.serial('Saliva Kits upload flow', () => {
       await searchPanel.search();
       await participantListTable.openParticipantPageAt(0);
       await participantPage.assertPageTitle();
-      const sampleInformationTab = await participantPage.clickTab<SampleInformationTab>(Tab.SAMPLE_INFORMATION);
+      const sampleInformationTab = await participantPage.tab(Tab.SAMPLE_INFORMATION).click<SampleInformationTab>();
       await sampleInformationTab.assertKitType(kitLabel, kitType)
       await sampleInformationTab.assertValue(kitLabel, {info: SampleInfoEnum.STATUS, value: SampleStatusEnum.RECEIVED});
       await sampleInformationTab.assertValue(kitLabel, {info: SampleInfoEnum.RECEIVED, value: receivedDate});

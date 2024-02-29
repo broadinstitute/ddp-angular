@@ -80,7 +80,7 @@ test.describe('View Sequencing Order Permission Test', () => {
 
         const participantPage = new ParticipantPage(page);
         await participantPage.assertPageTitle();
-        await participantPage.clickTab(Tab.SEQUENCING_ORDER);
+        await participantPage.tab(Tab.SEQUENCING_ORDER).click<SequencingOrderTab>();
 
         const sequencingOrderTab = new SequencingOrderTab(page);
         await sequencingOrderTab.waitForReady();

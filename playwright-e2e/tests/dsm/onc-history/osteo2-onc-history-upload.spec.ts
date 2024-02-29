@@ -3,7 +3,7 @@ import { test } from 'fixtures/dsm-fixture';
 import { CustomizeView, DataFilter, Label, Tab } from 'dsm/enums';
 import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
-import OncHistoryTab from 'dsm/component/tabs/onc-history-tab';
+import OncHistoryTab from 'dsm/pages/tab-pages/onc-history-tab';
 import { OsteoOncHistoryUpload } from 'dsm/component/tabs/interfaces/onc-history-inputs-types';
 import { getDate } from 'utils/date-utils';
 import { MiscellaneousEnum } from 'dsm/component/navigation/enums/miscellaneousNav-enum';
@@ -109,7 +109,7 @@ test.describe('Upload Onc History', () => {
 
       await participantListPage.filterListByShortId(shortId);
       const participantPage = await participantListTable.openParticipantPageAt(0);
-      const oncHistoryTab = await participantPage.clickTab<OncHistoryTab>(Tab.ONC_HISTORY);
+      const oncHistoryTab = await participantPage.tab(Tab.ONC_HISTORY).click<OncHistoryTab>();
       const oncHistoryTable: OncHistoryTable = oncHistoryTab.table;
 
       const numRows = await oncHistoryTable.getRowsCount();

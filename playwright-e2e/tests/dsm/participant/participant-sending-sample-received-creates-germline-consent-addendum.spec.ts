@@ -17,7 +17,7 @@ import FinalScanPage from 'dsm/pages/scanner-pages/finalScan-page';
 import { getDate, getToday } from 'utils/date-utils';
 import KitsSentPage from 'dsm/pages/kitsInfo-pages/kitsSentPage';
 import ParticipantPage from 'dsm/pages/participant-page/participant-page';
-import OncHistoryTab from 'dsm/component/tabs/onc-history-tab';
+import OncHistoryTab from 'dsm/pages/tab-pages/onc-history-tab';
 import { OncHistoryInputColumnsEnum, OncHistorySelectRequestEnum } from 'dsm/component/tabs/enums/onc-history-input-columns-enum';
 import { SMIdEnum, TissueDynamicFieldsEnum, TissueTypesEnum } from 'dsm/pages/tissue/enums/tissue-information-enum';
 import KitsReceivedPage from 'dsm/pages/kitsInfo-pages/kitsReceived-page/kitsReceivedPage';
@@ -63,7 +63,7 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
       participantPage = await goToTestParticipantPage(shortID, navigation);
 
       //Fill out an onc history and get back an accession number
-      oncHistoryTab = await participantPage.clickTab<OncHistoryTab>(Tab.ONC_HISTORY);
+      oncHistoryTab = await participantPage.tab(Tab.ONC_HISTORY).click<OncHistoryTab>();
       const oncHistoryTable = oncHistoryTab.table;
       const lastRow = await oncHistoryTable.getRowsCount() - 1;
 
@@ -71,7 +71,7 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
 
       //Navigate to the Tissue Request page
       const tissueInformationPage = await oncHistoryTable.openTissueInformationPage(lastRow);
-      await tissueInformationPage.assertPageTitle();
+      await tissueInformationPage.waitForReady();
 
       /**
        * Create Tumor Sample - the following need to be inputted in Tissue Request page before accessioning a SM-ID / tumor sample:
@@ -171,7 +171,7 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
       participantPage = await goToTestParticipantPage(shortID, navigation);
 
       //Fill out an onc history and get back an accession number
-      oncHistoryTab = await participantPage.clickTab<OncHistoryTab>(Tab.ONC_HISTORY);
+      oncHistoryTab = await participantPage.tab(Tab.ONC_HISTORY).click<OncHistoryTab>();
       const oncHistoryTable = oncHistoryTab.table;
       const lastRow = await oncHistoryTable.getRowsCount() - 1;
 
@@ -179,7 +179,7 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
 
       //Navigate to the Tissue Request page
       const tissueInformationPage = await oncHistoryTable.openTissueInformationPage(lastRow);
-      await tissueInformationPage.assertPageTitle();
+      await tissueInformationPage.waitForReady();
 
       /**
        * Create Tumor Sample - the following need to be inputted in Tissue Request page before accessioning a SM-ID / tumor sample:
@@ -279,7 +279,7 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
       participantPage = await goToTestParticipantPage(shortID, navigation);
 
       //Fill out an onc history and get back an accession number
-      oncHistoryTab = await participantPage.clickTab<OncHistoryTab>(Tab.ONC_HISTORY);
+      oncHistoryTab = await participantPage.tab(Tab.ONC_HISTORY).click<OncHistoryTab>();
       const oncHistoryTable = oncHistoryTab.table;
       const lastRow = await oncHistoryTable.getRowsCount() - 1;
 
@@ -287,7 +287,7 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
 
       //Navigate to the Tissue Request page
       const tissueInformationPage = await oncHistoryTable.openTissueInformationPage(lastRow);
-      await tissueInformationPage.assertPageTitle();
+      await tissueInformationPage.waitForReady();
 
       /**
        * Create Tumor Sample - the following need to be inputted in Tissue Request page before accessioning a SM-ID / tumor sample:
@@ -387,7 +387,7 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
       participantPage = await goToTestParticipantPage(shortID, navigation);
 
       //Fill out an onc history and get back an accession number
-      oncHistoryTab = await participantPage.clickTab<OncHistoryTab>(Tab.ONC_HISTORY);
+      oncHistoryTab = await participantPage.tab(Tab.ONC_HISTORY).click<OncHistoryTab>();
       const oncHistoryTable = oncHistoryTab.table;
       const lastRow = await oncHistoryTable.getRowsCount() - 1;
 
@@ -395,7 +395,7 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
 
       //Navigate to the Tissue Request page
       const tissueInformationPage = await oncHistoryTable.openTissueInformationPage(lastRow);
-      await tissueInformationPage.assertPageTitle();
+      await tissueInformationPage.waitForReady();
 
       /**
        * Create Tumor Sample - the following need to be inputted in Tissue Request page before accessioning a SM-ID / tumor sample:

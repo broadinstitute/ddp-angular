@@ -5,7 +5,7 @@ import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import { StudyNavEnum } from 'dsm/component/navigation/enums/studyNav-enum';
 import { Navigation } from 'dsm/component/navigation/navigation';
 import { OncHistoryInputColumnsEnum } from 'dsm/component/tabs/enums/onc-history-input-columns-enum';
-import OncHistoryTab from 'dsm/component/tabs/onc-history-tab';
+import OncHistoryTab from 'dsm/pages/tab-pages/onc-history-tab';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
 import ParticipantPage from 'dsm/pages/participant-page/participant-page';
 import { WelcomePage } from 'dsm/pages/welcome-page';
@@ -99,7 +99,7 @@ async function addOncHistory(page: Page, shortID: string, participantListPage: P
 
     const participantListTable = participantListPage.participantListTable;
     const participantPage: ParticipantPage = await participantListTable.openParticipantPageAt(0);
-    const oncHistoryTab = await participantPage.clickTab<OncHistoryTab>(Tab.ONC_HISTORY);
+    const oncHistoryTab = await participantPage.tab(Tab.ONC_HISTORY).click<OncHistoryTab>();
     const oncHistoryTable = oncHistoryTab.table;
     const rowIndex = await oncHistoryTable.getRowsCount() - 1;
     expect(rowIndex).toBeGreaterThanOrEqual(0);

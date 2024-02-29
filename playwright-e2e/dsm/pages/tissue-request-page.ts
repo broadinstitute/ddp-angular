@@ -1,8 +1,8 @@
 import { expect, Locator, Page } from '@playwright/test';
-import { DynamicFieldsEnum, ProblemWithTissueEnum, TissueInformationEnum } from './enums/tissue-information-enum';
+import { DynamicFieldsEnum, ProblemWithTissueEnum, TissueInformationEnum } from './tissue/enums/tissue-information-enum';
 import DatePicker from 'dsm/component/date-picker';
-import { waitForResponse } from 'utils/test-utils';
-import { FillDate } from './interfaces/tissue-information-interfaces';
+import { waitForNoSpinner, waitForResponse } from 'utils/test-utils';
+import { FillDate } from './tissue/interfaces/tissue-information-interfaces';
 import Select from 'dss/component/select';
 import TextArea from 'dss/component/textarea';
 import Tissue from 'dsm/component/tissue';
@@ -10,26 +10,37 @@ import Checkbox from 'dss/component/checkbox';
 import Button from 'dss/component/button';
 import Input from 'dss/component/input';
 import Modal from 'dsm/component/modal';
+import DsmPageBase from './dsm-page-base';
 
 
-export default class TissueInformationPage {
+export default class TissueRequestPage extends DsmPageBase {
   private readonly PAGE_TITLE = 'Tissue Request';
 
-  constructor(private readonly page: Page) { }
+  constructor(page: Page) {
+    super(page);
+  }
+
+  public async waitForReady(): Promise<void> {
+    await super.waitForReady();
+    await expect(this.page.locator(`${this.pageXPath}/h1`)).toHaveText(this.PAGE_TITLE);
+    await waitForNoSpinner(this.page);
+  }
 
   public async tissue(index = 0): Promise<Tissue> {
     await this.tissuesCountCheck(index);
     return new Tissue(this.page, index);
   }
 
-  public async backToParticipantPage(): Promise<void> {
-    await this.page.getByText('<< back to Participant Page').click();
-    await this.page.waitForLoadState('load');
+  public async backToParticipant(): Promise<void> {
+    await this.page.getByText('back to Participant Page').click();
+    await expect(this.page.locator('//app-participant-page/h1')).toHaveText('Participant Page');
+    await waitForNoSpinner(this.page);
   }
 
-  public async backToList(): Promise<void> {
-    await this.page.getByText('<< back to List').click();
-    await this.page.waitForLoadState('load');
+  public async backToParticipantList(): Promise<void> {
+    await this.page.getByText('back to List').click();
+    await expect(this.page.locator('//app-participant-list/h1')).toHaveText('Participant List');
+    await waitForNoSpinner(this.page);
   }
 
   public async addTissue(): Promise<Tissue> {
@@ -282,12 +293,6 @@ export default class TissueInformationPage {
     return this.page.locator(this.tissueXPath).count();
   }
 
-  /* Assertions */
-  public async assertPageTitle(): Promise<void> {
-    const pageTitle = await this.pageTitle.textContent();
-    expect(pageTitle?.trim()).toEqual(this.PAGE_TITLE);
-  }
-
   /* Locators */
   private get pageTitle(): Locator {
     return this.page.locator(this.pageTitleXPath);
@@ -298,7 +303,7 @@ export default class TissueInformationPage {
   }
 
   private locatorFor(dynamicFieldName: DynamicFieldsEnum): Locator {
-    return this.page.locator(this.XPathFor(dynamicFieldName))
+    return this.page.locator(this.XPathFor(dynamicFieldName));
   }
 
   private get problemsWithTissueUnableToObtainCheckbox(): Locator {
@@ -319,11 +324,11 @@ export default class TissueInformationPage {
 
   /* XPaths */
   private participantInformationXpath(name: TissueInformationEnum) {
-    return `${this.participantInformationTableXPath}/tr[td[text()[normalize-space()='${name}']]]/td[2]`
+    return `${this.participantInformationTableXPath}/tr[td[text()[normalize-space()='${name}']]]/td[2]`;
   }
 
   private XPathFor(dynamicFieldName: DynamicFieldsEnum): string {
-    return this.dynamicField(dynamicFieldName)
+    return this.dynamicField(dynamicFieldName);
   }
 
   private get tissueXPath(): string {
@@ -335,22 +340,22 @@ export default class TissueInformationPage {
   }
 
   private dynamicField(dynamicField: DynamicFieldsEnum, index = 2): string {
-    return `${this.participantDynamicInformationTableXPath}/tr[td[1][text()[normalize-space()='${dynamicField}']]]/td[${index}]`
+    return `${this.participantDynamicInformationTableXPath}/tr[td[1][text()[normalize-space()='${dynamicField}']]]/td[${index}]`;
   }
 
   private get participantInformationTableXPath(): string {
-    return `${this.pageXPath}//table[contains(@class, 'table-condensed')]/tbody`
+    return `${this.pageXPath}//table[contains(@class, 'table-condensed')]/tbody`;
   }
 
   private get participantDynamicInformationTableXPath(): string {
-    return `${this.pageXPath}/div/div[last()]/table[not(contains(@class, 'table'))]`
+    return `${this.pageXPath}/div/div[last()]/table[not(contains(@class, 'table'))]`;
   }
 
   private get pageTitleXPath(): string {
-    return `${this.pageXPath}/h1`
+    return `${this.pageXPath}/h1`;
   }
 
   private get pageXPath(): string {
-    return '//app-tissue-page'
+    return '//app-tissue-page';
   }
 }

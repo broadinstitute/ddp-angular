@@ -1,14 +1,13 @@
 import {expect, Locator, Page} from '@playwright/test';
 import {waitForNoSpinner, waitForResponse} from 'utils/test-utils';
 import {Label, Tab, ResponsePayload} from 'dsm/enums';
-import Tabs from 'dsm/component/tabs/tabs';
 import Input from 'dss/component/input';
 import Modal from 'dss/component/modal';
+import Tabs from 'dsm/pages/tabs';
 
 export default class ParticipantPage {
   private readonly PAGE_TITLE: string = 'Participant Page';
   private readonly UPDATE_PROFILE_SUCCESS_MESSAGES = [ResponsePayload.TASK_TYPE_UPDATE_PROFILE, ResponsePayload.RESULT_TYPE_SUCCESS];
-  private readonly tabs = new Tabs(this.page);
 
   constructor(protected readonly page: Page) {}
 
@@ -95,16 +94,6 @@ export default class ParticipantPage {
 
   public async getConsentTissue(): Promise<string> {
     return await this.readMainTextInfoFor(Label.CONSENT_TISSUE) || '';
-  }
-
-  public async isTabVisible(tabName: Tab): Promise<boolean> {
-    return await this.tabs.isTabVisible(tabName);
-  }
-
-  public async clickTab<T extends object>(tabName: Tab): Promise<T> {
-    await expect(this.tabs.tabLocator(tabName), `The tab '${tabName}' is not visible`)
-      .toBeVisible();
-    return await this.tabs.clickTab<T>(tabName) as T;
   }
 
   public async oncHistoryCreatedDate(): Promise<string> {
@@ -204,4 +193,9 @@ export default class ParticipantPage {
       "Participant page - participant's value doesn't match the provided one")
       .toBe(value);
   }
+
+   public tab(name: Tab): Tabs {
+      const page = this.page;
+      return new Tabs(page, name);
+    }
 }

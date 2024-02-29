@@ -48,7 +48,7 @@ test.describe('Receive Genome Study Kit', () => {
 
       await test.step('Set new sample kit barcode', async () => {
         newBarcode = `${shortId}-${newBarcode}`;
-        const genomeStudyTab = await participantPage.clickTab<GenomeStudyTab>(Tab.GENOME_STUDY);
+        const genomeStudyTab = await participantPage.tab(Tab.GENOME_STUDY).click<GenomeStudyTab>();
         const value = await genomeStudyTab.getField('Sample kit barcode for genome study').locator('input').inputValue();
         expect(value).toBe(''); // Sample Kit Barcode input should be empty
 
@@ -89,7 +89,7 @@ test.describe('Receive Genome Study Kit', () => {
         await participantListPage.filterListByShortId(shortId);
         await participantListPage.participantListTable.openParticipantPageAt(0);
 
-        const genomeStudyTab = await participantPage.clickTab<GenomeStudyTab>(Tab.GENOME_STUDY);
+        const genomeStudyTab = await participantPage.tab(Tab.GENOME_STUDY).click<GenomeStudyTab>();
         let field = genomeStudyTab.getField('Status of genome study sample kit');
 
         // "Sample kit received from participant" is checked

@@ -7,7 +7,7 @@ import { MiscellaneousEnum } from 'dsm/component/navigation/enums/miscellaneousN
 import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import { StudyNavEnum } from 'dsm/component/navigation/enums/studyNav-enum';
 import { Navigation } from 'dsm/component/navigation/navigation';
-import Tabs from 'dsm/component/tabs/tabs';
+import Tabs from 'dsm/pages/tabs';
 import UserPermissionPage from 'dsm/pages/user-and-permissions-page';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
 import Select from 'dss/component/select';
@@ -93,8 +93,8 @@ test.describe.serial('Medical Records View Permission', () => {
         expect(tabNames).toStrictEqual(study === StudyEnum.OSTEO2 ? expectedTabs.concat([Tab.INVITAE]) : expectedTabs);
         // All tabs are enabled
         for (const tabName of tabNames) {
-          const tab = new Tabs(page);
-          await tab.open(tabName as Tab);
+          const tab = new Tabs(page, tabName);
+          await tab.click();
         }
       })
     });

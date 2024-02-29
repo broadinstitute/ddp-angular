@@ -344,7 +344,7 @@ test.describe.serial('Medical records request workflow', () => {
   }
 
   async function openMedicalRecordsTab(participantPage: ParticipantPage): Promise<MedicalRecordsTable> {
-    const medicalRecordsTab = await participantPage.clickTab<MedicalRecordsTab>(Tab.MEDICAL_RECORD);
+    const medicalRecordsTab = await participantPage.tab(Tab.MEDICAL_RECORD).click<MedicalRecordsTab>();
     const medicalRecordTable = medicalRecordsTab.table;
     expect(await medicalRecordTable.getRowsCount()).toBeGreaterThanOrEqual(1);
     return medicalRecordTable;

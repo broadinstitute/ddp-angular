@@ -3,12 +3,15 @@ import OncHistoryTable from 'dsm/component/tables/onc-history-table';
 import { waitForResponse } from 'utils/test-utils';
 import Select from 'dss/component/select';
 import Button from 'dss/component/button';
+import TabPageBase from './tab-page-base';
+import { Tab } from 'dsm/enums';
 
-export default class OncHistoryTab {
+export default class OncHistoryTab extends TabPageBase {
   private readonly oncHistoryTable: OncHistoryTable;
 
-  constructor(private readonly page: Page) {
-    this.oncHistoryTable = new OncHistoryTable(this.page);
+  constructor(page: Page) {
+    super(page, Tab.ONC_HISTORY);
+    this.oncHistoryTable = new OncHistoryTable(this.page, `${this.toLocator}//app-onc-history-detail`);
   }
 
   public get table(): OncHistoryTable {
@@ -95,11 +98,11 @@ export default class OncHistoryTab {
 
   /* Locators */
   private get downloadPDFBundleButton(): Locator {
-    return this.page.getByRole('button', { name: 'Download PDF Bundle' });
+    return this.toLocator.getByRole('button', { name: 'Download PDF Bundle' });
   }
 
   private get downloadRequestDocumentsButton(): Locator {
-    return this.page.getByRole('button', { name: 'Download Request Documents' });
+    return this.toLocator.getByRole('button', { name: 'Download Request Documents' });
   }
 
   private filesOrderModalBodyContent(name: string): Locator {
