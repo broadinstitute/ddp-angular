@@ -16,7 +16,7 @@ import DsmPageBase from './dsm-page-base';
 import * as user from 'data/fake-user.json';
 
 export default class ParticipantListPage extends DsmPageBase {
-  private readonly PAGE_TITLE: string = 'Participant List';
+  protected PAGE_TITLE = 'Participant List';
   private readonly _filters: Filters = new Filters(this.page);
   private readonly _quickFilters: QuickFilters = new QuickFilters(this.page);
   private readonly _table: ParticipantListTable = new ParticipantListTable(this.page);
@@ -37,6 +37,10 @@ export default class ParticipantListPage extends DsmPageBase {
 
   constructor(page: Page) {
     super(page);
+  }
+
+  protected get rootLocator(): Locator {
+    return this.page.locator('app-participant-list');
   }
 
   public async waitForReady(): Promise<void> {

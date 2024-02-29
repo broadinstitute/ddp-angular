@@ -4,7 +4,7 @@ import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
 import { CustomizeView, DataFilter, Label, Tab } from 'dsm/enums';
 import MedicalRecordsTab from 'dsm/pages/medical-records/medical-records-tab';
-import OncHistoryTab from 'dsm/pages/tab-pages/onc-history-tab';
+import OncHistoryTab from 'dsm/pages/tablist/onc-history-tab';
 import CohortTag from 'dsm/component/cohort-tag';
 import { SamplesNavEnum } from 'dsm/component/navigation/enums/samplesNav-enum';
 import SearchPage, { SearchByField } from 'dsm/pages/samples/search-page';
@@ -91,12 +91,12 @@ test.describe.serial('Osteo1 Participant', () => {
       await surveyTabLocator.locator('mat-expansion-panel-header').nth(2).click(); // collapse click
 
       // Compare Medical Records screenshot
-      const medicalRecordsTab = await participantPage.tab(Tab.MEDICAL_RECORD).click<MedicalRecordsTab>();
+      const medicalRecordsTab = await participantPage.tablist(Tab.MEDICAL_RECORD).click<MedicalRecordsTab>();
       const medicalRecordTable = medicalRecordsTab.table;
       await expect(medicalRecordTable.tableLocator()).toHaveScreenshot('medical-records-view.png');
 
       // Compare Onc History screenshot
-      const oncHistoryTab = await participantPage.tab(Tab.ONC_HISTORY).click<OncHistoryTab>();
+      const oncHistoryTab = await participantPage.tablist(Tab.ONC_HISTORY).click<OncHistoryTab>();
       const oncHistoryTable = oncHistoryTab.table;
       await expect(oncHistoryTable.tableLocator()).toHaveScreenshot('onc-history-view.png');
 

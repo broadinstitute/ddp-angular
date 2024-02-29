@@ -1,13 +1,13 @@
-import {expect, Page} from '@playwright/test';
+import {expect, Locator, Page} from '@playwright/test';
 import {KitTypeEnum} from 'dsm/component/kitType/enums/kitType-enum';
 import {waitForNoSpinner} from 'utils/test-utils';
 import {assertTableHeaders} from 'utils/assertion-helper';
 import {rows} from 'lib/component/dsm/paginators/types/rowsPerPage';
 import KitsPageBase from 'dsm/pages/kits-page-base';
-import { Label } from 'dsm/enums';
+import {Label} from 'dsm/enums';
 
 export default class KitsSentPage extends KitsPageBase {
-  PAGE_TITLE = 'Kits Sent';
+  protected PAGE_TITLE = 'Kits Sent';
   protected TABLE_HEADERS = [Label.SHORT_ID, Label.SHIPPING_ID,
     Label.TRACKING_NUMBER, Label.TRACKING_RETURN,
     Label.SENT, Label.MF_CODE, Label.DDP_REALM,
@@ -15,6 +15,10 @@ export default class KitsSentPage extends KitsPageBase {
 
   constructor(page: Page) {
     super(page);
+  }
+
+  protected get rootLocator(): Locator {
+    return this.page.locator('app-shipping');
   }
 
   public async goToPage(page: number): Promise<void> {

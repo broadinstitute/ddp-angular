@@ -13,7 +13,6 @@ import Checkbox from 'dss/component/checkbox';
 import { Label } from 'dsm/enums';
 
 export default abstract class KitsPageBase extends DsmPageBase {
-  protected abstract PAGE_TITLE: string;
   protected abstract TABLE_HEADERS: string[];
   protected readonly kitType: KitType;
   protected readonly kitsTable: KitsTable;
@@ -32,11 +31,7 @@ export default abstract class KitsPageBase extends DsmPageBase {
   }
 
   public async waitForReady(): Promise<void> {
-    await Promise.all([
-      this.page.waitForLoadState(),
-      expect(this.page.locator('h1')).toHaveText(this.PAGE_TITLE),
-    ]);
-    await waitForNoSpinner(this.page);
+    await super.waitForReady();
     await expect(async () => expect(await this.page.locator('mat-checkbox[id]').count()).toBeGreaterThanOrEqual(1)).toPass({ timeout: 60000 });
     const kits = await this.getStudyKitTypes()
     for (const kit of kits) {

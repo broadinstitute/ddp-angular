@@ -1,15 +1,15 @@
 import { Locator, Page, expect } from '@playwright/test';
 import { Tab } from 'dsm/enums';
-import ContactInformationTab from 'dsm/component/tabs/contact-information-tab';
-import GenomeStudyTab from 'dsm/component/tabs/genome-study-tab';
-import OncHistoryTab from 'dsm/pages/tab-pages/onc-history-tab';
-import SampleInformationTab from 'dsm/component/tabs/sample-information-tab';
-import SurveyDataTab from 'dsm/component/tabs/survey-data-tab';
-import SequencingOrderTab from 'dsm/component/tabs/sequencing-order-tab';
-import MedicalRecordsTab from './medical-records/medical-records-tab';
+import ContactInformationTab from 'dsm/pages/tablist/contact-information-tab';
+import GenomeStudyTab from 'dsm/pages/tablist/genome-study-tab';
+import OncHistoryTab from 'dsm/pages/tablist/onc-history-tab';
+import SampleInformationTab from 'dsm/pages/tablist/sample-information-tab';
+import SurveyDataTab from 'dsm/pages/tablist/survey-data-tab';
+import SequencingOrderTab from 'dsm/pages/tablist/sequencing-order-tab';
+import MedicalRecordsTab from 'dsm/pages/medical-records/medical-records-tab';
 import { waitForNoSpinner } from 'utils/test-utils';
 
-export default class Tabs {
+export default class Tablist {
   protected readonly tabs = new Map<string, object>([
     [Tab.CONTACT_INFORMATION, new ContactInformationTab(this.page)],
     [Tab.SAMPLE_INFORMATION, new SampleInformationTab(this.page)],

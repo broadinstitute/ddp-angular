@@ -2,7 +2,7 @@ import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import { test } from 'fixtures/dsm-fixture';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
 import { CustomizeView, DataFilter, Label, Tab } from 'dsm/enums';
-import OncHistoryTab from 'dsm/pages/tab-pages/onc-history-tab';
+import OncHistoryTab from 'dsm/pages/tablist/onc-history-tab';
 import { OncHistoryInputColumnsEnum } from 'dsm/component/tabs/enums/onc-history-input-columns-enum';
 import { Page, expect } from '@playwright/test';
 import { logInfo } from 'utils/log-utils';
@@ -45,7 +45,7 @@ test.describe.serial('Onc History', () => {
       // Open Onc History tab
       await participantListPage.filterListByShortId(shortID);
       const participantPage = await participantListTable.openParticipantPageAt(0);
-      const oncHistoryTab = await participantPage.tab(Tab.ONC_HISTORY).click<OncHistoryTab>();
+      const oncHistoryTab = await participantPage.tablist(Tab.ONC_HISTORY).click<OncHistoryTab>();
       const oncHistoryTable = oncHistoryTab.table;
       let lastRow = await oncHistoryTable.getRowsCount() - 1;
 

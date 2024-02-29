@@ -3,7 +3,7 @@ import {waitForNoSpinner, waitForResponse} from 'utils/test-utils';
 import {Label, Tab, ResponsePayload} from 'dsm/enums';
 import Input from 'dss/component/input';
 import Modal from 'dss/component/modal';
-import Tabs from 'dsm/pages/tabs';
+import Tablist from 'dsm/component/tablist';
 
 export default class ParticipantPage {
   private readonly PAGE_TITLE: string = 'Participant Page';
@@ -194,8 +194,8 @@ export default class ParticipantPage {
       .toBe(value);
   }
 
-   public tab(name: Tab): Tabs {
+   public tablist(name: Tab): Tablist {
       const page = this.page;
-      return new Tabs(page, name);
+      return new Tablist(page, name);
     }
 }

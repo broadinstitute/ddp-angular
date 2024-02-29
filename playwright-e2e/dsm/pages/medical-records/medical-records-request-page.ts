@@ -7,6 +7,7 @@ import DatePicker from 'dsm/component/date-picker';
 import Checkbox from 'dss/component/checkbox';
 import Select from 'dss/component/select';
 import { logInfo } from 'utils/log-utils';
+import DsmPageBase from 'dsm/pages/dsm-page-base';
 
 export interface PDFType {
   IRB_LETTER: string;
@@ -33,28 +34,20 @@ export const PDFName: PDFType = {
 };
 
 
-export default class MedicalRecordsRequestPage {
-  private readonly PAGE_TITLE = 'Medical Records - Request Page';
+export default class MedicalRecordsRequestPage extends DsmPageBase {
+  PAGE_TITLE = 'Medical Records - Request Page';
 
-  constructor(private readonly page: Page) { }
+  constructor(page: Page) {
+    super(page);
+  }
+
+  protected get rootLocator(): Locator {
+    return this.page.locator('//app-medical-record');
+  }
 
   public async waitForReady(): Promise<void> {
-    await this.assertPageTitle();
+    await super.waitForReady();
     await waitForNoSpinner(this.page);
-  }
-
-  public async backToPreviousPage(): Promise<void> {
-    await this.page.getByText('<< back to previous page').click();
-    await this.page.waitForLoadState('load');
-    await waitForNoSpinner(this.page);
-    await this.page.waitForLoadState('networkidle');
-  }
-
-  public async backToParticipantList(): Promise<void> {
-    await this.page.getByText("<< back to 'Participant List'").click();
-    await this.page.waitForLoadState('load');
-    await waitForNoSpinner(this.page);
-    await this.page.waitForLoadState('networkidle');
   }
 
   public async getStaticText(infoFieldName: Label): Promise<string> {
@@ -130,16 +123,7 @@ export default class MedicalRecordsRequestPage {
     return this.dynamicInformationXpath(Label.INITIAL_MR_RECEIVED).locator('app-field-datepicker');
   }
 
-  /* Assertions */
-  public async assertPageTitle(): Promise<void> {
-    const pageTitle = await this.pageTitle.textContent();
-    expect(pageTitle?.trim()).toEqual(this.PAGE_TITLE);
-  }
-
   /* Locators */
-  private get pageTitle(): Locator {
-    return this.page.locator(`${this.pageXPath}/h1`);
-  }
 
   public get getNoActionNeeded(): Checkbox {
     return new Checkbox(this.page, { root: this.dynamicInformationXpath(Label.NO_ACTION_NEEDED)});
@@ -161,7 +145,7 @@ export default class MedicalRecordsRequestPage {
 
   public async downloadSinglePDF(pdf: string, opts: { nth?: number } = {}): Promise<Download> {
     const { nth } = opts;
-    const select = new Select(this.page, { selector: '//mat-select[@placeholder="Select PDF"]', root: this.pageXPath });
+    const select = new Select(this.page, { selector: '//mat-select[@placeholder="Select PDF"]', root: this.rootLocator });
     await expect(select.toLocator()).toBeVisible();
     await expect(this.downloadPDFBundleButton).toBeVisible();
 
@@ -211,7 +195,7 @@ export default class MedicalRecordsRequestPage {
   }
 
   private get staticInformationTableXPath(): string {
-    return `${this.pageXPath}//table[contains(@class, "table-condensed")]/tbody`;
+    return `${this.rootLocator}//table[contains(@class, "table-condensed")]/tbody`;
   }
 
   private dynamicInformationXpath(infoFieldName: Label, index = 2): Locator {
@@ -219,10 +203,6 @@ export default class MedicalRecordsRequestPage {
   }
 
   private get dynamicInformationTableXPath(): string {
-    return `${this.pageXPath}//div[last()]/table[not(contains(@class, "table"))]`;
-  }
-
-  private get pageXPath(): string {
-    return '//app-medical-record';
+    return `${this.rootLocator}//div[last()]/table[not(contains(@class, "table"))]`;
   }
 }

@@ -1,5 +1,5 @@
 import { Locator, Page, expect } from '@playwright/test';
-import { SurveyDataPanelEnum } from './enums/survey-data-enum';
+import { SurveyDataPanelEnum } from 'dsm/component/tabs/enums/survey-data-enum';
 
 export default class SurveyDataTab {
   constructor(private readonly page: Page) {

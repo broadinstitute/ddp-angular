@@ -1,7 +1,7 @@
 import { expect, Locator, Page } from '@playwright/test';
 
 export default class ClinicalOrdersPage {
-  private readonly PAGE_TITLE = 'Clinical Orders';
+  protected PAGE_TITLE = 'Clinical Orders';
 
   constructor(private readonly page: Page) {}
 

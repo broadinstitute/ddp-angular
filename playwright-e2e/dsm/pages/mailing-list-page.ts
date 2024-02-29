@@ -10,6 +10,7 @@ export const COLUMN = {
 }
 
 export default class MailingListPage extends DsmPageBase {
+  protected PAGE_TITLE = 'Mailing List';
   private readonly title: string | RegExp;
   readonly downloadButton: Locator;
 
@@ -19,7 +20,12 @@ export default class MailingListPage extends DsmPageBase {
     this.downloadButton = this.page.getByRole('button', { name: 'Download mailing list' })
   }
 
+  protected get rootLocator(): Locator {
+    return this.page.locator('app-mailing-list');
+  }
+
   public async waitForReady(): Promise<void> {
+    await super.waitForReady();
     await expect(this.page).toHaveTitle(this.title);
     await expect(this.downloadButton).toBeVisible();
   }

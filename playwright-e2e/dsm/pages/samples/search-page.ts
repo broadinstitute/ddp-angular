@@ -13,10 +13,6 @@ export enum SearchByField {
 }
 
 export default class SearchPage extends KitsPageBase {
-  constructor(page: Page) {
-    super(page);
-  }
-
   protected PAGE_TITLE = 'Kits Search';
   protected TABLE_HEADERS = [
     Label.DDP_REALM,
@@ -31,8 +27,12 @@ export default class SearchPage extends KitsPageBase {
     Label.COLLECTION_DATE
   ];
 
-  async waitForReady(): Promise<void> {
-    await expect(this.page.locator('h1')).toHaveText('Kit Search');
+  constructor(page: Page) {
+    super(page);
+  }
+
+  protected get rootLocator(): Locator {
+    return this.page.locator('app-shipping-search');
   }
 
   async searchByField(searchField: SearchByField, value: string): Promise<Table> {

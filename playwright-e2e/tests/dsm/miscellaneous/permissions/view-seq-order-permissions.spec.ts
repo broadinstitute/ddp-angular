@@ -5,7 +5,7 @@ import { SamplesNavEnum } from 'dsm/component/navigation/enums/samplesNav-enum';
 import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import { StudyNavEnum } from 'dsm/component/navigation/enums/studyNav-enum';
 import { Navigation } from 'dsm/component/navigation/navigation';
-import SequencingOrderTab from 'dsm/component/tabs/sequencing-order-tab';
+import SequencingOrderTab from 'dsm/pages/tablist/sequencing-order-tab';
 import UserPermissionPage from 'dsm/pages/user-and-permissions-page';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
 import ParticipantPage from 'dsm/pages/participant-page/participant-page';
@@ -80,7 +80,7 @@ test.describe('View Sequencing Order Permission Test', () => {
 
         const participantPage = new ParticipantPage(page);
         await participantPage.assertPageTitle();
-        await participantPage.tab(Tab.SEQUENCING_ORDER).click<SequencingOrderTab>();
+        await participantPage.tablist(Tab.SEQUENCING_ORDER).click<SequencingOrderTab>();
 
         const sequencingOrderTab = new SequencingOrderTab(page);
         await sequencingOrderTab.waitForReady();

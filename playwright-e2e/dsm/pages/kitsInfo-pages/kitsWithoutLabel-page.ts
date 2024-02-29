@@ -20,6 +20,10 @@ export default class KitsWithoutLabelPage extends KitsPageBase {
     super(page);
   }
 
+  protected get rootLocator(): Locator {
+    return this.page.locator('app-shipping');
+  }
+
   public async goToPage(page: number): Promise<void> {
     await this.kitsTable.goToPage(page);
   }

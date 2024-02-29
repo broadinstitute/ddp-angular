@@ -51,7 +51,7 @@ test.describe.serial('Initial Scan page', () => {
 
       // Kits Received page
       const kitsReceivedPage = await navigation.selectFromSamples<KitsReceivedPage>(SamplesNavEnum.RECEIVED);
-      await kitsReceivedPage.waitForLoad();
+      await kitsReceivedPage.waitForReady();
       await kitsReceivedPage.selectKitType(kitType);
 
       // Save Short ID and MF code

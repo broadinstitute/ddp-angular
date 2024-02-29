@@ -5,7 +5,7 @@ import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
 import { logInfo } from 'utils/log-utils';
 import ParticipantPage from 'dsm/pages/participant-page/participant-page';
-import OncHistoryTab from 'dsm/pages/tab-pages/onc-history-tab';
+import OncHistoryTab from 'dsm/pages/tablist/onc-history-tab';
 
 
 test.describe('Tumor', () => {
@@ -26,15 +26,15 @@ test.describe('Tumor', () => {
       // Open Tab
       const participantPage: ParticipantPage = await participantListTable.openParticipantPageAt(row);
 
-      expect(await participantPage.tab(Tab.ONC_HISTORY).isVisible()).toBeTruthy();
+      expect(await participantPage.tablist(Tab.ONC_HISTORY).isVisible()).toBeTruthy();
 
-      const oncHistoryTab = await participantPage.tab(Tab.ONC_HISTORY).click<OncHistoryTab>();
+      const oncHistoryTab = await participantPage.tablist(Tab.ONC_HISTORY).click<OncHistoryTab>();
       const oncHistoryTable = oncHistoryTab.table;
       const rows = await oncHistoryTable.rowLocator().count(); // append new row
       console.log(`onc history rows: ${rows}`);
       await page.waitForTimeout(5000);
 
-      expect(await participantPage.tab(Tab.INVITAE).isVisible()).toBeTruthy();
+      expect(await participantPage.tablist(Tab.INVITAE).isVisible()).toBeTruthy();
     });
   }
 });

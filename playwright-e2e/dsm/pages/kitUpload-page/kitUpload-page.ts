@@ -10,12 +10,16 @@ import {logInfo} from 'utils/log-utils';
 import KitsPageBase from 'dsm/pages/kits-page-base';
 
 export default class KitUploadPage extends KitsPageBase {
-  TABLE_HEADERS = [];
-  PAGE_TITLE = 'Kit Upload';
+  TABLE_HEADERS = []; // no table in this page
+  protected PAGE_TITLE = 'Kit Upload';
   private readonly T_HEAD = 'shortId\tfirstName\tlastName\tstreet1\tstreet2\tcity\tpostalCode\tstate\tcountry';
 
   constructor(page: Page) {
     super(page);
+  }
+
+  protected get rootLocator(): Locator {
+    return this.page.locator('app-upload');
   }
 
   public async waitForReady(): Promise<void> {

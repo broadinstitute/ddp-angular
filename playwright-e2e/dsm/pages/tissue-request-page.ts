@@ -14,10 +14,14 @@ import DsmPageBase from './dsm-page-base';
 
 
 export default class TissueRequestPage extends DsmPageBase {
-  private readonly PAGE_TITLE = 'Tissue Request';
+  protected PAGE_TITLE = 'Tissue Request';
 
   constructor(page: Page) {
     super(page);
+  }
+
+  protected get rootLocator(): Locator {
+    return this.page.locator('app-tissue-page');
   }
 
   public async waitForReady(): Promise<void> {
@@ -29,18 +33,6 @@ export default class TissueRequestPage extends DsmPageBase {
   public async tissue(index = 0): Promise<Tissue> {
     await this.tissuesCountCheck(index);
     return new Tissue(this.page, index);
-  }
-
-  public async backToParticipant(): Promise<void> {
-    await this.page.getByText('back to Participant Page').click();
-    await expect(this.page.locator('//app-participant-page/h1')).toHaveText('Participant Page');
-    await waitForNoSpinner(this.page);
-  }
-
-  public async backToParticipantList(): Promise<void> {
-    await this.page.getByText('back to List').click();
-    await expect(this.page.locator('//app-participant-list/h1')).toHaveText('Participant List');
-    await waitForNoSpinner(this.page);
   }
 
   public async addTissue(): Promise<Tissue> {

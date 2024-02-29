@@ -4,7 +4,7 @@ import KitsPageBase from 'dsm/pages/kits-page-base';
 import { Label } from 'dsm/enums';
 
 export default class KitsQueuePage extends KitsPageBase {
-  PAGE_TITLE = 'Kit Queue';
+  protected PAGE_TITLE = 'Kit Queue';
   TABLE_HEADERS = [
     Label.PRINT_KIT,
     Label.SHORT_ID,
@@ -18,6 +18,10 @@ export default class KitsQueuePage extends KitsPageBase {
 
   constructor(page: Page) {
     super(page);
+  }
+
+  protected get rootLocator(): Locator {
+    return this.page.locator('app-shipping');
   }
 
   public async goToPage(page: number): Promise<void> {

@@ -163,7 +163,7 @@ test.describe.serial('Medical records request workflow', () => {
         await medicalRecordsRequestPage.fillText(Label.CONFIRMED_INSTITUTION_NAME, confirmedInstitution);
         logInfo(`Confirmed Institution is ${confirmedInstitution}`);
 
-        await medicalRecordsRequestPage.backToPreviousPage();
+        await medicalRecordsRequestPage.backToParticipant();
 
         await participantPage.backToList();
         await participantListPage.filterListByShortId(shortId);
@@ -243,7 +243,7 @@ test.describe.serial('Medical records request workflow', () => {
         await expect(initialMRRequest).toHaveCount(count);
       }
 
-      await medicalRecordsRequestPage.backToPreviousPage();
+      await medicalRecordsRequestPage.backToParticipant();
 
       // Iterate all rows to find matching Institution and MR Status
       foundRow = await assertInstitution(medicalRecordTable, confirmedInstitution, 'MR Received');
@@ -344,7 +344,7 @@ test.describe.serial('Medical records request workflow', () => {
   }
 
   async function openMedicalRecordsTab(participantPage: ParticipantPage): Promise<MedicalRecordsTable> {
-    const medicalRecordsTab = await participantPage.tab(Tab.MEDICAL_RECORD).click<MedicalRecordsTab>();
+    const medicalRecordsTab = await participantPage.tablist(Tab.MEDICAL_RECORD).click<MedicalRecordsTab>();
     const medicalRecordTable = medicalRecordsTab.table;
     expect(await medicalRecordTable.getRowsCount()).toBeGreaterThanOrEqual(1);
     return medicalRecordTable;

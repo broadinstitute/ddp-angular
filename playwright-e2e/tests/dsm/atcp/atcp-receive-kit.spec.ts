@@ -5,7 +5,7 @@ import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import { StudyNavEnum } from 'dsm/component/navigation/enums/studyNav-enum';
 import { Navigation } from 'dsm/component/navigation/navigation';
 import { CustomizeView, Label, Tab } from 'dsm/enums';
-import GenomeStudyTab from 'dsm/component/tabs/genome-study-tab';
+import GenomeStudyTab from 'dsm/pages/tablist/genome-study-tab';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
 import ParticipantPage from 'dsm/pages/participant-page/participant-page';
 import AtcpSearchPage, { SearchByField } from 'dsm/pages/samples/search-page';
@@ -48,7 +48,7 @@ test.describe('Receive Genome Study Kit', () => {
 
       await test.step('Set new sample kit barcode', async () => {
         newBarcode = `${shortId}-${newBarcode}`;
-        const genomeStudyTab = await participantPage.tab(Tab.GENOME_STUDY).click<GenomeStudyTab>();
+        const genomeStudyTab = await participantPage.tablist(Tab.GENOME_STUDY).click<GenomeStudyTab>();
         const value = await genomeStudyTab.getField('Sample kit barcode for genome study').locator('input').inputValue();
         expect(value).toBe(''); // Sample Kit Barcode input should be empty
 
@@ -89,7 +89,7 @@ test.describe('Receive Genome Study Kit', () => {
         await participantListPage.filterListByShortId(shortId);
         await participantListPage.participantListTable.openParticipantPageAt(0);
 
-        const genomeStudyTab = await participantPage.tab(Tab.GENOME_STUDY).click<GenomeStudyTab>();
+        const genomeStudyTab = await participantPage.tablist(Tab.GENOME_STUDY).click<GenomeStudyTab>();
         let field = genomeStudyTab.getField('Status of genome study sample kit');
 
         // "Sample kit received from participant" is checked

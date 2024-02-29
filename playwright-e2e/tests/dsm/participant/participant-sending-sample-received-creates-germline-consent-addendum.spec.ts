@@ -17,7 +17,7 @@ import FinalScanPage from 'dsm/pages/scanner-pages/finalScan-page';
 import { getDate, getToday } from 'utils/date-utils';
 import KitsSentPage from 'dsm/pages/kitsInfo-pages/kitsSentPage';
 import ParticipantPage from 'dsm/pages/participant-page/participant-page';
-import OncHistoryTab from 'dsm/pages/tab-pages/onc-history-tab';
+import OncHistoryTab from 'dsm/pages/tablist/onc-history-tab';
 import { OncHistoryInputColumnsEnum, OncHistorySelectRequestEnum } from 'dsm/component/tabs/enums/onc-history-input-columns-enum';
 import { SMIdEnum, TissueDynamicFieldsEnum, TissueTypesEnum } from 'dsm/pages/tissue/enums/tissue-information-enum';
 import KitsReceivedPage from 'dsm/pages/kitsInfo-pages/kitsReceived-page/kitsReceivedPage';
@@ -63,7 +63,7 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
       participantPage = await goToTestParticipantPage(shortID, navigation);
 
       //Fill out an onc history and get back an accession number
-      oncHistoryTab = await participantPage.tab(Tab.ONC_HISTORY).click<OncHistoryTab>();
+      oncHistoryTab = await participantPage.tablist(Tab.ONC_HISTORY).click<OncHistoryTab>();
       const oncHistoryTable = oncHistoryTab.table;
       const lastRow = await oncHistoryTable.getRowsCount() - 1;
 
@@ -114,8 +114,7 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
 
       //Receive the saliva kit first
       const kitsReceivedPage = await navigation.selectFromSamples<KitsReceivedPage>(SamplesNavEnum.RECEIVED);
-      await kitsReceivedPage.waitForLoad();
-      await kitsReceivedPage.assertPageTitle();
+      await kitsReceivedPage.waitForReady();
       await kitsReceivedPage.selectKitType(KitTypeEnum.SALIVA);
       await kitsReceivedPage.kitReceivedRequest({mfCode: kitLabel});
 
@@ -171,7 +170,7 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
       participantPage = await goToTestParticipantPage(shortID, navigation);
 
       //Fill out an onc history and get back an accession number
-      oncHistoryTab = await participantPage.tab(Tab.ONC_HISTORY).click<OncHistoryTab>();
+      oncHistoryTab = await participantPage.tablist(Tab.ONC_HISTORY).click<OncHistoryTab>();
       const oncHistoryTable = oncHistoryTab.table;
       const lastRow = await oncHistoryTable.getRowsCount() - 1;
 
@@ -222,8 +221,7 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
 
       //Receive the blood kit first
       const kitsReceivedPage = await navigation.selectFromSamples<KitsReceivedPage>(SamplesNavEnum.RECEIVED);
-      await kitsReceivedPage.waitForLoad();
-      await kitsReceivedPage.assertPageTitle();
+      await kitsReceivedPage.waitForReady();
       await kitsReceivedPage.selectKitType(KitTypeEnum.BLOOD);
       await kitsReceivedPage.kitReceivedRequest({mfCode: kitLabel});
 
@@ -279,7 +277,7 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
       participantPage = await goToTestParticipantPage(shortID, navigation);
 
       //Fill out an onc history and get back an accession number
-      oncHistoryTab = await participantPage.tab(Tab.ONC_HISTORY).click<OncHistoryTab>();
+      oncHistoryTab = await participantPage.tablist(Tab.ONC_HISTORY).click<OncHistoryTab>();
       const oncHistoryTable = oncHistoryTab.table;
       const lastRow = await oncHistoryTable.getRowsCount() - 1;
 
@@ -338,8 +336,7 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
       });
 
       //Receive the saliva kit second
-      await kitsReceivedPage.waitForLoad();
-      await kitsReceivedPage.assertPageTitle();
+      await kitsReceivedPage.waitForReady();
       await kitsReceivedPage.selectKitType(KitTypeEnum.SALIVA);
       await kitsReceivedPage.kitReceivedRequest({mfCode: kitLabel});
 
@@ -387,7 +384,7 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
       participantPage = await goToTestParticipantPage(shortID, navigation);
 
       //Fill out an onc history and get back an accession number
-      oncHistoryTab = await participantPage.tab(Tab.ONC_HISTORY).click<OncHistoryTab>();
+      oncHistoryTab = await participantPage.tablist(Tab.ONC_HISTORY).click<OncHistoryTab>();
       const oncHistoryTable = oncHistoryTab.table;
       const lastRow = await oncHistoryTable.getRowsCount() - 1;
 
@@ -446,8 +443,7 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
       });
 
       //Receive the blood kit second
-      await kitsReceivedPage.waitForLoad();
-      await kitsReceivedPage.assertPageTitle();
+      await kitsReceivedPage.waitForReady();
       await kitsReceivedPage.selectKitType(KitTypeEnum.BLOOD);
       await kitsReceivedPage.kitReceivedRequest({mfCode: kitLabel});
 

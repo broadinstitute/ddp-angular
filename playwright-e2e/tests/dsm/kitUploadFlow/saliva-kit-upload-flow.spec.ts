@@ -8,7 +8,7 @@ import ParticipantListPage from 'dsm/pages/participant-list-page';
 import {StudyNavEnum} from 'dsm/component/navigation/enums/studyNav-enum';
 import ParticipantPage from 'dsm/pages/participant-page/participant-page';
 import {KitUploadInfo} from 'dsm/pages/kitUpload-page/models/kitUpload-model';
-import ContactInformationTab from 'dsm/component/tabs/contact-information-tab';
+import ContactInformationTab from 'dsm/pages/tablist/contact-information-tab';
 import {Label, Tab} from 'dsm/enums';
 import {SamplesNavEnum} from 'dsm/component/navigation/enums/samplesNav-enum';
 import {KitTypeEnum} from 'dsm/component/kitType/enums/kitType-enum';
@@ -16,7 +16,7 @@ import KitUploadPage from 'dsm/pages/kitUpload-page/kitUpload-page';
 import InitialScanPage from 'dsm/pages/scanner-pages/initialScan-page';
 import FinalScanPage from 'dsm/pages/scanner-pages/finalScan-page';
 import crypto from 'crypto';
-import SampleInformationTab from 'dsm/component/tabs/sample-information-tab';
+import SampleInformationTab from 'dsm/pages/tablist/sample-information-tab';
 import {SampleInfoEnum} from 'dsm/component/tabs/enums/sampleInfo-enum';
 import {SampleStatusEnum} from 'dsm/component/tabs/enums/sampleStatus-enum';
 import KitsWithoutLabelPage from 'dsm/pages/kitsInfo-pages/kitsWithoutLabel-page';
@@ -71,7 +71,7 @@ test.describe.serial('Saliva Kits upload flow', () => {
       expect(shortID, 'The short ID is empty').toBeTruthy();
       expect(firstName, 'The first name is empty').toBeTruthy();
       expect(lastName, 'The last name is empty').toBeTruthy();
-      const isContactInformationTabVisible = await participantPage.tab(Tab.CONTACT_INFORMATION).isVisible();
+      const isContactInformationTabVisible = await participantPage.tablist(Tab.CONTACT_INFORMATION).isVisible();
       const kitUploadInfo = new KitUploadInfo(
         shortID,
         firstName,
@@ -80,7 +80,7 @@ test.describe.serial('Saliva Kits upload flow', () => {
 
       // collects data from the contact information tab if the tab is available
       if (isContactInformationTabVisible) {
-        const contactInformationTab = await participantPage.tab(Tab.CONTACT_INFORMATION).click<ContactInformationTab>();
+        const contactInformationTab = await participantPage.tablist(Tab.CONTACT_INFORMATION).click<ContactInformationTab>();
         kitUploadInfo.address.street1 = (await contactInformationTab.getStreet1()) || kitUploadInfo.address.street1;
         kitUploadInfo.address.city = (await contactInformationTab.getCity()) || kitUploadInfo.address.city;
         kitUploadInfo.address.postalCode = (await contactInformationTab.getZip()) || kitUploadInfo.address.postalCode;
@@ -164,9 +164,8 @@ test.describe.serial('Saliva Kits upload flow', () => {
       // kits received page
       const kitsReceivedPage = await navigation.selectFromSamples<KitsReceivedPage>(SamplesNavEnum.RECEIVED);
       await kitsReceivedPage.kitReceivedRequest({mfCode: kitLabel});
-      await kitsReceivedPage.waitForLoad();
+      await kitsReceivedPage.waitForReady();
       await kitsReceivedPage.selectKitType(kitType);
-      await kitsReceivedPage.assertPageTitle();
       await kitsReceivedPage.assertDisplayedKitTypes(expectedKitTypes);
       await kitsReceivedPage.assertReloadKitListBtn();
       await kitsReceivedPage.assertTableHeader();
@@ -186,7 +185,7 @@ test.describe.serial('Saliva Kits upload flow', () => {
       await searchPanel.search();
       await participantListTable.openParticipantPageAt(0);
       await participantPage.assertPageTitle();
-      const sampleInformationTab = await participantPage.tab(Tab.SAMPLE_INFORMATION).click<SampleInformationTab>();
+      const sampleInformationTab = await participantPage.tablist(Tab.SAMPLE_INFORMATION).click<SampleInformationTab>();
       await sampleInformationTab.assertKitType(kitLabel, kitType)
       await sampleInformationTab.assertValue(kitLabel, {info: SampleInfoEnum.STATUS, value: SampleStatusEnum.RECEIVED});
       await sampleInformationTab.assertValue(kitLabel, {info: SampleInfoEnum.RECEIVED, value: receivedDate});

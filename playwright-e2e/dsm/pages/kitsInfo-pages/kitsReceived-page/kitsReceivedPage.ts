@@ -1,5 +1,5 @@
 import {KitsTable} from 'dsm/component/tables/kits-table';
-import {APIRequestContext, expect, Page} from '@playwright/test';
+import {APIRequestContext, expect, Locator, Page} from '@playwright/test';
 import {KitTypeEnum} from 'dsm/component/kitType/enums/kitType-enum';
 import {waitForNoSpinner} from 'utils/test-utils';
 import {assertTableHeaders} from 'utils/assertion-helper';
@@ -10,7 +10,7 @@ import { Label } from 'dsm/enums';
 const { BSP_TOKEN, DSM_BASE_URL } = process.env;
 
 export default class KitsReceivedPage extends KitsPageBase {
-  readonly PAGE_TITLE = 'Kits Received';
+  protected PAGE_TITLE = 'Kits Received';
   readonly TABLE_HEADERS = [Label.SHORT_ID, Label.SHIPPING_ID,
     Label.RECEIVED, Label.MF_CODE,
     Label.DDP_REALM, Label.TYPE, Label.SAMPLE_TYPE];
@@ -18,6 +18,10 @@ export default class KitsReceivedPage extends KitsPageBase {
 
   constructor(readonly page: Page, private readonly request: APIRequestContext) {
       super(page);
+  }
+
+  protected get rootLocator(): Locator {
+    return this.page.locator('app-shipping');
   }
 
   public get getKitsTable(): KitsTable {
@@ -30,11 +34,6 @@ export default class KitsReceivedPage extends KitsPageBase {
 
   public async rowsPerPage(rows: rows): Promise<void> {
     await this.kitsTable.rowsPerPage(rows);
-  }
-
-  public async waitForLoad(): Promise<void> {
-    await this.page.waitForLoadState('networkidle');
-    await waitForNoSpinner(this.page);
   }
 
   public async kitReceivedRequest(opts: { mfCode: string, isTumorSample?: boolean,
@@ -96,11 +95,6 @@ export default class KitsReceivedPage extends KitsPageBase {
   }
 
   /* Assertions */
-  public async assertPageTitle(): Promise<void> {
-    await expect(this.page.locator('h1'),
-      'Kits Received page - page title is wrong')
-      .toHaveText(this.PAGE_TITLE);
-  }
 
   public async assertReloadKitListBtn(): Promise<void> {
     await expect(this.page.locator(this.reloadKitListBtnXPath),

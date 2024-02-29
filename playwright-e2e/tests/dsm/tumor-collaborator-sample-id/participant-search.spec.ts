@@ -6,7 +6,7 @@ import ParticipantListPage from 'dsm/pages/participant-list-page';
 import { studyShortName } from 'utils/test-utils';
 import { logInfo } from 'utils/log-utils';
 import ParticipantPage from 'dsm/pages/participant-page/participant-page';
-import OncHistoryTab from 'dsm/pages/tab-pages/onc-history-tab';
+import OncHistoryTab from 'dsm/pages/tablist/onc-history-tab';
 import { OncHistoryInputColumnsEnum, OncHistorySelectRequestEnum } from 'dsm/component/tabs/enums/onc-history-input-columns-enum';
 import { SortOrder } from 'dss/component/table';
 
@@ -72,7 +72,7 @@ test.describe.serial('Tumor Collaborator Sample ID', () => {
       logInfo(`Participant Short ID: ${shortID}`);
 
       const participantPage: ParticipantPage = await participantListTable.openParticipantPageAt(row);
-      const oncHistoryTab = await participantPage.tab(Tab.ONC_HISTORY).click<OncHistoryTab>();
+      const oncHistoryTab = await participantPage.tablist(Tab.ONC_HISTORY).click<OncHistoryTab>();
       const oncHistoryTable = oncHistoryTab.table;
       const rows = await oncHistoryTable.rowLocator().count(); // append new row
       const rowIndex = rows - 1; // 0th-index

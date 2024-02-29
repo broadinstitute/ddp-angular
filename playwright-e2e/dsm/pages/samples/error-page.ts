@@ -1,4 +1,4 @@
-import { Page } from '@playwright/test';
+import { Locator, Page } from '@playwright/test';
 import { Label } from 'dsm/enums';
 import KitsPageBase from 'dsm/pages/kits-page-base';
 
@@ -23,5 +23,9 @@ export default class ErrorPage extends KitsPageBase {
 
   constructor(page: Page) {
     super(page);
+  }
+
+  protected get rootLocator(): Locator {
+    return this.page.locator('app-shipping');
   }
 }
