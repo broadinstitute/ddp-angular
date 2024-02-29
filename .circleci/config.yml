@@ -453,6 +453,7 @@ commands:
             fi
         #
 
+
 jobs:
   app-deploy:
     working_directory: *ng_workspace_path
@@ -695,6 +696,8 @@ jobs:
       - run:
           name: Running Playwright tests on << parameters.env >>
           working_directory: *playwright_path
+          environment:
+            JEST_JUNIT_ADD_FILE_ATTRIBUTE: true
           command: |
             if [ "<< parameters.test_suite >>" == "dss" ]
             then
@@ -708,9 +711,9 @@ jobs:
 
             echo ""
             TESTS_FILE=$(circleci tests split --split-by=timings --timings-type=classname e2e_tests.txt)
-            echo ${TESTS_FILE}
-            
-            npm run test:ci ${TESTS_FILE}
+            echo ""
+
+            echo $TESTS_FILE | circleci tests run --command="xargs npm run test:ci" --verbose --split-by=timings
           no_output_timeout: 10m
       - store_test_results:
           path: playwright-e2e/junit
