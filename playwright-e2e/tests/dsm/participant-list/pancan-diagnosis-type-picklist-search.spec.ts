@@ -1,13 +1,13 @@
 import { expect } from '@playwright/test';
 import { test } from 'fixtures/dsm-fixture';
-import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
 import { CustomizeView, Label } from 'dsm/enums';
 import { logInfo } from 'utils/log-utils';
+import { StudyName } from 'dsm/navigation';
 
 test.describe('Pancan study picklist search', () => {
   // CMI research studies
-  const studies = [StudyEnum.PANCAN];
+  const studies = [StudyName.PANCAN];
   const cancers = ['Gynecologic cancers', 'Leukemias', 'Sarcomas', 'Small intestine cancer', 'Gastrointestinal cancers'];
 
   for (const study of studies) {

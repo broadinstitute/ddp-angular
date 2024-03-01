@@ -1,6 +1,5 @@
 import { expect, Page, APIRequestContext } from '@playwright/test';
-import { MiscellaneousEnum } from 'dsm/component/navigation/enums/miscellaneousNav-enum';
-import { Navigation } from 'dsm/component/navigation/navigation';
+import { Miscellaneous, Navigation } from 'dsm/navigation';
 import Button from 'dss/component/button';
 import Input from 'dss/component/input';
 import Table from 'dss/component/table';
@@ -17,7 +16,7 @@ export default class ParticipantWithdrawalPage {
     const navigation = new Navigation(page, request);
     const [mailListResponse] = await Promise.all([
       waitForResponse(page, { uri: 'ui/exitParticipant/' }),
-      navigation.selectMiscellaneous(MiscellaneousEnum.PARTICIPANT_WITHDRAWAL)
+      navigation.selectFromMiscellaneous(Miscellaneous.PARTICIPANT_WITHDRAWAL)
     ]);
     return new ParticipantWithdrawalPage(page);
   }

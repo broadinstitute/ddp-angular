@@ -1,14 +1,14 @@
 import { expect } from '@playwright/test';
 import { test } from 'fixtures/dsm-fixture';
-import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
 import { logInfo } from 'utils/log-utils';
 import { faker } from '@faker-js/faker';
 import { CustomizeView, DataFilter, Label } from 'dsm/enums';
+import { StudyName } from 'dsm/navigation';
 
 test.describe.serial('Editing Participant Information', () => {
-  const cmiClinicalStudies = [StudyEnum.LMS, StudyEnum.OSTEO2];
-  const cmiResearchStudies = [StudyEnum.PANCAN];
+  const cmiClinicalStudies = [StudyName.LMS, StudyName.OSTEO2];
+  const cmiResearchStudies = [StudyName.PANCAN];
   const chosenCMIStudies = cmiClinicalStudies.concat(cmiResearchStudies);
 
   for (const study of chosenCMIStudies) {

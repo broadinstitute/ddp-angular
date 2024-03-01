@@ -1,7 +1,6 @@
 import { APIRequestContext, Download, expect, Locator, Page } from '@playwright/test';
 import Modal from 'dsm/component/modal';
-import { StudyNavEnum } from 'dsm/component/navigation/enums/studyNav-enum';
-import { Navigation } from 'dsm/component/navigation/navigation';
+import { Navigation, Study } from 'dsm/navigation';
 import { Label, FileFormat, TextFormat, Tab, DataFilter, CustomizeView } from 'dsm/enums';
 import { WelcomePage } from 'dsm/pages/welcome-page';
 import Checkbox from 'dss/component/checkbox';
@@ -26,7 +25,7 @@ export default class ParticipantListPage extends DsmPageBase {
     await welcomePage.selectStudy(study);
 
     const navigation = new Navigation(page, request);
-    const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
+    const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(Study.PARTICIPANT_LIST);
     await participantListPage.waitForReady();
 
     const participantsTable = participantListPage.participantListTable;

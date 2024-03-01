@@ -1,8 +1,6 @@
 import { expect } from '@playwright/test';
 import { CustomizeView, DataFilter, Label } from 'dsm/enums';
-import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
-import { StudyNavEnum } from 'dsm/component/navigation/enums/studyNav-enum';
-import { Navigation } from 'dsm/component/navigation/navigation';
+import { Navigation, Study, StudyName } from 'dsm/navigation';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
 import ParticipantPage from 'dsm/pages/participant-page';
 import ParticipantWithdrawalPage from 'dsm/pages/participant-withdrawal-page';
@@ -14,7 +12,7 @@ import * as user from 'data/fake-user.json';
 import { shuffle } from 'utils/test-utils';
 
 test.describe('Participants Withdrawal', () => {
-  const studies = [StudyEnum.LMS];
+  const studies = [StudyName.LMS];
 
     for (const study of studies) {
       test(`In @${study} @dsm`, async ({ page, request }) => {
@@ -86,7 +84,7 @@ test.describe('Participants Withdrawal', () => {
         logParticipantWithdrew(participantId, shortIdColumnId, registrationDate);
 
         const navigation = new Navigation(page, request);
-        await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
+        await navigation.selectFromStudy<ParticipantListPage>(Study.PARTICIPANT_LIST);
         await participantListPage.waitForReady();
 
         // verify status has changed to withdrawn

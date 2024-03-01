@@ -1,8 +1,6 @@
 import { Locator, Page } from '@playwright/test';
-import { MiscellaneousEnum } from './navigation/enums/miscellaneousNav-enum';
-import { SamplesNavEnum } from './navigation/enums/samplesNav-enum';
-import { StudyNavEnum } from './navigation/enums/studyNav-enum';
-import { StudyEnum } from './navigation/enums/selectStudyNav-enum';
+import { Miscellaneous, Samples, Study, StudyName } from 'dsm/navigation';
+
 
 export default class Dropdown {
   private readonly page: Page;
@@ -40,7 +38,7 @@ export default class Dropdown {
     return this.toLocator().locator('ul.dropdown-menu').locator('a').getByText(value, {exact: true});
   }
 
-  async getDisplayedOptions<T extends MiscellaneousEnum | SamplesNavEnum | StudyNavEnum | StudyEnum>(): Promise<T[]> {
+  async getDisplayedOptions<T extends Miscellaneous | Samples | Study | StudyName>(): Promise<T[]> {
     await this.open();
     const options: T[] = [];
     const links: Locator[] = await this.toLocator().locator('ul.dropdown-menu').locator('a').all();

@@ -1,26 +1,23 @@
 import { expect } from '@playwright/test';
 import { test } from 'fixtures/dsm-fixture';
-import { Navigation } from 'dsm/component/navigation/navigation';
+import { Navigation, Samples, Study, StudyName } from 'dsm/navigation';
 import Select from 'dss/component/select';
-import { KitUploadInfo } from 'dsm/pages/kitUpload-page/models/kitUpload-model';
-import {StudyEnum} from 'dsm/component/navigation/enums/selectStudyNav-enum';
+import { KitUploadInfo } from 'dsm/pages/models/kit-upload-model';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
-import {StudyNavEnum} from 'dsm/component/navigation/enums/studyNav-enum';
 import * as user from 'data/fake-user.json';
 import crypto from 'crypto';
-import KitUploadPage from 'dsm/pages/kitUpload-page/kitUpload-page';
-import {SamplesNavEnum} from 'dsm/component/navigation/enums/samplesNav-enum';
+import KitsUploadPage from 'dsm/pages/kits-upload-page';
 import FamilyMemberTab from 'dsm/pages/tablist/rgp-family-member-tab';
 import { FamilyMember } from 'dsm/component/tabs/enums/familyMember-enum';
-import KitsWithoutLabelPage from 'dsm/pages/kitsInfo-pages/kitsWithoutLabel-page';
-import KitsSentPage from 'dsm/pages/kitsInfo-pages/kitsSentPage';
-import KitsReceivedPage from 'dsm/pages/kitsInfo-pages/kitsReceived-page/kitsReceivedPage';
-import TrackingScanPage from 'dsm/pages/scanner-pages/trackingScan-page';
-import RgpFinalScanPage from 'dsm/pages/scanner-pages/rgpFinalScan-page'
+import KitsWithoutLabelPage from 'dsm/pages/kits-without-label-page';
+import KitsSentPage from 'dsm/pages/kits-sent-page';
+import KitsReceivedPage from 'dsm/pages/kits-received-page';
+import TrackingScanPage from 'dsm/pages/scan/tracking-scan-page';
+import RgpFinalScanPage from 'dsm/pages/scan/rgp-final-scan-page'
 import { simplifyShortID } from 'utils/faker-utils';
 import { ParticipantListTable } from 'dsm/component/tables/participant-list-table';
-import KitsQueuePage from 'dsm/pages/kitsInfo-pages/kit-queue-page';
-import ErrorPage from 'dsm/pages/samples/error-page';
+import KitsQueuePage from 'dsm/pages/kits-queue-page';
+import KitsWithErrorPage from 'dsm/pages/kits-with-error-page';
 import { CustomizeView, KitType, Label } from 'dsm/enums';
 
 test.describe('Blood & RNA Kit Upload', () => {
@@ -29,7 +26,7 @@ test.describe('Blood & RNA Kit Upload', () => {
 
     const testResultDirectory = testInfo.outputDir;
 
-    const study = StudyEnum.RGP;
+    const study = StudyName.RGP;
     const kitType = KitType.BLOOD_AND_RNA;
     const expectedKitTypes = [KitType.BLOOD, KitType.BLOOD_AND_RNA]; //Later will be just Blood & RNA kit type for RGP
     let kitTable;
@@ -45,7 +42,7 @@ test.describe('Blood & RNA Kit Upload', () => {
     await new Select(page, { label: 'Select study' }).selectOption(study);
 
     //Go to recently created playwright test participant to get their short id
-    const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
+    const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(Study.PARTICIPANT_LIST);
     await participantListPage.waitForReady();
 
     const participantListTable = new ParticipantListTable(page);
@@ -77,7 +74,7 @@ test.describe('Blood & RNA Kit Upload', () => {
 
     //Deactivate existing kits for participant
     //Note: no blood kits are automatically created for RGP - preliminary deactivation of existing kits is done in case of prior test run
-    const kitsWithoutLabelPage = await navigation.selectFromSamples<KitsWithoutLabelPage>(SamplesNavEnum.KITS_WITHOUT_LABELS);
+    const kitsWithoutLabelPage = await navigation.selectFromSamples<KitsWithoutLabelPage>(Samples.KITS_WITHOUT_LABELS);
     await kitsWithoutLabelPage.waitForReady();
     await kitsWithoutLabelPage.selectKitType(kitType);
     if (await kitsWithoutLabelPage.hasKitRequests()) {
@@ -95,7 +92,7 @@ test.describe('Blood & RNA Kit Upload', () => {
     kitUploadInfo.address.country = user.patient.country.abbreviation;
 
     //Upload a Blood & RNA kit
-    const kitUploadPage = await navigation.selectFromSamples<KitUploadPage>(SamplesNavEnum.KIT_UPLOAD);
+    const kitUploadPage = await navigation.selectFromSamples<KitsUploadPage>(Samples.KIT_UPLOAD);
     await kitUploadPage.waitForReady();
     await kitUploadPage.selectKitType(kitType);
     await kitUploadPage.assertBrowseBtn();
@@ -104,7 +101,7 @@ test.describe('Blood & RNA Kit Upload', () => {
     await kitUploadPage.uploadFile(kitType, [kitUploadInfo], study, testResultDirectory);
 
     //Go to Kits w/o Label to extract a shipping ID
-    await navigation.selectFromSamples<KitsWithoutLabelPage>(SamplesNavEnum.KITS_WITHOUT_LABELS);
+    await navigation.selectFromSamples<KitsWithoutLabelPage>(Samples.KITS_WITHOUT_LABELS);
     await kitsWithoutLabelPage.waitForReady();
     await kitsWithoutLabelPage.selectKitType(kitType);
     await kitsWithoutLabelPage.assertCreateLabelsBtn();
@@ -123,7 +120,7 @@ test.describe('Blood & RNA Kit Upload', () => {
     await kitsWithoutLabelPage.clickCreateLabels();
 
     //Kit Queue or Kit Error page (depending on where easypost sends the kit - easypost tends to send the kit to error in non-prod envs)
-    const kitQueuePage = await navigation.selectFromSamples<KitsQueuePage>(SamplesNavEnum.QUEUE);
+    const kitQueuePage = await navigation.selectFromSamples<KitsQueuePage>(Samples.QUEUE);
     await kitQueuePage.waitForReady();
     await kitQueuePage.selectKitType(KitType.BLOOD_AND_RNA);
     const kitQueuePageHasExistingKitRequests = await kitQueuePage.hasKitRequests();
@@ -134,7 +131,7 @@ test.describe('Blood & RNA Kit Upload', () => {
       amountOfKits = await kitTable.getRowsCount();
       if (amountOfKits === 0) {
         //If the kit is not found in Kit Queue -> go to Kit Error page and search for it there
-        kitErrorPage = await navigation.selectFromSamples<ErrorPage>(SamplesNavEnum.ERROR);
+        kitErrorPage = await navigation.selectFromSamples<KitsWithErrorPage>(Samples.ERROR);
         await kitErrorPage.waitForReady();
         await kitErrorPage.selectKitType(KitType.BLOOD_AND_RNA);
         kitTable = kitErrorPage.getKitsTable;
@@ -149,7 +146,7 @@ test.describe('Blood & RNA Kit Upload', () => {
         expect(kitQueueShippingID).toBe(shippingID);
       }
     } else if (!kitQueuePageHasExistingKitRequests) {
-      kitErrorPage = await navigation.selectFromSamples<ErrorPage>(SamplesNavEnum.ERROR);
+      kitErrorPage = await navigation.selectFromSamples<KitsWithErrorPage>(Samples.ERROR);
       await kitErrorPage.waitForReady();
       await kitErrorPage.selectKitType(KitType.BLOOD_AND_RNA);
       kitTable = kitErrorPage.getKitsTable;
@@ -163,14 +160,14 @@ test.describe('Blood & RNA Kit Upload', () => {
     //Tracking scan
     const labelNumber = crypto.randomUUID().toString().substring(0, 10);
     const kitLabel = `RGP_${labelNumber}`;
-    const trackingScanPage = await navigation.selectFromSamples<TrackingScanPage>(SamplesNavEnum.TRACKING_SCAN);
+    const trackingScanPage = await navigation.selectFromSamples<TrackingScanPage>(Samples.TRACKING_SCAN);
     await trackingScanPage.waitForReady();
     const trackingLabel = `tracking-${crypto.randomUUID().toString().substring(0, 10)}`;
     await trackingScanPage.fillScanPairs([trackingLabel, kitLabel]);
     await trackingScanPage.save();
 
     //RGP final scan page - RNA labels must have the prefix 'RNA' (all caps)
-    const finalScanPage = await navigation.selectFromSamples<RgpFinalScanPage>(SamplesNavEnum.RGP_FINAL_SCAN);
+    const finalScanPage = await navigation.selectFromSamples<RgpFinalScanPage>(Samples.RGP_FINAL_SCAN);
     const rnaNumber = crypto.randomUUID().toString().substring(0, 10);
 
     await finalScanPage.assertPageTitle();
@@ -191,7 +188,7 @@ test.describe('Blood & RNA Kit Upload', () => {
     await finalScanPage.save();
 
     //Kits Sent Page
-    const kitsSentPage = await navigation.selectFromSamples<KitsSentPage>(SamplesNavEnum.SENT);
+    const kitsSentPage = await navigation.selectFromSamples<KitsSentPage>(Samples.SENT);
     await kitsSentPage.waitForReady();
     await kitsSentPage.assertDisplayedKitTypes(expectedKitTypes);
     await kitsSentPage.selectKitType(kitType);
@@ -203,7 +200,7 @@ test.describe('Blood & RNA Kit Upload', () => {
     await kitsSentPage.search(Label.MF_CODE, rnaLabel, { count: 1 });
 
     //Kits Received Page
-    const kitsReceivedPage = await navigation.selectFromSamples<KitsReceivedPage>(SamplesNavEnum.RECEIVED);
+    const kitsReceivedPage = await navigation.selectFromSamples<KitsReceivedPage>(Samples.RECEIVED);
     await kitsReceivedPage.waitForReady();
     await kitsReceivedPage.kitReceivedRequestForRGPKits(kitLabel, shortID); //Mark the blood & rna kit as received
     await kitsReceivedPage.kitReceivedRequestForRGPKits(rnaLabel, shortID); //Mark the kit with the rna label as received

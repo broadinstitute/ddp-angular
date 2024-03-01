@@ -1,20 +1,16 @@
 import { expect } from '@playwright/test';
 import { CustomizeView, DataFilter, Label, Tab, UserPermission } from 'dsm/enums';
-import { MiscellaneousEnum } from 'dsm/component/navigation/enums/miscellaneousNav-enum';
-import { SamplesNavEnum } from 'dsm/component/navigation/enums/samplesNav-enum';
-import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
-import { StudyNavEnum } from 'dsm/component/navigation/enums/studyNav-enum';
-import { Navigation } from 'dsm/component/navigation/navigation';
+import { Miscellaneous, Navigation, Samples, Study, StudyName } from 'dsm/navigation';
 import SequencingOrderTab from 'dsm/pages/tablist/sequencing-order-tab';
 import UserPermissionPage from 'dsm/pages/user-and-permissions-page';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
 import ParticipantPage from 'dsm/pages/participant-page';
-import ClinicalOrdersPage from 'dsm/pages/samples/clinical-orders-page';
+import ClinicalOrdersPage from 'dsm/pages/clinical-orders-page';
 import Select from 'dss/component/select';
 import { testLimitedPermissions as test } from 'fixtures/dsm-fixture';
 
 test.describe('View Sequencing Order Permission Test', () => {
-  const studies = [StudyEnum.OSTEO2, StudyEnum.LMS]; //Current clinical studies
+  const studies = [StudyName.OSTEO2, StudyName.LMS]; //Current clinical studies
   const testEmail = process.env.DSM_USER2_EMAIL as string;
 
   for (const study of studies) {
@@ -26,7 +22,7 @@ test.describe('View Sequencing Order Permission Test', () => {
         await new Select(page, { label: 'Select study' }).selectOption(`${study}`);
 
         //Verify that the User and Permissions Page can be seen; Miscellaneous -> Users and Permissions
-        await navigation.selectMiscellaneous(MiscellaneousEnum.USERS_AND_PERMISSIONS);
+        await navigation.selectFromMiscellaneous(Miscellaneous.USERS_AND_PERMISSIONS);
         const userPermissionsPage = new UserPermissionPage(page);
 
         //Verify expected webelements can be seen
@@ -50,12 +46,12 @@ test.describe('View Sequencing Order Permission Test', () => {
       });
 
       await test.step('Verify that the current DSM user is able to view the Clinical Order page (via the Samples menu)', async () => {
-        const clinicalOrdersPage = await navigation.selectFromSamples<ClinicalOrdersPage>(SamplesNavEnum.CLINICAL_ORDERS);
+        const clinicalOrdersPage = await navigation.selectFromSamples<ClinicalOrdersPage>(Samples.CLINICAL_ORDERS);
         await clinicalOrdersPage.waitForReady();
       });
 
       await test.step('Verify that the current DSM user is able to view the Clinical Order Columns in Participant List', async () => {
-        const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
+        const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(Study.PARTICIPANT_LIST);
         await participantListPage.waitForReady();
 
         const customizeViewPanel = participantListPage.filters.customizeViewPanel;

@@ -1,24 +1,3 @@
-import { InputTypeEnum, OncHistorySelectRequestEnum } from 'dsm/component/tabs/enums/onc-history-input-columns-enum';
-import { FillDate } from 'dsm/pages/models/input-interface';
-
-export interface OncHistoryInputsTypes {
-  value?: string | number;
-  lookupSelectIndex?: number;
-  select?: OncHistorySelectRequestEnum,
-  date?: FillDate,
-}
-
-export interface OncHistoryInputsMapValue {
-  type: InputTypeEnum;
-  hasLookup: boolean;
-}
-
-export interface OncHistoryDateInput {
-  yyyy?: number,
-  month?: number,
-  dayOfMonth?: number
-}
-
 export interface OsteoOncHistoryUpload {
   RECORD_ID: string,
   REQUEST_STATUS: string;

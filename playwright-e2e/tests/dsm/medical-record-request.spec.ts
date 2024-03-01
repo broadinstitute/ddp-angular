@@ -1,6 +1,5 @@
 import { expect } from '@playwright/test';
 import { test } from 'fixtures/dsm-fixture';
-import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
 import { assertDateFormat, waitForResponse } from 'utils/test-utils';
 import { logInfo } from 'utils/log-utils';
@@ -14,6 +13,7 @@ import MedicalRecordsTable from 'dsm/component/tables/medical-records-table';
 import { QuickFiltersEnum } from 'dsm/component/filters/quick-filters';
 import { assertTableHeaders } from 'utils/assertion-helper';
 import path from 'path';
+import { StudyName } from 'dsm/navigation';
 
 // Tests depends on same participant
 test.describe.serial('Medical records request workflow', () => {
@@ -32,7 +32,7 @@ test.describe.serial('Medical records request workflow', () => {
   ];
 
   // One Clinical studies
-  const studies: StudyEnum[] = [StudyEnum.OSTEO2, StudyEnum.LMS];
+  const studies: StudyName[] = [StudyName.OSTEO2, StudyName.LMS];
 
   for (const study of studies) {
     test(`Update Institution @dsm @${study}`, async ({ page, request }) => {
@@ -381,11 +381,11 @@ test.describe.serial('Medical records request workflow', () => {
   function pdfDownloadPrefix(study: string) {
     let name;
     switch (study) {
-      case StudyEnum.OSTEO:
-      case StudyEnum.OSTEO2:
+      case StudyName.OSTEO:
+      case StudyName.OSTEO2:
         name = 'Osteo';
         break;
-      case StudyEnum.LMS:
+      case StudyName.LMS:
         name = 'LMS';
         break;
       default:

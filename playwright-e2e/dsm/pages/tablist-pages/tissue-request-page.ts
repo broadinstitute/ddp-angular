@@ -1,7 +1,7 @@
 import { expect, Locator, Page } from '@playwright/test';
 import DatePicker from 'dsm/component/date-picker';
 import { waitForResponse } from 'utils/test-utils';
-import { FillDate } from 'dsm/pages/models/input-interface';
+import { FillDate } from 'dsm/component/models/tissue-inputs-interface';
 import Select from 'dss/component/select';
 import TextArea from 'dss/component/textarea';
 import Tissue from 'dsm/component/tissue';

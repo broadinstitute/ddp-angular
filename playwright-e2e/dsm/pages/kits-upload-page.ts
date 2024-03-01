@@ -1,15 +1,15 @@
 import {expect, Locator, Page, Response} from '@playwright/test';
 import {waitForNoSpinner, waitForResponse} from 'utils/test-utils';
 import {createTextFileSync, deleteFileSync} from 'utils/file-utils';
-import {KitUploadInfo} from 'dsm/pages/kitUpload-page/models/kitUpload-model';
-import {StudyEnum} from 'dsm/component/navigation/enums/selectStudyNav-enum';
+import {KitUploadInfo} from 'dsm/pages/models/kit-upload-model';
 import path from 'path';
 import Modal from 'dsm/component/modal';
 import {logInfo} from 'utils/log-utils';
 import KitsPageBase from 'dsm/pages/kits-page-base';
 import { KitType } from 'dsm/enums';
+import { StudyName } from 'dsm/navigation';
 
-export default class KitUploadPage extends KitsPageBase {
+export default class KitsUploadPage extends KitsPageBase {
   TABLE_HEADERS = []; // no table in this page
   protected PAGE_TITLE = 'Kit Upload';
   private readonly T_HEAD = 'shortId\tfirstName\tlastName\tstreet1\tstreet2\tcity\tpostalCode\tstate\tcountry';
@@ -31,7 +31,7 @@ export default class KitUploadPage extends KitsPageBase {
     return super.selectKitType(kitType, { waitForResp: 'undefined' });
   }
 
-  public async uploadFile(kitType: KitType, kitInfo: KitUploadInfo[], study: StudyEnum, testResultDir?: string) {
+  public async uploadFile(kitType: KitType, kitInfo: KitUploadInfo[], study: StudyName, testResultDir?: string) {
     await expect(this.uploadKitsBtn, 'Kit Upload page - Upload Kits button should be disabled.').not.toBeEnabled();
 
     // Prepare upload file

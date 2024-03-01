@@ -8,7 +8,7 @@ export enum SearchByField {
   MANUFACTURE_BARCODE = 'Manufacturer Barcode'
 }
 
-export default class ErrorPage extends KitsPageBase {
+export default class KitsWithErrorPage extends KitsPageBase {
   protected PAGE_TITLE = 'Kits with Error';
   TABLE_HEADERS = [
     Label.PRINT_KIT,

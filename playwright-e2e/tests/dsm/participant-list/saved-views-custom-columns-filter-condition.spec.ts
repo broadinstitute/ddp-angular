@@ -1,13 +1,13 @@
 import { expect } from '@playwright/test';
 import { testWithUser2 as test } from 'fixtures/dsm-fixture';
 import { DataFilter, CustomizeView, Label } from 'dsm/enums';
-import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
 import { offsetDaysFromToday } from 'utils/date-utils';
 import crypto from 'crypto';
+import { StudyName } from 'dsm/navigation';
 
 test.describe('Participants List Search with Filtering Condition', () => {
-  const studies = [StudyEnum.LMS, StudyEnum.OSTEO2];
+  const studies = [StudyName.LMS, StudyName.OSTEO2];
 
   for (const study of studies) {
     test(`Save Current View @dsm @${study}`, async ({ page, request }) => {

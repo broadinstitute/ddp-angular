@@ -2,13 +2,12 @@ import { Locator, Page, expect } from '@playwright/test';
 import DsmPageBase from './dsm-page-base';
 import { KitsTable } from 'dsm/component/tables/kits-table';
 import { waitForNoSpinner, waitForResponse } from 'utils/test-utils';
-import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import { logInfo } from 'utils/log-utils';
 import Modal from 'dsm/component/modal';
 import { getDate, getDateMonthAbbreviated, offsetDaysFromDate } from 'utils/date-utils';
-import { SamplesNavEnum } from 'dsm/component/navigation/enums/samplesNav-enum';
 import Checkbox from 'dss/component/checkbox';
 import { KitType, Label } from 'dsm/enums';
+import { Samples, StudyName } from 'dsm/navigation';
 
 export default abstract class KitsPageBase extends DsmPageBase {
   protected abstract TABLE_HEADERS: string[];
@@ -141,18 +140,18 @@ export default abstract class KitsPageBase extends DsmPageBase {
     return null;
   }
 
-  public async getStudyKitTypes(studyName?: StudyEnum): Promise<KitType[]> {
+  public async getStudyKitTypes(studyName?: StudyName): Promise<KitType[]> {
     if (!studyName) {
       const studyNameLocation = this.page.locator(`//app-navigation//a[@data-toggle='dropdown']//i`);
-      studyName = await studyNameLocation.innerText() as StudyEnum;
+      studyName = await studyNameLocation.innerText() as StudyName;
     }
     // Most studies have Blood and Saliva kits; RGP has Blood and 'Blood & RNA' kits; Pancan has Blood, Saliva, and Stool kits
     let kitTypes;
     switch (studyName) {
-      case StudyEnum.RGP:
+      case StudyName.RGP:
         kitTypes = [KitType.BLOOD, KitType.BLOOD_AND_RNA];
         break;
-      case StudyEnum.PANCAN:
+      case StudyName.PANCAN:
         kitTypes = [KitType.BLOOD, KitType.SALIVA, KitType.STOOL];
         break;
       default:
@@ -236,7 +235,7 @@ export default abstract class KitsPageBase extends DsmPageBase {
    * @param currentPage The current page being checked
    * @returns Array of locators that have the mf barcode
    */
-  public async getMFBarcodesSince(sinceDay: string, currentPage: SamplesNavEnum.SENT | SamplesNavEnum.RECEIVED):Promise<Locator[]> {
+  public async getMFBarcodesSince(sinceDay: string, currentPage: Samples.SENT | Samples.RECEIVED):Promise<Locator[]> {
     const today = getDate();
     let currentDay = (new Date()).getTime(); //Get today's date in milliseconds for comparison
     const earliestDate = (new Date(sinceDay)).getTime(); //Get earliest requested date in milliseconds for comparison
@@ -263,14 +262,14 @@ export default abstract class KitsPageBase extends DsmPageBase {
   }
 
   private getMFBarcodeLocatorString(
-    currentPage: SamplesNavEnum.SENT | SamplesNavEnum.RECEIVED,
+    currentPage: Samples.SENT | Samples.RECEIVED,
     day: string): string {
     let result = '';
     switch (currentPage) {
-      case SamplesNavEnum.SENT:
+      case Samples.SENT:
         result = `//table//td[${this.sentColumnIndex}][contains(.,'${day}')]/following-sibling::td[${this.mfBarcodeIndex}]`;
         break;
-      case SamplesNavEnum.RECEIVED:
+      case Samples.RECEIVED:
         result = `//table//td[${this.receivedColumnIndex}][contains(.,'${day}')]/following-sibling::td[${this.mfBarcodeIndex}]`;
         break;
       default:

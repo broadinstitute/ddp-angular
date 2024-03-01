@@ -1,12 +1,12 @@
 import { expect } from '@playwright/test';
 import { test } from 'fixtures/dsm-fixture';
-import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
+import { StudyName } from 'dsm/navigation';
 
 test.describe('Display of Participants List Filter', () => {
-  const cmiClinicalStudies = [StudyEnum.LMS, StudyEnum.OSTEO2];
-  const cmiResearchStudies = [StudyEnum.BRAIN, StudyEnum.PANCAN];
-  const cmiResearchStudies2 = [StudyEnum.ANGIO, StudyEnum.ESC, StudyEnum.MBC, StudyEnum.PROSTATE];
+  const cmiClinicalStudies = [StudyName.LMS, StudyName.OSTEO2];
+  const cmiResearchStudies = [StudyName.BRAIN, StudyName.PANCAN];
+  const cmiResearchStudies2 = [StudyName.ANGIO, StudyName.ESC, StudyName.MBC, StudyName.PROSTATE];
 
   for (const study of cmiClinicalStudies.concat(cmiResearchStudies).concat(cmiResearchStudies2)) {
     test(`Status is displayed for every participant @${study} @dsm`, async ({ page, request }) => {

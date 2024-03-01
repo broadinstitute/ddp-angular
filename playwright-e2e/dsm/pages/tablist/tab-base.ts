@@ -5,7 +5,7 @@ export default abstract class TabBase {
   constructor(protected readonly page: Page, protected readonly tab: Tab) {
   }
 
-  public get rootLocator(): Locator {
+  public get toLocator(): Locator {
     return this.page.locator(`//tabset//tab[normalize-space(@heading)="${this.tab}"]`);
   }
 }

@@ -1,9 +1,7 @@
 import { expect } from '@playwright/test';
 import { test } from 'fixtures/dsm-fixture';
-import { SamplesNavEnum } from 'dsm/component/navigation/enums/samplesNav-enum';
-import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
-import { Navigation } from 'dsm/component/navigation/navigation';
-import KitsWithoutLabelPage from 'dsm/pages/kitsInfo-pages/kitsWithoutLabel-page';
+import { Navigation, Samples, StudyName } from 'dsm/navigation';
+import KitsWithoutLabelPage from 'dsm/pages/kits-without-label-page';
 import { WelcomePage } from 'dsm/pages/welcome-page';
 import { logInfo } from 'utils/log-utils';
 import { KitsTable } from 'dsm/component/tables/kits-table';
@@ -11,7 +9,7 @@ import { KitType, Label } from 'dsm/enums';
 
 // don't run in parallel
 test.describe.serial('Kit Deactivation', () => {
-  const studies = [StudyEnum.LMS, StudyEnum.RGP];
+  const studies = [StudyName.LMS, StudyName.RGP];
 
   for (const study of studies) {
     test(`From Kits Without Label page @dsm @${study} @kit`, async ({ page, request }) => {
@@ -27,7 +25,7 @@ test.describe.serial('Kit Deactivation', () => {
       let kitsTable: KitsTable;
 
       await test.step('Deactivate and verify', async () => {
-        kitsWithoutLabelPage = await navigation.selectFromSamples<KitsWithoutLabelPage>(SamplesNavEnum.KITS_WITHOUT_LABELS);
+        kitsWithoutLabelPage = await navigation.selectFromSamples<KitsWithoutLabelPage>(Samples.KITS_WITHOUT_LABELS);
         await kitsWithoutLabelPage.waitForReady();
         kitsTable = kitsWithoutLabelPage.getKitsTable;
         kits = await kitsWithoutLabelPage.getStudyKitTypes();

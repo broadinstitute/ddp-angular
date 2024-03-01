@@ -1,4 +1,3 @@
-import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import { test } from 'fixtures/dsm-fixture';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
 import { CustomizeView, DataFilter, Label, Tab } from 'dsm/enums';
@@ -9,9 +8,10 @@ import { faker } from '@faker-js/faker';
 import Input from 'dss/component/input';
 import { waitForResponse } from 'utils/test-utils';
 import OncHistoryTable from 'dsm/component/tables/onc-history-table';
+import { StudyName } from 'dsm/navigation';
 
 test.describe.serial('Onc History', () => {
-  const studies = [StudyEnum.PANCAN];
+  const studies = [StudyName.PANCAN];
 
   let shortID: string;
 
@@ -67,7 +67,7 @@ test.describe.serial('Onc History', () => {
               }
             }
           }, lastRow);
-      await oncHistoryTable.fillField(Label.FACILITY, { value: newFacilityName, lookupSelectIndex: -1 }, lastRow);
+      await oncHistoryTable.fillField(Label.FACILITY, { inputValue: newFacilityName, lookupIndex: -1 }, lastRow);
       const actualFacilityValue = await oncHistoryTable.getFieldValue(Label.FACILITY, lastRow);
       expect(actualFacilityValue).toStrictEqual(newFacilityName);
 

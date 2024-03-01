@@ -11,7 +11,7 @@ export default class OncHistoryTab extends TabBase {
 
   constructor(page: Page) {
     super(page, Tab.ONC_HISTORY);
-    this.oncHistoryTable = new OncHistoryTable(this.page, `${this.rootLocator}//app-onc-history-detail`);
+    this.oncHistoryTable = new OncHistoryTable(this.page, `${this.toLocator}//app-onc-history-detail`);
   }
 
   public get table(): OncHistoryTable {
@@ -98,11 +98,11 @@ export default class OncHistoryTab extends TabBase {
 
   /* Locators */
   private get downloadPDFBundleButton(): Locator {
-    return this.rootLocator.getByRole('button', { name: 'Download PDF Bundle' });
+    return this.toLocator.getByRole('button', { name: 'Download PDF Bundle' });
   }
 
   private get downloadRequestDocumentsButton(): Locator {
-    return this.rootLocator.getByRole('button', { name: 'Download Request Documents' });
+    return this.toLocator.getByRole('button', { name: 'Download Request Documents' });
   }
 
   private filesOrderModalBodyContent(name: string): Locator {

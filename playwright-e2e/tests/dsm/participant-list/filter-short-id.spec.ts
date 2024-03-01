@@ -1,12 +1,12 @@
 import { expect } from '@playwright/test';
 import { test } from 'fixtures/dsm-fixture';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
-import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import { studyShortName } from 'utils/test-utils';
 import { Label } from 'dsm/enums';
+import { StudyName } from 'dsm/navigation';
 
 test.describe('Participants Search', () => {
-  const studies = [StudyEnum.LMS, StudyEnum.OSTEO2];
+  const studies = [StudyName.LMS, StudyName.OSTEO2];
 
   for (const study of studies) {
     test(`Search by Short ID @dsm @${study}`, async ({ page, request }) => {

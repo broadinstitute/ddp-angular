@@ -12,7 +12,7 @@ export enum SearchByField {
   MANUFACTURE_BARCODE = 'Manufacturer Barcode'
 }
 
-export default class SearchPage extends KitsPageBase {
+export default class KitsSearchPage extends KitsPageBase {
   protected PAGE_TITLE = 'Kit Search';
   protected TABLE_HEADERS = [
     Label.DDP_REALM,

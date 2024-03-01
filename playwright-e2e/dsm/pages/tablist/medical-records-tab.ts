@@ -8,7 +8,7 @@ export default class MedicalRecordsTab extends TabBase {
 
   constructor(page: Page) {
     super(page, Tab.MEDICAL_RECORD);
-    this.medicalRecordsTable = new MedicalRecordsTable(this.page, this.rootLocator);
+    this.medicalRecordsTable = new MedicalRecordsTable(this.page, this.toLocator);
   }
 
   public get table(): MedicalRecordsTable {

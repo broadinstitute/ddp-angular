@@ -1,13 +1,13 @@
 import { expect } from '@playwright/test';
+import { StudyName } from 'dsm/navigation';
 import { CustomizeView, Label } from 'dsm/enums';
-import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
 import { test } from 'fixtures/dsm-fixture';
 import { getDate, getToday } from 'utils/date-utils';
 import { logInfo } from 'utils/log-utils';
 
 test.describe('DSM Date Picker', () => {
-  const study = StudyEnum.ANGIO;
+  const study = StudyName.ANGIO;
   const dobColumn = 'Date of Birth';
   // DoB is 12/20/1995
   const dob = {

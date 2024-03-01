@@ -11,12 +11,10 @@ export const COLUMN = {
 
 export default class MailingListPage extends DsmPageBase {
   protected PAGE_TITLE = 'Mailing List';
-  private readonly title: string | RegExp;
   readonly downloadButton: Locator;
 
-  constructor(page: Page, study: string|RegExp) {
+  constructor(page: Page) {
     super(page);
-    this.title = study;
     this.downloadButton = this.page.getByRole('button', { name: 'Download mailing list' })
   }
 
@@ -26,7 +24,6 @@ export default class MailingListPage extends DsmPageBase {
 
   public async waitForReady(): Promise<void> {
     await super.waitForReady();
-    await expect(this.page).toHaveTitle(this.title);
     await expect(this.downloadButton).toBeVisible();
   }
 

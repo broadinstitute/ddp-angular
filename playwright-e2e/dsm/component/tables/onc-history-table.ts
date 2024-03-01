@@ -6,16 +6,12 @@ import {
   InputTypeEnum,
   OncHistorySelectRequestEnum
 } from 'dsm/component/tabs/enums/onc-history-input-columns-enum';
-import { OncHistoryInputs } from 'dsm/component/tabs/model/onc-history-inputs';
-import {
-  OncHistoryInputsMapValue,
-  OncHistoryInputsTypes
-} from 'dsm/component/tabs/interfaces/onc-history-inputs-types';
+import { OncHistoryInputs } from 'dsm/component/models/onc-history-inputs';
 import { waitForResponse } from 'utils/test-utils';
 import Select from 'dss/component/select';
 import TissueRequestPage from 'dsm/pages/tablist-pages/tissue-request-page';
 import Button from 'dss/component/button';
-import { FillDate } from 'dsm/pages/models/input-interface';
+import { FillDate, FillInMap, InputTypeMap } from 'dsm/component/models/tissue-inputs-interface';
 import Input from 'dss/component/input';
 import Checkbox from 'dss/component/checkbox';
 import { Label } from 'dsm/enums';
@@ -51,9 +47,7 @@ export default class OncHistoryTable extends Table {
 
   public async getFieldValue(columnName: Label, rowIndex = 0): Promise<string> {
     const cell = await this.checkColumnAndCellValidity(columnName, rowIndex);
-    const {
-      type: inputType,
-    }: OncHistoryInputsMapValue = OncHistoryInputs.get(columnName) as OncHistoryInputsMapValue;
+    const { inputType }: InputTypeMap = OncHistoryInputs.get(columnName) as InputTypeMap;
 
     let value: Promise<any>;
     switch (inputType) {
@@ -95,16 +89,16 @@ export default class OncHistoryTable extends Table {
 
   public async fillField(columnName: Label, {
     date,
-    select,
-    value,
-    lookupSelectIndex
-  }: OncHistoryInputsTypes, rowIndex = 0): Promise<void> {
+    selection: select,
+    inputValue,
+    lookupIndex
+  }: FillInMap, rowIndex = 0): Promise<void> {
     const cell = await this.checkColumnAndCellValidity(columnName, rowIndex);
 
     const {
-      type: inputType,
+      inputType,
       hasLookup
-    }: OncHistoryInputsMapValue = OncHistoryInputs.get(columnName) as OncHistoryInputsMapValue;
+    }: InputTypeMap = OncHistoryInputs.get(columnName) as InputTypeMap;
 
     switch (inputType) {
       case InputTypeEnum.DATE: {
@@ -112,11 +106,11 @@ export default class OncHistoryTable extends Table {
         break;
       }
       case InputTypeEnum.INPUT: {
-        await this.fillInput(cell, String(value), hasLookup, lookupSelectIndex);
+        await this.fillInput(cell, String(inputValue), hasLookup, lookupIndex);
         break;
       }
       case InputTypeEnum.TEXTAREA: {
-        await this.fillTextArea(cell, String(value), hasLookup, lookupSelectIndex);
+        await this.fillTextArea(cell, String(inputValue), hasLookup, lookupIndex);
         break;
       }
       case InputTypeEnum.SELECT: {

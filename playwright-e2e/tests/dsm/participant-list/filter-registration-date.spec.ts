@@ -3,12 +3,12 @@ import { test } from 'fixtures/dsm-fixture';
 import { CustomizeView, DataFilter, Label } from 'dsm/enums';
 import { SortOrder } from 'dss/component/table';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
-import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import { getDate, offsetDaysFromDate, offsetDaysFromToday } from 'utils/date-utils';
 import { logInfo } from 'utils/log-utils';
+import { StudyName } from 'dsm/navigation';
 
 test.describe.serial('Participants Search', () => {
-  const studies = [StudyEnum.LMS, StudyEnum.OSTEO2];
+  const studies = [StudyName.LMS, StudyName.OSTEO2];
 
   for (const study of studies) {
     test(`Search by Registration Date @dsm @${study}`, async ({ page, request }) => {

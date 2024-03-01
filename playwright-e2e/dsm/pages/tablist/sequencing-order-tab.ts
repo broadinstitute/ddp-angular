@@ -1,23 +1,25 @@
 import { Locator, Page, expect } from '@playwright/test';
 import { getDate } from 'utils/date-utils';
+import TabBase from './tab-base';
+import { Tab } from 'dsm/enums';
 
-export default class SequeuncingOrderTab {
+export default class SequeuncingOrderTab extends TabBase {
   private readonly SAMPLE_ROW_XPATH = '//app-sequencing-order//tr';
   private readonly DATE_FIELD_XPATH = `//input[@data-placeholder='mm/dd/yyyy']`;
 
-  constructor(private readonly page: Page) {
+  constructor(page: Page) {
+    super(page, Tab.SEQUENCING_ORDER);
   }
 
   /* Actions */
 
   public async waitForReady(): Promise<void> {
-    const sequencingTab = this.page.locator(`//tab[@heading='Sequencing Order']`);
-    await sequencingTab.scrollIntoViewIfNeeded();
-    await expect(sequencingTab, 'The Sequencing Tab is not currently active').toHaveClass(/active/);
+    await this.toLocator.scrollIntoViewIfNeeded();
+    await expect(this.toLocator, 'The Sequencing Tab is not currently active').toHaveClass(/active/);
   }
 
   public async placeOrder(): Promise<void> {
-    const placeOrderButton = this.page.getByRole('button', { name: 'Place order' });
+    const placeOrderButton = this.toLocator.getByRole('button', { name: 'Place order' });
     await placeOrderButton.scrollIntoViewIfNeeded();
     await placeOrderButton.click();
   }
@@ -84,7 +86,7 @@ export default class SequeuncingOrderTab {
   }
 
   public getPlaceOrderButton(): Locator {
-    return this.page.getByRole('button', { name: 'Place order' });
+    return this.toLocator.getByRole('button', { name: 'Place order' });
   }
 
   private getCheckboxOfSample(sample: Locator): Locator {

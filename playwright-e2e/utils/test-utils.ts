@@ -1,11 +1,11 @@
 import { BrowserContext, Download, errors, expect, Locator, Page, Response } from '@playwright/test';
-import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import Input from 'dss/component/input';
 import Checkbox from 'dss/component/checkbox';
 import Select from 'dss/component/select';
 import axios from 'axios';
 import { logError } from './log-utils';
 import { ResponsePayload } from 'dsm/enums';
+import { StudyName } from 'dsm/navigation';
 
 export interface WaitForResponse {
   uri: string;
@@ -209,10 +209,10 @@ export function assertParticipantListDownloadFileName(download: Download, study:
   const actualFileName = download.suggestedFilename();
   let name;
   switch (study) {
-    case StudyEnum.OSTEO2:
+    case StudyName.OSTEO2:
       name = 'osteo2';
       break;
-    case StudyEnum.LMS:
+    case StudyName.LMS:
       name = 'cmi-lms';
       break;
     default:
@@ -222,7 +222,7 @@ export function assertParticipantListDownloadFileName(download: Download, study:
   expect(actualFileName.toLowerCase()).toBe(expectedFileName.toLowerCase());
 }
 
-export function studyShortName(study: StudyEnum): {
+export function studyShortName(study: StudyName): {
   shortName: string | null;
   realm: string | null;
   collaboratorPrefix: string | null;
@@ -235,66 +235,66 @@ export function studyShortName(study: StudyEnum): {
   let playwrightPrefixAdult = null;
   let playwrightPrefixChild = null;
   switch (study) {
-    case StudyEnum.LMS:
+    case StudyName.LMS:
       shortName = 'cmi-lms';
       realm = 'cmi-lms';
       collaboratorPrefix = 'PECGSProject';
       break;
-    case StudyEnum.OSTEO:
+    case StudyName.OSTEO:
       shortName = 'cmi-osteo';
       realm = 'Osteo';
       collaboratorPrefix = 'OSProject';
       break;
-    case StudyEnum.OSTEO2:
+    case StudyName.OSTEO2:
       shortName = 'cmi-osteo';
       realm = 'osteo2';
       collaboratorPrefix = 'OSPECGS';
       playwrightPrefixAdult = 'OS';
       playwrightPrefixChild = 'KidFirst';
       break;
-    case StudyEnum.AT:
+    case StudyName.AT:
       shortName = 'AT';
       realm = 'atcp';
       break;
-    case StudyEnum.PANCAN:
+    case StudyName.PANCAN:
       shortName = 'cmi-pancan';
       realm = 'PanCan';
       collaboratorPrefix = 'Project';
       break;
-    case StudyEnum.RAREX:
+    case StudyName.RAREX:
       shortName = 'rarex';
       realm = 'RareX';
       break;
-    case StudyEnum.MBC:
+    case StudyName.MBC:
       shortName = 'cmi-mbc';
       realm = 'Pepper-MBC';
       collaboratorPrefix = 'MBCProject';
       break;
-    case StudyEnum.BRAIN:
+    case StudyName.BRAIN:
       shortName = 'cmi-brain';
       realm = 'Brain';
       collaboratorPrefix = 'BrainProject';
       break;
-    case StudyEnum.ANGIO:
+    case StudyName.ANGIO:
       shortName = 'angio';
       realm = dsmEnv === 'dsm-test' ? 'Pepper-Angio' : 'Angio';
       collaboratorPrefix = 'Project Pepper';
       break;
-    case StudyEnum.PROSTATE:
+    case StudyName.PROSTATE:
       shortName = 'cmi-mpc';
       realm = 'Prostate';
       collaboratorPrefix = 'PCProject';
       break;
-    case StudyEnum.ESC:
+    case StudyName.ESC:
       shortName = 'cmi-esc';
       realm = 'GEC';
       collaboratorPrefix = 'GECProject';
       break;
-    case StudyEnum.BASIL:
+    case StudyName.BASIL:
       shortName = 'basil';
       realm = 'BASIL';
       break;
-    case StudyEnum.RGP:
+    case StudyName.RGP:
       shortName = 'rgp';
       realm = 'RGP';
       break;
@@ -304,18 +304,18 @@ export function studyShortName(study: StudyEnum): {
   return { shortName, realm, collaboratorPrefix, playwrightPrefixAdult, playwrightPrefixChild };
 }
 
-export function isCMIStudy(study: StudyEnum): boolean {
-  return (study === StudyEnum.ANGIO) ||
-  (study === StudyEnum.BRAIN) ||
-  (study === StudyEnum.ESC) ||
-  (study === StudyEnum.MBC) ||
-  (study === StudyEnum.OSTEO) ||
-  (study === StudyEnum.PANCAN) ||
-  (study === StudyEnum.PROSTATE);
+export function isCMIStudy(study: StudyName): boolean {
+  return (study === StudyName.ANGIO) ||
+  (study === StudyName.BRAIN) ||
+  (study === StudyName.ESC) ||
+  (study === StudyName.MBC) ||
+  (study === StudyName.OSTEO) ||
+  (study === StudyName.PANCAN) ||
+  (study === StudyName.PROSTATE);
 }
 
-export function isPECGSStudy(study: StudyEnum): boolean {
-  return (study === StudyEnum.OSTEO2) || (study === StudyEnum.LMS);
+export function isPECGSStudy(study: StudyName): boolean {
+  return (study === StudyName.OSTEO2) || (study === StudyName.LMS);
 }
 
 export function shuffle(array: any[]): any[] {

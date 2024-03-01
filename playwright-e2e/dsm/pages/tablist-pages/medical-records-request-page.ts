@@ -2,7 +2,7 @@ import { Download, expect, Locator, Page } from '@playwright/test';
 import { waitForNoSpinner, waitForResponse } from 'utils/test-utils';
 import { Label } from 'dsm/enums';
 import Input from 'dss/component/input';
-import { FillDate } from 'dsm/pages/models/input-interface';
+import { FillDate } from 'dsm/component/models/tissue-inputs-interface';
 import DatePicker from 'dsm/component/date-picker';
 import Checkbox from 'dss/component/checkbox';
 import Select from 'dss/component/select';

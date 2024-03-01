@@ -4,15 +4,15 @@ import TextArea from 'dss/component/textarea';
 import {
   FillDate,
   FillInMap,
-  InputMap
-} from 'dsm/pages/models/input-interface';
+  InputTypeMap
+} from 'dsm/component/models/tissue-inputs-interface';
 import Select from 'dss/component/select';
 import DatePicker from './date-picker';
 import Input from 'dss/component/input';
-import { tissueInputs } from 'dsm/pages/models/tissue-inputs';
-import { InputTypeEnum } from './tabs/enums/onc-history-input-columns-enum';
+import { TissueInputs } from 'dsm/component/models/tissue-inputs';
+import { InputTypeEnum, OncHistorySelectRequestEnum } from './tabs/enums/onc-history-input-columns-enum';
 import Button from 'dss/component/button';
-import SMID from './smid';
+import SMID from './sm-id';
 import { Label, SM_ID, TissueType } from 'dsm/enums';
 
 
@@ -50,9 +50,9 @@ export default class Tissue {
 
   public async getFieldValue(dynamicField: Label): Promise<string> {
     const {
-      type: inputType,
+      inputType,
       byText
-    } = tissueInputs.get(dynamicField) as InputMap;
+    } = TissueInputs.get(dynamicField) as InputTypeMap;
 
     let value: Promise<any>;
     const inputLocator = await this.getField(dynamicField, byText);
@@ -87,22 +87,23 @@ export default class Tissue {
 
   public async fillField(dynamicField: Label, {
     inputValue,
-    select,
-    dates
+    lookupIndex,
+    selection: select,
+    date
   }: FillInMap): Promise<void> {
     const {
-      type: inputType,
-      hasLookup,
-      byText
-    } = tissueInputs.get(dynamicField) as InputMap;
+      inputType,
+      byText,
+      hasLookup
+    } = TissueInputs.get(dynamicField) as InputTypeMap;
 
     switch (inputType) {
       case InputTypeEnum.DATE: {
-        dates && await this.fillDateFields(dynamicField, dates);
+        date && await this.fillDateFields(dynamicField, date);
         break;
       }
       case InputTypeEnum.INPUT: {
-        inputValue && await this.fillInputField(dynamicField, inputValue, byText, hasLookup);
+        inputValue && await this.fillInputField(dynamicField, inputValue, byText, hasLookup, lookupIndex);
         break;
       }
       case InputTypeEnum.TEXTAREA: {
@@ -158,7 +159,7 @@ export default class Tissue {
   }
 
   private async selectField(dynamicField: Label,
-    selection: TumorTypesEnum | TissueType | SequencingResultsEnum | 'Yes' | 'No')
+    selection: TumorTypesEnum | TissueType | SequencingResultsEnum | OncHistorySelectRequestEnum | 'Yes' | 'No')
     : Promise<void> {
     const selectLocator = await this.getField(dynamicField);
     const selectElement = new Select(this.page, { root: selectLocator });
@@ -172,7 +173,7 @@ export default class Tissue {
     }
   }
 
-  private async fillInputField(dynamicField: Label, value: string | number, byText = false, hasLookup = false): Promise<void> {
+  private async fillInputField(dynamicField: Label, value: string | number, byText = false, hasLookup = false, lookupIndex = 0): Promise<void> {
     const inputLocator = await this.getField(dynamicField, byText);
     const inputElement = new Input(this.page, { root: inputLocator });
     const currentValue = await this.getCurrentValue(dynamicField, inputElement);
@@ -193,7 +194,7 @@ export default class Tissue {
         waitForResponse(this.page, { uri: 'patch' }),
         inputElement.fillSimple(actualValue)
       ]);
-      hasLookup && await this.lookup();
+      hasLookup && await this.lookup(lookupIndex);
     }
   }
 

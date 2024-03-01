@@ -1,4 +1,3 @@
-import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import { test } from 'fixtures/dsm-fixture';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
 import { CustomizeView, DataFilter, Label, Tab } from 'dsm/enums';
@@ -8,9 +7,10 @@ import { expect } from '@playwright/test';
 import { getToday } from 'utils/date-utils';
 import { logInfo } from 'utils/log-utils';
 import { OncHistorySelectRequestEnum } from 'dsm/component/tabs/enums/onc-history-input-columns-enum';
+import { StudyName } from 'dsm/navigation';
 
 test.describe.serial('Tissue Request Flow', () => {
-  const studies = [StudyEnum.PANCAN];
+  const studies = [StudyName.PANCAN];
 
   for (const study of studies) {
     test(`Tissue Request Flow for ${study} study @dsm @feature`, async ({ page, request }) => {
@@ -49,7 +49,7 @@ test.describe.serial('Tissue Request Flow', () => {
       const oncHistoryTable = oncHistoryTab.table;
 
       await test.step('Update Onc History data - Facility', async () => {
-        await oncHistoryTable.fillField(Label.FACILITY, { value: 'm', lookupSelectIndex: 1 });
+        await oncHistoryTable.fillField(Label.FACILITY, { inputValue: 'm', lookupIndex: 1 });
       });
 
       await test.step('Automatically updated Onc History Created date', async () => {
@@ -79,11 +79,11 @@ test.describe.serial('Tissue Request Flow', () => {
       });
 
       await test.step('Update Onc History data - Type of PX', async () => {
-        await oncHistoryTable.fillField(Label.TYPE_OF_PX, { value: 'a', lookupSelectIndex: 4 });
+        await oncHistoryTable.fillField(Label.TYPE_OF_PX, { inputValue: 'a', lookupIndex: 4 });
       });
 
       await test.step('Update Onc History data - Request', async () => {
-        await oncHistoryTable.fillField(Label.REQUEST, { select: OncHistorySelectRequestEnum.REQUEST });
+        await oncHistoryTable.fillField(Label.REQUEST, { selection: OncHistorySelectRequestEnum.REQUEST });
       });
 
       await test.step('Clicking Download PDF Bundle', async () => {

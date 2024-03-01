@@ -1,12 +1,12 @@
 import { expect } from '@playwright/test';
 import { test } from 'fixtures/dsm-fixture';
 import { DataFilter, CustomizeView, Tab, Label } from 'dsm/enums';
-import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
 import { studyShortName } from 'utils/test-utils';
 import { logInfo } from 'utils/log-utils';
 import ParticipantPage from 'dsm/pages/participant-page';
 import OncHistoryTab from 'dsm/pages/tablist/onc-history-tab';
+import { StudyName } from 'dsm/navigation';
 
 /**
   * Collaborator Prefixes per study:
@@ -21,7 +21,7 @@ import OncHistoryTab from 'dsm/pages/tablist/onc-history-tab';
  * DSM should show the correct tumor id for the selected pt: [COLLABORATOR_PREFIX]_[SHORT_ID]_*
  */
 test.describe('Tumor Collaborator Sample ID', () => {
-  const studies: StudyEnum[] = [StudyEnum.MBC];
+  const studies: StudyName[] = [StudyName.MBC];
 
   for (const study of studies) {
     test(`Search by tumor sample id for legacy participant @dsm @${study}`, async ({ page, request }) => {

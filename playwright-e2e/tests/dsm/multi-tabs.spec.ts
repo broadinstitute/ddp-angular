@@ -1,9 +1,7 @@
 import { test, expect, Page, APIRequestContext } from '@playwright/test';
 import { login } from 'authentication/auth-dsm';
 import { CustomizeView, DataFilter, Label, Tab } from 'dsm/enums';
-import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
-import { StudyNavEnum } from 'dsm/component/navigation/enums/studyNav-enum';
-import { Navigation } from 'dsm/component/navigation/navigation';
+import { Navigation, Study, StudyName } from 'dsm/navigation';
 import OncHistoryTab from 'dsm/pages/tablist/onc-history-tab';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
 import ParticipantPage from 'dsm/pages/participant-page';
@@ -15,8 +13,8 @@ import { studyShortName } from 'utils/test-utils';
 const { DSM_USER_EMAIL, DSM_USER_PASSWORD } = process.env;
 
 test('Multiple browser tabs @dsm', async ({ browser, request }) => {
-  const pancan = StudyEnum.PANCAN;
-  const angio = StudyEnum.ANGIO;
+  const pancan = StudyName.PANCAN;
+  const angio = StudyName.ANGIO;
 
   // Create two pages in same browser
   const browserContext = await browser.newContext();
@@ -87,7 +85,7 @@ async function findAdultParticipantShortId(participantListPage: ParticipantListP
   });
 }
 
-async function addOncHistory(page: Page, shortID: string, participantListPage: ParticipantListPage, study: StudyEnum): Promise<void> {
+async function addOncHistory(page: Page, shortID: string, participantListPage: ParticipantListPage, study: StudyName): Promise<void> {
   const realm = studyShortName(study).realm;
   await test.step(`Add Onc history for study ${study}`, async () => {
     await page.bringToFront();
@@ -118,12 +116,12 @@ async function addOncHistory(page: Page, shortID: string, participantListPage: P
   });
 }
 
-async function logIntoStudy(page: Page, request: APIRequestContext, study: StudyEnum): Promise<ParticipantListPage> {
+async function logIntoStudy(page: Page, request: APIRequestContext, study: StudyName): Promise<ParticipantListPage> {
   return await test.step(`Log into study ${study}`, async () => {
     await page.bringToFront();
     await login(page, { email: DSM_USER_EMAIL, password: DSM_USER_PASSWORD });
     await new WelcomePage(page).selectStudy(study);
-    const participantListPage = await new Navigation(page, request).selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
+    const participantListPage = await new Navigation(page, request).selectFromStudy<ParticipantListPage>(Study.PARTICIPANT_LIST);
     await participantListPage.waitForReady();
     const [pancanRealm] = await participantListPage.participantListTable.getTextAt(0, Label.DDP);
     expect(pancanRealm).toStrictEqual(studyShortName(study).shortName);

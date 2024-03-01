@@ -1,7 +1,6 @@
 import { expect } from '@playwright/test';
 import { test } from 'fixtures/dsm-fixture';
 import { CustomizeView, DataFilter, Label, Tab } from 'dsm/enums';
-import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
 import { studyShortName } from 'utils/test-utils';
 import { logInfo } from 'utils/log-utils';
@@ -9,6 +8,7 @@ import ParticipantPage from 'dsm/pages/participant-page';
 import OncHistoryTab from 'dsm/pages/tablist/onc-history-tab';
 import { OncHistorySelectRequestEnum } from 'dsm/component/tabs/enums/onc-history-input-columns-enum';
 import { SortOrder } from 'dss/component/table';
+import { StudyName } from 'dsm/navigation';
 
 /**
 * Collaborator Prefixes per study:
@@ -33,7 +33,7 @@ import { SortOrder } from 'dss/component/table';
  */
 test.describe.serial('Tumor Collaborator Sample ID', () => {
   // Some studies are excluded due to lack of the suitable paricipants
-  const studies: StudyEnum[] = [StudyEnum.OSTEO2, StudyEnum.PANCAN, StudyEnum.MBC, StudyEnum.BRAIN];
+  const studies: StudyName[] = [StudyName.OSTEO2, StudyName.PANCAN, StudyName.MBC, StudyName.BRAIN];
 
   for (const study of studies) {
     test(`Search by tumor sample id for non-legacy participant @dsm @${study}`, async ({ page, request }) => {
@@ -78,7 +78,7 @@ test.describe.serial('Tumor Collaborator Sample ID', () => {
       const rowIndex = rows - 1; // 0th-index
 
       await test.step('Insert new Onc History data', async () => {
-        await oncHistoryTable.fillField(Label.FACILITY, { value: 'm', lookupSelectIndex: 1 }, rowIndex);
+        await oncHistoryTable.fillField(Label.FACILITY, { inputValue: 'm', lookupIndex: 1 }, rowIndex);
         await oncHistoryTable.fillField(Label.DATE_OF_PX,
           {
             date: {
@@ -89,8 +89,8 @@ test.describe.serial('Tumor Collaborator Sample ID', () => {
               }
             }
           }, rowIndex);
-        await oncHistoryTable.fillField(Label.TYPE_OF_PX, { value: 'a', lookupSelectIndex: 4 }, rowIndex);
-        await oncHistoryTable.fillField(Label.REQUEST, { select: OncHistorySelectRequestEnum.REQUEST }, rowIndex);
+        await oncHistoryTable.fillField(Label.TYPE_OF_PX, { inputValue: 'a', lookupIndex: 4 }, rowIndex);
+        await oncHistoryTable.fillField(Label.REQUEST, { selection: OncHistorySelectRequestEnum.REQUEST }, rowIndex);
       });
 
       await test.step('Check Tumor Collaborator Sample ID on Participant page', async () => {

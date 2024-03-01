@@ -1,14 +1,11 @@
 import { expect } from '@playwright/test';
 import { test } from 'fixtures/dsm-fixture';
-import { SamplesNavEnum } from 'dsm/component/navigation/enums/samplesNav-enum';
-import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
-import { StudyNavEnum } from 'dsm/component/navigation/enums/studyNav-enum';
-import { Navigation } from 'dsm/component/navigation/navigation';
+import { Navigation, Samples, Study, StudyName } from 'dsm/navigation';
 import { CustomizeView, Label, Tab } from 'dsm/enums';
 import GenomeStudyTab from 'dsm/pages/tablist/genome-study-tab';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
 import ParticipantPage from 'dsm/pages/participant-page';
-import AtcpSearchPage, { SearchByField } from 'dsm/pages/samples/search-page';
+import AtcpSearchPage, { SearchByField } from 'dsm/pages/kits-search-page';
 import { WelcomePage } from 'dsm/pages/welcome-page';
 import Radiobutton from 'dss/component/radiobutton';
 import { getUtcDate } from 'utils/date-utils';
@@ -17,7 +14,7 @@ import { studyShortName, waitForNoSpinner, waitForResponse } from 'utils/test-ut
 import { logInfo } from 'utils/log-utils';
 
 test.describe('Receive Genome Study Kit', () => {
-  const studies = [StudyEnum.AT];
+  const studies = [StudyName.AT];
   for (const study of studies) {
     let newBarcode = generateAlphaNumeric().toUpperCase();
 
@@ -35,7 +32,7 @@ test.describe('Receive Genome Study Kit', () => {
 
     test(`Receive genome sample kit for ${study} @dsm @${study} @functional`, async ({page}) => {
       await test.step('Search for the right participant on Participant List page', async () => {
-        participantListPage = await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
+        participantListPage = await navigation.selectFromStudy<ParticipantListPage>(Study.PARTICIPANT_LIST);
         await participantListPage.waitForReady();
 
         const rowIndex = await participantListPage.findParticipantFor(CustomizeView.GENOME_STUDY, Label.SAMPLE_KIT_BARCODE, {nth: 1});
@@ -64,7 +61,7 @@ test.describe('Receive Genome Study Kit', () => {
       });
 
       await test.step('Mark sample kit barcode received', async () => {
-        await navigation.selectFromSamples(SamplesNavEnum.SEARCH);
+        await navigation.selectFromSamples(Samples.SEARCH);
         const atSearchPage = new AtcpSearchPage(page);
         const table = await atSearchPage.searchByField(SearchByField.MANUFACTURE_BARCODE, newBarcode);
 
@@ -83,7 +80,7 @@ test.describe('Receive Genome Study Kit', () => {
       });
 
       await test.step('Verify participant detail has updated on Participant page', async () => {
-        participantListPage = await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
+        participantListPage = await navigation.selectFromStudy<ParticipantListPage>(Study.PARTICIPANT_LIST);
         await participantListPage.waitForReady();
 
         await participantListPage.filterListByShortId(shortId);

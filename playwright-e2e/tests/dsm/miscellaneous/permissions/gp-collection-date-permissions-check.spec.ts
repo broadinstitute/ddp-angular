@@ -1,27 +1,24 @@
 import { Locator, expect } from '@playwright/test';
 import Dropdown from 'dsm/component/dropdown';
-import { MainMenuEnum } from 'dsm/component/navigation/enums/mainMenu-enum';
-import { SamplesNavEnum } from 'dsm/component/navigation/enums/samplesNav-enum';
-import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
-import { Navigation } from 'dsm/component/navigation/navigation';
+import { Menu, Navigation, Samples, StudyName } from 'dsm/navigation';
 import { KitType, Label } from 'dsm/enums';
-import KitsSentPage from 'dsm/pages/kitsInfo-pages/kitsSentPage';
-import SearchPage, { SearchByField } from 'dsm/pages/samples/search-page';
+import KitsSentPage from 'dsm/pages/kits-sent-page';
+import KitsSearchPage, { SearchByField } from 'dsm/pages/kits-search-page';
 import Select from 'dss/component/select';
 import { testGPCollectionDate as test } from 'fixtures/dsm-fixture';
 import { getDate, offsetDaysFromDate } from 'utils/date-utils';
 import { logInfo } from 'utils/log-utils';
 
 test.describe.serial('GP Collection Date Permissions Test', () => {
-  const studies = [StudyEnum.OSTEO2, StudyEnum.LMS];
+  const studies = [StudyName.OSTEO2, StudyName.LMS];
   const expectedKitTypes = [KitType.BLOOD, KitType.SALIVA];
-  const expectedAvailableMenuItems = [MainMenuEnum.SELECTED_STUDY, MainMenuEnum.SAMPLES];
+  const expectedAvailableMenuItems = [Menu.SELECTED_STUDY, Menu.SAMPLES];
   const salivaKitType = KitType.SALIVA; //Saliva kits are usually automatically created, so there'll be more of these to use for testing compared to blood kits
-  const expectedSampleMenuItems = [SamplesNavEnum.UNSENT_KITS_OVERVIEW, SamplesNavEnum.REPORT,
-    SamplesNavEnum.SUMMARY, SamplesNavEnum.KITS_WITHOUT_LABELS, SamplesNavEnum.QUEUE, SamplesNavEnum.ERROR,
-    SamplesNavEnum.INITIAL_SCAN, SamplesNavEnum.TRACKING_SCAN, SamplesNavEnum.FINAL_SCAN, SamplesNavEnum.RGP_FINAL_SCAN,
-    SamplesNavEnum.SENT, SamplesNavEnum.RECEIVED, SamplesNavEnum.SENT_RECEIVED_OVERVIEW,
-    SamplesNavEnum.SEARCH, SamplesNavEnum.LABEL_SETTINGS, SamplesNavEnum.CLINICAL_ORDERS];
+  const expectedSampleMenuItems = [Samples.UNSENT_KITS_OVERVIEW, Samples.REPORT,
+    Samples.SUMMARY, Samples.KITS_WITHOUT_LABELS, Samples.QUEUE, Samples.ERROR,
+    Samples.INITIAL_SCAN, Samples.TRACKING_SCAN, Samples.FINAL_SCAN, Samples.RGP_FINAL_SCAN,
+    Samples.SENT, Samples.RECEIVED, Samples.SENT_RECEIVED_OVERVIEW,
+    Samples.SEARCH, Samples.LABEL_SETTINGS, Samples.CLINICAL_ORDERS];
   let todaysKits: Locator[] = [];
 
   for (const study of studies) {
@@ -49,7 +46,7 @@ test.describe.serial('GP Collection Date Permissions Test', () => {
         * Sent, Received, Sent/Received Overview, Search, Label Settings, Clinical Orders
         */
         const sampleMenu = new Dropdown(page, 'Samples');
-        const availableSampleMenuOptions = await sampleMenu.getDisplayedOptions<SamplesNavEnum>();
+        const availableSampleMenuOptions = await sampleMenu.getDisplayedOptions<Samples>();
         const amountOfSampleMenuOptions = availableSampleMenuOptions.length;
         expect(
           amountOfSampleMenuOptions,
@@ -59,7 +56,7 @@ test.describe.serial('GP Collection Date Permissions Test', () => {
       })
 
       await test.step('Go to Kits Sent page in the Samples menu and select a mf barcode and copy it', async () => {
-        const kitsSentPage = await navigation.selectFromSamples<KitsSentPage>(SamplesNavEnum.SENT);
+        const kitsSentPage = await navigation.selectFromSamples<KitsSentPage>(Samples.SENT);
         await kitsSentPage.waitForReady();
         await kitsSentPage.assertDisplayedKitTypes(expectedKitTypes);
         await kitsSentPage.selectKitType(salivaKitType);
@@ -69,7 +66,7 @@ test.describe.serial('GP Collection Date Permissions Test', () => {
         await kitsSentPage.sortColumnByDate({ columnName: Label.SENT, startWithRecentDates: true });
         const today = new Date();
         const aWeekAgo = getDate(offsetDaysFromDate(today, 7, { isAdd: false }));
-        todaysKits = await kitsSentPage.getMFBarcodesSince(aWeekAgo, SamplesNavEnum.SENT);
+        todaysKits = await kitsSentPage.getMFBarcodesSince(aWeekAgo, Samples.SENT);
         for (const kits of todaysKits) {
           const mfBarcode = (await kits.innerText()).trim();
           todaysMFBarcodes.push(mfBarcode);
@@ -79,8 +76,8 @@ test.describe.serial('GP Collection Date Permissions Test', () => {
       })
 
       await test.step(`Go to Kit Search page and select 'Search by mf barcode' and enter the barcode you copied and click on Search`, async () => {
-        await navigation.selectFromSamples(SamplesNavEnum.SEARCH);
-        const kitsSearchPage = new SearchPage(page);
+        await navigation.selectFromSamples(Samples.SEARCH);
+        const kitsSearchPage = new KitsSearchPage(page);
         await kitsSearchPage.waitForReady();
 
         //Find a kit that does not have a collection date and fill it out
@@ -101,7 +98,7 @@ test.describe.serial('GP Collection Date Permissions Test', () => {
       })
 
       await test.step('Enter a collection date for the kit that shows up and click Submit', async () => {
-        const kitsSearchPage = new SearchPage(page);
+        const kitsSearchPage = new KitsSearchPage(page);
         await kitsSearchPage.setKitCollectionDate({ dateField: currentKit, useTodayDate: true });
       })
     })
