@@ -1,6 +1,5 @@
 import { expect } from '@playwright/test';
 import { test } from 'fixtures/dsm-fixture';
-import { KitTypeEnum } from 'dsm/component/kitType/enums/kitType-enum';
 import { SamplesNavEnum } from 'dsm/component/navigation/enums/samplesNav-enum';
 import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import { Navigation } from 'dsm/component/navigation/navigation';
@@ -8,7 +7,7 @@ import KitsWithoutLabelPage from 'dsm/pages/kitsInfo-pages/kitsWithoutLabel-page
 import { WelcomePage } from 'dsm/pages/welcome-page';
 import { logInfo } from 'utils/log-utils';
 import { KitsTable } from 'dsm/component/tables/kits-table';
-import { Label } from 'dsm/enums';
+import { KitType, Label } from 'dsm/enums';
 
 // don't run in parallel
 test.describe.serial('Kit Deactivation', () => {
@@ -18,7 +17,7 @@ test.describe.serial('Kit Deactivation', () => {
     test(`From Kits Without Label page @dsm @${study} @kit`, async ({ page, request }) => {
       let shortId: string;
       let shippingId: string;
-      let kits: KitTypeEnum[];
+      let kits: KitType[];
 
       const welcomePage = new WelcomePage(page);
       const navigation = new Navigation(page, request);

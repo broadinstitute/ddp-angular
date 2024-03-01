@@ -13,7 +13,7 @@ export enum SearchByField {
 }
 
 export default class SearchPage extends KitsPageBase {
-  protected PAGE_TITLE = 'Kits Search';
+  protected PAGE_TITLE = 'Kit Search';
   protected TABLE_HEADERS = [
     Label.DDP_REALM,
     Label.SHORT_ID,

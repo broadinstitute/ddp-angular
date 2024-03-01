@@ -1,5 +1,5 @@
 import Select from 'dss/component/select';
-import ParticipantPage from 'dsm/pages/participant-page/participant-page';
+import ParticipantPage from 'dsm/pages/participant-page';
 import { Locator, Page, expect } from '@playwright/test';
 
 /**

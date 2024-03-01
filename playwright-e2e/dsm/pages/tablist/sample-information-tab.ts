@@ -1,7 +1,7 @@
 import {expect, Locator, Page} from '@playwright/test';
 import {SampleInfoEnum} from 'dsm/component/tabs/enums/sampleInfo-enum';
 import SampleInformation from 'dsm/component/tabs/model/sample-information-model';
-import {KitTypeEnum} from 'dsm/component/kitType/enums/kitType-enum';
+import { KitType } from 'dsm/enums';
 
 interface SampleInfo {
   [fieldName: string]: SampleInfoEnum;
@@ -83,7 +83,7 @@ export default class SampleInformationTab {
   }
 
   /* Assertions */
-  public async assertKitType(MFBarcode: string, type: KitTypeEnum): Promise<void> {
+  public async assertKitType(MFBarcode: string, type: KitType): Promise<void> {
     const MFBarcodeXPath = this.getSampleByMFBarcodeXPath(MFBarcode);
 
     await expect(this.page.locator(MFBarcodeXPath),
@@ -126,7 +126,7 @@ export default class SampleInformationTab {
     return `//tab[@heading='Sample Information']/fieldset//td[text()[normalize-space()='${MFCode}']]`
   }
 
-  private ancestorSampleTypeXPath(type: KitTypeEnum): string {
+  private ancestorSampleTypeXPath(type: KitType): string {
     return `/ancestor::fieldset/legend[contains(text(), ${type})]`
   }
 

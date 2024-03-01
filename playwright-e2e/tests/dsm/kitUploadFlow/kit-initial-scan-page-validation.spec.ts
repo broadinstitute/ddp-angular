@@ -4,10 +4,9 @@ import {Navigation} from 'dsm/component/navigation/navigation';
 import {login} from 'authentication/auth-dsm';
 import {StudyEnum} from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import {SamplesNavEnum} from 'dsm/component/navigation/enums/samplesNav-enum';
-import {KitTypeEnum} from 'dsm/component/kitType/enums/kitType-enum';
 import InitialScanPage from 'dsm/pages/scanner-pages/initialScan-page';
 import KitsReceivedPage from 'dsm/pages/kitsInfo-pages/kitsReceived-page/kitsReceivedPage';
-import { Label } from 'dsm/enums';
+import { KitType, Label } from 'dsm/enums';
 
 // don't run in parallel
 test.describe.serial('Initial Scan page', () => {
@@ -45,7 +44,7 @@ test.describe.serial('Initial Scan page', () => {
     });
 
     test(`Should throw error if kit is already received @functional @dsm @${study}`, async ({page}) => {
-      const kitType = KitTypeEnum.SALIVA;
+      const kitType = KitType.SALIVA;
 
       await welcomePage.selectStudy(study);
 

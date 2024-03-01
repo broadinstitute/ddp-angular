@@ -1,5 +1,4 @@
 import { APIRequestContext, Page, TestInfo, expect } from '@playwright/test';
-import { KitTypeEnum } from 'dsm/component/kitType/enums/kitType-enum';
 import { SamplesNavEnum } from 'dsm/component/navigation/enums/samplesNav-enum';
 import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import { StudyNavEnum } from 'dsm/component/navigation/enums/studyNav-enum';
@@ -14,18 +13,17 @@ import KitUploadPage from 'dsm/pages/kitUpload-page/kitUpload-page';
 import InitialScanPage from 'dsm/pages/scanner-pages/initialScan-page';
 import TrackingScanPage from 'dsm/pages/scanner-pages/trackingScan-page';
 import FinalScanPage from 'dsm/pages/scanner-pages/finalScan-page';
-import { getDate, getToday } from 'utils/date-utils';
+import { getToday } from 'utils/date-utils';
 import KitsSentPage from 'dsm/pages/kitsInfo-pages/kitsSentPage';
-import ParticipantPage from 'dsm/pages/participant-page/participant-page';
+import ParticipantPage from 'dsm/pages/participant-page';
 import OncHistoryTab from 'dsm/pages/tablist/onc-history-tab';
-import { OncHistoryInputColumnsEnum, OncHistorySelectRequestEnum } from 'dsm/component/tabs/enums/onc-history-input-columns-enum';
-import { SMIdEnum, TissueDynamicFieldsEnum, TissueTypesEnum } from 'dsm/pages/tissue/enums/tissue-information-enum';
 import KitsReceivedPage from 'dsm/pages/kitsInfo-pages/kitsReceived-page/kitsReceivedPage';
-import { CustomizeView, DataFilter, Label, Tab } from 'dsm/enums';
+import { CustomizeView, DataFilter, KitType, Label, SM_ID, Tab, TissueType } from 'dsm/enums';
 import crypto from 'crypto';
 import { logInfo } from 'utils/log-utils';
 import { waitForResponse } from 'utils/test-utils';
 import ErrorPage from 'dsm/pages/samples/error-page';
+import { OncHistorySelectRequestEnum } from 'dsm/component/tabs/enums/onc-history-input-columns-enum';
 
 test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
   const studies = [StudyEnum.OSTEO2]; //Only clinical (pecgs) studies get this event
@@ -57,7 +55,7 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
       //Prep the Saliva kit
       shortID = await findParticipantForGermlineConsentCreation(participantListPage, study);
       logInfo(`Chosen short id: ${shortID}`);
-      kitLabel = await prepareSentKit(shortID, KitTypeEnum.SALIVA, study, page, request, testInfo);
+      kitLabel = await prepareSentKit(shortID, KitType.SALIVA, study, page, request, testInfo);
 
       //Get the Participant Page of the chosen test participant
       participantPage = await goToTestParticipantPage(shortID, navigation);
@@ -70,7 +68,7 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
       randomAccessionNumber = await fillOncHistoryRow(participantPage, oncHistoryTab, facilityName, facilityPhoneNumber, facilityFaxNumber, lastRow);
 
       //Navigate to the Tissue Request page
-      const tissueInformationPage = await oncHistoryTable.openTissueInformationPage(lastRow);
+      const tissueInformationPage = await oncHistoryTable.openTissueRequestAt(lastRow);
       await tissueInformationPage.waitForReady();
 
       /**
@@ -89,33 +87,33 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
 
       await tissueInformationPage.assertFaxSentDatesCount(1);
 
-      today = getDate();
+      today = getToday();
       expect(faxSentDate.trim(), `Fax Sent Date has unexpected input: expected ${today} but received ${faxSentDate}`).toBe(today);
       expect(tissueReceivedDate.trim(), `Tissue Received Date has unexpected input: expected ${today} but received ${tissueReceivedDate}`).
         toBe(today);
 
       await tissueInformationPage.selectGender('Female');
 
-      const tissue = await tissueInformationPage.tissue();
-      await tissue.fillField(TissueDynamicFieldsEnum.USS, { inputValue: materialsReceivedAmount });
+      const tissue = tissueInformationPage.tissue();
+      await tissue.fillField(Label.USS_UNSTAINED, { inputValue: materialsReceivedAmount });
       smID = `SM-${crypto.randomUUID().toString().replace('-', '1').substring(0, 5)}`; //e.g. SM-12345
       secondSMID = `SM-${crypto.randomUUID().toString().replace('-', '1').substring(0, 5)}`; //e.g. SM-09876
-      const smIDModal = await tissue.fillSMIDs(SMIdEnum.USS_SM_IDS);
+      const smIDModal = await tissue.fillSMIDs(SM_ID.USS_SM_IDS);
       await smIDModal.fillInputs([smID, secondSMID]);
       await smIDModal.close();
 
-      await tissue.fillField(TissueDynamicFieldsEnum.TISSUE_TYPE, {select: TissueTypesEnum.BLOCK});
+      await tissue.fillField(Label.TISSUE_TYPE, {select: TissueType.BLOCK});
 
       tumorCollaboratorSampleIDPrefix = await tissue.getTumorCollaboratorSampleIDSuggestedValue();
       tumorSampleID = `${tumorCollaboratorSampleIDPrefix}_${crypto.randomUUID().toString().substring(0, 4)}`;
-      await tissue.fillField(TissueDynamicFieldsEnum.TUMOR_COLLABORATOR_SAMPLE_ID, { inputValue: tumorSampleID });
+      await tissue.fillField(Label.TUMOR_COLLABORATOR_SAMPLE_ID, { inputValue: tumorSampleID });
 
-      await tissue.fillField(TissueDynamicFieldsEnum.DATE_SENT_TO_GP, { inputValue: today });
+      await tissue.fillField(Label.DATE_SENT_TO_GP, { inputValue: today });
 
       //Receive the saliva kit first
       const kitsReceivedPage = await navigation.selectFromSamples<KitsReceivedPage>(SamplesNavEnum.RECEIVED);
       await kitsReceivedPage.waitForReady();
-      await kitsReceivedPage.selectKitType(KitTypeEnum.SALIVA);
+      await kitsReceivedPage.selectKitType(KitType.SALIVA);
       await kitsReceivedPage.kitReceivedRequest({mfCode: kitLabel});
 
       //Accession the tumor sample second (just receive the sample using the SM-ID)
@@ -164,7 +162,7 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
       //Prep the Blood kit
       shortID = await findParticipantForGermlineConsentCreation(participantListPage, study);
       logInfo(`Chosen short id: ${shortID}`);
-      kitLabel = await prepareSentKit(shortID, KitTypeEnum.BLOOD, study, page, request, testInfo);
+      kitLabel = await prepareSentKit(shortID, KitType.BLOOD, study, page, request, testInfo);
 
       //Get the Participant Page of the chosen test participant
       participantPage = await goToTestParticipantPage(shortID, navigation);
@@ -177,7 +175,7 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
       randomAccessionNumber = await fillOncHistoryRow(participantPage, oncHistoryTab, facilityName, facilityPhoneNumber, facilityFaxNumber, lastRow);
 
       //Navigate to the Tissue Request page
-      const tissueInformationPage = await oncHistoryTable.openTissueInformationPage(lastRow);
+      const tissueInformationPage = await oncHistoryTable.openTissueRequestAt(lastRow);
       await tissueInformationPage.waitForReady();
 
       /**
@@ -196,33 +194,33 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
 
       await tissueInformationPage.assertFaxSentDatesCount(1);
 
-      today = getDate();
+      today = getToday();
       expect(faxSentDate.trim(), `Fax Sent Date has unexpected input: expected ${today} but received ${faxSentDate}`).toBe(today);
       expect(tissueReceivedDate.trim(), `Tissue Received Date has unexpected input: expected ${today} but received ${tissueReceivedDate}`).
         toBe(today);
 
       await tissueInformationPage.selectGender('Female');
 
-      const tissue = await tissueInformationPage.tissue();
-      await tissue.fillField(TissueDynamicFieldsEnum.USS, { inputValue: materialsReceivedAmount });
+      const tissue = tissueInformationPage.tissue();
+      await tissue.fillField(Label.USS_UNSTAINED, { inputValue: materialsReceivedAmount });
       smID = `SM-${crypto.randomUUID().toString().replace('-', '1').substring(0, 5)}`; //e.g. SM-12345
       secondSMID = `SM-${crypto.randomUUID().toString().replace('-', '1').substring(0, 5)}`; //e.g. SM-09876
-      const smIDModal = await tissue.fillSMIDs(SMIdEnum.USS_SM_IDS);
+      const smIDModal = await tissue.fillSMIDs(SM_ID.USS_SM_IDS);
       await smIDModal.fillInputs([smID, secondSMID]);
       await smIDModal.close();
 
-      await tissue.fillField(TissueDynamicFieldsEnum.TISSUE_TYPE, {select: TissueTypesEnum.BLOCK});
+      await tissue.fillField(Label.TISSUE_TYPE, {select: TissueType.BLOCK});
 
       tumorCollaboratorSampleIDPrefix = await tissue.getTumorCollaboratorSampleIDSuggestedValue();
       tumorSampleID = `${tumorCollaboratorSampleIDPrefix}_${crypto.randomUUID().toString().substring(0, 4)}`;
-      await tissue.fillField(TissueDynamicFieldsEnum.TUMOR_COLLABORATOR_SAMPLE_ID, { inputValue: tumorSampleID });
+      await tissue.fillField(Label.TUMOR_COLLABORATOR_SAMPLE_ID, { inputValue: tumorSampleID });
 
-      await tissue.fillField(TissueDynamicFieldsEnum.DATE_SENT_TO_GP, { inputValue: today });
+      await tissue.fillField(Label.DATE_SENT_TO_GP, { inputValue: today });
 
       //Receive the blood kit first
       const kitsReceivedPage = await navigation.selectFromSamples<KitsReceivedPage>(SamplesNavEnum.RECEIVED);
       await kitsReceivedPage.waitForReady();
-      await kitsReceivedPage.selectKitType(KitTypeEnum.BLOOD);
+      await kitsReceivedPage.selectKitType(KitType.BLOOD);
       await kitsReceivedPage.kitReceivedRequest({mfCode: kitLabel});
 
       //Accession the tumor sample second (just receive the sample using the SM-ID)
@@ -271,7 +269,7 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
       //Prep the Saliva kit
       shortID = await findParticipantForGermlineConsentCreation(participantListPage, study);
       logInfo(`Chosen short id: ${shortID}`);
-      kitLabel = await prepareSentKit(shortID, KitTypeEnum.SALIVA, study, page, request, testInfo);
+      kitLabel = await prepareSentKit(shortID, KitType.SALIVA, study, page, request, testInfo);
 
       //Get the Participant Page of the chosen test participant
       participantPage = await goToTestParticipantPage(shortID, navigation);
@@ -284,7 +282,7 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
       randomAccessionNumber = await fillOncHistoryRow(participantPage, oncHistoryTab, facilityName, facilityPhoneNumber, facilityFaxNumber, lastRow);
 
       //Navigate to the Tissue Request page
-      const tissueInformationPage = await oncHistoryTable.openTissueInformationPage(lastRow);
+      const tissueInformationPage = await oncHistoryTable.openTissueRequestAt(lastRow);
       await tissueInformationPage.waitForReady();
 
       /**
@@ -303,28 +301,28 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
 
       await tissueInformationPage.assertFaxSentDatesCount(1);
 
-      today = getDate();
+      today = getToday();
       expect(faxSentDate.trim(), `Fax Sent Date has unexpected input: expected ${today} but received ${faxSentDate}`).toBe(today);
       expect(tissueReceivedDate.trim(), `Tissue Received Date has unexpected input: expected ${today} but received ${tissueReceivedDate}`).
         toBe(today);
 
       await tissueInformationPage.selectGender('Female');
 
-      const tissue = await tissueInformationPage.tissue();
-      await tissue.fillField(TissueDynamicFieldsEnum.USS, { inputValue: materialsReceivedAmount });
+      const tissue = tissueInformationPage.tissue();
+      await tissue.fillField(Label.USS_UNSTAINED, { inputValue: materialsReceivedAmount });
       smID = `SM-${crypto.randomUUID().toString().replace('-', '1').substring(0, 5)}`; //e.g. SM-12345
       secondSMID = `SM-${crypto.randomUUID().toString().replace('-', '1').substring(0, 5)}`; //e.g. SM-09876
-      const smIDModal = await tissue.fillSMIDs(SMIdEnum.USS_SM_IDS);
+      const smIDModal = await tissue.fillSMIDs(SM_ID.USS_SM_IDS);
       await smIDModal.fillInputs([smID, secondSMID]);
       await smIDModal.close();
 
-      await tissue.fillField(TissueDynamicFieldsEnum.TISSUE_TYPE, {select: TissueTypesEnum.BLOCK});
+      await tissue.fillField(Label.TISSUE_TYPE, {select: TissueType.BLOCK});
 
       tumorCollaboratorSampleIDPrefix = await tissue.getTumorCollaboratorSampleIDSuggestedValue();
       tumorSampleID = `${tumorCollaboratorSampleIDPrefix}_${crypto.randomUUID().toString().substring(0, 4)}`;
-      await tissue.fillField(TissueDynamicFieldsEnum.TUMOR_COLLABORATOR_SAMPLE_ID, { inputValue: tumorSampleID });
+      await tissue.fillField(Label.TUMOR_COLLABORATOR_SAMPLE_ID, { inputValue: tumorSampleID });
 
-      await tissue.fillField(TissueDynamicFieldsEnum.DATE_SENT_TO_GP, { inputValue: today });
+      await tissue.fillField(Label.DATE_SENT_TO_GP, { inputValue: today });
 
       //Accession the tumor sample first (just receive the sample using the SM-ID)
       const kitsReceivedPage = await navigation.selectFromSamples<KitsReceivedPage>(SamplesNavEnum.RECEIVED);
@@ -337,7 +335,7 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
 
       //Receive the saliva kit second
       await kitsReceivedPage.waitForReady();
-      await kitsReceivedPage.selectKitType(KitTypeEnum.SALIVA);
+      await kitsReceivedPage.selectKitType(KitType.SALIVA);
       await kitsReceivedPage.kitReceivedRequest({mfCode: kitLabel});
 
       //Confirm that the germline consent addendum was created - check that the GERMLINE_CONSENT_ADDENDUM_PEDIATRIC Survey Created column is not empty
@@ -378,7 +376,7 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
       //Prep the Blood kit
       shortID = await findParticipantForGermlineConsentCreation(participantListPage, study);
       logInfo(`Chosen short id: ${shortID}`);
-      kitLabel = await prepareSentKit(shortID, KitTypeEnum.BLOOD, study, page, request, testInfo);
+      kitLabel = await prepareSentKit(shortID, KitType.BLOOD, study, page, request, testInfo);
 
       //Get the Participant Page of the chosen test participant
       participantPage = await goToTestParticipantPage(shortID, navigation);
@@ -391,7 +389,7 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
       randomAccessionNumber = await fillOncHistoryRow(participantPage, oncHistoryTab, facilityName, facilityPhoneNumber, facilityFaxNumber, lastRow);
 
       //Navigate to the Tissue Request page
-      const tissueInformationPage = await oncHistoryTable.openTissueInformationPage(lastRow);
+      const tissueInformationPage = await oncHistoryTable.openTissueRequestAt(lastRow);
       await tissueInformationPage.waitForReady();
 
       /**
@@ -410,28 +408,28 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
 
       await tissueInformationPage.assertFaxSentDatesCount(1);
 
-      today = getDate();
+      today = getToday();
       expect(faxSentDate.trim(), `Fax Sent Date has unexpected input: expected ${today} but received ${faxSentDate}`).toBe(today);
       expect(tissueReceivedDate.trim(), `Tissue Received Date has unexpected input: expected ${today} but received ${tissueReceivedDate}`).
         toBe(today);
 
       await tissueInformationPage.selectGender('Female');
 
-      const tissue = await tissueInformationPage.tissue();
-      await tissue.fillField(TissueDynamicFieldsEnum.USS, { inputValue: materialsReceivedAmount });
+      const tissue = tissueInformationPage.tissue();
+      await tissue.fillField(Label.USS_UNSTAINED, { inputValue: materialsReceivedAmount });
       smID = `SM-${crypto.randomUUID().toString().replace('-', '1').substring(0, 5)}`; //e.g. SM-12345
       secondSMID = `SM-${crypto.randomUUID().toString().replace('-', '1').substring(0, 5)}`; //e.g. SM-09876
-      const smIDModal = await tissue.fillSMIDs(SMIdEnum.USS_SM_IDS);
+      const smIDModal = await tissue.fillSMIDs(SM_ID.USS_SM_IDS);
       await smIDModal.fillInputs([smID, secondSMID]);
       await smIDModal.close();
 
-      await tissue.fillField(TissueDynamicFieldsEnum.TISSUE_TYPE, {select: TissueTypesEnum.BLOCK});
+      await tissue.fillField(Label.TISSUE_TYPE, {select: TissueType.BLOCK});
 
       tumorCollaboratorSampleIDPrefix = await tissue.getTumorCollaboratorSampleIDSuggestedValue();
       tumorSampleID = `${tumorCollaboratorSampleIDPrefix}_${crypto.randomUUID().toString().substring(0, 4)}`;
-      await tissue.fillField(TissueDynamicFieldsEnum.TUMOR_COLLABORATOR_SAMPLE_ID, { inputValue: tumorSampleID });
+      await tissue.fillField(Label.TUMOR_COLLABORATOR_SAMPLE_ID, { inputValue: tumorSampleID });
 
-      await tissue.fillField(TissueDynamicFieldsEnum.DATE_SENT_TO_GP, { inputValue: today });
+      await tissue.fillField(Label.DATE_SENT_TO_GP, { inputValue: today });
 
       //Accession the tumor sample first (just receive the sample using the SM-ID)
       const kitsReceivedPage = await navigation.selectFromSamples<KitsReceivedPage>(SamplesNavEnum.RECEIVED);
@@ -444,7 +442,7 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
 
       //Receive the blood kit second
       await kitsReceivedPage.waitForReady();
-      await kitsReceivedPage.selectKitType(KitTypeEnum.BLOOD);
+      await kitsReceivedPage.selectKitType(KitType.BLOOD);
       await kitsReceivedPage.kitReceivedRequest({mfCode: kitLabel});
 
       //Confirm that the germline consent addendum was created - check that the GERMLINE_CONSENT_ADDENDUM_PEDIATRIC Survey Created column is not empty
@@ -595,13 +593,13 @@ function getPlaywrightParticipantLastNamePrefix(study: StudyEnum): string {
  * @returns the mf code a.k.a the kit label to be used to later mark the kit as sent
  */
 async function prepareSentKit(shortID: string,
-  kitType: KitTypeEnum,
+  kitType: KitType,
   study: StudyEnum,
   page: Page,
   request: APIRequestContext,
   testInfo: TestInfo): Promise<string> {
   const navigation = new Navigation(page, request);
-  const expectedKitTypes = [KitTypeEnum.SALIVA, KitTypeEnum.BLOOD]; //Studies used for the current test only have Saliva and Blood kits
+  const expectedKitTypes = [KitType.SALIVA, KitType.BLOOD]; //Studies used for the current test only have Saliva and Blood kits
   const testResultDirectory = testInfo.outputDir;
   let kitLabel = '';
 
@@ -666,9 +664,9 @@ async function prepareSentKit(shortID: string,
   //Scan saliva and blood kit in Initial Scan
   const initialScanPage = await navigation.selectFromSamples<InitialScanPage>(SamplesNavEnum.INITIAL_SCAN);
   await initialScanPage.assertPageTitle();
-  if (kitType === KitTypeEnum.SALIVA) {
+  if (kitType === KitType.SALIVA) {
     kitLabel = `${crypto.randomUUID().toString().substring(0, 14)}`; //Clinical Saliva kits just need to be 14 chars
-  } else if (kitType === KitTypeEnum.BLOOD) {
+  } else if (kitType === KitType.BLOOD) {
     kitLabel = `PECGS-${crypto.randomUUID().toString().substring(0, 10)}`; //Clinical Blood kits need a PECGS prefix
   }
   await initialScanPage.fillScanPairs([kitLabel, shortID]);
@@ -697,7 +695,7 @@ async function prepareSentKit(shortID: string,
   await kitsSentPage.search(Label.MF_CODE, kitLabel, { count: 1 });
 
   const sentDate = await kitsSentPage.getData(Label.SENT);
-  expect(getDate(new Date(sentDate))).toStrictEqual(getDate());
+  expect(sentDate).toStrictEqual(getToday());
 
   //Return the mf code a.k.a the kit label so that the kit can later be marked as received
   return kitLabel;
@@ -734,9 +732,9 @@ async function fillOncHistoryRow(participantPage: ParticipantPage,
   const oncHistoryTable = oncHistoryTab.table;
   const rowIndex = lastRowIndex ? lastRowIndex : await oncHistoryTable.getRowsCount() - 1;
   const randomAccessionNumber = crypto.randomUUID().toString().substring(0, 10);
-  const today = getToday();
+  const today = new Date();
 
-  await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.DATE_OF_PX, {
+  await oncHistoryTable.fillField(Label.DATE_OF_PX, {
     date: {
       date: {
         yyyy: today.getFullYear(),
@@ -745,13 +743,13 @@ async function fillOncHistoryRow(participantPage: ParticipantPage,
       }
     }
   }, rowIndex);
-  await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.ACCESSION_NUMBER, { value: randomAccessionNumber }, rowIndex);
-  await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.FACILITY, { value: facilityName }, rowIndex);
-  await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.PHONE, { value: facilityPhoneNumber }, rowIndex);
-  await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.FAX, { value: facilityFaxNumber }, rowIndex);
+  await oncHistoryTable.fillField(Label.ACCESSION_NUMBER, { value: randomAccessionNumber }, rowIndex);
+  await oncHistoryTable.fillField(Label.FACILITY, { value: facilityName }, rowIndex);
+  await oncHistoryTable.fillField(Label.PHONE, { value: facilityPhoneNumber }, rowIndex);
+  await oncHistoryTable.fillField(Label.FAX, { value: facilityFaxNumber }, rowIndex);
 
   //Mark Onc History as 'Request' status
-  await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.REQUEST, { select: OncHistorySelectRequestEnum.REQUEST }, rowIndex);
+  await oncHistoryTable.fillField(Label.REQUEST, { select: OncHistorySelectRequestEnum.REQUEST }, rowIndex);
 
   //Click Download Request Documents in order to have the Fax Sent Date automatically filled out for recently inputted onc history
   await oncHistoryTable.assertRowSelectionCheckbox(rowIndex);

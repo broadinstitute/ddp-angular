@@ -4,7 +4,7 @@ import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import { StudyNavEnum } from 'dsm/component/navigation/enums/studyNav-enum';
 import { Navigation } from 'dsm/component/navigation/navigation';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
-import ParticipantPage from 'dsm/pages/participant-page/participant-page';
+import ParticipantPage from 'dsm/pages/participant-page';
 import ParticipantWithdrawalPage from 'dsm/pages/participant-withdrawal-page';
 import { SortOrder } from 'dss/component/table';
 import { test } from 'fixtures/dsm-fixture';

@@ -7,7 +7,7 @@ import { Navigation } from 'dsm/component/navigation/navigation';
 import { CustomizeView, Label, Tab } from 'dsm/enums';
 import GenomeStudyTab from 'dsm/pages/tablist/genome-study-tab';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
-import ParticipantPage from 'dsm/pages/participant-page/participant-page';
+import ParticipantPage from 'dsm/pages/participant-page';
 import AtcpSearchPage, { SearchByField } from 'dsm/pages/samples/search-page';
 import { WelcomePage } from 'dsm/pages/welcome-page';
 import Radiobutton from 'dss/component/radiobutton';

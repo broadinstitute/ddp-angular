@@ -6,7 +6,7 @@ import OncHistoryTab from 'dsm/pages/tablist/onc-history-tab';
 import SampleInformationTab from 'dsm/pages/tablist/sample-information-tab';
 import SurveyDataTab from 'dsm/pages/tablist/survey-data-tab';
 import SequencingOrderTab from 'dsm/pages/tablist/sequencing-order-tab';
-import MedicalRecordsTab from 'dsm/pages/medical-records/medical-records-tab';
+import MedicalRecordsTab from 'dsm/pages/tablist/medical-records-tab';
 import { waitForNoSpinner } from 'utils/test-utils';
 
 export default class Tablist {

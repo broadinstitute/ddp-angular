@@ -4,10 +4,9 @@ import { CustomizeView, DataFilter, Label, Tab } from 'dsm/enums';
 import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import { StudyNavEnum } from 'dsm/component/navigation/enums/studyNav-enum';
 import { Navigation } from 'dsm/component/navigation/navigation';
-import { OncHistoryInputColumnsEnum } from 'dsm/component/tabs/enums/onc-history-input-columns-enum';
 import OncHistoryTab from 'dsm/pages/tablist/onc-history-tab';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
-import ParticipantPage from 'dsm/pages/participant-page/participant-page';
+import ParticipantPage from 'dsm/pages/participant-page';
 import { WelcomePage } from 'dsm/pages/welcome-page';
 import { SortOrder } from 'dss/component/table';
 import { logInfo } from 'utils/log-utils';
@@ -103,7 +102,7 @@ async function addOncHistory(page: Page, shortID: string, participantListPage: P
     const oncHistoryTable = oncHistoryTab.table;
     const rowIndex = await oncHistoryTable.getRowsCount() - 1;
     expect(rowIndex).toBeGreaterThanOrEqual(0);
-    const cell = await oncHistoryTable.checkColumnAndCellValidity(OncHistoryInputColumnsEnum.DATE_OF_PX, rowIndex);
+    const cell = await oncHistoryTable.checkColumnAndCellValidity(Label.DATE_OF_PX, rowIndex);
     const resp = await oncHistoryTable.fillDate(cell, {
       date: {
         yyyy: new Date().getFullYear(),

@@ -1,10 +1,9 @@
 import {expect, Locator, Page} from '@playwright/test';
-import {KitTypeEnum} from 'dsm/component/kitType/enums/kitType-enum';
 import {waitForNoSpinner} from 'utils/test-utils';
 import {assertTableHeaders} from 'utils/assertion-helper';
 import {rows} from 'lib/component/dsm/paginators/types/rowsPerPage';
 import KitsPageBase from 'dsm/pages/kits-page-base';
-import {Label} from 'dsm/enums';
+import {KitType, Label} from 'dsm/enums';
 
 export default class KitsSentPage extends KitsPageBase {
   protected PAGE_TITLE = 'Kits Sent';
@@ -51,11 +50,10 @@ export default class KitsSentPage extends KitsPageBase {
       .toBeVisible();
   }
 
-  public async assertDisplayedKitTypes(kitTypes: KitTypeEnum[]): Promise<void> {
+  public async assertDisplayedKitTypes(kitTypes: KitType[]): Promise<void> {
     await waitForNoSpinner(this.page);
     for (const kitType of kitTypes) {
-      await expect(this.kitType.displayedKitType(kitType),
-        'Kits Sent page - Displayed kit types checkboxes are wrong').toBeVisible()
+      await expect(this.kitCheckbox(kitType).toLocator()).toBeVisible()
     }
   }
 

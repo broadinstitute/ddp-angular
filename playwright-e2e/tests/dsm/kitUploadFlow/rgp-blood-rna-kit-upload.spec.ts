@@ -4,14 +4,13 @@ import { Navigation } from 'dsm/component/navigation/navigation';
 import Select from 'dss/component/select';
 import { KitUploadInfo } from 'dsm/pages/kitUpload-page/models/kitUpload-model';
 import {StudyEnum} from 'dsm/component/navigation/enums/selectStudyNav-enum';
-import { KitTypeEnum } from 'dsm/component/kitType/enums/kitType-enum';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
 import {StudyNavEnum} from 'dsm/component/navigation/enums/studyNav-enum';
 import * as user from 'data/fake-user.json';
 import crypto from 'crypto';
 import KitUploadPage from 'dsm/pages/kitUpload-page/kitUpload-page';
 import {SamplesNavEnum} from 'dsm/component/navigation/enums/samplesNav-enum';
-import FamilyMemberTab from 'dsm/pages/participant-page/rgp/family-member-tab';
+import FamilyMemberTab from 'dsm/pages/tablist/rgp-family-member-tab';
 import { FamilyMember } from 'dsm/component/tabs/enums/familyMember-enum';
 import KitsWithoutLabelPage from 'dsm/pages/kitsInfo-pages/kitsWithoutLabel-page';
 import KitsSentPage from 'dsm/pages/kitsInfo-pages/kitsSentPage';
@@ -22,7 +21,7 @@ import { simplifyShortID } from 'utils/faker-utils';
 import { ParticipantListTable } from 'dsm/component/tables/participant-list-table';
 import KitsQueuePage from 'dsm/pages/kitsInfo-pages/kit-queue-page';
 import ErrorPage from 'dsm/pages/samples/error-page';
-import { CustomizeView, Label } from 'dsm/enums';
+import { CustomizeView, KitType, Label } from 'dsm/enums';
 
 test.describe('Blood & RNA Kit Upload', () => {
   test('Verify that a blood & rna kit can be uploaded @dsm @rgp @functional @upload', async ({ page, request}, testInfo) => {
@@ -31,8 +30,8 @@ test.describe('Blood & RNA Kit Upload', () => {
     const testResultDirectory = testInfo.outputDir;
 
     const study = StudyEnum.RGP;
-    const kitType = KitTypeEnum.BLOOD_AND_RNA;
-    const expectedKitTypes = [KitTypeEnum.BLOOD, KitTypeEnum.BLOOD_AND_RNA]; //Later will be just Blood & RNA kit type for RGP
+    const kitType = KitType.BLOOD_AND_RNA;
+    const expectedKitTypes = [KitType.BLOOD, KitType.BLOOD_AND_RNA]; //Later will be just Blood & RNA kit type for RGP
     let kitTable;
     let amountOfKits;
     let kitErrorPage;
@@ -126,7 +125,7 @@ test.describe('Blood & RNA Kit Upload', () => {
     //Kit Queue or Kit Error page (depending on where easypost sends the kit - easypost tends to send the kit to error in non-prod envs)
     const kitQueuePage = await navigation.selectFromSamples<KitsQueuePage>(SamplesNavEnum.QUEUE);
     await kitQueuePage.waitForReady();
-    await kitQueuePage.selectKitType(KitTypeEnum.BLOOD_AND_RNA);
+    await kitQueuePage.selectKitType(KitType.BLOOD_AND_RNA);
     const kitQueuePageHasExistingKitRequests = await kitQueuePage.hasKitRequests();
     if (kitQueuePageHasExistingKitRequests) {
       //Search for the test kit using the shipping id
@@ -137,7 +136,7 @@ test.describe('Blood & RNA Kit Upload', () => {
         //If the kit is not found in Kit Queue -> go to Kit Error page and search for it there
         kitErrorPage = await navigation.selectFromSamples<ErrorPage>(SamplesNavEnum.ERROR);
         await kitErrorPage.waitForReady();
-        await kitErrorPage.selectKitType(KitTypeEnum.BLOOD_AND_RNA);
+        await kitErrorPage.selectKitType(KitType.BLOOD_AND_RNA);
         kitTable = kitErrorPage.getKitsTable;
         await kitTable.searchBy(Label.SHIPPING_ID, shippingID);
         amountOfKits = await kitTable.getRowsCount();
@@ -152,7 +151,7 @@ test.describe('Blood & RNA Kit Upload', () => {
     } else if (!kitQueuePageHasExistingKitRequests) {
       kitErrorPage = await navigation.selectFromSamples<ErrorPage>(SamplesNavEnum.ERROR);
       await kitErrorPage.waitForReady();
-      await kitErrorPage.selectKitType(KitTypeEnum.BLOOD_AND_RNA);
+      await kitErrorPage.selectKitType(KitType.BLOOD_AND_RNA);
       kitTable = kitErrorPage.getKitsTable;
       await kitTable.searchBy(Label.SHIPPING_ID, shippingID);
       amountOfKits = await kitTable.getRowsCount();

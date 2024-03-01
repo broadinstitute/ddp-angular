@@ -3,7 +3,7 @@ import { test } from 'fixtures/dsm-fixture';
 import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
 import { Label, Tab } from 'dsm/enums';
-import MedicalRecordsTab from 'dsm/pages/medical-records/medical-records-tab';
+import MedicalRecordsTab from 'dsm/pages/tablist/medical-records-tab';
 import OncHistoryTab from 'dsm/pages/tablist/onc-history-tab';
 import CohortTag from 'dsm/component/cohort-tag';
 import { SamplesNavEnum } from 'dsm/component/navigation/enums/samplesNav-enum';

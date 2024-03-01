@@ -29,7 +29,7 @@ test.describe('Sample Kit Queue UI', () => {
 
       // All kits are not selected by default
       for (const kitType of expectedKitSelection) {
-        expect(await kitQueuePage.getKitCheckbox(kitType).isChecked()).toBeFalsy();
+        expect(await kitQueuePage.kitCheckbox(kitType).isChecked()).toBeFalsy();
       }
 
       const kitsTable = kitQueuePage.getKitsTable;

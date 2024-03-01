@@ -85,7 +85,7 @@ export class Search {
     radioButtonValue && (await this.radioBtnLocator(columnName, radioButtonValue).click());
   }
 
-  public async checkboxes(columnName: string, { checkboxValues, additionalFilters }: Partial<CheckboxConfig>): Promise<void> {
+  public async checkboxes(columnName: Label | string, { checkboxValues, additionalFilters }: Partial<CheckboxConfig>): Promise<void> {
     await this.setAdditionalFilters(columnName, additionalFilters);
     if (checkboxValues && checkboxValues.length) {
       for (const checkboxValue of checkboxValues) {

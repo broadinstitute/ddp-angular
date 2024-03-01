@@ -2,7 +2,6 @@ import { expect } from '@playwright/test';
 import { test } from 'fixtures/dsm-fixture';
 import crypto from 'crypto';
 import * as mock from 'data/mock-address.json';
-import { KitTypeEnum } from 'dsm/component/kitType/enums/kitType-enum';
 import { SamplesNavEnum } from 'dsm/component/navigation/enums/samplesNav-enum';
 import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import { StudyNavEnum } from 'dsm/component/navigation/enums/studyNav-enum';
@@ -12,13 +11,13 @@ import { KitUploadInfo } from 'dsm/pages/kitUpload-page/models/kitUpload-model';
 import KitsSentPage from 'dsm/pages/kitsInfo-pages/kitsSentPage';
 import KitsWithoutLabelPage from 'dsm/pages/kitsInfo-pages/kitsWithoutLabel-page';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
-import ParticipantPage from 'dsm/pages/participant-page/participant-page';
+import ParticipantPage from 'dsm/pages/participant-page';
 import ErrorPage from 'dsm/pages/samples/error-page';
 import FinalScanPage from 'dsm/pages/scanner-pages/finalScan-page';
 import TrackingScanPage from 'dsm/pages/scanner-pages/trackingScan-page';
 import { WelcomePage } from 'dsm/pages/welcome-page';
 import { logInfo } from 'utils/log-utils';
-import { Label } from 'dsm/enums';
+import { KitType, Label } from 'dsm/enums';
 
 /**
  * Prefix check for Blood kit with Canada and New York address for LMS and Osteo2 studies.
@@ -41,8 +40,8 @@ test.describe.serial('Blood Kit Upload', () => {
   let shortID: string;
 
   const studies = [StudyEnum.LMS]; // StudyEnum.OSTEO2;
-  const kitType = KitTypeEnum.BLOOD;
-  const expectedKitTypes = [KitTypeEnum.SALIVA, KitTypeEnum.BLOOD];
+  const kitType = KitType.BLOOD;
+  const expectedKitTypes = [KitType.SALIVA, KitType.BLOOD];
   const kitLabel = crypto.randomUUID().toString().substring(0, 14).replace(/-/, 'a');
   const trackingLabel = `tracking-${crypto.randomUUID().toString().substring(0, 10).replace(/-/, 'z')}`;
 

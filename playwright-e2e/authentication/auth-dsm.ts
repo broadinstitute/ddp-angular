@@ -45,7 +45,7 @@ export async function login(page: Page, opts: { email?: string; password?: strin
     return;
   }
   // Retry login if login window is still present (POST /auth0 fails intermittenly)
-  console.log(`Retry log in`);
+  console.log(`      Retry log in`);
   await doLogIn();
   await assertLogIn(page);
   await expect(page).toHaveTitle('Select study');

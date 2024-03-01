@@ -6,12 +6,11 @@ import {login} from 'authentication/auth-dsm';
 import {StudyEnum} from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
 import {StudyNavEnum} from 'dsm/component/navigation/enums/studyNav-enum';
-import ParticipantPage from 'dsm/pages/participant-page/participant-page';
+import ParticipantPage from 'dsm/pages/participant-page';
 import {KitUploadInfo} from 'dsm/pages/kitUpload-page/models/kitUpload-model';
 import ContactInformationTab from 'dsm/pages/tablist/contact-information-tab';
-import {Label, Tab} from 'dsm/enums';
+import {KitSampleType, KitType, Label, Tab} from 'dsm/enums';
 import {SamplesNavEnum} from 'dsm/component/navigation/enums/samplesNav-enum';
-import {KitTypeEnum} from 'dsm/component/kitType/enums/kitType-enum';
 import KitUploadPage from 'dsm/pages/kitUpload-page/kitUpload-page';
 import InitialScanPage from 'dsm/pages/scanner-pages/initialScan-page';
 import FinalScanPage from 'dsm/pages/scanner-pages/finalScan-page';
@@ -22,7 +21,6 @@ import {SampleStatusEnum} from 'dsm/component/tabs/enums/sampleStatus-enum';
 import KitsWithoutLabelPage from 'dsm/pages/kitsInfo-pages/kitsWithoutLabel-page';
 import KitsSentPage from 'dsm/pages/kitsInfo-pages/kitsSentPage';
 import KitsReceivedPage from 'dsm/pages/kitsInfo-pages/kitsReceived-page/kitsReceivedPage';
-import {SampleTypesEnum} from 'dsm/pages/kitsInfo-pages/enums/sampleTypes-enum';
 import {getDate} from 'utils/date-utils';
 import {logInfo} from 'utils/log-utils';
 import TrackingScanPage from 'dsm/pages/scanner-pages/trackingScan-page';
@@ -37,8 +35,8 @@ test.describe.serial('Saliva Kits upload flow', () => {
   let testResultDir: string;
 
   const studies = [StudyEnum.LMS, StudyEnum.OSTEO2];
-  const kitType = KitTypeEnum.SALIVA;
-  const expectedKitTypes = [KitTypeEnum.SALIVA, KitTypeEnum.BLOOD];
+  const kitType = KitType.SALIVA;
+  const expectedKitTypes = [KitType.SALIVA, KitType.BLOOD];
 
   test.beforeEach(async ({ page, request }) => {
     await login(page);
@@ -205,5 +203,5 @@ async function sampleTypeCheck(kitUploadInfo: KitUploadInfo, sentOrReceivedPage:
   const sampleType = await sentOrReceivedPage.getData(Label.SAMPLE_TYPE);
   const {address} = kitUploadInfo;
   const isResearchKit = (address.country === 'US' && address.state === 'NY') || address.country === 'CA';
-  expect(sampleType.trim()).toBe(isResearchKit ? SampleTypesEnum.RESEARCH : SampleTypesEnum.CLINICAL)
+  expect(sampleType.trim()).toBe(isResearchKit ? KitSampleType.RESEARCH : KitSampleType.CLINICAL)
 }

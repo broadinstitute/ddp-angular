@@ -1,11 +1,10 @@
 import { Locator, expect } from '@playwright/test';
 import Dropdown from 'dsm/component/dropdown';
-import { KitTypeEnum } from 'dsm/component/kitType/enums/kitType-enum';
 import { MainMenuEnum } from 'dsm/component/navigation/enums/mainMenu-enum';
 import { SamplesNavEnum } from 'dsm/component/navigation/enums/samplesNav-enum';
 import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import { Navigation } from 'dsm/component/navigation/navigation';
-import { Label } from 'dsm/enums';
+import { KitType, Label } from 'dsm/enums';
 import KitsSentPage from 'dsm/pages/kitsInfo-pages/kitsSentPage';
 import SearchPage, { SearchByField } from 'dsm/pages/samples/search-page';
 import Select from 'dss/component/select';
@@ -15,9 +14,9 @@ import { logInfo } from 'utils/log-utils';
 
 test.describe.serial('GP Collection Date Permissions Test', () => {
   const studies = [StudyEnum.OSTEO2, StudyEnum.LMS];
-  const expectedKitTypes = [KitTypeEnum.BLOOD, KitTypeEnum.SALIVA];
+  const expectedKitTypes = [KitType.BLOOD, KitType.SALIVA];
   const expectedAvailableMenuItems = [MainMenuEnum.SELECTED_STUDY, MainMenuEnum.SAMPLES];
-  const salivaKitType = KitTypeEnum.SALIVA; //Saliva kits are usually automatically created, so there'll be more of these to use for testing compared to blood kits
+  const salivaKitType = KitType.SALIVA; //Saliva kits are usually automatically created, so there'll be more of these to use for testing compared to blood kits
   const expectedSampleMenuItems = [SamplesNavEnum.UNSENT_KITS_OVERVIEW, SamplesNavEnum.REPORT,
     SamplesNavEnum.SUMMARY, SamplesNavEnum.KITS_WITHOUT_LABELS, SamplesNavEnum.QUEUE, SamplesNavEnum.ERROR,
     SamplesNavEnum.INITIAL_SCAN, SamplesNavEnum.TRACKING_SCAN, SamplesNavEnum.FINAL_SCAN, SamplesNavEnum.RGP_FINAL_SCAN,

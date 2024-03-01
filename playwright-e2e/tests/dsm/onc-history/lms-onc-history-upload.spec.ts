@@ -9,7 +9,6 @@ import { getDate } from 'utils/date-utils';
 import { MiscellaneousEnum } from 'dsm/component/navigation/enums/miscellaneousNav-enum';
 import { Navigation } from 'dsm/component/navigation/navigation';
 import OncHistoryUploadPage from 'dsm/pages/onc-history-upload-page';
-import { OncHistoryInputColumnsEnum } from 'dsm/component/tabs/enums/onc-history-input-columns-enum';
 import { logInfo } from 'utils/log-utils';
 import { StudyNavEnum } from 'dsm/component/navigation/enums/studyNav-enum';
 import OncHistoryTable from 'dsm/component/tables/onc-history-table';
@@ -72,7 +71,7 @@ test.describe('Upload Onc History', () => {
       shortId = await participantListPage.findParticipantWithTab({
         findPediatricParticipant: false,
         tab: Tab.ONC_HISTORY,
-        uriString: 'filterList'
+        uri: 'filterList'
       });
 
       expect(shortId).toBeTruthy();
@@ -113,8 +112,8 @@ test.describe('Upload Onc History', () => {
       let rowIndex = -1
       let match = false;
       for (let i = 0; i < numRows; i++) {
-        const pxValue = await oncHistoryTable.getFieldValue(OncHistoryInputColumnsEnum.TYPE_OF_PX, i);
-        const dateValue = await oncHistoryTable.getFieldValue(OncHistoryInputColumnsEnum.DATE_OF_PX, i);
+        const pxValue = await oncHistoryTable.getFieldValue(Label.TYPE_OF_PX, i);
+        const dateValue = await oncHistoryTable.getFieldValue(Label.DATE_OF_PX, i);
         if (pxValue === pxType && dateValue === today) {
           rowIndex = i;
           match = true;

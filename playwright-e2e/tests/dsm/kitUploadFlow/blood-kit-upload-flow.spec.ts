@@ -6,12 +6,11 @@ import {login} from 'authentication/auth-dsm';
 import {StudyEnum} from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
 import {StudyNavEnum} from 'dsm/component/navigation/enums/studyNav-enum';
-import ParticipantPage from 'dsm/pages/participant-page/participant-page';
+import ParticipantPage from 'dsm/pages/participant-page';
 import {KitUploadInfo} from 'dsm/pages/kitUpload-page/models/kitUpload-model';
 import ContactInformationTab from 'dsm/pages/tablist/contact-information-tab';
-import {Label, Tab} from 'dsm/enums';
+import {KitType, Label, Tab} from 'dsm/enums';
 import {SamplesNavEnum} from 'dsm/component/navigation/enums/samplesNav-enum';
-import {KitTypeEnum} from 'dsm/component/kitType/enums/kitType-enum';
 import KitUploadPage from 'dsm/pages/kitUpload-page/kitUpload-page';
 import InitialScanPage from 'dsm/pages/scanner-pages/initialScan-page';
 import FinalScanPage from 'dsm/pages/scanner-pages/finalScan-page';
@@ -42,8 +41,8 @@ test.describe.serial('Blood Kits upload flow', () => {
   let testResultDir: string;
 
   const studies = [StudyEnum.OSTEO2];
-  const kitType = KitTypeEnum.BLOOD;
-  const expectedKitTypes = [KitTypeEnum.SALIVA, KitTypeEnum.BLOOD];
+  const kitType = KitType.BLOOD;
+  const expectedKitTypes = [KitType.SALIVA, KitType.BLOOD];
 
   test.beforeEach(async ({ page, request }) => {
     await login(page);

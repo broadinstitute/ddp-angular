@@ -4,7 +4,6 @@ import DatePicker from 'dsm/component/date-picker';
 import TextArea from 'dss/component/textarea';
 import {
   InputTypeEnum,
-  OncHistoryInputColumnsEnum,
   OncHistorySelectRequestEnum
 } from 'dsm/component/tabs/enums/onc-history-input-columns-enum';
 import { OncHistoryInputs } from 'dsm/component/tabs/model/onc-history-inputs';
@@ -14,24 +13,26 @@ import {
 } from 'dsm/component/tabs/interfaces/onc-history-inputs-types';
 import { waitForResponse } from 'utils/test-utils';
 import Select from 'dss/component/select';
-import TissueRequestPage from 'dsm/pages/tissue-request-page';
+import TissueRequestPage from 'dsm/pages/tablist-pages/tissue-request-page';
 import Button from 'dss/component/button';
-import { FillDate } from 'dsm/pages/tissue/interfaces/tissue-information-interfaces';
+import { FillDate } from 'dsm/pages/models/input-interface';
 import Input from 'dss/component/input';
 import Checkbox from 'dss/component/checkbox';
+import { Label } from 'dsm/enums';
 
 export default class OncHistoryTable extends Table {
-  private readonly tissueInformationPage: TissueRequestPage;
+  private readonly tissueRequestPage: TissueRequestPage;
 
   constructor(protected readonly page: Page, root: string) {
     super(page, { cssClassAttribute: '.table', root });
-    this.tissueInformationPage = new TissueRequestPage(this.page);
+    this.tissueRequestPage = new TissueRequestPage(this.page);
   }
 
-  public async openTissueInformationPage(index: number): Promise<TissueRequestPage> {
+  public async openTissueRequestAt(index: number): Promise<TissueRequestPage> {
     const button = new Button(this.page, { root: this.firstRequestColumn(index) });
     await button.click();
-    return this.tissueInformationPage;
+    await this.tissueRequestPage.waitForReady();
+    return this.tissueRequestPage;
   }
 
   public async selectRowAt(index: number): Promise<void> {
@@ -48,7 +49,7 @@ export default class OncHistoryTable extends Table {
     ]);
   }
 
-  public async getFieldValue(columnName: OncHistoryInputColumnsEnum, rowIndex = 0): Promise<string> {
+  public async getFieldValue(columnName: Label, rowIndex = 0): Promise<string> {
     const cell = await this.checkColumnAndCellValidity(columnName, rowIndex);
     const {
       type: inputType,
@@ -92,7 +93,7 @@ export default class OncHistoryTable extends Table {
     await saveAndCloseBtn.click();
   }
 
-  public async fillField(columnName: OncHistoryInputColumnsEnum, {
+  public async fillField(columnName: Label, {
     date,
     select,
     value,
@@ -276,16 +277,16 @@ export default class OncHistoryTable extends Table {
     return this.page.locator(this.tableXPath + this.rowXPath);
   }
 
-  private column(columnName: OncHistoryInputColumnsEnum): Locator {
+  private column(columnName: Label): Locator {
     return this.page.locator(this.columnXPath(columnName));
   }
 
-  private td(columnName: OncHistoryInputColumnsEnum): Locator {
+  private td(columnName: Label): Locator {
     return this.page.locator(this.tdXPath(columnName));
   }
 
   /* Assertions */
-  public async checkColumnAndCellValidity(columnName: OncHistoryInputColumnsEnum, rowIndex: number): Promise<Locator> {
+  public async checkColumnAndCellValidity(columnName: Label, rowIndex: number): Promise<Locator> {
     let column = this.column(columnName);
     if (await column.count() > 1) {
       column = column.nth(1);
@@ -314,15 +315,15 @@ export default class OncHistoryTable extends Table {
     return '//ancestor-or-self::td//app-lookup/div/ul/li'
   }
 
-  private tdXPath(columnName: OncHistoryInputColumnsEnum): string {
+  private tdXPath(columnName: Label): string {
     return `${this.tableXPath}${this.rowXPath}//td[position()=${this.columnPositionXPath(columnName)}]`;
   }
 
-  private columnPositionXPath(columnName: OncHistoryInputColumnsEnum): string {
+  private columnPositionXPath(columnName: Label): string {
     return `count(${this.columnXPath(columnName)}/preceding-sibling::th)+1`;
   }
 
-  private columnXPath(columnName: OncHistoryInputColumnsEnum): string {
+  private columnXPath(columnName: Label): string {
     return `${this.headerXPath}/th[descendant-or-self::*[text()[normalize-space()="${columnName}"]]]`;
   }
 

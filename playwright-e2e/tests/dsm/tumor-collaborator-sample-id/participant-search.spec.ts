@@ -5,9 +5,9 @@ import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
 import { studyShortName } from 'utils/test-utils';
 import { logInfo } from 'utils/log-utils';
-import ParticipantPage from 'dsm/pages/participant-page/participant-page';
+import ParticipantPage from 'dsm/pages/participant-page';
 import OncHistoryTab from 'dsm/pages/tablist/onc-history-tab';
-import { OncHistoryInputColumnsEnum, OncHistorySelectRequestEnum } from 'dsm/component/tabs/enums/onc-history-input-columns-enum';
+import { OncHistorySelectRequestEnum } from 'dsm/component/tabs/enums/onc-history-input-columns-enum';
 import { SortOrder } from 'dss/component/table';
 
 /**
@@ -78,8 +78,8 @@ test.describe.serial('Tumor Collaborator Sample ID', () => {
       const rowIndex = rows - 1; // 0th-index
 
       await test.step('Insert new Onc History data', async () => {
-        await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.FACILITY, { value: 'm', lookupSelectIndex: 1 }, rowIndex);
-        await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.DATE_OF_PX,
+        await oncHistoryTable.fillField(Label.FACILITY, { value: 'm', lookupSelectIndex: 1 }, rowIndex);
+        await oncHistoryTable.fillField(Label.DATE_OF_PX,
           {
             date: {
               date: {
@@ -89,17 +89,17 @@ test.describe.serial('Tumor Collaborator Sample ID', () => {
               }
             }
           }, rowIndex);
-        await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.TYPE_OF_PX, { value: 'a', lookupSelectIndex: 4 }, rowIndex);
-        await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.REQUEST, { select: OncHistorySelectRequestEnum.REQUEST }, rowIndex);
+        await oncHistoryTable.fillField(Label.TYPE_OF_PX, { value: 'a', lookupSelectIndex: 4 }, rowIndex);
+        await oncHistoryTable.fillField(Label.REQUEST, { select: OncHistorySelectRequestEnum.REQUEST }, rowIndex);
       });
 
       await test.step('Check Tumor Collaborator Sample ID on Participant page', async () => {
-        const tissueInformationPage = await oncHistoryTable.openTissueInformationPage(rowIndex);
+        const tissueInformationPage = await oncHistoryTable.openTissueRequestAt(rowIndex);
         const faxSentDate1 = await tissueInformationPage.getFaxSentDate();
         if (faxSentDate1.trim().length === 0) {
           await tissueInformationPage.fillFaxSentDates({ today: true });
         }
-        const tissue = await tissueInformationPage.tissue();
+        const tissue = tissueInformationPage.tissue();
         const suggestedSampleID = await tissue.getTumorCollaboratorSampleIDSuggestedValue();
         logInfo(`Tumor Collaborator Sample ID: ${suggestedSampleID}`);
 

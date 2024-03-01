@@ -3,10 +3,10 @@ import OncHistoryTable from 'dsm/component/tables/onc-history-table';
 import { waitForResponse } from 'utils/test-utils';
 import Select from 'dss/component/select';
 import Button from 'dss/component/button';
-import TabPageBase from './tab-page-base';
+import TabBase from 'dsm/pages/tablist/tab-base';
 import { Tab } from 'dsm/enums';
 
-export default class OncHistoryTab extends TabPageBase {
+export default class OncHistoryTab extends TabBase {
   private readonly oncHistoryTable: OncHistoryTable;
 
   constructor(page: Page) {

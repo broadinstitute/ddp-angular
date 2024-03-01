@@ -1,38 +1,58 @@
-import { waitForResponse } from 'utils/test-utils';
+import { waitForNoSpinner, waitForResponse } from 'utils/test-utils';
 import { expect, Locator, Page } from '@playwright/test';
-import {
-  SequencingResultsEnum,
-  SMIdEnum,
-  TissueDynamicFieldsEnum,
-  TissueTypesEnum,
-  TumorTypesEnum
-} from 'dsm/pages/tissue/enums/tissue-information-enum';
 import TextArea from 'dss/component/textarea';
 import {
   FillDate,
-  TissueInputsMapValue
-} from 'dsm/pages/tissue/interfaces/tissue-information-interfaces';
+  FillInMap,
+  InputMap
+} from 'dsm/pages/models/input-interface';
 import Select from 'dss/component/select';
 import DatePicker from './date-picker';
 import Input from 'dss/component/input';
-import { FillTissue } from 'dsm/pages/tissue/interfaces/fill-tissue-interface';
-import { tissueInputs } from 'dsm/pages/tissue/models/tissue-inputs';
+import { tissueInputs } from 'dsm/pages/models/tissue-inputs';
 import { InputTypeEnum } from './tabs/enums/onc-history-input-columns-enum';
 import Button from 'dss/component/button';
 import SMID from './smid';
+import { Label, SM_ID, TissueType } from 'dsm/enums';
+
+
+export enum SequencingResultsEnum {
+  FAILURE_AT_SHL = 'Failure at SHL',
+  ABANDONED_AT_GP = 'Abandoned at GP',
+  FAILED_PURITY = 'Failed Purity',
+  EXTERNAL_PATH_REVIEW_FAILED = 'External Path Review Failed',
+  SUCCESS = 'Success',
+  EMPTY = ''
+}
+
+export enum TumorTypesEnum {
+  PRIMARY = 'Primary',
+  MET = 'Met',
+  RECURRENT = 'Recurrent',
+  UNKNOWN = 'Unknown'
+}
 
 export default class Tissue {
   private readonly SMIDModal: SMID;
 
-  constructor(private readonly page: Page, private readonly tissueIndex: number = 0) {
-    this.SMIDModal = new SMID(this.page, this.tissueIndex);
+  constructor(private readonly page: Page, private readonly nth = 0) {
+    this.SMIDModal = new SMID(this.page, this.nth);
   }
 
-  public async getFieldValue(dynamicField: TissueDynamicFieldsEnum): Promise<string> {
+  public async delete(): Promise<void> {
+    const deleteButton = this.rootLocator.locator('//button[.//@data-icon="trash-alt"]');
+    await Promise.all([
+      waitForResponse(this.page, { uri: '/patch' }),
+      deleteButton.click()
+    ]);
+    await waitForNoSpinner(this.page);
+  }
+
+  public async getFieldValue(dynamicField: Label): Promise<string> {
     const {
       type: inputType,
       byText
-    } = tissueInputs.get(dynamicField) as TissueInputsMapValue;
+    } = tissueInputs.get(dynamicField) as InputMap;
 
     let value: Promise<any>;
     const inputLocator = await this.getField(dynamicField, byText);
@@ -57,7 +77,7 @@ export default class Tissue {
     return value;
   }
 
-  public async fillSMIDs(SMID: SMIdEnum): Promise<SMID> {
+  public async fillSMIDs(SMID: SM_ID): Promise<SMID> {
     const SMIDLocator = await this.getField(SMID);
     const SMIDPlusBtn = new Button(this.page, { root: SMIDLocator });
     await SMIDPlusBtn.click();
@@ -65,16 +85,16 @@ export default class Tissue {
     return this.SMIDModal;
   }
 
-  public async fillField(dynamicField: TissueDynamicFieldsEnum, {
+  public async fillField(dynamicField: Label, {
     inputValue,
     select,
     dates
-  }: FillTissue): Promise<void> {
+  }: FillInMap): Promise<void> {
     const {
       type: inputType,
       hasLookup,
       byText
-    } = tissueInputs.get(dynamicField) as TissueInputsMapValue;
+    } = tissueInputs.get(dynamicField) as InputMap;
 
     switch (inputType) {
       case InputTypeEnum.DATE: {
@@ -99,7 +119,7 @@ export default class Tissue {
   }
 
   public async getTumorCollaboratorSampleIDSuggestedValue(): Promise<string> {
-    const inputLocator = await this.getField(TissueDynamicFieldsEnum.TUMOR_COLLABORATOR_SAMPLE_ID, false);
+    const inputLocator = await this.getField(Label.TUMOR_COLLABORATOR_SAMPLE_ID, false);
     const inputElement = new Input(this.page, { root: inputLocator });
     const currentValue = await inputElement.currentValue();
 
@@ -114,11 +134,11 @@ export default class Tissue {
     await expect(dropDown).toHaveCount(1);
 
     await dropDown.nth(0).click();
-    return this.getCurrentValue(TissueDynamicFieldsEnum.TUMOR_COLLABORATOR_SAMPLE_ID, inputElement);
+    return this.getCurrentValue(Label.TUMOR_COLLABORATOR_SAMPLE_ID, inputElement);
   }
 
   /* Helper Functions */
-  private async fillTextareaField(dynamicField: TissueDynamicFieldsEnum, value: string | number): Promise<void> {
+  private async fillTextareaField(dynamicField: Label, value: string | number): Promise<void> {
     const textAreaLocator = await this.getField(dynamicField);
     const textarea = new TextArea(this.page, { root: textAreaLocator });
     const currentValue = await this.getCurrentValue(dynamicField, textarea);
@@ -137,8 +157,8 @@ export default class Tissue {
     }
   }
 
-  private async selectField(dynamicField: TissueDynamicFieldsEnum,
-    selection: TumorTypesEnum | TissueTypesEnum | SequencingResultsEnum | 'Yes' | 'No')
+  private async selectField(dynamicField: Label,
+    selection: TumorTypesEnum | TissueType | SequencingResultsEnum | 'Yes' | 'No')
     : Promise<void> {
     const selectLocator = await this.getField(dynamicField);
     const selectElement = new Select(this.page, { root: selectLocator });
@@ -152,7 +172,7 @@ export default class Tissue {
     }
   }
 
-  private async fillInputField(dynamicField: TissueDynamicFieldsEnum, value: string | number, byText = false, hasLookup = false): Promise<void> {
+  private async fillInputField(dynamicField: Label, value: string | number, byText = false, hasLookup = false): Promise<void> {
     const inputLocator = await this.getField(dynamicField, byText);
     const inputElement = new Input(this.page, { root: inputLocator });
     const currentValue = await this.getCurrentValue(dynamicField, inputElement);
@@ -165,7 +185,7 @@ export default class Tissue {
 
     await inputElement.focus();
     if (currentValue !== actualValue) {
-      if (!currentValue && dynamicField === TissueDynamicFieldsEnum.TUMOR_COLLABORATOR_SAMPLE_ID) {
+      if (!currentValue && dynamicField === Label.TUMOR_COLLABORATOR_SAMPLE_ID) {
         const dropDown = this.page.locator("//ul[contains(@class, 'Lookup--Dropdown')]/li");
         await dropDown.nth(0).click();
       }
@@ -177,7 +197,7 @@ export default class Tissue {
     }
   }
 
-  private async fillDateFields(dynamicField: TissueDynamicFieldsEnum, value: FillDate): Promise<void> {
+  private async fillDateFields(dynamicField: Label, value: FillDate): Promise<void> {
     const dateLocator = await this.getField(dynamicField);
     await this.fillDates(dateLocator, value);
   }
@@ -210,7 +230,7 @@ export default class Tissue {
     }
   }
 
-  private async getCurrentValue(dynamicField: TissueDynamicFieldsEnum, element: Input | Select | TextArea): Promise<string> {
+  private async getCurrentValue(dynamicField: Label, element: Input | Select | TextArea): Promise<string> {
     const currentValue = await element.currentValue();
     const isDisabled = await element.isDisabled();
 
@@ -219,46 +239,28 @@ export default class Tissue {
     return currentValue?.trim();
   }
 
-  private async getField(dynamicField: TissueDynamicFieldsEnum | SMIdEnum, byText = false): Promise<Locator> {
-    const fieldLocator = byText ? this.tissue.getByText(dynamicField) : this.findField(dynamicField);
+  private async getField(dynamicField: Label | SM_ID, byText = false): Promise<Locator> {
+    const fieldLocator = byText ? this.rootLocator.getByText(dynamicField) : this.findField(dynamicField);
     await expect(fieldLocator, `'${dynamicField}' is not visible`).toBeVisible();
 
     return fieldLocator;
   }
 
   /* Locator */
-  private findField(field: TissueDynamicFieldsEnum | SMIdEnum): Locator {
-    return this.tissue
-      .locator(this.fieldXPath(field));
-  }
-
-  private get tissue(): Locator {
-    return this.page.locator(this.tissueXPath)
-      .nth(this.tissueIndex);
+  private findField(field: Label | SM_ID): Locator {
+    return this.rootLocator.locator(this.fieldXPath(field));
   }
 
   private get lookupList(): Locator {
-    return this.page.locator(this.lookupListXPath);
+    return this.page.locator('xpath=//app-lookup/div/ul/li');
   }
 
   /* XPaths */
-  private fieldXPath(fieldName: TissueDynamicFieldsEnum | SMIdEnum): string {
+  private fieldXPath(fieldName: Label | SM_ID): string {
     return `//td[text()[normalize-space()='${fieldName}']]/following-sibling::td[1]`
   }
 
-  private get tissueXPath(): string {
-    return `${this.participantDynamicInformationTableXPath}//td[app-tissue]/app-tissue/div/table`
-  }
-
-  private get participantDynamicInformationTableXPath(): string {
-    return `${this.pageXPath}/div/div[last()]/table[not(contains(@class, 'table'))]`
-  }
-
-  private get pageXPath(): string {
-    return '//app-tissue-page'
-  }
-
-  private get lookupListXPath(): string {
-    return '//app-lookup/div/ul/li'
+  private get rootLocator(): Locator {
+    return this.page.locator('app-tissue').nth(this.nth);
   }
 }

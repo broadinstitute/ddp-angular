@@ -8,7 +8,7 @@ import { Navigation } from 'dsm/component/navigation/navigation';
 import SequencingOrderTab from 'dsm/pages/tablist/sequencing-order-tab';
 import UserPermissionPage from 'dsm/pages/user-and-permissions-page';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
-import ParticipantPage from 'dsm/pages/participant-page/participant-page';
+import ParticipantPage from 'dsm/pages/participant-page';
 import ClinicalOrdersPage from 'dsm/pages/samples/clinical-orders-page';
 import Select from 'dss/component/select';
 import { testLimitedPermissions as test } from 'fixtures/dsm-fixture';

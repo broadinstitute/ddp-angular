@@ -1,20 +1,17 @@
 import { Locator, Page, expect } from '@playwright/test';
 import DsmPageBase from './dsm-page-base';
 import { KitsTable } from 'dsm/component/tables/kits-table';
-import { KitTypeEnum } from 'dsm/component/kitType/enums/kitType-enum';
 import { waitForNoSpinner, waitForResponse } from 'utils/test-utils';
 import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
-import { KitType } from 'dsm/component/kitType/kitType';
 import { logInfo } from 'utils/log-utils';
 import Modal from 'dsm/component/modal';
 import { getDate, getDateMonthAbbreviated, offsetDaysFromDate } from 'utils/date-utils';
 import { SamplesNavEnum } from 'dsm/component/navigation/enums/samplesNav-enum';
 import Checkbox from 'dss/component/checkbox';
-import { Label } from 'dsm/enums';
+import { KitType, Label } from 'dsm/enums';
 
 export default abstract class KitsPageBase extends DsmPageBase {
   protected abstract TABLE_HEADERS: string[];
-  protected readonly kitType: KitType;
   protected readonly kitsTable: KitsTable;
   private readonly sentColumnIndex = 5;
   private readonly receivedColumnIndex = 3;
@@ -22,7 +19,6 @@ export default abstract class KitsPageBase extends DsmPageBase {
 
   protected constructor(readonly page: Page) {
     super(page);
-    this.kitType = new KitType(this.page);
     this.kitsTable = new KitsTable(this.page);
   }
 
@@ -35,12 +31,12 @@ export default abstract class KitsPageBase extends DsmPageBase {
     await expect(async () => expect(await this.page.locator('mat-checkbox[id]').count()).toBeGreaterThanOrEqual(1)).toPass({ timeout: 60000 });
     const kits = await this.getStudyKitTypes()
     for (const kit of kits) {
-      await expect(this.kitType.displayedKitType(kit)).toBeVisible();
+      await expect(this.kitCheckbox(kit).toLocator()).toBeVisible();
     }
     await waitForNoSpinner(this.page);
   }
 
-  public async reloadKitPage(kitType: KitTypeEnum): Promise<void> {
+  public async reloadKitPage(kitType: KitType): Promise<void> {
     await this.reload();
     await this.waitForReady();
     await this.selectKitType(kitType);
@@ -53,13 +49,13 @@ export default abstract class KitsPageBase extends DsmPageBase {
     await waitForNoSpinner(this.page);
   }
 
-  public async selectKitType(kitType: KitTypeEnum, opts: { waitForResp?: string } = {}): Promise<boolean> {
+  public async selectKitType(kitType: KitType, opts: { waitForResp?: string } = {}): Promise<boolean> {
     const { waitForResp = 'ui/kitRequests' } = opts;
     const waitPromise = waitForResp === 'undefined' ? Promise.resolve() : waitForResponse(this.page, { uri: waitForResp });
     await waitForNoSpinner(this.page);
     await Promise.all([
       waitPromise,
-      this.kitType.selectKitType(kitType)
+      this.kitCheckbox(kitType).check()
     ]);
     await waitForNoSpinner(this.page);
     return await this.hasKitRequests();
@@ -134,10 +130,10 @@ export default abstract class KitsPageBase extends DsmPageBase {
     return !existsText;
   }
 
-  public async getSelectedKitType(): Promise<KitTypeEnum | null> {
+  public async getSelectedKitType(): Promise<KitType | null> {
     const kits = await this.getStudyKitTypes();
     for (const kit of kits) {
-      const isSelected = await this.kitType.kitTypeCheckbox(kit).isChecked();
+      const isSelected = await this.kitCheckbox(kit).isChecked();
       if (isSelected) {
         return kit;
       }
@@ -145,11 +141,7 @@ export default abstract class KitsPageBase extends DsmPageBase {
     return null;
   }
 
-  public getKitCheckbox(kit: KitTypeEnum): Checkbox {
-    return this.kitType.kitTypeCheckbox(kit);
-  }
-
-  public async getStudyKitTypes(studyName?: StudyEnum): Promise<KitTypeEnum[]> {
+  public async getStudyKitTypes(studyName?: StudyEnum): Promise<KitType[]> {
     if (!studyName) {
       const studyNameLocation = this.page.locator(`//app-navigation//a[@data-toggle='dropdown']//i`);
       studyName = await studyNameLocation.innerText() as StudyEnum;
@@ -158,13 +150,13 @@ export default abstract class KitsPageBase extends DsmPageBase {
     let kitTypes;
     switch (studyName) {
       case StudyEnum.RGP:
-        kitTypes = [KitTypeEnum.BLOOD, KitTypeEnum.BLOOD_AND_RNA];
+        kitTypes = [KitType.BLOOD, KitType.BLOOD_AND_RNA];
         break;
       case StudyEnum.PANCAN:
-        kitTypes = [KitTypeEnum.BLOOD, KitTypeEnum.SALIVA, KitTypeEnum.STOOL];
+        kitTypes = [KitType.BLOOD, KitType.SALIVA, KitType.STOOL];
         break;
       default:
-        kitTypes = [KitTypeEnum.SALIVA, KitTypeEnum.BLOOD];
+        kitTypes = [KitType.SALIVA, KitType.BLOOD];
         break;
     }
     return kitTypes;
@@ -299,5 +291,9 @@ export default abstract class KitsPageBase extends DsmPageBase {
 
   public get getReloadKitListBtn(): Locator {
     return this.page.getByRole('button', {name: 'Reload Kit List'});
+  }
+
+  public kitCheckbox(kitType: KitType): Checkbox {
+    return new Checkbox(this.page, { label: kitType, root: 'app-root' });
   }
 }

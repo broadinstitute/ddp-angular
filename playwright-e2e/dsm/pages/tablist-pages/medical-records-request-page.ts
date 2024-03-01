@@ -2,12 +2,12 @@ import { Download, expect, Locator, Page } from '@playwright/test';
 import { waitForNoSpinner, waitForResponse } from 'utils/test-utils';
 import { Label } from 'dsm/enums';
 import Input from 'dss/component/input';
-import { FillDate } from 'dsm/pages/tissue/interfaces/tissue-information-interfaces';
+import { FillDate } from 'dsm/pages/models/input-interface';
 import DatePicker from 'dsm/component/date-picker';
 import Checkbox from 'dss/component/checkbox';
 import Select from 'dss/component/select';
 import { logInfo } from 'utils/log-utils';
-import DsmPageBase from 'dsm/pages/dsm-page-base';
+import tablistPageBase from 'dsm/pages/tablist-pages/tablist-page-base';
 
 export interface PDFType {
   IRB_LETTER: string;
@@ -34,7 +34,7 @@ export const PDFName: PDFType = {
 };
 
 
-export default class MedicalRecordsRequestPage extends DsmPageBase {
+export default class MedicalRecordsRequestPage extends tablistPageBase {
   PAGE_TITLE = 'Medical Records - Request Page';
 
   constructor(page: Page) {
@@ -45,20 +45,15 @@ export default class MedicalRecordsRequestPage extends DsmPageBase {
     return this.page.locator('//app-medical-record');
   }
 
-  public async waitForReady(): Promise<void> {
-    await super.waitForReady();
-    await waitForNoSpinner(this.page);
-  }
-
   public async getStaticText(infoFieldName: Label): Promise<string> {
-    const fieldLocator = this.staticInformationXpath(infoFieldName);
+    const fieldLocator = this.staticField(infoFieldName);
     await expect(fieldLocator, `Field: ${infoFieldName} not found.`).toBeVisible();
     const data = await fieldLocator.textContent();
     return data?.trim() as string;
   }
 
   public async fillText(infoFieldName: Label, value: string): Promise<void> {
-    const fieldLocator = this.dynamicInformationXpath(infoFieldName);
+    const fieldLocator = this.dynamicField(infoFieldName);
     const input = new Input(this.page, { root: fieldLocator, });
     await expect(input.toLocator(), `Field: ${infoFieldName} is not visible.`).toBeVisible();
     expect(await input.isDisabled(), `Field: ${infoFieldName} is not editable.`).toBeFalsy();
@@ -116,17 +111,17 @@ export default class MedicalRecordsRequestPage extends DsmPageBase {
   }
 
   public get initialMRRequestDateLocator(): Locator {
-    return this.dynamicInformationXpath(Label.INITIAL_MR_REQUEST).locator('app-field-datepicker');
+    return this.dynamicField(Label.INITIAL_MR_REQUEST).locator('app-field-datepicker');
   }
 
   public get initialMRReceivedDateLocator(): Locator {
-    return this.dynamicInformationXpath(Label.INITIAL_MR_RECEIVED).locator('app-field-datepicker');
+    return this.dynamicField(Label.INITIAL_MR_RECEIVED).locator('app-field-datepicker');
   }
 
   /* Locators */
 
   public get getNoActionNeeded(): Checkbox {
-    return new Checkbox(this.page, { root: this.dynamicInformationXpath(Label.NO_ACTION_NEEDED)});
+    return new Checkbox(this.page, { root: this.dynamicField(Label.NO_ACTION_NEEDED)});
   }
 
   public async downloadPDFBundle(): Promise<Download> {
@@ -188,21 +183,5 @@ export default class MedicalRecordsRequestPage extends DsmPageBase {
 
   private get downloadSelectedPDFButton(): Locator {
     return this.page.getByRole('button', { name: 'Download selected single PDF' });
-  }
-
-  private staticInformationXpath(infoFieldName: Label): Locator {
-    return this.page.locator(`${this.staticInformationTableXPath}//tr[td[text()[normalize-space()="${infoFieldName}"]]]/td[2]`);
-  }
-
-  private get staticInformationTableXPath(): string {
-    return `${this.rootLocator}//table[contains(@class, "table-condensed")]/tbody`;
-  }
-
-  private dynamicInformationXpath(infoFieldName: Label, index = 2): Locator {
-    return this.page.locator(`${this.dynamicInformationTableXPath}//tr[td[normalize-space()="${infoFieldName}"]]/td`);
-  }
-
-  private get dynamicInformationTableXPath(): string {
-    return `${this.rootLocator}//div[last()]/table[not(contains(@class, "table"))]`;
   }
 }

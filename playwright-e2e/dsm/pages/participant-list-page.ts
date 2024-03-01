@@ -246,9 +246,9 @@ export default class ParticipantListPage extends DsmPageBase {
    * @returns A participant with the requested tab
    */
   async findParticipantWithTab(
-    opts: { findPediatricParticipant: boolean, tab?: Tab, rgpProbandTab?: boolean, uriString?: string, prefix?: string }
+    opts: { findPediatricParticipant: boolean, tab?: Tab, rgpProbandTab?: boolean, uri?: string, prefix?: string }
     ): Promise<string> {
-    const { findPediatricParticipant = false, tab, rgpProbandTab = false, uriString = '/ui/applyFilter', prefix } = opts;
+    const { findPediatricParticipant = false, tab, rgpProbandTab = false, uri: uriString = '/ui/applyFilter', prefix } = opts;
     const searchPanel = this.filters.searchPanel;
     await searchPanel.open();
     const applyFilterResponse = await searchPanel.search({ uri: uriString });

@@ -194,8 +194,8 @@ export default class ParticipantPage {
       .toBe(value);
   }
 
-   public tablist(name: Tab): Tablist {
-      const page = this.page;
-      return new Tablist(page, name);
-    }
+  public tablist(name: Tab): Tablist {
+    const page = this.page;
+    return new Tablist(page, name);
+  }
 }

@@ -1,5 +1,5 @@
 import { InputTypeEnum, OncHistorySelectRequestEnum } from 'dsm/component/tabs/enums/onc-history-input-columns-enum';
-import { FillDate } from 'dsm/pages/tissue/interfaces/tissue-information-interfaces';
+import { FillDate } from 'dsm/pages/models/input-interface';
 
 export interface OncHistoryInputsTypes {
   value?: string | number;
