@@ -10,7 +10,7 @@ export const COLUMN = {
 }
 
 export default class MailingListPage extends DsmPageBase {
-  protected PAGE_TITLE = 'Mailing List';
+  PAGE_TITLE = 'Mailing List';
   readonly downloadButton: Locator;
 
   constructor(page: Page) {

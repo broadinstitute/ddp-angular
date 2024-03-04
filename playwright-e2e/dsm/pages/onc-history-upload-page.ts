@@ -6,11 +6,9 @@ import path from 'path';
 
 export default class OncHistoryUploadPage extends DsmPageBase {
   PAGE_TITLE = 'Onc History Upload';
-  private downloadButton: Locator;
 
   constructor(page: Page) {
     super(page);
-    this.downloadButton = this.page.getByRole('button', { name: 'Download' })
   }
 
   get toLocator(): Locator {

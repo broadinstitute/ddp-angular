@@ -26,7 +26,7 @@ export enum ProblemWithTissueEnum {
 
 
 export default class TissueRequestPage extends tablistPageBase {
-  protected PAGE_TITLE = 'Tissue Request';
+  PAGE_TITLE = 'Tissue Request';
 
   constructor(page: Page) {
     super(page);

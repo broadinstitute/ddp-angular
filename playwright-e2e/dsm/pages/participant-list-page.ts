@@ -15,7 +15,7 @@ import DsmPageBase from './dsm-page-base';
 import * as user from 'data/fake-user.json';
 
 export default class ParticipantListPage extends DsmPageBase {
-  protected PAGE_TITLE = 'Participant List';
+  PAGE_TITLE = 'Participant List';
   private readonly _filters: Filters = new Filters(this.page);
   private readonly _quickFilters: QuickFilters = new QuickFilters(this.page);
   private readonly _table: ParticipantListTable = new ParticipantListTable(this.page);
