@@ -36,7 +36,7 @@ export default class Tablist {
     let contactInformationEntered = true;
     if (this.tab === Tab.CONTACT_INFORMATION) {
       await this.checkAndClick();
-      contactInformationEntered = await this.HasContactInformationData();
+      contactInformationEntered = await this.hasContactInformationData();
     }
     return contactInformationEntered;
   }
@@ -52,7 +52,7 @@ export default class Tablist {
     return (this.tabs as Map<string, object>).get(this.tab) as T;
   }
 
-  protected async HasContactInformationData(): Promise<boolean> {
+  protected async hasContactInformationData(): Promise<boolean> {
     const isNotEnteredVisible = await (this.tabs.get(Tab.CONTACT_INFORMATION) as ContactInformationTab)
       .isNotEnteredVisible();
     return !isNotEnteredVisible;
