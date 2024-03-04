@@ -10,7 +10,7 @@ import KitsUploadPage from 'dsm/pages/kits-upload-page';
 import InitialScanPage from 'dsm/pages/scan/initial-scan-page';
 import TrackingScanPage from 'dsm/pages/scan/tracking-scan-page';
 import FinalScanPage from 'dsm/pages/scan/final-scan-page';
-import { getToday } from 'utils/date-utils';
+import { dateFormat, getDate, getToday, toLocalTime } from 'utils/date-utils';
 import KitsSentPage from 'dsm/pages/kits-sent-page';
 import ParticipantPage from 'dsm/pages/participant-page';
 import OncHistoryTab from 'dsm/pages/tablist/onc-history-tab';
@@ -692,7 +692,7 @@ async function prepareSentKit(shortID: string,
   await kitsSentPage.search(Label.MF_CODE, kitLabel, { count: 1 });
 
   const sentDate = await kitsSentPage.getData(Label.SENT);
-  expect(sentDate).toStrictEqual(getToday());
+  expect(dateFormat().format(new Date(sentDate))).toStrictEqual(getToday());
 
   //Return the mf code a.k.a the kit label so that the kit can later be marked as received
   return kitLabel;

@@ -24,7 +24,7 @@ export function getToday(): string {
     `${today.toLocaleString('en-US', { month: '2-digit' })}/` +
     `${today.toLocaleString('en-US', { day: '2-digit' })}/` +
     `${today.toLocaleString('en-US', { year: 'numeric' })}`;
-  console.log(`Today is ${formatToday}`);
+  // console.log(`Today is ${formatToday}`);
   return formatToday;
 }
 
@@ -66,6 +66,12 @@ export function getDateMonthAbbreviated(dateString: string): string {
 
 export function getDateEasternTimeZone(date?: Date): string {
   return dateFormat('America/New_York').format(date ? date : new Date());
+}
+
+export function toLocalTime(date?: string, timeZone?: string): string {
+  return date
+    ? new Date(date).toLocaleTimeString('en-US', {timeZone})
+    : new Date().toLocaleTimeString('en-US', {timeZone});
 }
 
 // convert local date to UTC date

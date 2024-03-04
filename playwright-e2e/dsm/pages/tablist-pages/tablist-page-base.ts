@@ -7,13 +7,15 @@ export default abstract class tablistPageBase extends DsmPageBase {
     super(page);
   }
 
-  protected staticField(infoFieldName: Label): Locator {
-    return this.rootLocator.locator(`xpath=//tr[not(.//input)][not(.//mat-checkbox)][td[text()[normalize-space()="${infoFieldName}"]]]/td[2]`);
+  protected staticField(fieldLabel: Label): Locator {
+    return this.rootLocator.locator(`xpath=//tr[not(.//input)][not(.//mat-checkbox)][td[text()[normalize-space()="${fieldLabel}"]]]/td[2]`);
   }
 
-  protected dynamicField(infoFieldName?: Label): Locator {
-    return infoFieldName
-      ? this.rootLocator.locator(`xpath=//tr[.//textarea or .//input or .//mat-checkbox][td[normalize-space()="${infoFieldName}"]]/td`)
-      : this.rootLocator.locator(`xpath=//tr[.//textarea or .//input or .//mat-checkbox]/td`);
+  protected dynamicField(fieldLabel?: Label): Locator {
+    return fieldLabel
+      ? this.rootLocator.locator(
+          `xpath=//tr[.//textarea or .//input or .//mat-checkbox or .//mat-select][td[normalize-space()="${fieldLabel}"]]/td`)
+      : this.rootLocator.locator(
+          `xpath=//tr[.//textarea or .//input or .//mat-checkbox or .//mat-select]/td`);
   }
 }

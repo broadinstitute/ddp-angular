@@ -261,7 +261,7 @@ export default class Tissue {
     return `//td[text()[normalize-space()='${fieldName}']]/following-sibling::td[1]`
   }
 
-  private get rootLocator(): Locator {
+  get rootLocator(): Locator {
     return this.page.locator('app-tissue').nth(this.nth);
   }
 }

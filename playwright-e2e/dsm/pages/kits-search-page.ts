@@ -35,9 +35,13 @@ export default class KitsSearchPage extends KitsPageBase {
     return this.page.locator('app-shipping-search');
   }
 
+  public async waitForReady(): Promise<void> {
+    await super.waitForReady();
+    await expect(this.searchByFieldSelect.toLocator()).toBeVisible();
+  }
+
   async searchByField(searchField: SearchByField, value: string): Promise<Table> {
-    const select = new Select(this.page, { label: 'Search by Field', root: 'app-shipping-search' });
-    await select.selectOption(searchField);
+    await this.searchByFieldSelect.selectOption(searchField);
     const locator = this.page.locator('//div[button[normalize-space()="Search Kit"]]');
     await locator.locator('//input').fill(value);
     await Promise.all([
@@ -49,6 +53,10 @@ export default class KitsSearchPage extends KitsPageBase {
     const table = new Table(this.page);
     await table.waitForReady();
     return table
+  }
+
+  get searchByFieldSelect(): Select {
+    return new Select(this.page, { label: 'Search by Field', root: 'app-shipping-search' });
   }
 
   async pickEndDate(opts: { yyyy?: number, month?: number, dayOfMonth?: number } = {}): Promise<string> {

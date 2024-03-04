@@ -27,10 +27,12 @@ export default abstract class KitsPageBase extends DsmPageBase {
 
   public async waitForReady(): Promise<void> {
     await super.waitForReady();
-    await expect(async () => expect(await this.page.locator('mat-checkbox[id]').count()).toBeGreaterThanOrEqual(1)).toPass({ timeout: 60000 });
-    const kits = await this.getStudyKitTypes()
-    for (const kit of kits) {
-      await expect(this.kitCheckbox(kit).toLocator()).toBeVisible();
+    if (this.PAGE_TITLE !== 'Kit Search') {
+      await expect(async () => expect(await this.page.locator('mat-checkbox[id]').count()).toBeGreaterThanOrEqual(1)).toPass({ timeout: 60000 });
+      const kits = await this.getStudyKitTypes()
+      for (const kit of kits) {
+        await expect(this.kitCheckbox(kit).toLocator()).toBeVisible();
+      }
     }
     await waitForNoSpinner(this.page);
   }

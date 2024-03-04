@@ -55,7 +55,8 @@ export default abstract class DsmPageBase {
   }
 
   public async backToParticipantList(): Promise<void> {
-    await this.page.getByText("back to (List|'Participant List')").click();
+    // regex allows apostrophe char in Medical Records Request page
+    await this.page.getByText(/back to\s((.)?Participant?\s)?List(.)?/).click();
     await expect(this.page.locator('//app-participant-list/h1')).toHaveText('Participant List');
     await waitForNoSpinner(this.page);
   }
