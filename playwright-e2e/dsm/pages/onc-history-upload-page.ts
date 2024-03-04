@@ -13,7 +13,7 @@ export default class OncHistoryUploadPage extends DsmPageBase {
     this.downloadButton = this.page.getByRole('button', { name: 'Download' })
   }
 
-  protected get rootLocator(): Locator {
+  protected get toLocator(): Locator {
     return this.page.locator('app-onc-history-upload');
   }
 

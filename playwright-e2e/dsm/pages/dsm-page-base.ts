@@ -27,7 +27,7 @@ export default abstract class DsmPageBase {
 
   public async waitForReady(): Promise<void> {
     await this.page.waitForLoadState();
-    await expect(this.rootLocator.locator('h1')).toHaveText(this.PAGE_TITLE);
+    await expect(this.toLocator.locator('h1')).toHaveText(this.PAGE_TITLE);
     await waitForNoSpinner(this.page);
   }
 
@@ -61,5 +61,5 @@ export default abstract class DsmPageBase {
     await waitForNoSpinner(this.page);
   }
 
-  protected abstract get rootLocator(): Locator;
+  protected abstract get toLocator(): Locator;
 }

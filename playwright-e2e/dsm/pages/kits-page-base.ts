@@ -178,7 +178,7 @@ export default abstract class KitsPageBase extends DsmPageBase {
       this.deactivateReasonBtn.click(),
     ]);
 
-    await expect(new Modal(this.page).toLocator()).not.toBeVisible();
+    await expect(new Modal(this.page, this.toLocator).toLocator).not.toBeVisible();
     await waitForNoSpinner(this.page);
     return reason;
   }

@@ -11,8 +11,8 @@ interface InputData {
 export default class SMID {
   private readonly modalComponent: Modal;
 
-  constructor(private readonly page: Page, private readonly tissueIndex: number) {
-    this.modalComponent = new Modal(this.page);
+  constructor(private readonly page: Page, private readonly root: Locator) {
+    this.modalComponent = new Modal(page, root);
   }
 
   public async getValueAt(index: number): Promise<string> {
@@ -67,7 +67,7 @@ export default class SMID {
     const currentValue = await fieldInput.currentValue();
     if (currentValue.trim() !== value) {
       await Promise.all([
-        waitForResponse(this.page, { uri: 'patch' }),
+        waitForResponse(this.page, { uri: '/patch' }),
         fieldInput.fillSimple(value)
       ]);
     }
@@ -93,10 +93,6 @@ export default class SMID {
   /* Locators */
   private get modalBody(): Locator {
     return this.modalComponent.bodyLocator();
-  }
-
-  private get modal(): Locator {
-    return this.page.locator(`(//app-tissue)[${this.tissueIndex + 1}]/app-modal`);
   }
 
   private get fields(): Locator {

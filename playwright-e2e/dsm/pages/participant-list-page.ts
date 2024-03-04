@@ -38,7 +38,7 @@ export default class ParticipantListPage extends DsmPageBase {
     super(page);
   }
 
-  protected get rootLocator(): Locator {
+  protected get toLocator(): Locator {
     return this.page.locator('app-participant-list');
   }
 
@@ -97,8 +97,8 @@ export default class ParticipantListPage extends DsmPageBase {
     const saveButton = this.page.locator('button').filter({ has: this.page.locator('[data-icon="save"]')});
     await saveButton.click();
 
-    const saveModal = new Modal(this.page);
-    await expect(saveModal.toLocator()).toBeVisible();
+    const saveModal = new Modal(this.page, this.toLocator);
+    await expect(saveModal.toLocator).toBeVisible();
     expect(await saveModal.getHeader()).toBe('Please enter a name for your filter');
     await saveModal.getInput({ label: 'Filter Name' }).fill(viewName);
     await Promise.all([
@@ -129,7 +129,7 @@ export default class ParticipantListPage extends DsmPageBase {
     const button = this.page.locator('button').filter({has: this.page.locator('[data-icon="file-download"]')});
     await button.click();
 
-    const modal = new Modal(this.page);
+    const modal = new Modal(this.page, this.toLocator);
     await expect(modal.headerLocator()).toHaveText('Configure export');
 
     const fileFormatRadio = modal.getRadiobutton(new RegExp('File format:'));

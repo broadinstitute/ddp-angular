@@ -41,7 +41,7 @@ export default class MedicalRecordsRequestPage extends tablistPageBase {
     super(page);
   }
 
-  protected get rootLocator(): Locator {
+  protected get toLocator(): Locator {
     return this.page.locator('//app-medical-record');
   }
 
@@ -140,7 +140,7 @@ export default class MedicalRecordsRequestPage extends tablistPageBase {
 
   public async downloadSinglePDF(pdf: string, opts: { nth?: number } = {}): Promise<Download> {
     const { nth } = opts;
-    const select = new Select(this.page, { selector: '//mat-select[@placeholder="Select PDF"]', root: this.rootLocator });
+    const select = new Select(this.page, { selector: '//mat-select[@placeholder="Select PDF"]', root: this.toLocator });
     await expect(select.toLocator()).toBeVisible();
     await expect(this.downloadPDFBundleButton).toBeVisible();
 

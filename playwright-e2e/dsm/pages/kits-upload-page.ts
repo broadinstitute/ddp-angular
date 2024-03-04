@@ -18,7 +18,7 @@ export default class KitsUploadPage extends KitsPageBase {
     super(page);
   }
 
-  protected get rootLocator(): Locator {
+  protected get toLocator(): Locator {
     return this.page.locator('app-upload');
   }
 
@@ -74,9 +74,9 @@ export default class KitsUploadPage extends KitsPageBase {
       await waitForNoSpinner(this.page);
     }
 
-    const modal = new Modal(this.page);
+    const modal = new Modal(this.page, this.toLocator);
     try {
-      await expect(modal.toLocator()).toBeVisible({timeout: 5000});
+      await expect(modal.toLocator).toBeVisible({timeout: 5000});
     } catch (err) {
       return;
     }

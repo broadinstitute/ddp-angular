@@ -32,7 +32,7 @@ export default class TissueRequestPage extends tablistPageBase {
     super(page);
   }
 
-  protected get rootLocator(): Locator {
+  protected get toLocator(): Locator {
     return this.page.locator('app-tissue-page');
   }
 
@@ -41,25 +41,15 @@ export default class TissueRequestPage extends tablistPageBase {
     if (index < 0) {
       throw new Error(`Invalid index number: ${index}`);
     }
-    return new Tissue(page, index);
+    return new Tissue(page, index, this.toLocator);
   }
 
   public async addTissue(): Promise<Tissue> {
-    const root = this.rootLocator.locator('//tr[.//text()[normalize-space()="Add another Block or set of Slides"]]');
+    const root = this.toLocator.locator('//tr[.//text()[normalize-space()="Add another Block or set of Slides"]]');
     const addButton = new Button(this.page, { root });
-    const isDisabled = await addButton.isDisabled();
-    if (isDisabled) {
-      throw new Error('"Add another Block or set of Slides" button is disabled');
-    }
     await addButton.click();
     const tissuesCount = await this.page.locator('app-tissue').count();
     return this.tissue(tissuesCount - 1);
-  }
-
-  public async getParticipantInformation(name: Label): Promise<string> {
-    const participantInformation = this.participantInformation(name);
-    const data = await participantInformation.textContent();
-    return data?.trim() as string;
   }
 
   public async getFaxSentDate(dateIndex = 0): Promise<string> {
@@ -128,23 +118,6 @@ export default class TissueRequestPage extends tablistPageBase {
     applyToAll && await this.applyToAll(destructionPolicyLocator);
   }
 
-  public async problemsWithTissue(newValue: ProblemWithTissueEnum, unableToObtainSelection = false): Promise<void> {
-    const problemsWithTissueLocator = this.dynamicField(Label.PROBLEM_WITH_TISSUE);
-    const selectElement = new Select(this.page, { root: problemsWithTissueLocator });
-    const selectedValue = await selectElement.currentValue();
-    const isDisabled = await selectElement.isSelectDisabled();
-    const allowSelection = !isDisabled && selectedValue?.trim() !== newValue;
-
-    if (allowSelection) {
-      await Promise.all([
-        waitForResponse(this.page, { uri: 'patch' }),
-        selectElement.selectOption(newValue)
-      ]);
-    }
-
-    await this.checkCheckbox(this.problemsWithTissueUnableToObtainCheckbox(), unableToObtainSelection);
-  }
-
   public async selectGender(gender: 'Male' | 'Female'): Promise<void> {
     const genderLocator = this.dynamicField(Label.GENDER);
     const selectElement = new Select(this.page, { root: genderLocator });
@@ -175,7 +148,7 @@ export default class TissueRequestPage extends tablistPageBase {
     const applyToAllBtn = new Button(this.page, { root, label: 'APPLY TO ALL', exactMatch: true });
     await applyToAllBtn.click();
 
-    const modal = new Modal(this.page);
+    const modal = new Modal(this.page, this.toLocator);
     await expect(modal.bodyLocator()).toHaveText(/Are you sure you want to change the destruction policy for all of the tissues from this facility/);
     const yesBtn = modal.getButton({ label: 'Yes' }).toLocator();
 
@@ -196,7 +169,7 @@ export default class TissueRequestPage extends tablistPageBase {
       // alert was closed by Playwright
     }
 
-    await expect(modal.toLocator()).not.toBeVisible();
+    await expect(modal.toLocator).not.toBeVisible();
   }
 
   private async fillFaxSentDate(dateIndex: number, date: FillDate): Promise<void> {
@@ -241,15 +214,5 @@ export default class TissueRequestPage extends tablistPageBase {
         checkbox.uncheck()
       ]);
     }
-  }
-
-  /* Locators */
-
-  private participantInformation(name: Label) {
-    return this.staticField(name);
-  }
-
-  private problemsWithTissueUnableToObtainCheckbox(): Locator {
-    return this.dynamicField(Label.PROBLEM_WITH_TISSUE)
   }
 }

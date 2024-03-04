@@ -31,7 +31,7 @@ export default class KitsSearchPage extends KitsPageBase {
     super(page);
   }
 
-  protected get rootLocator(): Locator {
+  protected get toLocator(): Locator {
     return this.page.locator('app-shipping-search');
   }
 

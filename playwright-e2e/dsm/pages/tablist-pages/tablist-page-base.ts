@@ -8,14 +8,14 @@ export default abstract class tablistPageBase extends DsmPageBase {
   }
 
   protected staticField(fieldLabel: Label): Locator {
-    return this.rootLocator.locator(`xpath=//tr[not(.//input)][not(.//mat-checkbox)][td[text()[normalize-space()="${fieldLabel}"]]]/td[2]`);
+    return this.toLocator.locator(`xpath=//tr[not(.//input)][not(.//mat-checkbox)][td[text()[normalize-space()="${fieldLabel}"]]]/td[2]`);
   }
 
   protected dynamicField(fieldLabel?: Label): Locator {
     return fieldLabel
-      ? this.rootLocator.locator(
+      ? this.toLocator.locator(
           `xpath=//tr[.//textarea or .//input or .//mat-checkbox or .//mat-select][td[normalize-space()="${fieldLabel}"]]/td`)
-      : this.rootLocator.locator(
+      : this.toLocator.locator(
           `xpath=//tr[.//textarea or .//input or .//mat-checkbox or .//mat-select]/td`);
   }
 }

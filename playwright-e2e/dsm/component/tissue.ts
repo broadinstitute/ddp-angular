@@ -35,8 +35,12 @@ export enum TumorTypesEnum {
 export default class Tissue {
   private readonly SMIDModal: SMID;
 
-  constructor(private readonly page: Page, private readonly nth = 0) {
-    this.SMIDModal = new SMID(this.page, this.nth);
+  constructor(private readonly page: Page, private readonly nth = 0, private readonly root: Locator) {
+    this.SMIDModal = new SMID(this.page, root);
+  }
+
+  get rootLocator(): Locator {
+    return this.root.locator('app-tissue').nth(this.nth);
   }
 
   public async delete(): Promise<void> {
@@ -259,9 +263,5 @@ export default class Tissue {
   /* XPaths */
   private fieldXPath(fieldName: Label | SM_ID): string {
     return `//td[text()[normalize-space()='${fieldName}']]/following-sibling::td[1]`
-  }
-
-  get rootLocator(): Locator {
-    return this.page.locator('app-tissue').nth(this.nth);
   }
 }
