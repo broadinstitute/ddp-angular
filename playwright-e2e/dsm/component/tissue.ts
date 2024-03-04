@@ -42,7 +42,7 @@ export default class Tissue extends ComponentBase {
   }
 
   get toLocator(): Locator {
-    return this.toLocator.locator('app-tissue').nth(this.nth);
+    return super.toLocator.locator('app-tissue').nth(this.nth);
   }
 
   public async delete(): Promise<void> {

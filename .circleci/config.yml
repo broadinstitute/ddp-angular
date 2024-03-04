@@ -693,8 +693,10 @@ jobs:
           working_directory: *playwright_path
           command: npx playwright install --with-deps chromium # Only need Chrome browser
       - run:
-          name: Running Playwright tests on << parameters.env >>
+          name: Running Playwright tests in << parameters.env >> env
           working_directory: *playwright_path
+          environment:
+            JEST_JUNIT_ADD_FILE_ATTRIBUTE: true
           command: |
             if [ "<< parameters.test_suite >>" == "dss" ]
             then
@@ -706,11 +708,9 @@ jobs:
               npx playwright test --list | grep -o 'tests/.*.spec.ts' | sort | uniq > e2e_tests.txt
             fi
 
-            echo ""
             TESTS_FILE=$(circleci tests split --split-by=timings --timings-type=classname e2e_tests.txt)
-            echo ${TESTS_FILE}
             
-            npm run test:ci ${TESTS_FILE}
+            echo $TESTS_FILE | circleci tests run --command="xargs npm run test:ci" --verbose --split-by=timings
           no_output_timeout: 10m
       - store_test_results:
           path: playwright-e2e/junit
