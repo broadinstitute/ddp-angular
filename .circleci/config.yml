@@ -803,7 +803,6 @@ workflows:
           check_changed: true
           requires:
             - << matrix.study_key >>-ui-unit-test-pr
-            - api-unit-test
       - ui-unit-test:
           <<: *filter-pr-branch
           name: << matrix.study_key >>-ui-unit-test-pr
