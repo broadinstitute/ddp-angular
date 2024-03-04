@@ -6,8 +6,8 @@ import KitsPageBase from 'dsm/pages/kits-page-base';
 import {KitType, Label} from 'dsm/enums';
 
 export default class KitsSentPage extends KitsPageBase {
-  protected PAGE_TITLE = 'Kits Sent';
-  protected TABLE_HEADERS = [Label.SHORT_ID, Label.SHIPPING_ID,
+  PAGE_TITLE = 'Kits Sent';
+  TABLE_HEADERS = [Label.SHORT_ID, Label.SHIPPING_ID,
     Label.TRACKING_NUMBER, Label.TRACKING_RETURN,
     Label.SENT, Label.MF_CODE, Label.DDP_REALM,
     Label.TYPE, Label.SAMPLE_TYPE];
@@ -16,7 +16,7 @@ export default class KitsSentPage extends KitsPageBase {
     super(page);
   }
 
-  protected get toLocator(): Locator {
+  get toLocator(): Locator {
     return this.page.locator('app-shipping');
   }
 

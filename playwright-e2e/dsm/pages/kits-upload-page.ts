@@ -11,14 +11,14 @@ import { StudyName } from 'dsm/navigation';
 
 export default class KitsUploadPage extends KitsPageBase {
   TABLE_HEADERS = []; // no table in this page
-  protected PAGE_TITLE = 'Kit Upload';
+  PAGE_TITLE = 'Kit Upload';
   private readonly T_HEAD = 'shortId\tfirstName\tlastName\tstreet1\tstreet2\tcity\tpostalCode\tstate\tcountry';
 
   constructor(page: Page) {
     super(page);
   }
 
-  protected get toLocator(): Locator {
+  get toLocator(): Locator {
     return this.page.locator('app-upload');
   }
 

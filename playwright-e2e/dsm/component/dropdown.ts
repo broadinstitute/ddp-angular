@@ -13,7 +13,7 @@ export default class Dropdown {
     this.locator = this.page.locator('li.dropdown').filter({ has: this.page.locator(textSelector) });
   }
 
-  toLocator(): Locator {
+  get toLocator(): Locator {
     return this.locator;
   }
 
@@ -21,12 +21,12 @@ export default class Dropdown {
    * Determine if dropdown is open by look up aria-expanded property
    */
   async isOpen(): Promise<boolean> {
-    const ariaExpanded = await this.toLocator().locator('a[data-toggle="dropdown"]').getAttribute('aria-expanded');
+    const ariaExpanded = await this.toLocator.locator('a[data-toggle="dropdown"]').getAttribute('aria-expanded');
     return ariaExpanded === 'true';
   }
 
   async open(): Promise<void> {
-    !(await this.isOpen()) && (await this.toLocator().locator('a.dropdown-toggle').click());
+    !(await this.isOpen()) && (await this.toLocator.locator('a.dropdown-toggle').click());
   }
 
   async selectOption(value: string): Promise<void> {
@@ -35,13 +35,13 @@ export default class Dropdown {
 
   async getOption(value: string): Promise<Locator> {
     await this.open();
-    return this.toLocator().locator('ul.dropdown-menu').locator('a').getByText(value, {exact: true});
+    return this.toLocator.locator('ul.dropdown-menu').locator('a').getByText(value, {exact: true});
   }
 
   async getDisplayedOptions<T extends Miscellaneous | Samples | Study | StudyName>(): Promise<T[]> {
     await this.open();
     const options: T[] = [];
-    const links: Locator[] = await this.toLocator().locator('ul.dropdown-menu').locator('a').all();
+    const links: Locator[] = await this.toLocator.locator('ul.dropdown-menu').locator('a').all();
     for (const link of links) {
       const innerText = (await link.innerText()).trim();
       options.push(innerText as T);

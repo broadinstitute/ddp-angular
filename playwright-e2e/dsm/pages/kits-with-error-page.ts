@@ -9,7 +9,7 @@ export enum SearchByField {
 }
 
 export default class KitsWithErrorPage extends KitsPageBase {
-  protected PAGE_TITLE = 'Kits with Error';
+  PAGE_TITLE = 'Kits with Error';
   TABLE_HEADERS = [
     Label.PRINT_KIT,
     Label.SHORT_ID,
@@ -25,7 +25,7 @@ export default class KitsWithErrorPage extends KitsPageBase {
     super(page);
   }
 
-  protected get toLocator(): Locator {
+  get toLocator(): Locator {
     return this.page.locator('app-shipping');
   }
 }

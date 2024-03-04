@@ -32,7 +32,7 @@ export default class TissueRequestPage extends tablistPageBase {
     super(page);
   }
 
-  protected get toLocator(): Locator {
+  get toLocator(): Locator {
     return this.page.locator('app-tissue-page');
   }
 

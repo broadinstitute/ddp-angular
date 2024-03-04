@@ -20,7 +20,7 @@ export default class KitsWithoutLabelPage extends KitsPageBase {
     super(page);
   }
 
-  protected get toLocator(): Locator {
+  get toLocator(): Locator {
     return this.page.locator('app-shipping');
   }
 

@@ -38,7 +38,7 @@ export default class ParticipantListPage extends DsmPageBase {
     super(page);
   }
 
-  protected get toLocator(): Locator {
+  get toLocator(): Locator {
     return this.page.locator('app-participant-list');
   }
 

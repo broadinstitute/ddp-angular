@@ -20,12 +20,15 @@ export default class Tablist {
     [Tab.SEQUENCING_ORDER, new SequencingOrderTab(this.page)],
   ]);
 
-  public constructor(private readonly page: Page, private readonly tab: Tab | string) {
+  public constructor(private readonly page: Page, private readonly tab: Tab | string) {}
+
+  get toLocator(): Locator {
+    return this.page.locator(`xpath=//tabset//*[@role="tablist"]//a[@role="tab"][.//text()[normalize-space()="${this.tab}"]]`);
   }
 
   public async isVisible(): Promise<boolean> {
     try {
-      await expect(this.link).toBeVisible();
+      await expect(this.toLocator).toBeVisible();
     } catch (err) {
       return false;
     }
@@ -39,12 +42,12 @@ export default class Tablist {
   }
 
   protected async isActive(): Promise<boolean> {
-    const clas = await this.link.getAttribute('class');
+    const clas = await this.toLocator.getAttribute('class');
     return clas ? clas.includes('active') : false;
   }
 
   public async click<T extends object>(): Promise<T> {
-    await expect(this.link, `Tab "${this.tab}" is not enabled`).toBeEnabled();
+    await expect(this.toLocator, `Tab "${this.tab}" is not enabled`).toBeEnabled();
     await this.checkAndClick();
     return (this.tabs as Map<string, object>).get(this.tab) as T;
   }
@@ -59,16 +62,10 @@ export default class Tablist {
     await expect(async () => {
       const isOpen = await this.isActive();
       if (!isOpen) {
-        await this.link.click();
+        await this.toLocator.click();
       }
       await waitForNoSpinner(this.page);
       expect(await this.isActive()).toBe(true);
     }).toPass();
-  }
-
-  /* Locators */
-
-  private get link(): Locator {
-    return this.page.locator(`xpath=//tabset//*[@role="tablist"]//a[@role="tab"][.//text()[normalize-space()="${this.tab}"]]`);
   }
 }

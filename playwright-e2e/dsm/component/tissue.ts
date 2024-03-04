@@ -14,6 +14,7 @@ import { InputTypeEnum, OncHistorySelectRequestEnum } from './tabs/enums/onc-his
 import Button from 'dss/component/button';
 import SMID from './sm-id';
 import { Label, SM_ID, TissueType } from 'dsm/enums';
+import ComponentBase from './component-base';
 
 
 export enum SequencingResultsEnum {
@@ -32,19 +33,20 @@ export enum TumorTypesEnum {
   UNKNOWN = 'Unknown'
 }
 
-export default class Tissue {
+export default class Tissue extends ComponentBase {
   private readonly SMIDModal: SMID;
 
-  constructor(private readonly page: Page, private readonly nth = 0, private readonly root: Locator) {
+  constructor(page: Page, private readonly nth = 0, root: Locator) {
+    super(page, {root});
     this.SMIDModal = new SMID(this.page, root);
   }
 
-  get rootLocator(): Locator {
-    return this.root.locator('app-tissue').nth(this.nth);
+  get toLocator(): Locator {
+    return this.toLocator.locator('app-tissue').nth(this.nth);
   }
 
   public async delete(): Promise<void> {
-    const deleteButton = this.rootLocator.locator('//button[.//@data-icon="trash-alt"]');
+    const deleteButton = this.toLocator.locator('//button[.//@data-icon="trash-alt"]');
     await Promise.all([
       waitForResponse(this.page, { uri: '/patch' }),
       deleteButton.click()
@@ -245,7 +247,7 @@ export default class Tissue {
   }
 
   private async getField(dynamicField: Label | SM_ID, byText = false): Promise<Locator> {
-    const fieldLocator = byText ? this.rootLocator.getByText(dynamicField) : this.findField(dynamicField);
+    const fieldLocator = byText ? this.toLocator.getByText(dynamicField) : this.findField(dynamicField);
     await expect(fieldLocator, `'${dynamicField}' is not visible`).toBeVisible();
 
     return fieldLocator;
@@ -253,7 +255,7 @@ export default class Tissue {
 
   /* Locator */
   private findField(field: Label | SM_ID): Locator {
-    return this.rootLocator.locator(this.fieldXPath(field));
+    return this.toLocator.locator(this.fieldXPath(field));
   }
 
   private get lookupList(): Locator {

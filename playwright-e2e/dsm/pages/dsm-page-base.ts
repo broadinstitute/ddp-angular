@@ -61,5 +61,5 @@ export default abstract class DsmPageBase {
     await waitForNoSpinner(this.page);
   }
 
-  protected abstract get toLocator(): Locator;
+  abstract get toLocator(): Locator;
 }

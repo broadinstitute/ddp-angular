@@ -9,8 +9,8 @@ import { KitType, Label } from 'dsm/enums';
 const { BSP_TOKEN, DSM_BASE_URL } = process.env;
 
 export default class KitsReceivedPage extends KitsPageBase {
-  protected PAGE_TITLE = 'Kits Received';
-  readonly TABLE_HEADERS = [Label.SHORT_ID, Label.SHIPPING_ID,
+  PAGE_TITLE = 'Kits Received';
+  TABLE_HEADERS = [Label.SHORT_ID, Label.SHIPPING_ID,
     Label.RECEIVED, Label.MF_CODE,
     Label.DDP_REALM, Label.TYPE, Label.SAMPLE_TYPE];
 
@@ -19,7 +19,7 @@ export default class KitsReceivedPage extends KitsPageBase {
       super(page);
   }
 
-  protected get toLocator(): Locator {
+  get toLocator(): Locator {
     return this.page.locator('app-shipping');
   }
 

@@ -13,8 +13,8 @@ export enum SearchByField {
 }
 
 export default class KitsSearchPage extends KitsPageBase {
-  protected PAGE_TITLE = 'Kit Search';
-  protected TABLE_HEADERS = [
+  PAGE_TITLE = 'Kit Search';
+  TABLE_HEADERS = [
     Label.DDP_REALM,
     Label.SHORT_ID,
     Label.COLLABORATOR_PARTICIPANT_ID,
@@ -31,7 +31,7 @@ export default class KitsSearchPage extends KitsPageBase {
     super(page);
   }
 
-  protected get toLocator(): Locator {
+  get toLocator(): Locator {
     return this.page.locator('app-shipping-search');
   }
 

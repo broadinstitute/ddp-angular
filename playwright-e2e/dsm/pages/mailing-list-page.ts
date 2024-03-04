@@ -18,7 +18,7 @@ export default class MailingListPage extends DsmPageBase {
     this.downloadButton = this.page.getByRole('button', { name: 'Download mailing list' })
   }
 
-  protected get toLocator(): Locator {
+  get toLocator(): Locator {
     return this.page.locator('app-mailing-list');
   }
 

@@ -41,7 +41,7 @@ export default class MedicalRecordsRequestPage extends tablistPageBase {
     super(page);
   }
 
-  protected get toLocator(): Locator {
+  get toLocator(): Locator {
     return this.page.locator('//app-medical-record');
   }
 
