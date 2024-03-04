@@ -9,7 +9,8 @@ import { logInfo } from 'utils/log-utils';
 import { OncHistorySelectRequestEnum } from 'dsm/component/tabs/enums/onc-history-input-columns-enum';
 import { StudyName } from 'dsm/navigation';
 
-test.describe.serial('Tissue Request Flow', () => {
+// TODO Enable until bug PEPPER-1322 is fixed
+test.describe.skip('Tissue Request Flow', () => {
   const studies = [StudyName.PANCAN];
 
   for (const study of studies) {
