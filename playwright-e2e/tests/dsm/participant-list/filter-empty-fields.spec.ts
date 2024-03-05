@@ -1,11 +1,11 @@
 import { expect } from '@playwright/test';
 import { test } from 'fixtures/dsm-fixture';
 import { CustomizeView, Label } from 'dsm/enums';
-import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
+import { StudyName } from 'dsm/navigation';
 
 test.describe('Participants List Manual Search', () => {
-  const studies = [StudyEnum.LMS, StudyEnum.PANCAN];
+  const studies = [StudyName.LMS, StudyName.PANCAN];
 
   for (const study of studies) {
     test(`With custom columns @dsm @${study}`, async ({ page, request }) => {

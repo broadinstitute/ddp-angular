@@ -1,18 +1,17 @@
-import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import { test } from 'fixtures/dsm-fixture';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
 import { CustomizeView, DataFilter, Label, Tab } from 'dsm/enums';
-import OncHistoryTab from 'dsm/component/tabs/onc-history-tab';
-import { OncHistoryInputColumnsEnum } from 'dsm/component/tabs/enums/onc-history-input-columns-enum';
+import OncHistoryTab from 'dsm/pages/tablist/onc-history-tab';
 import { Page, expect } from '@playwright/test';
 import { logInfo } from 'utils/log-utils';
 import { faker } from '@faker-js/faker';
 import Input from 'dss/component/input';
 import { waitForResponse } from 'utils/test-utils';
 import OncHistoryTable from 'dsm/component/tables/onc-history-table';
+import { StudyName } from 'dsm/navigation';
 
 test.describe.serial('Onc History', () => {
-  const studies = [StudyEnum.PANCAN];
+  const studies = [StudyName.PANCAN];
 
   let shortID: string;
 
@@ -37,7 +36,7 @@ test.describe.serial('Onc History', () => {
 
       await searchPanel.search();
       shortID = await participantListPage.findParticipantWithTab(
-        { findPediatricParticipant: false, tab: Tab.ONC_HISTORY, uriString: 'ui/filterList'}
+        { findPediatricParticipant: false, tab: Tab.ONC_HISTORY, uri: 'ui/filterList'}
       );
       logInfo(`Short id: ${shortID}`);
       expect(shortID?.length).toBeTruthy();
@@ -45,7 +44,7 @@ test.describe.serial('Onc History', () => {
       // Open Onc History tab
       await participantListPage.filterListByShortId(shortID);
       const participantPage = await participantListTable.openParticipantPageAt(0);
-      const oncHistoryTab = await participantPage.clickTab<OncHistoryTab>(Tab.ONC_HISTORY);
+      const oncHistoryTab = await participantPage.tablist(Tab.ONC_HISTORY).click<OncHistoryTab>();
       const oncHistoryTable = oncHistoryTab.table;
       let lastRow = await oncHistoryTable.getRowsCount() - 1;
 
@@ -58,7 +57,7 @@ test.describe.serial('Onc History', () => {
 
       // In new row, enter new facility name
       lastRow = ++lastRow;
-      await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.DATE_OF_PX,
+      await oncHistoryTable.fillField(Label.DATE_OF_PX,
           {
             date: {
               date: {
@@ -68,8 +67,8 @@ test.describe.serial('Onc History', () => {
               }
             }
           }, lastRow);
-      await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.FACILITY, { value: newFacilityName, lookupSelectIndex: -1 }, lastRow);
-      const actualFacilityValue = await oncHistoryTable.getFieldValue(OncHistoryInputColumnsEnum.FACILITY, lastRow);
+      await oncHistoryTable.fillField(Label.FACILITY, { inputValue: newFacilityName, lookupIndex: -1 }, lastRow);
+      const actualFacilityValue = await oncHistoryTable.getFieldValue(Label.FACILITY, lastRow);
       expect(actualFacilityValue).toStrictEqual(newFacilityName);
 
       // New facility name becomes available for select in new lookup
@@ -84,7 +83,7 @@ test.describe.serial('Onc History', () => {
   }
 
   async function validateLookup(page: Page, table: OncHistoryTable, row: number, keyword: string, lookupName: string) {
-    const cell = await table.checkColumnAndCellValidity(OncHistoryInputColumnsEnum.FACILITY, row);
+    const cell = await table.checkColumnAndCellValidity(Label.FACILITY, row);
     const input = new Input(page, { root: cell });
     const inputLocator = input.toLocator();
 
@@ -102,7 +101,7 @@ test.describe.serial('Onc History', () => {
       table.lookupList(inputLocator).getByText(lookupName).first().click()
     ]);
 
-    const value = await table.getFieldValue(OncHistoryInputColumnsEnum.FACILITY, row);
+    const value = await table.getFieldValue(Label.FACILITY, row);
     expect(value).toContain(lookupName);
   }
 });

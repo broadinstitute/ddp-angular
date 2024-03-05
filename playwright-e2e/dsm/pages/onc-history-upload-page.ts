@@ -5,16 +5,18 @@ import { createTextFileSync, deleteFileSync } from 'utils/file-utils';
 import path from 'path';
 
 export default class OncHistoryUploadPage extends DsmPageBase {
-  downloadButton: Locator;
+  PAGE_TITLE = 'Onc History Upload';
 
   constructor(page: Page) {
     super(page);
-    this.downloadButton = this.page.getByRole('button', { name: 'Download' })
+  }
+
+  get toLocator(): Locator {
+    return this.page.locator('app-onc-history-upload');
   }
 
   async waitForReady(): Promise<void> {
-    await expect(this.page.locator('h1')).toHaveText('Onc History Upload');
-    await waitForNoSpinner(this.page);
+    await super.waitForReady();
     await expect(this.page.locator('.download-button'))
       .toHaveText(/Click here to download the Onc History upload template and data dictionary/);
     await expect(this.uploadBtn).toBeDisabled();

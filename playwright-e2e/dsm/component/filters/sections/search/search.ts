@@ -85,7 +85,7 @@ export class Search {
     radioButtonValue && (await this.radioBtnLocator(columnName, radioButtonValue).click());
   }
 
-  public async checkboxes(columnName: string, { checkboxValues, additionalFilters }: Partial<CheckboxConfig>): Promise<void> {
+  public async checkboxes(columnName: Label | string, { checkboxValues, additionalFilters }: Partial<CheckboxConfig>): Promise<void> {
     await this.setAdditionalFilters(columnName, additionalFilters);
     if (checkboxValues && checkboxValues.length) {
       for (const checkboxValue of checkboxValues) {
@@ -109,7 +109,7 @@ export class Search {
     const datePicker = new DatePicker(this.page, { root: this.baseColumnXPath(column) });
     if (open) {
       await datePicker.open();
-      await datePicker.toLocator().scrollIntoViewIfNeeded().catch((error) => logError(error));
+      await datePicker.toLocator.scrollIntoViewIfNeeded().catch((error) => logError(error));
     } else {
       await datePicker.close();
     }

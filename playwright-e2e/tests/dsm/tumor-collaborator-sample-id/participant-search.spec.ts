@@ -1,14 +1,14 @@
 import { expect } from '@playwright/test';
 import { test } from 'fixtures/dsm-fixture';
 import { CustomizeView, DataFilter, Label, Tab } from 'dsm/enums';
-import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
 import { studyShortName } from 'utils/test-utils';
 import { logInfo } from 'utils/log-utils';
-import ParticipantPage from 'dsm/pages/participant-page/participant-page';
-import OncHistoryTab from 'dsm/component/tabs/onc-history-tab';
-import { OncHistoryInputColumnsEnum, OncHistorySelectRequestEnum } from 'dsm/component/tabs/enums/onc-history-input-columns-enum';
+import ParticipantPage from 'dsm/pages/participant-page';
+import OncHistoryTab from 'dsm/pages/tablist/onc-history-tab';
+import { OncHistorySelectRequestEnum } from 'dsm/component/tabs/enums/onc-history-input-columns-enum';
 import { SortOrder } from 'dss/component/table';
+import { StudyName } from 'dsm/navigation';
 
 /**
 * Collaborator Prefixes per study:
@@ -33,7 +33,7 @@ import { SortOrder } from 'dss/component/table';
  */
 test.describe.serial('Tumor Collaborator Sample ID', () => {
   // Some studies are excluded due to lack of the suitable paricipants
-  const studies: StudyEnum[] = [StudyEnum.OSTEO2, StudyEnum.PANCAN, StudyEnum.MBC, StudyEnum.BRAIN];
+  const studies: StudyName[] = [StudyName.OSTEO2, StudyName.PANCAN, StudyName.MBC, StudyName.BRAIN];
 
   for (const study of studies) {
     test(`Search by tumor sample id for non-legacy participant @dsm @${study}`, async ({ page, request }) => {
@@ -72,14 +72,14 @@ test.describe.serial('Tumor Collaborator Sample ID', () => {
       logInfo(`Participant Short ID: ${shortID}`);
 
       const participantPage: ParticipantPage = await participantListTable.openParticipantPageAt(row);
-      const oncHistoryTab = await participantPage.clickTab<OncHistoryTab>(Tab.ONC_HISTORY);
+      const oncHistoryTab = await participantPage.tablist(Tab.ONC_HISTORY).click<OncHistoryTab>();
       const oncHistoryTable = oncHistoryTab.table;
       const rows = await oncHistoryTable.rowLocator().count(); // append new row
       const rowIndex = rows - 1; // 0th-index
 
       await test.step('Insert new Onc History data', async () => {
-        await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.FACILITY, { value: 'm', lookupSelectIndex: 1 }, rowIndex);
-        await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.DATE_OF_PX,
+        await oncHistoryTable.fillField(Label.FACILITY, { inputValue: 'm', lookupIndex: 1 }, rowIndex);
+        await oncHistoryTable.fillField(Label.DATE_OF_PX,
           {
             date: {
               date: {
@@ -89,17 +89,17 @@ test.describe.serial('Tumor Collaborator Sample ID', () => {
               }
             }
           }, rowIndex);
-        await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.TYPE_OF_PX, { value: 'a', lookupSelectIndex: 4 }, rowIndex);
-        await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.REQUEST, { select: OncHistorySelectRequestEnum.REQUEST }, rowIndex);
+        await oncHistoryTable.fillField(Label.TYPE_OF_PX, { inputValue: 'a', lookupIndex: 4 }, rowIndex);
+        await oncHistoryTable.fillField(Label.REQUEST, { selection: OncHistorySelectRequestEnum.REQUEST }, rowIndex);
       });
 
       await test.step('Check Tumor Collaborator Sample ID on Participant page', async () => {
-        const tissueInformationPage = await oncHistoryTable.openTissueInformationPage(rowIndex);
+        const tissueInformationPage = await oncHistoryTable.openTissueRequestAt(rowIndex);
         const faxSentDate1 = await tissueInformationPage.getFaxSentDate();
         if (faxSentDate1.trim().length === 0) {
           await tissueInformationPage.fillFaxSentDates({ today: true });
         }
-        const tissue = await tissueInformationPage.tissue();
+        const tissue = tissueInformationPage.tissue();
         const suggestedSampleID = await tissue.getTumorCollaboratorSampleIDSuggestedValue();
         logInfo(`Tumor Collaborator Sample ID: ${suggestedSampleID}`);
 

@@ -1,20 +1,17 @@
 import {expect, test} from '@playwright/test';
 import {WelcomePage} from 'dsm/pages/welcome-page';
-import {Navigation} from 'dsm/component/navigation/navigation';
+import {Navigation, Samples, StudyName} from 'dsm/navigation';
 import {login} from 'authentication/auth-dsm';
-import {StudyEnum} from 'dsm/component/navigation/enums/selectStudyNav-enum';
-import {SamplesNavEnum} from 'dsm/component/navigation/enums/samplesNav-enum';
-import {KitTypeEnum} from 'dsm/component/kitType/enums/kitType-enum';
-import InitialScanPage from 'dsm/pages/scanner-pages/initialScan-page';
-import KitsReceivedPage from 'dsm/pages/kitsInfo-pages/kitsReceived-page/kitsReceivedPage';
-import { Label } from 'dsm/enums';
+import InitialScanPage from 'dsm/pages/scan/initial-scan-page';
+import KitsReceivedPage from 'dsm/pages/kits-received-page';
+import { KitType, Label } from 'dsm/enums';
 
 // don't run in parallel
 test.describe.serial('Initial Scan page', () => {
   let welcomePage: WelcomePage;
   let navigation: Navigation;
 
-  const studies = [StudyEnum.OSTEO2, StudyEnum.LMS];
+  const studies = [StudyName.OSTEO2, StudyName.LMS];
 
   test.beforeEach(async ({ page, request }) => {
     await login(page);
@@ -27,7 +24,7 @@ test.describe.serial('Initial Scan page', () => {
       await welcomePage.selectStudy(study);
 
       // Initial Scan page
-      const initialScanPage = await navigation.selectFromSamples<InitialScanPage>(SamplesNavEnum.INITIAL_SCAN);
+      const initialScanPage = await navigation.selectFromSamples<InitialScanPage>(Samples.INITIAL_SCAN);
       await initialScanPage.waitForReady();
 
       const kitLabelField = initialScanPage.getInput('Kit Label');
@@ -45,13 +42,13 @@ test.describe.serial('Initial Scan page', () => {
     });
 
     test(`Should throw error if kit is already received @functional @dsm @${study}`, async ({page}) => {
-      const kitType = KitTypeEnum.SALIVA;
+      const kitType = KitType.SALIVA;
 
       await welcomePage.selectStudy(study);
 
       // Kits Received page
-      const kitsReceivedPage = await navigation.selectFromSamples<KitsReceivedPage>(SamplesNavEnum.RECEIVED);
-      await kitsReceivedPage.waitForLoad();
+      const kitsReceivedPage = await navigation.selectFromSamples<KitsReceivedPage>(Samples.RECEIVED);
+      await kitsReceivedPage.waitForReady();
       await kitsReceivedPage.selectKitType(kitType);
 
       // Save Short ID and MF code
@@ -60,7 +57,7 @@ test.describe.serial('Initial Scan page', () => {
       const [mfCode] = await kitsTable.getTextAt(0, Label.MF_CODE);
 
       // Initial Scan page
-      const initialScanPage = await navigation.selectFromSamples<InitialScanPage>(SamplesNavEnum.INITIAL_SCAN);
+      const initialScanPage = await navigation.selectFromSamples<InitialScanPage>(Samples.INITIAL_SCAN);
       await initialScanPage.waitForReady();
 
       const kitLabelField = initialScanPage.getInput('Kit Label');

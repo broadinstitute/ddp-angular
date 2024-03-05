@@ -2,19 +2,17 @@ import { expect } from '@playwright/test';
 import { WelcomePage } from 'dsm/pages/welcome-page';
 import { test } from 'fixtures/dsm-fixture';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
-import ParticipantPage from 'dsm/pages/participant-page/participant-page';
+import ParticipantPage from 'dsm/pages/participant-page';
 import CohortTag from 'dsm/component/cohort-tag';
-import { StudyNavEnum } from 'dsm/component/navigation/enums/studyNav-enum';
-import { Navigation } from 'dsm/component/navigation/navigation';
+import { Navigation, Study, StudyName } from 'dsm/navigation';
 import * as crypto from 'crypto';
-import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import { logInfo } from 'utils/log-utils';
 import { CustomizeView, Label } from 'dsm/enums';
 
 test.describe('Cohort tags', () => {
   let shortId: string;
 
-  const studyNames = [StudyEnum.PANCAN];
+  const studyNames = [StudyName.PANCAN];
 
   for (const studyName of studyNames) {
     test.beforeEach(async ({page}) => {
@@ -59,7 +57,7 @@ test.describe('Cohort tags', () => {
       const cohortTagValue2 = `tag2-${uuid}`;
       const cohortTagValue3 = `tag3-${uuid}`;
 
-      const participantListPage = await new Navigation(page, request).selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
+      const participantListPage = await new Navigation(page, request).selectFromStudy<ParticipantListPage>(Study.PARTICIPANT_LIST);
       await participantListPage.waitForReady();
 
       // Apply filter in search for the right participant on Participant List page

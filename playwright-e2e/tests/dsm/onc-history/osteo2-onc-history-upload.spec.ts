@@ -1,24 +1,20 @@
 import { expect } from '@playwright/test';
 import { test } from 'fixtures/dsm-fixture';
 import { CustomizeView, DataFilter, Label, Tab } from 'dsm/enums';
-import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
-import OncHistoryTab from 'dsm/component/tabs/onc-history-tab';
-import { OsteoOncHistoryUpload } from 'dsm/component/tabs/interfaces/onc-history-inputs-types';
+import OncHistoryTab from 'dsm/pages/tablist/onc-history-tab';
 import { getDate } from 'utils/date-utils';
-import { MiscellaneousEnum } from 'dsm/component/navigation/enums/miscellaneousNav-enum';
-import { Navigation } from 'dsm/component/navigation/navigation';
+import { Miscellaneous, Navigation, Study, StudyName } from 'dsm/navigation';
 import OncHistoryUploadPage from 'dsm/pages/onc-history-upload-page';
-import { OncHistoryInputColumnsEnum } from 'dsm/component/tabs/enums/onc-history-input-columns-enum';
 import { logInfo } from 'utils/log-utils';
-import { StudyNavEnum } from 'dsm/component/navigation/enums/studyNav-enum';
 import OncHistoryTable from 'dsm/component/tables/onc-history-table';
 import { generateAlphaNumeric, generateRandomPhoneNum } from 'utils/faker-utils';
 import { studyShortName } from 'utils/test-utils';
+import { OsteoOncHistoryUpload } from 'dsm/component/models/onc-history-upload-interface';
 
 test.describe('Upload Onc History', () => {
   // Upload feature is only available for Leiomyosarcoma and OS PE-CGS studies.
-  const study = StudyEnum.OSTEO2;
+  const study = StudyName.OSTEO2;
   let shortId: string;
   // Create unique values to be used in upload file
   const today = getDate();
@@ -72,12 +68,12 @@ test.describe('Upload Onc History', () => {
       expect(rows).toBeGreaterThanOrEqual(1);
 
       // Find the first participant that has DSM and ES Participant ID.
-      const basicStudyInfo = studyShortName(StudyEnum.OSTEO2);
+      const basicStudyInfo = studyShortName(StudyName.OSTEO2);
       const playwrightTestUserPrefix = basicStudyInfo.playwrightPrefixAdult as string;
       shortId = await participantListPage.findParticipantWithTab({
         findPediatricParticipant: false,
         tab: Tab.ONC_HISTORY,
-        uriString: 'filterList',
+        uri: 'filterList',
         prefix: playwrightTestUserPrefix
       });
       expect(shortId).toBeTruthy();
@@ -89,7 +85,7 @@ test.describe('Upload Onc History', () => {
 
     await test.step('Upload text file', async () => {
       // From the 'Miscellaneous' menu, choose 'Onc History Upload'.
-      await navigation.selectMiscellaneous(MiscellaneousEnum.ONC_HISTORY_UPLOAD);
+      await navigation.selectFromMiscellaneous(Miscellaneous.ONC_HISTORY_UPLOAD);
       const oncHistoryPage = new OncHistoryUploadPage(page);
       await oncHistoryPage.waitForReady();
 
@@ -104,12 +100,12 @@ test.describe('Upload Onc History', () => {
 
     await test.step('Verify new Onc History', async () => {
       // Confirm Onc history. Duplicate records are valid.
-      participantListPage = await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
+      participantListPage = await navigation.selectFromStudy<ParticipantListPage>(Study.PARTICIPANT_LIST);
       await participantListPage.waitForReady();
 
       await participantListPage.filterListByShortId(shortId);
       const participantPage = await participantListTable.openParticipantPageAt(0);
-      const oncHistoryTab = await participantPage.clickTab<OncHistoryTab>(Tab.ONC_HISTORY);
+      const oncHistoryTab = await participantPage.tablist(Tab.ONC_HISTORY).click<OncHistoryTab>();
       const oncHistoryTable: OncHistoryTable = oncHistoryTab.table;
 
       const numRows = await oncHistoryTable.getRowsCount();
@@ -118,10 +114,10 @@ test.describe('Upload Onc History', () => {
       let rowIndex = -1
       let match = false;
       for (let i = 0; i < numRows; i++) {
-        const pxValue = await oncHistoryTable.getFieldValue(OncHistoryInputColumnsEnum.TYPE_OF_PX, i);
-        const dateValue = await oncHistoryTable.getFieldValue(OncHistoryInputColumnsEnum.DATE_OF_PX, i);
-        const faxValue = await oncHistoryTable.getFieldValue(OncHistoryInputColumnsEnum.FAX, i);
-        const phoneValue = await oncHistoryTable.getFieldValue(OncHistoryInputColumnsEnum.PHONE, i);
+        const pxValue = await oncHistoryTable.getFieldValue(Label.TYPE_OF_PX, i);
+        const dateValue = await oncHistoryTable.getFieldValue(Label.DATE_OF_PX, i);
+        const faxValue = await oncHistoryTable.getFieldValue(Label.FAX, i);
+        const phoneValue = await oncHistoryTable.getFieldValue(Label.PHONE, i);
         if (pxValue === pxType && dateValue === today && faxValue === fax && phoneValue === phone) {
           rowIndex = i;
           match = true;

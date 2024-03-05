@@ -15,35 +15,40 @@ export function dateFormat(timeZone?: string): Intl.DateTimeFormat {
     });
 }
 
-export function getToday(): Date {
-  return normalizeDate(new Date());
+/**
+ * Returns local today's date in "mm/dd/yyyy" format
+ */
+export function getToday(): string {
+  const today = new Date();
+  const formatToday =
+    `${today.toLocaleString('en-US', { month: '2-digit' })}/` +
+    `${today.toLocaleString('en-US', { day: '2-digit' })}/` +
+    `${today.toLocaleString('en-US', { year: 'numeric' })}`;
+  // console.log(`Today is ${formatToday}`);
+  return formatToday;
 }
 
-const normalizeDate = function(date: Date) {
-  date.setMinutes(date.getMinutes() + date.getTimezoneOffset());
-  return date;
+const normalizeDate = function() {
+  const today = new Date(); // returns the date in UTC time
+  today.setMinutes(today.getMinutes() + today.getTimezoneOffset()); // local date
+  return today;
 };
 
 /**
- * Returns a date with format mm/dd/yyyy
+ * Returns a given date in "mm/dd/yyyy" format
  * @param {Date} date
  * @returns {string}
  */
-export function getDate(date?: Date, opts: { timeZone?: string } = {}): string {
-  const { timeZone } = opts;
-  return dateFormat(timeZone).format(date ? normalizeDate(date) : getToday());
+export function getDate(date?: Date): string {
+  return dateFormat().format(date ? date : normalizeDate());
+}
+
+export function getTodayInTimezone(timezone: string): string {
+  return dateFormat(timezone).format(new Date());
 }
 
 /**
- * Central timezone: America/Chicago
- * Returns today date in format mm/dd/yyyy
- */
-export function getDateInCentralTimezone(): string {
-  return getDate(new Date(), { timeZone: 'America/Chicago' });
-}
-
-/**
- * Returns a given date in the Month DD, YYYY format
+ * Returns a given date in "Month DD, YYYY" format
  * @param dateString The date to format into Month DD, YYYY e.g. turn '11/29/2023' into 'Nov 29, 2023'
  * @returns Newly formated date as a string
  */
@@ -61,6 +66,12 @@ export function getDateMonthAbbreviated(dateString: string): string {
 
 export function getDateEasternTimeZone(date?: Date): string {
   return dateFormat('America/New_York').format(date ? date : new Date());
+}
+
+export function toLocalTime(date?: string, timeZone?: string): string {
+  return date
+    ? new Date(date).toLocaleTimeString('en-US', {timeZone})
+    : new Date().toLocaleTimeString('en-US', {timeZone});
 }
 
 // convert local date to UTC date

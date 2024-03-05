@@ -1,19 +1,19 @@
 import { expect } from '@playwright/test';
 import { test } from 'fixtures/dsm-fixture';
-import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
 import { assertDateFormat, waitForResponse } from 'utils/test-utils';
 import { logInfo } from 'utils/log-utils';
-import ParticipantPage from 'dsm/pages/participant-page/participant-page';
+import ParticipantPage from 'dsm/pages/participant-page';
 import { CustomizeView, DataFilter, Label, Tab } from 'dsm/enums';
-import MedicalRecordsTab from 'dsm/pages/medical-records/medical-records-tab';
+import MedicalRecordsTab from 'dsm/pages/tablist/medical-records-tab';
 import { SortOrder } from 'dss/component/table';
-import MedicalRecordsRequestPage, { PDFName } from 'dsm/pages/medical-records/medical-records-request-page';
+import MedicalRecordsRequestPage, { PDFName } from 'dsm/pages/tablist-pages/medical-records-request-page';
 import Input from 'dss/component/input';
-import MedicalRecordsTable from 'dsm/pages/medical-records/medical-records-table';
+import MedicalRecordsTable from 'dsm/component/tables/medical-records-table';
 import { QuickFiltersEnum } from 'dsm/component/filters/quick-filters';
 import { assertTableHeaders } from 'utils/assertion-helper';
 import path from 'path';
+import { StudyName } from 'dsm/navigation';
 
 // Tests depends on same participant
 test.describe.serial('Medical records request workflow', () => {
@@ -32,7 +32,7 @@ test.describe.serial('Medical records request workflow', () => {
   ];
 
   // One Clinical studies
-  const studies: StudyEnum[] = [StudyEnum.OSTEO2, StudyEnum.LMS];
+  const studies: StudyName[] = [StudyName.OSTEO2, StudyName.LMS];
 
   for (const study of studies) {
     test(`Update Institution @dsm @${study}`, async ({ page, request }) => {
@@ -163,7 +163,7 @@ test.describe.serial('Medical records request workflow', () => {
         await medicalRecordsRequestPage.fillText(Label.CONFIRMED_INSTITUTION_NAME, confirmedInstitution);
         logInfo(`Confirmed Institution is ${confirmedInstitution}`);
 
-        await medicalRecordsRequestPage.backToPreviousPage();
+        await medicalRecordsRequestPage.backToParticipant();
 
         await participantPage.backToList();
         await participantListPage.filterListByShortId(shortId);
@@ -243,7 +243,7 @@ test.describe.serial('Medical records request workflow', () => {
         await expect(initialMRRequest).toHaveCount(count);
       }
 
-      await medicalRecordsRequestPage.backToPreviousPage();
+      await medicalRecordsRequestPage.backToParticipant();
 
       // Iterate all rows to find matching Institution and MR Status
       foundRow = await assertInstitution(medicalRecordTable, confirmedInstitution, 'MR Received');
@@ -344,7 +344,7 @@ test.describe.serial('Medical records request workflow', () => {
   }
 
   async function openMedicalRecordsTab(participantPage: ParticipantPage): Promise<MedicalRecordsTable> {
-    const medicalRecordsTab = await participantPage.clickTab<MedicalRecordsTab>(Tab.MEDICAL_RECORD);
+    const medicalRecordsTab = await participantPage.tablist(Tab.MEDICAL_RECORD).click<MedicalRecordsTab>();
     const medicalRecordTable = medicalRecordsTab.table;
     expect(await medicalRecordTable.getRowsCount()).toBeGreaterThanOrEqual(1);
     return medicalRecordTable;
@@ -381,11 +381,11 @@ test.describe.serial('Medical records request workflow', () => {
   function pdfDownloadPrefix(study: string) {
     let name;
     switch (study) {
-      case StudyEnum.OSTEO:
-      case StudyEnum.OSTEO2:
+      case StudyName.OSTEO:
+      case StudyName.OSTEO2:
         name = 'Osteo';
         break;
-      case StudyEnum.LMS:
+      case StudyName.LMS:
         name = 'LMS';
         break;
       default:

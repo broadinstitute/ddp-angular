@@ -1,34 +1,29 @@
 import { APIRequestContext, Page, TestInfo, expect } from '@playwright/test';
-import { KitTypeEnum } from 'dsm/component/kitType/enums/kitType-enum';
-import { SamplesNavEnum } from 'dsm/component/navigation/enums/samplesNav-enum';
-import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
-import { StudyNavEnum } from 'dsm/component/navigation/enums/studyNav-enum';
-import { Navigation } from 'dsm/component/navigation/navigation';
-import KitsWithoutLabelPage from 'dsm/pages/kitsInfo-pages/kitsWithoutLabel-page';
+import { Navigation, Samples, Study, StudyName } from 'dsm/navigation';
+import KitsWithoutLabelPage from 'dsm/pages/kits-without-label-page';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
 import Select from 'dss/component/select';
 import { test } from 'fixtures/dsm-fixture';
 import * as user from 'data/fake-user.json';
-import { KitUploadInfo } from 'dsm/pages/kitUpload-page/models/kitUpload-model';
-import KitUploadPage from 'dsm/pages/kitUpload-page/kitUpload-page';
-import InitialScanPage from 'dsm/pages/scanner-pages/initialScan-page';
-import TrackingScanPage from 'dsm/pages/scanner-pages/trackingScan-page';
-import FinalScanPage from 'dsm/pages/scanner-pages/finalScan-page';
-import { getDate, getToday } from 'utils/date-utils';
-import KitsSentPage from 'dsm/pages/kitsInfo-pages/kitsSentPage';
-import ParticipantPage from 'dsm/pages/participant-page/participant-page';
-import OncHistoryTab from 'dsm/component/tabs/onc-history-tab';
-import { OncHistoryInputColumnsEnum, OncHistorySelectRequestEnum } from 'dsm/component/tabs/enums/onc-history-input-columns-enum';
-import { SMIdEnum, TissueDynamicFieldsEnum, TissueTypesEnum } from 'dsm/pages/tissue/enums/tissue-information-enum';
-import KitsReceivedPage from 'dsm/pages/kitsInfo-pages/kitsReceived-page/kitsReceivedPage';
-import { CustomizeView, DataFilter, Label, Tab } from 'dsm/enums';
+import { KitUploadInfo } from 'dsm/pages/models/kit-upload-model';
+import KitsUploadPage from 'dsm/pages/kits-upload-page';
+import InitialScanPage from 'dsm/pages/scan/initial-scan-page';
+import TrackingScanPage from 'dsm/pages/scan/tracking-scan-page';
+import FinalScanPage from 'dsm/pages/scan/final-scan-page';
+import { dateFormat, getDate, getToday, toLocalTime } from 'utils/date-utils';
+import KitsSentPage from 'dsm/pages/kits-sent-page';
+import ParticipantPage from 'dsm/pages/participant-page';
+import OncHistoryTab from 'dsm/pages/tablist/onc-history-tab';
+import KitsReceivedPage from 'dsm/pages/kits-received-page';
+import { CustomizeView, DataFilter, KitType, Label, SM_ID, Tab, TissueType } from 'dsm/enums';
 import crypto from 'crypto';
 import { logInfo } from 'utils/log-utils';
 import { waitForResponse } from 'utils/test-utils';
-import ErrorPage from 'dsm/pages/samples/error-page';
+import KitsWithErrorPage from 'dsm/pages/kits-with-error-page';
+import { OncHistorySelectRequestEnum } from 'dsm/component/tabs/enums/onc-history-input-columns-enum';
 
 test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
-  const studies = [StudyEnum.OSTEO2]; //Only clinical (pecgs) studies get this event
+  const studies = [StudyName.OSTEO2]; //Only clinical (pecgs) studies get this event
   const facilityName = user.doctor.hospital;
   const facilityPhoneNumber = user.doctor.phone;
   const facilityFaxNumber = user.doctor.fax;
@@ -51,27 +46,27 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
       navigation = new Navigation(page, request);
       await new Select(page, { label: 'Select study' }).selectOption(`${study}`);
 
-      const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
+      const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(Study.PARTICIPANT_LIST);
       await participantListPage.waitForReady();
 
       //Prep the Saliva kit
       shortID = await findParticipantForGermlineConsentCreation(participantListPage, study);
       logInfo(`Chosen short id: ${shortID}`);
-      kitLabel = await prepareSentKit(shortID, KitTypeEnum.SALIVA, study, page, request, testInfo);
+      kitLabel = await prepareSentKit(shortID, KitType.SALIVA, study, page, request, testInfo);
 
       //Get the Participant Page of the chosen test participant
       participantPage = await goToTestParticipantPage(shortID, navigation);
 
       //Fill out an onc history and get back an accession number
-      oncHistoryTab = await participantPage.clickTab<OncHistoryTab>(Tab.ONC_HISTORY);
+      oncHistoryTab = await participantPage.tablist(Tab.ONC_HISTORY).click<OncHistoryTab>();
       const oncHistoryTable = oncHistoryTab.table;
       const lastRow = await oncHistoryTable.getRowsCount() - 1;
 
       randomAccessionNumber = await fillOncHistoryRow(participantPage, oncHistoryTab, facilityName, facilityPhoneNumber, facilityFaxNumber, lastRow);
 
       //Navigate to the Tissue Request page
-      const tissueInformationPage = await oncHistoryTable.openTissueInformationPage(lastRow);
-      await tissueInformationPage.assertPageTitle();
+      const tissueInformationPage = await oncHistoryTable.openTissueRequestAt(lastRow);
+      await tissueInformationPage.waitForReady();
 
       /**
        * Create Tumor Sample - the following need to be inputted in Tissue Request page before accessioning a SM-ID / tumor sample:
@@ -89,34 +84,33 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
 
       await tissueInformationPage.assertFaxSentDatesCount(1);
 
-      today = getDate();
+      today = getToday();
       expect(faxSentDate.trim(), `Fax Sent Date has unexpected input: expected ${today} but received ${faxSentDate}`).toBe(today);
       expect(tissueReceivedDate.trim(), `Tissue Received Date has unexpected input: expected ${today} but received ${tissueReceivedDate}`).
         toBe(today);
 
       await tissueInformationPage.selectGender('Female');
 
-      const tissue = await tissueInformationPage.tissue();
-      await tissue.fillField(TissueDynamicFieldsEnum.USS, { inputValue: materialsReceivedAmount });
+      const tissue = tissueInformationPage.tissue();
+      await tissue.fillField(Label.USS_UNSTAINED, { inputValue: materialsReceivedAmount });
       smID = `SM-${crypto.randomUUID().toString().replace('-', '1').substring(0, 5)}`; //e.g. SM-12345
       secondSMID = `SM-${crypto.randomUUID().toString().replace('-', '1').substring(0, 5)}`; //e.g. SM-09876
-      const smIDModal = await tissue.fillSMIDs(SMIdEnum.USS_SM_IDS);
+      const smIDModal = await tissue.fillSMIDs(SM_ID.USS_SM_IDS);
       await smIDModal.fillInputs([smID, secondSMID]);
       await smIDModal.close();
 
-      await tissue.fillField(TissueDynamicFieldsEnum.TISSUE_TYPE, {select: TissueTypesEnum.BLOCK});
+      await tissue.fillField(Label.TISSUE_TYPE, {selection: TissueType.BLOCK});
 
       tumorCollaboratorSampleIDPrefix = await tissue.getTumorCollaboratorSampleIDSuggestedValue();
       tumorSampleID = `${tumorCollaboratorSampleIDPrefix}_${crypto.randomUUID().toString().substring(0, 4)}`;
-      await tissue.fillField(TissueDynamicFieldsEnum.TUMOR_COLLABORATOR_SAMPLE_ID, { inputValue: tumorSampleID });
+      await tissue.fillField(Label.TUMOR_COLLABORATOR_SAMPLE_ID, { inputValue: tumorSampleID });
 
-      await tissue.fillField(TissueDynamicFieldsEnum.DATE_SENT_TO_GP, { inputValue: today });
+      await tissue.fillField(Label.DATE_SENT_TO_GP, { inputValue: today });
 
       //Receive the saliva kit first
-      const kitsReceivedPage = await navigation.selectFromSamples<KitsReceivedPage>(SamplesNavEnum.RECEIVED);
-      await kitsReceivedPage.waitForLoad();
-      await kitsReceivedPage.assertPageTitle();
-      await kitsReceivedPage.selectKitType(KitTypeEnum.SALIVA);
+      const kitsReceivedPage = await navigation.selectFromSamples<KitsReceivedPage>(Samples.RECEIVED);
+      await kitsReceivedPage.waitForReady();
+      await kitsReceivedPage.selectKitType(KitType.SALIVA);
       await kitsReceivedPage.kitReceivedRequest({mfCode: kitLabel});
 
       //Accession the tumor sample second (just receive the sample using the SM-ID)
@@ -128,7 +122,7 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
       });
 
       //Confirm that the germline consent addendum was created - check that the GERMLINE_CONSENT_ADDENDUM_PEDIATRIC Survey Created column is not empty
-      await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
+      await navigation.selectFromStudy<ParticipantListPage>(Study.PARTICIPANT_LIST);
       await participantListPage.waitForReady();
 
       const customizeViewPanel = participantListPage.filters.customizeViewPanel;
@@ -159,27 +153,27 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
       navigation = new Navigation(page, request);
       await new Select(page, { label: 'Select study' }).selectOption(`${study}`);
 
-      const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
+      const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(Study.PARTICIPANT_LIST);
       await participantListPage.waitForReady();
 
       //Prep the Blood kit
       shortID = await findParticipantForGermlineConsentCreation(participantListPage, study);
       logInfo(`Chosen short id: ${shortID}`);
-      kitLabel = await prepareSentKit(shortID, KitTypeEnum.BLOOD, study, page, request, testInfo);
+      kitLabel = await prepareSentKit(shortID, KitType.BLOOD, study, page, request, testInfo);
 
       //Get the Participant Page of the chosen test participant
       participantPage = await goToTestParticipantPage(shortID, navigation);
 
       //Fill out an onc history and get back an accession number
-      oncHistoryTab = await participantPage.clickTab<OncHistoryTab>(Tab.ONC_HISTORY);
+      oncHistoryTab = await participantPage.tablist(Tab.ONC_HISTORY).click<OncHistoryTab>();
       const oncHistoryTable = oncHistoryTab.table;
       const lastRow = await oncHistoryTable.getRowsCount() - 1;
 
       randomAccessionNumber = await fillOncHistoryRow(participantPage, oncHistoryTab, facilityName, facilityPhoneNumber, facilityFaxNumber, lastRow);
 
       //Navigate to the Tissue Request page
-      const tissueInformationPage = await oncHistoryTable.openTissueInformationPage(lastRow);
-      await tissueInformationPage.assertPageTitle();
+      const tissueInformationPage = await oncHistoryTable.openTissueRequestAt(lastRow);
+      await tissueInformationPage.waitForReady();
 
       /**
        * Create Tumor Sample - the following need to be inputted in Tissue Request page before accessioning a SM-ID / tumor sample:
@@ -197,34 +191,33 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
 
       await tissueInformationPage.assertFaxSentDatesCount(1);
 
-      today = getDate();
+      today = getToday();
       expect(faxSentDate.trim(), `Fax Sent Date has unexpected input: expected ${today} but received ${faxSentDate}`).toBe(today);
       expect(tissueReceivedDate.trim(), `Tissue Received Date has unexpected input: expected ${today} but received ${tissueReceivedDate}`).
         toBe(today);
 
       await tissueInformationPage.selectGender('Female');
 
-      const tissue = await tissueInformationPage.tissue();
-      await tissue.fillField(TissueDynamicFieldsEnum.USS, { inputValue: materialsReceivedAmount });
+      const tissue = tissueInformationPage.tissue();
+      await tissue.fillField(Label.USS_UNSTAINED, { inputValue: materialsReceivedAmount });
       smID = `SM-${crypto.randomUUID().toString().replace('-', '1').substring(0, 5)}`; //e.g. SM-12345
       secondSMID = `SM-${crypto.randomUUID().toString().replace('-', '1').substring(0, 5)}`; //e.g. SM-09876
-      const smIDModal = await tissue.fillSMIDs(SMIdEnum.USS_SM_IDS);
+      const smIDModal = await tissue.fillSMIDs(SM_ID.USS_SM_IDS);
       await smIDModal.fillInputs([smID, secondSMID]);
       await smIDModal.close();
 
-      await tissue.fillField(TissueDynamicFieldsEnum.TISSUE_TYPE, {select: TissueTypesEnum.BLOCK});
+      await tissue.fillField(Label.TISSUE_TYPE, {selection: TissueType.BLOCK});
 
       tumorCollaboratorSampleIDPrefix = await tissue.getTumorCollaboratorSampleIDSuggestedValue();
       tumorSampleID = `${tumorCollaboratorSampleIDPrefix}_${crypto.randomUUID().toString().substring(0, 4)}`;
-      await tissue.fillField(TissueDynamicFieldsEnum.TUMOR_COLLABORATOR_SAMPLE_ID, { inputValue: tumorSampleID });
+      await tissue.fillField(Label.TUMOR_COLLABORATOR_SAMPLE_ID, { inputValue: tumorSampleID });
 
-      await tissue.fillField(TissueDynamicFieldsEnum.DATE_SENT_TO_GP, { inputValue: today });
+      await tissue.fillField(Label.DATE_SENT_TO_GP, { inputValue: today });
 
       //Receive the blood kit first
-      const kitsReceivedPage = await navigation.selectFromSamples<KitsReceivedPage>(SamplesNavEnum.RECEIVED);
-      await kitsReceivedPage.waitForLoad();
-      await kitsReceivedPage.assertPageTitle();
-      await kitsReceivedPage.selectKitType(KitTypeEnum.BLOOD);
+      const kitsReceivedPage = await navigation.selectFromSamples<KitsReceivedPage>(Samples.RECEIVED);
+      await kitsReceivedPage.waitForReady();
+      await kitsReceivedPage.selectKitType(KitType.BLOOD);
       await kitsReceivedPage.kitReceivedRequest({mfCode: kitLabel});
 
       //Accession the tumor sample second (just receive the sample using the SM-ID)
@@ -236,7 +229,7 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
       });
 
       //Confirm that the germline consent addendum was created - check that the GERMLINE_CONSENT_ADDENDUM_PEDIATRIC Survey Created column is not empty
-      await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
+      await navigation.selectFromStudy<ParticipantListPage>(Study.PARTICIPANT_LIST);
       await participantListPage.waitForReady();
 
       const customizeViewPanel = participantListPage.filters.customizeViewPanel;
@@ -267,27 +260,27 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
       navigation = new Navigation(page, request);
       await new Select(page, { label: 'Select study' }).selectOption(`${study}`);
 
-      const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
+      const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(Study.PARTICIPANT_LIST);
       await participantListPage.waitForReady();
 
       //Prep the Saliva kit
       shortID = await findParticipantForGermlineConsentCreation(participantListPage, study);
       logInfo(`Chosen short id: ${shortID}`);
-      kitLabel = await prepareSentKit(shortID, KitTypeEnum.SALIVA, study, page, request, testInfo);
+      kitLabel = await prepareSentKit(shortID, KitType.SALIVA, study, page, request, testInfo);
 
       //Get the Participant Page of the chosen test participant
       participantPage = await goToTestParticipantPage(shortID, navigation);
 
       //Fill out an onc history and get back an accession number
-      oncHistoryTab = await participantPage.clickTab<OncHistoryTab>(Tab.ONC_HISTORY);
+      oncHistoryTab = await participantPage.tablist(Tab.ONC_HISTORY).click<OncHistoryTab>();
       const oncHistoryTable = oncHistoryTab.table;
       const lastRow = await oncHistoryTable.getRowsCount() - 1;
 
       randomAccessionNumber = await fillOncHistoryRow(participantPage, oncHistoryTab, facilityName, facilityPhoneNumber, facilityFaxNumber, lastRow);
 
       //Navigate to the Tissue Request page
-      const tissueInformationPage = await oncHistoryTable.openTissueInformationPage(lastRow);
-      await tissueInformationPage.assertPageTitle();
+      const tissueInformationPage = await oncHistoryTable.openTissueRequestAt(lastRow);
+      await tissueInformationPage.waitForReady();
 
       /**
        * Create Tumor Sample - the following need to be inputted in Tissue Request page before accessioning a SM-ID / tumor sample:
@@ -305,31 +298,31 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
 
       await tissueInformationPage.assertFaxSentDatesCount(1);
 
-      today = getDate();
+      today = getToday();
       expect(faxSentDate.trim(), `Fax Sent Date has unexpected input: expected ${today} but received ${faxSentDate}`).toBe(today);
       expect(tissueReceivedDate.trim(), `Tissue Received Date has unexpected input: expected ${today} but received ${tissueReceivedDate}`).
         toBe(today);
 
       await tissueInformationPage.selectGender('Female');
 
-      const tissue = await tissueInformationPage.tissue();
-      await tissue.fillField(TissueDynamicFieldsEnum.USS, { inputValue: materialsReceivedAmount });
+      const tissue = tissueInformationPage.tissue();
+      await tissue.fillField(Label.USS_UNSTAINED, { inputValue: materialsReceivedAmount });
       smID = `SM-${crypto.randomUUID().toString().replace('-', '1').substring(0, 5)}`; //e.g. SM-12345
       secondSMID = `SM-${crypto.randomUUID().toString().replace('-', '1').substring(0, 5)}`; //e.g. SM-09876
-      const smIDModal = await tissue.fillSMIDs(SMIdEnum.USS_SM_IDS);
+      const smIDModal = await tissue.fillSMIDs(SM_ID.USS_SM_IDS);
       await smIDModal.fillInputs([smID, secondSMID]);
       await smIDModal.close();
 
-      await tissue.fillField(TissueDynamicFieldsEnum.TISSUE_TYPE, {select: TissueTypesEnum.BLOCK});
+      await tissue.fillField(Label.TISSUE_TYPE, {selection: TissueType.BLOCK});
 
       tumorCollaboratorSampleIDPrefix = await tissue.getTumorCollaboratorSampleIDSuggestedValue();
       tumorSampleID = `${tumorCollaboratorSampleIDPrefix}_${crypto.randomUUID().toString().substring(0, 4)}`;
-      await tissue.fillField(TissueDynamicFieldsEnum.TUMOR_COLLABORATOR_SAMPLE_ID, { inputValue: tumorSampleID });
+      await tissue.fillField(Label.TUMOR_COLLABORATOR_SAMPLE_ID, { inputValue: tumorSampleID });
 
-      await tissue.fillField(TissueDynamicFieldsEnum.DATE_SENT_TO_GP, { inputValue: today });
+      await tissue.fillField(Label.DATE_SENT_TO_GP, { inputValue: today });
 
       //Accession the tumor sample first (just receive the sample using the SM-ID)
-      const kitsReceivedPage = await navigation.selectFromSamples<KitsReceivedPage>(SamplesNavEnum.RECEIVED);
+      const kitsReceivedPage = await navigation.selectFromSamples<KitsReceivedPage>(Samples.RECEIVED);
       await kitsReceivedPage.kitReceivedRequest({
         mfCode: smID,
         isTumorSample: true,
@@ -338,13 +331,12 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
       });
 
       //Receive the saliva kit second
-      await kitsReceivedPage.waitForLoad();
-      await kitsReceivedPage.assertPageTitle();
-      await kitsReceivedPage.selectKitType(KitTypeEnum.SALIVA);
+      await kitsReceivedPage.waitForReady();
+      await kitsReceivedPage.selectKitType(KitType.SALIVA);
       await kitsReceivedPage.kitReceivedRequest({mfCode: kitLabel});
 
       //Confirm that the germline consent addendum was created - check that the GERMLINE_CONSENT_ADDENDUM_PEDIATRIC Survey Created column is not empty
-      await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
+      await navigation.selectFromStudy<ParticipantListPage>(Study.PARTICIPANT_LIST);
       await participantListPage.waitForReady();
 
       const customizeViewPanel = participantListPage.filters.customizeViewPanel;
@@ -375,27 +367,27 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
       navigation = new Navigation(page, request);
       await new Select(page, { label: 'Select study' }).selectOption(`${study}`);
 
-      const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
+      const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(Study.PARTICIPANT_LIST);
       await participantListPage.waitForReady();
 
       //Prep the Blood kit
       shortID = await findParticipantForGermlineConsentCreation(participantListPage, study);
       logInfo(`Chosen short id: ${shortID}`);
-      kitLabel = await prepareSentKit(shortID, KitTypeEnum.BLOOD, study, page, request, testInfo);
+      kitLabel = await prepareSentKit(shortID, KitType.BLOOD, study, page, request, testInfo);
 
       //Get the Participant Page of the chosen test participant
       participantPage = await goToTestParticipantPage(shortID, navigation);
 
       //Fill out an onc history and get back an accession number
-      oncHistoryTab = await participantPage.clickTab<OncHistoryTab>(Tab.ONC_HISTORY);
+      oncHistoryTab = await participantPage.tablist(Tab.ONC_HISTORY).click<OncHistoryTab>();
       const oncHistoryTable = oncHistoryTab.table;
       const lastRow = await oncHistoryTable.getRowsCount() - 1;
 
       randomAccessionNumber = await fillOncHistoryRow(participantPage, oncHistoryTab, facilityName, facilityPhoneNumber, facilityFaxNumber, lastRow);
 
       //Navigate to the Tissue Request page
-      const tissueInformationPage = await oncHistoryTable.openTissueInformationPage(lastRow);
-      await tissueInformationPage.assertPageTitle();
+      const tissueInformationPage = await oncHistoryTable.openTissueRequestAt(lastRow);
+      await tissueInformationPage.waitForReady();
 
       /**
        * Create Tumor Sample - the following need to be inputted in Tissue Request page before accessioning a SM-ID / tumor sample:
@@ -413,31 +405,31 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
 
       await tissueInformationPage.assertFaxSentDatesCount(1);
 
-      today = getDate();
+      today = getToday();
       expect(faxSentDate.trim(), `Fax Sent Date has unexpected input: expected ${today} but received ${faxSentDate}`).toBe(today);
       expect(tissueReceivedDate.trim(), `Tissue Received Date has unexpected input: expected ${today} but received ${tissueReceivedDate}`).
         toBe(today);
 
       await tissueInformationPage.selectGender('Female');
 
-      const tissue = await tissueInformationPage.tissue();
-      await tissue.fillField(TissueDynamicFieldsEnum.USS, { inputValue: materialsReceivedAmount });
+      const tissue = tissueInformationPage.tissue();
+      await tissue.fillField(Label.USS_UNSTAINED, { inputValue: materialsReceivedAmount });
       smID = `SM-${crypto.randomUUID().toString().replace('-', '1').substring(0, 5)}`; //e.g. SM-12345
       secondSMID = `SM-${crypto.randomUUID().toString().replace('-', '1').substring(0, 5)}`; //e.g. SM-09876
-      const smIDModal = await tissue.fillSMIDs(SMIdEnum.USS_SM_IDS);
+      const smIDModal = await tissue.fillSMIDs(SM_ID.USS_SM_IDS);
       await smIDModal.fillInputs([smID, secondSMID]);
       await smIDModal.close();
 
-      await tissue.fillField(TissueDynamicFieldsEnum.TISSUE_TYPE, {select: TissueTypesEnum.BLOCK});
+      await tissue.fillField(Label.TISSUE_TYPE, {selection: TissueType.BLOCK});
 
       tumorCollaboratorSampleIDPrefix = await tissue.getTumorCollaboratorSampleIDSuggestedValue();
       tumorSampleID = `${tumorCollaboratorSampleIDPrefix}_${crypto.randomUUID().toString().substring(0, 4)}`;
-      await tissue.fillField(TissueDynamicFieldsEnum.TUMOR_COLLABORATOR_SAMPLE_ID, { inputValue: tumorSampleID });
+      await tissue.fillField(Label.TUMOR_COLLABORATOR_SAMPLE_ID, { inputValue: tumorSampleID });
 
-      await tissue.fillField(TissueDynamicFieldsEnum.DATE_SENT_TO_GP, { inputValue: today });
+      await tissue.fillField(Label.DATE_SENT_TO_GP, { inputValue: today });
 
       //Accession the tumor sample first (just receive the sample using the SM-ID)
-      const kitsReceivedPage = await navigation.selectFromSamples<KitsReceivedPage>(SamplesNavEnum.RECEIVED);
+      const kitsReceivedPage = await navigation.selectFromSamples<KitsReceivedPage>(Samples.RECEIVED);
       await kitsReceivedPage.kitReceivedRequest({
         mfCode: smID,
         isTumorSample: true,
@@ -446,13 +438,12 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
       });
 
       //Receive the blood kit second
-      await kitsReceivedPage.waitForLoad();
-      await kitsReceivedPage.assertPageTitle();
-      await kitsReceivedPage.selectKitType(KitTypeEnum.BLOOD);
+      await kitsReceivedPage.waitForReady();
+      await kitsReceivedPage.selectKitType(KitType.BLOOD);
       await kitsReceivedPage.kitReceivedRequest({mfCode: kitLabel});
 
       //Confirm that the germline consent addendum was created - check that the GERMLINE_CONSENT_ADDENDUM_PEDIATRIC Survey Created column is not empty
-      await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
+      await navigation.selectFromStudy<ParticipantListPage>(Study.PARTICIPANT_LIST);
       await participantListPage.waitForReady();
 
       const customizeViewPanel = participantListPage.filters.customizeViewPanel;
@@ -489,7 +480,7 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
  * Does not already have a germline consent addendum
  * Does not already have a normal kit (i.e. a blood or saliva kit) sent out (for ease of testing)
  */
-async function findParticipantForGermlineConsentCreation(participantListPage: ParticipantListPage, study: StudyEnum): Promise<string> {
+async function findParticipantForGermlineConsentCreation(participantListPage: ParticipantListPage, study: StudyName): Promise<string> {
   const searchPanel = participantListPage.filters.searchPanel;
   await searchPanel.open();
   await searchPanel.checkboxes(Label.STATUS, { checkboxValues: [DataFilter.ENROLLED] });
@@ -563,22 +554,22 @@ async function findParticipantForGermlineConsentCreation(participantListPage: Pa
   return shortID;
 }
 
-function getPlaywrightParticipantLastNamePrefix(study: StudyEnum): string {
+function getPlaywrightParticipantLastNamePrefix(study: StudyName): string {
   let prefix = '';
   switch (study) {
-    case StudyEnum.BRAIN:
+    case StudyName.BRAIN:
       prefix = 'BR';
       break;
-    case StudyEnum.MBC:
+    case StudyName.MBC:
       prefix = 'testLastName';
       break;
-    case StudyEnum.OSTEO2:
+    case StudyName.OSTEO2:
       prefix = 'OS';
       break;
-    case StudyEnum.ANGIO:
-    case StudyEnum.AT:
-    case StudyEnum.LMS:
-    case StudyEnum.PANCAN:
+    case StudyName.ANGIO:
+    case StudyName.AT:
+    case StudyName.LMS:
+    case StudyName.PANCAN:
       prefix = 'Playwright';
       break;
     default:
@@ -599,18 +590,18 @@ function getPlaywrightParticipantLastNamePrefix(study: StudyEnum): string {
  * @returns the mf code a.k.a the kit label to be used to later mark the kit as sent
  */
 async function prepareSentKit(shortID: string,
-  kitType: KitTypeEnum,
-  study: StudyEnum,
+  kitType: KitType,
+  study: StudyName,
   page: Page,
   request: APIRequestContext,
   testInfo: TestInfo): Promise<string> {
   const navigation = new Navigation(page, request);
-  const expectedKitTypes = [KitTypeEnum.SALIVA, KitTypeEnum.BLOOD]; //Studies used for the current test only have Saliva and Blood kits
+  const expectedKitTypes = [KitType.SALIVA, KitType.BLOOD]; //Studies used for the current test only have Saliva and Blood kits
   const testResultDirectory = testInfo.outputDir;
   let kitLabel = '';
 
   //Deactivate existing kits
-  const kitsWithoutLabelPage = await navigation.selectFromSamples<KitsWithoutLabelPage>(SamplesNavEnum.KITS_WITHOUT_LABELS);
+  const kitsWithoutLabelPage = await navigation.selectFromSamples<KitsWithoutLabelPage>(Samples.KITS_WITHOUT_LABELS);
   await kitsWithoutLabelPage.waitForReady();
   await kitsWithoutLabelPage.selectKitType(kitType);
   if (await kitsWithoutLabelPage.hasKitRequests()) {
@@ -619,13 +610,13 @@ async function prepareSentKit(shortID: string,
     await kitsWithoutLabelPage.deactivateAllKitsFor(shortID);
   }
 
-  const kitErrorPage = await navigation.selectFromSamples<ErrorPage>(SamplesNavEnum.ERROR);
+  const kitErrorPage = await navigation.selectFromSamples<KitsWithErrorPage>(Samples.ERROR);
   await kitErrorPage.waitForReady();
   await kitErrorPage.selectKitType(kitType);
   await kitErrorPage.deactivateAllKitsFor(shortID);
 
   //Get first name and last name of the participant - Kit Upload checks that the names match the given short ids
-  const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
+  const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(Study.PARTICIPANT_LIST);
   await participantListPage.waitForReady();
 
   const searchPanel = participantListPage.filters.searchPanel;
@@ -646,7 +637,7 @@ async function prepareSentKit(shortID: string,
   kitUploadInfo.address.state = user.patient.state.abbreviation;
   kitUploadInfo.address.country = user.patient.country.abbreviation;
 
-  const kitUploadPage = await navigation.selectFromSamples<KitUploadPage>(SamplesNavEnum.KIT_UPLOAD);
+  const kitUploadPage = await navigation.selectFromSamples<KitsUploadPage>(Samples.KIT_UPLOAD);
   await kitUploadPage.waitForReady();
   await kitUploadPage.selectKitType(kitType);
   await kitUploadPage.assertBrowseBtn();
@@ -654,7 +645,7 @@ async function prepareSentKit(shortID: string,
   await kitUploadPage.uploadFile(kitType, [kitUploadInfo], study, testResultDirectory);
 
   //Check for kit in Kits without Label and get the shipping ID
-  await navigation.selectFromSamples<KitsWithoutLabelPage>(SamplesNavEnum.KITS_WITHOUT_LABELS);
+  await navigation.selectFromSamples<KitsWithoutLabelPage>(Samples.KITS_WITHOUT_LABELS);
   await kitsWithoutLabelPage.waitForReady();
   await kitsWithoutLabelPage.selectKitType(kitType);
   await kitsWithoutLabelPage.assertCreateLabelsBtn();
@@ -668,31 +659,31 @@ async function prepareSentKit(shortID: string,
   await expect(kitsTable.rowLocator()).toHaveCount(1);
 
   //Scan saliva and blood kit in Initial Scan
-  const initialScanPage = await navigation.selectFromSamples<InitialScanPage>(SamplesNavEnum.INITIAL_SCAN);
+  const initialScanPage = await navigation.selectFromSamples<InitialScanPage>(Samples.INITIAL_SCAN);
   await initialScanPage.assertPageTitle();
-  if (kitType === KitTypeEnum.SALIVA) {
+  if (kitType === KitType.SALIVA) {
     kitLabel = `${crypto.randomUUID().toString().substring(0, 14)}`; //Clinical Saliva kits just need to be 14 chars
-  } else if (kitType === KitTypeEnum.BLOOD) {
+  } else if (kitType === KitType.BLOOD) {
     kitLabel = `PECGS-${crypto.randomUUID().toString().substring(0, 10)}`; //Clinical Blood kits need a PECGS prefix
   }
   await initialScanPage.fillScanPairs([kitLabel, shortID]);
   await initialScanPage.save();
 
   //Both Saliva and Blood kits will now require a tracking label - see PEPPER-1249
-  const trackingScanPage = await navigation.selectFromSamples<TrackingScanPage>(SamplesNavEnum.TRACKING_SCAN);
+  const trackingScanPage = await navigation.selectFromSamples<TrackingScanPage>(Samples.TRACKING_SCAN);
   await trackingScanPage.waitForReady();
   const trackingLabel = `tracking-${crypto.randomUUID().toString().substring(0, 10)}`;
   await trackingScanPage.fillScanPairs([trackingLabel, kitLabel]);
   await trackingScanPage.save();
 
   //Scan kit in Final Scan - which marks the kit as sent
-  const finalScanPage = await navigation.selectFromSamples<FinalScanPage>(SamplesNavEnum.FINAL_SCAN);
+  const finalScanPage = await navigation.selectFromSamples<FinalScanPage>(Samples.FINAL_SCAN);
   await finalScanPage.assertPageTitle();
   await finalScanPage.fillScanPairs([kitLabel, shippingID]);
   await finalScanPage.save();
 
   //Check for the kit in the Kits Sent page
-  const kitsSentPage = await navigation.selectFromSamples<KitsSentPage>(SamplesNavEnum.SENT);
+  const kitsSentPage = await navigation.selectFromSamples<KitsSentPage>(Samples.SENT);
   await kitsSentPage.waitForReady();
   await kitsSentPage.assertDisplayedKitTypes(expectedKitTypes);
   await kitsSentPage.selectKitType(kitType);
@@ -701,14 +692,14 @@ async function prepareSentKit(shortID: string,
   await kitsSentPage.search(Label.MF_CODE, kitLabel, { count: 1 });
 
   const sentDate = await kitsSentPage.getData(Label.SENT);
-  expect(getDate(new Date(sentDate))).toStrictEqual(getDate());
+  expect(dateFormat().format(new Date(sentDate))).toStrictEqual(getToday());
 
   //Return the mf code a.k.a the kit label so that the kit can later be marked as received
   return kitLabel;
 }
 
 async function goToTestParticipantPage(shortID: string, navigation: Navigation): Promise<ParticipantPage> {
-  const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
+  const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(Study.PARTICIPANT_LIST);
   await participantListPage.waitForReady();
 
   const searchPanel = participantListPage.filters.searchPanel;
@@ -738,9 +729,9 @@ async function fillOncHistoryRow(participantPage: ParticipantPage,
   const oncHistoryTable = oncHistoryTab.table;
   const rowIndex = lastRowIndex ? lastRowIndex : await oncHistoryTable.getRowsCount() - 1;
   const randomAccessionNumber = crypto.randomUUID().toString().substring(0, 10);
-  const today = getToday();
+  const today = new Date();
 
-  await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.DATE_OF_PX, {
+  await oncHistoryTable.fillField(Label.DATE_OF_PX, {
     date: {
       date: {
         yyyy: today.getFullYear(),
@@ -749,13 +740,13 @@ async function fillOncHistoryRow(participantPage: ParticipantPage,
       }
     }
   }, rowIndex);
-  await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.ACCESSION_NUMBER, { value: randomAccessionNumber }, rowIndex);
-  await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.FACILITY, { value: facilityName }, rowIndex);
-  await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.PHONE, { value: facilityPhoneNumber }, rowIndex);
-  await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.FAX, { value: facilityFaxNumber }, rowIndex);
+  await oncHistoryTable.fillField(Label.ACCESSION_NUMBER, { inputValue: randomAccessionNumber }, rowIndex);
+  await oncHistoryTable.fillField(Label.FACILITY, { inputValue: facilityName }, rowIndex);
+  await oncHistoryTable.fillField(Label.PHONE, { inputValue: facilityPhoneNumber }, rowIndex);
+  await oncHistoryTable.fillField(Label.FAX, { inputValue: facilityFaxNumber }, rowIndex);
 
   //Mark Onc History as 'Request' status
-  await oncHistoryTable.fillField(OncHistoryInputColumnsEnum.REQUEST, { select: OncHistorySelectRequestEnum.REQUEST }, rowIndex);
+  await oncHistoryTable.fillField(Label.REQUEST, { selection: OncHistorySelectRequestEnum.REQUEST }, rowIndex);
 
   //Click Download Request Documents in order to have the Fax Sent Date automatically filled out for recently inputted onc history
   await oncHistoryTable.assertRowSelectionCheckbox(rowIndex);

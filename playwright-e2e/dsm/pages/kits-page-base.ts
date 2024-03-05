@@ -1,21 +1,16 @@
 import { Locator, Page, expect } from '@playwright/test';
 import DsmPageBase from './dsm-page-base';
 import { KitsTable } from 'dsm/component/tables/kits-table';
-import { KitTypeEnum } from 'dsm/component/kitType/enums/kitType-enum';
 import { waitForNoSpinner, waitForResponse } from 'utils/test-utils';
-import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
-import { KitType } from 'dsm/component/kitType/kitType';
 import { logInfo } from 'utils/log-utils';
 import Modal from 'dsm/component/modal';
 import { getDate, getDateMonthAbbreviated, offsetDaysFromDate } from 'utils/date-utils';
-import { SamplesNavEnum } from 'dsm/component/navigation/enums/samplesNav-enum';
 import Checkbox from 'dss/component/checkbox';
-import { Label } from 'dsm/enums';
+import { KitType, Label } from 'dsm/enums';
+import { Samples, StudyName } from 'dsm/navigation';
 
 export default abstract class KitsPageBase extends DsmPageBase {
-  protected abstract PAGE_TITLE: string;
   protected abstract TABLE_HEADERS: string[];
-  protected readonly kitType: KitType;
   protected readonly kitsTable: KitsTable;
   private readonly sentColumnIndex = 5;
   private readonly receivedColumnIndex = 3;
@@ -23,7 +18,6 @@ export default abstract class KitsPageBase extends DsmPageBase {
 
   protected constructor(readonly page: Page) {
     super(page);
-    this.kitType = new KitType(this.page);
     this.kitsTable = new KitsTable(this.page);
   }
 
@@ -32,20 +26,18 @@ export default abstract class KitsPageBase extends DsmPageBase {
   }
 
   public async waitForReady(): Promise<void> {
-    await Promise.all([
-      this.page.waitForLoadState(),
-      expect(this.page.locator('h1')).toHaveText(this.PAGE_TITLE),
-    ]);
-    await waitForNoSpinner(this.page);
-    await expect(async () => expect(await this.page.locator('mat-checkbox[id]').count()).toBeGreaterThanOrEqual(1)).toPass({ timeout: 60000 });
-    const kits = await this.getStudyKitTypes()
-    for (const kit of kits) {
-      await expect(this.kitType.displayedKitType(kit)).toBeVisible();
+    await super.waitForReady();
+    if (this.PAGE_TITLE !== 'Kit Search') {
+      await expect(async () => expect(await this.page.locator('mat-checkbox[id]').count()).toBeGreaterThanOrEqual(1)).toPass({ timeout: 60000 });
+      const kits = await this.getStudyKitTypes()
+      for (const kit of kits) {
+        await expect(this.kitCheckbox(kit).toLocator()).toBeVisible();
+      }
     }
     await waitForNoSpinner(this.page);
   }
 
-  public async reloadKitPage(kitType: KitTypeEnum): Promise<void> {
+  public async reloadKitPage(kitType: KitType): Promise<void> {
     await this.reload();
     await this.waitForReady();
     await this.selectKitType(kitType);
@@ -58,13 +50,13 @@ export default abstract class KitsPageBase extends DsmPageBase {
     await waitForNoSpinner(this.page);
   }
 
-  public async selectKitType(kitType: KitTypeEnum, opts: { waitForResp?: string } = {}): Promise<boolean> {
+  public async selectKitType(kitType: KitType, opts: { waitForResp?: string } = {}): Promise<boolean> {
     const { waitForResp = 'ui/kitRequests' } = opts;
     const waitPromise = waitForResp === 'undefined' ? Promise.resolve() : waitForResponse(this.page, { uri: waitForResp });
     await waitForNoSpinner(this.page);
     await Promise.all([
       waitPromise,
-      this.kitType.selectKitType(kitType)
+      this.kitCheckbox(kitType).check()
     ]);
     await waitForNoSpinner(this.page);
     return await this.hasKitRequests();
@@ -139,10 +131,10 @@ export default abstract class KitsPageBase extends DsmPageBase {
     return !existsText;
   }
 
-  public async getSelectedKitType(): Promise<KitTypeEnum | null> {
+  public async getSelectedKitType(): Promise<KitType | null> {
     const kits = await this.getStudyKitTypes();
     for (const kit of kits) {
-      const isSelected = await this.kitType.kitTypeCheckbox(kit).isChecked();
+      const isSelected = await this.kitCheckbox(kit).isChecked();
       if (isSelected) {
         return kit;
       }
@@ -150,26 +142,22 @@ export default abstract class KitsPageBase extends DsmPageBase {
     return null;
   }
 
-  public getKitCheckbox(kit: KitTypeEnum): Checkbox {
-    return this.kitType.kitTypeCheckbox(kit);
-  }
-
-  public async getStudyKitTypes(studyName?: StudyEnum): Promise<KitTypeEnum[]> {
+  public async getStudyKitTypes(studyName?: StudyName): Promise<KitType[]> {
     if (!studyName) {
       const studyNameLocation = this.page.locator(`//app-navigation//a[@data-toggle='dropdown']//i`);
-      studyName = await studyNameLocation.innerText() as StudyEnum;
+      studyName = await studyNameLocation.innerText() as StudyName;
     }
     // Most studies have Blood and Saliva kits; RGP has Blood and 'Blood & RNA' kits; Pancan has Blood, Saliva, and Stool kits
     let kitTypes;
     switch (studyName) {
-      case StudyEnum.RGP:
-        kitTypes = [KitTypeEnum.BLOOD, KitTypeEnum.BLOOD_AND_RNA];
+      case StudyName.RGP:
+        kitTypes = [KitType.BLOOD, KitType.BLOOD_AND_RNA];
         break;
-      case StudyEnum.PANCAN:
-        kitTypes = [KitTypeEnum.BLOOD, KitTypeEnum.SALIVA, KitTypeEnum.STOOL];
+      case StudyName.PANCAN:
+        kitTypes = [KitType.BLOOD, KitType.SALIVA, KitType.STOOL];
         break;
       default:
-        kitTypes = [KitTypeEnum.SALIVA, KitTypeEnum.BLOOD];
+        kitTypes = [KitType.SALIVA, KitType.BLOOD];
         break;
     }
     return kitTypes;
@@ -190,7 +178,7 @@ export default abstract class KitsPageBase extends DsmPageBase {
       this.deactivateReasonBtn.click(),
     ]);
 
-    await expect(new Modal(this.page).toLocator()).not.toBeVisible();
+    await expect(new Modal(this.page, this.toLocator).toLocator).not.toBeVisible();
     await waitForNoSpinner(this.page);
     return reason;
   }
@@ -249,7 +237,7 @@ export default abstract class KitsPageBase extends DsmPageBase {
    * @param currentPage The current page being checked
    * @returns Array of locators that have the mf barcode
    */
-  public async getMFBarcodesSince(sinceDay: string, currentPage: SamplesNavEnum.SENT | SamplesNavEnum.RECEIVED):Promise<Locator[]> {
+  public async getMFBarcodesSince(sinceDay: string, currentPage: Samples.SENT | Samples.RECEIVED):Promise<Locator[]> {
     const today = getDate();
     let currentDay = (new Date()).getTime(); //Get today's date in milliseconds for comparison
     const earliestDate = (new Date(sinceDay)).getTime(); //Get earliest requested date in milliseconds for comparison
@@ -276,14 +264,14 @@ export default abstract class KitsPageBase extends DsmPageBase {
   }
 
   private getMFBarcodeLocatorString(
-    currentPage: SamplesNavEnum.SENT | SamplesNavEnum.RECEIVED,
+    currentPage: Samples.SENT | Samples.RECEIVED,
     day: string): string {
     let result = '';
     switch (currentPage) {
-      case SamplesNavEnum.SENT:
+      case Samples.SENT:
         result = `//table//td[${this.sentColumnIndex}][contains(.,'${day}')]/following-sibling::td[${this.mfBarcodeIndex}]`;
         break;
-      case SamplesNavEnum.RECEIVED:
+      case Samples.RECEIVED:
         result = `//table//td[${this.receivedColumnIndex}][contains(.,'${day}')]/following-sibling::td[${this.mfBarcodeIndex}]`;
         break;
       default:
@@ -304,5 +292,9 @@ export default abstract class KitsPageBase extends DsmPageBase {
 
   public get getReloadKitListBtn(): Locator {
     return this.page.getByRole('button', {name: 'Reload Kit List'});
+  }
+
+  public kitCheckbox(kitType: KitType): Checkbox {
+    return new Checkbox(this.page, { label: kitType, root: 'app-root' });
   }
 }

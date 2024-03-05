@@ -1,5 +1,4 @@
 import { expect } from '@playwright/test';
-import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
 import { FileFormat } from 'dsm/enums';
 import { test } from 'fixtures/dsm-fixture';
@@ -9,10 +8,11 @@ import path from 'path';
 import { isNaN } from 'lodash';
 import { unzip } from 'utils/file-utils';
 import { logInfo } from 'utils/log-utils';
+import { StudyName } from 'dsm/navigation';
 
 test.describe.parallel('Participant List Download', () => {
   // Chose studies with fewer participants on Dev and Test. Otherwise download all data will take a very long time.
-  const studies = [StudyEnum.OSTEO];
+  const studies = [StudyName.OSTEO];
 
   for (const study of studies) {
     test(`Select All in @dsm @${study}`, async ({ page, request }, testInfo) => {

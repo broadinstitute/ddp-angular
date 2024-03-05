@@ -2,24 +2,20 @@ import { expect } from '@playwright/test';
 import { test } from 'fixtures/dsm-fixture';
 import crypto from 'crypto';
 import * as mock from 'data/mock-address.json';
-import { KitTypeEnum } from 'dsm/component/kitType/enums/kitType-enum';
-import { SamplesNavEnum } from 'dsm/component/navigation/enums/samplesNav-enum';
-import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
-import { StudyNavEnum } from 'dsm/component/navigation/enums/studyNav-enum';
-import { Navigation } from 'dsm/component/navigation/navigation';
-import KitUploadPage from 'dsm/pages/kitUpload-page/kitUpload-page';
-import { KitUploadInfo } from 'dsm/pages/kitUpload-page/models/kitUpload-model';
-import KitsSentPage from 'dsm/pages/kitsInfo-pages/kitsSentPage';
-import KitsWithoutLabelPage from 'dsm/pages/kitsInfo-pages/kitsWithoutLabel-page';
+import { Navigation, Samples, Study, StudyName } from 'dsm/navigation';
+import KitsUploadPage from 'dsm/pages/kits-upload-page';
+import { KitUploadInfo } from 'dsm/pages/models/kit-upload-model';
+import KitsSentPage from 'dsm/pages/kits-sent-page';
+import KitsWithoutLabelPage from 'dsm/pages/kits-without-label-page';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
-import ParticipantPage from 'dsm/pages/participant-page/participant-page';
-import ErrorPage from 'dsm/pages/samples/error-page';
-import FinalScanPage from 'dsm/pages/scanner-pages/finalScan-page';
+import ParticipantPage from 'dsm/pages/participant-page';
+import KitsWithErrorPage from 'dsm/pages/kits-with-error-page';
+import FinalScanPage from 'dsm/pages/scan/final-scan-page';
 import { WelcomePage } from 'dsm/pages/welcome-page';
 import { logInfo } from 'utils/log-utils';
-import InitialScanPage from 'dsm/pages/scanner-pages/initialScan-page';
-import TrackingScanPage from 'dsm/pages/scanner-pages/trackingScan-page';
-import { Label } from 'dsm/enums';
+import InitialScanPage from 'dsm/pages/scan/initial-scan-page';
+import TrackingScanPage from 'dsm/pages/scan/tracking-scan-page';
+import { KitType, Label } from 'dsm/enums';
 
 /**
  * Prefix check for Saliva kit with Canada and New York address for Osteo2
@@ -41,9 +37,9 @@ test.describe.serial('Saliva Kit Upload with a Canadian or New York address', ()
   let kitUploadInfo: KitUploadInfo;
   let shortID: string;
 
-  const studies = [StudyEnum.OSTEO2];
-  const kitType = KitTypeEnum.SALIVA;
-  const expectedKitTypes = [KitTypeEnum.SALIVA, KitTypeEnum.BLOOD];
+  const studies = [StudyName.OSTEO2];
+  const kitType = KitType.SALIVA;
+  const expectedKitTypes = [KitType.SALIVA, KitType.BLOOD];
   const kitLabel = crypto.randomUUID().toString().substring(0, 14).replace(/-/, 'z'); // alphanumerical string length should be 14
   const trackingLabel = `trackingLabel-${crypto.randomUUID().toString().substring(0, 10).replace(/-/, 'w')}`;
 
@@ -79,7 +75,7 @@ test.describe.serial('Saliva Kit Upload with a Canadian or New York address', ()
       await welcomePage.selectStudy(study);
 
       await test.step('Find a suitable participant', async () => {
-        const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
+        const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(Study.PARTICIPANT_LIST);
         await participantListPage.waitForReady();
 
         // Find an existing suitable participant
@@ -108,7 +104,7 @@ test.describe.serial('Saliva Kit Upload with a Canadian or New York address', ()
       });
 
       await test.step('Deactivate existing blood and saliva kits', async () => {
-        const kitsWithoutLabelPage = await navigation.selectFromSamples<KitsWithoutLabelPage>(SamplesNavEnum.KITS_WITHOUT_LABELS);
+        const kitsWithoutLabelPage = await navigation.selectFromSamples<KitsWithoutLabelPage>(Samples.KITS_WITHOUT_LABELS);
         await kitsWithoutLabelPage.waitForReady();
         // Note: This could break other Kit tests running concurrently
         for (const kit of expectedKitTypes) {
@@ -116,14 +112,14 @@ test.describe.serial('Saliva Kit Upload with a Canadian or New York address', ()
           await kitsWithoutLabelPage.deactivateAllKitsFor(shortID);
         }
 
-        const kitErrorPage = await navigation.selectFromSamples<ErrorPage>(SamplesNavEnum.ERROR);
+        const kitErrorPage = await navigation.selectFromSamples<KitsWithErrorPage>(Samples.ERROR);
         await kitErrorPage.waitForReady();
         await kitErrorPage.selectKitType(kitType);
         await kitErrorPage.deactivateAllKitsFor(shortID);
       });
 
       await test.step('Upload new saliva kit', async () => {
-        const kitUploadPage = await navigation.selectFromSamples<KitUploadPage>(SamplesNavEnum.KIT_UPLOAD);
+        const kitUploadPage = await navigation.selectFromSamples<KitsUploadPage>(Samples.KIT_UPLOAD);
         await kitUploadPage.waitForReady();
         await kitUploadPage.selectKitType(kitType);
         await kitUploadPage.skipAddressValidation(true); // because mocked address is different from participant's address
@@ -133,7 +129,7 @@ test.describe.serial('Saliva Kit Upload with a Canadian or New York address', ()
       });
 
       await test.step('Create kit label', async () => {
-        const kitsWithoutLabelPage = await navigation.selectFromSamples<KitsWithoutLabelPage>(SamplesNavEnum.KITS_WITHOUT_LABELS);
+        const kitsWithoutLabelPage = await navigation.selectFromSamples<KitsWithoutLabelPage>(Samples.KITS_WITHOUT_LABELS);
         await kitsWithoutLabelPage.waitForReady();
         await kitsWithoutLabelPage.selectKitType(kitType);
         await kitsWithoutLabelPage.assertCreateLabelsBtn();
@@ -152,7 +148,7 @@ test.describe.serial('Saliva Kit Upload with a Canadian or New York address', ()
 
       // New kit will be listed on Error page because address is in either Canada or New York
       await test.step('New kit will be listed on Error page', async () => {
-        const errorPage = await navigation.selectFromSamples<ErrorPage>(SamplesNavEnum.ERROR);
+        const errorPage = await navigation.selectFromSamples<KitsWithErrorPage>(Samples.ERROR);
         const kitListTable = errorPage.getKitsTable;
         await errorPage.waitForReady();
         await errorPage.selectKitType(kitType);
@@ -172,14 +168,14 @@ test.describe.serial('Saliva Kit Upload with a Canadian or New York address', ()
       });
 
       await test.step('Initial scan', async () => {
-        const initialScanPage = await navigation.selectFromSamples<InitialScanPage>(SamplesNavEnum.INITIAL_SCAN);
+        const initialScanPage = await navigation.selectFromSamples<InitialScanPage>(Samples.INITIAL_SCAN);
         await initialScanPage.assertPageTitle();
         await initialScanPage.fillScanPairs([kitLabel, shortID]);
         await initialScanPage.save();
       });
 
       await test.step('Tracking Scan', async () => {
-        const trackingScanPage = await navigation.selectFromSamples<TrackingScanPage>(SamplesNavEnum.TRACKING_SCAN);
+        const trackingScanPage = await navigation.selectFromSamples<TrackingScanPage>(Samples.TRACKING_SCAN);
         await trackingScanPage.waitForReady();
         await trackingScanPage.fillScanPairs([trackingLabel, kitLabel]);
         // Saved without error
@@ -187,14 +183,14 @@ test.describe.serial('Saliva Kit Upload with a Canadian or New York address', ()
       });
 
       await test.step('Final scan', async () => {
-        const finalScanPage = await navigation.selectFromSamples<FinalScanPage>(SamplesNavEnum.FINAL_SCAN);
+        const finalScanPage = await navigation.selectFromSamples<FinalScanPage>(Samples.FINAL_SCAN);
         await finalScanPage.waitForReady();
         await finalScanPage.fillScanPairs([kitLabel, shippingID]);
         await finalScanPage.save();
       });
 
       await test.step('Verification: Kit is no longer listed on Kit without Label page', async () => {
-        const kitsWithoutLabelPage = await navigation.selectFromSamples<KitsWithoutLabelPage>(SamplesNavEnum.KITS_WITHOUT_LABELS);
+        const kitsWithoutLabelPage = await navigation.selectFromSamples<KitsWithoutLabelPage>(Samples.KITS_WITHOUT_LABELS);
         await kitsWithoutLabelPage.waitForReady();
         await kitsWithoutLabelPage.selectKitType(kitType);
         const kitsTable = kitsWithoutLabelPage.getKitsTable;
@@ -203,7 +199,7 @@ test.describe.serial('Saliva Kit Upload with a Canadian or New York address', ()
       });
 
       await test.step('Verification: Kit sent', async () => {
-        const kitsSentPage = await navigation.selectFromSamples<KitsSentPage>(SamplesNavEnum.SENT);
+        const kitsSentPage = await navigation.selectFromSamples<KitsSentPage>(Samples.SENT);
         await kitsSentPage.waitForReady();
         await kitsSentPage.selectKitType(kitType);
         await kitsSentPage.search(Label.MF_CODE, kitLabel, { count: 1 });
@@ -216,7 +212,7 @@ test.describe.serial('Saliva Kit Upload with a Canadian or New York address', ()
 
       await welcomePage.selectStudy(study);
 
-      const trackingScanPage = await navigation.selectFromSamples<TrackingScanPage>(SamplesNavEnum.TRACKING_SCAN);
+      const trackingScanPage = await navigation.selectFromSamples<TrackingScanPage>(Samples.TRACKING_SCAN);
       await trackingScanPage.waitForReady();
       await trackingScanPage.fillScanPairs([trackingLabel, kitLabel]);
       await trackingScanPage.save({verifySuccess: false});

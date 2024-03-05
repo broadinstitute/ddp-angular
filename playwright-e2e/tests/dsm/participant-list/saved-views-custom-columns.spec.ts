@@ -1,12 +1,12 @@
 import { expect } from '@playwright/test';
 import { testWithUser2 as test } from 'fixtures/dsm-fixture';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
-import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import { CustomizeView, Label } from 'dsm/enums';
 import crypto from 'crypto';
+import { StudyName } from 'dsm/navigation';
 
 test.describe('Participant List Search without Filtering Condition', () => {
-  const studies = [StudyEnum.LMS, StudyEnum.OSTEO2, StudyEnum.PANCAN];
+  const studies = [StudyName.LMS, StudyName.OSTEO2, StudyName.PANCAN];
 
   for (const study of studies) {
     test(`Save and retrieve Views @dsm @${study}`, async ({ page, request }) => {

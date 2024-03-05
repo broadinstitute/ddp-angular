@@ -2,9 +2,7 @@ import { expect } from '@playwright/test';
 import { login } from 'authentication/auth-dsm';
 import { APP } from 'data/constants';
 import { test } from 'fixtures/rgp-fixture';
-import { MiscellaneousEnum } from 'dsm/component/navigation/enums/miscellaneousNav-enum';
-import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
-import { Navigation } from 'dsm/component/navigation/navigation';
+import { Miscellaneous, Navigation, StudyName } from 'dsm/navigation';
 import { SortOrder } from 'dss/component/table';
 import * as lodash from 'lodash';
 import MailingListPage, { COLUMN } from 'dsm/pages/mailing-list-page';
@@ -59,17 +57,17 @@ test.describe.serial('When an interested participant does NOT meet participation
     await login(page);
 
     const welcomePage = new WelcomePage(page);
-    await welcomePage.selectStudy(StudyEnum.RGP);
+    await welcomePage.selectStudy(StudyName.RGP);
 
     const navigation = new Navigation(page, request);
     const [mailListResponse] = await Promise.all([
       page.waitForResponse(response => response.url().includes('/ui/mailingList/RGP') && response.status() === 200),
-      navigation.selectMiscellaneous(MiscellaneousEnum.MAILING_LIST)
+      navigation.selectFromMiscellaneous(Miscellaneous.MAILING_LIST)
     ]);
     const respJson: MailListCSV[] = JSON.parse(await mailListResponse.text());
     expect.soft(respJson.length).toBeGreaterThan(1); // response should contains at least one emails
 
-    const mailingListPage = new MailingListPage(page, APP.RGP);
+    const mailingListPage = new MailingListPage(page);
     await mailingListPage.waitForReady();
 
     // Downloading mailing list

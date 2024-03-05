@@ -1,6 +1,5 @@
 import { APIRequestContext, expect, Page } from '@playwright/test';
-import { MiscellaneousEnum } from 'dsm/component/navigation/enums/miscellaneousNav-enum';
-import { Navigation } from 'dsm/component/navigation/navigation';
+import { Miscellaneous, Navigation } from 'dsm/navigation';
 import PreviousSurveysTable from 'dsm/component/tables/previous-surveys-table';
 import { WelcomePage } from 'dsm/pages/welcome-page';
 import Button from 'dss/component/button';
@@ -16,7 +15,7 @@ export default class FollowUpSurveyPage {
     await welcomePage.selectStudy(study);
 
     const navigation = new Navigation(page, request);
-    await navigation.selectMiscellaneous(MiscellaneousEnum.FOLLOW_UP_SURVEY);
+    await navigation.selectFromMiscellaneous(Miscellaneous.FOLLOW_UP_SURVEY);
     const followUpPage = new FollowUpSurveyPage(page);
     await followUpPage.waitForReady();
     return followUpPage;

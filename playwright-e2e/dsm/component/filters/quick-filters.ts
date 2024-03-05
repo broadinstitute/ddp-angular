@@ -1,5 +1,4 @@
 import { Locator, Page, expect } from '@playwright/test';
-import DsmPageBase from 'dsm/pages/dsm-page-base';
 import { waitForResponse } from 'utils/test-utils';
 
 export enum QuickFiltersEnum {
@@ -14,15 +13,12 @@ export enum QuickFiltersEnum {
   AOM_IN_LAST_SIX_MONTHS = 'user-clock',
 }
 
-export default class QuickFilters extends DsmPageBase {
+export default class QuickFilters {
   public static async click(page: Page, quickFilter: QuickFiltersEnum): Promise<void> {
     await new QuickFilters(page).click(quickFilter);
   }
 
-
-  constructor(page: Page) {
-    super(page);
-  }
+  constructor(private readonly page: Page) {}
 
   public getLocator(quickFilter: QuickFiltersEnum): Locator {
     return this.page.locator(`//button[.//*[@data-icon="${quickFilter}"] | .//*[contains(@class,"${quickFilter}")]]`);

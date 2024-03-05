@@ -1,17 +1,13 @@
 import { expect } from '@playwright/test';
 import Dropdown from 'dsm/component/dropdown';
-import { MainMenuEnum } from 'dsm/component/navigation/enums/mainMenu-enum';
-import { MiscellaneousEnum } from 'dsm/component/navigation/enums/miscellaneousNav-enum';
-import { SamplesNavEnum } from 'dsm/component/navigation/enums/samplesNav-enum';
-import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
-import { Navigation } from 'dsm/component/navigation/navigation';
+import { Menu, Miscellaneous, Navigation, Samples, StudyName } from 'dsm/navigation';
 import { UserPermission } from 'dsm/enums';
 import UserPermissionPage from 'dsm/pages/user-and-permissions-page';
 import Select from 'dss/component/select';
 import { testLimitedPermissions as test } from 'fixtures/dsm-fixture';
 
 test.describe('Kits Permissions', () => {
-    const studies = [StudyEnum.OSTEO2, StudyEnum.LMS];
+    const studies = [StudyName.OSTEO2, StudyName.LMS];
     const testEmail = process.env.DSM_USER2_EMAIL as string; // Mason Whiteclaw
 
     for (const study of studies) {
@@ -22,7 +18,7 @@ test.describe('Kits Permissions', () => {
           await new Select(page, { label: 'Select study' }).selectOption(`${study}`);
 
           // Verify user permissions match expected
-          await navigation.selectMiscellaneous(MiscellaneousEnum.USERS_AND_PERMISSIONS);
+          await navigation.selectFromMiscellaneous(Miscellaneous.USERS_AND_PERMISSIONS);
           const userPermissionsPage = new UserPermissionPage(page);
 
           const studyAdmin = userPermissionsPage.getStudyAdmin(testEmail);
@@ -45,9 +41,9 @@ test.describe('Kits Permissions', () => {
         });
 
         await test.step('Verify Kits related menu options are not in Samples menu', async () => {
-          const samplesMenu = new Dropdown(page, MainMenuEnum.SAMPLES);
-          const allOptions = await samplesMenu.getDisplayedOptions<SamplesNavEnum>();
-          expect(allOptions.includes(SamplesNavEnum.CLINICAL_ORDERS)).toBeTruthy();
+          const samplesMenu = new Dropdown(page, Menu.SAMPLES);
+          const allOptions = await samplesMenu.getDisplayedOptions<Samples>();
+          expect(allOptions.includes(Samples.CLINICAL_ORDERS)).toBeTruthy();
         });
       })
     }

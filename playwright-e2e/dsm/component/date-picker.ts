@@ -20,12 +20,12 @@ export default class DatePicker {
     this.locator.locator('app-field-datepicker').nth(nth);
   }
 
-  toLocator(): Locator {
+  get toLocator(): Locator {
     return this.locator;
   }
 
   input(): Input {
-    return new Input(this.page, { root: this.toLocator() });
+    return new Input(this.page, { root: this.toLocator });
   }
 
   dayPicker(): Locator {
@@ -54,7 +54,7 @@ export default class DatePicker {
     const today = new Date();
     const { yyyy = today.getFullYear(), month = today.getMonth(), dayOfMonth = today.getDate(), isToday = false } = opts;
 
-    const todayBtn = new Button(this.page, { root: this.toLocator(), exactMatch: true, label: 'Today' });
+    const todayBtn = new Button(this.page, { root: this.toLocator, exactMatch: true, label: 'Today' });
     const isEnabled = await todayBtn.isVisible() && !(await todayBtn.isDisabled());
     if (isToday && isEnabled) {
       await Promise.all([
@@ -122,11 +122,11 @@ export default class DatePicker {
   }
 
   private calendarButton(): Locator {
-    return this.toLocator().locator('button').filter({ has: this.page.locator('[data-icon="calendar-alt"]')});
+    return this.toLocator.locator('button').filter({ has: this.page.locator('[data-icon="calendar-alt"]')});
   }
 
   private calendar(): Locator {
-    return this.toLocator().locator('.Calendar--Popup');
+    return this.toLocator.locator('.Calendar--Popup');
   }
 
   private clickableCell(): string {

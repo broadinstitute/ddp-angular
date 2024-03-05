@@ -1,14 +1,12 @@
 import { Page, expect } from '@playwright/test';
 import { test } from 'fixtures/dsm-fixture';
-import { StudyEnum } from 'dsm/component/navigation/enums/selectStudyNav-enum';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
 import { Label, Tab } from 'dsm/enums';
-import MedicalRecordsTab from 'dsm/pages/medical-records/medical-records-tab';
-import OncHistoryTab from 'dsm/component/tabs/onc-history-tab';
+import MedicalRecordsTab from 'dsm/pages/tablist/medical-records-tab';
+import OncHistoryTab from 'dsm/pages/tablist/onc-history-tab';
 import CohortTag from 'dsm/component/cohort-tag';
-import { SamplesNavEnum } from 'dsm/component/navigation/enums/samplesNav-enum';
-import SearchPage, { SearchByField } from 'dsm/pages/samples/search-page';
-import { Navigation } from 'dsm/component/navigation/navigation';
+import KitsSearchPage, { SearchByField } from 'dsm/pages/kits-search-page';
+import { Navigation, Samples, StudyName } from 'dsm/navigation';
 import { SortOrder } from 'dss/component/table';
 import { WelcomePage } from 'dsm/pages/welcome-page';
 
@@ -23,7 +21,7 @@ test.describe.serial('Same Participant in Osteo1 and Osteo2', () => {
   test.skip(DSM_BASE_URL === undefined || (DSM_BASE_URL as string).indexOf('test') === -1);
 
   const shortID = 'P4A42B';
-  const osteo1 = StudyEnum.OSTEO;
+  const osteo1 = StudyName.OSTEO;
 
   test(`Should match expected data in Osteo1 Participant page`, async ({page, request}) => {
     const participantListPage: ParticipantListPage = await ParticipantListPage.goto(page, osteo1, request);
@@ -74,12 +72,12 @@ test.describe.serial('Same Participant in Osteo1 and Osteo2', () => {
       await surveyTabLocator.locator('mat-expansion-panel-header').nth(2).click(); // collapse click
 
       // Compare Medical Records tab screenshot
-      const medicalRecordsTab = await participantPage.clickTab<MedicalRecordsTab>(Tab.MEDICAL_RECORD);
+      const medicalRecordsTab = await participantPage.tablist(Tab.ONC_HISTORY).click<OncHistoryTab>();
       const medicalRecordTable = medicalRecordsTab.table;
       await expect(medicalRecordTable.tableLocator()).toHaveScreenshot('osteo1-medical-records-tab-view.png');
 
       // Compare Onc History tab screenshot
-      const oncHistoryTab = await participantPage.clickTab<OncHistoryTab>(Tab.ONC_HISTORY);
+      const oncHistoryTab = await participantPage.tablist(Tab.ONC_HISTORY).click<OncHistoryTab>();
       const oncHistoryTable = oncHistoryTab.table;
       await expect(oncHistoryTable.tableLocator()).toHaveScreenshot('osteo1-onc-history-tab-view.png');
 
@@ -93,7 +91,7 @@ test.describe.serial('Same Participant in Osteo1 and Osteo2', () => {
 
   test(`Should match expected data in Osteo1 Kits Search page`, async ({page, request}) => {
     await new WelcomePage(page).selectStudy(osteo1);
-    const kitsSearchPage = await new Navigation(page, request).selectFromSamples<SearchPage>(SamplesNavEnum.SEARCH);
+    const kitsSearchPage = await new Navigation(page, request).selectFromSamples<KitsSearchPage>(Samples.SEARCH);
     await kitsSearchPage.waitForReady();
 
     const table = await kitsSearchPage.searchByField(SearchByField.SHORT_ID, shortID);
@@ -102,7 +100,7 @@ test.describe.serial('Same Participant in Osteo1 and Osteo2', () => {
   });
 
   test(`Should find participant in Osteo2 study`, async ({page, request}) => {
-    const participantListPage: ParticipantListPage = await ParticipantListPage.goto(page, StudyEnum.OSTEO2, request);
+    const participantListPage: ParticipantListPage = await ParticipantListPage.goto(page, StudyName.OSTEO2, request);
     await participantListPage.filterListByShortId(shortID);
     const participantPage = await participantListPage.participantListTable.openParticipantPageAt(0);
 
@@ -113,12 +111,12 @@ test.describe.serial('Same Participant in Osteo1 and Osteo2', () => {
     await expect(page.locator('tabset .nav-tabs')).toHaveScreenshot('osteo2-tabs-visible-view.png');
 
     // Compare Medical Records tab screenshot
-    const medicalRecordsTab = await participantPage.clickTab<MedicalRecordsTab>(Tab.MEDICAL_RECORD);
+    const medicalRecordsTab = await participantPage.tablist(Tab.MEDICAL_RECORD).click<MedicalRecordsTab>();
     const medicalRecordTable = medicalRecordsTab.table;
     await expect(medicalRecordTable.tableLocator()).toHaveScreenshot('osteo2-medical-records-tab-view.png');
 
     // Compare Onc History tab screenshot
-    const oncHistoryTab = await participantPage.clickTab<OncHistoryTab>(Tab.ONC_HISTORY);
+    const oncHistoryTab = await participantPage.tablist(Tab.ONC_HISTORY).click<OncHistoryTab>();
     const oncHistoryTable = oncHistoryTab.table;
     await expect(oncHistoryTable.tableLocator()).toHaveScreenshot('osteo2-onc-history-tab-view.png');
   });

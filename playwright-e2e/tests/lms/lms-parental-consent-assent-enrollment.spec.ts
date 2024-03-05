@@ -11,10 +11,10 @@ import LmsSurveyAboutLmsPage from 'dss/pages/lms/lms-survey-about-lms-page';
 import SurveyAboutYou from 'dss/pages/survey-about-you';
 import { test } from 'fixtures/lms-fixture';
 import { assertActivityHeader } from 'utils/assertion-helper';
-import { getDateInCentralTimezone } from 'utils/date-utils';
 import { generateUserName } from 'utils/faker-utils';
 import { logParticipantCreated } from 'utils/log-utils';
 import { toHaveScreenshot, waitForResponse } from 'utils/test-utils';
+import { getTodayInTimezone } from 'utils/date-utils';
 
 test.describe.serial('LMS Child Enrollment', () => {
   let researchConsentPage: LmsResearchConsentPage;
@@ -245,8 +245,8 @@ test.describe.serial('LMS Child Enrollment', () => {
       const requestPromise = waitForResponse(page, { uri: '/answers'});
       await Promise.all([additionalConsentPage.signature().fill(childFullName), requestPromise]);
 
-      // Date text shows today's date in Central timezone with mm/dd/yyyy format
-      expect(await additionalConsentPage.getDisplayedDate()).toBe(getDateInCentralTimezone());
+      // Date text shows central timezone today's date in mm/dd/yyyy format
+      expect(await additionalConsentPage.getDisplayedDate()).toBe(getTodayInTimezone('America/Chicago'));
 
       await additionalConsentPage.next();
 

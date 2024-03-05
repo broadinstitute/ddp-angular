@@ -1,7 +1,6 @@
 import { APIRequestContext, Download, expect, Locator, Page } from '@playwright/test';
 import Modal from 'dsm/component/modal';
-import { StudyNavEnum } from 'dsm/component/navigation/enums/studyNav-enum';
-import { Navigation } from 'dsm/component/navigation/navigation';
+import { Navigation, Study } from 'dsm/navigation';
 import { Label, FileFormat, TextFormat, Tab, DataFilter, CustomizeView } from 'dsm/enums';
 import { WelcomePage } from 'dsm/pages/welcome-page';
 import Checkbox from 'dss/component/checkbox';
@@ -16,7 +15,7 @@ import DsmPageBase from './dsm-page-base';
 import * as user from 'data/fake-user.json';
 
 export default class ParticipantListPage extends DsmPageBase {
-  private readonly PAGE_TITLE: string = 'Participant List';
+  PAGE_TITLE = 'Participant List';
   private readonly _filters: Filters = new Filters(this.page);
   private readonly _quickFilters: QuickFilters = new QuickFilters(this.page);
   private readonly _table: ParticipantListTable = new ParticipantListTable(this.page);
@@ -26,7 +25,7 @@ export default class ParticipantListPage extends DsmPageBase {
     await welcomePage.selectStudy(study);
 
     const navigation = new Navigation(page, request);
-    const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(StudyNavEnum.PARTICIPANT_LIST);
+    const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(Study.PARTICIPANT_LIST);
     await participantListPage.waitForReady();
 
     const participantsTable = participantListPage.participantListTable;
@@ -37,6 +36,10 @@ export default class ParticipantListPage extends DsmPageBase {
 
   constructor(page: Page) {
     super(page);
+  }
+
+  get toLocator(): Locator {
+    return this.page.locator('app-participant-list');
   }
 
   public async waitForReady(): Promise<void> {
@@ -94,8 +97,8 @@ export default class ParticipantListPage extends DsmPageBase {
     const saveButton = this.page.locator('button').filter({ has: this.page.locator('[data-icon="save"]')});
     await saveButton.click();
 
-    const saveModal = new Modal(this.page);
-    await expect(saveModal.toLocator()).toBeVisible();
+    const saveModal = new Modal(this.page, this.toLocator);
+    await expect(saveModal.toLocator).toBeVisible();
     expect(await saveModal.getHeader()).toBe('Please enter a name for your filter');
     await saveModal.getInput({ label: 'Filter Name' }).fill(viewName);
     await Promise.all([
@@ -126,7 +129,7 @@ export default class ParticipantListPage extends DsmPageBase {
     const button = this.page.locator('button').filter({has: this.page.locator('[data-icon="file-download"]')});
     await button.click();
 
-    const modal = new Modal(this.page);
+    const modal = new Modal(this.page, this.toLocator);
     await expect(modal.headerLocator()).toHaveText('Configure export');
 
     const fileFormatRadio = modal.getRadiobutton(new RegExp('File format:'));
@@ -242,9 +245,9 @@ export default class ParticipantListPage extends DsmPageBase {
    * @returns A participant with the requested tab
    */
   async findParticipantWithTab(
-    opts: { findPediatricParticipant: boolean, tab?: Tab, rgpProbandTab?: boolean, uriString?: string, prefix?: string }
+    opts: { findPediatricParticipant: boolean, tab?: Tab, rgpProbandTab?: boolean, uri?: string, prefix?: string }
     ): Promise<string> {
-    const { findPediatricParticipant = false, tab, rgpProbandTab = false, uriString = '/ui/applyFilter', prefix } = opts;
+    const { findPediatricParticipant = false, tab, rgpProbandTab = false, uri: uriString = '/ui/applyFilter', prefix } = opts;
     const searchPanel = this.filters.searchPanel;
     await searchPanel.open();
     const applyFilterResponse = await searchPanel.search({ uri: uriString });

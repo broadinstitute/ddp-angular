@@ -5,8 +5,8 @@ import {rows} from 'lib/component/dsm/paginators/types/rowsPerPage';
 import { waitForNoSpinner } from 'utils/test-utils';
 
 export class KitsTable extends Table {
-  constructor(page: Page) {
-    super(page, {cssClassAttribute: '.table'});
+  constructor(page: Page, root?: Locator) {
+    super(page, {cssClassAttribute: '.table', root});
   }
 
   public async goToPage(page: number): Promise<void> {

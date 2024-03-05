@@ -1,5 +1,5 @@
 import {expect, Locator, Page} from '@playwright/test';
-import {StudyEnum} from 'dsm/component/navigation/enums/selectStudyNav-enum';
+import { StudyName } from 'dsm/navigation';
 import { UserPermission } from 'dsm/enums';
 import { isCMIStudy, isPECGSStudy } from 'utils/test-utils';
 
@@ -103,7 +103,7 @@ export default class UserPermissionPage {
     }
   }
 
-  public async assertAllPossibleStudyPermissionsAreVisible(study: StudyEnum, email: string): Promise<void> {
+  public async assertAllPossibleStudyPermissionsAreVisible(study: StudyName, email: string): Promise<void> {
     //Verify that all possible permissions for the study are available for the study admin to select
     const studyAdmin = this.getStudyAdmin(email);
     const allPossiblePermissions = await this.getPermissionsSection(studyAdmin);
@@ -159,28 +159,28 @@ export default class UserPermissionPage {
    * @param study the study name e.g. OS PE-CGS
    * @returns the study group e.g. pecgs
    */
-  private determineStudyGroup(study: StudyEnum): string {
+  private determineStudyGroup(study: StudyName): string {
     let studyGroup = '';
 
     if (isCMIStudy(study)) {
       studyGroup = this.CMI_STUDY_GROUP;
     } else if (isPECGSStudy(study)) {
       studyGroup = this.PECGS_STUDY_GROUP;
-    } else if (study === StudyEnum.RGP) {
+    } else if (study === StudyName.RGP) {
       studyGroup = this.RGP_STUDY_GROUP;
-    } else if (study === StudyEnum.PRION) {
+    } else if (study === StudyName.PRION) {
       studyGroup = this.PRION_STUDY_GROUP;
-    } else if (study === StudyEnum.AT) {
+    } else if (study === StudyName.AT) {
       studyGroup = this.ATCP_STUDY_GROUP;
-    } else if (study === StudyEnum.BRUGADA) {
+    } else if (study === StudyName.BRUGADA) {
       studyGroup = this.BRUGADA_STUDY_GROUP;
-    } else if (study === StudyEnum.DARWIN) {
+    } else if (study === StudyName.DARWIN) {
       studyGroup = this.DARWIN_ARK_STUDY_GROUP;
     }
     return studyGroup;
   }
 
-  public setStudyPermissions(study: StudyEnum): void {
+  public setStudyPermissions(study: StudyName): void {
     const permissions: UserPermission[] = [];
     const studyGroup = this.determineStudyGroup(study);
 
