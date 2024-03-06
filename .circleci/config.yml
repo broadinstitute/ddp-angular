@@ -22,10 +22,10 @@ references:
 
   # Note: important that values of guids and keys have matching order!"
   study_keys: &study_keys
-    "basil dsm-ui osteo brain angio mbc testboston mpc prion atcp rgp esc cgc circadia pancan brugada lms"
+    "basil dsm-ui osteo brain angio mbc testboston mpc prion atcp rgp esc cgc pancan brugada lms"
 
   study_guids: &study_guids
-    "basil NA CMI-OSTEO cmi-brain ANGIO cmi-mbc testboston cmi-mpc PRION atcp RGP cmi-esc cgc circadia cmi-pancan brugada cmi-lms"
+    "basil NA CMI-OSTEO cmi-brain ANGIO cmi-mbc testboston cmi-mpc PRION atcp RGP cmi-esc cgc cmi-pancan brugada cmi-lms"
 
   # Job runs for develop branch only
   filter-develop-branch: &filter-develop-branch
@@ -519,8 +519,6 @@ jobs:
       - conditionally-launch-build-and-store:
           study_key: cgc
       - conditionally-launch-build-and-store:
-          study_key: circadia
-      - conditionally-launch-build-and-store:
           study_key: pancan
       - conditionally-launch-build-and-store:
           study_key: brugada
@@ -799,7 +797,7 @@ workflows:
           matrix:
             alias: app-build
             parameters: &studies
-              study_key: [ dsm-ui, basil, osteo, brain, angio, mbc, testboston, mpc, prion, atcp, rgp, esc, cgc, circadia, pancan, brugada, lms ]
+              study_key: [ dsm-ui, basil, osteo, brain, angio, mbc, testboston, mpc, prion, atcp, rgp, esc, cgc, pancan, brugada, lms ]
           check_changed: true
           requires:
             - << matrix.study_key >>-ui-unit-test-pr
@@ -1013,9 +1011,6 @@ workflows:
       - deploy-stored-build-job:
           <<: *deploy_branch_filters
           study_key: cgc
-      - deploy-stored-build-job:
-          <<: *deploy_branch_filters
-          study_key: circadia
       - deploy-stored-build-job:
           <<: *deploy_branch_filters
           study_key: pancan
