@@ -194,7 +194,9 @@ export default class ParticipantListPage extends DsmPageBase {
     return new class {
       public async open(viewName: string): Promise<void> {
         await this.openPanel();
-        await this.findPanel(viewName).locator('span.clickable').click();
+        const filter = this.findPanel(viewName).locator('[data-icon="filter"]');
+        await filter.scrollIntoViewIfNeeded();
+        await filter.click();
         await waitForNoSpinner(page);
       }
 

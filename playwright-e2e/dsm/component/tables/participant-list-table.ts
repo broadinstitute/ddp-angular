@@ -1,9 +1,10 @@
-import { Locator, Page } from '@playwright/test';
+import { Locator, Page, expect } from '@playwright/test';
 import Table from 'dss/component/table';
 import ParticipantPage from 'dsm/pages/participant-page';
 import { rows } from 'lib/component/dsm/paginators/types/rowsPerPage';
 import { shuffle } from 'utils/test-utils';
 import { Label } from 'dsm/enums';
+import { StudyName } from 'dsm/navigation';
 
 export class ParticipantListTable extends Table {
   private readonly _participantPage: ParticipantPage;
@@ -75,6 +76,37 @@ export class ParticipantListTable extends Table {
     return cell.innerText();
   }
 
+  /**
+   * Use to verify that certain headers are currently displayed in the participant list
+   * @param checkDefaultFilterOfStudy choose whether to check for the default filter of a given study - use in combination with studyName param
+   * @param studyName the name of the study whose default filter should be checked
+   * @param customFilter for use to check display of custom filters - this is a given list of column headers that make up the given filter
+   */
+  public async assertDisplayedHeaders(opts: { checkDefaultFilterOfStudy?: boolean, studyName?: StudyName, customFilter?: Label[] }): Promise<void> {
+    const { checkDefaultFilterOfStudy = false, studyName, customFilter } = opts;
+    let participantListColumnHeaders: Label[] = [];
+
+    if (checkDefaultFilterOfStudy && studyName) {
+      participantListColumnHeaders = this.getDefaultFilterOfStudy(studyName);
+    } else if (customFilter) {
+      participantListColumnHeaders = customFilter;
+    } else if (!checkDefaultFilterOfStudy && !customFilter) {
+      throw new Error('No column headers were given to check');
+    }
+
+    for (const header of participantListColumnHeaders) {
+      let columnHeader;
+      if (header === Label.PARTICIPANT_LIST_CHECKBOX_HEADER) {
+        columnHeader = this.page.locator('//th[not(text())]');
+      } else {
+        columnHeader = this.page.locator(`//th[normalize-space(text())='${header}']`);
+      }
+      console.log(`Checking that the ${header} column is displayed`);
+      await expect(columnHeader, `Column ${header} is not visible in the participant list`).toBeVisible();
+    }
+    console.log(`\n`); //just to add a space between above log and other logs that might be used
+  }
+
   private getParticipantAt(position: number): Locator {
     return this.page.locator('//table/tbody/tr').nth(position);
   }
@@ -103,5 +135,39 @@ export class ParticipantListTable extends Table {
 
   private get rowsXPath(): string {
     return '//table/tbody/tr';
+  }
+
+  private getDefaultFilterOfStudy(studyName: StudyName): Label[] {
+    const defaultFilterColumnHeaders = [];
+
+    switch (studyName) {
+      case StudyName.RGP:
+        defaultFilterColumnHeaders.push(Label.PARTICIPANT_LIST_CHECKBOX_HEADER);
+        defaultFilterColumnHeaders.push(Label.FAMILY_ID);
+        defaultFilterColumnHeaders.push(Label.SUBJECT_ID);
+        defaultFilterColumnHeaders.push(Label.FIRST_NAME);
+        defaultFilterColumnHeaders.push(Label.LAST_NAME);
+        defaultFilterColumnHeaders.push(Label.DOB);
+        defaultFilterColumnHeaders.push(Label.AGE_TODAY);
+        defaultFilterColumnHeaders.push(Label.PREFERRED_LANGUAGE);
+        defaultFilterColumnHeaders.push(Label.RELATIONSHIP_TO_PROBAND);
+        defaultFilterColumnHeaders.push(Label.AFFECTED_STATUS);
+        defaultFilterColumnHeaders.push(Label.PHONE_PRIMARY);
+        defaultFilterColumnHeaders.push(Label.PREFERRED_EMAIL);
+        defaultFilterColumnHeaders.push(Label.ACCEPTANCE_STATUS);
+        defaultFilterColumnHeaders.push(Label.ACCEPTANCE_STATUS_DATE);
+        defaultFilterColumnHeaders.push(Label.ENORLLMENT_DATE);
+        break;
+      default:
+        //All other studies seem to use this as the default filter
+        defaultFilterColumnHeaders.push(Label.PARTICIPANT_LIST_CHECKBOX_HEADER);
+        defaultFilterColumnHeaders.push(Label.DDP);
+        defaultFilterColumnHeaders.push(Label.SHORT_ID);
+        defaultFilterColumnHeaders.push(Label.FIRST_NAME);
+        defaultFilterColumnHeaders.push(Label.LAST_NAME);
+        defaultFilterColumnHeaders.push(Label.STATUS);
+        break;
+    }
+    return defaultFilterColumnHeaders;
   }
 }
