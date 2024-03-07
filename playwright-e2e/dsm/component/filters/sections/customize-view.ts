@@ -1,7 +1,7 @@
 import { Locator, Page, expect } from '@playwright/test';
 import { StudyName } from 'dsm/navigation';
 import Checkbox from 'dss/component/checkbox';
-import { CustomizeView as ColumnGroup } from 'dsm/enums';
+import { CustomizeView as ColumnGroup, Label } from 'dsm/enums';
 import { COLUMN } from 'dsm/pages/mailing-list-page';
 
 export class CustomizeView {
@@ -92,7 +92,7 @@ export class CustomizeView {
     return true;
   }
 
-  public async assertStudyColumnsDisplayedFor(opts: { studyName: StudyName }): Promise<void> {
+  public async assertAllCustomizeViewColumnsDisplayedFor(opts: { studyName: StudyName }): Promise<void> {
     const { studyName } = opts;
     const studyColumnGroups: ColumnGroup[] = [];
 
@@ -113,7 +113,7 @@ export class CustomizeView {
       studyColumnGroups.push(ColumnGroup.COHORT_TAGS);
     }
 
-    //Get all of the column groups set for a study
+    //Get all of the column groups set for a study - need to make sure parental consent stuff is considered
     switch (studyName) {
       case StudyName.OSTEO2:
         studyColumnGroups.push(ColumnGroup.CLINICAL_ORDERS);
@@ -149,7 +149,25 @@ export class CustomizeView {
         throw new Error(`Expected column group names for ${studyName} are not setup/known`);
         break;
     }
-    await this.isColumnVisible(studyColumnGroups);
+
+    //Check each column group to make sure all column options are present
+    for (const columnGroup of studyColumnGroups) {
+      await this.assertColumnGroupAndAllColumnOptionsAreAvailable(columnGroup, studyName);
+    }
+  }
+
+  public async assertColumnGroupAndAllColumnOptionsAreAvailable(group: ColumnGroup, study: StudyName): Promise<void> {
+    const columnGroupButton = this.page.getByRole('button', { name: group}).first();
+    await columnGroupButton.click(); //opening group
+    const columnOptions = this.getColumnsInColumnGroup({ columnGroup: group, studyName: study});
+    for (const option of columnOptions) {
+      console.log(`Checking: ${group} \t->\t ${option}`);
+      const participantColumnOption = this.page.locator(
+        `//button[.//text()[normalize-space()='${group}']]/following-sibling::ul//mat-checkbox[.//text()[normalize-space()='${option}']]`
+      );
+      await expect(participantColumnOption, `Option ${option} is not visible in column group ${group}`).toBeVisible();
+    }
+    await columnGroupButton.click() //closing group
   }
 
   private isCMIStudy(studyName: StudyName): boolean {
@@ -181,6 +199,85 @@ export class CustomizeView {
   private async isExpanded(locator: Locator | undefined): Promise<boolean> {
     const isExpanded = await locator?.getAttribute('aria-expanded');
     return isExpanded === 'true' || false;
+  }
+
+  //Later check for expected differences between permissions for viewing column options / column groups - currently assumes able to view all columns
+  private getColumnsInColumnGroup(opts: { columnGroup: ColumnGroup, studyName: StudyName }): Label[] {
+    const { columnGroup, studyName } = opts;
+    const columnOptions: Label[] = [];
+
+    switch (columnGroup) {
+      case ColumnGroup.PARTICIPANT:
+        columnOptions.push(Label.COUNTRY);
+        columnOptions.push(Label.DATE_OF_BIRTH);
+        columnOptions.push(Label.DDP);
+        columnOptions.push(Label.DO_NOT_CONTACT);
+        columnOptions.push(Label.EMAIL);
+        columnOptions.push(Label.FILE_UPLOAD_TIME);
+        columnOptions.push(Label.FIRST_NAME);
+        columnOptions.push(Label.LAST_NAME);
+        columnOptions.push(Label.PARTICIPANT_ID);
+        columnOptions.push(Label.REGISTRATION_DATE);
+        columnOptions.push(Label.SHORT_ID);
+        columnOptions.push(Label.UPLOADED_FILE_NAME);
+        columnOptions.push(Label.STATUS);
+
+        if (this.isPediatricStudy(studyName)) {
+          columnOptions.push(Label.DATE_OF_MAJORITY);
+        }
+
+        if (this.hasLegacyParticipantID(studyName)) {
+          columnOptions.push(Label.LEGACY_PARTICIPANT_ID);
+          columnOptions.push(Label.LEGACY_SHORT_ID);
+        }
+        break;
+      case ColumnGroup.PARTICIPANT_DSM:
+        //stuff here
+        break;
+      case ColumnGroup.MEDICAL_RECORD:
+        //stuff here
+        break;
+      default:
+        throw new Error(`Expected column options for the ${columnGroup} are not known / setup in this method`);
+        break;
+    }
+    return columnOptions;
+  }
+
+  private isPediatricStudy(studyName: StudyName): boolean {
+    let isPediatric;
+    switch (studyName) {
+      case StudyName.BRAIN:
+      case StudyName.LMS:
+      case StudyName.OSTEO2:
+      case StudyName.PANCAN:
+        isPediatric = true;
+        break;
+      default:
+        isPediatric = false;
+        break;
+    }
+    return isPediatric;
+  }
+
+  private hasLegacyParticipantID(studyName: StudyName): boolean {
+    let hasLegacy;
+    switch (studyName) {
+      case StudyName.ANGIO:
+      case StudyName.AT:
+      case StudyName.BRAIN:
+      case StudyName.OSTEO:
+      case StudyName.MBC:
+      case StudyName.ESC:
+      case StudyName.RGP:
+      case StudyName.PROSTATE:
+        hasLegacy = true;
+        break
+      default:
+        hasLegacy = false;
+        break;
+    }
+    return hasLegacy;
   }
 
   /* Locators */

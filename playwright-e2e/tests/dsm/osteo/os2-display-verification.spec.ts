@@ -73,7 +73,7 @@ test.describe.serial(`OS2 Verify expected display of participant information`, (
     //Verify that all Customize View column groups are displayed
     const customizeViewPanel = participantListPage.filters.customizeViewPanel;
     await customizeViewPanel.open();
-    await customizeViewPanel.assertStudyColumnsDisplayedFor({ studyName: StudyName.OSTEO2 });
+    await customizeViewPanel.assertAllCustomizeViewColumnsDisplayedFor({ studyName: StudyName.OSTEO2 });
   })
 
   test.skip(`OS2: Verify participant page webelements`, async ({ page, request }) => {
