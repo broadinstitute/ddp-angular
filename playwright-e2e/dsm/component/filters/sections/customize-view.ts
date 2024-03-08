@@ -95,6 +95,8 @@ export class CustomizeView {
   public async assertAllCustomizeViewColumnsDisplayedFor(opts: { studyName: StudyName }): Promise<void> {
     const { studyName } = opts;
     const studyColumnGroups: ColumnGroup[] = [];
+    const duplicateColumnGroups: ColumnGroup[] = [];
+    let columnGroupInstance = 0;
 
     //Put in columns that most studies have
     if (this.isCMIStudy(studyName)) {
@@ -113,7 +115,7 @@ export class CustomizeView {
       studyColumnGroups.push(ColumnGroup.COHORT_TAGS);
     }
 
-    //Get all of the column groups set for a study - need to make sure parental consent stuff is considered
+    //Get all of the column groups set for a study - need to make sure parental consent stuff is considered (its column group shares a name with adult consent)
     switch (studyName) {
       case StudyName.OSTEO2:
         studyColumnGroups.push(ColumnGroup.CLINICAL_ORDERS);
@@ -121,6 +123,7 @@ export class CustomizeView {
         studyColumnGroups.push(ColumnGroup.ADDITIONAL_ASSENT_LEARNING_CHILD_DNA_WITH_INVITAE);
         studyColumnGroups.push(ColumnGroup.BIOLOGICAL_PARENT_FEMALE);
         studyColumnGroups.push(ColumnGroup.RESEARCH_CONSENT_FORM);
+        studyColumnGroups.push(ColumnGroup.RESEARCH_CONSENT_FORM); //Add twice in the case of a study with parental consent column group that has same name as adult consent column group
         studyColumnGroups.push(ColumnGroup.LOVED_ONE_SURVEY);
         studyColumnGroups.push(ColumnGroup.RESEARCH_CONSENT_ASSENT_FORM);
         studyColumnGroups.push(ColumnGroup.BIOLOGICAL_PARENT_MALE);
@@ -152,22 +155,58 @@ export class CustomizeView {
 
     //Check each column group to make sure all column options are present
     for (const columnGroup of studyColumnGroups) {
-      await this.assertColumnGroupAndAllColumnOptionsAreAvailable(columnGroup, studyName);
+      if (duplicateColumnGroups.includes(columnGroup)) {
+        //Try to determine how many times the given column group name has been seen for a study
+        const result = duplicateColumnGroups.filter((columnGroupName) => columnGroupName === columnGroup);
+        columnGroupInstance = result.length;
+        console.log(`Column group ${columnGroup} hasbeen seen ${columnGroupInstance} times`);
+      } else {
+        columnGroupInstance = 0;
+      }
+
+      await this.assertColumnGroupAndAllColumnOptionsAreAvailable(columnGroup, studyName, columnGroupInstance);
+
+      if (this.isKnownDuplicateColumnGroup(columnGroup)) {
+        duplicateColumnGroups.push(columnGroup);
+      }
     }
   }
 
-  public async assertColumnGroupAndAllColumnOptionsAreAvailable(group: ColumnGroup, study: StudyName): Promise<void> {
-    const columnGroupButton = this.page.getByRole('button', { name: group}).first();
+  public async assertColumnGroupAndAllColumnOptionsAreAvailable(group: ColumnGroup, study: StudyName, instanceNumber: number): Promise<void> {
+    const columnGroupButton = this.page.getByRole('button', { name: group}).nth(instanceNumber);
     await columnGroupButton.click(); //opening group
     const columnOptions = this.getColumnsInColumnGroup({ columnGroup: group, studyName: study});
+
     for (const option of columnOptions) {
       console.log(`Checking: ${group} \t->\t ${option}`);
       const participantColumnOption = this.page.locator(
         `//button[.//text()[normalize-space()='${group}']]/following-sibling::ul//mat-checkbox[.//text()[normalize-space()='${option}']]`
       );
-      await expect(participantColumnOption, `Option ${option} is not visible in column group ${group}`).toBeVisible();
+
+      await expect(participantColumnOption, `Column ${option} is not available in column group ${group} in the ${study} study`).toBeVisible();
     }
+
     await columnGroupButton.click() //closing group
+  }
+
+  /**
+   * Some column groups e.g Research Consent Form Columns appear twice in some studies Customize View
+   * because they are used for more than one thing e.g. adult consent vs parental consent
+   * @param group Column group name to check e.g. Research Consent Form Columns
+   * @returns true || false if the column group name is known to be a duplciate in at least one instance
+   */
+  private isKnownDuplicateColumnGroup(group: ColumnGroup): boolean {
+    let isKnownDuplicate;
+
+    switch (group) {
+      case ColumnGroup.RESEARCH_CONSENT_FORM:
+        isKnownDuplicate = true;
+        break;
+      default:
+        isKnownDuplicate = false;
+        break;
+    }
+    return isKnownDuplicate
   }
 
   private isCMIStudy(studyName: StudyName): boolean {
@@ -232,16 +271,153 @@ export class CustomizeView {
         }
         break;
       case ColumnGroup.PARTICIPANT_DSM:
-        //stuff here
+        if (this.isCMIStudy(studyName)) {
+          columnOptions.push(Label.DATE_WITHDRAWN);
+          columnOptions.push(Label.INCOMPLETE_OR_MINIMAL_MEDICAL_RECORDS);
+          columnOptions.push(Label.MR_ASSIGNEE);
+          columnOptions.push(Label.ONC_HISTORY_CREATED);
+          columnOptions.push(Label.ONC_HISTORY_REVIEWED);
+          columnOptions.push(Label.PAPER_CR_RECEIVED);
+          columnOptions.push(Label.PAPER_CR_SENT);
+          columnOptions.push(Label.PARTICIPANT_NOTES);
+          columnOptions.push(Label.READY_FOR_ABSTRACTION);
+          columnOptions.push(Label.TISSUE_ASSIGNEE);
+        }
+
+        if (studyName === StudyName.AT) {
+          columnOptions.push(Label.DATE_WITHDRAWN);
+        }
+
+        if (studyName === StudyName.RGP) {
+          columnOptions.push(Label.DATE_WITHDRAWN);
+          columnOptions.push(Label.EXPECTED_NUMBER_TO_SEQUENCE);
+          columnOptions.push(Label.FAMILY_NOTES);
+          columnOptions.push(Label.SEQR_PROJECT);
+          columnOptions.push(Label.SPECIALITY_PROJECT_CAGI_2022);
+          columnOptions.push(Label.SPECIALITY_PROJECT_CAGI_2023);
+          columnOptions.push(Label.SPECIALITY_PROJECT_CZI);
+          columnOptions.push(Label.SPECIALITY_PROJECT_R21);
+        }
         break;
       case ColumnGroup.MEDICAL_RECORD:
-        //stuff here
+        if (this.isCMIStudy(studyName)) {
+          columnOptions.push(Label.DUPLICATE);
+          columnOptions.push(Label.FOLLOW_UP_REQUIRED);
+          columnOptions.push(Label.FOLLOW_UP_REQUIRED_TEXT);
+          columnOptions.push(Label.INITIAL_MR_RECEIVED);
+          columnOptions.push(Label.INITIAL_MR_REQUEST);
+          columnOptions.push(Label.INITIAL_MR_REQUEST_TWO);
+          columnOptions.push(Label.INITIAL_MR_REQUEST_THREE);
+          columnOptions.push(Label.INSTITUTION_CONTACT_PERSON);
+          columnOptions.push(Label.INSTITUTION_FAX);
+          columnOptions.push(Label.INSTITUTION_NAME);
+          columnOptions.push(Label.INSTITUTION_PHONE);
+          columnOptions.push(Label.INTERNATIONAL);
+          columnOptions.push(Label.MR_DOCUMENT);
+          columnOptions.push(Label.MR_DOCUMENT_FILE_NAMES);
+          columnOptions.push(Label.MR_NOTES);
+          columnOptions.push(Label.MR_PROBLEM);
+          columnOptions.push(Label.MR_PROBLEM_TEXT);
+          columnOptions.push(Label.MR_REVIEW);
+          columnOptions.push(Label.MR_UNABLE_TO_OBTAIN);
+          columnOptions.push(Label.NO_ACTION_NEEDED);
+          columnOptions.push(Label.PAPER_CR_REQUIRED);
+          columnOptions.push(Label.TYPE);
+        } else {
+          throw new Error(`The ${studyName} study is not expected to have ${ColumnGroup.MEDICAL_RECORD}`);
+        }
         break;
+      case ColumnGroup.ONC_HISTORY:
+        if (this.isCMIStudy(studyName)) {
+          columnOptions.push(Label.ACCESSION_NUMBER);
+          columnOptions.push(Label.DATE_OF_PX);
+          columnOptions.push(Label.DESTRUCTION_POLICY);
+          columnOptions.push(Label.FACILITY);
+          columnOptions.push(Label.FACILITY_FAX);
+          columnOptions.push(Label.FACILITY_PHONE);
+          columnOptions.push(Label.GENDER);
+          columnOptions.push(Label.HISTOLOGY);
+          columnOptions.push(Label.LOCATION_OF_PX);
+          columnOptions.push(Label.ONC_HISTORY_NOTES);
+          columnOptions.push(Label.PROBLEM_WITH_TISSUE);
+          columnOptions.push(Label.REQUEST_STATUS);
+          columnOptions.push(Label.TISSUE_RECEIVED);
+          columnOptions.push(Label.TISSUE_REQUEST_DATE);
+          columnOptions.push(Label.TISSUE_REQUEST_DATE_TWO);
+          columnOptions.push(Label.TISSUE_REQUEST_DATE_THREE);
+          columnOptions.push(Label.TYPE_OF_PX);
+          columnOptions.push(Label.UNABLE_TO_OBTAIN);
+        } else {
+          throw new Error(`The ${studyName} study is not expected to have ${ColumnGroup.ONC_HISTORY}`);
+        }
+
+        //OS2, LMS have some additional expected columns in Onc History
+        if (studyName === StudyName.OSTEO2) {
+          columnOptions.push(Label.NECROSIS);
+          columnOptions.push(Label.VIABLE_TUMOR);
+          columnOptions.push(Label.BLOCK_TO_REQUEST_CAPITALIZED);
+          columnOptions.push(Label.BLOCKS_WITH_TUMOR);
+          columnOptions.push(Label.SAMPLE_FFPE);
+          columnOptions.push(Label.LOCAL_CONTROL);
+          columnOptions.push(Label.METHOD_OF_DECALCIFICATION);
+          columnOptions.push(Label.TUMOR_SIZE);
+        }
+
+        if (studyName === StudyName.LMS) {
+          columnOptions.push(Label.BLOCK_TO_REQUEST);
+          columnOptions.push(Label.EXTENSIVE_TREATMENT_EFFECT);
+          columnOptions.push(Label.FACILITY_WHERE_SAMPLE_WAS_REVIEWED);
+          columnOptions.push(Label.SLIDES_TO_REQUEST);
+          columnOptions.push(Label.TOTAL_NUMBER_SLIDES_MENTIONED);
+          columnOptions.push(Label.TUMOR_SIZE);
+        }
+        break;
+        case ColumnGroup.TISSUE:
+          //stuff here
+          break;
+        case ColumnGroup.SAMPLE:
+          //Only CMI studies and Brugada should have the Sample Columns - but only CMI studies should have the Sequencing Restriction option
+          if (this.isCMIStudy(studyName) || studyName === StudyName.BRUGADA) {
+            columnOptions.push(Label.COLLABORATOR_PARTICIPANT_ID);
+            columnOptions.push(Label.COLLECTION_DATE);
+            columnOptions.push(Label.MF_CODE);
+            columnOptions.push(Label.NORMAL_COLLABORATOR_SAMPLE_ID);
+            columnOptions.push(Label.SAMPLE_DEACTIVATION);
+            columnOptions.push(Label.SAMPLE_NOTES);
+            columnOptions.push(Label.SAMPLE_RECEIVED);
+            columnOptions.push(Label.SAMPLE_SENT);
+            columnOptions.push(Label.SAMPLE_TYPE);
+            columnOptions.push(Label.STATUS);
+          } else {
+            throw new Error(`The ${studyName} study is not expected to have ${ColumnGroup.SAMPLE}`);
+          }
+
+          if (this.isClinicalStudy(studyName)) {
+            columnOptions.push(Label.SEQUENCING_RESTRICTIONS);
+          }
+          break;
+        case ColumnGroup.COHORT_TAGS:
+          columnOptions.push(Label.COHORT_TAG_NAME);
+          break;
       default:
         throw new Error(`Expected column options for the ${columnGroup} are not known / setup in this method`);
         break;
     }
     return columnOptions;
+  }
+
+  private isClinicalStudy(studyName: StudyName): boolean {
+    let isClinical;
+    switch (studyName) {
+      case StudyName.OSTEO2:
+      case StudyName.LMS:
+        isClinical = true;
+        break;
+      default:
+        isClinical = false;
+        break;
+    }
+    return isClinical;
   }
 
   private isPediatricStudy(studyName: StudyName): boolean {

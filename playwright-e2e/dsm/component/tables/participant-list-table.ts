@@ -156,7 +156,7 @@ export class ParticipantListTable extends Table {
         defaultFilterColumnHeaders.push(Label.PREFERRED_EMAIL);
         defaultFilterColumnHeaders.push(Label.ACCEPTANCE_STATUS);
         defaultFilterColumnHeaders.push(Label.ACCEPTANCE_STATUS_DATE);
-        defaultFilterColumnHeaders.push(Label.ENORLLMENT_DATE);
+        defaultFilterColumnHeaders.push(Label.ENROLLMENT_DATE);
         break;
       default:
         //All other studies seem to use this as the default filter

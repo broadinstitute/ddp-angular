@@ -6,7 +6,7 @@ import { test } from 'fixtures/dsm-fixture';
 import { mailingListCreatedDate } from 'utils/date-utils';
 
 test.describe.serial(`OS2 Verify expected display of participant information`, () => {
-  const savedFilterName = `Playwright PE-CGS filter for OS2 - created on ${mailingListCreatedDate(new Date())}`;
+  const savedFilterName = `Playwright PE-CGS filter for OS2 - created on ${mailingListCreatedDate(new Date())}`; //named as such due to bug PEPPER-935
   const participantsWithReturnOfResultsFilter = [
     Label.PARTICIPANT_LIST_CHECKBOX_HEADER,
     Label.COHORT_TAG_NAME,
