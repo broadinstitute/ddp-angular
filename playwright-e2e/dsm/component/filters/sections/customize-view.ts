@@ -399,6 +399,9 @@ export class CustomizeView {
         case ColumnGroup.COHORT_TAGS:
           columnOptions.push(Label.COHORT_TAG_NAME);
           break;
+        case ColumnGroup.MEDICAL_RELEASE_FORM:
+          //stuff here - note both adults and kids MR column group share the same name - but order of display may differ depending on study
+          break;
         case ColumnGroup.PARENT_SIBLING:
           columnOptions.push(Label.FAMILY_HISTORY_SELF_PARENT_SIBLING_SURVEY_COMPLETED);
           columnOptions.push(Label.FAMILY_HISTORY_SELF_PARENT_SIBLING_SURVEY_CREATED);
