@@ -399,8 +399,63 @@ export class CustomizeView {
         case ColumnGroup.COHORT_TAGS:
           columnOptions.push(Label.COHORT_TAG_NAME);
           break;
+        case ColumnGroup.RESEARCH_CONSENT_FORM:
+          //stuff here - note both adult and kids Consent column group share the same name
+          break;
         case ColumnGroup.MEDICAL_RELEASE_FORM:
           //stuff here - note both adults and kids MR column group share the same name - but order of display may differ depending on study
+          break;
+        case ColumnGroup.HALF_SIBLING:
+          columnOptions.push(Label.FAMILY_HISTORY_SELF_HALF_SIBLING_SURVEY_COMPLETED);
+          columnOptions.push(Label.FAMILY_HISTORY_SELF_HALF_SIBLING_SURVEY_CREATED);
+          columnOptions.push(Label.FAMILY_HISTORY_SELF_HALF_SIBLING_SURVEY_LAST_UPDATED);
+          columnOptions.push(Label.FAMILY_HISTORY_SELF_HALF_SIBLING_SURVEY_STATUS);
+          columnOptions.push(Label.FH_HALF_SIBLING_AGE_RANGE);
+          columnOptions.push(Label.FH_HALF_SIBLING_CANCERS_LIST);
+          columnOptions.push(Label.FH_HALF_SIBLING_HAD_CANCER);
+          columnOptions.push(Label.IS_THIS_PERSON_CURRENTLY_LIVING);
+          columnOptions.push(Label.NAME_OR_NICKNAME);
+          columnOptions.push(Label.WHAT_IS_THIS_PERSONS_SEX_ASSIGNED_AT_BIRTH);
+          columnOptions.push(Label.WHICH_SIDE_OF_FAMILY_IS_THIS_PERSON_ON);
+          break;
+        case ColumnGroup.CHILD:
+          columnOptions.push(Label.FAMILY_HISTORY_SELF_CHILD_SURVEY_COMPLETED);
+          columnOptions.push(Label.FAMILY_HISTORY_SELF_CHILD_SURVEY_CREATED);
+          columnOptions.push(Label.FAMILY_HISTORY_SELF_CHILD_SURVEY_LAST_UPDATED);
+          columnOptions.push(Label.FAMILY_HISTORY_SELF_CHILD_SURVEY_STATUS);
+          columnOptions.push(Label.FH_CHILD_AGE_RANGE);
+          columnOptions.push(Label.FH_CHILD_CANCERS_LIST);
+          columnOptions.push(Label.FH_CHILD_HAD_CANCER);
+          columnOptions.push(Label.IS_THIS_PERSON_CURRENTLY_LIVING);
+          columnOptions.push(Label.NAME_OR_NICKNAME);
+          columnOptions.push(Label.WHAT_IS_THIS_PERSONS_SEX_ASSIGNED_AT_BIRTH);
+          columnOptions.push(Label.WHICH_SIDE_OF_FAMILY_IS_THIS_PERSON_ON);
+          break;
+        case ColumnGroup.GRANDPARENT:
+          columnOptions.push(Label.FAMILY_HISTORY_SELF_GRANDPARENT_SURVEY_COMPLETED);
+          columnOptions.push(Label.FAMILY_HISTORY_SELF_GRANDPARENT_SURVEY_CREATED);
+          columnOptions.push(Label.FAMILY_HISTORY_SELF_GRANDPARENT_SURVEY_LAST_UPDATED);
+          columnOptions.push(Label.FAMILY_HISTORY_SELF_GRANDPARENT_SURVEY_STATUS);
+          columnOptions.push(Label.FH_GRANDPARENT_AGE_RANGE);
+          columnOptions.push(Label.FH_GRANDPARENT_CANCERS_LIST);
+          columnOptions.push(Label.FH_GRANDPARENT_HAD_CANCER);
+          columnOptions.push(Label.IS_THIS_PERSON_CURRENTLY_LIVING);
+          columnOptions.push(Label.NAME_OR_NICKNAME);
+          columnOptions.push(Label.WHAT_IS_THIS_PERSONS_SEX_ASSIGNED_AT_BIRTH);
+          columnOptions.push(Label.WHICH_SIDE_OF_FAMILY_IS_THIS_PERSON_ON);
+          break;
+        case ColumnGroup.SIBLING:
+          columnOptions.push(Label.FAMILY_HISTORY_SELF_SIBLING_SURVEY_COMPLETED);
+          columnOptions.push(Label.FAMILY_HISTORY_SELF_SIBLING_SURVEY_CREATED);
+          columnOptions.push(Label.FAMILY_HISTORY_SELF_SIBLING_SURVEY_LAST_UPDATED);
+          columnOptions.push(Label.FAMILY_HISTORY_SELF_SIBLING_SURVEY_STATUS);
+          columnOptions.push(Label.FH_SIBLING_AGE_RANGE);
+          columnOptions.push(Label.FH_SIBLING_CANCERS_LIST);
+          columnOptions.push(Label.FH_SIBLING_HAD_CANCER);
+          columnOptions.push(Label.IS_THIS_PERSON_CURRENTLY_LIVING);
+          columnOptions.push(Label.NAME_OR_NICKNAME);
+          columnOptions.push(Label.WHAT_IS_THIS_PERSONS_SEX_ASSIGNED_AT_BIRTH);
+          columnOptions.push(Label.WHICH_SIDE_OF_FAMILY_IS_THIS_PERSON_ON);
           break;
         case ColumnGroup.PARENT_SIBLING:
           columnOptions.push(Label.FAMILY_HISTORY_SELF_PARENT_SIBLING_SURVEY_COMPLETED);
