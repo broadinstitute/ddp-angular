@@ -405,6 +405,16 @@ export class CustomizeView {
         case ColumnGroup.MEDICAL_RELEASE_FORM:
           //stuff here - note both adults and kids MR column group share the same name - but order of display may differ depending on study
           break;
+        case ColumnGroup.ADDITIONAL_CONSENT_ASSENT_LEARNING_ABOUT_CHILD_TUMOR:
+          columnOptions.push(Label.CONSENT_ADDENDUM_SURVEY_PEDIATRIC_COMPLETED);
+          columnOptions.push(Label.CONSENT_ADDENDUM_SURVEY_PEDIATRIC_CREATED);
+          columnOptions.push(Label.CONSENT_ADDENDUM_SURVEY_PEDIATRIC_LAST_UPDATED);
+          columnOptions.push(Label.CONSENT_ADDENDUM_SURVEY_PEDIATRIC_STATUS);
+          columnOptions.push(Label.SIGNATURE_WITHOUT_COLON);
+          columnOptions.push(Label.SIGNATURE);
+          columnOptions.push(Label.SOMATIC_ASSENT_ADDENDUM);
+          columnOptions.push(Label.SOMATIC_CONSENT_TUMOR_PREDIATRIC);
+          break;
         case ColumnGroup.HALF_SIBLING:
           columnOptions.push(Label.FAMILY_HISTORY_SELF_HALF_SIBLING_SURVEY_COMPLETED);
           columnOptions.push(Label.FAMILY_HISTORY_SELF_HALF_SIBLING_SURVEY_CREATED);
