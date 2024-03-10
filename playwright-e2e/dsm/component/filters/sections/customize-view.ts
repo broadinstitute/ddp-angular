@@ -399,6 +399,78 @@ export class CustomizeView {
         case ColumnGroup.COHORT_TAGS:
           columnOptions.push(Label.COHORT_TAG_NAME);
           break;
+        case ColumnGroup.PARENT_SIBLING:
+          columnOptions.push(Label.FAMILY_HISTORY_SELF_PARENT_SIBLING_SURVEY_COMPLETED);
+          columnOptions.push(Label.FAMILY_HISTORY_SELF_PARENT_SIBLING_SURVEY_CREATED);
+          columnOptions.push(Label.FAMILY_HISTORY_SELF_PARENT_SIBLING_SURVEY_LAST_UPDATED);
+          columnOptions.push(Label.FAMILY_HISTORY_SELF_PARENT_SIBLING_SURVEY_STATUS);
+          columnOptions.push(Label.FH_PARENT_SIBLING_AGE_RANGE);
+          columnOptions.push(Label.FH_PARENT_SIBLING_CANCERS_LIST);
+          columnOptions.push(Label.FH_PARENT_SIBLING_HAD_CANCER);
+          columnOptions.push(Label.IS_THIS_PERSON_CURRENTLY_LIVING);
+          columnOptions.push(Label.NAME_OR_NICKNAME);
+          columnOptions.push(Label.WHAT_IS_THIS_PERSONS_SEX_ASSIGNED_AT_BIRTH);
+          columnOptions.push(Label.WHICH_SIDE_OF_FAMILY_IS_THIS_PERSON_ON);
+          break;
+        case ColumnGroup.ADDITIONAL_CONSENT_LEARNING_ABOUT_TUMOR:
+          columnOptions.push(Label.CONSENT_ADDENDUM_SURVEY_COMPLETED);
+          columnOptions.push(Label.CONSENT_ADDENDUM_SURVEY_CREATED);
+          columnOptions.push(Label.CONSENT_ADDENDUM_SURVEY_LAST_UPDATED);
+          columnOptions.push(Label.CONSENT_ADDENDUM_SURVEY_STATUS);
+          columnOptions.push(Label.SIGNATURE);
+          columnOptions.push(Label.SOMATIC_CONSENT_TUMOR);
+          break;
+        case ColumnGroup.SURVEY_ABOUT_YOU_OR_YOUR_CHILD:
+          columnOptions.push(Label.ABOUT_YOU_ACTIVITY_SURVEY_COMPLETED);
+          columnOptions.push(Label.ABOUT_YOU_ACTIVITY_SURVEY_CREATED);
+          columnOptions.push(Label.ABOUT_YOU_ACTIVITY_SURVEY_LAST_UPDATED);
+          columnOptions.push(Label.ABOUT_YOU_ACTIVITY_SURVEY_STATUS);
+          columnOptions.push(Label.AFRO_HISPANIC);
+          columnOptions.push(Label.BIRTH_SEX_ASSIGN);
+          columnOptions.push(Label.CONFIDENCE_LEVEL_ID);
+          columnOptions.push(Label.GENDER_IDENTITY);
+          columnOptions.push(Label.HIGHEST_LEVEL_SCHOOL_ID);
+          columnOptions.push(Label.HOW_DID_YOU_HEAR_ABOUT_THE_PROJECT);
+          columnOptions.push(Label.INDIGENOUS_NATIVE);
+          columnOptions.push(Label.MIXED_RACE);
+          columnOptions.push(Label.OTHER_COMMENTS);
+          columnOptions.push(Label.PROBLEM_UNDERSTANDING_WRITTEN_ID);
+          columnOptions.push(Label.RACE_QUESTION);
+          columnOptions.push(Label.READ_HOSPITAL_MATERIALS_ID);
+          columnOptions.push(Label.WHAT_LANGUAGE_DO_YOU_SPEAK_AT_HOME);
+          break;
+        case ColumnGroup.INVITAE:
+          columnOptions.push(Label.BAM_FILE_RECEIVED_FROM_INVITAE);
+          columnOptions.push(Label.DATE_BAM_FILE_RECEIVED_FROM_INVITAE);
+          columnOptions.push(Label.DATE_REPORT_RECEIVED_FROM_INVITAE);
+          columnOptions.push(Label.GERMLINE_RETURN_NOTES_FIELD);
+          break;
+        case ColumnGroup.PROXY:
+          columnOptions.push(Label.EMAIL);
+          columnOptions.push(Label.FIRST_NAME);
+          columnOptions.push(Label.LAST_NAME);
+          break;
+        case ColumnGroup.INVITATION:
+          columnOptions.push(Label.ACCEPTED);
+          columnOptions.push(Label.CONTACT_EMAIL);
+          columnOptions.push(Label.CREATED);
+          columnOptions.push(Label.INVITATION_CODE);
+          columnOptions.push(Label.NOTES);
+          columnOptions.push(Label.TYPE);
+          columnOptions.push(Label.VERIFIED);
+          columnOptions.push(Label.VOIDED);
+          break;
+        case ColumnGroup.CONTACT_INFORMATION:
+          columnOptions.push(Label.CITY);
+          columnOptions.push(Label.COUNTRY);
+          columnOptions.push(Label.MAIL_TO_NAME);
+          columnOptions.push(Label.PHONE);
+          columnOptions.push(Label.STATE);
+          columnOptions.push(Label.STREET_ONE);
+          columnOptions.push(Label.STREET_TWO);
+          columnOptions.push(Label.VALID);
+          columnOptions.push(Label.ZIP);
+          break;
       default:
         throw new Error(`Expected column options for the ${columnGroup} are not known / setup in this method`);
         break;
