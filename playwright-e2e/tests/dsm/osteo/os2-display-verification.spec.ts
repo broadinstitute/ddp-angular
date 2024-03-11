@@ -1,6 +1,6 @@
 import { expect } from '@playwright/test';
-import { QuickFiltersEnum } from 'dsm/component/filters/quick-filters';
-import { CustomizeView, CustomizeViewID, DataFilter, Label } from 'dsm/enums';
+import { QuickFiltersEnum as QuickFilter } from 'dsm/component/filters/quick-filters';
+import { CustomizeView as CV, CustomizeViewID as ID, DataFilter, Label } from 'dsm/enums';
 import { Navigation, Study, StudyName } from 'dsm/navigation';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
 import Select from 'dss/component/select';
@@ -39,13 +39,13 @@ test.describe.serial(`${StudyName.OSTEO2}: Verify expected display of participan
     //Display columns that will be needed to make the following saved filters
     const customizeViewPanel = participantListPage.filters.customizeViewPanel;
     await customizeViewPanel.open();
-    await customizeViewPanel.selectColumns(CustomizeView.COHORT_TAGS, [Label.COHORT_TAG_NAME]);
-    await customizeViewPanel.selectColumns(CustomizeView.CLINICAL_ORDERS, [Label.CLINICAL_ORDER_PDO_NUMBER]);
-    await customizeViewPanel.selectColumns(CustomizeView.RESEARCH_CONSENT_FORM, [Label.CONSENT_TISSUE], { nth: 0 }); //adult's consent
-    await customizeViewPanel.selectColumns(CustomizeView.ADDITIONAL_CONSENT_LEARNING_ABOUT_TUMOR, [Label.SOMATIC_CONSENT_TUMOR]);
-    await customizeViewPanel.selectColumns(CustomizeView.WHAT_WE_LEARNED_FROM_SOMATIC_DNA, [Label.SOMATIC_RESULTS_SURVEY_CREATED]);
-    await customizeViewPanel.selectColumns(CustomizeView.PREQUALIFIER_SURVEY, [Label.SELF_STATE]);
-    await customizeViewPanel.selectColumns(CustomizeView.TISSUE, [Label.SM_ID_VALUE]);
+    await customizeViewPanel.selectColumns(CV.COHORT_TAGS, [Label.COHORT_TAG_NAME]);
+    await customizeViewPanel.selectColumns(CV.CLINICAL_ORDERS, [Label.CLINICAL_ORDER_PDO_NUMBER]);
+    await customizeViewPanel.selectColumns(CV.RESEARCH_CONSENT_FORM, [Label.CONSENT_TISSUE], { nth: 0 }); //adult's consent
+    await customizeViewPanel.selectColumns(CV.ADDITIONAL_CONSENT_LEARNING_ABOUT_TUMOR, [Label.SOMATIC_CONSENT_TUMOR]);
+    await customizeViewPanel.selectColumns(CV.WHAT_WE_LEARNED_FROM_SOMATIC_DNA, [Label.SOMATIC_RESULTS_SURVEY_CREATED]);
+    await customizeViewPanel.selectColumns(CV.PREQUALIFIER_SURVEY, [Label.SELF_STATE]);
+    await customizeViewPanel.selectColumns(CV.TISSUE, [Label.SM_ID_VALUE]);
     await customizeViewPanel.close();
 
     const searchPanel = participantListPage.filters.searchPanel;
@@ -103,7 +103,7 @@ test.describe.serial(`${StudyName.OSTEO2}: Verify expected display of participan
       await participantListPage.saveCurrentView(filterReturnOfResults);
     });
 
-    await test.step(`Confirm that the above saved filters were successfully saved into the Saved Filter section`, async() => {
+    await test.step(`Confirm that the above saved filters were successfully saved into the Saved Filter section`, async () => {
       await participantListPage.reloadWithDefaultFilter();
       await participantListTable.assertDisplayedHeaders({ checkDefaultFilterOfStudy: true, studyName: StudyName.OSTEO2 });
 
@@ -135,17 +135,17 @@ test.describe.serial(`${StudyName.OSTEO2}: Verify expected display of participan
 
     await test.step(`Verify the ${StudyName.OSTEO2} quick filters are displayed`, async () => {
       const quickFilters = participantListPage.quickFilters;
-      await quickFilters.assertQuickFilterDisplayed(QuickFiltersEnum.MEDICAL_RECORDS_NOT_REQUESTED_YET);
-      await quickFilters.assertQuickFilterDisplayed(QuickFiltersEnum.MEDICAL_RECORDS_NOT_RECEIVED_YET);
-      await quickFilters.assertQuickFilterDisplayed(QuickFiltersEnum.TISSUE_NEEDS_REVIEW);
-      await quickFilters.assertQuickFilterDisplayed(QuickFiltersEnum.TISSUE_NOT_REQUESTED_YET);
-      await quickFilters.assertQuickFilterDisplayed(QuickFiltersEnum.TISSUE_REQUESTED_NOT_RECEIVED_YET);
-      await quickFilters.assertQuickFilterDisplayed(QuickFiltersEnum.PARTICIPANT_WITHDRAWN);
-      await quickFilters.assertQuickFilterDisplayed(QuickFiltersEnum.AOM_IN_NEXT_SIX_MONTHS);
-      await quickFilters.assertQuickFilterDisplayed(QuickFiltersEnum.AOM_IN_LAST_SIX_MONTHS);
-      await quickFilters.assertQuickFilterDisplayed(QuickFiltersEnum.LOST_TO_FOLLOW_UP_AOM_WAS_OVER_ONE_MONTH_AGO);
-      await quickFilters.assertQuickFilterDisplayed(QuickFiltersEnum.UNDER_AGE);
-      await quickFilters.assertQuickFilterDisplayed(QuickFiltersEnum.PHI_REPORT);
+      await quickFilters.assertQuickFilterDisplayed(QuickFilter.MEDICAL_RECORDS_NOT_REQUESTED_YET);
+      await quickFilters.assertQuickFilterDisplayed(QuickFilter.MEDICAL_RECORDS_NOT_RECEIVED_YET);
+      await quickFilters.assertQuickFilterDisplayed(QuickFilter.TISSUE_NEEDS_REVIEW);
+      await quickFilters.assertQuickFilterDisplayed(QuickFilter.TISSUE_NOT_REQUESTED_YET);
+      await quickFilters.assertQuickFilterDisplayed(QuickFilter.TISSUE_REQUESTED_NOT_RECEIVED_YET);
+      await quickFilters.assertQuickFilterDisplayed(QuickFilter.PARTICIPANT_WITHDRAWN);
+      await quickFilters.assertQuickFilterDisplayed(QuickFilter.AOM_IN_NEXT_SIX_MONTHS);
+      await quickFilters.assertQuickFilterDisplayed(QuickFilter.AOM_IN_LAST_SIX_MONTHS);
+      await quickFilters.assertQuickFilterDisplayed(QuickFilter.LOST_TO_FOLLOW_UP_AOM_WAS_OVER_ONE_MONTH_AGO);
+      await quickFilters.assertQuickFilterDisplayed(QuickFilter.UNDER_AGE);
+      await quickFilters.assertQuickFilterDisplayed(QuickFilter.PHI_REPORT);
     })
 
     await test.step(`Verify that the Download List and Bulk Cohort Tagis displayed`, async () => {
@@ -159,30 +159,46 @@ test.describe.serial(`${StudyName.OSTEO2}: Verify expected display of participan
     await customizeViewPanel.open();
 
     await test.step(`Verify: Participant Columns`, async () => {
-      await customizeViewPanel.openColumnGroup({ columnSection: CustomizeView.PARTICIPANT, stableID: CustomizeViewID.PARTICIPANT_ID });
+      await customizeViewPanel.openColumnGroup({ columnSection: CV.PARTICIPANT, stableID: ID.PARTICIPANT });
 
-      await customizeViewPanel.assertColumnOptionDisplayed(CustomizeView.PARTICIPANT, CustomizeViewID.PARTICIPANT_ID, Label.COUNTRY);
-      await customizeViewPanel.assertColumnOptionDisplayed(CustomizeView.PARTICIPANT, CustomizeViewID.PARTICIPANT_ID, Label.DATE_OF_BIRTH);
-      await customizeViewPanel.assertColumnOptionDisplayed(CustomizeView.PARTICIPANT, CustomizeViewID.PARTICIPANT_ID, Label.DATE_OF_MAJORITY);
-      await customizeViewPanel.assertColumnOptionDisplayed(CustomizeView.PARTICIPANT, CustomizeViewID.PARTICIPANT_ID, Label.DDP);
-      await customizeViewPanel.assertColumnOptionDisplayed(CustomizeView.PARTICIPANT, CustomizeViewID.PARTICIPANT_ID, Label.DO_NOT_CONTACT);
-      await customizeViewPanel.assertColumnOptionDisplayed(CustomizeView.PARTICIPANT, CustomizeViewID.PARTICIPANT_ID, Label.EMAIL);
-      await customizeViewPanel.assertColumnOptionDisplayed(CustomizeView.PARTICIPANT, CustomizeViewID.PARTICIPANT_ID, Label.FILE_UPLOAD_TIME);
-      await customizeViewPanel.assertColumnOptionDisplayed(CustomizeView.PARTICIPANT, CustomizeViewID.PARTICIPANT_ID, Label.FIRST_NAME);
-      await customizeViewPanel.assertColumnOptionDisplayed(CustomizeView.PARTICIPANT, CustomizeViewID.PARTICIPANT_ID, Label.LAST_NAME);
-      await customizeViewPanel.assertColumnOptionDisplayed(CustomizeView.PARTICIPANT, CustomizeViewID.PARTICIPANT_ID, Label.PARTICIPANT_ID);
-      await customizeViewPanel.assertColumnOptionDisplayed(CustomizeView.PARTICIPANT, CustomizeViewID.PARTICIPANT_ID, Label.PREFERRED_LANGUAGE);
-      await customizeViewPanel.assertColumnOptionDisplayed(CustomizeView.PARTICIPANT, CustomizeViewID.PARTICIPANT_ID, Label.REGISTRATION_DATE);
-      await customizeViewPanel.assertColumnOptionDisplayed(CustomizeView.PARTICIPANT, CustomizeViewID.PARTICIPANT_ID, Label.SHORT_ID);
-      await customizeViewPanel.assertColumnOptionDisplayed(CustomizeView.PARTICIPANT, CustomizeViewID.PARTICIPANT_ID, Label.UPLOADED_FILE_NAME);
-      await customizeViewPanel.assertColumnOptionDisplayed(CustomizeView.PARTICIPANT, CustomizeViewID.PARTICIPANT_ID, Label.STATUS);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.PARTICIPANT, ID.PARTICIPANT, Label.COUNTRY);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.PARTICIPANT, ID.PARTICIPANT, Label.DATE_OF_BIRTH);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.PARTICIPANT, ID.PARTICIPANT, Label.DATE_OF_MAJORITY);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.PARTICIPANT, ID.PARTICIPANT, Label.DDP);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.PARTICIPANT, ID.PARTICIPANT, Label.DO_NOT_CONTACT);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.PARTICIPANT, ID.PARTICIPANT, Label.EMAIL);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.PARTICIPANT, ID.PARTICIPANT, Label.FILE_UPLOAD_TIME);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.PARTICIPANT, ID.PARTICIPANT, Label.FIRST_NAME);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.PARTICIPANT, ID.PARTICIPANT, Label.LAST_NAME);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.PARTICIPANT, ID.PARTICIPANT, Label.PARTICIPANT_ID);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.PARTICIPANT, ID.PARTICIPANT, Label.PREFERRED_LANGUAGE);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.PARTICIPANT, ID.PARTICIPANT, Label.REGISTRATION_DATE);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.PARTICIPANT, ID.PARTICIPANT, Label.SHORT_ID);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.PARTICIPANT, ID.PARTICIPANT, Label.UPLOADED_FILE_NAME);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.PARTICIPANT, ID.PARTICIPANT, Label.STATUS);
 
-      await customizeViewPanel.closeColumnGroup({ columnSection: CustomizeView.PARTICIPANT, stableID: CustomizeViewID.PARTICIPANT_ID });
+      await customizeViewPanel.closeColumnGroup({ columnSection: CV.PARTICIPANT, stableID: ID.PARTICIPANT });
       console.log(`\n`);
     })
 
     await test.step(`Verify: Participant - DSM Columns`, async () => {
-      //stuff here
+      await customizeViewPanel.openColumnGroup({ columnSection: CV.PARTICIPANT_DSM, stableID: ID.PARTICIPANT_DSM });
+
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.PARTICIPANT_DSM, ID.PARTICIPANT_DSM, Label.DATE_WITHDRAWN);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.PARTICIPANT_DSM, ID.PARTICIPANT_DSM, Label.GERMLINE_CONSENT_STATUS);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.PARTICIPANT_DSM, ID.PARTICIPANT_DSM, Label.INCOMPLETE_OR_MINIMAL_MEDICAL_RECORDS);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.PARTICIPANT_DSM, ID.PARTICIPANT_DSM, Label.MR_ASSIGNEE);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.PARTICIPANT_DSM, ID.PARTICIPANT_DSM, Label.ONC_HISTORY_CREATED);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.PARTICIPANT_DSM, ID.PARTICIPANT_DSM, Label.ONC_HISTORY_REVIEWED);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.PARTICIPANT_DSM, ID.PARTICIPANT_DSM, Label.PAPER_CR_RECEIVED);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.PARTICIPANT_DSM, ID.PARTICIPANT_DSM, Label.PAPER_CR_SENT);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.PARTICIPANT_DSM, ID.PARTICIPANT_DSM, Label.PARTICIPANT_NOTES);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.PARTICIPANT_DSM, ID.PARTICIPANT_DSM, Label.READY_FOR_ABSTRACTION);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.PARTICIPANT_DSM, ID.PARTICIPANT_DSM, Label.SOMATIC_CONSENT_STATUS);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.PARTICIPANT_DSM, ID.PARTICIPANT_DSM, Label.TISSUE_ASSIGNEE);
+
+      await customizeViewPanel.closeColumnGroup({ columnSection: CV.PARTICIPANT_DSM, stableID: ID.PARTICIPANT_DSM });
+      console.log(`\n`);
     })
 
     await test.step(`Verify: Medical Record Columns`, async () => {
@@ -202,9 +218,9 @@ test.describe.serial(`${StudyName.OSTEO2}: Verify expected display of participan
     })
 
     await test.step(`Verify: Cohort Tags Columns`, async () => {
-      await customizeViewPanel.openColumnGroup({ columnSection: CustomizeView.COHORT_TAGS, stableID: CustomizeViewID.COHORT_TAG_ID });
-      await customizeViewPanel.assertColumnOptionDisplayed(CustomizeView.COHORT_TAGS, CustomizeViewID.COHORT_TAG_ID, Label.COHORT_TAG_NAME);
-      await customizeViewPanel.closeColumnGroup({ columnSection: CustomizeView.COHORT_TAGS, stableID: CustomizeViewID.COHORT_TAG_ID });
+      await customizeViewPanel.openColumnGroup({ columnSection: CV.COHORT_TAGS, stableID: ID.COHORT_TAG });
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.COHORT_TAGS, ID.COHORT_TAG, Label.COHORT_TAG_NAME);
+      await customizeViewPanel.closeColumnGroup({ columnSection: CV.COHORT_TAGS, stableID: ID.COHORT_TAG });
     })
 
     await test.step(`Verify: Clinical Orders Columns`, async () => {
@@ -212,7 +228,7 @@ test.describe.serial(`${StudyName.OSTEO2}: Verify expected display of participan
     })
   })
 
-  test.skip(`${StudyName.OSTEO2}: Verify a ptp with only 'OS PE-CGS' cohort tag only shows up in OS2 realm, not OS1`, async({ page, request }) => {
+  test.skip(`${StudyName.OSTEO2}: Verify a ptp with only 'OS PE-CGS' cohort tag only shows up in OS2 realm, not OS1`, async ({ page, request }) => {
     navigation = new Navigation(page, request);
     await new Select(page, { label: 'Select study' }).selectOption(StudyName.OSTEO2);
 
@@ -221,25 +237,25 @@ test.describe.serial(`${StudyName.OSTEO2}: Verify expected display of participan
 
     const customizeViewPanel = participantListPage.filters.customizeViewPanel;
     await customizeViewPanel.open();
-    await customizeViewPanel.selectColumns(CustomizeView.COHORT_TAGS, [Label.COHORT_TAG_NAME]);
+    await customizeViewPanel.selectColumns(CV.COHORT_TAGS, [Label.COHORT_TAG_NAME]);
     await customizeViewPanel.close();
 
     const shortId = await participantListPage.findParticipantWithSingleCohortTag(StudyName.OSTEO2);
   })
 
-  test.skip(`${StudyName.OSTEO2}: Verify general appearance of participant page`, async({ page, request }) => {
+  test.skip(`${StudyName.OSTEO2}: Verify general appearance of participant page`, async ({ page, request }) => {
     //stuff here
   })
 
-  test.skip(`${StudyName.OSTEO2}: Verify that a ptp who resides in New York is not eligible for clinical sequencing`, async({ page, request }) => {
+  test.skip(`${StudyName.OSTEO2}: Verify that a ptp who resides in New York is not eligible for clinical sequencing`, async ({ page, request }) => {
     //stuff here - plan to use saved filter to just check that error message is displayed in Sequencing Tab e.g. "they're in NY or CA so are not eligible"
   })
 
-  test.skip(`${StudyName.OSTEO2}: Verify that onc history is not inputted for ptps who responded CONSENT_TISSUE = No`, async({ page, request }) => {
+  test.skip(`${StudyName.OSTEO2}: Verify that onc history is not inputted for ptps who responded CONSENT_TISSUE = No`, async ({ page, request }) => {
     //stuff here - plan to use saved filter to just check that error message is displayed in Onc History tab e.g. "they have not consented to sharing tissue"
   })
 
-  test.skip(`${StudyName.OSTEO2}: Verify that display of participant page for ptp with at least one Return of Results`, async({ page, request }) => {
+  test.skip(`${StudyName.OSTEO2}: Verify that display of participant page for ptp with at least one Return of Results`, async ({ page, request }) => {
     //stuff here
   })
 })
