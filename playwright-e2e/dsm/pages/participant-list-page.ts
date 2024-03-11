@@ -54,8 +54,18 @@ export default class ParticipantListPage extends DsmPageBase {
     await checkbox.check({ timeout: 30 * 1000 }); // long delay
   }
 
+  public async assertSelectAllDisplayed(): Promise<void> {
+    const checkbox = this.page.getByRole('checkbox', { name: 'Select all' });
+    await expect(checkbox).toBeVisible();
+  }
+
   public async addBulkCohortTags(): Promise<void> {
     await this.page.locator('//button[.//*[@tooltip="Bulk Cohort Tag"]]').click();
+  }
+
+  public async assertBulkCohortTagDisplayed(): Promise<void> {
+    const button = this.page.locator('//button[.//*[@tooltip="Bulk Cohort Tag"]]');
+    await expect(button).toBeVisible();
   }
 
   public get filters(): Filters {
@@ -106,6 +116,11 @@ export default class ParticipantListPage extends DsmPageBase {
       saveModal.getButton({ label: /Save Filter/ }).click()
     ]);
     await waitForNoSpinner(this.page);
+  }
+
+  public async assertDownloadListDisplayed(): Promise<void> {
+    const button = this.page.locator('button').filter({has: this.page.locator('[data-icon="file-download"]')});
+    await expect(button).toBeVisible();
   }
 
   /**
@@ -329,6 +344,29 @@ export default class ParticipantListPage extends DsmPageBase {
       }
     } while (foundShortID === '');
     return foundShortID;
+  }
+
+  //generalize this later
+  async findParticipantWithSingleCohortTag(tag: string): Promise<string> {
+    //Check that cohort tag column is already added to participant list - if it is not, add it
+    const cohortTagColumnHeader = this.page.locator(`//th[normalize-space(text())='${CustomizeView.COHORT_TAGS}']`);
+    if (!await cohortTagColumnHeader.isVisible()) {
+      const customizeViewPanel = this.filters.customizeViewPanel;
+      await customizeViewPanel.open();
+      await customizeViewPanel.selectColumns(CustomizeView.COHORT_TAGS, [Label.COHORT_TAG_NAME]);
+      await customizeViewPanel.close();
+    }
+
+    //Search for a participant that only has an 'OS PE-CGS' cohort tag (shows they registereed + enrolled in OS2 only)
+    const participantListTable = this.participantListTable;
+    let amountOfParticipantsDisplayed = await participantListTable.rowsCount;
+    let shortId = '';
+
+    do {
+
+    } while (shortId === '');
+
+    //Return participant
   }
 
   async findParticipantForKitUpload(opts: { allowNewYorkerOrCanadian: boolean, firstNameSubstring?: string }): Promise<number> {
