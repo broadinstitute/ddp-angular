@@ -332,7 +332,7 @@ export enum Label {
   MAILING_ADDRESS = 'Your Mailing Address *',
   MAIL_TO_NAME = 'Mail To Name',
   MATERIALS_RECEIVED = 'Materials received',
-  METHOD_OF_DECALCIFICATION = 'Method of Decalcification',
+  METHOD_OF_DECALCIFICATION = 'Method of decalcification',
   MF_BARCODE = 'MF Barcode',
   MF_CODE = 'MF code',
   MIXED_RACE = 'MIXED_RACE',
