@@ -196,6 +196,24 @@ export default class AtcpMedicalHistoryPage extends AtcpPageBase {
   }
 
   /**
+   * <br> Question: (Females only) Has the participant experienced onset of period?
+   *
+   * <br> Type: Radiobutton
+   */
+  get hasExperiencedOnsetOfPeriod(): Question {
+    return new Question(this.page, { cssClassAttribute: '.picklist-answer-FEMALE_ONSET_OF_PERIOD' });
+  }
+
+  /**
+   * <br> Question: (Females only) Has E2E-Second-Child-Herzogspiculum ever been pregnant?
+   *
+   * <br> Type: Radiobutton
+   */
+  get hasEverBeenPregnant(): Question {
+    return new Question(this.page, { cssClassAttribute: '.picklist-answer-FEMALE_PREGNANT' });
+  }
+
+  /**
    * <br> Question: Has [Participant's First Name] ever had any of the following infectious diseases? Select all that apply.
    *
    * <br> Type: Checkbox
@@ -342,5 +360,14 @@ export default class AtcpMedicalHistoryPage extends AtcpPageBase {
 
   get startResume(): Button {
     return new Button(this.page, { label: 'Start/Resume', root: '.activity-buttons' });
+  }
+
+  /**
+   * <br> Question: Medication category
+   *
+   * <br> Type: Select
+   */
+  get medicationCategory(): Question {
+    return new Question(this.page, { cssClassAttribute: '.picklist-answer-MEDICATION_CATEGORY_PICK_LIST' });
   }
 }

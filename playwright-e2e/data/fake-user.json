@@ -38,7 +38,9 @@
     "relationshipID": "70"
   },
   "doctor": {
-    "name": "John Strange",
+    "firstName": "John",
+    "lastName": "Strong",
+    "name": "John Strong",
     "specialty": "PRIMARY_CARE",
     "phone": "6187247123",
     "fax": "3213211234",
@@ -100,7 +102,7 @@
       "DD": "30",
       "YYYY": "2010"
     },
-    "age": "12",
+    "age": "13",
     "country": {
       "name": "UNITED STATES",
       "abbreviation": "US"
@@ -160,6 +162,7 @@
       "DD": "20",
       "YYYY": "2020"
     },
+    "sex": "Female",
     "age": "03",
     "country": {
       "name": "UNITED STATES",
