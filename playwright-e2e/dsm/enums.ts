@@ -358,7 +358,7 @@ export enum Label {
   ONC_HISTORY_REVIEWED = 'Onc History Reviewed',
   OTHER_COMMENTS = 'OTHER_COMMENTS',
   PAPER_CR_RECEIVED = 'Paper C/R Received',
-  PAPER_CR_REQUIRED = 'Paper C/R Required',
+  PAPER_CR_REQUIRED = 'Paper C/R required',
   PAPER_CR_SENT = 'Paper C/R Sent',
   PARTICIPANT_ID = 'Participant ID',
   PARTICIPANT_LIST_CHECKBOX_HEADER = 'checkbox column', //filling out to make error messages more verbose - but header is actually blank
