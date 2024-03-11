@@ -232,11 +232,11 @@ test.describe.serial(`${StudyName.OSTEO2}: Verify expected display of participan
   })
 
   test.skip(`${StudyName.OSTEO2}: Verify that a ptp who resides in New York is not eligible for clinical sequencing`, async({ page, request }) => {
-    //stuff here
+    //stuff here - plan to use saved filter to just check that error message is displayed in Sequencing Tab e.g. "they're in NY or CA so are not eligible"
   })
 
   test.skip(`${StudyName.OSTEO2}: Verify that onc history is not inputted for ptps who responded CONSENT_TISSUE = No`, async({ page, request }) => {
-    //stuff here
+    //stuff here - plan to use saved filter to just check that error message is displayed in Onc History tab e.g. "they have not consented to sharing tissue"
   })
 
   test.skip(`${StudyName.OSTEO2}: Verify that display of participant page for ptp with at least one Return of Results`, async({ page, request }) => {
