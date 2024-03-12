@@ -97,7 +97,7 @@ export class CustomizeView {
     const option = this.page.locator(
       `//button[.//text()[normalize-space()='${columnGroupName}']]` +
       `/following-sibling::ul[contains(@id, '${groupId}')]` +
-      `//mat-checkbox[.//text()[normalize-space()='${columnOption}']]`
+      `//mat-checkbox[.//text()[normalize-space()= '${columnOption}']]`
     );
     return option;
   }

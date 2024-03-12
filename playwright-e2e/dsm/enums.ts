@@ -98,7 +98,7 @@ export enum CustomizeViewID {
   PROXY = 'proxy',
   RESEARCH_CONSENT_ASSENT_FORM = 'CONSENT_ASSENT',
   RESEARCH_CONSENT_FORM_ADULT = 'CONSENT',
-  RESEARCH_CONSENT_FORM_PARENTAL = 'PARENTAL_CONSENT',
+  RESEARCH_CONSENT_FORM_KID = 'PARENTAL_CONSENT',
   SAMPLE = 'k',
   SIBLING = 'FAMILY_HISTORY_SELF_SIBLING',
   SURVEY_ABOUT_YOU_OR_YOUR_CHILD = 'ABOUT_YOU_ACTIVITY',
@@ -196,6 +196,9 @@ export enum Label {
   BLOCK_TO_SHL = 'Block to SHL',
   BLOCK_ID_TO_SHL = 'Block ID to SHL',
   BLOCKS_WITH_TUMOR = 'Blocks with Tumor',
+  CHILD_DATE_OF_BIRTH = `Your child’s Date of Birth`, //Apostrophe type is important - don't change to the one on the MAC laptop or it'll never retreive the webelement
+  CHILD_FULLNAME = `Your Child’s Full name:`, //See apostrophe note above
+  CHILD_MAILING_ADDRESS = `Your Child’s Mailing Address: *`, //See apostrophe note above
   CITY = 'City',
   CLINICAL_ORDER_DATE = 'Clinical Order Date',
   CLINICAL_ORDER_ID = 'Clinical Order Id',
@@ -370,6 +373,14 @@ export enum Label {
   PAPER_CR_RECEIVED = 'Paper C/R Received',
   PAPER_CR_REQUIRED = 'Paper C/R required',
   PAPER_CR_SENT = 'Paper C/R Sent',
+  PARENTAL_CONSENT_COMPLETED = 'PARENTAL_CONSENT Survey Completed',
+  PARENTAL_CONSENT_CREATED = 'PARENTAL_CONSENT Survey Created',
+  PARENTAL_CONSENT_UPDATED = 'PARENTAL_CONSENT Survey Last Updated',
+  PARENTAL_CONSENT_STATUS = 'PARENTAL_CONSENT Survey Status',
+  PARENTAL_CONSENT_BLOOD = 'PARENTAL_CONSENT_BLOOD',
+  PARENTAL_CON_CHILD_LASTNAME = 'PARENTAL_CONSENT_CHILD_LASTNAME',
+  PARENTAL_CONSENT_LASTNAME = 'PARENTAL_CONSENT_LASTNAME',
+  PARENTAL_CONSENT_TISSUE = 'PARENTAL_CONSENT_TISSUE',
   PARTICIPANT_ID = 'Participant ID',
   PARTICIPANT_LIST_CHECKBOX_HEADER = 'checkbox column', //filling out to make error messages more verbose - but header is actually blank
   PARTICIPANT_NOTES = 'Participant Notes',
@@ -390,6 +401,7 @@ export enum Label {
   READ_HOSPITAL_MATERIALS_ID = 'READ_HOSPITAL_MATERIALS_ID',
   RECEIVED = 'Received',
   REGISTRATION_DATE = 'Registration Date',
+  RELATIONSHIP_TO_CHILD = 'Relationship to child (Parent/Guardian)',
   RELATIONSHIP_TO_PROBAND = 'Relationship to Proband',
   RELEASE_SELF = 'RELEASE_SELF',
   REQUEST = 'Request',
@@ -464,6 +476,7 @@ export enum Label {
   WHAT_LANGUAGE_DO_YOU_SPEAK_AT_HOME = 'What language do you speak at home?',
   WHICH_SIDE_OF_FAMILY_IS_THIS_PERSON_ON = 'Which side of the family is this person on?',
   YOUR_CONTACT_INFORMATION = `Your Contact Information: *`,
+  YOUR_FULLNAME = 'Your Full Name',
   YOUR_NAME = 'Your name',
   ZIP = 'Zip',
 }
