@@ -298,16 +298,59 @@ test.describe.serial(`${StudyName.OSTEO2}: Verify expected display of participan
     })
 
     await test.step(`Verify: Sample Columns`, async () => {
-      //stuff here
+      await customizeViewPanel.openColumnGroup({ columnSection: CV.SAMPLE, stableID: ID.SAMPLE });
+
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.SAMPLE, ID.SAMPLE, Label.COLLABORATOR_PARTICIPANT_ID);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.SAMPLE, ID.SAMPLE, Label.COLLECTION_DATE);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.SAMPLE, ID.SAMPLE, Label.MF_CODE);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.SAMPLE, ID.SAMPLE, Label.NORMAL_COLLABORATOR_SAMPLE_ID);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.SAMPLE, ID.SAMPLE, Label.SAMPLE_DEACTIVATION);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.SAMPLE, ID.SAMPLE, Label.SAMPLE_NOTES);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.SAMPLE, ID.SAMPLE, Label.SAMPLE_RECEIVED);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.SAMPLE, ID.SAMPLE, Label.SAMPLE_SENT);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.SAMPLE, ID.SAMPLE, Label.SAMPLE_TYPE);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.SAMPLE, ID.SAMPLE, Label.SEQUENCING_RESTRICTIONS);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.SAMPLE, ID.SAMPLE, Label.STATUS);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.SAMPLE, ID.SAMPLE, Label.TRACKING_IN);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.SAMPLE, ID.SAMPLE, Label.TRACKING_OUT);
+
+      await customizeViewPanel.closeColumnGroup({ columnSection: CV.SAMPLE, stableID: ID.SAMPLE });
+      console.log(`\n`);
     })
 
     await test.step(`Verify: Cohort Tags Columns`, async () => {
       await customizeViewPanel.openColumnGroup({ columnSection: CV.COHORT_TAGS, stableID: ID.COHORT_TAG });
       await customizeViewPanel.assertColumnOptionDisplayed(CV.COHORT_TAGS, ID.COHORT_TAG, Label.COHORT_TAG_NAME);
       await customizeViewPanel.closeColumnGroup({ columnSection: CV.COHORT_TAGS, stableID: ID.COHORT_TAG });
+      console.log(`\n`);
     })
 
     await test.step(`Verify: Clinical Orders Columns`, async () => {
+      await customizeViewPanel.openColumnGroup({ columnSection: CV.CLINICAL_ORDERS, stableID: ID.CLINICAL_ORDER });
+
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.CLINICAL_ORDERS, ID.CLINICAL_ORDER, Label.CLINICAL_ORDER_DATE);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.CLINICAL_ORDERS, ID.CLINICAL_ORDER, Label.CLINICAL_ORDER_ID);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.CLINICAL_ORDERS, ID.CLINICAL_ORDER, Label.CLINICAL_ORDER_PDO_NUMBER);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.CLINICAL_ORDERS, ID.CLINICAL_ORDER, Label.CLINICAL_ORDER_STATUS);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.CLINICAL_ORDERS, ID.CLINICAL_ORDER, Label.CLINICAL_ORDER_STATUS_DATE);
+
+      await customizeViewPanel.closeColumnGroup({ columnSection: CV.CLINICAL_ORDERS, stableID: ID.CLINICAL_ORDER });
+      console.log(`\n`);
+    })
+
+    await test.step(`Verify: Survey: Your Child's Osteosarcoma Columns`, async () => {
+      //stuff here
+    })
+
+    await test.step(`Verify: Additional Consent & Assent: Learning More About Your Child's DNA with Invitae Columns`, async () => {
+      //stuff here
+    })
+
+    await test.step(`Verify: Biological / Birth Parent 1: Assigned female at birth Columns`, async () => {
+      //stuff here
+    })
+
+    await test.step(`Verify: Research Consent Form Columns [Adult / Self Consent]`, async () => {
       //stuff here
     })
   })
