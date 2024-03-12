@@ -69,7 +69,7 @@ export enum CustomizeView {
   WHAT_WE_LEARNED_FROM_SOMATIC_DNA = `What We’ve Learned from Your Child's/Your Tumor (somatic) DNA Columns`,
 }
 
-//The id attribute used by customize view columns
+//The id attribute used by customize view columns - use enum to keep track of stable ids
 export enum CustomizeViewID {
   ADD_CHILD_PARTICIPANT = 'ADD_PARTICIPANT',
   ADDITIONAL_CONSENT_ASSENT_LEARN_ABOUT_CHILD_TUMOR = 'CONSENT_ADDENDUM_PEDIATRIC',
@@ -210,6 +210,10 @@ export enum Label {
   CONFIRMED_PHONE = 'Confirmed Phone',
   CONFIRMED_FAX = 'Confirmed Fax',
   CONFIRMED_INSTITUTION_NAME = 'Confirmed Institution Name',
+  CONSENT_SURVEY_COMPLETED = 'CONSENT Survey Completed',
+  CONSENT_SURVEY_CREATED = 'CONSENT Survey Created',
+  CONSENT_LAST_UPDATED = 'CONSENT Survey Last Updated',
+  CONSENT_SURVEY_STATUS = 'CONSENT Survey Status',
   CONSENT_ADDENDUM_SURVEY_COMPLETED = 'CONSENT_ADDENDUM Survey Completed',
   CONSENT_ADDENDUM_SURVEY_CREATED = 'CONSENT_ADDENDUM Survey Created',
   CONSENT_ADDENDUM_SURVEY_LAST_UPDATED = 'CONSENT_ADDENDUM Survey Last Updated',
@@ -219,6 +223,7 @@ export enum Label {
   CONSENT_ADDENDUM_SURVEY_PEDIATRIC_LAST_UPDATED = 'CONSENT_ADDENDUM_PEDIATRIC Survey Last Updated',
   CONSENT_ADDENDUM_SURVEY_PEDIATRIC_STATUS = 'CONSENT_ADDENDUM_PEDIATRIC Survey Status',
   CONSENT_BLOOD = 'CONSENT_TISSUE',
+  CONSENT_LASTNAME = 'CONSENT_LASTNAME',
   CONSENT_TISSUE = 'CONSENT_TISSUE',
   CONTACT_EMAIL = 'Contact Email',
   CONTACT_PERSON = 'Contact Person',
@@ -458,6 +463,8 @@ export enum Label {
   WHAT_IS_THIS_PERSONS_SEX_ASSIGNED_AT_BIRTH = `What is this person's sex assigned at birth?`,
   WHAT_LANGUAGE_DO_YOU_SPEAK_AT_HOME = 'What language do you speak at home?',
   WHICH_SIDE_OF_FAMILY_IS_THIS_PERSON_ON = 'Which side of the family is this person on?',
+  YOUR_CONTACT_INFORMATION = `Your Contact Information: *`,
+  YOUR_NAME = 'Your name',
   ZIP = 'Zip',
 }
 

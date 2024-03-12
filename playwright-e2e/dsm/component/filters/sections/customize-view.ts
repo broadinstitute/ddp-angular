@@ -104,7 +104,7 @@ export class CustomizeView {
 
   public async openColumnGroup(opts: { columnSection: ColumnGroup, stableID: CustomizeViewID }): Promise<void> {
     const { columnSection, stableID } = opts; //use stable id to reduce the need for using nth
-    const button = this.page.locator(`//ul[contains(@id, '${stableID}')]/preceding-sibling::button[.//text()[normalize-space()='${columnSection}']]`);
+    const button = this.page.locator(`//ul[@id='${stableID}']/preceding-sibling::button[.//text()[normalize-space()='${columnSection}']]`);
     await expect(button).toBeVisible();
     const isOpen = await this.dropdownOptionsDisplayed(button);
     if (!isOpen) {
@@ -114,7 +114,7 @@ export class CustomizeView {
 
   public async closeColumnGroup(opts: { columnSection: ColumnGroup, stableID: CustomizeViewID }): Promise<void> {
     const { columnSection, stableID } = opts; //use stable id to reduce the need for using nth
-    const button = this.page.locator(`//ul[contains(@id, '${stableID}')]/preceding-sibling::button[.//text()[normalize-space()='${columnSection}']]`);
+    const button = this.page.locator(`//ul[@id='${stableID}']/preceding-sibling::button[.//text()[normalize-space()='${columnSection}']]`);
     await expect(button).toBeVisible();
     const isOpen = await this.dropdownOptionsDisplayed(button);
     if (isOpen) {
