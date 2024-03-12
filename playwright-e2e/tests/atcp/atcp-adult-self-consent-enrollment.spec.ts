@@ -1,21 +1,18 @@
 /* eslint-disable max-len */
 import { expect, Page } from '@playwright/test';
-import { APP } from 'data/constants';
 import AtcpConsentPage from 'dss/pages/atcp/atcp-consent-page';
 import AtcpContactPhysicianPage from 'dss/pages/atcp/atcp-contact-physician-page';
 import AtcpDashboardPage from 'dss/pages/atcp/atcp-dashboard-page';
 import AtcpGenomeStudyPage from 'dss/pages/atcp/atcp-genome-study-page';
-import AtcpHomePage from 'dss/pages/atcp/atcp-home-page';
+import AtcpHomePage, { EnrollmentReason } from 'dss/pages/atcp/atcp-home-page';
 import AtcpMedicalHistoryPage from 'dss/pages/atcp/atcp-medical-history-page';
 import AtcpRegistrationPage from 'dss/pages/atcp/atcp-registration-page';
 import AtcpReviewSubmissionPage from 'dss/pages/atcp/atcp-review-submission-page';
 import { test } from 'fixtures/atcp-fixture';
 import * as auth from 'authentication/auth-atcp';
 import * as user from 'data/fake-user.json';
-import { setAuth0UserEmailVerified } from 'utils/api-utils';
 import { assertTableHeaders } from 'utils/assertion-helper';
 import { generateUserName } from 'utils/faker-utils';
-import { logParticipantCreated } from 'utils/log-utils';
 
 test.describe('ATCP adult self-consent enrollment', () => {
   const assertActivityStep = async (page: Page, expectedText: string) => {
@@ -46,27 +43,7 @@ test.describe('ATCP adult self-consent enrollment', () => {
 
     const homePage = new AtcpHomePage(page);
     await homePage.waitForReady();
-
-    const joinUsPage = await homePage.joinUs();
-    await joinUsPage.fillInName(adultFirstName, adultLastName,
-      { firstNameTestId: 'answer:PREQUAL_FIRST_NAME', lastNameTestId: 'answer:PREQUAL_LAST_NAME' });
-
-    await joinUsPage.prequalSelfDescribe.toRadiobutton().check('I have A-T');
-    await joinUsPage.clickJoinUs();
-
-    const userEmail = await auth.createAccountWithEmailAlias(page, {
-      email: process.env.ATCP_USER_EMAIL,
-      password: process.env.ATCP_USER_PASSWORD
-    });
-    logParticipantCreated(userEmail, adultFullName);
-
-    await expect(page.locator('text="Account Activation"')).toBeVisible();
-    await expect(page.locator('.activate-account h2.Subtitle')).toHaveText(
-      `You are almost done! Please check your email: ${userEmail}. An email has been sent there with the guidelines to activate your account.`
-    );
-
-    // Send Auth0 API to verify user email
-    await setAuth0UserEmailVerified(APP.AT, userEmail, { isEmailVerified: true });
+    const userEmail = await homePage.createNewAcct(adultFirstName, adultLastName, EnrollmentReason.SELF);
     await auth.login(page, { email: userEmail });
 
     const registrationPage = new AtcpRegistrationPage(page);
