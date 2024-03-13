@@ -709,7 +709,7 @@ jobs:
             TESTS_FILE=$(circleci tests split --split-by=timings --timings-type=classname e2e_tests.txt)
             
             echo $TESTS_FILE | circleci tests run --command="xargs npm run test:ci" --verbose --split-by=timings
-          no_output_timeout: 10m
+          no_output_timeout: 15m
       - store_test_results:
           path: playwright-e2e/junit
       - store_artifacts:
