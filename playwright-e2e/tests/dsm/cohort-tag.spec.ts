@@ -23,8 +23,8 @@ test.describe('Cohort tags', () => {
     test(`Ensure cohort tags update and delete properly for @${studyName} @dsm @functional @cohort-tag`, async ({ page, request }) => {
       // Inspect network requests to find a Playwright test user that does not have any cohort tag
       await page.route('**/*', async (route, request): Promise<void> => {
-        const regex = new RegExp(/applyFilter\?realm=.*&userId=.*&parent=participantList/i);
-        if (request && !shortId && request.url().match(regex)) {
+        const regex = new RegExp(/filterList/i);
+        if (request && !shortId && request.url().match(regex) && !shortId) {
           logInfo(`Intercepting API request ${request.url()} for a E2E participant`);
           const response = await route.fetch({ timeout: 50000 });
           const json = JSON.parse(await response.text());
@@ -39,9 +39,11 @@ test.describe('Cohort tags', () => {
             if (!profile.firstName?.includes('E2E')) {
               continue;
             }
+
             if (cohortTag && Object.keys(cohortTag).length > 0) {
               continue; // cohort tags already exists
             }
+
             if (participantShortId) {
               shortId = participantShortId;
               break; // finished searching
@@ -64,6 +66,12 @@ test.describe('Cohort tags', () => {
       const customizeViewPanel = participantListPage.filters.customizeViewPanel;
       await customizeViewPanel.open();
       await customizeViewPanel.selectColumns(CustomizeView.COHORT_TAGS, [Label.COHORT_TAG_NAME]);
+      await customizeViewPanel.selectColumns(CustomizeView.PARTICIPANT, [Label.REGISTRATION_DATE]);
+
+      const searchPanel = participantListPage.filters.searchPanel;
+      await searchPanel.open();
+      await searchPanel.text(Label.FIRST_NAME, { textValue: 'E2E' });
+      await searchPanel.search();
 
       // Search participant by Short ID
       logInfo(`Participant Short ID: ${shortId}`);
@@ -110,9 +118,8 @@ test.describe('Cohort tags', () => {
       await cohortTag.assertCohortTagToHaveCount(cohortTagValue3, 1);
 
       await cohortTag.remove(cohortTagValue2);
-      await cohortTag.assertCohortTagToHaveCount(cohortTagValue2, 0);
-
       await cohortTag.remove(cohortTagValue3);
+      await cohortTag.assertCohortTagToHaveCount(cohortTagValue2, 0);
       await cohortTag.assertCohortTagToHaveCount(cohortTagValue3, 0);
 
       await participantPage.backToList();
