@@ -493,7 +493,7 @@ async function findParticipantForGermlineConsentCreation(participantListPage: Pa
   await customizeViewPanel.selectColumnsByID(CustomizeView.MEDICAL_RELEASE_FORM, [Label.PHYSICIAN], Label.RELEASE_SELF, { nth: 0 });
   await customizeViewPanel.selectColumns(CustomizeView.SAMPLE, [Label.SAMPLE_TYPE, Label.STATUS]);
   await customizeViewPanel.selectColumns(CustomizeView.ONC_HISTORY, [Label.TISSUE_REQUEST_DATE]);
-  await customizeViewPanel.selectColumns(CustomizeView.ADDITIONAL_CONSENT_LEARNING_ABOUT_TUMOR,
+  await customizeViewPanel.selectColumns(CustomizeView.LEARN_ABOUT_YOUR_TUMOR,
     [Label.SOMATIC_CONSENT_TUMOR]
   );
   await customizeViewPanel.selectColumns(CustomizeView.ADDITIONAL_CONSENT_LEARNING_DNA_WITH_INVITAE,

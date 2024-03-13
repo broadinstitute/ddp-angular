@@ -42,7 +42,7 @@ test.describe.serial(`${StudyName.OSTEO2}: Verify expected display of participan
     await customizeViewPanel.selectColumns(CV.COHORT_TAGS, [Label.COHORT_TAG_NAME]);
     await customizeViewPanel.selectColumns(CV.CLINICAL_ORDERS, [Label.CLINICAL_ORDER_PDO_NUMBER]);
     await customizeViewPanel.selectColumns(CV.RESEARCH_CONSENT_FORM, [Label.CONSENT_TISSUE], { nth: 0 }); //adult's consent
-    await customizeViewPanel.selectColumns(CV.ADDITIONAL_CONSENT_LEARNING_ABOUT_TUMOR, [Label.SOMATIC_CONSENT_TUMOR]);
+    await customizeViewPanel.selectColumns(CV.LEARN_ABOUT_YOUR_TUMOR, [Label.SOMATIC_CONSENT_TUMOR]);
     await customizeViewPanel.selectColumns(CV.WHAT_WE_LEARNED_FROM_SOMATIC_DNA, [Label.SOMATIC_RESULTS_SURVEY_CREATED]);
     await customizeViewPanel.selectColumns(CV.PREQUALIFIER_SURVEY, [Label.SELF_STATE]);
     await customizeViewPanel.selectColumns(CV.TISSUE, [Label.SM_ID_VALUE]);
@@ -487,12 +487,18 @@ test.describe.serial(`${StudyName.OSTEO2}: Verify expected display of participan
       //stuff here
     })
 
-    await test.step(`Verify: Loved One Survey Columns`, async () => {
-      //stuff here
-    })
-
     await test.step(`Verify: Additional Consent: Learning Abou Your Tumor Columns`, async () => {
-      //stuff here
+      await customizeViewPanel.openColumnGroup({ columnSection: CV.LEARN_ABOUT_YOUR_TUMOR, stableID: ID.LEARN_ABOUT_YOUR_TUMOR });
+
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.LEARN_ABOUT_YOUR_TUMOR, ID.LEARN_ABOUT_YOUR_TUMOR, Label.CONSENT_ADDENDUM_COMPLETED);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.LEARN_ABOUT_YOUR_TUMOR, ID.LEARN_ABOUT_YOUR_TUMOR, Label.CONSENT_ADDENDUM_CREATED);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.LEARN_ABOUT_YOUR_TUMOR, ID.LEARN_ABOUT_YOUR_TUMOR, Label.CONSENT_ADDENDUM_LAST_UPDATED);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.LEARN_ABOUT_YOUR_TUMOR, ID.LEARN_ABOUT_YOUR_TUMOR, Label.CONSENT_ADDENDUM_STATUS);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.LEARN_ABOUT_YOUR_TUMOR, ID.LEARN_ABOUT_YOUR_TUMOR, Label.SIGNATURE);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.LEARN_ABOUT_YOUR_TUMOR, ID.LEARN_ABOUT_YOUR_TUMOR, Label.SOMATIC_CONSENT_TUMOR);
+
+      await customizeViewPanel.closeColumnGroup({ columnSection: CV.LEARN_ABOUT_YOUR_TUMOR, stableID: ID.LEARN_ABOUT_YOUR_TUMOR });
+      console.log(`\n`);
     })
 
     await test.step(`Verify: Survey: About your child/you Columns`, async () => {
