@@ -347,7 +347,8 @@ export default class ParticipantListPage extends DsmPageBase {
   }
 
   //generalize this later
-  async findParticipantWithSingleCohortTag(tag: string): Promise<string> {
+  async findParticipantWithSingleCohortTag(opts: { tagName: string }): Promise<string> {
+    const { tagName } = opts;
     //Check that cohort tag column is already added to participant list - if it is not, add it
     const cohortTagColumnHeader = this.page.locator(`//th[normalize-space(text())='${CustomizeView.COHORT_TAGS}']`);
     if (!await cohortTagColumnHeader.isVisible()) {
