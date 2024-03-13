@@ -104,8 +104,9 @@ export class CustomizeView {
 
   public async openColumnGroup(opts: { columnSection: ColumnGroup, stableID: CustomizeViewID }): Promise<void> {
     const { columnSection, stableID } = opts; //use stable id to reduce the need for using nth
-    const button = this.page.locator(`//ul[@id='${stableID}']/preceding-sibling::button[.//text()[normalize-space()='${columnSection}']]`);
+    const button = this.page.locator(`//ul[@id='${stableID}']/preceding-sibling::button[.//text()[normalize-space()="${columnSection}"]]`);
     await expect(button).toBeVisible();
+    await button.scrollIntoViewIfNeeded();
     const isOpen = await this.dropdownOptionsDisplayed(button);
     if (!isOpen) {
       await button.click();
@@ -114,8 +115,9 @@ export class CustomizeView {
 
   public async closeColumnGroup(opts: { columnSection: ColumnGroup, stableID: CustomizeViewID }): Promise<void> {
     const { columnSection, stableID } = opts; //use stable id to reduce the need for using nth
-    const button = this.page.locator(`//ul[@id='${stableID}']/preceding-sibling::button[.//text()[normalize-space()='${columnSection}']]`);
+    const button = this.page.locator(`//ul[@id='${stableID}']/preceding-sibling::button[.//text()[normalize-space()="${columnSection}"]]`);
     await expect(button).toBeVisible();
+    await button.scrollIntoViewIfNeeded();
     const isOpen = await this.dropdownOptionsDisplayed(button);
     if (isOpen) {
       await button.click();
@@ -131,6 +133,7 @@ export class CustomizeView {
     const option = this.getColumnOption({ columnGroupName: columnSection, groupId: stableID, columnOption: columnName});
     console.log(`Checking for ${columnSection} \t->\t ${columnName}`);
     await expect(option).toHaveCount(1);
+    await option.scrollIntoViewIfNeeded();
     await expect(option).toBeVisible();
   }
 

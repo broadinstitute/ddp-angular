@@ -418,6 +418,115 @@ test.describe.serial(`${StudyName.OSTEO2}: Verify expected display of participan
       await customizeViewPanel.closeColumnGroup({ columnSection: CV.RESEARCH_CONSENT_FORM, stableID: ID.RESEARCH_CONSENT_FORM_KID });
       console.log(`\n`);
     })
+
+    await test.step(`Verify: Biological / Birth Parent 2: Assigned male at birth Columns`, async () => {
+      //stuff here
+    })
+
+    await test.step(`Verify: What We've Learned from Your Child's/Your Yumor (somatic) DNA Columns`, async () => {
+      //stuff here
+    })
+
+    await test.step(`Verify: Half-sibling Columns`, async () => {
+      //stuff here
+    })
+
+    await test.step(`Verify: Additional Consent: Learning More About Your DNA with Invitae Columns`, async () => {
+      //stuff here
+    })
+
+    await test.step(`Verify: Provide contact information Columns`, async () => {
+      //stuff here
+    })
+
+    await test.step(`Verify: Child Columns`, async () => {
+      //stuff here
+    })
+
+    await test.step(`Verify: Medical Release Form Columns [Adult]`, async () => {
+      //stuff here
+    })
+
+    await test.step(`Verify: Additional Details Columns`, async () => {
+      //stuff here
+    })
+
+    await test.step(`Verify: Add child participant Columns`, async () => {
+      //stuff here
+    })
+
+    await test.step(`Verify: Survey: Family History of Cancer Columns`, async () => {
+      //stuff here
+    })
+
+    await test.step(`Verify: Prequalifier Survey Columns`, async () => {
+      //stuff here
+    })
+
+    await test.step(`Verify: Survey: Your Child's/Your Osteosarcoma Columns`, async () => {
+      //stuff here
+    })
+
+    await test.step(`Verify: Grandparent Columns`, async () => {
+      //stuff here
+    })
+
+    await test.step(`Verify: Additional Consent & Assent: Learning About Your Child's Tumor Columns`, async () => {
+      //stuff here
+    })
+
+    await test.step(`Verify: Sibling Columns`, async () => {
+      //stuff here
+    })
+
+    await test.step(`Verify: Medical Release Form Columns [Pediatric]`, async () => {
+      //stuff here
+    })
+
+    await test.step(`Verify: Parent's Sibling Columns`, async () => {
+      //stuff here
+    })
+
+    await test.step(`Verify: Loved One Survey Columns`, async () => {
+      //stuff here
+    })
+
+    await test.step(`Verify: Additional Consent: Learning Abou Your Tumor Columns`, async () => {
+      //stuff here
+    })
+
+    await test.step(`Verify: Survey: About your child/you Columns`, async () => {
+      //stuff here
+    })
+
+    await test.step(`Verify: Invitae Columns`, async () => {
+      //stuff here
+    })
+
+    await test.step(`Verify: Proxy Columns`, async () => {
+      //stuff here
+    })
+
+    await test.step(`Verify: Invitation Columns`, async () => {
+      //stuff here
+    })
+
+    await test.step(`Verify: Contact Information Columns`, async () => {
+      await customizeViewPanel.openColumnGroup({ columnSection: CV.CONTACT_INFORMATION, stableID: ID.CONTACT_INFORMATION });
+
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.CONTACT_INFORMATION, ID.CONTACT_INFORMATION, Label.CITY);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.CONTACT_INFORMATION, ID.CONTACT_INFORMATION, Label.COUNTRY);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.CONTACT_INFORMATION, ID.CONTACT_INFORMATION, Label.MAIL_TO_NAME);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.CONTACT_INFORMATION, ID.CONTACT_INFORMATION, Label.PHONE);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.CONTACT_INFORMATION, ID.CONTACT_INFORMATION, Label.STATE);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.CONTACT_INFORMATION, ID.CONTACT_INFORMATION, Label.STREET_ONE);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.CONTACT_INFORMATION, ID.CONTACT_INFORMATION, Label.STREET_TWO);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.CONTACT_INFORMATION, ID.CONTACT_INFORMATION, Label.VALID);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.CONTACT_INFORMATION, ID.CONTACT_INFORMATION, Label.ZIP);
+
+      await customizeViewPanel.closeColumnGroup({ columnSection: CV.CONTACT_INFORMATION, stableID: ID.CONTACT_INFORMATION });
+      console.log(`\n`);
+    })
   })
 
   test.skip(`${StudyName.OSTEO2}: Verify a ptp with only 'OS PE-CGS' cohort tag only shows up in OS2 realm, not OS1`, async ({ page, request }) => {
