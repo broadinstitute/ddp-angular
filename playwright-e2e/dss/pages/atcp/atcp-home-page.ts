@@ -46,7 +46,7 @@ export default class AtcpHomePage extends AtcpPageBase implements HomePageInterf
     await joinUsPage.fillInName(firstName, lastName,
       { firstNameTestId: 'answer:PREQUAL_FIRST_NAME', lastNameTestId: 'answer:PREQUAL_LAST_NAME' });
 
-    await joinUsPage.prequalSelfDescribe.toRadiobutton().check("I'm a parent/legal guardian of someone who has A-T");
+    await joinUsPage.prequalSelfDescribe.toRadiobutton().check(reason);
     await joinUsPage.clickJoinUs();
 
     const userEmail = await auth.createAccountWithEmailAlias(this.page, {
