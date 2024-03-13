@@ -496,11 +496,40 @@ test.describe.serial(`${StudyName.OSTEO2}: Verify expected display of participan
     })
 
     await test.step(`Verify: Survey: About your child/you Columns`, async () => {
-      //stuff here
+      await customizeViewPanel.openColumnGroup({ columnSection: CV.SURVEY_ABOUT_YOU, stableID: ID.SURVEY_ABOUT_YOU });
+
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.SURVEY_ABOUT_YOU, ID.SURVEY_ABOUT_YOU, Label.ABOUT_YOU_ACTIVITY_SURVEY_COMPLETED);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.SURVEY_ABOUT_YOU, ID.SURVEY_ABOUT_YOU, Label.ABOUT_YOU_ACTIVITY_SURVEY_CREATED);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.SURVEY_ABOUT_YOU, ID.SURVEY_ABOUT_YOU, Label.ABOUT_YOU_ACTIVITY_SURVEY_LAST_UPDATED);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.SURVEY_ABOUT_YOU, ID.SURVEY_ABOUT_YOU, Label.ABOUT_YOU_ACTIVITY_SURVEY_STATUS);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.SURVEY_ABOUT_YOU, ID.SURVEY_ABOUT_YOU, Label.AFRO_HISPANIC);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.SURVEY_ABOUT_YOU, ID.SURVEY_ABOUT_YOU, Label.BIRTH_SEX_ASSIGN);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.SURVEY_ABOUT_YOU, ID.SURVEY_ABOUT_YOU, Label.CONFIDENCE_LEVEL_ID);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.SURVEY_ABOUT_YOU, ID.SURVEY_ABOUT_YOU, Label.GENDER_IDENTITY);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.SURVEY_ABOUT_YOU, ID.SURVEY_ABOUT_YOU, Label.HIGHEST_LEVEL_SCHOOL_ID);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.SURVEY_ABOUT_YOU, ID.SURVEY_ABOUT_YOU, Label.HOW_HEARD_ABOUT_PROJECT);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.SURVEY_ABOUT_YOU, ID.SURVEY_ABOUT_YOU, Label.INDIGENOUS_NATIVE);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.SURVEY_ABOUT_YOU, ID.SURVEY_ABOUT_YOU, Label.MIXED_RACE);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.SURVEY_ABOUT_YOU, ID.SURVEY_ABOUT_YOU, Label.OTHER_COMMENTS);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.SURVEY_ABOUT_YOU, ID.SURVEY_ABOUT_YOU, Label.PROBLEM_UNDERSTANDING_WRITTEN_ID);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.SURVEY_ABOUT_YOU, ID.SURVEY_ABOUT_YOU, Label.RACE_QUESTION);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.SURVEY_ABOUT_YOU, ID.SURVEY_ABOUT_YOU, Label.READ_HOSPITAL_MATERIALS_ID);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.SURVEY_ABOUT_YOU, ID.SURVEY_ABOUT_YOU, Label.WHAT_LANGUAGE_DO_YOU_SPEAK_AT_HOME);
+
+      await customizeViewPanel.closeColumnGroup({ columnSection: CV.SURVEY_ABOUT_YOU, stableID: ID.SURVEY_ABOUT_YOU });
+      console.log(`\n`);
     })
 
     await test.step(`Verify: Invitae Columns`, async () => {
-      //stuff here
+      await customizeViewPanel.openColumnGroup({ columnSection: CV.INVITAE, stableID: ID.INVITAE });
+
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.INVITAE, ID.INVITAE, Label.BAM_FILE_RECEIVED_FROM_INVITAE);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.INVITAE, ID.INVITAE, Label.DATE_BAM_FILE_RECEIVED_FROM_INVITAE);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.INVITAE, ID.INVITAE, Label.DATE_REPORT_RECEIVED_FROM_INVITAE);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.INVITAE, ID.INVITAE, Label.GERMLINE_RETURN_NOTES_FIELD);
+
+      await customizeViewPanel.closeColumnGroup({ columnSection: CV.INVITAE, stableID: ID.INVITAE });
+      console.log(`\n`);
     })
 
     await test.step(`Verify: Proxy Columns`, async () => {
