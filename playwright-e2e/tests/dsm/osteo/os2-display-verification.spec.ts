@@ -585,23 +585,31 @@ test.describe.serial(`${StudyName.OSTEO2}: Verify expected display of participan
     })
 
     await test.step(`Verify: Additional Consent & Assent: Learning About Your Child's Tumor Columns`, async () => {
-      //TODO
-      /*await customizeViewPanel.openColumnGroup({ columnSection: CV.COHORT_TAGS, stableID: ID.COHORT_TAG });
+      await customizeViewPanel.openColumnGroup({ columnSection: CV.LEARN_ABOUT_KID_TUMOR, stableID: ID.LEARN_ABOUT_KID_TUMOR });
 
-      await customizeViewPanel.assertColumnOptionDisplayed(CV.COHORT_TAGS, ID.COHORT_TAG, Label.COHORT_TAG_NAME);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.LEARN_ABOUT_KID_TUMOR, ID.LEARN_ABOUT_KID_TUMOR, Label.CONSENT_ADDENDUM_KID_COMPLETED);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.LEARN_ABOUT_KID_TUMOR, ID.LEARN_ABOUT_KID_TUMOR, Label.CONSENT_ADDENDUM_KID_CREATED);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.LEARN_ABOUT_KID_TUMOR, ID.LEARN_ABOUT_KID_TUMOR, Label.CONSENT_ADDENDUM_KID_UPDATED);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.LEARN_ABOUT_KID_TUMOR, ID.LEARN_ABOUT_KID_TUMOR, Label.CONSENT_ADDENDUM_KID_STATUS);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.LEARN_ABOUT_KID_TUMOR, ID.LEARN_ABOUT_KID_TUMOR, Label.SIGNATURE_WITHOUT_COLON);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.LEARN_ABOUT_KID_TUMOR, ID.LEARN_ABOUT_KID_TUMOR, Label.SIGNATURE);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.LEARN_ABOUT_KID_TUMOR, ID.LEARN_ABOUT_KID_TUMOR, Label.SOMATIC_ASSENT_ADDENDUM);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.LEARN_ABOUT_KID_TUMOR, ID.LEARN_ABOUT_KID_TUMOR, Label.SOMATIC_CONSENT_TUMOR_KID);
 
-      await customizeViewPanel.closeColumnGroup({ columnSection: CV.COHORT_TAGS, stableID: ID.COHORT_TAG });
-      console.log(`\n`);*/
+      await customizeViewPanel.closeColumnGroup({ columnSection: CV.LEARN_ABOUT_KID_TUMOR, stableID: ID.LEARN_ABOUT_KID_TUMOR });
+      console.log(`\n`);
     })
 
     await test.step(`Verify: Sibling Columns`, async () => {
-      //TODO
-      /*await customizeViewPanel.openColumnGroup({ columnSection: CV.COHORT_TAGS, stableID: ID.COHORT_TAG });
+      await customizeViewPanel.openColumnGroup({ columnSection: CV.SIBLING, stableID: ID.SIBLING });
 
-      await customizeViewPanel.assertColumnOptionDisplayed(CV.COHORT_TAGS, ID.COHORT_TAG, Label.COHORT_TAG_NAME);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.SIBLING, ID.SIBLING, Label.FAMILY_HISTORY_SELF_SIBLING_COMPLETED);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.SIBLING, ID.SIBLING, Label.FAMILY_HISTORY_SELF_SIBLING_CREATED);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.SIBLING, ID.SIBLING, Label.FAMILY_HISTORY_SELF_SIBLING_LAST_UPDATED);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.SIBLING, ID.SIBLING, Label.FAMILY_HISTORY_SELF_SIBLING_STATUS);
 
-      await customizeViewPanel.closeColumnGroup({ columnSection: CV.COHORT_TAGS, stableID: ID.COHORT_TAG });
-      console.log(`\n`);*/
+      await customizeViewPanel.closeColumnGroup({ columnSection: CV.SIBLING, stableID: ID.SIBLING });
+      console.log(`\n`);
     })
 
     await test.step(`Verify: Medical Release Form Columns [Pediatric]`, async () => {
