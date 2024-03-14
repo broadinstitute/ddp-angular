@@ -94,11 +94,17 @@ export class CustomizeView {
 
   public getColumnOption(opts: { columnGroupName: ColumnGroup, groupId: CustomizeViewID, columnOption: Label }): Locator {
     const {columnGroupName, groupId, columnOption} = opts;
-    const option = this.page.locator(
+    /*const option = this.page.locator(
       `//button[.//text()[normalize-space()='${columnGroupName}']]` +
       `/following-sibling::ul[contains(@id, '${groupId}')]` +
       `//mat-checkbox[.//text()[normalize-space()= '${columnOption}']]`
+    );*/
+    const checkbox = this.page.locator(
+      `//button[.//text()[normalize-space()='${columnGroupName}']]` +
+      `/following-sibling::ul[contains(@id, '${groupId}')]` +
+      `//mat-checkbox`
     );
+    const option = checkbox.getByText(columnOption, { exact: true });
     return option;
   }
 
