@@ -575,13 +575,22 @@ test.describe.serial(`${StudyName.OSTEO2}: Verify expected display of participan
     })
 
     await test.step(`Verify: Grandparent Columns`, async () => {
-      //TODO
-      /*await customizeViewPanel.openColumnGroup({ columnSection: CV.COHORT_TAGS, stableID: ID.COHORT_TAG });
+      await customizeViewPanel.openColumnGroup({ columnSection: CV.GRANDPARENT, stableID: ID.GRANDPARENT });
 
-      await customizeViewPanel.assertColumnOptionDisplayed(CV.COHORT_TAGS, ID.COHORT_TAG, Label.COHORT_TAG_NAME);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.GRANDPARENT, ID.GRANDPARENT, Label.FAMILY_HISTORY_SELF_GRANDPARENT_COMPLETED);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.GRANDPARENT, ID.GRANDPARENT, Label.FAMILY_HISTORY_SELF_GRANDPARENT_CREATED);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.GRANDPARENT, ID.GRANDPARENT, Label.FAMILY_HISTORY_SELF_GRANDPARENT_LAST_UPDATED);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.GRANDPARENT, ID.GRANDPARENT, Label.FAMILY_HISTORY_SELF_GRANDPARENT_STATUS);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.GRANDPARENT, ID.GRANDPARENT, Label.FH_GRANDPARENT_AGE_RANGE);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.GRANDPARENT, ID.GRANDPARENT, Label.FH_GRANDPARENT_CANCERS_LIST);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.GRANDPARENT, ID.GRANDPARENT, Label.FH_GRANDPARENT_HAD_CANCER);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.GRANDPARENT, ID.GRANDPARENT, Label.IS_THIS_PERSON_CURRENTLY_LIVING);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.GRANDPARENT, ID.GRANDPARENT, Label.NAME_OR_NICKNAME);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.GRANDPARENT, ID.GRANDPARENT, Label.WHAT_SEX_ASSIGNED_AT_BIRTH);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.GRANDPARENT, ID.GRANDPARENT, Label.WHICH_SIDE_OF_FAMILY_IS_THIS_PERSON_ON);
 
-      await customizeViewPanel.closeColumnGroup({ columnSection: CV.COHORT_TAGS, stableID: ID.COHORT_TAG });
-      console.log(`\n`);*/
+      await customizeViewPanel.closeColumnGroup({ columnSection: CV.GRANDPARENT, stableID: ID.GRANDPARENT });
+      console.log(`\n`);
     })
 
     await test.step(`Verify: Additional Consent & Assent: Learning About Your Child's Tumor Columns`, async () => {
