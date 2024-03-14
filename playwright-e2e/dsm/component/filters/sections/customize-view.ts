@@ -6,6 +6,12 @@ import { COLUMN } from 'dsm/pages/mailing-list-page';
 
 export class CustomizeView {
   private activeColumnsGroup = '';
+  //Some column group names are broken apart by other html tags
+  private columnGroupsUnableToUseExactName = [
+    ColumnGroup.BIRTH_PARENT_FEMALE,
+    ColumnGroup.BIRTH_PARENT_MALE
+  ];
+
   constructor(private readonly page: Page) {}
 
   public async open(): Promise<void> {
@@ -92,27 +98,35 @@ export class CustomizeView {
     return true;
   }
 
-  public getColumnOption(opts: { columnGroupName: ColumnGroup, groupId: CustomizeViewID, columnOption: Label }): Locator {
-    const {columnGroupName, groupId, columnOption} = opts;
-    /*const option = this.page.locator(
-      `//button[.//text()[normalize-space()='${columnGroupName}']]` +
-      `/following-sibling::ul[contains(@id, '${groupId}')]` +
-      `//mat-checkbox[.//text()[normalize-space()= '${columnOption}']]`
-    );*/
-    const button = this.page.getByRole('button', { name: columnGroupName }).locator(`//following-sibling::ul[contains(@id, '${groupId}')]`);
-    /*const checkbox = this.page.locator(
-      `//button[.//text()[normalize-space()='${columnGroupName}']]` +
-      `/following-sibling::ul[contains(@id, '${groupId}')]` +
-      `//mat-checkbox`
-    );*/
+  private useExactName(columnGroupName: ColumnGroup): boolean {
+    if (this.columnGroupsUnableToUseExactName.includes(columnGroupName)) {
+      return false;
+    }
+    return true;
+  }
+
+  public getColumnOption(opts: { columnGroupName: ColumnGroup, groupId: CustomizeViewID, columnOption: Label, instance?: number}): Locator {
+    const {columnGroupName, groupId, columnOption, instance = 0} = opts;
+    //button xpath includes dropdown list + stable id to reduce need of using nth
+    let button;
+    if (!this.useExactName(columnGroupName)) {
+      button = this.page.locator(`//button[contains(.,"${columnGroupName}")]/following-sibling::ul[@id='${groupId}']`);
+    } else {
+      button = this.page.getByRole('button', { name: columnGroupName, exact: true }).locator(`//following-sibling::ul[contains(@id, '${groupId}')]`);
+    }
     const checkbox = button.locator(`//mat-checkbox`);
-    const option = checkbox.getByText(columnOption, { exact: true });
+    const option = checkbox.getByText(columnOption, { exact: true }).nth(instance); //some column groups have multiple column options with the same name
     return option;
   }
 
   public async openColumnGroup(opts: { columnSection: ColumnGroup, stableID: CustomizeViewID }): Promise<void> {
     const { columnSection, stableID } = opts; //use stable id to reduce the need for using nth
-    const button = this.page.locator(`//ul[@id='${stableID}']/preceding-sibling::button[.//text()[normalize-space()="${columnSection}"]]`);
+    let button;
+    if (!this.useExactName(columnSection)) {
+      button = this.page.locator(`//ul[@id='${stableID}']/preceding-sibling::button[contains(., "${columnSection}")]`);
+    } else {
+      button = this.page.locator(`//ul[@id='${stableID}']/preceding-sibling::button[.//text()[normalize-space()="${columnSection}"]]`);
+    }
     await expect(button).toBeVisible();
     await button.scrollIntoViewIfNeeded();
     const isOpen = await this.dropdownOptionsDisplayed(button);
@@ -123,7 +137,12 @@ export class CustomizeView {
 
   public async closeColumnGroup(opts: { columnSection: ColumnGroup, stableID: CustomizeViewID }): Promise<void> {
     const { columnSection, stableID } = opts; //use stable id to reduce the need for using nth
-    const button = this.page.locator(`//ul[@id='${stableID}']/preceding-sibling::button[.//text()[normalize-space()="${columnSection}"]]`);
+    let button;
+    if (!this.useExactName(columnSection)) {
+      button = this.page.locator(`//ul[@id='${stableID}']/preceding-sibling::button[contains(., "${columnSection}")]`);
+    } else {
+      button = this.page.locator(`//ul[@id='${stableID}']/preceding-sibling::button[.//text()[normalize-space()="${columnSection}"]]`);
+    }
     await expect(button).toBeVisible();
     await button.scrollIntoViewIfNeeded();
     const isOpen = await this.dropdownOptionsDisplayed(button);
@@ -137,8 +156,12 @@ export class CustomizeView {
     return dropdownOptions.isVisible();
   }
 
-  public async assertColumnOptionDisplayed(columnSection: ColumnGroup, stableID: CustomizeViewID, columnName: Label): Promise<void> {
-    const option = this.getColumnOption({ columnGroupName: columnSection, groupId: stableID, columnOption: columnName});
+  public async assertColumnOptionDisplayed(
+    columnSection: ColumnGroup,
+    stableID: CustomizeViewID,
+    columnName: Label,
+    instance?: number): Promise<void> {
+    const option = this.getColumnOption({ columnGroupName: columnSection, groupId: stableID, columnOption: columnName, instance});
     console.log(`Checking for ${columnSection} \t->\t ${columnName}`);
     await expect(option).toHaveCount(1);
     await option.scrollIntoViewIfNeeded();
