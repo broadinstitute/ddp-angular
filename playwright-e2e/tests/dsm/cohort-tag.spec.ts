@@ -24,7 +24,7 @@ test.describe('Cohort tags', () => {
       // Inspect network requests to find a Playwright test user that does not have any cohort tag
       await page.route('**/*', async (route, request): Promise<void> => {
         const regex = new RegExp(/filterList/i);
-        if (request && !shortId && request.url().match(regex) && !shortId) {
+        if (request && !shortId && request.url().match(regex)) {
           logInfo(`Intercepting API request ${request.url()} for a E2E participant`);
           const response = await route.fetch({ timeout: 50000 });
           const json = JSON.parse(await response.text());
