@@ -1,4 +1,4 @@
-import type { PlaywrightTestConfig } from '@playwright/test';
+import { devices, type PlaywrightTestConfig } from '@playwright/test';
 import path from 'path';
 
 /**
@@ -9,6 +9,11 @@ import * as dotenv from 'dotenv';
 dotenv.config({ path: path.resolve(__dirname, '.env') });
 
 const { CI } = process.env;
+
+const viewport = {
+  width: 1600,
+  height: 960,
+};
 
 /**
  * Base Playwright TestConfig.
@@ -74,7 +79,7 @@ const testConfig: PlaywrightTestConfig = {
       ignoreDefaultArgs: ['--hide-scrollbars']
     },
     userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36',
-    viewport: { width: 1600, height: 960 },
+    viewport,
     ignoreHTTPSErrors: true,
 
     /* Maximum time each (browser) action such as `click()` can take. Defaults to 0 (no limit). */
@@ -103,13 +108,19 @@ const testConfig: PlaywrightTestConfig = {
       // Running DSM tests serially: npx playwright test --project="dsm" --workers=1
       name: 'dsm',
       testDir: 'tests/dsm',
-      use: {}
+      use: {
+        ...devices['Desktop Chrome'],
+        viewport
+      }
     },
     {
       name: 'dss',
       testDir: 'tests',
       testIgnore: ['tests/dsm/**/*.spec.ts'],
-      use: {}
+      use: {
+        ...devices['Desktop Chrome'],
+        viewport
+      }
     }
   ]
 };
