@@ -99,11 +99,13 @@ export class CustomizeView {
       `/following-sibling::ul[contains(@id, '${groupId}')]` +
       `//mat-checkbox[.//text()[normalize-space()= '${columnOption}']]`
     );*/
-    const checkbox = this.page.locator(
+    const button = this.page.getByRole('button', { name: columnGroupName }).locator(`//following-sibling::ul[contains(@id, '${groupId}')]`);
+    /*const checkbox = this.page.locator(
       `//button[.//text()[normalize-space()='${columnGroupName}']]` +
       `/following-sibling::ul[contains(@id, '${groupId}')]` +
       `//mat-checkbox`
-    );
+    );*/
+    const checkbox = button.locator(`//mat-checkbox`);
     const option = checkbox.getByText(columnOption, { exact: true });
     return option;
   }

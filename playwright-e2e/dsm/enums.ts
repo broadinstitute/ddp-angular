@@ -200,7 +200,7 @@ export enum Label {
   BLOCK_TO_SHL = 'Block to SHL',
   BLOCK_ID_TO_SHL = 'Block ID to SHL',
   BLOCKS_WITH_TUMOR = 'Blocks with Tumor',
-  CHILD_CURRENT_BODY_LOC = 'CHILD_CURRENTLY_BODY_LOC',
+  CHILD_CURRENT_BODY_LOC = 'CHILD_CURRENT_BODY_LOC',
   CHILD_CURRENTLY_TREATED = 'CHILD_CURRENTLY_TREATED',
   CHILD_DATE_OF_BIRTH = `Your child’s Date of Birth`, //Apostrophe type is important - don't change to the one on the MAC laptop or it'll never retreive the webelement
   CHILD_DIAGNOSIS_DATE = 'CHILD_DIAGNOSIS_DATE',

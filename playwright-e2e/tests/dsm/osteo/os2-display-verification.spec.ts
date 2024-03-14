@@ -339,7 +339,7 @@ test.describe.serial(`${StudyName.OSTEO2}: Verify expected display of participan
     })
 
     await test.step(`Verify: Survey: Your Child's Osteosarcoma Columns`, async () => {
-      /*await customizeViewPanel.openColumnGroup({ columnSection: CV.SURVEY_YOUR_CHILDS_OSTEO, stableID: ID.SURVEY_YOUR_CHILDS_OSTEO });
+      await customizeViewPanel.openColumnGroup({ columnSection: CV.SURVEY_YOUR_CHILDS_OSTEO, stableID: ID.SURVEY_YOUR_CHILDS_OSTEO });
 
       await customizeViewPanel.assertColumnOptionDisplayed(CV.SURVEY_YOUR_CHILDS_OSTEO, ID.SURVEY_YOUR_CHILDS_OSTEO, Label.ABOUT_CHILD_COMPLETED);
       await customizeViewPanel.assertColumnOptionDisplayed(CV.SURVEY_YOUR_CHILDS_OSTEO, ID.SURVEY_YOUR_CHILDS_OSTEO, Label.ABOUT_CHILD_CREATED);
@@ -362,7 +362,7 @@ test.describe.serial(`${StudyName.OSTEO2}: Verify expected display of participan
       await customizeViewPanel.assertColumnOptionDisplayed(CV.SURVEY_YOUR_CHILDS_OSTEO, ID.SURVEY_YOUR_CHILDS_OSTEO, Label.WHO_IS_FILLING_OUT_SURVEY);
 
       await customizeViewPanel.closeColumnGroup({ columnSection: CV.SURVEY_YOUR_CHILDS_OSTEO, stableID: ID.SURVEY_YOUR_CHILDS_OSTEO });
-      console.log(`\n`);*/
+      console.log(`\n`);
     })
 
     await test.step(`Verify: Additional Consent & Assent: Learning More About Your Child's DNA with Invitae Columns`, async () => {
