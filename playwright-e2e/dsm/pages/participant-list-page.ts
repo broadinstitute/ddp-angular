@@ -271,9 +271,9 @@ export default class ParticipantListPage extends DsmPageBase {
     const filterResponse = await searchPanel.search({ uri });
     let responseJson = JSON.parse(await filterResponse.text());
 
-    const endTime = Date.now() + 30 * 1000;
+    const endTime = Date.now() + 50 * 1000;
     let counter = 0; // num of participants being looked at
-    while (counter <= 30) {
+    while (counter <= 200) {
       for (const [index, value] of [...responseJson.participants].entries()) {
         counter++;
         let shortID: string;
@@ -322,14 +322,9 @@ export default class ParticipantListPage extends DsmPageBase {
       } // end of for ...entries()
 
       // Get new /filterList response by go to the next page
-      const hasNextPage = await this._table.paginator.hasNext();
-      if (!hasNextPage || Date.now() > endTime) {
-        if (tab) {
-          throw new Error(`Cannot find a participant with tab: ${tab} (num of participants: ${counter})`);
-        }
-        if (rgpProbandTab) {
-          throw new Error(`Cannot find a participant with the RGP Proband tab (num of participants: ${counter})`);
-        }
+      const hasNext = await this._table.paginator.hasNext();
+      if (!hasNext || Date.now() > endTime) {
+        break; // no more participants or exceeded max timeout
       }
 
       // continue with finding
@@ -337,7 +332,7 @@ export default class ParticipantListPage extends DsmPageBase {
       responseJson = JSON.parse(await nextPageResponse.text());
     } // end of while
 
-    throw new Error(`Cannot find a suitable participant with the ${tab} tab`);
+    throw new Error(`Cannot find a participant with RGP Proband tab or ${tab} tab. (checked num of participants: ${counter})`);
   }
 
   async findParticipantForKitUpload(opts: { allowNewYorkerOrCanadian: boolean, firstNameSubstring?: string }): Promise<number> {
