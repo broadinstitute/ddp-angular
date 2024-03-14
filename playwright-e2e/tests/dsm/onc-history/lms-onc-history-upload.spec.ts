@@ -66,7 +66,6 @@ test.describe('Upload Onc History', () => {
 
       // Find the first participant that has DSM and ES Participant ID.
       shortId = await participantListPage.findParticipantWithTab({
-        findPediatricParticipant: false,
         tab: Tab.ONC_HISTORY,
         uri: 'filterList'
       });

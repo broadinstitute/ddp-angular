@@ -245,88 +245,94 @@ export default class ParticipantListPage extends DsmPageBase {
    * @returns A participant with the requested tab
    */
   async findParticipantWithTab(
-    opts: { findPediatricParticipant: boolean, tab?: Tab, rgpProbandTab?: boolean, uri?: string, prefix?: string }
-    ): Promise<string> {
-    const { findPediatricParticipant = false, tab, rgpProbandTab = false, uri: uriString = '/ui/applyFilter', prefix } = opts;
-    const searchPanel = this.filters.searchPanel;
-    await searchPanel.open();
-    const applyFilterResponse = await searchPanel.search({ uri: uriString });
+    opts: {
+      isPediatric?: boolean,
+      tab?: Tab,
+      rgpProbandTab?: boolean,
+      uri?: string,
+      prefix?: string
+    }): Promise<string> {
+    const { isPediatric = false, tab, rgpProbandTab = false, uri = '/ui/applyFilter', prefix } = opts;
 
-    let foundShortID = '';
-    let unformattedFirstName: string;
-    let firstName: string;
+    if (tab !== Tab.ONC_HISTORY && tab !== Tab.MEDICAL_RECORD && !rgpProbandTab) {
+      throw new Error(`Undefined actions for tab: "${tab}" and rgpProbandTab: "${rgpProbandTab}"`);
+    }
+
     let testParticipantFirstName: string;
-
     if (prefix) {
       //If the automated participants for a study use a different prefix or name set-up than E2E, search for them using this info
       testParticipantFirstName = prefix;
     } else {
-      testParticipantFirstName = findPediatricParticipant ? user.child.firstName : user.adult.firstName; //Make sure to return automated test pts only
+      testParticipantFirstName = isPediatric ? user.child.firstName : user.adult.firstName; //Make sure to return automated test pts only
     }
 
-    let responseJson = JSON.parse(await applyFilterResponse.text());
-    const amountOfParticipantsDisplayed = responseJson.participants.length;
+    const searchPanel = this.filters.searchPanel;
+    await searchPanel.open();
+    const filterResponse = await searchPanel.search({ uri });
+    let responseJson = JSON.parse(await filterResponse.text());
 
-    //Find a participant who currently has the specified tab
-    do {
+    const endTime = Date.now() + 50 * 1000;
+    let counter = 0; // num of participants being looked at
+    while (counter <= 200) {
       for (const [index, value] of [...responseJson.participants].entries()) {
-        //The onc history tab will usually appear along with a medical record tab
-        //Checking for the medical record tab allows catching those who do not yet have an onc history detail/row/data (but have the tab itself)
-        if (tab === Tab.ONC_HISTORY) {
+        counter++;
+        let shortID: string;
+        let firstName = value.esData.profile?.firstName;
+        if (!firstName) {
+          // must have a value for First Name
+          continue;
+        }
+        firstName = JSON.stringify(firstName).replace(/['"]+/g, '');
+        if (!firstName.includes(testParticipantFirstName)) {
+          // must be PW test user
+          continue;
+        }
+
+        // The onc history tab will usually appear along with a medical record tab
+        // Checking for the medical record tab allows catching those who do not yet have an onc history detail/row/data (but have the tab itself)
+        if (tab === Tab.ONC_HISTORY || tab === Tab.MEDICAL_RECORD) {
           const medicalRecord = value.medicalRecords[0];
           const hasConsentedToTissue = value.esData.dsm.hasConsentedToTissueSample;
-          if (medicalRecord === undefined || hasConsentedToTissue === false) {
-            continue; //Participant does not have a Medical Record tab for some reason or has not consented to tissue samples (so tab should be there but no history should be entered), skip them
+          if (!medicalRecord || !hasConsentedToTissue) {
+            // Does not have a Medical Records tab or has not consented to tissue samples,
+            continue;
           }
-          unformattedFirstName = JSON.stringify(value.esData.profile.firstName);
-          firstName = unformattedFirstName.replace(/['"]+/g, ''); //Replace double quotes from JSON.stringify
+
           const participantID = value.participant.participantId; //Make sure when searching for onc history that the participant has a participantId in ES
-          if (medicalRecord && participantID && (firstName.includes(testParticipantFirstName))) {
-            foundShortID = JSON.stringify(value.esData.profile.hruid).replace(/['"]+/g, '');
-            logInfo(`Found the participant ${foundShortID} to have an onc history tab`);
-            break;
+          if (medicalRecord && participantID) {
+            shortID = JSON.stringify(value.esData.profile.hruid).replace(/['"]+/g, '');
+            if (!rgpProbandTab) {
+              // Do not have to find RGP Proband tab
+              logInfo(`Found participant with Short ID: ${shortID} to have tab: ${tab}`);
+              return shortID;
+            }
           }
         }
 
         if (rgpProbandTab) {
-          //If the participant has participantData, this seems to mean there's a proband tab in the account
-          const participantData = value.participantData[0];
-          if (participantData === undefined) {
-            continue; //Participant does not have a proband tab for some reason, skip them
-          }
-          firstName = value.esData.profile?.firstName;
-          if (!firstName) {
+          // Data in participantData seems to mean there's a proband tab
+          const participantData = value.participantData;
+          if (!participantData || participantData[0] === undefined) {
             continue;
           }
-          unformattedFirstName = JSON.stringify(firstName);
-          if (participantData && (firstName === testParticipantFirstName)) {
-            foundShortID = JSON.stringify(value.esData.profile.hruid).replace(/['"]+/g, '');
-            logInfo(`Found the RGP participant ${foundShortID} to have a proband tab`);
-            break;
-          }
+          shortID = JSON.stringify(value.esData.profile.hruid).replace(/['"]+/g, '');
+          logInfo(`Found RGP participant with Short ID: ${shortID} to have proband tabs`);
+          return shortID;
         }
+      } // end of for ...entries()
 
-        //Go to the next page if none of the participants in the current page are relevant
-        if (index === (amountOfParticipantsDisplayed - 1)) {
-          const hasNextPage = await this._table.paginator.hasNext();
-          if (hasNextPage) {
-            const [nextPageResponse] = await Promise.all([
-              waitForResponse(this.page, {uri: 'ui/filterList'}),
-              this._table.nextPage()
-            ]);
-            responseJson = JSON.parse(await nextPageResponse.text());
-          } else {
-            if (tab) {
-              throw new Error(`Could not find a participant with the ${tab} tab`);
-            }
-            if (rgpProbandTab) {
-              throw new Error(`Could not find a participant with the RGP Proband tab`);
-            }
-          }
-        }
+      // Get new /filterList response by go to the next page
+      const hasNext = await this._table.paginator.hasNext();
+      if (!hasNext || Date.now() > endTime) {
+        break; // no more participants or exceeded max timeout
       }
-    } while (foundShortID === '');
-    return foundShortID;
+
+      // continue with finding
+      const nextPageResponse = await this._table.nextPage();
+      responseJson = JSON.parse(await nextPageResponse.text());
+    } // end of while
+
+    throw new Error(`Cannot find a participant with RGP Proband tab or ${tab} tab. (checked num of participants: ${counter})`);
   }
 
   async findParticipantForKitUpload(opts: { allowNewYorkerOrCanadian: boolean, firstNameSubstring?: string }): Promise<number> {
@@ -431,7 +437,7 @@ export default class ParticipantListPage extends DsmPageBase {
     let participantsCount = await participantListTable.rowsCount;
     expect(participantsCount).toBeGreaterThanOrEqual(1);
 
-    const endTime = Date.now() + 90 * 1000;
+    const endTime = Date.now() + 50 * 1000;
     while (participantsCount > 0 && Date.now() < endTime) {
       let rowIndex = -1;
       // Iterate rows in random order
