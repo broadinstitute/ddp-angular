@@ -71,7 +71,6 @@ test.describe('Upload Onc History', () => {
       const basicStudyInfo = studyShortName(StudyName.OSTEO2);
       const playwrightTestUserPrefix = basicStudyInfo.playwrightPrefixAdult as string;
       shortId = await participantListPage.findParticipantWithTab({
-        findPediatricParticipant: false,
         tab: Tab.ONC_HISTORY,
         uri: 'filterList',
         prefix: playwrightTestUserPrefix

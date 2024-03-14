@@ -1,4 +1,4 @@
-import { Locator, Page } from '@playwright/test';
+import { Locator, Page, Response } from '@playwright/test';
 import Table from 'dss/component/table';
 import ParticipantPage from 'dsm/pages/participant-page';
 import { rows } from 'lib/component/dsm/paginators/types/rowsPerPage';
@@ -17,8 +17,8 @@ export class ParticipantListTable extends Table {
     await this.paginator.pageAt(page);
   }
 
-  public async nextPage(): Promise<void> {
-    await this.paginator.next();
+  public async nextPage(): Promise<Response> {
+    return await this.paginator.next();
   }
 
   public async previousPage(): Promise<void> {
