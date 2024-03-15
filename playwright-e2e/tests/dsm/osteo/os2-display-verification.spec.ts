@@ -856,7 +856,7 @@ test.describe.serial(`${StudyName.OSTEO2}: Verify expected display of participan
     })
   })
 
-  test.skip(`${StudyName.OSTEO2}: Verify a ptp with only 'OS PE-CGS' cohort tag only shows up in OS2 realm, not OS1`, async ({ page, request }) => {
+  test(`${StudyName.OSTEO2}: Verify a ptp with only 'OS PE-CGS' cohort tag only shows up in OS2 realm, not OS1`, async ({ page, request }) => {
     navigation = new Navigation(page, request);
     await new Select(page, { label: 'Select study' }).selectOption(StudyName.OSTEO2);
 
@@ -869,6 +869,14 @@ test.describe.serial(`${StudyName.OSTEO2}: Verify expected display of participan
     await customizeViewPanel.close();
 
     const shortId = await participantListPage.findParticipantWithSingleCohortTag({ tagName: StudyName.OSTEO2 });
+
+    await test.step(`Find a participant in OS2 that only has the OS PE-CGS cohort tag`, async () => {
+      //stuff here
+    })
+
+    await test.step(`Check that the participant found above is not found within DSM -> OS1 Participant List`, async () => {
+      //stuff here
+    })
   })
 
   test.skip(`${StudyName.OSTEO2}: Verify general appearance of participant page`, async ({ page, request }) => {

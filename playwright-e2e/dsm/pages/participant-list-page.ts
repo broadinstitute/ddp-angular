@@ -356,24 +356,46 @@ export default class ParticipantListPage extends DsmPageBase {
   async findParticipantWithSingleCohortTag(opts: { tagName: string }): Promise<string> {
     const { tagName } = opts;
     //Check that cohort tag column is already added to participant list - if it is not, add it
-    const cohortTagColumnHeader = this.page.locator(`//th[normalize-space(text())='${CustomizeView.COHORT_TAGS}']`);
+    const cohortTagColumnHeader = this.page.locator(`//th[normalize-space(text())='${Label.COHORT_TAG_NAME}']`);
     if (!await cohortTagColumnHeader.isVisible()) {
       const customizeViewPanel = this.filters.customizeViewPanel;
       await customizeViewPanel.open();
       await customizeViewPanel.selectColumns(CustomizeView.COHORT_TAGS, [Label.COHORT_TAG_NAME]);
+      await expect(cohortTagColumnHeader).toBeVisible();
       await customizeViewPanel.close();
     }
 
-    //Search for a participant that only has an 'OS PE-CGS' cohort tag (shows they registereed + enrolled in OS2 only)
+    //Search for a participant that only has an 'OS PE-CGS' cohort tag (shows they registered + enrolled in OS2 only)
     const participantListTable = this.participantListTable;
     let amountOfParticipantsDisplayed = await participantListTable.rowsCount;
+
     let shortId = '';
+    const endTime = Date.now() + 50 * 1000;
 
-    do {
+    while (shortId === '') {
+      for (let index = 0; index < amountOfParticipantsDisplayed; index++) {
+        const info = await participantListTable.getParticipantDataAt(index, Label.COHORT_TAG_NAME);
+        const infoArray = info.split(`\n\n`); //multiple cohort tags are split using this
+        if (infoArray.length === 1 && infoArray[0] === tagName) {
+          shortId = await participantListTable.getParticipantDataAt(index, Label.SHORT_ID);
+          console.log(`Short id ${shortId} was found to only contain the cohort tag ${tagName}`);
+          break;
+        }
+      }
 
-    } while (shortId === '');
+      if (shortId === '') {
+        // Get new /filterList response by go to the next page
+        const hasNext = await this._table.paginator.hasNext();
+        if (!hasNext || Date.now() > endTime) {
+          break; // no more participants or exceeded max timeout
+        }
+        await participantListTable.nextPage();
+        amountOfParticipantsDisplayed = await participantListTable.rowsCount;
+        }
+    }
 
     //Return participant
+    return shortId;
   }
 
   async findParticipantForKitUpload(opts: { allowNewYorkerOrCanadian: boolean, firstNameSubstring?: string }): Promise<number> {
