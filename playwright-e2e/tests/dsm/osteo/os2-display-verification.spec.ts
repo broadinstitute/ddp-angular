@@ -862,16 +862,15 @@ test.describe.serial(`${StudyName.OSTEO2}: Verify expected display of participan
 
     const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(Study.PARTICIPANT_LIST);
     await participantListPage.waitForReady();
-
-    const customizeViewPanel = participantListPage.filters.customizeViewPanel;
-    await customizeViewPanel.open();
-    await customizeViewPanel.selectColumns(CV.COHORT_TAGS, [Label.COHORT_TAG_NAME]);
-    await customizeViewPanel.close();
-
-    const shortId = await participantListPage.findParticipantWithSingleCohortTag({ tagName: StudyName.OSTEO2 });
+    let shortId;
 
     await test.step(`Find a participant in OS2 that only has the OS PE-CGS cohort tag`, async () => {
-      //stuff here
+      const customizeViewPanel = participantListPage.filters.customizeViewPanel;
+      await customizeViewPanel.open();
+      await customizeViewPanel.selectColumns(CV.COHORT_TAGS, [Label.COHORT_TAG_NAME]);
+      await customizeViewPanel.close();
+
+      shortId = await participantListPage.findParticipantWithSingleCohortTag({ tagName: StudyName.OSTEO2 });
     })
 
     await test.step(`Check that the participant found above is not found within DSM -> OS1 Participant List`, async () => {

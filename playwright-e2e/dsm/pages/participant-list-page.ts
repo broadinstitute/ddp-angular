@@ -387,7 +387,7 @@ export default class ParticipantListPage extends DsmPageBase {
         // Get new /filterList response by go to the next page
         const hasNext = await this._table.paginator.hasNext();
         if (!hasNext || Date.now() > endTime) {
-          break; // no more participants or exceeded max timeout
+          throw new Error(`No participants with only the cohort tag ${tagName} were found`);
         }
         await participantListTable.nextPage();
         amountOfParticipantsDisplayed = await participantListTable.rowsCount;
