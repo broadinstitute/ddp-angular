@@ -727,6 +727,12 @@ test.describe.serial(`${StudyName.OSTEO2}: Verify expected display of participan
       await customizeViewPanel.assertColumnOptionDisplayed(CV.SIBLING, ID.SIBLING, Label.FAMILY_HISTORY_SIBLING_CREATED);
       await customizeViewPanel.assertColumnOptionDisplayed(CV.SIBLING, ID.SIBLING, Label.FAMILY_HISTORY_SIBLING_LAST_UPDATED);
       await customizeViewPanel.assertColumnOptionDisplayed(CV.SIBLING, ID.SIBLING, Label.FAMILY_HISTORY_SIBLING_STATUS);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.SIBLING, ID.SIBLING, Label.FH_SIBLING_AGE_RANGE);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.SIBLING, ID.SIBLING, Label.FH_SIBLING_CANCERS_LIST);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.SIBLING, ID.SIBLING, Label.FH_SIBLING_HAD_CANCER);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.SIBLING, ID.SIBLING, Label.IS_THIS_PERSON_CURRENTLY_LIVING);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.SIBLING, ID.SIBLING, Label.NAME_OR_NICKNAME);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.SIBLING, ID.SIBLING, Label.WHAT_SEX_ASSIGNED_AT_BIRTH);
 
       await customizeViewPanel.closeColumnGroup({ columnSection: CV.SIBLING, stableID: ID.SIBLING });
     })
