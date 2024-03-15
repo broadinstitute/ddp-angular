@@ -34,7 +34,7 @@ test.describe.skip('Tissue Request Flow', () => {
 
         await searchPanel.search();
         shortID = await participantListPage.findParticipantWithTab(
-          { findPediatricParticipant: false, tab: Tab.ONC_HISTORY, uri: 'ui/filterList'}
+          { tab: Tab.ONC_HISTORY, uri: 'ui/filterList'}
         );
         expect(shortID?.length).toStrictEqual(6);
         logInfo(`Short id: ${shortID}`);

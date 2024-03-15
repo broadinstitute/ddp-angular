@@ -36,7 +36,7 @@ test.describe.serial('Onc History', () => {
 
       await searchPanel.search();
       shortID = await participantListPage.findParticipantWithTab(
-        { findPediatricParticipant: false, tab: Tab.ONC_HISTORY, uri: 'ui/filterList'}
+        { tab: Tab.ONC_HISTORY, uri: 'ui/filterList'}
       );
       logInfo(`Short id: ${shortID}`);
       expect(shortID?.length).toBeTruthy();

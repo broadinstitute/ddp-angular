@@ -1,4 +1,4 @@
-import {expect, Page} from '@playwright/test';
+import {expect, Page, Response} from '@playwright/test';
 import {waitForNoSpinner, waitForResponse} from 'utils/test-utils';
 import {rows} from './types/rowsPerPage';
 
@@ -23,8 +23,8 @@ export class ParticipantsListPaginator {
     await this.paginateAt(page);
   }
 
-  public async next(): Promise<void> {
-    await this.paginate(this.nextXPath);
+  public async next(): Promise<Response> {
+    return await this.paginate(this.nextXPath);
   }
 
   public async hasNext(): Promise<boolean> {
@@ -38,7 +38,7 @@ export class ParticipantsListPaginator {
     await this.paginate(this.previousXPath);
   }
 
-  private async paginate(xpath: string): Promise<void> {
+  private async paginate(xpath: string): Promise<Response> {
     const paginatorLocator = this.page.locator(xpath);
     const isDisabled = (await paginatorLocator.getAttribute('class'))?.includes('disabled');
     if (isDisabled) {
@@ -46,7 +46,7 @@ export class ParticipantsListPaginator {
     }
     const waitPromise = this.waitForReady();
     await paginatorLocator.click();
-    await waitPromise;
+    return await waitPromise;
   }
 
   private async paginateAt(page: number): Promise<void> {
@@ -57,12 +57,13 @@ export class ParticipantsListPaginator {
     await waitPromise;
   }
 
-  private async waitForReady(): Promise<void> {
-    await Promise.race([
+  private async waitForReady(): Promise<Response> {
+    const resp = await Promise.race([
       waitForResponse(this.page, {uri: 'filterList'}),
       waitForResponse(this.page, {uri: 'applyFilter'})
     ]);
     await waitForNoSpinner(this.page);
+    return resp;
   }
 
   /* XPaths */

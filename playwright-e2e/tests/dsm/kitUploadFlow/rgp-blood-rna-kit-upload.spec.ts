@@ -46,7 +46,7 @@ test.describe('Blood & RNA Kit Upload', () => {
     await participantListPage.waitForReady();
 
     const participantListTable = new ParticipantListTable(page);
-    const participantShortID = await participantListPage.findParticipantWithTab({ findPediatricParticipant: false, rgpProbandTab: true });
+    const participantShortID = await participantListPage.findParticipantWithTab({ rgpProbandTab: true });
 
     const customizeViewPanel = participantListPage.filters.customizeViewPanel;
     await customizeViewPanel.open();
