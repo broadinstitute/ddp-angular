@@ -860,9 +860,9 @@ test.describe.serial(`${StudyName.OSTEO2}: Verify expected display of participan
     navigation = new Navigation(page, request);
     await new Select(page, { label: 'Select study' }).selectOption(StudyName.OSTEO2);
 
-    const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(Study.PARTICIPANT_LIST);
+    let participantListPage = await navigation.selectFromStudy<ParticipantListPage>(Study.PARTICIPANT_LIST);
     await participantListPage.waitForReady();
-    let shortId;
+    let shortId: string;
 
     await test.step(`Find a participant in OS2 that only has the OS PE-CGS cohort tag`, async () => {
       const customizeViewPanel = participantListPage.filters.customizeViewPanel;
@@ -874,7 +874,19 @@ test.describe.serial(`${StudyName.OSTEO2}: Verify expected display of participan
     })
 
     await test.step(`Check that the participant found above is not found within DSM -> OS1 Participant List`, async () => {
-      //stuff here
+      navigation = new Navigation(page, request);
+      await navigation.selectStudy(StudyName.OSTEO);
+
+      participantListPage = await navigation.selectFromStudy<ParticipantListPage>(Study.PARTICIPANT_LIST); //realsAllowed check fails in OS1 - check here
+      //await participantListPage.waitForReady(); -check this because it fails here for OS1
+      const searchPanel = participantListPage.filters.searchPanel;
+      await searchPanel.open();
+      await searchPanel.text(Label.SHORT_ID, { textValue: shortId, exactMatch: true });
+      await searchPanel.search();
+
+      const osteoParticipantListTable = participantListPage.participantListTable;
+      const numberOfParticipantsDisplayed = await osteoParticipantListTable.rowsCount;
+      expect(numberOfParticipantsDisplayed, `The OS2 participant ${shortId} was found to also be displayed in OS1 Participant List`).toBe(0);
     })
   })
 
