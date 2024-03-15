@@ -565,13 +565,31 @@ test.describe.serial(`${StudyName.OSTEO2}: Verify expected display of participan
     })
 
     await test.step(`Verify: Survey: Your Child's/Your Osteosarcoma Columns`, async () => {
-      //TODO
-      /*await customizeViewPanel.openColumnGroup({ columnSection: CV.COHORT_TAGS, stableID: ID.COHORT_TAG });
+      await customizeViewPanel.openColumnGroup({ columnSection: CV.SURVEY_YOUR_OSTEO, stableID: ID.SURVEY_YOUR_OSTEO});
 
-      await customizeViewPanel.assertColumnOptionDisplayed(CV.COHORT_TAGS, ID.COHORT_TAG, Label.COHORT_TAG_NAME);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.SURVEY_YOUR_OSTEO, ID.SURVEY_YOUR_OSTEO, Label.ABOUT_YOUR_OSTEO_SURVEY_COMPLETED);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.SURVEY_YOUR_OSTEO, ID.SURVEY_YOUR_OSTEO, Label.ABOUT_YOUR_OSTEO_SURVEY_CREATED);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.SURVEY_YOUR_OSTEO, ID.SURVEY_YOUR_OSTEO, Label.ABOUT_YOUR_OSTEO_SURVEY_LAST_UPDATED);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.SURVEY_YOUR_OSTEO, ID.SURVEY_YOUR_OSTEO, Label.ABOUT_YOUR_OSTEO_SURVEY_STATUS);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.SURVEY_YOUR_OSTEO, ID.SURVEY_YOUR_OSTEO, Label.CURRENT_BODY_LOC);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.SURVEY_YOUR_OSTEO, ID.SURVEY_YOUR_OSTEO, Label.CURRENTLY_TREATED);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.SURVEY_YOUR_OSTEO, ID.SURVEY_YOUR_OSTEO, Label.DIAGNOSIS_DATE);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.SURVEY_YOUR_OSTEO, ID.SURVEY_YOUR_OSTEO, Label.EVER_RELAPSED);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.SURVEY_YOUR_OSTEO, ID.SURVEY_YOUR_OSTEO, Label.EXPERIENCE);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.SURVEY_YOUR_OSTEO, ID.SURVEY_YOUR_OSTEO, Label.HAD_RADIATION);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.SURVEY_YOUR_OSTEO, ID.SURVEY_YOUR_OSTEO, Label.HISPANIC);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.SURVEY_YOUR_OSTEO, ID.SURVEY_YOUR_OSTEO, Label.HOW_HEARD_ABOUT_PROJECT);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.SURVEY_YOUR_OSTEO, ID.SURVEY_YOUR_OSTEO, Label.INITIAL_BODY_LOC);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.SURVEY_YOUR_OSTEO, ID.SURVEY_YOUR_OSTEO, Label.OTHER_CANCERS);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.SURVEY_YOUR_OSTEO, ID.SURVEY_YOUR_OSTEO, Label.OTHER_CANCERS_LIST);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.SURVEY_YOUR_OSTEO, ID.SURVEY_YOUR_OSTEO, Label.SYMPTOMS_START_TIME);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.SURVEY_YOUR_OSTEO, ID.SURVEY_YOUR_OSTEO, Label.THERAPIES_RECEIVED);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.SURVEY_YOUR_OSTEO, ID.SURVEY_YOUR_OSTEO, Label.WHAT_IS_YOUR_RACE);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.SURVEY_YOUR_OSTEO, ID.SURVEY_YOUR_OSTEO, Label.WHO_IS_FILLING_OUT_SURVEY, 0);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.SURVEY_YOUR_OSTEO, ID.SURVEY_YOUR_OSTEO, Label.WHO_IS_FILLING_OUT_SURVEY, 1);
 
-      await customizeViewPanel.closeColumnGroup({ columnSection: CV.COHORT_TAGS, stableID: ID.COHORT_TAG });
-      console.log(`\n`);*/
+      await customizeViewPanel.closeColumnGroup({ columnSection: CV.SURVEY_YOUR_OSTEO, stableID: ID.SURVEY_YOUR_OSTEO});
+      console.log(`\n`);
     })
 
     await test.step(`Verify: Grandparent Columns`, async () => {
