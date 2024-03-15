@@ -154,8 +154,6 @@ test.describe.serial(`${StudyName.OSTEO2}: Verify expected display of participan
       await participantListPage.assertBulkCohortTagDisplayed();
     })
 
-    //TODO add a method to check all possible column options are as expected for Customize View
-    //Break each column group into test.step() and check them
     const customizeViewPanel = participantListPage.filters.customizeViewPanel;
     await customizeViewPanel.open();
 
