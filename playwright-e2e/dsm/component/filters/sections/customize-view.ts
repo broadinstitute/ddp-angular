@@ -149,6 +149,7 @@ export class CustomizeView {
     if (isOpen) {
       await button.click();
     }
+    console.log(`\n`);
   }
 
   private async dropdownOptionsDisplayed(button: Locator): Promise<boolean> {
