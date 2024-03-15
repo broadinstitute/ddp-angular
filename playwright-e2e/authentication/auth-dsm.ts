@@ -19,20 +19,22 @@ export async function login(page: Page, opts: { email?: string; password?: strin
 
   const assertLogIn = async (page: Page): Promise<boolean> => {
     const timeout = 30 * 1000;
-    const status = await Promise.race([
-      expect(authWindow).toBeVisible().then(() => 'Fail'),
-      expect(page).toHaveTitle('Select study').then(() => 'Pass'),
-      // Throw error when neither is resolved
-      new Promise((_, reject) => setTimeout(() => reject(Error('Timeout Error: Fail to confirm Log in successful.')), timeout)),
-    ]);
-    if (status === 'Pass') {
-      return true;
+    const endTime = Date.now() + timeout;
+    while (Date.now() <= endTime) {
+      try {
+        await expect(page).toHaveTitle('Select study', { timeout: 2000 });
+        return true; // login is successful
+      } catch (err) { /* empty */ }
+      try {
+        await expect(authWindow).toBeVisible({ timeout: 1000 });
+        return false; // login window is found
+      } catch (errr) { /* empty */ }
     }
     return false;
   };
 
   const doLogIn = async () => {
-    // Before fill out email and password, ensure LogIn window completed loading.
+    // Before fill out email and password, ensure LogIn window is visible.
     await expect(authWindow).toBeVisible({ timeout: 5 * 1000 });
     await expect(page.locator('.auth0-loading').first()).toBeHidden();
     await fillInEmailPassword(page, { email, password, waitForNavigation: false });
@@ -44,8 +46,8 @@ export async function login(page: Page, opts: { email?: string; password?: strin
   if (status) {
     return;
   }
-  // Retry login if login window is still present (POST /auth0 fails intermittenly)
+  // Retry login one more time if login window is still present (POST /auth0 fails intermittenly)
   await doLogIn();
   await assertLogIn(page);
-  await expect(page).toHaveTitle('Select study');
+  await expect(page, `DSM log in failed. Email: ${email}`).toHaveTitle('Select study', { timeout: 1000 });
 }
