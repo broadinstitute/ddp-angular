@@ -131,7 +131,8 @@ test.describe.serial(`${StudyName.OSTEO2}: Verify expected display of participan
     await participantListTable.assertDisplayedHeaders({ checkDefaultFilterOfStudy: true, studyName: StudyName.OSTEO2 }); //check to make sure test is starting from clean slate
 
     await test.step(`Verify that the Select All option is displayed`, async () => {
-      await participantListPage.assertSelectAllDisplayed();
+      const checkbox = page.getByRole('checkbox', { name: 'Select all' });
+      await expect(checkbox).toBeVisible();
     })
 
     await test.step(`Verify the ${StudyName.OSTEO2} quick filters are displayed`, async () => {

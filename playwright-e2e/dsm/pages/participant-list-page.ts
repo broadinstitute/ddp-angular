@@ -54,11 +54,6 @@ export default class ParticipantListPage extends DsmPageBase {
     await checkbox.check({ timeout: 30 * 1000 }); // long delay
   }
 
-  public async assertSelectAllDisplayed(): Promise<void> {
-    const checkbox = this.page.getByRole('checkbox', { name: 'Select all' });
-    await expect(checkbox).toBeVisible();
-  }
-
   public async addBulkCohortTags(): Promise<void> {
     await this.page.locator('//button[.//*[@tooltip="Bulk Cohort Tag"]]').click();
   }
