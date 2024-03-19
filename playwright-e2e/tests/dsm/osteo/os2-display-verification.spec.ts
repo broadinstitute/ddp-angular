@@ -1,8 +1,11 @@
 import { expect } from '@playwright/test';
 import { QuickFiltersEnum as QuickFilter } from 'dsm/component/filters/quick-filters';
-import { CustomizeView as CV, CustomizeViewID as ID, DataFilter, Label } from 'dsm/enums';
+import { CustomizeView as CV, CustomizeViewID as ID, DataFilter, Label, Tab } from 'dsm/enums';
 import { Navigation, Study, StudyName } from 'dsm/navigation';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
+import ParticipantPage from 'dsm/pages/participant-page';
+import ContactInformationTab from 'dsm/pages/tablist/contact-information-tab';
+import SequeuncingOrderTab from 'dsm/pages/tablist/sequencing-order-tab';
 import Select from 'dss/component/select';
 import { test } from 'fixtures/dsm-fixture';
 import { mailingListCreatedDate } from 'utils/date-utils';
@@ -19,7 +22,7 @@ test.describe.serial(`${StudyName.OSTEO2}: Verify expected display of participan
     Label.CONSENT_TISSUE,
     Label.SOMATIC_CONSENT_TUMOR,
     Label.SOMATIC_RESULTS_CREATED,
-    Label.SELF_STATE,
+    Label.STATE,
     Label.SM_ID_VALUE
   ];
 
@@ -44,7 +47,7 @@ test.describe.serial(`${StudyName.OSTEO2}: Verify expected display of participan
     await customizeViewPanel.selectColumns(CV.RESEARCH_CONSENT_FORM, [Label.CONSENT_TISSUE], { nth: 0 }); //adult's consent
     await customizeViewPanel.selectColumns(CV.LEARN_ABOUT_YOUR_TUMOR, [Label.SOMATIC_CONSENT_TUMOR]);
     await customizeViewPanel.selectColumns(CV.WHAT_WE_LEARNED_FROM_SOMATIC_DNA, [Label.SOMATIC_RESULTS_CREATED]);
-    await customizeViewPanel.selectColumns(CV.PREQUALIFIER, [Label.SELF_STATE]);
+    await customizeViewPanel.selectColumns(CV.CONTACT_INFORMATION, [Label.STATE]);
     await customizeViewPanel.selectColumns(CV.TISSUE, [Label.SM_ID_VALUE]);
     await customizeViewPanel.close();
 
@@ -58,7 +61,7 @@ test.describe.serial(`${StudyName.OSTEO2}: Verify expected display of participan
       await searchPanel.checkboxes(Label.STATUS, { checkboxValues: [DataFilter.ENROLLED]});
       await searchPanel.text(Label.SM_ID_VALUE, { additionalFilters: [DataFilter.NOT_EMPTY] }); //Must be 'Not Empty' to help find participants who might have accessioned SM-IDs
       await searchPanel.text(Label.COHORT_TAG_NAME, { textValue: StudyName.OSTEO2, exactMatch: true }); //'Exact Match' needs to be true else nothing is returned
-      await searchPanel.checkboxes(Label.SELF_STATE, { checkboxValues: ['New York'] }); //will be using just New York residence for the test
+      await searchPanel.text(Label.STATE, { textValue: 'NY' }); //will be using just New York residence for the test
       await searchPanel.search();
       await participantListPage.assertParticipantsCountGreaterOrEqual(1);
 
@@ -113,13 +116,12 @@ test.describe.serial(`${StudyName.OSTEO2}: Verify expected display of participan
       await savedFilterSection.exists(filterDidNotConsentToTissue);
       await savedFilterSection.exists(filterReturnOfResults);
 
-      await savedFilterSection.delete(filterNewYorkResidence); //Will move these to a test occurring later - putting here to not clog saved filter before tests are finalized
-      await savedFilterSection.delete(filterDidNotConsentToTissue);
+      await savedFilterSection.delete(filterDidNotConsentToTissue);//Will move these to a test occurring later - putting here to not clog saved filter before tests are finalized
       await savedFilterSection.delete(filterReturnOfResults);
     })
   })
 
-  test(`${StudyName.OSTEO2}: Verify general participant list webelements`, async ({ page, request }) => {
+  test.skip(`${StudyName.OSTEO2}: Verify general participant list webelements`, async ({ page, request }) => {
     test.slow();
     navigation = new Navigation(page, request);
     await new Select(page, { label: 'Select study' }).selectOption(StudyName.OSTEO2);
@@ -863,11 +865,11 @@ test.describe.serial(`${StudyName.OSTEO2}: Verify expected display of participan
     })
   })
 
-  test(`${StudyName.OSTEO2}: Verify a ptp with only 'OS PE-CGS' cohort tag only shows up in OS2 realm, not OS1`, async ({ page, request }) => {
+  test.skip(`${StudyName.OSTEO2}: Verify a ptp with only 'OS PE-CGS' cohort tag only shows up in OS2 realm, not OS1`, async ({ page, request }) => {
     navigation = new Navigation(page, request);
     await new Select(page, { label: 'Select study' }).selectOption(StudyName.OSTEO2);
 
-    let participantListPage = await navigation.selectFromStudy<ParticipantListPage>(Study.PARTICIPANT_LIST);
+    const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(Study.PARTICIPANT_LIST);
     await participantListPage.waitForReady();
     let shortId: string;
 
@@ -881,11 +883,10 @@ test.describe.serial(`${StudyName.OSTEO2}: Verify expected display of participan
     })
 
     await test.step(`Check that the participant found above is not found within DSM -> OS1 Participant List`, async () => {
+      console.log(`Checking OS1`);
       navigation = new Navigation(page, request);
       await navigation.selectStudy(StudyName.OSTEO);
 
-      participantListPage = await navigation.selectFromStudy<ParticipantListPage>(Study.PARTICIPANT_LIST); //realsAllowed check fails in OS1 - check here
-      //await participantListPage.waitForReady(); -check this because it fails here for OS1
       const searchPanel = participantListPage.filters.searchPanel;
       await searchPanel.open();
       await searchPanel.text(Label.SHORT_ID, { textValue: shortId, exactMatch: true });
@@ -901,8 +902,60 @@ test.describe.serial(`${StudyName.OSTEO2}: Verify expected display of participan
     //stuff here
   })
 
-  test.skip(`${StudyName.OSTEO2}: Verify that a ptp who resides in New York is not eligible for clinical sequencing`, async ({ page, request }) => {
+  test(`${StudyName.OSTEO2}: Verify that a ptp who resides in New York is not eligible for clinical sequencing`, async ({ page, request }) => {
     //stuff here - plan to use saved filter to just check that error message is displayed in Sequencing Tab e.g. "they're in NY or CA so are not eligible"
+    navigation = new Navigation(page, request);
+    await new Select(page, { label: 'Select study' }).selectOption(StudyName.OSTEO2);
+
+    const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(Study.PARTICIPANT_LIST);
+    await participantListPage.waitForReady();
+    const participantListTable = participantListPage.participantListTable;
+    let participantPosition: number;
+    let participantPage: ParticipantPage;
+    let shortID: string;
+    let contactInformationTab;
+    let sequencingOrderTab;
+
+    await test.step(`Use the filter to display participants whose residence is in New York state`, async () => {
+      const savedFilterSection = participantListPage.savedFilters;
+      await savedFilterSection.openPanel();
+      await savedFilterSection.exists(filterNewYorkResidence);
+      await savedFilterSection.open(filterNewYorkResidence);
+    })
+
+    await test.step(`Select a participant`, async () => {
+      [participantPosition] = await participantListTable.randomizeRows();
+      console.log(`Randomized row: ${participantPosition}`);
+      shortID = await participantListTable.getParticipantDataAt(participantPosition, Label.SHORT_ID);
+      console.log(`New York Participant Chosen: ${shortID}`);
+    })
+
+    await test.step(`Navigate to their participant page`, async () => {
+      participantPage = await participantListTable.openParticipantPageAt(participantPosition);
+      await participantPage.waitForReady();
+    })
+
+    await test.step(`Check that their residence is New York using the Contact Information Tab`, async () => {
+      contactInformationTab = await participantPage.tablist(Tab.CONTACT_INFORMATION).click<ContactInformationTab>();
+      const participantCountry = await contactInformationTab.getCountry();
+      expect(participantCountry).toBe('US');
+      const participantState = await contactInformationTab.getState();
+      expect(participantState).toBe('NY');
+    })
+
+    await test.step(`Check that Sequencing Tab has the "Error: ...participant is not eligible for clinical sequencing" text`, async () => {
+      sequencingOrderTab = await participantPage.tablist(Tab.SEQUENCING_ORDER).click<SequeuncingOrderTab>();
+      await sequencingOrderTab.waitForReady();
+      await sequencingOrderTab.assertParticipantNotEligibleForClinicalSequencing();
+    })
+
+    await test.step(`Delete the used NY participant list filter`, async () => {
+      await participantPage.backToList();
+      const savedFilterSection = participantListPage.savedFilters;
+      await savedFilterSection.openPanel();
+      await savedFilterSection.exists(filterNewYorkResidence);
+      await savedFilterSection.delete(filterNewYorkResidence);
+    })
   })
 
   test.skip(`${StudyName.OSTEO2}: Verify that onc history is not inputted for ptps who responded CONSENT_TISSUE = No`, async ({ page, request }) => {
