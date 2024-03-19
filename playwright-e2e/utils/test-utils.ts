@@ -244,7 +244,7 @@ export function studyShortName(study: StudyName): {
       collaboratorPrefix = 'OSProject';
       break;
     case StudyName.OSTEO2:
-      shortName = 'cmi-osteo';
+      shortName = 'cmi-osteo2';
       realm = 'osteo2';
       collaboratorPrefix = 'OSPECGS';
       playwrightPrefixAdult = 'OS';
