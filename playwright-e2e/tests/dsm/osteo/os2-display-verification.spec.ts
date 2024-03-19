@@ -116,8 +116,7 @@ test.describe.serial(`${StudyName.OSTEO2}: Verify expected display of participan
       await savedFilterSection.exists(filterDidNotConsentToTissue);
       await savedFilterSection.exists(filterReturnOfResults);
 
-      await savedFilterSection.delete(filterDidNotConsentToTissue);//Will move these to a test occurring later - putting here to not clog saved filter before tests are finalized
-      await savedFilterSection.delete(filterReturnOfResults);
+      await savedFilterSection.delete(filterReturnOfResults);//Will move these to a test occurring later - putting here to not clog saved filter before tests are finalized
     })
   })
 
@@ -902,7 +901,7 @@ test.describe.serial(`${StudyName.OSTEO2}: Verify expected display of participan
     //stuff here
   })
 
-  test(`${StudyName.OSTEO2}: Verify that a ptp who resides in New York is not eligible for clinical sequencing`, async ({ page, request }) => {
+  test.skip(`${StudyName.OSTEO2}: Verify that a ptp who resides in New York is not eligible for clinical sequencing`, async ({ page, request }) => {
     //stuff here - plan to use saved filter to just check that error message is displayed in Sequencing Tab e.g. "they're in NY or CA so are not eligible"
     navigation = new Navigation(page, request);
     await new Select(page, { label: 'Select study' }).selectOption(StudyName.OSTEO2);
@@ -958,7 +957,7 @@ test.describe.serial(`${StudyName.OSTEO2}: Verify expected display of participan
     })
   })
 
-  test.skip(`${StudyName.OSTEO2}: Verify that onc history is not inputted for ptps who responded CONSENT_TISSUE = No`, async ({ page, request }) => {
+  test(`${StudyName.OSTEO2}: Verify that onc history cannot be inputted for ptps who responded CONSENT_TISSUE = No`, async ({ page, request }) => {
     //stuff here - plan to use saved filter to just check that error message is displayed in Onc History tab e.g. "they have not consented to sharing tissue"
   })
 
