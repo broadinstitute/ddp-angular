@@ -13,7 +13,6 @@ import { mailingListCreatedDate } from 'utils/date-utils';
 
 test.describe.serial(`${StudyName.OSTEO2}: Verify expected display of participant information @dsm @${StudyName.OSTEO2}`, () => {
   const filterReturnOfResults = `PW - Return of Results filter for OS2 - created on ${mailingListCreatedDate(new Date())}`; //named as such due to bug PEPPER-935
-  //const filterDidNotConsentToTissue = `PW - Did not consent to Tissue filter for OS2 - created on ${mailingListCreatedDate(new Date())}`;
   const filterNewYorkResidence = `PW - New York residence filter for OS2 - created on ${mailingListCreatedDate(new Date())}`;
 
   const osteoTestFilter = [
@@ -96,7 +95,7 @@ test.describe.serial(`${StudyName.OSTEO2}: Verify expected display of participan
       await savedFilterSection.exists(filterNewYorkResidence);
       await savedFilterSection.exists(filterReturnOfResults);
 
-      await savedFilterSection.delete(filterReturnOfResults);//Will move these to a test occurring later - putting here to not clog saved filter before tests are finalized
+      await savedFilterSection.delete(filterNewYorkResidence);//Will move these to a test occurring later - putting here to not clog saved filter before tests are finalized
     })
   })
 
@@ -878,7 +877,25 @@ test.describe.serial(`${StudyName.OSTEO2}: Verify expected display of participan
   })
 
   test.skip(`${StudyName.OSTEO2}: Verify general appearance of participant page`, async ({ page, request }) => {
-    //stuff here
+    await test.step(`Use a filter to get the participants who likely have the most activities filled out`, async () => {
+      //stuff here
+    })
+
+    await test.step(`Chose a participant`, async () => {
+      //stuff here
+    })
+
+    await test.step(`Check their profile section`, async () => {
+      //stuff here
+    })
+
+    await test.step(`Check the section below profile`, async () => {
+      //stuff here
+    })
+
+    await test.step(`Check for presence of all expected tabs`, async () => {
+      //stuff here
+    })
   })
 
   test.skip(`${StudyName.OSTEO2}: Verify that a ptp who resides in New York is not eligible for clinical sequencing`, async ({ page, request }) => {
@@ -936,8 +953,7 @@ test.describe.serial(`${StudyName.OSTEO2}: Verify expected display of participan
     })
   })
 
-  test(`${StudyName.OSTEO2}: Verify that onc history cannot be inputted for ptps who responded CONSENT_TISSUE = No`, async ({ page, request }) => {
-    //stuff here - plan to use saved filter to just check that error message is displayed in Onc History tab e.g. "they have not consented to sharing tissue"
+  test.skip(`${StudyName.OSTEO2}: Verify that onc history error message is present for ptps with CONSENT_TISSUE = No`, async ({ page, request }) => {
     navigation = new Navigation(page, request);
     await new Select(page, { label: 'Select study' }).selectOption(StudyName.OSTEO2);
 
