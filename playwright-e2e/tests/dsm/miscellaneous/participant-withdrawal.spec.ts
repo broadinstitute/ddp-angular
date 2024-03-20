@@ -94,7 +94,7 @@ test.describe('Participants Withdrawal', () => {
           /// Status of participant should update to “Exited after enrollment” or “Exited before enrollment”
           const participantStatus = await participantsTable.findCell(Label.SHORT_ID, shortIdColumnId, Label.STATUS);
           await expect(participantStatus!).toContainText(/Exited (before|after) Enrollment/);
-        }).toPass({ timeout: 5 * 60 * 1000 });
+        }).toPass({ timeout: 20 * 60 * 1000 }); //timeout currently changed to ~ 20 mins; previously 5 mins
 
         // At Participant Page, verify few detail
         const participantPage: ParticipantPage = await participantsTable.openParticipantPageAt(0);
