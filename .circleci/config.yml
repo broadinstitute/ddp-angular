@@ -701,7 +701,7 @@ jobs:
               npx playwright test --list --project="dss" | grep -o 'tests/.*.spec.ts' | sort | uniq > e2e_tests.txt
             elif [ "<< parameters.test_suite >>" == "dsm" ]
             then
-              npx playwright test --list --project="dsm" | grep -o 'tests/.*.spec.ts' | sort | uniq > e2e_tests.txt
+              TEST_SLOW_MO=1000 npx playwright test --list --project="dsm" | grep -o 'tests/.*.spec.ts' | sort | uniq > e2e_tests.txt
             else
               npx playwright test --list | grep -o 'tests/.*.spec.ts' | sort | uniq > e2e_tests.txt
             fi
@@ -776,6 +776,9 @@ parameters:
   playwright_parallelism:
     type: integer
     default: 1
+  playwright_test_suite:
+    type: string
+    default: "UNKNOWN"
 
 workflows:
   version: 2
@@ -1035,6 +1038,6 @@ workflows:
           <<: *filter-develop-branch
           env: << pipeline.parameters.deploy_env >>
           parallelism_num: << pipeline.parameters.playwright_parallelism >>
-          test_suite: UNKNOWN
+          test_suite: << pipeline.parameters.playwright_test_suite >>
           requires:
             - playwright-build

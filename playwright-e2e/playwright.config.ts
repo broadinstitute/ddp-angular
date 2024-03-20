@@ -8,7 +8,7 @@ import path from 'path';
 import * as dotenv from 'dotenv';
 dotenv.config({ path: path.resolve(__dirname, '.env') });
 
-const { CI } = process.env;
+const { CI, TEST_SLOW_MO } = process.env;
 
 /**
  * Base Playwright TestConfig.
@@ -69,7 +69,7 @@ const testConfig: PlaywrightTestConfig = {
     browserName: 'chromium',
     headless: true,
     launchOptions: {
-      slowMo: 100,
+      slowMo: TEST_SLOW_MO ? parseInt(TEST_SLOW_MO) : 500,
       // Account for minor difference in text rendering and resolution between headless and headed mode
       ignoreDefaultArgs: ['--hide-scrollbars']
     },
