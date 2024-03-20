@@ -73,7 +73,7 @@ test.describe.serial('Editing Participant Information', () => {
           participantPage = await participantListTable.openParticipantPageAt(0);
           expect(await participantPage.getFirstName()).toEqual(newFirstName);
           expect(await participantPage.getLastName()).toEqual(newLastName);
-        }).toPass({ timeout: 300000 }); //currently changed to be ~ 5 mins
+        }).toPass({ timeout: 300000 }); //currently changed to be ~ 5 mins; previously 3.5 mins
       });
     });
   }
