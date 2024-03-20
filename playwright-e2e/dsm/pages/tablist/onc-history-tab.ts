@@ -8,6 +8,7 @@ import { Tab } from 'dsm/enums';
 
 export default class OncHistoryTab extends TabBase {
   private readonly oncHistoryTable: OncHistoryTable;
+  protected readonly PARTICIPANT_DID_NOT_CONSENT = `This participant did not consent to sharing tissue`;
 
   constructor(page: Page) {
     super(page, Tab.ONC_HISTORY);
@@ -16,6 +17,10 @@ export default class OncHistoryTab extends TabBase {
 
   public get table(): OncHistoryTable {
     return this.oncHistoryTable;
+  }
+
+  public get didNotConsentMessage(): Locator {
+    return this.page.getByText(this.PARTICIPANT_DID_NOT_CONSENT);
   }
 
   public async openFilesOrderModal(): Promise<void> {

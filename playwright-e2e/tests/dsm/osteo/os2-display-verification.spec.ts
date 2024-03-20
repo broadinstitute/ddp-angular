@@ -1,10 +1,11 @@
 import { expect } from '@playwright/test';
 import { QuickFiltersEnum as QuickFilter } from 'dsm/component/filters/quick-filters';
-import { CustomizeView as CV, CustomizeViewID as ID, DataFilter, Label, Tab } from 'dsm/enums';
+import { CustomizeView as CV, CustomizeViewID as ID, DataFilter, Label, Tab, CustomizeView } from 'dsm/enums';
 import { Navigation, Study, StudyName } from 'dsm/navigation';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
 import ParticipantPage from 'dsm/pages/participant-page';
 import ContactInformationTab from 'dsm/pages/tablist/contact-information-tab';
+import OncHistoryTab from 'dsm/pages/tablist/onc-history-tab';
 import SequeuncingOrderTab from 'dsm/pages/tablist/sequencing-order-tab';
 import Select from 'dss/component/select';
 import { test } from 'fixtures/dsm-fixture';
@@ -12,7 +13,7 @@ import { mailingListCreatedDate } from 'utils/date-utils';
 
 test.describe.serial(`${StudyName.OSTEO2}: Verify expected display of participant information @dsm @${StudyName.OSTEO2}`, () => {
   const filterReturnOfResults = `PW - Return of Results filter for OS2 - created on ${mailingListCreatedDate(new Date())}`; //named as such due to bug PEPPER-935
-  const filterDidNotConsentToTissue = `PW - Did not consent to Tissue filter for OS2 - created on ${mailingListCreatedDate(new Date())}`;
+  //const filterDidNotConsentToTissue = `PW - Did not consent to Tissue filter for OS2 - created on ${mailingListCreatedDate(new Date())}`;
   const filterNewYorkResidence = `PW - New York residence filter for OS2 - created on ${mailingListCreatedDate(new Date())}`;
 
   const osteoTestFilter = [
@@ -74,26 +75,6 @@ test.describe.serial(`${StudyName.OSTEO2}: Verify expected display of participan
     await participantListTable.assertDisplayedHeaders({ customFilter: osteoTestFilter });
 
     /**
-     * In this case, should a participant have CONSENT_TISSUE = No, the Onc History tab should be present but nothing should be able to be inputted
-     */
-    await test.step(`Create a saved filter that can be used to check participants that have not consented to sharing tissue`, async () => {
-      //Note - curious bug where CONSENT_TISSUE = No must be selected before Status = Enrolled - in order to get results (vice versa returns no pts - TODO make bug ticket)
-      await searchPanel.open();
-      await searchPanel.checkboxes(Label.CONSENT_TISSUE, { checkboxValues: [DataFilter.NO] });
-      await searchPanel.checkboxes(Label.STATUS, { checkboxValues: [DataFilter.ENROLLED] });
-      await searchPanel.text(Label.COHORT_TAG_NAME, { textValue: StudyName.OSTEO2, exactMatch: true });
-      await searchPanel.search();
-      await participantListPage.assertParticipantsCountGreaterOrEqual(1);
-
-      await participantListPage.saveCurrentView(filterDidNotConsentToTissue);
-    });
-
-    await searchPanel.open();
-    await searchPanel.clear();
-    await searchPanel.search({ uri: 'ui/applyFilter?' });
-    await participantListTable.assertDisplayedHeaders({ customFilter: osteoTestFilter });
-
-    /**
      * Use this filter to check participants who have completed most activities (and therefore have the most things for study admin to check)
      */
     await test.step(`Create a saved filter that can be used to check participants that already have at least one Return of Results`, async () => {
@@ -113,7 +94,6 @@ test.describe.serial(`${StudyName.OSTEO2}: Verify expected display of participan
       const savedFilterSection = participantListPage.savedFilters; //Check for the presence of the 3 filters in the Saved Filter section
       await savedFilterSection.openPanel();
       await savedFilterSection.exists(filterNewYorkResidence);
-      await savedFilterSection.exists(filterDidNotConsentToTissue);
       await savedFilterSection.exists(filterReturnOfResults);
 
       await savedFilterSection.delete(filterReturnOfResults);//Will move these to a test occurring later - putting here to not clog saved filter before tests are finalized
@@ -902,7 +882,6 @@ test.describe.serial(`${StudyName.OSTEO2}: Verify expected display of participan
   })
 
   test.skip(`${StudyName.OSTEO2}: Verify that a ptp who resides in New York is not eligible for clinical sequencing`, async ({ page, request }) => {
-    //stuff here - plan to use saved filter to just check that error message is displayed in Sequencing Tab e.g. "they're in NY or CA so are not eligible"
     navigation = new Navigation(page, request);
     await new Select(page, { label: 'Select study' }).selectOption(StudyName.OSTEO2);
 
@@ -959,6 +938,45 @@ test.describe.serial(`${StudyName.OSTEO2}: Verify expected display of participan
 
   test(`${StudyName.OSTEO2}: Verify that onc history cannot be inputted for ptps who responded CONSENT_TISSUE = No`, async ({ page, request }) => {
     //stuff here - plan to use saved filter to just check that error message is displayed in Onc History tab e.g. "they have not consented to sharing tissue"
+    navigation = new Navigation(page, request);
+    await new Select(page, { label: 'Select study' }).selectOption(StudyName.OSTEO2);
+
+    const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(Study.PARTICIPANT_LIST);
+    await participantListPage.waitForReady();
+    const participantListTable = participantListPage.participantListTable;
+    let participantPosition: number;
+    let participantPage: ParticipantPage;
+    let shortID: string;
+    let oncHistoryTab;
+
+    await test.step(`Find a participant who has responded Consent=No`, async () => {
+      participantPosition = await participantListPage.findParticipantFor(
+        CustomizeView.RESEARCH_CONSENT_FORM,
+        Label.CONSENT_TISSUE,
+        { value: 'No', nth: 0 }
+      );
+
+      const consentInput = (await participantListTable.getParticipantDataAt(participantPosition, Label.CONSENT_TISSUE)).trim();
+      shortID = await participantListTable.getParticipantDataAt(participantPosition, Label.SHORT_ID);
+      console.log(`Consent Input = ${consentInput} for shortID: ${shortID}`);
+      expect(shortID).toBeTruthy();
+      expect(consentInput).toBe('No');
+    })
+
+    await test.step(`Select a participant that has only 1 response to Consent=No recorded`, async () => {
+      participantPage = await participantListTable.openParticipantPageAt(participantPosition);
+      await participantPage.waitForReady();
+    })
+
+    await test.step(`Check that their Onc History tab displays "This ptp did not consent to tissue message"`, async () => {
+      oncHistoryTab = await participantPage.tablist(Tab.ONC_HISTORY).click<OncHistoryTab>();
+      const participantDidNotConsentMessage = oncHistoryTab.didNotConsentMessage;
+      await expect(participantDidNotConsentMessage).toBeVisible();
+
+      const oncHistoryTable = page.locator(`//app-onc-history-detail`);
+      console.log(`onc history table: ${oncHistoryTable}`);
+      await expect(oncHistoryTable).toHaveCount(0);
+    })
   })
 
   test.skip(`${StudyName.OSTEO2}: Verify that display of participant page for ptp with at least one Return of Results`, async ({ page, request }) => {
