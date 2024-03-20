@@ -877,11 +877,24 @@ test.describe.serial(`${StudyName.OSTEO2}: Verify expected display of participan
   })
 
   test.skip(`${StudyName.OSTEO2}: Verify general appearance of participant page`, async ({ page, request }) => {
+    navigation = new Navigation(page, request);
+    await new Select(page, { label: 'Select study' }).selectOption(StudyName.OSTEO2);
+
+    const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(Study.PARTICIPANT_LIST);
+    await participantListPage.waitForReady();
+    const participantListTable = participantListPage.participantListTable;
+    let participantPosition: number;
+    let participantPage: ParticipantPage;
+    let shortID: string;
+
     await test.step(`Use a filter to get the participants who likely have the most activities filled out`, async () => {
-      //stuff here
+      const savedFilterSection = participantListPage.savedFilters;
+      await savedFilterSection.openPanel();
+      await savedFilterSection.exists(filterReturnOfResults);
+      await savedFilterSection.open(filterReturnOfResults);
     })
 
-    await test.step(`Chose a participant`, async () => {
+    await test.step(`Choose a participant`, async () => {
       //stuff here
     })
 
