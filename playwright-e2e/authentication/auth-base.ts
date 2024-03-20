@@ -19,12 +19,7 @@ export async function fillInEmailPassword(
   const passwordInput = page.locator('input[type="password"]').locator('visible=true');
   const notYourAcctLink = page.locator('.auth0-lock-alternative-link:has-text("Not your account")');
 
-  const timeout = 10000;
-  await Promise.race([
-    notYourAcctLink.waitFor({ state: 'visible' }),
-    emailInput.waitFor({ state: 'visible' }),
-    new Promise((_, reject) => setTimeout(() => reject(Error('Timeout Error: Fail to confirm Log in successful.')), timeout)),
-  ]);
+  await expect(emailInput.or(notYourAcctLink)).toBeVisible({timeout: 10000});
 
   try {
     const existLink = await notYourAcctLink.isVisible();

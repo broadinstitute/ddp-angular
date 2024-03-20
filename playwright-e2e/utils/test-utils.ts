@@ -18,22 +18,20 @@ const { SITE_PASSWORD } = process.env;
 
 export async function waitForNoSpinner(page: Page, opts: { timeout?: number } = {}): Promise<void> {
   const { timeout = 50 * 1000 } = opts;
+
   const spinner = page.locator('[data-icon="spinner"].fa-spin, mat-spinner[role="progressbar"]').first();
   const appError = page.locator('app-error-snackbar .snackbar-content').first();
+
   await page.waitForLoadState().catch((err) => logError(err));
-  const pageStatus = await Promise.race([
-    spinner.waitFor({ state: 'hidden' }).then(() => 'Ready'),
-    appError.waitFor({ state: 'visible' }).then(() => 'Error'),
-    new Promise((_, reject) => setTimeout(() => reject(Error('Time out waiting for loading spinner to stop or a app error.')), timeout)),
-  ]);
-  if (pageStatus === 'Ready') {
-    // Check again for app error after spinner stopped
-    const visible = await appError.isVisible();
-    if (visible) {
-      throw new Error(await appError.innerText());
-    }
+
+  const existsSpinner = await spinner.isVisible();
+  if (existsSpinner) {
+    await expect(spinner, 'Timeout exception: Encountered app loading spinner.').toBeHidden({timeout});
   }
-  if (pageStatus === 'Error') {
+
+  // App error popup normally displays after loading spinner has finished
+  const existError = await appError.isVisible();
+  if (existError) {
     throw new Error(await appError.innerText());
   }
 }
@@ -246,7 +244,7 @@ export function studyShortName(study: StudyName): {
       collaboratorPrefix = 'OSProject';
       break;
     case StudyName.OSTEO2:
-      shortName = 'cmi-osteo';
+      shortName = 'cmi-osteo2';
       realm = 'osteo2';
       collaboratorPrefix = 'OSPECGS';
       playwrightPrefixAdult = 'OS';
