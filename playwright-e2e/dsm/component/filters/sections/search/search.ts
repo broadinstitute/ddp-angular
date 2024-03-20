@@ -169,6 +169,9 @@ export class Search {
   /* Locators */
 
   private checkboxLocator(columnName: string, checkboxName: string): Locator {
+    if (checkboxName.includes(`'`)) {
+      return this.page.locator(`${this.baseColumnXPath(columnName)}//mat-checkbox[label[.//*[text()[normalize-space()="${checkboxName}"]]]]`);
+    }
     return this.page.locator(`${this.baseColumnXPath(columnName)}//mat-checkbox[label[.//*[text()[normalize-space()='${checkboxName}']]]]`);
   }
 

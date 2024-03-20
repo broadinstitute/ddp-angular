@@ -131,7 +131,7 @@ test.describe.skip('Tissue Request Flow', () => {
         const tissue = tissueInformationPage.tissue();
         await tissue.fillField(Label.USS_UNSTAINED, { inputValue: testValue });
         await tissue.fillField(Label.BLOCK, { inputValue: testValue });
-        await tissue.fillField(Label.H_E, { inputValue: testValue });
+        await tissue.fillField(Label.H_E_PLURAL, { inputValue: testValue });
         await tissue.fillField(Label.SCROLL, { inputValue: testValue });
       });
 

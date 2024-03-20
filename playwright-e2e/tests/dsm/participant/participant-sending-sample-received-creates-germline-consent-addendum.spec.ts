@@ -127,7 +127,7 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
 
       const customizeViewPanel = participantListPage.filters.customizeViewPanel;
       await customizeViewPanel.open();
-      await customizeViewPanel.selectColumns(CustomizeView.ADDITIONAL_CONSENT_LEARNING_DNA_WITH_INVITAE,
+      await customizeViewPanel.selectColumns(CustomizeView.LEARN_DNA_WITH_INVITAE,
         [Label.GERMLINE_CONSENT_ADDENDUM_SURVEY_CREATED]);
 
       const searchPanel = participantListPage.filters.searchPanel;
@@ -234,7 +234,7 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
 
       const customizeViewPanel = participantListPage.filters.customizeViewPanel;
       await customizeViewPanel.open();
-      await customizeViewPanel.selectColumns(CustomizeView.ADDITIONAL_CONSENT_LEARNING_DNA_WITH_INVITAE,
+      await customizeViewPanel.selectColumns(CustomizeView.LEARN_DNA_WITH_INVITAE,
         [Label.GERMLINE_CONSENT_ADDENDUM_SURVEY_CREATED]);
 
       const searchPanel = participantListPage.filters.searchPanel;
@@ -341,7 +341,7 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
 
       const customizeViewPanel = participantListPage.filters.customizeViewPanel;
       await customizeViewPanel.open();
-      await customizeViewPanel.selectColumns(CustomizeView.ADDITIONAL_CONSENT_LEARNING_DNA_WITH_INVITAE,
+      await customizeViewPanel.selectColumns(CustomizeView.LEARN_DNA_WITH_INVITAE,
         [Label.GERMLINE_CONSENT_ADDENDUM_SURVEY_CREATED]);
 
       const searchPanel = participantListPage.filters.searchPanel;
@@ -448,7 +448,7 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
 
       const customizeViewPanel = participantListPage.filters.customizeViewPanel;
       await customizeViewPanel.open();
-      await customizeViewPanel.selectColumns(CustomizeView.ADDITIONAL_CONSENT_LEARNING_DNA_WITH_INVITAE,
+      await customizeViewPanel.selectColumns(CustomizeView.LEARN_DNA_WITH_INVITAE,
         [Label.GERMLINE_CONSENT_ADDENDUM_SURVEY_CREATED]);
 
       const searchPanel = participantListPage.filters.searchPanel;
@@ -493,10 +493,10 @@ async function findParticipantForGermlineConsentCreation(participantListPage: Pa
   await customizeViewPanel.selectColumnsByID(CustomizeView.MEDICAL_RELEASE_FORM, [Label.PHYSICIAN], Label.RELEASE_SELF, { nth: 0 });
   await customizeViewPanel.selectColumns(CustomizeView.SAMPLE, [Label.SAMPLE_TYPE, Label.STATUS]);
   await customizeViewPanel.selectColumns(CustomizeView.ONC_HISTORY, [Label.TISSUE_REQUEST_DATE]);
-  await customizeViewPanel.selectColumns(CustomizeView.ADDITIONAL_CONSENT_LEARNING_ABOUT_TUMOR,
+  await customizeViewPanel.selectColumns(CustomizeView.LEARN_ABOUT_YOUR_TUMOR,
     [Label.SOMATIC_CONSENT_TUMOR]
   );
-  await customizeViewPanel.selectColumns(CustomizeView.ADDITIONAL_CONSENT_LEARNING_DNA_WITH_INVITAE,
+  await customizeViewPanel.selectColumns(CustomizeView.LEARN_DNA_WITH_INVITAE,
     [Label.GERMLINE_CONSENT_ADDENDUM_SURVEY_CREATED]
   );
 

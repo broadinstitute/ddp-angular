@@ -6,6 +6,7 @@ import { Tab } from 'dsm/enums';
 export default class SequeuncingOrderTab extends TabBase {
   private readonly SAMPLE_ROW_XPATH = '//app-sequencing-order//tr';
   private readonly DATE_FIELD_XPATH = `//input[@data-placeholder='mm/dd/yyyy']`;
+  private readonly NOT_ELIGIBLE_DUE_TO_RESIDENCE = `Error: Participant lives in New York or Canada and is not eligible for clinical sequencing`;
 
   constructor(page: Page) {
     super(page, Tab.SEQUENCING_ORDER);
@@ -35,6 +36,11 @@ export default class SequeuncingOrderTab extends TabBase {
   public async assertPlaceOrderButtonInvisible(): Promise<void> {
     const placeOrderButton = this.getPlaceOrderButton();
     await expect(placeOrderButton).not.toBeVisible();
+  }
+
+  public async assertParticipantNotEligibleForClinicalSequencing(): Promise<void> {
+    const validationMessage = this.page.getByText(this.NOT_ELIGIBLE_DUE_TO_RESIDENCE);
+    await expect(validationMessage).toBeVisible();
   }
 
   public async fillAvailableCollectionDateFields(opts: {canPlaceClinicalOrder?: boolean}): Promise<void> {

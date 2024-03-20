@@ -189,7 +189,7 @@ export class Navigation {
       break;
       default:
         await Promise.all([
-          waitForResponse(this.page, { uri: '/realmsAllowed' }),
+          waitForResponse(this.page, { uri: 'ui/realmsAllowed' }),
           this.page.waitForLoadState(),
           new Dropdown(this.page, from).selectOption(selection),
         ]);
