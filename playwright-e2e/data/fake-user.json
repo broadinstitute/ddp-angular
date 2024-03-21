@@ -48,7 +48,10 @@
     "address": "55 Fruit Street, Boston, MA 02114",
     "street": "55 Fruit Street",
     "city": "Boston",
-    "state": "MA",
+    "state": {
+      "name": "MASSACHUSETTS",
+      "abbreviation": "MA"
+    },
     "zip": "02114"
   },
   "adult": {

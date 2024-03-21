@@ -358,7 +358,7 @@ export default abstract class PageBase implements PageInterface {
       physicianName = user.doctor.name,
       institutionName = user.doctor.hospital,
       city = user.doctor.city,
-      state = user.doctor.state,
+      state = user.doctor.state.name,
       country = user.patient.country.name,
       nth = 0,
       labels = { ...defaultMailingAddressLabels }
@@ -371,8 +371,8 @@ export default abstract class PageBase implements PageInterface {
     await institution.toInput(labels.physicianName).fill(physicianName);
     await institution.toInput(labels.hospital).fill(institutionName);
     await institution.toInput(labels.city!).fill(city);
-    await institution.toInput(labels.state!).fill(state, { overwrite: true });
-    await institution.toInput(labels.country!).fill(country, { overwrite: true });
+    await institution.toInput(labels.state!).fill(state);
+    await institution.toInput(labels.country!).fill(country);
   }
 
   /**
