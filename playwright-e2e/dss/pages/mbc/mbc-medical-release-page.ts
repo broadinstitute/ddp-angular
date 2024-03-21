@@ -39,7 +39,7 @@ export class MBCMedicalReleasePage extends MBCPageBase {
     await institution.toInput('Physician Name').fill(physicianName);
     await institution.toInput('Institution').fill(institutionName);
     await institution.toInput('City').fill(city);
-    await institution.toInput('State').fill(state, { overwrite: true });
+    await institution.toInput('State').fill(state);
   }
 
   /**
