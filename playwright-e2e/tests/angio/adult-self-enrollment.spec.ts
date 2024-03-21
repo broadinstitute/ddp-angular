@@ -105,24 +105,24 @@ test.describe('Adult Enrollment', () => {
     await medicalReleaseForm.yourPhysiciansNames().toInput('Physician Name').fill(user.doctor.name);
     await medicalReleaseForm.yourPhysiciansNames().toInput('Institution (if any)').fill(user.doctor.hospital);
     await medicalReleaseForm.yourPhysiciansNames().toInput('City').fill(user.doctor.city);
-    await medicalReleaseForm.yourPhysiciansNames().toInput('State').fill(user.doctor.state);
+    await medicalReleaseForm.yourPhysiciansNames().toInput('State').fill(user.doctor.state, { overwrite: true });
 
     await medicalReleaseForm.yourPhysiciansNames().toButton('ADD ANOTHER PHYSICIAN').click();
 
     await medicalReleaseForm.yourPhysiciansNames(1).toInput('Physician Name').fill(user.secondDoctor.fullName);
     await medicalReleaseForm.yourPhysiciansNames(1).toInput('Institution (if any)').fill(user.secondDoctor.hospital);
     await medicalReleaseForm.yourPhysiciansNames(1).toInput('City').fill(user.secondDoctor.city);
-    await medicalReleaseForm.yourPhysiciansNames(1).toInput('State').fill(user.secondDoctor.state);
+    await medicalReleaseForm.yourPhysiciansNames(1).toInput('State').fill(user.secondDoctor.state, { overwrite: true });
 
     await medicalReleaseForm.yourHospitalInstitution().toInput('Institution').fill(user.doctor.hospital);
     await medicalReleaseForm.yourHospitalInstitution().toInput('City').fill(user.doctor.city);
-    await medicalReleaseForm.yourHospitalInstitution().toInput('State').fill(user.doctor.state);
+    await medicalReleaseForm.yourHospitalInstitution().toInput('State').fill(user.doctor.state, { overwrite: true });
 
     await medicalReleaseForm.otherBiopsiesOrSurgeries().toButton('ADD ANOTHER INSTITUTION').click();
 
     await medicalReleaseForm.otherBiopsiesOrSurgeries().toInput('Institution').fill(user.secondDoctor.hospital);
     await medicalReleaseForm.otherBiopsiesOrSurgeries().toInput('City').fill(user.secondDoctor.city);
-    await medicalReleaseForm.otherBiopsiesOrSurgeries().toInput('State').fill(user.secondDoctor.state);
+    await medicalReleaseForm.otherBiopsiesOrSurgeries().toInput('State').fill(user.secondDoctor.state, { overwrite: true });
 
     await medicalReleaseForm.agreeToAllowUsToContactPhysicianToObtainRecords();
     await medicalReleaseForm.submit();
