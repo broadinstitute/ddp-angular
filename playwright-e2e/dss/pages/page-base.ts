@@ -358,7 +358,7 @@ export default abstract class PageBase implements PageInterface {
       physicianName = user.doctor.name,
       institutionName = user.doctor.hospital,
       city = user.doctor.city,
-      state = user.doctor.state,
+      state = user.doctor.state.name,
       country = user.patient.country.name,
       nth = 0,
       labels = { ...defaultMailingAddressLabels }

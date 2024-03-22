@@ -32,7 +32,7 @@ export default class MedicalReleaseFormPage extends PancanPageBase {
   }
 
   async fillInInPhysicianData(opts: { name?: string; hospital?: string; city?: string; state?: string } = {}): Promise<void> {
-    const { name = user.doctor.name, hospital = user.doctor.hospital, city = user.doctor.city, state = user.doctor.state } = opts;
+    const { name = user.doctor.name, hospital = user.doctor.hospital, city = user.doctor.city, state = user.doctor.state.name } = opts;
     const institution = this.hospital();
     await institution.toInput('Physician Name').fill(name);
     await institution.toInput('Hospital/Institution').fill(hospital);
