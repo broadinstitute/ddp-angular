@@ -254,7 +254,7 @@ export default class ParticipantListPage extends DsmPageBase {
     }): Promise<string> {
     const { isPediatric = false, tab, rgpProbandTab = false, uri = '/ui/applyFilter', prefix } = opts;
 
-    if (tab !== Tab.ONC_HISTORY && tab !== Tab.MEDICAL_RECORD && !rgpProbandTab) {
+    if (tab !== Tab.ONC_HISTORY && tab !== Tab.MEDICAL_RECORD && tab !== Tab.SAMPLE_INFORMATION && !rgpProbandTab) {
       throw new Error(`Undefined actions for tab: "${tab}" and rgpProbandTab: "${rgpProbandTab}"`);
     }
 
@@ -306,6 +306,21 @@ export default class ParticipantListPage extends DsmPageBase {
               logInfo(`Found participant with Short ID: ${shortID} to have tab: ${tab}`);
               return shortID;
             }
+          }
+        }
+
+        if (tab === Tab.SAMPLE_INFORMATION) {
+          const kits = value.kits;
+          if (!kits || kits[0] === undefined) {
+            // Does not have kits and so will not have a Sample Information tab
+            continue;
+          }
+          console.log(`Kits: ${JSON.stringify(kits)}`);
+
+          if (kits) {
+            shortID = JSON.stringify(value.esData.profile.hruid).replace(/['"]+/g, '');
+            console.log(`Found participant with Short ID: ${shortID} to have tab: ${tab}`);
+            return shortID;
           }
         }
 
