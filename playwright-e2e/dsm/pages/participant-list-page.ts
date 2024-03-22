@@ -287,7 +287,6 @@ export default class ParticipantListPage extends DsmPageBase {
           // must be PW test user
           continue;
         }
-
         // The onc history tab will usually appear along with a medical record tab
         // Checking for the medical record tab allows catching those who do not yet have an onc history detail/row/data (but have the tab itself)
         if (tab === Tab.ONC_HISTORY || tab === Tab.MEDICAL_RECORD) {
@@ -315,11 +314,10 @@ export default class ParticipantListPage extends DsmPageBase {
             // Does not have kits and so will not have a Sample Information tab
             continue;
           }
-          console.log(`Kits: ${JSON.stringify(kits)}`);
 
           if (kits) {
             shortID = JSON.stringify(value.esData.profile.hruid).replace(/['"]+/g, '');
-            console.log(`Found participant with Short ID: ${shortID} to have tab: ${tab}`);
+            logInfo(`Found participant with Short ID: ${shortID} to have tab: ${tab}`);
             return shortID;
           }
         }

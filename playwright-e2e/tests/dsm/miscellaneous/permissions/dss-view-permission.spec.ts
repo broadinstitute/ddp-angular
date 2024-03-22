@@ -8,6 +8,7 @@ import UserPermissionPage from 'dsm/pages/user-and-permissions-page';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
 import Select from 'dss/component/select';
 import { logInfo } from 'utils/log-utils';
+import { studyShortName } from 'utils/test-utils';
 
 const {
   OSTEO_USER_EMAIL,
@@ -98,10 +99,10 @@ test.describe.serial('DSS View Only Permission', () => {
         expect(await customizeViewPanel.isColumnVisible(notVisibleColumns)).toBe(false);
 
         // Find a participant created by Playwright DSS test
-        /*const rowIndex = await participantListPage.findParticipantFor(CustomizeView.PARTICIPANT, Label.EMAIL, {value: emails[i].split('@')[0] });
-        const participantListTable = participantListPage.participantListTable;
-        const shortId = await participantListTable.getParticipantDataAt(rowIndex, Label.SHORT_ID);*/
-        const shortId = await participantListPage.findParticipantWithTab({ tab: Tab.SAMPLE_INFORMATION });
+        const studyInfo = studyShortName(study);
+        const prefixInfo = studyInfo.playwrightPrefixAdult as string;
+        const shortId = await participantListPage.findParticipantWithTab({ tab: Tab.SAMPLE_INFORMATION, prefix: prefixInfo });
+
         await participantListPage.filterListByShortId(shortId);
         const participantListTable = participantListPage.participantListTable;
         logInfo(`${study} Participant Short ID: ${shortId}`);

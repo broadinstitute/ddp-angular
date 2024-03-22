@@ -237,6 +237,8 @@ export function studyShortName(study: StudyName): {
       shortName = 'cmi-lms';
       realm = 'cmi-lms';
       collaboratorPrefix = 'PECGSProject';
+      playwrightPrefixAdult = 'E2E';
+      playwrightPrefixChild = 'E2E-Child';
       break;
     case StudyName.OSTEO:
       shortName = 'cmi-osteo';
