@@ -8,6 +8,7 @@ import UserPermissionPage from 'dsm/pages/user-and-permissions-page';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
 import Select from 'dss/component/select';
 import { logInfo } from 'utils/log-utils';
+import { studyShortName } from 'utils/test-utils';
 
 const {
   OSTEO_USER_EMAIL,
@@ -70,13 +71,19 @@ test.describe.serial('Medical Records View Permission', () => {
         await participantListPage.waitForReady();
 
         // Find participant created by Playwright DSS test
-        const rowIndex = await participantListPage.findParticipantFor(CustomizeView.PARTICIPANT, Label.EMAIL, {value: emails[i].split('@')[0] });
-        const participantListTable = participantListPage.participantListTable;
-        const shortId = await participantListTable.getParticipantDataAt(rowIndex, Label.SHORT_ID);
+        //const rowIndex = await participantListPage.findParticipantFor(CustomizeView.PARTICIPANT, Label.EMAIL, {value: emails[i].split('@')[0] });
+        //const participantListTable = participantListPage.participantListTable;
+        //const shortId = await participantListTable.getParticipantDataAt(rowIndex, Label.SHORT_ID);
+        const studyInfo = studyShortName(study);
+        const prefixInfo = studyInfo.playwrightPrefixAdult as string;
+        const shortId = await participantListPage.findParticipantWithTab({ tab: Tab.ONC_HISTORY, prefix: prefixInfo });
         logInfo(`${study} Participant Short ID: ${shortId}`);
 
+        await participantListPage.filterListByShortId(shortId);
+        const participantListTable = participantListPage.participantListTable;
+
         // Open Participant page, user is able to see all tabs
-        await participantListTable.openParticipantPageAt(rowIndex);
+        await participantListTable.openParticipantPageAt(0);
         const expectedTabs = [
           Tab.SURVEY_DATA,
           Tab.SAMPLE_INFORMATION,
