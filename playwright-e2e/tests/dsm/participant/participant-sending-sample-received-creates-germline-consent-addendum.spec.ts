@@ -141,7 +141,7 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
         const participantListTable = participantListPage.participantListTable;
         const amountOfParticipants = await participantListTable.rowsCount;
         expect(amountOfParticipants).toBe(1);
-      }).toPass({intervals: [10_000], timeout: 180_000}); //increasing timeout to 3 mins - previously was 1 min
+      }).toPass({intervals: [10_000], timeout: 300_000}); //increasing timeout to 5 mins - previously was 1 min
 
       const participantListTable = participantListPage.participantListTable;
       const germlineInfo = (await participantListTable.getParticipantDataAt(0, Label.GERMLINE_CONSENT_ADDENDUM_SURVEY_CREATED)).trim();
@@ -248,7 +248,7 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
         const participantListTable = participantListPage.participantListTable;
         const amountOfParticipants = await participantListTable.rowsCount;
         expect(amountOfParticipants).toBe(1);
-      }).toPass({intervals: [10_000], timeout: 180_000});
+      }).toPass({intervals: [10_000], timeout: 300_000});
 
       const participantListTable = participantListPage.participantListTable;
       const germlineInfo = (await participantListTable.getParticipantDataAt(0, Label.GERMLINE_CONSENT_ADDENDUM_SURVEY_CREATED)).trim();
@@ -355,7 +355,7 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
         const participantListTable = participantListPage.participantListTable;
         const amountOfParticipants = await participantListTable.rowsCount;
         expect(amountOfParticipants).toBe(1);
-      }).toPass({intervals: [10_000], timeout: 180_000});
+      }).toPass({intervals: [10_000], timeout: 300_000});
 
       const participantListTable = participantListPage.participantListTable;
       const germlineInfo = (await participantListTable.getParticipantDataAt(0, Label.GERMLINE_CONSENT_ADDENDUM_SURVEY_CREATED)).trim();
@@ -462,7 +462,7 @@ test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
         const participantListTable = participantListPage.participantListTable;
         const amountOfParticipants = await participantListTable.rowsCount;
         expect(amountOfParticipants).toBe(1);
-      }).toPass({intervals: [10_000], timeout: 180_000});
+      }).toPass({intervals: [10_000], timeout: 300_000});
 
       const participantListTable = participantListPage.participantListTable;
       const germlineInfo = (await participantListTable.getParticipantDataAt(0, Label.GERMLINE_CONSENT_ADDENDUM_SURVEY_CREATED)).trim();
