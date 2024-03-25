@@ -43,7 +43,7 @@ test.describe.serial('DSM Family Enrollment Handling', () => {
     await customizeViewPanel.selectColumns(CustomizeView.PARTICIPANT, [Label.PARTICIPANT_ID]);
     const participantGuid = await participantListTable.getParticipantDataAt(0, Label.PARTICIPANT_ID);
     saveParticipantGuid(participantGuid);
-    console.log(`Short ID: ${shortID} & Participant Guid: ${participantGuid}`);
+    logInfo(`Short ID: ${shortID} & Participant Guid: ${participantGuid}`);
 
     //Filter the Participant List by the given guid
     await participantListPage.filterListByParticipantGUID(participantGuid);
