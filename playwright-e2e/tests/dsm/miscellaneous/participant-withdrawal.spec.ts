@@ -87,10 +87,11 @@ test.describe('Participants Withdrawal', () => {
         await navigation.selectFromStudy<ParticipantListPage>(Study.PARTICIPANT_LIST);
         await participantListPage.waitForReady();
 
+        await participantListPage.reload();
+        await participantListPage.filterListByShortId(shortIdColumnId);
+
         // verify status has changed to withdrawn
         /*await expect(async () => {
-          await participantListPage.reload();
-          await participantListPage.filterListByShortId(shortIdColumnId);
           /// Status of participant should update to “Exited after enrollment” or “Exited before enrollment”
           const participantStatus = await participantsTable.findCell(Label.SHORT_ID, shortIdColumnId, Label.STATUS);
           await expect(participantStatus!).toContainText(/Exited (before|after) Enrollment/);
