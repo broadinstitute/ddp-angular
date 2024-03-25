@@ -14,6 +14,7 @@ import { v4 as uuid } from 'uuid';
 import ParticipantPage from 'dsm/pages/participant-page';
 import { WelcomePage } from 'dsm/pages/welcome-page';
 import * as crypto from 'crypto';
+import { CustomizeView, Label } from 'dsm/enums';
 
 
 test.describe.serial('DSM Family Enrollment Handling', () => {
@@ -28,16 +29,26 @@ test.describe.serial('DSM Family Enrollment Handling', () => {
     //Verify the Participant List is displayed
     const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(Study.PARTICIPANT_LIST);
     await participantListPage.waitForReady();
+    const participantListTable = participantListPage.participantListTable;
 
-    //Get the most recent automated test participant (searches for up to a week ago)
-    const participantGuid = await participantListPage.getGuidOfMostRecentAutomatedParticipant(user.patient.firstName, true);
-    expect(participantGuid).toBeTruthy();
+    //Get an automated participant who has a proband tab
+    const shortID = await participantListPage.findParticipantWithTab({ rgpProbandTab: true });
+    expect(shortID).toBeTruthy();
+    const customizeViewPanel = participantListPage.filters.customizeViewPanel;
+    await customizeViewPanel.open();
+    await customizeViewPanel.selectColumns(CustomizeView.PARTICIPANT, [Label.SHORT_ID]);
+    await participantListPage.filterListByShortId(shortID);
+
+    await customizeViewPanel.open();
+    await customizeViewPanel.selectColumns(CustomizeView.PARTICIPANT, [Label.PARTICIPANT_ID]);
+    const participantGuid = await participantListTable.getParticipantDataAt(0, Label.PARTICIPANT_ID);
     saveParticipantGuid(participantGuid);
+    logInfo(`Short ID: ${shortID} & Participant Guid: ${participantGuid}`);
 
     //Filter the Participant List by the given guid
     await participantListPage.filterListByParticipantGUID(participantGuid);
 
-    const participantListTable = new ParticipantListTable(page);
+    //const participantListTable = new ParticipantListTable(page);
     const participantPage: ParticipantPage = await participantListTable.openParticipantPageAt(0);
 
     const guid = await participantPage.getGuid();
@@ -98,8 +109,6 @@ test.describe.serial('DSM Family Enrollment Handling', () => {
     const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(Study.PARTICIPANT_LIST);
     await participantListPage.waitForReady();
 
-    const participantGuid = await participantListPage.getGuidOfMostRecentAutomatedParticipant(user.patient.firstName, true);
-    saveParticipantGuid(participantGuid);
     await participantListPage.filterListByParticipantGUID(user.patient.participantGuid);
     //Check that the filtered list returns at least one participant
     const filteredList = page.locator('tr.ng-star-inserted');
@@ -165,8 +174,8 @@ test.describe.serial('DSM Family Enrollment Handling', () => {
     expect(familyIDFromFamilyMemberTab).toBe(proband.familyID);
 
     //Confirm that input entered in Important Notes and Process Notes is saved
-    await proband.inputImportantNotes('Testing notes here - Important Notes');
-    await proband.inputProcessNotes('Testing notes here - Process Notes');
+    await proband.inputImportantNotes(`Testing notes here - Important Notes inputted on ${new Date}`);
+    await proband.inputProcessNotes(`Testing notes here - Process Notes inputted on ${new Date}`);
     const uniqueID = uuid();
     const mixedRaceTestingNotes = `Testing using id ${uniqueID}`;
     await proband.inputMixedRaceNotes(mixedRaceTestingNotes);
@@ -532,9 +541,6 @@ test.describe.serial('DSM Family Enrollment Handling', () => {
     await participantListPage.waitForReady();
 
     //Get the most recent automated test participant (searches for up to a week ago)
-    const participantGuid = await participantListPage.getGuidOfMostRecentAutomatedParticipant(user.patient.firstName, true);
-    saveParticipantGuid(participantGuid);
-
     await participantListPage.filterListByParticipantGUID(user.patient.participantGuid);
 
     const participantListTable = new ParticipantListTable(page);
@@ -617,9 +623,6 @@ test.describe.serial('DSM Family Enrollment Handling', () => {
     await participantListPage.waitForReady();
 
     //Get the most recent automated test participant (searches for up to a week ago)
-    const participantGuid = await participantListPage.getGuidOfMostRecentAutomatedParticipant(user.patient.firstName, true);
-    saveParticipantGuid(participantGuid);
-
     await participantListPage.filterListByParticipantGUID(user.patient.participantGuid);
 
     const participantListTable = new ParticipantListTable(page);
