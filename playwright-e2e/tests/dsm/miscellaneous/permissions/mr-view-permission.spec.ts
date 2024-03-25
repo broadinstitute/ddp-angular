@@ -71,9 +71,6 @@ test.describe.serial('Medical Records View Permission', () => {
         await participantListPage.waitForReady();
 
         // Find participant created by Playwright DSS test
-        //const rowIndex = await participantListPage.findParticipantFor(CustomizeView.PARTICIPANT, Label.EMAIL, {value: emails[i].split('@')[0] });
-        //const participantListTable = participantListPage.participantListTable;
-        //const shortId = await participantListTable.getParticipantDataAt(rowIndex, Label.SHORT_ID);
         const studyInfo = studyShortName(study);
         const prefixInfo = studyInfo.playwrightPrefixAdult as string;
         const shortId = await participantListPage.findParticipantWithTab({ tab: Tab.ONC_HISTORY, prefix: prefixInfo });
