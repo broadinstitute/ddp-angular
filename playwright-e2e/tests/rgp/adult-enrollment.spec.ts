@@ -152,6 +152,7 @@ test.describe.serial('Adult Self Enrollment', () => {
     expect(await tellUsAboutYourFamily.yourFirstName().isDisabled()).toBe(true);
   });
 
+  //skipping until PEPPER-1390 is fixed
   test('Go to DSM to verify the newly created account can be found @dss @functional @rgp', async ({ page, request }) => {
     //Go to DSM to verify the newly created account can be found there
     await login(page);
