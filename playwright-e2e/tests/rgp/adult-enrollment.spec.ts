@@ -153,7 +153,7 @@ test.describe.serial('Adult Self Enrollment', () => {
   });
 
   //skipping until PEPPER-1390 is fixed
-  test.skip('Go to DSM to verify the newly created account can be found @dss @functional @rgp', async ({ page, request }) => {
+  test('Go to DSM to verify the newly created account can be found @dss @functional @rgp', async ({ page, request }) => {
     //Go to DSM to verify the newly created account can be found there
     await login(page);
     const navigation = new Navigation(page, request);
