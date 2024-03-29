@@ -31,7 +31,7 @@ export class MBCMedicalReleasePage extends MBCPageBase {
       physicianName = user.doctor.name,
       institutionName = user.doctor.hospital,
       city = user.doctor.city,
-      state = user.doctor.state,
+      state = user.doctor.state.name,
       nth = 0,
     } = opts;
 
@@ -58,7 +58,7 @@ export class MBCMedicalReleasePage extends MBCPageBase {
     const {
       institutionName = user.doctor.hospital,
       city = user.doctor.city,
-      state = user.doctor.state,
+      state = user.doctor.state.name,
       nth = 0,
       label = /Hospital/
     } = opts;

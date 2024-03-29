@@ -252,7 +252,7 @@ test.describe('ATCP parent consent enrollment', () => {
       await medicalHistory.physicianPhone.fill(doctor.phone);
       await medicalHistory.physicianHospitalName.fill(doctor.hospital);
       await medicalHistory.physicianHospitalCity.fill(doctor.city);
-      await medicalHistory.physicianHospitalState.fill(doctor.state);
+      await medicalHistory.physicianHospitalState.fill(doctor.state.name);
       await medicalHistory.physicianHospitalCountry.fill('USA');
       await medicalHistory.next();
 

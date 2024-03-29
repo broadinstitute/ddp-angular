@@ -73,7 +73,7 @@ test.describe('Receive Genome Study Kit', () => {
         const button = table.findButtonInCell(table.rowLocator(), { label: 'Mark Received' });
         await expect(button.toLocator()).toBeVisible();
         await Promise.all([
-          waitForResponse(page, { uri: `ui/receivedKits?realm=${studyShortName(study).realm}&userId=` }),
+          waitForResponse(page, { uri: `ui/receivedKits\\?realm=${studyShortName(study).realm}&userId=` }),
           button.click()
         ]);
         await waitForNoSpinner(page);
