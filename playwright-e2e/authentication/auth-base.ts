@@ -49,10 +49,10 @@ export async function fillInEmailPassword(
     page.locator('button[name="submit"]:visible, button[type="submit"]:visible').click(),
   ]);
 
-  await page.waitForTimeout(3000);
+  await page.waitForTimeout(500);
   await Promise.all([
     expect(authLoading).toBeHidden(),
-    await expect(emailInput).toBeHidden(),
+    expect(emailInput).toBeHidden(),
   ]);
   await waitForNoSpinner(page);
 }
