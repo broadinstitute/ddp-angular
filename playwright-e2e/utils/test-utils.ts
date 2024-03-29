@@ -6,6 +6,7 @@ import axios from 'axios';
 import { logError } from './log-utils';
 import { ResponsePayload } from 'dsm/enums';
 import { StudyName } from 'dsm/navigation';
+import { stat } from 'fs';
 
 export interface WaitForResponse {
   uri: string;
@@ -40,10 +41,10 @@ export async function waitForResponse(page: Page, { uri, status = 200, timeout, 
   let response: any;
   try {
     if (messageBody) {
-      response = await page.waitForResponse((response: Response) => response.url().includes(uri) &&
-      messageBody.every(async message => (await response.text()).includes(message as string)), { timeout });
+      response = await page.waitForResponse((resp: Response) => resp.url().includes(uri) &&
+        messageBody.every(async message => (await resp.text()).includes(message as string)), { timeout });
     } else {
-      response = await page.waitForResponse((response: Response) => response.url().includes(uri), { timeout });
+      response = await page.waitForResponse(new RegExp(uri, 'i'), { timeout });
     }
     await response.finished();
   } catch (err) {
