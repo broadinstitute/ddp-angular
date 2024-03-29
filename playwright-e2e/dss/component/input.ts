@@ -57,16 +57,10 @@ export default class Input extends WidgetBase {
     nth ? this.nth = nth : this.nth;
 
     const doAfterFill = async (): Promise<void> => {
-      const pressTab = this.toLocator().press('Tab');
-      if (waitForSaveRequest) {
-        await Promise.all([
-          waitForResponse(this.page, { uri: '/answers'}),
-          pressTab
-        ]);
-      } else {
-        await pressTab;
-        await this.page.waitForTimeout(200); // short delay to detect triggered saving request
-      }
+      await Promise.all([
+        requestPromise,
+        this.toLocator().press('Tab')
+      ]);
     }
 
     // Is Saving button visible before typing? tests become flaky if saving is in progress before adding another new patch request
@@ -81,6 +75,8 @@ export default class Input extends WidgetBase {
         logError(`Input (Locator: ${this.toLocator()}): Existing value: "${oldValue}". Set "overwrite" param to true for new value: "${value}".`);
       }
     }
+
+    const requestPromise = waitForSaveRequest ? waitForResponse(this.page, { uri: '/answers'}) : Promise.resolve();
 
     if (typeof value === 'string' && value.length === 0) {
       // clear the input field
