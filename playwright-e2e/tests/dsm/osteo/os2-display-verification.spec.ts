@@ -1009,6 +1009,19 @@ test.describe.serial(`${StudyName.OSTEO2}: Verify expected display of participan
   })
 
   test.skip(`${StudyName.OSTEO2}: Verify that display of participant page for ptp with at least one Return of Results`, async ({ page, request }) => {
-    //stuff here
+    navigation = new Navigation(page, request);
+    await new Select(page, { label: 'Select study' }).selectOption(StudyName.OSTEO2);
+
+    const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(Study.PARTICIPANT_LIST);
+    await participantListPage.waitForReady();
+    const participantListTable = participantListPage.participantListTable;
+
+    await test.step(`Find a participant who has had at least one Return of Results`, async () => {
+      //these participants are likely to have most of the activities done + the return of results
+    })
+
+    await test.step(`Find a participant who has had at least one Return of Results`, async () => {
+      //these participants are likely to have most of the activities done + the return of results
+    })
   })
-})
+});
