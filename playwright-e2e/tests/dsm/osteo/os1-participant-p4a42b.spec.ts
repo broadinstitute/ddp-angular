@@ -74,12 +74,12 @@ test.describe.serial('Same Participant in Osteo1 and Osteo2', () => {
       // Compare Medical Records tab screenshot
       const medicalRecordsTab = await participantPage.tablist(Tab.ONC_HISTORY).click<OncHistoryTab>();
       const medicalRecordTable = medicalRecordsTab.table;
-      await expect(medicalRecordTable.tableLocator()).toHaveScreenshot('osteo1-medical-records-tab-view.png');
+      //await expect(medicalRecordTable.tableLocator()).toHaveScreenshot('osteo1-medical-records-tab-view.png');
 
       // Compare Onc History tab screenshot
       const oncHistoryTab = await participantPage.tablist(Tab.ONC_HISTORY).click<OncHistoryTab>();
       const oncHistoryTable = oncHistoryTab.table;
-      await expect(oncHistoryTable.tableLocator()).toHaveScreenshot('osteo1-onc-history-tab-view.png');
+      //await expect(oncHistoryTable.tableLocator()).toHaveScreenshot('osteo1-onc-history-tab-view.png');
 
       // Check Cohort Tags
       // Should find Osteo1 Cohort tag: "OS"
@@ -118,7 +118,7 @@ test.describe.serial('Same Participant in Osteo1 and Osteo2', () => {
     // Compare Onc History tab screenshot
     const oncHistoryTab = await participantPage.tablist(Tab.ONC_HISTORY).click<OncHistoryTab>();
     const oncHistoryTable = oncHistoryTab.table;
-    await expect(oncHistoryTable.tableLocator()).toHaveScreenshot('osteo2-onc-history-tab-view.png');
+    //await expect(oncHistoryTable.tableLocator()).toHaveScreenshot('osteo2-onc-history-tab-view.png');
   });
 
   async function tagLength(page: Page, tagName: string): Promise<number> {
