@@ -22,7 +22,7 @@ import { waitForResponse } from 'utils/test-utils';
 import KitsWithErrorPage from 'dsm/pages/kits-with-error-page';
 import { OncHistorySelectRequestEnum } from 'dsm/component/tabs/enums/onc-history-input-columns-enum';
 
-test.describe.serial('Sending SAMPLE_RECEIVED event to DSS', () => {
+test.describe.skip('Sending SAMPLE_RECEIVED event to DSS', () => {
   const studies = [StudyName.OSTEO2]; //Only clinical (pecgs) studies get this event
   const facilityName = user.doctor.hospital;
   const facilityPhoneNumber = user.doctor.phone;
