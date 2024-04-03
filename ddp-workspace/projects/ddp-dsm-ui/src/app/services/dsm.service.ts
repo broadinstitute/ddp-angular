@@ -23,7 +23,7 @@ import {SendToParticipantRequest} from '../sharedLearningUpload/interfaces/sendT
 import {AddUsersRequest, RemoveUsersRequest} from '../usersAndPermissions/interfaces/addRemoveUsers';
 import {EditUsers} from '../usersAndPermissions/interfaces/editUsers';
 import {EditUserRoles} from '../usersAndPermissions/interfaces/role';
-import {LoggingService} from "ddp-sdk";
+import {LoggingService} from 'ddp-sdk';
 
 declare var DDP_ENV: any;
 

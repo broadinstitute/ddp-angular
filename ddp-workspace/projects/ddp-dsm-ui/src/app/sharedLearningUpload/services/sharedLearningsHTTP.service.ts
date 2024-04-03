@@ -7,7 +7,7 @@ import {
   SomaticResultSignedUrlResponse
 } from '../interfaces/somaticResultSignedUrlRequest';
 import {SessionService} from '../../services/session.service';
-import {LoggingService} from "ddp-sdk";
+import {LoggingService} from 'ddp-sdk';
 
 @Injectable()
 export class SharedLearningsHTTPService {

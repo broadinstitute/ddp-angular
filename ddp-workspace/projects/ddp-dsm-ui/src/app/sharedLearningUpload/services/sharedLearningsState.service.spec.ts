@@ -8,7 +8,7 @@ import {first} from 'rxjs/operators';
 import {expect} from '@angular/flex-layout/_private-utils/testing';
 import {HttpRequestStatusEnum} from '../enums/httpRequestStatus-enum';
 import {SomaticResultsFileVirusStatusEnum} from '../enums/somaticResultsFileVirusStatus-enum';
-import {LoggingService} from "ddp-sdk";
+import {LoggingService} from 'ddp-sdk';
 
 const testDocuments: any = [
   {
