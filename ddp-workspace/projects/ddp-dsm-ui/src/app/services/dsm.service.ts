@@ -1225,8 +1225,6 @@ export class DSMService {
       httpRequest: { requestUrl: location.href, userAgent: navigator.userAgent }
     };
 
-    console.log('Logging ' + JSON.stringify(body) + ' to ' + url);
-
     return this.http.post(
       url,
       body,
@@ -1236,7 +1234,6 @@ export class DSMService {
   }
 
   private handleError(error: any): Observable<any> {
-    console.log('Error ' + error);
     return throwError(() => error);
   }
 
