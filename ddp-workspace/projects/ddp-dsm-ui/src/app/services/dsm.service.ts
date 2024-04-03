@@ -23,6 +23,7 @@ import {SendToParticipantRequest} from '../sharedLearningUpload/interfaces/sendT
 import {AddUsersRequest, RemoveUsersRequest} from '../usersAndPermissions/interfaces/addRemoveUsers';
 import {EditUsers} from '../usersAndPermissions/interfaces/editUsers';
 import {EditUserRoles} from '../usersAndPermissions/interfaces/role';
+import {LoggingService} from 'ddp-sdk';
 
 declare var DDP_ENV: any;
 
@@ -39,7 +40,8 @@ export class DSMService {
                private sessionService: SessionService,
                private role: RoleService,
                private router: Router,
-              private localStorageService: LocalStorageService) {
+              private localStorageService: LocalStorageService,
+              private log: LoggingService) {
   }
 
   getDashboardData({startDate, endDate}: IDateRange, chartOrCount: StatisticsEnum): Observable<any> {
@@ -1216,6 +1218,7 @@ export class DSMService {
   }
 
   private handleError(error: any): Observable<any> {
+    this.log.logToCloud(error);
     return throwError(() => error);
   }
 
