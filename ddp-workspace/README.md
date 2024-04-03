@@ -11,7 +11,13 @@ npm install
 ```
 ## Launch apps
 
-Don't forget to render `ddpConfig.js/pepperConfig.js`.
+Don't forget to render `ddpConfig.js/pepperConfig.js` for study apps.
+
+For DSM, render the ddp_config.js file like so:
+
+```
+gcloud --project=${PROJECT_ID} secrets versions access latest --secret="study-manager-ui-config" > ddp-dsm-ui/src/assets/js/ddp_config.js
+```
 
 Sample apps:
 ```

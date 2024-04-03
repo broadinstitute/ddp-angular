@@ -16,7 +16,7 @@ export class LogEntry {
             || !entry.severity || !Object.values(LogSeverity).includes(entry.severity)
             || (entry.httpRequest && !isLogEntryHttpRequest(entry.httpRequest))
             || (entry.labels && Object.values(entry.labels).find(val => typeof val !== 'string'))) {
-            throw new Error("Invalid body");
+            throw new Error("Invalid body " + entry);
         }
 
         this.logName = `projects/${projectId}/logs/${entry.logName}`;

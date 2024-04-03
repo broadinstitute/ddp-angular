@@ -59,7 +59,7 @@ describe('Shared Learnings State Service', () => {
     const sessionService = new SessionService();
     spyOnProperty(sessionService, 'selectedRealm', 'get').and.returnValue('test study');
 
-    const httpService = new SharedLearningsHTTPService({} as DSMService, sessionService, {} as LoggingService);
+    const httpService = new SharedLearningsHTTPService({} as DSMService, sessionService);
     spyOn(httpService, 'getFiles').and.returnValue(of(testDocuments));
     spyOn(httpService, 'getFile').and.returnValue(of(testDocuments[0]));
     spyOn(httpService, 'sendToParticipant').and.returnValue(of({data: 123}));
