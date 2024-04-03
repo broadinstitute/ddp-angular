@@ -1,5 +1,5 @@
 import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
-import {ConfigurationService, LoggingService} from 'ddp-sdk';
+import {ConfigurationService} from 'ddp-sdk';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {RoleService} from '../../../services/role.service';
 import {DebugElement} from '@angular/core';
@@ -39,7 +39,7 @@ describe('UploadFileComponent', () => {
 
     spyOnProperty(roleService, 'allowUploadRorFile', 'get').and.returnValue(true);
 
-    const httpService = new SharedLearningsHTTPService({} as DSMService, sessionService, {} as LoggingService);
+    const httpService = new SharedLearningsHTTPService({} as DSMService, sessionService);
     spyOn(httpService, 'getSignedUrl')
       .and
       .returnValue(
