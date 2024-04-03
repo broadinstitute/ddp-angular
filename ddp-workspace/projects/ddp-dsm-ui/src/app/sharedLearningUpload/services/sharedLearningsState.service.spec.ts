@@ -8,6 +8,7 @@ import {first} from 'rxjs/operators';
 import {expect} from '@angular/flex-layout/_private-utils/testing';
 import {HttpRequestStatusEnum} from '../enums/httpRequestStatus-enum';
 import {SomaticResultsFileVirusStatusEnum} from '../enums/somaticResultsFileVirusStatus-enum';
+import {LoggingService} from "ddp-sdk";
 
 const testDocuments: any = [
   {
@@ -58,7 +59,7 @@ describe('Shared Learnings State Service', () => {
     const sessionService = new SessionService();
     spyOnProperty(sessionService, 'selectedRealm', 'get').and.returnValue('test study');
 
-    const httpService = new SharedLearningsHTTPService({} as DSMService, sessionService);
+    const httpService = new SharedLearningsHTTPService({} as DSMService, sessionService, {} as LoggingService);
     spyOn(httpService, 'getFiles').and.returnValue(of(testDocuments));
     spyOn(httpService, 'getFile').and.returnValue(of(testDocuments[0]));
     spyOn(httpService, 'sendToParticipant').and.returnValue(of({data: 123}));

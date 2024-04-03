@@ -17,6 +17,7 @@ describe('Component: PhiManifestComponent', () => {
     const mockRoleService = jasmine.createSpyObj('RoleService', ['method1', 'method2']);
     const mockRouter = jasmine.createSpyObj('Router', ['navigate']);
     const mockLocalStorageService = jasmine.createSpyObj('LocalStorageService', ['getItem', 'setItem']);
+    const mockLoggingServiceSpy = jasmine.createSpyObj('LoggingService', ['logToCloud']);
 
     // Create a mock DSMService using the mock dependencies
     mockDSMService = new DSMService(
@@ -24,7 +25,8 @@ describe('Component: PhiManifestComponent', () => {
       mockSessionService,
       mockRoleService,
       mockRouter,
-      mockLocalStorageService
+      mockLocalStorageService,
+      mockLoggingServiceSpy
     );
 
     const auth = jasmine.createSpyObj('Auth', ['authenticated', 'sessionLogout']);
