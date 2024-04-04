@@ -34,6 +34,14 @@ export class SharedLearningsHTTPService {
   }
 
   public upload(signedUrl: string, file: File): Observable<any> {
+    this.dsmService.logToCloud(`Uploading file ${file.name} to url ${signedUrl}.`).subscribe({
+      next: data => {
+        console.log('logged upload');
+      },
+      error: err => {
+        console.log('error logging upload ' + err);
+      }
+    });
     return this.dsmService.uploadSomaticResultsFile(signedUrl, file);
   }
 

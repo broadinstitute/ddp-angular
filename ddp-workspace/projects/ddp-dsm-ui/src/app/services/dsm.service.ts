@@ -1215,6 +1215,24 @@ export class DSMService {
     );
   }
 
+  public logToCloud(payload: string, sev = 'INFO'): Observable<void> {
+    const url =  `https://us-central1-${DDP_ENV.projectGcpId}.cloudfunctions.net/LoggingService`;
+    const body = {
+      logName: 'study-manager-ui',
+      severity: sev,
+      textPayload: payload,
+      labels: { userGuid: this.role.userID()  },
+      httpRequest: { requestUrl: location.href, userAgent: navigator.userAgent }
+    };
+
+    return this.http.post(
+      url,
+      body,
+      { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) }).pipe(
+      catchError(this.handleError.bind(this))
+    );
+  }
+
   private handleError(error: any): Observable<any> {
     return throwError(() => error);
   }
