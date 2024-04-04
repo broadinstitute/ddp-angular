@@ -7,15 +7,13 @@ import {
   SomaticResultSignedUrlResponse
 } from '../interfaces/somaticResultSignedUrlRequest';
 import {SessionService} from '../../services/session.service';
-import {LoggingService} from 'ddp-sdk';
 
 @Injectable()
 export class SharedLearningsHTTPService {
 
   constructor(
     private readonly dsmService: DSMService,
-    private readonly sessionService: SessionService,
-    private readonly log: LoggingService
+    private readonly sessionService: SessionService
   ) {}
 
   public getFiles(participantId: string): Observable<SomaticResultsFile[]> {
@@ -36,7 +34,14 @@ export class SharedLearningsHTTPService {
   }
 
   public upload(signedUrl: string, file: File): Observable<any> {
-    this.log.logToCloud(`Uploading file ${file} to url ${signedUrl}.`);
+    this.dsmService.logToCloud(`Uploading file ${file.name} to url ${signedUrl}.`).subscribe({
+      next: data => {
+        console.log('logged upload');
+      },
+      error: err => {
+        console.log('error logging upload ' + err);
+      }
+    });
     return this.dsmService.uploadSomaticResultsFile(signedUrl, file);
   }
 

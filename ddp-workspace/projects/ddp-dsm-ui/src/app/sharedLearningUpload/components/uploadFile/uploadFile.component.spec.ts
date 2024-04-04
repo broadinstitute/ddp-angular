@@ -39,7 +39,7 @@ describe('UploadFileComponent', () => {
 
     spyOnProperty(roleService, 'allowUploadRorFile', 'get').and.returnValue(true);
 
-    const httpService = new SharedLearningsHTTPService({} as DSMService, sessionService, {} as LoggingService);
+    const httpService = new SharedLearningsHTTPService({} as DSMService, sessionService);
     spyOn(httpService, 'getSignedUrl')
       .and
       .returnValue(

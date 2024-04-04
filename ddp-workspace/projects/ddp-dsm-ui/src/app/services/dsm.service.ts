@@ -23,7 +23,6 @@ import {SendToParticipantRequest} from '../sharedLearningUpload/interfaces/sendT
 import {AddUsersRequest, RemoveUsersRequest} from '../usersAndPermissions/interfaces/addRemoveUsers';
 import {EditUsers} from '../usersAndPermissions/interfaces/editUsers';
 import {EditUserRoles} from '../usersAndPermissions/interfaces/role';
-import {LoggingService} from 'ddp-sdk';
 
 declare var DDP_ENV: any;
 
@@ -40,8 +39,7 @@ export class DSMService {
                private sessionService: SessionService,
                private role: RoleService,
                private router: Router,
-              private localStorageService: LocalStorageService,
-              private log: LoggingService) {
+              private localStorageService: LocalStorageService) {
   }
 
   getDashboardData({startDate, endDate}: IDateRange, chartOrCount: StatisticsEnum): Observable<any> {
@@ -1217,8 +1215,25 @@ export class DSMService {
     );
   }
 
+  public logToCloud(payload: string, sev = 'INFO'): Observable<void> {
+    const url =  `https://us-central1-${DDP_ENV.projectGcpId}.cloudfunctions.net/LoggingService`;
+    const body = {
+      logName: 'study-manager-ui',
+      severity: sev,
+      textPayload: payload,
+      labels: { userGuid: this.role.userID()  },
+      httpRequest: { requestUrl: location.href, userAgent: navigator.userAgent }
+    };
+
+    return this.http.post(
+      url,
+      body,
+      { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) }).pipe(
+      catchError(this.handleError.bind(this))
+    );
+  }
+
   private handleError(error: any): Observable<any> {
-    this.log.logToCloud(error);
     return throwError(() => error);
   }
 
