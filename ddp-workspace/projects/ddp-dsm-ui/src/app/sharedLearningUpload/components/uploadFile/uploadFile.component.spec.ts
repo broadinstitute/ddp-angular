@@ -1,5 +1,5 @@
 import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
-import {ConfigurationService} from 'ddp-sdk';
+import {ConfigurationService, LoggingService} from 'ddp-sdk';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {RoleService} from '../../../services/role.service';
 import {DebugElement} from '@angular/core';

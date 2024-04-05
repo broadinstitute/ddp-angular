@@ -29,7 +29,7 @@ export const logMessage:  HttpFunction = (req: express.Request, res: express.Res
         return;
     }
 
-    if (req.body) { 
+    if (req.body) {
         let entry: LogEntry;
         if (!projectId) {
           res.status(500).send({error: "GCP_PROJECT environment variable not set"});
@@ -38,7 +38,7 @@ export const logMessage:  HttpFunction = (req: express.Request, res: express.Res
         try {
             entry = new LogEntry(projectId, req.body);
         } catch(error) {
-            console.error("Could not process log entry: %o", req.body);
+            console.error("Could not process log entry: body %o error %s", req.body, error);
             res.status(400).send(error);
             return;
         }

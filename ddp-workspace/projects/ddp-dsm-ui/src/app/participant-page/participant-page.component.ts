@@ -1801,7 +1801,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
             somaticConsentAddendumTumorAdult = consentAddendum?.questionsAnswers
               ?.find(({answer, stableId}) => stableId === 'SOMATIC_CONSENT_ADDENDUM_TUMOR' && answer);
 
-          } else if (this.participant.data.ddp?.toLowerCase() === 'cmi-osteo') {
+          } else if (this.participant.data.ddp?.toLowerCase().startsWith('cmi-osteo')) {
               somaticConsentAddendumTumorAdult = consentAddendum?.questionsAnswers
                 ?.find(({answer, stableId}) => stableId === 'SOMATIC_CONSENT_TUMOR' && answer);
           }
