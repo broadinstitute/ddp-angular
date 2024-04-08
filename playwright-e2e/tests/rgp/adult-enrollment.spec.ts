@@ -152,7 +152,8 @@ test.describe.serial('Adult Self Enrollment', () => {
     expect(await tellUsAboutYourFamily.yourFirstName().isDisabled()).toBe(true);
   });
 
-  test('Go to DSM to verify the newly created account can be found @dss @functional @rgp', async ({ page, request }) => {
+  //It seems there's ajob that runs for about 2 hours before participants show up in the morning - will unskip after PEPPER-1390 is done
+  test.skip('Go to DSM to verify the newly created account can be found @dss @functional @rgp', async ({ page, request }) => {
     //Go to DSM to verify the newly created account can be found there
     await login(page);
     const navigation = new Navigation(page, request);
