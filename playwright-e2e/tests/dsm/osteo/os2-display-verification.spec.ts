@@ -7,6 +7,7 @@ import ParticipantPage from 'dsm/pages/participant-page';
 import ContactInformationTab from 'dsm/pages/tablist/contact-information-tab';
 import OncHistoryTab from 'dsm/pages/tablist/onc-history-tab';
 import SequeuncingOrderTab from 'dsm/pages/tablist/sequencing-order-tab';
+import SharedLearningTab from 'dsm/pages/tablist/shared-learning-tab';
 import Select from 'dss/component/select';
 import { test } from 'fixtures/dsm-fixture';
 import { mailingListCreatedDate } from 'utils/date-utils';
@@ -1038,10 +1039,11 @@ test.describe.serial(`${StudyName.OSTEO2}: Verify expected display of participan
       expect(amountOfParticipantsDisplayed).toBe(1);
 
       participantPage = await participantListTable.openParticipantPageAt(0);
+      await participantPage.waitForReady();
     })
 
     await test.step(`Check the display of profile info`, async () => {
-      
+      //stuff here
     })
 
     await test.step(`Check that all tabs are displayed as expected`, async () => {
@@ -1049,7 +1051,19 @@ test.describe.serial(`${StudyName.OSTEO2}: Verify expected display of participan
     })
 
     await test.step(`Check Shared Learnings tab`, async () => {
-      //stuff here
+      const sharedLearningTab = await participantPage.tablist(Tab.SHARED_LEARNINGS).click<SharedLearningTab>();
+      const selectPDFButton = sharedLearningTab.selectPDFButton;
+      await expect(selectPDFButton).toBeVisible();
+
+      const fileDescription = sharedLearningTab.selectedFileSection;
+      await expect(fileDescription).toBeVisible();
+
+      const uploadButton = sharedLearningTab.uploadButton;
+      await expect(uploadButton).toBeVisible();
+
+      //Chosen participant is expected to have at least 1 return of results letter uploaded
+      const amountOfResultLetters = await sharedLearningTab.getUploadedFileCount();
+      expect(amountOfResultLetters).toBeGreaterThanOrEqual(1);
     })
   })
 });

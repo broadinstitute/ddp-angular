@@ -8,6 +8,7 @@ import SurveyDataTab from 'dsm/pages/tablist/survey-data-tab';
 import SequencingOrderTab from 'dsm/pages/tablist/sequencing-order-tab';
 import MedicalRecordsTab from 'dsm/pages/tablist/medical-records-tab';
 import { waitForNoSpinner } from 'utils/test-utils';
+import SharedLearningTab from 'dsm/pages/tablist/shared-learning-tab';
 
 export default class Tablist {
   protected readonly tabs = new Map<string, object>([
@@ -18,6 +19,7 @@ export default class Tablist {
     [Tab.MEDICAL_RECORD, new MedicalRecordsTab(this.page)],
     [Tab.SURVEY_DATA, new SurveyDataTab(this.page)],
     [Tab.SEQUENCING_ORDER, new SequencingOrderTab(this.page)],
+    [Tab.SHARED_LEARNINGS, new SharedLearningTab(this.page)],
   ]);
 
   public constructor(private readonly page: Page, private readonly tab: Tab | string) {}
