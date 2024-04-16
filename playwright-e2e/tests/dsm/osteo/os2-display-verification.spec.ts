@@ -1008,20 +1008,48 @@ test.describe.serial(`${StudyName.OSTEO2}: Verify expected display of participan
     })
   })
 
-  test.skip(`${StudyName.OSTEO2}: Verify that display of participant page for ptp with at least one Return of Results`, async ({ page, request }) => {
+  test(`${StudyName.OSTEO2}: Verify that display of participant page for ptp with at least one Return of Results`, async ({ page, request }) => {
     navigation = new Navigation(page, request);
     await new Select(page, { label: 'Select study' }).selectOption(StudyName.OSTEO2);
 
     const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(Study.PARTICIPANT_LIST);
     await participantListPage.waitForReady();
     const participantListTable = participantListPage.participantListTable;
+    let shortID: string;
+    let searchPanel;
+    let participantPage: ParticipantPage;
 
-    await test.step(`Find a participant who has had at least one Return of Results`, async () => {
+    await test.step(`Use the filter to find a participant who has had at least one Return of Results`, async () => {
       //these participants are likely to have most of the activities done + the return of results
+      const savedFilterSection = participantListPage.savedFilters;
+      await savedFilterSection.openPanel();
+      await savedFilterSection.exists(filterReturnOfResults);
+      await savedFilterSection.open(filterReturnOfResults);
+      shortID = await participantListPage.findParticipantWithTab({ tab: Tab.SHARED_LEARNINGS, uri: 'filterList?' });
     })
 
-    await test.step(`Find a participant who has had at least one Return of Results`, async () => {
-      //these participants are likely to have most of the activities done + the return of results
+    await test.step(`Open the chosen participant's participant page`, async () => {
+      searchPanel = participantListPage.filters.searchPanel;
+      await searchPanel.open();
+      await searchPanel.text(Label.SHORT_ID, { textValue: shortID, exactMatch: true });
+      await searchPanel.search();
+
+      const amountOfParticipantsDisplayed = await participantListTable.rowsCount;
+      expect(amountOfParticipantsDisplayed).toBe(1);
+
+      participantPage = await participantListTable.openParticipantPageAt(0);
+    })
+
+    await test.step(`Check the display of profile info`, async () => {
+      
+    })
+
+    await test.step(`Check that all tabs are displayed as expected`, async () => {
+      //stuff here
+    })
+
+    await test.step(`Check Shared Learnings tab`, async () => {
+      //stuff here
     })
   })
 });

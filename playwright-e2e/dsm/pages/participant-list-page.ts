@@ -265,8 +265,14 @@ export default class ParticipantListPage extends DsmPageBase {
       prefix?: string
     }): Promise<string> {
     const { isPediatric = false, tab, rgpProbandTab = false, uri = '/ui/applyFilter', prefix } = opts;
+    const expectedTabs: Tab[] = [
+      Tab.ONC_HISTORY,
+      Tab.MEDICAL_RECORD,
+      Tab.SAMPLE_INFORMATION,
+      Tab.SHARED_LEARNINGS,
+    ];
 
-    if (tab !== Tab.ONC_HISTORY && tab !== Tab.MEDICAL_RECORD && tab !== Tab.SAMPLE_INFORMATION && !rgpProbandTab) {
+    if (!expectedTabs.includes(tab as Tab) && !rgpProbandTab) {
       throw new Error(`Undefined actions for tab: "${tab}" and rgpProbandTab: "${rgpProbandTab}"`);
     }
 
@@ -328,6 +334,22 @@ export default class ParticipantListPage extends DsmPageBase {
           }
 
           if (kits) {
+            shortID = JSON.stringify(value.esData.profile.hruid).replace(/['"]+/g, '');
+            logInfo(`Found participant with Short ID: ${shortID} to have tab: ${tab}`);
+            return shortID;
+          }
+        }
+
+        if (tab === Tab.SHARED_LEARNINGS) {
+          const sharedLearnings = value.somaticResultUpload;
+          const id = JSON.stringify(value.esData.profile.hruid).replace(/['"]+/g, '');
+          console.log(`currently looking at ptp: ${id}`);
+          if (!sharedLearnings || sharedLearnings[0] === undefined) {
+            //Does not have a Return of Results uploaded or has them uploaded but does not have the Shared Learnings tab (due to testing)
+            continue;
+          }
+
+          if (sharedLearnings) {
             shortID = JSON.stringify(value.esData.profile.hruid).replace(/['"]+/g, '');
             logInfo(`Found participant with Short ID: ${shortID} to have tab: ${tab}`);
             return shortID;
