@@ -402,7 +402,7 @@ export default class ParticipantListPage extends DsmPageBase {
     let shortId = '';
     const endTime = Date.now() + 50 * 1000;
 
-    while (shortId === '') {
+    while (shortId === '' && amountOfParticipantsDisplayed > 0) {
       for (let index = 0; index < amountOfParticipantsDisplayed; index++) {
         const info = await participantListTable.getParticipantDataAt(index, Label.COHORT_TAG_NAME);
         const infoArray = info.split(`\n\n`); //multiple cohort tags are split using this
