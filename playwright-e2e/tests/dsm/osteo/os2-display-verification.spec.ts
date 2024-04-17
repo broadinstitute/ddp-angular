@@ -875,41 +875,6 @@ test.describe.serial(`${StudyName.OSTEO2}: Verify expected display of participan
     })
   })
 
-  test(`${StudyName.OSTEO2}: Verify general appearance of participant page`, async ({ page, request }) => {
-    navigation = new Navigation(page, request);
-    await new Select(page, { label: 'Select study' }).selectOption(StudyName.OSTEO2);
-
-    const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(Study.PARTICIPANT_LIST);
-    await participantListPage.waitForReady();
-    const participantListTable = participantListPage.participantListTable;
-    let participantPosition: number;
-    let participantPage: ParticipantPage;
-    let shortID: string;
-
-    await test.step(`Use a filter to get the participants who likely have the most activities filled out`, async () => {
-      const savedFilterSection = participantListPage.savedFilters;
-      await savedFilterSection.openPanel();
-      await savedFilterSection.exists(filterReturnOfResults);
-      await savedFilterSection.open(filterReturnOfResults);
-    })
-
-    await test.step(`Choose a participant`, async () => {
-      //stuff here
-    })
-
-    await test.step(`Check their profile section`, async () => {
-      //stuff here
-    })
-
-    await test.step(`Check the section below profile`, async () => {
-      //stuff here
-    })
-
-    await test.step(`Check for presence of all expected tabs`, async () => {
-      //stuff here
-    })
-  })
-
   test(`${StudyName.OSTEO2}: Verify that a ptp who resides in New York is not eligible for clinical sequencing`, async ({ page, request }) => {
     navigation = new Navigation(page, request);
     await new Select(page, { label: 'Select study' }).selectOption(StudyName.OSTEO2);
