@@ -1,4 +1,5 @@
 import { expect } from '@playwright/test';
+import exp from 'constants';
 import { QuickFiltersEnum as QuickFilter } from 'dsm/component/filters/quick-filters';
 import { CustomizeView as CV, CustomizeViewID as ID, DataFilter, Label, Tab, CustomizeView } from 'dsm/enums';
 import { Navigation, Study, StudyName } from 'dsm/navigation';
@@ -1047,7 +1048,23 @@ test.describe.serial(`${StudyName.OSTEO2}: Verify expected display of participan
     })
 
     await test.step(`Check that all tabs are displayed as expected`, async () => {
-      //stuff here
+      const surveyDataIsVisible = await participantPage.tablist(Tab.SURVEY_DATA).isVisible();
+      const sampleInformationIsVisible = await participantPage.tablist(Tab.SAMPLE_INFORMATION).isVisible();
+      const contactInformationIsVisible = await participantPage.tablist(Tab.CONTACT_INFORMATION).isVisible();
+      const medicalRecordsIsVisible = await participantPage.tablist(Tab.MEDICAL_RECORD).isVisible();
+      const oncHistoryIsVisible = await participantPage.tablist(Tab.ONC_HISTORY).isVisible();
+      const sequencingOrderTabIsVisible = await participantPage.tablist(Tab.SEQUENCING_ORDER).isVisible();
+      const invitaeTabIsVisible = await participantPage.tablist(Tab.INVITAE).isVisible();
+      const sharedLearningsIsVisible = await participantPage.tablist(Tab.SHARED_LEARNINGS).isVisible();
+
+      expect(surveyDataIsVisible).toBeTruthy();
+      expect(sampleInformationIsVisible).toBeTruthy();
+      expect(contactInformationIsVisible).toBeTruthy();
+      expect(medicalRecordsIsVisible).toBeTruthy();
+      expect(oncHistoryIsVisible).toBeTruthy();
+      expect(sequencingOrderTabIsVisible).toBeTruthy();
+      expect(invitaeTabIsVisible).toBeTruthy();
+      expect(sharedLearningsIsVisible).toBeTruthy();
     })
 
     await test.step(`Check Shared Learnings tab`, async () => {
