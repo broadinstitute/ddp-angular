@@ -5,6 +5,7 @@ import { rows } from 'lib/component/dsm/paginators/types/rowsPerPage';
 import { shuffle } from 'utils/test-utils';
 import { Label } from 'dsm/enums';
 import { StudyName } from 'dsm/navigation';
+import { logInfo } from 'utils/log-utils';
 
 export class ParticipantListTable extends Table {
   private readonly _participantPage: ParticipantPage;
@@ -101,10 +102,10 @@ export class ParticipantListTable extends Table {
       } else {
         columnHeader = this.page.locator(`//th[normalize-space(text())='${header}']`);
       }
-      console.log(`Checking that the ${header} column is displayed`);
+      logInfo(`Checking that the ${header} column is displayed`);
       await expect(columnHeader, `Column ${header} is not visible in the participant list`).toBeVisible();
     }
-    console.log(`\n`); //just to add a space between above log and other logs that might be used
+    logInfo(`\n`); //just to add a space between above log and other logs that might be used
   }
 
   private getParticipantAt(position: number): Locator {
