@@ -1051,5 +1051,13 @@ test.describe.serial(`${StudyName.OSTEO2}: Verify expected display of participan
       const amountOfResultLetters = await sharedLearningTab.getUploadedFileCount();
       expect(amountOfResultLetters).toBeGreaterThanOrEqual(1);
     })
+
+    await test.step(`Delete the Return of Results saved filter`, async () => {
+      await participantPage.backToList();
+      const savedFilterSection = participantListPage.savedFilters;
+      await savedFilterSection.openPanel();
+      await savedFilterSection.exists(filterReturnOfResults);
+      await savedFilterSection.delete(filterReturnOfResults);
+    })
   })
 });
