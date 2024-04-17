@@ -3,6 +3,7 @@ import { StudyName } from 'dsm/navigation';
 import Checkbox from 'dss/component/checkbox';
 import { CustomizeView as ColumnGroup, CustomizeViewID, Label } from 'dsm/enums';
 import { COLUMN } from 'dsm/pages/mailing-list-page';
+import { logInfo } from 'utils/log-utils';
 
 export class CustomizeView {
   private activeColumnsGroup = '';
@@ -163,7 +164,7 @@ export class CustomizeView {
     columnName: Label,
     instance?: number): Promise<void> {
     const option = this.getColumnOption({ columnGroupName: columnSection, groupId: stableID, columnOption: columnName, instance});
-    console.log(`Checking for ${columnSection} \t->\t ${columnName}`);
+    logInfo(`Checking for ${columnSection} \t->\t ${columnName}`);
     await expect(option).toHaveCount(1);
     await option.scrollIntoViewIfNeeded();
     await expect(option).toBeVisible();

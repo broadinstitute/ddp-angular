@@ -1,5 +1,4 @@
 import { expect } from '@playwright/test';
-import exp from 'constants';
 import CohortTag from 'dsm/component/cohort-tag';
 import { QuickFiltersEnum as QuickFilter } from 'dsm/component/filters/quick-filters';
 import { CustomizeView as CV, CustomizeViewID as ID, DataFilter, Label, Tab, CustomizeView } from 'dsm/enums';
@@ -31,7 +30,6 @@ test.describe.serial(`${StudyName.OSTEO2}: Verify expected display of participan
   ];
 
   let navigation;
-  let clinicalParticipantShortID: string;
 
   test(`OS2: Create various filters that can be used to check that OS2 is functioning as expected`, async ({ page, request }) => {
     navigation = new Navigation(page, request);
@@ -98,8 +96,6 @@ test.describe.serial(`${StudyName.OSTEO2}: Verify expected display of participan
       await savedFilterSection.openPanel();
       await savedFilterSection.exists(filterNewYorkResidence);
       await savedFilterSection.exists(filterReturnOfResults);
-
-      await savedFilterSection.delete(filterNewYorkResidence);//Will move these to a test occurring later - putting here to not clog saved filter before tests are finalized
     })
   })
 
