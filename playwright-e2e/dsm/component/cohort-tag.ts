@@ -46,10 +46,6 @@ export default class CohortTag {
     return `//mat-chip-list//mat-chip[normalize-space(text())="${tagName}"]`;
   }
 
-  public getParticipantPageCohortTagXPathTagFor(tagName: string): string {
-    return `//app-cohort-tag//mat-chip-list//mat-chip[normalize-space(text())='${tagName}']`;
-  }
-
   private get getSubmitButtonXPath(): string {
     return '//mat-dialog-container//app-bulk-cohort-tag-modal//button[.//*[text()="Submit"]]';
   }
@@ -58,7 +54,7 @@ export default class CohortTag {
   public async assertParticipantPageCohortTagToHaveCount(opts: { tagName: Label | StudyName, count: number }): Promise<void> {
     const {tagName, count} = opts;
     const cohortTagName = tagName as string;
-    const cohortTagLocator = this.getParticipantPageCohortTagXPathTagFor(cohortTagName);
+    const cohortTagLocator = this.getCohortXPathTagFor(cohortTagName);
     await expect(this.page.locator(cohortTagLocator)).toHaveCount(count);
   }
 
