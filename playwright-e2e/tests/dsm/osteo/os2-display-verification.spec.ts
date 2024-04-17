@@ -13,6 +13,7 @@ import SharedLearningTab from 'dsm/pages/tablist/shared-learning-tab';
 import Select from 'dss/component/select';
 import { test } from 'fixtures/dsm-fixture';
 import { mailingListCreatedDate } from 'utils/date-utils';
+import { logInfo } from 'utils/log-utils';
 
 test.describe.serial(`${StudyName.OSTEO2}: Verify expected display of participant information @dsm @${StudyName.OSTEO2}`, () => {
   const filterReturnOfResults = `PW - Return of Results filter for OS2 - created on ${mailingListCreatedDate(new Date())}`; //named as such due to bug PEPPER-935
@@ -864,7 +865,6 @@ test.describe.serial(`${StudyName.OSTEO2}: Verify expected display of participan
     })
 
     await test.step(`Check that the participant found above is not found within DSM -> OS1 Participant List`, async () => {
-      console.log(`Checking OS1`);
       navigation = new Navigation(page, request);
       await navigation.selectStudy(StudyName.OSTEO);
 
@@ -936,9 +936,8 @@ test.describe.serial(`${StudyName.OSTEO2}: Verify expected display of participan
 
     await test.step(`Select a participant`, async () => {
       [participantPosition] = await participantListTable.randomizeRows();
-      console.log(`Randomized row: ${participantPosition}`);
       shortID = await participantListTable.getParticipantDataAt(participantPosition, Label.SHORT_ID);
-      console.log(`New York Participant Chosen: ${shortID}`);
+      logInfo(`New York Participant Chosen: ${shortID}`);
     })
 
     await test.step(`Navigate to their participant page`, async () => {
@@ -990,7 +989,7 @@ test.describe.serial(`${StudyName.OSTEO2}: Verify expected display of participan
 
       const consentInput = (await participantListTable.getParticipantDataAt(participantPosition, Label.CONSENT_TISSUE)).trim();
       shortID = await participantListTable.getParticipantDataAt(participantPosition, Label.SHORT_ID);
-      console.log(`Consent Input = ${consentInput} for shortID: ${shortID}`);
+      logInfo(`Consent Input = ${consentInput} for shortID: ${shortID}`);
       expect(shortID).toBeTruthy();
       expect(consentInput).toBe('No');
     })
@@ -1006,7 +1005,6 @@ test.describe.serial(`${StudyName.OSTEO2}: Verify expected display of participan
       await expect(participantDidNotConsentMessage).toBeVisible();
 
       const oncHistoryTable = page.locator(`//app-onc-history-detail`);
-      console.log(`onc history table: ${oncHistoryTable}`);
       await expect(oncHistoryTable).toHaveCount(0);
     })
   })
