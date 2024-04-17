@@ -103,7 +103,7 @@ test.describe.serial(`${StudyName.OSTEO2}: Verify expected display of participan
     })
   })
 
-  test.skip(`${StudyName.OSTEO2}: Verify general participant list webelements`, async ({ page, request }) => {
+  test(`${StudyName.OSTEO2}: Verify general participant list webelements`, async ({ page, request }) => {
     test.slow();
     navigation = new Navigation(page, request);
     await new Select(page, { label: 'Select study' }).selectOption(StudyName.OSTEO2);
@@ -847,7 +847,7 @@ test.describe.serial(`${StudyName.OSTEO2}: Verify expected display of participan
     })
   })
 
-  test.skip(`${StudyName.OSTEO2}: Verify a ptp with only 'OS PE-CGS' cohort tag only shows up in OS2 realm, not OS1`, async ({ page, request }) => {
+  test(`${StudyName.OSTEO2}: Verify a ptp with only 'OS PE-CGS' cohort tag only shows up in OS2 realm, not OS1`, async ({ page, request }) => {
     navigation = new Navigation(page, request);
     await new Select(page, { label: 'Select study' }).selectOption(StudyName.OSTEO2);
 
@@ -879,7 +879,7 @@ test.describe.serial(`${StudyName.OSTEO2}: Verify expected display of participan
     })
   })
 
-  test.skip(`${StudyName.OSTEO2}: Verify general appearance of participant page`, async ({ page, request }) => {
+  test(`${StudyName.OSTEO2}: Verify general appearance of participant page`, async ({ page, request }) => {
     navigation = new Navigation(page, request);
     await new Select(page, { label: 'Select study' }).selectOption(StudyName.OSTEO2);
 
@@ -914,7 +914,7 @@ test.describe.serial(`${StudyName.OSTEO2}: Verify expected display of participan
     })
   })
 
-  test.skip(`${StudyName.OSTEO2}: Verify that a ptp who resides in New York is not eligible for clinical sequencing`, async ({ page, request }) => {
+  test(`${StudyName.OSTEO2}: Verify that a ptp who resides in New York is not eligible for clinical sequencing`, async ({ page, request }) => {
     navigation = new Navigation(page, request);
     await new Select(page, { label: 'Select study' }).selectOption(StudyName.OSTEO2);
 
@@ -968,7 +968,7 @@ test.describe.serial(`${StudyName.OSTEO2}: Verify expected display of participan
     })
   })
 
-  test.skip(`${StudyName.OSTEO2}: Verify that onc history error message is present for ptps with CONSENT_TISSUE = No`, async ({ page, request }) => {
+  test(`${StudyName.OSTEO2}: Verify that onc history error message is present for ptps with CONSENT_TISSUE = No`, async ({ page, request }) => {
     navigation = new Navigation(page, request);
     await new Select(page, { label: 'Select study' }).selectOption(StudyName.OSTEO2);
 

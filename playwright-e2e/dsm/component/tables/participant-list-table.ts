@@ -88,7 +88,7 @@ export class ParticipantListTable extends Table {
     let participantListColumnHeaders: Label[] = [];
 
     if (checkDefaultFilterOfStudy && studyName) {
-      participantListColumnHeaders = this.getDefaultFilterOfStudy(studyName);
+      participantListColumnHeaders = this.getDefaultFilter();
     } else if (customFilter) {
       participantListColumnHeaders = customFilter;
     } else if (!checkDefaultFilterOfStudy && !customFilter) {
@@ -138,37 +138,18 @@ export class ParticipantListTable extends Table {
     return '//table/tbody/tr';
   }
 
-  private getDefaultFilterOfStudy(studyName: StudyName): Label[] {
+  /**
+   * Returns the default filter that is used for most studies (except rgp)
+   * @returns a list of Labels that make up the default filter for most studies
+   */
+  private getDefaultFilter(): Label[] {
     const defaultFilterColumnHeaders = [];
-
-    switch (studyName) {
-      case StudyName.RGP:
-        defaultFilterColumnHeaders.push(Label.PARTICIPANT_LIST_CHECKBOX_HEADER);
-        defaultFilterColumnHeaders.push(Label.FAMILY_ID);
-        defaultFilterColumnHeaders.push(Label.SUBJECT_ID);
-        defaultFilterColumnHeaders.push(Label.FIRST_NAME);
-        defaultFilterColumnHeaders.push(Label.LAST_NAME);
-        defaultFilterColumnHeaders.push(Label.DOB);
-        defaultFilterColumnHeaders.push(Label.AGE_TODAY);
-        defaultFilterColumnHeaders.push(Label.PREFERRED_LANGUAGE);
-        defaultFilterColumnHeaders.push(Label.RELATIONSHIP_TO_PROBAND);
-        defaultFilterColumnHeaders.push(Label.AFFECTED_STATUS);
-        defaultFilterColumnHeaders.push(Label.PHONE_PRIMARY);
-        defaultFilterColumnHeaders.push(Label.PREFERRED_EMAIL);
-        defaultFilterColumnHeaders.push(Label.ACCEPTANCE_STATUS);
-        defaultFilterColumnHeaders.push(Label.ACCEPTANCE_STATUS_DATE);
-        defaultFilterColumnHeaders.push(Label.ENROLLMENT_DATE);
-        break;
-      default:
-        //All other studies seem to use this as the default filter
-        defaultFilterColumnHeaders.push(Label.PARTICIPANT_LIST_CHECKBOX_HEADER);
-        defaultFilterColumnHeaders.push(Label.DDP);
-        defaultFilterColumnHeaders.push(Label.SHORT_ID);
-        defaultFilterColumnHeaders.push(Label.FIRST_NAME);
-        defaultFilterColumnHeaders.push(Label.LAST_NAME);
-        defaultFilterColumnHeaders.push(Label.STATUS);
-        break;
-    }
+    defaultFilterColumnHeaders.push(Label.PARTICIPANT_LIST_CHECKBOX_HEADER);
+    defaultFilterColumnHeaders.push(Label.DDP);
+    defaultFilterColumnHeaders.push(Label.SHORT_ID);
+    defaultFilterColumnHeaders.push(Label.FIRST_NAME);
+    defaultFilterColumnHeaders.push(Label.LAST_NAME);
+    defaultFilterColumnHeaders.push(Label.STATUS);
     return defaultFilterColumnHeaders;
   }
 }
