@@ -1,4 +1,6 @@
 import { expect, Locator, Page } from '@playwright/test';
+import { Label } from 'dsm/enums';
+import { StudyName } from 'dsm/navigation';
 import { waitForResponse } from 'utils/test-utils';
 
 export default class CohortTag {
@@ -49,6 +51,13 @@ export default class CohortTag {
   }
 
   /* assertions */
+  public async assertParticipantPageCohortTagToHaveCount(opts: { tagName: Label | StudyName, count: number }): Promise<void> {
+    const {tagName, count} = opts;
+    const cohortTagName = tagName as string;
+    const cohortTagLocator = this.getCohortXPathTagFor(cohortTagName);
+    await expect(this.page.locator(cohortTagLocator)).toHaveCount(count);
+  }
+
   public async assertCohortTagToHaveCount(tagName: string, count: number): Promise<void> {
     await expect(this.page.locator(this.getCohortXPathTagFor(tagName))).toHaveCount(count);
   }

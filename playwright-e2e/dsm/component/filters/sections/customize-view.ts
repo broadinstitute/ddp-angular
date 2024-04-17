@@ -1,8 +1,18 @@
 import { Locator, Page, expect } from '@playwright/test';
+import { StudyName } from 'dsm/navigation';
 import Checkbox from 'dss/component/checkbox';
+import { CustomizeView as ColumnGroup, CustomizeViewID, Label } from 'dsm/enums';
+import { COLUMN } from 'dsm/pages/mailing-list-page';
+import { logInfo } from 'utils/log-utils';
 
 export class CustomizeView {
   private activeColumnsGroup = '';
+  //Some column group names are broken apart by other html tags
+  private columnGroupsUnableToUseExactName = [
+    ColumnGroup.BIRTH_PARENT_FEMALE,
+    ColumnGroup.BIRTH_PARENT_MALE
+  ];
+
   constructor(private readonly page: Page) {}
 
   public async open(): Promise<void> {
@@ -76,8 +86,9 @@ export class CustomizeView {
     }
   }
 
-  public async isColumnVisible(columns: string[]): Promise<boolean> {
+  public async isColumnVisible(columns: string[] | ColumnGroup[]): Promise<boolean> {
     for (const column of columns) {
+      console.log(`Checking for column group: ${column}`);
       const customizeViewColumn = this.page.getByRole('button', { name: column});
       try {
         await expect(customizeViewColumn.first()).toBeVisible({timeout: 5000});
@@ -86,6 +97,77 @@ export class CustomizeView {
       }
     }
     return true;
+  }
+
+  private useExactName(columnGroupName: ColumnGroup): boolean {
+    if (this.columnGroupsUnableToUseExactName.includes(columnGroupName)) {
+      return false;
+    }
+    return true;
+  }
+
+  public getColumnOption(opts: { columnGroupName: ColumnGroup, groupId: CustomizeViewID, columnOption: Label, instance?: number}): Locator {
+    const {columnGroupName, groupId, columnOption, instance = 0} = opts;
+    //button xpath includes dropdown list + stable id to reduce need of using nth
+    let button;
+    if (!this.useExactName(columnGroupName)) {
+      button = this.page.locator(`//button[contains(.,"${columnGroupName}")]/following-sibling::ul[@id='${groupId}']`);
+    } else {
+      button = this.page.getByRole('button', { name: columnGroupName, exact: true }).locator(`//following-sibling::ul[contains(@id, '${groupId}')]`);
+    }
+    const checkbox = button.locator(`//mat-checkbox`);
+    const option = checkbox.getByText(columnOption, { exact: true }).nth(instance); //some column groups have multiple column options with the same name
+    return option;
+  }
+
+  public async openColumnGroup(opts: { columnSection: ColumnGroup, stableID: CustomizeViewID }): Promise<void> {
+    const { columnSection, stableID } = opts; //use stable id to reduce the need for using nth
+    let button;
+    if (!this.useExactName(columnSection)) {
+      button = this.page.locator(`//ul[@id='${stableID}']/preceding-sibling::button[contains(., "${columnSection}")]`);
+    } else {
+      button = this.page.locator(`//ul[@id='${stableID}']/preceding-sibling::button[.//text()[normalize-space()="${columnSection}"]]`);
+    }
+    await expect(button).toBeVisible();
+    await button.scrollIntoViewIfNeeded();
+    const isOpen = await this.dropdownOptionsDisplayed(button);
+    if (!isOpen) {
+      await button.click();
+    }
+  }
+
+  public async closeColumnGroup(opts: { columnSection: ColumnGroup, stableID: CustomizeViewID }): Promise<void> {
+    const { columnSection, stableID } = opts; //use stable id to reduce the need for using nth
+    let button;
+    if (!this.useExactName(columnSection)) {
+      button = this.page.locator(`//ul[@id='${stableID}']/preceding-sibling::button[contains(., "${columnSection}")]`);
+    } else {
+      button = this.page.locator(`//ul[@id='${stableID}']/preceding-sibling::button[.//text()[normalize-space()="${columnSection}"]]`);
+    }
+    await expect(button).toBeVisible();
+    await button.scrollIntoViewIfNeeded();
+    const isOpen = await this.dropdownOptionsDisplayed(button);
+    if (isOpen) {
+      await button.click();
+    }
+    console.log(`\n`);
+  }
+
+  private async dropdownOptionsDisplayed(button: Locator): Promise<boolean> {
+    const dropdownOptions = button.locator(`//following-sibling::ul`);
+    return dropdownOptions.isVisible();
+  }
+
+  public async assertColumnOptionDisplayed(
+    columnSection: ColumnGroup,
+    stableID: CustomizeViewID,
+    columnName: Label,
+    instance?: number): Promise<void> {
+    const option = this.getColumnOption({ columnGroupName: columnSection, groupId: stableID, columnOption: columnName, instance});
+    logInfo(`Checking for ${columnSection} \t->\t ${columnName}`);
+    await expect(option).toHaveCount(1);
+    await option.scrollIntoViewIfNeeded();
+    await expect(option).toBeVisible();
   }
 
   private async isChecked(locator: Locator | undefined): Promise<boolean> {

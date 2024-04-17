@@ -38,7 +38,7 @@ export async function waitForNoSpinner(page: Page, opts: { timeout?: number } = 
 }
 
 export async function waitForResponse(page: Page, { uri, status = 200, timeout, messageBody }: WaitForResponse): Promise<Response> {
-  let response: any;
+  let response: Response;
   try {
     if (messageBody) {
       response = await page.waitForResponse((resp: Response) => resp.url().includes(uri) &&
