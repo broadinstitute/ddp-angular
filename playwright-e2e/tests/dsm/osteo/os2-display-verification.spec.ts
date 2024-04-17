@@ -1,5 +1,6 @@
 import { expect } from '@playwright/test';
 import exp from 'constants';
+import CohortTag from 'dsm/component/cohort-tag';
 import { QuickFiltersEnum as QuickFilter } from 'dsm/component/filters/quick-filters';
 import { CustomizeView as CV, CustomizeViewID as ID, DataFilter, Label, Tab, CustomizeView } from 'dsm/enums';
 import { Navigation, Study, StudyName } from 'dsm/navigation';
@@ -1044,7 +1045,16 @@ test.describe.serial(`${StudyName.OSTEO2}: Verify expected display of participan
     })
 
     await test.step(`Check the display of profile info`, async () => {
-      //stuff here
+      //Check profile webelements specific to OS2
+      const somaticConsentStatus = participantPage.getSomaticConsentStatusLocator;
+      const germlineConsentStatus = participantPage.getGermlineConsentStatusLocator;
+
+      await expect(somaticConsentStatus).toBeVisible();
+      await expect(germlineConsentStatus).toBeVisible();
+
+      //Check that the OS2 cohort tag is present and displayed only once
+      const participantPageCohortTag = new CohortTag(page);
+      await participantPageCohortTag.assertParticipantPageCohortTagToHaveCount({ tagName: StudyName.OSTEO2, count: 1 });
     })
 
     await test.step(`Check that all tabs are displayed as expected`, async () => {
