@@ -126,7 +126,7 @@ test.describe.serial('Medical records request workflow', () => {
         const [mrRequiresReviewValue] = await medicalRecordTable.getTextAt(0, Label.MR_REQUIRES_REVIEW);
         expect(mrRequiresReviewValue).toMatch(/Yes|No/);
 
-        const [paperCRRequiredValue] = await medicalRecordTable.getTextAt(0, Label.PAPER_CR_REQUIRED);
+        const [paperCRRequiredValue] = await medicalRecordTable.getTextAt(0, Label.PAPER_CR_REQUIRED_MEDICAL_RECORD_TABLE);
         expect(paperCRRequiredValue).toMatch(/Yes|No/);
 
         const [mrFollowUpRequiredValue] = await medicalRecordTable.getTextAt(0, Label.MR_FOLLOWUP_REQUIRED);

@@ -496,7 +496,8 @@ export enum Label {
   OTHER_CANCERS_LIST = 'OTHER_CANCERS_LIST',
   OTHER_COMMENTS = 'OTHER_COMMENTS',
   PAPER_CR_RECEIVED = 'Paper C/R Received',
-  PAPER_CR_REQUIRED = 'Paper C/R required',
+  PAPER_CR_REQUIRED = 'Paper C/R required', //written like this in Customize View -> Medical Record Columns
+  PAPER_CR_REQUIRED_MEDICAL_RECORD_TABLE = 'Paper C/R Required', //written like this in Participant page -> Medical Record
   PAPER_CR_SENT = 'Paper C/R Sent',
   PARENT_ONE_DUNNO = 'PARENT1_IDK',
   PARENT_TWO_DUNNO = 'PARENT2_IDK',
