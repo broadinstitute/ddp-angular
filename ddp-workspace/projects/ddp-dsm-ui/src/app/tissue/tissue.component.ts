@@ -102,7 +102,7 @@ export class TissueComponent {
   convertToCamelCase(str: string): string {
     const splittedWords = str.split('_');
     if (splittedWords.length < 2) {
-      //in case there is no underscore in the column name
+      //in case there is no underscore in the column name, assume it is an older column name which is all uppercase
       return this.handleAllUppercase(str);
     }
     return this.makeCamelCaseFrom(this.makeWordsLowerCase(splittedWords));
