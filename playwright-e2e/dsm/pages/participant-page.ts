@@ -112,6 +112,14 @@ export default class ParticipantPage {
     return this.page.locator(this.getMainInputValueInfoXPath(Label.LAST_NAME));
   }
 
+  public get getSomaticConsentStatusLocator(): Locator {
+    return this.page.locator(`//table//td[normalize-space(text())='Somatic Consent Status']//following-sibling::td//mat-select`);
+  }
+
+  public get getGermlineConsentStatusLocator(): Locator {
+    return this.page.locator(`//table//td[normalize-space(text())='Germline Consent Status']//following-sibling::td//mat-select`);
+  }
+
   public async updateInput(inputEnum: Label, newValue: string): Promise<void> {
     const input = this.page.locator(this.getMainInputValueInfoXPath(inputEnum));
     await input.fill('');

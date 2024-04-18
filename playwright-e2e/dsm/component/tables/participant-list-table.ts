@@ -1,9 +1,11 @@
-import { Locator, Page, Response } from '@playwright/test';
+import { Locator, Page, Response, expect } from '@playwright/test';
 import Table from 'dss/component/table';
 import ParticipantPage from 'dsm/pages/participant-page';
 import { rows } from 'lib/component/dsm/paginators/types/rowsPerPage';
 import { shuffle } from 'utils/test-utils';
 import { Label } from 'dsm/enums';
+import { StudyName } from 'dsm/navigation';
+import { logInfo } from 'utils/log-utils';
 
 export class ParticipantListTable extends Table {
   private readonly _participantPage: ParticipantPage;
@@ -75,6 +77,37 @@ export class ParticipantListTable extends Table {
     return cell.innerText();
   }
 
+  /**
+   * Use to verify that certain headers are currently displayed in the participant list
+   * @param checkDefaultFilterOfStudy choose whether to check for the default filter of a given study - use in combination with studyName param
+   * @param studyName the name of the study whose default filter should be checked
+   * @param customFilter for use to check display of custom filters - this is a given list of column headers that make up the given filter
+   */
+  public async assertDisplayedHeaders(opts: { checkDefaultFilterOfStudy?: boolean, studyName?: StudyName, customFilter?: Label[] }): Promise<void> {
+    const { checkDefaultFilterOfStudy = false, studyName, customFilter } = opts;
+    let participantListColumnHeaders: Label[] = [];
+
+    if (checkDefaultFilterOfStudy && studyName) {
+      participantListColumnHeaders = this.getDefaultFilter();
+    } else if (customFilter) {
+      participantListColumnHeaders = customFilter;
+    } else if (!checkDefaultFilterOfStudy && !customFilter) {
+      throw new Error('No column headers were given to check');
+    }
+
+    for (const header of participantListColumnHeaders) {
+      let columnHeader;
+      if (header === Label.PARTICIPANT_LIST_CHECKBOX_HEADER) {
+        columnHeader = this.page.locator('//th[not(text())]');
+      } else {
+        columnHeader = this.page.locator(`//th[normalize-space(text())='${header}']`);
+      }
+      logInfo(`Checking that the ${header} column is displayed`);
+      await expect(columnHeader, `Column ${header} is not visible in the participant list`).toBeVisible();
+    }
+    logInfo(`\n`); //just to add a space between above log and other logs that might be used
+  }
+
   private getParticipantAt(position: number): Locator {
     return this.page.locator('//table/tbody/tr').nth(position);
   }
@@ -103,5 +136,20 @@ export class ParticipantListTable extends Table {
 
   private get rowsXPath(): string {
     return '//table/tbody/tr';
+  }
+
+  /**
+   * Returns the default filter that is used for most studies (except rgp)
+   * @returns a list of Labels that make up the default filter for most studies
+   */
+  private getDefaultFilter(): Label[] {
+    const defaultFilterColumnHeaders = [];
+    defaultFilterColumnHeaders.push(Label.PARTICIPANT_LIST_CHECKBOX_HEADER);
+    defaultFilterColumnHeaders.push(Label.DDP);
+    defaultFilterColumnHeaders.push(Label.SHORT_ID);
+    defaultFilterColumnHeaders.push(Label.FIRST_NAME);
+    defaultFilterColumnHeaders.push(Label.LAST_NAME);
+    defaultFilterColumnHeaders.push(Label.STATUS);
+    return defaultFilterColumnHeaders;
   }
 }
