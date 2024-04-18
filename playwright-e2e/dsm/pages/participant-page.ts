@@ -89,11 +89,11 @@ export default class ParticipantPage {
   }
 
   public async getConsentBlood(): Promise<string> {
-    return await this.readMainTextInfoFor(Label.CONSENT_BLOOD) || '';
+    return await this.readMainTextInfoFor(Label.CONSENT_BLOOD_NORMAL_CASE) || '';
   }
 
   public async getConsentTissue(): Promise<string> {
-    return await this.readMainTextInfoFor(Label.CONSENT_TISSUE) || '';
+    return await this.readMainTextInfoFor(Label.CONSENT_TISSUE_NORMAL_CASE) || '';
   }
 
   public async oncHistoryCreatedDate(): Promise<string> {
