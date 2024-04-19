@@ -119,6 +119,7 @@ test.describe.serial(`${StudyName.OSTEO2}: Verify expected display of participan
       const quickFilters = participantListPage.quickFilters;
       await quickFilters.assertQuickFilterDisplayed(QuickFilter.MEDICAL_RECORDS_NOT_REQUESTED_YET);
       await quickFilters.assertQuickFilterDisplayed(QuickFilter.MEDICAL_RECORDS_NOT_RECEIVED_YET);
+      await quickFilters.assertQuickFilterDisplayed(QuickFilter.PAPER_CR_NEEDED);
       await quickFilters.assertQuickFilterDisplayed(QuickFilter.TISSUE_NEEDS_REVIEW);
       await quickFilters.assertQuickFilterDisplayed(QuickFilter.TISSUE_NOT_REQUESTED_YET);
       await quickFilters.assertQuickFilterDisplayed(QuickFilter.TISSUE_REQUESTED_NOT_RECEIVED_YET);
