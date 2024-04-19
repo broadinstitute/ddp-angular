@@ -554,7 +554,7 @@ export enum Label {
   RESULTS = 'Results',
   RETURN_DATE = 'Return Date',
   SAMPLE_DEACTIVATION = 'Sample Deactivation',
-  SAMPLE_FFPE = 'Is the sample FFPE',
+  SAMPLE_FFPE = 'Is the sample FFPE?',
   SAMPLE_KIT_BARCODE = 'Sample kit barcode for genome study',
   SAMPLE_NOTES = 'Sample Notes',
   SAMPLE_RECEIVED = 'Sample Received',
