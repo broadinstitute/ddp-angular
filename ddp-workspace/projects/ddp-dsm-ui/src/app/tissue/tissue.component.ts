@@ -42,6 +42,7 @@ export class TissueComponent {
   scrolls = 'scrolls';
   selectedSmIds = 0;
   smIdDuplicate = {};
+  camelCaseRegEx = new RegExp('(([a-z])+([A-z])+(\\.)*)+');
 
   constructor(private role: RoleService, private dsmService: DSMService, private compService: ComponentService,
               private router: Router, private auth: Auth) {
@@ -91,9 +92,47 @@ export class TissueComponent {
     if (this.tissue.additionalValuesJson != null) {
       if (this.tissue.additionalValuesJson[colName] != null) {
         return this.tissue.additionalValuesJson[colName];
+      } else if (this.tissue.additionalValuesJson[this.convertToCamelCase(colName)] != null) {
+        return this.tissue.additionalValuesJson[this.convertToCamelCase(colName)];
       }
     }
     return null;
+  }
+
+  convertToCamelCase(str: string): string {
+    const splittedWords = str.split('_');
+    if (splittedWords.length < 2) {
+      //in case there is no underscore in the column name, assume it is an older column name which is all uppercase
+      return this.handleAllUppercase(str);
+    }
+    return this.makeCamelCaseFrom(this.makeWordsLowerCase(splittedWords));
+  }
+
+  handleAllUppercase(word: string): string {
+    return this.isCamelCase(word) ? word : word.toLowerCase();
+  }
+
+  public isCamelCase(word: string): boolean {
+    return this.camelCaseRegEx.test(word);
+  }
+
+  makeCamelCaseFrom(words: string[]): string {
+    for (let i = 0; i < words.length; i++) {
+      const word = words[i];
+      if (i !== 0 && words.length > 0) {
+        words[i] = this.makeFirstLetterUpperCase(word);
+      }
+    }
+    return words.join('');
+  }
+
+  makeFirstLetterUpperCase(word: string): string {
+    return word.charAt(0).toUpperCase() + word.slice(1);
+  }
+
+  private makeWordsLowerCase(splittedWords: string[]): Array<string> {
+    const lowerCaseWords = splittedWords.map(word => word.toLowerCase());
+    return lowerCaseWords;
   }
 
   valueChanged(value: any, parameterName: string, pName?: string, pId?, alias?, smId?, smIdArray?, index?, value2?, parameter2?): boolean {
