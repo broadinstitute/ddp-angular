@@ -1,9 +1,9 @@
-import { Locator, Page } from '@playwright/test';
+import { Locator, Page, expect } from '@playwright/test';
 import { CustomizeView, CustomizeViewID, Label } from 'dsm/enums';
 
 export default class ColumnGroup {
   private readonly page: Page;
-  private locator: Locator;
+  private rootLocator: Locator;
   //Some column group names are broken apart by other html tags
   private columnGroupsUnableToUseExactName = [
     CustomizeView.BIRTH_PARENT_FEMALE,
@@ -20,6 +20,22 @@ export default class ColumnGroup {
     this.exactLocator = this.page.getByRole('button', { name: groupName, exact: true })
         .locator(`//following-sibling::ul[contains(@id, '${stableID}')]`);
 
-    this.locator = this.columnGroupsUnableToUseExactName.includes(groupName) ? this.approximateLocator : this.exactLocator;
+    this.rootLocator = this.columnGroupsUnableToUseExactName.includes(groupName) ? this.approximateLocator : this.exactLocator;
+  }
+
+  public getColumnOption(opts: { columnOption: Label, instance?: number }): Locator {
+    const { columnOption, instance = 0 } = opts;
+    const checkbox = this.rootLocator.locator('//mat-checkbox');
+    const option = checkbox.getByText(columnOption, { exact: true }).nth(instance);
+    return option;
+  }
+
+  public async assertColumnNameDisplayed(opts: { columnName: Label, nth?: number }): Promise<void> {
+    const { columnName, nth = 0 } = opts;
+    const column = this.getColumnOption({ columnOption: columnName, instance: nth });
+    console.log(`Now checking: ${this.rootLocator} \t->\t ${column}`);
+    await expect(column).toHaveCount(1);
+    await column.scrollIntoViewIfNeeded();
+    await expect(column).toBeVisible();
   }
 }
