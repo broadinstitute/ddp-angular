@@ -382,6 +382,53 @@ export default class ParticipantListPage extends DsmPageBase {
     throw new Error(`Cannot find a participant with RGP Proband tab or ${tab} tab. (checked num of participants: ${counter})`);
   }
 
+  async findParticipantsWithCohortTags(opts: { tagNames: string[] }): Promise<string> {
+    const { tagNames } = opts;
+
+    //Check that cohort tag column is already added to participant list - if it is not, add it
+    const cohortTagColumnHeader = this.page.locator(`//th[normalize-space(text())='${Label.COHORT_TAG_NAME}']`);
+    if (!await cohortTagColumnHeader.isVisible()) {
+      const customizeViewPanel = this.filters.customizeViewPanel;
+      await customizeViewPanel.open();
+      await customizeViewPanel.selectColumns(CustomizeView.COHORT_TAGS, [Label.COHORT_TAG_NAME]);
+      await expect(cohortTagColumnHeader).toBeVisible();
+      await customizeViewPanel.close();
+    }
+
+    //Search for participants who have the specified cohort tags
+    const participantListTable = this.participantListTable;
+    let amountOfParticipantsDisplayed = await participantListTable.rowsCount;
+
+    let shortId = '';
+    const endTime = Date.now() + 50 * 1000;
+    while (shortId === '' && amountOfParticipantsDisplayed > 0) {
+      for (let index = 0; index < amountOfParticipantsDisplayed; index++) {
+        const info = await participantListTable.getParticipantDataAt(index, Label.COHORT_TAG_NAME);
+        const infoArray = info.split(`\n\n`); //multiple cohort tags are split using this
+        if (infoArray.length > 1) {
+          //If the participant has at least 2 cohort tags - check if these tags contain the 'OS' and the 'OS PE-CGS' tags
+          if (infoArray.includes('OS') && infoArray.includes('OS PE-CGS')) {
+            shortId = await participantListTable.getParticipantDataAt(index, Label.SHORT_ID);
+            console.log(`Short id ${shortId} was found to have the following cohort tags: ${tagNames.toString()}`);
+          }
+        }
+      }
+
+      if (shortId === '') {
+        // Go to the next page to search to see if other participants have the specified cohort tags
+        const hasNext = await this._table.paginator.hasNext();
+        if (!hasNext || Date.now() > endTime) {
+          throw new Error(`No participants were found with the following cohort tags: ${tagNames.toString()}`);
+        }
+        await participantListTable.nextPage();
+        amountOfParticipantsDisplayed = await participantListTable.rowsCount;
+      }
+    }
+
+    //Return participant
+    return shortId;
+  }
+
   //generalize this later
   async findParticipantWithSingleCohortTag(opts: { tagName: string }): Promise<string> {
     const { tagName } = opts;
