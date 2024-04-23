@@ -262,9 +262,10 @@ export default class ParticipantListPage extends DsmPageBase {
       tab?: Tab,
       rgpProbandTab?: boolean,
       uri?: string,
-      prefix?: string
+      prefix?: string,
+      cohortTags?: string[]
     }): Promise<string> {
-    const { isPediatric = false, tab, rgpProbandTab = false, uri = '/ui/applyFilter', prefix } = opts;
+    const { isPediatric = false, tab, rgpProbandTab = false, uri = '/ui/applyFilter', prefix, cohortTags = null } = opts;
     const expectedTabs: Tab[] = [
       Tab.ONC_HISTORY,
       Tab.MEDICAL_RECORD,
@@ -317,12 +318,20 @@ export default class ParticipantListPage extends DsmPageBase {
 
           const participantID = value.participant.participantId; //Make sure when searching for onc history that the participant has a participantId in ES
           if (medicalRecord && participantID) {
-            shortID = JSON.stringify(value.esData.profile.hruid).replace(/['"]+/g, '');
+            if (cohortTags) {
+              //Search for participants with specific cohort tags
+              const tags = value.esData.dsm.cohortTag;
+              
+            } else {
+              shortID = JSON.stringify(value.esData.profile.hruid).replace(/['"]+/g, '');
+              return shortID;
+            }
+            /*shortID = JSON.stringify(value.esData.profile.hruid).replace(/['"]+/g, '');
             if (!rgpProbandTab) {
               // Do not have to find RGP Proband tab
               logInfo(`Found participant with Short ID: ${shortID} to have tab: ${tab}`);
               return shortID;
-            }
+            }*/
           }
         }
 
