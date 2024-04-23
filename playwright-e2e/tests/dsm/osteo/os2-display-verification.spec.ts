@@ -935,13 +935,20 @@ test.describe.serial(`${StudyName.OSTEO2}: Verify expected display of participan
     const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(Study.PARTICIPANT_LIST);
     await participantListPage.waitForReady();
     const participantListTable = participantListPage.participantListTable;
-    let participantPosition: number;
     let participantPage: ParticipantPage;
     let shortID: string;
     let oncHistoryTab;
 
     await test.step(`Find a participant who has responded Consent=No`, async () => {
-      participantPosition = await participantListPage.findParticipantFor(
+      shortID = await participantListPage.useSearchToFindConsentParticipantFor({
+        columnGroup: CustomizeView.RESEARCH_CONSENT_FORM,
+        columnName: Label.CONSENT_TISSUE,
+        value: 'No'
+      });
+
+      const consentInput = (await participantListTable.getParticipantDataAt(0, Label.CONSENT_TISSUE)).trim();
+      expect(consentInput).toBe('No');
+      /*participantPosition = await participantListPage.findParticipantFor(
         CustomizeView.RESEARCH_CONSENT_FORM,
         Label.CONSENT_TISSUE,
         { value: 'No', nth: 0 }
@@ -951,11 +958,11 @@ test.describe.serial(`${StudyName.OSTEO2}: Verify expected display of participan
       shortID = await participantListTable.getParticipantDataAt(participantPosition, Label.SHORT_ID);
       logInfo(`Consent Input = ${consentInput} for shortID: ${shortID}`);
       expect(shortID).toBeTruthy();
-      expect(consentInput).toBe('No');
+      expect(consentInput).toBe('No');*/
     })
 
     await test.step(`Select a participant that has only 1 response to Consent=No recorded`, async () => {
-      participantPage = await participantListTable.openParticipantPageAt(participantPosition);
+      participantPage = await participantListTable.openParticipantPageAt(0);
       await participantPage.waitForReady();
     })
 

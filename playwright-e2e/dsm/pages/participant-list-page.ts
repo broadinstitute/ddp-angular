@@ -502,6 +502,29 @@ export default class ParticipantListPage extends DsmPageBase {
     throw new Error(`Failed to find a suitable participant for Kit Upload within max waiting time 90 seconds.`);
   }
 
+  async useSearchToFindConsentParticipantFor(opts: { columnGroup: CustomizeView, columnName: Label, value: string }): Promise<string> {
+    const { columnGroup, columnName, value } = opts;
+
+    const customizeViewPanel = this.filters.customizeViewPanel;
+    await customizeViewPanel.open();
+    await customizeViewPanel.selectColumns(columnGroup, [columnName], { nth: 0 });
+    await customizeViewPanel.close();
+
+    const searchPanel = this.filters.searchPanel;
+    await searchPanel.open();
+    await searchPanel.checkboxes(Label.STATUS, { checkboxValues: [DataFilter.ENROLLED] });
+    await searchPanel.checkboxes(columnName, { checkboxValues: [value] });
+    await searchPanel.search();
+
+    const participantListTable = this.participantListTable;
+    const amountOfReturnedParticipants = await participantListTable.rowsCount;
+    expect(amountOfReturnedParticipants, `No enrolled participants found who selected: ${columnName} -> ${value}`).toBeGreaterThanOrEqual(1);
+
+    const [shortID] = await participantListTable.getTextAt(0, Label.SHORT_ID);
+    expect(shortID).toBeTruthy();
+    return shortID;
+  }
+
   async findParticipantFor(columnGroup: string, columnName: Label, opts: {value?: string, nth?: number} = {}): Promise<number> {
     const { value, nth = 0 } = opts;
 
