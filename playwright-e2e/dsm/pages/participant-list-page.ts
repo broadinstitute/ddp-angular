@@ -502,6 +502,7 @@ export default class ParticipantListPage extends DsmPageBase {
     throw new Error(`Failed to find a suitable participant for Kit Upload within max waiting time 90 seconds.`);
   }
 
+  //TODO Generalize this later
   async useSearchToFindConsentParticipantFor(opts: { columnGroup: CustomizeView, columnName: Label, value: string }): Promise<string> {
     const { columnGroup, columnName, value } = opts;
 
