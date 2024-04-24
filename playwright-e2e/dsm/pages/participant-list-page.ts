@@ -205,6 +205,7 @@ export default class ParticipantListPage extends DsmPageBase {
       public async open(viewName: string): Promise<void> {
         await this.openPanel();
         const filter = this.findPanel(viewName).locator('[data-icon="filter"]');
+        await expect(filter).toBeEnabled();
         await filter.scrollIntoViewIfNeeded();
         await filter.click();
         await waitForNoSpinner(page);
@@ -375,6 +376,7 @@ export default class ParticipantListPage extends DsmPageBase {
       }
 
       // continue with finding
+      console.log(`Looking for: ${tab}`);
       const nextPageResponse = await this._table.nextPage();
       responseJson = JSON.parse(await nextPageResponse.text());
     } // end of while
