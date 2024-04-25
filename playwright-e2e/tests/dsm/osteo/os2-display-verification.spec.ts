@@ -948,17 +948,6 @@ test.describe.serial(`${StudyName.OSTEO2}: Verify expected display of participan
 
       const consentInput = (await participantListTable.getParticipantDataAt(0, Label.CONSENT_TISSUE)).trim();
       expect(consentInput).toBe('No');
-      /*participantPosition = await participantListPage.findParticipantFor(
-        CustomizeView.RESEARCH_CONSENT_FORM,
-        Label.CONSENT_TISSUE,
-        { value: 'No', nth: 0 }
-      );
-
-      const consentInput = (await participantListTable.getParticipantDataAt(participantPosition, Label.CONSENT_TISSUE)).trim();
-      shortID = await participantListTable.getParticipantDataAt(participantPosition, Label.SHORT_ID);
-      logInfo(`Consent Input = ${consentInput} for shortID: ${shortID}`);
-      expect(shortID).toBeTruthy();
-      expect(consentInput).toBe('No');*/
     })
 
     await test.step(`Select a participant that has only 1 response to Consent=No recorded`, async () => {
