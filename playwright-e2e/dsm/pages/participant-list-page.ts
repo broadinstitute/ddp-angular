@@ -261,10 +261,11 @@ export default class ParticipantListPage extends DsmPageBase {
       isPediatric?: boolean,
       tab?: Tab,
       rgpProbandTab?: boolean,
+      rgpMinimumFamilySize?: number,
       uri?: string,
       prefix?: string
     }): Promise<string> {
-    const { isPediatric = false, tab, rgpProbandTab = false, uri = '/ui/applyFilter', prefix } = opts;
+    const { isPediatric = false, tab, rgpProbandTab = false, rgpMinimumFamilySize = 1, uri = '/ui/applyFilter', prefix } = opts;
     const expectedTabs: Tab[] = [
       Tab.ONC_HISTORY,
       Tab.MEDICAL_RECORD,
@@ -362,9 +363,20 @@ export default class ParticipantListPage extends DsmPageBase {
           if (!participantData || participantData[0] === undefined) {
             continue;
           }
-          shortID = JSON.stringify(value.esData.profile.hruid).replace(/['"]+/g, '');
-          logInfo(`Found RGP participant with Short ID: ${shortID} to have proband tabs`);
-          return shortID;
+          const familyMemberInfo = value.participantData;
+          const amountOfFamilyMembers = familyMemberInfo.length;
+          if (rgpMinimumFamilySize > 1 && amountOfFamilyMembers === 1) {
+            continue; //Looking for a family that has more than 1 person in the study
+          } else if (rgpMinimumFamilySize > 1 && amountOfFamilyMembers > 1) {
+            //Use the family member added to the account after the proband
+            shortID = JSON.stringify(value.esData.profile.hruid).replace(/['"]+/g, '');
+            logInfo(`Found RGP participant with Short ID: ${shortID} to have proband tabs - has ${amountOfFamilyMembers} study participants`);
+            return shortID;
+          } else if (rgpMinimumFamilySize === 1 && amountOfFamilyMembers === 1) {
+            shortID = JSON.stringify(value.esData.profile.hruid).replace(/['"]+/g, '');
+            logInfo(`Found RGP participant with Short ID: ${shortID} to have proband tabs - has 1 study participant`);
+            return shortID;
+          }
         }
       } // end of for ...entries()
 

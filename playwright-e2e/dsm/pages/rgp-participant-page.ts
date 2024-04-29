@@ -1,6 +1,8 @@
 import Select from 'dss/component/select';
 import ParticipantPage from 'dsm/pages/participant-page';
 import { Locator, Page, expect } from '@playwright/test';
+import { FamilyMember } from 'dsm/enums';
+import * as user from 'data/fake-user.json';
 
 /**
  * Captures the webelements in between profile section and the Family Member section
@@ -115,5 +117,53 @@ export default class RgpParticipantPage extends ParticipantPage {
 
     public getExpectedNumberToSequence(): Locator {
         return this.page.locator("//td[contains(text(), 'Expected # to Sequence')]/following-sibling::td/mat-select");
+    }
+
+    public async getAmountOfFamilyMembers(): Promise<number> {
+      return this.page.locator(`//app-participant-page//tabset//span[contains(text(), 'RGP')]/ancestor::a`).count();
+    }
+
+    public getFamilyMember(instance: number): Locator {
+      return this.page.locator(`(//app-participant-page//tabset//span[contains(text(), 'RGP')]/ancestor::a)[${instance}]`);
+    }
+
+    public async getFamilyMemberType(familyMember: Locator): Promise<FamilyMember> {
+      const brotherFirstName = user.brother.firstName;
+      const grandfatherFirstName = user.maternalGrandFather.firstName;
+      let familyMemberType: FamilyMember;
+
+      const buttonText = await familyMember.innerText();
+      console.log(`button text: ${buttonText}`);
+      const [personName] = buttonText.split('-');
+      console.log(`split text: ${personName}`);
+      const familyMemberName = personName.trim();
+
+      switch (familyMemberName) {
+        case brotherFirstName:
+          familyMemberType = FamilyMember.BROTHER;
+          break;
+        case grandfatherFirstName:
+          familyMemberType = FamilyMember.MATERNAL_GRANDFATHER;
+          break;
+        default:
+          throw new Error(`Family member ${familyMemberName} is unexpected`);
+          break;
+      }
+      return familyMemberType;
+    }
+
+    public getRelationshipID(familyMemberType: FamilyMember): string {
+      let id = '';
+      switch (familyMemberType) {
+        case FamilyMember.BROTHER:
+          id = user.brother.relationshipID;
+          break;
+        case FamilyMember.MATERNAL_GRANDFATHER:
+          id = user.maternalGrandFather.relationshipID;
+          break;
+        default:
+          break;
+      }
+      return id;
     }
 }
