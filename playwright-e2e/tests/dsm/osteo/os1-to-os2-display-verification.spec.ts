@@ -1,3 +1,4 @@
+import { Tab } from 'dsm/enums';
 import { Navigation, Study, StudyName } from 'dsm/navigation';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
 import Select from 'dss/component/select';
@@ -18,7 +19,8 @@ test.describe.serial(`${StudyName.OSTEO} -> ${StudyName.OSTEO2}: Verify expected
 
     const participantListTable = participantListPage.participantListTable;
     await test.step(`name`, async () => {
-      //Find participant by checking cohort tags
+      //Search for enrolled participants who have both the 'OS' and 'OS PE-CGS' tag
+      shortID = await participantListPage.findParticipantWithTab({ tab: Tab.MEDICAL_RECORD, cohortTags: ['OS', 'OS PE-CGS'] });
     })
   })
 

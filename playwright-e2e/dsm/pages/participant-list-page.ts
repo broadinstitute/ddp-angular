@@ -320,8 +320,12 @@ export default class ParticipantListPage extends DsmPageBase {
           if (medicalRecord && participantID) {
             if (cohortTags) {
               //Search for participants with specific cohort tags
-              const tags = value.esData.dsm.cohortTag;
-              
+              const tagArray = JSON.stringify(value.esData.dsm.cohortTag).replace(/['"]+/g, '').split('},');
+              if (!tagArray) {
+                //If for some reason, the participant hdoes not have any cohort tags, keep searching
+                continue;
+              }
+              console.log(`cohort tags: ${tagArray}`);
             } else {
               shortID = JSON.stringify(value.esData.profile.hruid).replace(/['"]+/g, '');
               return shortID;
