@@ -375,9 +375,10 @@ export default class ParticipantListPage extends DsmPageBase {
             shortID = JSON.stringify(value.esData.profile.hruid).replace(/['"]+/g, '');
             logInfo(`Found RGP participant with Short ID: ${shortID} to have proband tabs - has 1 study participant`);
           }
-          
-          if () {
-            
+
+          if (shortID) {
+            //If shortID is truthy
+            return shortID;
           }
         }
       } // end of for ...entries()
