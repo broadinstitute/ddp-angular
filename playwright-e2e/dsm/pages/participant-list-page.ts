@@ -4,7 +4,7 @@ import { Navigation, Study } from 'dsm/navigation';
 import { Label, FileFormat, TextFormat, Tab, DataFilter, CustomizeView } from 'dsm/enums';
 import { WelcomePage } from 'dsm/pages/welcome-page';
 import Checkbox from 'dss/component/checkbox';
-import { shuffle, waitForNoSpinner, waitForResponse } from 'utils/test-utils';
+import { isSubset, shuffle, waitForNoSpinner, waitForResponse } from 'utils/test-utils';
 import { Filters } from 'dsm/component/filters/filters';
 import { ParticipantListTable } from 'dsm/component/tables/participant-list-table';
 import { SortOrder } from 'dss/component/table';
@@ -252,6 +252,7 @@ export default class ParticipantListPage extends DsmPageBase {
    * @param opts findPediatricParticipant - determines if an adult or child participant should be returned
    * @param opts tab - the tab to be searched for e.g. onc history tab
    * @param opts rgpProbandTab - determines if a rgp proband tab is being searched for
+   * @param opts rgpMinimumFamilySize - the minimum number of family members the RGP study participant should have
    * @param opts uriString - the uri string to use when initially filtering for participants. Defaults to '/ui/applyFilter'
    * @param opts prefix - the prefix or name of the test users to be used in the search e.g. E2E or KidFirst for playwright created participants. Defaults to 'E2E'
    * @returns A participant with the requested tab
@@ -321,16 +322,24 @@ export default class ParticipantListPage extends DsmPageBase {
           if (medicalRecord && participantID) {
             if (cohortTags) {
               //Search for participants with specific cohort tags
-              const tagArray = JSON.stringify(value.esData.dsm.cohortTag).replace(/['"]+/g, '').split('},');
+              const tagArray = value.esData.dsm.cohortTag;
               if (!tagArray) {
                 //If for some reason, the participant hdoes not have any cohort tags, keep searching
                 continue;
               }
-              console.log(`cohort tags: ${tagArray}`);
+              const currentParticipantTags: string[] = [];
+              for (const [index, value] of [...tagArray].entries()) {
+                console.log(`info: ${value.cohortTagName}`);
+                currentParticipantTags.push(value.cohortTagName);
+              }
+              if (isSubset({ cohortTagGroup: currentParticipantTags, targetCohortTags: cohortTags })) {
+                shortID = JSON.stringify(value.esData.profile.hruid).replace(/['"]+/g, '');
+                console.log(`Participant ${shortID} has the tags [ ${cohortTags.join(', ')} ]`);
+              }
             } else {
               shortID = JSON.stringify(value.esData.profile.hruid).replace(/['"]+/g, '');
-              return shortID;
             }
+            return shortID;
             /*shortID = JSON.stringify(value.esData.profile.hruid).replace(/['"]+/g, '');
             if (!rgpProbandTab) {
               // Do not have to find RGP Proband tab

@@ -24,7 +24,7 @@ test.describe.serial(`${StudyName.OSTEO} -> ${StudyName.OSTEO2}: Verify expected
     })
   })
 
-  test(`OS2: Verify the OS1 participant can be found in the OS2 Participant List`, async ({ page, request }) => {
+  test.skip(`OS2: Verify the OS1 participant can be found in the OS2 Participant List`, async ({ page, request }) => {
     await test.step(`name`, async () => {
       //Check that the chosen participant can also be seen in OS2 Participant List
     })
@@ -36,7 +36,7 @@ test.describe.serial(`${StudyName.OSTEO} -> ${StudyName.OSTEO2}: Verify expected
     })
   })
 
-  test(`OS1: Verify that the participant has the expected display`, async ({ page, request }) => {
+  test.skip(`OS1: Verify that the participant has the expected display`, async ({ page, request }) => {
     await test.step(`name`, async () => {
       //Check that the participant has the Prequalifier, Consent, and Medical Release activities
     })
@@ -46,15 +46,15 @@ test.describe.serial(`${StudyName.OSTEO} -> ${StudyName.OSTEO2}: Verify expected
     })
   })
 
-  test(`OS1: Verify OS1 kits cannot be found in OS2`, async ({ page, request }) => {
+  test.skip(`OS1: Verify OS1 kits cannot be found in OS2`, async ({ page, request }) => {
     //stuff here
   })
 
-  test(`OS2: Verify a re-consented participant has the expected display`, async ({ page, request }) => {
+  test.skip(`OS2: Verify a re-consented participant has the expected display`, async ({ page, request }) => {
     //
   })
 
-  test(`OS2: Verify OS2 kits cannot be found in OS1`, async ({ page, request }) => {
+  test.skip(`OS2: Verify OS2 kits cannot be found in OS1`, async ({ page, request }) => {
     //stuff here
   })
 });
