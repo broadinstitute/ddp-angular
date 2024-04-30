@@ -295,7 +295,7 @@ export default class ParticipantListPage extends DsmPageBase {
     while (counter <= 200) {
       for (const [index, value] of [...responseJson.participants].entries()) {
         counter++;
-        let shortID: string;
+        let shortID = '';
         let firstName = value.esData.profile?.firstName;
         if (!firstName) {
           // must have a value for First Name
@@ -364,18 +364,20 @@ export default class ParticipantListPage extends DsmPageBase {
             continue;
           }
           const familyMemberInfo = value.participantData;
-          const amountOfFamilyMembers = familyMemberInfo.length;
-          if (rgpMinimumFamilySize > 1 && amountOfFamilyMembers === 1) {
+          const numberOfFamilyMembers = familyMemberInfo.length;
+          if (rgpMinimumFamilySize > 1 && numberOfFamilyMembers === 1) {
             continue; //Looking for a family that has more than 1 person in the study
-          } else if (rgpMinimumFamilySize > 1 && amountOfFamilyMembers > 1) {
+          } else if (rgpMinimumFamilySize > 1 && numberOfFamilyMembers > 1) {
             //Use the family member added to the account after the proband
             shortID = JSON.stringify(value.esData.profile.hruid).replace(/['"]+/g, '');
-            logInfo(`Found RGP participant with Short ID: ${shortID} to have proband tabs - has ${amountOfFamilyMembers} study participants`);
-            return shortID;
-          } else if (rgpMinimumFamilySize === 1 && amountOfFamilyMembers === 1) {
+            logInfo(`Found RGP participant with Short ID: ${shortID} to have proband tabs - has ${numberOfFamilyMembers} study participants`);
+          } else if (rgpMinimumFamilySize === 1 && numberOfFamilyMembers === 1) {
             shortID = JSON.stringify(value.esData.profile.hruid).replace(/['"]+/g, '');
             logInfo(`Found RGP participant with Short ID: ${shortID} to have proband tabs - has 1 study participant`);
-            return shortID;
+          }
+          
+          if () {
+            
           }
         }
       } // end of for ...entries()

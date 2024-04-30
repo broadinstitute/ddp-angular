@@ -247,7 +247,7 @@ test.describe.serial('Blood & RNA Kit Upload', () => {
 
 
     //Select the second family member tab - Playwright family members are usually either grandfather or brother
-    const amountOfFamilyMembers = await participantPage.getAmountOfFamilyMembers();
+    const amountOfFamilyMembers = await participantPage.getNumberOfFamilyMembers();
     expect(amountOfFamilyMembers).toBeGreaterThanOrEqual(2);
 
     const familyMember = participantPage.getFamilyMember(2);

@@ -119,7 +119,7 @@ export default class RgpParticipantPage extends ParticipantPage {
         return this.page.locator("//td[contains(text(), 'Expected # to Sequence')]/following-sibling::td/mat-select");
     }
 
-    public async getAmountOfFamilyMembers(): Promise<number> {
+    public async getNumberOfFamilyMembers(): Promise<number> {
       return this.page.locator(`//app-participant-page//tabset//span[contains(text(), 'RGP')]/ancestor::a`).count();
     }
 
