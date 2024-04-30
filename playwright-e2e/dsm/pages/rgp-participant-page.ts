@@ -133,9 +133,7 @@ export default class RgpParticipantPage extends ParticipantPage {
       let familyMemberType: FamilyMember;
 
       const buttonText = await familyMember.innerText();
-      console.log(`button text: ${buttonText}`);
       const [personName] = buttonText.split('-');
-      console.log(`split text: ${personName}`);
       const familyMemberName = personName.trim();
 
       switch (familyMemberName) {
