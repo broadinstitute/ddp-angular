@@ -329,7 +329,6 @@ export default class ParticipantListPage extends DsmPageBase {
               }
               const currentParticipantTags: string[] = [];
               for (const [index, value] of [...tagArray].entries()) {
-                console.log(`info: ${value.cohortTagName}`);
                 currentParticipantTags.push(value.cohortTagName);
               }
               if (isSubset({ cohortTagGroup: currentParticipantTags, targetCohortTags: cohortTags })) {

@@ -1,42 +1,72 @@
-import { Tab } from 'dsm/enums';
+import { expect } from '@playwright/test';
+import { Label, Tab } from 'dsm/enums';
 import { Navigation, Study, StudyName } from 'dsm/navigation';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
 import Select from 'dss/component/select';
 import { test } from 'fixtures/dsm-fixture';
+import { logInfo } from 'utils/log-utils';
+import { totalNumberOfOccurences } from 'utils/test-utils';
 
 test.describe.serial(`${StudyName.OSTEO} -> ${StudyName.OSTEO2}: Verify expected display of participant information @dsm`, () => {
   //Use 1 participant throughout the test to check the display of information
   let shortID = '';
   let navigation;
+  let participantListPage: ParticipantListPage;
+  let participantListTable;
 
   test(`${StudyName.OSTEO}: Find a participant who is re-consented into ${StudyName.OSTEO2}`, async ({ page, request }) => {
     //Find a re-consented participant by searching for those who have both `OS` and `OS PE-CGS` tags
     navigation = new Navigation(page, request);
     await new Select(page, { label: 'Select study' }).selectOption(StudyName.OSTEO);
 
-    const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(Study.PARTICIPANT_LIST);
+    participantListPage = await navigation.selectFromStudy<ParticipantListPage>(Study.PARTICIPANT_LIST);
     await participantListPage.waitForReady();
 
-    const participantListTable = participantListPage.participantListTable;
     await test.step(`Find a participant who has the 'OS' and 'OS PE-CGS' tags`, async () => {
       //Search for enrolled participants who have both the 'OS' and 'OS PE-CGS' tag
       shortID = await participantListPage.findParticipantWithTab({ tab: Tab.ONC_HISTORY, cohortTags: ['OS', 'OS PE-CGS'] });
     })
   })
 
-  test.skip(`OS2: Verify the OS1 participant can be found in the OS2 Participant List`, async ({ page, request }) => {
+  test(`OS2: Verify the OS1 participant can be found in the OS2 Participant List`, async ({ page, request }) => {
     await test.step(`name`, async () => {
-      //Check that the chosen participant can also be seen in OS2 Participant List
-    })
+        //Check that the chosen participant can also be seen in OS2 Participant List'
+        navigation = new Navigation(page, request);
+        await new Select(page, { label: 'Select study' }).selectOption(StudyName.OSTEO2);
 
-    await test.step(`name`, async () => {
-      //Check that the chosen participant also has the 'OS' and 'OS PE-CGS' cohort tags in OS2 Participant List
+        participantListPage = await navigation.selectFromStudy<ParticipantListPage>(Study.PARTICIPANT_LIST);
+        await participantListPage.waitForReady();
 
-      //Check the amount of times the tags are added to the participants (duplicate tags are not allowed)
+        const searchPanel = participantListPage.filters.searchPanel;
+        await searchPanel.open();
+        await searchPanel.text(Label.SHORT_ID, { textValue: shortID, exactMatch: true })
+        await searchPanel.search();
+
+        participantListTable = participantListPage.participantListTable;
+        const numberOfReturnedParticipants = await participantListTable.rowsCount;
+        expect(numberOfReturnedParticipants).toBe(1);
+
+        //Check that the chosen participant also has the 'OS' and 'OS PE-CGS' cohort tags in OS2 Participant List
+        const customizeViewPanel = participantListPage.filters.customizeViewPanel;
+        await customizeViewPanel.open();
+        await customizeViewPanel.selectColumns('Cohort Tags Columns', ['Cohort Tag Name']);
+        await customizeViewPanel.close();
+
+        const cohortTags = await participantListTable.getParticipantDataAt(0, 'Cohort Tag Name');
+        expect(cohortTags).toContain('OS');
+        expect(cohortTags).toContain('OS PE-CGS');
+
+        //Check the amount of times the tags are added to the participants (duplicate tags are not allowed)
+        const cohortTagArray = cohortTags.split('\n\n');
+        logInfo(`cohort tags as array: ${cohortTagArray.join(', ')}`);
+        const researchOsteoTagOccurences = totalNumberOfOccurences({ arrayToSearch: cohortTagArray, wordToSearchFor: 'OS' });
+        const clinicalOsteoTagOccurences = totalNumberOfOccurences({ arrayToSearch: cohortTagArray, wordToSearchFor: 'OS PE-CGS' });
+        expect(researchOsteoTagOccurences).toBe(1);
+        expect(clinicalOsteoTagOccurences).toBe(1);
     })
   })
 
-  test.skip(`OS1: Verify that the participant has the expected display`, async ({ page, request }) => {
+  /*test.skip(`OS1: Verify that the participant has the expected display`, async ({ page, request }) => {
     await test.step(`name`, async () => {
       //Check that the participant has the Prequalifier, Consent, and Medical Release activities
     })
@@ -56,5 +86,5 @@ test.describe.serial(`${StudyName.OSTEO} -> ${StudyName.OSTEO2}: Verify expected
 
   test.skip(`OS2: Verify OS2 kits cannot be found in OS1`, async ({ page, request }) => {
     //stuff here
-  })
+  })*/
 });

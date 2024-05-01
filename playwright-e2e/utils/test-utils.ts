@@ -353,3 +353,15 @@ export function isSubset(opts: { cohortTagGroup: string[], targetCohortTags: str
   const { cohortTagGroup, targetCohortTags } = opts;
   return targetCohortTags.every((tag) => cohortTagGroup.includes(tag));
 }
+
+export function totalNumberOfOccurences(opts: { arrayToSearch: string[], wordToSearchFor: string }): number {
+  const { arrayToSearch, wordToSearchFor } = opts;
+  let numberOfOccurrences = 0;
+  for (let index = 0; index < arrayToSearch.length; index++) {
+    const currentWord = arrayToSearch[index];
+    if (currentWord === wordToSearchFor) {
+      numberOfOccurrences++;
+    }
+  }
+  return numberOfOccurrences;
+}
