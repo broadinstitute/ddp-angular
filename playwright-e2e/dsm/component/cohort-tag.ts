@@ -28,6 +28,10 @@ export default class CohortTag {
     await this.page.keyboard.press('Escape');
   }
 
+  public getTag(tagName: string): Locator {
+    return this.page.locator(`//mat-chip-list//mat-chip[contains(text(), '${tagName}')]`); //To be used in participant page
+  }
+
   private getRemoveButtonFor(tagName: string): Locator {
     return this.page.locator(`${this.getCohortXPathTagFor(tagName)}//button[@matchipremove]`);
   }

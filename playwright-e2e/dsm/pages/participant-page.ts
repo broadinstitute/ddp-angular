@@ -1,6 +1,6 @@
 import {expect, Locator, Page} from '@playwright/test';
 import {waitForNoSpinner, waitForResponse} from 'utils/test-utils';
-import {Label, Tab, ResponsePayload} from 'dsm/enums';
+import {Label, Tab, ResponsePayload, FieldSettingInputType} from 'dsm/enums';
 import Input from 'dss/component/input';
 import Modal from 'dss/component/modal';
 import Tablist from 'dsm/component/tablist';
@@ -66,6 +66,10 @@ export default class ParticipantPage {
 
   public async getDoNotContact(): Promise<boolean> {
     return await this.readMainCheckboxValueFor(Label.DO_NOT_CONTACT);
+  }
+
+  public getDoNotContactSection(): Locator {
+    return this.page.locator(`//app-participant-page//td[normalize-space(text())='${Label.DO_NOT_CONTACT}']/following-sibling::td//mat-checkbox`);
   }
 
   public async getDateOfBirth(): Promise<string> {
@@ -143,6 +147,17 @@ export default class ParticipantPage {
     await this.page.keyboard.press('Escape'); // close modal
 
     await this.page.waitForTimeout(15000); // Don't remove: sleep 15 seconds
+  }
+
+  /**
+   * Returns the locator for a webelement added to the Participant Page via Study -> Field Settings
+   * @param opts name - the name of the webelement as seen in the Participant Page
+   * @param opts fieldSettingsType - the type of variable/webelement to search for
+   * @returns the locator of the field-settings-added webelement
+   */
+  public getFieldSettingWebelement(opts: { name: string | Label, fieldSettingType: FieldSettingInputType }): Locator {
+    const { name, fieldSettingType } = opts;
+    return this.page.locator(`//app-participant-page//table//td[normalize-space(text())='${name}']/following-sibling::td//${fieldSettingType}`);
   }
 
   /* Helper functions */

@@ -1,5 +1,6 @@
 import { expect } from '@playwright/test';
-import { Label, Tab } from 'dsm/enums';
+import CohortTag from 'dsm/component/cohort-tag';
+import { FieldSettingInputType as FieldSetting, Label, Tab } from 'dsm/enums';
 import { Navigation, Study, StudyName } from 'dsm/navigation';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
 import Select from 'dss/component/select';
@@ -56,7 +57,7 @@ test.describe.serial(`${StudyName.OSTEO} -> ${StudyName.OSTEO2}: Verify expected
         expect(cohortTags).toContain('OS');
         expect(cohortTags).toContain('OS PE-CGS');
 
-        //Check the amount of times the tags are added to the participants (duplicate tags are not allowed)
+        //Check the amount of times the tags are added to the participants (duplicate tags are not allowed - each Osteo tag should only be added once)
         const cohortTagArray = cohortTags.split('\n\n');
         logInfo(`cohort tags as array: ${cohortTagArray.join(', ')}`);
         const researchOsteoTagOccurences = totalNumberOfOccurences({ arrayToSearch: cohortTagArray, wordToSearchFor: 'OS' });
@@ -66,14 +67,98 @@ test.describe.serial(`${StudyName.OSTEO} -> ${StudyName.OSTEO2}: Verify expected
     })
   })
 
-  /*test.skip(`OS1: Verify that the participant has the expected display`, async ({ page, request }) => {
-    await test.step(`name`, async () => {
+  test.skip(`OS1: Verify that the participant page has the expected display`, async ({ page, request }) => {
+    navigation = new Navigation(page, request);
+    await new Select(page, { label: 'Select study' }).selectOption(StudyName.OSTEO);
+
+    participantListPage = await navigation.selectFromStudy<ParticipantListPage>(Study.PARTICIPANT_LIST);
+    await participantListPage.waitForReady();
+    await participantListPage.filterListByShortId(shortID);
+    participantListTable = participantListPage.participantListTable;
+    const participantPage = await participantListTable.openParticipantPageAt(0);
+
+    await test.step(`Check that expected OS1 profile webelements are as expected`, async () => {
+      await participantPage.waitForReady();
+
+      //General profile section check
+      const enrollmentStatus = await participantPage.getStatus();
+      expect(enrollmentStatus).toMatch(/(Enrolled|Exited after Enrollment)/); //Since chosen test participant should at least have been enrolled
+
+      const registrationDate = await participantPage.getRegistrationDate();
+      expect(registrationDate).toBeTruthy();
+
+      const participantPageShortID = await participantPage.getShortId();
+      expect(participantPageShortID).toBe(shortID);
+      const guid = await participantPage.getGuid();
+      expect(guid).toBeTruthy();
+
+      const firstName = await participantPage.getFirstName();
+      expect(firstName).toBeTruthy();
+      const lastName = await participantPage.getLastName();
+      expect(lastName).toBeTruthy();
+
+      const doNotContact = participantPage.getDoNotContactSection();
+      await expect(doNotContact).toBeVisible();
+
+      const dateOfBirth = await participantPage.getDateOfBirth();
+      expect(dateOfBirth).toBeTruthy();
+
+      //Gender is an optional question - so skipping validation for that
+
+      const preferredLanguage = await participantPage.getPreferredLanguage();
+      expect(preferredLanguage).toMatch(/(English|Español)/);
+
+      const participantPageCohortTags = new CohortTag(page);
+      const researchTag = participantPageCohortTags.getTag('OS');
+      const clinicalTag = participantPageCohortTags.getTag('OS PE-CGS');
+
+      expect(researchTag).toBeTruthy();
+      await expect(researchTag).toBeVisible();
+
+      expect(clinicalTag).toBeTruthy();
+      await expect(clinicalTag).toBeVisible();
+
+      //Additional profile section check e.g. webelements usually added via Field Settings
+      const participantNotes = participantPage.getFieldSettingWebelement({ name: Label.PARTICIPANT_NOTES, fieldSettingType: FieldSetting.TEXTAREA });
+      await expect(participantNotes).toBeVisible();
+
+      const oncHistoryCreated = participantPage.getFieldSettingWebelement({ name: Label.ONC_HISTORY_CREATED, fieldSettingType: FieldSetting.DATE });
+      await expect(oncHistoryCreated).toBeVisible();
+
+      const oncHistoryReviewed = participantPage.getFieldSettingWebelement({ name: Label.ONC_HISTORY_REVIEWED, fieldSettingType: FieldSetting.DATE });
+      await expect(oncHistoryReviewed).toBeVisible();
+
+      const medicalRecordCheckbox = participantPage.getFieldSettingWebelement({ 
+        name: Label.INCOMPLETE_OR_MINIMAL_MEDICAL_RECORDS,
+        fieldSettingType: FieldSetting.CHECKBOX
+      });
+      await expect(medicalRecordCheckbox).toBeVisible();
+
+      const readyForAbstractionCheckbox = participantPage.getFieldSettingWebelement({
+        name: Label.READY_FOR_ABSTRACTION,
+        fieldSettingType: FieldSetting.CHECKBOX
+      });
+      await expect(readyForAbstractionCheckbox).toBeVisible();
+
+      //May be an OS1-only webelement - seen in OS1 Prod
+      const patientContactedForPaperCRDate = participantPage.getFieldSettingWebelement({
+        name: 'Patient Contacted for Paper C/R',
+        fieldSettingType: FieldSetting.DATE
+      });
+      await expect(patientContactedForPaperCRDate).toBeVisible();
+    })
+
+    await test.step(`Check that expected OS1 activites are present in the Survey Data tab`, async () => {
       //Check that the participant has the Prequalifier, Consent, and Medical Release activities
     })
 
     await test.step(`name`, async () => {
       //Check that OS2-specific activities are not present in Participant Page -> Survey Data tab
     })
+  })
+
+  test.skip(`OS1: Verify OS1 onc history cannot be found in OS2`, async ({ page, request }) => {
+    //stuff here
   })
 
   test.skip(`OS1: Verify OS1 kits cannot be found in OS2`, async ({ page, request }) => {
@@ -86,5 +171,5 @@ test.describe.serial(`${StudyName.OSTEO} -> ${StudyName.OSTEO2}: Verify expected
 
   test.skip(`OS2: Verify OS2 kits cannot be found in OS1`, async ({ page, request }) => {
     //stuff here
-  })*/
+  })
 });

@@ -23,6 +23,15 @@ export enum DataFilter {
   REGISTERED = 'Registered',
 }
 
+export enum FieldSettingInputType {
+  CHECKBOX = 'mat-checkbox',
+  DATE = `input[@data-placeholder='mm/dd/yyyy']`,
+  NUMBER = `input[@type='number']`,
+  SELECT = `mat-select`,
+  TEXT = `input[@data-placeholder='Text']`,
+  TEXTAREA = `textarea`,
+}
+
 // Table column headers
 
 export enum CustomizeView {
