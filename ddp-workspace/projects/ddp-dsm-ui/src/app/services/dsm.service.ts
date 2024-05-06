@@ -1215,7 +1215,6 @@ export class DSMService {
     );
   }
 
-  // todo arz make it break
   public logToCloud(payload: string, sev = 'INFO'): Observable<any> {
     const url =  `https://us-central1-${DDP_ENV.projectGcpId}.cloudfunctions.net/LoggingService`;
     const body = {
