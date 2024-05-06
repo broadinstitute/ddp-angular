@@ -261,13 +261,23 @@ export default class ParticipantListPage extends DsmPageBase {
     opts: {
       isPediatric?: boolean,
       tab?: Tab,
+      shouldHaveOncHistory?: boolean,
       rgpProbandTab?: boolean,
       rgpMinimumFamilySize?: number,
       uri?: string,
       prefix?: string,
       cohortTags?: string[]
     }): Promise<string> {
-    const { isPediatric = false, tab, rgpProbandTab = false, rgpMinimumFamilySize = 1, uri = '/ui/applyFilter', prefix, cohortTags = null } = opts;
+    const {
+      isPediatric = false,
+      tab,
+      shouldHaveOncHistory = false,
+      rgpProbandTab = false,
+      rgpMinimumFamilySize = 1,
+      uri = '/ui/applyFilter',
+      prefix,
+      cohortTags = null
+    } = opts;
     const expectedTabs: Tab[] = [
       Tab.ONC_HISTORY,
       Tab.MEDICAL_RECORD,
@@ -331,6 +341,13 @@ export default class ParticipantListPage extends DsmPageBase {
               for (const [index, value] of [...tagArray].entries()) {
                 currentParticipantTags.push(value.cohortTagName);
               }
+
+              if (shouldHaveOncHistory) {
+                const oncHistoryDetail = value.oncHistoryDetails;
+                if (!oncHistoryDetail) {
+                  continue; //skip to check if another participant has inputted onc history data
+                }
+              }
               if (isSubset({ cohortTagGroup: currentParticipantTags, targetCohortTags: cohortTags })) {
                 shortID = JSON.stringify(value.esData.profile.hruid).replace(/['"]+/g, '');
                 console.log(`Participant ${shortID} has the tags [ ${cohortTags.join(', ')} ]`);
@@ -339,12 +356,6 @@ export default class ParticipantListPage extends DsmPageBase {
               shortID = JSON.stringify(value.esData.profile.hruid).replace(/['"]+/g, '');
             }
             return shortID;
-            /*shortID = JSON.stringify(value.esData.profile.hruid).replace(/['"]+/g, '');
-            if (!rgpProbandTab) {
-              // Do not have to find RGP Proband tab
-              logInfo(`Found participant with Short ID: ${shortID} to have tab: ${tab}`);
-              return shortID;
-            }*/
           }
         }
 
