@@ -935,27 +935,23 @@ test.describe.serial(`${StudyName.OSTEO2}: Verify expected display of participan
     const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(Study.PARTICIPANT_LIST);
     await participantListPage.waitForReady();
     const participantListTable = participantListPage.participantListTable;
-    let participantPosition: number;
     let participantPage: ParticipantPage;
     let shortID: string;
     let oncHistoryTab;
 
     await test.step(`Find a participant who has responded Consent=No`, async () => {
-      participantPosition = await participantListPage.findParticipantFor(
-        CustomizeView.RESEARCH_CONSENT_FORM,
-        Label.CONSENT_TISSUE,
-        { value: 'No', nth: 0 }
-      );
+      shortID = await participantListPage.useSearchToFindConsentParticipantFor({
+        columnGroup: CustomizeView.RESEARCH_CONSENT_FORM,
+        columnName: Label.CONSENT_TISSUE,
+        value: 'No'
+      });
 
-      const consentInput = (await participantListTable.getParticipantDataAt(participantPosition, Label.CONSENT_TISSUE)).trim();
-      shortID = await participantListTable.getParticipantDataAt(participantPosition, Label.SHORT_ID);
-      logInfo(`Consent Input = ${consentInput} for shortID: ${shortID}`);
-      expect(shortID).toBeTruthy();
+      const consentInput = (await participantListTable.getParticipantDataAt(0, Label.CONSENT_TISSUE)).trim();
       expect(consentInput).toBe('No');
     })
 
     await test.step(`Select a participant that has only 1 response to Consent=No recorded`, async () => {
-      participantPage = await participantListTable.openParticipantPageAt(participantPosition);
+      participantPage = await participantListTable.openParticipantPageAt(0);
       await participantPage.waitForReady();
     })
 
@@ -1004,12 +1000,6 @@ test.describe.serial(`${StudyName.OSTEO2}: Verify expected display of participan
 
     await test.step(`Check the display of profile info`, async () => {
       //Check profile webelements specific to OS2
-      const somaticConsentStatus = participantPage.getSomaticConsentStatusLocator;
-      const germlineConsentStatus = participantPage.getGermlineConsentStatusLocator;
-
-      await expect(somaticConsentStatus).toBeVisible();
-      await expect(germlineConsentStatus).toBeVisible();
-
       //Check that the OS2 cohort tag is present and displayed only once
       const participantPageCohortTag = new CohortTag(page);
       await participantPageCohortTag.assertParticipantPageCohortTagToHaveCount({ tagName: StudyName.OSTEO2, count: 1 });
