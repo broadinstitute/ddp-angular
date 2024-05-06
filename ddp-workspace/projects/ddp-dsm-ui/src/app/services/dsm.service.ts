@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { throwError, Observable} from 'rxjs';
+import {throwError, Observable, of} from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Filter } from '../filter-column/filter-column.model';
 import {Sort} from '../sort/sort.model';
@@ -1215,7 +1215,8 @@ export class DSMService {
     );
   }
 
-  public logToCloud(payload: string, sev = 'INFO'): Observable<void> {
+  // todo arz make it break
+  public logToCloud(payload: string, sev = 'INFO'): Observable<any> {
     const url =  `https://us-central1-${DDP_ENV.projectGcpId}.cloudfunctions.net/LoggingService`;
     const body = {
       logName: 'study-manager-ui',
@@ -1229,7 +1230,10 @@ export class DSMService {
       url,
       body,
       { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) }).pipe(
-      catchError(this.handleError.bind(this))
+      catchError((err: any) => {
+        console.log('Error logging to cloud: ' + err);
+        return of(null);
+      })
     );
   }
 
