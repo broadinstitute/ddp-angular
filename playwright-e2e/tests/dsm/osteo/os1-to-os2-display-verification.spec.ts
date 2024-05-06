@@ -71,7 +71,7 @@ test.describe.serial(`${StudyName.OSTEO} -> ${StudyName.OSTEO2}: Verify expected
     })
   })
 
-  test.skip(`OS1: Verify that the participant page has the expected display`, async ({ page, request }) => {
+  test(`OS1: Verify that the participant page has the expected display`, async ({ page, request }) => {
     navigation = new Navigation(page, request);
     await new Select(page, { label: 'Select study' }).selectOption(StudyName.OSTEO);
 
@@ -129,7 +129,7 @@ test.describe.serial(`${StudyName.OSTEO} -> ${StudyName.OSTEO2}: Verify expected
       const oncHistoryCreated = participantPage.getFieldSettingWebelement({ name: Label.ONC_HISTORY_CREATED, fieldSettingType: FieldSetting.DATE });
       await expect(oncHistoryCreated).toBeVisible();
 
-      const oncHistoryReviewed = participantPage.getFieldSettingWebelement({ name: Label.ONC_HISTORY_REVIEWED, fieldSettingType: FieldSetting.DATE });
+      const oncHistoryReviewed = participantPage.getOncHistoryReviewed();
       await expect(oncHistoryReviewed).toBeVisible();
 
       const medicalRecordCheckbox = participantPage.getFieldSettingWebelement({ 

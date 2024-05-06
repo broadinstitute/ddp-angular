@@ -29,7 +29,7 @@ export default class CohortTag {
   }
 
   public getTag(tagName: string): Locator {
-    return this.page.locator(`//mat-chip-list//mat-chip[contains(text(), '${tagName}')]`); //To be used in participant page
+    return this.page.locator(`//mat-chip-list//mat-chip[normalize-space(text())='${tagName}']`); //To be used in participant page
   }
 
   private getRemoveButtonFor(tagName: string): Locator {

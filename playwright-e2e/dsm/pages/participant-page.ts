@@ -157,7 +157,11 @@ export default class ParticipantPage {
    */
   public getFieldSettingWebelement(opts: { name: string | Label, fieldSettingType: FieldSettingInputType }): Locator {
     const { name, fieldSettingType } = opts;
-    return this.page.locator(`//app-participant-page//table//td[normalize-space(text())='${name}']/following-sibling::td//${fieldSettingType}`);
+    return this.page.locator(`(//app-participant-page//table//td[normalize-space(text())='${name}']/following-sibling::td//${fieldSettingType})[1]`);
+  }
+
+  public getOncHistoryReviewed(): Locator {
+    return this.page.locator(`//app-participant-page//div[normalize-space(text())='Onc History Reviewed']//input`);
   }
 
   /* Helper functions */
