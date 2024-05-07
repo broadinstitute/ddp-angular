@@ -24,11 +24,12 @@ test.describe.serial(`${StudyName.OSTEO} -> ${StudyName.OSTEO2}: Verify expected
     await participantListPage.waitForReady();
 
     await test.step(`Find a participant who has the 'OS' and 'OS PE-CGS' tags`, async () => {
-      //Search for enrolled participants who have both the 'OS' and 'OS PE-CGS' tag
+      //Search for enrolled participants who have both the 'OS' and 'OS PE-CGS' tag, have onc history, and have a kit (to be able to check everything)
       shortID = await participantListPage.findParticipantWithTab({
         tab: Tab.ONC_HISTORY,
         cohortTags: ['OS', 'OS PE-CGS'],
-        shouldHaveOncHistory: true
+        shouldHaveOncHistory: true,
+        shouldHaveKits: true,
       });
     })
   })

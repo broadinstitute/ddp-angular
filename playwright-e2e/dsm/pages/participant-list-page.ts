@@ -263,6 +263,7 @@ export default class ParticipantListPage extends DsmPageBase {
       isPediatric?: boolean,
       tab?: Tab,
       shouldHaveOncHistory?: boolean,
+      shouldHaveKits?: boolean,
       rgpProbandTab?: boolean,
       rgpMinimumFamilySize?: number,
       uri?: string,
@@ -273,6 +274,7 @@ export default class ParticipantListPage extends DsmPageBase {
       isPediatric = false,
       tab,
       shouldHaveOncHistory = false,
+      shouldHaveKits = false,
       rgpProbandTab = false,
       rgpMinimumFamilySize = 1,
       uri = '/ui/applyFilter',
@@ -346,9 +348,17 @@ export default class ParticipantListPage extends DsmPageBase {
               if (shouldHaveOncHistory) {
                 const oncHistoryDetail = value.oncHistoryDetails;
                 if (!oncHistoryDetail) {
-                  continue; //skip to check if another participant has inputted onc history data
+                  continue; //skip to check if another participant has inputted onc history data instead
                 }
               }
+
+              if (shouldHaveKits) {
+                const kitInformation = value.kits;
+                if (!kitInformation) {
+                  continue; //skip to check if another participant has kits instead
+                }
+              }
+
               if (isSubset({ cohortTagGroup: currentParticipantTags, targetCohortTags: cohortTags })) {
                 shortID = JSON.stringify(value.esData.profile.hruid).replace(/['"]+/g, '');
                 console.log(`Participant ${shortID} has the tags [ ${cohortTags.join(', ')} ]`);
