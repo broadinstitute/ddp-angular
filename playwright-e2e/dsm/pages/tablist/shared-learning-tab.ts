@@ -22,6 +22,6 @@ export default class SharedLearningTab extends TabBase {
   //Use screenshot comparison for the 'Upload Shared LEarnings Letter here...' section
 
   public async getUploadedFileCount(): Promise<number> {
-    return this.page.locator(`//app-files-table//table//tbody[@role='rowgroup']//tr`).count();
+    return this.page.locator(`//app-files-table//td[contains(@class, 'mat-column-Name')]`).count();
   }
 }
