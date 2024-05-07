@@ -83,7 +83,8 @@ export class UploadFileComponent implements OnDestroy {
             // if there's an error storing the file, remove the file
             // and inform the user to retry
             this.sharedLearningsHTTPService.delete(somaticResultsFile.somaticDocumentId);
-            this.updateUploadButtonBy(HttpRequestStatusEnum.RETRY);
+            this.updateUploadButtonBy(HttpRequestStatusEnum.ERROR_RETRY);
+            console.log(error);
           }
         });
     }
@@ -119,7 +120,7 @@ export class UploadFileComponent implements OnDestroy {
   }
 
   public get shouldDisableButton(): boolean {
-    return !this.isFileSelected || this.uploadStatus === HttpRequestStatusEnum.SUCCESS || noConnectionToBucket;
+    return !this.isFileSelected || this.uploadStatus === HttpRequestStatusEnum.SUCCESS;
   }
 
   public get btnClass(): string {
@@ -202,6 +203,10 @@ export class UploadFileComponent implements OnDestroy {
       case  HttpRequestStatusEnum.RETRY:
         this.uploadStatus = HttpRequestStatusEnum.RETRY;
         this.uploadButtonText = UploadButtonText.UPLOAD_RETRY;
+        break;
+      case  HttpRequestStatusEnum.ERROR_RETRY:
+        this.uploadStatus = HttpRequestStatusEnum.ERROR_RETRY;
+        this.uploadButtonText = UploadButtonText.ERROR_RETRY;
         break;
       default:
         this.uploadStatus = HttpRequestStatusEnum.NONE;
