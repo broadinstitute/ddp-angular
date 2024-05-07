@@ -66,6 +66,8 @@ export class UploadFileComponent implements OnDestroy {
       const openLoadingDialog = this.openLoadingDialog(selectedFile.name);
       let somaticResultsFile: SomaticResultsFile;
 
+      this.subscription?.unsubscribe();
+
       this.subscription = this.sharedLearningsHTTPService
         .getSignedUrl(selectedFile, this.participantId)
         .pipe(
@@ -77,7 +79,12 @@ export class UploadFileComponent implements OnDestroy {
         )
         .subscribe({
           next: () => this.handleSuccess(somaticResultsFile),
-          error: (error: any) => this.handleError(error)
+          error: (error: any) => {
+            // if there's an error storing the file, remove the file
+            // and inform the user to retry
+            this.sharedLearningsHTTPService.delete(somaticResultsFile.somaticDocumentId);
+            this.updateUploadButtonBy(HttpRequestStatusEnum.RETRY);
+          }
         });
     }
   }
@@ -112,7 +119,7 @@ export class UploadFileComponent implements OnDestroy {
   }
 
   public get shouldDisableButton(): boolean {
-    return !this.isFileSelected || this.uploadStatus === HttpRequestStatusEnum.SUCCESS;
+    return !this.isFileSelected || this.uploadStatus === HttpRequestStatusEnum.SUCCESS || noConnectionToBucket;
   }
 
   public get btnClass(): string {
