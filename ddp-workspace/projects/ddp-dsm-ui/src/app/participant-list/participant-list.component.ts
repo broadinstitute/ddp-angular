@@ -38,6 +38,8 @@ import { CohortTagComponent } from '../tags/cohort-tag/cohort-tag.component';
 import { CohortTag } from '../tags/cohort-tag/cohort-tag.model';
 import {FieldSettingsModel, ValueModel} from '../models';
 import {ExportHelpComponent} from '../help/help.component';
+import {Tissue} from '../tissue/tissue.model';
+import {DynamicValueUtilModel} from '../utils/dynamic-value-util.model';
 
 @Component({
   selector: 'app-participant-list',
@@ -1321,6 +1323,7 @@ export class ParticipantListComponent implements OnInit {
     } else {
       this.selectedColumns[ parent ].push(column);
     }
+    console.log(this.selectedColumns);
   }
 
   private isDataOfViewFilterExists(): boolean {
@@ -2507,4 +2510,10 @@ export class ParticipantListComponent implements OnInit {
     });
     return copiedColumns;
   }
+
+  getDynamicValue(tissue: Tissue, col: Filter): string {
+    return tissue.getAdditionalValue(col.participantColumn?.name);
+  }
+
+  protected readonly DynamicValueUtilModel = DynamicValueUtilModel;
 }
