@@ -20,6 +20,7 @@ export class KitRequest {
 
   public isSelected = false;
   public setSent = false;
+  PECGS_RESEARCH = 'PECGS_RESEARCH';
 
   static parse(json): KitRequest {
     return new KitRequest(
@@ -82,7 +83,7 @@ export class KitRequest {
 
   public getError(): string {
     if (this.error) {
-      if (this.message === 'PECGS_RESEARCH') {
+      if (this.message.includes(this.PECGS_RESEARCH)) {
         return 'PE-CGS Research Sample';
       }
       if (this.participant != null) {
