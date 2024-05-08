@@ -149,21 +149,6 @@ export default class ParticipantPage {
     await this.page.waitForTimeout(15000); // Don't remove: sleep 15 seconds
   }
 
-  /**
-   * Returns the locator for a webelement added to the Participant Page via Study -> Field Settings
-   * @param opts name - the name of the webelement as seen in the Participant Page
-   * @param opts fieldSettingsType - the type of variable/webelement to search for
-   * @returns the locator of the field-settings-added webelement
-   */
-  public getFieldSettingWebelement(opts: { name: string | Label, fieldSettingType: FieldSettingInputType }): Locator {
-    const { name, fieldSettingType } = opts;
-    return this.page.locator(`(//app-participant-page//table//td[normalize-space(text())='${name}']/following-sibling::td//${fieldSettingType})[1]`);
-  }
-
-  public getOncHistoryReviewed(): Locator {
-    return this.page.locator(`//app-participant-page//div[normalize-space(text())='Onc History Reviewed']//input`);
-  }
-
   /* Helper functions */
 
   private async readMainTextInfoFor(key: Label) {
@@ -186,6 +171,31 @@ export default class ParticipantPage {
 
   private get oncHistoryCreated(): Locator {
     return this.page.locator('//table//td[contains(text(),"Onc History Created")]/following-sibling::td');
+  }
+
+  /**
+     * Returns the locator for a webelement added to the Participant Page via Study -> Field Settings
+     * @param opts name - the name of the webelement as seen in the Participant Page
+     * @param opts fieldSettingsType - the type of variable/webelement to search for
+     * @returns the locator of the field-settings-added webelement
+     */
+  public getFieldSettingWebelement(opts: { name: string | Label, fieldSettingType: FieldSettingInputType }): Locator {
+    const { name, fieldSettingType } = opts;
+    return this.page.locator(`(//app-participant-page//table//td[normalize-space(text())='${name}']/following-sibling::td//${fieldSettingType})[1]`);
+  }
+
+  public getOncHistoryReviewed(): Locator {
+    return this.page.locator(`//app-participant-page//div[normalize-space(text())='Onc History Reviewed']//input`);
+  }
+
+  public getJumpTo(): Locator {
+    return this.page.locator(`//tabset//b[normalize-space(text())='Jump to:']`);
+  }
+
+  public getSurveyLink(opts: { surveyName: string }): Locator {
+    const { surveyName } = opts;
+    //The survey name in this case is the name + the version number as seen in DSM participant page e.g. 'Prequalifier Survey v1'
+    return this.page.locator(`//tab//a[normalize-space(text())='${surveyName}']`);
   }
 
   /* XPaths */

@@ -14,6 +14,10 @@ test.describe.serial(`${StudyName.OSTEO} -> ${StudyName.OSTEO2}: Verify expected
   let navigation;
   let participantListPage: ParticipantListPage;
   let participantListTable;
+  let surveyDataTab;
+  let sampleInformationTab;
+  let medicalRecordsTab;
+  let oncHistoryTab;
 
   test(`${StudyName.OSTEO}: Find a participant who is re-consented into ${StudyName.OSTEO2}`, async ({ page, request }) => {
     //Find a re-consented participant by searching for those who have both `OS` and `OS PE-CGS` tags
@@ -151,6 +155,34 @@ test.describe.serial(`${StudyName.OSTEO} -> ${StudyName.OSTEO2}: Verify expected
         fieldSettingType: FieldSetting.DATE
       });
       await expect(patientContactedForPaperCRDate).toBeVisible();
+    })
+
+    await test.step(`Check that expected OS1 tabs are displayed`, async () => {
+      //Check that the participant has the Survey Data, Sample Information, Medical Records, Onc History tab
+      const isSurveyDataTabVisible = await participantPage.tablist(Tab.SURVEY_DATA).isVisible();
+      expect(isSurveyDataTabVisible).toBeTruthy();
+
+      const isSampleInformationTabVisible = await participantPage.tablist(Tab.SAMPLE_INFORMATION).isVisible();
+      expect(isSampleInformationTabVisible).toBeTruthy();
+
+      const isMedicalRecordTabVisible = await participantPage.tablist(Tab.MEDICAL_RECORD).isVisible();
+      expect(isMedicalRecordTabVisible).toBeTruthy();
+
+      const isOncHistoryTabVisible = await participantPage.tablist(Tab.ONC_HISTORY).isVisible();
+      expect(isOncHistoryTabVisible).toBeTruthy();
+
+      const jumpToText = participantPage.getJumpTo();
+      await jumpToText.scrollIntoViewIfNeeded();
+      await expect(jumpToText).toBeVisible();
+
+      const prequalifierSurveyLink = participantPage.getSurveyLink({ surveyName: 'Prequalifier Survey v1' });
+      await expect(prequalifierSurveyLink).toBeVisible();
+
+      const consentFormLink = participantPage.getSurveyLink({ surveyName: 'Research Consent Form v1' });
+      await expect(consentFormLink).toBeVisible();
+
+      const medicalReleaseLink = participantPage.getSurveyLink({ surveyName: 'Medical Release Form v1' });
+      await expect(medicalReleaseLink).toBeVisible();
     })
 
     await test.step(`Check that expected OS1 activites are present in the Survey Data tab`, async () => {
