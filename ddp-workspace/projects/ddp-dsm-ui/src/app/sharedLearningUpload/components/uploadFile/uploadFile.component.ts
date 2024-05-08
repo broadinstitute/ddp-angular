@@ -7,16 +7,16 @@ import {
   ViewChild
 } from '@angular/core';
 import {SharedLearningsHTTPService} from '../../services/sharedLearningsHTTP.service';
-import {mergeMap, Subscription, tap} from 'rxjs';
-import {finalize} from 'rxjs/operators';
+import {EMPTY, Subscription, tap, throwError} from 'rxjs';
+import {catchError, finalize, take} from 'rxjs/operators';
 import {UploadButtonText} from '../../enums/uploadButtonText-enum';
 import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {LoadingModalComponent} from '../../../modals/loading-modal.component';
 import {HttpRequestStatusEnum} from '../../enums/httpRequestStatus-enum';
-import {HttpErrorResponse} from '@angular/common/http';
-import {SomaticResultSignedUrlResponse} from '../../interfaces/somaticResultSignedUrlRequest';
+import {HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 import {SomaticResultsFile} from '../../interfaces/somaticResultsFile';
 import {RoleService} from '../../../services/role.service';
+import { InterceptorSkipHeader} from "../../../interceptors/Http-interceptor.service";
 
 @Component({
   selector: 'app-upload-files',
@@ -59,7 +59,7 @@ export class UploadFileComponent implements OnDestroy {
   }
 
   public upload(): void {
-    if(!this.doNotAllowUpload) {
+    if (!this.doNotAllowUpload) {
       const selectedFiles: FileList = this.inputElement.nativeElement.files;
       const selectedFile: File = selectedFiles.item(0);
       this.updateUploadButtonBy(HttpRequestStatusEnum.IN_PROGRESS);
@@ -71,24 +71,37 @@ export class UploadFileComponent implements OnDestroy {
       this.subscription = this.sharedLearningsHTTPService
         .getSignedUrl(selectedFile, this.participantId)
         .pipe(
-          tap(({somaticResultUpload}: SomaticResultSignedUrlResponse) =>
-            somaticResultsFile = somaticResultUpload),
-          mergeMap(({signedUrl}: SomaticResultSignedUrlResponse) =>
-            this.sharedLearningsHTTPService.upload(signedUrl, selectedFile)),
-          finalize(() => openLoadingDialog.close())
-        )
-        .subscribe({
-          next: () => this.handleSuccess(somaticResultsFile),
-          error: (error: any) => {
-            // if there's an error storing the file, remove the file
-            // and inform the user to retry
-            this.sharedLearningsHTTPService.delete(somaticResultsFile.somaticDocumentId);
-            this.updateUploadButtonBy(HttpRequestStatusEnum.ERROR_RETRY);
-            console.log(error);
-          }
-        });
+          tap(signedUrlResponse => {
+            somaticResultsFile = signedUrlResponse.somaticResultUpload;
+            const headers = new HttpHeaders().set(InterceptorSkipHeader,"true");
+            this.sharedLearningsHTTPService.upload(signedUrlResponse.signedUrl, selectedFile, headers).pipe(
+              tap(uploadResponse => this.handleSuccess(somaticResultsFile)),
+              catchError(err => {
+                // if there's an error storing the file, remove the file
+                // and inform the user to retry
+                console.log('Error uploading ' + selectedFile.name + ' to ' + signedUrlResponse.signedUrl + ':' + JSON.stringify(err));
+                this.sharedLearningsHTTPService.delete(somaticResultsFile.somaticDocumentId)
+                  .pipe(
+                    tap(deleteResponse => {
+                      console.log('Deleted ' + somaticResultsFile.somaticDocumentId)
+                      this.updateUploadButtonBy(HttpRequestStatusEnum.ERROR_RETRY);
+                      return EMPTY;
+                    }),
+                    catchError(err => {
+                      console.log('Error deleting ' + somaticResultsFile.somaticDocumentId + ': ' + JSON.stringify(err));
+                      this.handleError(err);
+                      return throwError(err);
+                    }),
+                  ).subscribe();
+                return EMPTY;
+              })).subscribe();
+          }),
+          finalize(() => openLoadingDialog.close()),
+          catchError(err => throwError(err))
+        ).subscribe();
     }
   }
+
 
   public onFileSelection(event: Event): void {
     const selectedFiles: FileList = (event.target as HTMLInputElement).files;
