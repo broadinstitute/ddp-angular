@@ -2,6 +2,7 @@ import { Locator, Page, expect } from '@playwright/test';
 import { SurveyDataPanelEnum as SurveyName, ActivityVersionEnum as ActivityVersion } from 'dsm/component/tabs/enums/survey-data-enum';
 import { Label } from 'dsm/enums';
 
+//TODO add method to check Created, Completed, Last Updated information
 export default class SurveyDataTab {
   constructor(private readonly page: Page) {
   }
@@ -26,6 +27,7 @@ export default class SurveyDataTab {
     return activityQuestion;
   }
 
+  //TODO modify to better handle whitepsaces + line breaks + answers with more than one line of input e.g. from Medical Release Form
   public async getActivityAnswer(activityQuestion: Locator): Promise<string> {
     const answerLocator = activityQuestion.locator(`//following-sibling::div//b`);
     const answer = (await answerLocator.innerText()).trim();
@@ -36,19 +38,6 @@ export default class SurveyDataTab {
     await activityQuestion.scrollIntoViewIfNeeded(); //adding so that in case of error, the video can be more easily followed
     await expect(activityQuestion).toBeVisible();
   }
-  /*public async getActivityData(activity: SurveyDataPanelEnum, label: string): Promise<string[]> {
-    await this.activityDataPanel(activity).waitFor({state: 'visible' });
-    const region = this.activityDataPanel(activity).locator('xpath=//*[@role="region"]');
-    const isVisible = await region.isVisible();
-    if (!isVisible) {
-      await this.activityDataPanel(activity).click();
-      await expect(region).toBeVisible();
-    }
-
-    const data = region.locator(
-      `xpath=/*[contains(@class, "mat-expansion-panel-body")]/div[.//*[contains(@class, "grey-color")][normalize-space()="${label}"]]`);
-    return (await data.innerText()).split('\n+');
-  }*/
 
   private getActivityDataPanel(name: string, version: string): Locator {
     //Note: It's possible for a participant to have more than one version of an activity e.g. Research Consent in the case of a re-consented participant

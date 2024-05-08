@@ -190,7 +190,7 @@ test.describe.serial(`${StudyName.OSTEO} -> ${StudyName.OSTEO2}: Verify expected
 
     await test.step(`Check that the Prequalifier Survey is displayed as expected`, async () => {
       //Check that the participant has the Prequalifier activity
-      const surveyDataTab = new SurveyDataTab(page);
+      surveyDataTab = new SurveyDataTab(page);
 
       //Check Prequalifier questions are all present
       const prequalActivity = await surveyDataTab.getActivity({ activityName: SurveyName.PREQUALIFIER, activityVersion: ActivityVersion.ONE });
@@ -202,8 +202,7 @@ test.describe.serial(`${StudyName.OSTEO} -> ${StudyName.OSTEO2}: Verify expected
         activity: prequalActivity,
         questionShortID: Label.PREQUAL_SELF_DESCRIBE
       });
-      await prequalSelfDescribe.scrollIntoViewIfNeeded();
-      await expect(prequalSelfDescribe).toBeVisible();
+      await surveyDataTab.assertActivityQuestionDisplayed(prequalSelfDescribe);
 
       const currentAge = await surveyDataTab.getActivityQuestion({
         activity: prequalActivity,
@@ -249,15 +248,88 @@ test.describe.serial(`${StudyName.OSTEO} -> ${StudyName.OSTEO2}: Verify expected
     })
 
     await test.step(`Check that the Research Consent Form is displayed as expected`, async () => {
+      surveyDataTab = new SurveyDataTab(page);
+
       //Check that the participant has the Research Consent activity
+      const researchConsentActivity = await surveyDataTab.getActivity({
+        activityName: SurveyName.RESEARCH_CONSENT_FORM,
+        activityVersion: ActivityVersion.ONE
+      });
+      await researchConsentActivity.scrollIntoViewIfNeeded();
+      await expect(researchConsentActivity).toBeVisible();
+      await researchConsentActivity.click();
 
       //Check Consent questions are all present
+      const consentBlood = await surveyDataTab.getActivityQuestion({
+        activity: researchConsentActivity,
+        questionShortID: Label.CONSENT_BLOOD
+      });
+      await surveyDataTab.assertActivityQuestionDisplayed(consentBlood);
+
+      const consentTissue = await surveyDataTab.getActivityQuestion({
+        activity: researchConsentActivity,
+        questionShortID: Label.CONSENT_TISSUE
+      });
+      await surveyDataTab.assertActivityQuestionDisplayed(consentTissue);
+
+      const participantFirstName = await surveyDataTab.getActivityQuestion({
+        activity: researchConsentActivity,
+        questionShortID: Label.CONSENT_FIRSTNAME
+      });
+      await surveyDataTab.assertActivityQuestionDisplayed(participantFirstName);
+
+      const participantLastName = await surveyDataTab.getActivityQuestion({
+        activity: researchConsentActivity,
+        questionShortID: Label.CONSENT_LASTNAME
+      });
+      await surveyDataTab.assertActivityQuestionDisplayed(participantLastName);
+
+      const dateOfBirth = await surveyDataTab.getActivityQuestion({
+        activity: researchConsentActivity,
+        questionShortID: Label.CONSENT_DOB
+      });
+      await surveyDataTab.assertActivityQuestionDisplayed(dateOfBirth);
     })
 
     await test.step(`Check that the Medical Release Survey is displayed as expected`, async () => {
       //Check that the participant has the Medical Release activity
+      surveyDataTab = new SurveyDataTab(page);
 
       //Check Medical Release questions are all present
+      const medicalReleaseFormActivity = await surveyDataTab.getActivity({
+        activityName: SurveyName.MEDICAL_RELEASE_FORM,
+        activityVersion: ActivityVersion.ONE
+      });
+
+      const mailingAddress = await surveyDataTab.getActivityQuestion({
+        activity: medicalReleaseFormActivity,
+        questionShortID: Label.MAILING_ADDRESS_SHORT_ID
+      });
+      await surveyDataTab.assertActivityQuestionDisplayed(mailingAddress);
+
+      const physician = await surveyDataTab.getActivityQuestion({
+        activity: medicalReleaseFormActivity,
+        questionShortID: Label.PHYSICIAN
+      });
+      await surveyDataTab.assertActivityQuestionDisplayed(physician);
+
+      const initialBiopsy = await surveyDataTab.getActivityQuestion({
+        activity: medicalReleaseFormActivity,
+        questionShortID: Label.INITIAL_BIOPSY
+      });
+      await surveyDataTab.assertActivityQuestionDisplayed(initialBiopsy);
+
+      const institution = await surveyDataTab.getActivityQuestion({
+        activity: medicalReleaseFormActivity,
+        questionShortID: Label.INSTITUTION_UPPER_CASE
+      });
+      await surveyDataTab.assertActivityQuestionDisplayed(institution);
+
+      const releaseAgreement = await surveyDataTab.getActivityQuestion({
+        activity: medicalReleaseFormActivity,
+        questionShortID: Label.RELEASE_SELF_AGREEMENT
+      });
+      await surveyDataTab.assertActivityQuestionDisplayed(releaseAgreement);
     })
 
     await test.step(`name`, async () => {
