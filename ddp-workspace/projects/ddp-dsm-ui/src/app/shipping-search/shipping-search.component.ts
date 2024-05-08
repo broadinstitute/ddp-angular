@@ -178,7 +178,7 @@ saveCompleted(): void{
 
   isResearchSample(kitRequest: KitRequest): boolean {
     if (kitRequest.realm === 'osteo2' || kitRequest.realm === 'cmi-lms') {
-      return (kitRequest.message && kitRequest.message === this.PECGS_RESEARCH);
+      return (kitRequest.message && kitRequest.message.includes(this.PECGS_RESEARCH));
     }
     return false;
   }
