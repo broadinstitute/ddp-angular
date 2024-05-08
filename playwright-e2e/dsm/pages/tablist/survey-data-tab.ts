@@ -8,17 +8,17 @@ export default class SurveyDataTab {
 
   public async getActivity(opts: { activityName: SurveyName, activityVersion: ActivityVersion }): Promise<Locator> {
     const { activityName, activityVersion } = opts;
-    const activityPanel = this.getActivityDataPanel(activityName, activityVersion);
-    await activityPanel.waitFor({ state: 'visible' });
-    return activityPanel;
+    const activity = this.getActivityDataPanel(activityName, activityVersion);
+    await activity.waitFor({ state: 'visible' });
+    return activity;
   }
 
-  public async getActivityQuestion(opts: { activityPanel: Locator, questionShortID: Label }): Promise<Locator> {
-    const { activityPanel, questionShortID } = opts;
-    const expandedPanelRegion = activityPanel.locator(`/parent::mat-expansion-panel//*[@role='region']`);
+  public async getActivityQuestion(opts: { activity: Locator, questionShortID: Label }): Promise<Locator> {
+    const { activity, questionShortID } = opts;
+    const expandedPanelRegion = activity.locator(`//parent::mat-expansion-panel//*[@role='region']`);
     const isVisible = await expandedPanelRegion.isVisible();
     if (!isVisible) {
-      await activityPanel.click();
+      await activity.click();
       await expect(expandedPanelRegion).toBeVisible();
     }
     //Questions in DSM all usually are grey with the question short id attached
@@ -27,7 +27,7 @@ export default class SurveyDataTab {
   }
 
   public async getActivityAnswer(activityQuestion: Locator): Promise<string> {
-    const answerLocator = activityQuestion.locator(`/following-sibling::div//b`);
+    const answerLocator = activityQuestion.locator(`//following-sibling::div//b`);
     const answer = (await answerLocator.innerText()).trim();
     return answer;
   }

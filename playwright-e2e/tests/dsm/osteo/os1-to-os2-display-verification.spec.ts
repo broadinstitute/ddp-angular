@@ -3,10 +3,12 @@ import CohortTag from 'dsm/component/cohort-tag';
 import { FieldSettingInputType as FieldSetting, Label, Tab } from 'dsm/enums';
 import { Navigation, Study, StudyName } from 'dsm/navigation';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
+import SurveyDataTab from 'dsm/pages/tablist/survey-data-tab';
 import Select from 'dss/component/select';
 import { test } from 'fixtures/dsm-fixture';
 import { logInfo } from 'utils/log-utils';
 import { totalNumberOfOccurences } from 'utils/test-utils';
+import { SurveyDataPanelEnum as SurveyName, ActivityVersionEnum as ActivityVersion } from 'dsm/component/tabs/enums/survey-data-enum';
 
 test.describe.serial(`${StudyName.OSTEO} -> ${StudyName.OSTEO2}: Verify expected display of participant information @dsm`, () => {
   //Use 1 participant throughout the test to check the display of information
@@ -187,6 +189,23 @@ test.describe.serial(`${StudyName.OSTEO} -> ${StudyName.OSTEO2}: Verify expected
 
     await test.step(`Check that expected OS1 activites are present in the Survey Data tab`, async () => {
       //Check that the participant has the Prequalifier, Consent, and Medical Release activities
+      const surveyDataTab = new SurveyDataTab(page);
+
+      //Check Prequalifier questions are all present
+      const prequalActivity = await surveyDataTab.getActivity({ activityName: SurveyName.PREQUALIFIER, activityVersion: ActivityVersion.ONE });
+      await prequalActivity.scrollIntoViewIfNeeded();
+      await expect(prequalActivity).toBeVisible();
+      await prequalActivity.click(); //Click to open the panel to access the questions
+
+      const prequalSelfDescribe = await surveyDataTab.getActivityQuestion({
+        activity: prequalActivity,
+        questionShortID: Label.PREQUAL_SELF_DESCRIBE
+      });
+      await expect(prequalSelfDescribe).toBeVisible();
+
+      //Check Consent questions are all present
+
+      //Check Medical Release questions are all present
     })
 
     await test.step(`name`, async () => {
