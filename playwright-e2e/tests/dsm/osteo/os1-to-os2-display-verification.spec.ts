@@ -9,6 +9,7 @@ import { test } from 'fixtures/dsm-fixture';
 import { logInfo } from 'utils/log-utils';
 import { totalNumberOfOccurences } from 'utils/test-utils';
 import { SurveyDataPanelEnum as SurveyName, ActivityVersionEnum as ActivityVersion } from 'dsm/component/tabs/enums/survey-data-enum';
+import { language } from 'googleapis/build/src/apis/language';
 
 test.describe.serial(`${StudyName.OSTEO} -> ${StudyName.OSTEO2}: Verify expected display of participant information @dsm`, () => {
   //Use 1 participant throughout the test to check the display of information
@@ -187,8 +188,8 @@ test.describe.serial(`${StudyName.OSTEO} -> ${StudyName.OSTEO2}: Verify expected
       await expect(medicalReleaseLink).toBeVisible();
     })
 
-    await test.step(`Check that expected OS1 activites are present in the Survey Data tab`, async () => {
-      //Check that the participant has the Prequalifier, Consent, and Medical Release activities
+    await test.step(`Check that the Prequalifier Survey is displayed as expected`, async () => {
+      //Check that the participant has the Prequalifier activity
       const surveyDataTab = new SurveyDataTab(page);
 
       //Check Prequalifier questions are all present
@@ -201,9 +202,60 @@ test.describe.serial(`${StudyName.OSTEO} -> ${StudyName.OSTEO2}: Verify expected
         activity: prequalActivity,
         questionShortID: Label.PREQUAL_SELF_DESCRIBE
       });
+      await prequalSelfDescribe.scrollIntoViewIfNeeded();
       await expect(prequalSelfDescribe).toBeVisible();
 
+      const currentAge = await surveyDataTab.getActivityQuestion({
+        activity: prequalActivity,
+        questionShortID: Label.SELF_CURRENT_AGE
+      });
+      await surveyDataTab.assertActivityQuestionDisplayed(currentAge);
+
+      const country = await surveyDataTab.getActivityQuestion({
+        activity: prequalActivity,
+        questionShortID: Label.SELF_COUNTRY
+      });
+      await surveyDataTab.assertActivityQuestionDisplayed(country);
+
+      const province = await surveyDataTab.getActivityQuestion({
+        activity: prequalActivity,
+        questionShortID: Label.SELF_PROVINCE
+      });
+      await surveyDataTab.assertActivityQuestionDisplayed(province);
+
+      const childAge = await surveyDataTab.getActivityQuestion({
+        activity: prequalActivity,
+        questionShortID: Label.CHILD_CURRENT_AGE
+      });
+      await surveyDataTab.assertActivityQuestionDisplayed(childAge);
+
+      const childCountry = await surveyDataTab.getActivityQuestion({
+        activity: prequalActivity,
+        questionShortID: Label.CHILD_COUNTRY
+      });
+      await surveyDataTab.assertActivityQuestionDisplayed(childCountry);
+
+      const childState = await surveyDataTab.getActivityQuestion({
+        activity: prequalActivity,
+        questionShortID: Label.CHILD_STATE
+      });
+      await surveyDataTab.assertActivityQuestionDisplayed(childState);
+
+      const childProvince = await surveyDataTab.getActivityQuestion({
+        activity: prequalActivity,
+        questionShortID: Label.CHILD_PROVINCE
+      });
+      await surveyDataTab.assertActivityQuestionDisplayed(childProvince);
+    })
+
+    await test.step(`Check that the Research Consent Form is displayed as expected`, async () => {
+      //Check that the participant has the Research Consent activity
+
       //Check Consent questions are all present
+    })
+
+    await test.step(`Check that the Medical Release Survey is displayed as expected`, async () => {
+      //Check that the participant has the Medical Release activity
 
       //Check Medical Release questions are all present
     })

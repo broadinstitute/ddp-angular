@@ -31,6 +31,11 @@ export default class SurveyDataTab {
     const answer = (await answerLocator.innerText()).trim();
     return answer;
   }
+
+  public async assertActivityQuestionDisplayed(activityQuestion: Locator): Promise<void> {
+    await activityQuestion.scrollIntoViewIfNeeded(); //adding so that in case of error, the video can be more easily followed
+    await expect(activityQuestion).toBeVisible();
+  }
   /*public async getActivityData(activity: SurveyDataPanelEnum, label: string): Promise<string[]> {
     await this.activityDataPanel(activity).waitFor({state: 'visible' });
     const region = this.activityDataPanel(activity).locator('xpath=//*[@role="region"]');

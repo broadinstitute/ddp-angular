@@ -225,6 +225,8 @@ export enum Label {
   CHILD_CONTACT_CREATED = 'CHILD_CONTACT Survey Created',
   CHILD_CONTACT_LAST_UPDATED = 'CHILD_CONTACT Survey Last Updated',
   CHILD_CONTACT_STATUS = 'CHILD_CONTACT Survey Status',
+  CHILD_COUNTRY = 'CHILD_COUNTRY',
+  CHILD_CURRENT_AGE = 'CHILD_CURRENT_AGE',
   CHILD_CURRENT_BODY_LOC = 'CHILD_CURRENT_BODY_LOC',
   CHILD_CURRENTLY_TREATED = 'CHILD_CURRENTLY_TREATED',
   CHILD_DATE_OF_BIRTH = `Your child’s Date of Birth`, //Apostrophe type is important - don't change to the one on the MAC laptop or it'll never retreive the webelement
@@ -574,6 +576,8 @@ export enum Label {
   SAMPLE_TYPE = 'Sample Type',
   SCROLL = 'Scroll(s)',
   SCROLLS_BACK_FROM_SHL = 'Scrolls back from SHL',
+  SELF_COUNTRY = 'SELF_COUNTRY',
+  SELF_CURRENT_AGE = 'SELF_CURRENT_AGE',
   SELF_PROVINCE = 'SELF_PROVINCE',
   SELF_STATE = 'SELF_STATE',
   SENT = 'Sent',
