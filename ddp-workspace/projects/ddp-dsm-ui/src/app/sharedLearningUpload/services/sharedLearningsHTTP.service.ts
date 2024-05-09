@@ -7,7 +7,7 @@ import {
   SomaticResultSignedUrlResponse
 } from '../interfaces/somaticResultSignedUrlRequest';
 import {SessionService} from '../../services/session.service';
-import {HttpHeaders} from "@angular/common/http";
+import {HttpHeaders} from '@angular/common/http';
 
 @Injectable()
 export class SharedLearningsHTTPService {

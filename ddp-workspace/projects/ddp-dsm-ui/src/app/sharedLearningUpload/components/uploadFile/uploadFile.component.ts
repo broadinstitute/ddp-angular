@@ -16,7 +16,7 @@ import {HttpRequestStatusEnum} from '../../enums/httpRequestStatus-enum';
 import {HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 import {SomaticResultsFile} from '../../interfaces/somaticResultsFile';
 import {RoleService} from '../../../services/role.service';
-import { InterceptorSkipHeader} from "../../../interceptors/Http-interceptor.service";
+import { InterceptorSkipHeader} from '../../../interceptors/Http-interceptor.service';
 
 @Component({
   selector: 'app-upload-files',
@@ -73,7 +73,7 @@ export class UploadFileComponent implements OnDestroy {
         .pipe(
           tap(signedUrlResponse => {
             somaticResultsFile = signedUrlResponse.somaticResultUpload;
-            const headers = new HttpHeaders().set(InterceptorSkipHeader,"true");
+            const headers = new HttpHeaders().set(InterceptorSkipHeader,'true');
             this.sharedLearningsHTTPService.upload(signedUrlResponse.signedUrl, selectedFile, headers).pipe(
               tap(uploadResponse => this.handleSuccess(somaticResultsFile)),
               catchError(err => {
@@ -83,14 +83,14 @@ export class UploadFileComponent implements OnDestroy {
                 this.sharedLearningsHTTPService.delete(somaticResultsFile.somaticDocumentId)
                   .pipe(
                     tap(deleteResponse => {
-                      console.log('Deleted ' + somaticResultsFile.somaticDocumentId)
+                      console.log('Deleted ' + somaticResultsFile.somaticDocumentId);
                       this.updateUploadButtonBy(HttpRequestStatusEnum.ERROR_RETRY);
                       return EMPTY;
                     }),
-                    catchError(err => {
-                      console.log('Error deleting ' + somaticResultsFile.somaticDocumentId + ': ' + JSON.stringify(err));
-                      this.handleError(err);
-                      return throwError(err);
+                    catchError(deleteErr => {
+                      console.log('Error deleting ' + somaticResultsFile.somaticDocumentId + ': ' + JSON.stringify(deleteErr));
+                      this.handleError(deleteErr);
+                      return throwError(deleteErr);
                     }),
                   ).subscribe();
                 return EMPTY;

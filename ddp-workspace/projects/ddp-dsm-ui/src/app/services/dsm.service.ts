@@ -23,7 +23,7 @@ import {SendToParticipantRequest} from '../sharedLearningUpload/interfaces/sendT
 import {AddUsersRequest, RemoveUsersRequest} from '../usersAndPermissions/interfaces/addRemoveUsers';
 import {EditUsers} from '../usersAndPermissions/interfaces/editUsers';
 import {EditUserRoles} from '../usersAndPermissions/interfaces/role';
-import { InterceptorSkipHeader} from "../interceptors/Http-interceptor.service";
+import { InterceptorSkipHeader} from '../interceptors/Http-interceptor.service';
 
 declare var DDP_ENV: any;
 
