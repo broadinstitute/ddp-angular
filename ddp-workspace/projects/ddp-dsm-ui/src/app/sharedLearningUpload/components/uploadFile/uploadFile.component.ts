@@ -16,7 +16,6 @@ import {HttpRequestStatusEnum} from '../../enums/httpRequestStatus-enum';
 import {HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 import {SomaticResultsFile} from '../../interfaces/somaticResultsFile';
 import {RoleService} from '../../../services/role.service';
-import { InterceptorSkipHeader} from '../../../interceptors/Http-interceptor.service';
 
 @Component({
   selector: 'app-upload-files',
@@ -25,6 +24,7 @@ import { InterceptorSkipHeader} from '../../../interceptors/Http-interceptor.ser
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class UploadFileComponent implements OnDestroy {
+  private interceptorSkipHeader  = 'X-Skip-Interceptor';
   private readonly NO_FILE = 'No File';
   private readonly MAX_FILE_SIZE = 30000000;
   private readonly MAX_FILE_NAME_LENGTH = 255;
@@ -73,7 +73,7 @@ export class UploadFileComponent implements OnDestroy {
         .pipe(
           tap(signedUrlResponse => {
             somaticResultsFile = signedUrlResponse.somaticResultUpload;
-            const headers = new HttpHeaders().set(InterceptorSkipHeader,'true');
+            const headers = new HttpHeaders().set(this.interceptorSkipHeader,'true');
             this.sharedLearningsHTTPService.upload(signedUrlResponse.signedUrl, selectedFile, headers).pipe(
               tap(uploadResponse => this.handleSuccess(somaticResultsFile)),
               catchError(err => {
