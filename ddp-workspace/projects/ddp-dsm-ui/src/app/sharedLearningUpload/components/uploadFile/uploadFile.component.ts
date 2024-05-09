@@ -7,14 +7,13 @@ import {
   ViewChild
 } from '@angular/core';
 import {SharedLearningsHTTPService} from '../../services/sharedLearningsHTTP.service';
-import {mergeMap, Subscription, tap} from 'rxjs';
-import {finalize} from 'rxjs/operators';
+import {EMPTY, Subscription, tap, throwError} from 'rxjs';
+import {catchError, finalize, take} from 'rxjs/operators';
 import {UploadButtonText} from '../../enums/uploadButtonText-enum';
 import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {LoadingModalComponent} from '../../../modals/loading-modal.component';
 import {HttpRequestStatusEnum} from '../../enums/httpRequestStatus-enum';
-import {HttpErrorResponse} from '@angular/common/http';
-import {SomaticResultSignedUrlResponse} from '../../interfaces/somaticResultSignedUrlRequest';
+import {HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 import {SomaticResultsFile} from '../../interfaces/somaticResultsFile';
 import {RoleService} from '../../../services/role.service';
 
@@ -25,6 +24,7 @@ import {RoleService} from '../../../services/role.service';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class UploadFileComponent implements OnDestroy {
+  private interceptorSkipHeader  = 'X-Skip-Interceptor';
   private readonly NO_FILE = 'No File';
   private readonly MAX_FILE_SIZE = 30000000;
   private readonly MAX_FILE_NAME_LENGTH = 255;
@@ -59,28 +59,49 @@ export class UploadFileComponent implements OnDestroy {
   }
 
   public upload(): void {
-    if(!this.doNotAllowUpload) {
+    if (!this.doNotAllowUpload) {
       const selectedFiles: FileList = this.inputElement.nativeElement.files;
       const selectedFile: File = selectedFiles.item(0);
       this.updateUploadButtonBy(HttpRequestStatusEnum.IN_PROGRESS);
       const openLoadingDialog = this.openLoadingDialog(selectedFile.name);
       let somaticResultsFile: SomaticResultsFile;
 
+      this.subscription?.unsubscribe();
+
       this.subscription = this.sharedLearningsHTTPService
         .getSignedUrl(selectedFile, this.participantId)
         .pipe(
-          tap(({somaticResultUpload}: SomaticResultSignedUrlResponse) =>
-            somaticResultsFile = somaticResultUpload),
-          mergeMap(({signedUrl}: SomaticResultSignedUrlResponse) =>
-            this.sharedLearningsHTTPService.upload(signedUrl, selectedFile)),
-          finalize(() => openLoadingDialog.close())
-        )
-        .subscribe({
-          next: () => this.handleSuccess(somaticResultsFile),
-          error: (error: any) => this.handleError(error)
-        });
+          tap(signedUrlResponse => {
+            somaticResultsFile = signedUrlResponse.somaticResultUpload;
+            const headers = new HttpHeaders().set(this.interceptorSkipHeader,'true');
+            this.sharedLearningsHTTPService.upload(signedUrlResponse.signedUrl, selectedFile, headers).pipe(
+              tap(uploadResponse => this.handleSuccess(somaticResultsFile)),
+              catchError(err => {
+                // if there's an error storing the file, remove the file
+                // and inform the user to retry
+                console.log('Error uploading ' + selectedFile.name + ' to ' + signedUrlResponse.signedUrl + ':' + JSON.stringify(err));
+                this.sharedLearningsHTTPService.delete(somaticResultsFile.somaticDocumentId)
+                  .pipe(
+                    tap(deleteResponse => {
+                      console.log('Deleted ' + somaticResultsFile.somaticDocumentId);
+                      this.updateUploadButtonBy(HttpRequestStatusEnum.ERROR_RETRY);
+                      return EMPTY;
+                    }),
+                    catchError(deleteErr => {
+                      console.log('Error deleting ' + somaticResultsFile.somaticDocumentId + ': ' + JSON.stringify(deleteErr));
+                      this.handleError(deleteErr);
+                      return throwError(deleteErr);
+                    }),
+                  ).subscribe();
+                return EMPTY;
+              })).subscribe();
+          }),
+          finalize(() => openLoadingDialog.close()),
+          catchError(err => throwError(err))
+        ).subscribe();
     }
   }
+
 
   public onFileSelection(event: Event): void {
     const selectedFiles: FileList = (event.target as HTMLInputElement).files;
@@ -195,6 +216,10 @@ export class UploadFileComponent implements OnDestroy {
       case  HttpRequestStatusEnum.RETRY:
         this.uploadStatus = HttpRequestStatusEnum.RETRY;
         this.uploadButtonText = UploadButtonText.UPLOAD_RETRY;
+        break;
+      case  HttpRequestStatusEnum.ERROR_RETRY:
+        this.uploadStatus = HttpRequestStatusEnum.ERROR_RETRY;
+        this.uploadButtonText = UploadButtonText.ERROR_RETRY;
         break;
       default:
         this.uploadStatus = HttpRequestStatusEnum.NONE;
