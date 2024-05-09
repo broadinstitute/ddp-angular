@@ -140,7 +140,8 @@ export class UploadFileComponent implements OnDestroy {
     return this.uploadStatus === HttpRequestStatusEnum.SUCCESS ? 'uploadSuccess'
       : this.uploadStatus === HttpRequestStatusEnum.FAIL ? 'uploadFail'
         : this.uploadStatus === HttpRequestStatusEnum.RETRY ? 'uploadRetry'
-          : '';
+          : this.uploadStatus === HttpRequestStatusEnum.ERROR_RETRY ? 'uploadFail'
+            : '';
   }
 
   public get isAllowedToUpload(): boolean {
