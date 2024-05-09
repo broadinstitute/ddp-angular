@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { throwError, Observable} from 'rxjs';
+import { throwError, Observable, of, tap} from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Filter } from '../filter-column/filter-column.model';
 import {Sort} from '../sort/sort.model';
@@ -28,6 +28,7 @@ declare var DDP_ENV: any;
 
 @Injectable({providedIn: 'root'})
 export class DSMService {
+  private interceptorSkipHeader  = 'X-Skip-Interceptor';
   public static UI = 'ui/';
   public static REALM = 'realm';
   public static TARGET = 'target';
@@ -737,10 +738,8 @@ export class DSMService {
     );
   }
 
-  public uploadSomaticResultsFile(signedUrl: string, file: File): Observable<any> {
-    return this.http.put(signedUrl, file).pipe(
-      catchError(this.handleError)
-    );
+  public uploadSomaticResultsFile(signedUrl: string, file: File, headers?: HttpHeaders): Observable<any> {
+    return this.http.put(signedUrl, file, { headers: headers});
   }
 
   public sendSomaticResultsToParticipant(realm: string, payload: SendToParticipantRequest): Observable<any> {
@@ -760,6 +759,7 @@ export class DSMService {
     map.push({name: DSMService.REALM, value: realm});
     map.push({name: 'somaticDocumentId', value: somaticDocumentId});
     return this.http.delete(url, this.buildQueryHeader(map)).pipe(
+      tap(() => console.log('Deleted somatic document ' + somaticDocumentId)),
       catchError(this.handleError)
     );
   }
@@ -1215,7 +1215,7 @@ export class DSMService {
     );
   }
 
-  public logToCloud(payload: string, sev = 'INFO'): Observable<void> {
+  public logToCloud(payload: string, sev = 'INFO'): Observable<any> {
     const url =  `https://us-central1-${DDP_ENV.projectGcpId}.cloudfunctions.net/LoggingService`;
     const body = {
       logName: 'study-manager-ui',
@@ -1228,8 +1228,13 @@ export class DSMService {
     return this.http.post(
       url,
       body,
-      { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) }).pipe(
-      catchError(this.handleError.bind(this))
+      { headers: new HttpHeaders({ 'Content-Type': 'application/json'}).set(
+          this.interceptorSkipHeader, 'true')
+           }).pipe(
+      catchError((err: any) => {
+        console.log('Error logging to cloud: ' + err);
+        return of(null);
+      })
     );
   }
 

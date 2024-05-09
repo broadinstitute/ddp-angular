@@ -7,6 +7,7 @@ import {
   SomaticResultSignedUrlResponse
 } from '../interfaces/somaticResultSignedUrlRequest';
 import {SessionService} from '../../services/session.service';
+import {HttpHeaders} from '@angular/common/http';
 
 @Injectable()
 export class SharedLearningsHTTPService {
@@ -33,16 +34,13 @@ export class SharedLearningsHTTPService {
     return this.dsmService.getSomaticResultsFileUploadSignedUrl(this.selectedRealm, participantId, fileInformation);
   }
 
-  public upload(signedUrl: string, file: File): Observable<any> {
+  public upload(signedUrl: string, file: File, headers?: HttpHeaders): Observable<any> {
     this.dsmService.logToCloud(`Uploading file ${file.name} to url ${signedUrl}.`).subscribe({
-      next: data => {
-        console.log('logged upload');
-      },
       error: err => {
-        console.log('error logging upload ' + err);
+        console.error('error logging upload ' + err);
       }
     });
-    return this.dsmService.uploadSomaticResultsFile(signedUrl, file);
+    return this.dsmService.uploadSomaticResultsFile(signedUrl, file, headers);
   }
 
   public sendToParticipant(participantId: string, somaticDocumentId: number): Observable<object> {
