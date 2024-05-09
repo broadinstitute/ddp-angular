@@ -10,8 +10,11 @@ import { OncHistorySelectRequestEnum } from 'dsm/component/tabs/enums/onc-histor
 import { StudyName } from 'dsm/navigation';
 
 // TODO Enable until bug PEPPER-1322 is fixed
-test.describe.skip('Tissue Request Flow', () => {
-  const studies = [StudyName.PANCAN];
+test.describe('Tissue Request Flow', () => {
+  const studies = [StudyName.PANCAN, StudyName.LMS];
+  let testParticipantResidence: Label;
+  let tissue;
+  let today;
 
   for (const study of studies) {
     test(`Tissue Request Flow for ${study} study @dsm @feature`, async ({ page, request }) => {
@@ -24,13 +27,14 @@ test.describe.skip('Tissue Request Flow', () => {
         await customizeViewPanel.open();
         await customizeViewPanel.selectColumns(CustomizeView.MEDICAL_RECORD, [Label.MR_PROBLEM]);
         await customizeViewPanel.selectColumns(CustomizeView.DSM_COLUMNS, [Label.ONC_HISTORY_CREATED]);
-        await customizeViewPanel.selectColumns(CustomizeView.RESEARCH_CONSENT_FORM, [Label.MAILING_ADDRESS]);
+        testParticipantResidence = (study === StudyName.PANCAN) ? Label.MAILING_ADDRESS : Label.YOUR_CONTACT_INFORMATION; //PE-CGS studies use the latter
+        await customizeViewPanel.selectColumns(CustomizeView.RESEARCH_CONSENT_FORM, [testParticipantResidence]);
 
         await searchPanel.open();
         await searchPanel.checkboxes(Label.STATUS, { checkboxValues: [DataFilter.ENROLLED] });
         await searchPanel.checkboxes(Label.MR_PROBLEM, { checkboxValues: [DataFilter.NO] });
         await searchPanel.dates(Label.ONC_HISTORY_CREATED, { additionalFilters: [DataFilter.EMPTY] });
-        await searchPanel.text(Label.MAILING_ADDRESS, { additionalFilters: [DataFilter.NOT_EMPTY] });
+        await searchPanel.text(testParticipantResidence, { additionalFilters: [DataFilter.NOT_EMPTY] });
 
         await searchPanel.search();
         shortID = await participantListPage.findParticipantWithTab(
@@ -128,17 +132,35 @@ test.describe.skip('Tissue Request Flow', () => {
 
       await test.step('Add Material count', async () => {
         const testValue = 21;
-        const tissue = tissueInformationPage.tissue();
+        tissue = tissueInformationPage.tissue();
         await tissue.fillField(Label.USS_UNSTAINED, { inputValue: testValue });
         await tissue.fillField(Label.BLOCK, { inputValue: testValue });
         await tissue.fillField(Label.H_E_PLURAL, { inputValue: testValue });
         await tissue.fillField(Label.SCROLL, { inputValue: testValue });
       });
 
-      await test.step('Deleting OncHistory tab row', async () => {
+      await test.step(`Add Tumor Collaborator Sample ID`, async () => {
+        tissue = tissueInformationPage.tissue();
+        const randomSampleID = `PlaywrightID_${crypto.randomUUID().toString().substring(0, 10)}`;
+        await tissue.fillField(Label.TUMOR_COLLABORATOR_SAMPLE_ID, { inputValue: randomSampleID });
+      })
+
+      await test.step('Add External Path Review information', async () => {
+        tissue = tissueInformationPage.tissue();
+        await tissue.fillField(Label.DATE_SENT_FOR_EXTERNAL_PATH_REVIEW, { date: {today: true} });
+        await tissue.fillField(Label.DATE_RECEIVED_FROM_EXTERNAL_PATH_REVIEW, { date: {today: true} });
+      })
+
+      await test.step('Add Date Sent to GP', async () => {
+        tissue = tissueInformationPage.tissue();
+        await tissue.fillField(Label.DATE_SENT_TO_GP, { date: {today: true} });
+      })
+
+      //TODO Add back/uncomment when PEPPER-1322 is fixed
+      /*await test.step('Deleting OncHistory tab row', async () => {
         const tissue = await tissueInformationPage.addTissue();
         await tissue.delete();
-      });
+      });*/
     })
   }
 });
