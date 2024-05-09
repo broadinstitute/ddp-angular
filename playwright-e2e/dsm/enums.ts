@@ -209,6 +209,7 @@ export enum Label {
   BLOCK_TO_REQUEST = 'Block to Request', //Lower case usage in LMS -> Onc History columns
   BLOCK_TO_REQUEST_CAPITALIZED = 'BLOCK_TO_REQUEST', //Upper case usage in OS2 -> Onc History columns
   BLOCK_TO_SHL = 'Block to SHL',
+  BLOCK_ID = 'Block Id',
   BLOCK_ID_TO_SHL = 'Block ID to SHL',
   BLOCKS_WITH_TUMOR = 'Blocks with Tumor',
   CHILD_ADOLESCENT_ASSENT = `Child/Adolescent Assent`,
