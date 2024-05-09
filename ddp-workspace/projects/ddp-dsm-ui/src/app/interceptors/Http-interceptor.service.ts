@@ -23,13 +23,16 @@ export class HttpInterceptorService implements HttpInterceptor {
               private readonly authService: Auth) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    return next.handle(req).pipe(
+    var ignoreError = req?.headers?.has(HttpInterceptorService.InterceptorSkipHeader);
+    // InterceptorSkipHeader is only used internally to DSM.  don't pass it on to servers.
+    const cleanedHeaders = req.clone().headers.delete(HttpInterceptorService.InterceptorSkipHeader);
+    var cleanReq = req.clone({ headers: cleanedHeaders });
+    return next.handle(cleanReq).pipe(
       catchError((error: any) => {
-        if (!(req.headers.has(HttpInterceptorService.InterceptorSkipHeader))) {
+        if (!ignoreError) {
           if (error instanceof HttpErrorResponse) {
             !this.ignoreStatuses.includes(error?.status) &&
             this.errorsService.openSnackbar(error);
-
             error?.status === 401 && this.authService.doLogout();
           }
           return throwError(() => error);
