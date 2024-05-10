@@ -67,6 +67,7 @@ export default class DatePicker {
     const selectDate = new Date(yyyy, month, dayOfMonth);
     const date = getDate(selectDate).split('/')[1]; // get date with a leading zero if date < 10
     const monthName = selectDate.toLocaleString('default', { month: 'long' }); // get name of month
+    console.log(`month name: ${monthName}`);
 
     // pick year first
     await this.dayPicker().locator('th button[id]').click();

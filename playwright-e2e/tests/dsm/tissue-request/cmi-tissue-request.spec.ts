@@ -4,11 +4,12 @@ import { CustomizeView, DataFilter, Label, SM_ID, Tab, TissueType } from 'dsm/en
 import ParticipantPage from 'dsm/pages/participant-page';
 import OncHistoryTab from 'dsm/pages/tablist/onc-history-tab';
 import { expect } from '@playwright/test';
-import { getToday } from 'utils/date-utils';
+import { getDate, getToday } from 'utils/date-utils';
 import { logInfo } from 'utils/log-utils';
 import { OncHistorySelectRequestEnum } from 'dsm/component/tabs/enums/onc-history-input-columns-enum';
 import { StudyName } from 'dsm/navigation';
 import { SequencingResultsEnum, TumorTypesEnum } from 'dsm/component/tissue';
+import { DateFields } from 'dsm/component/models/tissue-inputs-interface';
 
 // TODO Enable until bug PEPPER-1322 is fixed
 test.describe('Tissue Request Flow', () => {
@@ -26,6 +27,11 @@ test.describe('Tissue Request Flow', () => {
   let heSMIDTwo; //Two sm-ids for H&E
   let isClinicalStudy: boolean;
   let isResearchStudy: boolean;
+  const dateOfPX: DateFields = {
+    yyyy: new Date().getFullYear(),
+    month: new Date().getMonth(),
+    dayOfMonth: new Date().getDate()
+  };
 
   for (const study of studies) {
     test(`Tissue Request Flow for ${study} study @dsm @feature`, async ({ page, request }) => {
@@ -87,11 +93,7 @@ test.describe('Tissue Request Flow', () => {
         await oncHistoryTable.fillField(Label.DATE_OF_PX,
           {
             date: {
-              date: {
-                yyyy: new Date().getFullYear(),
-                month: new Date().getMonth(),
-                dayOfMonth: new Date().getDate()
-              }
+              date: dateOfPX
             }
           });
       });
@@ -225,13 +227,13 @@ test.describe('Tissue Request Flow', () => {
         await tissue.fillField(Label.TUMOR_PERCENTAGE_AS_REPORTED_BY_SHL, { inputValue: `28%` });
 
         //Add SK ID
-        await tissue.fillField(Label.SK_ID, { inputValue: `random SK ID here` });
+        await tissue.fillField(Label.SK_ID, { inputValue: `random_${crypto.randomUUID().toString().substring(0, 4)}` });
 
         //Add First SM ID
         await tissue.fillField(Label.FIRST_SM_ID, { inputValue: `the_USS_SMID` });
 
         //Add SM ID for H&E
-        await tissue.fillField(Label.SM_ID_FOR_H_E, { inputValue: 'the_smid_for_H_E' });
+        await tissue.fillField(Label.SM_ID_FOR_H_E, { inputValue: `HE_${crypto.randomUUID().toString().substring(0, 5)}` });
 
         //Add Block ID
         await tissue.fillField(Label.BLOCK_ID, { inputValue: `someBlockID` });
@@ -261,6 +263,13 @@ test.describe('Tissue Request Flow', () => {
         await participantPage.waitForReady();
 
         await participantPage.tablist(Tab.ONC_HISTORY).click<OncHistoryTab>();
+        const year = dateOfPX.yyyy ?? 1234;
+        const month = dateOfPX.month ?? 56;
+        const day = dateOfPX.dayOfMonth ?? 78;
+        const previouslyEnteredDateOfPX = `${month + 1}/${day}/${year}`;
+        const elusiveInput = page.getByPlaceholder('mm/dd/yyyy').getByText(previouslyEnteredDateOfPX);
+        const tissueInfoButton = elusiveInput.locator(`//ancestor::tr//button[@tooltip='Tissue information']`);
+        await tissueInfoButton.click();
       });
 
       //TODO Add back/uncomment when PEPPER-1322 is fixed
