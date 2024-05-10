@@ -47,16 +47,20 @@ export class Tissue {
     if (!colName) {
       return null;
     }
+    const valueAtColumnKey = this.additionalValuesJson[colName];
+    const valueAtCamelCaseKey = this.additionalValuesJson[DynamicValueUtilModel.convertToCamelCase(colName)];
+    const valueAtLowerCaseKey = this.additionalValuesJson[colName.toLowerCase()];
     if (this.additionalValuesJson != null) {
-      if (this.additionalValuesJson[colName] != null) {
-        return this.additionalValuesJson[colName];
-      } else if (this.additionalValuesJson[DynamicValueUtilModel.convertToCamelCase(colName)] != null) {
-        return this.additionalValuesJson[DynamicValueUtilModel.convertToCamelCase(colName)];
-      } else if (this.additionalValuesJson[colName.toLowerCase()] != null) {
+      if (valueAtColumnKey != null) {
+        return valueAtColumnKey;
+      } else if (valueAtCamelCaseKey != null) {
+        return valueAtCamelCaseKey;
+      } else if (valueAtLowerCaseKey != null) {
         //as a last resort, try to get the value by converting the column name to lowercase
-        return this.additionalValuesJson[colName.toLowerCase()];
+        return valueAtLowerCaseKey;
       }
     }
     return null;
   }
+
 }

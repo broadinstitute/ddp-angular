@@ -750,9 +750,7 @@
                                     {{tissue[col.participantColumn.name] | noData}}
                                   </ng-container>
                                 </ng-container>
-                                <ng-container *ngIf="col.type === 'ADDITIONALVALUE' &&
-                                !DynamicValueUtilModel.isObjectEmpty(tissue['additionalValuesJson'])
-                                && getDynamicValue(tissue, col) != null; else noTDateTemplate">
+                                <ng-container *ngIf="isAdditionalValuePresent(col, tissue); else noTDateTemplate">
                                   <ng-container *ngIf="col.additionalType === 'DATE'">
                                     {{getDynamicValue(tissue, col) | date:'shortDate' | noData}}
                                   </ng-container>

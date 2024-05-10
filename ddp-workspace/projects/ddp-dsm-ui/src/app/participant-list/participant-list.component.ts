@@ -1323,7 +1323,6 @@ export class ParticipantListComponent implements OnInit {
     } else {
       this.selectedColumns[ parent ].push(column);
     }
-    console.log(this.selectedColumns);
   }
 
   private isDataOfViewFilterExists(): boolean {
@@ -2516,4 +2515,9 @@ export class ParticipantListComponent implements OnInit {
   }
 
   protected readonly DynamicValueUtilModel = DynamicValueUtilModel;
+
+  isAdditionalValuePresent(col: Filter, tissue: Tissue): boolean {
+    return col.type === 'ADDITIONALVALUE' && !DynamicValueUtilModel.isObjectEmpty(tissue['additionalValuesJson'])
+      && this.getDynamicValue(tissue, col) != null;
+  }
 }
