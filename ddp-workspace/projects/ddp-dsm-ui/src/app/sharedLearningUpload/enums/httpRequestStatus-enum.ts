@@ -3,5 +3,6 @@ export enum HttpRequestStatusEnum {
   SUCCESS = 'SUCCESS',
   FAIL = 'FAIL',
   IN_PROGRESS = 'IN_PROGRESS',
-  RETRY = 'RETRY'
+  RETRY = 'RETRY',
+  ERROR_RETRY = 'ERROR_RETRY'
 }
