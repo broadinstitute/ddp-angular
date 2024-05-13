@@ -328,14 +328,14 @@
           *ngIf="col.displayType === 'text' || col.displayType === 'TEXT' || col.displayType === ''|| col.displayType == null"
           [ngClass]="{'Width--100': true, 'Input--Min-WIDTH': true, 'Color--Field--Patched': isPatchedCurrently(col.columnName)}">
           <input matInput maxlength="200" [disabled]="!editable"
-                 value="{{getAdditionalValue(col.columnName)}}" placeholder="{{col.columnDisplay}}"
+                 value="{{tissue.getAdditionalValue(col.columnName)}}" placeholder="{{col.columnDisplay}}"
                  (change)="onAdditionalColChange($event, col.columnName)"
                  (blur)="currentField(null)" (focus)="currentField(col.columnName)">
         </mat-form-field>
         <mat-form-field *ngIf="col.displayType === 'NUMBER'"
                             [ngClass]="{'Input': true, 'Color--Field--Patched': isPatchedCurrently(col.columnName)}">
           <input matInput maxlength="200" type="number" [disabled]="!editable"
-                 value="{{getAdditionalValue(col.columnName)}}"
+                 value="{{tissue.getAdditionalValue(col.columnName)}}"
                  (change)="onAdditionalColChange($event, col.columnName)"
                  (blur)="currentField(null)" (focus)="currentField(col.columnName)">
         </mat-form-field>
@@ -343,21 +343,21 @@
                   *ngIf="col.displayType === 'TEXTAREA'"
                   [ngClass]="{'Width--100': true, 'Color--Field--Patched': isPatchedCurrently(col.columnName)}"
                   (blur)="currentField(null)" (focus)="currentField(col.columnName)" [disabled]="!editable"
-                  value="{{getAdditionalValue(col.columnName)}}"
+                  value="{{tissue.getAdditionalValue(col.columnName)}}"
                   (change)="onAdditionalColChange($event, col.columnName)"></textarea>
         <mat-select *ngIf="col.displayType === 'OPTIONS'" placeholder="{{col.columnDisplay}}"
-                   [ngModel]="getAdditionalValue(col.columnName)"
+                   [ngModel]="tissue.getAdditionalValue(col.columnName)"
                    (selectionChange)="onAdditionalColChange($event, col.columnName)" [disabled]="!editable"
                    [ngClass]="{'Color--Field--Patched': isPatchedCurrently(col.columnName)}">
           <mat-option *ngFor="let op of col.possibleValues" [value]="op.value">{{op.value}}</mat-option>
         </mat-select>
         <mat-checkbox *ngIf="col.displayType === 'CHECKBOX'" color="primary" disableRipple
-                     [ngModel]="getAdditionalValue(col.columnName)"
+                     [ngModel]="tissue.getAdditionalValue(col.columnName)"
                      (change)="onAdditionalColChange($event, col.columnName)" [disabled]="!editable">
         </mat-checkbox>
         <app-field-datepicker *ngIf="col.displayType === 'DATE'" [colorDuringPatch]="isPatchedCurrently(col.columnName)"
                               [disabled]="!editable"
-                              [dateString]="getAdditionalValue(col.columnName)"
+                              [dateString]="tissue.getAdditionalValue(col.columnName)"
                               (dateChanged)="onAdditionalColChange($event, col.columnName)"></app-field-datepicker>
       </td>
     </tr>
