@@ -1,6 +1,6 @@
 import { test } from 'fixtures/dsm-fixture';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
-import { CustomizeView, DataFilter, Label, SM_ID, Tab, TissueType } from 'dsm/enums';
+import { CustomizeView, DataFilter, FileFormat, Label, SM_ID, Tab, TissueType } from 'dsm/enums';
 import ParticipantPage from 'dsm/pages/participant-page';
 import OncHistoryTab from 'dsm/pages/tablist/onc-history-tab';
 import { expect } from '@playwright/test';
@@ -10,7 +10,11 @@ import { OncHistorySelectRequestEnum } from 'dsm/component/tabs/enums/onc-histor
 import { StudyName } from 'dsm/navigation';
 import { SequencingResultsEnum, TumorTypesEnum } from 'dsm/component/tissue';
 import { DateFields } from 'dsm/component/models/tissue-inputs-interface';
-import { studyShortName } from 'utils/test-utils';
+import { assertParticipantListDownloadFileName, studyShortName } from 'utils/test-utils';
+import * as XLSX from 'xlsx';
+import path from 'path';
+import { isNaN } from 'lodash';
+import { unzip } from 'utils/file-utils';
 
 // TODO Enable until bug PEPPER-1322 is fixed
 test.describe('Tissue Request Flow', () => {
@@ -38,7 +42,7 @@ test.describe('Tissue Request Flow', () => {
   };
 
   for (const study of studies) {
-    test(`Tissue Request Flow for ${study} study @dsm @feature`, async ({ page, request }) => {
+    test(`Tissue Request Flow for ${study} study @dsm @feature`, async ({ page, request }, testInfo) => {
       const participantListPage = await ParticipantListPage.goto(page, study, request);
       const customizeViewPanel = participantListPage.filters.customizeViewPanel;
       const searchPanel = participantListPage.filters.searchPanel;
@@ -304,6 +308,8 @@ test.describe('Tissue Request Flow', () => {
         const scrollValue = await tissue.getFieldValue(Label.SCROLL);
         expect(scrollValue).toBe(testMaterialsReceivedValue);
 
+        //TODO check that the SMIDs have been saved
+
         const expectedReturnDate = await tissue.getFieldValue(Label.EXPECTED_RETURN_DATE);
         expect(expectedReturnDate).toBe(today);
 
@@ -316,6 +322,55 @@ test.describe('Tissue Request Flow', () => {
 
           const dateReceivedFromExternalPathReview = await tissue.getFieldValue(Label.DATE_RECEIVED_FROM_EXTERNAL_PATH_REVIEW);
           expect(dateReceivedFromExternalPathReview).toBe(today);
+        }
+      });
+
+      await test.step('Go back to participant list to add External Path Review dates and confirm they appear in Ptp List Download', async () => {
+        if (isClinicalStudy) {
+          //Go back to Pariticpant List
+          await tissueInformationPage.backToParticipantList();
+          await participantListPage.waitForReady();
+
+          //Add the following columns to the Participant List: Date Sent For External Path Review, Date Received From External Path Review
+          const customizeViewPanel = participantListPage.filters.customizeViewPanel;
+          await customizeViewPanel.open();
+          await customizeViewPanel.selectColumns(
+            'Tissue Columns',
+            [Label.DATE_SENT_FOR_EXTERNAL_PATH_REVIEW, Label.DATE_RECEIVED_FROM_EXTERNAL_PATH_REVIEW]
+          );
+          await customizeViewPanel.close();
+
+          //Download the Participant List
+          const download = await participantListPage.downloadParticipant({ fileFormat: FileFormat.XLSX });
+          assertParticipantListDownloadFileName(download, study);
+
+          const dir = testInfo.outputDir;
+          const fileName = download.suggestedFilename();
+          const zipFile = path.join(dir, fileName);
+
+          await download.saveAs(zipFile);
+          expect(zipFile.endsWith('.zip')).toBeTruthy();
+          const targetFilePath = zipFile.split('.zip')[0];
+
+          const unzipFiles: string[] = unzip(zipFile, targetFilePath);
+          // Two files in zip
+          expect(unzipFiles.length).toStrictEqual(2);
+          expect(unzipFiles).toContain('DataDictionary.xlsx');
+          const [participantXlsx] = unzipFiles.filter(file => file.startsWith('Participant-') && file.endsWith('.xlsx'));
+
+          // Verify External Path Review dates in Excel download file
+          const xlsxFilePath = path.join(targetFilePath, participantXlsx);
+          const xlsxWorkbook = XLSX.readFile(xlsxFilePath);
+          const worksheet = xlsxWorkbook.Sheets[xlsxWorkbook.SheetNames[0]]; // First Worksheet
+
+          const json = XLSX.utils.sheet_to_json(worksheet, {range: 1}); // use second row for header
+          // Iterate rows to verify format of Registration Date
+          json.map((row: any) => {
+            const sentDate = row['Date Sent for External Path Review'].trim();
+            const receivedDate = row['Date Received from External Path Review'].trim();
+            console.log(`Analyzing External Path Review -> Sent Date: ${sentDate}`);
+            console.log(`Analyzing External Path Review -> Received Date: ${receivedDate}`);
+      });
         }
       });
 

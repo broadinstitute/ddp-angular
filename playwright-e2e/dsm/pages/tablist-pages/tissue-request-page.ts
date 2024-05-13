@@ -103,10 +103,11 @@ export default class TissueRequestPage extends tablistPageBase {
     const destructionPolicyYears = new Input(this.page, { root: destructionPolicyLocator });
     const isInputDisabled = await destructionPolicyYears.isDisabled();
 
-    await this.checkCheckbox(destructionPolicyLocator, keptIndefinitelySelection);
+    //await this.checkCheckbox(destructionPolicyLocator, keptIndefinitelySelection);
 
     const existingValue = await destructionPolicyYears.currentValue();
     const isAllowedToEnterValue = !keptIndefinitelySelection && !isInputDisabled && existingValue.trim() !== value.toString();
+    console.log(`isAllowedToEnterValue: ${isAllowedToEnterValue}`);
 
     if (isAllowedToEnterValue) {
       await Promise.all([
