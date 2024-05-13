@@ -271,7 +271,6 @@ test.describe('Tissue Request Flow', () => {
         await participantPage.tablist(Tab.ONC_HISTORY).click<OncHistoryTab>();
         const oncHistoryTab = await participantPage.tablist(Tab.ONC_HISTORY).click<OncHistoryTab>();
         const oncHistoryTable = oncHistoryTab.table;
-        console.log(`row id before getting tissue information button: ${rowID}`);
         const tissueInformationButton = oncHistoryTable.getTissueInformationButtion(rowID);
         await tissueInformationButton.click();
 
@@ -301,6 +300,20 @@ test.describe('Tissue Request Flow', () => {
 
         const scrollValue = await tissue.getFieldValue(Label.SCROLL);
         expect(scrollValue).toBe(testMaterialsReceivedValue);
+
+        const expectedReturnDate = await tissue.getFieldValue(Label.EXPECTED_RETURN_DATE);
+        expect(expectedReturnDate).toBe(today);
+
+        const returnDate = await tissue.getFieldValue(Label.RETURN_DATE);
+        expect(returnDate).toBe(today);
+
+        if (isClinicalStudy) {
+          const dateSentForExternalPathReview = await tissue.getFieldValue(Label.DATE_SENT_FOR_EXTERNAL_PATH_REVIEW);
+          expect(dateSentForExternalPathReview).toBe(today);
+
+          const dateReceivedFromExternalPathReview = await tissue.getFieldValue(Label.DATE_RECEIVED_FROM_EXTERNAL_PATH_REVIEW);
+          expect(dateReceivedFromExternalPathReview).toBe(today);
+        }
       });
 
       //TODO Add back/uncomment when PEPPER-1322 is fixed
