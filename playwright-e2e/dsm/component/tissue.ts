@@ -70,7 +70,7 @@ export default class Tissue extends ComponentBase {
         break;
       case InputTypeEnum.DATE:
         value = new Input(this.page, { root: inputLocator }).currentValue();
-        console.log(`Date Input Value: ${value}`);
+        console.log(`Date Input Value: ${await value}`);
         break;
       case InputTypeEnum.TEXTAREA:
         value = new TextArea(this.page, { root: inputLocator }).currentValue();

@@ -10,6 +10,7 @@ import { OncHistorySelectRequestEnum } from 'dsm/component/tabs/enums/onc-histor
 import { StudyName } from 'dsm/navigation';
 import { SequencingResultsEnum, TumorTypesEnum } from 'dsm/component/tissue';
 import { DateFields } from 'dsm/component/models/tissue-inputs-interface';
+import { studyShortName } from 'utils/test-utils';
 
 // TODO Enable until bug PEPPER-1322 is fixed
 test.describe('Tissue Request Flow', () => {
@@ -59,8 +60,10 @@ test.describe('Tissue Request Flow', () => {
         await searchPanel.text(testParticipantResidence, { additionalFilters: [DataFilter.NOT_EMPTY] });
 
         await searchPanel.search();
+        const studyInfo = studyShortName(study);
+        const prefixInfo = studyInfo.playwrightPrefixAdult as string;
         shortID = await participantListPage.findParticipantWithTab(
-          { tab: Tab.ONC_HISTORY, uri: 'ui/filterList'}
+          { tab: Tab.ONC_HISTORY, uri: 'ui/filterList', prefix: prefixInfo}
         );
         expect(shortID?.length).toStrictEqual(6);
         logInfo(`Short id: ${shortID}`);

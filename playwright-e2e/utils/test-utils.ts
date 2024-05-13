@@ -261,6 +261,8 @@ export function studyShortName(study: StudyName): {
       shortName = 'cmi-pancan';
       realm = 'PanCan';
       collaboratorPrefix = 'Project';
+      playwrightPrefixAdult = 'E2E';
+      playwrightPrefixChild = 'E2E-Child';
       break;
     case StudyName.RAREX:
       shortName = 'rarex';
