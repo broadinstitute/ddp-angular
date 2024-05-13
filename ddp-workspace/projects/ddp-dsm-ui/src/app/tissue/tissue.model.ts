@@ -44,13 +44,12 @@ export class Tissue {
   }
 
   getAdditionalValue(colName: string): string {
-    if (!colName) {
+    if (!colName || !this.additionalValuesJson) {
       return null;
     }
-    const valueAtColumnKey = this.additionalValuesJson[colName];
-    const valueAtCamelCaseKey = this.additionalValuesJson[DynamicValueUtilModel.convertToCamelCase(colName)];
-    const valueAtLowerCaseKey = this.additionalValuesJson[colName.toLowerCase()];
-    if (this.additionalValuesJson != null) {
+      const valueAtColumnKey = this.additionalValuesJson[colName];
+      const valueAtCamelCaseKey = this.additionalValuesJson[DynamicValueUtilModel.convertToCamelCase(colName)];
+      const valueAtLowerCaseKey = this.additionalValuesJson[colName.toLowerCase()];
       if (valueAtColumnKey != null) {
         return valueAtColumnKey;
       } else if (valueAtCamelCaseKey != null) {
@@ -59,7 +58,6 @@ export class Tissue {
         //as a last resort, try to get the value by converting the column name to lowercase
         return valueAtLowerCaseKey;
       }
-    }
     return null;
   }
 
