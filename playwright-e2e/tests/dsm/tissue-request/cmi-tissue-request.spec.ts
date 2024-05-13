@@ -18,7 +18,9 @@ test.describe('Tissue Request Flow', () => {
   const clinicalStudies = [StudyName.LMS, StudyName.OSTEO2];
   let testParticipantResidence: Label;
   let tissue;
+  let testMaterialsReceivedValue: string;
   let today;
+  let testRequestNotes: string;
   let ussSMIDOne;
   let ussSMIDTwo; //Two sm-ids for USS
   let scrollsSMIDOne;
@@ -27,6 +29,7 @@ test.describe('Tissue Request Flow', () => {
   let heSMIDTwo; //Two sm-ids for H&E
   let isClinicalStudy: boolean;
   let isResearchStudy: boolean;
+  let rowID: string;
   const dateOfPX: DateFields = {
     yyyy: new Date().getFullYear(),
     month: new Date().getMonth(),
@@ -75,6 +78,8 @@ test.describe('Tissue Request Flow', () => {
       await test.step('Update Onc History data - Facility', async () => {
         await oncHistoryTable.fillField(Label.FACILITY, { inputValue: 'm', lookupIndex: 1 });
       });
+
+      rowID = await oncHistoryTable.getRowID(Label.FACILITY, 0);
 
       await test.step('Automatically updated Onc History Created date', async () => {
         await participantPage.backToList();
@@ -138,7 +143,8 @@ test.describe('Tissue Request Flow', () => {
       });
 
       await test.step('Add Tissue Note', async () => {
-        await tissueInformationPage.fillNotes('Test tissue notes');
+        testRequestNotes = 'Test tissue notes';
+        await tissueInformationPage.fillNotes(testRequestNotes);
       });
 
       await test.step('Add a destruction policy and click on Apply to All', async () => {
@@ -146,26 +152,26 @@ test.describe('Tissue Request Flow', () => {
       });
 
       await test.step('Add Material count', async () => {
-        const testValue = 21;
+        testMaterialsReceivedValue = '21';
         tissue = tissueInformationPage.tissue();
-        await tissue.fillField(Label.USS_UNSTAINED, { inputValue: testValue });
-        await tissue.fillField(Label.BLOCK, { inputValue: testValue });
-        await tissue.fillField(Label.H_E_PLURAL, { inputValue: testValue });
-        await tissue.fillField(Label.SCROLL, { inputValue: testValue });
+        await tissue.fillField(Label.USS_UNSTAINED, { inputValue: testMaterialsReceivedValue });
+        await tissue.fillField(Label.BLOCK, { inputValue: testMaterialsReceivedValue });
+        await tissue.fillField(Label.H_E_PLURAL, { inputValue: testMaterialsReceivedValue });
+        await tissue.fillField(Label.SCROLL, { inputValue: testMaterialsReceivedValue });
       });
 
       await test.step('Input SM-IDs for USS, Scrolls, and H&E', async () => {
         tissue = tissueInformationPage.tissue();
 
         //Setup 6 SM-IDs (must be unique) - use 2 for USS, 2 for Scrolls, 2 for H&E
-        ussSMIDOne = `SM-${crypto.randomUUID().toString().replace('-', '1').substring(0, 5)}`;
-        ussSMIDTwo = `SM-${crypto.randomUUID().toString().replace('-', '1').substring(0, 5)}`;
+        ussSMIDOne = `SM-${crypto.randomUUID().toString().replace('-', '1').substring(0, 6)}`;
+        ussSMIDTwo = `SM-${crypto.randomUUID().toString().replace('-', '1').substring(0, 6)}`;
 
-        scrollsSMIDOne = `SM-${crypto.randomUUID().toString().replace('-', '1').substring(0, 5)}`;
-        scrollsSMIDTwo = `SM-${crypto.randomUUID().toString().replace('-', '1').substring(0, 5)}`;
+        scrollsSMIDOne = `SM-${crypto.randomUUID().toString().replace('-', '1').substring(0, 6)}`;
+        scrollsSMIDTwo = `SM-${crypto.randomUUID().toString().replace('-', '1').substring(0, 6)}`;
 
-        heSMIDOne = `SM-${crypto.randomUUID().toString().replace('-', '1').substring(0, 5)}`;
-        heSMIDTwo = `SM-${crypto.randomUUID().toString().replace('-', '1').substring(0, 5)}`;
+        heSMIDOne = `SM-${crypto.randomUUID().toString().replace('-', '1').substring(0, 6)}`;
+        heSMIDTwo = `SM-${crypto.randomUUID().toString().replace('-', '1').substring(0, 6)}`;
 
         const ussSMIDModal = await tissue.fillSMIDs(SM_ID.USS_SM_IDS);
         await ussSMIDModal.fillInputs([ussSMIDOne, ussSMIDTwo]);
@@ -263,13 +269,38 @@ test.describe('Tissue Request Flow', () => {
         await participantPage.waitForReady();
 
         await participantPage.tablist(Tab.ONC_HISTORY).click<OncHistoryTab>();
-        const year = dateOfPX.yyyy ?? 1234;
-        const month = dateOfPX.month ?? 56;
-        const day = dateOfPX.dayOfMonth ?? 78;
-        const previouslyEnteredDateOfPX = `${month + 1}/${day}/${year}`;
-        const elusiveInput = page.getByPlaceholder('mm/dd/yyyy').getByText(previouslyEnteredDateOfPX);
-        const tissueInfoButton = elusiveInput.locator(`//ancestor::tr//button[@tooltip='Tissue information']`);
-        await tissueInfoButton.click();
+        const oncHistoryTab = await participantPage.tablist(Tab.ONC_HISTORY).click<OncHistoryTab>();
+        const oncHistoryTable = oncHistoryTab.table;
+        console.log(`row id before getting tissue information button: ${rowID}`);
+        const tissueInformationButton = oncHistoryTable.getTissueInformationButtion(rowID);
+        await tissueInformationButton.click();
+
+        //Now in Tissue Request page - check the input for the main Tissue Request Section
+        today = getToday();
+
+        const faxSentDate = await tissueInformationPage.getFaxSentDate(0);
+        expect(faxSentDate).toBe(today);
+
+        const tissueReceivedDate = await tissueInformationPage.getTissueReceivedDate();
+        expect(tissueReceivedDate).toBe(today);
+
+        const tissueReqestNotes = await tissueInformationPage.getNotes();
+        expect(tissueReqestNotes).toBe(testRequestNotes);
+
+        //Check the input for the tissue block
+        tissue = tissueInformationPage.tissue();
+
+        const ussUnstainedValue = await tissue.getFieldValue(Label.USS_UNSTAINED);
+        expect(ussUnstainedValue).toBe(testMaterialsReceivedValue);
+
+        const blockValue = await tissue.getFieldValue(Label.BLOCK);
+        expect(blockValue).toBe(testMaterialsReceivedValue);
+
+        const heValue = await tissue.getFieldValue(Label.H_E_PLURAL);
+        expect(heValue).toBe(testMaterialsReceivedValue);
+
+        const scrollValue = await tissue.getFieldValue(Label.SCROLL);
+        expect(scrollValue).toBe(testMaterialsReceivedValue);
       });
 
       //TODO Add back/uncomment when PEPPER-1322 is fixed

@@ -271,6 +271,29 @@ export default class OncHistoryTable extends Table {
     return this.page.locator(this.tableXPath + this.rowXPath);
   }
 
+  //only use this after onc history has already been inputted
+  public async getRowID(columnName: Label, rowIndex: number): Promise<string> {
+    let column = this.column(columnName);
+    if (await column.count() > 1) {
+      column = column.nth(1);
+    }
+    await expect(column, `Onc History Table - the column ${columnName} doesn't exist`)
+      .toBeVisible();
+
+    const cell: Locator = this.td(columnName).nth(rowIndex);
+    await expect(cell, `Kits Table - more than one or no column was found with the name ${columnName}`)
+      .toHaveCount(1);
+    const parentRow = cell.locator(`//ancestor::tr`);
+    await expect(parentRow).toBeVisible();
+    const rowID = await parentRow.getAttribute('id', { timeout: 1000 }) as string;
+    console.log(`Onc History Row ID: ${rowID}`);
+    return rowID;
+  }
+
+  public getTissueInformationButtion(rowID: string): Locator {
+    return this.page.locator(`//app-onc-history-detail//tr[@id='${rowID}']//button[@tooltip='Tissue information']`);
+  }
+
   private column(columnName: Label): Locator {
     return this.page.locator(this.columnXPath(columnName));
   }

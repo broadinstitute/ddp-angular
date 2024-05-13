@@ -28,4 +28,5 @@ export const TissueInputs = new Map<Label, InputTypeMap>()
   .set(Label.SHL_WORK_NUMBER, { inputType: InputTypeEnum.INPUT, hasLookup: false, byText: false })
   .set(Label.DATE_SENT_FOR_EXTERNAL_PATH_REVIEW, { inputType: InputTypeEnum.DATE, hasLookup: false, byText: false })
   .set(Label.DATE_RECEIVED_FROM_EXTERNAL_PATH_REVIEW, { inputType: InputTypeEnum.DATE, hasLookup: false, byText: false })
-  .set(Label.BLOCK_ID, { inputType: InputTypeEnum.INPUT, hasLookup: false, byText: false });
+  .set(Label.BLOCK_ID, { inputType: InputTypeEnum.INPUT, hasLookup: false, byText: false })
+  .set(Label.TISSUE_RECEIVED, { inputType: InputTypeEnum.DATE, hasLookup: false, byText: false });
