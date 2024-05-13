@@ -1,4 +1,5 @@
 import {TissueSmId} from './sm-id.model';
+import {DynamicValueUtilModel} from '../utils/dynamic-value-util.model';
 
 export class Tissue {
 
@@ -41,4 +42,25 @@ export class Tissue {
       null,null,null,null,null,null,
       null,null,null,null,null, false);
   }
+
+  getAdditionalValue(colName: string): string {
+    if (!colName) {
+      return null;
+    }
+    const valueAtColumnKey = this.additionalValuesJson[colName];
+    const valueAtCamelCaseKey = this.additionalValuesJson[DynamicValueUtilModel.convertToCamelCase(colName)];
+    const valueAtLowerCaseKey = this.additionalValuesJson[colName.toLowerCase()];
+    if (this.additionalValuesJson != null) {
+      if (valueAtColumnKey != null) {
+        return valueAtColumnKey;
+      } else if (valueAtCamelCaseKey != null) {
+        return valueAtCamelCaseKey;
+      } else if (valueAtLowerCaseKey != null) {
+        //as a last resort, try to get the value by converting the column name to lowercase
+        return valueAtLowerCaseKey;
+      }
+    }
+    return null;
+  }
+
 }

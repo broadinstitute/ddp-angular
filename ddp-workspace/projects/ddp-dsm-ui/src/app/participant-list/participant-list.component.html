@@ -750,17 +750,16 @@
                                     {{tissue[col.participantColumn.name] | noData}}
                                   </ng-container>
                                 </ng-container>
-                                <ng-container *ngIf="col.type === 'ADDITIONALVALUE' && tissue['additionalValuesJson'] != null
-                                && tissue['additionalValuesJson'][col.participantColumn.name] != null; else noTDateTemplate">
+                                <ng-container *ngIf="isAdditionalValuePresent(col, tissue); else noTDateTemplate">
                                   <ng-container *ngIf="col.additionalType === 'DATE'">
-                                    {{tissue['additionalValuesJson'][col.participantColumn.name] | date:'shortDate' | noData}}
+                                    {{getDynamicValue(tissue, col) | date:'shortDate' | noData}}
                                   </ng-container>
                                   <ng-container *ngIf="col.additionalType === 'CHECKBOX'">
                                     {{getUtil().getYesNo(tissue['additionalValuesJson'][col.participantColumn.name]) | noData}}
                                   </ng-container>
                                   <ng-container
                                     *ngIf="col.additionalType !== 'DATE' && col.additionalType !== 'CHECKBOX'">
-                                    {{tissue['additionalValuesJson'][col.participantColumn.name] | noData}}
+                                    {{getDynamicValue(tissue, col) | noData}}
                                   </ng-container>
                                 </ng-container>
                                 <ng-container
