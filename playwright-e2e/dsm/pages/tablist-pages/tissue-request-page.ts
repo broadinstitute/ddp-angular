@@ -101,13 +101,16 @@ export default class TissueRequestPage extends tablistPageBase {
   public async fillDestructionPolicy(value: number, keptIndefinitelySelection = false, applyToAll = false): Promise<void> {
     const destructionPolicyLocator = this.dynamicField(Label.DESTRUCTION_POLICY);
     const destructionPolicyYears = new Input(this.page, { root: destructionPolicyLocator });
-    const isInputDisabled = await destructionPolicyYears.isDisabled();
+    const isInputDisabled = await destructionPolicyYears.isDisabled('aria-checked');
 
-    //await this.checkCheckbox(destructionPolicyLocator, keptIndefinitelySelection);
+    await this.checkCheckbox(destructionPolicyLocator, keptIndefinitelySelection);
 
     const existingValue = await destructionPolicyYears.currentValue();
-    const isAllowedToEnterValue = !keptIndefinitelySelection && !isInputDisabled && existingValue.trim() !== value.toString();
+    const isAllowedToEnterValue = (keptIndefinitelySelection === false && isInputDisabled === false && existingValue.trim() !== value.toString());
     console.log(`isAllowedToEnterValue: ${isAllowedToEnterValue}`);
+    console.log(`keepIndefinitelySelection: ${keptIndefinitelySelection}`);
+    console.log(`isInputDisabled: ${isInputDisabled}`);
+    console.log(`existing value: ${existingValue}`);
 
     if (isAllowedToEnterValue) {
       await Promise.all([
@@ -206,13 +209,15 @@ export default class TissueRequestPage extends tablistPageBase {
     if (check && !isChecked && !isDisabled) {
       await Promise.all([
         waitForResponse(this.page, { uri: 'patch' }),
-        checkbox.check()
+        checkbox.check(),
+        console.log(`CHECKED!`)
       ]);
     }
     if (!check && isChecked && !isDisabled) {
       await Promise.all([
         waitForResponse(this.page, { uri: 'patch' }),
-        checkbox.uncheck()
+        checkbox.uncheck(),
+        console.log(`UNCHECKED!`)
       ]);
     }
   }

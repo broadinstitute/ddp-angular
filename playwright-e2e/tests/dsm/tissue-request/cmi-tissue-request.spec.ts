@@ -4,7 +4,7 @@ import { CustomizeView, DataFilter, FileFormat, Label, SM_ID, Tab, TissueType } 
 import ParticipantPage from 'dsm/pages/participant-page';
 import OncHistoryTab from 'dsm/pages/tablist/onc-history-tab';
 import { expect } from '@playwright/test';
-import { getDate, getToday } from 'utils/date-utils';
+import { getDate, getDateinISOFormat, getToday } from 'utils/date-utils';
 import { logInfo } from 'utils/log-utils';
 import { OncHistorySelectRequestEnum } from 'dsm/component/tabs/enums/onc-history-input-columns-enum';
 import { StudyName } from 'dsm/navigation';
@@ -24,7 +24,8 @@ test.describe('Tissue Request Flow', () => {
   let testParticipantResidence: Label;
   let tissue;
   let testMaterialsReceivedValue: string;
-  let today;
+  let today: string;
+  let todayInISOFormat: string;
   let testRequestNotes: string;
   let ussSMIDOne;
   let ussSMIDTwo; //Two sm-ids for USS
@@ -49,6 +50,8 @@ test.describe('Tissue Request Flow', () => {
       let shortID = '';
       isClinicalStudy = clinicalStudies.includes(study);
       isResearchStudy = researchStudies.includes(study);
+      today = getToday();
+      todayInISOFormat = getDateinISOFormat(today);
 
       await test.step('Search for the right participant', async () => {
         await customizeViewPanel.open();
@@ -282,8 +285,6 @@ test.describe('Tissue Request Flow', () => {
         await tissueInformationButton.click();
 
         //Now in Tissue Request page - check the input for the main Tissue Request Section
-        today = getToday();
-
         const faxSentDate = await tissueInformationPage.getFaxSentDate(0);
         expect(faxSentDate).toBe(today);
 
@@ -364,12 +365,14 @@ test.describe('Tissue Request Flow', () => {
           const worksheet = xlsxWorkbook.Sheets[xlsxWorkbook.SheetNames[0]]; // First Worksheet
 
           const json = XLSX.utils.sheet_to_json(worksheet, {range: 1}); // use second row for header
-          // Iterate rows to verify format of Registration Date
+          // Iterate rows to verify that the External Path Review is able to be exported
           json.map((row: any) => {
             const sentDate = row['Date Sent for External Path Review'].trim();
             const receivedDate = row['Date Received from External Path Review'].trim();
             console.log(`Analyzing External Path Review -> Sent Date: ${sentDate}`);
             console.log(`Analyzing External Path Review -> Received Date: ${receivedDate}`);
+            expect(sentDate).toBe(todayInISOFormat);
+            expect(receivedDate).toBe(todayInISOFormat);
       });
         }
       });
