@@ -522,8 +522,7 @@ test.describe('Tissue Request Flow', () => {
         const xlsxWorkbook = XLSX.readFile(xlsxFilePath);
         const worksheet = xlsxWorkbook.Sheets[xlsxWorkbook.SheetNames[0]]; // First Worksheet
 
-        //const json = XLSX.utils.sheet_to_json(worksheet, {range: 1}); // use second row for header
-        const json = XLSX.utils.sheet_to_json(worksheet, { range: 1, defval: 'blank for now' });
+        const json = XLSX.utils.sheet_to_json(worksheet, {range: 1}); // use second row for header
         // Iterate rows to verify that the Tissue Request input is able to be exported
         json.map((row: any) => {
           console.log(`Row value: ${JSON.stringify(row)}`);
