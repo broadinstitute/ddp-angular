@@ -116,7 +116,7 @@ test.describe('Tissue Request Flow', () => {
           await participantListPage.filterListByShortId(shortID);
           await participantListTable.openParticipantPageAt(0);
           const actualOncHistoryCreatedDate = await participantPage.oncHistoryCreatedDate(); // automatically calculated
-          expect(actualOncHistoryCreatedDate, 'Onc History Date has not been updated').toStrictEqual('05/14/2024'); //changing for temp testing due to UTC time
+          expect(actualOncHistoryCreatedDate, 'Onc History Date has not been updated').toStrictEqual(today);
         }).toPass({timeout: 60 * 1000});
       });
 
