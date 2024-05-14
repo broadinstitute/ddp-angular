@@ -23,6 +23,8 @@ export enum SequencingResultsEnum {
   FAILED_PURITY = 'Failed Purity',
   EXTERNAL_PATH_REVIEW_FAILED = 'External Path Review Failed',
   SUCCESS = 'Success',
+  SUCCESS_RESEARCH = 'Success - Research',
+  SUCCESS_CLINICAL = 'Success - Clinical',
   EMPTY = ''
 }
 

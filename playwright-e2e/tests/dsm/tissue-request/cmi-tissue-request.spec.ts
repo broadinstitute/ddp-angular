@@ -8,7 +8,7 @@ import { getDate, getDateinISOFormat, getToday } from 'utils/date-utils';
 import { logInfo } from 'utils/log-utils';
 import { OncHistorySelectRequestEnum } from 'dsm/component/tabs/enums/onc-history-input-columns-enum';
 import { StudyName } from 'dsm/navigation';
-import { SequencingResultsEnum, TumorTypesEnum } from 'dsm/component/tissue';
+import { SequencingResultsEnum as SequencingResults, TumorTypesEnum as TumorTypes } from 'dsm/component/tissue';
 import { DateFields } from 'dsm/component/models/tissue-inputs-interface';
 import { assertParticipantListDownloadFileName, studyShortName } from 'utils/test-utils';
 import * as XLSX from 'xlsx';
@@ -22,8 +22,17 @@ test.describe('Tissue Request Flow', () => {
   const researchStudies = [StudyName.PANCAN];
   const clinicalStudies = [StudyName.LMS, StudyName.OSTEO2];
   const destructionPolicy = 2233;
-  const expectedBlockID = `ABCDE12345`;
+  const expectedBlockIDToSHL = `ABCDE12345`;
   const testParticipantGender = 'Female';
+  const tissueTypeBlock = TissueType.BLOCK;
+  const tumorTypePrimary = TumorTypes.PRIMARY;
+  const tissueSiteNotes = 'unknown tissue site';
+  const pathologyReportYes = 'Yes';
+  const shlWorkNumber = 'not random work number 123';
+  const tumorPercentageReportedBySHL = '28%';
+  const firstSMID = 'the_USS_SMID';
+  const blockID = 'someBlockID';
+  const sequencingResults = SequencingResults.SUCCESS_CLINICAL;
   let testParticipantResidence: Label;
   let tissue;
   let testMaterialsReceivedValue: string;
@@ -40,6 +49,10 @@ test.describe('Tissue Request Flow', () => {
   let isClinicalStudy: boolean;
   let isResearchStudy: boolean;
   let rowID: string;
+  let trackingNumber: string;
+  let tumorCollaboratorSampleID: string;
+  let skID: string;
+  let smidForHE: string;
   const dateOfPX: DateFields = {
     yyyy: new Date().getFullYear(),
     month: new Date().getMonth(),
@@ -146,6 +159,7 @@ test.describe('Tissue Request Flow', () => {
         const faxSentDate2 = await tissueInformationPage.getFaxSentDate(1);
         const tissueReceivedDate = await tissueInformationPage.getTissueReceivedDate();
         expect(faxSentDate1.trim(), 'Fax sent date 1 is not set to today').toEqual(getToday());
+        //TODO Investigate why the 2nd fax sent date seems to get filled out later in the test (seems to be only when automated test interacts with page)
         expect(faxSentDate2.trim(), 'Fax sent date 2 is not empty').toBe('');
         expect(tissueReceivedDate.trim(), 'Tissue received date is not empty').toBeFalsy();
       });
@@ -211,7 +225,7 @@ test.describe('Tissue Request Flow', () => {
         await tissue.fillField(Label.NOTES, { inputValue: tissueTestNotes });
 
         //Add Tissue Type -> select 'Block'
-        await tissue.fillField(Label.TISSUE_TYPE, { selection: TissueType.BLOCK });
+        await tissue.fillField(Label.TISSUE_TYPE, { selection: tissueTypeBlock });
 
         //Add Expected Return Date
         await tissue.fillField(Label.EXPECTED_RETURN_DATE, { date: { today: true } });
@@ -220,53 +234,51 @@ test.describe('Tissue Request Flow', () => {
         await tissue.fillField(Label.RETURN_DATE, { date: { today: true } });
 
         //Add Pathology Report
-        await tissue.fillField(Label.PATHOLOGY_REPORT, { selection: 'Yes' });
+        await tissue.fillField(Label.PATHOLOGY_REPORT, { selection: pathologyReportYes });
 
         //Add the Tumor Collaborator Sample ID
-        const suggestedValue = await tissue.getTumorCollaboratorSampleIDSuggestedValue();
-        console.log(`Suggested value: ${suggestedValue}`);
-        const randomSampleID = `${suggestedValue}_PlaywrightID_${crypto.randomUUID().toString().substring(0, 5)}`;
-        await tissue.fillField(Label.TUMOR_COLLABORATOR_SAMPLE_ID, { inputValue: randomSampleID });
+        const suggestedValue = await tissue.getTumorCollaboratorSampleIDSuggestedValue(); //Usually seems to return the short id
+        tumorCollaboratorSampleID = `${suggestedValue}_PlaywrightID_${crypto.randomUUID().toString().substring(0, 5)}`;
+        await tissue.fillField(Label.TUMOR_COLLABORATOR_SAMPLE_ID, { inputValue: tumorCollaboratorSampleID });
 
         //Add Tumor Type
-        await tissue.fillField(Label.TUMOR_TYPE, { selection: TumorTypesEnum.PRIMARY });
+        await tissue.fillField(Label.TUMOR_TYPE, { selection: tumorTypePrimary });
 
         //Add Tissue Site
-        await tissue.fillField(Label.TISSUE_SITE, { inputValue: 'unknown tissue site' });
+        await tissue.fillField(Label.TISSUE_SITE, { inputValue: tissueSiteNotes });
 
         //Add Block to SHL
         await tissue.fillField(Label.BLOCK_TO_SHL, { date: { today: true } });
 
         //Add Block ID to SHL - has a 10 character limit - should allow alpha-numerical characters
-        const blockID = 'ABCDE123456'; //11 characters for testing purposes
-        await tissue.fillField(Label.BLOCK_ID_TO_SHL, { inputValue: blockID }); //TODO validate that only 10 characters were inputted
+        const blockIDToSHL = 'ABCDE123456'; //11 characters for testing purposes
+        await tissue.fillField(Label.BLOCK_ID_TO_SHL, { inputValue: blockIDToSHL }); //TODO validate that only 10 characters were inputted
 
         //Add SHL Work Number
-        await tissue.fillField(Label.SHL_WORK_NUMBER, { inputValue: `random work number` });
+        await tissue.fillField(Label.SHL_WORK_NUMBER, { inputValue: shlWorkNumber });
 
         //Add Scrolls back from SHL
         await tissue.fillField(Label.SCROLLS_BACK_FROM_SHL, { date: { today: true } });
 
         //Add Tumor Percentage as reproted by SHL
-        await tissue.fillField(Label.TUMOR_PERCENTAGE_AS_REPORTED_BY_SHL, { inputValue: `28%` });
+        await tissue.fillField(Label.TUMOR_PERCENTAGE_AS_REPORTED_BY_SHL, { inputValue: tumorPercentageReportedBySHL });
 
         //Add SK ID
-        await tissue.fillField(Label.SK_ID, { inputValue: `random_${crypto.randomUUID().toString().substring(0, 4)}` });
+        skID = `random_${crypto.randomUUID().toString().substring(0, 4)}`;
+        await tissue.fillField(Label.SK_ID, { inputValue: skID });
 
         //Add First SM ID
-        await tissue.fillField(Label.FIRST_SM_ID, { inputValue: `the_USS_SMID` });
+        await tissue.fillField(Label.FIRST_SM_ID, { inputValue: firstSMID });
 
         //Add SM ID for H&E
-        await tissue.fillField(Label.SM_ID_FOR_H_E, { inputValue: `HE_${crypto.randomUUID().toString().substring(0, 5)}` });
+        smidForHE = `HE_${crypto.randomUUID().toString().substring(0, 5)}`;
+        await tissue.fillField(Label.SM_ID_FOR_H_E, { inputValue: smidForHE });
 
         //Add Block ID
-        await tissue.fillField(Label.BLOCK_ID, { inputValue: `someBlockID` });
+        await tissue.fillField(Label.BLOCK_ID, { inputValue: blockID });
 
         //Add Date Sent to GP
         await tissue.fillField(Label.DATE_SENT_TO_GP, { date: {today: true} });
-
-        //Add Sequencing Results
-        await tissue.fillField(Label.SEQUENCING_RESULTS, { selection: SequencingResultsEnum.EXTERNAL_PATH_REVIEW_FAILED });
       });
 
       if (isClinicalStudy) {
@@ -274,6 +286,12 @@ test.describe('Tissue Request Flow', () => {
           tissue = tissueInformationPage.tissue();
           await tissue.fillField(Label.DATE_SENT_FOR_EXTERNAL_PATH_REVIEW, { date: {today: true} });
           await tissue.fillField(Label.DATE_RECEIVED_FROM_EXTERNAL_PATH_REVIEW, { date: {today: true} });
+        });
+
+        await test.step('Add Sequencing Results', async () => {
+          //Only clinical studies should be allow to input sequencing results - dropdown appears in research studies - known bug - tracked by PEPPER-1246
+          tissue = tissueInformationPage.tissue();
+          await tissue.fillField(Label.SEQUENCING_RESULTS, { selection: sequencingResults });
         });
       }
 
@@ -311,10 +329,11 @@ test.describe('Tissue Request Flow', () => {
         //Check the input for the tissue block
         tissue = tissueInformationPage.tissue();
 
+        //Tissue notes field
         const tissueNotes = await tissue.getFieldValue(Label.NOTES);
         expect(tissueNotes).toBe(tissueTestNotes);
 
-        /* Materials Received section */
+        /* Materials Received Section Verification */
         const ussUnstainedValue = await tissue.getFieldValue(Label.USS_UNSTAINED);
         expect(ussUnstainedValue).toBe(testMaterialsReceivedValue);
 
@@ -327,7 +346,7 @@ test.describe('Tissue Request Flow', () => {
         const scrollValue = await tissue.getFieldValue(Label.SCROLL);
         expect(scrollValue).toBe(testMaterialsReceivedValue);
 
-        //TODO check that the SMIDs have been saved
+        /* SM-IDs Verification */
         //Check for the 2 previously inputted USS SM-IDs
         const ussSMIDModal = await tissue.getSMIDModal(SM_ID.USS_SM_IDS);
         const retreivedUSSOne = await ussSMIDModal.getValueAt(0);
@@ -336,18 +355,99 @@ test.describe('Tissue Request Flow', () => {
         expect(retrievedUSSTwo).toBe(ussSMIDTwo);
         await ussSMIDModal.close();
 
+        //Check for the 2 previously inputted Scrolls SM-IDs
+        const scrollsSMIDModal = await tissue.getSMIDModal(SM_ID.SCROLLS_SM_IDS);
+        const retrievedScrollsOne = await scrollsSMIDModal.getValueAt(0);
+        const retreivedScrollsTwo = await scrollsSMIDModal.getValueAt(1);
+        expect(retrievedScrollsOne).toBe(scrollsSMIDOne);
+        expect(retreivedScrollsTwo).toBe(scrollsSMIDTwo);
+        await scrollsSMIDModal.close();
+
+        //Check for the 2 previously inputted H&E SM-IDs
+        const heSMIDModal = await tissue.getSMIDModal(SM_ID.H_E_SM_IDS);
+        const retrievedHEOne = await heSMIDModal.getValueAt(0);
+        const retrievedHETwo = await heSMIDModal.getValueAt(1);
+        expect(retrievedHEOne).toBe(heSMIDOne);
+        expect(retrievedHETwo).toBe(heSMIDTwo);
+        await heSMIDModal.close();
+
+        /* Return Dates Verification */
         const expectedReturnDate = await tissue.getFieldValue(Label.EXPECTED_RETURN_DATE);
         expect(expectedReturnDate).toBe(today);
 
         const returnDate = await tissue.getFieldValue(Label.RETURN_DATE);
         expect(returnDate).toBe(today);
 
+        /* Tissue Type, Tumor Type, Tissue Site Verification*/
+        const inputtedTissueType = await tissue.getFieldValue(Label.TISSUE_TYPE);
+        expect(inputtedTissueType).toBe(tissueTypeBlock);
+
+        const inputtedTumorType = await tissue.getFieldValue(Label.TUMOR_TYPE);
+        expect(inputtedTumorType).toBe(tumorTypePrimary);
+
+        const inputtedTissueSiteNotes = await tissue.getFieldValue(Label.TISSUE_SITE);
+        expect(inputtedTissueSiteNotes).toBe(tissueSiteNotes);
+
+        /* Tracking Number Input */
+        //Tracking Number field seems to display after revisiting the Tissue Request page
+        trackingNumber = `Playwright_${crypto.randomUUID().toString().substring(0, 7)}`;
+        await tissue.fillField(Label.TRACKING_NUMBER, { inputValue: trackingNumber });
+
+        /* Pathology Report, Tumor Collaborator Sample ID Verification */
+        const inputtedPathologyReportValue = await tissue.getFieldValue(Label.PATHOLOGY_REPORT);
+        expect(inputtedPathologyReportValue).toBe(pathologyReportYes);
+
+        const inputtedSampleID = await tissue.getFieldValue(Label.TUMOR_COLLABORATOR_SAMPLE_ID);
+        expect(inputtedSampleID).toBe(tumorCollaboratorSampleID);
+
+        /* Block to SHL, Block ID to SHL, SHL Work Number, Scrolls back from SHL date, Tumor Percentage as Reported By SHL Verification */
+        const inputtedBlockToSHLDate = await tissue.getFieldValue(Label.BLOCK_TO_SHL);
+        expect(inputtedBlockToSHLDate).toBe(today);
+
+        //Previously inputted 11 chars, expecting only the first 10 chars to have been saved
+        const retreivedBlockIDToSHL = await tissue.getFieldValue(Label.BLOCK_ID_TO_SHL);
+        expect(retreivedBlockIDToSHL).toBe(expectedBlockIDToSHL);
+        expect(retreivedBlockIDToSHL.length).toBe(10);
+
+        const inputtedSHLWorkNumber = await tissue.getFieldValue(Label.SHL_WORK_NUMBER);
+        expect(inputtedSHLWorkNumber).toBe(shlWorkNumber);
+
+        const inputtedScrollsBackFromSHLDate = await tissue.getFieldValue(Label.SCROLLS_BACK_FROM_SHL);
+        expect(inputtedScrollsBackFromSHLDate).toBe(today);
+
+        const inputtedTumorPercentageReportedBySHL = await tissue.getFieldValue(Label.TUMOR_PERCENTAGE_AS_REPORTED_BY_SHL);
+        expect(inputtedTumorPercentageReportedBySHL).toBe(tumorPercentageReportedBySHL);
+
+        /* SK ID, First SM ID, SM ID for H&E Verification */
+        const inputtedSKID = await tissue.getFieldValue(Label.SK_ID);
+        expect(inputtedSKID).toBe(skID);
+
+        const inputtedFirstSMID = await tissue.getFieldValue(Label.FIRST_SM_ID);
+        expect(inputtedFirstSMID).toBe(firstSMID);
+
+        const inputtedSMIDForHE = await tissue.getFieldValue(Label.SM_ID_FOR_H_E);
+        expect(inputtedSMIDForHE).toBe(smidForHE);
+
+        /* Block ID Verification */
+        const inputtedBlockID = await tissue.getFieldValue(Label.BLOCK_ID);
+        expect(inputtedBlockID).toBe(blockID);
+
+        /* Date Sent to GP Verification */
+        const inputtedDateSentToGP = await tissue.getFieldValue(Label.DATE_SENT_TO_GP);
+        expect(inputtedDateSentToGP).toBe(today);
+
+        /* External Path Review, Sequencing Results Verification */
         if (isClinicalStudy) {
+          //External Path Review
           const dateSentForExternalPathReview = await tissue.getFieldValue(Label.DATE_SENT_FOR_EXTERNAL_PATH_REVIEW);
           expect(dateSentForExternalPathReview).toBe(today);
 
           const dateReceivedFromExternalPathReview = await tissue.getFieldValue(Label.DATE_RECEIVED_FROM_EXTERNAL_PATH_REVIEW);
           expect(dateReceivedFromExternalPathReview).toBe(today);
+
+          //Sequencing Results
+          const inputtedSequencingResults = await tissue.getFieldValue(Label.SEQUENCING_RESULTS);
+          expect(inputtedSequencingResults).toBe(sequencingResults);
         }
       });
 

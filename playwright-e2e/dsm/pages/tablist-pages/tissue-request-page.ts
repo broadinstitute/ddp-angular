@@ -107,10 +107,6 @@ export default class TissueRequestPage extends tablistPageBase {
 
     const existingValue = await destructionPolicyYears.currentValue();
     const isAllowedToEnterValue = (keptIndefinitelySelection === false && isInputDisabled === false && existingValue.trim() !== value.toString());
-    console.log(`isAllowedToEnterValue: ${isAllowedToEnterValue}`);
-    console.log(`keepIndefinitelySelection: ${keptIndefinitelySelection}`);
-    console.log(`isInputDisabled: ${isInputDisabled}`);
-    console.log(`existing value: ${existingValue}`);
 
     if (isAllowedToEnterValue) {
       await Promise.all([
