@@ -15,6 +15,7 @@ import { FillDate, FillInMap, InputTypeMap } from 'dsm/component/models/tissue-i
 import Input from 'dss/component/input';
 import Checkbox from 'dss/component/checkbox';
 import { Label } from 'dsm/enums';
+import { logInfo } from 'utils/log-utils';
 
 export default class OncHistoryTable extends Table {
   private readonly tissueRequestPage: TissueRequestPage;
@@ -286,7 +287,7 @@ export default class OncHistoryTable extends Table {
     const parentRow = cell.locator(`//ancestor::tr`);
     await expect(parentRow).toBeVisible();
     const rowID = await parentRow.getAttribute('id', { timeout: 1000 }) as string;
-    console.log(`Onc History Row ID: ${rowID}`);
+    logInfo(`Onc History Row ID: ${rowID}`);
     return rowID;
   }
 

@@ -71,7 +71,7 @@ export function getDateMonthAbbreviated(dateString: string): string {
 export function getDateinISOFormat(dateString: string): string {
   const date = new Date(dateString);
   const formattedDate = date.toLocaleDateString('en-CA');
-  console.log(`Date formatted in YYYY-MM-DD format: ${formattedDate}`);
+  logInfo(`Date formatted in YYYY-MM-DD format: ${formattedDate}`);
   return formattedDate;
 }
 

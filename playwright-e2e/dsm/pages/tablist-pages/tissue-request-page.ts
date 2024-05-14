@@ -218,14 +218,12 @@ export default class TissueRequestPage extends tablistPageBase {
       await Promise.all([
         waitForResponse(this.page, { uri: 'patch' }),
         checkbox.check(),
-        console.log(`CHECKED!`)
       ]);
     }
     if (!check && isChecked && !isDisabled) {
       await Promise.all([
         waitForResponse(this.page, { uri: 'patch' }),
         checkbox.uncheck(),
-        console.log(`UNCHECKED!`)
       ]);
     }
   }
