@@ -13,7 +13,6 @@ import { DateFields } from 'dsm/component/models/tissue-inputs-interface';
 import { assertParticipantListDownloadFileName, studyShortName } from 'utils/test-utils';
 import * as XLSX from 'xlsx';
 import path from 'path';
-import { isNaN } from 'lodash';
 import { unzip } from 'utils/file-utils';
 
 // TODO Enable until bug PEPPER-1322 is fixed
@@ -464,6 +463,7 @@ test.describe('Tissue Request Flow', () => {
           [
             Label.BLOCK_ID,
             Label.BLOCK_ID_TO_SHL,
+            Label.BLOCK_TO_SHL,
             Label.BLOCK,
             Label.DATE_SENT_TO_GP,
             Label.EXPECTED_RETURN_DATE,
@@ -479,6 +479,7 @@ test.describe('Tissue Request Flow', () => {
             Label.SM_ID_VALUE,
             Label.TISSUE_NOTES,
             Label.TISSUE_TYPE,
+            Label.TISSUE_SITE,
             Label.TRACKING_NUMBER,
             Label.TUMOR_COLLABORATOR_SAMPLE_ID,
             Label.TUMOR_PERCENTAGE_AS_REPORTED_BY_SHL,
@@ -521,18 +522,19 @@ test.describe('Tissue Request Flow', () => {
         const xlsxWorkbook = XLSX.readFile(xlsxFilePath);
         const worksheet = xlsxWorkbook.Sheets[xlsxWorkbook.SheetNames[0]]; // First Worksheet
 
-        const json = XLSX.utils.sheet_to_json(worksheet, {range: 1}); // use second row for header
+        //const json = XLSX.utils.sheet_to_json(worksheet, {range: 1}); // use second row for header
+        const json = XLSX.utils.sheet_to_json(worksheet, { range: 1, defval: 'blank for now' });
         // Iterate rows to verify that the Tissue Request input is able to be exported
         json.map((row: any) => {
+          console.log(`Row value: ${JSON.stringify(row)}`);
           const downloadedBlockID = row['Block Id'].trim();
           expect(downloadedBlockID).toBe(blockID);
 
           const downloadedBlockIDToSHL = row['Block ID to SHL'].trim();
           expect(downloadedBlockIDToSHL).toBe(expectedBlockIDToSHL);
 
-          //Currently fails in test run - Investigating
-          //const downloadedBlockToSHL = row['Block to SHL'].trim();
-          //expect(downloadedBlockToSHL).toBe(todayInISOFormat);
+          const downloadedBlockToSHL = row['Block to SHL'].trim();
+          expect(downloadedBlockToSHL).toBe(todayInISOFormat);
 
           const downloadedMaterialsReceivedForBlocks = row['Block(s)'].trim();
           expect(downloadedMaterialsReceivedForBlocks).toBe(testMaterialsReceivedValue);
@@ -573,9 +575,8 @@ test.describe('Tissue Request Flow', () => {
           const downloadedTissueNotes = row['Tissue Notes'].trim();
           expect(downloadedTissueNotes).toBe(tissueTestNotes);
 
-          //Currently fails in test run - Investigating
-          //const downloadedTissueSite = row['Tissue Site'].trim();
-          //expect(downloadedTissueSite).toBe(tissueSiteNotes);
+          const downloadedTissueSite = row['Tissue Site'].trim();
+          expect(downloadedTissueSite).toBe(tissueSiteNotes);
 
           const downloadedTissueType = row['Tissue Type'].trim();
           expect(downloadedTissueType).toBe(tissueTypeBlock.toLowerCase());
@@ -608,7 +609,7 @@ test.describe('Tissue Request Flow', () => {
             expect(externalPathReviewSentDate).toBe(todayInISOFormat);
             expect(externalPathReviewReceivedDate).toBe(todayInISOFormat);
 
-            /* Sequencing Results Verifiaction in Download */
+            /* Sequencing Results Verification in Download */
             const sequencedResults = row['Sequencing Results'].trim();
             console.log(`Analyzing Sequencing Results -> result: ${sequencedResults}`);
             expect(sequencedResults).toBe(sequencingResultsDownloadName);
