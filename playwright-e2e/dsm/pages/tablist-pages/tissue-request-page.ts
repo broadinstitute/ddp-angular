@@ -122,6 +122,12 @@ export default class TissueRequestPage extends tablistPageBase {
     applyToAll && await this.applyToAll(destructionPolicyLocator);
   }
 
+  public async getDestructionPolicy(): Promise<number> {
+    const destructionPolicyLocator = this.dynamicField(Label.DESTRUCTION_POLICY);
+    const destructionPolicyYears = new Input(this.page, { root: destructionPolicyLocator });
+    return parseInt(await destructionPolicyYears.currentValue());
+  }
+
   public async selectGender(gender: 'Male' | 'Female'): Promise<void> {
     const genderLocator = this.dynamicField(Label.GENDER);
     const selectElement = new Select(this.page, { root: genderLocator });
@@ -138,6 +144,12 @@ export default class TissueRequestPage extends tablistPageBase {
         selectElement.selectOption(gender),
       ]);
     }
+  }
+
+  public async getSelectedGender(): Promise<string> {
+    const genderLocator = this.dynamicField(Label.GENDER);
+    const selectElement = new Select(this.page, { root: genderLocator });
+    return await selectElement.currentValue();
   }
 
   /* Assertions */

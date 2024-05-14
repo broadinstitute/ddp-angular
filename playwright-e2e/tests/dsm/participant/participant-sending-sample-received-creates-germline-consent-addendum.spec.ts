@@ -95,7 +95,7 @@ test.describe('Sending SAMPLE_RECEIVED event to DSS', () => {
       await tissue.fillField(Label.USS_UNSTAINED, { inputValue: materialsReceivedAmount });
       smID = `SM-${crypto.randomUUID().toString().replace('-', '1').substring(0, 5)}`; //e.g. SM-12345
       secondSMID = `SM-${crypto.randomUUID().toString().replace('-', '1').substring(0, 5)}`; //e.g. SM-09876
-      const smIDModal = await tissue.fillSMIDs(SM_ID.USS_SM_IDS);
+      const smIDModal = await tissue.getSMIDModal(SM_ID.USS_SM_IDS);
       await smIDModal.fillInputs([smID, secondSMID]);
       await smIDModal.close();
 
@@ -202,7 +202,7 @@ test.describe('Sending SAMPLE_RECEIVED event to DSS', () => {
       await tissue.fillField(Label.USS_UNSTAINED, { inputValue: materialsReceivedAmount });
       smID = `SM-${crypto.randomUUID().toString().replace('-', '1').substring(0, 5)}`; //e.g. SM-12345
       secondSMID = `SM-${crypto.randomUUID().toString().replace('-', '1').substring(0, 5)}`; //e.g. SM-09876
-      const smIDModal = await tissue.fillSMIDs(SM_ID.USS_SM_IDS);
+      const smIDModal = await tissue.getSMIDModal(SM_ID.USS_SM_IDS);
       await smIDModal.fillInputs([smID, secondSMID]);
       await smIDModal.close();
 
@@ -309,7 +309,7 @@ test.describe('Sending SAMPLE_RECEIVED event to DSS', () => {
       await tissue.fillField(Label.USS_UNSTAINED, { inputValue: materialsReceivedAmount });
       smID = `SM-${crypto.randomUUID().toString().replace('-', '1').substring(0, 5)}`; //e.g. SM-12345
       secondSMID = `SM-${crypto.randomUUID().toString().replace('-', '1').substring(0, 5)}`; //e.g. SM-09876
-      const smIDModal = await tissue.fillSMIDs(SM_ID.USS_SM_IDS);
+      const smIDModal = await tissue.getSMIDModal(SM_ID.USS_SM_IDS);
       await smIDModal.fillInputs([smID, secondSMID]);
       await smIDModal.close();
 
@@ -416,7 +416,7 @@ test.describe('Sending SAMPLE_RECEIVED event to DSS', () => {
       await tissue.fillField(Label.USS_UNSTAINED, { inputValue: materialsReceivedAmount });
       smID = `SM-${crypto.randomUUID().toString().replace('-', '1').substring(0, 5)}`; //e.g. SM-12345
       secondSMID = `SM-${crypto.randomUUID().toString().replace('-', '1').substring(0, 5)}`; //e.g. SM-09876
-      const smIDModal = await tissue.fillSMIDs(SM_ID.USS_SM_IDS);
+      const smIDModal = await tissue.getSMIDModal(SM_ID.USS_SM_IDS);
       await smIDModal.fillInputs([smID, secondSMID]);
       await smIDModal.close();
 

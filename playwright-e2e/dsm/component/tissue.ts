@@ -85,7 +85,7 @@ export default class Tissue extends ComponentBase {
     return value;
   }
 
-  public async fillSMIDs(SMID: SM_ID): Promise<SMID> {
+  public async getSMIDModal(SMID: SM_ID): Promise<SMID> {
     const SMIDLocator = await this.getField(SMID);
     const SMIDPlusBtn = new Button(this.page, { root: SMIDLocator });
     await SMIDPlusBtn.click();
