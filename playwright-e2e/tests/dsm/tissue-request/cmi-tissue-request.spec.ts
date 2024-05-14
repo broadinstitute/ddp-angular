@@ -525,7 +525,6 @@ test.describe('Tissue Request Flow', () => {
         const json = XLSX.utils.sheet_to_json(worksheet, {range: 1}); // use second row for header
         // Iterate rows to verify that the Tissue Request input is able to be exported
         json.map((row: any) => {
-          console.log(`Row value: ${JSON.stringify(row)}`);
           const downloadedBlockID = row['Block Id'].trim();
           expect(downloadedBlockID).toBe(blockID);
 
@@ -595,9 +594,14 @@ test.describe('Tissue Request Flow', () => {
           const downloadedMaterialsReceivedForUSS = row['USS (unstained slides)'].trim();
           expect(downloadedMaterialsReceivedForUSS).toBe(testMaterialsReceivedValue);
 
-          //Was checking how this would work
-          const smidArray = row['SM-ID value'];
-          console.log(`smid values in download: ${smidArray}`)
+          const allSMIDsUsed = [ussSMIDOne, ussSMIDTwo, scrollsSMIDOne, scrollsSMIDTwo, heSMIDOne, heSMIDTwo];
+          const testSMIDHeaderArray = getSMIDHeaderValues(allSMIDsUsed);
+          for (let index = 0; index < testSMIDHeaderArray.length; index++) {
+            const currentSMID = testSMIDHeaderArray[index];
+            const downloadedSMIDValue = row[currentSMID];
+            console.log(`Analyzing SM-ID -> Value: ${downloadedSMIDValue}`);
+            expect(allSMIDsUsed.includes(downloadedSMIDValue)).toBeTruthy();
+          }
 
           if (isClinicalStudy) {
             /* External Path Review Dates Verification in Download */
@@ -624,3 +628,18 @@ test.describe('Tissue Request Flow', () => {
     })
   }
 });
+
+function getSMIDHeaderValues(allSMIDsUsed: string[]): string[] {
+  const baseSMIDHeader = 'SM-ID value';
+  const expectedHeaders: string[] = [];
+  for (let index = 0; index < allSMIDsUsed.length; index++) {
+    if (index === 0 && allSMIDsUsed[index] != null) {
+      expectedHeaders.push(baseSMIDHeader);
+      continue;
+    } else if (index > 0 && allSMIDsUsed[index] != null) {
+      const incrementedSMIDHeader = `${baseSMIDHeader}_${index}`;
+      expectedHeaders.push(incrementedSMIDHeader);
+    }
+  }
+  return expectedHeaders;
+}
