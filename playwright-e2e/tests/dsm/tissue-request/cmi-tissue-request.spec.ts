@@ -524,96 +524,96 @@ test.describe('Tissue Request Flow', () => {
 
         const json = XLSX.utils.sheet_to_json(worksheet, {range: 1}); // use second row for header
         // Iterate rows to verify that the Tissue Request input is able to be exported
-        json.map((columnHeaderInRow: any) => {
-          const downloadedBlockID = columnHeaderInRow['Block Id'].trim();
+        json.map((valueFromColumn: any) => {
+          const downloadedBlockID = valueFromColumn['Block Id'].trim();
           logInfo(`Analyzing Block Id -> Value: ${downloadedBlockID}`);
           expect(downloadedBlockID).toBe(blockID);
 
-          const downloadedBlockIDToSHL = columnHeaderInRow['Block ID to SHL'].trim();
+          const downloadedBlockIDToSHL = valueFromColumn['Block ID to SHL'].trim();
           logInfo(`Analyzing Block ID to SHL -> Value: ${downloadedBlockIDToSHL}`);
           expect(downloadedBlockIDToSHL).toBe(expectedBlockIDToSHL);
 
-          const downloadedBlockToSHL = columnHeaderInRow['Block to SHL'].trim();
+          const downloadedBlockToSHL = valueFromColumn['Block to SHL'].trim();
           logInfo(`Analyzing Block to SHL -> Value: ${downloadedBlockToSHL}`);
           expect(downloadedBlockToSHL).toBe(todayInISOFormat);
 
-          const downloadedMaterialsReceivedForBlocks = columnHeaderInRow['Block(s)'].trim();
+          const downloadedMaterialsReceivedForBlocks = valueFromColumn['Block(s)'].trim();
           logInfo(`Analyzing Materials Received for Blocks -> Value: ${downloadedMaterialsReceivedForBlocks}`);
           expect(downloadedMaterialsReceivedForBlocks).toBe(testMaterialsReceivedValue);
 
-          const downloadedDateSentToGP = columnHeaderInRow['Date sent to GP'].trim();
+          const downloadedDateSentToGP = valueFromColumn['Date sent to GP'].trim();
           logInfo(`Analyzing Date Sent to GP -> Value: ${downloadedDateSentToGP}`);
           expect(downloadedDateSentToGP).toBe(todayInISOFormat);
 
-          const downloadedExpectedReturnDate = columnHeaderInRow['Expected Return Date'].trim();
+          const downloadedExpectedReturnDate = valueFromColumn['Expected Return Date'].trim();
           logInfo(`Analyzing Expected Return Date -> Value: ${downloadedExpectedReturnDate}`);
           expect(downloadedExpectedReturnDate).toBe(todayInISOFormat);
 
-          const downloadedFirstSMID = columnHeaderInRow['First SM ID'].trim();
+          const downloadedFirstSMID = valueFromColumn['First SM ID'].trim();
           logInfo(`Analyzing First SM ID -> Value: ${downloadedFirstSMID}`);
           expect(downloadedFirstSMID).toBe(firstSMID);
 
-          const downloadedMaterialsReceivedForHE = columnHeaderInRow['H&E(s)'].trim();
+          const downloadedMaterialsReceivedForHE = valueFromColumn['H&E(s)'].trim();
           logInfo(`Analyzing Materials Received for H&E -> Value: ${downloadedMaterialsReceivedForHE}`);
           expect(downloadedMaterialsReceivedForHE).toBe(testMaterialsReceivedValue);
 
-          const downloadedPathologyReportResponse = columnHeaderInRow['Pathology Report'].trim();
+          const downloadedPathologyReportResponse = valueFromColumn['Pathology Report'].trim();
           logInfo(`Analyzing Pathology Report -> Value: ${downloadedPathologyReportResponse}`);
           expect(downloadedPathologyReportResponse).toBe(pathologyReportYes.toLowerCase());
 
-          const downloadedReturnDate = columnHeaderInRow['Return Date'].trim();
+          const downloadedReturnDate = valueFromColumn['Return Date'].trim();
           logInfo(`Analyzing Return Date -> Value: ${downloadedReturnDate}`);
           expect(downloadedReturnDate).toBe(todayInISOFormat);
 
-          const downloadedMaterialsReceivedForScrolls = columnHeaderInRow['Scroll(s)'].trim();
+          const downloadedMaterialsReceivedForScrolls = valueFromColumn['Scroll(s)'].trim();
           logInfo(`Analyzing Materials Received for Scroll(s) -> Value: ${downloadedMaterialsReceivedForScrolls}`);
           expect(downloadedMaterialsReceivedForScrolls).toBe(testMaterialsReceivedValue);
 
-          const downloadedScrollsBackFromSHL = columnHeaderInRow['Scrolls back from SHL'].trim();
+          const downloadedScrollsBackFromSHL = valueFromColumn['Scrolls back from SHL'].trim();
           logInfo(`Analyzing Scrolls back from SHL -> Value: ${downloadedScrollsBackFromSHL}`);
           expect(downloadedScrollsBackFromSHL).toBe(todayInISOFormat);
 
-          const downloadedSHLWorkNumber = columnHeaderInRow['SHL Work Number'].trim();
+          const downloadedSHLWorkNumber = valueFromColumn['SHL Work Number'].trim();
           logInfo(`Analyzing SHL Work Number -> Value: ${downloadedSHLWorkNumber}`);
           expect(downloadedSHLWorkNumber).toBe(shlWorkNumber);
 
-          const downloadedSKID = columnHeaderInRow['SK ID'].trim();
+          const downloadedSKID = valueFromColumn['SK ID'].trim();
           logInfo(`Analyzing SK ID-> Value: ${downloadedSKID}`);
           expect(downloadedSKID).toBe(skID);
 
-          const downloadedSMIDForHE = columnHeaderInRow['SM ID for H&E'].trim();
+          const downloadedSMIDForHE = valueFromColumn['SM ID for H&E'].trim();
           logInfo(`Analyzing SM ID for H&E -> Value: ${downloadedSMIDForHE}`);
           expect(downloadedSMIDForHE).toBe(smidForHE);
 
-          const downloadedTissueNotes = columnHeaderInRow['Tissue Notes'].trim();
+          const downloadedTissueNotes = valueFromColumn['Tissue Notes'].trim();
           logInfo(`Analyzing Tissue Notes -> Value: ${downloadedTissueNotes}`);
           expect(downloadedTissueNotes).toBe(tissueTestNotes);
 
-          const downloadedTissueSite = columnHeaderInRow['Tissue Site'].trim();
+          const downloadedTissueSite = valueFromColumn['Tissue Site'].trim();
           logInfo(`Analyzing Tissue Site -> Value: ${downloadedTissueSite}`);
           expect(downloadedTissueSite).toBe(tissueSiteNotes);
 
-          const downloadedTissueType = columnHeaderInRow['Tissue Type'].trim();
+          const downloadedTissueType = valueFromColumn['Tissue Type'].trim();
           logInfo(`Analyzing Tissue Type -> Value: ${downloadedTissueType}`);
           expect(downloadedTissueType).toBe(tissueTypeBlock.toLowerCase());
 
-          const downloadedTrackingNumber = columnHeaderInRow['Tracking Number'].trim();
+          const downloadedTrackingNumber = valueFromColumn['Tracking Number'].trim();
           logInfo(`Analyzing Tracking Number -> Value: ${downloadedTrackingNumber}`);
           expect(downloadedTrackingNumber).toBe(trackingNumber);
 
-          const downloadedSampleID = columnHeaderInRow['Tumor Collaborator Sample ID'].trim();
+          const downloadedSampleID = valueFromColumn['Tumor Collaborator Sample ID'].trim();
           logInfo(`Analyzing Tumor Collaborator Sample ID -> Value: ${downloadedSampleID}`);
           expect(downloadedSampleID).toBe(tumorCollaboratorSampleID);
 
-          const downloadedTumorPercentage = columnHeaderInRow['Tumor Percentage as reported by SHL'].trim();
+          const downloadedTumorPercentage = valueFromColumn['Tumor Percentage as reported by SHL'].trim();
           logInfo(`Analyzing Tumor Percentage as reported by SHL -> Value: ${downloadedTumorPercentage}`);
           expect(downloadedTumorPercentage).toBe(tumorPercentageReportedBySHL);
 
-          const downloadedTumorType = columnHeaderInRow['Tumor Type'].trim();
+          const downloadedTumorType = valueFromColumn['Tumor Type'].trim();
           logInfo(`Analyzing Tumor Type -> Value: ${downloadedTumorType}`);
           expect(downloadedTumorType).toBe(tumorTypePrimary.toLowerCase());
 
-          const downloadedMaterialsReceivedForUSS = columnHeaderInRow['USS (unstained slides)'].trim();
+          const downloadedMaterialsReceivedForUSS = valueFromColumn['USS (unstained slides)'].trim();
           logInfo(`Analyzing Materials Received for USS (unstained slides) -> Value: ${downloadedMaterialsReceivedForUSS}`);
           expect(downloadedMaterialsReceivedForUSS).toBe(testMaterialsReceivedValue);
 
@@ -621,22 +621,22 @@ test.describe('Tissue Request Flow', () => {
           const testSMIDHeaderArray = getSMIDHeaderValues(allSMIDsUsed);
           for (let index = 0; index < testSMIDHeaderArray.length; index++) {
             const currentSMIDHeaderName = testSMIDHeaderArray[index];
-            const downloadedSMIDValue = columnHeaderInRow[currentSMIDHeaderName];
+            const downloadedSMIDValue = valueFromColumn[currentSMIDHeaderName];
             logInfo(`Analyzing SM-ID ${index + 1} -> Value: ${downloadedSMIDValue}`);
             expect(allSMIDsUsed.includes(downloadedSMIDValue)).toBeTruthy();
           }
 
           if (isClinicalStudy) {
             /* External Path Review Dates Verification in Download */
-            const externalPathReviewSentDate = columnHeaderInRow['Date Sent for External Path Review'].trim();
-            const externalPathReviewReceivedDate = columnHeaderInRow['Date Received from External Path Review'].trim();
+            const externalPathReviewSentDate = valueFromColumn['Date Sent for External Path Review'].trim();
+            const externalPathReviewReceivedDate = valueFromColumn['Date Received from External Path Review'].trim();
             logInfo(`Analyzing External Path Review -> Sent Date: ${externalPathReviewSentDate}`);
             logInfo(`Analyzing External Path Review -> Received Date: ${externalPathReviewReceivedDate}`);
             expect(externalPathReviewSentDate).toBe(todayInISOFormat);
             expect(externalPathReviewReceivedDate).toBe(todayInISOFormat);
 
             /* Sequencing Results Verification in Download */
-            const sequencedResults = columnHeaderInRow['Sequencing Results'].trim();
+            const sequencedResults = valueFromColumn['Sequencing Results'].trim();
             logInfo(`Analyzing Sequencing Results -> result: ${sequencedResults}`);
             expect(sequencedResults).toBe(sequencingResultsDownloadName);
           }
