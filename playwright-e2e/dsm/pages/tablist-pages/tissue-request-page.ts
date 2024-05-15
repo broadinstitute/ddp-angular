@@ -101,12 +101,12 @@ export default class TissueRequestPage extends tablistPageBase {
   public async fillDestructionPolicy(value: number, keptIndefinitelySelection = false, applyToAll = false): Promise<void> {
     const destructionPolicyLocator = this.dynamicField(Label.DESTRUCTION_POLICY);
     const destructionPolicyYears = new Input(this.page, { root: destructionPolicyLocator });
-    const isInputDisabled = await destructionPolicyYears.isDisabled();
+    const isInputDisabled = await destructionPolicyYears.isDisabled('aria-checked');
 
     await this.checkCheckbox(destructionPolicyLocator, keptIndefinitelySelection);
 
     const existingValue = await destructionPolicyYears.currentValue();
-    const isAllowedToEnterValue = !keptIndefinitelySelection && !isInputDisabled && existingValue.trim() !== value.toString();
+    const isAllowedToEnterValue = (keptIndefinitelySelection === false && isInputDisabled === false && existingValue.trim() !== value.toString());
 
     if (isAllowedToEnterValue) {
       await Promise.all([
@@ -116,6 +116,12 @@ export default class TissueRequestPage extends tablistPageBase {
     }
 
     applyToAll && await this.applyToAll(destructionPolicyLocator);
+  }
+
+  public async getDestructionPolicy(): Promise<number> {
+    const destructionPolicyLocator = this.dynamicField(Label.DESTRUCTION_POLICY);
+    const destructionPolicyYears = new Input(this.page, { root: destructionPolicyLocator });
+    return parseInt(await destructionPolicyYears.currentValue());
   }
 
   public async selectGender(gender: 'Male' | 'Female'): Promise<void> {
@@ -134,6 +140,12 @@ export default class TissueRequestPage extends tablistPageBase {
         selectElement.selectOption(gender),
       ]);
     }
+  }
+
+  public async getSelectedGender(): Promise<string> {
+    const genderLocator = this.dynamicField(Label.GENDER);
+    const selectElement = new Select(this.page, { root: genderLocator });
+    return await selectElement.currentValue();
   }
 
   /* Assertions */
@@ -205,13 +217,13 @@ export default class TissueRequestPage extends tablistPageBase {
     if (check && !isChecked && !isDisabled) {
       await Promise.all([
         waitForResponse(this.page, { uri: 'patch' }),
-        checkbox.check()
+        checkbox.check(),
       ]);
     }
     if (!check && isChecked && !isDisabled) {
       await Promise.all([
         waitForResponse(this.page, { uri: 'patch' }),
-        checkbox.uncheck()
+        checkbox.uncheck(),
       ]);
     }
   }

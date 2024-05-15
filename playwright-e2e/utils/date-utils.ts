@@ -64,6 +64,17 @@ export function getDateMonthAbbreviated(dateString: string): string {
   return formattedDate;
 }
 
+/**
+ * Turns the given date string into YYYY-MM-DD format and returns it
+ * @param dateString The date to be formatted into ISo format i.e. YYYY-MM-DD format
+ */
+export function getDateinISOFormat(dateString: string): string {
+  const date = new Date(dateString);
+  const formattedDate = date.toLocaleDateString('en-CA');
+  logInfo(`Date formatted in YYYY-MM-DD format: ${formattedDate}`);
+  return formattedDate;
+}
+
 export function getDateEasternTimeZone(date?: Date): string {
   return dateFormat('America/New_York').format(date ? date : new Date());
 }

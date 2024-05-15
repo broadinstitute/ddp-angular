@@ -218,6 +218,7 @@ export enum Label {
   BLOCK_TO_REQUEST = 'Block to Request', //Lower case usage in LMS -> Onc History columns
   BLOCK_TO_REQUEST_CAPITALIZED = 'BLOCK_TO_REQUEST', //Upper case usage in OS2 -> Onc History columns
   BLOCK_TO_SHL = 'Block to SHL',
+  BLOCK_ID = 'Block Id',
   BLOCK_ID_TO_SHL = 'Block ID to SHL',
   BLOCKS_WITH_TUMOR = 'Blocks with Tumor',
   CHILD_ADOLESCENT_ASSENT = `Child/Adolescent Assent`,
@@ -301,8 +302,10 @@ export enum Label {
   DATE_OF_PX = 'Date of PX',
   DATE_OF_MAJORITY = 'Date of Majority',
   DATE_REPORT_RECEIVED_FROM_INVITAE = 'Date Report received from Invitae',
+  DATE_SENT_FOR_EXTERNAL_PATH_REVIEW = 'Date Sent for External Path Review',
   DATE_SENT_TO_GP = 'Date sent to GP',
   DATE_SIGNED_UP = 'Date signed up',
+  DATE_RECEIVED_FROM_EXTERNAL_PATH_REVIEW = 'Date Received from External Path Review',
   DATE_WITHDRAWN = 'Date Withdrawn',
   DEACTIVATED = 'Deactivated',
   DEACTIVATION_REASON = 'Deactivation Reason',
