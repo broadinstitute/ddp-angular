@@ -109,7 +109,7 @@ test.describe.skip('Create Onc History', () => {
         await tissue.fillField(Label.H_E_PLURAL, { inputValue: 0 });
         await tissue.fillField(Label.SCROLL, { inputValue: 0 });
 
-        const smIDModal = await tissue.fillSMIDs(SM_ID.USS_SM_IDS);
+        const smIDModal = await tissue.getSMIDModal(SM_ID.USS_SM_IDS);
         await smIDModal.fillInputs([smID]);
         await smIDModal.close();
         await tissue.fillField(Label.USS_UNSTAINED, { inputValue: 1 });

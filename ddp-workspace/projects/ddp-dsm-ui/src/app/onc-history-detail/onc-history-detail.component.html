@@ -70,7 +70,7 @@
           <app-field-datepicker [dateString]="oncHis.datePx" [showTodayButton]="false" [allowUnknownDay]="true"
                                 [disabled]="!editable || participantExited"
                                 (dateChanged)="valueChanged($event, 'datePx', i)"
-                                [colorDuringPatch]="isPatchedCurrently('datePx', i)"></app-field-datepicker>
+                                [colorDuringPatch]="isPatchedCurrently('datePx', i)" [attr.data-ddp-test]="'pxDate-' + oncHis.oncHistoryDetailId" ></app-field-datepicker>
         </td>
         <td>
           <app-lookup [lookupValue]="oncHis.typePx" [lookupType]="'tType'" [multiLineInput]="true"

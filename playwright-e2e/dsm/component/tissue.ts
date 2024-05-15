@@ -23,6 +23,8 @@ export enum SequencingResultsEnum {
   FAILED_PURITY = 'Failed Purity',
   EXTERNAL_PATH_REVIEW_FAILED = 'External Path Review Failed',
   SUCCESS = 'Success',
+  SUCCESS_RESEARCH = 'Success - Research',
+  SUCCESS_CLINICAL = 'Success - Clinical',
   EMPTY = ''
 }
 
@@ -62,6 +64,7 @@ export default class Tissue extends ComponentBase {
 
     let value: Promise<any>;
     const inputLocator = await this.getField(dynamicField, byText);
+    await inputLocator.scrollIntoViewIfNeeded();
 
     switch (inputType) {
       case InputTypeEnum.INPUT:
@@ -83,7 +86,7 @@ export default class Tissue extends ComponentBase {
     return value;
   }
 
-  public async fillSMIDs(SMID: SM_ID): Promise<SMID> {
+  public async getSMIDModal(SMID: SM_ID): Promise<SMID> {
     const SMIDLocator = await this.getField(SMID);
     const SMIDPlusBtn = new Button(this.page, { root: SMIDLocator });
     await SMIDPlusBtn.click();
@@ -248,6 +251,7 @@ export default class Tissue extends ComponentBase {
 
   private async getField(dynamicField: Label | SM_ID, byText = false): Promise<Locator> {
     const fieldLocator = byText ? this.toLocator.getByText(dynamicField) : this.findField(dynamicField);
+    await fieldLocator.scrollIntoViewIfNeeded();
     await expect(fieldLocator, `'${dynamicField}' is not visible`).toBeVisible();
 
     return fieldLocator;
@@ -264,6 +268,7 @@ export default class Tissue extends ComponentBase {
 
   /* XPaths */
   private fieldXPath(fieldName: Label | SM_ID): string {
-    return `//td[text()[normalize-space()='${fieldName}']]/following-sibling::td[1]`
+    //return `//td[text()[normalize-space()='${fieldName}']]/following-sibling::td[1]`
+    return `//td[normalize-space(text())='${fieldName}']//following-sibling::td[1]`;
   }
 }
