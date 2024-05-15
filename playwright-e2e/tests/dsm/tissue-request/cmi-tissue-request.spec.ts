@@ -620,8 +620,8 @@ test.describe('Tissue Request Flow', () => {
           const allSMIDsUsed = [ussSMIDOne, ussSMIDTwo, scrollsSMIDOne, scrollsSMIDTwo, heSMIDOne, heSMIDTwo];
           const testSMIDHeaderArray = getSMIDHeaderValues(allSMIDsUsed);
           for (let index = 0; index < testSMIDHeaderArray.length; index++) {
-            const currentSMID = testSMIDHeaderArray[index];
-            const downloadedSMIDValue = row[currentSMID];
+            const currentSMIDHeaderName = testSMIDHeaderArray[index];
+            const downloadedSMIDValue = row[currentSMIDHeaderName];
             logInfo(`Analyzing SM-ID ${index + 1} -> Value: ${downloadedSMIDValue}`);
             expect(allSMIDsUsed.includes(downloadedSMIDValue)).toBeTruthy();
           }
