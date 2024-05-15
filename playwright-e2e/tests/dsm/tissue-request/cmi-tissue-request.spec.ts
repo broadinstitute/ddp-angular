@@ -4,7 +4,7 @@ import { CustomizeView, DataFilter, FileFormat, Label, SM_ID, Tab, TissueType } 
 import ParticipantPage from 'dsm/pages/participant-page';
 import OncHistoryTab from 'dsm/pages/tablist/onc-history-tab';
 import { expect } from '@playwright/test';
-import { getDate, getDateinISOFormat, getToday } from 'utils/date-utils';
+import { getDateinISOFormat, getToday } from 'utils/date-utils';
 import { logInfo } from 'utils/log-utils';
 import { OncHistorySelectRequestEnum } from 'dsm/component/tabs/enums/onc-history-input-columns-enum';
 import { StudyName } from 'dsm/navigation';
@@ -14,6 +14,7 @@ import { assertParticipantListDownloadFileName, studyShortName } from 'utils/tes
 import * as XLSX from 'xlsx';
 import path from 'path';
 import { unzip } from 'utils/file-utils';
+import crypto from 'crypto';
 
 // TODO Enable until bug PEPPER-1322 is fixed
 test.describe('Tissue Request Flow', () => {
