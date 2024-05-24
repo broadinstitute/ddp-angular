@@ -41,7 +41,7 @@ export class DynamicValueUtilModel{
   }
 
   public static isObjectEmpty(obj: Object): boolean {
-    return Object.keys(obj).length === 0;
+    return obj && Object.keys(obj).length === 0;
   }
 
 }
