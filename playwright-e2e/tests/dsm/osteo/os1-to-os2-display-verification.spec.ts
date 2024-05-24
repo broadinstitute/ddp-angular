@@ -332,8 +332,67 @@ test.describe.serial(`${StudyName.OSTEO} -> ${StudyName.OSTEO2}: Verify expected
       await surveyDataTab.assertActivityQuestionDisplayed(releaseAgreement);
     })
 
-    await test.step(`name`, async () => {
+    await test.step(`Check that OS2-specific activities are not present in OS1 Participant Page -> Survey Data tab`, async () => {
       //Check that OS2-specific activities are not present in Participant Page -> Survey Data tab
+      /* These are the following:
+          Additional details (v1) [for Family History activity]
+          Biologival / Birth Parent 1: Assigend female at birth (v1) [for Family History activity]
+          Biological / Birth Parent 2: Assigned male at birth (v1) [for Family History activity]
+          Survey: Family History of Cancer (v2)
+          Survey: Your Child's/Your Osteosarcoma (v2) [OS1 has v1]
+          Survey: About your child/you (v2)
+          Add child participant (v1)
+      */
+      surveyDataTab = new SurveyDataTab(page);
+
+      const additionalDetailsPanel = await surveyDataTab.getActivity({
+        activityName: SurveyName.ADDITIONAL_DETAILS,
+        activityVersion: ActivityVersion.ONE,
+        checkForVisibility: false
+      });
+      await expect(additionalDetailsPanel).not.toBeVisible();
+
+      const birthParentFemalePanel = await surveyDataTab.getActivity({
+        activityName: SurveyName.BIOLOGICAL_PARENT_FEMALE,
+        activityVersion: ActivityVersion.ONE,
+        checkForVisibility: false
+      });
+      await expect(birthParentFemalePanel).not.toBeVisible();
+
+      const birthParentMalePanel = await surveyDataTab.getActivity({
+        activityName: SurveyName.BIOLOGICAL_PARENT_MALE,
+        activityVersion: ActivityVersion.ONE,
+        checkForVisibility: false
+      });
+      await expect(birthParentMalePanel).not.toBeVisible();
+
+      const familyHistoryActivity = await surveyDataTab.getActivity({
+        activityName: SurveyName.SURVEY_FAMILY_HISTORY_OF_CANCER,
+        activityVersion: ActivityVersion.TWO,
+        checkForVisibility: false
+      });
+      await expect(familyHistoryActivity).not.toBeVisible();
+
+      const yourOsteosarcomaActivity = await surveyDataTab.getActivity({
+        activityName: SurveyName.SURVEY_YOUR_OR_YOUR_CHILDS_OSTEOSARCOMA,
+        activityVersion: ActivityVersion.TWO,
+        checkForVisibility: false
+      });
+      await expect(yourOsteosarcomaActivity).not.toBeVisible();
+
+      const aboutYouActivity = await surveyDataTab.getActivity({
+        activityName: SurveyName.SURVEY_ABOUT_YOU_OR_YOUR_CHILD,
+        activityVersion: ActivityVersion.TWO,
+        checkForVisibility: false
+      });
+      await expect(aboutYouActivity).not.toBeVisible();
+
+      const addChildParticipantPanel = await surveyDataTab.getActivity({
+        activityName: SurveyName.ADD_CHILD_PARTICIPANT,
+        activityVersion: ActivityVersion.ONE,
+        checkForVisibility: false
+      });
+      await expect(addChildParticipantPanel).not.toBeVisible();
     })
   })
 
@@ -346,7 +405,7 @@ test.describe.serial(`${StudyName.OSTEO} -> ${StudyName.OSTEO2}: Verify expected
   })
 
   test.skip(`OS2: Verify a re-consented participant has the expected display`, async ({ page, request }) => {
-    //
+    //stuff here
   })
 
   test.skip(`OS2: Verify OS2 kits cannot be found in OS1`, async ({ page, request }) => {

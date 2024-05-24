@@ -1,16 +1,25 @@
 import { Locator, Page, expect } from '@playwright/test';
 import { SurveyDataPanelEnum as SurveyName, ActivityVersionEnum as ActivityVersion } from 'dsm/component/tabs/enums/survey-data-enum';
-import { Label } from 'dsm/enums';
+import { CustomizeView, Label } from 'dsm/enums';
 
 //TODO add method to check Created, Completed, Last Updated information
 export default class SurveyDataTab {
   constructor(private readonly page: Page) {
   }
 
-  public async getActivity(opts: { activityName: SurveyName, activityVersion: ActivityVersion }): Promise<Locator> {
-    const { activityName, activityVersion } = opts;
+  /**
+   * To be used to retreive the locator for the activity or panel in Survey Data tab
+   * @param opts actvityName - Could be the name of the activity or just the name of an expandable panel
+   * @param opts actvitityVersion - Usually located on the far-right of the expandable panel e.g. (sans quotes) 'Survey Version: v1'
+   * @param opts checkForVisibility - defaults to true; change to false if you want to handle checking that the locator is visible
+   * @returns the activity or panel's locator
+   */
+  public async getActivity(opts: { activityName: SurveyName, activityVersion: ActivityVersion, checkForVisibility?: boolean }): Promise<Locator> {
+    const { activityName, activityVersion, checkForVisibility = true } = opts;
     const activity = this.getActivityDataPanel(activityName, activityVersion);
-    await activity.waitFor({ state: 'visible' });
+    if (checkForVisibility) {
+      await activity.waitFor({ state: 'visible' });
+    }
     return activity;
   }
 
@@ -41,7 +50,7 @@ export default class SurveyDataTab {
 
   private getActivityDataPanel(name: string, version: string): Locator {
     //Note: It's possible for a participant to have more than one version of an activity e.g. Research Consent in the case of a re-consented participant
-    return this.page.locator(`//app-activity-data//mat-expansion-panel-header[contains(., '${name}') and contains(., '${version}')]`);
+    return this.page.locator(`//app-activity-data//mat-expansion-panel-header[contains(., "${name}") and contains(., '${version}')]`);
   }
 
   private getPanel(panelName: SurveyName): Locator {
