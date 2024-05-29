@@ -10,6 +10,9 @@ import { logInfo } from 'utils/log-utils';
 import { totalNumberOfOccurences } from 'utils/test-utils';
 import { SurveyDataPanelEnum as SurveyName, ActivityVersionEnum as ActivityVersion } from 'dsm/component/tabs/enums/survey-data-enum';
 import { language } from 'googleapis/build/src/apis/language';
+import OncHistoryTable from 'dsm/component/tables/onc-history-table';
+import OncHistoryTab from 'dsm/pages/tablist/onc-history-tab';
+import { OsteoOncHistoryUpload } from 'dsm/component/models/onc-history-upload-interface';
 
 test.describe.serial(`${StudyName.OSTEO} -> ${StudyName.OSTEO2}: Verify expected display of participant information @dsm`, () => {
   //Use 1 participant throughout the test to check the display of information
@@ -397,18 +400,88 @@ test.describe.serial(`${StudyName.OSTEO} -> ${StudyName.OSTEO2}: Verify expected
   })
 
   test.skip(`OS1: Verify OS1 onc history cannot be found in OS2`, async ({ page, request }) => {
-    //stuff here
+    navigation = new Navigation(page, request);
+    await new Select(page, { label: 'Select study' }).selectOption(StudyName.OSTEO);
+
+    participantListPage = await navigation.selectFromStudy<ParticipantListPage>(Study.PARTICIPANT_LIST);
+    await participantListPage.waitForReady();
+    await participantListPage.filterListByShortId(shortID);
+    participantListTable = participantListPage.participantListTable;
+    const participantPage = await participantListTable.openParticipantPageAt(0);
+
+    const oncHistoryTab = await participantPage.tablist(Tab.ONC_HISTORY).click<OncHistoryTab>();
+    const oncHistoryTable: OncHistoryTable = oncHistoryTab.table;
+
+    const numberOfRows = await oncHistoryTable.getRowsCount();
+    expect(numberOfRows).toBeGreaterThanOrEqual(1);
+    /**
+     * Check for the following columns:
+     * Date of PX
+     * Type of PX
+     * Location of PX
+     * Histology
+     * Accession Number
+     * Facility
+     * Phone
+     * Fax
+     * Destruction Policy (years)
+     * Request Status
+     */
+    const previousOncHistory: OsteoOncHistoryUpload[] = [];
+    for (let index = 0; index < numberOfRows; index++) {
+      const oncHistoryID = await oncHistoryTable.getRowID(Label.DATE_OF_PX, index);
+      const dateOfPX = await oncHistoryTable.getFieldValue(Label.DATE_OF_PX, index);
+      const typeOfPX = await oncHistoryTable.getFieldValue(Label.TYPE_OF_PX, index);
+      const locationOfPX = await oncHistoryTable.getFieldValue(Label.LOCATION_OF_PX, index);
+      const histology = await oncHistoryTable.getFieldValue(Label.HISTOLOGY, index);
+      const accessionNumber = await oncHistoryTable.getFieldValue(Label.ACCESSION_NUMBER, index);
+      const facilityName = await oncHistoryTable.getFieldValue(Label.FACILITY, index);
+      const facilityPhoneNumber = await oncHistoryTable.getFieldValue(Label.FACILITY_PHONE, index);
+      const facilityFaxNumber = await oncHistoryTable.getFieldValue(Label.FACILITY_FAX, index);
+      const destructionPolicy = await oncHistoryTable.getFieldValue(Label.DESTRUCTION_POLICY, index);
+      const requestStatus = await oncHistoryTable.getFieldValue(Label.REQUEST_STATUS, index);
+
+      const oncHistory: OsteoOncHistoryUpload = {
+        DATE_PX: dateOfPX,
+        TYPE_PX: typeOfPX,
+        LOCATION_PX: locationOfPX,
+        HISTOLOGY: histology,
+        ACCESSION: accessionNumber,
+        FACILITY: facilityName,
+        PHONE: facilityPhoneNumber,
+        FAX: facilityFaxNumber,
+        DESTRUCTION: destructionPolicy,
+        REQUEST_STATUS: requestStatus,
+        RECORD_ID: '',
+        ROW_ID: oncHistoryID
+      }
+      previousOncHistory.push(oncHistory);
+    }
+
+    console.log(`Total onc histories: ${previousOncHistory.length}`);
   })
 
   test.skip(`OS1: Verify OS1 kits cannot be found in OS2`, async ({ page, request }) => {
-    //stuff here
+    //Check Kit Search page
+
+    //Check Sent/Received Overview just in case
   })
 
   test.skip(`OS2: Verify a re-consented participant has the expected display`, async ({ page, request }) => {
-    //stuff here
+    //Check profile info
+
+    //Check that cohort tags are as expected
+
+    //Check that Survey Data tab is as expected - need to tweak ptp search method to get ptps with maximum expected activities
   })
 
   test.skip(`OS2: Verify OS2 kits cannot be found in OS1`, async ({ page, request }) => {
-    //stuff here
+    //Check Kit Search page
+
+    //Check Sent/Received Overview just in case
+  })
+
+  test.skip(`OS2: Verify that uploaded OS2 onc history does not appear in OS1`, async ({ page, request }) => {
+    //Add test for Onc History Upload feature that checks that OS2 uploaded onc history does not appear in OS1
   })
 });
