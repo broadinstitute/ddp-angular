@@ -45,7 +45,7 @@ test.describe.serial(`${StudyName.OSTEO} -> ${StudyName.OSTEO2}: Verify expected
   })
 
   test(`OS2: Verify the OS1 participant can be found in the OS2 Participant List`, async ({ page, request }) => {
-    await test.step(`name`, async () => {
+    await test.step(`Verify that the OS1 re-consented participant can be seen in the OS2 Participant List`, async () => {
         //Check that the chosen participant can also be seen in OS2 Participant List'
         navigation = new Navigation(page, request);
         await new Select(page, { label: 'Select study' }).selectOption(StudyName.OSTEO2);
@@ -143,7 +143,7 @@ test.describe.serial(`${StudyName.OSTEO} -> ${StudyName.OSTEO2}: Verify expected
       const oncHistoryReviewed = participantPage.getOncHistoryReviewed();
       await expect(oncHistoryReviewed).toBeVisible();
 
-      const medicalRecordCheckbox = participantPage.getFieldSettingWebelement({ 
+      const medicalRecordCheckbox = participantPage.getFieldSettingWebelement({
         name: Label.INCOMPLETE_OR_MINIMAL_MEDICAL_RECORDS,
         fieldSettingType: FieldSetting.CHECKBOX
       });
@@ -399,7 +399,7 @@ test.describe.serial(`${StudyName.OSTEO} -> ${StudyName.OSTEO2}: Verify expected
     })
   })
 
-  test.skip(`OS1: Verify OS1 onc history cannot be found in OS2`, async ({ page, request }) => {
+  test(`OS1: Verify OS1 onc history cannot be found in OS2`, async ({ page, request }) => {
     navigation = new Navigation(page, request);
     await new Select(page, { label: 'Select study' }).selectOption(StudyName.OSTEO);
 

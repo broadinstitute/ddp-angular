@@ -256,6 +256,8 @@ export default class ParticipantListPage extends DsmPageBase {
    * @param opts rgpMinimumFamilySize - the minimum number of family members the RGP study participant should have
    * @param opts uriString - the uri string to use when initially filtering for participants. Defaults to '/ui/applyFilter'
    * @param opts prefix - the prefix or name of the test users to be used in the search e.g. E2E or KidFirst for playwright created participants. Defaults to 'E2E'
+   * @param opts shouldHaveOncHistory - the returned participant should have onc history
+   * @param opts shouldHave Kits - the returned participant should have kits (including any that are just in 'Waiting on GP' status (i.e. they're in Kits w/o Label))
    * @returns A participant with the requested tab
    */
   async findParticipantWithTab(
@@ -333,7 +335,7 @@ export default class ParticipantListPage extends DsmPageBase {
 
           const participantID = value.participant.participantId; //Make sure when searching for onc history that the participant has a participantId in ES
           if (medicalRecord && participantID) {
-            if (cohortTags) {
+            if (cohortTags || shouldHaveOncHistory || shouldHaveKits) {
               //Search for participants with specific cohort tags
               const tagArray = value.esData.dsm.cohortTag;
               if (!tagArray) {
@@ -354,7 +356,7 @@ export default class ParticipantListPage extends DsmPageBase {
 
               if (shouldHaveKits) {
                 const kitInformation = value.kits;
-                if (!kitInformation) {
+                if (!kitInformation || kitInformation[0] === undefined) {
                   continue; //skip to check if another participant has kits instead
                 }
               }
