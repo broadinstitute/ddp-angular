@@ -20,6 +20,7 @@ test.describe.serial(`${StudyName.OSTEO} -> ${StudyName.OSTEO2}: Verify expected
   let navigation;
   let participantListPage: ParticipantListPage;
   let participantListTable;
+  let participantPage;
   let surveyDataTab;
   let sampleInformationTab;
   let medicalRecordsTab;
@@ -38,8 +39,7 @@ test.describe.serial(`${StudyName.OSTEO} -> ${StudyName.OSTEO2}: Verify expected
       shortID = await participantListPage.findParticipantWithTab({
         tab: Tab.ONC_HISTORY,
         cohortTags: ['OS', 'OS PE-CGS'],
-        shouldHaveOncHistory: true,
-        shouldHaveKits: true,
+        shouldHaveOncHistory: true
       });
     })
   })
@@ -168,8 +168,7 @@ test.describe.serial(`${StudyName.OSTEO} -> ${StudyName.OSTEO2}: Verify expected
       const isSurveyDataTabVisible = await participantPage.tablist(Tab.SURVEY_DATA).isVisible();
       expect(isSurveyDataTabVisible).toBeTruthy();
 
-      const isSampleInformationTabVisible = await participantPage.tablist(Tab.SAMPLE_INFORMATION).isVisible();
-      expect(isSampleInformationTabVisible).toBeTruthy();
+      //TODO Adjust the OS1 ptp creation test utility to also add a kit to the OS1 ptp, to add checking for the Sample Information tab
 
       const isMedicalRecordTabVisible = await participantPage.tablist(Tab.MEDICAL_RECORD).isVisible();
       expect(isMedicalRecordTabVisible).toBeTruthy();
@@ -400,8 +399,129 @@ test.describe.serial(`${StudyName.OSTEO} -> ${StudyName.OSTEO2}: Verify expected
   })
 
   test(`OS1: Verify OS1 onc history cannot be found in OS2`, async ({ page, request }) => {
+    const previousOncHistory: OsteoOncHistoryUpload[] = [];
+
+    await test.step(`Get test participant's OS1 onc history`, async () => {
+      navigation = new Navigation(page, request);
+      await new Select(page, { label: 'Select study' }).selectOption(StudyName.OSTEO);
+      participantListPage = await navigation.selectFromStudy<ParticipantListPage>(Study.PARTICIPANT_LIST);
+      await participantListPage.waitForReady();
+      await participantListPage.filterListByShortId(shortID);
+      participantListTable = participantListPage.participantListTable;
+      const participantPage = await participantListTable.openParticipantPageAt(0);
+
+      oncHistoryTab = await participantPage.tablist(Tab.ONC_HISTORY).click<OncHistoryTab>();
+      const oncHistoryTable: OncHistoryTable = oncHistoryTab.table;
+
+      //There is usually an extra row that is empty and ready for input
+      const numberOfRows = await oncHistoryTable.getRowsCount() - 1;
+      expect(numberOfRows).toBeGreaterThanOrEqual(1);
+      /**
+       * Check for the following columns:
+       * Date of PX
+       * Type of PX
+       * Location of PX
+       * Histology
+       * Accession Number
+       * Facility
+       * Phone
+       * Fax
+       * Destruction Policy (years)
+       * Request Status
+       */
+      for (let index = 0; index < numberOfRows; index++) {
+        const oncHistoryID = await oncHistoryTable.getRowID(Label.DATE_OF_PX, index);
+        const dateOfPX = await oncHistoryTable.getFieldValue(Label.DATE_OF_PX, index);
+        const typeOfPX = await oncHistoryTable.getFieldValue(Label.TYPE_OF_PX, index);
+        const locationOfPX = await oncHistoryTable.getFieldValue(Label.LOCATION_OF_PX, index);
+        const histology = await oncHistoryTable.getFieldValue(Label.HISTOLOGY, index);
+        const accessionNumber = await oncHistoryTable.getFieldValue(Label.ACCESSION_NUMBER, index);
+        const facilityName = await oncHistoryTable.getFieldValue(Label.FACILITY, index);
+        const facilityPhoneNumber = await oncHistoryTable.getFieldValue(Label.PHONE, index);
+        const facilityFaxNumber = await oncHistoryTable.getFieldValue(Label.FAX, index);
+        const destructionPolicy = await oncHistoryTable.getFieldValue(Label.DESTRUCTION_POLICY, index);
+        const requestStatus = await oncHistoryTable.getFieldValue(Label.REQUEST, index);
+
+        const oncHistory: OsteoOncHistoryUpload = {
+          DATE_PX: dateOfPX,
+          TYPE_PX: typeOfPX,
+          LOCATION_PX: locationOfPX,
+          HISTOLOGY: histology,
+          ACCESSION: accessionNumber,
+          FACILITY: facilityName,
+          PHONE: facilityPhoneNumber,
+          FAX: facilityFaxNumber,
+          DESTRUCTION: destructionPolicy,
+          REQUEST_STATUS: requestStatus,
+          RECORD_ID: '',
+          ROW_ID: oncHistoryID
+        }
+        previousOncHistory.push(oncHistory);
+      }
+
+      await participantPage.backToList();
+      await participantListPage.waitForReady();
+      console.log(`Total onc histories: ${previousOncHistory.length}\n\n`);
+      /*for (let index = 0; index < previousOncHistory.length; index++) {
+        const oncHistory = previousOncHistory[index];
+        console.log(`Onc history reuqest status: ${oncHistory.REQUEST_STATUS}`);
+      }*/
+    })
+
+    await test.step(`Verify the OS1 onc history cannot be found in OS2`, async () => {
+      navigation = new Navigation(page, request);
+      await navigation.selectStudy(StudyName.OSTEO2);
+      await participantListPage.filterListByShortId(shortID);
+      participantListTable = participantListPage.participantListTable;
+      participantPage = await participantListTable.openParticipantPageAt(0);
+
+      oncHistoryTab = await participantPage.tablist(Tab.ONC_HISTORY).click<OncHistoryTab>();
+      const oncHistoryTable: OncHistoryTable = oncHistoryTab.table;
+      const numberOfRows = await oncHistoryTable.getRowsCount() - 1;
+      expect(numberOfRows).toBeGreaterThanOrEqual(1);
+      console.log(`Number of OS2 onc history for ptp ${shortID}: ${numberOfRows}`);
+
+      const clinicalOncHistories: OsteoOncHistoryUpload[] = [];
+      for (let index = 0; index < numberOfRows; index++) {
+        const clinicalOncHistoryID = await oncHistoryTable.getRowID(Label.DATE_OF_PX, index);
+        const clinicalDateOfPX = await oncHistoryTable.getFieldValue(Label.DATE_OF_PX, index);
+        const clinicalTypeOfPX = await oncHistoryTable.getFieldValue(Label.TYPE_OF_PX, index);
+        const clinicalLocationOfPX = await oncHistoryTable.getFieldValue(Label.LOCATION_OF_PX, index);
+        const clinicalHistology = await oncHistoryTable.getFieldValue(Label.HISTOLOGY, index);
+        const clinicalAccessionNumber = await oncHistoryTable.getFieldValue(Label.ACCESSION_NUMBER, index);
+        const clinicalFacilityName = await oncHistoryTable.getFieldValue(Label.FACILITY, index);
+        const clinicalFacilityPhoneNumber = await oncHistoryTable.getFieldValue(Label.PHONE, index);
+        const clinicalFacilityFaxNumber = await oncHistoryTable.getFieldValue(Label.FAX, index);
+        const clinicalDestructionPolicy = await oncHistoryTable.getFieldValue(Label.DESTRUCTION_POLICY, index);
+        const clinicalRequestStatus = await oncHistoryTable.getFieldValue(Label.REQUEST, index);
+
+        const clinicalOncHistory: OsteoOncHistoryUpload = {
+          DATE_PX: clinicalDateOfPX,
+          TYPE_PX: clinicalTypeOfPX,
+          LOCATION_PX: clinicalLocationOfPX,
+          HISTOLOGY: clinicalHistology,
+          ACCESSION: clinicalAccessionNumber,
+          FACILITY: clinicalFacilityName,
+          PHONE: clinicalFacilityPhoneNumber,
+          FAX: clinicalFacilityFaxNumber,
+          DESTRUCTION: clinicalDestructionPolicy,
+          REQUEST_STATUS: clinicalRequestStatus,
+          RECORD_ID: '',
+          ROW_ID: clinicalOncHistoryID
+        }
+        clinicalOncHistories.push(clinicalOncHistory);
+      }
+
+      for (let index = 0; index < previousOncHistory.length; index++) {
+        const researchOncHistory = previousOncHistory[index];
+        expect(clinicalOncHistories.includes(researchOncHistory)).toBeFalsy();
+      }
+    })
+  })
+
+  test(`OS2: Verify a re-consented participant has the expected display`, async ({ page, request }) => {
     navigation = new Navigation(page, request);
-    await new Select(page, { label: 'Select study' }).selectOption(StudyName.OSTEO);
+    await new Select(page, { label: 'Select study' }).selectOption(StudyName.OSTEO2);
 
     participantListPage = await navigation.selectFromStudy<ParticipantListPage>(Study.PARTICIPANT_LIST);
     await participantListPage.waitForReady();
@@ -409,70 +529,74 @@ test.describe.serial(`${StudyName.OSTEO} -> ${StudyName.OSTEO2}: Verify expected
     participantListTable = participantListPage.participantListTable;
     const participantPage = await participantListTable.openParticipantPageAt(0);
 
-    const oncHistoryTab = await participantPage.tablist(Tab.ONC_HISTORY).click<OncHistoryTab>();
-    const oncHistoryTable: OncHistoryTable = oncHistoryTab.table;
+    //Check profile info
+    const enrollmentStatus = await participantPage.getStatus();
+    expect(enrollmentStatus).toMatch(/(Enrolled|Exited after Enrollment)/); //Since chosen test participant should at least have been enrolled
 
-    const numberOfRows = await oncHistoryTable.getRowsCount();
-    expect(numberOfRows).toBeGreaterThanOrEqual(1);
-    /**
-     * Check for the following columns:
-     * Date of PX
-     * Type of PX
-     * Location of PX
-     * Histology
-     * Accession Number
-     * Facility
-     * Phone
-     * Fax
-     * Destruction Policy (years)
-     * Request Status
-     */
-    const previousOncHistory: OsteoOncHistoryUpload[] = [];
-    for (let index = 0; index < numberOfRows; index++) {
-      const oncHistoryID = await oncHistoryTable.getRowID(Label.DATE_OF_PX, index);
-      const dateOfPX = await oncHistoryTable.getFieldValue(Label.DATE_OF_PX, index);
-      const typeOfPX = await oncHistoryTable.getFieldValue(Label.TYPE_OF_PX, index);
-      const locationOfPX = await oncHistoryTable.getFieldValue(Label.LOCATION_OF_PX, index);
-      const histology = await oncHistoryTable.getFieldValue(Label.HISTOLOGY, index);
-      const accessionNumber = await oncHistoryTable.getFieldValue(Label.ACCESSION_NUMBER, index);
-      const facilityName = await oncHistoryTable.getFieldValue(Label.FACILITY, index);
-      const facilityPhoneNumber = await oncHistoryTable.getFieldValue(Label.FACILITY_PHONE, index);
-      const facilityFaxNumber = await oncHistoryTable.getFieldValue(Label.FACILITY_FAX, index);
-      const destructionPolicy = await oncHistoryTable.getFieldValue(Label.DESTRUCTION_POLICY, index);
-      const requestStatus = await oncHistoryTable.getFieldValue(Label.REQUEST_STATUS, index);
+    const registrationDate = await participantPage.getRegistrationDate();
+    expect(registrationDate).toBeTruthy();
 
-      const oncHistory: OsteoOncHistoryUpload = {
-        DATE_PX: dateOfPX,
-        TYPE_PX: typeOfPX,
-        LOCATION_PX: locationOfPX,
-        HISTOLOGY: histology,
-        ACCESSION: accessionNumber,
-        FACILITY: facilityName,
-        PHONE: facilityPhoneNumber,
-        FAX: facilityFaxNumber,
-        DESTRUCTION: destructionPolicy,
-        REQUEST_STATUS: requestStatus,
-        RECORD_ID: '',
-        ROW_ID: oncHistoryID
-      }
-      previousOncHistory.push(oncHistory);
-    }
+    const participantPageShortID = await participantPage.getShortId();
+    expect(participantPageShortID).toBe(shortID);
+    const guid = await participantPage.getGuid();
+    expect(guid).toBeTruthy();
 
-    console.log(`Total onc histories: ${previousOncHistory.length}`);
+    const firstName = await participantPage.getFirstName();
+    expect(firstName).toBeTruthy();
+    const lastName = await participantPage.getLastName();
+    expect(lastName).toBeTruthy();
+
+    const doNotContact = participantPage.getDoNotContactSection();
+    await expect(doNotContact).toBeVisible();
+
+    const dateOfBirth = await participantPage.getDateOfBirth();
+    expect(dateOfBirth).toBeTruthy();
+
+    //Gender is an optional question - so skipping validation for that
+    const preferredLanguage = await participantPage.getPreferredLanguage();
+    expect(preferredLanguage).toMatch(/(English|Español)/);
+
+    //Check that cohort tags are as expected
+    const participantPageCohortTags = new CohortTag(page);
+    const researchTag = participantPageCohortTags.getTag('OS');
+    const clinicalTag = participantPageCohortTags.getTag('OS PE-CGS');
+
+    expect(researchTag).toBeTruthy();
+    await expect(researchTag).toBeVisible();
+
+    expect(clinicalTag).toBeTruthy();
+    await expect(clinicalTag).toBeVisible();
+
+    //Additional profile section check e.g. webelements usually added via Field Settings
+    const participantNotes = participantPage.getFieldSettingWebelement({ name: Label.PARTICIPANT_NOTES, fieldSettingType: FieldSetting.TEXTAREA });
+    await expect(participantNotes).toBeVisible();
+
+    const oncHistoryCreated = participantPage.getFieldSettingWebelement({ name: Label.ONC_HISTORY_CREATED, fieldSettingType: FieldSetting.DATE });
+    await expect(oncHistoryCreated).toBeVisible();
+
+    const oncHistoryReviewed = participantPage.getOncHistoryReviewed();
+    await expect(oncHistoryReviewed).toBeVisible();
+
+    const medicalRecordCheckbox = participantPage.getFieldSettingWebelement({
+      name: Label.INCOMPLETE_OR_MINIMAL_MEDICAL_RECORDS,
+      fieldSettingType: FieldSetting.CHECKBOX
+    });
+    await expect(medicalRecordCheckbox).toBeVisible();
+
+    const readyForAbstractionCheckbox = participantPage.getFieldSettingWebelement({
+      name: Label.READY_FOR_ABSTRACTION,
+      fieldSettingType: FieldSetting.CHECKBOX
+    });
+    await expect(readyForAbstractionCheckbox).toBeVisible();
+
+    //Check that Survey Data tab is as expected - need to tweak ptp search method to get ptps with maximum expected activities
   })
 
+  //TODO add a sample kit to OS1 test utility ptps
   test.skip(`OS1: Verify OS1 kits cannot be found in OS2`, async ({ page, request }) => {
     //Check Kit Search page
 
     //Check Sent/Received Overview just in case
-  })
-
-  test.skip(`OS2: Verify a re-consented participant has the expected display`, async ({ page, request }) => {
-    //Check profile info
-
-    //Check that cohort tags are as expected
-
-    //Check that Survey Data tab is as expected - need to tweak ptp search method to get ptps with maximum expected activities
   })
 
   test.skip(`OS2: Verify OS2 kits cannot be found in OS1`, async ({ page, request }) => {
