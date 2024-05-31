@@ -23,7 +23,7 @@
   <div class="option-selected"
        *ngIf="httpErrorSelectionList.selectedOptions.hasValue() && httpErrorSelectionList.selectedOptions.selected[0].value as errorResponse">
     <div class="option-selected-data">
-      <p>Message: <span>{{errorResponse.message }}</span></p>
+      <p>Message: <span>{{errorResponse.error}}</span></p>
       <p>Status Code: <span>{{errorResponse.status}}</span></p>
       <p>Status Text: <span>{{errorResponse.statusText}}</span></p>
     </div>
