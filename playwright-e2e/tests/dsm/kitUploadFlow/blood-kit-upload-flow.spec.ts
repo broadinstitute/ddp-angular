@@ -34,10 +34,14 @@ test.describe.serial('Blood Kits upload flow', () => {
   let kitLabel: string;
   let trackingLabel: string;
   let shippingID: string;
+  let isClinicalStudy;
+  let hasValidatedContactInformation = false;
 
   let testResultDir: string;
 
-  const studies = [StudyName.OSTEO2];
+  const studies = [StudyName.OSTEO2, StudyName.PANCAN];
+  const clinicalStudies = [StudyName.LMS, StudyName.OSTEO2];
+  const studiesWithContactInformationColumn = [StudyName.LMS, StudyName.OSTEO2, StudyName.PANCAN];
   const kitType = KitType.BLOOD;
   const expectedKitTypes = [KitType.SALIVA, KitType.BLOOD];
 
@@ -51,6 +55,15 @@ test.describe.serial('Blood Kits upload flow', () => {
   for (const study of studies) {
     test(`Should upload a single kit for one participant @functional @dsm @${study}`, async ({page}, testInfo) => {
       testResultDir = testInfo.outputDir;
+      if (clinicalStudies.includes(study)) {
+        isClinicalStudy = true;
+      } else {
+        isClinicalStudy = false;
+      }
+
+      if (studiesWithContactInformationColumn.includes(study)) {
+        hasValidatedContactInformation = true;
+      }
 
       await welcomePage.selectStudy(study);
       await homePage.assertWelcomeTitle();
@@ -60,7 +73,10 @@ test.describe.serial('Blood Kits upload flow', () => {
       await participantListPage.waitForReady();
 
       // find the right participant
-      const testParticipantIndex = await participantListPage.findParticipantForKitUpload({ allowNewYorkerOrCanadian: false });
+      const testParticipantIndex = await participantListPage.findParticipantForKitUpload({
+        allowNewYorkerOrCanadian: false,
+        hasContactInfomationColumn: hasValidatedContactInformation
+      });
 
       // Collects all the necessary data for kit upload
       const participantListTable = participantListPage.participantListTable;
@@ -103,11 +119,13 @@ test.describe.serial('Blood Kits upload flow', () => {
       await kitUploadPage.uploadFile(kitType, [kitUploadInfo], study, testResultDir);
 
       // initial scan
-      const initialScanPage = await navigation.selectFromSamples<InitialScanPage>(Samples.INITIAL_SCAN);
-      await initialScanPage.assertPageTitle();
       kitLabel = `PECGS-${crypto.randomUUID().toString().substring(0, 10)}`;
-      await initialScanPage.fillScanPairs([kitLabel, shortID]);
-      await initialScanPage.save();
+      if (isClinicalStudy) {
+        const initialScanPage = await navigation.selectFromSamples<InitialScanPage>(Samples.INITIAL_SCAN);
+        await initialScanPage.assertPageTitle();
+        await initialScanPage.fillScanPairs([kitLabel, shortID]);
+        await initialScanPage.save();
+      }
 
       // Kits without label for extracting a shipping ID
       await navigation.selectFromSamples<KitsWithoutLabelPage>(Samples.KITS_WITHOUT_LABELS);
@@ -146,7 +164,7 @@ test.describe.serial('Blood Kits upload flow', () => {
       await kitsSentPage.assertDisplayedKitTypes(expectedKitTypes);
       await kitsSentPage.selectKitType(kitType);
       await kitsSentPage.assertReloadKitListBtn();
-      await kitsSentPage.assertTableHeader();
+      await kitsSentPage.assertTableHeader(isClinicalStudy);
       await kitsSentPage.search(Label.MF_CODE, kitLabel, { count: 1 });
 
       const sentDate = await kitsSentPage.getData(Label.SENT);
@@ -159,7 +177,7 @@ test.describe.serial('Blood Kits upload flow', () => {
       await kitsReceivedPage.selectKitType(kitType);
       await kitsReceivedPage.assertDisplayedKitTypes(expectedKitTypes);
       await kitsReceivedPage.assertReloadKitListBtn();
-      await kitsReceivedPage.assertTableHeader();
+      await kitsReceivedPage.assertTableHeader(isClinicalStudy);
       await kitsReceivedPage.search(Label.MF_CODE, kitLabel);
       await kitsReceivedPage.assertDisplayedRowsCount(1);
       const receivedDate = await kitsReceivedPage.getData(Label.RECEIVED);

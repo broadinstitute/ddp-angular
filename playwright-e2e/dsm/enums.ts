@@ -647,6 +647,7 @@ export enum Label {
   YOUR_CHILD_MAIL_ADDRESS = `Your Child's Mailing Address`, //Different apostrophe than CHILD_MAILING_ADDRESS
   YOUR_CHILD_NAME = `Your child's name`,
   YOUR_CONTACT_INFORMATION = `Your Contact Information: *`,
+  YOUR_CONTACT_INFORMATION_MEDICAL_RELEASE = `Your contact information`,
   YOUR_FULLNAME = 'Your Full Name',
   YOUR_MAILING_ADDRESS = 'Your Mailing Address',
   YOUR_NAME = 'Your name',

@@ -33,10 +33,12 @@ test.describe.serial('Saliva Kits upload flow', () => {
 
   const studies = [StudyName.LMS, StudyName.OSTEO2, StudyName.PANCAN];
   const clinicalStudies = [StudyName.LMS, StudyName.OSTEO2];
+  const studiesWithContactInformationColumn = [StudyName.LMS, StudyName.OSTEO2, StudyName.PANCAN];
   const kitType = KitType.SALIVA;
   const expectedKitTypes = [KitType.SALIVA, KitType.BLOOD];
   //Clinical studies have slight differences that are apparent when doing a kit upload, viewing kit-related pages, etc.
-  let isClinicalStudy = false;
+  let isClinicalStudy;
+  let hasValidatedContactInformation = false;
 
   test.beforeEach(async ({ page, request }) => {
     await login(page);
@@ -50,6 +52,12 @@ test.describe.serial('Saliva Kits upload flow', () => {
       testResultDir = testInfo.outputDir;
       if (clinicalStudies.includes(study)) {
         isClinicalStudy = true;
+      } else {
+        isClinicalStudy = false;
+      }
+
+      if (studiesWithContactInformationColumn.includes(study)) {
+        hasValidatedContactInformation = true;
       }
 
       await welcomePage.selectStudy(study);
@@ -60,7 +68,10 @@ test.describe.serial('Saliva Kits upload flow', () => {
       await participantListPage.waitForReady();
 
       // find the right participant
-      const testParticipantIndex = await participantListPage.findParticipantForKitUpload({ allowNewYorkerOrCanadian: false });
+      const testParticipantIndex = await participantListPage.findParticipantForKitUpload({
+        allowNewYorkerOrCanadian: false,
+        hasContactInfomationColumn: hasValidatedContactInformation
+      });
 
       // Collects all the necessary data for kit upload
       const participantListTable = participantListPage.participantListTable;
@@ -159,7 +170,7 @@ test.describe.serial('Saliva Kits upload flow', () => {
       await kitsSentPage.assertDisplayedKitTypes(expectedKitTypes);
       await kitsSentPage.selectKitType(kitType);
       await kitsSentPage.assertReloadKitListBtn();
-      await kitsSentPage.assertTableHeader();
+      await kitsSentPage.assertTableHeader(isClinicalStudy);
       await kitsSentPage.search(Label.MF_CODE, kitLabel, { count: 1 });
       study === StudyName.OSTEO2 && await sampleTypeCheck(kitUploadInfo, kitsSentPage);
 
