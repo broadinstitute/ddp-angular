@@ -281,7 +281,7 @@ export default class ParticipantListPage extends DsmPageBase {
       rgpMinimumFamilySize = 1,
       uri = '/ui/applyFilter',
       prefix,
-      cohortTags = null
+      cohortTags = []
     } = opts;
     const expectedTabs: Tab[] = [
       Tab.ONC_HISTORY,
