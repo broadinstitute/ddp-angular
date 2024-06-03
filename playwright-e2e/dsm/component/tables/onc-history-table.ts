@@ -62,8 +62,10 @@ export default class OncHistoryTable extends Table {
         value = new TextArea(this.page, { root: cell }).currentValue();
         break;
       case InputTypeEnum.SELECT:
-        console.log(`locator: ${await cell.innerText()}\n`);
-        value = new Select(this.page, { root: cell }).currentValue();
+        //Onc History Request column has a possible value of 'Unable to Obtain' which makes the immediate column no longer a dropdown
+        //in order to retreive its value, using the below (which can also get the current dropdown value)
+        console.log(`InputType.Select value: ${await cell.innerText()}`);
+        value = cell.innerText();
         break;
       default:
         throw new Error(`Incorrect input type - ${inputType}`)
