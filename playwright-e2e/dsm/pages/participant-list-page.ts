@@ -502,7 +502,7 @@ export default class ParticipantListPage extends DsmPageBase {
     await customizeViewPanel.selectColumns(CustomizeView.PARTICIPANT, [Label.REGISTRATION_DATE]);
     await customizeViewPanel.selectColumns(CustomizeView.SAMPLE, [Label.NORMAL_COLLABORATOR_SAMPLE_ID]);
 
-    if (hasContactInfomationColumn ) {
+    if (hasContactInfomationColumn) {
       await customizeViewPanel.selectColumns(CustomizeView.CONTACT_INFORMATION, [Label.VALID]);
       await customizeViewPanel.selectColumns(CustomizeView.CONTACT_INFORMATION, [Label.COUNTRY, Label.STATE]);
     } else {
