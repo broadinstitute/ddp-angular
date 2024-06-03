@@ -1,11 +1,10 @@
 import {KitsTable} from 'dsm/component/tables/kits-table';
-import {APIRequestContext, expect, Locator, Page} from '@playwright/test';
+import {APIRequestContext, APIResponse, expect, Locator, Page} from '@playwright/test';
 import {waitForNoSpinner} from 'utils/test-utils';
 import {assertTableHeaders} from 'utils/assertion-helper';
 import {rows} from 'lib/component/dsm/paginators/types/rowsPerPage';
 import KitsPageBase from 'dsm/pages/kits-page-base';
 import { KitType, Label } from 'dsm/enums';
-import { APIResponse } from 'playwright';
 
 const { BSP_TOKEN, DSM_BASE_URL } = process.env;
 
