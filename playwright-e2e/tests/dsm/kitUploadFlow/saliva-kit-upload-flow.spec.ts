@@ -22,6 +22,7 @@ import {getDate} from 'utils/date-utils';
 import {logInfo} from 'utils/log-utils';
 import TrackingScanPage from 'dsm/pages/scan/tracking-scan-page';
 import KitsWithErrorPage from 'dsm/pages/kits-with-error-page';
+import KitsSearchPage from 'dsm/pages/kits-search-page';
 
 // don't run in parallel
 test.describe.serial('Saliva Kits upload flow', () => {
@@ -31,9 +32,15 @@ test.describe.serial('Saliva Kits upload flow', () => {
 
   let testResultDir: string;
 
-  const studies = [StudyName.LMS, StudyName.OSTEO2];
+  const studies = [StudyName.LMS, StudyName.OSTEO2, StudyName.PANCAN];
+  const clinicalStudies = [StudyName.LMS, StudyName.OSTEO2];
+  const studiesWithContactInformationColumn = [StudyName.LMS, StudyName.OSTEO2, StudyName.PANCAN];
   const kitType = KitType.SALIVA;
   const expectedKitTypes = [KitType.SALIVA, KitType.BLOOD];
+  //Clinical studies have slight differences that are apparent when doing a kit upload, viewing kit-related pages, etc.
+  let isClinicalStudy;
+  let hasValidatedContactInformation = false;
+  let nextKitCollaboratorSampleID = '';
 
   test.beforeEach(async ({ page, request }) => {
     await login(page);
@@ -45,6 +52,15 @@ test.describe.serial('Saliva Kits upload flow', () => {
   for (const study of studies) {
     test(`Should upload a single kit for one participant @functional @dsm @${study}`, async ({page}, testInfo) => {
       testResultDir = testInfo.outputDir;
+      if (clinicalStudies.includes(study)) {
+        isClinicalStudy = true;
+      } else {
+        isClinicalStudy = false;
+      }
+
+      if (studiesWithContactInformationColumn.includes(study)) {
+        hasValidatedContactInformation = true;
+      }
 
       await welcomePage.selectStudy(study);
       await homePage.assertWelcomeTitle();
@@ -54,7 +70,10 @@ test.describe.serial('Saliva Kits upload flow', () => {
       await participantListPage.waitForReady();
 
       // find the right participant
-      const testParticipantIndex = await participantListPage.findParticipantForKitUpload({ allowNewYorkerOrCanadian: false });
+      const testParticipantIndex = await participantListPage.findParticipantForKitUpload({
+        allowNewYorkerOrCanadian: false,
+        hasContactInfomationColumn: hasValidatedContactInformation
+      });
 
       // Collects all the necessary data for kit upload
       const participantListTable = participantListPage.participantListTable;
@@ -62,6 +81,7 @@ test.describe.serial('Saliva Kits upload flow', () => {
       const shortID = await participantPage.getShortId();
       const firstName = await participantPage.getFirstName();
       const lastName = await participantPage.getLastName();
+
       logInfo(`Participant Short ID: ${shortID}`);
       expect(shortID, 'The short ID is empty').toBeTruthy();
       expect(firstName, 'The first name is empty').toBeTruthy();
@@ -81,6 +101,17 @@ test.describe.serial('Saliva Kits upload flow', () => {
         kitUploadInfo.address.postalCode = (await contactInformationTab.getZip()) || kitUploadInfo.address.postalCode;
         kitUploadInfo.address.state = (await contactInformationTab.getState()) || kitUploadInfo.address.state;
         kitUploadInfo.address.country = (await contactInformationTab.getCountry()) || kitUploadInfo.address.country;
+      }
+
+      //estimate the next kit's sample collaborator id if currently checking a research kit - since that's the best way to verify it later
+      if (!clinicalStudies.includes(study)) {
+        const searchPage = await navigation.selectFromSamples<KitsSearchPage>(Samples.SEARCH);
+        nextKitCollaboratorSampleID = await searchPage.estimateNextKitCollaboratorSampleID({
+          participantShortID: shortID,
+          kitType: KitType.SALIVA,
+          studyName: study
+        });
+        logInfo(`Estimated collaborator sample id for ${study} participant ${shortID}: ${nextKitCollaboratorSampleID}`);
       }
 
       // deactivate all kits for the participant (in both Kits w/o Label and Kit Error page)
@@ -105,12 +136,16 @@ test.describe.serial('Saliva Kits upload flow', () => {
       await kitUploadPage.assertInstructionSnapshot();
       await kitUploadPage.uploadFile(kitType, [kitUploadInfo], study, testResultDir);
 
-      // initial scan
-      const initialScanPage = await navigation.selectFromSamples<InitialScanPage>(Samples.INITIAL_SCAN);
-      await initialScanPage.assertPageTitle();
+      //Create Kit Label - saliva kit labels should be exactly 14 characters
       const kitLabel = `kit-${crypto.randomUUID().toString().substring(0, 10)}`;
-      await initialScanPage.fillScanPairs([kitLabel, shortID]);
-      await initialScanPage.save();
+
+      // Initial Scan
+      if (isClinicalStudy) {
+        const initialScanPage = await navigation.selectFromSamples<InitialScanPage>(Samples.INITIAL_SCAN);
+        await initialScanPage.assertPageTitle();
+        await initialScanPage.fillScanPairs([kitLabel, shortID]);
+        await initialScanPage.save();
+      }
 
       // Kits without label for extracting a shipping ID
       await navigation.selectFromSamples<KitsWithoutLabelPage>(Samples.KITS_WITHOUT_LABELS);
@@ -149,7 +184,7 @@ test.describe.serial('Saliva Kits upload flow', () => {
       await kitsSentPage.assertDisplayedKitTypes(expectedKitTypes);
       await kitsSentPage.selectKitType(kitType);
       await kitsSentPage.assertReloadKitListBtn();
-      await kitsSentPage.assertTableHeader();
+      await kitsSentPage.assertTableHeader(isClinicalStudy);
       await kitsSentPage.search(Label.MF_CODE, kitLabel, { count: 1 });
       study === StudyName.OSTEO2 && await sampleTypeCheck(kitUploadInfo, kitsSentPage);
 
@@ -158,12 +193,16 @@ test.describe.serial('Saliva Kits upload flow', () => {
 
       // kits received page
       const kitsReceivedPage = await navigation.selectFromSamples<KitsReceivedPage>(Samples.RECEIVED);
-      await kitsReceivedPage.kitReceivedRequest({mfCode: kitLabel});
+      await kitsReceivedPage.kitReceivedRequest({
+        mfCode: kitLabel,
+        isClinicalKit: isClinicalStudy,
+        estimatedCollaboratorSampleID: nextKitCollaboratorSampleID
+      });
       await kitsReceivedPage.waitForReady();
       await kitsReceivedPage.selectKitType(kitType);
       await kitsReceivedPage.assertDisplayedKitTypes(expectedKitTypes);
       await kitsReceivedPage.assertReloadKitListBtn();
-      await kitsReceivedPage.assertTableHeader();
+      await kitsReceivedPage.assertTableHeader(isClinicalStudy);
       await kitsReceivedPage.search(Label.MF_CODE, kitLabel);
       await kitsReceivedPage.assertDisplayedRowsCount(1);
 
