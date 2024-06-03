@@ -468,7 +468,7 @@ test.describe.serial(`${StudyName.OSTEO} -> ${StudyName.OSTEO2}: Verify expected
       }*/
     })
 
-    await test.step(`Verify the OS1 onc history cannot be found in OS2`, async () => {
+    await test.step(`Check OS2 for OS1 onc history`, async () => {
       navigation = new Navigation(page, request);
       await navigation.selectStudy(StudyName.OSTEO2);
       await participantListPage.filterListByShortId(shortID);
@@ -590,6 +590,7 @@ test.describe.serial(`${StudyName.OSTEO} -> ${StudyName.OSTEO2}: Verify expected
     await expect(readyForAbstractionCheckbox).toBeVisible();
 
     //Check that Survey Data tab is as expected - need to tweak ptp search method to get ptps with maximum expected activities
+
   })
 
   //TODO add a sample kit to OS1 test utility ptps

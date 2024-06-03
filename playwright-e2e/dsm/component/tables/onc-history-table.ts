@@ -62,6 +62,7 @@ export default class OncHistoryTable extends Table {
         value = new TextArea(this.page, { root: cell }).currentValue();
         break;
       case InputTypeEnum.SELECT:
+        console.log(`locator: ${await cell.innerText()}\n`);
         value = new Select(this.page, { root: cell }).currentValue();
         break;
       default:
