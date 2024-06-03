@@ -21,6 +21,7 @@ import KitsReceivedPage from 'dsm/pages/kits-received-page';
 import TrackingScanPage from 'dsm/pages/scan/tracking-scan-page';
 import {getDate} from 'utils/date-utils';
 import { logInfo } from 'utils/log-utils';
+import KitsSearchPage from 'dsm/pages/kits-search-page';
 
 // don't run in parallel
 test.describe.serial('Blood Kits upload flow', () => {
@@ -36,6 +37,7 @@ test.describe.serial('Blood Kits upload flow', () => {
   let shippingID: string;
   let isClinicalStudy;
   let hasValidatedContactInformation = false;
+  let nextKitCollaboratorSampleID = '';
 
   let testResultDir: string;
 
@@ -99,6 +101,17 @@ test.describe.serial('Blood Kits upload flow', () => {
         kitUploadInfo.address.postalCode = (await contactInformationTab.getZip()) || kitUploadInfo.address.postalCode;
         kitUploadInfo.address.state = (await contactInformationTab.getState()) || kitUploadInfo.address.state;
         kitUploadInfo.address.country = (await contactInformationTab.getCountry()) || kitUploadInfo.address.country;
+      }
+
+      //estimate the next kit's sample collaborator id if currently checking a research kit - since that's the best way to verify it later
+      if (!clinicalStudies.includes(study)) {
+        const searchPage = await navigation.selectFromSamples<KitsSearchPage>(Samples.SEARCH);
+        nextKitCollaboratorSampleID = await searchPage.estimateNextKitCollaboratorSampleID({
+          participantShortID: shortID,
+          kitType: KitType.BLOOD,
+          studyName: study
+        });
+        logInfo(`Estimated collaborator sample id for ${study} participant ${shortID}: ${nextKitCollaboratorSampleID}`);
       }
 
       // deactivate all kits for the participant
@@ -172,7 +185,11 @@ test.describe.serial('Blood Kits upload flow', () => {
 
       // kits received page
       const kitsReceivedPage = await navigation.selectFromSamples<KitsReceivedPage>(Samples.RECEIVED);
-      await kitsReceivedPage.kitReceivedRequest({mfCode: kitLabel});
+      await kitsReceivedPage.kitReceivedRequest({
+        mfCode: kitLabel,
+        isClinicalKit: isClinicalStudy,
+        estimatedCollaboratorSampleID: nextKitCollaboratorSampleID
+      });
       await kitsReceivedPage.waitForReady();
       await kitsReceivedPage.selectKitType(kitType);
       await kitsReceivedPage.assertDisplayedKitTypes(expectedKitTypes);
