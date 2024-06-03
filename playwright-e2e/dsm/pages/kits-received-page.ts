@@ -41,9 +41,17 @@ export default class KitsReceivedPage extends KitsPageBase {
       isTumorSample?: boolean,
       accessionNumber?: string,
       tumorCollaboratorSampleID?: string,
-      isClinicalKit?: boolean
+      isClinicalKit?: boolean,
+      estimatedCollaboratorSampleID?: string
     }): Promise<void> {
-    const { mfCode = '', isTumorSample = false, accessionNumber = null, tumorCollaboratorSampleID = null, isClinicalKit = false } = opts;
+    const {
+      mfCode = '',
+      isTumorSample = false,
+      accessionNumber = null,
+      tumorCollaboratorSampleID = null,
+      isClinicalKit = false,
+      estimatedCollaboratorSampleID = '',
+    } = opts;
     if (!BSP_TOKEN) {
       throw Error('Invalid parameter: DSM BSP token is not provided.');
     }
@@ -74,7 +82,8 @@ export default class KitsReceivedPage extends KitsPageBase {
     expect(response.ok()).toBeTruthy();
 
     if (!isTumorSample && !isClinicalKit) {
-      //TODO assertion for research kits here
+      //for research kits, verify it using the estimated collaborator sample id (since they do not get kit labels back in the json response)
+      expect(jsonResponse).toHaveProperty('collaboratorSampleId', estimatedCollaboratorSampleID);
     }
 
     if (!isTumorSample && isClinicalKit) {

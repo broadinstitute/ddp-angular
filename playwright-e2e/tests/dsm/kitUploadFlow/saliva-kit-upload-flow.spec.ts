@@ -22,6 +22,7 @@ import {getDate} from 'utils/date-utils';
 import {logInfo} from 'utils/log-utils';
 import TrackingScanPage from 'dsm/pages/scan/tracking-scan-page';
 import KitsWithErrorPage from 'dsm/pages/kits-with-error-page';
+import KitsSearchPage from 'dsm/pages/kits-search-page';
 
 // don't run in parallel
 test.describe.serial('Saliva Kits upload flow', () => {
@@ -39,6 +40,7 @@ test.describe.serial('Saliva Kits upload flow', () => {
   //Clinical studies have slight differences that are apparent when doing a kit upload, viewing kit-related pages, etc.
   let isClinicalStudy;
   let hasValidatedContactInformation = false;
+  let nextKitCollaboratorSampleID = '';
 
   test.beforeEach(async ({ page, request }) => {
     await login(page);
@@ -79,6 +81,7 @@ test.describe.serial('Saliva Kits upload flow', () => {
       const shortID = await participantPage.getShortId();
       const firstName = await participantPage.getFirstName();
       const lastName = await participantPage.getLastName();
+
       logInfo(`Participant Short ID: ${shortID}`);
       expect(shortID, 'The short ID is empty').toBeTruthy();
       expect(firstName, 'The first name is empty').toBeTruthy();
@@ -98,6 +101,17 @@ test.describe.serial('Saliva Kits upload flow', () => {
         kitUploadInfo.address.postalCode = (await contactInformationTab.getZip()) || kitUploadInfo.address.postalCode;
         kitUploadInfo.address.state = (await contactInformationTab.getState()) || kitUploadInfo.address.state;
         kitUploadInfo.address.country = (await contactInformationTab.getCountry()) || kitUploadInfo.address.country;
+      }
+
+      //estimate the next kit's sample collaborator id if currently checking a research kit - since that's the best way to verify it later
+      if (!clinicalStudies.includes(study)) {
+        const searchPage = await navigation.selectFromSamples<KitsSearchPage>(Samples.SEARCH);
+        nextKitCollaboratorSampleID = await searchPage.estimateNextKitCollaboratorSampleID({
+          participantShortID: shortID,
+          kitType: KitType.SALIVA,
+          studyName: study
+        });
+        logInfo(`Estimated collaborator sample id for ${study} participant ${shortID}: ${nextKitCollaboratorSampleID}`);
       }
 
       // deactivate all kits for the participant (in both Kits w/o Label and Kit Error page)
@@ -179,7 +193,11 @@ test.describe.serial('Saliva Kits upload flow', () => {
 
       // kits received page
       const kitsReceivedPage = await navigation.selectFromSamples<KitsReceivedPage>(Samples.RECEIVED);
-      await kitsReceivedPage.kitReceivedRequest({mfCode: kitLabel, isClinicalKit: isClinicalStudy});
+      await kitsReceivedPage.kitReceivedRequest({
+        mfCode: kitLabel,
+        isClinicalKit: isClinicalStudy,
+        estimatedCollaboratorSampleID: nextKitCollaboratorSampleID
+      });
       await kitsReceivedPage.waitForReady();
       await kitsReceivedPage.selectKitType(kitType);
       await kitsReceivedPage.assertDisplayedKitTypes(expectedKitTypes);
