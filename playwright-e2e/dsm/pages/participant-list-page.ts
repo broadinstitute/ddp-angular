@@ -480,7 +480,7 @@ export default class ParticipantListPage extends DsmPageBase {
         }
       } else {
         //Not all CMI research studies have a Contact Information column group - will use Medical Release form to retreive address instead
-        //TODO use methods from PR#2368 to check the medical release form information
+        //TODO use methods from PR#2368 to check the medical release form information in order to later add MPC/Prostate checking (Pancan is added)
       }
       if (!allowNewYorkerOrCanadian && (country === 'CA' || (country === 'US' && state === 'NY'))) {
         return -1;
