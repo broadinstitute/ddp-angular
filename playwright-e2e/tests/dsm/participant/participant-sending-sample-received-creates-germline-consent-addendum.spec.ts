@@ -111,7 +111,11 @@ test.describe('Sending SAMPLE_RECEIVED event to DSS', () => {
       const kitsReceivedPage = await navigation.selectFromSamples<KitsReceivedPage>(Samples.RECEIVED);
       await kitsReceivedPage.waitForReady();
       await kitsReceivedPage.selectKitType(KitType.SALIVA);
-      await kitsReceivedPage.kitReceivedRequest({mfCode: kitLabel});
+      await kitsReceivedPage.kitReceivedRequest({
+        mfCode: kitLabel,
+        isTumorSample: false,
+        isClinicalKit: true
+      });
 
       //Accession the tumor sample second (just receive the sample using the SM-ID)
       await kitsReceivedPage.kitReceivedRequest({
@@ -218,7 +222,11 @@ test.describe('Sending SAMPLE_RECEIVED event to DSS', () => {
       const kitsReceivedPage = await navigation.selectFromSamples<KitsReceivedPage>(Samples.RECEIVED);
       await kitsReceivedPage.waitForReady();
       await kitsReceivedPage.selectKitType(KitType.BLOOD);
-      await kitsReceivedPage.kitReceivedRequest({mfCode: kitLabel});
+      await kitsReceivedPage.kitReceivedRequest({
+        mfCode: kitLabel,
+        isTumorSample: false,
+        isClinicalKit: true
+      });
 
       //Accession the tumor sample second (just receive the sample using the SM-ID)
       await kitsReceivedPage.kitReceivedRequest({
