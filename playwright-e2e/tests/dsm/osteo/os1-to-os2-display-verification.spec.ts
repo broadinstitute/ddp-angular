@@ -610,6 +610,7 @@ test.describe.serial(`${StudyName.OSTEO} -> ${StudyName.OSTEO2}: Verify expected
      */
     surveyDataTab = new SurveyDataTab(page);
 
+    /* Prequalifier Activity */
     const prequalifierActivity = await surveyDataTab.getActivity({
       activityName: SurveyName.PREQUALIFIER,
       activityVersion: ActivityVersion.TWO
@@ -617,6 +618,7 @@ test.describe.serial(`${StudyName.OSTEO} -> ${StudyName.OSTEO2}: Verify expected
     await prequalifierActivity.scrollIntoViewIfNeeded();
     await expect(prequalifierActivity).toBeVisible();
 
+    /* Research Consent Form Activity */
     const researchConsentActivity = await surveyDataTab.getActivity({
       activityName: SurveyName.RESEARCH_CONSENT_FORM,
       activityVersion: ActivityVersion.THREE
@@ -624,6 +626,7 @@ test.describe.serial(`${StudyName.OSTEO} -> ${StudyName.OSTEO2}: Verify expected
     await researchConsentActivity.scrollIntoViewIfNeeded();
     await expect(researchConsentActivity).toBeVisible();
 
+    /* Consent Addendum Activity */
     const consentAddendumActivity = await surveyDataTab.getActivity({
       activityName: SurveyName.CONSENT_ADDENDUM,
       activityVersion: ActivityVersion.THREE
@@ -631,6 +634,7 @@ test.describe.serial(`${StudyName.OSTEO} -> ${StudyName.OSTEO2}: Verify expected
     await consentAddendumActivity.scrollIntoViewIfNeeded();
     await expect(consentAddendumActivity).toBeVisible();
 
+    /* Medical Release Form Activity */
     const medicalReleaseFormActivity = await surveyDataTab.getActivity({
       activityName: SurveyName.MEDICAL_RELEASE_FORM,
       activityVersion: ActivityVersion.THREE
@@ -638,6 +642,7 @@ test.describe.serial(`${StudyName.OSTEO} -> ${StudyName.OSTEO2}: Verify expected
     await medicalReleaseFormActivity.scrollIntoViewIfNeeded();
     await expect(medicalReleaseFormActivity).toBeVisible();
 
+    /* Additional Details section (from Family History Activity) */
     const additionalDetails = await surveyDataTab.getActivity({
       activityName: SurveyName.ADDITIONAL_DETAILS,
       activityVersion: ActivityVersion.ONE
@@ -645,6 +650,7 @@ test.describe.serial(`${StudyName.OSTEO} -> ${StudyName.OSTEO2}: Verify expected
     await additionalDetails.scrollIntoViewIfNeeded();
     await expect(additionalDetails).toBeVisible();
 
+    /* Child section (from Family History Activity) */
     const familyHistoryChild = await surveyDataTab.getActivity({
       activityName: SurveyName.FAMILY_HISTORY_CHILD,
       activityVersion: ActivityVersion.ONE
@@ -652,6 +658,7 @@ test.describe.serial(`${StudyName.OSTEO} -> ${StudyName.OSTEO2}: Verify expected
     await familyHistoryChild.scrollIntoViewIfNeeded();
     await expect(familyHistoryChild).toBeVisible();
 
+    /* Grandparents section (from Family History Activity) */
     const familyHistoryGrandparentOne = await surveyDataTab.getActivity({
       activityName: SurveyName.FAMILY_HISTORY_GRANDPARENT,
       activityVersion: ActivityVersion.ONE,
@@ -684,6 +691,7 @@ test.describe.serial(`${StudyName.OSTEO} -> ${StudyName.OSTEO2}: Verify expected
     await familyHistoryGrandparentFour.scrollIntoViewIfNeeded();
     await expect(familyHistoryGrandparentFour).toBeVisible();
 
+    /* Half-Sibling section (from Family History Activity) */
     const familyHistoryHalfSibling = await surveyDataTab.getActivity({
       activityName: SurveyName.FAMILY_HISTORY_HALF_SIBLING,
       activityVersion: ActivityVersion.ONE
@@ -691,6 +699,7 @@ test.describe.serial(`${StudyName.OSTEO} -> ${StudyName.OSTEO2}: Verify expected
     await familyHistoryHalfSibling.scrollIntoViewIfNeeded();
     await expect(familyHistoryHalfSibling).toBeVisible();
 
+    /* Parent's Sibling section (from Family History Activity) */
     const familyHistoryParentSiblingOne = await surveyDataTab.getActivity({
       activityName: SurveyName.FAMILY_HISTORY_PARENTS_SIBLING,
       activityVersion: ActivityVersion.ONE,
@@ -707,6 +716,7 @@ test.describe.serial(`${StudyName.OSTEO} -> ${StudyName.OSTEO2}: Verify expected
     await familyHistoryParentSiblingTwo.scrollIntoViewIfNeeded();
     await expect(familyHistoryParentSiblingTwo).toBeVisible();
 
+    /* Birth Parents (female & male) section (from Family History Activity) */
     const familyHistoryBirthParentFemale = await surveyDataTab.getActivity({
       activityName: SurveyName.FAMILIY_HISTORY_BIOLOGICAL_PARENT_FEMALE,
       activityVersion: ActivityVersion.ONE
@@ -721,6 +731,7 @@ test.describe.serial(`${StudyName.OSTEO} -> ${StudyName.OSTEO2}: Verify expected
     await familyHistoryBirthParentMale.scrollIntoViewIfNeeded();
     await expect(familyHistoryBirthParentMale).toBeVisible();
 
+    /* Sibling section (from Family History Activity) */
     const familyHistorySiblingOne = await surveyDataTab.getActivity({
       activityName: SurveyName.FAMILY_HISTORY_SIBLING,
       activityVersion: ActivityVersion.ONE,
@@ -737,6 +748,7 @@ test.describe.serial(`${StudyName.OSTEO} -> ${StudyName.OSTEO2}: Verify expected
     await familyHistorySiblingTwo.scrollIntoViewIfNeeded();
     await expect(familyHistorySiblingTwo).toBeVisible();
 
+    /* Your Osteosarcoma Activity */
     const yourOsteosarcomaActivity = await surveyDataTab.getActivity({
       activityName: SurveyName.SURVEY_YOUR_OR_YOUR_CHILDS_OSTEOSARCOMA,
       activityVersion: ActivityVersion.TWO
@@ -744,6 +756,7 @@ test.describe.serial(`${StudyName.OSTEO} -> ${StudyName.OSTEO2}: Verify expected
     await yourOsteosarcomaActivity.scrollIntoViewIfNeeded();
     await expect(yourOsteosarcomaActivity).toBeVisible();
 
+    /* About You Activity */
     const aboutYouActivity = await surveyDataTab.getActivity({
       activityName: SurveyName.SURVEY_ABOUT_YOU_OR_YOUR_CHILD,
       activityVersion: ActivityVersion.TWO
@@ -751,6 +764,7 @@ test.describe.serial(`${StudyName.OSTEO} -> ${StudyName.OSTEO2}: Verify expected
     await aboutYouActivity.scrollIntoViewIfNeeded();
     await expect(aboutYouActivity).toBeVisible();
 
+    /* Family History Activity */
     const familyHistoryActivity = await surveyDataTab.getActivity({
       activityName: SurveyName.SURVEY_FAMILY_HISTORY_OF_CANCER,
       activityVersion: ActivityVersion.TWO
