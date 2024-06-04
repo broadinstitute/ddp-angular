@@ -3,7 +3,7 @@ export enum SurveyDataPanelEnum {
   ADDITIONAL_DETAILS = 'Additional details',
   FAMILIY_HISTORY_BIOLOGICAL_PARENT_FEMALE = `Biological / Birth Parent 1: Assigned female at birth`,
   FAMILY_HISTORY_BIOLOGICAL_PARENT_MALE = `Biological / Birth Parent 2: Assigned male at birth`,
-  FAMILY_HISTORY_CHILD = 'CHILD',
+  FAMILY_HISTORY_CHILD = 'Child',
   CONSENT_ADDENDUM = `Additional Consent: Learning About Your Tumor`,
   FAMILY_HISTORY_GRANDPARENT = 'Grandparent',
   FAMILY_HISTORY_HALF_SIBLING = 'Half-Sibling',

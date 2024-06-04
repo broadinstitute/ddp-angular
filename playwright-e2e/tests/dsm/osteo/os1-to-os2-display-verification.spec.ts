@@ -613,18 +613,25 @@ test.describe.serial(`${StudyName.OSTEO} -> ${StudyName.OSTEO2}: Verify expected
     /* Prequalifier Activity */
     const prequalifierActivity = await surveyDataTab.getActivity({
       activityName: SurveyName.PREQUALIFIER,
-      activityVersion: ActivityVersion.TWO
+      activityVersion: ActivityVersion.ONE
     });
     await prequalifierActivity.scrollIntoViewIfNeeded();
     await expect(prequalifierActivity).toBeVisible();
 
-    /* Research Consent Form Activity */
+    /* Research Consent Form Activities - from OS1 and OS2 */
     const researchConsentActivity = await surveyDataTab.getActivity({
       activityName: SurveyName.RESEARCH_CONSENT_FORM,
-      activityVersion: ActivityVersion.THREE
+      activityVersion: ActivityVersion.ONE
     });
     await researchConsentActivity.scrollIntoViewIfNeeded();
     await expect(researchConsentActivity).toBeVisible();
+
+    const researchConsentActivityReconsented = await surveyDataTab.getActivity({
+      activityName: SurveyName.RESEARCH_CONSENT_FORM,
+      activityVersion: ActivityVersion.THREE
+    });
+    await researchConsentActivityReconsented.scrollIntoViewIfNeeded();
+    await expect(researchConsentActivityReconsented).toBeVisible();
 
     /* Consent Addendum Activity */
     const consentAddendumActivity = await surveyDataTab.getActivity({
@@ -637,7 +644,7 @@ test.describe.serial(`${StudyName.OSTEO} -> ${StudyName.OSTEO2}: Verify expected
     /* Medical Release Form Activity */
     const medicalReleaseFormActivity = await surveyDataTab.getActivity({
       activityName: SurveyName.MEDICAL_RELEASE_FORM,
-      activityVersion: ActivityVersion.THREE
+      activityVersion: ActivityVersion.ONE
     });
     await medicalReleaseFormActivity.scrollIntoViewIfNeeded();
     await expect(medicalReleaseFormActivity).toBeVisible();
@@ -784,9 +791,5 @@ test.describe.serial(`${StudyName.OSTEO} -> ${StudyName.OSTEO2}: Verify expected
     //Check Kit Search page
 
     //Check Sent/Received Overview just in case
-  })
-
-  test.skip(`OS2: Verify that uploaded OS2 onc history does not appear in OS1`, async ({ page, request }) => {
-    //Add test for Onc History Upload feature that checks that OS2 uploaded onc history does not appear in OS1
   })
 });
