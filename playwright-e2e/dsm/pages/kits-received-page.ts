@@ -139,7 +139,8 @@ export default class KitsReceivedPage extends KitsPageBase {
     }
   }
 
-  public async assertTableHeader(isClinicalKit = false): Promise<void> {
+  public async assertTableHeader(opts: { isClinicalKit?: boolean }): Promise<void> {
+    const { isClinicalKit = false } = opts;
     if (isClinicalKit) {
       this.TABLE_HEADERS.push(Label.SAMPLE_TYPE);
     }
