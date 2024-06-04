@@ -78,7 +78,10 @@ test.describe.serial('Blood Kit Upload', () => {
         await participantListPage.waitForReady();
 
         // Find an existing suitable participant
-        const testParticipantIndex = await participantListPage.findParticipantForKitUpload({ allowNewYorkerOrCanadian: true });
+        const testParticipantIndex = await participantListPage.findParticipantForKitUpload({
+          allowNewYorkerOrCanadian: true,
+          hasContactInfomationColumn: true
+        });
 
         // Collects all the necessary data for kit upload
         const participantListTable = participantListPage.participantListTable;
