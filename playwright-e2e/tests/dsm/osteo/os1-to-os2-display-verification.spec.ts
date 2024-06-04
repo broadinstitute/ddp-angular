@@ -589,7 +589,25 @@ test.describe.serial(`${StudyName.OSTEO} -> ${StudyName.OSTEO2}: Verify expected
     });
     await expect(readyForAbstractionCheckbox).toBeVisible();
 
-    //Check that Survey Data tab is as expected - need to tweak ptp search method to get ptps with maximum expected activities
+    //Check that Survey Data tab is as expected
+    /**
+     * For consistency - will check for the following activities (playwright fills out family history activity for adult):
+     * Prequalifier Survey
+     * Research Consent Form
+     * Additional Consent: Learning About Your Tumor
+     * Medical Release Form
+     * Additional Details
+     * Child (playwright adds 1 child)
+     * Grandparent (playwright adds 4 grandparents)
+     * Half-Sibling (playwright adds 1 half-sibling)
+     * Parent's Sibling (playwright adds 2 parent's siblings)
+     * Biological / Birth Parent 1: Assigned female at birth
+     * Biological / Birth Parent 2: Assigned male at birth
+     * Sibling (playwright adds 2 siblings)
+     * Survey: Your Child's/Your Osteosarcoma
+     * Survey: About your child/you
+     * Survey: Family History of Cancer
+     */
 
   })
 
