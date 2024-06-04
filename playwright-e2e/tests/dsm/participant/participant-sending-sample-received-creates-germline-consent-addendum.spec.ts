@@ -335,13 +335,18 @@ test.describe('Sending SAMPLE_RECEIVED event to DSS', () => {
         mfCode: smID,
         isTumorSample: true,
         accessionNumber: randomAccessionNumber,
-        tumorCollaboratorSampleID: tumorSampleID
+        tumorCollaboratorSampleID: tumorSampleID,
+        isClinicalKit: false // since it's a tumor sample and not an uploaded kit
       });
 
       //Receive the saliva kit second
       await kitsReceivedPage.waitForReady();
       await kitsReceivedPage.selectKitType(KitType.SALIVA);
-      await kitsReceivedPage.kitReceivedRequest({mfCode: kitLabel});
+      await kitsReceivedPage.kitReceivedRequest({
+        mfCode: kitLabel,
+        isTumorSample: false,
+        isClinicalKit: true
+      });
 
       //Confirm that the germline consent addendum was created - check that the GERMLINE_CONSENT_ADDENDUM_PEDIATRIC Survey Created column is not empty
       await navigation.selectFromStudy<ParticipantListPage>(Study.PARTICIPANT_LIST);
@@ -442,13 +447,18 @@ test.describe('Sending SAMPLE_RECEIVED event to DSS', () => {
         mfCode: smID,
         isTumorSample: true,
         accessionNumber: randomAccessionNumber,
-        tumorCollaboratorSampleID: tumorSampleID
+        tumorCollaboratorSampleID: tumorSampleID,
+        isClinicalKit: false // since it's a tumor sample and not an uploaded kit
       });
 
       //Receive the blood kit second
       await kitsReceivedPage.waitForReady();
       await kitsReceivedPage.selectKitType(KitType.BLOOD);
-      await kitsReceivedPage.kitReceivedRequest({mfCode: kitLabel});
+      await kitsReceivedPage.kitReceivedRequest({
+        mfCode: kitLabel,
+        isTumorSample: false,
+        isClinicalKit: true
+      });
 
       //Confirm that the germline consent addendum was created - check that the GERMLINE_CONSENT_ADDENDUM_PEDIATRIC Survey Created column is not empty
       await navigation.selectFromStudy<ParticipantListPage>(Study.PARTICIPANT_LIST);
