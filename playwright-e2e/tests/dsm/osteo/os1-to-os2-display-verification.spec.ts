@@ -614,109 +614,149 @@ test.describe.serial(`${StudyName.OSTEO} -> ${StudyName.OSTEO2}: Verify expected
       activityName: SurveyName.PREQUALIFIER,
       activityVersion: ActivityVersion.TWO
     });
+    await prequalifierActivity.scrollIntoViewIfNeeded();
+    await expect(prequalifierActivity).toBeVisible();
 
     const researchConsentActivity = await surveyDataTab.getActivity({
       activityName: SurveyName.RESEARCH_CONSENT_FORM,
       activityVersion: ActivityVersion.THREE
     });
+    await researchConsentActivity.scrollIntoViewIfNeeded();
+    await expect(researchConsentActivity).toBeVisible();
 
     const consentAddendumActivity = await surveyDataTab.getActivity({
       activityName: SurveyName.CONSENT_ADDENDUM,
       activityVersion: ActivityVersion.THREE
     });
+    await consentAddendumActivity.scrollIntoViewIfNeeded();
+    await expect(consentAddendumActivity).toBeVisible();
 
     const medicalReleaseFormActivity = await surveyDataTab.getActivity({
       activityName: SurveyName.MEDICAL_RELEASE_FORM,
       activityVersion: ActivityVersion.THREE
     });
+    await medicalReleaseFormActivity.scrollIntoViewIfNeeded();
+    await expect(medicalReleaseFormActivity).toBeVisible();
 
     const additionalDetails = await surveyDataTab.getActivity({
       activityName: SurveyName.ADDITIONAL_DETAILS,
       activityVersion: ActivityVersion.ONE
     });
+    await additionalDetails.scrollIntoViewIfNeeded();
+    await expect(additionalDetails).toBeVisible();
 
     const familyHistoryChild = await surveyDataTab.getActivity({
       activityName: SurveyName.FAMILY_HISTORY_CHILD,
       activityVersion: ActivityVersion.ONE
     });
+    await familyHistoryChild.scrollIntoViewIfNeeded();
+    await expect(familyHistoryChild).toBeVisible();
 
     const familyHistoryGrandparentOne = await surveyDataTab.getActivity({
       activityName: SurveyName.FAMILY_HISTORY_GRANDPARENT,
       activityVersion: ActivityVersion.ONE,
       nth: 1
     });
+    await familyHistoryGrandparentOne.scrollIntoViewIfNeeded();
+    await expect(familyHistoryGrandparentOne).toBeVisible();
 
     const familyHistoryGrandparentTwo = await surveyDataTab.getActivity({
       activityName: SurveyName.FAMILY_HISTORY_GRANDPARENT,
       activityVersion: ActivityVersion.ONE,
       nth: 2
     });
+    await familyHistoryGrandparentTwo.scrollIntoViewIfNeeded();
+    await expect(familyHistoryGrandparentTwo).toBeVisible();
 
     const familyHistoryGrandparentThree = await surveyDataTab.getActivity({
       activityName: SurveyName.FAMILY_HISTORY_GRANDPARENT,
       activityVersion: ActivityVersion.ONE,
       nth: 3
     });
+    await familyHistoryGrandparentThree.scrollIntoViewIfNeeded();
+    await expect(familyHistoryGrandparentThree).toBeVisible();
 
     const familyHistoryGrandparentFour = await surveyDataTab.getActivity({
       activityName: SurveyName.FAMILY_HISTORY_GRANDPARENT,
       activityVersion: ActivityVersion.ONE,
       nth: 4
     });
+    await familyHistoryGrandparentFour.scrollIntoViewIfNeeded();
+    await expect(familyHistoryGrandparentFour).toBeVisible();
 
     const familyHistoryHalfSibling = await surveyDataTab.getActivity({
       activityName: SurveyName.FAMILY_HISTORY_HALF_SIBLING,
       activityVersion: ActivityVersion.ONE
     });
+    await familyHistoryHalfSibling.scrollIntoViewIfNeeded();
+    await expect(familyHistoryHalfSibling).toBeVisible();
 
     const familyHistoryParentSiblingOne = await surveyDataTab.getActivity({
       activityName: SurveyName.FAMILY_HISTORY_PARENTS_SIBLING,
       activityVersion: ActivityVersion.ONE,
       nth: 1
     });
+    await familyHistoryParentSiblingOne.scrollIntoViewIfNeeded();
+    await expect(familyHistoryParentSiblingOne).toBeVisible();
 
     const familyHistoryParentSiblingTwo = await surveyDataTab.getActivity({
       activityName: SurveyName.FAMILY_HISTORY_PARENTS_SIBLING,
       activityVersion: ActivityVersion.ONE,
       nth: 2
     });
+    await familyHistoryParentSiblingTwo.scrollIntoViewIfNeeded();
+    await expect(familyHistoryParentSiblingTwo).toBeVisible();
 
     const familyHistoryBirthParentFemale = await surveyDataTab.getActivity({
       activityName: SurveyName.FAMILIY_HISTORY_BIOLOGICAL_PARENT_FEMALE,
       activityVersion: ActivityVersion.ONE
     });
+    await familyHistoryBirthParentFemale.scrollIntoViewIfNeeded();
+    await expect(familyHistoryBirthParentFemale).toBeVisible();
 
     const familyHistoryBirthParentMale = await surveyDataTab.getActivity({
       activityName: SurveyName.FAMILY_HISTORY_BIOLOGICAL_PARENT_MALE,
       activityVersion: ActivityVersion.ONE
     });
+    await familyHistoryBirthParentMale.scrollIntoViewIfNeeded();
+    await expect(familyHistoryBirthParentMale).toBeVisible();
 
     const familyHistorySiblingOne = await surveyDataTab.getActivity({
       activityName: SurveyName.FAMILY_HISTORY_SIBLING,
       activityVersion: ActivityVersion.ONE,
       nth: 1
     });
+    await familyHistorySiblingOne.scrollIntoViewIfNeeded();
+    await expect(familyHistorySiblingOne).toBeVisible();
 
     const familyHistorySiblingTwo = await surveyDataTab.getActivity({
       activityName: SurveyName.FAMILY_HISTORY_SIBLING,
       activityVersion: ActivityVersion.ONE,
       nth: 2
     });
+    await familyHistorySiblingTwo.scrollIntoViewIfNeeded();
+    await expect(familyHistorySiblingTwo).toBeVisible();
 
     const yourOsteosarcomaActivity = await surveyDataTab.getActivity({
       activityName: SurveyName.SURVEY_YOUR_OR_YOUR_CHILDS_OSTEOSARCOMA,
       activityVersion: ActivityVersion.TWO
     });
+    await yourOsteosarcomaActivity.scrollIntoViewIfNeeded();
+    await expect(yourOsteosarcomaActivity).toBeVisible();
 
     const aboutYouActivity = await surveyDataTab.getActivity({
       activityName: SurveyName.SURVEY_ABOUT_YOU_OR_YOUR_CHILD,
       activityVersion: ActivityVersion.TWO
     });
+    await aboutYouActivity.scrollIntoViewIfNeeded();
+    await expect(aboutYouActivity).toBeVisible();
 
     const familyHistoryActivity = await surveyDataTab.getActivity({
       activityName: SurveyName.SURVEY_FAMILY_HISTORY_OF_CANCER,
       activityVersion: ActivityVersion.TWO
     });
+    await familyHistoryActivity.scrollIntoViewIfNeeded();
+    await expect(familyHistoryActivity).toBeVisible();
   })
 
   //TODO add a sample kit to OS1 test utility ptps
