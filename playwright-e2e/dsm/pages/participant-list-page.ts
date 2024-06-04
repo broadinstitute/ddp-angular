@@ -1,7 +1,7 @@
 import { APIRequestContext, Download, expect, Locator, Page } from '@playwright/test';
 import Modal from 'dsm/component/modal';
 import { Navigation, Study } from 'dsm/navigation';
-import { Label, FileFormat, TextFormat, Tab, DataFilter, CustomizeView } from 'dsm/enums';
+import { Label, FileFormat, TextFormat, Tab, DataFilter, CustomizeView, CustomizeViewID as ID} from 'dsm/enums';
 import { WelcomePage } from 'dsm/pages/welcome-page';
 import Checkbox from 'dss/component/checkbox';
 import { isSubset, shuffle, waitForNoSpinner, waitForResponse } from 'utils/test-utils';
@@ -489,29 +489,47 @@ export default class ParticipantListPage extends DsmPageBase {
     return shortId;
   }
 
-  async findParticipantForKitUpload(opts: { allowNewYorkerOrCanadian: boolean, firstNameSubstring?: string }): Promise<number> {
-    const { allowNewYorkerOrCanadian = false, firstNameSubstring } = opts;
+  async findParticipantForKitUpload(
+    opts: {
+      allowNewYorkerOrCanadian: boolean,
+      firstNameSubstring?: string,
+      hasContactInfomationColumn?: boolean
+    }): Promise<number> {
+    const { allowNewYorkerOrCanadian = false, firstNameSubstring, hasContactInfomationColumn = false } = opts;
 
     // Match data in First Name, Valid , Location and Collaborator Sample ID columns. If no match, returns -1.
     const compareForMatch = async (index: number): Promise<number> => {
       const fname = await participantListTable.getTextAt(index, Label.FIRST_NAME);
       const normalCollaboratorSampleID = await participantListTable.getTextAt(index, Label.NORMAL_COLLABORATOR_SAMPLE_ID);
-      const [isAddressValid] = await participantListTable.getTextAt(index, Label.VALID);
-      const [country] = await participantListTable.getTextAt(index, Label.COUNTRY);
-      const [state] = await participantListTable.getTextAt(index, Label.STATE);
-      logInfo(`Allow NY or Canadians: ${allowNewYorkerOrCanadian}`);
-      logInfo(`PT info - country: ${country}, state: ${state}, valid: ${isAddressValid}`);
+
+      let isAddressValid = '';
+      let country = '';
+      let state = '';
 
       let matchFirstName = true;
       if (firstNameSubstring) {
         matchFirstName = fname.indexOf(firstNameSubstring) !== -1;
       }
+
+      if (hasContactInfomationColumn) {
+        //Clinical studies (and some research studies) have the Contact Information Tab column group where the below info is retreived from
+        [isAddressValid] = await participantListTable.getTextAt(index, Label.VALID);
+        [country] = await participantListTable.getTextAt(index, Label.COUNTRY);
+        [state] = await participantListTable.getTextAt(index, Label.STATE);
+        logInfo(`Allow NY or Canadians: ${allowNewYorkerOrCanadian}`);
+        logInfo(`PT info - country: ${country}, state: ${state}, valid: ${isAddressValid}`);
+
+        if (matchFirstName && normalCollaboratorSampleID.length <= 5 && isAddressValid.toLowerCase().trim() === 'true') {
+          return index;
+        }
+      } else {
+        //Not all CMI research studies have a Contact Information column group - will use Medical Release form to retreive address instead
+        //TODO use methods from PR#2368 to check the medical release form information in order to later add MPC/Prostate checking (Pancan is added)
+      }
       if (!allowNewYorkerOrCanadian && (country === 'CA' || (country === 'US' && state === 'NY'))) {
         return -1;
       }
-      if (matchFirstName && normalCollaboratorSampleID.length <= 5 && isAddressValid.toLowerCase().trim() === 'true') {
-        return index;
-      }
+
       return -1;
     };
 
@@ -527,13 +545,28 @@ export default class ParticipantListPage extends DsmPageBase {
     await customizeViewPanel.open();
     await customizeViewPanel.selectColumns(CustomizeView.PARTICIPANT, [Label.REGISTRATION_DATE]);
     await customizeViewPanel.selectColumns(CustomizeView.SAMPLE, [Label.NORMAL_COLLABORATOR_SAMPLE_ID]);
-    await customizeViewPanel.selectColumns(CustomizeView.CONTACT_INFORMATION, [Label.VALID]);
-    await customizeViewPanel.selectColumns(CustomizeView.CONTACT_INFORMATION, [Label.COUNTRY, Label.STATE]);
+
+    if (hasContactInfomationColumn) {
+      await customizeViewPanel.selectColumns(CustomizeView.CONTACT_INFORMATION, [Label.VALID]);
+      await customizeViewPanel.selectColumns(CustomizeView.CONTACT_INFORMATION, [Label.COUNTRY, Label.STATE]);
+    } else {
+      await customizeViewPanel.selectColumnsByID(
+        CustomizeView.MEDICAL_RELEASE_FORM,
+        [Label.YOUR_CONTACT_INFORMATION_MEDICAL_RELEASE],
+        ID.MEDICAL_RELEASE_FORM_GENERAL
+      );
+    }
     await customizeViewPanel.close();
 
     expect(participantListTable.getHeaderIndex(Label.REGISTRATION_DATE)).not.toBe(-1);
     expect(participantListTable.getHeaderIndex(Label.NORMAL_COLLABORATOR_SAMPLE_ID)).not.toBe(-1);
-    expect(participantListTable.getHeaderIndex(Label.VALID)).not.toBe(-1);
+
+    if (hasContactInfomationColumn) {
+      expect(participantListTable.getHeaderIndex(Label.VALID)).not.toBe(-1);
+    } else {
+      expect(participantListTable.getHeaderIndex(Label.YOUR_CONTACT_INFORMATION)).not.toBe(-1);
+    }
+
     await expect(participantListTable.rowLocator().first()).toBeVisible();
 
     let participantsCount = await participantListTable.rowsCount;

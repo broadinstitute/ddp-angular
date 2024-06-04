@@ -1,5 +1,5 @@
 import {KitsTable} from 'dsm/component/tables/kits-table';
-import {APIRequestContext, expect, Locator, Page} from '@playwright/test';
+import {APIRequestContext, APIResponse, expect, Locator, Page} from '@playwright/test';
 import {waitForNoSpinner} from 'utils/test-utils';
 import {assertTableHeaders} from 'utils/assertion-helper';
 import {rows} from 'lib/component/dsm/paginators/types/rowsPerPage';
@@ -12,7 +12,7 @@ export default class KitsReceivedPage extends KitsPageBase {
   PAGE_TITLE = 'Kits Received';
   TABLE_HEADERS = [Label.SHORT_ID, Label.SHIPPING_ID,
     Label.RECEIVED, Label.MF_CODE,
-    Label.DDP_REALM, Label.TYPE, Label.SAMPLE_TYPE];
+    Label.DDP_REALM, Label.TYPE];
 
 
   constructor(readonly page: Page, private readonly request: APIRequestContext) {
@@ -35,18 +35,44 @@ export default class KitsReceivedPage extends KitsPageBase {
     await this.kitsTable.rowsPerPage(rows);
   }
 
-  public async kitReceivedRequest(opts: { mfCode: string, isTumorSample?: boolean,
-    accessionNumber?: string,
-    tumorCollaboratorSampleID?: string }): Promise<void> {
-    const { mfCode = '', isTumorSample = false, accessionNumber = null, tumorCollaboratorSampleID = null } = opts;
+  public async kitReceivedRequest(
+    opts: {
+      mfCode: string,
+      isTumorSample?: boolean,
+      accessionNumber?: string,
+      tumorCollaboratorSampleID?: string,
+      isClinicalKit?: boolean,
+      estimatedCollaboratorSampleID?: string
+    }): Promise<void> {
+    const {
+      mfCode = '',
+      isTumorSample = false,
+      accessionNumber = null,
+      tumorCollaboratorSampleID = null,
+      isClinicalKit = false,
+      estimatedCollaboratorSampleID = '',
+    } = opts;
     if (!BSP_TOKEN) {
       throw Error('Invalid parameter: DSM BSP token is not provided.');
     }
-    const response = await this.request.get(`${DSM_BASE_URL}/ddp/ClinicalKits/${mfCode}`, {
-      headers: {
-        Authorization: `Bearer ${BSP_TOKEN}`
-      }
-    });
+    let response: APIResponse;
+
+    if (isClinicalKit || isTumorSample) {
+      //Clinical kits need the below to be marked as received; Tumor samples need the below to be accessioned
+      response = await this.request.get(`${DSM_BASE_URL}/ddp/ClinicalKits/${mfCode}`, {
+        headers: {
+          Authorization: `Bearer ${BSP_TOKEN}`
+        }
+      });
+    } else {
+      //Regular research kits use the below instead
+      response = await this.request.get(`${DSM_BASE_URL}/ddp/Kits/${mfCode}`, {
+        headers: {
+          Authorization: `Bearer ${BSP_TOKEN}`
+        }
+      });
+    }
+
     let jsonResponse;
     try {
       jsonResponse = await response.json()
@@ -55,8 +81,13 @@ export default class KitsReceivedPage extends KitsPageBase {
     }
     expect(response.ok()).toBeTruthy();
 
-    if (!isTumorSample) {
-      expect(jsonResponse).toHaveProperty('kit_label', mfCode); //only kits get this
+    if (!isTumorSample && !isClinicalKit) {
+      //for research kits, verify it using the estimated collaborator sample id (since they do not get kit labels back in the json response)
+      expect(jsonResponse).toHaveProperty('collaboratorSampleId', estimatedCollaboratorSampleID);
+    }
+
+    if (!isTumorSample && isClinicalKit) {
+      expect(jsonResponse).toHaveProperty('kit_label', mfCode); //only clinical kits get this returned from json response
     }
 
     if (isTumorSample && accessionNumber != null && tumorCollaboratorSampleID != null) {
@@ -108,7 +139,10 @@ export default class KitsReceivedPage extends KitsPageBase {
     }
   }
 
-  public async assertTableHeader(): Promise<void> {
+  public async assertTableHeader(isClinicalKit = false): Promise<void> {
+    if (isClinicalKit) {
+      this.TABLE_HEADERS.push(Label.SAMPLE_TYPE);
+    }
     assertTableHeaders(await this.kitsTable.getHeaderTexts(), this.TABLE_HEADERS);
   }
 
