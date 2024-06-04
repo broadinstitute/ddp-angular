@@ -355,14 +355,14 @@ test.describe.serial(`${StudyName.OSTEO} -> ${StudyName.OSTEO2}: Verify expected
       await expect(additionalDetailsPanel).not.toBeVisible();
 
       const birthParentFemalePanel = await surveyDataTab.getActivity({
-        activityName: SurveyName.BIOLOGICAL_PARENT_FEMALE,
+        activityName: SurveyName.FAMILIY_HISTORY_BIOLOGICAL_PARENT_FEMALE,
         activityVersion: ActivityVersion.ONE,
         checkForVisibility: false
       });
       await expect(birthParentFemalePanel).not.toBeVisible();
 
       const birthParentMalePanel = await surveyDataTab.getActivity({
-        activityName: SurveyName.BIOLOGICAL_PARENT_MALE,
+        activityName: SurveyName.FAMILY_HISTORY_BIOLOGICAL_PARENT_MALE,
         activityVersion: ActivityVersion.ONE,
         checkForVisibility: false
       });
@@ -636,69 +636,69 @@ test.describe.serial(`${StudyName.OSTEO} -> ${StudyName.OSTEO2}: Verify expected
     });
 
     const familyHistoryChild = await surveyDataTab.getActivity({
-      activityName: SurveyName.CHILD,
+      activityName: SurveyName.FAMILY_HISTORY_CHILD,
       activityVersion: ActivityVersion.ONE
     });
 
     const familyHistoryGrandparentOne = await surveyDataTab.getActivity({
-      activityName: SurveyName.GRANDPARENT,
+      activityName: SurveyName.FAMILY_HISTORY_GRANDPARENT,
       activityVersion: ActivityVersion.ONE,
       nth: 1
     });
 
     const familyHistoryGrandparentTwo = await surveyDataTab.getActivity({
-      activityName: SurveyName.GRANDPARENT,
+      activityName: SurveyName.FAMILY_HISTORY_GRANDPARENT,
       activityVersion: ActivityVersion.ONE,
       nth: 2
     });
 
     const familyHistoryGrandparentThree = await surveyDataTab.getActivity({
-      activityName: SurveyName.GRANDPARENT,
+      activityName: SurveyName.FAMILY_HISTORY_GRANDPARENT,
       activityVersion: ActivityVersion.ONE,
       nth: 3
     });
 
     const familyHistoryGrandparentFour = await surveyDataTab.getActivity({
-      activityName: SurveyName.GRANDPARENT,
+      activityName: SurveyName.FAMILY_HISTORY_GRANDPARENT,
       activityVersion: ActivityVersion.ONE,
       nth: 4
     });
 
     const familyHistoryHalfSibling = await surveyDataTab.getActivity({
-      activityName: SurveyName.HALF_SIBLING,
+      activityName: SurveyName.FAMILY_HISTORY_HALF_SIBLING,
       activityVersion: ActivityVersion.ONE
     });
 
     const familyHistoryParentSiblingOne = await surveyDataTab.getActivity({
-      activityName: SurveyName.PARENTS_SIBLING,
+      activityName: SurveyName.FAMILY_HISTORY_PARENTS_SIBLING,
       activityVersion: ActivityVersion.ONE,
       nth: 1
     });
 
     const familyHistoryParentSiblingTwo = await surveyDataTab.getActivity({
-      activityName: SurveyName.PARENTS_SIBLING,
+      activityName: SurveyName.FAMILY_HISTORY_PARENTS_SIBLING,
       activityVersion: ActivityVersion.ONE,
       nth: 2
     });
 
     const familyHistoryBirthParentFemale = await surveyDataTab.getActivity({
-      activityName: SurveyName.BIOLOGICAL_PARENT_FEMALE,
+      activityName: SurveyName.FAMILIY_HISTORY_BIOLOGICAL_PARENT_FEMALE,
       activityVersion: ActivityVersion.ONE
     });
 
     const familyHistoryBirthParentMale = await surveyDataTab.getActivity({
-      activityName: SurveyName.BIOLOGICAL_PARENT_MALE,
+      activityName: SurveyName.FAMILY_HISTORY_BIOLOGICAL_PARENT_MALE,
       activityVersion: ActivityVersion.ONE
     });
 
     const familyHistorySiblingOne = await surveyDataTab.getActivity({
-      activityName: SurveyName.SIBLING,
+      activityName: SurveyName.FAMILY_HISTORY_SIBLING,
       activityVersion: ActivityVersion.ONE,
       nth: 1
     });
 
     const familyHistorySiblingTwo = await surveyDataTab.getActivity({
-      activityName: SurveyName.SIBLING,
+      activityName: SurveyName.FAMILY_HISTORY_SIBLING,
       activityVersion: ActivityVersion.ONE,
       nth: 2
     });
