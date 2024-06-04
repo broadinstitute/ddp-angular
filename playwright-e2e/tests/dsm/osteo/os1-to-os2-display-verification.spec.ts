@@ -608,7 +608,115 @@ test.describe.serial(`${StudyName.OSTEO} -> ${StudyName.OSTEO2}: Verify expected
      * Survey: About your child/you
      * Survey: Family History of Cancer
      */
+    surveyDataTab = new SurveyDataTab(page);
 
+    const prequalifierActivity = await surveyDataTab.getActivity({
+      activityName: SurveyName.PREQUALIFIER,
+      activityVersion: ActivityVersion.TWO
+    });
+
+    const researchConsentActivity = await surveyDataTab.getActivity({
+      activityName: SurveyName.RESEARCH_CONSENT_FORM,
+      activityVersion: ActivityVersion.THREE
+    });
+
+    const consentAddendumActivity = await surveyDataTab.getActivity({
+      activityName: SurveyName.CONSENT_ADDENDUM,
+      activityVersion: ActivityVersion.THREE
+    });
+
+    const medicalReleaseFormActivity = await surveyDataTab.getActivity({
+      activityName: SurveyName.MEDICAL_RELEASE_FORM,
+      activityVersion: ActivityVersion.THREE
+    });
+
+    const additionalDetails = await surveyDataTab.getActivity({
+      activityName: SurveyName.ADDITIONAL_DETAILS,
+      activityVersion: ActivityVersion.ONE
+    });
+
+    const familyHistoryChild = await surveyDataTab.getActivity({
+      activityName: SurveyName.CHILD,
+      activityVersion: ActivityVersion.ONE
+    });
+
+    const familyHistoryGrandparentOne = await surveyDataTab.getActivity({
+      activityName: SurveyName.GRANDPARENT,
+      activityVersion: ActivityVersion.ONE,
+      nth: 1
+    });
+
+    const familyHistoryGrandparentTwo = await surveyDataTab.getActivity({
+      activityName: SurveyName.GRANDPARENT,
+      activityVersion: ActivityVersion.ONE,
+      nth: 2
+    });
+
+    const familyHistoryGrandparentThree = await surveyDataTab.getActivity({
+      activityName: SurveyName.GRANDPARENT,
+      activityVersion: ActivityVersion.ONE,
+      nth: 3
+    });
+
+    const familyHistoryGrandparentFour = await surveyDataTab.getActivity({
+      activityName: SurveyName.GRANDPARENT,
+      activityVersion: ActivityVersion.ONE,
+      nth: 4
+    });
+
+    const familyHistoryHalfSibling = await surveyDataTab.getActivity({
+      activityName: SurveyName.HALF_SIBLING,
+      activityVersion: ActivityVersion.ONE
+    });
+
+    const familyHistoryParentSiblingOne = await surveyDataTab.getActivity({
+      activityName: SurveyName.PARENTS_SIBLING,
+      activityVersion: ActivityVersion.ONE,
+      nth: 1
+    });
+
+    const familyHistoryParentSiblingTwo = await surveyDataTab.getActivity({
+      activityName: SurveyName.PARENTS_SIBLING,
+      activityVersion: ActivityVersion.ONE,
+      nth: 2
+    });
+
+    const familyHistoryBirthParentFemale = await surveyDataTab.getActivity({
+      activityName: SurveyName.BIOLOGICAL_PARENT_FEMALE,
+      activityVersion: ActivityVersion.ONE
+    });
+
+    const familyHistoryBirthParentMale = await surveyDataTab.getActivity({
+      activityName: SurveyName.BIOLOGICAL_PARENT_MALE,
+      activityVersion: ActivityVersion.ONE
+    });
+
+    const familyHistorySiblingOne = await surveyDataTab.getActivity({
+      activityName: SurveyName.SIBLING,
+      activityVersion: ActivityVersion.ONE,
+      nth: 1
+    });
+
+    const familyHistorySiblingTwo = await surveyDataTab.getActivity({
+      activityName: SurveyName.SIBLING,
+      activityVersion: ActivityVersion.ONE,
+      nth: 2
+    });
+
+    const yourOsteosarcomaActivity = await surveyDataTab.getActivity({
+      activityName: SurveyName.SURVEY_YOUR_OR_YOUR_CHILDS_OSTEOSARCOMA,
+      activityVersion: ActivityVersion.TWO
+    });
+
+    const aboutYouActivity = await surveyDataTab.getActivity({
+      activityName: SurveyName.SURVEY_ABOUT_YOU_OR_YOUR_CHILD,
+      activityVersion: ActivityVersion.TWO
+    });
+
+    const familyHistoryActivity = await surveyDataTab.getActivity({
+      activityName: SurveyName.SURVEY_FAMILY_HISTORY_OF_CANCER,
+      activityVersion: ActivityVersion.TWO
+    });
   })
 
   //TODO add a sample kit to OS1 test utility ptps

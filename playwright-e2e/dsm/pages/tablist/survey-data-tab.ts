@@ -14,9 +14,14 @@ export default class SurveyDataTab {
    * @param opts checkForVisibility - defaults to true; change to false if you want to handle checking that the locator is visible
    * @returns the activity or panel's locator
    */
-  public async getActivity(opts: { activityName: SurveyName, activityVersion: ActivityVersion, checkForVisibility?: boolean }): Promise<Locator> {
-    const { activityName, activityVersion, checkForVisibility = true } = opts;
-    const activity = this.getActivityDataPanel(activityName, activityVersion);
+  public async getActivity(opts: {
+    activityName: SurveyName,
+    activityVersion: ActivityVersion,
+    checkForVisibility?: boolean,
+    nth?: number
+  }): Promise<Locator> {
+    const { activityName, activityVersion, checkForVisibility = true, nth = 1 } = opts;
+    const activity = this.getActivityDataPanel(activityName, activityVersion, nth);
     if (checkForVisibility) {
       await activity.waitFor({ state: 'visible' });
     }
@@ -48,9 +53,9 @@ export default class SurveyDataTab {
     await expect(activityQuestion).toBeVisible();
   }
 
-  private getActivityDataPanel(name: string, version: string): Locator {
+  private getActivityDataPanel(name: string, version: string, nth: number): Locator {
     //Note: It's possible for a participant to have more than one version of an activity e.g. Research Consent in the case of a re-consented participant
-    return this.page.locator(`//app-activity-data//mat-expansion-panel-header[contains(., "${name}") and contains(., '${version}')]`);
+    return this.page.locator(`(//app-activity-data//mat-expansion-panel-header[contains(., "${name}") and contains(., '${version}')])[${nth}]`);
   }
 
   private getPanel(panelName: SurveyName): Locator {
