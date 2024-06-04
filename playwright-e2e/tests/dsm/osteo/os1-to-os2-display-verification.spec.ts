@@ -1,7 +1,7 @@
 import { expect } from '@playwright/test';
 import CohortTag from 'dsm/component/cohort-tag';
 import { FieldSettingInputType as FieldSetting, Label, Tab } from 'dsm/enums';
-import { Navigation, Study, StudyName } from 'dsm/navigation';
+import { Navigation, Samples, Study, StudyName } from 'dsm/navigation';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
 import SurveyDataTab from 'dsm/pages/tablist/survey-data-tab';
 import Select from 'dss/component/select';
@@ -13,6 +13,7 @@ import { language } from 'googleapis/build/src/apis/language';
 import OncHistoryTable from 'dsm/component/tables/onc-history-table';
 import OncHistoryTab from 'dsm/pages/tablist/onc-history-tab';
 import { OsteoOncHistoryUpload } from 'dsm/component/models/onc-history-upload-interface';
+import KitsSearchPage, { SearchByField } from 'dsm/pages/kits-search-page';
 
 test.describe.serial(`${StudyName.OSTEO} -> ${StudyName.OSTEO2}: Verify expected display of participant information @dsm`, () => {
   //Use 1 participant throughout the test to check the display of information
@@ -782,7 +783,15 @@ test.describe.serial(`${StudyName.OSTEO} -> ${StudyName.OSTEO2}: Verify expected
 
   //TODO add a sample kit to OS1 test utility ptps
   test.skip(`OS1: Verify OS1 kits cannot be found in OS2`, async ({ page, request }) => {
-    //Check Kit Search page
+    navigation = new Navigation(page, request);
+    await new Select(page, { label: 'Select study' }).selectOption(StudyName.OSTEO);
+
+    //Check using the Kit Search page
+    const kitSearchPage = await navigation.selectFromSamples<KitsSearchPage>(Samples.SEARCH);
+    await kitSearchPage.waitForReady();
+    await kitSearchPage.searchByField(SearchByField.SHORT_ID, shortID);
+
+    //Get a list of the participant's kit shipping ids
 
     //Check Sent/Received Overview just in case
   })

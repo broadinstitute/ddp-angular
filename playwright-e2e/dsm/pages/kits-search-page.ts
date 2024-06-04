@@ -117,6 +117,29 @@ export default class KitsSearchPage extends KitsPageBase {
     return nextCollaboratorSampleID;
   }
 
+  public async getKitInformationFrom(opts: { column: Label }): Promise<string[]> {
+    const { column } = opts;
+    const columnInformation: string[] = [];
+    //check that the given label is one of the known table headers
+    if (!this.TABLE_HEADERS.includes(column)) {
+      throw new Error(`Column ${column} is not present in the Kit Search page`);
+    }
+
+    //check that there are actually kits to retreive information from
+    const numberOfKits = await this.getNumberOfKits();
+    if (numberOfKits === 0) {
+      console.log('Participant does not have any kits');
+    } else {
+      const columnIndex = this.TABLE_HEADERS.indexOf(column) + 1;
+      for (let index = 1; index <= numberOfKits; index++) {
+        const tableCell = this.page.locator(`(//app-shipping-search//tbody//td[${columnIndex}])[${index}]`);
+        const cellText = await tableCell.innerText();
+        columnInformation.push(cellText);
+      }
+    }
+    return columnInformation;
+  }
+
   private async getNumberOfKits(): Promise<number> {
     return this.page.locator(`//app-shipping-search//table//tbody//tr`).count();
   }
