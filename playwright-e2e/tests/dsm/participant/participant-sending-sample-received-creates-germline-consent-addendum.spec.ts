@@ -687,7 +687,7 @@ async function prepareSentKit(shortID: string,
   await kitsSentPage.assertDisplayedKitTypes(expectedKitTypes);
   await kitsSentPage.selectKitType(kitType);
   await kitsSentPage.assertReloadKitListBtn();
-  await kitsSentPage.assertTableHeader();
+  await kitsSentPage.assertTableHeader({ isClinicalKit: true });
   await kitsSentPage.search(Label.MF_CODE, kitLabel, { count: 1 });
 
   const sentDate = await kitsSentPage.getData(Label.SENT);

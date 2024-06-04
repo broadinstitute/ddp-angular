@@ -177,7 +177,7 @@ test.describe.serial('Blood Kits upload flow', () => {
       await kitsSentPage.assertDisplayedKitTypes(expectedKitTypes);
       await kitsSentPage.selectKitType(kitType);
       await kitsSentPage.assertReloadKitListBtn();
-      await kitsSentPage.assertTableHeader(isClinicalStudy);
+      await kitsSentPage.assertTableHeader({ isClinicalKit: isClinicalStudy });
       await kitsSentPage.search(Label.MF_CODE, kitLabel, { count: 1 });
 
       const sentDate = await kitsSentPage.getData(Label.SENT);
@@ -194,7 +194,7 @@ test.describe.serial('Blood Kits upload flow', () => {
       await kitsReceivedPage.selectKitType(kitType);
       await kitsReceivedPage.assertDisplayedKitTypes(expectedKitTypes);
       await kitsReceivedPage.assertReloadKitListBtn();
-      await kitsReceivedPage.assertTableHeader(isClinicalStudy);
+      await kitsReceivedPage.assertTableHeader({ isClinicalKit: isClinicalStudy });
       await kitsReceivedPage.search(Label.MF_CODE, kitLabel);
       await kitsReceivedPage.assertDisplayedRowsCount(1);
       const receivedDate = await kitsReceivedPage.getData(Label.RECEIVED);
