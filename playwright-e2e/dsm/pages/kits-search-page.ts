@@ -134,7 +134,7 @@ export default class KitsSearchPage extends KitsPageBase {
     //Check if there are actually kits to retreive information from
     const numberOfKits = await this.getNumberOfKits();
     if (numberOfKits === 0) {
-      console.log('Participant does not have any kits');
+      logInfo('Kit Search page: Participant does not have any kits');
       //Verify notification message "Kit was not found." is displayed
       const noKitsFoundMessage = this.page.locator(`//app-shipping-search//h3[normalize-space(text())='Kit was not found.']`);
       await expect(noKitsFoundMessage).toBeVisible();
