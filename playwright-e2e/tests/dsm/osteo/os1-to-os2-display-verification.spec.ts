@@ -799,9 +799,24 @@ test.describe.serial(`${StudyName.OSTEO} -> ${StudyName.OSTEO2}: Verify expected
     }
   })
 
-  test.skip(`OS2: Verify OS2 kits cannot be found in OS1`, async ({ page, request }) => {
-    //Check Kit Search page
+  test(`OS2: Verify OS2 kits cannot be found in OS1`, async ({ page, request }) => {
+    navigation = new Navigation(page, request);
+    await new Select(page, { label: 'Select study' }).selectOption(StudyName.OSTEO2);
 
-    //Check Sent/Received Overview just in case
+    //Check using the Kit Search page
+    const kitSearchPage = await navigation.selectFromSamples<KitsSearchPage>(Samples.SEARCH);
+    await kitSearchPage.waitForReady();
+    await kitSearchPage.searchByField(SearchByField.SHORT_ID, shortID);
+
+    //Get a list of the participant's kit shipping ids
+    const clinicalShippingIDs = await kitSearchPage.getKitInformationFrom({ column: Label.SHIPPING_ID });
+
+    //If the participant had kits in OS2, check for them in OS1
+    if (clinicalShippingIDs.length >= 1) {
+      await navigation.selectStudy(StudyName.OSTEO);
+      await navigation.selectFromSamples<KitsSearchPage>(Samples.SEARCH);
+      await kitSearchPage.searchByField(SearchByField.SHORT_ID, shortID);
+      await kitSearchPage.checkForAbsenceOfKitInformationInColumn({ column: Label.SHIPPING_ID, kitInformation: clinicalShippingIDs });
+    }
   })
 });
