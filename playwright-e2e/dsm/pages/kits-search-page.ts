@@ -128,7 +128,7 @@ export default class KitsSearchPage extends KitsPageBase {
     //check that there are actually kits to retreive information from
     const numberOfKits = await this.getNumberOfKits();
     if (numberOfKits === 0) {
-      console.log('Participant does not have any kits');
+      console.log('Participant does not have any kits'); //Didn't seem like it should throw an error here so putting in a logging message
     } else {
       const columnIndex = this.TABLE_HEADERS.indexOf(column) + 1;
       for (let index = 1; index <= numberOfKits; index++) {
