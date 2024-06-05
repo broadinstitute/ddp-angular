@@ -814,7 +814,7 @@ test.describe.serial(`${StudyName.OSTEO} -> ${StudyName.OSTEO2}: Verify expected
     //If the participant had kits in OS2, check for them in OS1
     if (clinicalShippingIDs.length >= 1) {
       await navigation.selectStudy(StudyName.OSTEO);
-      await navigation.selectFromSamples<KitsSearchPage>(Samples.SEARCH);
+      await kitSearchPage.waitForReady();
       await kitSearchPage.searchByField(SearchByField.SHORT_ID, shortID);
       await kitSearchPage.checkForAbsenceOfKitInformationInColumn({ column: Label.SHIPPING_ID, kitInformation: clinicalShippingIDs });
     }

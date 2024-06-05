@@ -64,7 +64,6 @@ export default class OncHistoryTable extends Table {
       case InputTypeEnum.SELECT:
         //Onc History Request column has a possible value of 'Unable to Obtain' which makes the immediate column no longer a dropdown
         //in order to retreive its value, using the below (which can also get the current dropdown value)
-        console.log(`InputType.Select value: ${await cell.innerText()}`);
         value = cell.innerText();
         break;
       default:

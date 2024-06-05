@@ -159,9 +159,9 @@ export default class KitsSearchPage extends KitsPageBase {
     const columnIndex = this.TABLE_HEADERS.indexOf(column) + 1;
     for (let index = 0; index < kitInformation.length; index++) {
       const information = kitInformation[index];
-      console.log(`Checking for a table cell in Kit Search page containing: ${information} in column ${column}`);
-      const tableCell = this.page.locator(`//app-shipping-search//tbody//td[normalize-space(text())='${information}]`);
-      await expect(tableCell).not.toBeVisible();
+      logInfo(`Checking to see if column ${column} contains: ${information}`);
+      const tableCell = this.page.locator(`//app-shipping-search//tbody//td[normalize-space(text())='${information}']`);
+      await expect(tableCell).toHaveCount(0);
     }
   }
 
