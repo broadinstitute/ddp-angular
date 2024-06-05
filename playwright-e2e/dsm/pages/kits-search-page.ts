@@ -2,9 +2,11 @@ import { expect, Locator, Page } from '@playwright/test';
 import DatePicker from 'dsm/component/date-picker';
 import Select from 'dss/component/select';
 import Table from 'dss/component/table';
-import { waitForNoSpinner, waitForResponse } from 'utils/test-utils';
+import { studyShortName, waitForNoSpinner, waitForResponse } from 'utils/test-utils';
 import KitsPageBase from 'dsm/pages/kits-page-base';
-import { Label } from 'dsm/enums';
+import { KitType, Label } from 'dsm/enums';
+import { StudyName } from 'dsm/navigation';
+import { logInfo } from 'utils/log-utils';
 
 export enum SearchByField {
   SHORT_ID = 'Short ID',
@@ -84,5 +86,38 @@ export default class KitsSearchPage extends KitsPageBase {
     const saveDateButton = dateField.locator(`//ancestor::app-field-datepicker//button[normalize-space()='Save Date']`);
     await expect(saveDateButton).toBeVisible();
     await saveDateButton.click();
+  }
+
+  public async estimateNextKitCollaboratorSampleID(opts: { participantShortID: string, kitType: KitType, studyName: StudyName }): Promise<string> {
+    const { participantShortID, kitType, studyName } = opts;
+    const studyInfo = studyShortName(studyName);
+    const sampleIDPrefix = studyInfo.collaboratorPrefix;
+    //e.g. Project_ABCDEF_SALIVA - is an example of a base collaborator sample id
+    let nextCollaboratorSampleID = `${sampleIDPrefix}_${participantShortID}_${kitType}`;
+
+    await this.searchByField(SearchByField.SHORT_ID, participantShortID);
+    const numberOfKits = await this.getNumberOfKits();
+    logInfo(`Kits Search Page - Spotted number of kits for ${participantShortID}: ${numberOfKits}`);
+    let currentNumberOfSpecifiedKitType = 0;
+    const typeHeaderIndex = this.TABLE_HEADERS.indexOf(Label.TYPE) + 1;
+
+    for (let index = 1; index <= numberOfKits; index++) {
+      const currentKit = this.page.locator(`(//app-shipping-search//table//tbody//tr//td[${typeHeaderIndex}])[${index}]`);
+      const currentKitType = await currentKit.innerText();
+      if (currentKitType === kitType) {
+        currentNumberOfSpecifiedKitType++;
+      }
+    }
+
+    if (currentNumberOfSpecifiedKitType >= 1) {
+      //e.g. Project_ABCDEF_SALIVA_2 if the participant currently has just 1 saliva kit
+      nextCollaboratorSampleID = `${sampleIDPrefix}_${participantShortID}_${kitType}_${currentNumberOfSpecifiedKitType + 1}`;
+    }
+
+    return nextCollaboratorSampleID;
+  }
+
+  private async getNumberOfKits(): Promise<number> {
+    return this.page.locator(`//app-shipping-search//table//tbody//tr`).count();
   }
 }

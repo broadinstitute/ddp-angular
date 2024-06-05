@@ -10,7 +10,7 @@ export default class KitsSentPage extends KitsPageBase {
   TABLE_HEADERS = [Label.SHORT_ID, Label.SHIPPING_ID,
     Label.TRACKING_NUMBER, Label.TRACKING_RETURN,
     Label.SENT, Label.MF_CODE, Label.DDP_REALM,
-    Label.TYPE, Label.SAMPLE_TYPE];
+    Label.TYPE];
 
   constructor(page: Page) {
     super(page);
@@ -57,7 +57,11 @@ export default class KitsSentPage extends KitsPageBase {
     }
   }
 
-  public async assertTableHeader(): Promise<void> {
+  public async assertTableHeader(opts: { isClinicalKit?: boolean }): Promise<void> {
+    const { isClinicalKit = false } = opts;
+    if (isClinicalKit) {
+      this.TABLE_HEADERS.push(Label.SAMPLE_TYPE);
+    }
     assertTableHeaders(await this.kitsTable.getHeaderTexts(), this.TABLE_HEADERS);
   }
 

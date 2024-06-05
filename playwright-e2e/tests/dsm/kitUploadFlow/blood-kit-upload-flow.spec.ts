@@ -21,6 +21,7 @@ import KitsReceivedPage from 'dsm/pages/kits-received-page';
 import TrackingScanPage from 'dsm/pages/scan/tracking-scan-page';
 import {getDate} from 'utils/date-utils';
 import { logInfo } from 'utils/log-utils';
+import KitsSearchPage from 'dsm/pages/kits-search-page';
 
 // don't run in parallel
 test.describe.serial('Blood Kits upload flow', () => {
@@ -34,10 +35,15 @@ test.describe.serial('Blood Kits upload flow', () => {
   let kitLabel: string;
   let trackingLabel: string;
   let shippingID: string;
+  let isClinicalStudy;
+  let hasValidatedContactInformation = false;
+  let nextKitCollaboratorSampleID = '';
 
   let testResultDir: string;
 
-  const studies = [StudyName.OSTEO2];
+  const studies = [StudyName.OSTEO2, StudyName.PANCAN];
+  const clinicalStudies = [StudyName.LMS, StudyName.OSTEO2];
+  const studiesWithContactInformationColumn = [StudyName.LMS, StudyName.OSTEO2, StudyName.PANCAN];
   const kitType = KitType.BLOOD;
   const expectedKitTypes = [KitType.SALIVA, KitType.BLOOD];
 
@@ -51,6 +57,15 @@ test.describe.serial('Blood Kits upload flow', () => {
   for (const study of studies) {
     test(`Should upload a single kit for one participant @functional @dsm @${study}`, async ({page}, testInfo) => {
       testResultDir = testInfo.outputDir;
+      if (clinicalStudies.includes(study)) {
+        isClinicalStudy = true;
+      } else {
+        isClinicalStudy = false;
+      }
+
+      if (studiesWithContactInformationColumn.includes(study)) {
+        hasValidatedContactInformation = true;
+      }
 
       await welcomePage.selectStudy(study);
       await homePage.assertWelcomeTitle();
@@ -60,7 +75,10 @@ test.describe.serial('Blood Kits upload flow', () => {
       await participantListPage.waitForReady();
 
       // find the right participant
-      const testParticipantIndex = await participantListPage.findParticipantForKitUpload({ allowNewYorkerOrCanadian: false });
+      const testParticipantIndex = await participantListPage.findParticipantForKitUpload({
+        allowNewYorkerOrCanadian: false,
+        hasContactInfomationColumn: hasValidatedContactInformation
+      });
 
       // Collects all the necessary data for kit upload
       const participantListTable = participantListPage.participantListTable;
@@ -85,6 +103,17 @@ test.describe.serial('Blood Kits upload flow', () => {
         kitUploadInfo.address.country = (await contactInformationTab.getCountry()) || kitUploadInfo.address.country;
       }
 
+      //estimate the next kit's sample collaborator id if currently checking a research kit - since that's the best way to verify it later
+      if (!clinicalStudies.includes(study)) {
+        const searchPage = await navigation.selectFromSamples<KitsSearchPage>(Samples.SEARCH);
+        nextKitCollaboratorSampleID = await searchPage.estimateNextKitCollaboratorSampleID({
+          participantShortID: shortID,
+          kitType: KitType.BLOOD,
+          studyName: study
+        });
+        logInfo(`Estimated collaborator sample id for ${study} participant ${shortID}: ${nextKitCollaboratorSampleID}`);
+      }
+
       // deactivate all kits for the participant
       const kitsWithoutLabelPage = await navigation.selectFromSamples<KitsWithoutLabelPage>(Samples.KITS_WITHOUT_LABELS);
       await kitsWithoutLabelPage.waitForReady();
@@ -103,11 +132,13 @@ test.describe.serial('Blood Kits upload flow', () => {
       await kitUploadPage.uploadFile(kitType, [kitUploadInfo], study, testResultDir);
 
       // initial scan
-      const initialScanPage = await navigation.selectFromSamples<InitialScanPage>(Samples.INITIAL_SCAN);
-      await initialScanPage.assertPageTitle();
       kitLabel = `PECGS-${crypto.randomUUID().toString().substring(0, 10)}`;
-      await initialScanPage.fillScanPairs([kitLabel, shortID]);
-      await initialScanPage.save();
+      if (isClinicalStudy) {
+        const initialScanPage = await navigation.selectFromSamples<InitialScanPage>(Samples.INITIAL_SCAN);
+        await initialScanPage.assertPageTitle();
+        await initialScanPage.fillScanPairs([kitLabel, shortID]);
+        await initialScanPage.save();
+      }
 
       // Kits without label for extracting a shipping ID
       await navigation.selectFromSamples<KitsWithoutLabelPage>(Samples.KITS_WITHOUT_LABELS);
@@ -146,7 +177,7 @@ test.describe.serial('Blood Kits upload flow', () => {
       await kitsSentPage.assertDisplayedKitTypes(expectedKitTypes);
       await kitsSentPage.selectKitType(kitType);
       await kitsSentPage.assertReloadKitListBtn();
-      await kitsSentPage.assertTableHeader();
+      await kitsSentPage.assertTableHeader({ isClinicalKit: isClinicalStudy });
       await kitsSentPage.search(Label.MF_CODE, kitLabel, { count: 1 });
 
       const sentDate = await kitsSentPage.getData(Label.SENT);
@@ -154,12 +185,16 @@ test.describe.serial('Blood Kits upload flow', () => {
 
       // kits received page
       const kitsReceivedPage = await navigation.selectFromSamples<KitsReceivedPage>(Samples.RECEIVED);
-      await kitsReceivedPage.kitReceivedRequest({mfCode: kitLabel});
+      await kitsReceivedPage.kitReceivedRequest({
+        mfCode: kitLabel,
+        isClinicalKit: isClinicalStudy,
+        estimatedCollaboratorSampleID: nextKitCollaboratorSampleID
+      });
       await kitsReceivedPage.waitForReady();
       await kitsReceivedPage.selectKitType(kitType);
       await kitsReceivedPage.assertDisplayedKitTypes(expectedKitTypes);
       await kitsReceivedPage.assertReloadKitListBtn();
-      await kitsReceivedPage.assertTableHeader();
+      await kitsReceivedPage.assertTableHeader({ isClinicalKit: isClinicalStudy });
       await kitsReceivedPage.search(Label.MF_CODE, kitLabel);
       await kitsReceivedPage.assertDisplayedRowsCount(1);
       const receivedDate = await kitsReceivedPage.getData(Label.RECEIVED);
