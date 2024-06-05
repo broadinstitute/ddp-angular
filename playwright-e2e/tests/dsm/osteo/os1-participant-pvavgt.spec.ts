@@ -7,7 +7,7 @@ import OncHistoryTab from 'dsm/pages/tablist/onc-history-tab';
 import CohortTag from 'dsm/component/cohort-tag';
 import KitsSearchPage, { SearchByField } from 'dsm/pages/kits-search-page';
 import { Navigation, Samples, Study, StudyName } from 'dsm/navigation';
-import { SortOrder } from 'dss/component/table';
+import Table, { SortOrder } from 'dss/component/table';
 import { WelcomePage } from 'dsm/pages/welcome-page';
 
 const { DSM_BASE_URL } = process.env;
@@ -112,8 +112,12 @@ test.describe.serial('Osteo1 Participant', () => {
     await kitsSearchPage.waitForReady();
 
     const table = await kitsSearchPage.searchByField(SearchByField.SHORT_ID, shortID);
-    await table.sort(Label.TYPE, SortOrder.ASC);
-    await expect(table.tableLocator()).toHaveScreenshot('kits-search-results.png');
+    if (table instanceof Table) {
+      await table.sort(Label.TYPE, SortOrder.ASC);
+      await expect(table.tableLocator()).toHaveScreenshot('kits-search-results.png');
+    } else {
+      throw new Error(`No table was returned from the search for participant ${shortID}`);
+    }
   });
 
   test(`Should not find Osteo1 participant in Osteo2 study`, async ({page, request}) => {
