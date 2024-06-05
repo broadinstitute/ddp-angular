@@ -111,7 +111,11 @@ test.describe('Sending SAMPLE_RECEIVED event to DSS', () => {
       const kitsReceivedPage = await navigation.selectFromSamples<KitsReceivedPage>(Samples.RECEIVED);
       await kitsReceivedPage.waitForReady();
       await kitsReceivedPage.selectKitType(KitType.SALIVA);
-      await kitsReceivedPage.kitReceivedRequest({mfCode: kitLabel});
+      await kitsReceivedPage.kitReceivedRequest({
+        mfCode: kitLabel,
+        isTumorSample: false,
+        isClinicalKit: true
+      });
 
       //Accession the tumor sample second (just receive the sample using the SM-ID)
       await kitsReceivedPage.kitReceivedRequest({
@@ -218,7 +222,11 @@ test.describe('Sending SAMPLE_RECEIVED event to DSS', () => {
       const kitsReceivedPage = await navigation.selectFromSamples<KitsReceivedPage>(Samples.RECEIVED);
       await kitsReceivedPage.waitForReady();
       await kitsReceivedPage.selectKitType(KitType.BLOOD);
-      await kitsReceivedPage.kitReceivedRequest({mfCode: kitLabel});
+      await kitsReceivedPage.kitReceivedRequest({
+        mfCode: kitLabel,
+        isTumorSample: false,
+        isClinicalKit: true
+      });
 
       //Accession the tumor sample second (just receive the sample using the SM-ID)
       await kitsReceivedPage.kitReceivedRequest({
@@ -327,13 +335,18 @@ test.describe('Sending SAMPLE_RECEIVED event to DSS', () => {
         mfCode: smID,
         isTumorSample: true,
         accessionNumber: randomAccessionNumber,
-        tumorCollaboratorSampleID: tumorSampleID
+        tumorCollaboratorSampleID: tumorSampleID,
+        isClinicalKit: false // since it's a tumor sample and not an uploaded kit
       });
 
       //Receive the saliva kit second
       await kitsReceivedPage.waitForReady();
       await kitsReceivedPage.selectKitType(KitType.SALIVA);
-      await kitsReceivedPage.kitReceivedRequest({mfCode: kitLabel});
+      await kitsReceivedPage.kitReceivedRequest({
+        mfCode: kitLabel,
+        isTumorSample: false,
+        isClinicalKit: true
+      });
 
       //Confirm that the germline consent addendum was created - check that the GERMLINE_CONSENT_ADDENDUM_PEDIATRIC Survey Created column is not empty
       await navigation.selectFromStudy<ParticipantListPage>(Study.PARTICIPANT_LIST);
@@ -434,13 +447,18 @@ test.describe('Sending SAMPLE_RECEIVED event to DSS', () => {
         mfCode: smID,
         isTumorSample: true,
         accessionNumber: randomAccessionNumber,
-        tumorCollaboratorSampleID: tumorSampleID
+        tumorCollaboratorSampleID: tumorSampleID,
+        isClinicalKit: false // since it's a tumor sample and not an uploaded kit
       });
 
       //Receive the blood kit second
       await kitsReceivedPage.waitForReady();
       await kitsReceivedPage.selectKitType(KitType.BLOOD);
-      await kitsReceivedPage.kitReceivedRequest({mfCode: kitLabel});
+      await kitsReceivedPage.kitReceivedRequest({
+        mfCode: kitLabel,
+        isTumorSample: false,
+        isClinicalKit: true
+      });
 
       //Confirm that the germline consent addendum was created - check that the GERMLINE_CONSENT_ADDENDUM_PEDIATRIC Survey Created column is not empty
       await navigation.selectFromStudy<ParticipantListPage>(Study.PARTICIPANT_LIST);
@@ -687,7 +705,7 @@ async function prepareSentKit(shortID: string,
   await kitsSentPage.assertDisplayedKitTypes(expectedKitTypes);
   await kitsSentPage.selectKitType(kitType);
   await kitsSentPage.assertReloadKitListBtn();
-  await kitsSentPage.assertTableHeader();
+  await kitsSentPage.assertTableHeader({ isClinicalKit: true });
   await kitsSentPage.search(Label.MF_CODE, kitLabel, { count: 1 });
 
   const sentDate = await kitsSentPage.getData(Label.SENT);
