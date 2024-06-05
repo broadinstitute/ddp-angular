@@ -112,12 +112,8 @@ test.describe.serial('Osteo1 Participant', () => {
     await kitsSearchPage.waitForReady();
 
     const table = await kitsSearchPage.searchByField(SearchByField.SHORT_ID, shortID);
-    if (table instanceof Table) {
-      await table.sort(Label.TYPE, SortOrder.ASC);
-      await expect(table.tableLocator()).toHaveScreenshot('kits-search-results.png');
-    } else {
-      throw new Error(`No table was returned from the search for participant ${shortID}`);
-    }
+    await table.sort(Label.TYPE, SortOrder.ASC);
+    await expect(table.tableLocator()).toHaveScreenshot('kits-search-results.png');
   });
 
   test(`Should not find Osteo1 participant in Osteo2 study`, async ({page, request}) => {

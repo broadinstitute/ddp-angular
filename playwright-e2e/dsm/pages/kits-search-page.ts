@@ -42,7 +42,7 @@ export default class KitsSearchPage extends KitsPageBase {
     await expect(this.searchByFieldSelect.toLocator()).toBeVisible();
   }
 
-  async searchByField(searchField: SearchByField, value: string): Promise<Table | void> {
+  async searchByField(searchField: SearchByField, value: string): Promise<Table> {
     await this.searchByFieldSelect.selectOption(searchField);
     const locator = this.page.locator('//div[button[normalize-space()="Search Kit"]]');
     await locator.locator('//input').fill(value);
@@ -56,7 +56,7 @@ export default class KitsSearchPage extends KitsPageBase {
     const table = new Table(this.page);
     if (numberOfKits === 0) {
       const noKitsFoundMessage = this.page.locator(`//app-shipping-search//h3[normalize-space(text())='Kit was not found.']`);
-      await expect(noKitsFoundMessage).toBeVisible(); //no table in the page, so return nothing
+      await expect(noKitsFoundMessage).toBeVisible();
     } else {
       await table.waitForReady();
     }
