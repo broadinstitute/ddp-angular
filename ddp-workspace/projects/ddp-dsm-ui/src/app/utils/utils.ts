@@ -53,7 +53,7 @@ export class Utils {
     if (date != null) {
       return date.toString();
     }
-    return '';
+    return null;
   }
 
   // used to get db saved date string (yyyy-MM-dd) as date
