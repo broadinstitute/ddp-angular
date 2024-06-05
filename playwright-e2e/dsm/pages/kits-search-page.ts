@@ -42,7 +42,7 @@ export default class KitsSearchPage extends KitsPageBase {
     await expect(this.searchByFieldSelect.toLocator()).toBeVisible();
   }
 
-  async searchByField(searchField: SearchByField, value: string): Promise<Table> {
+  async searchByField(searchField: SearchByField, value: string): Promise<Table | void> {
     await this.searchByFieldSelect.selectOption(searchField);
     const locator = this.page.locator('//div[button[normalize-space()="Search Kit"]]');
     await locator.locator('//input').fill(value);
@@ -52,9 +52,15 @@ export default class KitsSearchPage extends KitsPageBase {
     ]);
     await waitForNoSpinner(this.page);
 
+    const numberOfKits = await this.getNumberOfKits();
     const table = new Table(this.page);
-    await table.waitForReady();
-    return table
+    if (numberOfKits === 0) {
+      const noKitsFoundMessage = this.page.locator(`//app-shipping-search//h3[normalize-space(text())='Kit was not found.']`);
+      await expect(noKitsFoundMessage).toBeVisible(); //no table in the page, so return nothing
+    } else {
+      await table.waitForReady();
+    }
+    return table;
   }
 
   get searchByFieldSelect(): Select {
@@ -120,24 +126,43 @@ export default class KitsSearchPage extends KitsPageBase {
   public async getKitInformationFrom(opts: { column: Label }): Promise<string[]> {
     const { column } = opts;
     const columnInformation: string[] = [];
-    //check that the given label is one of the known table headers
+    //Check that the given label is one of the known table headers
     if (!this.TABLE_HEADERS.includes(column)) {
       throw new Error(`Column ${column} is not present in the Kit Search page`);
     }
 
-    //check that there are actually kits to retreive information from
+    //Check if there are actually kits to retreive information from
     const numberOfKits = await this.getNumberOfKits();
     if (numberOfKits === 0) {
-      console.log('Participant does not have any kits'); //Didn't seem like it should throw an error here so putting in a logging message
+      console.log('Participant does not have any kits');
+      //Verify notification message "Kit was not found." is displayed
+      const noKitsFoundMessage = this.page.locator(`//app-shipping-search//h3[normalize-space(text())='Kit was not found.']`);
+      await expect(noKitsFoundMessage).toBeVisible();
     } else {
       const columnIndex = this.TABLE_HEADERS.indexOf(column) + 1;
-      for (let index = 1; index <= numberOfKits; index++) {
-        const tableCell = this.page.locator(`(//app-shipping-search//tbody//td[${columnIndex}])[${index}]`);
+      for (let rowIndex = 1; rowIndex <= numberOfKits; rowIndex++) {
+        const tableCell = this.page.locator(`(//app-shipping-search//tbody//td[${columnIndex}])[${rowIndex}]`);
         const cellText = await tableCell.innerText();
         columnInformation.push(cellText);
       }
     }
     return columnInformation;
+  }
+
+  public async checkForAbsenceOfKitInformationInColumn(opts: { column: Label, kitInformation: string[] }): Promise<void> {
+    const { column, kitInformation } = opts;
+
+    //Check that the given label is one of the known table headers
+    if (!this.TABLE_HEADERS.includes(column)) {
+      throw new Error(`Column ${column} is not present in the Kit Search page`);
+    }
+    const columnIndex = this.TABLE_HEADERS.indexOf(column) + 1;
+    for (let index = 0; index < kitInformation.length; index++) {
+      const information = kitInformation[index];
+      console.log(`Checking for a table cell in Kit Search page containing: ${information} in column ${column}`);
+      const tableCell = this.page.locator(`//app-shipping-search//tbody//td[normalize-space(text())='${information}]`);
+      await expect(tableCell).not.toBeVisible();
+    }
   }
 
   private async getNumberOfKits(): Promise<number> {

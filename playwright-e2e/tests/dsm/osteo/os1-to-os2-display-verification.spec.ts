@@ -462,11 +462,7 @@ test.describe.serial(`${StudyName.OSTEO} -> ${StudyName.OSTEO2}: Verify expected
 
       await participantPage.backToList();
       await participantListPage.waitForReady();
-      console.log(`Total onc histories: ${previousOncHistory.length}\n\n`);
-      /*for (let index = 0; index < previousOncHistory.length; index++) {
-        const oncHistory = previousOncHistory[index];
-        console.log(`Onc history reuqest status: ${oncHistory.REQUEST_STATUS}`);
-      }*/
+      logInfo(`Total onc histories: ${previousOncHistory.length}\n\n`);
     })
 
     await test.step(`Check OS2 for OS1 onc history`, async () => {
@@ -796,7 +792,10 @@ test.describe.serial(`${StudyName.OSTEO} -> ${StudyName.OSTEO2}: Verify expected
 
     //If the participant had kits in OS1, check for them in OS2
     if (researchShippingIDs.length >= 1) {
-
+      await navigation.selectStudy(StudyName.OSTEO2);
+      await navigation.selectFromSamples<KitsSearchPage>(Samples.SEARCH);
+      await kitSearchPage.searchByField(SearchByField.SHORT_ID, shortID);
+      await kitSearchPage.checkForAbsenceOfKitInformationInColumn({ column: Label.SHIPPING_ID, kitInformation: researchShippingIDs });
     }
   })
 
