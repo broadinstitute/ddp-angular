@@ -652,7 +652,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
         v = value.checked;
       }
     }
-    if (v !== null || parameterName.includes('faxSent')) {
+    if (v !== null || this.isFaxDateParameter(parameterName)) {
       const patch1 = new PatchUtil(
         oncHis.oncHistoryDetailId, this.role.userMail(), {name: parameterName, value: v},
         null, 'participantId', oncHis.participantId, Statics.ONCDETAIL_ALIAS, null,
@@ -681,6 +681,11 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
         }
       });
     }
+  }
+
+  private isFaxDateParameter(parameterName: string): boolean {
+    console.log('parameterName: ' + parameterName);
+    return parameterName === 'oD.faxSent' || parameterName === 'oD.faxSent2' || parameterName === 'oD.faxSent3';
   }
 
   public leavePage(): boolean {
@@ -828,7 +833,10 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
               // TODO: check is it correct ? - shadowed variables `date`
               // eslint-disable-next-line @typescript-eslint/no-shadow
               const date = new Date();
-              const formattedDate = Utils.getFormattedDate(date);
+              let formattedDate = Utils.getFormattedDate(date);
+              if (formattedDate === '') {
+                formattedDate = null;
+              }
               if (!oncHis.faxSent) {
                 oncHis.faxSent = formattedDate;
                 oncHis.faxSentBy = this.role.userID();
