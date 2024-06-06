@@ -258,6 +258,7 @@ export default class ParticipantListPage extends DsmPageBase {
    * @param opts prefix - the prefix or name of the test users to be used in the search e.g. E2E or KidFirst for playwright created participants. Defaults to 'E2E'
    * @param opts shouldHaveOncHistory - the returned participant should have onc history
    * @param opts shouldHave Kits - the returned participant should have kits (including any that are just in 'Waiting on GP' status (i.e. they're in Kits w/o Label))
+   * @param opts cohortTags - a list of the the cohort tags the participant is expected to have
    * @returns A participant with the requested tab
    */
   async findParticipantWithTab(
@@ -339,7 +340,7 @@ export default class ParticipantListPage extends DsmPageBase {
               //Search for participants with specific cohort tags
               const tagArray = value.esData.dsm.cohortTag;
               if (!tagArray) {
-                //If for some reason, the participant hdoes not have any cohort tags, keep searching
+                //If for some reason, the participant does not have any cohort tags, keep searching
                 continue;
               }
               const currentParticipantTags: string[] = [];
@@ -361,7 +362,7 @@ export default class ParticipantListPage extends DsmPageBase {
                 }
               }
 
-              if (isSubset({ cohortTagGroup: currentParticipantTags, targetCohortTags: cohortTags })) {
+              if (cohortTags && isSubset({ cohortTagGroup: currentParticipantTags, targetCohortTags: cohortTags })) {
                 shortID = JSON.stringify(value.esData.profile.hruid).replace(/['"]+/g, '');
                 console.log(`Participant ${shortID} has the tags [ ${cohortTags.join(', ')} ]`);
               }
