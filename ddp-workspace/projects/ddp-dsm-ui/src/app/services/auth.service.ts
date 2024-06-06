@@ -171,8 +171,7 @@ export class Auth implements OnDestroy {
   public buildHeaders(): any {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      Accept: 'application/json',
-      Authorization: this.sessionService.getAuthBearerHeaderValue()
+      Accept: 'application/json'
     });
     return {headers, withCredentials: true};
   }
