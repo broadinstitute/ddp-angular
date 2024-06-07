@@ -336,7 +336,7 @@ export default class ParticipantListPage extends DsmPageBase {
 
           const participantID = value.participant.participantId; //Make sure when searching for onc history that the participant has a participantId in ES
           if (medicalRecord && participantID) {
-            if (cohortTags || shouldHaveOncHistory || shouldHaveKits) {
+            if (cohortTags.length >= 1 || shouldHaveOncHistory || shouldHaveKits) {
               //Search for participants with specific cohort tags
               const tagArray = value.esData.dsm.cohortTag;
               if (!tagArray) {
