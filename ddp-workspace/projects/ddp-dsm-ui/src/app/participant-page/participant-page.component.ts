@@ -652,8 +652,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
         v = value.checked;
       }
     }
-    if (v !== null) {
-
+    if (v !== null || this.isFaxDateParameter(parameterName)) {
       const patch1 = new PatchUtil(
         oncHis.oncHistoryDetailId, this.role.userMail(), {name: parameterName, value: v},
         null, 'participantId', oncHis.participantId, Statics.ONCDETAIL_ALIAS, null,
@@ -682,6 +681,11 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
         }
       });
     }
+  }
+
+  private isFaxDateParameter(parameterName: string): boolean {
+    console.log('parameterName: ' + parameterName);
+    return parameterName === 'oD.faxSent' || parameterName === 'oD.faxSent2' || parameterName === 'oD.faxSent3';
   }
 
   public leavePage(): boolean {
@@ -829,19 +833,22 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
               // TODO: check is it correct ? - shadowed variables `date`
               // eslint-disable-next-line @typescript-eslint/no-shadow
               const date = new Date();
-              const formattedDate = Utils.getFormattedDate(date);
-              if (oncHis.faxSent == null) {
+              let formattedDate = Utils.getFormattedDate(date);
+              if (formattedDate === '') {
+                formattedDate = null;
+              }
+              if (!oncHis.faxSent) {
                 oncHis.faxSent = formattedDate;
                 oncHis.faxSentBy = this.role.userID();
                 this.oncHistoryValueChanged(oncHis.faxSent, 'faxSent', oncHis);
-              } else if (oncHis.faxSent2 == null) {
+              } else if (!oncHis.faxSent2) {
                 //If current date is not already on FaxSent1
                 if (oncHis.faxSent !== formattedDate) {
                   oncHis.faxSent2 = formattedDate;
                   oncHis.faxSent2By = this.role.userID();
                   this.oncHistoryValueChanged(oncHis.faxSent2, 'faxSent2', oncHis);
                 }
-              } else if (oncHis.faxSent3 == null) {
+              } else if (!oncHis.faxSent3) {
                 //If current date is not already on either FaxSent1 or FaxSent2
                 if (oncHis.faxSent !== formattedDate && oncHis.faxSent2 !== formattedDate) {
                   oncHis.faxSent3 = formattedDate;
