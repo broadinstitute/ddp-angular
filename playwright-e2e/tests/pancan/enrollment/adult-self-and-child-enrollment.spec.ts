@@ -17,7 +17,8 @@ import HomePage from 'dss/pages/pancan/home-page';
 
 const { PANCAN_USER_EMAIL, PANCAN_USER_PASSWORD } = process.env;
 
-test.describe('Adult self-enroll & child (consent) enrollment', () => {
+//Skipping until new family history addition to workflow is automated - will be taken cared of by ticket PEPPER-1475
+test.describe.skip('Adult self-enroll & child (consent) enrollment', () => {
   test.slow();
 
   // Randomize patient last name

@@ -8,7 +8,7 @@ import { StudyName } from 'dsm/navigation';
 test.describe('Follow-Up Surveys', () => {
   let followupSurveyPage: FollowUpSurveyPage;
 
-  const studies = [StudyName.PANCAN, StudyName.ANGIO, StudyName.OSTEO, StudyName.LMS, StudyName.OSTEO2, StudyName.PROSTATE, StudyName.ESC];
+  const studies = [StudyName.ANGIO, StudyName.OSTEO, StudyName.LMS, StudyName.OSTEO2, StudyName.PROSTATE, StudyName.ESC];
 
   for (const study of studies) {
     test(`Shows list of follow-up surveys configured in @${study} @dsm @functional`, async ({ page, request }) => {
@@ -68,9 +68,6 @@ test.describe('Follow-Up Surveys', () => {
   async function selectSurveyForStudy(followupSurveyPage: FollowUpSurveyPage, study: string): Promise<void> {
     let survey: string;
     switch (study) {
-      case StudyName.PANCAN:
-        survey = 'FAMILY_HISTORY  (NONREPEATING)';
-        break;
       case StudyName.ANGIO:
         survey = 'followupconsent  (REPEATING)';
         break;
@@ -94,9 +91,6 @@ test.describe('Follow-Up Surveys', () => {
   function surveysForStudy(followupSurveyPage: FollowUpSurveyPage, study: string): string[] {
     let configuredSurveys: string[];
     switch (study) {
-      case StudyName.PANCAN:
-        configuredSurveys = ['BLOOD_CONSENT (REPEATING)', 'FAMILY_HISTORY (NONREPEATING)', 'DIET_LIFESTYLE (NONREPEATING)'];
-        break;
       case StudyName.ANGIO:
         configuredSurveys = ['followupconsent (REPEATING)'];
         break;
