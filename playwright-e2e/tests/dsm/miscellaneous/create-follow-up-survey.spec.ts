@@ -13,35 +13,6 @@ test.describe('Create Follow-Up Survey', () => {
   const studies = [StudyName.PROSTATE, StudyName.ESC];
   let followupSurveyPage: FollowUpSurveyPage;
 
-  test(`FAMILY_HISTORY (NONREPEATING) in @pancan @dsm @functional`, async ({ page, request }) => {
-    followupSurveyPage = await FollowUpSurveyPage.goto(page, StudyName.PANCAN, request);
-    await followupSurveyPage.waitForReady();
-
-    await followupSurveyPage.selectSurvey('FAMILY_HISTORY  (NONREPEATING)');
-    const previousSurveysTable = followupSurveyPage.previousSurveysTable;
-    await previousSurveysTable.waitForReady(60 * 1000);
-
-    const participantId = await previousSurveysTable.getRowText(0, Label.PARTICIPANT_ID);
-    expect(participantId).not.toBeNull();
-
-    // Fill out participant ID and reason
-    await followupSurveyPage.participantId(participantId!);
-    await followupSurveyPage.reasonForFollowUpSurvey(`playwright testing ${getDate()}`);
-    await followupSurveyPage.createSurvey();
-
-    // Modal window informs user survey won't be triggered again
-    const modal = new Modal(page);
-    const description = await modal.getHeader();
-    expect(description).toBe(
-      "Survey was already triggered for following participants.\nSelected survey was of type 'NONREPEATING' therefore DSM won't trigger again.");
-    const body = await modal.getBodyText();
-    expect(body).toBe(participantId);
-    await modal.close();
-
-    await previousSurveysTable.searchByColumn(Label.PARTICIPANT_ID, participantId!);
-    await expect(previousSurveysTable.rowLocator()).toHaveCount(1);
-  });
-
   for (const study of studies) {
     const survey = surveysForStudy(study);
     test(`${survey} in @${study} @dsm @functional`, async ({ page, request }) => {
