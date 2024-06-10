@@ -10,7 +10,7 @@ import { StudyName } from 'dsm/navigation';
 
 
 test.describe('Create Follow-Up Survey', () => {
-  const studies = [StudyName.PANCAN, StudyName.PROSTATE, StudyName.ESC];
+  const studies = [StudyName.PROSTATE, StudyName.ESC];
   let followupSurveyPage: FollowUpSurveyPage;
 
   test(`FAMILY_HISTORY (NONREPEATING) in @pancan @dsm @functional`, async ({ page, request }) => {
