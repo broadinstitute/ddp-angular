@@ -17,7 +17,8 @@ import HomePage from 'dss/pages/pancan/home-page';
 
 const { PANCAN_USER_EMAIL, PANCAN_USER_PASSWORD } = process.env;
 
-test.describe('Enroll myself as adult', () => {
+//Skipping until new family history addition to workflow is automated - will be taken cared of by ticket PEPPER-1475
+test.describe.skip('Enroll myself as adult', () => {
   test('can complete self-enrollment @dss @pancan @functional', async ({ page }) => {
     const pancanHomePage = new HomePage(page);
     await pancanHomePage.join({ waitForNav: true });
