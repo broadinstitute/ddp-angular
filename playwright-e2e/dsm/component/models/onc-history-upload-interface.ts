@@ -18,6 +18,7 @@ export interface OsteoOncHistoryUpload {
   FFPE?: string;
   DECALCIFICATION?: string;
   BLOCK_TO_REQUEST?: string;
+  ROW_ID?: string;
 }
 
 export interface LmsOncHistoryUpload {

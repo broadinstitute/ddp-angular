@@ -4,7 +4,7 @@ import { Navigation, Study } from 'dsm/navigation';
 import { Label, FileFormat, TextFormat, Tab, DataFilter, CustomizeView, CustomizeViewID as ID} from 'dsm/enums';
 import { WelcomePage } from 'dsm/pages/welcome-page';
 import Checkbox from 'dss/component/checkbox';
-import { shuffle, waitForNoSpinner, waitForResponse } from 'utils/test-utils';
+import { isSubset, shuffle, waitForNoSpinner, waitForResponse } from 'utils/test-utils';
 import { Filters } from 'dsm/component/filters/filters';
 import { ParticipantListTable } from 'dsm/component/tables/participant-list-table';
 import { SortOrder } from 'dss/component/table';
@@ -253,20 +253,37 @@ export default class ParticipantListPage extends DsmPageBase {
    * @param opts findPediatricParticipant - determines if an adult or child participant should be returned
    * @param opts tab - the tab to be searched for e.g. onc history tab
    * @param opts rgpProbandTab - determines if a rgp proband tab is being searched for
+   * @param opts rgpMinimumFamilySize - the minimum number of family members the RGP study participant should have
    * @param opts uriString - the uri string to use when initially filtering for participants. Defaults to '/ui/applyFilter'
    * @param opts prefix - the prefix or name of the test users to be used in the search e.g. E2E or KidFirst for playwright created participants. Defaults to 'E2E'
+   * @param opts shouldHaveOncHistory - the returned participant should have onc history
+   * @param opts shouldHave Kits - the returned participant should have kits (including any that are just in 'Waiting on GP' status (i.e. they're in Kits w/o Label))
+   * @param opts cohortTags - a list of the the cohort tags the participant is expected to have
    * @returns A participant with the requested tab
    */
   async findParticipantWithTab(
     opts: {
       isPediatric?: boolean,
       tab?: Tab,
+      shouldHaveOncHistory?: boolean,
+      shouldHaveKits?: boolean,
       rgpProbandTab?: boolean,
       rgpMinimumFamilySize?: number,
       uri?: string,
-      prefix?: string
+      prefix?: string,
+      cohortTags?: string[]
     }): Promise<string> {
-    const { isPediatric = false, tab, rgpProbandTab = false, rgpMinimumFamilySize = 1, uri = '/ui/applyFilter', prefix } = opts;
+    const {
+      isPediatric = false,
+      tab,
+      shouldHaveOncHistory = false,
+      shouldHaveKits = false,
+      rgpProbandTab = false,
+      rgpMinimumFamilySize = 1,
+      uri = '/ui/applyFilter',
+      prefix,
+      cohortTags = []
+    } = opts;
     const expectedTabs: Tab[] = [
       Tab.ONC_HISTORY,
       Tab.MEDICAL_RECORD,
@@ -319,12 +336,40 @@ export default class ParticipantListPage extends DsmPageBase {
 
           const participantID = value.participant.participantId; //Make sure when searching for onc history that the participant has a participantId in ES
           if (medicalRecord && participantID) {
-            shortID = JSON.stringify(value.esData.profile.hruid).replace(/['"]+/g, '');
-            if (!rgpProbandTab) {
-              // Do not have to find RGP Proband tab
-              logInfo(`Found participant with Short ID: ${shortID} to have tab: ${tab}`);
-              return shortID;
+            if (cohortTags.length >= 1 || shouldHaveOncHistory || shouldHaveKits) {
+              //Search for participants with specific cohort tags
+              const tagArray = value.esData.dsm.cohortTag;
+              if (!tagArray) {
+                //If for some reason, the participant does not have any cohort tags, keep searching
+                continue;
+              }
+              const currentParticipantTags: string[] = [];
+              for (const [index, value] of [...tagArray].entries()) {
+                currentParticipantTags.push(value.cohortTagName);
+              }
+
+              if (shouldHaveOncHistory) {
+                const oncHistoryDetail = value.oncHistoryDetails;
+                if (!oncHistoryDetail) {
+                  continue; //skip to check if another participant has inputted onc history data instead
+                }
+              }
+
+              if (shouldHaveKits) {
+                const kitInformation = value.kits;
+                if (!kitInformation || kitInformation[0] === undefined) {
+                  continue; //skip to check if another participant has kits instead
+                }
+              }
+
+              if (cohortTags && isSubset({ cohortTagGroup: currentParticipantTags, targetCohortTags: cohortTags })) {
+                shortID = JSON.stringify(value.esData.profile.hruid).replace(/['"]+/g, '');
+                console.log(`Participant ${shortID} has the tags [ ${cohortTags.join(', ')} ]`);
+              }
+            } else {
+              shortID = JSON.stringify(value.esData.profile.hruid).replace(/['"]+/g, '');
             }
+            return shortID;
           }
         }
 

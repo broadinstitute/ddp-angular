@@ -7,7 +7,7 @@ import OncHistoryTab from 'dsm/pages/tablist/onc-history-tab';
 import CohortTag from 'dsm/component/cohort-tag';
 import KitsSearchPage, { SearchByField } from 'dsm/pages/kits-search-page';
 import { Navigation, Samples, Study, StudyName } from 'dsm/navigation';
-import { SortOrder } from 'dss/component/table';
+import Table, { SortOrder } from 'dss/component/table';
 import { WelcomePage } from 'dsm/pages/welcome-page';
 
 const { DSM_BASE_URL } = process.env;

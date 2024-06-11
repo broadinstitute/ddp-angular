@@ -344,3 +344,26 @@ export function getDsmEnv(): string {
   const { DSM_BASE_URL } = process.env;
   return DSM_BASE_URL?.includes('dsm-test') ? 'dsm-test' : 'dsm-dev';
 }
+
+/**
+ * Checks if a subset of cohort tags can be found within the given cohort tag group
+ * @param opts cohortTagGroup - a list of cohort tags to check
+ * @param opts targetCohortTags - the cohort tags to check for
+ * @returns true || false depending on if cohortTagGroup contains the targetCohortTags
+ */
+export function isSubset(opts: { cohortTagGroup: string[], targetCohortTags: string[] }): boolean {
+  const { cohortTagGroup, targetCohortTags } = opts;
+  return targetCohortTags.every((tag) => cohortTagGroup.includes(tag));
+}
+
+export function totalNumberOfOccurences(opts: { arrayToSearch: string[], wordToSearchFor: string }): number {
+  const { arrayToSearch, wordToSearchFor } = opts;
+  let numberOfOccurrences = 0;
+  for (let index = 0; index < arrayToSearch.length; index++) {
+    const currentWord = arrayToSearch[index];
+    if (currentWord === wordToSearchFor) {
+      numberOfOccurrences++;
+    }
+  }
+  return numberOfOccurrences;
+}

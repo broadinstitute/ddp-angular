@@ -23,6 +23,15 @@ export enum DataFilter {
   REGISTERED = 'Registered',
 }
 
+export enum FieldSettingInputType {
+  CHECKBOX = 'mat-checkbox',
+  DATE = `input[@data-placeholder='mm/dd/yyyy']`,
+  NUMBER = `input[@type='number']`,
+  SELECT = `mat-select`,
+  TEXT = `input[@data-placeholder='Text']`,
+  TEXTAREA = `textarea`,
+}
+
 // Table column headers
 
 export enum CustomizeView {
@@ -218,6 +227,8 @@ export enum Label {
   CHILD_CONTACT_CREATED = 'CHILD_CONTACT Survey Created',
   CHILD_CONTACT_LAST_UPDATED = 'CHILD_CONTACT Survey Last Updated',
   CHILD_CONTACT_STATUS = 'CHILD_CONTACT Survey Status',
+  CHILD_COUNTRY = 'CHILD_COUNTRY',
+  CHILD_CURRENT_AGE = 'CHILD_CURRENT_AGE',
   CHILD_CURRENT_BODY_LOC = 'CHILD_CURRENT_BODY_LOC',
   CHILD_CURRENTLY_TREATED = 'CHILD_CURRENTLY_TREATED',
   CHILD_DATE_OF_BIRTH = `Your child’s Date of Birth`, //Apostrophe type is important - don't change to the one on the MAC laptop or it'll never retreive the webelement
@@ -272,6 +283,8 @@ export enum Label {
   CONSENT_ASSENT_TISSUE = 'CONSENT_ASSENT_TISSUE',
   CONSENT_BLOOD = 'CONSENT_BLOOD',
   CONSENT_BLOOD_NORMAL_CASE = 'Consent Blood',
+  CONSENT_DOB = 'CONSENT_DOB',
+  CONSENT_FIRSTNAME = 'CONSENT_FIRSTNAME',
   CONSENT_LASTNAME = 'CONSENT_LASTNAME',
   CONSENT_TISSUE = 'CONSENT_TISSUE',
   CONSENT_TISSUE_NORMAL_CASE = 'Consent Tissue',
@@ -469,8 +482,10 @@ export enum Label {
   LOVED_ONE_SYMPTOMS_START_TIME = 'LOVEDONE_SYMPTOMS_START_TIME',
   LOVED_ONE_THERAPIES_RECEIVED = 'LOVEDONE_THERAPIES_RECEIVED',
   MAILING_ADDRESS = 'Your Mailing Address *',
+  MAILING_ADDRESS_SHORT_ID = 'MAILING_ADDRESS',
   MAIL_TO_NAME = 'Mail To Name',
   MATERIALS_RECEIVED = 'Materials received',
+  MEDICAL_RECORDS = 'Medical Records',
   METHOD_OF_DECALCIFICATION = 'Method of decalcification',
   MF_BARCODE = 'MF Barcode',
   MF_CODE = 'MF code',
@@ -492,6 +507,7 @@ export enum Label {
   NO_CHILDREN = 'NO_CHILDREN',
   NORMAL_COLLABORATOR_SAMPLE_ID = 'Normal Collaborator Sample ID',
   NOTES = 'Notes',
+  ONC_HISTORY = 'Onc History',
   ONC_HISTORY_CREATED = 'Onc History Created',
   ONC_HISTORY_DATE = 'Onc History Date',
   ONC_HISTORY_NOTES = 'OncHistory Notes',
@@ -563,9 +579,12 @@ export enum Label {
   SAMPLE_NOTES = 'Sample Notes',
   SAMPLE_RECEIVED = 'Sample Received',
   SAMPLE_SENT = 'Sample Sent',
+  SAMPLE_INFORMATION = 'Sample Information',
   SAMPLE_TYPE = 'Sample Type',
   SCROLL = 'Scroll(s)',
   SCROLLS_BACK_FROM_SHL = 'Scrolls back from SHL',
+  SELF_COUNTRY = 'SELF_COUNTRY',
+  SELF_CURRENT_AGE = 'SELF_CURRENT_AGE',
   SELF_PROVINCE = 'SELF_PROVINCE',
   SELF_STATE = 'SELF_STATE',
   SENT = 'Sent',
@@ -600,6 +619,7 @@ export enum Label {
   STREET_ONE = 'Street 1',
   STREET_TWO = 'Street 2',
   SUBJECT_ID = 'Subject ID',
+  SURVEY_DATA = 'Survey Data',
   SYMPTOMS_START_TIME = 'SYMPTOMS_START_TIME',
   THERAPIES_RECEIVED = 'THERAPIES_RECEIVED',
   TOTAL_NUMBER_SLIDES_MENTIONED = 'Total number of slides mentioned',
