@@ -22,10 +22,10 @@ references:
 
   # Note: important that values of guids and keys have matching order!"
   study_keys: &study_keys
-    "basil dsm-ui osteo brain angio mbc testboston mpc prion atcp rgp esc cgc pancan brugada lms"
+    "basil dsm-ui osteo brain angio mbc mpc prion atcp rgp esc cgc pancan brugada lms"
 
   study_guids: &study_guids
-    "basil NA CMI-OSTEO cmi-brain ANGIO cmi-mbc testboston cmi-mpc PRION atcp RGP cmi-esc cgc cmi-pancan brugada cmi-lms"
+    "basil NA CMI-OSTEO cmi-brain ANGIO cmi-mbc cmi-mpc PRION atcp RGP cmi-esc cgc cmi-pancan brugada cmi-lms"
 
   # Job runs for develop branch only
   filter-develop-branch: &filter-develop-branch
@@ -440,11 +440,11 @@ commands:
             set -u
             CHANGED_STUDIES=$(../build-utils/findmodifiedprojects.sh << pipeline.git.base_revision >> << pipeline.git.revision >>)
             echo "The following projects were found to have changed: $CHANGED_STUDIES"
-            
+
             NG_PROJECT_NAME="ddp-<< parameters.study_key >>"
             CHANGED_DEPENDENCIES=$(echo $CHANGED_STUDIES | grep -E -e $NG_PROJECT_NAME -e _SHARED_ -e ddp-sdk -e toolkit || true)
             echo "CHANGED_DEPENDENCIES: $CHANGED_DEPENDENCIES"
-            
+
             if [[ -z $CHANGED_DEPENDENCIES ]]; then
               echo "Study << parameters.study_key >> has not changed"
               circleci-agent step halt
@@ -504,8 +504,6 @@ jobs:
           study_key: angio
       - conditionally-launch-build-and-store:
           study_key: mbc
-      - conditionally-launch-build-and-store:
-          study_key: testboston
       - conditionally-launch-build-and-store:
           study_key: mpc
       - conditionally-launch-build-and-store:
@@ -707,7 +705,7 @@ jobs:
             fi
 
             TESTS_FILE=$(circleci tests split --split-by=timings --timings-type=classname e2e_tests.txt)
-            
+
             echo $TESTS_FILE | circleci tests run --command="xargs npm run test:ci" --verbose --split-by=timings
           no_output_timeout: 15m
       - store_test_results:
@@ -800,7 +798,7 @@ workflows:
           matrix:
             alias: app-build
             parameters: &studies
-              study_key: [ dsm-ui, basil, osteo, brain, angio, mbc, testboston, mpc, prion, atcp, rgp, esc, cgc, pancan, brugada, lms ]
+              study_key: [ dsm-ui, basil, osteo, brain, angio, mbc, mpc, prion, atcp, rgp, esc, cgc, pancan, brugada, lms ]
           check_changed: true
           requires:
             - << matrix.study_key >>-ui-unit-test-pr
@@ -993,9 +991,6 @@ workflows:
       - deploy-stored-build-job:
           <<: *deploy_branch_filters
           study_key: angio
-      - deploy-stored-build-job:
-          <<: *deploy_branch_filters
-          study_key: testboston
       - deploy-stored-build-job:
           <<: *deploy_branch_filters
           study_key: mpc
