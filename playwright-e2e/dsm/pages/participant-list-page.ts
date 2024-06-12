@@ -284,7 +284,7 @@ export default class ParticipantListPage extends DsmPageBase {
       uri = '/ui/applyFilter',
       prefix,
       cohortTags = [],
-      enrollmentStatus = EnrollmentStatus.ENROLLED,
+      enrollmentStatus,
     } = opts;
     const expectedTabs: Tab[] = [
       Tab.ONC_HISTORY,
@@ -328,7 +328,8 @@ export default class ParticipantListPage extends DsmPageBase {
         }
 
         const participantEnrollmentStatus = value.esData.status;
-        if (participantEnrollmentStatus !== enrollmentStatus) {
+        if (enrollmentStatus && (participantEnrollmentStatus !== enrollmentStatus)) {
+          //Not all studies have an enrollment staus of Enrolled
           continue;
         }
 
