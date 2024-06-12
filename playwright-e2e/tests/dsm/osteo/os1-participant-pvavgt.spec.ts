@@ -17,7 +17,7 @@ const { DSM_BASE_URL } = process.env;
   Participant Short ID is hard-coded. Participant data is expected to be unchanged.
 */
 
-test.describe.serial('Osteo1 Participant', () => {
+test.describe.serial('Osteo1 Participant @OS1 @dsm @functional', () => {
   test.skip(DSM_BASE_URL === undefined || (DSM_BASE_URL as string).indexOf('test') === -1);
 
   const shortID = 'PVAVGT';
@@ -63,6 +63,8 @@ test.describe.serial('Osteo1 Participant', () => {
       expect(await participantPage.getRegistrationDate()).toContain('Feb 5, 2020');
       expect(await participantPage.getShortId()).toStrictEqual(shortID);
       expect(await participantPage.getGuid()).toStrictEqual('NSAVPY9ERWUFBMWJY3GY');
+      await page.evaluate(() => { window.scrollTo(0, 0); });
+      await page.waitForFunction(() => window.scrollY === 0);
 
       const ptLocator = page.locator('table.table.table-condensed');
       await expect(ptLocator).toHaveScreenshot('participant-data.png',
