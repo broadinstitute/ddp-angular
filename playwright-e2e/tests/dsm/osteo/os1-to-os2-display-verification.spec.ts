@@ -638,7 +638,7 @@ test.describe.serial(`${StudyName.OSTEO} -> ${StudyName.OSTEO2}: Verify expected
     await researchConsentActivityForOS2.scrollIntoViewIfNeeded();
     await expect(researchConsentActivityForOS2).toBeVisible();
 
-    /* Consent Addendum Activity - OS2 has also had 2 versions of this */
+    /* Consent Addendum Activity - OS2 has also had 2 versions of this, newer participants will have version 3 */
     const consentAddendumVersion2 = await surveyDataTab.getActivity({
       activityName: SurveyName.CONSENT_ADDENDUM,
       activityVersion: ActivityVersion.TWO,
