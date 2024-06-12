@@ -1,7 +1,7 @@
 import { APIRequestContext, Download, expect, Locator, Page } from '@playwright/test';
 import Modal from 'dsm/component/modal';
 import { Navigation, Study } from 'dsm/navigation';
-import { Label, FileFormat, TextFormat, Tab, DataFilter, CustomizeView, CustomizeViewID as ID, EnrollmentStatus} from 'dsm/enums';
+import { Label, FileFormat, TextFormat, Tab, DataFilter, CustomizeView, CustomizeViewID as ID, EnrollmentStatus, CustomizeViewID} from 'dsm/enums';
 import { WelcomePage } from 'dsm/pages/welcome-page';
 import Checkbox from 'dss/component/checkbox';
 import { isSubset, shuffle, waitForNoSpinner, waitForResponse } from 'utils/test-utils';
@@ -13,6 +13,7 @@ import { getDate, offsetDaysFromToday } from 'utils/date-utils';
 import { logInfo } from 'utils/log-utils';
 import DsmPageBase from './dsm-page-base';
 import * as user from 'data/fake-user.json';
+import { ActivityVersionEnum } from 'dsm/component/tabs/enums/survey-data-enum';
 
 export default class ParticipantListPage extends DsmPageBase {
   PAGE_TITLE = 'Participant List';
@@ -272,7 +273,7 @@ export default class ParticipantListPage extends DsmPageBase {
       uri?: string,
       prefix?: string,
       cohortTags?: string[],
-      enrollmentStatus?: EnrollmentStatus,
+      enrollmentStatus?: EnrollmentStatus
     }): Promise<string> {
     const {
       isPediatric = false,
@@ -284,7 +285,7 @@ export default class ParticipantListPage extends DsmPageBase {
       uri = '/ui/applyFilter',
       prefix,
       cohortTags = [],
-      enrollmentStatus,
+      enrollmentStatus
     } = opts;
     const expectedTabs: Tab[] = [
       Tab.ONC_HISTORY,

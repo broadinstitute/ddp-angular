@@ -1,6 +1,6 @@
 import { expect } from '@playwright/test';
 import CohortTag from 'dsm/component/cohort-tag';
-import { FieldSettingInputType as FieldSetting, Label, Tab } from 'dsm/enums';
+import { CustomizeViewID, FieldSettingInputType as FieldSetting, Label, Tab } from 'dsm/enums';
 import { Navigation, Samples, Study, StudyName } from 'dsm/navigation';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
 import SurveyDataTab from 'dsm/pages/tablist/survey-data-tab';
@@ -9,7 +9,6 @@ import { test } from 'fixtures/dsm-fixture';
 import { logInfo } from 'utils/log-utils';
 import { totalNumberOfOccurences } from 'utils/test-utils';
 import { SurveyDataPanelEnum as SurveyName, ActivityVersionEnum as ActivityVersion } from 'dsm/component/tabs/enums/survey-data-enum';
-import { language } from 'googleapis/build/src/apis/language';
 import OncHistoryTable from 'dsm/component/tables/onc-history-table';
 import OncHistoryTab from 'dsm/pages/tablist/onc-history-tab';
 import { OsteoOncHistoryUpload } from 'dsm/component/models/onc-history-upload-interface';
@@ -623,18 +622,35 @@ test.describe.serial(`${StudyName.OSTEO} -> ${StudyName.OSTEO2}: Verify expected
     await researchConsentActivityForOS1.scrollIntoViewIfNeeded();
     await expect(researchConsentActivityForOS1).toBeVisible();
 
-    const researchConsentActivityForOS2 = await surveyDataTab.getActivity({
+    /* OS2 has had 2 different versions of consent: version 2 and version 3 - occasionally, a re-consented participant with the former is selected by the test */
+    const clinicalConsentVersion2 = await surveyDataTab.getActivity({
       activityName: SurveyName.RESEARCH_CONSENT_FORM,
-      activityVersion: ActivityVersion.THREE
+      activityVersion: ActivityVersion.TWO,
+      checkForVisibility: false
     });
+    const clinicalConsentVersion3 = await surveyDataTab.getActivity({
+      activityName: SurveyName.RESEARCH_CONSENT_FORM,
+      activityVersion: ActivityVersion.THREE,
+      checkForVisibility: false
+    });
+    const researchConsentActivityForOS2 = (await (clinicalConsentVersion2).isVisible()) ? clinicalConsentVersion2 : clinicalConsentVersion3;
+    logInfo(`Resulting OS2 re-consent activity locator: ${researchConsentActivityForOS2}\n`);
     await researchConsentActivityForOS2.scrollIntoViewIfNeeded();
     await expect(researchConsentActivityForOS2).toBeVisible();
 
-    /* Consent Addendum Activity */
-    const consentAddendumActivity = await surveyDataTab.getActivity({
+    /* Consent Addendum Activity - OS2 has also had 2 versions of this */
+    const consentAddendumVersion2 = await surveyDataTab.getActivity({
       activityName: SurveyName.CONSENT_ADDENDUM,
-      activityVersion: ActivityVersion.THREE
+      activityVersion: ActivityVersion.TWO,
+      checkForVisibility: false
     });
+    const consentAddendumVersion3 = await surveyDataTab.getActivity({
+      activityName: SurveyName.CONSENT_ADDENDUM,
+      activityVersion: ActivityVersion.THREE,
+      checkForVisibility: false
+    });
+    const consentAddendumActivity = (await (consentAddendumVersion2).isVisible()) ? consentAddendumVersion2 : consentAddendumVersion3;
+    logInfo(`Resulting consent addendum locator: ${consentAddendumActivity}\n`);
     await consentAddendumActivity.scrollIntoViewIfNeeded();
     await expect(consentAddendumActivity).toBeVisible();
 
@@ -752,11 +768,19 @@ test.describe.serial(`${StudyName.OSTEO} -> ${StudyName.OSTEO2}: Verify expected
     await familyHistoryForSiblingTwo.scrollIntoViewIfNeeded();
     await expect(familyHistoryForSiblingTwo).toBeVisible();
 
-    /* Your Osteosarcoma Activity */
-    const yourOsteosarcomaActivity = await surveyDataTab.getActivity({
+    /* Your Osteosarcoma Activity - OS2 has also had 2 versions of this */
+    const yourOsteosarcomaVersion1 = await surveyDataTab.getActivity({
       activityName: SurveyName.SURVEY_YOUR_OR_YOUR_CHILDS_OSTEOSARCOMA,
-      activityVersion: ActivityVersion.TWO
+      activityVersion: ActivityVersion.ONE,
+      checkForVisibility: false
     });
+    const youOsteosarcomaVersion2 = await surveyDataTab.getActivity({
+      activityName: SurveyName.SURVEY_YOUR_OR_YOUR_CHILDS_OSTEOSARCOMA,
+      activityVersion: ActivityVersion.TWO,
+      checkForVisibility: false
+    });
+    const yourOsteosarcomaActivity = (await (yourOsteosarcomaVersion1).isVisible()) ? yourOsteosarcomaVersion1 : youOsteosarcomaVersion2;
+    logInfo(`Resulting Your Osteosarcoma Activity locator: ${yourOsteosarcomaActivity}\n`);
     await yourOsteosarcomaActivity.scrollIntoViewIfNeeded();
     await expect(yourOsteosarcomaActivity).toBeVisible();
 
@@ -793,7 +817,7 @@ test.describe.serial(`${StudyName.OSTEO} -> ${StudyName.OSTEO2}: Verify expected
     //If the participant had kits in OS1, check for them in OS2
     if (researchShippingIDs.length >= 1) {
       await navigation.selectStudy(StudyName.OSTEO2);
-      await navigation.selectFromSamples<KitsSearchPage>(Samples.SEARCH);
+      //await navigation.selectFromSamples<KitsSearchPage>(Samples.SEARCH);
       await kitSearchPage.searchByField(SearchByField.SHORT_ID, shortID);
       await kitSearchPage.checkForAbsenceOfKitInformationInColumn({ column: Label.SHIPPING_ID, kitInformation: researchShippingIDs });
     }
