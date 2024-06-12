@@ -52,9 +52,15 @@ export default class KitsSearchPage extends KitsPageBase {
     ]);
     await waitForNoSpinner(this.page);
 
+    const numberOfKits = await this.getNumberOfKits();
     const table = new Table(this.page);
-    await table.waitForReady();
-    return table
+    if (numberOfKits === 0) {
+      const noKitsFoundMessage = this.page.locator(`//app-shipping-search//h3[normalize-space(text())='Kit was not found.']`);
+      await expect(noKitsFoundMessage).toBeVisible();
+    } else {
+      await table.waitForReady();
+    }
+    return table;
   }
 
   get searchByFieldSelect(): Select {
@@ -115,6 +121,48 @@ export default class KitsSearchPage extends KitsPageBase {
     }
 
     return nextCollaboratorSampleID;
+  }
+
+  public async getKitInformationFrom(opts: { column: Label }): Promise<string[]> {
+    const { column } = opts;
+    const columnInformation: string[] = [];
+    //Check that the given label is one of the known table headers
+    if (!this.TABLE_HEADERS.includes(column)) {
+      throw new Error(`Column ${column} is not present in the Kit Search page`);
+    }
+
+    //Check if there are actually kits to retreive information from
+    const numberOfKits = await this.getNumberOfKits();
+    if (numberOfKits === 0) {
+      logInfo('Kit Search page: Participant does not have any kits');
+      //Verify notification message "Kit was not found." is displayed
+      const noKitsFoundMessage = this.page.locator(`//app-shipping-search//h3[normalize-space(text())='Kit was not found.']`);
+      await expect(noKitsFoundMessage).toBeVisible();
+    } else {
+      const columnIndex = this.TABLE_HEADERS.indexOf(column) + 1;
+      for (let rowIndex = 1; rowIndex <= numberOfKits; rowIndex++) {
+        const tableCell = this.page.locator(`(//app-shipping-search//tbody//td[${columnIndex}])[${rowIndex}]`);
+        const cellText = await tableCell.innerText();
+        columnInformation.push(cellText);
+      }
+    }
+    return columnInformation;
+  }
+
+  public async checkForAbsenceOfKitInformationInColumn(opts: { column: Label, kitInformation: string[] }): Promise<void> {
+    const { column, kitInformation } = opts;
+
+    //Check that the given label is one of the known table headers
+    if (!this.TABLE_HEADERS.includes(column)) {
+      throw new Error(`Column ${column} is not present in the Kit Search page`);
+    }
+    const columnIndex = this.TABLE_HEADERS.indexOf(column) + 1;
+    for (let index = 0; index < kitInformation.length; index++) {
+      const information = kitInformation[index];
+      logInfo(`Checking to see if column ${column} contains: ${information}`);
+      const tableCell = this.page.locator(`//app-shipping-search//tbody//td[normalize-space(text())='${information}']`);
+      await expect(tableCell).toHaveCount(0);
+    }
   }
 
   private async getNumberOfKits(): Promise<number> {
