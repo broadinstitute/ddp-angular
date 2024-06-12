@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 import { login } from 'authentication/auth-dsm';
 import Dropdown from 'dsm/component/dropdown';
-import { CustomizeView, Label, Tab, UserPermission } from 'dsm/enums';
+import { CustomizeView, EnrollmentStatus, Label, Tab, UserPermission } from 'dsm/enums';
 import { Menu, Miscellaneous, Navigation, Study, StudyName } from 'dsm/navigation';
 import Tablist from 'dsm/component/tablist';
 import UserPermissionPage from 'dsm/pages/user-and-permissions-page';
@@ -73,8 +73,12 @@ test.describe.serial('Medical Records View Permission', () => {
         // Find participant created by Playwright DSS test
         const studyInfo = studyShortName(study);
         const prefixInfo = studyInfo.playwrightPrefixAdult as string;
-        const shortId = await participantListPage.findParticipantWithTab({ tab: Tab.ONC_HISTORY, prefix: prefixInfo });
-        logInfo(`${study} Participant Short ID: ${shortId}`);
+        const shortId = await participantListPage.findParticipantWithTab({
+          tab: Tab.ONC_HISTORY,
+          prefix: prefixInfo,
+          enrollmentStatus: EnrollmentStatus.ENROLLED
+        });
+        console.log(`${study} Participant Short ID: ${shortId}`);
 
         await participantListPage.filterListByShortId(shortId);
         const participantListTable = participantListPage.participantListTable;

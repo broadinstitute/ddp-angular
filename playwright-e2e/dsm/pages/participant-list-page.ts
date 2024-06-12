@@ -1,7 +1,7 @@
 import { APIRequestContext, Download, expect, Locator, Page } from '@playwright/test';
 import Modal from 'dsm/component/modal';
 import { Navigation, Study } from 'dsm/navigation';
-import { Label, FileFormat, TextFormat, Tab, DataFilter, CustomizeView, CustomizeViewID as ID} from 'dsm/enums';
+import { Label, FileFormat, TextFormat, Tab, DataFilter, CustomizeView, CustomizeViewID as ID, EnrollmentStatus} from 'dsm/enums';
 import { WelcomePage } from 'dsm/pages/welcome-page';
 import Checkbox from 'dss/component/checkbox';
 import { isSubset, shuffle, waitForNoSpinner, waitForResponse } from 'utils/test-utils';
@@ -271,7 +271,8 @@ export default class ParticipantListPage extends DsmPageBase {
       rgpMinimumFamilySize?: number,
       uri?: string,
       prefix?: string,
-      cohortTags?: string[]
+      cohortTags?: string[],
+      enrollmentStatus?: EnrollmentStatus,
     }): Promise<string> {
     const {
       isPediatric = false,
@@ -282,7 +283,8 @@ export default class ParticipantListPage extends DsmPageBase {
       rgpMinimumFamilySize = 1,
       uri = '/ui/applyFilter',
       prefix,
-      cohortTags = []
+      cohortTags = [],
+      enrollmentStatus = EnrollmentStatus.ENROLLED,
     } = opts;
     const expectedTabs: Tab[] = [
       Tab.ONC_HISTORY,
@@ -324,6 +326,12 @@ export default class ParticipantListPage extends DsmPageBase {
           // must be PW test user
           continue;
         }
+
+        const participantEnrollmentStatus = value.esData.status;
+        if (participantEnrollmentStatus !== enrollmentStatus) {
+          continue;
+        }
+
         // The onc history tab will usually appear along with a medical record tab
         // Checking for the medical record tab allows catching those who do not yet have an onc history detail/row/data (but have the tab itself)
         if (tab === Tab.ONC_HISTORY || tab === Tab.MEDICAL_RECORD) {
