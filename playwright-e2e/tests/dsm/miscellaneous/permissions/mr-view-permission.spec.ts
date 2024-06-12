@@ -73,6 +73,7 @@ test.describe.serial('Medical Records View Permission', () => {
         // Find participant created by Playwright DSS test
         const studyInfo = studyShortName(study);
         const prefixInfo = studyInfo.playwrightPrefixAdult as string;
+        //Note: Withdrawn participants do not get their onc history tabs displayed even if they have ons history (expected behavior)
         const shortId = await participantListPage.findParticipantWithTab({
           tab: Tab.ONC_HISTORY,
           prefix: prefixInfo,
