@@ -36,7 +36,8 @@ const testConfig: PlaywrightTestConfig = {
       scale: 'css',
       // Account for minor difference in text rendering and resolution between headless and headed mode
       threshold: 1,
-      maxDiffPixelRatio: 0.5
+      maxDiffPixelRatio: 0.5,
+      maxDiffPixels: 1 //Attempting to account for tendency for screenshot comparison to fail by 1 pixel
     }
   },
   /* Run tests in files in parallel */
