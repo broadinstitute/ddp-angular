@@ -100,7 +100,7 @@ export class ScannerService {
       saveFn: (data: object) => this.saveReceivingScan(data),
       inputFields: [
         {
-          controllerName: 'kit',
+          controllerName: 'kitLabel',
           placeholder: 'SM-ID',
           maxLength: undefined,
           validators: [Validators.required]
