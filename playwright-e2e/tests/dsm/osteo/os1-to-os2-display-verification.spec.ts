@@ -636,7 +636,7 @@ test.describe.serial(`${StudyName.OSTEO} -> ${StudyName.OSTEO2}: Verify expected
     const researchConsentActivityForOS2 = (await (clinicalConsentVersion2).isVisible()) ? clinicalConsentVersion2 : clinicalConsentVersion3;
     logInfo(`Resulting OS2 re-consent activity locator: ${researchConsentActivityForOS2}\n`);
     await researchConsentActivityForOS2.scrollIntoViewIfNeeded();
-    await expect(researchConsentActivityForOS2).toBeVisible();
+    await expect(researchConsentActivityForOS2, 'This OS2 participant does not have research consent v2 or v3').toBeVisible();
 
     /* Consent Addendum Activity - OS2 has also had 2 versions of this, newer participants will have version 3 */
     const consentAddendumVersion2 = await surveyDataTab.getActivity({
@@ -652,7 +652,7 @@ test.describe.serial(`${StudyName.OSTEO} -> ${StudyName.OSTEO2}: Verify expected
     const consentAddendumActivity = (await (consentAddendumVersion2).isVisible()) ? consentAddendumVersion2 : consentAddendumVersion3;
     logInfo(`Resulting consent addendum locator: ${consentAddendumActivity}\n`);
     await consentAddendumActivity.scrollIntoViewIfNeeded();
-    await expect(consentAddendumActivity).toBeVisible();
+    await expect(consentAddendumActivity, 'This OS2 participant does not have consent addendum v2 or v3').toBeVisible();
 
     /* Medical Release Form Activity */
     const medicalReleaseFormActivity = await surveyDataTab.getActivity({
@@ -782,7 +782,7 @@ test.describe.serial(`${StudyName.OSTEO} -> ${StudyName.OSTEO2}: Verify expected
     const yourOsteosarcomaActivity = (await (yourOsteosarcomaVersion1).isVisible()) ? yourOsteosarcomaVersion1 : youOsteosarcomaVersion2;
     logInfo(`Resulting Your Osteosarcoma Activity locator: ${yourOsteosarcomaActivity}\n`);
     await yourOsteosarcomaActivity.scrollIntoViewIfNeeded();
-    await expect(yourOsteosarcomaActivity).toBeVisible();
+    await expect(yourOsteosarcomaActivity, 'This OS2 participant does not have Your Osteo activity v1 or v2').toBeVisible();
 
     /* About You Activity */
     const aboutYouActivity = await surveyDataTab.getActivity({
