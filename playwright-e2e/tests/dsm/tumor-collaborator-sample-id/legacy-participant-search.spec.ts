@@ -55,8 +55,11 @@ test.describe('Tumor Collaborator Sample ID', () => {
 
       const rowIndex = 0;
       const [shortID] = await participantListTable.getTextAt(rowIndex, Label.SHORT_ID);
+      const [legacyShortID] = await participantListTable.getTextAt(rowIndex, Label.LEGACY_SHORT_ID);
       logInfo(`Participant Short ID: ${shortID}`);
+      logInfo(`Participant Legacy Short ID: ${legacyShortID}`);
       expect(shortID).toBeTruthy();
+      expect(legacyShortID).toBeTruthy();
 
       const participantPage: ParticipantPage = await participantListTable.openParticipantPageAt(rowIndex);
       const oncHistoryTab = await participantPage.tablist(Tab.ONC_HISTORY).click<OncHistoryTab>();
@@ -71,7 +74,11 @@ test.describe('Tumor Collaborator Sample ID', () => {
 
         // Shows the correct tumor id prefix: [COLLABORATOR_PREFIX]_[LEGACY_SHORT_ID]_*
         const studyPrefix = studyShortName(study).collaboratorPrefix;
-        expect(suggestedSampleID).toMatch(new RegExp(`${studyPrefix}_${shortID}_`));
+        //Most legacy ptp examples in Dev follow the former; the sole example in Test follows the latter (due to prior testing)
+        const sampleIDWithShortID = `${studyPrefix}_${shortID}_`;
+        const sampleIDWithLegacyShortID = `${studyPrefix}_${legacyShortID}_`;
+        const possibleSampleIDs = [sampleIDWithShortID, sampleIDWithLegacyShortID];
+        expect(possibleSampleIDs).toContain(suggestedSampleID);
       });
     });
   }

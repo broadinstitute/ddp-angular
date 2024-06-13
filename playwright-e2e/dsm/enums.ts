@@ -736,3 +736,11 @@ export enum ErrorMessage {
   NOT_ELIGIBLE_FOR_CLINICAL_SEQUENCING_NY_OR_CA = `Error: Participant lives in New York or Canada and is not eligible for clinical sequencing`,
   ONC_HISTORY_TAB_CONSENT_TISSUE_NO = 'This participant did not consent to sharing tissue',
 }
+
+export enum EnrollmentStatus {
+  REGISTERED = 'REGISTERED',
+  EXITED_BEFORE_ENROLLMENT = 'EXITED_BEFORE_ENROLLMENT',
+  EXITED_AFTER_ENROLLMENT = 'EXITED_AFTER_ENROLLMENT',
+  ENROLLED = 'ENROLLED',
+  LOST_TO_FOLLOWUP = 'LOST_TO_FOLLOWUP',
+}

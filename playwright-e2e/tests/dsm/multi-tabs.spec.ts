@@ -1,6 +1,6 @@
 import { test, expect, Page, APIRequestContext } from '@playwright/test';
 import { login } from 'authentication/auth-dsm';
-import { Label, Tab } from 'dsm/enums';
+import { EnrollmentStatus, Label, Tab } from 'dsm/enums';
 import { Navigation, Study, StudyName } from 'dsm/navigation';
 import OncHistoryTab from 'dsm/pages/tablist/onc-history-tab';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
@@ -21,13 +21,19 @@ test('Multiple browser tabs @dsm', async ({ browser, request }) => {
   // Tab A: Open Participant List page, realm matches expected study PanCan
   const pancanPage = await browserContext.newPage();
   const pancanParticipantListPage = await logIntoStudy(pancanPage, request, pancan);
-  const pancanParticipantShortId = await pancanParticipantListPage.findParticipantWithTab({ tab: Tab.ONC_HISTORY });
+  const pancanParticipantShortId = await pancanParticipantListPage.findParticipantWithTab({
+    tab: Tab.ONC_HISTORY,
+    enrollmentStatus: EnrollmentStatus.ENROLLED
+  });
   logInfo(`PanCan participant Short ID: ${pancanParticipantShortId}`);
 
   // Tab B: Open Participant List page, realm matches expected study angio
   const angioPage = await browserContext.newPage();
   const angioParticipantListPage = await logIntoStudy(angioPage, request, angio);
-  const angioParticipantShortId = await angioParticipantListPage.findParticipantWithTab({ tab: Tab.ONC_HISTORY });
+  const angioParticipantShortId = await angioParticipantListPage.findParticipantWithTab({
+    tab: Tab.ONC_HISTORY,
+    enrollmentStatus: EnrollmentStatus.ENROLLED
+  });
   logInfo(`angio participant Short ID: ${angioParticipantShortId}`);
 
   // Add new Onc History for study PanCan in tab A
