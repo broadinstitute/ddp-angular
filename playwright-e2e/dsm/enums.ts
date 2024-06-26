@@ -534,6 +534,7 @@ export enum Label {
   PARTICIPANT_NOTES = 'Participant Notes',
   PATHOLOGY_REPORT = 'Pathology Report',
   PATHOLOGY_PRESENT = 'Pathology Present',
+  PATIENT_CONTACTED_FOR_PAPER_CR = `Patient Contacted for Paper C/R`,
   PATIENT_SIGNATURE = `Patient's signature:`,
   PHONE = 'Phone',
   PHONE_PRIMARY = 'Phone (Primary)',
@@ -747,7 +748,7 @@ export enum EnrollmentStatus {
 
 export enum ParticipantListPageOptions {
   SEARCH = 'Search',
-  RELOAD_WITH_DEFAULT_FILTER = 'Reload With Default Filters',
+  RELOAD_WITH_DEFAULT_FILTER = 'Reload With Default Filter',
   CUSTOMIZE_VIEW = 'Customize View',
   SAVE_CURRENT_VIEW = 'Save Current View',
   SAVED_FILTERS = 'Saved Filters',
