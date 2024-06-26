@@ -1,7 +1,7 @@
 import { APIRequestContext, Download, expect, Locator, Page } from '@playwright/test';
 import Modal from 'dsm/component/modal';
 import { Navigation, Study } from 'dsm/navigation';
-import { Label, FileFormat, TextFormat, Tab, DataFilter, CustomizeView, CustomizeViewID as ID, EnrollmentStatus, CustomizeViewID} from 'dsm/enums';
+import { Label, FileFormat, TextFormat, Tab, DataFilter, CustomizeView, CustomizeViewID as ID, EnrollmentStatus, CustomizeViewID, ParticipantListPageOptions} from 'dsm/enums';
 import { WelcomePage } from 'dsm/pages/welcome-page';
 import Checkbox from 'dss/component/checkbox';
 import { isSubset, shuffle, waitForNoSpinner, waitForResponse } from 'utils/test-utils';
@@ -717,5 +717,10 @@ export default class ParticipantListPage extends DsmPageBase {
     const numberOfParticipants = await this.participantListTable.rowsCount;
     expect(numberOfParticipants, `No recent test participants were found with the given first name: ${participantName}`).toBeGreaterThanOrEqual(1);
     return this.participantListTable.getCellDataForColumn(Label.PARTICIPANT_ID, 1);
+  }
+
+  public getParticipantListOption(opts: { optionName: ParticipantListPageOptions }): Locator {
+    const { optionName } = opts;
+    return this.page.locator(`//text()[normalize-space()='${optionName}']/preceding-sibling::button`);
   }
 }

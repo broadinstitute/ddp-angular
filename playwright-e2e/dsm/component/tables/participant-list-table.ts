@@ -87,7 +87,7 @@ export class ParticipantListTable extends Table {
     const { checkDefaultFilterOfStudy = false, studyName, customFilter } = opts;
     let participantListColumnHeaders: Label[] = [];
 
-    if (checkDefaultFilterOfStudy && studyName) {
+    if (checkDefaultFilterOfStudy && studyName && (studyName !== StudyName.RGP)) {
       participantListColumnHeaders = this.getDefaultFilter();
     } else if (customFilter) {
       participantListColumnHeaders = customFilter;

@@ -744,3 +744,11 @@ export enum EnrollmentStatus {
   ENROLLED = 'ENROLLED',
   LOST_TO_FOLLOWUP = 'LOST_TO_FOLLOWUP',
 }
+
+export enum ParticipantListPageOptions {
+  SEARCH = 'Search',
+  RELOAD_WITH_DEFAULT_FILTER = 'Reload With Default Filters',
+  CUSTOMIZE_VIEW = 'Customize View',
+  SAVE_CURRENT_VIEW = 'Save Current View',
+  SAVED_FILTERS = 'Saved Filters',
+}
