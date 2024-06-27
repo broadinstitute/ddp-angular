@@ -54,7 +54,8 @@ export class ClinicalPageComponent implements OnInit {
   }
 
   public downloadList(): void {
-    const map: { shortId: string; sampleType: string; sample: string; orderId: string; orderDate: string; status: string; statusDetail: string; orderMessage: string; statusMessage: string;}[] = [];
+    const map: { shortId: string; sampleType: string; sample: string; orderId: string; orderDate: string;
+      status: string; statusDetail: string; orderMessage: string; statusMessage: string; }[] = [];
     for (const order of this.clinicalOrdersArray) {
       map.push( this.getOrderJson( order ) );
     }
