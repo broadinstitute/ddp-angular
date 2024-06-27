@@ -19,9 +19,12 @@
       </th>
       <th>Sample Type</th>
       <th>Sample</th>
+      <th>Order Number</th>
       <th>Order Date</th>
       <th>Status</th>
-      <th>Order Number</th>
+      <th>Status Detail</th>
+      <th>Order Message</th>
+      <th>Status Message</th>
     </tr>
     </thead>
     <tbody>
@@ -31,9 +34,13 @@
         {{order.sampleType}}
       </td>
       <td>{{order.sample}}</td>
+      <td>{{order.orderId}}</td>
       <td>{{getDateFormatted(order.orderDate)}}</td>
       <td>{{getOrderStatus(order.orderStatus)}}</td>
-      <td>{{order.orderId}}</td>
+      <td>{{order.statusDetail}}</td>
+      <td>{{order.orderMessage}}</td>
+      <td>{{order.statusMessage}}</td>
+
     </tr>
     </tbody>
   </table>
