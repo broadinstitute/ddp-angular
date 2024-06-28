@@ -150,6 +150,11 @@ test.describe.serial(`${StudyName.OSTEO}: Verify expected display of participant
       /* Abstraction Columns */
 
       /* Cohort Tag Columns */
+      await customizeViewPanel.openColumnGroup({ columnSection: CV.COHORT_TAGS, stableID: ID.COHORT_TAG });
+
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.COHORT_TAGS, ID.COHORT_TAG, Label.COHORT_TAG_NAME);
+
+      await customizeViewPanel.closeColumnGroup({ columnSection: CV.COHORT_TAGS, stableID: ID.COHORT_TAG });
 
       /* Survey: Your Child's Osteosarcoma Columns */
 
@@ -162,10 +167,53 @@ test.describe.serial(`${StudyName.OSTEO}: Verify expected display of participant
       /* Research Consent Form Columns (parental-consnet) */
 
       /* Medical Release Form Columns (adult) */
+      await customizeViewPanel.openColumnGroup({ columnSection: CV.MEDICAL_RELEASE_FORM, stableID: ID.MEDICAL_RELEASE_FORM_ADULT });
+
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.MEDICAL_RELEASE_FORM, ID.MEDICAL_RELEASE_FORM_ADULT, Label.INSTITUTION);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.MEDICAL_RELEASE_FORM, ID.MEDICAL_RELEASE_FORM_ADULT, Label.PHYSICIAN);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.MEDICAL_RELEASE_FORM, ID.MEDICAL_RELEASE_FORM_ADULT, Label.RELEASE_SELF_COMPLETED);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.MEDICAL_RELEASE_FORM, ID.MEDICAL_RELEASE_FORM_ADULT, Label.RELEASE_SELF_CREATED);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.MEDICAL_RELEASE_FORM, ID.MEDICAL_RELEASE_FORM_ADULT, Label.RELEASE_SELF_LAST_UPDATED);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.MEDICAL_RELEASE_FORM, ID.MEDICAL_RELEASE_FORM_ADULT, Label.RELEASE_SELF_STATUS);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.MEDICAL_RELEASE_FORM, ID.MEDICAL_RELEASE_FORM_ADULT, Label.RELEASE_SELF_AGREEMENT);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.MEDICAL_RELEASE_FORM, ID.MEDICAL_RELEASE_FORM_ADULT, Label.WHERE_INITIAL_BIOPSY_DONE);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.MEDICAL_RELEASE_FORM, ID.MEDICAL_RELEASE_FORM_ADULT, Label.YOUR_MAILING_ADDRESS);
+
+      await customizeViewPanel.closeColumnGroup({ columnSection: CV.MEDICAL_RELEASE_FORM, stableID: ID.MEDICAL_RELEASE_FORM_ADULT });
 
       /* Prequalifier Survey Columns */
+      await customizeViewPanel.openColumnGroup({ columnSection: CV.PREQUALIFIER, stableID: ID.PREQUALIFIER });
+
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.PREQUALIFIER, ID.PREQUALIFIER, Label.CHILD_PROVINCE);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.PREQUALIFIER, ID.PREQUALIFIER, Label.CHILD_STATE);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.PREQUALIFIER, ID.PREQUALIFIER, Label.HOW_OLD_ARE_YOU);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.PREQUALIFIER, ID.PREQUALIFIER, Label.HOW_OLD_IS_YOUR_CHILD);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.PREQUALIFIER, ID.PREQUALIFIER, Label.PREQUAL_COMPLETED);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.PREQUALIFIER, ID.PREQUALIFIER, Label.PREQUAL_CREATED);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.PREQUALIFIER, ID.PREQUALIFIER, Label.PREQUAL_LAST_UPDATED);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.PREQUALIFIER, ID.PREQUALIFIER, Label.PREQUAL_STATUS);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.PREQUALIFIER, ID.PREQUALIFIER, Label.PREQUAL_SELF_DESCRIBE);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.PREQUALIFIER, ID.PREQUALIFIER, Label.SELF_PROVINCE);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.PREQUALIFIER, ID.PREQUALIFIER, Label.SELF_STATE);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.PREQUALIFIER, ID.PREQUALIFIER, Label.WHERE_DO_YOU_LIVE);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.PREQUALIFIER, ID.PREQUALIFIER, Label.WHERE_DOES_YOUR_CHILD_LIVE);
+
+      await customizeViewPanel.closeColumnGroup({ columnSection: CV.PREQUALIFIER, stableID: ID.PREQUALIFIER });
 
       /* Medical Release Form Columns (pediatric/minor) */
+      await customizeViewPanel.openColumnGroup({ columnSection: CV.MEDICAL_RELEASE_FORM, stableID: ID.MEDICAL_RELEASE_FORM_KID });
+
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.MEDICAL_RELEASE_FORM, ID.MEDICAL_RELEASE_FORM_KID, Label.INITIAL_BIOPSY);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.MEDICAL_RELEASE_FORM, ID.MEDICAL_RELEASE_FORM_KID, Label.INSTITUTION);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.MEDICAL_RELEASE_FORM, ID.MEDICAL_RELEASE_FORM_KID, Label.PHYSICIAN);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.MEDICAL_RELEASE_FORM, ID.MEDICAL_RELEASE_FORM_KID, Label.RELEASE_MINOR_COMPLETED);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.MEDICAL_RELEASE_FORM, ID.MEDICAL_RELEASE_FORM_KID, Label.RELEASE_MINOR_CREATED);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.MEDICAL_RELEASE_FORM, ID.MEDICAL_RELEASE_FORM_KID, Label.RELEASE_MINOR_LAST_UPDATED);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.MEDICAL_RELEASE_FORM, ID.MEDICAL_RELEASE_FORM_KID, Label.RELEASE_MINOR_STATUS);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.MEDICAL_RELEASE_FORM, ID.MEDICAL_RELEASE_FORM_KID, Label.RELEASE_MINOR_AGREEMENT);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.MEDICAL_RELEASE_FORM, ID.MEDICAL_RELEASE_FORM_KID, Label.YOUR_CHILD_MAIL_ADDRESS);
+
+      await customizeViewPanel.closeColumnGroup({ columnSection: CV.MEDICAL_RELEASE_FORM, stableID: ID.MEDICAL_RELEASE_FORM_KID });
 
       /* Proxy Columns */
       await customizeViewPanel.openColumnGroup({ columnSection: CV.PROXY, stableID: ID.PROXY });
