@@ -10,6 +10,8 @@
   <div align="right" style="width: 100%; height: 100%;">
     <button (click)="downloadList()" color="primary" mat-raised-button>Download list</button>
     <button (click)="reloadList()" color="primary" mat-raised-button>Reload list</button>
+    <br><br>
+    <td>Download list includes additional fields "Order Message & Status Message"</td>
   </div>
   <table class="table table-striped Width--100">
     <thead>
@@ -23,8 +25,6 @@
       <th>Order Date</th>
       <th>Status</th>
       <th>Status Detail</th>
-      <th>Order Message</th>
-      <th>Status Message</th>
     </tr>
     </thead>
     <tbody>
@@ -38,9 +38,6 @@
       <td>{{getDateFormatted(order.orderDate)}}</td>
       <td>{{getOrderStatus(order.orderStatus)}}</td>
       <td>{{order.statusDetail}}</td>
-      <td>{{order.orderMessage}}</td>
-      <td>{{order.statusMessage}}</td>
-
     </tr>
     </tbody>
   </table>
