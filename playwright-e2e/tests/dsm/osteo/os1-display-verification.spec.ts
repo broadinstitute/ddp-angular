@@ -418,7 +418,26 @@ test.describe.serial(`${StudyName.OSTEO}: Verify expected display of participant
       await customizeViewPanel.closeColumnGroup({ columnSection: CV.INVITATION, stableID: ID.INVITATION });
     })
 
-    //Check that the amount of participants with the 'OS' cohort tag is a match for total participants in the study
+    await test.step(`Verify that the amount of ptps with the 'OS' cohort tag is the same as the total amount of ptps in the study`, async () => {
+      const amountOfStudyParticipants = await participantListTable.numOfParticipants();
+      //quick check that there are participants currently displayed
+      expect(amountOfStudyParticipants).toBeGreaterThan(0);
+
+      //Do a search for 'OS' cohort tag and verify that the amount of ptps returned matched that amount in the study
+      const customizeViewPanel = participantListPage.filters.customizeViewPanel;
+      await customizeViewPanel.open();
+      await customizeViewPanel.openColumnGroup({ columnSection: CV.COHORT_TAGS, stableID: ID.COHORT_TAG });
+      await customizeViewPanel.selectColumns(CV.COHORT_TAGS, [Label.COHORT_TAG_NAME]);
+      await customizeViewPanel.closeColumnGroup({ columnSection: CV.COHORT_TAGS, stableID: ID.COHORT_TAG });
+
+      const searchPanel = participantListPage.filters.searchPanel;
+      await searchPanel.open();
+      await searchPanel.text(Label.COHORT_TAG_NAME, { textValue: 'OS', exactMatch: true });
+      await searchPanel.search();
+
+      const amountOfOSTaggedParticipants = await participantListTable.numOfParticipants();
+      expect(amountOfOSTaggedParticipants).toBe(amountOfStudyParticipants);
+    });
   })
 
   test.skip(`${StudyName.OSTEO}: Verify expected display of participant page`, async ({ page, request }) => {
