@@ -1,0 +1,18 @@
+table {
+  overflow: auto;
+}
+
+table tr {
+  max-height: 560px;
+  overflow-y: auto;
+}
+
+table td.statusEl {
+  max-width: 360px;
+  overflow: auto;
+}
+
+table td.jsonEl {
+  max-width: 150px;
+  overflow: auto;
+}
