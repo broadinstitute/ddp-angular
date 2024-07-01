@@ -54,7 +54,8 @@ export class ClinicalPageComponent implements OnInit {
   }
 
   public downloadList(): void {
-    const map: { shortId: string; sampleType: string; sample: string; orderDate: string; status: string; orderId: string }[] = [];
+    const map: { shortId: string; sampleType: string; sample: string; orderId: string; orderDate: string;
+      status: string; statusDetail: string; orderMessage: string; statusMessage: string; }[] = [];
     for (const order of this.clinicalOrdersArray) {
       map.push( this.getOrderJson( order ) );
     }
@@ -62,9 +63,13 @@ export class ClinicalPageComponent implements OnInit {
     fields.push( 'shortId' );
     fields.push( 'sampleType' );
     fields.push( 'sample' );
+    fields.push( 'orderId' );
     fields.push( 'orderDate' );
     fields.push( 'status' );
-    fields.push( 'orderId' );
+    fields.push( 'statusDetail' );
+    fields.push( 'orderMessage' );
+    fields.push( 'statusMessage' );
+
     const date = new Date();
     Utils.createCSV(
       fields,
@@ -84,8 +89,11 @@ export class ClinicalPageComponent implements OnInit {
       sampleType: order.sampleType,
       sample: order.sample,
       orderDate: dateCreated,
+      orderId: order.orderId,
       status: this.getOrderStatus( order.statusDetail ),
-      orderId: order.orderId
+      statusDetail: order.statusDetail,
+      orderMessage: order.orderMessage,
+      statusMessage: order.statusMessage
     };
   }
 }
