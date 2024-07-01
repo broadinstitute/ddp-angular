@@ -142,8 +142,60 @@ test.describe.serial(`${StudyName.OSTEO}: Verify expected display of participant
       await customizeViewPanel.closeColumnGroup({ columnSection: CV.MEDICAL_RECORD, stableID: ID.MEDICAL_RECORD });
 
       /* Onc History Columns */
+      await customizeViewPanel.openColumnGroup({ columnSection: CV.ONC_HISTORY, stableID: ID.ONC_HISTORY });
+
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.ONC_HISTORY, ID.ONC_HISTORY, Label.ACCESSION_NUMBER);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.ONC_HISTORY, ID.ONC_HISTORY, Label.DATE_OF_PX);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.ONC_HISTORY, ID.ONC_HISTORY, Label.DESTRUCTION_POLICY);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.ONC_HISTORY, ID.ONC_HISTORY, Label.FACILITY);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.ONC_HISTORY, ID.ONC_HISTORY, Label.FACILITY_FAX);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.ONC_HISTORY, ID.ONC_HISTORY, Label.FACILITY_PHONE);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.ONC_HISTORY, ID.ONC_HISTORY, Label.GENDER);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.ONC_HISTORY, ID.ONC_HISTORY, Label.HISTOLOGY);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.ONC_HISTORY, ID.ONC_HISTORY, Label.LOCATION_OF_PX);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.ONC_HISTORY, ID.ONC_HISTORY, Label.ONC_HISTORY_NOTES);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.ONC_HISTORY, ID.ONC_HISTORY, Label.PROBLEM_WITH_TISSUE_COLUMN);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.ONC_HISTORY, ID.ONC_HISTORY, Label.REQUEST_STATUS);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.ONC_HISTORY, ID.ONC_HISTORY, Label.TISSUE_RECEIVED);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.ONC_HISTORY, ID.ONC_HISTORY, Label.TISSUE_REQUEST_DATE);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.ONC_HISTORY, ID.ONC_HISTORY, Label.TISSUE_REQUEST_DATE_TWO);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.ONC_HISTORY, ID.ONC_HISTORY, Label.TISSUE_REQUEST_DATE_THREE);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.ONC_HISTORY, ID.ONC_HISTORY, Label.TYPE_OF_PX);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.ONC_HISTORY, ID.ONC_HISTORY, Label.UNABLE_TO_OBTAIN);
+
+      await customizeViewPanel.closeColumnGroup({ columnSection: CV.ONC_HISTORY, stableID: ID.ONC_HISTORY });
 
       /* Tissue Columns */
+      await customizeViewPanel.openColumnGroup({ columnSection: CV.TISSUE, stableID: ID.TISSUE });
+
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.TISSUE, ID.TISSUE, Label.BLOCK_ID_TO_SHL);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.TISSUE, ID.TISSUE, Label.BLOCK_TO_SHL);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.TISSUE, ID.TISSUE, Label.BLOCK);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.TISSUE, ID.TISSUE, Label.COUNT_RECEIVED);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.TISSUE, ID.TISSUE, Label.DATE_SENT_TO_GP);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.TISSUE, ID.TISSUE, Label.EXPECTED_RETURN_DATE);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.TISSUE, ID.TISSUE, Label.FIRST_SM_ID);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.TISSUE, ID.TISSUE, Label.H_E_SINGULAR);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.TISSUE, ID.TISSUE, Label.H_E_PLURAL);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.TISSUE, ID.TISSUE, Label.PATHOLOGY_REPORT);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.TISSUE, ID.TISSUE, Label.RETURN_DATE);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.TISSUE, ID.TISSUE, Label.SCROLL);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.TISSUE, ID.TISSUE, Label.SCROLLS_BACK_FROM_SHL);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.TISSUE, ID.TISSUE, Label.SEQUENCING_RESULTS);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.TISSUE, ID.TISSUE, Label.SHL_WORK_NUMBER);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.TISSUE, ID.TISSUE, Label.SK_ID);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.TISSUE, ID.TISSUE, Label.SM_ID_FOR_H_E);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.TISSUE, ID.TISSUE, Label.SM_ID_VALUE);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.TISSUE, ID.TISSUE, Label.TISSUE_NOTES);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.TISSUE, ID.TISSUE, Label.TISSUE_SITE);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.TISSUE, ID.TISSUE, Label.TISSUE_TYPE);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.TISSUE, ID.TISSUE, Label.TRACKING_NUMBER);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.TISSUE, ID.TISSUE, Label.TUMOR_COLLABORATOR_SAMPLE_ID);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.TISSUE, ID.TISSUE, Label.TUMOR_PERCENTAGE_AS_REPORTED_BY_SHL);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.TISSUE, ID.TISSUE, Label.TUMOR_TYPE);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.TISSUE, ID.TISSUE, Label.USS_UNSTAINED);
+
+      await customizeViewPanel.closeColumnGroup({ columnSection: CV.TISSUE, stableID: ID.TISSUE });
 
       /* Sample Columns */
       await customizeViewPanel.openColumnGroup({ columnSection: CV.SAMPLE, stableID: ID.SAMPLE });
@@ -165,12 +217,6 @@ test.describe.serial(`${StudyName.OSTEO}: Verify expected display of participant
       await customizeViewPanel.openColumnGroup({ columnSection: CV.ABSTRACTION, stableID: ID.ABSTRACTION });
 
       await customizeViewPanel.assertColumnOptionDisplayed(CV.ABSTRACTION, ID.ABSTRACTION, Label.ACTIVITY);
-      await customizeViewPanel.assertColumnOptionDisplayed(CV.ABSTRACTION, ID.ABSTRACTION, Label.CERTAIN_TEXT);
-      await customizeViewPanel.assertColumnOptionDisplayed(CV.ABSTRACTION, ID.ABSTRACTION, Label.FIRST_NUMBER);
-      await customizeViewPanel.assertColumnOptionDisplayed(CV.ABSTRACTION, ID.ABSTRACTION, Label.OTHER_MULTI_SELECT);
-      await customizeViewPanel.assertColumnOptionDisplayed(CV.ABSTRACTION, ID.ABSTRACTION, Label.SECOND_NUMBER);
-      await customizeViewPanel.assertColumnOptionDisplayed(CV.ABSTRACTION, ID.ABSTRACTION, Label.SELECT);
-      await customizeViewPanel.assertColumnOptionDisplayed(CV.ABSTRACTION, ID.ABSTRACTION, Label.STATUS);
       await customizeViewPanel.assertColumnOptionDisplayed(CV.ABSTRACTION, ID.ABSTRACTION, Label.USER);
 
       await customizeViewPanel.closeColumnGroup({ columnSection: CV.ABSTRACTION, stableID: ID.ABSTRACTION });
@@ -183,6 +229,29 @@ test.describe.serial(`${StudyName.OSTEO}: Verify expected display of participant
       await customizeViewPanel.closeColumnGroup({ columnSection: CV.COHORT_TAGS, stableID: ID.COHORT_TAG });
 
       /* Survey: Your Child's Osteosarcoma Columns */
+      await customizeViewPanel.openColumnGroup({ columnSection: CV.SURVEY_YOUR_CHILDS_OSTEO, stableID: ID.SURVEY_YOUR_CHILDS_OSTEO });
+
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.SURVEY_YOUR_CHILDS_OSTEO, ID.SURVEY_YOUR_CHILDS_OSTEO, Label.ABOUT_CHILD_COMPLETED);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.SURVEY_YOUR_CHILDS_OSTEO, ID.SURVEY_YOUR_CHILDS_OSTEO, Label.ABOUT_CHILD_CREATED);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.SURVEY_YOUR_CHILDS_OSTEO, ID.SURVEY_YOUR_CHILDS_OSTEO, Label.ABOUT_CHILD_LAST_UPDATED);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.SURVEY_YOUR_CHILDS_OSTEO, ID.SURVEY_YOUR_CHILDS_OSTEO, Label.ABOUT_CHILD_STATUS);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.SURVEY_YOUR_CHILDS_OSTEO, ID.SURVEY_YOUR_CHILDS_OSTEO, Label.CHILD_CURRENT_BODY_LOC);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.SURVEY_YOUR_CHILDS_OSTEO, ID.SURVEY_YOUR_CHILDS_OSTEO, Label.CHILD_CURRENTLY_TREATED);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.SURVEY_YOUR_CHILDS_OSTEO, ID.SURVEY_YOUR_CHILDS_OSTEO, Label.CHILD_DIAGNOSIS_DATE);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.SURVEY_YOUR_CHILDS_OSTEO, ID.SURVEY_YOUR_CHILDS_OSTEO, Label.CHILD_EXPERIENCE);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.SURVEY_YOUR_CHILDS_OSTEO, ID.SURVEY_YOUR_CHILDS_OSTEO, Label.CHILD_HAD_RADIATION);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.SURVEY_YOUR_CHILDS_OSTEO, ID.SURVEY_YOUR_CHILDS_OSTEO, Label.CHILD_HISPANIC);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.SURVEY_YOUR_CHILDS_OSTEO, ID.SURVEY_YOUR_CHILDS_OSTEO, Label.CHILD_INITIAL_BODY_LOC);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.SURVEY_YOUR_CHILDS_OSTEO, ID.SURVEY_YOUR_CHILDS_OSTEO, Label.CHILD_OTHER_CANCERS);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.SURVEY_YOUR_CHILDS_OSTEO, ID.SURVEY_YOUR_CHILDS_OSTEO, Label.CHILD_OTHER_CANCERS_LIST);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.SURVEY_YOUR_CHILDS_OSTEO, ID.SURVEY_YOUR_CHILDS_OSTEO, Label.CHILD_RACE);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.SURVEY_YOUR_CHILDS_OSTEO, ID.SURVEY_YOUR_CHILDS_OSTEO, Label.CHILD_SYMPTOMS_START_TIME);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.SURVEY_YOUR_CHILDS_OSTEO, ID.SURVEY_YOUR_CHILDS_OSTEO, Label.CHILD_THERAPIES_RECEIVED);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.SURVEY_YOUR_CHILDS_OSTEO, ID.SURVEY_YOUR_CHILDS_OSTEO, Label.HAS_CHILD_OSTEO_RELAPSED);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.SURVEY_YOUR_CHILDS_OSTEO, ID.SURVEY_YOUR_CHILDS_OSTEO, Label.HOW_HEARD_ABOUT_PROJECT);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.SURVEY_YOUR_CHILDS_OSTEO, ID.SURVEY_YOUR_CHILDS_OSTEO, Label.WHO_IS_FILLING_OUT_SURVEY);
+
+      await customizeViewPanel.closeColumnGroup({ columnSection: CV.SURVEY_YOUR_CHILDS_OSTEO, stableID: ID.SURVEY_YOUR_CHILDS_OSTEO });
 
       /* Research Consent Form Columns (adult) */
       await customizeViewPanel.openColumnGroup({ columnSection: CV.RESEARCH_CONSENT_FORM, stableID: ID.RESEARCH_CONSENT_FORM_ADULT});
@@ -279,7 +348,7 @@ test.describe.serial(`${StudyName.OSTEO}: Verify expected display of participant
       /* Medical Release Form Columns (adult) */
       await customizeViewPanel.openColumnGroup({ columnSection: CV.MEDICAL_RELEASE_FORM, stableID: ID.MEDICAL_RELEASE_FORM_ADULT });
 
-      await customizeViewPanel.assertColumnOptionDisplayed(CV.MEDICAL_RELEASE_FORM, ID.MEDICAL_RELEASE_FORM_ADULT, Label.INSTITUTION);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.MEDICAL_RELEASE_FORM, ID.MEDICAL_RELEASE_FORM_ADULT, Label.INSTITUTION_UPPER_CASE);
       await customizeViewPanel.assertColumnOptionDisplayed(CV.MEDICAL_RELEASE_FORM, ID.MEDICAL_RELEASE_FORM_ADULT, Label.PHYSICIAN);
       await customizeViewPanel.assertColumnOptionDisplayed(CV.MEDICAL_RELEASE_FORM, ID.MEDICAL_RELEASE_FORM_ADULT, Label.RELEASE_SELF_COMPLETED);
       await customizeViewPanel.assertColumnOptionDisplayed(CV.MEDICAL_RELEASE_FORM, ID.MEDICAL_RELEASE_FORM_ADULT, Label.RELEASE_SELF_CREATED);
@@ -314,7 +383,7 @@ test.describe.serial(`${StudyName.OSTEO}: Verify expected display of participant
       await customizeViewPanel.openColumnGroup({ columnSection: CV.MEDICAL_RELEASE_FORM, stableID: ID.MEDICAL_RELEASE_FORM_KID });
 
       await customizeViewPanel.assertColumnOptionDisplayed(CV.MEDICAL_RELEASE_FORM, ID.MEDICAL_RELEASE_FORM_KID, Label.INITIAL_BIOPSY);
-      await customizeViewPanel.assertColumnOptionDisplayed(CV.MEDICAL_RELEASE_FORM, ID.MEDICAL_RELEASE_FORM_KID, Label.INSTITUTION);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.MEDICAL_RELEASE_FORM, ID.MEDICAL_RELEASE_FORM_KID, Label.INSTITUTION_UPPER_CASE);
       await customizeViewPanel.assertColumnOptionDisplayed(CV.MEDICAL_RELEASE_FORM, ID.MEDICAL_RELEASE_FORM_KID, Label.PHYSICIAN);
       await customizeViewPanel.assertColumnOptionDisplayed(CV.MEDICAL_RELEASE_FORM, ID.MEDICAL_RELEASE_FORM_KID, Label.RELEASE_MINOR_COMPLETED);
       await customizeViewPanel.assertColumnOptionDisplayed(CV.MEDICAL_RELEASE_FORM, ID.MEDICAL_RELEASE_FORM_KID, Label.RELEASE_MINOR_CREATED);

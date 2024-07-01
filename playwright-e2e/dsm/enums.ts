@@ -649,7 +649,7 @@ export enum Label {
   TUMOR_PERCENTAGE_AS_REPORTED_BY_SHL = 'Tumor Percentage as reported by SHL',
   TUMOR_SIZE = 'Tumor Size',
   TUMOR_TYPE = 'Tumor Type',
-  UNABLE_TO_OBTAIN = 'Unable to Obtain',
+  UNABLE_TO_OBTAIN = 'Unable To Obtain',
   UPLOADED_FILE_NAME = 'Uploaded File Name',
   USER = 'User',
   USS_UNSTAINED = 'USS (unstained slides)',
