@@ -146,8 +146,34 @@ test.describe.serial(`${StudyName.OSTEO}: Verify expected display of participant
       /* Tissue Columns */
 
       /* Sample Columns */
+      await customizeViewPanel.openColumnGroup({ columnSection: CV.SAMPLE, stableID: ID.SAMPLE });
+
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.SAMPLE, ID.SAMPLE, Label.COLLABORATOR_PARTICIPANT_ID);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.SAMPLE, ID.SAMPLE, Label.MF_CODE);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.SAMPLE, ID.SAMPLE, Label.NORMAL_COLLABORATOR_SAMPLE_ID);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.SAMPLE, ID.SAMPLE, Label.SAMPLE_DEACTIVATION);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.SAMPLE, ID.SAMPLE, Label.SAMPLE_RECEIVED);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.SAMPLE, ID.SAMPLE, Label.SAMPLE_SENT);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.SAMPLE, ID.SAMPLE, Label.SAMPLE_TYPE);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.SAMPLE, ID.SAMPLE, Label.STATUS);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.SAMPLE, ID.SAMPLE, Label.TRACKING_IN);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.SAMPLE, ID.SAMPLE, Label.TRACKING_OUT);
+
+      await customizeViewPanel.closeColumnGroup({ columnSection: CV.SAMPLE, stableID: ID.SAMPLE });
 
       /* Abstraction Columns */
+      await customizeViewPanel.openColumnGroup({ columnSection: CV.ABSTRACTION, stableID: ID.ABSTRACTION });
+
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.ABSTRACTION, ID.ABSTRACTION, Label.ACTIVITY);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.ABSTRACTION, ID.ABSTRACTION, Label.CERTAIN_TEXT);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.ABSTRACTION, ID.ABSTRACTION, Label.FIRST_NUMBER);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.ABSTRACTION, ID.ABSTRACTION, Label.OTHER_MULTI_SELECT);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.ABSTRACTION, ID.ABSTRACTION, Label.SECOND_NUMBER);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.ABSTRACTION, ID.ABSTRACTION, Label.SELECT);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.ABSTRACTION, ID.ABSTRACTION, Label.STATUS);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.ABSTRACTION, ID.ABSTRACTION, Label.USER);
+
+      await customizeViewPanel.closeColumnGroup({ columnSection: CV.ABSTRACTION, stableID: ID.ABSTRACTION });
 
       /* Cohort Tag Columns */
       await customizeViewPanel.openColumnGroup({ columnSection: CV.COHORT_TAGS, stableID: ID.COHORT_TAG });
@@ -159,12 +185,96 @@ test.describe.serial(`${StudyName.OSTEO}: Verify expected display of participant
       /* Survey: Your Child's Osteosarcoma Columns */
 
       /* Research Consent Form Columns (adult) */
+      await customizeViewPanel.openColumnGroup({ columnSection: CV.RESEARCH_CONSENT_FORM, stableID: ID.RESEARCH_CONSENT_FORM_ADULT});
+
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.RESEARCH_CONSENT_FORM, ID.RESEARCH_CONSENT_FORM_ADULT, Label.CONSENT_SURVEY_COMPLETED);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.RESEARCH_CONSENT_FORM, ID.RESEARCH_CONSENT_FORM_ADULT, Label.CONSENT_SURVEY_CREATED);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.RESEARCH_CONSENT_FORM, ID.RESEARCH_CONSENT_FORM_ADULT, Label.CONSENT_LAST_UPDATED);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.RESEARCH_CONSENT_FORM, ID.RESEARCH_CONSENT_FORM_ADULT, Label.CONSENT_SURVEY_STATUS);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.RESEARCH_CONSENT_FORM, ID.RESEARCH_CONSENT_FORM_ADULT, Label.CONSENT_BLOOD);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.RESEARCH_CONSENT_FORM, ID.RESEARCH_CONSENT_FORM_ADULT, Label.CONSENT_LASTNAME);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.RESEARCH_CONSENT_FORM, ID.RESEARCH_CONSENT_FORM_ADULT, Label.CONSENT_TISSUE);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.RESEARCH_CONSENT_FORM, ID.RESEARCH_CONSENT_FORM_ADULT, Label.DATE_OF_BIRTH);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.RESEARCH_CONSENT_FORM, ID.RESEARCH_CONSENT_FORM_ADULT, Label.YOUR_NAME);
+
+      await customizeViewPanel.closeColumnGroup({ columnSection: CV.RESEARCH_CONSENT_FORM, stableID: ID.RESEARCH_CONSENT_FORM_ADULT});
 
       /* Loved One Survey Columns */
+      await customizeViewPanel.openColumnGroup({ columnSection: CV.LOVED_ONE_SURVEY, stableID: ID.LOVED_ONE});
+
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.LOVED_ONE_SURVEY, ID.LOVED_ONE, Label.HOW_HEARD_ABOUT_PROJECT);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.LOVED_ONE_SURVEY, ID.LOVED_ONE, Label.LOVED_ONE_COMPLETED);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.LOVED_ONE_SURVEY, ID.LOVED_ONE, Label.LOVED_ONE_CREATED);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.LOVED_ONE_SURVEY, ID.LOVED_ONE, Label.LOVED_ONE_LAST_UPDATED);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.LOVED_ONE_SURVEY, ID.LOVED_ONE, Label.LOVED_ONE_STATUS);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.LOVED_ONE_SURVEY, ID.LOVED_ONE, Label.LOVED_ONE_ADDITIONAL_SURVEY_CONTACT);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.LOVED_ONE_SURVEY, ID.LOVED_ONE, Label.LOVED_ONE_DIAGNOSED_DETAILS);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.LOVED_ONE_SURVEY, ID.LOVED_ONE, Label.LOVED_ONE_DIAGNOSIS_DATE);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.LOVED_ONE_SURVEY, ID.LOVED_ONE, Label.LOVED_ONE_DIAGNOSIS_POSTAL_CODE);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.LOVED_ONE_SURVEY, ID.LOVED_ONE, Label.LOVED_ONE_DIAGNOSIS_PRIMARY_LOCATION);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.LOVED_ONE_SURVEY, ID.LOVED_ONE, Label.LOVED_ONE_DIAGNOSIS_SPREAD_LOC);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.LOVED_ONE_SURVEY, ID.LOVED_ONE, Label.LOVED_ONE_DATE_OF_BIRTH);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.LOVED_ONE_SURVEY, ID.LOVED_ONE, Label.LOVED_ONE_EVER_RELAPSED);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.LOVED_ONE_SURVEY, ID.LOVED_ONE, Label.LOVED_ONE_EXPERIENCE);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.LOVED_ONE_SURVEY, ID.LOVED_ONE, Label.LOVED_ONE_FAMILY_HISTORY);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.LOVED_ONE_SURVEY, ID.LOVED_ONE, Label.LOVED_ONE_FUTURE_CONTACT);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.LOVED_ONE_SURVEY, ID.LOVED_ONE, Label.LOVED_ONE_HAD_BENIGN_BONE_TUMOR);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.LOVED_ONE_SURVEY, ID.LOVED_ONE, Label.LOVED_ONE_HAD_RADIATION);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.LOVED_ONE_SURVEY, ID.LOVED_ONE, Label.LOVED_ONE_HISPANIC);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.LOVED_ONE_SURVEY, ID.LOVED_ONE, Label.LOVED_ONE_METASTATIC_DISEASE_DATE);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.LOVED_ONE_SURVEY, ID.LOVED_ONE, Label.LOVED_ONE_OTHER_CANCERS);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.LOVED_ONE_SURVEY, ID.LOVED_ONE, Label.LOVED_ONE_OTHER_CANCERS_LIST);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.LOVED_ONE_SURVEY, ID.LOVED_ONE, Label.LOVED_ONE_PASSED_POSTAL_CODE);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.LOVED_ONE_SURVEY, ID.LOVED_ONE, Label.LOVED_ONE_PRIMARY_CAREGIVER);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.LOVED_ONE_SURVEY, ID.LOVED_ONE, Label.LOVED_ONE_RACE);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.LOVED_ONE_SURVEY, ID.LOVED_ONE, Label.LOVED_ONE_RADIATION_LOC);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.LOVED_ONE_SURVEY, ID.LOVED_ONE, Label.LOVED_ONE_RECEIVED_RADIATION);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.LOVED_ONE_SURVEY, ID.LOVED_ONE, Label.LOVED_ONE_RELAPSE_DATES);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.LOVED_ONE_SURVEY, ID.LOVED_ONE, Label.LOVED_ONE_SURGERIES);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.LOVED_ONE_SURVEY, ID.LOVED_ONE, Label.LOVED_ONE_SYMPTOMS_START_TIME);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.LOVED_ONE_SURVEY, ID.LOVED_ONE, Label.LOVED_ONE_THERAPIES_RECEIVED);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.LOVED_ONE_SURVEY, ID.LOVED_ONE, Label.WHAT_IS_LOVED_ONE_FIRSTNAME);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.LOVED_ONE_SURVEY, ID.LOVED_ONE, Label.WHAT_IS_LOVED_ONE_LASTNAME);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.LOVED_ONE_SURVEY, ID.LOVED_ONE, Label.WHAT_IS_RELATION_TO_LOVED_ONE);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.LOVED_ONE_SURVEY, ID.LOVED_ONE, Label.WHEN_DID_LOVED_ONE_PASS_AWAY);
+
+      await customizeViewPanel.closeColumnGroup({ columnSection: CV.LOVED_ONE_SURVEY, stableID: ID.LOVED_ONE});
 
       /* Research Consent & Assent Form Columns (consent-assent) */
+      await customizeViewPanel.openColumnGroup({ columnSection: CV.RESEARCH_CONSENT_ASSENT_FORM, stableID: ID.CONSENT_ASSENT});
+
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.RESEARCH_CONSENT_ASSENT_FORM, ID.CONSENT_ASSENT, Label.CHILD_ADOLESCENT_ASSENT);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.RESEARCH_CONSENT_ASSENT_FORM, ID.CONSENT_ASSENT, Label.CONSENT_ASSENT_COMPLETED);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.RESEARCH_CONSENT_ASSENT_FORM, ID.CONSENT_ASSENT, Label.CONSENT_ASSENT_CREATED);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.RESEARCH_CONSENT_ASSENT_FORM, ID.CONSENT_ASSENT, Label.CONSENT_ASSENT_LAST_UPDATED);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.RESEARCH_CONSENT_ASSENT_FORM, ID.CONSENT_ASSENT, Label.CONSENT_ASSENT_STATUS);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.RESEARCH_CONSENT_ASSENT_FORM, ID.CONSENT_ASSENT, Label.CONSENT_ASSENT_BLOOD);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.RESEARCH_CONSENT_ASSENT_FORM, ID.CONSENT_ASSENT, Label.CONSENT_ASSENT_CHILD_LASTNAME);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.RESEARCH_CONSENT_ASSENT_FORM, ID.CONSENT_ASSENT, Label.CONSENT_ASSENT_LASTNAME);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.RESEARCH_CONSENT_ASSENT_FORM, ID.CONSENT_ASSENT, Label.CONSENT_ASSENT_TISSUE);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.RESEARCH_CONSENT_ASSENT_FORM, ID.CONSENT_ASSENT, Label.RELATIONSHIP_TO_CHILD);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.RESEARCH_CONSENT_ASSENT_FORM, ID.CONSENT_ASSENT, Label.YOUR_CHILD_NAME);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.RESEARCH_CONSENT_ASSENT_FORM, ID.CONSENT_ASSENT, Label.CHILD_DATE_OF_BIRTH);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.RESEARCH_CONSENT_ASSENT_FORM, ID.CONSENT_ASSENT, Label.YOUR_NAME);
+
+      await customizeViewPanel.closeColumnGroup({ columnSection: CV.RESEARCH_CONSENT_ASSENT_FORM, stableID: ID.CONSENT_ASSENT});
 
       /* Research Consent Form Columns (parental-consnet) */
+      await customizeViewPanel.openColumnGroup({ columnSection: CV.RESEARCH_CONSENT_FORM, stableID: ID.RESEARCH_CONSENT_FORM_KID});
+
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.RESEARCH_CONSENT_FORM, ID.RESEARCH_CONSENT_FORM_KID, Label.PARENTAL_CONSENT_COMPLETED);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.RESEARCH_CONSENT_FORM, ID.RESEARCH_CONSENT_FORM_KID, Label.PARENTAL_CONSENT_CREATED);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.RESEARCH_CONSENT_FORM, ID.RESEARCH_CONSENT_FORM_KID, Label.PARENTAL_CONSENT_UPDATED);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.RESEARCH_CONSENT_FORM, ID.RESEARCH_CONSENT_FORM_KID, Label.PARENTAL_CONSENT_STATUS);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.RESEARCH_CONSENT_FORM, ID.RESEARCH_CONSENT_FORM_KID, Label.PARENTAL_CONSENT_BLOOD);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.RESEARCH_CONSENT_FORM, ID.RESEARCH_CONSENT_FORM_KID, Label.PARENTAL_CON_CHILD_LASTNAME);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.RESEARCH_CONSENT_FORM, ID.RESEARCH_CONSENT_FORM_KID, Label.PARENTAL_CONSENT_TISSUE);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.RESEARCH_CONSENT_FORM, ID.RESEARCH_CONSENT_FORM_KID, Label.RELATIONSHIP_TO_CHILD);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.RESEARCH_CONSENT_FORM, ID.RESEARCH_CONSENT_FORM_KID, Label.YOUR_CHILD_NAME);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.RESEARCH_CONSENT_FORM, ID.RESEARCH_CONSENT_FORM_KID, Label.CHILD_DATE_OF_BIRTH);
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.RESEARCH_CONSENT_FORM, ID.RESEARCH_CONSENT_FORM_KID, Label.YOUR_NAME);
+
+      await customizeViewPanel.closeColumnGroup({ columnSection: CV.RESEARCH_CONSENT_FORM, stableID: ID.RESEARCH_CONSENT_FORM_KID});
 
       /* Medical Release Form Columns (adult) */
       await customizeViewPanel.openColumnGroup({ columnSection: CV.MEDICAL_RELEASE_FORM, stableID: ID.MEDICAL_RELEASE_FORM_ADULT });

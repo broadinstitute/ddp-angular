@@ -80,6 +80,7 @@ export enum CustomizeView {
 
 //The id attribute used by customize view columns - use enum to keep track of stable ids
 export enum CustomizeViewID {
+  ABSTRACTION = 'a',
   ADD_CHILD_PARTICIPANT = 'ADD_PARTICIPANT',
   LEARN_ABOUT_KID_TUMOR = 'CONSENT_ADDENDUM_PEDIATRIC',
   LEARN_KID_DNA = 'GERMLINE_CONSENT_ADDENDUM_PEDIATRIC',
@@ -207,6 +208,7 @@ export enum Label {
   ACCEPTANCE_STATUS = 'Acceptance Status**',
   ACCEPTANCE_STATUS_DATE = 'Acceptance Status Date**',
   ACCESSION_NUMBER = 'Accession Number',
+  ACTIVITY = 'Activity',
   ADDENDUM_CONSENT_BOOL = 'ADDENDUM_CONSENT_BOOL',
   ADDENDUM_CONSENT_KID = 'ADDENDUM_CONSENT_BOOL_PEDIATRIC',
   AFFECTED_STATUS = 'Affected Status',
@@ -222,6 +224,7 @@ export enum Label {
   BLOCK_ID = 'Block Id',
   BLOCK_ID_TO_SHL = 'Block ID to SHL',
   BLOCKS_WITH_TUMOR = 'Blocks with Tumor',
+  CERTAIN_TEXT = 'CertainText',
   CHILD_ADOLESCENT_ASSENT = `Child/Adolescent Assent`,
   CHILD_CONTACT_COMPLETED = 'CHILD_CONTACT Survey Completed',
   CHILD_CONTACT_CREATED = 'CHILD_CONTACT Survey Created',
@@ -397,6 +400,7 @@ export enum Label {
   FH_OTHER_FACTORS_CANCER_RISK = 'FH_OTHER_FACTORS_CANCER_RISK',
   FILE_UPLOAD_TIME = 'File Upload Time',
   FIRST_NAME = 'First Name',
+  FIRST_NUMBER = 'FirstNumber',
   FIRST_SM_ID = 'First SM ID',
   FOLLOW_UP_REQUIRED = 'Follow-Up required',
   FOLLOW_UP_REQUIRED_TEXT = 'Follow-Up required Text',
@@ -515,6 +519,7 @@ export enum Label {
   OTHER_CANCERS = 'OTHER_CANCERS',
   OTHER_CANCERS_LIST = 'OTHER_CANCERS_LIST',
   OTHER_COMMENTS = 'OTHER_COMMENTS',
+  OTHER_MULTI_SELECT = 'OtherMultiSelect',
   PAPER_CR_RECEIVED = 'Paper C/R Received',
   PAPER_CR_REQUIRED = 'Paper C/R required', //written like this in Customize View -> Medical Record Columns
   PAPER_CR_REQUIRED_MEDICAL_RECORD_TABLE = 'Paper C/R Required', //written like this in Participant page -> Medical Record
@@ -584,6 +589,8 @@ export enum Label {
   SAMPLE_TYPE = 'Sample Type',
   SCROLL = 'Scroll(s)',
   SCROLLS_BACK_FROM_SHL = 'Scrolls back from SHL',
+  SECOND_NUMBER = 'SecondNumber',
+  SELECT = 'Select',
   SELF_COUNTRY = 'SELF_COUNTRY',
   SELF_CURRENT_AGE = 'SELF_CURRENT_AGE',
   SELF_PROVINCE = 'SELF_PROVINCE',
@@ -644,6 +651,7 @@ export enum Label {
   TUMOR_TYPE = 'Tumor Type',
   UNABLE_TO_OBTAIN = 'Unable to Obtain',
   UPLOADED_FILE_NAME = 'Uploaded File Name',
+  USER = 'User',
   USS_UNSTAINED = 'USS (unstained slides)',
   VALID = 'Valid',
   VERIFIED = 'Verified',
