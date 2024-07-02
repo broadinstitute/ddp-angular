@@ -16,6 +16,7 @@ export enum SurveyDataPanelEnum {
   SURVEY_ABOUT_YOU_OR_YOUR_CHILD = 'Survey: About your child/you',
   SURVEY_FAMILY_HISTORY_OF_CANCER = 'Survey: Family History of Cancer',
   SURVEY_YOUR_OR_YOUR_CHILDS_OSTEOSARCOMA = `Survey: Your Child's/Your Osteosarcoma`,
+  SURVEY_YOUR_CHILDS_OSTEOSARCOMA = `Survey: Your Child's Osteosarcoma`,
 }
 
 export enum ActivityVersionEnum {

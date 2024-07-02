@@ -1,10 +1,16 @@
 import { expect } from '@playwright/test';
+import CohortTag from 'dsm/component/cohort-tag';
 import { QuickFiltersEnum } from 'dsm/component/filters/quick-filters';
-import { CustomizeView as CV, CustomizeViewID as ID, Label, ParticipantListPageOptions as ParticipantList } from 'dsm/enums';
+import { CustomizeView as CV, DataFilter, CustomizeViewID as ID, Label, ParticipantListPageOptions as ParticipantList, FieldSettingInputType as FieldSetting, Tab } from 'dsm/enums';
 import { Navigation, Study, StudyName } from 'dsm/navigation';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
+import ParticipantPage from 'dsm/pages/participant-page';
+import SurveyDataTab from 'dsm/pages/tablist/survey-data-tab';
 import Select from 'dss/component/select';
+import { SortOrder } from 'dss/component/table';
+import { SurveyDataPanelEnum as SurveyName, ActivityVersionEnum as ActivityVersion } from 'dsm/component/tabs/enums/survey-data-enum';
 import { test } from 'fixtures/dsm-fixture';
+import { logInfo } from 'utils/log-utils';
 
 test.describe.serial(`${StudyName.OSTEO}: Verify expected display of participant information @dsm @functional @${StudyName.OSTEO}`, () => {
   let navigation;
@@ -440,7 +446,323 @@ test.describe.serial(`${StudyName.OSTEO}: Verify expected display of participant
     });
   })
 
-  test.skip(`${StudyName.OSTEO}: Verify expected display of participant page`, async ({ page, request }) => {
-    //stuff here
+  test(`${StudyName.OSTEO}: Verify expected display of participant page`, async ({ page, request }) => {
+    navigation = new Navigation(page, request);
+    await new Select(page, { label: 'Select study' }).selectOption(StudyName.OSTEO);
+
+    const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(Study.PARTICIPANT_LIST);
+    await participantListPage.waitForReady();
+
+    const participantListTable = participantListPage.participantListTable;
+    let participantPage: ParticipantPage;
+    let shortID: string;
+    let surveyDataTab: SurveyDataTab;
+
+    //Search for an enrolled participant and check that they have the expected webelements
+    await test.step(`Find a participant with most of the OS1 activities`, async () => {
+      const customizeViewPanel = participantListPage.filters.customizeViewPanel;
+      await customizeViewPanel.open();
+
+      await customizeViewPanel.openColumnGroup({ columnSection: CV.SURVEY_YOUR_CHILDS_OSTEO, stableID: ID.SURVEY_YOUR_CHILDS_OSTEO });
+      await customizeViewPanel.selectColumns(CV.SURVEY_YOUR_CHILDS_OSTEO, [Label.ABOUT_CHILD_COMPLETED]);
+      await customizeViewPanel.closeColumnGroup({ columnSection: CV.SURVEY_YOUR_CHILDS_OSTEO, stableID: ID.SURVEY_YOUR_CHILDS_OSTEO });
+
+      await customizeViewPanel.openColumnGroup({ columnSection: CV.MEDICAL_RELEASE_FORM, stableID: ID.MEDICAL_RELEASE_FORM_KID });
+      await customizeViewPanel.selectColumnsByID(
+        'Medical Release Form Columns',
+        [Label.INSTITUTION_UPPER_CASE],
+        ID.MEDICAL_RELEASE_FORM_KID,
+        { nth: 1 }
+      );
+      await customizeViewPanel.closeColumnGroup({ columnSection: CV.MEDICAL_RELEASE_FORM, stableID: ID.MEDICAL_RELEASE_FORM_KID });
+
+      await customizeViewPanel.close();
+      const searchPanel = participantListPage.filters.searchPanel;
+      await searchPanel.open();
+      await searchPanel.checkboxes(Label.STATUS, { checkboxValues: [DataFilter.ENROLLED] });
+      await searchPanel.dates(Label.ABOUT_CHILD_COMPLETED, { additionalFilters: [DataFilter.NOT_EMPTY] });
+      await searchPanel.search();
+
+      //Note a.k.a TODO: when PEPPER-1434 is fixed, also do a search for Not Empty results for Institution
+      const amountOfReturnedParticipants = await participantListTable.numOfParticipants();
+      expect(amountOfReturnedParticipants).toBeGreaterThan(0);
+
+      await participantListTable.sort(Label.INSTITUTION_UPPER_CASE, SortOrder.ASC);
+      shortID = await participantListTable.getParticipantDataAt(0, Label.SHORT_ID);
+      participantPage = await participantListTable.openParticipantPageAt(0);
+      logInfo(`Checking ${shortID}'s participant page`);
+    });
+
+    await test.step(`Check participant page - profile section to make sure all webelements are accounted for`, async () => {
+      await participantPage.waitForReady();
+
+      //Check the profile section
+      const enrollmentStatus = await participantPage.getStatus();
+      expect(enrollmentStatus).toBe(DataFilter.ENROLLED);
+
+      const registrationDate = await participantPage.getRegistrationDate();
+      expect(registrationDate).toBeTruthy();
+
+      const participantPageShortID = await participantPage.getShortId();
+      expect(participantPageShortID).toBeTruthy();
+
+      const participantGuid = await participantPage.getGuid();
+      expect(participantGuid).toBeTruthy();
+
+      const firstName = await participantPage.getFirstName();
+      expect(firstName).toBeTruthy();
+
+      const lastName = await participantPage.getLastName();
+      expect(lastName).toBeTruthy();
+
+      const email = await participantPage.getEmail();
+      expect(email).toBeTruthy();
+
+      const doNotContactCheckbox = participantPage.getDoNotContactSection();
+      await expect(doNotContactCheckbox).toBeVisible();
+
+      const dateOfBirth = await participantPage.getDateOfBirth();
+      expect(dateOfBirth).toBeTruthy();
+
+      const dateOfMajority = await participantPage.getDateOfMajority();
+      expect(dateOfMajority).toBeTruthy();
+
+      //Date of Diagnosis is not a required question - so skipping asserting that it is present
+
+      const consentTissueResponse = await participantPage.getConsentTissue();
+      expect(consentTissueResponse).toMatch(/(Yes|No)/);
+
+      const consentBloodResponse = await participantPage.getConsentBlood();
+      expect(consentBloodResponse).toMatch(/(Yes|No)/);
+
+      //Gender is not a required question - so skipping asserting that it is present
+
+      const preferredLanguage = await participantPage.getPreferredLanguage();
+      expect(preferredLanguage).toMatch(/(English|Español)/); //Español, in case a ptp is re-consented
+
+      //Check that cohort tags are as expected
+      const participantPageCohortTags = new CohortTag(page);
+      const researchTag = participantPageCohortTags.getTag('OS');
+      expect(researchTag).toBeTruthy();
+
+      //Additional profile section check e.g. webelements usually added via Field Settings
+      const participantNotes = participantPage.getFieldSettingWebelement({ name: Label.PARTICIPANT_NOTES, fieldSettingType: FieldSetting.TEXTAREA });
+      await expect(participantNotes).toBeVisible();
+
+      const oncHistoryCreated = participantPage.getFieldSettingWebelement({ name: Label.ONC_HISTORY_CREATED, fieldSettingType: FieldSetting.DATE });
+      await expect(oncHistoryCreated).toBeVisible();
+
+      const medicalRecordCheckbox = participantPage.getFieldSettingWebelement({
+        name: Label.INCOMPLETE_OR_MINIMAL_MEDICAL_RECORDS,
+        fieldSettingType: FieldSetting.CHECKBOX
+      });
+      await expect(medicalRecordCheckbox).toBeVisible();
+
+      const readyForAbstractionCheckbox = participantPage.getFieldSettingWebelement({
+        name: Label.READY_FOR_ABSTRACTION,
+        fieldSettingType: FieldSetting.CHECKBOX
+      });
+      await expect(readyForAbstractionCheckbox).toBeVisible();
+
+      //May be an OS1-only webelement - seen in OS1 Prod
+      const patientContactedForPaperCRDate = participantPage.getFieldSettingWebelement({
+        name: 'Patient Contacted for Paper C/R',
+        fieldSettingType: FieldSetting.DATE
+      });
+      await expect(patientContactedForPaperCRDate).toBeVisible();
+    });
+
+    await test.step(`Check that expected OS1 tabs are displayed`, async () => {
+      //Check that the participant has the Survey Data, Sample Information, Medical Records, Onc History tab
+      //Note: following check is also done for a OS1 -> OS2 ptp in os1-to-os2-display-verification.spec.ts
+      const isSurveyDataTabVisible = await participantPage.tablist(Tab.SURVEY_DATA).isVisible();
+      expect(isSurveyDataTabVisible).toBeTruthy();
+
+      //TODO Adjust the OS1 ptp creation test utility to also add a kit to the OS1 ptp, to add checking for the Sample Information tab
+
+      const isMedicalRecordTabVisible = await participantPage.tablist(Tab.MEDICAL_RECORD).isVisible();
+      expect(isMedicalRecordTabVisible).toBeTruthy();
+
+      const isOncHistoryTabVisible = await participantPage.tablist(Tab.ONC_HISTORY).isVisible();
+      expect(isOncHistoryTabVisible).toBeTruthy();
+
+      const jumpToText = participantPage.getJumpTo();
+      await jumpToText.scrollIntoViewIfNeeded();
+      await expect(jumpToText).toBeVisible();
+
+      const prequalifierSurveyLink = participantPage.getSurveyLink({ surveyName: 'Prequalifier Survey v1' });
+      await expect(prequalifierSurveyLink).toBeVisible();
+
+      const consentFormLink = participantPage.getSurveyLink({ surveyName: 'Research Consent Form v1' });
+      await expect(consentFormLink).toBeVisible();
+
+      const medicalReleaseLink = participantPage.getSurveyLink({ surveyName: 'Medical Release Form v1' });
+      await expect(medicalReleaseLink).toBeVisible();
+    });
+
+    await test.step(`Check that the Prequalifier Survey is displayed as expected`, async () => {
+      //Check that the participant has the Prequalifier activity
+      surveyDataTab = new SurveyDataTab(page);
+
+      //Check Prequalifier questions are all present
+      const prequalActivity = await surveyDataTab.getActivity({
+        activityName: SurveyName.PREQUALIFIER,
+        activityVersion: ActivityVersion.ONE
+      });
+      await prequalActivity.scrollIntoViewIfNeeded();
+      await expect(prequalActivity).toBeVisible();
+      await prequalActivity.click(); //Click to open the panel to access the questions
+
+      const prequalSelfDescribe = await surveyDataTab.getActivityQuestion({
+        activity: prequalActivity,
+        questionShortID: Label.PREQUAL_SELF_DESCRIBE
+      });
+      await surveyDataTab.assertActivityQuestionDisplayed(prequalSelfDescribe);
+
+      const currentAge = await surveyDataTab.getActivityQuestion({
+        activity: prequalActivity,
+        questionShortID: Label.SELF_CURRENT_AGE
+      });
+      await surveyDataTab.assertActivityQuestionDisplayed(currentAge);
+
+      const country = await surveyDataTab.getActivityQuestion({
+        activity: prequalActivity,
+        questionShortID: Label.SELF_COUNTRY
+      });
+      await surveyDataTab.assertActivityQuestionDisplayed(country);
+
+      const province = await surveyDataTab.getActivityQuestion({
+        activity: prequalActivity,
+        questionShortID: Label.SELF_PROVINCE
+      });
+      await surveyDataTab.assertActivityQuestionDisplayed(province);
+
+      const childAge = await surveyDataTab.getActivityQuestion({
+        activity: prequalActivity,
+        questionShortID: Label.CHILD_CURRENT_AGE
+      });
+      await surveyDataTab.assertActivityQuestionDisplayed(childAge);
+
+      const childCountry = await surveyDataTab.getActivityQuestion({
+        activity: prequalActivity,
+        questionShortID: Label.CHILD_COUNTRY
+      });
+      await surveyDataTab.assertActivityQuestionDisplayed(childCountry);
+
+      const childState = await surveyDataTab.getActivityQuestion({
+        activity: prequalActivity,
+        questionShortID: Label.CHILD_STATE
+      });
+      await surveyDataTab.assertActivityQuestionDisplayed(childState);
+
+      const childProvince = await surveyDataTab.getActivityQuestion({
+        activity: prequalActivity,
+        questionShortID: Label.CHILD_PROVINCE
+      });
+      await surveyDataTab.assertActivityQuestionDisplayed(childProvince);
+    })
+
+    await test.step(`Check that the Survey: Your Child's Osteosarcoma is displayed as expected`, async () => {
+      surveyDataTab = new SurveyDataTab(page);
+
+      //Check that the participant has the Survey: Your Child's Osteosarcoma activity
+      const yourChildOsteoActivity = await surveyDataTab.getActivity({
+        activityName: SurveyName.SURVEY_YOUR_CHILDS_OSTEOSARCOMA,
+        activityVersion: ActivityVersion.ONE,
+      });
+      await yourChildOsteoActivity.scrollIntoViewIfNeeded();
+      await expect(yourChildOsteoActivity).toBeVisible();
+      await yourChildOsteoActivity.click();
+
+      const fillingOutSurvey = await surveyDataTab.getActivityQuestion({
+        activity: yourChildOsteoActivity,
+        questionShortID: Label.WHO_IS_FILLING_ID
+      });
+      await surveyDataTab.assertActivityQuestionDisplayed(fillingOutSurvey);
+
+      const childDiagnosisDate = await surveyDataTab.getActivityQuestion({
+        activity: yourChildOsteoActivity,
+        questionShortID: Label.CHILD_DIAGNOSIS_DATE
+      });
+      await surveyDataTab.assertActivityQuestionDisplayed(childDiagnosisDate);
+
+      const childSymptomStartTime = await surveyDataTab.getActivityQuestion({
+        activity: yourChildOsteoActivity,
+        questionShortID: Label.CHILD_SYMPTOMS_START_TIME
+      });
+      await surveyDataTab.assertActivityQuestionDisplayed(childSymptomStartTime);
+
+      const childInitialBodyLocation = await surveyDataTab.getActivityQuestion({
+        activity: yourChildOsteoActivity,
+        questionShortID: Label.CHILD_INITIAL_BODY_LOC
+      });
+      await surveyDataTab.assertActivityQuestionDisplayed(childInitialBodyLocation);
+
+      const childCurrentBodyLocation = await surveyDataTab.getActivityQuestion({
+        activity: yourChildOsteoActivity,
+        questionShortID: Label.CHILD_CURRENT_BODY_LOC
+      });
+      await surveyDataTab.assertActivityQuestionDisplayed(childCurrentBodyLocation);
+
+      const childHadRadiation = await surveyDataTab.getActivityQuestion({
+        activity: yourChildOsteoActivity,
+        questionShortID: Label.CHILD_HAD_RADIATION
+      });
+      await surveyDataTab.assertActivityQuestionDisplayed(childHadRadiation);
+
+      const childTherapiesReceived = await surveyDataTab.getActivityQuestion({
+        activity: yourChildOsteoActivity,
+        questionShortID: Label.CHILD_THERAPIES_RECEIVED
+      });
+      await surveyDataTab.assertActivityQuestionDisplayed(childTherapiesReceived);
+
+      const childEverRelapsed = await surveyDataTab.getActivityQuestion({
+        activity: yourChildOsteoActivity,
+        questionShortID: Label.CHILD_EVER_RELAPSED
+      });
+      await surveyDataTab.assertActivityQuestionDisplayed(childEverRelapsed);
+
+      const childCurrentlyTreated = await surveyDataTab.getActivityQuestion({
+        activity: yourChildOsteoActivity,
+        questionShortID: Label.CHILD_CURRENTLY_TREATED
+      });
+      await surveyDataTab.assertActivityQuestionDisplayed(childCurrentlyTreated);
+
+      const childOtherCancers = await surveyDataTab.getActivityQuestion({
+        activity: yourChildOsteoActivity,
+        questionShortID: Label.CHILD_OTHER_CANCERS
+      });
+      await surveyDataTab.assertActivityQuestionDisplayed(childOtherCancers);
+
+      const childOtherCancersList = await surveyDataTab.getActivityQuestion({
+        activity: yourChildOsteoActivity,
+        questionShortID: Label.CHILD_OTHER_CANCERS_LIST
+      });
+      await surveyDataTab.assertActivityQuestionDisplayed(childOtherCancersList);
+
+      const childExperience = await surveyDataTab.getActivityQuestion({
+        activity: yourChildOsteoActivity,
+        questionShortID: Label.CHILD_EXPERIENCE
+      });
+      await surveyDataTab.assertActivityQuestionDisplayed(childExperience);
+
+      const childHispanic = await surveyDataTab.getActivityQuestion({
+        activity: yourChildOsteoActivity,
+        questionShortID: Label.CHILD_HISPANIC
+      });
+      await surveyDataTab.assertActivityQuestionDisplayed(childHispanic);
+
+      const childRace = await surveyDataTab.getActivityQuestion({
+        activity: yourChildOsteoActivity,
+        questionShortID: Label.CHILD_RACE
+      });
+      await surveyDataTab.assertActivityQuestionDisplayed(childRace);
+
+      const childHowHeardAboutProject = await surveyDataTab.getActivityQuestion({
+        activity: yourChildOsteoActivity,
+        questionShortID: Label.CHILD_HOW_HEARD_ID
+      });
+      await surveyDataTab.assertActivityQuestionDisplayed(childHowHeardAboutProject);
+    })
   })
 })
