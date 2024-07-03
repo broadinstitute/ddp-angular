@@ -752,7 +752,44 @@ test.describe.serial(`${StudyName.OSTEO}: Verify expected display of participant
     })
 
     await test.step(`Check that the Medical Release Form is displayed as expected`, async () => {
-      //stuff here
+      surveyDataTab = new SurveyDataTab(page);
+      const medicalReleaseActivity = await surveyDataTab.getActivity({
+        activityName: SurveyName.MEDICAL_RELEASE_FORM,
+        activityVersion: ActivityVersion.ONE
+      });
+      await medicalReleaseActivity.scrollIntoViewIfNeeded();
+      await expect(medicalReleaseActivity).toBeVisible();
+      await medicalReleaseActivity.click();
+
+      const mailingAdress = await surveyDataTab.getActivityQuestion({
+        activity: medicalReleaseActivity,
+        questionShortID: Label.MAILING_ADDRESS_SHORT_ID
+      });
+      await surveyDataTab.assertActivityQuestionDisplayed(mailingAdress);
+
+      const physician = await surveyDataTab.getActivityQuestion({
+        activity: medicalReleaseActivity,
+        questionShortID: Label.PHYSICIAN
+      });
+      await surveyDataTab.assertActivityQuestionDisplayed(physician);
+
+      const initialBiopsy = await surveyDataTab.getActivityQuestion({
+        activity: medicalReleaseActivity,
+        questionShortID: Label.INITIAL_BIOPSY
+      });
+      await surveyDataTab.assertActivityQuestionDisplayed(initialBiopsy);
+
+      const institution = await surveyDataTab.getActivityQuestion({
+        activity: medicalReleaseActivity,
+        questionShortID: Label.INSTITUTION_UPPER_CASE
+      });
+      await surveyDataTab.assertActivityQuestionDisplayed(institution);
+
+      const releaseMinorAgreement = await surveyDataTab.getActivityQuestion({
+        activity: medicalReleaseActivity,
+        questionShortID: Label.RELEASE_MINOR_AGREEMENT
+      });
+      await surveyDataTab.assertActivityQuestionDisplayed(releaseMinorAgreement);
     })
 
     await test.step(`Check that the Survey: Your Child's Osteosarcoma is displayed as expected`, async () => {
