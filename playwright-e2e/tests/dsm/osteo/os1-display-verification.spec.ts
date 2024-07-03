@@ -662,6 +662,99 @@ test.describe.serial(`${StudyName.OSTEO}: Verify expected display of participant
       await surveyDataTab.assertActivityQuestionDisplayed(childProvince);
     })
 
+    await test.step(`Check that the Research Consent Form is displayed as expected`, async () => {
+      surveyDataTab = new SurveyDataTab(page);
+
+      const consentAssentActivity = await surveyDataTab.getActivity({
+        activityName: SurveyName.RESEARCH_CONSENT_ASSENT_FORM,
+        activityVersion: ActivityVersion.ONE,
+        checkForVisibility: false
+      });
+      const parentalConsentActivity = await surveyDataTab.getActivity({
+        activityName: SurveyName.RESEARCH_CONSENT_FORM,
+        activityVersion: ActivityVersion.ONE,
+        checkForVisibility: false
+      });
+
+      //Determine if we're looking at a consent-assent or parental-consent ptp - use this method until PEPPER-1434 is fixed
+      const useConsentAssentActivity = await consentAssentActivity.isVisible();
+      const consentBloodID = useConsentAssentActivity ? Label.CONSENT_ASSENT_BLOOD : Label.PARENTAL_CONSENT_BLOOD;
+      const consentTissueID = useConsentAssentActivity ? Label.CONSENT_ASSENT_TISSUE : Label.PARENTAL_CONSENT_TISSUE;
+      const childFirstNameID = useConsentAssentActivity ? Label.CONSENT_ASSENT_CHILD_FISRTNAME : Label.PARENTAL_CON_CHILD_FIRSTNAME;
+      const childLastNameID = useConsentAssentActivity ? Label.CONSENT_ASSENT_CHILD_LASTNAME : Label.PARENTAL_CON_CHILD_LASTNAME;
+      const childDateOfBirthID = useConsentAssentActivity ? Label.CONSENT_ASSENT_CHILD_DATE_OF_BIRTH : Label.PARENTAL_CON_CHILD_DATE_OF_BIRTH;
+      const proxyFirstNameID = useConsentAssentActivity ? Label.CONSENT_ASSENT_FIRSTNAME : Label.PARENTAL_CONSENT_FIRSTNAME;
+      const proxyLastNameID = useConsentAssentActivity ? Label.CONSENT_ASSENT_LASTNAME : Label.PARENTAL_CONSENT_LASTNAME;
+      const proxyRelationshipToChildID = useConsentAssentActivity ? Label.CONSENT_ASSENT_RELATIONSHIP : Label.PARENTAL_CONSENT_RELATIONSHIP;
+      const childAssentSignatureID = Label.CONSENT_ASSENT_CHILD_SIGNATURE;
+
+      const researchConsentActivity = useConsentAssentActivity ? consentAssentActivity : parentalConsentActivity;
+      await researchConsentActivity.scrollIntoViewIfNeeded();
+      await expect(researchConsentActivity).toBeVisible();
+      await researchConsentActivity.click();
+
+      //Check pediatric research consent questions
+      const consentBlood = await surveyDataTab.getActivityQuestion({
+        activity: researchConsentActivity,
+        questionShortID: consentBloodID
+      });
+      await surveyDataTab.assertActivityQuestionDisplayed(consentBlood);
+
+      const consentTissue = await surveyDataTab.getActivityQuestion({
+        activity: researchConsentActivity,
+        questionShortID: consentTissueID
+      });
+      await surveyDataTab.assertActivityQuestionDisplayed(consentTissue);
+
+      const studyParticipantFirstName = await surveyDataTab.getActivityQuestion({
+        activity: researchConsentActivity,
+        questionShortID: childFirstNameID
+      });
+      await surveyDataTab.assertActivityQuestionDisplayed(studyParticipantFirstName);
+
+      const studyParticipantLastName = await surveyDataTab.getActivityQuestion({
+        activity: researchConsentActivity,
+        questionShortID: childLastNameID
+      });
+      await surveyDataTab.assertActivityQuestionDisplayed(studyParticipantLastName);
+
+      const studyParticipantDateOfBirth = await surveyDataTab.getActivityQuestion({
+        activity: researchConsentActivity,
+        questionShortID: childDateOfBirthID
+      });
+      await surveyDataTab.assertActivityQuestionDisplayed(studyParticipantDateOfBirth);
+
+      const proxyFirstName = await surveyDataTab.getActivityQuestion({
+        activity: researchConsentActivity,
+        questionShortID: proxyFirstNameID
+      });
+      await surveyDataTab.assertActivityQuestionDisplayed(proxyFirstName);
+
+      const proxyLastName = await surveyDataTab.getActivityQuestion({
+        activity: researchConsentActivity,
+        questionShortID: proxyLastNameID
+      });
+      await surveyDataTab.assertActivityQuestionDisplayed(proxyLastName);
+
+      const proxyRelationshipToChild = await surveyDataTab.getActivityQuestion({
+        activity: researchConsentActivity,
+        questionShortID: proxyRelationshipToChildID
+      });
+      await surveyDataTab.assertActivityQuestionDisplayed(proxyRelationshipToChild);
+
+      if (useConsentAssentActivity) {
+        const childAssentSignature = await surveyDataTab.getActivityQuestion({
+          activity: researchConsentActivity,
+          questionShortID: childAssentSignatureID
+        });
+        await surveyDataTab.assertActivityQuestionDisplayed(childAssentSignature);
+      }
+    })
+
+    await test.step(`Check that the Medical Release Form is displayed as expected`, async () => {
+      //stuff here
+    })
+
     await test.step(`Check that the Survey: Your Child's Osteosarcoma is displayed as expected`, async () => {
       surveyDataTab = new SurveyDataTab(page);
 
