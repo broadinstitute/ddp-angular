@@ -273,7 +273,8 @@ export default class ParticipantListPage extends DsmPageBase {
       uri?: string,
       prefix?: string,
       cohortTags?: string[],
-      enrollmentStatus?: EnrollmentStatus
+      enrollmentStatus?: EnrollmentStatus,
+      isAgedUpParticipant?: boolean
     }): Promise<string> {
     const {
       isPediatric = false,
@@ -285,7 +286,8 @@ export default class ParticipantListPage extends DsmPageBase {
       uri = '/ui/applyFilter',
       prefix,
       cohortTags = [],
-      enrollmentStatus
+      enrollmentStatus,
+      isAgedUpParticipant
     } = opts;
     const expectedTabs: Tab[] = [
       Tab.ONC_HISTORY,
@@ -375,6 +377,11 @@ export default class ParticipantListPage extends DsmPageBase {
               if (cohortTags && isSubset({ cohortTagGroup: currentParticipantTags, targetCohortTags: cohortTags })) {
                 shortID = JSON.stringify(value.esData.profile.hruid).replace(/['"]+/g, '');
                 console.log(`Participant ${shortID} has the tags [ ${cohortTags.join(', ')} ]`);
+              }
+            } else if (!isAgedUpParticipant) {
+              const ageUpInvitation = value.esData.invitations;
+              if (ageUpInvitation[0] === undefined) {
+                shortID = JSON.stringify(value.esData.profile.hruid).replace(/['"]+/g, '');
               }
             } else {
               shortID = JSON.stringify(value.esData.profile.hruid).replace(/['"]+/g, '');

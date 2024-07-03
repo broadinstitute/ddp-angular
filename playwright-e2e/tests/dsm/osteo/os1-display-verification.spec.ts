@@ -488,7 +488,12 @@ test.describe.serial(`${StudyName.OSTEO}: Verify expected display of participant
       expect(amountOfReturnedParticipants).toBeGreaterThan(0);
 
       await participantListTable.sort(Label.INSTITUTION_UPPER_CASE, SortOrder.ASC);
-      shortID = await participantListTable.getParticipantDataAt(0, Label.SHORT_ID);
+      shortID = await participantListPage.findParticipantWithTab({
+        tab: Tab.ONC_HISTORY,
+        isPediatric: true,
+        isAgedUpParticipant: false,
+        uri: 'filterList'
+      });
       participantPage = await participantListTable.openParticipantPageAt(0);
       logInfo(`Checking ${shortID}'s participant page`);
     });
@@ -516,7 +521,7 @@ test.describe.serial(`${StudyName.OSTEO}: Verify expected display of participant
       expect(lastName).toBeTruthy();
 
       const email = await participantPage.getEmail();
-      expect(email).toBeTruthy();
+      expect(email).toBeFalsy(); //only adults (self-consent and aged-up ptps who have re-consented get their emails put in here)
 
       const doNotContactCheckbox = participantPage.getDoNotContactSection();
       await expect(doNotContactCheckbox).toBeVisible();
@@ -593,7 +598,7 @@ test.describe.serial(`${StudyName.OSTEO}: Verify expected display of participant
       const prequalifierSurveyLink = participantPage.getSurveyLink({ surveyName: 'Prequalifier Survey v1' });
       await expect(prequalifierSurveyLink).toBeVisible();
 
-      const consentFormLink = participantPage.getSurveyLink({ surveyName: 'Research Consent Form v1' });
+      const consentFormLink = participantPage.getSurveyLink({ surveyName: 'Research Consent & Assent Form v1' });
       await expect(consentFormLink).toBeVisible();
 
       const medicalReleaseLink = participantPage.getSurveyLink({ surveyName: 'Medical Release Form v1' });
