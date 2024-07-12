@@ -22,7 +22,11 @@
     <img class="logo" src="/assets/images/DFCI llogo.png" alt="" />
     <img class="logo" src="/assets/images/PE-CGS-logo.png" alt="" />
   </div>
+
+
   <div class="paragraph-2">
+    <br><br>
+    <div class="paragraph-text-2" [innerHTML]="'home.fundingText' | translate"></div>
     <div class="paragraph-headline-2" [innerHTML]="'home.paragraph2Headline' | translate"></div>
     <div class="paragraph-text-2" [innerHTML]="'home.paragraph2Text' | translate"></div>
     <button class="paragraph-button-2" [routerLink]="['/about']">
