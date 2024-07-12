@@ -26,6 +26,29 @@
     margin: 1.875rem 0;
 }
 
+.funding-section-v1 {
+    background-color: #483D8B;
+    text-align: center;
+    //font-family: $primary-font-light;
+    margin-top: 4rem;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+}
+
+.funding-section {
+    background-color: #66CDAA;
+}
+
+.funding-block {
+    margin: 2.375rem auto 2.375rem auto;
+}
+
+.funding-block__text {
+    display: grid;
+    grid-gap: 2rem;
+}
+
 .organizations-section {
     display: flex;
     justify-content: center;
