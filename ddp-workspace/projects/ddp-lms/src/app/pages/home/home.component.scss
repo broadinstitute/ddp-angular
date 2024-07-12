@@ -186,18 +186,35 @@
       margin: 0 1.5%;
     }
   }
+  .paragraph-f {
+    background-color: #483D8B;
+    text-align: center;
+    font-family: $primary-font-light;
+    margin-top: 4rem;
+
+    .paragraph-text-f {
+      padding-top: 3rem;
+      padding-bottom: 3rem;
+      text-align: left;
+      margin: auto auto auto auto;
+      width: 55%;
+      color: #ffffff;
+      font-size: 1.25rem;
+    }
+  }
+
   .paragraph-2 {
     background-color: #402c4f;
     text-align: center;
     font-family: $primary-font-light;
 
     .paragraph-headline-2 {
-      padding-top: 1.5rem;
+      padding-top: 6.5rem;
       color: #ffffff;
       font-size: 3rem;
       font-weight: 300;
       text-align: center;
-      margin-bottom: 3rem;
+      margin-bottom: 4rem;
     }
 
     .paragraph-text-2 {
