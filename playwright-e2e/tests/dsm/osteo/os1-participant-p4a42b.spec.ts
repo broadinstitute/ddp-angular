@@ -29,7 +29,7 @@ test.describe.skip('Same Participant in Osteo1 and Osteo2 @OS1 @dsm @functional'
     await participantListPage.waitForReady();
 
     // Open participant page
-    const participantPage = await participantListPage.participantListTable.openParticipantPageAt({ position: 0 });;
+    const participantPage = await participantListPage.participantListTable.openParticipantPageAt({ position: 0 });
 
     await test.step('Verify data', async () => {
       expect(await participantPage.getStatus()).toStrictEqual('Enrolled');
