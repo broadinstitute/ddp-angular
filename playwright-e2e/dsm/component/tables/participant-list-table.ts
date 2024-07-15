@@ -36,8 +36,14 @@ export class ParticipantListTable extends Table {
     return shuffle([...Array(rowCount).keys()]);
   }
 
-  public async openParticipantPageAt(position: number): Promise<ParticipantPage> {
-    await this.getParticipantAt(position).click();
+  public async openParticipantPageAt(position: number, isCMIStudy = true, cmiColumn = 'DDP'): Promise<ParticipantPage> {
+    let participantRow = this.getParticipantAt(position);
+    const cellPosition = this.theadCount(cmiColumn);
+    if (isCMIStudy) {
+      //Below method is to make sure that a column that leads to the Tissue Request page is not clicked - DDP column is usually displayed
+      participantRow = this.page.locator(`//table/tbody/tr//td[position()=${cellPosition}]`).nth(position);
+    }
+    await participantRow.click();
     await this._participantPage.waitForReady();
     return this._participantPage;
   }

@@ -12,7 +12,9 @@ import { SurveyDataPanelEnum as SurveyName, ActivityVersionEnum as ActivityVersi
 import { test } from 'fixtures/dsm-fixture';
 import { logInfo } from 'utils/log-utils';
 
+const { DSM_BASE_URL } = process.env;
 test.describe.serial(`${StudyName.OSTEO}: Verify expected display of participant information @dsm @functional @${StudyName.OSTEO}`, () => {
+  test.skip(DSM_BASE_URL === undefined || (DSM_BASE_URL as string).indexOf('test') === -1);
   let navigation;
 
   test(`${StudyName.OSTEO}: Verifying display of participant list`, async ({ page, request }) => {
