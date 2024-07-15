@@ -496,7 +496,7 @@ test.describe.serial(`${StudyName.OSTEO}: Verify expected display of participant
         isAgedUpParticipant: false,
         uri: 'filterList'
       });
-      participantPage = await participantListTable.openParticipantPageAt(0);
+      participantPage = await participantListTable.openParticipantPageAt({ position: 0 });
       logInfo(`Checking ${shortID}'s participant page`);
     });
 

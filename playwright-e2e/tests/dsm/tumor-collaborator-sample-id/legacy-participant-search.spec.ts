@@ -61,7 +61,7 @@ test.describe('Tumor Collaborator Sample ID', () => {
       expect(shortID).toBeTruthy();
       expect(legacyShortID).toBeTruthy();
 
-      const participantPage: ParticipantPage = await participantListTable.openParticipantPageAt(rowIndex);
+      const participantPage: ParticipantPage = await participantListTable.openParticipantPageAt({ position: rowIndex });
       const oncHistoryTab = await participantPage.tablist(Tab.ONC_HISTORY).click<OncHistoryTab>();
       const oncHistoryTable = oncHistoryTab.table;
 

@@ -2,7 +2,7 @@ import { Locator, Page, Response, expect } from '@playwright/test';
 import Table from 'dss/component/table';
 import ParticipantPage from 'dsm/pages/participant-page';
 import { rows } from 'lib/component/dsm/paginators/types/rowsPerPage';
-import { shuffle } from 'utils/test-utils';
+import { isCMIStudy, shuffle } from 'utils/test-utils';
 import { Label } from 'dsm/enums';
 import { StudyName } from 'dsm/navigation';
 import { logInfo } from 'utils/log-utils';
@@ -36,7 +36,8 @@ export class ParticipantListTable extends Table {
     return shuffle([...Array(rowCount).keys()]);
   }
 
-  public async openParticipantPageAt(position: number, isCMIStudy = true, cmiColumn = 'DDP'): Promise<ParticipantPage> {
+  public async openParticipantPageAt(opts: { position: number, isCMIStudy?: boolean, cmiColumn?: string }): Promise<ParticipantPage> {
+    const { position, isCMIStudy = true, cmiColumn = 'DDP' } = opts;
     let participantRow = this.getParticipantAt(position);
     const cellPosition = this.theadCount(cmiColumn);
     if (isCMIStudy) {

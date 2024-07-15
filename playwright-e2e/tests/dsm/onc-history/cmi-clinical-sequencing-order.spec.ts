@@ -58,7 +58,7 @@ test.describe.skip('Create Onc History', () => {
 
       // Open participant Onc History tab, create new Onc History row
       await participantListPage.filterListByShortId(shortID!);
-      let participantPage: ParticipantPage = await participantListTable.openParticipantPageAt(0);
+      let participantPage: ParticipantPage = await participantListTable.openParticipantPageAt({ position: 0 });
       let oncHistoryTab = await participantPage.tablist(Tab.ONC_HISTORY).click<OncHistoryTab>();
 
       // Fill out new Onc History in empty row
@@ -91,7 +91,7 @@ test.describe.skip('Create Onc History', () => {
         await expect(async () => {
           await participantListPage.reload();
           await participantListPage.filterListByShortId(shortID!);
-          participantPage = await participantListTable.openParticipantPageAt(0);
+          participantPage = await participantListTable.openParticipantPageAt({ position: 0 });
           oncHistoryTab = await participantPage.tablist(Tab.ONC_HISTORY).click<OncHistoryTab>();
           const status = await oncHistoryTab.table.getFieldValue(Label.REQUEST, lastRow);
           expect(status).toStrictEqual(OncHistorySelectRequestEnum.SENT);
@@ -149,7 +149,7 @@ test.describe.skip('Create Onc History', () => {
       await test.step('Sequencing Order tab should be visible after receive', async () => {
         const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(Study.PARTICIPANT_LIST);
         await participantListPage.filterListByShortId(shortID!);
-        const participantPage = await participantListTable.openParticipantPageAt(0);
+        const participantPage = await participantListTable.openParticipantPageAt({ position: 0 });
         const sequencingOrderTab = await participantPage.tablist(Tab.SEQUENCING_ORDER).click<SequencingOrderTab>();
         await sequencingOrderTab.waitForReady();
         // todo

@@ -99,7 +99,7 @@ test.describe('Tissue Request Flow', () => {
       await searchPanel.search();
 
       const participantListTable = participantListPage.participantListTable;
-      const participantPage: ParticipantPage = await participantListTable.openParticipantPageAt(0);
+      const participantPage: ParticipantPage = await participantListTable.openParticipantPageAt({ position: 0 });
       const oncHistoryTab = await participantPage.tablist(Tab.ONC_HISTORY).click<OncHistoryTab>();
       const oncHistoryTable = oncHistoryTab.table;
 
@@ -115,7 +115,7 @@ test.describe('Tissue Request Flow', () => {
           await page.reload();
           await participantListPage.waitForReady();
           await participantListPage.filterListByShortId(shortID);
-          await participantListTable.openParticipantPageAt(0);
+          await participantListTable.openParticipantPageAt({ position: 0 });
           const actualOncHistoryCreatedDate = await participantPage.oncHistoryCreatedDate(); // automatically calculated
           expect(actualOncHistoryCreatedDate, 'Onc History Date has not been updated').toStrictEqual(today);
         }).toPass({timeout: 60 * 1000});
@@ -151,7 +151,7 @@ test.describe('Tissue Request Flow', () => {
       });
 
       await participantPage.backToList();
-      await participantListTable.openParticipantPageAt(0);
+      await participantListTable.openParticipantPageAt({ position: 0 });
       await participantPage.tablist(Tab.ONC_HISTORY).click<OncHistoryTab>();
       const tissueInformationPage = await oncHistoryTable.openTissueRequestAt(0);
 
@@ -301,7 +301,7 @@ test.describe('Tissue Request Flow', () => {
         const searchPanel = participantListPage.filters.searchPanel;
         await searchPanel.search({ uri: 'filterList' });
 
-        await participantListTable.openParticipantPageAt(0);
+        await participantListTable.openParticipantPageAt({ position: 0 });
         await participantPage.waitForReady();
 
         await participantPage.tablist(Tab.ONC_HISTORY).click<OncHistoryTab>();

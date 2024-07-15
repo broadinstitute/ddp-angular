@@ -71,7 +71,7 @@ test.describe.serial('Tumor Collaborator Sample ID', () => {
       expect(shortID?.length).toStrictEqual(6);
       logInfo(`Participant Short ID: ${shortID}`);
 
-      const participantPage: ParticipantPage = await participantListTable.openParticipantPageAt(row);
+      const participantPage: ParticipantPage = await participantListTable.openParticipantPageAt({ position: row });
       const oncHistoryTab = await participantPage.tablist(Tab.ONC_HISTORY).click<OncHistoryTab>();
       const oncHistoryTable = oncHistoryTab.table;
       const rows = await oncHistoryTable.rowLocator().count(); // append new row

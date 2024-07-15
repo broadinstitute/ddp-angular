@@ -98,7 +98,7 @@ test.describe('Upload Onc History', () => {
       await participantListPage.waitForReady();
 
       await participantListPage.filterListByShortId(shortId);
-      const participantPage = await participantListTable.openParticipantPageAt(0);
+      const participantPage = await participantListTable.openParticipantPageAt({ position: 0 });
       const oncHistoryTab = await participantPage.tablist(Tab.ONC_HISTORY).click<OncHistoryTab>();
       const oncHistoryTable: OncHistoryTable = oncHistoryTab.table;
 

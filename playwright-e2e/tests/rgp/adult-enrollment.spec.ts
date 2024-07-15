@@ -174,7 +174,7 @@ test.describe.serial('Adult Self Enrollment', () => {
       timeout: 120_000
     });
 
-    await participantListTable.openParticipantPageAt(0);
+    await participantListTable.openParticipantPageAt({ position: 0 });
     await expect(page.getByRole('heading', { name: 'Participant Page' })).toBeVisible();
     await expect(page.getByRole('cell', { name: user.patient.participantGuid })).toBeVisible();
   });
