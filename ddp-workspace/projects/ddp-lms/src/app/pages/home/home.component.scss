@@ -180,12 +180,29 @@
     display: flex;
     justify-content: center;
     margin-bottom: 1.5rem;
-    
+
     .logo {
       height: 2.6rem;
       margin: 0 1.5%;
     }
   }
+  .paragraph-f {
+    background-color: #483D8B;
+    text-align: center;
+    font-family: $primary-font-light;
+    margin-top: 4rem;
+
+    .paragraph-text-f {
+      padding-top: 3rem;
+      padding-bottom: 3rem;
+      text-align: left;
+      margin: auto auto auto auto;
+      width: 55%;
+      color: #ffffff;
+      font-size: 1.25rem;
+    }
+  }
+
   .paragraph-2 {
     background-color: #402c4f;
     text-align: center;
