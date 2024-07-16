@@ -198,6 +198,7 @@
               "Alt": "Logotipo PE-CGS"
             }
         },
+        "fundingText": "Los proyectos de Osteosarcoma y Leiomiosarcoma de Count Me In son posibles gracias a financiamiento federal mendiante el fondo Involucramiento de Participantes y Secuenciación del Genoma de Cáncer (PE-CGS) como parte de la iniciativa Cancer Moonshot. Obtenga más información sobre PE-CGS <a class=\"hereLink\" href=\"https://pe-cgs.org/\" target=\"_blank\"><u>aquí.</u></a>",
         "StepsSection": {
             "Title": "Usted puede ayudar a promover descubrimientos",
             "Step1": {
@@ -414,7 +415,7 @@
         },
         "PACSection": {
             "Title": "Consejo Asesor del Proyecto",
-            "Text": "El Consejo Asesor del Proyecto sobre Osteosarcoma está compuesto por <span class=\"bold\">pacientes, defensores, cuidadores</span> y <span class=\"bold\">seres queridos</span> afectados por el osteosarcoma. El Consejo Asesor se reúne periódicamente con el equipo de operaciones del proyecto a través de videollamadas para <span class=\"bold\">desarrollar todos los aspectos del proyecto,</span> entre ellos, las preguntas de las encuestas, el sitio web del proyecto, el nombre y logotipo del proyecto y los kits de muestras.",
+            "Text": "El Consejo de Consulta del Proyecto de Osteosarcoma (PAC) está compuesto por pacientes, defensores, cuidadores y seres queridos que han sido afectados por el osteosarcoma, quienes están profundamente involucrados en el desarrollo de todos los aspectos del Proyecto de Osteosarcoma. Seguimos increíblemente agradecidos por su invaluable tiempo y atención dedicada a apoyar nuestros esfuerzos de investigación.",
             "Members": [
                 {
                     "Name": "Theresa Beech",
