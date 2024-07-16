@@ -1,4 +1,13 @@
 <h2 class="title static-page-title" translate>App.HomePage.ParticipateSection.Title</h2>
+
+<div class="youtube-video">
+    <iframe width="560" height="315" lazy-resource title="YouTube video player" class="youtube-video__iframe"
+        [src]="'App.HomePage.ParticipateSection.YouTubeLink' | translate"
+        frameborder="0" allow="accelerometer; autoplay; encrypted-media;
+        gyroscope; picture-in-picture" allowfullscreen>
+    </iframe>
+</div>
+
 <div class="steps container">
     <div class="step" *ngFor="let step of
     (isPediHCCTheme ? 'App.PedihccPage.ParticipateSection.Steps' :'App.HomePage.ParticipateSection.Steps') | translate;
