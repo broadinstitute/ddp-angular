@@ -525,7 +525,7 @@
     "countMeInText": "Count Me In is stewarded by the Broad Institute of MIT and Harvard, the Dana-Farber Cancer Institute and Emerson Collective.</br></br>Count Me In's Leiomyosarcoma (LMS) Project is supported by a grant from the National Cancer Institute's Cancer Moonshot program and is part of the Participant Engagement and Cancer Genome Sequencing (PE-CGS) Network of research centers.</br></br>The Leiomyosarcoma Project has been designed and implemented collaboratively with leiomyosarcoma patients, advocates, caregivers, loved ones, cancer researchers, and clinicians.",
     "AdvisorsBlock": {
       "Headline": "Project Advisory Council",
-      "ProjectSummary": "The Leiomyosarcoma Project Advisory Council (PAC) is made up of patients, advocates, caregivers, and loved ones who have been impacted by leiomyosarcoma. The PAC meets regularly with the project operations team via video calls to develop all aspects of the project, including survey questions, the project website, the project name and logo, and sample kits.",
+      "ProjectSummary": "The Leiomyosarcoma Project Advisory Council (PAC) was composed of patients, advocates, caregivers, and loved ones who had been impacted by leiomyosarcoma, who were deeply involved in developing all aspects of the Leiomyosarcoma Project. We remain incredibly grateful for their invaluable time and attention devoted to supporting our research efforts.",
       "Advisors": [
         {
           "name": "Mitch Achee",
@@ -839,6 +839,7 @@
   "home": {
     "paragraph1Header": "Have a direct impact on the future of leiomyosarcoma.",
     "paragraph1Text": "If you have ever been diagnosed with leiomyosarcoma, join a nationwide movement of patients to contribute your samples, your medical records, and your voice to leiomyosarcoma research. Together, we can speed the development of future therapies.",
+    "fundingText": "Count Me In’s Osteosarcoma and Leiomyosarcoma Projects are made possible by federal funding through the Participant Engagement and Cancer Genome Sequencing (PE-CGS) grant as part of the Cancer Moonshot Initiative. Learn more about PE-CGS <a class=\"hereLink\" href=\"https://pe-cgs.org/\" target=\"_blank\"><u>here.</u></a>",
     "countMeInBtn": "Count Me In",
     "learMoreBtn": "Learn More",
     "paragraph2Headline": "What is the goal of the LMSproject?\n\n",
