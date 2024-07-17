@@ -166,6 +166,7 @@ test.describe.serial('Adult Self Enrollment', () => {
 
     await expect(async () => {
       await participantListPage.filterListByParticipantGUID(user.patient.participantGuid);
+      console.log(`Looking for: ${user.patient.participantGuid}`);
       //Make sure the newly created participant can be found and it's participant page can be accessed
       const participantListRowCount = await participantListTable.rowsCount;
       expect(participantListRowCount).toBe(1);
@@ -174,7 +175,7 @@ test.describe.serial('Adult Self Enrollment', () => {
       timeout: 120_000
     });
 
-    await participantListTable.openParticipantPageAt({ position: 0 });
+    await participantListTable.openParticipantPageAt({ position: 0, isCMIStudy: false });
     await expect(page.getByRole('heading', { name: 'Participant Page' })).toBeVisible();
     await expect(page.getByRole('cell', { name: user.patient.participantGuid })).toBeVisible();
   });
