@@ -7,7 +7,7 @@ import * as user from 'data/fake-user.json';
 
 const OSTEO_USER_EMAIL = process.env.OSTEO_USER_EMAIL as string;
 
-test.describe('description', () => {
+test.describe('Create a new OS1 participant to be used for OS1 -> OS2 reconsent workflow testing', () => {
   test('Create a OS1 participant @dsm @functional @osteo', async ({ page, request }) => {
     await test.step(`Create a new OS1 participant using the auth_token from DSM`, async () => {
     //Get auth_token from DSM
