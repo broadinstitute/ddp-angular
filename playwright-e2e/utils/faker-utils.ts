@@ -1,6 +1,8 @@
 import { faker } from '@faker-js/faker';
-import { Page } from '@playwright/test';
+import { APIRequestContext, expect, Page } from '@playwright/test';
 import * as user from 'data/fake-user.json';
+
+const { API_BASE_URL } = process.env;
 
 export const generateAlphaNumeric = (length?: number): string => {
   return faker.string.alphanumeric(length ? length : 6);
@@ -61,3 +63,35 @@ export const simplifyShortID = (shortId: string, studyName: string): string => {
   const shortIdParts = shortId.split(`${studyName}_`); // Use 'RGP_' to determine where to split
   return shortIdParts[1]; //The subject id to be used as short id
 };
+
+export const createNewOS1Participant = async (
+  authToken: string,
+  request: APIRequestContext,
+  participantEmail: string,
+  participantFirstName: string,
+  participantLastName: string,
+  participantDateOfBirth: string
+): Promise<void> => {
+  if (!authToken) {
+    throw Error(`Invalid parameter: DSM auth_token not provided`);
+  }
+
+  const participantCreationResponse = await request.post(`${API_BASE_URL}/pepper/v1/dsm/studies/cmi-osteo/ddp/osteo1user`, {
+    headers: {
+      Authorization: `Bearer ${authToken}`
+    },
+    data: {
+      email: participantEmail,
+      firstName: participantFirstName,
+      lastName: participantLastName,
+      birthDate: participantDateOfBirth
+    },
+  });
+
+  expect(participantCreationResponse.ok()).toBeTruthy();
+  const responseAsJSON = await participantCreationResponse.json();
+  expect(responseAsJSON).toHaveProperty('email', participantEmail);
+  expect(responseAsJSON).toHaveProperty('profile.firstName', participantFirstName);
+  expect(responseAsJSON).toHaveProperty('profile.lastName', participantLastName);
+  expect(responseAsJSON).toHaveProperty('profile.birthDate', participantDateOfBirth);
+}
