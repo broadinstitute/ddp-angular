@@ -1,6 +1,7 @@
 import { faker } from '@faker-js/faker';
 import { APIRequestContext, expect, Page } from '@playwright/test';
 import * as user from 'data/fake-user.json';
+import { logInfo } from './log-utils';
 
 const { API_BASE_URL } = process.env;
 
@@ -90,6 +91,7 @@ export const createNewOS1Participant = async (
 
   expect(participantCreationResponse.ok()).toBeTruthy();
   const responseAsJSON = await participantCreationResponse.json();
+  logInfo(`Participant Creation Info: ${JSON.stringify(responseAsJSON)}`);
   expect(responseAsJSON).toHaveProperty('email', participantEmail);
   expect(responseAsJSON).toHaveProperty('profile.firstName', participantFirstName);
   expect(responseAsJSON).toHaveProperty('profile.lastName', participantLastName);

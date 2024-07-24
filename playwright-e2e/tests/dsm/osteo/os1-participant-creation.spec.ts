@@ -4,6 +4,7 @@ import Select from 'dss/component/select';
 import { test } from 'fixtures/dsm-fixture';
 import { createNewOS1Participant, generateEmailAlias, generateUserName } from 'utils/faker-utils';
 import * as user from 'data/fake-user.json';
+import { logInfo } from 'utils/log-utils';
 
 const OSTEO_USER_EMAIL = process.env.OSTEO_USER_EMAIL as string;
 
@@ -20,13 +21,13 @@ test.describe('Create a new OS1 participant to be used for OS1 -> OS2 reconsent 
     const dateOfBirth = `${year}-${month}-${day}`; //Must be in YYYY-MM-DD format
     const email = generateEmailAlias(OSTEO_USER_EMAIL);
     console.log(`Checking name: ${firstName} ${lastName}`);
-    console.log(`Checking date of birth: ${dateOfBirth}`);
-    console.log(`Checking email: ${email}`);
+    logInfo(`Checking date of birth: ${dateOfBirth}`);
+    logInfo(`Checking email: ${email}`);
     await createNewOS1Participant(userIDToken, request, email, firstName, lastName, dateOfBirth);
     })
   })
 
-  //Fill out workflow in DSS OS2
+  //Check that new participant is in OS1
 
-  //Go into DSM and check that ptp can be seen in OS1 & OS2
+  //Check that new participant is not in OS2
 })
