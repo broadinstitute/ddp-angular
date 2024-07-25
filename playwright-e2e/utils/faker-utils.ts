@@ -2,6 +2,7 @@ import { faker } from '@faker-js/faker';
 import { APIRequestContext, expect, Page } from '@playwright/test';
 import * as user from 'data/fake-user.json';
 import { logInfo } from './log-utils';
+import { Label } from 'dsm/enums';
 
 const { API_BASE_URL } = process.env;
 
@@ -71,8 +72,10 @@ export const createNewOS1Participant = async (
   participantEmail: string,
   participantFirstName: string,
   participantLastName: string,
-  participantDateOfBirth: string
-): Promise<void> => {
+  participantDateOfBirth: string,
+  opts: { returnedIDType: Label.SHORT_ID | Label.PARTICIPANT_ID }
+): Promise<string> => {
+  const { returnedIDType } = opts;
   if (!authToken) {
     throw Error(`Invalid parameter: DSM auth_token not provided`);
   }
@@ -96,4 +99,13 @@ export const createNewOS1Participant = async (
   expect(responseAsJSON).toHaveProperty('profile.firstName', participantFirstName);
   expect(responseAsJSON).toHaveProperty('profile.lastName', participantLastName);
   expect(responseAsJSON).toHaveProperty('profile.birthDate', participantDateOfBirth);
+
+  let participantID = '';
+  if (returnedIDType === Label.SHORT_ID) {
+    participantID = responseAsJSON.hruid;
+  } else if (returnedIDType === Label.PARTICIPANT_ID) {
+    participantID = responseAsJSON.guid;
+  }
+  console.log(`Returning OS1 participant with ID: ${participantID}`);
+  return participantID;
 }

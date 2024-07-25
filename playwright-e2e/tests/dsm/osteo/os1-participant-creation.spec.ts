@@ -5,10 +5,13 @@ import { test } from 'fixtures/dsm-fixture';
 import { createNewOS1Participant, generateEmailAlias, generateUserName } from 'utils/faker-utils';
 import * as user from 'data/fake-user.json';
 import { logInfo } from 'utils/log-utils';
+import { Label } from 'dsm/enums';
 
 const OSTEO_USER_EMAIL = process.env.OSTEO_USER_EMAIL as string;
 
 test.describe('Create a new OS1 participant to be used for OS1 -> OS2 reconsent workflow testing', () => {
+  let shortID;
+
   test('Create a OS1 participant @dsm @functional @osteo', async ({ page, request }) => {
     await test.step(`Create a new OS1 participant using the auth_token from DSM`, async () => {
     //Get auth_token from DSM
@@ -23,7 +26,7 @@ test.describe('Create a new OS1 participant to be used for OS1 -> OS2 reconsent 
     console.log(`Checking name: ${firstName} ${lastName}`);
     logInfo(`Checking date of birth: ${dateOfBirth}`);
     logInfo(`Checking email: ${email}`);
-    await createNewOS1Participant(userIDToken, request, email, firstName, lastName, dateOfBirth);
+    shortID = await createNewOS1Participant(userIDToken, request, email, firstName, lastName, dateOfBirth, { returnedIDType: Label.SHORT_ID });
     })
   })
 
