@@ -66,6 +66,10 @@ export const simplifyShortID = (shortId: string, studyName: string): string => {
   return shortIdParts[1]; //The subject id to be used as short id
 };
 
+/***
+ * Creates a new adult participant in the OS1 study
+ * @returns The id of the newly created participant - returns short id or participant guid based on the requested returnedIDType
+ */
 export const createNewOS1Participant = async (
   authToken: string,
   request: APIRequestContext,
@@ -106,6 +110,6 @@ export const createNewOS1Participant = async (
   } else if (returnedIDType === Label.PARTICIPANT_ID) {
     participantID = responseAsJSON.guid;
   }
-  console.log(`Returning OS1 participant with ID: ${participantID}`);
+  logInfo(`Returning OS1 participant with ID: ${participantID}`);
   return participantID;
 }
