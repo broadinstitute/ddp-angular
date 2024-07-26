@@ -8,11 +8,13 @@ import { Navigation, Study, StudyName } from 'dsm/navigation';
 import * as crypto from 'crypto';
 import { logInfo } from 'utils/log-utils';
 import { CustomizeView, Label } from 'dsm/enums';
+import { totalNumberOfOccurences } from 'utils/test-utils';
 
 test.describe('Cohort tags', () => {
   let shortId: string;
 
   const studyNames = [StudyName.PANCAN];
+  const greetingTag = 'Hi';
 
   for (const studyName of studyNames) {
     test.beforeEach(async ({page}) => {
@@ -125,6 +127,87 @@ test.describe('Cohort tags', () => {
       await participantPage.backToList();
       cohortTagName = await participantListTable.getParticipantDataAt(0, Label.COHORT_TAG_NAME);
       expect(cohortTagName.length).toBe(0); // No more Cohort Tag
+
+      //Verify that tags cannot be added twice via Bulk Cohort Tag option to more than 1 participant
+      await participantListPage.reloadWithDefaultFilter();
+
+      await customizeViewPanel.open();
+      await customizeViewPanel.selectColumns(CustomizeView.COHORT_TAGS, [Label.COHORT_TAG_NAME]);
+      await customizeViewPanel.close();
+
+      await participantListTable.selectCheckboxForParticipantAt(0);
+      await participantListTable.selectCheckboxForParticipantAt(1);
+      await participantListTable.selectCheckboxForParticipantAt(2);
+
+      //Add tag to above selected participants
+      await participantListPage.addBulkCohortTags();
+      await cohortTag.add(greetingTag, false);
+      await cohortTag.submitAndExit();
+
+      //Check that the new tag has been added once
+      let participantOneCohortTags = (await participantListTable.getParticipantDataAt(0, Label.COHORT_TAG_NAME)).split(`\n\n`);
+      let participantOneTagOccurences = totalNumberOfOccurences({ arrayToSearch: participantOneCohortTags, wordToSearchFor: greetingTag });
+      expect(participantOneTagOccurences).toBe(1);
+
+      let participantTwoCohortTags = (await participantListTable.getParticipantDataAt(1, Label.COHORT_TAG_NAME)).split(`\n\n`);
+      let participantTwoTagOccurences = totalNumberOfOccurences({ arrayToSearch: participantTwoCohortTags, wordToSearchFor: greetingTag });
+      expect(participantTwoTagOccurences).toBe(1);
+
+      let participantThreeCohortTags = (await participantListTable.getParticipantDataAt(2, Label.COHORT_TAG_NAME)).split(`\n\n`);
+      let participantThreeTagOccurences = totalNumberOfOccurences({ arrayToSearch: participantThreeCohortTags, wordToSearchFor: greetingTag });
+      expect(participantThreeTagOccurences).toBe(1);
+
+      //Attempt to add tag again
+      await participantListTable.selectCheckboxForParticipantAt(0);
+      await participantListTable.selectCheckboxForParticipantAt(1);
+      await participantListTable.selectCheckboxForParticipantAt(2);
+
+      //Attempt to add tag to above selected participants
+      await participantListPage.addBulkCohortTags();
+      await cohortTag.add(greetingTag, false);
+      await cohortTag.submitAndExit();
+
+      //If a duplicate attempt was made, the popup just closes without adding a duplciate instance of the requested tag
+      participantOneCohortTags = (await participantListTable.getParticipantDataAt(0, Label.COHORT_TAG_NAME)).split(`\n\n`);
+      participantOneTagOccurences = totalNumberOfOccurences({ arrayToSearch: participantOneCohortTags, wordToSearchFor: greetingTag });
+      expect(participantOneTagOccurences).toBe(1);
+
+      participantTwoCohortTags = (await participantListTable.getParticipantDataAt(1, Label.COHORT_TAG_NAME)).split(`\n\n`);
+      participantTwoTagOccurences = totalNumberOfOccurences({ arrayToSearch: participantTwoCohortTags, wordToSearchFor: greetingTag });
+      expect(participantTwoTagOccurences).toBe(1);
+
+      participantThreeCohortTags = (await participantListTable.getParticipantDataAt(2, Label.COHORT_TAG_NAME)).split(`\n\n`);
+      participantThreeTagOccurences = totalNumberOfOccurences({ arrayToSearch: participantThreeCohortTags, wordToSearchFor: greetingTag });
+      expect(participantThreeTagOccurences).toBe(1);
+
+      //Delete the added greeting tag from the above three participants
+      await participantListTable.openParticipantPageAt(0);
+      await participantPage.waitForReady();
+      await cohortTag.remove(greetingTag);
+      await participantPage.backToList();
+
+      await participantListTable.openParticipantPageAt(1);
+      await participantPage.waitForReady();
+      await cohortTag.remove(greetingTag);
+      await participantPage.backToList();
+
+      await participantListTable.openParticipantPageAt(2);
+      await participantPage.waitForReady();
+      await cohortTag.remove(greetingTag);
+      await participantPage.backToList();
+
+      //Check that none of the above participants has the greeting/test tag
+      participantOneCohortTags = (await participantListTable.getParticipantDataAt(0, Label.COHORT_TAG_NAME)).split(`\n\n`);
+      participantOneTagOccurences = totalNumberOfOccurences({ arrayToSearch: participantOneCohortTags, wordToSearchFor: greetingTag });
+      expect(participantOneTagOccurences).toBe(0);
+
+      participantTwoCohortTags = (await participantListTable.getParticipantDataAt(1, Label.COHORT_TAG_NAME)).split(`\n\n`);
+      participantTwoTagOccurences = totalNumberOfOccurences({ arrayToSearch: participantTwoCohortTags, wordToSearchFor: greetingTag });
+      expect(participantTwoTagOccurences).toBe(0);
+
+      participantThreeCohortTags = (await participantListTable.getParticipantDataAt(2, Label.COHORT_TAG_NAME)).split(`\n\n`);
+      participantThreeTagOccurences = totalNumberOfOccurences({ arrayToSearch: participantThreeCohortTags, wordToSearchFor: greetingTag });
+      expect(participantThreeTagOccurences).toBe(0);
     });
   }
 });
