@@ -725,7 +725,7 @@ async function goToTestParticipantPage(shortID: string, navigation: Navigation):
   await searchPanel.search();
 
   const participantListTable = participantListPage.participantListTable;
-  return await participantListTable.openParticipantPageAt(0);
+  return await participantListTable.openParticipantPageAt({ position: 0 });
 }
 
  /**

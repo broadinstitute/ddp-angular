@@ -90,7 +90,7 @@ test.describe.serial(`${StudyName.OSTEO} -> ${StudyName.OSTEO2}: Verify expected
     await participantListPage.waitForReady();
     await participantListPage.filterListByShortId(shortID);
     participantListTable = participantListPage.participantListTable;
-    const participantPage = await participantListTable.openParticipantPageAt(0);
+    const participantPage = await participantListTable.openParticipantPageAt({ position: 0 });
 
     await test.step(`Check that expected OS1 profile webelements are as expected`, async () => {
       await participantPage.waitForReady();
@@ -408,7 +408,7 @@ test.describe.serial(`${StudyName.OSTEO} -> ${StudyName.OSTEO2}: Verify expected
       await participantListPage.waitForReady();
       await participantListPage.filterListByShortId(shortID);
       participantListTable = participantListPage.participantListTable;
-      const participantPage = await participantListTable.openParticipantPageAt(0);
+      const participantPage = await participantListTable.openParticipantPageAt({ position: 0 });
 
       oncHistoryTab = await participantPage.tablist(Tab.ONC_HISTORY).click<OncHistoryTab>();
       const oncHistoryTable: OncHistoryTable = oncHistoryTab.table;
@@ -469,7 +469,7 @@ test.describe.serial(`${StudyName.OSTEO} -> ${StudyName.OSTEO2}: Verify expected
       await navigation.selectStudy(StudyName.OSTEO2);
       await participantListPage.filterListByShortId(shortID);
       participantListTable = participantListPage.participantListTable;
-      participantPage = await participantListTable.openParticipantPageAt(0);
+      participantPage = await participantListTable.openParticipantPageAt({ position: 0 });
 
       oncHistoryTab = await participantPage.tablist(Tab.ONC_HISTORY).click<OncHistoryTab>();
       const oncHistoryTable: OncHistoryTable = oncHistoryTab.table;
@@ -523,7 +523,7 @@ test.describe.serial(`${StudyName.OSTEO} -> ${StudyName.OSTEO2}: Verify expected
     await participantListPage.waitForReady();
     await participantListPage.filterListByShortId(shortID);
     participantListTable = participantListPage.participantListTable;
-    const participantPage = await participantListTable.openParticipantPageAt(0);
+    const participantPage = await participantListTable.openParticipantPageAt({ position: 0 });
 
     //Check profile info
     const enrollmentStatus = await participantPage.getStatus();

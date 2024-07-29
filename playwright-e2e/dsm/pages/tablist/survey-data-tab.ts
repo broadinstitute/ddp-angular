@@ -37,7 +37,7 @@ export default class SurveyDataTab {
       await expect(expandedPanelRegion).toBeVisible();
     }
     //Questions in DSM all usually are grey with the question short id attached
-    const activityQuestion = expandedPanelRegion.locator(`//h5[contains(@class, 'grey-color') and contains(., '${questionShortID}')]`);
+    const activityQuestion = expandedPanelRegion.locator(`//h5[contains(@class, 'grey-color') and contains(., '${questionShortID}')]`).nth(0);
     return activityQuestion;
   }
 

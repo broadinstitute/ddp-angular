@@ -53,7 +53,7 @@ async function addOncHistory(page: Page, shortID: string, participantListPage: P
     await searchPanel.search();
 
     const participantListTable = participantListPage.participantListTable;
-    const participantPage: ParticipantPage = await participantListTable.openParticipantPageAt(0);
+    const participantPage: ParticipantPage = await participantListTable.openParticipantPageAt({ position: 0 });
     const oncHistoryTab = await participantPage.tablist(Tab.ONC_HISTORY).click<OncHistoryTab>();
     const oncHistoryTable = oncHistoryTab.table;
     const rowIndex = await oncHistoryTable.getRowsCount() - 1;

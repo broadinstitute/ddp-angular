@@ -10,7 +10,7 @@ import { WelcomePage } from 'dsm/pages/welcome-page';
 import Radiobutton from 'dss/component/radiobutton';
 import { getUtcDate } from 'utils/date-utils';
 import { generateAlphaNumeric } from 'utils/faker-utils';
-import { studyShortName, waitForNoSpinner, waitForResponse } from 'utils/test-utils';
+import { isCMIStudy, studyShortName, waitForNoSpinner, waitForResponse } from 'utils/test-utils';
 import { logInfo } from 'utils/log-utils';
 
 test.describe('Receive Genome Study Kit', () => {
@@ -39,7 +39,7 @@ test.describe('Receive Genome Study Kit', () => {
 
         const participantListTable = participantListPage.participantListTable;
         shortId = await participantListTable.getParticipantDataAt(rowIndex, Label.SHORT_ID);
-        participantPage = await participantListTable.openParticipantPageAt(rowIndex);
+        participantPage = await participantListTable.openParticipantPageAt({ position: rowIndex, isCMIStudy: false });
         logInfo(`Participant Short ID: ${shortId}`);
       });
 
@@ -84,7 +84,7 @@ test.describe('Receive Genome Study Kit', () => {
         await participantListPage.waitForReady();
 
         await participantListPage.filterListByShortId(shortId);
-        await participantListPage.participantListTable.openParticipantPageAt(0);
+        await participantListPage.participantListTable.openParticipantPageAt({ position: 0, isCMIStudy: false });
 
         const genomeStudyTab = await participantPage.tablist(Tab.GENOME_STUDY).click<GenomeStudyTab>();
         let field = genomeStudyTab.getField('Status of genome study sample kit');

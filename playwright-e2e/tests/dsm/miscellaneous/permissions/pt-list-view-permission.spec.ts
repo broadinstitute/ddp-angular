@@ -79,7 +79,7 @@ test.describe.serial('DSS View Only Permission', () => {
         logInfo(`${study} Participant Subject ID: ${subjectId}`);
 
         // Open Participant page to verify visible tabs
-        await participantListTable.openParticipantPageAt(rowIndex);
+        await participantListTable.openParticipantPageAt({ position: rowIndex, isCMIStudy: false });
 
         const visibleTabs = page.locator('tabset a[role="tab"]');
         const tabNames: string[] = await visibleTabs.allInnerTexts();

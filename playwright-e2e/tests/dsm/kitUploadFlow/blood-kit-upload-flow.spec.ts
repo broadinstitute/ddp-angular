@@ -82,7 +82,7 @@ test.describe.serial('Blood Kits upload flow', () => {
 
       // Collects all the necessary data for kit upload
       const participantListTable = participantListPage.participantListTable;
-      const participantPage: ParticipantPage = await participantListTable.openParticipantPageAt(testParticipantIndex);
+      const participantPage: ParticipantPage = await participantListTable.openParticipantPageAt({ position: testParticipantIndex });
       shortID = await participantPage.getShortId();
       logInfo(`Participant Short ID: ${shortID}`);
 
@@ -207,7 +207,7 @@ test.describe.serial('Blood Kits upload flow', () => {
       await searchPanel.open();
       await searchPanel.text(Label.SHORT_ID, {textValue: shortID});
       await searchPanel.search();
-      await participantListTable.openParticipantPageAt(0);
+      await participantListTable.openParticipantPageAt({ position: 0 });
       await participantPage.assertPageTitle();
       const sampleInformationTab = await participantPage.tablist(Tab.SAMPLE_INFORMATION).click<SampleInformationTab>();
       await sampleInformationTab.assertKitType(kitLabel, kitType);
