@@ -83,7 +83,7 @@ test.describe('Cohort tags', () => {
       let cohortTagName = await participantListTable.getParticipantDataAt(0, Label.COHORT_TAG_NAME);
       expect(cohortTagName.length).toBe(0); // No Cohort Tags
 
-      const participantPage: ParticipantPage = await participantListTable.openParticipantPageAt(0);
+      const participantPage: ParticipantPage = await participantListTable.openParticipantPageAt({ position: 0 });
       await participantPage.assertPageTitle();
 
       const cohortTag = new CohortTag(page);
@@ -99,7 +99,7 @@ test.describe('Cohort tags', () => {
       await participantListPage.filterListByShortId(shortId);
       cohortTagName = await participantListTable.getParticipantDataAt(0, Label.COHORT_TAG_NAME);
       expect(cohortTagName.length).toBeGreaterThan(1); // Cohort Tags exist
-      await participantListTable.openParticipantPageAt(0);
+      await participantListTable.openParticipantPageAt({ position: 0 });
 
       // Verify tags existence
       await cohortTag.assertCohortTagToHaveCount(cohortTagValue1, 0);
@@ -116,7 +116,7 @@ test.describe('Cohort tags', () => {
       await cohortTag.add(cohortTagValue3, false);
       await cohortTag.submitAndExit();
 
-      await participantListTable.openParticipantPageAt(0);
+      await participantListTable.openParticipantPageAt({ position: 0 });
       await cohortTag.assertCohortTagToHaveCount(cohortTagValue3, 1);
 
       await cohortTag.remove(cohortTagValue2);

@@ -901,7 +901,7 @@ test.describe.serial(`${StudyName.OSTEO2}: Verify expected display of participan
     })
 
     await test.step(`Navigate to their participant page`, async () => {
-      participantPage = await participantListTable.openParticipantPageAt(participantPosition);
+      participantPage = await participantListTable.openParticipantPageAt({ position: participantPosition });
       await participantPage.waitForReady();
     })
 
@@ -951,7 +951,7 @@ test.describe.serial(`${StudyName.OSTEO2}: Verify expected display of participan
     })
 
     await test.step(`Select a participant that has only 1 response to Consent=No recorded`, async () => {
-      participantPage = await participantListTable.openParticipantPageAt(0);
+      participantPage = await participantListTable.openParticipantPageAt({ position: 0 });
       await participantPage.waitForReady();
     })
 
@@ -994,7 +994,7 @@ test.describe.serial(`${StudyName.OSTEO2}: Verify expected display of participan
       const amountOfParticipantsDisplayed = await participantListTable.rowsCount;
       expect(amountOfParticipantsDisplayed).toBe(1);
 
-      participantPage = await participantListTable.openParticipantPageAt(0);
+      participantPage = await participantListTable.openParticipantPageAt({ position: 0 });
       await participantPage.waitForReady();
     })
 

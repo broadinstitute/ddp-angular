@@ -49,7 +49,7 @@ test.describe.serial('DSM Family Enrollment Handling', () => {
     await participantListPage.filterListByParticipantGUID(participantGuid);
 
     //const participantListTable = new ParticipantListTable(page);
-    const participantPage: ParticipantPage = await participantListTable.openParticipantPageAt(0);
+    const participantPage: ParticipantPage = await participantListTable.openParticipantPageAt({ position: 0, isCMIStudy: false });
 
     const guid = await participantPage.getGuid();
     expect(guid).toBe(participantGuid);
@@ -115,7 +115,7 @@ test.describe.serial('DSM Family Enrollment Handling', () => {
     await expect(filteredList).toHaveCount(1);
 
     const participantListTable = new ParticipantListTable(page);
-    await participantListTable.openParticipantPageAt(0);
+    await participantListTable.openParticipantPageAt({ position: 0, isCMIStudy: false });
 
     //Verify that the proband tab is present (and includes the text RGP and 3 as proband subject ids have the format RGP_{family id}_3)
     const proband = new FamilyMemberTab(page, FamilyMember.PROBAND);
@@ -249,7 +249,7 @@ test.describe.serial('DSM Family Enrollment Handling', () => {
     await familyAccount.backToList();
     await participantListPage.filters.searchPanel.search();
     await expect(filteredList).toHaveCount(1);
-    await participantListTable.openParticipantPageAt(0);
+    await participantListTable.openParticipantPageAt({ position: 0, isCMIStudy: false });
 
     //After refreshing participant list and page, check that the input for the above textareas are as expected
     //Note: Proband tab is usually the tab that is open/selected upon visiting participant page/family account page
@@ -544,7 +544,7 @@ test.describe.serial('DSM Family Enrollment Handling', () => {
     await participantListPage.filterListByParticipantGUID(user.patient.participantGuid);
 
     const participantListTable = new ParticipantListTable(page);
-    await participantListTable.openParticipantPageAt(0);
+    await participantListTable.openParticipantPageAt({ position: 0, isCMIStudy: false });
     const rgpParticipantPage = new RgpParticipantPage(page);
 
     const familyMemberForm = rgpParticipantPage.addFamilyMemberDialog;
@@ -626,7 +626,7 @@ test.describe.serial('DSM Family Enrollment Handling', () => {
     await participantListPage.filterListByParticipantGUID(user.patient.participantGuid);
 
     const participantListTable = new ParticipantListTable(page);
-    await participantListTable.openParticipantPageAt(0);
+    await participantListTable.openParticipantPageAt({ position: 0, isCMIStudy: false });
 
     //Setup family members - for creation and comparison
     const brother = new FamilyMemberTab(page, FamilyMember.BROTHER);

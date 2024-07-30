@@ -99,7 +99,7 @@ test.describe('Participants Withdrawal', () => {
         */ //Usually fails due to the status slowly updating in ES - commenting out until resolved
 
         // At Participant Page, verify few detail
-        const participantPage: ParticipantPage = await participantsTable.openParticipantPageAt(0);
+        const participantPage: ParticipantPage = await participantsTable.openParticipantPageAt({ position: 0 });
 
         const guid = await participantPage.getGuid();
         expect(guid).toBe(participantId);

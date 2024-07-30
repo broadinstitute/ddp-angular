@@ -85,7 +85,7 @@ test.describe.serial('Blood Kit Upload', () => {
 
         // Collects all the necessary data for kit upload
         const participantListTable = participantListPage.participantListTable;
-        participantPage = await participantListTable.openParticipantPageAt(testParticipantIndex);
+        participantPage = await participantListTable.openParticipantPageAt({ position: testParticipantIndex });
       });
 
       await test.step('Collect participant information', async () => {

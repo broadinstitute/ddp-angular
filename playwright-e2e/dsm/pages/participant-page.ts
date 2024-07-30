@@ -195,7 +195,7 @@ export default class ParticipantPage {
   public getSurveyLink(opts: { surveyName: string }): Locator {
     const { surveyName } = opts;
     //The survey name in this case is the name + the version number as seen in DSM participant page e.g. 'Prequalifier Survey v1'
-    return this.page.locator(`//tab//a[normalize-space(text())='${surveyName}']`);
+    return this.page.locator(`//tab//a[normalize-space(text())='${surveyName}']`).nth(0);
   }
 
   /* XPaths */

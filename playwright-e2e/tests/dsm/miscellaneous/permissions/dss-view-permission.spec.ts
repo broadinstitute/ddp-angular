@@ -112,7 +112,7 @@ test.describe.serial('DSS View Only Permission', () => {
         await expect(async () => {
           await participantListPage.reload();
           await participantListPage.filterListByShortId(shortId);
-          await participantListTable.openParticipantPageAt(0);
+          await participantListTable.openParticipantPageAt({ position: 0 });
           const visibleTabs = page.locator('tabset a[role="tab"]');
           tabNames = await visibleTabs.allInnerTexts();
           expect(tabNames).toStrictEqual(expectedTabs);

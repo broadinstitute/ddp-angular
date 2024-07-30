@@ -60,7 +60,7 @@ test.describe.serial('Blood & RNA Kit Upload', () => {
     await customizeViewPanel.selectColumns(CustomizeView.PARTICIPANT, [Label.SHORT_ID]);
 
     await participantListPage.filterListByShortId(familyShortID);
-    await participantListTable.openParticipantPageAt(0);
+    await participantListTable.openParticipantPageAt({ position: 0, isCMIStudy: false });
 
     //For RGP, the short id needed for the kit upload is the family member's subject id
     const proband = new FamilyMemberTab(page, FamilyMember.PROBAND);
@@ -242,7 +242,7 @@ test.describe.serial('Blood & RNA Kit Upload', () => {
     await customizeViewPanel.selectColumns(CustomizeView.PARTICIPANT, [Label.SHORT_ID]);
 
     await participantListPage.filterListByShortId(familyShortID);
-    await participantListTable.openParticipantPageAt(0);
+    await participantListTable.openParticipantPageAt({ position: 0, isCMIStudy: false });
     const participantPage = new RgpParticipantPage(page);
 
 

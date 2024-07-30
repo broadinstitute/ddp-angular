@@ -80,6 +80,7 @@ export enum CustomizeView {
 
 //The id attribute used by customize view columns - use enum to keep track of stable ids
 export enum CustomizeViewID {
+  ABSTRACTION = 'a',
   ADD_CHILD_PARTICIPANT = 'ADD_PARTICIPANT',
   LEARN_ABOUT_KID_TUMOR = 'CONSENT_ADDENDUM_PEDIATRIC',
   LEARN_KID_DNA = 'GERMLINE_CONSENT_ADDENDUM_PEDIATRIC',
@@ -207,6 +208,7 @@ export enum Label {
   ACCEPTANCE_STATUS = 'Acceptance Status**',
   ACCEPTANCE_STATUS_DATE = 'Acceptance Status Date**',
   ACCESSION_NUMBER = 'Accession Number',
+  ACTIVITY = 'Activity',
   ADDENDUM_CONSENT_BOOL = 'ADDENDUM_CONSENT_BOOL',
   ADDENDUM_CONSENT_KID = 'ADDENDUM_CONSENT_BOOL_PEDIATRIC',
   AFFECTED_STATUS = 'Affected Status',
@@ -222,6 +224,7 @@ export enum Label {
   BLOCK_ID = 'Block Id',
   BLOCK_ID_TO_SHL = 'Block ID to SHL',
   BLOCKS_WITH_TUMOR = 'Blocks with Tumor',
+  CERTAIN_TEXT = 'CertainText',
   CHILD_ADOLESCENT_ASSENT = `Child/Adolescent Assent`,
   CHILD_CONTACT_COMPLETED = 'CHILD_CONTACT Survey Completed',
   CHILD_CONTACT_CREATED = 'CHILD_CONTACT Survey Created',
@@ -233,10 +236,12 @@ export enum Label {
   CHILD_CURRENTLY_TREATED = 'CHILD_CURRENTLY_TREATED',
   CHILD_DATE_OF_BIRTH = `Your child’s Date of Birth`, //Apostrophe type is important - don't change to the one on the MAC laptop or it'll never retreive the webelement
   CHILD_DIAGNOSIS_DATE = 'CHILD_DIAGNOSIS_DATE',
+  CHILD_EVER_RELAPSED = `CHILD_EVER_RELAPSED`,
   CHILD_EXPERIENCE = 'CHILD_EXPERIENCE',
   CHILD_FULLNAME = `Your Child’s Full name:`, //See apostrophe note above
   CHILD_HAD_RADIATION = 'CHILD_HAD_RADIATION',
   CHILD_HISPANIC = 'CHILD_HISPANIC',
+  CHILD_HOW_HEARD_ID = `CHILD_HOW_HEAR`,
   CHILD_INITIAL_BODY_LOC = 'CHILD_INITIAL_BODY_LOC',
   CHILD_MAILING_ADDRESS = `Your Child’s Mailing Address: *`, //See apostrophe note above
   CHILD_OTHER_CANCERS = 'CHILD_OTHER_CANCERS',
@@ -278,7 +283,12 @@ export enum Label {
   CONSENT_ASSENT_LAST_UPDATED = 'CONSENT_ASSENT Survey Last Updated',
   CONSENT_ASSENT_STATUS = 'CONSENT_ASSENT Survey Status',
   CONSENT_ASSENT_BLOOD = 'CONSENT_ASSENT_BLOOD',
+  CONSENT_ASSENT_CHILD_DATE_OF_BIRTH = 'CONSENT_ASSENT_CHILD_DOB',
+  CONSENT_ASSENT_CHILD_FISRTNAME = 'CONSENT_ASSENT_CHILD_FIRSTNAME',
   CONSENT_ASSENT_CHILD_LASTNAME = 'CONSENT_ASSENT_CHILD_LASTNAME',
+  CONSENT_ASSENT_CHILD_SIGNATURE = 'CONSENT_ASSENT_CHILD_SIGNATURE',
+  CONSENT_ASSENT_FIRSTNAME = 'CONSENT_ASSENT_FIRSTNAME',
+  CONSENT_ASSENT_RELATIONSHIP = 'CONSENT_ASSENT_RELATIONSHIP',
   CONSENT_ASSENT_LASTNAME = 'CONSENT_ASSENT_LASTNAME',
   CONSENT_ASSENT_TISSUE = 'CONSENT_ASSENT_TISSUE',
   CONSENT_BLOOD = 'CONSENT_BLOOD',
@@ -397,6 +407,7 @@ export enum Label {
   FH_OTHER_FACTORS_CANCER_RISK = 'FH_OTHER_FACTORS_CANCER_RISK',
   FILE_UPLOAD_TIME = 'File Upload Time',
   FIRST_NAME = 'First Name',
+  FIRST_NUMBER = 'FirstNumber',
   FIRST_SM_ID = 'First SM ID',
   FOLLOW_UP_REQUIRED = 'Follow-Up required',
   FOLLOW_UP_REQUIRED_TEXT = 'Follow-Up required Text',
@@ -515,6 +526,7 @@ export enum Label {
   OTHER_CANCERS = 'OTHER_CANCERS',
   OTHER_CANCERS_LIST = 'OTHER_CANCERS_LIST',
   OTHER_COMMENTS = 'OTHER_COMMENTS',
+  OTHER_MULTI_SELECT = 'OtherMultiSelect',
   PAPER_CR_RECEIVED = 'Paper C/R Received',
   PAPER_CR_REQUIRED = 'Paper C/R required', //written like this in Customize View -> Medical Record Columns
   PAPER_CR_REQUIRED_MEDICAL_RECORD_TABLE = 'Paper C/R Required', //written like this in Participant page -> Medical Record
@@ -526,7 +538,11 @@ export enum Label {
   PARENTAL_CONSENT_UPDATED = 'PARENTAL_CONSENT Survey Last Updated',
   PARENTAL_CONSENT_STATUS = 'PARENTAL_CONSENT Survey Status',
   PARENTAL_CONSENT_BLOOD = 'PARENTAL_CONSENT_BLOOD',
+  PARENTAL_CON_CHILD_DATE_OF_BIRTH = 'PARENTAL_CONSENT_CHILD_DOB',
+  PARENTAL_CON_CHILD_FIRSTNAME = 'PARENTAL_CONSENT_SHILD_FIRSTNAME',
   PARENTAL_CON_CHILD_LASTNAME = 'PARENTAL_CONSENT_CHILD_LASTNAME',
+  PARENTAL_CONSENT_FIRSTNAME = 'PARENTAL_CONSENT_FIRSTNAME',
+  PARENTAL_CONSENT_RELATIONSHIP = 'PARENTAL_CONSENT_RELATIONSHIP',
   PARENTAL_CONSENT_LASTNAME = 'PARENTAL_CONSENT_LASTNAME',
   PARENTAL_CONSENT_TISSUE = 'PARENTAL_CONSENT_TISSUE',
   PARTICIPANT_ID = 'Participant ID',
@@ -534,6 +550,7 @@ export enum Label {
   PARTICIPANT_NOTES = 'Participant Notes',
   PATHOLOGY_REPORT = 'Pathology Report',
   PATHOLOGY_PRESENT = 'Pathology Present',
+  PATIENT_CONTACTED_FOR_PAPER_CR = `Patient Contacted for Paper C/R`,
   PATIENT_SIGNATURE = `Patient's signature:`,
   PHONE = 'Phone',
   PHONE_PRIMARY = 'Phone (Primary)',
@@ -583,6 +600,8 @@ export enum Label {
   SAMPLE_TYPE = 'Sample Type',
   SCROLL = 'Scroll(s)',
   SCROLLS_BACK_FROM_SHL = 'Scrolls back from SHL',
+  SECOND_NUMBER = 'SecondNumber',
+  SELECT = 'Select',
   SELF_COUNTRY = 'SELF_COUNTRY',
   SELF_CURRENT_AGE = 'SELF_CURRENT_AGE',
   SELF_PROVINCE = 'SELF_PROVINCE',
@@ -641,8 +660,9 @@ export enum Label {
   TUMOR_PERCENTAGE_AS_REPORTED_BY_SHL = 'Tumor Percentage as reported by SHL',
   TUMOR_SIZE = 'Tumor Size',
   TUMOR_TYPE = 'Tumor Type',
-  UNABLE_TO_OBTAIN = 'Unable to Obtain',
+  UNABLE_TO_OBTAIN = 'Unable To Obtain',
   UPLOADED_FILE_NAME = 'Uploaded File Name',
+  USER = 'User',
   USS_UNSTAINED = 'USS (unstained slides)',
   VALID = 'Valid',
   VERIFIED = 'Verified',
@@ -662,6 +682,7 @@ export enum Label {
   WHERE_DOES_YOUR_CHILD_LIVE = 'Where does your child live?',
   WHERE_INITIAL_BIOPSY_DONE = 'Where was your initial biopsy performed?',
   WHICH_SIDE_OF_FAMILY_IS_THIS_PERSON_ON = 'Which side of the family is this person on?',
+  WHO_IS_FILLING_ID = `WHO_IS_FILLING`,
   WHO_IS_FILLING_OUT_SURVEY = 'Who is filling out this survey?',
   YOUR_CHILD_EMAIL_ADDRESS = `Your child's email address`,
   YOUR_CHILD_MAIL_ADDRESS = `Your Child's Mailing Address`, //Different apostrophe than CHILD_MAILING_ADDRESS
@@ -743,4 +764,12 @@ export enum EnrollmentStatus {
   EXITED_AFTER_ENROLLMENT = 'EXITED_AFTER_ENROLLMENT',
   ENROLLED = 'ENROLLED',
   LOST_TO_FOLLOWUP = 'LOST_TO_FOLLOWUP',
+}
+
+export enum ParticipantListPageOptions {
+  SEARCH = 'Search',
+  RELOAD_WITH_DEFAULT_FILTER = 'Reload With Default Filter',
+  CUSTOMIZE_VIEW = 'Customize View',
+  SAVE_CURRENT_VIEW = 'Save Current View',
+  SAVED_FILTERS = 'Saved Filters',
 }

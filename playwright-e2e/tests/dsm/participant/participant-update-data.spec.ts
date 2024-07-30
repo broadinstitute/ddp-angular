@@ -39,7 +39,7 @@ test.describe.serial('Editing Participant Information', () => {
       const participantListTable = participantListPage.participantListTable;
       const rowIndex = (await participantListTable.randomizeRows())[0];
 
-      const participantPage = await participantListTable.openParticipantPageAt(rowIndex);
+      const participantPage = await participantListTable.openParticipantPageAt({ position: rowIndex });
 
       await test.step('Collect participant information before change', async () => {
         shortID = await participantPage.getShortId();

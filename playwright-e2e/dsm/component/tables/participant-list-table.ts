@@ -2,7 +2,7 @@ import { Locator, Page, Response, expect } from '@playwright/test';
 import Table from 'dss/component/table';
 import ParticipantPage from 'dsm/pages/participant-page';
 import { rows } from 'lib/component/dsm/paginators/types/rowsPerPage';
-import { shuffle } from 'utils/test-utils';
+import { isCMIStudy, shuffle } from 'utils/test-utils';
 import { Label } from 'dsm/enums';
 import { StudyName } from 'dsm/navigation';
 import { logInfo } from 'utils/log-utils';
@@ -36,8 +36,15 @@ export class ParticipantListTable extends Table {
     return shuffle([...Array(rowCount).keys()]);
   }
 
-  public async openParticipantPageAt(position: number): Promise<ParticipantPage> {
-    await this.getParticipantAt(position).click();
+  public async openParticipantPageAt(opts: { position: number, isCMIStudy?: boolean, cmiColumn?: string }): Promise<ParticipantPage> {
+    const { position, isCMIStudy = true, cmiColumn = 'DDP' } = opts;
+    let participantRow = this.getParticipantAt(position);
+    const cellPosition = this.theadCount(cmiColumn);
+    if (isCMIStudy) {
+      //Below method is to make sure that a column that leads to the Tissue Request page is not clicked - DDP column is usually displayed
+      participantRow = this.page.locator(`//table/tbody/tr//td[position()=${cellPosition}]`).nth(position);
+    }
+    await participantRow.click();
     await this._participantPage.waitForReady();
     return this._participantPage;
   }
@@ -87,7 +94,7 @@ export class ParticipantListTable extends Table {
     const { checkDefaultFilterOfStudy = false, studyName, customFilter } = opts;
     let participantListColumnHeaders: Label[] = [];
 
-    if (checkDefaultFilterOfStudy && studyName) {
+    if (checkDefaultFilterOfStudy && studyName && (studyName !== StudyName.RGP)) {
       participantListColumnHeaders = this.getDefaultFilter();
     } else if (customFilter) {
       participantListColumnHeaders = customFilter;

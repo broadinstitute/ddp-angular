@@ -88,7 +88,7 @@ test.describe.serial('Medical records request workflow', () => {
       });
 
       await test.step('Assert participant information', async () => {
-        participantPage = await participantListTable.openParticipantPageAt(rowIndex);
+        participantPage = await participantListTable.openParticipantPageAt({ position: rowIndex });
 
         shortId = await participantPage.getShortId();
         expect(shortId.length).toStrictEqual(6);
@@ -167,7 +167,7 @@ test.describe.serial('Medical records request workflow', () => {
 
         await participantPage.backToList();
         await participantListPage.filterListByShortId(shortId);
-        await participantListTable.openParticipantPageAt(0);
+        await participantListTable.openParticipantPageAt({ position: 0 });
 
         medicalRecordTable = await openMedicalRecordsTab(participantPage);
         await assertInstitution(medicalRecordTable, confirmedInstitution);
@@ -180,7 +180,7 @@ test.describe.serial('Medical records request workflow', () => {
       const participantListTable = participantListPage.participantListTable;
 
       await participantListPage.filterListByShortId(shortId);
-      const participantPage = await participantListTable.openParticipantPageAt(0);
+      const participantPage = await participantListTable.openParticipantPageAt({ position: 0 });
       let medicalRecordTable = await openMedicalRecordsTab(participantPage);
 
       // Open Medical Request page
@@ -218,7 +218,7 @@ test.describe.serial('Medical records request workflow', () => {
       // Institution table on the Medical Record tab will now show MR Status "Fax Sent"
       await medicalRecordsRequestPage.backToParticipantList();
       await participantListPage.filterListByShortId(shortId);
-      await participantListTable.openParticipantPageAt(0);
+      await participantListTable.openParticipantPageAt({ position: 0 });
       medicalRecordTable = await openMedicalRecordsTab(participantPage);
       let foundRow = await assertInstitution(medicalRecordTable, confirmedInstitution, 'Fax Sent');
 
@@ -261,7 +261,7 @@ test.describe.serial('Medical records request workflow', () => {
         await participantListPage.reload();
         await participantListPage.waitForReady();
         await participantListPage.filterListByShortId(shortId);
-        await participantListTable.openParticipantPageAt(0);
+        await participantListTable.openParticipantPageAt({ position: 0 });
         medicalRecordTable = await openMedicalRecordsTab(participantPage);
         medicalRecordsRequestPage = await medicalRecordTable.openRequestPageByRowIndex(foundRow);
         const isChecked = await medicalRecordsRequestPage.getNoActionNeeded.isChecked();
@@ -282,7 +282,7 @@ test.describe.serial('Medical records request workflow', () => {
       const participantListTable = participantListPage.participantListTable;
 
       await participantListPage.filterListByShortId(shortId);
-      const participantPage = await participantListTable.openParticipantPageAt(0);
+      const participantPage = await participantListTable.openParticipantPageAt({ position: 0 });
 
       const existsDateOfMajority = await page.locator(participantPage.getMainTextInfoXPath(Label.DATE_OF_MAJORITY)).isVisible();
 

@@ -29,7 +29,7 @@ test.describe.skip('Same Participant in Osteo1 and Osteo2 @OS1 @dsm @functional'
     await participantListPage.waitForReady();
 
     // Open participant page
-    const participantPage = await participantListPage.participantListTable.openParticipantPageAt(0);
+    const participantPage = await participantListPage.participantListTable.openParticipantPageAt({ position: 0 });
 
     await test.step('Verify data', async () => {
       expect(await participantPage.getStatus()).toStrictEqual('Enrolled');
@@ -104,7 +104,7 @@ test.describe.skip('Same Participant in Osteo1 and Osteo2 @OS1 @dsm @functional'
   test(`Should find participant in Osteo2 study`, async ({page, request}) => {
     const participantListPage: ParticipantListPage = await ParticipantListPage.goto(page, StudyName.OSTEO2, request);
     await participantListPage.filterListByShortId(shortID);
-    const participantPage = await participantListPage.participantListTable.openParticipantPageAt(0);
+    const participantPage = await participantListPage.participantListTable.openParticipantPageAt({ position: 0 });
 
     // Check visible tabs
     const expectedTabs = ['Survey Data', 'Sample Information', 'Contact Information', 'Medical Records', 'Onc History', 'Invitae'];

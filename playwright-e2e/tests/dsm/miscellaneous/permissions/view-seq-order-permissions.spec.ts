@@ -72,7 +72,7 @@ test.describe('View Sequencing Order Permission Test', () => {
         //Check that at least 1 study participant already has a clinical order id
         const numberOfParticipants = await participantListTable.numOfParticipants();
         expect(numberOfParticipants).toBeGreaterThan(0);
-        await participantListTable.openParticipantPageAt(0);
+        await participantListTable.openParticipantPageAt({ position: 0 });
 
         const participantPage = new ParticipantPage(page);
         await participantPage.assertPageTitle();

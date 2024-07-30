@@ -43,7 +43,7 @@ test.describe.serial('Onc History', () => {
 
       // Open Onc History tab
       await participantListPage.filterListByShortId(shortID);
-      const participantPage = await participantListTable.openParticipantPageAt(0);
+      const participantPage = await participantListTable.openParticipantPageAt({ position: 0 });
       const oncHistoryTab = await participantPage.tablist(Tab.ONC_HISTORY).click<OncHistoryTab>();
       const oncHistoryTable = oncHistoryTab.table;
       let lastRow = await oncHistoryTable.getRowsCount() - 1;

@@ -85,7 +85,7 @@ test.describe.serial('Medical Records View Permission', () => {
         const participantListTable = participantListPage.participantListTable;
 
         // Open Participant page, user is able to see all tabs
-        await participantListTable.openParticipantPageAt(0);
+        await participantListTable.openParticipantPageAt({ position: 0 });
         const expectedTabs = [
           Tab.SURVEY_DATA,
           Tab.SAMPLE_INFORMATION,
