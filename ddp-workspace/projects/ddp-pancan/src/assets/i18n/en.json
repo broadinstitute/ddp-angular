@@ -894,7 +894,7 @@
         "TooltipAlt": "Information",
         "Validators": {
             "DateNavyValidationRule": "Entered date is invalid",
-            "Autocomplete": "No {{control}} is found"
+            "Autocomplete": "Invalid option found"
         },
         "SubjectPanel": {
             "Link": "Return to subject look-up",
