@@ -37,7 +37,7 @@ import {ActivityData} from '../activity-data/activity-data.model';
 import {SessionService} from '../services/session.service';
 
 const fileSaver = require('file-saver');
-const usTerritories = ["US", "AS", "GU", "MP", "PR", "VI"];
+const territoriesUS = ["US", "AS", "GU", "MP", "PR", "VI"];
 
 @Component({
   selector: 'app-participant-page',
@@ -1672,7 +1672,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
       if (countryQuestion != null && countryQuestion.answer) {
         if (countryQuestion.answer instanceof Array) {
           const selfCountry = countryQuestion.answer[0];
-          if (usTerritories.includes(selfCountry)) {
+          if (territoriesUS.includes(selfCountry)) {
             canBeSequencedBasedOnLocation = true;
             if (selfCountry == this.SELF_COUNTRY_US) {
               const stateQuestion = prequalActivity?.questionsAnswers?.find(questionAnswer => questionAnswer.stableId === this.SELF_STATE);
@@ -1696,7 +1696,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
         if (countryQuestion != null && countryQuestion.answer) {
           if (countryQuestion.answer instanceof Array) {
             const childCountry = countryQuestion.answer[0];
-            if (usTerritories.includes(childCountry)) {
+            if (territoriesUS.includes(childCountry)) {
               canBeSequencedBasedOnLocation = true;
               if (childCountry == this.SELF_COUNTRY_US) {
                 const stateQuestion = addParticipantActivity?.questionsAnswers?.find(questionAnswer => questionAnswer.stableId === this.CHILD_STATE);
