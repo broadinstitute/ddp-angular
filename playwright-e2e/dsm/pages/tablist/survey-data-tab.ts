@@ -42,8 +42,14 @@ export default class SurveyDataTab {
   }
 
   //TODO modify to better handle whitepsaces + line breaks + answers with more than one line of input e.g. from Medical Release Form
-  public async getActivityAnswer(activityQuestion: Locator): Promise<string> {
-    const answerLocator = activityQuestion.locator(`//following-sibling::div//b`);
+  public async getActivityAnswer(activityQuestion: Locator, opts: { fieldName?: Label }): Promise<string> {
+    const { fieldName = '' } = opts;
+    let answerLocator: Locator;
+    if (fieldName) {
+      answerLocator = activityQuestion.locator(`//following-sibling::div//span[normalize-space(text())='${fieldName}']/preceding-sibling::b`);
+    } else {
+      answerLocator = activityQuestion.locator(`//following-sibling::div//b`);
+    }
     const answer = (await answerLocator.innerText()).trim();
     return answer;
   }

@@ -553,6 +553,7 @@ export enum Label {
   PATIENT_CONTACTED_FOR_PAPER_CR = `Patient Contacted for Paper C/R`,
   PATIENT_SIGNATURE = `Patient's signature:`,
   PHONE = 'Phone',
+  PHONE_NUMBER = 'Phone Number',
   PHONE_PRIMARY = 'Phone (Primary)',
   PHYSICIAN = 'PHYSICIAN',
   PLEASE_SPECIFY = 'Please specify',

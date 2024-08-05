@@ -1,8 +1,10 @@
 import { expect } from '@playwright/test';
+import { ActivityVersionEnum as ActivityVersion, SurveyDataPanelEnum as SurveyName } from 'dsm/component/tabs/enums/survey-data-enum';
 import { CustomizeView, DataFilter, Label, Tab } from 'dsm/enums';
 import { Navigation, Study, StudyName } from 'dsm/navigation';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
 import ContactInformationTab from 'dsm/pages/tablist/contact-information-tab';
+import SurveyDataTab from 'dsm/pages/tablist/survey-data-tab';
 import Select from 'dss/component/select';
 import { test } from 'fixtures/dsm-fixture';
 import { isCMIStudy, isPECGSStudy } from 'utils/test-utils';
@@ -26,18 +28,17 @@ test.describe(`Confirm that participant phone number information is displayed @d
       const customizeViewPanel = participantListPage.filters.customizeViewPanel;
       await customizeViewPanel.open();
 
-      //Check for phone number info from column groups in Participant List
-      //Check for phone number info in Participant Page
-
       if (isCMIStudy(study) || isPECGSStudy(study)) {
         //Check Research Consent -> Your Contact Info to make sure phone information is displayed
         await customizeViewPanel.selectColumns(CustomizeView.CONTACT_INFORMATION, [Label.PHONE]);
-        await customizeViewPanel.selectColumns(CustomizeView.RESEARCH_CONSENT_FORM, [Label.MAILING_ADDRESS]);
+        const addressLabel = isPECGSStudy(study) ? Label.YOUR_CONTACT_INFORMATION : Label.MAILING_ADDRESS;
+        console.log(`Address label to use: ${addressLabel}`);
+        await customizeViewPanel.selectColumns(CustomizeView.RESEARCH_CONSENT_FORM, [addressLabel]);
         await customizeViewPanel.close();
 
         await searchPanel.open();
         await searchPanel.checkboxes(Label.STATUS, { checkboxValues: [DataFilter.ENROLLED] });
-        await searchPanel.text(Label.MAILING_ADDRESS, { additionalFilters: [DataFilter.NOT_EMPTY] });
+        await searchPanel.text(addressLabel, { additionalFilters: [DataFilter.NOT_EMPTY] });
         await searchPanel.search({ uri: 'filterList' });
 
         //NOTE: Contact Information Columns -> Phone cannot be filtered (covered by PEPPER-1505) - will be using header's sorting to find non-empty phone numbers
@@ -47,26 +48,50 @@ test.describe(`Confirm that participant phone number information is displayed @d
 
         //Get first option for phone number and check if the study participant's address include that information
         shortID = await participantListTable.getCellDataForColumn(Label.SHORT_ID, 1);
+        expect(shortID).toBeTruthy();
         console.log(`Checking participant ${shortID}'s information`);
 
-        const participantPhoneNumber = await participantListTable.getCellDataForColumn(Label.PHONE, 1);
-        console.log(`Participant ${shortID}'s Phone Number: ${participantPhoneNumber}`);
-        expect(participantPhoneNumber).toBeTruthy();
+        const participantListPhoneNumber = await participantListTable.getCellDataForColumn(Label.PHONE, 1);
+        console.log(`Participant ${shortID}'s Phone Number: ${participantListPhoneNumber}`);
+        expect(participantListPhoneNumber).toBeTruthy();
 
-        const participantAddressInList = await participantListTable.getCellDataForColumn(Label.MAILING_ADDRESS, 1);
-        expect(participantAddressInList.includes(participantPhoneNumber)).toBeTruthy();
+        const participantAddressInList = await participantListTable.getCellDataForColumn(addressLabel, 1);
+        expect(participantAddressInList.includes(participantListPhoneNumber)).toBeTruthy();
 
         await participantListPage.filterListByShortId(shortID);
         participantPage = await participantListTable.openParticipantPageAt({ position: 0 });
 
         //Check Survey Data
+        await participantPage.tablist(Tab.SURVEY_DATA).isVisible();
+        const surveyDataTab = await participantPage.tablist(Tab.SURVEY_DATA).click<SurveyDataTab>();
 
+        //Some studies have more than 1 research consent activity version e.g. OS2
+        const consentFormVersionOne = await surveyDataTab.getActivity({
+          activityName: SurveyName.RESEARCH_CONSENT_FORM,
+          activityVersion: ActivityVersion.ONE,
+          checkForVisibility: false
+        });
+
+        const consentFormVersionTwo = await surveyDataTab.getActivity({
+          activityName: SurveyName.RESEARCH_CONSENT_FORM,
+          activityVersion: ActivityVersion.TWO,
+          checkForVisibility: false
+        });
+
+        const researchConsentForm = await consentFormVersionOne.isVisible() ? consentFormVersionOne : consentFormVersionTwo;
+        const mailingAddress = await surveyDataTab.getActivityQuestion({
+          activity: researchConsentForm,
+          questionShortID: Label.MAILING_ADDRESS_SHORT_ID
+        });
+        const addressFormPhoneNumber = await surveyDataTab.getActivityAnswer(mailingAddress, { fieldName: Label.PHONE_NUMBER });
+        expect(addressFormPhoneNumber).toBeTruthy();
+        expect(addressFormPhoneNumber).toBe(participantListPhoneNumber);
 
         //Check Contact Information tab
         await participantPage.tablist(Tab.CONTACT_INFORMATION).isVisible();
         const contactInformationTab = await participantPage.tablist(Tab.CONTACT_INFORMATION).click<ContactInformationTab>();
         const contactInformationPhoneNumber = await contactInformationTab.getPhone();
-        expect(participantPhoneNumber).toBe(contactInformationPhoneNumber);
+        expect(participantListPhoneNumber).toBe(contactInformationPhoneNumber);
       } else {
         // (Specifically for ATCP) Check Registration -> Phone
       }
