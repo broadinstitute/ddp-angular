@@ -37,6 +37,7 @@ import {ActivityData} from '../activity-data/activity-data.model';
 import {SessionService} from '../services/session.service';
 
 const fileSaver = require('file-saver');
+const usTerritories = ["US", "AS", "GU", "MP", "PR", "VI"];
 
 @Component({
   selector: 'app-participant-page',
@@ -138,6 +139,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
   public readonly sequencingOrdersArray$ = new BehaviorSubject<SequencingOrder[] | []>([]);
 
   private ENROLLED = 'ENROLLED';
+  private CONSENT_SUSPENDED = 'CONSENT_SUSPENDED';
   private PREQUAL = 'PREQUAL';
   private SELF_COUNTRY = 'SELF_COUNTRY';
   private SELF_STATE = 'SELF_STATE';
@@ -198,9 +200,14 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
 
     this.sortActivities();
     this.addMedicalProviderInformation();
+    console.log(`allowedToDoOrderSequencing ${this.role.allowedToDoOrderSequencing()}`);
+    console.log(`hasSequencingOrders ${this.hasSequencingOrders}`);
+
     if ((this.role.allowedToDoOrderSequencing() || this.role.canViewSeqOrderStatus()) && this.hasSequencingOrders) {
+      console.log("  invoking getMercuryEligibleSamples... ");
       this.getMercuryEligibleSamples();
       this.canSequence = this.canHaveSequencing(this.participant);
+      console.log(`canSequence ${this.canSequence}`);
     }
   }
 
@@ -899,6 +906,8 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
     }
     if (tabName === 'sequencing' && (this.role.allowedToDoOrderSequencing() || this.role.canViewSeqOrderStatus())
       && this.hasSequencingOrders) {
+      console.log("  invoking getMercuryEligibleSamples...CHK2222... ");
+
       this.getMercuryEligibleSamples();
     }
   }
@@ -1669,17 +1678,22 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
       const countryQuestion = prequalActivity?.questionsAnswers?.find(questionAnswer => questionAnswer.stableId === this.SELF_COUNTRY);
       if (countryQuestion != null && countryQuestion.answer) {
         if (countryQuestion.answer instanceof Array) {
-          if (countryQuestion.answer.indexOf(this.SELF_COUNTRY_US) > -1) {
-            const stateQuestion = prequalActivity?.questionsAnswers?.find(questionAnswer => questionAnswer.stableId === this.SELF_STATE);
-            if (stateQuestion.answer instanceof Array) {
-              if (stateQuestion.answer.indexOf(this.SELF_STATE_NY) === -1) {
-                canBeSequencedBasedOnLocation = true;
+          const selfCountry = countryQuestion.answer[0];
+          if (usTerritories.includes(selfCountry)) {
+            canBeSequencedBasedOnLocation = true;
+            if (selfCountry == this.SELF_COUNTRY_US) {
+              const stateQuestion = prequalActivity?.questionsAnswers?.find(questionAnswer => questionAnswer.stableId === this.SELF_STATE);
+              if (stateQuestion.answer instanceof Array) {
+                if (stateQuestion.answer.indexOf(this.SELF_STATE_NY) > -1) {
+                  canBeSequencedBasedOnLocation = false;
+                }
               }
             }
           }
         }
       }
     }
+
     //pediatric pt
     if (!canBeSequencedBasedOnLocation) {
       const addParticipantActivity = participant.data.activities.find(activity => activity.activityCode === this.ADD_PARTICIPANT);
@@ -1688,12 +1702,15 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
           questionAnswer => questionAnswer.stableId === this.CHILD_COUNTRY);
         if (countryQuestion != null && countryQuestion.answer) {
           if (countryQuestion.answer instanceof Array) {
-            if (countryQuestion.answer.indexOf(this.SELF_COUNTRY_US) > -1) {
-              const stateQuestion = addParticipantActivity?.questionsAnswers?.find(
-                questionAnswer => questionAnswer.stableId === this.CHILD_STATE);
-              if (stateQuestion.answer instanceof Array) {
-                if (stateQuestion.answer.indexOf(this.SELF_STATE_NY) === -1) {
-                  canBeSequencedBasedOnLocation = true;
+            const childCountry = countryQuestion.answer[0];
+            if (usTerritories.includes(childCountry)) {
+              canBeSequencedBasedOnLocation = true;
+              if (childCountry == this.SELF_COUNTRY_US) {
+                const stateQuestion = addParticipantActivity?.questionsAnswers?.find(questionAnswer => questionAnswer.stableId === this.CHILD_STATE);
+                if (stateQuestion.answer instanceof Array) {
+                  if (stateQuestion.answer.indexOf(this.SELF_STATE_NY) > -1) {
+                    canBeSequencedBasedOnLocation = false;
+                  }
                 }
               }
             }
@@ -1706,10 +1723,13 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
 
   canHaveSequencing(participant: Participant): boolean {
     if (!(this.role.allowedToDoOrderSequencing() || this.role.canViewSeqOrderStatus()) || !this.hasSequencingOrders) {
+      console.log(`returning false..`);
       return false;
     }
 
     const enrolled: boolean = participant.data.status === this.ENROLLED;
+    const consentSuspended: boolean = participant.data.status === this.CONSENT_SUSPENDED;
+
     let hasGender = false;
     if (this.hasOncHistoryGender(participant)) {
       hasGender = true;
@@ -1724,7 +1744,8 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
         hasGender = false;
       }
     }
-    return hasGender && enrolled;
+    console.log(`hasGender : ${hasGender}   .. enrolled: ${enrolled}`);
+    return hasGender && (enrolled || consentSuspended);
   }
 
   private hasOncHistoryGender(participant: Participant): boolean {
