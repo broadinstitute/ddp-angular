@@ -1677,7 +1677,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
             if (selfCountry == this.SELF_COUNTRY_US) {
               const stateQuestion = prequalActivity?.questionsAnswers?.find(questionAnswer => questionAnswer.stableId === this.SELF_STATE);
               if (stateQuestion.answer instanceof Array) {
-                if (stateQuestion.answer.indexOf(this.SELF_STATE_NY) > -1) {
+                if (stateQuestion.answer.includes(this.SELF_STATE_NY)) {
                   canBeSequencedBasedOnLocation = false;
                 }
               }
@@ -1701,7 +1701,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
               if (childCountry == this.SELF_COUNTRY_US) {
                 const stateQuestion = addParticipantActivity?.questionsAnswers?.find(questionAnswer => questionAnswer.stableId === this.CHILD_STATE);
                 if (stateQuestion.answer instanceof Array) {
-                  if (stateQuestion.answer.indexOf(this.SELF_STATE_NY) > -1) {
+                  if (stateQuestion.answer.includes(this.SELF_STATE_NY)) {
                     canBeSequencedBasedOnLocation = false;
                   }
                 }
