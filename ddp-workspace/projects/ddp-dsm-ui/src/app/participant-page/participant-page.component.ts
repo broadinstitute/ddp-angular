@@ -200,14 +200,9 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
 
     this.sortActivities();
     this.addMedicalProviderInformation();
-    console.log(`allowedToDoOrderSequencing ${this.role.allowedToDoOrderSequencing()}`);
-    console.log(`hasSequencingOrders ${this.hasSequencingOrders}`);
-
     if ((this.role.allowedToDoOrderSequencing() || this.role.canViewSeqOrderStatus()) && this.hasSequencingOrders) {
-      console.log("  invoking getMercuryEligibleSamples... ");
       this.getMercuryEligibleSamples();
       this.canSequence = this.canHaveSequencing(this.participant);
-      console.log(`canSequence ${this.canSequence}`);
     }
   }
 
@@ -906,8 +901,6 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
     }
     if (tabName === 'sequencing' && (this.role.allowedToDoOrderSequencing() || this.role.canViewSeqOrderStatus())
       && this.hasSequencingOrders) {
-      console.log("  invoking getMercuryEligibleSamples...CHK2222... ");
-
       this.getMercuryEligibleSamples();
     }
   }
@@ -1723,7 +1716,6 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
 
   canHaveSequencing(participant: Participant): boolean {
     if (!(this.role.allowedToDoOrderSequencing() || this.role.canViewSeqOrderStatus()) || !this.hasSequencingOrders) {
-      console.log(`returning false..`);
       return false;
     }
 
@@ -1744,7 +1736,6 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
         hasGender = false;
       }
     }
-    console.log(`hasGender : ${hasGender}   .. enrolled: ${enrolled}`);
     return hasGender && (enrolled || consentSuspended);
   }
 
