@@ -892,7 +892,7 @@
         "TooltipAlt": "Información",
         "Validators": {
             "DateNavyValidationRule": "La fecha es inválida",
-            "Autocomplete": "No se encuentra {{control}}"
+            "Autocomplete": "Se encontró una opción no válida"
         },
         "SubjectPanel": {
             "Link": "Regresar a la búsqueda de participantes voluntarios",
