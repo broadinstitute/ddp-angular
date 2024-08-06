@@ -32,7 +32,7 @@ test.describe(`Confirm that participant phone number information is displayed @d
         //Check Research Consent -> Your Contact Info to make sure phone information is displayed
         await customizeViewPanel.selectColumns(CustomizeView.CONTACT_INFORMATION, [Label.PHONE]);
         const addressLabel = isPECGSStudy(study) ? Label.YOUR_CONTACT_INFORMATION : Label.MAILING_ADDRESS;
-        console.log(`Address label to use: ${addressLabel}`);
+        console.log(`Label of the address in the Research Consent column options: ${addressLabel}`);
         await customizeViewPanel.selectColumns(CustomizeView.RESEARCH_CONSENT_FORM, [addressLabel]);
         await customizeViewPanel.close();
 
@@ -41,7 +41,7 @@ test.describe(`Confirm that participant phone number information is displayed @d
         await searchPanel.text(addressLabel, { additionalFilters: [DataFilter.NOT_EMPTY] });
         await searchPanel.search({ uri: 'filterList' });
 
-        //NOTE: Contact Information Columns -> Phone cannot be filtered (covered by PEPPER-1505) - will be using header's sorting to find non-empty phone numbers
+        //NOTE: Contact Information Columns -> Phone cannot be filtered for Not Empty (covered by PEPPER-1505) - will be using the header's sorting to find non-empty phone numbers
         const phoneNumberHeader = participantListTable.getHeaderByName(Label.PHONE);
         await phoneNumberHeader.click(); //click twice in order to get the participants that have a phone number
         await phoneNumberHeader.click();
