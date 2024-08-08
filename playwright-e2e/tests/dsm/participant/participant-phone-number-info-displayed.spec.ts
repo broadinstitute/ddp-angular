@@ -72,13 +72,13 @@ test.describe(`Confirm that participant phone number information is displayed @d
           checkForVisibility: false
         });
 
-        const consentFormVersionTwo = await surveyDataTab.getActivity({
+        const consentFormVersionThree = await surveyDataTab.getActivity({
           activityName: SurveyName.RESEARCH_CONSENT_FORM,
-          activityVersion: ActivityVersion.TWO,
+          activityVersion: ActivityVersion.THREE,
           checkForVisibility: false
         });
 
-        const researchConsentForm = await consentFormVersionOne.isVisible() ? consentFormVersionOne : consentFormVersionTwo;
+        const researchConsentForm = await consentFormVersionOne.isVisible() ? consentFormVersionOne : consentFormVersionThree;
         const mailingAddress = await surveyDataTab.getActivityQuestion({
           activity: researchConsentForm,
           questionShortID: Label.MAILING_ADDRESS_SHORT_ID
