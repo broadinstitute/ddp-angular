@@ -1,6 +1,6 @@
 import { expect } from '@playwright/test';
 import { ActivityVersionEnum as ActivityVersion, SurveyDataPanelEnum as SurveyName } from 'dsm/component/tabs/enums/survey-data-enum';
-import { CustomizeView, DataFilter, Label, Tab } from 'dsm/enums';
+import { CustomizeView, CustomizeViewID as ID, DataFilter, Label, Tab } from 'dsm/enums';
 import { Navigation, Study, StudyName } from 'dsm/navigation';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
 import ContactInformationTab from 'dsm/pages/tablist/contact-information-tab';
@@ -94,6 +94,42 @@ test.describe(`Confirm that participant phone number information is displayed @d
         expect(participantListPhoneNumber).toBe(contactInformationPhoneNumber);
       } else {
         // (Specifically for ATCP) Check Registration -> Phone
+        //Get the columns that usually consistently have some phone number information
+        await customizeViewPanel.selectColumnsByID(CustomizeView.REGISTRATION, [Label.REGISTRATION_PHONE], ID.ATCP_DSS_REGISTRATION);
+        await customizeViewPanel.selectColumnsByID(CustomizeView.PARTICIPANT_INFO, [Label.PHONE_HOME], ID.ATCP_PARTICIPANT_INFO);
+
+        //Search/filter to make sure to only get the test participants that have provided the information
+        await searchPanel.open();
+        await searchPanel.text(Label.REGISTRATION_PHONE, { additionalFilters: [DataFilter.NOT_EMPTY] });
+        await searchPanel.search({ uri: 'filterList' });
+        await participantListTable.waitForReady();
+
+        const numberOfReturnedParticipants = await participantListTable.getRowsCount();
+        expect(numberOfReturnedParticipants).toBeGreaterThanOrEqual(1);
+
+        //Verify that the information in the columns above match in the Participant List
+        const registrationActivityPhoneNumber = await participantListTable.getCellDataForColumn(Label.REGISTRATION_PHONE, 1);
+        expect(registrationActivityPhoneNumber).toBeTruthy();
+
+        const participantHomePhoneNumber = await participantListTable.getCellDataForColumn(Label.PHONE_HOME, 1);
+        expect(participantHomePhoneNumber).toBeTruthy();
+
+        expect(participantHomePhoneNumber).toBe(registrationActivityPhoneNumber);
+
+        //Verify that the information is the same in the Participant Page
+        shortID = await participantListTable.getCellDataForColumn(Label.SHORT_ID, 1);
+        expect(shortID).toBeTruthy();
+        await participantListPage.filterListByShortId(shortID);
+        console.log(`Checking participant ${shortID}'s information`);
+        console.log(`Phone number as entered in Registration activity: ${registrationActivityPhoneNumber}`);
+        console.log(`Participant's home phone number (should be the same as the number in Registration Activity): ${participantHomePhoneNumber}`);
+
+        participantPage = await participantListTable.openParticipantPageAt({ position: 0 });
+        await participantPage.waitForReady();
+
+        //Check Survey Data tab -> Registration
+
+        //Check Participant Info tab -> Phone (H)
       }
     })
   }
