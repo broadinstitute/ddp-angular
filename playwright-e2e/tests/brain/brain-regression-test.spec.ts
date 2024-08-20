@@ -136,6 +136,9 @@ test('Brain statics @dss @brain', async ({ page }) => {
   await page.getByRole('img', { name: 'The Angiosarcoma Project data release diagram' }).click();
 });
 
+//Skipping due to the Brain (Dev ENV only!) bug that makes registration impossible since register modal does not appear, only login modal
+//Above is noted by PEPPER-177
+//Brain Dev also seems to have the previous frontend version - there's mention of Brain Cancer Project instead of Brain Tumor Project
 test.fixme('Brain enroll kid on their behalf @dss @brain', async ({ page }) => {
   test.slow();
   await page.goto(BRAIN_BASE_URL!);

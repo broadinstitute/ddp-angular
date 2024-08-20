@@ -33,7 +33,7 @@ import { StudyName } from 'dsm/navigation';
  */
 test.describe.serial('Tumor Collaborator Sample ID', () => {
   // Some studies are excluded due to lack of the suitable paricipants
-  const studies: StudyName[] = [StudyName.OSTEO2, StudyName.PANCAN, StudyName.MBC, StudyName.BRAIN];
+  const studies: StudyName[] = [StudyName.OSTEO2, StudyName.PANCAN, StudyName.MBC];
 
   for (const study of studies) {
     test(`Search by tumor sample id for non-legacy participant @dsm @${study}`, async ({ page, request }) => {
