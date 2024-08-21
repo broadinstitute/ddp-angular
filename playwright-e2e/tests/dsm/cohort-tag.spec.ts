@@ -181,17 +181,17 @@ test.describe('Cohort tags', () => {
       expect(participantThreeTagOccurences).toBe(1);
 
       //Delete the added greeting tag from the above three participants
-      await participantListTable.openParticipantPageAt(0);
+      await participantListTable.openParticipantPageAt({ position: 0 });
       await participantPage.waitForReady();
       await cohortTag.remove(greetingTag);
       await participantPage.backToList();
 
-      await participantListTable.openParticipantPageAt(1);
+      await participantListTable.openParticipantPageAt({ position: 1 });
       await participantPage.waitForReady();
       await cohortTag.remove(greetingTag);
       await participantPage.backToList();
 
-      await participantListTable.openParticipantPageAt(2);
+      await participantListTable.openParticipantPageAt({ position: 2 });
       await participantPage.waitForReady();
       await cohortTag.remove(greetingTag);
       await participantPage.backToList();
