@@ -1,4 +1,4 @@
-export enum SurveyDataPanelEnum {
+export enum SurveyName {
   ADD_CHILD_PARTICIPANT = 'Add child participant',
   ADDITIONAL_DETAILS = 'Additional details',
   FAMILIY_HISTORY_BIOLOGICAL_PARENT_FEMALE = `Biological / Birth Parent 1: Assigned female at birth`,
@@ -10,6 +10,7 @@ export enum SurveyDataPanelEnum {
   MEDICAL_RELEASE_FORM = 'Medical Release Form',
   FAMILY_HISTORY_PARENTS_SIBLING = `Parent's Sibling`,
   PREQUALIFIER = 'Prequalifier Survey',
+  REGISTRATION = 'Registration',
   RESEARCH_CONSENT_ASSENT_FORM = 'Research Consent & Assent Form',
   RESEARCH_CONSENT_FORM = 'Research Consent Form',
   FAMILY_HISTORY_SIBLING = 'Sibling',
@@ -19,7 +20,7 @@ export enum SurveyDataPanelEnum {
   SURVEY_YOUR_CHILDS_OSTEOSARCOMA = `Survey: Your Child's Osteosarcoma`,
 }
 
-export enum ActivityVersionEnum {
+export enum ActivityVersion {
   ONE = 'Survey Version: v1',
   TWO = 'Survey Version: v2',
   THREE = 'Survey Version: v3',

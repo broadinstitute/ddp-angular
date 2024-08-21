@@ -1,5 +1,5 @@
 import { expect } from '@playwright/test';
-import { ActivityVersionEnum as ActivityVersion, SurveyDataPanelEnum as SurveyName } from 'dsm/component/tabs/enums/survey-data-enum';
+import { ActivityVersion, SurveyName } from 'dsm/component/tabs/enums/survey-data-enum';
 import { CustomizeView, CustomizeViewID as ID, DataFilter, Label, Tab } from 'dsm/enums';
 import { Navigation, Study, StudyName } from 'dsm/navigation';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
@@ -108,12 +108,14 @@ test.describe(`Confirm that participant phone number information is displayed @d
         expect(numberOfReturnedParticipants).toBeGreaterThanOrEqual(1);
 
         //Verify that the information in the columns above match in the Participant List
-        const registrationActivityPhoneNumber = await participantListTable.getCellDataForColumn(Label.REGISTRATION_PHONE, 1);
+        const registrationActivityPhoneNumber = (await participantListTable.getCellDataForColumn(Label.REGISTRATION_PHONE, 1)).trim();
         expect(registrationActivityPhoneNumber).toBeTruthy();
 
-        const participantHomePhoneNumber = await participantListTable.getCellDataForColumn(Label.PHONE_HOME, 1);
+        const participantHomePhoneNumber = (await participantListTable.getCellDataForColumn(Label.PHONE_HOME, 1)).trim();
         expect(participantHomePhoneNumber).toBeTruthy();
 
+        console.log(`Activity #:${registrationActivityPhoneNumber}`);
+        console.log(`Home #:${participantHomePhoneNumber}`);
         expect(participantHomePhoneNumber).toBe(registrationActivityPhoneNumber);
 
         //Verify that the information is the same in the Participant Page
@@ -121,13 +123,33 @@ test.describe(`Confirm that participant phone number information is displayed @d
         expect(shortID).toBeTruthy();
         await participantListPage.filterListByShortId(shortID);
         console.log(`Checking participant ${shortID}'s information`);
-        console.log(`Phone number as entered in Registration activity: ${registrationActivityPhoneNumber}`);
-        console.log(`Participant's home phone number (should be the same as the number in Registration Activity): ${participantHomePhoneNumber}`);
+        console.log(`Phone number as entered in Registration activity:${registrationActivityPhoneNumber}`);
 
         participantPage = await participantListTable.openParticipantPageAt({ position: 0 });
         await participantPage.waitForReady();
 
         //Check Survey Data tab -> Registration
+        const isSurveyDataTabVisible = await participantPage.tablist(Tab.SURVEY_DATA).isVisible();
+        expect(isSurveyDataTabVisible).toBeTruthy();
+
+        const surveyDataTab = new SurveyDataTab(page);
+
+        const registrationActivity = await surveyDataTab.getActivity({
+          activityName: SurveyName.REGISTRATION,
+          activityVersion: ActivityVersion.ONE
+        });
+        await registrationActivity.scrollIntoViewIfNeeded();
+        await expect(registrationActivity).toBeVisible();
+        await registrationActivity.click(); //Clicking to open the panel
+
+        const registrationActivtyPhoneNumberQuestion = await surveyDataTab.getActivityQuestion({
+          activity: registrationActivity,
+          questionShortID: Label.REGISTRATION_PHONE
+        });
+        const registrationActivtiyPhoneNumberResponse = await surveyDataTab.getActivityAnswer({
+          activityQuestion: registrationActivtyPhoneNumberQuestion
+        });
+        console.log(`phone # info in survey data: ${registrationActivtiyPhoneNumberResponse}`);
 
         //Check Participant Info tab -> Phone (H)
       }

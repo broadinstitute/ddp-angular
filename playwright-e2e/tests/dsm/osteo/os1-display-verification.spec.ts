@@ -8,7 +8,7 @@ import ParticipantPage from 'dsm/pages/participant-page';
 import SurveyDataTab from 'dsm/pages/tablist/survey-data-tab';
 import Select from 'dss/component/select';
 import { SortOrder } from 'dss/component/table';
-import { SurveyDataPanelEnum as SurveyName, ActivityVersionEnum as ActivityVersion } from 'dsm/component/tabs/enums/survey-data-enum';
+import { SurveyName as SurveyName, ActivityVersion as ActivityVersion } from 'dsm/component/tabs/enums/survey-data-enum';
 import { test } from 'fixtures/dsm-fixture';
 import { logInfo } from 'utils/log-utils';
 
