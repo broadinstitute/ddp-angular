@@ -1,5 +1,5 @@
 import { Locator, Page, expect } from '@playwright/test';
-import { SurveyName as SurveyName, ActivityVersion as ActivityVersion } from 'dsm/component/tabs/enums/survey-data-enum';
+import { SurveyName, ActivityVersion } from 'dsm/component/tabs/enums/survey-data-enum';
 import { CustomizeView, Label } from 'dsm/enums';
 
 //TODO add method to check Created, Completed, Last Updated information

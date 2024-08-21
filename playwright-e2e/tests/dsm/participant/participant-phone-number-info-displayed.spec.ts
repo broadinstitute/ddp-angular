@@ -4,9 +4,11 @@ import { CustomizeView, CustomizeViewID as ID, DataFilter, Label, Tab } from 'ds
 import { Navigation, Study, StudyName } from 'dsm/navigation';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
 import ContactInformationTab from 'dsm/pages/tablist/contact-information-tab';
+import ParticipantInfoTab from 'dsm/pages/tablist/participant-info-tab';
 import SurveyDataTab from 'dsm/pages/tablist/survey-data-tab';
 import Select from 'dss/component/select';
 import { test } from 'fixtures/dsm-fixture';
+import { logInfo } from 'utils/log-utils';
 import { isCMIStudy, isPECGSStudy } from 'utils/test-utils';
 
 test.describe(`Confirm that participant phone number information is displayed @dsm @functional`, () => {
@@ -32,7 +34,7 @@ test.describe(`Confirm that participant phone number information is displayed @d
         //Check Research Consent -> Your Contact Info to make sure phone information is displayed
         await customizeViewPanel.selectColumns(CustomizeView.CONTACT_INFORMATION, [Label.PHONE]);
         const addressLabel = isPECGSStudy(study) ? Label.YOUR_CONTACT_INFORMATION : Label.MAILING_ADDRESS;
-        console.log(`Label of the address in the Research Consent column options: ${addressLabel}`);
+        logInfo(`Label of the address in the Research Consent column options: ${addressLabel}`);
         await customizeViewPanel.selectColumns(CustomizeView.RESEARCH_CONSENT_FORM, [addressLabel]);
         await customizeViewPanel.close();
 
@@ -49,10 +51,10 @@ test.describe(`Confirm that participant phone number information is displayed @d
         //Get first option for phone number and check if the study participant's address include that information
         shortID = await participantListTable.getCellDataForColumn(Label.SHORT_ID, 1);
         expect(shortID).toBeTruthy();
-        console.log(`Checking participant ${shortID}'s information`);
+        logInfo(`Checking participant ${shortID}'s information`);
 
         const participantListPhoneNumber = await participantListTable.getCellDataForColumn(Label.PHONE, 1);
-        console.log(`Participant ${shortID}'s Phone Number: ${participantListPhoneNumber}`);
+        logInfo(`Participant ${shortID}'s Phone Number: ${participantListPhoneNumber}`);
         expect(participantListPhoneNumber).toBeTruthy();
 
         const participantAddressInList = await participantListTable.getCellDataForColumn(addressLabel, 1);
@@ -83,7 +85,10 @@ test.describe(`Confirm that participant phone number information is displayed @d
           activity: researchConsentForm,
           questionShortID: Label.MAILING_ADDRESS_SHORT_ID
         });
-        const addressFormPhoneNumber = await surveyDataTab.getActivityAnswer(mailingAddress, { fieldName: Label.PHONE_NUMBER });
+        const addressFormPhoneNumber = await surveyDataTab.getActivityAnswer({
+          activityQuestion: mailingAddress,
+          fieldName: Label.PHONE_NUMBER
+        });
         expect(addressFormPhoneNumber).toBeTruthy();
         expect(addressFormPhoneNumber).toBe(participantListPhoneNumber);
 
@@ -114,16 +119,16 @@ test.describe(`Confirm that participant phone number information is displayed @d
         const participantHomePhoneNumber = (await participantListTable.getCellDataForColumn(Label.PHONE_HOME, 1)).trim();
         expect(participantHomePhoneNumber).toBeTruthy();
 
-        console.log(`Activity #:${registrationActivityPhoneNumber}`);
-        console.log(`Home #:${participantHomePhoneNumber}`);
+        logInfo(`Activity #:${registrationActivityPhoneNumber}`);
+        logInfo(`Home #:${participantHomePhoneNumber}`);
         expect(participantHomePhoneNumber).toBe(registrationActivityPhoneNumber);
 
         //Verify that the information is the same in the Participant Page
         shortID = await participantListTable.getCellDataForColumn(Label.SHORT_ID, 1);
         expect(shortID).toBeTruthy();
         await participantListPage.filterListByShortId(shortID);
-        console.log(`Checking participant ${shortID}'s information`);
-        console.log(`Phone number as entered in Registration activity:${registrationActivityPhoneNumber}`);
+        logInfo(`Checking participant ${shortID}'s information`);
+        logInfo(`Phone number as entered in Registration activity:${registrationActivityPhoneNumber}`);
 
         participantPage = await participantListTable.openParticipantPageAt({ position: 0 });
         await participantPage.waitForReady();
@@ -149,9 +154,20 @@ test.describe(`Confirm that participant phone number information is displayed @d
         const registrationActivtiyPhoneNumberResponse = await surveyDataTab.getActivityAnswer({
           activityQuestion: registrationActivtyPhoneNumberQuestion
         });
-        console.log(`phone # info in survey data: ${registrationActivtiyPhoneNumberResponse}`);
+        logInfo(`phone # info in survey data: ${registrationActivtiyPhoneNumberResponse}`);
 
         //Check Participant Info tab -> Phone (H)
+        const isParticipantInfoTabVisible = await participantPage.tablist(Tab.PARTICIPANT_INFO).isVisible();
+        expect(isParticipantInfoTabVisible).toBeTruthy();
+
+        await participantPage.tablist(Tab.PARTICIPANT_INFO).click();
+
+        const participantInfoTab = new ParticipantInfoTab(page);
+        const participantInfoTabPhoneNumber = await participantInfoTab.getFieldInput({
+          fieldName: Label.PHONE_HOME
+        });
+        logInfo(`Participant Info Tab phone#: ${participantHomePhoneNumber}`);
+        expect(participantInfoTabPhoneNumber).toBe(registrationActivityPhoneNumber);
       }
     })
   }
