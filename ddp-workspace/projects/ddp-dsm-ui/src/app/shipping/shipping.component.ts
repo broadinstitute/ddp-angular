@@ -516,16 +516,25 @@ export class ShippingComponent implements OnInit {
   }
 
   private downloadKitList(fieldNames?: string[]): void {
-    const map: { realm: string; participantId: string; shortID: string; mfCode: string; sent: string; received: string }[] = [];
+    const map: { realm: string; participantId: string; shortID: string; mfCode: string; sent: string; received: string;
+      deactivated: string; deactivationReason: string; shippingId: string; type: string; sampleType: string;}[] = [];
 
     for (const kitRequest of this.kitRequests) {
       let sentDate: string = null;
-      if (kitRequest.scanDate !== 0) {
+      if (kitRequest.scanDate !== 0 && kitRequest.scanDate != null) {
         sentDate = Utils.getDateFormatted(new Date(kitRequest.scanDate), Utils.DATE_STRING_IN_CVS);
       }
       let receivedDate: string = null;
-      if (kitRequest.receiveDate !== 0) {
+      if (kitRequest.receiveDate !== 0 && kitRequest.receiveDate != null) {
         receivedDate = Utils.getDateFormatted(new Date(kitRequest.receiveDate), Utils.DATE_STRING_IN_CVS);
+      }
+      let deactivatedDate: string = null;
+      if (kitRequest.deactivatedDate !== 0 && kitRequest.deactivatedDate != null) {
+        deactivatedDate = Utils.getDateFormatted(new Date(kitRequest.deactivatedDate), Utils.DATE_STRING_IN_CVS);
+      }
+      let typeOfSample = 'Clinical Sample';
+      if (this.isResearchSample(kitRequest)) {
+        typeOfSample = 'Research Sample';
       }
       map.push({
         realm: kitRequest.realm,
@@ -533,10 +542,16 @@ export class ShippingComponent implements OnInit {
         shortID: kitRequest.getID(),
         mfCode: kitRequest.kitLabel,
         sent: sentDate,
-        received: receivedDate
+        received: receivedDate,
+        deactivated: deactivatedDate,
+        deactivationReason: kitRequest.deactivationReason,
+        shippingId: kitRequest.getShippingIdOrError(),
+        type: kitRequest.kitTypeName,
+        sampleType: typeOfSample
       });
     }
-    const fields = [ 'realm', 'participantId', 'shortID', 'mfCode', 'sent', 'received' ];
+    const fields = [ 'realm', 'participantId', 'shortID', 'mfCode', 'sent', 'received',
+      'deactivated', 'deactivationReason', 'shippingId', 'type', 'sampleType' ];
     const date = new Date();
     Utils.createCSV(
       fields,
