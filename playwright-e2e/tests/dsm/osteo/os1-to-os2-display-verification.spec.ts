@@ -8,7 +8,7 @@ import Select from 'dss/component/select';
 import { test } from 'fixtures/dsm-fixture';
 import { logInfo } from 'utils/log-utils';
 import { totalNumberOfOccurences } from 'utils/test-utils';
-import { SurveyName as SurveyName, ActivityVersion as ActivityVersion } from 'dsm/component/tabs/enums/survey-data-enum';
+import { SurveyName, ActivityVersion } from 'dsm/component/tabs/enums/survey-data-enum';
 import OncHistoryTable from 'dsm/component/tables/onc-history-table';
 import OncHistoryTab from 'dsm/pages/tablist/onc-history-tab';
 import { OsteoOncHistoryUpload } from 'dsm/component/models/onc-history-upload-interface';
