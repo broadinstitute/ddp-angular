@@ -545,7 +545,7 @@ export class ShippingComponent implements OnInit {
         received: receivedDate,
         deactivated: deactivatedDate,
         deactivationReason: kitRequest.deactivationReason,
-        shippingId: kitRequest.getShippingIdOrError(),
+        shippingId: kitRequest.ddpLabel,
         type: kitRequest.kitTypeName,
         sampleType: typeOfSample
       });
