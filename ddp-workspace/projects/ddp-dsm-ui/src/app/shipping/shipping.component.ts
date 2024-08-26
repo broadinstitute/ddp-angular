@@ -532,9 +532,9 @@ export class ShippingComponent implements OnInit {
       if (kitRequest.deactivatedDate !== 0 && kitRequest.deactivatedDate != null) {
         deactivatedDate = Utils.getDateFormatted(new Date(kitRequest.deactivatedDate), Utils.DATE_STRING_IN_CVS);
       }
-      let typeOfSample = 'Clinical Sample';
-      if (this.isResearchSample(kitRequest)) {
-        typeOfSample = 'Research Sample';
+      let typeOfSample = 'Research Sample';
+      if (this.isClinicalStudy && !this.isResearchSample(kitRequest)) {
+        typeOfSample = 'Clinical Sample';
       }
       map.push({
         realm: kitRequest.realm,
