@@ -13,7 +13,7 @@ import { getDate, offsetDaysFromToday } from 'utils/date-utils';
 import { logInfo } from 'utils/log-utils';
 import DsmPageBase from './dsm-page-base';
 import * as user from 'data/fake-user.json';
-import { ActivityVersionEnum } from 'dsm/component/tabs/enums/survey-data-enum';
+import { ActivityVersion } from 'dsm/component/tabs/enums/survey-data-enum';
 
 export default class ParticipantListPage extends DsmPageBase {
   PAGE_TITLE = 'Participant List';

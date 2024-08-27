@@ -1,5 +1,5 @@
 import { Locator, Page, expect } from '@playwright/test';
-import { SurveyDataPanelEnum as SurveyName, ActivityVersionEnum as ActivityVersion } from 'dsm/component/tabs/enums/survey-data-enum';
+import { SurveyName, ActivityVersion } from 'dsm/component/tabs/enums/survey-data-enum';
 import { CustomizeView, Label } from 'dsm/enums';
 
 //TODO add method to check Created, Completed, Last Updated information
@@ -42,8 +42,14 @@ export default class SurveyDataTab {
   }
 
   //TODO modify to better handle whitepsaces + line breaks + answers with more than one line of input e.g. from Medical Release Form
-  public async getActivityAnswer(activityQuestion: Locator): Promise<string> {
-    const answerLocator = activityQuestion.locator(`//following-sibling::div//b`);
+  public async getActivityAnswer(opts: { activityQuestion: Locator, fieldName?: Label }): Promise<string> {
+    const { activityQuestion, fieldName = '' } = opts;
+    let answerLocator: Locator;
+    if (fieldName) {
+      answerLocator = activityQuestion.locator(`//following-sibling::div//span[normalize-space(text())='${fieldName}']/preceding-sibling::b`);
+    } else {
+      answerLocator = activityQuestion.locator(`//following-sibling::div//b`);
+    }
     const answer = (await answerLocator.innerText()).trim();
     return answer;
   }
