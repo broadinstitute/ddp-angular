@@ -77,6 +77,7 @@ export class ParticipantListTable extends Table {
   * @returns the contents of the specified column in the specified row
   */
   public async getCellDataForColumn(columnName: Label, rowNumber: number): Promise<string> {
+    await this.waitForReady(); //Note: Tests in some studies occasionally goes to fast when getting data - this line is neccessary for the below to do as intended
     const numberOfPrecedingColumns = await this.page.locator(`//table/thead/th[contains(., '${columnName}')]/preceding-sibling::th`).count();
     const columnIndex = numberOfPrecedingColumns + 1;
     //Find the cell in a specific row and column
