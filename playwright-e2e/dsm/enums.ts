@@ -11,16 +11,17 @@ export enum KitSampleType {
 }
 
 export enum DataFilter {
-  NOT_EMPTY = 'Not Empty',
-  EXACT_MATCH = 'Exact Match',
-  RANGE = 'Range',
   EMPTY = 'Empty',
   ENROLLED = 'Enrolled',
-  REQUEST = 'Request',
-  RECEIVED = 'Received',
+  EXACT_MATCH = 'Exact Match',
+  LOST_TO_FOLLOWUP = 'Lost to Followup',
   NO = 'No',
-  YES = 'Yes',
+  NOT_EMPTY = 'Not Empty',
+  RANGE = 'Range',
+  RECEIVED = 'Received',
   REGISTERED = 'Registered',
+  REQUEST = 'Request',
+  YES = 'Yes',
 }
 
 export enum FieldSettingInputType {

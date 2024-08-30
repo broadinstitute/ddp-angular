@@ -1,4 +1,5 @@
 import { expect } from '@playwright/test';
+import { ParticipantListTable } from 'dsm/component/tables/participant-list-table';
 import { CustomizeView, DataFilter, Label } from 'dsm/enums';
 import { Navigation, Study, StudyName } from 'dsm/navigation';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
@@ -12,6 +13,7 @@ test.describe.serial('Verify that clinical orders can be placed in mercury @dsm 
   let searchPanel;
   let shortID;
   let participantPage;
+  let sequencingOrderID;
 
   for (const study of pecgsStudies) {
     test(`${study}: Verify a clinical order can be placed for a participant with Enrolled status`, async ({ page, request }) => {
@@ -66,3 +68,38 @@ test.describe.serial('Verify that clinical orders can be placed in mercury @dsm 
     })
   }
 })
+
+async function findParticipantForGermlineSequencing(opts: {
+  enrollmentStatus: DataFilter.ENROLLED | DataFilter.LOST_TO_FOLLOWUP,
+  participantListPage: ParticipantListPage,
+  participantListTable: ParticipantListTable
+  residenceInUSTerritory?: boolean
+}): Promise<string> {
+  const { enrollmentStatus, participantListPage, participantListTable, residenceInUSTerritory = false } = opts;
+
+  const customizeViewPanel = participantListPage.filters.customizeViewPanel;
+  await customizeViewPanel.open();
+  await customizeViewPanel.selectColumns(CustomizeView.CONTACT_INFORMATION, [Label.CITY, Label.COUNTRY]);
+  await customizeViewPanel.close();
+
+  const searchPanel = participantListPage.filters.searchPanel;
+  await searchPanel.open();
+  await searchPanel.checkboxes(Label.STATUS, { checkboxValues: [enrollmentStatus] });
+  await searchPanel.dates(Label.CLINICAL_ORDER_DATE, { additionalFilters: [DataFilter.NOT_EMPTY] });
+  await searchPanel.text(Label.CLINICAL_ORDER_ID, { additionalFilters: [DataFilter.NOT_EMPTY] });
+
+  if (residenceInUSTerritory) {
+    //Location used: Yigo, Guam
+    await searchPanel.text(Label.CITY, { textValue: 'YIGO' });
+    await searchPanel.text(Label.COUNTRY, { textValue: 'GU' });
+  } else {
+    await searchPanel.text(Label.CITY, { textValue: 'CAMBRIDGE' });
+    await searchPanel.text(Label.COUNTRY, { textValue: 'US' });
+  }
+
+  await searchPanel.search({ uri: 'filterList' });
+
+  const numberOfReturnedParticipants = await participantListTable.getRowsCount();
+  expect(numberOfReturnedParticipants).toBeGreaterThanOrEqual(1);
+}
+

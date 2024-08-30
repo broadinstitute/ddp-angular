@@ -7,6 +7,17 @@ export default class SequeuncingOrderTab extends TabBase {
   private readonly SAMPLE_ROW_XPATH = '//app-sequencing-order//tr';
   private readonly DATE_FIELD_XPATH = `//input[@data-placeholder='mm/dd/yyyy']`;
   private readonly NOT_ELIGIBLE_DUE_TO_RESIDENCE = `Error: Participant lives in New York or Canada and is not eligible for clinical sequencing`;
+  private readonly SEQUENCING_ORDER_COLUMNS = [
+    'Select',
+    'Sample Type',
+    'Sample',
+    'Sample Status',
+    'Collection Date',
+    'Latest Sequencing Order Date',
+    'Latest Order Status',
+    'Latest Order Number',
+    'Latest PDO Number'
+  ];
 
   constructor(page: Page) {
     super(page, Tab.SEQUENCING_ORDER);
