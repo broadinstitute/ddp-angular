@@ -73,7 +73,7 @@ import {
                 <div class="row">
                     <section
                         class="Message col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1 NoPadding">
-                        <h1 class="Message-title WrapperTL">
+                        <h1 class="Message-title">
                             Angiosarcoma Project Updates
                         </h1>
                     </section>
