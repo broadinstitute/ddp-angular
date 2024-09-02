@@ -20,6 +20,7 @@ import {
     AppComponent
 } from 'toolkit';
 
+import { HeaderComponent } from './components/header/header.component';
 import { AboutUsComponent } from './components/about-us/about-us.component';
 import { DataReleaseComponent } from './components/data-release/data-release.component';
 import { MoreDetailsComponent } from './components/more-details/more-details.component';
@@ -141,7 +142,8 @@ export function translateFactory(translate: TranslateService, injector: Injector
         MoreDetailsComponent,
         PrismComponent,
         WelcomeComponent,
-        EndEnrollComponent
+        EndEnrollComponent,
+        HeaderComponent
     ],
     providers: [
         {
@@ -166,7 +168,7 @@ export function translateFactory(translate: TranslateService, injector: Injector
     bootstrap: [AppComponent]
 })
 export class AppModule {
-    constructor(private analytics: AnalyticsEventsService) {
+    //constructor(private analytics: AnalyticsEventsService) {
 
-    }
+    //}
 }

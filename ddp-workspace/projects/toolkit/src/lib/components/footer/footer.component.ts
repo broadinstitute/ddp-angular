@@ -39,6 +39,9 @@ import { map, mergeMap } from 'rxjs/operators';
               <li *ngIf="showInfoForPhysicians" class="Footer-navItem">
                   <a [routerLink]="['physician.pdf']" target="_blank" class="Footer-navItemLink" translate>Toolkit.Footer.Info</a>
               </li>
+              <li *ngIf="!showEnroll" class="Footer-navItem">
+                  <a target="_blank" [href]="countMeInUrl" class="Footer-navItemLink" >joincountmein.org</a>
+              </li>
               <li class="Footer-navItem">
                   <span (click)="goToTop()" class="Footer-navItemLink" translate>Toolkit.Footer.Top</span>
               </li>
@@ -66,11 +69,16 @@ import { map, mergeMap } from 'rxjs/operators';
                   </li>
               </ul>
           </div>
+
+          <div>
+              <a *ngIf="!showEnroll" class="Footer-logoCMI" target="_blank" [href]="countMeInUrl">
+                  <img lazy-resource class="Footer-logoCMI-img" src="assets/images/logo-count-me-in.svg" alt="Count Me In logo">
+              </a>
+          </div>
+
           <div>
               <ul class="Footer-contactList Footer-contactList--right">
-                  <li>
-                      <br>
-                  </li>
+                  <li><br></li>
                   <li translate>Toolkit.Common.Organization</li>
                   <li translate>Toolkit.Footer.Contacts.Address</li>
                   <li translate>Toolkit.Footer.Contacts.Zip</li>
@@ -78,9 +86,15 @@ import { map, mergeMap } from 'rxjs/operators';
           </div>
       </div>
       </nav>
-      <a class="Footer-logoCMI" target="_blank" [href]="countMeInUrl">
+
+        <a *ngIf="!showEnroll" class="Footer-logoCMI" target="_blank" >
+        </a>
+
+      <a *ngIf="showEnroll" class="Footer-logoCMI" target="_blank" [href]="countMeInUrl">
             <img lazy-resource class="Footer-logoCMI-img" src="assets/images/logo-count-me-in.svg" alt="Count Me In logo">
       </a>
+
+
   </div>
 </footer>`
 })
@@ -175,5 +189,9 @@ export class FooterComponent implements OnInit {
     public get showJoinMailingList(): boolean {
         return this.toolkitConfiguration.showJoinMailingList;
     }
+    public get showEnroll(): boolean {
+        return this.toolkitConfiguration.showEnroll;
+    }
+
 
 }
