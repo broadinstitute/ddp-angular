@@ -5,11 +5,16 @@
     padding-top: 5px;
     padding-bottom: 20px;
     background-color: #f5f3f0;
+    /*background-image: linear-gradient(0deg, #FF9A35, #FFDE3F);*/
     z-index: 1;
 }
 
+.margin-top-20 {
+    margin-top: 20px;
+}
+
 .main-timeline-title {
-    background-color: #ece05a;
+    background-image: linear-gradient(0deg, #FF9A35, #FFDE3F);
 }
 
 .main-timeline {

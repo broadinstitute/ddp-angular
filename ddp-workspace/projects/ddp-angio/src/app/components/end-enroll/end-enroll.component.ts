@@ -68,8 +68,9 @@ import {
                 </section>
             </div>
 
-            <section style="background-color: #F5F5F0FF;">
-                <div class="row WrapperTL">
+            <section
+                class="main-timeline-title ">
+                <div class="row">
                     <section
                         class="Message col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1 NoPadding">
                         <h1 class="Message-title WrapperTL">
@@ -152,8 +153,9 @@ import {
 
             <div class="row">
                 <section
-                    class="Message col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1 NoPadding">
-                    <p class="Message-text">
+                    class="Message col-lg-6 col-lg-offset-3  ">
+                <!--                    class="Message col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-5 col-xs-offset-1 ">-->
+                    <p class="Message-text margin-top-20">
                         Questions? Please reach out to us at any time at <a class='Link' href='https://info@joincountmein.org.'>info@joincountmein.org</a>.
                     </p>
                 </section>
