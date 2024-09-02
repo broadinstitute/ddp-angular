@@ -167,8 +167,4 @@ export function translateFactory(translate: TranslateService, injector: Injector
     ],
     bootstrap: [AppComponent]
 })
-export class AppModule {
-    //constructor(private analytics: AnalyticsEventsService) {
-
-    //}
-}
+export class AppModule {}
