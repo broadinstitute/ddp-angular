@@ -18,22 +18,22 @@ import { map, mergeMap } from 'rxjs/operators';
       </a>
       <nav class="Footer-nav">
           <ul class="Footer-navList">
-              <li class="Footer-navItem Footer-navItem--first">
+              <li *ngIf="showHome"  class="Footer-navItem Footer-navItem--first">
                   <a [routerLink]="['/']" class="Footer-navItemLink" translate>Toolkit.Footer.Home</a>
               </li>
               <li *ngIf="showDataRelease" class="Footer-navItem">
                   <a [routerLink]="['/data-release']" class="Footer-navItemLink" translate>Toolkit.Footer.Data</a>
               </li>
-              <li class="Footer-navItem">
+              <li *ngIf="showFAQ"  class="Footer-navItem">
                   <a [routerLink]="['/more-details']" class="Footer-navItemLink" translate>Toolkit.Footer.FAQ</a>
               </li>
-              <li class="Footer-navItem">
+              <li *ngIf="showAboutUs" class="Footer-navItem">
                   <a [routerLink]="['/about-us']" class="Footer-navItemLink" translate>Toolkit.Footer.About</a>
               </li>
               <li *ngIf="showBlog" class="Footer-navItem">
                   <a [href]="blogUrl" class="Footer-navItemLink" translate>Toolkit.Footer.NewsBlog</a>
               </li>
-              <li class="Footer-navItem">
+              <li *ngIf="showJoinMailingList" class="Footer-navItem">
                   <span (click)="openJoinDialog()" class="Footer-navItemLink" translate>Toolkit.Footer.Join</span>
               </li>
               <li *ngIf="showInfoForPhysicians" class="Footer-navItem">
@@ -162,4 +162,18 @@ export class FooterComponent implements OnInit {
     public get showBlog(): boolean {
         return this.toolkitConfiguration.showBlog;
     }
+
+    public get showAboutUs(): boolean {
+        return this.toolkitConfiguration.showAboutUs;
+    }
+    public get showHome(): boolean {
+        return this.toolkitConfiguration.showHome;
+    }
+    public get showFAQ(): boolean {
+        return this.toolkitConfiguration.showFAQ;
+    }
+    public get showJoinMailingList(): boolean {
+        return this.toolkitConfiguration.showJoinMailingList;
+    }
+
 }

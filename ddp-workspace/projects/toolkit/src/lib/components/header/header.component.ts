@@ -32,12 +32,12 @@ import { AnalyticsEventsService, BrowserContentService, WindowRef, AnalyticsEven
             <li *ngIf="showLanguageSelector" class="Header-navItem language-selector">
                 <ddp-language-selector [isScrolled]="isScrolled"></ddp-language-selector>
             </li>
-            <li *ngIf="showButtons && showDataRelease" class="Header-navItem" fxShow="false" fxShow.gt-sm>
+            <li *ngIf="showDataRelease" class="Header-navItem" fxShow="false" fxShow.gt-sm>
                 <span [routerLink]="['/data-release']" class="SimpleButton" [ngClass]="{'SimpleButton--Scrolled': isScrolled}" translate>
                     Toolkit.Header.DataRelease
                 </span>
             </li>
-            <li class="Header-navItem" fxShow="false" fxShow.gt-xs>
+            <li *ngIf="showLearnMore" class="Header-navItem" fxShow="false" fxShow.gt-xs>
                 <span (click)="openEvent()" class="SimpleButton" [ngClass]="{'SimpleButton--Scrolled': isScrolled}" translate>
                     Toolkit.Header.LearnMore
                 </span>
@@ -46,7 +46,7 @@ import { AnalyticsEventsService, BrowserContentService, WindowRef, AnalyticsEven
                 <ddp-user-menu [isScrolled]="isScrolled">
                 </ddp-user-menu>
             </li>
-            <li *ngIf="showButtons" class="Header-navItem">
+            <li *ngIf="showButtons && showEnroll" class="Header-navItem">
                 <span [routerLink]="unsupportedBrowser ? null : '/count-me-in'"
                       (click)="clickCountMeIn()"
                       class="CountButton" [ngClass]="{'CountButton--Scrolled': isScrolled}"
@@ -134,6 +134,14 @@ export class HeaderComponent implements OnInit {
 
     public get showDataRelease(): boolean {
         return this.toolkitConfiguration.showDataRelease;
+    }
+
+    public get showLearnMore(): boolean {
+        return this.toolkitConfiguration.showLearnMore;
+    }
+
+    public get showEnroll(): boolean {
+        return this.toolkitConfiguration.showEnroll;
     }
 
     private doAnalytics(): void {

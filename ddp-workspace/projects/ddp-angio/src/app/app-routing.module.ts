@@ -32,6 +32,7 @@ import { DataReleaseComponent } from './components/data-release/data-release.com
 import { MoreDetailsComponent } from './components/more-details/more-details.component';
 import { PrismComponent } from './components/prism/prism.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
+import { EndEnrollComponent } from './components/end-enroll/end-enroll.component';
 
 const routes: Routes = [
     {
@@ -160,14 +161,6 @@ const routes: Routes = [
         canActivate: [IrbGuard]
     },
     {
-        path: 'count-me-in',
-        component: WorkflowStartActivityComponent,
-        canActivate: [
-            IrbGuard,
-            BrowserGuard
-        ]
-    },
-    {
         path: 'about-us',
         component: AboutUsComponent,
         canActivate: [IrbGuard]
@@ -225,7 +218,7 @@ const routes: Routes = [
     },
     {
         path: '',
-        component: WelcomeComponent,
+        component: EndEnrollComponent,
         pathMatch: 'full',
         canActivate: [IrbGuard]
     },
