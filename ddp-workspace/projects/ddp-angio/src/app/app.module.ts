@@ -39,6 +39,7 @@ declare const DDP_ENV: any;
 
 declare const ga: (...args: any[]) => void;
 
+const toolkitConfig = new ToolkitConfigurationService();
 export const tkCfg = new ToolkitConfigurationService();
 tkCfg.studyGuid = DDP_ENV.studyGuid;
 tkCfg.aboutYouGuid = 'ANGIOABOUTYOU';
@@ -150,6 +151,11 @@ export function translateFactory(translate: TranslateService, injector: Injector
             provide: 'ddp.config',
             useValue: config
         },
+        {
+            provide: 'toolkit.toolkitConfig',
+            useValue: toolkitConfig,
+        },
+
         {
             provide: 'toolkit.toolkitConfig',
             useValue: tkCfg

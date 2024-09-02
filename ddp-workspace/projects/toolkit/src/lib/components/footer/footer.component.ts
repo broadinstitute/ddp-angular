@@ -39,7 +39,7 @@ import { map, mergeMap } from 'rxjs/operators';
               <li *ngIf="showInfoForPhysicians" class="Footer-navItem">
                   <a [routerLink]="['physician.pdf']" target="_blank" class="Footer-navItemLink" translate>Toolkit.Footer.Info</a>
               </li>
-              <li *ngIf="!showEnroll" class="Footer-navItem">
+              <li *ngIf="!showEnroll" class="Footer-navItem  Footer-navItem--space">
                   <a target="_blank" [href]="countMeInUrl" class="Footer-navItemLink" >joincountmein.org</a>
               </li>
               <li class="Footer-navItem">
@@ -71,7 +71,7 @@ import { map, mergeMap } from 'rxjs/operators';
           </div>
 
           <div>
-              <a *ngIf="!showEnroll" class="Footer-logoCMI" target="_blank" [href]="countMeInUrl">
+              <a *ngIf="!showEnroll" class="Footer-logoCMI Footer-navItem--space" target="_blank" [href]="countMeInUrl">
                   <img lazy-resource class="Footer-logoCMI-img" src="assets/images/logo-count-me-in.svg" alt="Count Me In logo">
               </a>
           </div>
