@@ -86,6 +86,7 @@ export class ToolkitConfigurationService {
     showJoinMailingList: boolean = true;
     showLearnMore: boolean = true;
     showEnroll: boolean = true;
+    endEnroll: boolean;
     agreeConsent: boolean;
     dashboardDisplayedColumns: Array<DashboardColumns> = ['name', 'summary', 'date', 'status', 'actions'];
 
