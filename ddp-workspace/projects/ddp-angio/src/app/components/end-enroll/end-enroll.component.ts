@@ -8,7 +8,7 @@ import {
 } from 'ddp-sdk';
 
 @Component({
-    selector: 'end-enroll',
+    selector: 'app-end-enroll',
     template: `
 
         <toolkit-header [showButtons]="false"></toolkit-header>
