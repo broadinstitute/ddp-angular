@@ -9,8 +9,6 @@ import { TranslateService } from '@ngx-translate/core';
 import {
     DdpModule,
     ConfigurationService,
-    AnalyticsEventsService,
-    AnalyticsEvent,
     LoggingService
 } from 'ddp-sdk';
 
