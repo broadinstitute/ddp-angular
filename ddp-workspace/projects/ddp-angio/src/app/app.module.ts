@@ -20,7 +20,6 @@ import {
     AppComponent
 } from 'toolkit';
 
-import { HeaderComponent } from './components/header/header.component';
 import { AboutUsComponent } from './components/about-us/about-us.component';
 import { DataReleaseComponent } from './components/data-release/data-release.component';
 import { MoreDetailsComponent } from './components/more-details/more-details.component';
@@ -143,8 +142,7 @@ export function translateFactory(translate: TranslateService, injector: Injector
         MoreDetailsComponent,
         PrismComponent,
         WelcomeComponent,
-        EndEnrollComponent,
-        HeaderComponent
+        EndEnrollComponent
     ],
     providers: [
         {
