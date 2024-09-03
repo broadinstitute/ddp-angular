@@ -12,12 +12,11 @@ import SurveyAboutYou from 'dss/pages/survey-about-you';
 import { test } from 'fixtures/lms-fixture';
 import { assertActivityHeader } from 'utils/assertion-helper';
 import { generateUserName } from 'utils/faker-utils';
-import { logParticipantCreated } from 'utils/log-utils';
+import { logInfo, logParticipantCreated } from 'utils/log-utils';
 import { toHaveScreenshot, waitForResponse } from 'utils/test-utils';
 
 test.describe.serial('LMS Adult Enrollment', () => {
-  const numberOfTimesToRunTest = 5;
-  let numberOfTimesRan = 0;
+  const numberOfTimesToRunTest = 6;
   let researchConsentPage: LmsResearchConsentPage;
   let additionalConsentPage: LmsAdditionalConsentPage;
 
@@ -25,8 +24,8 @@ test.describe.serial('LMS Adult Enrollment', () => {
     await expect(page.locator('.activity-step.active')).toHaveText(expectedText);
   };
 
-  while (numberOfTimesRan <= numberOfTimesToRunTest) {
-    test('self-consent @visual @dss @lms', async ({ page }) => {
+  for (let numberOfTimesRan = 1; numberOfTimesRan < numberOfTimesToRunTest; numberOfTimesRan++) {
+    test(`LMS self-consent - run number: ${numberOfTimesRan} @visual @dss @lms`, async ({ page }) => {
       test.slow();
 
       researchConsentPage = new LmsResearchConsentPage(page);
@@ -241,8 +240,7 @@ test.describe.serial('LMS Adult Enrollment', () => {
       await toHaveScreenshot(page, 'ddp-user-activities [role="table"]', 'dashboard-table.png');
 
       expect(test.info().errors).toHaveLength(0);
-      numberOfTimesRan++;
-      console.log(`LMS Adult Enrollment Test has been ran ${numberOfTimesRan} times`);
+      logInfo(`LMS Adult Enrollment Test has been ran ${numberOfTimesRan} times`);
     });
   }
 })
