@@ -71,24 +71,31 @@ import { map, mergeMap } from 'rxjs/operators';
           </div>
 
           <div>
-              <a *ngIf="!showEnroll" class="Footer-logoCMI Footer-navItem--space" target="_blank" [href]="countMeInUrl">
-                  <img lazy-resource class="Footer-logoCMI-img" src="assets/images/logo-count-me-in.svg" alt="Count Me In logo">
-              </a>
-          </div>
-
-          <div>
-              <ul class="Footer-contactList Footer-contactList--right">
+              <ul *ngIf="showEnroll" class="Footer-contactList Footer-contactList--right">
                   <li><br></li>
                   <li translate>Toolkit.Common.Organization</li>
                   <li translate>Toolkit.Footer.Contacts.Address</li>
                   <li translate>Toolkit.Footer.Contacts.Zip</li>
               </ul>
+
+              <ul *ngIf="!showEnroll" class="Footer-contactList-2">
+                  <li translate>Toolkit.Common.Organization</li>
+                  <li translate>Toolkit.Footer.Contacts.Address</li>
+                  <li translate>Toolkit.Footer.Contacts.Zip</li>
+              </ul>
           </div>
-      </div>
+
+          <div>
+              <a *ngIf="!showEnroll" class="Footer-logoCMI Footer-navItem--logo" target="_blank" [href]="countMeInUrl">
+                  <img lazy-resource class="Footer-logoCMI-img" src="assets/images/logo-count-me-in.svg" alt="Count Me In logo">
+              </a>
+          </div>
+
+          </div>
       </nav>
 
-        <a *ngIf="!showEnroll" class="Footer-logoCMI" target="_blank" >
-        </a>
+        <!--<a *ngIf="!showEnroll" class="Footer-logoCMI" target="_blank" >
+        </a>-->
 
       <a *ngIf="showEnroll" class="Footer-logoCMI" target="_blank" [href]="countMeInUrl">
             <img lazy-resource class="Footer-logoCMI-img" src="assets/images/logo-count-me-in.svg" alt="Count Me In logo">
