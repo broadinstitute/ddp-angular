@@ -114,7 +114,7 @@ import {
                                 <div class="card-body p-4 WrapperTL">
                                     <h4>February</h4>
                                     <h1 class="margin-top-0">2020</h1>
-                                    <h4> ASCproject is featured in Nature Medicine (<a class="mb-0" target="_blank" href="https://www.nature.com/articles/s41591-019-0749-z">The Angiosarcoma Project:
+                                    <h4>ASCproject is featured in Nature Medicine (<a class="mb-0" target="_blank" href="https://www.nature.com/articles/s41591-019-0749-z">The Angiosarcoma Project:
                                         enabling genomic and clinical discoveries in rare cancer through patient
                                         partnered research</a>)
                                     </h4>
@@ -134,7 +134,7 @@ import {
                             <div class="card WrapperTL">
                                 <div class="card-body p-4 WrapperTL">
                                     <h1>2021</h1>
-                                    <h4> Trial is complete & findings are published (<a class="mb-0" target="_blank" href="https://pubmed.ncbi.nlm.nih.gov/34380663/">Multicenter phase II trial (SWOG S1609, cohort 51) of ipilimumab and nivolumab in metastatic or unresectable angiosarcoma: a substudy of dual anti-CTLA-4 and anti-PD-1 blockade in rare tumors (DART)</a>)
+                                    <h4>Trial is complete & findings are published (<a class="mb-0" target="_blank" href="https://pubmed.ncbi.nlm.nih.gov/34380663/">Multicenter phase II trial (SWOG S1609, cohort 51) of ipilimumab and nivolumab in metastatic or unresectable angiosarcoma: a substudy of dual anti-CTLA-4 and anti-PD-1 blockade in rare tumors (DART)</a>)
                                     </h4>
                                 </div>
                             </div>
@@ -156,7 +156,6 @@ import {
             <div class="row">
                 <section
                     class="Message col-lg-6 col-lg-offset-3  ">
-                <!--                    class="Message col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-5 col-xs-offset-1 ">-->
                     <p class="Message-text margin-top-20">
                         Questions? Please reach out to us at any time at <a class='Link' href='https://info@joincountmein.org.'>info@joincountmein.org</a>.
                     </p>
