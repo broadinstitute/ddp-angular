@@ -85,7 +85,7 @@ import {
                         <div class="timeline left">
                             <div class="card WrapperTL">
                                 <div class="card-body p-4 WrapperTL">
-                                    <h2>2017</h2>
+                                    <h1>2017</h1>
                                     <h4 class="mb-0">Angiosarcoma Project launches. Over 60 patients joined on the first
                                         day.</h4>
                                 </div>
@@ -94,7 +94,7 @@ import {
                         <div class="timeline right">
                             <div class="card WrapperTL">
                                 <div class="card-body p-4 WrapperTL">
-                                    <h2>2018</h2>
+                                    <h1>2018</h1>
                                     <h4 class="mb-0">First data generated through the project is shared in the public
                                         domain.</h4>
                                 </div>
@@ -103,7 +103,7 @@ import {
                         <div class="timeline left">
                             <div class="card WrapperTL">
                                 <div class="card-body p-4 WrapperTL">
-                                    <h2>2019</h2>
+                                    <h1>2019</h1>
                                     <h4 class="mb-0">Over 250 patients have consented. Additional data is shared in the
                                         public domain and used to design clinical trials for angiosarcoma patients.</h4>
                                 </div>
@@ -113,7 +113,7 @@ import {
                             <div class="card WrapperTL">
                                 <div class="card-body p-4 WrapperTL">
                                     <h4>February</h4>
-                                    <h2 class="margin-top-0">2020</h2>
+                                    <h1 class="margin-top-0">2020</h1>
                                     <h4> ASCproject is featured in Nature Medicine (<a class="mb-0" target="_blank" href="https://www.nature.com/articles/s41591-019-0749-z">The Angiosarcoma Project:
                                         enabling genomic and clinical discoveries in rare cancer through patient
                                         partnered research</a>)
@@ -125,7 +125,7 @@ import {
                             <div class="card WrapperTL">
                                 <div class="card-body p-4 WrapperTL">
                                     <h4>November</h4>
-                                    <h2 class="margin-top-0">2021</h2>
+                                    <h1 class="margin-top-0">2021</h1>
                                     <h4 class="mb-0">Phase II multicenter interventional trial starts.</h4>
                                 </div>
                             </div>
@@ -133,7 +133,7 @@ import {
                         <div class="timeline right">
                             <div class="card WrapperTL">
                                 <div class="card-body p-4 WrapperTL">
-                                    <h2>2021</h2>
+                                    <h1>2021</h1>
                                     <h4> Trial is complete & findings are published (<a class="mb-0" target="_blank" href="https://pubmed.ncbi.nlm.nih.gov/34380663/">Multicenter phase II trial (SWOG S1609, cohort 51) of ipilimumab and nivolumab in metastatic or unresectable angiosarcoma: a substudy of dual anti-CTLA-4 and anti-PD-1 blockade in rare tumors (DART)</a>)
                                     </h4>
                                 </div>
@@ -142,7 +142,7 @@ import {
                         <div class="timeline left">
                             <div class="card WrapperTL">
                                 <div class="card-body p-4 WrapperTL">
-                                    <h2>2024</h2>
+                                    <h1>2024</h1>
                                     <h4 class="mb-0">Over 470 angiosarcoma patients have fully enrolled. Data generated
                                         by the project will serve as a catalyst for ongoing research for years to
                                         come.</h4>
