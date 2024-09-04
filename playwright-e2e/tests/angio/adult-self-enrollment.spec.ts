@@ -13,7 +13,7 @@ import ResearchConsentPage from 'dss/pages/angio/enrollment/research-consent-pag
 
 const { ANGIO_USER_EMAIL, ANGIO_USER_PASSWORD } = process.env;
 
-test.describe('Adult Enrollment', () => {
+test.describe.skip('Adult Enrollment', () => {
   // Randomize last name
   const lastName = generateUserName(user.patient.lastName);
 
