@@ -125,7 +125,7 @@ import {
                             <div class="card WrapperTL">
                                 <div class="card-body p-4 WrapperTL">
                                     <h4>November</h4>
-                                    <h1 class="margin-top-0">2021</h1>
+                                    <h1 class="margin-top-0">2020</h1>
                                     <h4 class="mb-0">Phase II multicenter interventional trial starts.</h4>
                                 </div>
                             </div>
