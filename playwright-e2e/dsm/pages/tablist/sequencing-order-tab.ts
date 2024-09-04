@@ -7,17 +7,7 @@ export default class SequeuncingOrderTab extends TabBase {
   private readonly SAMPLE_ROW_XPATH = '//app-sequencing-order//tr';
   private readonly DATE_FIELD_XPATH = `//input[@data-placeholder='mm/dd/yyyy']`;
   private readonly NOT_ELIGIBLE_DUE_TO_RESIDENCE = `Error: Participant lives in New York or Canada and is not eligible for clinical sequencing`;
-  private readonly SEQUENCING_ORDER_COLUMNS = [
-    'Select',
-    'Sample Type',
-    'Sample',
-    'Sample Status',
-    'Collection Date',
-    'Latest Sequencing Order Date',
-    'Latest Order Status',
-    'Latest Order Number',
-    'Latest PDO Number'
-  ];
+  private readonly PLACE_ORDER_MODAL_TEXT = `Are you sure you want to place a clinical sequencing order for the following samples:`;
 
   constructor(page: Page) {
     super(page, Tab.SEQUENCING_ORDER);
@@ -49,9 +39,33 @@ export default class SequeuncingOrderTab extends TabBase {
     await expect(placeOrderButton).not.toBeVisible();
   }
 
+  public async assertPlaceOrderButtonDisplayed(): Promise<void> {
+    const placeOrderButton = this.getPlaceOrderButton();
+    await placeOrderButton.scrollIntoViewIfNeeded();
+    await expect(placeOrderButton, 'The Place Order button is not visible to the current DSM user').toBeVisible();
+  }
+
   public async assertParticipantNotEligibleForClinicalSequencing(): Promise<void> {
     const validationMessage = this.page.getByText(this.NOT_ELIGIBLE_DUE_TO_RESIDENCE);
     await expect(validationMessage).toBeVisible();
+  }
+
+  public async assertClinicalOrderModalDisplayed(): Promise<void> {
+    const placeOrderModal = this.page.locator(`//div[contains(text(), '${this.PLACE_ORDER_MODAL_TEXT}')]`);
+    await placeOrderModal.scrollIntoViewIfNeeded();
+    await expect(placeOrderModal, 'Place Order modal is not visible - clinical order cannot be placed').toBeVisible();
+  }
+
+  public async closeClinicalOrderModal(): Promise<void> {
+    const button = this.page.locator(`//div[@class='modal-content']/div[@class='modal-footer']//button[normalize-space(text())='Close']`);
+    await expect(button, 'Clinical Order modal -> [Close] button is not visible').toBeVisible();
+    await button.click();
+  }
+
+  public async submitClinicalOrder(): Promise<void> {
+    const button = this.page.locator(`//div[@class='modal-content']/div[@class='modal-footer']//button[normalize-space(text())='Submit']`);
+    await expect(button, 'Clinical Order modal -> [Submit] button is not visible').toBeVisible();
+    await button.click();
   }
 
   public async fillAvailableCollectionDateFields(opts: {canPlaceClinicalOrder?: boolean}): Promise<void> {
@@ -104,6 +118,11 @@ export default class SequeuncingOrderTab extends TabBase {
 
   public getPlaceOrderButton(): Locator {
     return this.toLocator.getByRole('button', { name: 'Place order' });
+  }
+
+  public async selectSampleCheckbox(sample: Locator): Promise<void> {
+    const checkbox = sample.locator('//mat-checkbox');
+    await checkbox.click();
   }
 
   private getCheckboxOfSample(sample: Locator): Locator {
