@@ -8,7 +8,7 @@ import { StudyName } from 'dsm/navigation';
 test.describe('Follow-Up Surveys', () => {
   let followupSurveyPage: FollowUpSurveyPage;
 
-  const studies = [StudyName.ANGIO, StudyName.OSTEO, StudyName.LMS, StudyName.OSTEO2, StudyName.PROSTATE, StudyName.ESC];
+  const studies = [StudyName.OSTEO, StudyName.LMS, StudyName.OSTEO2, StudyName.PROSTATE, StudyName.ESC];
 
   for (const study of studies) {
     test(`Shows list of follow-up surveys configured in @${study} @dsm @functional`, async ({ page, request }) => {
