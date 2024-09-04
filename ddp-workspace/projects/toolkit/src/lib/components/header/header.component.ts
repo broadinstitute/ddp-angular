@@ -8,60 +8,70 @@ import { AnalyticsEventsService, BrowserContentService, WindowRef, AnalyticsEven
 @Component({
     selector: 'toolkit-header',
     template: `
-    <mat-toolbar class="Header"
-                 [ngClass]="{'Header--scrolled': isScrolled, 'warning-message-top': unsupportedBrowser}">
-    <div *ngIf="!(isMobile && stickySubtitle && isScrolled)"
-          class="Header-logo"
-          ngClass.xs="Header-logo--small"
-          [ngClass.xs]="{'Header-logo--hide': stickySubtitle && isScrolled}">
-        <a [routerLink]="['/']" class="Header-link">
-            <img src="assets/images/project-logo.svg" class="Header-logoImg"
-                 alt="Project isotype">
-            <div class="Header-logoText"
-                 [ngClass]="{'Header-logoText--Scrolled': isScrolled}"
-                 [innerHTML]="'Toolkit.Header.HeaderLogo' | translate">
+        <mat-toolbar class="Header"
+                     [ngClass]="{'Header--scrolled': isScrolled, 'warning-message-top': unsupportedBrowser}">
+            <div *ngIf="!(isMobile && stickySubtitle && isScrolled)"
+                 class="Header-logo"
+                 ngClass.xs="Header-logo--small"
+                 [ngClass.xs]="{'Header-logo--hide': stickySubtitle && isScrolled}">
+                <a [routerLink]="['/']" class="Header-link">
+                    <img src="assets/images/project-logo.svg" class="Header-logoImg"
+                         alt="Project isotype">
+                    <div class="Header-logoText"
+                         [ngClass]="{'Header-logoText--Scrolled': isScrolled}"
+                         [innerHTML]="'Toolkit.Header.HeaderLogo' | translate">
+                    </div>
+                </a>
             </div>
-        </a>
-    </div>
-    <div *ngIf="isScrolled && stickySubtitle" class="HeaderInfo" [ngClass]="{'HeaderInfo--scrolled': isScrolled && isMobile}">
-        <div class="PageHeader-subTitle" [innerHTML]="stickySubtitle">
-        </div>
-    </div>
-    <nav class="Header-nav" ngClass.xs="Header-nav--small">
-        <ul class="Header-navList" ngClass.xs="Header-navList--small">
-            <li *ngIf="showLanguageSelector" class="Header-navItem language-selector">
-                <ddp-language-selector [isScrolled]="isScrolled"></ddp-language-selector>
-            </li>
-            <li *ngIf="showButtons && showDataRelease" class="Header-navItem" fxShow="false" fxShow.gt-sm>
-                <span [routerLink]="['/data-release']" class="SimpleButton" [ngClass]="{'SimpleButton--Scrolled': isScrolled}" translate>
+            <div *ngIf="isScrolled && stickySubtitle" class="HeaderInfo"
+                 [ngClass]="{'HeaderInfo--scrolled': isScrolled && isMobile}">
+                <div class="PageHeader-subTitle" [innerHTML]="stickySubtitle">
+                </div>
+            </div>
+            <nav class="Header-nav" ngClass.xs="Header-nav--small">
+                <ul class="Header-navList" ngClass.xs="Header-navList--small">
+                    <li *ngIf="showLanguageSelector" class="Header-navItem language-selector">
+                        <ddp-language-selector [isScrolled]="isScrolled"></ddp-language-selector>
+                    </li>
+                    <li *ngIf="showButtons && showDataRelease && !endEnroll" class="Header-navItem" fxShow="false" fxShow.gt-sm>
+                <span [routerLink]="['/data-release']" class="SimpleButton"
+                      [ngClass]="{'SimpleButton--Scrolled': isScrolled}" translate>
                     Toolkit.Header.DataRelease
                 </span>
-            </li>
-            <li class="Header-navItem" fxShow="false" fxShow.gt-xs>
-                <span (click)="openEvent()" class="SimpleButton" [ngClass]="{'SimpleButton--Scrolled': isScrolled}" translate>
+                    </li>
+                    <li *ngIf="endEnroll" class="Header-navItem" fxShow="true" fxShow.gt-sm>
+                <span [routerLink]="['/data-release']" class="SimpleButton"
+                      [ngClass]="{'SimpleButton--Scrolled': isScrolled}" translate>
+                    Toolkit.Header.DataRelease
+                </span>
+                    </li>
+                    <li *ngIf="showLearnMore" class="Header-navItem" fxShow="false" fxShow.gt-xs>
+                <span (click)="openEvent()" class="SimpleButton" [ngClass]="{'SimpleButton--Scrolled': isScrolled}"
+                      translate>
                     Toolkit.Header.LearnMore
                 </span>
-            </li>
-            <li *ngIf="showUserMenu && !unsupportedBrowser" class="Header-navItem user-menu-header">
-                <ddp-user-menu [isScrolled]="isScrolled">
-                </ddp-user-menu>
-            </li>
-            <li *ngIf="showButtons" class="Header-navItem">
+                    </li>
+                    <li *ngIf="showUserMenu && !unsupportedBrowser" class="Header-navItem user-menu-header">
+                        <ddp-user-menu [isScrolled]="isScrolled">
+                        </ddp-user-menu>
+                    </li>
+                    <li *ngIf="showButtons" class="Header-navItem">
                 <span [routerLink]="unsupportedBrowser ? null : '/count-me-in'"
                       (click)="clickCountMeIn()"
                       class="CountButton" [ngClass]="{'CountButton--Scrolled': isScrolled}"
                       [innerHTML]="'Toolkit.Header.CountMeIn' | translate">
                 </span>
-            </li>
-            <li class="Header-navItem" fxHide="false" fxHide.gt-xs>
+                    </li>
+                    <li *ngIf="!endEnroll" class="Header-navItem" fxHide="false" fxHide.gt-xs>
                 <span class="MenuButton">
-                    <mat-icon (click)="openEvent()" class="MenuButton-Icon" [ngClass]="{'MenuButton-Icon--Scrolled': isScrolled}">menu
+                    <mat-icon (click)="openEvent()" class="MenuButton-Icon"
+                              [ngClass]="{'MenuButton-Icon--Scrolled': isScrolled}">menu
                     </mat-icon>
                 </span>
-            </li>
-        </ul>
-    </nav>
-    </mat-toolbar>`,
+                    </li>
+                </ul>
+            </nav>
+        </mat-toolbar>`,
     styles: [`
         .Header {
             justify-content: space-between;
@@ -134,6 +144,14 @@ export class HeaderComponent implements OnInit {
 
     public get showDataRelease(): boolean {
         return this.toolkitConfiguration.showDataRelease;
+    }
+
+    public get showLearnMore(): boolean {
+        return this.toolkitConfiguration.showLearnMore;
+    }
+
+    public get endEnroll(): boolean {
+        return this.toolkitConfiguration.endEnroll;
     }
 
     private doAnalytics(): void {
