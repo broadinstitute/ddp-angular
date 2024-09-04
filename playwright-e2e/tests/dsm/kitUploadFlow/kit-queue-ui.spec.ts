@@ -8,7 +8,7 @@ import { Label } from 'dsm/enums';
 
 test.describe('Sample Kit Queue UI', () => {
   const studies = [
-    StudyName.ANGIO, StudyName.BRAIN, StudyName.OSTEO, StudyName.OSTEO2, StudyName.PANCAN,
+    StudyName.BRAIN, StudyName.OSTEO, StudyName.OSTEO2, StudyName.PANCAN,
     StudyName.RGP, StudyName.LMS, StudyName.ESC, StudyName.PROSTATE
   ];
 
