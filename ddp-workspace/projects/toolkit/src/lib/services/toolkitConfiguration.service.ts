@@ -79,7 +79,14 @@ export class ToolkitConfigurationService {
     // Layout settings
     showDataRelease: boolean;
     showInfoForPhysicians: boolean;
-    showBlog: boolean;
+    showBlog: boolean = true;
+    showAboutUs: boolean = true;
+    showHome: boolean = true;
+    showFAQ: boolean = true;
+    showJoinMailingList: boolean = true;
+    showLearnMore: boolean = true;
+    showEnroll: boolean = true;
+    endEnroll: boolean;
     agreeConsent: boolean;
     dashboardDisplayedColumns: Array<DashboardColumns> = ['name', 'summary', 'date', 'status', 'actions'];
 
