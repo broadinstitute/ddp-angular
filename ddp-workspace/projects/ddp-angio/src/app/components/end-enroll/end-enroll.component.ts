@@ -65,7 +65,7 @@ import {
                         <a class="cmi-link" target="_blank" href="https://joincountmein.org"><u>Count Me In</u></a>
                          remains committed to elevating patient centered research, to revolutionize
                         the understanding of rare cancers and rare diseases, accelerate treatment discovery, and drive
-                        medical </p>
+                        medical progress.</p>
                 </section>
             </div>
 
@@ -85,7 +85,7 @@ import {
                         <div class="timeline left">
                             <div class="card WrapperTL">
                                 <div class="card-body p-4 WrapperTL">
-                                    <h4>2017</h4>
+                                    <h1>2017</h1>
                                     <h4 class="mb-0">Angiosarcoma Project launches. Over 60 patients joined on the first
                                         day.</h4>
                                 </div>
@@ -94,7 +94,7 @@ import {
                         <div class="timeline right">
                             <div class="card WrapperTL">
                                 <div class="card-body p-4 WrapperTL">
-                                    <h4>2018</h4>
+                                    <h1>2018</h1>
                                     <h4 class="mb-0">First data generated through the project is shared in the public
                                         domain.</h4>
                                 </div>
@@ -103,7 +103,7 @@ import {
                         <div class="timeline left">
                             <div class="card WrapperTL">
                                 <div class="card-body p-4 WrapperTL">
-                                    <h4>2019</h4>
+                                    <h1>2019</h1>
                                     <h4 class="mb-0">Over 250 patients have consented. Additional data is shared in the
                                         public domain and used to design clinical trials for angiosarcoma patients.</h4>
                                 </div>
@@ -112,17 +112,20 @@ import {
                         <div class="timeline right">
                             <div class="card WrapperTL">
                                 <div class="card-body p-4 WrapperTL">
-                                    <h4>Februrary 2020</h4>
-                                    <h4 class="mb-0">ASCproject is featured in Nature Medicine (The Angiosarcoma Project:
+                                    <h4>February</h4>
+                                    <h1 class="margin-top-0">2020</h1>
+                                    <h4>ASCproject is featured in Nature Medicine (<a class="mb-0" target="_blank" href="https://www.nature.com/articles/s41591-019-0749-z">The Angiosarcoma Project:
                                         enabling genomic and clinical discoveries in rare cancer through patient
-                                        partnered research).</h4>
+                                        partnered research</a>)
+                                    </h4>
                                 </div>
                             </div>
                         </div>
                         <div class="timeline left">
                             <div class="card WrapperTL">
                                 <div class="card-body p-4 WrapperTL">
-                                    <h4>November 2021</h4>
+                                    <h4>November</h4>
+                                    <h1 class="margin-top-0">2020</h1>
                                     <h4 class="mb-0">Phase II multicenter interventional trial starts.</h4>
                                 </div>
                             </div>
@@ -130,18 +133,16 @@ import {
                         <div class="timeline right">
                             <div class="card WrapperTL">
                                 <div class="card-body p-4 WrapperTL">
-                                    <h4>2021</h4>
-                                    <h4 class="mb-0">Trial is complete & findings are published (Multicenter phase II
-                                        trial (SWOG S1609, cohort 51) of ipilimumab and nivolumab in metastatic or
-                                        unresectable angiosarcoma: a substudy of dual anti-CTLA-4 and anti-PD-1 blockade
-                                        in rare tumors (DART))</h4>
+                                    <h1>2021</h1>
+                                    <h4>Trial is complete & findings are published (<a class="mb-0" target="_blank" href="https://pubmed.ncbi.nlm.nih.gov/34380663/">Multicenter phase II trial (SWOG S1609, cohort 51) of ipilimumab and nivolumab in metastatic or unresectable angiosarcoma: a substudy of dual anti-CTLA-4 and anti-PD-1 blockade in rare tumors (DART)</a>)
+                                    </h4>
                                 </div>
                             </div>
                         </div>
                         <div class="timeline left">
                             <div class="card WrapperTL">
                                 <div class="card-body p-4 WrapperTL">
-                                    <h4>2024</h4>
+                                    <h1>2024</h1>
                                     <h4 class="mb-0">Over 470 angiosarcoma patients have fully enrolled. Data generated
                                         by the project will serve as a catalyst for ongoing research for years to
                                         come.</h4>
@@ -155,7 +156,6 @@ import {
             <div class="row">
                 <section
                     class="Message col-lg-6 col-lg-offset-3  ">
-                <!--                    class="Message col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-5 col-xs-offset-1 ">-->
                     <p class="Message-text margin-top-20">
                         Questions? Please reach out to us at any time at <a class='Link' href='https://info@joincountmein.org.'>info@joincountmein.org</a>.
                     </p>
