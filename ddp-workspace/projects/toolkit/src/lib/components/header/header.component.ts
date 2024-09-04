@@ -33,13 +33,13 @@ import { AnalyticsEventsService, BrowserContentService, WindowRef, AnalyticsEven
                     <li *ngIf="showLanguageSelector" class="Header-navItem language-selector">
                         <ddp-language-selector [isScrolled]="isScrolled"></ddp-language-selector>
                     </li>
-                    <li *ngIf="showButtons && showDataRelease" class="Header-navItem" fxShow="false" fxShow.gt-sm>
+                    <li *ngIf="showButtons && showDataRelease && !endEnroll" class="Header-navItem" fxShow="false" fxShow.gt-sm>
                 <span [routerLink]="['/data-release']" class="SimpleButton"
                       [ngClass]="{'SimpleButton--Scrolled': isScrolled}" translate>
                     Toolkit.Header.DataRelease
                 </span>
                     </li>
-                    <li *ngIf="endEnroll" class="Header-navItem" fxShow="false" fxShow.gt-sm>
+                    <li *ngIf="endEnroll" class="Header-navItem" fxShow="true" fxShow.gt-sm>
                 <span [routerLink]="['/data-release']" class="SimpleButton"
                       [ngClass]="{'SimpleButton--Scrolled': isScrolled}" translate>
                     Toolkit.Header.DataRelease
@@ -62,7 +62,7 @@ import { AnalyticsEventsService, BrowserContentService, WindowRef, AnalyticsEven
                       [innerHTML]="'Toolkit.Header.CountMeIn' | translate">
                 </span>
                     </li>
-                    <li class="Header-navItem" fxHide="false" fxHide.gt-xs>
+                    <li *ngIf="!endEnroll" class="Header-navItem" fxHide="false" fxHide.gt-xs>
                 <span class="MenuButton">
                     <mat-icon (click)="openEvent()" class="MenuButton-Icon"
                               [ngClass]="{'MenuButton-Icon--Scrolled': isScrolled}">menu

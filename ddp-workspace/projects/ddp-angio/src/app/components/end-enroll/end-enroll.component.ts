@@ -62,7 +62,7 @@ import {
                 <section
                     class="Message col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1 NoPadding">
                     <p class="Message-text">
-                        <a style="color:#ED933A" target="_blank" href="https://joincountmein.org"><u>Count Me In</u></a>
+                        <a class="cmi-link" target="_blank" href="https://joincountmein.org"><u>Count Me In</u></a>
                          remains committed to elevating patient centered research, to revolutionize
                         the understanding of rare cancers and rare diseases, accelerate treatment discovery, and drive
                         medical </p>
