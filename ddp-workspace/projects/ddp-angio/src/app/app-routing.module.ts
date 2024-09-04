@@ -5,6 +5,7 @@ import {
     IrbGuard,
 } from 'ddp-sdk';
 
+import { PasswordComponent } from 'toolkit';
 import { DataReleaseComponent } from './components/data-release/data-release.component';
 import { EndEnrollComponent } from './components/end-enroll/end-enroll.component';
 
@@ -18,6 +19,10 @@ const routes: Routes = [
         path: '',
         component: EndEnrollComponent,
         canActivate: [IrbGuard]
+    },
+    {
+        path: 'password',
+        component: PasswordComponent
     },
     {
         path: '**',
