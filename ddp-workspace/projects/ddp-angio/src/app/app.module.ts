@@ -9,8 +9,6 @@ import { TranslateService } from '@ngx-translate/core';
 import {
     DdpModule,
     ConfigurationService,
-    AnalyticsEventsService,
-    AnalyticsEvent,
     LoggingService
 } from 'ddp-sdk';
 
@@ -25,6 +23,7 @@ import { DataReleaseComponent } from './components/data-release/data-release.com
 import { MoreDetailsComponent } from './components/more-details/more-details.component';
 import { PrismComponent } from './components/prism/prism.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
+import { EndEnrollComponent } from './components/end-enroll/end-enroll.component';
 
 const baseElt = document.getElementsByTagName('base');
 
@@ -37,6 +36,7 @@ declare const DDP_ENV: any;
 
 declare const ga: (...args: any[]) => void;
 
+const toolkitConfig = new ToolkitConfigurationService();
 export const tkCfg = new ToolkitConfigurationService();
 tkCfg.studyGuid = DDP_ENV.studyGuid;
 tkCfg.aboutYouGuid = 'ANGIOABOUTYOU';
@@ -67,7 +67,14 @@ tkCfg.instagramId = 'countmein';
 tkCfg.cBioPortalLink = 'https://www.cbioportal.org/study/summary?id=angs_painter_2020';
 tkCfg.countMeInUrl = 'https://joincountmein.org/';
 tkCfg.showDataRelease = true;
-tkCfg.showInfoForPhysicians = true;
+tkCfg.endEnroll = true;
+tkCfg.showEnroll = false;
+tkCfg.showLearnMore = false;
+tkCfg.showInfoForPhysicians = false;
+tkCfg.showAboutUs = false;
+tkCfg.showFAQ = false;
+tkCfg.showHome = false;
+tkCfg.showJoinMailingList = false;
 tkCfg.showBlog = false;
 tkCfg.blogUrl = '';
 
@@ -134,12 +141,18 @@ export function translateFactory(translate: TranslateService, injector: Injector
         MoreDetailsComponent,
         PrismComponent,
         WelcomeComponent,
+        EndEnrollComponent
     ],
     providers: [
         {
             provide: 'ddp.config',
             useValue: config
         },
+        {
+            provide: 'toolkit.toolkitConfig',
+            useValue: toolkitConfig,
+        },
+
         {
             provide: 'toolkit.toolkitConfig',
             useValue: tkCfg
@@ -157,8 +170,4 @@ export function translateFactory(translate: TranslateService, injector: Injector
     ],
     bootstrap: [AppComponent]
 })
-export class AppModule {
-    constructor(private analytics: AnalyticsEventsService) {
-
-    }
-}
+export class AppModule {}
