@@ -784,3 +784,14 @@ export enum ParticipantListPageOptions {
   SAVE_CURRENT_VIEW = 'Save Current View',
   SAVED_FILTERS = 'Saved Filters',
 }
+
+export enum SequencingOrderColumn {
+  SAMPLE_TYPE = 'Sample Type',
+  SAMPLE = 'Sample',
+  SAMPLE_STATUS = 'Sample Status',
+  COLLECTION_DATE = 'Collection Date',
+  LATEST_SEQUENCING_ORDER_DATE = 'Latest Seqeuncing Order Date',
+  LATEST_ORDER_STATUS = 'Latetst Order Status',
+  LATEST_ORDER_NUMBER = 'Latest Order Number',
+  LATEST_PDO_NUMBER = 'Latest PDO Number',
+}

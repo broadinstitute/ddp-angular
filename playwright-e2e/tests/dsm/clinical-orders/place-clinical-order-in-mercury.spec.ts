@@ -1,23 +1,25 @@
 import { expect, Locator } from '@playwright/test';
 import { ParticipantListTable } from 'dsm/component/tables/participant-list-table';
-import { CustomizeView, DataFilter, Label, Tab } from 'dsm/enums';
+import { CustomizeView, DataFilter, Label, SequencingOrderColumn, Tab } from 'dsm/enums';
 import { Navigation, Study, StudyName } from 'dsm/navigation';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
 import ParticipantPage from 'dsm/pages/participant-page';
 import SequeuncingOrderTab from 'dsm/pages/tablist/sequencing-order-tab';
 import Select from 'dss/component/select';
 import { test } from 'fixtures/dsm-fixture';
+import { getToday } from 'utils/date-utils';
 import { studyShortName } from 'utils/test-utils';
 
 const pecgsStudies = [StudyName.OSTEO2]; //Checking OS2 first
 test.describe.serial('Verify that clinical orders can be placed in mercury @dsm @functional', () => {
   let navigation;
-  let shortID;
+  let shortID: string;
   let participantPage: ParticipantPage;
   let sequencingOrderTab: SequeuncingOrderTab;
   let normalSample: Locator;
   let tumorSample: Locator;
-  let previousLatestOrderNumber: string;
+  let previousLatestOrderNumberTumor: string;
+  let previousLatestOrderNumberNormal: string;
 
   for (const study of pecgsStudies) {
     test(`${study}: Verify a clinical order can be placed for a participant with Enrolled status`, async ({ page, request }) => {
@@ -50,9 +52,16 @@ test.describe.serial('Verify that clinical orders can be placed in mercury @dsm 
       await test.step('Place a clinical order using the Sequencing Order tab', async () => {
         normalSample = await sequencingOrderTab.getFirstAvailableNormalSample();
         await sequencingOrderTab.selectSampleCheckbox(normalSample);
+        //console.log(`normal xpath: ${normalSample}`);
+        await sequencingOrderTab.fillCollectionDateIfNeeded(normalSample);
+        previousLatestOrderNumberNormal = await sequencingOrderTab.getColumnDataForSample(normalSample, SequencingOrderColumn.LATEST_ORDER_NUMBER);
+        console.log(`previous Latest Order Number for normal sample: ${previousLatestOrderNumberNormal}`);
 
         tumorSample = await sequencingOrderTab.getFirstAvailableTumorSample();
         await sequencingOrderTab.selectSampleCheckbox(tumorSample);
+        //console.log(`tumor xpath: ${tumorSample}`);
+        previousLatestOrderNumberTumor = await sequencingOrderTab.getColumnDataForSample(tumorSample, SequencingOrderColumn.LATEST_ORDER_NUMBER);
+        console.log(`previous Latest Order Number for tumor sample: ${previousLatestOrderNumberTumor}`);
 
         await sequencingOrderTab.assertPlaceOrderButtonDisplayed();
         await sequencingOrderTab.placeOrder();
@@ -63,7 +72,28 @@ test.describe.serial('Verify that clinical orders can be placed in mercury @dsm 
 
       /* NOTE: Need to go from Participant Page -> Participant List -> (refresh) -> Participant Page in order to see the new info */
       await test.step('Use the new Latest Order Number to place the order in mercury', async () => {
+        await participantPage.backToList();
+        await participantListPage.filterListByShortId(shortID);
+        await participantListTable.openParticipantPageAt({ position: 0 });
+
+        await participantPage.waitForReady();
+        sequencingOrderTab = await participantPage.tablist(Tab.SEQUENCING_ORDER).click<SequeuncingOrderTab>();
+        await sequencingOrderTab.waitForReady();
+
         //Verify that Latest Sequencing Order Date is the current date and Latest Order Number has received new input
+        const today = getToday();
+
+        const orderDateNormal = await sequencingOrderTab.getColumnDataForSample(normalSample, SequencingOrderColumn.LATEST_SEQUENCING_ORDER_DATE);
+        expect(orderDateNormal).toBe(today);
+
+        const orderDateTumor = await sequencingOrderTab.getColumnDataForSample(tumorSample, SequencingOrderColumn.LATEST_SEQUENCING_ORDER_DATE);
+        expect(orderDateTumor).toBe(today);
+
+        const newLatestOrderNumberNormal = await sequencingOrderTab.getColumnDataForSample(normalSample, SequencingOrderColumn.LATEST_ORDER_NUMBER);
+        expect(newLatestOrderNumberNormal).not.toBe(previousLatestOrderNumberNormal);
+
+        const newLatestOrderNumberTumor = await sequencingOrderTab.getColumnDataForSample(tumorSample, SequencingOrderColumn.LATEST_ORDER_NUMBER);
+        expect(newLatestOrderNumberTumor).not.toBe(previousLatestOrderNumberTumor);
       });
     })
 

@@ -1,13 +1,13 @@
 import { Locator, Page, expect } from '@playwright/test';
-import { getDate } from 'utils/date-utils';
+import { getDate, getDateinISOFormat, getToday } from 'utils/date-utils';
 import TabBase from './tab-base';
-import { Tab } from 'dsm/enums';
+import { SequencingOrderColumn, Tab } from 'dsm/enums';
 
 export default class SequeuncingOrderTab extends TabBase {
   private readonly SAMPLE_ROW_XPATH = '//app-sequencing-order//tr';
   private readonly DATE_FIELD_XPATH = `//input[@data-placeholder='mm/dd/yyyy']`;
   private readonly NOT_ELIGIBLE_DUE_TO_RESIDENCE = `Error: Participant lives in New York or Canada and is not eligible for clinical sequencing`;
-  private readonly PLACE_ORDER_MODAL_TEXT = `Are you sure you want to place a clinical sequencing order for the following samples:`;
+  private readonly PLACE_CLINICAL_ORDER_MODAL_TEXT = `Are you sure you want to place a clinical sequencing order for the following samples:`;
 
   constructor(page: Page) {
     super(page, Tab.SEQUENCING_ORDER);
@@ -51,7 +51,7 @@ export default class SequeuncingOrderTab extends TabBase {
   }
 
   public async assertClinicalOrderModalDisplayed(): Promise<void> {
-    const placeOrderModal = this.page.locator(`//div[contains(text(), '${this.PLACE_ORDER_MODAL_TEXT}')]`);
+    const placeOrderModal = this.page.locator(`//div[contains(text(), '${this.PLACE_CLINICAL_ORDER_MODAL_TEXT}')]`);
     await placeOrderModal.scrollIntoViewIfNeeded();
     await expect(placeOrderModal, 'Place Order modal is not visible - clinical order cannot be placed').toBeVisible();
   }
@@ -125,6 +125,28 @@ export default class SequeuncingOrderTab extends TabBase {
     await checkbox.click();
   }
 
+  public async getColumnDataForSample(sample: Locator, columnName: SequencingOrderColumn): Promise<string> {
+    const columnIndex = await this.getColumnHeaderIndex(columnName);
+    const cellContent = await sample.locator(`//td[${columnIndex}]`).textContent() as string;
+    console.log(`Sequencing order tab - sample data under ${columnName} column: ${cellContent}`);
+    return cellContent;
+  }
+
+  public async fillCollectionDateIfNeeded(normalSample: Locator): Promise<void> {
+    const collectionDateColumnIndex = await this.getColumnHeaderIndex(SequencingOrderColumn.COLLECTION_DATE);
+    const unfilledCollectionDateColumn = normalSample.locator(`//td[${collectionDateColumnIndex}]/app-field-datepicker//input`);
+    if (unfilledCollectionDateColumn) {
+      await normalSample.locator(`//td[${collectionDateColumnIndex}]//button[normalize-space(text())='Today']`).click();
+
+      //Assert that the correct date was inputted
+      const today = getToday();
+      const collectionDateInISOFormat = getDateinISOFormat(today);
+      const collectionDateColumn = normalSample.locator(`//td[${collectionDateColumnIndex}]`);
+      const collectionDate = await collectionDateColumn.innerText();
+      expect(collectionDate).toBe(collectionDateInISOFormat);
+    }
+  }
+
   private getCheckboxOfSample(sample: Locator): Locator {
     return sample.locator('//mat-checkbox');
   }
@@ -143,5 +165,12 @@ export default class SequeuncingOrderTab extends TabBase {
     const amountOfSamples = samples.length;
     expect(amountOfSamples, 'No tumor samples were available in the Sequencing tab').toBeGreaterThanOrEqual(1);
     return samples;
+  }
+
+  private async getColumnHeaderIndex(columnName: SequencingOrderColumn): Promise<number> {
+    const precedingColumns = this.page.locator(`//th[normalize-space(text())='${columnName}']/preceding-sibling::th`);
+    const columnIndex = await precedingColumns.count() + 1;
+    console.log(`${columnName} is the ${columnIndex}th column`);
+    return columnIndex;
   }
 }
