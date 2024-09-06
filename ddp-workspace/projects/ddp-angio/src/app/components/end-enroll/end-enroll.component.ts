@@ -34,7 +34,7 @@ import {
                 <section
                     class="Message Message--intro col-lg-6 col-lg-offset-1 col-md-7 col-md-offset-1 col-sm-7 col-sm-offset-1 col-xs-10 col-xs-offset-1">
                     <h1 class="Message-title">
-                        To everyone who has taken part in the Angiosarcoma Project, thank you for your invaluable partnership that continues to be instrumental in shaping the future of angiosarcoma.
+                        <u>Enrollment is now CLOSED</u> for the Angiosarcoma Project (ASCproject).
                     </h1>
                 </section>
             </div>
