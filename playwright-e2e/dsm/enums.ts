@@ -790,8 +790,8 @@ export enum SequencingOrderColumn {
   SAMPLE = 'Sample',
   SAMPLE_STATUS = 'Sample Status',
   COLLECTION_DATE = 'Collection Date',
-  LATEST_SEQUENCING_ORDER_DATE = 'Latest Seqeuncing Order Date',
-  LATEST_ORDER_STATUS = 'Latetst Order Status',
+  LATEST_SEQUENCING_ORDER_DATE = 'Latest Sequencing Order Date',
+  LATEST_ORDER_STATUS = 'Latest Order Status',
   LATEST_ORDER_NUMBER = 'Latest Order Number',
   LATEST_PDO_NUMBER = 'Latest PDO Number',
 }

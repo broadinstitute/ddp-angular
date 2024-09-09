@@ -7,10 +7,12 @@ import ParticipantPage from 'dsm/pages/participant-page';
 import SequeuncingOrderTab from 'dsm/pages/tablist/sequencing-order-tab';
 import Select from 'dss/component/select';
 import { test } from 'fixtures/dsm-fixture';
-import { getToday } from 'utils/date-utils';
+import { getDateMonthAbbreviated, getToday } from 'utils/date-utils';
 import { studyShortName } from 'utils/test-utils';
 
 const pecgsStudies = [StudyName.OSTEO2]; //Checking OS2 first
+const { MERCURY_PUBSUB_TOPIC_NAME } = process.env;
+
 test.describe.serial('Verify that clinical orders can be placed in mercury @dsm @functional', () => {
   let navigation;
   let shortID: string;
@@ -19,7 +21,9 @@ test.describe.serial('Verify that clinical orders can be placed in mercury @dsm 
   let normalSample: Locator;
   let tumorSample: Locator;
   let previousLatestOrderNumberTumor: string;
+  let newLatestOrderNumberTumor: string;
   let previousLatestOrderNumberNormal: string;
+  let newLatestOrderNumberNormal: string;
 
   for (const study of pecgsStudies) {
     test(`${study}: Verify a clinical order can be placed for a participant with Enrolled status`, async ({ page, request }) => {
@@ -31,12 +35,13 @@ test.describe.serial('Verify that clinical orders can be placed in mercury @dsm 
       const participantListTable = participantListPage.participantListTable;
 
       await test.step('Chose an enrolled participant that will get a clinical order placed', async () => {
-        shortID = await findParticipantForGermlineSequencing({
+        /*shortID = await findParticipantForGermlineSequencing({
           enrollmentStatus: DataFilter.ENROLLED,
           participantList: participantListPage,
           participantTable: participantListTable,
           studyName: study
-        });
+        });*/
+        shortID = 'P47H2G';
 
         await participantListPage.filterListByShortId(shortID);
         participantPage = await participantListTable.openParticipantPageAt({ position: 0 });
@@ -71,7 +76,7 @@ test.describe.serial('Verify that clinical orders can be placed in mercury @dsm 
       });
 
       /* NOTE: Need to go from Participant Page -> Participant List -> (refresh) -> Participant Page in order to see the new info */
-      await test.step('Use the new Latest Order Number to place the order in mercury', async () => {
+      await test.step('Verify that the Latest Sequencing Order Date and Latest Order Number have been updated', async () => {
         await participantPage.backToList();
         await participantListPage.filterListByShortId(shortID);
         await participantListTable.openParticipantPageAt({ position: 0 });
@@ -84,16 +89,20 @@ test.describe.serial('Verify that clinical orders can be placed in mercury @dsm 
         const today = getToday();
 
         const orderDateNormal = await sequencingOrderTab.getColumnDataForSample(normalSample, SequencingOrderColumn.LATEST_SEQUENCING_ORDER_DATE);
-        expect(orderDateNormal).toBe(today);
+        expect(orderDateNormal.trim()).toBe(today);
 
         const orderDateTumor = await sequencingOrderTab.getColumnDataForSample(tumorSample, SequencingOrderColumn.LATEST_SEQUENCING_ORDER_DATE);
-        expect(orderDateTumor).toBe(today);
+        expect(orderDateTumor.trim()).toBe(today);
 
-        const newLatestOrderNumberNormal = await sequencingOrderTab.getColumnDataForSample(normalSample, SequencingOrderColumn.LATEST_ORDER_NUMBER);
+        newLatestOrderNumberNormal = await sequencingOrderTab.getColumnDataForSample(normalSample, SequencingOrderColumn.LATEST_ORDER_NUMBER);
         expect(newLatestOrderNumberNormal).not.toBe(previousLatestOrderNumberNormal);
 
-        const newLatestOrderNumberTumor = await sequencingOrderTab.getColumnDataForSample(tumorSample, SequencingOrderColumn.LATEST_ORDER_NUMBER);
+        newLatestOrderNumberTumor = await sequencingOrderTab.getColumnDataForSample(tumorSample, SequencingOrderColumn.LATEST_ORDER_NUMBER);
         expect(newLatestOrderNumberTumor).not.toBe(previousLatestOrderNumberTumor);
+      });
+
+      await test.step('Place an order in mercury', () => {
+        const result = createMercuryOrderMessage({ latestOrderNumber: newLatestOrderNumberTumor });
       });
     })
 
@@ -169,3 +178,24 @@ async function findParticipantForGermlineSequencing(opts: {
   return shortID;
 }
 
+function createMercuryOrderMessage(opts: { latestOrderNumber: string, orderStatus?: string }): string {
+  const { latestOrderNumber, orderStatus = 'Approved' } = opts;
+  const today = getToday();
+  const readableDate = getDateMonthAbbreviated(today);
+
+  const message = `
+  {
+  "status": {
+    "orderID":"${latestOrderNumber}",
+    "orderStatus": "${orderStatus}",
+    "details": "Successfully created order",
+    "pdoKey": "Made by Playwright on ${readableDate}",
+    "json": "PDO-123"
+    }
+  }`;
+
+  const messageObject = JSON.parse(message);
+  console.log(`Resulting mercury order message object: ${JSON.stringify(messageObject)}`);
+
+  return 'blank';
+}

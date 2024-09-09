@@ -135,15 +135,14 @@ export default class SequeuncingOrderTab extends TabBase {
   public async fillCollectionDateIfNeeded(normalSample: Locator): Promise<void> {
     const collectionDateColumnIndex = await this.getColumnHeaderIndex(SequencingOrderColumn.COLLECTION_DATE);
     const unfilledCollectionDateColumn = normalSample.locator(`//td[${collectionDateColumnIndex}]/app-field-datepicker//input`);
-    if (unfilledCollectionDateColumn) {
+    if (await unfilledCollectionDateColumn.isVisible()) {
       await normalSample.locator(`//td[${collectionDateColumnIndex}]//button[normalize-space(text())='Today']`).click();
 
       //Assert that the correct date was inputted
       const today = getToday();
       const collectionDateInISOFormat = getDateinISOFormat(today);
       const collectionDateColumn = normalSample.locator(`//td[${collectionDateColumnIndex}]`);
-      const collectionDate = await collectionDateColumn.innerText();
-      expect(collectionDate).toBe(collectionDateInISOFormat);
+      await expect(collectionDateColumn).toHaveText(collectionDateInISOFormat);
     }
   }
 
