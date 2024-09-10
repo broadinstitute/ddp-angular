@@ -293,7 +293,6 @@ function createMercuryOrderMessage(opts: {
 
 async function placeMercuryOrder(topicNameOrID: string, messsage: string): Promise<void> {
   const pubsubClient = new PubSub({projectId: MERCURY_PUBSUB_PROJECT_ID});
-  pubsubClient.getTopics
   const dataBuffer = Buffer.from(messsage);
   console.log(`Topic name or id: ${topicNameOrID}`);
 
