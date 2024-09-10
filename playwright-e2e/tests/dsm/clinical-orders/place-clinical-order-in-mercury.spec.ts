@@ -181,13 +181,13 @@ test.describe.serial('Verify that clinical orders can be placed in mercury @dsm 
         expect(tumorSampleType).toBe('Tumor');
 
         const tumorSampleName = await getColumnDataForRow(clinicalOrderTumor, ClinicalOrdersColumn.SAMPLE, page);
-        expect(tumorSampleName).toBe(sampleNameNormal);
+        expect(tumorSampleName).toBe(sampleNameTumor);
 
         const tumorOrderNumber = await getColumnDataForRow(clinicalOrderTumor, ClinicalOrdersColumn.ORDER_NUMBER, page);
-        expect(tumorOrderNumber).toBe(latestOrderNumberNormal);
+        expect(tumorOrderNumber).toBe(latestOrderNumberTumor);
 
         const tumorOrderDate = await getColumnDataForRow(clinicalOrderTumor, ClinicalOrdersColumn.ORDER_DATE, page);
-        expect(tumorOrderDate).toBe(orderDateNormal);
+        expect(tumorOrderDate).toBe(orderDateTumor);
 
         const tumorOrderStatus = await getColumnDataForRow(clinicalOrderTumor, ClinicalOrdersColumn.STATUS, page);
         expect(tumorOrderStatus).toBe(approvedOrderStatus);

@@ -379,5 +379,5 @@ export async function getColumnDataForRow(row: Locator, columnName: string, page
   const columnIndex = await getColumnHeaderIndex(columnName, page);
   const cellContent = await row.locator(`//td[${columnIndex}]`).textContent() as string;
   console.log(`Data under ${columnName} column: ${cellContent}`);
-  return cellContent;
+  return cellContent.trim();
 }
