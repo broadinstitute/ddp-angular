@@ -33,8 +33,8 @@ import {
             <div class="Intro row">
                 <section
                     class="Message Message--intro col-lg-6 col-lg-offset-1 col-md-7 col-md-offset-1 col-sm-7 col-sm-offset-1 col-xs-10 col-xs-offset-1">
-                    <h1 class="Message-title">
-                        To everyone who has taken part in the Angiosarcoma Project, thank you for your invaluable partnership that continues to be instrumental in shaping the future of angiosarcoma.
+                    <h1 class="Message-title margin-top-100">
+                        <u><b>Enrollment is now CLOSED</b></u> for the Angiosarcoma Project (ASCproject).
                     </h1>
                 </section>
             </div>
@@ -51,9 +51,7 @@ import {
                 <section
                     class="Message col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1 NoPadding">
                     <p class="Message-text">
-                        We are now prioritizing the ongoing analysis of data derived from everyone who enrolled. As
-                        such, <strong>we are no longer enrolling new participants in the Angiosarcoma Project
-                        (ASCproject).</strong>
+                        Thank you to everyone who has taken part in the Angiosarcoma Project. We have now generated the largest cohort of patient data ever for this disease and will be generating impactful discoveries to help fuel future therapies for angiosarcoma patients.
                     </p>
                 </section>
             </div>
@@ -63,8 +61,8 @@ import {
                     class="Message col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1 NoPadding">
                     <p class="Message-text">
                         <a class="cmi-link" target="_blank" href="https://joincountmein.org"><u>Count Me In</u></a>
-                         remains committed to elevating patient centered research, to revolutionize
-                        the understanding of rare cancers and rare diseases, accelerate treatment discovery, and drive
+                         remains committed to elevating patient centered research, revolutionizing
+                        the understanding of rare cancers and rare diseases, accelerate treatment discovery, and driving
                         medical progress.</p>
                 </section>
             </div>
