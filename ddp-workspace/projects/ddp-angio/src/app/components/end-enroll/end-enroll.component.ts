@@ -51,7 +51,7 @@ import {
                 <section
                     class="Message col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1 NoPadding">
                     <p class="Message-text">
-                        Thank you to everyone who has taken part in the Angiosarcoma Project. We are now prioritizing the ongoing analysis and release of data derived from those who enrolled.
+                        Thank you to everyone who has taken part in the Angiosarcoma Project. We have now generated the largest cohort of patient data ever for this disease and will be generating impactful discoveries to help fuel future therapies for angiosarcoma patients.
                     </p>
                 </section>
             </div>
