@@ -360,8 +360,168 @@ test.describe.serial('Verify that clinical orders can be placed in mercury @dsm 
       });
     })
 
-    test(`${study}: Verify a clinical order can be placed for a participant located in U.S. territory`, async ({ page, request }) => {
-      //stuff here
+    test(`${study}: Verify a clinical order can be placed for a lost to follwup participant located in U.S. territory`, async ({ page, request }) => {
+      navigation = new Navigation(page, request);
+      await new Select(page, { label: 'Select study' }).selectOption(study);
+
+      const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(Study.PARTICIPANT_LIST);
+      await participantListPage.waitForReady();
+      const participantListTable = participantListPage.participantListTable;
+
+      await test.step('Chose an enrolled participant that will get a clinical order placed', async () => {
+        shortID = await findParticipantForGermlineSequencing({
+          enrollmentStatus: DataFilter.LOST_TO_FOLLOWUP,
+          participantList: participantListPage,
+          participantTable: participantListTable,
+          studyName: study,
+          usePediatricParticipant: true,
+          residenceInUSTerritory: true
+        });
+
+        await participantListPage.filterListByShortId(shortID);
+        participantPage = await participantListTable.openParticipantPageAt({ position: 0 });
+        await participantPage.waitForReady();
+      });
+
+      await test.step('Make sure that the Sequencing Order tab is visible', async () => {
+        await participantPage.tablist(Tab.SEQUENCING_ORDER).isVisible();
+        sequencingOrderTab = await participantPage.tablist(Tab.SEQUENCING_ORDER).click<SequeuncingOrderTab>();
+        await sequencingOrderTab.waitForReady();
+      });
+
+      await test.step('Place a clinical order using the Sequencing Order tab', async () => {
+        normalSample = await sequencingOrderTab.getFirstAvailableNormalSample();
+        await sequencingOrderTab.selectSampleCheckbox(normalSample);
+        sampleNameNormal = await getColumnDataForRow(normalSample, SequencingOrderColumn.SAMPLE, page);
+        await sequencingOrderTab.fillCollectionDateIfNeeded(normalSample);
+        previousLatestOrderNumberNormal = await getColumnDataForRow(normalSample, SequencingOrderColumn.LATEST_ORDER_NUMBER, page);
+        console.log(`previous Latest Order Number for normal sample: ${previousLatestOrderNumberNormal}`);
+
+        tumorSample = await sequencingOrderTab.getFirstAvailableTumorSample();
+        await sequencingOrderTab.selectSampleCheckbox(tumorSample);
+        sampleNameTumor = await getColumnDataForRow(tumorSample, SequencingOrderColumn.SAMPLE, page);
+        previousLatestOrderNumberTumor = await getColumnDataForRow(tumorSample, SequencingOrderColumn.LATEST_ORDER_NUMBER, page);
+        console.log(`previous Latest Order Number for tumor sample: ${previousLatestOrderNumberTumor}`);
+
+        await sequencingOrderTab.assertPlaceOrderButtonDisplayed();
+        await sequencingOrderTab.placeOrder();
+
+        await sequencingOrderTab.assertClinicalOrderModalDisplayed();
+        await sequencingOrderTab.submitClinicalOrder();
+      });
+
+      /* NOTE: Need to go from Participant Page -> Participant List -> (refresh) -> Participant Page in order to see the new info */
+      await test.step('Verify that the Latest Sequencing Order Date and Latest Order Number have been updated', async () => {
+        await participantPage.backToList();
+        await participantListPage.filterListByShortId(shortID);
+        await participantListTable.openParticipantPageAt({ position: 0 });
+
+        await participantPage.waitForReady();
+        sequencingOrderTab = await participantPage.tablist(Tab.SEQUENCING_ORDER).click<SequeuncingOrderTab>();
+        await sequencingOrderTab.waitForReady();
+
+        //Verify that Latest Sequencing Order Date is the current date and Latest Order Number has received new input
+        const today = getToday();
+
+        orderDateNormal = await getColumnDataForRow(normalSample, SequencingOrderColumn.LATEST_SEQUENCING_ORDER_DATE, page);
+        expect(orderDateNormal.trim()).toBe(today);
+
+        orderDateTumor = await getColumnDataForRow(tumorSample, SequencingOrderColumn.LATEST_SEQUENCING_ORDER_DATE, page);
+        expect(orderDateTumor.trim()).toBe(today);
+
+        latestOrderNumberNormal = await getColumnDataForRow(normalSample, SequencingOrderColumn.LATEST_ORDER_NUMBER, page);
+        expect(latestOrderNumberNormal).not.toBe(previousLatestOrderNumberNormal);
+
+        latestOrderNumberTumor = await getColumnDataForRow(tumorSample, SequencingOrderColumn.LATEST_ORDER_NUMBER, page);
+        expect(latestOrderNumberTumor).not.toBe(previousLatestOrderNumberTumor);
+      });
+
+      await test.step('Place an order in mercury', async () => {
+        const message = createMercuryOrderMessage({
+          latestOrderNumber: latestOrderNumberTumor,
+          orderStatus: approvedOrderStatus,
+          orderDetails: orderStatusDetail
+        });
+        await placeMercuryOrder(MERCURY_PUBSUB_TOPIC_NAME, message);
+      });
+
+      await test.step('Verify that the mercury order was successfully placed', async () => {
+        //Check that Latest Order Status, Latest PDO Number are not empty for both Normal and Tumor samples - tab needs info refreshed in order to see changes
+        await participantPage.backToList();
+        await participantListPage.filterListByShortId(shortID);
+        participantPage = await participantListTable.openParticipantPageAt({ position: 0 });
+        await participantPage.waitForReady();
+
+        await participantPage.tablist(Tab.SEQUENCING_ORDER).isVisible();
+        await participantPage.tablist(Tab.SEQUENCING_ORDER).click<SequeuncingOrderTab>();
+        await sequencingOrderTab.waitForReady();
+
+        /* Checking the Normal sample's info */
+        const latestOrderStatusNormal = await getColumnDataForRow(normalSample, SequencingOrderColumn.LATEST_ORDER_STATUS, page);
+        expect(latestOrderStatusNormal).toBe(approvedOrderStatus);
+        const latestPDONumberNormal = await getColumnDataForRow(normalSample, SequencingOrderColumn.LATEST_PDO_NUMBER, page);
+        expect(latestPDONumberNormal).toContain(`Made-by-Playwright-on`);
+
+        /* Checking the Tumor sample's info */
+        const latestOrderStatusTumor = await getColumnDataForRow(tumorSample, SequencingOrderColumn.LATEST_ORDER_STATUS, page);
+        expect(latestOrderStatusTumor).toBe(approvedOrderStatus);
+        const latestPDONumberTumor = await getColumnDataForRow(tumorSample, SequencingOrderColumn.LATEST_PDO_NUMBER, page);
+        expect(latestPDONumberTumor).toContain(`Made-by-Playwright-on`);
+      });
+
+      await test.step('Verify that the mercury order can be seen in Samples -> Clinical Orders', async () => {
+        //Check that info of the newest clinical order can be seen in Clinical Orders page
+        const clinicalOrderPage = await navigation.selectFromSamples<ClinicalOrdersPage>(Samples.CLINICAL_ORDERS);
+        await clinicalOrderPage.waitForReady();
+
+        const clinicalOrderNormal = clinicalOrderPage.getClinicalOrderRow({ sampleType: 'Normal', orderNumber: latestOrderNumberNormal });
+        const clinicalOrderTumor = clinicalOrderPage.getClinicalOrderRow({ sampleType: 'Tumor', orderNumber: latestOrderNumberTumor });
+
+        // Check that each sample's info is present: Short ID, Sample Type, Sample, Order Number, Order Date, Status, Status Detail
+        /* Normal Sample */
+        const normalShortID = await getColumnDataForRow(clinicalOrderNormal, ClinicalOrdersColumn.SHORT_ID, page);
+        expect(normalShortID).toBe(shortID);
+
+        const normalSampleType = await getColumnDataForRow(clinicalOrderNormal, ClinicalOrdersColumn.SAMPLE_TYPE, page);
+        expect(normalSampleType).toBe('Normal');
+
+        const normalSampleName = await getColumnDataForRow(clinicalOrderNormal, ClinicalOrdersColumn.SAMPLE, page);
+        expect(normalSampleName).toBe(sampleNameNormal);
+
+        const normalOrderNumber = await getColumnDataForRow(clinicalOrderNormal, ClinicalOrdersColumn.ORDER_NUMBER, page);
+        expect(normalOrderNumber).toBe(latestOrderNumberNormal);
+
+        const normalOrderDate = await getColumnDataForRow(clinicalOrderNormal, ClinicalOrdersColumn.ORDER_DATE, page);
+        expect(normalOrderDate).toBe(orderDateNormal);
+
+        const normalOrderStatus = await getColumnDataForRow(clinicalOrderNormal, ClinicalOrdersColumn.STATUS, page);
+        expect(normalOrderStatus).toBe(approvedOrderStatus);
+
+        const normalStatusDetail = await getColumnDataForRow(clinicalOrderNormal, ClinicalOrdersColumn.STATUS_DETAIL, page);
+        expect(normalStatusDetail).toBe(orderStatusDetail);
+
+        /* Tumor Sample */
+        const tumorShortID = await getColumnDataForRow(clinicalOrderTumor, ClinicalOrdersColumn.SHORT_ID, page);
+        expect(tumorShortID).toBe(shortID);
+
+        const tumorSampleType = await getColumnDataForRow(clinicalOrderTumor, ClinicalOrdersColumn.SAMPLE_TYPE, page);
+        expect(tumorSampleType).toBe('Tumor');
+
+        const tumorSampleName = await getColumnDataForRow(clinicalOrderTumor, ClinicalOrdersColumn.SAMPLE, page);
+        expect(tumorSampleName).toBe(sampleNameTumor);
+
+        const tumorOrderNumber = await getColumnDataForRow(clinicalOrderTumor, ClinicalOrdersColumn.ORDER_NUMBER, page);
+        expect(tumorOrderNumber).toBe(latestOrderNumberTumor);
+
+        const tumorOrderDate = await getColumnDataForRow(clinicalOrderTumor, ClinicalOrdersColumn.ORDER_DATE, page);
+        expect(tumorOrderDate).toBe(orderDateTumor);
+
+        const tumorOrderStatus = await getColumnDataForRow(clinicalOrderTumor, ClinicalOrdersColumn.STATUS, page);
+        expect(tumorOrderStatus).toBe(approvedOrderStatus);
+
+        const tumorStatusDetail = await getColumnDataForRow(clinicalOrderTumor, ClinicalOrdersColumn.STATUS_DETAIL, page);
+        expect(tumorStatusDetail).toBe(orderStatusDetail);
+      });
     })
   }
 })
