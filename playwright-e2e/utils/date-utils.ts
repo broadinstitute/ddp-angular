@@ -149,3 +149,7 @@ export const calculateAge = (month: string, day: string, year: string): number =
 
   return resultAge;
 };
+
+export const getTodayInEastCoastDateTimeFormat = (): string => {
+  return new Date().toLocaleString('en-US', { timeZone: 'America/New_York' });
+}

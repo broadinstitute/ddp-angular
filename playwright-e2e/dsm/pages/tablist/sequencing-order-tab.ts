@@ -2,6 +2,7 @@ import { Locator, Page, expect } from '@playwright/test';
 import { getDate, getDateinISOFormat, getToday } from 'utils/date-utils';
 import TabBase from './tab-base';
 import { SequencingOrderColumn, Tab } from 'dsm/enums';
+import { getColumnHeaderIndex } from 'utils/test-utils';
 
 export default class SequeuncingOrderTab extends TabBase {
   private readonly SAMPLE_ROW_XPATH = '//app-sequencing-order//tr';
@@ -125,15 +126,8 @@ export default class SequeuncingOrderTab extends TabBase {
     await checkbox.click();
   }
 
-  public async getColumnDataForSample(sample: Locator, columnName: SequencingOrderColumn): Promise<string> {
-    const columnIndex = await this.getColumnHeaderIndex(columnName);
-    const cellContent = await sample.locator(`//td[${columnIndex}]`).textContent() as string;
-    console.log(`Sequencing order tab - sample data under ${columnName} column: ${cellContent}`);
-    return cellContent;
-  }
-
   public async fillCollectionDateIfNeeded(normalSample: Locator): Promise<void> {
-    const collectionDateColumnIndex = await this.getColumnHeaderIndex(SequencingOrderColumn.COLLECTION_DATE);
+    const collectionDateColumnIndex = await getColumnHeaderIndex(SequencingOrderColumn.COLLECTION_DATE, this.page);
     const unfilledCollectionDateColumn = normalSample.locator(`//td[${collectionDateColumnIndex}]/app-field-datepicker//input`);
     if (await unfilledCollectionDateColumn.isVisible()) {
       await normalSample.locator(`//td[${collectionDateColumnIndex}]//button[normalize-space(text())='Today']`).click();
@@ -164,12 +158,5 @@ export default class SequeuncingOrderTab extends TabBase {
     const amountOfSamples = samples.length;
     expect(amountOfSamples, 'No tumor samples were available in the Sequencing tab').toBeGreaterThanOrEqual(1);
     return samples;
-  }
-
-  private async getColumnHeaderIndex(columnName: SequencingOrderColumn): Promise<number> {
-    const precedingColumns = this.page.locator(`//th[normalize-space(text())='${columnName}']/preceding-sibling::th`);
-    const columnIndex = await precedingColumns.count() + 1;
-    console.log(`${columnName} is the ${columnIndex}th column`);
-    return columnIndex;
   }
 }

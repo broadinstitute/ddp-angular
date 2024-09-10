@@ -367,3 +367,17 @@ export function totalNumberOfOccurences(opts: { arrayToSearch: string[], wordToS
   }
   return numberOfOccurrences;
 }
+
+export async function getColumnHeaderIndex(columnName: string, page: Page): Promise<number> {
+  const precedingColumns = page.locator(`//th[normalize-space(text())='${columnName}']/preceding-sibling::th`);
+  const columnIndex = await precedingColumns.count() + 1;
+  console.log(`${columnName} is the ${columnIndex}th column`);
+  return columnIndex;
+}
+
+export async function getColumnDataForRow(row: Locator, columnName: string, page: Page): Promise<string> {
+  const columnIndex = await getColumnHeaderIndex(columnName, page);
+  const cellContent = await row.locator(`//td[${columnIndex}]`).textContent() as string;
+  console.log(`Data under ${columnName} column: ${cellContent}`);
+  return cellContent;
+}

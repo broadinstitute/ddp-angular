@@ -795,3 +795,13 @@ export enum SequencingOrderColumn {
   LATEST_ORDER_NUMBER = 'Latest Order Number',
   LATEST_PDO_NUMBER = 'Latest PDO Number',
 }
+
+export enum ClinicalOrdersColumn {
+  SHORT_ID = 'Short ID',
+  SAMPLE_TYPE = 'Sample Type',
+  SAMPLE = 'Sample',
+  ORDER_NUMBER = 'Order Number',
+  ORDER_DATE = 'Order Date',
+  STATUS = 'Status',
+  STATUS_DETAIL = 'Status Detail'
+}
