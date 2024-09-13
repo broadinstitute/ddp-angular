@@ -12,7 +12,7 @@ import { getColumnDataForRow, studyShortName } from 'utils/test-utils';
 import { PubSub } from '@google-cloud/pubsub';
 import ClinicalOrdersPage from 'dsm/pages/clinical-orders-page';
 
-const pecgsStudies = [StudyName.OSTEO2]; //Checking OS2 first
+const pecgsStudies = [StudyName.OSTEO2, StudyName.LMS]; //Checking OS2 first
 const MERCURY_PUBSUB_TOPIC_NAME = process.env.MERCURY_PUBSUB_TOPIC_NAME as string;
 const MERCURY_PUBSUB_PROJECT_ID = process.env.MERCURY_PUBSUB_PROJECT_ID as string;
 
@@ -44,12 +44,13 @@ test.describe.serial('Verify that clinical orders can be placed in mercury @dsm 
       const participantListTable = participantListPage.participantListTable;
 
       await test.step('Chose an enrolled participant that will get a clinical order placed', async () => {
-        shortID = await findParticipantForGermlineSequencing({
+        /*shortID = await findParticipantForGermlineSequencing({
           enrollmentStatus: DataFilter.ENROLLED,
           participantList: participantListPage,
           participantTable: participantListTable,
           studyName: study
-        });
+        });*/
+        shortID = 'PTPGLV';//checking LMS ptp
 
         await participantListPage.filterListByShortId(shortID);
         participantPage = await participantListTable.openParticipantPageAt({ position: 0 });
@@ -545,6 +546,7 @@ async function findParticipantForGermlineSequencing(opts: {
 
   const customizeViewPanel = participantList.filters.customizeViewPanel;
   await customizeViewPanel.open();
+  await customizeViewPanel.selectColumns(CustomizeView.SAMPLE, [Label.STATUS]);
   await customizeViewPanel.selectColumns(CustomizeView.CLINICAL_ORDERS, [
     Label.CLINICAL_ORDER_DATE,
     Label.CLINICAL_ORDER_ID,

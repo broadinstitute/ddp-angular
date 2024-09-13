@@ -58,6 +58,10 @@ export class ParticipantListTable extends Table {
     return this.cell(position, columnIndex).innerText();
   }
 
+  public getParticipantColumnDataViaShortID(shortID: string, columnToCheck: string): string {
+    
+  }
+
   public async selectCheckboxForParticipantAt(position: number): Promise<void> {
     await this.getParticipantAt(position).nth(0).locator('mat-checkbox').click();
   }
