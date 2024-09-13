@@ -162,30 +162,11 @@ test.describe(`Confirm that participant phone number information is displayed @d
 })
 
 async function getDisplayedConsent(surveyDataTab: SurveyDataTab): Promise<Locator> {
-  const consentFormVersionOne = await surveyDataTab.getActivity({
+  const researchConsent = await surveyDataTab.getActivity({
     activityName: SurveyName.RESEARCH_CONSENT_FORM,
-    activityVersion: ActivityVersion.ONE,
-    checkForVisibility: false
+    checkForVisibility: false,
+    getLatestVersion: true,
   });
-
-  const consentFormVersionTwo = await surveyDataTab.getActivity({
-    activityName: SurveyName.RESEARCH_CONSENT_FORM,
-    activityVersion: ActivityVersion.TWO,
-    checkForVisibility: false
-  });
-
-  const consentFormVersionThree = await surveyDataTab.getActivity({
-    activityName: SurveyName.RESEARCH_CONSENT_FORM,
-    activityVersion: ActivityVersion.THREE,
-    checkForVisibility: false
-  });
-
-  let researchConsent = consentFormVersionOne; //Initially make it version 1, unless a different version is visible
-  if (await consentFormVersionTwo.isVisible()) {
-    researchConsent = consentFormVersionTwo;
-  } else if (await consentFormVersionThree.isVisible()) {
-    researchConsent = consentFormVersionThree;
-  }
-
+  console.log(`DisplayedConsent: ${researchConsent}`);
   return researchConsent;
 }
