@@ -18,26 +18,29 @@ import { map, mergeMap } from 'rxjs/operators';
       </a>
       <nav class="Footer-nav">
           <ul class="Footer-navList">
-              <li class="Footer-navItem Footer-navItem--first">
+              <li *ngIf="showHome"  class="Footer-navItem Footer-navItem--first">
                   <a [routerLink]="['/']" class="Footer-navItemLink" translate>Toolkit.Footer.Home</a>
               </li>
               <li *ngIf="showDataRelease" class="Footer-navItem">
                   <a [routerLink]="['/data-release']" class="Footer-navItemLink" translate>Toolkit.Footer.Data</a>
               </li>
-              <li class="Footer-navItem">
+              <li *ngIf="showFAQ"  class="Footer-navItem">
                   <a [routerLink]="['/more-details']" class="Footer-navItemLink" translate>Toolkit.Footer.FAQ</a>
               </li>
-              <li class="Footer-navItem">
+              <li *ngIf="showAboutUs" class="Footer-navItem">
                   <a [routerLink]="['/about-us']" class="Footer-navItemLink" translate>Toolkit.Footer.About</a>
               </li>
               <li *ngIf="showBlog" class="Footer-navItem">
                   <a [href]="blogUrl" class="Footer-navItemLink" translate>Toolkit.Footer.NewsBlog</a>
               </li>
-              <li class="Footer-navItem">
+              <li *ngIf="showJoinMailingList" class="Footer-navItem">
                   <span (click)="openJoinDialog()" class="Footer-navItemLink" translate>Toolkit.Footer.Join</span>
               </li>
               <li *ngIf="showInfoForPhysicians" class="Footer-navItem">
                   <a [routerLink]="['physician.pdf']" target="_blank" class="Footer-navItemLink" translate>Toolkit.Footer.Info</a>
+              </li>
+              <li *ngIf="!showEnroll" class="Footer-navItem  Footer-navItem--space">
+                  <a target="_blank" [href]="countMeInUrl" class="Footer-navItemLink" >joincountmein.org</a>
               </li>
               <li class="Footer-navItem">
                   <span (click)="goToTop()" class="Footer-navItemLink" translate>Toolkit.Footer.Top</span>
@@ -66,21 +69,39 @@ import { map, mergeMap } from 'rxjs/operators';
                   </li>
               </ul>
           </div>
+
           <div>
-              <ul class="Footer-contactList Footer-contactList--right">
-                  <li>
-                      <br>
-                  </li>
+              <ul *ngIf="showEnroll" class="Footer-contactList Footer-contactList--right">
+                  <li><br></li>
+                  <li translate>Toolkit.Common.Organization</li>
+                  <li translate>Toolkit.Footer.Contacts.Address</li>
+                  <li translate>Toolkit.Footer.Contacts.Zip</li>
+              </ul>
+
+              <ul *ngIf="!showEnroll" class="Footer-contactList-2">
                   <li translate>Toolkit.Common.Organization</li>
                   <li translate>Toolkit.Footer.Contacts.Address</li>
                   <li translate>Toolkit.Footer.Contacts.Zip</li>
               </ul>
           </div>
-      </div>
+
+          <div>
+              <a *ngIf="!showEnroll" class="Footer-logoCMI Footer-navItem--logo" target="_blank" [href]="countMeInUrl">
+                  <img lazy-resource class="Footer-logoCMI-img" src="assets/images/logo-count-me-in.svg" alt="Count Me In logo">
+              </a>
+          </div>
+
+          </div>
       </nav>
-      <a class="Footer-logoCMI" target="_blank" [href]="countMeInUrl">
+
+        <!--<a *ngIf="!showEnroll" class="Footer-logoCMI" target="_blank" >
+        </a>-->
+
+      <a *ngIf="showEnroll" class="Footer-logoCMI" target="_blank" [href]="countMeInUrl">
             <img lazy-resource class="Footer-logoCMI-img" src="assets/images/logo-count-me-in.svg" alt="Count Me In logo">
       </a>
+
+
   </div>
 </footer>`
 })
@@ -162,4 +183,22 @@ export class FooterComponent implements OnInit {
     public get showBlog(): boolean {
         return this.toolkitConfiguration.showBlog;
     }
+
+    public get showAboutUs(): boolean {
+        return this.toolkitConfiguration.showAboutUs;
+    }
+    public get showHome(): boolean {
+        return this.toolkitConfiguration.showHome;
+    }
+    public get showFAQ(): boolean {
+        return this.toolkitConfiguration.showFAQ;
+    }
+    public get showJoinMailingList(): boolean {
+        return this.toolkitConfiguration.showJoinMailingList;
+    }
+    public get showEnroll(): boolean {
+        return this.toolkitConfiguration.showEnroll;
+    }
+
+
 }
