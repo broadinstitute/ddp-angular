@@ -730,4 +730,14 @@ export default class ParticipantListPage extends DsmPageBase {
     const { optionName } = opts;
     return this.page.locator(`//text()[normalize-space()='${optionName}']/preceding-sibling::button`);
   }
+
+  public async refreshParticipantListUsingShortID(opts: { ID: string }): Promise<void> {
+    const { ID } = opts;
+    const searchPanel = this.filters.searchPanel;
+    await searchPanel.open();
+    const shortIDField = this.page.locator(`//app-filter-column//input[contains(@data-placeholder, 'Short ID')]`);
+    await expect(shortIDField, 'Search Panel -> Short ID column is not visible, it may need to be added to the Participant List').toBeVisible();
+    await searchPanel.text(Label.SHORT_ID, { textValue: ID });
+    await searchPanel.search();
+  }
 }

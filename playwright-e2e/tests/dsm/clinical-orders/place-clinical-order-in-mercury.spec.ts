@@ -44,15 +44,15 @@ test.describe.serial('Verify that clinical orders can be placed in mercury @dsm 
       const participantListTable = participantListPage.participantListTable;
 
       await test.step('Chose an enrolled participant that will get a clinical order placed', async () => {
-        /*shortID = await findParticipantForGermlineSequencing({
+        shortID = await findParticipantForGermlineSequencing({
           enrollmentStatus: DataFilter.ENROLLED,
           participantList: participantListPage,
           participantTable: participantListTable,
           studyName: study
-        });*/
-        shortID = 'PTPGLV';//checking LMS ptp
+        });
+        //shortID = 'PTPGLV';//checking LMS ptp
 
-        await participantListPage.filterListByShortId(shortID);
+        await participantListPage.refreshParticipantListUsingShortID({ ID: shortID });
         participantPage = await participantListTable.openParticipantPageAt({ position: 0 });
         await participantPage.waitForReady();
       });
@@ -87,7 +87,7 @@ test.describe.serial('Verify that clinical orders can be placed in mercury @dsm 
       /* NOTE: Need to go from Participant Page -> Participant List -> (refresh) -> Participant Page in order to see the new info */
       await test.step('Verify that the Latest Sequencing Order Date and Latest Order Number have been updated', async () => {
         await participantPage.backToList();
-        await participantListPage.filterListByShortId(shortID);
+        await participantListPage.refreshParticipantListUsingShortID({ ID: shortID });
         await participantListTable.openParticipantPageAt({ position: 0 });
 
         await participantPage.waitForReady();
@@ -121,26 +121,32 @@ test.describe.serial('Verify that clinical orders can be placed in mercury @dsm 
 
       await test.step('Verify that the mercury order was successfully placed', async () => {
         //Check that Latest Order Status, Latest PDO Number are not empty for both Normal and Tumor samples - tab needs info refreshed in order to see changes
-        await participantPage.backToList();
-        await participantListPage.filterListByShortId(shortID);
-        participantPage = await participantListTable.openParticipantPageAt({ position: 0 });
-        await participantPage.waitForReady();
+        await expect(async () => {
+          //Occasionally, a couple of seconds are needed before the info shows up in DSM UI
+          await participantPage.backToList();
+          await participantListPage.refreshParticipantListUsingShortID({ ID: shortID });
+          participantPage = await participantListTable.openParticipantPageAt({ position: 0 });
+          await participantPage.waitForReady();
 
-        await participantPage.tablist(Tab.SEQUENCING_ORDER).isVisible();
-        await participantPage.tablist(Tab.SEQUENCING_ORDER).click<SequeuncingOrderTab>();
-        await sequencingOrderTab.waitForReady();
+          await participantPage.tablist(Tab.SEQUENCING_ORDER).isVisible();
+          await participantPage.tablist(Tab.SEQUENCING_ORDER).click<SequeuncingOrderTab>();
+          await sequencingOrderTab.waitForReady();
 
-        /* Checking the Normal sample's info */
-        const latestOrderStatusNormal = await getColumnDataForRow(normalSample, SequencingOrderColumn.LATEST_ORDER_STATUS, page);
-        expect(latestOrderStatusNormal).toBe(approvedOrderStatus);
-        const latestPDONumberNormal = await getColumnDataForRow(normalSample, SequencingOrderColumn.LATEST_PDO_NUMBER, page);
-        expect(latestPDONumberNormal).toContain(`Made-by-Playwright-on`);
+          /* Checking the Normal sample's info */
+          const latestOrderStatusNormal = await getColumnDataForRow(normalSample, SequencingOrderColumn.LATEST_ORDER_STATUS, page);
+          expect(latestOrderStatusNormal).toBe(approvedOrderStatus);
+          const latestPDONumberNormal = await getColumnDataForRow(normalSample, SequencingOrderColumn.LATEST_PDO_NUMBER, page);
+          expect(latestPDONumberNormal).toContain(`Made-by-Playwright-on`);
 
-        /* Checking the Tumor sample's info */
-        const latestOrderStatusTumor = await getColumnDataForRow(tumorSample, SequencingOrderColumn.LATEST_ORDER_STATUS, page);
-        expect(latestOrderStatusTumor).toBe(approvedOrderStatus);
-        const latestPDONumberTumor = await getColumnDataForRow(tumorSample, SequencingOrderColumn.LATEST_PDO_NUMBER, page);
-        expect(latestPDONumberTumor).toContain(`Made-by-Playwright-on`);
+          /* Checking the Tumor sample's info */
+          const latestOrderStatusTumor = await getColumnDataForRow(tumorSample, SequencingOrderColumn.LATEST_ORDER_STATUS, page);
+          expect(latestOrderStatusTumor).toBe(approvedOrderStatus);
+          const latestPDONumberTumor = await getColumnDataForRow(tumorSample, SequencingOrderColumn.LATEST_PDO_NUMBER, page);
+          expect(latestPDONumberTumor).toContain(`Made-by-Playwright-on`);
+        }).toPass({
+          intervals: [10_000],
+          timeout: 60_000
+        });
       });
 
       await test.step('Verify that the mercury order can be seen in Samples -> Clinical Orders', async () => {
@@ -215,7 +221,7 @@ test.describe.serial('Verify that clinical orders can be placed in mercury @dsm 
           usePediatricParticipant: true
         });
 
-        await participantListPage.filterListByShortId(shortID);
+        await participantListPage.refreshParticipantListUsingShortID({ ID: shortID });
         participantPage = await participantListTable.openParticipantPageAt({ position: 0 });
         await participantPage.waitForReady();
       });
@@ -250,7 +256,7 @@ test.describe.serial('Verify that clinical orders can be placed in mercury @dsm 
       /* NOTE: Need to go from Participant Page -> Participant List -> (refresh) -> Participant Page in order to see the new info */
       await test.step('Verify that the Latest Sequencing Order Date and Latest Order Number have been updated', async () => {
         await participantPage.backToList();
-        await participantListPage.filterListByShortId(shortID);
+        await participantListPage.refreshParticipantListUsingShortID({ ID: shortID });
         await participantListTable.openParticipantPageAt({ position: 0 });
 
         await participantPage.waitForReady();
@@ -285,7 +291,7 @@ test.describe.serial('Verify that clinical orders can be placed in mercury @dsm 
       await test.step('Verify that the mercury order was successfully placed', async () => {
         //Check that Latest Order Status, Latest PDO Number are not empty for both Normal and Tumor samples - tab needs info refreshed in order to see changes
         await participantPage.backToList();
-        await participantListPage.filterListByShortId(shortID);
+        await participantListPage.refreshParticipantListUsingShortID({ ID: shortID });
         participantPage = await participantListTable.openParticipantPageAt({ position: 0 });
         await participantPage.waitForReady();
 
@@ -379,7 +385,7 @@ test.describe.serial('Verify that clinical orders can be placed in mercury @dsm 
           residenceInUSTerritory: true
         });
 
-        await participantListPage.filterListByShortId(shortID);
+        await participantListPage.refreshParticipantListUsingShortID({ ID: shortID });
         participantPage = await participantListTable.openParticipantPageAt({ position: 0 });
         await participantPage.waitForReady();
       });
@@ -414,7 +420,7 @@ test.describe.serial('Verify that clinical orders can be placed in mercury @dsm 
       /* NOTE: Need to go from Participant Page -> Participant List -> (refresh) -> Participant Page in order to see the new info */
       await test.step('Verify that the Latest Sequencing Order Date and Latest Order Number have been updated', async () => {
         await participantPage.backToList();
-        await participantListPage.filterListByShortId(shortID);
+        await participantListPage.refreshParticipantListUsingShortID({ ID: shortID });
         await participantListTable.openParticipantPageAt({ position: 0 });
 
         await participantPage.waitForReady();
@@ -449,7 +455,7 @@ test.describe.serial('Verify that clinical orders can be placed in mercury @dsm 
       await test.step('Verify that the mercury order was successfully placed', async () => {
         //Check that Latest Order Status, Latest PDO Number are not empty for both Normal and Tumor samples - tab needs info refreshed in order to see changes
         await participantPage.backToList();
-        await participantListPage.filterListByShortId(shortID);
+        await participantListPage.refreshParticipantListUsingShortID({ ID: shortID });
         participantPage = await participantListTable.openParticipantPageAt({ position: 0 });
         await participantPage.waitForReady();
 
@@ -578,11 +584,31 @@ async function findParticipantForGermlineSequencing(opts: {
   const numberOfReturnedParticipants = await participantTable.getRowsCount();
   expect(numberOfReturnedParticipants).toBeGreaterThanOrEqual(1);
 
-  //Randomly chose a participant to get a clinical order who had previously had an order placed
-  const randomizedParticipantRows = await participantTable.randomizeRows();
-  const rowNumber = randomizedParticipantRows[0];
+  //Enrollment Status and Kit Status have the same name in the Participant List Table, so take out Enrollment Status
+  await customizeViewPanel.open();
+  await customizeViewPanel.deselectColumns(CustomizeView.PARTICIPANT, [Label.STATUS]);
+  await customizeViewPanel.close();
 
-  const shortID = await participantTable.getParticipantDataAt(rowNumber, Label.SHORT_ID);
+  //Randomly chose a participant to get a clinical order who had previously had an order placed - and does not have deactivated kits (due to the bug: PEPPER-1511)
+  /*const randomizedParticipantRows = await participantTable.randomizeRows();
+  const rowNumber = randomizedParticipantRows[0];*/
+  let participantChosen = false;
+  let rowNumber = 0;
+  let shortID = '';
+  while (!participantChosen) {
+    const randomizedParticipantRows = await participantTable.randomizeRows();
+    rowNumber = randomizedParticipantRows[0];
+    const kitStatus = (await participantTable.getParticipantDataAt(rowNumber, Label.STATUS)).trim();
+    console.log(`Kit Status: ${kitStatus}`);
+    if (!kitStatus.includes(`Deactivated`) || studyName === StudyName.OSTEO2) {
+      participantChosen = true;
+      shortID = await participantTable.getParticipantDataAt(rowNumber, Label.SHORT_ID);
+      console.log(`short id without a deactivated kit: ${shortID}`);
+    }
+  }
+
+  //const shortID = await participantTable.getParticipantDataAt(rowNumber, Label.SHORT_ID);
+  //shortID = 'PTPGLV';
   console.log(`Participant chosen for clinical order: ${shortID}`);
 
   return shortID;
