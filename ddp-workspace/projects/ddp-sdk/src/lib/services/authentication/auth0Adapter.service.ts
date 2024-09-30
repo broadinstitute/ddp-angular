@@ -202,9 +202,9 @@ export class Auth0AdapterService implements OnDestroy {
                     //try without decode.. error description from auth0 actions
                     try {
                         error = JSON.parse(err.errorDescription);
-                    } catch (e) {
-                        console.log("Failed to parse Auth error received", e);
-                        this.log.logError(`${this.LOG_SOURCE}.handleAuthentication: Problem decoding authentication error`, e);
+                    } catch (e2) {
+                        console.log('Failed to parse Auth error received', e2);
+                        this.log.logError(`${this.LOG_SOURCE}.handleAuthentication: Problem decoding authentication error`, e2);
                     }
                 }
                 if (onErrorCallback && error) {
