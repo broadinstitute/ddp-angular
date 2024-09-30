@@ -371,7 +371,6 @@ export function totalNumberOfOccurences(opts: { arrayToSearch: string[], wordToS
 export async function getColumnHeaderIndex(columnName: string, page: Page): Promise<number> {
   const precedingColumns = page.locator(`//th[normalize-space(text())='${columnName}']/preceding-sibling::th`);
   const columnIndex = await precedingColumns.count() + 1;
-  console.log(`${columnName} is the ${columnIndex}th column`);
   return columnIndex;
 }
 
