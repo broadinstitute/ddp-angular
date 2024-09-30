@@ -89,7 +89,6 @@ export class Auth0AdapterService implements OnDestroy {
                 redirectUri
             });
         } catch (e) {
-            console.log("------ERROR----createWebAuth", e);
             this.log.logError(`${this.LOG_SOURCE}.createWebAuth`, e);
             throw new Error(e);
         }
