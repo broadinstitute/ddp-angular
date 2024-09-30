@@ -89,6 +89,7 @@ export class Auth0AdapterService implements OnDestroy {
                 redirectUri
             });
         } catch (e) {
+            console.log("------ERROR----createWebAuth", e);
             this.log.logError(`${this.LOG_SOURCE}.createWebAuth`, e);
             throw new Error(e);
         }
@@ -199,7 +200,13 @@ export class Auth0AdapterService implements OnDestroy {
                 try {
                     error = JSON.parse(decodeURIComponent(err.errorDescription));
                 } catch (e) {
-                    this.log.logError(`${this.LOG_SOURCE}.handleAuthentication: Problem decoding authentication error`, e);
+                    //try without decode.. error description from auth0 actions
+                    try {
+                        error = JSON.parse(err.errorDescription);
+                    } catch (e) {
+                        console.log("Failed to parse Auth error received", e);
+                        this.log.logError(`${this.LOG_SOURCE}.handleAuthentication: Problem decoding authentication error`, e);
+                    }
                 }
                 if (onErrorCallback && error) {
                     // We might encounter errors from Auth0 that is not in expected
