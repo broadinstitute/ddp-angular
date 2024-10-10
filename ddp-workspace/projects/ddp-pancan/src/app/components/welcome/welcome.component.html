@@ -13,6 +13,11 @@
                    color="primary">
                     {{'App.HomePage.JoinCountMeInButton' | translate}}
                 </a>
+                <a mat-flat-button
+                   [routerLink]="'/' + AppRoutes.ScientificResearch"
+                   class="btn center curr-projects-btn button button_small" >
+                    {{'App.HomePage.CurrentProjectsButton' | translate}}
+                </a>
             </div>
             <img src="assets/images/patients.png"
                  class="image"
