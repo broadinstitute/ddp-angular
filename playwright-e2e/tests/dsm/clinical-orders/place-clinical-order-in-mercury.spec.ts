@@ -12,7 +12,7 @@ import { getColumnDataForRow, studyShortName } from 'utils/test-utils';
 import { PubSub } from '@google-cloud/pubsub';
 import ClinicalOrdersPage from 'dsm/pages/clinical-orders-page';
 
-const pecgsStudies = [StudyName.OSTEO2, StudyName.LMS]; //Checking OS2 first
+const pecgsStudies = [StudyName.OSTEO2]; //Checking OS2 first - LMS runs into PEPPER-1511 more; TODO: Add LMS once PEPPER-1511 is fixed
 const MERCURY_PUBSUB_TOPIC_NAME = process.env.MERCURY_PUBSUB_TOPIC_NAME as string;
 const MERCURY_PUBSUB_PROJECT_ID = process.env.MERCURY_PUBSUB_PROJECT_ID as string;
 
@@ -461,26 +461,32 @@ test.describe.serial('Verify that clinical orders can be placed in mercury @dsm 
 
       await test.step('Verify that the mercury order was successfully placed', async () => {
         //Check that Latest Order Status, Latest PDO Number are not empty for both Normal and Tumor samples - tab needs info refreshed in order to see changes
-        await participantPage.backToList();
-        await participantListPage.refreshParticipantListUsingShortID({ ID: shortID });
-        participantPage = await participantListTable.openParticipantPageAt({ position: 0 });
-        await participantPage.waitForReady();
+        //NOTE: occasionally needs a couple more seconds before the expected statuses are displayed
+        await expect(async () => {
+          await participantPage.backToList();
+          await participantListPage.refreshParticipantListUsingShortID({ ID: shortID });
+          participantPage = await participantListTable.openParticipantPageAt({ position: 0 });
+          await participantPage.waitForReady();
 
-        await participantPage.tablist(Tab.SEQUENCING_ORDER).isVisible();
-        await participantPage.tablist(Tab.SEQUENCING_ORDER).click<SequeuncingOrderTab>();
-        await sequencingOrderTab.waitForReady();
+          await participantPage.tablist(Tab.SEQUENCING_ORDER).isVisible();
+          await participantPage.tablist(Tab.SEQUENCING_ORDER).click<SequeuncingOrderTab>();
+          await sequencingOrderTab.waitForReady();
 
-        /* Checking the Normal sample's info */
-        const latestOrderStatusNormal = await getColumnDataForRow(normalSample, SequencingOrderColumn.LATEST_ORDER_STATUS, page);
-        expect(latestOrderStatusNormal).toBe(approvedOrderStatus);
-        const latestPDONumberNormal = await getColumnDataForRow(normalSample, SequencingOrderColumn.LATEST_PDO_NUMBER, page);
-        expect(latestPDONumberNormal).toContain(`Made-by-Playwright-on`);
+          /* Checking the Normal sample's info */
+          const latestOrderStatusNormal = await getColumnDataForRow(normalSample, SequencingOrderColumn.LATEST_ORDER_STATUS, page);
+          expect(latestOrderStatusNormal).toBe(approvedOrderStatus);
+          const latestPDONumberNormal = await getColumnDataForRow(normalSample, SequencingOrderColumn.LATEST_PDO_NUMBER, page);
+          expect(latestPDONumberNormal).toContain(`Made-by-Playwright-on`);
 
-        /* Checking the Tumor sample's info */
-        const latestOrderStatusTumor = await getColumnDataForRow(tumorSample, SequencingOrderColumn.LATEST_ORDER_STATUS, page);
-        expect(latestOrderStatusTumor).toBe(approvedOrderStatus);
-        const latestPDONumberTumor = await getColumnDataForRow(tumorSample, SequencingOrderColumn.LATEST_PDO_NUMBER, page);
-        expect(latestPDONumberTumor).toContain(`Made-by-Playwright-on`);
+          /* Checking the Tumor sample's info */
+          const latestOrderStatusTumor = await getColumnDataForRow(tumorSample, SequencingOrderColumn.LATEST_ORDER_STATUS, page);
+          expect(latestOrderStatusTumor).toBe(approvedOrderStatus);
+          const latestPDONumberTumor = await getColumnDataForRow(tumorSample, SequencingOrderColumn.LATEST_PDO_NUMBER, page);
+          expect(latestPDONumberTumor).toContain(`Made-by-Playwright-on`);
+        }).toPass({
+          intervals: [10_000],
+          timeout: 60_000
+        });
       });
 
       await test.step('Verify that the mercury order can be seen in Samples -> Clinical Orders', async () => {
