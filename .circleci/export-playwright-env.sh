@@ -9,6 +9,12 @@ echo "export SITE_PASSWORD=$sitePwd" >> playwright-env/envvars
 export bspToken=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.bsp | .[] | select(.env==\"$ENV\") | .token")
 echo "export BSP_TOKEN=$bspToken" >> playwright-env/envvars
 
+export pubsubTopicName=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.mercury | .[] | select(.env==\"$ENV\") | .pubsubTopicName")
+echo "export MERCURY_PUBSUB_TOPIC_NAME=$pubsubTopicName" >> playwright-env/envvars
+
+export pubsubProjectId=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.mercury | .[] | select(.env==\"$ENV\") | .pubsubProjectId")
+echo "export MERCURY_PUBSUB_PROJECT_ID=$pubsubProjectId" >> playwright-env/envvars
+
 export dsmUser1=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[] | select(.app==\"dsm\") | .users[0] | .userName")
 export dsmUser1Password=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.users | .[] | select(.app==\"dsm\") | .users[0] | .password")
 echo "export DSM_USER1_EMAIL=$dsmUser1" >> playwright-env/envvars
