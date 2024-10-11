@@ -140,7 +140,7 @@ export const calculateAge = (month: string, day: string, year: string): number =
   const today = new Date();
 
   let resultAge = today.getFullYear() - dateOfBirth.getFullYear();
-  const resultMonth = today.getMonth() - dateOfBirth.getMonth();
+  const resultMonth = (today.getMonth() + 1) - dateOfBirth.getMonth(); //getMonth() is zero-based
 
   //Adjust age result depending on if birthday has not yet occurred for the year
   if (resultMonth < 0 || (resultMonth === 0 && today.getDate() < dateOfBirth.getDate())) {
