@@ -293,29 +293,32 @@ test.describe.serial('Verify that clinical orders can be placed in mercury @dsm 
 
       await test.step('Verify that the mercury order was successfully placed', async () => {
         //Check that Latest Order Status, Latest PDO Number are not empty for both Normal and Tumor samples - tab needs info refreshed in order to see changes
-        await participantPage.backToList();
-        await participantListPage.refreshParticipantListUsingShortID({ ID: shortID });
-        participantPage = await participantListTable.openParticipantPageAt({ position: 0 });
-        await participantPage.waitForReady();
+        await expect(async () => {
+          //Occasionally, a couple of seconds are needed before the info shows up in DSM UI
+          await participantPage.backToList();
+          await participantListPage.refreshParticipantListUsingShortID({ ID: shortID });
+          participantPage = await participantListTable.openParticipantPageAt({ position: 0 });
+          await participantPage.waitForReady();
 
-        await participantPage.tablist(Tab.SEQUENCING_ORDER).isVisible();
-        await participantPage.tablist(Tab.SEQUENCING_ORDER).click<SequeuncingOrderTab>();
-        await sequencingOrderTab.waitForReady();
+          await participantPage.tablist(Tab.SEQUENCING_ORDER).isVisible();
+          await participantPage.tablist(Tab.SEQUENCING_ORDER).click<SequeuncingOrderTab>();
+          await sequencingOrderTab.waitForReady();
 
-        /* Checking the Normal sample's info */
-        if ((study === StudyName.OSTEO2) && (participantEnrollmentStatus === DataFilter.LOST_TO_FOLLOWUP)) {
-          //LMS Lost-to-Followup participants do not have all info displayed in SequencingOrder tab (tracked by PEPPER-1511)
+          /* Checking the Normal sample's info */
           const latestOrderStatusNormal = await getColumnDataForRow(normalSample, SequencingOrderColumn.LATEST_ORDER_STATUS, page);
           expect(latestOrderStatusNormal).toBe(approvedOrderStatus);
           const latestPDONumberNormal = await getColumnDataForRow(normalSample, SequencingOrderColumn.LATEST_PDO_NUMBER, page);
           expect(latestPDONumberNormal).toContain(`Made-by-Playwright-on`);
-        }
 
-        /* Checking the Tumor sample's info */
-        const latestOrderStatusTumor = await getColumnDataForRow(tumorSample, SequencingOrderColumn.LATEST_ORDER_STATUS, page);
-        expect(latestOrderStatusTumor).toBe(approvedOrderStatus);
-        const latestPDONumberTumor = await getColumnDataForRow(tumorSample, SequencingOrderColumn.LATEST_PDO_NUMBER, page);
-        expect(latestPDONumberTumor).toContain(`Made-by-Playwright-on`);
+          /* Checking the Tumor sample's info */
+          const latestOrderStatusTumor = await getColumnDataForRow(tumorSample, SequencingOrderColumn.LATEST_ORDER_STATUS, page);
+          expect(latestOrderStatusTumor).toBe(approvedOrderStatus);
+          const latestPDONumberTumor = await getColumnDataForRow(tumorSample, SequencingOrderColumn.LATEST_PDO_NUMBER, page);
+          expect(latestPDONumberTumor).toContain(`Made-by-Playwright-on`);
+        }).toPass({
+          intervals: [10_000],
+          timeout: 60_000
+        });
       });
 
       await test.step('Verify that the mercury order can be seen in Samples -> Clinical Orders', async () => {
@@ -484,7 +487,7 @@ test.describe.serial('Verify that clinical orders can be placed in mercury @dsm 
           const latestPDONumberTumor = await getColumnDataForRow(tumorSample, SequencingOrderColumn.LATEST_PDO_NUMBER, page);
           expect(latestPDONumberTumor).toContain(`Made-by-Playwright-on`);
         }).toPass({
-          intervals: [5_000],
+          intervals: [10_000],
           timeout: 60_000
         });
       });
