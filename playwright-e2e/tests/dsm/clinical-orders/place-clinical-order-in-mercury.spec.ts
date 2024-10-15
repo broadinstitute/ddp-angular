@@ -7,7 +7,7 @@ import ParticipantPage from 'dsm/pages/participant-page';
 import SequeuncingOrderTab from 'dsm/pages/tablist/sequencing-order-tab';
 import Select from 'dss/component/select';
 import { test } from 'fixtures/dsm-fixture';
-import { getDateEasternTimeZone, getDateMonthAbbreviated, getToday, getTodayInEastCoastDateTimeFormat, toLocalTime } from 'utils/date-utils';
+import { getDateEasternTimeZone, getDateMonthAbbreviated, getToday, getTodayInEastCoastDateTimeZone, toLocalTime } from 'utils/date-utils';
 import { getColumnDataForRow, studyShortName } from 'utils/test-utils';
 import { PubSub } from '@google-cloud/pubsub';
 import ClinicalOrdersPage from 'dsm/pages/clinical-orders-page';
@@ -634,7 +634,7 @@ function createMercuryOrderMessage(opts: {
   orderDetails?: string
 }): string {
   const { latestOrderNumber, orderStatus = 'Approved', orderDetails = 'Successfully created order' } = opts;
-  const readableDate = getTodayInEastCoastDateTimeFormat();
+  const readableDate = getTodayInEastCoastDateTimeZone();
 
   const message = `
   {
