@@ -484,7 +484,7 @@ test.describe.serial('Verify that clinical orders can be placed in mercury @dsm 
           const latestPDONumberTumor = await getColumnDataForRow(tumorSample, SequencingOrderColumn.LATEST_PDO_NUMBER, page);
           expect(latestPDONumberTumor).toContain(`Made-by-Playwright-on`);
         }).toPass({
-          intervals: [10_000],
+          intervals: [5_000],
           timeout: 60_000
         });
       });
