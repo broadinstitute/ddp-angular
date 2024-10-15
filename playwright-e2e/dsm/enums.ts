@@ -11,16 +11,17 @@ export enum KitSampleType {
 }
 
 export enum DataFilter {
-  NOT_EMPTY = 'Not Empty',
-  EXACT_MATCH = 'Exact Match',
-  RANGE = 'Range',
   EMPTY = 'Empty',
   ENROLLED = 'Enrolled',
-  REQUEST = 'Request',
-  RECEIVED = 'Received',
+  EXACT_MATCH = 'Exact Match',
+  LOST_TO_FOLLOWUP = 'Lost to Followup',
   NO = 'No',
-  YES = 'Yes',
+  NOT_EMPTY = 'Not Empty',
+  RANGE = 'Range',
+  RECEIVED = 'Received',
   REGISTERED = 'Registered',
+  REQUEST = 'Request',
+  YES = 'Yes',
 }
 
 export enum FieldSettingInputType {
@@ -782,4 +783,25 @@ export enum ParticipantListPageOptions {
   CUSTOMIZE_VIEW = 'Customize View',
   SAVE_CURRENT_VIEW = 'Save Current View',
   SAVED_FILTERS = 'Saved Filters',
+}
+
+export enum SequencingOrderColumn {
+  SAMPLE_TYPE = 'Sample Type',
+  SAMPLE = 'Sample',
+  SAMPLE_STATUS = 'Sample Status',
+  COLLECTION_DATE = 'Collection Date',
+  LATEST_SEQUENCING_ORDER_DATE = 'Latest Sequencing Order Date',
+  LATEST_ORDER_STATUS = 'Latest Order Status',
+  LATEST_ORDER_NUMBER = 'Latest Order Number',
+  LATEST_PDO_NUMBER = 'Latest PDO Number',
+}
+
+export enum ClinicalOrdersColumn {
+  SHORT_ID = 'Short ID',
+  SAMPLE_TYPE = 'Sample Type',
+  SAMPLE = 'Sample',
+  ORDER_NUMBER = 'Order Number',
+  ORDER_DATE = 'Order Date',
+  STATUS = 'Status',
+  STATUS_DETAIL = 'Status Detail'
 }
