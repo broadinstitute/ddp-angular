@@ -11,6 +11,7 @@ import { getDateEasternTimeZone, getDateMonthAbbreviated, getToday, getTodayInEa
 import { getColumnDataForRow, studyShortName } from 'utils/test-utils';
 import { PubSub } from '@google-cloud/pubsub';
 import ClinicalOrdersPage from 'dsm/pages/clinical-orders-page';
+import { logInfo } from 'utils/log-utils';
 
 const pecgsStudies = [StudyName.OSTEO2]; //Checking OS2 first - LMS runs into PEPPER-1511 more; TODO: Add LMS once PEPPER-1511 is fixed
 const MERCURY_PUBSUB_TOPIC_NAME = process.env.MERCURY_PUBSUB_TOPIC_NAME as string;
@@ -71,13 +72,13 @@ test.describe.serial('Verify that clinical orders can be placed in mercury @dsm 
         sampleNameNormal = await getColumnDataForRow(normalSample, SequencingOrderColumn.SAMPLE, page);
         await sequencingOrderTab.fillCollectionDateIfNeeded(normalSample);
         previousLatestOrderNumberNormal = await getColumnDataForRow(normalSample, SequencingOrderColumn.LATEST_ORDER_NUMBER, page);
-        console.log(`previous Latest Order Number for normal sample: ${previousLatestOrderNumberNormal}`);
+        logInfo(`previous Latest Order Number for normal sample: ${previousLatestOrderNumberNormal}`);
 
         tumorSample = await sequencingOrderTab.getFirstAvailableTumorSample();
         await sequencingOrderTab.selectSampleCheckbox(tumorSample);
         sampleNameTumor = await getColumnDataForRow(tumorSample, SequencingOrderColumn.SAMPLE, page);
         previousLatestOrderNumberTumor = await getColumnDataForRow(tumorSample, SequencingOrderColumn.LATEST_ORDER_NUMBER, page);
-        console.log(`previous Latest Order Number for tumor sample: ${previousLatestOrderNumberTumor}`);
+        logInfo(`previous Latest Order Number for tumor sample: ${previousLatestOrderNumberTumor}`);
 
         await sequencingOrderTab.assertPlaceOrderButtonDisplayed();
         await sequencingOrderTab.placeOrder();
@@ -241,13 +242,13 @@ test.describe.serial('Verify that clinical orders can be placed in mercury @dsm 
         sampleNameNormal = await getColumnDataForRow(normalSample, SequencingOrderColumn.SAMPLE, page);
         await sequencingOrderTab.fillCollectionDateIfNeeded(normalSample);
         previousLatestOrderNumberNormal = await getColumnDataForRow(normalSample, SequencingOrderColumn.LATEST_ORDER_NUMBER, page);
-        console.log(`previous Latest Order Number for normal sample: ${previousLatestOrderNumberNormal}`);
+        logInfo(`previous Latest Order Number for normal sample: ${previousLatestOrderNumberNormal}`);
 
         tumorSample = await sequencingOrderTab.getFirstAvailableTumorSample();
         await sequencingOrderTab.selectSampleCheckbox(tumorSample);
         sampleNameTumor = await getColumnDataForRow(tumorSample, SequencingOrderColumn.SAMPLE, page);
         previousLatestOrderNumberTumor = await getColumnDataForRow(tumorSample, SequencingOrderColumn.LATEST_ORDER_NUMBER, page);
-        console.log(`previous Latest Order Number for tumor sample: ${previousLatestOrderNumberTumor}`);
+        logInfo(`previous Latest Order Number for tumor sample: ${previousLatestOrderNumberTumor}`);
 
         await sequencingOrderTab.assertPlaceOrderButtonDisplayed();
         await sequencingOrderTab.placeOrder();
@@ -412,13 +413,13 @@ test.describe.serial('Verify that clinical orders can be placed in mercury @dsm 
         sampleNameNormal = await getColumnDataForRow(normalSample, SequencingOrderColumn.SAMPLE, page);
         await sequencingOrderTab.fillCollectionDateIfNeeded(normalSample);
         previousLatestOrderNumberNormal = await getColumnDataForRow(normalSample, SequencingOrderColumn.LATEST_ORDER_NUMBER, page);
-        console.log(`previous Latest Order Number for normal sample: ${previousLatestOrderNumberNormal}`);
+        logInfo(`previous Latest Order Number for normal sample: ${previousLatestOrderNumberNormal}`);
 
         tumorSample = await sequencingOrderTab.getFirstAvailableTumorSample();
         await sequencingOrderTab.selectSampleCheckbox(tumorSample);
         sampleNameTumor = await getColumnDataForRow(tumorSample, SequencingOrderColumn.SAMPLE, page);
         previousLatestOrderNumberTumor = await getColumnDataForRow(tumorSample, SequencingOrderColumn.LATEST_ORDER_NUMBER, page);
-        console.log(`previous Latest Order Number for tumor sample: ${previousLatestOrderNumberTumor}`);
+        logInfo(`previous Latest Order Number for tumor sample: ${previousLatestOrderNumberTumor}`);
 
         await sequencingOrderTab.assertPlaceOrderButtonDisplayed();
         await sequencingOrderTab.placeOrder();
@@ -564,7 +565,6 @@ async function findParticipantForGermlineSequencing(opts: {
   if (usePediatricParticipant) {
     participantPrefix = studyInformation.playwrightPrefixChild;
   }
-  console.log(`prefix: ${participantPrefix}`);
 
   const customizeViewPanel = participantList.filters.customizeViewPanel;
   await customizeViewPanel.open();
@@ -616,17 +616,17 @@ async function findParticipantForGermlineSequencing(opts: {
     const randomizedParticipantRows = await participantTable.randomizeRows();
     rowNumber = randomizedParticipantRows[0];
     const kitStatus = (await participantTable.getParticipantDataAt(rowNumber, Label.STATUS)).trim();
-    console.log(`Kit Status: ${kitStatus}`);
+    logInfo(`Kit Status: ${kitStatus}`);
     if (!kitStatus.includes(`Deactivated`) || studyName === StudyName.OSTEO2) {
       participantChosen = true;
       shortID = await participantTable.getParticipantDataAt(rowNumber, Label.SHORT_ID);
-      console.log(`short id without a deactivated kit: ${shortID}`);
+      logInfo(`short id without a deactivated kit: ${shortID}`);
     }
   }
 
   //const shortID = await participantTable.getParticipantDataAt(rowNumber, Label.SHORT_ID);
   //shortID = 'PTPGLV';
-  console.log(`Participant chosen for clinical order: ${shortID}`);
+  logInfo(`Participant chosen for clinical order: ${shortID}`);
 
   return shortID;
 }
@@ -651,22 +651,23 @@ function createMercuryOrderMessage(opts: {
   }`;
 
   const messageObject = JSON.parse(message);
-  console.log(`Resulting pubsub message is:\n ${JSON.stringify(messageObject)}`);
+  logInfo(`Resulting pubsub message is:\n ${JSON.stringify(messageObject)}`);
   return JSON.stringify(messageObject);
 }
 
 async function placeMercuryOrder(topicNameOrID: string, messsage: string): Promise<void> {
   const pubsubClient = new PubSub({projectId: MERCURY_PUBSUB_PROJECT_ID});
   const dataBuffer = Buffer.from(messsage);
-  console.log(`Topic name or id: ${topicNameOrID}`);
+  logInfo(`Topic name or id: ${topicNameOrID}`);
+  logInfo(`Project ID: ${MERCURY_PUBSUB_PROJECT_ID}`);
 
   try {
     const messageID = await pubsubClient
     .topic(topicNameOrID)
     .publishMessage({ data: dataBuffer });
-    console.log(`Message ${messageID} was published`);
+    logInfo(`Message ${messageID} was published`);
   } catch (error) {
-    console.log(`Received error while publishing: ${(error as Error).message}`);
+    logInfo(`Received error while publishing: ${(error as Error).message}`);
     process.exitCode = 1;
   }
 }
