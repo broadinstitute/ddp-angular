@@ -25,7 +25,7 @@
                 </div>
             </div>
 
-            <div id="sectionPeopleList" class="section__people-list" *ngIf="section.PeopleList?.length">
+            <div class="section__people-list" *ngIf="section.PeopleList?.length">
                 <ng-container *ngFor="let block of section.PeopleList">
                     <h4 class="section__people-list__title">{{block.Title}}</h4>
                     <div class="section__people-list__block">
