@@ -1,7 +1,7 @@
 import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
-import {ReplaySubject} from "rxjs";
-import {CompositeDisposable} from "ddp-sdk";
-import {ActivatedRoute} from "@angular/router";
+import {ReplaySubject} from 'rxjs';
+import {CompositeDisposable} from 'ddp-sdk';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
     selector: 'app-scientific-research',
@@ -47,7 +47,7 @@ export class ScientificResearchComponent implements OnInit, AfterViewInit, OnDes
             return;
         }
 
-        const yOffset = el.offsetTop
+        const yOffset = el.offsetTop;
         window.scrollTo({
             top: yOffset,
             behavior: 'smooth',
