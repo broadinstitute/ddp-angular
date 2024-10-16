@@ -1,5 +1,5 @@
 <main class="page" [ngClass]="isAboutUsPage ? 'about-us': 'scientific-research'">
-    <section *ngFor="let section of (source + '.Sections') | translate; let i = index;" [class]="'section section-' + i">
+    <section *ngFor="let section of (source + '.Sections') | translate; let i = index;" [class]="'section section-' + i "[id] = "'section-' + i">
         <div class="section__content">
             <h3 class="section__title static-page-title">{{section.Title}}</h3>
 
@@ -25,7 +25,7 @@
                 </div>
             </div>
 
-            <div class="section__people-list" *ngIf="section.PeopleList?.length">
+            <div id="sectionPeopleList" class="section__people-list" *ngIf="section.PeopleList?.length">
                 <ng-container *ngFor="let block of section.PeopleList">
                     <h4 class="section__people-list__title">{{block.Title}}</h4>
                     <div class="section__people-list__block">
