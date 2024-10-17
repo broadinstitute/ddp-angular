@@ -126,8 +126,6 @@
                     "Time": "10 minutes",
                     "Title": "Provide a saliva and/or blood sample",
                     "Text": "We will send you a kit to collect a sample of your saliva and/or blood. We will study these samples to help improve our understanding of cancer.",
-                    "Button": "View Kit Instructions",
-                    "href": "Salvia_Kit_Instructions_PanCan.pdf",
                     "ImageAlt": "Sample collection kit"
                 },
                 {
