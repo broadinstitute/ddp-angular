@@ -1,4 +1,5 @@
 import { ConfigurationService } from 'ddp-sdk';
+
 import { LanguageHostName } from './languageHostName';
 
 /**

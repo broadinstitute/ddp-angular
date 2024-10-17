@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@angular/core';
 import { DESTINATION_QUERY_PARAM, LANGUAGE_QUERY_PARAM } from 'ddp-sdk';
-import { osteoConfigurationService } from './osteoConfiguration.service';
+import { OsteoConfigurationService } from './osteoConfiguration.service';
 
 @Injectable({
   providedIn: 'root',
@@ -11,7 +11,7 @@ import { osteoConfigurationService } from './osteoConfiguration.service';
  * Note that we leverage existing ChangeLanguageRedirectComponent
  */
 export class LanguageHostRedirector  {
-  constructor(@Inject('ddp.config') private osConfig: osteoConfigurationService) {
+  constructor(@Inject('ddp.config') private osConfig: OsteoConfigurationService) {
       const matchingHostName = osConfig.languageHostNames.find(each => each.hostName === window.location.hostname);
       if (matchingHostName) {
         this.redirectToBaseHostName(matchingHostName.languageCode);
