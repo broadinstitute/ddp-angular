@@ -1,7 +1,7 @@
 <main class="page" [ngClass]="isAboutUsPage ? 'about-us': 'scientific-research'">
-    <section *ngFor="let section of (source + '.Sections') | translate; let i = index;" [class]="'section section-' + i "[id] = "'section-' + i">
+    <section *ngFor="let section of (source + '.Sections') | translate; let i = index;" [class]="'section section-' + i">
         <div class="section__content">
-            <h3 class="section__title static-page-title">{{section.Title}}</h3>
+            <h3 class="section__title static-page-title" [id] = "'section-' + i">{{section.Title}}</h3>
 
             <div class="section__description" *ngIf="section.Paragraphs?.length || section.Examples">
                 <ng-container *ngIf="section.Paragraphs?.length">
