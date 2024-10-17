@@ -385,7 +385,7 @@ test.describe.serial('Verify that clinical orders can be placed in mercury @dsm 
       await participantListPage.waitForReady();
       const participantListTable = participantListPage.participantListTable;
 
-      await test.step('Chose an enrolled participant that will get a clinical order placed', async () => {
+      await test.step('Chose a lost-to-followup participant that will get a clinical order placed', async () => {
         participantEnrollmentStatus = DataFilter.LOST_TO_FOLLOWUP;
         shortID = await findParticipantForGermlineSequencing({
           enrollmentStatus: participantEnrollmentStatus,
