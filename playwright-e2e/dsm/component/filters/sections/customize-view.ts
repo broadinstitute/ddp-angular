@@ -170,6 +170,13 @@ export class CustomizeView {
     await expect(option).toBeVisible();
   }
 
+  public async assertColumnOptionSelected(columnSection: ColumnGroup, stableID: CustomizeViewID, columnName: Label, instance?: number): Promise<void> {
+    const option = this.getColumnOption({ columnGroupName: columnSection, groupId: stableID, columnOption: columnName, instance});
+    logInfo(`Checking if ${option} is selected`);
+    await option.scrollIntoViewIfNeeded();
+    await expect(option).toBeChecked();
+  }
+
   private async isChecked(locator: Locator | undefined): Promise<boolean> {
     const isChecked = (await locator?.getAttribute('class'))?.includes('mat-checkbox-checked');
     return isChecked || false;
