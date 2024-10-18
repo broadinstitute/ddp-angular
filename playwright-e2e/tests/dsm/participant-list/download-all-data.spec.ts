@@ -57,7 +57,7 @@ test.describe.parallel('Participant List Download', () => {
       });
     });
 
-    test(`Particpant List -> Select All option - removing a column does not erase column option from Customize View in @dsm @${study}`, async ({ page, request }) => {
+    test(`Select All: removing a column does not erase column option from Customize View in @dsm @${study}`, async ({ page, request }) => {
       test.slow();
       const participantListPage = await ParticipantListPage.goto(page, study, request);
       const participantListTable = participantListPage.participantListTable;
