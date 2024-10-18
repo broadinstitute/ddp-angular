@@ -78,7 +78,7 @@ test.describe.parallel('Participant List Download', () => {
       await customizeViewPanel.assertColumnOptionSelected(CV.PARTICIPANT, ID.PARTICIPANT, Label.PARTICIPANT_ID);
       await customizeViewPanel.deselectColumns(CV.PARTICIPANT, [Label.PARTICIPANT_ID]);
       await expect(participantIDColumn).not.toBeVisible();
-      
+
       await customizeViewPanel.openColumnGroup({ columnSection: CV.PARTICIPANT, stableID: ID.PARTICIPANT });
       await customizeViewPanel.assertColumnOptionDisplayed(CV.PARTICIPANT, ID.PARTICIPANT, Label.PARTICIPANT_ID);
       await customizeViewPanel.selectColumns(CV.PARTICIPANT, [Label.PARTICIPANT_ID]);

@@ -17,7 +17,7 @@ test.describe(`AT: Verify that data does not disappear in Participant List`, () 
     const participantListTable = participantListPage.participantListTable;
     const searchPanel = participantListPage.filters.searchPanel;
     const customizeViewPanel = participantListPage.filters.customizeViewPanel;
-    
+
     //Chose a participant who already has Medical History -> sibling data
     await customizeViewPanel.open();
     await customizeViewPanel.openColumnGroup({ columnSection: CV.MEDICAL_HISTORY, stableID: ID.MEDICAL_HISTORY });
