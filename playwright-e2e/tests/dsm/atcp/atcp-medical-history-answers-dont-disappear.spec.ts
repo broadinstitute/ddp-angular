@@ -18,6 +18,7 @@ test.describe(`AT: Verify that data does not disappear in Participant List`, () 
     const searchPanel = participantListPage.filters.searchPanel;
     const customizeViewPanel = participantListPage.filters.customizeViewPanel;
     
+    //Chose a participant who already has Medical History -> sibling data
     await customizeViewPanel.open();
     await customizeViewPanel.openColumnGroup({ columnSection: CV.MEDICAL_HISTORY, stableID: ID.MEDICAL_HISTORY });
     await customizeViewPanel.selectColumns(Label.MEDICAL_HISTORY, [`$ddp.participantFirstName()'s Siblings`]);
@@ -32,7 +33,7 @@ test.describe(`AT: Verify that data does not disappear in Participant List`, () 
     const shortID = await participantListTable.getParticipantDataAt(0, Label.SHORT_ID);
     await participantListPage.filterListByShortId(shortID);
 
-    //Check that `$ddp.participantFirstName()'s Siblings` column and its data can still be seen
+    //Verify that the sibling column and data is displayed
     const siblingColumn = participantListTable.getHeaderByName(`$ddp.participantFirstName()'s Siblings`, { exactMatch: true });
     await expect(siblingColumn).toBeVisible();
     const siblingInfo = await participantListTable.getParticipantDataAt(0, `$ddp.participantFirstName()'s Siblings`);
@@ -42,6 +43,7 @@ test.describe(`AT: Verify that data does not disappear in Participant List`, () 
     await participantPage.waitForReady();
     await participantPage.backToList();
 
+    //Verify that after going back to the Participant List, that the data is still displayed
     await participantListPage.filterListByShortId(shortID);
     await participantListPage.waitForReady();
     await expect(siblingColumn).toBeVisible();
