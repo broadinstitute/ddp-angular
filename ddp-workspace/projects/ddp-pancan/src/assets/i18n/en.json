@@ -32,6 +32,7 @@
         },
         "HomePage": {
             "JoinCountMeInButton": "Join Count Me In",
+            "CurrentProjectsButton": "Explore Current Projects",
             "LearnMoreSection": {
                 "Title": "Have a direct impact on the future of cancer research.",
                 "Text": "Count Me In is a nonprofit research initiative that engages patients and enables them to accelerate cancer research by sharing their samples, their clinical information, and their voices.",
@@ -125,8 +126,6 @@
                     "Time": "10 minutes",
                     "Title": "Provide a saliva and/or blood sample",
                     "Text": "We will send you a kit to collect a sample of your saliva and/or blood. We will study these samples to help improve our understanding of cancer.",
-                    "Button": "View Kit Instructions",
-                    "href": "Salvia_Kit_Instructions_PanCan.pdf",
                     "ImageAlt": "Sample collection kit"
                 },
                 {

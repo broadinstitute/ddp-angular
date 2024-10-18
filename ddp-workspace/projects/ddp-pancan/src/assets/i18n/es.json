@@ -32,6 +32,7 @@
         },
         "HomePage": {
             "JoinCountMeInButton": "Únase a Count Me In",
+            "CurrentProjectsButton": "Explorar proyectos actuales",
             "LearnMoreSection": {
                 "Title": "Actuemos juntos para dejar huella en el futuro de la investigación del cáncer.",
                 "Text": "Count Me In es una iniciativa de investigación sin fines de lucro que involucra a los pacientes y les permite hacer avances en la investigación del cáncer al compartir sus muestras, su información clínica y sus puntos de vista.",
@@ -125,8 +126,6 @@
                     "Time": "10 minutos",
                     "Title": "Proporcione una muestra de saliva y/o de sangre",
                     "Text": "Le enviaremos un kit para obtener una muestra de su saliva y/o su sangre. Estudiaremos estas muestras para ayudar a mejorar nuestros conocimientos sobre el cáncer.",
-                    "Button": "Ver las instrucciones para el kit",
-                    "href": "Salvia_Kit_Instructions_PanCan_Espanol.pdf",
                     "ImageAlt": "Kit de obtención de muestras"
                 },
                 {

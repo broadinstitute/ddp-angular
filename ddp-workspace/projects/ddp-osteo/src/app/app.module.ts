@@ -5,16 +5,17 @@ import { LOCATION_INITIALIZED, CommonModule } from '@angular/common';
 import { AppRoutingModule } from './app-routing.module';
 
 import { TranslateService } from '@ngx-translate/core';
+import { OsteoConfigurationService } from './services/osteoConfiguration.service';
+import { LanguageHostRedirector } from './services/languageHostRedirector.service';
 
 import {
     DdpModule,
-    ConfigurationService,
     AnalyticsEventsService,
     AnalyticsEvent,
     LoggingService,
     SubmitAnnouncementService,
     SubmissionManager,
-    LanguageService,
+    LanguageService
 } from 'ddp-sdk';
 
 import { ToolkitModule, ToolkitConfigurationService } from 'toolkit';
@@ -97,7 +98,7 @@ tkCfg.useMultiParticipantDashboard = true;
 tkCfg.lightswitchInstagramWidgetId = 'b095a6f8bf80532d8e05264ca5b8c3f4';
 tkCfg.countMeInUrl = 'https://joincountmein.org/';
 
-export const config = new ConfigurationService();
+export const config = new OsteoConfigurationService();
 config.backendUrl = DDP_ENV.basePepperUrl;
 config.auth0Domain = DDP_ENV.auth0Domain;
 config.auth0ClientId = DDP_ENV.auth0ClientId;
@@ -129,6 +130,12 @@ config.alwaysShowQuestionsCountInModalNestedActivity = true;
 config.validateOnlyVisibleSections = true;
 config.institutionsAdditionalFields = { PHYSICIAN: ['COUNTRY'] };
 config.updatePreferredLanguageForGovernedParticipants = true;
+
+function appInitializerFactory(translate: TranslateService, injector: Injector, logger: LoggingService,
+                               language: LanguageService,
+                               _redirector: LanguageHostRedirector): () => Promise<any> {
+    return translateFactory(translate, injector, logger, language);
+}
 
 export function translateFactory(
     translate: TranslateService,
@@ -214,8 +221,8 @@ export function translateFactory(
         },
         {
             provide: APP_INITIALIZER,
-            useFactory: translateFactory,
-            deps: [TranslateService, Injector, LoggingService, LanguageService],
+            useFactory: appInitializerFactory,
+            deps: [TranslateService, Injector, LoggingService, LanguageService, LanguageHostRedirector],
             multi: true,
         },
         SubmitAnnouncementService,
