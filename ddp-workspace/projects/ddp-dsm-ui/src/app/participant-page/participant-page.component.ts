@@ -1828,7 +1828,8 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
           }
 
           //Once aged up and NOT followedup consent will be suspended, so check if CONSENT_SUSPENDED
-          //To handle agedup scenarios, check consent(assent)AddendumPediatric (which are from pre age up activity) only if adult consentAddendum doesn't exist
+          //To handle agedup scenarios, check consent(assent)AddendumPediatric (which are from pre age up activity)
+          // only if adult consentAddendum doesn't exist
           return mercuryAllow && studyAllow && hasConsentedToTissueSample && !consentSuspended &&
             (somaticConsentAddendumTumorAdult?.answer ||
               (somaticConsentTumorPediatric?.answer && somaticAssentAddendum?.answer && consentAddendum === undefined) ||
