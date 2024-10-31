@@ -37,7 +37,7 @@ test.describe('Upload Onc History', () => {
     BLOCKS_WITH_TUMOR: '',
     VIABLE_TUMOR: 'No',
     NECROSIS: '',
-    REQUEST_STATUS: 'request', //  Valid values are: [review, no, hold, request, sent, received, returned, unableObtainTissue]
+    REQUEST_STATUS: 'request', //  Valid values are: [review, no, hold, request, sent, received, receivedIncomplete, receivedIncomplete, returned, unableObtainTissue]
     BLOCK_TO_REQUEST: '',
     DECALCIFICATION: 'EDTA',
     FFPE: 'Unknown',
