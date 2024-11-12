@@ -102,7 +102,7 @@ import {
                             <div class="card WrapperTL">
                                 <div class="card-body p-4 WrapperTL">
                                     <h1>2021</h1>
-                                    <h4 class="mb-0">De-identified patient-reported data from 165 participants released via a secure patient data browser <a class="mb-0" target="_blank" href="https://escproject.org/">(ESCp Data)</a></h4>
+                                    <h4 class="mb-0">De-identified patient-reported data from 165 participants released via a secure patient data browser <a class="mb-0" target="_blank" href="https://escproject.org/" style="color:#FFC145;"><b><u>(ESCp Data)</u></b></a></h4>
                                 </div>
                             </div>
                         </div>
