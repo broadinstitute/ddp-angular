@@ -2,6 +2,7 @@ import { promises as fsPromises } from 'fs';
 import path from 'path';
 import { APP } from 'data/constants';
 import { StudyName } from 'dsm/navigation';
+import { ManagementClient } from 'auth0';
 
 
 // Stores AUTH0 access token for targeted app.
@@ -51,6 +52,7 @@ function buildAuth0ClientCredentials(app: APP): string {
       clientSecret = process.env.OSTEO_AUTH0_CLIENT_SECRET;
       audience = process.env.OSTEO_AUTH0_AUDIENCE;
       domain = process.env.OSTEO_AUTH0_DOMAIN;
+      break;
     default:
       throw Error(`Undefined app name: ${app}`);
   }
@@ -76,6 +78,7 @@ export async function getAuth0AccessToken(app: APP): Promise<string> {
   }
 
   const credentials = JSON.parse(buildAuth0ClientCredentials(app));
+  console.log(`credentials: ${JSON.stringify(credentials)}`);
 
   return fetch(`https://${credentials.domain}/oauth/token`, {
     method: 'POST',
@@ -89,6 +92,7 @@ export async function getAuth0AccessToken(app: APP): Promise<string> {
   })
     .then(async (res) => res.json())
     .then((json) => {
+      console.log(`json with access token: ${JSON.stringify(json)}`);
       return json.access_token;
     })
     .catch((err) => {
@@ -159,27 +163,6 @@ export async function setAuth0UserEmailVerified(app: APP, email: string, opts: {
     });
 }
 
-export async function updateAuth0UserPassword(app: APP, email: string, userPassword: string): Promise<void> {
-  const credentials = JSON.parse(buildAuth0ClientCredentials(app));
-  const accessToken = await getAuth0AccessToken(app);
-  const user = await getAuth0UserByEmail(app, email, accessToken);
-  const userId = JSON.parse(JSON.stringify(user)).user_id;
-
-  return fetch(`https://${credentials.domain}/api/v2/users/${userId}`, {
-    method: 'PATCH',
-    headers: {
-      authorization: `Bearer ${accessToken}`,
-      'Content-type': 'application/json; charset=UTF-8'
-    },
-    body: JSON.stringify({ password: userPassword})
-  })
-    .then(async (res) => {
-      if (!res.ok) {
-        console.log(Promise.reject(JSON.stringify(await res.json())));
-      }
-    })
-    .catch((err) => {
-      console.error(`ERROR: PATCH /api/v2/users/${userId}\n`, err);
-      throw err;
-    });
+export async function updateAuth0UserPassword(app: APP, userEmail: string, userPassword: string): Promise<void> {
+  const management = new ManagementClient({});
 }

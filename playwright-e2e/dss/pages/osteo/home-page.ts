@@ -1,6 +1,7 @@
 import { expect, Locator, Page } from '@playwright/test';
 import { waitForNoSpinner } from 'utils/test-utils';
 import { OsteoPageBase } from 'dss/pages/osteo/osteo-page-base';
+import { ORGANIZATIONS as ORGANIZATION } from 'dss/enum';
 
 export default class HomePage extends OsteoPageBase {
   private readonly pageTitle: Locator;
@@ -18,5 +19,10 @@ export default class HomePage extends OsteoPageBase {
 
   async clickCountMeIn(): Promise<void> {
     await this.page.getByRole('banner').getByRole('link', { name: 'Count Me In' }).click();
+  }
+
+  async assertOrganizationLogoDisplayed( organization: ORGANIZATION ): Promise<void> {
+    const organizationLogo = await this.page.locator(`//app-welcome//section[@class='organizations-section']//img[contains(@alt, '${organization}')]`);
+    await expect(organizationLogo).toBeVisible();
   }
 }
