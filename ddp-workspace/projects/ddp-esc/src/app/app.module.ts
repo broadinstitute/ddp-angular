@@ -22,7 +22,7 @@ import { WelcomeComponent } from './components/welcome/welcome.component';
 import { MoreDetailsComponent } from './components/more-details/more-details.component';
 import { AboutUsComponent } from './components/about-us/about-us.component';
 import { DataReleaseComponent } from './components/data-release/data-release.component';
-import { EndEnrollComponent } from "./components/end-enroll/end-enroll.component";
+import { EndEnrollComponent } from './components/end-enroll/end-enroll.component';
 
 const baseElt = document.getElementsByTagName('base');
 
