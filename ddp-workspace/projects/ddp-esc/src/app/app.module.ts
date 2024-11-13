@@ -23,7 +23,6 @@ import { MoreDetailsComponent } from './components/more-details/more-details.com
 import { AboutUsComponent } from './components/about-us/about-us.component';
 import { DataReleaseComponent } from './components/data-release/data-release.component';
 import { EndEnrollComponent } from "./components/end-enroll/end-enroll.component";
-//import { toolkitConfig } from "../../../ddp-esc/src/app/app.module";
 
 const baseElt = document.getElementsByTagName('base');
 
@@ -33,8 +32,6 @@ if (baseElt) {
 }
 
 declare const DDP_ENV: any;
-
-declare const ga: (...args: any[]) => void;
 
 export const toolkitConfig = new ToolkitConfigurationService();
 
@@ -65,10 +62,9 @@ toolkitConfig.showDataRelease = true;
 toolkitConfig.endEnroll = true;
 toolkitConfig.showEnroll = false;
 toolkitConfig.showLearnMore = false;
-toolkitConfig.endEnroll = true;
+toolkitConfig.showInfoForPhysicians = false;
 toolkitConfig.showEnroll = false;
 toolkitConfig.showLearnMore = false;
-toolkitConfig.showInfoForPhysicians = false;
 toolkitConfig.showAboutUs = false;
 toolkitConfig.showFAQ = false;
 toolkitConfig.showHome = false;

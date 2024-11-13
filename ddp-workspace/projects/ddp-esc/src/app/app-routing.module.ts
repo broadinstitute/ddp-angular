@@ -1,10 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import {
-    IrbGuard
-} from 'ddp-sdk';
-
 import { PasswordComponent } from 'toolkit';
 import { DataReleaseComponent } from './components/data-release/data-release.component';
 import { EndEnrollComponent } from './components/end-enroll/end-enroll.component';
@@ -12,13 +8,11 @@ import { EndEnrollComponent } from './components/end-enroll/end-enroll.component
 const routes: Routes = [
     {
         path: 'data-release',
-        component: DataReleaseComponent,
-        canActivate: [IrbGuard]
+        component: DataReleaseComponent
     },
     {
         path: '',
-        component: EndEnrollComponent,
-        canActivate: [IrbGuard]
+        component: EndEnrollComponent
     },
     {
         path: 'password',
