@@ -29,6 +29,10 @@
     margin-top: 20px;
 }
 
+.margin-left-200 {
+    margin-left: 200px;
+}
+
 .main-timeline-title {
     background-image: linear-gradient(0deg, #FFC145, #90ACD7);
 }
