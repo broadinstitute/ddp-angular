@@ -33,7 +33,7 @@ import {
             <div class="Intro row">
                 <section
                     class="Message Message--intro col-lg-6 col-lg-offset-1 col-md-7 col-md-offset-1 col-sm-7 col-sm-offset-1 col-xs-10 col-xs-offset-1">
-                    <h1 class="Message-title margin-top-50">
+                    <h1 class="Message-title margin-top-50 margin-left-200">
                         <u><b>Enrollment is now CLOSED</b></u> for the Esophageal and Stomach Cancer Project.
                     </h1>
                 </section>
