@@ -109,7 +109,7 @@ import {
                         <div class="timeline left">
                             <div class="card WrapperTL">
                                 <div class="card-body p-4 WrapperTL">
-                                    <h1 class="margin-top-0">2024</h1>
+                                    <h1>2024</h1>
                                     <h4>Over 287 esophageal and stomach cancer patients have fully enrolled. Data generated through this project will be deidentified and added to repositories for ongoing research.</h4>
                                 </div>
                             </div>
@@ -117,7 +117,7 @@ import {
                         <div class="timeline right">
                             <div class="card WrapperTL">
                                 <div class="card-body p-4 WrapperTL">
-                                    <h1 class="margin-top-0">2024</h1>
+                                    <h1>2024</h1>
                                     <h4 class="mb-0">Partnership with Mass General Brigham and Dana-Farber Cancer Institute established, funded by a Degregorio Foundation award, to study biomarker tumor response in patients with esophageal and stomach cancers, which may help identify better targets for future drug treatment</h4>
                                 </div>
                             </div>
