@@ -4,7 +4,6 @@ import { APP } from 'data/constants';
 import { StudyName } from 'dsm/navigation';
 import { ManagementClient } from 'auth0';
 
-
 // Stores AUTH0 access token for targeted app.
 // Created automatically when the authorization flow completes for the first time.
 const getTokenPath = (app: APP) => path.join(process.cwd(), app, 'token.txt');
