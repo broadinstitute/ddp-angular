@@ -163,5 +163,31 @@ export async function setAuth0UserEmailVerified(app: APP, email: string, opts: {
 }
 
 export async function updateAuth0UserPassword(app: APP, userEmail: string, userPassword: string): Promise<void> {
-  const management = new ManagementClient({});
+  const credentials = JSON.parse(buildAuth0ClientCredentials(app));
+  console.log(`credentials: ${JSON.stringify(credentials)}`);
+
+  const management = new ManagementClient({
+    domain: credentials.domain,
+    clientId: credentials.client_id,
+    clientSecret: credentials.client_secret
+  });
+}
+
+export async function getUserId(app: APP, userEmail: string): Promise<void> {
+  const credentials = JSON.parse(buildAuth0ClientCredentials(app));
+  console.log(`credentials: ${JSON.stringify(credentials)}`);
+
+  var myHeaders = new Headers();
+  myHeaders.append("Accept", "application/json");
+
+  var requestOptions: RequestInit = {
+    method: 'GET',
+    headers: myHeaders,
+    redirect: 'follow'
+  };
+
+  fetch(`${credentials.audience}users-by-email?email=${userEmail}`, requestOptions)
+  .then(response => console.log(response.text()))
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
 }

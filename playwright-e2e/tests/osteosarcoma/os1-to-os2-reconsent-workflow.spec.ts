@@ -4,7 +4,7 @@ import { Navigation, Study, StudyName } from 'dsm/navigation';
 import Select from 'dss/component/select';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
 import { CustomizeView, CustomizeViewID, DataFilter, Label } from 'dsm/enums';
-import { updateAuth0UserPassword } from 'utils/api-utils';
+import { getUserId, updateAuth0UserPassword } from 'utils/api-utils';
 import { APP } from 'data/constants';
 
 test.describe(`Reconsent an OS1 participant into OS2`, () => {
@@ -33,7 +33,8 @@ test.describe(`Reconsent an OS1 participant into OS2`, () => {
 
     await page.goto(OSTEO_BASE_URL);
     await page.waitForURL(OSTEO_BASE_URL);
-    await updateAuth0UserPassword(APP.OSTEO, participantEmail, PARTICIPANT_PASSWORD);
+    await getUserId(APP.OSTEO, participantEmail);
+    //await updateAuth0UserPassword(APP.OSTEO, participantEmail, PARTICIPANT_PASSWORD);
   });
 });
 
