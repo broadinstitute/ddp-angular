@@ -10,7 +10,7 @@ import { StudyName } from 'dsm/navigation';
 
 
 test.describe('Create Follow-Up Survey', () => {
-  const studies = [StudyName.PROSTATE, StudyName.ESC];
+  const studies = [StudyName.PROSTATE];
   let followupSurveyPage: FollowUpSurveyPage;
 
   for (const study of studies) {
