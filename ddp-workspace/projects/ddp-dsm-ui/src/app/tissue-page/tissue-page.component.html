@@ -42,7 +42,7 @@
         </tr>
         <tr>
           <td>Request Status</td>
-          <td>{{oncHistoryDetail.request === 'unableObtainTissue' ? 'Unable To Obtain' : oncHistoryDetail.request | titlecase}}</td>
+          <td>{{oncHistoryDetail.request === 'unableObtainTissue' ? 'Unable To Obtain' : (oncHistoryDetail.request === 'receivedIncomplete' ? 'Received Incomplete' : oncHistoryDetail.request | titlecase)}}</td>
         </tr>
         <tr>
           <td>Short ID</td>

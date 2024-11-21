@@ -146,6 +146,7 @@ export class Filter {
     new NameValue('unable To Obtain', 'Unable To Obtain'),
     new NameValue('sent', 'Sent'),
     new NameValue('received', 'Received'),
+    new NameValue('receivedIncomplete', 'Received Incomplete'),
     new NameValue('returned', 'Returned')
   ]);
   public static TISSUE_FAX = new Filter(ParticipantColumn.TISSUE_FAX, Filter.DATE_TYPE);

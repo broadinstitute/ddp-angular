@@ -5,7 +5,7 @@ import {
     Auth0CodeCallbackComponent,
     AuthGuard,
     IrbGuard,
-    BrowserGuard
+    BrowserGuard, ChangeLanguageRedirectComponent
 } from 'ddp-sdk';
 
 import {
@@ -285,6 +285,13 @@ const routes: Routes = [
         component: WelcomeComponent,
         pathMatch: 'full',
         canActivate: [IrbGuard]
+    },
+    {
+        path: 'change-language-redirect',
+        component: ChangeLanguageRedirectComponent,
+        canActivate: [
+            IrbGuard
+        ]
     },
     {
         path: '**',

@@ -1801,6 +1801,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
           const studyAllow = allowedStudies.includes(this.sessionService.selectedRealm);
 
           const hasConsentedToTissueSample = this.participant.data.dsm?.['hasConsentedToTissueSample'];
+          const consentSuspended = this.participant.data.status === 'CONSENT_SUSPENDED';
 
           const consentAddendumPediatric = this.participant.data.activities
             ?.find(({activityCode}) => activityCode === 'CONSENT_ADDENDUM_PEDIATRIC');
@@ -1826,11 +1827,14 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
                 ?.find(({answer, stableId}) => stableId === 'SOMATIC_CONSENT_TUMOR' && answer);
           }
 
-          return mercuryAllow && studyAllow && hasConsentedToTissueSample &&
+          //Once aged up and NOT followedup consent will be suspended, so check if CONSENT_SUSPENDED
+          //To handle agedup scenarios, check consent(assent)AddendumPediatric (which are from pre age up activity)
+          // only if adult consentAddendum doesn't exist
+          return mercuryAllow && studyAllow && hasConsentedToTissueSample && !consentSuspended &&
             (somaticConsentAddendumTumorAdult?.answer ||
-              (somaticConsentTumorPediatric?.answer && somaticAssentAddendum?.answer) ||
+              (somaticConsentTumorPediatric?.answer && somaticAssentAddendum?.answer && consentAddendum === undefined) ||
               (somaticConsentTumorPediatric?.answer && consentAddendumPediatricStatus === 'COMPLETE'
-                && somaticAssentAddendum === undefined)
+                && somaticAssentAddendum === undefined && consentAddendum === undefined)
             );
         })
       );
