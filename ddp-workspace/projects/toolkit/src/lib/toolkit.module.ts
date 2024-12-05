@@ -240,8 +240,13 @@ export class ToolkitModule {
         private router: Router,
         private analytics: AnalyticsEventsService) {
         this.router.events.subscribe(event => {
-            if (event instanceof NavigationEnd && event.url != undefined && !(event.url.includes("activity") || event.url.includes("dashboard") || event.url.includes("login-landing"))) {
-                this.analytics.emitNavigationEvent();
+            if (event instanceof NavigationEnd) {
+                if (event.url != undefined && !(event.url.includes("activity") || event.url.includes("dashboard") || event.url.includes("login-landing"))) {
+                    console.debug("Emitting navigation event: {}", event.url);
+                    this.analytics.emitNavigationEvent();
+                } else {
+                    console.debug("Not emitting navigation event: {}", event.url);
+                }
             }
         });
     }
