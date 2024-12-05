@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 
 import { Route } from '../../constants/Route';
+import {AnalyticsEventsService} from "ddp-sdk";
 
 @Component({
   selector: 'app-about',
@@ -8,5 +9,9 @@ import { Route } from '../../constants/Route';
   styleUrls: ['./about.component.scss'],
 })
 export class AboutComponent {
+  constructor(private analytics: AnalyticsEventsService) {
+    this.analytics.emitNavigationEvent();
+  }
+
   readonly Route = Route;
 }

@@ -27,8 +27,12 @@ export class AnalyticsEventsService {
             eventLabel: eventLabel === null ? eventAction : eventLabel,
             eventValue
         };
-        this.events.next(event);
-        this.events.next(this.buildGTagEvent(eventCategory, eventAction));
+        if (event.location != undefined && (event.location.includes("activity") || event.location.includes("dashboard"))) {
+            return;
+        } else {
+            this.events.next(event);
+            this.events.next(this.buildGTagEvent(eventCategory, eventAction));
+        }
     }
 
     public emitCustomGtagEvent(eventName: string, clickText?: string, clickUrl?: string): void {

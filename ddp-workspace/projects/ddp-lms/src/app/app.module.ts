@@ -11,6 +11,7 @@ import {
   LoggingService,
   SubmitAnnouncementService,
   SubmissionManager,
+  AnalyticsEventsService
 } from 'ddp-sdk';
 
 import { ToolkitModule, ToolkitConfigurationService } from 'toolkit';
@@ -46,6 +47,8 @@ import { LandingPageComponent } from './components/landing-page/landing-page.com
 import { WorkflowStartComponent } from './components/workflow-start/workflow-start.component';
 import {GovernedUserService} from './services/governed-user.service';
 import {PrequalifierService} from './services/prequalifier.service';
+
+declare const gtag: (...args: any[]) => void;
 
 declare const DDP_ENV: Record<string, any>;
 
@@ -191,4 +194,10 @@ const translateFactory =
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule {
+  constructor(private analytics: AnalyticsEventsService) {
+    // https://developers.google.com/tag-platform/gtagjs/reference#event
+    this.analytics.gTagEventsExcludingPageViews
+      .subscribe(event => gtag('event', event.event_name, event.parameters));
+  }
+}
