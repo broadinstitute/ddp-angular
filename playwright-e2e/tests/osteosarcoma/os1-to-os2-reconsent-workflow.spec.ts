@@ -4,8 +4,14 @@ import { Navigation, Study, StudyName } from 'dsm/navigation';
 import Select from 'dss/component/select';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
 import { CustomizeView, CustomizeViewID, DataFilter, Label } from 'dsm/enums';
-import { getAccessToken, updateAuth0UserPassword } from 'utils/api-utils';
+import { updateAuth0UserPassword } from 'utils/api-utils';
 import { APP } from 'data/constants';
+import HomePage from 'dss/pages/osteo/home-page';
+import { fillSitePassword } from 'utils/test-utils';
+import { login } from 'authentication/auth-osteo';
+import ResearchConsentFormPage from 'dss/pages/osteo/research-consent-page';
+import * as user from 'data/fake-user.json';
+import ConsentAddendumPage from 'dss/pages/osteo/consent-addendump-page';
 
 test.describe(`Reconsent an OS1 participant into OS2`, () => {
   const PARTICIPANT_PASSWORD = process.env.OSTEO_USER_PASSWORD as string;
@@ -13,29 +19,72 @@ test.describe(`Reconsent an OS1 participant into OS2`, () => {
 
   let navigation;
   let shortID;
-  let participantEmail;
+  let participantEmail: string;
 
   test(`Osteo: Re-consent workflow`, async ({ page, request }) => {
-    navigation = new Navigation(page, request);
-    await new Select(page, { label: 'Select study' }).selectOption(StudyName.OSTEO);
+    await test.step('Choose an OS1 participant to re-consent', async () => {
+      navigation = new Navigation(page, request);
+      await new Select(page, { label: 'Select study' }).selectOption(StudyName.OSTEO);
 
-    const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(Study.PARTICIPANT_LIST);
-    await participantListPage.waitForReady();
-    shortID = await findOS1ParticipantWhoHasNotReconsented(participantListPage);
+      const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(Study.PARTICIPANT_LIST);
+      await participantListPage.waitForReady();
+      shortID = await findOS1ParticipantWhoHasNotReconsented(participantListPage);
 
-    const participantListTable = participantListPage.participantListTable;
-    const participantPage = await participantListTable.openParticipantPageAt({ position: 0 });
-    await participantPage.waitForReady();
-    participantEmail = await participantPage.getEmail();
-    expect(participantEmail).toBeTruthy();
-    console.log(`Participant email is: ${participantEmail}`);
-    console.log(`Participant password is: ${PARTICIPANT_PASSWORD}`);
+      const participantListTable = participantListPage.participantListTable;
+      const participantPage = await participantListTable.openParticipantPageAt({ position: 0 });
+      await participantPage.waitForReady();
+      participantEmail = await participantPage.getEmail();
+      expect(participantEmail).toBeTruthy();
+      console.log(`Participant email is: ${participantEmail}`);
+      console.log(`Participant password is: ${PARTICIPANT_PASSWORD}\n`);
+    });
 
-    await page.goto(OSTEO_BASE_URL);
-    await page.waitForURL(OSTEO_BASE_URL);
-    console.log('before getAccessToken');
-    getAccessToken(APP.OSTEO, participantEmail);
-    //await updateAuth0UserPassword(APP.OSTEO, participantEmail, PARTICIPANT_PASSWORD);
+    await test.step('Update their passsword so that they can be logged into', async () => {
+      await updateAuth0UserPassword(APP.OSTEO, participantEmail, PARTICIPANT_PASSWORD);
+    });
+
+    await test.step('Re-consent to OS2 / OS PE-CGS', async () => {
+      //Playwright general participant test info
+      const firstName = user.patient.firstName;
+      const lastName = user.patient.lastName;
+      const participantFullName = user.patient.fullName;
+      const birthMonth = user.patient.birthDate.MM;
+      const birthDate = user.patient.birthDate.DD;
+      const birthYear = user.patient.birthDate.YYYY;
+
+      await page.goto(OSTEO_BASE_URL);
+      await fillSitePassword(page);
+
+      const homePage = new HomePage(page);
+      await homePage.waitForReady();
+      await login(page, { email: participantEmail, password: PARTICIPANT_PASSWORD });
+
+      const researchConsentPage = new ResearchConsentFormPage(page, 'adult');
+      await researchConsentPage.waitForReady(); //Currently in 1. Key Points
+      await researchConsentPage.next(); //Currently in 2. Full Form
+      await researchConsentPage.next(); //Currently in 3. Sign Consent
+      await researchConsentPage.assertCurrentResearchConsentSection('3. Sign Consent');
+      await researchConsentPage.agreeToDrawBloodSamples();
+      await researchConsentPage.requestStoredSamples();
+      await researchConsentPage.fillInName(firstName, lastName);
+      await researchConsentPage.fillInDateOfBirth(birthMonth, birthDate, birthYear);
+      await researchConsentPage.fillInContactAddress({ fullName: participantFullName });
+      await researchConsentPage.submit();
+
+      const consentAddendumPage = new ConsentAddendumPage(page);
+      await consentAddendumPage.waitForReady();
+      await consentAddendumPage.clickAgreeToShareAvailableResults({ response: 'Yes' });
+      await consentAddendumPage.signature().fill(participantFullName);
+      await consentAddendumPage.submit();
+    });
+
+    await test.step('Verify that the participant now has 2 consents in the DSS dashabord', async () => {
+      //stuff here
+    });
+
+    await test.step('Verify that the participant now has 2 consents in the DSM participant page', async () => {
+      //stuff here
+    });
   });
 });
 

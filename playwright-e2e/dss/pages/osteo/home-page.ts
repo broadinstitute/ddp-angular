@@ -21,8 +21,12 @@ export default class HomePage extends OsteoPageBase {
     await this.page.getByRole('banner').getByRole('link', { name: 'Count Me In' }).click();
   }
 
-  async assertOrganizationLogoDisplayed( organization: ORGANIZATION ): Promise<void> {
-    const organizationLogo = await this.page.locator(`//app-welcome//section[@class='organizations-section']//img[contains(@alt, '${organization}')]`);
+  async clickLogin(): Promise<void> {
+    await this.page.getByRole('button', { name: 'Log In' }).click();
+  }
+
+  async assertOrganizationLogoDisplayed(organization: ORGANIZATION): Promise<void> {
+    const organizationLogo = this.page.locator(`//app-welcome//section[@class='organizations-section']//img[contains(@alt, '${organization}')]`);
     await expect(organizationLogo).toBeVisible();
   }
 }

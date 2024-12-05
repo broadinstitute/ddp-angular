@@ -163,17 +163,29 @@ export async function setAuth0UserEmailVerified(app: APP, email: string, opts: {
     });
 }
 
-export function updateAuth0UserPassword(app: APP, userEmail: string, userPassword: string): void {
+export async function updateAuth0UserPassword(app: APP, userEmail: string, userPassword: string): Promise<void> {
+  const accessToken = await getAuth0AccessToken(APP.OSTEO);
+  const info = await getAuth0UserByEmail(APP.OSTEO, userEmail, accessToken);
+  const userID = JSON.parse(JSON.stringify(info)).user_id;
+  console.log(`auth0 userID: ${userID}`);
+
   const credentials = JSON.parse(buildAuth0ClientCredentials(app));
-  console.log(`credentials: ${JSON.stringify(credentials)}`);
-
-  const management = new ManagementClient({
-    domain: credentials.domain,
-    clientId: credentials.client_id,
-    clientSecret: credentials.client_secret
-  });
-}
-
-export function getAccessToken(app: APP, userEmail: string): void {
-  //WIP
+  return fetch(`https://${credentials.domain}/api/v2/users/${userID}`, {
+    method: 'PATCH',
+    headers: {
+      authorization: `Bearer ${accessToken}`,
+      'Content-type': 'application/json; charset=UTF-8'
+    },
+    body: JSON.stringify({ password: userPassword})
+  })
+    .then(async (res) => {
+      if (res.ok) {
+        return res.json();
+      }
+      return Promise.reject(JSON.stringify(await res.json()));
+    })
+    .catch((err) => {
+      console.error(`ERROR: PATCH /api/v2/users/${userID}\n`, err);
+      throw err;
+    });
 }

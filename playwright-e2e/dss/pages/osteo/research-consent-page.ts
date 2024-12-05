@@ -14,6 +14,8 @@ export default class ResearchConsentFormPage extends OsteoPageBase {
   async waitForReady(): Promise<void> {
     await super.waitForReady();
     await expect(this.pageTitle).toHaveText('Research Consent Form');
+    const activitySteppers = this.page.locator(`//div[contains(@class, 'activity-steps')]//p`);
+    await expect(activitySteppers).toHaveText(['1. Key Points', '2. Full Form', '3. Sign Consent']);
   }
 
   async agreeToDrawBloodSamples(answer = 'Yes'): Promise<void> {

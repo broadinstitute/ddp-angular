@@ -441,4 +441,9 @@ export default abstract class PageBase implements PageInterface {
   myRelationshipToParticipant(): Question {
     return new Question(this.page, { prompt: 'My relationship to the participant is:' });
   }
+
+  async assertCurrentResearchConsentSection(sectionName: '1. Key Points' | '2. Full Form' | '3. Sign Consent'): Promise<void> {
+    const currentActivityStepper = this.page.locator(`//div[contains(@class, 'activity-steps')]//p[contains(@class, 'active')]`);
+    await expect(currentActivityStepper).toHaveText(sectionName);
+  }
 }
