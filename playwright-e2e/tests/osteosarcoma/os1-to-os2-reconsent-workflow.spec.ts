@@ -12,6 +12,7 @@ import { login } from 'authentication/auth-osteo';
 import ResearchConsentFormPage from 'dss/pages/osteo/research-consent-page';
 import * as user from 'data/fake-user.json';
 import ConsentAddendumPage from 'dss/pages/osteo/consent-addendump-page';
+import SurveyAboutOsteoPage from 'dss/pages/osteo/survey-about-osteo-page';
 
 test.describe(`Reconsent an OS1 participant into OS2`, () => {
   const PARTICIPANT_PASSWORD = process.env.OSTEO_USER_PASSWORD as string;
@@ -76,6 +77,19 @@ test.describe(`Reconsent an OS1 participant into OS2`, () => {
       await consentAddendumPage.clickAgreeToShareAvailableResults({ response: 'Yes' });
       await consentAddendumPage.signature().fill(participantFullName);
       await consentAddendumPage.submit();
+
+      const aboutYourOsteoPage = new SurveyAboutOsteoPage(page);
+      await aboutYourOsteoPage.next();
+      await aboutYourOsteoPage.fillInDiagnosedDate('January', '1989');
+      await aboutYourOsteoPage.chooseTimeframe('0-6 months before diagnosis');
+      await aboutYourOsteoPage.initialBodyLocation().check('Upper arm (humerus)');
+      await aboutYourOsteoPage.currentBodyLocation().check('Upper arm (humerus)');
+      await aboutYourOsteoPage.hadRadiationAsTreatment().check('Yes');
+      await aboutYourOsteoPage.hadReceivedTherapies().check('Sorafenib');
+      await aboutYourOsteoPage.hasEverRelapsed().check('No');
+      await aboutYourOsteoPage.isCurrentlyBeingTreated().check('No');
+      await aboutYourOsteoPage.haveOtherCancer().check('No');
+      await aboutYourOsteoPage.submit();
     });
 
     await test.step('Verify that the participant now has 2 consents in the DSS dashabord', async () => {
