@@ -4,12 +4,27 @@ import {AnalyticsEvent} from '../models/analyticsEvent';
 import {GTagEvent} from '../models/gtagEvent';
 import {filter} from 'rxjs/operators';
 import {GoogleAnalyticsEvent, isAnalyticsEvent, isGtagEvent} from '../models/googleAnalyticsEvent';
+import {Router} from "@angular/router";
 
 
 @Injectable()
 export class AnalyticsEventsService {
 
     private events = new Subject<GoogleAnalyticsEvent>();
+
+    constructor(private router: Router) {}
+
+    pushToDataLayer(data: any) {
+        (window as any).dataLayer = (window as any).dataLayer || [];
+        (window as any).dataLayer.push(data);
+    }
+
+    public trackPageView(url: string) {
+        this.pushToDataLayer({
+            event: 'page_view',
+            page_path: url
+        });
+    }
 
     public emitCustomEvent(
         eventCategory: string,
@@ -43,7 +58,7 @@ export class AnalyticsEventsService {
 
     public emitNavigationEvent(): void {
         const event: AnalyticsEvent = {
-            hitType: 'pageview',
+            hitType: 'page_view',
             // set page directly in order to exclude sensitive query params
             // and simpler aggregation of stats
             page: location.pathname,
