@@ -245,7 +245,7 @@ export class ToolkitModule {
                     console.debug("Emitting navigation event: {}", event.url);
                     this.analytics.emitNavigationEvent();
                 } else {
-                    console.debug("Not emitting navigation event: {}", event.url);
+                    console.debug("Skipping emitting navigation event: {}", event.url);
                 }
             }
         });

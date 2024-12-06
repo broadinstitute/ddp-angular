@@ -10,8 +10,6 @@ import { LanguageHostRedirector } from './services/languageHostRedirector.servic
 
 import {
     DdpModule,
-    AnalyticsEventsService,
-    AnalyticsEvent,
     LoggingService,
     SubmitAnnouncementService,
     SubmissionManager,
@@ -47,7 +45,6 @@ import { WorkflowStartComponent } from './components/workflow-start/workflow-sta
 import { LandingPageComponent } from './components/landing-page/landing-page.component';
 import { PrequalifierService } from './services/prequalifier.service';
 import { GovernedUserService } from './services/governed-user.service';
-import {NavigationEnd} from "@angular/router";
 
 const baseElt = document.getElementsByTagName('base');
 
@@ -233,14 +230,4 @@ export function translateFactory(
     ],
     bootstrap: [AppComponent],
 })
-export class AppModule {
-    /*constructor(private analytics: AnalyticsEventsService) {
-        this.analytics.analyticEvents.subscribe((event: AnalyticsEvent) => {
-            if (event instanceof NavigationEnd) {
-                if (event.url != undefined && !(event.url.includes("activity") || event.url.includes("dashboard") || event.url.includes("login-landing"))) {
-                    this.analytics.emitNavigationEvent();
-                }
-            }
-        });
-    }*/
-}
+export class AppModule {}
