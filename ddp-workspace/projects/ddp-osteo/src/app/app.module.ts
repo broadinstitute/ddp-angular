@@ -237,14 +237,12 @@ export class AppModule {
         private router: Router) {
         this.router.events.subscribe(event => {
             if (event instanceof NavigationEnd) {
-                if (event.url != undefined && !(event.url.includes("activity") || event.url.includes("dashboard") || event.url.includes("login-landing"))) {
-                    console.log("Emitting navigation event: {} from AppMod to TAG: {}", event.url, config.projectGAToken);
+                if (event.url !== undefined && !(event.url.includes('activity') ||
+                    event.url.includes('dashboard') || event.url.includes('login'))) {
+                    console.debug("Emitting navigation event: {} from AppMod to TAG: {}", event.url, config.projectGAToken);
                     gtag('config', config.projectGAToken, {
-                        'page_path': event.url
+                        page_path: event.url
                     });
-
-                } else {
-                    console.debug("Skipping emitting navigation event: {}", event.url);
                 }
             }
         });
