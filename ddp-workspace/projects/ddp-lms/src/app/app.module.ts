@@ -202,7 +202,7 @@ export class AppModule {
       if (event instanceof NavigationEnd) {
         if (event.url !== undefined && !(event.url.includes('activity')
           || event.url.includes('dashboard') || event.url.includes('login'))) {
-          //console.log('Emitting navigation event: {} from AppMod to TAG: {}', event.url, sdkConfig.projectGAToken);
+          console.log('Emitting navigation event: {} from AppMod to TAG: {}', event.url, sdkConfig.projectGAToken);
           gtag('config', sdkConfig.projectGAToken, {
             page_path: event.url
           });
