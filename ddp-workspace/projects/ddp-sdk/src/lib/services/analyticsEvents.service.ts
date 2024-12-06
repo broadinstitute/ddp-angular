@@ -6,13 +6,16 @@ import {filter} from 'rxjs/operators';
 import {GoogleAnalyticsEvent, isAnalyticsEvent, isGtagEvent} from '../models/googleAnalyticsEvent';
 import {Router} from "@angular/router";
 
+//declare let gtag: Function;
+declare const gtag: (...args: any[]) => void;
 
 @Injectable()
 export class AnalyticsEventsService {
 
     private events = new Subject<GoogleAnalyticsEvent>();
 
-    constructor(private router: Router) {}
+    constructor(private router: Router) {
+    }
 
     pushToDataLayer(data: any) {
         (window as any).dataLayer = (window as any).dataLayer || [];
@@ -23,6 +26,11 @@ export class AnalyticsEventsService {
         this.pushToDataLayer({
             event: 'page_view',
             page_path: url
+        });
+
+        console.debug("sending page view event");
+        gtag('config', 'G-VZ3QPCL198', {
+            'page_path': url
         });
     }
 
