@@ -46,7 +46,7 @@ import { LandingPageComponent } from './components/landing-page/landing-page.com
 import { WorkflowStartComponent } from './components/workflow-start/workflow-start.component';
 import {GovernedUserService} from './services/governed-user.service';
 import {PrequalifierService} from './services/prequalifier.service';
-import {NavigationEnd, Router} from "@angular/router";
+import {NavigationEnd, Router} from '@angular/router';
 
 declare const DDP_ENV: Record<string, any>;
 
@@ -202,7 +202,7 @@ export class AppModule {
       if (event instanceof NavigationEnd) {
         if (event.url !== undefined && !(event.url.includes('activity')
           || event.url.includes('dashboard') || event.url.includes('login'))) {
-          console.debug("Emitting navigation event: {} from AppMod to TAG: {}", event.url, sdkConfig.projectGAToken);
+          //console.log('Emitting navigation event: {} from AppMod to TAG: {}', event.url, sdkConfig.projectGAToken);
           gtag('config', sdkConfig.projectGAToken, {
             page_path: event.url
           });
