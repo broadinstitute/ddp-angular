@@ -39,7 +39,7 @@ describe('UserActivitiesComponent', () => {
         });
         sessionSpy = jasmine.createSpyObj('sessionSpy', ['setParticipant']);
         const statusesServiceAgentSpy = jasmine.createSpyObj('statusesServiceAgentSpy', { getStatuses: of([]) });
-        const analyticsSpy = jasmine.createSpyObj('analyticsSpy', ['emitCustomEvent']);
+        //const analyticsSpy = jasmine.createSpyObj('analyticsSpy', ['emitCustomEvent']);
         await TestBed.configureTestingModule({
             imports: [
                 MatTableModule,
@@ -53,7 +53,7 @@ describe('UserActivitiesComponent', () => {
                 { provide: ActivityInstanceStatusServiceAgent, useValue: statusesServiceAgentSpy },
                 { provide: LoggingService, useValue: {} },
                 { provide: ActivityServiceAgent, useValue: {} },
-                { provide: AnalyticsEventsService, useValue: analyticsSpy },
+                //{ provide: AnalyticsEventsService, useValue: analyticsSpy },
                 { provide: SessionMementoService, useValue: sessionSpy },
                 { provide: 'ddp.config', useValue: {} },
             ],

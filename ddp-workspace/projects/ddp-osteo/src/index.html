@@ -21,7 +21,10 @@
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
-        gtag('config', DDP_ENV.projectGAToken);
+        //gtag('config', DDP_ENV.projectGAToken);
+        gtag('config', DDP_ENV.projectGAToken, {
+            send_page_view: false
+        });
      </script>
 
 </head>
