@@ -46,10 +46,12 @@ import { LandingPageComponent } from './components/landing-page/landing-page.com
 import { WorkflowStartComponent } from './components/workflow-start/workflow-start.component';
 import {GovernedUserService} from './services/governed-user.service';
 import {PrequalifierService} from './services/prequalifier.service';
+import {NavigationEnd, Router} from "@angular/router";
 
 declare const DDP_ENV: Record<string, any>;
 
 const base = document.querySelector('base')?.getAttribute('href') ?? '';
+declare const ga: (...args: any[]) => void;
 
 /**
  * SDK Config
@@ -102,6 +104,7 @@ toolkitConfig.instagramId = 'countmein';
 toolkitConfig.lightswitchInstagramWidgetId = '814feee04df55de38ec37791efea075e';
 toolkitConfig.allowEditUserProfile = false;
 
+declare const gtag: (...args: any[]) => void;
 const translateFactory =
   (
     inj: Injector,
@@ -191,4 +194,23 @@ const translateFactory =
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+
+export class AppModule {
+  constructor(
+    private router: Router) {
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        if (event.url != undefined && !(event.url.includes("activity") || event.url.includes("dashboard") || event.url.includes("login-landing"))) {
+          console.log("Emitting navigation event: {} from AppMod to TAG: {}", event.url, sdkConfig.projectGAToken);
+          gtag('config', sdkConfig.projectGAToken, {
+            'page_path': event.url
+          });
+
+        } else {
+          console.debug("Skipping emitting navigation event: {}", event.url);
+        }
+      }
+    });
+  }
+}
+

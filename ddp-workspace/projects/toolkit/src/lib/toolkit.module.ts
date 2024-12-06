@@ -241,13 +241,7 @@ export class ToolkitModule {
         private analytics: AnalyticsEventsService) {
         this.router.events.subscribe(event => {
             if (event instanceof NavigationEnd) {
-                if (event.url != undefined && !(event.url.includes("activity") || event.url.includes("dashboard") || event.url.includes("login-landing"))) {
-                    console.debug("Emitting navigation event: {}", event.url);
-                    //this.analytics.emitNavigationEvent();
-                    this.analytics.trackPageView(event.url);
-                } else {
-                    console.debug("Skipping emitting navigation event: {}", event.url);
-                }
+                //this.analytics.emitNavigationEvent();
             }
         });
     }

@@ -4,41 +4,20 @@ import {AnalyticsEvent} from '../models/analyticsEvent';
 import {GTagEvent} from '../models/gtagEvent';
 import {filter} from 'rxjs/operators';
 import {GoogleAnalyticsEvent, isAnalyticsEvent, isGtagEvent} from '../models/googleAnalyticsEvent';
-import {Router} from "@angular/router";
 
-//declare let gtag: Function;
-declare const gtag: (...args: any[]) => void;
 
 @Injectable()
 export class AnalyticsEventsService {
 
     private events = new Subject<GoogleAnalyticsEvent>();
 
-    constructor(private router: Router) {
-    }
-
-    pushToDataLayer(data: any) {
-        (window as any).dataLayer = (window as any).dataLayer || [];
-        (window as any).dataLayer.push(data);
-    }
-
-    public trackPageView(url: string) {
-        this.pushToDataLayer({
-            event: 'page_view',
-            page_path: url
-        });
-
-        console.debug("sending page view event");
-        gtag('config', 'G-VZ3QPCL198', {
-            'page_path': url
-        });
-    }
-
+    /* we no longer use GA so this method is a no-op */
     public emitCustomEvent(
         eventCategory: string,
         eventAction: string,
         eventLabel: string | null = null,
         eventValue: string | null = null): void {
+        /*
         const event: AnalyticsEvent = {
             hitType: 'event',
             // set page directly in order to exclude sensitive query params
@@ -50,23 +29,25 @@ export class AnalyticsEventsService {
             eventLabel: eventLabel === null ? eventAction : eventLabel,
             eventValue
         };
-        if (event.location != undefined && (event.location.includes("activity") || event.location.includes("dashboard"))) {
-            return;
-        } else {
-            this.events.next(event);
-            this.events.next(this.buildGTagEvent(eventCategory, eventAction));
-        }
+        this.events.next(event);
+        this.events.next(this.buildGTagEvent(eventCategory, eventAction));
+        */
     }
 
+    /* we no longer use GA so this method is a no-op */
     public emitCustomGtagEvent(eventName: string, clickText?: string, clickUrl?: string): void {
+        /*
         const newEvent = this.buildGTagEvent(eventName, clickText, clickUrl);
         this.events.next(newEvent);
         return;
+         */
     }
 
+    /* we no longer use GA so this method is a no-op */
     public emitNavigationEvent(): void {
+        /*
         const event: AnalyticsEvent = {
-            hitType: 'page_view',
+            hitType: 'pageview',
             // set page directly in order to exclude sensitive query params
             // and simpler aggregation of stats
             page: location.pathname,
@@ -75,6 +56,7 @@ export class AnalyticsEventsService {
         this.events.next(event);
         // this is a gtag "recommended event" https://developers.google.com/tag-platform/gtagjs/reference/events#page_view
         this.events.next(this.buildGTagEvent('page_view'));
+         */
     }
 
     public get analyticEvents(): Observable<AnalyticsEvent> {
