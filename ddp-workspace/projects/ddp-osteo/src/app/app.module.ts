@@ -13,7 +13,7 @@ import {
     LoggingService,
     SubmitAnnouncementService,
     SubmissionManager,
-    LanguageService, ConfigurationService
+    LanguageService
 } from 'ddp-sdk';
 
 import { ToolkitModule, ToolkitConfigurationService } from 'toolkit';
@@ -45,7 +45,6 @@ import { WorkflowStartComponent } from './components/workflow-start/workflow-sta
 import { LandingPageComponent } from './components/landing-page/landing-page.component';
 import { PrequalifierService } from './services/prequalifier.service';
 import { GovernedUserService } from './services/governed-user.service';
-import {NavigationEnd, Router} from '@angular/router';
 
 const baseElt = document.getElementsByTagName('base');
 
@@ -57,7 +56,6 @@ if (baseElt) {
 declare const DDP_ENV: any;
 
 declare const ga: (...args: any[]) => void;
-declare const gtag: (...args: any[]) => void;
 
 export const tkCfg = new ToolkitConfigurationService();
 tkCfg.studyGuid = DDP_ENV.studyGuid;
@@ -232,19 +230,5 @@ export function translateFactory(
     ],
     bootstrap: [AppComponent],
 })
-export class AppModule {
-    constructor(
-        private router: Router) {
-        this.router.events.subscribe(event => {
-            if (event instanceof NavigationEnd) {
-                if (event.url !== undefined && !(event.url.includes('activity') ||
-                    event.url.includes('dashboard') || event.url.includes('login'))) {
-                    //console.log('Emitting navigation event: {} from AppMod to TAG: {}', event.url, config.projectGAToken);
-                    gtag('config', config.projectGAToken, {
-                        page_path: event.url
-                    });
-                }
-            }
-        });
-    }
-}
+
+export class AppModule {}
