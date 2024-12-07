@@ -202,8 +202,9 @@ export class AppModule {
       if (event instanceof NavigationEnd) {
         if (event.url !== 'undefined' &&
           (event.url.includes('about') || event.url.includes('faq') || event.url.includes('how-to-participate') ||
-            event.url.includes('scientific-impact') || event.url.includes('for-your-physician'))) {
-          console.log('Emitting navigation event: {} from AppMod to TAG: {}', event.url, sdkConfig.projectGAToken);
+            event.url.includes('scientific-impact') || event.url.includes('for-your-physician') ||
+            event.url.includes('count-me-in'))) {
+          //console.log('Emitting navigation event: {} from AppMod to TAG: {}', event.url, sdkConfig.projectGAToken);
           gtag('config', sdkConfig.projectGAToken, {
             page_path: event.url
           });
