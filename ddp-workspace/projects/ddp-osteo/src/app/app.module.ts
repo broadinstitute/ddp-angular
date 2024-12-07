@@ -45,7 +45,7 @@ import { WorkflowStartComponent } from './components/workflow-start/workflow-sta
 import { LandingPageComponent } from './components/landing-page/landing-page.component';
 import { PrequalifierService } from './services/prequalifier.service';
 import { GovernedUserService } from './services/governed-user.service';
-import {NavigationEnd, Router} from "@angular/router";
+import { NavigationEnd, Router } from '@angular/router';
 
 const baseElt = document.getElementsByTagName('base');
 
