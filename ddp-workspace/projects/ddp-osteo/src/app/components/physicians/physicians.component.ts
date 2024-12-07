@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 
 @Component({
-    selector: 'app-physicians',
-    templateUrl: './physicians.component.html',
-    styleUrls: ['./physicians.component.scss']
+  selector: 'app-physicians',
+  templateUrl: './physicians.component.html',
+  styleUrls: ['./physicians.component.scss']
 })
 export class PhysiciansComponent {
 
-    readonly stepsHrf = [
+      readonly stepsHrf = [
         'consent.pdf',
         'For_physician.pdf',
         'surveys.pdf',
@@ -15,6 +15,6 @@ export class PhysiciansComponent {
         'tumor_samples.pdf'
     ];
 
-    constructor() { }
+  constructor() { }
 
 }
