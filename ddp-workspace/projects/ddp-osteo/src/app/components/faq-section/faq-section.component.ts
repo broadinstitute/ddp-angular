@@ -2,9 +2,9 @@ import {Component, ElementRef, Input, QueryList, ViewChild, ViewChildren} from '
 import {MatAccordion, MatExpansionPanel} from '@angular/material/expansion';
 
 @Component({
-  selector: 'app-faq-section',
-  templateUrl: './faq-section.component.html',
-  styleUrls: ['./faq-section.component.scss']
+    selector: 'app-faq-section',
+    templateUrl: './faq-section.component.html',
+    styleUrls: ['./faq-section.component.scss']
 })
 export class FaqSectionComponent {
 
@@ -19,7 +19,7 @@ export class FaqSectionComponent {
     @ViewChildren(MatExpansionPanel, {read: ElementRef})
     private expansionElements: QueryList<ElementRef<HTMLDivElement>>;
 
-  constructor() { }
+    constructor() { }
 
     public isLinkItem(type: string): boolean {
         return type === 'link';
