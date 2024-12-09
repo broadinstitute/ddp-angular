@@ -1,9 +1,6 @@
 import { promises as fsPromises } from 'fs';
 import path from 'path';
 import { APP } from 'data/constants';
-import { StudyName } from 'dsm/navigation';
-import { ManagementClient } from 'auth0';
-import request from 'request';
 
 // Stores AUTH0 access token for targeted app.
 // Created automatically when the authorization flow completes for the first time.
