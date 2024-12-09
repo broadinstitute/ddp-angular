@@ -9,7 +9,6 @@ import { APP } from 'data/constants';
 import HomePage from 'dss/pages/osteo/home-page';
 import { fillSitePassword } from 'utils/test-utils';
 import { login } from 'authentication/auth-osteo';
-import * as dsm from 'authentication/auth-dsm';
 import ResearchConsentFormPage from 'dss/pages/osteo/research-consent-page';
 import * as user from 'data/fake-user.json';
 import ConsentAddendumPage from 'dss/pages/osteo/consent-addendump-page';
@@ -23,7 +22,6 @@ import { ActivityVersion, SurveyName } from 'dsm/component/tabs/enums/survey-dat
 test.describe.serial(`Reconsent an OS1 participant into OS2`, () => {
   const PARTICIPANT_PASSWORD = process.env.OSTEO_USER_PASSWORD as string;
   const OSTEO_BASE_URL = process.env.OSTEO_BASE_URL as string;
-  const DSM_BASE_URL = process.env.DSM_BASE_URL as string;
 
   let navigation: Navigation;
   let shortID: string;
@@ -48,7 +46,7 @@ test.describe.serial(`Reconsent an OS1 participant into OS2`, () => {
     });
 
     await test.step('Update their passsword so that they can be logged into', async () => {
-      await updateAuth0UserPassword(APP.OSTEO, participantEmail, PARTICIPANT_PASSWORD);
+      await updateAuth0UserPassword(APP.CMI, participantEmail, PARTICIPANT_PASSWORD);
     });
 
     await test.step('Re-consent to OS2 / OS PE-CGS', async () => {
@@ -120,7 +118,7 @@ test.describe.serial(`Reconsent an OS1 participant into OS2`, () => {
     });
   });
 
-  test(`OS2: Verify the participant has an OS1 consent and OS2 consent`, async ({ page, request }) => {
+  test(`DSM -> OS2: Verify the participant has an OS1 consent and an OS2 consent`, async ({ page, request }) => {
     navigation = new Navigation(page, request);
     await new Select(page, { label: 'Select study' }).selectOption(StudyName.OSTEO2);
 
@@ -137,6 +135,11 @@ test.describe.serial(`Reconsent an OS1 participant into OS2`, () => {
 
     const surveyDataTab = new SurveyDataTab(page);
 
+    /**
+     * Note: os1-to-os2-display-verification.spec.ts already checks the re-consented ptps do not have OS2 activities in DSM -> OS1
+     * Checking below for the expected DSM -> OS2 consent-related activties displayed in Participant Page
+     */
+
     const initialConsentActivity = await surveyDataTab.getActivity({
       activityName: SurveyName.RESEARCH_CONSENT_FORM,
       activityVersion: ActivityVersion.ONE
@@ -150,6 +153,13 @@ test.describe.serial(`Reconsent an OS1 participant into OS2`, () => {
     });
     await reConsentActivity.scrollIntoViewIfNeeded();
     await expect(reConsentActivity).toBeVisible();
+
+    const consentAddendumActivity = await surveyDataTab.getActivity({
+      activityName: SurveyName.CONSENT_ADDENDUM,
+      activityVersion: ActivityVersion.THREE
+    });
+    await consentAddendumActivity.scrollIntoViewIfNeeded();
+    await expect(consentAddendumActivity).toBeVisible();
   });
 });
 

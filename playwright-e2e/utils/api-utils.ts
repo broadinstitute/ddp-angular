@@ -44,11 +44,11 @@ function buildAuth0ClientCredentials(app: APP): string {
       audience = process.env.ATCP_AUTH0_AUDIENCE;
       domain = process.env.ATCP_AUTH0_DOMAIN;
       break;
-    case 'OSTEO':
-      clientId = process.env.OSTEO_AUTH0_CLIENT_ID;
-      clientSecret = process.env.OSTEO_AUTH0_CLIENT_SECRET;
-      audience = process.env.OSTEO_AUTH0_AUDIENCE;
-      domain = process.env.OSTEO_AUTH0_DOMAIN;
+    case 'CMI':
+      clientId = process.env.CMI_AUTH0_CLIENT_ID;
+      clientSecret = process.env.CMI_AUTH0_CLIENT_SECRET;
+      audience = process.env.CMI_AUTH0_AUDIENCE;
+      domain = process.env.CMI_AUTH0_DOMAIN;
       break;
     default:
       throw Error(`Undefined app name: ${app}`);
@@ -161,8 +161,8 @@ export async function setAuth0UserEmailVerified(app: APP, email: string, opts: {
 }
 
 export async function updateAuth0UserPassword(app: APP, userEmail: string, userPassword: string): Promise<void> {
-  const accessToken = await getAuth0AccessToken(APP.OSTEO);
-  const info = await getAuth0UserByEmail(APP.OSTEO, userEmail, accessToken);
+  const accessToken = await getAuth0AccessToken(APP.CMI);
+  const info = await getAuth0UserByEmail(APP.CMI, userEmail, accessToken);
   const userID = JSON.parse(JSON.stringify(info)).user_id;
   console.log(`auth0 userID: ${userID}`);
 
