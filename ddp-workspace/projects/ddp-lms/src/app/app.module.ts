@@ -198,6 +198,7 @@ const translateFactory =
 export class AppModule {
   constructor(
     private router: Router) {
+    gtag('js', new Date());
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         if (event.url !== 'undefined' &&
