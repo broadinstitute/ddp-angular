@@ -241,7 +241,7 @@ export class ToolkitModule {
         private analytics: AnalyticsEventsService) {
         this.router.events.subscribe(event => {
             if (event instanceof NavigationEnd) {
-                this.analytics.emitNavigationEvent();
+                //this.analytics.emitNavigationEvent();
             }
         });
     }
