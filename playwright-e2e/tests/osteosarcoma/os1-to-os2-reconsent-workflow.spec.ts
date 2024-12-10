@@ -177,7 +177,7 @@ test.describe.serial(`Reconsent an OS1 participant into OS2`, () => {
       await familyHistoryPage.assertSectionTitle(Section.YOUR_PARENTS_SIBLINGS);
       await familyHistoryPage.clickAddParentSibling();
       await familyHistoryPage.addFamilyMember('PARENT_SIBLING', {
-        nickname: "Teddy Murphy",
+        nickname: 'Teddy Murphy',
         sexAtBirth: 'Male',
         currentlyLiving: true,
         ageRange: '45-49',
@@ -189,7 +189,7 @@ test.describe.serial(`Reconsent an OS1 participant into OS2`, () => {
 
       await familyHistoryPage.clickAddParentSibling();
       await familyHistoryPage.addFamilyMember('PARENT_SIBLING', {
-        nickname: "Gayle Genarro",
+        nickname: 'Gayle Genarro',
         sexAtBirth: 'Female',
         currentlyLiving: true,
         ageRange: '40-44',
@@ -206,7 +206,7 @@ test.describe.serial(`Reconsent an OS1 participant into OS2`, () => {
       //Biological mother's side
       await familyHistoryPage.clickAddGrandParent();
       await familyHistoryPage.addFamilyMember('GRANDPARENT', {
-        nickname: "Al Gennaro",
+        nickname: 'Al Gennaro',
         sexAtBirth: 'Male',
         currentlyLiving: true,
         ageRange: '90-94',
@@ -224,7 +224,7 @@ test.describe.serial(`Reconsent an OS1 participant into OS2`, () => {
       await expect(familyHistoryPage.getNextButton()).toBeVisible();
       await familyHistoryPage.clickAddGrandParent();
       await familyHistoryPage.addFamilyMember('GRANDPARENT', {
-        nickname: "Gloria Genarro",
+        nickname: 'Gloria Genarro',
         sexAtBirth: 'Female',
         currentlyLiving: true,
         ageRange: '90-94',
@@ -237,7 +237,7 @@ test.describe.serial(`Reconsent an OS1 participant into OS2`, () => {
       //Biological father's side
       await familyHistoryPage.clickAddGrandParent();
       await familyHistoryPage.addFamilyMember('GRANDPARENT', {
-        nickname: "Lily Belcher",
+        nickname: 'Lily Belcher',
         sexAtBirth: 'Female',
         currentlyLiving: false,
         ageRange: '25-29',
@@ -256,7 +256,7 @@ test.describe.serial(`Reconsent an OS1 participant into OS2`, () => {
 
       await familyHistoryPage.clickAddGrandParent();
       await familyHistoryPage.addFamilyMember('GRANDPARENT', {
-        nickname: "Big Bob Belcher",
+        nickname: 'Big Bob Belcher',
         sexAtBirth: 'Male',
         currentlyLiving: true,
         ageRange: '70-74',
