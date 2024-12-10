@@ -218,7 +218,7 @@ export class AppModule {
     });
   }
 
-  injectScripts() {
+  injectScripts(): void {
     const gtmScriptTag = this.renderer.createElement('script');
     gtmScriptTag.type = 'text/javascript';
     gtmScriptTag.src = 'https://www.googletagmanager.com/gtag/js?id=' + sdkConfig.projectGAToken;
