@@ -1,4 +1,4 @@
-import { Locator, Page } from '@playwright/test';
+import { expect, Locator, Page } from '@playwright/test';
 
 export enum DashboardActivity {
   RESEARCH_CONSENT = 'Research Consent Form',
@@ -17,5 +17,10 @@ export default class DashboardPage {
 
   getActivity(activity: DashboardActivity): Locator {
     return this.page.locator(`//ddp-user-activities//button[contains(text(), '${activity}')]`);
+  }
+
+  async waitForReady(): Promise<void> {
+    const dashboardTitle = this.page.locator(`//h1//span[normalize-space(text())='Participant Dashboard']`);
+    await expect(dashboardTitle).toBeVisible();
   }
 }

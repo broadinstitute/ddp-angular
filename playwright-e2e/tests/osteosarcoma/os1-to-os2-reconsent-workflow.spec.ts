@@ -18,8 +18,11 @@ import SurveyAboutYou from 'dss/pages/osteo/survey-about-you';
 import DashboardPage, { DashboardActivity } from 'dss/pages/dashboard-page';
 import SurveyDataTab from 'dsm/pages/tablist/survey-data-tab';
 import { ActivityVersion, SurveyName } from 'dsm/component/tabs/enums/survey-data-enum';
+import { FamilyHistory, Section } from 'dss/pages/family-history';
+import { getToday } from 'utils/date-utils';
 
 test.describe.serial(`Reconsent an OS1 participant into OS2`, () => {
+  test.slow();
   const PARTICIPANT_PASSWORD = process.env.OSTEO_USER_PASSWORD as string;
   const OSTEO_BASE_URL = process.env.OSTEO_BASE_URL as string;
 
@@ -115,6 +118,219 @@ test.describe.serial(`Reconsent an OS1 participant into OS2`, () => {
       const dashboardPage = new DashboardPage(page);
       const researchConsentButtons = dashboardPage.getActivity(DashboardActivity.RESEARCH_CONSENT);
       await expect(researchConsentButtons).toHaveCount(2);
+    });
+
+    await test.step('Complete the family history activity', async () => {
+      //Note: Workflow tends to go like this: prequal (if registering) -> consent -> consent addendum -> medical release -> about your osteo -> about you -> dashboard -> family history
+      const dashboardPage = new DashboardPage(page);
+      const familyHistoryActivityButton = dashboardPage.getActivity(DashboardActivity.SURVEY_FAMILY_HISTORY_OF_CANCER);
+      await familyHistoryActivityButton.scrollIntoViewIfNeeded();
+      await expect(familyHistoryActivityButton).toBeVisible();
+      await familyHistoryActivityButton.click();
+
+      const familyHistoryPage = new FamilyHistory(page);
+      await familyHistoryPage.waitForReady();
+      await familyHistoryPage.assertSectionTitle(Section.INTRODUCTION);
+      await familyHistoryPage.next();
+
+      await familyHistoryPage.assertSectionTitle(Section.INSTRUCTIONS);
+      await familyHistoryPage.next();
+
+      /* Parent Section */
+      await familyHistoryPage.assertSectionTitle(Section.YOUR_PARENTS);
+      await familyHistoryPage.addFamilyMember('PARENT1', {
+        nickname: 'Linda Belcher',
+        sexAtBirth: 'Female',
+        currentlyLiving: true,
+        ageRange: '40-44',
+        cancers: [
+          {
+            cancerSearch: 'angiosa',
+            expectedCancerResult: 'Angiosarcoma',
+            numTimesToHitDownArrow: 1,
+            time: '35-39'
+          }
+        ],
+        ancestry: ['Ashkenazi']
+      });
+      await expect(familyHistoryPage.getNextButton()).toBeVisible();
+
+      await familyHistoryPage.addFamilyMember('PARENT2', {
+        nickname: 'Bob Belcher',
+        sexAtBirth: 'Male',
+        currentlyLiving: true,
+        ageRange: '40-44',
+        cancers: [
+          {
+            cancerSearch: 'esoph',
+            expectedCancerResult: 'Esophageal cancer',
+            numTimesToHitDownArrow: 1,
+            time: '35-39'
+          }
+        ],
+        ancestry: []
+      });
+      await expect(familyHistoryPage.getNextButton()).toBeVisible();
+      await familyHistoryPage.next();
+
+      /* Parent's Sibling(s) Section */
+      await familyHistoryPage.assertSectionTitle(Section.YOUR_PARENTS_SIBLINGS);
+      await familyHistoryPage.clickAddParentSibling();
+      await familyHistoryPage.addFamilyMember('PARENT_SIBLING', {
+        nickname: "Teddy Murphy",
+        sexAtBirth: 'Male',
+        currentlyLiving: true,
+        ageRange: '45-49',
+        cancers: [],
+        ancestry: [],
+        sideOfFamily: 'Biological / Birth Parent 2: Assigned Male at birth'
+      });
+      await expect(familyHistoryPage.getNextButton()).toBeVisible();
+
+      await familyHistoryPage.clickAddParentSibling();
+      await familyHistoryPage.addFamilyMember('PARENT_SIBLING', {
+        nickname: "Gayle Genarro",
+        sexAtBirth: 'Female',
+        currentlyLiving: true,
+        ageRange: '40-44',
+        cancers: [],
+        ancestry: [],
+        sideOfFamily: 'Biological / Birth Parent 1: Assigned Female at birth'
+      });
+      await expect(familyHistoryPage.getNextButton()).toBeVisible();
+      await familyHistoryPage.next();
+
+      /* Grandparent(s) Section */
+      await familyHistoryPage.assertSectionTitle(Section.YOUR_GRANDPARENTS);
+
+      //Biological mother's side
+      await familyHistoryPage.clickAddGrandParent();
+      await familyHistoryPage.addFamilyMember('GRANDPARENT', {
+        nickname: "Al Gennaro",
+        sexAtBirth: 'Male',
+        currentlyLiving: true,
+        ageRange: '90-94',
+        cancers: [
+          {
+            cancerSearch: 'noid',
+            expectedCancerResult: 'Gastrointestinal carcinoid tumor',
+            numTimesToHitDownArrow: 6,
+            time: '55-59'
+          }
+        ],
+        ancestry: [],
+        sideOfFamily: 'Biological / Birth Parent 1: Assigned Female at birth'
+      });
+      await expect(familyHistoryPage.getNextButton()).toBeVisible();
+      await familyHistoryPage.clickAddGrandParent();
+      await familyHistoryPage.addFamilyMember('GRANDPARENT', {
+        nickname: "Gloria Genarro",
+        sexAtBirth: 'Female',
+        currentlyLiving: true,
+        ageRange: '90-94',
+        cancers: [],
+        ancestry: [],
+        sideOfFamily: 'Biological / Birth Parent 1: Assigned Female at birth'
+      });
+      await expect(familyHistoryPage.getNextButton()).toBeVisible();
+
+      //Biological father's side
+      await familyHistoryPage.clickAddGrandParent();
+      await familyHistoryPage.addFamilyMember('GRANDPARENT', {
+        nickname: "Lily Belcher",
+        sexAtBirth: 'Female',
+        currentlyLiving: false,
+        ageRange: '25-29',
+        cancers: [
+          {
+            cancerSearch: 'brea',
+            expectedCancerResult: 'Breast Cancer',
+            numTimesToHitDownArrow: 1,
+            time: '25-29'
+          }
+        ],
+        ancestry: [],
+        sideOfFamily: 'Biological / Birth Parent 2: Assigned Male at birth'
+      });
+      await expect(familyHistoryPage.getNextButton()).toBeVisible();
+
+      await familyHistoryPage.clickAddGrandParent();
+      await familyHistoryPage.addFamilyMember('GRANDPARENT', {
+        nickname: "Big Bob Belcher",
+        sexAtBirth: 'Male',
+        currentlyLiving: true,
+        ageRange: '70-74',
+        cancers: [],
+        ancestry: [],
+        sideOfFamily: 'Biological / Birth Parent 2: Assigned Male at birth'
+      });
+      await expect(familyHistoryPage.getNextButton()).toBeVisible();
+      await familyHistoryPage.next();
+
+      /* Sibling(s) Section */
+      await familyHistoryPage.assertSectionTitle(Section.YOUR_SIBLINGS);
+      await familyHistoryPage.clickAddSibling();
+      await familyHistoryPage.addFamilyMember('SIBLING', {
+        nickname: 'Tina Belcher',
+        sexAtBirth: 'Female',
+        currentlyLiving: true,
+        ageRange: '10-14',
+        cancers: [],
+        ancestry: []
+      });
+      await expect(familyHistoryPage.getNextButton()).toBeVisible();
+
+      await familyHistoryPage.clickAddSibling();
+      await familyHistoryPage.addFamilyMember('SIBLING', {
+        nickname: 'Gene Belcher',
+        sexAtBirth: 'Male',
+        currentlyLiving: true,
+        ageRange: '10-14',
+        cancers: [],
+        ancestry: []
+      });
+      await expect(familyHistoryPage.getNextButton()).toBeVisible();
+
+      await familyHistoryPage.clickAddSibling();
+      await familyHistoryPage.addFamilyMember('SIBLING', {
+        nickname: 'Louise Belcher',
+        sexAtBirth: 'Female',
+        currentlyLiving: true,
+        ageRange: '5-9',
+        cancers: [],
+        ancestry: []
+      });
+      await expect(familyHistoryPage.getNextButton()).toBeVisible();
+      await familyHistoryPage.next();
+
+      /* Half-sibling(s) Section */
+      await familyHistoryPage.assertSectionTitle(Section.YOUR_HALF_SIBLINGS);
+      await familyHistoryPage.clickAddHalfSibling();
+      await familyHistoryPage.addFamilyMember('HALF_SIBLING', {
+        nickname: 'Abbiejean Kane-Archer',
+        sexAtBirth: 'Female',
+        currentlyLiving: true,
+        ageRange: '<5',
+        sideOfFamily: 'Biological / Birth Parent 2: Assigned Male at birth',
+        cancers: [],
+        ancestry: []
+      });
+      await expect(familyHistoryPage.getNextButton()).toBeVisible();
+      await familyHistoryPage.next();
+
+      /* Children Section */
+      await familyHistoryPage.assertSectionTitle(Section.YOUR_CHILDREN);
+      await familyHistoryPage.clickDoNotHaveChildren();
+      await expect(familyHistoryPage.getNextButton()).toBeVisible();
+      await familyHistoryPage.next();
+
+      /* Additional Details Section */
+      await familyHistoryPage.assertSectionTitle(Section.ADDITIONAL_DETAILS);
+      await familyHistoryPage.additionalDetails().fill(`Filled by Playwright on ${getToday()}`);
+      await expect(familyHistoryPage.getFinishButton()).toBeVisible();
+      await familyHistoryPage.finish(); //Clicking finish button navigates participant to the dashboard
+
+      await dashboardPage.waitForReady();
     });
   });
 
