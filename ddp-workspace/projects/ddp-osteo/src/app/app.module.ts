@@ -240,7 +240,6 @@ export class AppModule {
         rendererFactory: RendererFactory2,
         private router: Router) {
         this.renderer = rendererFactory.createRenderer(null, null);
-        this.injectScripts();
         this.router.events.subscribe(event => {
             if (event instanceof NavigationEnd) {
                 if (event.url !== 'undefined' &&
@@ -248,6 +247,7 @@ export class AppModule {
                         event.url.includes('scientific-impact') || event.url.includes('physicians') ||
                         event.url.includes('count-me-in'))) {
                     //console.log('Emitting navigation event: {} from AppMod to TAG: {}', event.url, config.projectGAToken);
+                    this.injectScripts();
                     gtag('config', config.projectGAToken, {
                         page_path: event.url
                     });
