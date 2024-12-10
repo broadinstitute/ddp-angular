@@ -1,5 +1,5 @@
-import { APP_INITIALIZER, Injector, NgModule } from '@angular/core';
-import { LOCATION_INITIALIZED } from '@angular/common';
+import {APP_INITIALIZER, Inject, Injector, NgModule, Renderer2, RendererFactory2} from '@angular/core';
+import {DOCUMENT, LOCATION_INITIALIZED} from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TranslateService } from '@ngx-translate/core';
@@ -51,7 +51,7 @@ import {NavigationEnd, Router} from '@angular/router';
 declare const DDP_ENV: Record<string, any>;
 
 const base = document.querySelector('base')?.getAttribute('href') ?? '';
-declare const ga: (...args: any[]) => void;
+declare const gtag: (...args: any[]) => void;
 
 /**
  * SDK Config
@@ -104,7 +104,6 @@ toolkitConfig.instagramId = 'countmein';
 toolkitConfig.lightswitchInstagramWidgetId = '814feee04df55de38ec37791efea075e';
 toolkitConfig.allowEditUserProfile = false;
 
-declare const gtag: (...args: any[]) => void;
 const translateFactory =
   (
     inj: Injector,
@@ -196,9 +195,14 @@ const translateFactory =
 })
 
 export class AppModule {
+  private renderer: Renderer2;
+
   constructor(
+    @Inject(DOCUMENT) private document: Document,
+    rendererFactory: RendererFactory2,
     private router: Router) {
-    gtag('js', new Date());
+    this.renderer = rendererFactory.createRenderer(null, null);
+    this.injectScripts();
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         if (event.url !== 'undefined' &&
@@ -213,5 +217,24 @@ export class AppModule {
       }
     });
   }
+
+  injectScripts() {
+    const gtmScriptTag = this.renderer.createElement('script');
+    gtmScriptTag.type = 'text/javascript';
+    gtmScriptTag.src = 'https://www.googletagmanager.com/gtag/js?id=' + sdkConfig.projectGAToken;
+    this.renderer.appendChild(this.document.body, gtmScriptTag);
+
+    const gtagInitScript = this.renderer.createElement('script');
+    gtagInitScript.type = 'text/javascript';
+    gtagInitScript.text = `window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    `;
+    this.renderer.appendChild(this.document.body, gtagInitScript);
+  }
+
 }
 

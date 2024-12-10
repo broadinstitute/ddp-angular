@@ -1,7 +1,7 @@
-import { NgModule, Injector, APP_INITIALIZER } from '@angular/core';
+import {NgModule, Injector, APP_INITIALIZER, Inject, RendererFactory2, Renderer2} from '@angular/core';
 import { BrowserModule, HammerModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { LOCATION_INITIALIZED, CommonModule } from '@angular/common';
+import {LOCATION_INITIALIZED, CommonModule, DOCUMENT} from '@angular/common';
 import { AppRoutingModule } from './app-routing.module';
 
 import { TranslateService } from '@ngx-translate/core';
@@ -233,16 +233,21 @@ export function translateFactory(
 })
 
 export class AppModule {
+    private renderer: Renderer2;
+
     constructor(
+        @Inject(DOCUMENT) private document: Document,
+        rendererFactory: RendererFactory2,
         private router: Router) {
-        gtag('js', new Date());
+        this.renderer = rendererFactory.createRenderer(null, null);
+        this.injectScripts();
         this.router.events.subscribe(event => {
             if (event instanceof NavigationEnd) {
                 if (event.url !== 'undefined' &&
                     (event.url.includes('about-us') || event.url.includes('more-details') || event.url.includes('participation') ||
                         event.url.includes('scientific-impact') || event.url.includes('physicians') ||
                         event.url.includes('count-me-in'))) {
-                    console.log('Emitting navigation event: {} from AppMod to TAG: {}', event.url, config.projectGAToken);
+                    //console.log('Emitting navigation event: {} from AppMod to TAG: {}', event.url, config.projectGAToken);
                     gtag('config', config.projectGAToken, {
                         page_path: event.url
                     });
@@ -250,4 +255,24 @@ export class AppModule {
             }
         });
     }
+
+
+    injectScripts() {
+        const gtmScriptTag = this.renderer.createElement('script');
+        gtmScriptTag.type = 'text/javascript';
+        gtmScriptTag.src = 'https://www.googletagmanager.com/gtag/js?id=' + config.projectGAToken;
+        this.renderer.appendChild(this.document.body, gtmScriptTag);
+
+        const gtagInitScript = this.renderer.createElement('script');
+        gtagInitScript.type = 'text/javascript';
+        gtagInitScript.text = `window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+          dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+        `;
+        this.renderer.appendChild(this.document.body, gtagInitScript);
+    }
+
 }
