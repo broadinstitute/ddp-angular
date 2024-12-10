@@ -136,6 +136,6 @@ export class UserActivitiesComponent implements OnInit, OnDestroy, OnChanges, Af
   }
 
   private doAnalytics(action: string): void {
-      this.analytics.emitCustomEvent(AnalyticsEventCategories.Dashboard, action);
+      //this.analytics.emitCustomEvent(AnalyticsEventCategories.Dashboard, action);
   }
 }
