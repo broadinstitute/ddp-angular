@@ -94,7 +94,7 @@ export async function getAuth0AccessToken(app: APP): Promise<string> {
       return json.access_token;
     })
     .catch((err) => {
-      logInfo(`ERROR: POST /oauth/token:\n`, err);
+      logInfo(`ERROR: POST /oauth/token:\n ${err}`);
       throw err;
     });
 }
@@ -129,7 +129,7 @@ export async function getAuth0UserByEmail(app: APP, email: string, accessToken: 
       return json[0];
     })
     .catch((err) => {
-      logInfo(`ERROR: GET /api/v2/users-by-email?${email}:\n`, err);
+      logInfo(`ERROR: GET /api/v2/users-by-email?${email}:\n ${err}`);
       throw err;
     });
 }
@@ -156,7 +156,7 @@ export async function setAuth0UserEmailVerified(app: APP, email: string, opts: {
       return Promise.reject(JSON.stringify(await res.json()));
     })
     .catch((err) => {
-      logInfo(`ERROR: PATCH /api/v2/users/${userId}\n`, err);
+      logInfo(`ERROR: PATCH /api/v2/users/${userId}\n ${err}`);
       throw err;
     });
 }
@@ -183,7 +183,7 @@ export async function updateAuth0UserPassword(app: APP, userEmail: string, userP
       return Promise.reject(JSON.stringify(await res.json()));
     })
     .catch((err) => {
-      logInfo(`ERROR: PATCH /api/v2/users/${userID}\n`, err);
+      logInfo(`ERROR: PATCH /api/v2/users/${userID}\n ${err}`);
       throw err;
     });
 }
