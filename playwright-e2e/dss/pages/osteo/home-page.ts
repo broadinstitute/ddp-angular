@@ -1,7 +1,7 @@
 import { expect, Locator, Page } from '@playwright/test';
 import { waitForNoSpinner } from 'utils/test-utils';
 import { OsteoPageBase } from 'dss/pages/osteo/osteo-page-base';
-import { ORGANIZATIONS as ORGANIZATION } from 'dss/enum';
+import { ORGANIZATIONS as ORGANIZATION } from 'dss/enums';
 
 export default class HomePage extends OsteoPageBase {
   private readonly pageTitle: Locator;

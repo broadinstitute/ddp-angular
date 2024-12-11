@@ -20,6 +20,7 @@ import SurveyDataTab from 'dsm/pages/tablist/survey-data-tab';
 import { ActivityVersion, SurveyName } from 'dsm/component/tabs/enums/survey-data-enum';
 import { FamilyHistory, Section } from 'dss/pages/family-history';
 import { getToday } from 'utils/date-utils';
+import { logInfo } from 'utils/log-utils';
 
 test.describe.serial(`Reconsent an OS1 participant into OS2`, () => {
   test.slow();
@@ -44,8 +45,8 @@ test.describe.serial(`Reconsent an OS1 participant into OS2`, () => {
       await participantPage.waitForReady();
       participantEmail = await participantPage.getEmail();
       expect(participantEmail).toBeTruthy();
-      console.log(`Participant email is: ${participantEmail}`);
-      console.log(`Participant password is: ${PARTICIPANT_PASSWORD}\n`);
+      logInfo(`Participant email is: ${participantEmail}`);
+      logInfo(`Participant password is: ${PARTICIPANT_PASSWORD}\n`);
     });
 
     await test.step('Update their passsword so that they can be logged into', async () => {
@@ -397,14 +398,14 @@ async function findOS1ParticipantWhoHasNotReconsented(participantList: Participa
   const participantListTable = participantList.participantListTable;
   const numberOfReturnedParticipants = await participantListTable.rowsCount;
   expect(numberOfReturnedParticipants).toBeGreaterThanOrEqual(1);
-  console.log(`Current page shows ${numberOfReturnedParticipants} participants`);
+  logInfo(`Current page shows ${numberOfReturnedParticipants} participants`);
   await participantListTable.changeRowCount(50);
 
   const shortID = await participantListTable.getCellDataForColumn(Label.SHORT_ID, 1);
   const participantCohortTags = await participantListTable.getCellDataForColumn(Label.COHORT_TAG_NAME, 1);
   expect(participantCohortTags).not.toContain(`OS PE-CGS`);
   expect(participantCohortTags).toContain(`OS`);
-  console.log(`Chosen short id: ${shortID}`);
+  logInfo(`Chosen short id: ${shortID}`);
 
   //Return the participant
   return shortID;

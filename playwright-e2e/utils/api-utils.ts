@@ -1,6 +1,7 @@
 import { promises as fsPromises } from 'fs';
 import path from 'path';
 import { APP } from 'data/constants';
+import { logInfo } from './log-utils';
 
 // Stores AUTH0 access token for targeted app.
 // Created automatically when the authorization flow completes for the first time.
@@ -75,7 +76,7 @@ export async function getAuth0AccessToken(app: APP): Promise<string> {
   }
 
   const credentials = JSON.parse(buildAuth0ClientCredentials(app));
-  console.log(`credentials: ${JSON.stringify(credentials)}`);
+  logInfo(`credentials: ${JSON.stringify(credentials)}`);
 
   return fetch(`https://${credentials.domain}/oauth/token`, {
     method: 'POST',
@@ -89,11 +90,11 @@ export async function getAuth0AccessToken(app: APP): Promise<string> {
   })
     .then(async (res) => res.json())
     .then((json) => {
-      console.log(`json with access token: ${JSON.stringify(json)}`);
+      logInfo(`json with access token: ${JSON.stringify(json)}`);
       return json.access_token;
     })
     .catch((err) => {
-      console.error(`ERROR: POST /oauth/token:\n`, err);
+      logInfo(`ERROR: POST /oauth/token:\n`, err);
       throw err;
     });
 }
@@ -128,7 +129,7 @@ export async function getAuth0UserByEmail(app: APP, email: string, accessToken: 
       return json[0];
     })
     .catch((err) => {
-      console.error(`ERROR: GET /api/v2/users-by-email?${email}:\n`, err);
+      logInfo(`ERROR: GET /api/v2/users-by-email?${email}:\n`, err);
       throw err;
     });
 }
@@ -155,7 +156,7 @@ export async function setAuth0UserEmailVerified(app: APP, email: string, opts: {
       return Promise.reject(JSON.stringify(await res.json()));
     })
     .catch((err) => {
-      console.error(`ERROR: PATCH /api/v2/users/${userId}\n`, err);
+      logInfo(`ERROR: PATCH /api/v2/users/${userId}\n`, err);
       throw err;
     });
 }
@@ -164,7 +165,7 @@ export async function updateAuth0UserPassword(app: APP, userEmail: string, userP
   const accessToken = await getAuth0AccessToken(APP.CMI);
   const info = await getAuth0UserByEmail(APP.CMI, userEmail, accessToken);
   const userID = JSON.parse(JSON.stringify(info)).user_id;
-  console.log(`auth0 userID: ${userID}`);
+  logInfo(`auth0 userID: ${userID}`);
 
   const credentials = JSON.parse(buildAuth0ClientCredentials(app));
   return fetch(`https://${credentials.domain}/api/v2/users/${userID}`, {
@@ -182,7 +183,7 @@ export async function updateAuth0UserPassword(app: APP, userEmail: string, userP
       return Promise.reject(JSON.stringify(await res.json()));
     })
     .catch((err) => {
-      console.error(`ERROR: PATCH /api/v2/users/${userID}\n`, err);
+      logInfo(`ERROR: PATCH /api/v2/users/${userID}\n`, err);
       throw err;
     });
 }
