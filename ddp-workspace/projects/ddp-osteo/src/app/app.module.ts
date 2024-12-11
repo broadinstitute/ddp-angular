@@ -247,7 +247,7 @@ export class AppModule {
                     (event.url.includes('about-us') || event.url.includes('more-details') || event.url.includes('participation') ||
                         event.url.includes('scientific-impact') || event.url.includes('physicians') ||
                         event.url.includes('count-me-in'))) {
-                    console.log('Emitting navigation event: {} from AppMod to TAG: {}', event.url, config.projectGAToken);
+                    //console.log('Emitting navigation event: {} from AppMod to TAG: {}', event.url, config.projectGAToken);
                     this.injectScripts();
                     gtag('config', config.projectGAToken, {
                         page_path: event.url
