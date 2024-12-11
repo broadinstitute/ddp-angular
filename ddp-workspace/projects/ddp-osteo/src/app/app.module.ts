@@ -241,7 +241,7 @@ export class AppModule {
         private router: Router) {
         this.renderer = rendererFactory.createRenderer(null, null);
         this.router.events.subscribe(event => {
-            if (event instanceof NavigationEnd) {
+            if (localStorage.getItem('session_key') == null && event instanceof NavigationEnd) {
                 if (event.url !== 'undefined' &&
                     (event.url.includes('about-us') || event.url.includes('more-details') || event.url.includes('participation') ||
                         event.url.includes('scientific-impact') || event.url.includes('physicians') ||
