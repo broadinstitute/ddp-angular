@@ -1,5 +1,5 @@
-import { APP_INITIALIZER, Injector, NgModule } from '@angular/core';
-import { LOCATION_INITIALIZED } from '@angular/common';
+import {APP_INITIALIZER, Inject, Injector, NgModule, Renderer2, RendererFactory2} from '@angular/core';
+import {DOCUMENT, LOCATION_INITIALIZED} from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TranslateService } from '@ngx-translate/core';
@@ -10,7 +10,7 @@ import {
   LanguageService,
   LoggingService,
   SubmitAnnouncementService,
-  SubmissionManager,
+  SubmissionManager, SessionMementoService
 } from 'ddp-sdk';
 
 import { ToolkitModule, ToolkitConfigurationService } from 'toolkit';
@@ -46,10 +46,12 @@ import { LandingPageComponent } from './components/landing-page/landing-page.com
 import { WorkflowStartComponent } from './components/workflow-start/workflow-start.component';
 import {GovernedUserService} from './services/governed-user.service';
 import {PrequalifierService} from './services/prequalifier.service';
+import {NavigationEnd, Router} from '@angular/router';
 
 declare const DDP_ENV: Record<string, any>;
 
 const base = document.querySelector('base')?.getAttribute('href') ?? '';
+declare const gtag: (...args: any[]) => void;
 
 /**
  * SDK Config
@@ -191,4 +193,49 @@ const translateFactory =
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+
+export class AppModule {
+  private renderer: Renderer2;
+
+  constructor(
+    @Inject(DOCUMENT) private document: Document,
+    rendererFactory: RendererFactory2,
+    private session: SessionMementoService,
+    private router: Router) {
+    this.renderer = rendererFactory.createRenderer(null, null);
+    this.router.events.subscribe(event => {
+      if (!this.session.isAuthenticatedSession() && event instanceof NavigationEnd) {
+        if (event.url !== 'undefined' &&
+          (event.url.includes('about') || event.url.includes('faq') || event.url.includes('how-to-participate') ||
+            event.url.includes('scientific-impact') || event.url.includes('for-your-physician') ||
+            event.url.includes('count-me-in'))) {
+          //console.log('Emitting navigation event: {} from AppMod to TAG: {}', event.url, sdkConfig.projectGAToken);
+          this.injectScripts();
+          gtag('config', sdkConfig.projectGAToken, {
+            page_path: event.url
+          });
+        }
+      }
+    });
+  }
+
+  injectScripts(): void {
+    const gtmScriptTag = this.renderer.createElement('script');
+    gtmScriptTag.type = 'text/javascript';
+    gtmScriptTag.src = 'https://www.googletagmanager.com/gtag/js?id=' + sdkConfig.projectGAToken;
+    this.renderer.appendChild(this.document.body, gtmScriptTag);
+
+    const gtagInitScript = this.renderer.createElement('script');
+    gtagInitScript.type = 'text/javascript';
+    gtagInitScript.text = `window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    `;
+    this.renderer.appendChild(this.document.body, gtagInitScript);
+  }
+
+}
+
