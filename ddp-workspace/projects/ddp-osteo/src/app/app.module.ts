@@ -13,7 +13,7 @@ import {
     LoggingService,
     SubmitAnnouncementService,
     SubmissionManager,
-    LanguageService
+    LanguageService, SessionMementoService
 } from 'ddp-sdk';
 
 import { ToolkitModule, ToolkitConfigurationService } from 'toolkit';
@@ -238,10 +238,11 @@ export class AppModule {
     constructor(
         @Inject(DOCUMENT) private document: Document,
         rendererFactory: RendererFactory2,
+        private session: SessionMementoService,
         private router: Router) {
         this.renderer = rendererFactory.createRenderer(null, null);
         this.router.events.subscribe(event => {
-            if (event instanceof NavigationEnd) {
+            if (!this.session.isAuthenticatedSession() && event instanceof NavigationEnd) {
                 if (event.url !== 'undefined' &&
                     (event.url.includes('about-us') || event.url.includes('more-details') || event.url.includes('participation') ||
                         event.url.includes('scientific-impact') || event.url.includes('physicians') ||
