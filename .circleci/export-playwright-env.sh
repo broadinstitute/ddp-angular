@@ -130,3 +130,13 @@ echo "export ATCP_AUTH0_DOMAIN=$atcpDomain" >> playwright-env/envvars
 echo "export ATCP_AUTH0_AUDIENCE=$atcpAudience" >> playwright-env/envvars
 echo "export ATCP_AUTH0_CLIENT_ID=$atcpClientId" >> playwright-env/envvars
 echo "export ATCP_AUTH0_CLIENT_SECRET=$atcpClientSecret" >> playwright-env/envvars
+
+# Read Auth0 CMI client credentials
+export cmiDomain=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.auth0 | .[] | select(.app==\"cmi\" and .env==\"$ENV\") | .domain")
+export cmiAudience=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.auth0 | .[] | select(.app==\"cmi\" and .env==\"$ENV\") | .audience")
+export cmiClientId=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.auth0 | .[] | select(.app==\"cmi\" and .env==\"$ENV\") | .clientId")
+export cmiClientSecret=$(vault read --format=json secret/pepper/test/v1/e2e | jq -r ".data.auth0 | .[] | select(.app==\"cmi\" and .env==\"$ENV\") | .clientSecret")
+echo "export CMI_AUTH0_DOMAIN=$cmiDomain" >> playwright-env/envvars
+echo "export CMI_AUTH0_AUDIENCE=$cmiAudience" >> playwright-env/envvars
+echo "export CMI_AUTH0_CLIENT_ID=$cmiClientId" >> playwright-env/envvars
+echo "export CMI_AUTH0_CLIENT_SECRET=$cmiClientSecret" >> playwright-env/envvars

@@ -1,4 +1,4 @@
-import { Page } from '@playwright/test';
+import { expect, Locator, Page } from '@playwright/test';
 import Question from 'dss/component/Question';
 import { booleanToYesOrNo, waitForResponse } from 'utils/test-utils';
 import { CancerSelector } from 'dss/pages/cancer-selector';
@@ -7,6 +7,19 @@ import { BrainBasePage } from 'dss/pages/brain/brain-base-page';
 /**
  * CMI's family history
  */
+
+export enum Section {
+  INTRODUCTION = 'Introduction',
+  INSTRUCTIONS = 'Instructions',
+  YOUR_PARENTS = 'Your Parents',
+  YOUR_PARENTS_SIBLINGS = "Your Parents' Siblings",
+  YOUR_GRANDPARENTS = 'Your Grandparents',
+  YOUR_SIBLINGS = 'Your Siblings',
+  YOUR_HALF_SIBLINGS = 'Your Half-Siblings',
+  YOUR_CHILDREN = 'Your Children',
+  ADDITIONAL_DETAILS = 'Additional details'
+}
+
 export class FamilyHistory extends BrainBasePage {
   constructor(page: Page) {
     super(page);
@@ -142,5 +155,25 @@ export class FamilyHistory extends BrainBasePage {
       waitForResponse(this.page, { uri: '/summary' }),
       this.page.getByRole('button', { name: 'Save' }).click(),
     ]);
+  }
+
+  async assertSectionTitle(title: Section) {
+    let sectionTitle: Locator;
+    if (title === Section.ADDITIONAL_DETAILS) {
+      sectionTitle = this.page.locator(`//ddp-activity-block//span[normalize-space(text())="${title}"]`);
+    } else {
+      sectionTitle = this.page.locator(`//ddp-activity-section//div[@class='ddp-content']//p[normalize-space(text())="${title}"]`);
+    }
+    await expect(sectionTitle).toBeVisible();
+  }
+
+  async clickDoNotHaveChildren(): Promise<void> {
+    const checkbox = this.page.locator(`//mat-checkbox[contains(., 'Not applicable; I do not have any children.')]`);
+    await expect(checkbox).toBeVisible();
+    await checkbox.click();
+  }
+
+  additionalDetails(): Locator {
+    return this.page.locator(`//ddp-activity-answer//textarea[@data-ddp-test='answer:FH_OTHER_FACTORS_CANCER_RISK']`);
   }
 }
