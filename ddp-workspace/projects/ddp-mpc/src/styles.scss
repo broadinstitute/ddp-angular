@@ -1,5 +1,6 @@
 @use '@angular/material' as mat;
 @import 'app-theme.scss';
+@import "app/components/end-enroll/end-enroll.component.css";
 $warning-height: 150px;
 
 html,
@@ -358,6 +359,21 @@ a:focus {
     padding: 0;
 }
 
+.Footer-navItem--space {
+    padding-left: 250px;
+    padding-right: 180px;
+}
+
+.Footer-navItem--logo {
+    padding-left: 100px;
+    padding-right: 180px;
+}
+
+.Footer-navItem--space-contact {
+    padding-left: 250px;
+    padding-right: 0px;
+}
+
 .Footer-navItemLink {
     transition: color 0.3s ease;
     cursor: pointer;
@@ -383,6 +399,13 @@ a:focus {
     font-weight: 300;
     list-style-type: none;
     padding: 0;
+}
+
+.Footer-contactList-2 {
+    color: mat.get-color-from-palette($app-theme, 500);
+    font-weight: 300;
+    list-style-type: none;
+    padding: 0 0 0 100px;
 }
 
 .Footer-contactList--right {
