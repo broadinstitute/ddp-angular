@@ -41,7 +41,7 @@
 
 .main-timeline {
     position: relative;
-    background-image: linear-gradient(0deg, #1862AB, #BAD6EA);
+    background-image: linear-gradient(4deg, #1862AB, #BAD6EA);
     margin-left: -5px;
     border: #d6ecf2;
 }
