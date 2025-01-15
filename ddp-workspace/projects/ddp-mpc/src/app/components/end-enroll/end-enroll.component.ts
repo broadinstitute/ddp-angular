@@ -77,8 +77,8 @@ import {
                         <div class="timeline left">
                             <div class="card WrapperTL">
                                 <div class="card-body p-4 WrapperTL">
-                                    <h1>2018</h1>
                                     <ul>
+                                        <h1>2018</h1>
                                         <li><h4 class="mb-0">MPCproject launched through collaboration with patients and advocates</h4></li>
                                         <li><h4 class="mb-0">Poster presentation at GU ASCO: <a class="mb-0" target="_blank" href="https://ascopubs.org/doi/10.1200/JCO.2018.36.6_suppl.279" style="color:#1862AB;"> <u>The Metastatic Prostate Cancer (MPCproject): transational genomics through direct patient engagement</u></a></h4></li>
                                     </ul>
@@ -88,10 +88,10 @@ import {
                         <div class="timeline right">
                             <div class="card WrapperTL">
                                 <div class="card-body p-4 WrapperTL">
-                                    <h1>2019</h1>
                                     <ul>
-                                    <li><h4 class="mb-0">First data release from 19 patients shared on cBioPortal <a class="mb-0" target="_blank" href="https://cbioportal.org/" style="color:#1862AB;"><u>cBioPortal</u></a></h4></li>
-                                    <li><h4 class="mb-0">GU Onc Uro Today podcast with Dr. Chuck Ryan featured Dr. Eli Van Allen discussing the project: <a class="mb-0" target="_blank" href="https://www.urotoday.com/video-lectures/clinical-trials-for-my-patients-prostate-cancer/video/1484-count-me-in-the-metastatic-prostate-cancer-project-eliezer-van-allen.html" style="color:#1862AB;"><u>Count Me In! The Metastatic Prostate Cancer Project - Eliezer Van Allen</u></a></h4></li>
+                                        <h1>2019</h1>
+                                        <li><h4 class="mb-0">First data release from 19 patients shared on  <a class="mb-0" target="_blank" href="https://cbioportal.org/" style="color:#1862AB;"><u>cBioPortal</u></a></h4></li>
+                                        <li><h4 class="mb-0">GU Onc Uro Today podcast with Dr. Chuck Ryan featured Dr. Eli Van Allen discussing the project: <a class="mb-0" target="_blank" href="https://www.urotoday.com/video-lectures/clinical-trials-for-my-patients-prostate-cancer/video/1484-count-me-in-the-metastatic-prostate-cancer-project-eliezer-van-allen.html" style="color:#1862AB;"><u>Count Me In! The Metastatic Prostate Cancer Project - Eliezer Van Allen</u></a></h4></li>
                                     </ul>
                                 </div>
                             </div>
@@ -99,10 +99,10 @@ import {
                         <div class="timeline left">
                             <div class="card WrapperTL">
                                 <div class="card-body p-4 WrapperTL">
-                                    <h1>2020</h1>
                                     <ul>
-                                    <li><h4 class="mb-0">Data shared with researchers through additional repositories: the National Institute of Health’s (NIH) <a class="mb-0" target="_blank" href="https://www.ncbi.nlm.nih.gov/gap/" style="color:#1862AB;"><u>database of Genotypes and Phenotypes (dbGaP)</u></a> <a class="mb-0" target="_blank" href="https://portal.gdc.cancer.gov/" style="color:#1862AB;"><u>and the National Cancer Institute’s (NCI) Genomic Data Commons (GDC)</u></a></h4></li>
-                                    <li><h4 class="mb-0">First request for serial blood samples from existing participants</h4></li>
+                                        <h1>2020</h1>
+                                        <li><h4 class="mb-0">Data shared with researchers through additional repositories: the National Institute of Health’s (NIH) <a class="mb-0" target="_blank" href="https://www.ncbi.nlm.nih.gov/gap/" style="color:#1862AB;"><u>database of Genotypes and Phenotypes (dbGaP)</u></a> and the National Cancer Institute’s (NCI) <a class="mb-0" target="_blank" href="https://portal.gdc.cancer.gov/" style="color:#1862AB;"><u>Genomic Data Commons (GDC)</u></a></h4></li>
+                                        <li><h4 class="mb-0">First request for serial blood samples from existing participants</h4></li>
                                     </ul>
                                 </div>
                             </div>
@@ -110,10 +110,10 @@ import {
                         <div class="timeline right">
                             <div class="card WrapperTL">
                                 <div class="card-body p-4 WrapperTL">
-                                    <h1>2021</h1>
                                     <ul>
-                                    <li><h4 class="mb-0">Over 750 individuals with advanced or metastatic prostate cancer have fully enrolled in the project</h4></li>
-                                    <li><h4 class="mb-0">Preprint of publication shared on bioRx <a class="mb-0" target="_blank" href="https://www.biorxiv.org/content/10.1101/2021.07.09.451849v2" style="color:#1862AB;"><u>A patient driven clinicogenomic partnership through the Metastatic Prostate Cancer Project | bioRxiv </u></a></h4></li>
+                                        <h1>2021</h1>
+                                        <li><h4 class="mb-0">Over 750 individuals with advanced or metastatic prostate cancer have fully enrolled in the project</h4></li>
+                                        <li><h4 class="mb-0">Preprint of publication shared on bioRx <a class="mb-0" target="_blank" href="https://www.biorxiv.org/content/10.1101/2021.07.09.451849v2" style="color:#1862AB;"><u>A patient driven clinicogenomic partnership through the Metastatic Prostate Cancer Project | bioRxiv </u></a></h4></li>
                                     </ul>
                                 </div>
                             </div>
@@ -121,16 +121,18 @@ import {
                         <div class="timeline left">
                             <div class="card WrapperTL">
                                 <div class="card-body p-4 WrapperTL">
+                                    <ul>
                                     <h1>2022</h1>
-                                    <h4>Publication printed in Cell Genomics: <a class="mb-0" target="_blank" href="https://pubmed.ncbi.nlm.nih.gov/36177448/" style="color:#1862AB;"><u>A patient-driven clinicogenomic partnership for metastatic prostate cancer</u></a></h4>
+                                    <li><h4>Publication printed in Cell Genomics: <a class="mb-0" target="_blank" href="https://pubmed.ncbi.nlm.nih.gov/36177448/" style="color:#1862AB;"><u>A patient-driven clinicogenomic partnership for metastatic prostate cancer</u></a></h4></li>
+                                    </ul>
                                 </div>
                             </div>
                         </div>
                         <div class="timeline right">
                             <div class="card WrapperTL">
                                 <div class="card-body p-4 WrapperTL">
-                                    <h1>2025</h1>
                                     <ul>
+                                        <h1>2025</h1>
                                         <li><h4 class="mb-0">Over 900 metastatic prostate cancer patients have fully enrolled, including nearly 100 serial blood sample participants. Data generated by the project will serve as a catalyst for ongoing research for years to come</h4></li>
                                         <li><h4 class="mb-0">Analysis and publication of final data set to come, including patient reported data, abstracted medical record data, and sequenced genomic data from ~370 patients</h4></li>
                                         <li><h4 class="mb-0">Final data set also includes data on >175 serial blood samples from >75 participants</h4></li>
