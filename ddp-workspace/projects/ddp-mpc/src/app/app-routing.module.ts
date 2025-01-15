@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import {
-  Auth0CodeCallbackComponent,
   AuthGuard,
   IrbGuard,
   BrowserGuard
@@ -10,20 +9,12 @@ import {
 
 import {
   ActivityPageComponent,
-  ActivityComponent,
   DashboardComponent,
-  LoginLandingComponent,
   ErrorComponent,
-  StayInformedComponent,
   PasswordComponent,
   RedirectToLoginLandingComponent,
   WorkflowStartActivityComponent,
-  InternationalPatientsComponent,
-  SessionExpiredComponent,
-  RedirectToAuth0LoginComponent,
-    ToolkitModule,
-    ToolkitConfigurationService
-
+  SessionExpiredComponent
 } from 'toolkit';
 
 import { DataReleaseComponent } from './components/data-release/data-release.component';

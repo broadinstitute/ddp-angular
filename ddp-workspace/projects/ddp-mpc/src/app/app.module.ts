@@ -125,10 +125,10 @@ export function translateFactory(translate: TranslateService, injector: Injector
     ToolkitModule
   ],
   declarations: [
-    WelcomeComponent,
-    MoreDetailsComponent,
-    AboutUsComponent,
-    DataReleaseComponent,
+      WelcomeComponent,
+      MoreDetailsComponent,
+      AboutUsComponent,
+      DataReleaseComponent,
       EndEnrollComponent
   ],
   providers: [
