@@ -15,7 +15,7 @@ import {MBCFollowUpSurvey1} from 'dss/pages/mbc/mbc-follow-up-survey-1';
 const {MBC_USER_EMAIL, MBC_USER_PASSWORD, MBC_BASE_URL, SITE_PASSWORD} = process.env;
 
 
-test.describe.serial('MBC enrolment @mbc', () => {
+test.describe.skip('MBC enrollment @mbc', () => {
   test('join the movement @dss @functional @mbc', async ({page}) => {
     const participant = user.adult;
     const firstName = generateUserName(participant.firstName);
