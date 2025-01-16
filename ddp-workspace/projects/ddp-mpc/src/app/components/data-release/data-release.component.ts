@@ -16,7 +16,7 @@ import { WindowRef } from 'ddp-sdk';
     }
     `],
     template: `
-    <toolkit-header [showButtons]="true"></toolkit-header>
+    <toolkit-header [showButtons]="false"></toolkit-header>
     <div class="Wrapper">
         <div class="PageHeader">
             <div class="PageHeader-background">

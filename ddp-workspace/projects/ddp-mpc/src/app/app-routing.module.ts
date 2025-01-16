@@ -34,23 +34,6 @@ const routes: Routes = [
     }
   },
   {
-    path: 'dashboard',
-    component: DashboardComponent,
-    canActivate: [
-      IrbGuard,
-      BrowserGuard,
-      AuthGuard
-    ]
-  },
-  {
-    path: 'count-me-in',
-    component: WorkflowStartActivityComponent,
-    canActivate: [
-      IrbGuard,
-      BrowserGuard
-    ]
-  },
-  {
     path: 'data-release',
     component: DataReleaseComponent,
     canActivate: [IrbGuard]
