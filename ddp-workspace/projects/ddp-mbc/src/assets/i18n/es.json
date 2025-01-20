@@ -454,6 +454,76 @@
                 }
             }
         },
+        "EndEnroll": {
+            "TitlePart1": "El registro de nuevos participantes ha cerrado",
+            "TitlePart2": "para el Proyecto de Cáncer de Mama Metastásico (MBCproject).",
+            "Heading1" : "Thank you to everyone who has participated in the project. We continue to analyze and share the data generated through your partnership, which will help continue to shape the future of research in metastatic breast cancer.",
+            "Heading2": "Count Me In (CMI) remains committed to elevating patient centered research to revolutionize the understanding of rare cancers and rare diseases, accelerate treatment discovery, and drive medical progress.",
+            "timeline": {
+                "Heading": "Metastatic Breast Cancer Project Timeline",
+                "2015": {
+                    "October2015": "October 2015",
+                    "Pt1": "El proyecto MBC se lanzó después de un extenso período de conversaciones impactantes con pacientes y defensores de pacientes."
+                },
+                "2016": {
+                    "heading1": "Over 1,300 people with metastatic breast cancer have consented to the project in the first 9 months, giving the project team permission to obtain and analyze copies of medical records, portions of leftover tumor samples, and saliva samples",
+                    "heading2": "MBCproject was featured in a number of press articles, blog posts and videos, such as:",
+                    "Pt1": "The Wall Street Journal (Researchers Take Aim at Metastatic Breast Cancer and New Studies Rely on the Internet for Help Treating Cancer Patients)",
+                    "Pt2": "The New York Times Magazine (Learning from the Lazarus Effect)",
+                    "Pt3": "Associated Press (Crowdsourcing effort takes aim at deadliest breast cancers article and video)",
+                    "Pt4": "Fast Company (#Cancer: Researchers are conducting huge studies using Twitter, Facebook)",
+                    "Pt5": "Atlanta Black Star"
+                },
+                "2017": {
+                    "Pt1": "",
+                    "Pt2": "",
+                    "Pt3": "",
+                    "Pt4": "",
+                    "Pt5": ""
+                },
+                "2018": {
+                    "Pt1": "",
+                    "Pt2": "",
+                    "Pt3": "",
+                    "Pt4": "",
+                    "Pt5": "",
+                    "Pt6": ""
+                },
+                "2019": {
+                    "Pt1": "",
+                    "Pt2": "",
+                    "Pt3": "",
+                    "Pt4": ""
+                },
+                "2020": {
+                    "Pt1": "",
+                    "Pt2": ""
+                },
+                "2021": {
+                    "Pt1": "",
+                    "Pt2": "",
+                    "Pt3": "",
+                    "Pt4": ""
+                },
+                "2023": {
+                    "Pt1": "",
+                    "Pt2": "",
+                    "Pt3": ""
+                },
+                "2025": {
+                    "Pt1": "",
+                    "Pt2": "",
+                    "Pt3": "",
+                    "Pt3-1": "",
+                    "Pt3-2": "",
+                    "Pt3-3": "",
+                    "Pt3-4": "",
+                    "Pt3-5": "",
+                    "Pt3-6": ""
+                }
+            }
+        },
+
         "StayInformed": {
             "Title": "¡Manténgase Informada/o!",
             "Text": "Gracias por unirse a la lista de correo. Le enviaremos noticias para que este informada/o. Puede darse de baja en cualquier momento. Si tiene alguna pregunta sobre su estado en el proyecto, envíe un correo electrónico a ",

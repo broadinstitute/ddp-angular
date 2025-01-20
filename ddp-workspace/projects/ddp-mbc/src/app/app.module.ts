@@ -17,6 +17,7 @@ import { WelcomeComponent } from './components/welcome/welcome.component';
 import { PartnersComponent } from './components/partners/partners.component';
 import { MbcConfigurationService } from './services/mbcConfiguration.service';
 import { LanguageHostRedirector } from './services/languageHostRedirector.service';
+import { EndEnrollComponent } from './components/end-enroll/end-enroll.component';
 
 const baseElt = document.getElementsByTagName('base');
 
@@ -136,8 +137,8 @@ function translateFactory(translate: TranslateService,
         DataReleaseComponent,
         MoreDetailsComponent,
         WelcomeComponent,
-        PartnersComponent
-    ],
+        PartnersComponent,
+        EndEnrollComponent    ],
     providers: [
         {
             provide: 'ddp.config',

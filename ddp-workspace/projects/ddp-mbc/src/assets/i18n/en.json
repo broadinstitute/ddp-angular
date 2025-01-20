@@ -454,6 +454,97 @@
                 }
             }
         },
+        "EndEnroll": {
+            "TitlePart1": "Enrollment is now CLOSED",
+            "TitlePart2": "for the Metastatic Breast Cancer Project (MBCproject).",
+            "Title": "Enrollment is now CLOSED for the Metastatic Breast Cancer Project (MBCproject).",
+            "Heading1" : "Thank you to everyone who has participated in the project. We continue to analyze and share the data generated through your partnership, which will help continue to shape the future of research in metastatic breast cancer.",
+            "Heading2": "remains committed to elevating patient centered research to revolutionize the understanding of rare cancers and rare diseases, accelerate treatment discovery, and drive medical progress.",
+
+            "timeline": {
+                "Heading": "Metastatic Breast Cancer Project Timeline",
+                "2015": {
+                    "October": "October",
+                    "Pt1": "MBCproject launched after an extensive period of impactful conversations with patients and advocates."
+                },
+                "2016": {
+                    "heading1": "Over 1,300 people with metastatic breast cancer have consented to the project in the first 9 months, giving the project team permission to obtain and analyze copies of medical records, portions of leftover tumor samples, and saliva samples",
+                    "heading2": "MBCproject was featured in a number of press articles, blog posts and videos, such as:",
+                    "Pt1": "The Wall Street Journal (Researchers Take Aim at Metastatic Breast Cancer and New Studies Rely on the Internet for Help Treating Cancer Patients)",
+                    "Pt2": "The New York Times Magazine (Learning from the Lazarus Effect)",
+                    "Pt3": "Associated Press (Crowdsourcing effort takes aim at deadliest breast cancers article and video)",
+                    "Pt4": "Fast Company (#Cancer: Researchers are conducting huge studies using Twitter, Facebook)",
+                    "Pt5": "Atlanta Black Star"
+                },
+                "2017": {
+                    "Pt1": "Project began collecting blood samples to analyze cell free tumor DNA (“liquid biopsies”) to help understand tumor evolution and resistance to therapies ",
+                    "Pt2": "Expanded community outreach efforts in the African American community with a focus on transparency, building trust, outreach & education, and partnerships and collaborations",
+                    "Pt3-1": "Released a ",
+                    "Pt3-2": " and ",
+                    "Pt3-3": " about collaborative efforts with some MBCproject participants to address racial disparities in research participation. Thank you to everyone involved and who has helped us along the way",
+                    "Pt4": "De-identified genomic, clinical, and patient-reported data from 103 tumor samples from 78 patients included in first project data release on ",
+                    "Pt5": "Campus Ambassador program at Howard launched by student leaders, named HUMBLE (Howard University Metastatic Breast Cancer Learning Experience), focused on driving outreach to the MBC community"
+                },
+                "2018": {
+                    "Pt1": ">1,650 saliva kits, >450 blood samples received",
+                    "Pt2": "Presented a poster at the American Association for Cancer Research (AACR) Annual Meeting",
+                    "Pt3": "Third data release -- including data now totaling 237 samples from 180 participants; Dataset has now been downloaded by researchers over 5,000 times, and viewed over 80,000 times",
+                    "Pt4": "Presented new research on de novo metastatic breast cancer using data from the project at the San Antonio Breast Cancer Symposium (SABCS)",
+                    "Pt5": "Initiated faith-based pilot project to engage Black/African American patients and community members in Baltimore, MD, through partnerships with the Health Ministries Network and the Minority Coalition for Precision Medicine",
+                    "Pt6": "With support from the Breast Cancer Research Foundation (BCRF), we received funding to address barriers that Black/African American patients face in participating in genomics studies. This initiative aimed to foster equitable inclusion and ensure that the benefits of genomics research are accessible to all."
+                },
+                "2019": {
+                    "Pt1-1": "Data shared with researchers through additional repositories: the National Institute of Health’s (NIH) ",
+                    "Pt1-2": "database of Genotypes and Phenotypes (dbGaP)",
+                    "Pt1-3": "and the National Cancer Institute’s (NCI)",
+                    "Pt1-4":  "Genomic Data Commons (GDC)",
+                    "Pt2": "Attended Metastatic Breast Cancer Disparities Summit in Washington, DC, hosted by the Tigerlily Foundation, with 4 MBCproject Ambassadors participating on a panel to share their experiences",
+                    "Pt3": "Project is featured in a poster spotlight session at  the San Antonio Breast Cancer Symposium (SABCS)",
+                    "Pt4-1": "Interactive patient data browser ",
+                    "Pt4-2": "launched - with data from over 1,300 patients who completed the 2 available MBCproject surveys"
+                },
+                "2020": {
+                    "Pt1": ">5,640 patients have signed up for the MBCproject (the largest known prospective cohort of MBC patients collecting this type of data) and biospecimens have been collected from over 2,000 participants.",
+                    "Pt2-1": "First RNAsequencing data released from 228 tumors on ",
+                    "and": " and ",
+                    "cBioPortal": "cBioPortal",
+                    "dbGap": "dbGap",
+                    "Pt2-2": "containing information on the status of nearly all of the genes in the genome for the tumor samples that have been profiled by focusing on the RNA instead of DNA. Information about RNA in metastatic tumors is likely to provide critical information about mechanisms of resistance and metastasis in advanced cancer—something that has been missing in the more focused analyses of tumor DNA that have been previously conducted."
+                },
+                "2021": {
+                    "Pt1": "MBCproject made available in Spanish, built in collaboration with a Spanish advisory council and other advocates and professional stakeholders",
+                    "Pt2": "Two posters featured at the 2021 San Antonio Breast Cancer Conference",
+                    "Pt2-1": "Update on the clinico-genomic analyses from the Metastatic Breast Cancer Project",
+                    "Pt2-2": "Update on progress and plans in the MBCproject, including partnerships with patients, advocates, advocacy groups, open data sharing, and our focus on enrolling underrepresented and historically excluded patients",
+
+                    "Pt3": "Hispanic / Latino outreach efforts expanded",
+                    "Pt4-1": "Additional data released on ",
+                    "Pt4-2": " , with data derived from 379 samples from 301 participants "
+                },
+                "2023": {
+                    "Pt1-1": "medRxiv preprint",
+                    "Pt1-2": "shared, providing insight into the development of the MBCproject and its associated dataset, enabling the cancer research community to utilize the MBCproject dataset in their pursuit of scientific inquiry",
+                    "Pt2-1": "Co-led by Black/African American MBC patient advocates and the ",
+                    "Pt2-2": "Tigerlily Foundation",
+                    "Pt2-3": "pilot program launched aimed at reaching Black/African American MBC patients to raise awareness about the importance of participating in the MBCproject",
+                    "Pt3": "Presented the approach and framework from the CMI/Tigerlily Foundation pilot at the JADPRO Live! Conference in Orlando, FL"
+                },
+                "2025": {
+                    "Pt1-1": "Final data release on ",
+                    "gdc": "GDC",
+                    "Pt1-2": "including:",
+                    "Pt1-3": "1276 biospecimens from 549 participants",
+                    "Pt2": "Presented initial results from the CMI/Tigerlily Foundation pilot at the 17th AACR Conference on the Science of Cancer Health Disparities in Racial/Ethnic Minorities and the Medically Underserved (AACR Disparities Conference) in Los Angeles, CA",
+                    "Pt3": "Final Impact from the MBCproject Participant Community",
+                    "Pt3-1": "5616 participants registered",
+                    "Pt3-2": "3735 participants consented",
+                    "Pt3-3": "1724 medical records received",
+                    "Pt3-4": "2293 saliva samples received from participants",
+                    "Pt3-5": "1115 blood samples received from participants",
+                    "Pt3-6": "704 tissue samples received"
+                }
+            }
+        },
         "StayInformed": {
             "Title": "Stay Informed!",
             "Text": "Thank you for joining the email list. We'll send you updates and keep you informed. You can unsubscribe at any time. If you have any questions about your status in the project, please email ",

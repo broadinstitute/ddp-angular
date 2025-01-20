@@ -28,6 +28,7 @@ import { AboutUsComponent } from './components/about-us/about-us.component';
 import { DataReleaseComponent } from './components/data-release/data-release.component';
 import { MoreDetailsComponent } from './components/more-details/more-details.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
+import { EndEnrollComponent } from './components/end-enroll/end-enroll.component';
 
 const routes: Routes = [
     {
@@ -128,15 +129,6 @@ const routes: Routes = [
         }
     },
     {
-        path: 'dashboard',
-        component: DashboardComponent,
-        canActivate: [
-            IrbGuard,
-            BrowserGuard,
-            AuthGuard
-        ]
-    },
-    {
         path: 'auth',
         component: Auth0CodeCallbackComponent,
         canActivate: [IrbGuard]
@@ -168,14 +160,6 @@ const routes: Routes = [
         path: 'login-landing/:mode',
         component: RedirectToAuth0LoginComponent,
         canActivate: [IrbGuard]
-    },
-    {
-        path: 'count-me-in',
-        component: WorkflowStartActivityComponent,
-        canActivate: [
-            IrbGuard,
-            BrowserGuard
-        ]
     },
     {
         path: 'about-us',
@@ -227,6 +211,10 @@ const routes: Routes = [
         path: 'updates',
         component: WelcomeComponent,
         canActivate: [IrbGuard]
+    },
+    {
+        path: 'end-enroll',
+        component: EndEnrollComponent
     },
     {
         path: '',
