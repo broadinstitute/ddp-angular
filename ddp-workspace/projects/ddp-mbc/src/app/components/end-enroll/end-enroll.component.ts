@@ -36,11 +36,6 @@ import {Observable} from 'rxjs';
             <div class="Intro row">
                 <section
                     class="Message Message--intro ">
-<!--
-                    <h1 class="Message-title margin-enroll-end-text">
-                        <u><b>Enrollment is now CLOSED</b></u> for the Metastatic Prostate Cancer Project (MPCproject).
-                    </h1>
--->
                     <h1 class="Message-title text-underline-bold margin-enroll-end-text" translate>
                         Toolkit.EndEnroll.TitlePart1
                     </h1>
@@ -115,7 +110,8 @@ import {Observable} from 'rxjs';
                                         Toolkit.EndEnroll.timeline.2016.heading2
                                     </h4>
                                     <ul>
-                                        <li><h4 class="mb-0">The Wall Street Journal<a class="mb-0" target="_blank" href="http://www.wsj.com/articles/researchers-take-aim-at-metastatic-breast-cancer-1455592266" style="color:#2BB673;"><u>(Researchers Take Aim at Metastatic Breast Cancer and New Studies Rely on the Internet for Help Treating Cancer Patients)</u></a></h4></li>
+                                        <li><h4 class="mb-0">The Wall Street Journal (<a class="mb-0" target="_blank" href="http://www.wsj.com/articles/researchers-take-aim-at-metastatic-breast-cancer-1455592266" style="color:#2BB673;"><u>Researchers Take Aim at Metastatic Breast Cancer</u></a>
+                                            and <a class="mb-0" target="_blank" href="http://www.wsj.com/articles/new-studies-rely-on-the-internet-for-help-treating-cancer-patients-1465238017" style="color:#2BB673;"><u>New Studies Rely on the Internet for Help Treating Cancer Patients</u></a>)</h4></li>
                                         <li><h4 class="mb-0">The New York Times Magazine<a class="mb-0" target="_blank" href="http://www.nytimes.com/2016/05/15/magazine/exceptional-responders-cancer-the-lazarus-effect.html?_r=1" style="color:#2BB673;"><u>(Learning from the Lazarus Effect)</u></a></h4></li>
                                         <li><h4 class="mb-0">Associated Press (<a class="mb-0" target="_blank" href="https://apnews.com/general-news-56825b4874e346df8015b1e42138de4b" style="color:#2BB673;"><u>Crowdsourcing effort takes aim at deadliest breast cancers article</u></a>
                                             and <a class="mb-0" target="_blank" href="https://www.youtube.com/watch?v=WOM1o6GlTro" style="color:#2BB673;"><u>video</u></a>)</h4></li>
@@ -123,7 +119,7 @@ import {Observable} from 'rxjs';
                                         <li><h4 class="mb-0"><a class="mb-0" target="_blank" href="https://atlantablackstar.com/2016/10/20/new-project-aims-to-better-understand-metastatic-breast-cancer-in-black-patients-by-sampling-dna-tumor-tissues/" style="color:#2BB673;"><u>Atlanta Black Star</u></a></h4></li>
                                         <li><h4 class="mb-0">Broad Institute blog (<a class="mb-0" target="_blank" href="https://giving.broadinstitute.org/power-patients" style="color:#2BB673;"><u>Power to the Patients</u></a>
                                             and Youtube channel <a class="mb-0" target="_blank" href="https://www.youtube.com/watch?v=57PNC5JJu2I" style="color:#2BB673;"><u>Metastatic Breast Cancer Project: Patient-Driven Research</u></a>)</h4></li>
-                                        <li><h4 class="mb-0">Project patient visit to discuss the project and why it’s so important to patients and researchers alike<a class="mb-0" target="_blank" href="https://www.youtube.com/watch?v=BWyzY9eggI8" style="color:#2BB673;"><u> (The Metastatic Breast Cancer Project)</u></a>.</h4></li>
+                                        <li><h4 class="mb-0">Project patient visit to discuss the project and why it’s so important to patients and researchers alike (<a class="mb-0" target="_blank" href="https://www.youtube.com/watch?v=BWyzY9eggI8" style="color:#2BB673;"><u>The Metastatic Breast Cancer Project</u></a>).</h4></li>
                                     </ul>
                                 </div>
                             </div>
@@ -167,7 +163,7 @@ import {Observable} from 'rxjs';
                                             Toolkit.EndEnroll.timeline.2019.Pt1-3<a class="mb-0 text-underline" translate target="_blank" href="https://portal.gdc.cancer.gov/" style="color:#2BB673;text-decoration: underline;">Toolkit.EndEnroll.timeline.2019.Pt1-4</a></h4></li>
                                         <li><h4 class="mb-0" translate>Toolkit.EndEnroll.timeline.2019.Pt2</h4></li>
                                         <li><h4 class="mb-0" translate>Toolkit.EndEnroll.timeline.2019.Pt3</h4></li>
-                                        <li><h4 class="mb-0" translate><a class="mb-0 text-underline"  translate target="_blank" href="https://www.ncbi.nlm.nih.gov/gap/" style="text-decoration:underline; color:#2BB673;">Toolkit.EndEnroll.timeline.2019.Pt4-1</a>
+                                        <li><h4 class="mb-0" translate><a class="mb-0 text-underline"  translate target="_blank" href="https://mbcproject.org/data-release" style="text-decoration:underline; color:#2BB673;">Toolkit.EndEnroll.timeline.2019.Pt4-1</a>
                                             Toolkit.EndEnroll.timeline.2019.Pt4-2</h4></li>
                                     </ul>
                                 </div>
@@ -199,8 +195,7 @@ import {Observable} from 'rxjs';
                                         </ul>
                                         <li><h4 class="mb-0" translate>Toolkit.EndEnroll.timeline.2021.Pt3</h4></li>
 
-                                        <li><h4 class="mb-0" translate>Toolkit.EndEnroll.timeline.2021.Pt4-1<a class="mb-0 text-underline"  translate target="_blank" href="https://cbioportal.org/" style="text-decoration:underline; color:#2BB673;">Toolkit.EndEnroll.timeline.2020.cBioPortal</a>
-                                            Toolkit.EndEnroll.timeline.2021.Pt4-2</h4></li>
+                                        <li><h4 class="mb-0" translate>Toolkit.EndEnroll.timeline.2021.Pt4-1<a class="mb-0 text-underline"  translate target="_blank" href="https://cbioportal.org/" style="text-decoration:underline; color:#2BB673;">Toolkit.EndEnroll.timeline.2020.cBioPortal</a>Toolkit.EndEnroll.timeline.2021.Pt4-2</h4></li>
                                     </ul>
                                 </div>
                             </div>
@@ -212,8 +207,7 @@ import {Observable} from 'rxjs';
                                         <h1>2023</h1>
                                         <li><h4 class="mb-0" translate><a class="mb-0 text-underline"  translate target="_blank" href="https://www.medrxiv.org/content/10.1101/2023.06.07.23291117v1" style="text-decoration:underline; color:#2BB673;">Toolkit.EndEnroll.timeline.2023.Pt1-1</a>
                                             Toolkit.EndEnroll.timeline.2023.Pt1-2</h4></li>
-                                        <li><h4 class="mb-0" translate>Toolkit.EndEnroll.timeline.2023.Pt2-1<a class="mb-0 text-underline"  translate target="_blank" href="https://tigerlilyfoundation.org/" style="text-decoration:underline; color:#2BB673;">Toolkit.EndEnroll.timeline.2023.Pt2-2</a>
-                                            Toolkit.EndEnroll.timeline.2023.Pt2-3</h4></li>
+                                        <li><h4 class="mb-0" translate>Toolkit.EndEnroll.timeline.2023.Pt2-1<a class="mb-0 text-underline"  translate target="_blank" href="https://tigerlilyfoundation.org/" style="text-decoration:underline; color:#2BB673;">Toolkit.EndEnroll.timeline.2023.Pt2-2</a>Toolkit.EndEnroll.timeline.2023.Pt2-3</h4></li>
                                         <li><h4 class="mb-0" translate>Toolkit.EndEnroll.timeline.2023.Pt3</h4></li>
                                     </ul>
                                 </div>
