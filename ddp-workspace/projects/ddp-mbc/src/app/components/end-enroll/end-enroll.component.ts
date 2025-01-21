@@ -1,13 +1,13 @@
 import {Component, OnInit} from '@angular/core';
-import { NGXTranslateService } from 'ddp-sdk';
 import {
     AnalyticsEventActions,
     AnalyticsEventCategories,
     AnalyticsEventsService,
     BrowserContentService,
+    NGXTranslateService,
     WindowRef
 } from 'ddp-sdk';
-import {Observable} from "rxjs";
+import {Observable} from 'rxjs';
 // import {ToolkitConfigurationService} from "toolkit";
 
 @Component({
@@ -279,7 +279,7 @@ export class EndEnrollComponent implements OnInit {
     public ngOnInit(): void {
         this.unsupportedBrowser = this.browserContent.unsupportedBrowser();
         this.facebookUrl$ = this.ngxTranslate.getTranslation('Toolkit.Footer.FacebookLink');
-        this.countMeInUrl = "https://joincountmein.org";
+        this.countMeInUrl = 'https://joincountmein.org';
     }
 
     public clickCountMeIn(): void {
