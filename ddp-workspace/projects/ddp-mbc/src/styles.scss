@@ -349,7 +349,7 @@ mat-icon.ddp-dropdown-arrow {
 .Footer-navigation {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    //justify-content: space-between;
 }
 
 .Footer-navItem--space {
@@ -371,7 +371,7 @@ mat-icon.ddp-dropdown-arrow {
     color: mat.get-color-from-palette($app-theme, 500);
     font-weight: 300;
     list-style-type: none;
-    padding: 0 0 0 100px;
+    padding: 0 0 150px 80px;
 }
 
 .Footer-logo {
@@ -383,7 +383,7 @@ mat-icon.ddp-dropdown-arrow {
 }
 
 .Footer-logoCMI {
-    padding: 15px 25px 0 25px;
+    padding: 15px 25px 125px 80px;
 }
 
 .Footer-logoCMI-img {
@@ -476,7 +476,8 @@ mat-icon.ddp-dropdown-arrow {
     font-size: 0.95rem;
     line-height: 1.6em;
     text-decoration: none;
-    padding-left: 20px;
+    padding-left: 80px;
+    padding-right: 90px;
 }
 
 .Footer-navItem--first {
@@ -499,7 +500,7 @@ mat-icon.ddp-dropdown-arrow {
     display: flex;
     flex-direction: row;
     width: 100%;
-    padding: 10px 0 0 0;
+    padding: 10px 0 0 60px;
 }
 
 .Footer-contactList {
