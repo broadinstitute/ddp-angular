@@ -619,8 +619,8 @@
             "Logout": "LOG OUT"
         },
         "SignInOut": {
-            "SignIn": "Sign In",
-            "SignOut": "Sign Out"
+            "SignIn": "",
+            "SignOut": ""
         },
         "LanguageSelector": {
             "LanguageSelection": "language selection"

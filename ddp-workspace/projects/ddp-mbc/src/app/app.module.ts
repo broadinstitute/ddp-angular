@@ -10,11 +10,7 @@ import { AnalyticsEvent, AnalyticsEventsService, DdpModule, LanguageService, Log
 
 import { AppComponent, ToolkitConfigurationService, ToolkitModule } from 'toolkit';
 
-import { AboutUsComponent } from './components/about-us/about-us.component';
 import { DataReleaseComponent } from './components/data-release/data-release.component';
-import { MoreDetailsComponent } from './components/more-details/more-details.component';
-import { WelcomeComponent } from './components/welcome/welcome.component';
-import { PartnersComponent } from './components/partners/partners.component';
 import { MbcConfigurationService } from './services/mbcConfiguration.service';
 import { LanguageHostRedirector } from './services/languageHostRedirector.service';
 import { EndEnrollComponent } from './components/end-enroll/end-enroll.component';
@@ -56,9 +52,9 @@ tkCfg.bloodReleaseUrl = 'blood-release-survey';
 tkCfg.followupUrl = 'followup';
 tkCfg.internationalPatientsUrl = 'international-patients';
 tkCfg.mailingListDialogUrl = 'updates';
-tkCfg.phone = '617-800-1622';
-tkCfg.infoEmail = 'info@mbcproject.org';
-tkCfg.dataEmail = 'data@mbcproject.org';
+tkCfg.phone = '857-500-6264';
+tkCfg.infoEmail = 'info@joincountmein.org';
+tkCfg.dataEmail = 'info@joincountmein.org';
 tkCfg.twitterAccountId = 'count_me_in';
 tkCfg.facebookGroupId = 'joincountmein';
 tkCfg.instagramId = 'countmein';
@@ -68,6 +64,17 @@ tkCfg.showDataRelease = true;
 tkCfg.showInfoForPhysicians = false;
 tkCfg.showBlog = false;
 tkCfg.blogUrl = 'http://mbc-project.blogspot.com/';
+
+tkCfg.endEnroll = true;
+tkCfg.showEnroll = false;
+tkCfg.showLearnMore = false;
+tkCfg.showInfoForPhysicians = false;
+tkCfg.showEnroll = false;
+tkCfg.showLearnMore = false;
+tkCfg.showAboutUs = false;
+tkCfg.showFAQ = false;
+tkCfg.showHome = false;
+tkCfg.showJoinMailingList = false;
 
 export const config = new MbcConfigurationService();
 config.backendUrl = DDP_ENV.basePepperUrl;
@@ -133,11 +140,7 @@ function translateFactory(translate: TranslateService,
         ToolkitModule
     ],
     declarations: [
-        AboutUsComponent,
         DataReleaseComponent,
-        MoreDetailsComponent,
-        WelcomeComponent,
-        PartnersComponent,
         EndEnrollComponent    ],
     providers: [
         {

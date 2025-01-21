@@ -7,7 +7,7 @@ import { NGXTranslateService } from 'ddp-sdk';
 @Component({
     selector: 'app-more-details',
     template: `
-    <toolkit-header [showButtons]="true" [showLanguageSelector]="true"></toolkit-header>
+    <toolkit-header [showButtons]="false" [showLanguageSelector]="true"></toolkit-header>
     <div class="Wrapper">
         <div class="PageHeader">
             <div class="PageHeader-background">

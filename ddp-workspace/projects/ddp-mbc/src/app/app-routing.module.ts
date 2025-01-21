@@ -3,167 +3,25 @@ import { RouterModule, Routes } from '@angular/router';
 
 import {
     Auth0CodeCallbackComponent,
-    AuthGuard,
     IrbGuard,
     BrowserGuard,
     ChangeLanguageRedirectComponent
 } from 'ddp-sdk';
 
 import {
-    ActivityPageComponent,
-    ActivityComponent,
-    DashboardComponent,
-    LoginLandingComponent,
     ErrorComponent,
-    StayInformedComponent,
     PasswordComponent,
     RedirectToLoginLandingComponent,
-    WorkflowStartActivityComponent,
-    InternationalPatientsComponent,
-    SessionExpiredComponent,
-    RedirectToAuth0LoginComponent,
+    SessionExpiredComponent
 } from 'toolkit';
 
-import { AboutUsComponent } from './components/about-us/about-us.component';
 import { DataReleaseComponent } from './components/data-release/data-release.component';
-import { MoreDetailsComponent } from './components/more-details/more-details.component';
-import { WelcomeComponent } from './components/welcome/welcome.component';
 import { EndEnrollComponent } from './components/end-enroll/end-enroll.component';
 
 const routes: Routes = [
     {
-        path: 'about-you',
-        component: ActivityPageComponent,
-        canActivate: [
-            IrbGuard,
-            BrowserGuard,
-            AuthGuard
-        ],
-        data: {
-            activityGuid: 'ABOUTYOU',
-            createActivityInstance: true
-        }
-    },
-    {
-        path: 'consent',
-        component: ActivityPageComponent,
-        canActivate: [
-            IrbGuard,
-            BrowserGuard,
-            AuthGuard
-        ],
-        data: {
-            activityGuid: 'CONSENT'
-        }
-    },
-    {
-        path: 'release-survey',
-        component: ActivityPageComponent,
-        canActivate: [
-            IrbGuard,
-            BrowserGuard,
-            AuthGuard
-        ],
-        data: {
-            activityGuid: 'RELEASE'
-        }
-    },
-    {
-        path: 'tissue-consent',
-        component: ActivityPageComponent,
-        canActivate: [
-            IrbGuard,
-            BrowserGuard,
-            AuthGuard
-        ],
-        data: {
-            activityGuid: 'TISSUECONSENT'
-        }
-    },
-    {
-        path: 'tissue-release',
-        component: ActivityPageComponent,
-        canActivate: [
-            IrbGuard,
-            BrowserGuard,
-            AuthGuard
-        ],
-        data: {
-            activityGuid: 'TISSUERELEASE'
-        }
-    },
-    {
-        path: 'blood-consent',
-        component: ActivityPageComponent,
-        canActivate: [
-            IrbGuard,
-            BrowserGuard,
-            AuthGuard
-        ],
-        data: {
-            activityGuid: 'BLOODCONSENT'
-        }
-    },
-    {
-        path: 'blood-release-survey',
-        component: ActivityPageComponent,
-        canActivate: [
-            IrbGuard,
-            BrowserGuard,
-            AuthGuard
-        ],
-        data: {
-            activityGuid: 'BLOODRELEASE'
-        }
-    },
-    {
-        path: 'followup',
-        component: ActivityPageComponent,
-        canActivate: [
-            IrbGuard,
-            BrowserGuard,
-            AuthGuard
-        ],
-        data: {
-            activityGuid: 'FOLLOWUP'
-        }
-    },
-    {
         path: 'auth',
         component: Auth0CodeCallbackComponent,
-        canActivate: [IrbGuard]
-    },
-    {
-        path: 'activity/:id',
-        component: ActivityComponent,
-        canActivate: [
-            IrbGuard,
-            BrowserGuard,
-            AuthGuard
-        ]
-    },
-    {
-        path: 'activity-link/:id',
-        component: ActivityComponent,
-        canActivate: [
-            IrbGuard,
-            BrowserGuard,
-            AuthGuard
-        ]
-    },
-    {
-        path: 'login-landing',
-        component: LoginLandingComponent,
-        canActivate: [IrbGuard]
-    },
-    {
-        path: 'login-landing/:mode',
-        component: RedirectToAuth0LoginComponent,
-        canActivate: [IrbGuard]
-    },
-    {
-        path: 'about-us',
-        component: AboutUsComponent,
         canActivate: [IrbGuard]
     },
     {
@@ -173,21 +31,6 @@ const routes: Routes = [
     {
         path: 'data-release',
         component: DataReleaseComponent,
-        canActivate: [IrbGuard]
-    },
-    {
-        path: 'more-details',
-        component: MoreDetailsComponent,
-        canActivate: [IrbGuard]
-    },
-    {
-        path: 'stay-informed',
-        component: StayInformedComponent,
-        canActivate: [IrbGuard]
-    },
-    {
-        path: 'international-patients',
-        component: InternationalPatientsComponent,
         canActivate: [IrbGuard]
     },
     {
@@ -208,43 +51,8 @@ const routes: Routes = [
         component: PasswordComponent
     },
     {
-        path: 'updates',
-        component: WelcomeComponent,
-        canActivate: [IrbGuard]
-    },
-    {
-        path: 'end-enroll',
-        component: EndEnrollComponent
-    },
-    {
         path: '',
-        component: WelcomeComponent,
-        pathMatch: 'full',
-        canActivate: [IrbGuard]
-    },
-    {
-        path: 'users/:id/edit',
-        redirectTo: 'about-you'
-    },
-    {
-        path: 'consent/:id/keys',
-        redirectTo: 'tissue-consent'
-    },
-    {
-        path: 'consent/:id/patient',
-        redirectTo: 'tissue-release'
-    },
-    {
-        path: 'bdconsent/:id/keys',
-        redirectTo: 'blood-consent'
-    },
-    {
-        path: 'bdconsent/:id/info',
-        redirectTo: 'blood-release-survey'
-    },
-    {
-        path: 'followupone/:id',
-        redirectTo: 'followup'
+        component: EndEnrollComponent
     },
     {
         path: 'change-language-redirect',
