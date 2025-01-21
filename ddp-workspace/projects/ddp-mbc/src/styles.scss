@@ -1219,7 +1219,8 @@ ul {
 
 .Message--intro .Message-title,
 .Message--intro .Message-text {
-    color: mat.get-color-from-palette($app-theme, 100);
+    color: black;
+    //color: mat.get-color-from-palette($app-theme, 100);
 }
 
 .Separator {
