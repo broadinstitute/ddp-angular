@@ -460,6 +460,7 @@
             "Title": "Enrollment is now CLOSED for the Metastatic Breast Cancer Project (MBCproject).",
             "Heading1" : "Thank you to everyone who has participated in the project. We continue to analyze and share the data generated through your partnership, which will help continue to shape the future of research in metastatic breast cancer.",
             "Heading2": "remains committed to elevating patient centered research to revolutionize the understanding of rare cancers and rare diseases, accelerate treatment discovery, and drive medical progress.",
+            "contact": "Questions? Please reach out to us at any time at ",
 
             "timeline": {
                 "Heading": "Metastatic Breast Cancer Project Timeline",
@@ -496,10 +497,12 @@
                 "2019": {
                     "Pt1-1": "Data shared with researchers through additional repositories: the National Institute of Health’s (NIH) ",
                     "Pt1-2": "database of Genotypes and Phenotypes (dbGaP)",
-                    "Pt1-3": "and the National Cancer Institute’s (NCI)",
-                    "Pt1-4":  "Genomic Data Commons (GDC)",
+                    "Pt1-3": "and the National Cancer Institute’s (NCI) ",
+                    "Pt1-4": "Genomic Data Commons (GDC)",
+                    "Pt1-5": "",
                     "Pt2": "Attended Metastatic Breast Cancer Disparities Summit in Washington, DC, hosted by the Tigerlily Foundation, with 4 MBCproject Ambassadors participating on a panel to share their experiences",
                     "Pt3": "Project is featured in a poster spotlight session at  the San Antonio Breast Cancer Symposium (SABCS)",
+                    "Pt4-0": "",
                     "Pt4-1": "Interactive patient data browser",
                     "Pt4-2": " launched - with data from over 1,300 patients who completed the 2 available MBCproject surveys"
                 },
@@ -509,7 +512,7 @@
                     "and": " and ",
                     "cBioPortal": "cBioPortal",
                     "dbGap": "dbGap",
-                    "Pt2-2": "containing information on the status of nearly all of the genes in the genome for the tumor samples that have been profiled by focusing on the RNA instead of DNA. Information about RNA in metastatic tumors is likely to provide critical information about mechanisms of resistance and metastasis in advanced cancer—something that has been missing in the more focused analyses of tumor DNA that have been previously conducted."
+                    "Pt2-2": ", containing information on the status of nearly all of the genes in the genome for the tumor samples that have been profiled by focusing on the RNA instead of DNA. Information about RNA in metastatic tumors is likely to provide critical information about mechanisms of resistance and metastasis in advanced cancer—something that has been missing in the more focused analyses of tumor DNA that have been previously conducted."
                 },
                 "2021": {
                     "Pt1": "MBCproject made available in Spanish, built in collaboration with a Spanish advisory council and other advocates and professional stakeholders",
@@ -521,6 +524,7 @@
                     "Pt4-2": ", with data derived from 379 samples from 301 participants "
                 },
                 "2023": {
+                    "Pt1-0": "",
                     "Pt1-1": "medRxiv preprint",
                     "Pt1-2": "shared, providing insight into the development of the MBCproject and its associated dataset, enabling the cancer research community to utilize the MBCproject dataset in their pursuit of scientific inquiry",
                     "Pt2-1": "Co-led by Black/African American MBC patient advocates and the ",
@@ -531,7 +535,7 @@
                 "2025": {
                     "Pt1-1": "Final data release on ",
                     "gdc": "GDC",
-                    "Pt1-2": "including:",
+                    "Pt1-2": ", including:",
                     "Pt1-3": "1276 biospecimens from 549 participants",
                     "Pt2": "Presented initial results from the CMI/Tigerlily Foundation pilot at the 17th AACR Conference on the Science of Cancer Health Disparities in Racial/Ethnic Minorities and the Medically Underserved (AACR Disparities Conference) in Los Angeles, CA",
                     "Pt3": "Final Impact from the MBCproject Participant Community",

@@ -160,10 +160,10 @@ import {Observable} from 'rxjs';
                                     <ul>
                                     <h1>2019</h1>
                                         <li><h4 class="mb-0" translate>Toolkit.EndEnroll.timeline.2019.Pt1-1<a class="mb-0 text-underline"  translate target="_blank" href="https://www.ncbi.nlm.nih.gov/gap/" style="text-decoration: underline; color:#2BB673;">Toolkit.EndEnroll.timeline.2019.Pt1-2</a>
-                                            Toolkit.EndEnroll.timeline.2019.Pt1-3<a class="mb-0 text-underline" translate target="_blank" href="https://portal.gdc.cancer.gov/" style="color:#2BB673;text-decoration: underline;">Toolkit.EndEnroll.timeline.2019.Pt1-4</a></h4></li>
+                                            Toolkit.EndEnroll.timeline.2019.Pt1-3<a class="mb-0 text-underline" translate target="_blank" href="https://portal.gdc.cancer.gov/" style="color:#2BB673;text-decoration: underline;">Toolkit.EndEnroll.timeline.2019.Pt1-4</a>Toolkit.EndEnroll.timeline.2019.Pt1-5</h4></li>
                                         <li><h4 class="mb-0" translate>Toolkit.EndEnroll.timeline.2019.Pt2</h4></li>
                                         <li><h4 class="mb-0" translate>Toolkit.EndEnroll.timeline.2019.Pt3</h4></li>
-                                        <li><h4 class="mb-0" translate><a class="mb-0 text-underline"  translate target="_blank" href="https://mbcproject.org/data-release" style="text-decoration:underline; color:#2BB673;">Toolkit.EndEnroll.timeline.2019.Pt4-1</a>
+                                        <li><h4 class="mb-0" translate>Toolkit.EndEnroll.timeline.2019.Pt4-0<a class="mb-0 text-underline"  translate target="_blank" href="https://mbcproject.org/data-release" style="text-decoration:underline; color:#2BB673;">Toolkit.EndEnroll.timeline.2019.Pt4-1</a>
                                             Toolkit.EndEnroll.timeline.2019.Pt4-2</h4></li>
                                     </ul>
                                 </div>
@@ -176,8 +176,7 @@ import {Observable} from 'rxjs';
                                         <h1>2020</h1>
                                         <li><h4 class="mb-0" translate>Toolkit.EndEnroll.timeline.2020.Pt1</h4></li>
                                         <li><h4 class="mb-0" translate>Toolkit.EndEnroll.timeline.2020.Pt2-1<a class="mb-0 text-underline"  translate target="_blank" href="https://cbioportal.org/" style="text-decoration:underline; color:#2BB673;">Toolkit.EndEnroll.timeline.2020.cBioPortal</a>
-                                            Toolkit.EndEnroll.timeline.2020.and<a class="mb-0 text-underline" translate target="_blank" href="https://www.ncbi.nlm.nih.gov/gap/" style="color:#2BB673;text-decoration: underline;">Toolkit.EndEnroll.timeline.2020.dbGap</a>
-                                            Toolkit.EndEnroll.timeline.2020.Pt2-2</h4></li>
+                                            Toolkit.EndEnroll.timeline.2020.and<a class="mb-0 text-underline" translate target="_blank" href="https://www.ncbi.nlm.nih.gov/gap/" style="color:#2BB673;text-decoration: underline;">Toolkit.EndEnroll.timeline.2020.dbGap</a>Toolkit.EndEnroll.timeline.2020.Pt2-2</h4></li>
                                     </ul>
                                 </div>
                             </div>
@@ -205,7 +204,7 @@ import {Observable} from 'rxjs';
                                 <div class="card-body p-4 WrapperTL">
                                     <ul>
                                         <h1>2023</h1>
-                                        <li><h4 class="mb-0" translate><a class="mb-0 text-underline"  translate target="_blank" href="https://www.medrxiv.org/content/10.1101/2023.06.07.23291117v1" style="text-decoration:underline; color:#2BB673;">Toolkit.EndEnroll.timeline.2023.Pt1-1</a>
+                                        <li><h4 class="mb-0" translate>Toolkit.EndEnroll.timeline.2023.Pt1-0<a class="mb-0 text-underline"  translate target="_blank" href="https://www.medrxiv.org/content/10.1101/2023.06.07.23291117v1" style="text-decoration:underline; color:#2BB673;">Toolkit.EndEnroll.timeline.2023.Pt1-1</a>
                                             Toolkit.EndEnroll.timeline.2023.Pt1-2</h4></li>
                                         <li><h4 class="mb-0" translate>Toolkit.EndEnroll.timeline.2023.Pt2-1<a class="mb-0 text-underline"  translate target="_blank" href="https://tigerlilyfoundation.org/" style="text-decoration:underline; color:#2BB673;">Toolkit.EndEnroll.timeline.2023.Pt2-2</a>Toolkit.EndEnroll.timeline.2023.Pt2-3</h4></li>
                                         <li><h4 class="mb-0" translate>Toolkit.EndEnroll.timeline.2023.Pt3</h4></li>
@@ -219,8 +218,7 @@ import {Observable} from 'rxjs';
                                     <ul>
                                         <h1>2025</h1>
                                         <li><h4 class="mb-0" translate>Toolkit.EndEnroll.timeline.2025.Pt1-1<a class="mb-0 text-underline"  translate target="_blank" href="https://cbioportal.org/" style="text-decoration:underline; color:#2BB673;">Toolkit.EndEnroll.timeline.2020.cBioPortal</a>
-                                            Toolkit.EndEnroll.timeline.2020.and<a class="mb-0 text-underline" translate target="_blank" href="https://portal.gdc.cancer.gov/" style="color:#2BB673;text-decoration: underline;">Toolkit.EndEnroll.timeline.2025.gdc</a>
-                                            Toolkit.EndEnroll.timeline.2025.Pt1-2</h4></li>
+                                            Toolkit.EndEnroll.timeline.2020.and<a class="mb-0 text-underline" translate target="_blank" href="https://portal.gdc.cancer.gov/" style="color:#2BB673;text-decoration: underline;">Toolkit.EndEnroll.timeline.2025.gdc</a>Toolkit.EndEnroll.timeline.2025.Pt1-2</h4></li>
                                             <ul><li><h4 class="mb-0" translate>Toolkit.EndEnroll.timeline.2025.Pt1-3</h4></li></ul>
 
                                         <li><h4 class="mb-0" translate>Toolkit.EndEnroll.timeline.2025.Pt2</h4></li>
@@ -245,8 +243,8 @@ import {Observable} from 'rxjs';
             <div class="row">
                 <section
                     class="Message col-lg-6 col-lg-offset-3  ">
-                    <p class="Message-text margin-top-20">
-                        Questions? Please reach out to us at any time at <a class='Link' href='https://info@joincountmein.org.'>info@joincountmein.org</a>.
+                    <p class="Message-text margin-top-20" translate>Toolkit.EndEnroll.contact
+                        <a class='Link' href='https://info@joincountmein.org.'>info@joincountmein.org</a>.
                     </p>
                 </section>
             </div>
