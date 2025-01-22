@@ -132,7 +132,7 @@ import {Observable} from 'rxjs';
                                         <li><h4 class="mb-0" translate>Toolkit.EndEnroll.timeline.2017.Pt1</h4></li>
                                         <li><h4 class="mb-0" translate>Toolkit.EndEnroll.timeline.2017.Pt2</h4></li>
                                         <li><h4 class="mb-0" translate>Toolkit.EndEnroll.timeline.2017.Pt3-1<a class="mb-0" target="_blank" href="https://www.youtube.com/watch?v=-L4BnpEJd30" style="color:#2BB673;"><u> video </u></a>
-                                            Toolkit.EndEnroll.timeline.2017.Pt3-2<a class="mb-0" target="_blank" href="https://www.broadinstitute.org/news/learning-lessons-past-mbc-project-engages-patients-diversify-medical-research" style="color:#2BB673;"><u>article</u></a>Toolkit.EndEnroll.timeline.2017.Pt3-3</h4></li>
+                                            Toolkit.EndEnroll.timeline.2017.Pt3-2<a class="mb-0" translate target="_blank" href="https://www.broadinstitute.org/news/learning-lessons-past-mbc-project-engages-patients-diversify-medical-research" style="color:#2BB673;text-decoration: underline;">Toolkit.EndEnroll.timeline.2017.article</a>Toolkit.EndEnroll.timeline.2017.Pt3-3</h4></li>
                                         <li><h4 class="mb-0" translate>Toolkit.EndEnroll.timeline.2017.Pt4<a class="mb-0" target="_blank" href="https://cbioportal.org/" style="color:#2BB673;"><u> cBioPortal</u></a></h4></li>
                                         <li><h4 class="mb-0" translate>Toolkit.EndEnroll.timeline.2017.Pt5</h4></li>
                                     </ul>
@@ -217,7 +217,7 @@ import {Observable} from 'rxjs';
                                 <div class="card-body p-4 WrapperTL">
                                     <ul>
                                         <h1>2025</h1>
-                                        <li><h4 class="mb-0" translate>Toolkit.EndEnroll.timeline.2025.Pt1-1<a class="mb-0 text-underline"  translate target="_blank" href="https://cbioportal.org/" style="text-decoration:underline; color:#2BB673;">Toolkit.EndEnroll.timeline.2020.cBioPortal</a>
+                                        <li><h4 class="mb-0" translate>Toolkit.EndEnroll.timeline.2025.Pt1-1<a class="mb-0 text-underline"  translate target="_blank" href="https://www.ncbi.nlm.nih.gov/gap/" style="text-decoration:underline; color:#2BB673;">Toolkit.EndEnroll.timeline.2020.dbGap</a>
                                             Toolkit.EndEnroll.timeline.2020.and<a class="mb-0 text-underline" translate target="_blank" href="https://portal.gdc.cancer.gov/" style="color:#2BB673;text-decoration: underline;">Toolkit.EndEnroll.timeline.2025.gdc</a>Toolkit.EndEnroll.timeline.2025.Pt1-2</h4></li>
                                             <ul><li><h4 class="mb-0" translate>Toolkit.EndEnroll.timeline.2025.Pt1-3</h4></li></ul>
 
