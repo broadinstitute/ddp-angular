@@ -242,9 +242,9 @@ import {Observable} from 'rxjs';
 
             <div class="row">
                 <section
-                    class="Message col-lg-6 col-lg-offset-3  ">
+                    class="Message  col-lg-6 col-lg-offset-3">
                     <p class="Message-text margin-top-20" translate>Toolkit.EndEnroll.contact
-                        <a class='Link' href='https://info@joincountmein.org.'>info@joincountmein.org</a>.
+                        <a class='Link' href='mailto:info@joincountmein.org'>info@joincountmein.org</a>.
                     </p>
                 </section>
             </div>
