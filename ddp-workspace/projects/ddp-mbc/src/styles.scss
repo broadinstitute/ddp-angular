@@ -476,7 +476,7 @@ mat-icon.ddp-dropdown-arrow {
     font-size: 0.95rem;
     line-height: 1.6em;
     text-decoration: none;
-    padding-left: 80px;
+    padding-left: 90px;
     padding-right: 90px;
 }
 
@@ -665,6 +665,14 @@ mat-icon.ddp-dropdown-arrow {
     text-align: center;
     color: mat.get-color-from-palette($app-theme, 1100);
     display: block;
+}
+
+.Message-2 {
+    text-align: center;
+    color: mat.get-color-from-palette($app-theme, 1100);
+    display: block;
+    margin-top: 10px;
+    margin-bottom: 80px;
 }
 
 .Message-title {

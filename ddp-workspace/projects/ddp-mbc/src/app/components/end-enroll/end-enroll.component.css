@@ -38,7 +38,7 @@
 
 .text-underline-bold {
     text-decoration: underline;
-    font-width: bold;
+    font-weight: bold;
 }
 
 .text-underline {

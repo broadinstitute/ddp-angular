@@ -1,7 +1,7 @@
 {
     "App": {
         "Home": "Página Principal",
-        "Data": "Datos",
+        "Data": "Datos                  ",
         "FAQ": "Más Detalles/Preguntas Más Frecuentes",
         "About": "Sobre Nosotros",
         "Join": "Lista de Correo",
@@ -457,17 +457,18 @@
         "EndEnroll": {
             "TitlePart1": "El registro de nuevos participantes ha cerrado",
             "TitlePart2": "para el Proyecto de Cáncer de Mama Metastásico (MBCproject).",
-            "Heading1" : "Thank you to everyone who has participated in the project. We continue to analyze and share the data generated through your partnership, which will help continue to shape the future of research in metastatic breast cancer.",
-            "Heading2": "Count Me In (CMI) remains committed to elevating patient centered research to revolutionize the understanding of rare cancers and rare diseases, accelerate treatment discovery, and drive medical progress.",
+            "Heading1" : "Gracias a todos los que han participado en el proyecto. Continuamos analizando y compartiendo los datos generados a través de su cooperación, lo que ayudará a seguir definiendo ell futuro de la investigación del cáncer de mama metastásico.",
+            "Heading2": "sigue comprometido en elevar la investigación centrada en pacientes para  revolucionar el entendimiento de cánceres y enfermedades poco comunes, asi como acelerar el descubrimiento de tratamientos e impulsar el avance médico.",
+            "contact": "¿Tiene preguntas? Comuníquese con nosotros por correo electrónico a ",
             "timeline": {
-                "Heading": "Metastatic Breast Cancer Project Timeline",
+                "Heading": "Cronología del proyecto de Cáncer de Mama Metastásico",
                 "2015": {
-                    "October2015": "October 2015",
+                    "October": "Octubre",
                     "Pt1": "El proyecto MBC se lanzó después de un extenso período de conversaciones impactantes con pacientes y defensores de pacientes."
                 },
                 "2016": {
-                    "heading1": "Over 1,300 people with metastatic breast cancer have consented to the project in the first 9 months, giving the project team permission to obtain and analyze copies of medical records, portions of leftover tumor samples, and saliva samples",
-                    "heading2": "MBCproject was featured in a number of press articles, blog posts and videos, such as:",
+                    "heading1": "Más de 1300 personas con cáncer de mama metastásico dieron su consentimiento para participar del proyecto en los primeros 9 meses, dando permiso de obtener y analizar registros médicos, partes de muestras de tumores sobrantes y muestras de saliva.",
+                    "heading2": "El proyecto MBC apareció en numerosos artículos de prensa, publicaciones de blogs y vídeos, como:",
                     "Pt1": "The Wall Street Journal (Researchers Take Aim at Metastatic Breast Cancer and New Studies Rely on the Internet for Help Treating Cancer Patients)",
                     "Pt2": "The New York Times Magazine (Learning from the Lazarus Effect)",
                     "Pt3": "Associated Press (Crowdsourcing effort takes aim at deadliest breast cancers article and video)",
@@ -475,51 +476,73 @@
                     "Pt5": "Atlanta Black Star"
                 },
                 "2017": {
-                    "Pt1": "",
-                    "Pt2": "",
-                    "Pt3": "",
-                    "Pt4": "",
-                    "Pt5": ""
+                    "Pt1": "Proyecto comenzó a recolectar muestras de sangre para analizar el ADN tumoral en las células (“biopsias líquidas”) para ayudar a entender la evolución del tumor y resistencia a tratamientos ",
+                    "Pt2": "Ampliación de los esfuerzos de alcance comunitario en la comunidad afroamericana enfocándose en la transparencia, la creación de confianza, educación, alianzas y colaboraciones.",
+                    "Pt3-1": "Publicación de ",
+                    "Pt3-2": " y ",
+                    "Pt3-3": " sobre los esfuerzos de colaboración con algunos participantes del proyecto MBC para abordar las desigualdades raciales en la participación en investigación. Gracias a todos los involucrados y a quienes nos han ayudado a lo largo del camino.",
+                    "Pt4": "Desidentificación de datos genómicos, clínicos y notificados por los pacientes de 103 muestras tumorales de 78 pacientes incluidos en la primera publicación de datos del proyecto en ",
+                    "Pt5": "Líderes estudiantiles de Howard lanzaron el programa Campus Ambassador, llamado HUMBLE (Howard University Metastatic Breast Cancer Learning Experience), enfocado en impulsar la difusión en la comunidad de MBC"
                 },
                 "2018": {
-                    "Pt1": "",
-                    "Pt2": "",
-                    "Pt3": "",
-                    "Pt4": "",
-                    "Pt5": "",
-                    "Pt6": ""
+                    "Pt1": "Se recibieron más de 1650 kits de saliva y más de 450 muestras de sangre",
+                    "Pt2": "Presentación de póster en la Reunión Anual de la Asociación Estadounidense para la Investigación del Cáncer (AACR)",
+                    "Pt3": "Tercera publicación de datos, que suman un total de 237 muestras de 180 participantes; los investigadores han descargado el conjunto de datos más de 5000 veces y lo han visto más de 80000 veces",
+                    "Pt4": "Se presentó una nueva investigación sobre el cáncer de mama metastásico de novo utilizando datos del proyecto en el Simposio sobre Cáncer de Mama de San Antonio (SABCS)",
+                    "Pt5": "Se inició un proyecto piloto basado en la fe para involucrar a pacientes y miembros de la comunidad afroamericana en Baltimore, Maryland, a través de asociaciones con la Red de Ministerios de Salud y la Coalición de Minorías para la Medicina de Precisión.",
+                    "Pt6": "Con el apoyo de la Fundación para la Investigación del Cáncer de Mama (BCRF), recibimos fondos para abordar las barreras que enfrentan los pacientes afroamericanos al participar en estudios genómicos. Esta iniciativa tenía como objetivo fomentar la inclusión y garantizar que los beneficios de la investigación genómica sean accesibles para todos."
                 },
                 "2019": {
-                    "Pt1": "",
-                    "Pt2": "",
-                    "Pt3": "",
-                    "Pt4": ""
+                    "Pt1-1": "Datos compartidos con investigadores a través de repositorios adicionales: ",
+                    "Pt1-2": "la base de datos de genotipos y fenotipos (dbGaP)",
+                    "Pt1-3": " del Instituto Nacional de Salud (NIH) y el ",
+                    "Pt1-4": "Genomic Data Commons (GDC) ",
+                    "Pt1-5": "del Instituto Nacional del Cáncer (NCI)",
+                    "Pt2": "Asistencia a la Cumbre sobre desigualdades en el cáncer de mama metastásico en Washington, DC, organizada por la Fundación Tigerlily, con 4 embajadores del proyecto MBC que participaron en un panel para compartir sus experiencias.",
+                    "Pt3": "El proyecto se presenta en una sesión de posters destacados en el Simposio sobre cáncer de mama de San Antonio (SABCS)",
+                    "Pt4-0": "Se lanzó un ",
+                    "Pt4-1": "navegador interactivo de datos de pacientes:",
+                    "Pt4-2": " con datos de más de 1300 pacientes que completaron las 2 encuestas disponibles del MBCproject"
                 },
                 "2020": {
-                    "Pt1": "",
-                    "Pt2": ""
+                    "Pt1": "Más de 5640 pacientes se han inscrito en el proyecto MBC (La cohorte prospectiva más grande conocida de pacientes con cáncer de mama metastásico que recopila este tipo de datos.) y se han recopilado bio especímenes de más de 2000 participantes.",
+                    "Pt2-1": "Publicación de los primeros datos de secuenciación de ARN de 228 tumores en ",
+                    "and": " y ",
+                    "cBioPortal": "cBioPortal",
+                    "dbGap": "dbGap",
+                    "Pt2-2": ", que contienen información sobre el estado de casi todos los genes del genoma de las muestras tumorales que se han perfilado centrándose en el ARN en lugar del ADN. Es probable que la información sobre el ARN en tumores metastásicos proporcione información crítica sobre los mecanismos de resistencia y metástasis en el cáncer avanzado, algo que ha faltado en los análisis más centrados en el ADN tumoral que se han realizado anteriormente."
                 },
                 "2021": {
-                    "Pt1": "",
-                    "Pt2": "",
-                    "Pt3": "",
-                    "Pt4": ""
+                    "Pt1": "Proyecto MBC disponible en Español, creado en colaboración con un Consejo de Consulta Hispano y otros profesionales interesados.",
+                    "Pt2": "Dos posters presentados en la Conferencia sobre Cáncer de Mama de San Antonio de 2021",
+                    "Pt2-1": "Actualización sobre los análisis clínico-genómicos del Proyecto de Cáncer de Mama Metastásico",
+                    "Pt2-2": "Actualización sobre el progreso y los planes en el proyecto MBC, incluidas las asociaciones con pacientes, defensores, grupos de defensa, intercambio de datos abiertos y nuestro enfoque en la inscripción de pacientes subrepresentados e históricamente excluidos.",
+                    "Pt3": "Ampliación de los los esfuerzos de difusión  Hispana/Latina",
+                    "Pt4-1": "Publicación de datos adicionales  en ",
+                    "Pt4-2": ", con datos derivados de 379 muestras de 301 participantes"
                 },
                 "2023": {
-                    "Pt1": "",
-                    "Pt2": "",
-                    "Pt3": ""
+                    "Pt1-0": "Se compartió una preimpresión de ",
+                    "Pt1-1": "medRxiv",
+                    "Pt1-2": "que brinda información sobre el desarrollo del proyecto MBC y su conjunto de datos asociados, lo que permite que la comunidad de investigación del cáncer utilice el conjunto de datos del proyecto MBC en su búsqueda de investigación científica.",
+                    "Pt2-1": "Lanzamiento de un programa piloto codirigido por defensores de pacientes Afroamericanos con cáncer de mama metastásico y la ",
+                    "Pt2-2": "Fundación Tigerlily",
+                    "Pt2-3": ", destinado a llegar a pacientes afroamericanos con cáncer de mama metastásico para generar conciencia sobre la importancia de participar en el proyecto MBC.",
+                    "Pt3": "Presentación del enfoque y el marco del proyecto piloto CMI/Tigerlily Foundation en la conferencia JADPRO Live! en Orlando, Florida."
                 },
                 "2025": {
-                    "Pt1": "",
-                    "Pt2": "",
-                    "Pt3": "",
-                    "Pt3-1": "",
-                    "Pt3-2": "",
-                    "Pt3-3": "",
-                    "Pt3-4": "",
-                    "Pt3-5": "",
-                    "Pt3-6": ""
+                    "Pt1-1": "Publicación de datos finales sobre ",
+                    "gdc": "GDC",
+                    "Pt1-2": ", que incluye:",
+                    "Pt1-3": "1276 muestras de 549 participantes",
+                    "Pt2": "Presentación de los resultados iniciales del proyecto piloto CMI/Tigerlily Foundation en la 17.ª Conferencia de la AACR sobre la ciencia de las desigualdades en la salud del cáncer en minorías raciales/étnicas y personas con servicios médicos insuficientes (Conferencia de desigualdades de la AACR) en Los Ángeles, California.",
+                    "Pt3": "Impacto final de la comunidad de participantes del proyecto MBC",
+                    "Pt3-1": "5616 participantes registradas",
+                    "Pt3-2": "3735 participantes dieron su consentimiento",
+                    "Pt3-3": "1724 registros médicos recibidos",
+                    "Pt3-4": "2293 muestras de saliva recibidas",
+                    "Pt3-5": "1115 muestras de sangre recibidas",
+                    "Pt3-6": "704 muestras de tejido"
                 }
             }
         },
@@ -561,7 +584,7 @@
         "ErrorCodes": {
             "PASSWORD_RESET_LINK_EXPIRED": "El enlace para restablecer su contraseña ha caducado"
         },
-        "SessionExpired": {
+        "Expired": {
             "Text": {
                 "Pt1": "Su sesión fue cerrada por precaución de seguridad por falta de inactividad.",
                 "Pt2": "Por favor vuelva a iniciar su sesión para regresar a la ultima página en la que estaba."
@@ -603,8 +626,8 @@
             "Logout": "CERRAR SESIÓN"
         },
         "SignInOut": {
-            "SignIn": "Iniciar Sesión",
-            "SignOut": "Cerrar Sesión"
+            "SignIn": "",
+            "SignOut": ""
         },
         "LanguageSelector": {
             "LanguageSelection": "selección de idioma"
