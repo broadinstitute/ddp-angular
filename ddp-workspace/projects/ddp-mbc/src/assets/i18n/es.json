@@ -458,7 +458,7 @@
             "TitlePart1": "El registro de nuevos participantes ha cerrado",
             "TitlePart2": "para el Proyecto de Cáncer de Mama Metastásico (MBCproject).",
             "Heading1" : "Gracias a todos los que han participado en el proyecto. Continuamos analizando y compartiendo los datos generados a través de su cooperación, lo que ayudará a seguir definiendo ell futuro de la investigación del cáncer de mama metastásico.",
-            "Heading2": "Count Me In (CMI) sigue comprometido en elevar la investigación centrada en pacientes para  revolucionar el entendimiento de cánceres y enfermedades poco comunes, asi como acelerar el descubrimiento de tratamientos e impulsar el avance médico.",
+            "Heading2": "sigue comprometido en elevar la investigación centrada en pacientes para  revolucionar el entendimiento de cánceres y enfermedades poco comunes, asi como acelerar el descubrimiento de tratamientos e impulsar el avance médico.",
             "contact": "¿Tiene preguntas? Comuníquese con nosotros por correo electrónico a ",
             "timeline": {
                 "Heading": "Cronología del proyecto de Cáncer de Mama Metastásico",
@@ -584,7 +584,7 @@
         "ErrorCodes": {
             "PASSWORD_RESET_LINK_EXPIRED": "El enlace para restablecer su contraseña ha caducado"
         },
-        "SessionExpired": {
+        "Expired": {
             "Text": {
                 "Pt1": "Su sesión fue cerrada por precaución de seguridad por falta de inactividad.",
                 "Pt2": "Por favor vuelva a iniciar su sesión para regresar a la ultima página en la que estaba."
@@ -626,8 +626,8 @@
             "Logout": "CERRAR SESIÓN"
         },
         "SignInOut": {
-            "SignIn": "Iniciar Sesión",
-            "SignOut": "Cerrar Sesión"
+            "SignIn": "",
+            "SignOut": ""
         },
         "LanguageSelector": {
             "LanguageSelection": "selección de idioma"
