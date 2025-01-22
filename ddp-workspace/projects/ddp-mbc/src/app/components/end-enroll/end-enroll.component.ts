@@ -35,8 +35,8 @@ import {Observable} from 'rxjs';
 
             <div class="Intro row">
                 <section
-                    class="Message Message--intro ">
-                    <h1 class="Message-title text-underline-bold margin-enroll-end-text" translate>
+                    class="Message Message--intro">
+                    <h1 class="Message-title text-underline-bold margin-enroll-end-text" style="font-weight: bold;" translate>
                         Toolkit.EndEnroll.TitlePart1
                     </h1>
                     <h1 class="Message-title margin-enroll-end-text" translate>
@@ -241,12 +241,9 @@ import {Observable} from 'rxjs';
             </section>
 
             <div class="row">
-                <section
-                    class="Message  col-lg-6 col-lg-offset-3">
-                    <p class="Message-text margin-top-20" translate>Toolkit.EndEnroll.contact
-                        <a class='Link' href='mailto:info@joincountmein.org'>info@joincountmein.org</a>.
-                    </p>
-                </section>
+                <p class="Message-2" translate>Toolkit.EndEnroll.contact
+                    <a class='Link' href='mailto:info@joincountmein.org'>info@joincountmein.org</a>.
+                </p>
             </div>
 
         </div>
