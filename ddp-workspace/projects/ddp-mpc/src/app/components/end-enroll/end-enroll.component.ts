@@ -148,7 +148,7 @@ import {
                 <section
                     class="Message col-lg-6 col-lg-offset-3  ">
                     <p class="Message-text margin-top-20">
-                        Questions? Please reach out to us at any time at <a class='Link' href='https://info@joincountmein.org.'>info@joincountmein.org</a>.
+                        Questions? Please reach out to us at any time at <a class='Link' href='mailto:info@joincountmein.org'>info@joincountmein.org</a>.
                     </p>
                 </section>
             </div>
