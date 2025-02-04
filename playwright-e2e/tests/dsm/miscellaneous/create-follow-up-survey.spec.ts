@@ -5,7 +5,7 @@ import FollowUpSurveyPage from 'dsm/pages/follow-up-survey-page';
 import { getDate } from 'utils/date-utils';
 import { generateAlphaNumeric, generateRandomNum } from 'utils/faker-utils';
 import { waitForResponse } from 'utils/test-utils';
-import { CustomizeView, CustomizeViewID, DataFilter, Label } from 'dsm/enums';
+import { CustomizeView as CV, CustomizeViewID as ID, DataFilter, Label } from 'dsm/enums';
 import { Navigation, Study, StudyName } from 'dsm/navigation';
 import Select from 'dss/component/select';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
@@ -78,7 +78,7 @@ test.describe('Create Follow-Up Survey', () => {
   async function findParticipantWithoutBloodConsent(page: Page, participantListPage: ParticipantListPage): Promise<string> {
     const customizeViewPanel = participantListPage.filters.customizeViewPanel;
     await customizeViewPanel.open();
-    await customizeViewPanel.openColumnGroup({ columnSection: CustomizeView.RESEARCH_CONSENT_FORM_BLOOD_DRAW, stableID: CustomizeViewID.BLOOD_CONSENT });
+    await customizeViewPanel.openColumnGroup({ columnSection: CV.RESEARCH_CONSENT_FORM_BLOOD_DRAW, stableID: ID.BLOOD_CONSENT });
     await customizeViewPanel.selectColumns('Research Consent Form (Blood Draw) Columns', [Label.BLOOD_CONSENT_SURVEY_CREATED]);
     await customizeViewPanel.close();
 

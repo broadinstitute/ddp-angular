@@ -1,6 +1,6 @@
 import { expect, Locator, Page } from '@playwright/test';
 import Question from 'dss/component/Question';
-import { booleanToYesOrNo, waitForResponse } from 'utils/test-utils';
+import { booleanToYesOrNo, check, waitForResponse } from 'utils/test-utils';
 import { CancerSelector } from 'dss/pages/cancer-selector';
 import { BrainBasePage } from 'dss/pages/brain/brain-base-page';
 
@@ -192,6 +192,7 @@ export class FamilyHistory extends BrainBasePage {
 
   async clickChildDoesNotHaveChildren(): Promise<void> {
     const checkbox = this.page.locator(`//mat-checkbox[contains(., 'Not applicable, my child does not have any children.')]`);
+    await checkbox.click();
   }
 
   additionalDetails(): Locator {
