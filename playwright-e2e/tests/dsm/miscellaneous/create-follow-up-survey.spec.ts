@@ -8,9 +8,8 @@ import { waitForResponse } from 'utils/test-utils';
 import { Label } from 'dsm/enums';
 import { StudyName } from 'dsm/navigation';
 
-//TODO Replace with Pancan - since that study is ongoing
-test.describe.skip('Create Follow-Up Survey', () => {
-  const studies = [StudyName.PROSTATE];
+test.describe('Create Follow-Up Survey', () => {
+  const studies = [StudyName.PANCAN];
   let followupSurveyPage: FollowUpSurveyPage;
 
   for (const study of studies) {

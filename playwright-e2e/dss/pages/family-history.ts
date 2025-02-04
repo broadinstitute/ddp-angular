@@ -12,11 +12,17 @@ export enum Section {
   INTRODUCTION = 'Introduction',
   INSTRUCTIONS = 'Instructions',
   YOUR_PARENTS = 'Your Parents',
+  YOUR_CHILDS_PARENTS = `Your Child's Parents`,
   YOUR_PARENTS_SIBLINGS = "Your Parents' Siblings",
+  YOUR_CHILDS_PARENTS_SIBLINGS = `Your Child's Parents' Siblings`,
   YOUR_GRANDPARENTS = 'Your Grandparents',
+  YOUR_CHILDS_GRANDPARENTS = `Your Child's Grandparents`,
   YOUR_SIBLINGS = 'Your Siblings',
+  YOUR_CHILDS_SIBLINGS = `Your Child's Siblings`,
   YOUR_HALF_SIBLINGS = 'Your Half-Siblings',
+  YOUR_CHILDS_HALF_SIBLINGS = `Your Child's Half-Siblings`,
   YOUR_CHILDREN = 'Your Children',
+  YOUR_CHILDS_CHILDREN = `Your Child's Children`,
   ADDITIONAL_DETAILS = 'Additional details'
 }
 
@@ -94,13 +100,19 @@ export class FamilyHistory extends BrainBasePage {
     await this.page.getByRole('button', { name: 'Add a Child' }).click();
   }
 
-  async addFamilyMember(relationship: string, p: FamilyMember): Promise<void> {
+  async addFamilyMember(relationship: string, p: FamilyMember, customSelectorBase?: string): Promise<void> {
     if (relationship === 'PARENT1') {
       await this.page.locator('mat-card-content').filter({ hasText: 'Biological / Birth Parent 1' }).getByRole('button', { name: 'Edit' }).click();
     } else if (relationship === 'PARENT2') {
       await this.page.locator('mat-card-content').filter({ hasText: 'Biological / Birth Parent 2' }).getByRole('button', { name: 'Edit' }).click();
     }
-    const selectorBase = `FH_${relationship}`;
+
+    let selectorBase = '';
+    if (customSelectorBase) {
+      selectorBase = customSelectorBase;
+    } else {
+      selectorBase = `FH_${relationship}`;
+    }
 
     await this.page.getByTestId(`answer:${selectorBase}_ALIAS`).fill(p.nickname);
     await this.page.locator(`.picklist-answer-${selectorBase}_LIVING`).getByText(booleanToYesOrNo(p.currentlyLiving), { exact: true }).click();
@@ -167,13 +179,22 @@ export class FamilyHistory extends BrainBasePage {
     await expect(sectionTitle).toBeVisible();
   }
 
-  async clickDoNotHaveChildren(): Promise<void> {
-    const checkbox = this.page.locator(`//mat-checkbox[contains(., 'Not applicable; I do not have any children.')]`);
+  async clickDoNotHaveChildren(hasCustomTextDifference?: boolean): Promise<void> {
+    let checkbox: Locator;
+    if (hasCustomTextDifference) {
+      checkbox = this.page.locator(`//mat-checkbox[contains(., 'Not applicable, I do not have any children.')]`);
+    } else {
+      checkbox = this.page.locator(`//mat-checkbox[contains(., 'Not applicable; I do not have any children.')]`);
+    }
     await expect(checkbox).toBeVisible();
     await checkbox.click();
   }
 
+  async clickChildDoesNotHaveChildren(): Promise<void> {
+    const checkbox = this.page.locator(`//mat-checkbox[contains(., 'Not applicable, my child does not have any children.')]`);
+  }
+
   additionalDetails(): Locator {
-    return this.page.locator(`//ddp-activity-answer//textarea[@data-ddp-test='answer:FH_OTHER_FACTORS_CANCER_RISK']`);
+    return this.page.locator(`//ddp-activity-answer//textarea[contains(@data-ddp-test, 'OTHER_FACTORS_CANCER_RISK')]`);
   }
 }
