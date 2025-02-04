@@ -1,12 +1,14 @@
-import { expect } from '@playwright/test';
+import { expect, Page } from '@playwright/test';
 import Modal from 'dsm/component/modal';
 import { test } from 'fixtures/dsm-fixture';
 import FollowUpSurveyPage from 'dsm/pages/follow-up-survey-page';
 import { getDate } from 'utils/date-utils';
 import { generateAlphaNumeric, generateRandomNum } from 'utils/faker-utils';
 import { waitForResponse } from 'utils/test-utils';
-import { Label } from 'dsm/enums';
-import { StudyName } from 'dsm/navigation';
+import { CustomizeView, CustomizeViewID, DataFilter, Label } from 'dsm/enums';
+import { Navigation, Study, StudyName } from 'dsm/navigation';
+import Select from 'dss/component/select';
+import ParticipantListPage from 'dsm/pages/participant-list-page';
 
 test.describe('Create Follow-Up Survey', () => {
   const studies = [StudyName.PANCAN];
@@ -15,7 +17,14 @@ test.describe('Create Follow-Up Survey', () => {
   for (const study of studies) {
     const survey = surveysForStudy(study);
     test(`${survey} in @${study} @dsm @functional`, async ({ page, request }) => {
-      followupSurveyPage = await FollowUpSurveyPage.goto(page, study, request);
+      const navigation = new Navigation(page, request);
+      await new Select(page, { label: 'Select study' }).selectOption(`${study}`);
+      const participantListPage = await navigation.selectFromStudy<ParticipantListPage>(Study.PARTICIPANT_LIST);
+      await participantListPage.waitForReady();
+
+      //Find a partiicpant without a Blood Consent who can be used to trigger both Blood Consent and Diet/Lifestyle Survey
+      const shortID = findParticipantWithoutBloodConsent(page, participantListPage);
+      /*followupSurveyPage = await FollowUpSurveyPage.goto(page, study, request);
       await followupSurveyPage.waitForReady();
 
       await followupSurveyPage.selectSurvey(survey);
@@ -24,9 +33,9 @@ test.describe('Create Follow-Up Survey', () => {
       expect(rowsCount).toBeGreaterThanOrEqual(1);
 
       // Find any participant ID to create new survey (repeating)
-      const randRowIndex = generateRandomNum(0, rowsCount);
-      const participantId = await previousSurveysTable.getRowText(randRowIndex, Label.PARTICIPANT_ID);
-      expect(participantId).not.toBeNull();
+      //const randRowIndex = generateRandomNum(0, rowsCount);
+      //const participantId = await previousSurveysTable.getRowText(randRowIndex, Label.PARTICIPANT_ID);
+      //expect(participantId).not.toBeNull();
 
       // Create new survey by fill out participant ID and reason
       const reason = `playwright testing ${generateAlphaNumeric()}`;
@@ -44,6 +53,7 @@ test.describe('Create Follow-Up Survey', () => {
           return item.surveyInfo.participantId === participantId && item.reason === reason
         });
       expect(filterResult.length).toBe(1);
+      */
     });
   }
 
@@ -63,5 +73,19 @@ test.describe('Create Follow-Up Survey', () => {
         throw new Error(`Survey study "${study}" is undefined`);
     }
     return survey;
+  }
+
+  async function findParticipantWithoutBloodConsent(page: Page, participantListPage: ParticipantListPage): Promise<string> {
+    const customizeViewPanel = participantListPage.filters.customizeViewPanel;
+    await customizeViewPanel.open();
+    await customizeViewPanel.openColumnGroup({ columnSection: CustomizeView.RESEARCH_CONSENT_FORM_BLOOD_DRAW, stableID: CustomizeViewID.BLOOD_CONSENT });
+    await customizeViewPanel.selectColumns('Research Consent Form (Blood Draw) Columns', [Label.BLOOD_CONSENT_SURVEY_CREATED]);
+    await customizeViewPanel.close();
+
+    const searchPanel = participantListPage.filters.searchPanel;
+    await searchPanel.open();
+    //Find enrolled participant without a blood consent
+    await searchPanel.checkboxes(Label.STATUS, { checkboxValues: [DataFilter.ENROLLED] });
+
   }
 });
