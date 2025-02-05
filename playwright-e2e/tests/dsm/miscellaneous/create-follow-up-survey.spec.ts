@@ -86,5 +86,6 @@ test.describe('Create Follow-Up Survey', () => {
     await searchPanel.open();
     //Find enrolled participant without a blood consent
     await searchPanel.checkboxes(Label.STATUS, { checkboxValues: [DataFilter.ENROLLED] });
+    return 'test';
   }
 });
