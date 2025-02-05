@@ -137,7 +137,7 @@ test.describe('Adult self-enroll & child (consent) enrollment', () => {
     await expect(page.getByRole('main')).toMatchAriaSnapshot(`
         - paragraph: Introduction
         - paragraph: /This survey should take approximately \\d+-\\d+ minutes to complete and all questions are optional\\./
-        - paragraph: /Please do not hesistate to contact our team at info@joincountmein\\.org or \\d+-\\d+-\\d+ with any questions about this survey\\./
+        - paragraph: /Please do not hesistate to contact our team at info@joincountmein\\.org/
         - paragraph: Thank you for partnering with us to make this research possible.
         - group: +Additional information on survey participation and privacy
         - button "Next"
@@ -147,7 +147,7 @@ test.describe('Adult self-enroll & child (consent) enrollment', () => {
     await familyHistoryPage.assertSectionTitle(Section.INSTRUCTIONS);
     await expect(page.locator('ddp-activity-content')).toMatchAriaSnapshot(`
       - paragraph: Instructions
-      - paragraph: /In this survey we would like to know the living status, age, and cancer history of people in your biological, or blood-related, family./
+      - paragraph: /In this survey we would like to know the living status, age, and cancer history of people/
       - paragraph: /We appreciate you providing any information that you know, but it is okay if there are details you are unable to provide./
     `);
     await familyHistoryPage.next();
@@ -200,7 +200,7 @@ test.describe('Adult self-enroll & child (consent) enrollment', () => {
       cancers: [],
       ancestry: [],
       sideOfFamily: 'Biological / Birth Parent 2: Assigned Male at birth'
-    },'PARENT_SIBLING');
+    }, 'PARENT_SIBLING');
     await expect(familyHistoryPage.getNextButton()).toBeVisible();
 
     await familyHistoryPage.clickAddParentSibling();
@@ -212,7 +212,7 @@ test.describe('Adult self-enroll & child (consent) enrollment', () => {
       cancers: [],
       ancestry: [],
       sideOfFamily: 'Biological / Birth Parent 1: Assigned Female at birth'
-    },'PARENT_SIBLING');
+    }, 'PARENT_SIBLING');
     await expect(familyHistoryPage.getNextButton()).toBeVisible();
     await familyHistoryPage.next();
 
@@ -235,7 +235,7 @@ test.describe('Adult self-enroll & child (consent) enrollment', () => {
         }
       ],
       ancestry: []
-    },'GRANDPARENT');
+    }, 'GRANDPARENT');
     await expect(familyHistoryPage.getNextButton()).toBeVisible();
     await familyHistoryPage.clickAddGrandParent();
     await familyHistoryPage.addFamilyMember('GRANDPARENT', {
@@ -245,7 +245,7 @@ test.describe('Adult self-enroll & child (consent) enrollment', () => {
       ageRange: '90-94',
       cancers: [],
       ancestry: []
-    },'GRANDPARENT');
+    }, 'GRANDPARENT');
     await expect(familyHistoryPage.getNextButton()).toBeVisible();
 
     //Biological father's side
@@ -264,7 +264,7 @@ test.describe('Adult self-enroll & child (consent) enrollment', () => {
         }
       ],
       ancestry: []
-    },'GRANDPARENT');
+    }, 'GRANDPARENT');
     await expect(familyHistoryPage.getNextButton()).toBeVisible();
 
     await familyHistoryPage.clickAddGrandParent();
@@ -275,7 +275,7 @@ test.describe('Adult self-enroll & child (consent) enrollment', () => {
       ageRange: '70-74',
       cancers: [],
       ancestry: []
-    },'GRANDPARENT');
+    }, 'GRANDPARENT');
     await expect(familyHistoryPage.getNextButton()).toBeVisible();
     await familyHistoryPage.next();
 
@@ -289,7 +289,7 @@ test.describe('Adult self-enroll & child (consent) enrollment', () => {
       ageRange: '10-14',
       cancers: [],
       ancestry: []
-    },'SIBLING');
+    }, 'SIBLING');
     await expect(familyHistoryPage.getNextButton()).toBeVisible();
 
     await familyHistoryPage.clickAddSibling();
@@ -300,7 +300,7 @@ test.describe('Adult self-enroll & child (consent) enrollment', () => {
       ageRange: '10-14',
       cancers: [],
       ancestry: []
-    },'SIBLING');
+    }, 'SIBLING');
     await expect(familyHistoryPage.getNextButton()).toBeVisible();
 
     await familyHistoryPage.clickAddSibling();
@@ -311,7 +311,7 @@ test.describe('Adult self-enroll & child (consent) enrollment', () => {
       ageRange: '5-9',
       cancers: [],
       ancestry: []
-    },'SIBLING');
+    }, 'SIBLING');
     await expect(familyHistoryPage.getNextButton()).toBeVisible();
     await familyHistoryPage.next();
 
@@ -325,7 +325,7 @@ test.describe('Adult self-enroll & child (consent) enrollment', () => {
       ageRange: '<5',
       cancers: [],
       ancestry: []
-    },'HALF_SIBLING');
+    }, 'HALF_SIBLING');
     await expect(familyHistoryPage.getNextButton()).toBeVisible();
     await familyHistoryPage.next();
 
@@ -435,7 +435,7 @@ test.describe('Adult self-enroll & child (consent) enrollment', () => {
     await expect(page.getByRole('main')).toMatchAriaSnapshot(`
         - paragraph: Introduction
         - paragraph: /This survey should take approximately \\d+-\\d+ minutes to complete and all questions are optional\\./
-        - paragraph: /Please do not hesistate to contact our team at info@joincountmein\\.org or \\d+-\\d+-\\d+ with any questions about this survey\\./
+        - paragraph: /Please do not hesistate to contact our team at info@joincountmein\\.org/
         - paragraph: Thank you for partnering with us to make this research possible.
         - group: +Additional information on survey participation and privacy
         - button "Next"
@@ -445,7 +445,7 @@ test.describe('Adult self-enroll & child (consent) enrollment', () => {
     await familyHistoryPage.assertSectionTitle(Section.INSTRUCTIONS);
     await expect(page.locator('ddp-activity-content')).toMatchAriaSnapshot(`
       - paragraph: Instructions
-      - paragraph: /In this survey we would like to know the living status, age, and cancer history of people in your child's biological, or blood-related, family./
+      - paragraph: /In this survey we would like to know the living status, age, and cancer history of people/
       - paragraph: /We appreciate you providing any information that you know, but it is okay if there are details you are unable to provide./
     `);
     await familyHistoryPage.next();
@@ -498,7 +498,7 @@ test.describe('Adult self-enroll & child (consent) enrollment', () => {
       cancers: [],
       ancestry: [],
       sideOfFamily: 'Biological / Birth Parent 2: Assigned Male at birth'
-    },'PARENT_SIBLING');
+    }, 'PARENT_SIBLING');
     await expect(familyHistoryPage.getNextButton()).toBeVisible();
 
     await familyHistoryPage.clickAddParentSibling();
@@ -510,7 +510,7 @@ test.describe('Adult self-enroll & child (consent) enrollment', () => {
       cancers: [],
       ancestry: [],
       sideOfFamily: 'Biological / Birth Parent 1: Assigned Female at birth'
-    },'PARENT_SIBLING');
+    }, 'PARENT_SIBLING');
     await expect(familyHistoryPage.getNextButton()).toBeVisible();
     await familyHistoryPage.next();
 
@@ -533,7 +533,7 @@ test.describe('Adult self-enroll & child (consent) enrollment', () => {
         }
       ],
       ancestry: []
-    },'GRANDPARENT');
+    }, 'GRANDPARENT');
     await expect(familyHistoryPage.getNextButton()).toBeVisible();
     await familyHistoryPage.clickAddGrandParent();
     await familyHistoryPage.addFamilyMember('GRANDPARENT', {
@@ -543,7 +543,7 @@ test.describe('Adult self-enroll & child (consent) enrollment', () => {
       ageRange: '90-94',
       cancers: [],
       ancestry: []
-    },'GRANDPARENT');
+    }, 'GRANDPARENT');
     await expect(familyHistoryPage.getNextButton()).toBeVisible();
 
     //Biological father's side
@@ -562,7 +562,7 @@ test.describe('Adult self-enroll & child (consent) enrollment', () => {
         }
       ],
       ancestry: []
-    },'GRANDPARENT');
+    }, 'GRANDPARENT');
     await expect(familyHistoryPage.getNextButton()).toBeVisible();
 
     await familyHistoryPage.clickAddGrandParent();
@@ -573,7 +573,7 @@ test.describe('Adult self-enroll & child (consent) enrollment', () => {
       ageRange: '70-74',
       cancers: [],
       ancestry: []
-    },'GRANDPARENT');
+    }, 'GRANDPARENT');
     await expect(familyHistoryPage.getNextButton()).toBeVisible();
     await familyHistoryPage.next();
 
@@ -587,7 +587,7 @@ test.describe('Adult self-enroll & child (consent) enrollment', () => {
       ageRange: '10-14',
       cancers: [],
       ancestry: []
-    },'SIBLING');
+    }, 'SIBLING');
     await expect(familyHistoryPage.getNextButton()).toBeVisible();
 
     await familyHistoryPage.clickAddSibling();
@@ -598,7 +598,7 @@ test.describe('Adult self-enroll & child (consent) enrollment', () => {
       ageRange: '10-14',
       cancers: [],
       ancestry: []
-    },'SIBLING');
+    }, 'SIBLING');
     await expect(familyHistoryPage.getNextButton()).toBeVisible();
 
     await familyHistoryPage.clickAddSibling();
@@ -609,7 +609,7 @@ test.describe('Adult self-enroll & child (consent) enrollment', () => {
       ageRange: '5-9',
       cancers: [],
       ancestry: []
-    },'SIBLING');
+    }, 'SIBLING');
     await expect(familyHistoryPage.getNextButton()).toBeVisible();
     await familyHistoryPage.next();
 
@@ -623,7 +623,7 @@ test.describe('Adult self-enroll & child (consent) enrollment', () => {
       ageRange: '<5',
       cancers: [],
       ancestry: []
-    },'HALF_SIBLING');
+    }, 'HALF_SIBLING');
     await expect(familyHistoryPage.getNextButton()).toBeVisible();
     await familyHistoryPage.next();
 
