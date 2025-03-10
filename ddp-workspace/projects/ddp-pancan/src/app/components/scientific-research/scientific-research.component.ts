@@ -23,6 +23,7 @@ export class ScientificResearchComponent implements OnInit, AfterViewInit, OnDes
         LMS: 'http://www.lmsproject.org',
         MBC: 'https://www.mbcproject.org/',
         MBCSpanish: 'http://mbcprojectenespanol.org/',
+        trcc: ' https://trccproject.org/?referralSource=%7B%22referringSite%22%3A%22joincountmein.org%22%7D',
         MPC: 'https://mpcproject.org/',
         Osteo: 'https://osproject.org/',
         PediHCC: '/pedihcc'
