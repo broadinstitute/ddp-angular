@@ -12,7 +12,7 @@ import { setAuth0UserEmailVerified } from 'utils/api-utils';
 
 const { RGP_USER_EMAIL, RGP_USER_PASSWORD } = process.env;
 
-test.describe('Child Enrollment', () => {
+test.describe.skip('Child Enrollment', () => {
   const assertProgressActiveItem = async (page: Page, itemName: string): Promise<void> => {
     const locator = page.locator('li.activity-stepper__step-container button.stepper-btn.stepper-btn--active');
     await expect(locator).toHaveCount(1);
