@@ -78,11 +78,6 @@ const routes: Routes = [
     canActivate: [IrbGuard],
   },
   {
-    path: AppRoutes.TellUsYourStory,
-    component: TellUsYourStoryComponent,
-    canActivate: [IrbGuard],
-  },
-  {
     path: AppRoutes.AboutUs,
     component: AboutUsComponent,
     canActivate: [IrbGuard],
@@ -146,8 +141,6 @@ const routes: Routes = [
     path: AppRoutes.Password,
     component: PasswordComponent,
   },
-  { path: AppRoutes.CountMeIn,
-    redirectTo: AppRoutes.TellUsYourStory },
   {
     path: AppRoutes.StayInformed,
     component: StayInformedComponent,

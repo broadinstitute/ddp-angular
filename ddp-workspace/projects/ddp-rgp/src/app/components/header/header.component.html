@@ -161,20 +161,11 @@
         </li>
 
         <li *ngIf="!isAuthenticated" class="nav-list__item">
-          <div class="nav-control">
-            <a
-              class="nav-control__button pm get-started-link"
-              [class.get-started-link--orange]="isHeaderWhite"
-              [routerLink]="Routes.HowItWorks"
-            >
-              {{ 'Header.GetStarted' | translate }}
-            </a>
-          </div>
-
-          <div
-            class="get-started-auth only-desktop"
-            [class.get-started-auth--white]="isHeaderWhite"
-          >
+            <div class="nav-control">
+                <div
+                class="get-started-auth only-desktop"
+                [class.get-started-auth--white]="isHeaderWhite">
+            </div>
             <ddp-sign-in-out></ddp-sign-in-out>
           </div>
         </li>
