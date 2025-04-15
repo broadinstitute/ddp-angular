@@ -25,8 +25,8 @@
     "axios": "^1.6.5",
     "csv-parser": "^3.0.0",
     "dotenv": "^16.3.1",
-    "eslint": "^8.35.0",
-    "eslint-plugin-import": "^2.27.5",
+    "eslint": "^9.24.0",
+    "eslint-plugin-import": "^2.31.0",
     "uuid": "^9.0.1",
     "xlsx": "https://cdn.sheetjs.com/xlsx-0.20.1/xlsx-0.20.1.tgz"
   },
