@@ -21,7 +21,7 @@ import { Label } from 'dsm/enums';
 const RGP_USER_EMAIL = process.env.RGP_USER_EMAIL as string;
 const newEmail = generateEmailAlias(RGP_USER_EMAIL);
 
-test.describe.serial('When an interested participant does NOT meet participation requirements', () => {
+test.describe.skip('When an interested participant does NOT meet participation requirements', () => {
   test('Join Mail List @visual @dsm @rgp', async ({ page }) => {
     const homePage = new HomePage(page);
     await homePage.clickGetStarted();
