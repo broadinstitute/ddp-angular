@@ -527,7 +527,8 @@ test.describe.serial(`${StudyName.OSTEO2}: Verify expected display of participan
 
       await customizeViewPanel.assertColumnOptionDisplayed(CV.LEARN_DNA_WITH_INVITAE, ID.LEARN_DNA_WITH_INVITAE, Label.ADDENDUM_CONSENT_BOOL);
       await customizeViewPanel.assertColumnOptionDisplayed(CV.LEARN_DNA_WITH_INVITAE, ID.LEARN_DNA_WITH_INVITAE, Label.GERMLINE_CONSENT_COMPLETED);
-      await customizeViewPanel.assertColumnOptionDisplayed(CV.LEARN_DNA_WITH_INVITAE, ID.LEARN_DNA_WITH_INVITAE, Label.GERMLINE_CONSENT_CREATED);
+      // eslint-disable-next-line max-len
+      await customizeViewPanel.assertColumnOptionDisplayed(CV.LEARN_DNA_WITH_INVITAE, ID.LEARN_DNA_WITH_INVITAE, Label.GERMLINE_CONSENT_ADDENDUM_SURVEY_CREATED);
       await customizeViewPanel.assertColumnOptionDisplayed(CV.LEARN_DNA_WITH_INVITAE, ID.LEARN_DNA_WITH_INVITAE, Label.GERMLINE_CONSENT_LAST_UPDATED);
       await customizeViewPanel.assertColumnOptionDisplayed(CV.LEARN_DNA_WITH_INVITAE, ID.LEARN_DNA_WITH_INVITAE, Label.GERMLINE_SURVEY_STATUS);
       await customizeViewPanel.assertColumnOptionDisplayed(CV.LEARN_DNA_WITH_INVITAE, ID.LEARN_DNA_WITH_INVITAE, Label.SIGNATURE);

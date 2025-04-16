@@ -74,7 +74,7 @@ test.describe('Tissue Request Flow', () => {
       await test.step('Search for the right participant', async () => {
         await customizeViewPanel.open();
         await customizeViewPanel.selectColumns(CustomizeView.MEDICAL_RECORD, [Label.MR_PROBLEM]);
-        await customizeViewPanel.selectColumns(CustomizeView.DSM_COLUMNS, [Label.ONC_HISTORY_CREATED]);
+        await customizeViewPanel.selectColumns(CustomizeView.PARTICIPANT_DSM, [Label.ONC_HISTORY_CREATED]);
         testParticipantResidence = isResearchStudy ? Label.MAILING_ADDRESS : Label.YOUR_CONTACT_INFORMATION; //PE-CGS studies use the latter
         await customizeViewPanel.selectColumns(CustomizeView.RESEARCH_CONSENT_FORM, [testParticipantResidence]);
 

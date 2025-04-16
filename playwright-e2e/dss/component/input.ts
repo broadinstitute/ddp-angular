@@ -54,6 +54,7 @@ export default class Input extends WidgetBase {
   } = {}): Promise<void> {
     const { dropdownOption, type, nth, waitForSaveRequest = false, overwrite = false } = opts;
     const useType = type ? type : false;
+    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
     nth ? this.nth = nth : this.nth;
 
     const doAfterFill = async (): Promise<void> => {

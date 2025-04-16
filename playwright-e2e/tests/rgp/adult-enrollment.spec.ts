@@ -133,15 +133,12 @@ test.describe.skip('Adult Self Enrollment', () => {
     expect(headers).toEqual(orderedHeaders);
 
     const summaryCell = await table.findCell('Form', 'Tell us about your family', 'Summary');
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     await expect(summaryCell!).toHaveText('Your application is complete. Thank you for applying!');
 
     const statusCell = await table.findCell('Form', 'Tell us about your family', 'Status');
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     await expect(statusCell!).toContainText('Complete');
 
     const actionsCell = await table.findCell('Form', 'Tell us about your family', 'Actions');
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const viewButton = table.findButtonInCell(actionsCell!, { label: 'View' });
     expect(viewButton).toBeTruthy();
     // Make sure the View button in table cell is working by clicking it and checks page navigation
