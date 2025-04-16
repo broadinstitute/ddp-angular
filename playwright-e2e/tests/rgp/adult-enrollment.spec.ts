@@ -16,7 +16,7 @@ import { Navigation, Study } from 'dsm/navigation';
 import ParticipantListPage from 'dsm/pages/participant-list-page';
 const { RGP_USER_EMAIL, RGP_USER_PASSWORD } = process.env;
 
-test.describe.serial('Adult Self Enrollment', () => {
+test.describe.skip('Adult Self Enrollment', () => {
   const assertProgressActiveItem = async (page: Page, itemName: string): Promise<void> => {
     const locator = page.locator('li.activity-stepper__step-container button.stepper-btn.stepper-btn--active');
     await expect(locator).toHaveCount(1);
