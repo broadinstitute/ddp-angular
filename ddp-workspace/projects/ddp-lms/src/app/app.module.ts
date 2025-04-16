@@ -101,7 +101,7 @@ toolkitConfig.mailingListDialogUrl = 'updates';
 toolkitConfig.twitterAccountId = 'count_me_in';
 toolkitConfig.facebookGroupId = 'joincountmein';
 toolkitConfig.instagramId = 'countmein';
-toolkitConfig.lightswitchInstagramWidgetId = '814feee04df55de38ec37791efea075e';
+toolkitConfig.lightswitchInstagramWidgetId = 'b095a6f8bf80532d8e05264ca5b8c3f4';
 toolkitConfig.allowEditUserProfile = false;
 
 const translateFactory =

@@ -16,17 +16,20 @@ export class HomeComponent {
   readonly twitterUrl: string;
   readonly facebookUrl: string;
   readonly instagramUrl: string;
+  public lightswitchWidgetId: string;
 
   constructor(
     private session: SessionMementoService,
     private dialog: MatDialog,
     private analytics: AnalyticsEventsService,
-    @Inject('toolkit.toolkitConfig') private toolkitConfiguration: ToolkitConfigurationService,
+  @Inject('toolkit.toolkitConfig') private toolkitConfiguration: ToolkitConfigurationService,
     private communicationService: CommunicationService,
   ) {
     this.twitterUrl = `https://twitter.com/${this.toolkitConfiguration.twitterAccountId}`;
     this.facebookUrl = `https://www.facebook.com/${this.toolkitConfiguration.facebookGroupId}`;
     this.instagramUrl = `https://www.instagram.com/${this.toolkitConfiguration.instagramId}`;
+    this.lightswitchWidgetId =
+      `${this.toolkitConfiguration.lightswitchInstagramWidgetId}`;
   }
 
   public sendSocialMediaAnalytics(event: string): void {
