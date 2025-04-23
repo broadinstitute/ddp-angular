@@ -77,6 +77,11 @@ const routes: Routes = [
     component: SessionExpiredComponent,
     canActivate: [IrbGuard],
   },
+    {
+        path: AppRoutes.TellUsYourStory,
+        component: TellUsYourStoryComponent,
+        canActivate: [IrbGuard],
+    },
   {
     path: AppRoutes.AboutUs,
     component: AboutUsComponent,

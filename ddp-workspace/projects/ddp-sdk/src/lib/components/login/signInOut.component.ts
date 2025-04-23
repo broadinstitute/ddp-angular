@@ -10,6 +10,7 @@ import { Subscription } from 'rxjs';
     template: `
     <button class="SimpleButton"
             [ngClass]="{'SimpleButton--Scrolled': isScrolled}"
+            style="font-size: 1.1rem;"
             data-ddp-test="signInButton"
             *ngIf="!isAuthenticated"
             (click)="doSignIn()">

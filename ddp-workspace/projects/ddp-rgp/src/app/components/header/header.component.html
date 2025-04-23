@@ -25,112 +25,6 @@
       [class.app-header__nav--open]="isMobileNavShown"
     >
       <ul class="nav-list">
-        <li class="nav-list__item">
-          <div class="nav-control">
-            <button
-              class="nav-control__button"
-              [class.nav-control__button--white]="isHeaderWhite"
-              (click)="onDropdownClick('families')"
-            >
-              {{ 'Header.Families.Text' | translate }}
-              <span class="caret"></span>
-            </button>
-
-            <div
-              *ngIf="isFamiliesMenuShown"
-              #familiesMenu
-              class="nav-control__dropdown"
-            >
-              <a
-                class="nav-control__link"
-                [routerLink]="Routes.EligibilityCriteria"
-              >
-                {{ 'Header.Families.Item1' | translate }}
-              </a>
-              <a class="nav-control__link" [routerLink]="Routes.HowItWorks">
-                {{ 'Header.Families.Item2' | translate }}
-              </a>
-              <a
-                class="nav-control__link"
-                [routerLink]="Routes.PrivacyAndYourData"
-              >
-                {{ 'Header.Families.Item3' | translate }}
-              </a>
-              <a
-                class="nav-control__link"
-                [routerLink]="Routes.ForYourPhysician"
-              >
-                {{ 'Header.Families.Item4' | translate }}
-              </a>
-            </div>
-          </div>
-        </li>
-
-        <li class="nav-list__item">
-          <div class="nav-control">
-            <button
-              class="nav-control__button"
-              [class.nav-control__button--white]="isHeaderWhite"
-              (click)="onDropdownClick('researchers')"
-            >
-              {{ 'Header.Researchers.Text' | translate }}
-              <span class="caret"></span>
-            </button>
-
-            <div *ngIf="isResearchersMenuShown" class="nav-control__dropdown">
-              <a class="nav-control__link" [routerLink]="Routes.DataSharing">
-                {{ 'Header.Researchers.Item1' | translate }}
-              </a>
-            </div>
-          </div>
-        </li>
-
-        <li class="nav-list__item">
-          <div class="nav-control">
-            <button
-              class="nav-control__button"
-              [class.nav-control__button--white]="isHeaderWhite"
-              (click)="onDropdownClick('projects')"
-            >
-              {{ 'Header.Projects.Text' | translate }}
-              <span class="caret"></span>
-            </button>
-
-            <div *ngIf="isProjectsMenuShown" class="nav-control__dropdown">
-              <a class="nav-control__link" [routerLink]="Routes.LGMD">
-                {{ 'Header.Projects.Item1' | translate }}
-              </a>
-
-              <a class="nav-control__link" [routerLink]="Routes.Craniofacial">
-                {{ 'Header.Projects.Item2' | translate }}
-              </a>
-            </div>
-          </div>
-        </li>
-
-        <li class="nav-list__item">
-          <div class="nav-control">
-            <a
-              class="nav-control__button pm"
-              [class.nav-control__button--white]="isHeaderWhite"
-              [routerLink]="Routes.AboutUs"
-            >
-              {{ 'Header.AboutUs' | translate }}
-            </a>
-          </div>
-        </li>
-
-        <li class="nav-list__item">
-          <div class="nav-control">
-            <a
-              class="nav-control__button pm"
-              [class.nav-control__button--white]="isHeaderWhite"
-              [routerLink]="Routes.Faq"
-            >
-              {{ 'Header.FAQs' | translate }}
-            </a>
-          </div>
-        </li>
 
         <li class="nav-list__item">
           <div class="nav-control">
@@ -139,7 +33,7 @@
               (click)="onDropdownClick('languageList')"
             ></ddp-language-selector>
           </div>
-        </li>
+
 
         <li *ngIf="isAuthenticated" class="nav-list__item">
           <div class="nav-control">
@@ -151,16 +45,9 @@
               {{ 'Header.Dashboard' | translate }}
             </a>
           </div>
-
-          <div
-            class="get-started-auth only-desktop"
-            [class.get-started-auth--white]="isHeaderWhite"
-          >
-            <ddp-sign-in-out></ddp-sign-in-out>
-          </div>
         </li>
 
-        <li *ngIf="!isAuthenticated" class="nav-list__item">
+        <li class="nav-list__item">
             <div class="nav-control">
                 <div
                 class="get-started-auth only-desktop"
@@ -170,10 +57,6 @@
           </div>
         </li>
       </ul>
-
-      <div class="sign-in-out only-mobile pm">
-        <ddp-sign-in-out></ddp-sign-in-out>
-      </div>
     </nav>
   </header>
 </div>

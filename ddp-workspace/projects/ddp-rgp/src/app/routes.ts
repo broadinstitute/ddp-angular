@@ -6,7 +6,7 @@ export enum Routes {
   LoginLandingMode = 'login-landing/:mode',
   PasswordResetDone = 'password-reset-done',
   SessionExpired = 'session-expired',
-  TellUsYourStory = 'tell-us-your-story',
+  TellUsYourStory = '2e8b93kdml2',
   CountMeIn = 'count-me-in',
   StayInformed = 'stay-informed',
   Error = 'error',
