@@ -226,7 +226,7 @@
 
 .feeds {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     grid-gap: 4rem;
 }
 
@@ -310,7 +310,7 @@
     }
 
     .feeds {
-        grid-template-columns: 0.5fr 1fr;
+        grid-template-columns: 0.5fr;
     }
 
     .stay-informed-block {
