@@ -15,7 +15,7 @@
 }
 
 .footer {
-    background-color: mat.get-color-from-palette($app-theme, 200);
+    background-color: mat.get-color-from-palette($app-theme, 100);
     min-height: 17rem;
 }
 
@@ -25,7 +25,7 @@
     padding: 3.25rem 1.5625rem 4rem 1.5625rem;
     display: flex;
     justify-content: space-between;
-    color: mat.get-color-from-palette($app-theme, 100);
+    color: mat.get-color-from-palette($app-theme, 200);
 }
 
 .list {
