@@ -1,6 +1,5 @@
 @use '@angular/material' as mat;
 @import 'app-theme.scss';
-//@import 'app/components/end-enroll/end-enroll.component.scss';
 @import './styles/fonts.scss';
 @import './styles/buttons.scss';
 @import './styles/dialogs.scss';
@@ -148,14 +147,6 @@ p {
 
 .no-margin {
     margin: 0;
-}
-
-.fl-left {
-    float: left;
-}
-
-.fl-right {
-    float: right;
 }
 
 .only-margin-bottom {
