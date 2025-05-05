@@ -545,7 +545,7 @@ a:focus {
 
 .Footer-logoText {
     margin: 10px 0 0 10px;
-    color: mat.get-color-from-palette($app-theme, 400);
+    color: mat.get-color-from-palette($app-theme, 200);
     font-size: 18px;
     font-weight: 300;
     line-height: 19px;
@@ -563,14 +563,13 @@ a:focus {
     flex-direction: row;
     list-style-type: none;
     flex-wrap: wrap;
-    padding: 0;
 }
 
 .Footer-navItem {
     font-size: 0.95rem;
     line-height: 1.6em;
     text-decoration: none;
-    padding-left: 80px;
+    padding-left: 40px;
 }
 
 .Footer-navItem--first {
@@ -820,7 +819,7 @@ a:focus {
     position: relative;
     min-height: 100%;
     margin: 0 35px;
-    padding-bottom: 250px;
+    padding-bottom: 80px;
     background-color: mat.get-color-from-palette($app-theme, 100);
     z-index: 1;
 }
