@@ -68,12 +68,6 @@
                 "Part2": "visit our site"
             }
         },
-        "EndEnrollment": {
-            "Title": "Thank you for your interest in the Brain Tumor Project",
-            "Timeline": {
-                "2018-text1": "Brain Tumor  launched through collaboration with patients and advocates.. from en.json"
-            }
-        },
         "Participation": {
             "Title": "What does participation look like?",
             "Survey": [
@@ -947,7 +941,7 @@
             "Organization": "Count Me In"
         },
         "Header": {
-            "HeaderLogo": "Metastatic<br>Breast Cancer<br>Project",
+            "HeaderLogo": "The Brain Tumor Project",
             "DataRelease": "Data Release",
             "LearnMore": "Learn More",
             "CountMeIn": "count me <span class=\"icon-silhouette\"></span>n"
