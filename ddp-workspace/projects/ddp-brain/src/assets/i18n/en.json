@@ -717,7 +717,7 @@
             "Logout": "LOG OUT"
         },
         "SignInOut": {
-            "SignIn": "Log In",
+            "SignIn": "",
             "SignOut": "Log Out"
         },
         "UserActivities": {
@@ -791,7 +791,7 @@
                 "City": "City",
                 "State": "State"
             },
-            "Form" : {
+            "Form": {
                 "OtherPhysician": "Other physician",
                 "OtherInstitution": "Other institution"
             },
@@ -920,8 +920,8 @@
             "NoUsers": "No participants are found",
             "NoData": "No participants data is entered",
             "DashboardButton": "Dashboard",
-            "MinQueryLengthHint":  "Enter at least {{length}} characters",
-            "DashboardButtonLabel":  "Navigates to dashboard for the user {{user}}",
+            "MinQueryLengthHint": "Enter at least {{length}} characters",
+            "DashboardButtonLabel": "Navigates to dashboard for the user {{user}}",
             "WarningSize": "You can see only {{count}} participant from {{totalCount}}. Specify your search request."
         },
         "SubjectPanel": {
@@ -934,6 +934,35 @@
         "AdminActionPanel": {
             "ActivityEdit": "Click the Edit button to temporarily unlock for editing. Your edits will be saved as you go. When you click submit or navigate away, the activity will be locked again automatically.",
             "EditButton": "Edit"
+        }
+    },
+    "Toolkit": {
+        "Common": {
+            "Organization": "Count Me In"
+        },
+        "Header": {
+            "HeaderLogo": "The Brain Tumor Project",
+            "DataRelease": "Data Release",
+            "LearnMore": "Learn More",
+            "CountMeIn": "count me <span class=\"icon-silhouette\"></span>n"
+        },
+        "Footer": {
+            "FooterLogo": "The Brain Tumor Project",
+            "Home": "Home",
+            "Data": "Data Release",
+            "FAQ": "More Details/FAQ",
+            "About": "About Us",
+            "Join": "Join Mailing List",
+            "NewsBlog": "",
+            "Top": "▴ Back to top",
+            "Contacts": {
+                "ContactUs": "Contact Us:",
+                "Address": "415 Main St, Cambridge, MA",
+                "Zip": "02142, United States"
+            },
+            "FacebookLink": "https://www.facebook.com/joincountmein",
+            "TwitterLink": "https://twitter.com/count_me_in",
+            "InstagramLink": "https://www.instagram.com/countmein"
         }
     }
 }

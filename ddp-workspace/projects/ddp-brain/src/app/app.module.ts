@@ -36,6 +36,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { ModalImageComponent } from './components/modal-image/modal-image.component';
 import { PrismComponent } from './components/prism/prism.component';
+import { EndEnrollComponent } from './components/end-enroll/end-enroll.component';
 
 const baseElt = document.getElementsByTagName('base');
 
@@ -63,13 +64,24 @@ toolkitConfig.activityUrl = AppRoutes.Activity;
 toolkitConfig.errorUrl = AppRoutes.Error;
 toolkitConfig.stayInformedUrl = AppRoutes.StayInformed;
 toolkitConfig.mailingListDialogUrl = AppRoutes.MailingList;
-toolkitConfig.phone = '651-229-3480';
-toolkitConfig.infoEmail = 'info@braintumorproject.org';
-toolkitConfig.dataEmail = 'data@braintumorproject.org';
+toolkitConfig.phone = '857-500-6264';
+toolkitConfig.infoEmail = 'info@joincountmein.org';
+toolkitConfig.dataEmail = 'info@joincountmein.org';
 toolkitConfig.twitterAccountId = 'count_me_in';
 toolkitConfig.facebookGroupId = 'joincountmein';
 toolkitConfig.instagramId = 'countmein';
 toolkitConfig.countMeInUrl = 'https://joincountmein.org/';
+toolkitConfig.endEnroll = true;
+toolkitConfig.showDataRelease = false;
+toolkitConfig.showEnroll = false;
+toolkitConfig.showLearnMore = false;
+toolkitConfig.showInfoForPhysicians = false;
+toolkitConfig.showEnroll = false;
+toolkitConfig.showLearnMore = false;
+toolkitConfig.showAboutUs = false;
+toolkitConfig.showFAQ = false;
+toolkitConfig.showHome = false;
+toolkitConfig.showJoinMailingList = false;
 
 export const sdkConfig = new ConfigurationService();
 sdkConfig.backendUrl = DDP_ENV.basePepperUrl;
@@ -136,6 +148,7 @@ export function translateFactory(translate: TranslateService, injector: Injector
         ModalImageComponent,
         LearnMoreSectionComponent,
         PrismComponent,
+        EndEnrollComponent
     ],
     imports: [
         BrowserModule,
@@ -169,11 +182,4 @@ export function translateFactory(translate: TranslateService, injector: Injector
     ],
     bootstrap: [AppComponent]
 })
-export class AppModule {
-    constructor(private analytics: AnalyticsEventsService) {
-        this.analytics.analyticEvents.subscribe((event: AnalyticsEvent) => {
-            ga('send', event);
-            ga('platform.send', event);
-        });
-    }
-}
+export class AppModule {}
