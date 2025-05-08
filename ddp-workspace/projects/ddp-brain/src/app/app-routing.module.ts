@@ -58,11 +58,7 @@ const routes: Routes = [
     },
     {
         path: '',
-        component: EndEnrollComponent,
-        pathMatch: 'full',
-        canActivate: [
-            IrbGuard
-        ]
+        component: EndEnrollComponent
     },
     {
         path: '**',
