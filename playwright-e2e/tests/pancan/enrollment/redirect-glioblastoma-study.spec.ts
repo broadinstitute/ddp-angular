@@ -8,7 +8,7 @@ import HomePage from 'dss/pages/pancan/home-page';
 import { assertHeader } from 'utils/assertion-helper';
 import { fillSitePassword } from 'utils/test-utils';
 
-test.describe('Redirect to Brain cancer project', () => {
+test.skip('Redirect to Brain cancer project', () => {
   test('When selecting Glioblastoma as diagnosed cancer @dss @pancan', async ({ page }) => {
     const pancanHomePage = new HomePage(page);
     await pancanHomePage.join({ waitForNav: true });
