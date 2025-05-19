@@ -7,7 +7,7 @@ import { take } from 'rxjs/operators';
 @Component({
     selector: 'toolkit-password',
     template: `
-        <toolkit-header [showButtons]="true"
+        <toolkit-header [showButtons]="false"
                         [showUserMenu]="false">
         </toolkit-header>
         <div class="Wrapper">

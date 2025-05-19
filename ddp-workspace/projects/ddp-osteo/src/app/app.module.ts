@@ -1,20 +1,19 @@
-import { NgModule, Injector, APP_INITIALIZER } from '@angular/core';
+import {NgModule, Injector, APP_INITIALIZER, Inject, RendererFactory2, Renderer2} from '@angular/core';
 import { BrowserModule, HammerModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { LOCATION_INITIALIZED, CommonModule } from '@angular/common';
+import {LOCATION_INITIALIZED, CommonModule, DOCUMENT} from '@angular/common';
 import { AppRoutingModule } from './app-routing.module';
 
 import { TranslateService } from '@ngx-translate/core';
+import { OsteoConfigurationService } from './services/osteoConfiguration.service';
+import { LanguageHostRedirector } from './services/languageHostRedirector.service';
 
 import {
     DdpModule,
-    ConfigurationService,
-    AnalyticsEventsService,
-    AnalyticsEvent,
     LoggingService,
     SubmitAnnouncementService,
     SubmissionManager,
-    LanguageService,
+    LanguageService, SessionMementoService
 } from 'ddp-sdk';
 
 import { ToolkitModule, ToolkitConfigurationService } from 'toolkit';
@@ -46,6 +45,7 @@ import { WorkflowStartComponent } from './components/workflow-start/workflow-sta
 import { LandingPageComponent } from './components/landing-page/landing-page.component';
 import { PrequalifierService } from './services/prequalifier.service';
 import { GovernedUserService } from './services/governed-user.service';
+import { NavigationEnd, Router } from '@angular/router';
 
 const baseElt = document.getElementsByTagName('base');
 
@@ -56,7 +56,7 @@ if (baseElt) {
 
 declare const DDP_ENV: any;
 
-declare const ga: (...args: any[]) => void;
+declare const gtag: (...args: any[]) => void;
 
 export const tkCfg = new ToolkitConfigurationService();
 tkCfg.studyGuid = DDP_ENV.studyGuid;
@@ -97,7 +97,7 @@ tkCfg.useMultiParticipantDashboard = true;
 tkCfg.lightswitchInstagramWidgetId = 'b095a6f8bf80532d8e05264ca5b8c3f4';
 tkCfg.countMeInUrl = 'https://joincountmein.org/';
 
-export const config = new ConfigurationService();
+export const config = new OsteoConfigurationService();
 config.backendUrl = DDP_ENV.basePepperUrl;
 config.auth0Domain = DDP_ENV.auth0Domain;
 config.auth0ClientId = DDP_ENV.auth0ClientId;
@@ -129,6 +129,12 @@ config.alwaysShowQuestionsCountInModalNestedActivity = true;
 config.validateOnlyVisibleSections = true;
 config.institutionsAdditionalFields = { PHYSICIAN: ['COUNTRY'] };
 config.updatePreferredLanguageForGovernedParticipants = true;
+
+function appInitializerFactory(translate: TranslateService, injector: Injector, logger: LoggingService,
+                               language: LanguageService,
+                               _redirector: LanguageHostRedirector): () => Promise<any> {
+    return translateFactory(translate, injector, logger, language);
+}
 
 export function translateFactory(
     translate: TranslateService,
@@ -214,8 +220,8 @@ export function translateFactory(
         },
         {
             provide: APP_INITIALIZER,
-            useFactory: translateFactory,
-            deps: [TranslateService, Injector, LoggingService, LanguageService],
+            useFactory: appInitializerFactory,
+            deps: [TranslateService, Injector, LoggingService, LanguageService, LanguageHostRedirector],
             multi: true,
         },
         SubmitAnnouncementService,
@@ -225,11 +231,49 @@ export function translateFactory(
     ],
     bootstrap: [AppComponent],
 })
+
 export class AppModule {
-    constructor(private analytics: AnalyticsEventsService) {
-        this.analytics.analyticEvents.subscribe((event: AnalyticsEvent) => {
-            ga('send', event);
-            ga('platform.send', event);
+    private renderer: Renderer2;
+
+    constructor(
+        @Inject(DOCUMENT) private document: Document,
+        rendererFactory: RendererFactory2,
+        private session: SessionMementoService,
+        private router: Router) {
+        this.renderer = rendererFactory.createRenderer(null, null);
+        this.router.events.subscribe(event => {
+            if (!this.session.isAuthenticatedSession() && event instanceof NavigationEnd) {
+                if (event.url !== 'undefined' &&
+                    (event.url.includes('about-us') || event.url.includes('more-details') || event.url.includes('participation') ||
+                        event.url.includes('scientific-impact') || event.url.includes('physicians') ||
+                        event.url.includes('count-me-in'))) {
+                    //console.log('Emitting navigation event: {} from AppMod to TAG: {}', event.url, config.projectGAToken);
+                    this.injectScripts();
+                    gtag('config', config.projectGAToken, {
+                        page_path: event.url
+                    });
+                }
+            }
         });
     }
+
+
+    injectScripts(): void {
+        const gtmScriptTag = this.renderer.createElement('script');
+        gtmScriptTag.type = 'text/javascript';
+        gtmScriptTag.src = 'https://www.googletagmanager.com/gtag/js?id=' + config.projectGAToken;
+        this.renderer.appendChild(this.document.body, gtmScriptTag);
+
+        const gtagInitScript = this.renderer.createElement('script');
+        gtagInitScript.type = 'text/javascript';
+        gtagInitScript.text = `window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+          dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+        `;
+        this.renderer.appendChild(this.document.body, gtagInitScript);
+    }
+
 }

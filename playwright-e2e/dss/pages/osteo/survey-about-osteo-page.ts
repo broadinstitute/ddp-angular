@@ -76,6 +76,10 @@ export default class SurveyAboutOsteoPage extends OsteoPageBase {
     return new Question(this.page, { cssClassAttribute: '.picklist-answer-THERAPIES_RECEIVED'});
   }
 
+  hasEverRelapsed(): Question {
+    return new Question(this.page, { cssClassAttribute: '.picklist-answer-EVER_RELAPSED'});
+  }
+
   /**
    * <br> Question: Are you currently being treated for osteosarcoma?
    * <br> Type: Radiobutton

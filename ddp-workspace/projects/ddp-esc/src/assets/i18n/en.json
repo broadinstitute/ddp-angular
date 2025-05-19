@@ -437,7 +437,7 @@
             "Logout": "LOG OUT"
         },
         "SignInOut": {
-            "SignIn": "Sign In",
+            "SignIn": "",
             "SignOut": "Sign Out"
         },
         "UserActivities": {

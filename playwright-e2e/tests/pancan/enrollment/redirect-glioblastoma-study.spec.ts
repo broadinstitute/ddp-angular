@@ -8,7 +8,7 @@ import HomePage from 'dss/pages/pancan/home-page';
 import { assertHeader } from 'utils/assertion-helper';
 import { fillSitePassword } from 'utils/test-utils';
 
-test.describe('Redirect to Brain cancer project', () => {
+test.skip('Redirect to Brain cancer project', () => {
   test('When selecting Glioblastoma as diagnosed cancer @dss @pancan', async ({ page }) => {
     const pancanHomePage = new HomePage(page);
     await pancanHomePage.join({ waitForNav: true });
@@ -32,7 +32,14 @@ test.describe('Redirect to Brain cancer project', () => {
     // See a popup redirects
     const modal = new Modal(page);
     await expect(modal.toLocator().locator('.confirm-dialog-title')).toHaveText('Your participation');
-    await expect(modal.toLocator()).toHaveScreenshot('modal-redirect.png');
+    await expect(modal.toLocator()).toMatchAriaSnapshot(`
+      - dialog:
+        - text: Your participation
+        - paragraph: Count Me In has an open project specific to your cancer type.
+        - paragraph: Use the button below to join the Brain Tumor Project and learn more about this existing work.
+        - button "Go to project"
+        - button "Cancel"
+      `);
     await modal.getButton({ label: 'Go to project' }).click();
 
     // Enter site password

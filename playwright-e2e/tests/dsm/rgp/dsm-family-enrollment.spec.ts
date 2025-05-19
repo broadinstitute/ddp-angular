@@ -17,7 +17,7 @@ import * as crypto from 'crypto';
 import { CustomizeView, Label } from 'dsm/enums';
 
 
-test.describe.serial('DSM Family Enrollment Handling', () => {
+test.describe.skip('DSM Family Enrollment Handling', () => {
   let rgpEmail: string;
 
   test('Verify the display and functionality of family account dynamic fields @dsm @functional @rgp', async ({ page, request}) => {

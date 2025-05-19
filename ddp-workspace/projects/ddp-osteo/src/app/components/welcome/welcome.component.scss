@@ -226,8 +226,9 @@
 
 .feeds {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     grid-gap: 4rem;
+    text-align: center;
 }
 
 .twitter-feed {
@@ -310,7 +311,7 @@
     }
 
     .feeds {
-        grid-template-columns: 0.5fr 1fr;
+        grid-template-columns: 0.5fr;
     }
 
     .stay-informed-block {

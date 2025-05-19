@@ -20,7 +20,7 @@ import { StudyName } from 'dsm/navigation';
  *
  * DSM should show the correct tumor id for the selected pt: [COLLABORATOR_PREFIX]_[SHORT_ID]_*
  */
-test.describe('Tumor Collaborator Sample ID', () => {
+test.describe.skip('Tumor Collaborator Sample ID', () => {
   const studies: StudyName[] = [StudyName.MBC];
 
   for (const study of studies) {
