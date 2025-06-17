@@ -246,12 +246,14 @@
             },
             "ClosingText": {
                 "Part1": "Nosotros haremos el resto",
-                "Part2": " Con su permiso, obtendremos copias de sus historias clínicas y le enviaremos un kit de saliva."
+                "Part2": " Con su permiso, obtendremos copias de sus historias clínicas y le enviaremos un kit de saliva.",
+                "Part3": "Su salud y bienestar son lo primero. Entendemos que vivir con una enfermedad o discapacidad puede tener desafíos, y le invitamos a unirse a nuestro proyecto cuando le sea más fácil."
             },
             "IframeTitle": "Video de YouTube sobre cómo participar"
         },
         "ParticipateSection": {
             "Title": "Cómo participar",
+            "Intro": "Su salud y bienestar son lo primero. Entendemos que vivir con una enfermedad o discapacidad puede tener desafíos, y le invitamos a unirse a nuestro proyecto cuando le sea más fácil.",
             "Steps": [
                 {
                     "Title": "PASO 1",
@@ -350,7 +352,7 @@
             },
             {
                 "step": "Obtenga más información sobre su ADN normal, sí así lo desea",
-                "Text": "El Proyecto sobre Osteosarcoma también se asoció con Invitae para secuenciar y compartir información sobre ADN de línea germinal (o ADN “normal”) a partir de muestras de saliva. Durante el proyecto, los participantes podrán decidir si desean proporcionar una muestra de saliva adicional para adquirir más información sobre su ADN normal o el de su hijo(a) y consultar con un asesor genético para comprender estos resultados. Si el participante no desea formar parte de este proceso, sus datos no se compartirán con Invitae. Este proceso no está disponible para los participantes de Canadá, ya que Invitae no está autorizada a prestar servicios de asesoramiento genético allí.",
+                "Text": "Los participantes del proyecto OS podrán decidir si desean obtener más información sobre su ADN germinal (o ADN \"normal\") o el de su hijo/a mediante asesoramiento genético y pruebas genéticas de línea germinal a través de una colaboración con Genome Medical e Invitae. La información obtenida de las pruebas puede incluir detalles que indiquen el riesgo de cáncer para el participante y su familia. Esta parte del proyecto está disponible para los participantes residentes en EE. UU. (dentro de los 50 estados) de quienes hayamos recibido una muestra de sangre o saliva y para quienes una institución médica nos haya enviado una muestra de tumor. Para participar en esta parte del estudio, los participantes deberán firmar un formulario de consentimiento adicional (enviado por correo electrónico), programar una cita telefónica con un asesor genético de Genome Medical y enviar una muestra de saliva adicional. El asesor genético ayudará al participante a decidir si se realiza o no la prueba y le ayudará a comprender los resultados. Si un participante no participa en este proceso, sus datos no se compartirán con Genome Medical e Invitae.",
                 "ImageAlt": "Computer screen displaying online survey"
             }
         ]
@@ -655,7 +657,7 @@
                         "Paragraphs": [
                             "<a id='Pbenefits'>Si bien no existen beneficios tácitos que los individuos puedan recibir por su participación en el Proyecto sobre Osteosarcoma, el proyecto ofrece algunas oportunidades opcionales para involucrarse más que podrían interesarles a aquellos participantes que deseen obtener más información acerca de las muestras que proporcionan.</a>",
                             "<span>&#8226; <b>Reciba información sobre los hallazgos obtenidos de la muestra de su tumor (opcional): </b></span>si el participante decide compartir muestras de tejido archivadas con el proyecto, es posible que podamos comunicarle información de la secuenciación genómica de la muestra del tumor. Esta información tiene por objeto resaltar cómo las muestras del participante contribuyen a la investigación y no tendrá ninguna repercusión en su tratamiento o pronóstico. Debido a ciertas restricciones reglamentarias, no podemos compartir los resultados con los participantes de Nueva York y Canadá.",
-                            "<span>&#8226; <b>Obtenga más información sobre su ADN normal (opcional): </b></span>el proyecto también se asoció con Invitae para secuenciar y compartir información sobre ADN de línea germinal (o ADN “normal”) a partir de muestras de saliva. Durante el proyecto, los participantes podrán decidir si desean proporcionar una muestra de saliva adicional para adquirir más información sobre su ADN normal y consultar con un asesor genético para comprender estos resultados. Si el participante no desea formar parte de este proceso, sus datos no se compartirán con Invitae. Este proceso no está disponible para los participantes de Canadá, ya que Invitae no está autorizada a prestar servicios de asesoramiento genético allí."
+                            "<span>&#8226; <b>Obtenga más información sobre su ADN normal (opcional): </b></span>Los participantes del Osproject pueden decidir si desean obtener más información sobre su ADN germinal (o ADN \"normal\") o el de su hijo/a mediante asesoramiento genético y pruebas genéticas de línea germinal a través de una colaboración con Genome Medical e Invitae. La información de las pruebas puede incluir detalles que indiquen el riesgo de cáncer para el participante y su familia. Esta parte del proyecto está disponible para los participantes residentes en EE. UU. (dentro de los 50 estados) de quienes hayamos recibido una muestra de sangre o saliva y para quienes una institución tratante nos haya enviado una muestra de tumor. Para participar en esta parte del estudio, los participantes deberán firmar un formulario de consentimiento adicional (enviado por correo electrónico), programar una cita telefónica con un asesor genético de Genome Medical y luego enviar una muestra de saliva adicional. El asesor genético ayudará al participante a decidir si se realiza o no la prueba y le ayudará a comprender los resultados. Si un participante no participa en este proceso, sus datos no se compartirán con Genome Medical e Invitae"
                         ]
                     },
                     {
@@ -731,9 +733,15 @@
                     {
                         "Question": "¿Quiénes utilizarán las muestras de los participantes y consultarán su información?",
                         "Paragraphs": [
-                            "Las muestras y la información médica de los participantes estarán a disposición del equipo y los investigadores del estudio de Count Me In, el Broad Institute del MIT y Harvard y Dana-Farber Cancer Institute. En el formulario de consentimiento encontrará más detalles sobre cómo protegemos la información de los participantes y sus muestras.",
+                            "Las muestras y la información sanitaria de los participantes estarán disponibles para el personal del estudio y los investigadores de Count Me In, el Broad Institute del MIT y Harvard, el Dana-Farber Cancer Institute y la Universidad de Chicago. Puede encontrar más detalles sobre cómo protegemos la información y las muestras de los participantes en el formulario de consentimiento.",
                             "Después de que eliminemos el nombre y cualquier otro tipo de información que pueda identificar a los participantes, compartiremos los resultados obtenidos gracias a su participación con la comunidad de investigación a través de reconocidas bases de datos científicos de acceso público (por ejemplo, las bases de datos de los Institutos Nacionales de la Salud y el Instituto Nacional del Cáncer, como el Genomic Data Commons, el dbGaP y el cBioPortal for Cancer Genomics). Algunas de estas bases de datos son de acceso público, y otras están restringidas a investigadores acreditados.",
-                            "Si la secuenciación de línea germinal de un participante se realiza con Invitae, esta empresa recibirá su nombre e información de contacto. Los datos e informes generados por Invitae se compartirán con el participante y con el personal del estudio que esté asociado con el proyecto. Los resultados de línea germinal de Invitae no se compartirán en bases de datos científicas."
+                            "Si un participante se somete a una secuenciación de línea germinal con Genome Medical e Invitae, se le proporcionará a Genome Medical e Invitae su nombre y datos de contacto. Los datos y el informe generados por Invitae se compartirán con el participante y con el equipo de estudio asociado al proyecto. Los resultados de la secuenciación de línea germinal de Invitae no se compartirán en bases de datos científicas."
+                        ]
+                    },
+                    {
+                        "Question": "¿Cómo se protege la privacidad de los participantes?",
+                        "Paragraphs": [
+                            "Toda investigación, incluida la genética del cáncer, conlleva riesgos para la privacidad de los participantes. Contamos con procedimientos y medidas de seguridad diseñados para minimizar los riesgos y proteger la confidencialidad de la información de los participantes. Solo el personal capacitado del estudio tiene acceso a esta información. Cuando enviamos datos a bancos centrales de datos u otros investigadores, los nombres u otra información que pueda utilizarse para identificar fácilmente a los participantes se eliminarán y se reemplazarán por un código numérico. Los participantes no serán identificados en ninguna publicación ni presentación. Puede encontrar una descripción de cómo recopilamos datos, qué elementos de los datos divulgamos y cómo es una divulgación de datos en nuestra <a href=\"/scientific-impact\" class=\"Link\">página de Impacto Científico</a>."
                         ]
                     }
                 ]
