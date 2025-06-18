@@ -53,6 +53,12 @@
             "Text": "With your help, patients can be the driving force behind cancer research."
         }
     },
+    "EndEnrollment": {
+        "Title": "Thank you for your interest in the Metastatic Prostate Cancer Project",
+        "Timeline": {
+            "2018-text1": "MPCproject launched through collaboration with patients and advocates.. from en.json"
+        }
+    },
     "DataRelease": {
         "Title": "MPCproject Data",
         "ViewDataButton": "VIEW THE MPCPROJECT DATA",
@@ -456,7 +462,7 @@
             "Logout": "LOG OUT"
         },
         "SignInOut": {
-            "SignIn": "Sign In",
+            "SignIn": "",
             "SignOut": "Sign Out"
         },
         "LanguageSelector": {

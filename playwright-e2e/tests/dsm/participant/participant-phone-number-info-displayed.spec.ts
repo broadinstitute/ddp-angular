@@ -1,4 +1,4 @@
-import { expect } from '@playwright/test';
+import { expect, Locator } from '@playwright/test';
 import { ActivityVersion, SurveyName } from 'dsm/component/tabs/enums/survey-data-enum';
 import { CustomizeView, CustomizeViewID as ID, DataFilter, Label, Tab } from 'dsm/enums';
 import { Navigation, Study, StudyName } from 'dsm/navigation';
@@ -68,19 +68,7 @@ test.describe(`Confirm that participant phone number information is displayed @d
         const surveyDataTab = await participantPage.tablist(Tab.SURVEY_DATA).click<SurveyDataTab>();
 
         //Some studies have more than 1 research consent activity version e.g. OS2
-        const consentFormVersionOne = await surveyDataTab.getActivity({
-          activityName: SurveyName.RESEARCH_CONSENT_FORM,
-          activityVersion: ActivityVersion.ONE,
-          checkForVisibility: false
-        });
-
-        const consentFormVersionThree = await surveyDataTab.getActivity({
-          activityName: SurveyName.RESEARCH_CONSENT_FORM,
-          activityVersion: ActivityVersion.THREE,
-          checkForVisibility: false
-        });
-
-        const researchConsentForm = await consentFormVersionOne.isVisible() ? consentFormVersionOne : consentFormVersionThree;
+        const researchConsentForm = await getDisplayedConsent(surveyDataTab);
         const mailingAddress = await surveyDataTab.getActivityQuestion({
           activity: researchConsentForm,
           questionShortID: Label.MAILING_ADDRESS_SHORT_ID
@@ -172,3 +160,13 @@ test.describe(`Confirm that participant phone number information is displayed @d
     })
   }
 })
+
+async function getDisplayedConsent(surveyDataTab: SurveyDataTab): Promise<Locator> {
+  const researchConsent = await surveyDataTab.getActivity({
+    activityName: SurveyName.RESEARCH_CONSENT_FORM,
+    checkForVisibility: false,
+    getLatestVersion: true,
+  });
+  console.log(`DisplayedConsent: ${researchConsent}`);
+  return researchConsent;
+}

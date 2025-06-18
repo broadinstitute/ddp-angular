@@ -4,7 +4,7 @@ import { ToolkitConfigurationService } from 'toolkit';
 @Component({
     selector: 'app-about-us',
     template: `
-  <toolkit-header [showButtons]="true"></toolkit-header>
+  <toolkit-header [showButtons]="false"></toolkit-header>
   <div class="Wrapper">
     <div class="PageHeader">
       <div class="PageHeader-image">

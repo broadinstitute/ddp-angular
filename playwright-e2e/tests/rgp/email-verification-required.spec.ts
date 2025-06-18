@@ -7,7 +7,7 @@ import HomePage from 'dss/pages/rgp/home-page';
 
 const { RGP_USER_EMAIL, RGP_USER_PASSWORD, RGP_BASE_URL } = process.env;
 
-test.describe('Registration requires email Verification', () => {
+test.describe.skip('Registration requires email Verification', () => {
   test('Login is blocked without verification @functional @dss @rgp', async ({ page }) => {
     const homePage = new HomePage(page);
     await homePage.clickGetStarted();

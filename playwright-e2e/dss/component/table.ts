@@ -219,7 +219,11 @@ export default class Table {
     return allColumnNames.findIndex((text: string) => exactMatch ? text.trim() === column : new RegExp(column, 'i').test(text));
   }
 
-  getHeaderByName(name: RegExp | string): Locator {
+  getHeaderByName(name: RegExp | string, opts: { exactMatch?: boolean } = {}): Locator {
+    const { exactMatch = false } = opts;
+    if (exactMatch) {
+      return this.headerLocator().getByText(name, { exact: true });
+    }
     return this.headerLocator().filter({hasText: name});
   }
 

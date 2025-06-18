@@ -9,8 +9,6 @@ import { TranslateService } from '@ngx-translate/core';
 import {
   DdpModule,
   ConfigurationService,
-  AnalyticsEventsService,
-  AnalyticsEvent,
   LoggingService
 } from 'ddp-sdk';
 
@@ -24,6 +22,7 @@ import { WelcomeComponent } from './components/welcome/welcome.component';
 import { MoreDetailsComponent } from './components/more-details/more-details.component';
 import { AboutUsComponent } from './components/about-us/about-us.component';
 import { DataReleaseComponent } from './components/data-release/data-release.component';
+import { EndEnrollComponent } from './components/end-enroll/end-enroll.component';
 
 const baseElt = document.getElementsByTagName('base');
 
@@ -53,16 +52,25 @@ toolkitConfig.errorUrl = 'error';
 toolkitConfig.stayInformedUrl = 'stay-informed';
 toolkitConfig.internationalPatientsUrl = 'international-patients';
 toolkitConfig.mailingListDialogUrl = 'updates';
-toolkitConfig.phone = '651-293-5029';
-toolkitConfig.infoEmail = 'info@mpcproject.org';
-toolkitConfig.dataEmail = 'data@mpcproject.org';
+toolkitConfig.phone = '857-500-6264';
+toolkitConfig.infoEmail = 'info@joincountmein.org';
+toolkitConfig.dataEmail = 'info@joincountmein.org';
 toolkitConfig.twitterAccountId = 'count_me_in';
 toolkitConfig.instagramId = 'countmein';
 toolkitConfig.facebookGroupId = 'joincountmein';
 toolkitConfig.cBioPortalLink = 'https://www.cbioportal.org/study/summary?id=mpcproject_broad_2021';
 toolkitConfig.countMeInUrl = 'https://joincountmein.org/';
 toolkitConfig.showDataRelease = true;
-toolkitConfig.showInfoForPhysicians = true;
+toolkitConfig.endEnroll = true;
+toolkitConfig.showEnroll = false;
+toolkitConfig.showLearnMore = false;
+toolkitConfig.showInfoForPhysicians = false;
+toolkitConfig.showEnroll = false;
+toolkitConfig.showLearnMore = false;
+toolkitConfig.showAboutUs = false;
+toolkitConfig.showFAQ = false;
+toolkitConfig.showHome = false;
+toolkitConfig.showJoinMailingList = false;
 toolkitConfig.showBlog = false;
 
 export const sdkConfig = new ConfigurationService();
@@ -117,10 +125,11 @@ export function translateFactory(translate: TranslateService, injector: Injector
     ToolkitModule
   ],
   declarations: [
-    WelcomeComponent,
-    MoreDetailsComponent,
-    AboutUsComponent,
-    DataReleaseComponent
+      WelcomeComponent,
+      MoreDetailsComponent,
+      AboutUsComponent,
+      DataReleaseComponent,
+      EndEnrollComponent
   ],
   providers: [
     {
@@ -144,11 +153,4 @@ export function translateFactory(translate: TranslateService, injector: Injector
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {
-  constructor(private analytics: AnalyticsEventsService) {
-    this.analytics.analyticEvents.subscribe((event: AnalyticsEvent) => {
-      ga('send', event);
-      ga('platform.send', event);
-    });
-  }
-}
+export class AppModule {}

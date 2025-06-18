@@ -1,6 +1,7 @@
 import { Locator, Page, expect } from '@playwright/test';
 import { SurveyName, ActivityVersion } from 'dsm/component/tabs/enums/survey-data-enum';
 import { CustomizeView, Label } from 'dsm/enums';
+import { logInfo } from 'utils/log-utils';
 
 //TODO add method to check Created, Completed, Last Updated information
 export default class SurveyDataTab {
@@ -16,12 +17,21 @@ export default class SurveyDataTab {
    */
   public async getActivity(opts: {
     activityName: SurveyName,
-    activityVersion: ActivityVersion,
+    activityVersion?: ActivityVersion,
     checkForVisibility?: boolean,
-    nth?: number
+    nth?: number,
+    getLatestVersion?: boolean
   }): Promise<Locator> {
-    const { activityName, activityVersion, checkForVisibility = true, nth = 1 } = opts;
-    const activity = this.getActivityDataPanel(activityName, activityVersion, nth);
+    const { activityName, activityVersion, checkForVisibility = true, nth = 1, getLatestVersion = true } = opts;
+    let activity = this.page.locator(`(//app-activity-data//mat-expansion-panel-header[contains(., "${activityName}")])`);
+    if (activityVersion) {
+      activity = this.getActivityDataPanel(activityName, activityVersion, nth);
+    } else if (getLatestVersion) {
+      const numberOfSimilarActivities = await activity.count();
+      logInfo(`number of similar activities: ${numberOfSimilarActivities}`);
+      activity = this.page.locator(`(//app-activity-data//mat-expansion-panel-header[contains(., "${activityName}")])[${numberOfSimilarActivities}]`);
+      logInfo(`Activity with latest version: ${activity}`);
+    }
     if (checkForVisibility) {
       await activity.waitFor({ state: 'visible' });
     }

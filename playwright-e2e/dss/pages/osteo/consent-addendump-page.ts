@@ -17,6 +17,12 @@ export default class ConsentAddendumPage extends OsteoPageBase {
     await waitForNoSpinner(this.page);
   }
 
+  async clickAgreeToShareAvailableResults(opts: { response: 'Yes' | 'No' }): Promise<void> {
+    const { response } = opts;
+    const agreeToShareResults = this.agreeToShareAvailableResults();
+    await agreeToShareResults.check(response);
+  }
+
   /**
    * Question: You can share with me any available results from the sequencing of tumor sample[s] that the study has received
    * @returns {Radiobutton}

@@ -40,6 +40,12 @@
     width: 8.12375rem;
   }
 
+  @media screen and (max-width: 650px) {
+    .feeds {
+      grid-template-columns: 1fr;
+    }
+  }
+
   @media (max-width: 556px) {
     padding: 2rem;
     text-align: center;
@@ -126,7 +132,11 @@
         margin-bottom: 2rem;
       }
 
-      @media (max-width: 835px) {
+      .feeds {
+        grid-template-columns: 0.5fr;
+      }
+
+      @media (max-width: 735px) {
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -468,6 +478,22 @@
         }
       }
     }
+
+    .feeds {
+      display: grid;
+      grid-template-columns: 1fr;
+      text-align: center;
+    }
+
+    .social-media-title-2 {
+      color: #ffffff;
+      font-family: $primary-font-light;
+      font-size: 2rem;
+      letter-spacing: -0.1px;
+      line-height: 34px;
+      text-align: center;
+    }
+
     .social-media-title {
       color: #ffffff;
       font-family: $primary-font-light;

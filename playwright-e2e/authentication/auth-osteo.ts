@@ -9,7 +9,7 @@ export async function login(page: Page, opts: { email?: string; password?: strin
   if (email == null || password == null) {
     throw Error('Invalid Osteo email or password: undefined');
   }
-  await page.locator(Nav.Login).click();
+  await page.locator(Nav.Login).nth(0).click();
   await fillInEmailPassword(page, { email, password });
 }
 
