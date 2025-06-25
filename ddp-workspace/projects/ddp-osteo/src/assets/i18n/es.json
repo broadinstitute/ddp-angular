@@ -115,7 +115,7 @@
             },
             {
                 "Title": "<strong>¿Se entrega a los participantes resultados individuales de este estudio?</strong>",
-                "Text": "Si el participante decide compartir muestras de tejido archivadas con el proyecto, es posible que podamos comunicarle información sobre lo que hemos aprendido de la secuenciación genómica de la muestra del tumor. Esta información tiene por objeto resaltar cómo las muestras del participante contribuyen a la investigación y no tendrá ninguna repercusión en su tratamiento o pronóstico. Debido a ciertas restricciones reglamentarias, no podemos compartir los resultados con los participantes de Nueva York y Canadá. <br><br>El proyecto también se asoció con Invitae para secuenciar y compartir información sobre ADN de línea germinal (o ADN “normal”) a partir de muestras de saliva. Durante el proyecto, los participantes podrán decidir si desean proporcionar una muestra de saliva adicional para adquirir más información sobre su ADN normal y consultar con un asesor genético para comprender estos resultados. Si el participante no desea formar parte de este proceso, sus datos no se compartirán con Invitae. Este proceso no está disponible para los participantes de Canadá, ya que Invitae no está autorizada a prestar servicios de asesoramiento genético allí."
+                "Text": "Si el participante decide compartir muestras de tejido archivadas con el proyecto, es posible que podamos comunicarle información sobre lo que hemos aprendido de la secuenciación genómica de la muestra del tumor. Esta información tiene por objeto resaltar cómo las muestras del participante contribuyen a la investigación y no tendrá ninguna repercusión en su tratamiento o pronóstico. Debido a ciertas restricciones reglamentarias, no podemos compartir los resultados con los participantes de Nueva York y Canadá. <br><br>El proyecto también colabora con Genome Medical e Invitae para secuenciar y compartir información sobre el ADN germinal (o ADN \"normal\") de muestras de saliva. Durante el proyecto, los participantes de quienes hayamos recibido una muestra de sangre o saliva, y para quienes hayamos recibido una muestra tumoral de una institución de tratamiento, podrán decidir si desean proporcionar una muestra de saliva adicional para conocer mejor su ADN normal y hablar con un asesor genético para comprender estos resultados. Si un participante no participa en este proceso, sus datos no se compartirán con Genome Medical e Invitae. Este proceso solo está disponible para participantes elegibles residentes en EE. UU. (dentro de los 50 estados)."
             },
             {
                 "Title": "<strong>¿Qué diferencia a este proyecto de otros estudios existentes?</strong>",
@@ -296,6 +296,7 @@
 
     "ParticipationPage": {
         "Title": "Cómo participar",
+        "Intro": "Su salud y bienestar son lo primero. Entendemos que vivir con una enfermedad o discapacidad puede tener desafíos, y le invitamos a unirse a nuestro proyecto cuando le sea más fácil.",
         "Steps": [
             {
                 "Step": "PASO 1",
