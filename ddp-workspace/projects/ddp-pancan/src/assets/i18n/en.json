@@ -30,6 +30,35 @@
             "linkedin": "https://www.linkedin.com/company/count-me-in-patient-partnered-research/",
             "threads": "https://www.threads.net/@countmein"
         },
+        "EndEnrollPage": {
+            "IntroductionSection": {
+                "Title": "Enrollment is now CLOSED.",
+                "ImageAlt": "Pan Can project Patients"
+            },
+            "ThankYouSection": {
+                "Paragraph1": "Thank you to everyone who has participated. Since its inception, Count Me In (CMI) has placed patients at the center of discovery. Through direct engagement with individuals living with cancer and rare diseases, CMI has built a powerful model for research—one rooted in trust, transparency, and the shared goal of accelerating scientific breakthroughs.To the patients, families, researchers, and advocates who stood with us: thank you. Your courage, generosity, and partnership have helped define what's possible in biomedical research.",
+                "Paragraph2": "To the patients, families, researchers, and advocates who stood with us: thank you. Your courage, generosity, and partnership have helped define what’s possible in biomedical research. "
+            },
+            "TimelineSection": {
+                "Title": "Count Me In Timeline",
+                "TimelineTitle1": "2015–2020",
+                "TimelineBody1": "<ul><li><strong>Count Me In launches</strong> as a new model for direct-to-patient cancer research.</li><li>Early partnerships form with patient advocates, clinicians, and researchers to co-develop study design and  materials.</li></ul><h4>Initial projects include:</h4><h5>Metastatic Breast Cancer Project (2015)</h5><ul><li><a href='https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/study.cgi?study_id=phs001709.v1.p1' target='_blank'>https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/study.cgi?study_id=phs001709.v1.p1</a></li><li><a href='https://www.cbioportal.org/study/summary?id=brca_mbcproject_2022' target='_blank'>https://www.cbioportal.org/study/summary?id=brca_mbcproject_2022</a></li><li><a href='https://www.medrxiv.org/content/10.1101/2023.06.07.23291117v1' target='_blank'>The Metastatic Breast Cancer Project: leveraging patient-partnered research to expand the clinical and  genomic landscape of metastatic breast cancer and accelerate discoveries</a></li></ul><h5>Angiosarcoma Project (2017)</h5><ul><li><a href='https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/study.cgi?study_id=phs001931.v1.p1' target='_blank'>https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/study.cgi?study_id=phs001931.v1.p1</a></li><li><a href='https://www.cbioportal.org/study/summary?id=angs_project_painter_2018' target='_blank'>https://www.cbioportal.org/study/summary?id=angs_project_painter_2018</a></li><li><a href='https://www.nature.com/articles/s41591-019-0749-z' target='_blank'>The Angiosarcoma Project: enabling genomic and clinical discoveries in a rare cancer through  patient-partnered research</a></li></ul><h5>Metastatic Prostate Cancer Project (2018)</h5><ul><li><a href='https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/study.cgi?study_id=phs001939.v3.p1' target='_blank'>https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/study.cgi?study_id=phs001939.v3.p1</a></li><li><a href='https://www.cbioportal.org/study/summary?id=mpcproject_broad_2021' taget='_blank'>https://www.cbioportal.org/study/summary?id=mpcproject_broad_2021</a></li><li><a href='https://pubmed.ncbi.nlm.nih.gov/36177448/' target='_blank'>A patient-driven clinicogenomic partnership for metastatic prostate cancer</a></li></ul><h5>Esophageal & Stomach Cancer Project (2019)</h5>",
+                "TimelineTitle2": "2021–2022",
+                "TimelineBody2": "<ul><li><strong>Expansion into additional rare and common cancers: </strong><ul><li><strong><a href='https://pe-cgs.org/' target='_blank'>PE-CGS</a> Grant Awarded - Enabling Osteosarcoma and LMS Projects (2021)</strong></li><li><strong>Brain Tumor Project (2021)</strong></li><li><strong>Colorectal Cancer Project (2022)</strong></li></ul><li>Data and discoveries from participants are shared with the global research community through open-access platforms.</li><li>Participant stories continue to help shape outreach, awareness, and scientific inquiry.</li></ul>",
+                "TimelineTitle3": "2023–2024",
+                "TimelineBody3": "<ul><li>New tools launched to capture richer, patient-reported data, such as lifestyle and diet surveys, stool kits, and more.</li><li>Count Me In featured at major conferences and in media outlets such as <strong>BBC StoryWorks</strong>.</li><li>Partnerships deepen with advocacy groups across the U.S. and Canada.</li><li>New projects launched:<ul><li><strong>Pediatric Hepatocellular Carcinoma Project (PediHCC, 2023)</strong></li></ul></li></ul>",
+                "TimelineTitle4": "2025",
+                "TimelineBody4": "<ul><li>New project launched: <strong><a href='https://trccproject.org/' target='_blank'>Translocation Renal Cell Carcinoma Project (tRCC, 2024)</a></strong></li><li><strong>Count Me In officially joins Broad Clinical Labs (BCL)</strong> to continue and expand patient-partnered research.</li><li><strong>Over 12,000 patients</strong> have enrolled across all CMI projects to date.</li><li><strong>Enrollment through JoinCountMeIn.org closes.</strong></li><li>CMI’s data, samples, and findings continue to support ongoing scientific discovery</li></ul>"
+            },
+            "ContinueText": "Although enrollment has ended, the work is far from over. Patient-partnered research will continue to be supported and offered by Broad Clinical Labs. Together, we will continue to analyze and share the data generated through your partnership, which will help shape the future of cancer research. To learn more, visit <a href='https://www.broadinstitute.org/genomics' target'_blank'>https://www.broadinstitute.org/genomics</a>.",
+            "ProjectList": {
+                "Title": "Explore Current Projects",
+                "ProjectLink1": "<a href='https://osproject.org/' target='_blank'>Osteosarcoma Project</a>",
+                "ProjectLink2": "<a href='https://lmsproject.org/' target='_blank'>Leiomyosarcoma Project</a>",
+                "ProjectLink3": "<a href='http://pedihccproject.org' target='_blank'>Pediatric Heptacellular Carcinoma Project</a>",
+                "ProjectLink4": "<a href='https://trccproject.org/' target='_blank'>Translocation Renal Cell Carcinoma Project</a>"
+            }
+        },
         "HomePage": {
             "JoinCountMeInButton": "Join Count Me In",
             "CurrentProjectsButton": "Explore Current Projects",
@@ -40,7 +69,7 @@
             },
             "IntroductionSection": {
                 "Title": "Every patient's experience with cancer should be counted.",
-                "Text": "Patients’ medical records, tumor samples, and personal experiences hold clues—about which cancers will respond or become resistant to which therapies—that often can’t be found in research labs or clinical trials. <span class=\"Italic\">Count Me In</span> enables cancer patients anywhere to share their information with researchers everywhere, to help reveal patterns in the data.",
+                "Text": "Patients’ medical records, tumor samples, and personal experiences hold clues—about which cancers will respond or become resistant to which therapies—that often can’t be found in research labs or clinical trials.<span class=\"Italic\">Count Me In</span>enables cancer patients anywhere to share their information with researchers everywhere, to help reveal patterns in the data.",
                 "ImageAlt": "Pan Can project Patients"
             },
             "JoinSection": {
@@ -154,16 +183,46 @@
                         "This approach of Count Me In enables building and deeply studying cohorts of patients not only within one cancer type, but also that cut across cancer types &#8212; such as all patients who receive a particular therapy, such as immunotherapy; or patients within a particular age group, such as adolescents and young adults. Count Me In has built and will continue to build research initiatives around different patient populations and cohorts. As more people join, there will be more opportunities to launch deeper studies within more patient cohorts."
                     ],
                     "Links": [
-                        { "key": "Angio", "label": "Angiosarcoma Project" },
-                        { "key": "Brain", "label": "Brain Tumor Project" },
-                        { "key": "CRC", "label": "Colorectal Cancer Project" },
-                        { "key": "ESC", "label": "Esophageal and Stomach Cancer Project" },
-                        { "key": "LMS", "label": "Leiomyosarcoma Project" },
-                        { "key": "MBC", "label": "Metastatic Breast Cancer Project" },
-                        { "key": "MBCSpanish", "label": "Metastatic Breast Cancer Project in Spanish" },
-                        { "key": "MPC", "label": "Metastatic Prostate Cancer Project" },
-                        { "key": "Osteo", "label": "Osteosarcoma Project" },
-                        { "key": "PediHCC", "label": "Pediatric Hepatocellular Carcinoma (HCC) and HCC-Like Tumor Project" }
+                        {
+                            "key": "Angio",
+                            "label": "Angiosarcoma Project"
+                        },
+                        {
+                            "key": "Brain",
+                            "label": "Brain Tumor Project"
+                        },
+                        {
+                            "key": "CRC",
+                            "label": "Colorectal Cancer Project"
+                        },
+                        {
+                            "key": "ESC",
+                            "label": "Esophageal and Stomach Cancer Project"
+                        },
+                        {
+                            "key": "LMS",
+                            "label": "Leiomyosarcoma Project"
+                        },
+                        {
+                            "key": "MBC",
+                            "label": "Metastatic Breast Cancer Project"
+                        },
+                        {
+                            "key": "MBCSpanish",
+                            "label": "Metastatic Breast Cancer Project in Spanish"
+                        },
+                        {
+                            "key": "MPC",
+                            "label": "Metastatic Prostate Cancer Project"
+                        },
+                        {
+                            "key": "Osteo",
+                            "label": "Osteosarcoma Project"
+                        },
+                        {
+                            "key": "PediHCC",
+                            "label": "Pediatric Hepatocellular Carcinoma (HCC) and HCC-Like Tumor Project"
+                        }
                     ]
                 },
                 {
@@ -179,17 +238,17 @@
                         "Links": [
                             {
                                 "Title": "Proline rich 11 (PRR11) overexpression amplifies PI3K signaling and promotes antiestrogen resistance in breast cancer.",
-                                "Source": "<i>Nature Communications.</i> 2020 Oct 30;11(1):5488.",
+                                "Source": "<i>Nature Communications.</i>2020 Oct 30;11(1):5488.",
                                 "Link": "https://www.nature.com/articles/s41467-020-19291-x"
                             },
                             {
                                 "Title": "Prevalence and mutational determinants of high tumor mutation burden in breast cancer.",
-                                "Source": "<i>Annals of Oncology</i> 2020 Mar;31(3):387-394.<br/>BioRxiv 745265 [Preprint; August 2019].",
+                                "Source": "<i>Annals of Oncology</i>2020 Mar;31(3):387-394.<br/>BioRxiv 745265 [Preprint; August 2019].",
                                 "Link": "https://www.annalsofoncology.org/article/S0923-7534(19)40698-4/fulltext"
                             },
                             {
                                 "Title": "The Angiosarcoma Project: enabling genomic and clinical discoveries in a rare cancer through patient-partnered research.",
-                                "Source": "<i>Nature Medicine</i> 2020 Feb;26(2):181-187.<br/>BioRxiv 741744 [Preprint; August 2019].",
+                                "Source": "<i>Nature Medicine</i>2020 Feb;26(2):181-187.<br/>BioRxiv 741744 [Preprint; August 2019].",
                                 "Link": "https://www.nature.com/articles/s41591-019-0749-z.epdf?author_access_token=cBBx7BAXQ6Z3D-FtgKtMatRgN0jAjWel9jnR3ZoTv0OuyqpOiBwU8Z8ASb5NY9IbXk1V1KF_R5v6TTbcRFo-JeMJ0-VLX-DiOKjqfH1Idg9OXZftog_CeSSuTvzZX78hU5-xKsQ6XRMok9B76DOedQ%3D%3D"
                             }
                         ]
@@ -214,7 +273,7 @@
                     "Paragraphs": [
                         "Count Me In (CMI) began with discussions between Emerson Collective and the Broad Institute of MIT and Harvard in 2013. Since the launch of the first project in metastatic breast cancer in late 2015, thousands of individuals living with cancer from around the United States and Canada have said “Count Me In” to partnering with researchers and sharing their experiences.",
                         "The Metastatic Breast Cancer (MBC) project was the first iteration of this vision, followed by the Angiosarcoma (ASC) Project in 2017, and the Metastatic Prostate Cancer (MPC) Project in 2018. Since then, CMI has also launched the Esophageal and Stomach Cancer Project, the Brain Tumor (BT) Project, and the Osteosarcoma (OS) Project. In Fall 2021, enrollment in Count Me In became available to any patient in the United States or Canada who has ever been diagnosed with cancer.",
-                        "In 2018, Count Me In was established as a nonprofit organization, committed to advancing patient-partnered research. Count Me In is stewarded by the <a target='_blank' href='https://www.emersoncollective.com/'>Emerson Collective</a>, a California-based social change organization; the <a target='_blank' href='https://www.broadinstitute.org/'>Broad Institute</a>, a leading nonprofit biomedical research institution; and the <a target='_blank' href='https://www.dana-farber.org/'>Dana Farber Cancer Institute</a>, a leading cancer hospital.",
+                        "In 2018, Count Me In was established as a nonprofit organization, committed to advancing patient-partnered research. Count Me In is stewarded by the<a target='_blank' href='https://www.emersoncollective.com/'>Emerson Collective</a>, a California-based social change organization; the<a target='_blank' href='https://www.broadinstitute.org/'>Broad Institute</a>, a leading nonprofit biomedical research institution; and the<a target='_blank' href='https://www.dana-farber.org/'>Dana Farber Cancer Institute</a>, a leading cancer hospital.",
                         "In August 2021 we opened our platform to everyone in the USA and Canada who has ever been diagnosed with cancer. We will continue to learn from each patient that is counted in."
                     ]
                 },
@@ -264,13 +323,13 @@
                 {
                     "Question": "Why is this needed?",
                     "Paragraphs": [
-                        "Patients have the power to advance cancer research in a way that no one else can. Patients’ medical records, tumor samples, and personal experiences hold clues—about which cancers will respond or become resistant to which therapies — that often can’t be found in research labs or clinical trials. <br/>The majority of patients have never had the opportunity to participate in research—because most cancer patients are cared for in community settings where this type of research is not done; most patients have never been asked if they’d like to contribute their tissue samples and medical information for research. <br/>Answering many important questions about cancer will require engaging and empowering many more patients as partners, and offering the opportunity to participate in groundbreaking research to all people living with cancer, whether they live near a research hospital or not. Count Me In aims to help make that possible."
+                        "Patients have the power to advance cancer research in a way that no one else can. Patients’ medical records, tumor samples, and personal experiences hold clues—about which cancers will respond or become resistant to which therapies — that often can’t be found in research labs or clinical trials.<br/>The majority of patients have never had the opportunity to participate in research—because most cancer patients are cared for in community settings where this type of research is not done; most patients have never been asked if they’d like to contribute their tissue samples and medical information for research.<br/>Answering many important questions about cancer will require engaging and empowering many more patients as partners, and offering the opportunity to participate in groundbreaking research to all people living with cancer, whether they live near a research hospital or not. Count Me In aims to help make that possible."
                     ]
                 },
                 {
                     "Question": "How can I participate?",
                     "Paragraphs": [
-                        "If you or your child have ever been diagnosed with cancer, and reside in the United States, United States territories- including Puerto Rico, or Canada, you can sign up by clicking “Count Me In”. <a class='Link' href='/participation'>Click here</a> to learn more about participation.",
+                        "If you or your child have ever been diagnosed with cancer, and reside in the United States, United States territories- including Puerto Rico, or Canada, you can sign up by clicking “Count Me In”.<a class='Link' href='/participation'>Click here</a>to learn more about participation.",
                         "If you’re a cancer researcher, you can access the data generated through Count Me In projects through existing publicly available databases, such as the cBioPortal for Cancer Genomics and the National Cancer Institute’s Genomic Data Commons. You can also join our mailing list for updates about new data releases and publications."
                     ]
                 },
@@ -278,7 +337,7 @@
                     "Question": "What does Count Me In do with the data?",
                     "Paragraphs": [
                         "After removing all personal information that would readily identify individuals, data is shared freely in an effort to accelerate discoveries, enabling researchers to identify patterns in data. Batches of data are released publicly on a regular basis, and are available to all researchers—so that everyone may use the data to make discoveries and advance progress against cancer, including new medicines and diagnostics.",
-                        "Quick links to released data: <br/><a class='Link' href='https://www.mbcproject.org/data-release'>https://www.mbcproject.org/data-release</a><br/><a class='Link' href='https://ascproject.org/data-release'>https://ascproject.org/data-release</a>"
+                        "Quick links to released data:<br/><a class='Link' href='https://www.mbcproject.org/data-release'>https://www.mbcproject.org/data-release</a><br/><a class='Link' href='https://ascproject.org/data-release'>https://ascproject.org/data-release</a>"
                     ]
                 },
                 {
@@ -348,79 +407,30 @@
                     "Question": "If I have signed up on behalf of my child, what happens when they become an adult?",
                     "Paragraphs": [
                         "When your child reaches the age where they can consent for themselves, they need to do so to continue to participate. For the US and Canada, this varies by state and territory, and is between ages of 18 and 21. Count Me In will contact you prior to this age to get your child’s contact information.",
-                        "If your child chooses to remain in the study  the project team will continue to request medical records and tissue samples from any point in your child’s cancer treatment."
+                        "If your child chooses to remain in the study the project team will continue to request medical records and tissue samples from any point in your child’s cancer treatment."
                     ]
                 }
             ]
         },
         "ColorectalPage": {
             "IntroductionSection": {
-                "Title": "Have a direct impact on the future of colorectal cancer.",
-                "Text": "If you have ever been diagnosed with colorectal cancer, join a nationwide movement of patients to contribute your samples, your medical records, and your voice to colorectal cancer research. Together, we can speed the development of future therapies."
+                "Title": "<u>Enrollment is now complete</u> for the Colorectal Cancer Project.",
+                "Text": "Thank you to everyone who has participated in the project. We continue to analyze and share the data generated through your partnership, which will help shape the future of research in colorectal cancer."
             },
-            "LearnMoreSection": {
-                "Title": "What is this project about?",
-                "Paragraphs": [
-                    "The Colorectal Cancer Project is part of <a class='Link' href='https://joincountmein.org'>Count Me In</a>, a research initiative that enables cancer patients to directly transform cancer research and discovery. Any individual in the United States or Canada who has ever been diagnosed with colorectal cancer can share information about their experience through completing surveys, sharing biological sample(s), and copies of their medical records with researchers in order to speed the pace of discovery.",
-                    "The goal of <a class='Link' href='https://joincountmein.org'>Count Me In</a> is to generate a large dataset of linked patient-reported, genomic, clinical, and molecular information that can be shared with the biomedical community. Every patient’s story holds a piece of the puzzle that can help us better understand cancer. By discovering the genes and the variants that drive cancer and sharing this data, we hope insights can be gained to develop more effective therapies."
-                ]
+            "TimelineSection": {
+                "Title": "Colorectal Cancer Project Timeline",
+                "TimelineTitle1": "2021",
+                "TimelineBody1": "<ul><li><a href='https://www.dana-farber.org/newsroom/news-releases/2021/new-research-initiative-launches-for-all-patients-ever-diagnosed-with-colorectal-cancer' target='_blank'>Project launched</a> in both English and Spanish through collaboration with patients, advocates, clinicians and researchers.</li><li>Partnered with advocacy groups across the U.S. and Canada, including <a href='https://www.ccran.org/' target='_blank'>Colorectal Cancer Resource & Action Network</a>, <a href='https://www.colorectalcancercanada.com/' target='_blank'>Colorectal Cancer Canada</a>, <a href='https://www.colonstars.org/' target=_blank'>Colon Cancer Stars</a>, <a href='https://fightcolorectalcancer.org/' target='_blank'>Fight Colorectal Cancer</a>, <a href='https://www.gicancersalliance.org/' target='_blank'>GI Cancers Alliance</a>, and <a href='https://www.theraymondfoundation.org/' target='_blank'>Raymond Foundation</a>. </li><li>Represented the project at <a href='https://www.allycon.org/' target='_blank'>AllyCon</a>, a <a href='https://colorectalcancer.org/' target='_blank'>Colorectal Cancer Alliance</a> conference.</li> <li>Featured in <a href='https://ascopost.com/issues/december-25-2021/solving-the-conundrum-of-young-onset-colorectal-cancer/' target='_blank'>The ASCO Post</a>.</li></ul>",
+                "TimelineTitle2": "2022",
+                "TimelineBody2": "<ul><li>Over 200 people with colorectal cancer enrolled in the project in the first year, giving the project team permission to obtain and analyze copies of medical records, portions of leftover tumor samples, and saliva samples.</li><li>Project team presented to advocacy groups and authored blog posts with organizations like <a href='https://cancer.ca/en/' target='_blank'>Canadian Cancer Society</a>, <a href='https://www.ccran.org/' target='_blank'>CCRAN</a>, <a href='https://www.colorectalcancercanada.com/' target='_blank'>Colorectal Cancer Canada</a>, <a href='https://fightcolorectalcancer.org/' target='_blank'>Fight CRC</a>, <a href='https://www.gicancersalliance.org/' target=_blank'>GI Cancers Alliance</a>,<a href='https://www.globalcca.org/' target='_blank'>Global Colon Cancer Association</a>, and <a href='https://www.theraymondfoundation.org/' target='_blank'>Raymond Foundation</a>, as well as joining an Instagram live with <a href='https://fightcolorectalcancer.org/' target='_blank'>Fight CRC</a> (10K followers).</li><li></li>Featured in <a href='https://www.cancerhealth.com/article/black-panther-returns-prompts-talks-colorectal-cancer-black-community-video' target='_blank'>Cancer Health</a>, <em>“Black Panther” Returns, Prompts Conversation About Colorectal Cancer in the Black Community</em>.</li></ul>",
+                "TimelineTitle3": "2023",
+                "TimelineBody3": "<ul><li>First stool collection kits sent out to patients who consented to share these samples.</li>  <li>Launched comprehensive Diet & Lifestyle Survey to capture additional cohort-level data and enhance the depth of participant insights. </li><li>Participated in conferences and community events across the US, Virtual presentations to groups like <a href='https://colontown.org/' target='_blank'>ColonTown</a>, <a href='https://hcb2.org/' target='_blank'>Hitting Cancer Below the Belt</a>, <a href='https://cancercoalitionofvirginia.org/' target='_blank'>Cancer Action Coalition of Virginia</a>, and <a href='https://www.ccran.org/' target='_blank'>CCRAN</a></li><li>Featured in <a href='https://www.medscape.com/viewarticle/990047?form=fpf' target='_blank'>Medcape Medical News</a>: <em>Why Is Colorectal Cancer Rising in Younger People?</em> </li><li>CRC Awareness Month campaign, including video testimonials of trusted community members. </li></ul>",
+                "TimelineTitle4": "2024",
+                "TimelineBody4": "<ul><li>Shared new 5 x 7\" outreach cards, featuring patient participants, in English and Spanish with providers, patients, and at community events</li> <li>Participated in conferences and community events across the US</li>   <li>Shared virtual presentations with CCRAN, <a href='https://manuptocancer.org/' target='_blank'>Man Up to Cancer</a>, <a href='https://fightcolorectalcancer.org/' target='_blank'>Fight CRC</a></li> <li>Principal investigator, Dr. Kimmie Ng, featured in BBC StoryWorks’ <a href='https://www.bbc.com/storyworks/specials/rewriting-cancer/' target='_blank'>Rewriting Cancer series</a>, sharing about the unique opportunity of Count Me In</li><li>Collaborated with participants to share personal stories via social media, with special attention in March, Colorectal Cancer Awareness Month.</li> </ul>",
+                "TimelineTitle5": "2025",
+                "TimelineBody5": "<ul><li>Co-hosted a virtual session with <a href='https://fightcolorectalcancer.org/' target='_blank'>Fight CRC</a> and <a href='https://www.brightspotnetwork.org/' target='_blank'>Bright Spot Network</a></li> <li>Over 330 people with colorectal cancer have fully enrolled in the project. Data generated through the project will be de-identified and added to repositories for ongoing research. </li></ul>"
             },
-            "FAQ": {
-                "Questions": [
-                    {
-                        "Question": "What is the goal of the Colorectal Cancer Project?",
-                        "Paragraphs": [
-                            "Our aim is that the data generated by this project can help us better understand the landscape of colorectal cancer and treatment. Because we are able to work with all patients regardless of where they live (in the USA or CA), we hope to reach populations that have been understudied, including individuals who are diagnosed with colorectal cancer at a young age, individuals from marginalized communities who have historically been excluded from research, and patients with metastatic colorectal cancer."
-                        ]
-                    },
-                    {
-                        "Question": "Who is eligible to participate?",
-                        "Paragraphs": [
-                            "Anyone who has been diagnosed with colon and rectal cancer at any point may participate if they live in the USA or Canada."
-                        ]
-                    },
-                    {
-                        "Question": "Who is conducting this research?",
-                        "Paragraphs": [
-                            "The Colorectal Cancer Project is part of Count Me In, a research initiative that enables cancer patients to directly transform cancer research and discovery. Any individual in the United States or Canada who has ever been diagnosed with colorectal cancer can share information about their experience through completing surveys, sharing biological sample(s), and copies of their medical records with researchers in order to speed the pace of discovery.",
-                            "The goal of Count Me In is to generate a large dataset of linked patient-reported, genomic, clinical, and molecular information that can be shared with the biomedical community. Every patient’s story holds a piece of the puzzle that can help us better understand cancer. By discovering the genes and the variants that drive cancer and sharing this data, we hope insights can be gained to develop more effective therapies.",
-                            "Learn more about Count Me In <a class='Link' href='/about-us'>here</a>."
-                        ]
-                    },
-                    {
-                        "Question": "How is Count Me In addressing inclusivity in participation?",
-                        "Paragraphs": [
-                            "Count Me In understands that many barriers exist - structural and historical - that prevent underrepresented and marginalized communities from directly participating in research. Count Me In is committed to the core principle that <span class='Italic'>every</span> cancer patient, regardless of where they live, what language they speak, what their heritage may be - that their experience matters and the inclusion of their experience is imperative in furthering our understanding of cancer.",
-                            "Traditional cancer research does not lend itself to being as inclusive as it should be. Cancer disparities exist as evidence of how much more work in this space needs to be done - and it’s one in which we recognize that we’ll never truly arrive - but continue to strive for, alongside patients. We believe patients should be direct partners in cancer research and know that we can only advance our understanding of cancer and accelerate discoveries, if we do so together."
-                        ]
-                    },
-                    {
-                        "Question": "How have patients been involved in the design of this project?",
-                        "Paragraphs": [
-                            "We have worked closely with patients, parents, and patient advocates within the colorectal cancer community from the beginning of this project through its design and implementation. The community has been involved in all aspects including concept, goals, messaging, forms, and the design of this website. We have also worked with a Scientific Advisory Council made up of leading researchers working in colorectal cancer.",
-                            "We're proud to have our Advocacy Partners, the Colorectal Cancer Resource & Action Network, Raymond Foundation, GI Cancers Alliance, Colorectal Cancer Canada, Fight Colorectal Cancer, Colon Cancer Stars, Global Colon Cancer Association, Colorectal Cancer Alliance, and Colon Cancer Coalition to partner with and support this project."
-                        ]
-                    }
-                ]
-            },
-            "Partners": {
-                "Title": "Partners",
-                "Alts": {
-                    "CCResource": "Colorectal Cancer Resource & Action Network",
-                    "Raymond": "Raymond Foundation",
-                    "GICAlliance": "GI Cancers Alliance",
-                    "CCCanada": "Colorectal Cancer Canada",
-                    "FightCC": "Fight Colorectal Cancer",
-                    "ColonCancerStars": "Colon Cancer Stars logo",
-                    "GCCA": "Global Colon Cancer association logo",
-                    "CCAlliance": "Colorectal Cancer Alliance logo",
-                    "ColonCancerCoalition": "Colon Cancer Coalition logo"
-                },
-                "Text": "For more information on how to become a partner for the Colorectal Cancer Project, contact the team at <a class='Link' href='mailto:info@colorectalcancerproject.org'>info@colorectalcancerproject.org</a>."
-            },
-            "CountMeInSection": {
-                "Title": "Please join us in saying “Count Me In!”"
-            },
+            "ContinueText": "Questions? Please reach out to us via email to <a href='info@JoinCountMeIn.org'>info@JoinCountMeIn.org</a>.",
             "Footer": {
                 "Text": "The Colorectal Cancer Project is part of <span class='bold'>Count Me In</span>, a research initiative that brings together patients and scientists as partners to speed up discoveries in cancer research."
             }
@@ -433,8 +443,8 @@
             "LearnMoreSection": {
                 "Title": "What is this project about?",
                 "Paragraphs": [
-                    "The Pediatric Hepatocellular Carcinoma (HCC) & HCC-Like Tumors Project is part of <a class='Link' target='_blank' href='https://joincountmein.org'>Count Me In</a>, a research initiative that enables cancer patients to directly transform cancer research and discovery. Any individual in the United States or Canada who has ever been diagnosed with hepatocellular carcinoma before the age of 21, hepatocellular neoplasm not otherwise specified (HCN NOS), or hepatoblastoma diagnosed at 6 or older can share information about their experience through completing surveys, sharing biological sample(s), and copies of their medical records with researchers in order to speed the pace of discovery.",
-                    "The goal of <a class='Link' target='_blank' href='https://joincountmein.org'>Count Me In</a> is to generate a large dataset of linked patient-reported, genomic, clinical, and molecular information that can be shared with the biomedical community. Every patient's story holds a piece of the puzzle that can help us better understand cancer. By discovering the genes and the variants that drive cancer and sharing this data, we hope insights can be gained to develop more effective therapies."
+                    "The Pediatric Hepatocellular Carcinoma (HCC) & HCC-Like Tumors Project is part of<a class='Link' target='_blank' href='https://joincountmein.org'>Count Me In</a>, a research initiative that enables cancer patients to directly transform cancer research and discovery. Any individual in the United States or Canada who has ever been diagnosed with hepatocellular carcinoma before the age of 21, hepatocellular neoplasm not otherwise specified (HCN NOS), or hepatoblastoma diagnosed at 6 or older can share information about their experience through completing surveys, sharing biological sample(s), and copies of their medical records with researchers in order to speed the pace of discovery.",
+                    "The goal of<a class='Link' target='_blank' href='https://joincountmein.org'>Count Me In</a>is to generate a large dataset of linked patient-reported, genomic, clinical, and molecular information that can be shared with the biomedical community. Every patient's story holds a piece of the puzzle that can help us better understand cancer. By discovering the genes and the variants that drive cancer and sharing this data, we hope insights can be gained to develop more effective therapies."
                 ]
             },
             "ParticipateSection": {
@@ -512,14 +522,14 @@
             "Partners": {
                 "Title": "Partners",
                 "Alts": {},
-                "Text": "For information on how to become a partner, contact the team at <a class='Link' href='https://info@joincountmein.org.'>info@joincountmein.org</a>."
+                "Text": "For information on how to become a partner, contact the team at<a class='Link' href='https://info@joincountmein.org.'>info@joincountmein.org</a>."
             },
             "CountMeInSection": {
                 "Title": "Join the movement and say Count Me In"
             }
         },
         "LmsPage": {
-            "Title": "<span>Enrolling Soon:</span> <span>The Leiomyosarcoma (LMS) Project</span>",
+            "Title": "<span>Enrolling Soon:</span><span>The Leiomyosarcoma (LMS) Project</span>",
             "IntroductionSection": {
                 "Title": "Have a direct impact on the future of leiomyosarcoma.",
                 "Text": "If you have ever been diagnosed with leiomyosarcoma, join a movement of patients to contribute your samples, medical records, and experiences to LMS research. Together, we can speed the development of future therapies.",
@@ -552,7 +562,7 @@
                     {
                         "Question": "Who is conducting this research?",
                         "Paragraphs": [
-                            "This project is being conducted by the Broad Institute of MIT and Harvard, Dana-Farber Cancer Institute, and Count Me In, a non-profit research initiative that conducts patient-partnered studies of cancer. This project and Count Me In's Osteosarcoma Project is supported by a grant from the National Cancer Institute's Cancer Moonshot program and is part of the <a class='Link' target='_blank' href='https://www.cancer.gov/research/key-initiatives/moonshot-cancer-initiative/implementation/patient-engagement'>Participant Engagement and Cancer Genome Sequencing (PE-CGS) Network</a> of research centers. Count Me In is stewarded by three leading organizations: Emerson Collective, a California-based social change organization; the Broad Institute of MIT and Harvard, a leading nonprofit biomedical research institution; and the Dana-Farber Cancer Institute, a leading cancer hospital."
+                            "This project is being conducted by the Broad Institute of MIT and Harvard, Dana-Farber Cancer Institute, and Count Me In, a non-profit research initiative that conducts patient-partnered studies of cancer. This project and Count Me In's Osteosarcoma Project is supported by a grant from the National Cancer Institute's Cancer Moonshot program and is part of the<a class='Link' target='_blank' href='https://www.cancer.gov/research/key-initiatives/moonshot-cancer-initiative/implementation/patient-engagement'>Participant Engagement and Cancer Genome Sequencing (PE-CGS) Network</a>of research centers. Count Me In is stewarded by three leading organizations: Emerson Collective, a California-based social change organization; the Broad Institute of MIT and Harvard, a leading nonprofit biomedical research institution; and the Dana-Farber Cancer Institute, a leading cancer hospital."
                         ]
                     },
                     {
@@ -564,7 +574,7 @@
                 ]
             },
             "Footer": {
-                "Text": "The Leiomyosarcoma Project (LMSproject) is part of <span class='bold'>Count Me In</span>, a research initiative that brings together patients and scientists as partners to speed up discoveries in cancer research."
+                "Text": "The Leiomyosarcoma Project (LMSproject) is part of<span class='bold'>Count Me In</span>, a research initiative that brings together patients and scientists as partners to speed up discoveries in cancer research."
             }
         },
         "ImageAlts": {
