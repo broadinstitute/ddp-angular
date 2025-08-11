@@ -25,11 +25,11 @@ import { ColorectalPageComponent } from './components/splash-pages/colorectal-pa
 import { LmsPageComponent } from './components/splash-pages/lms-page/lms-page.component';
 import { ActivityPageComponent } from './components/activity-page/activity-page.component';
 import { PediHCCPageComponent } from './components/splash-pages/pediatric-hcc-page/pedihcc-page.component';
-
+import { EndEnrollComponent } from './components/end-enroll/end-enroll.component';
 const routes: Routes = [
     {
         path: '',
-        component: WelcomeComponent,
+        component: EndEnrollComponent,
         pathMatch: 'full',
         canActivate: [IrbGuard]
     },

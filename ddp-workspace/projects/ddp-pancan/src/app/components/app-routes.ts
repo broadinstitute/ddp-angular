@@ -22,5 +22,6 @@ export const AppRoutes = {
     JoinList: 'join-list',
     ColorectalPage: 'colorectal',
     PediHCCPage: 'pedihcc',
-    LMS: 'lms'
+    LMS: 'lms',
+
 };
