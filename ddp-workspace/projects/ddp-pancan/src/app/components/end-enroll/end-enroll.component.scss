@@ -1,0 +1,489 @@
+@import '../../../styles/variables.scss';
+
+section {
+    text-align: center;
+
+    &.introduction {
+        padding: 1.8rem 2rem 1.125rem 2rem;
+
+        .title {
+            margin-bottom: 1.25rem;
+        }
+
+        .text {
+            font-size: 1.25rem;
+            line-height: 30px;
+        }
+
+        .image {
+            width: 50%;
+            max-width: 630px;
+            padding-left: 40px;
+            object-fit: contain;
+        }
+
+        .info,
+        .title,
+        .text {
+            text-align: left;
+        }
+    }
+
+    &.learn-more {
+        padding: 5rem 0 4.06rem;
+        background-color: $accent-color-green;
+
+        .title {
+            margin-bottom: 2rem;
+        }
+    }
+
+    &.join {
+        padding: 3.1rem 1.625rem 4rem;
+        display: flex;
+        box-sizing: border-box;
+        align-items: center;
+
+        .image {
+            width: 18rem;
+            object-fit: contain;
+        }
+
+        .description {
+            flex: 1 2 auto;
+        }
+
+        .title {
+            margin-bottom: 2.12rem;
+        }
+
+        .text {
+            max-width: 37.5rem;
+
+            &:first-of-type {
+                margin-bottom: 2rem;
+            }
+        }
+    }
+
+    &.participate {
+        background-color: $accent-color-orange;
+        padding: 7rem 1.25rem 4.25rem;
+        text-align: left;
+    }
+
+    &.faq {
+        padding: 6.88rem 0 5.75rem 0;
+
+        .container {
+            box-sizing: border-box;
+            max-width: 900px;
+            padding: 0 3.75rem;
+            margin: 3.5rem auto;
+            text-align: left;
+        }
+    }
+
+    &.stay-informed {
+        background-color: $primary-color;
+        color: white;
+        padding-left: 1.25rem;
+        padding-right: 1.25rem;
+    }
+
+    &.join-cmi {
+        padding-left: 0;
+        padding-right: 0;
+    }
+}
+
+.title,
+.text {
+    max-width: 45.5rem;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.learn-more-btn {
+    margin-top: 2.81rem;
+}
+
+.join-cmi-btn {
+    margin: 2.5rem 0 2rem;
+}
+
+.curr-projects-btn {
+    margin: 1.5rem 0 1rem;
+    border: 2px solid black;
+    white-space: normal;
+    width: 12em;
+}
+
+.introduction_container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    h1 {
+        font-weight: 700;
+        text-decoration: underline;
+    }
+}
+
+@media screen and (max-width: $desktop-breakpoint) {
+    section {
+        &:nth-child(n) {
+            padding-left: 5rem;
+            padding-right: 5rem;
+        }
+
+        &.introduction {
+
+            .info,
+            .title,
+            .text {
+                text-align: center;
+            }
+
+            .image {
+                max-width: 100%;
+                margin: 3rem 0;
+                padding: 0;
+            }
+        }
+
+        .introduction_container {
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        &.join {
+            padding-top: 4rem;
+            padding-bottom: 5rem;
+
+            .image {
+                width: 13rem;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: $tablet-breakpoint) {
+    section {
+        &:nth-child(n) {
+            padding-left: 3rem;
+            padding-right: 3rem;
+        }
+
+        &.introduction {
+            .logos {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+
+                >img:first-child {
+                    margin: 0;
+                }
+            }
+        }
+
+        &.join {
+            flex-direction: column;
+
+            .image {
+                margin: 0 auto;
+            }
+        }
+
+        &.faq {
+            .container {
+                padding: 0;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: $mobile-breakpoint) {
+    section {
+        &:nth-child(n) {
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
+        }
+
+        &:not(.join) {
+            padding-top: 5rem;
+        }
+
+        &.join-cmi {
+            padding-bottom: 5rem;
+        }
+    }
+}
+
+:host ::ng-deep .static-page-paragraph-text {
+    font-size: 1.5rem;
+    line-height: 36px;
+}
+
+/* Timeline */
+@media (min-width: 768px) {
+    .tl-container {
+        width: 750px;
+    }
+}
+
+@media (min-width: 992px) {
+    .tl-container {
+        width: 970px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .tl-container {
+        width: 1170px;
+    }
+}
+
+section.tl-section-wrapper#tl-section-wrapper {
+    .row:nth-child(1) {
+        margin: 70px auto;
+
+        .Message {
+            p {
+                margin: 20px auto;
+            }
+        }
+    }
+
+    .tl-container {
+        padding-right: 15px;
+        padding-left: 15px;
+        margin-right: auto;
+        margin-left: auto;
+
+
+    }
+}
+
+.WrapperTL {
+    position: relative;
+    min-height: 100%;
+    margin: 0 15px 0 20px;
+    padding-top: 5px;
+    padding-bottom: 20px;
+   /* background-color: #f5f3f0;*/
+    z-index: 1;
+
+
+}
+
+.margin-top-0 {
+    margin-top: -10px;
+}
+
+.margin-top-100 {
+    margin-top: 100px;
+}
+
+.margin-top-20 {
+    margin-top: 20px;
+}
+
+#tl-section-wrapper {
+    a {
+        overflow-wrap: break-word;
+    }
+
+    .main-timeline-title {
+        background-image: linear-gradient(0deg, #BCECD6, #6EBEB9, #94CEC8);
+    }
+
+    .main-timeline {
+        position: relative;
+        /* background-image: linear-gradient(0deg, #FF9A35, #FFDE3F);*/
+        border: #d6ecf2;
+        /* padding: 1.8rem 2rem 1.125rem 2rem;*/
+        max-width: 1440px;
+    }
+
+    /* The actual timeline (the vertical ruler) */
+    .main-timeline::after {
+        content: "";
+        position: absolute;
+        width: 6px;
+        background-color: #f5f3f0;
+        top: 0;
+        bottom: 0;
+        /*left: 50%;*/
+        margin-left: -3px;
+    }
+
+    /* Container around content */
+    .timeline {
+        position: relative;
+        /*background-color: #f5f3f0;*/
+        width: 50%;
+    }
+
+    text-align: left;
+
+    h2 {
+        font-size: 48px;
+    }
+
+    h3 {
+        font-weight: 700;
+        text-align: left;
+        font-size: 32px !important;
+        line-height: 1.1em;
+
+    }
+
+    .timeline-body-text {
+        h4 {
+            text-align: left;
+            font-weight: 700;
+            font-size: 22px;
+            line-height: 1.1em;
+            margin-bottom: 20px;
+        }
+
+        h5 {
+            text-align: left;
+            font-size: 20px;
+            line-height: 1.1em;
+        }
+
+        ol,
+        ul {
+            padding: 0 20px 20px 20px;
+            text-align: left;
+
+            li {
+                text-align: left;
+
+                ol,
+                ul {
+                    padding-left: 20px;
+                    text-align: left;
+                }
+            }
+        }
+    }
+
+    /* The circles on the timeline */
+    .timeline::after {
+        content: "";
+        position: absolute;
+        width: 25px;
+        height: 25px;
+        right: -13px;
+        background-color: #ed933a;
+        border: 5px solid #f5f3f0;
+        top: 15px;
+        border-radius: 50%;
+        z-index: 1;
+    }
+
+    /* Place the container to the left */
+    .left {
+        padding: 0px 40px 20px 0px;
+        left: 0;
+    }
+
+    /* Place the container to the right */
+    .right {
+        padding: 0px 0px 20px 40px;
+        left: 50%;
+    }
+    .left, .right{
+        .card-body{
+            background-color: #f5f3f0;
+            padding: 20px;
+        }
+    }
+    /* Add arrows to the left container (pointing right) */
+    .left::before {
+        content: " ";
+        position: absolute;
+        top: 18px;
+        z-index: 1;
+        right: 30px;
+        border: medium solid white;
+        border-width: 10px 0 10px 10px;
+        border-color: transparent transparent transparent white;
+    }
+
+    /* Add arrows to the right container (pointing left) */
+    .right::before {
+        content: " ";
+        position: absolute;
+        top: 18px;
+        z-index: 1;
+        left: 30px;
+        border: medium solid white;
+        border-width: 10px 10px 10px 0;
+        border-color: transparent white transparent transparent;
+    }
+
+    /* Fix the circle for containers on the right side */
+    .right::after {
+        left: -12px;
+    }
+}
+
+.link-list {
+    margin-bottom: 20px;
+}
+
+/* Media queries - Responsive timeline on screens less than 600px wide */
+@media screen and (max-width: 600px) {
+    #tl-section-wrapper {
+
+        /* Place the timelime to the left */
+        .main-timeline::after {
+            left: 31px;
+        }
+
+        /* Full-width containers */
+        .timeline {
+            width: 100%;
+            padding-left: 70px;
+            padding-right: 25px;
+        }
+
+        /* Make sure that all arrows are pointing leftwards */
+        .timeline::before {
+            left: 60px;
+            border: medium solid white;
+            border-width: 10px 10px 10px 0;
+            border-color: transparent white transparent transparent;
+        }
+
+        /* Make sure all circles are at the same spot */
+        .left::after,
+        .right::after {
+            left: 18px;
+        }
+
+        .left::before {
+            right: auto;
+        }
+
+        /* Make all right containers behave like the left ones */
+        .right {
+            left: 0%;
+        }
+    }
+}
+
+@media (max-width: $desktop-breakpoint) {
+    #tl-section-wrapper {
+        padding: 0;
+
+        section:nth-child(n) {
+            padding: 0;
+        }
+    }
+}
