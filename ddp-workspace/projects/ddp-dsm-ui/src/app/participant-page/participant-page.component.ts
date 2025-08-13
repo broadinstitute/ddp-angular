@@ -1794,9 +1794,6 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
     return this.sequencingOrdersArray$
       .pipe(
         map((sequencingOrders: SequencingOrder[]) => {
-          const mercuryAllow = sequencingOrders
-            .some(({pdoOrderId, sampleType}: SequencingOrder) => pdoOrderId && sampleType === 'Tumor');
-
           const allowedStudies = ['osteo2', 'cmi-lms'];
           const studyAllow = allowedStudies.includes(this.sessionService.selectedRealm);
 
@@ -1830,7 +1827,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
           //Once aged up and NOT followedup consent will be suspended, so check if CONSENT_SUSPENDED
           //To handle agedup scenarios, check consent(assent)AddendumPediatric (which are from pre age up activity)
           // only if adult consentAddendum doesn't exist
-          return mercuryAllow && studyAllow && hasConsentedToTissueSample && !consentSuspended &&
+          return studyAllow && hasConsentedToTissueSample && !consentSuspended &&
             (somaticConsentAddendumTumorAdult?.answer ||
               (somaticConsentTumorPediatric?.answer && somaticAssentAddendum?.answer && consentAddendum === undefined) ||
               (somaticConsentTumorPediatric?.answer && consentAddendumPediatricStatus === 'COMPLETE'
