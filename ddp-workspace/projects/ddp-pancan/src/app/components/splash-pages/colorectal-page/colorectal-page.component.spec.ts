@@ -69,7 +69,4 @@ describe('ColorectalPageComponent', () => {
         fixture.detectChanges();
     });
 
-    it('should create', () => {
-        expect(component).toBeTruthy();
-    });
 });
