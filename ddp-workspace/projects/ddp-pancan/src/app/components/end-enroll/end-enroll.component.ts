@@ -1,6 +1,5 @@
-import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
-import { AppRoutes } from '../../app-routes';
-import { ToolkitConfigurationService } from 'toolkit';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { AppRoutes } from '../app-routes';
 import { OnInit, ViewEncapsulation} from '@angular/core';
 import { 
     AnalyticsEventActions, 
@@ -11,25 +10,21 @@ import {
 } from 'ddp-sdk';
 
 @Component({
-    selector: 'app-colorectal-page',
-    templateUrl: './colorectal-page.component.html',
-    styleUrls: ['./colorectal-page.component.scss'],
+    selector: 'app-end-enroll',
+    templateUrl: './end-enroll.component.html',
+    styleUrls: ['./end-enroll.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush 
 })
-export class ColorectalPageComponent {
-    phone: string;
-    email: string;
-    readonly AppRoutes = AppRoutes;
+export class EndEnrollComponent implements OnInit{
     public unsupportedBrowser: boolean;
+    readonly AppRoutes = AppRoutes;
     private readonly HEADER_HEIGHT: number = 70;
 
-    constructor(@Inject('toolkit.toolkitConfig') config: ToolkitConfigurationService,  private windowRef: WindowRef,
+    constructor(
+        private windowRef: WindowRef,
         private analytics: AnalyticsEventsService,
-        private browserContent: BrowserContentService) {
-        this.phone = config.colorectalPagePhone;
-        this.email = config.colorectalPageEmail;
-    }
+        private browserContent: BrowserContentService) { }
 
     public ngOnInit(): void {
         this.unsupportedBrowser = this.browserContent.unsupportedBrowser();

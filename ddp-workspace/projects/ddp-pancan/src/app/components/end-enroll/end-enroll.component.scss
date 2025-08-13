@@ -1,153 +1,168 @@
-@import '../../../../styles/variables';
+@import '../../../styles/variables.scss';
 
 section {
     text-align: center;
-    padding-left: 3rem;
-    padding-right: 3rem;
 
     &.introduction {
-        padding: 5.125rem 5rem 1.5rem;
+        padding: 1.8rem 2rem 1.125rem 2rem;
 
-        .flex {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .description {
-            flex: 0 1 auto;
-            text-align: left;
-            max-width: 651px;
-            padding-right: 2rem;
-
-            .title  {
-                margin: 0;
-            }
-        }
-
-        .image {
-            flex: 0 1 auto;
-        }
-
-        .logos {
-            padding: 2rem 0 1rem;
+        .title {
+            margin-bottom: 1.25rem;
         }
 
         .text {
             font-size: 1.25rem;
             line-height: 30px;
+        }
+
+        .image {
+            width: 50%;
+            max-width: 630px;
+            padding-left: 40px;
+            object-fit: contain;
+        }
+
+        .info,
+        .title,
+        .text {
+            text-align: left;
         }
     }
 
     &.learn-more {
-        padding-top: 4.56rem;
-        padding-bottom: 3.875rem;
-        background-color: $accent-colorectal-color;
+        padding: 5rem 0 4.06rem;
+        background-color: $accent-color-green;
 
-        .title, .text {
-            max-width: 962px;
-            margin: 0 auto;
+        .title {
+            margin-bottom: 2rem;
         }
+    }
+
+    &.join {
+        padding: 3.1rem 1.625rem 4rem;
+        display: flex;
+        box-sizing: border-box;
+        align-items: center;
+
+        .image {
+            width: 18rem;
+            object-fit: contain;
+        }
+
+        .description {
+            flex: 1 2 auto;
+        }
+
+        .title {
+            margin-bottom: 2.12rem;
+        }
+
         .text {
-            text-align: left;
-            margin-top: 2.5rem;
-            margin-bottom: 2.5rem;
-            font-size: 1.25rem;
-            line-height: 30px;
+            max-width: 37.5rem;
+
+            &:first-of-type {
+                margin-bottom: 2rem;
+            }
         }
     }
 
     &.participate {
-        background-color: $primary-colorectal-color;
-        color: white;
-        padding-top: 5.18rem;
-        padding-bottom: 3.75rem;
+        background-color: $accent-color-orange;
+        padding: 7rem 1.25rem 4.25rem;
         text-align: left;
-
-        ::ng-deep .steps {
-            color: black;
-        }
     }
 
     &.faq {
-        padding-top: 6.875rem;
-        padding-bottom: 2.875rem;
-
-        .title {
-            margin-top: 0;
-        }
+        padding: 6.88rem 0 5.75rem 0;
 
         .container {
-            margin: 4rem auto 3.125rem;
-            max-width: 1007px;
-        }
-    }
-
-    &.partners {
-        max-width: 1081px;
-        margin: 0 auto;
-        padding-top: 4.875rem;
-        padding-bottom: 5.5rem;
-
-        .title {
-            margin-top: 0;
-        }
-
-        .text {
-            opacity: 1;
-            margin: 5.5rem 0 0;
-        }
-
-        .logos {
-            display: flex;
-            gap: 5rem;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            align-items: center;
+            box-sizing: border-box;
+            max-width: 900px;
+            padding: 0 3.75rem;
+            margin: 3.5rem auto;
+            text-align: left;
         }
     }
 
     &.stay-informed {
-        background-color: $primary-colorectal-color;
+        background-color: $primary-color;
         color: white;
-
-        ::ng-deep .container {
-            max-width: 1062px;
-        }
+        padding-left: 1.25rem;
+        padding-right: 1.25rem;
     }
+
+    &.join-cmi {
+        padding-left: 0;
+        padding-right: 0;
+    }
+}
+
+.title,
+.text {
+    max-width: 45.5rem;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.learn-more-btn {
+    margin-top: 2.81rem;
 }
 
 .join-cmi-btn {
-    margin-top: 12px;
+    margin: 2.5rem 0 2rem;
 }
 
-:host ::ng-deep {
-    .Link {
-        color: black;
-        text-decoration: underline;
-        font-weight: bold;
-    }
+.curr-projects-btn {
+    margin: 1.5rem 0 1rem;
+    border: 2px solid black;
+    white-space: normal;
+    width: 12em;
+}
 
-    .static-page-paragraph-text {
-        font-size: 1.5rem;
-        line-height: 36px;
+.introduction_container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    h1 {
+        font-weight: 700;
+        text-decoration: underline;
     }
 }
 
 @media screen and (max-width: $desktop-breakpoint) {
     section {
-        &.introduction {
-            padding-left: 3rem;
-            padding-right: 3rem;
+        &:nth-child(n) {
+            padding-left: 5rem;
+            padding-right: 5rem;
+        }
 
-            .description {
-                min-width: 365px;
+        &.introduction {
+
+            .info,
+            .title,
+            .text {
+                text-align: center;
             }
 
             .image {
-                width: 320px;
-                height: 315px;
+                max-width: 100%;
+                margin: 3rem 0;
+                padding: 0;
+            }
+        }
+
+        .introduction_container {
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        &.join {
+            padding-top: 4rem;
+            padding-bottom: 5rem;
+
+            .image {
+                width: 13rem;
             }
         }
     }
@@ -155,37 +170,35 @@ section {
 
 @media screen and (max-width: $tablet-breakpoint) {
     section {
+        &:nth-child(n) {
+            padding-left: 3rem;
+            padding-right: 3rem;
+        }
+
         &.introduction {
-            .flex {
+            .logos {
+                display: flex;
                 flex-direction: column;
                 align-items: center;
-                gap: 2rem;
-            }
+                gap: 10px;
 
-            .description {
-                text-align: center;
-                padding: 0;
-            }
-
-            .image {
-                width: 260px;
-                height: 255px;
-            }
-
-            .logos img:first-child {
-                margin-right: 3rem;
+                >img:first-child {
+                    margin: 0;
+                }
             }
         }
 
-        &.partners {
-            .logos {
-                flex-direction: column;
-                max-width: 100%;
+        &.join {
+            flex-direction: column;
 
-                img {
-                    max-width: 100%;
-                    height: auto;
-                }
+            .image {
+                margin: 0 auto;
+            }
+        }
+
+        &.faq {
+            .container {
+                padding: 0;
             }
         }
     }
@@ -193,39 +206,46 @@ section {
 
 @media screen and (max-width: $mobile-breakpoint) {
     section {
-        padding-left: 1.5rem !important;
-        padding-right: 1.5rem !important;
+        &:nth-child(n) {
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
+        }
 
-        &.introduction {
-            .description {
-                min-width: unset;
-            }
+        &:not(.join) {
+            padding-top: 5rem;
+        }
 
-            .image {
-                display: none;
-            }
-
-            .logos img {
-                display: block;
-                margin: 0 auto 5px !important;
-            }
+        &.join-cmi {
+            padding-bottom: 5rem;
         }
     }
 }
 
-#tl-section-wrapper {
-    padding: 0;
-    a {
-        overflow-wrap: break-word;
-        
+:host ::ng-deep .static-page-paragraph-text {
+    font-size: 1.5rem;
+    line-height: 36px;
+}
+
+/* Timeline */
+@media (min-width: 768px) {
+    .tl-container {
+        width: 750px;
     }
+}
+
+@media (min-width: 992px) {
+    .tl-container {
+        width: 970px;
+    }
+}
+
 @media (min-width: 1200px) {
     .tl-container {
         width: 1170px;
     }
 }
 
-section#tl-section-wrapper {
+section.tl-section-wrapper#tl-section-wrapper {
     .row:nth-child(1) {
         margin: 70px auto;
 
@@ -252,21 +272,39 @@ section#tl-section-wrapper {
     margin: 0 15px 0 20px;
     padding-top: 5px;
     padding-bottom: 20px;
-    /*background-color: #f5f3f0;*/
+   /* background-color: #f5f3f0;*/
     z-index: 1;
 
 
 }
+
+.margin-top-0 {
+    margin-top: -10px;
+}
+
+.margin-top-100 {
+    margin-top: 100px;
+}
+
+.margin-top-20 {
+    margin-top: 20px;
+}
+
+#tl-section-wrapper {
+    a {
+        overflow-wrap: break-word;
+    }
+
     .main-timeline-title {
-        background-image: linear-gradient(0deg, #ADD8E6, #0077C8);
-        padding: 0;
+        background-image: linear-gradient(0deg, #BCECD6, #6EBEB9, #94CEC8);
     }
 
     .main-timeline {
         position: relative;
+        /* background-image: linear-gradient(0deg, #FF9A35, #FFDE3F);*/
         border: #d6ecf2;
+        /* padding: 1.8rem 2rem 1.125rem 2rem;*/
         max-width: 1440px;
-        
     }
 
     /* The actual timeline (the vertical ruler) */
@@ -274,7 +312,7 @@ section#tl-section-wrapper {
         content: "";
         position: absolute;
         width: 6px;
-        background-color: $text-color;
+        background-color: #f5f3f0;
         top: 0;
         bottom: 0;
         /*left: 50%;*/
@@ -287,6 +325,8 @@ section#tl-section-wrapper {
         /*background-color: #f5f3f0;*/
         width: 50%;
     }
+
+    text-align: left;
 
     h2 {
         font-size: 48px;
@@ -339,8 +379,8 @@ section#tl-section-wrapper {
         width: 25px;
         height: 25px;
         right: -13px;
-        background-color: $grey-button-color;
-        border: 5px solid $text-color;
+        background-color: #ed933a;
+        border: 5px solid #f5f3f0;
         top: 15px;
         border-radius: 50%;
         z-index: 1;
@@ -370,9 +410,9 @@ section#tl-section-wrapper {
         top: 18px;
         z-index: 1;
         right: 30px;
-        border: medium solid $text-color;
+        border: medium solid white;
         border-width: 10px 0 10px 10px;
-        border-color: transparent transparent transparent $text-color;
+        border-color: transparent transparent transparent white;
     }
 
     /* Add arrows to the right container (pointing left) */
@@ -382,9 +422,9 @@ section#tl-section-wrapper {
         top: 18px;
         z-index: 1;
         left: 30px;
-        border: medium solid $text-color;
+        border: medium solid white;
         border-width: 10px 10px 10px 0;
-        border-color: transparent $text-color transparent transparent;
+        border-color: transparent white transparent transparent;
     }
 
     /* Fix the circle for containers on the right side */
@@ -416,9 +456,9 @@ section#tl-section-wrapper {
         /* Make sure that all arrows are pointing leftwards */
         .timeline::before {
             left: 60px;
-            border: medium solid $text-color;
+            border: medium solid white;
             border-width: 10px 10px 10px 0;
-            border-color: transparent $text-color transparent transparent;
+            border-color: transparent white transparent transparent;
         }
 
         /* Make sure all circles are at the same spot */
@@ -437,6 +477,7 @@ section#tl-section-wrapper {
         }
     }
 }
+
 @media (max-width: $desktop-breakpoint) {
     #tl-section-wrapper {
         padding: 0;
