@@ -16,7 +16,7 @@ import {
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ColorectalPageComponent {
+export class ColorectalPageComponent implements OnInit {
     phone: string;
     email: string;
     readonly AppRoutes = AppRoutes;
