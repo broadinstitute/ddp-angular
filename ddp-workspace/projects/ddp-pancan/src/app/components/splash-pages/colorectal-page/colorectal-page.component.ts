@@ -1,10 +1,9 @@
-import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject, OnInit, ViewEncapsulation } from '@angular/core';
 import { AppRoutes } from '../../app-routes';
 import { ToolkitConfigurationService } from 'toolkit';
-import { OnInit, ViewEncapsulation} from '@angular/core';
-import { 
-    AnalyticsEventActions, 
-    AnalyticsEventCategories, 
+import {
+    AnalyticsEventActions,
+    AnalyticsEventCategories,
     AnalyticsEventsService,
     BrowserContentService,
     WindowRef
