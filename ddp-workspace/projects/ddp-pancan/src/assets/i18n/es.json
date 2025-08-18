@@ -30,6 +30,35 @@
             "linkedin": "https://www.linkedin.com/company/count-me-in-patient-partnered-research/",
             "threads": "https://www.threads.net/@countmein"
         },
+        "EndEnrollPage": {
+            "IntroductionSection": {
+                "Title": "La inscripción ya está CERRADA",
+                "ImageAlt": "Pan Can project Patients"
+            },
+            "ThankYouSection": {
+                "Paragraph1": "Gracias a todos los que participaron. Desde sus inicios, Count Me In (CMI) ha priorizado a los pacientes en el descubrimiento. A través de la interacción directa con personas que viven con cáncer y enfermedades raras, CMI ha construido un modelo de investigación sólido, basado en la confianza, la transparencia y el objetivo común de impulsar los avances científicos.",
+                "Paragraph2": "A los pacientes, familias, investigadores y defensores que nos apoyaron: gracias. Su valentía, generosidad y colaboración han ayudado a definir lo que es posible en la investigación biomédica."
+            },
+            "TimelineSection": {
+                "Title": "Cronología de Count Me In:",
+                "TimelineTitle1": "2015–2020",
+                "TimelineBody1": "<ul><li>Se lanza Count Me In como un nuevo modelo para la investigación oncológica directa con el paciente.</li><li>Se establecen colaboraciones iniciales con defensores de pacientes, profesionales clínicos e investigadores para desarrollar conjuntamente el diseño y los materiales del estudio.</li></ul><h4>Entre los proyectos iniciales se incluyen:</h4><h5>Proyecto sobre Cáncer de Mama Metastásico (2015)</h5><ul><li><a href='https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/study.cgi?study_id=phs001709.v1.p1' target='_blank'>https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/study.cgi?study_id=phs001709.v1.p1</a></li><li><a href='https://www.cbioportal.org/study/summary?id=brca_mbcproject_2022' target='_blank'>https://www.cbioportal.org/study/summary?id=brca_mbcproject_2022</a></li><li><a href='https://www.medrxiv.org/content/10.1101/2023.06.07.23291117v1' target='_blank'>The Metastatic Breast Cancer Project: leveraging patient-partnered research to expand the clinical and  genomic landscape of metastatic breast cancer and accelerate discoveries</a></li></ul><h5>Proyecto  sobre Angiosarcoma (2017)</h5><ul><li><a href='https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/study.cgi?study_id=phs001931.v1.p1' target='_blank'>https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/study.cgi?study_id=phs001931.v1.p1</a></li><li><a href='https://www.cbioportal.org/study/summary?id=angs_project_painter_2018' target='_blank'>https://www.cbioportal.org/study/summary?id=angs_project_painter_2018</a></li><li><a href='https://www.nature.com/articles/s41591-019-0749-z' target='_blank'>The Angiosarcoma Project: enabling genomic and clinical discoveries in a rare cancer through  patient-partnered research</a></li></ul><h5>Proyecto de Cáncer de Próstata Metastásico (2018)</h5><ul><li><a href='https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/study.cgi?study_id=phs001939.v3.p1' target='_blank'>https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/study.cgi?study_id=phs001939.v3.p1</a></li><li><a href='https://www.cbioportal.org/study/summary?id=mpcproject_broad_2021' taget='_blank'>https://www.cbioportal.org/study/summary?id=mpcproject_broad_2021</a></li><li><a href='https://pubmed.ncbi.nlm.nih.gov/36177448/' target='_blank'>A patient-driven clinicogenomic partnership for metastatic prostate cancer</a></li></ul><h5>Proyecto de Cáncer de Esófago y Estómago (2019)</h5>",
+                "TimelineTitle2": "2021–2022",
+                "TimelineBody2": "<ul><li>Expansión a otros tipos de cáncer raros y comunes: <ul><li><strong><a href='https://pe-cgs.org/' target='_blank'>Subvención PE-CGS otorgada:</a> Apoyando a los proyectos de osteosarcoma y LMS (2021)</strong></li><li><strong>Proyecto de Tumores Cerebrales (2021)</strong></li><li><strong>Proyecto de Cáncer Colorrectal (2022)</strong></li></ul><li>Los datos y descubrimientos de los participantes se comparten con la comunidad investigadora global a través de plataformas de acceso abierto.</li><li>Las historias de los participantes siguen contribuyendo a la divulgación, la concienciación y la investigación científica.</li></ul>",
+                "TimelineTitle3": "2023–2024",
+                "TimelineBody3": "<ul><li>Se lanzan nuevas herramientas para recopilar datos más completos de los pacientes, como encuestas sobre estilo de vida y dieta, kits de análisis de heces y más.</li><li>\"Count Me In\" se presenta en importantes congresos y medios de comunicación como <strong>BBC StoryWorks</strong>.</li><li>Se profundizan las colaboraciones con grupos de apoyo en EE. UU. y Canadá.</li><li>Nuevos proyectos lanzados: <ul><li><a href='https://pedihccproject.org/' target='_blank'><strong>Proyecto de Carcinoma Hepatocelular Pediátrico (PediHCC, 2023)</strong></a></li></ul</li></ul>",
+                "TimelineTitle4": "2025",
+                "TimelineBody4": "<ul><li>Nuevo proyecto lanzado: <strong><a href='https://trccproject.org/' target='_blank'>Proyecto de Carcinoma de Células Renales por Translocación (tRCC, 2024</a></strong></li><li><strong>Count Me In se une oficialmente a Broad Clinical Labs (BCL)</strong> para continuar y expandir la investigación en colaboración con pacientes. </li><li>Hasta la fecha, se han inscrito <strong>más de 12 000</strong> pacientes en todos los proyectos de CMI.</li><li><strong>El plazo de inscripción a través de JoinCountMeIn.org finaliza. </strong></li><li>Los datos, muestras y hallazgos de CMI continúan impulsando el descubrimiento científico.</li></ul>"
+            },
+            "ContinueText": "Aunque el plazo de inscripción ha finalizado, el trabajo está lejos de terminar. Broad Clinical Labs seguirá apoyando y ofreciendo la investigación en colaboración con pacientes. Juntos, seguiremos analizando y compartiendo los datos generados gracias a su colaboración, lo que contribuirá a definir el futuro de la investigación del cáncer. Para obtener más información, visite <a href='https://www.broadinstitute.org/genomics' target'_blank'>https://www.broadinstitute.org/genomics</a>.",
+            "ProjectList": {
+                "Title": "Explore los proyectos actuales",
+                "ProjectLink1": "<a href='https://osproject.org/' target='_blank'>Proyecto de osteosarcoma</a>",
+                "ProjectLink2": "<a href='https://lmsproject.org/' target='_blank'>Proyecto de leiomiosarcoma</a>",
+                "ProjectLink3": "<a href='http://pedihccproject.org' target='_blank'>Proyecto de carcinoma hepatocelular pediátrico</a>",
+                "ProjectLink4": "<a href='https://trccproject.org/' target='_blank'>Proyecto de carcinoma de células renales por translocación</a>"
+            }
+        },
         "HomePage": {
             "JoinCountMeInButton": "Únase a Count Me In",
             "CurrentProjectsButton": "Explorar proyectos actuales",
@@ -153,16 +182,46 @@
                         "Esta estrategia propuesta por Count Me In permite crear y estudiar a profundidad cohortes de pacientes no solo dentro de un mismo tipo de cáncer, sino que también abarquen datos de distintos tipos de cáncer, como todos los pacientes que reciben un tratamiento determinado, como inmunoterapia, o los pacientes dentro de un grupo de edad específicos, como adolescentes y adultos jóvenes. Count Me In ha desarrollado y continuará desarrollando iniciativas de investigación en torno a diferentes poblaciones y cohortes de pacientes. A medida que se unan más personas, habrá más oportunidades de dar comienzo a estudios más profundos dentro de más cohortes de pacientes."
                     ],
                     "Links": [
-                        { "key": "Angio", "label": "Angiosarcoma Project" },
-                        { "key": "Brain", "label": "Brain Tumor Project" },
-                        { "key": "CRC", "label": "Colorectal Cancer Project" },
-                        { "key": "ESC", "label": "Esophageal and Stomach Cancer Project" },
-                        { "key": "LMS", "label": "Leiomyosarcoma Project" },
-                        { "key": "MBC", "label": "Metastatic Breast Cancer Project" },
-                        { "key": "MBCSpanish", "label": "Proyecto de Cáncer de Mama Metastásico en Español" },
-                        { "key": "MPC", "label": "Metastatic Prostate Cancer Project" },
-                        { "key": "Osteo", "label": "Osteosarcoma Project" },
-                        { "key": "PediHCC", "label": "Pediatric Hepatocellular Carcinoma (HCC) and HCC-Like Tumor Project" }
+                        {
+                            "key": "Angio",
+                            "label": "Angiosarcoma Project"
+                        },
+                        {
+                            "key": "Brain",
+                            "label": "Brain Tumor Project"
+                        },
+                        {
+                            "key": "CRC",
+                            "label": "Colorectal Cancer Project"
+                        },
+                        {
+                            "key": "ESC",
+                            "label": "Esophageal and Stomach Cancer Project"
+                        },
+                        {
+                            "key": "LMS",
+                            "label": "Leiomyosarcoma Project"
+                        },
+                        {
+                            "key": "MBC",
+                            "label": "Metastatic Breast Cancer Project"
+                        },
+                        {
+                            "key": "MBCSpanish",
+                            "label": "Proyecto de Cáncer de Mama Metastásico en Español"
+                        },
+                        {
+                            "key": "MPC",
+                            "label": "Metastatic Prostate Cancer Project"
+                        },
+                        {
+                            "key": "Osteo",
+                            "label": "Osteosarcoma Project"
+                        },
+                        {
+                            "key": "PediHCC",
+                            "label": "Pediatric Hepatocellular Carcinoma (HCC) and HCC-Like Tumor Project"
+                        }
                     ]
                 },
                 {
@@ -354,73 +413,25 @@
         },
         "ColorectalPage": {
             "IntroductionSection": {
-                "Title": "Contribuya directamente al futuro del cáncer colorrectal.",
-                "Text": "Si alguna vez ha recibido un diagnóstico de cáncer colorrectal, únase a una iniciativa con participación de pacientes a nivel nacional y aporte sus muestras, historias clínicas y experiencia a la investigación sobre cáncer colorrectal. Juntos, podemos acelerar el desarrollo de futuros tratamientos."
+                "Title": "<u>Ya se completó la inscripción</u> para el Proyecto de Cáncer Colorrectal.",
+                "Text": "Gracias a todos los que participaron en el proyecto. Seguimos analizando y compartiendo los datos generados gracias a su colaboración, lo cual contribuirá a definir el futuro de la investigación sobre el cáncer colorrectal."
             },
-            "LearnMoreSection": {
-                "Title": "¿De qué se trata este proyecto?",
-                "Paragraphs": [
-                    "El Proyecto de cáncer colorrectal forma parte de <a class='Link' href='https://joincountmein.org'>Count Me In</a>, una iniciativa de investigación que permite que los pacientes con cáncer transformen de forma directa la investigación y los descubrimientos en el cáncer. Toda persona en Estados Unidos o Canadá que alguna vez haya recibido un diagnóstico de cáncer colorrectal puede compartir información sobre su experiencia respondiendo encuestas y compartiendo muestras biológicas y copias de sus registros medicos con los investigadores para acelerar el paso de los descubrimientos.",
-                    "El objetivo de <a class='Link' href='https://joincountmein.org'>Count Me In</a> es generar un gran conjunto de datos de información genómica, clínica y molecular aportada por los pacientes que pueda compartirse con la comunidad biomédica. La historia de cada paciente es una pieza del rompecabezas que puede ayudarnos a comprender mejor el cáncer. Al descubrir los genes y las variaciones que dan lugar al cáncer y compartir estos datos, esperamos poder obtener información valiosa para desarrollar más tratamientos eficaces."
-                ]
+            "TimelineSection": {
+                "Title": "Cronología del Proyecto de Cáncer Colorrectal",
+                "TimelineTitle1": "2021",
+                "TimelineBody1": "<ul><li>Proyecto lanzado en inglés y español gracias a la colaboración con pacientes, defensores, médicos e investigadores.</li><li>Se colaboró con grupos de apoyo en EE. UU. y Canadá, como la <a href='https://www.ccran.org/' target='_blank'>Colorectal Cancer Resource & Action Network</a>, <a href='https://www.colorectalcancercanada.com/' target='_blank'>Colorectal Cancer Canada</a>, <a href='https://www.colonstars.org/' target=_blank'>Colon Cancer Stars</a>, <a href='https://fightcolorectalcancer.org/' target='_blank'>Fight Colorectal Cancer</a>, <a href='https://www.gicancersalliance.org/' target='_blank'>GI Cancers Alliance</a>, y <a href='https://www.theraymondfoundation.org/' target='_blank'>Raymond Foundation</a>. </li><li>Representó al proyecto en <a href='https://www.allycon.org/' target='_blank'>AllyCon</a>, una conferencia de <a href='https://colorectalcancer.org/' target='_blank'>Colorectal Cancer Alliance</a>.</li> <li>Fue destacado en un post de <a href='https://ascopost.com/issues/december-25-2021/solving-the-conundrum-of-young-onset-colorectal-cancer/' target='_blank'>ASCO</a>.</li></ul>",
+                "TimelineTitle2": "2022",
+                "TimelineBody2": "<ul><li>Más de 200 personas con cáncer colorrectal se inscribieron en el proyecto durante el primer año, lo que permitió al equipo obtener y analizar copias de historiales médicos, fragmentos de muestras tumorales sobrantes y muestras de saliva.</li><li>El equipo del proyecto realizó presentaciones ante grupos de apoyo y publicó entradas de blog con organizaciones como <a href='https://cancer.ca/en/' target='_blank'>Canadian Cancer Society</a>, <a href='https://www.ccran.org/' target='_blank'>CCRAN</a>, <a href='https://www.colorectalcancercanada.com/' target='_blank'>Colorectal Cancer Canada</a>, <a href='https://fightcolorectalcancer.org/' target='_blank'>Fight CRC</a>, <a href='https://www.gicancersalliance.org/' target=_blank'>GI Cancers Alliance</a>,<a href='https://www.globalcca.org/' target='_blank'>Global Colon Cancer Association</a>, y <a href='https://www.theraymondfoundation.org/' target='_blank'>Raymond Foundation</a>, demás, participó en una transmisión en vivo de Instagram con <a href='https://fightcolorectalcancer.org/' target='_blank'>Fight CRC</a> (10000 seguidores).</li><li>Destacado en <a href='https://www.cancerhealth.com/article/black-panther-returns-prompts-talks-colorectal-cancer-black-community-video' target='_blank'>Cancer Health</a>, el regreso de <em>“Black Panther” genera debate sobre el cáncer colorrectal en la comunidad afroamericana</em>.</li></ul>",
+                "TimelineTitle3": "2023",
+                "TimelineBody3": "<ul><li>Se enviaron los primeros kits de recolección de heces a los pacientes que dieron su consentimiento para compartir estas muestras. </li>  <li>Se lanzó una encuesta integral sobre dieta y estilo de vida para recopilar datos adicionales a nivel de cohorte y profundizar en la información de los participantes. </li><li>Se participó en conferencias y eventos comunitarios en todo EE. UU., y se realizaron presentaciones virtuales para grupos como <a href='https://colontown.org/' target='_blank'>ColonTown</a>, <a href='https://hcb2.org/' target='_blank'>Hitting Cancer Below the Belt</a>, <a href='https://cancercoalitionofvirginia.org/' target='_blank'>Cancer Action Coalition of Virginia</a>, y <a href='https://www.ccran.org/' target='_blank'>CCRAN</a></li><li>Se presentó en <a href='https://www.medscape.com/viewarticle/990047?form=fpf' target='_blank'>Medcape Medical News</a>: <em>¿Por qué está aumentando el cáncer colorrectal en personas jóvenes?</em>  </li><li>Campaña del Mes de Concientización sobre el CCR, que incluye testimonios en video de miembros de confianza de la comunidad.</li></ul>",
+                "TimelineTitle4": "2024",
+                "TimelineBody4": "<ul><li>Compartimos nuevas tarjetas de divulgación de 5 x 7 pulgadas, con pacientes participantes, en inglés y español, con proveedores, pacientes y en eventos comunitarios.</li> <li>Participamos en conferencias y eventos comunitarios en todo EE. UU. </li>   <li>Compartimos presentaciones virtuales con CCRAN, <a href='https://manuptocancer.org/' target='_blank'>Man Up to Cancer</a>, y <a href='https://fightcolorectalcancer.org/' target='_blank'>Fight CRC</a></li> <li>La investigadora principal, la Dra. Kimmie Ng, participó en la serie <a href='https://www.bbc.com/storyworks/specials/rewriting-cancer/' target='_blank'>\"Rewriting Cancer\"</a>, de BBC StoryWorks, donde compartió sobre la oportunidad única de Count Me In.</li><li>Colaboramos con los participantes para compartir historias personales a través de las redes sociales, con especial atención en marzo, el Mes de Concientización sobre el Cáncer Colorrectal.</li> </ul>",
+                "TimelineTitle5": "2025",
+                "TimelineBody5": "<ul><li>Se organizó una sesión virtual en conjunto con <a href='https://fightcolorectalcancer.org/' target='_blank'>Fight CRC</a> y <a href='https://www.brightspotnetwork.org/' target='_blank'>Bright Spot Network</a></li> <li>Más de 330 personas con cáncer colorrectal ya se han inscrito en el proyecto.  Los datos generados se anonimizarán y se añadirán a repositorios para la investigación continúa.</li></ul>"
             },
-            "FAQ": {
-                "Questions": [
-                    {
-                        "Question": "¿Cuál es el objetivo del Proyecto de cáncer colorrectal?",
-                        "Paragraphs": [
-                            "Nuestro objetivo es que los datos generados a partir de este proyecto puedan ayudarnos a comprender mejor el panorama del cáncer colorrectal y su tratamiento. Gracias a que podemos trabajar con todos los pacientes, sin importar dónde vivan (en los Estados Unidos o Canadá), esperamos llegar a poblaciones que no han sido lo suficientemente estudiadas, lo que incluye personas que han recibido un diagnóstico de cáncer colorrectal a una edad temprana, personas de comunidades marginadas que históricamente se han excluido de las investigaciones y pacientes con cáncer colorrectal metastásico."
-                        ]
-                    },
-                    {
-                        "Question": "¿Quiénes pueden participar?",
-                        "Paragraphs": [
-                            "Todas las personas que hayan recibido un diagnóstico de cáncer de colon y recto en algún momento de su vida pueden participar si viven en Estados Unidos o Canadá."
-                        ]
-                    },
-                    {
-                        "Question": "¿Qué hace Count Me In con los datos del Proyecto de cáncer colorrectal?",
-                        "Paragraphs": [
-                            "Después de eliminar toda la información personal que identificaría con facilidad a las personas, los datos se comparten libremente con el objetivo de agilizar los descubrimientos, al permitir que los investigadores identifiquen patrones en los datos. Los lotes de datos se haran disponibles al público de forma periódica y están disponibles para todos los investigadores, de manera que todos pueden utilizarlos para hacer descubrimientos y avances contra el cáncer, que incluyen nuevos medicamentos y métodos de diagnóstico.",
-                            "Enlaces rápidos a datos publicados: <br/><a class='Link' href='https://www.mbcproject.org/data-release'>https://www.mbcproject.org/data-release</a><br/><a class='Link' href='https://ascproject.org/data-release'>https://ascproject.org/data-release</a>"
-                        ]
-                    },
-                    {
-                        "Question": "¿Cómo aborda Count Me In la inclusividad en la participación?",
-                        "Paragraphs": [
-                            "Count Me In entiende que existen muchas barreras (estructurales e históricas) que impiden la participación directa de comunidades subrepresentadas y marginadas en la investigación. Count Me In tiene un compromiso con el principio fundamental de que la experiencia de todos los pacientes con cáncer es importante, independientemente de dónde vivan, qué idioma hablen o cuál sea su patrimonio cultural, y la incorporación de su experiencia es imperativa para ampliar nuestros conocimientos sobre el cáncer.",
-                            "La investigación tradicional del cáncer no se presta a ser tan inclusiva como debería. Las desigualdades en torno al cáncer son prueba de todo el trabajo que todavía queda por hacer en este espacio, y reconocemos que nunca llegaremos a la culminación de esa labor, pero continuamos esforzándonos por lograrlo, junto con pacientes. Creemos que los pacientes deben ser aliados directos en la investigación del cáncer y sabemos que solo podemos avanzar nuestros conocimientos sobre el cáncer y acelerar los descubrimientos si lo hacemos juntos."
-                        ]
-                    },
-                    {
-                        "Question": "¿Cómo ha sido la participación de los pacientes en el diseño de este proyecto?",
-                        "Paragraphs": [
-                            "Count Me In ha trabajado estrechamente con pacientes, seres queridos y defensores de pacientes en la comunidad del cáncer colorrectal para desarrollar este proyecto. Los pacientes participaron en todos los aspectos del diseño, incluidos el concepto, los objetivos, las comunicaciones, los formularios y el sitio web.",
-                            "Estamos orgullosos de tener como aliados a Colorectal Cancer Resource & Action Network, Raymond Foundation, GI Cancers Alliance, Colorectal Cancer Canada, Fight Colorectal Cancer, Colon Cancer Stars, Global Colon Cancer Association, Colorectal Cancer Alliance y Colon Cancer Coalition por colaborar y apoyar este proyecto."
-                        ]
-                    }
-                ]
-            },
-            "Partners": {
-                "Title": "Aliados",
-                "Alts": {
-                    "CCResource": "Colorectal Cancer Resource & Action Network logo",
-                    "Raymond": "Raymond Foundation logo",
-                    "GICAlliance": "GI Cancers Alliance logo",
-                    "CCCanada": "Colorectal Cancer Canada logo",
-                    "FightCC": "Fight Colorectal Cancer logo",
-                    "ColonCancerStars": "Colon Cancer Stars logo",
-                    "GCCA": "Global Colon Cancer Association logo",
-                    "CCAlliance": "Colorectal Cancer Alliance logo",
-                    "ColonCancerCoalition": "Colon Cancer Coalition logo"
-                },
-                "Text": "Para obtener más información sobre cómo participar en el Proyecto de cáncer colorrectal, comuníquese con el equipo en <a class='Link' href='mailto:info@colorectalcancerproject.org'>info@colorectalcancerproject.org</a>."
-            },
-            "CountMeInSection": {
-                "Title": "Únase al movimiento Count Me In y comparta su experiencia"
-            },
+            "ContinueText": "¿Tiene alguna pregunta? Contáctenos por correo electrónico a <a href='mailto:info@JoinCountMeIn.org'>info@JoinCountMeIn.org</a>.",
             "Footer": {
-                "Text": "El Proyecto de cáncer colorrectal forma parte de <span class='bold'>Count Me In</span>, una iniciativa de investigación que une a pacientes y científicos para juntos acelerar los descubrimientos en la investigación del cáncer."
+                "Text": "The Colorectal Cancer Project is part of <span class='bold'>Count Me In</span>, a research initiative that brings together patients and scientists as partners to speed up discoveries in cancer research."
             }
         },
         "PedihccPage": {

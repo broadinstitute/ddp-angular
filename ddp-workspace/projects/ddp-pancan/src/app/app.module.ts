@@ -35,7 +35,6 @@ import { FaqSectionComponent } from './components/faq-section/faq-section.compon
 import { FaqComponent } from './components/faq/faq.component';
 import { ParticipationComponent } from './components/participation/participation.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
-import { AuthComponent } from './components/auth/auth.component';
 import { AboutUsComponent } from './components/about-us/about-us.component';
 import { PageWithSectionsComponent } from './components/page-with-sections/page-with-sections.component';
 import { ScientificResearchComponent } from './components/scientific-research/scientific-research.component';
@@ -48,6 +47,7 @@ import { LmsPageComponent } from './components/splash-pages/lms-page/lms-page.co
 import { ActivityComponent } from './components/activity/activity.component';
 import { ActivityPageComponent } from './components/activity-page/activity-page.component';
 import { PediHCCPageComponent } from './components/splash-pages/pediatric-hcc-page/pedihcc-page.component';
+import { EndEnrollComponent } from './components/end-enroll/end-enroll.component';
 
 const base = document.querySelector('base')?.getAttribute('href') || '';
 
@@ -151,7 +151,6 @@ export function translateFactory(translate: TranslateService,
         FaqComponent,
         ParticipationComponent,
         NavigationComponent,
-        AuthComponent,
         AboutUsComponent,
         PageWithSectionsComponent,
         ScientificResearchComponent,
@@ -164,6 +163,7 @@ export function translateFactory(translate: TranslateService,
         ActivityComponent,
         ActivityPageComponent,
         PediHCCPageComponent,
+        EndEnrollComponent
     ],
     imports: [
         BrowserModule,
