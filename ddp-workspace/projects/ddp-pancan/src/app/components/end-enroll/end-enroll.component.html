@@ -2,7 +2,11 @@
     <section class="introduction">
         <div class="introduction_container">
             <div class="info">
-                <h1 class="title static-page-title" translate>App.EndEnrollPage.IntroductionSection.Title</h1>
+                <section
+                    class="Message NoPadding text-left">
+                    <p class="Message-text" translate>App.EndEnrollPage.ThankYouSection.Paragraph1</p>
+                    <p class="Message-text" translate>App.EndEnrollPage.ThankYouSection.Paragraph2</p>
+                </section>
             </div>
             <img src="assets/images/patients.png" class="image"
                 [alt]="'App.HomePage.IntroductionSection.ImageAlt' | translate">
@@ -24,64 +28,58 @@
                 height="32">
 
         </div>
-        </section>
-        <section class="tl-section-wrapper" id="tl-section-wrapper">
-            <div class="row">
-                <section
-                    class="Message col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1 NoPadding">
-                    <p class="Message-text" translate>App.EndEnrollPage.ThankYouSection.Paragraph1</p>
-                    <p class="Message-text" translate>App.EndEnrollPage.ThankYouSection.Paragraph2</p>
-                </section>
-            </div>
-            <section class="main-timeline-title">
-                <div class="tl-container container py-5">
-                    <div class="row">
-                        <section
-                            class=" col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1 NoPadding">
-                            <h2 translate>App.EndEnrollPage.TimelineSection.Title</h2>
-                        </section>
+    </section>
+    <section class="tl-section-wrapper" id="tl-section-wrapper">
+        <div class="row"></div>
+        <section class="main-timeline-title">
+            <div class="tl-container container py-5">
+                <div class="row">
+                    <section
+                        class=" col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1 NoPadding">
+                        <h2 translate>App.EndEnrollPage.TimelineSection.Title</h2>
+                    </section>
+                </div>
+                <div class="main-timeline">
+                    <div class="timeline left">
+                        <div class="card WrapperTL">
+                            <div class="card-body p-4 WrapperTL">
+                                <h3 translate>App.EndEnrollPage.TimelineSection.TimelineTitle1</h3>
+                                <div [innerHTML]="'App.EndEnrollPage.TimelineSection.TimelineBody1' | translate"
+                                    class="timeline-body-text"></div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="main-timeline">
-                        <div class="timeline left">
-                            <div class="card WrapperTL">
-                                <div class="card-body p-4 WrapperTL">
-                                    <h3 translate>App.EndEnrollPage.TimelineSection.TimelineTitle1</h3>
-                                    <div [innerHTML]="'App.EndEnrollPage.TimelineSection.TimelineBody1' | translate"
-                                        class="timeline-body-text"></div>
-                                </div>
+                    <div class="timeline right">
+                        <div class="card WrapperTL">
+                            <div class="card-body p-4 WrapperTL">
+                                <h3 translate>App.EndEnrollPage.TimelineSection.TimelineTitle2</h3>
+                                <div [innerHTML]="'App.EndEnrollPage.TimelineSection.TimelineBody2' | translate"
+                                    class="timeline-body-text"></div>
                             </div>
                         </div>
-                        <div class="timeline right">
-                            <div class="card WrapperTL">
-                                <div class="card-body p-4 WrapperTL">
-                                    <h3 translate>App.EndEnrollPage.TimelineSection.TimelineTitle2</h3>
-                                    <div [innerHTML]="'App.EndEnrollPage.TimelineSection.TimelineBody2' | translate"
-                                        class="timeline-body-text"></div>
-                                </div>
+                    </div>
+                    <div class="timeline left">
+                        <div class="card WrapperTL">
+                            <div class="card-body p-4 WrapperTL">
+                                <h3 translate>App.EndEnrollPage.TimelineSection.TimelineTitle3</h3>
+                                <div [innerHTML]="'App.EndEnrollPage.TimelineSection.TimelineBody3' | translate"
+                                    class="timeline-body-text"></div>
                             </div>
                         </div>
-                        <div class="timeline left">
-                            <div class="card WrapperTL">
-                                <div class="card-body p-4 WrapperTL">
-                                    <h3 translate>App.EndEnrollPage.TimelineSection.TimelineTitle3</h3>
-                                    <div [innerHTML]="'App.EndEnrollPage.TimelineSection.TimelineBody3' | translate"
-                                        class="timeline-body-text"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="timeline right">
-                            <div class="card WrapperTL">
-                                <div class="card-body p-4 WrapperTL">
-                                    <h3 translate>App.EndEnrollPage.TimelineSection.TimelineTitle4</h3>
-                                    <div [innerHTML]="'App.EndEnrollPage.TimelineSection.TimelineBody4' | translate"
-                                        class="timeline-body-text"></div>
-                                </div>
+                    </div>
+                    <div class="timeline right">
+                        <div class="card WrapperTL">
+                            <div class="card-body p-4 WrapperTL">
+                                <h3 translate>App.EndEnrollPage.TimelineSection.TimelineTitle4</h3>
+                                <div [innerHTML]="'App.EndEnrollPage.TimelineSection.TimelineBody4' | translate"
+                                    class="timeline-body-text"></div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </section>
-        
+            </div>
+        </section>
+
     </section>
     <div class="row">
         <section class="Message col-lg-6 col-lg-offset-3  ">
