@@ -1,20 +1,13 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { AppRoutes } from '../app-routes';
-import { OnInit, ViewEncapsulation} from '@angular/core';
-import { 
-    AnalyticsEventActions, 
-    AnalyticsEventCategories, 
-    AnalyticsEventsService,
-    BrowserContentService,
-    WindowRef
-} from 'ddp-sdk';
+import { AnalyticsEventActions, AnalyticsEventCategories, AnalyticsEventsService, BrowserContentService, WindowRef } from 'ddp-sdk';
 
 @Component({
     selector: 'app-end-enroll',
     templateUrl: './end-enroll.component.html',
     styleUrls: ['./end-enroll.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush 
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class EndEnrollComponent implements OnInit{
     public unsupportedBrowser: boolean;

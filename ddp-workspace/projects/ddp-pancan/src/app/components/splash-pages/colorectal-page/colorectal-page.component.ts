@@ -1,14 +1,7 @@
-import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject, ViewEncapsulation} from '@angular/core';
 import { AppRoutes } from '../../app-routes';
 import { ToolkitConfigurationService } from 'toolkit';
-import { OnInit, ViewEncapsulation} from '@angular/core';
-import { 
-    AnalyticsEventActions, 
-    AnalyticsEventCategories, 
-    AnalyticsEventsService,
-    BrowserContentService,
-    WindowRef
-} from 'ddp-sdk';
+import { AnalyticsEventActions, AnalyticsEventCategories, AnalyticsEventsService, BrowserContentService, WindowRef } from 'ddp-sdk';
 
 @Component({
     selector: 'app-colorectal-page',
