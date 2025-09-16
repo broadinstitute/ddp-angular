@@ -4,8 +4,7 @@
             <div class="info">
                 <section
                     class="Message NoPadding text-left">
-                    <p class="Message-text" translate>App.EndEnrollPage.ThankYouSection.Paragraph1</p>
-                    <p class="Message-text" translate>App.EndEnrollPage.ThankYouSection.Paragraph2</p>
+                    <div class="Message-text" translate [innerHTML]="'App.EndEnrollPage.ThankYouSection.Intro' | translate"></div>                    
                 </section>
             </div>
             <img src="assets/images/patients.png" class="image"
@@ -23,10 +22,11 @@
     <section>
         <a #secondView></a>
         <div class="logos">
-            <img src="assets/images/logo-broad.svg" alt="Broad Institute logo" width="124" height="32">
-            <img src="assets/images/dana-farber-logo.png" alt="Dana-Farber Cancer Institute logo" width="124"
-                height="32">
-
+           <a href="https://www.broadinstitute.org/genomics" target="_blank"><img src="assets/images/logo-broad.svg" alt="Broad Institute logo" width="124" height="32"></a>
+            <a href="https://www.dana-farber.org/" target="_blank" rel="noopener">
+                <img src="assets/images/dana-farber-logo.png" alt="Dana-Farber Cancer Institute logo" width="124"
+                    height="32">
+            </a>
         </div>
     </section>
     <section class="tl-section-wrapper" id="tl-section-wrapper">
@@ -79,14 +79,7 @@
                 </div>
             </div>
         </section>
-
     </section>
-    <div class="row">
-        <section class="Message col-lg-6 col-lg-offset-3  ">
-            <p class="Message-text margin-top-20" [innerHTML]="'App.EndEnrollPage.ContinueText' | translate">
-            </p>
-        </section>
-    </div>
     <div class="row link-list">
         <section>
             <h2 translate>App.EndEnrollPage.ProjectList.Title</h2>
