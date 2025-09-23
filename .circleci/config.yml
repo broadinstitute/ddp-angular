@@ -22,10 +22,10 @@ references:
 
   # Note: important that values of guids and keys have matching order!"
   study_keys: &study_keys
-    "basil dsm-ui osteo brain angio mbc mpc prion rgp esc pancan brugada lms"
+    "dsm-ui osteo brain angio mbc mpc prion rgp esc pancan brugada lms"
 
   study_guids: &study_guids
-    "basil NA CMI-OSTEO cmi-brain ANGIO cmi-mbc cmi-mpc PRION RGP cmi-esc cmi-pancan brugada cmi-lms"
+    "NA CMI-OSTEO cmi-brain ANGIO cmi-mbc cmi-mpc PRION RGP cmi-esc cmi-pancan brugada cmi-lms"
 
   # Job runs for develop branch only
   filter-develop-branch: &filter-develop-branch
@@ -495,8 +495,6 @@ jobs:
       - checkout:
           path: *repo_path
       - conditionally-launch-build-and-store:
-          study_key: basil
-      - conditionally-launch-build-and-store:
           study_key: osteo
       - conditionally-launch-build-and-store:
           study_key: brain
@@ -794,7 +792,7 @@ workflows:
           matrix:
             alias: app-build
             parameters: &studies
-              study_key: [ dsm-ui, basil, osteo, brain, angio, mbc, mpc, prion, rgp, esc, pancan, brugada, lms ]
+              study_key: [ dsm-ui, osteo, brain, angio, mbc, mpc, prion, rgp, esc, pancan, brugada, lms ]
           check_changed: true
           requires:
             - << matrix.study_key >>-ui-unit-test-pr
@@ -963,13 +961,6 @@ workflows:
 
   deploy-all-apps-workflow:
     jobs:
-      - deploy-stored-build-job:
-          filters:
-            branches:
-              only:
-                - test
-                - staging
-          study_key: basil
       - deploy-stored-build-job: &deploy_branch_filters
           filters:
             branches:
