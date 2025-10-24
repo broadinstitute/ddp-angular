@@ -47,6 +47,7 @@ import { WorkflowStartComponent } from './components/workflow-start/workflow-sta
 import {GovernedUserService} from './services/governed-user.service';
 import {PrequalifierService} from './services/prequalifier.service';
 import {NavigationEnd, Router} from '@angular/router';
+import {EndEnrollComponent} from './pages/end-enroll/end-enroll.component';
 
 declare const DDP_ENV: Record<string, any>;
 
@@ -157,6 +158,7 @@ const translateFactory =
     FooterNavComponent,
     LandingPageComponent,
     WorkflowStartComponent,
+    EndEnrollComponent
   ],
   imports: [
     BrowserModule,
