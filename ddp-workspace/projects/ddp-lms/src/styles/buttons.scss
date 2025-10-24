@@ -4,14 +4,14 @@
 
 .button,
 .SimpleButton {
-    padding: 0.625rem 2rem;
-    border-radius: 4px;
-    border: none;
-    box-sizing: border-box;
-    text-align: center;
-    cursor: pointer;
-    font-weight: 500;
     transition: 0.3s;
+    cursor: pointer;
+    box-sizing: border-box;
+    border: none;
+    border-radius: 4px;
+    padding: 0.625rem 2rem;
+    font-weight: 500;
+    text-align: center;
     white-space: nowrap;
 }
 
@@ -41,14 +41,14 @@
 
 .button_primary,
 .mat-flat-button.mat-primary {
-    background-color: mat.get-color-from-palette($app-primary, 500);
     border: 2px solid mat.get-color-from-palette($app-primary, 500);
+    background-color: mat.get-color-from-palette($app-primary, 500);
     color: white;
 
     &:hover:not([disabled]),
     &:hover:enabled {
-        background-color: darken(mat.get-color-from-palette($app-primary, 500), 35%);
         border-color: darken(mat.get-color-from-palette($app-primary, 500), 35%);
+        background-color: darken(mat.get-color-from-palette($app-primary, 500), 35%);
     }
 }
 
@@ -60,9 +60,9 @@
 }
 
 .button_secondary {
+    border: 2px solid $text-color !important;
     background-color: transparent;
     color: $text-color;
-    border: 2px solid $text-color !important;
 
     &:hover:not([disabled]),
     &:hover:enabled,
@@ -90,23 +90,23 @@ button_new-item {
 .ButtonFilled,
 .submit_button ,
 .button_new-item {
-  padding: 0.7rem 1.75rem !important;
-  background-color: #9953ce;
+  transition: color .3s !important;
   border-color: #9953ce !important;
   border-radius: 4px;
+  background-color: #9953ce;
+  padding: 0.7rem 1.75rem !important;
   color: white;
-  transition: color .3s !important;
   &:hover {
-    color: #bbbbbe;
-    background-color: #7f30b8 !important;
-    border-color: #7f30b8 !important;
     cursor: pointer !important;
+    border-color: #7f30b8 !important;
+    background-color: #7f30b8 !important;
+    color: #bbbbbe;
   }
 
   &:active {
-    color: black !important;
 
     border-color: #7f30b8 !important;
+    color: black !important;
   }
 
   &:hover:not([disabled]),
@@ -119,9 +119,9 @@ button_new-item {
 
 .SimpleButton {
     @extend .btn-auth;
+    border-width: 0;
 
     background-color: transparent;
-    border-width: 0;
 
     ddp-sign-in-out & {
         border: 2px solid $text-color;
@@ -134,8 +134,8 @@ button_new-item {
     }
 
     .footer & {
-        color: white;
         border-color: white;
+        color: white;
 
         &:hover:not([disabled]),
         &:hover:enabled {
@@ -160,9 +160,9 @@ button_new-item {
 .button-link {
     border: none;
     background: none;
+    color: $primary-color;
     font-size: inherit;
     font-family: inherit;
-    color: $primary-color;
 
     &:hover, &:focus {
         text-decoration: underline;
@@ -173,8 +173,8 @@ button_new-item {
 @media screen and (max-width: $mobile-breakpoint) {
     .button,
     .SimpleButton {
-        padding-left: 1rem;
         padding-right: 1rem;
+        padding-left: 1rem;
         font-size: 1.2rem;
         white-space: normal;
     }

@@ -16,7 +16,7 @@ import { Route } from '../../../constants/Route';
         <ddp-sign-in-out></ddp-sign-in-out>
       </li>
 
-      <li>
+      <li *ngIf="headerConfig.showCmiButton">
         <a class="button button_primary cmiBtn" *ngIf="!isAuthenticated" [routerLink]="Route.CountMeIn">
           {{ 'Header.Links.CountMeIn' | translate }}
         </a>

@@ -1,6 +1,6 @@
-@use '@angular/material' as mat;
-@import '../../../theme.scss';
-@import '../../../styles/fonts.scss';
+@use "@angular/material" as mat;
+@import "../../../theme.scss";
+@import "../../../styles/fonts.scss";
 
 * {
   margin: 0;
@@ -8,24 +8,25 @@
 }
 .header {
   $height: 6.25rem;
+  display: flex;
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
+  justify-content: center;
   z-index: 1;
   transition: all 200ms linear;
   background-color: white;
+  width: 100%;
   height: $height;
-  display: flex;
-  justify-content: center;
 
   .header-content {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 1.5625rem;
     gap: 3rem;
+    padding: 0 1.5625rem;
     $padding-top: 1.5rem;
+    width: 85%;
 
     .header__nav {
       width: 100%;
@@ -33,30 +34,25 @@
 
     .main-link {
       display: flex;
-      text-decoration: none;
       color: black;
+      text-decoration: none;
 
       img {
         margin-right: 1rem;
       }
 
       p {
-        line-height: 1.4375rem;
         display: flex;
         align-items: center;
-        font-family: Untitled-Sans, sans-serif;
         font-weight: 500;
+        line-height: 1.4375rem;
+        font-family: Untitled-Sans, sans-serif;
       }
     }
 
     .loginOutButtons {
       display: flex;
       justify-content: flex-end;
-      margin-top: 1.2rem;
-
-      ::ng-deep .SimpleButton:hover {
-        background-color: rgba(0, 0, 0, 0.04);
-      }
     }
 
     .auth__dashboard {
@@ -64,9 +60,9 @@
     }
 
     &.hamburger-version {
+      position: fixed;
       justify-content: space-between;
       width: 90%;
-      position: fixed;
 
       .header__nav {
         position: absolute;
@@ -81,16 +77,16 @@
   }
 
   &.panel-opened {
-    height: 100vh;
     z-index: 3;
+    height: 100vh;
 
     .panel-controls {
       display: flex;
       flex-direction: column;
-      margin: 1.5625rem 2.5rem;
-      transition: opacity 100ms 200ms ease;
-      opacity: 1;
       visibility: visible;
+      opacity: 1;
+      transition: opacity 100ms 200ms ease;
+      margin: 1.5625rem 2.5rem;
       height: 100%;
 
       .nav,
@@ -136,9 +132,9 @@
 
 .header-link__dashboard,
 .header-link {
-  margin-right: 0.625rem;
   display: flex;
   align-items: center;
+  margin-right: 0.625rem;
 }
 
 .header-link:link,
@@ -173,8 +169,8 @@
 }
 
 .activity-heading {
-  width: 43.75rem;
   margin: 0 1.5rem;
+  width: 43.75rem;
 }
 
 .header_shadow {
@@ -184,8 +180,8 @@
 .auth {
   display: flex;
   align-items: center;
-  margin-left: 0.9375rem;
   margin-top: 1.2rem;
+  margin-left: 0.9375rem;
 
   ::ng-deep .SimpleButton:hover {
     background-color: rgba(0, 0, 0, 0.04);
@@ -193,24 +189,25 @@
 }
 
 .auth__login {
+  cursor: pointer;
   font-size: 1.0625rem;
   line-height: 1.375rem;
-  cursor: pointer;
 }
 
-.cmiBtn {
-  padding: 0.7rem 1.75rem !important;
-  background-color: #9953ce;
+.cmiBtn,
+.loginOutButtons ::ng-deep .SimpleButton {
+  transition: color 0.3s, background-color 0.3s;
   border-color: #9953ce;
   border-radius: 0.25rem;
+  background-color: #9953ce;
+  padding: 0.7rem 1.75rem !important;
   color: white;
   font-size: 1.0625rem;
-  transition: color 0.3s;
 
   &:hover {
-    background-color: #7f30b8;
-    border-color: #7f30b8;
     cursor: pointer;
+    border-color: #7f30b8;
+    background-color: #7f30b8;
   }
 }
 
@@ -258,20 +255,20 @@
 
 .hamburger {
   transform: translateY(10px);
-  padding: 2rem;
-  cursor: pointer;
-  transition-property: opacity, filter;
   transition-duration: 0.15s;
+  transition-property: opacity, filter;
   transition-timing-function: linear;
-  background-color: transparent;
+  cursor: pointer;
   border: 0;
+  background-color: transparent;
+  padding: 2rem;
 }
 
 .hamburger-box {
-  width: 1.875rem;
-  height: 1.25rem;
   display: inline-block;
   position: relative;
+  width: 1.875rem;
+  height: 1.25rem;
 }
 
 .hamburger-inner {
@@ -283,20 +280,20 @@
 .hamburger-inner,
 .hamburger-inner::before,
 .hamburger-inner::after {
+  position: absolute;
+  transition-duration: 0.15s;
+  transition-property: transform;
+  transition-timing-function: ease;
+  border-radius: 2px;
+  background-color: mat.get-color-from-palette($app-theme, 200);
   width: 1.875rem;
   height: 2px;
-  background-color: mat.get-color-from-palette($app-theme, 200);
-  border-radius: 2px;
-  position: absolute;
-  transition-property: transform;
-  transition-duration: 0.15s;
-  transition-timing-function: ease;
 }
 
 .hamburger-inner::before,
 .hamburger-inner::after {
-  content: '';
   display: block;
+  content: "";
 }
 
 .hamburger--slider .hamburger-inner {
@@ -305,9 +302,9 @@
 
 .hamburger--slider .hamburger-inner::before {
   top: 8px;
+  transition-duration: 0.15s;
   transition-property: transform, opacity;
   transition-timing-function: ease;
-  transition-duration: 0.15s;
 }
 
 .hamburger--slider .hamburger-inner::after {
