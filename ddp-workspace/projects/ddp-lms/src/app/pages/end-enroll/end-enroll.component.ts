@@ -45,4 +45,8 @@ export class EndEnrollComponent {
   public openJoinMailingList(): void {
     this.communicationService.openJoinDialog();
   }
+
+  public scrollTo(element: HTMLElement): void {
+    element?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
 }
