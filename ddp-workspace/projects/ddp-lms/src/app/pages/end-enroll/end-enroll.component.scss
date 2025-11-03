@@ -183,6 +183,7 @@ img {
 .timeline {
   z-index: 0;
   isolation: isolate;
+  overflow: hidden;
   --line-width: 0.4rem;
   --line-gap: 4rem;
   box-sizing: border-box;
@@ -191,12 +192,16 @@ img {
   padding: 4rem 0 0rem;
   scroll-margin-top: 6.25rem;
 
+  @media screen and (max-width: 1024px) {
+    --line-gap: 3rem;
+  }
+
   &__inner {
     margin-right: auto;
     margin-left: auto;
     width: 85%;
 
-    @media screen and (min-width: 1024.1px) {
+    @media screen and (min-width: 1336.1px) {
       width: 70%;
     }
   }
@@ -220,11 +225,16 @@ img {
   &__list::after {
     position: absolute;
     top: 1.5rem;
+    right: 0;
     bottom: 0;
-    left: calc(50% - var(--line-width) / 2);
     background: #000;
     width: var(--line-width);
     content: "";
+
+    @media screen and (min-width: 1024.1px) {
+      right: unset;
+      left: calc(50% - var(--line-width) / 2);
+    }
   }
 }
 
@@ -232,13 +242,16 @@ img {
   display: flex;
   z-index: 2;
 
+  @media screen and (max-width: 1024px) {
+    padding-right: calc(var(--line-width) + var(--line-gap));
+    padding-bottom: 2rem;
+  }
+
   &__inner {
     position: relative;
     box-sizing: border-box;
     background: #fff;
     padding: 2rem 2.25rem;
-    width: 100%;
-
     @media screen and (min-width: 1024.1px) {
       padding: 2rem 1.25rem;
       width: calc(50% - var(--line-width) / 2 - var(--line-gap));
@@ -247,22 +260,29 @@ img {
 
   &__inner::after {
     --triangle-size: 1rem;
-    --triangle-offset: calc(var(--line-gap) / 2 + var(--triangle-size) / 2);
+    --triangle-offset: calc(var(--line-gap) / 2 + var(--triangle-size) / 4);
     position: absolute;
     top: 1rem;
     right: calc(var(--triangle-offset) * -1);
-    border-width: 1rem 0 1rem var(--triangle-size);
+    border-width: var(--triangle-size) 0 var(--triangle-size) var(--triangle-size);
     border-style: solid;
     border-color: transparent transparent transparent #fff;
     width: 0;
     height: 0;
     content: "";
+
+    @media screen and (max-width: 1024px) {
+      --triangle-size: 0.75rem;
+      top: 1.15rem;
+    }
   }
 
   &:nth-child(even) &__inner::after {
-    right: unset;
-    left: calc(var(--triangle-offset) * -1);
-    transform: scaleX(-1);
+    @media screen and (min-width: 1024.1px) {
+      right: unset;
+      left: calc(var(--triangle-offset) * -1);
+      transform: scaleX(-1);
+    }
   }
 
   &__inner::before {
@@ -280,12 +300,16 @@ img {
   }
 
   &:nth-child(even) &__inner::before {
-    right: unset;
-    left: calc(var(--circle-offset) * -1);
+    @media screen and (min-width: 1024.1px) {
+      right: unset;
+      left: calc(var(--circle-offset) * -1);
+    }
   }
 
   &:nth-child(even) &__inner {
-    margin-left: auto;
+    @media screen and (min-width: 1024.1px) {
+      margin-left: auto;
+    }
   }
 
   &__date {
@@ -387,7 +411,9 @@ img {
   }
   .company-logo {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
+    gap: 20px 10px;
     margin-bottom: 1.5rem;
 
     .logo {

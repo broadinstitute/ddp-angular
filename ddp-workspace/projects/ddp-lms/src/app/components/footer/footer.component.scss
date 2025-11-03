@@ -4,39 +4,39 @@
   font-family: Untitled-Sans, sans-serif;
 
   .container {
-    background-color: #131314;
     display: flex;
-    justify-content: center;
     flex-direction: column;
+    justify-content: center;
+    background-color: #131314;
 
     $padding-left: 3.375rem;
     $padding-right: 2rem;
 
     .footer-nav {
-      padding: 3.375rem $padding-right 4rem $padding-left;
+      padding: 1.25rem $padding-right 1.25rem $padding-left;
     }
 
     .copy-right {
-      color: white;
-      justify-content: space-between;
-      padding: 2.125rem $padding-right 2.75rem $padding-left;
       display: flex;
       flex-wrap: wrap;
+      justify-content: space-between;
       gap: 2rem;
+      padding: 2.125rem $padding-right 2.75rem $padding-left;
+      color: white;
 
       p {
-        font-size: 1rem;
         display: flex;
         gap: 1rem;
+        font-size: 1rem;
       }
 
       ul {
-        list-style: none;
         display: flex;
-        gap: 3rem;
-        align-items: center;
         flex-wrap: wrap;
+        align-items: center;
+        gap: 3rem;
         padding: 0;
+        list-style: none;
 
         li {
           font-size: 1rem;
@@ -49,8 +49,8 @@
     }
 
     hr {
-      margin: 0;
       opacity: 0.3;
+      margin: 0;
     }
   }
 }
