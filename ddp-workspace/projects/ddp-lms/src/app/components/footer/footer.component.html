@@ -1,16 +1,22 @@
 <footer class="footer">
-  <div class="container">
-    <app-footer-nav class="footer-nav"></app-footer-nav>
-    <hr />
-    <div class="copy-right">
-      <p>
-        <span>Copyright © {{ currentYear }}</span> <span>Count Me In.</span><span> All rights reserved.</span>
-      </p>
-      <ul>
-        <li>Contact Us</li>
-        <li><a href="mailto:info@lmsproject.org">info@lmsproject.org</a></li>
-        <li><a href="tel:651-403-5556">651-403-5556</a></li>
-      </ul>
+  <div class="footer__inner">
+    <ul class="footer__contact-info">
+      <li>Contact Us</li>
+      <li><a href="mailto:info@lmsproject.org">info@lmsproject.org</a></li>
+      <li><a href="tel:651-403-5556">651-403-5556</a></li>
+    </ul>
+    <p class="footer__address">Count Me In <br />415 Main Street Cambridge, MA 02142, <br />United States</p>
+    <div class="cmi-info">
+      <p class="back-to-top" (click)="scrollTop()">Back to top</p>
+      <a class="cmi-info-logo" href="https://joincountmein.org/" target="_blank">
+        <img
+          width="117"
+          height="52"
+          lazy-resource
+          src="assets/images/logo-count-me-in.svg"
+          alt="Count Me In Logo"
+        />
+      </a>
     </div>
   </div>
 </footer>
