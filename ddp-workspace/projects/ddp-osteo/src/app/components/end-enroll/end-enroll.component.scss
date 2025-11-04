@@ -1,0 +1,282 @@
+@use "@angular/material" as mat;
+@import "../../../app-theme.scss";
+
+.intro-media-block {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    align-items: center;
+    margin: 2rem auto 1.875rem auto;
+    grid-gap: 3rem;
+
+    @media screen and (max-width: 768px) {
+        grid-template-columns: 1fr;
+        grid-gap: 2rem;
+        justify-items: center;
+    }
+}
+
+.intro-media-block__text {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    h1 {
+        margin-bottom: 1.5rem;
+    }
+
+    p {
+        margin-top: 0;
+        margin-bottom: 1rem;
+    }
+
+    ::ng-deep a {
+        text-decoration: underline;
+    }
+}
+
+.intro-media-block__buttons {
+    display: grid;
+    grid-template-columns: max-content max-content;
+    grid-gap: 1rem;
+}
+
+.intro-media-block__img {
+    img {
+        display: block;
+        width: 300px;
+        max-width: 100%;
+        height: auto;
+    }
+
+    &.gray-scale {
+        filter: grayscale(100%);
+    }
+}
+
+.navigation-section {
+    display: flex;
+    justify-content: center;
+    margin: 1.875rem 0;
+}
+
+.funding-section-v1 {
+    display: flex;
+    justify-content: center;
+    margin-top: 4rem;
+    margin-bottom: 1.5rem;
+    background-color: #483d8b;
+    text-align: center;
+}
+
+.funding-section {
+    background-color: #66cdaa;
+}
+
+.funding-block {
+    margin: 2.375rem auto 2.375rem auto;
+}
+
+.funding-block__text {
+    display: grid;
+    grid-gap: 2rem;
+}
+
+.organizations-section {
+    display: flex;
+    justify-content: center;
+    gap: 20px 10px;
+    box-sizing: border-box;
+    margin-bottom: 1.5rem;
+    padding: 1rem 1.5625rem 3rem;
+
+    @media screen and (max-width: 480px) {
+        flex-wrap: wrap;
+    }
+}
+
+.organizations-section__img {
+    margin: 0 5%;
+    height: 2.5rem;
+}
+
+.background-decorator {
+    background-image: url(/assets/images/yellow-shape.svg);
+    background-position: top;
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 23rem;
+}
+
+.timeline {
+    z-index: 0;
+    box-sizing: border-box;
+    isolation: isolate;
+    width: 100%;
+    overflow: hidden;
+    --line-width: 0.4rem;
+    --line-gap: 4rem;
+    box-sizing: border-box;
+    background-image: linear-gradient(135deg, #fbe96b 20%, #eba17c 100%);
+    background-color: #eba17c;
+    padding: 4rem 1.5625rem 0rem;
+    scroll-margin-top: 6.25rem;
+
+    @media screen and (max-width: 1024px) {
+        --line-gap: 3rem;
+    }
+
+    &__inner {
+        margin-right: auto;
+        margin-left: auto;
+        max-width: 1200px;
+    }
+
+    &__title {
+        margin-top: 0;
+        margin-bottom: 3rem;
+        font-weight: 700;
+        font-size: Round(to-zero, 2.625rem, 1px);
+        text-align: center;
+    }
+
+    &__list {
+        display: flex;
+        position: relative;
+        flex-direction: column;
+        margin: 0 auto;
+        padding: 0 0 4rem;
+        list-style: none;
+    }
+
+    &__list::after {
+        position: absolute;
+        top: 1.5rem;
+        right: 0;
+        bottom: 0;
+        background: #000;
+        width: var(--line-width);
+        content: "";
+
+        @media screen and (min-width: 1024.1px) {
+            right: unset;
+            left: calc(50% - var(--line-width) / 2);
+        }
+    }
+}
+
+.timeline-item {
+    display: flex;
+    z-index: 2;
+
+    @media screen and (max-width: 1024px) {
+        padding-right: calc(var(--line-width) + var(--line-gap));
+        padding-bottom: 2rem;
+    }
+
+    &__inner {
+        position: relative;
+        box-sizing: border-box;
+        background: #fff;
+        padding: 2rem 2.25rem;
+        @media screen and (min-width: 1024.1px) {
+            padding: 2rem 1.25rem;
+            width: calc(50% - var(--line-width) / 2 - var(--line-gap));
+        }
+    }
+
+    &__inner::after {
+        --triangle-size: 1rem;
+        --triangle-offset: calc(var(--line-gap) / 2 + var(--triangle-size) / 4);
+        position: absolute;
+        top: 1rem;
+        right: calc(var(--triangle-offset) * -1);
+        border-width: var(--triangle-size) 0 var(--triangle-size) var(--triangle-size);
+        border-style: solid;
+        border-color: transparent transparent transparent #fff;
+        width: 0;
+        height: 0;
+        content: "";
+
+        @media screen and (max-width: 1024px) {
+            --triangle-size: 0.75rem;
+            top: 1.15rem;
+        }
+    }
+
+    &:nth-child(even) &__inner::after {
+        @media screen and (min-width: 1024.1px) {
+            right: unset;
+            left: calc(var(--triangle-offset) * -1);
+            transform: scaleX(-1);
+        }
+    }
+
+    &__inner::before {
+        --circle-size: 2rem;
+        --circle-offset: calc(var(--line-gap) + var(--circle-size) / 2 + var(--line-width) / 2);
+        position: absolute;
+        top: 1rem;
+        right: calc(var(--circle-offset) * -1);
+        box-shadow: inset 0 0 0 0.3rem #000;
+        border-radius: 50%;
+        background-color: #eba17c;
+        width: var(--circle-size);
+        height: var(--circle-size);
+        content: "";
+    }
+
+    &:nth-child(even) &__inner::before {
+        @media screen and (min-width: 1024.1px) {
+            right: unset;
+            left: calc(var(--circle-offset) * -1);
+        }
+    }
+
+    &:nth-child(even) &__inner {
+        @media screen and (min-width: 1024.1px) {
+            margin-left: auto;
+        }
+    }
+
+    &__date {
+        margin: 0 0 1rem;
+        font-size: 24px;
+        font-size: Round(to-zero, 1.55rem, 1px);
+        line-height: 1;
+    }
+
+    &__content {
+        ::ng-deep ul {
+            padding-left: 1.4rem;
+            list-style: disc;
+        }
+        & ::ng-deep a {
+            color: #7154ff;
+            font-style: italic;
+            text-decoration: underline;
+        }
+    }
+}
+
+.outro {
+    box-sizing: border-box;
+    padding: 4rem 1.5625rem 3rem;
+    width: 100%;
+}
+
+.outro__text {
+    margin: 0 auto;
+    width: 100%;
+    max-width: 1200px;
+    p {
+        margin-top: 0;
+        margin-bottom: 1rem;
+    }
+
+    ::ng-deep a {
+        color: #7154ff;
+        text-decoration: underline;
+    }
+}
+

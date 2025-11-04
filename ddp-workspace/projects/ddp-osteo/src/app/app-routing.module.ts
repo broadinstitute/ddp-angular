@@ -36,6 +36,7 @@ import { ActivityPageComponent } from './components/activity-page/activity-page.
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import {WorkflowStartComponent} from './components/workflow-start/workflow-start.component';
 import {LandingPageComponent} from './components/landing-page/landing-page.component';
+import { EndEnrollComponent } from './components/end-enroll/end-enroll.component';
 
 
 const routes: Routes = [
@@ -282,7 +283,7 @@ const routes: Routes = [
     },
     {
         path: '',
-        component: WelcomeComponent,
+        component: EndEnrollComponent,
         pathMatch: 'full',
         canActivate: [IrbGuard]
     },

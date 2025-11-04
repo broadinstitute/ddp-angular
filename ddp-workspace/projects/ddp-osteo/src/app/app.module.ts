@@ -46,6 +46,7 @@ import { LandingPageComponent } from './components/landing-page/landing-page.com
 import { PrequalifierService } from './services/prequalifier.service';
 import { GovernedUserService } from './services/governed-user.service';
 import { NavigationEnd, Router } from '@angular/router';
+import { EndEnrollComponent } from './components/end-enroll/end-enroll.component';
 
 const baseElt = document.getElementsByTagName('base');
 
@@ -191,6 +192,7 @@ export function translateFactory(
     ],
     declarations: [
         WelcomeComponent,
+        EndEnrollComponent,
         AppComponent,
         FooterComponent,
         GalleryComponent,
