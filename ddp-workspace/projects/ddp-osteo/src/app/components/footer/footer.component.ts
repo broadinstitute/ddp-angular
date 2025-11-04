@@ -78,4 +78,11 @@ export class FooterComponent implements OnInit {
     public sendSocialMediaAnalytics(event: string): void {
         this.analytics.emitCustomEvent(AnalyticsEventCategories.Social, event);
     }
+
+    public scrollToTop(): void {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth',
+        });
+    }
 }

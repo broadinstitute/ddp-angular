@@ -1,137 +1,34 @@
 <footer class="footer">
-    <div class="content">
-        <nav class="nav">
-            <ul class="navigation">
-                <ng-container *ngFor="let listItem of footerNavElements">
-                    <li class="navigation-item">
-                        <a
-                            class="footer-link"
-                            translate
-                            [routerLink]="listItem.routerLink"
-                            [routerLinkActive]="
-                                listItem.isMailingListButton ? '' : 'active'
-                            "
-                            [routerLinkActiveOptions]="{ exact: true }"
-                            [attr.aria-label]="
-                                listItem.arialLabel
-                                    ? (listItem.arialLabel | translate)
-                                    : null
-                            "
-                            (click)="
-                                openJoinMailingList(
-                                    listItem.isMailingListButton
-                                )
-                            "
-                            >{{ listItem.text }}</a
-                        >
-                    </li>
-                </ng-container>
-                <li class="navigation-item">
-                    <div class="contacts">
-                        <span translate>Footer.Contacts.Title</span>
-                        <div class="contacts-container">
-                            <div class="contact-links-and-icons">
-                                <div class="links">
-                                    <a
-                                        class="footer-link"
-                                        [href]="emailHref"
-                                        target="_blank"
-                                        >{{ email }}</a
-                                    >
-                                    <a
-                                        class="footer-link"
-                                        [href]="phoneHref"
-                                        target="_blank"
-                                        >{{ phone }}</a
-                                    >
-                                </div>
-                                <div>
-                                    <a
-                                        (click)="
-                                            sendSocialMediaAnalytics('twitter')
-                                        "
-                                        class="social-media__link"
-                                        [href]="twitterUrl"
-                                        target="_blank"
-                                    >
-                                        <img
-                                            class="social-media__logo"
-                                            lazy-resource
-                                            src="assets/images/twitter-small.png"
-                                            [alt]="
-                                                'Common.Alts.Twitter'
-                                                    | translate
-                                            "
-                                        />
-                                    </a>
-                                    <a
-                                        (click)="
-                                            sendSocialMediaAnalytics('facebook')
-                                        "
-                                        class="social-media__link"
-                                        [href]="facebookUrl"
-                                        target="_blank"
-                                    >
-                                        <img
-                                            class="social-media__logo"
-                                            lazy-resource
-                                            src="assets/images/facebook-small.png"
-                                            [alt]="
-                                                'Common.Alts.Facebook'
-                                                    | translate
-                                            "
-                                        />
-                                    </a>
-                                    <a
-                                        (click)="
-                                            sendSocialMediaAnalytics(
-                                                'instagram'
-                                            )
-                                        "
-                                        class="social-media__link"
-                                        [href]="instagramUrl"
-                                        target="_blank"
-                                    >
-                                        <img
-                                            class="social-media__logo"
-                                            lazy-resource
-                                            src="assets/images/instagram-small.png"
-                                            [alt]="
-                                                'Common.Alts.Instagram'
-                                                    | translate
-                                            "
-                                        />
-                                    </a>
-                                </div>
-                            </div>
-                            <p
-                                class="no-margin address"
-                                [innerHTML]="
-                                    'Footer.Contacts.Address' | translate
-                                "
-                                translate
-                            ></p>
-                        </div>
-                    </div>
-                </li>
-            </ul>
-        </nav>
+    <div class="footer__inner">
+        <div class="contacts">
+            <p class="contacts__title" translate>Footer.Contacts.Title</p>
+            <div class="contacts__links">
+                <a class="contact-link" [href]="emailHref" target="_blank">{{
+                    email
+                }}</a>
+                <a class="contact-link" [href]="phoneHref" target="_blank">{{
+                    phone
+                }}</a>
+            </div>
+        </div>
+        <div class="address">
+            <p
+                class="address__text"
+                [innerHTML]="'Footer.Contacts.Address' | translate"
+            ></p>
+        </div>
 
         <div class="cmi-info">
+            <p class="back-to-top" (click)="scrollToTop()" [innerHTML]="'EndEnroll.back-to-top' | translate"></p>
             <a class="cmi-info-logo" [href]="countMeInUrl" target="_blank">
                 <img
+                width="117"
+                height="52"
                     lazy-resource
                     src="assets/images/logo-count-me-in.svg"
                     [alt]="'Common.Alts.CMI' | translate"
                 />
             </a>
-            <p class="no-margin cmi-info-text">
-                <span translate>Footer.Info.Text.Part1</span>
-                <a class="bold" [href]="countMeInUrl" target="_blank" translate
-                    >Common.CMI</a
-                >,
-                <span translate>Footer.Info.Text.Part2</span>
-            </p>
         </div>
     </div>
 </footer>

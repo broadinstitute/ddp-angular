@@ -1,137 +1,79 @@
-@use '@angular/material' as mat;
+@use "@angular/material" as mat;
 @import "../../../app-theme.scss";
 
 .footer {
     background-color: mat.get-color-from-palette($app-theme, 900);
-    width: 100%;
     padding: 3rem 0;
+    width: 100%;
 
-    .content {
-        margin: auto;
-        padding: 3.25rem 1.5625rem 4rem 1.5625rem;
+    &__inner {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        margin: 0 auto;
+        padding: 0 1.5625rem;
+        max-width: 1200px;
+
+        @media screen and (max-width: 768px) {
+            grid-template-columns: 1fr;
+            grid-gap: 2rem;
+            text-align: center;
+        }
+    }
+
+    .contacts__title {
+        margin-bottom: 0;
+        font-weight: 600;
+        line-height: 1.5625rem;
+    }
+
+    .contacts__links {
         display: flex;
         flex-direction: column;
-        align-items: flex-start;
-        width: 80%;
-
-        .nav .navigation {
-            list-style: none;
-            display: flex;
-            gap: 2rem;
-            padding: 0;
-            position: relative;
-
-            .navigation-item {
-                position: relative;
-                text-align: center;
-
-                &:last-of-type {
-                    text-align: left;
-                }
-
-                .footer-link {
-                    font-size: 1.25rem;
-                    line-height: 1.5625rem;
-
-                    &:hover {
-                        color: mat.get-color-from-palette($app-theme, 650);
-                        text-decoration: underline;
-                    }
-
-                    &.active {
-                        text-decoration: underline;
-                    }
-                }
-
-                .contacts {
-                    display: flex;
-                    flex-direction: column;
-
-                    .contacts-container {
-                        display: flex;
-                        top: 100%;
-                        left: 0;
-                        gap: 2rem;
-
-                        .contact-links-and-icons .footer-link,
-                        .address {
-                            font-size: 0.9375rem !important;
-                        }
-
-                        .contact-links-and-icons {
-                            .links {
-                                display: flex;
-                                flex-direction: column;
-                            }
-                        }
-
-                        .address {
-                            line-height: 1.2rem;
-                            width: 10rem;
-                        }
-                    }
-
-                    .social-media__logo {
-                        width: 1.5625rem;
-                        height: 1.5625rem;
-                    }
-                }
-            }
-
-            @media (max-width: 66.875rem) {
-                flex-wrap: wrap;
-                margin-bottom: 2rem;
-            }
-
-            @media (max-width: 42.5rem) {
-                flex-direction: column;
-
-                .navigation-item {
-                    text-align: left;
-                }
-            }
-
-            &::after {
-                content: "";
-                position: absolute;
-                bottom: 1.5rem;
-                left: 0;
-                width: 40%;
-                height: 0.0625rem;
-                background: mat.get-color-from-palette($app-theme, 700);
-
-                @media (max-width: 66.875rem) {
-                    bottom: -1rem;
-                }
-
-                @media (max-width: 42.5rem) {
-                    width: 100%;
-                }
-            }
+        gap: 0.5rem;
+        margin-top: 0.5rem;
+        a {
+            font-size: 1.375rem;
         }
-
-        .cmi-info {
-            display: flex;
-            align-items: center;
-            width: 50%;
-
-            .cmi-info-logo {
-                margin-right: 2.5rem;
-            }
-
-            .cmi-info-text {
-                font-size: 0.9375rem;
-                line-height: 1.375rem;
-            }
-
-            @media (max-width: 45rem) {
-                width: 70%;
-            }
-        }
-
-        @media (max-width: 70.625rem) {
-            width: 90%;
-        }
-
     }
+
+    .address__text {
+        text-align: center;
+    }
+
+    .back-to-top {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        gap: 0.5rem;
+        cursor: pointer;
+        margin: 0;
+        text-align: right;
+
+        &::before {
+            border-right: 0.4rem solid transparent;
+            border-bottom: 0.4rem solid currentColor;
+            border-left: 0.4rem solid transparent;
+            content: "";
+        }
+
+        @media screen and (max-width: 768px) {
+            justify-content: center;
+            text-align: center;
+        }
+    }
+
+    .cmi-info{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 1rem;
+        @media screen and (max-width: 768px) {
+            align-items: center;
+        }
+    }
+
+    p{
+        margin: 0;
+    }
+
 }
