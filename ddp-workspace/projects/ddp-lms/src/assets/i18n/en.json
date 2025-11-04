@@ -85,7 +85,7 @@
               "Question": "Who is conducting this research?",
               "Paragraphs": [
                 "This project is being conducted by the Broad Institute of MIT and Harvard, Dana-Farber Cancer Institute, and Count Me In, a non-profit research initiative that conducts patient-partnered studies of cancer. Count Me In's Osteosarcoma (OS) Project and Leiomyosarcoma (LMS) Project are supported by a grant from the National Cancer Institute's Cancer Moonshot program and are part of the <a href='https://pe-cgs.org' target='_blank'>Participant Engagement and Cancer Genome Sequencing (PE-CGS) Network of research centers</a>."
-            ]
+              ]
             },
             {
               "Question": "Who is eligible to participate?",
@@ -97,7 +97,9 @@
             },
             {
               "Question": "Are there any costs for participants to participate?",
-              "Paragraphs": ["No, there are no costs for the participant associated with any step in the project."]
+              "Paragraphs": [
+                "No, there are no costs for the participant associated with any step in the project."
+              ]
             },
             {
               "Question": "Is this research being conducted for profit?",
@@ -192,7 +194,9 @@
             },
             {
               "Question": "How can I receive updates on the LMSproject?",
-              "Paragraphs": ["If you would like updates on the project, please sign up for our mailing list."]
+              "Paragraphs": [
+                "If you would like updates on the project, please sign up for our mailing list."
+              ]
             }
           ]
         }
@@ -946,16 +950,16 @@
     "Questionnaire": "Surveys",
     "FamilyHistory": "Family History"
   },
-  "EndEnroll":{
-    "hero":{
+  "EndEnroll": {
+    "hero": {
       "title": "Enrollment for this funded project has now closed, a milestone reached together with our participants.",
       "paragraph-1": "Thank you to everyone who has enrolled in the project. We continue to analyze and share the data generated through your partnership, which will help shape the future of research in leiomyosarcoma (LMS). ",
       "paragraph-2": "By generating a comprehensive LMS dataset, researchers can better understand the disease and improve future treatments. De-identified clinical, genomic, molecular, and patient-reported data will be shared with the biomedical research community, through platforms such as cBioPortal for Cancer Genomics and the National Cancer Institute (NCI) Genomic Data Commons.",
       "paragraph-3": "LMS Project participants will have access to their participant dashboards through <strong>August 30, 2026. Questions? Please reach out to us via email to <a href='mailto:info@lmsproject.org'>info@lmsproject.org</a>.</strong>"
     },
-    "timeline":{
+    "timeline": {
       "title": "Leiomyosarcoma Project Milestones",
-      "items" : [
+      "items": [
         {
           "date": "2020",
           "content": "<ul><li>Received notice of award of National Cancer Institute (NCI) Participant Engagement and Cancer Genome Sequencing <a href='https://pe-cgs.org/' target='_blank'>(PE-CGS) network</a> grant.</li></ul>"
@@ -971,10 +975,14 @@
         {
           "date": "2024",
           "content": "<ul><li>Published manuscript on participant engagement <a href='https://pubmed.ncbi.nlm.nih.gov/40517303/' target='_blank'>(Optimizing participant and community engagement in cancer genomic sequencing research)</a>.</li><li>Published manuscript Supporting participant engagement in cancer genomics research in rare cancers: a qualitative study of patients, caregivers, and advocates.</li><li>Participated in yearly Sarcoma Awareness Month social media efforts (including in 2023 and 2024).</li><li>Received over XYZ germline samples and 500 tumor samples from participants in the LMS Project (as of 12/12/25).</li><li>Enrollment complete December 12, 2025. Over XYZ people with leiomyosarcoma have enrolled in the project, ranging in age from X - Y and from X states/provinces. Data generated through the project has/will be de-identified and added to repositories for ongoing research.</li></ul>"
+        },
+        {
+          "date": "2025",
+          "content": "<ul><li>Published manuscript on participant engagement <a href='https://pubmed.ncbi.nlm.nih.gov/40517303/' target='_blank'>(Optimizing participant and community engagement in cancer genomic sequencing research)</a>.</li><li>Published manuscript Supporting participant engagement in cancer genomics research in rare cancers: a qualitative study of patients, caregivers, and advocates</li><li>Participated in yearly Sarcoma Awareness Month social media efforts (including in 2023 and 2024).</li><li>Received over XYZ germline samples and 500 tumor samples from participants in the LMS Project (as of 12/12/25).</li><li>Enrollment complete December 12, 2025. Over XYZ people with leiomyosarcoma have enrolled in the project, ranging in age from X - Y and from X states/provinces. Data generated through the project has/will be de-identified and added to repositories for ongoing research.</li></ul>"
         }
       ]
     },
-    "outro":{
+    "outro": {
       "paragraph-1": "Visit <a href='https://pe-cgs.org/' target='_blank'>pe-cgs.org</a> for updates from the Participant Engagement and Cancer Genome Sequencing Network.",
       "paragraph-2": "<strong>Questions? Please reach out to us via email to <a href='mailto:info@lmsproject.org'>info@lmsproject.org</a>.</strong>"
     }
