@@ -1,15 +1,15 @@
-@use '@angular/material' as mat;
-@import '../../../app-theme.scss';
+@use "@angular/material" as mat;
+@import "../../../app-theme.scss";
 
 .header {
-    background-color: mat.get-color-from-palette($app-theme, 100);
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
     z-index: 1;
-    height: 6.25rem;
     transition: all 200ms linear;
+    background-color: mat.get-color-from-palette($app-theme, 100);
+    width: 100%;
+    height: 6.25rem;
 
     .languageSelection {
         display: flex;
@@ -18,13 +18,19 @@
     }
 }
 
+.header-buttons {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
 .header_shadow {
     box-shadow: 0 2px 20px 0 rgba(0, 0, 0, 0.2);
 }
 
 .placeholder {
-    height: 0;
     transition: all 200ms linear;
+    height: 0;
 }
 
 .placeholder_opened {
@@ -32,16 +38,16 @@
 }
 
 .panel-opened {
-    height: 100vh;
     z-index: 3;
+    height: 100vh;
 
     .panel-controls {
         display: flex;
         flex-direction: column;
-        margin: 1.5625rem 2.5rem;
-        transition: opacity 100ms 200ms ease;
-        opacity: 1;
         visibility: visible;
+        opacity: 1;
+        transition: opacity 100ms 200ms ease;
+        margin: 1.5625rem 2.5rem;
         height: 100%;
 
         .nav,
@@ -86,17 +92,18 @@
 
 .header-content {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-items: center;
-    height: 6.25rem;
-    max-width: 60%;
+    gap: 1rem;
     margin: auto;
     padding: 0 1.5625rem;
+    max-width: 1200px;
+    height: 6.25rem;
 }
 
 .wider-header {
-    max-width: 80%!important;
     justify-content: center;
+    max-width: 80% !important;
 
     .languageSelection {
         margin-left: 3em;
@@ -104,30 +111,43 @@
 }
 
 .panel-controls {
-    opacity: 0;
     visibility: hidden;
+    opacity: 0;
     height: 0;
 }
 
 .navigation {
-    list-style: none;
     display: flex;
+    list-style: none;
 }
 
 .navigation__item {
-    margin-right: 2.8125rem;
     display: flex;
+    margin-right: 2.8125rem;
 }
 
 .auth {
     display: flex;
     align-items: center;
+    gap: 1rem;
 }
 
 .auth__login {
-    font-size: 1.0625rem;
-    line-height: 1.375rem;
-    cursor: pointer;
+    ::ng-deep button {
+        cursor: pointer;
+        border-radius: 4px;
+        background-color: mat.get-color-from-palette($app-theme, 350);
+        padding: 0.625rem 1.25rem;
+        color: mat.get-color-from-palette($app-theme, 200);
+        font-size: 1.0625rem;
+        line-height: 1.375rem;
+        text-decoration: none;
+
+        &:hover{
+            //make bg darker with scss function
+            background-color: darken(mat.get-color-from-palette($app-theme, 350), 10%);
+        }
+    }
 }
 
 .header-button {
@@ -138,11 +158,24 @@
     display: flex;
     align-items: center;
     text-decoration: none !important;
+
+    @media screen and (max-width: 450px) {
+
+        .project-logo__img {
+            margin-right: 0.5rem;
+            height: 2rem;
+        }
+
+        .project-logo__text {
+            font-size: 1rem;
+            line-height: 1.2rem;
+        }
+    }
 }
 
 .project-logo:hover {
-    text-decoration: none;
     color: mat.get-color-from-palette($app-theme, 200);
+    text-decoration: none;
 }
 
 .project-logo__img {
@@ -151,8 +184,8 @@
 }
 
 .project-logo__text {
-    line-height: 1.4rem;
     font-size: 1.1rem;
+    line-height: 1.4rem;
 }
 
 .activity-heading {
@@ -164,21 +197,21 @@
 }
 
 .hamburger {
-    padding: 2rem;
-    cursor: pointer;
-    transition-property: opacity, filter;
-    transition-duration: 0.15s;
-    transition-timing-function: linear;
-    background-color: transparent;
-    border: 0;
     display: none;
+    transition-duration: 0.15s;
+    transition-property: opacity, filter;
+    transition-timing-function: linear;
+    cursor: pointer;
+    border: 0;
+    background-color: transparent;
+    padding: 2rem;
 }
 
 .hamburger-box {
-    width: 1.875rem;
-    height: 1.25rem;
     display: inline-block;
     position: relative;
+    width: 1.875rem;
+    height: 1.25rem;
 }
 
 .hamburger-inner {
@@ -190,20 +223,20 @@
 .hamburger-inner,
 .hamburger-inner::before,
 .hamburger-inner::after {
+    position: absolute;
+    transition-duration: 0.15s;
+    transition-property: transform;
+    transition-timing-function: ease;
+    border-radius: 2px;
+    background-color: mat.get-color-from-palette($app-theme, 200);
     width: 1.875rem;
     height: 2px;
-    background-color: mat.get-color-from-palette($app-theme, 200);
-    border-radius: 2px;
-    position: absolute;
-    transition-property: transform;
-    transition-duration: 0.15s;
-    transition-timing-function: ease;
 }
 
 .hamburger-inner::before,
 .hamburger-inner::after {
-    content: "";
     display: block;
+    content: "";
 }
 
 .hamburger--slider .hamburger-inner {
@@ -212,9 +245,9 @@
 
 .hamburger--slider .hamburger-inner::before {
     top: 8px;
+    transition-duration: 0.15s;
     transition-property: transform, opacity;
     transition-timing-function: ease;
-    transition-duration: 0.15s;
 }
 
 .hamburger--slider .hamburger-inner::after {
@@ -283,8 +316,8 @@
     }
 
     .languageSelection {
+        padding: 0 !important;
         width: 100%;
-        padding: 0!important;
     }
 
     .header-button {
@@ -293,7 +326,7 @@
 
     .nav,
     .auth {
-        display: none;
+        // display: none;
     }
 
     .header-content {
@@ -314,7 +347,7 @@
 
 @media only screen and (max-width: 1669px) {
     .wider-header {
-        max-width: 90%!important;
+        max-width: 90% !important;
     }
 }
 
@@ -326,11 +359,11 @@
 
 @media only screen and (max-width: 480px) {
     .header {
-        padding: .5em 0;
+        padding: 0.5em 0;
     }
     .header-content {
-        padding: 0 5px;
         justify-content: space-around;
+        padding: 0 5px;
         max-width: 100% !important;
         .languageSelection {
             margin-left: 0;

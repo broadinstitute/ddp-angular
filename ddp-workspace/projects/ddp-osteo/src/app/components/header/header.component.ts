@@ -2,7 +2,7 @@ import { Component, Inject, HostListener, OnInit } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { Router, NavigationEnd } from '@angular/router';
 import { WindowRef, SessionMementoService, AnalyticsEventsService, AnalyticsEventCategories, AnalyticsEventActions } from 'ddp-sdk';
-import { HeaderConfigurationService, CommunicationService } from 'toolkit';
+import { HeaderConfigurationService, CommunicationService, } from 'toolkit';
 
 @Component({
   selector: 'app-header',

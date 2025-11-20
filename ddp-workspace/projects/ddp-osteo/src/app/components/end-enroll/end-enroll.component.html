@@ -1,0 +1,85 @@
+<main class="main">
+    <section class="section">
+        <div class="content content_wide intro-media-block">
+            <div class="intro-media-block__text">
+                <h1 translate>EndEnroll.hero.title</h1>
+                <p [innerHTML]="'EndEnroll.hero.parahraph-1' | translate"></p>
+                <p [innerHTML]="'EndEnroll.hero.parahraph-2' | translate"></p>
+                <p [innerHTML]="'EndEnroll.hero.parahraph-3' | translate"></p>
+            </div>
+            <div class="intro-media-block__img gray-scale">
+                <img
+                    lazy-resource
+                    width="400"
+                    height="384"
+                    src="/assets/images/hero-img.png"
+                    [alt]="'HomePage.IntroductionSection.ImageAlt' | translate"
+                />
+            </div>
+        </div>
+    </section>
+    <section class="navigation-section">
+        <input
+            (click)="scrollToStepsSection()"
+            type="image"
+            src="assets/images/arrow.svg"
+            [alt]="'HomePage.NavigationSection.Button.Alt' | translate"
+        />
+    </section>
+    <section class="organizations-section">
+        <img
+            lazy-resource
+            src="assets/images/logo-broad-institute.svg"
+            class="organizations-section__img"
+            [alt]="'HomePage.OrganizationsSection.BroadLogo.Alt' | translate"
+        />
+        <img
+            lazy-resource
+            src="assets/images/logo-new-DFCI.jpg"
+            class="organizations-section__img"
+            [alt]="
+                'HomePage.OrganizationsSection.DanaFarberLogo.Alt' | translate
+            "
+        />
+        <img
+            lazy-resource
+            src="assets/images/PE-CGS-logo.png"
+            class="organizations-section__img"
+            [alt]="'HomePage.OrganizationsSection.PECGSLogo.Alt' | translate"
+        />
+    </section>
+
+    <section class="timeline" #scrollAnchor>
+        <div class="timeline__inner">
+            <h2
+                class="timeline__title text-center"
+                [innerHTML]="'EndEnroll.timeline.title' | translate"
+            ></h2>
+            <ol class="timeline__list">
+                <li
+                    class="timeline__item timeline-item"
+                    *ngFor="let item of 'EndEnroll.timeline.items' | translate"
+                >
+                    <article class="timeline-item__inner">
+                        <h3
+                            class="timeline-item__date"
+                            [innerHTML]="item.date"
+                        ></h3>
+                        <div
+                            class="timeline-item__content"
+                            [innerHTML]="item.content"
+                        ></div>
+                    </article>
+                </li>
+            </ol>
+        </div>
+    </section>
+
+    <section class="outro">
+        <div class="outro__text">
+            <p [innerHTML]="'EndEnroll.outro.paragraph-1' | translate"></p>
+            <p [innerHTML]="'EndEnroll.outro.paragraph-2' | translate"></p>
+        </div>
+    </section>
+
+</main>

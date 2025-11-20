@@ -54,7 +54,7 @@
             }
         },
         "Contacts": {
-            "Title": "Comuníquese con nosotros",
+            "Title": "Comuníquese con nosotros:",
             "Address": "Count Me In<br>415 Main St, Cambridge, MA<br>02142, Estados Unidos"
         }
     },
@@ -129,9 +129,6 @@
                 "Title": "<strong>¿Qué tipo de interrogantes pretende abordar este proyecto?</strong>",
                 "Text": "En la última década, la caracterización genómica de los tumores ha iluminado los fundamentos moleculares del cáncer. Estos descubrimientos han conducido al desarrollo de tratamientos innovadores y medidas preventivas que ya han revolucionado la atención médica del cáncer. A pesar de este progreso, se desconoce mucho sobre la genómica del osteosarcoma.<br><br>Algunos de los diversos interrogantes que nos planteamos son los siguientes:<br><br><span>•</span> ¿Cuáles son todos los genes y las mutaciones que pueden inducir la aparición de un osteosarcoma?<br><span>•</span> ¿Qué explica que algunos pacientes muestren respuestas extraordinarias a un tratamiento concreto?<br> <span>•</span> ¿Qué explica que algunos tumores nunca respondan a un determinado tratamiento?<br><span>•</span> ¿Cómo podemos desarrollar mejores tratamientos para el osteosarcoma?<br><br>A pesar de los progresos que se han hecho para empezar a responder a estas preguntas, seguimos lejos del objetivo. Para conseguirlo, será necesaria la caracterización genómica detallada de miles de muestras de cáncer relacionadas con información clínica.<br><br>Si tiene alguna pregunta sobre este estudio, póngase en contacto con nosotros al siguiente correo electrónico <a href=\"mailto:info@osproject.org\" class=\"Link\">info@osproject.org</a> o llame al <a class=\"Link\" href=\"tel:651-602-2020\">651-602-2020</a>.<br><br>El Proyecto sobre Osteosarcoma forma parte de Count Me In"
             }
-
-
-
         ],
         "IntroSection": {
             "Title": "Información para su médico",
@@ -141,7 +138,6 @@
             "Title": "Información para su médico"
         }
     },
-
     "DashboardIntro": {
         "isParent": "Gracias por formar parte del Proyecto sobre Osteosarcoma. Esta página contiene enlaces a los formularios y encuestas que forman parte del estudio. Con el tiempo, podemos añadir encuestas adicionales para su consideración. La información que nos proporcione nos ayudará a entender mejor el cáncer.<br><br>Si, en algún momento, tiene preguntas o desea compartir información actualizada, comuníquese con el equipo del estudio por correo electrónico a <a class=\"Link\" href=\"mailto:info@osproject.org\">info@osproject.org</a> o llame al <a class=\"Link\" href='tel:651-602-2020'>651-602-2020. </a>",
         "isChild": "Gracias por formar parte del Proyecto sobre Osteosarcoma. Esta página contiene enlaces a los formularios y las encuestas de su hijo(a) que forman parte del estudio. Con el tiempo, podemos añadir encuestas adicionales para su consideración. La información que nos proporcione nos ayudará a entender mejor el cáncer.<br><br>Si, en algún momento, tiene preguntas o desea compartir información actualizada, comuníquese con el equipo del estudio por correo electrónico a <a class=\"Link\" href=\"mailto:info@osproject.org\">info@osproject.org</a> o llame al <a class=\"Link\" href='tel:651-602-2020'>651-602-2020</a>.",
@@ -195,7 +191,7 @@
                 "Alt": "Logotipo de Dana Farber"
             },
             "PECGSLogo": {
-              "Alt": "Logotipo PE-CGS"
+                "Alt": "Logotipo PE-CGS"
             }
         },
         "fundingText": "Los proyectos de Osteosarcoma y Leiomiosarcoma de Count Me In son posibles gracias a financiamiento federal mendiante el fondo Involucramiento de Participantes y Secuenciación del Genoma de Cáncer (PE-CGS) como parte de la iniciativa Cancer Moonshot. Obtenga más información sobre PE-CGS <a class=\"hereLink\" href=\"https://pe-cgs.org/\" target=\"_blank\"><u>aquí.</u></a>",
@@ -293,7 +289,6 @@
             "ImageAlt": "Hands raised to volunteer"
         }
     },
-
     "ParticipationPage": {
         "Title": "Cómo participar",
         "Intro": "Su salud y bienestar son lo primero. Entendemos que vivir con una enfermedad o discapacidad puede tener desafíos, y le invitamos a unirse a nuestro proyecto cuando le sea más fácil.",
@@ -356,7 +351,6 @@
             }
         ]
     },
-
     "SIPage": {
         "introduction": {
             "Title": "Impacto científico"
@@ -592,7 +586,6 @@
                     "Affiliations": [
                         "Dana-Farber Cancer Institute",
                         "Escuela de Medicina de Harvard"
-
                     ],
                     "Url": "",
                     "Image": "assets/images/Oza.jpg",
@@ -609,7 +602,6 @@
                     "Image": "assets/images/Raut.jpg",
                     "Alt": "Fotografía de Chandrajit Raut"
                 }
-
             ]
         },
         "LearnMoreSection": {
@@ -1139,5 +1131,43 @@
         },
         "ConfirmDeletion": "¿Está seguro de que desea eliminar\nesta información?",
         "CancelBtn": "Cancelar"
+    },
+    "EndEnroll": {
+        "hero": {
+            "title": "La inscripción de este proyecto financiado ya está cerrada, un logro alcanzado junto con nuestros participantes.",
+            "parahraph-1": "Gracias a todos los que se han inscrito en el proyecto. Seguimos analizando y compartiendo los datos generados gracias a su colaboración, lo que contribuirá a definir el futuro de la investigación sobre el osteosarcoma (OS).",
+            "parahraph-2": "Al generar un conjunto completo de datos sobre el OS, los investigadores pueden comprender mejor la enfermedad y optimizar los tratamientos futuros. Los datos clínicos, genómicos, moleculares y notificados por los pacientes, sin identificar, se compartirán con la comunidad de investigación biomédica a través de plataformas como cBioPortal for Cancer Genomics y el Genomic Data Commons del Instituto Nacional del Cáncer (NCI).",
+            "parahraph-3": "Los participantes del Proyecto OS seguirán teniendo acceso a su pantalla principal. <strong>¿Tiene alguna pregunta? Contáctenos por correo electrónico a <a href=\"mailto:info@osproject.org\">info@osproject.org</a>.</strong>"
+        },
+        "timeline": {
+            "title": "Logros del Proyecto Osteosarcoma",
+            "items": [
+                {
+                    "date": "2020",
+                    "content": "<ul><li>Se asoció con grupos de defensa en los EE. UU. y Canadá, incluidos<a href='https://www.mibagents.org/' target='_blank'>MIB Agents</a>, <a href='https://www.quadw.org/' target='_blank'>The QuadW Foundation</a>, <a href='https://childrenscancer.org/zach/' target='_blank'>Zach Sobiech Osteosarcoma Fund</a>, <a href='https://childrenscancer.org/because-of-daniel/' target='_blank'>Because of Daniel</a>, <a href='https://oscollaborative.org/' target='_blank'>Osteosarcoma Collaborative</a>, <a href='https://mcamf.org/' target='_blank'>Mason Chandler Allen Memorial Foundation</a>, y <a href='https://osinst.org/' target='_blank'>Osteosarcoma Institute</a>.</li><li>Se lanzó el proyecto en el evento FACTOR de MIB Agent en febrero de 2020 a través de la colaboración con pacientes, defensores, médicos e investigadores.</li><li>Se recibió la notificación de la concesión de una subvención de la Red de Participación de los Participantes y Secuenciación del Genoma del Cáncer <a href='https://pe-cgs.org/' target='_blank'>(PE-CGS)</a> del Instituto Nacional del Cáncer (NCI) para ampliar el proyecto.</li></ul>"
+                },
+                {
+                    "date": "2022",
+                    "content": "<ul><li>El proyecto se relanzo en septiembre de 2022 como parte de la red PE-CGS, agregando oportunidades adicionales para los participantes.</li><li>Participó en conferencias y eventos comunitarios en todo Estados Unidos y en el extranjero para impulsar la inscripción.</li><li>Se publicó un manuscrito en la red PE-CGS <a href='https://jamanetwork.com/journals/jama-health-forum/fullarticle/2791195' target='_blank'>(Un marco para promover la diversidad, la equidad y la inclusión en la investigación genética y genómica).</a></li></ul>"
+                },
+                {
+                    "date": "2023",
+                    "content": "<ul><li>Se completó la prueba genética de la línea germinal (modificaciones del ADN heredadas) para el primer participante.</li><li>Se lanzaron grupos focales de discusión dentro de la comunidad hispana y latina (H/L).</li><li>Presentado a grupos de H/L, incluidos la Iglesia de Hispana y La Colaborativa, Nueva Vida Surviving Cancer Group y el podcast \"Osteobites Preguntas y Respuestas\".</li><li>Se publico un manuscrito sobre el involucramiento de participantes <a href='https://pubmed.ncbi.nlm.nih.gov/36791345/' target='_blank'>(Priorities to Promote Participant Engagement in the Participant Engagement and Cancer Genome Sequencing (PE-CGS) Network)</a>.</li></ul>"
+                },
+                {
+                    "date": "2024",
+                    "content": "<ul><li>Se lanzó el sitio web del Proyecto OS en español.</li><li>Se publicó un manuscrito sobre barreras sistémicas en la investigación con pacientes asociados <a href='https://ascopubs.org/doi/10.1200/JCO.24.00347' target='_blank'>(Overcoming systemic barriers to make patient-partnered research a reality)</a>.</li><li>Se enviaron los primeros resultados de pruebas genéticas somáticas (ADN del tumor) al participante.</li><li>Se optimizó la Red de participación médica para ampliar el alcance asociado con los pacientes.</li></ul>"
+                },
+                {
+                    "date": "2025",
+                    "content": "<ul><li>Presentado a grupos que incluyen Iglesia Hispana, La Colaborativa, y MIB Agents.</li><li>Se asoció con Chelsey Gomez (@ohyouresotough), una defensora y artista del cáncer AYA, para compartir obras de arte adaptadas a varias comunidades de cáncer AYA, incluido OS.</li><li>Se publico un manuscrito sobre el involucramiento de participants <a href='https://pubmed.ncbi.nlm.nih.gov/40517303/' target='_blank'>(Optimizing participant and community engagement in cancer genomic sequencing research)</a>.</li><li>Se publicó el manuscrito Apoyo al involucramiento de los participantes en la investigación genómica del cáncer en cánceres raros: un estudio cualitativo de pacientes, cuidadores y defensores</li><li>Participó en los esfuerzos anuales en redes sociales del Mes de Concientización sobre el Sarcoma (incluidos en 2023 y 2024).</li><li>Se recibieron más de XYZ muestras de línea germinal y 500 muestras de tumores de los participantes en el Proyecto OS (al 12/12/25).</li></ul>"
+                }
+            ]
+        },
+        "outro": {
+            "paragraph-1": "Visite <a href='https://pe-cgs.org/' target='_blank'>pe-cgs.org</a> para obtener actualizaciones de la Red de Involucramiento de Participantes y Secuenciación del Genoma del Cáncer.",
+            "paragraph-2": "<strong>¿Tiene alguna pregunta? Contáctenos por correo electrónico a <a href='mailto:info@osproject.org'>info@osproject.org</a>.</strong>"
+        },
+        "back-to-top": "Volver arriba"
     }
 }

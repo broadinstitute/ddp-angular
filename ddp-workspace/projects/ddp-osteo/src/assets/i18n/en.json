@@ -54,7 +54,7 @@
             }
         },
         "Contacts": {
-            "Title": "Contact Us",
+            "Title": "Contact Us:",
             "Address": "Count Me In<br>415 Main St, Cambridge, MA<br>02142, United States"
         }
     },
@@ -129,22 +129,18 @@
                 "Title": "<strong>What kinds of questions is this project aiming to address?</strong>",
                 "Text": "Over the past decade, genomic characterization of tumors has shed enormous light on the molecular underpinnings of cancer. These discoveries have led to the development of novel therapies and preventive measures that have already revolutionized cancer care. Despite this progress, the genomics of osteosarcoma remains poorly understood.<br><br>The types of questions we strive to answer include:<br><br><span>&#8226;</span> What are all the genes and mutations that can lead to osteosarcoma?<br><span>&#8226;</span> What explains why some patients show extraordinary responses to a particular treatment?<br> <span>&#8226;</span> What explains why some tumors never respond to a particular treatment?<br><span>&#8226;</span> How can we develop better treatments for osteosarcoma?<br><br>Despite the progress that has been made to begin to answer these questions, we remain far from the goal. To get there, the detailed genomic characterization of many thousands of clinically annotated cancer samples will be required.<br><br>If you have any questions about this study, please reach out to us at <a href=\"mailto:info@osproject.org\" class=\"Link\">info@osproject.org</a> or <a class=\"Link\" href=\"tel:651-602-2020\">651-602-2020</a>.<br><br>The Osteosarcoma Project is part of Count Me In"
             }
-
-
-
         ],
         "IntroSection": {
             "Title": "For your physician",
             "Text": "The purpose of this page is to provide details about the Osteosarcoma Project to your physician and care team so they can learn more about the project. You can show them this website, or print out a PDF below with the same information to discuss at your next appointment"
         },
-        "ISection" : {
+        "ISection": {
             "Title": "For your physician"
         }
     },
-
-    "DashboardIntro" : {
+    "DashboardIntro": {
         "isParent": "Thank you for being part of the Osteosarcoma project. This page contains links to your forms and surveys that are part of the study. Over time, we may add additional surveys for your consideration. The information you provide will help drive our understanding of cancer.<br><br>If at any time you have questions or would like to share updated information, please contact the study team at <a class=\"Link\" href=\"mailto:info@osproject.org\">info@osproject.org</a> or call <a class=\"Link\" href='tel:651-602-2020'>651-602-2020. </a>",
-        "isChild" : "Thank you for being part of the Osteosarcoma project. This page contains links to your child’s forms and surveys that are part of the study. Over time, we may add additional surveys for your consideration. The information you provide will help drive our understanding of cancer.<br><br>If at any time you have questions or would like to share updated information, please contact the study team at <a class=\"Link\" href=\"mailto:info@osproject.org\">info@osproject.org</a> or call <a class=\"Link\" href='tel:651-602-2020'>651-602-2020</a>.",
+        "isChild": "Thank you for being part of the Osteosarcoma project. This page contains links to your child’s forms and surveys that are part of the study. Over time, we may add additional surveys for your consideration. The information you provide will help drive our understanding of cancer.<br><br>If at any time you have questions or would like to share updated information, please contact the study team at <a class=\"Link\" href=\"mailto:info@osproject.org\">info@osproject.org</a> or call <a class=\"Link\" href='tel:651-602-2020'>651-602-2020</a>.",
         "isLovedOne": "Thank you for being part of the Osteosarcoma Project and sharing your Loved One’s experience with osteosarcoma. This page contains a link that will take you to the survey so you can complete it.<br><br>If at any time you have questions or would like to share updated information, please contact the study team at <a class=\"Link\" href=\"mailto:info@osproject.org\">info@osproject.org</a> or call <a class=\"Link\" href='tel:651-602-2020'>651-602-2020</a>."
     },
     "HomePage": {
@@ -195,7 +191,7 @@
                 "Alt": "Dana Farber logo"
             },
             "PECGSLogo": {
-              "Alt": "PE-CGS logo"
+                "Alt": "PE-CGS logo"
             }
         },
         "fundingText": "Count Me In’s Osteosarcoma and Leiomyosarcoma Projects are made possible by federal funding through the Participant Engagement and Cancer Genome Sequencing (PE-CGS) grant as part of the Cancer Moonshot Initiative. Learn more about PE-CGS <a class=\"hereLink\" href=\"https://pe-cgs.org/\" target=\"_blank\"><u>here.</u></a>",
@@ -292,7 +288,6 @@
             "ImageAlt": "Hands raised to volunteer"
         }
     },
-
     "ParticipationPage": {
         "Title": "Here’s how to participate",
         "Intro": "Your health and well-being come first. We understand that living with an illness or disability can bring challenges, and we welcome you to join our project when you're most able to do so.",
@@ -333,7 +328,6 @@
             }
         ]
     },
-
     "BenefitsParticipation": {
         "Title": "Benefits of Participation",
         "Participations": [
@@ -591,7 +585,6 @@
                     "Affiliations": [
                         "Dana-Farber Cancer Institute",
                         "Harvard Medical School"
-
                     ],
                     "Url": "",
                     "Image": "assets/images/Oza.jpg",
@@ -608,7 +601,6 @@
                     "Image": "assets/images/Raut.jpg",
                     "Alt": "Chandrajit Raut photo"
                 }
-
             ]
         },
         "LearnMoreSection": {
@@ -1141,5 +1133,43 @@
         },
         "ConfirmDeletion": "Are you sure you want to delete \nthis information?",
         "CancelBtn": "Cancel"
+    },
+    "EndEnroll": {
+        "hero": {
+            "title": "Enrollment for this funded project has now closed, a milestone reached together with our participants.",
+            "parahraph-1": "Thank you to everyone who has enrolled in the project. We continue to analyze and share the data generated through your partnership, which will help shape the future of research in osteosarcoma (OS).",
+            "parahraph-2": "By generating a comprehensive OS dataset, researchers can better understand the disease and improve future treatments. De-identified clinical, genomic, molecular, and patient-reported data will be shared with the biomedical research community, through platforms such as cBioPortal for Cancer Genomics and the National Cancer Institute (NCI) Genomic Data Commons.",
+            "parahraph-3": "OS Project participants will continue to have access to their participant dashboards. <strong>Questions? Please reach out to us via email to <a href=\"mailto:info@osproject.org\">info@osproject.org</a>.</strong>"
+        },
+        "timeline": {
+            "title": "Osteosarcoma Project Milestones",
+            "items": [
+                {
+                    "date": "2020",
+                    "content": "<ul><li>Partnered with advocacy groups across the US and Canada, including <a href='https://www.mibagents.org/' target='_blank'>MIB Agents</a>, <a href='https://www.quadw.org/' target='_blank'>The QuadW Foundation</a>, <a href='https://childrenscancer.org/zach/' target='_blank'>Zach Sobiech Osteosarcoma Fund</a>, <a href='https://childrenscancer.org/because-of-daniel/' target='_blank'>Because of Daniel</a>, <a href='https://oscollaborative.org/' target='_blank'>Osteosarcoma Collaborative</a>, <a href='https://mcamf.org/' target='_blank'>Mason Chandler Allen Memorial Foundation</a>, and <a href='https://osinst.org/' target='_blank'>Osteosarcoma Institute</a>.</li><li>Launched project at <a href='https://www.mibagents.org/factor-conference/2020' target='_blank'>MIB Agent's FACTOR</a> event in February 2020 through collaboration with patients, advocates, clinicians and researchers.</li><li>Received notice of award of National Cancer Institute (NCI) Participant Engagement and Cancer Genome Sequencing <a href='https://pe-cgs.org/' target='_blank'>(PE-CGS) network</a> grant to expand the project.</li></ul>"
+                },
+                {
+                    "date": "2022",
+                    "content": "<ul><li>Re-launched project in September 2022 as a part of the PE-CGS network, adding additional opportunities for participants.</li><li>Participated in conferences and community events across the US and abroad to drive enrollment.</li><li>Published manuscript on PE-CGS network<a href='https://jamanetwork.com/journals/jama-health-forum/fullarticle/2791195' target='_blank'> (A Framework for Promoting Diversity, Equity, and Inclusion in Genetics and Genomics Research)</a>.</li></ul>"
+                },
+                {
+                    "date": "2023",
+                    "content": "<ul><li>Completed germline genetic testing (inherited DNA modifications) for first participant.</li><li>Launched Focus Group discussions within the Hispanic and Latino (H/L) OS community.</li><li>Presented to H/L groups, including Iglesia de Hispana, and La Colaborativa, Nueva Vida Surviving Cancer Group, and the \"Osteobites Preguntas y Respuestas\" podcast.</li><li>Published manuscript on participant engagement <a href='https://pubmed.ncbi.nlm.nih.gov/36791345/' target='_blank'>(Priorities to Promote Participant Engagement in the Participant Engagement and Cancer Genome Sequencing (PE-CGS) Network)</a>.</li></ul>"
+                },
+                {
+                    "date": "2024",
+                    "content": "<ul><li>Launched OS Project website in Spanish.</li><li>Published manuscript on systemic barriers in patient-partnered research <a href='https://ascopubs.org/doi/10.1200/JCO.24.00347' target='_blank'>(Overcoming systemic barriers to make patient-partnered research a reality)</a>.</li><li>Sent first somatic genetic testing (DNA from tumor) results to participant.</li><li>Optimized Physician Engagement Network to expand patient-partnered outreach.</li></ul>"
+                },
+                {
+                    "date": "2025",
+                    "content": "<ul><li>Presented to groups including Iglesia de Hispana, La Colaborativa, and MIB Agents.</li><li>Partnered with Chelsey Gomez (@ohyouresotough), an AYA cancer advocate and artist, to share artwork tailored to various AYA cancer communities, including OS.</li><li>Published manuscript on participant engagement <a href='https://pubmed.ncbi.nlm.nih.gov/40517303/' target='_blank'>(Optimizing participant and community engagement in cancer genomic sequencing research)</a>.</li><li>Published manuscript Supporting participant engagement in cancer genomics research in rare cancers: a qualitative study of patients, caregivers, and advocates</li><li>Participated in yearly Sarcoma Awareness Month social media efforts (including in 2023 and 2024).</li><li>Received over XYZ germline samples and 500 tumor samples from participants in the OS Project (as of 12/12/25).</li><li>Closed enrollment December 12, 2025. Over XYZ people with osteosarcoma have enrolled in the project, ranging in age from X - Y and from X states/provinces. Data generated through the project has/will be de-identified and added to repositories for ongoing research.</li></ul>"
+                }
+            ]
+        },
+        "outro": {
+            "paragraph-1": "Visit <a href='https://pe-cgs.org/' target='_blank'>pe-cgs.org</a> for updates from the Participant Engagement and Cancer Genome Sequencing Network.",
+            "paragraph-2": "<strong>Questions? Please reach out to us via email to <a href='mailto:info@osproject.org'>info@osproject.org</a>.</strong>"
+        },
+        "back-to-top": "Back to top"
     }
 }
