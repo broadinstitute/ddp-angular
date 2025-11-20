@@ -179,14 +179,6 @@ const routes: Routes = [
         canActivate: [IrbGuard]
     },
     {
-        path: 'count-me-in',
-        component: WorkflowStartComponent,
-        canActivate: [
-            IrbGuard,
-            BrowserGuard
-        ]
-    },
-    {
         path: 'about-us',
         component: AboutUsComponent,
         canActivate: [IrbGuard]

@@ -193,11 +193,6 @@ const routes: Routes = [
     canActivate: [IrbGuard],
   },
   {
-    path: Route.CountMeIn,
-    component: WorkflowStartComponent,
-    canActivate: [IrbGuard, BrowserGuard],
-  },
-  {
     path: Route.ActivityId,
     component: ActivityComponent,
     canActivate: [IrbGuard, BrowserGuard, AuthGuard],
