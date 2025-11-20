@@ -21,7 +21,7 @@ import { HeaderService } from '../../services/header.service';
 export class HeaderComponent implements OnInit {
   public isPanelOpened = false;
   public isPageScrolled = false;
-  public showHamburgerVersion$: Observable<boolean> = this.breakPointObserver
+  public showHamburgerVersion$: Observable<boolean> | boolean = this.breakPointObserver
     .observe(['(max-width: 1235px)'])
     .pipe(map((result) => result.matches));
 
@@ -38,11 +38,18 @@ export class HeaderComponent implements OnInit {
   ) {}
 
   public ngOnInit(): void {
+    this.setupHeader();
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         this.isPanelOpened = false;
       }
     });
+  }
+
+  public setupHeader(): void {
+    this.headerConfig.showMainButtons = false;
+    this.headerConfig.showCmiButton = false;
+    this.showHamburgerVersion$ = false;
   }
 
   public openCloseMenu(): void {
@@ -62,7 +69,7 @@ export class HeaderComponent implements OnInit {
   }
 
   onLogoClick(): void {
-    this.headerConfig.setupDefaultHeader();
+    this.setupHeader();
   }
 
   @HostListener('window: scroll') public onWindowScroll(): void {

@@ -1,0 +1,243 @@
+@import "../../../../../ddp-pancan/src/styles/variables.scss";
+.hero {
+  margin: 0 auto;
+  padding: 3rem 0 4rem;
+  width: 85%;
+
+  &__grid {
+    display: grid;
+    align-items: center;
+    gap: 3rem;
+
+    @media screen and (min-width: 1024.1px) {
+      grid-template-columns: 1fr 360px;
+    }
+  }
+
+  &__title {
+    font-weight: 700;
+    font-size: 3rem;
+    font-size: Round(to-zero, 3rem, 1px);
+  }
+
+  &__text {
+    ::ng-deep strong a {
+      color: inherit;
+    }
+  }
+
+  &__media {
+  }
+
+  &__flex-row {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+    margin-bottom: 3rem;
+  }
+}
+
+.d-block {
+  display: block;
+}
+
+.mx-auto {
+  margin-right: auto;
+  margin-left: auto;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.skip-link {
+  all: unset;
+  cursor: pointer;
+  --_icon-color: #000;
+  &:hover,
+  &:focus-visible {
+    --_icon-color: #a268ce;
+  }
+
+  .icon * {
+    transition: stroke 0.3s;
+  }
+}
+
+.text-center {
+  text-align: center;
+}
+
+.timeline {
+  z-index: 0;
+  isolation: isolate;
+  overflow: hidden;
+  --line-width: 0.4rem;
+  --line-gap: 4rem;
+  box-sizing: border-box;
+  background-image: linear-gradient(135deg, #a27fc1 20%, #c3acd6 100%);
+  background-color: #a27fc1;
+  padding: 4rem 0 0rem;
+  scroll-margin-top: 6.25rem;
+
+  @media screen and (max-width: 1024px) {
+    --line-gap: 3rem;
+  }
+
+  &__inner {
+    margin-right: auto;
+    margin-left: auto;
+    width: 85%;
+
+    @media screen and (min-width: 1336.1px) {
+      width: 70%;
+    }
+  }
+
+  &__title {
+    margin-top: 0;
+    margin-bottom: 3rem;
+    font-weight: 700;
+    font-size: Round(to-zero, 2.625rem, 1px);
+  }
+
+  &__list {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    margin: 0 auto;
+    padding: 0 0 4rem;
+    list-style: none;
+  }
+
+  &__list::after {
+    position: absolute;
+    top: 1.5rem;
+    right: 0;
+    bottom: 0;
+    background: #000;
+    width: var(--line-width);
+    content: "";
+
+    @media screen and (min-width: 1024.1px) {
+      right: unset;
+      left: calc(50% - var(--line-width) / 2);
+    }
+  }
+}
+
+.timeline-item {
+  display: flex;
+  z-index: 2;
+
+  @media screen and (max-width: 1024px) {
+    padding-right: calc(var(--line-width) + var(--line-gap));
+    padding-bottom: 2rem;
+  }
+
+  &__inner {
+    position: relative;
+    box-sizing: border-box;
+    background: #fff;
+    padding: 2rem 2.25rem;
+    @media screen and (min-width: 1024.1px) {
+      padding: 2rem 1.25rem;
+      width: calc(50% - var(--line-width) / 2 - var(--line-gap));
+    }
+  }
+
+  &__inner::after {
+    --triangle-size: 1rem;
+    --triangle-offset: calc(var(--line-gap) / 2 + var(--triangle-size) / 4);
+    position: absolute;
+    top: 1rem;
+    right: calc(var(--triangle-offset) * -1);
+    border-width: var(--triangle-size) 0 var(--triangle-size) var(--triangle-size);
+    border-style: solid;
+    border-color: transparent transparent transparent #fff;
+    width: 0;
+    height: 0;
+    content: "";
+
+    @media screen and (max-width: 1024px) {
+      --triangle-size: 0.75rem;
+      top: 1.15rem;
+    }
+  }
+
+  &:nth-child(even) &__inner::after {
+    @media screen and (min-width: 1024.1px) {
+      right: unset;
+      left: calc(var(--triangle-offset) * -1);
+      transform: scaleX(-1);
+    }
+  }
+
+  &__inner::before {
+    --circle-size: 2rem;
+    --circle-offset: calc(var(--line-gap) + var(--circle-size) / 2 + var(--line-width) / 2);
+    position: absolute;
+    top: 1rem;
+    right: calc(var(--circle-offset) * -1);
+    box-shadow: inset 0 0 0 0.3rem #000;
+    border-radius: 50%;
+    background-color: #9953ce;
+    width: var(--circle-size);
+    height: var(--circle-size);
+    content: "";
+  }
+
+  &:nth-child(even) &__inner::before {
+    @media screen and (min-width: 1024.1px) {
+      right: unset;
+      left: calc(var(--circle-offset) * -1);
+    }
+  }
+
+  &:nth-child(even) &__inner {
+    @media screen and (min-width: 1024.1px) {
+      margin-left: auto;
+    }
+  }
+
+  &__date {
+    margin: 0 0 1rem;
+    font-size: 24px;
+    font-size: Round(to-zero, 1.55rem, 1px);
+    line-height: 1;
+  }
+
+  &__content {
+    ::ng-deep ul {
+      padding-left: 1.4rem;
+      list-style: disc;
+    }
+    ::ng-deep a{
+      text-decoration: underline;
+    }
+  }
+}
+
+.outro {
+  margin: 4rem auto;
+  width: 85%;
+}
+
+.home {
+
+  .company-logo {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px 10px;
+    margin-bottom: 1.5rem;
+
+    .logo {
+      margin: 0 1.5%;
+      height: 2.6rem;
+    }
+  }
+  
+}

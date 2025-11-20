@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Route } from '../../../constants/Route';
-import { CommunicationService } from 'toolkit';
+import { CommunicationService, HeaderConfigurationService} from 'toolkit';
 import { SessionMementoService } from 'ddp-sdk';
 import { HeaderService } from '../../../services/header.service';
 
@@ -15,8 +15,13 @@ export class FooterNavComponent {
   constructor(
     private communicationService: CommunicationService,
     private session: SessionMementoService,
-    public headerConfig: HeaderService
+    public headerConfig: HeaderConfigurationService
   ) {}
+
+  ngOnInit(): void {
+    this.headerConfig.showMainButtons = false;
+    this.headerConfig.showLoginButton = false;
+  }
 
   public scrollTop(): void {
     window.scroll({

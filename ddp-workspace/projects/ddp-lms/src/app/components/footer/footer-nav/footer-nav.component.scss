@@ -1,17 +1,17 @@
 .main-section {
   display: flex;
-  justify-content: space-between;
+  flex-wrap: wrap;
+  justify-content: flex-end;
   align-items: center;
   gap: 3rem;
-  flex-wrap: wrap;
 
   ul {
-    list-style: none;
-    font-weight: 500;
     display: flex;
     flex-wrap: wrap;
     gap: 2rem;
     padding: 0;
+    font-weight: 500;
+    list-style: none;
 
     li {
       cursor: pointer;
@@ -19,8 +19,8 @@
       font-size: 1rem;
 
       &.active {
-        text-decoration: underline;
         font-weight: bold;
+        text-decoration: underline;
       }
 
       &:first-of-type {
@@ -41,26 +41,26 @@
 
   .buttons {
     display: flex;
-    gap: 2rem;
     flex-wrap: wrap;
+    gap: 2rem;
 
     .button {
       padding: 0.91rem 2rem;
     }
 
     .cmiBtn {
-      padding: 0.7rem 1.75rem !important;
-      background-color: #9953ce;
+      transition: color .3s;
       border-color: #9953ce;
       border-radius: 4px;
+      background-color: #9953ce;
+      padding: 0.7rem 1.75rem !important;
       color: white;
       font-size: 1.0625rem;
-      transition: color .3s;
 
       &:hover {
-        background-color: #7f30b8;
-        border-color: #7f30b8;
         cursor: pointer;
+        border-color: #7f30b8;
+        background-color: #7f30b8;
       }
     }
 

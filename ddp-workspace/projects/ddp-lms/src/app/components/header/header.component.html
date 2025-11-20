@@ -13,6 +13,7 @@
         Project
       </p>
     </a>
+    
     <nav *ngIf="headerConfig.showMainButtons" class="header__nav">
       <app-nav *ngIf="!(showHamburgerVersion$ | async)"></app-nav>
     </nav>
@@ -20,7 +21,7 @@
     <nav class="header__nav" *ngIf="(showHamburgerVersion$ | async) && isPanelOpened">
       <app-mobile-nav class="mobile-nav"></app-mobile-nav>
     </nav>
-
+    
     <div *ngIf="headerConfig.stickySubtitle || headerConfig.showBreadcrumbs" class="activity-heading">
       <div *ngIf="headerConfig.showBreadcrumbs" class="breadcrumbs">
         <app-workflow-progress

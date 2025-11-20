@@ -1,56 +1,71 @@
-@import '../../../styles/fonts.scss';
+@import "../../../styles/fonts.scss";
 
 .footer {
-  font-family: Untitled-Sans, sans-serif;
+  background: #f8f8f8;
+  padding: 3rem 0;
+  font-family: Untitled-Sans, sans-serif;;
+  &__inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    margin: 0 auto;
+    padding: 0 1.5625rem;
+    max-width: 85%;
 
-  .container {
-    background-color: #131314;
+    @media screen and (max-width: 768px) {
+      grid-template-columns: 1fr;
+      grid-gap: 2rem;
+      text-align: center;
+    }
+  }
+
+  .back-to-top {
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    margin: 0;
+    text-align: right;
+
+    &::before {
+      border-right: 0.4rem solid transparent;
+      border-bottom: 0.4rem solid currentColor;
+      border-left: 0.4rem solid transparent;
+      content: "";
+    }
+
+    @media screen and (max-width: 768px) {
+      justify-content: center;
+      text-align: center;
+    }
+  }
+
+  .cmi-info {
+    display: flex;
     flex-direction: column;
-
-    $padding-left: 3.375rem;
-    $padding-right: 2rem;
-
-    .footer-nav {
-      padding: 3.375rem $padding-right 4rem $padding-left;
+    align-items: flex-end;
+    gap: 1rem;
+    
+    @media screen and (max-width: 768px) {
+      align-items: center;
     }
+  }
 
-    .copy-right {
-      color: white;
-      justify-content: space-between;
-      padding: 2.125rem $padding-right 2.75rem $padding-left;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 2rem;
-
-      p {
-        font-size: 1rem;
-        display: flex;
-        gap: 1rem;
-      }
-
-      ul {
-        list-style: none;
-        display: flex;
-        gap: 3rem;
-        align-items: center;
-        flex-wrap: wrap;
-        padding: 0;
-
-        li {
-          font-size: 1rem;
-
-          a {
-            color: white;
-          }
-        }
-      }
+  &__contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    
+    li {
+      font-size: 1.375rem;
     }
+  }
 
-    hr {
-      margin: 0;
-      opacity: 0.3;
-    }
+  &__address{
+    margin: 0;
+    text-align: center;
   }
 }

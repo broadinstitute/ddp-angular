@@ -4,12 +4,14 @@
       <mat-icon>arrow_upward</mat-icon>
       <span class="back-to-top">Back to top</span>
     </li>
-    <li routerLinkActive="active" [routerLink]="Route.About">About us</li>
-    <li routerLinkActive="active" [routerLink]="Route.HowToParticipate">Participation</li>
-    <li routerLinkActive="active" [routerLink]="Route.ScientificImpact">Scientific Impact</li>
-    <li routerLinkActive="active" [routerLink]="Route.FAQ">FAQs</li>
-    <li routerLinkActive="active" (click)="openJoinMailingList()">Join Mailing List</li>
-    <li routerLinkActive="active" [routerLink]="Route.ForYourPhysician">For your Physician</li>
+    <ng-container *ngIf="headerConfig.showMainButtons">
+      <li routerLinkActive="active" [routerLink]="Route.About">About us</li>
+      <li routerLinkActive="active" [routerLink]="Route.HowToParticipate">Participation</li>
+      <li routerLinkActive="active" [routerLink]="Route.ScientificImpact">Scientific Impact</li>
+      <li routerLinkActive="active" [routerLink]="Route.FAQ">FAQs</li>
+      <li routerLinkActive="active" (click)="openJoinMailingList()">Join Mailing List</li>
+      <li routerLinkActive="active" [routerLink]="Route.ForYourPhysician">For your Physician</li>
+    </ng-container>
   </ul>
 
   <div class="buttons" *ngIf="!isAuthenticated && headerConfig.showLoginButton">

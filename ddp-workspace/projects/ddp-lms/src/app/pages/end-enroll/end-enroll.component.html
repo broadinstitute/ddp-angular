@@ -1,0 +1,65 @@
+<main class="home">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <section class="hero">
+    <div class="hero__grid">
+      <div class="hero__text">
+        <h1 class="hero__title" [innerHTML]="'EndEnroll.hero.title' | translate"></h1>
+        <p [innerHTML]="'EndEnroll.hero.paragraph-1' | translate"></p>
+        <p [innerHTML]="'EndEnroll.hero.paragraph-2' | translate"></p>
+        <p [innerHTML]="'EndEnroll.hero.paragraph-3' | translate"></p>
+      </div>
+      <div class="hero__media">
+        <img
+          width="400"
+          height="384"
+          class="mx-auto"
+          src="/assets/images/paragraph1Photo.png"
+          alt="illustration-person-sitting"
+        />
+      </div>
+    </div>
+    <div class="hero__flex-row">
+      <button aria-label="skip to content" (click)="scrollTo(timeline)" class="skip-link">
+        <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 21 21">
+          <g
+            fill="none"
+            fill-rule="evenodd"
+            stroke="var(--_icon-color, #000)"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            transform="translate(2 2)"
+          >
+            <circle cx="8.5" cy="8.5" r="8" />
+            <path d="m5.5 7.5 3 3 3-3" />
+          </g>
+        </svg>
+      </button>
+    </div>
+    <div class="hero__flex-row company-logo">
+      <img class="logo" src="/assets/images/Broad logo.png" alt="" />
+      <img class="logo" src="/assets/images/DFCI llogo.png" alt="" />
+      <img class="logo" src="/assets/images/PE-CGS-logo.png" alt="" />
+    </div>
+  </section>
+
+  <section class="timeline" #timeline>
+    <div class="timeline__inner">
+          <h2 class="timeline__title text-center" [innerHTML]="'EndEnroll.timeline.title' | translate"></h2>
+      <ol class="timeline__list">
+        <li class="timeline__item timeline-item" *ngFor="let item of ('EndEnroll.timeline.items' | translate)">
+          <article class="timeline-item__inner">
+            <h3 class="timeline-item__date" [innerHTML]="item.date"></h3>
+            <div class="timeline-item__content" [innerHTML]="item.content"></div>
+          </article>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="outro">
+    <div class="outro__text">
+      <p [innerHTML]="'EndEnroll.outro.paragraph-1' | translate"></p>
+      <p [innerHTML]="'EndEnroll.outro.paragraph-2' | translate"></p>
+    </div>
+  </section>
+</main>
