@@ -3,7 +3,7 @@ import {WindowRef, AnalyticsEventsService, AnalyticsEventCategories, AnalyticsEv
 import { HeaderConfigurationService, CommunicationService, ToolkitConfigurationService } from 'toolkit';
 
 @Component({
-    selector: 'end-enroll',
+    selector: 'app-end-enroll',
     templateUrl: './end-enroll.component.html',
     styleUrls: ['./end-enroll.component.scss'],
 })
