@@ -15,7 +15,8 @@
   }
 
   &__title {
-    font-weight: 700;
+    font-family: $primary-font-medium;
+    font-weight: 500;
     font-size: 3rem;
     font-size: Round(to-zero, 3rem, 1px);
   }
@@ -99,7 +100,8 @@ img {
   &__title {
     margin-top: 0;
     margin-bottom: 3rem;
-    font-weight: 700;
+    font-family: $primary-font-medium;
+    font-weight: 500;
     font-size: Round(to-zero, 2.625rem, 1px);
   }
 
@@ -239,5 +241,5 @@ img {
       height: 2.6rem;
     }
   }
-  
+
 }
