@@ -52,8 +52,6 @@
             "ContinueText": "Although enrollment has ended, the work is far from over. Patient-partnered research will continue to be supported and offered by Broad Clinical Labs. Together, we will continue to analyze and share the data generated through your partnership, which will help shape the future of cancer research. To learn more, visit <a href='https://www.broadinstitute.org/genomics' target'_blank'>https://www.broadinstitute.org/genomics</a>.",
             "ProjectList": {
                 "Title": "Explore Current Projects",
-                "ProjectLink1": "<a href='https://osproject.org/' target='_blank'>Osteosarcoma Project</a>",
-                "ProjectLink2": "<a href='https://lmsproject.org/' target='_blank'>Leiomyosarcoma Project</a>",
                 "ProjectLink3": "<a href='http://pedihccproject.org' target='_blank'>Pediatric Heptacellular Carcinoma Project</a>",
                 "ProjectLink4": "<a href='https://trccproject.org/' target='_blank'>Translocation Renal Cell Carcinoma Project</a>"
             }
