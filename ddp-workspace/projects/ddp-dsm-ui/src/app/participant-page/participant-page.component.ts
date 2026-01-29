@@ -1798,7 +1798,6 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
           const studyAllow = allowedStudies.includes(this.sessionService.selectedRealm);
 
           const hasConsentedToTissueSample = this.participant.data.dsm?.['hasConsentedToTissueSample'];
-          const consentSuspended = this.participant.data.status === 'CONSENT_SUSPENDED';
 
           const consentAddendumPediatric = this.participant.data.activities
             ?.find(({activityCode}) => activityCode === 'CONSENT_ADDENDUM_PEDIATRIC');
@@ -1827,7 +1826,7 @@ export class ParticipantPageComponent implements OnInit, OnDestroy, AfterViewChe
           //Once aged up and NOT followedup consent will be suspended, so check if CONSENT_SUSPENDED
           //To handle agedup scenarios, check consent(assent)AddendumPediatric (which are from pre age up activity)
           // only if adult consentAddendum doesn't exist
-          return studyAllow && hasConsentedToTissueSample && !consentSuspended &&
+          return studyAllow && hasConsentedToTissueSample &&
             (somaticConsentAddendumTumorAdult?.answer ||
               (somaticConsentTumorPediatric?.answer && somaticAssentAddendum?.answer && consentAddendum === undefined) ||
               (somaticConsentTumorPediatric?.answer && consentAddendumPediatricStatus === 'COMPLETE'
