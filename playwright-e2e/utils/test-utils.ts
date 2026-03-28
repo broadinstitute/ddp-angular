@@ -41,8 +41,8 @@ export async function waitForResponse(page: Page, { uri, status = 200, timeout, 
   let response: Response;
   try {
     if (messageBody) {
-      response = await page.waitForResponse((resp: Response) => resp.url().includes(uri) &&
-        messageBody.every(async message => (await resp.text()).includes(message as string)), { timeout });
+      // eslint-disable-next-line max-len, @typescript-eslint/no-misused-promises
+      response = (await page.waitForResponse((resp: Response) => resp.url().includes(uri) && messageBody.every(async message => (await resp.text()).includes(message as string)), { timeout }));
     } else {
       response = await page.waitForResponse(new RegExp(uri, 'i'), { timeout });
     }

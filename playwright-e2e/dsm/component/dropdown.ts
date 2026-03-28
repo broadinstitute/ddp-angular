@@ -26,7 +26,9 @@ export default class Dropdown {
   }
 
   async open(): Promise<void> {
-    !(await this.isOpen()) && (await this.toLocator.locator('a.dropdown-toggle').click());
+    if (!(await this.isOpen())) {
+      (await this.toLocator.locator('a.dropdown-toggle').click());
+    }
   }
 
   async selectOption(value: string): Promise<void> {

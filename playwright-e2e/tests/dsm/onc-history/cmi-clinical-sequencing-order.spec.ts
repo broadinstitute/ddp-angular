@@ -38,7 +38,7 @@ test.describe.skip('Create Onc History', () => {
       await test.step('Search for participant that has Onc History tab', async () => {
         const customizeViewPanel = participantListPage.filters.customizeViewPanel;
         await customizeViewPanel.open();
-        await customizeViewPanel.selectColumns(CustomizeView.DSM_COLUMNS, [Label.ONC_HISTORY_CREATED]);
+        await customizeViewPanel.selectColumns(CustomizeView.PARTICIPANT_DSM, [Label.ONC_HISTORY_CREATED]);
         await customizeViewPanel.selectColumns(CustomizeView.RESEARCH_CONSENT_FORM, ['CONSENT_BLOOD', 'CONSENT_TISSUE']);
 
         const searchPanel = participantListPage.filters.searchPanel;

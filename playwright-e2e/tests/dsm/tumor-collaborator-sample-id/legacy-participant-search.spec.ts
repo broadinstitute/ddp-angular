@@ -35,7 +35,7 @@ test.describe.skip('Tumor Collaborator Sample ID', () => {
         await customizeViewPanel.selectColumns(CustomizeView.TISSUE, [Label.TUMOR_COLLABORATOR_SAMPLE_ID]);
         await customizeViewPanel.selectColumns(CustomizeView.PARTICIPANT, [Label.LEGACY_SHORT_ID]);
         await customizeViewPanel.deselectColumns(CustomizeView.PARTICIPANT, [Label.DDP, Label.LAST_NAME, Label.FIRST_NAME]);
-        await customizeViewPanel.selectColumns(CustomizeView.DSM_COLUMNS, [Label.ONC_HISTORY_CREATED]);
+        await customizeViewPanel.selectColumns(CustomizeView.PARTICIPANT_DSM, [Label.ONC_HISTORY_CREATED]);
         await customizeViewPanel.selectColumns(CustomizeView.MEDICAL_RECORD, [Label.MR_PROBLEM]);
 
         await expect(participantListTable.getHeaderByName(Label.DDP)).not.toBeVisible();

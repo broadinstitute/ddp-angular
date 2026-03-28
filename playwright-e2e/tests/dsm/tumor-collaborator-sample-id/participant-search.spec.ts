@@ -47,7 +47,7 @@ test.describe.serial('Tumor Collaborator Sample ID', () => {
         await customizeViewPanel.selectColumns(CustomizeView.TISSUE, [Label.TUMOR_COLLABORATOR_SAMPLE_ID]);
         await customizeViewPanel.selectColumns(CustomizeView.PARTICIPANT, [Label.REGISTRATION_DATE]);
         await customizeViewPanel.deselectColumns(CustomizeView.PARTICIPANT, [Label.DDP, Label.LAST_NAME, Label.FIRST_NAME]);
-        await customizeViewPanel.selectColumns(CustomizeView.DSM_COLUMNS, [Label.ONC_HISTORY_CREATED]);
+        await customizeViewPanel.selectColumns(CustomizeView.PARTICIPANT_DSM, [Label.ONC_HISTORY_CREATED]);
         await customizeViewPanel.selectColumns(CustomizeView.MEDICAL_RECORD, [Label.MR_PROBLEM]);
         await customizeViewPanel.selectColumns(CustomizeView.RESEARCH_CONSENT_FORM, ['CONSENT_BLOOD', 'CONSENT_TISSUE']);
 

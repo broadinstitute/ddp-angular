@@ -63,7 +63,11 @@ export class CustomizeView {
 
   private async selectOrDeselect(columnName: string, deselect = false): Promise<void> {
     const checkbox = this.columnCheckbox(columnName);
-    deselect ? await checkbox.uncheck() : await checkbox.check();
+    if (deselect) {
+      await checkbox.uncheck();
+    } else {
+      await checkbox.check();
+    }
   }
 
   private async openColumnsGroup(opts: { nth?: number } = {}): Promise<void> {
