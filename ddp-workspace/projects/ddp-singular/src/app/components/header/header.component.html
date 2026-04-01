@@ -8,7 +8,9 @@
       />
     </a>
 
-    <button class="toggle" [class.toggle--shown]="isNavigationShown" (click)="onToggleClick()">
+    <button class="toggle" [class.toggle--shown]="isNavigationShown"
+            (click)="onToggleClick()"
+            aria-label="Toggle menu button">
       <span class="toggle__bar"></span>
       <span class="toggle__bar"></span>
       <span class="toggle__bar"></span>
