@@ -1,12 +1,14 @@
 import { Locator, Page, expect } from '@playwright/test';
-import { getDate } from 'utils/date-utils';
+import { getDate, getDateinISOFormat, getToday } from 'utils/date-utils';
 import TabBase from './tab-base';
-import { Tab } from 'dsm/enums';
+import { SequencingOrderColumn, Tab } from 'dsm/enums';
+import { getColumnHeaderIndex } from 'utils/test-utils';
 
 export default class SequeuncingOrderTab extends TabBase {
   private readonly SAMPLE_ROW_XPATH = '//app-sequencing-order//tr';
   private readonly DATE_FIELD_XPATH = `//input[@data-placeholder='mm/dd/yyyy']`;
   private readonly NOT_ELIGIBLE_DUE_TO_RESIDENCE = `Error: Participant lives in New York or Canada and is not eligible for clinical sequencing`;
+  private readonly PLACE_CLINICAL_ORDER_MODAL_TEXT = `Are you sure you want to place a clinical sequencing order for the following samples:`;
 
   constructor(page: Page) {
     super(page, Tab.SEQUENCING_ORDER);
@@ -38,9 +40,33 @@ export default class SequeuncingOrderTab extends TabBase {
     await expect(placeOrderButton).not.toBeVisible();
   }
 
+  public async assertPlaceOrderButtonDisplayed(): Promise<void> {
+    const placeOrderButton = this.getPlaceOrderButton();
+    await placeOrderButton.scrollIntoViewIfNeeded();
+    await expect(placeOrderButton, 'The Place Order button is not visible to the current DSM user').toBeVisible();
+  }
+
   public async assertParticipantNotEligibleForClinicalSequencing(): Promise<void> {
     const validationMessage = this.page.getByText(this.NOT_ELIGIBLE_DUE_TO_RESIDENCE);
     await expect(validationMessage).toBeVisible();
+  }
+
+  public async assertClinicalOrderModalDisplayed(): Promise<void> {
+    const placeOrderModal = this.page.locator(`//div[contains(text(), '${this.PLACE_CLINICAL_ORDER_MODAL_TEXT}')]`);
+    await placeOrderModal.scrollIntoViewIfNeeded();
+    await expect(placeOrderModal, 'Place Order modal is not visible - clinical order cannot be placed').toBeVisible();
+  }
+
+  public async closeClinicalOrderModal(): Promise<void> {
+    const button = this.page.locator(`//div[@class='modal-content']/div[@class='modal-footer']//button[normalize-space(text())='Close']`);
+    await expect(button, 'Clinical Order modal -> [Close] button is not visible').toBeVisible();
+    await button.click();
+  }
+
+  public async submitClinicalOrder(): Promise<void> {
+    const button = this.page.locator(`//div[@class='modal-content']/div[@class='modal-footer']//button[normalize-space(text())='Submit']`);
+    await expect(button, 'Clinical Order modal -> [Submit] button is not visible').toBeVisible();
+    await button.click();
   }
 
   public async fillAvailableCollectionDateFields(opts: {canPlaceClinicalOrder?: boolean}): Promise<void> {
@@ -93,6 +119,25 @@ export default class SequeuncingOrderTab extends TabBase {
 
   public getPlaceOrderButton(): Locator {
     return this.toLocator.getByRole('button', { name: 'Place order' });
+  }
+
+  public async selectSampleCheckbox(sample: Locator): Promise<void> {
+    const checkbox = sample.locator('//mat-checkbox');
+    await checkbox.click();
+  }
+
+  public async fillCollectionDateIfNeeded(normalSample: Locator): Promise<void> {
+    const collectionDateColumnIndex = await getColumnHeaderIndex(SequencingOrderColumn.COLLECTION_DATE, this.page);
+    const unfilledCollectionDateColumn = normalSample.locator(`//td[${collectionDateColumnIndex}]/app-field-datepicker//input`);
+    if (await unfilledCollectionDateColumn.isVisible()) {
+      await normalSample.locator(`//td[${collectionDateColumnIndex}]//button[normalize-space(text())='Today']`).click();
+
+      //Assert that the correct date was inputted
+      const today = getToday();
+      const collectionDateInISOFormat = getDateinISOFormat(today);
+      const collectionDateColumn = normalSample.locator(`//td[${collectionDateColumnIndex}]`);
+      await expect(collectionDateColumn).toHaveText(collectionDateInISOFormat);
+    }
   }
 
   private getCheckboxOfSample(sample: Locator): Locator {
